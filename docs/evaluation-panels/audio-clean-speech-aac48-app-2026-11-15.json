@@ -1,0 +1,90 @@
+{
+  "cases": {
+    "piper": {
+      "baseline_status": "unassessed",
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "pdf_sha256": "00df1c3e531efb0802918a7d00943bbfe1864d17ed2322829d3349a3771b857a",
+      "presentation": {
+        "decoded_samples": 96256,
+        "excluded_trailing_samples": 256,
+        "native_clock": {
+          "channels": 2,
+          "presentation_end_exclusive_pts": 288000,
+          "sample_rate": 48000,
+          "time_base": "1/48000"
+        },
+        "presentation_end_exclusive_pts": 96000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "source_replay": {
+        "excerpts_verified": 2,
+        "reason": "local_change",
+        "samples": [
+          31360,
+          46720
+        ],
+        "status": "localized_difference"
+      },
+      "submitted_m4a_sha256": "d5cfa91770a57628d25437359d11c0a9c31d9757375928ae6b061d6c65a94f46"
+    },
+    "unrelated": {
+      "baseline_status": "unassessed",
+      "earlier_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "pdf_sha256": "98357409245628abb17fddd09b467b9ed0e5327b753969a9488703cb7a77ae3a",
+      "presentation": {
+        "decoded_samples": 96256,
+        "excluded_trailing_samples": 256,
+        "native_clock": {
+          "channels": 2,
+          "presentation_end_exclusive_pts": 288000,
+          "sample_rate": 48000,
+          "time_base": "1/48000"
+        },
+        "presentation_end_exclusive_pts": 96000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "source_replay": {
+        "excerpts_verified": 0,
+        "reason": "reference_match_not_supported",
+        "status": "unassessed"
+      },
+      "submitted_m4a_sha256": "5023b18c448d9cd09591d0aa98a778cdfde5750e2f9a85b26b88b6f2a344a358"
+    },
+    "untouched": {
+      "baseline_status": "unassessed",
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "pdf_sha256": "8600e57c8f6bf0d5cc368c40b74cbd0d0296f18b53f6e58620da65a61b9395c7",
+      "presentation": {
+        "decoded_samples": 96256,
+        "excluded_trailing_samples": 256,
+        "native_clock": {
+          "channels": 2,
+          "presentation_end_exclusive_pts": 288000,
+          "sample_rate": 48000,
+          "time_base": "1/48000"
+        },
+        "presentation_end_exclusive_pts": 96000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "source_replay": {
+        "excerpts_verified": 0,
+        "reason": "no_local_change",
+        "status": "no_local_difference"
+      },
+      "submitted_m4a_sha256": "5023b18c448d9cd09591d0aa98a778cdfde5750e2f9a85b26b88b6f2a344a358"
+    }
+  },
+  "jobs_before_payment": 0,
+  "paid_analyses": 2,
+  "saved_assessments_preserved": true,
+  "usd_cents": 999
+}

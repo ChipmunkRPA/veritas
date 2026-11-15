@@ -1,0 +1,3465 @@
+{
+  "bank": "ami",
+  "method": {
+    "comparison": "Replay the frozen dense speech measurement on 48 kHz AAC-LC at 64 kbps mono or 96 kbps stereo. The stereo right channel uses a 0.55 scaled copy plus a 0.20 copy delayed by 1.5 ms. The left channel is the original mixture.",
+    "condition": "The earlier file is the exact uninterrupted dry original. Submitted audio has competing speech 5 dB louder.",
+    "controls": "Count genuine splices separately from ordinary processing, isolated background and an unrelated earlier reader.",
+    "location": "Cover half of the known interval and achieve at least .30 temporal intersection over union."
+  },
+  "rows": [
+    {
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "encoded_sha256": {
+        "aac48_mono": "164cb58b571181ba0d3d633bb510e13e3084de193dba37cb1b1826b47ad10ea7",
+        "aac48_stereo": "5023b18c448d9cd09591d0aa98a778cdfde5750e2f9a85b26b88b6f2a344a358"
+      },
+      "group": 0,
+      "kind": "untouched",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "7fd8ab8c9c69387f44b6c7bda075b128d332ec6f5145e0cb1e4ba3dd026358c7",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "encoded_sha256": {
+        "aac48_mono": "164cb58b571181ba0d3d633bb510e13e3084de193dba37cb1b1826b47ad10ea7",
+        "aac48_stereo": "5023b18c448d9cd09591d0aa98a778cdfde5750e2f9a85b26b88b6f2a344a358"
+      },
+      "group": 0,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac48_stereo": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "7fd8ab8c9c69387f44b6c7bda075b128d332ec6f5145e0cb1e4ba3dd026358c7",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "encoded_sha256": {
+        "aac48_mono": "2970384b78c656fb5669b73652c847d5eefef335800cf3dc33ee85a5f46024b8",
+        "aac48_stereo": "0498d0e1a36d13a28f6bb0dceace1bce70cb44ef420110d32c9e0d76a783732c"
+      },
+      "group": 0,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "ea57507b2aafb3b8578a2c80768e57c684d8779b2996b63bff82388607a7d42d",
+      "truth": [
+        30116,
+        45476
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "encoded_sha256": {
+        "aac48_mono": "1d46e73c18828f07e62c3a8e155fbb424734a614a38beb2a55c27fb9e9edcc5c",
+        "aac48_stereo": "e7b86ea2f0b25909fca60552237885b12d23ccd2a793a029f6019a080ba686fd"
+      },
+      "group": 0,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "51d914fb8c95453937f41e16dd4fa4e1cb80e03e841e706dbe3180f5a3ad3142",
+      "truth": [
+        30116,
+        45476
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "encoded_sha256": {
+        "aac48_mono": "514ce1e7605c28e004b02ba16d58531543dd6f03ed03c2e13ea14da24e1405ce",
+        "aac48_stereo": "d5cfa91770a57628d25437359d11c0a9c31d9757375928ae6b061d6c65a94f46"
+      },
+      "group": 0,
+      "kind": "piper",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "2250554ac8ba1249f1d4c00f5ef0bcb27d21702e548177e1ea5a23443fa04c9c",
+      "truth": [
+        30116,
+        45476
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "encoded_sha256": {
+        "aac48_mono": "eb7dbc9cfc3c58ce7b6bbcd36840eb7f0f3b7244efb2e3290e91c1042fa544e1",
+        "aac48_stereo": "d8c0c14f7a8ff626aa18cea9c4624b5b6c04bb30eb1ecb0d3dfc89f3604c03a0"
+      },
+      "group": 0,
+      "kind": "kitten",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            31360,
+            46720
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "1adbd6e336d32db9f0f8876cdfef5e5f141c3a394c20a1c5c34c7ece34b87f72",
+      "truth": [
+        30116,
+        45476
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "encoded_sha256": {
+        "aac48_mono": "e00f9b21fcaff1ad440dbd36c0bc44076f03072d801d0700ad41d1e07100fb0c",
+        "aac48_stereo": "ee2e3b259044bd2362fd4565561c02b428a65cbf4f3e77346019522db2dd741c"
+      },
+      "group": 1,
+      "kind": "untouched",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "333f008b6ea77a1f517e2f426bd61e84e923df472f7f5ce37a13c28330758d86",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "encoded_sha256": {
+        "aac48_mono": "e00f9b21fcaff1ad440dbd36c0bc44076f03072d801d0700ad41d1e07100fb0c",
+        "aac48_stereo": "ee2e3b259044bd2362fd4565561c02b428a65cbf4f3e77346019522db2dd741c"
+      },
+      "group": 1,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac48_stereo": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "333f008b6ea77a1f517e2f426bd61e84e923df472f7f5ce37a13c28330758d86",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "encoded_sha256": {
+        "aac48_mono": "bc000e6e151277944f30aa07705af9cd430409383724bd81ee9dbfa04f32274e",
+        "aac48_stereo": "32cfa25db90013379a40ee8061f09320e28ebb15721c3bfedd22988a955f899e"
+      },
+      "group": 1,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            19200,
+            34560
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            19200,
+            34560
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            19200,
+            34560
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "d140bf53b4994755b50011fc28fd1eace091924ca24a73a6caf72920287edb0e",
+      "truth": [
+        19752,
+        35112
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "encoded_sha256": {
+        "aac48_mono": "8effa02ac2090f3a5543fd0bf33caded20377af8f9865b46675a90e8a7e581b7",
+        "aac48_stereo": "65c7ede68affed24f5a6dc8aac26065b93cfdf4426b98b7de36864949c915619"
+      },
+      "group": 1,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            19200,
+            34560
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            19200,
+            34560
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            18560,
+            33920
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "1cc60ca6a593f781db5891d532a1a4048f7b84ce6dd28d9bedb7833cf4817dca",
+      "truth": [
+        19752,
+        35112
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "encoded_sha256": {
+        "aac48_mono": "a7cd9882ce8ba9f7a3d1f8acf4498a7672c4875592edfdc47489d0665e404d65",
+        "aac48_stereo": "a4ce475dfb6b3a792660a8f668b9b096793bbe7656e290ffe91c413d50256363"
+      },
+      "group": 1,
+      "kind": "piper",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            18560,
+            33920
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            18560,
+            33920
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            18560,
+            33920
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "0eb7ebc3be58a26c1123a5e1905802ed83eaa727efcfb7e9a3f63c18609b31dc",
+      "truth": [
+        19752,
+        35112
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c34cafd215ff7812e18520e34378807ff019f4668df68f33838bd93611df485e",
+      "encoded_sha256": {
+        "aac48_mono": "38e8ae512d4f2272817a5c7bc89f47525b01d2462b922723937666120fa68761",
+        "aac48_stereo": "492aa317d0926c5b22167caa1101a89f59f383d1740786e324ee1c76a01146ef"
+      },
+      "group": 1,
+      "kind": "kitten",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            19200,
+            34560
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            19200,
+            34560
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            19200,
+            34560
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "5abf956d14b7af2a8c87df7061883f633613b001672bf3c3a2804fe8421dc68b",
+      "truth": [
+        19752,
+        35112
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "encoded_sha256": {
+        "aac48_mono": "c55594aaec6a3166b4864492738a22eb982551adc87fff0957bd435e527600ff",
+        "aac48_stereo": "9dbbb241e55b90f19dd0da490238258f73288252bffa272feb91d5724308600c"
+      },
+      "group": 2,
+      "kind": "untouched",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "1e58f975187bf21827ca0ee25df0478280ebdff68eab75550f1a95bed20a4ced",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "cdff0a5380e7388dc55ed9433be16c589e8bff067f54b51bfd0840ec9de974e7",
+      "encoded_sha256": {
+        "aac48_mono": "c55594aaec6a3166b4864492738a22eb982551adc87fff0957bd435e527600ff",
+        "aac48_stereo": "9dbbb241e55b90f19dd0da490238258f73288252bffa272feb91d5724308600c"
+      },
+      "group": 2,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac48_stereo": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "1e58f975187bf21827ca0ee25df0478280ebdff68eab75550f1a95bed20a4ced",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "encoded_sha256": {
+        "aac48_mono": "53674e1f0a1fa8fce07a474fa1878dcb152be31ade0ad9263ab84f2f610fe7b0",
+        "aac48_stereo": "8621d522aef2b9fd905a6873129fa04d301217f2c1547ac5bf60ebd08cc07c82"
+      },
+      "group": 2,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            41600,
+            56960
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            41600,
+            56960
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            41600,
+            56960
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "07f70aea00b32c194e5727f9a80d1c9216f63de43eaf45dee41f02f2fd95f001",
+      "truth": [
+        45769,
+        61129
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "encoded_sha256": {
+        "aac48_mono": "85c880527c9b4c868904ba8092ddabe2378eddf5596c9433d74144d853144474",
+        "aac48_stereo": "789b5c1e2dad5dc083f3324a00276eaded8944e18253a00daacdb6f7c985dfac"
+      },
+      "group": 2,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "5b344c98b0f98622fea60a5aa3d5cf123a979e09344dddfe102e3dcae775c3ab",
+      "truth": [
+        45769,
+        61129
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "encoded_sha256": {
+        "aac48_mono": "1e866c03ace56c396af45e0177d64c64893b2c971f884bf4445595e7e3b59d26",
+        "aac48_stereo": "78ab8625645e99631b653c49d6cb661f67b0144b16e688bf9693250ee8b76c94"
+      },
+      "group": 2,
+      "kind": "piper",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "dd7a070e31e9028717679f8635237e0c614e1094c589b5ea070810c6155a81e9",
+      "truth": [
+        45769,
+        61129
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "f9ed59c92dadfa2250dd1081a061aa81ff2a6d81162fbe64dd15690e28e7efa5",
+      "encoded_sha256": {
+        "aac48_mono": "017e2c2c5e7f08d4016a100ccf730a6cb0c06c6470735043c88fbf0deaf6e3b9",
+        "aac48_stereo": "f429c28af17444d17d530ee5d3940d81f1050f70b4c537afdd38c5fdb6214bee"
+      },
+      "group": 2,
+      "kind": "kitten",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            42240,
+            57600
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "90439db12b314db37f44293d49ef7d48bc7e0daa0d2d83fb5f76de557e824002",
+      "truth": [
+        45769,
+        61129
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "cdff0a5380e7388dc55ed9433be16c589e8bff067f54b51bfd0840ec9de974e7",
+      "encoded_sha256": {
+        "aac48_mono": "2ce336bcf0343edfc7eb658f9d56be6f426d46b0e79f98c8df61e79597592da7",
+        "aac48_stereo": "ea410cf4bf33e8e8e4ec9e955310a6bbaf0747cc79253c18b597175d76060d2a"
+      },
+      "group": 3,
+      "kind": "untouched",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "71b997126d8f34ddf5a2beb1f48dc315bd3a1b4c1a8c57319b45d0ab42e21bf4",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "98cfac6784b06f7bd9ad0047d0ee1d735f7ffb0b34b5ab26ee74a55640fa8067",
+      "encoded_sha256": {
+        "aac48_mono": "2ce336bcf0343edfc7eb658f9d56be6f426d46b0e79f98c8df61e79597592da7",
+        "aac48_stereo": "ea410cf4bf33e8e8e4ec9e955310a6bbaf0747cc79253c18b597175d76060d2a"
+      },
+      "group": 3,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac48_stereo": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "71b997126d8f34ddf5a2beb1f48dc315bd3a1b4c1a8c57319b45d0ab42e21bf4",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "cdff0a5380e7388dc55ed9433be16c589e8bff067f54b51bfd0840ec9de974e7",
+      "encoded_sha256": {
+        "aac48_mono": "3a308eb8812b70345681aa9d77d420c8e6e7b593ab3f97aa4182ce639c65618a",
+        "aac48_stereo": "015edce702b7411970250bbeb4c124caff3d3fe615053c23886e4c5686389815"
+      },
+      "group": 3,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "c1c3d4ccb2f9b816f7eccbc2d1a9510f66123da597abc7cef7432aea02572168",
+      "truth": [
+        9949,
+        25309
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "cdff0a5380e7388dc55ed9433be16c589e8bff067f54b51bfd0840ec9de974e7",
+      "encoded_sha256": {
+        "aac48_mono": "bd5ce3e8527e2706c9b045b2cfaa0c2f4087382796b0ed87757711e5619fd88b",
+        "aac48_stereo": "73d3dc56337eb702afaff81f579fdaef72f8993f6fd4c0ba7c1a996bf13853a0"
+      },
+      "group": 3,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "c91760f3915c066a49c8ecbe57bff05a6201d0195568a975d65554faacff9bea",
+      "truth": [
+        9949,
+        25309
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "cdff0a5380e7388dc55ed9433be16c589e8bff067f54b51bfd0840ec9de974e7",
+      "encoded_sha256": {
+        "aac48_mono": "55855c259f0770082d66f9da1931c47fa874f2335e061e48f632602814dc895a",
+        "aac48_stereo": "e99945efab566b0b32b44a4a5a8d87f9f18a43649b46448f11323afc934bd4c1"
+      },
+      "group": 3,
+      "kind": "piper",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "a152dadfb576e08d093f340b946289694d888f54174d803aa7b75d55adc43c99",
+      "truth": [
+        9949,
+        25309
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "cdff0a5380e7388dc55ed9433be16c589e8bff067f54b51bfd0840ec9de974e7",
+      "encoded_sha256": {
+        "aac48_mono": "51242e58988450edeb80fafb778dbb4b321bdeaf4a60e3db1d53b50abfe13bb4",
+        "aac48_stereo": "f2e3d1b6bf5f0f292308cf7fcd63589664852ec5f0010e9120d73ce9dfc36702"
+      },
+      "group": 3,
+      "kind": "kitten",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8320,
+            23680
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            8960,
+            24320
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            8320,
+            23680
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "fdb60716200b446b1ab9b89c9a3e6dbc47cd90ce37db0363d53a66fbd649651b",
+      "truth": [
+        9949,
+        25309
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "98cfac6784b06f7bd9ad0047d0ee1d735f7ffb0b34b5ab26ee74a55640fa8067",
+      "encoded_sha256": {
+        "aac48_mono": "653340fd8b305af6091360354a32a436ab05472f384d8db38f1a568a6d62eaa6",
+        "aac48_stereo": "e1dd0b94502e3b5bd706e63eec5072962fa2212a09309382ff30da1667f8dff3"
+      },
+      "group": 4,
+      "kind": "untouched",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "4e54241a21398661ebdff6fce1332d6119a999d2d56424a720c74dd041f1a712",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "c3ce0ad95ee880f7fedde503163b9a8249c90322ff26279a3f71b484dc6b3c18",
+      "encoded_sha256": {
+        "aac48_mono": "653340fd8b305af6091360354a32a436ab05472f384d8db38f1a568a6d62eaa6",
+        "aac48_stereo": "e1dd0b94502e3b5bd706e63eec5072962fa2212a09309382ff30da1667f8dff3"
+      },
+      "group": 4,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac48_stereo": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "4e54241a21398661ebdff6fce1332d6119a999d2d56424a720c74dd041f1a712",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "98cfac6784b06f7bd9ad0047d0ee1d735f7ffb0b34b5ab26ee74a55640fa8067",
+      "encoded_sha256": {
+        "aac48_mono": "ac2a9a16e820dadd3edf6e1dcca241d04ed206b65a65a7180f1724bc1d341dfc",
+        "aac48_stereo": "07a525f2058f86a50cdff064d5d34646863d516f19c78108edadc8b2f6fde75d"
+      },
+      "group": 4,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            28160,
+            43520
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            29440,
+            44800
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            28160,
+            43520
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "cf4e814550ea0bab38a70a69d87fde3f89bc70dc06d8f046192d3f210a1881e5",
+      "truth": [
+        32715,
+        48075
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "98cfac6784b06f7bd9ad0047d0ee1d735f7ffb0b34b5ab26ee74a55640fa8067",
+      "encoded_sha256": {
+        "aac48_mono": "da8864b5665a31250b4c3717271e9cae5f003631ecd39e491b25c5df5188262d",
+        "aac48_stereo": "1f309955b07456194f33f4daae847043bef7c83bfee31dbb1e1542f8d2aaac1d"
+      },
+      "group": 4,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            30720,
+            46080
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            30720,
+            46080
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            30720,
+            46080
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "9a2da75f6d5ec240f6ce2e93d781e9dfbe8e65a29fbd931c28283a4759f3a507",
+      "truth": [
+        32715,
+        48075
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "98cfac6784b06f7bd9ad0047d0ee1d735f7ffb0b34b5ab26ee74a55640fa8067",
+      "encoded_sha256": {
+        "aac48_mono": "c8052d7b6f85cbf06eb9e66fbade5a61f2a38ea8396242a8ba65b83e745a7f3c",
+        "aac48_stereo": "103791df1f8a7533b8862a175fc1f283a5b9e3110829bfd02eb059bb7270e904"
+      },
+      "group": 4,
+      "kind": "piper",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            30080,
+            45440
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            30080,
+            45440
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            29440,
+            44800
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "ee659213dbce2b25184939cfe9066996d7fa3578c515502368108330eb6f9485",
+      "truth": [
+        32715,
+        48075
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "98cfac6784b06f7bd9ad0047d0ee1d735f7ffb0b34b5ab26ee74a55640fa8067",
+      "encoded_sha256": {
+        "aac48_mono": "72ceff500aefcd88361c0628de179080276554845d0fe6fc8165471d2c2908f6",
+        "aac48_stereo": "1c87e65078e59a7286605368b1f2a98a2419d9fb5fdad8bfddd8d5cb6b888a6b"
+      },
+      "group": 4,
+      "kind": "kitten",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            30720,
+            46080
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            30720,
+            46080
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            30720,
+            46080
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "0dc945a5bbb07d372eae08505aa5f3bb92886d83bafd21a0d7be1d17c1a5c9ea",
+      "truth": [
+        32715,
+        48075
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c3ce0ad95ee880f7fedde503163b9a8249c90322ff26279a3f71b484dc6b3c18",
+      "encoded_sha256": {
+        "aac48_mono": "812389bc5a54f59370a3c8ba0da587b481c9bca731e5da2f8a48f6b33ddbeed6",
+        "aac48_stereo": "48aff4658c72ad4ecf599317905254e85e6651ccfd2258d2e5c388c95819a5d0"
+      },
+      "group": 5,
+      "kind": "untouched",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "f273f321b7fcf59fd0e1f6119e64dcc80d1d0246718cd971ec9821e8354cf1f0",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "7936f6cd5382d70384512e15dd1ad285a925d7b5d2f9f486dd43de598b6fb530",
+      "encoded_sha256": {
+        "aac48_mono": "812389bc5a54f59370a3c8ba0da587b481c9bca731e5da2f8a48f6b33ddbeed6",
+        "aac48_stereo": "48aff4658c72ad4ecf599317905254e85e6651ccfd2258d2e5c388c95819a5d0"
+      },
+      "group": 5,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac48_stereo": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "f273f321b7fcf59fd0e1f6119e64dcc80d1d0246718cd971ec9821e8354cf1f0",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "c3ce0ad95ee880f7fedde503163b9a8249c90322ff26279a3f71b484dc6b3c18",
+      "encoded_sha256": {
+        "aac48_mono": "4fe4a96649faeedc94c990c54d91d80e563462d60a973c1b4b9b9420ffc8de32",
+        "aac48_stereo": "10987cd604c0ae8301bc94093c9db9d9a2730ae1df7ebd5891a22c1095f6b218"
+      },
+      "group": 5,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            54400,
+            69760
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            54400,
+            69760
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            54400,
+            69760
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "cfd782e4c4d6c75944bd533d4a2e1534b79b115a782c8906a86c6648022cf98a",
+      "truth": [
+        58652,
+        74012
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c3ce0ad95ee880f7fedde503163b9a8249c90322ff26279a3f71b484dc6b3c18",
+      "encoded_sha256": {
+        "aac48_mono": "c551f6c3125fe5c0006d7134637384e5a647ab429af654133a9507182bfad709",
+        "aac48_stereo": "73e70cf50734bc9f4c5d764353d3581cc8efa1bdba49710c96f33ef513fea56a"
+      },
+      "group": 5,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "d81484fa22dc8b38af27320249f031b52e7bdaa761ef9c0953608c041a6c4e8f",
+      "truth": [
+        58652,
+        74012
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c3ce0ad95ee880f7fedde503163b9a8249c90322ff26279a3f71b484dc6b3c18",
+      "encoded_sha256": {
+        "aac48_mono": "2759f284045d22a174a9fb1390813b69ba23945911c642fc4fddf68ae927c55b",
+        "aac48_stereo": "d5bdd390476e09d4e38d2bd5979cbfcd923b568093a5b25875ad054cb4f49a71"
+      },
+      "group": 5,
+      "kind": "piper",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "c70657456d0cc8875804da63a6ba7d69ccb832a9a03092f148c49d7122f9da9a",
+      "truth": [
+        58652,
+        74012
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "c3ce0ad95ee880f7fedde503163b9a8249c90322ff26279a3f71b484dc6b3c18",
+      "encoded_sha256": {
+        "aac48_mono": "0d4c304c026a82d5b9190da4e177d1474483b276c829dcb23a5f631655213a16",
+        "aac48_stereo": "876ccaba5641b56e184c63dfa77b4ef7c4fd8c778a36a0c2969abeeb7426660d"
+      },
+      "group": 5,
+      "kind": "kitten",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            55040,
+            70400
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "f83ec35d452e2e84500b16ab7e6373d93f6cff8e9b2bddc53a2dcabbbe61dd75",
+      "truth": [
+        58652,
+        74012
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "7936f6cd5382d70384512e15dd1ad285a925d7b5d2f9f486dd43de598b6fb530",
+      "encoded_sha256": {
+        "aac48_mono": "d301445cf565df848a105faad79ea94a1ad63f493581ad64bf89815ae891b67d",
+        "aac48_stereo": "16f3bdeece18ff3027f6da5f5e75db4d68e901bd86982bcf1f13a270682cc2d6"
+      },
+      "group": 6,
+      "kind": "untouched",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "b475d1d5011a18d7d14a0064015a9eb223fcd58385c759c846f789e2792e944e",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "d4c86f41f8d4a7ee40167b414f31a9236a701863a873e840220339bd681387f4",
+      "encoded_sha256": {
+        "aac48_mono": "d301445cf565df848a105faad79ea94a1ad63f493581ad64bf89815ae891b67d",
+        "aac48_stereo": "16f3bdeece18ff3027f6da5f5e75db4d68e901bd86982bcf1f13a270682cc2d6"
+      },
+      "group": 6,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac48_stereo": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "b475d1d5011a18d7d14a0064015a9eb223fcd58385c759c846f789e2792e944e",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "7936f6cd5382d70384512e15dd1ad285a925d7b5d2f9f486dd43de598b6fb530",
+      "encoded_sha256": {
+        "aac48_mono": "24e5ddabefe48a93d55d06a3bfea1357528f9b7d200033e3954414c2d7053e2f",
+        "aac48_stereo": "4c8aa7605dc04535f7a6d859ced1bfbc32c743c82599e627e3a9122e12282667"
+      },
+      "group": 6,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            59520,
+            74880
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            61440,
+            76800
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "cb41447e322734eed7d8ad2a26270db13d552a898349f3a3eec6f43ec3377b99",
+      "truth": [
+        63052,
+        78412
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "7936f6cd5382d70384512e15dd1ad285a925d7b5d2f9f486dd43de598b6fb530",
+      "encoded_sha256": {
+        "aac48_mono": "891e5902d94c064fe2c5996cef152f375e65538bc1210d964a1c9db11ceae3d7",
+        "aac48_stereo": "208744391b48e28c50563838f4c27b13f1a408bee379e2fb50d3d46ecf2e65b5"
+      },
+      "group": 6,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            59520,
+            74880
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "6b91bf54e7f867cda34b2fd38283614cfbc18b1da732b308efb123a54834aa5a",
+      "truth": [
+        63052,
+        78412
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "7936f6cd5382d70384512e15dd1ad285a925d7b5d2f9f486dd43de598b6fb530",
+      "encoded_sha256": {
+        "aac48_mono": "c5cb8b6240e60115c506a3b18e5a228b14ce2dc48b759ebc9d3db3df94a57d6c",
+        "aac48_stereo": "f548304195012c1c6ce944217e1df331ff39a44f985094cbfd6013747a3b0ce1"
+      },
+      "group": 6,
+      "kind": "piper",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            59520,
+            74880
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "c5a4dc548bc207d1a28c56a6649529e3c8228c589c98e2c95f981817c2cf6395",
+      "truth": [
+        63052,
+        78412
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "7936f6cd5382d70384512e15dd1ad285a925d7b5d2f9f486dd43de598b6fb530",
+      "encoded_sha256": {
+        "aac48_mono": "96fce029141cbb211f21e33055cdecd3246359fb35560cfd139ada4968584aba",
+        "aac48_stereo": "c70bec9a54c3914fccec417e7a0b3867791d67282a874f27cce8295880daa02c"
+      },
+      "group": 6,
+      "kind": "kitten",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": [
+            59520,
+            74880
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": [
+            58880,
+            74240
+          ],
+          "reason": "local_change",
+          "status": "localized_difference"
+        }
+      },
+      "submitted_pcm_sha256": "6b7b62b67194e7609d248e258951eff31b1d93ef4a3b107bce05e7ab25445280",
+      "truth": [
+        63052,
+        78412
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "d4c86f41f8d4a7ee40167b414f31a9236a701863a873e840220339bd681387f4",
+      "encoded_sha256": {
+        "aac48_mono": "8b1f539e50c162222e56f6e83a93c45988969d32ca66463ce9b1b8d7c8f83b9c",
+        "aac48_stereo": "686fc08ab096bd464008b9ac1128adaa823a9c0c5b8bf4e015514fe2c63829b1"
+      },
+      "group": 7,
+      "kind": "untouched",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "9bfc2133e0f472a427458a8d9bc542030254bc1b932e8a166db6a7d59464c106",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "5af4b13d78e1dc5b6d3edf1866d9e50015a050f9b30dcf48c60d42db8b794fd3",
+      "encoded_sha256": {
+        "aac48_mono": "8b1f539e50c162222e56f6e83a93c45988969d32ca66463ce9b1b8d7c8f83b9c",
+        "aac48_stereo": "686fc08ab096bd464008b9ac1128adaa823a9c0c5b8bf4e015514fe2c63829b1"
+      },
+      "group": 7,
+      "kind": "unrelated",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "aac48_stereo": {
+          "admitted": false,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        },
+        "pcm": {
+          "admitted": false,
+          "presentation": null,
+          "range": null,
+          "reason": "reference_match_not_supported",
+          "status": "unassessed"
+        }
+      },
+      "submitted_pcm_sha256": "9bfc2133e0f472a427458a8d9bc542030254bc1b932e8a166db6a7d59464c106",
+      "truth": null
+    },
+    {
+      "earlier_pcm_sha256": "d4c86f41f8d4a7ee40167b414f31a9236a701863a873e840220339bd681387f4",
+      "encoded_sha256": {
+        "aac48_mono": "e453b2efc15acdd1baa57dcce12bd71340b193df1f2227fcb863920c5461f1a5",
+        "aac48_stereo": "e181d7f01a94163ee2154655868bda0d323e5336955134566361db6f79e13460"
+      },
+      "group": 7,
+      "kind": "same_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "0b7a9ca8fb8179211b0c137eb782a097f49ec18b7d29ba0f2c1f3b45814ba668",
+      "truth": [
+        79677,
+        95037
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "d4c86f41f8d4a7ee40167b414f31a9236a701863a873e840220339bd681387f4",
+      "encoded_sha256": {
+        "aac48_mono": "dfc434346b9ce661da9106fbea2388abc99ec9473bc76bebb36732291b8ace28",
+        "aac48_stereo": "3e84c5c51e13ed2df3d9430bc5930b6a742951aec9746032130e678177286295"
+      },
+      "group": 7,
+      "kind": "different_reader_splice",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "aecf47bb4380a63d0bf93a682e5dc2730671fec94ab1f730572f426181279499",
+      "truth": [
+        79677,
+        95037
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "d4c86f41f8d4a7ee40167b414f31a9236a701863a873e840220339bd681387f4",
+      "encoded_sha256": {
+        "aac48_mono": "4514526dd217c42f71e0e761515b0aeb6aadc12cb60128264f8664f759912f29",
+        "aac48_stereo": "39d543bfe44069e9d305e4ed9d121e398f9e12ed0883b585721d013aafbc2cc1"
+      },
+      "group": 7,
+      "kind": "piper",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "ae67b1e758425f3517f22327adb5e04b537e975132fb29bfa48a4162a2b29b2d",
+      "truth": [
+        79677,
+        95037
+      ]
+    },
+    {
+      "earlier_pcm_sha256": "d4c86f41f8d4a7ee40167b414f31a9236a701863a873e840220339bd681387f4",
+      "encoded_sha256": {
+        "aac48_mono": "e290684cbb46997ceb2e034430ced68c60d15ac89e881cff8636c7af5c9a21c6",
+        "aac48_stereo": "8acc4c63ee4d338740abe1bfccdddf43e718bad20c4fe14603be7df6ca7948c9"
+      },
+      "group": 7,
+      "kind": "kitten",
+      "outcomes": {
+        "aac48_mono": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 1,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "aac48_stereo": {
+          "admitted": true,
+          "presentation": {
+            "decoded_samples": 96256,
+            "excluded_trailing_samples": 256,
+            "native_clock": {
+              "channels": 2,
+              "presentation_end_exclusive_pts": 288000,
+              "sample_rate": 48000,
+              "time_base": "1/48000"
+            },
+            "presentation_end_exclusive_pts": 96000,
+            "presentation_start_pts": 0,
+            "sample_rate": 16000,
+            "side": "submitted",
+            "time_base": "1/16000"
+          },
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        },
+        "pcm": {
+          "admitted": true,
+          "presentation": null,
+          "range": null,
+          "reason": "no_local_change",
+          "status": "no_local_difference"
+        }
+      },
+      "submitted_pcm_sha256": "832cbde59cb0178cbcfa6517d7e0a57ccc62f9a15e7062b02e86fa47a928fcde",
+      "truth": [
+        79677,
+        95037
+      ]
+    }
+  ],
+  "schema": "chipmunk.audio-clean-speech-aac48-transfer/1",
+  "source_sha256": "f75a359827024a3bc757c36841426a62d990ff6ba8435351db0eacbaa1314e66",
+  "summary": {
+    "aac48_mono": {
+      "genuine_splice": {
+        "admitted": 16,
+        "broad": 0,
+        "files": 16,
+        "flags": 14,
+        "unassessed": 0,
+        "useful": 14
+      },
+      "kitten": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 7,
+        "unassessed": 0,
+        "useful": 7
+      },
+      "ordinary_processing": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 0,
+        "unassessed": 0,
+        "useful": 0
+      },
+      "piper": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 7,
+        "unassessed": 0,
+        "useful": 7
+      },
+      "unrelated": {
+        "admitted": 0,
+        "broad": 0,
+        "files": 8,
+        "flags": 0,
+        "unassessed": 8,
+        "useful": 0
+      }
+    },
+    "aac48_stereo": {
+      "genuine_splice": {
+        "admitted": 16,
+        "broad": 0,
+        "files": 16,
+        "flags": 14,
+        "unassessed": 0,
+        "useful": 14
+      },
+      "kitten": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 7,
+        "unassessed": 0,
+        "useful": 7
+      },
+      "ordinary_processing": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 0,
+        "unassessed": 0,
+        "useful": 0
+      },
+      "piper": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 7,
+        "unassessed": 0,
+        "useful": 7
+      },
+      "unrelated": {
+        "admitted": 0,
+        "broad": 0,
+        "files": 8,
+        "flags": 0,
+        "unassessed": 8,
+        "useful": 0
+      }
+    },
+    "pcm": {
+      "genuine_splice": {
+        "admitted": 16,
+        "broad": 0,
+        "files": 16,
+        "flags": 14,
+        "unassessed": 0,
+        "useful": 14
+      },
+      "kitten": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 7,
+        "unassessed": 0,
+        "useful": 7
+      },
+      "ordinary_processing": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 0,
+        "unassessed": 0,
+        "useful": 0
+      },
+      "piper": {
+        "admitted": 8,
+        "broad": 0,
+        "files": 8,
+        "flags": 7,
+        "unassessed": 0,
+        "useful": 7
+      },
+      "unrelated": {
+        "admitted": 0,
+        "broad": 0,
+        "files": 8,
+        "flags": 0,
+        "unassessed": 8,
+        "useful": 0
+      }
+    }
+  }
+}

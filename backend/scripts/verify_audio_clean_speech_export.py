@@ -47,7 +47,7 @@ def verify_export(earlier, submitted, export):
     require((schema in {SCHEMA, LONG_SCHEMA} or dense or eq_guard) and result["sample_rate"] == RATE
             and record["affects_overall_confidence"] is False and result["affects_overall_confidence"] is False,
             "The export needs local speech evidence with zero AI weight")
-    decoded = [_decode(path, record[side], aac_presentation=aac and side == "submitted", retain_padding=True)
+    decoded = [_decode(path, record[side], aac_presentation=aac and side == "submitted", retain_padding=True, allow_aac48=True)
                for path, side in zip((earlier, submitted), SIDES, strict=True)]
     proof = decoded[1][2]
     require(proof is not None and result.get("aac_presentation") == {"side": "submitted", **proof} if aac

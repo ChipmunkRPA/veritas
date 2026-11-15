@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Earlier-copy noisy speech at 48 kHz](audio-clean-speech-aac-2026-11-15.md#48-khz-mono-and-stereo-aac)
+  covers qualified mono and stereo AAC submissions. The re-encoded panels
+  located 56/64 staged replacements in mono and 57/64 in stereo, with no
+  flags on 80 unchanged and same-word controls. Both carriers also flagged
+  35/40 genuine splices. The evidence carries zero AI-confidence weight.
+
 - [Writing range adaptation to GPT-5.4](writing-range-generator-adaptation-2026-11-15.md)
   finds one of 48 held report rewrites with the same eight ordinary flags
   at the wider research point. The adapted head loses all three useful

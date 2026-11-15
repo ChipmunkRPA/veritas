@@ -11,6 +11,7 @@ from pathlib import Path
 
 PANELS = Path(__file__).resolve().parents[2] / "docs/evaluation-panels"
 SCHEMA = "chipmunk.audio-clean-speech-aac-transfer/1"
+SCHEMA48 = "chipmunk.audio-clean-speech-aac48-transfer/1"
 SOURCE_PANELS = {"icsi": "audio-short-edit-detector-training-2026-11-14.json",
                  "ami": "audio-random-clock-stock-2026-11-13.json"}
 RATES = (32, 64)
@@ -19,6 +20,9 @@ METHOD = {"condition": "The earlier file is the exact uninterrupted dry original
           "comparison": "Use the frozen dense speech measurement and frequency-balance guard. Compare PCM with native 16 kHz mono AAC-LC at 32 and 64 kbps.",
           "location": "Cover half of the known interval and achieve at least .30 temporal intersection over union.",
           "controls": "Count genuine splices separately from ordinary processing, isolated background and an unrelated earlier reader."}
+CARRIERS48 = {"aac48_mono": (64, 1), "aac48_stereo": (96, 2)}
+METHOD48 = METHOD | {"comparison": "Replay the frozen dense speech measurement on 48 kHz AAC-LC at 64 kbps mono or 96 kbps stereo. "
+    "The stereo right channel uses a 0.55 scaled copy plus a 0.20 copy delayed by 1.5 ms. The left channel is the original mixture."}
 
 
 def read(path):
@@ -95,13 +99,28 @@ def encode(pcm, path, rate):
                    input=pcm, check=True, stdout=subprocess.DEVNULL, timeout=25)
 
 
+def encode48(pcm, path, carrier):
+    import numpy as np
+
+    rate, channels = CARRIERS48[carrier]
+    if channels == 2:
+        left = np.frombuffer(pcm, dtype="<i2")
+        delayed = np.pad(left[:-24], (24, 0))
+        right = np.rint(0.55 * left + 0.20 * delayed).astype("<i2")
+        pcm = np.column_stack((left, right)).astype("<i2", copy=False).tobytes()
+    subprocess.run(["ffmpeg", "-nostdin", "-loglevel", "error", "-y", "-f", "s16le", "-ar", "16000", "-ac", str(channels),
+                    "-i", "pipe:0", "-ar", "48000", "-map_metadata", "-1", "-threads", "1", "-c:a", "aac",
+                    "-profile:a", "aac_low", "-b:a", f"{rate}k", "-fflags", "+bitexact", "-flags:a", "+bitexact", str(path)],
+                   input=pcm, check=True, stdout=subprocess.DEVNULL, timeout=25)
+
+
 def compact(result):
     return {"status": result["status"], "reason": result["reason"], "admitted": result["match_support"]["admitted"],
             "range": result["range"]["samples"] if "range" in result else None,
             "presentation": result.get("aac_presentation")}
 
 
-def run(bank, folder):
+def run(bank, folder, *, aac48=False):
     import wave
 
     from app.evidence.audio_reference import SCHEMA_WITH_AAC_CLEAN_SPEECH, compare
@@ -119,16 +138,19 @@ def run(bank, folder):
             lossless, _ = compare(earlier, pcm, **options)
             results = {"pcm": compact(lossless["clean_speech"])}
             encodes = {}
-            for rate in RATES:
-                encode(noisy, aac, rate)
+            for key in (CARRIERS48 if aac48 else (f"aac{rate}" for rate in RATES)):
+                if aac48:
+                    encode48(noisy, aac, key)
+                else:
+                    encode(noisy, aac, int(key[3:]))
                 measured, _ = compare(earlier, aac, **options, include_clean_speech_aac=True)
                 require(measured["schema"] == SCHEMA_WITH_AAC_CLEAN_SPEECH, "AAC presentation was not verified")
-                key = f"aac{rate}"
                 results[key] = compact(measured["clean_speech"])
                 encodes[key] = sha(aac.read_bytes())
             rows.append({"group": group, "kind": kind, "truth": truth, "earlier_pcm_sha256": sha(dry),
                          "submitted_pcm_sha256": sha(noisy), "encoded_sha256": encodes, "outcomes": results})
-    receipt = {"schema": SCHEMA, "bank": bank, "method": METHOD, "source_sha256": source_hash(bank), "rows": rows}
+    receipt = {"schema": SCHEMA48 if aac48 else SCHEMA, "bank": bank, "method": METHOD48 if aac48 else METHOD,
+               "source_sha256": source_hash(bank), "rows": rows}
     receipt["summary"] = review(receipt)
     return receipt
 
@@ -145,7 +167,8 @@ def location(span, truth):
 
 def review(receipt):
     bank = receipt["bank"]
-    require(receipt["schema"] == SCHEMA and receipt["method"] == METHOD
+    high = receipt["schema"] == SCHEMA48
+    require(receipt["schema"] in (SCHEMA, SCHEMA48) and receipt["method"] == (METHOD48 if high else METHOD)
             and receipt["source_sha256"] == source_hash(bank), "Different source freeze or method")
     group_count, case_count = (24, 8) if bank == "icsi" else (8, 6)
     rows = receipt["rows"]
@@ -162,15 +185,21 @@ def review(receipt):
             a, b = row["truth"]
             require(0 <= a < b <= SAMPLES, "The known range exceeds the source")
         require(not (synthetic or splice) or row["truth"] is not None, "A replacement lacks its known range")
-        require(set(row["outcomes"]) == {"pcm", *(f"aac{rate}" for rate in RATES)}, "A carrier is missing")
+        carriers = set(CARRIERS48) if high else {f"aac{rate}" for rate in RATES}
+        require(set(row["outcomes"]) == {"pcm", *carriers}, "A carrier is missing")
         for carrier, result in row["outcomes"].items():
             span = result["range"]
             proof = result["presentation"]
             if carrier != "pcm":
                 require(proof["side"] == "submitted" and proof["presentation_end_exclusive_pts"] == SAMPLES
                         and proof["presentation_start_pts"] == 0 and proof["sample_rate"] == 16000
-                        and proof["time_base"] == "1/16000" and 0 <= proof["decoded_samples"] - SAMPLES < 1024
+                        and proof["time_base"] == "1/16000" and 0 <= proof["decoded_samples"] - SAMPLES <= (342 if high else 1023)
                         and proof["excluded_trailing_samples"] == proof["decoded_samples"] - SAMPLES, "AAC presentation differs")
+                if high:
+                    require(proof.get("native_clock") == {"sample_rate": 48_000, "channels": CARRIERS48[carrier][1],
+                        "time_base": "1/48000", "presentation_end_exclusive_pts": SAMPLES * 3}, "Native AAC clock differs")
+                else:
+                    require("native_clock" not in proof, "Unexpected native clock")
             else:
                 require(proof is None, "Unexpected AAC presentation reading")
             status = result["status"]
@@ -190,11 +219,12 @@ if __name__ == "__main__":
     parser.add_argument("phase", choices=("icsi", "ami", "review"))
     parser.add_argument("receipt", type=Path)
     parser.add_argument("--sources", type=Path)
+    parser.add_argument("--aac48", action="store_true")
     args = parser.parse_args()
     if args.phase == "review":
         print(json.dumps(review(read(args.receipt)), sort_keys=True, indent=2))
     else:
         if args.sources is None:
             parser.error("Native scoring requires --sources")
-        result = run(args.phase, args.sources)
+        result = run(args.phase, args.sources, aac48=args.aac48)
         args.receipt.write_text(json.dumps(result, sort_keys=True, indent=2) + "\n")

@@ -98,3 +98,53 @@ backend/.venv/bin/python -B -m scripts.audio_clean_speech_aac_app \
 backend/.venv/bin/python -B -m scripts.verify_audio_clean_speech_export \
   "$earlier" "$submitted" "$export"
 ```
+
+## 48 kHz mono and stereo AAC
+
+The local comparison also supports a six-second 48 kHz mono or stereo
+AAC-LC submission with a single audio track. Its earlier copy is a
+six-second 16 kHz mono PCM16 WAV or FLAC. Both recordings need continuous
+timing from sample zero. The check reads the original AAC presentation
+length, converts the soundtrack to 16 kHz mono, then excludes trailing
+decoded samples outside the six seconds of playback. The browser and PDF
+identify the original mono or stereo format. JSON preserves the native
+48 kHz presentation length and the 16 kHz measurement and excerpt clock.
+[FFprobe stream metadata](https://ffmpeg.org/ffprobe.html)
+
+The measurement, frequency-balance guard and decision point carry over
+from the earlier comparison. We re-encoded the two retained noisy source
+banks at 64 kbps mono and 96 kbps stereo. In the stereo delivery the left
+channel is the original mixture. The right uses a scaled direct copy and a
+quiet 1.5 ms delayed copy. The source banks include competing speakers 5 dB
+above the foreground. These are controlled re-encodes of the same 240
+pairs. Microphones that independently capture the surrounding speakers
+were outside this test.
+
+| Held result | PCM | 48 kHz mono | 48 kHz stereo |
+| --- | ---: | ---: | ---: |
+| ICSI synthetic replacements located | 43/48 | 42/48 | 43/48 |
+| AMI synthetic replacements located | 14/16 | 14/16 | 14/16 |
+| Genuine splices flagged | 35/40 | 35/40 | 35/40 |
+| Unchanged and same-word resampling controls flagged | 0/80 | 0/80 | 0/80 |
+| Isolated backgrounds and unrelated references admitted | 0/56 | 0/56 | 0/56 |
+
+The comparison marks where matching sound becomes weaker. The response
+to genuine splices illustrates why it carries zero weight in the AI
+assessment and requires the earlier copy.
+[ICSI carrier receipt](evaluation-panels/audio-clean-speech-aac48-icsi-2026-11-15.json)
+· [AMI carrier receipt](evaluation-panels/audio-clean-speech-aac48-ami-2026-11-15.json)
+
+Use `--aac48` on either native panel command above. The portable `review`
+command accepts receipts from either sample rate. Use `--carrier
+aac48_stereo` on the app command with the 48 kHz AMI receipt to replay the
+paid comparison and report export.
+
+Two simulated USD 9.99 checkouts verified that work queued after payment.
+The stereo edit showed **1.960–2.920 s**, with analysis ticks
+**[31,360, 46,720)** and both playable excerpts. The six-second source
+ended at tick 288,000 on the native clock. The comparison excluded 256
+trailing samples from its 16 kHz decode. The API, PDF and JSON agreed.
+Independent decoding reproduced the two excerpt hashes and waveform
+values. The unchanged pair produced no local difference, and the
+unrelated earlier copy stayed unassessed.
+[Paid stereo comparison receipt](evaluation-panels/audio-clean-speech-aac48-app-2026-11-15.json)

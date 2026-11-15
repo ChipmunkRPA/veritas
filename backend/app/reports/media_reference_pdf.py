@@ -418,7 +418,9 @@ def _clean_speech_page(document, result):
         _text(page, MARGIN, 259, f"{outcome} Windows overlap.", size=9, color=MUTED)
     if aac := result.get("aac_presentation"):
         duration = aac["presentation_end_exclusive_pts"] / aac["sample_rate"]
-        _text(page, MARGIN, 273, f"AAC duration {duration:.3f} s. Excluded {aac['excluded_trailing_samples']} trailing decoded samples.",
+        native = aac.get("native_clock")
+        source = f"48 kHz {'stereo' if native['channels'] == 2 else 'mono'} source. " if native else ""
+        _text(page, MARGIN, 273, f"AAC duration {duration:.3f} s. {source}Excluded {aac['excluded_trailing_samples']} trailing decoded samples.",
               size=9, color=MUTED)
     if not span:
         _text(page, MARGIN, 259 + offset, "The decoded sample comparison is reported separately.")

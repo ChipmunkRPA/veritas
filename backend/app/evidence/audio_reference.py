@@ -12,7 +12,7 @@ import numpy as np
 
 from app.core.canonical import canonical_hash
 from app.detectors.audio.decode import SAMPLE_RATE as AUDIO_RATE
-from app.detectors.audio.decode import AudioStreamUnavailable, aac_native_extent, decode_audio, wav_bytes
+from app.detectors.audio.decode import AudioStreamUnavailable, aac48_presentation, aac_native_extent, decode_audio, wav_bytes
 from app.detectors.audio.waveform import envelope
 from app.evidence import audio_level_adjustment
 from app.storage.files import sniff_audio
@@ -429,7 +429,7 @@ def channel_timing(decoded, assets, *, sample_limit=None):
             "affects_overall_confidence": False, "sample_rate": AUDIO_RATE, "ranges": ranges}
 
 
-def _aac_presented_tracks(paths, decoded):
+def _aac_presented_tracks(paths, decoded, *, high_rate=False):
     tracks = tuple(item[0] for item in decoded)
     if not all(track[0] == "measured" and track[2]["source_pts"] == 0 for track in tracks):
         return None
@@ -437,8 +437,13 @@ def _aac_presented_tracks(paths, decoded):
         return None
     native = next(i for i, item in enumerate(decoded) if item[4])
     aac = 1 - native
-    duration = aac_native_extent(paths[aac])
-    if duration is None or duration != len(tracks[native][1]) or not 0 <= len(tracks[aac][1]) - duration < 1024:
+    native_clock = aac48_presentation(paths[aac]) if high_rate else None
+    if high_rate and (aac != 1 or native_clock is None):
+        return None
+    duration = native_clock["presentation_end_exclusive_pts"] // 3 if native_clock else aac_native_extent(paths[aac])
+    # One 1024-sample AAC-LC frame occupies at most 342 samples after decimation.
+    padding_limit = 342 if native_clock else 1023
+    if duration is None or duration != len(tracks[native][1]) or not 0 <= len(tracks[aac][1]) - duration <= padding_limit:
         return None
     aac_track = tracks[aac]
     trimmed = tuple((track[0], track[1][:duration], track[2]) for track in tracks)
@@ -451,6 +456,8 @@ def _aac_presented_tracks(paths, decoded):
         "decoded_samples": len(aac_track[1]),
         "excluded_trailing_samples": len(aac_track[1]) - duration,
     }
+    if native_clock:
+        proof["native_clock"] = native_clock
     return trimmed, proof
 
 
@@ -541,8 +548,11 @@ def _clean_speech(decoded, assets, *, allow_long, use_dense, use_eq_guard, inclu
         result["match_support"] = match_support
     if aac_tracks is not None:
         result["aac_presentation"] = aac
-        result["scope"] += (" This check uses the six seconds presented by the submitted AAC track. "
-                            "Ordinary edits and local level changes can also reduce matching sound.")
+        if "native_clock" in aac:
+            result["scope"] += " It measures the six seconds of AAC playback after conversion to 16 kHz mono."
+        else:
+            result["scope"] += (" This check uses the six seconds presented by the submitted AAC track. "
+                                "Ordinary edits and local level changes can also reduce matching sound.")
     if span is not None:
         start, stop = span["samples"]
         excerpts = {side: _timing_excerpt(assets, "clean-reference-speech", side, track[1], track[2]["source_pts"], [start, stop])
@@ -710,9 +720,12 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
     aac_tracks = _aac_presented_tracks(paths, (first, second)) if (
         (include_local_timing and include_aac_timing) or (include_clean_speech and include_clean_speech_aac)) else None
     timing_aac = aac_tracks if include_local_timing and include_aac_timing else None
-    speech_aac = (aac_tracks if include_clean_speech_aac and aac_tracks
-                  and aac_tracks[1]["side"] == "submitted"
-                  and aac_tracks[1]["presentation_end_exclusive_pts"] == 6 * AUDIO_RATE else None)
+    speech_aac = None
+    if include_clean_speech and include_clean_speech_aac:
+        presented = aac_tracks or _aac_presented_tracks(paths, (first, second), high_rate=True)
+        if (presented and presented[1]["side"] == "submitted"
+                and presented[1]["presentation_end_exclusive_pts"] == 6 * AUDIO_RATE):
+            speech_aac = presented
     if include_local_timing:
         record.update(schema=SCHEMA_WITH_LOCAL_TIMING,
                       local_timing=_local_timing((first, second), audio, assets, aac_tracks=timing_aac))

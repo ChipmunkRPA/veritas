@@ -39,7 +39,7 @@ def decode(path, original):
     return raw, origin
 
 
-def _decode(path, original, *, aac_presentation, retain_padding=False):
+def _decode(path, original, *, aac_presentation, retain_padding=False, allow_aac48=False):
     path = str(path.resolve())
     with open(path, "rb") as source:
         size = Path(path).stat().st_size
@@ -48,7 +48,7 @@ def _decode(path, original, *, aac_presentation, retain_padding=False):
                 "Original file differs from the export")
     probe = command(
         "ffprobe", "-v", "error", "-protocol_whitelist", "file", "-select_streams", "a",
-        "-show_entries", "stream=sample_rate,channels,codec_name,bits_per_raw_sample,time_base,start_pts,duration_ts:format=format_name",
+        "-show_entries", "stream=sample_rate,channels,channel_layout,profile,codec_name,bits_per_raw_sample,time_base,start_pts,duration_ts:format=format_name",
         "-of", "json", path,
     )
     info = json.loads(probe.stdout)
@@ -58,14 +58,17 @@ def _decode(path, original, *, aac_presentation, retain_padding=False):
         (codec, container) == ("flac", "flac") and stream.get("bits_per_raw_sample") == "16"
     )
     aac = aac_presentation and (codec, container) == ("aac", "mov,mp4,m4a,3gp,3g2,mj2")
-    eligible = aac or lossless
-    require(eligible and int(stream["sample_rate"]) == RATE and stream["channels"] == 1
-            and Fraction(stream["time_base"]) == Fraction(1, RATE),
-            "Timing evidence requires native 16 kHz mono audio in a supported container")
+    high = (aac and allow_aac48 and stream["sample_rate"] == "48000" and stream["time_base"] == "1/48000"
+            and stream.get("profile") == "LC" and (stream["channels"], stream.get("channel_layout")) in {(1, "mono"), (2, "stereo")})
+    require(high or ((aac or lossless) and int(stream["sample_rate"]) == RATE and stream["channels"] == 1
+                 and Fraction(stream["time_base"]) == Fraction(1, RATE)), "Unsupported source audio format")
     limit = MAX_SAMPLES + (1024 if aac else 1)
+    filters = f"atrim=end_sample={limit},ashowinfo"
+    if high:
+        filters = f"aformat=sample_fmts=s16:channel_layouts=mono,aresample={RATE},{filters}"
     audio = command(
         "ffmpeg", "-v", "info", "-nostdin", "-protocol_whitelist", "file", "-copyts", "-i", path,
-        "-map", "0:a:0", "-af", f"atrim=end_sample={limit},ashowinfo", "-c:a", "pcm_s16le", "-f", "s16le", "pipe:1",
+        "-map", "0:a:0", "-af", filters, "-c:a", "pcm_s16le", "-f", "s16le", "pipe:1",
     )
     frames = [(int(i), int(tick), int(length)) for i, tick, length in FRAME.findall(audio.stderr)]
     require(frames and len(audio.stdout) % 2 == 0, "Missing decoded sample clock")
@@ -79,11 +82,15 @@ def _decode(path, original, *, aac_presentation, retain_padding=False):
     if aac:
         duration = stream.get("duration_ts")
         require(type(duration) is int and stream.get("start_pts") == origin == 0
-                and 0 <= count - duration < 1024, "AAC presentation extent differs")
-        presented = duration
+                and (not high or duration % 3 == 0), "AAC presentation extent differs")
+        presented = duration // 3 if high else duration
+        require(0 <= count - presented <= (342 if high else 1023), "AAC padding differs")
         proof = {"sample_rate": RATE, "time_base": f"1/{RATE}", "presentation_start_pts": 0,
                  "presentation_end_exclusive_pts": presented, "decoded_samples": count,
                  "excluded_trailing_samples": count - presented}
+        if high:
+            proof["native_clock"] = {"sample_rate": 48_000, "channels": stream["channels"], "time_base": "1/48000",
+                                     "presentation_end_exclusive_pts": duration}
     require(MIN_SAMPLES <= presented <= MAX_SAMPLES, "Recording extent differs")
     return (audio.stdout if retain_padding else audio.stdout[:2*presented]), origin, proof
 

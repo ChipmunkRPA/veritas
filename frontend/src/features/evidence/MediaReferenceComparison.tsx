@@ -60,7 +60,10 @@ type SoundtrackTiming = {
   basis?: string
   picture_profile?: { width: number; height: number; pictures: number; frames_per_second: number }
   waveform_note?: string
-  aac_presentation?: { side: Side; sample_rate: number; presentation_end_exclusive_pts: number; excluded_trailing_samples: number }
+  aac_presentation?: {
+    side: Side; sample_rate: number; presentation_end_exclusive_pts: number; excluded_trailing_samples: number
+    native_clock?: { sample_rate: number; channels: number }
+  }
   range?: Record<Side, SoundtrackSide> & {
     picture?: SoundtrackPicture
     paired_pictures?: Record<'before' | 'during' | 'after', Record<Side, SoundtrackPicture>>
@@ -449,6 +452,7 @@ function SoundtrackTimingEvidence({ timing, assets, audioOnly = false, title: cu
     {timing.waveform_note && <p className="m-0 text-caption text-text-muted">{timing.waveform_note}</p>}
     {aac && <p className="m-0 text-caption text-text-muted">
       {labels[aac.side]} · AAC duration {sourceSeconds.format(aac.presentation_end_exclusive_pts / aac.sample_rate)} s
+      {aac.native_clock && ` · ${aac.native_clock.sample_rate / 1000} kHz ${aac.native_clock.channels === 2 ? 'stereo' : 'mono'} source`}
       {' · '}{aac.excluded_trailing_samples.toLocaleString('en-US')} trailing decoded samples excluded
     </p>}
     {span && <>
@@ -929,7 +933,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
           {alignedSpeechAvailable
             ? 'Compare continuous 16 kHz mono 16-bit WAV or FLAC copies of 5.8 to 12 seconds. The trial can align small timing differences. Heavy background sound can prevent a result.'
             : `Compare short speech changes. Both files need exactly ${longCleanSpeechAvailable ? 'six or twelve' : 'six'} seconds of continuous 16 kHz mono 16-bit WAV or FLAC with the same start and timing.`}
-          {cleanSpeechAacAvailable && ' The analyzed file can also be a six-second, 16 kHz mono AAC M4A when the earlier copy is a six-second WAV or FLAC on the same sample clock.'}
+          {cleanSpeechAacAvailable && ' The analyzed file can also be a six-second AAC M4A at 16 kHz mono or 48 kHz mono or stereo. Use a six-second 16 kHz mono 16-bit WAV or FLAC earlier copy with matching timing.'}
         </p>
       </div>}
       {soundDifferenceAvailable && <div className="min-w-0 basis-full">

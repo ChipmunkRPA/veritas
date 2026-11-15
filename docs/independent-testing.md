@@ -38,6 +38,9 @@ The [noisy AAC speech comparison replay](audio-clean-speech-aac-2026-11-15.md#lo
 recounts exact-clock findings across 240 paired recordings at two AAC
 bitrates and on uncompressed WAV. Genuine splices, resampling, isolated
 background speech and wrong references are counted separately.
+The [48 kHz extension](audio-clean-speech-aac-2026-11-15.md#48-khz-mono-and-stereo-aac)
+independently replays mono and stereo deliveries and verifies both the
+original AAC presentation length and the decoded excerpt clock.
 
 The [small PNG interpolation replay](image-native-cfa-fine-2026-11-15.md#reproduce)
 recounts locations, control flags and unassessed deliveries on two

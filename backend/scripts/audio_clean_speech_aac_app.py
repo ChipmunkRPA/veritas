@@ -7,12 +7,20 @@ import json
 import os
 from pathlib import Path
 
-from scripts.audio_clean_speech_aac_transfer import ami_cases, encode, read, review, sha
+from scripts.audio_clean_speech_aac_transfer import (
+    CARRIERS48,
+    ami_cases,
+    encode,
+    encode48,
+    icsi_cases,
+    read,
+    review,
+    sha,
+)
 from scripts.audio_focused_window_app import write_wav
 from scripts.video_short_return_encoded_app import PaymentStub, body, checkout, configure, counts
 
 ROOT = Path(__file__).resolve().parents[2]
-ROLES = ("piper", "untouched", "unrelated")
 
 
 def run(args):
@@ -37,9 +45,17 @@ def run(args):
 
     receipt = read(args.receipt)
     review(receipt)
-    expected = {row["kind"]: row for row in receipt["rows"] if row["group"] == 0 and row["kind"] in ROLES}
-    fixtures = {kind: (dry, noisy) for group, kind, _, dry, noisy in ami_cases(args.sources) if group == 0 and kind in ROLES}
-    assert set(fixtures) == set(ROLES)
+    carrier = args.carrier
+    if receipt["bank"] == "ami":
+        group_id, correction, source = 0, "piper", ami_cases
+    else:
+        source = icsi_cases
+        selected = next(row for row in receipt["rows"] if row["kind"].startswith("edited/")
+                        and row["outcomes"][carrier]["range"])
+        group_id, correction = selected["group"], selected["kind"]
+    pattern = {"piper" if receipt["bank"] == "ami" else "edited": correction, "untouched": "untouched", "unrelated": "unrelated"}
+    expected = {row["kind"]: row for row in receipt["rows"] if row["group"] == group_id}
+    fixtures = {kind: (dry, noisy) for group, kind, _, dry, noisy in source(args.sources) if group == group_id}
     torch.set_num_threads(2)
     torch.set_num_interop_threads(1)
     stub = PaymentStub()
@@ -52,18 +68,21 @@ def run(args):
             db.flush()
             client.headers["X-API-Key"], _ = auth.issue_api_key(db, owner)
             db.commit()
-        for role in ROLES:
-            dry, noisy = fixtures[role]
-            pinned = expected[role]
+        for role, case in pattern.items():
+            dry, noisy = fixtures[case]
+            pinned = expected[case]
             assert sha(dry) == pinned["earlier_pcm_sha256"] and sha(noisy) == pinned["submitted_pcm_sha256"]
             earlier = args.output / f"{role}-earlier.wav"
             write_wav(earlier, dry)
             upload = "untouched" if role == "unrelated" else role
             submitted = args.output / f"{upload}-submitted.m4a"
             if upload not in analyses:
-                encode(noisy, submitted, 32)
+                if carrier in CARRIERS48:
+                    encode48(noisy, submitted, carrier)
+                else:
+                    encode(noisy, submitted, 32)
                 analyses[upload] = checkout(client, stub, submitted, kind="audio", media_type="audio/mp4", filename=submitted.name)
-            assert sha(submitted.read_bytes()) == pinned["encoded_sha256"]["aac32"]
+            assert sha(submitted.read_bytes()) == pinned["encoded_sha256"][carrier]
             aid = analyses[upload]
             with get_session() as db:
                 frozen = db.get(Analysis, aid).result_hash
@@ -82,7 +101,7 @@ def run(args):
             check = comparison["clean_speech"]
             assert comparison["schema"] == SCHEMA_WITH_MATCHING_WAVEFORM
             assert comparison["comparison_schema"] == SCHEMA_WITH_AAC_CLEAN_SPEECH
-            measured = pinned["outcomes"]["aac32"]
+            measured = pinned["outcomes"][carrier]
             span = measured["range"]
             assert check["status"] == measured["status"] and check["aac_presentation"] == measured["presentation"]
             assert check.get("range", {}).get("samples") == span and check["affects_overall_confidence"] is False
@@ -99,6 +118,9 @@ def run(args):
                 words = " ".join(page.get_text().split())
                 scan(words)
                 assert "AAC duration 6.000 s" in words and check["summary"] in words
+                if carrier in CARRIERS48:
+                    channels = CARRIERS48[carrier][1]
+                    assert f"48 kHz {'stereo' if channels == 2 else 'mono'} source" in words
                 if span:
                     assert f"Source ticks [{span[0]}, {span[1]})" in words and len(page.get_drawings()) >= 4
             with get_session() as db:
@@ -116,4 +138,5 @@ if __name__ == "__main__":
     parser.add_argument("output", type=Path)
     parser.add_argument("--receipt", type=Path, required=True)
     parser.add_argument("--sources", type=Path, required=True)
+    parser.add_argument("--carrier", choices=("aac32", *CARRIERS48), default="aac32")
     run(parser.parse_args())

@@ -56,8 +56,8 @@ rule. Both candidates assessed every recording and had a qualifying
 speech window overlapping the edit on all 48 staged edits. Under ICSI,
 five useful one-second windows cleared the cutoff on five edited files.
 The system ranked four of those windows first. At the two-context cutoff,
-two useful windows cleared the cutoff, and both lost to unrelated times
-in their recordings.
+two edited files had a useful window above the cutoff. In both files,
+the highest-ranked window pointed to an unrelated time.
 
 The four one-second ICSI locations came from both generators on two readers.
 All pointed to **3.500–4.500 s**. In a diagnostic comparison after scoring,

@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Writing range adaptation to GPT-5.4](writing-range-generator-adaptation-2026-11-15.md)
+  finds one of 48 held report rewrites with the same eight ordinary flags
+  at the wider research point. The adapted head loses all three useful
+  local Qwen locations and increases ordinary alerts on the news and
+  abstract transfer. It stays in evaluation.
+
 - [Word ranges trained against matched originals](writing-paired-ranges-2026-11-15.md)
   reduced tighter ordinary report flags from 8/93 to 2/93 and located
   three local Qwen rewrites versus five for the prior range head. Both

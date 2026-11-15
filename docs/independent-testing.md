@@ -29,6 +29,11 @@ checks a separate training objective against both earlier heads, including
 recounts matched ordinary alerts and shows where even the known sentence
 fails to rank the changed words correctly.
 
+The [GPT-5.4 rewrite training replay](writing-range-generator-adaptation-2026-11-15.md#replay)
+checks split separation across 108 added training pairs, genuine report
+calibration and held works. It separates prior project exposure from
+the unlisted genre-transfer works and recounts the paired gains and losses.
+
 The [noisy AAC speech comparison replay](audio-clean-speech-aac-2026-11-15.md#local-app-and-replay)
 recounts exact-clock findings across 240 paired recordings at two AAC
 bitrates and on uncompressed WAV. Genuine splices, resampling, isolated

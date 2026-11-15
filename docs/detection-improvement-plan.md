@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [A second voice detector under competing speech](audio-second-classifier-overlap-2026-11-14.md)
+  appeared to recover four of 16 ICSI edits. All four locations also flagged
+  on their matched genuine and isolated background controls. The shorter
+  detector added 15 ordinary flags in the 24 matched controls and remains
+  evaluation-only. The numeric replay recounts those collisions.
+
 - [Narrower locations inside short speech alerts](audio-nested-voice-window-2026-11-14.md)
   recovered five useful edit locations across two readers in 48 aligned
   replacements. It also narrowed 18 existing ordinary AMI alerts. The app

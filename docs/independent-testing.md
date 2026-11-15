@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [second voice detector replay](audio-second-classifier-overlap-2026-11-14.md#replay)
+recounts alerts and exact ranges under AMI and ICSI competing speech. It
+checks whether the apparent recoveries are also flagged at the same times
+in the corresponding genuine mixtures and isolated backgrounds.
+
 The [nested speech-window replay](audio-nested-voice-window-2026-11-14.md#replay)
 checks the time evidence behind existing alerts on exact spoken-word
 replacements under AMI and ICSI background speech. The

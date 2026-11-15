@@ -12,6 +12,7 @@ from app.evidence import face_short_window_binding as short_windows
 from app.evidence.face_interval_binding import face_context_box, validate_face_input
 from app.evidence.face_primary_track_binding import position_context
 from app.evidence.video_packet_versions import (
+    BOUNDARY_AVC_PROPOSAL_VERSION,
     DENSE_DURATION_FACE_VERSION,
     DENSE_SHORT_FACE_VERSION,
     FINE_SCENE_FACE_VERSION,
@@ -86,7 +87,8 @@ METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VE
                    proposal.PANE_TRACK_AVC_METHOD: PANE_TRACK_AVC_PROPOSAL_VERSION,
                    proposal.SECOND_PANE_TRACK_AVC_METHOD: SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION,
                    proposal.OPPOSITE_PANE_TRACK_AVC_METHOD: OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION,
-                   proposal.OVERLAPPING_PANE_TRACK_AVC_METHOD: OVERLAPPING_PANE_TRACK_AVC_PROPOSAL_VERSION}
+                   proposal.OVERLAPPING_PANE_TRACK_AVC_METHOD: OVERLAPPING_PANE_TRACK_AVC_PROPOSAL_VERSION,
+                   proposal.BOUNDARY_AVC_METHOD: BOUNDARY_AVC_PROPOSAL_VERSION}
 WINDOW_METHODS = frozenset((short_windows.METHOD, carriers.METHOD))
 POINT = 0.10
 SCENE_POINT = 0.55

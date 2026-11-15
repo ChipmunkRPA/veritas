@@ -50,6 +50,27 @@ def _rank(reduced, box_at, check):
     return kept
 
 
+def boundary_shortlist(reduced, anchor_boxes, check):
+    """Reserve the face budget for complete pairs near either end of the clip."""
+    if len(anchor_boxes) < 4:
+        return []
+    box = {key: float(np.median([item[key] for item in anchor_boxes])) for key in ("x", "y", "w", "h")}
+    pairs = proof.BOUNDARY_PAIRS
+    strength = {}
+    for edge in sorted(proof.BOUNDARY_CANDIDATES):
+        check("clip-boundary face shortlist")
+        if result := face_paired_edge.motion(edge, reduced, box):
+            strength[edge] = float.fromhex(result["central_hex"])
+    ranked = sorted((-min(strength[a], strength[b]), a, b) for a, b in pairs if a in strength and b in strength)
+    kept = set()
+    ordered = []
+    for _, a, b in ranked:
+        if len(kept | {a, b}) <= proof.MAX_EDGES and len(proof.face_schedule(kept | {a, b})) <= proof.MAX_FACE_READS:
+            ordered.extend(edge for edge in (a, b) if edge not in kept)
+            kept.update((a, b))
+    return ordered
+
+
 def pane_motion(edge, reduced, box, pane):
     """Count off-face tiles with an abrupt change relative to nearby frames."""
     x, y, w, h = (box[key] * 0.3 for key in ("x", "y", "w", "h"))

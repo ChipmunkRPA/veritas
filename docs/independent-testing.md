@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [near-end face-change replay](video-face-clip-boundary-2026-11-15.md#reproduce)
+recounts staged edits and ordinary controls near the start and end of
+four-second clips. An independent decoder verifies the exact source
+clocks and three representative pictures for each selected interval.
+
 The [isolated-sentence response replay](writing-context-response-words-2026-11-15.md#independent-replay)
 recounts changes in local word selection and ordinary alerts across
 reports, news, abstracts and dated journal revisions. It also exposes

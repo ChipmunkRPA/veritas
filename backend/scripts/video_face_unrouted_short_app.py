@@ -91,7 +91,8 @@ def native_frames(client, packet, source, commitment, folder, *, representatives
 
 
 def verified_surfaces(client, aid, source, commitment, evidence, packet, folder, *, representatives=REPRESENTATIVES,
-                      initial_coverage="Initial scan. This clip is outside the supported frame or face-size profile."):
+                      initial_coverage="Initial scan. This clip is outside the supported frame or face-size profile.",
+                      expected_range="2.067-2.267"):
     import pymupdf
 
     from app.reports import engine
@@ -110,7 +111,7 @@ def verified_surfaces(client, aid, source, commitment, evidence, packet, folder,
     with pymupdf.open(stream=pdf, filetype="pdf") as document:
         words = " ".join(" ".join(page.get_text().split()) for page in document)
         scan(words)
-        assert "brief face-change range spans 2.067-2.267 s" in words and "with an exclusive end" in words
+        assert f"brief face-change range spans {expected_range} s" in words and "with an exclusive end" in words
         if initial_coverage is not None:
             assert initial_coverage in words
         assert "Bounded native scan. A brief face-change range was recorded." in words

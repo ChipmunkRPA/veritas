@@ -21,13 +21,14 @@ PANE_TRACK_AVC_METHOD = "face-short-return/18"
 SECOND_PANE_TRACK_AVC_METHOD = "face-short-return/19"
 OPPOSITE_PANE_TRACK_AVC_METHOD = "face-short-return/20"
 OVERLAPPING_PANE_TRACK_AVC_METHOD = "face-short-return/21"
+BOUNDARY_AVC_METHOD = "face-short-return/22"
 AVC_ENCODING = ("h264", "yuv420p", "avc1")
 SOURCE_PROFILES = {METHOD: (paired.ENCODING, "mp4"), WEBM_METHOD: (WEBM_ENCODING, "webm"),
                    AVC_METHOD: (AVC_ENCODING, "mp4"), SECOND_AVC_METHOD: (AVC_ENCODING, "mp4"),
                    MOVING_AVC_METHOD: (AVC_ENCODING, "mp4"), PRIMARY_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"),
                    POSITION_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"), PANE_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"),
                    SECOND_PANE_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"), OPPOSITE_PANE_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"),
-                   OVERLAPPING_PANE_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4")}
+                   OVERLAPPING_PANE_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"), BOUNDARY_AVC_METHOD: (AVC_ENCODING, "mp4")}
 METHODS = frozenset(SOURCE_PROFILES)
 OPPOSITE_PANE_METHODS = frozenset({OPPOSITE_PANE_TRACK_AVC_METHOD, OVERLAPPING_PANE_TRACK_AVC_METHOD})
 PANE_METHODS = OPPOSITE_PANE_METHODS | {PANE_TRACK_AVC_METHOD, SECOND_PANE_TRACK_AVC_METHOD}
@@ -39,6 +40,10 @@ ANCHOR_SAMPLES = tuple(range(4, 120, 10))
 EDGE_SCAN = range(6, 115)
 DURATIONS = (5, 6, 7)
 SECOND_AVC_DURATIONS = (5, 6, 7, 8, 9)
+BOUNDARY_EDGES = frozenset((3, 4, 5, 115, 116, 117))
+BOUNDARY_PAIRS = frozenset((start, start + length) for start in range(3, 118) for length in SECOND_AVC_DURATIONS
+                           if start + length <= 117 and (start in BOUNDARY_EDGES or start + length in BOUNDARY_EDGES))
+BOUNDARY_CANDIDATES = frozenset(edge for pair in BOUNDARY_PAIRS for edge in pair)
 SECOND_AVC_GAP = Fraction(3, paired.RATE)
 OPPOSITE_PANE_MIN_OVERLAP = Fraction(3, paired.RATE)
 MAX_EDGES = 16
@@ -125,16 +130,19 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     )
     start, stop = (record[key] for key in ("start_frame_index", "end_frame_index"))
     edges = record["shortlist_edges"]
+    near_boundary = record["method"] == BOUNDARY_AVC_METHOD
+    allowed_edges = BOUNDARY_CANDIDATES if near_boundary else EDGE_SCAN
     require(
         isinstance(edges, list)
         and 2 <= len(edges) <= MAX_EDGES
         and len(edges) == len(set(edges))
-        and all(type(i) is int and i in EDGE_SCAN for i in edges)
+        and all(type(i) is int and i in allowed_edges for i in edges)
         and start in edges
         and stop in edges
         and type(start) is int
         and type(stop) is int
-        and stop - start in (SECOND_AVC_DURATIONS if record["method"] in MOVING_METHODS | SECOND_METHODS else DURATIONS),
+        and ((start, stop) in BOUNDARY_PAIRS if near_boundary else
+             stop - start in (SECOND_AVC_DURATIONS if record["method"] in MOVING_METHODS | SECOND_METHODS else DURATIONS)),
         "Brief face proposal has an invalid edge shortlist",
     )
     planned = face_schedule(edges)

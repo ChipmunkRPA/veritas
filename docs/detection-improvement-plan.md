@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Short face changes near either end of a clip](video-face-clip-boundary-2026-11-15.md)
+  located both native boundaries in 10/24 held staged H.264 edits
+  versus zero for the prior brief proposal, with no flags on 32 ordinary
+  controls. The additional local pass uses three source frames on each
+  side of both transitions, including near the beginning or end.
+
 - [Word responses after hiding neighboring sentences](writing-context-response-words-2026-11-15.md)
   improved the two-stage report check from 4/32 to 6/32 local Qwen
   locations and reduced ordinary report flags from 22/93 to 14/93.

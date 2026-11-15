@@ -1,0 +1,1640 @@
+{
+  "schema": "chipmunk.video-face-clip-boundary/1",
+  "method": {
+    "timeline": "Exactly 120 presented 720p pictures at 30 fps, upright 4:2:0 H.264 MP4.",
+    "candidate": "Reserve whole pairs near the crop boundaries. Three actual native face samples on each side of both adjacent-picture changes, using the fixed two-edge appearance and motion measurements.",
+    "comparison": "Run the current stationary and moving short proposal first. Compare with a near-end supplement using the same inputs. Keep the current proposal when it selected a range.",
+    "coverage": "Counts use temporal IoU >= 0.5. Exact matches require both native frame indices. Keep unmatched ordinary ranges and insufficient face coverage visible."
+  },
+  "split": "held",
+  "weights": {
+    "face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+    "face_recognition_sface_2021dec.onnx": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79"
+  },
+  "rows": [
+    {
+      "group": 89,
+      "condition": "original",
+      "truth": [],
+      "sha256": "0f792d12f48fa1495f0ba4e1dbd1a679ff0de2f7f242fe30187dc48baaddafbd",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 27
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 89,
+      "condition": "early_swap",
+      "truth": [
+        [
+          4,
+          11
+        ]
+      ],
+      "sha256": "8b313954545567be99d862fc115effa3cb7481300edb76d2367a39b4ec9d6343",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 34
+        },
+        "boundary": {
+          "selected": [
+            4,
+            11
+          ],
+          "measured": true,
+          "scheduled": 23,
+          "anchors": [
+            {
+              "index": 3,
+              "pts": 3000,
+              "rgb_sha256": "9925d0ba0dc4008e11f82f02da0941851f44d6e36aba559b2f8be052aa2fe25c"
+            },
+            {
+              "index": 8,
+              "pts": 8000,
+              "rgb_sha256": "3201aea63df7768dc403fb7cb4aec50748bf3d51a2c98a3547e52a09d980bf03"
+            },
+            {
+              "index": 11,
+              "pts": 11000,
+              "rgb_sha256": "f8b64a2090af304e1dcd64d6d296543fe56de8350cc216f417fd61d6421d4fa2"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 89,
+      "condition": "late_swap",
+      "truth": [
+        [
+          109,
+          117
+        ]
+      ],
+      "sha256": "93bae97acad7b18ae47d57aa12525aae948f7a2d11cef088952eff345ec327cf",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 33
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 89,
+      "condition": "early_light",
+      "truth": [],
+      "sha256": "bff79bd0f71d0197fbe78253fac13a316637ed6f4de4c612da2d40d04bd895f9",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 28
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 89,
+      "condition": "late_cut",
+      "truth": [],
+      "sha256": "9398bfe83620e27d63d95363e855e0575b386cc9786ba222c3b6bbb7d4d10084",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 27
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 89,
+      "condition": "early_jump",
+      "truth": [],
+      "sha256": "642663233e7963e8d47c879c545811e56639df097bc7fd116bee9eb2c1a27956",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 36
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 24
+        }
+      }
+    },
+    {
+      "group": 89,
+      "condition": "late_reencode",
+      "truth": [
+        [
+          109,
+          117
+        ]
+      ],
+      "sha256": "c008db27e9c01566ccd145b1e7d429251b4528bb5d65199c9ea1708dc3bea011",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 28
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 76,
+      "condition": "original",
+      "truth": [],
+      "sha256": "44b577a6d00f1eb4650fee2d0845935de5398feed5f1d466537816cd6117f289",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 81
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 76,
+      "condition": "early_swap",
+      "truth": [
+        [
+          5,
+          13
+        ]
+      ],
+      "sha256": "b6a8205a3bf474e25d6452c80c5a0f80520dd2bb6dfea9c62bef2feb1e674e14",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 80
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 76,
+      "condition": "late_swap",
+      "truth": [
+        [
+          109,
+          115
+        ]
+      ],
+      "sha256": "f78237019022a16353bcb1e41401151b17d00bdf0991ebb46458607242ce64d6",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 83
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 76,
+      "condition": "early_light",
+      "truth": [],
+      "sha256": "141f4e6700f1bdf8b5f7d164f26d064175810d369ea2bc072347bc11d8ecd00f",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 80
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 76,
+      "condition": "late_cut",
+      "truth": [],
+      "sha256": "6a7bef4398f2d1f3a5183f91db278a77838a22191148dfdf3e30f9212bcca58c",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 82
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 76,
+      "condition": "early_jump",
+      "truth": [],
+      "sha256": "036bd1110f00df3b0d2f5116c11e2ef09942432621dfc9f612c3d0459b2d8795",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 81
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 76,
+      "condition": "late_reencode",
+      "truth": [
+        [
+          109,
+          115
+        ]
+      ],
+      "sha256": "d06fbb2046498ffd7a19c3e8b7ea34f4c484465bcc5d279a00fd89f1d3b7ed44",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 82
+        },
+        "boundary": {
+          "selected": [
+            109,
+            115
+          ],
+          "measured": true,
+          "scheduled": 23,
+          "anchors": [
+            {
+              "index": 108,
+              "pts": 108000,
+              "rgb_sha256": "68156b923945d04451efea80ba80094f3b48f0dc9bfe20761f8c169ef3fe70a2"
+            },
+            {
+              "index": 112,
+              "pts": 112000,
+              "rgb_sha256": "a9d4d104cf5a6b0fc10ce45d9edd93cd3ad3a4e4710bd7e59758d3e60c0e4edd"
+            },
+            {
+              "index": 115,
+              "pts": 115000,
+              "rgb_sha256": "3f9d76239ac8a7b894f5f2ded5579a0c21fadee9485ceb44bec370a0ffe501a7"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 48,
+      "condition": "original",
+      "truth": [],
+      "sha256": "75aa0d47b81fc8d4f32acf64ea90bc8f609ab33b7c1ed452c5c68027b2e39cc3",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 68
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 48,
+      "condition": "early_swap",
+      "truth": [
+        [
+          3,
+          9
+        ]
+      ],
+      "sha256": "943913ebaa923e2900c02cc96f35cda1fd26b4802a6089e9422fc996cf0136a3",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 75
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 48,
+      "condition": "late_swap",
+      "truth": [
+        [
+          109,
+          117
+        ]
+      ],
+      "sha256": "cb84f977ed8315bc47f8087a8d26bd710be2d6b82502a341041afe9913eb52f2",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 64
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 48,
+      "condition": "early_light",
+      "truth": [],
+      "sha256": "84caa472c9384d9466199773b90a5ca335f8bf444693e0b504a554242d87e9c3",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 68
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 48,
+      "condition": "late_cut",
+      "truth": [],
+      "sha256": "22de115e4b7972e19f18eebb5f1e7203d25c691907b777b729dc4331fb5ce92b",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 70
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 48,
+      "condition": "early_jump",
+      "truth": [],
+      "sha256": "33b84221b2bd802bba5051df2a6c56c5df0aa575899248b0cd44c2ae42dab5df",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 72
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 48,
+      "condition": "late_reencode",
+      "truth": [
+        [
+          109,
+          117
+        ]
+      ],
+      "sha256": "e78f992f0633bb9c3ad77bec3d262b883a3c92ad4fac103d02e1a1d6a836557a",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 64
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 0,
+      "condition": "original",
+      "truth": [],
+      "sha256": "0930fcee3e309f196ccad6600d08e1914de0d01eb106cb56505851f79eedf34e",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 0,
+      "condition": "early_swap",
+      "truth": [
+        [
+          4,
+          11
+        ]
+      ],
+      "sha256": "ff138b4cd85391a57e5d696c2a48161c0bbabcbcb5abd60fff805922364a57b7",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 18
+        },
+        "boundary": {
+          "selected": [
+            4,
+            11
+          ],
+          "measured": true,
+          "scheduled": 23,
+          "anchors": [
+            {
+              "index": 3,
+              "pts": 3000,
+              "rgb_sha256": "bb04da59902427982a84ec18f758be0bde08b4fd144bc05945a4cd06209651f7"
+            },
+            {
+              "index": 8,
+              "pts": 8000,
+              "rgb_sha256": "a6e46ed754acf23cb5bf95474c817cddcfa526d8d69a413106f86b109faf0413"
+            },
+            {
+              "index": 11,
+              "pts": 11000,
+              "rgb_sha256": "67e085a9c8e7355213b2377d4233d216ec9baa9517b2e4071f5fe927dced309f"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 0,
+      "condition": "late_swap",
+      "truth": [
+        [
+          109,
+          115
+        ]
+      ],
+      "sha256": "33c972acbe556489c3655e2541039222d03bc13415ed2b24543170a47e9f9488",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 18
+        },
+        "boundary": {
+          "selected": [
+            109,
+            115
+          ],
+          "measured": true,
+          "scheduled": 23,
+          "anchors": [
+            {
+              "index": 108,
+              "pts": 108000,
+              "rgb_sha256": "5e220c2d1120b203d883b824eadf5cb5bf6b97bbbfd03a4f7da494fd9d41d63a"
+            },
+            {
+              "index": 112,
+              "pts": 112000,
+              "rgb_sha256": "24a958fa47b00d18204606447b1c433daf9bbca0fa9214c36a09f8169c65f846"
+            },
+            {
+              "index": 115,
+              "pts": 115000,
+              "rgb_sha256": "b48e4cfb314b52c2c4347705bf86f90178dec9267bad2ec9020252060ad51dc9"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 0,
+      "condition": "early_light",
+      "truth": [],
+      "sha256": "9aa3bb49dc2c15bd8d0198ce3fd1e26b86a3cdfda2831be1c6b74e7672706bee",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 0,
+      "condition": "late_cut",
+      "truth": [],
+      "sha256": "6e4d2e54c27f855084ec284d806487e44748f600e452203110e49b2049f9a8d3",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 20
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 0,
+      "condition": "early_jump",
+      "truth": [],
+      "sha256": "c72e9e45bcc4b390d1e08621a5f9b176b666a3c13946f34622f544715a06a740",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 0,
+      "condition": "late_reencode",
+      "truth": [
+        [
+          109,
+          115
+        ]
+      ],
+      "sha256": "ebd88eec5aaeecb00758c9f58665eb6723f7d80e34cf4cf42840317b732fd0b6",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 18
+        },
+        "boundary": {
+          "selected": [
+            109,
+            115
+          ],
+          "measured": true,
+          "scheduled": 23,
+          "anchors": [
+            {
+              "index": 108,
+              "pts": 108000,
+              "rgb_sha256": "b096c271f238e268823d65b0cc0eb13c9feb0e259dddc6554e9053ba5bc56ad6"
+            },
+            {
+              "index": 112,
+              "pts": 112000,
+              "rgb_sha256": "d8bc044470d15a057dbc81fcf6c2da22c4b19579d4167a1b7ca2882eadd56a53"
+            },
+            {
+              "index": 115,
+              "pts": 115000,
+              "rgb_sha256": "c55b718df7cdd9ba1fef9f78a25b6ea7a9467903df76b8daf223b8b6fa42c669"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 46,
+      "condition": "original",
+      "truth": [],
+      "sha256": "f5371fc7f5978bba8bcb89356bc7919b9c7ff0b780557e9280a9936a4eba5d29",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 67
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 46,
+      "condition": "early_swap",
+      "truth": [
+        [
+          5,
+          13
+        ]
+      ],
+      "sha256": "d957c7f9981a32f18eb2fc3c7c7b931e75675655df53b6cb3470267fffa0f3a3",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 70
+        },
+        "boundary": {
+          "selected": [
+            5,
+            13
+          ],
+          "measured": true,
+          "scheduled": 22,
+          "anchors": [
+            {
+              "index": 4,
+              "pts": 4000,
+              "rgb_sha256": "88fb0b3981a436b2caf1147809c4f5719c411f311d3d71ade9f96b1e0f5b4ec6"
+            },
+            {
+              "index": 10,
+              "pts": 10000,
+              "rgb_sha256": "67c86d52d4b499aa3df97d2f98c502632082b3b1d923609d03a04001971f4d33"
+            },
+            {
+              "index": 13,
+              "pts": 13000,
+              "rgb_sha256": "9434a2ef951efb65ec81763fe38f245eba56c595e7a8f49e085d93f81d2dae11"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 46,
+      "condition": "late_swap",
+      "truth": [
+        [
+          109,
+          116
+        ]
+      ],
+      "sha256": "a514e9edba13f4dc4c5f6e8e4253e3ec4efedbc0b601dd9ea795a5af93480dcd",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 67
+        },
+        "boundary": {
+          "selected": [
+            109,
+            116
+          ],
+          "measured": true,
+          "scheduled": 24,
+          "anchors": [
+            {
+              "index": 108,
+              "pts": 108000,
+              "rgb_sha256": "d36b6bbc9dc7a2e5c9485892d0f7e3723b94c4ffc7282bbafe0d0d353c22e623"
+            },
+            {
+              "index": 113,
+              "pts": 113000,
+              "rgb_sha256": "e06de3325fb71ca50eef07764ea443cc3579553b7c25e53df33b877fc41a43db"
+            },
+            {
+              "index": 116,
+              "pts": 116000,
+              "rgb_sha256": "c72dfb35c35cbb12145beccffb93490fa4e96058762cb5b6cf345beb5b3dc250"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 46,
+      "condition": "early_light",
+      "truth": [],
+      "sha256": "82803d6f14fbc734456a06fedc30cb15f3404d61dbdc73293db667d79c438068",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 66
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 22
+        }
+      }
+    },
+    {
+      "group": 46,
+      "condition": "late_cut",
+      "truth": [],
+      "sha256": "5dec5ec2f12d21e32c5b57e1071b63dfef06ad5c43b4e13cb011af8cfd9a19f1",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 69
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 46,
+      "condition": "early_jump",
+      "truth": [],
+      "sha256": "ec6ece25e875bae102915e473afe655ffaf5b7996b407e73bae71d0dcb6cfe18",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 60
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 46,
+      "condition": "late_reencode",
+      "truth": [
+        [
+          109,
+          116
+        ]
+      ],
+      "sha256": "608256ac7e107a7e390e942de7d100f5763ab3aa576158dfdc0322e510407d59",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 70
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 38,
+      "condition": "original",
+      "truth": [],
+      "sha256": "0953cc19dc63d48ff8900c445a041053e383628fa76616d3f4e98809260da7a0",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 45
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 24
+        }
+      }
+    },
+    {
+      "group": 38,
+      "condition": "early_swap",
+      "truth": [
+        [
+          3,
+          9
+        ]
+      ],
+      "sha256": "bc1a133592721d58479ca5b7e074518b84ec0cca7b2bce5950c4f4f9180f0ae5",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 60
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 25
+        }
+      }
+    },
+    {
+      "group": 38,
+      "condition": "late_swap",
+      "truth": [
+        [
+          109,
+          115
+        ]
+      ],
+      "sha256": "1eacde156fda6e554ddcb7fa36b83d00fbba8d0450e05c16e43e537235ebef47",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 52
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 23
+        }
+      }
+    },
+    {
+      "group": 38,
+      "condition": "early_light",
+      "truth": [],
+      "sha256": "b17e4db80faec5744767c37f91643f64b9aacfb3d3190394ba44c917f806ced1",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 60
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 25
+        }
+      }
+    },
+    {
+      "group": 38,
+      "condition": "late_cut",
+      "truth": [],
+      "sha256": "852d51de65cfe60f8645e3ddf95c613cdcdcef37c4dcacba1403b833435d55d4",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 46
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 23
+        }
+      }
+    },
+    {
+      "group": 38,
+      "condition": "early_jump",
+      "truth": [],
+      "sha256": "6d5916560df2acc6c1683ae782a69435cfdb6535ab2ae41a998abf651a169d01",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 59
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 25
+        }
+      }
+    },
+    {
+      "group": 38,
+      "condition": "late_reencode",
+      "truth": [
+        [
+          109,
+          115
+        ]
+      ],
+      "sha256": "7819fdd73e21d7545a8ee0eba208613fa41651f5a48d80bf700b877a9a45c389",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 57
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 25
+        }
+      }
+    },
+    {
+      "group": 35,
+      "condition": "original",
+      "truth": [],
+      "sha256": "a60ecc7aa9f48cfad2e7755ab8b89bbe2b9bcc5f17544e2852f7bcd6713c507b",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 35,
+      "condition": "early_swap",
+      "truth": [
+        [
+          4,
+          11
+        ]
+      ],
+      "sha256": "ffc89ef35fcade5454e594ef5fd43331f3b0a3f6765412d86ce13533e9fd6be9",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 18
+        },
+        "boundary": {
+          "selected": [
+            4,
+            11
+          ],
+          "measured": true,
+          "scheduled": 23,
+          "anchors": [
+            {
+              "index": 3,
+              "pts": 3000,
+              "rgb_sha256": "19f9436daf6bc009c7d3f92930fde2620f160109b2ec20accbaf6b50336df168"
+            },
+            {
+              "index": 8,
+              "pts": 8000,
+              "rgb_sha256": "7b65d9290d2dab02dfe815d664c5db96c91bca5681a1a453346199cacfd04940"
+            },
+            {
+              "index": 11,
+              "pts": 11000,
+              "rgb_sha256": "6d7cc21a81fde11e87dec4295c247fc859e612d8adf6a5a42f8687598522a883"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 35,
+      "condition": "late_swap",
+      "truth": [
+        [
+          109,
+          116
+        ]
+      ],
+      "sha256": "2202bc39f0f7d6644932896d9920e24b48e589391d7a0d615c5d342e305ba6c1",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 18
+        },
+        "boundary": {
+          "selected": [
+            109,
+            116
+          ],
+          "measured": true,
+          "scheduled": 23,
+          "anchors": [
+            {
+              "index": 108,
+              "pts": 108000,
+              "rgb_sha256": "374e6ebb7b63d54939d6b8eb88fc48c9cbe70befae69201d888f4a4c5cdc762f"
+            },
+            {
+              "index": 113,
+              "pts": 113000,
+              "rgb_sha256": "5d7067b810a38e20a9d92ce47599d971dbe697b5c6a232276431f9bfcdc5f4c0"
+            },
+            {
+              "index": 116,
+              "pts": 116000,
+              "rgb_sha256": "222b0966e724ac72b5b87b8f37b2b6bc339f332746282056ea861958008032a3"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 35,
+      "condition": "early_light",
+      "truth": [],
+      "sha256": "4edc10fae6f7192b97cdc5dd3d69376f41ba3e5b4a680a8f68f14382fa67dae1",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 35,
+      "condition": "late_cut",
+      "truth": [],
+      "sha256": "da50f0c57bab803fe58adea75bf089292bc77d387e36dc187bdf534e7376682b",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 18
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 35,
+      "condition": "early_jump",
+      "truth": [],
+      "sha256": "8653653271ffc481d1db887b6752742b587b20c4f3964cb45fe9165a6a5c2330",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 35,
+      "condition": "late_reencode",
+      "truth": [
+        [
+          109,
+          116
+        ]
+      ],
+      "sha256": "f3775d9e26eac65e1d2b4f15b9b53b89b83dd0ab0a2a9f3964b13bb91d2d6c9a",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 18
+        },
+        "boundary": {
+          "selected": [
+            109,
+            116
+          ],
+          "measured": true,
+          "scheduled": 23,
+          "anchors": [
+            {
+              "index": 108,
+              "pts": 108000,
+              "rgb_sha256": "9d884ce7d8e5ef9d74497dcd3e2b17dbab863323bc03f9092db650357a02a477"
+            },
+            {
+              "index": 113,
+              "pts": 113000,
+              "rgb_sha256": "b89cc72eaad038987f8475cd1f7a50d5cee43a890c56c823b228b8670ada8714"
+            },
+            {
+              "index": 116,
+              "pts": 116000,
+              "rgb_sha256": "6fd7e672ef604355a968adeb280a93e763b24b677d30f0f23b8d7b08c13264ce"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 73,
+      "condition": "original",
+      "truth": [],
+      "sha256": "e631abf11408d956f1d96f200a4ca8919aaa0265237b0fc1261cc0312db91a38",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 28
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 73,
+      "condition": "early_swap",
+      "truth": [
+        [
+          5,
+          13
+        ]
+      ],
+      "sha256": "3ee6fda9207a0c3cacc8ebdb314987676460e425efb7c98d590e576929f4e421",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 12
+        },
+        "boundary": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 73,
+      "condition": "late_swap",
+      "truth": [
+        [
+          109,
+          117
+        ]
+      ],
+      "sha256": "759b691cc689097f107693160b10322cf60787c87177f0fa73909a0b63fb9481",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 34
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 73,
+      "condition": "early_light",
+      "truth": [],
+      "sha256": "ac1ed4c3592a60a4a87ea760e67a43c6de275c8bd6374c5293f48fdceae9e70a",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 12
+        },
+        "boundary": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 73,
+      "condition": "late_cut",
+      "truth": [],
+      "sha256": "303c8ed2a03155db8dd3ec6c8293ee2992754b1b1fed0aaa21084c412a1e18d5",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 27
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 73,
+      "condition": "early_jump",
+      "truth": [],
+      "sha256": "91f32b8d5d8b6488945529d885d7eed9d845463af5ac983a16802cd9e3913915",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 12
+        },
+        "boundary": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 73,
+      "condition": "late_reencode",
+      "truth": [
+        [
+          109,
+          117
+        ]
+      ],
+      "sha256": "80af84c18ae1b7efa98366ffd532a10f750a9f1501e921a438c434aaa668a96a",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 33
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    }
+  ],
+  "groups": [
+    {
+      "index": 89,
+      "early": [
+        4,
+        11
+      ],
+      "late": [
+        109,
+        117
+      ],
+      "receipt_sha256": "04087a02240532324794d9caa6753cd38810dc732145a74aeddf7a6706f6ede7"
+    },
+    {
+      "index": 76,
+      "early": [
+        5,
+        13
+      ],
+      "late": [
+        109,
+        115
+      ],
+      "receipt_sha256": "fd3c5894ed523c95287ec3916d2b8243a17e61c797fa29609d103ada0ceaead5"
+    },
+    {
+      "index": 48,
+      "early": [
+        3,
+        9
+      ],
+      "late": [
+        109,
+        117
+      ],
+      "receipt_sha256": "e7448704b0eb949f4bd824c6bd2c7eb0178369eb558ee9d086b041c3dae69506"
+    },
+    {
+      "index": 0,
+      "early": [
+        4,
+        11
+      ],
+      "late": [
+        109,
+        115
+      ],
+      "receipt_sha256": "5405c027a80a115599e96be176c50cba46f83f0e2a70f24f023d388db52b2d03"
+    },
+    {
+      "index": 46,
+      "early": [
+        5,
+        13
+      ],
+      "late": [
+        109,
+        116
+      ],
+      "receipt_sha256": "820d19c0271e353052cdedea170086f2f9025cb4e566003e43663f1e137ed49b"
+    },
+    {
+      "index": 38,
+      "early": [
+        3,
+        9
+      ],
+      "late": [
+        109,
+        115
+      ],
+      "receipt_sha256": "020f619e013e26094d8ee613cf04748c6352241c3b52699594c24ea4b4ffc602"
+    },
+    {
+      "index": 35,
+      "early": [
+        4,
+        11
+      ],
+      "late": [
+        109,
+        116
+      ],
+      "receipt_sha256": "8eb24c115b9ade5bd269f19787fe2b14067f632f975f272529c32466b4e6db7e"
+    },
+    {
+      "index": 73,
+      "early": [
+        5,
+        13
+      ],
+      "late": [
+        109,
+        117
+      ],
+      "receipt_sha256": "f6dc70f59b8435b05f08aaff986a02ffeb16abe3c35c31d15ee40fc2fd29d121"
+    }
+  ],
+  "results": {
+    "original": {
+      "files": 8,
+      "edits": 0,
+      "prior_measured": 7,
+      "boundary_measured": 8,
+      "prior_flags": 0,
+      "expanded_flags": 0,
+      "prior_exact": 0,
+      "expanded_exact": 0,
+      "prior_useful": 0,
+      "expanded_useful": 0
+    },
+    "early_swap": {
+      "files": 8,
+      "edits": 8,
+      "prior_measured": 5,
+      "boundary_measured": 7,
+      "prior_flags": 0,
+      "expanded_flags": 4,
+      "prior_exact": 0,
+      "expanded_exact": 4,
+      "prior_useful": 0,
+      "expanded_useful": 4
+    },
+    "late_swap": {
+      "files": 8,
+      "edits": 8,
+      "prior_measured": 5,
+      "boundary_measured": 8,
+      "prior_flags": 0,
+      "expanded_flags": 3,
+      "prior_exact": 0,
+      "expanded_exact": 3,
+      "prior_useful": 0,
+      "expanded_useful": 3
+    },
+    "early_light": {
+      "files": 8,
+      "edits": 0,
+      "prior_measured": 7,
+      "boundary_measured": 7,
+      "prior_flags": 0,
+      "expanded_flags": 0,
+      "prior_exact": 0,
+      "expanded_exact": 0,
+      "prior_useful": 0,
+      "expanded_useful": 0
+    },
+    "late_cut": {
+      "files": 8,
+      "edits": 0,
+      "prior_measured": 5,
+      "boundary_measured": 8,
+      "prior_flags": 0,
+      "expanded_flags": 0,
+      "prior_exact": 0,
+      "expanded_exact": 0,
+      "prior_useful": 0,
+      "expanded_useful": 0
+    },
+    "early_jump": {
+      "files": 8,
+      "edits": 0,
+      "prior_measured": 7,
+      "boundary_measured": 7,
+      "prior_flags": 0,
+      "expanded_flags": 0,
+      "prior_exact": 0,
+      "expanded_exact": 0,
+      "prior_useful": 0,
+      "expanded_useful": 0
+    },
+    "late_reencode": {
+      "files": 8,
+      "edits": 8,
+      "prior_measured": 5,
+      "boundary_measured": 8,
+      "prior_flags": 0,
+      "expanded_flags": 3,
+      "prior_exact": 0,
+      "expanded_exact": 3,
+      "prior_useful": 0,
+      "expanded_useful": 3
+    }
+  }
+}

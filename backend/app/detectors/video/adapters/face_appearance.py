@@ -739,6 +739,7 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
     prior = details.get("face_return")
     second_avc = proposal_method == proposal.AVC_METHOD and settings.video_face_second_avc_review
     retry_moving = proposal_method == proposal.AVC_METHOD and settings.video_face_moving_avc_review
+    retry_boundary = proposal_method == proposal.AVC_METHOD and settings.video_face_boundary_avc_review
     retry_panes = proposal_method == proposal.AVC_METHOD and settings.video_face_pane_track_avc_review and prior is None
     track_modes = [
         method for enabled, method in (
@@ -879,6 +880,33 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
             if retry_panes:
                 pane_measured = recover_panes()
 
+    def recover_boundary(anchors):
+        nonlocal edges, planned, faces
+        if not retry_boundary or any(len(found) > 1 for found in detections.values()):
+            return False
+        boundary_edges = face_short_proposal.boundary_shortlist(reduced, list(anchors.values()), stop.check)
+        if not boundary_edges:
+            return False
+        schedule = proposal.face_schedule(boundary_edges)
+        original_faces, original_coverage = faces, coverage.copy()
+        faces = {i: faces[i] for i in schedule if i in faces}
+        coverage.update(status="unassessed", reason="time_budget", scheduled_frames=len(schedule))
+        read(set(schedule) - set(proposal.ANCHOR_SAMPLES) - faces.keys(), face=True, pixels=False)
+        selected = face_short_proposal.select(
+            boundary_edges, faces, reduced, stop.check,
+            lambda start, end: (start, end) not in proposal.BOUNDARY_PAIRS or excluded(start, end),
+            durations=proposal.SECOND_AVC_DURATIONS,
+        )
+        stop.check("clip-boundary face proposal")
+        if selected is None:
+            faces = original_faces
+            coverage.update(original_coverage)
+            return False
+        edges, planned = boundary_edges, schedule
+        details["face_return"] = record(selected, proposal.BOUNDARY_AVC_METHOD)
+        coverage.update(status="localized", reason=None)
+        return True
+
     def recover_panes():
         nonlocal pane, reference_faces, faces, anchor_indices, edges, planned
         sampled = {i: detections[i] for i in proposal.ANCHOR_SAMPLES}
@@ -1008,7 +1036,8 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
                 read(set(planned) - set(proposal.ANCHOR_SAMPLES) - faces.keys(), face=True, pixels=False)
                 if edges and not face_short_proposal.has_measurable_pair(edges, faces, proposal.SECOND_AVC_DURATIONS):
                     coverage["reason"] = "insufficient_same_shot_context"
-                    recover_tracks()
+                    if not recover_boundary(anchors):
+                        recover_tracks()
                     return
                 selected = face_short_proposal.select(edges, faces, reduced, stop.check, excluded,
                                                      durations=proposal.SECOND_AVC_DURATIONS)
@@ -1023,7 +1052,8 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
                     coverage.update(status="unassessed", reason="insufficient_same_shot_context")
                 else:
                     coverage.update(status="no_distinct_range", reason=None)
-                recover_tracks()
+                if not recover_boundary(anchors):
+                    recover_tracks()
                 return
             prior = details["face_return"] = record(selected, proposal_method)
             coverage.update(status="localized", reason=None)

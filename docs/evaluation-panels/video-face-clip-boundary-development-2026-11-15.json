@@ -1,0 +1,932 @@
+{
+  "schema": "chipmunk.video-face-clip-boundary/1",
+  "method": {
+    "timeline": "Exactly 120 presented 720p pictures at 30 fps, upright 4:2:0 H.264 MP4.",
+    "candidate": "Reserve whole pairs near the crop boundaries. Three actual native face samples on each side of both adjacent-picture changes, using the fixed two-edge appearance and motion measurements.",
+    "comparison": "Run the current stationary and moving short proposal first. Compare with a near-end supplement using the same inputs. Keep the current proposal when it selected a range.",
+    "coverage": "Counts use temporal IoU >= 0.5. Exact matches require both native frame indices. Keep unmatched ordinary ranges and insufficient face coverage visible."
+  },
+  "split": "development",
+  "weights": {
+    "face_detection_yunet_2023mar.onnx": "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4",
+    "face_recognition_sface_2021dec.onnx": "0ba9fbfa01b5270c96627c4ef784da859931e02f04419c829e83484087c34e79"
+  },
+  "rows": [
+    {
+      "group": 49,
+      "condition": "original",
+      "truth": [],
+      "sha256": "6d5e69fabff043ec789c5f75aa7c59fdf0a2d938a867c400f7d297109e0672fb",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 31
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 49,
+      "condition": "early_swap",
+      "truth": [
+        [
+          3,
+          9
+        ]
+      ],
+      "sha256": "841d59194199c66eb250a0a202a8690aebb36f7fd3fa91e5070505686deb39b0",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 53
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 49,
+      "condition": "late_swap",
+      "truth": [
+        [
+          109,
+          115
+        ]
+      ],
+      "sha256": "dae9c3475381a9e0aa6480469417a0a0b4012b1ed7faa4a45b045a06b10086d1",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 31
+        },
+        "boundary": {
+          "selected": [
+            109,
+            115
+          ],
+          "measured": true,
+          "scheduled": 23,
+          "anchors": [
+            {
+              "index": 108,
+              "pts": 108000,
+              "rgb_sha256": "74ff17fdb49675424e6b0a8cdac513169a8cfe2bae76a257a9e77221623ae84d"
+            },
+            {
+              "index": 112,
+              "pts": 112000,
+              "rgb_sha256": "46393b24d8806fd0be1be1d7799f3c1098d9e06f07c0dd367c677424f5cee215"
+            },
+            {
+              "index": 115,
+              "pts": 115000,
+              "rgb_sha256": "8de4e87b8bffd35fb65bb60bc9b05ae6f3eda65e9ea76dd3ae2b4ac429091360"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 49,
+      "condition": "early_light",
+      "truth": [],
+      "sha256": "535850b0548004fade12cfa6121a8727c09ec984cd7c3404c18267f3f21bd851",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 48
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 49,
+      "condition": "late_cut",
+      "truth": [],
+      "sha256": "5a8399789b2a14548a8500d82177f6f7c1a6aa11b392296a6a50a93e36d35992",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 25
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 49,
+      "condition": "early_jump",
+      "truth": [],
+      "sha256": "66907cd9990596b4fa2a6914533ebb8035a6bf8d5f3b7336da661791a4d42350",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 48
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 49,
+      "condition": "late_reencode",
+      "truth": [
+        [
+          109,
+          115
+        ]
+      ],
+      "sha256": "9504ccc183085ec934fe4a13aaaed244a5cee505742518b8041b1cdf923b5047",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 31
+        },
+        "boundary": {
+          "selected": [
+            109,
+            115
+          ],
+          "measured": true,
+          "scheduled": 23,
+          "anchors": [
+            {
+              "index": 108,
+              "pts": 108000,
+              "rgb_sha256": "72725055972d2b33ebbd007e36f4e3933d40c76ae43679fa86ba5127e4537789"
+            },
+            {
+              "index": 112,
+              "pts": 112000,
+              "rgb_sha256": "2f30537d34a370bf35a991b0916672937eb6a5bf7af0a92a7a42dfe561baba27"
+            },
+            {
+              "index": 115,
+              "pts": 115000,
+              "rgb_sha256": "60ca9efc7a48d4f97a256dee50e33976293d5afceb2fe885fcc22d32889b028b"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 27,
+      "condition": "original",
+      "truth": [],
+      "sha256": "8170b5b7a30040296873b4a7f1d2de9d3c7a9c970429e7afd98ab9ffffeba87f",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 18
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 27,
+      "condition": "early_swap",
+      "truth": [
+        [
+          4,
+          11
+        ]
+      ],
+      "sha256": "89d359619f4db42a0e4c526961e6f2c5de66665d5404aeb9f68c93fc1d11c8d4",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 29
+        },
+        "boundary": {
+          "selected": [
+            4,
+            11
+          ],
+          "measured": true,
+          "scheduled": 23,
+          "anchors": [
+            {
+              "index": 3,
+              "pts": 3000,
+              "rgb_sha256": "91f57d8ea350cd88b4a8760d93c9f70fb19d2a9533f3f6ed60fccec6aeaf7dc9"
+            },
+            {
+              "index": 8,
+              "pts": 8000,
+              "rgb_sha256": "19a31203dc022d101cfde71bb123135352912877f092f511b91cdff93aefc87b"
+            },
+            {
+              "index": 11,
+              "pts": 11000,
+              "rgb_sha256": "f917efb53fd183905939199523a983b795d1c300e630ead5a86e1f574ae83bb9"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 27,
+      "condition": "late_swap",
+      "truth": [
+        [
+          109,
+          116
+        ]
+      ],
+      "sha256": "f73f9b99603575c630227cc82cc9beb3b44ee5315d49f5f4445b398fd9fead48",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 24
+        },
+        "boundary": {
+          "selected": [
+            109,
+            116
+          ],
+          "measured": true,
+          "scheduled": 23,
+          "anchors": [
+            {
+              "index": 108,
+              "pts": 108000,
+              "rgb_sha256": "670c253af30d407b66131d5d305791663bd0fb03793bed3304bfc01692a9bbc5"
+            },
+            {
+              "index": 113,
+              "pts": 113000,
+              "rgb_sha256": "6d1bf6bb8705d2fbfa098200da48ac912c31f1a6e019034d8854e3534e0e5963"
+            },
+            {
+              "index": 116,
+              "pts": 116000,
+              "rgb_sha256": "7216e2f511da05d1bec069c77d19e8a9bb3c4811afd26ee670ae2ad793940f32"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 27,
+      "condition": "early_light",
+      "truth": [],
+      "sha256": "8a0b1e8c594fa8ea3a076cbedfd40692f7c3693d438aaf2a9da5e39791ed78d1",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 23
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 27,
+      "condition": "late_cut",
+      "truth": [],
+      "sha256": "1d3607725e12ad97a3cf14fa8eb7cdaa7e61a81d6c2336fde56c9eb74aacecce",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 31
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 27,
+      "condition": "early_jump",
+      "truth": [],
+      "sha256": "fa90977591fc58e3cbb0c539cf57b14588430eddb25799bd44e50bf7629741b7",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 30
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 27,
+      "condition": "late_reencode",
+      "truth": [
+        [
+          109,
+          116
+        ]
+      ],
+      "sha256": "e1242901a6bb9a8cfd06d8a33a7b40b6ec285a3611a234a019e129d840924f9a",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 24
+        },
+        "boundary": {
+          "selected": [
+            109,
+            116
+          ],
+          "measured": true,
+          "scheduled": 23,
+          "anchors": [
+            {
+              "index": 108,
+              "pts": 108000,
+              "rgb_sha256": "c8772f968b5970171f4a0b63f93ab238fda027cb8d1163318aa412a80144584f"
+            },
+            {
+              "index": 113,
+              "pts": 113000,
+              "rgb_sha256": "5a038792742ce715d9d00bc592c43ddc5c63f81c11ad100e4b7a239595f370c2"
+            },
+            {
+              "index": 116,
+              "pts": 116000,
+              "rgb_sha256": "47db3e729823b7d01cc1df76d610e5670180d2cdff29641524159640dee36a8c"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 50,
+      "condition": "original",
+      "truth": [],
+      "sha256": "044e678124b10559ae184e2754432797aa2b5c75b546c3c5f056ebdb8e2128d2",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 56
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 25
+        }
+      }
+    },
+    {
+      "group": 50,
+      "condition": "early_swap",
+      "truth": [
+        [
+          5,
+          13
+        ]
+      ],
+      "sha256": "42b2ea2b64e6f6c2d97d5ae62ea5cd5b78338dfe5bbc851d6e5d5a5a8880ab26",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 75
+        },
+        "boundary": {
+          "selected": [
+            5,
+            13
+          ],
+          "measured": true,
+          "scheduled": 33,
+          "anchors": [
+            {
+              "index": 4,
+              "pts": 4000,
+              "rgb_sha256": "5d5ff645109a732f985e1b5b0386a714e23a5f9836514fd4764dde182f4f5150"
+            },
+            {
+              "index": 10,
+              "pts": 10000,
+              "rgb_sha256": "fc7e79f581fd22a9283603ef38f45d7bb1629d59b6d4d8577002e9be4f378489"
+            },
+            {
+              "index": 13,
+              "pts": 13000,
+              "rgb_sha256": "b94e7a0bbe89b434414d66fd38a64998a464534d84f482872abb679a0b9861e7"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 50,
+      "condition": "late_swap",
+      "truth": [
+        [
+          109,
+          117
+        ]
+      ],
+      "sha256": "bc9f481c97b81fe9cd9a94c218a06e55047f9710fa232104285cca976c5742ba",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 62
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 37
+        }
+      }
+    },
+    {
+      "group": 50,
+      "condition": "early_light",
+      "truth": [],
+      "sha256": "3540f296381746dcb0271bcb0e2b95385641aedd672afb22bc42390f17806549",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 70
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 23
+        }
+      }
+    },
+    {
+      "group": 50,
+      "condition": "late_cut",
+      "truth": [],
+      "sha256": "2877c11c1451a056f004ef1fb0b9ba22f62e0197e0051b9bcd2b5aa7c1f9ebb7",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 51
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 25
+        }
+      }
+    },
+    {
+      "group": 50,
+      "condition": "early_jump",
+      "truth": [],
+      "sha256": "a0e89019bcc30fd6d49f70713caff205c8a877d81304ed298d38e57c0739ecbe",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 75
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 23
+        }
+      }
+    },
+    {
+      "group": 50,
+      "condition": "late_reencode",
+      "truth": [
+        [
+          109,
+          117
+        ]
+      ],
+      "sha256": "67d820ffc19bea7d7a2772ee3592ae220e703ca07c9623fc295c8333aa9d06d0",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 63
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 37
+        }
+      }
+    },
+    {
+      "group": 30,
+      "condition": "original",
+      "truth": [],
+      "sha256": "4712b5d69b68d38df240871ca75b675f76cfe1a2516913818746f21007d22543",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 31
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 30,
+      "condition": "early_swap",
+      "truth": [
+        [
+          3,
+          9
+        ]
+      ],
+      "sha256": "9bcee0d2593290350c758827f4cde7fc5495edb88d31d638cdbacb00b4e3aa91",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 50
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 30,
+      "condition": "late_swap",
+      "truth": [
+        [
+          109,
+          116
+        ]
+      ],
+      "sha256": "72ba13319627936f3be6065b2bd96e71f3d1d6464b4b07fa801db7efef2fac29",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 37
+        },
+        "boundary": {
+          "selected": [
+            109,
+            116
+          ],
+          "measured": true,
+          "scheduled": 23,
+          "anchors": [
+            {
+              "index": 108,
+              "pts": 108000,
+              "rgb_sha256": "2ace05fb4ad1bee028043fb35df99d995c2027f725cbe1e9681d65f8f718cc91"
+            },
+            {
+              "index": 113,
+              "pts": 113000,
+              "rgb_sha256": "454b6396562924186f60524182cc482966bc4ebe12f1baebcb3c4eddf21c3e25"
+            },
+            {
+              "index": 116,
+              "pts": 116000,
+              "rgb_sha256": "c9a5fbe8035e9711bc7e0afa194d5d0b2bf1f2ad1acafbe774293b7f84b87c32"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "group": 30,
+      "condition": "early_light",
+      "truth": [],
+      "sha256": "f23a65adff045fcaa575e433e07c1170f894cc616f00b67e4f6c6f4b1738c495",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 44
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 30,
+      "condition": "late_cut",
+      "truth": [],
+      "sha256": "042adcd97c956996d0de54b824df5b430b4f8d9ef257f4e967ccea9b8aa38689",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 42
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 30,
+      "condition": "early_jump",
+      "truth": [],
+      "sha256": "629c4df3538da9bbced4b6a127e33f44efc7bb6c57ec38c99529bdf3f8d6c19c",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 44
+        },
+        "boundary": {
+          "selected": null,
+          "measured": true,
+          "scheduled": 12
+        }
+      }
+    },
+    {
+      "group": 30,
+      "condition": "late_reencode",
+      "truth": [
+        [
+          109,
+          116
+        ]
+      ],
+      "sha256": "b9d1b0baca7982e7bbeb08b031a3d45987749bb94de0befe67204ec3a6bff17a",
+      "first_pts": 0,
+      "time_base": "1/30000",
+      "readings": {
+        "current": {
+          "selected": null,
+          "measured": false,
+          "scheduled": 32
+        },
+        "boundary": {
+          "selected": [
+            109,
+            116
+          ],
+          "measured": true,
+          "scheduled": 23,
+          "anchors": [
+            {
+              "index": 108,
+              "pts": 108000,
+              "rgb_sha256": "6c86673aa9d94ab72cf9c304b758ea157288e973c421923706184a9cace642ad"
+            },
+            {
+              "index": 113,
+              "pts": 113000,
+              "rgb_sha256": "66ed6a0e235c5f91d0df9d4141de6233aba54b66be389cbd37139e7032f4a04c"
+            },
+            {
+              "index": 116,
+              "pts": 116000,
+              "rgb_sha256": "0b109f25b91cf5357ff813fa2b0ffc445be05c0892409afad0635fc291f3139b"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "groups": [
+    {
+      "index": 49,
+      "early": [
+        3,
+        9
+      ],
+      "late": [
+        109,
+        115
+      ],
+      "receipt_sha256": "6f1a8962d79b0c5935d8b9fa11a8e97b42754f1422d6717bb055b0609e787965"
+    },
+    {
+      "index": 27,
+      "early": [
+        4,
+        11
+      ],
+      "late": [
+        109,
+        116
+      ],
+      "receipt_sha256": "b0a7a4635c2cf0b2efadeee275d95bc3775a36a556ae8dab89f537ffb0685a18"
+    },
+    {
+      "index": 50,
+      "early": [
+        5,
+        13
+      ],
+      "late": [
+        109,
+        117
+      ],
+      "receipt_sha256": "220ab48e1e66537cc418204896a909ec043bd40c609c525289cbb334a328bc34"
+    },
+    {
+      "index": 30,
+      "early": [
+        3,
+        9
+      ],
+      "late": [
+        109,
+        116
+      ],
+      "receipt_sha256": "2688e1f8a5846972b6d5bd13c92da9121256ce68779af132b0610e6d76b9d760"
+    }
+  ],
+  "results": {
+    "original": {
+      "files": 4,
+      "edits": 0,
+      "prior_measured": 2,
+      "boundary_measured": 4,
+      "prior_flags": 0,
+      "expanded_flags": 0,
+      "prior_exact": 0,
+      "expanded_exact": 0,
+      "prior_useful": 0,
+      "expanded_useful": 0
+    },
+    "early_swap": {
+      "files": 4,
+      "edits": 4,
+      "prior_measured": 4,
+      "boundary_measured": 4,
+      "prior_flags": 0,
+      "expanded_flags": 2,
+      "prior_exact": 0,
+      "expanded_exact": 2,
+      "prior_useful": 0,
+      "expanded_useful": 2
+    },
+    "late_swap": {
+      "files": 4,
+      "edits": 4,
+      "prior_measured": 2,
+      "boundary_measured": 4,
+      "prior_flags": 0,
+      "expanded_flags": 3,
+      "prior_exact": 0,
+      "expanded_exact": 3,
+      "prior_useful": 0,
+      "expanded_useful": 3
+    },
+    "early_light": {
+      "files": 4,
+      "edits": 0,
+      "prior_measured": 4,
+      "boundary_measured": 4,
+      "prior_flags": 0,
+      "expanded_flags": 0,
+      "prior_exact": 0,
+      "expanded_exact": 0,
+      "prior_useful": 0,
+      "expanded_useful": 0
+    },
+    "late_cut": {
+      "files": 4,
+      "edits": 0,
+      "prior_measured": 3,
+      "boundary_measured": 4,
+      "prior_flags": 0,
+      "expanded_flags": 0,
+      "prior_exact": 0,
+      "expanded_exact": 0,
+      "prior_useful": 0,
+      "expanded_useful": 0
+    },
+    "early_jump": {
+      "files": 4,
+      "edits": 0,
+      "prior_measured": 4,
+      "boundary_measured": 4,
+      "prior_flags": 0,
+      "expanded_flags": 0,
+      "prior_exact": 0,
+      "expanded_exact": 0,
+      "prior_useful": 0,
+      "expanded_useful": 0
+    },
+    "late_reencode": {
+      "files": 4,
+      "edits": 4,
+      "prior_measured": 1,
+      "boundary_measured": 4,
+      "prior_flags": 0,
+      "expanded_flags": 3,
+      "prior_exact": 0,
+      "expanded_exact": 3,
+      "prior_useful": 0,
+      "expanded_useful": 3
+    }
+  }
+}

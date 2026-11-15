@@ -1,0 +1,3509 @@
+{
+  "fit_sha256": {
+    "boundary": "fdff3d1c5c16b18e3482b2d9eaed0ce7e63aa35981527a18283a21ade82f73d0",
+    "matched_rank": "c7c66c33d61d8e950c98b4c06263500adf99c093c74ef368a28cd712f96742ba"
+  },
+  "rows": [
+    {
+      "arm": "untouched",
+      "condition": "0dB",
+      "group": 0,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              17600,
+              25600
+            ],
+            "score": 0.73014384
+          },
+          "MeloTTS": {
+            "range": [
+              17600,
+              25600
+            ],
+            "score": 0.41036227
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": 1.46519028
+          },
+          "clock-MeloTTS": {
+            "range": [
+              12800,
+              20800
+            ],
+            "score": 1.43626944
+          }
+        }
+      },
+      "pcm_sha256": "0807c8afd2ab40a8552b0daf36d50745e6106b10a2245d59c7eefcd68c469401",
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "condition": "-5dB",
+      "group": 0,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              17600,
+              25600
+            ],
+            "score": 0.59987409
+          },
+          "MeloTTS": {
+            "range": [
+              12800,
+              20800
+            ],
+            "score": 0.40003507
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": 1.41957453
+          },
+          "clock-MeloTTS": {
+            "range": [
+              11200,
+              19200
+            ],
+            "score": 0.98985951
+          }
+        }
+      },
+      "pcm_sha256": "7fd8ab8c9c69387f44b6c7bda075b128d332ec6f5145e0cb1e4ba3dd026358c7",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "0dB",
+      "group": 0,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              17600,
+              25600
+            ],
+            "score": 0.71556854
+          },
+          "MeloTTS": {
+            "range": [
+              12800,
+              20800
+            ],
+            "score": 0.45611934
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": 1.57419261
+          },
+          "clock-MeloTTS": {
+            "range": [
+              12800,
+              20800
+            ],
+            "score": 1.6096415
+          }
+        }
+      },
+      "pcm_sha256": "0688bd72ca4e207bf0f69f70b212f3dbc57a60f80165905bdd3cb2e06bc06c4b",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "-5dB",
+      "group": 0,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              17600,
+              25600
+            ],
+            "score": 0.16884074
+          },
+          "MeloTTS": {
+            "range": [
+              11200,
+              19200
+            ],
+            "score": 0.32255603
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": 0.44472381
+          },
+          "clock-MeloTTS": {
+            "range": [
+              11200,
+              19200
+            ],
+            "score": 1.2060002
+          }
+        }
+      },
+      "pcm_sha256": "ea57507b2aafb3b8578a2c80768e57c684d8779b2996b63bff82388607a7d42d",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "0dB",
+      "group": 0,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              16000,
+              24000
+            ],
+            "score": 0.25991361
+          },
+          "MeloTTS": {
+            "range": [
+              12800,
+              24800
+            ],
+            "score": 0.4192807
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": 0.53793667
+          },
+          "clock-MeloTTS": {
+            "range": [
+              12800,
+              20800
+            ],
+            "score": 1.41117069
+          }
+        }
+      },
+      "pcm_sha256": "15a2f0846cdfa29e615f469ee87033ef6e24c9b43b803138c46bb01edb752656",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "-5dB",
+      "group": 0,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              16000,
+              24000
+            ],
+            "score": -0.25217781
+          },
+          "MeloTTS": {
+            "range": [
+              11200,
+              19200
+            ],
+            "score": 0.26987897
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              20800,
+              28800
+            ],
+            "score": -0.81139519
+          },
+          "clock-MeloTTS": {
+            "range": [
+              11200,
+              19200
+            ],
+            "score": 1.1502826
+          }
+        }
+      },
+      "pcm_sha256": "51d914fb8c95453937f41e16dd4fa4e1cb80e03e841e706dbe3180f5a3ad3142",
+      "truth": null
+    },
+    {
+      "arm": "piper",
+      "condition": "0dB",
+      "group": 0,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              32000,
+              40000
+            ],
+            "score": 0.2369867
+          },
+          "MeloTTS": {
+            "range": [
+              11200,
+              19200
+            ],
+            "score": 0.33173472
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              32000,
+              40000
+            ],
+            "score": 1.01809997
+          },
+          "clock-MeloTTS": {
+            "range": [
+              11200,
+              19200
+            ],
+            "score": 1.1526105
+          }
+        }
+      },
+      "pcm_sha256": "bf54d62af9a4c0c2922b95bd6c7a74cc2a60e44a1ef1c864485c64b7c2f3b7d0",
+      "truth": [
+        30116,
+        45476
+      ]
+    },
+    {
+      "arm": "piper",
+      "condition": "-5dB",
+      "group": 0,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              16000,
+              24000
+            ],
+            "score": 0.05743363
+          },
+          "MeloTTS": {
+            "range": [
+              11200,
+              19200
+            ],
+            "score": 0.14460686
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              30400,
+              38400
+            ],
+            "score": 0.35204094
+          },
+          "clock-MeloTTS": {
+            "range": [
+              11200,
+              19200
+            ],
+            "score": 0.71750883
+          }
+        }
+      },
+      "pcm_sha256": "2250554ac8ba1249f1d4c00f5ef0bcb27d21702e548177e1ea5a23443fa04c9c",
+      "truth": [
+        30116,
+        45476
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "0dB",
+      "group": 0,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              17600,
+              25600
+            ],
+            "score": 0.57739213
+          },
+          "MeloTTS": {
+            "range": [
+              38400,
+              46400
+            ],
+            "score": 0.42960468
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": 1.09425722
+          },
+          "clock-MeloTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": 1.42826348
+          }
+        }
+      },
+      "pcm_sha256": "6b8a504eae7222a1eb94a165b374382b1bb67fc6f86908a2140c9786fbdad506",
+      "truth": [
+        30116,
+        45476
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "-5dB",
+      "group": 0,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              17600,
+              25600
+            ],
+            "score": -0.00791625
+          },
+          "MeloTTS": {
+            "range": [
+              38400,
+              46400
+            ],
+            "score": 0.20157141
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              32000,
+              40000
+            ],
+            "score": -0.16300267
+          },
+          "clock-MeloTTS": {
+            "range": [
+              38400,
+              46400
+            ],
+            "score": 0.91393233
+          }
+        }
+      },
+      "pcm_sha256": "1adbd6e336d32db9f0f8876cdfef5e5f141c3a394c20a1c5c34c7ece34b87f72",
+      "truth": [
+        30116,
+        45476
+      ]
+    },
+    {
+      "arm": "untouched",
+      "condition": "0dB",
+      "group": 1,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              64000,
+              72000
+            ],
+            "score": -1.27395652
+          },
+          "MeloTTS": {
+            "range": [
+              38400,
+              46400
+            ],
+            "score": 0.12661813
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              9600,
+              17600
+            ],
+            "score": -1.523065
+          },
+          "clock-MeloTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": 0.96054685
+          }
+        }
+      },
+      "pcm_sha256": "34f8a616332fb8b14ad75e4be3ac09eb132a12d08729bb4537d2ad84f8048457",
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "condition": "-5dB",
+      "group": 1,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              51200,
+              59200
+            ],
+            "score": -0.99494609
+          },
+          "MeloTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": 0.43558715
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              8000,
+              16000
+            ],
+            "score": -0.72468669
+          },
+          "clock-MeloTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": 1.69073467
+          }
+        }
+      },
+      "pcm_sha256": "333f008b6ea77a1f517e2f426bd61e84e923df472f7f5ce37a13c28330758d86",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "0dB",
+      "group": 1,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              11200,
+              19200
+            ],
+            "score": -1.10797978
+          },
+          "MeloTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": 0.28644627
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              9600,
+              17600
+            ],
+            "score": -0.936
+          },
+          "clock-MeloTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": 1.25600432
+          }
+        }
+      },
+      "pcm_sha256": "b16df657998989e189ca49af72716795f6e192f9a4c62365a159be5f3fc8f569",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "-5dB",
+      "group": 1,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              9600,
+              17600
+            ],
+            "score": -0.78880075
+          },
+          "MeloTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": 0.43054177
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              9600,
+              17600
+            ],
+            "score": -0.29879293
+          },
+          "clock-MeloTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": 1.53190588
+          }
+        }
+      },
+      "pcm_sha256": "d140bf53b4994755b50011fc28fd1eace091924ca24a73a6caf72920287edb0e",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "0dB",
+      "group": 1,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              11200,
+              19200
+            ],
+            "score": -1.06202976
+          },
+          "MeloTTS": {
+            "range": [
+              38400,
+              46400
+            ],
+            "score": 0.19505557
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              9600,
+              17600
+            ],
+            "score": -1.06237341
+          },
+          "clock-MeloTTS": {
+            "range": [
+              38400,
+              46400
+            ],
+            "score": 1.16716956
+          }
+        }
+      },
+      "pcm_sha256": "0f74130d58f1d117bfbac3154993eb403fb1c992345ec249ab3a17232567ddb5",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "-5dB",
+      "group": 1,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              9600,
+              17600
+            ],
+            "score": -0.95052512
+          },
+          "MeloTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": 0.3598556
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              9600,
+              17600
+            ],
+            "score": -0.70353053
+          },
+          "clock-MeloTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": 1.65456874
+          }
+        }
+      },
+      "pcm_sha256": "1cc60ca6a593f781db5891d532a1a4048f7b84ce6dd28d9bedb7833cf4817dca",
+      "truth": null
+    },
+    {
+      "arm": "piper",
+      "condition": "0dB",
+      "group": 1,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              16000,
+              24000
+            ],
+            "score": -0.90895215
+          },
+          "MeloTTS": {
+            "range": [
+              72000,
+              80000
+            ],
+            "score": 0.33463291
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              9600,
+              17600
+            ],
+            "score": -0.86832593
+          },
+          "clock-MeloTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": 0.9330477
+          }
+        }
+      },
+      "pcm_sha256": "e6a5d527bfd7a18e697a4288377034794641a60bd57c6443b4403750ab65e413",
+      "truth": [
+        19752,
+        35112
+      ]
+    },
+    {
+      "arm": "piper",
+      "condition": "-5dB",
+      "group": 1,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": -0.16363876
+          },
+          "MeloTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": 0.47613487
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              20800,
+              28800
+            ],
+            "score": -0.27151909
+          },
+          "clock-MeloTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": 1.64001905
+          }
+        }
+      },
+      "pcm_sha256": "0eb7ebc3be58a26c1123a5e1905802ed83eaa727efcfb7e9a3f63c18609b31dc",
+      "truth": [
+        19752,
+        35112
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "0dB",
+      "group": 1,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              9600,
+              17600
+            ],
+            "score": -1.28194035
+          },
+          "MeloTTS": {
+            "range": [
+              38400,
+              46400
+            ],
+            "score": 0.30208805
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              9600,
+              17600
+            ],
+            "score": -1.18633864
+          },
+          "clock-MeloTTS": {
+            "range": [
+              38400,
+              46400
+            ],
+            "score": 1.19142104
+          }
+        }
+      },
+      "pcm_sha256": "5665ea8d9dcd1ff9dcbc891996d2e0c3f206719f9aad7d10914d4c4d21ec92f3",
+      "truth": [
+        19752,
+        35112
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "-5dB",
+      "group": 1,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              49600,
+              57600
+            ],
+            "score": -0.80594236
+          },
+          "MeloTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": 0.427326
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              49600,
+              57600
+            ],
+            "score": -0.54974924
+          },
+          "clock-MeloTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": 1.62035955
+          }
+        }
+      },
+      "pcm_sha256": "5abf956d14b7af2a8c87df7061883f633613b001672bf3c3a2804fe8421dc68b",
+      "truth": [
+        19752,
+        35112
+      ]
+    },
+    {
+      "arm": "untouched",
+      "condition": "0dB",
+      "group": 2,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              54400,
+              62400
+            ],
+            "score": -0.99079008
+          },
+          "MeloTTS": {
+            "range": [
+              24000,
+              32000
+            ],
+            "score": -0.98466723
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              52800,
+              60800
+            ],
+            "score": -1.10015558
+          },
+          "clock-MeloTTS": {
+            "range": [
+              22400,
+              30400
+            ],
+            "score": 0.6080505
+          }
+        }
+      },
+      "pcm_sha256": "0dad29c671f144635cd4d9911f7d3947fdf3f46056ff0a0a29089c5456c7ba86",
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "condition": "-5dB",
+      "group": 2,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              51200,
+              59200
+            ],
+            "score": -1.13805841
+          },
+          "MeloTTS": {
+            "range": [
+              70400,
+              78400
+            ],
+            "score": -0.86251202
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": -0.91083488
+          },
+          "clock-MeloTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": 0.19539184
+          }
+        }
+      },
+      "pcm_sha256": "1e58f975187bf21827ca0ee25df0478280ebdff68eab75550f1a95bed20a4ced",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "0dB",
+      "group": 2,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              48000,
+              56000
+            ],
+            "score": -0.34574051
+          },
+          "MeloTTS": {
+            "range": [
+              72000,
+              80000
+            ],
+            "score": -1.18454411
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              48000,
+              56000
+            ],
+            "score": 0.20563004
+          },
+          "clock-MeloTTS": {
+            "range": [
+              24000,
+              32000
+            ],
+            "score": 0.42362717
+          }
+        }
+      },
+      "pcm_sha256": "013672648ca6227eb2d469d36bc44098332328a3528e118a3d42a2e66570e418",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "-5dB",
+      "group": 2,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": -0.8528208
+          },
+          "MeloTTS": {
+            "range": [
+              70400,
+              78400
+            ],
+            "score": -0.55861919
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              35200,
+              43200
+            ],
+            "score": -0.59258113
+          },
+          "clock-MeloTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": 0.49716301
+          }
+        }
+      },
+      "pcm_sha256": "07f70aea00b32c194e5727f9a80d1c9216f63de43eaf45dee41f02f2fd95f001",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "0dB",
+      "group": 2,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              54400,
+              62400
+            ],
+            "score": -0.94833915
+          },
+          "MeloTTS": {
+            "range": [
+              24000,
+              32000
+            ],
+            "score": -0.98045908
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": -1.48467017
+          },
+          "clock-MeloTTS": {
+            "range": [
+              22400,
+              30400
+            ],
+            "score": 0.61160502
+          }
+        }
+      },
+      "pcm_sha256": "6379c0342f0266f2f57eb0afa44cc4c8a91e0331b42faebcfa3524c7b726a1be",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "-5dB",
+      "group": 2,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": -0.88971829
+          },
+          "MeloTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": -0.60486782
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": -0.91859997
+          },
+          "clock-MeloTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": 0.39976736
+          }
+        }
+      },
+      "pcm_sha256": "5b344c98b0f98622fea60a5aa3d5cf123a979e09344dddfe102e3dcae775c3ab",
+      "truth": null
+    },
+    {
+      "arm": "piper",
+      "condition": "0dB",
+      "group": 2,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              24000,
+              32000
+            ],
+            "score": -1.34494027
+          },
+          "MeloTTS": {
+            "range": [
+              24000,
+              32000
+            ],
+            "score": -0.90328974
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              35200,
+              43200
+            ],
+            "score": -2.09173223
+          },
+          "clock-MeloTTS": {
+            "range": [
+              24000,
+              32000
+            ],
+            "score": 0.73631348
+          }
+        }
+      },
+      "pcm_sha256": "a7e0a9b02069464ad501ff4c3fb7e9db1e66bc8f9ad38de0a14dbda8bfd6d21a",
+      "truth": [
+        45769,
+        61129
+      ]
+    },
+    {
+      "arm": "piper",
+      "condition": "-5dB",
+      "group": 2,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": -0.85230105
+          },
+          "MeloTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": -0.474037
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              70400,
+              78400
+            ],
+            "score": -0.83726623
+          },
+          "clock-MeloTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": 0.4379184
+          }
+        }
+      },
+      "pcm_sha256": "dd7a070e31e9028717679f8635237e0c614e1094c589b5ea070810c6155a81e9",
+      "truth": [
+        45769,
+        61129
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "0dB",
+      "group": 2,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              22400,
+              30400
+            ],
+            "score": -0.95010791
+          },
+          "MeloTTS": {
+            "range": [
+              43200,
+              51200
+            ],
+            "score": -0.8413252
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              35200,
+              43200
+            ],
+            "score": -1.85780953
+          },
+          "clock-MeloTTS": {
+            "range": [
+              22400,
+              30400
+            ],
+            "score": 0.2047427
+          }
+        }
+      },
+      "pcm_sha256": "28b5069f6964099fc6df3fa35f5512e5d83e9a623cb5d5c5dfc451aca137c892",
+      "truth": [
+        45769,
+        61129
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "-5dB",
+      "group": 2,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              52800,
+              60800
+            ],
+            "score": -0.5348806
+          },
+          "MeloTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": -0.55843229
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": -0.75436733
+          },
+          "clock-MeloTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": 0.51209529
+          }
+        }
+      },
+      "pcm_sha256": "90439db12b314db37f44293d49ef7d48bc7e0daa0d2d83fb5f76de557e824002",
+      "truth": [
+        45769,
+        61129
+      ]
+    },
+    {
+      "arm": "untouched",
+      "condition": "0dB",
+      "group": 3,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              48000,
+              56000
+            ],
+            "score": -1.26751856
+          },
+          "MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 0.18879383
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              48000,
+              56000
+            ],
+            "score": -1.06817372
+          },
+          "clock-MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 0.89780097
+          }
+        }
+      },
+      "pcm_sha256": "547441aca685481110ae0cb985f2d2091a09d1e12f696a2b96da063e2b1215b2",
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "condition": "-5dB",
+      "group": 3,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": -0.37218919
+          },
+          "MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 0.19951996
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              41600,
+              49600
+            ],
+            "score": -0.29258179
+          },
+          "clock-MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 0.99940032
+          }
+        }
+      },
+      "pcm_sha256": "71b997126d8f34ddf5a2beb1f48dc315bd3a1b4c1a8c57319b45d0ab42e21bf4",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "0dB",
+      "group": 3,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": -0.81818044
+          },
+          "MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 0.23809929
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              38400,
+              46400
+            ],
+            "score": -0.26062398
+          },
+          "clock-MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 1.02150206
+          }
+        }
+      },
+      "pcm_sha256": "eb9e20643d97101449da64797cfec86e92e15e0bcc9528c457b80a64c166597b",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "-5dB",
+      "group": 3,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": -0.36180883
+          },
+          "MeloTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": 0.27041577
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              57600,
+              65600
+            ],
+            "score": 0.3826313
+          },
+          "clock-MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 1.07416714
+          }
+        }
+      },
+      "pcm_sha256": "c1c3d4ccb2f9b816f7eccbc2d1a9510f66123da597abc7cef7432aea02572168",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "0dB",
+      "group": 3,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": -0.76848543
+          },
+          "MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 0.29739137
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              48000,
+              56000
+            ],
+            "score": -0.96448462
+          },
+          "clock-MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 1.00123692
+          }
+        }
+      },
+      "pcm_sha256": "13e0aef6dbba516209c70612c7c4af808c2d061b6c9b54ae9eba0661d178a95f",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "-5dB",
+      "group": 3,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              43200,
+              51200
+            ],
+            "score": -0.37062493
+          },
+          "MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 0.33799905
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              57600,
+              65600
+            ],
+            "score": -0.39046672
+          },
+          "clock-MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 1.22990811
+          }
+        }
+      },
+      "pcm_sha256": "c91760f3915c066a49c8ecbe57bff05a6201d0195568a975d65554faacff9bea",
+      "truth": null
+    },
+    {
+      "arm": "piper",
+      "condition": "0dB",
+      "group": 3,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": -0.6663331
+          },
+          "MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 0.32568342
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              4800,
+              12800
+            ],
+            "score": -1.12501622
+          },
+          "clock-MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 1.19825245
+          }
+        }
+      },
+      "pcm_sha256": "7d38740fc20d0f64b96c8bf5eeb8a2f47d84c1e075cee910c227f63519a3cf29",
+      "truth": [
+        9949,
+        25309
+      ]
+    },
+    {
+      "arm": "piper",
+      "condition": "-5dB",
+      "group": 3,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": -0.25302958
+          },
+          "MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 0.29509906
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              17600,
+              25600
+            ],
+            "score": -0.70036924
+          },
+          "clock-MeloTTS": {
+            "range": [
+              84800,
+              92800
+            ],
+            "score": 1.24108891
+          }
+        }
+      },
+      "pcm_sha256": "a152dadfb576e08d093f340b946289694d888f54174d803aa7b75d55adc43c99",
+      "truth": [
+        9949,
+        25309
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "0dB",
+      "group": 3,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              40000,
+              52000
+            ],
+            "score": -0.81428984
+          },
+          "MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 0.25020998
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": -0.67481114
+          },
+          "clock-MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 0.93391693
+          }
+        }
+      },
+      "pcm_sha256": "87623b57412e05d32f92dbd05a9855a7245f76abb96ed38c467883b6b37767b9",
+      "truth": [
+        9949,
+        25309
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "-5dB",
+      "group": 3,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              43200,
+              51200
+            ],
+            "score": -0.18196093
+          },
+          "MeloTTS": {
+            "range": [
+              1600,
+              9600
+            ],
+            "score": 0.25370963
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": 0.26912997
+          },
+          "clock-MeloTTS": {
+            "range": [
+              0,
+              8000
+            ],
+            "score": 1.02542719
+          }
+        }
+      },
+      "pcm_sha256": "fdb60716200b446b1ab9b89c9a3e6dbc47cd90ce37db0363d53a66fbd649651b",
+      "truth": [
+        9949,
+        25309
+      ]
+    },
+    {
+      "arm": "untouched",
+      "condition": "0dB",
+      "group": 4,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              88000,
+              96000
+            ],
+            "score": -0.6013492
+          },
+          "MeloTTS": {
+            "range": [
+              28800,
+              36800
+            ],
+            "score": -0.279683
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              88000,
+              96000
+            ],
+            "score": -1.47496449
+          },
+          "clock-MeloTTS": {
+            "range": [
+              30400,
+              38400
+            ],
+            "score": -0.42754174
+          }
+        }
+      },
+      "pcm_sha256": "cf972f38381fab52c831321dc63aae7707c201cc77d3a1020734a9c8791e4e93",
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "condition": "-5dB",
+      "group": 4,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": -0.22486384
+          },
+          "MeloTTS": {
+            "range": [
+              28800,
+              36800
+            ],
+            "score": 0.19551877
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": -1.31646221
+          },
+          "clock-MeloTTS": {
+            "range": [
+              28800,
+              36800
+            ],
+            "score": 0.69458529
+          }
+        }
+      },
+      "pcm_sha256": "4e54241a21398661ebdff6fce1332d6119a999d2d56424a720c74dd041f1a712",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "0dB",
+      "group": 4,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              88000,
+              96000
+            ],
+            "score": -0.64099245
+          },
+          "MeloTTS": {
+            "range": [
+              28800,
+              36800
+            ],
+            "score": -0.19666426
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              88000,
+              96000
+            ],
+            "score": -1.74356754
+          },
+          "clock-MeloTTS": {
+            "range": [
+              30400,
+              38400
+            ],
+            "score": -0.35702487
+          }
+        }
+      },
+      "pcm_sha256": "2117a2e0048f2b51db42b39498b201b8dad324527707f0bdb7ffc1d18564db5c",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "-5dB",
+      "group": 4,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": -0.18425292
+          },
+          "MeloTTS": {
+            "range": [
+              28800,
+              36800
+            ],
+            "score": 0.28311813
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": -1.27262573
+          },
+          "clock-MeloTTS": {
+            "range": [
+              30400,
+              38400
+            ],
+            "score": 0.93705032
+          }
+        }
+      },
+      "pcm_sha256": "cf4e814550ea0bab38a70a69d87fde3f89bc70dc06d8f046192d3f210a1881e5",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "0dB",
+      "group": 4,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              43200,
+              51200
+            ],
+            "score": -0.14086006
+          },
+          "MeloTTS": {
+            "range": [
+              33600,
+              41600
+            ],
+            "score": 0.00719312
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              43200,
+              51200
+            ],
+            "score": -0.96711708
+          },
+          "clock-MeloTTS": {
+            "range": [
+              33600,
+              41600
+            ],
+            "score": -0.44797999
+          }
+        }
+      },
+      "pcm_sha256": "d048fcd9b4be63eaab40ee568d86e1e30b3c96a8f84bed66faf60bfc7b7be832",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "-5dB",
+      "group": 4,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": -0.19491656
+          },
+          "MeloTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": 0.1065491
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": -1.22357686
+          },
+          "clock-MeloTTS": {
+            "range": [
+              43200,
+              51200
+            ],
+            "score": 0.61742934
+          }
+        }
+      },
+      "pcm_sha256": "9a2da75f6d5ec240f6ce2e93d781e9dfbe8e65a29fbd931c28283a4759f3a507",
+      "truth": null
+    },
+    {
+      "arm": "piper",
+      "condition": "0dB",
+      "group": 4,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              88000,
+              96000
+            ],
+            "score": -0.55658475
+          },
+          "MeloTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": -0.64068157
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              32000,
+              40000
+            ],
+            "score": -1.33309499
+          },
+          "clock-MeloTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": -1.21426618
+          }
+        }
+      },
+      "pcm_sha256": "ea01ffcbe6b2bc3650ee8167da92bc32405faf539702719ed8f35697f0353947",
+      "truth": [
+        32715,
+        48075
+      ]
+    },
+    {
+      "arm": "piper",
+      "condition": "-5dB",
+      "group": 4,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": -0.28643192
+          },
+          "MeloTTS": {
+            "range": [
+              41600,
+              49600
+            ],
+            "score": 0.34952542
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              32000,
+              40000
+            ],
+            "score": 0.11021973
+          },
+          "clock-MeloTTS": {
+            "range": [
+              41600,
+              49600
+            ],
+            "score": 1.33049232
+          }
+        }
+      },
+      "pcm_sha256": "ee659213dbce2b25184939cfe9066996d7fa3578c515502368108330eb6f9485",
+      "truth": [
+        32715,
+        48075
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "0dB",
+      "group": 4,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              36800,
+              44800
+            ],
+            "score": -0.43721115
+          },
+          "MeloTTS": {
+            "range": [
+              38400,
+              46400
+            ],
+            "score": 0.32043681
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              88000,
+              96000
+            ],
+            "score": -1.69931821
+          },
+          "clock-MeloTTS": {
+            "range": [
+              40000,
+              48000
+            ],
+            "score": 1.24625317
+          }
+        }
+      },
+      "pcm_sha256": "a78248266fa3040474a2d7b3e70eca3de8d68e0c5a842dd6da403c95ff3de9fe",
+      "truth": [
+        32715,
+        48075
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "-5dB",
+      "group": 4,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": -0.37538114
+          },
+          "MeloTTS": {
+            "range": [
+              43200,
+              51200
+            ],
+            "score": 0.40822248
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": -1.54883222
+          },
+          "clock-MeloTTS": {
+            "range": [
+              41600,
+              49600
+            ],
+            "score": 1.70043201
+          }
+        }
+      },
+      "pcm_sha256": "0dc945a5bbb07d372eae08505aa5f3bb92886d83bafd21a0d7be1d17c1a5c9ea",
+      "truth": [
+        32715,
+        48075
+      ]
+    },
+    {
+      "arm": "untouched",
+      "condition": "0dB",
+      "group": 5,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": -0.27445546
+          },
+          "MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": -0.10912376
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": 0.51241198
+          },
+          "clock-MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": 0.62653779
+          }
+        }
+      },
+      "pcm_sha256": "cfb351e031c827474b94085d319fadb4aae0cebaab02f099533e2a3c247ed97e",
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "condition": "-5dB",
+      "group": 5,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": -0.29375125
+          },
+          "MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": -0.03279575
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": 0.50259924
+          },
+          "clock-MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": 0.79263268
+          }
+        }
+      },
+      "pcm_sha256": "f273f321b7fcf59fd0e1f6119e64dcc80d1d0246718cd971ec9821e8354cf1f0",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "0dB",
+      "group": 5,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": -0.31682849
+          },
+          "MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": -0.1122125
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": 0.40151956
+          },
+          "clock-MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": 0.53127372
+          }
+        }
+      },
+      "pcm_sha256": "6b390c961cebd19509dd897b0b8a343a6a96268136e71035770a5d5f1f36e317",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "-5dB",
+      "group": 5,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": -0.40804249
+          },
+          "MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": -0.06097741
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": 0.36011797
+          },
+          "clock-MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": 0.8427905
+          }
+        }
+      },
+      "pcm_sha256": "cfd782e4c4d6c75944bd533d4a2e1534b79b115a782c8906a86c6648022cf98a",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "0dB",
+      "group": 5,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": -0.12251468
+          },
+          "MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": -0.08797868
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": 0.68366949
+          },
+          "clock-MeloTTS": {
+            "range": [
+              48000,
+              56000
+            ],
+            "score": 0.57451884
+          }
+        }
+      },
+      "pcm_sha256": "adcb3f6d585fc61937bcc7a3f43c38bb651a8b3849d6e1b345576d2c28d28422",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "-5dB",
+      "group": 5,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": -0.33422361
+          },
+          "MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": -0.0521108
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": 0.36446515
+          },
+          "clock-MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": 0.77892798
+          }
+        }
+      },
+      "pcm_sha256": "d81484fa22dc8b38af27320249f031b52e7bdaa761ef9c0953608c041a6c4e8f",
+      "truth": null
+    },
+    {
+      "arm": "piper",
+      "condition": "0dB",
+      "group": 5,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": 0.09282013
+          },
+          "MeloTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": 0.22359003
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": 0.8388223
+          },
+          "clock-MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": 0.96995265
+          }
+        }
+      },
+      "pcm_sha256": "da363f715897d4ce8107e053c5d5af2437180db7e501ca90d88d8be1c1126863",
+      "truth": [
+        58652,
+        74012
+      ]
+    },
+    {
+      "arm": "piper",
+      "condition": "-5dB",
+      "group": 5,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": -0.32054341
+          },
+          "MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": 0.11533403
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": 0.32730817
+          },
+          "clock-MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": 1.02327724
+          }
+        }
+      },
+      "pcm_sha256": "c70657456d0cc8875804da63a6ba7d69ccb832a9a03092f148c49d7122f9da9a",
+      "truth": [
+        58652,
+        74012
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "0dB",
+      "group": 5,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": -0.10147653
+          },
+          "MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": -0.06702005
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": 0.52115378
+          },
+          "clock-MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": 0.58270712
+          }
+        }
+      },
+      "pcm_sha256": "b544fc91dfaa70e0776a83209d66205d48e5c4a58b5287faee112364c5216cdc",
+      "truth": [
+        58652,
+        74012
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "-5dB",
+      "group": 5,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": -0.31872951
+          },
+          "MeloTTS": {
+            "range": [
+              46400,
+              54400
+            ],
+            "score": 0.00562212
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": 0.22910848
+          },
+          "clock-MeloTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": 0.84256928
+          }
+        }
+      },
+      "pcm_sha256": "f83ec35d452e2e84500b16ab7e6373d93f6cff8e9b2bddc53a2dcabbbe61dd75",
+      "truth": [
+        58652,
+        74012
+      ]
+    },
+    {
+      "arm": "untouched",
+      "condition": "0dB",
+      "group": 6,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              51200,
+              59200
+            ],
+            "score": -0.85955158
+          },
+          "MeloTTS": {
+            "range": [
+              57600,
+              65600
+            ],
+            "score": 0.19700102
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              49600,
+              57600
+            ],
+            "score": -0.87295107
+          },
+          "clock-MeloTTS": {
+            "range": [
+              59200,
+              67200
+            ],
+            "score": 0.88064886
+          }
+        }
+      },
+      "pcm_sha256": "158eb8a3b03ea9d29abbba35e40ebd9dc5e8861ee36d55f44c52b473b86b21d1",
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "condition": "-5dB",
+      "group": 6,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              52800,
+              60800
+            ],
+            "score": -0.71389352
+          },
+          "MeloTTS": {
+            "range": [
+              57600,
+              65600
+            ],
+            "score": 0.29942753
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              51200,
+              59200
+            ],
+            "score": -0.48840641
+          },
+          "clock-MeloTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": 1.16810398
+          }
+        }
+      },
+      "pcm_sha256": "b475d1d5011a18d7d14a0064015a9eb223fcd58385c759c846f789e2792e944e",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "0dB",
+      "group": 6,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              51200,
+              59200
+            ],
+            "score": -0.53513413
+          },
+          "MeloTTS": {
+            "range": [
+              70400,
+              78400
+            ],
+            "score": 0.28438338
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              49600,
+              57600
+            ],
+            "score": -0.32668757
+          },
+          "clock-MeloTTS": {
+            "range": [
+              72000,
+              80000
+            ],
+            "score": 1.24230765
+          }
+        }
+      },
+      "pcm_sha256": "085b00d6b75a5f23147e11759ec9a69baef091bc7cbcd7ee2a885bd8a31cfbda",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "-5dB",
+      "group": 6,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              51200,
+              59200
+            ],
+            "score": -0.75589458
+          },
+          "MeloTTS": {
+            "range": [
+              70400,
+              78400
+            ],
+            "score": 0.3120843
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              49600,
+              57600
+            ],
+            "score": -0.29627317
+          },
+          "clock-MeloTTS": {
+            "range": [
+              70400,
+              78400
+            ],
+            "score": 1.29772603
+          }
+        }
+      },
+      "pcm_sha256": "cb41447e322734eed7d8ad2a26270db13d552a898349f3a3eec6f43ec3377b99",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "0dB",
+      "group": 6,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              59200,
+              67200
+            ],
+            "score": -0.50310621
+          },
+          "MeloTTS": {
+            "range": [
+              59200,
+              67200
+            ],
+            "score": 0.17659092
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              49600,
+              57600
+            ],
+            "score": -0.60791287
+          },
+          "clock-MeloTTS": {
+            "range": [
+              57600,
+              65600
+            ],
+            "score": 0.83994671
+          }
+        }
+      },
+      "pcm_sha256": "13abce65185d9e4ddcb53d5b4445ec330b65d413a6b359550c4edbec57405d7c",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "-5dB",
+      "group": 6,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              60800,
+              68800
+            ],
+            "score": -0.50156693
+          },
+          "MeloTTS": {
+            "range": [
+              59200,
+              67200
+            ],
+            "score": 0.29784281
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              64000,
+              72000
+            ],
+            "score": -0.40574119
+          },
+          "clock-MeloTTS": {
+            "range": [
+              60800,
+              68800
+            ],
+            "score": 1.26635772
+          }
+        }
+      },
+      "pcm_sha256": "6b91bf54e7f867cda34b2fd38283614cfbc18b1da732b308efb123a54834aa5a",
+      "truth": null
+    },
+    {
+      "arm": "piper",
+      "condition": "0dB",
+      "group": 6,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              62400,
+              70400
+            ],
+            "score": -0.31667571
+          },
+          "MeloTTS": {
+            "range": [
+              59200,
+              67200
+            ],
+            "score": 0.258584
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              65600,
+              73600
+            ],
+            "score": 0.33262546
+          },
+          "clock-MeloTTS": {
+            "range": [
+              57600,
+              65600
+            ],
+            "score": 1.07748452
+          }
+        }
+      },
+      "pcm_sha256": "a3acf3127f785db3e41a273fffaf9b5289b13e59df3d8e2f5bc656e98147876e",
+      "truth": [
+        63052,
+        78412
+      ]
+    },
+    {
+      "arm": "piper",
+      "condition": "-5dB",
+      "group": 6,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              65600,
+              73600
+            ],
+            "score": -0.00884097
+          },
+          "MeloTTS": {
+            "range": [
+              57600,
+              65600
+            ],
+            "score": 0.26678792
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              67200,
+              75200
+            ],
+            "score": 0.94468594
+          },
+          "clock-MeloTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": 1.09362482
+          }
+        }
+      },
+      "pcm_sha256": "c5a4dc548bc207d1a28c56a6649529e3c8228c589c98e2c95f981817c2cf6395",
+      "truth": [
+        63052,
+        78412
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "0dB",
+      "group": 6,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              65600,
+              73600
+            ],
+            "score": -0.40833828
+          },
+          "MeloTTS": {
+            "range": [
+              59200,
+              67200
+            ],
+            "score": 0.30105831
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              65600,
+              73600
+            ],
+            "score": 0.05770475
+          },
+          "clock-MeloTTS": {
+            "range": [
+              60800,
+              68800
+            ],
+            "score": 1.19807506
+          }
+        }
+      },
+      "pcm_sha256": "4b2911301859da6f07b2423de4420dcc547aae4bc3be61c42f4a089ea7a4f562",
+      "truth": [
+        63052,
+        78412
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "-5dB",
+      "group": 6,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              65600,
+              73600
+            ],
+            "score": -0.50021647
+          },
+          "MeloTTS": {
+            "range": [
+              59200,
+              67200
+            ],
+            "score": 0.30371453
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              68800,
+              76800
+            ],
+            "score": 0.30018385
+          },
+          "clock-MeloTTS": {
+            "range": [
+              60800,
+              68800
+            ],
+            "score": 1.2306518
+          }
+        }
+      },
+      "pcm_sha256": "6b7b62b67194e7609d248e258951eff31b1d93ef4a3b107bce05e7ab25445280",
+      "truth": [
+        63052,
+        78412
+      ]
+    },
+    {
+      "arm": "untouched",
+      "condition": "0dB",
+      "group": 7,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": -1.3496601
+          },
+          "MeloTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": -0.22067503
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": -1.126105
+          },
+          "clock-MeloTTS": {
+            "range": [
+              17600,
+              25600
+            ],
+            "score": 0.44710263
+          }
+        }
+      },
+      "pcm_sha256": "fa01c4ec635d4cc2fe06e827e03a63ef70b3672375be9ffd2fc252426e7154d9",
+      "truth": null
+    },
+    {
+      "arm": "untouched",
+      "condition": "-5dB",
+      "group": 7,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": -0.11153149
+          },
+          "MeloTTS": {
+            "range": [
+              49600,
+              57600
+            ],
+            "score": 0.11906178
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": 0.26238327
+          },
+          "clock-MeloTTS": {
+            "range": [
+              51200,
+              59200
+            ],
+            "score": 0.68698541
+          }
+        }
+      },
+      "pcm_sha256": "9bfc2133e0f472a427458a8d9bc542030254bc1b932e8a166db6a7d59464c106",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "0dB",
+      "group": 7,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": -1.04635019
+          },
+          "MeloTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": -0.02636924
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": -0.65072241
+          },
+          "clock-MeloTTS": {
+            "range": [
+              17600,
+              25600
+            ],
+            "score": 0.57340805
+          }
+        }
+      },
+      "pcm_sha256": "4f7a7d8e58490937cc48577a3fd57b46c130dd8872465b773c4b509929a415ac",
+      "truth": null
+    },
+    {
+      "arm": "same_reader_splice",
+      "condition": "-5dB",
+      "group": 7,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": -0.01154573
+          },
+          "MeloTTS": {
+            "range": [
+              51200,
+              59200
+            ],
+            "score": 0.11051282
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": 0.35680663
+          },
+          "clock-MeloTTS": {
+            "range": [
+              54400,
+              62400
+            ],
+            "score": 0.72614216
+          }
+        }
+      },
+      "pcm_sha256": "0b7a9ca8fb8179211b0c137eb782a097f49ec18b7d29ba0f2c1f3b45814ba668",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "0dB",
+      "group": 7,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": -0.68035727
+          },
+          "MeloTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": -0.23773454
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": -0.1023715
+          },
+          "clock-MeloTTS": {
+            "range": [
+              44800,
+              52800
+            ],
+            "score": 0.67789772
+          }
+        }
+      },
+      "pcm_sha256": "636e3e1f4e807a8136eebfd98109c9ce58d717f859592527da6644e783e0708e",
+      "truth": null
+    },
+    {
+      "arm": "different_reader_splice",
+      "condition": "-5dB",
+      "group": 7,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": 0.15666134
+          },
+          "MeloTTS": {
+            "range": [
+              48000,
+              56000
+            ],
+            "score": 0.25613042
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": 0.66322327
+          },
+          "clock-MeloTTS": {
+            "range": [
+              51200,
+              59200
+            ],
+            "score": 1.00291778
+          }
+        }
+      },
+      "pcm_sha256": "aecf47bb4380a63d0bf93a682e5dc2730671fec94ab1f730572f426181279499",
+      "truth": null
+    },
+    {
+      "arm": "piper",
+      "condition": "0dB",
+      "group": 7,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": -0.65065669
+          },
+          "MeloTTS": {
+            "range": [
+              52800,
+              60800
+            ],
+            "score": -0.12643651
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": -0.06204416
+          },
+          "clock-MeloTTS": {
+            "range": [
+              52800,
+              60800
+            ],
+            "score": 0.60339381
+          }
+        }
+      },
+      "pcm_sha256": "3e16cf2426afaa56270f11f5c2b126be901cbc1dc50973f5559a827917f236cd",
+      "truth": [
+        79677,
+        95037
+      ]
+    },
+    {
+      "arm": "piper",
+      "condition": "-5dB",
+      "group": 7,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": 0.02521193
+          },
+          "MeloTTS": {
+            "range": [
+              48000,
+              56000
+            ],
+            "score": 0.24576353
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": 0.47032432
+          },
+          "clock-MeloTTS": {
+            "range": [
+              49600,
+              57600
+            ],
+            "score": 1.09769437
+          }
+        }
+      },
+      "pcm_sha256": "ae67b1e758425f3517f22327adb5e04b537e975132fb29bfa48a4162a2b29b2d",
+      "truth": [
+        79677,
+        95037
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "0dB",
+      "group": 7,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": -0.91252868
+          },
+          "MeloTTS": {
+            "range": [
+              19200,
+              27200
+            ],
+            "score": -0.26329005
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": -0.50315859
+          },
+          "clock-MeloTTS": {
+            "range": [
+              51200,
+              59200
+            ],
+            "score": 0.33574072
+          }
+        }
+      },
+      "pcm_sha256": "840b62a6f3baf3a50a83bd7cd5051a214c63f2ac3a0f7fae06e22bb5363cc01b",
+      "truth": [
+        79677,
+        95037
+      ]
+    },
+    {
+      "arm": "kitten",
+      "condition": "-5dB",
+      "group": 7,
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": 0.18183954
+          },
+          "MeloTTS": {
+            "range": [
+              49600,
+              57600
+            ],
+            "score": 0.28187311
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              56000,
+              64000
+            ],
+            "score": 0.69713303
+          },
+          "clock-MeloTTS": {
+            "range": [
+              51200,
+              59200
+            ],
+            "score": 1.0973273
+          }
+        }
+      },
+      "pcm_sha256": "832cbde59cb0178cbcfa6517d7e0a57ccc62f9a15e7062b02e86fa47a928fcde",
+      "truth": [
+        79677,
+        95037
+      ]
+    },
+    {
+      "arm": "isolated",
+      "condition": "isolated",
+      "group": "isolated-0",
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              41600,
+              49600
+            ],
+            "score": 0.11769475
+          },
+          "MeloTTS": {
+            "range": [
+              88000,
+              96000
+            ],
+            "score": -0.26634267
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              41600,
+              49600
+            ],
+            "score": 0.74786452
+          },
+          "clock-MeloTTS": {
+            "range": [
+              88000,
+              96000
+            ],
+            "score": 0.10079894
+          }
+        }
+      },
+      "pcm_sha256": "d6a6cd5a4fedd3eb0c8fead8e53d67f11208abd47988256383a4f9a4a7124612",
+      "truth": null
+    },
+    {
+      "arm": "isolated",
+      "condition": "isolated",
+      "group": "isolated-1",
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              84800,
+              92800
+            ],
+            "score": -1.45879842
+          },
+          "MeloTTS": {
+            "range": [
+              49600,
+              57600
+            ],
+            "score": -1.48533295
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              86400,
+              94400
+            ],
+            "score": -2.18633876
+          },
+          "clock-MeloTTS": {
+            "range": [
+              88000,
+              96000
+            ],
+            "score": -1.21935929
+          }
+        }
+      },
+      "pcm_sha256": "9aa3dbe52a874165423ac79d862c817c86d71cbf517871d11401e1fd329bcf2f",
+      "truth": null
+    },
+    {
+      "arm": "isolated",
+      "condition": "isolated",
+      "group": "isolated-2",
+      "heads": {
+        "boundary": {
+          "ChatterboxTTS": {
+            "range": [
+              25600,
+              33600
+            ],
+            "score": -1.50287261
+          },
+          "MeloTTS": {
+            "range": [
+              24000,
+              32000
+            ],
+            "score": -0.99081928
+          }
+        },
+        "matched_rank": {
+          "clock-ChatterboxTTS": {
+            "range": [
+              27200,
+              35200
+            ],
+            "score": -1.8976709
+          },
+          "clock-MeloTTS": {
+            "range": [
+              24000,
+              32000
+            ],
+            "score": -1.45145653
+          }
+        }
+      },
+      "pcm_sha256": "8c18212eb07bf20a57613cb5087cc55d071de74ebaf12f529c8307ce8e5c1cf1",
+      "truth": null
+    }
+  ],
+  "schema": "chipmunk.audio-short-edit-agreement-random/1",
+  "source_sha256": "407d4743f816d293045ca53a86ea4125e136744694061f6805e9f86dae23c4dd"
+}

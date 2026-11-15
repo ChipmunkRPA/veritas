@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Agreement between short speech-edit checks](audio-short-edit-agreement-2026-11-15.md)
+  increased correctly located primary edits from 4/48 to 8/48 when any
+  wider check could add an interval. It also added 19 ordinary flags and
+  three isolated-background flags. Requiring agreement limited the
+  increase to one ordinary primary flag and added one useful random-clock
+  location with four additional ordinary flags in that bank. The app
+  retains the current speech review.
+
 - [Between-frame lip-timing comparison](video-lip-subframe-transfer-2026-11-15.md)
   found five new locations and lost six at the tighter primary point,
   while ordinary flags increased from 2/192 to 16/192. A single-event

@@ -13,6 +13,13 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short speech-edit agreement replay](audio-short-edit-agreement-2026-11-15.md#replay)
+checks whether different speech responses support the same interval.
+It replays original and joint point selection, compares individual
+checks and combinations, and counts useful ranges also found in
+matched genuine splices. The separate random-clock readings can be
+remeasured from the original retained recordings and fitted assets.
+
 The [between-frame lip-timing replay](video-lip-subframe-transfer-2026-11-15.md#replay)
 compares interpolation and single-event sensitivity on the same
 speech and source clocks. It derives the operating points from four

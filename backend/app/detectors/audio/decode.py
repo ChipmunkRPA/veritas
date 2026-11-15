@@ -162,7 +162,7 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
     if type(stream_position) is not int or stream_position < 0:
         raise ValueError("Invalid audio stream position")
     try:
-        info = _probe(path)
+        info = _probe(path, exact_duration=True)
         streams = info.get("streams") or []
         if not streams:
             raise AudioStreamUnavailable("The file has no audio stream")
@@ -231,6 +231,10 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
             "source_timing_precision_s": 1 / SAMPLE_RATE,
             "limit_samples": maximum,
         }
+        if (fmt.get("format_name") == "mov,mp4,m4a,3gp,3g2,mj2"
+                and mapping["source_codec"] == "aac" and mapping["source_sample_rate"] == 48_000
+                and type(stream.get("duration_ts")) is int):
+            mapping["source_duration_pts"] = stream["duration_ts"]
         if mapping["source_codec"] == "flac":
             mapping["source_container"] = fmt.get("format_name")
             bits = _number(stream.get("bits_per_raw_sample"))

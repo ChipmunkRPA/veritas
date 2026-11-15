@@ -43,7 +43,8 @@ def assess(ctx, frame_store, mapping, audio_input, shots):
         return binding.skipped("runtime")
     request = {"runtime": str(runtime.resolve()) if runtime else None, "geometry": str(geometry.resolve()),
                "checkpoint": str(model.resolve()), "frames": table.to_json(), "video": str(frame_store.path.resolve()),
-               "wav": str(ctx.store.path_for(audio_input["wav_sha256"]).resolve()), "samples": mapping["samples"]}
+               "wav": str(ctx.store.path_for(audio_input["wav_sha256"]).resolve()), "samples": mapping["samples"],
+               "presented_samples": binding.presented_samples(mapping)}
     env = {"PATH": os.environ.get("PATH", os.defpath), "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1",
            "HF_HUB_DISABLE_TELEMETRY": "1", "PYTHONPATH": str(Path(__file__).resolve().parents[3]),
            "OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "VECLIB_MAXIMUM_THREADS": "1"}
@@ -69,13 +70,15 @@ def audio_assets(pcm, mapping, record):
     from app.evidence.audio_packets import _chart
 
     origin = binding.audio_origin(mapping)
+    presented = binding.presented_samples(mapping)
     start, end = record["measurement"]["span"]
     if (origin is None or len(pcm) != mapping["samples"] or mapping["pcm_sha256"] != record["pcm_sha256"]
+            or presented != record["inputs"]["samples"] or not 0 <= start < end <= presented
             or record["witness"]["audio_source_pts"] != [origin + start, origin + end]):
         raise ValueError("The timing excerpt differs from its frozen soundtrack")
     return {
         binding.CLIP: wav_bytes(pcm[start:end]),
-        binding.WAVEFORM: _chart(pcm, [], start=max(0, start - 3200), end=min(len(pcm), end + 3200),
+        binding.WAVEFORM: _chart(pcm, [], start=max(0, start - 3200), end=min(presented, end + 3200),
                                  selected=(start, end), scores=False,
                                  title="Highlighted audio interval (source time, peak-scaled amplitude)", source_offset=origin,
                                  time_precision=3, peak_scaled=True),

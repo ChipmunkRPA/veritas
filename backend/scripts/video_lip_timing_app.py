@@ -14,7 +14,7 @@ from zipfile import ZipFile
 SOURCE = "s41_p_bbbt7p"
 
 
-def fixtures(output, sources, receipt):
+def fixtures(output, sources, receipt, *, aac48=False):
     from scripts import video_lip_viseme_transfer as study
     from scripts.video_lip_event_alignment import aac_clocked
 
@@ -31,7 +31,12 @@ def fixtures(output, sources, receipt):
     waveforms = study.parent.treatments(study.phone.pcm(payloads["audio"]), row["edit"])
     for role in ("late", "original"):
         aac = output / f"{role}.m4a"
-        aac_clocked(waveforms[role], aac)
+        if aac48:
+            from scripts.video_lip_timing_aac48 import encode
+
+            encode(waveforms[role], aac, 48_000)
+        else:
+            aac_clocked(waveforms[role], aac)
         subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(picture), "-i", str(aac),
                         "-map", "0:v:0", "-map", "1:a:0", "-c", "copy", str(output / f"{role}.mp4")], check=True)
     return picture
@@ -48,7 +53,7 @@ def run(args):
                       VERITAS_VIDEO_LIP_TIMING_RUNTIME=str(args.runtime.resolve()))
     if args.standard_checks:
         os.environ.update(VERITAS_DEVICE="auto", VERITAS_JOB_TIMEOUT_S="480")
-    picture = fixtures(output, args.sources, args.receipt)
+    picture = fixtures(output, args.sources, args.receipt, aac48=args.aac48)
 
     import pymupdf
     from fastapi.testclient import TestClient
@@ -115,6 +120,12 @@ def run(args):
                 assert witness == {"audio_source_pts": [10880, 22400], "picture_source_samples": [8320, 19840],
                                    "baseline_lag_samples": 0, "change_samples": 2560,
                                    "picture_frames": {"before": 12, "during": 21, "after": 30}}
+                if args.aac48:
+                    audio = evidence["audio"]["source"]
+                    assert audio["source_sample_rate"] == 48_000
+                    assert audio["source_duration_pts"] // 3 == review["inputs"]["samples"] < audio["samples"]
+                    proof["presented_samples"] = review["inputs"]["samples"]
+                    proof["padding_excluded_samples"] = audio["samples"] - review["inputs"]["samples"]
                 assets = {role: fetch(client, asset["url"]) for role, asset in packet["artifacts"].items()}
                 assert all(sha(data) == packet["artifacts"][role]["sha256"] for role, data in assets.items())
                 report = body(client.post(f"/api/v2/analyses/{aid}/reports", json={"profile": "standard"}))
@@ -156,4 +167,5 @@ if __name__ == "__main__":
     for name in ("output", "sources", "receipt", "checkpoint", "geometry", "runtime"):
         parser.add_argument(name, type=Path)
     parser.add_argument("--standard-checks", action="store_true", help="Also run the configured Full video detectors")
+    parser.add_argument("--aac48", action="store_true", help="Replay with 48 kHz mono AAC source tracks")
     run(parser.parse_args())

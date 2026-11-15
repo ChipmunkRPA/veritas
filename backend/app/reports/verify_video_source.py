@@ -551,8 +551,14 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
         decoded_audio = decode_audio(original, source_sha256=digest, max_seconds=VIDEO_AUDIO_MAX_SECONDS)
         if (decoded_audio.mapping["pcm_sha256"] != lip_timing["pcm_sha256"]
+                or video_viseme_binding.presented_samples(decoded_audio.mapping) != lip_timing["inputs"]["samples"]
                 or video_viseme_binding.audio_origin(decoded_audio.mapping) != lip_timing["audio_origin_pts"]):
             raise ValueError("The original video does not reproduce the timing review's soundtrack")
+        if "source_duration_pts" in decoded_audio.mapping and any(
+            decoded_audio.mapping[key] != evidence["audio"]["source"].get(key)
+            for key in video_viseme_binding.AAC_PRESENTATION_FIELDS
+        ):
+            raise ValueError("The timing review's AAC presentation clock differs from the original")
         if lip_timing.get("witness"):
             packet = next(packet for packet in packets if packet["id"] == video_viseme_binding.PACKET_ID)
             for role, content in audio_assets(decoded_audio.pcm, decoded_audio.mapping, lip_timing).items():

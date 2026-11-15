@@ -31,21 +31,47 @@ STATUS = {
 }
 _SHA = re.compile(r"[a-f0-9]{64}")
 _UNSET = object()
+AAC_PRESENTATION_FIELDS = ("source_codec", "source_time_base", "source_start_pts", "source_duration_pts")
 
 
 def skipped(reason):
     return {"schema": SCHEMA, "status": reason, "observation": STATUS[reason], "affects_overall_confidence": False}
 
 
-def audio_origin(mapping):
+def presented_samples(mapping):
+    """Keep AAC padding outside the timing comparison and its evidence."""
     samples = mapping.get("samples")
-    if (mapping.get("timeline_time_base") != "1/16000" or not 20_000 <= (samples or 0) <= 64_000
-            or mapping.get("source_channels") != 1 or mapping.get("source_sample_rate") != timing.RATE):
+    if type(samples) is not int:
         return None
+    rate = mapping.get("source_sample_rate")
+    if rate == 48_000:
+        if (mapping.get("source_codec") != "aac" or mapping.get("source_time_base") != "1/48000"
+                or mapping.get("source_start_pts") != 0):
+            return None
+        duration = mapping.get("source_duration_pts")
+        if type(duration) is not int:
+            return None
+        extent = duration // 3
+        # An AAC-LC frame is 1024 native samples, at most 342 output samples.
+        if not 0 <= samples - extent <= 342:
+            return None
+        samples = extent
+    elif rate != timing.RATE:
+        return None
+    return samples if 20_000 <= samples <= 64_000 else None
+
+
+def audio_origin(mapping):
+    if (mapping.get("timeline_time_base") != "1/16000" or mapping.get("source_channels") != 1
+            or presented_samples(mapping) is None):
+        return None
+    samples = mapping["samples"]
     clock = mapping.get("timeline") or []
     if not clock:
         return None
     first, cursor = clock[0]["source_pts"], 0
+    if mapping.get("source_sample_rate") == 48_000 and first != 0:
+        return None
     for block in clock:
         a, b, pts = (block[key] for key in ("start_sample", "end_sample", "source_pts"))
         if any(type(value) is not int for value in (a, b, pts)) or not cursor == a < b <= samples or pts != first + a:
@@ -73,7 +99,7 @@ def measured(raw, *, timestamps, time_base, source, mapping):
                 raise ValueError("Timing input has an invalid mouth observation")
         rows.append({**row, "sample": round(pts * base * timing.RATE) - origin})
         geometry.append({**rows[-1], "gap": None if gap is None else gap / timing.SCORE_UNITS})
-    samples = mapping["samples"]
+    samples = presented_samples(mapping)
     last = -1
     for label, at, strength in raw["phones"]:
         if (label not in timing.PHONES or type(at) is not int or not last < at < samples

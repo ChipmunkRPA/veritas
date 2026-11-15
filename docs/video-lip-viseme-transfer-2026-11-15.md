@@ -114,9 +114,10 @@ development. Set `VERITAS_VIDEO_LIP_TIMING_MODEL_DIR` to the pinned acoustic
 checkpoint directory and `VERITAS_VIDEO_LIP_TIMING_FACE_ASSET` to the
 pinned face asset. If MediaPipe 0.10.32 is installed separately, set
 `VERITAS_VIDEO_LIP_TIMING_RUNTIME` to that environment's package directory.
-The trial uses short, upright, single-shot clips at roughly 24 fps and
-continuous mono 16 kHz PCM16 or AAC sound. The worker runs offline and
-stops if it cannot finish within its bounded time budget.
+The trial uses short, upright, single-shot clips at roughly 24 fps. It
+supports continuous mono 16 kHz PCM16 or AAC and qualified mono 48 kHz
+AAC in MP4 or MOV. The worker runs offline and stops if it cannot
+finish within its bounded time budget.
 
 The app compares one constant offset against two offsets, one inside the
 candidate range and one supported by the surrounding speech. A matching
@@ -148,6 +149,56 @@ backend/.venv/bin/python -B -m scripts.video_lip_timing_app "$run/app" "$archive
 
 Add `--standard-checks` to exercise the configured Full video detectors
 alongside the timing trial.
+
+## 48 kHz AAC coverage
+
+The earlier app skipped 48 kHz soundtracks. The new path checks the
+original AAC presentation extent and keeps the analysis on the existing
+16 kHz time axis. It excludes decoded AAC padding from the measurement,
+playback excerpt and waveform. Admission requires a continuous zero-origin
+mono stream, valid native duration, and padding within one AAC-LC frame.
+The picture gate, model and timing decision point retain their prior
+settings. [FFprobe stream timing](https://ffmpeg.org/ffprobe.html)
+
+The same eight held speakers above supplied 16 clips and 112 paired
+conditions, encoded once at 16 kHz and once at 48 kHz. These are new
+AAC deliveries of the same staged shifts and controls. The replay uses
+FFmpeg 7.0.2 and the same aperture measurements and speech weights. The
+48 kHz path recovered the authored presentation sample count and agreed
+with the original audio origin within one 16 kHz sample on all 112 cases.
+
+| Result | 16 kHz AAC at 48 kbps | 48 kHz AAC at 96 kbps |
+| --- | ---: | ---: |
+| Useful short timing locations | 3 / 32 | 4 / 32 |
+| Short timing flags at an incorrect location or sign | 1 / 32 | 1 / 32 |
+| Ordinary control flags | 0 / 48 | 0 / 48 |
+| Constant-delay flags | 1 / 32 | 3 / 32 |
+| Unresolved short timing cases | 13 / 32 | 10 / 32 |
+| Unresolved ordinary controls | 15 / 48 | 17 / 48 |
+
+The revised trial covers a format the local app previously skipped. The
+extra flags on constant-delay controls support retaining the check as a
+timing observation outside the overall AI assessment. General performance
+on camera-native 48 kHz uploads and generated or reanimated faces remains
+unmeasured by this carrier test.
+[Paired carrier measurements](evaluation-panels/video-lip-timing-aac48-2026-11-15.json)
+
+Four simulated USD 9.99 checkouts exercised the prior and extended paths
+with the other configured Full video detectors enabled. No analysis
+queued before payment. The 48 kHz edit showed sound at **0.680–1.400 s**
+and pictures at **0.520–1.240 s**. The matched ordinary clip showed no
+timing finding, and the silent control showed the unsupported status.
+The evidence API, PDF, JSON and signed original replay agreed. The
+timing check excluded 75 decoded samples beyond the presentation end.
+[48 kHz Full worker receipt](evaluation-panels/video-lip-timing-aac48-app-2026-11-15.json)
+
+```sh
+export PYTHONPATH=backend HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+carrier=docs/evaluation-panels/video-lip-viseme-carrier-2026-11-15.json.gz
+backend/.venv/bin/python -B -m scripts.video_lip_timing_aac48 "$carrier" "$archives" "$checkpoint" "$run/aac48.json"
+backend/.venv/bin/python -B -m scripts.video_lip_timing_app "$run/app48" "$archives" "$carrier" \
+  "$checkpoint" "$face_landmarker" "$mediapipe_runtime" --aac48 --standard-checks
+```
 
 ## Independent replay
 

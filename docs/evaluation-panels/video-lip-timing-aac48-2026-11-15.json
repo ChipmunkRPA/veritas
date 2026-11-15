@@ -1,0 +1,2648 @@
+{
+  "source_receipt_sha256": "ec7da511828d48ba840a3d0befd5db419d76d30a9059dd8fd1182f4af051ebad",
+  "device": "cpu",
+  "point": 0.9279881,
+  "counts": {
+    "16000": {
+      "ordinary_files": 48,
+      "ordinary_flags": 0,
+      "ordinary_unresolved": 15,
+      "constant_files": 32,
+      "constant_flags": 1,
+      "constant_unresolved": 13,
+      "local_files": 32,
+      "local_flags": 4,
+      "local_unresolved": 13,
+      "local_useful": 3
+    },
+    "48000": {
+      "ordinary_files": 48,
+      "ordinary_flags": 0,
+      "ordinary_unresolved": 17,
+      "constant_files": 32,
+      "constant_flags": 3,
+      "constant_unresolved": 12,
+      "local_files": 32,
+      "local_flags": 5,
+      "local_unresolved": 10,
+      "local_useful": 4
+    }
+  },
+  "rows": [
+    {
+      "source": "s30_p_sgbi2s",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 34816,
+          "checked_samples": 34816,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 34475,
+          "checked_samples": 34240,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s30_p_sgbi2s",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 34816,
+          "checked_samples": 34816,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 34475,
+          "checked_samples": 34240,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s30_p_sgbi2s",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 34816,
+          "checked_samples": 34816,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 34475,
+          "checked_samples": 34240,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s30_p_sgbi2s",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 34816,
+          "checked_samples": 34816,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 34475,
+          "checked_samples": 34240,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s30_p_sgbi2s",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 34816,
+          "checked_samples": 34816,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 34475,
+          "checked_samples": 34240,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s30_p_sgbi2s",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 34816,
+          "checked_samples": 34816,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 34475,
+          "checked_samples": 34240,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s30_p_sgbi2s",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 34816,
+          "checked_samples": 34816,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 34475,
+          "checked_samples": 34240,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s30_l_brao4p",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 32768,
+          "checked_samples": 32768,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 32085,
+          "checked_samples": 32000,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s30_l_brao4p",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 32768,
+          "checked_samples": 32768,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 32085,
+          "checked_samples": 32000,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s30_l_brao4p",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 32768,
+          "checked_samples": 32768,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 32085,
+          "checked_samples": 32000,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s30_l_brao4p",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 32768,
+          "checked_samples": 32768,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 32085,
+          "checked_samples": 32000,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s30_l_brao4p",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 32768,
+          "checked_samples": 32768,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 32085,
+          "checked_samples": 32000,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s30_l_brao4p",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 32768,
+          "checked_samples": 32768,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 32085,
+          "checked_samples": 32000,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s30_l_brao4p",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 32768,
+          "checked_samples": 32768,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 32085,
+          "checked_samples": 32000,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s34_p_sbbx8n",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 40960,
+          "checked_samples": 40960,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 40619,
+          "checked_samples": 40480,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s34_p_sbbx8n",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 40960,
+          "checked_samples": 40960,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 40619,
+          "checked_samples": 40480,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s34_p_sbbx8n",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 40960,
+          "checked_samples": 40960,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 40619,
+          "checked_samples": 40480,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s34_p_sbbx8n",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 40960,
+          "checked_samples": 40960,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 40619,
+          "checked_samples": 40480,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s34_p_sbbx8n",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 40960,
+          "checked_samples": 40960,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 40619,
+          "checked_samples": 40480,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s34_p_sbbx8n",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 40960,
+          "checked_samples": 40960,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 40619,
+          "checked_samples": 40480,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s34_p_sbbx8n",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 40960,
+          "checked_samples": 40960,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 40619,
+          "checked_samples": 40480,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s34_l_pwbl6n",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39253,
+          "checked_samples": 39200,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s34_l_pwbl6n",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39253,
+          "checked_samples": 39200,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s34_l_pwbl6n",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39253,
+          "checked_samples": 39200,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s34_l_pwbl6n",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39253,
+          "checked_samples": 39200,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s34_l_pwbl6n",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39253,
+          "checked_samples": 39200,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s34_l_pwbl6n",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39253,
+          "checked_samples": 39200,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s34_l_pwbl6n",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39253,
+          "checked_samples": 39200,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s24_p_lgwx1p",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37888,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37205,
+          "checked_samples": 37120,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s24_p_lgwx1p",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37888,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37205,
+          "checked_samples": 37120,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s24_p_lgwx1p",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37888,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37205,
+          "checked_samples": 37120,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s24_p_lgwx1p",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37888,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "matched",
+          "useful": false,
+          "decoded_samples": 37205,
+          "checked_samples": 37120,
+          "audio_source_pts": [
+            9600,
+            21120
+          ],
+          "change_samples": -3200
+        }
+      }
+    },
+    {
+      "source": "s24_p_lgwx1p",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37888,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37205,
+          "checked_samples": 37120,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s24_p_lgwx1p",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37888,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37205,
+          "checked_samples": 37120,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s24_p_lgwx1p",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37888,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37205,
+          "checked_samples": 37120,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s24_l_lwba4s",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38912,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 38571,
+          "checked_samples": 38400,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s24_l_lwba4s",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38912,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 38571,
+          "checked_samples": 38400,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s24_l_lwba4s",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38912,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 38571,
+          "checked_samples": 38400,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s24_l_lwba4s",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38912,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 38571,
+          "checked_samples": 38400,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s24_l_lwba4s",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38912,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 38571,
+          "checked_samples": 38400,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s24_l_lwba4s",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38912,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 38571,
+          "checked_samples": 38400,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s24_l_lwba4s",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38912,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 38571,
+          "checked_samples": 38400,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s45_p_brbo3s",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37888,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37760,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s45_p_brbo3s",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37888,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37760,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s45_p_brbo3s",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37888,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37760,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s45_p_brbo3s",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37888,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37760,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s45_p_brbo3s",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37888,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37760,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s45_p_brbo3s",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37888,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37760,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s45_p_brbo3s",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "matched",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37888,
+          "audio_source_pts": [
+            6400,
+            17920
+          ],
+          "change_samples": -3200
+        },
+        "48000": {
+          "status": "matched",
+          "useful": false,
+          "decoded_samples": 37888,
+          "checked_samples": 37760,
+          "audio_source_pts": [
+            6400,
+            17920
+          ],
+          "change_samples": -3200
+        }
+      }
+    },
+    {
+      "source": "s45_l_prws2p",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 40960,
+          "checked_samples": 40960,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 40277,
+          "checked_samples": 40000,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s45_l_prws2p",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 40960,
+          "checked_samples": 40960,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 40277,
+          "checked_samples": 40000,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s45_l_prws2p",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 40960,
+          "checked_samples": 40960,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 40277,
+          "checked_samples": 40000,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s45_l_prws2p",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 40960,
+          "checked_samples": 40960,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "matched",
+          "useful": false,
+          "decoded_samples": 40277,
+          "checked_samples": 40000,
+          "audio_source_pts": [
+            7680,
+            14080
+          ],
+          "change_samples": 5120
+        }
+      }
+    },
+    {
+      "source": "s45_l_prws2p",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "matched",
+          "useful": false,
+          "decoded_samples": 40960,
+          "checked_samples": 40960,
+          "audio_source_pts": [
+            17920,
+            29440
+          ],
+          "change_samples": -5120
+        },
+        "48000": {
+          "status": "matched",
+          "useful": false,
+          "decoded_samples": 40277,
+          "checked_samples": 40000,
+          "audio_source_pts": [
+            17920,
+            29440
+          ],
+          "change_samples": -5120
+        }
+      }
+    },
+    {
+      "source": "s45_l_prws2p",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 40960,
+          "checked_samples": 40960,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 40277,
+          "checked_samples": 40000,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s45_l_prws2p",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 40960,
+          "checked_samples": 40960,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 40277,
+          "checked_samples": 40000,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s41_p_bbbt7p",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39595,
+          "checked_samples": 39520,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s41_p_bbbt7p",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39595,
+          "checked_samples": 39520,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s41_p_bbbt7p",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39595,
+          "checked_samples": 39520,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s41_p_bbbt7p",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39595,
+          "checked_samples": 39520,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s41_p_bbbt7p",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39595,
+          "checked_samples": 39520,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s41_p_bbbt7p",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39595,
+          "checked_samples": 39520,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s41_p_bbbt7p",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "matched",
+          "useful": true,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": [
+            10880,
+            22400
+          ],
+          "change_samples": 2560
+        },
+        "48000": {
+          "status": "matched",
+          "useful": true,
+          "decoded_samples": 39595,
+          "checked_samples": 39520,
+          "audio_source_pts": [
+            10880,
+            22400
+          ],
+          "change_samples": 2560
+        }
+      }
+    },
+    {
+      "source": "s41_l_prib5p",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 45056,
+          "checked_samples": 45056,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 45056,
+          "checked_samples": 44800,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s41_l_prib5p",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 45056,
+          "checked_samples": 45056,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 45056,
+          "checked_samples": 44800,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s41_l_prib5p",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 45056,
+          "checked_samples": 45056,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 45056,
+          "checked_samples": 44800,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s41_l_prib5p",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 45056,
+          "checked_samples": 45056,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 45056,
+          "checked_samples": 44800,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s41_l_prib5p",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 45056,
+          "checked_samples": 45056,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 45056,
+          "checked_samples": 44800,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s41_l_prib5p",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 45056,
+          "checked_samples": 45056,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "matched",
+          "useful": true,
+          "decoded_samples": 45056,
+          "checked_samples": 44800,
+          "audio_source_pts": [
+            10880,
+            17280
+          ],
+          "change_samples": -1920
+        }
+      }
+    },
+    {
+      "source": "s41_l_prib5p",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 45056,
+          "checked_samples": 45056,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 45056,
+          "checked_samples": 44800,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s33_p_bram5p",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38912,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38720,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s33_p_bram5p",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38912,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38720,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s33_p_bram5p",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38912,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38720,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s33_p_bram5p",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38912,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38720,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s33_p_bram5p",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38912,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38720,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s33_p_bram5p",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38912,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 38912,
+          "checked_samples": 38720,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s33_p_bram5p",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "matched",
+          "useful": true,
+          "decoded_samples": 38912,
+          "checked_samples": 38912,
+          "audio_source_pts": [
+            17920,
+            29440
+          ],
+          "change_samples": 3840
+        },
+        "48000": {
+          "status": "matched",
+          "useful": true,
+          "decoded_samples": 38912,
+          "checked_samples": 38720,
+          "audio_source_pts": [
+            17920,
+            29440
+          ],
+          "change_samples": 3840
+        }
+      }
+    },
+    {
+      "source": "s33_l_srat5p",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39680,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s33_l_srat5p",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39680,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s33_l_srat5p",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39680,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s33_l_srat5p",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39680,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s33_l_srat5p",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39680,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s33_l_srat5p",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39680,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s33_l_srat5p",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39680,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s10_p_lral6p",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39253,
+          "checked_samples": 39200,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s10_p_lral6p",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39253,
+          "checked_samples": 39200,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s10_p_lral6p",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39253,
+          "checked_samples": 39200,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s10_p_lral6p",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39253,
+          "checked_samples": 39200,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s10_p_lral6p",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39253,
+          "checked_samples": 39200,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s10_p_lral6p",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39253,
+          "checked_samples": 39200,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s10_p_lral6p",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 39936,
+          "checked_samples": 39936,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 39253,
+          "checked_samples": 39200,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s10_l_bwbp9a",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 41984,
+          "checked_samples": 41984,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 41643,
+          "checked_samples": 41600,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s10_l_bwbp9a",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 41984,
+          "checked_samples": 41984,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 41643,
+          "checked_samples": 41600,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s10_l_bwbp9a",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 41984,
+          "checked_samples": 41984,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 41643,
+          "checked_samples": 41600,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s10_l_bwbp9a",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 41984,
+          "checked_samples": 41984,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 41643,
+          "checked_samples": 41600,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s10_l_bwbp9a",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 41984,
+          "checked_samples": 41984,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 41643,
+          "checked_samples": 41600,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s10_l_bwbp9a",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "matched",
+          "useful": true,
+          "decoded_samples": 41984,
+          "checked_samples": 41984,
+          "audio_source_pts": [
+            7680,
+            19200
+          ],
+          "change_samples": -2560
+        },
+        "48000": {
+          "status": "matched",
+          "useful": true,
+          "decoded_samples": 41643,
+          "checked_samples": 41600,
+          "audio_source_pts": [
+            7680,
+            19200
+          ],
+          "change_samples": -2560
+        }
+      }
+    },
+    {
+      "source": "s10_l_bwbp9a",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 41984,
+          "checked_samples": 41984,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 41643,
+          "checked_samples": 41600,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s54_p_lgbg8a",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 25600,
+          "checked_samples": 25600,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 24917,
+          "checked_samples": 24800,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s54_p_lgbg8a",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 25600,
+          "checked_samples": 25600,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 24917,
+          "checked_samples": 24800,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s54_p_lgbg8a",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 25600,
+          "checked_samples": 25600,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 24917,
+          "checked_samples": 24800,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s54_p_lgbg8a",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 25600,
+          "checked_samples": 25600,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 24917,
+          "checked_samples": 24800,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s54_p_lgbg8a",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 25600,
+          "checked_samples": 25600,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "insufficient_events",
+          "useful": false,
+          "decoded_samples": 24917,
+          "checked_samples": 24800,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s54_p_lgbg8a",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 25600,
+          "checked_samples": 25600,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 24917,
+          "checked_samples": 24800,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s54_p_lgbg8a",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 25600,
+          "checked_samples": 25600,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 24917,
+          "checked_samples": 24800,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s54_l_swiy2p",
+      "role": "original",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 29696,
+          "checked_samples": 29696,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 29355,
+          "checked_samples": 29280,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s54_l_swiy2p",
+      "role": "filtered",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 29696,
+          "checked_samples": 29696,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 29355,
+          "checked_samples": 29280,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s54_l_swiy2p",
+      "role": "gain",
+      "kind": "ordinary",
+      "carriers": {
+        "16000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 29696,
+          "checked_samples": 29696,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 29355,
+          "checked_samples": 29280,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s54_l_swiy2p",
+      "role": "global_early",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 29696,
+          "checked_samples": 29696,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 29355,
+          "checked_samples": 29280,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s54_l_swiy2p",
+      "role": "global_late",
+      "kind": "constant",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 29696,
+          "checked_samples": 29696,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 29355,
+          "checked_samples": 29280,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s54_l_swiy2p",
+      "role": "early",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 29696,
+          "checked_samples": 29696,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "ambiguous_change",
+          "useful": false,
+          "decoded_samples": 29355,
+          "checked_samples": 29280,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    },
+    {
+      "source": "s54_l_swiy2p",
+      "role": "late",
+      "kind": "local",
+      "carriers": {
+        "16000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 29696,
+          "checked_samples": 29696,
+          "audio_source_pts": null,
+          "change_samples": null
+        },
+        "48000": {
+          "status": "no_match",
+          "useful": false,
+          "decoded_samples": 29355,
+          "checked_samples": 29280,
+          "audio_source_pts": null,
+          "change_samples": null
+        }
+      }
+    }
+  ]
+}

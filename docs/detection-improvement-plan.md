@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Speech and mouth timing on 48 kHz AAC](video-lip-viseme-transfer-2026-11-15.md#48-khz-aac-coverage)
+  extends the local trial to qualified short mono AAC videos. It located
+  4/32 staged local shifts, flagged no ordinary controls out of 48 and
+  flagged 3/32 constant-delay controls. The evidence excludes decoded
+  padding and carries zero AI-confidence weight.
+
 - [Source-bound chat formatting markers](document-chat-format-markers-2026-11-15.md)
   adds exact locations from eight documented formats to text, Word,
   mapped email and selectable PDF evidence. All 72 archived ordinary

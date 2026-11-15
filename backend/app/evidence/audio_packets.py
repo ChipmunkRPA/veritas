@@ -395,6 +395,10 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
         document["coverage"][SPEECH_SELECTION] = selection
     if "audio_stream_indices" in mapping:
         document["source"]["audio_stream_indices"] = mapping["audio_stream_indices"]
+    if analysis.kind == "video" and "source_duration_pts" in mapping:
+        from app.evidence.video_viseme_binding import AAC_PRESENTATION_FIELDS
+
+        document["source"].update({key: mapping[key] for key in AAC_PRESENTATION_FIELDS})
     if analysis.kind == "audio" and (review := record.get("short_voice_review")):
         from app.evidence.audio_short_review import build as build_short_voice_review
         from app.evidence.audio_short_review_binding import source_metadata

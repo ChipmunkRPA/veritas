@@ -52,7 +52,7 @@ def observe(request):
     phones = {name[0]: label for label, names in viseme_timing.PHONES.items() for name in names}
     decoder, _ = neural_decoder(Path(request["checkpoint"]), names=tuple(
         name for names in viseme_timing.PHONES.values() for name in names))
-    values = np.rint(pcm * 32768.).astype("<i2")
+    values = np.rint(pcm[:request["presented_samples"]] * 32768.).astype("<i2")
     return {"frames": measured, "phones": [[phones[phone], at, weight] for phone, at, weight in decoder(values)]}
 
 

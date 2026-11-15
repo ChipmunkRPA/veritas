@@ -71,6 +71,12 @@ speakers outside the primary cohorts. The [local app replay](video-lip-viseme-tr
 checks prepaid worker behavior, the PDF and JSON, and original-source
 verification of the signed report.
 
+The [48 kHz soundtrack coverage replay](video-lip-viseme-transfer-2026-11-15.md#48-khz-aac-coverage)
+recreates 112 paired AAC cases at two sample rates with the timing point
+frozen. Its receipt separates short timing, ordinary, and constant-delay
+outcomes. The app replay verifies the presented duration, original frame
+coordinates and waveform after excluding AAC padding.
+
 The [short rewrite word-span replay](writing-local-word-spans-2026-11-15.md#independent-replay)
 recounts contiguous word evidence, ordinary flags and whether a result
 also appeared in the matched ordinary draft. It separately reads the

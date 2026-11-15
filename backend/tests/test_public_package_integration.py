@@ -521,7 +521,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.document_unselected_responses', 'app.evidence.document_check_coverage',
                         'app.evidence.document_matched_context', 'app.evidence.document_paragraph_priority',
                         'app.evidence.document_email_contexts', 'app.evidence.document_native_locations',
-                        'app.evidence.document_invisible_characters',
+                        'app.evidence.document_invisible_characters', 'app.evidence.document_chat_markers',
                         'app.evidence.document_passage_position', 'app.evidence.document_long_passage_position',
                         'app.evidence.document_tracked_changes', 'app.evidence.document_pdf_visibility', 'app.evidence.document_word_visibility',
                         'app.evidence.document_bibliography',
@@ -595,7 +595,7 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
                                  'image_copy_similarity_binding.py', 'image_copy_affine_binding.py',
                                  'image_editor_preview_binding.py', 'image_transparency_binding.py', 'image_animation_binding.py',
                                  'stereo_binding.py', 'stereo_collapse_binding.py', 'scene_return_binding.py',
-                                 'video_viseme_binding.py', 'video_viseme_timing.py'])
+                                 'video_viseme_binding.py', 'video_viseme_timing.py', 'document_chat_markers.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
 
@@ -631,6 +631,14 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
     elif name == 'video_viseme_binding.py':
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.core.canonical', 'canonical_hash'), ('app.evidence', 'video_viseme_timing')}
+    elif name == 'document_chat_markers.py':
+        assert imports <= sys.stdlib_module_names | {'app'}
+        assert local == {('app.core.canonical', 'FLOAT_DP'), ('app.core.canonical', 'canonical_hash'),
+                         ('app.evidence.document_native_locations', 'MAX_RANGES'),
+                         ('app.evidence.document_native_locations', 'clip_source_ranges'),
+                         ('app.evidence.document_repeat', 'block_anchor'),
+                         ('app.evidence.document_repeat', 'validate_block_anchor'),
+                         ('app.evidence.document_scope', 'mapped_email_html')}
     else:
         assert imports <= sys.stdlib_module_names
 

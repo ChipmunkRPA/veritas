@@ -127,7 +127,7 @@ def model():
     )
 
 
-def fit_input(root, plan, generator, filterbank):
+def fit_input(root, plan, generator, feature_of):
     import numpy as np
 
     wanted = ("untouched", "genuine_splice", f"resampled/{generator}", f"edited/{generator}")
@@ -136,19 +136,22 @@ def fit_input(root, plan, generator, filterbank):
     clock = np.arange(FRAMES) * HOP
     for g in (source for source in plan["sources"] if source["role"] == "fit"):
         group, (left, right) = g["group"], g["truth"]
-        records.append([[features(pcm(root, selected[group, condition, kind]), filterbank) for kind in wanted]
+        records.append([[feature_of(root, selected[group, condition, kind]) for kind in wanted]
                         for condition in sources.CONDITIONS])
         masks.append((clock >= left) & (clock < right))
         edges.append((abs(clock-left) <= 480) | (abs(clock-right) <= 480))
     return np.array(records), np.array(masks, np.float32), np.array(edges, np.float32)
 
 
-def train(root, plan, generator, bank):
+def train(root, plan, generator, bank, *, feature_of=None):
     import numpy as np
     import torch
     from torch.nn import functional as F
 
-    x, region, edge = fit_input(root, plan, generator, bank)
+    if feature_of is None:
+        def feature_of(data, row):
+            return features(pcm(data, row), bank)
+    x, region, edge = fit_input(root, plan, generator, feature_of)
     axes = (0, 1, 2, 4)
     mean = x.mean(axis=axes, dtype=np.float64).astype(np.float32)
     scale = np.maximum(.001, x.std(axis=axes, dtype=np.float64)).astype(np.float32)
@@ -204,7 +207,7 @@ def best_interval(local, edge, spans):
     return None if peak is None else {"score": round(peak[0], 8), "range": [-peak[1], -peak[2]]}
 
 
-def score_rows(classifier, norm, root, rows, bank, activity):
+def score_rows(classifier, norm, root, rows, bank, activity, *, feature_of=None, select=best_interval):
     import torch
 
     mean, scale = norm
@@ -215,9 +218,10 @@ def score_rows(classifier, norm, root, rows, bank, activity):
             if key not in cache:
                 signal = pcm(root, row)
                 spans = activity.spans(signal)
-                value = (features(signal, bank) - mean[:, None]) / scale[:, None]
+                raw = features(signal, bank) if feature_of is None else feature_of(root, row)
+                value = (raw - mean[:, None]) / scale[:, None]
                 local, edges = classifier(torch.from_numpy(value[None]))[0].numpy()
-                cache[key] = best_interval(local, edges, spans)
+                cache[key] = select(local, edges, spans)
             result.append({"pcm_sha256": key, "best": cache[key]})
     return result
 
@@ -394,14 +398,14 @@ def matched_order(rows, measured):
     return dict(counts)
 
 
-def result(record):
+def result(record, *, schema=SCHEMA, method=METHOD):
     plan = record["sources"]
     SOURCE.check(plan["schema"] == sources.SCHEMA and plan["method"] == sources.METHOD, "Source policy differs")
     validate_plan(plan)
     candidate, incumbent = record["candidate"], record["incumbent"]
     encoded = json.dumps(plan, sort_keys=True, indent=2, allow_nan=False) + "\n"
     digest = SOURCE.digest(encoded.encode("utf-8"))
-    SOURCE.check(candidate["freeze"]["schema"] == SCHEMA and candidate["freeze"]["method"] == METHOD
+    SOURCE.check(candidate["freeze"]["schema"] == schema and candidate["freeze"]["method"] == method
                  and candidate["freeze"]["source_sha256"] == incumbent["source_sha256"] == digest,
                  "Analysis commitments differ")
     SOURCE.check(candidate["freeze"]["seed"] == SEED and candidate["freeze"]["epochs"] == EPOCHS,

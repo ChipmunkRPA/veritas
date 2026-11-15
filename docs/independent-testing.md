@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short voice edit speech-layer replay](audio-short-edit-speech-layers-2026-11-14.md#independent-replay)
+recounts true locations, false alerts and unassessed inputs on two anonymous
+numeric panels. It includes a generator and meeting transfer with cutoffs
+fixed on the original calibration readers. No speech recordings are needed
+to reproduce the calculations.
+
 The [overlapping face-change replay](video-face-overlapping-pane-2026-11-14.md#independent-replay)
 recounts both sides of simultaneous and staggered face edits, including
 single-edit controls, ordinary speaker cuts and a shared lighting change.

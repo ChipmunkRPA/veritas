@@ -60,6 +60,18 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Frame-level speech features for short edits under competing speech](audio-short-edit-speech-layers-2026-11-14.md)
+  raised matched-control ranking from 7/48 to 18/48. A separate 48-file
+  transfer found one ElevenLabs location with no ordinary or background
+  alerts for the better encoder fit. It missed all three clone and all
+  four Kokoro edits. The flanking readout did not reproduce its useful
+  location on transfer. All new speech heads remain in evaluation.
+
+- [Earlier-copy comparison for cropped WebP](image-reference-cropped-webp-2026-11-14.md)
+  localized 163/192 staged edits and produced zero highlights on 144
+  crop-only or recompression controls. The app and exports present both
+  native coordinate systems and the area measured in the earlier copy.
+
 - [Overlapping face changes on opposite sides](video-face-overlapping-pane-2026-11-14.md)
   increased exact locations from 16/32 to 32/32 on staged simultaneous
   and staggered edits. All 16 single-edit controls retained one correct range,

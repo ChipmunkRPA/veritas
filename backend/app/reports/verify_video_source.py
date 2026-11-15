@@ -364,6 +364,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError("The original video did not reproduce the recorded no-match result")
     hold = evidence.get("picture_hold") or {}
     sequence = hold.get("sequence_review")
+    reverse_sequence = hold.get(picture_sequence.REVERSE_KEY)
     motion = hold.get("motion_sequence_review")
     local_mouth = hold.get("mouth_local_hold")
     mouth_limit = 0
@@ -493,6 +494,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         _verify_picture_hold(evidence, table, hold_observations)
     if sequence is not None and canonical_hash(picture_sequence.scan(hold_observations, table.tb)) != canonical_hash(sequence):
         raise ValueError("The original video does not reproduce its repeated moving-picture sequences")
+    if reverse_sequence is not None and canonical_hash(picture_sequence.scan(hold_observations, table.tb, reverse=True)) != canonical_hash(reverse_sequence):
+        raise ValueError("The original video does not reproduce its reversed moving-picture sequences")
     if motion is not None:
         if motion["schema"] == picture_sequence.MOTION_EXTENDED_SCHEMA:
             opening_profile = picture_motion.profile(table, motion_encoding)

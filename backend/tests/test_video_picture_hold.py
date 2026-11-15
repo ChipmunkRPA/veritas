@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import io
+import itertools
 import json
 import subprocess
 from fractions import Fraction
@@ -33,7 +34,7 @@ from scripts.video_motion_sequence_360p_transfer import authored
 from scripts.video_mouth_local_hold_panel import encode as encode_mouth_hold
 
 
-def _source(path, *, held=False, late=False, repeated=False):
+def _source(path, *, held=False, late=False, repeated=False, reverse=False):
     y, x = np.mgrid[:48, :80]
     frames = [np.stack(((x + 13*i) % 256, (y * 5 + i) % 256, (x + y + i) % 256), axis=-1).astype(np.uint8)
               for i in range(190 if late else 40)]
@@ -41,7 +42,8 @@ def _source(path, *, held=False, late=False, repeated=False):
         start = 145 if late else 10
         frames[start:start + 16] = [frames[start]] * 16
     if repeated:
-        frames[145:165] = frames[24:44]
+        donor = frames[24:44]
+        frames[145:165] = donor[::-1] if reverse else donor
     subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-f", "rawvideo", "-pixel_format", "rgb24", "-video_size", "80x48",
                     "-framerate", "20", "-i", "pipe:0", "-c:v", "libx264rgb", "-crf", "0", "-output_ts_offset", "5", str(path)],
                    input=b"".join(frame.tobytes() for frame in frames), check=True, timeout=30)
@@ -87,7 +89,7 @@ def _mouth_source(path, monkeypatch, *, hd):
     monkeypatch.setattr(mouth_local_hold, "source_geometry", lambda *_: (mouth_local_hold.Geometry(cx, cy, span), 1))
 
 
-@pytest.mark.parametrize("case", ["opening_hold", "later_hold", "moving_sequence", "lossy_sequence", "lossy_sequence_360p",
+@pytest.mark.parametrize("case", ["opening_hold", "later_hold", "moving_sequence", "reverse_sequence", "lossy_sequence", "lossy_sequence_360p",
                                    "lossy_sequence_360p_late", "mouth_hold", "mouth_hold_hd"])
 def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monkeypatch, case, request):
     mouth = case in {"mouth_hold", "mouth_hold_hd"}
@@ -95,7 +97,8 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
     high_res = case.startswith("lossy_sequence_360p")
     extension = case == "lossy_sequence_360p_late"
     lossy = case.startswith("lossy_sequence")
-    repeated, late = mouth or lossy or case == "moving_sequence", case != "opening_hold"
+    reverse = case == "reverse_sequence"
+    repeated, late = mouth or lossy or reverse or case == "moving_sequence", case != "opening_hold"
     path = tmp_path / ("mouth-hold.mp4" if mouth else "exact-hold.mkv")
     if mouth:
         _mouth_source(path, monkeypatch, hd=hd)
@@ -109,7 +112,7 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
             indices = [20, 41, 130, 151]
             deliver(read_source(None), path, 20, 130, 22, "copy", "h264")
     else:
-        frames = _source(path, held=not repeated, late=late, repeated=repeated)
+        frames = _source(path, held=not repeated, late=late, repeated=repeated, reverse=reverse)
     table = probe_frames(path)
     if lossy:
         frames = {frame.index: frame.rgb for frame in decode_frames(path, table, indices)}
@@ -149,7 +152,10 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
         assert not np.array_equal(frames[indices[0]], frames[indices[2]])
     elif repeated:
         assert scan["match"] is None and scan["coverage"]["scan_scope"] == picture_sequence.SCAN_SCOPE
-        match = scan["coverage"]["sequence_review"]["pair"]
+        key = picture_sequence.REVERSE_KEY if reverse else "sequence_review"
+        other_key = "sequence_review" if reverse else picture_sequence.REVERSE_KEY
+        assert scan["coverage"][other_key]["status"] == "no_match"
+        match = scan["coverage"][key]["pair"]
         indices = [24, 43, 145, 164]
         assert match["frame_count"] == match["unique_pictures"] == 20
         assert match["span_s"] == .95 and [r[2] for r in picture_sequence.endpoints(match)] == indices
@@ -192,11 +198,21 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
         assert service.load_packet_set(db, analysis, store) == document
         assert document["coverage"]["scored_frame_indices"] == []
         expected_packet = (mouth_local_hold_binding.PACKET_ID if mouth else picture_sequence.MOTION_PACKET_ID if lossy
+                           else picture_sequence.REVERSE_PACKET_ID if reverse
                            else picture_sequence.PACKET_ID if repeated else binding.PACKET_ID)
         [packet] = [candidate for candidate in document["packets"] if candidate["id"] == expected_packet] if mouth else document["packets"]
         assert packet["id"] == expected_packet
         assert canonical_hash(packet["mouth_local_hold" if mouth else "picture_sequence" if repeated else "picture_hold"]) == canonical_hash(match)
         assert [f["anchor"]["frame_index"] for f in packet["frames"]] == indices
+        if reverse:
+            assert packet["affects_overall_confidence"] is False and match["order"] == "reverse"
+            assert [f["artifact_refs"]["original"] for f in packet["frames"]] == [
+                "start_picture", "end_picture", "end_picture", "start_picture"]
+            altered = copy.deepcopy(document)
+            del altered["packets"][0]["picture_sequence"]["order"]
+            del altered["picture_hold"][picture_sequence.REVERSE_KEY]["pair"]["order"]
+            with pytest.raises(ValueError, match="wrong matching method"):
+                binding.validate(altered)
         if mouth:
             assert not packet["affects_overall_confidence"]
             assert [f["interval_role"] for f in packet["frames"]] == ["before", "during", "after"]
@@ -259,6 +275,10 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
                     assert "Repeated ranges 0.840-1.720 s and 5.880-6.760 s" in text
                 else:
                     assert "Repeated ranges 1.000-2.050 s and 6.500-7.550 s" in text
+            elif reverse:
+                assert "Reversed moving sequences" in text and "VPR03" in text
+                assert "Reversed ranges 6.200-7.150 s and 12.250-13.200 s" in text
+                assert "plays the same 20 decoded pictures backward" in text
             elif repeated:
                 assert "Repeated moving sequences" in text and "VPR01" in text
                 assert "Repeated ranges 6.200-7.150 s and 12.250-13.200 s" in text
@@ -331,6 +351,25 @@ def test_repeated_sequence_requires_distinct_pixels_and_equal_verified_spacing()
     pts[30] = None
     assert picture_sequence.scan(list(zip(pts, moving, strict=True)), Fraction(1, 1000))["status"] == "no_match"
     assert picture_sequence.scan([(i * 50, "static") for i in range(40)], Fraction(1, 1000))["status"] == "no_match"
+
+
+def test_reverse_sequence_preserves_the_spacing_between_corresponding_frames():
+    tb = Fraction(1, 1000)
+    first_steps = [40, 60] * 6
+    first_pts = list(itertools.accumulate(first_steps, initial=0))
+    second_pts = list(itertools.accumulate(reversed(first_steps), initial=900))
+    digests = [str(i) for i in range(len(first_pts))]
+    pictures = digests + digests[::-1]
+
+    matched = picture_sequence.scan(list(zip(first_pts + second_pts, pictures, strict=True)), tb, reverse=True)
+    assert matched["pair"]["frame_count"] == 13
+    assert matched["pair"]["span_s"] == .6
+    same_order_pts = list(itertools.accumulate(first_steps, initial=900))
+    failed = picture_sequence.scan(list(zip(first_pts + same_order_pts, pictures, strict=True)), tb, reverse=True)
+    assert failed["status"] == "no_match"
+    second_pts[6] = None
+    unverified = picture_sequence.scan(list(zip(first_pts + second_pts, pictures, strict=True)), tb, reverse=True)
+    assert unverified["status"] != "matched"
 
 
 def test_completed_opening_is_preserved_when_extended_decoder_stops(monkeypatch, tmp_path):

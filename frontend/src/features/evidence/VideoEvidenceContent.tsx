@@ -90,7 +90,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         ? packet.scene_return.tiles : null
       const navigationKnown = frame.anchor.playback_time_s != null && Number.isFinite(frame.anchor.playback_time_s) && frame.anchor.playback_time_s >= 0
       const occurrence = packet.picture_sequence && (frame.anchor.frame_index <= packet.picture_sequence.first.end_frame_index
-        ? 'First occurrence' : 'Second occurrence')
+        ? 'First occurrence' : packet.picture_sequence.order === 'reverse' ? 'Reversed occurrence' : 'Second occurrence')
       return <div key={frame.id} className="rounded-md border border-border p-3">
         <p className="m-0 mb-3 text-small font-medium">{occurrence && `${occurrence} · `}{frame.interval_role && <span className="capitalize">{frame.interval_role} {packet.scene_return ? 'picture change' : `${cut ? 'picture-cut' : refined ? 'refined' : packet.mouth_local_hold ? 'hold' : packet.face_spatial_cut ? 'review' : 'flagged'} range`} · </span>}Frame {frame.anchor.frame_index}{frame.is_peak ? ' · highest response in this sample sequence' : ''}
           {frame.score !== null && <span className="font-mono"> · response {frame.score.toFixed(3)}</span>}</p>
@@ -147,8 +147,16 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       <h3 id="video-picture-sequence-heading" className="m-0 text-body font-medium">Repeated moving sequences</h3>
       <p className="mt-2 mb-0 text-small">{hold.sequence_review.status === 'matched'
         ? <a className="underline" href="#media-evidence-VPR01">Inspect both matching source ranges</a>
-        : hold.sequence_review.status === 'no_match' ? 'No exact moving sequence repeated within the checked frames.'
+        : hold.sequence_review.status === 'no_match' ? 'No exact repeat in the same frame order was found in the checked frames.'
         : 'The checked footage did not contain two usable ranges of at least half a second.'}</p>
+    </section>}
+    {hold?.reverse_sequence_review && <section aria-labelledby="video-reverse-sequence-heading" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="video-reverse-sequence-heading" className="m-0 text-body font-medium">Reversed moving sequences</h3>
+      <p className="mt-2 mb-0 text-small">{hold.reverse_sequence_review.status === 'matched'
+        ? <a className="underline" href="#media-evidence-VPR03">Inspect both source ranges and their endpoint frames</a>
+        : hold.reverse_sequence_review.status === 'no_match' ? 'No exact reversed sequence was found in the checked frames.'
+        : 'The checked footage did not contain two usable ranges of at least half a second.'}</p>
+      <p className="mt-2 mb-0 text-caption text-text-muted">Checked the first {hold.frames_scanned} source frames for exact decoded matches. Reverse playback can be part of ordinary editing.</p>
     </section>}
     {motion && <section aria-labelledby="video-motion-sequence-heading" className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-motion-sequence-heading" className="m-0 text-body font-medium">Similar repeated moving sequences</h3>
@@ -210,7 +218,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       {!packet.scene_return && <p className="mt-2 mb-0 text-small text-text-muted">{packet.picture_hold
         ? <>{packet.picture_hold.frame_count} consecutive decoded frames have identical pixels over <strong>{seconds(packet.picture_hold.span_s)}</strong> between the first and last source timestamps.</>
         : packet.picture_sequence
-        ? <>First occurrence <strong>{seconds(packet.picture_sequence.first.start_stream_s)}–{seconds(packet.picture_sequence.first.end_stream_s)}</strong> · Second occurrence <strong>{seconds(packet.picture_sequence.second.start_stream_s)}–{seconds(packet.picture_sequence.second.end_stream_s)}</strong> on the source clock.</>
+        ? <>First occurrence <strong>{seconds(packet.picture_sequence.first.start_stream_s)}–{seconds(packet.picture_sequence.first.end_stream_s)}</strong> · {packet.picture_sequence.order === 'reverse' ? 'Reversed occurrence' : 'Second occurrence'} <strong>{seconds(packet.picture_sequence.second.start_stream_s)}–{seconds(packet.picture_sequence.second.end_stream_s)}</strong> on the source clock.</>
         : packet.mouth_local_hold && packet.window
         ? <>Measured mouth-region hold <strong>{seconds(packet.window.start_stream_s)}–{seconds(packet.window.end_stream_s)}</strong> on the source clock. The end is exclusive. Source frames {packet.mouth_local_hold.frames[0]}–{packet.mouth_local_hold.frames[1] - 1}.</>
         : packet.whole_face_review

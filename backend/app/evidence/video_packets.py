@@ -553,7 +553,14 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
                              source: dict, review: dict, decoded: dict) -> dict:
     pair = review["pair"]
     motion = "supporting_edge_offsets" in pair
+    reverse = review["schema"] == picture_sequence.REVERSE_SCHEMA
     packet_id = picture_sequence.MOTION_PACKET_ID if motion else picture_sequence.PACKET_ID
+    title = "Similar moving pictures at two source ranges" if motion else "Same moving pictures at two source ranges"
+    selection = "longest_pair_of_similar_moving_sequences" if motion else "longest_pair_of_exact_moving_sequences"
+    if reverse:
+        packet_id = picture_sequence.REVERSE_PACKET_ID
+        title = "Moving pictures repeated in reverse"
+        selection = "longest_pair_of_reversed_moving_sequences"
     motion_limit = review["frames_scanned"] if motion else None
     frames, images, labels, assets = [], [], [], {}
     for number, (occurrence, role, index, pts, digest) in enumerate(picture_sequence.endpoints(pair), 1):
@@ -579,19 +586,19 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
     sheet.paste(first, (0, 0))
     sheet.paste(second, (0, first.height))
     assets["contact_sheet"] = _packet_image(db, store, analysis, set_id, sheet)
-    return {"id": packet_id, "title": "Similar moving pictures at two source ranges" if motion else "Same moving pictures at two source ranges",
+    return {"id": packet_id, "title": title,
             "evidence_type": "anomaly", "claim_scope": "paired_frame_sequences",
             "semantics": review["schema"],
             "picture_sequence": pair, "affects_overall_confidence": False, "finding_ids": [], "signal_refs": [],
             "exhibit_refs": [], "frames": frames, "observation": picture_sequence.observation(pair),
-            "interpretation": picture_sequence.CONTEXT,
+            "interpretation": picture_sequence.REVERSE_CONTEXT if reverse else picture_sequence.CONTEXT,
             "limitations": [(f"The comparison checks whole-picture appearance and motion in the first {motion_limit} frames. It can miss edits "
                              "that change speed, framing or the motion pattern." if motion else
                              "The comparison requires exact decoded pixels and matching frame spacing within the scanned range.")],
             "measurements": [{"label": "Matching pictures in each range", "value": pair["frame_count"], "unit": "frames"},
                              {"label": "First-to-last source timestamp span", "value": pair["span_s"], "unit": "seconds"}],
             "artifacts": assets, "clip": {"status": "unavailable", "reason": "Use the original video to play either occurrence."},
-            "derivation": {"version": VERSION, "selection": "longest_pair_of_similar_moving_sequences" if motion else "longest_pair_of_exact_moving_sequences",
+            "derivation": {"version": VERSION, "selection": selection,
                            "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
 
 
@@ -749,11 +756,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["picture_hold"] = (hold["coverage"] if hold is not None else picture_hold_binding.coverage(
             "unavailable", picture_hold_binding.HISTORICAL, source["time_base"]))
     match = hold["match"] if hold is not None else None
-    review = document.get("picture_hold", {}).get("sequence_review", {})
-    if review.get("pair") is None:
-        review = document.get("picture_hold", {}).get("motion_sequence_review", {})
-    pair = review.get("pair")
-    mouth_review = document.get("picture_hold", {}).get("mouth_local_hold", {})
+    picture_reviews = document.get("picture_hold", {})
+    sequence_matches = [picture_reviews[key] for key in ("sequence_review", "motion_sequence_review", picture_sequence.REVERSE_KEY)
+                        if picture_reviews.get(key, {}).get("pair") is not None]
+    mouth_review = picture_reviews.get("mouth_local_hold", {})
     mouth_match = mouth_review.get("match")
     boundary_indices = {i for candidate in chosen for i in candidate.get("face_boundary", {}).get("anchors", {}).values()}
     boundary_indices.update(i for candidate in chosen for i in candidate.get("face_spatial_cut", {}).get("anchors", {}).values())
@@ -764,8 +770,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         wanted.update(scene_indices)
         exact_indices.update(scene_indices)
     endpoints = {match["start_frame_index"], match["end_frame_index"]} if match is not None else set()
-    if pair is not None:
-        endpoints.update(row[2] for row in picture_sequence.endpoints(pair))
+    for review in sequence_matches:
+        endpoints.update(row[2] for row in picture_sequence.endpoints(review["pair"]))
     if mouth_match is not None:
         endpoints.update(mouth_match["anchors"])
     selected = sorted(wanted | endpoints)
@@ -1022,7 +1028,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["packets"].append(packet)
     if match is not None:
         document["packets"].append(_picture_hold_packet(db, store, analysis, set_id, source, match, decoded))
-    if pair is not None:
+    for review in sequence_matches:
         document["packets"].append(_picture_sequence_packet(db, store, analysis, set_id, source, review, decoded))
     if mouth_match is not None:
         audio_input = (result.get("manifest", {}).get("sampling", {}).get("video_audio_evidence") or {}).get("input")

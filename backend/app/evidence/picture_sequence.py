@@ -12,10 +12,14 @@ from app.core.canonical import canonical_hash
 SCHEMA = "chipmunk.video-exact-sequence/1"
 SCAN_SCOPE = "native-sequence-prefix/1"
 PACKET_ID = "VPR01"
+REVERSE_SCHEMA = "chipmunk.video-reverse-sequence/1"
+REVERSE_KEY = "reverse_sequence_review"
+REVERSE_PACKET_ID = "VPR03"
 MIN_UNIQUE = 8
 MIN_SPAN = Fraction(1, 2)
 MAX_STEP = Fraction(1, 8)
 CONTEXT = "Loops, transitions and ordinary editing can repeat a moving sequence. This check carries zero weight in the AI estimate."
+REVERSE_CONTEXT = "Reverse playback can be part of ordinary editing. This check carries zero weight in the AI estimate."
 MOTION_SCHEMA = "chipmunk.video-motion-sequence/1"
 MOTION_EXTENDED_SCHEMA = "chipmunk.video-motion-sequence/2"
 MOTION_SCHEMAS = frozenset({MOTION_SCHEMA, MOTION_EXTENDED_SCHEMA})
@@ -92,17 +96,45 @@ def _pair(ticks, digests, steps, minimum):
     return best
 
 
-def scan(observations, tb: Fraction):
-    """Compare equal pixels and frame spacing in two disjoint continuous occurrences."""
+def _reverse_pair(ticks, digests, steps, minimum):
+    if sum(code is not None and count >= 2 for code, count in Counter(digests).items()) < MIN_UNIQUE:
+        return None
+    best = None
+    n = len(digests)
+    # Corresponding frame indices add up to the same value across a reversed pair.
+    for index_sum in range(2 * MIN_UNIQUE - 1, 2 * n - 2 * MIN_UNIQUE):
+        distinct = set()
+        for left in range((index_sum - 1) // 2, max(-1, index_sum - n), -1):
+            right = index_sum - left
+            code = digests[left]
+            if code is None or code != digests[right]:
+                distinct.clear()
+                continue
+            if not distinct or steps[left + 1] is None or steps[left + 1] != steps[right]:
+                first_end, second_start = left, right
+                distinct.clear()
+            distinct.add(code)
+            if len(distinct) >= MIN_UNIQUE:
+                elapsed = ticks[first_end] - ticks[left]
+                rank = elapsed, -left, -second_start
+                if elapsed >= minimum and (best is None or rank > best[0]):
+                    best = rank, first_end, len(distinct)
+    return best
+
+
+def scan(observations, tb: Fraction, *, reverse=False):
+    """Compare equal pixels and corresponding frame spacing in two disjoint source ranges."""
+    schema = REVERSE_SCHEMA if reverse else SCHEMA
     ticks = [row[0] for row in observations]
     digests = [row[1] if row[0] is not None else None for row in observations]
     minimum = math.ceil(MIN_SPAN / tb)
     steps = _steps(ticks, tb)
     if not _two_spans(ticks, steps, minimum):
-        return {"schema": SCHEMA, "status": "unavailable", "pair": None}
-    best = _pair(ticks, digests, steps, minimum)
+        return {"schema": schema, "status": "unavailable", "pair": None}
+    find_pair = _reverse_pair if reverse else _pair
+    best = find_pair(ticks, digests, steps, minimum)
     if best is None:
-        return {"schema": SCHEMA, "status": "no_match", "pair": None}
+        return {"schema": schema, "status": "no_match", "pair": None}
     (elapsed, neg_start, neg_other), end, unique = best
     start, other = -neg_start, -neg_other
     width = end - start + 1
@@ -114,13 +146,18 @@ def scan(observations, tb: Fraction):
     pair = {"first": spans[0], "second": spans[1], "frame_count": width, "unique_pictures": unique,
             "span_s": float(elapsed * tb), "rgb_sequence_sha256": canonical_hash(digests[start:end + 1]),
             "endpoint_rgb_sha256": [digests[start], digests[end]]}
-    return {"schema": SCHEMA, "status": "matched", "pair": pair}
+    if reverse:
+        pair["order"] = "reverse"
+    return {"schema": schema, "status": "matched", "pair": pair}
 
 
 def observation(pair):
     if "supporting_edge_offsets" in pair:
         return (f"Two separate source ranges contain {pair['frame_count']} visually similar pictures with the same timing. "
                 f"{len(pair['supporting_edge_offsets'])} transitions show matching changes across the picture.")
+    if pair.get("order") == "reverse":
+        return (f"The second source range plays the same {pair['frame_count']} decoded pictures backward, "
+                "with the corresponding frame spacing preserved.")
     return f"Two disjoint sequences contain the same {pair['frame_count']} decoded pictures in the same order and at the same frame spacing."
 
 
@@ -129,11 +166,16 @@ def endpoints(pair):
         span = pair[occurrence]
         for offset, role in enumerate(("start", "end")):
             digests = span["endpoint_rgb_sha256"] if "supporting_edge_offsets" in pair else pair["endpoint_rgb_sha256"]
-            yield occurrence, role, span[f"{role}_frame_index"], span["pts"][0 if offset == 0 else -1], digests[offset]
+            digest_offset = 1 - offset if occurrence == "second" and pair.get("order") == "reverse" else offset
+            yield occurrence, role, span[f"{role}_frame_index"], span["pts"][0 if offset == 0 else -1], digests[digest_offset]
 
 
 def picture_ref(pair, occurrence, role):
-    return f"{occurrence}_{role}_picture" if "supporting_edge_offsets" in pair else f"{role}_picture"
+    if "supporting_edge_offsets" in pair:
+        return f"{occurrence}_{role}_picture"
+    if occurrence == "second" and pair.get("order") == "reverse":
+        role = "end" if role == "start" else "start"
+    return f"{role}_picture"
 
 
 def _require(condition, message):
@@ -146,15 +188,18 @@ def _close(number, expected):
 
 
 def validate(cover, document):
-    packets = [p for p in document["packets"] if p.get("id") in {PACKET_ID, MOTION_PACKET_ID} or "picture_sequence" in p
-               or p.get("claim_scope") == "paired_frame_sequences" or p.get("semantics") in MOTION_SCHEMAS | {SCHEMA}]
-    _require(all(p.get("id") in {PACKET_ID, MOTION_PACKET_ID} for p in packets), "Unexpected repeated sequence packet")
+    packet_ids = {PACKET_ID, MOTION_PACKET_ID, REVERSE_PACKET_ID}
+    packets = [p for p in document["packets"] if p.get("id") in packet_ids or "picture_sequence" in p
+               or p.get("claim_scope") == "paired_frame_sequences" or p.get("semantics") in MOTION_SCHEMAS | {SCHEMA, REVERSE_SCHEMA}]
+    _require(all(p.get("id") in packet_ids for p in packets), "Unexpected repeated sequence packet")
     exact = cover.get("sequence_review")
+    reverse = cover.get(REVERSE_KEY)
     motion = cover.get("motion_sequence_review")
     motion_rate = None
     if exact is not None:
         _require(cover.get("scan_scope") == SCAN_SCOPE and cover["frames_scanned"] == cover["frame_limit"],
                  "Repeated sequence lacks completed coverage")
+    _require(reverse is None or exact is not None, "Reversed sequence lacks a completed native scan")
     if motion is not None:
         source = document["source"]
         schema = motion["schema"]
@@ -173,17 +218,20 @@ def validate(cover, document):
                      "Motion sequence has invalid measured coverage")
     _validate_pair(exact, document["source"], cover["frames_scanned"] if exact is not None else 0,
                    [p for p in packets if p["id"] == PACKET_ID])
+    _validate_pair(reverse, document["source"], cover["frames_scanned"] if reverse is not None else 0,
+                   [p for p in packets if p["id"] == REVERSE_PACKET_ID], reverse=True)
     _validate_pair(motion, document["source"], motion["frames_scanned"] if motion is not None else 0,
                    [p for p in packets if p["id"] == MOTION_PACKET_ID], motion_rate=motion_rate)
 
 
-def _validate_pair(record, source, scanned, packets, *, motion_rate=None):
+def _validate_pair(record, source, scanned, packets, *, motion_rate=None, reverse=False):
     if record is None:
         _require(not packets, "Repeated sequence lacks a recorded scan")
         return
     motion = motion_rate is not None
     schema = record["schema"]
-    _require(schema in MOTION_SCHEMAS if motion else schema == SCHEMA, "Repeated sequence lacks completed coverage")
+    _require(schema in MOTION_SCHEMAS if motion else schema == (REVERSE_SCHEMA if reverse else SCHEMA),
+             "Repeated sequence lacks completed coverage")
     if record["status"] != "matched":
         _require(record["status"] in {"unavailable", "no_match"} and record["pair"] is None and not packets,
                  "Repeated sequence evidence disagrees with its status")
@@ -191,7 +239,8 @@ def _validate_pair(record, source, scanned, packets, *, motion_rate=None):
     pair = record["pair"]
     _require(len(packets) == 1 and packets[0].get("picture_sequence") == pair,
              "Repeated sequence omits the recorded pair")
-    _require(("supporting_edge_offsets" in pair) == motion, "Repeated sequence has the wrong matching method")
+    _require(("supporting_edge_offsets" in pair) == motion and pair.get("order") == ("reverse" if reverse else None),
+             "Repeated sequence has the wrong matching method")
     tb = Fraction(source["time_base"])
     count = pair["frame_count"]
     _require(type(count) is int and MIN_UNIQUE <= count <= scanned // 2,
@@ -220,7 +269,8 @@ def _validate_pair(record, source, scanned, packets, *, motion_rate=None):
                  and _close(span["start_stream_s"], pts[0] * tb) and _close(span["end_stream_s"], pts[-1] * tb),
                  "Repeated sequence has incomplete clock support")
         intervals.append(steps)
-    _require(intervals[0] == intervals[1], "Repeated sequence changes the native frame spacing")
+    _require(intervals[0] == (intervals[1][::-1] if reverse else intervals[1]),
+             "Repeated sequence changes the native frame spacing")
     if motion:
         _require(all(step * tb == Fraction(1, motion_rate) for step in intervals[0]), "Motion sequence uses unsupported frame spacing")
     for span in spans if motion else (pair,):
@@ -231,7 +281,8 @@ def _validate_pair(record, source, scanned, packets, *, motion_rate=None):
     _require(packet.get("claim_scope") == "paired_frame_sequences" and packet.get("semantics") == schema
              and packet.get("evidence_type") == "anomaly" and packet.get("affects_overall_confidence") is False
              and packet.get("signal_refs") == packet.get("finding_ids") == packet.get("exhibit_refs") == []
-             and packet.get("observation") == observation(pair) and packet.get("interpretation") == CONTEXT,
+             and packet.get("observation") == observation(pair)
+             and packet.get("interpretation") == (REVERSE_CONTEXT if reverse else CONTEXT),
              "Repeated sequence is misrepresented as statistical evidence")
     refs = {picture_ref(pair, occurrence, role) for occurrence, role, *_ in endpoints(pair)}
     _require(set(packet["artifacts"]) == refs | {"contact_sheet"}, "Repeated sequence lacks endpoint images")

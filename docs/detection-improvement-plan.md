@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Reversed moving pictures in a single video](video-reversed-sequence-2026-11-14.md)
+  located all eight exact lossless reversals with no flags in 32 ordinary
+  or forward-copy controls. It missed all eight lossy reverse copies. The
+  app supplies exact end frames and source times in the browser, PDF and
+  JSON, with zero weight in the AI estimate.
+
 - [Writing with reordered surrounding sentences](writing-context-order-transfer-2026-11-14.md)
   reduced ordinary flags and lost 20 and 17 previously useful rewrite
   locations on two panels. It remains experimental. The independent

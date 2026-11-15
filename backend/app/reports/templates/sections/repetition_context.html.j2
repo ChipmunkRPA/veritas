@@ -11,8 +11,15 @@
 {% if hold.get('sequence_review') %}
 <h3>Repeated moving sequences</h3>
 {% if hold.sequence_review.status == 'matched' %}<p><a href="#multimedia-evidence-VPR01">Inspect both matching source ranges</a>.</p>
-{% elif hold.sequence_review.status == 'no_match' %}<p>No exact moving sequence repeated within the checked frames.</p>
+{% elif hold.sequence_review.status == 'no_match' %}<p>No exact repeat in the same frame order was found in the checked frames.</p>
 {% else %}<p>The checked footage did not contain two usable ranges of at least half a second.</p>{% endif %}
+{% endif %}
+{% if hold.get('reverse_sequence_review') %}
+<h3>Reversed moving sequences</h3>
+{% if hold.reverse_sequence_review.status == 'matched' %}<p><a href="#multimedia-evidence-VPR03">Inspect both source ranges and their endpoint frames</a>.</p>
+{% elif hold.reverse_sequence_review.status == 'no_match' %}<p>No exact reversed sequence was found in the checked frames.</p>
+{% else %}<p>The checked footage did not contain two usable ranges of at least half a second.</p>{% endif %}
+<p class="caption">Checked the first {{ hold.frames_scanned }} source frames for exact decoded matches. Reverse playback can be part of ordinary editing. JSON pointer <span class="mono">/picture_hold/reverse_sequence_review</span>.</p>
 {% endif %}
 {% if hold.get('motion_sequence_review') %}
 {% set motion = hold.motion_sequence_review %}

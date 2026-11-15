@@ -85,7 +85,9 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
     cover = result["coverage"]
     if sequence_review and 0 < cover["frames_scanned"] == cover["frame_limit"]:
         cover["scan_scope"] = picture_sequence.SCAN_SCOPE
-        cover["sequence_review"] = picture_sequence.scan(observed[:cover["frames_scanned"]], tb)
+        scanned_prefix = observed[:cover["frames_scanned"]]
+        cover["sequence_review"] = picture_sequence.scan(scanned_prefix, tb)
+        cover[picture_sequence.REVERSE_KEY] = picture_sequence.scan(scanned_prefix, tb, reverse=True)
         if motion_profile is not None and cover["frames_scanned"] >= motion_profile[1]:
             opening_limit = motion_profile[1]
             exact_pair = cover["sequence_review"]["pair"]

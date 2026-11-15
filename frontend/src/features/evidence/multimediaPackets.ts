@@ -33,7 +33,7 @@ export interface VideoEvidencePacket extends PacketBase {
     span_s: number; frame_count: number; decoded_rgb_sha256: string; pts: number[] }
   mouth_local_hold?: { frames: [number, number]; box: [number, number, number, number] }
   scene_return?: { schema: 'picture-change-return/1' | 'picture-change-return/2'; start_stream_s: number; end_stream_s: number; tiles: number[] }
-  picture_sequence?: { first: PictureSequenceSpan; second: PictureSequenceSpan; frame_count: number; span_s: number }
+  picture_sequence?: { first: PictureSequenceSpan; second: PictureSequenceSpan; frame_count: number; span_s: number; order?: 'reverse' }
   face_interval?: { start_stream_s: number; end_stream_s: number; lift: number;
     samples: Record<'before' | 'during' | 'after', { frame_index: number; pts: number; score: number }[]> }
   face_sequence?: { start_stream_s: number; end_stream_s: number; response: number;
@@ -66,6 +66,7 @@ export interface VideoEvidenceSet extends SetBase {
     last_frame_index: number | null; last_stream_time_s: number | null; last_pts: number | null; time_base: string;
     reason: string | null; packet_id: string | null; scan_scope?: 'extended-native-prefix/1' | 'native-sequence-prefix/1'; continuity_breaks?: number;
     sequence_review?: { status: 'matched' | 'no_match' | 'unavailable' }
+    reverse_sequence_review?: { status: 'matched' | 'no_match' | 'unavailable' }
     mouth_local_hold?: { status: 'matched' | 'no_match' | 'no_stable_face' | 'unavailable'; frames_scanned: number;
       packet_id: 'VPH02' | null; affects_overall_confidence: false; assessed_window_starts?: number[] }
     motion_sequence_review?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number; parameters: { frame_rate: 20 | 25 }

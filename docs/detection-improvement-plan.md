@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Direct supervision of word ranges](writing-supervised-ranges-2026-11-15.md)
+  increased useful local Qwen report locations from one to five at the
+  tighter point, with five net additional ordinary flags. In 48 new
+  GPT-5.4 report pairs, both useful wider locations also flagged the
+  same sentence on the matched untouched file. The range check and a
+  combined work-level rule remain in evaluation.
+
 - [Earlier-copy speech check for AAC under competing speech](audio-clean-speech-aac-2026-11-15.md)
   localized 55/64 staged replacements at 32 kbps and 57/64 at 64 kbps.
   It highlighted none of 80 unchanged or same-word resampling controls.

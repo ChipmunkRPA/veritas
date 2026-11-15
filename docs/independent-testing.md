@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [direct word-range replay](writing-supervised-ranges-2026-11-15.md#independent-replay)
+recounts contiguous word matches, matched-control alerts and a single
+work-level comparison point for two checks. The report replication adds
+48 publisher works outside the audited earlier report rosters.
+
 The [noisy AAC speech comparison replay](audio-clean-speech-aac-2026-11-15.md#local-app-and-replay)
 recounts exact-clock findings across 240 paired recordings at two AAC
 bitrates and on uncompressed WAV. Genuine splices, resampling, isolated

@@ -38,10 +38,10 @@ from app.engine.detector import (
     UnitScore,
 )
 from app.engine.profiles import SAMPLING
-from app.evidence.audio_binding import SPEECH_SELECTION, VOICE_CLOCK_LIMIT
+from app.evidence.audio_binding import MONO_VOICE_LIMIT, SPEECH_SELECTION, VOICE_CLOCK_LIMIT
 
 NOT_ANALYSABLE = {"absent": "no audio track", "unreadable": "the sound track could not be decoded", "silent": "silent sound track",
-                  "short": "the sound track is shorter than 1 s"}
+                  "short": "the sound track is shorter than 1 s", "cancelled": MONO_VOICE_LIMIT}
 NO_CONTINUOUS_VOICE = "No continuous source interval of at least one second contains enough speech to score."
 NO_ADMITTED_VOICE = "No source window of at least one second contains at least half detected speech."
 

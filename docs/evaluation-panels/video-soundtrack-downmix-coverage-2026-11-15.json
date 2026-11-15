@@ -1,0 +1,343 @@
+{
+  "after": {
+    "jobs_before_payment": 0,
+    "price_usd_cents": 999,
+    "rows": {
+      "aac-control": {
+        "affected": [],
+        "decode_status": "analysed",
+        "guarded": false,
+        "mono_sha256": "8840b6ec002c8f0d418f5365bab4ed16c2790257cb2b4c4cdfc44030c282d6fb",
+        "overall_code": "not_assessable",
+        "signed_report_verified": false,
+        "soundtrack": {
+          "confidence_pct": 93.7,
+          "direction": "original",
+          "headline": "Leaning towards original speech",
+          "limitation": "Local screening estimate calibrated on a balanced reference set of authentic and AI speech. It is not a measured accuracy rate for this recording. Validation used short English speech; heavy background sound can cause errors or an inconclusive result. No per-file confidence interval is established. When voices overlap, the check cannot identify which speaker drove the result. The speech assessment is separate from the visual and audio-picture timing results."
+        },
+        "source_sha256": "950edb448816554824d3bf6f6b93fa3a1a4b5066414377e13fd24d7f19232e72",
+        "voice_window_count": 1
+      },
+      "aac-partial": {
+        "affected": [
+          {
+            "correlation": -0.910798,
+            "downmix": {
+              "attenuation_db": 13.411,
+              "mono_rms_dbfs": -43.067,
+              "strong_attenuation": true
+            },
+            "end_sample": 32000,
+            "left_rms_dbfs": -29.656,
+            "level_gap_db": 0.022,
+            "louder_channel": null,
+            "right_rms_dbfs": -29.678,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "start_sample": 16000,
+            "status": "measured"
+          }
+        ],
+        "decode_status": "analysed",
+        "guarded": true,
+        "mono_sha256": "9cbf1c05a2186e87a2c92d560c3315ee6874f3a26745a24127b4d6d9d54caca3",
+        "overall_code": "not_assessable",
+        "signed_report_verified": true,
+        "soundtrack": {
+          "confidence_pct": null,
+          "direction": "inconclusive",
+          "headline": "Speech unassessed because of stereo cancellation",
+          "limitation": "The stereo channels cancel some sound in the mono input. A recording-wide voice estimate is unavailable."
+        },
+        "source_sha256": "8854fea1a7b8a4fb0f0063339b5c9315ed4f602b8c82d08ecf933e874b50495e",
+        "voice_window_count": 1
+      },
+      "alac-cancelled": {
+        "affected": [
+          {
+            "correlation": -1.0,
+            "downmix": {
+              "attenuation_db": null,
+              "mono_rms_dbfs": -140,
+              "strong_attenuation": true
+            },
+            "end_sample": 32000,
+            "left_rms_dbfs": -24.217,
+            "level_gap_db": 0.0,
+            "louder_channel": null,
+            "right_rms_dbfs": -24.217,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "start_sample": 16000,
+            "status": "measured"
+          }
+        ],
+        "decode_status": "cancelled",
+        "guarded": true,
+        "mono_sha256": "ea0787f65f73b0013d03b359490e3125211b28ad5c1502ffb1544c0ded4192f5",
+        "overall_code": "not_assessable",
+        "signed_report_verified": true,
+        "soundtrack": {
+          "confidence_pct": null,
+          "direction": "inconclusive",
+          "headline": "Speech unassessed because of stereo cancellation",
+          "limitation": "The stereo channels cancel some sound in the mono input. A recording-wide voice estimate is unavailable."
+        },
+        "source_sha256": "00443e836da36ef5242e0afd1821eff54b9b8d83438185be8aad18ece3e3ed41",
+        "voice_window_count": 0
+      },
+      "alac-control": {
+        "affected": [],
+        "decode_status": "analysed",
+        "guarded": false,
+        "mono_sha256": "03c6d1992e71fdf882762ab89b8a2104c4e2405ccde78064971a9a851cb14ba1",
+        "overall_code": "not_assessable",
+        "signed_report_verified": false,
+        "soundtrack": {
+          "confidence_pct": 93.6,
+          "direction": "original",
+          "headline": "Leaning towards original speech",
+          "limitation": "Local screening estimate calibrated on a balanced reference set of authentic and AI speech. It is not a measured accuracy rate for this recording. Validation used short English speech; heavy background sound can cause errors or an inconclusive result. No per-file confidence interval is established. When voices overlap, the check cannot identify which speaker drove the result. The speech assessment is separate from the visual and audio-picture timing results."
+        },
+        "source_sha256": "ff422f42e4c9606e3384ae8f5c47035bda3ec154236c10349d4a6e7d493c9403",
+        "voice_window_count": 1
+      },
+      "alac-partial": {
+        "affected": [
+          {
+            "correlation": -0.982278,
+            "downmix": {
+              "attenuation_db": 20.557,
+              "mono_rms_dbfs": -42.7,
+              "strong_attenuation": true
+            },
+            "end_sample": 32000,
+            "left_rms_dbfs": -22.143,
+            "level_gap_db": 0.031,
+            "louder_channel": null,
+            "right_rms_dbfs": -22.174,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "start_sample": 16000,
+            "status": "measured"
+          }
+        ],
+        "decode_status": "analysed",
+        "guarded": true,
+        "mono_sha256": "03c6d1992e71fdf882762ab89b8a2104c4e2405ccde78064971a9a851cb14ba1",
+        "overall_code": "not_assessable",
+        "signed_report_verified": true,
+        "soundtrack": {
+          "confidence_pct": null,
+          "direction": "inconclusive",
+          "headline": "Speech unassessed because of stereo cancellation",
+          "limitation": "The stereo channels cancel some sound in the mono input. A recording-wide voice estimate is unavailable."
+        },
+        "source_sha256": "eeccf4daad50a609c8a3dfb8fa67d74e38ea7ae90e227c773cfa6178b21fc0bb",
+        "voice_window_count": 1
+      },
+      "alac-silent": {
+        "affected": [],
+        "decode_status": "silent",
+        "guarded": false,
+        "mono_sha256": "ea0787f65f73b0013d03b359490e3125211b28ad5c1502ffb1544c0ded4192f5",
+        "overall_code": "not_assessable",
+        "signed_report_verified": false,
+        "soundtrack": null,
+        "source_sha256": "5b9f8e80265b8923c2e3b79ca432acaaa932ab52b12906250368af2e95184d4d",
+        "voice_window_count": 0
+      }
+    },
+    "schema": "chipmunk.video-downmix-coverage/1"
+  },
+  "before": {
+    "jobs_before_payment": 0,
+    "price_usd_cents": 999,
+    "rows": {
+      "aac-control": {
+        "affected": [],
+        "decode_status": "analysed",
+        "guarded": false,
+        "mono_sha256": "8840b6ec002c8f0d418f5365bab4ed16c2790257cb2b4c4cdfc44030c282d6fb",
+        "overall_code": "not_assessable",
+        "signed_report_verified": false,
+        "soundtrack": {
+          "confidence_pct": 93.7,
+          "direction": "original",
+          "headline": "Leaning towards original speech",
+          "limitation": "Local screening estimate calibrated on a balanced reference set of authentic and AI speech. It is not a measured accuracy rate for this recording. Validation used short English speech; heavy background sound can cause errors or an inconclusive result. No per-file confidence interval is established. When voices overlap, the check cannot identify which speaker drove the result. The speech assessment is separate from the visual and audio-picture timing results."
+        },
+        "source_sha256": "950edb448816554824d3bf6f6b93fa3a1a4b5066414377e13fd24d7f19232e72",
+        "voice_window_count": 1
+      },
+      "aac-partial": {
+        "affected": [
+          {
+            "correlation": -0.910798,
+            "downmix": {
+              "attenuation_db": 13.411,
+              "mono_rms_dbfs": -43.067,
+              "strong_attenuation": true
+            },
+            "end_sample": 32000,
+            "left_rms_dbfs": -29.656,
+            "level_gap_db": 0.022,
+            "louder_channel": null,
+            "right_rms_dbfs": -29.678,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "start_sample": 16000,
+            "status": "measured"
+          }
+        ],
+        "decode_status": "analysed",
+        "guarded": false,
+        "mono_sha256": "9cbf1c05a2186e87a2c92d560c3315ee6874f3a26745a24127b4d6d9d54caca3",
+        "overall_code": "not_assessable",
+        "signed_report_verified": false,
+        "soundtrack": {
+          "confidence_pct": 93.6,
+          "direction": "original",
+          "headline": "Leaning towards original speech",
+          "limitation": "Local screening estimate calibrated on a balanced reference set of authentic and AI speech. It is not a measured accuracy rate for this recording. Validation used short English speech; heavy background sound can cause errors or an inconclusive result. No per-file confidence interval is established. When voices overlap, the check cannot identify which speaker drove the result. The speech assessment is separate from the visual and audio-picture timing results."
+        },
+        "source_sha256": "8854fea1a7b8a4fb0f0063339b5c9315ed4f602b8c82d08ecf933e874b50495e",
+        "voice_window_count": 1
+      },
+      "alac-cancelled": {
+        "affected": [
+          {
+            "correlation": -1.0,
+            "downmix": {
+              "attenuation_db": null,
+              "mono_rms_dbfs": -140,
+              "strong_attenuation": true
+            },
+            "end_sample": 32000,
+            "left_rms_dbfs": -24.217,
+            "level_gap_db": 0.0,
+            "louder_channel": null,
+            "right_rms_dbfs": -24.217,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "start_sample": 16000,
+            "status": "measured"
+          }
+        ],
+        "decode_status": "silent",
+        "guarded": false,
+        "mono_sha256": "ea0787f65f73b0013d03b359490e3125211b28ad5c1502ffb1544c0ded4192f5",
+        "overall_code": "not_assessable",
+        "signed_report_verified": false,
+        "soundtrack": null,
+        "source_sha256": "00443e836da36ef5242e0afd1821eff54b9b8d83438185be8aad18ece3e3ed41",
+        "voice_window_count": 0
+      },
+      "alac-control": {
+        "affected": [],
+        "decode_status": "analysed",
+        "guarded": false,
+        "mono_sha256": "03c6d1992e71fdf882762ab89b8a2104c4e2405ccde78064971a9a851cb14ba1",
+        "overall_code": "not_assessable",
+        "signed_report_verified": false,
+        "soundtrack": {
+          "confidence_pct": 93.6,
+          "direction": "original",
+          "headline": "Leaning towards original speech",
+          "limitation": "Local screening estimate calibrated on a balanced reference set of authentic and AI speech. It is not a measured accuracy rate for this recording. Validation used short English speech; heavy background sound can cause errors or an inconclusive result. No per-file confidence interval is established. When voices overlap, the check cannot identify which speaker drove the result. The speech assessment is separate from the visual and audio-picture timing results."
+        },
+        "source_sha256": "ff422f42e4c9606e3384ae8f5c47035bda3ec154236c10349d4a6e7d493c9403",
+        "voice_window_count": 1
+      },
+      "alac-partial": {
+        "affected": [
+          {
+            "correlation": -0.982278,
+            "downmix": {
+              "attenuation_db": 20.557,
+              "mono_rms_dbfs": -42.7,
+              "strong_attenuation": true
+            },
+            "end_sample": 32000,
+            "left_rms_dbfs": -22.143,
+            "level_gap_db": 0.031,
+            "louder_channel": null,
+            "right_rms_dbfs": -22.174,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "start_sample": 16000,
+            "status": "measured"
+          }
+        ],
+        "decode_status": "analysed",
+        "guarded": false,
+        "mono_sha256": "03c6d1992e71fdf882762ab89b8a2104c4e2405ccde78064971a9a851cb14ba1",
+        "overall_code": "not_assessable",
+        "signed_report_verified": false,
+        "soundtrack": {
+          "confidence_pct": 93.6,
+          "direction": "original",
+          "headline": "Leaning towards original speech",
+          "limitation": "Local screening estimate calibrated on a balanced reference set of authentic and AI speech. It is not a measured accuracy rate for this recording. Validation used short English speech; heavy background sound can cause errors or an inconclusive result. No per-file confidence interval is established. When voices overlap, the check cannot identify which speaker drove the result. The speech assessment is separate from the visual and audio-picture timing results."
+        },
+        "source_sha256": "eeccf4daad50a609c8a3dfb8fa67d74e38ea7ae90e227c773cfa6178b21fc0bb",
+        "voice_window_count": 1
+      },
+      "alac-silent": {
+        "affected": [],
+        "decode_status": "silent",
+        "guarded": false,
+        "mono_sha256": "ea0787f65f73b0013d03b359490e3125211b28ad5c1502ffb1544c0ded4192f5",
+        "overall_code": "not_assessable",
+        "signed_report_verified": false,
+        "soundtrack": null,
+        "source_sha256": "5b9f8e80265b8923c2e3b79ca432acaaa932ab52b12906250368af2e95184d4d",
+        "voice_window_count": 0
+      }
+    },
+    "schema": "chipmunk.video-downmix-coverage/1"
+  }
+}

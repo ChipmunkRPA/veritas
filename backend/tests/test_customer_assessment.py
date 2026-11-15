@@ -5,6 +5,7 @@ from pathlib import Path
 import pytest
 
 from app.engine.customer_assessment import RULE, customer_assessment
+from app.evidence.audio_binding import MONO_VOICE_LIMIT, MONO_VOICE_POLICY
 
 CASES = json.loads((Path(__file__).parent / "fixtures/customer_assessment_cases.json").read_text())
 
@@ -47,6 +48,17 @@ def test_one_video_timing_window_does_not_assess_a_change():
     assert all(got[key] == before[key] for key in ("direction", "confidence_pct", "excluded_channels"))
     timing["metrics"]["steps"] = 1
     assert "too few measured speech windows" not in customer_assessment(result)["scope_note"]
+
+
+def test_video_stereo_cancellation_withholds_only_soundtrack_estimate():
+    case = next(c for c in CASES if c["name"] == "real video excludes checked voice and timing from visual percentage")
+    result = copy.deepcopy(case["input"])
+    before = customer_assessment(result)
+    result["manifest"] = {"sampling": {"video_audio_evidence": {"mono_voice_policy": MONO_VOICE_POLICY}}}
+    after = customer_assessment(result)
+    assert after.pop("soundtrack") == {"direction": "inconclusive", "headline": "Speech unassessed because of stereo cancellation",
+                                      "confidence_pct": None, "limitation": MONO_VOICE_LIMIT}
+    assert after == before
 
 
 @pytest.mark.parametrize("code,p,direction,confidence", [

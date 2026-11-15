@@ -23,7 +23,8 @@ PDF show the affected times next to the channel comparison. The JSON
 windows. Their WAV excerpts and waveform retain the left, right and
 analyzed mono signals. Existing interval scores remain available for
 inspection. The guard applies to the two standalone voice-fusion paths.
-Video still uses its existing soundtrack evidence. This rule covers
+The [video soundtrack version](video-soundtrack-downmix-coverage-2026-11-15.md)
+uses the same stereo measurements. This rule covers
 measurable stereo cancellation on supported clocks and does not measure
 speech masked acoustically in the individual channels.
 

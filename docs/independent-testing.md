@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [video soundtrack coverage replay](video-soundtrack-downmix-coverage-2026-11-15.md#replay)
+compares the same AAC and ALAC soundtracks with and without the coverage
+rule. It checks the measured source ranges, unchanged controls, paid
+workflow and three signed reports. The public receipt needs no weights.
+
 The [Word revision input replay](document-word-writing-input-2026-11-15.md#local-verification)
 compares the accepted and tracked versions of the same document, checks
 their exact detector inputs, and verifies the revision locations and

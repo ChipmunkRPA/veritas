@@ -1434,7 +1434,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "background_reduced_voice_review": background_review,
             "stereo_context": stereo_context,
             "stereo_listening": stereo_listening,
-            "mono_voice_coverage_limit": voice_coverage.get("mono_voice_coverage_limit") if kind == "audio" else None,
+            "mono_voice_coverage_limit": voice_coverage.get("mono_voice_coverage_limit"),
             **stereo_excerpts,
             "repetition_context": copy.deepcopy(stereo_source.get("repetition_context")),
             "repetition_context_pointer": "/audio/repetition_context" if kind == "video" else "/repetition_context",

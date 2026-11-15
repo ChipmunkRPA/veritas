@@ -47,7 +47,7 @@ class SampledFrame:
 
 @dataclass(frozen=True)
 class AudioTrack:
-    status: str  # absent | unreadable | short (< 1 s, no PCM) | silent | analysed
+    status: str  # absent | unreadable | short (< 1 s, no PCM) | silent | cancelled (silent mono) | analysed
     pcm: np.ndarray | None = None
     samples: int = 0
     gate: tuple[tuple[float, float], ...] | None = None  # A-1: speech spans; voice windows at least half inside are scored

@@ -44,9 +44,9 @@ def current_voice_detection_output(output) -> bool:
     return isinstance(output, dict) and output.get("voice_clock_policy") == VOICE_CLOCK_POLICY
 
 
-def exclude_recording_voice(entries: list[dict]) -> list[dict]:
+def exclude_recording_voice(entries: list[dict], *, reason: str = VOICE_CLOCK_LIMIT) -> list[dict]:
     """Keep interval scores available for evidence and omit them from whole-file fusion."""
-    return [{**entry, "status": "not_applicable", "reason": VOICE_CLOCK_LIMIT, "aggregate": None, "unit_scores": []}
+    return [{**entry, "status": "not_applicable", "reason": reason, "aggregate": None, "unit_scores": []}
             if entry.get("family") == "voice" and entry.get("status") == "ok" else entry for entry in entries]
 
 

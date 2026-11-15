@@ -326,12 +326,16 @@ it('shows both source-linked waveforms and playable excerpts for a local soundtr
 })
 
 
-it('shows soundtrack level loss in the voice lane with the original video clock', () => {
+it.each([false, true])('shows soundtrack level loss on the original video clock with coverage limit %s', (limited) => {
   const set = fixture()
   const audio = set.audio!
   audio.status = 'not_assessed'
   audio.reason = 'No voice-check windows were scored.'
   audio.coverage = { ...audio.coverage!, scored_samples: 0, unscored_samples: audio.source.samples!, windows: [] }
+  const reason = 'The stereo channels cancel some sound in the mono input. A recording-wide voice estimate is unavailable.'
+  if (limited) audio.coverage.mono_voice_coverage_limit = {
+    policy: 'destructive-stereo-downmix/1', reason, stereo_window_indices: [0],
+  }
   audio.coverage.stereo_attenuation_overlaps = [{ start_sample: 34000, end_sample: 48000,
     unscored_interval_index: 0, stereo_window_index: 0,
     source_timestamp_ranges: [{ start_sample: 34000, end_sample: 48000, source_start_pts: 120400,
@@ -375,7 +379,11 @@ it('shows soundtrack level loss in the voice lane with the original video clock'
   expect(section.getByText('7.400 s–8.400 s')).toBeTruthy()
   expect(section.getByText('Video playback 2.400 s–3.400 s')).toBeTruthy()
   expect(section.getByText('[118400, 134400) at 1/16000')).toBeTruthy()
-  expect(section.getByText(/do not contribute to the AI assessment/)).toBeTruthy()
+  if (limited) {
+    expect(section.getByText(`${reason} Affected decoded audio 2.000 s–3.000 s.`)).toBeTruthy()
+  } else {
+    expect(section.getByText(/do not contribute to the AI assessment/)).toBeTruthy()
+  }
   const comparison = within(section.getByText('Compare stereo and analyzed mono').closest('details')!)
   expect(comparison.getByText(/Source PTS \[118400, 134400\).*Video playback 2\.400 s–3\.400 s/)).toBeTruthy()
   expect(comparison.getByLabelText('Exact analyzed mono').getAttribute('src')).toBe(

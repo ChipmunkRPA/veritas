@@ -41,6 +41,7 @@ function ChartTip({ active, payload, label }: { active?: boolean; payload?: { pa
 function audioStatus(video: Record<string, unknown> | undefined): string {
   const info = (video as { audio_analysis?: { audio?: string; seconds?: number; p_synthetic?: number } } | undefined)?.audio_analysis
   if (!info) return 'n/a'
+  if (info.audio === 'cancelled') return 'Speech unassessed because of stereo cancellation'
   if (info.audio === 'analysed') return `${info.seconds ?? '?'} s analysed, p(synthetic) ${info.p_synthetic != null ? info.p_synthetic.toFixed(2) : '—'}`
   return info.audio ?? 'n/a'
 }

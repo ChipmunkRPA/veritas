@@ -14,6 +14,7 @@ from app.engine.finding_assessment import finding_assessments
 from app.engine.fusion import abstain
 from app.engine.service_policy import RULE, THRESHOLD, standard_service_policy
 from app.evidence import document_bibliography, document_pdf_visibility, document_word_visibility
+from app.evidence.audio_binding import MONO_VOICE_LIMIT, MONO_VOICE_POLICY
 
 ARTICLE_REFERENCE_SLICE = "document/local-article-v1"
 EMAIL_REFERENCE_SLICE = "document/local-email-v1"
@@ -121,6 +122,10 @@ def _pct(value: float) -> float:
 def _video_soundtrack(result: Mapping[str, Any]) -> dict[str, Any] | None:
     if result.get("kind") != "video" or result.get("status") not in (None, "done"):
         return None
+    record = (result.get("manifest", {}).get("sampling", {}).get("video_audio_evidence") or {})
+    if record.get("mono_voice_policy") == MONO_VOICE_POLICY:
+        return {"direction": "inconclusive", "headline": "Speech unassessed because of stereo cancellation",
+                "confidence_pct": None, "limitation": MONO_VOICE_LIMIT}
     from app.detectors.audio.calibration import NOTE, SHA256
 
     for signal in result.get("signals") or []:

@@ -7,9 +7,16 @@ from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.evidence import audio_packets, stereo_listening, stereo_repetition
 from app.evidence import video_soundtrack_pair_binding as soundtrack_binding
-from app.evidence.audio_binding import SPEECH_SELECTION, VOICE_CLOCK_POLICY
+from app.evidence.audio_binding import (
+    MONO_VOICE_COVERAGE,
+    MONO_VOICE_POLICY,
+    SPEECH_SELECTION,
+    VOICE_CLOCK_POLICY,
+    mono_voice_coverage_limit,
+)
 from app.evidence.audio_gain_repetition_binding import GAIN_INPUT, GAIN_VERSION
 from app.evidence.av_binding import TIMING_WINDOWS
+from app.evidence.stereo_binding import destructive_downmix_windows
 from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import DetectorRun
@@ -53,7 +60,7 @@ def freeze_input(ctx, decoded, *, path=None) -> dict:
                 return {'sha256': art.sha256, 'media_type': media_type, **metadata}
 
             binding[soundtrack_binding.KEY] = pair.describe(source, reading, decoded, secondary, store_media)
-        output = {'input': binding}
+        output = {'input': binding, 'destructive_mono_downmix': bool(destructive_downmix_windows(stereo_context))}
         if stereo_context is not None:
             stereo = register_artefact(db, ctx.store, canonical_json(stereo_context), media_type='application/json',
                                        role='stage_output', created_by='video-audio-stereo/1', analysis_id=ctx.analysis_id)
@@ -75,6 +82,8 @@ def published_record(ctx) -> dict:
               'input': decoded.get('evidence_input'), 'voice_checks': [], 'av_checks': [], 'sound_checks': []}
     if (ctx.outputs.get('detect') or {}).get('voice_clock_policy') == VOICE_CLOCK_POLICY:
         record['voice_clock_policy'] = VOICE_CLOCK_POLICY
+    if decoded.get('destructive_mono_downmix'):
+        record['mono_voice_policy'] = MONO_VOICE_POLICY
     if stereo_sha := (ctx.outputs.get('render') or {}).get('audio_stereo_context_sha256'):
         record['stereo_context_sha256'] = stereo_sha
     with ctx.sessions() as db:
@@ -117,6 +126,7 @@ def build_channel(db, analysis, store, result: dict, *, set_id: str) -> dict:
     content = audio_packets.build_content(db, analysis, store, result,
         record={'input': record['input'], 'checks': record['voice_checks'], 'sound_checks': record.get('sound_checks', []),
                 'voice_clock_policy': record.get('voice_clock_policy'),
+                'mono_voice_policy': record.get('mono_voice_policy'),
                 SPEECH_SELECTION: record.get(SPEECH_SELECTION),
                 'stereo_context_sha256': record.get('stereo_context_sha256')}, set_id=set_id)
     if (pair := record['input'].get(soundtrack_binding.KEY)) is not None:
@@ -181,6 +191,10 @@ def verify_source_content(channel: dict, *, result: dict, store, source_sha256: 
                source=channel['source'], pcm=pcm, mapping=mapping, waveform=audio_packets._chart)
     windows = audio_packets._windows(store, result, {'checks': record['voice_checks']}, binding)
     coverage = channel['coverage']
+    mono_guarded = record.get('mono_voice_policy') == MONO_VOICE_POLICY
+    expected_limit = mono_voice_coverage_limit(channel.get('stereo_context')) if mono_guarded else None
+    if (mono_guarded and not expected_limit) or coverage.get(MONO_VOICE_COVERAGE) != expected_limit:
+        raise audio_packets.PacketIntegrityError('The voice coverage limit differs from the frozen video soundtrack policy')
     union = interval_union((w['start_sample'], w['end_sample']) for w in windows)
     intervals = [{'start_sample': a, 'end_sample': b} for a, b in union]
     if (canonical_hash(coverage['windows']) != canonical_hash(windows) or coverage['scored_intervals'] != intervals

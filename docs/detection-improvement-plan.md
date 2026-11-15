@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Stereo cancellation in video soundtracks](video-soundtrack-downmix-coverage-2026-11-15.md)
+  withholds the soundtrack estimate when the analyzed mono mix loses
+  audible stereo sound. Two partial cancellations stopped leaning original,
+  one entirely cancelled mix stopped appearing as a silent track, and
+  three controls were unchanged. Signed replays retain the source interval.
+
 - [Word tracked wording in writing input](document-word-writing-input-2026-11-15.md)
   projects supported insertions and deletions before scoring. The matched
   tracked and accepted Word files use the same text. Unsupported paragraph

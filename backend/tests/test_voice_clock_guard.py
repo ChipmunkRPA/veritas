@@ -17,6 +17,7 @@ from app.engine.detector import Profile, StageOutputs
 from app.engine.stages import audio, video
 from app.evidence import audio_binding
 from app.evidence.audio_binding import (
+    MONO_VOICE_LIMIT,
     VOICE_CLOCK_LIMIT,
     current_voice_detection_output,
     exclude_recording_voice,
@@ -126,7 +127,8 @@ def test_window_cap_ranks_continuous_pieces_together_and_can_keep_a_short_tail()
     np.testing.assert_array_equal(values, pcm[15999:32000])
 
 
-def test_optional_four_second_check_and_fusion_leave_only_interval_evidence():
+@pytest.mark.parametrize("fusion_limit", [VOICE_CLOCK_LIMIT, MONO_VOICE_LIMIT])
+def test_optional_four_second_check_and_fusion_leave_only_interval_evidence(fusion_limit):
     pcm = np.ones(64000, np.float32)
     track = AudioTrack("analysed", pcm, len(pcm), clock_breaks=(32000,))
     ctx = SimpleNamespace(outputs=StageOutputs(audio=track))
@@ -135,9 +137,10 @@ def test_optional_four_second_check_and_fusion_leave_only_interval_evidence():
     assert check.run(ctx).reason == VOICE_CLOCK_LIMIT
     voice = {"family": "voice", "status": "ok", "aggregate": {"raw": 0.98}, "unit_scores": [{"raw": 0.98}]}
     visual = {"family": "learned-face", "status": "ok", "aggregate": {"raw": 0.75}}
-    limited, kept = exclude_recording_voice([voice, visual])
+    limited, kept = exclude_recording_voice([voice, visual], reason=fusion_limit)
     assert voice["status"] == "ok" and voice["unit_scores"]
     assert limited["status"] == "not_applicable" and limited["aggregate"] is None and not limited["unit_scores"]
+    assert limited["reason"] == fusion_limit
     assert kept is visual
     assert not current_voice_detection_output({"detectors": [voice]})
     assert current_voice_detection_output({"detectors": [voice], "voice_clock_policy": "source-clock-split/1"})

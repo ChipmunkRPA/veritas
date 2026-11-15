@@ -327,9 +327,13 @@ def customer_view(snapshot: ReportSnapshot, out: dict, redact: Callable[[str], s
     out["channel_findings"] = []
     if snapshot.analysis.kind == "video":
         soundtrack = assessment.get("soundtrack")
+        evidence = out.get("evidence") or {}
+        mono_limit = soundtrack and evidence.get("mono_voice_coverage_limit")
         voice_packet_ids = {p["id"] for p in packets if p.get("kind") == "audio"}
-        if soundtrack and any(image.get("anchor") == "multimedia-evidence-voice-waveform" and image.get("uri")
-                              for image in (out.get("evidence") or {}).get("overview") or []):
+        if mono_limit:
+            out["customer_soundtrack_link"] = {"href": "#multimedia-stereo-context", "label": "Stereo soundtrack evidence"}
+        elif soundtrack and any(image.get("anchor") == "multimedia-evidence-voice-waveform" and image.get("uri")
+                                 for image in evidence.get("overview") or []):
             out["customer_soundtrack_link"] = {"href": "#multimedia-evidence-voice-waveform", "label": "Voice waveform"}
         for label, families in [("Visual content", {"F3_whole_image_generation", "V3_synthetic_video"}),
                                 ("Faces", {"V1_face_track", "F10_face"}),
@@ -338,6 +342,8 @@ def customer_view(snapshot: ReportSnapshot, out: dict, redact: Callable[[str], s
             if not members:
                 continue
             if label == "Voice" and soundtrack:
+                if mono_limit:
+                    continue
                 packet_link = next((link for f in members
                     for link in by_id.get(str(f.get("id")), {}).get("support", []) if link["id"] in voice_packet_ids), None)
                 if packet_link:

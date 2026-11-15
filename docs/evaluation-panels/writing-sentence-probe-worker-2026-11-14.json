@@ -1,0 +1,4859 @@
+{
+  "benchmark_sha256": "cb7d602c5e255d7c66df8ba3cdb71a5db5f042b6f8e4524fcb22422b59174676",
+  "checkout": {
+    "jobs_before_payment": 0,
+    "simulated": true,
+    "usd_minor": 999
+  },
+  "results": {
+    "gpt-5.4/ordinary": {
+      "absolute/conservative": 10,
+      "absolute/conservative/combined": 24,
+      "absolute/conservative/wrong_location": 0,
+      "absolute/matched": 17,
+      "absolute/matched/combined": 24,
+      "absolute/matched/wrong_location": 0,
+      "inconclusive": 24,
+      "paired/conservative": 5,
+      "paired/conservative/combined": 24,
+      "paired/conservative/wrong_location": 0,
+      "paired/matched": 12,
+      "paired/matched/combined": 24,
+      "paired/matched/wrong_location": 0,
+      "total": 24,
+      "worker": 24
+    },
+    "gpt-5.4/rewritten": {
+      "absolute/conservative": 7,
+      "absolute/conservative/combined": 14,
+      "absolute/conservative/wrong_location": 5,
+      "absolute/matched": 9,
+      "absolute/matched/combined": 15,
+      "absolute/matched/wrong_location": 8,
+      "inconclusive": 24,
+      "paired/conservative": 5,
+      "paired/conservative/combined": 13,
+      "paired/conservative/wrong_location": 3,
+      "paired/matched": 6,
+      "paired/matched/combined": 14,
+      "paired/matched/wrong_location": 5,
+      "total": 24,
+      "worker": 10
+    },
+    "qwen3-8b/ordinary": {
+      "absolute/conservative": 13,
+      "absolute/conservative/combined": 23,
+      "absolute/conservative/wrong_location": 0,
+      "absolute/matched": 16,
+      "absolute/matched/combined": 23,
+      "absolute/matched/wrong_location": 0,
+      "inconclusive": 24,
+      "paired/conservative": 4,
+      "paired/conservative/combined": 23,
+      "paired/conservative/wrong_location": 0,
+      "paired/matched": 12,
+      "paired/matched/combined": 24,
+      "paired/matched/wrong_location": 0,
+      "total": 24,
+      "worker": 23
+    },
+    "qwen3-8b/rewritten": {
+      "absolute/conservative": 5,
+      "absolute/conservative/combined": 11,
+      "absolute/conservative/wrong_location": 10,
+      "absolute/matched": 5,
+      "absolute/matched/combined": 11,
+      "absolute/matched/wrong_location": 14,
+      "inconclusive": 24,
+      "paired/conservative": 3,
+      "paired/conservative/combined": 11,
+      "paired/conservative/wrong_location": 3,
+      "paired/matched": 5,
+      "paired/matched/combined": 12,
+      "paired/matched/wrong_location": 8,
+      "total": 24,
+      "worker": 10
+    }
+  },
+  "rows": [
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            225,
+            380
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              225,
+              380
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            381,
+            686
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              225,
+              380
+            ],
+            [
+              381,
+              686
+            ],
+            [
+              687,
+              837
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            687,
+            837
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              687,
+              837
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "987733dd4424da4a551b840fbffb0774eb7cb1752b114957e62bcfcd793e2a7e",
+      "sha256": "5981953cbebc79105ed5c9c0601cc71c505baa023df3bfd20f434dc82245e6ae",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            225,
+            393
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              225,
+              393
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            394,
+            699
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              225,
+              393
+            ],
+            [
+              394,
+              699
+            ],
+            [
+              700,
+              850
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            700,
+            850
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              700,
+              850
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "987733dd4424da4a551b840fbffb0774eb7cb1752b114957e62bcfcd793e2a7e",
+      "sha256": "1a3d23ddfc37c1e18d970ea841554260cc5cf261bf193006b76d0ebd1c325b86",
+      "signature_verified": true
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            654,
+            884
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              398,
+              653
+            ],
+            [
+              654,
+              884
+            ],
+            [
+              885,
+              1029
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            885,
+            1029
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              885,
+              1029
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "c44345157d56358ad770b2765e8d168c5d7d9ed02b4cdf800555edd5f8a82e07",
+      "sha256": "185e21df833a4b12dc3215e2cf19ec4e0b38b19ac86edaba57b970f752097ecc",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            398,
+            704
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              398,
+              704
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            705,
+            935
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              398,
+              704
+            ],
+            [
+              705,
+              935
+            ],
+            [
+              936,
+              1080
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            936,
+            1080
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              936,
+              1080
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "c44345157d56358ad770b2765e8d168c5d7d9ed02b4cdf800555edd5f8a82e07",
+      "sha256": "ba0b07ba65ee719a002b2bc5a80cccae0cadc311a92e51fadf9cc7eb4860b2b4",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            205
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              205
+            ],
+            [
+              206,
+              412
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            206,
+            412
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              206,
+              412
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "e22b4a3872d5c762e5848a2eec228ec2262c19a859f7f839ab1e7888c630db23",
+      "sha256": "845b28ff5c79f6574994071e70b8d2947b9a90f856a7e07b766909202af8c95d",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            205
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              205
+            ],
+            [
+              206,
+              412
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            206,
+            412
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              206,
+              412
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "e22b4a3872d5c762e5848a2eec228ec2262c19a859f7f839ab1e7888c630db23",
+      "sha256": "4905ee0ce706640761bf357c1ccfd68e7a871750676d2316fe530b85cf6c3118",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            455,
+            582
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              455,
+              582
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            583,
+            647
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              583,
+              647
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "c87fbe018d4c2d30fa5f97ce9379aa3013feb394a875591bf332ef3b257f11f8",
+      "sha256": "9a420972eadf38738d8477fb72511382fb7ef0c8dd2fa9b397fd149b9c5e45ca",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            598,
+            662
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              598,
+              662
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "c87fbe018d4c2d30fa5f97ce9379aa3013feb394a875591bf332ef3b257f11f8",
+      "sha256": "443dbea7be336ce5875e05a3f66f5af4d28f31328c35e05aec0dc15819ab83b1",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            304,
+            362
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              304,
+              362
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            532,
+            716
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              532,
+              716
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            717,
+            884
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              717,
+              884
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "abe9795c977930f4fdc233db5ecf8bc4e9b7918e2071247a5b9e1f14ac2bb759",
+      "sha256": "869bd062d384b94608a10149356916d1ca50ccdd6aa34c2f82b84a712e8f6c9c",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            304,
+            362
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              304,
+              362
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            526,
+            710
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              526,
+              710
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            711,
+            878
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              711,
+              878
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "abe9795c977930f4fdc233db5ecf8bc4e9b7918e2071247a5b9e1f14ac2bb759",
+      "sha256": "d9255c4c222b298f7de3e6385b74c229fad76c27769d8355706c16ea66a79ea8",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            117,
+            211
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              117,
+              211
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            212,
+            439
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              117,
+              211
+            ],
+            [
+              212,
+              439
+            ],
+            [
+              440,
+              526
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            440,
+            526
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              440,
+              526
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            527,
+            669
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              527,
+              669
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "7c65888ddfaa42d9747d158a1e1b81b16d22977abb2184f853f47f9e3052d231",
+      "sha256": "9c9b31eeb07df95eb0daf47269eaaf684d673617448aa2b50a6e69e5d8339e46",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            117,
+            235
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              117,
+              235
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            236,
+            463
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              117,
+              235
+            ],
+            [
+              236,
+              463
+            ],
+            [
+              464,
+              550
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            464,
+            550
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              464,
+              550
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            551,
+            693
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              551,
+              693
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "7c65888ddfaa42d9747d158a1e1b81b16d22977abb2184f853f47f9e3052d231",
+      "sha256": "88157d57ed88ae0e27a76b7b083e356c4aac6d9c913edc5193eb3be842cd500b",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            124
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              0,
+              124
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            332,
+            491
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              332,
+              491
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            651,
+            747
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              651,
+              747
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "708f42b005362b2745ef3ae9aee65af6d5d371e10d1df8c2f4270296de20db75",
+      "sha256": "8e71118d0327d02fc5667159a297759d0a5d316d35f542a4289842342b73d0ea",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            124
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              0,
+              124
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            332,
+            491
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              332,
+              491
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            650,
+            746
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              650,
+              746
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "708f42b005362b2745ef3ae9aee65af6d5d371e10d1df8c2f4270296de20db75",
+      "sha256": "fe1b67c2d9d383626caf2f87c4a67db110369b902eecbceabaec17e131c2de94",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            108
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              108
+            ],
+            [
+              109,
+              313
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            109,
+            313
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              109,
+              313
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            314,
+            441
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              314,
+              441
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            442,
+            792
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              442,
+              792
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "7af6f0d549094e82932682749f43dc3f173cd65dd6be6d992856f22c4ecb7ee7",
+      "sha256": "58a0e82ebd3a42dcd605a0932f6050fdc618ed44d5a0b75c51e4659123f11ba5",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            108
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              108
+            ],
+            [
+              109,
+              313
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            109,
+            313
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              109,
+              313
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            314,
+            439
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              314,
+              439
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            440,
+            790
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              440,
+              790
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "7af6f0d549094e82932682749f43dc3f173cd65dd6be6d992856f22c4ecb7ee7",
+      "sha256": "efe382b3020a42aef47dca2c479e4f892d81ad29d560ad9611ed550a0495b585",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            203
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              0,
+              203
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            297,
+            418
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              297,
+              418
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "8f8899061aff0ffe6229e967f7cb7fd6d4337c357e24bf2b295bbd1571b3813b",
+      "sha256": "47140376a98914162267056105b467660545c79c4a48273d99f2df04737855a6",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            203
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              0,
+              203
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            297,
+            418
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              297,
+              418
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "8f8899061aff0ffe6229e967f7cb7fd6d4337c357e24bf2b295bbd1571b3813b",
+      "sha256": "3cf5a66347db5bcd8bc3208e0691ad7cca93b81aaaf8d5f07c08022f46796128",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            763,
+            863
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              763,
+              863
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "d138ab3ca13880b8a249197e5f6f97d5798c6bfc393a7c3bcfbf9a9b9f5ac26b",
+      "sha256": "1fd2aa05b6d933f669a3122d9a6ca1f74d71b24e165d8130a3c40aaece6578a2",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            767,
+            867
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              767,
+              867
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "d138ab3ca13880b8a249197e5f6f97d5798c6bfc393a7c3bcfbf9a9b9f5ac26b",
+      "sha256": "1fc28d929a8411601f860653666139c11b956c22dbe33b564b90addb713cc76d",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            188
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              188
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            189,
+            301
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              189,
+              301
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            416,
+            521
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              416,
+              521
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            522,
+            714
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              522,
+              714
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "c57a03dfd021efb6b662884bd47c7cae228d1542b22882abc1834af54ac37b82",
+      "sha256": "f3b8d26841daead093e504b30ac45d3638e344386647764bf1758734cdd6c79c",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            188
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              188
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            189,
+            301
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              189,
+              301
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            411,
+            516
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              411,
+              516
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            517,
+            709
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              517,
+              709
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "c57a03dfd021efb6b662884bd47c7cae228d1542b22882abc1834af54ac37b82",
+      "sha256": "18aba0ff55eec1ec36c581309e56a71ace8886a975dabcb810f9da9095a86818",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            552,
+            675
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              552,
+              675
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "eeb4891903ec494fe6408cbd271f1ff904aebaf11d4309219bf904ba0e5c906b",
+      "sha256": "37c30a44632f72d4560553b7cbc2e6584271b422024aa79bb2c41c64c673342e",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            668,
+            786
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              668,
+              786
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "eeb4891903ec494fe6408cbd271f1ff904aebaf11d4309219bf904ba0e5c906b",
+      "sha256": "d10abffa59ed2541ef5cd2eccbbff0d2367781686be782cb805ecd58bf703337",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            225,
+            618
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              225,
+              618
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "6ea9f45fc37cb104681290b04f73d02683dd5659697e1c3a787ab1c002386e15",
+      "sha256": "7e93384d5179c4afa6a3b08dea52c13ce33ae40d9af432847e4d3c57b7e379e1",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            225,
+            492
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              225,
+              492
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "6ea9f45fc37cb104681290b04f73d02683dd5659697e1c3a787ab1c002386e15",
+      "sha256": "25f0774ce25233c003082987c2757c7e3f03237f4c3036ecd46155325d06719a",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            236
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              236
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            622,
+            752
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              622,
+              752
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "3c588ff34877f4b54e0a6a0d361081aedb76794b9c4db183fae590cefb8f69ac",
+      "sha256": "0c72308901d872e2dc8d6541945d21e5dd7a8763bad9e29afdb8ff4c35c05414",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            236
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              236
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            628,
+            758
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              628,
+              758
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "3c588ff34877f4b54e0a6a0d361081aedb76794b9c4db183fae590cefb8f69ac",
+      "sha256": "2b2d1f20bfbdc9760eeadb18e4a7b8e7da4e77a7647133134f4ec7b3d3c2885a",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            400,
+            515
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              400,
+              515
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "179c91f9c120521222e20e40098b3670dc59e68dcbd03cf1d302bff4d8c2176c",
+      "sha256": "fe2247796b319f8a04d250fa4842a02c4d3c5b2be88ba47cfd6404c01e1e6355",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            400,
+            518
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              400,
+              518
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "179c91f9c120521222e20e40098b3670dc59e68dcbd03cf1d302bff4d8c2176c",
+      "sha256": "1d5dadf1e0e40e8d5e4c7c07f528e5b4e3e09206d86fb5a0193b8d8b011bb88f",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            299,
+            572
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              299,
+              572
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "8cc85c02590373b3423cdc52218ba12791f08fdf7e1a9f6fba0496730544544a",
+      "sha256": "444697eeb44265daabe00a3e13b42ba08fecc049d3892440fdd52febe3bf609c",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            301,
+            574
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              301,
+              574
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "8cc85c02590373b3423cdc52218ba12791f08fdf7e1a9f6fba0496730544544a",
+      "sha256": "bcbc804ad1c7ad487dcc9cd2624f08e24c58fff41e7b75a244d8dd4e110db500",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            136
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              136
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            137,
+            206
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              137,
+              206
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            466,
+            535
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              466,
+              535
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            536,
+            612
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              536,
+              612
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "28713d75a04f7d2f5f15f0bfa179bd7da14be4cd5cea5e9f59cba744bc44d4ee",
+      "sha256": "1b7422372407f190e5fbaf9fa53a17b6b35367b8a45d0e30e2d144276e2d81bf",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            136
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              136
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            137,
+            206
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              137,
+              206
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            480,
+            549
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              480,
+              549
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            550,
+            626
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              550,
+              626
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "28713d75a04f7d2f5f15f0bfa179bd7da14be4cd5cea5e9f59cba744bc44d4ee",
+      "sha256": "680e35dbf0f16604880c300438434950930191201fb39cf7bbbd0ad92e22c761",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            167
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              0,
+              167
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            331,
+            414
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              331,
+              414
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            598,
+            739
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              415,
+              597
+            ],
+            [
+              598,
+              739
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "6f117c340e333e53e926ee15dcd6380b2a09b805d7c676094845d85c67122e97",
+      "sha256": "1f3b26aef51aed2187fd94ad9b8c32f54767b5ae33dd8c593bf926fdcd73b2b8",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            167
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              0,
+              167
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            318,
+            401
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              318,
+              401
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            585,
+            726
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              402,
+              584
+            ],
+            [
+              585,
+              726
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "6f117c340e333e53e926ee15dcd6380b2a09b805d7c676094845d85c67122e97",
+      "sha256": "aa4fc19d077ac1a6fb5382748d9fc3d9e3606d535a089b909edb6bc135a9bbf3",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            561,
+            628
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              561,
+              628
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "9020f0a803bcbe70e7cc9b114cb19ebb81257bffe658357ef1fe79b18a83bc4b",
+      "sha256": "294e330d82f2bf79a4f366ebc354cfab7b8a02e7c6a806aeaff4546e4cbfdb9d",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            479,
+            566
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              479,
+              566
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            567,
+            634
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              567,
+              634
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "9020f0a803bcbe70e7cc9b114cb19ebb81257bffe658357ef1fe79b18a83bc4b",
+      "sha256": "34a64bd8cffef9d5cf1b56472f4f86d4a2428c97934e1bb873a9046038a2beab",
+      "signature_verified": false
+    },
+    {
+      "cards": [],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "1319d087ab90261332d7005f659beeb92d92c60166852a657ae5b7e2a7b2e58e",
+      "sha256": "dc9fd75e1991ed6ed2cbf3f411def07bdae81a204d4fe0dbb6214ab46c9a7d08",
+      "signature_verified": false
+    },
+    {
+      "cards": [],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "1319d087ab90261332d7005f659beeb92d92c60166852a657ae5b7e2a7b2e58e",
+      "sha256": "f02134b0bf4dc4b57b8c14d40de0e826514ed2fde1e4f1b394202ae904180656",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            160,
+            253
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              160,
+              253
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            254,
+            411
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              254,
+              411
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            412,
+            598
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              412,
+              598
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "49f1a43939379fc6630a3c79787eabd418dcbd318cfb9ab56df9aa072a6af1ad",
+      "sha256": "e4d85b88ca3d70f0bfa38fa7b1fb5c8127d9f0e614e475e03ef22747666b44b8",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            160,
+            253
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              160,
+              253
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            254,
+            411
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              254,
+              411
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            412,
+            633
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              412,
+              633
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "49f1a43939379fc6630a3c79787eabd418dcbd318cfb9ab56df9aa072a6af1ad",
+      "sha256": "ba429104d6d1d82f8e6acf39dec98362b9fcdf72787e869dcc4229c4f3c29d9c",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            664,
+            740
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              664,
+              740
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "31f20e5716677155f89ef8e8bb0d7d3e285b27532364365c5d3fea0e6f68e1cf",
+      "sha256": "b9736c84d0cf37c64325f1f682bb51f233df416c2d62acc5299ac60bb29c9f26",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            681,
+            757
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              681,
+              757
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "31f20e5716677155f89ef8e8bb0d7d3e285b27532364365c5d3fea0e6f68e1cf",
+      "sha256": "3e9f79e122503765e64b5b01777db7f7b89e7b7aca13ea5fc3cd4f5ade1478b5",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            221,
+            453
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              143,
+              220
+            ],
+            [
+              221,
+              453
+            ],
+            [
+              454,
+              815
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            454,
+            815
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              221,
+              453
+            ],
+            [
+              454,
+              815
+            ],
+            [
+              816,
+              1047
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            816,
+            1047
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              454,
+              815
+            ],
+            [
+              816,
+              1047
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "2891c1cd5cb5c29782d116d6393226e558c0aac336783d1491851d1f9dbe02b2",
+      "sha256": "8a97f352fed58070752f158cac90c2b6d708879407dccf4cf22758cac6daf449",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            464,
+            825
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              221,
+              463
+            ],
+            [
+              464,
+              825
+            ],
+            [
+              826,
+              1057
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            826,
+            1057
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              464,
+              825
+            ],
+            [
+              826,
+              1057
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "2891c1cd5cb5c29782d116d6393226e558c0aac336783d1491851d1f9dbe02b2",
+      "sha256": "315646f6f146347532119f7a6618d1349b173ccffc5e92425cd2af758925470c",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            613,
+            749
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              338,
+              612
+            ],
+            [
+              613,
+              749
+            ],
+            [
+              750,
+              958
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            750,
+            958
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              613,
+              749
+            ],
+            [
+              750,
+              958
+            ],
+            [
+              959,
+              1121
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "a331e450ec16da1e34494476e35fa2c0ef576190ea8b168d90468c3d4d2ed3c1",
+      "sha256": "077aa03d79901e18d028624f2e90ebed8a9b5a08fbbb888396b6fbac5fca0d05",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            613,
+            749
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              338,
+              612
+            ],
+            [
+              613,
+              749
+            ],
+            [
+              750,
+              971
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            750,
+            971
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              613,
+              749
+            ],
+            [
+              750,
+              971
+            ],
+            [
+              972,
+              1134
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "qwen3-8b",
+      "group": "a331e450ec16da1e34494476e35fa2c0ef576190ea8b168d90468c3d4d2ed3c1",
+      "sha256": "2d0b3ec43140c674fba514cdc4b4cc120cbe6ea9c46bb823ff4e7da4f232c370",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            405,
+            467
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              405,
+              467
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            468,
+            529
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              468,
+              529
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            530,
+            581
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              468,
+              529
+            ],
+            [
+              530,
+              581
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "67a5818eb45b3e61dd8ded99c6a6def0098363ce9363ce548c51aa46a040de09",
+      "sha256": "5f2eb8b1f0c43dedb8c7f5425bb2f260c309af6e5030c2928d6067d84ffc2d77",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            406,
+            468
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              406,
+              468
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            469,
+            530
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              469,
+              530
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            531,
+            582
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              469,
+              530
+            ],
+            [
+              531,
+              582
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "67a5818eb45b3e61dd8ded99c6a6def0098363ce9363ce548c51aa46a040de09",
+      "sha256": "0ad6acf0c95fa7c9c0e9c1b0412e8b7cffe5e605511731159e85edf53a9a81bb",
+      "signature_verified": true
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            257,
+            449
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              257,
+              449
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            450,
+            518
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              450,
+              518
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            519,
+            592
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              519,
+              592
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "01779f9ff11aff6a15af31eb9c8df21ec4559a3d09d9b5a2214d26a5ec3a9a26",
+      "sha256": "48ed603b5e4efb256ab88329d7aff6c5e6fb394efa93ead11373e8144cfa3ee7",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            438,
+            506
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              438,
+              506
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            507,
+            580
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              507,
+              580
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "01779f9ff11aff6a15af31eb9c8df21ec4559a3d09d9b5a2214d26a5ec3a9a26",
+      "sha256": "874bff8a0d87d40a94393a8cffa590942553c548fc63a5301d7d7299a16bbd78",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            170,
+            383
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              170,
+              383
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            474,
+            775
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              474,
+              775
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            776,
+            908
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              776,
+              908
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "93444cf9f6e238cd71add11cb079876eff35581429dca41001669baae183e3cc",
+      "sha256": "64ba85630262cd55d6c0daf265686556c9ebb4515a2b5bf036838114c4af50d0",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            170,
+            383
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              170,
+              383
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            474,
+            775
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              474,
+              775
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            776,
+            908
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              776,
+              908
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "93444cf9f6e238cd71add11cb079876eff35581429dca41001669baae183e3cc",
+      "sha256": "f200dda91bd4873cab70a40269aad3522c3ded60981fc38852da7efaa4391a43",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            819,
+            1000
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              819,
+              1000
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "6c5fca20dec1db7c75027499510b1cabb9893ba130efee3902a374f7fe352237",
+      "sha256": "40138e40705daf39d6134c55b7c26b8606a4a9aa8648290621804fa37f7c8b2d",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            814,
+            995
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              814,
+              995
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "6c5fca20dec1db7c75027499510b1cabb9893ba130efee3902a374f7fe352237",
+      "sha256": "51c591be332d62e2c66798de457865797499fe9949fa6b9f28195a6d837d5e46",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            356,
+            494
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              356,
+              494
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "de6dfc30b7917c806850cbe1bd66f0d38c7145383f6e8766ab55c05df88a7c04",
+      "sha256": "1a7ab5635b77fa94ba36b59297af566c3935dfc1cde4c2a0f8d281dd45d1a9c3",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            356,
+            494
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              356,
+              494
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "de6dfc30b7917c806850cbe1bd66f0d38c7145383f6e8766ab55c05df88a7c04",
+      "sha256": "5af74bc9c88983bf331fd3fa830efa86bf2d6221bdc02abe3c03b76643793505",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            248,
+            308
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              248,
+              308
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            570,
+            700
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              570,
+              700
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "edefcdd872f401141e1a6d040966c5a13367b5375d5bbfffae06901f1cbf4ec2",
+      "sha256": "d813e19ce55ea670a89054d5a6d2c49ae3bbcb576df68adbaaaa3b534980c042",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            248,
+            308
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              248,
+              308
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            569,
+            699
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              569,
+              699
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "edefcdd872f401141e1a6d040966c5a13367b5375d5bbfffae06901f1cbf4ec2",
+      "sha256": "c9cd4802a9e12ef6195051502996bc80afe3e3b847e872803e470b9dfdaa73d5",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            120
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              120
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            260,
+            422
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              121,
+              259
+            ],
+            [
+              260,
+              422
+            ],
+            [
+              423,
+              545
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            423,
+            545
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              423,
+              545
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            546,
+            684
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              423,
+              545
+            ],
+            [
+              546,
+              684
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "5212120d8f1b8888e854daaa72fee223a24fb1f7a1dca01c28a6639c32629ef1",
+      "sha256": "e982f2b1e5c15692da4f20677c4d0b8d568e9e392d23f3e6f511103d70bc864f",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            120
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              120
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            263,
+            425
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              121,
+              262
+            ],
+            [
+              263,
+              425
+            ],
+            [
+              426,
+              548
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            426,
+            548
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              426,
+              548
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            549,
+            687
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              426,
+              548
+            ],
+            [
+              549,
+              687
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "5212120d8f1b8888e854daaa72fee223a24fb1f7a1dca01c28a6639c32629ef1",
+      "sha256": "7018a0cb877bd30ce8c13707394def1bd39c1253643de9b2a59a6a171bc2b0c6",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            142
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              142
+            ],
+            [
+              143,
+              350
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            143,
+            350
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              143,
+              350
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            674,
+            842
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              674,
+              842
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "b6453549bb78007b4aa42373afcf0c35acbf8d4f0ef11fd3d080cd60ecd9c316",
+      "sha256": "1d994639ef3d541c165bf87396670f4f58b82789433604fab3354fea8160cb5f",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            142
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              142
+            ],
+            [
+              143,
+              350
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            143,
+            350
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              143,
+              350
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            670,
+            838
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              670,
+              838
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "b6453549bb78007b4aa42373afcf0c35acbf8d4f0ef11fd3d080cd60ecd9c316",
+      "sha256": "fae3a78ba5e12a881314e960da4ae54c77a30082e6770190be9c84d759e47a55",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            343,
+            468
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              343,
+              468
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            578,
+            755
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              578,
+              755
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "88a3184d4085c1ba1fcba03eba6e22108a7919237ddb1eb799453f6be991aab2",
+      "sha256": "c60aeb94497f8ab4781f9ec2f4274e185c1895b903d560913ffaf2aca24bb8e0",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            343,
+            468
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              343,
+              468
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            469,
+            583
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              469,
+              583
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            584,
+            761
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              584,
+              761
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "88a3184d4085c1ba1fcba03eba6e22108a7919237ddb1eb799453f6be991aab2",
+      "sha256": "483b828f9879acafc4ece912329ed13762a47bf38054de0e6a54b47aef805e0d",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            109
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              109
+            ],
+            [
+              110,
+              315
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            110,
+            315
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              110,
+              315
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            576,
+            734
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              316,
+              575
+            ],
+            [
+              576,
+              734
+            ],
+            [
+              735,
+              888
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            735,
+            888
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              735,
+              888
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "34efbd930242b3328718ffdf2332e4e2218cf83399b0b2b372b25bcc1160ea62",
+      "sha256": "fc2051acdda6e7c15a4f7d5e8a5e4d44a79ba0f8e584e6e1b16e48f73dd61c21",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            109
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              109
+            ],
+            [
+              110,
+              315
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            110,
+            315
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              110,
+              315
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            576,
+            719
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              316,
+              575
+            ],
+            [
+              576,
+              719
+            ],
+            [
+              720,
+              873
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            720,
+            873
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              720,
+              873
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "34efbd930242b3328718ffdf2332e4e2218cf83399b0b2b372b25bcc1160ea62",
+      "sha256": "41dbcaa3f831fe47ee0259882091647c9ba6eb9b62e2f80a6ffbc2186937e5e5",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            428,
+            644
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              428,
+              644
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            645,
+            876
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              428,
+              644
+            ],
+            [
+              645,
+              876
+            ],
+            [
+              877,
+              1256
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            877,
+            1256
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              877,
+              1256
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1257,
+            1471
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              1257,
+              1471
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "7f2b730cc0efcc45c4f262fda0bba51ad424128dc1e2371e5163cdc104f851bc",
+      "sha256": "d4765614d59be124bc37647b6dfa5f877d5e695c45a225bca70e71d2fc3e337a",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            428,
+            645
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              428,
+              645
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            646,
+            877
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              428,
+              645
+            ],
+            [
+              646,
+              877
+            ],
+            [
+              878,
+              1257
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            878,
+            1257
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              878,
+              1257
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            1258,
+            1472
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              1258,
+              1472
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "7f2b730cc0efcc45c4f262fda0bba51ad424128dc1e2371e5163cdc104f851bc",
+      "sha256": "dbc1f0505a89d0df11d1e375b97bf70e37d74a57cca3784e089dca90e8e97c8f",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            533,
+            711
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              533,
+              711
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "7b9cf0fa4180c3abebb27260226b48862f84e68f5cb6365b3ceba4b8aa54e9d1",
+      "sha256": "f7a81d27b9c6a5786914c7cdbbd9bebc4350bc745535374a3a7ce56c3b9e78b1",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            534,
+            712
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              534,
+              712
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "7b9cf0fa4180c3abebb27260226b48862f84e68f5cb6365b3ceba4b8aa54e9d1",
+      "sha256": "517f090e5fc1f9a977e119b72ecfcdc8a0952a0ebd13cc57aee15ff16fa2a982",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            257
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              257
+            ],
+            [
+              258,
+              411
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            258,
+            411
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              258,
+              411
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            412,
+            491
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              258,
+              411
+            ],
+            [
+              412,
+              491
+            ],
+            [
+              492,
+              652
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            492,
+            652
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              492,
+              652
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            653,
+            1100
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              492,
+              652
+            ],
+            [
+              653,
+              1100
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "133c0a81dd5a628d4f66e661ea38e80d090b236c142416fd903551bee01986b7",
+      "sha256": "5eb172e5e83b843809778b8e1b56be97d2f4083deb530f9a49b9a6842bd23663",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            257
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              257
+            ],
+            [
+              258,
+              411
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            258,
+            411
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              258,
+              411
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            412,
+            498
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              412,
+              498
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            499,
+            659
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              499,
+              659
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            660,
+            1107
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              499,
+              659
+            ],
+            [
+              660,
+              1107
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "133c0a81dd5a628d4f66e661ea38e80d090b236c142416fd903551bee01986b7",
+      "sha256": "2d8068bc980586b763e4b23b0d1077bd28f417f86fe08ace3e97ddb2d74a907a",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            360,
+            483
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              360,
+              483
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            657,
+            769
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              657,
+              769
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "ec3fa8f10aabefcf363999ca69a9dc0c3fa5656566baf163057b979882528d24",
+      "sha256": "8178b6acd050bf95ec824b048d8620cd379ca6f013390e95808b847e43627a72",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            651,
+            763
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              651,
+              763
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "ec3fa8f10aabefcf363999ca69a9dc0c3fa5656566baf163057b979882528d24",
+      "sha256": "9cf6eabc9febf2a87a932a594fa0cbe001c6d08a485d3c52ef070fbd50a1fcd3",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            317
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              317
+            ],
+            [
+              318,
+              550
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            318,
+            550
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              318,
+              550
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "f1348c6a16297b1a73e7566ec44091b1bb0d9225960129d209fa6ce16636d4ca",
+      "sha256": "065cc96e93b5e917e20a2a1df03919285320060fd1e66f96e03d0dd107bba946",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            317
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              317
+            ],
+            [
+              318,
+              550
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            318,
+            550
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              318,
+              550
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            670,
+            807
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              670,
+              807
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "f1348c6a16297b1a73e7566ec44091b1bb0d9225960129d209fa6ce16636d4ca",
+      "sha256": "6af2d22ae4da72ddf1473eca9029d0d68dfe0e14f92430ef8d1576fd347d4367",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            474,
+            695
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              474,
+              695
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            696,
+            883
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              474,
+              695
+            ],
+            [
+              696,
+              883
+            ],
+            [
+              884,
+              1093
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "9839966260d14a4e3a92c2a08161471b55fbcbe77c5a06995f6e00af27ba2800",
+      "sha256": "760bb5d669eb244a4f333a1a291cdd471a32b9851dc09860a54755c616a70b87",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            276,
+            467
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              276,
+              467
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            468,
+            689
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              468,
+              689
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            690,
+            877
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              468,
+              689
+            ],
+            [
+              690,
+              877
+            ],
+            [
+              878,
+              1087
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "9839966260d14a4e3a92c2a08161471b55fbcbe77c5a06995f6e00af27ba2800",
+      "sha256": "06bb5dcd8d0a2ef68a5f7a9d3587d0f427d5b1ed538ee6fa4897cb3a4a27d702",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            759,
+            890
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              759,
+              890
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            891,
+            1010
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              891,
+              1010
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "e62090c7a35e2e685701cf2085baf92d1d8e60b59ac7334fa678780f555873c8",
+      "sha256": "d06887613259d70b233035b53c5e0643c9b446b5c7c9cbdaa1c4327c66352c1a",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            892,
+            1011
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              892,
+              1011
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "e62090c7a35e2e685701cf2085baf92d1d8e60b59ac7334fa678780f555873c8",
+      "sha256": "81d8e79d85b9aab0bcf23ec3dba8405d3c6c1663d5c159a6b8b8b9b9794c1a6c",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            131,
+            387
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              130
+            ],
+            [
+              131,
+              387
+            ],
+            [
+              388,
+              509
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            763,
+            870
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              763,
+              870
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "85b8c95b504d32104c6994abc02f00637a83f1d02a412df1338f45cb6fb4e195",
+      "sha256": "33524517b6ee1e4ab9f8762f22303e555c239430b59706858ccf3ff4a74cff22",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            131,
+            387
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              130
+            ],
+            [
+              131,
+              387
+            ],
+            [
+              388,
+              509
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            739,
+            846
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              739,
+              846
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "85b8c95b504d32104c6994abc02f00637a83f1d02a412df1338f45cb6fb4e195",
+      "sha256": "376d116b1b640fdd6828b400130b68b0726e89e6d6ad96d9aeb539e20450dba5",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            329,
+            476
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              329,
+              476
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            750,
+            826
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              750,
+              826
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "8e94904cb5b13e4dfbfaf16e6964932830eb3c34fc40d72961824f88bbaeac84",
+      "sha256": "af1261b1bb4e3501ac77299b501d9841896f0ab28e2281723149706b1d9e7959",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            205,
+            331
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              205,
+              331
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            332,
+            479
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              332,
+              479
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            753,
+            829
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              753,
+              829
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "8e94904cb5b13e4dfbfaf16e6964932830eb3c34fc40d72961824f88bbaeac84",
+      "sha256": "0ec59c9e98fdb09190e369025689f7906063fbb0c326c2cd98908b09d72a8584",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            123
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              123
+            ],
+            [
+              124,
+              193
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            124,
+            193
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              124,
+              193
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            194,
+            405
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              194,
+              405
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "1dc1b87297cbfd3862bed085c88c5156523d7a60d23213aaa75803f59d734b1a",
+      "sha256": "95400b162b53ede894bb8e87ecc75b1a87e3a4b35e9a71e9f5fb12758bae2855",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            123
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              123
+            ],
+            [
+              124,
+              193
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            124,
+            193
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              124,
+              193
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "1dc1b87297cbfd3862bed085c88c5156523d7a60d23213aaa75803f59d734b1a",
+      "sha256": "5a8c479623378d9f9ad2946c12798f8f93758187ebf9e5c25f60b0169e8dc8ca",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            257
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              257
+            ],
+            [
+              258,
+              645
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            258,
+            645
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              258,
+              645
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            646,
+            760
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              646,
+              760
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            761,
+            935
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              761,
+              935
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            936,
+            1208
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              761,
+              935
+            ],
+            [
+              936,
+              1208
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "d897cc26771c615e673d5fac683cc80d601309642e284dcbf062688daf686e07",
+      "sha256": "1a92faba70094f7083a3c9a9a55aa6dd47282f55991a11adcf1fe008810ff7a7",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "scored_context",
+          "focus": [
+            0,
+            257
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              257
+            ],
+            [
+              258,
+              645
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            258,
+            645
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              258,
+              645
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            646,
+            760
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              646,
+              760
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            761,
+            932
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              761,
+              932
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            933,
+            1205
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              761,
+              932
+            ],
+            [
+              933,
+              1205
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "d897cc26771c615e673d5fac683cc80d601309642e284dcbf062688daf686e07",
+      "sha256": "e696f31ccca47b5e911e2accad95abe509cf176b3efeeca52c5210e7c623a66b",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            848,
+            1048
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              848,
+              1048
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "a0838d41b3075d44c122033f0370f24fda4570a41540c36f1dcbd5e54f7de53a",
+      "sha256": "b91eb92e92a31f08ce9f061ca8d264ac5c5bd857af7bc47c1d0820155442d0bc",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            851,
+            1051
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              851,
+              1051
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "a0838d41b3075d44c122033f0370f24fda4570a41540c36f1dcbd5e54f7de53a",
+      "sha256": "18b46096193b2cffb8c5c14fc074a8fbf9a74759de6dd63b1806bf06edfea904",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            73
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              0,
+              73
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            355,
+            471
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              355,
+              471
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "e73f991c9483f2b4301bd29331a0e81da6879b33917a1f040e95283a4170a4e9",
+      "sha256": "e6d6dfa9c857519c5fc0281b23c36dcdad01695f46773847ac5cf1261eb9cb8f",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            73
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              0,
+              73
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            327,
+            443
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              327,
+              443
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "e73f991c9483f2b4301bd29331a0e81da6879b33917a1f040e95283a4170a4e9",
+      "sha256": "07098ab927c4e99a513b1da7c1a6585a9c51b053dc0ad3cc1eb2c2d5bfc517bf",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            123
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              123
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            452,
+            632
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              452,
+              632
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            633,
+            744
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              452,
+              632
+            ],
+            [
+              633,
+              744
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "original",
+      "group": "4f52fdc250defe59574675b1e622f89a8d0189c8e97a25dfc2eb712e19a13666",
+      "sha256": "571536c26ea879b1d866732c6691a8d01d350c3d1289ff45c6f171b15c8fd1a5",
+      "signature_verified": false
+    },
+    {
+      "cards": [
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            0,
+            123
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              0,
+              123
+            ]
+          ]
+        },
+        {
+          "basis": "ratio_reduction",
+          "focus": [
+            452,
+            626
+          ],
+          "primary_support": false,
+          "spans": [
+            [
+              452,
+              626
+            ]
+          ]
+        },
+        {
+          "basis": "scored_context",
+          "focus": [
+            627,
+            738
+          ],
+          "primary_support": true,
+          "spans": [
+            [
+              452,
+              626
+            ],
+            [
+              627,
+              738
+            ]
+          ]
+        }
+      ],
+      "checks": {
+        "passage_classifier": "completed",
+        "writing_pattern_ratio": "completed"
+      },
+      "decision": "inconclusive",
+      "family": "gpt-5.4",
+      "group": "4f52fdc250defe59574675b1e622f89a8d0189c8e97a25dfc2eb712e19a13666",
+      "sha256": "d3290484004debf4f08c4326a47117f4242462afba338d93de33db55fb3203f7",
+      "signature_verified": false
+    }
+  ],
+  "schema": "chipmunk.writing-sentence-probe-worker/1"
+}

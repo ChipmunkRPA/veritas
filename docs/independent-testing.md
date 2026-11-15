@@ -13,6 +13,13 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [sentence-head replay](writing-sentence-probe-2026-11-14.md#replay)
+recounts exact rewrite locations and ordinary flags across held works and
+the dated journal revision panel. It reconstructs the cutoffs from separate
+genuine excerpts and reports results by genre and generator. A separate
+receipt compares the same government excerpts with the actual Full worker,
+including 96 simulated checkouts and two source-bound report verifications.
+
 The [single-track timing replay](video-lip-offset-path-2026-11-14.md#replay)
 compares 20 local shifts with 100 held ordinary views, including rendered
 short camera-cut controls and dubbed sound. The report regression verifies

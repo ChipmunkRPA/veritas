@@ -60,6 +60,19 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Sentence heads for a single rewritten passage](writing-sentence-probe-2026-11-14.md)
+  compared two new heads on 73 held pairs and 74 dated journal excerpts.
+  In the actual Full worker, the tighter paired head added four useful
+  government-report locations. Existing reports already flagged
+  47/48 ordinary excerpts, and the new head alone flagged 9/48 while
+  locating 8/48 known rewrites. Both heads stay offline.
+
+- [Matching speech waveform under background noise](audio-reference-waveform-2026-11-14.md)
+  locates 40/81 staged noisy splices with an earlier clean copy, up from zero.
+  The combined checks held at 4/312 ordinary comparison flags. The same
+  location, separate source clocks and waveforms appear in the browser and
+  exports. The earlier-copy trial contributes zero AI-confidence weight.
+
 - [Temporary lag within a continuous shot](video-lip-offset-path-2026-11-14.md)
   measured five of 20 held local timing shifts and located none. It added
   no alerts on 100 ordinary controls and stays offline. The app and PDF

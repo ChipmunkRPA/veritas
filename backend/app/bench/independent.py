@@ -261,6 +261,35 @@ def _paired_regions(strata: dict, prior: dict, *, iterations: int, seed: int) ->
     return differences
 
 
+def _location_outcome(row, minimum_iou, minimum_recall):
+    location = row["localization"]
+    if location["status"] != "ok":
+        return "unassessed"
+    if not location["reported_units"]:
+        return "no_region"
+    if not row["label"]:
+        return "highlighted_control"
+    metrics = _region_pair_values(row)
+    if metrics["positive_iou"] >= minimum_iou and metrics["positive_recall"] >= minimum_recall:
+        return "useful_location"
+    return "region_below_overlap_rule"
+
+
+def _location_transitions(strata, prior, operating_point):
+    comparisons = []
+    for (modality, condition, label), rows in sorted(strata.items()):
+        planned = [row for row in rows if "localization_truth" in row]
+        if not planned:
+            continue
+        transitions = Counter((_location_outcome(prior[row["id"]], *operating_point),
+                               _location_outcome(row, *operating_point)) for row in planned)
+        comparisons.append({"modality": modality, "condition": condition, "label": label,
+                            "planned": len(planned), "source_groups": len({row["group"] for row in planned}),
+                            "transitions": [{"baseline": before, "candidate": after, "cases": count}
+                                            for (before, after), count in sorted(transitions.items())]})
+    return {"minimum_iou": operating_point[0], "minimum_recall": operating_point[1], "strata": comparisons}
+
+
 def summarize(manifest: dict, confirmation: dict, lock: dict, *, require_freeze_commitment: bool = False) -> dict:
     rows = audit_receipt(manifest, confirmation, "confirmation")
     if lock.get("manifest_sha256") != digest(manifest) or lock.get("schema") != SCHEMA:
@@ -312,10 +341,13 @@ def summarize(manifest: dict, confirmation: dict, lock: dict, *, require_freeze_
 
 def compare(manifest: dict, baseline: dict, baseline_lock: dict, candidate: dict,
             candidate_lock: dict, *, iterations: int = 2000, seed: int = 20261105,
-            require_freeze_commitment: bool = False) -> dict:
+            require_freeze_commitment: bool = False, useful_location: tuple[float, float] | None = None) -> dict:
     """Matched all-source alert differences, with source-group bootstrap intervals."""
     if type(iterations) is not int or iterations < 100:
         raise ValueError("Use at least 100 bootstrap replicates")
+    if useful_location is not None and (len(useful_location) != 2 or any(
+            type(value) not in (int, float) or not 0 < value <= 1 for value in useful_location)):
+        raise ValueError("Use a minimum location IoU and recall each greater than zero and at most one")
     old = summarize(manifest, baseline, baseline_lock, require_freeze_commitment=require_freeze_commitment)
     new = summarize(manifest, candidate, candidate_lock, require_freeze_commitment=require_freeze_commitment)
     prior = {r["id"]: r for r in audit_receipt(manifest, baseline, "confirmation")}
@@ -346,4 +378,6 @@ def compare(manifest: dict, baseline: dict, baseline_lock: dict, candidate: dict
                               "Intervals describe this source panel and do not resolve unknown training overlap or domain shift."}
     if regional := _paired_regions(strata, prior, iterations=iterations, seed=seed):
         result["paired_localization_differences"] = regional
+    if useful_location is not None:
+        result["paired_location_outcomes"] = _location_transitions(strata, prior, useful_location)
     return result

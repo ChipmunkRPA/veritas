@@ -471,7 +471,7 @@ def test_paired_localization_averages_variants_and_counts_assessment_losses():
             row["localization"].update(reported_units=10, overlap_units=10)
         if row["id"] == "other":
             row["localization"] = {"status": "failed", "reason": "Lost source mapping"}
-    result = review.compare(manifest, old, old_lock, new, new_lock, iterations=100)
+    result = review.compare(manifest, old, old_lock, new, new_lock, iterations=100, useful_location=(.30, .50))
     comparisons = {row["metric"]: row for row in result["paired_localization_differences"]}
     iou = comparisons["positive_iou"]
     assert (iou["planned"], iou["source_groups"]) == (4, 2)
@@ -481,6 +481,14 @@ def test_paired_localization_averages_variants_and_counts_assessment_losses():
     coverage = comparisons["localization_coverage"]
     assert coverage["candidate_minus_baseline"] == -.5
     assert coverage["case_transitions"] == {"increased": 0, "decreased": 1, "tied": 3}
+    location = result["paired_location_outcomes"]
+    assert (location["minimum_iou"], location["minimum_recall"]) == (.30, .50)
+    assert location["strata"] == [{"modality": "image", "condition": "clean", "label": 1,
+                                    "planned": 4, "source_groups": 2, "transitions": [
+        {"baseline": "no_region", "candidate": "no_region", "cases": 1},
+        {"baseline": "no_region", "candidate": "useful_location", "cases": 2},
+        {"baseline": "useful_location", "candidate": "unassessed", "cases": 1},
+    ]}]
 
 
 def test_raw_response_auc_handles_ties_and_omits_no_cases_from_counts():

@@ -13,6 +13,10 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [writing context-order replay](writing-context-order-transfer-2026-11-14.md#replay-and-independent-evaluation)
+rebuilds calibrated sentence rankings across matched news and abstract
+excerpts. It counts losses and gains against the existing location rule.
+
 The [downsized WebP earlier-copy replay](image-reference-resized-webp-2026-11-14.md#local-app-and-independent-replay)
 rebuilds downscaled downloads, confirms the measured mask on the submitted
 pixel grid and verifies the corresponding original crop at native resolution.
@@ -2930,6 +2934,15 @@ declared source group and resamples source groups for its intervals. It reports
 individual case transition counts alongside the group-weighted difference.
 Read the coverage difference with overlap and false regions so a missing
 source mapping cannot be mistaken for an improvement.
+
+Add `--useful-location 0.30 0.50` to `compare` to count whether each method
+met a minimum 0.30 intersection over union and 0.50 recall. Declare the
+overlap rule before examining held outcomes. The `paired_location_outcomes`
+section counts transitions between useful locations, below-rule regions,
+assessed files with no region, and unassessed files. Ordinary controls
+have their own highlighted outcome. The aggregate counts cases and source
+groups while omitting individual coordinates.
+
 For an image with 1,000 source pixels and a 100-pixel truth mask, a report
 covering 80 pixels with 60 pixels inside the mask contributes an IoU of
 60 / 120. Keep the exact region geometry in your private evaluation records.

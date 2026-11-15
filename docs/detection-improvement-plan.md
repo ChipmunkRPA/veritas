@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Writing with reordered surrounding sentences](writing-context-order-transfer-2026-11-14.md)
+  reduced ordinary flags and lost 20 and 17 previously useful rewrite
+  locations on two panels. It remains experimental. The independent
+  comparison now counts useful-location gains, losses and unassessed
+  outcomes across all four media types.
+
 - [Earlier-copy evidence after downsizing to WebP](image-reference-resized-webp-2026-11-14.md)
   located 273/288 held edits, including 138/144 small edits. All 216
   unchanged or recompression-only deliveries had no highlights. The local

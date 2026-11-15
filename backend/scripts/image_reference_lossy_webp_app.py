@@ -19,6 +19,26 @@ ROLES = ("sharp", "prior_webp", "translated")
 
 
 def examples(args, receipt):
+    if args.resized:
+        from scripts import image_reference_resized_webp_transfer as benchmark
+
+        profile = "bicubic_webp70"
+        roles = ("small_sharp", "prior_webp", "translated")
+        rows = receipt["rows"]
+        measured = {(r["case"]["source"], r["case"]["role"]): r for r in rows if r["case"]["profile"] == profile}
+        chosen = next(source for (source, role), row in measured.items() if role == "small_sharp"
+                      and useful((row["selected"], row["overlap"]), row["case"]["changed"])
+                      and measured[source, "prior_webp"]["status"] == "comparable" and not measured[source, "prior_webp"]["selected"]
+                      and measured[source, "translated"]["status"] != "comparable")
+        inputs = {}
+        for case, ref, upload, truth in benchmark.deliveries(args, "held", identity=chosen):
+            role = case["role"]
+            if role in roles and profile == case["profile"]:
+                row = measured[chosen, role]
+                assert case == row["case"]
+                inputs[role] = (row, ref, upload, truth)
+        assert set(inputs) == set(roles)
+        return inputs
     rows = receipt["rows"]
     by_source = {(row["case"]["source"], row["case"]["role"]): row for row in rows if row["case"]["profile"] == "fast_q82"}
     source = next(row["case"]["source"] for row in rows if row["case"]["profile"] == "fast_q82" and row["case"]["role"] == "sharp"
@@ -36,17 +56,17 @@ def examples(args, receipt):
     raise ValueError("Held app proof cases were incomplete")
 
 
-def verify(payload, row, ref, submitted, folder, truth):
+def verify(payload, row, ref, submitted, folder, truth, *, resized):
     import numpy as np
     import pymupdf
     from PIL import Image
 
-    from app.detectors.image import reference_lossy_webp
+    from app.detectors.image import reference_lossy_webp, reference_lossy_webp_resize
     from scripts.review_image_reference_export import review
     from scripts.verify_multimedia_exports import scan
 
     comparison = payload["comparison"]
-    assert comparison["schema"] == reference_lossy_webp.SCHEMA
+    assert comparison["schema"] == (reference_lossy_webp_resize.SCHEMA if resized else reference_lossy_webp.SCHEMA)
     assert comparison["status"] == row["status"] and comparison["affects_overall_confidence"] is False
     scan(str(comparison))
     pdf = base64.b64decode(payload.pop("pdf"), validate=True)
@@ -58,11 +78,13 @@ def verify(payload, row, ref, submitted, folder, truth):
         pages = [page.get_text() for page in report]
         scan("\n".join(pages))
         if regions := comparison["regions"]:
-            assert "allows for lossy WebP compression" in pages[0] and len(regions) + 1 == len(pages)
+            summary = "proportional downsampling and WebP compression" if resized else "allows for lossy WebP compression"
+            assert summary in pages[0] and len(regions) + 1 == len(pages)
             mask_bytes = base64.b64decode(payload["pngs"][comparison["mask"]["file"]], validate=True)
             with Image.open(io.BytesIO(mask_bytes)) as image:
                 mask = np.asarray(image) == 255
-            assert sha(mask.tobytes()) == row["selected_sha256"] and int((mask & truth).sum()) == row["overlap"]
+            field = "selection_sha256" if resized else "selected_sha256"
+            assert sha(mask.tobytes()) == row[field] and int((mask & truth).sum()) == row["overlap"]
             for text, region in zip(pages[1:], regions, strict=True):
                 assert all(region[role]["sha256"] in text for role in ("reference_crop", "submitted_crop", "submitted_overlay"))
         else:
@@ -75,7 +97,12 @@ def verify(payload, row, ref, submitted, folder, truth):
 
 def run(args):
     receipt = read(args.receipt)
-    assert held.readout(receipt["rows"]) == receipt["outcomes"]
+    if args.resized:
+        from scripts import image_reference_resized_webp_transfer as benchmark
+
+        benchmark.verify(receipt)
+    else:
+        assert held.readout(receipt["rows"]) == receipt["outcomes"]
     configure(args.output, ROOT)
     os.environ.update(VERITAS_ENVIRONMENT="dev", VERITAS_IMAGE_REFERENCE_COMPARISON_ENABLED="true",
                       VERITAS_IMAGE_REFERENCE_LOSSY_WEBP="true")
@@ -107,8 +134,7 @@ def run(args):
             db.flush()
             client.headers["X-API-Key"], _ = auth.issue_api_key(db, owner)
             db.commit()
-        for role in ROLES:
-            row, earlier, upload, truth = fixtures[role]
+        for role, (row, earlier, upload, truth) in fixtures.items():
             folder = args.output / role
             folder.mkdir()
             ref, submitted = folder / "earlier.png", folder / "submitted.webp"
@@ -119,7 +145,7 @@ def run(args):
             endpoint = f"/api/v2/analyses/{aid}/image-reference-comparison"
             assert body(client.get(endpoint))["available"]
             response = body(client.post(endpoint, files={"reference": (ref.name, earlier, "image/png")}, data={"include_pdf": "true"}))
-            verification[role] = verify(response, row, ref, submitted, folder, truth)
+            verification[role] = verify(response, row, ref, submitted, folder, truth, resized=args.resized)
             assert result_hash(aid) == before
     save(args.output / "receipt.json", {"results": verification, "paid_analyses": len(stub.sessions), "unpaid_jobs": 0,
                                         "overall_analysis_preserved": True})
@@ -129,6 +155,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
     parser.add_argument("receipt", type=Path)
+    parser.add_argument("--resized", action="store_true")
     parser.add_argument("--development-sources", type=Path, required=True)
     data = ROOT / "backend/data/independent-evaluation"
     parser.add_argument("--native", type=Path, default=data / "native-regional-serving-v47")

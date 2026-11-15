@@ -20,6 +20,7 @@ from app.detectors.image import (
     reference_jpeg_detail_loss,
     reference_lossless_webp,
     reference_lossy_webp,
+    reference_lossy_webp_resize,
     reference_png_exact_resize,
     reference_png_opacity,
     reference_png_orientation,
@@ -170,7 +171,11 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                                     else (_oriented_rgb(original), _oriented_rgb(questioned)))
         else:
             reference, submitted = _oriented_rgb(original), _oriented_rgb(questioned)
-        if allow_lossy_webp and reference_lossy_webp.supported(questioned, after):
+        if (allow_lossy_webp and allow_proportional_resize and original.size != questioned.size
+                and reference_lossy_webp.supported(questioned, after, minimum_side=reference_lossy_webp_resize.MIN_SIDE)):
+            schema = reference_lossy_webp_resize.SCHEMA
+            result, mask = reference_lossy_webp_resize.compare(original, questioned, before, after)
+        elif allow_lossy_webp and reference_lossy_webp.supported(questioned, after):
             schema = reference_lossy_webp.SCHEMA
             result, mask = reference_lossy_webp.compare(original, questioned, before, after)
         elif webp:
@@ -251,6 +256,8 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                                                        if result["status"] == "comparable" else reference_lossless_webp.LIMITATION),
                       reference_lossy_webp.SCHEMA: (reference_lossy_webp.INTERPRETATION
                                                    if result["status"] == "comparable" else reference_lossy_webp.LIMITATION),
+                      reference_lossy_webp_resize.SCHEMA: (reference_lossy_webp_resize.INTERPRETATION
+                                                          if result["status"] == "comparable" else reference_lossy_webp_resize.LIMITATION),
                       reference_png_opacity.SCHEMA: (reference_png_opacity.INTERPRETATION if result["status"] == "comparable"
                                                     else reference_png_opacity.UNASSESSED_INTERPRETATION),
                       **dict.fromkeys(reference_jpeg_detail_loss.SCHEMAS, reference_jpeg_detail_loss.INTERPRETATION)}

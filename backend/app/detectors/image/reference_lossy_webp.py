@@ -26,7 +26,7 @@ INTERPRETATION = ("Marked areas have local brightness differences after filterin
                   "cause these differences. The comparison carries zero weight in the AI assessment.")
 
 
-def webp_size(data: bytes) -> tuple[int, int] | None:
+def webp_size(data: bytes, *, minimum_side: int = 512) -> tuple[int, int] | None:
     """Recognize a simple opaque VP8 key picture and check its native size."""
     if (len(data) < 31 or data[:4] != b"RIFF" or data[8:16] != b"WEBPVP8 "
             or int.from_bytes(data[4:8], "little") != len(data) - 8 or data[23:26] != b"\x9d\x01\x2a"):
@@ -39,14 +39,14 @@ def webp_size(data: bytes) -> tuple[int, int] | None:
             or tag & 1 or version > 3 or not tag & 16 or not 0 < partition < size - 10):
         return None
     w, h = (int.from_bytes(data[index:index + 2], "little") for index in (26, 28))
-    if not 512 <= min(w, h) <= max(w, h) <= 1024:
+    if not minimum_side <= min(w, h) <= max(w, h) <= 1024:
         return None
     return w, h
 
 
-def supported(image, body):
+def supported(image, body, *, minimum_side: int = 512):
     return (image.format == "WEBP" and image.mode == "RGB" and getattr(image, "n_frames", 1) == 1
-            and webp_size(body) == image.size and image.getexif().get(274, 1) == 1)
+            and webp_size(body, minimum_side=minimum_side) == image.size and image.getexif().get(274, 1) == 1)
 
 
 def _smooth(rgb):
@@ -76,15 +76,21 @@ def _framing(reference, difference):
             "earlier_rgb_sha256": hashlib.sha256(reference.tobytes()).hexdigest()}
 
 
+def unavailable():
+    return {"status": UNASSESSED, "regions": [], "affects_overall_confidence": False}, None
+
+
 def compare(earlier, submitted, earlier_bytes, submitted_bytes):
-    inaccessible = {"status": UNASSESSED, "regions": [], "affects_overall_confidence": False}
     if (not reference_lossless_webp.supported(earlier, earlier_bytes, png=True) or not supported(submitted, submitted_bytes)
             or earlier.size != submitted.size):
-        return inaccessible, None
-    reference, questioned = np.asarray(earlier), np.asarray(submitted)
+        return unavailable()
+    return compare_pixels(np.asarray(earlier), np.asarray(submitted))
+
+
+def compare_pixels(reference, questioned):
     shift, response = reference_compare._alignment(reference, questioned)
     if response < reference_compare.MIN_REGISTRATION_RESPONSE or max(map(abs, shift)) > reference_compare.MAX_NATIVE_SHIFT:
-        return inaccessible, None
+        return unavailable()
     delta = _smooth(questioned) - _smooth(reference)
     offset = np.median(delta[::8, ::8], axis=(0, 1))
     weighted = np.asarray(METHOD["brightness_weights"], np.float32)
@@ -93,7 +99,7 @@ def compare(earlier, submitted, earlier_bytes, submitted_bytes):
     changed = difference > METHOD["region_residual"]
     background = 1. - float(changed.mean())
     if proof is None or background < reference_compare.MIN_BACKGROUND_FRACTION:
-        return inaccessible, None
+        return unavailable()
     opened = cv2.morphologyEx(changed.astype(np.uint8), cv2.MORPH_OPEN,
                              cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5, 5)))
     regions, mask, omitted = reference_compare._regions(opened, round(changed.size * METHOD["minimum_region_area_fraction"]))

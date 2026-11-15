@@ -78,11 +78,13 @@ def _check_image(path: Path, *, allow_lossy_webp: bool = False) -> None:
                 return
             if allow_lossy_webp:
                 from app.detectors.image.reference_lossy_webp import supported
+                from app.detectors.image.reference_lossy_webp_resize import MIN_SIDE
 
-                if supported(image, body):
+                if supported(image, body, minimum_side=MIN_SIDE):
                     return
-            kind = "WebP" if allow_lossy_webp else "lossless WebP"
-            raise ProblemError(422, "Unsupported WebP", f"Use a simple opaque {kind} with each side between 512 and 1,024 pixels.")
+            scope = ("Use a simple opaque WebP. Downsampled lossy comparisons require each side to be 384 to 1,024 pixels."
+                     if allow_lossy_webp else "Use a simple opaque lossless WebP with each side between 512 and 1,024 pixels.")
+            raise ProblemError(422, "Unsupported WebP", scope)
 
 
 def _unavailable() -> ProblemError:

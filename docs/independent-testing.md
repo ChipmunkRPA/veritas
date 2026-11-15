@@ -13,6 +13,10 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [downsized WebP earlier-copy replay](image-reference-resized-webp-2026-11-14.md#local-app-and-independent-replay)
+rebuilds downscaled downloads, confirms the measured mask on the submitted
+pixel grid and verifies the corresponding original crop at native resolution.
+
 The [video timing-anchor replay](video-mouth-clock-context-2026-11-14.md#replay)
 recounts local dubs with and without soundtrack shifts and verifies the
 actual audio samples, frame clocks, and witness crops from both panels.

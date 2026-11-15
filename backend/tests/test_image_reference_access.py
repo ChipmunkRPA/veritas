@@ -23,6 +23,7 @@ from app.detectors.image import (
     reference_exact_jpeg,
     reference_lossless_webp,
     reference_lossy_webp,
+    reference_lossy_webp_resize,
     reference_png_opacity,
     reference_png_orientation,
     reference_same_jpeg,
@@ -134,7 +135,8 @@ def _assert_pdf_assets(pdf, page, assets, payload):
 
 
 @pytest.mark.parametrize("scenario", ["edited", "webp_earlier", "identical", "wrong_framing", "other_photo", "lossy", "jpeg_earlier"])
-def test_lossless_webp_uses_exact_pixels_and_bound_sources(reference_http, tmp_path, scenario):
+def test_lossless_webp_uses_exact_pixels_and_bound_sources(reference_http, tmp_path, monkeypatch, scenario):
+    monkeypatch.setattr(settings, "image_reference_lossy_webp", False)
     f = reference_http
     rng = np.random.default_rng(890)
     before = cv2.resize(f.reference_pixels, (768, 512))
@@ -254,6 +256,42 @@ def test_lossy_webp_comparison_preserves_source_crops(reference_http, tmp_path, 
         export.write_text(json.dumps(payload))
         with pytest.raises(ValueError, match="Lossy WebP measurements differ"):
             review(export, earlier_file, submitted_file)
+
+
+def test_resized_lossy_webp_export_keeps_both_native_crops(reference_http, tmp_path, monkeypatch):
+    monkeypatch.setattr(settings, "image_reference_lossy_webp", True)
+    f = reference_http
+    before = Image.fromarray(cv2.resize(f.reference_pixels, (768, 512), interpolation=cv2.INTER_LINEAR))
+    edited = np.array(before)
+    edited[140:198, 260:318] = (220, 44, 135)
+    earlier_file, submitted_file, export = (tmp_path / name for name in ("earlier.png", "submitted.webp", "comparison.json"))
+    before.save(earlier_file, format="PNG")
+    Image.fromarray(edited).resize((576, 384), Image.Resampling.LANCZOS).save(submitted_file, format="WEBP", quality=75)
+    stored = f.store.put_bytes(submitted_file.read_bytes())
+    with Session(f.engine) as db:
+        record = db.get(Analysis, "image-a")
+        record.sha256, record.size_bytes = stored.sha256, stored.size_bytes
+        db.commit()
+    assert f.client.get(_url(), headers=f.viewer).json() == {"available": True}
+    response = f.client.post(_url(), files=_upload(earlier_file.read_bytes()), headers=f.viewer, data={"include_pdf": "true"})
+    assert response.status_code == 200, response.text[:300]
+    payload = response.json()
+    comp = payload["comparison"]
+    assert comp["schema"] == reference_lossy_webp_resize.SCHEMA and comp["affects_overall_confidence"] is False
+    assert comp["status"] == "comparable" and comp["regions"]
+    region = comp["regions"][0]
+    native = region["reference_region"]
+    assert native["w"] > region["w"] and native["h"] > region["h"]
+    pdf_bytes = base64.b64decode(payload.pop("pdf"), validate=True)
+    with pymupdf.open(stream=pdf_bytes, filetype="pdf") as pdf:
+        assert "proportional downsampling and WebP compression" in pdf[0].get_text()
+        _assert_pdf_assets(pdf, pdf[1], [region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")], payload)
+    export.write_text(json.dumps(payload))
+    assert review(export, earlier_file, submitted_file)["crops_verified"] >= 2
+    native["x"] += 1
+    export.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="Lossy WebP measurements differ"):
+        review(export, earlier_file, submitted_file)
 
 
 def test_rotated_png_keeps_exact_native_pixels_in_both_exports(reference_http, tmp_path):

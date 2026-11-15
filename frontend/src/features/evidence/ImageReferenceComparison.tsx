@@ -6,7 +6,7 @@ import {
   compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
   IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
-  pngOpacitySchema, exactWebpSchema, lossyWebpSchema,
+  pngOpacitySchema, exactWebpSchema, lossyWebpSchema, resizedLossyWebpSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -80,12 +80,13 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const opacity = comparison.schema === pngOpacitySchema ? comparison.png_opacity : undefined
   const exactWebp = comparison.schema === exactWebpSchema ? comparison.exact_webp : undefined
   const lossyWebp = comparison.schema === lossyWebpSchema ? comparison.lossy_webp : undefined
+  const resizedWebp = comparison.schema === resizedLossyWebpSchema ? comparison.lossy_webp_resize : undefined
   const sameJpegBlocks = (comparison.schema === sameJpegSchema || detailLoss) ? alignment : undefined
   const shiftedJpeg = comparison.schema === shiftedJpegSchema ? alignment : undefined
   const sameStructureFraming = comparison.schema === structureJpegSchema ? comparison.same_framing_structure : undefined
   const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' || exact || delivery
     ? comparison.reference_crop_bounds : undefined
-  const resized = comparable && (Boolean(cropped) || comparison.schema === 'chipmunk.image-reference-comparison/3')
+  const resized = comparable && (Boolean(cropped) || Boolean(resizedWebp) || comparison.schema === 'chipmunk.image-reference-comparison/3')
   const completeMatch = (exact ?? orientation)?.matched_pixels === submitted.width * submitted.height
     || opacity?.matched_pixels === submitted.width * submitted.height
     || exactWebp?.changed_pixels === 0
@@ -146,6 +147,11 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       supported matching framing. The comparison highlights local brightness differences after filtering small compression variations.
       Ordinary editing can cause differences.
       This check carries no weight in the AI assessment.
+    </p>}
+    {resizedWebp && <p className="mt-2 mb-0 text-small text-text-muted">
+      {resizedWebp.supported_kernels.length} resize filters supported the same framing after WebP compression.
+      The highlights mark brightness differences that persisted across filters. Each crop uses its own file’s native pixels.
+      This comparison carries zero weight in the AI assessment.
     </p>}
     {sameJpegFraming && <p className="mt-2 mb-0 text-small text-text-muted">
       Exact JPEG block matches support the same framing. After encoding the earlier PNG with the submitted JPEG settings,

@@ -112,6 +112,35 @@ describe('earlier-copy comparison', () => {
     expect(JSON.parse(await blobText(download))).toEqual({ comparison: record, pngs: result.pngs })
   })
 
+  it('shows native crop coordinates after WebP downsampling', async () => {
+    const result = structuredClone(comparison)
+    const record = result.comparison
+    record.schema = 'chipmunk.image-reference-comparison/20'
+    record.reference = { ...record.reference, width: 960, height: 800 }
+    record.submitted = { ...record.submitted, width: 768, height: 640 }
+    record.affects_overall_confidence = false
+    record.lossy_webp_resize = { earlier_rgb_sha256: hash, submitted_over_reference_xy: [[768, 960], [640, 800]],
+      supported_kernels: (['bicubic', 'lanczos'] as const).map(kernel => ({
+        kernel, matching_tiles: 180, textured_tiles: 200, tile_side_px: 32, earlier_rgb_sha256: hash,
+      })),
+    }
+    record.regions[0].reference_region = { x: 147, y: 81, w: 113, h: 88 }
+    record.regions[0].reference_crop = artifact('reference-01.png', 113, 88)
+    record.mask = artifact('difference-mask.png', 768, 640)
+    delete record.alignment
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText(/2 resize filters supported the same framing/)).toBeTruthy()
+    expect(screen.getByText('x 147, y 81 · 113 × 88 px')).toBeTruthy()
+    expect(screen.getByText('x 118, y 65 · 90 × 70 px')).toBeTruthy()
+    expect(screen.getByAltText('Difference mask in submitted image coordinates')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
+    const [download] = vi.mocked(saveBlob).mock.calls[0]
+    expect(JSON.parse(await blobText(download))).toEqual({ comparison: record, pngs: result.pngs })
+  })
+
   it('shows opacity changes and retains the native mask in the JSON download', async () => {
     const result = structuredClone(comparison)
     const record = result.comparison

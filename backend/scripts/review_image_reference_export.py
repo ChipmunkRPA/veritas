@@ -35,6 +35,7 @@ EXTENDED_JPEG_DETAIL_LOSS_SCHEMA = "chipmunk.image-reference-comparison/16"
 PNG_OPACITY_SCHEMA = "chipmunk.image-reference-comparison/17"
 EXACT_WEBP_SCHEMA = "chipmunk.image-reference-comparison/18"
 LOSSY_WEBP_SCHEMA = "chipmunk.image-reference-comparison/19"
+RESIZED_LOSSY_WEBP_SCHEMA = "chipmunk.image-reference-comparison/20"
 ORIENTATION_SCHEMA = "chipmunk.image-reference-comparison/6"
 CROPPED_RESIZE_SCHEMAS = {CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, JPEG_PNG_ENVELOPE_SCHEMA}
 ORIENTATIONS = {
@@ -398,7 +399,8 @@ def _native_reference_replay(comparison, earlier, submitted, *, opacity, lossy_w
 
     with TemporaryDirectory() as temporary:
         evidence = Path(temporary) / "evidence"
-        regenerated = inspect(earlier, submitted, evidence_dir=evidence, allow_png_opacity=opacity, allow_lossy_webp=lossy_webp)
+        regenerated = inspect(earlier, submitted, evidence_dir=evidence, allow_png_opacity=opacity, allow_lossy_webp=lossy_webp,
+                              allow_proportional_resize=comparison["schema"] == RESIZED_LOSSY_WEBP_SCHEMA)
         label = "PNG opacity" if opacity else "Lossy WebP" if lossy_webp else "Exact WebP"
         _require(_same_replayed_fields(comparison, regenerated), f"{label} measurements differ from the supplied sources")
         if "mask" in regenerated:
@@ -427,7 +429,8 @@ def review(export, earlier, submitted):
         submitted_bytes = _read(submitted, MAX_SOURCE_BYTES)
         opacity = comparison["schema"] == PNG_OPACITY_SCHEMA
         webp = comparison["schema"] == EXACT_WEBP_SCHEMA
-        lossy_webp = comparison["schema"] == LOSSY_WEBP_SCHEMA
+        resized_webp = comparison["schema"] == RESIZED_LOSSY_WEBP_SCHEMA
+        lossy_webp = comparison["schema"] in {LOSSY_WEBP_SCHEMA, RESIZED_LOSSY_WEBP_SCHEMA}
         ref = _source(stack, earlier_bytes, comparison["reference"], composite=opacity, webp=webp or lossy_webp)
         sub = _source(stack, submitted_bytes, comparison["submitted"], composite=opacity, webp=webp or lossy_webp)
         resized = comparison["schema"] == RESIZE_SCHEMA or comparison["schema"] in CROPPED_RESIZE_SCHEMAS
@@ -482,7 +485,7 @@ def review(export, earlier, submitted):
             box = _bounds(region, sub.size)
             _require(_contains(overlap, box), "Region extends outside the recorded overlap")
             earlier_box = _bounds(region.get("reference_region", region), ref.size)
-            if resized:
+            if resized or resized_webp:
                 expected_box = _resize_bounds(box, ref, sub, crop)
             elif oriented:
                 expected_box = _orientation_bounds(box, sub.size, inverse)

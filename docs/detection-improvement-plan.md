@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Earlier-copy evidence after downsizing to WebP](image-reference-resized-webp-2026-11-14.md)
+  located 273/288 held edits, including 138/144 small edits. All 216
+  unchanged or recompression-only deliveries had no highlights. The local
+  app, PDF and JSON show independent native crops from both files.
+
 - [Repeated audio offsets in measured video](video-mouth-clock-context-2026-11-14.md)
   now link supporting nonoverlapping source windows in the browser, PDF
   and JSON. A separate speech-anchor trial added one useful location and

@@ -101,6 +101,11 @@ def _summary(document, comparison, assets):
         _text(page, MARGIN, 302, "The comparison allows for lossy WebP compression.", size=10, font="hebo")
         _text(page, MARGIN, 318, f"{proof['matching_tiles']:,} of {proof['textured_tiles']:,} detailed areas supported the framing.",
               size=10, color=MUTED)
+    if proof := comparison.get("lossy_webp_resize"):
+        kernels = ", ".join(row["kernel"] for row in proof["supported_kernels"])
+        _text(page, MARGIN, 302, "Matching framing after proportional downsampling and WebP compression.", size=10, font="hebo")
+        _text(page, MARGIN, 318, f"Resize filters supporting the framing: {kernels}.", size=10, color=MUTED)
+        _text(page, MARGIN, 334, "Each crop uses the native pixels of its own file.", size=10, color=MUTED)
     if schema == reference_exact_jpeg.SCHEMA:
         proof = comparison["alignment"]
         _text(page, MARGIN, 302, "Same framing supported by exact JPEG block matches.", size=10, font="hebo")

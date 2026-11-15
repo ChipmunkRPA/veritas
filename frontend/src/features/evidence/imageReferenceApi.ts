@@ -36,6 +36,13 @@ interface OrientedCropProof {
   difference_mask_sha256: string
 }
 
+interface LossyWebpSupport {
+  matching_tiles: number
+  textured_tiles: number
+  tile_side_px: number
+  earlier_rgb_sha256: string
+}
+
 export interface ImageReferenceRecord {
   schema: string
   status: string
@@ -86,7 +93,12 @@ export interface ImageReferenceRecord {
   }
   png_opacity?: { opacity_changed_pixels: number; matched_pixels: number; matched_tiles: [number, number][] }
   exact_webp?: { changed_pixels: number; matched_tiles: [number, number][]; earlier_rgb_sha256: string; submitted_rgb_sha256: string }
-  lossy_webp?: { matching_tiles: number; textured_tiles: number; tile_side_px: number; earlier_rgb_sha256: string }
+  lossy_webp?: LossyWebpSupport
+  lossy_webp_resize?: {
+    earlier_rgb_sha256: string
+    submitted_over_reference_xy: [[number, number], [number, number]]
+    supported_kernels: (LossyWebpSupport & { kernel: 'bicubic' | 'bilinear' | 'lanczos' })[]
+  }
   affects_overall_confidence?: boolean
   additional_regions?: number
 }
@@ -106,6 +118,7 @@ export const extendedJpegDetailLossSchema = 'chipmunk.image-reference-comparison
 export const pngOpacitySchema = 'chipmunk.image-reference-comparison/17'
 export const exactWebpSchema = 'chipmunk.image-reference-comparison/18'
 export const lossyWebpSchema = 'chipmunk.image-reference-comparison/19'
+export const resizedLossyWebpSchema = 'chipmunk.image-reference-comparison/20'
 export const isJpegDetailLoss = (schema: string) =>
   schema === jpegDetailLossSchema || schema === extendedJpegDetailLossSchema
 export const IMAGE_REFERENCE_SECTION_ID = 'earlier-image-comparison'
@@ -192,6 +205,13 @@ function validSameJpegProof(comparison: ImageReferenceRecord): boolean {
     })
 }
 
+function supportsLossyFraming(proof: LossyWebpSupport, width: number, height: number) {
+  return proof.tile_side_px === 32 && [proof.matching_tiles, proof.textured_tiles].every(Number.isSafeInteger)
+    && proof.matching_tiles >= 24 && 20 * proof.matching_tiles >= 13 * proof.textured_tiles
+    && proof.matching_tiles <= proof.textured_tiles && proof.textured_tiles <= Math.floor(width / 32) * Math.floor(height / 32)
+    && /^[a-f0-9]{64}$/.test(proof.earlier_rgb_sha256)
+}
+
 export async function compareWithEarlierImage(analysisId: string, file: File, signal: AbortSignal): Promise<ImageReferenceResult> {
   const form = new FormData()
   form.append('reference', file)
@@ -224,13 +244,33 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
     const { width, height } = comparison.submitted
     if (!webp || comparison.affects_overall_confidence !== false || ![width, height].every(
       side => Number.isSafeInteger(side) && side >= 512 && side <= 1024)
-        || comparison.reference.width !== width || comparison.reference.height !== height || webp.tile_side_px !== 32
-        || ![webp.matching_tiles, webp.textured_tiles].every(Number.isSafeInteger)
-        || webp.matching_tiles < 24 || 20 * webp.matching_tiles < 13 * webp.textured_tiles || webp.matching_tiles > webp.textured_tiles
-        || webp.textured_tiles > Math.floor(width / 32) * Math.floor(height / 32)
-        || !/^[a-f0-9]{64}$/.test(webp.earlier_rgb_sha256)
+        || comparison.reference.width !== width || comparison.reference.height !== height || !supportsLossyFraming(webp, width, height)
         || comparison.regions.some(region => !validAreaWithin(region, width, height))) {
       throw new Error('The server returned an incomplete lossy WebP comparison.')
+    }
+  }
+  if (comparison.schema === resizedLossyWebpSchema && comparison.status === 'comparable') {
+    const resize = comparison.lossy_webp_resize
+    const { width, height } = comparison.submitted
+    const { width: earlierWidth, height: earlierHeight } = comparison.reference
+    const [xScale, yScale] = resize?.submitted_over_reference_xy ?? []
+    const kernels = resize?.supported_kernels
+    if (!resize || comparison.affects_overall_confidence !== false
+        || ![width, height, earlierWidth, earlierHeight].every(Number.isSafeInteger)
+        || Math.min(width, height) < 384 || width >= earlierWidth || height >= earlierHeight
+        || Math.min(earlierWidth, earlierHeight) < 512 || Math.max(earlierWidth, earlierHeight) > 1024
+        || xScale?.[0] !== width || xScale[1] !== earlierWidth || yScale?.[0] !== height || yScale[1] !== earlierHeight
+        || !/^[a-f0-9]{64}$/.test(resize.earlier_rgb_sha256) || !Array.isArray(kernels) || kernels.length < 2 || kernels.length > 3
+        || !kernels.every(row => row && ['bicubic', 'bilinear', 'lanczos'].includes(row.kernel) && supportsLossyFraming(row, width, height))
+        || new Set(kernels.map(row => row.kernel)).size !== kernels.length
+        || comparison.regions.some(region => {
+          const earlier = region.reference_region
+          if (!validAreaWithin(region, width, height) || !earlier || !validAreaWithin(earlier, earlierWidth, earlierHeight)) return true
+          return earlier.x !== Math.floor(region.x * earlierWidth / width) || earlier.y !== Math.floor(region.y * earlierHeight / height)
+            || earlier.x + earlier.w !== Math.ceil((region.x + region.w) * earlierWidth / width)
+            || earlier.y + earlier.h !== Math.ceil((region.y + region.h) * earlierHeight / height)
+        })) {
+      throw new Error('The server returned an incomplete resized WebP comparison.')
     }
   }
   if (comparison.schema === pngOpacitySchema && comparison.status === 'comparable') {

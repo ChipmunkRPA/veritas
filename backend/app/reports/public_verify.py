@@ -352,6 +352,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         from app.evidence.audio_bandwidth_binding import BANDWIDTH_SCHEMAS
         from app.evidence.audio_binding import validate_audio_stream_scope, validate_unscored_voice_coverage
         from app.evidence.audio_silence_binding import CONTEXT_SCHEMA
+        from app.evidence.audio_tonal_phase_binding import SCHEMA as TONAL_PHASE_SCHEMA
 
         validate_audio_stream_scope(evidence["source"])
         validate_unscored_voice_coverage(evidence['coverage'], evidence['source'], evidence.get('stereo_context'))
@@ -359,7 +360,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         if evidence['version'] in {'audio-evidence-2', 'audio-evidence-3'}:
             _require(bool(acoustic), 'Audio acoustic context is missing')
         if evidence['version'] == 'audio-evidence-3':
-            _require(acoustic['schema'] in {'chipmunk.acoustic-context/2', CONTEXT_SCHEMA, *BANDWIDTH_SCHEMAS},
+            _require(acoustic['schema'] in {'chipmunk.acoustic-context/2', CONTEXT_SCHEMA, TONAL_PHASE_SCHEMA, *BANDWIDTH_SCHEMAS},
                      'Audio continuity measurements are missing')
         if acoustic is not None:
             from app.evidence.audio_background_binding import validate_acoustic_context

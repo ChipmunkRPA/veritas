@@ -839,7 +839,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.stereo_collapse_binding',
                         'app.evidence.audio_gain_repetition_binding',
                         'app.evidence.audio_background_binding','app.evidence.audio_bandwidth_binding', 'app.evidence.audio_silence_binding','app.evidence.audio_repetition_binding','app.evidence.audio_exact_repetition',
-                        'app.evidence.audio_similarity_binding',
+                        'app.evidence.audio_similarity_binding', 'app.evidence.audio_tonal_phase_binding',
                         'app.evidence.av_binding','app.evidence.av_lag_support','app.evidence.video_soundtrack_pair_binding',
                         'app.evidence.face_interval_binding','app.evidence.face_boundary_binding','app.evidence.face_boundary_clock','app.evidence.face_alignment_context',
                         'app.evidence.face_paired_edge_binding','app.evidence.face_short_proposal_binding','app.evidence.face_primary_track_binding','app.evidence.face_short_window_binding','app.evidence.face_short_carrier_binding','app.evidence.face_spatial_cut_binding',
@@ -850,7 +850,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.image_eligibility','app.evidence.image_copy_similarity_binding','app.evidence.image_interpolation_binding',
                         'app.evidence.image_copy_affine_binding','app.evidence.image_embedded_pair_binding',
                         'app.evidence.image_animation_binding','app.evidence.image_transparency_binding',
-                        'app.evidence.document_scope','app.evidence.email_alternatives',
+                        'app.evidence.document_scope','app.evidence.document_pdf_visibility','app.evidence.email_alternatives',
                         'app.evidence.document_invisible_characters','app.evidence.document_native_locations',
                         'app.evidence.document_check_coverage'):
             return None

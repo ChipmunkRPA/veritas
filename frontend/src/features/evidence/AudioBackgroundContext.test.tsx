@@ -118,6 +118,20 @@ describe('background and recording context', () => {
     expect(screen.queryByRole('alert')).toBeNull()
   })
 
+  it('shows a tone phase observation and its source-linked waveform and clip', () => {
+    const set = fixture()
+    const context = set.acoustic_context!
+    context.schema = 'chipmunk.acoustic-context/6'
+    context.tonal_phase = { comparisons: 5, status: 'measured_change' }
+    context.events[0].category = 'tonal_phase'
+    context.events[0].observation = 'The 60 and 120 Hz tones changed phase inside the measured interval.'
+    show(set)
+    expect(screen.getByRole('button', { name: 'Inspect B01, Temporary change in tone phase, 2.000 s–3.000 s' })).toBeTruthy()
+    expect(screen.getByText(/60 and 120 Hz tones changed phase/)).toBeTruthy()
+    expect(screen.getByAltText(/B01: mixed-track waveform/)).toBeTruthy()
+    expect(screen.getByLabelText('B01: exact acoustic interval').getAttribute('src')).toContain(context.events[0].artifacts.selected_clip.sha256)
+  })
+
   it('shows real acoustic assets and intervals even with no voice scoring, without treating quiet sound as synthesis', () => {
     const set = fixture(), original = structuredClone(set)
     show(set)

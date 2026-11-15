@@ -1006,6 +1006,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 "source": copy.deepcopy(acoustic.get("source", {})), "bin_count": len(acoustic.get("bins", [])),
                 "event_count": len(acoustic.get("events", [])), "limitations": copy.deepcopy(acoustic.get("limitations", [])),
                 "upper_frequency_status": acoustic.get("upper_frequency_drop", {}).get("status"),
+                "tonal_phase": acoustic.get("tonal_phase"),
                 "digital_silence": acoustic.get("digital_silence"),
                 "images": [plate(role, asset, overview_label("acoustic context", acoustic, role))
                            for role, asset in sorted(acoustic.get("overview", {}).items())]})

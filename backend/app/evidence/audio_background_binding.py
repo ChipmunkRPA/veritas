@@ -9,6 +9,7 @@ import math
 import re
 
 from app.evidence import audio_silence_binding as silence
+from app.evidence import audio_tonal_phase_binding as tonal
 from app.evidence.audio_bandwidth_binding import (
     BANDWIDTH_METHOD,
     EXPANDED_SCHEMA,
@@ -69,13 +70,19 @@ def _validate(context, source, voice_packets):
     versions = {"chipmunk.acoustic-context/1": "mixed-acoustics-1", "chipmunk.acoustic-context/2": "mixed-acoustics-2",
                 LEGACY_SCHEMA: LEGACY_VERSION, EXPANDED_SCHEMA: EXPANDED_VERSION}
     method = context["method"]
-    with_silence = context["schema"] == silence.CONTEXT_SCHEMA
+    with_tonal = context["schema"] == tonal.SCHEMA
+    with_silence = context["schema"] in {silence.CONTEXT_SCHEMA, tonal.SCHEMA}
     acoustic_version = method["version"]
+    if with_tonal:
+        require(acoustic_version.endswith(tonal.SUFFIX), "Invalid tone phase version")
+        acoustic_version = acoustic_version.removesuffix(tonal.SUFFIX)
+    else:
+        require(tonal.KEY not in context and tonal.KEY not in method, "Unexpected tone phase coverage")
     if with_silence:
         variants = {"mixed-acoustics-2", LEGACY_VERSION, EXPANDED_VERSION}
         require(acoustic_version in {version + silence.VERSION_SUFFIX for version in variants}, "Invalid digital-silence version")
         base_version = acoustic_version.removesuffix(silence.VERSION_SUFFIX)
-        versions[silence.CONTEXT_SCHEMA] = acoustic_version
+        versions[context["schema"]] = method["version"]
     else:
         base_version = acoustic_version
         require(silence.KEY not in context and silence.KEY not in method, "Unexpected digital-silence coverage")
@@ -191,6 +198,10 @@ def _validate(context, source, voice_packets):
     else:
         require("upper_frequency_drop" not in context and "upper_frequency_drop" not in method,
                 "Legacy acoustics cannot contain upper-frequency review")
+    measured_tonal = None
+    if with_tonal:
+        require(method[tonal.KEY] == tonal.METHOD and tonal.native_input(samples, source), "Unsupported tone phase input or method")
+        measured_tonal = tonal.validate(context[tonal.KEY], samples)
 
     def image(asset, height):
         require(asset["media_type"] == "image/png" and sha(asset["sha256"])
@@ -206,11 +217,15 @@ def _validate(context, source, voice_packets):
         categories.add("upper_frequency_drop")
     if with_silence:
         categories.add(silence.KEY)
-    require(isinstance(context["events"], list) and len(context["events"]) <= 8 + 4 * current + bandwidth + len(silent_ranges),
+    if with_tonal:
+        categories.add(tonal.KEY)
+    require(isinstance(context["events"], list)
+            and len(context["events"]) <= 8 + 4 * current + bandwidth + len(silent_ranges) + int(measured_tonal is not None),
             "Too many acoustic evidence events")
     previous = None
     seen_transitions = set()
     seen_bandwidth = False
+    seen_tone = False
     for index, event in enumerate(context["events"], 1):
         require(event["id"] == f"B{index:02d}" and event["evidence_type"] == "descriptive"
                 and event["category"] in categories, "Invalid acoustic event identity or semantics")
@@ -225,12 +240,19 @@ def _validate(context, source, voice_packets):
         require(event["related_voice_packet_ids"] == [p["id"] for p in voice_packets
                 if p["interval"]["start_sample"] < b and p["interval"]["end_sample"] > a], "Acoustic event voice references differ")
         selected = [row for row in bins if a <= row["start_sample"] < b]
-        require(event["category"] in {"spectral_transition", "upper_frequency_drop", silence.KEY}
+        require(event["category"] in {"spectral_transition", "upper_frequency_drop", silence.KEY, tonal.KEY}
                 or (bool(selected) and selected[0]["start_sample"] == a and selected[-1]["end_sample"] == b),
                 "Acoustic event does not align to measured bins")
         value = event["observations"][0]["value"]
         require(numeric(value, -120, 240 if event["category"] == "upper_frequency_drop" else 120), "Invalid acoustic event measurement")
-        if event["category"] == silence.KEY:
+        if event["category"] == tonal.KEY:
+            require(measured_tonal is not None and not seen_tone and event["title"] == tonal.TITLE
+                    and measured_tonal["tones"][0]["samples"] == [a, b]
+                    and event["observations"] == tonal.observations(measured_tonal)
+                    and event["interpretation"] == tonal.LIMITATION,
+                    "Tone phase observation differs from its source readings")
+            seen_tone = True
+        elif event["category"] == silence.KEY:
             levels = silent_ranges.pop((a, b), None)
             require(event["title"] == silence.TITLE and levels is not None and value == 0
                     and len(event["observations"]) == 3
@@ -276,4 +298,5 @@ def _validate(context, source, voice_packets):
         image(event["artifacts"]["spectrogram"], 320)
     require(seen_transitions == set(transitions), "Selected continuity leads are missing")
     require(seen_bandwidth == (measured_bandwidth is not None), "Selected temporary upper-frequency observation is missing")
+    require(seen_tone == (measured_tonal is not None), "Selected tone phase observation is missing")
     require(not silent_ranges, "Selected digital-silence event is missing")

@@ -19,6 +19,7 @@ from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.audio.decode import SAMPLE_RATE, source_ranges, wav_bytes
 from app.evidence import audio_silence
 from app.evidence import audio_silence_binding as silence
+from app.evidence import audio_tonal_phase_binding as tonal
 from app.evidence.audio_bandwidth_binding import (
     BANDWIDTH_METHOD,
     EXPANDED_SCHEMA,
@@ -113,11 +114,13 @@ def _candidates(bins: list[dict]) -> list[dict]:
 def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict], *, version: str = VERSION) -> dict:
     if not isinstance(version, str):
         raise ValueError("Unsupported acoustic measurement version")
-    with_silence = version.endswith(silence.VERSION_SUFFIX)
-    base_version = version.removesuffix(silence.VERSION_SUFFIX)
+    with_tonal = version.endswith(tonal.SUFFIX)
+    acoustic_version = version.removesuffix(tonal.SUFFIX)
+    with_silence = acoustic_version.endswith(silence.VERSION_SUFFIX)
+    base_version = acoustic_version.removesuffix(silence.VERSION_SUFFIX)
     schemas = {"mixed-acoustics-1": "chipmunk.acoustic-context/1", VERSION: SCHEMA,
                BANDWIDTH_VERSION: BANDWIDTH_SCHEMA, EXPANDED_VERSION: EXPANDED_SCHEMA}
-    if base_version not in schemas or (with_silence and base_version == "mixed-acoustics-1"):
+    if base_version not in schemas or (with_silence and base_version == "mixed-acoustics-1") or (with_tonal and not with_silence):
         raise ValueError("Unsupported acoustic measurement version")
     current = base_version != "mixed-acoustics-1"
     bandwidth = base_version in {BANDWIDTH_VERSION, EXPANDED_VERSION}
@@ -143,8 +146,22 @@ def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict
     silence_detail = audio_silence.measure(pcm, mapping["timeline"]) if with_silence else None
     if silence_detail is not None:
         selected.extend({**row, "category": silence.KEY, "value": 0} for row in silence_detail["selected"])
+    tone_detail = None
+    if with_tonal:
+        from app.evidence.audio_tonal_phase import measure
+
+        if not tonal.native_input(len(pcm), mapping):
+            raise ValueError("Tone phase comparison requires short native mono audio on a continuous clock")
+        counts, readings = measure(pcm)
+        count, best = counts["harmonic"], readings["harmonic"]
+        tone_detail = {"comparisons": count, "status": "no_supported_change" if count else "unassessed"}
+        if best and best["score"] > tonal.POINT:
+            tone_detail.update(status="measured_change", measurement=best)
+            start, end = best["tones"][0]["samples"]
+            selected.append({"category": tonal.KEY, "start_sample": start, "end_sample": end, "value": best["score"]})
     selected.sort(key=lambda c: (c["start_sample"], c["end_sample"], c["category"]))
-    document = {"schema": silence.CONTEXT_SCHEMA if with_silence else schemas[base_version], "status": "ready", "source": source,
+    schema = tonal.SCHEMA if with_tonal else silence.CONTEXT_SCHEMA if with_silence else schemas[base_version]
+    document = {"schema": schema, "status": "ready", "source": source,
                 "method": {"version": version, "frame_samples": FRAME_SAMPLES,
                            "description": "Deterministic measurements of frozen mixed mono PCM; no sound-source separation or AI classification.",
                            "thresholds": THRESHOLDS, "selection": "Clipping, then energy changes, then longest quiet intervals; up to eight, shown in time order.",
@@ -174,10 +191,20 @@ def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict
         document["method"][silence.KEY] = silence.METHOD
         document[silence.KEY] = silence_detail
         document["limitations"].append(silence.LIMITATION)
+    if tone_detail is not None:
+        document["method"][tonal.KEY] = tonal.METHOD
+        document[tonal.KEY] = tone_detail
     for i, candidate in enumerate(selected, 1):
         a, b, category, value = (candidate[k] for k in ("start_sample", "end_sample", "category", "value"))
         ca, cb = max(0, a-2*SAMPLE_RATE), min(len(pcm), b+2*SAMPLE_RATE)
-        if category == silence.KEY:
+        if category == tonal.KEY:
+            tone_measurements = tone_detail["measurement"]
+            first, second = (row["frequency_hz"] for row in tone_measurements["tones"])
+            observation = (f"The {first} and {second} Hz tones changed phase between the surrounding sound and the "
+                           f"measured {a/SAMPLE_RATE:.3f}–{b/SAMPLE_RATE:.3f} s interval.")
+            interpretation = tonal.LIMITATION
+            label, unit = "Weaker phase-change reading", "rad"
+        elif category == silence.KEY:
             ca, cb = a - silence.FLANK, b + silence.FLANK
             label, unit = "Nonzero samples in the selected interval", "samples"
             observation = f"All {b-a:,} samples are zero from {a/SAMPLE_RATE:.3f} to {b/SAMPLE_RATE:.3f} s, with measurable sound on both sides."
@@ -212,7 +239,10 @@ def _base(pcm: np.ndarray, mapping: dict, source: dict, voice_packets: list[dict
                  "limitations": ["This interval is descriptive acoustic context, not a synthetic-voice finding or exact edit boundary."]}
         if "change_sample" in candidate:
             event["change_sample"] = candidate["change_sample"]
-        if category == silence.KEY:
+        if category == tonal.KEY:
+            event["title"] = tonal.TITLE
+            event["observations"] = tonal.observations(tone_measurements)
+        elif category == silence.KEY:
             event["title"] = silence.TITLE
             event["observations"].extend({"label": f"{side} 100 ms RMS", "value": level, "unit": "dBFS"}
                                          for side, level in zip(("Before", "After"), candidate["flank_rms_dbfs"], strict=True))

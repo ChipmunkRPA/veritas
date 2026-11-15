@@ -240,18 +240,22 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if "regions" in review:
             replay_detail += f" Verified {len(review['regions'])} selected speech ranges against the same original samples."
     from app.evidence import audio_silence_binding as silence
+    from app.evidence import audio_tonal_phase_binding as tonal
     from app.evidence.audio_bandwidth_binding import BANDWIDTH_SCHEMAS
 
     context = audio.get("acoustic_context") or {}
-    if context.get("schema") in BANDWIDTH_SCHEMAS or "upper_frequency_drop" in context:
+    if context.get("schema") in BANDWIDTH_SCHEMAS or "upper_frequency_drop" in context or tonal.KEY in context:
         from app.evidence.audio_background import verify_source_content
         from app.evidence.audio_packets import _chart
 
         paths = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"]}
         verify_source_content(context, pcm=decoded.pcm, mapping=decoded.mapping, source=context["source"],
                               voice_packets=audio["packets"], read_asset=lambda sha: archive.read(paths[sha]), waveform=_chart)
-        replay_detail += " Recomputed the temporary upper-frequency comparison and acoustic plots."
-    if context.get("schema") == silence.CONTEXT_SCHEMA:
+        if context.get("schema") in BANDWIDTH_SCHEMAS or "upper_frequency_drop" in context:
+            replay_detail += " Recomputed the temporary upper-frequency comparison and acoustic plots."
+        if tonal.KEY in context:
+            replay_detail += " Recomputed the narrowband tone phase comparison and acoustic plots."
+    if context.get("schema") in {silence.CONTEXT_SCHEMA, tonal.SCHEMA}:
         from app.evidence.audio_silence import measure
 
         # Use the verified source ledger to keep zero runs on continuous clocks.

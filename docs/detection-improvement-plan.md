@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Temporary phase changes in background sound](audio-tonal-phase-evidence-2026-11-14.md)
+  located 12/144 staged intervals in short noisy mixtures. Seven of 72
+  gradual timing changes also triggered the check. The other 540 controls
+  produced zero flags. The opt-in local observation records the time range,
+  playback and waveforms with zero AI-confidence weight.
+
 - [Different source ranges in writing agreement](writing-joint-tail-transfer-2026-11-14.md)
   explains when the writing-pattern check measured the marked sentence and
   the classifier flagged a wider context. Same-genre calibration added one

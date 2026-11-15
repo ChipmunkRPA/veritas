@@ -527,6 +527,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.document_percentage_consistency',
                         'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.av_lag_support',
                         'app.evidence.audio_background_binding', 'app.evidence.audio_bandwidth_binding', 'app.evidence.audio_silence_binding',
+                        'app.evidence.audio_tonal_phase_binding',
                         'app.evidence.audio_repetition_binding', 'app.evidence.audio_exact_repetition', 'app.evidence.audio_similarity_binding',
                         'app.evidence.face_interval_binding', 'app.evidence.face_boundary_binding', 'app.evidence.face_boundary_clock', 'app.evidence.face_alignment_context',
                         'app.evidence.face_paired_edge_binding', 'app.evidence.face_short_proposal_binding', 'app.evidence.face_short_window_binding', 'app.evidence.face_short_carrier_binding', 'app.evidence.face_spatial_cut_binding',
@@ -540,7 +541,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.stereo_collapse_binding'):
             return None
         if fullname.startswith(('app.storage', 'app.core.config', 'app.detectors', 'app.evidence', 'app.api',
-                                'torch', 'numpy', 'cv2', 'transformers', 'fastapi', 'sqlalchemy')):
+                                'torch', 'numpy', 'cv2', 'transformers', 'fastapi', 'sqlalchemy', 'pymupdf')):
             raise RuntimeError('Offline verification imported runtime: ' + fullname)
 sys.meta_path.insert(0, RuntimeUnavailable())
 def no_network(*args, **kwargs):
@@ -588,7 +589,7 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
         assert "2 unannotated crops matched" in verify_image_source.check(archive, bundle, original)
 
 
-@pytest.mark.parametrize('name', ['face_interval_binding.py', 'face_short_window_binding.py', 'face_short_carrier_binding.py', 'sound_event_binding.py', 'document_scope.py',
+@pytest.mark.parametrize('name', ['face_interval_binding.py', 'face_short_window_binding.py', 'face_short_carrier_binding.py', 'sound_event_binding.py', 'document_scope.py', 'audio_tonal_phase_binding.py',
                                  'image_copy_similarity_binding.py', 'image_copy_affine_binding.py',
                                  'image_editor_preview_binding.py', 'image_transparency_binding.py', 'image_animation_binding.py',
                                  'stereo_binding.py', 'stereo_collapse_binding.py', 'scene_return_binding.py'])
@@ -621,6 +622,9 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
     elif name == 'stereo_collapse_binding.py':
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.evidence.audio_silence_binding', 'continuous_spans')}
+    elif name == 'document_scope.py':
+        assert imports <= sys.stdlib_module_names | {'app'}
+        assert local == {('app.evidence', 'document_pdf_visibility')}
     else:
         assert imports <= sys.stdlib_module_names
 

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [background tone phase replay](audio-tonal-phase-evidence-2026-11-14.md#replay)
+compares two tonal continuity rules with the existing acoustic check.
+It includes exact staged intervals, ordinary controls, and a transfer
+to different speaker IDs and recorded background tones.
+
 The [writing agreement replay](writing-joint-tail-transfer-2026-11-14.md#local-replay)
 compares single-check flags and two-check agreement on disjoint news and
 abstract works. It includes separate same-genre cutoffs, matched ordinary

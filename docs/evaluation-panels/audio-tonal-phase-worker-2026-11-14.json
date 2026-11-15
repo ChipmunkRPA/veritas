@@ -1,0 +1,88 @@
+{
+  "cases": {
+    "measured_change": {
+      "event": {
+        "clip_sha256": "c061cb614d2ce8b325330d7668cd5ffd42ccfeb7ac6f1b67ca82ac5e564ca9cb",
+        "source_interval_samples": [
+          24960,
+          33280
+        ],
+        "tones": [
+          {
+            "frequency_hz": 100,
+            "inside_offsets_rad": [
+              -0.747709,
+              -0.742084
+            ],
+            "outside_offset_rad": 0.003891,
+            "samples": [
+              24960,
+              33280
+            ],
+            "support_centers": [
+              21120,
+              28800,
+              29440,
+              37120
+            ],
+            "tone_above_neighbors_db": 16.6984,
+            "tone_level_dbfs": -40.051976
+          },
+          {
+            "frequency_hz": 200,
+            "inside_offsets_rad": [
+              -1.623761,
+              -1.602849
+            ],
+            "outside_offset_rad": 0.048294,
+            "samples": [
+              24960,
+              33280
+            ],
+            "support_centers": [
+              21120,
+              28800,
+              29440,
+              37120
+            ],
+            "tone_above_neighbors_db": 17.497357,
+            "tone_level_dbfs": -36.355872
+          }
+        ]
+      },
+      "evidence_assets_verified": 10,
+      "exports_match": true,
+      "scene": "rain",
+      "signed_source_replay": true,
+      "source_pcm_sha256": "eb87dc0c8fe0a6ba803c79d417526798c26bff36180bec3b2fe138c0e7eec39b",
+      "status": "measured_change",
+      "truth_samples": [
+        23740,
+        35260
+      ]
+    },
+    "no_supported_change": {
+      "event": null,
+      "evidence_assets_verified": 6,
+      "exports_match": true,
+      "scene": "rain",
+      "signed_source_replay": true,
+      "source_pcm_sha256": "cde6cfd9775b5564f8337cd5056094f9c1b7a8d7593a53edafb54c307076476d",
+      "status": "no_supported_change",
+      "truth_samples": null
+    },
+    "unassessed": {
+      "event": null,
+      "evidence_assets_verified": 6,
+      "exports_match": true,
+      "scene": "rain",
+      "signed_source_replay": true,
+      "source_pcm_sha256": "fdb4c5c22dc3f6326f1c6e3f35798190bcaadf9907f8de24e2f3d55567ccf9bf",
+      "status": "unassessed",
+      "truth_samples": null
+    }
+  },
+  "overall_assessments_preserved": true,
+  "simulated_paid_analyses": 6,
+  "unpaid_jobs": 0
+}

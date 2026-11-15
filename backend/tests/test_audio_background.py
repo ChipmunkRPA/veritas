@@ -8,15 +8,17 @@ from PIL import Image
 
 from app.core.canonical import canonical_json
 from app.detectors.audio.decode import SAMPLE_RATE, read_wav
+from app.evidence import audio_tonal_phase_binding as tonal
 from app.evidence.audio_background import (
     build_content,
     spectrogram_values,
     verify_source_content,
 )
+from app.evidence.audio_background_binding import validate_acoustic_context
 from app.evidence.audio_packets import _chart
 
 
-def build(pcm, *, version='mixed-acoustics-2'):
+def build(pcm, *, version='mixed-acoustics-2', native=False):
     pcm = (np.rint(np.asarray(pcm) * 32768).clip(-32768, 32767).astype('<i2').astype(np.float32) / 32768)
     sha = hashlib.sha256(pcm.astype('<f4').tobytes()).hexdigest()
     source = {'sha256': 'a'*64, 'pcm_sha256': sha, 'samples': len(pcm), 'sample_rate': SAMPLE_RATE, 'coordinate_space': 'analysed-mono-pcm'}
@@ -24,6 +26,10 @@ def build(pcm, *, version='mixed-acoustics-2'):
     mapping = {'samples': len(pcm), 'timeline_time_base':'1/16000', 'timeline': [
         {'start_sample': 0, 'end_sample': split, 'source_pts': 16000},
         {'start_sample': split, 'end_sample': len(pcm), 'source_pts': split+32000}]}
+    if native:
+        mapping.update(timeline=[{'start_sample': 0, 'end_sample': len(pcm), 'source_pts': 0}],
+                       source_codec="pcm_s16le", source_container="wav", source_bit_depth=16,
+                       source_channels=1, source_sample_rate=SAMPLE_RATE, source_duration_s=len(pcm) / SAMPLE_RATE)
     assets = {}
     def asset(data, media_type, **metadata):
         sha = hashlib.sha256(data).hexdigest()
@@ -95,6 +101,38 @@ def test_silence_has_finite_floor_and_no_synthesis_result():
     assert all('score' not in row for row in doc['bins'])
     assert b'NaN' not in canonical_json(doc)
     verify(fixture)
+
+
+@pytest.mark.parametrize(("case", "status"), [
+    ("no-tone", "unassessed"), ("continuous", "no_supported_change"), ("change", "measured_change"),
+])
+def test_tone_phase_evidence_replays_with_exact_source_samples(case, status):
+    time = np.arange(73600) / SAMPLE_RATE
+    pcm = np.random.default_rng(12).normal(0, .014, len(time))
+    if case == "change":
+        time[21840:35920] += .0041
+    if case != "no-tone":
+        pcm += .045 * np.sin(2 * np.pi * 60 * time) + .026 * np.sin(2 * np.pi * 120 * time)
+    fixture = build(pcm, native=True, version='mixed-acoustics-2+silence' + tonal.SUFFIX)
+    document, assets, original, source, mapping, packets = fixture
+    assert document["schema"] == tonal.SCHEMA
+    assert document[tonal.KEY]["status"] == status
+    validate_acoustic_context(document, source=source | mapping, voice_packets=packets)
+    verify(fixture)
+
+    selected = [item for item in document["events"] if item["category"] == tonal.KEY]
+    if case == "change":
+        event, = selected
+        a, b = (event["interval"][key] for key in ("start_sample", "end_sample"))
+        assert abs(a - 21840) <= 1920 and abs(b - 35920) <= 1920
+        assert event["source_timestamp_ranges"][0]["source_start_pts"] == a
+        np.testing.assert_array_equal(read_wav(assets[event["artifacts"]["selected_clip"]["sha256"]]), original[a:b])
+        assert "zero AI-confidence weight" in event["interpretation"]
+        document[tonal.KEY]["measurement"]["tones"][0]["frequency_hz"] = 50
+        with pytest.raises(ValueError, match="phase locations"):
+            validate_acoustic_context(document, source=source | mapping, voice_packets=packets)
+    else:
+        assert selected == []
 
 
 def test_exact_silence_does_not_join_across_source_clock_gap():

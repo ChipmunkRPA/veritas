@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [small PNG interpolation replay](image-native-cfa-fine-2026-11-15.md#reproduce)
+recounts locations, control flags and unassessed deliveries on two
+separate camera groups. The native replay verifies the original RAW
+hashes before rebuilding the smaller local edits and matched controls.
+
 The [near-end face-change replay](video-face-clip-boundary-2026-11-15.md#reproduce)
 recounts staged edits and ordinary controls near the start and end of
 four-second clips. An independent decoder verifies the exact source

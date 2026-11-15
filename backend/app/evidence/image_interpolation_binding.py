@@ -12,17 +12,21 @@ SCHEMA = "image-native-interpolation/1"
 EXTENDED_SCHEMA = "image-native-interpolation/2"
 ROTATION_SCHEMA = "image-native-interpolation/3"
 QUANTIZED_SCHEMA = "image-native-interpolation/4"
+FINE_SCHEMA = "image-native-interpolation/5"
 SCOPE = "This check requires a 2048 × 1536, 16-bit RGB PNG without ancillary chunks and a repeatable interpolation pattern."
 ROTATION_SCOPE = SCOPE + " It also looks for local interpolation consistent with a small rotation."
 QUANTIZED_SCOPE = ROTATION_SCOPE + " This check also compares local stored-value steps with the remaining pixel pattern."
+FINE_SCOPE = SCOPE + " The fine check compares nearby 16-pixel cells on the original pixel grid."
 EXTENDED_SCOPE = (
     "This check requires a 16-bit RGB PNG without ancillary chunks, a repeatable interpolation pattern, "
     "and one of these sizes: 2048 × 1536, 2304 × 1728, 2368 × 1344 or 1792 × 1792."
 )
 LEGACY_SIZE = (2048, 1536)
 SUPPORTED_SIZES = frozenset({LEGACY_SIZE, (2304, 1728), (2368, 1344), (1792, 1792)})
-SCOPES = {SCHEMA: SCOPE, EXTENDED_SCHEMA: EXTENDED_SCOPE, ROTATION_SCHEMA: ROTATION_SCOPE, QUANTIZED_SCHEMA: QUANTIZED_SCOPE}
-REGION_STATUSES = frozenset({"matched", "rotation", "quantized_resampling"})
+SCOPES = {SCHEMA: SCOPE, EXTENDED_SCHEMA: EXTENDED_SCOPE, ROTATION_SCHEMA: ROTATION_SCOPE,
+          QUANTIZED_SCHEMA: QUANTIZED_SCOPE, FINE_SCHEMA: FINE_SCOPE}
+BASIS_SCHEMAS = {ROTATION_SCHEMA, QUANTIZED_SCHEMA, FINE_SCHEMA}
+REGION_STATUSES = frozenset({"matched", "rotation", "quantized_resampling", "fine_shift"})
 LIMITATION = "An ordinary edit can change the interpolation pattern. The observation carries zero AI confidence weight."
 STATUS = {
     "unsupported_png": "The PNG did not match the supported input profile.",
@@ -31,6 +35,7 @@ STATUS = {
     "matched": "A compact region showed a different interpolation pattern from the surrounding image.",
     "rotation": "A compact region showed an interpolation pattern consistent with a small local rotation.",
     "quantized_resampling": "A compact region used larger pixel-value steps and retained a repeating camera-style pattern.",
+    "fine_shift": "A small region repeated a different camera interpolation pattern from the surrounding image.",
     "provenance": "The analysis stopped at verified provenance before this check ran.",
     "unavailable": "The check could not finish during the analysis.",
 }
@@ -60,7 +65,10 @@ def observation(schema, status):
     return STATUS[status]
 
 
-def basis(status):
+def basis(status, fine=None):
+    if status == "fine_shift":
+        return (f"The alternate pattern was stronger in {fine['matching_cells']} of {fine['compared_cells']} "
+                "measured 16 × 16 pixel cells within the crop. This supports a local change in pixel alignment.")
     return {"rotation": ROTATION_OBSERVATION, "quantized_resampling": QUANTIZED_OBSERVATION}.get(status)
 
 
@@ -82,11 +90,23 @@ def validate(document, commitment):
             or status not in STATUS or record["observation"] != observation(schema, status)
             or (status == "rotation" and schema not in {ROTATION_SCHEMA, QUANTIZED_SCHEMA})
             or (status == "quantized_resampling" and schema != QUANTIZED_SCHEMA)
+            or (status == "fine_shift" and schema != FINE_SCHEMA)
+            or (schema == FINE_SCHEMA and status not in {"fine_shift", "no_match"})
             or record["scope"] != scope or record["limitation"] != LIMITATION
             or record["affects_overall_confidence"] is not False):
         raise ValueError("Interpolation evidence differs from its source commitment")
-    if (schema in {ROTATION_SCHEMA, QUANTIZED_SCHEMA} and record.get("basis") != basis(status)
-            or schema not in {ROTATION_SCHEMA, QUANTIZED_SCHEMA} and "basis" in record):
+    fine = record.get("fine_pattern")
+    if status == "fine_shift":
+        if (not isinstance(fine, dict) or fine.keys() != {"alternate_phase", "matching_cells", "compared_cells"}
+                or any(type(value) is not int for value in fine.values())
+                or fine["alternate_phase"] not in range(4) or fine["alternate_phase"] == record["phase"]
+                or fine["compared_cells"] not in {4, 6, 9}
+                or not 2 * fine["compared_cells"] <= 3 * fine["matching_cells"] <= 3 * fine["compared_cells"]):
+            raise ValueError("Invalid fine interpolation reading")
+    elif "fine_pattern" in record:
+        raise ValueError("Unexpected fine interpolation reading")
+    if (schema in BASIS_SCHEMAS and record.get("basis") != basis(status, fine)
+            or schema not in BASIS_SCHEMAS and "basis" in record):
         raise ValueError("Interpolation evidence does not describe the recorded basis")
     quantized = record.get("quantized_pattern")
     if status == "quantized_resampling":
@@ -115,11 +135,16 @@ def validate(document, commitment):
             raise ValueError("Interpolation source images require a measured region")
         return
     x0, y0, x1, y1 = box
-    alignment = 32 if status == "matched" else 16
-    if (any(type(v) is not int or v % alignment for v in box)
-            or not 0 <= x0 < x1 <= size[0] or not 0 <= y0 < y1 <= size[1]
-            or not 64 <= x1 - x0 <= 192 or not 64 <= y1 - y0 <= 192
-            or (x1 - x0) % 32 or (y1 - y0) % 32
+    alignment = 8 if fine is not None else 32 if status == "matched" else 16
+    if any(type(v) is not int or v % alignment for v in box):
+        raise ValueError("Interpolation region is not aligned to its native grid")
+    if fine is not None:
+        valid_shape = (x1 - x0 in {32, 48} and y1 - y0 in {32, 48}
+                       and fine["compared_cells"] == (x1 - x0) * (y1 - y0) // 256)
+    else:
+        valid_shape = (64 <= x1 - x0 <= 192 and 64 <= y1 - y0 <= 192
+                       and (x1 - x0) % 32 == (y1 - y0) % 32 == 0)
+    if (not valid_shape or not 0 <= x0 < x1 <= size[0] or not 0 <= y0 < y1 <= size[1]
             or not SHA.fullmatch(str(digest)) or set(pictures) != set(ROLES)):
         raise ValueError("Interpolation region or source image is invalid")
     for role, (width, height) in zip(ROLES, ((size[0] // 2, size[1] // 2), (x1 - x0, y1 - y0)), strict=True):

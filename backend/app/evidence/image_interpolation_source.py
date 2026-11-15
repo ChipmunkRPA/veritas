@@ -11,7 +11,8 @@ from app.detectors.image import native_cfa, native_cfa_dimensions
 from app.evidence import image_interpolation_binding as binding
 
 
-def record(source_sha256, *, body=None, skipped=False, schema=None, include_rotation=False, include_quantized=False, check=None):
+def record(source_sha256, *, body=None, skipped=False, schema=None, include_rotation=False, include_quantized=False,
+           include_fine=False, check=None):
     if schema is None:
         is_legacy_size = body is not None and native_cfa_dimensions.png_size(body) == binding.LEGACY_SIZE
         if not is_legacy_size:
@@ -21,9 +22,10 @@ def record(source_sha256, *, body=None, skipped=False, schema=None, include_rota
         else:
             schema = binding.ROTATION_SCHEMA if include_rotation else binding.SCHEMA
     detector = native_cfa_dimensions if schema == binding.EXTENDED_SCHEMA else native_cfa
-    extra_status, extra_region, quantized = "no_match", None, None
+    fine_requested = schema == binding.FINE_SCHEMA or (include_fine and schema != binding.EXTENDED_SCHEMA)
+    extra_status, extra_region, quantized, fine = "no_match", None, None, None
     try:
-        if body is not None and not skipped and schema in {binding.ROTATION_SCHEMA, binding.QUANTIZED_SCHEMA}:
+        if body is not None and not skipped and (schema in {binding.ROTATION_SCHEMA, binding.QUANTIZED_SCHEMA} or fine_requested):
             rgb = detector.decoded_rgb(body)
             measurement = detector.measure(rgb) if rgb is not None else native_cfa.InterpolationReview("unsupported_png")
             if measurement.status == "assessed" and not measurement.region:
@@ -31,11 +33,23 @@ def record(source_sha256, *, body=None, skipped=False, schema=None, include_rota
                     from app.detectors.image import native_cfa_quantized
 
                     extra_status, extra_region, quantized = native_cfa_quantized.inspect(rgb, check=check)
-                else:
+                elif schema == binding.ROTATION_SCHEMA:
                     from app.detectors.image import native_cfa_rotation
 
                     extra_region = native_cfa_rotation.inspect(rgb, check=check)["box"]
                     extra_status = "rotation" if extra_region else "no_match"
+                if fine_requested and extra_region is None:
+                    from app.detectors.image import native_cfa_fine
+
+                    try:
+                        proposed = native_cfa_fine.propose(rgb, measurement.phase, check=check)
+                    except (cv2.error, MemoryError):
+                        pass  # Preserve an already completed coarse measurement.
+                    else:
+                        schema = binding.FINE_SCHEMA
+                        if proposed is not None and proposed["response"] > native_cfa_fine.POINT:
+                            extra_status, extra_region = "fine_shift", proposed["region"]
+                            fine = {key: proposed[key] for key in ("alternate_phase", "matching_cells", "compared_cells")}
         else:
             measurement = detector.inspect_png(body) if body is not None and not skipped else None
     except (cv2.error, MemoryError):
@@ -56,8 +70,10 @@ def record(source_sha256, *, body=None, skipped=False, schema=None, include_rota
               "supported_cells": measurement.supported_cells if measurement else 0,
               "reference_closure": measurement.reference_closure if measurement else None,
               "decoded_rgb16_sha256": digest}
-    if schema in {binding.ROTATION_SCHEMA, binding.QUANTIZED_SCHEMA}:
-        result["basis"] = binding.basis(status)
+    if schema in binding.BASIS_SCHEMAS:
+        result["basis"] = binding.basis(status, fine)
+    if fine is not None:
+        result["fine_pattern"] = fine
     if schema == binding.QUANTIZED_SCHEMA:
         result["quantized_pattern"] = (dict(zip(("code_step", "minimum_channel_fraction", "phase_contrast"), quantized, strict=True))
                                        if quantized is not None else None)

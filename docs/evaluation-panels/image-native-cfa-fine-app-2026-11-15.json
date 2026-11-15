@@ -1,0 +1,64 @@
+{
+  "cases": {
+    "32_sharp": {
+      "images_verified_in_pdf": 2,
+      "pdf_sha256": "04ade2ca3558edc2f96b2c67b194d242737bff145cf7772202a7adcc5ca966cc",
+      "record": {
+        "affects_overall_confidence": false,
+        "basis": "The alternate pattern was stronger in 4 of 4 measured 16 \u00d7 16 pixel cells within the crop. This supports a local change in pixel alignment.",
+        "decoded_rgb16_sha256": "349872c6f74fad568e93e36448710574e4dee78163c928ce96ba7f3462025c54",
+        "fine_pattern": {
+          "alternate_phase": 2,
+          "compared_cells": 4,
+          "matching_cells": 4
+        },
+        "limitation": "An ordinary edit can change the interpolation pattern. The observation carries zero AI confidence weight.",
+        "observation": "A small region repeated a different camera interpolation pattern from the surrounding image.",
+        "phase": 0,
+        "reference_closure": 1.0,
+        "region": [
+          480,
+          416,
+          512,
+          448
+        ],
+        "schema": "image-native-interpolation/5",
+        "scope": "This check requires a 2048 \u00d7 1536, 16-bit RGB PNG without ancillary chunks and a repeatable interpolation pattern. The fine check compares nearby 16-pixel cells on the original pixel grid.",
+        "source_sha256": "3ae4a6b79f618ca25651f8ed4cd0478e0bb1a726bb5571dfce4b51f9c63e19f2",
+        "status": "fine_shift",
+        "supported_cells": 2620
+      },
+      "signed_source_verified": true,
+      "source": 1079,
+      "source_sha256": "3ae4a6b79f618ca25651f8ed4cd0478e0bb1a726bb5571dfce4b51f9c63e19f2"
+    },
+    "local_tone": {
+      "images_verified_in_pdf": 0,
+      "pdf_sha256": "016dffc522ed6f79e96dcc90abe6532038d7d69ff346e4649de0efe6a9a637ed",
+      "record": {
+        "affects_overall_confidence": false,
+        "basis": null,
+        "decoded_rgb16_sha256": null,
+        "limitation": "An ordinary edit can change the interpolation pattern. The observation carries zero AI confidence weight.",
+        "observation": "No qualifying interpolation shift was found in the checked areas.",
+        "phase": 0,
+        "reference_closure": 1.0,
+        "region": null,
+        "schema": "image-native-interpolation/5",
+        "scope": "This check requires a 2048 \u00d7 1536, 16-bit RGB PNG without ancillary chunks and a repeatable interpolation pattern. The fine check compares nearby 16-pixel cells on the original pixel grid.",
+        "source_sha256": "f7897e23e59810671830cf508763398d326dd70631273600579534a7d5b845b5",
+        "status": "no_match",
+        "supported_cells": 2620
+      },
+      "signed_source_verified": true,
+      "source": 1079,
+      "source_sha256": "f7897e23e59810671830cf508763398d326dd70631273600579534a7d5b845b5"
+    }
+  },
+  "checkout": {
+    "analyses": 4,
+    "before_payment_jobs": 0,
+    "cents": 999,
+    "currency": "USD"
+  }
+}

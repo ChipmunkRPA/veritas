@@ -565,7 +565,8 @@ def render(ctx: StageContext) -> dict[str, Any]:
         rotation = settings.image_native_rotation_review and (remaining is None or remaining >= 15)
         interpolation[image_interpolation_binding.KEY] = image_interpolation_source.record(
             ingest["sha256"], body=body, skipped=stopped, include_rotation=rotation,
-            include_quantized=rotation and settings.image_native_quantized_review, check=ctx.check,
+            include_quantized=rotation and settings.image_native_quantized_review,
+            include_fine=settings.image_native_fine_review, check=ctx.check,
         )
     return {"artefacts_indexed": len(records), "bytes": sum(a["size_bytes"] for a in records), "tiles": tiles,
             "legacy_artifacts": legacy, "exhibits": image_exhibits, "artefacts": image_artefacts, **interpolation}

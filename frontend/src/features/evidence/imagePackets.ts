@@ -146,6 +146,7 @@ export interface ImageEvidenceSet {
   native_interpolation_review?: {
     record: { status: string; observation: string; scope: string; limitation: string; basis?: string | null;
       quantized_pattern?: { code_step: number; minimum_channel_fraction: number; phase_contrast: number } | null;
+      fine_pattern?: { alternate_phase: number; matching_cells: number; compared_cells: number };
       supported_cells: number; region: [number, number, number, number] | null; affects_overall_confidence: false }
     artifacts: Partial<Record<'context' | 'crop', EvidenceImage>>
   }

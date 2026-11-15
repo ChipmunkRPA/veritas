@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Small interpolation changes in one native PNG](image-native-cfa-fine-2026-11-15.md)
+  localized 16/20 sharp 32-pixel edits missed by the coarse rule,
+  with no flags in 120 supported ordinary controls. The fine fallback
+  shows the measured cells and original 16-bit crop. It carries zero
+  weight in AI confidence and provided no useful feathered 32- or
+  48-pixel locations.
+
 - [Short face changes near either end of a clip](video-face-clip-boundary-2026-11-15.md)
   located both native boundaries in 10/24 held staged H.264 edits
   versus zero for the prior brief proposal, with no flags on 32 ordinary

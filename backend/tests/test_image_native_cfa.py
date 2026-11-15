@@ -144,6 +144,33 @@ def test_signed_interpolation_observation_binds_native_crop_and_coordinates(rend
         source.verify(body, review, data.__getitem__)
 
 
+def test_fine_review_selects_small_region_without_changing_coarse_evidence(renders):
+    original, edited = renders
+    small = original.copy()
+    small[416:448, 480:512] = original[160:192, 129:161]
+    body = png(small)
+    sha = hashlib.sha256(body).hexdigest()
+    assert source.record(sha, body=body)["status"] == "no_match"
+    measured = source.record(sha, body=body, include_fine=True)
+    assert measured["schema"] == binding.FINE_SCHEMA and measured["status"] == "fine_shift"
+    assert measured["region"] == [480, 416, 512, 448]
+    assert measured["fine_pattern"] == {"alternate_phase": 1, "matching_cells": 4, "compared_cells": 4}
+    assert measured["affects_overall_confidence"] is False
+    assert source.record(sha, body=body, schema=binding.FINE_SCHEMA) == measured
+    assert np.array_equal(source.plates(body, measured["region"], schema=binding.FINE_SCHEMA)["crop"],
+                          small[416:448, 480:512, ::-1])
+
+    for pixels, expected in ((original, "no_match"), (edited, "matched")):
+        encoded = png(pixels)
+        digest = hashlib.sha256(encoded).hexdigest()
+        result = source.record(digest, body=encoded, include_fine=True)
+        assert result["status"] == expected
+        if expected == "matched":
+            assert result == source.record(digest, body=encoded)
+        else:
+            assert result["schema"] == binding.FINE_SCHEMA and result["region"] is None
+
+
 def test_quantized_region_binds_measurement_and_preserves_rotation_priority(renders, monkeypatch):
     from app.detectors.image import native_cfa_quantized, native_cfa_rotation
 

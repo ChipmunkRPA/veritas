@@ -72,6 +72,19 @@ it('shows the measured pixel-value step and the source crop for local resampling
   expect(screen.getByText(/opposite two-pixel patterns/)).toBeTruthy()
   expect(screen.getByAltText('Original 16-bit source crop')).toBeTruthy()
 })
+it('shows the supporting cell count, original crop and coordinates for a small phase shift', () => {
+  show({ ...evidence, source: { ...evidence.source, width: 2048, height: 1536 }, packets: [], native_interpolation_review: {
+    record: { status: 'fine_shift', observation: 'A small region repeated a different camera interpolation pattern.',
+      basis: 'The alternate pattern was stronger in 4 of 4 measured 16 × 16 pixel cells within the crop.',
+      fine_pattern: { alternate_phase: 1, matching_cells: 4, compared_cells: 4 },
+      scope: 'Supported 16-bit PNGs only.', limitation: 'This carries zero AI confidence weight.',
+      supported_cells: 2620, region: [480, 416, 512, 448], affects_overall_confidence: false },
+    artifacts: { context: artifact('b'), crop: artifact('c') },
+  } })
+  expect(screen.getByText(/4 of 4 measured 16 × 16 pixel cells/)).toBeTruthy()
+  expect(screen.getByText(/Source columns \[480, 512\) and rows \[416, 448\)/)).toBeTruthy()
+  expect(screen.getByAltText('Original 16-bit source crop')).toBeTruthy()
+})
 afterEach(() => {
   cleanup()
   vi.unstubAllGlobals()

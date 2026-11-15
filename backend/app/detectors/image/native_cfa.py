@@ -84,14 +84,15 @@ def decoded_rgb(body: bytes | memoryview) -> np.ndarray | None:
     return np.ascontiguousarray(bgr[..., ::-1])
 
 
-def cell_sums(matrix):
+def cell_sums(matrix, cell=CELL):
     height, width = matrix.shape
-    return matrix.reshape(height // CELL, CELL, width // CELL, CELL).sum(axis=(1, 3))
+    return matrix.reshape(height // cell, cell, width // cell, cell).sum(axis=(1, 3))
 
 
-def stencil(rgb):
+def stencil(rgb, *, cell=CELL, minimum=MIN_SAMPLES, half_step=False):
     values = rgb.astype(np.int32)
     height, width = rgb.shape[:2]
+    step = cell // 2 if half_step else cell
     channels = []
     for index in (0, 2):
         channel = values[..., index]
@@ -109,9 +110,12 @@ def stencil(rgb):
                 p = np.s_[parity // 2:height:2, parity % 2:width:2]
                 evaluated = np.zeros_like(eligible)
                 evaluated[p] = eligible[p]
-                count = cell_sums(evaluated)
-                matched = cell_sums(evaluated & (diff <= CLOSURE_TOLERANCE))
-                rates.append(np.divide(matched, np.maximum(count, 1), where=count >= MIN_SAMPLES,
+                count = cell_sums(evaluated, step)
+                matched = cell_sums(evaluated & (diff <= CLOSURE_TOLERANCE), step)
+                if half_step:
+                    count = count[:-1, :-1] + count[1:, :-1] + count[:-1, 1:] + count[1:, 1:]
+                    matched = matched[:-1, :-1] + matched[1:, :-1] + matched[:-1, 1:] + matched[1:, 1:]
+                rates.append(np.divide(matched, np.maximum(count, 1), where=count >= minimum,
                                        out=np.full_like(count, np.nan, dtype=np.float64)))
             orientations.append(rates)
         channels.append(orientations)

@@ -99,7 +99,7 @@ it('shows mono level loss at the matching source interval without marking it as 
   expect(section.queryByText(/recording-wide voice estimate is unavailable/)).toBeNull()
 })
 
-it('plays only the committed comparison and anchors all four assets to its sample and source times', () => {
+it.each([false, true])('plays only the committed comparison with optional channel difference %s', (difference) => {
   const set = fixture()
   set.source.pcm_sha256 = 'd'.repeat(64)
   set.source.samples = 32000
@@ -116,9 +116,10 @@ it('plays only the committed comparison and anchors all four assets to its sampl
     sha256: hash.repeat(64), media_type: 'audio/wav', url: 'https://foreign.invalid', samples: 16000,
     channels: 1, sample_rate: 16000,
   })
-  set.stereo_listening = { schema: 'chipmunk.stereo-listening/1', affects_overall_confidence: false, windows: [{
+  set.stereo_listening = { schema: difference ? 'chipmunk.stereo-listening/2' : 'chipmunk.stereo-listening/1', affects_overall_confidence: false, windows: [{
     stereo_window_index: 1, artifacts: { left: clip('1'), right: clip('2'), mono: clip('3'),
-      waveform: { sha256: '4'.repeat(64), media_type: 'image/png', url: 'https://foreign.invalid', width: 960, height: 290 } },
+      ...(difference ? { difference: clip('5') } : {}),
+      waveform: { sha256: '4'.repeat(64), media_type: 'image/png', url: 'https://foreign.invalid', width: 960, height: difference ? 370 : 290 } },
   }] }
   const { rerender } = render(<MemoryRouter><AudioEvidenceContent set={set} token="signed token" mediaReady /></MemoryRouter>)
   const region = within(screen.getByRole('region', { name: 'Stereo channel comparison' }))
@@ -132,10 +133,18 @@ it('plays only the committed comparison and anchors all four assets to its sampl
       `/api/v2/analyses/stereo-audio/evidence-packets/set/assets/${hash.repeat(64)}.wav?token=signed%20token`,
     )
   }
-  const image = comparison.getByAltText(/exact analyzed mono waveforms, 1\.000 s–2\.000 s/)
+  const image = comparison.getByAltText(/exact analyzed mono.* waveforms, 1\.000 s–2\.000 s/)
   expect(image.getAttribute('src')).toContain(`/${'4'.repeat(64)}.png?token=signed%20token`)
   expect(image.getAttribute('width')).toBe('960')
-  expect(image.getAttribute('height')).toBe('290')
+  expect(image.getAttribute('height')).toBe(difference ? '370' : '290')
+  if (difference) {
+    expect(comparison.getByLabelText('Derived channel difference').getAttribute('src')).toBe(
+      `/api/v2/analyses/stereo-audio/evidence-packets/set/assets/${'5'.repeat(64)}.wav?token=signed%20token`,
+    )
+    expect(comparison.getByText(/analysis did not score this derived clip/)).toBeTruthy()
+  } else {
+    expect(comparison.queryByLabelText('Derived channel difference')).toBeNull()
+  }
   const left = comparison.getByLabelText('Decoded left channel') as HTMLAudioElement
   Object.defineProperty(left, 'paused', { configurable: true, value: false })
   const stopLeft = vi.spyOn(left, 'pause').mockImplementation(() => {

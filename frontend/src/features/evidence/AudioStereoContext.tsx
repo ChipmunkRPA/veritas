@@ -30,18 +30,17 @@ export default function AudioStereoContext({ set, token, mediaReady, videoOrigin
   const monoLimit = set.coverage?.mono_voice_coverage_limit
   const cancelled = monoLimit?.policy === 'destructive-stereo-downmix/1'
     ? monoLimit.stereo_window_indices.flatMap((index) => context.windows[index] ? [context.windows[index]] : []) : []
-  const listening = set.stereo_listening
-  const comparisons = hasDownmix && listening?.schema === 'chipmunk.stereo-listening/1'
-    && listening.affects_overall_confidence === false ? listening.windows.flatMap(({ stereo_window_index, artifacts }) => {
+  const record = set.stereo_listening
+  const listening = (record?.schema === 'chipmunk.stereo-listening/1' || record?.schema === 'chipmunk.stereo-listening/2')
+    && record.affects_overall_confidence === false ? record : undefined
+  const comparisons = hasDownmix && listening ? listening.windows.flatMap(({ stereo_window_index, artifacts }) => {
       const window = context.windows[stereo_window_index]
       return window ? [{ window, artifacts }] : []
     }) : []
   const silence = context.channel_silence
-  const silenceAssets = listening?.schema === 'chipmunk.stereo-listening/1'
-    && listening.affects_overall_confidence === false ? listening.channel_silence : undefined
+  const silenceAssets = listening?.channel_silence
   const identical = context.identical_channel_interval
-  const identicalAssets = listening?.schema === 'chipmunk.stereo-listening/1'
-    && listening.affects_overall_confidence === false ? listening.identical_channel_interval : undefined
+  const identicalAssets = listening?.identical_channel_interval
   return <section id="media-evidence-stereo" aria-labelledby="media-evidence-stereo-heading" className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
     <h3 id="media-evidence-stereo-heading" className="m-0 text-body font-medium">Stereo channel comparison</h3>
     {!bound ? <p role="alert" className="mt-2 mb-0 text-small text-text-muted">The channel measurements do not match this analyzed audio input.</p>
@@ -163,12 +162,16 @@ export default function AudioStereoContext({ set, token, mediaReady, videoOrigin
             })}
             <figure className="m-0 mt-3">
               <EvidencePicture set={set} artifact={artifacts.waveform} token={token} ready={mediaReady} chart
-                alt={`Decoded left and right channels and exact analyzed mono waveforms, ${range(window)}`} />
+                alt={`Decoded left and right channels and exact analyzed mono${artifacts.difference ? ' and derived channel difference' : ''} waveforms, ${range(window)}`} />
             </figure>
             <div className="mt-3 grid gap-3 min-[900px]:grid-cols-3">
               {(['left', 'right', 'mono'] as const).map((channel) => <EvidenceAudio key={channel} set={set}
                 artifact={artifacts[channel]} token={token} ready={mediaReady} alt={channels[channel]} />)}
             </div>
+            {artifacts.difference && <div className="mt-3">
+              <p className="mb-2 text-caption text-text-muted">Channel difference is (left − right) / 2. It helps isolate opposing sound. The analysis did not score this derived clip.</p>
+              <EvidenceAudio set={set} artifact={artifacts.difference} token={token} ready={mediaReady} alt="Derived channel difference" />
+            </div>}
           </article>)}
         </details>}
         <details className="mt-3 text-small text-text-muted">

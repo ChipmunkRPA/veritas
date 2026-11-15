@@ -5,11 +5,13 @@ import re
 
 from app.evidence import stereo_collapse_binding
 from app.evidence.audio_silence_binding import FLANK
-from app.evidence.stereo_binding import CHANNEL_SILENCE, SAMPLE_RATE
+from app.evidence.stereo_binding import CHANNEL_SILENCE, SAMPLE_RATE, destructive_downmix_windows
 from app.evidence.stereo_binding import SCHEMA as STEREO_SCHEMA
 
 SCHEMA = "chipmunk.stereo-listening/1"
+DIFFERENCE_SCHEMA = "chipmunk.stereo-listening/2"
 DIMENSIONS = (960, 290)
+DIFFERENCE_DIMENSIONS = (960, 370)
 CHANNELS = ("left", "right", "mono")
 MAX_WINDOWS = 3
 LOCAL_EXCERPTS = {CHANNEL_SILENCE: FLANK, stereo_collapse_binding.KEY: stereo_collapse_binding.FLANK}
@@ -49,16 +51,17 @@ def validate(listening: dict, stereo: dict | None) -> None:
         rows = listening["windows"]
         excerpts = {key: spans for key in LOCAL_EXCERPTS if (spans := intervals(stereo, key))}
         keys = {"schema", "affects_overall_confidence", "windows", *excerpts}
+        difference = set(destructive_downmix_windows(stereo)).intersection(selected) if listening["schema"] == DIFFERENCE_SCHEMA else set()
         if (set(listening) != keys
-                or listening["schema"] != SCHEMA or listening["affects_overall_confidence"] is not False
+                or listening["schema"] not in (SCHEMA, DIFFERENCE_SCHEMA) or listening["affects_overall_confidence"] is not False
+                or (listening["schema"] == DIFFERENCE_SCHEMA and not difference)
                 or (not selected and not excerpts) or not isinstance(rows, list)
                 or [row["stereo_window_index"] for row in rows] != selected):
             raise ValueError("Stereo listening windows differ from the measured channel comparison")
         for row in rows:
-            if (set(row) != {"stereo_window_index", "artifacts"} or type(row["stereo_window_index"]) is not int
-                    or set(row["artifacts"]) != {*CHANNELS, "waveform"}):
+            if set(row) != {"stereo_window_index", "artifacts"} or type(row["stereo_window_index"]) is not int:
                 raise ValueError("Stereo listening assets are incomplete")
-            _validate_assets(row["artifacts"], SAMPLE_RATE)
+            _validate_assets(row["artifacts"], SAMPLE_RATE, difference=row["stereo_window_index"] in difference)
         for key, spans in excerpts.items():
             section = listening[key]
             if not isinstance(section, list) or len(section) != len(spans):
@@ -71,11 +74,13 @@ def validate(listening: dict, stereo: dict | None) -> None:
         raise ValueError("Stereo listening evidence has invalid fields") from error
 
 
-def _validate_assets(assets, samples):
-    if set(assets) != {*CHANNELS, "waveform"}:
+def _validate_assets(assets, samples, *, difference=False):
+    roles = {*CHANNELS, "waveform", "difference"} if difference else {*CHANNELS, "waveform"}
+    if set(assets) != roles:
         raise ValueError("Stereo listening assets are incomplete")
+    width, height = DIFFERENCE_DIMENSIONS if difference else DIMENSIONS
     for name, asset in assets.items():
-        expected = ({"media_type": "image/png", "width": DIMENSIONS[0], "height": DIMENSIONS[1]} if name == "waveform"
+        expected = ({"media_type": "image/png", "width": width, "height": height} if name == "waveform"
                     else {"media_type": "audio/wav", "sample_rate": SAMPLE_RATE, "samples": samples, "channels": 1})
         if (set(asset) != {*expected, "sha256", "url"} or any(asset[key] != value for key, value in expected.items())
                 or not re.fullmatch(r"[a-f0-9]{64}", asset["sha256"])):

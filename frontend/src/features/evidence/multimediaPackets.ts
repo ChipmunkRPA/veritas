@@ -161,8 +161,8 @@ export interface StereoChannelContext {
   })[]
 }
 interface StereoListeningContext {
-  schema: 'chipmunk.stereo-listening/1'; affects_overall_confidence: false
-  windows: { stereo_window_index: number; artifacts: Record<'left' | 'right' | 'mono' | 'waveform', EvidenceAsset> }[]
+  schema: 'chipmunk.stereo-listening/1' | 'chipmunk.stereo-listening/2'; affects_overall_confidence: false
+  windows: { stereo_window_index: number; artifacts: Record<'left' | 'right' | 'mono' | 'waveform', EvidenceAsset> & { difference?: EvidenceAsset } }[]
   channel_silence?: { artifacts: Record<'left' | 'right' | 'mono' | 'waveform', EvidenceAsset> }[]
   identical_channel_interval?: { artifacts: Record<'left' | 'right' | 'mono' | 'waveform', EvidenceAsset> }[]
 }

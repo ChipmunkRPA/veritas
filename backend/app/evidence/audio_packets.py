@@ -522,7 +522,8 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
 
     listening_digest = binding.get("stereo_listening_pcm_sha256") or mapping.get("stereo_listening_pcm_sha256")
     if listening := stereo_listening.build(store, listening_digest, document.get("stereo_context"), pcm,
-            lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata)):
+            lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
+            include_difference=MONO_VOICE_COVERAGE in document["coverage"]):
         document["stereo_listening"] = listening
     from app.evidence.audio_repetition import build as build_repetition
     from app.evidence.audio_similarity import build as build_similarity

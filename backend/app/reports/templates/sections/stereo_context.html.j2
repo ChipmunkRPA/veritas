@@ -69,6 +69,7 @@ JSON pointer <span class="mono">{{ row.json_pointer }}</span>.</p>
 <p class="caption">Samples [{{ comparison.start_sample }}, {{ comparison.end_sample }}) at {{ stereo.sample_rate }} Hz.
 {% for range in comparison.ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% if range.playback %} Video playback {{ '%.3f' | format(range.playback[0]) }}–{{ '%.3f' | format(range.playback[1]) }} s.{% endif %}{% endfor %}
 {% if comparison.omitted_ranges %} {{ comparison.omitted_ranges }} additional source-clock ranges in JSON.{% endif %}</p>
+{% if comparison.difference %}<p class="caption">Channel difference is (left − right) / 2. It helps isolate opposing sound. The analysis did not score this derived clip.</p>{% endif %}
 {{ plates([comparison.waveform], true) }}
 <p class="caption evidence-hash">Waveform SHA-256 <span class="mono">{{ comparison.waveform.sha256 }}</span>.<br>
 JSON pointer <span class="mono">{{ comparison.json_pointer }}</span>.</p>

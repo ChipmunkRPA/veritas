@@ -1319,12 +1319,14 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     for index, comparison in enumerate((stereo_source.get("stereo_listening") or {}).get("windows", [])):
         window = stereo_context["windows"][comparison["stereo_window_index"]]
         interval = _voice_interval_view(window, rate, video_origin_s)
-        caption = (f"Decoded left and right channels and exact analyzed mono, "
+        difference = comparison["artifacts"].get("difference")
+        caption = (f"Decoded left and right channels, analyzed mono{', and derived channel difference' if difference else ''}, "
                    f"{interval['start_s']:.3f}–{interval['end_s']:.3f} s. "
                    f"Samples [{window['start_sample']}, {window['end_sample']}) at {rate} Hz.")
         stereo_listening.append({
             **interval, "start_sample": window["start_sample"], "end_sample": window["end_sample"],
             "waveform": plate("waveform", comparison["artifacts"]["waveform"], caption),
+            "difference": difference is not None,
             "json_pointer": f"{stereo_prefix}/stereo_listening/windows/{index}",
         })
     stereo_excerpts = {key: [] for key in LOCAL_EXCERPTS}

@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Playback of speech lost in mono](audio-cancelled-speech-transfer-2026-11-15.md)
+  adds the exact difference clip and waveform for selected stereo
+  cancellation evidence in audio and video. A 392-delivery classifier
+  comparison found uneven gains across three held source panels. The
+  derived clip is available for listening and carries zero AI weight.
+
 - [Right-angle JPEG copies at quality 85 and 95](image-jpeg-rotation-profiles-2026-11-15.md)
   expands the source-bound rotation check to two additional standard
   compression tables. Correct locations rose from 1/72 to 50/72 at

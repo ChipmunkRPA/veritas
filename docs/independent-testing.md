@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [cancelled-speech replay](audio-cancelled-speech-transfer-2026-11-15.md#local-app-verification-and-replay)
+recounts separate voice response points and missed, flagged and
+unassessed windows across three held panels. The app evidence separately
+binds the derived waveform to the original stereo samples.
+
 The [JPEG rotation profile replay](image-jpeg-rotation-profiles-2026-11-15.md#replay)
 recounts both required crop overlaps and separately checks misplaced
 areas, matched controls, and repeated-structure controls. It also

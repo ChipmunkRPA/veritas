@@ -176,7 +176,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                                            read_waveform=lambda sha: archive.read(plots[sha])))
         except ObjectIntegrityError as error:
             raise ValueError(str(error)) from error
-        intervals += 3 * sum(1 for _ in all_artifacts(listening))
+        intervals += sum(len(assets) - 1 for assets in all_artifacts(listening))
     if repeated is not None:
         from app.evidence.audio_gain_repetition_binding import GAIN_VERSION
         from app.evidence.stereo_repetition import native_pcm, verify

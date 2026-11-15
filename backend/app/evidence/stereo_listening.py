@@ -8,8 +8,11 @@ import numpy as np
 from PIL import Image, ImageDraw
 
 from app.detectors.audio.decode import SAMPLE_RATE, wav_bytes
+from app.evidence.stereo_binding import destructive_downmix_windows
 from app.evidence.stereo_listening_binding import (
     CHANNELS,
+    DIFFERENCE_DIMENSIONS,
+    DIFFERENCE_SCHEMA,
     DIMENSIONS,
     LOCAL_EXCERPTS,
     SCHEMA,
@@ -49,12 +52,13 @@ def freeze(db, store, analysis_id: str, decoded):
 
 
 def _waveform(tracks: tuple[np.ndarray, ...], *, flank: int = 0) -> bytes:
-    im = Image.new("RGB", DIMENSIONS, "#faf9f5")
+    dimensions = DIFFERENCE_DIMENSIONS if len(tracks) > len(CHANNELS) else DIMENSIONS
+    im = Image.new("RGB", dimensions, "#faf9f5")
     draw = ImageDraw.Draw(im)
     x0, x1 = PLOT_BOX[0], PLOT_BOX[2] - 1
     draw.text((x0, 10), "Same amplitude scale | Time within clip", fill="#203b30")
-    labels = ("Left channel", "Right channel", "Analyzed mono")
-    colors = ("#176853", "#315b96", "#9b511e")
+    labels = ("Left channel", "Right channel", "Analyzed mono", "Channel difference")[:len(tracks)]
+    colors = ("#176853", "#315b96", "#9b511e", "#74518a")[:len(tracks)]
     sample_count = len(tracks[0])
     for index, (track, label, color) in enumerate(zip(tracks, labels, colors, strict=True)):
         mid = 67 + 80 * index
@@ -67,14 +71,15 @@ def _waveform(tracks: tuple[np.ndarray, ...], *, flank: int = 0) -> bytes:
         for i, chunk in enumerate(np.array_split(track, x1 - x0)):
             draw.line((x0+i, mid-float(chunk.max())*32, x0+i, mid-float(chunk.min())*32), fill=color)
     for i in range(5):
-        draw.text((x0 - 12 + i * (x1 - x0) / 4, 267), f"{i * sample_count / (4 * SAMPLE_RATE):.2f}s", fill="#203b30")
+        draw.text((x0 - 12 + i * (x1 - x0) / 4, dimensions[1] - 23), f"{i * sample_count / (4 * SAMPLE_RATE):.2f}s", fill="#203b30")
     out = io.BytesIO()
     im.save(out, "PNG")
     return out.getvalue()
 
 
-def payloads(data: bytes, stereo: dict, pcm: np.ndarray, *, waveform: bool = True):
+def payloads(data: bytes, stereo: dict, pcm: np.ndarray, *, waveform: bool = True, include_difference: bool = False):
     excerpts = list(_excerpts(stereo))
+    cancelled = set(destructive_downmix_windows(stereo)) if include_difference else set()
     if not excerpts or len(data) != 4 * sum(end - start for _, start, end in excerpts):
         raise ObjectIntegrityError("Stereo listening data does not cover the selected sample intervals")
     values = np.frombuffer(data, dtype="<i2").reshape(-1, 2)
@@ -85,6 +90,10 @@ def payloads(data: bytes, stereo: dict, pcm: np.ndarray, *, waveform: bool = Tru
         offset += count
         tracks = (pair[:, 0].astype(np.float32) / 32768, pair[:, 1].astype(np.float32) / 32768, pcm[start:end])
         files = {name: wav_bytes(track) for name, track in zip(CHANNELS, tracks, strict=True)}
+        if index in cancelled:
+            difference = (tracks[0] - tracks[1]) / 2
+            files["difference"] = wav_bytes(difference)
+            tracks = (*tracks, difference)
         if waveform:
             files["waveform"] = _waveform(tracks, flank=LOCAL_EXCERPTS.get(index, 0))
         yield index, count, files
@@ -95,16 +104,18 @@ def _frozen_data(store, digest: str) -> bytes:
     return store.read_bytes(digest)
 
 
-def build(store, digest: str | None, stereo: dict | None, pcm: np.ndarray, asset) -> dict | None:
+def build(store, digest: str | None, stereo: dict | None, pcm: np.ndarray, asset, *, include_difference: bool = False) -> dict | None:
     if digest is None:
         return None
     if not stereo:
         raise ObjectIntegrityError("Stereo listening requires its source-clock measurements")
-    result = {"schema": SCHEMA, "affects_overall_confidence": False, "windows": []}
-    for index, count, files in payloads(_frozen_data(store, digest), stereo, pcm):
-        artifacts = {name: asset(files[name], "audio/wav", samples=count, sample_rate=SAMPLE_RATE, channels=1)
-                     for name in CHANNELS}
-        artifacts["waveform"] = asset(files["waveform"], "image/png", width=DIMENSIONS[0], height=DIMENSIONS[1])
+    difference = include_difference and bool(set(select_windows(stereo)).intersection(destructive_downmix_windows(stereo)))
+    result = {"schema": DIFFERENCE_SCHEMA if difference else SCHEMA, "affects_overall_confidence": False, "windows": []}
+    for index, count, files in payloads(_frozen_data(store, digest), stereo, pcm, include_difference=difference):
+        artifacts = {name: asset(body, "audio/wav", samples=count, sample_rate=SAMPLE_RATE, channels=1)
+                     for name, body in files.items() if name != "waveform"}
+        width, height = DIFFERENCE_DIMENSIONS if "difference" in files else DIMENSIONS
+        artifacts["waveform"] = asset(files["waveform"], "image/png", width=width, height=height)
         if isinstance(index, str):
             result.setdefault(index, []).append({"artifacts": artifacts})
         else:
@@ -118,14 +129,18 @@ def verify_payloads(listening: dict, stereo: dict, pcm: np.ndarray, data: bytes,
     except ValueError as error:
         raise ObjectIntegrityError(str(error)) from error
     wav_digests = set()
-    for assets, (_, _, files) in zip(all_artifacts(listening), payloads(data, stereo, pcm, waveform=read_waveform is not None), strict=True):
+    expected_payloads = payloads(data, stereo, pcm, waveform=read_waveform is not None,
+                                 include_difference=listening["schema"] == DIFFERENCE_SCHEMA)
+    for assets, (_, _, files) in zip(all_artifacts(listening), expected_payloads, strict=True):
         for name, body in files.items():
             recorded = assets[name]["sha256"]
             if name == "waveform":
                 # Replay plot pixels independent of font rendering and PNG encoding.
                 try:
+                    x0, y0, x1, y1 = PLOT_BOX
+                    plot = (x0, y0, x1, y1 + 80) if "difference" in files else PLOT_BOX
                     with Image.open(io.BytesIO(body)) as expected, Image.open(io.BytesIO(read_waveform(recorded))) as displayed:
-                        if displayed.convert("RGB").crop(PLOT_BOX).tobytes() == expected.crop(PLOT_BOX).tobytes():
+                        if displayed.size == expected.size and displayed.convert("RGB").crop(plot).tobytes() == expected.crop(plot).tobytes():
                             continue
                 except (OSError, SyntaxError) as error:
                     raise ObjectIntegrityError("Stereo listening waveform could not be decoded") from error

@@ -23,6 +23,8 @@ PDF show the affected times next to the channel comparison. The JSON
 windows. Their WAV excerpts and waveform retain the left, right and
 analyzed mono signals. Existing interval scores remain available for
 inspection. The guard applies to the two standalone voice-fusion paths.
+The [channel-difference view](audio-cancelled-speech-transfer-2026-11-15.md)
+adds derived playback to selected cancellation intervals.
 The [video soundtrack version](video-soundtrack-downmix-coverage-2026-11-15.md)
 uses the same stereo measurements. This rule covers
 measurable stereo cancellation on supported clocks and does not measure

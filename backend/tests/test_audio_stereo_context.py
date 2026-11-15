@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 import subprocess
 import wave
@@ -11,6 +12,7 @@ from types import SimpleNamespace
 
 import numpy as np
 import pytest
+from PIL import Image
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
@@ -25,13 +27,14 @@ from app.evidence import audio_packets, service, stereo_binding, stereo_listenin
 from app.evidence.audio_binding import (
     MONO_VOICE_COVERAGE,
     MONO_VOICE_LIMIT,
+    MONO_VOICE_POLICY,
     mono_voice_coverage_limit,
     stereo_attenuation_overlaps,
     unscored_voice_intervals,
     validate_unscored_voice_coverage,
     voice_input_limit,
 )
-from app.evidence.stereo_listening_binding import select_windows
+from app.evidence.stereo_listening_binding import DIFFERENCE_SCHEMA, SCHEMA, select_windows
 from app.reports import engine, multimedia_evidence, package, signing, verify, verify_audio_source
 from app.reports import snapshot as report_snapshot
 from app.reports.specimens import specimen
@@ -232,8 +235,8 @@ def test_channel_silence_does_not_cross_source_clock_gap():
     assert result["selected"][0]["source_timestamp_ranges"] == source_ranges(mapping, 23000, 26200)
 
 
-@pytest.mark.parametrize("channel_change", ["none", "mute", "identical"])
-def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_path, monkeypatch, channel_change):
+@pytest.mark.parametrize("channel_change,include_difference", [("none", False), ("mute", False), ("identical", False), ("none", True)])
+def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_path, monkeypatch, channel_change, include_difference):
     first, second, path = (tmp_path / name for name in ("source.wav", "alternate.wav", "multitrack.mka"))
     _source(first, seconds=2, mode="first_left_then_balanced", rate=SAMPLE_RATE)
     if channel_change != "none":
@@ -263,6 +266,8 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         result = deepcopy(snapshot.result)
         result["input"]["sha256"] = sha
         result["manifest"]["sampling"]["audio_evidence"] = {"input": evidence_input, "checks": []}
+        if include_difference:
+            result["manifest"]["sampling"]["audio_evidence"]["mono_voice_policy"] = MONO_VOICE_POLICY
         analysis.result_hash = store.put_bytes(canonical_json(result)).sha256
         packet = audio_packets.build_packet_set(db, analysis, store, result)
         db.commit()
@@ -272,10 +277,16 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         assert "model" not in json.dumps(packet["stereo_context"]).lower()
         listening = packet["stereo_listening"]
         assert listening["affects_overall_confidence"] is False
+        assert listening["schema"] == (DIFFERENCE_SCHEMA if include_difference else SCHEMA)
         assert [row["stereo_window_index"] for row in listening["windows"]] == [0, 1]
         assets = listening["windows"][1]["artifacts"]
         left, right, mono = (read_wav(store.read_bytes(assets[name]["sha256"])) for name in ("left", "right", "mono"))
         assert np.any(left) and np.array_equal(left, -right) and not np.any(mono)
+        assert ("difference" in assets) == include_difference
+        assert "difference" not in listening["windows"][0]["artifacts"]
+        if include_difference:
+            np.testing.assert_array_equal(read_wav(store.read_bytes(assets["difference"]["sha256"])), (left - right) / 2)
+            assert assets["waveform"]["height"] == 370
         assert np.array_equal(mono, context.state["audio"].pcm[SAMPLE_RATE:2*SAMPLE_RATE])
         assert {asset["sha256"] for asset in assets.values()} <= service.asset_refs(packet).keys()
         assert mapping["stereo_listening_pcm_sha256"] not in service.asset_refs(packet)
@@ -350,6 +361,7 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
         assert "Strong level drop in the analyzed mono mix." in words
         assert "Mono is digitally silent" in words
         assert "/stereo_listening/windows/1" in words
+        assert ("Channel difference is" in words) == include_difference
         assert "Exact silence in one channel" in words
         if channel_change == "mute":
             assert "/stereo_context/channel_silence/selected/0" in words
@@ -397,13 +409,25 @@ def test_actual_audio_stage_packet_api_export_and_report_use_same_windows(tmp_pa
                 in checked.checks[-1].detail)
         forged_listening = deepcopy(packet)
         clips = forged_listening["stereo_listening"]["windows"][1]["artifacts"]
-        clips["left"], clips["right"] = clips["right"], clips["left"]
+        if include_difference:
+            clips["difference"] = clips["right"]
+        else:
+            clips["left"], clips["right"] = clips["right"], clips["left"]
         forged_listening["sha256"] = audio_packets.packet_hash(forged_listening)
         with pytest.raises(ObjectIntegrityError, match="differs from its committed channel samples"):
             multimedia_evidence.view(snapshot.model_copy(update={"evidence": forged_listening}))
         swapped_plot = deepcopy(packet)
         first, second = (row["artifacts"] for row in swapped_plot["stereo_listening"]["windows"])
-        first["waveform"], second["waveform"] = second["waveform"], first["waveform"]
+        if include_difference:
+            original_plot = second["waveform"]["sha256"]
+            changed = io.BytesIO()
+            with Image.open(io.BytesIO(store.read_bytes(original_plot))) as chart:
+                chart.putpixel((130, 310), (255, 0, 255))
+                chart.save(changed, format="PNG")
+            new_plot = store.put_bytes(changed.getvalue()).sha256
+            second["waveform"].update(sha256=new_plot, url=second["waveform"]["url"].replace(original_plot, new_plot))
+        else:
+            first["waveform"], second["waveform"] = second["waveform"], first["waveform"]
         swapped_plot["sha256"] = audio_packets.packet_hash(swapped_plot)
         with pytest.raises(ObjectIntegrityError, match="waveform differs from its committed channel samples"):
             multimedia_evidence.view(snapshot.model_copy(update={"evidence": swapped_plot}))

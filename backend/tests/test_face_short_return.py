@@ -132,6 +132,26 @@ def test_opposite_pane_range_reuses_source_pictures_and_tracks_a_different_face(
         face_return_binding.validate_second(dict(second, face_detection_boxes=[{**detection, "boxes": []}]), primary)
 
 
+def test_overlapping_opposite_pane_range_requires_three_native_frame_intervals():
+    from app.evidence.face_short_proposal_binding import (
+        OVERLAPPING_PANE_TRACK_AVC_METHOD,
+        PANE_TRACK_AVC_METHOD,
+    )
+
+    common = {"time_base": "1/30000", "scene_frame_inputs": [{"frame_index": 54, "pts": 54000}],
+              "face_detection_boxes": [{"frame_index": 54, "boxes": [[105, 250, 100, 80], [700, 250, 120, 90]]}]}
+    primary = dict(common, method=PANE_TRACK_AVC_METHOD, pane="left", start_pts=60000, end_pts=68000)
+    second = dict(common, method=OVERLAPPING_PANE_TRACK_AVC_METHOD, pane="right", start_pts=65000, end_pts=72000)
+    face_return_binding.validate_second(second, primary)
+    face_return_binding.validate_second(dict(second, start_pts=60000, end_pts=68000), primary)
+    with pytest.raises(ValueError, match="share at least three"):
+        face_return_binding.validate_second(dict(second, start_pts=65001), primary)
+    with pytest.raises(ValueError, match="different sides on the same native pictures"):
+        face_return_binding.validate_second(dict(second, pane="left"), primary)
+    with pytest.raises(ValueError, match="different clocks"):
+        face_return_binding.validate_second(dict(second, time_base="1/90000"), primary)
+
+
 def test_second_dense_range_reuses_first_without_publishing_a_cut():
     base = table_for(25)
     table = replace(base, pts=base.pts[:120], pict_types=base.pict_types[:120],

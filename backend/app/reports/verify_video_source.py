@@ -57,7 +57,7 @@ from app.evidence.video_packet_versions import (
     GUARDED_720P30_FACE_VERSION,
     GUARDED_CODEC_FACE_VERSION,
     MOVING_AVC_PROPOSAL_VERSION,
-    OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION,
+    OPPOSITE_PANE_VERSIONS,
     PAIRED_EDGE_VERSION,
     PANE_TRACK_AVC_PROPOSAL_VERSION,
     POSITION_TRACK_AVC_PROPOSAL_VERSION,
@@ -253,7 +253,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     source = evidence["source"]
     encoding = None
     delivery = None
-    opposite_pane = evidence["version"] == OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION
+    opposite_pane = evidence["version"] in OPPOSITE_PANE_VERSIONS
     second_avc = opposite_pane or evidence["version"] in {SECOND_AVC_PROPOSAL_VERSION, SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION}
     first_return = next((packet["face_return"] for packet in evidence["packets"] if packet.get("face_return")), {})
     avc_with_guarded_first = second_avc and first_return.get("method") == GUARDED_720P30_METHOD
@@ -307,8 +307,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError("The original video differs from its brief WebM face-review source profile")
     if evidence["version"] in {SHORT_AVC_PROPOSAL_VERSION, SECOND_AVC_PROPOSAL_VERSION, MOVING_AVC_PROPOSAL_VERSION,
                                PRIMARY_TRACK_AVC_PROPOSAL_VERSION, POSITION_TRACK_AVC_PROPOSAL_VERSION,
-                               PANE_TRACK_AVC_PROPOSAL_VERSION, SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION,
-                               OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION}:
+                               PANE_TRACK_AVC_PROPOSAL_VERSION, SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION} | OPPOSITE_PANE_VERSIONS:
         delivery = probe_container(original, include_codec_tag=True)
         encoding = delivery.get("codec"), delivery.get("pix_fmt")
         if not face_short_proposal_binding.avc_source(table, (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag")),

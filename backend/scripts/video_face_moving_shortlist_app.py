@@ -22,16 +22,17 @@ from scripts.video_short_return_encoded_app import (
 
 
 def run(bank, output, *, primary_track=False, position_track=False, pane_track=False, second_pane=False,
-        opposite_receipt=None):
+        opposite_receipt=None, overlapping_receipt=None):
     configure(output, ROOT)
-    two_ranges = second_pane or opposite_receipt is not None
+    cross_side = opposite_receipt is not None or overlapping_receipt is not None
+    two_ranges = second_pane or cross_side
     pane_track |= two_ranges
     os.environ.update(
         BASE_FLAGS, VERITAS_VIDEO_FACE_SECOND_AVC_REVIEW="true", VERITAS_VIDEO_FACE_MOVING_AVC_REVIEW="false",
         VERITAS_VIDEO_FACE_PRIMARY_TRACK_AVC_REVIEW="false",
         VERITAS_VIDEO_FACE_POSITION_TRACK_AVC_REVIEW=str(pane_track).lower(),
         VERITAS_VIDEO_FACE_PANE_TRACK_AVC_REVIEW=str(two_ranges).lower(),
-        VERITAS_VIDEO_FACE_SECOND_PANE_AVC_REVIEW=str(opposite_receipt is not None).lower(),
+        VERITAS_VIDEO_FACE_SECOND_PANE_AVC_REVIEW=str(cross_side).lower(),
         VERITAS_VIDEO_FACE_OPPOSITE_PANE_AVC_REVIEW="false",
     )
 
@@ -47,6 +48,7 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
     from app.evidence.face_short_proposal_binding import (
         MOVING_AVC_METHOD,
         OPPOSITE_PANE_TRACK_AVC_METHOD,
+        OVERLAPPING_PANE_TRACK_AVC_METHOD,
         PANE_TRACK_AVC_METHOD,
         POSITION_TRACK_AVC_METHOD,
         PRIMARY_TRACK_AVC_METHOD,
@@ -69,7 +71,29 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
     stub = PaymentStub()
     service._stripe = stub
     roster = {row["file"]: row for row in json.loads((bank / "media.json").read_text())["rows"]}
-    if opposite_receipt:
+    if overlapping_receipt:
+        panel = json.loads(overlapping_receipt.read_bytes())
+        assert panel["result"]["qualifies"]
+        rows = panel["rows"]
+        selected = []
+        for condition in ("aligned", "staggered", "left_only", "light_pulse"):
+            for row in rows:
+                if row["condition"] != condition:
+                    continue
+                first, second = row["first"], row["overlapping_opposite"]
+                if condition in ("aligned", "staggered"):
+                    good = first and second and all(
+                        {"pane": item["pane"], "frames": item["frames"]} in row["truth"] for item in (first, second))
+                else:
+                    good = not (row["same"] or row["opposite"] or second) and bool(first) == bool(row["truth"])
+                if good:
+                    selected.append(f"g{row['group']}-{condition}.mp4")
+                    break
+        assert len(selected) == 4
+        cases = tuple(selected)
+        serving_mode = "video_face_opposite_pane_avc_review"
+        review_method, packet_version = OVERLAPPING_PANE_TRACK_AVC_METHOD, "video-evidence-34"
+    elif opposite_receipt:
         rows = json.loads(opposite_receipt.read_bytes())["rows"]
         positives = []
         controls = []
@@ -153,7 +177,7 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                 assert evidence["version"] == packet_version
                 change = packet["face_return"]
                 interval = [change["start_frame_index"], change["end_frame_index"]]
-                if opposite_receipt:
+                if cross_side:
                     assert {"pane": change["pane"], "frames": interval} in row["truth"]
                 elif pane_track:
                     assert interval in row["truth"] and change["pane"] == row["expected_pane"]
@@ -168,8 +192,11 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                     [primary] = [r for r in evidence["packets"] if r.get("semantics") == PANE_TRACK_AVC_METHOD]
                     [first] = existing
                     first_interval = [first["start_frame_index"], first["end_frame_index"]]
-                    assert interval != first_interval
-                    if opposite_receipt:
+                    if overlapping_receipt:
+                        assert min(interval[1], first_interval[1]) - max(interval[0], first_interval[0]) >= 3
+                    else:
+                        assert interval != first_interval
+                    if cross_side:
                         assert change["pane"] != first["pane"]
                         assert {"pane": first["pane"], "frames": first_interval} in row["truth"]
                     else:
@@ -205,8 +232,10 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                         for label, count in zip(("Start", "End"), change["off_face_motion_tiles"], strict=True):
                             assert f"{label} abrupt changes outside the face on the {change['pane']} {count}" in words
                     if two_ranges:
-                        side_label = "other side" if opposite_receipt else "same side"
-                        assert f"Additional brief face change on the {side_label}" in words
+                        side_label = "other side" if cross_side else "same side"
+                        heading = ("Overlapping face change on the other side" if overlapping_receipt
+                                   else f"Additional brief face change on the {side_label}")
+                        assert heading in words
                         assert f"brief face-change range spans {first['start_stream_s']:.3f}-{first['end_stream_s']:.3f} s" in words
                     assert images | primary_images <= {
                         image_signature(document.extract_image(xref)["image"])
@@ -230,7 +259,7 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                 )
                 assert replay.outcome == "verified" and replay.signer_authenticated, replay.as_dict()
                 replay_detail = (
-                    "off-face motion counts on each tracked side at both boundaries of its range" if opposite_receipt else
+                    "off-face motion counts on each tracked side at both boundaries of its range" if cross_side else
                     "off-face motion counts on the tracked side at both boundaries of each range" if second_pane else
                     "bounded face shortlist"
                 )
@@ -267,7 +296,7 @@ def run(bank, output, *, primary_track=False, position_track=False, pane_track=F
                         first["anchors"][role] for role in ("before", "during", "after")
                     ]
                     results[case]["exact_source_images"] += len(primary_images)
-                if opposite_receipt:
+                if cross_side:
                     results[case]["primary_side"] = first["pane"]
     receipt = {
         "cases": results,
@@ -288,7 +317,8 @@ if __name__ == "__main__":
     mode.add_argument("--pane-track", action="store_true")
     mode.add_argument("--second-pane", action="store_true")
     mode.add_argument("--opposite-receipt", type=Path, help="Check selected positives and controls from the opposite-side trial")
+    mode.add_argument("--overlapping-receipt", type=Path, help="Check coincident and staggered opposite-side ranges")
     args = parser.parse_args()
     run(args.bank.resolve(), args.output.resolve(), primary_track=args.primary_track,
         position_track=args.position_track, pane_track=args.pane_track, second_pane=args.second_pane,
-        opposite_receipt=args.opposite_receipt)
+        opposite_receipt=args.opposite_receipt, overlapping_receipt=args.overlapping_receipt)

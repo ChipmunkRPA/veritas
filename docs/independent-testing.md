@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [overlapping face-change replay](video-face-overlapping-pane-2026-11-14.md#independent-replay)
+recounts both sides of simultaneous and staggered face edits, including
+single-edit controls, ordinary speaker cuts and a shared lighting change.
+Native replay checks the timestamp lattice and the saved source pictures.
+
 The [PDF reflow replay](document-pdf-reflow-evidence-2026-11-14.md#independent-replay)
 checks exact changed-sentence positions across page breaks, ordinary
 revisions and controls where the new layout should leave wording unchanged

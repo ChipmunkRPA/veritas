@@ -19,6 +19,7 @@ from app.evidence.video_packet_versions import (
     GUARDED_CODEC_FACE_VERSION,
     MOVING_AVC_PROPOSAL_VERSION,
     OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION,
+    OVERLAPPING_PANE_TRACK_AVC_PROPOSAL_VERSION,
     PANE_TRACK_AVC_PROPOSAL_VERSION,
     POSITION_TRACK_AVC_PROPOSAL_VERSION,
     PRIMARY_TRACK_AVC_PROPOSAL_VERSION,
@@ -50,11 +51,12 @@ GUARDED_METHODS = frozenset({GUARDED_CODEC_METHOD, GUARDED_720P30_METHOD, SECOND
 SECOND_BY_VERSION = {SECOND_SHORT_FACE_VERSION: SECOND_METHOD, SECOND_HD_FACE_VERSION: SECOND_HD_METHOD,
                      SECOND_AVC_PROPOSAL_VERSION: SECOND_AVC_METHOD,
                      SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION: proposal.SECOND_PANE_TRACK_AVC_METHOD,
-                     OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION: proposal.OPPOSITE_PANE_TRACK_AVC_METHOD}
+                     OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION: proposal.OPPOSITE_PANE_TRACK_AVC_METHOD,
+                     OVERLAPPING_PANE_TRACK_AVC_PROPOSAL_VERSION: proposal.OVERLAPPING_PANE_TRACK_AVC_METHOD}
 PRIMARY_BY_SECOND = {SECOND_METHOD: SECOND_PRIOR_METHODS, SECOND_HD_METHOD: frozenset({GUARDED_720P30_METHOD}),
                      SECOND_AVC_METHOD: frozenset({GUARDED_720P30_METHOD, proposal.AVC_METHOD}),
                      proposal.SECOND_PANE_TRACK_AVC_METHOD: frozenset({proposal.PANE_TRACK_AVC_METHOD}),
-                     proposal.OPPOSITE_PANE_TRACK_AVC_METHOD: frozenset({proposal.PANE_TRACK_AVC_METHOD})}
+                     **{method: frozenset({proposal.PANE_TRACK_AVC_METHOD}) for method in proposal.OPPOSITE_PANE_METHODS}}
 GUARDED_720P30_DIMENSIONS = (1280, 720)
 GUARDED_720P30_STEP = Fraction(1, 30)
 FINE_SCENE_FRAME_COUNT = 120
@@ -83,7 +85,8 @@ METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VE
                    proposal.POSITION_TRACK_AVC_METHOD: POSITION_TRACK_AVC_PROPOSAL_VERSION,
                    proposal.PANE_TRACK_AVC_METHOD: PANE_TRACK_AVC_PROPOSAL_VERSION,
                    proposal.SECOND_PANE_TRACK_AVC_METHOD: SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION,
-                   proposal.OPPOSITE_PANE_TRACK_AVC_METHOD: OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION}
+                   proposal.OPPOSITE_PANE_TRACK_AVC_METHOD: OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION,
+                   proposal.OVERLAPPING_PANE_TRACK_AVC_METHOD: OVERLAPPING_PANE_TRACK_AVC_PROPOSAL_VERSION}
 WINDOW_METHODS = frozenset((short_windows.METHOD, carriers.METHOD))
 POINT = 0.10
 SCENE_POINT = 0.55
@@ -114,6 +117,9 @@ def _time(value, expected):
 
 
 def observation(record):
+    if record["method"] == proposal.OVERLAPPING_PANE_TRACK_AVC_METHOD:
+        return (f"The face on the {record['pane']} side also changed in appearance from {record['start_stream_s']:.3f} "
+                f"to {record['end_stream_s']:.3f} s, during part or all of the first range.")
     return (
         f"The face appearance changed briefly from {record['start_stream_s']:.3f} to "
         f"{record['end_stream_s']:.3f} s and then returned toward its surrounding appearance."
@@ -166,10 +172,14 @@ def validate_second(record, primary, *incumbents):
     base = Fraction(record["time_base"])
     if record["method"] in proposal.SECOND_METHODS:
         a, b = primary["start_pts"], primary["end_pts"]
-        _require(primary["time_base"] == record["time_base"]
-                 and max(a - right, left - b) * base >= proposal.SECOND_AVC_GAP,
-                 "The second AVC face range is too close to the first brief range")
-        if record["method"] == proposal.OPPOSITE_PANE_TRACK_AVC_METHOD:
+        _require(primary["time_base"] == record["time_base"], "The two face ranges use different clocks")
+        if record["method"] == proposal.OVERLAPPING_PANE_TRACK_AVC_METHOD:
+            _require((min(right, b) - max(left, a)) * base >= proposal.OPPOSITE_PANE_MIN_OVERLAP,
+                     "The opposite-side face ranges do not share at least three native frame intervals")
+        else:
+            _require(max(a - right, left - b) * base >= proposal.SECOND_AVC_GAP,
+                     "The second AVC face range is too close to the first brief range")
+        if record["method"] in proposal.OPPOSITE_PANE_METHODS:
             _require({record["pane"], primary["pane"]} == {"left", "right"}
                      and record["scene_frame_inputs"] == primary["scene_frame_inputs"],
                      "Opposite-side face ranges must follow different sides on the same native pictures")

@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Overlapping face changes on opposite sides](video-face-overlapping-pane-2026-11-14.md)
+  increased exact locations from 16/32 to 32/32 on staged simultaneous
+  and staggered edits. All 16 single-edit controls retained one correct range,
+  and 24 ordinary controls gained no ranges.
+
 - [Changed sentences across PDF page breaks](document-pdf-reflow-evidence-2026-11-14.md)
   adds source-bound paired review for verified selectable PDF text.
   The mapping located all 53 revisions in the reflowed panel and

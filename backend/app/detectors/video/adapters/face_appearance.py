@@ -958,8 +958,15 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
                     }
                 elif settings.video_face_opposite_pane_avc_review and len(proposals) == 2:
                     _, other, _, _, _ = proposals[1]
-                    if not distinct_from_first(value)(other["start_frame_index"], other["end_frame_index"]):
-                        secondary = {**other, "method": proposal.OPPOSITE_PANE_TRACK_AVC_METHOD}
+                    start, end = other["start_frame_index"], other["end_frame_index"]
+                    overlap = min(value["end_pts"], other["end_pts"]) - max(value["start_pts"], other["start_pts"])
+                    other_method = None
+                    if not distinct_from_first(value)(start, end):
+                        other_method = proposal.OPPOSITE_PANE_TRACK_AVC_METHOD
+                    elif not excluded(start, end) and overlap * table.tb >= proposal.OPPOSITE_PANE_MIN_OVERLAP:
+                        other_method = proposal.OVERLAPPING_PANE_TRACK_AVC_METHOD
+                    if other_method is not None:
+                        secondary = {**other, "method": other_method}
                         followup.update(scheduled_frames=len(other["scheduled_frame_indices"]),
                                         measured_face_frames=len(other["frame_inputs"]))
                 if secondary is not None:
@@ -1093,7 +1100,7 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
              *(("The optional second range on the selected side reuses the same pictures and face measurements.",)
                if settings.video_face_short_avc_review and settings.video_face_pane_track_avc_review
                and settings.video_face_second_pane_avc_review else ()),
-             *(("The other side can supply a separate range from its already measured pictures.",)
+             *(("The other side can supply its own range, including across the same moment, from already measured pictures.",)
                if settings.video_face_short_avc_review and settings.video_face_pane_track_avc_review
                and settings.video_face_second_pane_avc_review and settings.video_face_opposite_pane_avc_review else ()),
              *(("The enabled overlapping review reads 240 native pictures and compares three bounded face input sets.",)

@@ -35,7 +35,8 @@ def model_assets(path):
     require("license: apache-2.0" in readme, "Commercial checkpoint terms were not verified")
 
 
-def neural_decoder(path, *, names=("b", "bʲ", "bʰ", "bː", "p", "pʲ", "pʰ", "pː")):
+def phone_posteriors(path):
+    """Return dense per-hop phone probabilities and the verified speech clock."""
     import numpy as np
     import torch
     from transformers import AutoModelForCTC, Wav2Vec2FeatureExtractor
@@ -48,7 +49,6 @@ def neural_decoder(path, *, names=("b", "bʲ", "bʰ", "bː", "p", "pʲ", "pʰ", 
     model = AutoModelForCTC.from_pretrained(path, local_files_only=True, trust_remote_code=False, dtype=dtype).to(device).eval()
     feature = Wav2Vec2FeatureExtractor.from_pretrained(path, local_files_only=True)
     vocabulary = json.loads((path / "vocab.json").read_text())
-    phones = {vocabulary[name]: name[0] for name in names}
     hop, width = 1, 1
     for kernel, step in zip(model.config.conv_kernel, model.config.conv_stride, strict=True):
         width += hop * (kernel - 1)
@@ -61,15 +61,30 @@ def neural_decoder(path, *, names=("b", "bʲ", "bʰ", "bː", "p", "pʲ", "pʰ", 
         with torch.inference_mode():
             outputs = model(inputs).logits.float().cpu()[0].softmax(-1)
         require(len(outputs) == (len(samples) - width) // STRIDE + 1, "CTC frame count does not match the input")
-        maxima = outputs.argmax(1).tolist()
-        events = []
-        for token, positions in groupby(range(len(maxima)), key=maxima.__getitem__):
-            if token not in phones:
-                continue
-            index = max(positions, key=lambda p: float(outputs[p, token]))
-            value = float(outputs[index, token])
-            if value >= .35:
-                events.append([phones[token], index * STRIDE + CENTER, round(value, 6)])
-        return events
+        return outputs
+
+    return infer, vocabulary, device
+
+
+def neural_decoder(path, *, names=("b", "bʲ", "bʰ", "bː", "p", "pʲ", "pʰ", "pː")):
+    posteriors, vocabulary, device = phone_posteriors(path)
+    phones = {vocabulary[name]: name[0] for name in names}
+
+    def infer(samples):
+        return collapse(posteriors(samples), phones)
 
     return infer, device
+
+
+def collapse(outputs, phones):
+    """Keep the highest-confidence time in each consecutive recognized phone."""
+    maxima = outputs.argmax(1).tolist()
+    events = []
+    for token, positions in groupby(range(len(maxima)), key=maxima.__getitem__):
+        if token not in phones:
+            continue
+        index = max(positions, key=lambda p: float(outputs[p, token]))
+        value = float(outputs[index, token])
+        if value >= .35:
+            events.append([phones[token], index * STRIDE + CENTER, round(value, 6)])
+    return events

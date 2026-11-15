@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Dense speech evidence for lip timing](video-lip-dense-posteriors-2026-11-15.md)
+  complements the sparse cue on the main PCM and separate AAC panels.
+  It adds four and two useful ranges, respectively. It recovers none
+  of 48 shifts on native CREMA-D recordings or after an arithmetic
+  25 fps replay. The cue remains experimental.
+
 - [Word predictability inside a rewrite](writing-curvature-ranges-2026-11-15.md)
   tested absolute curvature, a comparison with both flanks, and their
   agreement. Each located one of 309 rewrites at the wider point, compared

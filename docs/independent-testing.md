@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [dense lip-timing replay](video-lip-dense-posteriors-2026-11-15.md#replay)
+recounts selected ranges and constant-delay errors under both sparse and
+dense speech measurements. It separates the held PCM and AAC deliveries
+from the native-clock actor test and its virtual 25 fps comparison.
+
 The [word predictability replay](writing-curvature-ranges-2026-11-15.md#replay)
 rebuilds exact range selections from per-word scalar measurements. It
 recounts both calibration points, paired gains and losses, and genuine

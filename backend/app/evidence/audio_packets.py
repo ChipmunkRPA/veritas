@@ -280,7 +280,7 @@ def verify_speech_selection(document, store, record):
 
 def _chart(pcm: np.ndarray, windows: list[dict[str, Any]], *, start: int, end: int,
            selected: tuple[int, int] | None, scores: bool, title: str | None = None,
-           source_offset: int = 0, time_precision: int = 2) -> bytes:
+           source_offset: int = 0, time_precision: int = 2, peak_scaled: bool = False) -> bytes:
     im = Image.new("RGB", (960, 280), (250, 249, 245))
     draw = ImageDraw.Draw(im)
     x0, y0, x1, y1 = 58, 40, 938, 232
@@ -303,12 +303,14 @@ def _chart(pcm: np.ndarray, windows: list[dict[str, Any]], *, start: int, end: i
         draw.text((16, y0 - 5), "1.0", fill=(70, 80, 70))
         draw.text((16, y1 - 5), "0.0", fill=(70, 80, 70))
     else:
-        chunks = np.array_split(pcm[start:end], x1 - x0)
+        samples = pcm[start:end]
+        chunks = np.array_split(samples, x1 - x0)
+        amplitude = 90 / (float(np.max(np.abs(samples), initial=0.)) or 1.) if peak_scaled else 90
         mid = (y0 + y1) / 2
         draw.line((x0, mid, x1, mid), fill=(190, 200, 190))
         for i, chunk in enumerate(chunks):
             if chunk.size:
-                draw.line((x0 + i, mid - float(chunk.max()) * 90, x0 + i, mid - float(chunk.min()) * 90), fill=(45, 100, 78))
+                draw.line((x0 + i, mid - float(chunk.max()) * amplitude, x0 + i, mid - float(chunk.min()) * amplitude), fill=(45, 100, 78))
     for fraction in (0, 0.25, 0.5, 0.75, 1):
         x = x0 + fraction * (x1 - x0)
         seconds = (source_offset + start + fraction * (end - start)) / SAMPLE_RATE

@@ -39,6 +39,7 @@ from app.evidence import (
     mouth_hold_sound,
     mouth_local_hold_binding,
     picture_hold_binding,
+    video_viseme_binding,
     picture_sequence,
     scene_return_binding,
     whole_face_binding,
@@ -106,7 +107,7 @@ def _stage(db: Session, store: ObjectStore, analysis_id: str, name: str) -> tupl
     return json.loads(_verified(store, art.sha256)), art.sha256
 
 
-def _records(db: Session, store: ObjectStore, analysis: Analysis, result: dict) -> tuple[FrameTable, dict, dict, list, dict | None, dict | None, dict | None]:
+def _records(db: Session, store: ObjectStore, analysis: Analysis, result: dict) -> tuple[FrameTable, dict, dict, list, dict | None, dict | None, dict | None, dict | None]:
     probe, render = _stage(db, store, analysis.id, "probe"), _stage(db, store, analysis.id, "render")
     sampling = result.get("manifest", {}).get("sampling", {})
     if (probe is None or render is None or sampling.get("frame_anchor_version") != ANCHOR_VERSION
@@ -157,7 +158,13 @@ def _records(db: Session, store: ObjectStore, analysis: Analysis, result: dict) 
         raise PacketIntegrityError("Picture-change coverage differs from its published commitment")
     if digest is not None:
         source[scene_return_binding.COVERAGE_COMMITMENT] = digest
-    return table, source, by_index, [{"stage": "probe", "sha256": probe[1]}, {"stage": "render", "sha256": render[1]}], hold, scene, scene_coverage
+    timing = render[0].get(video_viseme_binding.KEY)
+    commitment = sampling.get(video_viseme_binding.COMMITMENT)
+    if (canonical_hash(timing) if timing is not None else None) != commitment:
+        raise PacketIntegrityError("Lip timing differs from the published commitment")
+    if commitment is not None:
+        source[video_viseme_binding.COMMITMENT] = commitment
+    return table, source, by_index, [{"stage": "probe", "sha256": probe[1]}, {"stage": "render", "sha256": render[1]}], hold, scene, scene_coverage, timing
 
 
 def _signals(result: dict, exhibit: dict) -> list[dict]:
@@ -669,6 +676,56 @@ def _mouth_hold_packet(db: Session, store: ObjectStore, analysis: Analysis, set_
                            "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
 
 
+def _lip_timing_packet(db, store, analysis, set_id, source, table, review, decoded, audio_input):
+    from app.detectors.video.viseme_review import audio_assets
+    from app.evidence import audio_packets
+
+    binding = video_viseme_binding
+    witness = review["witness"]
+    origin = source["timeline_origin_s"]
+    assets, frames = {}, []
+    for role in binding.ROLES:
+        index = witness["picture_frames"][role]
+        record = review["inputs"]["frames"][index]
+        x, y, right, bottom = record["mouth_box"]
+        image = Image.fromarray(decoded[index])
+        crop = image.crop((x, y, right, bottom))
+        if hashlib.sha256(crop.tobytes()).hexdigest() != record["mouth_crop_sha256"]:
+            raise PacketIntegrityError("Lip timing mouth pixels differ from the frozen observation")
+        original_key, crop_key = f"{role}_original", f"{role}_crop"
+        assets[original_key] = _packet_image(db, store, analysis, set_id, image)
+        assets[crop_key] = _packet_image(db, store, analysis, set_id, crop)
+        time = table.seconds(index)
+        frames.append({"id": f"{binding.PACKET_ID}.{role}", "interval_role": role,
+                       "anchor": {"frame_index": index, "pts": table.pts[index], "time_base": table.time_base,
+                                  "decoded_rgb_sha256": record["rgb_sha256"], "original_sha256": source["sha256"],
+                                  "width": table.width, "height": table.height, "stream_selector": "v:0",
+                                  "coordinate_space": source["coordinate_space"], "stream_time_s": time,
+                                  "playback_time_s": None if origin is None else time - origin},
+                       "score": None, "is_peak": False, "context_region": {"x": x, "y": y, "w": right-x, "h": bottom-y},
+                       "region_meaning": "measured_mouth_region",
+                       "artifact_refs": {"original": original_key, "context": original_key, "crop": crop_key}})
+    pcm, mapping = audio_packets._input(store, analysis, audio_input)
+    sound = audio_assets(pcm, mapping, review)
+    a, b = review["measurement"]["span"]
+    assets[binding.CLIP] = audio_packets._asset(db, store, analysis, set_id, sound[binding.CLIP], "audio/wav",
+                                              samples=b-a, sample_rate=16000, channels=1)
+    assets[binding.WAVEFORM] = audio_packets._asset(db, store, analysis, set_id, sound[binding.WAVEFORM], "image/png",
+                                                   width=960, height=280, time_axis="source_pts")
+    return {"id": binding.PACKET_ID, "title": "Local speech and mouth timing change", "evidence_type": "anomaly",
+            "claim_scope": "sampled_window", "semantics": binding.SCHEMA, binding.KEY: witness,
+            "affects_overall_confidence": False, "finding_ids": [], "signal_refs": [], "exhibit_refs": [],
+            "frames": frames, "artifacts": assets, "observation": binding.observation(review),
+            "interpretation": "The spoken sounds and observed mouth openings support a different offset inside this interval.",
+            "measurements": [{"label": "Speech events compared across the source clip",
+                              "value": review["measurement"]["eligible_events"], "unit": "events"}],
+            "limitations": [binding.LIMITATION],
+            "clip": {"status": "unavailable", "reason": "Use the original video for playback on the picture clock."},
+            "derivation": {"version": VERSION, "selection": "local_speech_mouth_compatibility",
+                           "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks",
+                           "source_pixels": "exact_native_rgb"}}
+
+
 def _channel_coverage(db: Session, store: ObjectStore, analysis: Analysis, result: dict) -> dict:
     probe, render = _stage(db, store, analysis.id, "probe"), _stage(db, store, analysis.id, "render")
     has_audio = probe[0].get("info", {}).get("has_audio") if probe else None
@@ -700,7 +757,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if canonical_hash(result) != analysis.result_hash or result.get("input", {}).get("sha256") != analysis.sha256:
         raise PacketIntegrityError("Video result or original identity does not match")
     store.verify(analysis.sha256)
-    table, source, anchors, records, hold, scene, scene_coverage = _records(db, store, analysis, result)
+    table, source, anchors, records, hold, scene, scene_coverage, timing = _records(db, store, analysis, result)
     candidates, scored_frames, omitted = _observations(db, store, analysis, result, table, anchors)
     window_candidates, window_frames = _window_observations(result, table, anchors)
     sequence_candidates, sequence_frames = _sequence_observations(result, table, source, anchors)
@@ -762,6 +819,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                         if picture_reviews.get(key, {}).get("pair") is not None]
     mouth_review = picture_reviews.get("mouth_local_hold", {})
     mouth_match = mouth_review.get("match")
+    if timing is not None:
+        document[video_viseme_binding.KEY] = timing
     boundary_indices = {i for candidate in chosen for i in candidate.get("face_boundary", {}).get("anchors", {}).values()}
     boundary_indices.update(i for candidate in chosen for i in candidate.get("face_spatial_cut", {}).get("anchors", {}).values())
     exact_indices = boundary_indices | {i for candidate in return_candidates for i in candidate["face_return"]["anchors"].values()}
@@ -770,6 +829,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         scene_indices = {item["frame_index"] for item in scene["anchors"]}
         wanted.update(scene_indices)
         exact_indices.update(scene_indices)
+    if timing and timing["status"] == "matched":
+        indices = set(timing["witness"]["picture_frames"].values())
+        wanted.update(indices)
+        exact_indices.update(indices)
     endpoints = {match["start_frame_index"], match["end_frame_index"]} if match is not None else set()
     for review in sequence_matches:
         endpoints.update(row[2] for row in picture_sequence.endpoints(review["pair"]))
@@ -1039,6 +1102,9 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["packets"].append(_mouth_hold_packet(db, store, analysis, set_id, source, table, mouth_review, decoded, audio_input))
     if scene is not None:
         document["packets"].append(_scene_return_packet(db, store, analysis, set_id, source, scene, decoded))
+    if timing and timing["status"] == "matched":
+        audio_input = (result.get("manifest", {}).get("sampling", {}).get("video_audio_evidence") or {})["input"]
+        document["packets"].append(_lip_timing_packet(db, store, analysis, set_id, source, table, timing, decoded, audio_input))
     if VERSION in NESTED_VERSIONS:
         from app.evidence import video_audio, video_av
 
@@ -1059,6 +1125,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                                              canonical_hash=canonical_hash)
         scene_return_binding.validate(document, scene, pts=table.pts, canonical_hash=canonical_hash)
         scene_return_binding.validate_coverage(document, canonical_hash=canonical_hash, pts=table.pts)
+        video_viseme_binding.validate(document, timestamps=table.pts, committed=timing)
     except (KeyError, TypeError, ValueError) as error:
         raise PacketIntegrityError(str(error)) from error
     register_artefact(db, store, canonical_json(document), media_type="application/json", role="exhibit_payload",
@@ -1082,6 +1149,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         face_boundary_binding.validate_set(document)
         face_spatial_cut_binding.validate_set(document)
         face_return_coverage.validate(document)
+        video_viseme_binding.validate(document)
     except (KeyError, TypeError, ValueError) as error:
         raise PacketIntegrityError(str(error)) from error
     table_base = FrameTable(time_base=source["time_base"], pts=(), key_frames=(), pict_types="", width=source["width"],
@@ -1097,7 +1165,9 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         for name, asset in artifacts.items():
             held_sound = (name == mouth_hold_sound.WAV and packet.get("id") == mouth_local_hold_binding.PACKET_ID
                           and packet.get("mouth_hold_sound") and asset.get("media_type") == "audio/wav")
-            if (not _SHA.fullmatch(str(asset.get("sha256", ""))) or (not held_sound and
+            lip_sound = (name == video_viseme_binding.CLIP and packet.get("id") == video_viseme_binding.PACKET_ID
+                         and packet.get(video_viseme_binding.KEY) and asset.get("media_type") == "audio/wav")
+            if (not _SHA.fullmatch(str(asset.get("sha256", ""))) or (not (held_sound or lip_sound) and
                     (asset.get("media_type") not in {"image/png", "video/mp4"} or min(asset.get("width", 0), asset.get("height", 0)) <= 0))):
                 raise PacketIntegrityError("Video evidence has invalid image references")
         try:

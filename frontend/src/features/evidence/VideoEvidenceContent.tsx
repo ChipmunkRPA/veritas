@@ -77,6 +77,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
   const hold = set.picture_hold
   const sceneReview = set.coverage?.scene_return_review
   const mouthHold = hold?.mouth_local_hold
+  const lipTiming = set.lip_timing_review
   const motion = hold?.motion_sequence_review
   const reverseMotion = hold?.reverse_motion_sequence_review
   const motionRate = motion?.parameters.frame_rate ?? 20
@@ -86,14 +87,15 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     <div className="mt-5 space-y-5">{frames.map((frame) => {
       const cut = packet.face_spatial_cut_frames?.some(item => item.id === frame.id)
       const crop = frame.artifact_refs.crop && packet.artifacts[frame.artifact_refs.crop]
-      const mouthCrop = packet.mouth_local_hold && crop
+      const mouthCrop = (packet.mouth_local_hold || packet.lip_timing_review) && crop
+      const rangeLabel = packet.scene_return ? 'picture change' : `${cut ? 'picture-cut' : refined ? 'refined' : packet.mouth_local_hold ? 'hold' : packet.lip_timing_review ? 'timing' : packet.face_spatial_cut ? 'review' : 'flagged'} range`
       const sceneSupport = frame.interval_role === 'during' && packet.scene_return
         ? packet.scene_return.tiles : null
       const navigationKnown = frame.anchor.playback_time_s != null && Number.isFinite(frame.anchor.playback_time_s) && frame.anchor.playback_time_s >= 0
       const occurrence = packet.picture_sequence && (frame.anchor.frame_index <= packet.picture_sequence.first.end_frame_index
         ? 'First occurrence' : packet.picture_sequence.order === 'reverse' ? 'Reversed occurrence' : 'Second occurrence')
       return <div key={frame.id} className="rounded-md border border-border p-3">
-        <p className="m-0 mb-3 text-small font-medium">{occurrence && `${occurrence} · `}{frame.interval_role && <span className="capitalize">{frame.interval_role} {packet.scene_return ? 'picture change' : `${cut ? 'picture-cut' : refined ? 'refined' : packet.mouth_local_hold ? 'hold' : packet.face_spatial_cut ? 'review' : 'flagged'} range`} · </span>}Frame {frame.anchor.frame_index}{frame.is_peak ? ' · highest response in this sample sequence' : ''}
+        <p className="m-0 mb-3 text-small font-medium">{occurrence && `${occurrence} · `}{frame.interval_role && <span className="capitalize">{frame.interval_role} {rangeLabel} · </span>}Frame {frame.anchor.frame_index}{frame.is_peak ? ' · highest response in this sample sequence' : ''}
           {frame.score !== null && <span className="font-mono"> · response {frame.score.toFixed(3)}</span>}</p>
         <div className={evidenceGrid}>
           <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={packet.artifacts[frame.artifact_refs.original]} token={token} ready={mediaReady} alt={`${frame.id}: exact original video frame`} />
@@ -116,6 +118,11 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     })}</div>
 
   return <div id="media-evidence-visual" data-testid="video-evidence-content" className="scroll-mt-20">
+    {lipTiming && <section aria-labelledby="video-lip-timing-heading" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="video-lip-timing-heading" className="m-0 text-body font-medium">Speech and mouth timing trial</h3>
+      <p className="mt-2 mb-0 text-small text-text-muted">{lipTiming.observation}</p>
+      {lipTiming.status === 'matched' && <a className="mt-2 inline-block text-small underline" href="#media-evidence-VLT01">Inspect source frames and waveform</a>}
+    </section>}
     {hold && <section aria-labelledby="video-picture-hold-heading" className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-picture-hold-heading" className="m-0 text-body font-medium">Identical consecutive frames</h3>
       {hold.status === 'unavailable' ? <p className="mt-2 mb-0 text-small text-text-muted">{hold.reason ?? 'This check could not verify a sequence of frames.'}</p>
@@ -224,7 +231,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     <div className="mt-6 space-y-7">{set.packets.map((packet) => <article key={packet.id} id={`media-evidence-${packet.id}`} className={evidenceCard}>
       <h3 className="m-0 text-body font-medium"><span className="font-mono text-accent mr-3">{packet.id}</span>{packet.title}</h3>
       {!packet.picture_hold && <p className="mt-2 mb-0 text-body">{packet.observation}</p>}
-      {!packet.scene_return && <p className="mt-2 mb-0 text-small text-text-muted">{packet.picture_hold
+      {!packet.scene_return && !packet.lip_timing_review && <p className="mt-2 mb-0 text-small text-text-muted">{packet.picture_hold
         ? <>{packet.picture_hold.frame_count} consecutive decoded frames have identical pixels over <strong>{seconds(packet.picture_hold.span_s)}</strong> between the first and last source timestamps.</>
         : packet.picture_sequence
         ? <>First occurrence <strong>{seconds(packet.picture_sequence.first.start_stream_s)}–{seconds(packet.picture_sequence.first.end_stream_s)}</strong> · {packet.picture_sequence.order === 'reverse' ? 'Reversed occurrence' : 'Second occurrence'} <strong>{seconds(packet.picture_sequence.second.start_stream_s)}–{seconds(packet.picture_sequence.second.end_stream_s)}</strong> on the source clock.</>
@@ -255,7 +262,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         <p className="mt-1 mb-0">End of change · frames {packet.face_return.edges.exit.frame_indices.join(', ')}</p>
         <p className="mt-2 mb-0 text-caption text-text-muted">At each boundary the check compared the first three frames with the last three.</p>
       </div>}
-      {!packet.picture_hold && !packet.picture_sequence && !packet.whole_face_review && !packet.scene_return && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
+      {!packet.picture_hold && !packet.picture_sequence && !packet.whole_face_review && !packet.scene_return && !packet.lip_timing_review && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
       {packet.face_spatial_cut && packet.face_spatial_cut_frames && <section className="mt-5 rounded-md border border-border p-3">
         <h4 className="m-0 text-small font-medium">Picture-cut context</h4>
         <p className="mt-2 mb-0 text-small text-text-muted">Picture detail outside the face changed at both ends of <strong>{seconds(packet.face_spatial_cut.start_stream_s)}–{seconds(packet.face_spatial_cut.end_stream_s)}</strong> on the source clock, with an exclusive end. A cut between shots is one plausible explanation for this face change.</p>
@@ -271,6 +278,13 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         {renderFrames(packet, packet.face_boundary_frames, true)}
       </section>}
       {renderFrames(packet, packet.frames, false)}
+      {packet.lip_timing_review && <div className="mt-4 space-y-3">
+        <EvidencePicture set={set} artifact={packet.artifacts.lip_timing_waveform} token={token} ready={mediaReady}
+          alt="Waveform on the audio source clock during the timing change" chart />
+        <p className="m-0 text-caption text-text-muted">The shaded interval matches the playback below. The waveform is scaled to make quiet speech visible.</p>
+        <EvidenceAudio set={set} artifact={packet.artifacts.lip_timing_audio} token={token} ready={mediaReady}
+          alt="Listen to the soundtrack during the measured timing change" />
+      </div>}
       {packet.mouth_local_hold && packet.artifacts.mouth_hold_waveform && packet.artifacts.mouth_hold_audio &&
         <div className="mt-4 space-y-3">
           <EvidencePicture set={set} artifact={packet.artifacts.mouth_hold_waveform} token={token} ready={mediaReady}

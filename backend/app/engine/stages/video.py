@@ -94,6 +94,7 @@ from app.evidence import (
     face_spatial_cut_binding,
     picture_hold_binding,
     scene_return_binding,
+    video_viseme_binding,
 )
 from app.evidence.audio_binding import (
     VOICE_CLOCK_LIMIT,
@@ -1182,6 +1183,15 @@ def render(ctx: StageContext) -> dict[str, Any]:
                                   "unavailable", reason="missing_anchors", frames_scanned=scene_return_binding.FRAME_COUNT, first_pts=first))
     decode_output = ctx.outputs.get("decode") or {}
     decoded_audio = decode_output.get("audio") or {}
+    timing_review = None
+    if settings.environment == "dev" and settings.video_lip_timing_review and ctx.profile == Profile.FULL:
+        from app.detectors.video.viseme_review import assess
+
+        timing_review = (video_viseme_binding.skipped("provenance") if provenance_gate.stop(ctx) else
+                         assess(ctx, frame_store, ctx.state.get("video_audio_mapping"),
+                                decoded_audio.get("evidence_input"), shot_output.get("ranges")))
+        if timing_review.get("witness"):
+            anchors = frame_store.native_anchors()
     stereo_sha = decoded_audio.get("stereo_context_sha256")
     # A reused historical render output must not acquire evidence on publication.
     stereo_objects = [obj for obj in decode_output.get("artefacts", []) if obj["sha256"] == stereo_sha]
@@ -1191,6 +1201,7 @@ def render(ctx: StageContext) -> dict[str, Any]:
             "picture_hold": hold,
             **({scene_return_binding.KEY: scene} if scene is not None else {}),
             **({scene_return_binding.COVERAGE: scene_coverage} if scene_coverage is not None else {}),
+            **({video_viseme_binding.KEY: timing_review} if timing_review is not None else {}),
             "audio_mapping": ctx.state.get("video_audio_mapping"), "audio_status": decoded_audio.get("status"),
             "audio_stereo_context_sha256": stereo_sha}
 
@@ -1220,6 +1231,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         result.manifest.sampling[scene_return_binding.COMMITMENT] = canonical_hash(rendered[scene_return_binding.KEY])
     if rendered.get(scene_return_binding.COVERAGE) is not None:
         result.manifest.sampling[scene_return_binding.COVERAGE_COMMITMENT] = canonical_hash(rendered[scene_return_binding.COVERAGE])
+    if rendered.get(video_viseme_binding.KEY) is not None:
+        result.manifest.sampling[video_viseme_binding.COMMITMENT] = canonical_hash(rendered[video_viseme_binding.KEY])
     for entry in (ctx.outputs.get("detect") or {}).get("detectors", []):
         if entry["detector_id"] != APPEARANCE_REVIEW:
             continue

@@ -142,14 +142,15 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
     source = document["source"]
     sampling = result.get("manifest", {}).get("sampling", {})
     if kind == "video":
-        from app.evidence import scene_return_binding
+        from app.evidence import scene_return_binding, video_viseme_binding
 
         if (sampling.get("frame_anchor_version") != "stream-pts-rgb24/1"
                 or any(source.get(key) != sampling.get(key) or not source.get(key)
                        for key in ("frame_table_sha256", "frame_anchor_sha256"))
                 or source.get("timeline_origin_s") != sampling.get("timeline_origin_s")
                 or any(source.get(key) != sampling.get(key)
-                       for key in (scene_return_binding.COMMITMENT, scene_return_binding.COVERAGE_COMMITMENT))
+                       for key in (scene_return_binding.COMMITMENT, scene_return_binding.COVERAGE_COMMITMENT,
+                                   video_viseme_binding.COMMITMENT))
                 or ("picture_hold" in document and source.get("picture_hold_sha256") != sampling.get("picture_hold_sha256"))):
             raise ObjectIntegrityError("Video evidence does not match the published source-frame commitments")
     elif kind == "audio":
@@ -196,6 +197,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         mouth_hold_sound,
         picture_hold_binding,
         scene_return_binding,
+        video_viseme_binding,
         whole_face_binding,
     )
     from app.evidence.face_interval_binding import validate_packet as validate_face_interval
@@ -245,6 +247,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         if (canonical_hash(scene) if scene is not None else None) != source.get(scene_return_binding.COMMITMENT):
             raise ValueError("Picture-change record differs from the frozen render output")
         scene_return_binding.validate(document, scene, pts=table.pts, canonical_hash=canonical_hash)
+        video_viseme_binding.validate(document, timestamps=table.pts, committed=records["render"].get(video_viseme_binding.KEY))
         scene_return_binding.validate_coverage(document, canonical_hash=canonical_hash, pts=table.pts)
         if records["render"].get(scene_return_binding.COVERAGE) != document["coverage"].get(scene_return_binding.COVERAGE):
             raise ValueError("Picture-change coverage differs from the frozen render output")
@@ -370,6 +373,18 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                             raise ObjectIntegrityError("Video crop is not from its recorded source region")
         if packet.get("face_lighting") and face_lighting_context.record(packet, source, brightness_inputs) != packet["face_lighting"]:
             raise ObjectIntegrityError("Video brightness differs from the displayed source pixels")
+        if video_viseme_binding.KEY in packet:
+            from app.detectors.audio.decode import read_wav
+            from app.detectors.video.viseme_review import audio_assets
+
+            sound = document["audio"]["source"]
+            pcm = read_wav(_bytes(sound["wav_sha256"], store))
+            try:
+                expected = audio_assets(pcm, sound, document[video_viseme_binding.KEY])
+            except ValueError as error:
+                raise ObjectIntegrityError("Lip timing audio differs from the frozen soundtrack") from error
+            if any(assets[packet["artifacts"][role]["sha256"]] != data for role, data in expected.items()):
+                raise ObjectIntegrityError("Lip timing audio or waveform differs from the frozen soundtrack")
         if packet.get("mouth_hold_sound"):
             from app.detectors.audio.decode import read_wav
             from app.detectors.video.mouth_hold_sound import source_assets
@@ -1036,6 +1051,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["picture_sequence"] = copy.deepcopy(repeated_sequence)
             mouth_hold = packet.get("mouth_local_hold")
             scene_return = packet.get("scene_return")
+            lip_timing = packet.get("lip_timing_review")
+            if lip_timing is not None:
+                row["lip_timing_review"] = copy.deepcopy(lip_timing)
             if scene_return is not None:
                 row["scene_return"] = copy.deepcopy(scene_return)
             if sheet := packet["artifacts"].get("contact_sheet"):
@@ -1045,6 +1063,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             if waveform := packet["artifacts"].get("mouth_hold_waveform"):
                 clock = "source time" if waveform.get("time_axis") == "source_pts" else "time since the decoded audio starts"
                 row["images"].append(plate("mouth_hold_waveform", waveform, f"Mono soundtrack during these measured pictures ({clock})"))
+            if waveform := packet["artifacts"].get("lip_timing_waveform"):
+                row["images"].append(plate("lip_timing_waveform", waveform, "Highlighted playback on the audio source clock (peak-scaled amplitude)"))
             row["window"] = copy.deepcopy(packet.get("window"))
             row["face_interval"] = copy.deepcopy(packet.get("face_interval"))
             row["face_sequence"] = copy.deepcopy(packet.get("face_sequence"))
@@ -1063,10 +1083,10 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                       "first_refined": position == coarse_count and boundary_count > 0,
                                       "cut_frame": position >= coarse_count + boundary_count,
                                       "first_cut": position == coarse_count + boundary_count,
-                                      "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact decoded source frame" if hold or repeated_sequence or mouth_hold or scene_return else "Exact analysed source frame", "context": "Frame context", "crop": "Exact measured mouth-region crop" if mouth_hold else "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
+                                      "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact decoded source frame" if hold or repeated_sequence or mouth_hold or scene_return or lip_timing else "Exact analysed source frame", "context": "Frame context", "crop": "Exact measured mouth-region crop" if mouth_hold or lip_timing else "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
                                                  for role in ("original", "context", "crop", "measured_patch")
                                                  if role in frame["artifact_refs"] and (not (hold or repeated_sequence or scene_return) or role == "original")
-                                                 and (not mouth_hold or role != "context")]})
+                                                 and (not (mouth_hold or lip_timing) or role != "context")]})
         elif packet_kind == "audio":
             row["images"] = [plate(role, packet["artifacts"][role]) for role in ("waveform", "scores")]
             row["audio"] = {"interval": copy.deepcopy(packet["interval"]), "context_interval": copy.deepcopy(packet["context_interval"]),
@@ -1206,6 +1226,11 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 row["locator"] = f"Mouth-region hold {row['window']['start_stream_s']:.3f}-{row['window']['end_stream_s']:.3f} s"
             if scene_return:
                 row["locator"] = f"Picture change {scene_return['start_stream_s']:.3f}-{scene_return['end_stream_s']:.3f} s"
+            if lip_timing:
+                from app.evidence.video_viseme_timing import RATE
+
+                a, b = (sample / RATE for sample in lip_timing["audio_source_pts"])
+                row["locator"] = f"Audio {a:.3f}-{b:.3f} s"
         else:
             locations = []
             for anchor in packet["anchors"]:
@@ -1396,6 +1421,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "percentage_consistency": percentage_consistency,
             "picture_hold": copy.deepcopy(document.get("picture_hold")),
             "scene_return_review": (document.get("coverage") or {}).get("scene_return_review") if kind == "video" else None,
+            "lip_timing_review": document.get("lip_timing_review") if kind == "video" else None,
             "brief_face_review": (document.get("coverage") or {}).get("brief_face_review") if kind == "video" else None,
             "brief_face_windows": (document.get("coverage") or {}).get("brief_face_windows") if kind == "video" else None,
             "picture_frame_count": document["source"].get("frame_count", 0) if kind == "video" else 0,

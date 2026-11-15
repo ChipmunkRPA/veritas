@@ -23,6 +23,7 @@ from app.evidence import (
     image_animation_binding,
     image_transparency_binding,
     scene_return_binding,
+    video_viseme_binding,
 )
 from app.evidence.audio_binding import SPEECH_SELECTION, SPEECH_SELECTION_COMMITMENT
 from app.evidence.av_binding import TIMING_COMMITMENT, TIMING_WINDOWS
@@ -99,7 +100,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     _require(set(result) <= {'schema', 'is_projection', 'original_result_sha256', 'decision', 'findings', 'checks', 'note',
                              IMAGE_EDITOR_PREVIEW, face_return_coverage.COMMITMENT, email_alternatives.COMMITMENT,
                              face_short_window_binding.COMMITMENT, scene_return_binding.COMMITMENT,
-                             scene_return_binding.COVERAGE_COMMITMENT, WRITING_POSITION, WRITING_CHECK_COVERAGE,
+                             scene_return_binding.COVERAGE_COMMITMENT, video_viseme_binding.COMMITMENT,
+                             WRITING_POSITION, WRITING_CHECK_COVERAGE,
                              EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, WORD_TEXT_VISIBILITY,
                              IMAGE_INTERPOLATION, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
                              image_animation_binding.KEY,
@@ -132,6 +134,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                  'Picture-change evidence differs from its committed public result')
         scene_return_binding.validate(evidence, canonical_hash=canonical_hash)
         scene_return_binding.validate_coverage(evidence, canonical_hash=canonical_hash)
+        _require(evidence['source'].get(video_viseme_binding.COMMITMENT) == result.get(video_viseme_binding.COMMITMENT),
+                 'Lip timing differs from its committed public result')
+        video_viseme_binding.validate(evidence)
         face_boundary_binding.validate_set(evidence)
         face_spatial_cut_binding.validate_set(evidence)
         face_return_binding.validate_set(evidence)
@@ -212,7 +217,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         _require(TIMING_COMMITMENT not in result, 'Timing window coverage belongs to video evidence')
         _require(face_return_coverage.COMMITMENT not in result, 'Brief face-change coverage belongs to video evidence')
         _require(face_short_window_binding.COMMITMENT not in result, 'Overlapping face windows belong to video evidence')
-        _require(not {scene_return_binding.COMMITMENT, scene_return_binding.COVERAGE_COMMITMENT}.intersection(result),
+        _require(not {scene_return_binding.COMMITMENT, scene_return_binding.COVERAGE_COMMITMENT,
+                      video_viseme_binding.COMMITMENT}.intersection(result),
                  'Picture-change observations belong to video evidence')
     if analysis['kind'] == 'image':
         from app.evidence import image_interpolation_binding as interpolation

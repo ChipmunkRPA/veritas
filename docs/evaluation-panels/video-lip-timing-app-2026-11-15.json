@@ -1,0 +1,49 @@
+{
+  "paid_analyses": 4,
+  "unpaid_jobs": 0,
+  "payment_mode": "simulated USD 9.99",
+  "standard_checks": true,
+  "outcomes": [
+    {
+      "file_role": "late",
+      "sha256": "2d3d55ba66ef5bb39206d3de1b8b47bb578ca3fe68ecffc52cfdc8c5f66d98a9",
+      "status": "off"
+    },
+    {
+      "file_role": "late",
+      "sha256": "2d3d55ba66ef5bb39206d3de1b8b47bb578ca3fe68ecffc52cfdc8c5f66d98a9",
+      "status": "matched",
+      "witness": {
+        "audio_source_pts": [
+          10880,
+          22400
+        ],
+        "baseline_lag_samples": 0,
+        "change_samples": 2560,
+        "picture_frames": {
+          "after": 30,
+          "before": 12,
+          "during": 21
+        },
+        "picture_source_samples": [
+          8320,
+          19840
+        ]
+      },
+      "verified_assets": 8,
+      "source_replay": "Original SHA-256 and the source frame clock matched. Verified native frames (61), original images or crops (6), mouth patches (0), and aligned face inputs (0). Recomputed picture-clock coverage for 4 timing windows. Replayed every frame in the repeated-picture inspection (61). Verified the timing review's soundtrack and 61 native mouth crops. Recomputed the exact moving-sequence comparison.",
+      "pdf_sha256": "b0fcbb2cb6a4b60b3108f4dce58318ff43fa1b88352ae03a0c1bf9d570c29d1b",
+      "same_assessment_as_off": true
+    },
+    {
+      "file_role": "original",
+      "sha256": "1407639e2ea3afaecb174d91685434d6b23e603f3aa09862d2524fb9cb886e08",
+      "status": "no_match"
+    },
+    {
+      "file_role": "source",
+      "sha256": "76711964c057491ffc510e9c7c923262ef7226e9aba6ebda6d2cd4b1bcb6b758",
+      "status": "unsupported"
+    }
+  ]
+}

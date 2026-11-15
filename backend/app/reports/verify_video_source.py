@@ -41,6 +41,7 @@ from app.evidence import (
     picture_hold_binding,
     picture_sequence,
     scene_return_binding,
+    video_viseme_binding,
 )
 from app.evidence.av_binding import TIMING_WINDOWS
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
@@ -330,6 +331,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     picture_hold_binding.validate(evidence)
     scene_return_binding.validate(evidence, pts=table.pts, canonical_hash=canonical_hash)
     scene_return_binding.validate_coverage(evidence, canonical_hash=canonical_hash, pts=table.pts)
+    video_viseme_binding.validate(evidence, timestamps=table.pts)
+    lip_timing = evidence.get(video_viseme_binding.KEY) or {}
+    timing_frames = {row["index"]: row for row in lip_timing.get("inputs", {}).get("frames", []) if row["gap_units"] is not None}
     scene_coverage = (evidence.get("coverage") or {}).get(scene_return_binding.COVERAGE) or {}
     scene_committed = source.get(scene_return_binding.COMMITMENT)
     if scene_committed or scene_coverage.get("status") == "no_match":
@@ -448,7 +452,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError("The original video's codec or carrier differs from its guarded face-review scope")
     elif guarded_records:
         raise ValueError("Guarded face evidence requires its dedicated version")
-    indices = set(pictures) | set(mouths) | set(faces) | set(scenes) | set(range(hold_frames))
+    indices = set(pictures) | set(mouths) | set(faces) | set(scenes) | set(range(hold_frames)) | set(timing_frames)
     hold_observations = []
     motion_descriptors = []
     mouth_pictures = []
@@ -459,6 +463,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             index = frame.index
             found.add(index)
             rgb_sha = hashlib.sha256(frame.rgb).hexdigest()
+            if row := timing_frames.get(index):
+                _frame_anchor(frame, row["pts"], row["rgb_sha256"], "Speech and mouth timing input", rgb_sha)
+                x, y, right, bottom = row["mouth_box"]
+                if hashlib.sha256(frame.rgb[y:bottom, x:right].tobytes()).hexdigest() != row["mouth_crop_sha256"]:
+                    raise ValueError("The original video does not reproduce the recorded timing crop")
             if index < hold_frames:
                 hold_observations.append((frame.pts if frame.pts_verified else None, rgb_sha))
             if index < motion_limit:
@@ -530,6 +539,19 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             for role, content in measured.items():
                 if hashlib.sha256(content).hexdigest() != packet["artifacts"][role]["sha256"]:
                     raise ValueError("The sound clip or waveform differs from the supplied soundtrack")
+    if lip_timing.get("inputs"):
+        from app.detectors.audio.decode import VIDEO_AUDIO_MAX_SECONDS, decode_audio
+        from app.detectors.video.viseme_review import audio_assets
+
+        decoded_audio = decode_audio(original, source_sha256=digest, max_seconds=VIDEO_AUDIO_MAX_SECONDS)
+        if (decoded_audio.mapping["pcm_sha256"] != lip_timing["pcm_sha256"]
+                or video_viseme_binding.audio_origin(decoded_audio.mapping) != lip_timing["audio_origin_pts"]):
+            raise ValueError("The original video does not reproduce the timing review's soundtrack")
+        if lip_timing.get("witness"):
+            packet = next(packet for packet in packets if packet["id"] == video_viseme_binding.PACKET_ID)
+            for role, content in audio_assets(decoded_audio.pcm, decoded_audio.mapping, lip_timing).items():
+                if hashlib.sha256(content).hexdigest() != packet["artifacts"][role]["sha256"]:
+                    raise ValueError("The timing clip or waveform differs from the supplied soundtrack")
     fine_edges = sum(_verify_scene_support(record, background_frames) for record in fine_records)
     for record in guarded_records:
         _verify_guarded_scene(record, background_frames)
@@ -575,5 +597,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             + (" Recomputed the surrounding-picture cut context and both native boundaries." if cut_records else "")
             + (f" Replayed every frame in the repeated-picture inspection ({hold_frames})." if hold_frames else "")
             + (" Recomputed the held mouth-region pixel measurements." if local_mouth and local_mouth["match"] else "")
+            + (f" Verified the timing review's soundtrack and {len(timing_frames)} native mouth crops."
+               if lip_timing.get("inputs") else "")
             + (" Recomputed the exact moving-sequence comparison." if sequence is not None else "")
             + (" Replayed the motion-aware moving-sequence check." if motion is not None else ""))

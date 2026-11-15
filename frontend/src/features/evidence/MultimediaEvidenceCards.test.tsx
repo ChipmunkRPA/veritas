@@ -38,6 +38,25 @@ const show = (set: MultimediaEvidenceSet, token = 'signed token', mediaReady = t
 afterEach(cleanup)
 
 describe('ordinary multimedia evidence', () => {
+  it('links the matched speech and mouth timing ranges to exact crops and audio', () => {
+    const previous = video.packets[0]
+    show({ ...video, lip_timing_review: { status: 'matched', observation: 'A local timing change was measured.', affects_overall_confidence: false },
+      packets: [{ ...previous, id: 'VLT01', title: 'Local speech and mouth timing change', claim_scope: 'sampled_window',
+        observation: 'Audio source time 0.680–1.400 s. Corresponding picture time 0.520–1.240 s.',
+        lip_timing_review: { audio_source_pts: [10880, 22400], picture_source_samples: [8320, 19840], change_samples: 2560 },
+        frames: (['before', 'during', 'after'] as const).map(role => ({ ...previous.frames[0], id: `VLT01.${role}`, interval_role: role, score: null, is_peak: false })),
+        artifacts: { ...previous.artifacts, lip_timing_waveform: asset('2'), lip_timing_audio: asset('3', 'audio/wav') },
+      }],
+    })
+    const link = screen.getByRole('link', { name: 'Inspect source frames and waveform' })
+    expect(link.getAttribute('href')).toBe('#media-evidence-VLT01')
+    const evidence = within(screen.getByRole('article'))
+    expect(evidence.getByText(/Audio source time 0.680–1.400 s.*picture time 0.520–1.240 s/)).toBeTruthy()
+    expect(evidence.getAllByAltText(/exact measured mouth region/)).toHaveLength(3)
+    expect(evidence.getByAltText(/Waveform on the audio source clock/)).toBeTruthy()
+    expect(evidence.getByLabelText('Listen to the soundtrack during the measured timing change').getAttribute('src')).toContain('.wav')
+  })
+
   it('distinguishes displayed passages from the full list of writing candidates', () => {
     show({ ...document, omitted_windows: 6, coverage: {
       scored_windows: 24,

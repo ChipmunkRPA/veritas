@@ -215,7 +215,8 @@ def validate(cover, document):
         motion = cover.get(key)
         backwards = key == MOTION_REVERSE_KEY
         source = document["source"]
-        rate = _validate_motion_scope(motion, source, exact_review, cover["frames_scanned"], reverse=backwards)
+        rate = _validate_motion_scope(motion, source, exact_review,
+                                      cover["frames_scanned"] if motion is not None else 0, reverse=backwards)
         _validate_pair(motion, source, motion["frames_scanned"] if motion is not None else 0,
                        [p for p in packets if p["id"] == packet_id], motion_rate=rate, reverse=backwards)
 

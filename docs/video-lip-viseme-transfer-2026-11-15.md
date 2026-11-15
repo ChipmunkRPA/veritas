@@ -105,8 +105,49 @@ These results support a local trial using the tighter point with
 source evidence and zero authorship-confidence weight. Current evidence
 measures short shifts in speech with known faces. Synchronized
 redrawing, offscreen speakers, cuts, heavy occlusion and arbitrary
-video clocks remain outside this transfer. This receipt documents a
-research runner and no app setting is enabled by it.
+video clocks remain outside this transfer.
+
+## Local application trial
+
+Enable `VERITAS_VIDEO_LIP_TIMING_REVIEW=true` for new Full analyses in
+development. Set `VERITAS_VIDEO_LIP_TIMING_MODEL_DIR` to the pinned acoustic
+checkpoint directory and `VERITAS_VIDEO_LIP_TIMING_FACE_ASSET` to the
+pinned face asset. If MediaPipe 0.10.32 is installed separately, set
+`VERITAS_VIDEO_LIP_TIMING_RUNTIME` to that environment's package directory.
+The trial uses short, upright, single-shot clips at roughly 24 fps and
+continuous mono 16 kHz PCM16 or AAC sound. The worker runs offline and
+stops if it cannot finish within its bounded time budget.
+
+The app compares one constant offset against two offsets, one inside the
+candidate range and one supported by the surrounding speech. A matching
+result shows the two source ranges, three original frames and mouth crops,
+and a waveform highlighting the exact playable audio. The waveform includes
+up to 200 ms of surrounding sound on each side and scales amplitude for
+legibility. The audio excerpt preserves the decoded samples. The browser,
+Standard PDF and JSON use the same coordinates. Skipped, unresolved, and
+measured results have separate coverage messages. The observation carries
+zero weight in the overall AI assessment.
+
+The local prepaid replay makes four analyses with simulated USD 9.99
+checkout. The prepared AAC shift runs with the trial off and on, an unedited
+AAC clip checks the ordinary outcome, and a silent video checks coverage.
+The replay verifies the same assessment with the trial off and on, exact
+API and export agreement, PDF image bytes at decoded-pixel level, and the
+signed package against the original source. The signed verifier recomputes
+the offset comparison from the retained numeric measurements and checks the
+native picture and audio assets. It uses the recorded geometry and speech
+events during this replay.
+[Full local worker receipt](evaluation-panels/video-lip-timing-app-2026-11-15.json)
+
+```sh
+export PYTHONPATH=backend HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+backend/.venv/bin/python -B -m scripts.video_lip_timing_app "$run/app" "$archives" \
+  docs/evaluation-panels/video-lip-viseme-carrier-2026-11-15.json.gz \
+  "$checkpoint" "$face_landmarker" "$mediapipe_runtime"
+```
+
+Add `--standard-checks` to exercise the configured Full video detectors
+alongside the timing trial.
 
 ## Independent replay
 

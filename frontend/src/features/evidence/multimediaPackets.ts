@@ -32,6 +32,7 @@ export interface VideoEvidencePacket extends PacketBase {
     start_stream_s: number; end_stream_s: number; start_playback_s: number | null; end_playback_s: number | null;
     span_s: number; frame_count: number; decoded_rgb_sha256: string; pts: number[] }
   mouth_local_hold?: { frames: [number, number]; box: [number, number, number, number] }
+  lip_timing_review?: { audio_source_pts: [number, number]; picture_source_samples: [number, number]; change_samples: number }
   scene_return?: { schema: 'picture-change-return/1' | 'picture-change-return/2'; start_stream_s: number; end_stream_s: number; tiles: number[] }
   picture_sequence?: { first: PictureSequenceSpan; second: PictureSequenceSpan; frame_count: number; span_s: number; order?: 'reverse' }
   face_interval?: { start_stream_s: number; end_stream_s: number; lift: number;
@@ -61,6 +62,7 @@ export interface VideoEvidencePacket extends PacketBase {
 type PictureSequenceSpan = { start_frame_index: number; end_frame_index: number; start_stream_s: number; end_stream_s: number }
 export interface VideoEvidenceSet extends SetBase {
   schema: 'chipmunk.video-evidence/1'; packets: VideoEvidencePacket[]; omitted_candidates: number
+  lip_timing_review?: { status: string; observation: string; affects_overall_confidence: false }
   source: { sha256: string; time_base?: string; width?: number; height?: number; timeline_origin_s?: number | null }
   picture_hold?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number; frame_limit: number;
     last_frame_index: number | null; last_stream_time_s: number | null; last_pts: number | null; time_base: string;

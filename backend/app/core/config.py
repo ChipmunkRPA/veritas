@@ -243,6 +243,10 @@ class Settings(BaseSettings):
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.
     video_soundtrack_pair_review: bool = False  # Compare two matching audio streams in one short video.
     video_mouth_hold_speech_context: bool = False  # Trial: measure speech activity at a verified mouth hold.
+    video_lip_timing_review: bool = False  # Local trial on short single-shot clips with exact source timing.
+    video_lip_timing_model_dir: Path | None = None
+    video_lip_timing_face_asset: Path | None = None
+    video_lip_timing_runtime: Path | None = None
     video_soundtrack_frequency_review: bool = False  # Check cross-band support after a missed broad timing match.
     video_reference_local_area: bool = False  # Qualified short 720 x 480 earlier-copy picture evidence.
     video_reference_measured_interval: bool = False  # Show strongly supported frame boundaries for qualified local picture ranges.

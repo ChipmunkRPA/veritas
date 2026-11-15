@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Topic-conditioned predictability in formal writing](writing-topic-response-2026-11-14.md)
+  reduced ordinary flags from 44/48 to 37/48 while reducing useful
+  locations from 22/48 to 19/48 on fresh government excerpts. The
+  experimental rules stay offline. The app now underlines passages
+  selected solely by the writing-pattern check and identifies that
+  limited basis in the browser, PDF and JSON.
+
 - [Sentence heads for a single rewritten passage](writing-sentence-probe-2026-11-14.md)
   compared two new heads on 73 held pairs and 74 dated journal excerpts.
   In the actual Full worker, the tighter paired head added four useful

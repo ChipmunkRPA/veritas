@@ -10,6 +10,11 @@ export function windowInspectionDirection(window: DocumentEvidenceWindow): boole
   return lowerSupports ? window.score < boundary : window.score >= boundary
 }
 
+export function writingPatternOnly(packet: DocumentEvidencePacket): boolean {
+  const supporting = packet.supporting_windows.filter((window) => windowInspectionDirection(window) === true)
+  return supporting.length > 0 && supporting.every((window) => window.score_kind === 'perplexity_ratio')
+}
+
 export function passageLocation(packet: DocumentEvidencePacket): string {
   const locations = packet.anchors.map((anchor) => {
     const place = anchor.page != null ? `Page ${anchor.page}`
@@ -57,6 +62,7 @@ export function RecordedPassage({ packet }: { packet: DocumentEvidencePacket }) 
   const shortened = first > 0 || last < match.characters.length
   const basis = packet.inspection_scope?.basis
   const matched = !!packet.matched_context_review
+  const patternOnly = writingPatternOnly(packet)
   const label = matched ? 'Selected sentence and scored context' : basis === 'ratio_reduction' ? 'Measured writing-pattern range'
     : basis === 'scored_context' ? 'Scored text in its source context' : 'Selected passage in its source context'
   return <div className="mt-4" data-testid={`source-passage-${packet.id}`}>
@@ -73,15 +79,21 @@ export function RecordedPassage({ packet }: { packet: DocumentEvidencePacket }) 
           && range.end === packet.focus.end - packet.context.start
         return <Fragment key={range.start}>
           {match.characters.slice(match.ranges[i - 1]?.end ?? first, range.start).join('')}
-          <mark className={basis === 'scored_context' && !focus ? 'bg-surface text-text border-b-2 border-accent rounded-xs' : 'bg-hl-ai text-text border-b-2 border-hl-ai-rule rounded-xs'}
-            data-review-focus={focus || undefined}
-            data-testid={`passage-highlight-${packet.id}`}>{match.characters.slice(range.start, range.end).join('')}</mark>
+          {patternOnly
+            ? <span className="underline decoration-text-muted underline-offset-4" data-testid={`passage-highlight-${packet.id}`}>
+              {match.characters.slice(range.start, range.end).join('')}
+            </span>
+            : <mark className={basis === 'scored_context' && !focus ? 'bg-surface text-text border-b-2 border-accent rounded-xs' : 'bg-hl-ai text-text border-b-2 border-hl-ai-rule rounded-xs'}
+              data-review-focus={focus || undefined}
+              data-testid={`passage-highlight-${packet.id}`}>{match.characters.slice(range.start, range.end).join('')}</mark>}
         </Fragment>
       })}
       {match.characters.slice(match.end, last).join('')}
       {last < match.characters.length && <span aria-label="Later saved context not displayed"> …</span>}
     </blockquote>
-    <p className="mt-2 mb-0 text-caption text-text-muted">{matched
+    <p className="mt-2 mb-0 text-caption text-text-muted">{patternOnly
+      ? 'The underline locates the predictability measurement. Formal, templated and edited human writing can give similar readings.'
+      : matched
       ? 'The shaded sentence is the review location. Underlines mark the three sentences the check read together. This is a passage-level clue with zero weight in the overall assessment.'
       : basis === 'scored_context'
       ? 'The highlight covers the measured context. The navigation sentence gives you a place to start reading. The response does not identify generated words.'
@@ -104,7 +116,7 @@ export default function DocumentInspectionMap({ packets, selectedId, onSelect }:
         const supporting = packet.supporting_windows.filter((window) => windowInspectionDirection(window) === true).length
         const opposing = packet.supporting_windows.filter((window) => windowInspectionDirection(window) === false).length
         const basis = packet.inspection_scope?.basis
-        const reading = supporting && opposing ? 'Responses disagree' : supporting
+        const reading = writingPatternOnly(packet) ? 'Predictability measurement' : supporting && opposing ? 'Responses disagree' : supporting
           ? basis === 'scored_context' ? 'Context response' : basis === 'ratio_reduction' ? 'Measured ratio' : 'Inspection flag'
           : 'Recorded comparison'
         const match = basis === 'scored_context' && !packet.matched_context_review ? sourceHighlight(packet) : null

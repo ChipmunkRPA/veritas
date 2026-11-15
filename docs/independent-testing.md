@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [topic-response replay](writing-topic-response-2026-11-14.md#reproduce)
+compares matched and neutral topic cues on government-report sentences.
+It reports the effect on ordinary passage flags and correct locations on
+48 fresh work pairs, with a raw-response control.
+
 The [sentence-head replay](writing-sentence-probe-2026-11-14.md#replay)
 recounts exact rewrite locations and ordinary flags across held works and
 the dated journal revision panel. It reconstructs the cutoffs from separate

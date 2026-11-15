@@ -1085,6 +1085,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                              for role, asset in sorted(packet["artifacts"].items())]
             focus, context = packet["focus"], packet["context"]
             matched_review = bool(packet.get("matched_context_review"))
+            row["writing_pattern_only"] = document_scope.writing_pattern_only(packet["supporting_windows"])
+            if row["writing_pattern_only"]:
+                row["interpretation"] = document_scope.WRITING_PATTERN_INTERPRETATION
             if matched_review:
                 row["matched_context_review"] = True
             priority = part.get("coverage", {}).get(document_paragraph_priority.KEY)

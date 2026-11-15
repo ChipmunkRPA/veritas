@@ -501,6 +501,7 @@ def test_ratio_boundary_can_select_a_passage_even_when_classifier_opposes(packet
     analysis.result_hash = canonical_hash(result)
     evidence = build_packet_set(db, analysis, store, result)
     assert len(evidence["packets"]) == 3
+    assert all(packet["review_basis"] == "writing_pattern_only" for packet in evidence["packets"])
     assert all([w["direction"] for w in packet["supporting_windows"]] == ["opposes_ai", "supports_ai"] for packet in evidence["packets"])
     assert all(packet["inspection_scope"] == {
         "basis": "ratio_reduction", "spans": [{"start": packet["focus"]["start"], "end": packet["focus"]["end"]}],

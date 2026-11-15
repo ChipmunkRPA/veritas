@@ -298,6 +298,16 @@ def supports_inspection(window: dict) -> bool:
     return inspection_direction(window) is True
 
 
+def writing_pattern_only(windows: list[dict]) -> bool:
+    supporting = [window for window in windows if supports_inspection(window)]
+    return bool(supporting) and all(window.get("score_kind") == "perplexity_ratio" for window in supporting)
+
+
+WRITING_PATTERN_INTERPRETATION = (
+    "This passage was selected by the writing-pattern check. Surrounding text can influence the measurement."
+)
+
+
 def build(focus: dict, windows: list[dict], size: int) -> dict:
     """Use supporting input spans, or an exact and separately measured ratio reduction."""
     start, end = check_range(focus, size)
@@ -336,6 +346,10 @@ def validate(packet: dict, size: int) -> None:
         not low <= span["start"] < span["end"] <= high for span in scope["spans"]
     ):
         raise ValueError("Document inspection scope differs from the recorded supporting inputs")
+    if "review_basis" in packet and (
+        packet["review_basis"] != "writing_pattern_only" or not writing_pattern_only(packet["supporting_windows"])
+    ):
+        raise ValueError("The writing-pattern review basis differs from the recorded responses")
 
 
 def validate_passage_coverage(document: dict) -> None:

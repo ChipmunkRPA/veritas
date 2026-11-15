@@ -183,11 +183,16 @@ describe('ordinary document passage inspection', () => {
     expect(screen.queryByText(/Responses at or above/)).toBeNull()
   })
 
-  it('keeps the separate measured ratio reduction narrow', () => {
-    const item: DocumentEvidencePacket = { ...packet, inspection_scope: { basis: 'ratio_reduction',
-      spans: [{ start: packet.focus.start, end: packet.focus.end }] } }
-    render(<RecordedPassage packet={item} />)
-    expect(screen.getByTestId('passage-highlight-T01').textContent).toBe('Same sentence.')
+  it('underlines a sole writing-pattern measurement at its exact recorded range', () => {
+    const [classifier, ratio] = packet.supporting_windows
+    const item: DocumentEvidencePacket = { ...packet, review_basis: 'writing_pattern_only',
+      supporting_windows: [{ ...classifier, direction: 'opposes_ai' }, { ...ratio, direction: 'supports_ai', score: 0.8 }],
+      inspection_scope: { basis: 'ratio_reduction', spans: [{ start: packet.focus.start, end: packet.focus.end }] } }
+    show(evidence([item]))
+    const highlight = screen.getByTestId('passage-highlight-T01')
+    expect(highlight.textContent).toBe('Same sentence.')
+    expect(highlight.tagName).toBe('SPAN')
+    expect(screen.getByText('Predictability measurement')).toBeTruthy()
     expect(screen.getByText('Measured writing-pattern range')).toBeTruthy()
   })
 

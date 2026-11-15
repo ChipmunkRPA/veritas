@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from copy import deepcopy
 
+import pytest
+
 from test_document_packets import _add_ratio
 from test_document_packets import packet_factory as packet_factory
 
@@ -11,10 +13,12 @@ from app.reports import engine, multimedia_evidence
 from app.reports.specimens import specimen
 
 
-def test_pdf_keeps_ratio_reduction_distinct_from_full_forward_context(packet_factory, monkeypatch):
+@pytest.mark.parametrize("pattern_only", [False, True])
+def test_pdf_keeps_ratio_reduction_distinct_from_full_forward_context(packet_factory, monkeypatch, pattern_only):
     text = ("A longer opening sentence provides source context. Yes we can. "
             "A final sentence remains available as forward-only context.")
-    db, store, analysis, result, decoded, _ = packet_factory(text=text, scores=(0.1, 0.9, 0.1))
+    primary = 0.1 if pattern_only else 0.9
+    db, store, analysis, result, decoded, _ = packet_factory(text=text, scores=(0.1, primary, 0.1))
     ratio_signal = _add_ratio(result, decoded)
     measured = ratio_signal["details"]["text_evidence"]["windows"][1]
     # The short focus borrows its preceding sentence for the ratio reduction.
@@ -25,9 +29,12 @@ def test_pdf_keeps_ratio_reduction_distinct_from_full_forward_context(packet_fac
                     scored_token_indices=list(range(reduction_end)), tokens_scored=reduction_end,
                     neighbor_expansion=True,
                     token_coverage={"tokens": reduction_end, "covered_tokens": reduction_end, "token_windows": 1})
+    if pattern_only:
+        measured.update(score=0.8, score_exact_hex=float(0.8).hex(), mean_negative_log_likelihood=1.6)
     analysis.result_hash = canonical_hash(result)
     evidence = build_packet_set(db, analysis, store, result)
     assert len(evidence["packets"]) == 1
+    assert (evidence["packets"][0].get("review_basis") == "writing_pattern_only") is pattern_only
     full_end = len(decoded["text"])
     assert reduction_end < full_end
 
@@ -49,7 +56,7 @@ def test_pdf_keeps_ratio_reduction_distinct_from_full_forward_context(packet_fac
     assert ratio["tokens_scored"] == reduction_end and ratio["neighbor_expansion"] is True
     assert ratio["contexts"][0]["source_token_range"] == [0, full_end]
     assert ratio["contexts"][0]["scored_token_range"] == [0, full_end]
-    assert ratio["supports_ai"] is False  # Raw ratio 1.4 is above the lower-is-AI boundary.
+    assert ratio["supports_ai"] is pattern_only
     assert "threshold" not in ratio and "ai_when" not in ratio
     html = " ".join(engine.render_html(snapshot, embed_fonts=False).split())
     assert f"This passage's ratio uses {reduction_end} selected token(s), intersecting source characters [0, {reduction_end})." in html
@@ -58,10 +65,12 @@ def test_pdf_keeps_ratio_reduction_distinct_from_full_forward_context(packet_fac
     assert "not necessarily all the tokens used for this passage's ratio" in html
     assert "No AI-like flag for this input." in html
     assert "It carries no passage-level authorship confidence." in html
+    assert ('class="document-predictability-range"' in html) is pattern_only
     assert "The recorded checks disagree. One response was AI-like and another did not flag its input." in html
     assert "Inspection boundary:" not in html
     assert "Each check uses its own recorded operating threshold" not in html
     pdf = " ".join(engine.pdf_text(engine.render_pdf(snapshot).pdf).split())
+    assert ("Predictability measurement." in pdf) is pattern_only
     assert "No AI-like flag for this input." in pdf
     assert "Inspection boundary:" not in pdf
     assert "Each check uses its own recorded operating threshold" not in pdf

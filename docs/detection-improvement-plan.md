@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Isolated-background supervision for short speech edits](audio-short-edit-background-training-2026-11-15.md)
+  lowered ordinary competing-speech flags from 35/72 to 19/72 and from
+  18/72 to 9/72 in the two stricter held comparisons. One stock fold
+  lost two useful locations. All new candidates missed useful locations
+  on 18 fresh noisy SINE edits and 11 separate recorded-room edits.
+  Only one of the 18 SINE edits could fit an admitted two-second window.
+  All 18 could fit the narrower grid. The candidates remain in evaluation.
+
 - [Stereo mono-input voice coverage](audio-downmix-coverage-2026-11-15.md)
   withholds the recording-wide estimate when sound in the stereo upload
   cancels in the mono waveform used by the voice check. Four staged

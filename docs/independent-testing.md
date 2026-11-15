@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [isolated-background training replay](audio-short-edit-background-training-2026-11-15.md#independent-replay)
+recalculates six calibration pairs, matched false-alert changes and time
+overlap. The independently selectable 18-reader SINE panel checks 80
+deliveries and compares the live scan's two-second window geometry with
+the narrower candidate grid.
+
 The [stereo voice coverage replay](audio-downmix-coverage-2026-11-15.md#replay)
 compares 32 simulated prepaid analyses with matched source hashes.
 It verifies the exact mono cancellation times, the four withheld

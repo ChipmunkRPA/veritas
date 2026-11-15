@@ -14,6 +14,8 @@ from scripts import audio_shared_mel_context as parent
 
 source = parent.source
 PANELS = ("development", "random_placement", "families", "sine")
+PUBLISHED_PARENT = parent.PANELS / "audio-shared-mel-context-2026-11-14.json"
+PUBLISHED_PARENT_SHA256 = "e4de086f269d7682bfd48a5b5bed9f92f666d3e577e367a079474b8e2f419bce"
 SCHEMA = "chipmunk.audio-input-contribution-transfer/1"
 ARMS = ("dense", "contribution", "agreement")
 FIRST_UPPER_BAND = 40
@@ -159,15 +161,18 @@ def _summary(rows, arm, point, *, supplement=False):
 
 def review(receipt):
     lock, panels = receipt["freeze"], receipt["panels"]
-    source.check(lock["schema"] == SCHEMA and lock["method"] == METHOD and lock["bindings"] == parent.ledger_roles()
+    source.check(source.path_sha(PUBLISHED_PARENT) == PUBLISHED_PARENT_SHA256, "Published comparison receipt differs")
+    previous = source.read(PUBLISHED_PARENT)
+    source.check(lock["schema"] == SCHEMA and lock["method"] == METHOD and lock["bindings"] == previous["freeze"]["bindings"]
                  and set(panels) == set(PANELS), "Method or input commitments differ")
     for panel in PANELS:
-        for row, expected in zip(panels[panel], parent.input_rows(panel), strict=True):
-            source.check(all(row[key] == value for key, value in expected.items()) and
-                         row["existing_summary"] == (panel in {"families", "sine"}), "A source differs from its parent receipt")
+        for row, expected in zip(panels[panel], previous["panels"][panel], strict=True):
+            source.check(all(row[key] == value for key, value in expected.items() if key not in {"views", "pooled_frames"}),
+                         "A source differs from its parent receipt")
             views = row["views"]
             source.check(set(views) == set(ARMS) and all(len(values) == len(parent.STARTS) for values in views.values())
                          and all(value is None or math.isfinite(value) for values in views.values() for value in values)
+                         and views["dense"] == expected["views"]["local"]
                          and [value is None for value in views["dense"]] ==
                          [value is None for value in views["contribution"]] and views["agreement"] == _agreement(views),
                          "Source windows or agreement differ")

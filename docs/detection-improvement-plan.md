@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Input sensitivity during a short voice edit](audio-input-contribution-transfer-2026-11-14.md)
+  found zero added useful locations with the signed upper-frequency cue.
+  Agreement with the dense score added one range on the three-generator
+  panel but lost three on the stock-voice panel. All 195 recordings and
+  2,018 conventional dense-window readings reproduced the prior inputs.
+  The cue stays experimental. The independent reviewer now counts separate
+  localized events, including misses hidden by combined area measurements.
+
 - [Reversed moving pictures in a single video](video-reversed-sequence-2026-11-14.md)
   located all eight exact lossless reversals with no flags in 32 ordinary
   or forward-copy controls. It missed all eight lossy reverse copies. The

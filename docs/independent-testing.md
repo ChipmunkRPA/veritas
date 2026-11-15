@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short-voice input sensitivity replay](audio-input-contribution-transfer-2026-11-14.md#reproduce)
+checks source identities, exact sample windows and held results across
+several synthesis families with competing speech. Use `count-events`
+[below](#count-exact-locations-on-your-own-files) to review separate edits
+inside one recording or document without sharing their exact coordinates.
+
 The [writing context-order replay](writing-context-order-transfer-2026-11-14.md#replay-and-independent-evaluation)
 rebuilds calibrated sentence rankings across matched news and abstract
 excerpts. It counts losses and gains against the existing location rule.

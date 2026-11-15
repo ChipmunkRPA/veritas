@@ -37,6 +37,7 @@ EXACT_WEBP_SCHEMA = "chipmunk.image-reference-comparison/18"
 LOSSY_WEBP_SCHEMA = "chipmunk.image-reference-comparison/19"
 RESIZED_LOSSY_WEBP_SCHEMA = "chipmunk.image-reference-comparison/20"
 CROPPED_LOSSY_WEBP_SCHEMA = "chipmunk.image-reference-comparison/21"
+CROPPED_RESIZED_LOSSY_WEBP_SCHEMA = "chipmunk.image-reference-comparison/22"
 ORIENTATION_SCHEMA = "chipmunk.image-reference-comparison/6"
 CROPPED_RESIZE_SCHEMAS = {CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, JPEG_PNG_ENVELOPE_SCHEMA}
 ORIENTATIONS = {
@@ -401,8 +402,10 @@ def _native_reference_replay(comparison, earlier, submitted, *, opacity, lossy_w
     with TemporaryDirectory() as temporary:
         evidence = Path(temporary) / "evidence"
         regenerated = inspect(earlier, submitted, evidence_dir=evidence, allow_png_opacity=opacity, allow_lossy_webp=lossy_webp,
-                              allow_proportional_resize=comparison["schema"] in {RESIZED_LOSSY_WEBP_SCHEMA, CROPPED_LOSSY_WEBP_SCHEMA},
-                              allow_lossy_webp_crop=comparison["schema"] == CROPPED_LOSSY_WEBP_SCHEMA)
+                              allow_proportional_resize=comparison["schema"] in {RESIZED_LOSSY_WEBP_SCHEMA, CROPPED_LOSSY_WEBP_SCHEMA,
+                                                                                CROPPED_RESIZED_LOSSY_WEBP_SCHEMA},
+                              allow_lossy_webp_crop=comparison["schema"] in {CROPPED_LOSSY_WEBP_SCHEMA, CROPPED_RESIZED_LOSSY_WEBP_SCHEMA},
+                              allow_lossy_webp_crop_resize=comparison["schema"] == CROPPED_RESIZED_LOSSY_WEBP_SCHEMA)
         label = "PNG opacity" if opacity else "Lossy WebP" if lossy_webp else "Exact WebP"
         _require(_same_replayed_fields(comparison, regenerated), f"{label} measurements differ from the supplied sources")
         if "mask" in regenerated:
@@ -431,9 +434,10 @@ def review(export, earlier, submitted):
         submitted_bytes = _read(submitted, MAX_SOURCE_BYTES)
         opacity = comparison["schema"] == PNG_OPACITY_SCHEMA
         webp = comparison["schema"] == EXACT_WEBP_SCHEMA
-        resized_webp = comparison["schema"] == RESIZED_LOSSY_WEBP_SCHEMA
+        crop_resize_webp = comparison["schema"] == CROPPED_RESIZED_LOSSY_WEBP_SCHEMA
+        resized_webp = comparison["schema"] == RESIZED_LOSSY_WEBP_SCHEMA or crop_resize_webp
         cropped_webp = comparison["schema"] == CROPPED_LOSSY_WEBP_SCHEMA
-        lossy_webp = comparison["schema"] in {LOSSY_WEBP_SCHEMA, RESIZED_LOSSY_WEBP_SCHEMA, CROPPED_LOSSY_WEBP_SCHEMA}
+        lossy_webp = comparison["schema"] == LOSSY_WEBP_SCHEMA or resized_webp or cropped_webp
         ref = _source(stack, earlier_bytes, comparison["reference"], composite=opacity, webp=webp or lossy_webp)
         sub = _source(stack, submitted_bytes, comparison["submitted"], composite=opacity, webp=webp or lossy_webp)
         resized = comparison["schema"] == RESIZE_SCHEMA or comparison["schema"] in CROPPED_RESIZE_SCHEMAS
@@ -441,6 +445,8 @@ def review(export, earlier, submitted):
         jpeg = comparison["schema"] in {EXACT_JPEG_IDENTITY_SCHEMA, SHIFTED_JPEG_SCHEMA, STRUCTURE_JPEG_SCHEMA,
                                         SAME_JPEG_SCHEMA, JPEG_DETAIL_LOSS_SCHEMA, EXTENDED_JPEG_DETAIL_LOSS_SCHEMA}
         crop = comparison.get("reference_crop_bounds") if comparison["schema"] in CROPPED_RESIZE_SCHEMAS else None
+        if crop_resize_webp:
+            crop = comparison["lossy_webp_crop_resize"]["reference_crop"]
         if opacity or webp or lossy_webp:
             expected_native_mask = _native_reference_replay(comparison, earlier, submitted, opacity=opacity, lossy_webp=lossy_webp)
             dx, dy, overlap = 0, 0, (0, 0, sub.width, sub.height)

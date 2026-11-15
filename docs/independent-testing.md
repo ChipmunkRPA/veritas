@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [cropped and downsized WebP replay](image-reference-crop-resize-webp-2026-11-15.md#replay-commands)
+recounts same-source edit locations after both transformations, including
+cases where cropping removed the edit. The local app replay verifies both
+native crops against the original sources and the report's embedded pixels.
+
 The [short voice ranking replay](audio-competing-speech-ranking-2026-11-15.md#independent-replay)
 checks ordinary and background controls at the same edit clock. It also
 compares two training variants on 172 retained transfer recordings across

@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Earlier-copy comparison after both cropping and downsizing WebP](image-reference-crop-resize-webp-2026-11-15.md)
+  located 129/192 staged edits where the prior WebP paths were unassessed.
+  It highlighted no controls and accepted the exact crop on 174/384 of
+  them. The evidence view and exports use the original pixels and
+  coordinates. The supplementary comparison has zero AI-confidence weight.
+
 - [Ranking short voice edits against matched controls](audio-competing-speech-ranking-2026-11-15.md)
   increased useful locations without a matched control alert from one to
   three on the primary panel at the wider point. In 172 separate transfer

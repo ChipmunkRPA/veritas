@@ -168,7 +168,7 @@ def frozen_inputs(args, part, profile):
         yield row, views, truth
 
 
-def authored(views, truth, identity):
+def authored(views, truth, identity, *, allow_invisible=False):
     original = views["original"]
     height, width = original.shape[:2]
     photo = Image.fromarray(original)
@@ -202,7 +202,8 @@ def authored(views, truth, identity):
     generated = {"sharp": views["edited"], "feathered": blend(views["edited"])}
     for role, rgb in generated.items():
         actual = np.any(rgb != original, axis=2)
-        require(actual.any() and not (actual & ~truth).any(), f"{role} edit exceeded exact support")
+        require((allow_invisible or actual.any()) and not (actual & ~truth).any(),
+                f"{role} edit missing or outside exact support")
     return ordinary, generated
 
 

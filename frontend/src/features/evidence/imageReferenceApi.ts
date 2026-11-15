@@ -43,6 +43,12 @@ interface LossyWebpSupport {
   earlier_rgb_sha256: string
 }
 
+interface LossyWebpProjection {
+  earlier_rgb_sha256: string
+  submitted_over_reference_xy: [[number, number], [number, number]]
+  supported_kernels: (LossyWebpSupport & { kernel: 'bicubic' | 'bilinear' | 'lanczos' })[]
+}
+
 export interface ImageReferenceRecord {
   schema: string
   status: string
@@ -94,15 +100,15 @@ export interface ImageReferenceRecord {
   png_opacity?: { opacity_changed_pixels: number; matched_pixels: number; matched_tiles: [number, number][] }
   exact_webp?: { changed_pixels: number; matched_tiles: [number, number][]; earlier_rgb_sha256: string; submitted_rgb_sha256: string }
   lossy_webp?: LossyWebpSupport
-  lossy_webp_resize?: {
-    earlier_rgb_sha256: string
-    submitted_over_reference_xy: [[number, number], [number, number]]
-    supported_kernels: (LossyWebpSupport & { kernel: 'bicubic' | 'bilinear' | 'lanczos' })[]
-  }
+  lossy_webp_resize?: LossyWebpProjection
   lossy_webp_crop?: {
     reference_crop: NativeImageArea
     anchor_zones: [number, number][]
     framing: LossyWebpSupport
+  }
+  lossy_webp_crop_resize?: {
+    reference_crop: NativeImageArea & { matching_features: number; supporting_tiles: { row: number; column: number; correlation: number }[] }
+    projection: LossyWebpProjection
   }
   affects_overall_confidence?: boolean
   additional_regions?: number
@@ -125,6 +131,7 @@ export const exactWebpSchema = 'chipmunk.image-reference-comparison/18'
 export const lossyWebpSchema = 'chipmunk.image-reference-comparison/19'
 export const resizedLossyWebpSchema = 'chipmunk.image-reference-comparison/20'
 export const croppedLossyWebpSchema = 'chipmunk.image-reference-comparison/21'
+export const croppedResizedLossyWebpSchema = 'chipmunk.image-reference-comparison/22'
 export const isJpegDetailLoss = (schema: string) =>
   schema === jpegDetailLossSchema || schema === extendedJpegDetailLossSchema
 export const IMAGE_REFERENCE_SECTION_ID = 'earlier-image-comparison'
@@ -255,26 +262,36 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
       throw new Error('The server returned an incomplete lossy WebP comparison.')
     }
   }
-  if (comparison.schema === resizedLossyWebpSchema && comparison.status === 'comparable') {
-    const resize = comparison.lossy_webp_resize
+  const croppedResize = comparison.schema === croppedResizedLossyWebpSchema
+  if ((comparison.schema === resizedLossyWebpSchema || croppedResize) && comparison.status === 'comparable') {
+    const crop = comparison.lossy_webp_crop_resize
+    const resize = croppedResize ? crop?.projection : comparison.lossy_webp_resize
     const { width, height } = comparison.submitted
     const { width: earlierWidth, height: earlierHeight } = comparison.reference
+    const area = croppedResize ? crop?.reference_crop : { x: 0, y: 0, w: earlierWidth, h: earlierHeight }
     const [xScale, yScale] = resize?.submitted_over_reference_xy ?? []
     const kernels = resize?.supported_kernels
-    if (!resize || comparison.affects_overall_confidence !== false
+    if (!resize || !area || !validAreaWithin(area, earlierWidth, earlierHeight) || comparison.affects_overall_confidence !== false
         || ![width, height, earlierWidth, earlierHeight].every(Number.isSafeInteger)
         || Math.min(width, height) < 384 || width >= earlierWidth || height >= earlierHeight
         || Math.min(earlierWidth, earlierHeight) < 512 || Math.max(earlierWidth, earlierHeight) > 1024
-        || xScale?.[0] !== width || xScale[1] !== earlierWidth || yScale?.[0] !== height || yScale[1] !== earlierHeight
+        || xScale?.[0] !== width || xScale[1] !== area.w || yScale?.[0] !== height || yScale[1] !== area.h
+        || (croppedResize && (!crop || (area.w === earlierWidth && area.h === earlierHeight)
+          || earlierWidth - area.w > 128 || earlierHeight - area.h > 128 || 5 * area.w < 4 * earlierWidth || 5 * area.h < 4 * earlierHeight
+          || width < Math.round(.72 * area.w) || width > Math.round(.95 * area.w)
+          || height < Math.round(.72 * area.h) || height > Math.round(.95 * area.h)
+          || Math.abs(width * area.h - height * area.w) > Math.max(area.w, area.h)
+          || !Number.isSafeInteger(crop.reference_crop.matching_features) || crop.reference_crop.matching_features < 20
+          || !Array.isArray(crop.reference_crop.supporting_tiles) || crop.reference_crop.supporting_tiles.length < 6))
         || !/^[a-f0-9]{64}$/.test(resize.earlier_rgb_sha256) || !Array.isArray(kernels) || kernels.length < 2 || kernels.length > 3
         || !kernels.every(row => row && ['bicubic', 'bilinear', 'lanczos'].includes(row.kernel) && supportsLossyFraming(row, width, height))
         || new Set(kernels.map(row => row.kernel)).size !== kernels.length
         || comparison.regions.some(region => {
           const earlier = region.reference_region
           if (!validAreaWithin(region, width, height) || !earlier || !validAreaWithin(earlier, earlierWidth, earlierHeight)) return true
-          return earlier.x !== Math.floor(region.x * earlierWidth / width) || earlier.y !== Math.floor(region.y * earlierHeight / height)
-            || earlier.x + earlier.w !== Math.ceil((region.x + region.w) * earlierWidth / width)
-            || earlier.y + earlier.h !== Math.ceil((region.y + region.h) * earlierHeight / height)
+          return earlier.x !== area.x + Math.floor(region.x * area.w / width) || earlier.y !== area.y + Math.floor(region.y * area.h / height)
+            || earlier.x + earlier.w !== area.x + Math.ceil((region.x + region.w) * area.w / width)
+            || earlier.y + earlier.h !== area.y + Math.ceil((region.y + region.h) * area.h / height)
         })) {
       throw new Error('The server returned an incomplete resized WebP comparison.')
     }

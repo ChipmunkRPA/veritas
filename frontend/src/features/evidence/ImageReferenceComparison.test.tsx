@@ -168,6 +168,37 @@ describe('earlier-copy comparison', () => {
     expect(JSON.parse(await blobText(download))).toEqual({ comparison: record, pngs: result.pngs })
   })
 
+  it('shows the earlier-image area when a WebP was cropped and resized', async () => {
+    const result = structuredClone(comparison)
+    const record = result.comparison
+    record.schema = 'chipmunk.image-reference-comparison/22'
+    record.reference = { ...record.reference, width: 960, height: 800 }
+    record.submitted = { ...record.submitted, width: 720, height: 600 }
+    record.affects_overall_confidence = false
+    record.lossy_webp_crop_resize = {
+      reference_crop: { x: 16, y: 11, w: 900, h: 750, matching_features: 37,
+        supporting_tiles: Array.from({ length: 6 }, (_, i) => ({ row: i % 3, column: Math.floor(i / 3), correlation: .99 })) },
+      projection: { earlier_rgb_sha256: hash, submitted_over_reference_xy: [[720, 900], [600, 750]],
+        supported_kernels: (['bicubic', 'lanczos'] as const).map(kernel => ({ kernel, matching_tiles: 180,
+          textured_tiles: 200, tile_side_px: 32, earlier_rgb_sha256: hash })) },
+    }
+    record.mask = artifact('difference-mask.png', 720, 600)
+    record.regions[0].reference_region = { x: 163, y: 92, w: 113, h: 88 }
+    record.regions[0].reference_crop = artifact('reference-01.png', 113, 88)
+    delete record.alignment
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText(/2 resize filters supported the comparison/)).toBeTruthy()
+    expect(screen.getByText('x 16, y 11 · 900 × 750 px')).toBeTruthy()
+    expect(screen.getByText('x 163, y 92 · 113 × 88 px')).toBeTruthy()
+    expect(screen.getByText('x 118, y 65 · 90 × 70 px')).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
+    const [download] = vi.mocked(saveBlob).mock.calls[0]
+    expect(JSON.parse(await blobText(download))).toEqual({ comparison: record, pngs: result.pngs })
+  })
+
   it('shows opacity changes and retains the native mask in the JSON download', async () => {
     const result = structuredClone(comparison)
     const record = result.comparison

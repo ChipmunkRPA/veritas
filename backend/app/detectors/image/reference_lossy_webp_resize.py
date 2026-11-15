@@ -34,6 +34,12 @@ def compare(earlier, submitted, earlier_bytes, submitted_bytes):
             or not reference_lossless_webp.supported(earlier, earlier_bytes, png=True)
             or not reference_lossy_webp.supported(submitted, submitted_bytes, minimum_side=MIN_SIDE)):
         return reference_lossy_webp.unavailable()
+    return compare_resized(earlier, submitted)
+
+
+def compare_resized(earlier, submitted):
+    rw, rh = earlier.size
+    sw, sh = submitted.size
     votes = np.zeros((sh, sw), np.uint8)
     questioned = np.asarray(submitted)
     supporters = []

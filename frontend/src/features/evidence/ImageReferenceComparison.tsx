@@ -6,7 +6,7 @@ import {
   compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
   IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
-  pngOpacitySchema, exactWebpSchema, lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema,
+  pngOpacitySchema, exactWebpSchema, lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -82,12 +82,13 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const lossyWebp = comparison.schema === lossyWebpSchema ? comparison.lossy_webp : undefined
   const resizedWebp = comparison.schema === resizedLossyWebpSchema ? comparison.lossy_webp_resize : undefined
   const croppedWebp = comparison.schema === croppedLossyWebpSchema ? comparison.lossy_webp_crop : undefined
+  const croppedResizedWebp = comparison.schema === croppedResizedLossyWebpSchema ? comparison.lossy_webp_crop_resize : undefined
   const sameJpegBlocks = (comparison.schema === sameJpegSchema || detailLoss) ? alignment : undefined
   const shiftedJpeg = comparison.schema === shiftedJpegSchema ? alignment : undefined
   const sameStructureFraming = comparison.schema === structureJpegSchema ? comparison.same_framing_structure : undefined
   const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' || exact || delivery
     ? comparison.reference_crop_bounds : undefined
-  const resized = comparable && (Boolean(cropped) || Boolean(resizedWebp) || comparison.schema === 'chipmunk.image-reference-comparison/3')
+  const resized = comparable && (Boolean(cropped || resizedWebp || croppedResizedWebp) || comparison.schema === 'chipmunk.image-reference-comparison/3')
   const completeMatch = (exact ?? orientation)?.matched_pixels === submitted.width * submitted.height
     || opacity?.matched_pixels === submitted.width * submitted.height
     || exactWebp?.changed_pixels === 0
@@ -157,6 +158,11 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     {croppedWebp && <p className="mt-2 mb-0 text-small text-text-muted">
       Matching detail in {croppedWebp.anchor_zones.length} areas of the WebP located the crop at <NativeArea area={croppedWebp.reference_crop} /> in the earlier copy.
       {' '}The highlights show brightness differences within that crop after allowing for compression. Pixels outside the crop were unassessed.
+      {' '}Ordinary edits can cause these differences. This comparison carries zero weight in the AI assessment.
+    </p>}
+    {croppedResizedWebp && <p className="mt-2 mb-0 text-small text-text-muted">
+      Matching detail located the earlier crop at <NativeArea area={croppedResizedWebp.reference_crop} />.
+      {' '}{croppedResizedWebp.projection.supported_kernels.length} resize filters supported the comparison. Pixels outside the earlier crop were unassessed.
       {' '}Ordinary edits can cause these differences. This comparison carries zero weight in the AI assessment.
     </p>}
     {sameJpegFraming && <p className="mt-2 mb-0 text-small text-text-muted">

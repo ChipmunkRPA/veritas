@@ -19,19 +19,24 @@ ROLES = ("sharp", "prior_webp", "translated")
 
 
 def examples(args, receipt):
-    if args.cropped:
-        from scripts import image_reference_cropped_webp_transfer as benchmark
+    if args.cropped or args.crop_resize:
+        if args.crop_resize:
+            from scripts import image_reference_crop_resize_webp_transfer as benchmark
+            profile, deliveries = "lanczos70", benchmark.deliveries
+        else:
+            from scripts import image_reference_cropped_webp_transfer as benchmark
+            profile, deliveries = "tight_corner", benchmark.cases
 
-        profile = "tight_corner"
         roles = ("small_feathered", "prior_jpeg", "mirrored")
         measured = {(r["case"]["source"], r["case"]["role"]): r for r in receipt["rows"] if r["case"]["profile"] == profile}
         chosen = next(source for (source, role), row in measured.items() if role == roles[0]
+                      and (not args.crop_resize or not row["baseline"])
                       and row["registered"] == row["case"]["crop"]
                       and useful((row["selected"], row["overlap"]), row["case"]["changed"])
                       and measured[source, roles[1]]["registered"] and not measured[source, roles[1]]["selected"]
                       and not measured[source, roles[2]]["registered"])
         inputs = {}
-        for case, ref, upload, truth in benchmark.cases(args, "held", identity=chosen):
+        for case, ref, upload, truth in deliveries(args, "held", identity=chosen):
             role = case["role"]
             if role in roles and profile == case["profile"]:
                 row = measured[chosen, role]
@@ -76,17 +81,17 @@ def examples(args, receipt):
     raise ValueError("Held app proof cases were incomplete")
 
 
-def verify(payload, row, ref, submitted, folder, truth, *, resized, cropped):
+def verify(payload, row, ref, submitted, folder, truth, *, resized, cropped, crop_resize=False):
     import numpy as np
     import pymupdf
     from PIL import Image
 
-    from app.detectors.image import reference_lossy_webp, reference_lossy_webp_crop, reference_lossy_webp_resize
+    from app.detectors.image import reference_lossy_webp, reference_lossy_webp_crop, reference_lossy_webp_crop_resize, reference_lossy_webp_resize
     from scripts.review_image_reference_export import review
     from scripts.verify_multimedia_exports import scan
 
     comparison = payload["comparison"]
-    schema = reference_lossy_webp_resize.SCHEMA if resized or cropped else reference_lossy_webp.SCHEMA
+    schema = reference_lossy_webp_resize.SCHEMA if resized or cropped or crop_resize else reference_lossy_webp.SCHEMA
     status = row.get("status", reference_lossy_webp.UNASSESSED)
     summary = "proportional downsampling and WebP compression" if resized else "allows for lossy WebP compression"
     field = "selection_sha256" if resized else "selected_sha256"
@@ -94,6 +99,11 @@ def verify(payload, row, ref, submitted, folder, truth, *, resized, cropped):
         schema, status = reference_lossy_webp_crop.SCHEMA, "comparable"
         summary, field = "Matched an unscaled crop after WebP compression", "selection"
         bounds = comparison["lossy_webp_crop"]["reference_crop"]
+        assert [bounds[key] for key in ("x", "y", "w", "h")] == row["registered"]
+    if crop_resize and row["registered"]:
+        schema, status = reference_lossy_webp_crop_resize.SCHEMA, "comparable"
+        summary, field = "Matched the crop and scale after WebP compression", "selection"
+        bounds = comparison["lossy_webp_crop_resize"]["reference_crop"]
         assert [bounds[key] for key in ("x", "y", "w", "h")] == row["registered"]
     assert comparison["schema"] == schema
     assert comparison["status"] == status and comparison["affects_overall_confidence"] is False
@@ -112,8 +122,23 @@ def verify(payload, row, ref, submitted, folder, truth, *, resized, cropped):
             with Image.open(io.BytesIO(mask_bytes)) as image:
                 mask = np.asarray(image) == 255
             assert sha(mask.tobytes()) == row[field] and int((mask & truth).sum()) == row["overlap"]
-            for text, region in zip(pages[1:], regions, strict=True):
-                assert all(region[role]["sha256"] in text for role in ("reference_crop", "submitted_crop", "submitted_overlay"))
+            for index, (text, region) in enumerate(zip(pages[1:], regions, strict=True), 1):
+                roles = ("reference_crop", "submitted_crop", "submitted_overlay")
+                assert all(region[role]["sha256"] in text for role in roles)
+                if crop_resize:
+                    exhibits = dict.fromkeys((asset[0], asset[1]) for asset in report[index].get_images())
+                    for (xref, alpha_xref), role in zip(exhibits, roles, strict=True):
+                        png = base64.b64decode(payload["pngs"][region[role]["file"]], validate=True)
+                        with Image.open(io.BytesIO(png)) as image:
+                            pixels = pymupdf.Pixmap(report, xref).samples
+                            if role == "submitted_overlay":
+                                assert pymupdf.Pixmap(report, alpha_xref).samples == image.getchannel("A").tobytes()
+                                rgba = np.asarray(image)
+                                opaque = rgba[..., 3] > 0
+                                rgb = np.frombuffer(pixels, dtype=np.uint8).reshape(*rgba.shape[:2], 3)
+                                np.testing.assert_allclose(rgb[opaque], rgba[..., :3][opaque], atol=1)
+                            else:
+                                assert pixels == image.tobytes()
         else:
             assert not payload["pngs"] and len(pages) == 1
     (folder / "comparison.pdf").write_bytes(pdf)
@@ -124,7 +149,11 @@ def verify(payload, row, ref, submitted, folder, truth, *, resized, cropped):
 
 def run(args):
     receipt = read(args.receipt)
-    if args.cropped:
+    if args.crop_resize:
+        from scripts import image_reference_crop_resize_webp_transfer as benchmark
+
+        benchmark.review(receipt)
+    elif args.cropped:
         from scripts import image_reference_cropped_webp_transfer as benchmark
 
         benchmark.review(receipt)
@@ -137,6 +166,8 @@ def run(args):
     configure(args.output, ROOT)
     os.environ.update(VERITAS_ENVIRONMENT="dev", VERITAS_IMAGE_REFERENCE_COMPARISON_ENABLED="true",
                       VERITAS_IMAGE_REFERENCE_LOSSY_WEBP="true")
+    if args.crop_resize:
+        os.environ["VERITAS_IMAGE_REFERENCE_LOSSY_WEBP_CROP_RESIZE"] = "true"
     fixtures = examples(args, receipt)
 
     import cv2
@@ -145,6 +176,7 @@ def run(args):
 
     from app.api import auth
     from app.billing import service
+    from app.core.config import settings
     from app.main import app
     from app.storage.db import Analysis, get_session
 
@@ -175,8 +207,14 @@ def run(args):
             before = result_hash(aid)
             endpoint = f"/api/v2/analyses/{aid}/image-reference-comparison"
             assert body(client.get(endpoint))["available"]
+            if args.crop_resize and role == "small_feathered":
+                settings.image_reference_lossy_webp_crop_resize = False
+                old = body(client.post(endpoint, files={"reference": (ref.name, earlier, "image/png")}))
+                assert old["comparison"]["status"] == "webp_lossy_delivery_unassessed"
+                settings.image_reference_lossy_webp_crop_resize = True
             response = body(client.post(endpoint, files={"reference": (ref.name, earlier, "image/png")}, data={"include_pdf": "true"}))
-            verification[role] = verify(response, row, ref, submitted, folder, truth, resized=args.resized, cropped=args.cropped)
+            verification[role] = verify(response, row, ref, submitted, folder, truth, resized=args.resized,
+                                        cropped=args.cropped, crop_resize=args.crop_resize)
             assert result_hash(aid) == before
     save(args.output / "receipt.json", {"results": verification, "paid_analyses": len(stub.sessions), "unpaid_jobs": 0,
                                         "overall_analysis_preserved": True})
@@ -189,6 +227,7 @@ if __name__ == "__main__":
     geometry = parser.add_mutually_exclusive_group()
     geometry.add_argument("--resized", action="store_true")
     geometry.add_argument("--cropped", action="store_true")
+    geometry.add_argument("--crop-resize", action="store_true")
     parser.add_argument("--development-sources", type=Path, required=True)
     data = ROOT / "backend/data/independent-evaluation"
     parser.add_argument("--native", type=Path, default=data / "native-regional-serving-v47")

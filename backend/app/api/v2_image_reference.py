@@ -183,7 +183,8 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
                              allow_same_jpeg=settings.image_reference_same_jpeg,
                              allow_jpeg_detail_loss=settings.image_reference_jpeg_detail_loss,
                              allow_jpeg_detail_loss_extra_qualities=settings.image_reference_jpeg_detail_loss_extra_qualities,
-                             allow_lossy_webp=settings.image_reference_lossy_webp, allow_lossy_webp_crop=True)
+                             allow_lossy_webp=settings.image_reference_lossy_webp, allow_lossy_webp_crop=True,
+                             allow_lossy_webp_crop_resize=settings.image_reference_lossy_webp_crop_resize)
         if settings.image_reference_jpeg_png_envelope and comparison["status"] not in {
             "comparable", UNASSESSED, WEBP_UNASSESSED, LOSSY_WEBP_UNASSESSED,
         }:

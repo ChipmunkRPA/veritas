@@ -21,6 +21,7 @@ from app.detectors.image import (
     reference_lossless_webp,
     reference_lossy_webp,
     reference_lossy_webp_crop,
+    reference_lossy_webp_crop_resize,
     reference_lossy_webp_resize,
     reference_png_exact_resize,
     reference_png_opacity,
@@ -155,7 +156,8 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             allow_shifted_jpeg: bool = False, allow_structure_jpeg: bool = False,
             allow_same_jpeg: bool = False, allow_jpeg_detail_loss: bool = False,
             allow_jpeg_detail_loss_extra_qualities: bool = False, allow_png_opacity: bool = False,
-            allow_lossy_webp: bool = False, allow_lossy_webp_crop: bool = False) -> dict:
+            allow_lossy_webp: bool = False, allow_lossy_webp_crop: bool = False,
+            allow_lossy_webp_crop_resize: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     refuse_truncated_images()
     before, after = _bytes(reference_path), _bytes(submitted_path)
@@ -180,6 +182,10 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                 cropped, crop_mask = reference_lossy_webp_crop.compare(original, questioned, before, after)
                 if cropped["status"] == "comparable":
                     result, mask, schema = cropped, crop_mask, reference_lossy_webp_crop.SCHEMA
+            if allow_lossy_webp_crop_resize and result["status"] != "comparable":
+                combined, combined_mask = reference_lossy_webp_crop_resize.compare(original, questioned, before, after)
+                if combined["status"] == "comparable":
+                    result, mask, schema = combined, combined_mask, reference_lossy_webp_crop_resize.SCHEMA
         elif allow_lossy_webp and reference_lossy_webp.supported(questioned, after):
             schema = reference_lossy_webp.SCHEMA
             result, mask = reference_lossy_webp.compare(original, questioned, before, after)
@@ -264,6 +270,7 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                       reference_lossy_webp_resize.SCHEMA: (reference_lossy_webp_resize.INTERPRETATION
                                                           if result["status"] == "comparable" else reference_lossy_webp_resize.LIMITATION),
                       reference_lossy_webp_crop.SCHEMA: reference_lossy_webp_crop.INTERPRETATION,
+                      reference_lossy_webp_crop_resize.SCHEMA: reference_lossy_webp_crop_resize.INTERPRETATION,
                       reference_png_opacity.SCHEMA: (reference_png_opacity.INTERPRETATION if result["status"] == "comparable"
                                                     else reference_png_opacity.UNASSESSED_INTERPRETATION),
                       **dict.fromkeys(reference_jpeg_detail_loss.SCHEMAS, reference_jpeg_detail_loss.INTERPRETATION)}

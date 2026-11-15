@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Independent edits to two competing voices](audio-two-voice-components-2026-11-15.md)
+  renders 140 new mixtures with matched genuine edits. A wider stereo
+  check locates two new held ranges and follows the correct voice in both.
+  It also adds six alerts on 32 ordinary files and misplaces eight edited
+  ranges, so it remains in evaluation. The replay scores timing and
+  source assignment independently across four generators.
+
 - [Turning down each estimated voice in a noisy recording](audio-stream-attenuation-2026-11-15.md)
   tested 139 deliveries across four generators. The most selective rule
   found one ICSI edit range, repeated that range on two ordinary controls,

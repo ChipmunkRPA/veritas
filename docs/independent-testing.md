@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [two-voice source attribution replay](audio-two-voice-components-2026-11-15.md#replay)
+checks 140 deliveries whose primary and competing voices change independently.
+The portable reader separates timestamps, wrong-voice flags, ordinary alerts,
+and coverage. The native instructions re-render the room responses and check
+the same mixture, control, and stem commitments before inference.
+
 The [competing-voice attenuation replay](audio-stream-attenuation-2026-11-15.md#replay)
 recreates decision counts for 139 deliveries spanning four voice generators.
 It checks source-clock overlap, genuine edits at the same clock, and whether

@@ -64,7 +64,7 @@ def source_plan():
     return groups
 
 
-def cases(photo, ordinal, split):
+def cases(photo, ordinal, split, *, feather_width=6):
     import cv2
     import numpy as np
 
@@ -82,7 +82,7 @@ def cases(photo, ordinal, split):
         if feather:
             yy, xx = np.indices((size, size))
             rim = np.minimum.reduce((yy+1, xx+1, size-yy, size-xx))
-            alpha = ((1 - np.cos(np.pi * np.minimum(1., rim / 6))) / 2)[..., None]
+            alpha = ((1 - np.cos(np.pi * np.minimum(1., rim / feather_width))) / 2)[..., None]
             donor = np.rint(region * (1-alpha) + donor * alpha).astype(np.uint16)
         changed = empty.copy()
         changed[y:y+size, x:x+size] = np.any(region != donor, axis=2)
@@ -109,8 +109,9 @@ def cases(photo, ordinal, split):
             yield f"{size}_{name}", modified, changed
 
 
-def native_inputs(options):
+def native_photos(options):
     import cv2
+
     from scripts import image_native_cfa_closure_transfer as baseline
 
     cv2.setNumThreads(1)
@@ -125,13 +126,19 @@ def native_inputs(options):
                 path = options.archive / f"sample-{row['id']}{Path(row['url']).suffix.lower()}"
                 require(file_hash(path) == row["sha256"], "The camera-source checksum differs")
                 photo, _ = baseline.raw_render(decoder, path)
-                yield row, cases(photo, index, options.phase)
+                yield row, index, photo
         finally:
             sys.path.pop(0)
 
 
+def native_inputs(options):
+    for row, index, photo in native_photos(options):
+        yield row, cases(photo, index, options.phase)
+
+
 def readout(values, truth):
     import numpy as np
+
     from app.detectors.image import native_cfa, native_cfa_fine
     from scripts.image_native_cfa_png_transfer import png_body
 
@@ -201,15 +208,16 @@ def review(record, development=None):
         coarse, fine = row["coarse"], row["fine"]
         expanded = coarse or (fine if fine and fine["response"] > point else None)
 
-        def useful(region):
-            if not region or not row["changed"]:
+        def useful(region, changed):
+            if not region or not changed:
                 return False
             x, y, x1, y1 = region["region"]
             common = region["intersection"]
-            return 2*common >= row["changed"] and 10*common >= 3*((x1-x)*(y1-y) + row["changed"] - common)
+            return 2*common >= changed and 10*common >= 3*((x1-x)*(y1-y) + changed - common)
 
         counts[case].update(files=1, assessed=int(row["status"] == "assessed"), coarse_flags=int(coarse is not None),
-                            coarse_useful=int(useful(coarse)), expanded_flags=int(expanded is not None), expanded_useful=int(useful(expanded)))
+                            coarse_useful=int(useful(coarse, row["changed"])), expanded_flags=int(expanded is not None),
+                            expanded_useful=int(useful(expanded, row["changed"])))
     result = {key: dict(value) for key, value in counts.items()}
     require("results" not in record or record["results"] == result, "Stored results do not reproduce")
     return result

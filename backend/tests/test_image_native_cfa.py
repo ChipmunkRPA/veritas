@@ -171,6 +171,30 @@ def test_fine_review_selects_small_region_without_changing_coarse_evidence(rende
             assert result["schema"] == binding.FINE_SCHEMA and result["region"] is None
 
 
+def test_refined_crop_follows_recovered_pattern_on_each_side(renders):
+    original, _ = renders
+    modified = original.copy()
+    target = modified[416:464, 480:528]
+    y, x = np.indices((48, 48))
+    distance = np.minimum.reduce((x + 1, y + 1, 48 - x, 48 - y))
+    weight = ((1 - np.cos(np.pi * np.minimum(1., distance / 6))) / 2)[..., None]
+    target[:] = np.rint(target * (1 - weight) + original[160:208, 129:177] * weight).astype(np.uint16)
+    body = png(modified)
+    sha = hashlib.sha256(body).hexdigest()
+    prior = source.record(sha, body=body, include_fine=True)
+    refined = source.record(sha, body=body, include_fine=True, include_extent=True)
+    assert prior["schema"] == binding.FINE_SCHEMA
+    assert refined["schema"] == binding.EXTENT_SCHEMA and refined["region"] == [480, 416, 528, 464]
+    assert refined["extent_pattern"]["inner_region"] == prior["region"]
+    assert binding.extent_region(refined["extent_pattern"]) == refined["region"]
+    assert source.record(sha, body=body, schema=binding.EXTENT_SCHEMA) == refined
+    assert source.record(sha, body=body, schema=binding.FINE_SCHEMA) == prior
+    assert np.array_equal(source.plates(body, refined["region"], schema=binding.EXTENT_SCHEMA)["crop"], target[..., ::-1])
+    refined["extent_pattern"]["edges"][0]["supporting_pairs"] = 0
+    with pytest.raises(ValueError, match="extent support"):
+        binding.extent_region(refined["extent_pattern"])
+
+
 def test_quantized_region_binds_measurement_and_preserves_rotation_priority(renders, monkeypatch):
     from app.detectors.image import native_cfa_quantized, native_cfa_rotation
 

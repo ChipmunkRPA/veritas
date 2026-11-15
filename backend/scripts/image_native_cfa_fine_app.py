@@ -73,7 +73,7 @@ def run(args):
     from app.api import auth
     from app.billing import service
     from app.core.config import settings
-    from app.evidence.image_interpolation_binding import FINE_SCHEMA, KEY
+    from app.evidence.image_interpolation_binding import EXTENT_SCHEMA, FINE_SCHEMA, KEY
     from app.main import app
     from app.storage.db import Analysis, get_session
     from app.storage.objects import default_store
@@ -85,13 +85,24 @@ def run(args):
         return stored["decision"], stored.get("customer_assessment")
 
     def submit(client, path, enabled):
-        settings.image_native_fine_review = enabled
+        settings.image_native_fine_review = enabled or args.extent is not None
+        settings.image_native_extent_review = enabled and args.extent is not None
         aid = checkout(client, stub, path, kind="image", media_type="image/png", filename=path.name)
         return aid, body(client.get(f"/api/v2/analyses/{aid}/evidence-packets"))
 
     held, development = read(args.held), read(args.calibration)
     review(development)
     review(held, development)
+    if args.extent is not None:
+        from scripts.image_native_cfa_extent_transfer import review as review_extent
+
+        extent = read(args.extent)
+        review_extent(extent)
+        target = next(row for row in extent["measurements"]["prior"] if row["role"] == "48_feather" and row["extent"])
+        positive = "48_feather"
+    else:
+        positive = "32_sharp"
+        target = None
     proof = {}
     cv2.setNumThreads(1)
     torch.set_num_threads(2)
@@ -105,25 +116,31 @@ def run(args):
             db.flush()
             client.headers["X-API-Key"], _ = auth.issue_api_key(db, owner)
             db.commit()
-        source, deliveries = next(native_inputs(args))
+        source, deliveries = next((row, cases) for row, cases in native_inputs(args) if target is None or row["id"] == target["id"])
         for role, rgb, _ in deliveries:
-            if role not in {"32_sharp", "local_tone"}:
+            if role not in {positive, "local_tone"}:
                 continue
             expected = next(row for row in held["rows"] if row["id"] == source["id"] and row["role"] == role)
             path = args.output / (role + ".png")
             path.write_bytes(png_body(rgb))
             assert digest(path.read_bytes()) == expected["png_sha256"]
             incumbent, older = submit(client, path, enabled=False)
-            assert older[KEY]["record"]["status"] == "no_match"
+            old_region = (expected["fine"]["region"] if target is not None and role == positive else None)
+            assert older[KEY]["record"]["region"] == old_region
             aid, evidence = submit(client, path, enabled=True)
             actual = evidence[KEY]["record"]
-            region = expected["fine"]["region"] if role == "32_sharp" else None
-            assert actual["schema"] == FINE_SCHEMA and actual["region"] == region
+            refined = target["extent"] if target is not None and role == positive else None
+            region = refined["region"] if refined else expected["fine"]["region"] if role == positive else None
+            assert actual["schema"] == (EXTENT_SCHEMA if refined else FINE_SCHEMA) and actual["region"] == region
+            if refined:
+                assert actual["extent_pattern"] == {key: refined[key] for key in ("inner_region", "edges")}
             assert actual["status"] == ("fine_shift" if region else "no_match")
             assert actual["affects_overall_confidence"] is False and assessment(aid) == assessment(incumbent)
             proof[role] = {"source": source["id"], "source_sha256": expected["png_sha256"], "record": actual,
                            **check_exports(client, aid, path, evidence, region, path.with_suffix(""))}
-    assert set(proof) == {"32_sharp", "local_tone"}
+            if target is not None:
+                proof[role]["prior_region"] = old_region
+    assert set(proof) == {positive, "local_tone"}
     checkout_proof = {"currency": "USD", "cents": 999, "analyses": 4, "before_payment_jobs": 0}
     (args.output / "receipt.json").write_text(json.dumps({"checkout": checkout_proof, "cases": proof}, indent=2, sort_keys=True) + "\n")
 
@@ -133,5 +150,6 @@ if __name__ == "__main__":
     parser.add_argument("output", type=Path)
     for option in ("held", "calibration", "cache", "archive"):
         parser.add_argument(f"--{option}", type=Path, required=True)
+    parser.add_argument("--extent", type=Path, help="Replay an extent-refined feathered case from the held panel")
     parser.set_defaults(phase="held")
     run(parser.parse_args())

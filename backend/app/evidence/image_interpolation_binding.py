@@ -13,10 +13,12 @@ EXTENDED_SCHEMA = "image-native-interpolation/2"
 ROTATION_SCHEMA = "image-native-interpolation/3"
 QUANTIZED_SCHEMA = "image-native-interpolation/4"
 FINE_SCHEMA = "image-native-interpolation/5"
+EXTENT_SCHEMA = "image-native-interpolation/6"
 SCOPE = "This check requires a 2048 × 1536, 16-bit RGB PNG without ancillary chunks and a repeatable interpolation pattern."
 ROTATION_SCOPE = SCOPE + " It also looks for local interpolation consistent with a small rotation."
 QUANTIZED_SCOPE = ROTATION_SCOPE + " This check also compares local stored-value steps with the remaining pixel pattern."
 FINE_SCOPE = SCOPE + " The fine check compares nearby 16-pixel cells on the original pixel grid."
+EXTENT_SCOPE = FINE_SCOPE + " It also checks where the surrounding pattern returns beyond those cells."
 EXTENDED_SCOPE = (
     "This check requires a 16-bit RGB PNG without ancillary chunks, a repeatable interpolation pattern, "
     "and one of these sizes: 2048 × 1536, 2304 × 1728, 2368 × 1344 or 1792 × 1792."
@@ -24,8 +26,10 @@ EXTENDED_SCOPE = (
 LEGACY_SIZE = (2048, 1536)
 SUPPORTED_SIZES = frozenset({LEGACY_SIZE, (2304, 1728), (2368, 1344), (1792, 1792)})
 SCOPES = {SCHEMA: SCOPE, EXTENDED_SCHEMA: EXTENDED_SCOPE, ROTATION_SCHEMA: ROTATION_SCOPE,
-          QUANTIZED_SCHEMA: QUANTIZED_SCOPE, FINE_SCHEMA: FINE_SCOPE}
-BASIS_SCHEMAS = {ROTATION_SCHEMA, QUANTIZED_SCHEMA, FINE_SCHEMA}
+          QUANTIZED_SCHEMA: QUANTIZED_SCOPE, FINE_SCHEMA: FINE_SCOPE, EXTENT_SCHEMA: EXTENT_SCOPE}
+FINE_SCHEMAS = {FINE_SCHEMA, EXTENT_SCHEMA}
+BASIS_SCHEMAS = {ROTATION_SCHEMA, QUANTIZED_SCHEMA, *FINE_SCHEMAS}
+EDGE_SIDES = ("left", "top", "right", "bottom")
 REGION_STATUSES = frozenset({"matched", "rotation", "quantized_resampling", "fine_shift"})
 LIMITATION = "An ordinary edit can change the interpolation pattern. The observation carries zero AI confidence weight."
 STATUS = {
@@ -65,11 +69,42 @@ def observation(schema, status):
     return STATUS[status]
 
 
-def basis(status, fine=None):
+def basis(status, fine=None, extent=None):
     if status == "fine_shift":
-        return (f"The alternate pattern was stronger in {fine['matching_cells']} of {fine['compared_cells']} "
-                "measured 16 × 16 pixel cells within the crop. This supports a local change in pixel alignment.")
+        counts = f"The alternate pattern was stronger in {fine['matching_cells']} of {fine['compared_cells']} measured 16 × 16 pixel cells"
+        if extent is not None:
+            return (f"{counts} in the inner region. "
+                    f"The surrounding pattern returned beyond {len(extent['edges'])} sides of that region, supporting the larger crop.")
+        return f"{counts} within the crop. This supports a local change in pixel alignment."
     return {"rotation": ROTATION_OBSERVATION, "quantized_resampling": QUANTIZED_OBSERVATION}.get(status)
+
+
+def extent_region(extent):
+    if not isinstance(extent, dict) or extent.keys() != {"inner_region", "edges"}:
+        raise ValueError("Invalid interpolation extent evidence")
+    inner, edges = extent["inner_region"], extent["edges"]
+    if (not isinstance(inner, list) or len(inner) != 4 or any(type(value) is not int or value % 8 for value in inner)
+            or not isinstance(edges, list) or not 2 <= len(edges) <= 4):
+        raise ValueError("Invalid interpolation extent grid")
+    x0, y0, x1, y1 = inner
+    if not (x1 - x0 in {32, 48} and y1 - y0 in {32, 48}
+            and 16 <= x0 < x1 <= LEGACY_SIZE[0] - 16 and 16 <= y0 < y1 <= LEGACY_SIZE[1] - 16):
+        raise ValueError("Invalid inner interpolation region")
+    pairs_by_side = ((y1 - y0) // 8, (x1 - x0) // 8) * 2
+    region = inner.copy()
+    previous = -1
+    for edge in edges:
+        if not isinstance(edge, dict) or edge.keys() != {"side", "supporting_pairs", "compared_pairs"} or edge["side"] not in EDGE_SIDES:
+            raise ValueError("Invalid interpolation extent side")
+        index = EDGE_SIDES.index(edge["side"])
+        count = pairs_by_side[index]
+        support = edge["supporting_pairs"]
+        if index <= previous or type(edge["compared_pairs"]) is not int or edge["compared_pairs"] != count or (
+                type(support) is not int or not 2 * count <= 3 * support <= 3 * count):
+            raise ValueError("Invalid interpolation extent support")
+        previous = index
+        region[index] += -8 if index < 2 else 8
+    return region
 
 
 def validate(document, commitment):
@@ -90,8 +125,9 @@ def validate(document, commitment):
             or status not in STATUS or record["observation"] != observation(schema, status)
             or (status == "rotation" and schema not in {ROTATION_SCHEMA, QUANTIZED_SCHEMA})
             or (status == "quantized_resampling" and schema != QUANTIZED_SCHEMA)
-            or (status == "fine_shift" and schema != FINE_SCHEMA)
+            or (status == "fine_shift" and schema not in FINE_SCHEMAS)
             or (schema == FINE_SCHEMA and status not in {"fine_shift", "no_match"})
+            or (schema == EXTENT_SCHEMA and status != "fine_shift")
             or record["scope"] != scope or record["limitation"] != LIMITATION
             or record["affects_overall_confidence"] is not False):
         raise ValueError("Interpolation evidence differs from its source commitment")
@@ -105,7 +141,13 @@ def validate(document, commitment):
             raise ValueError("Invalid fine interpolation reading")
     elif "fine_pattern" in record:
         raise ValueError("Unexpected fine interpolation reading")
-    if (schema in BASIS_SCHEMAS and record.get("basis") != basis(status, fine)
+    extent = record.get("extent_pattern")
+    if schema == EXTENT_SCHEMA:
+        if extent_region(extent) != record["region"]:
+            raise ValueError("Interpolation extent differs from its supported sides")
+    elif "extent_pattern" in record:
+        raise ValueError("Unexpected interpolation extent evidence")
+    if (schema in BASIS_SCHEMAS and record.get("basis") != basis(status, fine, extent)
             or schema not in BASIS_SCHEMAS and "basis" in record):
         raise ValueError("Interpolation evidence does not describe the recorded basis")
     quantized = record.get("quantized_pattern")
@@ -139,8 +181,9 @@ def validate(document, commitment):
     if any(type(v) is not int or v % alignment for v in box):
         raise ValueError("Interpolation region is not aligned to its native grid")
     if fine is not None:
-        valid_shape = (x1 - x0 in {32, 48} and y1 - y0 in {32, 48}
-                       and fine["compared_cells"] == (x1 - x0) * (y1 - y0) // 256)
+        a, b, c, d = extent["inner_region"] if extent is not None else box
+        valid_shape = (c - a in {32, 48} and d - b in {32, 48}
+                       and fine["compared_cells"] == (c - a) * (d - b) // 256)
     else:
         valid_shape = (64 <= x1 - x0 <= 192 and 64 <= y1 - y0 <= 192
                        and (x1 - x0) % 32 == (y1 - y0) % 32 == 0)

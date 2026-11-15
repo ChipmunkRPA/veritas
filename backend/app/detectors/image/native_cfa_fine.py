@@ -13,6 +13,10 @@ MINIMUM = 10
 ALT_CLOSURE = .62
 PHASE_LEAD = .25
 POINT = .25
+EDGE_CELL = 8
+EDGE_INTERIOR_MAX = .75
+EDGE_EXTERIOR_MIN = .80
+EDGE_CHANGE_MIN = .20
 
 
 def propose(rgb, phase, *, check=None):
@@ -48,3 +52,32 @@ def propose(rgb, phase, *, check=None):
     if check is not None:
         check("small native interpolation region")
     return strongest[1] if strongest is not None else None
+
+
+def refine_extent(rgb, phase, inner):
+    """Extend an accepted region where native closure drops, then returns outside it."""
+    x0, y0, x1, y1 = inner
+    padding = 2 * EDGE_CELL
+    height, width = rgb.shape[:2]
+    if not (padding <= x0 < x1 <= width - padding and padding <= y0 < y1 <= height - padding):
+        return None
+    area = rgb[y0-padding:y1+padding, x0-padding:x1+padding]
+    reference = native_cfa.stencil(area, cell=EDGE_CELL, minimum=4)[..., phase]
+    strips = {
+        "left": (reference[2:-2, 1], reference[2:-2, 0]),
+        "top": (reference[1, 2:-2], reference[0, 2:-2]),
+        "right": (reference[2:-2, -2], reference[2:-2, -1]),
+        "bottom": (reference[-2, 2:-2], reference[-1, 2:-2]),
+    }
+    region = list(inner)
+    edges = []
+    for i, (side, (inside, outside)) in enumerate(strips.items()):
+        supported = ((inside <= EDGE_INTERIOR_MAX) & (outside >= EDGE_EXTERIOR_MIN)
+                     & (outside - inside >= EDGE_CHANGE_MIN))
+        count = int(supported.sum())
+        if 3 * count >= 2 * len(inside):
+            region[i] += -EDGE_CELL if i < 2 else EDGE_CELL
+            edges.append({"side": side, "supporting_pairs": count, "compared_pairs": len(inside)})
+    if len(edges) < 2:
+        return None
+    return {"region": region, "inner_region": inner, "edges": edges}

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [feathered PNG crop replay](image-native-cfa-fine-2026-11-15.md#feathered-edit-crops)
+verifies how paired cell readings extend a previously highlighted region.
+It recounts the original and extended crop overlap at two feather widths
+across two separate camera groups and retains the earlier ordinary controls.
+
 The [fractional-rate face replay](video-face-clip-boundary-2026-11-15.md#2997-fps-source-clocks)
 recounts edited intervals and ordinary controls at 30000/1001 fps. It
 checks a clock-only remux and separate captures recorded at that rate,

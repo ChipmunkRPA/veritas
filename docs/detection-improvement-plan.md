@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Larger crops for feathered native PNG edits](image-native-cfa-fine-2026-11-15.md#feathered-edit-crops)
+  improves useful localization from 0/20 to 11/20 staged 48-pixel edits
+  at each of two blend widths. It extends a previously detected region
+  along measured edges. No prior useful sharp locations were lost and
+  no new ordinary flags were added. The 32-pixel feathered cases still
+  had no useful locations.
+
 - [Face-change localization at 29.97 fps](video-face-clip-boundary-2026-11-15.md#2997-fps-source-clocks)
   reproduces all ten earlier locations after a clock-only conversion and
   locates both boundaries in six of 12 staged edits from separate native

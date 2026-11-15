@@ -12,7 +12,8 @@ from app.evidence import image_interpolation_binding as binding
 
 
 def record(source_sha256, *, body=None, skipped=False, schema=None, include_rotation=False, include_quantized=False,
-           include_fine=False, check=None):
+           include_fine=False, include_extent=False, check=None):
+    extent_requested = schema == binding.EXTENT_SCHEMA or (schema is None and include_fine and include_extent)
     if schema is None:
         is_legacy_size = body is not None and native_cfa_dimensions.png_size(body) == binding.LEGACY_SIZE
         if not is_legacy_size:
@@ -22,8 +23,8 @@ def record(source_sha256, *, body=None, skipped=False, schema=None, include_rota
         else:
             schema = binding.ROTATION_SCHEMA if include_rotation else binding.SCHEMA
     detector = native_cfa_dimensions if schema == binding.EXTENDED_SCHEMA else native_cfa
-    fine_requested = schema == binding.FINE_SCHEMA or (include_fine and schema != binding.EXTENDED_SCHEMA)
-    extra_status, extra_region, quantized, fine = "no_match", None, None, None
+    fine_requested = schema in binding.FINE_SCHEMAS or (include_fine and schema != binding.EXTENDED_SCHEMA)
+    extra_status, extra_region, quantized, fine, extent = "no_match", None, None, None, None
     try:
         if body is not None and not skipped and (schema in {binding.ROTATION_SCHEMA, binding.QUANTIZED_SCHEMA} or fine_requested):
             rgb = detector.decoded_rgb(body)
@@ -50,6 +51,15 @@ def record(source_sha256, *, body=None, skipped=False, schema=None, include_rota
                         if proposed is not None and proposed["response"] > native_cfa_fine.POINT:
                             extra_status, extra_region = "fine_shift", proposed["region"]
                             fine = {key: proposed[key] for key in ("alternate_phase", "matching_cells", "compared_cells")}
+                            if extent_requested:
+                                try:
+                                    expanded = native_cfa_fine.refine_extent(rgb, measurement.phase, extra_region)
+                                except (cv2.error, MemoryError):
+                                    expanded = None
+                                if expanded is not None:
+                                    schema = binding.EXTENT_SCHEMA
+                                    extra_region = expanded["region"]
+                                    extent = {key: expanded[key] for key in ("inner_region", "edges")}
         else:
             measurement = detector.inspect_png(body) if body is not None and not skipped else None
     except (cv2.error, MemoryError):
@@ -71,9 +81,11 @@ def record(source_sha256, *, body=None, skipped=False, schema=None, include_rota
               "reference_closure": measurement.reference_closure if measurement else None,
               "decoded_rgb16_sha256": digest}
     if schema in binding.BASIS_SCHEMAS:
-        result["basis"] = binding.basis(status, fine)
+        result["basis"] = binding.basis(status, fine, extent)
     if fine is not None:
         result["fine_pattern"] = fine
+    if extent is not None:
+        result["extent_pattern"] = extent
     if schema == binding.QUANTIZED_SCHEMA:
         result["quantized_pattern"] = (dict(zip(("code_step", "minimum_channel_fraction", "phase_contrast"), quantized, strict=True))
                                        if quantized is not None else None)

@@ -1,0 +1,101 @@
+{
+  "cases": {
+    "48_feather": {
+      "images_verified_in_pdf": 2,
+      "pdf_sha256": "e0dee36200247590aa39d0bb1ca5894c65d9c4164766cd45f4e2b26f111acbe1",
+      "prior_region": [
+        488,
+        424,
+        520,
+        456
+      ],
+      "record": {
+        "affects_overall_confidence": false,
+        "basis": "The alternate pattern was stronger in 4 of 4 measured 16 \u00d7 16 pixel cells in the inner region. The surrounding pattern returned beyond 4 sides of that region, supporting the larger crop.",
+        "decoded_rgb16_sha256": "b3483d884819be367ef97f8a4af0ea9387d83ea14564e8f230db41e79d7595e3",
+        "extent_pattern": {
+          "edges": [
+            {
+              "compared_pairs": 4,
+              "side": "left",
+              "supporting_pairs": 4
+            },
+            {
+              "compared_pairs": 4,
+              "side": "top",
+              "supporting_pairs": 4
+            },
+            {
+              "compared_pairs": 4,
+              "side": "right",
+              "supporting_pairs": 4
+            },
+            {
+              "compared_pairs": 4,
+              "side": "bottom",
+              "supporting_pairs": 4
+            }
+          ],
+          "inner_region": [
+            488,
+            424,
+            520,
+            456
+          ]
+        },
+        "fine_pattern": {
+          "alternate_phase": 2,
+          "compared_cells": 4,
+          "matching_cells": 4
+        },
+        "limitation": "An ordinary edit can change the interpolation pattern. The observation carries zero AI confidence weight.",
+        "observation": "A small region repeated a different camera interpolation pattern from the surrounding image.",
+        "phase": 0,
+        "reference_closure": 1.0,
+        "region": [
+          480,
+          416,
+          528,
+          464
+        ],
+        "schema": "image-native-interpolation/6",
+        "scope": "This check requires a 2048 \u00d7 1536, 16-bit RGB PNG without ancillary chunks and a repeatable interpolation pattern. The fine check compares nearby 16-pixel cells on the original pixel grid. It also checks where the surrounding pattern returns beyond those cells.",
+        "source_sha256": "5af4e016ccfe6d3f36bd5861e70a1cf249861e1b228113e2592297da3090a4ad",
+        "status": "fine_shift",
+        "supported_cells": 2620
+      },
+      "signed_source_verified": true,
+      "source": 1079,
+      "source_sha256": "5af4e016ccfe6d3f36bd5861e70a1cf249861e1b228113e2592297da3090a4ad"
+    },
+    "local_tone": {
+      "images_verified_in_pdf": 0,
+      "pdf_sha256": "65e261521acb45b957aeb8520ba07d5653049969d7321fd35b0ab008e9056b6e",
+      "prior_region": null,
+      "record": {
+        "affects_overall_confidence": false,
+        "basis": null,
+        "decoded_rgb16_sha256": null,
+        "limitation": "An ordinary edit can change the interpolation pattern. The observation carries zero AI confidence weight.",
+        "observation": "No qualifying interpolation shift was found in the checked areas.",
+        "phase": 0,
+        "reference_closure": 1.0,
+        "region": null,
+        "schema": "image-native-interpolation/5",
+        "scope": "This check requires a 2048 \u00d7 1536, 16-bit RGB PNG without ancillary chunks and a repeatable interpolation pattern. The fine check compares nearby 16-pixel cells on the original pixel grid.",
+        "source_sha256": "f7897e23e59810671830cf508763398d326dd70631273600579534a7d5b845b5",
+        "status": "no_match",
+        "supported_cells": 2620
+      },
+      "signed_source_verified": true,
+      "source": 1079,
+      "source_sha256": "f7897e23e59810671830cf508763398d326dd70631273600579534a7d5b845b5"
+    }
+  },
+  "checkout": {
+    "analyses": 4,
+    "before_payment_jobs": 0,
+    "cents": 999,
+    "currency": "USD"
+  }
+}

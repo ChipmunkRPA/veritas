@@ -70,6 +70,66 @@ replayed from the original files. The tone control showed no region, and
 the automated assessment for each file agreed with the option off and on.
 [Local checkout and export receipt](evaluation-panels/image-native-cfa-fine-app-2026-11-15.json)
 
+## Feathered edit crops
+
+The 18 flagged 48-pixel feathered edits had 32 × 32 crops entirely inside
+the changed area. Each crop covered 44% of the changed pixels, below the
+study's 50% criterion. The extent check starts with the accepted fine
+crop. Along each side it tests pairs of 8 × 8 cells, one just outside the
+crop and the other farther out. A side needs the normal interpolation
+pattern to be weaker in the nearer cell and recover in the farther cell
+in at least two-thirds of the pairs. The fixed limits are 0.75 in the near
+cell, 0.80 in the far cell, and a rise of at least 0.20. The crop extends
+eight pixels along each supported side when at least two sides qualify.
+The report describes the inner region and the support for the larger crop.
+
+The same six development camera groups were used to set the rule before
+replaying the two panels of ten other cameras. The wider feather deliveries
+use new nine-pixel blends from the same sources as the earlier six-pixel
+blends. Each row counts useful crops against the changed-pixel masks.
+
+| Staged delivery | Held, previous → extended | Transfer, previous → extended |
+| --- | ---: | ---: |
+| 48 × 48, six-pixel feather | 0 → 7 / 10 | 0 → 4 / 10 |
+| 48 × 48, nine-pixel feather | 0 → 7 / 10 | 0 → 4 / 10 |
+| 64 × 64, six-pixel feather | 8 → 9 / 10 | 7 → 7 / 10 |
+| 64 × 64, nine-pixel feather | 8 → 9 / 10 | 7 → 7 / 10 |
+| 32 × 32, each feather width | 0 → 0 / 10 | 0 → 0 / 10 |
+
+Ten of the eleven useful 48-pixel crops matched the staged region exactly
+at each feather width. All previously useful sharp crops still qualified.
+The rule only extends a previously flagged crop and added no flags in the
+120 supported ordinary controls. The test kept the same PNG scope and the
+same fine detection point. Crop extent carries zero AI-confidence weight.
+
+[Development extent receipt](evaluation-panels/image-native-cfa-extent-development-2026-11-15.json) ·
+[Held extent receipt](evaluation-panels/image-native-cfa-extent-held-2026-11-15.json) ·
+[Transfer extent receipt](evaluation-panels/image-native-cfa-extent-transfer-2026-11-15.json)
+
+Enable `VERITAS_IMAGE_NATIVE_EXTENT_REVIEW=true` alongside the two PNG
+settings above. The extent setting defaults to off. The local worker
+replayed the feathered edit and its tone control with the setting off and
+on. All four analyses queued only after simulated USD 9.99 checkout. On
+the edit, the earlier 32 × 32 crop grew to 48 × 48. The API, JSON and
+Standard PDF give columns [480, 528), rows [416, 464) and the basis for
+all four supported sides. The original 16-bit crop, the outline and signed
+source verification agreed. The tone control still showed no region, and
+automated assessments for both files agreed with the setting off and on.
+[Local extent checkout and exports](evaluation-panels/image-native-cfa-extent-app-2026-11-15.json)
+
+The standard-library reviewer recalculates the supported extension and
+the table. Native replay uses the same camera and decoder inputs as the
+fine check, with `held` or `transfer` in place of `review` and the
+`--cache` and `--archive` arguments described below.
+
+```sh
+PYTHONPATH=backend python3 -B -S -m scripts.image_native_cfa_extent_transfer \
+  review docs/evaluation-panels/image-native-cfa-extent-held-2026-11-15.json
+```
+
+Add `--extent "$run/extent-held.json"` when running the local app command
+below to verify the new report with a replayed extent receipt.
+
 ## Reproduce
 
 The numeric recount uses the standard library and the public receipts.

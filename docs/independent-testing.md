@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [earlier speech-layer replay](audio-short-edit-layer-ablation-2026-11-15.md#replay)
+recomputes genuine-only operating points and exact-clock outcomes on three
+transfer banks. It can show when retaining both checks adds an apparent
+location that also occurs at the same clock in a genuine splice.
+
 The [edited-paragraph replay](document-mixed-format-comparison-2026-11-13.md#a-paragraph-that-moved-and-changed)
 recounts exact passage positions and highlights outside the known edited
 sentence across TXT and Word. It includes two generator families, five

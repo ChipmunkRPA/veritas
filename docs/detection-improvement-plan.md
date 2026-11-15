@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Earlier speech-encoder layers under competing voices](audio-short-edit-layer-ablation-2026-11-15.md)
+  located 3/16 randomized −5 dB edits versus 1/16 for the current review,
+  with two ordinary flags versus three. Two of the three locations also
+  flagged genuine splices, and neither earlier-layer arm found a useful
+  noisy location on the other 43 transfer edits. Both stay in evaluation.
+
 - [Edited paragraphs that move between drafts](document-mixed-format-comparison-2026-11-13.md#a-paragraph-that-moved-and-changed)
   links both positions in matching TXT and Word drafts. It confines the
   changed-word highlights to the known revised sentence in 65/72 staged

@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short speech edit control replay](audio-short-edit-noise-projection-2026-11-15.md#independent-replay)
+checks whether a matched genuine file or an isolated background triggered
+at the known edit time, even if its selected endpoints differ. It also
+recounts useful locations at equal ordinary-group budgets without speech
+recordings or model weights.
+
 To check [right-angle copies in a single PNG](image-exact-turned-copy-2026-11-15.md),
 recount the native crop positions and control flags using the public
 receipt. The native replay uses 38 pinned Wikimedia photos and also

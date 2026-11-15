@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Clean-feature correction for competing speech](audio-short-edit-noise-projection-2026-11-15.md)
+  reduced feature error on all 144 paired deliveries. Two apparent short
+  edit detections repeated in the isolated backgrounds. No added location
+  held up on the three-generator transfer. A portable reviewer now identifies
+  matched-control alerts at the same edit clock even with different boundaries.
+
 - [Exact right-angle image copies](image-exact-turned-copy-2026-11-15.md)
   localized both source areas in 108/114 staged PNG edits versus 0/114
   for prior copy-evidence paths. The check added no highlights on the

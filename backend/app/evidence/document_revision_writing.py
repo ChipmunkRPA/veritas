@@ -21,6 +21,7 @@ MULTIPLE_SCHEMA = "chipmunk.paired-writing-review/6"
 INDEPENDENT_SCHEMA = "chipmunk.paired-writing-review/7"
 WORD_INDEPENDENT_SCHEMA = "chipmunk.paired-writing-review/8"
 PDF_INDEPENDENT_SCHEMA = "chipmunk.paired-writing-review/9"
+PDF_CONTINUATION_SCHEMA = "chipmunk.paired-writing-review/10"
 ANCHORED_DRAFT_SCHEMA = "chipmunk.document-revision-comparison/7"
 MAX_REVISIONS = 4
 MULTIPLE_SCOPE = ("Checks separate changed sentences in short English text drafts. Each comparison requires its own "
@@ -37,6 +38,11 @@ WORD_INDEPENDENT_SCOPE = (
 PDF_INDEPENDENT_SCOPE = (
     "Each listed sentence and its unchanged neighbors share a verified selectable text block on one page of each draft. "
     "The drafts may use different pages for the same text. Other text may remain unchecked. "
+    "The responses are uncalibrated and carry zero authorship confidence weight."
+)
+PDF_CONTINUATION_SCOPE = (
+    "Each listed sentence was matched by two unchanged neighbors in verified selectable PDF text. "
+    "The comparison can follow adjacent text blocks or a page break in each draft. Other text may remain unchecked. "
     "The responses are uncalibrated and carry zero authorship confidence weight."
 )
 # Second-highest genuine work response in the frozen paired center transfer.
@@ -355,7 +361,8 @@ def refine_wording(comparison: dict, earlier: str, later: str) -> dict:
 
 def independently_anchored_revisions(comparison: dict, earlier: str, later: str, *,
                                      word_layouts: WordLayouts | None = None,
-                                     pdf_layouts: PdfLayouts | None = None) -> list[PairedInput]:
+                                     pdf_layouts: PdfLayouts | None = None,
+                                     pdf_continuations: bool = False) -> list[PairedInput]:
     """Map one changed sentence without requiring unrelated revisions to share its layout."""
     word = comparison["format"] == "docx"
     pdf = comparison["format"] == "pdf"
@@ -363,7 +370,12 @@ def independently_anchored_revisions(comparison: dict, earlier: str, later: str,
             or (pdf and pdf_layouts is None)
             or comparison.get("relocated_passages")):
         return []
-    old, new = _source(earlier), _source(later)
+    if pdf_continuations:
+        assert pdf_layouts is not None
+        old, new = (_source(document_revision_pdf.continuation_text(text, layout))
+                    for text, layout in zip((earlier, later), pdf_layouts, strict=True))
+    else:
+        old, new = _source(earlier), _source(later)
     if old is None or new is None:
         return []
 
@@ -414,8 +426,10 @@ def independently_anchored_revisions(comparison: dict, earlier: str, later: str,
             changed_by_side = {}
             for key, focus, layout in zip(("earlier", "later"), (before, after), pdf_layouts, strict=True):
                 start, end = focus["context_spans"][0][0], focus["context_spans"][-1][1]
-                blocks = [block for block in layout if block["start"] <= start < end <= block["end"]]
-                if len(blocks) != 1:
+                blocks = [block for block in layout if block["start"] < end and start < block["end"]]
+                if (not 1 <= len(blocks) <= (3 if pdf_continuations else 1)
+                        or len({block["page"] for block in blocks}) > 2
+                        or not (blocks[0]["start"] <= start < end <= blocks[-1]["end"])):
                     break
                 positions = [span for change in local_changes for span in change[f"{key}_changed_tokens"]]
                 try:
@@ -437,8 +451,17 @@ def independently_anchored_revisions(comparison: dict, earlier: str, later: str,
     return candidates
 
 
+def pdf_anchored_revisions(comparison: dict, earlier: str, later: str, layouts: PdfLayouts) -> tuple[list[PairedInput], bool]:
+    """Keep every existing PDF match when the continued reading order adds coverage."""
+    current = independently_anchored_revisions(comparison, earlier, later, pdf_layouts=layouts)
+    extended = independently_anchored_revisions(comparison, earlier, later, pdf_layouts=layouts, pdf_continuations=True)
+    if len(extended) > len(current) and all(item in extended for item in current):
+        return extended, True
+    return current, False
+
+
 def multiple_result(candidates: list[PairedInput], measured: list[list[dict] | None] | None = None, *,
-                    independent: bool = False, draft_format: str = "plain_text") -> dict:
+                    independent: bool = False, draft_format: str = "plain_text", pdf_continuations: bool = False) -> dict:
     if not candidates or (measured is not None and len(measured) != len(candidates)):
         raise ValueError("Expected individually mapped paired revisions")
     reviews = []
@@ -457,7 +480,9 @@ def multiple_result(candidates: list[PairedInput], measured: list[list[dict] | N
             "pdf": (PDF_INDEPENDENT_SCHEMA, PDF_INDEPENDENT_SCOPE),
         }.get(draft_format, (INDEPENDENT_SCHEMA, INDEPENDENT_SCOPE))
     summary = f"Checked {checked} of {len(candidates)} mapped revisions. Both writing responses increased at {increases}."
-    if schema == PDF_INDEPENDENT_SCHEMA:
+    if pdf_continuations:
+        schema, scope = PDF_CONTINUATION_SCHEMA, PDF_CONTINUATION_SCOPE
+    if schema in (PDF_INDEPENDENT_SCHEMA, PDF_CONTINUATION_SCHEMA):
         if checked:
             summary = (f"Scored {checked} of {len(candidates)} mapped sentences. "
                        f"Both checks gave a stronger AI-like response for {increases} of the scored sentences.")
@@ -543,17 +568,26 @@ def verify(comparison: dict, earlier: str, later: str, recorded: dict, *,
            word_layouts: WordLayouts | None = None, pdf_layouts: PdfLayouts | None = None) -> str:
     """Rebuild the source scope and check saved response arithmetic without inference."""
     schema = recorded.get("schema")
-    if schema in (MULTIPLE_SCHEMA, INDEPENDENT_SCHEMA, WORD_INDEPENDENT_SCHEMA, PDF_INDEPENDENT_SCHEMA):
+    if schema in (MULTIPLE_SCHEMA, INDEPENDENT_SCHEMA, WORD_INDEPENDENT_SCHEMA, PDF_INDEPENDENT_SCHEMA, PDF_CONTINUATION_SCHEMA):
         independent = schema != MULTIPLE_SCHEMA
-        candidates = (independently_anchored_revisions(comparison, earlier, later, word_layouts=word_layouts,
-                                                       pdf_layouts=pdf_layouts) if independent
-                      else separate_revisions(comparison, earlier, later))
+        continuations = schema == PDF_CONTINUATION_SCHEMA
+        if continuations:
+            if pdf_layouts is None:
+                raise ValueError("Continued sentences require verified PDF reading order")
+            candidates, continued = pdf_anchored_revisions(comparison, earlier, later, pdf_layouts)
+            if not continued:
+                raise ValueError("The extended PDF mapping does not replay")
+        elif independent:
+            candidates = independently_anchored_revisions(comparison, earlier, later, word_layouts=word_layouts,
+                                                          pdf_layouts=pdf_layouts)
+        else:
+            candidates = separate_revisions(comparison, earlier, later)
         revisions = recorded.get("revisions")
         if (not isinstance(revisions, list) or len(revisions) != len(candidates) or not candidates
                 or any(not isinstance(row, dict) for row in revisions)):
             raise ValueError("The draft comparison does not contain all mapped revisions")
         expected = multiple_result(candidates, [row.get("responses") for row in revisions], independent=independent,
-                                   draft_format=comparison["format"])
+                                   draft_format=comparison["format"], pdf_continuations=continuations)
         if json.dumps(recorded, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
             raise ValueError("Mapped revisions differ from the source positions or saved responses")
         return expected["status"]

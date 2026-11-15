@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Changed sentences across PDF page breaks](document-pdf-reflow-evidence-2026-11-14.md)
+  adds source-bound paired review for verified selectable PDF text.
+  The mapping located all 53 revisions in the reflowed panel and
+  left all 42 unchanged or unsupported layouts outside the paired findings.
+
 - [Training a short-edit detector](audio-short-edit-detector-training-2026-11-14.md)
   scored 88 matched prompts with readers, background sessions and the
   synthetic training generator held out of each assessment. One model

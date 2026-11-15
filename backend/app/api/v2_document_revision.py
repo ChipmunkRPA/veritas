@@ -157,7 +157,7 @@ class DraftPairedCheck(BaseModel):
         "chipmunk.paired-writing-review/1", "chipmunk.paired-writing-review/2",
         "chipmunk.paired-writing-review/3", "chipmunk.paired-writing-review/4", "chipmunk.paired-writing-review/5",
         "chipmunk.paired-writing-review/6", "chipmunk.paired-writing-review/7", "chipmunk.paired-writing-review/8",
-        "chipmunk.paired-writing-review/9",
+        "chipmunk.paired-writing-review/9", "chipmunk.paired-writing-review/10",
     ] = Field(alias="schema")
     status: Literal["outside_scope", "unavailable", "no_joint_increase", "joint_increase"]
     scope: str
@@ -351,6 +351,7 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
         candidate = None
         separate = []
         independent = False
+        pdf_continuations = False
         draft_format = comparison["format"]
         word_layouts = native_layouts if draft_format == "docx" else None
         pdf_layouts = native_layouts if pdf_independent else None
@@ -363,16 +364,19 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
             if candidate is None:
                 if settings.document_paired_separate_review:
                     separate = paired.separate_revisions(comparison, old_text, new_text)
-                if not separate and (pdf_layouts is not None
-                                     or settings.document_paired_separate_review and settings.document_paired_independent_review):
+                if not separate and pdf_layouts is not None:
+                    separate, pdf_continuations = paired.pdf_anchored_revisions(comparison, old_text, new_text, pdf_layouts)
+                    independent = bool(separate)
+                elif not separate and settings.document_paired_separate_review and settings.document_paired_independent_review:
                     separate = paired.independently_anchored_revisions(
-                        comparison, old_text, new_text, word_layouts=word_layouts, pdf_layouts=pdf_layouts,
+                        comparison, old_text, new_text, word_layouts=word_layouts,
                     )
                     independent = bool(separate)
             center_responses = neighboring_responses = None
             if separate:
                 comparison["paired_check"] = paired.multiple_result(
                     separate, paired.score_separate(separate), independent=independent, draft_format=draft_format,
+                    pdf_continuations=pdf_continuations,
                 )
             elif candidate is not None and candidate.across_paragraphs:
                 responses, center_responses = paired.score_boundary(candidate)
@@ -386,7 +390,8 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
         except Exception as error:
             log.warning("document_revision.paired_check_unavailable", exception=type(error).__name__)
             comparison["paired_check"] = (
-                paired.multiple_result(separate, independent=independent, draft_format=draft_format) if separate
+                paired.multiple_result(separate, independent=independent, draft_format=draft_format,
+                                       pdf_continuations=pdf_continuations) if separate
                 else paired.result(candidate, draft_format=draft_format)
             )
     check = comparison.get("paired_check", {})

@@ -446,6 +446,80 @@ def test_independent_pdf_review_verifies_a_sentence_that_moved_to_another_page(r
         assert "Writing responses were unavailable." in "".join(page.get_text() for page in report)
 
 
+def test_paired_pdf_review_follows_a_sentence_through_a_page_break(reference_http, monkeypatch, tmp_path):
+    fixtures = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_detector_mode", "candidate")
+    monkeypatch.setattr(settings, "text_window_sentences", 3)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    monkeypatch.setattr(settings, "document_paired_independent_review", True)
+    left = "The audit included reports from eight regional offices."
+    right = "The records are kept at the city office."
+    changed_before = "Staff listed the inspection dates in a long table."
+    changed_after = "The reviewers recorded the inspection dates and described their findings in detail."
+    split = changed_after.index("and described")
+
+    def draft(sentence, *, page_break=False, line_start=735):
+        with pymupdf.open() as pdf:
+            page = pdf.new_page()
+            if page_break:
+                page.insert_text((54, line_start), left + " " + sentence[:split].rstrip(), fontsize=10)
+                pdf.new_page().insert_text((54, 68), sentence[split:] + " " + right, fontsize=10)
+            else:
+                assert page.insert_textbox((54, 55, 530, 300), f"{left} {sentence} {right}", fontsize=10) >= 0
+            return pdf.tobytes()
+
+    older, newer = draft(changed_before), draft(changed_after, page_break=True)
+    _saved(fixtures, "paired-pdf-continuation", ".pdf", newer)
+    route = _url("paired-pdf-continuation")
+    inputs = []
+
+    def score(candidates):
+        inputs.extend(candidates)
+        return [[{"earlier": .2, "later": .5}, {"earlier": .3, "later": .8}]]
+
+    monkeypatch.setattr(paired, "score_separate", score)
+    standard = fixtures.client.post(route, headers=fixtures.viewer, files=_upload(older, ".pdf"))
+    assert standard.status_code == 200 and not inputs
+    response = fixtures.client.post(route, headers=fixtures.viewer, files=_upload(older, ".pdf"),
+                                    data={"include_paired_check": "true", "include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    payload = response.json()
+    comparison = payload["comparison"]
+    check = comparison["paired_check"]
+    assert check["schema"] == paired.PDF_CONTINUATION_SCHEMA
+    assert check["status"] == "joint_increase" and check["authorship_confidence_contribution"] == 0
+    assert comparison["changes"] == standard.json()["comparison"]["changes"]
+    candidate, = inputs
+    assert candidate.earlier == f"{left} {changed_before} {right}"
+    assert candidate.later == f"{left} {changed_after} {right}"
+    revision, = check["revisions"]
+    assert revision["earlier"]["text"] == changed_before
+    assert revision["later"]["text"] == changed_after[:split].rstrip() + "\n\n" + changed_after[split:]
+    assert [page["page"] for page in revision["later"]["pdf_pages"]] == [1, 2]
+    assert all(page["word_regions"] for page in revision["later"]["pdf_pages"])
+    assert revision["change_ids"]
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as report:
+        text = " ".join(" ".join(page.get_text().split()) for page in report)
+        assert "Page 1" in text and "Page 2" in text and "Changed sentence 1" in text
+        assert "zero authorship confidence weight" in text and "ModernBERT" not in text and "Tropa" not in text
+
+    old, new, exported = (tmp_path / name for name in ("earlier.pdf", "later.pdf", "comparison.json"))
+    old.write_bytes(older)
+    new.write_bytes(newer)
+    exported.write_text(json.dumps(comparison))
+    assert review(exported, old, new)["paired_pdf_word_regions_verified"] >= 3
+    revision["later"]["pdf_pages"][1]["page"] = 1
+    exported.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="Mapped revisions differ"):
+        review(exported, old, new)
+
+    _saved(fixtures, "paired-pdf-wide-gap", ".pdf", draft(changed_after, page_break=True, line_start=116))
+    unpaired = fixtures.client.post(_url("paired-pdf-wide-gap"), headers=fixtures.viewer, files=_upload(older, ".pdf"),
+                                    data={"include_paired_check": "true"}).json()
+    assert unpaired["comparison"]["paired_check"]["status"] == "outside_scope"
+    assert len(inputs) == 1
+
+
 def test_pdf_drafts_with_unmapped_or_locked_pages_are_refused():
     source = _pdf_draft("green", 0)
     with pymupdf.open() as document:

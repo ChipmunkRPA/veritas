@@ -9,6 +9,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from statistics import median
 
 from app.core.config import settings
 from app.core.deadline import StepTimeout
@@ -129,6 +130,36 @@ def ordered_text(text: str, source_map: list[dict], *, page_limit: int = 1, sing
             return ""
         cursor, previous_bottom = end, bottom
     return text if cursor == len(text) else ""
+
+
+def continuation_text(text: str, layout: list[dict]) -> str:
+    """Join nearby body lines in verified native reading order without shifting offsets."""
+    if not ordered_text(text, layout, page_limit=NATIVE_COMPARISON_MAX_PAGES, single_column=True):
+        return text
+    joined = list(text)
+    for before, after in zip(layout, layout[1:]):
+        last = text[before["start"]:before["end"]].rstrip("\u201d\u2019\")]} ")
+        first = text[after["start"]:after["end"]]
+        if not last or not first or last.endswith(("-", "\u2010", "\u00ad")):
+            continue
+        if not last.endswith((".", "!", "?", "\u2026")) and not first[0].islower():
+            continue
+        before_height, after_height = (median(word["bbox"][3] - word["bbox"][1] for word in block["fragments"])
+                                       for block in (before, after))
+        line_height = max(before_height, after_height)
+        if min(before_height, after_height) < .8 * line_height:
+            continue
+        if abs(before["bbox"][0] - after["bbox"][0]) > .8 * line_height:
+            continue
+        if before["page"] == after["page"]:
+            if after["bbox"][1] - before["bbox"][3] > 1.25 * line_height:
+                continue
+        elif (before["page"] + 1 != after["page"] or before["page_width"] != after["page_width"]
+              or before["page_height"] != after["page_height"]
+              or before["page_height"] - before["bbox"][3] > 120 or after["bbox"][1] > 120):
+            continue
+        joined[before["end"]:after["start"]] = "  "
+    return "".join(joined)
 
 
 def render_previews(changes: list[dict], earlier: Path, later: Path) -> list[dict]:

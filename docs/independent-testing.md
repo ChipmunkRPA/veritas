@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [PDF reflow replay](document-pdf-reflow-evidence-2026-11-14.md#independent-replay)
+checks exact changed-sentence positions across page breaks, ordinary
+revisions and controls where the new layout should leave wording unchanged
+or the paired check outside scope.
+
 The [short-edit training replay](audio-short-edit-detector-training-2026-11-14.md#independent-replay)
 rebuilds matched dry and competing-speech variants. It checks separate
 speaker and generator roles, cutoffs frozen on genuine recordings, and

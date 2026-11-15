@@ -5,7 +5,7 @@ from __future__ import annotations
 from html import escape
 
 from app.evidence.document_revision import HTML_COORDINATES
-from app.evidence.document_revision_writing import STATUS_TEXT
+from app.evidence.document_revision_writing import PDF_CONTINUATION_SCHEMA, STATUS_TEXT
 from app.reports.engine import _restricted_fetcher, load_weasyprint
 
 STYLE = """
@@ -20,7 +20,7 @@ p { margin: 4pt 0; }
 .side { margin: 5pt 0; padding-left: 8pt; border-left: 2px solid #bdc9be; }
 .coordinates { font: 8.5pt/1.25 monospace; color: #526658; break-after: avoid; }
 .excerpt { white-space: pre-wrap; overflow-wrap: anywhere; }
-.word-paired-change { break-inside: avoid; }
+.keep-together { break-inside: avoid; }
 mark { color: inherit; background: #e3e9e0; text-decoration: underline; text-decoration-color: #285f50; }
 a { color: #285f50; }
 .page-preview { margin: 5pt 0 8pt; break-inside: avoid; }
@@ -86,7 +86,7 @@ def _paired(review: dict | None) -> str:
               f'<p>{escape(review["scope"])}</p>']
     for number, revision in enumerate(review.get("revisions", ()), 1):
         heading = f"Changed sentence {number}"
-        output.append(f'<section class="word-paired-change"><h2>{heading}</h2>'
+        output.append(f'<section class="keep-together"><h2>{heading}</h2>'
                       f'<p>{escape(STATUS_TEXT[revision["status"]])}</p>')
         if change_ids := revision.get("change_ids"):
             links = ", ".join(f'<a href="#draft-change-{escape(value)}">{escape(value)}</a>' for value in change_ids)
@@ -171,7 +171,9 @@ def render(comparison: dict) -> bytes:
     changes = []
     docx = comparison["format"] == "docx"
     paired = comparison.get("paired_check")
-    change_class = ' class="word-paired-change"' if paired and paired.get("earlier", {}).get("context_paragraphs") else ""
+    keep_changes_together = paired and (paired.get("schema") == PDF_CONTINUATION_SCHEMA
+                                       or paired.get("earlier", {}).get("context_paragraphs"))
+    change_class = ' class="keep-together"' if keep_changes_together else ""
     html_reply = comparison["coordinate_space"] == HTML_COORDINATES
     mixed = comparison["format"] == "mixed"
     format_label = {"plain_text": "Text", "docx": "Word body text", "pdf": "PDF text", "mixed": "Wording change"}.get(comparison["format"])

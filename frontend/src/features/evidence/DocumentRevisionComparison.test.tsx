@@ -336,7 +336,9 @@ it('shows separate revision outcomes with links to the correct wording changes',
   }
 })
 
-it.each(['.txt', '.docx', '.pdf'] as const)('shows wording changes and native scope for an independent %s review', async (extension) => {
+it.each([
+  ['plain text', '.txt', false], ['Word', '.docx', false], ['PDF', '.pdf', false], ['split PDF', '.pdf', true],
+] as const)('shows wording changes and native scope for %s', async (_layout, extension, continued) => {
   const word = extension === '.docx'
   const pdf = extension === '.pdf'
   const page = (number: number) => ({ page: number, page_width: 612, page_height: 792, page_rotation: 0, word_regions: [] })
@@ -346,7 +348,8 @@ it.each(['.txt', '.docx', '.pdf'] as const)('shows wording changes and native sc
     coordinate_space: pdf ? 'pdf_native_text_unicode_codepoint' : word ? 'docx_body_unicode_codepoint' : 'decoded_source_unicode_codepoint',
     earlier: source, later: source, scope: 'Compares the wording.', interpretation: 'Shows wording changes.', changes: [],
     paired_check: {
-      schema: pdf ? 'chipmunk.paired-writing-review/9' : word ? 'chipmunk.paired-writing-review/8' : 'chipmunk.paired-writing-review/7',
+      schema: continued ? 'chipmunk.paired-writing-review/10' : pdf ? 'chipmunk.paired-writing-review/9'
+        : word ? 'chipmunk.paired-writing-review/8' : 'chipmunk.paired-writing-review/7',
       status: 'joint_increase', authorship_confidence_contribution: 0,
       summary: 'Checked 1 of 1 mapped revisions.', scope: 'Other edits may remain unchecked.',
       revisions: [{
@@ -358,7 +361,7 @@ it.each(['.txt', '.docx', '.pdf'] as const)('shows wording changes and native sc
           })) }) },
         later: { start: 23, end: 33, text: 'Heavy fog.', context_spans: [[3, 22], [23, 33], [34, 42]],
           input_sha256: 'b'.repeat(64),
-          ...(pdf && { pdf_pages: [page(2)] }),
+          ...(pdf && { pdf_pages: continued ? [page(2), page(3)] : [page(2)] }),
           ...(word && { context_paragraphs: [[0, 19], [20, 30], [31, 39]].map(([start, end]) => ({
             paragraph: 2, body_index: 1, start, end,
           })) }) },
@@ -385,6 +388,7 @@ it.each(['.txt', '.docx', '.pdf'] as const)('shows wording changes and native sc
     expect(screen.getByText('PDF page 1')).toBeTruthy()
     expect(screen.getByText('PDF page 2')).toBeTruthy()
   }
+  if (continued) expect(screen.getByText('PDF page 3')).toBeTruthy()
   for (const word of ['Early', 'rain', 'Heavy', 'fog']) {
     expect(screen.getByText(word).tagName).toBe('MARK')
   }

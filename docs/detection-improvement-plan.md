@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Writing range agreement and nearby-sentence contrast](writing-range-context-2026-11-15.md)
+  raised useful retained abstract locations from 1/60 to 2/60 while
+  reducing ordinary flags from 25/60 to 8/60 at the wider point. On
+  28 separate abstract pairs it located one edit with a matching ordinary
+  alert and increased ordinary flags at both points. The combinations
+  remain in evaluation.
+
 - [Short speech review on 48 kHz AAC](audio-short-aac-transfer-2026-11-15.md)
   adds a local Full trial for a verified six-second mono M4A presentation.
   It gains four useful deliveries from two source groups when combined

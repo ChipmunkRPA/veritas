@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [writing range agreement replay](writing-range-context-2026-11-15.md#replay)
+compares positions and overlapping words across two fitted checks.
+It includes 28 additional abstract pairs excluded from earlier
+source inventories and recounts where a matched ordinary case flags
+the same sentence.
+
 The [short AAC speech replay](audio-short-aac-transfer-2026-11-15.md#replay)
 reconstructs the comparison on three retained source banks and recounts
 useful intervals, misplaced flags and ordinary source groups. The

@@ -12,7 +12,13 @@ import numpy as np
 
 from app.core.canonical import canonical_hash
 from app.detectors.audio.decode import SAMPLE_RATE as AUDIO_RATE
-from app.detectors.audio.decode import AudioStreamUnavailable, aac48_presentation, aac_native_extent, decode_audio, wav_bytes
+from app.detectors.audio.decode import (
+    AudioStreamUnavailable,
+    aac48_presentation,
+    aac_native_extent,
+    decode_audio,
+    wav_bytes,
+)
 from app.detectors.audio.waveform import envelope
 from app.evidence import audio_level_adjustment
 from app.storage.files import sniff_audio
@@ -33,6 +39,7 @@ SCHEMA_WITH_CLEAN_SPEECH_SUPPORT = "chipmunk.audio-reference-comparison/13"
 SCHEMA_WITH_ALIGNED_SPEECH = "chipmunk.audio-reference-comparison/14"
 SCHEMA_WITH_MATCHING_WAVEFORM = "chipmunk.audio-reference-comparison/15"
 SCHEMA_WITH_AAC_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/16"
+SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/17"
 MAX_BYTES = 48 * 1024 * 1024
 MAX_SECONDS = 30
 MAX_PRESENTED_RANGES = 3
@@ -506,8 +513,12 @@ def _clean_speech(decoded, assets, *, allow_long, use_dense, use_eq_guard, inclu
     if aac_tracks is not None:
         tracks, aac = aac_tracks
         samples = ((track[1] * 32768).astype("<i2") for track in tracks)
-        dense = eq_guard = True
-        reason, span, profile, match_support = audio_clean_speech_dense.locate_with_match_support(*samples)
+        long = aac["presentation_end_exclusive_pts"] == audio_clean_speech_long.SAMPLES
+        if long:
+            reason, span, profile = audio_clean_speech_long.locate(*samples)
+        else:
+            dense = eq_guard = True
+            reason, span, profile, match_support = audio_clean_speech_dense.locate_with_match_support(*samples)
     elif not all(track[0] == "measured" and source[4] for track, source in zip(tracks, decoded, strict=True)):
         reason, span = "native_format_required", None
     elif not (all(track[2]["source_pts"] == 0 for track in tracks)
@@ -549,7 +560,8 @@ def _clean_speech(decoded, assets, *, allow_long, use_dense, use_eq_guard, inclu
     if aac_tracks is not None:
         result["aac_presentation"] = aac
         if "native_clock" in aac:
-            result["scope"] += " It measures the six seconds of AAC playback after conversion to 16 kHz mono."
+            duration = "twelve" if long else "six"
+            result["scope"] += f" It measures the {duration} seconds of AAC playback after conversion to 16 kHz mono."
         else:
             result["scope"] += (" This check uses the six seconds presented by the submitted AAC track. "
                                 "Ordinary edits and local level changes can also reduce matching sound.")
@@ -559,7 +571,7 @@ def _clean_speech(decoded, assets, *, allow_long, use_dense, use_eq_guard, inclu
                     for side, track in zip(("earlier", "submitted"), tracks, strict=True)}
         result["range"] = span | excerpts | {"support_sha256": canonical_hash(span)}
     if aac_tracks is not None:
-        return SCHEMA_WITH_AAC_CLEAN_SPEECH, result
+        return (SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH if long else SCHEMA_WITH_AAC_CLEAN_SPEECH), result
     extended = long or reason == "common_clock_required"
     if match_support is not None:
         return SCHEMA_WITH_CLEAN_SPEECH_SUPPORT, result
@@ -723,9 +735,12 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
     speech_aac = None
     if include_clean_speech and include_clean_speech_aac:
         presented = aac_tracks or _aac_presented_tracks(paths, (first, second), high_rate=True)
-        if (presented and presented[1]["side"] == "submitted"
-                and presented[1]["presentation_end_exclusive_pts"] == 6 * AUDIO_RATE):
-            speech_aac = presented
+        if presented and presented[1]["side"] == "submitted":
+            proof = presented[1]
+            duration = proof["presentation_end_exclusive_pts"]
+            if duration == 6 * AUDIO_RATE or (allow_long_clean_speech and duration == 12 * AUDIO_RATE
+                                              and proof.get("native_clock", {}).get("channels") == 1):
+                speech_aac = presented
     if include_local_timing:
         record.update(schema=SCHEMA_WITH_LOCAL_TIMING,
                       local_timing=_local_timing((first, second), audio, assets, aac_tracks=timing_aac))
@@ -738,7 +753,7 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
                                        use_dense=use_dense_clean_speech, use_eq_guard=use_clean_speech_eq_guard,
                                        include_match_support=include_clean_speech_match_support, aac_tracks=speech_aac)
         record.update(schema=schema, clean_speech=speech)
-    if timing_aac and record["schema"] != SCHEMA_WITH_AAC_CLEAN_SPEECH:
+    if timing_aac and speech_aac is None:
         record["schema"] = SCHEMA_WITH_AAC_TIMING
         if include_clean_speech:
             record["local_timing"]["twelve_second_speech_option"] = allow_long_clean_speech

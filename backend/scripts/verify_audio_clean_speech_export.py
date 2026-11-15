@@ -19,6 +19,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD,
     SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
+    SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH,
     SCHEMA_WITH_MATCHING_WAVEFORM,
 )
 from scripts.verify_audio_local_timing_export import _decode
@@ -38,13 +39,14 @@ def verify_export(earlier, submitted, export):
     schema = record["schema"]
     if schema in {SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM}:
         schema = record["comparison_schema"]
-    long = schema == LONG_SCHEMA
+    long_aac = schema == SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH
+    long = schema == LONG_SCHEMA or long_aac
     dense = schema == SCHEMA_WITH_DENSE_CLEAN_SPEECH
-    aac = schema == SCHEMA_WITH_AAC_CLEAN_SPEECH
-    with_support = aac or schema == SCHEMA_WITH_CLEAN_SPEECH_SUPPORT
+    aac = schema == SCHEMA_WITH_AAC_CLEAN_SPEECH or long_aac
+    with_support = schema in {SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_CLEAN_SPEECH_SUPPORT}
     eq_guard = with_support or schema == SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD
     sample_count = audio_clean_speech_long.SAMPLES if long else audio_clean_speech.SAMPLES
-    require((schema in {SCHEMA, LONG_SCHEMA} or dense or eq_guard) and result["sample_rate"] == RATE
+    require((schema == SCHEMA or long or dense or eq_guard) and result["sample_rate"] == RATE
             and record["affects_overall_confidence"] is False and result["affects_overall_confidence"] is False,
             "The export needs local speech evidence with zero AI weight")
     decoded = [_decode(path, record[side], aac_presentation=aac and side == "submitted", retain_padding=True, allow_aac48=True)
@@ -52,6 +54,8 @@ def verify_export(earlier, submitted, export):
     proof = decoded[1][2]
     require(proof is not None and result.get("aac_presentation") == {"side": "submitted", **proof} if aac
             else "aac_presentation" not in result, "AAC presentation proof differs")
+    require(not long_aac or proof.get("native_clock", {}).get("channels") == 1,
+            "The twelve-second AAC comparison needs a verified 48 kHz mono source")
     require(all(origin == 0 and (reading["presentation_end_exclusive_pts"] if reading else len(raw) // 2) == sample_count
                 for raw, origin, reading in decoded),
             "This verification requires both equal supported native source clocks")

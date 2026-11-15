@@ -17,6 +17,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
     SCHEMA_WITH_LOCAL_TIMING,
+    SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH,
     SCHEMA_WITH_LONG_CLEAN_SPEECH,
     SCHEMA_WITH_MATCHING_WAVEFORM,
     SCHEMA_WITH_STEREO,
@@ -148,7 +149,7 @@ def _audio_summary(document, record):
         _text(page, MARGIN, y, label, font="hebo")
         _text(page, MARGIN, y + 20, f"SHA-256 {record[side]['sha256']}", size=9, font="cour", color=MUTED)
     if record["status"] != "measured":
-        separate = record["schema"] in {SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_AAC_TIMING,
+        separate = record["schema"] in {SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH, SCHEMA_WITH_AAC_TIMING,
                                         SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM}
         title = "Decoded sample comparison unavailable" if separate else "Comparison unassessed"
         _text(page, MARGIN, 346, title, size=16, font="hebo")
@@ -159,7 +160,7 @@ def _audio_summary(document, record):
             _text(page, MARGIN, 397, "The aligned speech result appears on a separate page.", size=10, color=MUTED)
         elif record["schema"] == SCHEMA_WITH_AAC_TIMING:
             _text(page, MARGIN, 397, "The local timing result appears on a separate page.", size=10, color=MUTED)
-        elif record["schema"] == SCHEMA_WITH_AAC_CLEAN_SPEECH:
+        elif record["schema"] in {SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH}:
             _text(page, MARGIN, 397, "The local speech result appears on a separate page.", size=10, color=MUTED)
         return
     _text(page, MARGIN, 346, "Decoded sample comparison", size=16, font="hebo")
@@ -417,6 +418,7 @@ def _clean_speech_page(document, result):
         outcome = "The pair met the matching-sound rule." if support["admitted"] else "The pair had too little matching sound."
         _text(page, MARGIN, 259, f"{outcome} Windows overlap.", size=9, color=MUTED)
     if aac := result.get("aac_presentation"):
+        offset = 36
         duration = aac["presentation_end_exclusive_pts"] / aac["sample_rate"]
         native = aac.get("native_clock")
         source = f"48 kHz {'stereo' if native['channels'] == 2 else 'mono'} source. " if native else ""
@@ -641,7 +643,8 @@ def render(record, assets):
         is_audio = record["schema"] in (AUDIO_SCHEMA, SCHEMA_WITH_LEVEL_ADJUSTMENT, SCHEMA_WITH_TRIM_ALIGNMENT,
                                         SCHEMA_WITH_TRIM_AND_LEVEL, SCHEMA_WITH_STEREO, SCHEMA_WITH_LOCAL_TIMING,
                                         SCHEMA_WITH_CHANNEL_TIMING, SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH,
-                                        SCHEMA_WITH_AAC_TIMING, SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_DENSE_CLEAN_SPEECH,
+                                        SCHEMA_WITH_AAC_TIMING, SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH,
+                                        SCHEMA_WITH_DENSE_CLEAN_SPEECH,
                                         SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD, SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
                                         SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})

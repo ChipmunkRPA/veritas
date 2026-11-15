@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [twelve-second AAC speech replay](audio-clean-speech-aac-2026-11-15.md#twelve-second-mono-aac-under-competing-speech)
+recounts 272 paired comparisons on the same lossless, mono and stereo
+delivery clocks. It preserves local edit positions, mismatched references
+and ordinary changes separately. The native replay can regenerate the
+input pairs and exercise the authenticated report and export.
+
 The [lip timing picture-clock replay](video-lip-frame-clock-2026-11-15.md#replay)
 compares original, held and nearest picture samples at exact frame rates
 with the soundtrack events and operating point fixed. A separate native

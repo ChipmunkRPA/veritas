@@ -148,3 +148,68 @@ Independent decoding reproduced the two excerpt hashes and waveform
 values. The unchanged pair produced no local difference, and the
 unrelated earlier copy stayed unassessed.
 [Paid stereo comparison receipt](evaluation-panels/audio-clean-speech-aac48-app-2026-11-15.json)
+
+## Twelve-second mono AAC under competing speech
+
+With the six-second AAC and twelve-second earlier-copy options enabled,
+the local app accepts a continuous twelve-second 48 kHz mono AAC-LC
+submission and a matching twelve-second 16 kHz mono PCM16 WAV or FLAC
+earlier recording. It verifies the audio presentation duration, discards
+codec padding, and uses the existing twelve-second same-clock comparison.
+Two neighboring six-second windows must support the selected interval.
+The earlier recording and the submitted mix retain their own playable
+excerpts and shared waveform scale. This comparison locates changes to
+matching sound. An ordinary splice can produce the same finding.
+[Twelve-second waveform method](audio-clean-reference-duration-2026-11-13.md)
+
+The benchmark joined a target and an untouched companion excerpt from
+the same retained bank to make each twelve-second pair. The seam is
+shared by the earlier file and its submitted counterpart. Half of the
+target excerpts start after six seconds. The AMI and ICSI banks provide
+32 target source groups and 272 constructed comparisons. The intentional
+speech edits come from four generator families. Recorded competing speech
+is 5 dB louder than the foreground by the original six-second mix design.
+The same earlier and submitted PCM inputs are replayed as lossless and
+as 48 kHz AAC. The stereo right-channel construction matches the
+six-second carrier test. These are joined clips and controlled re-encodes.
+They do not model arbitrary twelve-second microphone recordings.
+
+| Result | Lossless | Mono AAC | Stereo AAC trial |
+| --- | ---: | ---: | ---: |
+| Correctly located synthetic replacements | 32/64 | 32/64 | 32/64 |
+| Correctly located replacements after six seconds | 14/32 | 14/32 | 14/32 |
+| Correctly located deliberate genuine splices | 19/40 | 19/40 | 19/40 |
+| Ordinary untouched or same-word resampling flags | 6/80 | 6/80 | 12/80 |
+| Wrong or half-matching references admitted | 0/64 | 0/64 | 0/64 |
+| Background-only target halves admitted | 0/24 | 0/24 | 0/24 |
+
+The mono AAC result retains the same correctly located edits and ordinary
+flags as lossless. One genuine splice moves to a different useful interval.
+The stereo mix doubles the ordinary flags, so the twelve-second option
+admits mono only. Each measured AAC decode had 171 trailing samples
+outside the twelve-second 16 kHz analysis prefix. An AAC file outside the
+verified duration remains unassessed by this local comparison.
+[Twelve-second numeric receipt](evaluation-panels/audio-clean-speech-aac-long-2026-11-15.json.gz)
+
+The local worker ran two simulated USD 9.99 checkouts, with zero jobs
+before payment. The twelve-second option recovered **7.120–7.840 s**
+in the staged edit and highlighted no range in the matched unchanged
+recording. The half-matching earlier file stayed unassessed. The PDF and
+JSON showed the same ticks and both waveform excerpts. Independent source
+decoding verified the exported excerpts and proof of AAC presentation.
+The comparisons preserved the saved automated assessments.
+[Local worker and evidence receipt](evaluation-panels/audio-clean-speech-aac-long-app-2026-11-15.json)
+
+The offline recount reproduces the paired results on Python 3.12 and
+3.14. The native mode reconstructs the joined pairs from the same pinned
+AMI and ICSI PCM sources as the six-second comparison. Its receipts
+carry intervals, clock metadata and hashes. Raw recordings stay local.
+
+```sh
+export PYTHONPATH=backend OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1
+module=scripts.audio_clean_speech_aac_long_transfer
+python3 -B -S -m "$module" docs/evaluation-panels/audio-clean-speech-aac-long-2026-11-15.json.gz
+backend/.venv/bin/python -B -m "$module" "$run/twelve-aac.json.gz" --icsi "$icsi" --ami "$stock"
+backend/.venv/bin/python -B -m scripts.audio_clean_speech_aac_app \
+  "$app_run" --receipt "$run/twelve-aac.json.gz" --sources "$stock" --carrier aac48_mono --long
+```

@@ -18,6 +18,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
     SCHEMA_WITH_LOCAL_TIMING,
+    SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH,
     SCHEMA_WITH_LONG_CLEAN_SPEECH,
     SCHEMA_WITH_MATCHING_WAVEFORM,
     SCHEMA_WITH_TRIM_ALIGNMENT,
@@ -54,8 +55,9 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False, c
             compare_source = partial(compare, include_local_timing=True, include_aac_timing=True,
                                      include_clean_speech="clean_speech" in record,
                                      allow_long_clean_speech=record.get("local_timing", {}).get("twelve_second_speech_option", True))
-        elif schema == SCHEMA_WITH_AAC_CLEAN_SPEECH:
+        elif schema in {SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH}:
             compare_source = partial(compare, include_clean_speech=True, include_clean_speech_aac=True,
+                                     allow_long_clean_speech=schema == SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH,
                                      include_local_timing="local_timing" in record,
                                      include_aac_timing="aac_presentation" in record.get("local_timing", {}),
                                      include_channel_timing="channel_timing" in record)

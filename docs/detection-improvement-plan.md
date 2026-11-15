@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Twelve-second AAC speech comparison](audio-clean-speech-aac-2026-11-15.md#twelve-second-mono-aac-under-competing-speech)
+  retains 32/64 useful synthetic replacement locations from the lossless
+  comparison with six ordinary flags in each carrier. Fourteen correct
+  locations start after six seconds. The twelve-second stereo candidate
+  increased ordinary flags from 6/80 to 12/80 and remains experimental.
+
 - [Lip timing at 30 and 29.97 fps](video-lip-frame-clock-2026-11-15.md)
   reproduced seven correctly located carrier deliveries in a controlled
   nearest-picture replay. On separate native 29.97 fps speech, it located

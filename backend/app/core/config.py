@@ -242,7 +242,7 @@ class Settings(BaseSettings):
     audio_reference_long_clean_speech: bool = False  # Extend the optional clean-copy comparison to twelve seconds.
     audio_reference_dense_clean_speech: bool = False  # Trial: denser comparison of six-second clean-copy pairs.
     audio_reference_clean_speech_eq_guard: bool = False  # Trial: explain consistent frequency changes in six-second pairs.
-    audio_reference_clean_speech_aac: bool = False  # Trial: compare a native clean source with six-second AAC M4A.
+    audio_reference_clean_speech_aac: bool = False  # Compare a native clean source with qualified AAC M4A.
     audio_reference_aligned_speech: bool = False  # Trial: align speech when the two clean-copy timelines differ locally.
     audio_reference_matching_waveform: bool = False  # Trial: compare retained speech around local timing shifts under background sound.
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.

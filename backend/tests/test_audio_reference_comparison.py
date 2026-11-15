@@ -934,7 +934,8 @@ def test_clean_speech_lane_api_is_opt_in_and_renders_source_ranges(reference_htt
         assert db.get(Analysis, "other-kind").result_hash == original_result
 
 
-def test_clean_speech_twelve_seconds_distinguishes_late_change_and_broad_frequency_processing(tmp_path):
+@pytest.mark.parametrize("aac_channels", [None, 1, 2])
+def test_clean_speech_twelve_seconds_distinguishes_late_change_and_broad_frequency_processing(tmp_path, aac_channels):
     from scipy.signal import butter, sosfiltfilt
 
     rng = np.random.default_rng(172)
@@ -951,11 +952,34 @@ def test_clean_speech_twelve_seconds_distinguishes_late_change_and_broad_frequen
         ("mismatched", donor + background, "unassessed"),
     ):
         other = save(tmp_path, name, (np.rint(waveform) / 32768).astype(np.float32))
-        record, assets = audio_reference.compare(path, other, include_clean_speech=True, use_dense_clean_speech=True)
-        assert record["schema"] == audio_reference.SCHEMA_WITH_LONG_CLEAN_SPEECH
+        schema = audio_reference.SCHEMA_WITH_LONG_CLEAN_SPEECH
+        if aac_channels:
+            encoded = tmp_path / f"{name}.m4a"
+            subprocess.run(["ffmpeg", "-v", "error", "-i", str(other), "-ar", "48000", "-ac", str(aac_channels),
+                            "-c:a", "aac", "-b:a", "96k", str(encoded)], check=True)
+            other = encoded
+            schema = audio_reference.SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH
+        options = dict(include_clean_speech=True, use_dense_clean_speech=True, include_clean_speech_aac=bool(aac_channels))
+        record, assets = audio_reference.compare(path, other, **options)
+        if aac_channels == 2:
+            assert record["clean_speech"]["status"] == "unassessed"
+            assert "aac_presentation" not in record["clean_speech"]
+            continue
+        assert record["schema"] == schema
         check = record["clean_speech"]
         assert check["status"] == expected and check["sample_count"] == 192000
         assert check["affects_overall_confidence"] is record["affects_overall_confidence"] is False
+        if aac_channels:
+            proof = check["aac_presentation"]
+            assert proof["presentation_end_exclusive_pts"] == 192000
+            assert proof["native_clock"] == {"sample_rate": 48000, "channels": aac_channels,
+                                             "time_base": "1/48000", "presentation_end_exclusive_pts": 576000}
+            assert proof["decoded_samples"] - proof["excluded_trailing_samples"] == 192000
+            if name == "late":
+                disabled, _ = audio_reference.compare(path, other, allow_long_clean_speech=False, **options)
+                assert disabled["clean_speech"]["status"] == "unassessed"
+                reversed_pair, _ = audio_reference.compare(other, path, **options)
+                assert reversed_pair["clean_speech"]["status"] == "unassessed"
         output.write_text(json.dumps({"comparison": record,
                                       "assets": {key: base64.b64encode(raw).decode() for key, raw in assets.items()}}))
         assert run(path, other, output, verify=True) == record

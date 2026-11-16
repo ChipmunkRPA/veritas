@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Paired face calibration on a fresh codec panel](video-paired-face-calibration-2026-11-16.md)
+  compares four combinations on 24 additional target groups. The
+  current check flags 35/48 direct and 15/48 tandem swaps, with 4/24
+  ordinary alerts at each quality. The frozen alternatives recover no
+  additional swaps. An exploratory same-frame comparison indicates
+  where representative calibration could improve the quality tradeoff.
+
 - [Temporal texture on whole-clip face swaps](video-whole-face-temporal-transfer-2026-11-16.md)
   measures 22 fresh groups with two swap engines and matched originals.
   The temporal candidates flag 0/88 swaps. The current paired face

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [paired face calibration replay](video-paired-face-calibration-2026-11-16.md#replay)
+recomputes four ways to combine exact paired face readings on 24
+separate targets. It retains unassessed clips and explains how both
+delivery variants enter calibration.
+
 The [whole-clip face-swap replay](video-whole-face-temporal-transfer-2026-11-16.md#replay)
 replays the app's six-frame comparison and nine temporal
 fits on direct and tandem encodes. Its numeric receipt can be read

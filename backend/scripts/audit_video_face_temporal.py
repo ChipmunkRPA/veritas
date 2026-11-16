@@ -9,6 +9,7 @@ import subprocess
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 from fractions import Fraction
+from itertools import groupby
 from pathlib import Path
 
 from scripts.video_face_temporal_fit import read, save
@@ -124,6 +125,30 @@ def release(result, roster, audited, output):
     save(output, data | {"acquisition": public_roster(read(roster)), "native_audit": read(audited)})
 
 
+def matched_false_alarm_diagnostic(data):
+    from scripts.video_face_pair_calibration import paired_flags
+
+    reference = paired_flags(data["held"])
+    diagnostic = {}
+    for delivery in ("direct", "tandem"):
+        rows = [row for row in data["held"] if row["delivery"] == delivery]
+        budget = sum(reference[row["file"]] is True for row in rows if row["family"] == "ordinary")
+        scores = []
+        for row in rows:
+            score = data["scores"][row["file"]]["same_frame_agreement"]["response"]
+            if score is not None:
+                scores.append((score, row["family"] != "ordinary"))
+        ordinary = positive = 0
+        for _, items in groupby(sorted(scores, reverse=True), key=lambda row: row[0]):
+            labels = [value for _, value in items]
+            if ordinary + labels.count(False) > budget:
+                break
+            ordinary += labels.count(False)
+            positive += labels.count(True)
+        diagnostic[delivery] = {"ordinary_budget": budget, "ordinary_selected": ordinary, "swaps_selected": positive}
+    return diagnostic
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     phases = parser.add_subparsers(dest="action", required=True)
@@ -136,10 +161,24 @@ if __name__ == "__main__":
     replay = phases.add_parser("restore")
     for name in ("receipt", "publisher", "output"):
         replay.add_argument(name, type=Path)
+    pair = phases.add_parser("release-pair")
+    for name in ("result", "roster", "output"):
+        pair.add_argument(name, type=Path)
+    diagnostic = phases.add_parser("verify-pair-diagnostic")
+    diagnostic.add_argument("receipt", type=Path)
     args = parser.parse_args()
     if args.action == "pixels":
         audit(args.deliveries, args.development, args.held, args.output)
     elif args.action == "release":
         release(args.result, args.roster, args.audited, args.output)
-    else:
+    elif args.action == "restore":
         restore_roster(read(args.receipt)["acquisition"], args.publisher, args.output)
+    elif args.action == "release-pair":
+        result = read(args.result)
+        save(args.output, result | {"acquisition": public_roster(read(args.roster)),
+                                    "matched_false_alarm_diagnostic": matched_false_alarm_diagnostic(result)})
+    else:
+        result = read(args.receipt)
+        expected = matched_false_alarm_diagnostic(result)
+        assert expected == result["matched_false_alarm_diagnostic"]
+        print(json.dumps(expected, sort_keys=True))

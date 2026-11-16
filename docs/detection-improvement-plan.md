@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Writing changes within a document](writing-local-baseline-transfer-2026-11-16.md)
+  add exact source locations when a passage stands out within the same
+  file. On 40 new source-matched pairs, the added check found five more
+  known passages with the same ten ordinary files flagged. All five gains
+  came from historical prose. The overall authorship assessment gives the
+  added ranges zero weight.
+
 - [Two-second checks in longer recordings](audio-two-second-long-review-2026-11-16.md)
   add a local waveform, source clock and playable excerpt for supported
   nine- to fourteen-second WAV and FLAC uploads. The comparison has

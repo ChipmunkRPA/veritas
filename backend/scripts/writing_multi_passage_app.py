@@ -66,6 +66,7 @@ def exports(client, aid, source, record, output):
                     positions = ", ".join(f"[{a}, {b})" for a, b in place["ranges"])
                     assert f"{label} characters {positions}." in text
             assert " ".join(row["preview"].split()[:8]) in text
+        assert text.count(proof.BASELINE_REASON) == sum(row.get("basis") == "document_baseline" for row in record["ranges"])
     public = paid.body(client.get(f"/api/analyses/{aid}/export.json"))
     scan(json.dumps(public))
     package = paid.body(client.post(f"/api/v2/analyses/{aid}/packages", json={

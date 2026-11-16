@@ -25,7 +25,11 @@ def enabled() -> bool:
 
 
 def policy() -> str | bool:
-    return document_passage_intervals.NATIVE_SCHEMA if enabled() else False
+    if not enabled():
+        return False
+    if settings.text_passage_document_baseline_review:
+        return document_passage_intervals.DOCUMENT_BASELINE_SCHEMA
+    return document_passage_intervals.NATIVE_SCHEMA
 
 
 def measure(classifier, doc, sentences, context, ctx, spec, revisions):
@@ -66,4 +70,7 @@ def measure(classifier, doc, sentences, context, ctx, spec, revisions):
         except (DetectorTimeout, IndexError, OSError, RuntimeError, ValueError):
             # The existing context and document scores are already available.
             pass
-    return document_passage_intervals.capture(doc.text, doc.source_map, geometry, readings, method=method, checked_end=end)
+    return document_passage_intervals.capture(
+        doc.text, doc.source_map, geometry, readings, method=method, checked_end=end,
+        document_baseline=settings.text_passage_document_baseline_review,
+    )

@@ -288,7 +288,9 @@ function WritingPassageIntervals({ review, method, emailHtml }: {
 }) {
   return <section id="document-writing-passage-intervals" aria-labelledby="writing-passage-intervals-title" className="mt-4 rounded-md border border-border p-4">
     <h3 id="writing-passage-intervals-title" className="m-0 text-body font-medium">Possible AI-like writing passages</h3>
-    <p className="mt-2 mb-0 text-small">This optional check combines readings of individual sentences and their surrounding text. Sustained AI-like patterns can highlight separate passages for review.</p>
+    <p className="mt-2 mb-0 text-small">This optional check combines readings of individual sentences and their surrounding text. {review.schema === 'document-writing-passage-intervals/3'
+      ? 'It also looks for passages that stand out within the document.'
+      : 'Sustained AI-like patterns can highlight separate passages for review.'}</p>
     {method === 'email' && <p className="mt-2 mb-0 text-small">This check covers the mapped reply body.</p>}
     <p className="mt-2 mb-0 text-small">{review.status === 'flagged' ? 'Inspect the highlighted passages in context.'
       : review.status === 'no_ranges' ? 'No passage was selected. Authorship remains undetermined by this check.'
@@ -303,6 +305,7 @@ function WritingPassageIntervals({ review, method, emailHtml }: {
             : <ul className="m-0 list-none pl-0 text-small">{range.locations.map((place, index) => 'ranges' in place &&
               <li key={index}>{'paragraph' in place ? `Word paragraph ${place.paragraph}` : `Decoded email ${emailHtml ? 'HTML ' : ''}body part ${place.mime_part}`} characters <span className="font-mono">{place.ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}</span>.</li>
             )}</ul>}
+        {range.basis === 'document_baseline' && <p className="m-0 text-small">Selected by comparing this passage with the writing patterns elsewhere in this file.</p>}
         <blockquote className="my-2 border-l-2 border-border pl-3 whitespace-pre-line break-words text-small">{range.preview}{range.end - range.start > Array.from(range.preview).length ? '…' : ''}</blockquote>
       </div>
     })}

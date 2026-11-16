@@ -159,6 +159,19 @@ describe('ordinary multimedia evidence', () => {
     expect(section.getByText('Across pages')).toBeTruthy()
   })
 
+  it('explains a passage found by comparing writing within the file', () => {
+    show({ ...document, packets: [], coverage: {
+      writing_passage_intervals: {
+        schema: 'document-writing-passage-intervals/3', status: 'flagged', authorship_confidence_contribution: 0,
+        ranges: [{ start: 5, end: 18, source_start: 7, source_end: 20, preview: 'Local passage', basis: 'document_baseline' }],
+      },
+    } })
+    const section = within(screen.getByRole('region', { name: 'Possible AI-like writing passages' }))
+    expect(section.getByText('Selected by comparing this passage with the writing patterns elsewhere in this file.')).toBeTruthy()
+    expect(section.getByText('[7, 20)')).toBeTruthy()
+    expect(section.getByText(/carries zero weight in the overall assessment/)).toBeTruthy()
+  })
+
   it('shows decoded HTML positions in the mapped reply', () => {
     show({ ...document, source: { ...document.source, method: 'email' }, packets: [], coverage: {
       email: { body_content_type: 'text/html' }, writing_passage_intervals: {

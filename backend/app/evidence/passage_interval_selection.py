@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import math
 from collections import defaultdict
+from statistics import median
 
 LONGEST = 40
 CAP = 6
@@ -82,3 +83,39 @@ def select_intervals(proposals, point, count):
                     best = added, (*spans, (start, end, score))
             table[end][length] = best
     return table[count][CAP][1]
+
+
+def lower_quarter(values):
+    eligible = sorted(value for value in values if value is not None)
+    return eligible[math.ceil(len(eligible) / 4) - 1] if eligible else None
+
+
+def center_on_document(values, reference):
+    baseline = lower_quarter(values)
+    if baseline is None:
+        return values
+    shift = max(-1., min(1., baseline - reference))
+    return [None if value is None else max(-4., min(4., value - shift)) for value in values]
+
+
+def flank_adjusted_candidates(values):
+    candidates = []
+    for start, end, score in interval_candidates(values):
+        before = values[max(0, start - 5):start]
+        after = values[end:end + 5]
+        if min(len(before), len(after)) >= 2 and None not in (*before, *after):
+            contrast = sum(values[start:end]) / (end - start) - max(median(before), median(after))
+            score += math.sqrt(end - start) * min(2., max(0., contrast)) / 3
+        candidates.append((start, end, score))
+    return candidates
+
+
+def add_disjoint_ranges(primary, secondary):
+    """Preserve the existing selection and add separate ranges up to its display limit."""
+    chosen = [(first, stop, response, "pooled") for first, stop, response in primary]
+    for first, stop, response in sorted(secondary, key=lambda row: (-row[2], row[0], row[1])):
+        if len(chosen) >= CAP:
+            break
+        if all(stop < a or b < first for a, b, _, _ in chosen):
+            chosen.append((first, stop, response, "document_baseline"))
+    return sorted(chosen)

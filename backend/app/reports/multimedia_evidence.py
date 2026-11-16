@@ -1550,7 +1550,11 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "passage_position": _passage_position_view(document.get("coverage") or {}, withheld=withheld)
             if kind == "document" else None,
             "writing_passage_intervals": (
-                {**intervals, "title": document_passage_intervals.TITLE, "explanation": document_passage_intervals.EXPLANATION,
+                {**intervals, "title": document_passage_intervals.TITLE,
+                 "explanation": (document_passage_intervals.BASELINE_EXPLANATION
+                                 if intervals["schema"] == document_passage_intervals.DOCUMENT_BASELINE_SCHEMA
+                                 else document_passage_intervals.EXPLANATION),
+                 "baseline_reason": document_passage_intervals.BASELINE_REASON,
                  "status_note": document_passage_intervals.STATUS[intervals["status"]],
                  "method": document["source"]["method"],
                  "email_html": ((document.get("coverage") or {}).get("email") or {}).get("body_content_type") == "text/html"}

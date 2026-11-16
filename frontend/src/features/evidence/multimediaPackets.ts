@@ -495,9 +495,9 @@ export interface DocumentEvidenceSet extends SetBase {
     unselected_passage_responses?: DocumentUnselectedResponses;
     passage_position_review?: DocumentPassagePosition;
     writing_passage_intervals?: {
-      schema: 'document-writing-passage-intervals/1' | 'document-writing-passage-intervals/2';
+      schema: 'document-writing-passage-intervals/1' | 'document-writing-passage-intervals/2' | 'document-writing-passage-intervals/3';
       status: 'flagged' | 'no_ranges' | 'unassessed';
-      ranges: ({ start: number; end: number; preview: string } & (
+      ranges: ({ start: number; end: number; preview: string; basis?: 'pooled' | 'document_baseline' } & (
         { source_start: number; source_end: number } | { locations: (
           { page: number; boxes: [number, number, number, number][] } |
           { paragraph: number; ranges: [number, number][] } |

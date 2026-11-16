@@ -3,7 +3,6 @@ from dataclasses import asdict
 from types import SimpleNamespace
 
 import pytest
-
 from app.core.canonical import canonical_hash
 from app.detectors.text import language_scope
 from app.detectors.text.adapters import interval_review
@@ -81,3 +80,43 @@ def test_pdf_locations_use_the_same_precision_before_and_after_export():
     from_source = native.locate("pymupdf", mapping, 0, 5)
     from_frozen_mapping = native.locate("pymupdf", json.loads(canonical_json(mapping)), 0, 5)
     assert from_source == from_frozen_mapping == json.loads(canonical_json(from_source))
+
+
+@pytest.mark.parametrize("suffix", [".txt", ".docx"])
+def test_document_baseline_preserves_prior_ranges_and_replays_original_locations(tmp_path, suffix):
+    path = tmp_path / f"passages{suffix}"
+    path.write_bytes(BODY.encode() if suffix == ".txt" else fixture("word", BODY, None))
+    doc = extract(path, suffix)
+    sentences = segment(doc)
+    geometry = [[row.start, row.end, row.n_words] for row in sentences]
+    assert len(geometry) == 18
+    response = [.005] * len(geometry)
+    response[4:6] = [.999, .999]
+    response[11:13] = [.85, .85]
+    readings = {"context": response, "isolated": response}
+    method = doc.meta["method"]
+    options = {"method": method, "checked_end": len(doc.text)}
+    original = proof.capture(doc.text, doc.source_map, geometry, readings, **options)
+    expanded = proof.capture(doc.text, doc.source_map, geometry, readings, document_baseline=True, **options)
+    assert original["schema"] == (proof.SCHEMA if suffix == ".txt" else proof.NATIVE_SCHEMA)
+    assert expanded["schema"] == proof.DOCUMENT_BASELINE_SCHEMA
+    retained, additional = expanded["ranges"]
+    assert retained == original["ranges"][0] | {"basis": "pooled"}
+    assert (additional["start"], additional["end"], additional["basis"]) == (
+        sentences[11].start, sentences[12].end, "document_baseline",
+    )
+    if suffix == ".docx":
+        assert [place["paragraph"] for place in additional["locations"]] == [2, 3]
+    assert expanded["authorship_confidence_contribution"] == 0
+
+    def evidence(record):
+        return {"source": {"method": method, "chars": len(doc.text), proof.COMMITMENT: canonical_hash(record)},
+                "coverage": doc.meta | {proof.KEY: record}}
+
+    positions = [asdict(row) for row in sentences]
+    for record in (original, expanded):
+        proof.verify_source(evidence(record), doc.text, doc.source_map, positions, metadata=doc.meta)
+    forged = deepcopy(expanded)
+    forged["ranges"][1]["basis"] = "pooled"
+    with pytest.raises(ValueError, match="invalid highlighted ranges"):
+        proof.verify_source(evidence(forged), doc.text, doc.source_map, positions, metadata=doc.meta)

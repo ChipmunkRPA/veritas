@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [local writing baseline replay](writing-local-baseline-transfer-2026-11-16.md#replay)
+recounts matches and ordinary alerts across two layouts for a retained
+panel and a separate source-group panel. It verifies that the app selects
+the same ranges when it uses the rounded responses saved in a report.
+
 The [longer two-second audio replay](audio-two-second-long-review-2026-11-16.md#reproduce)
 exports per-input truth and the selected ranges from three methods.
 It uses six editing systems, untouched audio from two corpora and six

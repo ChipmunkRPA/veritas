@@ -49,6 +49,7 @@
 {% for span in location.ranges %}<span class="mono">[{{ span[0] }}, {{ span[1] }})</span>{{ ', ' if not loop.last else '.' }}{% endfor %}</p>
 {% endfor %}
 {% endif %}
+{% if range.get('basis') == 'document_baseline' %}<p class="caption">{{ intervals.baseline_reason }}</p>{% endif %}
 <blockquote>{{ range.preview }}{% if range.end - range.start > range.preview | length %}…{% endif %}</blockquote>
 </div>
 {% endfor %}

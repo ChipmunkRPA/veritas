@@ -1,0 +1,252 @@
+{
+  "browser": {
+    "cases": [
+      {
+        "fixture": "street-dance-later_mirrored-avc-1080-2997-on",
+        "matched": true,
+        "seek_s": 5.238567,
+        "source_frames": [
+          31,
+          52,
+          157,
+          178
+        ]
+      },
+      {
+        "fixture": "street-dance-original-avc-1080-2997-on",
+        "matched": false
+      },
+      {
+        "fixture": "street-dance-in_place_mirror-avc-1080-2997-on",
+        "matched": false
+      },
+      {
+        "fixture": "hd-vcd-20-later_mirrored-webm-720-2997-on",
+        "matched": true,
+        "seek_s": 5.105,
+        "source_frames": [
+          36,
+          57,
+          153,
+          174
+        ]
+      },
+      {
+        "fixture": "hd-vcd-20-original-webm-720-2997-on",
+        "matched": false
+      },
+      {
+        "fixture": "hd-vcd-20-in_place_mirror-webm-720-2997-on",
+        "matched": false
+      },
+      {
+        "fixture": "vertical-bee-later_mirrored-hevc-portrait-30-on",
+        "matched": true,
+        "seek_s": null,
+        "source_frames": [
+          31,
+          52,
+          157,
+          178
+        ]
+      },
+      {
+        "fixture": "vertical-bee-original-hevc-portrait-30-on",
+        "matched": false
+      },
+      {
+        "fixture": "vertical-bee-in_place_mirror-hevc-portrait-30-on",
+        "matched": false
+      },
+      {
+        "fixture": "vertical-bee-later_mirrored-avc-portrait-23976-on",
+        "matched": true,
+        "seek_s": 5.213542,
+        "source_frames": [
+          24,
+          41,
+          125,
+          142
+        ]
+      },
+      {
+        "fixture": "vertical-bee-original-avc-portrait-23976-on",
+        "matched": false
+      },
+      {
+        "fixture": "vertical-bee-in_place_mirror-avc-portrait-23976-on",
+        "matched": false
+      }
+    ],
+    "page_errors": 0
+  },
+  "cases": [
+    {
+      "enabled": false,
+      "fixture": "street-dance-later_mirrored-avc-1080-2997-off",
+      "ranges_s": [],
+      "signed_original_verified": false,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "7560f7b402187e504d58492680520af5eba9fc5cb6f6a2945bc3c04456d4f6c1"
+    },
+    {
+      "enabled": true,
+      "fixture": "street-dance-later_mirrored-avc-1080-2997-on",
+      "ranges_s": [
+        [
+          1.034367,
+          1.735067
+        ],
+        [
+          5.238567,
+          5.939267
+        ]
+      ],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 4,
+      "source_sha256": "7560f7b402187e504d58492680520af5eba9fc5cb6f6a2945bc3c04456d4f6c1"
+    },
+    {
+      "enabled": true,
+      "fixture": "street-dance-original-avc-1080-2997-on",
+      "ranges_s": [],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "1f6ca100ef613bede56cde3779a14845e3e5370b12885d899c0f71dd4f9df92e"
+    },
+    {
+      "enabled": true,
+      "fixture": "street-dance-in_place_mirror-avc-1080-2997-on",
+      "ranges_s": [],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "481fbf3af1b7e048c31bec8ecd5fa46f4421a1c4a9212143a84d06b20da8af7b"
+    },
+    {
+      "enabled": false,
+      "fixture": "hd-vcd-20-later_mirrored-webm-720-2997-off",
+      "ranges_s": [],
+      "signed_original_verified": false,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "e752331310dbe1c825aad3537473e63a8a37dcad66ded5ac3bf24b6112995969"
+    },
+    {
+      "enabled": true,
+      "fixture": "hd-vcd-20-later_mirrored-webm-720-2997-on",
+      "ranges_s": [
+        [
+          1.201,
+          1.902
+        ],
+        [
+          5.105,
+          5.806
+        ]
+      ],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 4,
+      "source_sha256": "e752331310dbe1c825aad3537473e63a8a37dcad66ded5ac3bf24b6112995969"
+    },
+    {
+      "enabled": true,
+      "fixture": "hd-vcd-20-original-webm-720-2997-on",
+      "ranges_s": [],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "95920821a35d573c4ca8ea95610b42fc05c4efbab760883f5dca90a4c4c8cbef"
+    },
+    {
+      "enabled": true,
+      "fixture": "hd-vcd-20-in_place_mirror-webm-720-2997-on",
+      "ranges_s": [],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "f2f05df173e208ca7cf1f7c27c1d83d207ef8498bf2f0be37dfeb06a79282b1b"
+    },
+    {
+      "enabled": false,
+      "fixture": "vertical-bee-later_mirrored-hevc-portrait-30-off",
+      "ranges_s": [],
+      "signed_original_verified": false,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "32edbcc1de94b212424fd27a4c031e5697cc0ab3b59bb66f237bd6b75ccd54d4"
+    },
+    {
+      "enabled": true,
+      "fixture": "vertical-bee-later_mirrored-hevc-portrait-30-on",
+      "ranges_s": [
+        [
+          1.033333,
+          1.733333
+        ],
+        [
+          5.233333,
+          5.933333
+        ]
+      ],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 4,
+      "source_sha256": "32edbcc1de94b212424fd27a4c031e5697cc0ab3b59bb66f237bd6b75ccd54d4"
+    },
+    {
+      "enabled": true,
+      "fixture": "vertical-bee-original-hevc-portrait-30-on",
+      "ranges_s": [],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "bca4da3054363bbf477bf7dff040b57bc6596cbffd98c3e731332407137b1853"
+    },
+    {
+      "enabled": true,
+      "fixture": "vertical-bee-in_place_mirror-hevc-portrait-30-on",
+      "ranges_s": [],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "5f5ba036998504136fae407dceeccee368bcf8549885316f5405f1d81a9c201f"
+    },
+    {
+      "enabled": false,
+      "fixture": "vertical-bee-later_mirrored-avc-portrait-23976-off",
+      "ranges_s": [],
+      "signed_original_verified": false,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "521e6804214bb19b5fbcbb13dbfcbfcc1f2afb819fb0515796ef5f39f7345c52"
+    },
+    {
+      "enabled": true,
+      "fixture": "vertical-bee-later_mirrored-avc-portrait-23976-on",
+      "ranges_s": [
+        [
+          1.001,
+          1.710042
+        ],
+        [
+          5.213542,
+          5.922583
+        ]
+      ],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 4,
+      "source_sha256": "521e6804214bb19b5fbcbb13dbfcbfcc1f2afb819fb0515796ef5f39f7345c52"
+    },
+    {
+      "enabled": true,
+      "fixture": "vertical-bee-original-avc-portrait-23976-on",
+      "ranges_s": [],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "182cb509b674be5a91e85a5ed985b21c7201d1800255ce45f0f9fd29bb87733b"
+    },
+    {
+      "enabled": true,
+      "fixture": "vertical-bee-in_place_mirror-avc-portrait-23976-on",
+      "ranges_s": [],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "c4e9483a2e931053648675b711683f8db3c03be647bbbb3db683447a921c3238"
+    }
+  ],
+  "paid_analyses": 16,
+  "unchanged_assessment_on_matched_pairs": true,
+  "unpaid_jobs": 0
+}

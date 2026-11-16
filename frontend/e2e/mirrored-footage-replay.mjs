@@ -19,7 +19,7 @@ try {
     await coverage.waitFor()
     const finding = page.locator('#media-evidence-VPR06')
     if (!row.matched) {
-      await coverage.getByText('No mirrored repeat was found in the first 225 frames.', { exact: true }).waitFor()
+      await coverage.getByText(`No mirrored repeat was found in the first ${row.checked_frames} frames.`, { exact: true }).waitFor()
       assert.equal(await finding.count(), 0)
       cases.push({ fixture: row.name, matched: false })
       continue
@@ -39,17 +39,20 @@ try {
         await element.decode()
         return [element.naturalWidth, element.naturalHeight]
       })
-      assert.deepEqual(dimensions, [640, 360])
+      assert.deepEqual(dimensions, row.dimensions)
       await finding.getByRole('button', { name: `Go to frame ${frame.frame_index} in playback`, exact: true }).waitFor()
     }
-    const anchor = row.frames[2]
-    await finding.getByRole('button', { name: `Go to frame ${anchor.frame_index} in playback`, exact: true }).click()
-    const player = page.getByLabel('Original video evidence playback')
-    await page.waitForFunction(({ selector, time }) => {
-      const video = document.querySelector(selector)
-      return video && video.readyState >= 1 && !video.seeking && Math.abs(video.currentTime - time) < .002
-    }, { selector: 'video[aria-label="Original video evidence playback"]', time: anchor.playback_time_s })
-    const seek = await player.evaluate(element => element.currentTime)
+    let seek = null
+    if (row.seek_verified_in_browser) {
+      const anchor = row.frames[2]
+      await finding.getByRole('button', { name: `Go to frame ${anchor.frame_index} in playback`, exact: true }).click()
+      const player = page.getByLabel('Original video evidence playback')
+      await page.waitForFunction(({ selector, time }) => {
+        const video = document.querySelector(selector)
+        return video && video.readyState >= 1 && !video.seeking && Math.abs(video.currentTime - time) < .002
+      }, { selector: 'video[aria-label="Original video evidence playback"]', time: anchor.playback_time_s })
+      seek = await player.evaluate(element => element.currentTime)
+    }
     await finding.screenshot({ path: path.join(input.output, `${row.name}-browser.png`), animations: 'disabled' })
     cases.push({ fixture: row.name, matched: true, source_frames: row.frames.map(frame => frame.frame_index), seek_s: seek })
   }

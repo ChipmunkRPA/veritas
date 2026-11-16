@@ -387,6 +387,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     motion_encoding = None
     motion_limit = 0
     motion_reads = []
+    motion_descriptor = picture_motion.descriptor
     if motion_records:
         delivery = delivery if delivery is not None else probe_container(original)
         motion_encoding = delivery.get("codec"), delivery.get("pix_fmt")
@@ -399,9 +400,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 raise ValueError("The original video differs from its motion comparison source profile")
             motion_reads.append((record, exact_review, profile))
             motion_limit = max(motion_limit, profile[1])
+            if record["schema"] == picture_sequence.MOTION_REFLECTED_HD_SCHEMA:
+                motion_descriptor = picture_motion.hd_descriptor
     extended = "continuity_breaks" in hold
     hold_frames = 0
-    if extended or sequence is not None or local_mouth is not None:
+    if extended or sequence is not None or local_mouth is not None or motion_records:
         picture_hold_binding.validate_source_clock(evidence, table.pts, table.interpolated)
         hold_frames = hold["frames_scanned"]
     pictures, mouths, faces, scenes = defaultdict(list), defaultdict(list), defaultdict(list), defaultdict(list)
@@ -465,7 +468,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError("The original video's codec or carrier differs from its guarded face-review scope")
     elif guarded_records:
         raise ValueError("Guarded face evidence requires its dedicated version")
-    indices = set(pictures) | set(mouths) | set(faces) | set(scenes) | set(range(hold_frames)) | set(timing_frames)
+    reading_limit = max(hold_frames, motion_limit)
+    indices = set(pictures) | set(mouths) | set(faces) | set(scenes) | set(range(reading_limit)) | set(timing_frames)
     hold_observations = []
     motion_descriptors = []
     mouth_pictures = []
@@ -481,10 +485,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 x, y, right, bottom = row["mouth_box"]
                 if hashlib.sha256(frame.rgb[y:bottom, x:right].tobytes()).hexdigest() != row["mouth_crop_sha256"]:
                     raise ValueError("The original video does not reproduce the recorded timing crop")
-            if index < hold_frames:
+            if index < reading_limit:
                 hold_observations.append((frame.pts if frame.pts_verified else None, rgb_sha))
             if index < motion_limit:
-                motion_descriptors.append(picture_motion.descriptor(frame.rgb))
+                motion_descriptors.append(motion_descriptor(frame.rgb))
             if index < mouth_limit:
                 _frame_anchor(frame, local_mouth["pts"][index], local_mouth["frame_hashes"][index], "Mouth-region input", rgb_sha)
                 mouth_pictures.append(frame.rgb)
@@ -517,10 +521,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if _sha(original) != digest:
         raise ValueError("The supplied original changed during decoding")
     if extended:
-        _verify_picture_hold(evidence, table, hold_observations)
-    if sequence is not None and canonical_hash(picture_sequence.scan(hold_observations, table.tb)) != canonical_hash(sequence):
+        _verify_picture_hold(evidence, table, hold_observations[:hold_frames])
+    if sequence is not None and canonical_hash(picture_sequence.scan(hold_observations[:hold_frames], table.tb)) != canonical_hash(sequence):
         raise ValueError("The original video does not reproduce its repeated moving-picture sequences")
-    if reverse_sequence is not None and canonical_hash(picture_sequence.scan(hold_observations, table.tb, reverse=True)) != canonical_hash(reverse_sequence):
+    if reverse_sequence is not None and canonical_hash(picture_sequence.scan(hold_observations[:hold_frames], table.tb, reverse=True)) != canonical_hash(reverse_sequence):
         raise ValueError("The original video does not reproduce its reversed moving-picture sequences")
     for record, exact_review, profile in motion_reads:
         if record["schema"] == picture_sequence.MOTION_EXTENDED_SCHEMA:
@@ -531,8 +535,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             if opening["status"] != "no_match":
                 raise ValueError("The extended motion comparison displaced an opening result")
         limit = profile[1]
+        exact_pair = exact_review["pair"] if exact_review is not None else None
         reproduced = picture_motion.scan(hold_observations[:limit], motion_descriptors[:limit], table.tb, motion_encoding,
-                                         exact_review["pair"], source_profile=profile, schema=record["schema"])
+                                         exact_pair, source_profile=profile, schema=record["schema"])
         if canonical_hash(reproduced) != canonical_hash(record):
             raise ValueError("The original video does not reproduce its similar moving-picture sequences")
     if local_mouth is not None:

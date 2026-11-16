@@ -204,7 +204,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       <p className="mt-2 mb-0 text-small">{reflectedMotion.status === 'matched'
         ? <a className="underline" href="#media-evidence-VPR06">Inspect both source ranges and frames</a>
         : reflectedMotion.status === 'no_match' ? `No mirrored repeat was found in the first ${reflectedMotion.frames_scanned} frames.`
-        : 'This check needs regular, verified source timestamps throughout the first nine seconds.'}</p>
+        : 'This check needs regular, verified source timestamps throughout the checked opening frames.'}</p>
     </section>}
     {!!set.coverage?.brief_face_review?.observations.length && <section aria-labelledby="video-brief-face-coverage-heading"
       className="mt-4 rounded-md border border-border p-4">

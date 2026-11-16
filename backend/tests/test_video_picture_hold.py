@@ -93,7 +93,8 @@ def _mouth_source(path, monkeypatch, *, hd):
 
 
 @pytest.mark.parametrize("case", ["opening_hold", "later_hold", "moving_sequence", "reverse_sequence", "lossy_reverse", "lossy_sequence", "lossy_sequence_360p",
-                                   "lossy_sequence_360p_late", "retimed_sequence", "reflected_sequence", "mouth_hold", "mouth_hold_hd"])
+                                   "lossy_sequence_360p_late", "retimed_sequence", "reflected_sequence", "reflected_hd",
+                                   "mouth_hold", "mouth_hold_hd"])
 def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monkeypatch, case, request):
     mouth = case in {"mouth_hold", "mouth_hold_hd"}
     hd = case == "mouth_hold_hd"
@@ -101,11 +102,12 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
     extension = case == "lossy_sequence_360p_late"
     lossy_reverse = case == "lossy_reverse"
     retimed = case == "retimed_sequence"
-    reflected = case == "reflected_sequence"
+    reflected_hd = case == "reflected_hd"
+    reflected = case == "reflected_sequence" or reflected_hd
     lossy = case.startswith("lossy_sequence") or lossy_reverse or retimed or reflected
     reverse = case == "reverse_sequence"
     repeated, late = mouth or lossy or reverse or case == "moving_sequence", case != "opening_hold"
-    path = tmp_path / ("native-picture.mp4" if mouth or retimed or reflected else "exact-hold.mkv")
+    path = tmp_path / ("hd-picture.webm" if reflected_hd else "native-picture.mp4" if mouth or retimed or reflected else "exact-hold.mkv")
     if mouth:
         _mouth_source(path, monkeypatch, hd=hd)
     elif lossy:
@@ -116,9 +118,21 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
             indices = [26, 66, 144, 164]
         elif reflected:
             source = np.frombuffer(_motion_raster(226), dtype=np.uint8).reshape(226, -1)
-            frames, _ = reflected_delivery(source, 26, 144, 23, "later_mirrored")
-            encode_speed(path, frames)
-            indices = [26, 48, 144, 166]
+            if reflected_hd:
+                frames, _ = reflected_delivery(source, 26, 143, 22, "later_mirrored")
+                master = tmp_path / "source.mp4"
+                encode_speed(master, frames)
+                subprocess.run([
+                    "ffmpeg", "-nostdin", "-v", "error", "-threads", "2", "-i", str(master), "-an",
+                    "-vf", "scale=1280:720,settb=1/120000,setpts=N*4004", "-r", "30000/1001", "-fps_mode", "cfr",
+                    "-c:v", "libvpx-vp9", "-crf", "18", "-b:v", "0", "-deadline", "good", "-cpu-used", "6",
+                    "-threads", "2", str(path),
+                ], check=True, timeout=60)
+                indices = [26, 47, 143, 164]
+            else:
+                frames, _ = reflected_delivery(source, 26, 144, 23, "later_mirrored")
+                encode_speed(path, frames)
+                indices = [26, 48, 144, 166]
         elif extension:
             indices = late_authored(_motion_raster(450), path, 0, "late_cross", "h264")
         elif high_res:
@@ -135,7 +149,7 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
     store = ObjectStore(tmp_path / "objects")
     original = store.put_file(path)
     origin = 0. if lossy or mouth else 5.
-    encoding = ("h264", "yuv420p") if lossy or mouth else None
+    encoding = (("vp9" if reflected_hd else "h264"), "yuv420p") if lossy or mouth else None
     scan = picture_hold.inspect(store.path_for(original.sha256), table, origin=origin, sequence_review=repeated,
                                 motion_encoding=encoding, mouth_review=mouth, retimed_review=retimed,
                                 reflected_review=reflected)
@@ -164,8 +178,9 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
                       if lossy_reverse else "motion_sequence_review")
         motion = coverage[motion_key]
         assert motion["status"] == "matched" and motion["frames_scanned"] == (450 if extension else 225 if high_res or retimed or reflected else 180)
-        assert motion["parameters"]["frame_rate"] == (25 if high_res or retimed or reflected else 20)
-        expected_schema = (picture_sequence.MOTION_REFLECTED_SCHEMA if reflected else picture_sequence.MOTION_RETIMED_SCHEMA if retimed else picture_sequence.MOTION_REVERSE_SCHEMA if lossy_reverse else
+        assert motion["parameters"]["frame_rate"] == ("30000/1001" if reflected_hd else 25 if high_res or retimed or reflected else 20)
+        expected_schema = (picture_sequence.MOTION_REFLECTED_HD_SCHEMA if reflected_hd
+                           else picture_sequence.MOTION_REFLECTED_SCHEMA if reflected else picture_sequence.MOTION_RETIMED_SCHEMA if retimed else picture_sequence.MOTION_REVERSE_SCHEMA if lossy_reverse else
                            picture_sequence.MOTION_EXTENDED_SCHEMA if extension else picture_sequence.MOTION_SCHEMA)
         assert motion["schema"] == expected_schema
         match = motion["pair"]
@@ -192,7 +207,8 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
     database = create_engine("sqlite://")
     Base.metadata.create_all(database)
     with Session(database) as db:
-        analysis = Analysis(id="video-picture-hold", kind="video", filename=path.name, content_type="video/mp4" if mouth else "video/x-matroska",
+        content_type = "video/webm" if reflected_hd else "video/mp4" if mouth else "video/x-matroska"
+        analysis = Analysis(id="video-picture-hold", kind="video", filename=path.name, content_type=content_type,
                             size_bytes=original.size_bytes, sha256=original.sha256, status="done", revision=1,
                             result_schema_version=2)
         db.add(analysis)
@@ -272,9 +288,11 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
                     binding.validate(altered)
             if extension or retimed or reflected:
                 interrupted = list(table.pts)
-                interrupted[400 if extension else 27] += 1
+                interrupted[400 if extension else 27] += 12 if reflected_hd else 1
                 with pytest.raises(ValueError, match="complete verified native clock"):
                     picture_sequence.validate_clock(motion, interrupted, (), tb=table.tb)
+            if reflected_hd:
+                assert [m["value"] for m in packet["measurements"][1:]] == [.7, .701]
         for frame in packet["frames"]:
             ref = packet["artifacts"][frame["artifact_refs"]["original"]]
             asset = service.asset_refs(document)[ref["sha256"]]
@@ -317,7 +335,8 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
                 assert "twice the speed" in text
             elif reflected:
                 assert "Similar footage flipped left to right" in text and "VPR06" in text
-                assert "Mirrored ranges 1.040-1.920 s and 5.760-6.640 s" in text
+                location = "0.868-1.568 s and 4.771-5.472 s" if reflected_hd else "1.040-1.920 s and 5.760-6.640 s"
+                assert f"Mirrored ranges {location}" in text
                 assert "matching picture changes support the comparison" in text
             elif lossy:
                 assert "Similar repeated moving sequences" in text and "VPR02" in text

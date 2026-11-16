@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [HD mirrored footage replay](video-mirrored-hd-2026-11-16.md#replay)
+offers six video delivery profiles and 144 numeric outcomes covering
+landscape, portrait, fractional rates, and paired re-encodes. The
+independent readback compares each reported image and timestamp with
+the original.
+
 The [mirrored footage replay](video-mirrored-sequence-2026-11-16.md#replay)
 compares the existing repeat checks and the added reflection check
 on 198 deliveries from eleven camera recordings. The portable check

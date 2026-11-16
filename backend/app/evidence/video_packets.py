@@ -574,7 +574,7 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
         packet_id = picture_sequence.MOTION_RETIMED_PACKET_ID
         title = "Footage repeated at two playback speeds"
         selection = "longest_two_to_one_pair_of_similar_moving_sequences"
-    if review["schema"] == picture_sequence.MOTION_REFLECTED_SCHEMA:
+    if review["schema"] in picture_sequence.MOTION_REFLECTED_SCHEMAS:
         packet_id = picture_sequence.MOTION_REFLECTED_PACKET_ID
         title = "Similar footage flipped left to right"
         selection = "longest_pair_of_similar_reflected_moving_sequences"
@@ -608,6 +608,12 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
                        "It tests a two-to-one speed ratio and can miss changes in framing or other speed ratios.")
         measurements = [{"label": f"{label} range duration", "value": pair["span_s"] * pair["frame_steps"][side], "unit": "seconds"}
                         for side, label in (("first", "First"), ("second", "Second"))]
+    elif review["schema"] == picture_sequence.MOTION_REFLECTED_HD_SCHEMA:
+        limitations = (f"The check compares whole-picture appearance and motion in the first {motion_limit} native frames. "
+                       "Changes in speed, framing or the recorded motion can affect the match.")
+        tb = parse_time_base(source["time_base"])
+        measurements = [{"label": f"{side.title()} range duration", "value": float((pair[side]["pts"][-1] - pair[side]["pts"][0]) * tb),
+                         "unit": "seconds"} for side in ("first", "second")]
     else:
         limitations = (f"The comparison checks whole-picture appearance and motion in the first {motion_limit} frames. "
                        "It can miss edits that change speed, framing or the motion pattern." if motion else

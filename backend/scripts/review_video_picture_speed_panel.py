@@ -10,7 +10,7 @@ from fractions import Fraction
 from pathlib import Path
 
 
-def _reproduce_anchors(path, anchors):
+def _reproduce_anchors(path, anchors, *, count=225):
     with path.open("rb") as stream:
         digest = hashlib.file_digest(stream, "sha256").hexdigest()
     probe = json.loads(subprocess.check_output(
@@ -24,7 +24,7 @@ def _reproduce_anchors(path, anchors):
          "-hash", "sha256", "-"], text=True, timeout=20,
     )
     observed = [line.rsplit(",", 1)[-1].strip() for line in hashes.splitlines() if not line.startswith("#")]
-    assert len(clock) == len(observed) == 225, path.name
+    assert len(clock) == len(observed) == count, path.name
     for index, tick, pixel_digest in anchors:
         assert (clock[index], observed[index]) == (tick, pixel_digest), (path.name, index)
     return digest

@@ -43,6 +43,11 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
     extended_profile = (picture_motion.profile(table, motion_encoding, schema=picture_sequence.MOTION_EXTENDED_SCHEMA)
                         if motion_profile is not None else None)
     motion_limit = (extended_profile or motion_profile or (0, 0))[1]
+    hd_schema = picture_sequence.MOTION_REFLECTED_HD_SCHEMA
+    hd_profile = (picture_motion.profile(table, motion_encoding, schema=hd_schema)
+                  if reflected_review and sequence_review else None)
+    descriptor = picture_motion.hd_descriptor if hd_profile else picture_motion.descriptor
+    descriptor_limit = hd_profile[1] if hd_profile else motion_limit
     started = time.monotonic()
     timeout = DECODE_TIMEOUT_S if remaining_s is None else min(DECODE_TIMEOUT_S, remaining_s - 1.0)
     if timeout < 0.5 and limit:
@@ -71,8 +76,8 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                     observed.append((point, digest))
                 if frame.index < mouth_count:
                     mouth_frames.append(frame.rgb)
-                if frame.index < motion_limit:
-                    descriptors.append(picture_motion.descriptor(frame.rgb))
+                if frame.index < descriptor_limit:
+                    descriptors.append(descriptor(frame.rgb))
                 if scanned == opening_limit and limit > opening_limit:
                     opening = _result(table, origin, opening_limit, scanned, last_pts, longest, best)
     except (DecodeError, TimeoutExpired):
@@ -82,6 +87,9 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
     else:
         result = _result(table, origin, limit, scanned, last_pts, longest, best, breaks=breaks if limit > opening_limit else None)
     cover = result["coverage"]
+    if hd_profile and len(observed) >= descriptor_limit and (remaining_s is None or remaining_s - (time.monotonic() - started) > 1.0):
+        cover[picture_sequence.MOTION_REFLECTED_KEY] = picture_motion.scan(
+            observed[:descriptor_limit], descriptors, tb, motion_encoding, None, source_profile=hd_profile, schema=hd_schema)
     if sequence_review and 0 < cover["frames_scanned"] == cover["frame_limit"]:
         cover["scan_scope"] = picture_sequence.SCAN_SCOPE
         scanned_prefix = observed[:cover["frames_scanned"]]

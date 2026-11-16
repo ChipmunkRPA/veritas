@@ -5,6 +5,7 @@ from fractions import Fraction
 from itertools import pairwise
 
 import numpy as np
+from PIL import Image
 
 from app.core.canonical import canonical_hash
 from app.detectors.video import picture_speed
@@ -16,6 +17,8 @@ def profile(table, encoding, *, schema=binding.MOTION_SCHEMA):
     if (not binding.motion_encoding_allowed(schema, encoding) or table.rotation
             or dimensions != (table.coded_width, table.coded_height)):
         return None
+    if schema == binding.MOTION_REFLECTED_HD_SCHEMA:
+        return binding.hd_profile(dimensions, table.pts, table.tb)
     supported = binding.motion_profile(dimensions, schema)
     if supported is None or len(table) < supported[1]:
         return None
@@ -32,6 +35,11 @@ def descriptor(rgb):
     height, width = rgb.shape[:2]
     means = rgb.reshape(30, height // 30, 40, width // 40, 3).mean(axis=(1, 3), dtype=np.float64)
     return (means @ np.array([77., 150., 29.]) / 256).reshape(-1)
+
+
+def hd_descriptor(rgb):
+    grid = Image.fromarray(rgb).resize((40, 30), Image.Resampling.BOX)
+    return (np.asarray(grid) @ np.array([77., 150., 29.]) / 256).reshape(-1)
 
 
 def _segments(indices, step):
@@ -143,9 +151,14 @@ def scan(observations, values, tb, encoding, exact_pair, *, source_profile, sche
         return result
     ticks, hashes = zip(*observations, strict=True)
     step = Fraction(1, frame_rate)
-    if any(tick is None for tick in ticks) or any((b - a) * tb != step for a, b in pairwise(ticks)):
+    hd = schema == binding.MOTION_REFLECTED_HD_SCHEMA
+    if hd:
+        clock_ok = binding.hd_clock_matches(ticks, tb, frame_rate)
+    else:
+        clock_ok = all(tick is not None for tick in ticks) and all((b - a) * tb == step for a, b in pairwise(ticks))
+    if not clock_ok:
         return result
-    reflected = schema == binding.MOTION_REFLECTED_SCHEMA
+    reflected = schema in binding.MOTION_REFLECTED_SCHEMAS
     if exact_pair is not None and not reflected:
         return result | {"reason": "exact_sequence"}
     reverse = schema == binding.MOTION_REVERSE_SCHEMA
@@ -171,7 +184,9 @@ def scan(observations, values, tb, encoding, exact_pair, *, source_profile, sche
         spans[name] = {"start_frame_index": start, "end_frame_index": end, "pts": pts,
                        "start_stream_s": float(pts[0] * tb), "end_stream_s": float(pts[-1] * tb),
                        "endpoint_rgb_sha256": [digests[0], digests[-1]], "rgb_sequence_sha256": canonical_hash(digests)}
-    pair = spans | {"frame_count": count, "span_s": float(Fraction(count - 1, frame_rate)), "supporting_edge_offsets": supports}
+    first = spans["first"]["pts"]
+    span = (first[-1] - first[0]) * tb if hd else (count - 1) * step
+    pair = spans | {"frame_count": count, "span_s": float(span), "supporting_edge_offsets": supports}
     if reverse:
         pair["order"] = "reverse"
     if retimed:

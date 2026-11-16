@@ -32,10 +32,11 @@ BASELINE_KEYS = ("sequence_review", binding.REVERSE_KEY, "motion_sequence_review
                  binding.MOTION_REVERSE_KEY, binding.MOTION_RETIMED_KEY)
 
 
-def mirror(pictures):
+def mirror(pictures, *, dimensions=(WIDTH, HEIGHT)):
     output = np.empty_like(pictures)
     start = 0
-    for width, height in ((WIDTH, HEIGHT), (WIDTH // 2, HEIGHT // 2), (WIDTH // 2, HEIGHT // 2)):
+    w, h = dimensions
+    for width, height in ((w, h), (w // 2, h // 2), (w // 2, h // 2)):
         end = start + width * height
         plane = pictures[:, start:end].reshape(len(pictures), height, width)
         output[:, start:end] = plane[:, :, ::-1].reshape(len(pictures), -1)

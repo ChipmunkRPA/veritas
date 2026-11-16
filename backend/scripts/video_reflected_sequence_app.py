@@ -16,18 +16,20 @@ from scripts.writing_character_view_app import tokens_assessed
 ROOT = Path(__file__).resolve().parents[2]
 KEY = binding.MOTION_REFLECTED_KEY
 PACKET = binding.MOTION_REFLECTED_PACKET_ID
+MIME = {".mp4": "video/mp4", ".webm": "video/webm", ".mov": "video/quicktime"}
+HD_REPLAY_PROFILES = ("avc-1080-2997", "webm-720-2997", "hevc-portrait-30", "avc-portrait-23976")
 
 
-def examples(rows):
-    for codec in ("h264", "vp9"):
-        positive = next(row for row in rows if row["codec"] == codec and row["role"] == "later_mirrored" and row["exact"]
-                        and all(other["reflected"] is None for other in rows
-                                if (other["source"], other["codec"]) == (row["source"], codec)
-                                and other["role"] in {"original", "in_place_mirror"}))
+def examples(rows, groups):
+    for label in groups:
+        group = [row for row in rows if row.get("delivery_profile", row["codec"]) == label]
+        positive = next(row for row in group if row["role"] == "later_mirrored" and row["exact"]
+                        and all(other["reflected"] is None for other in group
+                                if other["source"] == row["source"] and other["role"] in {"original", "in_place_mirror"}))
         yield positive, False
         yield positive, True
         for role in ("original", "in_place_mirror"):
-            yield next(row for row in rows if (row["source"], row["codec"], row["role"]) == (positive["source"], codec, role)), True
+            yield next(row for row in group if (row["source"], row["role"]) == (positive["source"], role)), True
 
 
 def exports(client, aid, evidence, original, packet, output):
@@ -46,7 +48,7 @@ def exports(client, aid, evidence, original, packet, output):
         for frame in packet["frames"]:
             asset = packet["artifacts"][frame["artifact_refs"]["original"]]
             signature = image_signature(fetch(client, asset["url"]))
-            assert signature == ((640, 360), frame["anchor"]["decoded_rgb_sha256"])
+            assert signature == ((evidence["source"]["width"], evidence["source"]["height"]), frame["anchor"]["decoded_rgb_sha256"])
             images.add(signature)
         with pymupdf.open(stream=pdf, filetype="pdf") as document:
             words = " ".join(" ".join(page.get_text().split()) for page in document)
@@ -70,7 +72,7 @@ def exports(client, aid, evidence, original, packet, output):
     return len(packet["frames"]) if packet else 0
 
 
-def run(clips, held, output, browser):
+def run(clips, held, output, browser, *, groups=("h264", "vp9")):
     configure(output, ROOT)
     os.environ.update(VERITAS_ENVIRONMENT="dev", VERITAS_FRONTEND_DIR=str(ROOT / "frontend/dist"),
                       VERITAS_VIDEO_RETIMED_SEQUENCE_REVIEW="true", VERITAS_LOG_LEVEL="WARNING")
@@ -99,19 +101,19 @@ def run(clips, held, output, browser):
             key, _ = auth.issue_api_key(db, examiner)
             db.commit()
         client.headers["X-API-Key"] = key
-        for row, enabled in examples(held):
+        for row, enabled in examples(held, groups):
             settings.video_reflected_sequence_review = enabled
-            source = clips / row["delivery"]
+            profile = row.get("delivery_profile")
+            source = clips / (profile or "") / row["delivery"]
             assert sha_path(source) == row["sha256"]
-            aid = checkout(client, stub, source, media_type="video/mp4" if source.suffix == ".mp4" else "video/webm",
-                           filename=source.name)
+            aid = checkout(client, stub, source, media_type=MIME[source.suffix], filename=source.name)
             route = f"/api/v2/analyses/{aid}"
             evidence = body(client.get(f"{route}/evidence-packets"))
             exported = fetch(client, f"/api/analyses/{aid}/export.json")
             for public in (exported, fetch(client, route)):
                 scan(public.decode())
             assert json.loads(exported)["evidence"] == evidence
-            name = f"{source.stem}-{row['codec']}-{'on' if enabled else 'off'}"
+            name = f"{source.stem}-{profile or row['codec']}-{'on' if enabled else 'off'}"
             check = evidence["picture_hold"].get(KEY)
             assert (check is not None) == enabled
             packets = [packet for packet in evidence["packets"] if packet["id"] == PACKET]
@@ -120,6 +122,7 @@ def run(clips, held, output, browser):
             packet = packets[0] if packets else None
             if check:
                 assert check["status"] == ("matched" if positive else "no_match")
+                assert check["schema"] == (binding.MOTION_REFLECTED_HD_SCHEMA if profile else binding.MOTION_REFLECTED_SCHEMA)
             if packet:
                 assert packet["affects_overall_confidence"] is False
                 assert list(binding.endpoints(packet["picture_sequence"])) == [tuple(anchor) for anchor in row["anchors"]]
@@ -135,6 +138,8 @@ def run(clips, held, output, browser):
                              "source_frames_in_pdf": count, "signed_original_verified": enabled})
             if enabled:
                 browser_cases.append({"analysis_id": aid, "name": name, "matched": positive, "ranges_s": clock,
+                                      "checked_frames": check["frames_scanned"], "seek_verified_in_browser": row["codec"] != "hevc",
+                                      "dimensions": [evidence["source"][key] for key in ("width", "height")],
                                       "frames": [entry["anchor"] for entry in packet["frames"]] if packet else []})
             print(name, clock, flush=True)
         ui = browser_check(output, app, key, browser_cases, scenario="mirrored-footage-replay.mjs") if browser else None
@@ -148,5 +153,12 @@ if __name__ == "__main__":
     parser.add_argument("receipt", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--browser", action="store_true")
+    parser.add_argument("--hd", action="store_true", help="Use the combined numeric panel for the HD replay")
     args = parser.parse_args()
-    run(args.clips, json.loads(args.receipt.read_text())["cases"], args.output, args.browser)
+    receipt = json.loads(args.receipt.read_text())
+    if args.hd:
+        rows = [row | {"delivery_profile": panel["delivery_profile"], "codec": panel["method"]["codec"]}
+                for panel in receipt["profiles"] for row in panel["cases"]]
+        run(args.clips, rows, args.output, args.browser, groups=HD_REPLAY_PROFILES)
+    else:
+        run(args.clips, receipt["cases"], args.output, args.browser)

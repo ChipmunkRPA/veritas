@@ -25,6 +25,8 @@ MOTION_EXTENDED_SCHEMA = "chipmunk.video-motion-sequence/2"
 MOTION_REVERSE_SCHEMA = "chipmunk.video-reverse-motion-sequence/1"
 MOTION_RETIMED_SCHEMA = "chipmunk.video-retimed-motion-sequence/1"
 MOTION_REFLECTED_SCHEMA = "chipmunk.video-reflected-motion-sequence/1"
+MOTION_REFLECTED_HD_SCHEMA = "chipmunk.video-reflected-motion-sequence/2"
+MOTION_REFLECTED_SCHEMAS = frozenset({MOTION_REFLECTED_SCHEMA, MOTION_REFLECTED_HD_SCHEMA})
 MOTION_SCHEMAS = frozenset({MOTION_SCHEMA, MOTION_EXTENDED_SCHEMA})
 MOTION_PACKET_ID = "VPR02"
 MOTION_REVERSE_KEY = "reverse_motion_sequence_review"
@@ -41,12 +43,17 @@ MOTION_REVIEWS = (
     ("motion_sequence_review", MOTION_PACKET_ID, MOTION_SCHEMAS),
     (MOTION_REVERSE_KEY, MOTION_REVERSE_PACKET_ID, frozenset({MOTION_REVERSE_SCHEMA})),
     (MOTION_RETIMED_KEY, MOTION_RETIMED_PACKET_ID, frozenset({MOTION_RETIMED_SCHEMA})),
-    (MOTION_REFLECTED_KEY, MOTION_REFLECTED_PACKET_ID, frozenset({MOTION_REFLECTED_SCHEMA})),
+    (MOTION_REFLECTED_KEY, MOTION_REFLECTED_PACKET_ID, MOTION_REFLECTED_SCHEMAS),
 )
 MOTION_PROFILES = {(320, 180): (20, 180), (640, 360): (25, 225)}
 MOTION_EXTENDED_PROFILES = {(640, 360): (25, 450)}
 MOTION_360P_PROFILES = {(640, 360): (25, 225)}
 MOTION_ENCODINGS = {("h264", "yuv420p"), ("vp9", "yuv420p")}
+HD_ENCODINGS = MOTION_ENCODINGS | {("hevc", "yuv420p")}
+HD_DIMENSIONS = frozenset({(1280, 720), (1920, 1080), (720, 1280), (1080, 1920)})
+HD_RATES = tuple(Fraction(rate) for rate in ("24", "24000/1001", "25", "30", "30000/1001"))
+HD_PREFIX_S = 8
+HD_MINIMUM_S = 2
 MOTION_PARAMETERS = {
     "luma_grid": [40, 30], "maximum_picture_rms": 1.6, "minimum_motion_rms": .4,
     "minimum_motion_cosine": .65, "minimum_motion_rms_ratio": .55, "minimum_supporting_edges": 8,
@@ -66,6 +73,8 @@ def motion_profile(dimensions, schema):
 
 
 def motion_encoding_allowed(schema, encoding):
+    if schema == MOTION_REFLECTED_HD_SCHEMA:
+        return tuple(encoding or ()) in HD_ENCODINGS
     return tuple(encoding or ()) in (MOTION_ENCODINGS if schema != MOTION_RETIMED_SCHEMA else {("h264", "yuv420p")})
 
 
@@ -73,10 +82,38 @@ def motion_parameters(schema, rate):
     parameters = MOTION_PARAMETERS | {"frame_rate": rate}
     if schema == MOTION_RETIMED_SCHEMA:
         parameters["native_frame_steps"] = [1, 2]
-    if schema == MOTION_REFLECTED_SCHEMA:
+    if schema in MOTION_REFLECTED_SCHEMAS:
         parameters.update(maximum_picture_rms=2.4, minimum_unflipped_picture_rms=4.8,
                           spatial_transform=HORIZONTAL_REFLECTION)
+    if schema == MOTION_REFLECTED_HD_SCHEMA:
+        parameters.update(frame_rate=str(rate), minimum_motion_rms=float(Fraction(10) / rate),
+                          descriptor="box_rgb8_luminance")
     return parameters
+
+
+def hd_frame_limit(dimensions, count, rate):
+    limit = min(count, math.ceil(HD_PREFIX_S * rate))
+    return limit if dimensions in HD_DIMENSIONS and rate in HD_RATES and limit >= math.ceil(HD_MINIMUM_S * rate) else 0
+
+
+def hd_clock_matches(pts, tb, rate):
+    """Check cadence while leaving measured, possibly rounded, timestamp ticks intact."""
+    if not pts or any(type(point) is not int for point in pts) or not 0 < tb <= Fraction(1, 1000):
+        return False
+    step = 1 / (tb * rate)
+    first = pts[0]
+    # At most one tick of relative error from rounding the first and current timestamp.
+    tolerance = step.denominator - 1
+    return all(abs((point - first) * step.denominator - index * step.numerator) <= tolerance
+               for index, point in enumerate(pts))
+
+
+def hd_profile(dimensions, pts, tb):
+    for rate in HD_RATES:
+        limit = hd_frame_limit(dimensions, len(pts), rate)
+        if limit and hd_clock_matches(pts[:limit], tb, rate):
+            return rate, limit
+    return None
 
 
 def _steps(ticks, tb):
@@ -276,8 +313,22 @@ def _validate_motion_scope(record, source, exact, scanned, *, schemas):
     if record is None:
         return None
     schema = record["schema"]
-    profile = motion_profile((source["width"], source["height"]), schema)
-    _require(schema in schemas and profile is not None, "Motion sequence has unsupported source dimensions or method")
+    dimensions = source["width"], source["height"]
+    _require(schema in schemas, "Motion sequence has an unsupported method")
+    if schema == MOTION_REFLECTED_HD_SCHEMA:
+        rate_string = record["parameters"]["frame_rate"]
+        _require(rate_string in {str(rate) for rate in HD_RATES}, "HD motion sequence has an unsupported clock")
+        rate = Fraction(rate_string)
+        limit = hd_frame_limit(dimensions, source["frame_count"], rate)
+        expected = canonical_hash(motion_parameters(schema, rate))
+        _require(limit > 0 and canonical_hash(record["parameters"]) == expected
+                 and motion_encoding_allowed(schema, record["encoding"]), "HD motion sequence has unsupported source scope or parameters")
+        _require((record["status"] == "unavailable" and record["frames_scanned"] == 0 and record["reason"] == "source_clock")
+                 or (record["status"] != "unavailable" and record["frames_scanned"] == limit and record["reason"] is None),
+                 "HD motion sequence has invalid scan coverage")
+        return rate
+    profile = motion_profile(dimensions, schema)
+    _require(profile is not None, "Motion sequence has unsupported source dimensions")
     rate, limit = profile
     _require(exact is not None and scanned >= limit and record["parameters"] == motion_parameters(schema, rate)
              and motion_encoding_allowed(schema, record["encoding"]), "Motion sequence has unsupported source scope or parameters")
@@ -307,7 +358,8 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
     pair = record["pair"]
     reverse = schema in {REVERSE_SCHEMA, MOTION_REVERSE_SCHEMA}
     retimed = schema == MOTION_RETIMED_SCHEMA
-    reflected = schema == MOTION_REFLECTED_SCHEMA
+    reflected = schema in MOTION_REFLECTED_SCHEMAS
+    hd = schema == MOTION_REFLECTED_HD_SCHEMA
     _require(len(packets) == 1 and packets[0].get("picture_sequence") == pair,
              "Repeated sequence omits the recorded pair")
     _require(("supporting_edge_offsets" in pair) == motion and pair.get("order") == ("reverse" if reverse else None),
@@ -346,13 +398,19 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
                  and all(type(p) is int for p in pts), "Repeated sequence has an invalid source interval")
         steps = _steps(pts, tb)[1:]
         elapsed = (pts[-1] - pts[0]) * tb
-        _require(None not in steps and elapsed / stride >= MIN_SPAN and _close(pair["span_s"], elapsed / stride)
+        _require(None not in steps and elapsed / stride >= MIN_SPAN
                  and _close(span["start_stream_s"], pts[0] * tb) and _close(span["end_stream_s"], pts[-1] * tb),
                  "Repeated sequence has incomplete clock support")
+        if hd:
+            _require(hd_clock_matches(pts, tb, motion_rate) and (side != "first" or _close(pair["span_s"], elapsed)),
+                     "HD motion sequence has unsupported frame spacing")
+        else:
+            _require(_close(pair["span_s"], elapsed / stride), "Repeated sequence has an incorrect source span")
         intervals.append([Fraction(step, stride) for step in steps] if retimed else steps)
-    _require(intervals[0] == (intervals[1][::-1] if reverse else intervals[1]),
-             "Repeated sequence changes the native frame spacing")
-    if motion:
+    if not hd:
+        _require(intervals[0] == (intervals[1][::-1] if reverse else intervals[1]),
+                 "Repeated sequence changes the native frame spacing")
+    if motion and not hd:
         _require(all(step * tb == Fraction(1, motion_rate) for step in intervals[0]), "Motion sequence uses unsupported frame spacing")
     for span in spans if motion else (pair,):
         digests = span["endpoint_rgb_sha256"]
@@ -392,6 +450,12 @@ def validate_clock(record, table_pts: Sequence[int], interpolated: Sequence[int]
         _require(len(pts) == limit and not set(interpolated).intersection(range(limit))
                  and all((b - a) * tb == step for a, b in zip(pts, pts[1:])),
                  "Motion sequence lacks a complete verified native clock")
+    if record and record["schema"] == MOTION_REFLECTED_HD_SCHEMA and record["status"] != "unavailable":
+        limit = record["frames_scanned"]
+        rate = Fraction(record["parameters"]["frame_rate"])
+        pts = table_pts[:limit]
+        _require(len(pts) == limit and not set(interpolated).intersection(range(limit)) and hd_clock_matches(pts, tb, rate),
+                 "HD motion sequence lacks a complete verified native clock")
     if not record or record["pair"] is None:
         return
     inferred = set(interpolated)

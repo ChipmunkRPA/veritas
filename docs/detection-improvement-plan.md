@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Mirrored footage in HD and portrait](video-mirrored-hd-2026-11-16.md)
+  extends the opening scan to common HD and vertical encodes, including
+  fractional-rate WebM. Across six profiles it locates 31 of 36
+  single-encode and 14 of 18 twice-encoded cases with zero alerts on
+  90 controls. The evidence retains the two original source ranges.
+
 - [Mirrored footage in one upload](video-mirrored-sequence-2026-11-16.md)
   locates both source ranges in 38 of 44 single-encode deliveries
   and 16 of 22 twice-encoded deliveries. It adds zero flags on 132

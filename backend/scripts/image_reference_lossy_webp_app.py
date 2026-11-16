@@ -81,12 +81,17 @@ def examples(args, receipt):
     raise ValueError("Held app proof cases were incomplete")
 
 
-def verify(payload, row, ref, submitted, folder, truth, *, resized, cropped, crop_resize=False):
+def verify(payload, row, ref, submitted, folder, truth, *, resized=False, cropped=False, crop_resize=False, earlier_jpeg=False):
     import numpy as np
     import pymupdf
     from PIL import Image
 
-    from app.detectors.image import reference_lossy_webp, reference_lossy_webp_crop, reference_lossy_webp_crop_resize, reference_lossy_webp_resize
+    from app.detectors.image import (
+        reference_lossy_webp,
+        reference_lossy_webp_crop,
+        reference_lossy_webp_crop_resize,
+        reference_lossy_webp_resize,
+    )
     from scripts.review_image_reference_export import review
     from scripts.verify_multimedia_exports import scan
 
@@ -95,6 +100,8 @@ def verify(payload, row, ref, submitted, folder, truth, *, resized, cropped, cro
     status = row.get("status", reference_lossy_webp.UNASSESSED)
     summary = "proportional downsampling and WebP compression" if resized else "allows for lossy WebP compression"
     field = "selection_sha256" if resized else "selected_sha256"
+    if earlier_jpeg:
+        schema, summary = reference_lossy_webp.EARLIER_JPEG_SCHEMA, "earlier JPEG and submitted WebP"
     if cropped and row["registered"]:
         schema, status = reference_lossy_webp_crop.SCHEMA, "comparable"
         summary, field = "Matched an unscaled crop after WebP compression", "selection"
@@ -116,6 +123,7 @@ def verify(payload, row, ref, submitted, folder, truth, *, resized, cropped, cro
     with pymupdf.open(stream=pdf, filetype="pdf") as report:
         pages = [page.get_text() for page in report]
         scan("\n".join(pages))
+        assert report.metadata["author"] == "Chipmunk Verify"
         if regions := comparison["regions"]:
             assert summary in pages[0] and len(regions) + 1 == len(pages)
             mask_bytes = base64.b64decode(payload["pngs"][comparison["mask"]["file"]], validate=True)
@@ -125,7 +133,7 @@ def verify(payload, row, ref, submitted, folder, truth, *, resized, cropped, cro
             for index, (text, region) in enumerate(zip(pages[1:], regions, strict=True), 1):
                 roles = ("reference_crop", "submitted_crop", "submitted_overlay")
                 assert all(region[role]["sha256"] in text for role in roles)
-                if crop_resize:
+                if crop_resize or earlier_jpeg:
                     exhibits = dict.fromkeys((asset[0], asset[1]) for asset in report[index].get_images())
                     for (xref, alpha_xref), role in zip(exhibits, roles, strict=True):
                         png = base64.b64decode(payload["pngs"][region[role]["file"]], validate=True)
@@ -213,7 +221,7 @@ def run(args):
                 assert old["comparison"]["status"] == "webp_lossy_delivery_unassessed"
                 settings.image_reference_lossy_webp_crop_resize = True
             response = body(client.post(endpoint, files={"reference": (ref.name, earlier, "image/png")}, data={"include_pdf": "true"}))
-            verification[role] = verify(response, row, ref, submitted, folder, truth, resized=args.resized,
+            verification[role] = verify(body(response), row, ref, submitted, folder, truth, resized=args.resized,
                                         cropped=args.cropped, crop_resize=args.crop_resize)
             assert result_hash(aid) == before
     save(args.output / "receipt.json", {"results": verification, "paid_analyses": len(stub.sessions), "unpaid_jobs": 0,

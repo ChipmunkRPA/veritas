@@ -1,4 +1,4 @@
-"""Same-framing comparison of a lossy WebP with an earlier lossless RGB copy."""
+"""Same-framing comparison of a lossy WebP with an earlier RGB copy."""
 
 from __future__ import annotations
 
@@ -8,9 +8,10 @@ from collections import Counter
 import cv2
 import numpy as np
 
-from app.detectors.image import reference_compare, reference_lossless_webp
+from app.detectors.image import jpeg_bitstream, reference_compare, reference_lossless_webp
 
 SCHEMA = "chipmunk.image-reference-comparison/19"
+EARLIER_JPEG_SCHEMA = "chipmunk.image-reference-comparison/24"
 UNASSESSED = "webp_lossy_delivery_unassessed"
 TILE = 32
 METHOD = {
@@ -24,6 +25,11 @@ METHOD = {
 LIMITATION = "This comparison needs matching framing with enough detailed areas that agree after allowing for WebP compression."
 INTERPRETATION = ("Marked areas have local brightness differences after filtering small compression variations. Ordinary editing can "
                   "cause these differences. The comparison carries zero weight in the AI assessment.")
+EARLIER_JPEG_INTERPRETATION = ("Matched the framing of the earlier JPEG and submitted WebP. The highlights mark local brightness "
+                               "differences that survived compression filtering. Ordinary editing can cause these differences. "
+                               "The comparison carries zero weight in the AI assessment.")
+EARLIER_JPEG_LIMITATION = ("The comparison needs an upright RGB JPEG and lossy WebP with matching dimensions and enough matching detail. "
+                           "The comparison carries zero weight in the AI assessment.")
 
 
 def webp_size(data: bytes, *, minimum_side: int = 512) -> tuple[int, int] | None:
@@ -83,6 +89,21 @@ def unavailable():
 def compare(earlier, submitted, earlier_bytes, submitted_bytes):
     if (not reference_lossless_webp.supported(earlier, earlier_bytes, png=True) or not supported(submitted, submitted_bytes)
             or earlier.size != submitted.size):
+        return unavailable()
+    return compare_pixels(np.asarray(earlier), np.asarray(submitted))
+
+
+def compare_earlier_jpeg(earlier, submitted, earlier_bytes, submitted_bytes):
+    """Compare compatible JPEG and WebP deliveries at their common native origin."""
+    if (earlier.format != "JPEG" or earlier.mode != "RGB" or getattr(earlier, "n_frames", 1) != 1
+            or earlier.getexif().get(274, 1) != 1 or earlier.info.get("icc_profile")
+            or earlier.size != submitted.size or not supported(submitted, submitted_bytes)):
+        return unavailable()
+    structure = jpeg_bitstream.read(earlier_bytes)
+    if (structure is None or structure.frame not in {"baseline", "progressive"} or structure.precision != 8
+            or (structure.width, structure.height) != earlier.size
+            or tuple(component.id for component in structure.components) != (1, 2, 3)
+            or structure.sampling_factors not in {"2x2,1x1,1x1", "1x1,1x1,1x1"}):
         return unavailable()
     return compare_pixels(np.asarray(earlier), np.asarray(submitted))
 

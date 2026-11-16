@@ -236,6 +236,7 @@ class Settings(BaseSettings):
     image_reference_lossy_webp: bool = False  # Compare a simple lossy WebP with an earlier lossless copy.
     image_reference_lossy_webp_crop_resize: bool = False  # Compare a qualified crop that was also downsized.
     image_reference_lossy_webp_color: bool = False  # Review localized color differences after matching earlier WebP framing.
+    image_reference_lossy_webp_earlier_jpeg: bool = False  # Compare matching JPEG and lossy WebP framing.
     audio_reference_comparison_enabled: bool = False  # Authenticated comparison of a short earlier recording.
     audio_reference_local_timing: bool = False  # Find localized changes in the timing of matching excerpts.
     audio_reference_aac_timing: bool = False  # Support native mono M4A and lossless timing pairs with the same presented duration.

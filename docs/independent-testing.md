@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [earlier JPEG and WebP replay](image-jpeg-webp-comparison-2026-11-16.md#replay)
+recounts 1,008 pairs from 48 photos and rebuilds the exact output masks
+from the original source banks. It includes three encoding recipes and
+checks ordinary edits and compression on the same photos.
+
 The [longer speech excerpt replay](audio-long-focused-context-2026-11-16.md#reproduce)
 exports the exact source sample labels from six generators and the
 matched ordinary and isolated-background deliveries. The same

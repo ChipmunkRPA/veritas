@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Earlier JPEG compared with a lossy WebP](image-jpeg-webp-comparison-2026-11-16.md)
+  locates meaningful differences in 111 of 144 known edit deliveries and
+  marks none of 288 compression-only controls. The comparison shows both
+  source crops and contributes zero authorship weight. The single-upload
+  phase and recompression candidates remain in evaluation.
+
 - [Focused speech edits on 48 kHz WAV and FLAC](audio-focused-edit-48k-2026-11-16.md)
   preserve all three 16 kHz locations in the 136-delivery replay. One
   additional location appears in both containers. No ordinary or

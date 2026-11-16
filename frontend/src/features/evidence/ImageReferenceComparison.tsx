@@ -7,7 +7,7 @@ import {
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
   IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
   pngOpacitySchema, exactWebpSchema, lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema,
-  imageFramingSchema, webpColorSchema,
+  earlierJpegWebpSchema, imageFramingSchema, webpColorSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -81,7 +81,8 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const opacity = comparison.schema === pngOpacitySchema ? comparison.png_opacity : undefined
   const exactWebp = comparison.schema === exactWebpSchema ? comparison.exact_webp : undefined
   const framing = imageFramingSchema(comparison)
-  const lossyWebp = framing === lossyWebpSchema ? comparison.lossy_webp : undefined
+  const earlierJpegWebp = framing === earlierJpegWebpSchema
+  const lossyWebp = framing === lossyWebpSchema || earlierJpegWebp ? comparison.lossy_webp : undefined
   const resizedWebp = framing === resizedLossyWebpSchema ? comparison.lossy_webp_resize : undefined
   const croppedWebp = framing === croppedLossyWebpSchema ? comparison.lossy_webp_crop : undefined
   const croppedResizedWebp = framing === croppedResizedLossyWebpSchema ? comparison.lossy_webp_crop_resize : undefined
@@ -100,8 +101,9 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const maskDescription = delivery ? 'White marks color differences outside the expected delivery range.'
     : (exact || orientedResize) ? 'White marks retained differences from the reproduced resize.'
     : resized ? 'White marks differences flagged by at least two tested resizes.' : 'White marks the selected differences.'
-  const reason = Object.prototype.hasOwnProperty.call(unassessed, comparison.status)
+  const genericReason = Object.prototype.hasOwnProperty.call(unassessed, comparison.status)
     ? unassessed[comparison.status] : 'The selected copies could not be compared reliably.'
+  const reason = (earlierJpegWebp && comparison.interpretation) || genericReason
   const pdf = comparisonPdfData(result)
   const download = () => {
     const json = JSON.stringify(imageReferenceExport(result), null, 2) + '\n'
@@ -149,7 +151,8 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     </p>}
     {lossyWebp && <p className="mt-2 mb-0 text-small text-text-muted">
       {lossyWebp.matching_tiles.toLocaleString('en-US')} of {lossyWebp.textured_tiles.toLocaleString('en-US')} detailed areas
-      supported matching framing. {colorReview ? 'The brightness check allows for small compression variations.' :
+      supported matching framing{earlierJpegWebp ? ' between the earlier JPEG and submitted WebP' : ''}.
+      {' '}{colorReview ? 'The brightness check allows for small compression variations.' :
         'The comparison highlights local brightness differences after filtering small compression variations.'}
       Ordinary editing can cause differences.
       This check carries no weight in the AI assessment.

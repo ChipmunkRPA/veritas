@@ -98,7 +98,9 @@ def _summary(document, comparison, assets):
             _text(page, MARGIN, 318, f"{len(proof['matched_tiles'])} matching detailed areas supported the framing.",
                   size=10, color=MUTED)
     if proof := comparison.get("lossy_webp"):
-        _text(page, MARGIN, 302, "The comparison allows for lossy WebP compression.", size=10, font="hebo")
+        note = ("Matching framing across the earlier JPEG and submitted WebP."
+                if schema == reference_lossy_webp.EARLIER_JPEG_SCHEMA else "The comparison allows for lossy WebP compression.")
+        _text(page, MARGIN, 302, note, size=10, font="hebo")
         _text(page, MARGIN, 318, f"{proof['matching_tiles']:,} of {proof['textured_tiles']:,} detailed areas supported the framing.",
               size=10, color=MUTED)
     if proof := comparison.get("lossy_webp_resize"):

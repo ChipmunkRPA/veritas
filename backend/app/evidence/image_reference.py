@@ -160,7 +160,8 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             allow_same_jpeg: bool = False, allow_jpeg_detail_loss: bool = False,
             allow_jpeg_detail_loss_extra_qualities: bool = False, allow_png_opacity: bool = False,
             allow_lossy_webp: bool = False, allow_lossy_webp_crop: bool = False,
-            allow_lossy_webp_crop_resize: bool = False, allow_lossy_webp_color: bool = False) -> dict:
+            allow_lossy_webp_crop_resize: bool = False, allow_lossy_webp_color: bool = False,
+            allow_lossy_webp_earlier_jpeg: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     refuse_truncated_images()
     before, after = _bytes(reference_path), _bytes(submitted_path)
@@ -177,7 +178,11 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                                     else (_oriented_rgb(original), _oriented_rgb(questioned)))
         else:
             reference, submitted = _oriented_rgb(original), _oriented_rgb(questioned)
-        if (allow_lossy_webp and allow_proportional_resize and original.size != questioned.size
+        if (allow_lossy_webp and allow_lossy_webp_earlier_jpeg and original.format == "JPEG"
+                and reference_lossy_webp.supported(questioned, after, minimum_side=reference_lossy_webp_resize.MIN_SIDE)):
+            schema = reference_lossy_webp.EARLIER_JPEG_SCHEMA
+            result, mask = reference_lossy_webp.compare_earlier_jpeg(original, questioned, before, after)
+        elif (allow_lossy_webp and allow_proportional_resize and original.size != questioned.size
                 and reference_lossy_webp.supported(questioned, after, minimum_side=reference_lossy_webp_resize.MIN_SIDE)):
             schema = reference_lossy_webp_resize.SCHEMA
             result, mask = reference_lossy_webp_resize.compare(original, questioned, before, after)
@@ -270,6 +275,8 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                                                        if result["status"] == "comparable" else reference_lossless_webp.LIMITATION),
                       reference_lossy_webp.SCHEMA: (reference_lossy_webp.INTERPRETATION
                                                    if result["status"] == "comparable" else reference_lossy_webp.LIMITATION),
+                      reference_lossy_webp.EARLIER_JPEG_SCHEMA: (reference_lossy_webp.EARLIER_JPEG_INTERPRETATION
+                                                               if result["status"] == "comparable" else reference_lossy_webp.EARLIER_JPEG_LIMITATION),
                       reference_lossy_webp_resize.SCHEMA: (reference_lossy_webp_resize.INTERPRETATION
                                                           if result["status"] == "comparable" else reference_lossy_webp_resize.LIMITATION),
                       reference_lossy_webp_crop.SCHEMA: reference_lossy_webp_crop.INTERPRETATION,

@@ -124,6 +124,7 @@ export interface ImageReferenceRecord {
     }[]
   }
   affects_overall_confidence?: boolean
+  interpretation?: string
   additional_regions?: number
 }
 
@@ -146,6 +147,7 @@ export const resizedLossyWebpSchema = 'chipmunk.image-reference-comparison/20'
 export const croppedLossyWebpSchema = 'chipmunk.image-reference-comparison/21'
 export const croppedResizedLossyWebpSchema = 'chipmunk.image-reference-comparison/22'
 export const webpColorSchema = 'chipmunk.image-reference-comparison/23'
+export const earlierJpegWebpSchema = 'chipmunk.image-reference-comparison/24'
 const lossyWebpSchemas = [lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema]
 export const imageFramingSchema = (record: ImageReferenceRecord) =>
   record.schema === webpColorSchema ? record.comparison_schema : record.schema
@@ -293,7 +295,7 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
       throw new Error('The server returned an incomplete lossless WebP comparison.')
     }
   }
-  if (framing === lossyWebpSchema && comparison.status === 'comparable') {
+  if ((framing === lossyWebpSchema || framing === earlierJpegWebpSchema) && comparison.status === 'comparable') {
     const webp = comparison.lossy_webp
     const { width, height } = comparison.submitted
     if (!webp || comparison.affects_overall_confidence !== false || ![width, height].every(

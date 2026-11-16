@@ -52,6 +52,8 @@ def reference_http(tmp_path, monkeypatch):
     store = ObjectStore(tmp_path / "objects")
     monkeypatch.setattr(settings, "environment", "dev")
     monkeypatch.setattr(settings, "image_reference_comparison_enabled", True)
+    monkeypatch.setattr(settings, "image_reference_lossy_webp_color", False)
+    monkeypatch.setattr(settings, "image_reference_lossy_webp_earlier_jpeg", False)
     monkeypatch.setattr(settings, "single_user", False)
     monkeypatch.setattr(settings, "api_key", "test-bootstrap-not-used")
     monkeypatch.setattr(settings, "api_key_pepper", "isolated-test-pepper")
@@ -197,21 +199,28 @@ def test_lossless_webp_uses_exact_pixels_and_bound_sources(reference_http, tmp_p
             review_oriented_resize(export, reference_path, submitted_path)
 
 
-@pytest.mark.parametrize("scenario", ["edit", "reencoded", "translated", "jpeg_earlier"])
+@pytest.mark.parametrize("scenario", ["edit", "reencoded", "translated", "jpeg_earlier", "jpeg_edit", "jpeg_reencoded", "jpeg_translated"])
 def test_lossy_webp_comparison_preserves_source_crops(reference_http, tmp_path, monkeypatch, scenario):
     monkeypatch.setattr(settings, "image_reference_lossy_webp", True)
+    jpeg_enabled = scenario in {"jpeg_edit", "jpeg_reencoded", "jpeg_translated"}
+    monkeypatch.setattr(settings, "image_reference_lossy_webp_earlier_jpeg", jpeg_enabled)
+    monkeypatch.setattr(settings, "image_reference_lossy_webp_color", jpeg_enabled)
     f = reference_http
     before = cv2.resize(f.reference_pixels, (768, 512), interpolation=cv2.INTER_LINEAR)
     after = before.copy()
-    if scenario == "edit":
+    edited = scenario in {"edit", "jpeg_edit"}
+    if edited:
         after[140:211, 260:350] = (220, 44, 135)
-    if scenario == "translated":
+    if scenario in {"translated", "jpeg_translated"}:
         after = np.roll(after, 3, axis=1)
     with io.BytesIO() as stream:
         Image.fromarray(after).save(stream, format="WEBP", quality=70, method=4)
         submitted = stream.getvalue()
     with io.BytesIO() as stream:
-        Image.fromarray(before).save(stream, format="JPEG" if scenario == "jpeg_earlier" else "PNG")
+        if scenario.startswith("jpeg_"):
+            Image.fromarray(before).save(stream, format="JPEG", quality=82, progressive=True)
+        else:
+            Image.fromarray(before).save(stream, format="PNG")
         earlier = stream.getvalue()
     stored = f.store.put_bytes(submitted)
     with Session(f.engine) as db:
@@ -223,12 +232,15 @@ def test_lossy_webp_comparison_preserves_source_crops(reference_http, tmp_path, 
     assert response.status_code == 200, response.text[:300]
     payload = response.json()
     comp = payload["comparison"]
-    assert comp["schema"] == reference_lossy_webp.SCHEMA and comp["affects_overall_confidence"] is False
-    expected = "comparable" if scenario in {"edit", "reencoded"} else reference_lossy_webp.UNASSESSED
+    schema = reference_lossy_webp.EARLIER_JPEG_SCHEMA if jpeg_enabled else reference_lossy_webp.SCHEMA
+    assert comp["schema"] == schema and comp["affects_overall_confidence"] is False
+    expected = "comparable" if edited or scenario in {"reencoded", "jpeg_reencoded"} else reference_lossy_webp.UNASSESSED
     assert comp["status"] == expected
     pdf_bytes = base64.b64decode(payload.pop("pdf"), validate=True)
-    if scenario == "edit":
+    if edited:
         assert comp["regions"]
+        with Image.open(io.BytesIO(earlier)) as reference:
+            decoded_earlier = np.asarray(reference)
         with Image.open(io.BytesIO(submitted)) as image:
             actual = np.asarray(image)
         with Image.open(io.BytesIO(_asset_bytes(payload, comp["mask"]))) as image:
@@ -238,10 +250,11 @@ def test_lossy_webp_comparison_preserves_source_crops(reference_http, tmp_path, 
             assert overlap >= .5 * truth.sum()
             assert overlap >= .3 * np.count_nonzero(mask | truth)
         with pymupdf.open(stream=pdf_bytes, filetype="pdf") as pdf:
-            assert "allows for lossy WebP compression" in pdf[0].get_text()
+            note = "earlier JPEG and submitted WebP" if jpeg_enabled else "allows for lossy WebP compression"
+            assert note in pdf[0].get_text()
             for index, region in enumerate(comp["regions"], 1):
                 x, y, w, h = (region[key] for key in ("x", "y", "w", "h"))
-                for role, pixels in (("reference_crop", before), ("submitted_crop", actual)):
+                for role, pixels in (("reference_crop", decoded_earlier), ("submitted_crop", actual)):
                     with Image.open(io.BytesIO(_asset_bytes(payload, region[role]))) as crop:
                         assert np.array_equal(np.asarray(crop), pixels[y:y+h, x:x+w])
                 _assert_pdf_assets(pdf, pdf[index], [region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")], payload)
@@ -252,7 +265,7 @@ def test_lossy_webp_comparison_preserves_source_crops(reference_http, tmp_path, 
     submitted_file.write_bytes(submitted)
     export.write_text(json.dumps(payload))
     assert review(export, earlier_file, submitted_file)["source_hashes_verified"] == 2
-    if scenario == "edit":
+    if edited:
         comp["lossy_webp"]["matching_tiles"] -= 1
         export.write_text(json.dumps(payload))
         with pytest.raises(ValueError, match="Lossy WebP measurements differ"):

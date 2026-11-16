@@ -39,6 +39,7 @@ RESIZED_LOSSY_WEBP_SCHEMA = "chipmunk.image-reference-comparison/20"
 CROPPED_LOSSY_WEBP_SCHEMA = "chipmunk.image-reference-comparison/21"
 CROPPED_RESIZED_LOSSY_WEBP_SCHEMA = "chipmunk.image-reference-comparison/22"
 WEBP_COLOR_SCHEMA = "chipmunk.image-reference-comparison/23"
+EARLIER_JPEG_WEBP_SCHEMA = "chipmunk.image-reference-comparison/24"
 LOSSY_WEBP_SCHEMAS = {LOSSY_WEBP_SCHEMA, RESIZED_LOSSY_WEBP_SCHEMA, CROPPED_LOSSY_WEBP_SCHEMA, CROPPED_RESIZED_LOSSY_WEBP_SCHEMA}
 ORIENTATION_SCHEMA = "chipmunk.image-reference-comparison/6"
 CROPPED_RESIZE_SCHEMAS = {CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, JPEG_PNG_ENVELOPE_SCHEMA}
@@ -409,7 +410,8 @@ def _native_reference_replay(comparison, earlier, submitted, *, opacity, lossy_w
                               allow_proportional_resize=geometry in LOSSY_WEBP_SCHEMAS - {LOSSY_WEBP_SCHEMA},
                               allow_lossy_webp_crop=geometry in {CROPPED_LOSSY_WEBP_SCHEMA, CROPPED_RESIZED_LOSSY_WEBP_SCHEMA},
                               allow_lossy_webp_crop_resize=geometry == CROPPED_RESIZED_LOSSY_WEBP_SCHEMA,
-                              allow_lossy_webp_color=color)
+                              allow_lossy_webp_color=color,
+                              allow_lossy_webp_earlier_jpeg=geometry == EARLIER_JPEG_WEBP_SCHEMA)
         label = "PNG opacity" if opacity else "Lossy WebP" if lossy_webp else "Exact WebP"
         _require(_same_replayed_fields(comparison, regenerated), f"{label} measurements differ from the supplied sources")
         if "mask" in regenerated:
@@ -446,7 +448,7 @@ def review(export, earlier, submitted):
         crop_resize_webp = webp_geometry == CROPPED_RESIZED_LOSSY_WEBP_SCHEMA
         resized_webp = webp_geometry == RESIZED_LOSSY_WEBP_SCHEMA or crop_resize_webp
         cropped_webp = webp_geometry == CROPPED_LOSSY_WEBP_SCHEMA
-        lossy_webp = webp_geometry in LOSSY_WEBP_SCHEMAS
+        lossy_webp = webp_geometry in LOSSY_WEBP_SCHEMAS | {EARLIER_JPEG_WEBP_SCHEMA}
         ref = _source(stack, earlier_bytes, comparison["reference"], composite=opacity, webp=webp or lossy_webp)
         sub = _source(stack, submitted_bytes, comparison["submitted"], composite=opacity, webp=webp or lossy_webp)
         resized = comparison["schema"] == RESIZE_SCHEMA or comparison["schema"] in CROPPED_RESIZE_SCHEMAS

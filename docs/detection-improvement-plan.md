@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Synthetic background sound under speech](environmental-component-transfer-2026-11-16.md)
+  compares the mixed recording, an estimated background, and two combinations
+  on 24 held environmental source groups and three unseen generators.
+  With genuine speech 6 dB louder, the residual locates the generated
+  background's presence in 6/72 deliveries with 1/24 ordinary alerts.
+  The combined fit selected in development finds 1/72 with zero ordinary
+  alerts. The app's background findings continue to describe acoustic context.
+
 - [More precise alignment of cropped repeats](video-crop-alignment-2026-11-16.md)
   locates 76 of 140 staged repeats versus 32 with the fixed search.
   The 120 controls stayed clear. The app shows the matching time

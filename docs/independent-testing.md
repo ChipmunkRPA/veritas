@@ -64,6 +64,12 @@ incremental receipt covers edits paired with verified original utterances
 under identical competing speech. It includes the frozen offsets, source
 hashes and isolated-background controls.
 
+The [environmental component replay](environmental-component-transfer-2026-11-16.md#replay)
+checks background origin independently of the voice target. It preserves the
+matched foreground and gain in every comparison and includes isolated,
+partly generated voice, voice-only and Opus controls. The publicly available
+arithmetic recounts 508 held results and all operating points for the new arms.
+
 The [earlier JPEG and WebP replay](image-jpeg-webp-comparison-2026-11-16.md#replay)
 recounts 1,008 pairs from 48 photos and rebuilds the exact output masks
 from the original source banks. It includes three encoding recipes and

@@ -245,7 +245,8 @@ class Binoculars:
         finally:
             raw = logp_obs = p_perf = None
 
-    def token_scores(self, text: str, *, check: Callable[[str], None] | None = None) -> TokenScores:
+    def token_scores(self, text: str, *, check: Callable[[str], None] | None = None,
+                     score_chunk: Callable[[torch.Tensor], tuple[np.ndarray, np.ndarray]] | None = None) -> TokenScores:
         """Score complete rolling coverage, checking the caller's deadline between expensive operations.
 
         Omitted callbacks retain the legacy context deadline. The v2 adapter passes
@@ -275,7 +276,10 @@ class Binoculars:
             ctx_start = max(0, end - body)  # include up to (body - STRIDE) tokens of left context
             chunk = anchor + ids[ctx_start:end]
             tokens = torch.tensor([chunk], dtype=torch.long)
-            a, b = self._chunk_scores(tokens) if check is None else self._chunk_scores(tokens, check=check)
+            if score_chunk is not None:
+                a, b = score_chunk(tokens)
+            else:
+                a, b = self._chunk_scores(tokens) if check is None else self._chunk_scores(tokens, check=check)
             checkpoint("completed Binoculars token window")
             _check_losses(a, b, len(chunk) - 1)
             # a[k] scores chunk[k+1]. With an anchor, chunk[k+1] == ids[ctx_start + k]; without, ids[ctx_start + k + 1].

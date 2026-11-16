@@ -9,7 +9,10 @@ from abc import ABC, abstractmethod
 from collections.abc import Callable, Iterator
 from dataclasses import dataclass, field
 from enum import StrEnum
-from typing import Any, ClassVar, Literal, Protocol
+from typing import TYPE_CHECKING, Any, ClassVar, Literal, Protocol
+
+if TYPE_CHECKING:
+    from app.engine.models import ModelManager
 
 
 class Modality(StrEnum):
@@ -267,6 +270,10 @@ class Detector(ABC):
 
     def load(self, lease: ModelLease) -> None:  # noqa: B027 (optional hook)
         """Bind loaded weights from the lease; no I/O except through the lease."""
+
+    def run_after_memory_refusal(self, ctx: RunContext, models: ModelManager, *, wait_s: float) -> DetectorResult | None:
+        """Optional lower-memory execution under the same deadline and managed leases."""
+        return None
 
     @abstractmethod
     def run(self, ctx: RunContext) -> DetectorResult: ...

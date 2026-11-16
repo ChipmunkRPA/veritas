@@ -9,7 +9,7 @@ RoBERTa classifier and Binoculars.
 """
 from __future__ import annotations
 
-from typing import Any, ClassVar
+from typing import TYPE_CHECKING, Any, ClassVar
 
 from app.core.config import settings
 from app.detectors.text.adapters.common import (
@@ -24,6 +24,8 @@ from app.detectors.text.binoculars import (
     CTX,
     MIN_DOCUMENT_TOKENS,
     Binoculars,
+    TokenScores,
+    _losses_from_logits,
     document_score,
     sentence_score_records,
 )
@@ -46,6 +48,9 @@ from app.engine.detector import (
     RunContext,
     UnitScore,
 )
+
+if TYPE_CHECKING:
+    from app.engine.models import ModelManager
 
 
 class _SequenceClassifier(Detector):
@@ -193,8 +198,9 @@ class HelloSimpleAIDetector(_SequenceClassifier):
 
 class BinocularsDetector(Detector):
     OBSERVER, PERFORMER = "hf.qwen.qwen2_5_1_5b", "hf.qwen.qwen2_5_1_5b_instruct"
+    VOCABULARY_SIZE = 151936  # Both pinned output heads include padding beyond the tokenizer's vocabulary.
     spec = text_spec("txt.binoculars", "Binoculars zero-shot (Qwen2.5-1.5B observer / 1.5B-Instruct performer)", InputUnit.DOCUMENT,
-                     model_ids=(OBSERVER, PERFORMER), timeout_s=180.0, profiles=FULL_DEEP, version="0.4.0")
+                     model_ids=(OBSERVER, PERFORMER), timeout_s=180.0, profiles=FULL_DEEP, version="0.4.1")
 
     def activation_plan(self, ctx: RunContext) -> tuple[ActivationUse, ...]:
         return tuple(ActivationUse(m, 1, "token sequence", f"One sequence at a time, at most {CTX} tokens including optional EOS anchor",
@@ -208,15 +214,95 @@ class BinocularsDetector(Detector):
         doc, sents = document_input(ctx)
         tokenizer, observer = ctx.lease.get(self.OBSERVER).obj
         other_tokenizer, performer = ctx.lease.get(self.PERFORMER).obj
+        self._check_vocabulary(tokenizer, other_tokenizer)
+        b = Binoculars.from_parts(tokenizer, observer, performer, ctx.device)
+        ts = b.token_scores(doc.text, check=ctx.deadline.check)
+        self._check_source_tokenization(other_tokenizer, doc.text, ts)
+        return self._result(ctx, doc, sents, ts, tokenizer.eos_token_id, other_tokenizer.eos_token_id,
+                            revisions(ctx, self.OBSERVER, self.PERFORMER))
+
+    def run_after_memory_refusal(self, ctx: RunContext, models: ModelManager, *, wait_s: float) -> DetectorResult | None:
+        terms = models.lease_terms((self.OBSERVER, self.PERFORMER), prefer=str(ctx.device))
+        if terms.device != "cpu" or terms.dtype != "float32" or settings.environment != "dev":
+            return None
+
+        import torch
+
+        check = ctx.deadline.check
+        doc, sents = document_input(ctx)
+        allowances = {model_id: models.activation_bytes_for_items({model_id: 1})
+                      for model_id in (self.OBSERVER, self.PERFORMER)}
+
+        def borrow(model_ids, reserved=0):
+            remaining = ctx.deadline.remaining()
+            return models.lease(model_ids, prefer="cpu", activation_bytes=reserved,
+                                wait_s=wait_s if remaining is None else min(wait_s, remaining))
+
+        with borrow((self.OBSERVER,)) as lease:
+            check("paired tokenizer lease")
+            tokenizer = lease.get(self.OBSERVER).obj[0]
+        runtime = Binoculars.from_parts(tokenizer, None, None, "cpu")
+        pins = {}
+        counterpart = None
+
+        @torch.inference_mode()
+        def score_chunk(ids):
+            nonlocal counterpart
+            reserved = ids.numel() * self.VOCABULARY_SIZE * 4
+            # The observer logits stay reserved even after its weights can be evicted.
+            with borrow((), reserved):
+                observed = performed = loaded = None
+                try:
+                    check("paired writing observer lease")
+                    with borrow((self.OBSERVER,), allowances[self.OBSERVER]) as observer_lease:
+                        check("paired writing observer forward")
+                        loaded = observer_lease.get(self.OBSERVER)
+                        pins[self.OBSERVER] = str(loaded.revision)
+                        observed = loaded.obj[1](ids).logits
+                        loaded = None
+                        check("completed paired writing observer forward")
+                    if observed.device.type != "cpu" or observed.numel() * observed.element_size() > reserved:
+                        raise ValueError("Paired writing logits exceed the reserved CPU tensor")
+                    check("paired writing performer lease")
+                    with borrow((self.PERFORMER,), allowances[self.PERFORMER]) as performer_lease:
+                        check("paired writing performer forward")
+                        loaded = performer_lease.get(self.PERFORMER)
+                        pins[self.PERFORMER] = str(loaded.revision)
+                        if counterpart is None:
+                            counterpart = loaded.obj[0]
+                            self._check_vocabulary(tokenizer, counterpart)
+                        performed = loaded.obj[1](ids).logits
+                        loaded = None
+                        check("completed paired writing performer forward")
+                        losses = _losses_from_logits(observed, performed, ids)
+                        check("completed paired writing loss reduction")
+                        return losses
+                finally:
+                    observed = performed = loaded = None
+
+        ts = runtime.token_scores(doc.text, check=check, score_chunk=score_chunk)
+        if counterpart is None:
+            result = DetectorResult.not_applicable(f"fewer than {MIN_DOCUMENT_TOKENS} scored tokens")
+        else:
+            self._check_source_tokenization(counterpart, doc.text, ts)
+            result = self._result(ctx, doc, sents, ts, tokenizer.eos_token_id, counterpart.eos_token_id, pins)
+        result.device, result.dtype = terms.device, terms.dtype
+        return result
+
+    @staticmethod
+    def _check_vocabulary(tokenizer, other_tokenizer):
         # Cross-entropy compares the same vocabulary positions. A matching excerpt
         # alone is insufficient if the paired tokenizers map other tokens differently.
         if tokenizer.get_vocab() != other_tokenizer.get_vocab():
             raise ValueError("The paired text check requires identical vocabulary IDs")
-        b = Binoculars.from_parts(tokenizer, observer, performer, ctx.device)
-        ts = b.token_scores(doc.text, check=ctx.deadline.check)
-        counterpart = other_tokenizer(doc.text, return_offsets_mapping=True, add_special_tokens=False)
+
+    @staticmethod
+    def _check_source_tokenization(other_tokenizer, text, ts):
+        counterpart = other_tokenizer(text, return_offsets_mapping=True, add_special_tokens=False)
         if counterpart["input_ids"] != ts.source_token_ids or [tuple(o) for o in counterpart["offset_mapping"]] != ts.offsets:
             raise ValueError("The paired text check tokenizers disagree on the actual source input")
+
+    def _result(self, ctx, doc, sents, ts: TokenScores, anchor, paired_eos, model_revisions):
         score, n_tokens = document_score(ts)
         if score is None:
             return DetectorResult.not_applicable(f"fewer than {MIN_DOCUMENT_TOKENS} scored tokens")
@@ -254,8 +340,8 @@ class BinocularsDetector(Detector):
                             "mean_cross_entropy_exact_hex": float(record["mean_cross_entropy"]).hex(),
                             "ai_when": "lt", "is_calibrated": False,
                             "input_semantics": "Source envelope of the recorded rolling contexts. Exact paired-model input is the committed token-ID sequence, not a re-tokenized excerpt.",
-                            "shared_input_anchor_id": tokenizer.eos_token_id,
-                            "paired_tokenizer_default_eos_ids": [tokenizer.eos_token_id, other_tokenizer.eos_token_id],
+                            "shared_input_anchor_id": anchor,
+                            "paired_tokenizer_default_eos_ids": [anchor, paired_eos],
                             "anchor_policy": "The first tokenizer's explicit leading token is supplied in the same input sequence to both models; their default end tokens need not agree.",
                             "token_coverage": {"tokens": record["tokens_scored"], "covered_tokens": record["tokens_scored"],
                                                "token_windows": len(selected)}})
@@ -269,7 +355,7 @@ class BinocularsDetector(Detector):
                        "statistical fingerprint of LLM sampling." if machine_like else
                        "The text carries more surprise than LLM-sampled text, consistent with human authorship."),
             metrics={"tokens": float(n_tokens), "sentences_scored": float(len(units))},
-            model_revisions=revisions(ctx, self.OBSERVER, self.PERFORMER),
+            model_revisions=model_revisions,
             details={"text_evidence": {"version": "scored-context/2", "offset_unit": "unicode_codepoint",
                      "extracted_text_sha256": text_hash(doc.text), "join": "single_source_span",
                      "shared_tokenization_verified": True, "windows": windows, "contexts": ts.input_contexts,

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [CPU writing-pattern replay](writing-pattern-cpu-memory-2026-11-15.md#replay)
+repeats a native memory-budget skip and verifies restored token coverage
+on two publisher pairs and a longer control. It exercises the original
+loss calculation and checks the customer-facing API, JSON and PDF.
+
 The [paired writing format replay](document-mixed-format-comparison-2026-11-13.md#paired-writing-responses-across-formats)
 checks six TXT, DOCX and PDF directions against the same two source
 pairs. The JSON verifier checks exact source positions and the saved

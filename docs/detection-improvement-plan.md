@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Writing-pattern check on a local CPU](writing-pattern-cpu-memory-2026-11-15.md)
+  restores the existing ratio when the two models cannot fit together.
+  The Mac completed five local CPU analyses, including a two-context
+  check at the existing memory budget. The ratio missed both labeled
+  rewrites and raised no whole-document alerts on the ordinary inputs.
+
 - [Paired writing responses across TXT, Word and PDF](document-mixed-format-comparison-2026-11-13.md#paired-writing-responses-across-formats)
   brings both writing checks to sentences linked by unchanged neighbors
   across formats. Both responses reproduced in all 12 local comparisons

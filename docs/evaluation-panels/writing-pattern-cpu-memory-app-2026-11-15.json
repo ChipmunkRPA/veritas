@@ -1,0 +1,98 @@
+{
+  "before_status": "skipped_memory_budget",
+  "cases": [
+    {
+      "context_input_sha256": [
+        "1ac8fddee36d85e04f70f6d14234320098024cf76a65c9142790e368ba2bb459"
+      ],
+      "contexts": 1,
+      "delivery": "original",
+      "direction": "unavailable",
+      "family": "gemini-2.5-flash",
+      "genre": "reports",
+      "group": "1813f807863cf206c97b5795acd669d0ccad10a7ef98ccd361c00cd7ebc9f72b",
+      "raw": "0x1.0b1a6d698fe69p+0",
+      "report_exercised": true,
+      "review_side": "other",
+      "scored_sentences": 6,
+      "sha256": "3d12572c295d61f198f8d790493c114868e4002b8992114b14f8bc786d5b528a",
+      "tokens": 188
+    },
+    {
+      "context_input_sha256": [
+        "56d6e3365c870a5637541d5d65224ac54130394078ca06558a7fe0ee042a8fa3"
+      ],
+      "contexts": 1,
+      "delivery": "edited",
+      "direction": "unavailable",
+      "family": "gemini-2.5-flash",
+      "genre": "reports",
+      "group": "1813f807863cf206c97b5795acd669d0ccad10a7ef98ccd361c00cd7ebc9f72b",
+      "raw": "0x1.119a73b42cc2dp+0",
+      "report_exercised": false,
+      "review_side": "other",
+      "scored_sentences": 6,
+      "sha256": "72538a1be56796f632a6a3abd3fdfe2deb972da36b62f8596457cdc4c1f05507",
+      "tokens": 187
+    },
+    {
+      "context_input_sha256": [
+        "47c84de30101e44b22dacd5238620e7c9a356066e8a43aa8a0f7552a930da15e"
+      ],
+      "contexts": 1,
+      "delivery": "original",
+      "direction": "unavailable",
+      "family": "gpt-5.4",
+      "genre": "news",
+      "group": "0345f749ff574b64ffba316eebb6dd1bfdf9de5e158a8ee01b176d8713714277",
+      "raw": "0x1.108e79aae6c8fp+0",
+      "report_exercised": false,
+      "review_side": "other",
+      "scored_sentences": 6,
+      "sha256": "3ed472c739b2ef4cf8a063b9dbcc79387327b920d315e5996745afb9f21032c3",
+      "tokens": 145
+    },
+    {
+      "context_input_sha256": [
+        "8e7a2a0c91d38db557d608d474c61cab06b957340575ea158c9d8826724020ba"
+      ],
+      "contexts": 1,
+      "delivery": "edited",
+      "direction": "unavailable",
+      "family": "gpt-5.4",
+      "genre": "news",
+      "group": "0345f749ff574b64ffba316eebb6dd1bfdf9de5e158a8ee01b176d8713714277",
+      "raw": "0x1.0fa57eaa2a0a9p+0",
+      "report_exercised": false,
+      "review_side": "other",
+      "scored_sentences": 6,
+      "sha256": "13985a67e3e8dc8e2b6f8043bcafdb66a6db9f0fd55afed6b1b71dddfb736f04",
+      "tokens": 140
+    },
+    {
+      "context_input_sha256": [
+        "fc696e99aecb8a0e47a1504a367974c60d802af56fdb06355b6117f924adcede",
+        "f56fa17d37eda0d0fa7ddc34ff2e352c84fb0737fde81c1be96940c8a557c73d"
+      ],
+      "contexts": 2,
+      "delivery": "long_control",
+      "direction": "unavailable",
+      "family": "ordinary",
+      "genre": "mixed",
+      "group": null,
+      "raw": "0x1.f94ea077036cap-1",
+      "report_exercised": true,
+      "review_side": "other",
+      "scored_sentences": 36,
+      "sha256": "65c8d6da1f0264909d4215b01c05d538e973a477181900e27c9e9a526d7fbd08",
+      "tokens": 988
+    }
+  ],
+  "checkouts": 6,
+  "cpu_model_budget_mb": 7600,
+  "exact_sentence_matches": 6,
+  "legacy_cpu_arithmetic_matched": true,
+  "prepayment_jobs": 0,
+  "schema": "chipmunk.text-ratio-cpu-memory-app/1",
+  "simulated_usd_cents": 999
+}

@@ -12,7 +12,10 @@ from app.detectors.text import binoculars
 from app.detectors.text.adapters.learned import BinocularsDetector
 from app.detectors.text.extract import from_string, text_hash
 from app.detectors.text.segment import segment
+from app.engine.boundary import Deadline, DetectorTimeout, InMemoryRunStore, run_detector
+from app.engine.detector import Profile, RunContext
 from app.engine.manifest import load_manifest
+from app.engine.models import FootprintStore, ManagedModel, ModelManager
 from app.engine.registry import DetectorRegistry
 
 
@@ -40,7 +43,7 @@ def test_production_manifest_can_import_changed_adapter():
     entry = load_manifest().detector("txt.binoculars")
     assert entry is not None
     assert DetectorRegistry._adapter_class(entry) is BinocularsDetector
-    assert entry.version == "0.4.0"
+    assert entry.version == "0.4.1"
 
 
 def context(doc, first=None, other=None):
@@ -104,6 +107,65 @@ def test_without_anchor_first_token_is_explicitly_unscored(monkeypatch):
     assert scores.input_contexts[0]["anchor_token_count"] == 0
     assert scores.input_contexts[0]["scored_token_range"][0] == 1
     assert 0 not in binoculars.sentence_score_records(scores, segment(doc))[0]["scored_token_indices"]
+
+
+def test_refused_dual_lease_replays_identical_cpu_ranges_with_one_model_pinned(monkeypatch, tmp_path):
+    import torch
+
+    from app.core.config import settings
+
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(binoculars, "CTX", 24)
+    monkeypatch.setattr(binoculars, "STRIDE", 16)
+    monkeypatch.setattr(BinocularsDetector, "VOCABULARY_SIZE", 256)
+    detector = BinocularsDetector()
+    calls = []
+    doc = from_string("A measured writing response has enough text. 😀 The next sentence crosses several contexts.")
+
+    def execute(budget, label, *, time_out=False):
+        def build(model_id, device, dtype):
+            assert device == "cpu" and dtype == "float32"
+
+            def forward(ids):
+                pinned = sorted(row.id for row in models.snapshot() if row.pins)
+                calls.append((label, model_id, pinned, ids[0].tolist()))
+                if time_out and model_id == detector.PERFORMER:
+                    raise DetectorTimeout("fixture deadline during the second forward")
+                center = ids.unsqueeze(-1).float()
+                vocab = torch.arange(256, dtype=torch.float32)
+                gap = 1. if model_id == detector.OBSERVER else 3.
+                return SimpleNamespace(logits=-(vocab - center - gap).abs() / 64.)
+
+            return SimpleNamespace(obj=(CharacterTokenizer(), forward), revision="fixture")
+
+        entries = [ManagedModel(model_id, fp32_bytes=50_000, activation_bytes_per_item=8_000)
+                   for model_id in (detector.OBSERVER, detector.PERFORMER)]
+        models = ModelManager(budget_bytes=budget, models=entries, loader_for=lambda _: build,
+                              store=FootprintStore(tmp_path / f"{label}.json"))
+        store = InMemoryRunStore()
+        run_ctx = RunContext(label, None, Profile.FULL, "cpu", "float32", None, context(doc).outputs, Deadline(), None, None)
+        result = run_detector(detector, run_ctx, store=store, models=models)
+        assert len(store.for_analysis(label)) == 1
+        assert all(row.pins == 0 for row in models.snapshot())
+        assert models.free_bytes() == budget - sum(row.bytes_declared for row in models.snapshot())
+        return result
+
+    baseline = execute(150_000, "simultaneous")
+    sequential = execute(85_000, "sequential")
+    assert baseline.status == sequential.status == "ok"
+    assert baseline.aggregate == sequential.aggregate and baseline.unit_scores == sequential.unit_scores
+    assert baseline.details == sequential.details and baseline.model_revisions == sequential.model_revisions
+    forward_inputs = {
+        label: [(model, ids) for mode, model, _, ids in calls if mode == label]
+        for label in ("simultaneous", "sequential")
+    }
+    assert len(forward_inputs["sequential"]) > 4 and forward_inputs["sequential"] == forward_inputs["simultaneous"]
+    assert all(pinned == [model] for mode, model, pinned, _ in calls if mode == "sequential")
+    timed_out = execute(85_000, "timeout", time_out=True)
+    assert timed_out.status == "timeout" and not timed_out.details and timed_out.aggregate is None
+    monkeypatch.setattr(settings, "environment", "production")
+    refused = execute(85_000, "production")
+    assert refused.status == "skipped" and refused.reason == "memory budget"
 
 
 def test_adapter_freezes_raw_ratio_threshold_and_matching_paired_tokenization(monkeypatch):

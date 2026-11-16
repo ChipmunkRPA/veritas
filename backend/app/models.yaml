@@ -2251,7 +2251,7 @@ detectors:
 
   - id: txt.binoculars
     adapter: app.detectors.text.adapters.learned:BinocularsDetector
-    version: 0.4.0
+    version: 0.4.1
     name: Binoculars zero-shot (Qwen2.5-1.5B observer / 1.5B-Instruct performer)
     modality: text
     family: text

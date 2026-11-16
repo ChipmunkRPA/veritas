@@ -20,7 +20,7 @@ import threading
 import time
 import traceback
 from collections.abc import Callable
-from contextlib import nullcontext
+from contextlib import ExitStack, nullcontext
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from numbers import Integral
@@ -296,7 +296,20 @@ def _execute(detector: Detector, ctx: RunContext, nested: Deadline, models: Mode
     wait_s = lease_wait_s if remaining is None else min(lease_wait_s, remaining)
     lease_cm = models.lease(model_ids, prefer=prefer, activation_bytes=allowance, wait_s=wait_s) \
         if model_ids and models is not None else nullcontext(ModelLease(prefer, "float32", {}))
-    with lease_cm as lease:
+    with ExitStack() as scope:
+        try:
+            lease = scope.enter_context(lease_cm)
+        except MemoryBudgetExceeded:
+            assert models is not None
+            nested.check("model memory fallback")
+            alternate = detector.run_after_memory_refusal(
+                dataclasses.replace(ctx, device=prefer, deadline=nested), models, wait_s=wait_s,
+            )
+            if alternate is None:
+                raise
+            if not isinstance(alternate, DetectorResult) or not alternate.device or not alternate.dtype:
+                raise TypeError(f"{detector.spec.id} memory fallback must return a result with device and dtype") from None
+            return alternate
         nested.check("model lease")
         run_ctx = dataclasses.replace(ctx, lease=lease, device=lease.device, dtype=lease.dtype, deadline=nested)
         detector.load(lease)

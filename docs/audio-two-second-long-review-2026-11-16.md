@@ -68,12 +68,45 @@ The fixed comparison counts one-to-one detections, ordinary and
 background flags, unassessed cases, and genuine time highlighted.
 It tests the application rule and a stricter comparison that requires
 an elevated, distinct two-second window with at least one second of
-overlap. This asks whether an independent window placement can reduce
+overlap. This asks whether a second window placement can reduce
 isolated flags. The same detector reads both windows. A recent
 multi-speaker localization study describes how aggregating responses
 can affect boundary precision and how controlled results degrade
 under recordings and generators outside calibration.
 [Multi-speaker temporal localization study](https://arxiv.org/html/2609.10051v1)
+
+## Fresh transfer results
+
+The input audit verified all 240 native delivery hashes, six source room
+hashes, and 96 exact mixture and isolated-background pairs. The largest
+difference between the intended and rendered mixing ratios was 0.00053 dB.
+Every delivery had eligible measurements. At each noise level the same
+24 edited recordings contain 155 labeled intervals, and 24 ordinary
+recordings under the same conditions provide controls. Each of the 48 mixtures
+also has an isolated-background control.
+[Input clock and mixing audit](evaluation-panels/audio-two-second-long-fresh-input-audit-2026-11-16.json)
+
+| Condition | Edit intervals located out of 155, current / two seconds / with second window | Ordinary flags out of 24, current / two seconds / with second window | Isolated-background flags out of 48, current / two seconds / with second window |
+| --- | --- | --- | --- |
+| Clean | 64 / 82 / 81 | 0 / 1 / 0 | — |
+| Competing speech at −5 dB | 34 / 49 / 47 | 5 / 11 / 5 | 0 / 6 / 1 |
+| Competing speech at −10 dB | 19 / 27 / 22 | 1 / 8 / 2 | 0 / 6 / 1 |
+
+The independent event counter requires at least 0.30 intersection over
+union and half of the known interval recovered. All three comparisons
+keep the current selections. With a second overlapping window required,
+additional matches came from 13 clean sources, 10 sources at −5 dB, and
+three at −10 dB. The condition at −10 dB still missed 133 of 155 known
+intervals with the second-window rule. These are matched comparisons on
+three deliveries of the same edited sources.
+
+The results favor using the second window to confirm a focused range.
+The two-second window remains useful as local evidence. The confirmation
+step needs its own app replay for the saved source samples and captions.
+Both comparisons use the same voice detector and are treated as
+supplementary evidence. The published receipt stores positions and scalar
+responses. The independent export checks the event counts and the amount
+of ordinary audio covered by flags. [Numeric transfer receipt](evaluation-panels/audio-two-second-long-fresh-2026-11-16.json.gz)
 
 ## Reproduce
 
@@ -101,3 +134,7 @@ python3 -B -S -m "$module" export "$run/result.json.gz" "$run/independent"
   docs/evaluation-panels/audio-long-focused-context-paired-2026-11-16.json.gz \
   "$prior_native_inputs" "$run/app" --browser
 ```
+
+The `review` and `export` commands also accept the published numeric
+receipt directly. The export supplies a manifest, exact source-sample
+truth, and results from the three comparisons for another evaluator.

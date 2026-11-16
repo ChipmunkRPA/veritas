@@ -70,8 +70,10 @@ are not public screening promises or calibrated population probabilities.
 - [Two-second checks in longer recordings](audio-two-second-long-review-2026-11-16.md)
   add a local waveform, source clock and playable excerpt for supported
   nine- to fourteen-second WAV and FLAC uploads. The comparison has
-  no effect on overall confidence. A 240-delivery transfer uses fresh
-  source bytes, 41 declared foreground readers and six separate meetings.
+  zero weight in overall confidence. In a fresh 240-delivery transfer,
+  requiring a second overlapping window kept 47 of 49 edit matches at
+  −5 dB and reduced ordinary flags from 11 to five. That rule is ready
+  for app replay.
 
 - [Earlier JPEG compared with a lossy WebP](image-jpeg-webp-comparison-2026-11-16.md)
   locates meaningful differences in 111 of 144 known edit deliveries and

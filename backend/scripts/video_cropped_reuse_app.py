@@ -17,6 +17,26 @@ from scripts.writing_character_view_app import tokens_assessed
 ROOT = Path(__file__).resolve().parents[2]
 
 
+def examples(report):
+    if "plan" not in report:
+        profile = report["profile"]
+        role = "offset_reuse_tandem" if profile == "avc-720" else "offset_reuse"
+        positive = next(row for row in report["cases"] if row["role"] == role and row["candidate"]
+                        and row["candidate"]["ranges"] == row["truth"]["ranges"])
+        control = next(row for row in report["cases"] if row["source"] == positive["source"] and row["role"] == "in_place_crop")
+        assert not control["candidate"]
+        return report, positive, control
+    plan = report["plan"]
+    wanted = "centered" if plan["profile"] == "avc-360" else "landmarks"
+    roles = {"center_reuse"} if wanted == "centered" else {"center_fractional_reuse_tandem", "between_grid_reuse_tandem"}
+    positive = next(row for row in plan["cases"] if row["role"] in roles and row["selected"] == wanted
+                    and row["results"][wanted]["ranges"] == row["truth"]["ranges"])
+    control = next(row for row in plan["cases"] if row["source"] == positive["source"] and row["role"] == "in_place_crop")
+    assert not control["selected"]
+    candidate = positive["results"][wanted] | {"alignment": wanted}
+    return plan, positive | {"candidate": candidate, "candidate_anchors": candidate["pts"]}, control
+
+
 def run(clips, reports, output, browser):
     configure(output, ROOT)
     os.environ.update(VERITAS_ENVIRONMENT="dev", VERITAS_FRONTEND_DIR=str(ROOT / "frontend/dist"), VERITAS_LOG_LEVEL="WARNING")
@@ -44,17 +64,11 @@ def run(clips, reports, output, browser):
             database.commit()
         client.headers["X-API-Key"] = key
         for path in reports:
-            report = json.loads(path.read_text())
-            by_role = {(row["source"], row["role"]): row for row in report["cases"]}
-            role = "offset_reuse_tandem" if report["profile"] == "avc-720" else "offset_reuse"
-            matched = next(row for row in report["cases"] if row["role"] == role and row["candidate"]
-                           and row["candidate"]["ranges"] == row["truth"]["ranges"])
-            control = by_role[matched["source"], "in_place_crop"]
-            assert not control["candidate"]
+            report, matched, control = examples(json.loads(path.read_text()))
             baseline = None
             for row, enabled in ((matched, False), (matched, True), (control, True)):
                 settings.video_cropped_sequence_review = enabled
-                source = clips / path.stem / row["delivery"]
+                source = clips / path.stem.removesuffix("-result") / row["delivery"]
                 assert sha_path(source) == row["sha256"]
                 aid = checkout(client, stub, source, filename=source.name)
                 route = f"/api/v2/analyses/{aid}"
@@ -81,7 +95,10 @@ def run(clips, reports, output, browser):
                 if packet:
                     pair = packet["picture_sequence"]
                     assert packet["affects_overall_confidence"] is False
-                    assert pair["framing"] == {field: row["candidate"][field] for field in ("wider_range", "crop_box")}
+                    candidate = row["candidate"]
+                    assert pair["framing"] == {field: candidate[field] for field in ("wider_range", "crop_box", "alignment")
+                                                if field in candidate}
+                    assert check["schema"] == (binding.MOTION_CROP_ALIGNED_SCHEMA if "alignment" in candidate else binding.MOTION_CROP_SCHEMA)
                     assert [[pair[side]["pts"][0], pair[side]["pts"][-1]] for side in ("first", "second")] == row["candidate_anchors"]
                     frames = [frame["anchor"] for frame in packet["frames"]]
                     crop_sizes = [[region["w"], region["h"]] for frame in packet["frames"] if (region := frame.get("context_region"))]

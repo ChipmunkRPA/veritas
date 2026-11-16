@@ -22,7 +22,7 @@ def profile(table, encoding, *, schema=binding.MOTION_SCHEMA):
     supported = binding.motion_profile(dimensions, schema)
     if supported is None or len(table) < supported[1]:
         return None
-    if schema in {binding.MOTION_EXTENDED_SCHEMA, binding.MOTION_CROP_SCHEMA}:
+    if schema in {binding.MOTION_EXTENDED_SCHEMA, *binding.MOTION_CROP_SCHEMAS}:
         rate, limit = supported
         tb, step = table.tb, Fraction(1, rate)
         if any(i < limit for i in table.interpolated) or any(
@@ -159,15 +159,13 @@ def scan(observations, values, tb, encoding, exact_pair, *, source_profile, sche
     if not clock_ok:
         return result
     reflected = schema in binding.MOTION_REFLECTED_SCHEMAS
-    cropped = schema == binding.MOTION_CROP_SCHEMA
+    cropped = schema in binding.MOTION_CROP_SCHEMAS
     if exact_pair is not None and not (reflected or cropped):
         return result | {"reason": "exact_sequence"}
     reverse = schema == binding.MOTION_REVERSE_SCHEMA
     retimed = schema == binding.MOTION_RETIMED_SCHEMA
     if cropped:
-        from app.detectors.video.picture_crop import find
-
-        match = find(values, frame_rate)
+        match, alignment = _crop_match(values, frame_rate, schema)
         if match is not None:
             occurrences = tuple((start, 1) for start, _ in match.ranges)
             count = match.ranges[0][1] - match.ranges[0][0] + 1
@@ -204,4 +202,18 @@ def scan(observations, values, tb, encoding, exact_pair, *, source_profile, sche
         pair["spatial_transform"] = binding.HORIZONTAL_REFLECTION
     if cropped:
         pair["framing"] = {"wider_range": match.wider_range, "crop_box": list(match.crop_box)}
+        if alignment:
+            pair["framing"]["alignment"] = alignment
     return result | {"status": "matched", "reason": None, "frames_scanned": len(ticks), "pair": pair}
+
+
+def _crop_match(values, frame_rate, schema):
+    if schema == binding.MOTION_CROP_SCHEMA:
+        from app.detectors.video.picture_crop import find
+
+        return find(values, frame_rate), None
+    from app.detectors.video.picture_crop_aligned import find as aligned
+
+    matches = [(match, method) for method, match in aligned(values).items() if match]
+    return max(matches, key=lambda row: (row[0].ranges[0][1] - row[0].ranges[0][0], len(row[0].support)),
+               default=(None, None))

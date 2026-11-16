@@ -4,7 +4,7 @@ from __future__ import annotations
 import hashlib
 import time
 from collections.abc import Callable
-from contextlib import closing
+from contextlib import closing, suppress
 from pathlib import Path
 from subprocess import TimeoutExpired
 
@@ -155,8 +155,16 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                                                                detector_path=detector_path, schema=mouth_profile)
         if (crop_profile and len(crop_frames) == crop_limit and cover["frames_scanned"] >= crop_limit
                 and (remaining_s is None or remaining_s - (time.monotonic() - started) > 1.5)):
-            cover[picture_sequence.MOTION_CROP_KEY] = picture_motion.scan(
+            crop = picture_motion.scan(
                 observed[:crop_limit], crop_frames, tb, motion_encoding, None, source_profile=crop_profile, schema=crop_schema)
+            if crop["status"] == "no_match" and (remaining_s is None or remaining_s - (time.monotonic() - started) > 1.5):
+                from cv2 import error as OpenCVError
+
+                # Preserve the completed fixed crop comparison if the optional alignment fails.
+                with suppress(OpenCVError):
+                    crop = picture_motion.scan(observed[:crop_limit], crop_frames, tb, motion_encoding, None,
+                                               source_profile=crop_profile, schema=picture_sequence.MOTION_CROP_ALIGNED_SCHEMA)
+            cover[picture_sequence.MOTION_CROP_KEY] = crop
     return result
 
 

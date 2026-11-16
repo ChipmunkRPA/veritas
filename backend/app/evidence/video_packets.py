@@ -578,7 +578,7 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
         packet_id = picture_sequence.MOTION_REFLECTED_PACKET_ID
         title = "Similar footage flipped left to right"
         selection = "longest_pair_of_similar_reflected_moving_sequences"
-    if review["schema"] == picture_sequence.MOTION_CROP_SCHEMA:
+    if review["schema"] in picture_sequence.MOTION_CROP_SCHEMAS:
         packet_id = picture_sequence.MOTION_CROP_PACKET_ID
         title = "Similar footage shown with a tighter crop"
         selection = "longest_pair_of_similar_cropped_moving_sequences"
@@ -618,9 +618,9 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
                        "It tests a two-to-one speed ratio and can miss changes in framing or other speed ratios.")
         measurements = [{"label": f"{label} range duration", "value": pair["span_s"] * pair["frame_steps"][side], "unit": "seconds"}
                         for side, label in (("first", "First"), ("second", "Second"))]
-    elif review["schema"] == picture_sequence.MOTION_CROP_SCHEMA:
+    elif review["schema"] in picture_sequence.MOTION_CROP_SCHEMAS:
         limitations = (f"The check compares the first {motion_limit} native frames at the same playback speed. "
-                       "It samples fixed crops and can miss other framing changes.")
+                       "It compares crops that stay fixed through both ranges and can miss other framing changes.")
         measurements = [{"label": "Source range duration", "value": pair["span_s"], "unit": "seconds"}]
     elif review["schema"] == picture_sequence.MOTION_REFLECTED_HD_SCHEMA:
         limitations = (f"The check compares whole-picture appearance and motion in the first {motion_limit} native frames. "

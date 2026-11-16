@@ -402,7 +402,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             if profile is None or record["encoding"] != list(motion_encoding):
                 raise ValueError("The original video differs from its motion comparison source profile")
             motion_reads.append((record, exact_review, profile))
-            if record["schema"] == picture_sequence.MOTION_CROP_SCHEMA:
+            if record["schema"] in picture_sequence.MOTION_CROP_SCHEMAS:
                 from app.detectors.video.picture_crop import luminance as crop_luminance
 
                 crop_limit = profile[1]
@@ -547,7 +547,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 raise ValueError("The extended motion comparison displaced an opening result")
         limit = profile[1]
         exact_pair = exact_review["pair"] if exact_review is not None else None
-        values = crop_frames if record["schema"] == picture_sequence.MOTION_CROP_SCHEMA else motion_descriptors
+        values = crop_frames if record["schema"] in picture_sequence.MOTION_CROP_SCHEMAS else motion_descriptors
+        if record["schema"] == picture_sequence.MOTION_CROP_ALIGNED_SCHEMA:
+            fixed = picture_motion.scan(hold_observations[:limit], values[:limit], table.tb, motion_encoding,
+                                        exact_pair, source_profile=profile, schema=picture_sequence.MOTION_CROP_SCHEMA)
+            if fixed["status"] != "no_match":
+                raise ValueError("The aligned copy review displaced a fixed crop result")
         reproduced = picture_motion.scan(hold_observations[:limit], values[:limit], table.tb, motion_encoding,
                                          exact_pair, source_profile=profile, schema=record["schema"])
         if canonical_hash(reproduced) != canonical_hash(record):

@@ -28,6 +28,8 @@ MOTION_RETIMED_SCHEMA = "chipmunk.video-retimed-motion-sequence/1"
 MOTION_REFLECTED_SCHEMA = "chipmunk.video-reflected-motion-sequence/1"
 MOTION_REFLECTED_HD_SCHEMA = "chipmunk.video-reflected-motion-sequence/2"
 MOTION_CROP_SCHEMA = "chipmunk.video-cropped-motion-sequence/1"
+MOTION_CROP_ALIGNED_SCHEMA = "chipmunk.video-cropped-motion-sequence/2"
+MOTION_CROP_SCHEMAS = frozenset({MOTION_CROP_SCHEMA, MOTION_CROP_ALIGNED_SCHEMA})
 MOTION_REFLECTED_SCHEMAS = frozenset({MOTION_REFLECTED_SCHEMA, MOTION_REFLECTED_HD_SCHEMA})
 MOTION_SCHEMAS = frozenset({MOTION_SCHEMA, MOTION_EXTENDED_SCHEMA})
 MOTION_PACKET_ID = "VPR02"
@@ -50,7 +52,7 @@ MOTION_REVIEWS = (
     (MOTION_REVERSE_KEY, MOTION_REVERSE_PACKET_ID, frozenset({MOTION_REVERSE_SCHEMA})),
     (MOTION_RETIMED_KEY, MOTION_RETIMED_PACKET_ID, frozenset({MOTION_RETIMED_SCHEMA})),
     (MOTION_REFLECTED_KEY, MOTION_REFLECTED_PACKET_ID, MOTION_REFLECTED_SCHEMAS),
-    (MOTION_CROP_KEY, MOTION_CROP_PACKET_ID, frozenset({MOTION_CROP_SCHEMA})),
+    (MOTION_CROP_KEY, MOTION_CROP_PACKET_ID, MOTION_CROP_SCHEMAS),
 )
 MOTION_PROFILES = {(320, 180): (20, 180), (640, 360): (25, 225)}
 MOTION_EXTENDED_PROFILES = {(640, 360): (25, 450)}
@@ -58,6 +60,7 @@ MOTION_360P_PROFILES = {(640, 360): (25, 225)}
 MOTION_CROP_PROFILES = {(640, 360): (25, 225), (1280, 720): (25, 200)}
 CROP_WORK_WIDTH, CROP_WORK_HEIGHT = 192, 108
 CROP_PERCENTAGES = (70, 75, 80, 85, 90)
+CROP_ALIGNED_UNIT = 32
 MOTION_ENCODINGS = {("h264", "yuv420p"), ("vp9", "yuv420p")}
 HD_ENCODINGS = MOTION_ENCODINGS | {("hevc", "yuv420p")}
 HD_DIMENSIONS = frozenset({(1280, 720), (1920, 1080), (720, 1280), (1080, 1920)})
@@ -79,7 +82,7 @@ def motion_profile(dimensions, schema):
         return MOTION_EXTENDED_PROFILES.get(dimensions)
     if schema in {MOTION_RETIMED_SCHEMA, MOTION_REFLECTED_SCHEMA}:
         return MOTION_360P_PROFILES.get(dimensions)
-    if schema == MOTION_CROP_SCHEMA:
+    if schema in MOTION_CROP_SCHEMAS:
         return MOTION_CROP_PROFILES.get(dimensions)
     return None
 
@@ -87,7 +90,7 @@ def motion_profile(dimensions, schema):
 def motion_encoding_allowed(schema, encoding):
     if schema == MOTION_REFLECTED_HD_SCHEMA:
         return tuple(encoding or ()) in HD_ENCODINGS
-    return tuple(encoding or ()) in (MOTION_ENCODINGS if schema not in {MOTION_RETIMED_SCHEMA, MOTION_CROP_SCHEMA}
+    return tuple(encoding or ()) in (MOTION_ENCODINGS if schema not in {MOTION_RETIMED_SCHEMA, *MOTION_CROP_SCHEMAS}
                                      else {("h264", "yuv420p")})
 
 
@@ -101,11 +104,14 @@ def motion_parameters(schema, rate):
     if schema == MOTION_REFLECTED_HD_SCHEMA:
         parameters.update(frame_rate=str(rate), minimum_motion_rms=float(Fraction(10) / rate),
                           descriptor="box_rgb8_luminance")
-    if schema == MOTION_CROP_SCHEMA:
+    if schema in MOTION_CROP_SCHEMAS:
         parameters.update(luma_grid=[32, 18], maximum_picture_rms=3., minimum_direct_rms=7.,
                           minimum_motion_rms=.37, minimum_motion_cosine=.82, minimum_motion_rms_ratio=.60,
                           minimum_support_fraction=.60, crop_percentages=list(CROP_PERCENTAGES),
                           working_grid=[CROP_WORK_WIDTH, CROP_WORK_HEIGHT])
+    if schema == MOTION_CROP_ALIGNED_SCHEMA:
+        parameters.update(maximum_picture_rms=3.25, crop_units_per_working_pixel=CROP_ALIGNED_UNIT,
+                          landmark_frame_step=6, maximum_landmark_features=100, maximum_crop_proposals=16)
     return parameters
 
 
@@ -113,16 +119,34 @@ def crop_region(pair, occurrence, width, height):
     crop = pair.get("framing")
     if crop is None or crop["wider_range"] != occurrence:
         return None
+    unit = CROP_ALIGNED_UNIT if "alignment" in crop else 1
     left, top, right, bottom = crop["crop_box"]
-    x, y = left * width // CROP_WORK_WIDTH, top * height // CROP_WORK_HEIGHT
-    x2, y2 = -(-right * width // CROP_WORK_WIDTH), -(-bottom * height // CROP_WORK_HEIGHT)
+    work_width, work_height = CROP_WORK_WIDTH * unit, CROP_WORK_HEIGHT * unit
+    x, y = left * width // work_width, top * height // work_height
+    x2, y2 = -(-right * width // work_width), -(-bottom * height // work_height)
     return {"x": x, "y": y, "w": x2 - x, "h": y2 - y}
 
 
-def valid_crop_box(box):
+def valid_crop_box(box, *, alignment=None):
     if not isinstance(box, list) or len(box) != 4 or any(type(value) is not int for value in box):
         return False
     left, top, right, bottom = box
+    if alignment == "landmarks":
+        width, height = CROP_WORK_WIDTH * CROP_ALIGNED_UNIT, CROP_WORK_HEIGHT * CROP_ALIGNED_UNIT
+        return (0 <= left < right <= width and 0 <= top < bottom <= height
+                and 69 * width - 100 <= 100 * (right - left)
+                and 1000 * (right - left) <= 925 * width + 1000
+                and abs(CROP_WORK_HEIGHT * (right - left) - CROP_WORK_WIDTH * (bottom - top))
+                <= CROP_WORK_HEIGHT + CROP_WORK_WIDTH)
+    if alignment == "centered":
+        for percent in CROP_PERCENTAGES:
+            w, h = CROP_WORK_WIDTH * CROP_ALIGNED_UNIT, CROP_WORK_HEIGHT * CROP_ALIGNED_UNIT
+            outside = (100 - percent) / 200
+            if box == [round(w * outside), round(h * outside), round(w * (1 - outside)), round(h * (1 - outside))]:
+                return True
+        return False
+    if alignment is not None:
+        return False
     for scale in CROP_PERCENTAGES:
         width, height = round(CROP_WORK_WIDTH * scale / 100), round(CROP_WORK_HEIGHT * scale / 100)
         spare_x, spare_y = CROP_WORK_WIDTH - width, CROP_WORK_HEIGHT - height
@@ -377,7 +401,7 @@ def _validate_motion_scope(record, source, exact, scanned, *, schemas):
     rate, limit = profile
     _require(exact is not None and scanned >= limit and record["parameters"] == motion_parameters(schema, rate)
              and motion_encoding_allowed(schema, record["encoding"]), "Motion sequence has unsupported source scope or parameters")
-    exact_takes_priority = exact["status"] == "matched" and schema not in {MOTION_REFLECTED_SCHEMA, MOTION_CROP_SCHEMA}
+    exact_takes_priority = exact["status"] == "matched" and schema not in {MOTION_REFLECTED_SCHEMA, *MOTION_CROP_SCHEMAS}
     if record["status"] == "unavailable":
         _require(schema != MOTION_EXTENDED_SCHEMA and record["frames_scanned"] == 0 and (record["reason"] == "source_clock"
                  or (record["reason"] == "exact_sequence" and exact_takes_priority)),
@@ -404,7 +428,7 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
     reverse = schema in {REVERSE_SCHEMA, MOTION_REVERSE_SCHEMA}
     retimed = schema == MOTION_RETIMED_SCHEMA
     reflected = schema in MOTION_REFLECTED_SCHEMAS
-    cropped = schema == MOTION_CROP_SCHEMA
+    cropped = schema in MOTION_CROP_SCHEMAS
     hd = schema == MOTION_REFLECTED_HD_SCHEMA
     _require(len(packets) == 1 and packets[0].get("picture_sequence") == pair,
              "Repeated sequence omits the recorded pair")
@@ -417,8 +441,12 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
     _require(("framing" in pair) == cropped, "Repeated sequence has unexpected crop geometry")
     if cropped:
         framing = pair["framing"]
-        _require(set(framing) == {"wider_range", "crop_box"} and framing["wider_range"] in {"first", "second"}
-                 and valid_crop_box(framing["crop_box"]), "Repeated sequence has an unsupported crop")
+        aligned = schema == MOTION_CROP_ALIGNED_SCHEMA
+        fields = {"wider_range", "crop_box"} | ({"alignment"} if aligned else set())
+        _require(set(framing) == fields and framing["wider_range"] in {"first", "second"}
+                 and (not aligned or framing["alignment"] in {"centered", "landmarks"})
+                 and valid_crop_box(framing["crop_box"], alignment=framing.get("alignment")),
+                 "Repeated sequence has an unsupported crop")
     strides = pair.get("frame_steps", {"first": 1, "second": 1})
     if retimed:
         _require(set(strides) == {"first", "second"} and all(type(step) is int for step in strides.values())
@@ -507,7 +535,7 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
 
 
 def validate_clock(record, table_pts: Sequence[int], interpolated: Sequence[int], *, tb: Fraction):
-    fixed_clock = {MOTION_EXTENDED_SCHEMA, MOTION_REVERSE_SCHEMA, MOTION_RETIMED_SCHEMA, MOTION_REFLECTED_SCHEMA, MOTION_CROP_SCHEMA}
+    fixed_clock = {MOTION_EXTENDED_SCHEMA, MOTION_REVERSE_SCHEMA, MOTION_RETIMED_SCHEMA, MOTION_REFLECTED_SCHEMA, *MOTION_CROP_SCHEMAS}
     if record and record["schema"] in fixed_clock and record["status"] != "unavailable":
         limit = record["frames_scanned"]
         pts = table_pts[:limit]

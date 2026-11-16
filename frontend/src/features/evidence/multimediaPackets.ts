@@ -41,7 +41,7 @@ export interface VideoEvidencePacket extends PacketBase {
   scene_return?: { schema: 'picture-change-return/1' | 'picture-change-return/2'; start_stream_s: number; end_stream_s: number; tiles: number[] }
   picture_sequence?: { first: PictureSequenceSpan; second: PictureSequenceSpan; frame_count: number; span_s: number; order?: 'reverse';
     frame_steps?: Record<'first' | 'second', 1 | 2>; spatial_transform?: 'horizontal_reflection';
-    framing?: { wider_range: 'first' | 'second'; crop_box: [number, number, number, number] } }
+    framing?: { wider_range: 'first' | 'second'; crop_box: [number, number, number, number]; alignment?: 'centered' | 'landmarks' } }
   face_interval?: { start_stream_s: number; end_stream_s: number; lift: number;
     samples: Record<'before' | 'during' | 'after', { frame_index: number; pts: number; score: number }[]> }
   face_sequence?: { start_stream_s: number; end_stream_s: number; response: number;

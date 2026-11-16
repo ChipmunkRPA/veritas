@@ -54,7 +54,7 @@ def _region(box):
             right / picture_crop.WORK_WIDTH, bottom / picture_crop.WORK_HEIGHT)
 
 
-def _deliveries(frames, case, geometry, dimensions):
+def _deliveries(frames, case, geometry, dimensions, *, fractional=None):
     early, late, short, long, zoom = geometry
     if case == "original":
         return (frames,), None
@@ -65,7 +65,10 @@ def _deliveries(frames, case, geometry, dimensions):
         reference, target, count = late, early, long
         region = zoom
     elif case == "between_grid_reuse":
-        region = (0.035, 0.121, 0.86, 0.946)
+        region = fractional[0] if fractional else (0.035, 0.121, 0.86, 0.946)
+    elif case == "center_fractional_reuse":
+        reference, target, count = late, early, long
+        region = fractional[1]
     else:
         region = (0.075, 0.075, 0.925, 0.925)
     if case == "in_place_crop" or case == "moving_crop":
@@ -84,11 +87,20 @@ def _deliveries(frames, case, geometry, dimensions):
     return (frames[:target], replacement, frames[target + count:]), truth
 
 
-def build(output, sources, profile):
+def _fractional_crops(digest):
+    size = (.7265, .7765, .8265, .8765, .9115)[int(digest[14:16], 16) % 5]
+    x, y = [(1 - size) * (.14 + byte / 255 * .72) for byte in (int(digest[16:18], 16), int(digest[18:20], 16))]
+    center = (1 - size) / 2
+    return (x, y, x + size, y + size), (center, center, center + size, center + size)
+
+
+def build(output, sources, profile, *, alignment_plan=False):
     dimensions = PROFILES[profile]
     output.mkdir(parents=True)
     assert len({row["sha256"] for row in sources}) == len(sources)
     cases = []
+    roles = (ROLES + ("center_fractional_reuse", "center_fractional_reuse_tandem", "between_grid_reuse_tandem")
+             if alignment_plan else ROLES)
     for source in sources:
         url_path = Path(source["path"])
         digest = _sha(url_path)
@@ -103,11 +115,12 @@ def build(output, sources, profile):
         with tempfile.TemporaryDirectory(prefix=".frames-", dir=output) as spool:
             frames = _prepared_frames(source, Path(spool) / "source.yuv", *dimensions, RATE, COUNT)
             priors = {}
-            for case in ROLES:
+            for case in roles:
                 filename = f"{source['id']}-{case}.mp4"
                 parent = case.removesuffix("_tandem")
                 if parent == case:
-                    segments, truth = _deliveries(frames, case, geometry, dimensions)
+                    segments, truth = _deliveries(frames, case, geometry, dimensions,
+                                                   fractional=_fractional_crops(digest) if alignment_plan else None)
                     prior = None
                 else:
                     original, truth = priors[parent]
@@ -122,6 +135,7 @@ def build(output, sources, profile):
         "profile": profile, "dims": list(dimensions), "minimum_iou": .5,
         "candidate_sha256": _sha(Path(picture_crop.__file__)),
         "sources": [{k: v for k, v in row.items() if k != "path"} for row in sources], "cases": cases,
+        **({"alignment_plan": True} if alignment_plan else {}),
     })
 
 
@@ -178,11 +192,12 @@ if __name__ == "__main__":
     prepare.add_argument("output", type=Path)
     prepare.add_argument("sources", type=Path)
     prepare.add_argument("profile", choices=PROFILES)
+    prepare.add_argument("--alignment-plan", action="store_true")
     measure = commands.add_parser("score")
     measure.add_argument("output", type=Path)
     measure.add_argument("result", type=Path)
     args = parser.parse_args()
     if args.command == "build":
-        build(args.output, json.loads(args.sources.read_text()), args.profile)
+        build(args.output, json.loads(args.sources.read_text()), args.profile, alignment_plan=args.alignment_plan)
     else:
         score(args.output, args.result)

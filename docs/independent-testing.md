@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [subpixel crop alignment replay](video-crop-alignment-2026-11-16.md#replay)
+recounts all four comparisons on 260 deliveries from ten camera
+recordings. It can recheck the timing of each result with FFprobe and
+measures crop-edge error against the authored native rectangles.
+
 The [cropped-footage replay](video-cropped-reuse-2026-11-16.md#replay)
 recounts 160 deliveries and reads back the original frame timestamps
 independently. It separates crop placements the method covers from

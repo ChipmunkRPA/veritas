@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [More precise alignment of cropped repeats](video-crop-alignment-2026-11-16.md)
+  locates 76 of 140 staged repeats versus 32 with the fixed search.
+  The 120 controls stayed clear. The app shows the matching time
+  ranges and original crops for supported 360p and 720p submissions
+  with zero AI-confidence weight.
+
 - [Footage reused with a tighter crop](video-cropped-reuse-2026-11-16.md)
   adds 27 useful paired locations on 32 offset-crop deliveries across
   360p and 720p, with no new flags across 96 controls. Centered and

@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [two-generator audio replay](audio-joint-generator-transfer-2026-11-16.md#replay-and-compare-another-detector)
+publishes sample-level truth for new declared readers with same-word TTS
+and voice conversion. The exporter creates the shared evaluation format.
+It lets another detector submit its selected source ranges for the same
+matched real, edited and isolated-background inputs.
+
 The [WebP geometric copy replay](image-small-affine-webp-2026-11-16.md#replay)
 compares three search methods on 466 encodes from 37 photo groups. It
 reconstructs both crop locations from a single uploaded image and verifies

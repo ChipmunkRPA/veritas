@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Training short voice-edit checks on two generators](audio-joint-generator-transfer-2026-11-16.md)
+  raises useful locations from 10 to 20 across 224 retained edits at the
+  strict point, with ten additional alerts across 275 ordinary deliveries.
+  The separate eight-reader noisy test rises from three to five useful
+  locations on 32 edited deliveries at the same 15/48 ordinary alerts.
+  Both noise-level gains come from one voice-conversion edit. The new
+  fits remain in evaluation.
+
 - [Small geometric copies in a single lossy WebP](image-small-affine-webp-2026-11-16.md)
   locates both copied areas on 41 of 168 staged edits, up from 16, with
   zero flags across 298 ordinary deliveries. Both areas are shown with

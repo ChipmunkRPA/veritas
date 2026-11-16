@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short speech boundary replay](audio-edit-boundary-direction-2026-11-16.md#independent-replay)
+recounts fixed operating points and exact time overlap across 559
+submissions. The new matched reader set also replays the original,
+ordinary resample, synthetic edit and exact competing background on
+the same clock.
+
 The [same-frame face calibration replay](video-face-quantization-calibration-2026-11-16.md#replay)
 compares a shared calibration and two adjustments for quantization on
 270 matched deliveries. It also replays 24 camera controls and shows

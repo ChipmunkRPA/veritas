@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Separate entry and exit cues for speech edits](audio-edit-boundary-direction-2026-11-16.md)
+  added four useful ranges in one simulated room and one in the retained
+  ICSI test. The nine new matched readers supplied 99 submissions at two
+  interference levels and without added sound. The candidates supplied
+  zero useful locations there and stay in evaluation.
+
 - [Same-frame face calibration across three encodes](video-face-quantization-calibration-2026-11-16.md)
   adds six of 60 strongly recompressed swap flags without increasing
   the five of 30 ordinary flags at that delivery. Across all encodes it

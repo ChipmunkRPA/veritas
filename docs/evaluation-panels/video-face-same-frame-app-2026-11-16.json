@@ -1,0 +1,61 @@
+{
+  "cases": {
+    "03-uniface-direct-on": {
+      "flagged": true,
+      "method": "paired-whole-face-samples/1",
+      "sha256": "8670a4de49da615b787b50a682833501fc7c35d22f26424e4ef998d5b762a451"
+    },
+    "09-inswapper-tandem-off": {
+      "flagged": false,
+      "method": "paired-whole-face-samples/1",
+      "sha256": "6150650611719ab7bbfe1fa65eeb55ce206a75606b2e7cff8725787345f44e7c"
+    },
+    "09-inswapper-tandem-on": {
+      "evidence_window_s": [
+        0.56,
+        3.4
+      ],
+      "flagged": true,
+      "method": "same-frame-face-samples/1",
+      "pdf_api_json_agree": true,
+      "sha256": "6150650611719ab7bbfe1fa65eeb55ce206a75606b2e7cff8725787345f44e7c",
+      "signed_source_verification": true,
+      "six_exact_images": true,
+      "source_samples": [
+        14,
+        57,
+        85
+      ]
+    },
+    "09-ordinary-tandem-on": {
+      "flagged": false,
+      "method": "paired-whole-face-samples/1",
+      "sha256": "abcccccd682fbaa7e7449a45609f304a7919649a1dc073030fb79dc3e0b57382"
+    },
+    "20-uniface-tandem-off": {
+      "flagged": false,
+      "method": "paired-whole-face-samples/1",
+      "sha256": "ad68c8c89fe9f53448dbf4ccceaa5094919d5fcd7fe8259ca10e61c04134e740"
+    },
+    "20-uniface-tandem-on": {
+      "evidence_window_s": [
+        0.56,
+        3.4
+      ],
+      "flagged": true,
+      "method": "same-frame-face-samples/1",
+      "pdf_api_json_agree": true,
+      "sha256": "ad68c8c89fe9f53448dbf4ccceaa5094919d5fcd7fe8259ca10e61c04134e740",
+      "signed_source_verification": true,
+      "six_exact_images": true,
+      "source_samples": [
+        14,
+        57,
+        85
+      ]
+    }
+  },
+  "overall_assessments_unchanged": true,
+  "simulated_paid_jobs": 6,
+  "unpaid_jobs": 0
+}

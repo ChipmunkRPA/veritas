@@ -6,6 +6,7 @@ from math import isfinite
 
 import cv2
 
+from app.core.config import settings
 from app.detectors.image import dfdc, gend
 from app.detectors.image.adapters.common import revisions
 from app.detectors.image.faces import detect_faces
@@ -16,6 +17,10 @@ from app.evidence import whole_face_binding as whole_face
 
 DETECTOR = "vid.review.whole_face"
 FAMILY = "whole-face-review"
+
+
+def same_frame_enabled() -> bool:
+    return settings.environment == "dev" and settings.video_whole_face_review and settings.video_whole_face_same_frame_review
 
 
 class WholeFaceReviewDetector(Detector):
@@ -81,11 +86,21 @@ class WholeFaceReviewDetector(Detector):
         if score is None:
             return DetectorResult.not_applicable("each face check needs at least four usable samples")
         flagged = score > whole_face.REVIEW_POINT
+        method = whole_face.METHOD
         observed = ("The paired face checks found a face-swap pattern worth reviewing in the sampled frames." if flagged else
                     "The paired face checks did not flag a face-swap pattern in the sampled frames.")
+        if not flagged and same_frame_enabled():
+            from app.detectors.video.face_return import source_carrier
+
+            if inputs.encoding == ("h264", "yuv420p") and whole_face.same_frame_source(
+                    table, (*inputs.encoding, inputs.codec_tag), source_carrier(store.path)):
+                alternative = whole_face.same_frame_score(*arms)
+                if alternative is not None and alternative > whole_face.SAME_FRAME_POINT:
+                    method, score, flagged = whole_face.SAME_FRAME_METHOD, alternative, True
+                    observed = "The combined responses on the same sampled faces show a face-swap pattern worth reviewing."
         return DetectorResult(status="ok", aggregate=UnitScore("global", score, "score"), observed=observed,
                               reference="Six interior source frames, with at least four usable inputs per check.",
                               reasoning="The response describes sampled faces and carries no weight in the overall AI assessment.",
-                              details={"review_only": True, "whole_face_review": {"schema": whole_face.METHOD, "flagged": flagged,
+                              details={"review_only": True, "whole_face_review": {"schema": method, "flagged": flagged,
                                        "score_hex": score.hex(), "time_base": table.time_base, "samples": samples}},
                               model_revisions=revisions(ctx, *self.MODELS))

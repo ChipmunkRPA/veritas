@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [same-frame face calibration replay](video-face-quantization-calibration-2026-11-16.md#replay)
+compares a shared calibration and two adjustments for quantization on
+270 matched deliveries. It also replays 24 camera controls and shows
+how to verify the exact frames from a signed application report.
+
 The [paired face calibration replay](video-paired-face-calibration-2026-11-16.md#replay)
 recomputes four ways to combine exact paired face readings on 24
 separate targets. It retains unassessed clips and explains how both

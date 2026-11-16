@@ -285,7 +285,7 @@ def _whole_face_candidate(result: dict, table: FrameTable, source: dict, anchors
              "whole_face_review": record, "window": {"frame_indices": list(indices)},
              "rows": [{"frame_index": row["frame_index"], "score": None, "box": row["box"]} for row in samples],
              "peak": {"frame_index": samples[1]["frame_index"], "score": float.fromhex(record["score_hex"])},
-             "scored_frame_count": len(indices), "threshold": whole_face_binding.REVIEW_POINT}]
+             "scored_frame_count": len(indices), "threshold": whole_face_binding.review_point(record["schema"])}]
 
 
 def _window_observations(result: dict, table: FrameTable, anchors: dict) -> tuple[list[dict], set[int]]:
@@ -968,7 +968,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             origin = source["timeline_origin_s"]
             start, end = table.seconds(indices[0]), table.seconds(indices[-1])
             packet.update(title="Sampled faces to review" if whole["flagged"] else "Sampled face review",
-                          evidence_type="anomaly", claim_scope="sampled_window", semantics=whole_face_binding.METHOD,
+                          evidence_type="anomaly", claim_scope="sampled_window", semantics=whole["schema"],
                           whole_face_review=whole, affects_overall_confidence=False,
                           observation=candidate["signals"][0]["observed"],
                           interpretation="The source frames show the faces at sampled positions. The check compares responses across the clip and carries no weight in overall AI confidence.",

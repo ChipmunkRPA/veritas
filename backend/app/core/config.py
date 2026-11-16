@@ -327,6 +327,7 @@ class Settings(BaseSettings):
     video_face_second_return_review: bool = False  # Check a second disjoint range on tested short H.264 profiles.
     video_face_detail_repeat_review: bool = False  # Repeat a selected coarse appearance range at lower image detail.
     video_whole_face_review: bool = False  # Add six native face observations for local review without changing the estimate.
+    video_whole_face_same_frame_review: bool = False  # Optional fallback combining both readings at the same sampled face.
     audio_weight: float = 0.8  # docs/eval_audio.md: fused AUC 0.92 on ASVspoof-DF + in-the-wild, FPR ~10 % in the wild
     audio_classifiers: list[str] = [  # HuggingFace audio-classification checkpoints, each "repo_id|positive_label_substring|weight"
         "Gustking/wav2vec2-large-xlsr-deepfake-audio-classification|fake|1.0",  # AUC 0.917 overall / 0.974 ASVspoof-DF

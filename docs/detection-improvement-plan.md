@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Same-frame face calibration across three encodes](video-face-quantization-calibration-2026-11-16.md)
+  adds six of 60 strongly recompressed swap flags without increasing
+  the five of 30 ordinary flags at that delivery. Across all encodes it
+  adds 13 swap flags and four ordinary alerts. The optional development
+  fallback shows the sampled source frames and face crops in the app,
+  PDF and JSON with zero overall AI confidence weight.
+
 - [Paired face calibration on a fresh codec panel](video-paired-face-calibration-2026-11-16.md)
   compares four combinations on 24 additional target groups. The
   current check flags 35/48 direct and 15/48 tandem swaps, with 4/24

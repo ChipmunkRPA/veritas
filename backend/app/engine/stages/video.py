@@ -63,6 +63,7 @@ from app.detectors.video.adapters.synthesis import ClipInputs
 from app.detectors.video.adapters.tracks import LowResVideo
 from app.detectors.video.adapters.whole_face import DETECTOR as WHOLE_FACE_REVIEW
 from app.detectors.video.adapters.whole_face import FAMILY as WHOLE_FACE_FAMILY
+from app.detectors.video.adapters.whole_face import same_frame_enabled
 from app.detectors.video.audio import SR, is_mostly_silence, limit_voice_signal, silent_signal, voice_signal
 from app.detectors.video.audio import specs as audio_specs
 from app.detectors.video.decode import DecodeError, FrameTable, decode_stream, probe_frames
@@ -100,6 +101,7 @@ from app.evidence.audio_binding import (
     MONO_VOICE_LIMIT,
     VOICE_CLOCK_LIMIT,
     VOICE_CLOCK_POLICY,
+    current_voice_detection_output,
     exclude_recording_voice,
     limit_voice_screening,
     source_clock_breaks,
@@ -419,6 +421,12 @@ def faces(ctx: StageContext) -> dict[str, Any]:
 
 
 AUDIO_UNDECODABLE = "the sound track could not be decoded"
+WHOLE_FACE_SAME_FRAME_POLICY = "whole_face_same_frame_review"
+
+
+def current_detect_output(output) -> bool:
+    return (current_voice_detection_output(output)
+            and output.get(WHOLE_FACE_SAME_FRAME_POLICY, False) is same_frame_enabled())
 
 
 def detect(ctx: StageContext) -> dict[str, Any]:
@@ -427,12 +435,13 @@ def detect(ctx: StageContext) -> dict[str, Any]:
     audio = ctx.state.get("audio")
     audio_failure = AUDIO_UNDECODABLE if audio is not None and audio.status == "unreadable" else None
     outputs = _outputs(ctx)
+    policies = {"voice_clock_policy": VOICE_CLOCK_POLICY, WHOLE_FACE_SAME_FRAME_POLICY: same_frame_enabled()}
     out = common.run_detectors(ctx, (Modality.VIDEO, Modality.AUDIO),
                                exclude={"provenance", "face-detection", "face-tracking", SEQUENCE_FAMILY, WHOLE_FACE_FAMILY},
                                outputs=outputs, max_units=VIDEO_MAX_UNIT_SCORES, face_failure=common.face_stage_failure(ctx),
                                audio_failure=audio_failure)
     if not {SEQUENCE_REVIEW, APPEARANCE_REVIEW, WHOLE_FACE_REVIEW}.intersection(ctx.state["registry"].enabled(Modality.VIDEO, ctx.profile)):
-        return {**out, "voice_clock_policy": VOICE_CLOCK_POLICY}
+        return {**out, **policies}
     store = ctx.state.get("frame_store")
     sampled = ctx.state.get("frames") or []
     # The frozen experiment used these largest-face positions. No classifier
@@ -449,7 +458,7 @@ def detect(ctx: StageContext) -> dict[str, Any]:
                                   outputs=dataclasses.replace(outputs, face_review=inputs),
                                   max_units=VIDEO_MAX_UNIT_SCORES, face_failure=common.face_stage_failure(ctx))
     merged = {key: [*out.get(key, []), *review.get(key, [])] for key in ("detectors", "exhibits", "artefacts")}
-    return {**merged, "voice_clock_policy": VOICE_CLOCK_POLICY}
+    return {**merged, **policies}
 
 
 # --- legacy fuser ------------------------------------------------------------------------------------------

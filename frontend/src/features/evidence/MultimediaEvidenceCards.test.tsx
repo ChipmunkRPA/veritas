@@ -578,14 +578,14 @@ describe('ordinary multimedia evidence', () => {
     expect(review.queryByRole('link')).toBeNull()
   })
 
-  it('shows the whole-clip face review as six positions and three source examples', () => {
+  it.each([undefined, 'same-frame-face-samples/1'] as const)('shows six planned positions and three source examples (%s)', (schema) => {
     const set = structuredClone(video)
     const item = set.packets[0]
     const samples = [6, 12, 18, 24, 30, 36].map((frame_index, i) => ({ frame_index, pts: 12000 + i * 2000,
       responses_hex: ['0x1.0p-1', '0x1.0p+0'] as [string, string] }))
     item.title = 'Sampled faces to review'
     item.claim_scope = 'sampled_window'
-    item.whole_face_review = { flagged: true, time_base: '1/1000', samples }
+    item.whole_face_review = { schema, flagged: true, time_base: '1/1000', samples }
     item.window = { frame_indices: samples.map((row) => row.frame_index), start_pts: 12000, end_pts: 22000,
       time_base: '1/1000', start_stream_s: 12, end_stream_s: 22, start_playback_s: 2, end_playback_s: 12 }
     item.frames = [samples[0], samples[3], samples[5]].map((row) => ({ ...item.frames[0], id: `V01.${row.frame_index}`,
@@ -593,6 +593,7 @@ describe('ordinary multimedia evidence', () => {
         stream_time_s: row.pts / 1000, playback_time_s: row.pts / 1000 - 10 } }))
     show(set)
     expect(screen.getByRole('heading', { name: /Sampled faces to review/ })).toBeTruthy()
+    expect(screen.getByText(schema ? /combined at each jointly measured face/ : /compared faces at six sampled positions/)).toBeTruthy()
     expect(screen.getByText(/Planned frame indices: 6, 12, 18, 24, 30, 36/)).toBeTruthy()
     expect(screen.getAllByAltText(/exact original video frame/)).toHaveLength(3)
     expect(screen.getAllByAltText(/source face crop for context/)).toHaveLength(3)

@@ -81,3 +81,39 @@ def test_measurement_and_source_tampering_fails(packet_inputs, path, value):
     target[path[-1]] = value
     with pytest.raises(ValueError):
         review.validate_packet(packet, source, pts=pts)
+
+
+def test_same_frame_fallback_binds_joint_support_and_exact_delivery():
+    pts = list(range(0, 100 * 512, 512))
+    source = {"width": 640, "height": 360, "time_base": "1/12800", "frame_count": len(pts)}
+    indices = review.sample_indices(pts)
+    first, second = [0.55] * 6, [-1.0] * 6
+    assert review.paired_score(first, second) < review.REVIEW_POINT
+    joint = review.same_frame_score(first, second)
+    record = {"schema": review.SAME_FRAME_METHOD, "time_base": source["time_base"], "flagged": True,
+              "score_hex": joint.hex(),
+              "samples": [{"frame_index": i, "pts": pts[i], "box": {"x": 5, "y": 5, "w": 48, "h": 48},
+                           "responses_hex": [a.hex(), b.hex()]}
+                          for i, a, b in zip(indices, first, second, strict=True)]}
+    assert review.validate(record, source, pts=pts) == indices
+    assert review.validate(record, source) == indices
+
+    altered_clock = list(pts)
+    altered_clock[1] += 1
+    with pytest.raises(ValueError, match="fallback profile"):
+        review.validate(record, source, pts=altered_clock)
+    with pytest.raises(ValueError, match="fallback profile"):
+        review.validate(record, {**source, "width": 1280})
+
+    already_flagged = deepcopy(record)
+    for sample in already_flagged["samples"]:
+        sample["responses_hex"][0] = 0.9.hex()
+    with pytest.raises(ValueError, match="fallback profile"):
+        review.validate(already_flagged, source)
+
+    partial = deepcopy(record)
+    partial["samples"][0].update(box=None, responses_hex=[None, None])
+    for sample in partial["samples"][1:3]:
+        sample["responses_hex"][1] = None
+    with pytest.raises(ValueError, match="fallback profile"):
+        review.validate(partial, source)

@@ -26,7 +26,8 @@ def digest(value):
     return hashlib.sha256(value.encode()).hexdigest()
 
 
-def plan(base, output):
+def plan(base, output, *, counts=None, max_source_seconds=10, excluded_groups=()):
+    counts = COUNTS if counts is None else counts
     known = base / "video-common-sources-v89"
     permissions = known / "permissions"
     receipt = sources.read(permissions / "receipt.json")
@@ -56,7 +57,8 @@ def plan(base, output):
     eligible = []
     for case in candidates:
         target = case["target"]
-        if not 5 <= float(target["end_time"]) - float(target["start_time"]) <= 10:
+        group_key = digest(RULE + "/" + target["id"])
+        if group_key in excluded_groups or not 5 <= float(target["end_time"]) - float(target["start_time"]) <= max_source_seconds:
             continue
         paths = {"ordinary": "original_videos/" + target["filename"]} | {
             item["generator"]: item["generator"] + "/" + item["filename"] for item in case["swaps"]}
@@ -67,16 +69,16 @@ def plan(base, output):
             files[family] = {"path": name, "sha256": sha, "size": size}
         if any(row["size"] > LIMIT for row in files.values()):
             continue
-        eligible.append({"group": digest(RULE + "/" + target["id"]), "source_video_url": target["original_link"],
+        eligible.append({"group": group_key, "source_video_url": target["original_link"],
                          "donors": case["donor_source_keys"], "files": files})
     eligible.sort(key=lambda row: row["group"])
-    chosen = eligible[:sum(COUNTS.values())]
-    assert len(chosen) == sum(COUNTS.values())
+    chosen = eligible[:sum(counts.values())]
+    assert len(chosen) == sum(counts.values())
     for i, group in enumerate(chosen):
-        group.update(role="development" if i < COUNTS["development"] else "held", index=i)
+        group.update(role="development" if i < counts["development"] else "held", index=i)
     assert len({media["sha256"] for item in chosen for media in item["files"].values()}) == len(chosen) * 3
     assert len({donor for row in chosen for donor in row["donors"]}) == len(chosen) * 2
-    value = {"recipe": RECIPE, "rules": RULE, "revision": sources.RTFS_REV, "selected_groups": COUNTS,
+    value = {"recipe": RECIPE, "rules": RULE, "revision": sources.RTFS_REV, "selected_groups": counts,
              "groups": chosen, "historical_groups_excluded": len({row["group"] for row in prior}),
              "metadata_sha256": {name: receipt["files"][name]["sha256"] for name in metadata},
              "publisher_file_info_sha256": sources.sha(info)}

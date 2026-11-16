@@ -42,6 +42,7 @@ from app.evidence import (
     picture_sequence,
     scene_return_binding,
     video_viseme_binding,
+    whole_face_binding,
 )
 from app.evidence.av_binding import TIMING_WINDOWS
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
@@ -413,8 +414,14 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     cut_records, cut_indices, cut_pixels = [], set(), {}
     interpolated = set(table.interpolated)
     packets = [*evidence["packets"], *(evidence.get("av") or {}).get("packets", [])]
+    if any(packet.get("semantics") == whole_face_binding.SAME_FRAME_METHOD for packet in packets):
+        delivery = probe_container(original, include_codec_tag=True)
+        encoding = delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag")
+        if not whole_face_binding.same_frame_source(table, encoding, face_return.source_carrier(original)):
+            raise ValueError("The original video differs from the same-frame face review profile")
     for packet in packets:
         _verify_clip_clock(packet, table, interpolated)
+        whole_face_binding.validate_packet(packet, source, pts=table.pts)
         validate_face_boundary(packet, source, evidence["version"], table_pts=table.pts, interpolated=interpolated)
         face_spatial_cut_binding.validate_packet(packet, source, evidence["version"], table_pts=table.pts, interpolated=interpolated)
         validate_face_return(packet, source, table_pts=table.pts, interpolated=interpolated,

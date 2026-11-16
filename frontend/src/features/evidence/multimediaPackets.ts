@@ -54,7 +54,7 @@ export interface VideoEvidencePacket extends PacketBase {
     window_start_frame_index?: number;
     frame_inputs: { frame_index: number }[]; scene_frame_inputs?: { frame_index: number }[];
     edges?: Record<'entry' | 'exit', { frame_indices: number[] }> }
-  whole_face_review?: { flagged: boolean; time_base: string;
+  whole_face_review?: { schema?: 'paired-whole-face-samples/1' | 'same-frame-face-samples/1'; flagged: boolean; time_base: string;
     samples: { frame_index: number; pts: number; responses_hex: [string | null, string | null] }[] }
   clip?: { status: 'unavailable'; reason: string } | { status: 'ready'; artifact_ref: string;
     start_frame_index: number; end_frame_index_exclusive: number; source_pts: number[]; clip_pts: number[]; clip_time_base: string;

@@ -253,7 +253,9 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         : packet.mouth_local_hold && packet.window
         ? <>Measured mouth-region hold <strong>{seconds(packet.window.start_stream_s)}–{seconds(packet.window.end_stream_s)}</strong> on the source clock. The end is exclusive. Source frames {packet.mouth_local_hold.frames[0]}–{packet.mouth_local_hold.frames[1] - 1}.</>
         : packet.whole_face_review
-        ? 'Two checks compared faces at six sampled positions across the clip. The three frames shown below are examples of those inputs.'
+        ? packet.whole_face_review.schema === 'same-frame-face-samples/1'
+          ? 'Both readings were combined at each jointly measured face. The three frames below show representative inputs.'
+          : 'Two checks compared faces at six sampled positions across the clip. The three frames shown below are examples of those inputs.'
         : packet.face_sequence
         ? <>Measured face-change range <strong>{seconds(packet.face_sequence.start_stream_s)}–{seconds(packet.face_sequence.end_stream_s)}</strong>. Three consecutive crops support each of {packet.face_sequence.centers.during.length} centers in this range. The response belongs to the sequence.</>
         : packet.face_return

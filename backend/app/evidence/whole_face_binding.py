@@ -12,11 +12,37 @@ FRAME_COUNT = 6
 MIN_SCORED_FRAMES = 4
 MIN_FACE_PX = 48
 METHOD = "paired-whole-face-samples/1"
+SAME_FRAME_METHOD = "same-frame-face-samples/1"
+METHODS = frozenset({METHOD, SAME_FRAME_METHOD})
+SAME_FRAME_ENCODING = ("h264", "yuv420p", "avc1")
+SAME_FRAME_DIMENSIONS = (640, 360)
+SAME_FRAME_PICTURES = 100
+SAME_FRAME_STEP = Fraction(1, 25)
 # Each arm is centered and scaled by its median and 90th percentile on the
 # same ten development originals. The paired point was frozen on those ten.
 REFERENCE_SCALE = (0.024325260892510414, 0.43718233704566956)
 COMPLEMENT_SCALE = (-3.6829073429107666, 0.11348772048950195)
 REVIEW_POINT = 1.2940809706865464
+# Pooled ordinary calibration in docs/video-face-quantization-calibration-2026-11-16.md.
+SAME_FRAME_NORMALIZERS = ((0.03397737070918083, 0.6322437501512468),
+                          (-3.1351442337036133, 7.178168892860413))
+SAME_FRAME_POINT = 0.4046108311641258
+
+
+def _fixed_clock(pts, time_base) -> bool:
+    return len(pts) == SAME_FRAME_PICTURES and all(
+        (tick - pts[0]) * time_base == index * SAME_FRAME_STEP for index, tick in enumerate(pts))
+
+
+def same_frame_source(table, encoding, carrier) -> bool:
+    return (encoding == SAME_FRAME_ENCODING and carrier == "mp4"
+            and (table.width, table.height) == SAME_FRAME_DIMENSIONS
+            and not (table.rotation or table.truncated or table.interpolated)
+            and _fixed_clock(table.pts, table.tb))
+
+
+def review_point(schema: str) -> float:
+    return SAME_FRAME_POINT if schema == SAME_FRAME_METHOD else REVIEW_POINT
 
 
 def sample_indices(pts: Sequence[int]) -> tuple[int, ...]:
@@ -49,9 +75,18 @@ def paired_score(reference: Sequence[float | None], complement: Sequence[float |
     return max(scores)
 
 
+def same_frame_score(reference: Sequence[float | None], complement: Sequence[float | None]) -> float | None:
+    """Combine the two readings at each jointly measured native position."""
+    (first_center, first_scale), (second_center, second_scale) = SAME_FRAME_NORMALIZERS
+    values = [((first - first_center) / first_scale + (second - second_center) / second_scale) / 2
+              for first, second in zip(reference, complement, strict=True)
+              if first is not None and second is not None]
+    return median(values) if len(values) >= MIN_SCORED_FRAMES else None
+
+
 def validate(record: dict, source: dict, *, pts: Sequence[int] | None = None) -> tuple[int, ...]:
     """Verify recorded source positions, per-arm support and the paired result."""
-    if (record.get("schema") != METHOD or record.get("time_base") != source["time_base"]
+    if (record.get("schema") not in METHODS or record.get("time_base") != source["time_base"]
             or type(record.get("flagged")) is not bool or not isinstance(record.get("score_hex"), str)):
         raise ValueError("Paired face evidence has an invalid schema or source clock")
     samples = record["samples"]
@@ -84,8 +119,18 @@ def validate(record: dict, source: dict, *, pts: Sequence[int] | None = None) ->
         elif first is not None or second is not None:
             raise ValueError("A face response has no recorded face input")
         responses.append((first, second))
-    score = paired_score(*zip(*responses, strict=True))
-    if score is None or score.hex() != record["score_hex"] or (score > REVIEW_POINT) != record["flagged"]:
+    arms = tuple(zip(*responses, strict=True))
+    score = paired_score(*arms)
+    if record["schema"] == SAME_FRAME_METHOD:
+        time_base = Fraction(source["time_base"])
+        if ((source["width"], source["height"]) != SAME_FRAME_DIMENSIONS or source["frame_count"] != SAME_FRAME_PICTURES
+                or any((stamp - timestamps[0]) * time_base != (i - indices[0]) * SAME_FRAME_STEP
+                       for i, stamp in zip(indices, timestamps, strict=True))
+                or (pts is not None and not _fixed_clock(pts, time_base))
+                or score is None or score > REVIEW_POINT or not record["flagged"]):
+            raise ValueError("Same-frame face evidence is outside its fallback profile")
+        score = same_frame_score(*arms)
+    if score is None or score.hex() != record["score_hex"] or (score > review_point(record["schema"])) != record["flagged"]:
         raise ValueError("The paired face outcome does not match its recorded responses")
     return indices
 
@@ -97,9 +142,9 @@ def representatives(record: dict) -> list[dict]:
 
 def validate_packet(packet: dict, source: dict, *, pts: Sequence[int] | None = None) -> None:
     record = packet.get("whole_face_review")
-    if record is None and packet.get("semantics") != METHOD:
+    if record is None and packet.get("semantics") not in METHODS:
         return
-    if (not isinstance(record, dict) or packet.get("semantics") != METHOD or packet.get("claim_scope") != "sampled_window"
+    if (not isinstance(record, dict) or packet.get("semantics") != record.get("schema") or packet.get("claim_scope") != "sampled_window"
             or packet.get("affects_overall_confidence") is not False or len(packet.get("signal_refs", ())) != 1):
         raise ValueError("Paired face evidence has an invalid scope or check reference")
     indices = validate(record, source, pts=pts)

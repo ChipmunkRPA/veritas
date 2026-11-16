@@ -189,7 +189,8 @@ def run_analysis(analysis_id: str, *, deadline: Deadline | None = None, profile:
                            if s.id == "detect" else s for s in stages)
         stages = tuple(dataclasses.replace(s, critical=True) if s.id in REFUSION_REUSED[kind] else s for s in stages)
     elif kind in ("audio", "video"):
-        stages = tuple(dataclasses.replace(s, reuse_if=current_voice_detection_output) if s.id == "detect" else s for s in stages)
+        reuse = vid.current_detect_output if kind == "video" else current_voice_detection_output
+        stages = tuple(dataclasses.replace(s, reuse_if=reuse) if s.id == "detect" else s for s in stages)
     elif kind == "document":
         expected = provenance_gate.CREDENTIALS[kind] in active_registry.enabled("text", resolved)
         reuse = partial(doc.current_provenance_output, expected=expected)

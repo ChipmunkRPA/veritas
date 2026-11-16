@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Clean-to-noisy speech localization](audio-clean-teacher-transfer-2026-11-16.md)
+  compares a supervised teacher using matched clean speech with a
+  shifted-target control. Its aligned fallback adds four useful
+  locations across two simulated rooms, with one extra ordinary
+  alert. It remains experimental after zero gains in a separate
+  room and on 12 fresh readers at two stronger background levels.
+
 - [Footage reused at two playback speeds](video-retimed-sequence-2026-11-16.md)
   locates both source ranges in 26 of 32 staged 2:1 repeats, with zero
   added alerts on 56 controls. Both time ranges and four original frames

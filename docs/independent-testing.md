@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [clean-to-noisy speech replay](audio-clean-teacher-transfer-2026-11-16.md#replay)
+reconstructs all six fits and recalculates paired localization and
+false flags on 460 deliveries, including a separate measured room
+and 12 additional readers at two interference levels.
+
 The [retimed footage replay](video-retimed-sequence-2026-11-16.md#reproduce)
 recounts both time ranges, the playback ratio, and ordinary alerts. It can
 independently read the endpoint clocks and exact RGB from the delivered

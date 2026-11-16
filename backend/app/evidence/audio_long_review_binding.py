@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import re
 
+from app.evidence import audio_two_second_binding as two_second
+
 RATE = 16_000
 SPAN = 3 * RATE
 SCHEMA = "chipmunk.long-voice-review/1"
@@ -156,6 +158,9 @@ def validate_window_fields(window, *extra):
 
 def validate(review: dict, source: dict) -> None:
     try:
+        if two_second.KEY in review:
+            two_second.validate(review[two_second.KEY], source)
+            review = {key: value for key, value in review.items() if key != two_second.KEY}
         if COVERAGE in review:
             _validate({key: val for key, val in review.items() if key != COVERAGE}, source)
             record = review[COVERAGE]
@@ -253,3 +258,7 @@ def _validate_focused(review, source):
 
 def media_windows(review):
     return review.get("regions") if review.get("schema") in FOCUSED_SCHEMAS else review.get("windows")
+
+
+def all_media_windows(review):
+    return [*media_windows(review), *review.get(two_second.KEY, {}).get("regions", ())]

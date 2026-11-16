@@ -18,6 +18,8 @@ from app.engine.detector import Profile
 from app.engine.stages import audio
 from app.evidence import audio_long_review, audio_packets
 from app.evidence import audio_long_review_binding as binding
+from app.evidence import audio_short_review_binding as short
+from app.evidence import audio_two_second_binding as two_second
 from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, AnalysisStage, Base, DetectorRun
 from app.storage.objects import ObjectStore
@@ -227,3 +229,50 @@ def test_optional_review_respects_the_serving_model_and_provenance_gate(monkeypa
     assert audio._long_voice_review(ctx, None, primary)["reason"] == binding.SKIPPED_BUDGET
     monkeypatch.setattr(audio.provenance_gate, "stop", lambda _: True)
     assert audio._long_voice_review(ctx, None, primary) is None
+
+
+def test_two_second_scan_deduplicates_native_ranges_and_replays_excerpt_hashes():
+    pcm = np.arange(160_001, dtype=np.int32).astype("<i2").astype("<f4") / 32768
+    source = native_source(len(pcm)) | {"pcm_sha256": sha256(pcm.tobytes()).hexdigest()}
+    starts = two_second.excerpt_starts(len(pcm))
+    assert starts == [0, 32_000, 64_000, 64_001]
+    assert not two_second.excerpt_starts(two_second.MINIMUM - 1)
+    assert not two_second.excerpt_starts(two_second.MAXIMUM + 1)
+    readings = []
+    for start, chosen in zip(starts, (4, 2, 0, None), strict=True):
+        rows = [] if chosen is None else [
+            {"start_sample": a, "end_sample": b, "logit": short.REVIEW_POINT + int(index == chosen)}
+            for index, (a, b) in enumerate(short.GRID)
+        ]
+        readings.append({"start_sample": start, "pcm_sha256": sha256(pcm[start:start+short.SAMPLES].tobytes()).hexdigest(),
+                         "speech_samples": [short.RATE if rows else 0] * len(short.GRID), "responses": rows})
+    raw = canonical_json({"detector_id": two_second.DETECTOR_ID, "status": "ok", "details": {
+        "pcm_sha256": source["pcm_sha256"], two_second.KEY: {"schema": two_second.SCHEMA, "excerpts": readings}}})
+    pin = sha256(raw).hexdigest()
+    store = SimpleNamespace(read_bytes={pin: raw}.__getitem__)
+    record = long_voice_review.skipped(binding.SKIPPED_BUDGET) | {two_second.KEY: {"raw_output_sha256": pin}}
+    assets = {}
+
+    def asset(data, media_type, **metadata):
+        digest = sha256(data).hexdigest()
+        assets[digest] = data
+        return {"sha256": digest, "media_type": media_type, **metadata}
+
+    review = audio_long_review.build(record, store=store, source=source, pcm=pcm, mapping=source, asset=asset, waveform=audio_packets._chart)
+    scan = review[two_second.KEY]
+    assert scan["status"] == "flagged" and scan["affects_overall_confidence"] is False
+    assert all("responses" not in excerpt for excerpt in scan["excerpts"])
+    [window] = binding.all_media_windows(review)
+    assert (window["start_sample"], window["end_sample"], window["supporting_excerpts"]) == (64_000, 96_000, [0, 1, 2])
+    np.testing.assert_array_equal(read_wav(assets[window["artifacts"]["selected_clip"]["sha256"]]), pcm[64_000:96_000])
+    audio_long_review.verify(review, record, store=store, source=source, pcm=pcm, mapping=source,
+                             read_asset=assets.__getitem__, waveform=audio_packets._chart)
+    audio_long_review.verify_source(review, pcm=pcm, mapping=source, waveform=audio_packets._chart)
+    spoofed = deepcopy(review)
+    spoofed[two_second.KEY]["excerpts"][0]["pcm_sha256"] = "a" * 64
+    with pytest.raises(ValueError, match="excerpt differs from the original samples"):
+        audio_long_review.verify_source(spoofed, pcm=pcm, mapping=source, waveform=audio_packets._chart)
+    spoofed = deepcopy(review)
+    spoofed[two_second.KEY]["regions"][0]["source_timestamp_ranges"][0]["source_start_pts"] += 1
+    with pytest.raises(ValueError, match="exhibit differs"):
+        binding.validate(spoofed, source)

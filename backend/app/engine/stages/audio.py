@@ -53,7 +53,7 @@ from app.engine.stages import common
 from app.engine.stages import video as vid
 from app.evidence import audio_background_review_binding as background_binding
 from app.evidence import audio_focused_edit_binding as focused_edit_binding
-from app.evidence import audio_long_review_binding
+from app.evidence import audio_long_review_binding, audio_two_second_binding
 from app.evidence.audio_binding import (
     MONO_VOICE_POLICY,
     SPEECH_SELECTION,
@@ -213,9 +213,11 @@ def detect(ctx: StageContext) -> dict[str, Any]:
     focused_edit = short.pop(focused_edit_binding.KEY, None)
     long = _long_voice_review(ctx, track, output["detectors"])
     background = _background_voice_review(ctx, track, output["detectors"])
+    two_second = _long_two_second_review(ctx, track) if long is not None else None
     return {**output, "voice_clock_policy": VOICE_CLOCK_POLICY, "short_voice_review": short,
             **({"long_voice_review": long} if long is not None else {}),
             **({focused_edit_binding.KEY: focused_edit} if focused_edit is not None else {}),
+            **({audio_two_second_binding.KEY: two_second} if two_second is not None else {}),
             **({background_binding.KEY: background} if background is not None else {})}
 
 
@@ -281,6 +283,32 @@ def _long_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict | 
     reason = (audio_long_review_binding.SKIPPED_TIMEOUT if review.status == "timeout"
               else audio_long_review_binding.SKIPPED_UNAVAILABLE)
     return long_voice_review.skipped(reason, schema=schema)
+
+
+def _long_two_second_review(ctx: StageContext, track) -> dict | None:
+    binding = audio_two_second_binding
+    if (settings.environment != "dev" or not settings.audio_two_second_long_review
+            or not ctx.outputs["decode"].get("long_voice_review_source_supported")
+            or track.pcm is None or not binding.excerpt_starts(len(track.pcm))):
+        return None
+    from app.detectors.audio.extended_short_voice_review import BUDGET_S, ExtendedShortVoiceReview
+    from app.engine.registry import get_registry
+
+    if binding.DETECTOR_ID in get_registry().policy.deny_detectors:
+        return None
+    remaining = ctx.deadline.remaining()
+    if remaining is not None and remaining < BUDGET_S + long_voice_review.PIPELINE_RESERVE_S:
+        return {"reason": binding.TIME_BUDGET}
+    detector = ExtendedShortVoiceReview()
+    run_ctx = RunContext(analysis_id=ctx.analysis_id, media=common.media(ctx), profile=ctx.profile, device="cpu",
+                         dtype=None, lease=None, outputs=StageOutputs(audio=track), deadline=ctx.deadline,
+                         exhibits=ctx.exhibits.bind(detector.spec.id), log=ctx.log.bind(detector_id=detector.spec.id))
+    store = ctx.state["run_store"]
+    review = run_detector(detector, run_ctx, store=store, models=ctx.state.get("models"), timeout_s=BUDGET_S)
+    ctx.check("two-second speech scan")
+    if review.status == "ok" and (run_id := store.run_id(ctx.analysis_id, detector.spec.id)):
+        return {"run_id": run_id}
+    return {"reason": binding.TIMEOUT if review.status == "timeout" else binding.UNAVAILABLE}
 
 
 def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
@@ -616,6 +644,9 @@ def publish(ctx: StageContext) -> dict[str, Any]:
             long = _published_review(db, ctx, long_result, long_voice_review.skipped(
                 audio_long_review_binding.SKIPPED_RECEIPT,
                 schema=(long_result or {}).get("schema", audio_long_review_binding.SCHEMA)))
+            if long is not None and (two_second := _published_review(db, ctx, detect_output.get(audio_two_second_binding.KEY),
+                                                                   {"reason": audio_two_second_binding.UNAVAILABLE})) is not None:
+                long = long | {audio_two_second_binding.KEY: two_second}
             background_result = detect_output.get(background_binding.KEY)
             background = _published_review(db, ctx, background_result,
                                            background_voice_review.skipped(background_binding.SKIPPED_RECEIPT))

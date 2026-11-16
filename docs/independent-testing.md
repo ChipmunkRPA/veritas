@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [longer two-second audio replay](audio-two-second-long-review-2026-11-16.md#reproduce)
+exports per-input truth and the selected ranges from three methods.
+It uses six editing systems, untouched audio from two corpora and six
+new competing-speech recordings. The app replay checks that the PDF,
+JSON and playable excerpts use the same source samples.
+
 The [earlier JPEG and WebP replay](image-jpeg-webp-comparison-2026-11-16.md#replay)
 recounts 1,008 pairs from 48 photos and rebuilds the exact output masks
 from the original source banks. It includes three encoding recipes and

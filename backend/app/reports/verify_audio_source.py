@@ -41,9 +41,9 @@ def _clips(audio: dict, alignment: dict) -> Iterator[tuple[str, dict, list[dict]
     if (review := audio.get(FOCUSED_EDIT)) and review["status"] == "flagged":
         yield "Focused speech edit clip", review["interval"], review["source_timestamp_ranges"], review["artifacts"]["selected_clip"]
     if review := audio.get("long_voice_review"):
-        from app.evidence.audio_long_review_binding import media_windows
+        from app.evidence.audio_long_review_binding import all_media_windows
 
-        for window in media_windows(review):
+        for window in all_media_windows(review):
             if clip := window["artifacts"].get("selected_clip"):
                 yield "Long speech-window clip", window, window["source_timestamp_ranges"], clip
     if (review := audio.get("background_reduced_voice_review")) and review["status"] == "flagged":
@@ -257,11 +257,15 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if (review := audio.get("long_voice_review")) is not None:
         from app.evidence.audio_long_review import verify_source
         from app.evidence.audio_packets import _chart
+        from app.evidence.audio_two_second_binding import KEY as TWO_SECOND
 
         verify_source(review, pcm=decoded.pcm, mapping=decoded.mapping, waveform=_chart)
         replay_detail += f" Verified {len(review['windows'])} long speech-window input ranges and their marked waveforms."
         if "regions" in review:
             replay_detail += f" Verified {len(review['regions'])} selected speech ranges against the same original samples."
+        if (scan := review.get(TWO_SECOND)) and scan["excerpts"]:
+            replay_detail += (f" Verified {len(scan['excerpts'])} six-second speech excerpts and "
+                              f"{len(scan['regions'])} marked two-second windows.")
     from app.evidence import audio_silence_binding as silence
     from app.evidence import audio_tonal_phase_binding as tonal
     from app.evidence.audio_bandwidth_binding import BANDWIDTH_SCHEMAS

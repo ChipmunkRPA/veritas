@@ -80,6 +80,9 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       event.interval.start_sample < shortInterval.end_sample && event.interval.end_sample > shortInterval.start_sample)
     : []
   const longReview = standalone ? set.long_voice_review : undefined
+  const twoSecond = longReview?.two_second_review
+  const twoSecondCount = twoSecond?.excerpts.reduce((total, row) =>
+    total + row.speech_samples.filter(samples => samples >= longVoiceSampleRate).length, 0)
   const focusedSpeech = Array.isArray(longReview?.regions)
   const hasMeasuredSpeech = longReview?.windows.some((window) => window.direction !== 'unassessed')
   const backgroundReview = standalone ? set.background_reduced_voice_review : undefined
@@ -123,7 +126,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
     setSelection(packet.id)
   }, [hash, set.packets])
   return <div ref={root} data-testid="audio-evidence-content"
-    onPlayCapture={longReview?.status === 'corroborated' || backgroundReview?.status === 'flagged' ? (event) => {
+    onPlayCapture={longReview?.status === 'corroborated' || twoSecond?.status === 'flagged' || backgroundReview?.status === 'flagged' ? (event) => {
       if (event.target instanceof HTMLAudioElement) pauseAudio(event.target)
     } : undefined}>
     {tracks && tracks.length > 1 && <section aria-label="Audio track coverage" className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
@@ -237,6 +240,40 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
           <li key={window.start_sample}>{seconds(window.start_sample / rate)}–{seconds(window.end_sample / rate)}</li>)}</ul>
       </details>}
       <p className="mt-3 mb-0 text-caption text-text-muted">{shortReview.limitation}</p>
+    </section>}
+    {twoSecond && <section id="media-evidence-two-second-speech-review" aria-label={twoSecond.title}
+      className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
+      <h3 className="m-0 text-body font-medium">{twoSecond.title}</h3>
+      <p className="mt-2 mb-0 text-small" role="status">{twoSecond.reason}</p>
+      {twoSecond.regions.length > 0 && <ol className="mt-4 mb-0 space-y-3 list-none p-0">
+        {twoSecond.regions.map(region => {
+          const span = `${seconds(region.start_sample / longVoiceSampleRate)}–${seconds(region.end_sample / longVoiceSampleRate)}`
+          const context = (set.acoustic_context?.events ?? []).filter(event =>
+            event.interval.start_sample < region.end_sample && event.interval.end_sample > region.start_sample)
+          return <li key={region.start_sample} className="rounded-md border border-border p-3">
+            <p className="m-0 text-small font-medium">AI-like speech response at {span}</p>
+            <p className="mt-1 mb-0 font-mono text-caption text-text-muted">Samples [{region.start_sample}, {region.end_sample})</p>
+            <SourceTimestamps ranges={region.source_timestamp_ranges} />
+            <div className="mt-3"><EvidencePicture set={set} artifact={region.artifacts.waveform} token={token} ready={mediaReady}
+              chart alt={`Waveform for the two-second speech window at ${span}`} /></div>
+            <div className="mt-3"><EvidenceAudio set={set} artifact={region.artifacts.selected_clip} token={token} ready={mediaReady}
+              alt={`Two-second speech window at ${span}`} /></div>
+            {context.length > 0 && <p className="mt-3 mb-0 text-caption text-text-muted">Overlapping recording observations{' '}
+              {context.map((event, index) => <span key={event.id}>{index > 0 && ', '}
+                <Link to={{ search, hash: `#media-evidence-${encodeURIComponent(event.id)}` }} className="underline underline-offset-2">{event.id}</Link>
+              </span>)}.</p>}
+          </li>
+        })}
+      </ol>}
+      {twoSecond.excerpts.length > 0 && <details className="mt-3 text-small">
+        <summary className="cursor-pointer">{twoSecondCount} checks across {twoSecond.excerpts.length} overlapping six-second excerpts</summary>
+        <ul className="mt-2 mb-0 list-disc pl-4">{twoSecond.excerpts.map(excerpt => <li key={excerpt.start_sample}>
+          {seconds(excerpt.start_sample / longVoiceSampleRate)}–{seconds(excerpt.start_sample / longVoiceSampleRate + 6)}
+          {' · '}{excerpt.speech_samples.filter(samples => samples >= longVoiceSampleRate).length}
+          {' of '}{excerpt.speech_samples.length} windows had enough speech to check
+        </li>)}</ul>
+      </details>}
+      <p className="mt-3 mb-0 text-caption text-text-muted">{twoSecond.limitation}</p>
     </section>}
     {longReview && <section id="media-evidence-long-voice-review" aria-label={longReview.title}
       className="mt-5 rounded-md border border-border p-4 scroll-mt-20">

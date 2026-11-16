@@ -117,14 +117,20 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
                 raise ObjectIntegrityError("The evidence has an invalid focused speech review")
             groups.append(review["artifacts"])
         if "long_voice_review" in part:
-            from app.evidence.audio_long_review_binding import media_windows
+            from app.evidence.audio_long_review_binding import all_media_windows, media_windows
+            from app.evidence.audio_two_second_binding import KEY, validate
 
             review = part["long_voice_review"]
             if (part is not document or part.get("schema") != "chipmunk.audio-evidence/1"
                     or not isinstance(review, dict) or not isinstance(review.get("windows"), list)
                     or not isinstance(media_windows(review), list)):
                 raise ObjectIntegrityError("The evidence has an invalid long speech-window review")
-            groups.extend(window["artifacts"] for window in media_windows(review))
+            if KEY in review:
+                try:
+                    validate(review[KEY], part["source"])
+                except ValueError as error:
+                    raise ObjectIntegrityError(str(error)) from error
+            groups.extend(window["artifacts"] for window in all_media_windows(review))
         if "background_reduced_voice_review" in part:
             review = part["background_reduced_voice_review"]
             if (part is not document or part.get("schema") != "chipmunk.audio-evidence/1" or not isinstance(review, dict)):

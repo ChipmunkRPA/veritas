@@ -16,7 +16,7 @@ from PIL import Image
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.audio.coverage import interval_union
-from app.evidence import audio_focused_edit_binding, document_scope, service
+from app.evidence import audio_focused_edit_binding, audio_two_second_binding, document_scope, service
 from app.evidence.av_binding import (
     AUDIO_CLOCK_BREAKS,
     AV_CLOCK_DISPLAY_LIMIT,
@@ -101,9 +101,9 @@ def asset_items(document: dict[str, Any]):
             for role, asset in sorted((part.get(key) or {}).get("artifacts", {}).items()):
                 yield None, f"{key}_{role}", asset
         if review := part.get("long_voice_review"):
-            from app.evidence.audio_long_review_binding import media_windows
+            from app.evidence.audio_long_review_binding import all_media_windows
 
-            for index, window in enumerate(media_windows(review)):
+            for index, window in enumerate(all_media_windows(review)):
                 for role, asset in sorted(window["artifacts"].items()):
                     yield None, f"long_voice_review_{index}_{role}", asset
         for role, asset in sorted((part.get("background_reduced_voice_review") or {}).get("artifacts", {}).items()):
@@ -1451,6 +1451,16 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             if asset := window["artifacts"].get("waveform"):
                 caption = "Waveform with the selected speech range highlighted" if focused else "Waveform with the reviewed three-second window highlighted"
                 window["waveform"] = plate("waveform", asset, caption)
+        if review := long_voice_review.get(audio_two_second_binding.KEY):
+            review["checked_windows"] = sum(count >= audio_two_second_binding.RATE
+                                            for excerpt in review["excerpts"] for count in excerpt["speech_samples"])
+            for region in review["regions"]:
+                region["waveform"] = plate("waveform", region["artifacts"]["waveform"], "Waveform with the two-second window highlighted")
+                region["recording_context"] = [
+                    event["id"] for event in (document.get("acoustic_context") or {}).get("events", ())
+                    if event["interval"]["start_sample"] < region["end_sample"]
+                    and event["interval"]["end_sample"] > region["start_sample"]
+                ]
     background_review = copy.deepcopy(document.get("background_reduced_voice_review"))
     if background_review and (asset := background_review["artifacts"].get("waveform")):
         background_review["waveform"] = plate("waveform", asset, "Original waveform across the flagged three-second interval")

@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Two-second checks in longer recordings](audio-two-second-long-review-2026-11-16.md)
+  add a local waveform, source clock and playable excerpt for supported
+  nine- to fourteen-second WAV and FLAC uploads. The comparison has
+  no effect on overall confidence. A 240-delivery transfer uses fresh
+  source bytes, 41 declared foreground readers and six separate meetings.
+
 - [Earlier JPEG compared with a lossy WebP](image-jpeg-webp-comparison-2026-11-16.md)
   locates meaningful differences in 111 of 144 known edit deliveries and
   marks none of 288 compression-only controls. The comparison shows both

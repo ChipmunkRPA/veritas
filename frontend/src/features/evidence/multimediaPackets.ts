@@ -255,6 +255,17 @@ export interface LongVoiceReview {
     source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
     artifacts: Record<'selected_clip' | 'waveform', EvidenceAsset>
   })[]
+  two_second_review?: {
+    schema: 'chipmunk.extended-short-voice-review/1'
+    title: string; status: 'flagged' | 'no_flag' | 'unassessed' | 'skipped'
+    reason: string; limitation: string; affects_overall_confidence: false
+    excerpts: { start_sample: number; pcm_sha256: string; speech_samples: number[]; selected_window: number | null }[]
+    regions: (SampleInterval & {
+      supporting_excerpts: number[]; pcm_sha256: string
+      source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
+      artifacts: Record<'selected_clip' | 'waveform', EvidenceAsset>
+    })[]
+  }
 }
 export type LongVoiceCoverageStatus = 'directional' | 'inconclusive' | 'below_speech_minimum' | 'outside_schedule'
 export interface BackgroundVoiceReview {

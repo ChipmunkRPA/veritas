@@ -250,10 +250,13 @@ Samples [{{ review.interval.start_sample }}, {{ review.interval.end_sample }}) a
 {% set review = evidence.focused_speech_edit_review %}
 <h3 id="multimedia-focused-speech-edit">{{ review.title }}</h3>
 <p class="caption">{{ review.reason }}{% if review.checked_windows %} Checked {{ review.checked_windows }} windows lasting 0.5 to 1 second.{% endif %}</p>
+{% if review.schema == 'chipmunk.focused-speech-edit-review/2' %}<p class="caption">The check uses 16 kHz audio decoded from the 48 kHz recording.</p>{% endif %}
 {% if review.status == 'flagged' %}
 <p class="caption">Flagged window {{ '%.3f' | format(review.start_s) }}–{{ '%.3f' | format(review.end_s) }} s.
-Samples [{{ review.interval.start_sample }}, {{ review.interval.end_sample }}) at 16000 Hz.
-{% for range in review.source_timestamp_ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% endfor %}</p>
+{% if review.get('original_timestamp_range') %}Decoded samples [{{ review.interval.start_sample }}, {{ review.interval.end_sample }}) at 16000 Hz.
+Original samples [{{ review.original_timestamp_range.start_pts }}, {{ review.original_timestamp_range.end_pts }}) at 48000 Hz.
+{% else %}Samples [{{ review.interval.start_sample }}, {{ review.interval.end_sample }}) at 16000 Hz.
+{% for range in review.source_timestamp_ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% endfor %}{% endif %}</p>
 {% if review.get('recording_context') %}<p class="caption">Recording observations at the same time {% for id in review.recording_context %}<a href="#multimedia-evidence-{{ id }}">{{ id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>{% endif %}
 {{ plates([review.waveform]) }}
 {% endif %}

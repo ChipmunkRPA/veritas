@@ -22,7 +22,11 @@ try {
     const card = page.getByRole('region', { name: review.title })
     const { start_sample, end_sample } = review.interval
     await card.getByText(`samples [${start_sample}, ${end_sample})`, { exact: false }).waitFor()
-    await card.getByText(`Source PTS [${start_sample}, ${end_sample}) at 1/16000.`).waitFor()
+    if (review.original_timestamp_range) {
+      await card.getByText(`Original samples [${3 * start_sample}, ${3 * end_sample}) at 48000 Hz.`).waitFor()
+    } else {
+      await card.getByText(`Source PTS [${start_sample}, ${end_sample}) at 1/16000.`).waitFor()
+    }
     const waveform = card.getByAltText('Waveform with the focused speech window marked')
     const [width, height] = await waveform.evaluate(async image => {
       await image.decode()

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [longer speech excerpt replay](audio-long-focused-context-2026-11-16.md#reproduce)
+exports the exact source sample labels from six generators and the
+matched ordinary and isolated-background deliveries. The same
+event counter accepts another detector's intervals for those inputs.
+
 The [focused speech edit app replay](audio-focused-edit-local-2026-11-16.md#replay)
 tests two noisy deliveries and their controls through checkout. It checks
 the exact source samples, both waveform renders and the signed report

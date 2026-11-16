@@ -60,6 +60,18 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Focused speech edits on 48 kHz WAV and FLAC](audio-focused-edit-48k-2026-11-16.md)
+  preserve all three 16 kHz locations in the 136-delivery replay. One
+  additional location appears in both containers. No ordinary or
+  isolated-background submission is flagged by this check. The app and
+  report show the original and decoded sample positions.
+
+- [Focused speech edits in longer recordings](audio-long-focused-context-2026-11-16.md)
+  compares single and repeated responses from shifted six-second
+  excerpts. One edit is located in both matched mixtures and five
+  isolated recordings flag at each level. Requiring repeat support
+  removes those isolated flags and both useful locations.
+
 - [Local focused speech edit review](audio-focused-edit-local-2026-11-16.md)
   runs after a completed two-second check without a flag in supported
   six-second mono recordings. It shows the source interval, waveform and

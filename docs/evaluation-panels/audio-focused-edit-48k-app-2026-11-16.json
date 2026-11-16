@@ -1,0 +1,138 @@
+{
+  "schema": "chipmunk.focused-speech-edit-app/1",
+  "cases": [
+    {
+      "case": "louder-edit",
+      "native_samples": 96000,
+      "panel_pcm_sha256": "ddc517d3b7f85d4c3bef984f3b05cfc20097f130afaa9390c5fecc911ff55ae0",
+      "source_sha256": "f22e681878d41eb5dc6895e40d0066b0707d988924405da27deaa2a331148c5b",
+      "primary": "no_flag",
+      "focused": "flagged",
+      "interval": {
+        "end_sample": 52800,
+        "start_sample": 44800
+      },
+      "checked_windows": 160,
+      "signed_pdf_sha256": "2d62efd9a8a6db92dbf545a03f79cb5ee62c483929444fef4c8716016322312d",
+      "original_timestamp_range": {
+        "end_pts": 158400,
+        "start_pts": 134400,
+        "time_base": "1/48000"
+      },
+      "original_sample_count": 288000
+    },
+    {
+      "case": "louder-disabled",
+      "native_samples": 96000,
+      "panel_pcm_sha256": "ddc517d3b7f85d4c3bef984f3b05cfc20097f130afaa9390c5fecc911ff55ae0",
+      "source_sha256": "f22e681878d41eb5dc6895e40d0066b0707d988924405da27deaa2a331148c5b",
+      "primary": "no_flag",
+      "focused": null,
+      "interval": null,
+      "checked_windows": null,
+      "signed_pdf_sha256": null,
+      "original_timestamp_range": null,
+      "original_sample_count": 288000
+    },
+    {
+      "case": "moderate-edit",
+      "native_samples": 96000,
+      "panel_pcm_sha256": "038bd9111db44cfc8ae85c691d2dc36d4bd37321f19cd65d1564e559d7444eee",
+      "source_sha256": "a80cd876d744ee00883580eaa2e3aa93660f16498ab2265d3a2055cc142a66ba",
+      "primary": "no_flag",
+      "focused": "flagged",
+      "interval": {
+        "end_sample": 52800,
+        "start_sample": 44800
+      },
+      "checked_windows": 160,
+      "signed_pdf_sha256": "db97f3e85945a2be98ea0fa12f62c578a5f1bd6cdd283933d100867416902119",
+      "original_timestamp_range": {
+        "end_pts": 158400,
+        "start_pts": 134400,
+        "time_base": "1/48000"
+      },
+      "original_sample_count": 288000
+    },
+    {
+      "case": "ordinary",
+      "native_samples": 96000,
+      "panel_pcm_sha256": "c230f9a9d78a505a9c4f70ef905a151a48b9af321e3f07c69a2a9c03d468d19c",
+      "source_sha256": "8654ae81d757db5cb7a5c95d78e37806ebbcc54b0f65e7827f667923c9a42062",
+      "primary": "no_flag",
+      "focused": "no_flag",
+      "interval": null,
+      "checked_windows": 160,
+      "signed_pdf_sha256": "70a3db7f3be9d4a0a2967a88b7184cd6dc780ab71f5fdf57230c5e1ddc14a19c",
+      "original_timestamp_range": null,
+      "original_sample_count": 288000
+    },
+    {
+      "case": "isolated-background",
+      "native_samples": 96000,
+      "panel_pcm_sha256": "a8eb5a4f398eda5ca6e3b8dd96a699f3f59b682c495975ae596689d8bd4f0723",
+      "source_sha256": "1f544c291f1486084c1f7735af75290c2243724c253e909c30eefaea3cd0adcc",
+      "primary": "no_flag",
+      "focused": "no_flag",
+      "interval": null,
+      "checked_windows": 159,
+      "signed_pdf_sha256": null,
+      "original_timestamp_range": null,
+      "original_sample_count": 288000
+    },
+    {
+      "case": "existing-flag",
+      "native_samples": 96000,
+      "panel_pcm_sha256": "72975af0700329ea035c93f69b73c97ee7d5cb3ac7b454faa9f3aacc22171d25",
+      "source_sha256": "e28a8b8fc0c86d827dc7c21a08446c0059a5a81c4e7d8c5d2cefbb206bf821b2",
+      "primary": "flagged",
+      "focused": null,
+      "interval": null,
+      "checked_windows": null,
+      "signed_pdf_sha256": null,
+      "original_timestamp_range": null,
+      "original_sample_count": 288000
+    },
+    {
+      "case": "extra-sample",
+      "native_samples": 96000,
+      "panel_pcm_sha256": "ddc517d3b7f85d4c3bef984f3b05cfc20097f130afaa9390c5fecc911ff55ae0",
+      "source_sha256": "8b014f65c015f40e457b30c5940f15cf2887d7d9050822a0296bc95257dd4d5a",
+      "primary": "skipped",
+      "focused": null,
+      "interval": null,
+      "checked_windows": null,
+      "signed_pdf_sha256": null,
+      "original_timestamp_range": null,
+      "original_sample_count": 288001
+    }
+  ],
+  "same_assessment_with_option_off": true,
+  "simulated_payment_usd_cents": 999,
+  "jobs_before_payment": 0,
+  "browser": {
+    "excerpts": [
+      {
+        "case": "louder-edit",
+        "start_sample": 44800,
+        "end_sample": 52800,
+        "playback_seconds": 0.5,
+        "waveform_pixels": [
+          960,
+          280
+        ]
+      },
+      {
+        "case": "moderate-edit",
+        "start_sample": 44800,
+        "end_sample": 52800,
+        "playback_seconds": 0.5,
+        "waveform_pixels": [
+          960,
+          280
+        ]
+      }
+    ],
+    "page_errors": 0
+  }
+}

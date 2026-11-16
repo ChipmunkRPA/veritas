@@ -6,14 +6,17 @@ import re
 
 from app.evidence.audio_short_review_binding import (
     LOSSLESS_FORMATS,
+    LOSSLESS_RATE,
     RATE,
     SAMPLES,
     _continuous_clock,
     source_range,
+    supported_resampled_lossless,
 )
 
 KEY = "focused_speech_edit_review"
 SCHEMA = "chipmunk.focused-speech-edit-review/1"
+RESAMPLED_SCHEMA = "chipmunk.focused-speech-edit-review/2"
 DETECTOR_ID = "aud.focused_speech_edit"
 TITLE = "Focused speech edit review"
 LIMITATION = ("The marked window is a lead for closer listening. Ordinary editing and overlapping speech can affect "
@@ -39,6 +42,11 @@ def supported_source(source: dict) -> bool:
             and _continuous_clock(source))
 
 
+def original_range(start: int, end: int) -> dict:
+    ratio = LOSSLESS_RATE // RATE
+    return {"start_pts": ratio * start, "end_pts": ratio * end, "time_base": "1/48000"}
+
+
 def on_grid(start: int, end: int) -> bool:
     return (type(start) is int and type(end) is int and 0 <= start < end <= SAMPLES
             and start % STEP == 0 and end - start in WIDTHS)
@@ -47,9 +55,16 @@ def on_grid(start: int, end: int) -> bool:
 def validate(review: dict, source: dict) -> None:
     fields = {"schema", "title", "status", "reason", "limitation", "affects_overall_confidence",
               "checked_windows", "interval", "start_s", "end_s", "source_timestamp_ranges", "artifacts"}
-    if (not isinstance(review, dict) or set(review) != fields or review["schema"] != SCHEMA
+    if not isinstance(review, dict):
+        raise ValueError("Missing focused speech review")
+    schema = review.get("schema")
+    resampled = schema == RESAMPLED_SCHEMA
+    if resampled:
+        fields.add("original_timestamp_range")
+    eligible = supported_resampled_lossless(source) if resampled else supported_source(source)
+    if (set(review) != fields or schema not in (SCHEMA, RESAMPLED_SCHEMA)
             or review["title"] != TITLE or review["limitation"] != LIMITATION
-            or review["affects_overall_confidence"] is not False or not supported_source(source)):
+            or review["affects_overall_confidence"] is not False or not eligible):
         raise ValueError("Focused speech review does not match its supported source")
     status, reason, count = (review[key] for key in ("status", "reason", "checked_windows"))
     if type(status) is not str or status not in {"flagged", "no_flag", "skipped"} or type(reason) is not str:
@@ -61,7 +76,8 @@ def validate(review: dict, source: dict) -> None:
     interval, assets = review["interval"], review["artifacts"]
     if status != "flagged":
         if (interval is not None or assets != {} or review["source_timestamp_ranges"] != []
-                or review["start_s"] is not None or review["end_s"] is not None):
+                or review["start_s"] is not None or review["end_s"] is not None
+                or review.get("original_timestamp_range") is not None):
             raise ValueError("An unflagged focused speech review includes a selected interval")
         return
     if not isinstance(interval, dict) or set(interval) != {"start_sample", "end_sample"}:
@@ -69,6 +85,7 @@ def validate(review: dict, source: dict) -> None:
     start, end = (interval[key] for key in ("start_sample", "end_sample"))
     if (not on_grid(start, end) or review["start_s"] != start / RATE or review["end_s"] != end / RATE
             or review["source_timestamp_ranges"] != [source_range(source, start, end)]
+            or (resampled and review["original_timestamp_range"] != original_range(start, end))
             or not isinstance(assets, dict) or set(assets) != {"selected_clip", "waveform"}):
         raise ValueError("Focused speech media falls outside its measured source range")
     clip, waveform = assets["selected_clip"], assets["waveform"]

@@ -228,11 +228,12 @@ export interface ShortVoiceReview {
   artifacts: Partial<Record<'selected_clip' | 'waveform', EvidenceAsset>>
 }
 export interface FocusedSpeechEditReview {
-  schema: 'chipmunk.focused-speech-edit-review/1'
+  schema: 'chipmunk.focused-speech-edit-review/1' | 'chipmunk.focused-speech-edit-review/2'
   status: 'flagged' | 'no_flag' | 'skipped'
   title: string; reason: string; limitation: string; affects_overall_confidence: false
   checked_windows: number; interval: SampleInterval | null; start_s: number | null; end_s: number | null
   source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
+  original_timestamp_range?: { start_pts: number; end_pts: number; time_base: '1/48000' } | null
   artifacts: Partial<Record<'selected_clip' | 'waveform', EvidenceAsset>>
 }
 export interface LongVoiceReview {

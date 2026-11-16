@@ -300,6 +300,7 @@ class Settings(BaseSettings):
     audio_short_aac_review: bool = False  # Local inspection on verified six-second AAC-LC presentations.
     audio_short_lossless_48k_review: bool = False  # Local inspection on verified six-second mono WAV and FLAC.
     audio_focused_edit_review: bool = False  # Optional local follow-up for short speech edits.
+    audio_focused_edit_lossless_48k_review: bool = False  # Extend the focused review to verified native 48 kHz lossless clocks.
     audio_focused_long_review: bool = False  # Optional source-clock review with overlapping native speech windows.
     audio_focused_long_48k_review: bool = False  # Local trial for continuous 48 kHz mono PCM16 WAV.
     audio_bandwidth_return_review: bool = False  # Optional native short lossless audio processing context.

@@ -18,6 +18,9 @@ API and JSON include source samples, window coverage and both assets.
 The Standard PDF uses the same source times and waveform. The signed
 package can be verified against the original upload.
 
+The later [48 kHz extension](audio-focused-edit-48k-2026-11-16.md)
+adds original and decoded sample positions for verified lossless files.
+
 ## Evaluation and local verification
 
 The existing check plus the strict focused review located 5 of 32 noisy

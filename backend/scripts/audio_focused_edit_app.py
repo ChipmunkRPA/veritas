@@ -9,11 +9,13 @@ import hashlib
 import json
 import os
 import subprocess
+import tempfile
 import wave
 from pathlib import Path
 from zipfile import ZipFile
 
 from app.evidence import audio_focused_edit_binding as binding
+from scripts.audio_focused_edit_carrier import render
 from scripts.image_jpeg_turned_copy_app import browser_check
 from scripts.video_short_return_encoded_app import PaymentStub, body, checkout, configure, fetch, wait
 
@@ -35,10 +37,29 @@ def cases(study):
     yield "extra-sample", loud, True, "wav", None
 
 
-def fixture(output, media, name, row, container):
+def fixture(output, media, name, row, container, lossless_48k):
     pin = row["pcm_sha256"]
     raw = (media / "pcm" / f"{pin}.pcm").read_bytes()
     assert hashlib.sha256(raw).hexdigest() == pin and len(raw) == 2 * binding.SAMPLES
+    if lossless_48k:
+        import io
+
+        from app.detectors.audio.decode import decode_audio
+
+        with tempfile.TemporaryDirectory(dir=output) as scratch:
+            assets = {path.suffix[1:]: path for path in render(raw, Path(scratch))}
+            file = output / f"{name}.{container}"
+            if name == "extra-sample":
+                with wave.open(str(assets["wav"]), "rb") as stream:
+                    params, pcm = stream.getparams(), stream.readframes(stream.getnframes())
+                with wave.open(str(file), "wb") as stream:
+                    stream.setparams(params)
+                    stream.writeframes(pcm + pcm[-2:])
+            else:
+                assets[container].replace(file)
+        frozen = decode_audio(file, source_sha256=hashlib.sha256(file.read_bytes()).hexdigest(), max_seconds=7)
+        with wave.open(io.BytesIO(frozen.wav), "rb") as stream:
+            return file, stream.readframes(stream.getnframes())
     wav = output / f"{name}.wav"
     with wave.open(str(wav), "wb") as stream:
         stream.setparams((1, 2, binding.RATE, binding.SAMPLES, "NONE", "not compressed"))
@@ -70,7 +91,12 @@ def verify_report(client, route, file, evidence, signer, raw):
     if review["status"] == "flagged":
         a, b = (review["interval"][key] for key in ("start_sample", "end_sample"))
         assert f"{a / 16000:.3f}–{b / 16000:.3f} s" in words
-        assert f"Source PTS [{a}, {b}) at 1/16000." in words
+        if source_range := review.get("original_timestamp_range"):
+            assert source_range == binding.original_range(a, b)
+            assert f"Original samples [{3 * a}, {3 * b}) at 48000 Hz." in words
+            assert f"Decoded samples [{a}, {b}) at 16000 Hz." in words
+        else:
+            assert f"Source PTS [{a}, {b}) at 1/16000." in words
         clip = fetch(client, review["artifacts"]["selected_clip"]["url"])
         with wave.open(io.BytesIO(clip), "rb") as stream:
             assert (stream.getframerate(), stream.getnchannels(), stream.getsampwidth()) == (16000, 1, 2)
@@ -100,6 +126,7 @@ def run(args):
     configure(args.output, ROOT)
     os.environ.update(VERITAS_ENVIRONMENT="dev", VERITAS_AUDIO_DETECTOR_MODE="candidate",
                       VERITAS_AUDIO_SHORT_ADMISSION_REVIEW="true", VERITAS_LOG_LEVEL="WARNING",
+                      VERITAS_AUDIO_SHORT_LOSSLESS_48K_REVIEW=str(args.lossless_48k).lower(),
                       HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1")
 
     import torch
@@ -129,8 +156,9 @@ def run(args):
         client.headers["X-API-Key"] = token
         signer = body(client.get("/api/v2/instance/public-key"))
         for name, row, enabled, container, expected in cases(study):
-            file, raw = fixture(args.output, args.media, name, row, container)
-            settings.audio_focused_edit_review = enabled
+            file, raw = fixture(args.output, args.media, name, row, container, args.lossless_48k)
+            settings.audio_focused_edit_review = enabled or args.lossless_48k
+            settings.audio_focused_edit_lossless_48k_review = enabled and args.lossless_48k
             aid = checkout(client, stub, file, kind="audio", media_type=f"audio/{container}", filename=file.name)
             with get_session() as db:
                 result = json.loads(default_store().read_bytes(db.get(Analysis, aid).result_hash))
@@ -145,7 +173,10 @@ def run(args):
                 assert binding.DETECTOR_ID not in content and "score_units" not in content
             previous, focused = evidence["short_voice_review"], evidence.get(binding.KEY)
             if name == "extra-sample":
-                assert evidence["source"]["samples"] == binding.SAMPLES + 1
+                if args.lossless_48k:
+                    assert evidence["source"]["source_duration_pts"] == 6 * binding.LOSSLESS_RATE + 1
+                else:
+                    assert evidence["source"]["samples"] == binding.SAMPLES + 1
                 assert previous["status"] == "skipped"
             else:
                 assert previous["status"] == ("flagged" if row["current"]["range"] is not None else "no_flag")
@@ -153,6 +184,7 @@ def run(args):
             report_sha = None
             if focused:
                 assert focused["affects_overall_confidence"] is False
+                assert focused["schema"] == (binding.RESAMPLED_SCHEMA if args.lossless_48k else binding.SCHEMA)
                 binding.validate(focused, evidence["source"])
                 if expected == "flagged":
                     a, b = row["candidates"]["both"]["range"]
@@ -165,7 +197,10 @@ def run(args):
                              "source_sha256": hashlib.sha256(file.read_bytes()).hexdigest(),
                              "primary": previous["status"], "focused": expected, "interval": focused["interval"] if focused else None,
                              "checked_windows": focused["checked_windows"] if focused else None,
-                             "signed_pdf_sha256": report_sha})
+                             "signed_pdf_sha256": report_sha,
+                             **({"original_timestamp_range": focused.get("original_timestamp_range") if focused else None,
+                                 "original_sample_count": evidence["source"]["source_duration_pts"]}
+                                if args.lossless_48k else {})})
             print(name, previous["status"], expected, flush=True)
         assert assessments["louder-edit"] == assessments["louder-disabled"]
         browser = browser_check(args.output, app, token, browser_cases, scenario="focused-speech-replay.mjs") if args.browser else None
@@ -180,4 +215,5 @@ if __name__ == "__main__":
     for key in ("study", "media", "output"):
         parser.add_argument(key, type=Path)
     parser.add_argument("--browser", action="store_true")
+    parser.add_argument("--lossless-48k", action="store_true")
     run(parser.parse_args())

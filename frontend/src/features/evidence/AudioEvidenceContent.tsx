@@ -140,11 +140,16 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       {focusedEdit.checked_windows > 0 && <p className="mt-2 mb-0 text-small">
         Checked {focusedEdit.checked_windows} windows lasting 0.5 to 1 second.
       </p>}
+      {focusedEdit.schema === 'chipmunk.focused-speech-edit-review/2' && <p className="mt-2 mb-0 text-small">
+        The check uses 16 kHz audio decoded from the 48 kHz recording.
+      </p>}
       {focusedEdit.interval && focusedEdit.start_s != null && focusedEdit.end_s != null && <>
         <p className="mt-2 mb-0 font-mono text-caption text-text-muted">
           Flagged window {seconds(focusedEdit.start_s)}–{seconds(focusedEdit.end_s)} · samples [{focusedEdit.interval.start_sample}, {focusedEdit.interval.end_sample})
         </p>
-        <SourceTimestamps ranges={focusedEdit.source_timestamp_ranges} />
+        {focusedEdit.original_timestamp_range ? <p className="m-0 text-caption">
+          Original samples [{focusedEdit.original_timestamp_range.start_pts}, {focusedEdit.original_timestamp_range.end_pts}) at 48000 Hz.
+        </p> : <SourceTimestamps ranges={focusedEdit.source_timestamp_ranges} />}
         {focusedEdit.artifacts.waveform && <div className="mt-4">
           <EvidencePicture set={set} artifact={focusedEdit.artifacts.waveform} token={token} ready={mediaReady} chart
             alt="Waveform with the focused speech window marked" />

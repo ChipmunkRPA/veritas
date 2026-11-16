@@ -334,7 +334,9 @@ def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
                 if measured.status == "ok" and (nearby_id := store.run_id(ctx.analysis_id, nearby.spec.id)):
                     output["nearby_run_id"] = nearby_id
         if (settings.environment == "dev" and settings.audio_focused_edit_review and response.get("status") == "no_flag"
-                and ctx.outputs["decode"].get("focused_edit_source_supported")):
+                and (ctx.outputs["decode"].get("focused_edit_source_supported")
+                     or (settings.audio_focused_edit_lossless_48k_review
+                         and ctx.outputs["decode"].get("short_voice_review_resampled_lossless")))):
             output[focused_edit_binding.KEY] = _focused_edit_review(ctx, run_ctx)
         return output
     reason = ("The optional short-window check ran out of analysis time." if review.status == "timeout"

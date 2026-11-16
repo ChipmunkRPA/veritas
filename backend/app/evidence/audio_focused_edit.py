@@ -36,10 +36,14 @@ def build(record, *, store, source, pcm, mapping, asset, waveform):
         if outcome not in {"time", "unavailable"}:
             raise ValueError("Unexpected unmeasured focused speech response")
     status = outcome if outcome in {"flagged", "no_flag"} else "skipped"
-    document = {"schema": binding.SCHEMA, "title": binding.TITLE, "status": status,
+    resampled = source.get("source_sample_rate") == binding.LOSSLESS_RATE
+    document = {"schema": binding.RESAMPLED_SCHEMA if resampled else binding.SCHEMA,
+                "title": binding.TITLE, "status": status,
                 "reason": binding.REASONS[outcome], "limitation": binding.LIMITATION,
                 "affects_overall_confidence": False, "checked_windows": count, "interval": interval,
                 "start_s": None, "end_s": None, "source_timestamp_ranges": [], "artifacts": {}}
+    if resampled:
+        document["original_timestamp_range"] = binding.original_range(a, b) if interval else None
     if interval is not None:
         document.update(start_s=a / binding.RATE, end_s=b / binding.RATE, source_timestamp_ranges=source_ranges(mapping, a, b))
         document["artifacts"] = {

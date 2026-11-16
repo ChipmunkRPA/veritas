@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [learned writing prompt replay](writing-prompt-contrast-2026-11-16.md#replay)
+rebuilds exact sentence ranges from the pinned publisher files. It measures
+ordinary flags, complete sentence placement and changed-word coverage on
+a news and abstract panel and a separate report transfer.
+
 The [small JPEG copy replay](image-small-affine-jpeg-2026-11-16.md#reproduce)
 compares both localized areas on 108 staged geometric copies. It includes
 198 ordinary deliveries and reports the two search variants separately.

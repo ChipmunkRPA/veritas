@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Learned prompts for locating rewritten sentences](writing-prompt-contrast-2026-11-16.md)
+  compares 100 held pairs across news, abstracts and reports. At the wider
+  point the learned reading locates 9/100 edits versus 7/100 current and
+  flags 17/100 ordinary excerpts versus 30/100. The combined reading
+  locates 11/100 and flags 29/100 ordinary excerpts. The report transfer
+  supplies little distinct evidence, and the learned check stays experimental.
+
 - [Small rotated and resized copies in JPEGs](image-small-affine-jpeg-2026-11-16.md)
   locates both areas in 31 of 108 held staged edits, up from 13. The
   new suggestions include 23 further partial locations and add no ordinary

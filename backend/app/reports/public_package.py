@@ -76,6 +76,7 @@ def public_result(result: dict) -> dict:
                 source_coverage[key] = commitment
     if result.get('kind') == 'document':
         from app.evidence import (
+            document_character_review,
             document_chat_markers,
             document_check_coverage,
             document_invisible_characters,
@@ -97,6 +98,8 @@ def public_result(result: dict) -> dict:
             source_coverage[document_word_visibility.COMMITMENT] = word_visibility
         if invisible := document_invisible_characters.from_result(result):
             source_coverage[document_invisible_characters.COMMITMENT] = invisible
+        if adjusted := document_character_review.result_commitment(result):
+            source_coverage[document_character_review.COMMITMENT] = adjusted
         if markers := document_chat_markers.from_result(result):
             source_coverage[document_chat_markers.COMMITMENT] = markers
     checks = [{k: s[k] for k in ('id', 'display_id', 'category', 'family', 'scope', 'status', 'raw_score',

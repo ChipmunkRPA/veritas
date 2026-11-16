@@ -141,6 +141,18 @@ class _SequenceClassifier(Detector):
                     if (document_matched_context.matches(self.spec.id, self.spec.version, model_revisions)
                             and document_paragraph_priority.eligible(doc.text, doc.source_map, doc.meta.get("method"))):
                         evidence[document_paragraph_priority.KEY] = document_paragraph_priority.SCHEMA
+        details = {"text_evidence": evidence}
+        if self.ISOLATED_PARAGRAPH_REVIEW and settings.text_character_adjusted_review:
+            from app.detectors.text.adapters import character_review
+            from app.evidence import document_matched_context
+
+            if character_review.enabled() and document_matched_context.matches(self.spec.id, self.spec.version, model_revisions):
+                try:
+                    rows = character_review.record_primary(clf, doc, input_windows, ctx)
+                except (DetectorTimeout, RuntimeError, ValueError):
+                    rows = []
+                if rows:
+                    details[character_review.STAGED] = rows
         return DetectorResult(
             status="ok", unit_scores=units, aggregate=aggregate,
             observed=f"{self.SCORE_KIND} {p_doc:.3f} (word-weighted mean over {len(chunks)} chunk(s)); {len(sents)} sentence "
@@ -150,7 +162,7 @@ class _SequenceClassifier(Detector):
             reasoning=f"The classifier places the document on the {side} side of its decision boundary.",
             metrics={"chunks": float(len(chunks)), "sentences": float(len(sents)), "tokens": float(token_count),
                      "token_windows": float(token_windows)}, model_revisions=model_revisions,
-            details={"text_evidence": evidence})
+            details=details)
 
 
 class DesklibDetector(_SequenceClassifier):

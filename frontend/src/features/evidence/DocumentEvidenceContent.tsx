@@ -314,6 +314,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const textVisibility = set.coverage?.pdf_text_visibility
   const wordVisibility = set.coverage?.word_text_visibility
   const invisible = set.coverage?.invisible_characters
+  const characterReview = set.coverage?.writing_character_review
   const lookalikes = invisible?.schema === 'document-invisible-characters/2'
   const ocrPages = set.coverage?.ocr?.pages ?? []
   const matched = set.coverage?.matched_context_review
@@ -382,6 +383,27 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
       {invisible.matches > invisible.locations.length && <p className="mt-2 mb-0 text-caption text-text-muted">
         {invisible.matches - invisible.locations.length} additional characters exceed the location display limit.
       </p>}
+    </section>}
+    {!!characterReview?.ranges.length && <section aria-labelledby="document-character-review" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="document-character-review" className="m-0 text-body font-medium">Writing response after character adjustment</h3>
+      <p className="mt-2 mb-0 text-small">Two checks reread the context after adjusting selected invisible breaks and look-alike letters.
+        {' '}Ordinary text can show the same response shift. The excerpts show the submitted text. This review carries zero AI-authorship weight.</p>
+      <ul className="mt-2 mb-0 list-none space-y-3 p-0 text-small">
+        {characterReview.ranges.map(({ spans, location, changes, excerpt, state }) => {
+          const focus = spans[1]
+          const source = location.kind === 'pdf' ? `PDF page ${location.page}` : location.kind === 'docx'
+            ? `Word body path ${location.body_path[0]}` : location.kind === 'email' ? `Email part ${location.mime_part}` : 'Decoded text'
+          return <li key={focus.start} className="border-t border-border pt-3">
+            <p className="m-0 font-medium">{{ changed: 'The writing response changed direction after character adjustment.',
+              different: 'The adjusted readings gave different directions.', consistent: 'The response direction held after character adjustment.' }[state]}</p>
+            <p className="mt-1 mb-0 font-mono text-caption text-text-muted">Extracted passage [{focus.start}, {focus.end}) · {source}
+              {'ranges' in location && location.ranges.map(([start, end]) => ` · Source [${start}, ${end})`)}</p>
+            <blockquote className="mt-2 mb-0 border-l border-border pl-3">{excerpt}</blockquote>
+            <p className="mt-2 mb-0 text-caption text-text-muted">Characters adjusted in the scored context
+              {changes.map(({ codepoint, offset }) => ` · ${codepoint} at ${offset}`)}.</p>
+          </li>
+        })}
+      </ul>
     </section>}
     {wordVisibility && <section aria-labelledby="document-word-text-visibility" className="mt-4 rounded-md border border-border p-4">
       <h3 id="document-word-text-visibility" className="m-0 text-body font-medium">Word text visibility</h3>

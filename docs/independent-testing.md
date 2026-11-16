@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [writing-formatting replay](writing-character-view-2026-11-15.md#local-app-and-replay)
+recounts source-aligned responses on 72 held matched works with three
+formatting variants. It verifies the exact adjusted input hashes and
+source positions for TXT, Word, HTML email and selectable PDF.
+
 The [changed-passage replay](document-paired-blocks-2026-11-15.md#replay)
 checks split and merged sentences in all nine TXT, Word and PDF pairings.
 It also verifies exact changed words, native source positions and the

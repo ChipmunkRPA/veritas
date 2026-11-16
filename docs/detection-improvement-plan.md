@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Writing response sensitivity to selected Unicode formatting](writing-character-view-2026-11-15.md)
+  restores the clean response on 72 held matched works across three
+  formatted deliveries. On the combined delivery, both checks locate
+  11 rewrites after adjustment versus three as submitted. Ordinary flags
+  rise from seven to 18. The app reports the direction change or disagreement
+  at the original passage and gives it zero authorship confidence weight.
+
 - [Split and merged sentences in an earlier-draft comparison](document-paired-blocks-2026-11-15.md)
   maps all nine format pairings for each of five known two-sentence
   rewrites, up from one pairing per work. The authored split and merge

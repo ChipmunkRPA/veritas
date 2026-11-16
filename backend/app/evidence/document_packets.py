@@ -25,6 +25,7 @@ from app.core.config import settings
 from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
 from app.evidence import (
     document_bibliography,
+    document_character_review,
     document_chat_markers,
     document_check_coverage,
     document_email_contexts,
@@ -341,6 +342,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_bibliography.validate(document)
         document_word_visibility.validate(document, document["source"].get(document_word_visibility.COMMITMENT))
         document_invisible_characters.validate(document, document["source"].get(document_invisible_characters.COMMITMENT))
+        document_character_review.validate(document, document["source"].get(document_character_review.COMMITMENT))
         document_chat_markers.validate(document, document["source"].get(document_chat_markers.COMMITMENT))
         document_matched_context.validate(document)
         document_paragraph_priority.validate(document)
@@ -539,6 +541,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][document_invisible_characters.KEY] = document_invisible_characters.rebuild(
             text, mapping, decoded["meta"], invisible)
         document_invisible_characters.validate(document, invisible)
+    if adjusted := document_character_review.from_result(result):
+        document["source"][document_character_review.COMMITMENT] = canonical_hash(adjusted)
+        document["coverage"][document_character_review.KEY] = adjusted
+        document_character_review.verify_source(document, text, mapping, decoded["meta"], sentences=decoded["sentences"])
     if markers := document_chat_markers.from_result(result):
         document["source"][document_chat_markers.COMMITMENT] = markers
         document["coverage"][document_chat_markers.KEY] = document_chat_markers.measure(text, mapping, decoded["meta"])
@@ -730,6 +736,10 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             if document["source"].get(document_invisible_characters.COMMITMENT) != document_invisible_characters.from_result(result):
                 raise ValueError("Invisible-character evidence differs from the published result")
             document_invisible_characters.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])
+            if document["source"].get(document_character_review.COMMITMENT) != document_character_review.result_commitment(result):
+                raise ValueError("Character-adjusted writing differs from the published result")
+            document_character_review.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"],
+                                                    sentences=decoded["sentences"])
             if document["source"].get(document_chat_markers.COMMITMENT) != document_chat_markers.from_result(result):
                 raise ValueError("Chat-format marker evidence differs from the published result")
             document_chat_markers.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])

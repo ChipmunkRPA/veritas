@@ -16,6 +16,7 @@ from app.core.canonical import canonical_hash
 from app.detectors.text.extract import extract, text_hash
 from app.evidence import (
     document_bibliography,
+    document_character_review,
     document_chat_markers,
     document_context,
     document_email_contexts,
@@ -143,6 +144,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_pdf_visibility.verify_source(evidence, doc.meta)
     document_word_visibility.verify_source(evidence, doc.meta.get(document_word_visibility.KEY))
     document_invisible_characters.verify_source(evidence, text, mapping, doc.meta)
+    if document_character_review.KEY in coverage:
+        from app.detectors.text.pipeline import segment_within
+
+        document_character_review.verify_source(evidence, text, mapping, doc.meta,
+                                                sentences=[asdict(row) for row in segment_within(doc)])
     document_chat_markers.verify_source(evidence, text, mapping, doc.meta)
     from app.evidence import document_check_coverage
 
@@ -225,6 +231,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if characters.get("schema") == document_invisible_characters.GLYPH_SCHEMA
         else " Verified invisible Unicode characters and retained source positions." if characters else ""
     )
+    character_detail = (" Verified the character-adjusted writing input hashes and original sentence positions."
+                        if document_character_review.KEY in coverage else "")
     pdf_visibility = coverage.get(document_pdf_visibility.KEY, {})
     pdf_replacement_detail = (" Verified the PDF copyable-text comparison and retained page locations."
                               if "replacement_examined_pages" in pdf_visibility else "")
@@ -235,4 +243,5 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
-            f"{tracked_detail}{word_visibility_detail}{invisible_detail}{pdf_replacement_detail}{pdf_covered_detail}{percentage_detail}{marker_detail}")
+            f"{tracked_detail}{word_visibility_detail}{invisible_detail}{character_detail}{pdf_replacement_detail}"
+            f"{pdf_covered_detail}{percentage_detail}{marker_detail}")

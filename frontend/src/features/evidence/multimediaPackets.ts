@@ -499,6 +499,13 @@ export interface DocumentEvidenceSet extends SetBase {
       checked_blocks: number; checked_chars: number; matches: number; authorship_confidence_contribution: 0;
       locations: { text_offset: number; source_start: number; source_end: number; codepoint: string; looks_like?: string;
         body_path?: (number | 'row' | 'cell')[]; mime_part?: string }[] };
+    writing_character_review?: { schema: 'document-writing-character-review/1'; authorship_confidence_contribution: 0;
+      input_view: 'english-writing-character-view/1';
+      ranges: { spans: { start: number; end: number }[]; excerpt: string;
+        location: { kind: 'text'; ranges: [number, number][] } | { kind: 'docx'; body_path: number[]; ranges: [number, number][] }
+          | { kind: 'email'; mime_part: string; html: boolean; ranges: [number, number][] } | { kind: 'pdf'; page: number };
+        changes: { offset: number; codepoint: string; replacement: string }[];
+        state: 'changed' | 'different' | 'consistent' }[] };
     chat_format_markers?: { schema: 'document-chat-format-markers/1'; scope: string; limitation: string;
       checked_chars: number; turns: number; authorship_confidence_contribution: 0;
       locations: { opener: DocumentChatMarker; closer: DocumentChatMarker }[] };

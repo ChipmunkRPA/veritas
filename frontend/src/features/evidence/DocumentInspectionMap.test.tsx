@@ -130,6 +130,23 @@ describe('ordinary document passage inspection', () => {
     expect(within(section).getByText(/Word body path 1, paragraph characters \[32, 33\)/)).toBeTruthy()
   })
 
+  it('shows the adjusted writing direction beside the unchanged source excerpt', () => {
+    const set = evidence([])
+    show({ ...set, coverage: { ...set.coverage, writing_character_review: {
+      schema: 'document-writing-character-review/1', authorship_confidence_contribution: 0,
+      input_view: 'english-writing-character-view/1',
+      ranges: [{ spans: [{ start: 0, end: 18 }, { start: 19, end: 34 }, { start: 35, end: 49 }],
+        excerpt: 'More cоpies came.', location: { kind: 'email', mime_part: '1', html: true, ranges: [[45, 68]] },
+        changes: [{ offset: 24, codepoint: 'U+043E', replacement: 'o' }], state: 'changed' }],
+    } } })
+    const section = within(screen.getByRole('region', { name: 'Writing response after character adjustment' }))
+    expect(section.getByText('The writing response changed direction after character adjustment.')).toBeTruthy()
+    expect(section.getByText('More cоpies came.')).toBeTruthy()
+    expect(section.getByText(/Email part 1 · Source \[45, 68\)/)).toBeTruthy()
+    expect(section.getByText(/U\+043E at 24/)).toBeTruthy()
+    expect(section.getByText(/zero AI-authorship weight/)).toBeTruthy()
+  })
+
   it('marks exact percentage values after a supplementary Unicode character', () => {
     const text = (value: string) => `The review 🧪 found ${value} percent of submitted applications qualified.`
     const readings = [['47', 50], ['37.0', 150]] as const

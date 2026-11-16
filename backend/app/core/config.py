@@ -337,6 +337,7 @@ class Settings(BaseSettings):
     text_paragraph_evidence_priority: bool = False
     text_matched_context_review: bool = False
     text_checkpoint_agreement_review: bool = False
+    text_character_adjusted_review: bool = False
     text_passage_position_review: bool = False
     text_long_passage_position_review: bool = False
     text_bibliography_scope_review: bool = False  # Keep qualified terminal citations out of body writing inference.

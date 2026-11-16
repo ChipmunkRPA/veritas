@@ -58,6 +58,20 @@
 {% if invisible.matches > invisible.locations | length %}<p class="caption">{{ invisible.matches - (invisible.locations | length) }} further characters exceed the location display limit.</p>{% endif %}
 <p class="caption">{{ invisible.scope }} {{ invisible.limitation }} JSON pointer <span class="mono">/coverage/invisible_characters</span>.</p>
 {% endif %}
+{% set character_review = evidence.get('writing_character_review') %}
+{% if character_review %}
+<h3 id="document-character-review">Writing response after character adjustment</h3>
+<p>Two checks reread the context after adjusting selected invisible breaks and look-alike letters. Ordinary text can show the same response shift. The excerpts show the submitted text. This review carries zero AI-authorship weight.</p>
+{% for row in character_review %}
+<div class="evidence-fact">
+<p><b>{{ row.summary }}</b></p>
+<p class="caption">Extracted passage [{{ row.spans[1].start }}, {{ row.spans[1].end }}){% if row.location.kind == 'pdf' %} · PDF page {{ row.location.page }}{% elif row.location.kind == 'docx' %} · Word body path {{ row.location.body_path[0] }}{% elif row.location.kind == 'email' %} · Email part {{ row.location.mime_part }}{% endif %}{% for range in row.location.get('ranges', []) %} · Source [{{ range[0] }}, {{ range[1] }}){% endfor %}.</p>
+<blockquote>{{ row.excerpt }}</blockquote>
+<p class="caption">Characters adjusted in the scored context{% for change in row.changes %} · {{ change.codepoint }} at {{ change.offset }}{% endfor %}.</p>
+</div>
+{% endfor %}
+<p class="caption">See <span class="mono">/coverage/writing_character_review</span> in the JSON export for exact scoring input hashes and character positions.</p>
+{% endif %}
 {% set breaks = evidence.get('av_clock_breaks') %}
 {% if breaks %}
 <h3 id="multimedia-av-clock-breaks">Soundtrack clock breaks that prevented a timing check</h3>

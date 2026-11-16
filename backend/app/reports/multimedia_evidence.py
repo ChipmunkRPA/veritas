@@ -160,6 +160,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
             raise ObjectIntegrityError("Audio evidence does not match the published sample commitments")
     else:
         from app.evidence import (
+            document_character_review,
             document_chat_markers,
             document_invisible_characters,
             document_tracked_changes,
@@ -172,6 +173,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
                 source.get(document_tracked_changes.COMMITMENT) != document_tracked_changes.from_result(result)
                 or source.get(document_word_visibility.COMMITMENT) != document_word_visibility.from_result(result)
                 or source.get(document_invisible_characters.COMMITMENT) != document_invisible_characters.from_result(result)
+                or source.get(document_character_review.COMMITMENT) != document_character_review.result_commitment(result)
                 or source.get(document_chat_markers.COMMITMENT) != document_chat_markers.from_result(result)):
             raise ObjectIntegrityError("Document evidence does not match the published extraction commitments")
 
@@ -557,6 +559,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     from app.detectors.text.extract import text_hash
     from app.evidence import (
         document_bibliography,
+        document_character_review,
         document_chat_markers,
         document_check_coverage,
         document_email_contexts,
@@ -609,6 +612,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_bibliography.verify_source(document, decoded["meta"])
         document_word_visibility.verify_source(document, decoded["meta"].get(document_word_visibility.KEY), frozen=True)
         document_invisible_characters.verify_source(document, text, mapping, decoded["meta"])
+        document_character_review.verify_source(document, text, mapping, decoded["meta"], sentences=decoded["sentences"])
         document_chat_markers.verify_source(document, text, mapping, decoded["meta"])
         document_native_locations.validate(document)
         document_scope.validate_card_selection(document, mapping)
@@ -816,6 +820,12 @@ def _invisible_characters_view(coverage: dict) -> dict | None:
             "locations": [{**row, "name": invisible.character_name(row),
                            "label": invisible.location_label(row, record["coordinate_space"])}
                           for row in record["locations"]]}
+
+
+def _character_review_view(coverage: dict) -> list[dict]:
+    from app.evidence import document_character_review as review
+
+    return [row | {"summary": review.STATE[row["state"]]} for row in coverage.get(review.KEY, {}).get("ranges", ())]
 
 
 def _chat_markers_view(coverage: dict) -> dict | None:
@@ -1503,6 +1513,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "email_classifier_input_scope": (document.get("coverage") or {}).get(EMAIL_INPUT_SCOPE) if kind == "document" else None,
             "word_tracked_changes": (document.get("coverage") or {}).get(TRACKED) if kind == "document" and not withheld else None,
             "invisible_characters": _invisible_characters_view(document.get("coverage") or {}) if kind == "document" else None,
+            "writing_character_review": _character_review_view(document.get("coverage") or {})
+            if kind == "document" and not withheld else None,
             "chat_format_markers": _chat_markers_view(document.get("coverage") or {}) if kind == "document" and not withheld else None,
             "coverage_details": ([f"{'Voice evidence' if key == 'audio' else 'Audio/video synchronization evidence'}: {channel['reason']}"
                                   for key, channel in (document.get("coverage", {}).get("channels") or {}).items()]

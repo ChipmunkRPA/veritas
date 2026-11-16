@@ -42,6 +42,7 @@ from app.engine.runner import StageContext
 from app.engine.stages import common, document_screening
 from app.evidence import (
     document_bibliography,
+    document_character_review,
     document_chat_markers,
     document_check_coverage,
     document_invisible_characters,
@@ -52,10 +53,11 @@ from app.evidence import (
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p37"
+PIPELINE_VERSION = "doc-2.0-p38"
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 BIBLIOGRAPHY_POLICY = "writing_bibliography_review_enabled"
 CLAUSE_POLICY = "writing_within_sentence_language_review_enabled"
+CHARACTER_POLICY = "writing_character_adjusted_review_enabled"
 PRIMARY_DETECTORS = TEXT_PRIMARY_DETECTORS  # v0.3 used the fine-tune whenever it was installed
 SECONDARY_DETECTOR = "txt.hf.hello_simpleai"
 BINOCULARS_DETECTOR = "txt.binoculars"
@@ -156,13 +158,14 @@ def current_provenance_output(output: Any, *, expected: bool) -> bool:
 
 
 def detect(ctx: StageContext) -> dict[str, Any]:
-    from app.detectors.text.adapters import agreement
+    from app.detectors.text.adapters import agreement, character_review
     from app.engine.boundary import Cancelled
 
     decoded = ctx.outputs["decode"]
     scope = None
     witness = None
     clause_review = language_scope.clause_review_enabled()
+    character_enabled = character_review.enabled()
     if not provenance_gate.stop(ctx):
         doc, sentences = document_input(ctx)
         ctx.check("before identifying writing language")
@@ -188,15 +191,26 @@ def detect(ctx: StageContext) -> dict[str, Any]:
         except Exception as error:
             ctx.check("after the optional second writing check")
             ctx.log.warning("writing_review.omitted", error_type=type(error).__name__)
-    return {**detected, language_scope.KEY: scope, CLAUSE_POLICY: clause_review,
+    if character_enabled:
+        try:
+            if review := character_review.finalize(ctx, detected, decoded):
+                detected[document_character_review.KEY] = review
+        except Cancelled:
+            raise
+        except (KeyError, ValueError, TypeError) as error:
+            ctx.log.warning("writing_character_review.omitted", error_type=type(error).__name__)
+    return {**detected, language_scope.KEY: scope, CLAUSE_POLICY: clause_review, CHARACTER_POLICY: character_enabled,
             **({language_scope.CLAUSE_KEY: witness} if witness else {})}
 
 
 def current_detect_output(output: Any) -> bool:
     """Require an explicit coverage decision before reusing fresh detector outputs."""
+    from app.detectors.text.adapters import character_review
+
     return (isinstance(output, dict) and isinstance(output.get("detectors"), list)
             and language_scope.KEY in output
             and output.get(CLAUSE_POLICY, False) is language_scope.clause_review_enabled()
+            and output.get(CHARACTER_POLICY, False) is character_review.enabled()
             and output[language_scope.KEY] in (None, language_scope.ENGLISH, *language_scope.MESSAGES))
 
 
@@ -570,6 +584,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         result.manifest.sampling[document_tracked_changes.COMMITMENT] = canonical_hash(tracked)
     detected = ctx.outputs.get("detect") or {}
     verified_credentials = provenance_gate.stop(ctx)
+    if not verified_credentials and (reading := detected.get(document_character_review.KEY)):
+        result.manifest.sampling[document_character_review.KEY] = reading
     if writing_checks := document_check_coverage.capture(
         detected.get("detectors", []), PRIMARY_DETECTORS, BINOCULARS_DETECTOR,
         language=detected.get(language_scope.KEY), verified_credentials=verified_credentials,

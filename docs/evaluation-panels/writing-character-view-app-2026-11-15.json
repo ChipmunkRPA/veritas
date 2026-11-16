@@ -1,0 +1,172 @@
+{
+  "schema": "chipmunk.writing-character-view-app/1",
+  "paid_analyses": 5,
+  "price_usd": 9.99,
+  "unpaid_analysis_jobs": 0,
+  "baseline_assessment_agrees": true,
+  "results": [
+    {
+      "format": ".txt",
+      "state": "different",
+      "focus": {
+        "end": 225,
+        "start": 109
+      },
+      "location": {
+        "kind": "text",
+        "ranges": [
+          [
+            109,
+            225
+          ]
+        ]
+      },
+      "points": [
+        {
+          "codepoint": "U+0435",
+          "offset": 115,
+          "replacement": "e"
+        },
+        {
+          "codepoint": "U+0435",
+          "offset": 123,
+          "replacement": "e"
+        },
+        {
+          "codepoint": "U+00AD",
+          "offset": 138,
+          "replacement": ""
+        },
+        {
+          "codepoint": "U+200B",
+          "offset": 148,
+          "replacement": ""
+        }
+      ],
+      "original_verified": true,
+      "pdf_sha256": "736ce08ea0ecd6c04f312e7d2a42d6d31418462a9f10409387d9651db8c671ca",
+      "json_sha256": "5b70b7c4e19cacccf91ba9a647bf06295c0b8d1456533e7eab29991cfaf6e4c5"
+    },
+    {
+      "format": ".docx",
+      "state": "different",
+      "focus": {
+        "end": 225,
+        "start": 109
+      },
+      "location": {
+        "body_path": [
+          0
+        ],
+        "kind": "docx",
+        "ranges": [
+          [
+            109,
+            225
+          ]
+        ]
+      },
+      "points": [
+        {
+          "codepoint": "U+0435",
+          "offset": 115,
+          "replacement": "e"
+        },
+        {
+          "codepoint": "U+0435",
+          "offset": 123,
+          "replacement": "e"
+        },
+        {
+          "codepoint": "U+00AD",
+          "offset": 138,
+          "replacement": ""
+        },
+        {
+          "codepoint": "U+200B",
+          "offset": 148,
+          "replacement": ""
+        }
+      ],
+      "original_verified": true,
+      "pdf_sha256": "507bbc644923ccf5bf6414c23285a4b6b0af1e3c3b746270344ce320b25e386e",
+      "json_sha256": "600f583739668e9b9975f5d911702ab092ccb5609981fe6ecfe40996c97728f6"
+    },
+    {
+      "format": ".eml",
+      "state": "different",
+      "focus": {
+        "end": 225,
+        "start": 109
+      },
+      "location": {
+        "html": true,
+        "kind": "email",
+        "mime_part": "1",
+        "ranges": [
+          [
+            124,
+            263
+          ]
+        ]
+      },
+      "points": [
+        {
+          "codepoint": "U+0435",
+          "offset": 115,
+          "replacement": "e"
+        },
+        {
+          "codepoint": "U+0435",
+          "offset": 123,
+          "replacement": "e"
+        },
+        {
+          "codepoint": "U+00AD",
+          "offset": 138,
+          "replacement": ""
+        },
+        {
+          "codepoint": "U+200B",
+          "offset": 148,
+          "replacement": ""
+        }
+      ],
+      "original_verified": true,
+      "pdf_sha256": "f31ba92dfb3918ef3b7f2e8153affecf530133d06ae367a5f370d3a909c7a86b",
+      "json_sha256": "9e7ec5859fa7f768278bf0ebfe03f4e925959107a68765f123ae08e5465b0533"
+    },
+    {
+      "format": ".pdf",
+      "state": "different",
+      "focus": {
+        "end": 223,
+        "start": 109
+      },
+      "location": {
+        "kind": "pdf",
+        "page": 1
+      },
+      "points": [
+        {
+          "codepoint": "U+0435",
+          "offset": 115,
+          "replacement": "e"
+        },
+        {
+          "codepoint": "U+0435",
+          "offset": 123,
+          "replacement": "e"
+        },
+        {
+          "codepoint": "U+03BF",
+          "offset": 136,
+          "replacement": "o"
+        }
+      ],
+      "original_verified": true,
+      "pdf_sha256": "3280f44294fa793700657817d4bbebb6c0bd964d28fe76532e192085e77da4fc",
+      "json_sha256": "34d5a558c86e431a7b980bb5ee129005d788c8adf2d08528091488a5d0a8c1d1"
+    }
+  ]
+}

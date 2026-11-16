@@ -3523,3 +3523,9 @@ recounts both-region overlap, added control flags and missed edits
 across 149 held views. The native procedure recreates JPEG deliveries
 from the credited sources. The separate prepaid replay checks the
 same two native crops in the browser, API, PDF, JSON and signed package.
+
+The [mixed-language writing replay](writing-language-window-transfer-2026-11-15.md#replay)
+reconstructs clause, sentence and paragraph switches from credited
+sources. The portable reader compares exact English input recovery,
+foreign-text admission and raw responses on each side of 112 paired
+writing sources.

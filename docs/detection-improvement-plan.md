@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [English contexts in mixed-language documents](writing-language-window-transfer-2026-11-15.md)
+  recovered an exact English context on all 448 prepared paragraph and
+  sentence switches that the app left unassessed. The stricter rule
+  still admitted foreign words on 26/224 within-sentence switches.
+  On the separate-paragraph case the raw writing score flagged 41/112
+  rewritten passages and 32/112 matched originals. Both approaches
+  remain in evaluation.
+
 - [Native-grid JPEG rotation](image-jpeg-native-rotation-2026-11-15.md)
   adds rotation evidence for larger photos. The held comparison rose
   from 1/60 to 26/60 correctly located edits across ten camera groups.

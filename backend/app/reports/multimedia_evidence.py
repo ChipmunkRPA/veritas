@@ -1454,12 +1454,18 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         if review := long_voice_review.get(audio_two_second_binding.KEY):
             review["checked_windows"] = sum(count >= audio_two_second_binding.RATE
                                             for excerpt in review["excerpts"] for count in excerpt["speech_samples"])
+            review["regions"] = [region for region in review["regions"] if "same_pair_as" not in region]
             for region in review["regions"]:
                 region["waveform"] = plate("waveform", region["artifacts"]["waveform"], "Waveform with the two-second window highlighted")
+                confirming = region.get("confirming_window")
+                if confirming is not None:
+                    confirming["waveform"] = plate("waveform", confirming["artifacts"]["waveform"],
+                                                  "Waveform with the confirming window highlighted")
+                windows = (region, confirming) if confirming is not None else (region,)
                 region["recording_context"] = [
                     event["id"] for event in (document.get("acoustic_context") or {}).get("events", ())
-                    if event["interval"]["start_sample"] < region["end_sample"]
-                    and event["interval"]["end_sample"] > region["start_sample"]
+                    if any(event["interval"]["start_sample"] < window["end_sample"]
+                           and event["interval"]["end_sample"] > window["start_sample"] for window in windows)
                 ]
     background_review = copy.deepcopy(document.get("background_reduced_voice_review"))
     if background_review and (asset := background_review["artifacts"].get("waveform")):

@@ -246,18 +246,27 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       <h3 className="m-0 text-body font-medium">{twoSecond.title}</h3>
       <p className="mt-2 mb-0 text-small" role="status">{twoSecond.reason}</p>
       {twoSecond.regions.length > 0 && <ol className="mt-4 mb-0 space-y-3 list-none p-0">
-        {twoSecond.regions.map(region => {
-          const span = `${seconds(region.start_sample / longVoiceSampleRate)}–${seconds(region.end_sample / longVoiceSampleRate)}`
-          const context = (set.acoustic_context?.events ?? []).filter(event =>
-            event.interval.start_sample < region.end_sample && event.interval.end_sample > region.start_sample)
+        {twoSecond.regions.filter(region => region.same_pair_as === undefined).map(region => {
+          const windows = region.confirming_window ? [region, region.confirming_window] : [region]
+          const time = (sample: number) => region.confirming_window
+            ? `${(sample / longVoiceSampleRate).toFixed(7)} s` : seconds(sample / longVoiceSampleRate)
+          const context = (set.acoustic_context?.events ?? []).filter(event => windows.some(window =>
+            event.interval.start_sample < window.end_sample && event.interval.end_sample > window.start_sample))
           return <li key={region.start_sample} className="rounded-md border border-border p-3">
-            <p className="m-0 text-small font-medium">AI-like speech response at {span}</p>
-            <p className="mt-1 mb-0 font-mono text-caption text-text-muted">Samples [{region.start_sample}, {region.end_sample})</p>
-            <SourceTimestamps ranges={region.source_timestamp_ranges} />
-            <div className="mt-3"><EvidencePicture set={set} artifact={region.artifacts.waveform} token={token} ready={mediaReady}
-              chart alt={`Waveform for the two-second speech window at ${span}`} /></div>
-            <div className="mt-3"><EvidenceAudio set={set} artifact={region.artifacts.selected_clip} token={token} ready={mediaReady}
-              alt={`Two-second speech window at ${span}`} /></div>
+            {windows.map((window, index) => {
+              const span = `${time(window.start_sample)}–${time(window.end_sample)}`
+              const playerLabel = index === 0 ? 'Two-second speech window' : 'Confirming two-second speech window'
+              const waveformLabel = index === 0 ? 'two-second speech window' : 'confirming two-second speech window'
+              return <div key={window.start_sample} className={index > 0 ? 'mt-4 border-t border-border pt-3' : undefined}>
+                <p className="m-0 text-small font-medium">{index === 0 ? 'AI-like speech response' : 'Confirming response'} at {span}</p>
+                <p className="mt-1 mb-0 font-mono text-caption text-text-muted">Samples [{window.start_sample}, {window.end_sample})</p>
+                <SourceTimestamps ranges={window.source_timestamp_ranges} />
+                <div className="mt-3"><EvidencePicture set={set} artifact={window.artifacts.waveform} token={token} ready={mediaReady}
+                  chart alt={`Waveform for the ${waveformLabel} at ${span}`} /></div>
+                <div className="mt-3"><EvidenceAudio set={set} artifact={window.artifacts.selected_clip} token={token} ready={mediaReady}
+                  alt={`${playerLabel} at ${span}`} /></div>
+              </div>
+            })}
             {context.length > 0 && <p className="mt-3 mb-0 text-caption text-text-muted">Overlapping recording observations{' '}
               {context.map((event, index) => <span key={event.id}>{index > 0 && ', '}
                 <Link to={{ search, hash: `#media-evidence-${encodeURIComponent(event.id)}` }} className="underline underline-offset-2">{event.id}</Link>

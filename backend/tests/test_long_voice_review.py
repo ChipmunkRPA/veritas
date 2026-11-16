@@ -5,9 +5,6 @@ from types import SimpleNamespace
 
 import numpy as np
 import pytest
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
-
 from app.core.canonical import canonical_json
 from app.core.config import settings
 from app.detectors.audio import long_voice_review
@@ -23,6 +20,8 @@ from app.evidence import audio_two_second_binding as two_second
 from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, AnalysisStage, Base, DetectorRun
 from app.storage.objects import ObjectStore
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
 
 
 def native_source(samples):
@@ -231,7 +230,12 @@ def test_optional_review_respects_the_serving_model_and_provenance_gate(monkeypa
     assert audio._long_voice_review(ctx, None, primary) is None
 
 
-def test_two_second_scan_deduplicates_native_ranges_and_replays_excerpt_hashes():
+@pytest.mark.parametrize(("schema", "with_confirmation", "marked"), [
+    (two_second.SCHEMA, False, True),
+    (two_second.CONFIRMED_SCHEMA, False, False),
+    (two_second.CONFIRMED_SCHEMA, True, True),
+])
+def test_two_second_scan_deduplicates_source_ranges_and_replays_confirmation(schema, with_confirmation, marked):
     pcm = np.arange(160_001, dtype=np.int32).astype("<i2").astype("<f4") / 32768
     source = native_source(len(pcm)) | {"pcm_sha256": sha256(pcm.tobytes()).hexdigest()}
     starts = two_second.excerpt_starts(len(pcm))
@@ -240,14 +244,15 @@ def test_two_second_scan_deduplicates_native_ranges_and_replays_excerpt_hashes()
     assert not two_second.excerpt_starts(two_second.MAXIMUM + 1)
     readings = []
     for start, chosen in zip(starts, (4, 2, 0, None), strict=True):
+        nearby = {0: 3, 32_000: 3}.get(start) if with_confirmation else None
         rows = [] if chosen is None else [
-            {"start_sample": a, "end_sample": b, "logit": short.REVIEW_POINT + int(index == chosen)}
+            {"start_sample": a, "end_sample": b, "logit": short.REVIEW_POINT - 1 + 3 * int(index == chosen) + 2 * int(index == nearby)}
             for index, (a, b) in enumerate(short.GRID)
         ]
         readings.append({"start_sample": start, "pcm_sha256": sha256(pcm[start:start+short.SAMPLES].tobytes()).hexdigest(),
                          "speech_samples": [short.RATE if rows else 0] * len(short.GRID), "responses": rows})
     raw = canonical_json({"detector_id": two_second.DETECTOR_ID, "status": "ok", "details": {
-        "pcm_sha256": source["pcm_sha256"], two_second.KEY: {"schema": two_second.SCHEMA, "excerpts": readings}}})
+        "pcm_sha256": source["pcm_sha256"], two_second.KEY: {"schema": schema, "excerpts": readings}}})
     pin = sha256(raw).hexdigest()
     store = SimpleNamespace(read_bytes={pin: raw}.__getitem__)
     record = long_voice_review.skipped(binding.SKIPPED_BUDGET) | {two_second.KEY: {"raw_output_sha256": pin}}
@@ -260,11 +265,19 @@ def test_two_second_scan_deduplicates_native_ranges_and_replays_excerpt_hashes()
 
     review = audio_long_review.build(record, store=store, source=source, pcm=pcm, mapping=source, asset=asset, waveform=audio_packets._chart)
     scan = review[two_second.KEY]
-    assert scan["status"] == "flagged" and scan["affects_overall_confidence"] is False
-    assert all("responses" not in excerpt for excerpt in scan["excerpts"])
-    [window] = binding.all_media_windows(review)
-    assert (window["start_sample"], window["end_sample"], window["supporting_excerpts"]) == (64_000, 96_000, [0, 1, 2])
-    np.testing.assert_array_equal(read_wav(assets[window["artifacts"]["selected_clip"]["sha256"]]), pcm[64_000:96_000])
+    assert scan["status"] == ("flagged" if marked else "no_flag") and scan["affects_overall_confidence"] is False
+    assert all("responses" not in excerpt and ("elevated_windows" in excerpt) == (schema == two_second.CONFIRMED_SCHEMA)
+               for excerpt in scan["excerpts"])
+    windows = binding.all_media_windows(review)
+    if marked:
+        assert windows[0]["supporting_excerpts"] == [0, 1, 2]
+    expected = [(64_000, 96_000)] if marked else []
+    if with_confirmation:
+        expected.append((48_000, 80_000))
+        assert windows[1]["supporting_excerpts"] == [0]
+    assert [(window["start_sample"], window["end_sample"]) for window in windows] == expected
+    for window, (a, b) in zip(windows, expected, strict=True):
+        np.testing.assert_array_equal(read_wav(assets[window["artifacts"]["selected_clip"]["sha256"]]), pcm[a:b])
     audio_long_review.verify(review, record, store=store, source=source, pcm=pcm, mapping=source,
                              read_asset=assets.__getitem__, waveform=audio_packets._chart)
     audio_long_review.verify_source(review, pcm=pcm, mapping=source, waveform=audio_packets._chart)
@@ -272,7 +285,28 @@ def test_two_second_scan_deduplicates_native_ranges_and_replays_excerpt_hashes()
     spoofed[two_second.KEY]["excerpts"][0]["pcm_sha256"] = "a" * 64
     with pytest.raises(ValueError, match="excerpt differs from the original samples"):
         audio_long_review.verify_source(spoofed, pcm=pcm, mapping=source, waveform=audio_packets._chart)
-    spoofed = deepcopy(review)
-    spoofed[two_second.KEY]["regions"][0]["source_timestamp_ranges"][0]["source_start_pts"] += 1
-    with pytest.raises(ValueError, match="exhibit differs"):
-        binding.validate(spoofed, source)
+    if marked:
+        spoofed = deepcopy(review)
+        row = spoofed[two_second.KEY]["regions"][0]
+        changed = row["confirming_window"] if with_confirmation else row
+        changed["source_timestamp_ranges"][0]["source_start_pts"] += 1
+        with pytest.raises(ValueError, match="exhibit differs"):
+            binding.validate(spoofed, source)
+    if with_confirmation:
+        spoofed = deepcopy(review)
+        spoofed[two_second.KEY]["excerpts"][0]["elevated_windows"] = [4, 4]
+        with pytest.raises(ValueError, match="admitted elevated windows"):
+            binding.validate(spoofed, source)
+        forged = deepcopy(review)
+        forged[two_second.KEY]["regions"][0]["confirming_window"]["pcm_sha256"] = "0" * 64
+        with pytest.raises(ValueError, match="PCM differs"):
+            audio_long_review.verify_source(forged, pcm=pcm, mapping=source, waveform=audio_packets._chart)
+
+
+def test_two_second_reciprocal_windows_share_one_exhibit():
+    excerpts = [{"start_sample": start, "selected_window": selected, "elevated_windows": [selected]}
+                for start, selected in ((0, 2), (32_000, 1))]
+    first, repeat = two_second.regions(excerpts, schema=two_second.CONFIRMED_SCHEMA)
+    assert "same_pair_as" not in first and repeat["same_pair_as"] == first["start_sample"]
+    assert first["confirming_window"]["start_sample"] == repeat["start_sample"]
+    assert repeat["confirming_window"]["start_sample"] == first["start_sample"]

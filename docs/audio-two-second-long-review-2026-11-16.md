@@ -24,6 +24,14 @@ run with its separate evidence. The option defaults off. The check
 reuses the existing commercially permitted voice and speech activity
 assets. [Asset terms and hashes](../backend/app/models.yaml)
 
+With `VERITAS_AUDIO_TWO_SECOND_LONG_CONFIRMATION=true`, a reported
+window needs another elevated two-second window that overlaps by at
+least one second. Repeated measurements at exactly the same source
+position count once. The app displays the qualifying second window
+with the greatest shift in start time. When both windows nominate
+each other, the browser and PDF show the pair in one exhibit. JSON
+retains both selection records and the reference between them.
+
 ## Prior results and application replay
 
 On 180 paired deliveries from an earlier panel, adding the
@@ -101,12 +109,45 @@ intervals with the second-window rule. These are matched comparisons on
 three deliveries of the same edited sources.
 
 The results favor using the second window to confirm a focused range.
-The two-second window remains useful as local evidence. The confirmation
-step needs its own app replay for the saved source samples and captions.
-Both comparisons use the same voice detector and are treated as
-supplementary evidence. The published receipt stores positions and scalar
-responses. The independent export checks the event counts and the amount
-of ordinary audio covered by flags. [Numeric transfer receipt](evaluation-panels/audio-two-second-long-fresh-2026-11-16.json.gz)
+After grouping reciprocal pairs, the 125 marked windows give 113 distinct
+exhibits across the test deliveries. Five pairs start less than 0.1 seconds
+apart. Both readings use the same voice detector, share at least one
+second of audio and serve as supplementary evidence. The published
+receipt stores positions and scalar responses. The independent export
+checks the event counts and the amount of ordinary audio covered by flags.
+The reader also verifies that the saved response precision gives the
+same excerpt selections as the numeric evaluation. [Numeric transfer receipt](evaluation-panels/audio-two-second-long-fresh-2026-11-16.json.gz)
+
+## Confirmation in the local app
+
+Eight simulated USD 9.99 checkouts replayed the single-window review
+and the two-window rule on selected fresh recordings. Zero analyses
+queued before payment. The clean, −5 dB and −10 dB edited recordings
+all displayed confirmed ranges. The ordinary and isolated-background
+controls each lost their earlier single-window alert. Paired runs of
+the same source agreed on the overall assessment and the earlier
+long-window evidence. The browser played both windows in each exhibit.
+Both waveforms and source-clock intervals appeared together in the
+PDF and the signed export verified both against the original recording.
+[Prepaid browser, PDF and signed export receipt](evaluation-panels/audio-two-second-confirmation-app-2026-11-16.json)
+
+## Timing limits
+
+Only 100 of the 155 labeled edits could meet the overlap criterion
+even once among all scheduled two-second windows. Fifty-one edits
+were shorter than 0.60 seconds, below the minimum length that can reach
+0.30 intersection over union inside a two-second window. Four more lacked
+a matching scheduled position. At least one admitted window remained
+available for each of those 100 eligible labels under both noise levels.
+
+The separate `geometry` command also compares reporting the common
+part of both windows while keeping the earlier long-window results.
+It finds 84 clean matches compared with 81 for the full window, with
+11 gained and eight lost. The narrower ranges locate 44 versus 47 at
+−5 dB and 21 versus 22 at −10 dB. The ordinary and isolated-background
+flag counts agree under both geometries. The app displays both complete
+measured windows. A shorter, separately measured check can test
+individual edit locations beyond the two-second geometry.
 
 ## Reproduce
 
@@ -129,10 +170,14 @@ module=scripts.audio_two_second_transfer
   "$librispeech" "$run/rooms" "$run/inputs"
 "$runner" -B -m "$module" score "$run/inputs" models/weights/audio-upgrade "$run/result.json.gz"
 python3 -B -S -m "$module" review "$run/result.json.gz"
+python3 -B -S -m "$module" geometry "$run/result.json.gz"
 python3 -B -S -m "$module" export "$run/result.json.gz" "$run/independent"
 "$runner" -B -m scripts.audio_two_second_app \
   docs/evaluation-panels/audio-long-focused-context-paired-2026-11-16.json.gz \
   "$prior_native_inputs" "$run/app" --browser
+"$runner" -B -m scripts.audio_two_second_app \
+  docs/evaluation-panels/audio-two-second-long-fresh-2026-11-16.json.gz \
+  "$run/inputs" "$run/confirmation-app" --confirmation --browser
 ```
 
 The `review` and `export` commands also accept the published numeric

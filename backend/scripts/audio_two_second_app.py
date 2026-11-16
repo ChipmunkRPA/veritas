@@ -38,7 +38,47 @@ def cases(receipt):
                             and any(e["short_assessed"] for e in row["excerpts"]) and not selected(row)), True, "wav")
                  for kind in ("ordinary", "background")]
     for name, row, enabled, carrier in fixtures:
-        yield name, row, enabled, carrier, selected(row)
+        yield name, row, carrier, binding.SCHEMA if enabled else None, selected(row), []
+
+
+def confirmation_cases(receipt):
+    from scripts import audio_two_second_transfer as study
+
+    rows = receipt["rows"]
+    assert study.summarize(receipt["freeze"], rows) == receipt["summary"]
+
+    def plan(row, schema):
+        readings = binding.summarize_readings(row["excerpts"], row["samples"], schema=schema)
+        return binding.regions(readings, schema=schema)
+
+    def trial(name, row, carrier, schema):
+        regions = plan(row, schema)
+        support = [span(region["confirming_window"]) for region in regions] if schema == binding.CONFIRMED_SCHEMA else []
+        return name, row, carrier, schema, [span(region) for region in regions], support
+
+    def target(condition):
+        for row in rows:
+            if row["condition"] == condition and row["kind"] == "edited":
+                arms = study.locations(row)
+                if prior.matches(arms["adjacent_support"], row["truth"]) - prior.matches(arms["current"], row["truth"]):
+                    return row
+        raise ValueError(f"No additionally located edit under {condition}")
+
+    confirmed = binding.CONFIRMED_SCHEMA
+    strong = target("overlap_-10dB")
+    yield trial("strong-single-window", strong, "flac", binding.SCHEMA)
+    yield trial("strong-confirmed", strong, "flac", confirmed)
+    yield trial("moderate-confirmed", target("overlap_-5dB"), "flac", confirmed)
+    yield trial("clean-confirmed", target("clean"), "wav", confirmed)
+    for kind in ("ordinary", "background"):
+        control = next(row for row in rows if row["kind"] == kind and row["condition"] == "overlap_-5dB"
+                       and plan(row, binding.SCHEMA) and not plan(row, confirmed))
+        yield trial(f"{kind}-single-window", control, "wav", binding.SCHEMA)
+        yield trial(f"{kind}-confirmed", control, "wav", confirmed)
+
+
+def span(window):
+    return window["start_sample"], window["end_sample"]
 
 
 def render(folder, name, raw, carrier):
@@ -63,7 +103,6 @@ def without_asset_urls(value):
 
 def verify_exports(client, route, media, evidence, pcm, signer):
     import pymupdf
-
     from app.reports.engine import pdf_text
     from app.reports.verify import verify_package
     from scripts.verify_multimedia_exports import pixels, scan
@@ -75,6 +114,8 @@ def verify_exports(client, route, media, evidence, pcm, signer):
     scan(words)
     review = evidence["long_voice_review"][binding.KEY]
     assert binding.TITLE in words and review["reason"] in words
+    assert words.count("Confirming response") == sum("confirming_window" in region and "same_pair_as" not in region
+                                                     for region in review["regions"])
     with pymupdf.open(stream=pdf, filetype="pdf") as view:
         pages = [
             (" ".join(page.get_text().split()), {((pix.width, pix.height), hashlib.sha256(pix.samples).hexdigest())
@@ -82,14 +123,17 @@ def verify_exports(client, route, media, evidence, pcm, signer):
             for page in view
         ]
         for region in review["regions"]:
-            start, end = region["start_sample"], region["end_sample"]
-            assert f"Source PTS [{start}, {end}) at 1/16000." in words
-            clip = fetch(client, region["artifacts"]["selected_clip"]["url"])
-            with wave.open(io.BytesIO(clip), "rb") as stream:
-                assert (stream.getframerate(), stream.getnchannels(), stream.getsampwidth()) == (binding.RATE, 1, 2)
-                assert stream.readframes(stream.getnframes()) == pcm[2 * start:2 * end]
-            chart = pixels(fetch(client, region["artifacts"]["waveform"]["url"]))
-            assert any(chart in charts and f"Source PTS [{start}, {end}) at 1/16000." in text for text, charts in pages)
+            witnesses = []
+            for window in binding.media_windows({"regions": [region]}):
+                start, end = span(window)
+                clip = fetch(client, window["artifacts"]["selected_clip"]["url"])
+                with wave.open(io.BytesIO(clip), "rb") as stream:
+                    assert (stream.getframerate(), stream.getnchannels(), stream.getsampwidth()) == (binding.RATE, 1, 2)
+                    assert stream.readframes(stream.getnframes()) == pcm[2 * start:2 * end]
+                chart = pixels(fetch(client, window["artifacts"]["waveform"]["url"]))
+                witnesses.append((f"Source PTS [{start}, {end}) at 1/16000.", chart))
+            assert any(all(caption in text and chart in charts for caption, chart in witnesses)
+                       and (len(witnesses) == 1 or "Confirming response" in text) for text, charts in pages)
     bundle = body(client.post(f"{route}/packages", json={"report_id": report["id"], "kind": "draft", "include_original": False}))
     wait(client, f"/api/v2/packages/{bundle['id']}", timeout=120)
     media.with_suffix(".pdf").write_bytes(pdf)
@@ -99,6 +143,8 @@ def verify_exports(client, route, media, evidence, pcm, signer):
                              expect_key_id=signer["key_id"], source_audio=media)
     assert checked.outcome == "verified", checked.as_dict()
     assert any(f"{len(review['regions'])} marked two-second windows" in check.detail for check in checked.checks)
+    if review["schema"] == binding.CONFIRMED_SCHEMA and review["regions"]:
+        assert any(f"{len(review['regions'])} confirming two-second windows" in check.detail for check in checked.checks)
     with ZipFile(archive) as exported:
         assert json.loads(exported.read("evidence.json")) == evidence
         assert exported.read("report.pdf") == pdf
@@ -111,20 +157,20 @@ def run(args):
                       VERITAS_AUDIO_FOCUSED_LONG_REVIEW="true", VERITAS_LOG_LEVEL="WARNING")
 
     import torch
-    from fastapi.testclient import TestClient
-
     from app.api import auth
     from app.billing import service
     from app.core.config import settings
     from app.main import app
     from app.storage.db import Analysis, get_session
     from app.storage.objects import default_store
+    from fastapi.testclient import TestClient
     from scripts.verify_multimedia_exports import scan
 
     torch.set_num_threads(2)
     torch.set_num_interop_threads(1)
     frozen = prior.read(args.receipt)
-    prior.validate(frozen)
+    if not args.confirmation:
+        prior.validate(frozen)
     simulation = PaymentStub()
     service._stripe = simulation
     observed, before, browser_cases = {}, {}, []
@@ -137,10 +183,11 @@ def run(args):
             db.commit()
         client.headers["X-API-Key"] = token
         signer = body(client.get("/api/v2/instance/public-key"))
-        for name, row, enabled, carrier, expected in cases(frozen):
+        for name, row, carrier, schema, expected, expected_support in (confirmation_cases(frozen) if args.confirmation else cases(frozen)):
             raw = (args.media / "pcm" / f"{row['pcm_sha256']}.pcm").read_bytes()
             assert prior.digest(raw) == row["pcm_sha256"] and len(raw) == 2 * row["samples"]
-            settings.audio_two_second_long_review = enabled
+            settings.audio_two_second_long_review = schema is not None
+            settings.audio_two_second_long_confirmation = schema == binding.CONFIRMED_SCHEMA
             media = render(args.output, name, raw, carrier)
             aid = checkout(client, simulation, media, kind="audio", media_type=f"audio/{carrier}", filename=media.name)
             route = f"/api/v2/analyses/{aid}"
@@ -157,17 +204,26 @@ def run(args):
             assessment = result["decision"], result.get("customer_assessment"), baseline
             before[name] = assessment
             review = long.get(binding.KEY)
-            assert (review is not None) == enabled
+            assert (review is None) == (schema is None)
             if review is None:
                 continue
             binding.validate(review, evidence["source"])
+            assert review["schema"] == schema
             assert review["status"] == ("flagged" if expected else "no_flag")
-            assert [(region["start_sample"], region["end_sample"]) for region in review["regions"]] == expected
+            assert [span(region) for region in review["regions"]] == expected
+            assert [span(region["confirming_window"]) for region in review["regions"] if "confirming_window" in region] == expected_support
             sha_pdf = verify_exports(client, route, media, evidence, raw, signer)
             browser_cases.append({"analysis_id": aid, "name": name, "review": review})
             observed[name] = {"container": carrier, "status": review["status"], "ranges": expected, "pdf_sha256": sha_pdf}
+            if args.confirmation:
+                observed[name].update(schema=schema, confirming_ranges=expected_support, source_sha256=row["pcm_sha256"],
+                                      condition=row["condition"], known_edit_ranges=row["truth"])
             print(f"{name}: {review['status']} with matching API, PDF and signed source playback", flush=True)
-        assert before["clean-before"] == before["clean-edited"]
+        if args.confirmation:
+            for case in ("strong", "ordinary", "background"):
+                assert before[f"{case}-single-window"] == before[f"{case}-confirmed"]
+        else:
+            assert before["clean-before"] == before["clean-edited"]
         browser = browser_check(args.output, app, token, browser_cases, scenario="long-two-second-speech-replay.mjs") if args.browser else None
     prior.save(args.output / "receipt.json", {"cases": observed, "browser": browser, "paid_analyses": len(simulation.sessions),
                                              "jobs_before_payment": 0, "same_assessment_and_baseline": True})
@@ -178,4 +234,5 @@ if __name__ == "__main__":
     for key in ("receipt", "media", "output"):
         parser.add_argument(key, type=Path)
     parser.add_argument("--browser", action="store_true")
+    parser.add_argument("--confirmation", action="store_true", help="Replay the two-window rule on the fresh numeric comparison")
     run(parser.parse_args())

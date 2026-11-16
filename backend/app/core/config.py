@@ -305,6 +305,7 @@ class Settings(BaseSettings):
     audio_focused_long_review: bool = False  # Optional source-clock review with overlapping native speech windows.
     audio_focused_long_48k_review: bool = False  # Local trial for continuous 48 kHz mono PCM16 WAV.
     audio_two_second_long_review: bool = False  # Local overlapping two-second check for nine- to fourteen-second lossless audio.
+    audio_two_second_long_confirmation: bool = False  # Require a second overlapping elevated response for a reported window.
     audio_bandwidth_return_review: bool = False  # Optional native short lossless audio processing context.
     audio_tonal_phase_review: bool = False  # Optional descriptive phase comparison in short native mono audio.
     audio_background_review_model: Path | None = None  # Local pinned enhancement assets.

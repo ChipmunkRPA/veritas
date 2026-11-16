@@ -54,22 +54,31 @@ def _check_excerpt_inputs(excerpts, pcm):
 def _two_second_review(record, *, store, source, pcm, mapping, artifacts):
     if not two_second.supported_source(source) or not two_second.supported_source(mapping):
         raise ValueError("Two-second scan is outside its source profile")
-    public = {"schema": two_second.SCHEMA, "title": two_second.TITLE, "limitation": two_second.LIMITATION,
-              "affects_overall_confidence": False}
-    if set(record) == {"reason"} and record["reason"] in two_second.SKIP_REASONS:
-        return {**public, "status": "skipped", "reason": record["reason"], "excerpts": [], "regions": []}
-    raw = _receipt(record, store, source, detector_id=two_second.DETECTOR_ID, key=two_second.KEY)
-    if set(raw) != {"schema", "excerpts"} or raw["schema"] != two_second.SCHEMA:
+    skipped = set(record) in ({"reason"}, {"reason", "schema"}) and record["reason"] in two_second.SKIP_REASONS
+    raw = None if skipped else _receipt(record, store, source, detector_id=two_second.DETECTOR_ID, key=two_second.KEY)
+    schema = record.get("schema", two_second.SCHEMA) if skipped else raw.get("schema")
+    if schema not in two_second.LIMITATIONS or (raw is not None and set(raw) != {"schema", "excerpts"}):
         raise ValueError("Malformed two-second scan receipt")
-    excerpts = two_second.summarize_readings(raw["excerpts"], len(pcm))
+    public = {"schema": schema, "title": two_second.TITLE, "limitation": two_second.LIMITATIONS[schema],
+              "affects_overall_confidence": False}
+    if skipped:
+        return {**public, "status": "skipped", "reason": record["reason"], "excerpts": [], "regions": []}
+    excerpts = two_second.summarize_readings(raw["excerpts"], len(pcm), schema=schema)
     _check_excerpt_inputs(excerpts, pcm)
-    regions = []
-    for region in two_second.regions(excerpts):
+
+    def freeze_window(region):
         start, end = region["start_sample"], region["end_sample"]
         window = {**region, "pcm_sha256": _digest(pcm[start:end].astype("<f4").tobytes())}
-        regions.append({**window, "source_timestamp_ranges": _sample_witness(window, pcm, mapping), "artifacts": artifacts(window)})
-    status = two_second.status(excerpts)
-    return {**public, "status": status, "reason": two_second.REASONS[status], "excerpts": excerpts, "regions": regions}
+        return {**window, "source_timestamp_ranges": _sample_witness(window, pcm, mapping), "artifacts": artifacts(window)}
+
+    regions = []
+    for region in two_second.regions(excerpts, schema=schema):
+        selected = freeze_window(region)
+        if confirming := region.get("confirming_window"):
+            selected["confirming_window"] = freeze_window(confirming)
+        regions.append(selected)
+    status = two_second.status(excerpts, regions)
+    return {**public, "status": status, "reason": two_second.REASONS_BY_SCHEMA[schema][status], "excerpts": excerpts, "regions": regions}
 
 
 def build(record, *, store, source, pcm, mapping, asset, waveform, include_sample_coverage=True):
@@ -134,7 +143,7 @@ def verify_source(document, *, pcm, mapping, waveform):
     binding.validate(document, mapping)
     extension = document.get(two_second.KEY, {})
     _check_excerpt_inputs(extension.get("excerpts", ()), pcm)
-    for window in [*document["windows"], *document.get("regions", []), *extension.get("regions", ())]:
+    for window in [*document["windows"], *document.get("regions", []), *two_second.media_windows(extension)]:
         if _sample_witness(window, pcm, mapping) != window["source_timestamp_ranges"]:
             raise ValueError("Long speech-window source timestamps differ from the original clock")
         if (asset := window["artifacts"].get("waveform")) and _digest(_waveform(window, pcm, waveform)) != asset["sha256"]:

@@ -214,7 +214,6 @@ def librispeech_controls(archive, excluded, earlier, exposed, occupied):
 
 def prepare(args):
     import numpy as np
-
     from scripts import audio_noise_window_transfer as source
     from scripts.audio_edit_direction_fresh import mix
     from scripts.audio_focused_context_sources import HISTORY, _sha
@@ -297,12 +296,10 @@ def prepare(args):
 
 
 def locations(row):
-    excerpts = binding.summarize_readings(row["excerpts"], row["samples"])
+    excerpts = binding.summarize_readings(row["excerpts"], row["samples"], schema=binding.CONFIRMED_SCHEMA)
     selected = [(region["start_sample"], region["end_sample"]) for region in binding.regions(excerpts)]
-    elevated = {(r["start_sample"] + e["start_sample"], r["end_sample"] + e["start_sample"])
-                for e in row["excerpts"] for r in e["responses"] if r["logit"] > short.REVIEW_POINT}
-    corroborated = [window for window in selected
-                    if any(other != window and prior.overlap(other, window) >= binding.RATE for other in elevated)]
+    corroborated = [(region["start_sample"], region["end_sample"])
+                    for region in binding.regions(excerpts, schema=binding.CONFIRMED_SCHEMA)]
     windows = row["current_windows"]
     dense = current.focused_intervals(row["samples"])
     assert [(w["start_sample"], w["end_sample"]) for w in windows] == (dense or current.intervals(row["samples"]))
@@ -313,6 +310,53 @@ def locations(row):
         primary = [window for window in windows if window["direction"] == "ai"] if current.status(windows) == "corroborated" else []
     baseline = [(window["start_sample"], window["end_sample"]) for window in primary]
     return dict(zip(ARMS, (baseline, sorted(set(baseline + selected)), sorted(set(baseline + corroborated))), strict=True))
+
+
+def verify_serving(rows):
+    from app.core.canonical import canonical_json
+
+    for row in rows:
+        rounded = json.loads(canonical_json(row["excerpts"]))
+        for schema in (binding.SCHEMA, binding.CONFIRMED_SCHEMA):
+            original = binding.summarize_readings(row["excerpts"], row["samples"], schema=schema)
+            stored = binding.summarize_readings(rounded, row["samples"], schema=schema)
+            assert stored == original, (row["id"], schema)
+
+
+def geometry_audit(rows):
+    """Check individual placement limits and compare intersections at the frozen points."""
+    counts = defaultdict(Counter)
+    for row in rows:
+        tally = counts[row["condition"]]
+        truth = row["truth"]
+        arms = locations(row)
+        excerpts = binding.summarize_readings(row["excerpts"], row["samples"], schema=binding.CONFIRMED_SCHEMA)
+        paired = binding.regions(excerpts, schema=binding.CONFIRMED_SCHEMA)
+        intersections = {(max(region["start_sample"], region["confirming_window"]["start_sample"]),
+                          min(region["end_sample"], region["confirming_window"]["end_sample"])) for region in paired}
+        full = arms["adjacent_support"]
+        narrowed = sorted(set(arms["current"]) | intersections)
+        before, after = prior.matches(full, truth), prior.matches(narrowed, truth)
+        tally["truth_ranges"] += len(truth)
+        tally["confirmed_full_matches"] += len(before)
+        tally["intersection_matches"] += len(after)
+        tally["intersection_added_matches"] += len(after - before)
+        tally["intersection_lost_matches"] += len(before - after)
+        if row["kind"] == "edited":
+            scheduled = [(offset + a, offset + b) for offset in binding.excerpt_starts(row["samples"]) for a, b in short.GRID]
+            admitted = [(excerpt["start_sample"] + reading["start_sample"], excerpt["start_sample"] + reading["end_sample"])
+                        for excerpt in row["excerpts"] for reading in excerpt["responses"]]
+            tally["shorter_than_600_ms"] += sum(b - a < 9600 for a, b in truth)
+            tally["covered_at_scheduled_geometry"] += sum(bool(prior.matches(scheduled, [interval])) for interval in truth)
+            tally["covered_at_admitted_geometry"] += sum(bool(prior.matches(admitted, [interval])) for interval in truth)
+        else:
+            tally[f"{row['kind']}_full_flags"] += bool(full)
+            tally[f"{row['kind']}_intersection_flags"] += bool(narrowed)
+        if row["kind"] != "background":
+            for label, proposed in (("full", full), ("intersection", narrowed)):
+                tally[f"genuine_samples_marked_{label}"] += sum(b - a - sum(prior.overlap((a, b), exact) for exact in truth)
+                                                                 for a, b in prior.merge(proposed))
+    return dict(sorted(counts.items()))
 
 
 def summarize(freeze, rows):
@@ -352,7 +396,6 @@ def summarize(freeze, rows):
 
 def score(media, weights, output):
     import numpy as np
-
     from app.detectors.audio import extended_short_voice_review
     from app.engine.boundary import Deadline
     from scripts.audio_joint_generator_transfer import panels
@@ -445,7 +488,8 @@ if __name__ == "__main__":
     actions = parser.add_subparsers(dest="action", required=True)
     for action, fields in (("capture", ("annotations", "output")),
                            ("prepare", ("ranges", "labels_b", "part_a", "labels_a", "librispeech", "rooms", "output")),
-                           ("score", ("media", "weights", "output")), ("review", ("receipt",)), ("export", ("receipt", "output"))):
+                           ("score", ("media", "weights", "output")), ("review", ("receipt",)),
+                           ("geometry", ("receipt",)), ("export", ("receipt", "output"))):
         command = actions.add_parser(action)
         for field in fields:
             command.add_argument(field, type=Path)
@@ -462,4 +506,7 @@ if __name__ == "__main__":
         result = prior.read(args.receipt)
         counts = summarize(result["freeze"], result["rows"])
         assert counts == result["summary"]
+        verify_serving(result["rows"])
+        if args.action == "geometry":
+            counts = geometry_audit(result["rows"])
         print(json.dumps(counts, indent=2))

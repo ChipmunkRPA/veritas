@@ -58,6 +58,16 @@ edited files before any waveform group could be frozen.
 
 ## Separate confirmation sources
 
+- **HQ-MPSD v1** pairs ordinary and synthetic speech with aligned
+  short replacements and separately labels transition frames. Its
+  Zenodo metadata declares CC BY 4.0. The paper identifies one synthesis
+  engine, XTTS-v2. Its upstream terms expressly address model outputs,
+  allow certain unpaid evaluations and exclude commercial model training.
+  The project reviewed the paper and license metadata. A multi-generator
+  comparison requires another source with explicit lineage.
+  [Construction and alignment method](https://arxiv.org/html/2512.13012v1)
+  · [HQ-MPSD record metadata](https://zenodo.org/api/records/17929533)
+  · [Upstream model and output terms](https://huggingface.co/coqui/XTTS-v2/blob/main/LICENSE.txt)
 - **PhonemeDF v1.0.1** supplies explicit per-generator native archives and
   aligned genuine/synthetic words. The existing exact same-word experiment
   admitted four reader roles from bounded prefixes and used only the two

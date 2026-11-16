@@ -296,10 +296,11 @@ def _long_two_second_review(ctx: StageContext, track) -> dict | None:
 
     if binding.DETECTOR_ID in get_registry().policy.deny_detectors:
         return None
+    schema = binding.CONFIRMED_SCHEMA if settings.audio_two_second_long_confirmation else binding.SCHEMA
     remaining = ctx.deadline.remaining()
     if remaining is not None and remaining < BUDGET_S + long_voice_review.PIPELINE_RESERVE_S:
-        return {"reason": binding.TIME_BUDGET}
-    detector = ExtendedShortVoiceReview()
+        return binding.skipped(binding.TIME_BUDGET, schema=schema)
+    detector = ExtendedShortVoiceReview(schema=schema)
     run_ctx = RunContext(analysis_id=ctx.analysis_id, media=common.media(ctx), profile=ctx.profile, device="cpu",
                          dtype=None, lease=None, outputs=StageOutputs(audio=track), deadline=ctx.deadline,
                          exhibits=ctx.exhibits.bind(detector.spec.id), log=ctx.log.bind(detector_id=detector.spec.id))
@@ -307,8 +308,8 @@ def _long_two_second_review(ctx: StageContext, track) -> dict | None:
     review = run_detector(detector, run_ctx, store=store, models=ctx.state.get("models"), timeout_s=BUDGET_S)
     ctx.check("two-second speech scan")
     if review.status == "ok" and (run_id := store.run_id(ctx.analysis_id, detector.spec.id)):
-        return {"run_id": run_id}
-    return {"reason": binding.TIMEOUT if review.status == "timeout" else binding.UNAVAILABLE}
+        return {"run_id": run_id, "schema": schema} if schema == binding.CONFIRMED_SCHEMA else {"run_id": run_id}
+    return binding.skipped(binding.TIMEOUT if review.status == "timeout" else binding.UNAVAILABLE, schema=schema)
 
 
 def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
@@ -644,9 +645,11 @@ def publish(ctx: StageContext) -> dict[str, Any]:
             long = _published_review(db, ctx, long_result, long_voice_review.skipped(
                 audio_long_review_binding.SKIPPED_RECEIPT,
                 schema=(long_result or {}).get("schema", audio_long_review_binding.SCHEMA)))
-            if long is not None and (two_second := _published_review(db, ctx, detect_output.get(audio_two_second_binding.KEY),
-                                                                   {"reason": audio_two_second_binding.UNAVAILABLE})) is not None:
-                long = long | {audio_two_second_binding.KEY: two_second}
+            if long is not None and (two_second_result := detect_output.get(audio_two_second_binding.KEY)) is not None:
+                fallback = audio_two_second_binding.skipped(
+                    audio_two_second_binding.UNAVAILABLE, schema=two_second_result.get("schema", audio_two_second_binding.SCHEMA),
+                )
+                long = long | {audio_two_second_binding.KEY: _published_review(db, ctx, two_second_result, fallback)}
             background_result = detect_output.get(background_binding.KEY)
             background = _published_review(db, ctx, background_result,
                                            background_voice_review.skipped(background_binding.SKIPPED_RECEIPT))

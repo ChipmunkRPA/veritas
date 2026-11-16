@@ -236,6 +236,11 @@ export interface FocusedSpeechEditReview {
   original_timestamp_range?: { start_pts: number; end_pts: number; time_base: '1/48000' } | null
   artifacts: Partial<Record<'selected_clip' | 'waveform', EvidenceAsset>>
 }
+interface TwoSecondSpeechWindow extends SampleInterval {
+  supporting_excerpts: number[]; pcm_sha256: string
+  source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
+  artifacts: Record<'selected_clip' | 'waveform', EvidenceAsset>
+}
 export interface LongVoiceReview {
   schema: 'chipmunk.long-voice-review/1' | 'chipmunk.long-voice-review/2' | 'chipmunk.long-voice-review/3'; title: 'Long speech-window review'
   status: 'corroborated' | 'no_corroboration' | 'skipped'
@@ -256,15 +261,11 @@ export interface LongVoiceReview {
     artifacts: Record<'selected_clip' | 'waveform', EvidenceAsset>
   })[]
   two_second_review?: {
-    schema: 'chipmunk.extended-short-voice-review/1'
+    schema: 'chipmunk.extended-short-voice-review/1' | 'chipmunk.extended-short-voice-review/2'
     title: string; status: 'flagged' | 'no_flag' | 'unassessed' | 'skipped'
     reason: string; limitation: string; affects_overall_confidence: false
-    excerpts: { start_sample: number; pcm_sha256: string; speech_samples: number[]; selected_window: number | null }[]
-    regions: (SampleInterval & {
-      supporting_excerpts: number[]; pcm_sha256: string
-      source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
-      artifacts: Record<'selected_clip' | 'waveform', EvidenceAsset>
-    })[]
+    excerpts: { start_sample: number; pcm_sha256: string; speech_samples: number[]; selected_window: number | null; elevated_windows?: number[] }[]
+    regions: (TwoSecondSpeechWindow & { confirming_window?: TwoSecondSpeechWindow; same_pair_as?: number })[]
   }
 }
 export type LongVoiceCoverageStatus = 'directional' | 'inconclusive' | 'below_speech_minimum' | 'outside_schedule'

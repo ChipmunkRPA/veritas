@@ -33,6 +33,11 @@ class ExtendedShortVoiceReview(short_voice_review.ShortVoiceReview):
     spec = replace(BASE_SPEC, id=binding.DETECTOR_ID, name=binding.TITLE, version="1.0.0",
                    requirements=replace(BASE_SPEC.requirements, timeout_s=BUDGET_S))
 
+    def __init__(self, *, schema=binding.SCHEMA):
+        self.schema = schema
+        if schema == binding.CONFIRMED_SCHEMA:
+            self.spec = replace(self.spec, version="1.1.0")
+
     def applicable(self, ctx):
         track = ctx.outputs.audio
         ok = track is not None and track.pcm is not None and not track.clock_breaks and bool(binding.excerpt_starts(len(track.pcm)))
@@ -44,6 +49,6 @@ class ExtendedShortVoiceReview(short_voice_review.ShortVoiceReview):
         voice = ctx.lease.get(short_voice_review.PellaVoiceDetector.MODEL_ID).obj
         readings = scan(pcm, activity, voice, ctx.deadline)
         return DetectorResult(status="ok", details={
-            binding.KEY: {"schema": binding.SCHEMA, "excerpts": readings},
+            binding.KEY: {"schema": self.schema, "excerpts": readings},
             "pcm_sha256": pcm_sha256(pcm),
         })

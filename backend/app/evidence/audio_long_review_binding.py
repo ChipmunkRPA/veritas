@@ -261,4 +261,4 @@ def media_windows(review):
 
 
 def all_media_windows(review):
-    return [*media_windows(review), *review.get(two_second.KEY, {}).get("regions", ())]
+    return [*media_windows(review), *two_second.media_windows(review.get(two_second.KEY, {}))]

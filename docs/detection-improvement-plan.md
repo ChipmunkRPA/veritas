@@ -72,8 +72,9 @@ are not public screening promises or calibrated population probabilities.
   nine- to fourteen-second WAV and FLAC uploads. The comparison has
   zero weight in overall confidence. In a fresh 240-delivery transfer,
   requiring a second overlapping window kept 47 of 49 edit matches at
-  −5 dB and reduced ordinary flags from 11 to five. That rule is ready
-  for app replay.
+  −5 dB and reduced ordinary flags from 11 to five. The local app
+  displays both clips, waveforms and exact source intervals. Its signed
+  export verifies both windows against the original recording.
 
 - [Earlier JPEG compared with a lossy WebP](image-jpeg-webp-comparison-2026-11-16.md)
   locates meaningful differences in 111 of 144 known edit deliveries and

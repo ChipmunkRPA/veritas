@@ -266,6 +266,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if (scan := review.get(TWO_SECOND)) and scan["excerpts"]:
             replay_detail += (f" Verified {len(scan['excerpts'])} six-second speech excerpts and "
                               f"{len(scan['regions'])} marked two-second windows.")
+            if confirmed := sum("confirming_window" in region for region in scan["regions"]):
+                replay_detail += f" Verified {confirmed} confirming two-second windows against the original samples."
     from app.evidence import audio_silence_binding as silence
     from app.evidence import audio_tonal_phase_binding as tonal
     from app.evidence.audio_bandwidth_binding import BANDWIDTH_SCHEMAS

@@ -1,9 +1,11 @@
-"""Source-bound review of distinct passages in plain English text."""
+"""Source-bound review of distinct writing passages."""
 from __future__ import annotations
 
 import math
 
 from app.core.canonical import canonical_hash
+from app.evidence import document_interval_locations as native
+from app.evidence import document_tracked_changes
 from app.evidence.document_native_locations import clip_source_ranges
 from app.evidence.document_scope import PASSAGE_INTERVALS_COMMITMENT as COMMITMENT
 from app.evidence.document_scope import PASSAGE_INTERVALS_KEY as KEY
@@ -17,6 +19,7 @@ from app.evidence.passage_interval_selection import (
 )
 
 SCHEMA = "document-writing-passage-intervals/1"
+NATIVE_SCHEMA = "document-writing-passage-intervals/2"
 MIN_SENTENCES = 12
 MAX_SENTENCES = 128
 PREVIEW_CHARS = 600
@@ -76,46 +79,55 @@ def _original_position(mapping, offset):
     return None
 
 
-def capture(text, mapping, sentences, readings):
+def capture(text, mapping, sentences, readings, *, method="plain", checked_end=None):
     rows = []
     for first, stop, _ in _choices(sentences, readings):
         start, end = sentences[first][0], sentences[stop - 1][1]
-        left, right = _original_position(mapping, start), _original_position(mapping, end - 1)
-        if left is None or right is None or left[0] >= right[1]:
+        if method == "plain":
+            left, right = _original_position(mapping, start), _original_position(mapping, end - 1)
+            place = {"source_start": left[0], "source_end": right[1]} if left and right and left[0] < right[1] else {}
+        else:
+            locations = native.locate(method, mapping, start, end)
+            place = {"locations": locations} if locations else {}
+        if not place:
             readings, rows = None, []
             break
-        rows.append({
-            "start": start,
-            "end": end,
-            "source_start": left[0],
-            "source_end": right[1],
-            "preview": text[start:min(end, start + PREVIEW_CHARS)],
-        })
+        rows.append({"start": start, "end": end, "preview": text[start:min(end, start + PREVIEW_CHARS)], **place})
     status = "unassessed" if readings is None else "flagged" if rows else "no_ranges"
-    return {"schema": SCHEMA, "sentences": sentences, "readings": readings, "ranges": rows, "status": status,
-            "authorship_confidence_contribution": 0}
+    result = {"schema": SCHEMA if method == "plain" else NATIVE_SCHEMA, "sentences": sentences, "readings": readings,
+              "ranges": rows, "status": status, "authorship_confidence_contribution": 0}
+    if method != "plain":
+        result["checked_end"] = checked_end
+    return result
 
 
 def validate(document, expected):
-    record = (document.get("coverage") or {}).get(KEY)
+    metadata = document.get("coverage") or {}
+    record = metadata.get(KEY)
     if record is None and expected is None:
         return
-    if (not isinstance(record, dict) or set(record) != {
-            "schema", "sentences", "readings", "ranges", "status", "authorship_confidence_contribution"}
-            or record["schema"] != SCHEMA or canonical_hash(record) != expected
-            or document["source"]["method"] != "plain"
+    method, chars = document["source"]["method"], document["source"]["chars"]
+    is_native = method in native.KINDS
+    fields = {"schema", "sentences", "readings", "ranges", "status", "authorship_confidence_contribution"}
+    if is_native:
+        fields.add("checked_end")
+    if (not isinstance(record, dict) or set(record) != fields or canonical_hash(record) != expected
+            or record["schema"] != (NATIVE_SCHEMA if is_native else SCHEMA) or (not is_native and method != "plain")
             or type(record["authorship_confidence_contribution"]) is not int
             or record["authorship_confidence_contribution"] != 0):
         raise ValueError("Writing passage interval evidence has an invalid commitment or scope")
+    checked = record["checked_end"] if is_native else chars
+    if is_native and (not native.eligible_source(method, metadata, metadata.get(document_tracked_changes.KEY))
+                      or type(checked) is not int or not 0 < checked <= chars or (method != "email" and checked != chars)):
+        raise ValueError("Incomplete native writing passage coverage")
 
     sentences, readings, rows = (record[name] for name in ("sentences", "readings", "ranges"))
-    chars = document["source"]["chars"]
     if not isinstance(sentences, list) or not MIN_SENTENCES <= len(sentences) <= MAX_SENTENCES:
         raise ValueError("Writing passage intervals need valid sentence boundaries")
     previous = 0
     for span in sentences:
         if (not isinstance(span, list) or len(span) != 3 or any(type(value) is not int for value in span)
-                or not previous <= span[0] < span[1] <= chars or not 0 <= span[2] <= span[1] - span[0]):
+                or not previous <= span[0] < span[1] <= checked or not 0 <= span[2] <= span[1] - span[0]):
             raise ValueError("Writing passage intervals have invalid sentence boundaries")
         previous = span[1]
     if readings is not None and (
@@ -129,21 +141,32 @@ def validate(document, expected):
     if record["status"] != status or not isinstance(rows, list) or len(rows) != len(choices):
         raise ValueError("Writing passage intervals differ from the recorded readings")
     source_previous = 0
+    range_fields = {"start", "end", "preview"} | ({"locations"} if is_native else {"source_start", "source_end"})
     for row, (first, stop, _) in zip(rows, choices, strict=True):
         a, b = sentences[first][0], sentences[stop - 1][1]
-        if (not isinstance(row, dict) or set(row) != {"start", "end", "source_start", "source_end", "preview"}
+        if (not isinstance(row, dict) or set(row) != range_fields
                 or (row["start"], row["end"]) != (a, b)
-                or type(row["source_start"]) is not int or type(row["source_end"]) is not int
-                or not source_previous <= row["source_start"] < row["source_end"]
                 or not isinstance(row["preview"], str) or len(row["preview"]) != min(b - a, PREVIEW_CHARS)):
             raise ValueError("Writing passage intervals have invalid highlighted ranges")
-        source_previous = row["source_end"]
+        if is_native:
+            native.validate(method, metadata, row["locations"], a, b)
+        else:
+            if (type(row["source_start"]) is not int or type(row["source_end"]) is not int
+                    or not source_previous <= row["source_start"] < row["source_end"]):
+                raise ValueError("Writing passage intervals have invalid original text positions")
+            source_previous = row["source_end"]
 
 
-def verify_source(document, text, mapping, sentences):
+def verify_source(document, text, mapping, sentences, *, metadata=None, word_review=None):
     record = (document.get("coverage") or {}).get(KEY)
     validate(document, document["source"].get(COMMITMENT))
     if record is not None:
-        geometry = [[row["start"], row["end"], row["n_words"]] for row in sentences]
-        if capture(text, mapping, geometry, record["readings"]) != record:
+        method = document["source"]["method"]
+        if method != "plain" and metadata is None:
+            raise ValueError("Native writing passage replay requires the mapped source coverage")
+        end = len(text) if method == "plain" else native.checked_end(method, text, mapping, metadata, word_review)
+        if end is None or (method != "plain" and end != record["checked_end"]):
+            raise ValueError("Writing passage intervals differ from the mapped text scope")
+        geometry = [[row["start"], row["end"], row["n_words"]] for row in sentences if row["end"] <= end]
+        if capture(text, mapping, geometry, record["readings"], method=method, checked_end=end) != record:
             raise ValueError("Writing passage intervals differ from the source text")

@@ -147,6 +147,31 @@ describe('ordinary multimedia evidence', () => {
     expect(section.queryByText('Second region')).toBeNull()
   })
 
+  it('shows original PDF page numbers for a separate writing passage', () => {
+    show({ ...document, source: { ...document.source, method: 'pymupdf' }, packets: [], coverage: {
+      writing_passage_intervals: {
+        schema: 'document-writing-passage-intervals/2', status: 'flagged', authorship_confidence_contribution: 0,
+        ranges: [{ start: 0, end: 11, preview: 'Across pages', locations: [{ page: 1, boxes: [] }, { page: 2, boxes: [] }] }],
+      },
+    } })
+    const section = within(screen.getByRole('region', { name: 'Possible AI-like writing passages' }))
+    expect(section.getByText(/Original PDF pages 1, 2/)).toBeTruthy()
+    expect(section.getByText('Across pages')).toBeTruthy()
+  })
+
+  it('shows decoded HTML positions in the mapped reply', () => {
+    show({ ...document, source: { ...document.source, method: 'email' }, packets: [], coverage: {
+      email: { body_content_type: 'text/html' }, writing_passage_intervals: {
+        schema: 'document-writing-passage-intervals/2', status: 'flagged', authorship_confidence_contribution: 0,
+        ranges: [{ start: 0, end: 11, preview: 'Reply clause', locations: [{ mime_part: '1.2', ranges: [[43, 54]] }] }],
+      },
+    } })
+    const section = within(screen.getByRole('region', { name: 'Possible AI-like writing passages' }))
+    expect(section.getByText('This check covers the mapped reply body.')).toBeTruthy()
+    expect(section.getByText(/Decoded email HTML body part 1\.2/)).toBeTruthy()
+    expect(section.getByText('[43, 54)')).toBeTruthy()
+  })
+
   it.each([
     [{ kind: 'docx', paragraph_index: 0, body_path: [0] }, /Word body paragraph 1/],
     [{ kind: 'email', mime_part: '1.2' }, /decoded email MIME part 1\.2/],

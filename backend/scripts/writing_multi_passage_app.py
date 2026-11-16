@@ -55,7 +55,16 @@ def exports(client, aid, source, record, output):
         scan(text)
         assert proof.TITLE in text and proof.STATUS["flagged"] in text
         for row in record["ranges"]:
-            assert f"Original text characters [{row['source_start']}, {row['source_end']})" in text
+            if "locations" not in row:
+                assert f"Original text characters [{row['source_start']}, {row['source_end']})" in text
+            elif source.suffix == ".pdf":
+                pages = ", ".join(map(str, sorted({p["page"] for p in row["locations"]})))
+                assert f"Original PDF pages {pages}." in text
+            else:
+                for place in row["locations"]:
+                    label = f"Word paragraph {place['paragraph']}" if "paragraph" in place else f"body part {place['mime_part']}"
+                    positions = ", ".join(f"[{a}, {b})" for a, b in place["ranges"])
+                    assert f"{label} characters {positions}." in text
             assert " ".join(row["preview"].split()[:8]) in text
     public = paid.body(client.get(f"/api/analyses/{aid}/export.json"))
     scan(json.dumps(public))

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [native writing passage replay](writing-native-passage-locations-2026-11-16.md#reproduce)
+compares the same 49 ordinary and rewritten pairs across five formats.
+It records changed sentence inputs and checks the original Word, PDF and
+email locations from the app's signed reports.
+
 The [short speech boundary replay](audio-edit-boundary-direction-2026-11-16.md#independent-replay)
 recounts fixed operating points and exact time overlap across 559
 submissions. The new matched reader set also replays the original,

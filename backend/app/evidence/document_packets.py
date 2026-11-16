@@ -547,10 +547,6 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["source"][document_character_review.COMMITMENT] = canonical_hash(adjusted)
         document["coverage"][document_character_review.KEY] = adjusted
         document_character_review.verify_source(document, text, mapping, decoded["meta"], sentences=decoded["sentences"])
-    if intervals := document_passage_intervals.from_result(result):
-        document["source"][document_passage_intervals.COMMITMENT] = canonical_hash(intervals)
-        document["coverage"][document_passage_intervals.KEY] = intervals
-        document_passage_intervals.verify_source(document, text, mapping, decoded["sentences"])
     if markers := document_chat_markers.from_result(result):
         document["source"][document_chat_markers.COMMITMENT] = markers
         document["coverage"][document_chat_markers.KEY] = document_chat_markers.measure(text, mapping, decoded["meta"])
@@ -559,6 +555,11 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["source"][document_tracked_changes.COMMITMENT] = tracked_commitment
         document["coverage"][document_tracked_changes.KEY] = decoded.get(document_tracked_changes.KEY)
         document_tracked_changes.validate(document, tracked_commitment)
+    if intervals := document_passage_intervals.from_result(result):
+        document["source"][document_passage_intervals.COMMITMENT] = canonical_hash(intervals)
+        document["coverage"][document_passage_intervals.KEY] = intervals
+        document_passage_intervals.verify_source(document, text, mapping, decoded["sentences"], metadata=decoded["meta"],
+                                                 word_review=decoded.get(document_tracked_changes.KEY))
     if alternative_review := email_alternatives.result_review(result):
         document["coverage"][email_alternatives.KEY] = alternative_review
         email_alternatives.validate_set(document, canonical_hash(alternative_review))
@@ -748,7 +749,8 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
                                                     sentences=decoded["sentences"])
             if document["source"].get(document_passage_intervals.COMMITMENT) != document_passage_intervals.result_commitment(result):
                 raise ValueError("Writing passage intervals differ from the published result")
-            document_passage_intervals.verify_source(document, decoded["text"], decoded["source_map"], decoded["sentences"])
+            document_passage_intervals.verify_source(document, decoded["text"], decoded["source_map"], decoded["sentences"],
+                                                     metadata=decoded["meta"], word_review=decoded.get(document_tracked_changes.KEY))
             if document["source"].get(document_chat_markers.COMMITMENT) != document_chat_markers.from_result(result):
                 raise ValueError("Chat-format marker evidence differs from the published result")
             document_chat_markers.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])

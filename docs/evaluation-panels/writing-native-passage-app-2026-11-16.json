@@ -1,0 +1,578 @@
+{
+  "cases": {
+    "email_html/mixed": {
+      "excluded_characters": 111,
+      "locations": [
+        {
+          "excerpt_sha256": "4bb775463723ba80fdda1760e9961a83cdbfcefc609a46efc4a785c8619e4cfd",
+          "places": [
+            {
+              "end": 552,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  129,
+                  572
+                ]
+              ],
+              "start": 114
+            },
+            {
+              "end": 987,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  579,
+                  1012
+                ]
+              ],
+              "start": 554
+            },
+            {
+              "end": 1613,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  1019,
+                  1648
+                ]
+              ],
+              "start": 989
+            },
+            {
+              "end": 1978,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  1655,
+                  2018
+                ]
+              ],
+              "start": 1615
+            }
+          ]
+        },
+        {
+          "excerpt_sha256": "a613a3e871daf84a29ba045154782d5efca0ee111faab478323925c67416fc10",
+          "places": [
+            {
+              "end": 5184,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  4751,
+                  5304
+                ]
+              ],
+              "start": 4631
+            },
+            {
+              "end": 5751,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  5311,
+                  5876
+                ]
+              ],
+              "start": 5186
+            },
+            {
+              "end": 6329,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  5883,
+                  6459
+                ]
+              ],
+              "start": 5753
+            },
+            {
+              "end": 6944,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  6466,
+                  7079
+                ]
+              ],
+              "start": 6331
+            },
+            {
+              "end": 7301,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  7086,
+                  7441
+                ]
+              ],
+              "start": 6946
+            },
+            {
+              "end": 7340,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  7448,
+                  7485
+                ]
+              ],
+              "start": 7303
+            }
+          ]
+        }
+      ],
+      "pdf_sha256": "e12d7ccfef72a420f8548423193ed1bc01c0640f7997dcc7381d9442b1c2ec63",
+      "selected": [
+        [
+          97,
+          1667
+        ],
+        [
+          3890,
+          6183
+        ]
+      ],
+      "sha256": "d278649b3340fd9f2365a7c79ab0ecfcb0cf0ec3dfc10b15e706d794a074e597",
+      "status": "flagged"
+    },
+    "email_html/ordinary": {
+      "excluded_characters": 111,
+      "selected": [],
+      "sha256": "ab00e089b8e4423cd51835b3a18d6e25022f68f75f9c2a9ebac449a00eb805c3",
+      "status": "no_ranges"
+    },
+    "email_plain/mixed": {
+      "excluded_characters": 166,
+      "locations": [
+        {
+          "excerpt_sha256": "4bb775463723ba80fdda1760e9961a83cdbfcefc609a46efc4a785c8619e4cfd",
+          "places": [
+            {
+              "end": 552,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  114,
+                  552
+                ]
+              ],
+              "start": 114
+            },
+            {
+              "end": 987,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  554,
+                  987
+                ]
+              ],
+              "start": 554
+            },
+            {
+              "end": 1613,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  989,
+                  1613
+                ]
+              ],
+              "start": 989
+            },
+            {
+              "end": 1978,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  1615,
+                  1978
+                ]
+              ],
+              "start": 1615
+            }
+          ]
+        },
+        {
+          "excerpt_sha256": "a613a3e871daf84a29ba045154782d5efca0ee111faab478323925c67416fc10",
+          "places": [
+            {
+              "end": 5184,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  4631,
+                  5184
+                ]
+              ],
+              "start": 4631
+            },
+            {
+              "end": 5751,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  5186,
+                  5751
+                ]
+              ],
+              "start": 5186
+            },
+            {
+              "end": 6329,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  5753,
+                  6329
+                ]
+              ],
+              "start": 5753
+            },
+            {
+              "end": 6944,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  6331,
+                  6944
+                ]
+              ],
+              "start": 6331
+            },
+            {
+              "end": 7301,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  6946,
+                  7301
+                ]
+              ],
+              "start": 6946
+            },
+            {
+              "end": 7340,
+              "mime_part": "1",
+              "ranges": [
+                [
+                  7303,
+                  7340
+                ]
+              ],
+              "start": 7303
+            }
+          ]
+        }
+      ],
+      "pdf_sha256": "35333bb0cb7cb9625549abef800304b82e081775930aab3d8b4c0ccfcf328675",
+      "quote_control_status": "no_ranges",
+      "selected": [
+        [
+          97,
+          1667
+        ],
+        [
+          3890,
+          6183
+        ]
+      ],
+      "sha256": "2dbeb10ce5b4814f5ccd120826f3b6b48b69b211b53ff2ee4e7022fafa971ccf",
+      "status": "flagged"
+    },
+    "email_plain/ordinary": {
+      "excluded_characters": 166,
+      "selected": [],
+      "sha256": "b949c3ede981b467932b9466a22888dbde9943af28d13df46e1f0118ff746ee4",
+      "status": "no_ranges"
+    },
+    "pdf/mixed": {
+      "excluded_characters": 0,
+      "locations": [
+        {
+          "excerpt_sha256": "4bb775463723ba80fdda1760e9961a83cdbfcefc609a46efc4a785c8619e4cfd",
+          "places": [
+            {
+              "boxes": 68,
+              "coordinate_space": "unrotated-page-points",
+              "end": 552,
+              "page": 1,
+              "start": 114
+            },
+            {
+              "boxes": 65,
+              "coordinate_space": "unrotated-page-points",
+              "end": 987,
+              "page": 1,
+              "start": 554
+            },
+            {
+              "boxes": 101,
+              "coordinate_space": "unrotated-page-points",
+              "end": 1613,
+              "page": 1,
+              "start": 989
+            },
+            {
+              "boxes": 58,
+              "coordinate_space": "unrotated-page-points",
+              "end": 1978,
+              "page": 1,
+              "start": 1615
+            }
+          ]
+        },
+        {
+          "excerpt_sha256": "a613a3e871daf84a29ba045154782d5efca0ee111faab478323925c67416fc10",
+          "places": [
+            {
+              "boxes": 86,
+              "coordinate_space": "unrotated-page-points",
+              "end": 5184,
+              "page": 2,
+              "start": 4631
+            },
+            {
+              "boxes": 84,
+              "coordinate_space": "unrotated-page-points",
+              "end": 5751,
+              "page": 2,
+              "start": 5186
+            },
+            {
+              "boxes": 90,
+              "coordinate_space": "unrotated-page-points",
+              "end": 6329,
+              "page": 2,
+              "start": 5753
+            },
+            {
+              "boxes": 93,
+              "coordinate_space": "unrotated-page-points",
+              "end": 6944,
+              "page": 2,
+              "start": 6331
+            },
+            {
+              "boxes": 54,
+              "coordinate_space": "unrotated-page-points",
+              "end": 7301,
+              "page": 2,
+              "start": 6946
+            },
+            {
+              "boxes": 5,
+              "coordinate_space": "unrotated-page-points",
+              "end": 7340,
+              "page": 3,
+              "start": 7303
+            }
+          ]
+        }
+      ],
+      "pdf_sha256": "2c4344d1c29e1ca9fd26977ed83295e66ec838fc388f8b0c5d6ea6376c0134b9",
+      "selected": [
+        [
+          97,
+          1667
+        ],
+        [
+          3890,
+          6183
+        ]
+      ],
+      "sha256": "0ea4b10cf7eaa85e008322c145a3659419b6892a26b877e62124329b18488237",
+      "status": "flagged"
+    },
+    "pdf/ordinary": {
+      "excluded_characters": 0,
+      "selected": [],
+      "sha256": "8e829dc49ab5e859e9b690923527d344b98a032dba95a3fa6914bedaacdd95c8",
+      "status": "no_ranges"
+    },
+    "word/mixed": {
+      "excluded_characters": 0,
+      "locations": [
+        {
+          "excerpt_sha256": "4bb775463723ba80fdda1760e9961a83cdbfcefc609a46efc4a785c8619e4cfd",
+          "places": [
+            {
+              "body_path": [
+                0
+              ],
+              "end": 552,
+              "paragraph": 1,
+              "ranges": [
+                [
+                  114,
+                  552
+                ]
+              ],
+              "start": 114
+            },
+            {
+              "body_path": [
+                1
+              ],
+              "end": 987,
+              "paragraph": 2,
+              "ranges": [
+                [
+                  0,
+                  433
+                ]
+              ],
+              "start": 554
+            },
+            {
+              "body_path": [
+                2
+              ],
+              "end": 1613,
+              "paragraph": 3,
+              "ranges": [
+                [
+                  0,
+                  624
+                ]
+              ],
+              "start": 989
+            },
+            {
+              "body_path": [
+                3
+              ],
+              "end": 1978,
+              "paragraph": 4,
+              "ranges": [
+                [
+                  0,
+                  363
+                ]
+              ],
+              "start": 1615
+            }
+          ]
+        },
+        {
+          "excerpt_sha256": "a613a3e871daf84a29ba045154782d5efca0ee111faab478323925c67416fc10",
+          "places": [
+            {
+              "body_path": [
+                12
+              ],
+              "end": 5184,
+              "paragraph": 13,
+              "ranges": [
+                [
+                  0,
+                  553
+                ]
+              ],
+              "start": 4631
+            },
+            {
+              "body_path": [
+                13
+              ],
+              "end": 5751,
+              "paragraph": 14,
+              "ranges": [
+                [
+                  0,
+                  565
+                ]
+              ],
+              "start": 5186
+            },
+            {
+              "body_path": [
+                14
+              ],
+              "end": 6329,
+              "paragraph": 15,
+              "ranges": [
+                [
+                  0,
+                  576
+                ]
+              ],
+              "start": 5753
+            },
+            {
+              "body_path": [
+                15
+              ],
+              "end": 6944,
+              "paragraph": 16,
+              "ranges": [
+                [
+                  0,
+                  613
+                ]
+              ],
+              "start": 6331
+            },
+            {
+              "body_path": [
+                16
+              ],
+              "end": 7301,
+              "paragraph": 17,
+              "ranges": [
+                [
+                  0,
+                  355
+                ]
+              ],
+              "start": 6946
+            },
+            {
+              "body_path": [
+                17
+              ],
+              "end": 7340,
+              "paragraph": 18,
+              "ranges": [
+                [
+                  0,
+                  37
+                ]
+              ],
+              "start": 7303
+            }
+          ]
+        }
+      ],
+      "pdf_sha256": "e106355c45b0b2e87dc40852a2f02a2df28354ce4dabf82d87a513bc102bed01",
+      "selected": [
+        [
+          97,
+          1667
+        ],
+        [
+          3890,
+          6183
+        ]
+      ],
+      "sha256": "9dc2a7e8201dcf11db96541e461d7f9d42b7aaecb7f48bf76644e51cc9f2fecb",
+      "status": "flagged"
+    },
+    "word/ordinary": {
+      "excluded_characters": 0,
+      "selected": [],
+      "sha256": "7bbe408dcaf9929e49212cacf1c5444830d789288e2cfa3099407a3286e8f02f",
+      "status": "no_ranges"
+    }
+  },
+  "offline_verified_without_analysis_runtime": true,
+  "pdf_json_and_api_source_locations_agree": true,
+  "same_assessment": true,
+  "signed_packages_verified_against_originals": 4,
+  "simulated_prepaid_analyses": 10,
+  "source_case": "6bfce7a0f53514fcc0b227be",
+  "unpaid_jobs": 0
+}

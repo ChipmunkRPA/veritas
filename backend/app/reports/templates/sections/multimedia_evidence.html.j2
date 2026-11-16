@@ -30,6 +30,31 @@
 <p class="caption">Evidence set {{ evidence.version }} - SHA-256 <span class="mono evidence-hash">{{ evidence.sha256 }}</span></p>
 <p class="caption"{% if evidence.kind == 'audio' %} id="multimedia-evidence-voice-coverage"{% endif %}>{{ evidence.coverage_note }}</p>
 {% for note in evidence.coverage_details %}<p class="caption">{{ note }}</p>{% endfor %}
+{% if evidence.get('writing_passage_intervals') %}
+{% set intervals = evidence.writing_passage_intervals %}
+<div class="multimedia-acoustic-summary" id="document-writing-passage-intervals">
+<h3>{{ intervals.title }}</h3>
+<p>{{ intervals.explanation }}</p>
+{% if intervals.method == 'email' %}<p class="caption">This check covers the mapped reply body.</p>{% endif %}
+<p>{{ intervals.status_note }}</p>
+{% for range in intervals.ranges %}
+<div class="writing-passage-excerpt">
+{% if range.locations is not defined %}
+<p>Original text characters <span class="mono">[{{ range.source_start }}, {{ range.source_end }})</span>.</p>
+{% elif intervals.method == 'pymupdf' %}
+<p>Original PDF pages {{ range.locations | map(attribute='page') | unique | join(', ') }}. Exact word boxes are recorded in JSON.</p>
+{% else %}
+{% for location in range.locations %}
+<p class="caption">{% if intervals.method == 'python-docx' %}Word paragraph {{ location.paragraph }}{% else %}Decoded email {{ 'HTML ' if intervals.email_html else '' }}body part {{ location.mime_part }}{% endif %} characters
+{% for span in location.ranges %}<span class="mono">[{{ span[0] }}, {{ span[1] }})</span>{{ ', ' if not loop.last else '.' }}{% endfor %}</p>
+{% endfor %}
+{% endif %}
+<blockquote>{{ range.preview }}{% if range.end - range.start > range.preview | length %}…{% endif %}</blockquote>
+</div>
+{% endfor %}
+<p class="caption">Positions are zero-based with the end excluded. JSON pointer <span class="mono">/coverage/writing_passage_intervals</span>.</p>
+</div>
+{% endif %}
 {% set chat = evidence.get('chat_format_markers') %}
 {% if chat %}
 <h3 id="document-chat-format-markers">{{ chat.title }}</h3>
@@ -317,19 +342,6 @@ XML body index {{ mark.body_index }}, child path {{ mark.child_path | join(' / '
 {% endif %}
 {% if evidence.get('passage_position') %}
 {% include 'sections/document_passage_position.html.j2' %}
-{% endif %}
-{% if evidence.get('writing_passage_intervals') %}
-{% set intervals = evidence.writing_passage_intervals %}
-<div class="multimedia-acoustic-summary" id="document-writing-passage-intervals">
-<h3>{{ intervals.title }}</h3>
-<p>{{ intervals.explanation }}</p>
-<p>{{ intervals.status_note }}</p>
-{% for range in intervals.ranges %}
-<p>Original text characters <span class="mono">[{{ range.source_start }}, {{ range.source_end }})</span>.</p>
-<blockquote>{{ range.preview }}{% if range.end - range.start > range.preview | length %}…{% endif %}</blockquote>
-{% endfor %}
-<p class="caption">Positions are zero-based with the end excluded. JSON pointer <span class="mono">/coverage/writing_passage_intervals</span>.</p>
-</div>
 {% endif %}
 {% if evidence.get('writing_agreement') %}
 <h3>Second writing check</h3>

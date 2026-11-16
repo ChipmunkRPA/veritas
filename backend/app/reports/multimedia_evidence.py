@@ -616,7 +616,8 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_word_visibility.verify_source(document, decoded["meta"].get(document_word_visibility.KEY), frozen=True)
         document_invisible_characters.verify_source(document, text, mapping, decoded["meta"])
         document_character_review.verify_source(document, text, mapping, decoded["meta"], sentences=decoded["sentences"])
-        document_passage_intervals.verify_source(document, text, mapping, decoded["sentences"])
+        document_passage_intervals.verify_source(document, text, mapping, decoded["sentences"], metadata=decoded["meta"],
+                                                 word_review=decoded.get(document_tracked_changes.KEY))
         document_chat_markers.verify_source(document, text, mapping, decoded["meta"])
         document_native_locations.validate(document)
         document_scope.validate_card_selection(document, mapping)
@@ -1516,7 +1517,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             if kind == "document" else None,
             "writing_passage_intervals": (
                 {**intervals, "title": document_passage_intervals.TITLE, "explanation": document_passage_intervals.EXPLANATION,
-                 "status_note": document_passage_intervals.STATUS[intervals["status"]]}
+                 "status_note": document_passage_intervals.STATUS[intervals["status"]],
+                 "method": document["source"]["method"],
+                 "email_html": ((document.get("coverage") or {}).get("email") or {}).get("body_content_type") == "text/html"}
                 if kind == "document" and not withheld
                 and (intervals := (document.get("coverage") or {}).get(document_passage_intervals.KEY)) else None
             ),

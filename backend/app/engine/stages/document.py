@@ -202,7 +202,7 @@ def detect(ctx: StageContext) -> dict[str, Any]:
         except (KeyError, ValueError, TypeError) as error:
             ctx.log.warning("writing_character_review.omitted", error_type=type(error).__name__)
     return {**detected, language_scope.KEY: scope, CLAUSE_POLICY: clause_review, CHARACTER_POLICY: character_enabled,
-            INTERVAL_POLICY: interval_review.enabled(),
+            INTERVAL_POLICY: interval_review.policy(),
             **({language_scope.CLAUSE_KEY: witness} if witness else {})}
 
 
@@ -214,7 +214,7 @@ def current_detect_output(output: Any) -> bool:
             and language_scope.KEY in output
             and output.get(CLAUSE_POLICY, False) is language_scope.clause_review_enabled()
             and output.get(CHARACTER_POLICY, False) is character_review.enabled()
-            and output.get(INTERVAL_POLICY, False) is interval_review.enabled()
+            and output.get(INTERVAL_POLICY, False) == interval_review.policy()
             and output[language_scope.KEY] in (None, language_scope.ENGLISH, *language_scope.MESSAGES))
 
 

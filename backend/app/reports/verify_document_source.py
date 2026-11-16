@@ -150,7 +150,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
         sentences = [asdict(row) for row in segment_within(doc)]
         document_character_review.verify_source(evidence, text, mapping, doc.meta, sentences=sentences)
-        document_passage_intervals.verify_source(evidence, text, mapping, sentences)
+        document_passage_intervals.verify_source(evidence, text, mapping, sentences, metadata=doc.meta, word_review=doc.word_review)
     document_chat_markers.verify_source(evidence, text, mapping, doc.meta)
     from app.evidence import document_check_coverage
 

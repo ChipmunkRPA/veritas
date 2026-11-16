@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Separate writing passages in native files](writing-native-passage-locations-2026-11-16.md)
+  transfers the plain-text check to Word, mapped email replies and
+  selectable PDFs. All 294 Word and email deliveries reproduce the
+  same selections. The 98 PDFs locate 24 of 98 labeled passages with
+  six ordinary alerts and one unassessed upload.
+
 - [Separate entry and exit cues for speech edits](audio-edit-boundary-direction-2026-11-16.md)
   added four useful ranges in one simulated room and one in the retained
   ICSI test. The nine new matched readers supplied 99 submissions at two

@@ -281,19 +281,31 @@ function PagePlates({ set, packet, page, token, mediaReady }: { set: DocumentEvi
   </div>
 }
 
-function WritingPassageIntervals({ review }: {
+function WritingPassageIntervals({ review, method, emailHtml }: {
   review: NonNullable<NonNullable<DocumentEvidenceSet['coverage']>['writing_passage_intervals']>
+  method?: string
+  emailHtml: boolean
 }) {
   return <section id="document-writing-passage-intervals" aria-labelledby="writing-passage-intervals-title" className="mt-4 rounded-md border border-border p-4">
     <h3 id="writing-passage-intervals-title" className="m-0 text-body font-medium">Possible AI-like writing passages</h3>
     <p className="mt-2 mb-0 text-small">This optional check combines readings of individual sentences and their surrounding text. Sustained AI-like patterns can highlight separate passages for review.</p>
+    {method === 'email' && <p className="mt-2 mb-0 text-small">This check covers the mapped reply body.</p>}
     <p className="mt-2 mb-0 text-small">{review.status === 'flagged' ? 'Inspect the highlighted passages in context.'
       : review.status === 'no_ranges' ? 'No passage was selected. Authorship remains undetermined by this check.'
       : 'Complete readings or original passage positions were unavailable.'}</p>
-    {review.ranges.map(range => <div key={range.source_start} className="mt-3">
-      <p className="m-0 text-small">Original text characters <span className="font-mono">[{range.source_start}, {range.source_end})</span>.</p>
-      <blockquote className="my-2 border-l-2 border-border pl-3 whitespace-pre-line break-words text-small">{range.preview}{range.end - range.start > Array.from(range.preview).length ? '…' : ''}</blockquote>
-    </div>)}
+    {review.ranges.map(range => {
+      const pages = 'locations' in range ? [...new Set(range.locations.flatMap(place => 'page' in place ? [place.page] : []))] : []
+      return <div key={range.start} className="mt-3">
+        {'source_start' in range
+          ? <p className="m-0 text-small">Original text characters <span className="font-mono">[{range.source_start}, {range.source_end})</span>.</p>
+          : pages.length > 0
+            ? <p className="m-0 text-small">Original PDF pages {pages.join(', ')}. Exact word boxes are recorded in JSON.</p>
+            : <ul className="m-0 list-none pl-0 text-small">{range.locations.map((place, index) => 'ranges' in place &&
+              <li key={index}>{'paragraph' in place ? `Word paragraph ${place.paragraph}` : `Decoded email ${emailHtml ? 'HTML ' : ''}body part ${place.mime_part}`} characters <span className="font-mono">{place.ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}</span>.</li>
+            )}</ul>}
+        <blockquote className="my-2 border-l-2 border-border pl-3 whitespace-pre-line break-words text-small">{range.preview}{range.end - range.start > Array.from(range.preview).length ? '…' : ''}</blockquote>
+      </div>
+    })}
     <p className="mt-2 mb-0 text-caption text-text-muted">Positions are zero-based with the end excluded. Ordinary writing can produce similar patterns. This check carries zero weight in the overall assessment.</p>
   </section>
 }
@@ -344,6 +356,8 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const selectablePages = [...new Set(writingAgreement?.pdf_spans?.map((span) => span.page) ?? [])]
   const usesOcr = ocrPages.some((page) => page.status === 'extracted') || set.packets.some((packet) => packet.anchors.some((anchor) => anchor.extraction === 'ocr'))
   return <div data-testid="document-evidence-content">
+    {set.coverage?.writing_passage_intervals && <WritingPassageIntervals review={set.coverage.writing_passage_intervals}
+      method={set.source.method} emailHtml={emailCoverage?.body_content_type === 'text/html'} />}
     <EmailBodyComparison review={set.coverage?.email_body_alternatives} />
     {set.coverage?.email_classifier_input_scope && <EmailInputScope scope={set.coverage.email_classifier_input_scope} />}
     {tracked && <section aria-label="Word tracked text changes" className="mt-4 rounded-md border border-border p-4">
@@ -512,7 +526,6 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     <DocumentPassageCoverage coverage={set.coverage?.local_passage_coverage} />
     <DocumentUnselectedResponses responses={set.coverage?.unselected_passage_responses} />
     {set.coverage?.passage_position_review && <PassagePosition review={set.coverage.passage_position_review} />}
-    {set.coverage?.writing_passage_intervals && <WritingPassageIntervals review={set.coverage.writing_passage_intervals} />}
     {writingAgreement && <section className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
       <h3 className="m-0 text-body font-medium text-text">Second writing check</h3>
       <p className="mt-2 mb-0">The second check revisits the exact text behind up to six AI-like responses. This evidence carries zero weight in the overall assessment.</p>

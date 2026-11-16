@@ -1,4 +1,4 @@
-"""Read isolated sentences for the optional plain-text passage review."""
+"""Read isolated sentences for optional source-mapped passage review."""
 from __future__ import annotations
 
 import math
@@ -8,7 +8,12 @@ from app.core.config import settings
 from app.detectors.text import language_scope
 from app.detectors.text.adapters.common import FULL_DEEP
 from app.engine.boundary import DetectorTimeout
-from app.evidence import document_matched_context, document_passage_intervals
+from app.evidence import (
+    document_interval_locations,
+    document_matched_context,
+    document_passage_intervals,
+    document_tracked_changes,
+)
 
 KEY = document_passage_intervals.KEY
 EXTRA_SECONDS = 18.0
@@ -19,26 +24,46 @@ def enabled() -> bool:
             and settings.text_detector_mode == "candidate" and settings.text_window_sentences == 3)
 
 
+def policy() -> str | bool:
+    return document_passage_intervals.NATIVE_SCHEMA if enabled() else False
+
+
 def measure(classifier, doc, sentences, context, ctx, spec, revisions):
-    if (not enabled() or ctx.profile not in FULL_DEEP or doc.meta.get("method") != "plain"
+    if (not enabled() or ctx.profile not in FULL_DEEP
             or ctx.outputs.document.get(language_scope.KEY) != language_scope.ENGLISH
-            or not document_passage_intervals.MIN_SENTENCES <= len(sentences) <= document_passage_intervals.MAX_SENTENCES
             or not document_matched_context.matches(spec.id, spec.version, revisions)):
         return None
-    geometry = [[sentence.start, sentence.end, sentence.n_words] for sentence in sentences]
+    method = doc.meta.get("method")
+    end = len(doc.text) if method == "plain" else document_interval_locations.checked_end(
+        method, doc.text, doc.source_map, doc.meta, ctx.outputs.document.get(document_tracked_changes.KEY),
+    )
+    if end is None:
+        return None
+    scoped = [sentence for sentence in sentences if sentence.end <= end]
+    if not document_passage_intervals.MIN_SENTENCES <= len(scoped) <= document_passage_intervals.MAX_SENTENCES:
+        return None
+    geometry = [[sentence.start, sentence.end, sentence.n_words] for sentence in scoped]
     remaining = ctx.deadline.remaining()
     readings = None
     if remaining is None or remaining >= EXTRA_SECONDS + 2:
         deadline = ctx.deadline.nested(EXTRA_SECONDS)
         try:
-            values = classifier.predict([sentence.text for sentence in sentences], batch=12, check=deadline.check)
+            inputs = [sentence.text for sentence in scoped]
+            contexts = context[:len(scoped)]
+            shortened = len(scoped) < len(sentences)
+            if shortened:
+                # Replace the last primary window, which included the first sentence of the excluded email tail.
+                inputs.append(" ".join(inputs[-2:]))
+            values = list(classifier.predict(inputs, batch=12, check=deadline.check))
+            if shortened:
+                contexts[-1] = values.pop()
             deadline.check("separate writing passage responses")
-            if (len(values) == len(context) == len(sentences)
-                    and all(math.isfinite(value) and 0 <= value <= 1 for value in (*values, *context))):
+            if (len(values) == len(contexts) == len(scoped)
+                    and all(math.isfinite(value) and 0 <= value <= 1 for value in (*values, *contexts))):
                 # Select from exactly the values the canonical evidence record will retain.
-                readings = {"context": [round(float(value), FLOAT_DP) for value in context],
+                readings = {"context": [round(float(value), FLOAT_DP) for value in contexts],
                             "isolated": [round(float(value), FLOAT_DP) for value in values]}
-        except (DetectorTimeout, OSError, RuntimeError, ValueError):
+        except (DetectorTimeout, IndexError, OSError, RuntimeError, ValueError):
             # The existing context and document scores are already available.
             pass
-    return document_passage_intervals.capture(doc.text, doc.source_map, geometry, readings)
+    return document_passage_intervals.capture(doc.text, doc.source_map, geometry, readings, method=method, checked_end=end)

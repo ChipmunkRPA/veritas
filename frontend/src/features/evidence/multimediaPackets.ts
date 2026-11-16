@@ -474,9 +474,15 @@ export interface DocumentEvidenceSet extends SetBase {
     unselected_passage_responses?: DocumentUnselectedResponses;
     passage_position_review?: DocumentPassagePosition;
     writing_passage_intervals?: {
-      schema: 'document-writing-passage-intervals/1';
+      schema: 'document-writing-passage-intervals/1' | 'document-writing-passage-intervals/2';
       status: 'flagged' | 'no_ranges' | 'unassessed';
-      ranges: { start: number; end: number; source_start: number; source_end: number; preview: string }[];
+      ranges: ({ start: number; end: number; preview: string } & (
+        { source_start: number; source_end: number } | { locations: (
+          { page: number; boxes: [number, number, number, number][] } |
+          { paragraph: number; ranges: [number, number][] } |
+          { mime_part: string; ranges: [number, number][] }
+        )[] }
+      ))[];
       authorship_confidence_contribution: 0;
     };
     original_text_locations?: { schema: 'document-original-text-locations/1'; packets: Record<string, DocumentOriginalTextLocation[]> };

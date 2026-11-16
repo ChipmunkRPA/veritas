@@ -129,6 +129,9 @@ public numeric receipt. [Measured cases and locked protocol](evaluation-panels/w
 
 ## Local app
 
+The [native format follow-up](writing-native-passage-locations-2026-11-16.md)
+documents Word, selectable PDF and reply-body support added after this trial.
+
 Enable `VERITAS_TEXT_PASSAGE_INTERVALS_REVIEW=true` in development
 with candidate text scoring and three-sentence context. Full and
 Deep analyses can check plain English text with 12 to 128 sentences.

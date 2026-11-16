@@ -368,7 +368,7 @@ describe('ordinary multimedia evidence', () => {
   })
 
   it('shows timing-sensitive short speech evidence with the original alert and nearby source positions', () => {
-    const set = { ...structuredClone(audio), packets: [] }
+    const set = { ...structuredClone(audio), packets: [], source: { ...audio.source, source_sample_rate: 48000 } }
     const interval = { start_sample: 64000, end_sample: 96000 }
     const shifted = { start_sample: 62720, end_sample: 94720 }
     set.short_voice_review = {
@@ -378,6 +378,9 @@ describe('ordinary multimedia evidence', () => {
       checked_windows: [interval], interval, start_s: 4, end_s: 6,
       source_timestamp_ranges: [{ ...interval, source_start_pts: 64000, source_end_pts: 96000, time_base: '1/16000' }],
       artifacts: { selected_clip: asset('f', 'audio/wav') },
+      window_coverage: [{ ...interval, speech_samples: 24000, status: 'checked', source_timestamp_ranges: [
+        { ...interval, source_start_pts: 64000, source_end_pts: 96000, time_base: '1/16000' },
+      ] }],
       nearby_window_review: { status: 'varied', windows: [{ ...shifted, speech_samples: 22720, status: 'below_review_point',
         pcm_sha256: '7'.repeat(64), source_timestamp_ranges: [
           { ...shifted, source_start_pts: 62720, source_end_pts: 94720, time_base: '1/16000' },
@@ -385,6 +388,7 @@ describe('ordinary multimedia evidence', () => {
     }
     show(set)
     const review = within(screen.getByRole('region', { name: 'Short speech-window review' }))
+    expect(review.getByText('This check uses 16 kHz mono audio decoded from the 48 kHz source.')).toBeTruthy()
     expect(review.getByText(/Small timing changes affected this finding/)).toBeTruthy()
     expect(review.getByText('3.920 s–5.920 s')).toBeTruthy()
     expect(review.getByText('Source PTS [62720, 94720) at 1/16000.')).toBeTruthy()

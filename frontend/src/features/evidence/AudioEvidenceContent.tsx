@@ -143,6 +143,9 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       {standalone && set.source.identical_stereo_channel_pcm_sha256 && <p className="mt-2 mb-0 text-small">
         Both recorded channels contain the same samples.
       </p>}
+      {set.source.source_sample_rate === 48000 && shortReview.window_coverage && <p className="mt-2 mb-0 text-small">
+        This check uses 16 kHz mono audio decoded from the 48 kHz source.
+      </p>}
       {shortReview.status === 'flagged' && shortReview.interval && shortReview.start_s != null && shortReview.end_s != null && <>
         <p className="mt-2 mb-0 font-mono text-caption text-text-muted">
           Analyzed input {seconds(shortReview.start_s)}–{seconds(shortReview.end_s)} · samples [{shortReview.interval.start_sample}, {shortReview.interval.end_sample})

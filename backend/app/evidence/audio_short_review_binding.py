@@ -30,6 +30,10 @@ REVIEW_POINT = 6.822523597593649
 MP3_REVIEW_POINT = 7.085599896496718
 MP3_ORIGIN = 1105
 AAC_RATE, AAC_FRAME, AAC_REVIEW_POINT = 48_000, 1024, 7.049249651163794
+LOSSLESS_RATE = 48_000
+LOSSLESS_FORMATS = {("wav", "pcm_s16le"), ("flac", "flac")}
+LOSSLESS_NATIVE_CLOCK = "source_native_clock_verified"
+RESAMPLED_DESCRIPTION = "This check uses 16 kHz mono audio decoded from the 48 kHz source."
 AAC_CONTAINER = "mov,mp4,m4a,3gp,3g2,mj2"
 AAC_FIELDS = ("source_container", "source_profile", "source_bit_rate", "source_time_base", "source_start_pts",
               "source_duration_pts")
@@ -57,6 +61,9 @@ def source_metadata(mapping: dict) -> dict:
     keys = {"flac": ("source_container", "source_bit_depth"), "pcm_s16le": ("source_container", "source_bit_depth"),
             "mp3": ("source_container", "source_bit_rate"), "aac": AAC_FIELDS}
     metadata.update({key: mapping[key] for key in keys.get(metadata["source_codec"], ()) if key in mapping})
+    if mapping.get("source_sample_rate") == LOSSLESS_RATE and metadata["source_codec"] in NEARBY_CODECS:
+        metadata.update({key: mapping[key] for key in ("source_time_base", "source_start_pts", "source_duration_pts", LOSSLESS_NATIVE_CLOCK)
+                         if key in mapping})
     if IDENTICAL_CHANNEL_PCM in mapping:
         metadata[IDENTICAL_CHANNEL_PCM] = mapping[IDENTICAL_CHANNEL_PCM]
     return metadata
@@ -84,9 +91,10 @@ def supported_aac(source: dict) -> bool:
     )
 
 
-def _native_clock(mapping: dict, origin: int = 0) -> bool:
+def _continuous_clock(mapping: dict, origin: int = 0, *, source_rate: int = RATE) -> bool:
     return (
-        mapping.get("samples") == SAMPLES and mapping.get("sample_rate") == mapping.get("source_sample_rate") == RATE
+        mapping.get("samples") == SAMPLES and mapping.get("sample_rate") == RATE
+        and mapping.get("source_sample_rate") == source_rate
         and mapping.get("channels") == 1 and len(mapping.get("audio_stream_indices", [0])) == 1
         and mapping.get("timeline_time_base") == "1/16000"
         and mapping.get("timeline") == [{"start_sample": 0, "end_sample": SAMPLES, "source_pts": origin}]
@@ -96,15 +104,40 @@ def _native_clock(mapping: dict, origin: int = 0) -> bool:
 def eligible_stereo_source(mapping: dict) -> bool:
     return (
         mapping.get("source_channels") == 2 and mapping.get("source_bit_depth") == 16
-        and (mapping.get("source_container"), mapping.get("source_codec")) in {("wav", "pcm_s16le"), ("flac", "flac")}
-        and _native_clock(mapping)
+        and (mapping.get("source_container"), mapping.get("source_codec")) in LOSSLESS_FORMATS
+        and _continuous_clock(mapping)
     )
+
+
+def supported_resampled_lossless(mapping: dict) -> bool:
+    container = mapping.get("source_container")
+    origin = mapping.get("source_start_pts")
+    duration = mapping.get("source_duration_pts")
+    return (
+        (container, mapping.get("source_codec")) in LOSSLESS_FORMATS
+        and mapping.get("source_channels") == 1 and mapping.get("source_bit_depth") == 16
+        and mapping.get("source_time_base") == "1/48000" and type(duration) is int and duration == 6 * LOSSLESS_RATE
+        and mapping.get(LOSSLESS_NATIVE_CLOCK) is True
+        and ((type(origin) is int and origin == 0) or (container == "wav" and origin is None))
+        and _continuous_clock(mapping, source_rate=LOSSLESS_RATE)
+    )
+
+
+def scope_reason(*, aac: bool, resampled: bool) -> str:
+    if not resampled:
+        return AAC_SCOPE_REASON if aac else SCOPE_REASON
+    carriers = " and a verified 48 kHz mono AAC-LC profile" if aac else ""
+    return ("This check requires six continuous seconds in Full analysis. It supports 16-bit mono WAV and FLAC at "
+            "16 or 48 kHz, lossless 16 kHz audio with two identical channels, a verified 48 kb/s mono MP3 profile"
+            f"{carriers}.")
 
 
 def supported_source(mapping: dict) -> bool:
     codec = mapping.get("source_codec")
     if codec == "aac":
         return supported_aac(mapping)
+    if mapping.get("source_sample_rate") == LOSSLESS_RATE:
+        return supported_resampled_lossless(mapping)
     if mapping.get("source_channels") == 2:
         pin = mapping.get(IDENTICAL_CHANNEL_PCM)
         return eligible_stereo_source(mapping) and isinstance(pin, str) and re.fullmatch("[a-f0-9]{64}", pin) is not None
@@ -112,7 +145,7 @@ def supported_source(mapping: dict) -> bool:
         codec == "flac" and mapping.get("source_container") == "flac" and mapping.get("source_bit_depth") == 16
     )
     mp3 = codec == "mp3" and mapping.get("source_container") == "mp3" and mapping.get("source_bit_rate") == 48000
-    return mapping.get("source_channels") == 1 and (lossless or mp3) and _native_clock(mapping, MP3_ORIGIN if mp3 else 0)
+    return mapping.get("source_channels") == 1 and (lossless or mp3) and _continuous_clock(mapping, MP3_ORIGIN if mp3 else 0)
 
 
 def selected_range(responses: list[dict], codec: str | None = None) -> dict | None:

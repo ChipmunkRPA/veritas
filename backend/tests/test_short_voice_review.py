@@ -96,6 +96,49 @@ def test_mp3_uses_its_frozen_point_and_exact_source_clock():
     assert not binding.source_metadata_matches({"source_codec": "mp3", "source_bit_rate": 64000}, mp3)
 
 
+@pytest.mark.skipif(not which("ffmpeg") or not which("ffprobe"), reason="requires FFmpeg")
+@pytest.mark.parametrize("carrier", ["wav", "flac"])
+def test_resampled_lossless_check_requires_exact_original_extent(tmp_path, carrier):
+    import wave
+
+    def decode(native_samples):
+        wav = tmp_path / f"{native_samples}.wav"
+        with wave.open(str(wav), "wb") as stream:
+            stream.setparams((1, 2, binding.LOSSLESS_RATE, native_samples, "NONE", "not compressed"))
+            stream.writeframes(bytes(2 * native_samples))
+        path = wav
+        if carrier == "flac":
+            path = wav.with_suffix(".flac")
+            run(["ffmpeg", "-v", "error", "-i", str(wav), str(path)], check=True)
+        return decode_audio(path, source_sha256=sha256(path.read_bytes()).hexdigest()).mapping
+
+    mapping = decode(288000)
+    assert binding.supported_source(mapping)
+    assert binding.source_metadata(mapping)["source_duration_pts"] == 288000
+    assert binding.source_metadata(mapping)[binding.LOSSLESS_NATIVE_CLOCK] is True
+    assert binding.source_metadata_matches(mapping, mapping)
+    assert not binding.source_metadata_matches(mapping, mapping | {"source_duration_pts": 288001})
+    longer = decode(288001)
+    assert longer["samples"] == binding.SAMPLES
+    assert not binding.supported_source(longer)
+    for invalid in ({"source_channels": 2}, {"source_start_pts": 1}, {"source_bit_depth": 24},
+                    {binding.LOSSLESS_NATIVE_CLOCK: False}, {"audio_stream_indices": [0, 1]},
+                    {"timeline": [dict(mapping["timeline"][0], source_pts=1)]}):
+        assert not binding.supported_source(mapping | invalid)
+    if carrier == "flac":
+        path = tmp_path / "288001.flac"
+        raw = path.read_bytes()
+        # Change STREAMINFO's total sample count, leaving the audio frames intact.
+        fields = int.from_bytes(raw[18:26], "big")
+        extent_mask = (1 << 36) - 1
+        assert fields & extent_mask == 288001
+        raw = raw[:18] + ((fields & ~extent_mask) | 288000).to_bytes(8, "big") + raw[26:]
+        path.write_bytes(raw)
+        inconsistent = decode_audio(path, source_sha256=sha256(raw).hexdigest()).mapping
+        assert inconsistent["samples"] == binding.SAMPLES and inconsistent["source_duration_pts"] == 288000
+        assert not binding.supported_source(inconsistent)
+
+
 def test_aac_keeps_the_exact_presentation_separate_from_decoder_padding():
     presentation = np.zeros(binding.SAMPLES, np.float32)
     padded = np.concatenate((presentation, np.ones(256, np.float32)))

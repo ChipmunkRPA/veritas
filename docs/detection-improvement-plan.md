@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Short speech review for six-second 48 kHz WAV and FLAC](audio-short-lossless-48k-2026-11-15.md)
+  extends local audio coverage with exact native frame-clock verification.
+  Both deliveries retain all four useful ranges out of 128 staged edits,
+  with the same 27/128 genuine and 0/46 isolated background flags. A
+  conflicting lossless header and an extra native sample both abstain.
+  The browser, PDF, JSON and signed verification keep the source timing.
+
 - [Mouth width and opening for short lip shifts](video-lip-mouth-width-transfer-2026-11-15.md)
   raised correct locations from 18/128 to 21/128 on retained Grid PCM.
   It added one useful AAC location and one across 45 separate actors.

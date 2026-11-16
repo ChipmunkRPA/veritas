@@ -23,6 +23,7 @@ from typing import Any
 import numpy as np
 
 from app.detectors.video.decode import _input
+from app.evidence.audio_short_review_binding import LOSSLESS_FORMATS, LOSSLESS_NATIVE_CLOCK, LOSSLESS_RATE
 from app.evidence.stereo_binding import MAX_SECONDS as STEREO_MAX_SECONDS
 
 SAMPLE_RATE = 16_000
@@ -153,6 +154,15 @@ def _named_timeline(log: str, name: str) -> str:
     return "\n".join(line for line in log.splitlines() if line.startswith(f"[ashowinfo@{name} "))
 
 
+def _exact_zero_based_clock(log: str, samples: int) -> bool:
+    if sum(int(count) for _, _, count in _FRAME.findall(log)) != samples:
+        return False
+    try:
+        return _mapping(log, samples) == [{"start_sample": 0, "end_sample": samples, "source_pts": 0}]
+    except ValueError:
+        return False
+
+
 def _read_stereo(path: Path, limit: int) -> np.ndarray:
     with wave.open(str(path), "rb") as wav:
         count = wav.getnframes()
@@ -185,10 +195,19 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
         if stream_position >= len(streams):
             raise AudioStreamUnavailable("The selected audio stream is not present")
         stream = streams[stream_position]
+        fmt = info.get("format") or {}
         input_stream = f"0:a:{stream_position}"
         maximum = math.floor(max_seconds * SAMPLE_RATE)
         filters = f"aformat=sample_fmts=s16:channel_layouts=mono,aresample={SAMPLE_RATE},atrim=end_sample={maximum},ashowinfo,asetpts=N/SR/TB"
         layout = stream.get("channel_layout")
+        native_extent = 6 * LOSSLESS_RATE
+        inspect_native_clock = (
+            len(streams) == 1 and max_seconds >= 7
+            and (fmt.get("format_name"), stream.get("codec_name")) in LOSSLESS_FORMATS
+            and (stream.get("channels"), stream.get("sample_rate"), stream.get("time_base"), stream.get("duration_ts"))
+            == (1, str(LOSSLESS_RATE), f"1/{LOSSLESS_RATE}", native_extent)
+        )
+        native_clock_verified = False
         stereo_pcm, stereo_clock = None, None
         capture_stereo = False
         if inspect_stereo or retain_stereo:
@@ -227,11 +246,14 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
                     capture_stereo = False
                     stereo_pcm, stereo_clock = None, None
             if not capture_stereo:
-                run = subprocess.run(command + ["-map", input_stream, "-af", filters] + mono_output,
+                input_filters = ("ashowinfo@original," + filters.replace("ashowinfo", "ashowinfo@mono")
+                                 if inspect_native_clock else filters)
+                run = subprocess.run(command + ["-map", input_stream, "-af", input_filters] + mono_output,
                                      capture_output=True, text=True, timeout=180, check=True, stdin=subprocess.DEVNULL)
                 pcm = read_wav(output.read_bytes())
-                timeline = _mapping(run.stderr, len(pcm))
-        fmt = info.get("format") or {}
+                timeline = _mapping(_named_timeline(run.stderr, "mono") if inspect_native_clock else run.stderr, len(pcm))
+                if inspect_native_clock:
+                    native_clock_verified = _exact_zero_based_clock(_named_timeline(run.stderr, "original"), native_extent)
         mapping = {
             "version": VERSION, "source_sha256": source_sha256,
             "sample_rate": SAMPLE_RATE, "channels": 1, "sample_format": "s16le",
@@ -261,6 +283,11 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
             mapping["source_bit_depth"] = int(bits) if bits is not None else None
         if mapping["source_codec"] == "pcm_s16le" and fmt.get("format_name") == "wav":
             mapping.update(source_container="wav", source_bit_depth=16)
+        if ((mapping.get("source_container"), mapping["source_codec"]) in LOSSLESS_FORMATS
+                and mapping["source_sample_rate"] == LOSSLESS_RATE and type(stream.get("duration_ts")) is int):
+            mapping["source_duration_pts"] = stream["duration_ts"]
+        if native_clock_verified:
+            mapping[LOSSLESS_NATIVE_CLOCK] = True
         if mapping["source_codec"] == "mp3":
             mapping["source_container"] = fmt.get("format_name")
             bit_rate = _number(stream.get("bit_rate"))

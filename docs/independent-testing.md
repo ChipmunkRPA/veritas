@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [48 kHz short speech replay](audio-short-lossless-48k-2026-11-15.md#reproduce)
+compares 302 paired recordings in two lossless formats at a frozen
+operating point. Native replay checks the original frame clocks and
+the full local worker path, including a FLAC with a conflicting header.
+
 The [mouth-width timing comparison](video-lip-mouth-width-transfer-2026-11-15.md#replay)
 recalculates matched interval and control counts from source-linked mouth
 measurements. Native replay uses the same fit and decision rules on 45

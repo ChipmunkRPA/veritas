@@ -62,10 +62,10 @@ from app.evidence.audio_binding import (
 )
 from app.evidence.audio_short_review_binding import (
     AAC_CONTAINER,
-    AAC_SCOPE_REASON,
     IDENTICAL_CHANNEL_PCM,
     NEARBY_CODECS,
-    SCOPE_REASON,
+    scope_reason,
+    supported_resampled_lossless,
     supported_source,
 )
 from app.evidence.stereo_binding import destructive_downmix_windows
@@ -186,6 +186,7 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     return {"sample_rate": SR, "samples": int(len(pcm)), "seconds": round(len(pcm) / SR, 3),
             "destructive_mono_downmix": bool(destructive_downmix_windows(decoded.mapping["stereo_context"])),
             "short_voice_review_source_supported": supported_source(decoded.mapping),
+            "short_voice_review_resampled_lossless": supported_resampled_lossless(decoded.mapping),
             "short_voice_review_source_codec": decoded.mapping.get("source_codec"),
             "long_voice_review_source_supported": audio_long_review_binding.supported_source(decoded.mapping),
             "long_voice_review_resampled_source_supported": audio_long_review_binding.supported_resampled_source(decoded.mapping),
@@ -288,12 +289,14 @@ def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
     facts = ctx.outputs["probe"]["facts"]
     source_codec = ctx.outputs["decode"].get("short_voice_review_source_codec")
     aac_enabled = settings.environment == "dev" and settings.audio_short_aac_review
+    resampled_enabled = settings.environment == "dev" and settings.audio_short_lossless_48k_review
     container = facts.get("container")
     allowed_container = container in {"wav", "flac", "mp3"} or (
         aac_enabled and source_codec == "aac" and container == AAC_CONTAINER and not facts.get("has_video"))
     if (Profile(ctx.profile) is not Profile.FULL or not allowed_container
-            or not ctx.outputs["decode"].get("short_voice_review_source_supported")):
-        return short_voice_review.skipped(AAC_SCOPE_REASON if aac_enabled else SCOPE_REASON)
+            or not ctx.outputs["decode"].get("short_voice_review_source_supported")
+            or (ctx.outputs["decode"].get("short_voice_review_resampled_lossless") and not resampled_enabled)):
+        return short_voice_review.skipped(scope_reason(aac=aac_enabled, resampled=resampled_enabled))
     primary = next((e for e in entries if e.get("detector_id") == short_voice_review.PellaVoiceDetector.spec.id), {})
     coverage_skip = (settings.environment == "dev" and settings.audio_short_admission_review
                      and primary.get("status") == "not_applicable" and primary.get("reason") == NO_ADMITTED_VOICE)

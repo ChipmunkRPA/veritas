@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Facial detail after recompression](video-face-detail-comparison-2026-11-16.md)
+  compared a frozen patch-based signal on 24 fresh targets with two swap
+  generators and separate camera controls. On strong recompression the wider
+  fallback increased swap flags from 23 to 28 of 48 and ordinary alerts from
+  six to eight of 24. It also added a camera alert. The stricter setting
+  caught zero extra swaps. The current local face review stays active.
+
 - [Synthetic background sound under speech](environmental-component-transfer-2026-11-16.md)
   compares the mixed recording, an estimated background, and two combinations
   on 24 held environmental source groups and three unseen generators.

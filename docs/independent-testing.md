@@ -73,6 +73,11 @@ matched foreground and gain in every comparison and includes isolated,
 partly generated voice, voice-only and Opus controls. The publicly available
 arithmetic recounts 508 held results and all operating points for the new arms.
 
+The [facial detail replay](video-face-detail-comparison-2026-11-16.md#replay)
+recounts seven frozen responses and both fallback settings for 144 fresh
+deliveries and 16 camera controls. The receipt records a separate FFprobe
+and FFmpeg check of source cadence, delivered clocks and original RGB hashes.
+
 The [earlier JPEG and WebP replay](image-jpeg-webp-comparison-2026-11-16.md#replay)
 recounts 1,008 pairs from 48 photos and rebuilds the exact output masks
 from the original source banks. It includes three encoding recipes and

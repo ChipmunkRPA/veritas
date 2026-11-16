@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [mouth-width timing comparison](video-lip-mouth-width-transfer-2026-11-15.md#replay)
+recalculates matched interval and control counts from source-linked mouth
+measurements. Native replay uses the same fit and decision rules on 45
+separate actors and audits the original picture and soundtrack clocks.
+
 The [separate-channel transfer replay](audio-stereo-channel-replication-2026-11-15.md#replay)
 recounts the two existing operating points on 60 new matched stereo
 clips. The native route regenerates the source selections, stock voice

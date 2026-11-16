@@ -1,0 +1,606 @@
+{
+  "grid_receipt_sha256": "d5f5128e5e9c8488a78d13afd28396d0bb35deabf103bd714c26a974290a30a7",
+  "panels": {
+    "first": {
+      "actors": 24,
+      "counts": {
+        "add_both/tight/constant": {
+          "assessed": 48,
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "add_both/tight/local": {
+          "assessed": 47,
+          "files": 48,
+          "flagged": 8,
+          "misplaced": 2,
+          "useful": 6
+        },
+        "add_both/tight/ordinary": {
+          "assessed": 71,
+          "files": 72,
+          "flagged": 5,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "add_both/wider/constant": {
+          "assessed": 48,
+          "files": 48,
+          "flagged": 10,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "add_both/wider/local": {
+          "assessed": 47,
+          "files": 48,
+          "flagged": 18,
+          "misplaced": 9,
+          "useful": 9
+        },
+        "add_both/wider/ordinary": {
+          "assessed": 71,
+          "files": 72,
+          "flagged": 15,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "add_width/tight/constant": {
+          "assessed": 48,
+          "files": 48,
+          "flagged": 4,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "add_width/tight/local": {
+          "assessed": 48,
+          "files": 48,
+          "flagged": 9,
+          "misplaced": 3,
+          "useful": 6
+        },
+        "add_width/tight/ordinary": {
+          "assessed": 72,
+          "files": 72,
+          "flagged": 5,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "add_width/wider/constant": {
+          "assessed": 48,
+          "files": 48,
+          "flagged": 10,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "add_width/wider/local": {
+          "assessed": 48,
+          "files": 48,
+          "flagged": 18,
+          "misplaced": 9,
+          "useful": 9
+        },
+        "add_width/wider/ordinary": {
+          "assessed": 72,
+          "files": 72,
+          "flagged": 15,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "aperture/tight/constant": {
+          "assessed": 44,
+          "files": 48,
+          "flagged": 1,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "aperture/tight/local": {
+          "assessed": 45,
+          "files": 48,
+          "flagged": 5,
+          "misplaced": 2,
+          "useful": 3
+        },
+        "aperture/tight/ordinary": {
+          "assessed": 65,
+          "files": 72,
+          "flagged": 5,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "aperture/wider/constant": {
+          "assessed": 44,
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "aperture/wider/local": {
+          "assessed": 45,
+          "files": 48,
+          "flagged": 10,
+          "misplaced": 5,
+          "useful": 5
+        },
+        "aperture/wider/ordinary": {
+          "assessed": 65,
+          "files": 72,
+          "flagged": 10,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "both/tight/constant": {
+          "assessed": 44,
+          "files": 48,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "both/tight/local": {
+          "assessed": 39,
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 0,
+          "useful": 2
+        },
+        "both/tight/ordinary": {
+          "assessed": 62,
+          "files": 72,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "both/wider/constant": {
+          "assessed": 44,
+          "files": 48,
+          "flagged": 1,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "both/wider/local": {
+          "assessed": 39,
+          "files": 48,
+          "flagged": 4,
+          "misplaced": 1,
+          "useful": 3
+        },
+        "both/wider/ordinary": {
+          "assessed": 62,
+          "files": 72,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "current/tight/constant": {
+          "assessed": 46,
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "current/tight/local": {
+          "assessed": 47,
+          "files": 48,
+          "flagged": 7,
+          "misplaced": 2,
+          "useful": 5
+        },
+        "current/tight/ordinary": {
+          "assessed": 67,
+          "files": 72,
+          "flagged": 5,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "current/wider/constant": {
+          "assessed": 46,
+          "files": 48,
+          "flagged": 9,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "current/wider/local": {
+          "assessed": 47,
+          "files": 48,
+          "flagged": 17,
+          "misplaced": 8,
+          "useful": 9
+        },
+        "current/wider/ordinary": {
+          "assessed": 67,
+          "files": 72,
+          "flagged": 15,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "sparse/tight/constant": {
+          "assessed": 23,
+          "files": 48,
+          "flagged": 1,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "sparse/tight/local": {
+          "assessed": 30,
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 0,
+          "useful": 2
+        },
+        "sparse/tight/ordinary": {
+          "assessed": 37,
+          "files": 72,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "sparse/wider/constant": {
+          "assessed": 23,
+          "files": 48,
+          "flagged": 7,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "sparse/wider/local": {
+          "assessed": 30,
+          "files": 48,
+          "flagged": 10,
+          "misplaced": 4,
+          "useful": 6
+        },
+        "sparse/wider/ordinary": {
+          "assessed": 37,
+          "files": 72,
+          "flagged": 5,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "width/tight/constant": {
+          "assessed": 35,
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "width/tight/local": {
+          "assessed": 40,
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 1,
+          "useful": 1
+        },
+        "width/tight/ordinary": {
+          "assessed": 58,
+          "files": 72,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "width/wider/constant": {
+          "assessed": 35,
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "width/wider/local": {
+          "assessed": 40,
+          "files": 48,
+          "flagged": 2,
+          "misplaced": 1,
+          "useful": 1
+        },
+        "width/wider/ordinary": {
+          "assessed": 58,
+          "files": 72,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        }
+      },
+      "qualifications_sha256": "4da9fd22b6909c70eb65e46cd069015bd85978e72841b25a97995c1126d38f93"
+    },
+    "remaining": {
+      "actors": 21,
+      "counts": {
+        "add_both/tight/constant": {
+          "assessed": 42,
+          "files": 42,
+          "flagged": 1,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "add_both/tight/local": {
+          "assessed": 42,
+          "files": 42,
+          "flagged": 8,
+          "misplaced": 4,
+          "useful": 4
+        },
+        "add_both/tight/ordinary": {
+          "assessed": 63,
+          "files": 63,
+          "flagged": 3,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "add_both/wider/constant": {
+          "assessed": 42,
+          "files": 42,
+          "flagged": 8,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "add_both/wider/local": {
+          "assessed": 42,
+          "files": 42,
+          "flagged": 18,
+          "misplaced": 11,
+          "useful": 7
+        },
+        "add_both/wider/ordinary": {
+          "assessed": 63,
+          "files": 63,
+          "flagged": 15,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "add_width/tight/constant": {
+          "assessed": 42,
+          "files": 42,
+          "flagged": 2,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "add_width/tight/local": {
+          "assessed": 42,
+          "files": 42,
+          "flagged": 8,
+          "misplaced": 4,
+          "useful": 4
+        },
+        "add_width/tight/ordinary": {
+          "assessed": 63,
+          "files": 63,
+          "flagged": 5,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "add_width/wider/constant": {
+          "assessed": 42,
+          "files": 42,
+          "flagged": 9,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "add_width/wider/local": {
+          "assessed": 42,
+          "files": 42,
+          "flagged": 16,
+          "misplaced": 10,
+          "useful": 6
+        },
+        "add_width/wider/ordinary": {
+          "assessed": 63,
+          "files": 63,
+          "flagged": 17,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "aperture/tight/constant": {
+          "assessed": 38,
+          "files": 42,
+          "flagged": 1,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "aperture/tight/local": {
+          "assessed": 38,
+          "files": 42,
+          "flagged": 3,
+          "misplaced": 1,
+          "useful": 2
+        },
+        "aperture/tight/ordinary": {
+          "assessed": 58,
+          "files": 63,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "aperture/wider/constant": {
+          "assessed": 38,
+          "files": 42,
+          "flagged": 3,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "aperture/wider/local": {
+          "assessed": 38,
+          "files": 42,
+          "flagged": 12,
+          "misplaced": 8,
+          "useful": 4
+        },
+        "aperture/wider/ordinary": {
+          "assessed": 58,
+          "files": 63,
+          "flagged": 6,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "both/tight/constant": {
+          "assessed": 38,
+          "files": 42,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "both/tight/local": {
+          "assessed": 39,
+          "files": 42,
+          "flagged": 2,
+          "misplaced": 2,
+          "useful": 0
+        },
+        "both/tight/ordinary": {
+          "assessed": 58,
+          "files": 63,
+          "flagged": 3,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "both/wider/constant": {
+          "assessed": 38,
+          "files": 42,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "both/wider/local": {
+          "assessed": 39,
+          "files": 42,
+          "flagged": 4,
+          "misplaced": 3,
+          "useful": 1
+        },
+        "both/wider/ordinary": {
+          "assessed": 58,
+          "files": 63,
+          "flagged": 3,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "current/tight/constant": {
+          "assessed": 41,
+          "files": 42,
+          "flagged": 1,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "current/tight/local": {
+          "assessed": 38,
+          "files": 42,
+          "flagged": 7,
+          "misplaced": 3,
+          "useful": 4
+        },
+        "current/tight/ordinary": {
+          "assessed": 60,
+          "files": 63,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "current/wider/constant": {
+          "assessed": 41,
+          "files": 42,
+          "flagged": 8,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "current/wider/local": {
+          "assessed": 38,
+          "files": 42,
+          "flagged": 15,
+          "misplaced": 9,
+          "useful": 6
+        },
+        "current/wider/ordinary": {
+          "assessed": 60,
+          "files": 63,
+          "flagged": 15,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "sparse/tight/constant": {
+          "assessed": 18,
+          "files": 42,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "sparse/tight/local": {
+          "assessed": 16,
+          "files": 42,
+          "flagged": 4,
+          "misplaced": 2,
+          "useful": 2
+        },
+        "sparse/tight/ordinary": {
+          "assessed": 24,
+          "files": 63,
+          "flagged": 0,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "sparse/wider/constant": {
+          "assessed": 18,
+          "files": 42,
+          "flagged": 5,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "sparse/wider/local": {
+          "assessed": 16,
+          "files": 42,
+          "flagged": 10,
+          "misplaced": 5,
+          "useful": 5
+        },
+        "sparse/wider/ordinary": {
+          "assessed": 24,
+          "files": 63,
+          "flagged": 9,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "width/tight/constant": {
+          "assessed": 40,
+          "files": 42,
+          "flagged": 1,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "width/tight/local": {
+          "assessed": 34,
+          "files": 42,
+          "flagged": 1,
+          "misplaced": 1,
+          "useful": 0
+        },
+        "width/tight/ordinary": {
+          "assessed": 56,
+          "files": 63,
+          "flagged": 5,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "width/wider/constant": {
+          "assessed": 40,
+          "files": 42,
+          "flagged": 1,
+          "misplaced": 0,
+          "useful": 0
+        },
+        "width/wider/local": {
+          "assessed": 34,
+          "files": 42,
+          "flagged": 1,
+          "misplaced": 1,
+          "useful": 0
+        },
+        "width/wider/ordinary": {
+          "assessed": 56,
+          "files": 63,
+          "flagged": 5,
+          "misplaced": 0,
+          "useful": 0
+        }
+      },
+      "qualifications_sha256": "fd861a97a6e51f6af99e5ec1fd45b99a615a95a139e0cc62c06925850c8ea286"
+    }
+  },
+  "schema": "chipmunk.video-lip-mouth-width-native/1"
+}

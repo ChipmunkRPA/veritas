@@ -21,7 +21,7 @@ SCHEMA = "chipmunk.video-lip-dense-native/1"
 study = dense.prior
 
 
-def pixels(source, qualified, geometry):
+def pixels(source, qualified, geometry, *, measure_width=False):
     from app.detectors.video.decode import FrameTable, decode_stream, probe_frames
     from app.evidence.video_reference_timing import _landmarker, _mesh
 
@@ -42,6 +42,8 @@ def pixels(source, qualified, geometry):
                 record.update(gap_units=round(float(median(features[:3])) * timing.SCORE_UNITS), mouth_box=box,
                               rgb_sha256=study.phone.digest(frame.rgb.tobytes()),
                               mouth_crop_sha256=study.phone.digest(frame.rgb[y:bottom, x:right].tobytes()))
+                if measure_width:
+                    record["width_units"] = round(float(features[3]) * timing.SCORE_UNITS)
             frames.append(record)
     if len(frames) != len(table):
         raise ValueError("Incomplete publisher picture scan")

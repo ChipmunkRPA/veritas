@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Mouth width and opening for short lip shifts](video-lip-mouth-width-transfer-2026-11-15.md)
+  raised correct locations from 18/128 to 21/128 on retained Grid PCM.
+  It added one useful AAC location and one across 45 separate actors.
+  Ordinary flags rose from 2/192 to 5/192 in the main panel and from
+  0/63 to 3/63 in the second actor panel. The check stays in evaluation.
+
 - [Historical editorial revisions as writing controls](writing-historical-editorial-negatives-2026-11-15.md)
   adds 120 separate dated Wikipedia test articles and tests 180 other
   articles as training controls. Either original or edited Wikipedia text

@@ -141,7 +141,10 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       <h3 className="m-0 text-body font-medium">{focusedEdit.title}</h3>
       <p className="mt-2 mb-0 text-small">{focusedEdit.reason}</p>
       {focusedEdit.checked_windows > 0 && <p className="mt-2 mb-0 text-small">
-        Checked {focusedEdit.checked_windows} windows lasting 0.5 to 1 second.
+        Checked {focusedEdit.checked_windows} windows lasting {focusedEdit.checked_scope ? '0.25' : '0.5'} to 1 second.
+      </p>}
+      {focusedEdit.checked_scope && <p className="mt-2 mb-0 text-small">
+        Search scope {seconds(focusedEdit.checked_scope.start_sample / 16000)}–{seconds(focusedEdit.checked_scope.end_sample / 16000)}.
       </p>}
       {focusedEdit.schema === 'chipmunk.focused-speech-edit-review/2' && <p className="mt-2 mb-0 text-small">
         The check uses 16 kHz audio decoded from the 48 kHz recording.

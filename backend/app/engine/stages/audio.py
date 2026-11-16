@@ -214,6 +214,12 @@ def detect(ctx: StageContext) -> dict[str, Any]:
     long = _long_voice_review(ctx, track, output["detectors"])
     background = _background_voice_review(ctx, track, output["detectors"])
     two_second = _long_two_second_review(ctx, track) if long is not None else None
+    if (settings.environment == "dev" and settings.audio_centered_speech_edit_review
+            and settings.audio_detector_mode == "candidate" and Profile(ctx.profile) is Profile.FULL
+            and ctx.outputs["decode"].get("long_voice_review_source_supported")
+            and track.pcm is not None and focused_edit_binding.centered_scope(len(track.pcm)) is not None
+            and not provenance_gate.stop(ctx)):
+        focused_edit = _focused_edit_review(ctx, track, centered=True)
     return {**output, "voice_clock_policy": VOICE_CLOCK_POLICY, "short_voice_review": short,
             **({"long_voice_review": long} if long is not None else {}),
             **({focused_edit_binding.KEY: focused_edit} if focused_edit is not None else {}),
@@ -366,35 +372,37 @@ def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
                 and (ctx.outputs["decode"].get("focused_edit_source_supported")
                      or (settings.audio_focused_edit_lossless_48k_review
                          and ctx.outputs["decode"].get("short_voice_review_resampled_lossless")))):
-            output[focused_edit_binding.KEY] = _focused_edit_review(ctx, run_ctx)
+            output[focused_edit_binding.KEY] = _focused_edit_review(ctx, run_ctx.outputs.audio)
         return output
     reason = ("The optional short-window check ran out of analysis time." if review.status == "timeout"
               else "The optional short-window check could not complete.")
     return short_voice_review.skipped(reason)
 
 
-def _focused_edit_review(ctx: StageContext, short_ctx: RunContext) -> dict | None:
+def _focused_edit_review(ctx: StageContext, track, *, centered: bool = False) -> dict | None:
     from app.detectors.audio import focused_edit_review
     from app.engine.registry import get_registry
 
     registry = get_registry()
-    model = registry.manifest.model(focused_edit_review.MODEL_ID)
+    detector = focused_edit_review.CenteredSpeechEditReview() if centered else focused_edit_review.FocusedSpeechEditReview()
+    model = registry.manifest.model(detector.model_id)
     if (focused_edit_binding.DETECTOR_ID in registry.policy.deny_detectors or model is None
             or not registry.policy.allows_class(model.licence.class_)):
         return None
+    schema = {"schema": focused_edit_binding.CENTERED_SCHEMA} if centered else {}
     remaining = ctx.deadline.remaining()
     budget = short_voice_review.BUDGET_S
     if remaining is not None and remaining < budget + short_voice_review.PIPELINE_RESERVE_S:
-        return {"reason": "time"}
-    detector = focused_edit_review.FocusedSpeechEditReview()
-    run_ctx = dataclasses.replace(short_ctx, outputs=StageOutputs(audio=short_ctx.outputs.audio),
-                                  exhibits=ctx.exhibits.bind(detector.spec.id), log=ctx.log.bind(detector_id=detector.spec.id))
+        return {"reason": "time", **schema}
+    run_ctx = RunContext(analysis_id=ctx.analysis_id, media=common.media(ctx), profile=ctx.profile, device="cpu",
+                         dtype=None, lease=None, outputs=StageOutputs(audio=track), deadline=ctx.deadline,
+                         exhibits=ctx.exhibits.bind(detector.spec.id), log=ctx.log.bind(detector_id=detector.spec.id))
     store = ctx.state["run_store"]
     review = run_detector(detector, run_ctx, store=store, models=ctx.state.get("models"), timeout_s=budget)
     ctx.check("focused speech edit review")
     if review.status == "ok" and (run_id := store.run_id(ctx.analysis_id, detector.spec.id)):
-        return {"run_id": run_id}
-    return {"reason": "time" if review.status == "timeout" else "unavailable"}
+        return {"run_id": run_id, **schema}
+    return {"reason": "time" if review.status == "timeout" else "unavailable", **schema}
 
 
 # --- temporal stage ------------------------------------------------------------------------------------------------
@@ -639,8 +647,12 @@ def publish(ctx: StageContext) -> dict[str, Any]:
                 nearby = _published_review(db, ctx, {"run_id": nearby_id}, {})
                 if nearby:
                     short["nearby_raw_output_sha256"] = nearby["raw_output_sha256"]
-            focused_edit = _published_review(db, ctx, detect_output.get(focused_edit_binding.KEY),
-                                             {"reason": "unavailable"}) if short and short.get("raw_output_sha256") else None
+            focused_result = detect_output.get(focused_edit_binding.KEY)
+            centered = (focused_result or {}).get("schema") == focused_edit_binding.CENTERED_SCHEMA
+            focused_edit = (_published_review(db, ctx, focused_result, {"reason": "unavailable"})
+                            if centered or (short and short.get("raw_output_sha256")) else None)
+            if focused_edit and centered:
+                focused_edit = focused_edit | {"schema": focused_edit_binding.CENTERED_SCHEMA}
             long_result = detect_output.get("long_voice_review")
             long = _published_review(db, ctx, long_result, long_voice_review.skipped(
                 audio_long_review_binding.SKIPPED_RECEIPT,

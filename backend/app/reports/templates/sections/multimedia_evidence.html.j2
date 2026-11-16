@@ -269,7 +269,8 @@ Samples [{{ review.interval.start_sample }}, {{ review.interval.end_sample }}) a
 {% if evidence.get('focused_speech_edit_review') %}
 {% set review = evidence.focused_speech_edit_review %}
 <h3 id="multimedia-focused-speech-edit">{{ review.title }}</h3>
-<p class="caption">{{ review.reason }}{% if review.checked_windows %} Checked {{ review.checked_windows }} windows lasting 0.5 to 1 second.{% endif %}</p>
+<p class="caption">{{ review.reason }}{% if review.checked_windows %} Checked {{ review.checked_windows }} windows lasting {{ '0.25' if review.get('checked_scope') else '0.5' }} to 1 second.{% endif %}</p>
+{% if review.get('checked_scope') %}<p class="caption">Search scope {{ '%.3f' | format(review.checked_scope.start_sample / 16000) }}–{{ '%.3f' | format(review.checked_scope.end_sample / 16000) }} s.</p>{% endif %}
 {% if review.schema == 'chipmunk.focused-speech-edit-review/2' %}<p class="caption">The check uses 16 kHz audio decoded from the 48 kHz recording.</p>{% endif %}
 {% if review.status == 'flagged' %}
 <p class="caption">Flagged window {{ '%.3f' | format(review.start_s) }}–{{ '%.3f' | format(review.end_s) }} s.

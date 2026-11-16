@@ -149,9 +149,11 @@ def validate_content(document: dict[str, Any]) -> None:
             raise PacketIntegrityError(str(error)) from error
     if focused_edit_binding.KEY in document:
         try:
-            if document.get("schema") != SCHEMA or (document.get("short_voice_review") or {}).get("status") != "no_flag":
-                raise ValueError("Focused speech review requires a completed short-window review without a flag")
-            focused_edit_binding.validate(document[focused_edit_binding.KEY], source)
+            review = document[focused_edit_binding.KEY]
+            focused_edit_binding.validate(review, source)
+            if (document.get("schema") != SCHEMA or (review["schema"] != focused_edit_binding.CENTERED_SCHEMA
+                    and (document.get("short_voice_review") or {}).get("status") != "no_flag")):
+                raise ValueError("Focused speech review is outside its standalone audio scope")
         except ValueError as error:
             raise PacketIntegrityError(str(error)) from error
     if "long_voice_review" in document:
@@ -422,7 +424,9 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
         )
     if analysis.kind == "audio" and (review := record.get(focused_edit_binding.KEY)):
         from app.evidence.audio_focused_edit import build as build_focused_edit
+        from app.evidence.audio_short_review_binding import source_metadata
 
+        document["source"].update(source_metadata(mapping))
         document[focused_edit_binding.KEY] = build_focused_edit(
             review, store=store, source=document["source"], pcm=pcm, mapping=mapping,
             asset=lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),

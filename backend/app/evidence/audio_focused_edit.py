@@ -11,6 +11,11 @@ from app.evidence import audio_focused_edit_binding as binding
 
 def build(record, *, store, source, pcm, mapping, asset, waveform):
     count, interval = 0, None
+    centered = record.get("schema") == binding.CENTERED_SCHEMA
+    scope = binding.centered_scope(len(pcm)) if centered else (0, binding.SAMPLES)
+    if scope is None or (centered and not binding.centered_supported(source)):
+        raise ValueError("Focused speech review source is outside the calibrated scope")
+    left, right = scope
     if pin := record.get("raw_output_sha256"):
         raw = store.read_bytes(pin)
         if hashlib.sha256(raw).hexdigest() != pin:
@@ -21,34 +26,50 @@ def build(record, *, store, source, pcm, mapping, asset, waveform):
                 or details.get("pcm_sha256") != source["pcm_sha256"]):
             raise ValueError("Focused speech response belongs to a different check or source")
         response = details[binding.KEY]
-        count, best = response["checked_windows"], response["best"]
-        if type(count) is not int or (count == 0) != (best is None):
-            raise ValueError("Focused speech response differs from its checked coverage")
-        outcome = "no_speech" if best is None else "no_flag"
-        if best is not None:
-            a, b = best["start_sample"], best["end_sample"]
-            if type(best["score_units"]) is not int or not binding.on_grid(a, b):
-                raise ValueError("Focused speech response is outside its timing grid")
-            if best["score_units"] > binding.REVIEW_POINT:
-                outcome, interval = "flagged", {"start_sample": a, "end_sample": b}
+        count = response["checked_windows"]
+        if centered:
+            readings = response["readings"]
+            if (response.get("schema") != binding.CENTERED_SCHEMA
+                    or response["scope"] != binding.interval_dict(left, right)
+                    or response["scope_pcm_sha256"] != hashlib.sha256(pcm[left:right].astype("<f4").tobytes()).hexdigest()
+                    or type(count) is not int or (count == 0) != (not any(item is not None for item in readings))):
+                raise ValueError("Focused speech response differs from its checked six-second input")
+            interval = binding.centered_selection(readings, left)
+        else:
+            best = response["best"]
+            if type(count) is not int or (count == 0) != (best is None):
+                raise ValueError("Focused speech response differs from its checked coverage")
+            if best is not None:
+                a, b = best["start_sample"], best["end_sample"]
+                if type(best["score_units"]) is not int or not binding.on_grid(a, b):
+                    raise ValueError("Focused speech response is outside its timing grid")
+                if best["score_units"] > binding.REVIEW_POINT:
+                    interval = binding.interval_dict(a, b)
+        outcome = "flagged" if interval is not None else "no_flag" if count else "no_speech"
     else:
         outcome = record["reason"]
         if outcome not in {"time", "unavailable"}:
             raise ValueError("Unexpected unmeasured focused speech response")
     status = outcome if outcome in {"flagged", "no_flag"} else "skipped"
     resampled = source.get("source_sample_rate") == binding.LOSSLESS_RATE
-    document = {"schema": binding.RESAMPLED_SCHEMA if resampled else binding.SCHEMA,
+    schema = binding.CENTERED_SCHEMA if centered else binding.RESAMPLED_SCHEMA if resampled else binding.SCHEMA
+    document = {"schema": schema,
                 "title": binding.TITLE, "status": status,
-                "reason": binding.REASONS[outcome], "limitation": binding.LIMITATION,
+                "reason": binding.REASONS[outcome], "limitation": binding.CENTERED_LIMITATION if centered else binding.LIMITATION,
                 "affects_overall_confidence": False, "checked_windows": count, "interval": interval,
                 "start_s": None, "end_s": None, "source_timestamp_ranges": [], "artifacts": {}}
+    if centered:
+        document["checked_scope"] = binding.interval_dict(left, right)
     if resampled:
-        document["original_timestamp_range"] = binding.original_range(a, b) if interval else None
+        document["original_timestamp_range"] = None
     if interval is not None:
+        a, b = interval["start_sample"], interval["end_sample"]
+        if resampled:
+            document["original_timestamp_range"] = binding.original_range(a, b)
         document.update(start_s=a / binding.RATE, end_s=b / binding.RATE, source_timestamp_ranges=source_ranges(mapping, a, b))
         document["artifacts"] = {
             "selected_clip": asset(wav_bytes(pcm[a:b]), "audio/wav", samples=b - a, sample_rate=binding.RATE, channels=1),
-            "waveform": asset(waveform(pcm, [], start=0, end=binding.SAMPLES, selected=(a, b), scores=False),
+            "waveform": asset(waveform(pcm, [], start=left, end=right, selected=(a, b), scores=False),
                               "image/png", width=960, height=280),
         }
     binding.validate(document, source)

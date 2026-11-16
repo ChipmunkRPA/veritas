@@ -250,7 +250,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         from app.evidence.audio_packets import _chart
 
         selected = (review["interval"]["start_sample"], review["interval"]["end_sample"])
-        waveform = _chart(decoded.pcm, [], start=0, end=len(decoded.pcm), selected=selected, scores=False)
+        scope = review.get("checked_scope", {"start_sample": 0, "end_sample": len(decoded.pcm)})
+        waveform = _chart(decoded.pcm, [], start=scope["start_sample"], end=scope["end_sample"], selected=selected, scores=False)
         if hashlib.sha256(waveform).hexdigest() != review["artifacts"]["waveform"]["sha256"]:
             raise ValueError("Focused speech waveform differs from the recorded samples")
         replay_detail += " Recomputed the marked focused speech waveform."

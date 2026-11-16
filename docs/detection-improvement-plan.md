@@ -105,7 +105,10 @@ are not public screening promises or calibrated population probabilities.
   six-second fit adds two correct locations at −5 dB and the ten-second
   fit adds one at −10 dB. Each adds zero ordinary alerts at the level
   where it gains those locations. Both alert on the same clean original.
-  Both candidates remain in evaluation.
+  The full fresh comparison goes from 18/73 to 21/73 at −5 dB and
+  10/73 to 11/73 at −10 dB. The six-second fit is an optional local check
+  with exact scope, clips and waveforms in the browser, PDF and signed
+  JSON. The ten-second fit remains in evaluation.
 
 - [Writing changes within a document](writing-local-baseline-transfer-2026-11-16.md)
   add exact source locations when a passage stands out within the same

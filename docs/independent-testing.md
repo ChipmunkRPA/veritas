@@ -62,7 +62,10 @@ controls. The separate fresh recount validates all changed ranges against the
 frozen labels and reports incremental alerts by control type. A second
 incremental receipt covers edits paired with verified original utterances
 under identical competing speech. It includes the frozen offsets, source
-hashes and isolated-background controls.
+hashes and isolated-background controls. The complete 312-delivery replay
+adds absolute misses, alerts and coverage. The local app replay verifies
+the middle six seconds and the selected windows against the original WAV
+and FLAC files through simulated checkout, PDF, JSON and playback.
 
 The [environmental component replay](environmental-component-transfer-2026-11-16.md#replay)
 checks background origin independently of the voice target. It preserves the

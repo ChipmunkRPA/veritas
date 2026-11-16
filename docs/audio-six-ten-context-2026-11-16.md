@@ -94,9 +94,9 @@ deliveries. At least one head proposed a range on
 every other delivery, the combined locations equal the app's
 existing locations by construction. A replay of this procedure
 on the full 240-delivery retained result reproduced the changes
-using the 25 deliveries that could change. The fresh table
-reports incremental changes. Absolute current recall and
-ordinary-alert counts need the separate full baseline replay.
+using the 25 deliveries that could change. The first fresh table
+reports incremental changes. The full baseline replay below includes
+absolute recall and ordinary-alert counts.
 [Frozen fresh roster and per-delivery changes](evaluation-panels/audio-six-ten-context-fresh-delta-2026-11-16.json.gz)
 
 | Condition at the wider point | Add six seconds, edit locations / untouched alerts / processed alerts | Add ten seconds, edit locations / untouched alerts / processed alerts | Add either, edit locations / untouched alerts / processed alerts |
@@ -160,7 +160,61 @@ the three conditions. Requiring agreement adds only the clean ordinary
 alert at the wider point. The mixing ratios are known from preparation.
 Selecting different checks for real uploads would require a separately
 validated acoustic measurement from the delivered audio. Both candidates
-remain in evaluation. [Per-delivery changes and frozen source plan](evaluation-panels/audio-six-ten-context-matched-delta-2026-11-16.json.gz)
+were in evaluation during these comparisons. [Per-delivery changes and frozen source plan](evaluation-panels/audio-six-ten-context-matched-delta-2026-11-16.json.gz)
+
+## Complete fresh comparison
+
+The incumbent finished scoring all 312 fresh deliveries. Every input
+had an incumbent measurement. The table compares the incumbent with
+adding the six-second fit at the already frozen wider point. All
+known intervals fully within the middle six seconds are counted.
+The 24 edited and 24 ordinary source recordings each have an isolated
+background control at each noise level. The ordinary processing
+controls reuse the ordinary source backgrounds.
+
+| Condition | Correct edit locations out of 73 | Untouched alerts out of 24 | Ordinary reprocessing alerts out of 24 | Isolated-background alerts out of 48 |
+| --- | ---: | ---: | ---: | ---: |
+| Clean | 35 → 35 | 1 → 1 | 1 → 1 | — |
+| Competing speech, −5 dB | 18 → 21 | 7 → 7 | 7 → 7 | 0 → 0 |
+| Competing speech, −10 dB | 10 → 11 | 4 → 5 | 4 → 5 | 0 → 0 |
+
+The added six-second check found two more edits of at most 600 ms at
+−5 dB and one more at −10 dB. At the stronger level, 62 of 73 known
+intervals remain missed in this shared scope. Both checkpoint digests,
+both operating points and the per-delivery ranges appear in the complete
+numeric receipt. Its portable recount agrees with the independent
+event counter on every method. [Complete fresh scores and coverage](evaluation-panels/audio-six-ten-context-fresh-complete-2026-11-16.json.gz)
+
+## Local six-second check
+
+The middle six seconds of a native 16 kHz mono 16-bit WAV or FLAC
+recording can receive this additional check in Full analysis when the
+recording lasts from nine to fourteen seconds and has a verified
+continuous source clock. It uses the six-second fit and its frozen
+calibration. The card and Standard PDF show the checked scope and the
+actual selected time when a window is flagged. The browser plays the
+original excerpt and shows the marked waveform. The JSON and signed
+package preserve the exact source samples. This check contributes zero
+weight to overall confidence.
+
+The local development option is `VERITAS_AUDIO_CENTERED_SPEECH_EDIT_REVIEW=true`
+with the candidate voice configuration. Copy the pinned six-second
+`short.safetensors` from the fitted run to
+`models/research/wavlm-v13/centered-speech-head.safetensors`. The
+commercially permitted encoder and notices are the same as the other
+focused speech check. The optional setting defaults off. The ten-second
+head remains in evaluation. [Weight commitments](../backend/app/models.yaml)
+
+Five simulated USD 9.99 purchases exercised the local app. Zero analyses
+queued before payment. The two edited files returned **3.160–4.160 s**
+within **2.660–8.660 s**, and **4.940–5.940 s** within **2.990–8.990 s**.
+The ordinary recording and isolated background returned zero flags. The
+browser played both one-second original excerpts and matched the PDF
+waveforms and JSON coordinates. The signed exports verified against all
+four source files. Paired runs with the check off and on preserved the
+overall assessment and the earlier long-window readings. The serving
+selection code also reproduced the numeric readings and ranges for all
+312 fresh deliveries from the saved features. [Local app receipt](evaluation-panels/audio-centered-speech-app-2026-11-16.json)
 
 ## Replay
 
@@ -181,6 +235,10 @@ delta=docs/evaluation-panels/audio-six-ten-context-fresh-delta-2026-11-16.json.g
 python3 -B -S -m scripts.audio_long_context_review "$delta" --incremental
 matched=docs/evaluation-panels/audio-six-ten-context-matched-delta-2026-11-16.json.gz
 python3 -B -S -m scripts.audio_long_context_review "$matched" --incremental
+fresh=docs/evaluation-panels/audio-six-ten-context-fresh-complete-2026-11-16.json.gz
+python3 -B -S -m scripts.audio_long_context_review "$fresh"
+python3 -B -S -m scripts.audio_long_context_review "$fresh" --export "$fresh_review"
+python3 -B -S -m scripts.audio_long_context_review "$fresh" --point strict --export "$fresh_review_strict"
 ```
 
 The matched controls use the LibriTTS dev-clean archive with
@@ -194,4 +252,13 @@ runner=backend/.venv/bin/python
 "$runner" -B -m scripts.audio_matched_originals prepare "$archive" "$fresh" "$work/originals.json" "$rooms" "$work/matched"
 "$runner" -B -m scripts.audio_long_context_transfer measure "$work/matched" "$work/measurements" "$encoder" "$vad"
 "$runner" -B -m scripts.audio_long_context_transfer delta "$fit" "$points" "$work/matched" "$work/measurements" "$weights" "$work/delta.json"
+```
+
+Use the prepared 312-delivery panel for the local checkout replay.
+The test uses simulated payments and a fresh filesystem path with
+hard-link support.
+
+```sh
+npm --prefix frontend run build
+"$runner" -B -m scripts.audio_centered_speech_app "$fresh" "$fresh_media" "$local_app" --browser
 ```

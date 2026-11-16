@@ -13,7 +13,7 @@ from app.engine import runs
 from app.engine.boundary import Deadline
 from app.engine.detector import Profile
 from app.engine.stages import audio
-from app.evidence import audio_long_review, audio_packets
+from app.evidence import audio_focused_edit, audio_focused_edit_binding, audio_long_review, audio_packets
 from app.evidence import audio_long_review_binding as binding
 from app.evidence import audio_short_review_binding as short
 from app.evidence import audio_two_second_binding as two_second
@@ -28,6 +28,41 @@ def native_source(samples):
     return {"samples": samples, "channels": 1, "sample_rate": binding.RATE, "source_channels": 1,
             "source_sample_rate": binding.RATE, "source_bit_depth": 16, "source_container": "flac", "source_codec": "flac",
             "timeline_time_base": "1/16000", "timeline": [{"start_sample": 0, "end_sample": samples, "source_pts": 0}]}
+
+
+def test_centered_short_edit_binds_the_absolute_clock_and_waveform():
+    focused = audio_focused_edit_binding
+    count = 160_003
+    pcm = np.arange(count).astype("<i2").astype("<f4") / 32768
+    source = native_source(count) | {"pcm_sha256": sha256(pcm.tobytes()).hexdigest()}
+    start = 32_001
+    scope = {"start_sample": start, "end_sample": 128_001}
+    response = {"schema": focused.CENTERED_SCHEMA, "scope": scope, "checked_windows": 1,
+                "scope_pcm_sha256": sha256(pcm[start:128_001].tobytes()).hexdigest(),
+                "readings": [{"score": 10., "range": [800, 4800]}, None, None, None, None, None]}
+    raw = canonical_json({"detector_id": focused.DETECTOR_ID, "status": "ok",
+                          "details": {"pcm_sha256": source["pcm_sha256"], focused.KEY: response}})
+    record = {"schema": focused.CENTERED_SCHEMA, "raw_output_sha256": sha256(raw).hexdigest()}
+    store = SimpleNamespace(read_bytes={record["raw_output_sha256"]: raw}.__getitem__)
+    assets = {}
+
+    def asset(data, media_type, **metadata):
+        digest = sha256(data).hexdigest()
+        assets[digest] = data
+        return {"sha256": digest, "media_type": media_type, **metadata}
+
+    shown = audio_focused_edit.build(record, store=store, source=source, pcm=pcm, mapping=source,
+                                    asset=asset, waveform=audio_packets._chart)
+    assert shown["checked_scope"] == scope
+    assert shown["interval"] == {"start_sample": 32_801, "end_sample": 36_801}
+    assert shown["affects_overall_confidence"] is False
+    np.testing.assert_array_equal(read_wav(assets[shown["artifacts"]["selected_clip"]["sha256"]]), pcm[32_801:36_801])
+    audio_focused_edit.verify(shown, record, store=store, source=source, pcm=pcm, mapping=source,
+                              read_asset=assets.__getitem__, waveform=audio_packets._chart)
+    shifted = shown | {"checked_scope": {"start_sample": 32_000, "end_sample": 128_000}}
+    with pytest.raises(ValueError, match="supported source"):
+        focused.validate(shifted, source)
+    assert not focused.centered_supported(source | {"source_sample_rate": 48_000})
 
 
 @pytest.mark.parametrize(("samples", "starts"), [

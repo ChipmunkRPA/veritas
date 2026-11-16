@@ -87,6 +87,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
   const motion = hold?.motion_sequence_review
   const reverseMotion = hold?.reverse_motion_sequence_review
   const retimedMotion = hold?.retimed_motion_sequence_review
+  const reflectedMotion = hold?.reflected_motion_sequence_review
   const motionRate = motion?.parameters.frame_rate ?? 20
   const motionLimit = motion?.frames_scanned || motionRate * 9
   const laterFrames = hold && set.coverage ? set.coverage.frame_count - hold.frames_scanned : 0
@@ -196,6 +197,13 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       <p className="mt-2 mb-0 text-small">{retimedMotion.status === 'matched'
         ? <a className="underline" href="#media-evidence-VPR05">Inspect the faster and slower source ranges</a>
         : retimedMotion.status === 'no_match' ? `No match at a two-to-one speed ratio was found in the first ${retimedMotion.frames_scanned} frames.`
+        : 'This check needs regular, verified source timestamps throughout the first nine seconds.'}</p>
+    </section>}
+    {reflectedMotion && <section aria-labelledby="video-reflected-motion-heading" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="video-reflected-motion-heading" className="m-0 text-body font-medium">Mirrored footage check</h3>
+      <p className="mt-2 mb-0 text-small">{reflectedMotion.status === 'matched'
+        ? <a className="underline" href="#media-evidence-VPR06">Inspect both source ranges and frames</a>
+        : reflectedMotion.status === 'no_match' ? `No mirrored repeat was found in the first ${reflectedMotion.frames_scanned} frames.`
         : 'This check needs regular, verified source timestamps throughout the first nine seconds.'}</p>
     </section>}
     {!!set.coverage?.brief_face_review?.observations.length && <section aria-labelledby="video-brief-face-coverage-heading"

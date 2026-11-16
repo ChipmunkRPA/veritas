@@ -40,7 +40,7 @@ export interface VideoEvidencePacket extends PacketBase {
   }
   scene_return?: { schema: 'picture-change-return/1' | 'picture-change-return/2'; start_stream_s: number; end_stream_s: number; tiles: number[] }
   picture_sequence?: { first: PictureSequenceSpan; second: PictureSequenceSpan; frame_count: number; span_s: number; order?: 'reverse';
-    frame_steps?: Record<'first' | 'second', 1 | 2> }
+    frame_steps?: Record<'first' | 'second', 1 | 2>; spatial_transform?: 'horizontal_reflection' }
   face_interval?: { start_stream_s: number; end_stream_s: number; lift: number;
     samples: Record<'before' | 'during' | 'after', { frame_index: number; pts: number; score: number }[]> }
   face_sequence?: { start_stream_s: number; end_stream_s: number; response: number;
@@ -78,6 +78,7 @@ export interface VideoEvidenceSet extends SetBase {
     reverse_motion_sequence_review?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number
       reason: 'exact_sequence' | 'source_clock' | null }
     retimed_motion_sequence_review?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number }
+    reflected_motion_sequence_review?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number }
     mouth_local_hold?: { status: 'matched' | 'no_match' | 'no_stable_face' | 'unavailable'; frames_scanned: number;
       packet_id: 'VPH02' | null; affects_overall_confidence: false; assessed_window_starts?: number[] }
     motion_sequence_review?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number; parameters: { frame_rate: 20 | 25 }

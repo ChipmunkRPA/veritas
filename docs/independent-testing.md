@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [mirrored footage replay](video-mirrored-sequence-2026-11-16.md#replay)
+compares the existing repeat checks and the added reflection check
+on 198 deliveries from eleven camera recordings. The portable check
+recounts paired localization and can verify all reported endpoints
+from the videos with a separate FFmpeg readback.
+
 The [local writing baseline replay](writing-local-baseline-transfer-2026-11-16.md#replay)
 recounts matches and ordinary alerts across two layouts for a retained
 panel and a separate source-group panel. It verifies that the app selects

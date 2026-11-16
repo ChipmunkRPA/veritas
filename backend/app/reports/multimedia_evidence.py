@@ -1277,6 +1277,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                               "; ".join(f"frame {f['anchor']['frame_index']} at {f['anchor']['stream_time_s']:.6f} s" for f in packet["frames"]))
             if repeat := row["picture_sequence"]:
                 label = ("Ranges at two playback speeds " if repeat.get("frame_steps") else
+                         "Mirrored ranges " if repeat.get("spatial_transform") == "horizontal_reflection" else
                          "Reversed ranges " if repeat.get("order") == "reverse" else "Repeated ranges ")
                 row["locator"] = label + " and ".join(
                     f"{repeat[side]['start_stream_s']:.3f}-{repeat[side]['end_stream_s']:.3f} s" for side in ("first", "second"))

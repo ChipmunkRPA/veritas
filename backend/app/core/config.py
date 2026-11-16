@@ -316,6 +316,7 @@ class Settings(BaseSettings):
     video_face_spatial_cut_context: bool = False  # Explain supported surrounding-picture changes on qualified HEVC clips.
     video_scene_return_review: bool = False  # Show brief picture changes independently of any face finding.
     video_retimed_sequence_review: bool = False  # Inspect copies with two-to-one playback after existing repeat checks.
+    video_reflected_sequence_review: bool = False  # Inspect left-to-right footage repeats on supported native clocks.
     video_face_short_window_review: bool = False  # Check overlapping native windows on supported eight-second HEVC clips.
     video_face_short_carrier_review: bool = False  # Check qualified four-second VP9 WebM or eight-second H.264 MP4 and VP9 WebM.
     video_face_short_avc_review: bool = False  # Trial: review brief face changes in qualified four-second H.264 MP4.

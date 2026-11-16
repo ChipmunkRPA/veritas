@@ -20,7 +20,7 @@ DECODE_TIMEOUT_S = 8.0
 def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Callable[[], None] | None = None,
             remaining_s: float | None = None, sequence_review: bool = False,
             motion_encoding: tuple[str | None, str | None] | None = None, mouth_review: bool = False,
-            retimed_review: bool = False) -> dict:
+            retimed_review: bool = False, reflected_review: bool = False) -> dict:
     """Try an extended native scan under the same deadline, retaining a completed opening result."""
     opening_limit = binding.frame_limit(len(table), table.width, table.height)
     tb = table.tb
@@ -117,6 +117,14 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                         cover[picture_sequence.MOTION_RETIMED_KEY] = picture_motion.scan(
                             observed[:retimed_limit], descriptors[:retimed_limit], tb, motion_encoding, None,
                             source_profile=retimed_profile, schema=schema)
+            if reflected_review and (remaining_s is None or remaining_s - (time.monotonic() - started) > 1.0):
+                schema = picture_sequence.MOTION_REFLECTED_SCHEMA
+                reflected_profile = picture_motion.profile(table, motion_encoding, schema=schema)
+                if reflected_profile is not None:
+                    reflected_limit = reflected_profile[1]
+                    cover[picture_sequence.MOTION_REFLECTED_KEY] = picture_motion.scan(
+                        observed[:reflected_limit], descriptors[:reflected_limit], tb, motion_encoding, exact_pair,
+                        source_profile=reflected_profile, schema=schema)
         mouth_prefix = observed[:mouth_count]
         if (mouth_profile and cover["frames_scanned"] >= mouth_count and len(mouth_frames) == mouth_count
                 and all(point is not None for point, _ in mouth_prefix)):

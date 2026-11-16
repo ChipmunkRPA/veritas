@@ -88,6 +88,53 @@ def _pair(values, frame_rate, *, reverse=False):
     return result
 
 
+def _reflected_pair(values, frame_rate, parameters):
+    values = np.stack(values)
+    columns, rows = parameters["luma_grid"]
+    reflected = values.reshape(-1, rows, columns)[:, :, ::-1].copy().reshape(values.shape)
+    norm = (values * values).mean(axis=1)
+    summed_norm = norm[:, None] + norm[None, :]
+    pixels = values.shape[1]
+    direct_distance = summed_norm - 2 * (values @ values.T) / pixels
+    reflected_distance = summed_norm - 2 * (values @ reflected.T) / pixels
+    close = ((reflected_distance <= parameters["maximum_picture_rms"] ** 2)
+             & (direct_distance >= parameters["minimum_unflipped_picture_rms"] ** 2))
+
+    motion = np.diff(values, axis=0)
+    motion -= motion.mean(axis=1, keepdims=True)
+    reflected_motion = motion.reshape(-1, rows, columns)[:, :, ::-1].copy().reshape(motion.shape)
+    rms = np.sqrt((motion * motion).mean(axis=1))
+    stronger = np.maximum(rms[:, None], rms[None, :])
+    weaker = np.minimum(rms[:, None], rms[None, :])
+    cosine = (motion @ reflected_motion.T / pixels) / np.maximum(rms[:, None] * rms[None, :], 1e-12)
+    supported = ((weaker >= parameters["minimum_motion_rms"])
+                 & (cosine >= parameters["minimum_motion_cosine"])
+                 & (weaker >= parameters["minimum_motion_rms_ratio"] * stronger))
+    linked = close[:-1, :-1] & close[1:, 1:]
+
+    minimum_edges = parameters["minimum_supporting_edges"]
+    minimum_span = frame_rate * binding.MIN_SPAN
+    best, result = None, None
+    for lag in range(int(minimum_span) + 1, len(values) - int(minimum_span)):
+        matches = linked.diagonal(lag)
+        changes = supported.diagonal(lag)
+        for segment in _segments(np.flatnonzero(matches), 1):
+            for chain in _segments(segment[changes[segment]], parameters["maximum_support_edge_step"]):
+                for first, start in enumerate(chain[:max(0, len(chain) - minimum_edges + 1)]):
+                    # Both endpoints of the first range must precede the second range.
+                    stop = int(np.searchsorted(chain, start + lag - 1, side="left"))
+                    end = int(chain[stop - 1]) + 1
+                    width = end - start
+                    if (stop - first < minimum_edges or width < minimum_span
+                            or stop - first < parameters["minimum_support_fraction"] * width):
+                        continue
+                    rank = width, -int(start), -int(start + lag)
+                    if best is None or rank > best:
+                        best = rank
+                        result = int(start), end, int(start + lag), [int(i - start) for i in chain[first:stop]]
+    return result
+
+
 def scan(observations, values, tb, encoding, exact_pair, *, source_profile, schema=binding.MOTION_SCHEMA):
     frame_rate, limit = source_profile
     result = {"schema": schema, "status": "unavailable", "reason": "source_clock", "frames_scanned": 0,
@@ -98,7 +145,8 @@ def scan(observations, values, tb, encoding, exact_pair, *, source_profile, sche
     step = Fraction(1, frame_rate)
     if any(tick is None for tick in ticks) or any((b - a) * tb != step for a, b in pairwise(ticks)):
         return result
-    if exact_pair is not None:
+    reflected = schema == binding.MOTION_REFLECTED_SCHEMA
+    if exact_pair is not None and not reflected:
         return result | {"reason": "exact_sequence"}
     reverse = schema == binding.MOTION_REVERSE_SCHEMA
     retimed = schema == binding.MOTION_RETIMED_SCHEMA
@@ -107,7 +155,8 @@ def scan(observations, values, tb, encoding, exact_pair, *, source_profile, sche
         if match is not None:
             occurrences, count, supports = match
     else:
-        match = _pair(values, frame_rate, reverse=reverse)
+        match = (_reflected_pair(values, frame_rate, result["parameters"]) if reflected
+                 else _pair(values, frame_rate, reverse=reverse))
         if match is not None:
             start, end, other, supports = match
             count = end - start + 1
@@ -127,4 +176,6 @@ def scan(observations, values, tb, encoding, exact_pair, *, source_profile, sche
         pair["order"] = "reverse"
     if retimed:
         pair["frame_steps"] = dict(zip(("first", "second"), (stride for _, stride in occurrences), strict=True))
+    if reflected:
+        pair["spatial_transform"] = binding.HORIZONTAL_REFLECTION
     return result | {"status": "matched", "reason": None, "frames_scanned": len(ticks), "pair": pair}

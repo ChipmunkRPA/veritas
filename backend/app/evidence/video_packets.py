@@ -574,6 +574,10 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
         packet_id = picture_sequence.MOTION_RETIMED_PACKET_ID
         title = "Footage repeated at two playback speeds"
         selection = "longest_two_to_one_pair_of_similar_moving_sequences"
+    if review["schema"] == picture_sequence.MOTION_REFLECTED_SCHEMA:
+        packet_id = picture_sequence.MOTION_REFLECTED_PACKET_ID
+        title = "Similar footage flipped left to right"
+        selection = "longest_pair_of_similar_reflected_moving_sequences"
     motion_limit = review["frames_scanned"] if motion else None
     frames, images, labels, assets = [], [], [], {}
     for number, (occurrence, role, index, pts, digest) in enumerate(picture_sequence.endpoints(pair), 1):
@@ -832,8 +836,9 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             "unavailable", picture_hold_binding.HISTORICAL, source["time_base"]))
     match = hold["match"] if hold is not None else None
     picture_reviews = document.get("picture_hold", {})
-    sequence_matches = [picture_reviews[key] for key in ("sequence_review", "motion_sequence_review", picture_sequence.REVERSE_KEY,
-                                                         picture_sequence.MOTION_REVERSE_KEY, picture_sequence.MOTION_RETIMED_KEY)
+    sequence_keys = ("sequence_review", "motion_sequence_review", picture_sequence.REVERSE_KEY, picture_sequence.MOTION_REVERSE_KEY,
+                     picture_sequence.MOTION_RETIMED_KEY, picture_sequence.MOTION_REFLECTED_KEY)
+    sequence_matches = [picture_reviews[key] for key in sequence_keys
                         if picture_reviews.get(key, {}).get("pair") is not None]
     mouth_review = picture_reviews.get("mouth_local_hold", {})
     mouth_match = mouth_review.get("match")

@@ -375,9 +375,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     hold = evidence.get("picture_hold") or {}
     sequence = hold.get("sequence_review")
     reverse_sequence = hold.get(picture_sequence.REVERSE_KEY)
-    motion = hold.get("motion_sequence_review")
-    reverse_motion = hold.get(picture_sequence.MOTION_REVERSE_KEY)
-    retimed_motion = hold.get(picture_sequence.MOTION_RETIMED_KEY)
+    motion_records = [(key, record) for key, _, _ in picture_sequence.MOTION_REVIEWS if (record := hold.get(key)) is not None]
     local_mouth = hold.get("mouth_local_hold")
     mouth_limit = 0
     if local_mouth is not None:
@@ -389,14 +387,13 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     motion_encoding = None
     motion_limit = 0
     motion_reads = []
-    if motion is not None or reverse_motion is not None or retimed_motion is not None:
+    if motion_records:
         delivery = delivery if delivery is not None else probe_container(original)
         motion_encoding = delivery.get("codec"), delivery.get("pix_fmt")
-        if retimed_motion is not None and face_return.source_carrier(original) != "mp4":
+        if hold.get(picture_sequence.MOTION_RETIMED_KEY) is not None and face_return.source_carrier(original) != "mp4":
             raise ValueError("Retimed sequence review requires a verified MP4 carrier")
-        for record, exact_review in ((motion, sequence), (reverse_motion, reverse_sequence), (retimed_motion, sequence)):
-            if record is None:
-                continue
+        for key, record in motion_records:
+            exact_review = reverse_sequence if key == picture_sequence.MOTION_REVERSE_KEY else sequence
             profile = picture_motion.profile(table, motion_encoding, schema=record["schema"])
             if profile is None or record["encoding"] != list(motion_encoding):
                 raise ValueError("The original video differs from its motion comparison source profile")
@@ -622,4 +619,4 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             + (f" Verified the timing review's soundtrack and {len(timing_frames)} native mouth crops."
                if lip_timing.get("inputs") else "")
             + (" Recomputed the exact moving-sequence comparison." if sequence is not None else "")
-            + (" Replayed the motion-aware moving-sequence check." if motion is not None else ""))
+            + (" Replayed the motion-aware moving-sequence checks." if motion_records else ""))

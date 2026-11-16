@@ -24,6 +24,7 @@ MOTION_SCHEMA = "chipmunk.video-motion-sequence/1"
 MOTION_EXTENDED_SCHEMA = "chipmunk.video-motion-sequence/2"
 MOTION_REVERSE_SCHEMA = "chipmunk.video-reverse-motion-sequence/1"
 MOTION_RETIMED_SCHEMA = "chipmunk.video-retimed-motion-sequence/1"
+MOTION_REFLECTED_SCHEMA = "chipmunk.video-reflected-motion-sequence/1"
 MOTION_SCHEMAS = frozenset({MOTION_SCHEMA, MOTION_EXTENDED_SCHEMA})
 MOTION_PACKET_ID = "VPR02"
 MOTION_REVERSE_KEY = "reverse_motion_sequence_review"
@@ -31,9 +32,20 @@ MOTION_REVERSE_PACKET_ID = "VPR04"
 MOTION_RETIMED_KEY = "retimed_motion_sequence_review"
 MOTION_RETIMED_PACKET_ID = "VPR05"
 MOTION_RETIMED_CONTEXT = "Playback speed changes are common in ordinary editing. This check carries zero weight in the AI estimate."
+MOTION_REFLECTED_KEY = "reflected_motion_sequence_review"
+MOTION_REFLECTED_PACKET_ID = "VPR06"
+HORIZONTAL_REFLECTION = "horizontal_reflection"
+MOTION_REFLECTED_CONTEXT = ("Ordinary editing can reuse footage in a mirrored orientation. The comparison leaves the order of creation "
+                            "undetermined and carries zero weight in the AI estimate.")
+MOTION_REVIEWS = (
+    ("motion_sequence_review", MOTION_PACKET_ID, MOTION_SCHEMAS),
+    (MOTION_REVERSE_KEY, MOTION_REVERSE_PACKET_ID, frozenset({MOTION_REVERSE_SCHEMA})),
+    (MOTION_RETIMED_KEY, MOTION_RETIMED_PACKET_ID, frozenset({MOTION_RETIMED_SCHEMA})),
+    (MOTION_REFLECTED_KEY, MOTION_REFLECTED_PACKET_ID, frozenset({MOTION_REFLECTED_SCHEMA})),
+)
 MOTION_PROFILES = {(320, 180): (20, 180), (640, 360): (25, 225)}
 MOTION_EXTENDED_PROFILES = {(640, 360): (25, 450)}
-MOTION_RETIMED_PROFILES = {(640, 360): (25, 225)}
+MOTION_360P_PROFILES = {(640, 360): (25, 225)}
 MOTION_ENCODINGS = {("h264", "yuv420p"), ("vp9", "yuv420p")}
 MOTION_PARAMETERS = {
     "luma_grid": [40, 30], "maximum_picture_rms": 1.6, "minimum_motion_rms": .4,
@@ -48,8 +60,8 @@ def motion_profile(dimensions, schema):
         return MOTION_PROFILES.get(dimensions)
     if schema == MOTION_EXTENDED_SCHEMA:
         return MOTION_EXTENDED_PROFILES.get(dimensions)
-    if schema == MOTION_RETIMED_SCHEMA:
-        return MOTION_RETIMED_PROFILES.get(dimensions)
+    if schema in {MOTION_RETIMED_SCHEMA, MOTION_REFLECTED_SCHEMA}:
+        return MOTION_360P_PROFILES.get(dimensions)
     return None
 
 
@@ -61,6 +73,9 @@ def motion_parameters(schema, rate):
     parameters = MOTION_PARAMETERS | {"frame_rate": rate}
     if schema == MOTION_RETIMED_SCHEMA:
         parameters["native_frame_steps"] = [1, 2]
+    if schema == MOTION_REFLECTED_SCHEMA:
+        parameters.update(maximum_picture_rms=2.4, minimum_unflipped_picture_rms=4.8,
+                          spatial_transform=HORIZONTAL_REFLECTION)
     return parameters
 
 
@@ -173,6 +188,9 @@ def scan(observations, tb: Fraction, *, reverse=False):
 
 
 def observation(pair):
+    if pair.get("spatial_transform") == HORIZONTAL_REFLECTION:
+        return (f"Two separate ranges contain {pair['frame_count']} visually similar pictures after a left-to-right flip. "
+                f"{len(pair['supporting_edge_offsets'])} matching picture changes support the comparison.")
     if steps := pair.get("frame_steps"):
         faster, slower = ("first", "second") if steps["first"] == 1 else ("second", "first")
         return (f"The {faster} range shows {pair['frame_count']} matching pictures at twice the speed of the {slower} range. "
@@ -190,6 +208,8 @@ def observation(pair):
 
 
 def interpretation(pair):
+    if pair.get("spatial_transform") == HORIZONTAL_REFLECTION:
+        return MOTION_REFLECTED_CONTEXT
     if "frame_steps" in pair:
         return MOTION_RETIMED_CONTEXT
     return REVERSE_CONTEXT if pair.get("order") == "reverse" else CONTEXT
@@ -223,10 +243,11 @@ def _close(number, expected):
 
 
 def validate(cover, document):
-    packet_ids = {PACKET_ID, MOTION_PACKET_ID, REVERSE_PACKET_ID, MOTION_REVERSE_PACKET_ID, MOTION_RETIMED_PACKET_ID}
+    packet_ids = {PACKET_ID, REVERSE_PACKET_ID, *(packet_id for _, packet_id, _ in MOTION_REVIEWS)}
+    schemas = {SCHEMA, REVERSE_SCHEMA}.union(*(schemas for _, _, schemas in MOTION_REVIEWS))
     packets = [p for p in document["packets"] if p.get("id") in packet_ids or "picture_sequence" in p
                or p.get("claim_scope") == "paired_frame_sequences"
-               or p.get("semantics") in MOTION_SCHEMAS | {SCHEMA, REVERSE_SCHEMA, MOTION_REVERSE_SCHEMA, MOTION_RETIMED_SCHEMA}]
+               or p.get("semantics") in schemas]
     _require(all(p.get("id") in packet_ids for p in packets), "Unexpected repeated sequence packet")
     exact = cover.get("sequence_review")
     reverse = cover.get(REVERSE_KEY)
@@ -235,54 +256,48 @@ def validate(cover, document):
                  "Repeated sequence lacks completed coverage")
     _require(reverse is None or exact is not None, "Reversed sequence lacks a completed native scan")
     _validate_pair(exact, document["source"], cover["frames_scanned"] if exact is not None else 0,
-                   [p for p in packets if p["id"] == PACKET_ID])
+                   [p for p in packets if p["id"] == PACKET_ID], schemas={SCHEMA})
     _validate_pair(reverse, document["source"], cover["frames_scanned"] if reverse is not None else 0,
-                   [p for p in packets if p["id"] == REVERSE_PACKET_ID], reverse=True)
-    for key, packet_id, exact_review in (("motion_sequence_review", MOTION_PACKET_ID, exact),
-                                         (MOTION_REVERSE_KEY, MOTION_REVERSE_PACKET_ID, reverse),
-                                         (MOTION_RETIMED_KEY, MOTION_RETIMED_PACKET_ID, exact)):
+                   [p for p in packets if p["id"] == REVERSE_PACKET_ID], schemas={REVERSE_SCHEMA})
+    for key, packet_id, schemas in MOTION_REVIEWS:
         motion = cover.get(key)
-        backwards = key == MOTION_REVERSE_KEY
-        retimed = key == MOTION_RETIMED_KEY
-        if retimed and motion is not None:
+        if key == MOTION_RETIMED_KEY and motion is not None:
             _require(all(record and record["pair"] is None for record in (
                 exact, reverse, cover.get("motion_sequence_review"), cover.get(MOTION_REVERSE_KEY),
             )), "Retimed sequence requires completed earlier repeat comparisons without a match")
         source = document["source"]
-        rate = _validate_motion_scope(motion, source, exact_review,
-                                      cover["frames_scanned"] if motion is not None else 0, reverse=backwards, retimed=retimed)
+        rate = _validate_motion_scope(motion, source, reverse if key == MOTION_REVERSE_KEY else exact,
+                                      cover["frames_scanned"] if motion is not None else 0, schemas=schemas)
         _validate_pair(motion, source, motion["frames_scanned"] if motion is not None else 0,
-                       [p for p in packets if p["id"] == packet_id], motion_rate=rate, reverse=backwards, retimed=retimed)
+                       [p for p in packets if p["id"] == packet_id], schemas=schemas, motion_rate=rate)
 
 
-def _validate_motion_scope(record, source, exact, scanned, *, reverse, retimed):
+def _validate_motion_scope(record, source, exact, scanned, *, schemas):
     if record is None:
         return None
     schema = record["schema"]
-    schemas = {MOTION_RETIMED_SCHEMA} if retimed else {MOTION_REVERSE_SCHEMA} if reverse else MOTION_SCHEMAS
     profile = motion_profile((source["width"], source["height"]), schema)
     _require(schema in schemas and profile is not None, "Motion sequence has unsupported source dimensions or method")
     rate, limit = profile
     _require(exact is not None and scanned >= limit and record["parameters"] == motion_parameters(schema, rate)
              and motion_encoding_allowed(schema, record["encoding"]), "Motion sequence has unsupported source scope or parameters")
+    exact_takes_priority = exact["status"] == "matched" and schema != MOTION_REFLECTED_SCHEMA
     if record["status"] == "unavailable":
         _require(schema != MOTION_EXTENDED_SCHEMA and record["frames_scanned"] == 0 and (record["reason"] == "source_clock"
-                 or (record["reason"] == "exact_sequence" and exact["status"] == "matched")),
+                 or (record["reason"] == "exact_sequence" and exact_takes_priority)),
                  "Motion sequence has an invalid skipped outcome")
     else:
-        _require(record["frames_scanned"] == limit and record["reason"] is None and exact["status"] != "matched",
+        _require(record["frames_scanned"] == limit and record["reason"] is None and not exact_takes_priority,
                  "Motion sequence has invalid measured coverage")
     return rate
 
 
-def _validate_pair(record, source, scanned, packets, *, motion_rate=None, reverse=False, retimed=False):
+def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=None):
     if record is None:
         _require(not packets, "Repeated sequence lacks a recorded scan")
         return
     motion = motion_rate is not None
     schema = record["schema"]
-    schemas = ({MOTION_RETIMED_SCHEMA} if retimed else {MOTION_REVERSE_SCHEMA} if reverse else MOTION_SCHEMAS) if motion else {
-        REVERSE_SCHEMA if reverse else SCHEMA}
     _require(schema in schemas,
              "Repeated sequence lacks completed coverage")
     if record["status"] != "matched":
@@ -290,11 +305,17 @@ def _validate_pair(record, source, scanned, packets, *, motion_rate=None, revers
                  "Repeated sequence evidence disagrees with its status")
         return
     pair = record["pair"]
+    reverse = schema in {REVERSE_SCHEMA, MOTION_REVERSE_SCHEMA}
+    retimed = schema == MOTION_RETIMED_SCHEMA
+    reflected = schema == MOTION_REFLECTED_SCHEMA
     _require(len(packets) == 1 and packets[0].get("picture_sequence") == pair,
              "Repeated sequence omits the recorded pair")
     _require(("supporting_edge_offsets" in pair) == motion and pair.get("order") == ("reverse" if reverse else None),
              "Repeated sequence has the wrong matching method")
     _require(("frame_steps" in pair) == retimed, "Repeated sequence has unexpected frame strides")
+    _require(("spatial_transform" not in pair and not reflected)
+             or (reflected and pair.get("spatial_transform") == HORIZONTAL_REFLECTION),
+             "Repeated sequence has the wrong spatial transform")
     strides = pair.get("frame_steps", {"first": 1, "second": 1})
     if retimed:
         _require(set(strides) == {"first", "second"} and all(type(step) is int for step in strides.values())
@@ -363,7 +384,8 @@ def _validate_pair(record, source, scanned, packets, *, motion_rate=None, revers
 
 
 def validate_clock(record, table_pts: Sequence[int], interpolated: Sequence[int], *, tb: Fraction):
-    if record and record["schema"] in {MOTION_EXTENDED_SCHEMA, MOTION_REVERSE_SCHEMA, MOTION_RETIMED_SCHEMA} and record["status"] != "unavailable":
+    fixed_clock = {MOTION_EXTENDED_SCHEMA, MOTION_REVERSE_SCHEMA, MOTION_RETIMED_SCHEMA, MOTION_REFLECTED_SCHEMA}
+    if record and record["schema"] in fixed_clock and record["status"] != "unavailable":
         limit = record["frames_scanned"]
         pts = table_pts[:limit]
         step = Fraction(1, record["parameters"]["frame_rate"])

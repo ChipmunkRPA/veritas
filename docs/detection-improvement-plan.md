@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Mirrored footage in one upload](video-mirrored-sequence-2026-11-16.md)
+  locates both source ranges in 38 of 44 single-encode deliveries
+  and 16 of 22 twice-encoded deliveries. It adds zero flags on 132
+  ordinary and other-repeat controls. The local check shows both
+  ranges and four original pictures with zero AI-confidence weight.
+
 - [Writing changes within a document](writing-local-baseline-transfer-2026-11-16.md)
   add exact source locations when a passage stands out within the same
   file. On 40 new source-matched pairs, the added check found five more

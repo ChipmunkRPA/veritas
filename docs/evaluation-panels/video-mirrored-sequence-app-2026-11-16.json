@@ -1,0 +1,132 @@
+{
+  "browser": {
+    "cases": [
+      {
+        "fixture": "rain-later_mirrored-h264-on",
+        "matched": true,
+        "seek_s": 5.96,
+        "source_frames": [
+          38,
+          54,
+          149,
+          165
+        ]
+      },
+      {
+        "fixture": "rain-original-h264-on",
+        "matched": false
+      },
+      {
+        "fixture": "rain-in_place_mirror-h264-on",
+        "matched": false
+      },
+      {
+        "fixture": "rain-later_mirrored-vp9-on",
+        "matched": true,
+        "seek_s": 5.96,
+        "source_frames": [
+          38,
+          54,
+          149,
+          165
+        ]
+      },
+      {
+        "fixture": "rain-original-vp9-on",
+        "matched": false
+      },
+      {
+        "fixture": "rain-in_place_mirror-vp9-on",
+        "matched": false
+      }
+    ],
+    "page_errors": 0
+  },
+  "cases": [
+    {
+      "enabled": false,
+      "fixture": "rain-later_mirrored-h264-off",
+      "ranges_s": [],
+      "signed_original_verified": false,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "198161e4adade058890b03c6637c6f430c711e2faa1565a4206c1d74f7a66798"
+    },
+    {
+      "enabled": true,
+      "fixture": "rain-later_mirrored-h264-on",
+      "ranges_s": [
+        [
+          1.52,
+          2.16
+        ],
+        [
+          5.96,
+          6.6
+        ]
+      ],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 4,
+      "source_sha256": "198161e4adade058890b03c6637c6f430c711e2faa1565a4206c1d74f7a66798"
+    },
+    {
+      "enabled": true,
+      "fixture": "rain-original-h264-on",
+      "ranges_s": [],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "31261c190e6a6fb2668aec41c611939cae9c2dd8614d28df30ca6a124a9e9b23"
+    },
+    {
+      "enabled": true,
+      "fixture": "rain-in_place_mirror-h264-on",
+      "ranges_s": [],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "e2ee78d2243dc0eebbcc04c7af3884cff91eb81c1f7d13ed806a958ea9b832dd"
+    },
+    {
+      "enabled": false,
+      "fixture": "rain-later_mirrored-vp9-off",
+      "ranges_s": [],
+      "signed_original_verified": false,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "78fcd915899833c29fa68be46db8b077c24fa912736fde4faced0477d65a9a31"
+    },
+    {
+      "enabled": true,
+      "fixture": "rain-later_mirrored-vp9-on",
+      "ranges_s": [
+        [
+          1.52,
+          2.16
+        ],
+        [
+          5.96,
+          6.6
+        ]
+      ],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 4,
+      "source_sha256": "78fcd915899833c29fa68be46db8b077c24fa912736fde4faced0477d65a9a31"
+    },
+    {
+      "enabled": true,
+      "fixture": "rain-original-vp9-on",
+      "ranges_s": [],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "c12565749ca416c362c7189f4cfdc8665a9cac7f39e3c600695053d977946827"
+    },
+    {
+      "enabled": true,
+      "fixture": "rain-in_place_mirror-vp9-on",
+      "ranges_s": [],
+      "signed_original_verified": true,
+      "source_frames_in_pdf": 0,
+      "source_sha256": "a8fe04bd86a6799298b38d1b2c6c0595336580644435d2d0eaa95caa854939c3"
+    }
+  ],
+  "paid_analyses": 8,
+  "unchanged_assessment_on_matched_pairs": true,
+  "unpaid_jobs": 0
+}

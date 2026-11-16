@@ -125,6 +125,28 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText(/Ordinary editing and polished writing can produce a similar response/)).toBeTruthy()
   })
 
+  it('shows separate writing ranges and keeps an empty review inconclusive', () => {
+    const coverage = (status: 'flagged' | 'no_ranges'): DocumentEvidenceSet['coverage'] => ({
+      writing_passage_intervals: {
+        schema: 'document-writing-passage-intervals/1', status, authorship_confidence_contribution: 0,
+        ranges: status === 'flagged' ? [
+          { start: 11, end: 23, source_start: 12, source_end: 24, preview: 'First region' },
+          { start: 41, end: 54, source_start: 45, source_end: 58, preview: 'Second region' },
+        ] : [],
+      },
+    })
+    const { rerender } = show({ ...document, packets: [], coverage: coverage('flagged') })
+    const section = within(screen.getByRole('region', { name: 'Possible AI-like writing passages' }))
+    expect(section.getByText('[12, 24)')).toBeTruthy()
+    expect(section.getByText('[45, 58)')).toBeTruthy()
+    expect(section.getByText('Second region')).toBeTruthy()
+    rerender(<MemoryRouter><MultimediaEvidenceContent set={{
+      ...document, packets: [], coverage: coverage('no_ranges'),
+    }} token="signed token" mediaReady /></MemoryRouter>)
+    expect(section.getByText(/Authorship remains undetermined/)).toBeTruthy()
+    expect(section.queryByText('Second region')).toBeNull()
+  })
+
   it.each([
     [{ kind: 'docx', paragraph_index: 0, body_path: [0] }, /Word body paragraph 1/],
     [{ kind: 'email', mime_part: '1.2' }, /decoded email MIME part 1\.2/],

@@ -25,6 +25,7 @@ from app.evidence import (
     document_native_locations,
     document_paragraph_priority,
     document_passage_coverage,
+    document_passage_intervals,
     document_passage_position,
     document_pdf_visibility,
     document_percentage_consistency,
@@ -144,11 +145,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_pdf_visibility.verify_source(evidence, doc.meta)
     document_word_visibility.verify_source(evidence, doc.meta.get(document_word_visibility.KEY))
     document_invisible_characters.verify_source(evidence, text, mapping, doc.meta)
-    if document_character_review.KEY in coverage:
+    if document_character_review.KEY in coverage or document_passage_intervals.KEY in coverage:
         from app.detectors.text.pipeline import segment_within
 
-        document_character_review.verify_source(evidence, text, mapping, doc.meta,
-                                                sentences=[asdict(row) for row in segment_within(doc)])
+        sentences = [asdict(row) for row in segment_within(doc)]
+        document_character_review.verify_source(evidence, text, mapping, doc.meta, sentences=sentences)
+        document_passage_intervals.verify_source(evidence, text, mapping, sentences)
     document_chat_markers.verify_source(evidence, text, mapping, doc.meta)
     from app.evidence import document_check_coverage
 
@@ -233,6 +235,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     )
     character_detail = (" Verified the character-adjusted writing input hashes and original sentence positions."
                         if document_character_review.KEY in coverage else "")
+    interval_detail = (" Verified writing passage selection from the saved responses and positions in the original text."
+                       if document_passage_intervals.KEY in coverage else "")
     pdf_visibility = coverage.get(document_pdf_visibility.KEY, {})
     pdf_replacement_detail = (" Verified the PDF copyable-text comparison and retained page locations."
                               if "replacement_examined_pages" in pdf_visibility else "")
@@ -243,5 +247,5 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
-            f"{tracked_detail}{word_visibility_detail}{invisible_detail}{character_detail}{pdf_replacement_detail}"
+            f"{tracked_detail}{word_visibility_detail}{invisible_detail}{character_detail}{interval_detail}{pdf_replacement_detail}"
             f"{pdf_covered_detail}{percentage_detail}{marker_detail}")

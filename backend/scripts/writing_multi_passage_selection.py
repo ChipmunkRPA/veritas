@@ -8,12 +8,19 @@ from collections import defaultdict
 from pathlib import Path
 from statistics import median
 
+from app.detectors.text.passage_intervals import (
+    CAP,
+    combine_responses,
+    interval_candidates,
+    length_bucket,
+    normalize,
+    probability_log_odds,
+    select_intervals,
+)
 from scripts import writing_multi_passage_panel as source
 
 ARMS = ("context_centers", "isolated_centers", "isolated_intervals", "combined_intervals")
 POINTS = {"tighter": .90, "wider": .75}
-LONGEST = 40
-CAP = 6
 DESIGN = {
     "score_views": "Current three-sentence context and isolated sentence responses. Standardize each view by genre and "
                    "input length against ordinary validation sentences only.",
@@ -32,15 +39,6 @@ def _quantile(rows, fraction):
     return sorted(rows)[max(0, math.ceil(len(rows) * fraction) - 1)]
 
 
-def _logit(value):
-    bounded = min(1 - 1e-6, max(1e-6, value))
-    return math.log(bounded / (1 - bounded))
-
-
-def _width(value):
-    return 0 if value < 16 else 1 if value < 33 else 2
-
-
 def _inputs(variant, view):
     sentences = variant["sentences"]
     for i, value in enumerate(variant[view]):
@@ -48,7 +46,7 @@ def _inputs(variant, view):
             yield None
             continue
         span = [sentences[i]] if view == "isolated" else sentences[max(0, i-1):i+2]
-        yield _width(sum(item[-1] for item in span)), _logit(value)
+        yield length_bucket(sum(item[-1] for item in span)), probability_log_odds(value)
 
 
 def _normalizers(works):
@@ -75,52 +73,8 @@ def _normalized(variant, genre, stats, view):
         else:
             length, score = item
             values = stats.get((genre, view, length))
-            adapted.append(None if values is None else max(-4., min(4., (score - values[0]) / values[1])))
+            adapted.append(None if values is None else normalize(score, *values))
     return adapted
-
-
-def _reconstruct(isolated, context):
-    fitted = list(isolated)
-    constraints = []
-    for i, reading in enumerate(context):
-        indices = range(max(0, i-1), min(len(fitted), i+2))
-        if reading is not None and all(isolated[j] is not None for j in indices):
-            constraints.append((reading, indices))
-    for _ in range(20):
-        step = [0. if anchor is None else .55 * (anchor - old) for anchor, old in zip(isolated, fitted, strict=True)]
-        for reading, indices in constraints:
-            adjustment = (reading - sum(fitted[j] for j in indices) / len(indices)) / len(indices)
-            for j in indices:
-                step[j] += adjustment
-        fitted = [None if item is None else max(-4., min(4., item + .4 * delta))
-                  for item, delta in zip(fitted, step, strict=True)]
-    return fitted
-
-
-def _ranges(values, *, runs):
-    if not runs:
-        return [(i, i + 1, score) for i, score in enumerate(values) if score is not None]
-    candidates = []
-    for start, opening in enumerate(values):
-        if opening is None:
-            continue
-        nearby_left = values[start - 1] if start else None
-        score_sum, positive = 0., 0
-        for end in range(start + 1, min(start + LONGEST, len(values)) + 1):
-            closing = values[end - 1]
-            if closing is None:
-                break
-            score_sum += closing
-            positive += closing > 0
-            width = end - start
-            if 2 * positive < width:
-                continue
-            nearby_right = values[end] if end < len(values) else None
-            left = max(0., opening - nearby_left) if nearby_left is not None else 0.
-            right = max(0., closing - nearby_right) if nearby_right is not None else 0.
-            score = score_sum / math.sqrt(width) + .15 * (min(left, 3.) + min(right, 3.))
-            candidates.append((start, end, score))
-    return candidates
 
 
 def _select_centers(proposals, point):
@@ -136,34 +90,14 @@ def _select_centers(proposals, point):
     return sorted(sorted(selected, key=lambda row: (-row[2], row[0]))[:CAP])
 
 
-def _select_ranges(proposals, point, count):
-    endings = defaultdict(list)
-    for start, end, score in proposals:
-        if score > point:
-            endings[end].append((start, score))
-    # Each cell stores the best cumulative excess over the point for the
-    # prefix and available range count, with one untreated sentence between ranges.
-    table = [[(0., ()) for _ in range(CAP + 1)] for _ in range(count + 1)]
-    for end in range(1, count + 1):
-        for length in range(1, CAP + 1):
-            best = table[end-1][length]
-            for start, score in endings[end]:
-                previous, spans = table[max(0, start-1)][length-1]
-                added = previous + score - point
-                if added > best[0]:
-                    best = added, (*spans, (start, end, score))
-            table[end][length] = best
-    return table[count][CAP][1]
-
-
 def proposals(variant, genre, stats):
     isolated = _normalized(variant, genre, stats, "isolated")
     context = _normalized(variant, genre, stats, "context")
     return {
-        ARMS[0]: _ranges(context, runs=False),
-        ARMS[1]: _ranges(isolated, runs=False),
-        ARMS[2]: _ranges(isolated, runs=True),
-        ARMS[3]: _ranges(_reconstruct(isolated, context), runs=True),
+        ARMS[0]: [(i, i + 1, score) for i, score in enumerate(context) if score is not None],
+        ARMS[1]: [(i, i + 1, score) for i, score in enumerate(isolated) if score is not None],
+        ARMS[2]: interval_candidates(isolated),
+        ARMS[3]: interval_candidates(combine_responses(isolated, context)),
     }
 
 
@@ -171,7 +105,7 @@ def _choice(arm, variant, candidates, point):
     if arm.endswith("centers"):
         selected = _select_centers(candidates, point)
     else:
-        selected = _select_ranges(candidates, point, len(variant["sentences"]))
+        selected = select_intervals(candidates, point, len(variant["sentences"]))
     readings = []
     for start, end, value in selected:
         first, last = variant["sentences"][start], variant["sentences"][end - 1]

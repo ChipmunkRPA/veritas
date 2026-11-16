@@ -65,7 +65,9 @@ are not public screening promises or calibrated population probabilities.
   layouts. With a shared calibration, combined intervals locate 24/98
   passages versus 11/98 with the current context responses. Ordinary
   flags rise from 4/49 to 6/49, and unmatched suggestions within mixed
-  excerpts fall from 48 to four in each layout.
+  excerpts fall from 48 to four in each layout. The optional local
+  review shows excerpts and original positions for supported plain
+  English uploads in the evidence view, PDF and JSON.
 
 - [Clean-to-noisy speech localization](audio-clean-teacher-transfer-2026-11-16.md)
   compares a supervised teacher using matched clean speech with a

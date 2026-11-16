@@ -318,6 +318,19 @@ XML body index {{ mark.body_index }}, child path {{ mark.child_path | join(' / '
 {% if evidence.get('passage_position') %}
 {% include 'sections/document_passage_position.html.j2' %}
 {% endif %}
+{% if evidence.get('writing_passage_intervals') %}
+{% set intervals = evidence.writing_passage_intervals %}
+<div class="multimedia-acoustic-summary" id="document-writing-passage-intervals">
+<h3>{{ intervals.title }}</h3>
+<p>{{ intervals.explanation }}</p>
+<p>{{ intervals.status_note }}</p>
+{% for range in intervals.ranges %}
+<p>Original text characters <span class="mono">[{{ range.source_start }}, {{ range.source_end }})</span>.</p>
+<blockquote>{{ range.preview }}{% if range.end - range.start > range.preview | length %}…{% endif %}</blockquote>
+{% endfor %}
+<p class="caption">Positions are zero-based with the end excluded. JSON pointer <span class="mono">/coverage/writing_passage_intervals</span>.</p>
+</div>
+{% endif %}
 {% if evidence.get('writing_agreement') %}
 <h3>Second writing check</h3>
 <p class="caption">The second check revisits the exact text behind up to six AI-like responses. This evidence carries zero weight in the overall assessment.</p>

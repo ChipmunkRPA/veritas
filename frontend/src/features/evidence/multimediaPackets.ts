@@ -473,6 +473,12 @@ export interface DocumentEvidenceSet extends SetBase {
     local_passage_coverage?: DocumentPassageCoverage;
     unselected_passage_responses?: DocumentUnselectedResponses;
     passage_position_review?: DocumentPassagePosition;
+    writing_passage_intervals?: {
+      schema: 'document-writing-passage-intervals/1';
+      status: 'flagged' | 'no_ranges' | 'unassessed';
+      ranges: { start: number; end: number; source_start: number; source_end: number; preview: string }[];
+      authorship_confidence_contribution: 0;
+    };
     original_text_locations?: { schema: 'document-original-text-locations/1'; packets: Record<string, DocumentOriginalTextLocation[]> };
     writing_second_check?: { schema: 'document-writing-second-check/1' | 'document-writing-second-check/2' | 'document-writing-second-check/3' | 'document-writing-second-check/4' | 'document-writing-second-check/5' | 'document-writing-second-check/6'; authorship_confidence_contribution: 0;
       body_spans?: { start: number; end: number }[];

@@ -163,6 +163,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
             document_character_review,
             document_chat_markers,
             document_invisible_characters,
+            document_passage_intervals,
             document_tracked_changes,
             document_word_visibility,
         )
@@ -174,6 +175,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
                 or source.get(document_word_visibility.COMMITMENT) != document_word_visibility.from_result(result)
                 or source.get(document_invisible_characters.COMMITMENT) != document_invisible_characters.from_result(result)
                 or source.get(document_character_review.COMMITMENT) != document_character_review.result_commitment(result)
+                or source.get(document_passage_intervals.COMMITMENT) != document_passage_intervals.result_commitment(result)
                 or source.get(document_chat_markers.COMMITMENT) != document_chat_markers.from_result(result)):
             raise ObjectIntegrityError("Document evidence does not match the published extraction commitments")
 
@@ -568,6 +570,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_native_locations,
         document_paragraph_priority,
         document_passage_coverage,
+        document_passage_intervals,
         document_passage_position,
         document_pdf_visibility,
         document_percentage_consistency,
@@ -613,6 +616,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_word_visibility.verify_source(document, decoded["meta"].get(document_word_visibility.KEY), frozen=True)
         document_invisible_characters.verify_source(document, text, mapping, decoded["meta"])
         document_character_review.verify_source(document, text, mapping, decoded["meta"], sentences=decoded["sentences"])
+        document_passage_intervals.verify_source(document, text, mapping, decoded["sentences"])
         document_chat_markers.verify_source(document, text, mapping, decoded["meta"])
         document_native_locations.validate(document)
         document_scope.validate_card_selection(document, mapping)
@@ -1019,6 +1023,7 @@ def _voice_interval_view(interval: dict, rate: int, video_origin_s: float | None
 
 
 def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[str, Any] | None:
+    from app.evidence import document_passage_intervals
     from app.evidence.document_email_contexts import KEY as EMAIL_INPUT_SCOPE
     from app.evidence.document_native_locations import KEY as ORIGINAL_TEXT_LOCATIONS
     from app.evidence.document_tracked_changes import KEY as TRACKED
@@ -1509,6 +1514,12 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             if kind == "document" else None,
             "passage_position": _passage_position_view(document.get("coverage") or {}, withheld=withheld)
             if kind == "document" else None,
+            "writing_passage_intervals": (
+                {**intervals, "title": document_passage_intervals.TITLE, "explanation": document_passage_intervals.EXPLANATION,
+                 "status_note": document_passage_intervals.STATUS[intervals["status"]]}
+                if kind == "document" and not withheld
+                and (intervals := (document.get("coverage") or {}).get(document_passage_intervals.KEY)) else None
+            ),
             "writing_agreement": _writing_agreement_view(document.get("coverage") or {}) if kind == "document" else None,
             "email_body_alternatives": (document.get("coverage") or {}).get("email_body_alternatives") if kind == "document" else None,
             "email_classifier_input_scope": (document.get("coverage") or {}).get(EMAIL_INPUT_SCOPE) if kind == "document" else None,

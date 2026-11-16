@@ -153,6 +153,11 @@ class _SequenceClassifier(Detector):
                     rows = []
                 if rows:
                     details[character_review.STAGED] = rows
+        if self.ISOLATED_PARAGRAPH_REVIEW and settings.text_passage_intervals_review:
+            from app.detectors.text.adapters import interval_review
+
+            if intervals := interval_review.measure(clf, doc, sents, p_win, ctx, self.spec, model_revisions):
+                details[interval_review.KEY] = intervals
         return DetectorResult(
             status="ok", unit_scores=units, aggregate=aggregate,
             observed=f"{self.SCORE_KIND} {p_doc:.3f} (word-weighted mean over {len(chunks)} chunk(s)); {len(sents)} sentence "

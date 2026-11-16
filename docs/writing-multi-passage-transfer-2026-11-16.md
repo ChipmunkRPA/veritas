@@ -118,14 +118,40 @@ and cleared one. The two-layout gain holds across both source collections.
 Many labeled rewrites remain unlocated. The genre-specific gains depend
 on knowing the source genre. These samples cover two English prose
 collections, six recorded generator backends and two text layouts.
-The evidence supports evaluating a supplemental local review with
-the pooled calibration. Authorship calibration on typical customer
-documents needs broader independent evidence.
+The local review uses the shared wider comparison. Authorship
+calibration on typical customer documents needs broader independent
+evidence.
 
 A separate audit rebuilt the 304 deliveries from the private source plan
 and independently checked 17,290 context input hashes, every selected
 range and its overlap with the labels. The portable replay uses the
 public numeric receipt. [Measured cases and locked protocol](evaluation-panels/writing-multi-passage-transfer-2026-11-16.json.gz)
+
+## Local app
+
+Enable `VERITAS_TEXT_PASSAGE_INTERVALS_REVIEW=true` in development
+with candidate text scoring and three-sentence context. Full and
+Deep analyses can check plain English text with 12 to 128 sentences.
+The check gives each selected passage an excerpt and original decoded
+character range. The evidence view, PDF and JSON use the same record.
+A check with no selected passage leaves authorship undetermined.
+The optional reading carries zero weight in automated assessments.
+
+The shared serving arithmetic reproduced the frozen wider selections
+on all 196 held deliveries. The evidence receipt retains the
+original protocol hashes from before the shared code was extracted.
+The signed export can replay the selection from the saved responses
+and confirm the excerpts and character positions against the original
+upload. Reproducing model inference uses the separate scoring command
+below.
+
+The native app identified **[114, 1978)** and **[4631, 7340)** in a
+held economic report, overlapping its two labeled rewrites. The
+source-matched original had no selected passages. The same rewritten
+upload produced the same automated assessment with the option off and
+on. All three simulated USD 9.99 checkouts queued the analysis after
+payment confirmation. The evidence API, PDF, JSON and signed bundle
+agreed on both original ranges. [Local application receipt](evaluation-panels/writing-multi-passage-app-2026-11-16.json)
 
 ## Replay
 
@@ -155,4 +181,13 @@ runner=backend/.venv/bin/python
 "$runner" -B -m scripts.writing_multi_passage_panel prepare "$sources" "$run/plan.json.gz"
 "$runner" -B -m scripts.writing_multi_passage_panel score "$run/plan.json.gz" "$snapshot" "$run/measured.json.gz"
 python3 -B -S -m scripts.writing_multi_passage_selection "$run/measured.json.gz" --write "$run/result.json.gz"
+```
+
+Replay the isolated paid flow from the same pinned source directory.
+Use a fresh application output directory. The run uses a simulated
+Stripe checkout and includes an ordinary counterpart and a rollback
+comparison.
+
+```sh
+"$runner" -B -m scripts.writing_multi_passage_app "$sources" "$run/paid-app"
 ```

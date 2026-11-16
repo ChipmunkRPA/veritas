@@ -46,6 +46,7 @@ from app.evidence import (
     document_chat_markers,
     document_check_coverage,
     document_invisible_characters,
+    document_passage_intervals,
     document_pdf_visibility,
     document_tracked_changes,
     document_word_visibility,
@@ -58,6 +59,7 @@ DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chu
 BIBLIOGRAPHY_POLICY = "writing_bibliography_review_enabled"
 CLAUSE_POLICY = "writing_within_sentence_language_review_enabled"
 CHARACTER_POLICY = "writing_character_adjusted_review_enabled"
+INTERVAL_POLICY = "writing_passage_intervals_review_enabled"
 PRIMARY_DETECTORS = TEXT_PRIMARY_DETECTORS  # v0.3 used the fine-tune whenever it was installed
 SECONDARY_DETECTOR = "txt.hf.hello_simpleai"
 BINOCULARS_DETECTOR = "txt.binoculars"
@@ -158,7 +160,7 @@ def current_provenance_output(output: Any, *, expected: bool) -> bool:
 
 
 def detect(ctx: StageContext) -> dict[str, Any]:
-    from app.detectors.text.adapters import agreement, character_review
+    from app.detectors.text.adapters import agreement, character_review, interval_review
     from app.engine.boundary import Cancelled
 
     decoded = ctx.outputs["decode"]
@@ -200,17 +202,19 @@ def detect(ctx: StageContext) -> dict[str, Any]:
         except (KeyError, ValueError, TypeError) as error:
             ctx.log.warning("writing_character_review.omitted", error_type=type(error).__name__)
     return {**detected, language_scope.KEY: scope, CLAUSE_POLICY: clause_review, CHARACTER_POLICY: character_enabled,
+            INTERVAL_POLICY: interval_review.enabled(),
             **({language_scope.CLAUSE_KEY: witness} if witness else {})}
 
 
 def current_detect_output(output: Any) -> bool:
     """Require an explicit coverage decision before reusing fresh detector outputs."""
-    from app.detectors.text.adapters import character_review
+    from app.detectors.text.adapters import character_review, interval_review
 
     return (isinstance(output, dict) and isinstance(output.get("detectors"), list)
             and language_scope.KEY in output
             and output.get(CLAUSE_POLICY, False) is language_scope.clause_review_enabled()
             and output.get(CHARACTER_POLICY, False) is character_review.enabled()
+            and output.get(INTERVAL_POLICY, False) is interval_review.enabled()
             and output[language_scope.KEY] in (None, language_scope.ENGLISH, *language_scope.MESSAGES))
 
 
@@ -586,6 +590,12 @@ def publish(ctx: StageContext) -> dict[str, Any]:
     verified_credentials = provenance_gate.stop(ctx)
     if not verified_credentials and (reading := detected.get(document_character_review.KEY)):
         result.manifest.sampling[document_character_review.KEY] = reading
+    if not verified_credentials:
+        for entry in detected.get("detectors", []):
+            if (entry["detector_id"] == document_screening.DETECTOR and entry["status"] == "ok"
+                    and (intervals := (entry.get("details") or {}).get(document_passage_intervals.KEY))):
+                result.manifest.sampling[document_passage_intervals.KEY] = intervals
+                break
     if writing_checks := document_check_coverage.capture(
         detected.get("detectors", []), PRIMARY_DETECTORS, BINOCULARS_DETECTOR,
         language=detected.get(language_scope.KEY), verified_credentials=verified_credentials,

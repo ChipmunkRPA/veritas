@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Separate rewritten passages in one document](writing-multi-passage-transfer-2026-11-16.md)
+  compares 49 held originals and their two-rewrite versions in two
+  layouts. With a shared calibration, combined intervals locate 24/98
+  passages versus 11/98 with the current context responses. Ordinary
+  flags rise from 4/49 to 6/49, and unmatched suggestions within mixed
+  excerpts fall from 48 to four in each layout.
+
 - [Clean-to-noisy speech localization](audio-clean-teacher-transfer-2026-11-16.md)
   compares a supervised teacher using matched clean speech with a
   shifted-target control. Its aligned fallback adds four useful

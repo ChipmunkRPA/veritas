@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [separate writing passages replay](writing-multi-passage-transfer-2026-11-16.md#replay)
+recounts one-to-one passage matches and ordinary alerts on 49 held
+excerpts. It compares both published and layout-neutral delivery and
+records the same comparison with one calibration shared across genres.
+
 The [clean-to-noisy speech replay](audio-clean-teacher-transfer-2026-11-16.md#replay)
 reconstructs all six fits and recalculates paired localization and
 false flags on 460 deliveries, including a separate measured room

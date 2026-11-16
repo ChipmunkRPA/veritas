@@ -616,6 +616,8 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
     if retimed:
         limitations = (f"The check compares whole pictures in the first {motion_limit} native frames. "
                        "It tests a two-to-one speed ratio and can miss changes in framing or other speed ratios.")
+        if review["schema"] == picture_sequence.MOTION_RETIMED_COMPRESSED_SCHEMA:
+            limitations = "The comparison groups nearby picture detail to reduce the effects of recompression. " + limitations
         measurements = [{"label": f"{label} range duration", "value": pair["span_s"] * pair["frame_steps"][side], "unit": "seconds"}
                         for side, label in (("first", "First"), ("second", "Second"))]
     elif review["schema"] in picture_sequence.MOTION_CROP_SCHEMAS:

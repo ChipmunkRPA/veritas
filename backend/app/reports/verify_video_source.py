@@ -553,6 +553,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                                         exact_pair, source_profile=profile, schema=picture_sequence.MOTION_CROP_SCHEMA)
             if fixed["status"] != "no_match":
                 raise ValueError("The aligned copy review displaced a fixed crop result")
+        if record["schema"] == picture_sequence.MOTION_RETIMED_COMPRESSED_SCHEMA:
+            prior = picture_motion.scan(hold_observations[:limit], values[:limit], table.tb, motion_encoding,
+                                        exact_pair, source_profile=profile, schema=picture_sequence.MOTION_RETIMED_SCHEMA)
+            if prior["status"] != "no_match":
+                raise ValueError("The broader retiming comparison displaced an earlier match")
         reproduced = picture_motion.scan(hold_observations[:limit], values[:limit], table.tb, motion_encoding,
                                          exact_pair, source_profile=profile, schema=record["schema"])
         if canonical_hash(reproduced) != canonical_hash(record):

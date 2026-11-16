@@ -131,9 +131,13 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                     retimed_profile = picture_motion.profile(table, motion_encoding, schema=schema)
                     if retimed_profile is not None and source_carrier(path) == "mp4":
                         retimed_limit = retimed_profile[1]
-                        cover[picture_sequence.MOTION_RETIMED_KEY] = picture_motion.scan(
-                            observed[:retimed_limit], descriptors[:retimed_limit], tb, motion_encoding, None,
-                            source_profile=retimed_profile, schema=schema)
+                        pictures, grid = observed[:retimed_limit], descriptors[:retimed_limit]
+                        timing = picture_motion.scan(pictures, grid, tb, motion_encoding, None,
+                                                     source_profile=retimed_profile, schema=schema)
+                        if timing["status"] == "no_match" and (remaining_s is None or remaining_s - (time.monotonic() - started) > 1.0):
+                            timing = picture_motion.scan(pictures, grid, tb, motion_encoding, None, source_profile=retimed_profile,
+                                                         schema=picture_sequence.MOTION_RETIMED_COMPRESSED_SCHEMA)
+                        cover[picture_sequence.MOTION_RETIMED_KEY] = timing
             if reflected_review and (remaining_s is None or remaining_s - (time.monotonic() - started) > 1.0):
                 schema = picture_sequence.MOTION_REFLECTED_SCHEMA
                 reflected_profile = picture_motion.profile(table, motion_encoding, schema=schema)

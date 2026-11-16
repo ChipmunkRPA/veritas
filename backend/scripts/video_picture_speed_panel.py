@@ -10,7 +10,6 @@ from contextlib import closing
 from pathlib import Path
 
 import numpy as np
-
 from app.detectors.video import picture_motion, picture_speed
 from app.detectors.video.decode import decode_frames, probe_frames
 from app.evidence import picture_sequence as binding
@@ -77,7 +76,7 @@ def _encode(path, pictures):
     ], input=memoryview(pictures), capture_output=True, check=True, timeout=25)
 
 
-def build(output, sources):
+def build(output, sources, *, cases=CASES):
     output.mkdir()
     planned = []
     for source in sources:
@@ -87,7 +86,7 @@ def build(output, sources):
             raise ValueError(f"Source hash differs for {source['id']}")
         pictures = _input_pictures(path, source["offset_s"])
         early, late = 25 + int(digest[:2], 16) % 16, 132 + int(digest[2:4], 16) % 16
-        for role in CASES:
+        for role in cases:
             name = f"{source['id']}-{role}.mp4"
             destination = output / name
             original_role = role.removesuffix("_tandem")

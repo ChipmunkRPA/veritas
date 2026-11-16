@@ -15,19 +15,32 @@ try {
   const cases = []
   for (const row of input.cases) {
     const cropped = row.mode === 'crop'
+    const retimed = row.mode === 'retimed'
+    const labels = retimed ? {
+      heading: 'Footage repeated at two playback speeds', packet: 'VPR05',
+      empty: `No match at a two-to-one speed ratio was found in the first ${row.checked_frames} frames.`,
+      link: 'Inspect the faster and slower source ranges', title: 'Footage repeated at two playback speeds',
+    } : cropped ? {
+      heading: 'Cropped footage check', packet: 'VPR07',
+      empty: `No qualifying cropped repeat was found in the first ${row.checked_frames} frames.`,
+      link: 'Inspect both time ranges and matching crops', title: 'Similar footage shown with a tighter crop',
+    } : {
+      heading: 'Mirrored footage check', packet: 'VPR06',
+      empty: `No mirrored repeat was found in the first ${row.checked_frames} frames.`,
+      link: 'Inspect both source ranges and frames', title: 'Similar footage flipped left to right',
+    }
     await page.goto(`${input.url}/analyses/${row.analysis_id}/media-evidence?view=plain`)
-    const coverage = page.getByRole('region', { name: cropped ? 'Cropped footage check' : 'Mirrored footage check' })
+    const coverage = page.getByRole('region', { name: labels.heading })
     await coverage.waitFor()
-    const finding = page.locator(cropped ? '#media-evidence-VPR07' : '#media-evidence-VPR06')
+    const finding = page.locator(`#media-evidence-${labels.packet}`)
     if (!row.matched) {
-      const subject = cropped ? 'qualifying cropped' : 'mirrored'
-      await coverage.getByText(`No ${subject} repeat was found in the first ${row.checked_frames} frames.`, { exact: true }).waitFor()
+      await coverage.getByText(labels.empty, { exact: true }).waitFor()
       assert.equal(await finding.count(), 0)
       cases.push({ fixture: row.name, matched: false })
       continue
     }
-    await coverage.getByRole('link', { name: cropped ? 'Inspect both time ranges and matching crops' : 'Inspect both source ranges and frames' }).click()
-    await finding.getByRole('heading', { name: cropped ? 'Similar footage shown with a tighter crop' : 'Similar footage flipped left to right' }).waitFor()
+    await coverage.getByRole('link', { name: labels.link }).click()
+    await finding.getByRole('heading', { name: labels.title }).waitFor()
     const textSeconds = value => `${value.toFixed(3)} s`
     for (const range of row.ranges_s) {
       await finding.getByText(range.map(textSeconds).join('–'), { exact: true }).waitFor()

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [recompressed retiming replay](video-retimed-compression-2026-11-16.md#application-scope-and-replay)
+recounts 180 deliveries from 12 camera recordings and can verify the exact
+source clocks and RGB endpoint hashes. Both passes use the same source
+videos and authored edit ranges.
+
 The [subpixel crop alignment replay](video-crop-alignment-2026-11-16.md#replay)
 recounts all four comparisons on 260 deliveries from ten camera
 recordings. It can recheck the timing of each result with FFprobe and

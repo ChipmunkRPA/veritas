@@ -25,6 +25,8 @@ MOTION_SCHEMA = "chipmunk.video-motion-sequence/1"
 MOTION_EXTENDED_SCHEMA = "chipmunk.video-motion-sequence/2"
 MOTION_REVERSE_SCHEMA = "chipmunk.video-reverse-motion-sequence/1"
 MOTION_RETIMED_SCHEMA = "chipmunk.video-retimed-motion-sequence/1"
+MOTION_RETIMED_COMPRESSED_SCHEMA = "chipmunk.video-retimed-motion-sequence/2"
+MOTION_RETIMED_SCHEMAS = frozenset({MOTION_RETIMED_SCHEMA, MOTION_RETIMED_COMPRESSED_SCHEMA})
 MOTION_REFLECTED_SCHEMA = "chipmunk.video-reflected-motion-sequence/1"
 MOTION_REFLECTED_HD_SCHEMA = "chipmunk.video-reflected-motion-sequence/2"
 MOTION_CROP_SCHEMA = "chipmunk.video-cropped-motion-sequence/1"
@@ -50,7 +52,7 @@ MOTION_CROP_CONTEXT = ("Ordinary editing can reuse the same footage with a tight
 MOTION_REVIEWS = (
     ("motion_sequence_review", MOTION_PACKET_ID, MOTION_SCHEMAS),
     (MOTION_REVERSE_KEY, MOTION_REVERSE_PACKET_ID, frozenset({MOTION_REVERSE_SCHEMA})),
-    (MOTION_RETIMED_KEY, MOTION_RETIMED_PACKET_ID, frozenset({MOTION_RETIMED_SCHEMA})),
+    (MOTION_RETIMED_KEY, MOTION_RETIMED_PACKET_ID, MOTION_RETIMED_SCHEMAS),
     (MOTION_REFLECTED_KEY, MOTION_REFLECTED_PACKET_ID, MOTION_REFLECTED_SCHEMAS),
     (MOTION_CROP_KEY, MOTION_CROP_PACKET_ID, MOTION_CROP_SCHEMAS),
 )
@@ -80,7 +82,7 @@ def motion_profile(dimensions, schema):
         return MOTION_PROFILES.get(dimensions)
     if schema == MOTION_EXTENDED_SCHEMA:
         return MOTION_EXTENDED_PROFILES.get(dimensions)
-    if schema in {MOTION_RETIMED_SCHEMA, MOTION_REFLECTED_SCHEMA}:
+    if schema in {*MOTION_RETIMED_SCHEMAS, MOTION_REFLECTED_SCHEMA}:
         return MOTION_360P_PROFILES.get(dimensions)
     if schema in MOTION_CROP_SCHEMAS:
         return MOTION_CROP_PROFILES.get(dimensions)
@@ -90,14 +92,17 @@ def motion_profile(dimensions, schema):
 def motion_encoding_allowed(schema, encoding):
     if schema == MOTION_REFLECTED_HD_SCHEMA:
         return tuple(encoding or ()) in HD_ENCODINGS
-    return tuple(encoding or ()) in (MOTION_ENCODINGS if schema not in {MOTION_RETIMED_SCHEMA, *MOTION_CROP_SCHEMAS}
+    return tuple(encoding or ()) in (MOTION_ENCODINGS if schema not in {*MOTION_RETIMED_SCHEMAS, *MOTION_CROP_SCHEMAS}
                                      else {("h264", "yuv420p")})
 
 
 def motion_parameters(schema, rate):
     parameters = MOTION_PARAMETERS | {"frame_rate": rate}
-    if schema == MOTION_RETIMED_SCHEMA:
+    if schema in MOTION_RETIMED_SCHEMAS:
         parameters["native_frame_steps"] = [1, 2]
+    if schema == MOTION_RETIMED_COMPRESSED_SCHEMA:
+        parameters.update(luma_grid=[20, 15], maximum_picture_rms=2.45,
+                          minimum_motion_rms=.35, minimum_motion_rms_ratio=.60)
     if schema in MOTION_REFLECTED_SCHEMAS:
         parameters.update(maximum_picture_rms=2.4, minimum_unflipped_picture_rms=4.8,
                           spatial_transform=HORIZONTAL_REFLECTION)
@@ -426,7 +431,7 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
         return
     pair = record["pair"]
     reverse = schema in {REVERSE_SCHEMA, MOTION_REVERSE_SCHEMA}
-    retimed = schema == MOTION_RETIMED_SCHEMA
+    retimed = schema in MOTION_RETIMED_SCHEMAS
     reflected = schema in MOTION_REFLECTED_SCHEMAS
     cropped = schema in MOTION_CROP_SCHEMAS
     hd = schema == MOTION_REFLECTED_HD_SCHEMA
@@ -535,7 +540,7 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
 
 
 def validate_clock(record, table_pts: Sequence[int], interpolated: Sequence[int], *, tb: Fraction):
-    fixed_clock = {MOTION_EXTENDED_SCHEMA, MOTION_REVERSE_SCHEMA, MOTION_RETIMED_SCHEMA, MOTION_REFLECTED_SCHEMA, *MOTION_CROP_SCHEMAS}
+    fixed_clock = {MOTION_EXTENDED_SCHEMA, MOTION_REVERSE_SCHEMA, *MOTION_RETIMED_SCHEMAS, MOTION_REFLECTED_SCHEMA, *MOTION_CROP_SCHEMAS}
     if record and record["schema"] in fixed_clock and record["status"] != "unavailable":
         limit = record["frames_scanned"]
         pts = table_pts[:limit]

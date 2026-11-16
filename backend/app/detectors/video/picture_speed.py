@@ -8,8 +8,12 @@ import numpy as np
 from app.evidence.picture_sequence import MIN_SPAN, MOTION_PARAMETERS
 
 
-def _linked_movement(values):
-    parameters = MOTION_PARAMETERS
+def coarse_grid(values):
+    """Average adjacent cells of the native 40 by 30 luminance grid."""
+    return np.stack(values).reshape(-1, 15, 2, 20, 2).mean(axis=(2, 4)).reshape(-1, 300)
+
+
+def _linked_movement(values, parameters):
     norm = (values * values).mean(axis=1)
     distances = norm[:, None] + norm[None, :] - 2 * values @ values.T / values.shape[1]
     close = distances <= parameters["maximum_picture_rms"] ** 2
@@ -30,11 +34,11 @@ def _linked_movement(values):
     return linked, moving & linked
 
 
-def find(values, frame_rate):
-    linked, supported = _linked_movement(np.stack(values))
-    minimum = MOTION_PARAMETERS["minimum_supporting_edges"]
+def find(values, frame_rate, *, parameters=MOTION_PARAMETERS):
+    linked, supported = _linked_movement(np.stack(values), parameters)
+    minimum = parameters["minimum_supporting_edges"]
     min_edges = math.ceil(frame_rate * MIN_SPAN)
-    max_step = MOTION_PARAMETERS["maximum_support_edge_step"]
+    max_step = parameters["maximum_support_edge_step"]
     best, match = None, None
     for parity in range(2):
         connections = linked[parity::2]

@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Retimed footage after stronger recompression](video-retimed-compression-2026-11-16.md)
+  adds a second search using broader picture detail when the existing check
+  finds no match. On 12 separate recordings it increased correct ranges
+  from 2 to 29 of 48 after a second encode, with zero alerts on 60 ordinary
+  controls. The result shows both source ranges and four original frames.
+
 - [Facial detail after recompression](video-face-detail-comparison-2026-11-16.md)
   compared a frozen patch-based signal on 24 fresh targets with two swap
   generators and separate camera controls. On strong recompression the wider

@@ -163,7 +163,7 @@ def scan(observations, values, tb, encoding, exact_pair, *, source_profile, sche
     if exact_pair is not None and not (reflected or cropped):
         return result | {"reason": "exact_sequence"}
     reverse = schema == binding.MOTION_REVERSE_SCHEMA
-    retimed = schema == binding.MOTION_RETIMED_SCHEMA
+    retimed = schema in binding.MOTION_RETIMED_SCHEMAS
     if cropped:
         match, alignment = _crop_match(values, frame_rate, schema)
         if match is not None:
@@ -171,7 +171,9 @@ def scan(observations, values, tb, encoding, exact_pair, *, source_profile, sche
             count = match.ranges[0][1] - match.ranges[0][0] + 1
             supports = list(match.support)
     elif retimed:
-        match = picture_speed.find(values, frame_rate)
+        if schema == binding.MOTION_RETIMED_COMPRESSED_SCHEMA:
+            values = picture_speed.coarse_grid(values)
+        match = picture_speed.find(values, frame_rate, parameters=result["parameters"])
         if match is not None:
             occurrences, count, supports = match
     else:

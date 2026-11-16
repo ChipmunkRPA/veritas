@@ -270,6 +270,7 @@ class Settings(BaseSettings):
     document_paired_boundary_review: bool = False  # Optional paired TXT and Word check beside one preserved paragraph break.
     document_paired_separate_review: bool = False  # Review independently mapped revisions in paired plain-text drafts.
     document_paired_independent_review: bool = False  # Optional fallback for independently matched sentences and source locations.
+    document_paired_block_review: bool = False  # Compare one or two changed sentences between exact surrounding sentences.
     document_email_alternatives_review: bool = False  # Compare two bounded body renditions of one EML.
     document_percentage_consistency: bool = False  # Optional local comparison of repeated percentage statements in mapped text.
     document_archive_comparison_enabled: bool = False  # Authenticated development-only public archive comparison.

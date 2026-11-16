@@ -30,6 +30,7 @@ WORD_INDEPENDENT_SCHEMA = "chipmunk.paired-writing-review/8"
 PDF_INDEPENDENT_SCHEMA = "chipmunk.paired-writing-review/9"
 PDF_CONTINUATION_SCHEMA = "chipmunk.paired-writing-review/10"
 MIXED_DRAFT_SCHEMA = "chipmunk.paired-writing-review/11"
+BLOCK_DRAFT_SCHEMA = "chipmunk.paired-writing-review/12"
 ANCHORED_DRAFT_SCHEMA = "chipmunk.document-revision-comparison/7"
 MAX_REVISIONS = 4
 MULTIPLE_SCOPE = ("Checks separate changed sentences in short English text drafts. Each comparison requires its own "
@@ -58,6 +59,11 @@ MIXED_DRAFT_SCOPE = (
     "and verified source positions. Word needs ordinary body paragraphs. PDF needs visible, selectable text in a clear "
     "single-column reading order. "
     "Only the listed sentences were checked. The responses are uncalibrated and carry zero authorship confidence weight."
+)
+BLOCK_DRAFT_SCOPE = (
+    "Compares changed wording between two unchanged sentences. Each draft can have one or two changed sentences "
+    "between those anchors. The review covers verified TXT, Word and selectable PDF text. "
+    "The responses are uncalibrated and carry zero authorship confidence weight."
 )
 # Second-highest genuine work response in the frozen paired center transfer.
 BOUNDARY_POINT = 0.12844311183234092
@@ -504,8 +510,98 @@ def pdf_anchored_revisions(comparison: dict, earlier: str, later: str, layouts: 
     return current, False
 
 
+def _changed_blocks(texts, views):
+    old, new = map(_source, views)
+    if old is None or new is None:
+        return []
+    old_doc, old_units = old
+    new_doc, new_units = new
+    before = Counter(unit.text for unit in old_units)
+    after = Counter(unit.text for unit in new_units)
+    current = {unit.text: i for i, unit in enumerate(new_units) if after[unit.text] == 1}
+    anchors = [(i, current[unit.text]) for i, unit in enumerate(old_units)
+               if before[unit.text] == 1 and unit.text in current]
+    if any(a >= b for (_, a), (_, b) in zip(anchors, anchors[1:])):
+        return []
+
+    result = []
+    for (a, b), (c, d) in zip(anchors, anchors[1:]):
+        if (c-a, d-b) not in {(2, 3), (3, 2), (3, 3)}:
+            continue
+        left = old_units[a:c+1]
+        right = new_units[b:d+1]
+        if left[0].paragraph != left[-1].paragraph or right[0].paragraph != right[-1].paragraph:
+            continue
+        if any(unit.text in after for unit in left[1:-1]) or any(unit.text in before for unit in right[1:-1]):
+            continue
+        earlier, old_input = _context(old_doc, left, texts[0])
+        later, new_input = _context(new_doc, right, texts[1])
+        old_tokens = tokens(texts[0], [(earlier["start"], earlier["end"])])
+        new_tokens = tokens(texts[1], [(later["start"], later["end"])])
+        # A punctuation-only sentence split is a wording comparison, with
+        # too little substance for a separate writing response.
+        lexical = [[word.casefold() for word, _, _ in rows if any(char.isalnum() for char in word)]
+                   for rows in (old_tokens, new_tokens)]
+        if lexical[0] == lexical[1]:
+            continue
+        wording = differences(old_tokens, new_tokens)
+        result.append(PairedInput(old_input, new_input, {"earlier": earlier, "later": later, "wording_changes": wording}))
+    return result
+
+
+def _block_layouts(comparison, layouts):
+    draft_format = comparison["format"]
+    if draft_format == "mixed":
+        return (comparison["earlier"]["format"], comparison["later"]["format"]), layouts
+    if draft_format == "plain_text":
+        return (draft_format, draft_format), (None, None)
+    return (draft_format, draft_format), layouts if draft_format in ("docx", "pdf") else None
+
+
+def _bind_block(comparison, geometry):
+    _link_changes(comparison, geometry)
+    if not geometry.get("change_ids"):
+        return False
+    return all(
+        geometry[side]["start"] <= change[side]["start"] <= change[side]["end"] <= geometry[side]["end"]
+        for change in comparison["changes"] if change["id"] in geometry["change_ids"]
+        for side in ("earlier", "later") if change[side] is not None
+    )
+
+
+def block_anchored_revisions(comparison: dict, earlier: str, later: str,
+                             layouts: MixedLayouts | None) -> list[PairedInput]:
+    """Match joined or split changed sentences and keep existing single matches."""
+    formats, layouts = _block_layouts(comparison, layouts)
+    if layouts is None or not comparison["changes"] or comparison.get("relocated_passages"):
+        return []
+    texts = earlier, later
+    sources = tuple(document_revision_pdf.continuation_text(text, layout) if fmt == "pdf" else text
+                    for text, layout, fmt in zip(texts, layouts, formats, strict=True))
+    blocks = []
+    for candidate in _changed_blocks(texts, sources):
+        geometry = candidate.geometry
+        if (_bind_block(comparison, geometry)
+                and all(_bind_focus(geometry[side], layout, fmt, geometry["wording_changes"], side, continuations=True)
+                        for side, layout, fmt in zip(("earlier", "later"), layouts, formats, strict=True))):
+            blocks.append(candidate)
+    if not blocks:
+        return []
+    singles = _map_anchored(comparison, texts, layouts, formats, continuations="pdf" in formats)
+    for candidate in singles:
+        _link_changes(comparison, candidate.geometry)
+    candidates = sorted([*singles, *blocks], key=lambda row: row.geometry["later"]["start"])
+    if len(candidates) > MAX_REVISIONS or any(
+        a.geometry[side]["end"] > b.geometry[side]["start"]
+        for a, b in zip(candidates, candidates[1:]) for side in ("earlier", "later")
+    ):
+        return []
+    return candidates
+
+
 def multiple_result(candidates: list[PairedInput], measured: list[list[dict] | None] | None = None, *,
-                    independent: bool = False, draft_format: str = "plain_text", pdf_continuations: bool = False) -> dict:
+                    independent: bool = False, draft_format: str = "plain_text", pdf_continuations: bool = False,
+                    blocks: bool = False) -> dict:
     if draft_format == "mixed" and not candidates and measured is None:
         return {"schema": MIXED_DRAFT_SCHEMA, "status": "outside_scope", "scope": MIXED_DRAFT_SCOPE,
                 "summary": "No changed sentence could be matched and verified in both drafts for the paired writing check.",
@@ -537,6 +633,13 @@ def multiple_result(candidates: list[PairedInput], measured: list[list[dict] | N
                        f"Both checks gave a stronger AI-like response for {increases} of the scored sentences.")
         else:
             summary = "The changed sentences were located in both drafts. Writing responses were unavailable."
+    if blocks:
+        schema, scope = BLOCK_DRAFT_SCHEMA, BLOCK_DRAFT_SCOPE
+        if checked:
+            summary = (f"Scored {checked} of {len(candidates)} mapped passages. "
+                       f"Both checks gave a stronger AI-like response for {increases} of the scored passages.")
+        else:
+            summary = "The changed passages were located in both drafts. Writing responses were unavailable."
     return {"schema": schema,
             "status": "joint_increase" if increases else
             "no_joint_increase" if checked == len(candidates) else "unavailable",
@@ -618,6 +721,10 @@ def verify(comparison: dict, earlier: str, later: str, recorded: dict, *,
            mixed_layouts: MixedLayouts | None = None) -> str:
     """Rebuild the source scope and check saved response arithmetic without inference."""
     schema = recorded.get("schema")
+    if schema == BLOCK_DRAFT_SCHEMA:
+        layouts = {"mixed": mixed_layouts, "docx": word_layouts, "pdf": pdf_layouts}.get(comparison["format"])
+        candidates = block_anchored_revisions(comparison, earlier, later, layouts)
+        return _verify_revisions(recorded, candidates, independent=False, draft_format=comparison["format"], blocks=True)
     if (schema == MIXED_DRAFT_SCHEMA) != (comparison["format"] == "mixed"):
         raise ValueError("The paired writing check uses a different draft format")
     if schema == MIXED_DRAFT_SCHEMA:
@@ -659,7 +766,7 @@ def verify(comparison: dict, earlier: str, later: str, recorded: dict, *,
     return expected["status"]
 
 
-def _verify_revisions(recorded, candidates, *, independent, draft_format, pdf_continuations=False):
+def _verify_revisions(recorded, candidates, *, independent, draft_format, pdf_continuations=False, blocks=False):
     revisions = recorded.get("revisions")
     if candidates:
         if (not isinstance(revisions, list) or len(revisions) != len(candidates)
@@ -669,7 +776,7 @@ def _verify_revisions(recorded, candidates, *, independent, draft_format, pdf_co
     else:
         responses = None
     expected = multiple_result(candidates, responses, independent=independent, draft_format=draft_format,
-                               pdf_continuations=pdf_continuations)
+                               pdf_continuations=pdf_continuations, blocks=blocks)
     if json.dumps(recorded, sort_keys=True, allow_nan=False) != json.dumps(expected, sort_keys=True, allow_nan=False):
         raise ValueError("Mapped revisions differ from the source positions or saved responses")
     return expected["status"]

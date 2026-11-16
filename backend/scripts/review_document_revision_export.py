@@ -20,6 +20,7 @@ from app.evidence.document_revision_word_alignment import SCHEMA as ALIGNED_WORD
 from app.evidence.document_revision_word_tables import SCHEMA as WORD_TABLES_SCHEMA
 from app.evidence.document_revision_writing import (
     ANCHORED_DRAFT_SCHEMA,
+    BLOCK_DRAFT_SCHEMA,
     INDEPENDENT_SCHEMA,
     MIXED_DRAFT_SCHEMA,
     PDF_CONTINUATION_SCHEMA,
@@ -63,10 +64,12 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
     if (anchored and paired is not None and paired.get("status") != "outside_scope"
             and paired.get("schema") != INDEPENDENT_SCHEMA):
         raise ValueError("Anchored wording changes cannot carry statistical sentence responses")
-    mixed_paired = paired is not None and paired.get("schema") == MIXED_DRAFT_SCHEMA
+    blocks = paired is not None and paired.get("schema") == BLOCK_DRAFT_SCHEMA
+    mixed_paired = paired is not None and (paired.get("schema") == MIXED_DRAFT_SCHEMA or (blocks and old_extension != extension))
     if paired is not None and mixed_paired != (old_extension != extension):
         raise ValueError("Paired writing responses use different source formats from the supplied drafts")
-    pdf_independent = paired is not None and paired.get("schema") in (PDF_INDEPENDENT_SCHEMA, PDF_CONTINUATION_SCHEMA)
+    pdf_independent = (paired is not None and (paired.get("schema") in (PDF_INDEPENDENT_SCHEMA, PDF_CONTINUATION_SCHEMA)
+                       or (blocks and old_extension == extension == ".pdf")))
     expected, old_text, new_text, native_layouts = compare_with_sources(
         _read(earlier, MAX_BYTES), _read(later, MAX_BYTES), extension, earlier_extension=old_extension,
         email_body_only=paired is not None, pdf_paired_text_only=paired is not None,

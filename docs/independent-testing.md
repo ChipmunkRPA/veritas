@@ -13,6 +13,15 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [changed-passage replay](document-paired-blocks-2026-11-15.md#replay)
+checks split and merged sentences in all nine TXT, Word and PDF pairings.
+It also verifies exact changed words, native source positions and the
+app's PDF and JSON after a simulated checkout.
+
+The [masked grammar replay](writing-function-sequence-2026-11-15.md#replay)
+recounts exact locations, word overlap and flags on matched originals in
+96 fresh news and report rewrites at two frozen operating points.
+
 The [speech and mouth mismatch replay](video-lip-articulation-2026-11-15.md#local-app-and-independent-replay)
 checks a new visual fit against same-speaker word replacements and
 matched ordinary, same-word and uniform-delay controls. It replays

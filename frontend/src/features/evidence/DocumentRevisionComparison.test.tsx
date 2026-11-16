@@ -385,8 +385,10 @@ it('shows separate revision outcomes with links to the correct wording changes',
 })
 
 it.each([
-  ['plain text', '.txt', false], ['Word', '.docx', false], ['PDF', '.pdf', false], ['split PDF', '.pdf', true],
-] as const)('shows wording changes and native scope for %s', async (_layout, extension, continued) => {
+  ['plain text', '.txt', false, false], ['Word', '.docx', false, false],
+  ['PDF', '.pdf', false, false], ['split PDF', '.pdf', true, false],
+  ['sentence split in Word', '.docx', false, true],
+] as const)('shows wording changes and native scope for %s', async (_layout, extension, continued, split) => {
   const word = extension === '.docx'
   const pdf = extension === '.pdf'
   const page = (number: number) => ({ page: number, page_width: 612, page_height: 792, page_rotation: 0, word_regions: [] })
@@ -396,7 +398,8 @@ it.each([
     coordinate_space: pdf ? 'pdf_native_text_unicode_codepoint' : word ? 'docx_body_unicode_codepoint' : 'decoded_source_unicode_codepoint',
     earlier: source, later: source, scope: 'Compares the wording.', interpretation: 'Shows wording changes.', changes: [],
     paired_check: {
-      schema: continued ? 'chipmunk.paired-writing-review/10' : pdf ? 'chipmunk.paired-writing-review/9'
+      schema: split ? 'chipmunk.paired-writing-review/12'
+        : continued ? 'chipmunk.paired-writing-review/10' : pdf ? 'chipmunk.paired-writing-review/9'
         : word ? 'chipmunk.paired-writing-review/8' : 'chipmunk.paired-writing-review/7',
       status: 'joint_increase', authorship_confidence_contribution: 0,
       summary: 'Checked 1 of 1 mapped revisions.', scope: 'Other edits may remain unchecked.',
@@ -407,10 +410,12 @@ it.each([
           ...(word && { context_paragraphs: [[0, 19], [20, 31], [32, 40]].map(([start, end]) => ({
             paragraph: 1, body_index: 0, start, end,
           })) }) },
-        later: { start: 23, end: 33, text: 'Heavy fog.', context_spans: [[3, 22], [23, 33], [34, 42]],
+        later: { start: 23, end: split ? 41 : 33, text: split ? 'Heavy fog. It held.' : 'Heavy fog.',
+          context_spans: split ? [[3, 22], [23, 33], [34, 41], [42, 50]] : [[3, 22], [23, 33], [34, 42]],
           input_sha256: 'b'.repeat(64),
           ...(pdf && { pdf_pages: continued ? [page(2), page(3)] : [page(2)] }),
-          ...(word && { context_paragraphs: [[0, 19], [20, 30], [31, 39]].map(([start, end]) => ({
+          ...(word && { context_paragraphs: (split ? [[0, 19], [20, 30], [31, 38], [39, 47]]
+            : [[0, 19], [20, 30], [31, 39]]).map(([start, end]) => ({
             paragraph: 2, body_index: 1, start, end,
           })) }) },
         wording_changes: [{ earlier: [20, 30], later: [23, 32],
@@ -427,10 +432,11 @@ it.each([
   fireEvent.change(input, { target: { files: [new File(['earlier'], 'earlier' + extension)] } })
   fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
   expect(await screen.findByText('Other edits may remain unchecked.')).toBeTruthy()
-  expect(screen.getByText('Analyzed sentence [23, 33)')).toBeTruthy()
+  expect(screen.getByText(split ? 'Analyzed sentences [23, 41)' : 'Analyzed sentence [23, 33)')).toBeTruthy()
+  if (split) expect(screen.getByRole('heading', { name: 'Changed passage 1' })).toBeTruthy()
   if (word) {
     expect(screen.getByText('Paragraph 1 [20, 31)')).toBeTruthy()
-    expect(screen.getByText('Paragraph 2 [20, 30)')).toBeTruthy()
+    expect(screen.getByText(split ? 'Paragraph 2 [20, 38)' : 'Paragraph 2 [20, 30)')).toBeTruthy()
   }
   if (pdf) {
     expect(screen.getByText('PDF page 1')).toBeTruthy()

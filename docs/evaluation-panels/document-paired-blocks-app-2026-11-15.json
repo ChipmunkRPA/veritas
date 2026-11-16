@@ -1,0 +1,305 @@
+{
+  "altered_scope_rejected": true,
+  "initial_analysis_preserved": true,
+  "paid_analyses": 3,
+  "price_usd": 9.99,
+  "results": [
+    {
+      "analyzed_format": ".docx",
+      "earlier_format": ".txt",
+      "responses": [
+        {
+          "earlier": 0.06973516941070557,
+          "later": 0.09384936094284058
+        },
+        {
+          "earlier": 0.22235199809074402,
+          "later": 0.01745736412703991
+        }
+      ],
+      "role": "known_rewrite",
+      "sentences": [
+        2,
+        2
+      ],
+      "source": "46185a50371e877a46712479124399d2fadc98c0fc00077ca35fa035cfb533e6",
+      "status": "no_joint_increase",
+      "verification": {
+        "body_paragraph_ranges_verified": 4,
+        "changed_token_ranges_verified": 8,
+        "changes_by_role": {
+          "body": 4
+        },
+        "coordinate_space": "per_source_unicode_codepoint",
+        "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+        "paired_word_sentence_ranges_verified": 4,
+        "source_hashes_verified": 2
+      }
+    },
+    {
+      "analyzed_format": ".docx",
+      "earlier_format": ".docx",
+      "responses": [
+        {
+          "earlier": 0.06973516941070557,
+          "later": 0.09384936094284058
+        },
+        {
+          "earlier": 0.22235199809074402,
+          "later": 0.01745736412703991
+        }
+      ],
+      "role": "known_rewrite",
+      "sentences": [
+        2,
+        2
+      ],
+      "source": "46185a50371e877a46712479124399d2fadc98c0fc00077ca35fa035cfb533e6",
+      "status": "no_joint_increase",
+      "verification": {
+        "body_paragraph_ranges_verified": 8,
+        "changed_token_ranges_verified": 8,
+        "changes_by_role": {
+          "body": 4
+        },
+        "coordinate_space": "docx_body_unicode_codepoint",
+        "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+        "paired_word_sentence_ranges_verified": 8,
+        "source_hashes_verified": 2
+      }
+    },
+    {
+      "analyzed_format": ".docx",
+      "earlier_format": ".pdf",
+      "responses": [
+        {
+          "earlier": 0.06973516941070557,
+          "later": 0.09384936094284058
+        },
+        {
+          "earlier": 0.22235199809074402,
+          "later": 0.01745736412703991
+        }
+      ],
+      "role": "known_rewrite",
+      "sentences": [
+        2,
+        2
+      ],
+      "source": "46185a50371e877a46712479124399d2fadc98c0fc00077ca35fa035cfb533e6",
+      "status": "no_joint_increase",
+      "verification": {
+        "body_paragraph_ranges_verified": 4,
+        "changed_token_ranges_verified": 8,
+        "changes_by_role": {
+          "body": 4
+        },
+        "coordinate_space": "per_source_unicode_codepoint",
+        "paired_pdf_word_regions_verified": 3,
+        "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+        "paired_word_sentence_ranges_verified": 4,
+        "pdf_previews_verified": 3,
+        "pdf_word_regions_verified": 3,
+        "source_hashes_verified": 2
+      }
+    },
+    {
+      "analyzed_format": ".pdf",
+      "earlier_format": ".txt",
+      "responses": [
+        {
+          "earlier": 0.9082529544830322,
+          "later": 0.5935518741607666
+        },
+        {
+          "earlier": 0.9928128123283386,
+          "later": 0.9941051006317139
+        }
+      ],
+      "role": "authored_split",
+      "sentences": [
+        1,
+        2
+      ],
+      "source": "ad1a64057f9ab34fecfe3f4ee78660bb0316dbda9370581ffbeb1e8bddf3d598",
+      "status": "no_joint_increase",
+      "verification": {
+        "changed_token_ranges_verified": 20,
+        "changes_by_role": {
+          "body": 1
+        },
+        "coordinate_space": "per_source_unicode_codepoint",
+        "paired_pdf_word_regions_verified": 11,
+        "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+        "pdf_previews_verified": 1,
+        "pdf_word_regions_verified": 11,
+        "source_hashes_verified": 2
+      }
+    },
+    {
+      "analyzed_format": ".pdf",
+      "earlier_format": ".docx",
+      "responses": [
+        {
+          "earlier": 0.9082529544830322,
+          "later": 0.5935518741607666
+        },
+        {
+          "earlier": 0.9928128123283386,
+          "later": 0.9941051006317139
+        }
+      ],
+      "role": "authored_split",
+      "sentences": [
+        1,
+        2
+      ],
+      "source": "ad1a64057f9ab34fecfe3f4ee78660bb0316dbda9370581ffbeb1e8bddf3d598",
+      "status": "no_joint_increase",
+      "verification": {
+        "body_paragraph_ranges_verified": 1,
+        "changed_token_ranges_verified": 20,
+        "changes_by_role": {
+          "body": 1
+        },
+        "coordinate_space": "per_source_unicode_codepoint",
+        "paired_pdf_word_regions_verified": 11,
+        "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+        "paired_word_sentence_ranges_verified": 3,
+        "pdf_previews_verified": 1,
+        "pdf_word_regions_verified": 11,
+        "source_hashes_verified": 2
+      }
+    },
+    {
+      "analyzed_format": ".pdf",
+      "earlier_format": ".pdf",
+      "responses": [
+        {
+          "earlier": 0.9082529544830322,
+          "later": 0.5935518741607666
+        },
+        {
+          "earlier": 0.9928128123283386,
+          "later": 0.9941051006317139
+        }
+      ],
+      "role": "authored_split",
+      "sentences": [
+        1,
+        2
+      ],
+      "source": "ad1a64057f9ab34fecfe3f4ee78660bb0316dbda9370581ffbeb1e8bddf3d598",
+      "status": "no_joint_increase",
+      "verification": {
+        "changed_token_ranges_verified": 20,
+        "changes_by_role": {
+          "body": 1
+        },
+        "coordinate_space": "pdf_native_text_unicode_codepoint",
+        "paired_pdf_word_regions_verified": 19,
+        "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+        "pdf_previews_verified": 2,
+        "pdf_word_regions_verified": 19,
+        "source_hashes_verified": 2
+      }
+    },
+    {
+      "analyzed_format": ".txt",
+      "earlier_format": ".txt",
+      "responses": [
+        {
+          "earlier": 0.5935518741607666,
+          "later": 0.9082529544830322
+        },
+        {
+          "earlier": 0.9941051006317139,
+          "later": 0.9928128123283386
+        }
+      ],
+      "role": "authored_merge",
+      "sentences": [
+        2,
+        1
+      ],
+      "source": "283128acef14943c127f7327ca8f57e7cd7c31ec6c5546de5d62ab16a2f9758a",
+      "status": "no_joint_increase",
+      "verification": {
+        "changed_token_ranges_verified": 20,
+        "changes_by_role": {
+          "body": 1
+        },
+        "coordinate_space": "decoded_source_unicode_codepoint",
+        "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+        "source_hashes_verified": 2
+      }
+    },
+    {
+      "analyzed_format": ".txt",
+      "earlier_format": ".docx",
+      "responses": [
+        {
+          "earlier": 0.5935518741607666,
+          "later": 0.9082529544830322
+        },
+        {
+          "earlier": 0.9941051006317139,
+          "later": 0.9928128123283386
+        }
+      ],
+      "role": "authored_merge",
+      "sentences": [
+        2,
+        1
+      ],
+      "source": "283128acef14943c127f7327ca8f57e7cd7c31ec6c5546de5d62ab16a2f9758a",
+      "status": "no_joint_increase",
+      "verification": {
+        "body_paragraph_ranges_verified": 1,
+        "changed_token_ranges_verified": 20,
+        "changes_by_role": {
+          "body": 1
+        },
+        "coordinate_space": "per_source_unicode_codepoint",
+        "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+        "paired_word_sentence_ranges_verified": 4,
+        "source_hashes_verified": 2
+      }
+    },
+    {
+      "analyzed_format": ".txt",
+      "earlier_format": ".pdf",
+      "responses": [
+        {
+          "earlier": 0.5935518741607666,
+          "later": 0.9082529544830322
+        },
+        {
+          "earlier": 0.9941051006317139,
+          "later": 0.9928128123283386
+        }
+      ],
+      "role": "authored_merge",
+      "sentences": [
+        2,
+        1
+      ],
+      "source": "283128acef14943c127f7327ca8f57e7cd7c31ec6c5546de5d62ab16a2f9758a",
+      "status": "no_joint_increase",
+      "verification": {
+        "changed_token_ranges_verified": 20,
+        "changes_by_role": {
+          "body": 1
+        },
+        "coordinate_space": "per_source_unicode_codepoint",
+        "paired_pdf_word_regions_verified": 12,
+        "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+        "pdf_previews_verified": 1,
+        "pdf_word_regions_verified": 11,
+        "source_hashes_verified": 2
+      }
+    }
+  ],
+  "schema": "chipmunk.paired-document-block-replay/1",
+  "unpaid_jobs": 0
+}

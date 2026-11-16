@@ -60,6 +60,17 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Split and merged sentences in an earlier-draft comparison](document-paired-blocks-2026-11-15.md)
+  maps all nine format pairings for each of five known two-sentence
+  rewrites, up from one pairing per work. The authored split and merge
+  each map in all nine pairings. The app and exports preserve the exact
+  changes. The optional writing responses carry zero AI confidence weight.
+
+- [Masked grammar sequences for standalone rewrites](writing-function-sequence-2026-11-15.md)
+  locates four of 96 fresh rewrites at the wider setting and flags 23 of
+  96 originals. The ordinary-revision fit locates two and flags 21.
+  These fits stay in evaluation.
+
 - [Local mismatch between speech sounds and mouth openings](video-lip-articulation-2026-11-15.md)
   adds seven correct ranges on 34 held PCM word replacements and raises
   AAC recovery from 1/34 to 10/34. Ordinary alerts rise from 2/68 to

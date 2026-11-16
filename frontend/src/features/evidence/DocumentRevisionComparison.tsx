@@ -152,7 +152,8 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
       <p className="mt-2 mb-0 text-small">{paired.summary}</p>
       <p className="mt-1 mb-0 text-caption text-text-muted">{paired.scope}</p>
       {paired.revisions?.map((revision, index) => <article key={revision.later.start} className="mt-3 border-t border-border pt-3">
-        <h4 className="m-0 text-small font-medium">Changed sentence {index + 1}</h4>
+        <h4 className="m-0 text-small font-medium">{paired.schema === 'chipmunk.paired-writing-review/12'
+          ? 'Changed passage' : 'Changed sentence'} {index + 1}</h4>
         <p className="mt-1 mb-0 text-small">{revision.status === 'joint_increase'
           ? 'Both writing checks gave a stronger AI-like response in the analyzed version.'
           : revision.status === 'unavailable' ? 'This mapped revision could not be scored.'
@@ -166,12 +167,13 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
           {(['earlier', 'later'] as const).map(side => {
             const sentence = revision[side]
             const location = sentence.context_paragraphs?.[1]
+            const lastLocation = sentence.context_paragraphs?.at(-2)
             return <div key={side}>
               <p className="m-0 font-mono text-caption text-text-muted">
-                {side === 'earlier' ? 'Earlier' : 'Analyzed'} sentence [{sentence.start}, {sentence.end})
+                {side === 'earlier' ? 'Earlier' : 'Analyzed'} {sentence.context_spans.length === 4 ? 'sentences' : 'sentence'} [{sentence.start}, {sentence.end})
               </p>
               {location && <p className="mt-1 mb-0 font-mono text-caption text-text-muted">
-                Paragraph {location.paragraph} [{location.start}, {location.end})
+                Paragraph {location.paragraph} [{location.start}, {lastLocation?.end ?? location.end})
               </p>}
               {sentence.pdf_pages?.map(page => <p key={page.page} className="mt-1 mb-0 font-mono text-caption text-text-muted">
                 PDF page {page.page}

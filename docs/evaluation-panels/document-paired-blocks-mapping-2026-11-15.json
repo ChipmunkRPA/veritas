@@ -1,0 +1,1098 @@
+{
+  "excluded": [],
+  "plan_sha256": "f654055f9be26d5c5f476239ce2ca3b2f71d2f4bbeb3ae8679c51a4a0f299e93",
+  "schema": "chipmunk.paired-document-block-replay/1",
+  "sources": [
+    {
+      "counts": [
+        2,
+        2
+      ],
+      "deliveries": {
+        ".docx/.docx": {
+          "before": false,
+          "files": [
+            "58b73df756297f3ea5c15e68e7b265fb0ce9127459a45290b998b2f860044de9",
+            "047e65b7113465f149db8a3fdfc89b150fa07f907fdaf587698db94a60172b9d"
+          ],
+          "input_hashes": [
+            "f5ba81de8a20b5ea435da96199af55aaa666b7fcf0fb4cd59b5bf21ef3b21ba2",
+            "17de9fb31dfef7d2cd3344577bf65c3c5819e8faf5316f604278863f6b32992f"
+          ],
+          "mapped": true
+        },
+        ".docx/.pdf": {
+          "before": false,
+          "files": [
+            "58b73df756297f3ea5c15e68e7b265fb0ce9127459a45290b998b2f860044de9",
+            "f467f2d33324a0be191085dddb54c25943f3ebea7950ce03db0b338935b7da05"
+          ],
+          "input_hashes": [
+            "f5ba81de8a20b5ea435da96199af55aaa666b7fcf0fb4cd59b5bf21ef3b21ba2",
+            "17de9fb31dfef7d2cd3344577bf65c3c5819e8faf5316f604278863f6b32992f"
+          ],
+          "mapped": true
+        },
+        ".docx/.txt": {
+          "before": false,
+          "files": [
+            "58b73df756297f3ea5c15e68e7b265fb0ce9127459a45290b998b2f860044de9",
+            "17de9fb31dfef7d2cd3344577bf65c3c5819e8faf5316f604278863f6b32992f"
+          ],
+          "input_hashes": [
+            "f5ba81de8a20b5ea435da96199af55aaa666b7fcf0fb4cd59b5bf21ef3b21ba2",
+            "17de9fb31dfef7d2cd3344577bf65c3c5819e8faf5316f604278863f6b32992f"
+          ],
+          "mapped": true
+        },
+        ".pdf/.docx": {
+          "before": false,
+          "files": [
+            "575fb625c73d771fe7104933fc4abf59e762ddb41a136a77e7ff2a9f108fac38",
+            "047e65b7113465f149db8a3fdfc89b150fa07f907fdaf587698db94a60172b9d"
+          ],
+          "input_hashes": [
+            "f5ba81de8a20b5ea435da96199af55aaa666b7fcf0fb4cd59b5bf21ef3b21ba2",
+            "17de9fb31dfef7d2cd3344577bf65c3c5819e8faf5316f604278863f6b32992f"
+          ],
+          "mapped": true
+        },
+        ".pdf/.pdf": {
+          "before": false,
+          "files": [
+            "575fb625c73d771fe7104933fc4abf59e762ddb41a136a77e7ff2a9f108fac38",
+            "f467f2d33324a0be191085dddb54c25943f3ebea7950ce03db0b338935b7da05"
+          ],
+          "input_hashes": [
+            "f5ba81de8a20b5ea435da96199af55aaa666b7fcf0fb4cd59b5bf21ef3b21ba2",
+            "17de9fb31dfef7d2cd3344577bf65c3c5819e8faf5316f604278863f6b32992f"
+          ],
+          "mapped": true
+        },
+        ".pdf/.txt": {
+          "before": false,
+          "files": [
+            "575fb625c73d771fe7104933fc4abf59e762ddb41a136a77e7ff2a9f108fac38",
+            "17de9fb31dfef7d2cd3344577bf65c3c5819e8faf5316f604278863f6b32992f"
+          ],
+          "input_hashes": [
+            "f5ba81de8a20b5ea435da96199af55aaa666b7fcf0fb4cd59b5bf21ef3b21ba2",
+            "17de9fb31dfef7d2cd3344577bf65c3c5819e8faf5316f604278863f6b32992f"
+          ],
+          "mapped": true
+        },
+        ".txt/.docx": {
+          "before": false,
+          "files": [
+            "f5ba81de8a20b5ea435da96199af55aaa666b7fcf0fb4cd59b5bf21ef3b21ba2",
+            "047e65b7113465f149db8a3fdfc89b150fa07f907fdaf587698db94a60172b9d"
+          ],
+          "input_hashes": [
+            "f5ba81de8a20b5ea435da96199af55aaa666b7fcf0fb4cd59b5bf21ef3b21ba2",
+            "17de9fb31dfef7d2cd3344577bf65c3c5819e8faf5316f604278863f6b32992f"
+          ],
+          "mapped": true
+        },
+        ".txt/.pdf": {
+          "before": false,
+          "files": [
+            "f5ba81de8a20b5ea435da96199af55aaa666b7fcf0fb4cd59b5bf21ef3b21ba2",
+            "f467f2d33324a0be191085dddb54c25943f3ebea7950ce03db0b338935b7da05"
+          ],
+          "input_hashes": [
+            "f5ba81de8a20b5ea435da96199af55aaa666b7fcf0fb4cd59b5bf21ef3b21ba2",
+            "17de9fb31dfef7d2cd3344577bf65c3c5819e8faf5316f604278863f6b32992f"
+          ],
+          "mapped": true
+        },
+        ".txt/.txt": {
+          "before": true,
+          "files": [
+            "f5ba81de8a20b5ea435da96199af55aaa666b7fcf0fb4cd59b5bf21ef3b21ba2",
+            "17de9fb31dfef7d2cd3344577bf65c3c5819e8faf5316f604278863f6b32992f"
+          ],
+          "input_hashes": [
+            "f5ba81de8a20b5ea435da96199af55aaa666b7fcf0fb4cd59b5bf21ef3b21ba2",
+            "17de9fb31dfef7d2cd3344577bf65c3c5819e8faf5316f604278863f6b32992f"
+          ],
+          "mapped": true
+        }
+      },
+      "family": "gpt-5.4",
+      "genre": "news",
+      "parent_files": [
+        "c3b459e181d15952d652bb1ca687a87dd4b07110409f1066e9155ec29a8bb9b4",
+        "9c3d80aa19f3bef96fd3ebf7699575cf394171465f79883a1d0009a2163f748b"
+      ],
+      "role": "known_rewrite",
+      "source": "46185a50371e877a46712479124399d2fadc98c0fc00077ca35fa035cfb533e6",
+      "words": [
+        86,
+        88
+      ]
+    },
+    {
+      "counts": [
+        2,
+        2
+      ],
+      "deliveries": {
+        ".docx/.docx": {
+          "before": false,
+          "files": [
+            "1de69f2b6505c85969442676a85def18e7ad963e3c007803134743e0a93d88aa",
+            "37d8d8005795df563415af540e48f43e34c9d1b586d2a8eeb77ddc2331e25445"
+          ],
+          "input_hashes": [
+            "caf4d7e9c48c1e132003f68a502d23b3f5b6e2bfab13a6c07495a32fe7ed37e8",
+            "0c8aaf7261d4e7aa37230e0d7ca7da2eabd5e36c621781c40ffaf1628b3d79aa"
+          ],
+          "mapped": true
+        },
+        ".docx/.pdf": {
+          "before": false,
+          "files": [
+            "1de69f2b6505c85969442676a85def18e7ad963e3c007803134743e0a93d88aa",
+            "70804d23bdaa274824ccf8473099c96b30af858489eca38cfcb84190c4d995cf"
+          ],
+          "input_hashes": [
+            "caf4d7e9c48c1e132003f68a502d23b3f5b6e2bfab13a6c07495a32fe7ed37e8",
+            "0c8aaf7261d4e7aa37230e0d7ca7da2eabd5e36c621781c40ffaf1628b3d79aa"
+          ],
+          "mapped": true
+        },
+        ".docx/.txt": {
+          "before": false,
+          "files": [
+            "1de69f2b6505c85969442676a85def18e7ad963e3c007803134743e0a93d88aa",
+            "0c8aaf7261d4e7aa37230e0d7ca7da2eabd5e36c621781c40ffaf1628b3d79aa"
+          ],
+          "input_hashes": [
+            "caf4d7e9c48c1e132003f68a502d23b3f5b6e2bfab13a6c07495a32fe7ed37e8",
+            "0c8aaf7261d4e7aa37230e0d7ca7da2eabd5e36c621781c40ffaf1628b3d79aa"
+          ],
+          "mapped": true
+        },
+        ".pdf/.docx": {
+          "before": false,
+          "files": [
+            "b6c97b7b4b0b04c7c4efe455c1999f76a88e512f7284534a36e1721b484a8103",
+            "37d8d8005795df563415af540e48f43e34c9d1b586d2a8eeb77ddc2331e25445"
+          ],
+          "input_hashes": [
+            "caf4d7e9c48c1e132003f68a502d23b3f5b6e2bfab13a6c07495a32fe7ed37e8",
+            "0c8aaf7261d4e7aa37230e0d7ca7da2eabd5e36c621781c40ffaf1628b3d79aa"
+          ],
+          "mapped": true
+        },
+        ".pdf/.pdf": {
+          "before": false,
+          "files": [
+            "b6c97b7b4b0b04c7c4efe455c1999f76a88e512f7284534a36e1721b484a8103",
+            "70804d23bdaa274824ccf8473099c96b30af858489eca38cfcb84190c4d995cf"
+          ],
+          "input_hashes": [
+            "caf4d7e9c48c1e132003f68a502d23b3f5b6e2bfab13a6c07495a32fe7ed37e8",
+            "0c8aaf7261d4e7aa37230e0d7ca7da2eabd5e36c621781c40ffaf1628b3d79aa"
+          ],
+          "mapped": true
+        },
+        ".pdf/.txt": {
+          "before": false,
+          "files": [
+            "b6c97b7b4b0b04c7c4efe455c1999f76a88e512f7284534a36e1721b484a8103",
+            "0c8aaf7261d4e7aa37230e0d7ca7da2eabd5e36c621781c40ffaf1628b3d79aa"
+          ],
+          "input_hashes": [
+            "caf4d7e9c48c1e132003f68a502d23b3f5b6e2bfab13a6c07495a32fe7ed37e8",
+            "0c8aaf7261d4e7aa37230e0d7ca7da2eabd5e36c621781c40ffaf1628b3d79aa"
+          ],
+          "mapped": true
+        },
+        ".txt/.docx": {
+          "before": false,
+          "files": [
+            "caf4d7e9c48c1e132003f68a502d23b3f5b6e2bfab13a6c07495a32fe7ed37e8",
+            "37d8d8005795df563415af540e48f43e34c9d1b586d2a8eeb77ddc2331e25445"
+          ],
+          "input_hashes": [
+            "caf4d7e9c48c1e132003f68a502d23b3f5b6e2bfab13a6c07495a32fe7ed37e8",
+            "0c8aaf7261d4e7aa37230e0d7ca7da2eabd5e36c621781c40ffaf1628b3d79aa"
+          ],
+          "mapped": true
+        },
+        ".txt/.pdf": {
+          "before": false,
+          "files": [
+            "caf4d7e9c48c1e132003f68a502d23b3f5b6e2bfab13a6c07495a32fe7ed37e8",
+            "70804d23bdaa274824ccf8473099c96b30af858489eca38cfcb84190c4d995cf"
+          ],
+          "input_hashes": [
+            "caf4d7e9c48c1e132003f68a502d23b3f5b6e2bfab13a6c07495a32fe7ed37e8",
+            "0c8aaf7261d4e7aa37230e0d7ca7da2eabd5e36c621781c40ffaf1628b3d79aa"
+          ],
+          "mapped": true
+        },
+        ".txt/.txt": {
+          "before": true,
+          "files": [
+            "caf4d7e9c48c1e132003f68a502d23b3f5b6e2bfab13a6c07495a32fe7ed37e8",
+            "0c8aaf7261d4e7aa37230e0d7ca7da2eabd5e36c621781c40ffaf1628b3d79aa"
+          ],
+          "input_hashes": [
+            "caf4d7e9c48c1e132003f68a502d23b3f5b6e2bfab13a6c07495a32fe7ed37e8",
+            "0c8aaf7261d4e7aa37230e0d7ca7da2eabd5e36c621781c40ffaf1628b3d79aa"
+          ],
+          "mapped": true
+        }
+      },
+      "family": "gemini-2.5-flash",
+      "genre": "news",
+      "parent_files": [
+        "10f0524520223c2b941d83a23fa98cdfb29c5267cd2a1cfc0f5df18f2fff88fa",
+        "e2b990e1ade50a8ee551d882f919ffde942cfc8284ae54af612171c46fd7cdeb"
+      ],
+      "role": "known_rewrite",
+      "source": "6543acc727465635816e88572070eab22fc8bb8cda5a5f3f371ae62c7366edc3",
+      "words": [
+        94,
+        84
+      ]
+    },
+    {
+      "counts": [
+        2,
+        2
+      ],
+      "deliveries": {
+        ".docx/.docx": {
+          "before": false,
+          "files": [
+            "8d4838b1e2f1aeb9f052d9d08d6f5d93a1dd743689662d8d88c9ccb27e557d6b",
+            "c6a953ae0877e7fecb4c32a3a1e727acbfe7cdfcf987e12285ae9975b12f23ec"
+          ],
+          "input_hashes": [
+            "360e947ce13f5a194ebe6c926b1f9ef127475c4078eb0e5fdc0ea9ffc04e6036",
+            "312577ee7d9ecdf3807cf8a3fe6d106c5029b0d7294dc3407beffc11565ee4a6"
+          ],
+          "mapped": true
+        },
+        ".docx/.pdf": {
+          "before": false,
+          "files": [
+            "8d4838b1e2f1aeb9f052d9d08d6f5d93a1dd743689662d8d88c9ccb27e557d6b",
+            "b820891cc79f348164fbc87fae7832a75bf26d82c1b3a36efcba6f6fcfa65413"
+          ],
+          "input_hashes": [
+            "360e947ce13f5a194ebe6c926b1f9ef127475c4078eb0e5fdc0ea9ffc04e6036",
+            "312577ee7d9ecdf3807cf8a3fe6d106c5029b0d7294dc3407beffc11565ee4a6"
+          ],
+          "mapped": true
+        },
+        ".docx/.txt": {
+          "before": false,
+          "files": [
+            "8d4838b1e2f1aeb9f052d9d08d6f5d93a1dd743689662d8d88c9ccb27e557d6b",
+            "312577ee7d9ecdf3807cf8a3fe6d106c5029b0d7294dc3407beffc11565ee4a6"
+          ],
+          "input_hashes": [
+            "360e947ce13f5a194ebe6c926b1f9ef127475c4078eb0e5fdc0ea9ffc04e6036",
+            "312577ee7d9ecdf3807cf8a3fe6d106c5029b0d7294dc3407beffc11565ee4a6"
+          ],
+          "mapped": true
+        },
+        ".pdf/.docx": {
+          "before": false,
+          "files": [
+            "84c738fb0654bdcb8aa7f1acaacc03329c9d735745f83f10075da37837f17fad",
+            "c6a953ae0877e7fecb4c32a3a1e727acbfe7cdfcf987e12285ae9975b12f23ec"
+          ],
+          "input_hashes": [
+            "360e947ce13f5a194ebe6c926b1f9ef127475c4078eb0e5fdc0ea9ffc04e6036",
+            "312577ee7d9ecdf3807cf8a3fe6d106c5029b0d7294dc3407beffc11565ee4a6"
+          ],
+          "mapped": true
+        },
+        ".pdf/.pdf": {
+          "before": false,
+          "files": [
+            "84c738fb0654bdcb8aa7f1acaacc03329c9d735745f83f10075da37837f17fad",
+            "b820891cc79f348164fbc87fae7832a75bf26d82c1b3a36efcba6f6fcfa65413"
+          ],
+          "input_hashes": [
+            "360e947ce13f5a194ebe6c926b1f9ef127475c4078eb0e5fdc0ea9ffc04e6036",
+            "312577ee7d9ecdf3807cf8a3fe6d106c5029b0d7294dc3407beffc11565ee4a6"
+          ],
+          "mapped": true
+        },
+        ".pdf/.txt": {
+          "before": false,
+          "files": [
+            "84c738fb0654bdcb8aa7f1acaacc03329c9d735745f83f10075da37837f17fad",
+            "312577ee7d9ecdf3807cf8a3fe6d106c5029b0d7294dc3407beffc11565ee4a6"
+          ],
+          "input_hashes": [
+            "360e947ce13f5a194ebe6c926b1f9ef127475c4078eb0e5fdc0ea9ffc04e6036",
+            "312577ee7d9ecdf3807cf8a3fe6d106c5029b0d7294dc3407beffc11565ee4a6"
+          ],
+          "mapped": true
+        },
+        ".txt/.docx": {
+          "before": false,
+          "files": [
+            "360e947ce13f5a194ebe6c926b1f9ef127475c4078eb0e5fdc0ea9ffc04e6036",
+            "c6a953ae0877e7fecb4c32a3a1e727acbfe7cdfcf987e12285ae9975b12f23ec"
+          ],
+          "input_hashes": [
+            "360e947ce13f5a194ebe6c926b1f9ef127475c4078eb0e5fdc0ea9ffc04e6036",
+            "312577ee7d9ecdf3807cf8a3fe6d106c5029b0d7294dc3407beffc11565ee4a6"
+          ],
+          "mapped": true
+        },
+        ".txt/.pdf": {
+          "before": false,
+          "files": [
+            "360e947ce13f5a194ebe6c926b1f9ef127475c4078eb0e5fdc0ea9ffc04e6036",
+            "b820891cc79f348164fbc87fae7832a75bf26d82c1b3a36efcba6f6fcfa65413"
+          ],
+          "input_hashes": [
+            "360e947ce13f5a194ebe6c926b1f9ef127475c4078eb0e5fdc0ea9ffc04e6036",
+            "312577ee7d9ecdf3807cf8a3fe6d106c5029b0d7294dc3407beffc11565ee4a6"
+          ],
+          "mapped": true
+        },
+        ".txt/.txt": {
+          "before": true,
+          "files": [
+            "360e947ce13f5a194ebe6c926b1f9ef127475c4078eb0e5fdc0ea9ffc04e6036",
+            "312577ee7d9ecdf3807cf8a3fe6d106c5029b0d7294dc3407beffc11565ee4a6"
+          ],
+          "input_hashes": [
+            "360e947ce13f5a194ebe6c926b1f9ef127475c4078eb0e5fdc0ea9ffc04e6036",
+            "312577ee7d9ecdf3807cf8a3fe6d106c5029b0d7294dc3407beffc11565ee4a6"
+          ],
+          "mapped": true
+        }
+      },
+      "family": "gpt-5.4",
+      "genre": "reports",
+      "parent_files": [
+        "a88e293a31d00c6fe1a299f67f5c00dcdb2753047e587fe62b3cab930bb467fb",
+        "cc85461f3133eff10a19977ccb4c3eb758d32f8076cbbc22fd916ff888dc97d5"
+      ],
+      "role": "known_rewrite",
+      "source": "992ee62f2ced618b4ec719c9d2dae12194ca4d91479dd7eabbd9ed42a7a669e2",
+      "words": [
+        159,
+        156
+      ]
+    },
+    {
+      "counts": [
+        2,
+        2
+      ],
+      "deliveries": {
+        ".docx/.docx": {
+          "before": false,
+          "files": [
+            "4f96f8f551ea9f17db88218cfae00bfddeaea886c3a6914ddaa62eab8d54327a",
+            "972bf93832067c8528d629b8fa62c0081f1edb85f39b71fe232c48e4df00573b"
+          ],
+          "input_hashes": [
+            "11b8027c1036cd096f93808902cb0dd43184e11e950a5dc60cf69d4a2bedf3f4",
+            "979c50c12c56e975fce36384bdfe96c48457a4e0a7b29a846ecea06284708466"
+          ],
+          "mapped": true
+        },
+        ".docx/.pdf": {
+          "before": false,
+          "files": [
+            "4f96f8f551ea9f17db88218cfae00bfddeaea886c3a6914ddaa62eab8d54327a",
+            "b51fda7573f7d15a2820e424ffb128589c501cff915a9aa9058f39bcc5e86817"
+          ],
+          "input_hashes": [
+            "11b8027c1036cd096f93808902cb0dd43184e11e950a5dc60cf69d4a2bedf3f4",
+            "979c50c12c56e975fce36384bdfe96c48457a4e0a7b29a846ecea06284708466"
+          ],
+          "mapped": true
+        },
+        ".docx/.txt": {
+          "before": false,
+          "files": [
+            "4f96f8f551ea9f17db88218cfae00bfddeaea886c3a6914ddaa62eab8d54327a",
+            "979c50c12c56e975fce36384bdfe96c48457a4e0a7b29a846ecea06284708466"
+          ],
+          "input_hashes": [
+            "11b8027c1036cd096f93808902cb0dd43184e11e950a5dc60cf69d4a2bedf3f4",
+            "979c50c12c56e975fce36384bdfe96c48457a4e0a7b29a846ecea06284708466"
+          ],
+          "mapped": true
+        },
+        ".pdf/.docx": {
+          "before": false,
+          "files": [
+            "ef0783800d86fc0185c2f6b0e99e2fd0c7d90ce8d9ef04bdcba221e56a8d0e3d",
+            "972bf93832067c8528d629b8fa62c0081f1edb85f39b71fe232c48e4df00573b"
+          ],
+          "input_hashes": [
+            "11b8027c1036cd096f93808902cb0dd43184e11e950a5dc60cf69d4a2bedf3f4",
+            "979c50c12c56e975fce36384bdfe96c48457a4e0a7b29a846ecea06284708466"
+          ],
+          "mapped": true
+        },
+        ".pdf/.pdf": {
+          "before": false,
+          "files": [
+            "ef0783800d86fc0185c2f6b0e99e2fd0c7d90ce8d9ef04bdcba221e56a8d0e3d",
+            "b51fda7573f7d15a2820e424ffb128589c501cff915a9aa9058f39bcc5e86817"
+          ],
+          "input_hashes": [
+            "11b8027c1036cd096f93808902cb0dd43184e11e950a5dc60cf69d4a2bedf3f4",
+            "979c50c12c56e975fce36384bdfe96c48457a4e0a7b29a846ecea06284708466"
+          ],
+          "mapped": true
+        },
+        ".pdf/.txt": {
+          "before": false,
+          "files": [
+            "ef0783800d86fc0185c2f6b0e99e2fd0c7d90ce8d9ef04bdcba221e56a8d0e3d",
+            "979c50c12c56e975fce36384bdfe96c48457a4e0a7b29a846ecea06284708466"
+          ],
+          "input_hashes": [
+            "11b8027c1036cd096f93808902cb0dd43184e11e950a5dc60cf69d4a2bedf3f4",
+            "979c50c12c56e975fce36384bdfe96c48457a4e0a7b29a846ecea06284708466"
+          ],
+          "mapped": true
+        },
+        ".txt/.docx": {
+          "before": false,
+          "files": [
+            "11b8027c1036cd096f93808902cb0dd43184e11e950a5dc60cf69d4a2bedf3f4",
+            "972bf93832067c8528d629b8fa62c0081f1edb85f39b71fe232c48e4df00573b"
+          ],
+          "input_hashes": [
+            "11b8027c1036cd096f93808902cb0dd43184e11e950a5dc60cf69d4a2bedf3f4",
+            "979c50c12c56e975fce36384bdfe96c48457a4e0a7b29a846ecea06284708466"
+          ],
+          "mapped": true
+        },
+        ".txt/.pdf": {
+          "before": false,
+          "files": [
+            "11b8027c1036cd096f93808902cb0dd43184e11e950a5dc60cf69d4a2bedf3f4",
+            "b51fda7573f7d15a2820e424ffb128589c501cff915a9aa9058f39bcc5e86817"
+          ],
+          "input_hashes": [
+            "11b8027c1036cd096f93808902cb0dd43184e11e950a5dc60cf69d4a2bedf3f4",
+            "979c50c12c56e975fce36384bdfe96c48457a4e0a7b29a846ecea06284708466"
+          ],
+          "mapped": true
+        },
+        ".txt/.txt": {
+          "before": true,
+          "files": [
+            "11b8027c1036cd096f93808902cb0dd43184e11e950a5dc60cf69d4a2bedf3f4",
+            "979c50c12c56e975fce36384bdfe96c48457a4e0a7b29a846ecea06284708466"
+          ],
+          "input_hashes": [
+            "11b8027c1036cd096f93808902cb0dd43184e11e950a5dc60cf69d4a2bedf3f4",
+            "979c50c12c56e975fce36384bdfe96c48457a4e0a7b29a846ecea06284708466"
+          ],
+          "mapped": true
+        }
+      },
+      "family": "gpt-5.4",
+      "genre": "reports",
+      "parent_files": [
+        "fe47460d4783790c8273205d09a6487ced0176dff8145ad6f8d1e9af18806bf1",
+        "c0d1a8724205d10cc92a20978d7d1c1f257e9459d2c19921592f29a5d2275bcc"
+      ],
+      "role": "known_rewrite",
+      "source": "de95688e07a40acf1f9ba57a7376a34d46b9ca83c9d3186e90335775c846ab56",
+      "words": [
+        94,
+        91
+      ]
+    },
+    {
+      "counts": [
+        2,
+        2
+      ],
+      "deliveries": {
+        ".docx/.docx": {
+          "before": false,
+          "files": [
+            "e7ced381052db98d979965cca2aef7684248943f2e1c9b4dc86fd300271258f1",
+            "eebe782776bfb5aef169d5e8a6d71b3d10a12b4bb38ad2157a1da9a554bc106d"
+          ],
+          "input_hashes": [
+            "f215a8917f82d1808449a9d4290caf25c63dc96df1012c1f6254b9cdacd42b3f",
+            "26f67c6c2850a08e7c9f268e378a12f7b911d7b9298d83aea3c5defd6f621867"
+          ],
+          "mapped": true
+        },
+        ".docx/.pdf": {
+          "before": false,
+          "files": [
+            "e7ced381052db98d979965cca2aef7684248943f2e1c9b4dc86fd300271258f1",
+            "304c82aa8c7e7d486447be3615afc1cdbaa8de6262f37ff2854136f43cef013f"
+          ],
+          "input_hashes": [
+            "f215a8917f82d1808449a9d4290caf25c63dc96df1012c1f6254b9cdacd42b3f",
+            "26f67c6c2850a08e7c9f268e378a12f7b911d7b9298d83aea3c5defd6f621867"
+          ],
+          "mapped": true
+        },
+        ".docx/.txt": {
+          "before": false,
+          "files": [
+            "e7ced381052db98d979965cca2aef7684248943f2e1c9b4dc86fd300271258f1",
+            "26f67c6c2850a08e7c9f268e378a12f7b911d7b9298d83aea3c5defd6f621867"
+          ],
+          "input_hashes": [
+            "f215a8917f82d1808449a9d4290caf25c63dc96df1012c1f6254b9cdacd42b3f",
+            "26f67c6c2850a08e7c9f268e378a12f7b911d7b9298d83aea3c5defd6f621867"
+          ],
+          "mapped": true
+        },
+        ".pdf/.docx": {
+          "before": false,
+          "files": [
+            "cbbb9beddf52beb9485a940bf8df3a9042df3d9c60b0b5de1da81c4c593cc2af",
+            "eebe782776bfb5aef169d5e8a6d71b3d10a12b4bb38ad2157a1da9a554bc106d"
+          ],
+          "input_hashes": [
+            "f215a8917f82d1808449a9d4290caf25c63dc96df1012c1f6254b9cdacd42b3f",
+            "26f67c6c2850a08e7c9f268e378a12f7b911d7b9298d83aea3c5defd6f621867"
+          ],
+          "mapped": true
+        },
+        ".pdf/.pdf": {
+          "before": false,
+          "files": [
+            "cbbb9beddf52beb9485a940bf8df3a9042df3d9c60b0b5de1da81c4c593cc2af",
+            "304c82aa8c7e7d486447be3615afc1cdbaa8de6262f37ff2854136f43cef013f"
+          ],
+          "input_hashes": [
+            "f215a8917f82d1808449a9d4290caf25c63dc96df1012c1f6254b9cdacd42b3f",
+            "26f67c6c2850a08e7c9f268e378a12f7b911d7b9298d83aea3c5defd6f621867"
+          ],
+          "mapped": true
+        },
+        ".pdf/.txt": {
+          "before": false,
+          "files": [
+            "cbbb9beddf52beb9485a940bf8df3a9042df3d9c60b0b5de1da81c4c593cc2af",
+            "26f67c6c2850a08e7c9f268e378a12f7b911d7b9298d83aea3c5defd6f621867"
+          ],
+          "input_hashes": [
+            "f215a8917f82d1808449a9d4290caf25c63dc96df1012c1f6254b9cdacd42b3f",
+            "26f67c6c2850a08e7c9f268e378a12f7b911d7b9298d83aea3c5defd6f621867"
+          ],
+          "mapped": true
+        },
+        ".txt/.docx": {
+          "before": false,
+          "files": [
+            "f215a8917f82d1808449a9d4290caf25c63dc96df1012c1f6254b9cdacd42b3f",
+            "eebe782776bfb5aef169d5e8a6d71b3d10a12b4bb38ad2157a1da9a554bc106d"
+          ],
+          "input_hashes": [
+            "f215a8917f82d1808449a9d4290caf25c63dc96df1012c1f6254b9cdacd42b3f",
+            "26f67c6c2850a08e7c9f268e378a12f7b911d7b9298d83aea3c5defd6f621867"
+          ],
+          "mapped": true
+        },
+        ".txt/.pdf": {
+          "before": false,
+          "files": [
+            "f215a8917f82d1808449a9d4290caf25c63dc96df1012c1f6254b9cdacd42b3f",
+            "304c82aa8c7e7d486447be3615afc1cdbaa8de6262f37ff2854136f43cef013f"
+          ],
+          "input_hashes": [
+            "f215a8917f82d1808449a9d4290caf25c63dc96df1012c1f6254b9cdacd42b3f",
+            "26f67c6c2850a08e7c9f268e378a12f7b911d7b9298d83aea3c5defd6f621867"
+          ],
+          "mapped": true
+        },
+        ".txt/.txt": {
+          "before": true,
+          "files": [
+            "f215a8917f82d1808449a9d4290caf25c63dc96df1012c1f6254b9cdacd42b3f",
+            "26f67c6c2850a08e7c9f268e378a12f7b911d7b9298d83aea3c5defd6f621867"
+          ],
+          "input_hashes": [
+            "f215a8917f82d1808449a9d4290caf25c63dc96df1012c1f6254b9cdacd42b3f",
+            "26f67c6c2850a08e7c9f268e378a12f7b911d7b9298d83aea3c5defd6f621867"
+          ],
+          "mapped": true
+        }
+      },
+      "family": "gemini-2.5-flash",
+      "genre": "reports",
+      "parent_files": [
+        "6ed1a6e99c6318708896114dca0c49c1c019813e33fc6bb3fc15fcfed4949f93",
+        "370baa9c069f9bc742f6203a69bf02cc1786e01ae8b7f4df377547f14eccbba8"
+      ],
+      "role": "known_rewrite",
+      "source": "fc812c5a00d4488aa652647811f507efaa77dd1f0e282495d671a90360ecb517",
+      "words": [
+        99,
+        99
+      ]
+    },
+    {
+      "counts": [
+        1,
+        2
+      ],
+      "deliveries": {
+        ".docx/.docx": {
+          "before": false,
+          "files": [
+            "46949142e72d56d251f7c14d0d91f1b24823b903c011769f67316d408847145e",
+            "9a0b77241c6ac0e13ed353d6294dfa0211fe49ef317b9534abb9f98706a9c2e3"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".docx/.pdf": {
+          "before": false,
+          "files": [
+            "46949142e72d56d251f7c14d0d91f1b24823b903c011769f67316d408847145e",
+            "33141fad0900cfa70e3f07c98c16708c61240e69223db3d056efbace01e6d685"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".docx/.txt": {
+          "before": false,
+          "files": [
+            "46949142e72d56d251f7c14d0d91f1b24823b903c011769f67316d408847145e",
+            "2ece78c798f77aa7aa2c69b311e29b32be59d3fb1308a7314c174db6d4e9e8fd"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".pdf/.docx": {
+          "before": false,
+          "files": [
+            "fe3522b1d7dc0cc32286eb10cff5807fccd9529346f27dd00e4a7013efa71bd0",
+            "9a0b77241c6ac0e13ed353d6294dfa0211fe49ef317b9534abb9f98706a9c2e3"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".pdf/.pdf": {
+          "before": false,
+          "files": [
+            "fe3522b1d7dc0cc32286eb10cff5807fccd9529346f27dd00e4a7013efa71bd0",
+            "33141fad0900cfa70e3f07c98c16708c61240e69223db3d056efbace01e6d685"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".pdf/.txt": {
+          "before": false,
+          "files": [
+            "fe3522b1d7dc0cc32286eb10cff5807fccd9529346f27dd00e4a7013efa71bd0",
+            "2ece78c798f77aa7aa2c69b311e29b32be59d3fb1308a7314c174db6d4e9e8fd"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".txt/.docx": {
+          "before": false,
+          "files": [
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579",
+            "9a0b77241c6ac0e13ed353d6294dfa0211fe49ef317b9534abb9f98706a9c2e3"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".txt/.pdf": {
+          "before": false,
+          "files": [
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579",
+            "33141fad0900cfa70e3f07c98c16708c61240e69223db3d056efbace01e6d685"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".txt/.txt": {
+          "before": false,
+          "files": [
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579",
+            "2ece78c798f77aa7aa2c69b311e29b32be59d3fb1308a7314c174db6d4e9e8fd"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        }
+      },
+      "role": "punctuation_only",
+      "source": "5ef6d08b73d7e7468a8c56868c353595bcc9b5f92cd3352c4c5b2f8a990a6448"
+    },
+    {
+      "counts": [
+        1,
+        2
+      ],
+      "deliveries": {
+        ".docx/.docx": {
+          "before": false,
+          "files": [
+            "46949142e72d56d251f7c14d0d91f1b24823b903c011769f67316d408847145e",
+            "2de46e237933f460e447f82c0dc3f3c29a4df561c0789d669e62a212ae06384b"
+          ],
+          "input_hashes": [
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579",
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275"
+          ],
+          "mapped": true
+        },
+        ".docx/.pdf": {
+          "before": false,
+          "files": [
+            "46949142e72d56d251f7c14d0d91f1b24823b903c011769f67316d408847145e",
+            "5270e097f62b690be850448e97c547c40b47bf4471e646373d24199dc8ef2252"
+          ],
+          "input_hashes": [
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579",
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275"
+          ],
+          "mapped": true
+        },
+        ".docx/.txt": {
+          "before": false,
+          "files": [
+            "46949142e72d56d251f7c14d0d91f1b24823b903c011769f67316d408847145e",
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275"
+          ],
+          "input_hashes": [
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579",
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275"
+          ],
+          "mapped": true
+        },
+        ".pdf/.docx": {
+          "before": false,
+          "files": [
+            "fe3522b1d7dc0cc32286eb10cff5807fccd9529346f27dd00e4a7013efa71bd0",
+            "2de46e237933f460e447f82c0dc3f3c29a4df561c0789d669e62a212ae06384b"
+          ],
+          "input_hashes": [
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579",
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275"
+          ],
+          "mapped": true
+        },
+        ".pdf/.pdf": {
+          "before": false,
+          "files": [
+            "fe3522b1d7dc0cc32286eb10cff5807fccd9529346f27dd00e4a7013efa71bd0",
+            "5270e097f62b690be850448e97c547c40b47bf4471e646373d24199dc8ef2252"
+          ],
+          "input_hashes": [
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579",
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275"
+          ],
+          "mapped": true
+        },
+        ".pdf/.txt": {
+          "before": false,
+          "files": [
+            "fe3522b1d7dc0cc32286eb10cff5807fccd9529346f27dd00e4a7013efa71bd0",
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275"
+          ],
+          "input_hashes": [
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579",
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275"
+          ],
+          "mapped": true
+        },
+        ".txt/.docx": {
+          "before": false,
+          "files": [
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579",
+            "2de46e237933f460e447f82c0dc3f3c29a4df561c0789d669e62a212ae06384b"
+          ],
+          "input_hashes": [
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579",
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275"
+          ],
+          "mapped": true
+        },
+        ".txt/.pdf": {
+          "before": false,
+          "files": [
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579",
+            "5270e097f62b690be850448e97c547c40b47bf4471e646373d24199dc8ef2252"
+          ],
+          "input_hashes": [
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579",
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275"
+          ],
+          "mapped": true
+        },
+        ".txt/.txt": {
+          "before": false,
+          "files": [
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579",
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275"
+          ],
+          "input_hashes": [
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579",
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275"
+          ],
+          "mapped": true
+        }
+      },
+      "role": "authored_split",
+      "source": "ad1a64057f9ab34fecfe3f4ee78660bb0316dbda9370581ffbeb1e8bddf3d598"
+    },
+    {
+      "counts": [
+        2,
+        1
+      ],
+      "deliveries": {
+        ".docx/.docx": {
+          "before": false,
+          "files": [
+            "2de46e237933f460e447f82c0dc3f3c29a4df561c0789d669e62a212ae06384b",
+            "46949142e72d56d251f7c14d0d91f1b24823b903c011769f67316d408847145e"
+          ],
+          "input_hashes": [
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275",
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579"
+          ],
+          "mapped": true
+        },
+        ".docx/.pdf": {
+          "before": false,
+          "files": [
+            "2de46e237933f460e447f82c0dc3f3c29a4df561c0789d669e62a212ae06384b",
+            "fe3522b1d7dc0cc32286eb10cff5807fccd9529346f27dd00e4a7013efa71bd0"
+          ],
+          "input_hashes": [
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275",
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579"
+          ],
+          "mapped": true
+        },
+        ".docx/.txt": {
+          "before": false,
+          "files": [
+            "2de46e237933f460e447f82c0dc3f3c29a4df561c0789d669e62a212ae06384b",
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579"
+          ],
+          "input_hashes": [
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275",
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579"
+          ],
+          "mapped": true
+        },
+        ".pdf/.docx": {
+          "before": false,
+          "files": [
+            "5270e097f62b690be850448e97c547c40b47bf4471e646373d24199dc8ef2252",
+            "46949142e72d56d251f7c14d0d91f1b24823b903c011769f67316d408847145e"
+          ],
+          "input_hashes": [
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275",
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579"
+          ],
+          "mapped": true
+        },
+        ".pdf/.pdf": {
+          "before": false,
+          "files": [
+            "5270e097f62b690be850448e97c547c40b47bf4471e646373d24199dc8ef2252",
+            "fe3522b1d7dc0cc32286eb10cff5807fccd9529346f27dd00e4a7013efa71bd0"
+          ],
+          "input_hashes": [
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275",
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579"
+          ],
+          "mapped": true
+        },
+        ".pdf/.txt": {
+          "before": false,
+          "files": [
+            "5270e097f62b690be850448e97c547c40b47bf4471e646373d24199dc8ef2252",
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579"
+          ],
+          "input_hashes": [
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275",
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579"
+          ],
+          "mapped": true
+        },
+        ".txt/.docx": {
+          "before": false,
+          "files": [
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275",
+            "46949142e72d56d251f7c14d0d91f1b24823b903c011769f67316d408847145e"
+          ],
+          "input_hashes": [
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275",
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579"
+          ],
+          "mapped": true
+        },
+        ".txt/.pdf": {
+          "before": false,
+          "files": [
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275",
+            "fe3522b1d7dc0cc32286eb10cff5807fccd9529346f27dd00e4a7013efa71bd0"
+          ],
+          "input_hashes": [
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275",
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579"
+          ],
+          "mapped": true
+        },
+        ".txt/.txt": {
+          "before": false,
+          "files": [
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275",
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579"
+          ],
+          "input_hashes": [
+            "81c8198b1e6b0c2868c5cfeb3efebf683c3801f4cae9ace8265f7441c855a275",
+            "2d9e5eab0a518ce4818576c3c6c6473ade8574cfdd380a860464d1d63856d579"
+          ],
+          "mapped": true
+        }
+      },
+      "role": "authored_merge",
+      "source": "283128acef14943c127f7327ca8f57e7cd7c31ec6c5546de5d62ab16a2f9758a"
+    },
+    {
+      "counts": [
+        1,
+        2
+      ],
+      "deliveries": {
+        ".docx/.docx": {
+          "before": false,
+          "files": [
+            "1e41d779d15eef838c40b76513ea35213985b046b00674237704581ffb721cf7",
+            "74c7bd17c03327a8d83bd004e240b2785df0ca9fee0c939af2aa20d4c4522e4f"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".docx/.pdf": {
+          "before": false,
+          "files": [
+            "1e41d779d15eef838c40b76513ea35213985b046b00674237704581ffb721cf7",
+            "d79ee667b99ff34afdfc274022f1070277a92b67b5f4b491793a0f207b604bdb"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".docx/.txt": {
+          "before": false,
+          "files": [
+            "1e41d779d15eef838c40b76513ea35213985b046b00674237704581ffb721cf7",
+            "94204f3f638eb75f43eac30b348843697aa0f2ad4a6e49a8de4570e3dd33737c"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".pdf/.docx": {
+          "before": false,
+          "files": [
+            "e4f5f93ed9ac927366c2102684d921b683d07af9a5655259641492e1904744d7",
+            "74c7bd17c03327a8d83bd004e240b2785df0ca9fee0c939af2aa20d4c4522e4f"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".pdf/.pdf": {
+          "before": false,
+          "files": [
+            "e4f5f93ed9ac927366c2102684d921b683d07af9a5655259641492e1904744d7",
+            "d79ee667b99ff34afdfc274022f1070277a92b67b5f4b491793a0f207b604bdb"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".pdf/.txt": {
+          "before": false,
+          "files": [
+            "e4f5f93ed9ac927366c2102684d921b683d07af9a5655259641492e1904744d7",
+            "94204f3f638eb75f43eac30b348843697aa0f2ad4a6e49a8de4570e3dd33737c"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".txt/.docx": {
+          "before": false,
+          "files": [
+            "977e45c827c1fd8edb7eb89256aff14798c4e38a60602fce9a801b3eb3d4f231",
+            "74c7bd17c03327a8d83bd004e240b2785df0ca9fee0c939af2aa20d4c4522e4f"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".txt/.pdf": {
+          "before": false,
+          "files": [
+            "977e45c827c1fd8edb7eb89256aff14798c4e38a60602fce9a801b3eb3d4f231",
+            "d79ee667b99ff34afdfc274022f1070277a92b67b5f4b491793a0f207b604bdb"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        },
+        ".txt/.txt": {
+          "before": false,
+          "files": [
+            "977e45c827c1fd8edb7eb89256aff14798c4e38a60602fce9a801b3eb3d4f231",
+            "94204f3f638eb75f43eac30b348843697aa0f2ad4a6e49a8de4570e3dd33737c"
+          ],
+          "input_hashes": [],
+          "mapped": false
+        }
+      },
+      "role": "duplicate_anchor",
+      "source": "e24a5a32c9b8c8637ee33cd72bff6a05a140a48891a1c1a3b06447e1900b6446"
+    }
+  ],
+  "summary": {
+    "authored_merge": {
+      "before": 0,
+      "comparisons": 9,
+      "mapped": 9,
+      "works": 1
+    },
+    "authored_split": {
+      "before": 0,
+      "comparisons": 9,
+      "mapped": 9,
+      "works": 1
+    },
+    "duplicate_anchor": {
+      "before": 0,
+      "comparisons": 9,
+      "mapped": 0,
+      "works": 1
+    },
+    "known_rewrite": {
+      "before": 5,
+      "comparisons": 45,
+      "mapped": 45,
+      "works": 5
+    },
+    "punctuation_only": {
+      "before": 0,
+      "comparisons": 9,
+      "mapped": 0,
+      "works": 1
+    }
+  },
+  "writing_receipt_sha256": "86eab0d20e0919771b1c4ec4e395f87c58ca9fa255819afee53084af1e2d3128"
+}

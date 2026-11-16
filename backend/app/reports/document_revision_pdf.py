@@ -5,7 +5,7 @@ from __future__ import annotations
 from html import escape
 
 from app.evidence.document_revision import EDITED_RELOCATION_SCHEMA, HTML_COORDINATES
-from app.evidence.document_revision_writing import PDF_CONTINUATION_SCHEMA, STATUS_TEXT
+from app.evidence.document_revision_writing import BLOCK_DRAFT_SCHEMA, PDF_CONTINUATION_SCHEMA, STATUS_TEXT
 from app.reports.engine import _restricted_fetcher, load_weasyprint
 
 STYLE = """
@@ -84,8 +84,9 @@ def _paired(review: dict | None) -> str:
         return ""
     output = [f'<section><h2>Experimental paired writing check</h2><p>{escape(review["summary"])}</p>'
               f'<p>{escape(review["scope"])}</p>']
+    heading_unit = "passage" if review["schema"] == BLOCK_DRAFT_SCHEMA else "sentence"
     for number, revision in enumerate(review.get("revisions", ()), 1):
-        heading = f"Changed sentence {number}"
+        heading = f"Changed {heading_unit} {number}"
         output.append(f'<section class="keep-together"><h2>{heading}</h2>'
                       f'<p>{escape(STATUS_TEXT[revision["status"]])}</p>')
         if change_ids := revision.get("change_ids"):
@@ -96,8 +97,9 @@ def _paired(review: dict | None) -> str:
             changed_tokens = [span for change in revision.get("wording_changes", ())
                               for span in change[f"{side}_changed_tokens"]]
             paragraphs = item.get("context_paragraphs")
-            output.append(_side(f"{label} sentence", item | {"changed_tokens": changed_tokens,
-                                                             "paragraphs": [paragraphs[1]] if paragraphs else []}))
+            unit = "sentences" if len(item["context_spans"]) == 4 else "sentence"
+            paragraph = [paragraphs[1] | {"end": paragraphs[-2]["end"]}] if paragraphs else []
+            output.append(_side(f"{label} {unit}", item | {"changed_tokens": changed_tokens, "paragraphs": paragraph}))
         for i, row in enumerate(revision.get("responses") or (), 1):
             output.append(f'<p>Check {i} · {row["earlier"]:.4g} → {row["later"]:.4g}</p>')
         output.append("</section>")
@@ -171,7 +173,7 @@ def render(comparison: dict) -> bytes:
     changes = []
     docx = comparison["format"] == "docx"
     paired = comparison.get("paired_check")
-    keep_changes_together = paired and (paired.get("schema") == PDF_CONTINUATION_SCHEMA
+    keep_changes_together = paired and (paired.get("schema") in (PDF_CONTINUATION_SCHEMA, BLOCK_DRAFT_SCHEMA)
                                        or paired.get("earlier", {}).get("context_paragraphs"))
     change_class = ' class="keep-together"' if keep_changes_together else ""
     html_reply = comparison["coordinate_space"] == HTML_COORDINATES

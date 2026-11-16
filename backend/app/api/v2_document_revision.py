@@ -159,7 +159,7 @@ class DraftPairedCheck(BaseModel):
         "chipmunk.paired-writing-review/3", "chipmunk.paired-writing-review/4", "chipmunk.paired-writing-review/5",
         "chipmunk.paired-writing-review/6", "chipmunk.paired-writing-review/7", "chipmunk.paired-writing-review/8",
         "chipmunk.paired-writing-review/9", "chipmunk.paired-writing-review/10",
-        "chipmunk.paired-writing-review/11",
+        "chipmunk.paired-writing-review/11", "chipmunk.paired-writing-review/12",
     ] = Field(alias="schema")
     status: Literal["outside_scope", "unavailable", "no_joint_increase", "joint_increase"]
     scope: str
@@ -343,6 +343,8 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
     mixed_paired = (paired_requested and earlier_extension != extension
                     and earlier_extension in MIXED_DRAFTS and extension in MIXED_DRAFTS
                     and settings.document_paired_independent_review)
+    block_enabled = (settings.document_paired_block_review and settings.document_paired_independent_review
+                     and extension in MIXED_DRAFTS and (paired_enabled or mixed_paired))
     pdf_independent = paired_enabled and extension == ".pdf" and settings.document_paired_independent_review
     try:
         comparison, old_text, new_text, native_layouts = compare_with_sources(
@@ -356,7 +358,20 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
         raise ProblemError(422, "Could not compare drafts", str(error)) from None
     except OSError:
         raise ProblemError(500, "Earlier-draft comparison unavailable", "The local service could not stage the comparison.") from None
-    if mixed_paired:
+    blocks = []
+    if block_enabled:
+        try:
+            blocks = paired.block_anchored_revisions(comparison, old_text, new_text, native_layouts)
+        except ValueError as error:
+            log.warning("document_revision.block_mapping_unavailable", exception=type(error).__name__)
+    if blocks:
+        try:
+            responses = paired.score_separate(blocks)
+        except Exception as error:
+            log.warning("document_revision.paired_check_unavailable", exception=type(error).__name__)
+            responses = None
+        comparison["paired_check"] = paired.multiple_result(blocks, responses, draft_format=comparison["format"], blocks=True)
+    elif mixed_paired:
         candidates = []
         try:
             candidates = paired.mixed_anchored_revisions(comparison, old_text, new_text, native_layouts)

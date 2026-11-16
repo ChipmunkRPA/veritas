@@ -26,6 +26,12 @@ reported and confirming windows in the browser, PDF and signed JSON.
 It includes ordinary and isolated-background controls run under both
 rules on identical source bytes.
 
+The [shorter speech replay](audio-focused-long-transfer-2026-11-16.md#replay)
+applies the focused calibration to the same 240 longer deliveries. It
+exports a direct comparison and a second result requiring repeated short
+responses from different excerpts. The independent counter verifies both
+added sets of ranges against the exact sample truth.
+
 The [earlier JPEG and WebP replay](image-jpeg-webp-comparison-2026-11-16.md#replay)
 recounts 1,008 pairs from 48 photos and rebuilds the exact output masks
 from the original source banks. It includes three encoding recipes and

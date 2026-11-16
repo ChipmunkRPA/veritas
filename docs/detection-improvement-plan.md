@@ -76,6 +76,11 @@ are not public screening promises or calibrated population probabilities.
   displays both clips, waveforms and exact source intervals. Its signed
   export verifies both windows against the original recording.
 
+- [Shorter windows in long speech](audio-focused-long-transfer-2026-11-16.md)
+  locate one additional 340 ms edit at −5 dB and flag four extra
+  ordinary recordings. The strongest background test gains no correct
+  locations. This comparison stays in evaluation for longer recordings.
+
 - [Earlier JPEG compared with a lossy WebP](image-jpeg-webp-comparison-2026-11-16.md)
   locates meaningful differences in 111 of 144 known edit deliveries and
   marks none of 288 compression-only controls. The comparison shows both

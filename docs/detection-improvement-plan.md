@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Combining word locations with the writing-pattern ratio](writing-ratio-fusion-transfer-2026-11-15.md)
+  compares seven frozen rules on 113 unseen matched work pairs. The
+  two-word combination went from 7/113 to 8/113 useful locations and
+  from 28/113 to 30/113 ordinary flags at the wider point. The number
+  of useful locations with a matching ordinary flag rose from two to
+  four. Adding the ratio found no net gain and raised ordinary flags
+  to 35/113. The combinations stay in evaluation.
+
 - [Writing-pattern check on a local CPU](writing-pattern-cpu-memory-2026-11-15.md)
   restores the existing ratio when the two models cannot fit together.
   The Mac completed five local CPU analyses, including a two-context

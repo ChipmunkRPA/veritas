@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [word and ratio combination replay](writing-ratio-fusion-transfer-2026-11-15.md#replay)
+recalculates independent ordinary points for seven rules, then checks
+which source words each rule picked across 113 matched publisher pairs.
+It preserves true locations, false alarms and same-sentence flags on
+the matching originals.
+
 The [CPU writing-pattern replay](writing-pattern-cpu-memory-2026-11-15.md#replay)
 repeats a native memory-budget skip and verifies restored token coverage
 on two publisher pairs and a longer control. It exercises the original

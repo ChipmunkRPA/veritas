@@ -3529,3 +3529,8 @@ reconstructs clause, sentence and paragraph switches from credited
 sources. The portable reader compares exact English input recovery,
 foreign-text admission and raw responses on each side of 112 paired
 writing sources.
+
+The [within-sentence language replay](writing-within-sentence-language-2026-11-15.md#replay)
+counts language switches recovered by short source samples, compares
+their exact ranges with the planned insertions, and tests the verdict
+and export behavior on TXT, Word, EML and PDF in the paid app.

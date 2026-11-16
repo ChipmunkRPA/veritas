@@ -57,6 +57,22 @@ describe('ordinary multimedia evidence', () => {
     expect(evidence.getByLabelText('Listen to the soundtrack during the measured timing change').getAttribute('src')).toContain('.wav')
   })
 
+  it('shows the exact language evidence when all authorship checks were outside scope', () => {
+    show({ ...document, packets: [], coverage: { writing_check_coverage: {
+      schema: 'document-writing-check-coverage/3',
+      checks: { passage_classifier: 'not_applicable' },
+      reasons: { passage_classifier: 'mixed_language' },
+      language_witness: {
+        sentence: 3, range: { start: 16, end: 46, sha256: 'a'.repeat(64) },
+        context: { start: 8, end: 60, sha256: 'b'.repeat(64) },
+      },
+    } } })
+    const section = within(screen.getByRole('region', { name: 'Writing check coverage' }))
+    expect(section.getByText('The extracted text contained English and another language.')).toBeTruthy()
+    expect(section.getByText('Two overlapping samples in extracted sentence 3 indicated another language.')).toBeTruthy()
+    expect(section.getByText(/Marked characters \[16, 46\) and supporting context \[8, 60\)/)).toBeTruthy()
+  })
+
   it('distinguishes displayed passages from the full list of writing candidates', () => {
     show({ ...document, omitted_windows: 6, coverage: {
       scored_windows: 24,

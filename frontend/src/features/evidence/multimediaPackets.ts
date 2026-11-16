@@ -518,6 +518,10 @@ type WritingCheckCoverage =
   | { schema: 'document-writing-check-coverage/1'; checks: Partial<Record<WritingCheck, WritingCheckState>> }
   | { schema: 'document-writing-check-coverage/2'; checks: Partial<Record<WritingCheck, WritingCheckState>>;
       reasons: Partial<Record<WritingCheck, WritingCheckReason>> }
+  | { schema: 'document-writing-check-coverage/3'; checks: Partial<Record<WritingCheck, WritingCheckState>>;
+      reasons: Partial<Record<WritingCheck, WritingCheckReason>>;
+      language_witness: { sentence: number; range: { start: number; end: number; sha256: string };
+        context: { start: number; end: number; sha256: string } } }
 export interface EmailBodyAlternatives {
   status: 'difference' | 'equivalent' | 'unsupported'
   parts?: Record<'plain' | 'html', { id: string }>

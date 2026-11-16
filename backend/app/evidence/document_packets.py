@@ -526,6 +526,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if writing_checks := document_check_coverage.from_result(result):
         document["coverage"][document_check_coverage.KEY] = writing_checks
         document["source"][document_check_coverage.COMMITMENT] = document_check_coverage.commitment(writing_checks)
+        document_check_coverage.verify_source(document, text, decoded["sentences"])
     if visibility := decoded["meta"].get(document_pdf_visibility.KEY):
         document["coverage"][document_pdf_visibility.KEY] = visibility
     if bibliography := decoded["meta"].get(document_bibliography.KEY):
@@ -725,6 +726,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
                 raise ValueError("Word visibility evidence differs from the published result")
             document_word_visibility.verify_source(document, decoded["meta"].get(document_word_visibility.KEY), frozen=True)
             document_check_coverage.verify(document, document_check_coverage.commitment(document_check_coverage.from_result(result)))
+            document_check_coverage.verify_source(document, decoded["text"], decoded["sentences"])
             if document["source"].get(document_invisible_characters.COMMITMENT) != document_invisible_characters.from_result(result):
                 raise ValueError("Invisible-character evidence differs from the published result")
             document_invisible_characters.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])

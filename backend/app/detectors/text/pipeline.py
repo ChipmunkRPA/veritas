@@ -431,15 +431,16 @@ def _analyze_segmented(doc: Document, sents: list[Sentence], art_dir: Path | Non
             sentence["reasons"] = [notice]
         return result
     check_document_length(doc, sents)
-    scope = language_scope.classify(doc.text, sents)
+    scope, witness = language_scope.review(doc.text, sents, within_sentence=language_scope.clause_review_enabled())
     if scope in language_scope.MESSAGES:
-        return unassessed_language_document(doc, sents, scope)
+        return unassessed_language_document(doc, sents, scope, witness)
     scores, timings = score_document(doc, sents)
     return assemble_document(doc, sents, scores, art_dir, timings=timings, t0=t0)
 
 
-def unassessed_language_document(doc: Document, sents: list[Sentence], scope: str) -> dict:
-    headline, reason = language_scope.MESSAGES[scope]
+def unassessed_language_document(doc: Document, sents: list[Sentence], scope: str, witness: dict | None = None) -> dict:
+    headline = language_scope.MESSAGES[scope][0]
+    reason = language_scope.explanation(scope, witness)
     result = assemble_document(doc, sents, DocumentScores(n_sentences=len(sents)), None)
     result["verdict"].update(probability_ai=None, label="Not assessable", confidence="low",
                              summary=headline, reasoning=[reason], caveats=[reason])

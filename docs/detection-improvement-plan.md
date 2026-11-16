@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Language switches inside an English sentence](writing-within-sentence-language-2026-11-15.md)
+  withholds English-only writing scores when two source samples agree
+  on a different language. The paired check caught 60/61 previously
+  admitted substantial clauses and 99/133 previously admitted short
+  clauses, with zero extra stops across 336 controls. It records the
+  inspected sentence and character ranges in the local app and exports.
+
 - [English contexts in mixed-language documents](writing-language-window-transfer-2026-11-15.md)
   recovered an exact English context on all 448 prepared paragraph and
   sentence switches that the app left unassessed. The stricter rule

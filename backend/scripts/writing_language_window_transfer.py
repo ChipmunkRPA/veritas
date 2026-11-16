@@ -77,12 +77,12 @@ def candidates(sentences):
     }
 
 
-def foreign_bank(books):
+def foreign_bank(books, roster=BOOKS, *, count=28):
     from app.detectors.text.extract import from_string
     from app.detectors.text.segment import segment
 
     banks = {}
-    for language, (book, commitment) in BOOKS.items():
+    for language, (book, commitment) in roster.items():
         raw = (books / f"{book}.txt").read_bytes()
         assert sha(raw) == commitment
         interior = re.split(r"(?m)^\*\*\* START [^\n]+\n", raw.decode("utf-8-sig"), maxsplit=1)[1]
@@ -99,8 +99,8 @@ def foreign_bank(books):
                         and candidate.count(".") == 1 and candidate[0].isupper()):
                     sample.append(candidate)
         candidates = sorted(set(sample), key=sha)
-        assert len(candidates) >= 28, (language, len(candidates))
-        banks[language] = candidates[:28]
+        assert len(candidates) >= count, (language, len(candidates))
+        banks[language] = candidates[:count]
     return banks
 
 

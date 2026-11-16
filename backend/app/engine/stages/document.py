@@ -52,9 +52,10 @@ from app.evidence import (
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p36"
+PIPELINE_VERSION = "doc-2.0-p37"
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 BIBLIOGRAPHY_POLICY = "writing_bibliography_review_enabled"
+CLAUSE_POLICY = "writing_within_sentence_language_review_enabled"
 PRIMARY_DETECTORS = TEXT_PRIMARY_DETECTORS  # v0.3 used the fine-tune whenever it was installed
 SECONDARY_DETECTOR = "txt.hf.hello_simpleai"
 BINOCULARS_DETECTOR = "txt.binoculars"
@@ -160,6 +161,8 @@ def detect(ctx: StageContext) -> dict[str, Any]:
 
     decoded = ctx.outputs["decode"]
     scope = None
+    witness = None
+    clause_review = language_scope.clause_review_enabled()
     if not provenance_gate.stop(ctx):
         doc, sentences = document_input(ctx)
         ctx.check("before identifying writing language")
@@ -172,7 +175,7 @@ def detect(ctx: StageContext) -> dict[str, Any]:
         elif covered and decoded["words"] < MIN_WORDS:
             scope = language_scope.TOO_LITTLE_AFTER_COVER
         else:
-            scope = language_scope.classify(doc.text, sentences)
+            scope, witness = language_scope.review(doc.text, sentences, within_sentence=clause_review)
         ctx.check("after identifying writing language")
     detected = common.run_detectors(ctx, (Modality.TEXT,),
                                     outputs=StageOutputs(document={**decoded, language_scope.KEY: scope}),
@@ -185,13 +188,15 @@ def detect(ctx: StageContext) -> dict[str, Any]:
         except Exception as error:
             ctx.check("after the optional second writing check")
             ctx.log.warning("writing_review.omitted", error_type=type(error).__name__)
-    return {**detected, language_scope.KEY: scope}
+    return {**detected, language_scope.KEY: scope, CLAUSE_POLICY: clause_review,
+            **({language_scope.CLAUSE_KEY: witness} if witness else {})}
 
 
 def current_detect_output(output: Any) -> bool:
     """Require an explicit coverage decision before reusing fresh detector outputs."""
     return (isinstance(output, dict) and isinstance(output.get("detectors"), list)
             and language_scope.KEY in output
+            and output.get(CLAUSE_POLICY, False) is language_scope.clause_review_enabled()
             and output[language_scope.KEY] in (None, language_scope.ENGLISH, *language_scope.MESSAGES))
 
 
@@ -410,7 +415,8 @@ def fuse(ctx: StageContext) -> dict[str, Any]:
     detected = ctx.outputs.get("detect") or {}
     doc, sents = document_input(ctx)
     if (scope := detected.get(language_scope.KEY)) in language_scope.MESSAGES:
-        return enforce_extraction_scope(unassessed_language_fusion(ctx, doc, sents, scope), doc)
+        return enforce_extraction_scope(
+            unassessed_language_fusion(ctx, doc, sents, scope, detected.get(language_scope.CLAUSE_KEY)), doc)
     local_mode = settings.text_detector_mode == "candidate" and pin is None
     local_email = pin == document_screening.EMAIL_SHA256 or (local_mode and not ctx.state.get("force_fallback"))
     selection = (Selection(kind="document", mode="fallback") if local_mode or local_email
@@ -477,11 +483,14 @@ def fuse(ctx: StageContext) -> dict[str, Any]:
     return enforce_extraction_scope(fused, doc)
 
 
-def unassessed_language_fusion(ctx: StageContext, doc: Document, sents: list[Sentence], scope: str) -> dict[str, Any]:
-    headline, reason = language_scope.MESSAGES[scope]
+def unassessed_language_fusion(
+    ctx: StageContext, doc: Document, sents: list[Sentence], scope: str, witness: dict | None = None,
+) -> dict[str, Any]:
+    headline = language_scope.MESSAGES[scope][0]
+    reason = language_scope.explanation(scope, witness)
     decision = Decision(code="not_assessable", verbal=headline, reason=reason,
                         band="uncertain", confidence="low", fusion_mode="fallback").model_dump(mode="json")
-    legacy = unassessed_language_document(doc, sents, scope)
+    legacy = unassessed_language_document(doc, sents, scope, witness)
     assessments = [{**row, "note": reason} if row["hypothesis"] == "H1_whole_content_synthesis" else row
                    for row in common.LEGACY_ASSESSMENTS]
     profile = {**ctx.outputs["condition"]["profile"], "within_validated_envelope": False,
@@ -564,6 +573,7 @@ def publish(ctx: StageContext) -> dict[str, Any]:
     if writing_checks := document_check_coverage.capture(
         detected.get("detectors", []), PRIMARY_DETECTORS, BINOCULARS_DETECTOR,
         language=detected.get(language_scope.KEY), verified_credentials=verified_credentials,
+        language_witness=document_check_coverage.freeze_witness(decoded["text"], detected.get(language_scope.CLAUSE_KEY)),
     ):
         result.manifest.sampling[document_check_coverage.KEY] = writing_checks
     if word_visibility := decoded.get("meta", {}).get(document_word_visibility.KEY):

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime
@@ -26,6 +27,7 @@ from app.engine import pipelines
 from app.engine.customer_assessment import customer_assessment
 from app.engine.detector import Profile
 from app.engine.stages import document
+from app.evidence import document_check_coverage
 from app.evidence.document_packets import build_packet_set
 from app.reports import engine, public_package
 from app.reports import snapshot as reports_snapshot
@@ -82,6 +84,28 @@ def test_shared_language_identifier_is_safe_under_parallel_use(monkeypatch):
     with ThreadPoolExecutor(max_workers=4) as pool:
         readings = list(pool.map(extract._ocr_language, (text for text, _ in samples)))
     assert [reading["code"] for reading in readings] == [code for _, code in samples]
+
+
+def test_clause_witness_requires_the_two_saved_ranges_in_the_original_sentence():
+    text = " ".join(["sample"] * 20)
+    last_short = len(" ".join(["sample"] * 12))
+    record = document_check_coverage.freeze_witness(text, {
+        "start": 0, "end": last_short, "context_start": 0, "context_end": len(text), "sentence": 0,
+    })
+    coverage = {"schema": document_check_coverage.CLAUSE_SCHEMA,
+                "checks": {"passage_classifier": "not_applicable"},
+                "reasons": {"passage_classifier": "mixed_language"}, "language_witness": record}
+    evidence = {"source": {"chars": len(text)}, "coverage": {document_check_coverage.KEY: coverage}}
+    sentences = [{"start": 0, "end": len(text)}]
+    commitment = document_check_coverage.commitment(coverage)
+    document_check_coverage.verify(evidence, commitment)
+    document_check_coverage.verify_source(evidence, text, sentences)
+    with pytest.raises(ValueError, match="recorded original text"):
+        document_check_coverage.verify_source(evidence, text.replace("sample", "source", 1), sentences)
+    corrupt = copy.deepcopy(evidence)
+    corrupt["coverage"][document_check_coverage.KEY]["language_witness"]["context"]["end"] += 1
+    with pytest.raises(ValueError, match="outside the extracted document"):
+        document_check_coverage.verify(corrupt, document_check_coverage.commitment(corrupt["coverage"][document_check_coverage.KEY]))
 
 
 def forbid(*_args, **_kwargs):

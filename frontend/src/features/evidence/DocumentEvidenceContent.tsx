@@ -319,6 +319,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const matched = set.coverage?.matched_context_review
   const writingAgreement = set.coverage?.writing_second_check
   const writingChecks = set.coverage?.writing_check_coverage
+  const languageWitness = writingChecks?.schema === 'document-writing-check-coverage/3' ? writingChecks.language_witness : null
   const scoredWindows = set.coverage?.scored_windows
   const balancedSelection = set.coverage?.balanced_passage_selection
   const tracked = set.coverage?.word_tracked_changes
@@ -453,12 +454,19 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         {([['passage_classifier', 'Passage classifier'], ['writing_pattern_ratio', 'Writing-pattern ratio']] as const)
           .map(([key, name]) => {
             const state = writingChecks.checks[key]
-            const reason = writingChecks.schema === 'document-writing-check-coverage/2' && writingChecks.reasons[key]
+            const reason = writingChecks.schema !== 'document-writing-check-coverage/1' && writingChecks.reasons[key]
             return state && <li key={key}>{name} · {writingCheckLabels[state]}
               {reason && <span className="ml-1 text-text-muted">{writingCheckReasons[reason]}</span>}
             </li>
           })}
       </ul>
+      {languageWitness && <div id="writing-language-location" className="mt-3 text-small">
+        <p className="m-0">Two overlapping samples in extracted sentence {languageWitness.sentence} indicated another language.</p>
+        <p className="mt-1 mb-0 text-caption text-text-muted">
+          Marked characters [{languageWitness.range.start}, {languageWitness.range.end}) and supporting context
+          {' '}[{languageWitness.context.start}, {languageWitness.context.end}) use zero-based extracted-text offsets.
+        </p>
+      </div>}
     </section>}
     <DocumentInspectionMap packets={set.packets} selectedId={selectedId} onSelect={selectPassage} />
     {set.coverage?.writing_bibliography && <BibliographyCoverage review={set.coverage.writing_bibliography} />}

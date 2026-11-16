@@ -144,6 +144,13 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_word_visibility.verify_source(evidence, doc.meta.get(document_word_visibility.KEY))
     document_invisible_characters.verify_source(evidence, text, mapping, doc.meta)
     document_chat_markers.verify_source(evidence, text, mapping, doc.meta)
+    from app.evidence import document_check_coverage
+
+    checks = coverage.get(document_check_coverage.KEY) or {}
+    if checks.get("language_witness"):
+        from app.detectors.text.pipeline import segment_within
+
+        document_check_coverage.verify_source(evidence, text, [asdict(row) for row in segment_within(doc)])
     if document_percentage_consistency.KEY in evidence:
         from app.detectors.text.pipeline import segment_within
 

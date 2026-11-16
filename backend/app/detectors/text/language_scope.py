@@ -10,6 +10,7 @@ from app.detectors.text.segment import Sentence
 from app.evidence import document_tracked_changes
 
 KEY = "writing_language_scope"
+CLAUSE_KEY = "writing_language_clause"
 ENGLISH = "english"
 TOO_LITTLE_AFTER_COVER = "too_little_after_cover"
 UNSUPPORTED_WORD_REVISIONS = "unsupported_word_revisions"
@@ -88,3 +89,30 @@ def classify(text: str, sentences: list[Sentence]) -> str:
     if other:
         return "unsupported"
     return ENGLISH if whole == "en" else "unknown"
+
+
+def clause_review_enabled() -> bool:
+    from app.core.config import settings
+
+    return settings.environment == "dev" and settings.text_within_sentence_language_review
+
+
+def review(text: str, sentences: list[Sentence], *, within_sentence: bool) -> tuple[str, dict | None]:
+    scope = classify(text, sentences)
+    if scope == ENGLISH and within_sentence:
+        from app.detectors.text.language_clauses import candidates
+
+        if witness := candidates(sentences)["paired"]:
+            return "mixed", witness
+    return scope, None
+
+
+def explanation(scope: str, witness: dict | None = None) -> str:
+    reason = MESSAGES[scope][1]
+    if witness:
+        first, last = witness["start"], witness["end"]
+        reason += (
+            f" Two overlapping samples indicated another language in extracted sentence {witness['sentence'] + 1}. "
+            f"The marked range is [{first}, {last}) in extracted-text characters."
+        )
+    return reason

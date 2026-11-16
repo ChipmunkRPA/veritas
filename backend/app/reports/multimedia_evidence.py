@@ -600,6 +600,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     if isinstance(email, dict) and canonical_hash(email) != canonical_hash(decoded.get("meta", {}).get("email")):
         raise ObjectIntegrityError("Frozen email coverage differs from the recorded extraction")
     try:
+        document_check_coverage.verify_source(document, text, decoded["sentences"])
         document_tracked_changes.verify_source(document, decoded.get(document_tracked_changes.KEY),
                                               expected=source.get(document_tracked_changes.COMMITMENT))
         verify_repeated_passages(document, text, mapping)
@@ -848,6 +849,8 @@ def _document_coverage_details(coverage: dict) -> list[str]:
         if key in checks:
             reason = f" {document_check_coverage.REASONS[reasons[key]][1]}" if key in reasons else ""
             notes.append(f"{title}. {document_check_coverage.LABELS[checks[key]]}.{reason}")
+    if witness := writing.get("language_witness"):
+        notes.append(document_check_coverage.witness_description(witness))
     if bibliography := coverage.get(document_bibliography.KEY):
         notes.append(f"{document_bibliography.notice(bibliography)} Location in original: "
                      f"{document_bibliography.location_label(bibliography)}. Citation accuracy was not assessed.")

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [frozen short speech union replay](audio-short-edit-union-holdout-2026-11-15.md#reproduce)
+reconstructs both combined decisions and paired false alarms on 32
+additional reader pairs. It records the shape of the edit, each
+predicted span and the new room sample commitments.
+
 The [short speech window replay](audio-short-edit-duration-transfer-2026-11-15.md#reproduce)
 checks fixed, dense, width-calibrated and context-relative intervals
 under loud competing speech. The two receipts reconstruct the operating

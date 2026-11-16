@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Frozen comparison of combined short speech checks](audio-short-edit-union-holdout-2026-11-15.md)
+  tests the previously suggested union and fallback on 32 new reader
+  pairs with six new room recordings. Both combinations retained one
+  useful location and increased ordinary flags from 10/32 to 14/32.
+  The shorter rule stays in evaluation.
+
 - [Shorter speech windows under competing conversation](audio-short-edit-duration-transfer-2026-11-15.md)
   tests denser starts, width-specific calibration and nearby-speech contrast.
   On 16 fresh noisy reader pairs, the two-second app scan found one

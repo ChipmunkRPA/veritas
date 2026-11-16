@@ -93,7 +93,9 @@ An exploratory union of the current scan and the second fit's wider
 width-calibrated result located two different edits out of 16 and
 flagged two ordinary originals out of 16. The union was considered
 after seeing the results. A separately frozen comparison would be
-needed to assess that combination.
+needed to assess that combination. That [subsequent frozen comparison](audio-short-edit-union-holdout-2026-11-15.md)
+tested 32 other reader pairs and observed zero additional useful
+locations and four additional ordinary flags.
 
 ## Reproduce
 

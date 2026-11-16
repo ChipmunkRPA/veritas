@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Separate-channel replication on two other rooms](audio-stereo-channel-replication-2026-11-15.md)
+  used 24 previously unselected MLS readers and fresh replacements from
+  two stock generators. The tighter rule matched the existing 3/36 useful
+  locations and 1/24 ordinary flags. The wider rule reached 4/36, with
+  4/24 ordinary flags and four added misplaced intervals. Both channel
+  scoring routes remain in evaluation.
+
 - [Separate stereo channel readings under loud speech](audio-stereo-regression-2026-11-15.md)
   tested 150 held stereo deliveries. The tighter physical-channel fallback
   raised correctly located edits from 3/80 to 5/80 and ordinary flags from

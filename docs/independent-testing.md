@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [separate-channel transfer replay](audio-stereo-channel-replication-2026-11-15.md#replay)
+recounts the two existing operating points on 60 new matched stereo
+clips. The native route regenerates the source selections, stock voice
+inserts and both measured room responses before checking the scores.
+
 The [stereo background-speech replay](audio-stereo-regression-2026-11-15.md#replay)
 separately measures physical channels and a mid-side filter on measured
 room responses and recorded competing speech. It recounts localization,

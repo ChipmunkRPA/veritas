@@ -54,14 +54,14 @@ def read(path):
     return json.loads(path.read_text())
 
 
-def shard(path, domain, family, expected):
+def shard(path, domain, family, expected, *, split="test"):
     if pool.file_hash(path) != expected:
         raise ValueError("Publisher shard differs")
     rows = defaultdict(dict)
     csv.field_size_limit(1024 * 1024)
     with path.open(newline="", encoding="utf-8") as stream:
         for row in csv.DictReader(stream, strict=True):
-            if (row["domain"], row["generator"], row["split"], row["subset"]) != (domain, family, "test", "main"):
+            if (row["domain"], row["generator"], row["split"], row["subset"]) != (domain, family, split, "main"):
                 raise ValueError("Unexpected publisher source")
             version = row["version"]
             work = rows[row["id"]]

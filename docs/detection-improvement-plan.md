@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Use adjacent word features to locate rewrites](writing-word-neighbors-2026-11-15.md)
+  compared two small heads and their average with the incumbent. On 48
+  previously unused abstract pairs from two generators, adjacency reduced
+  ordinary flags from 14 to six and found one useful location, matching the
+  incumbent's count. Both highlights repeated in the matching ordinary
+  sentence. The new checks stay in evaluation.
+
 - [Two rotated-copy pairs in a larger JPEG](image-jpeg-disjoint-rotation-2026-11-15.md)
   locates both pairs in 26/40 staged double edits, up from 0/40. It adds
   one misplaced pair and no flags on 109 ordinary controls. The local

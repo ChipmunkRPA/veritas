@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [neighboring-word replay](writing-word-neighbors-2026-11-15.md#replay)
+rebuilds the 48-work abstract holdout from two pin-checked publisher files.
+The portable reviewer compares word highlights, wrong-sentence selections,
+and matches against ordinary originals using recorded offsets and scores.
+
 The [two rotated-copy pairs replay](image-jpeg-disjoint-rotation-2026-11-15.md#local-app-and-replay)
 checks both crop pairs against the labeled locations, replays the previous
 single-edit results on the same bytes, and verifies that the browser, PDF,

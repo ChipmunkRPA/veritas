@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Historical editorial revisions as writing controls](writing-historical-editorial-negatives-2026-11-15.md)
+  adds 120 separate dated Wikipedia test articles and tests 180 other
+  articles as training controls. Either original or edited Wikipedia text
+  cleared the same four flags on revised Wikipedia controls. On 84 news
+  and report pairs, combining the revised-text fit with the existing
+  two-range check raised useful locations from 4/84 to 6/84 and ordinary
+  flags from 11/84 to 31/84 at the wider point. The fits stay in evaluation.
+
 - [Language switches inside an English sentence](writing-within-sentence-language-2026-11-15.md)
   withholds English-only writing scores when two source samples agree
   on a different language. The paired check caught 60/61 previously

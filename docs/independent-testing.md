@@ -3534,3 +3534,9 @@ The [within-sentence language replay](writing-within-sentence-language-2026-11-1
 counts language switches recovered by short source samples, compares
 their exact ranges with the planned insertions, and tests the verdict
 and export behavior on TXT, Word, EML and PDF in the paid app.
+
+The [historical editorial controls replay](writing-historical-editorial-negatives-2026-11-15.md#replay)
+checks all 300 public Wikipedia revision identities, measures false
+flags before and after ordinary rewriting, and recounts combinations
+against two separate English rewrite panels. The receipt retains
+article and revision numbers for source review.

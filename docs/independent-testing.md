@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [stereo speech confirmation replay](audio-clean-speech-close-confirmation-2026-11-15.md#replay)
+rechecks the evidence from both original channels, including whether 0.8-second
+window spacing recovers an edit or flags an unrelated reference. Its native
+route reproduces 528 comparison pairs from committed source recordings.
+
 The [same-speaker word-replacement replay](video-lip-content-transfer-2026-11-15.md#replay)
 compares exact soundtrack replacements with matched same-word edits and
 constant delays. The native picture audit checks the original frame clocks

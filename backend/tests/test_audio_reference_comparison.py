@@ -45,6 +45,40 @@ def save_stereo(folder, name, samples):
     return path
 
 
+@pytest.mark.parametrize(("right_start", "allowed", "supported"), [
+    (32000, True, True), (None, True, False), (38400, True, False), (32000, False, False),
+])
+def test_closer_stereo_windows_need_common_range_on_both_channels(monkeypatch, right_start, allowed, supported):
+    from app.evidence import audio_clean_speech_long as long
+    from app.evidence import audio_clean_speech_stereo as stereo
+
+    baseline = "no_corroborated_local_change"
+    views = {name: {"reason": baseline, "range": None} for name in ("downmix", "left", "right")}
+    observations = dict.fromkeys(views, (baseline, None, None))
+    support = {side: [{"admitted": True, "upper_correlation": value}] * 2
+               for side, value in (("left", .5), ("right", .35))}
+    monkeypatch.setattr(stereo, "observe", lambda *_: (observations, views, support))
+    starts = {1: 32000, 2: 30400, 3: right_start}
+
+    def windows(_earlier, pcm, _reason):
+        start = starts[int(pcm[0])]
+        return [] if start is None else [{"start": position, "result": {
+            "samples": [start, start + 11520], "relative_drop": .5,
+        }} for position in (6400, 19200)]
+
+    monkeypatch.setattr(long, "denser_windows", windows)
+    channels = np.array([[2, 3]])
+    reason, result, _, proof = stereo.locate(np.array([0]), np.array([1]), channels, allow_close_consensus=allowed)
+    assert reason == ("local_change" if supported else baseline)
+    if supported:
+        assert result["supporting_window_starts"] == [6400, 19200]
+        assert result["samples"] == [32000, 43520]
+        assert proof["witness_channels"] == ["left", "right"]
+        assert proof["channel_window_starts"] == {"left": [6400, 19200], "right": [6400, 19200]}
+    else:
+        assert result is None and "channel_window_starts" not in proof
+
+
 def test_stereo_comparison_preserves_changes_hidden_by_downmix_and_exact_tail(tmp_path):
     rng = np.random.default_rng(451)
     before = rng.integers(-4000, 4001, (20123, 2), dtype=np.int16) * 2

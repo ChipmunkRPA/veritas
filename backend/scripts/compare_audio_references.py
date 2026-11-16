@@ -15,6 +15,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_CLEAN_SPEECH,
     SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD,
     SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
+    SCHEMA_WITH_CLOSE_STEREO_AAC,
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
     SCHEMA_WITH_DENSER_STEREO_AAC,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
@@ -62,6 +63,7 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False, c
                                      allow_long_clean_speech=schema != SCHEMA_WITH_AAC_CLEAN_SPEECH,
                                      include_clean_speech_stereo_aac=schema in STEREO_AAC_SPEECH_SCHEMAS,
                                      allow_denser_stereo_windows=schema == SCHEMA_WITH_DENSER_STEREO_AAC,
+                                     allow_close_stereo_consensus=schema == SCHEMA_WITH_CLOSE_STEREO_AAC,
                                      include_local_timing="local_timing" in record,
                                      include_aac_timing="aac_presentation" in record.get("local_timing", {}),
                                      include_channel_timing="channel_timing" in record)

@@ -394,10 +394,11 @@ it('shows exact moved sound in the reported stereo channel', async () => {
   expect(screen.queryByRole('region', { name: 'Right channel timing' })).toBeNull()
 })
 
-it.each([[8, false], [11, false], [12, false], [13, false], [16, false], [16, true], [17, true], [18, true], [19, true]])(
+it.each([[8, false], [11, false], [12, false], [13, false], [16, false], [16, true], [17, true], [18, true], [19, true], [20, true]])(
   'shows both source excerpts for local speech comparison version %s with 48 kHz AAC %s', async (version, highRate) => {
   const stereo = version >= 18
-  const denser = version === 19
+  const denser = version >= 19
+  const both = version === 20
   const long = version >= 17
   const aac = version === 16 || long
   const dense = version !== 8 && !long
@@ -415,12 +416,13 @@ it.each([[8, false], [11, false], [12, false], [13, false], [16, false], [16, tr
         presentation_end_exclusive_pts: long ? 192000 : 96000, excluded_trailing_samples: 256,
         ...(highRate && { native_clock: { sample_rate: 48000, channels: version === 17 ? 1 : 2,
           presentation_end_exclusive_pts: long ? 576000 : 288000 } }) } } : {}),
-      ...(stereo && { stereo_support: { witness_channels: ['left'], ...(denser && { denser_window_starts: true }),
+      ...(stereo && { stereo_support: { witness_channels: both ? ['left', 'right'] : ['left'], ...(denser && { denser_window_starts: true }),
+        ...(both && { channel_window_starts: { left: [6400, 19200], right: [12800, 25600] } }),
         views: { downmix: { reason: 'local_change', range: [32000, 43520] },
           left: { reason: 'local_change', range: [32000, 43520] },
-          right: { reason: 'no_corroborated_local_change', range: null } } } }),
+          right: both ? { reason: 'local_change', range: [32000, 43520] } : { reason: 'no_corroborated_local_change', range: null } } } }),
       range: { earlier: excerpt, submitted: excerpt, relative_drop: .5,
-        ...(denser && { supporting_window_starts: [6400, 25600] }),
+        ...(denser && { supporting_window_starts: [6400, both ? 19200 : 25600] }),
         bands: [[300, 900], [900, 1750]].map(band_hz => ({ band_hz, before: 1, within: .5, after: 1 })) } },
   }
   const fetch = vi.fn().mockResolvedValueOnce(Response.json({ available: true, clean_speech_available: true,
@@ -442,8 +444,10 @@ it.each([[8, false], [11, false], [12, false], [13, false], [16, false], [16, tr
   expect(Boolean(screen.queryByText(new RegExp(`AAC duration ${long ? 12 : 6}\\.000 s.*256 trailing decoded samples excluded`)))).toBe(aac)
   expect(Boolean(screen.queryByText(/48 kHz stereo source/))).toBe(highRate && version !== 17)
   expect(Boolean(screen.queryByText(/48 kHz mono source/))).toBe(version === 17)
-  expect(Boolean(screen.queryByText('The left channel supported 2.000–2.720 s.'))).toBe(stereo)
-  expect(Boolean(screen.queryByText(/found by checking additional window starts/))).toBe(denser)
+  expect(Boolean(screen.queryByText(/^The left channel supported 2\.000–2\.720 s\./))).toBe(stereo)
+  expect(Boolean(screen.queryByText(/found by checking additional window starts/))).toBe(denser && !both)
+  expect(Boolean(screen.queryByText(/The right channel supported .*checks started at 0\.800 s and 1\.600 s/))).toBe(both)
+  expect(Boolean(screen.queryByText(/Both original channels supported the same part/))).toBe(both)
   expect(screen.getAllByRole('img', { name: /matched excerpt waveform/ })).toHaveLength(2)
   expect((fetch.mock.calls[1][1].body as FormData).get('earlier_has_clean_speech')).toBe('true')
   expect(screen.getByRole('button', { name: 'Download PDF' })).toBeTruthy()

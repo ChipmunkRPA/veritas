@@ -87,6 +87,7 @@ type CleanSpeechComparison = {
   aac_presentation?: SoundtrackTiming['aac_presentation']
   stereo_support?: {
     denser_window_starts?: true
+    channel_window_starts?: Record<'left' | 'right', [number, number]>
     views: Record<'downmix' | 'left' | 'right', { reason: string; range: [number, number] | null }>
     witness_channels: ('left' | 'right')[]
   }
@@ -197,6 +198,7 @@ type Comparison = {
     | 'chipmunk.audio-reference-comparison/13' | 'chipmunk.audio-reference-comparison/14'
     | 'chipmunk.audio-reference-comparison/15' | 'chipmunk.audio-reference-comparison/16'
     | 'chipmunk.audio-reference-comparison/17' | 'chipmunk.audio-reference-comparison/18' | 'chipmunk.audio-reference-comparison/19'
+    | 'chipmunk.audio-reference-comparison/20'
   picture?: never
   picture_insertion?: never
   insertion_retention?: never
@@ -593,7 +595,8 @@ function ResultView({ result }: { result: Result }) {
         comparison.schema === 'chipmunk.audio-reference-comparison/16' ||
         comparison.schema === 'chipmunk.audio-reference-comparison/17' ||
         comparison.schema === 'chipmunk.audio-reference-comparison/18' ||
-        comparison.schema === 'chipmunk.audio-reference-comparison/19') && 'Decoded sample comparison unavailable. '}
+        comparison.schema === 'chipmunk.audio-reference-comparison/19' ||
+        comparison.schema === 'chipmunk.audio-reference-comparison/20') && 'Decoded sample comparison unavailable. '}
       {notes[comparison.status] ?? 'The files could not be compared.'}
     </p>}
     {comparison.aligned_speech && <AlignedSpeechEvidence result={comparison.aligned_speech} assets={assets} />}
@@ -718,8 +721,10 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
     <SoundtrackTimingEvidence timing={result} assets={assets} audioOnly title="Local speech comparison" analyzedMono={!!stereo} />
     {stereo?.witness_channels.map(channel => {
       const range = stereo.views[channel].range
+      const starts = stereo.channel_window_starts?.[channel]
       return range && <p key={channel} className="m-0 text-caption text-text-muted">
         The {channel} channel supported {sourceSeconds.format(range[0] / trimSampleRate)}–{sourceSeconds.format(range[1] / trimSampleRate)} s.
+        {starts && ` Its checks started at ${sourceSeconds.format(starts[0] / trimSampleRate)} s and ${sourceSeconds.format(starts[1] / trimSampleRate)} s.`}
       </p>
     })}
     {support && <p className="m-0 text-caption text-text-muted">
@@ -733,7 +738,9 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
     {span?.supporting_window_starts && <p className="m-0 text-caption text-text-muted">
       Two six-second checks starting at {sourceSeconds.format(span.supporting_window_starts[0] / trimSampleRate)} s and{' '}
       {sourceSeconds.format(span.supporting_window_starts[1] / trimSampleRate)} s agreed.
-      {stereo?.denser_window_starts && ' The interval was found by checking additional window starts.'}
+      {stereo?.channel_window_starts
+        ? ' Both original channels supported the same part of the interval.'
+        : stereo?.denser_window_starts && ' The interval was found by checking additional window starts.'}
     </p>}
     {span && result.basis && <div className="text-caption text-text-muted">
       <p className="m-0">Drop in signed matching-sound gain {span.relative_drop.toFixed(3)}.</p>
@@ -813,7 +820,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       const accepted = kind === 'video' && !hasCoverage ? 14 : 13
       const hasAacSpeech = kind === 'audio' && schema === 'chipmunk.audio-reference-comparison/16'
       const hasStereoAacSpeech = kind === 'audio' && (schema === 'chipmunk.audio-reference-comparison/18' ||
-        schema === 'chipmunk.audio-reference-comparison/19')
+        schema === 'chipmunk.audio-reference-comparison/19' || schema === 'chipmunk.audio-reference-comparison/20')
       const hasLongAacSpeech = hasStereoAacSpeech || (kind === 'audio' && schema === 'chipmunk.audio-reference-comparison/17')
       if (!hasAacSpeech && !hasLongAacSpeech && !Array.from({ length: accepted }, (_, index) => index + 1).some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
@@ -870,6 +877,13 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
             !Array.isArray(stereo.witness_channels) || (!!stereo.witness_channels.length !== !!localSpeech?.range) ||
             stereo.witness_channels.some(channel => !['left', 'right'].includes(channel) || !stereo.views[channel]?.range)) {
           throw new Error('The comparison response is missing its stereo speech evidence.')
+        }
+        if (stereo.channel_window_starts && (schema !== 'chipmunk.audio-reference-comparison/20' ||
+            !(['left', 'right'] as const).every(side => {
+              const starts = stereo.channel_window_starts?.[side]
+              return stereo.witness_channels.includes(side) && starts?.length === 2 && starts[1] - starts[0] === 12800
+            }))) {
+          throw new Error('The comparison response is missing the window starts for both channels.')
         }
       }
       if ((schema === 'chipmunk.audio-reference-comparison/7' || schema === 'chipmunk.video-reference-comparison/8')

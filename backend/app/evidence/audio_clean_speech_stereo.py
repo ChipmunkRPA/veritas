@@ -11,6 +11,11 @@ def overlap(a, b):
     return 2 * (min(a[1], b[1]) - max(a[0], b[0])) >= max(a[1] - a[0], b[1] - b[0])
 
 
+def common_half_range(ranges):
+    return (2 * (min(end for _, end in ranges) - max(start for start, _ in ranges))
+            >= max(end - start for start, end in ranges))
+
+
 def select(readings, support):
     left, right = (readings[side]["range"] for side in CHANNELS)
     agreement = None
@@ -65,7 +70,7 @@ def observe(earlier, views):
     return observations, readings, support
 
 
-def locate(earlier, downmix, stereo, *, allow_denser_windows=False):
+def locate(earlier, downmix, stereo, *, allow_denser_windows=False, allow_close_consensus=False):
     views = {"downmix": downmix, "left": stereo[:, 0], "right": stereo[:, 1]}
     observations, readings, support = observe(earlier, views)
     choices = select(readings, support)
@@ -74,19 +79,28 @@ def locate(earlier, downmix, stereo, *, allow_denser_windows=False):
     reason, span, profile = observations["downmix"]
     if witnesses:
         return reason, span, profile, proof
-    if allow_denser_windows and reason not in {"reference_match_not_supported", "consistent_frequency_balance_change"}:
+    if (allow_denser_windows or allow_close_consensus) and reason not in {
+            "reference_match_not_supported", "consistent_frequency_balance_change"}:
         from app.evidence.audio_clean_speech_long import corroborate_windows, denser_windows
 
-        candidates = {name: corroborate_windows(denser_windows(earlier, pcm, readings[name]["reason"]))
-                      for name, pcm in views.items()}
-        dense = {name: {"range": candidate["samples"] if candidate else None,
-                        "reason": "local_change" if candidate else readings[name]["reason"]}
-                 for name, candidate in candidates.items()}
-        witnesses = supporting_channels(dense, support, select(dense, support))
-        if witnesses:
-            return "local_change", candidates["downmix"], None, {
-                "views": dense, "witness_channels": witnesses, "denser_window_starts": True,
-            }
+        values = {name: denser_windows(earlier, pcm, readings[name]["reason"]) for name, pcm in views.items()}
+        gaps = (19200, 12800) if allow_close_consensus else (19200,)
+        for gap in gaps:
+            candidates = {name: corroborate_windows(series, gap) for name, series in values.items()}
+            dense = {name: {"range": candidate["samples"] if candidate else None,
+                            "reason": "local_change" if candidate else readings[name]["reason"]}
+                     for name, candidate in candidates.items()}
+            witnesses = supporting_channels(dense, support, select(dense, support))
+            if not witnesses:
+                continue
+            evidence = {"views": dense, "witness_channels": witnesses, "denser_window_starts": True}
+            if gap == 12800:
+                ranges = [view["range"] for view in dense.values()]
+                if not all(ranges) or not common_half_range(ranges):
+                    continue
+                evidence.update(witness_channels=list(CHANNELS), channel_window_starts={
+                    name: candidates[name]["supporting_window_starts"] for name in CHANNELS})
+            return "local_change", candidates["downmix"], None, evidence
     if any(view["range"] for view in readings.values()):
         return "stereo_range_not_corroborated", None, None, proof
     return reason, None, profile, proof

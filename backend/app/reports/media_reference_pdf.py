@@ -454,17 +454,23 @@ def _clean_speech_page(document, result):
     if "supporting_window_starts" in span:
         first_window, last_window = (x / rate for x in span["supporting_window_starts"])
         starts = f"{first_window:.3f} s and {last_window:.3f} s"
-        witness_text = (f"The denser scan found agreement at window starts of {starts}."
-                        if stereo and stereo.get("denser_window_starts")
-                        else f"Two six-second checks starting at {starts} agreed.")
+        if stereo and stereo.get("channel_window_starts"):
+            witness_text = f"Two mono mix checks starting at {starts} agreed with both source channels."
+        elif stereo and stereo.get("denser_window_starts"):
+            witness_text = f"The denser scan found agreement at window starts of {starts}."
+        else:
+            witness_text = f"Two six-second checks starting at {starts} agreed."
         _text(page, MARGIN, 291 + offset, witness_text, size=9, color=MUTED)
     if "basis" in result:
         _text(page, MARGIN, 291 + offset, f"Drop in signed matching-sound gain  {span['relative_drop']:.3f}", size=9, color=MUTED)
     if stereo:
         for index, side in enumerate(stereo["witness_channels"]):
             start, stop = stereo["views"][side]["range"]
-            _text(page, MARGIN, 343 + 13 * index, f"{side.capitalize()} channel supported {start / rate:.3f} to {stop / rate:.3f} s.",
-                  size=9, color=MUTED)
+            channel_text = f"{side.capitalize()} channel supported {start / rate:.3f} to {stop / rate:.3f} s."
+            if windows := stereo.get("channel_window_starts", {}).get(side):
+                window_start, window_end = (point / rate for point in windows)
+                channel_text += f" Its checks started at {window_start:.3f} s and {window_end:.3f} s."
+            _text(page, MARGIN, 343 + 13 * index, channel_text, size=9, color=MUTED)
     maximum = max(.01, *(abs(level) for side in LABELS for field in ("low", "high")
                         for level in span[side]["waveform"][field]))
     centers = (439, 590) if stereo else (408, 565) if offset else (379, 565)

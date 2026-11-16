@@ -245,6 +245,7 @@ class Settings(BaseSettings):
     audio_reference_clean_speech_aac: bool = False  # Compare a native clean source with qualified AAC M4A.
     audio_reference_clean_speech_stereo_aac: bool = False  # Corroborate a 12-second AAC interval with native channels.
     audio_reference_stereo_denser_windows: bool = False  # Retry corroboration with more window starts.
+    audio_reference_stereo_close_consensus: bool = False  # Retry closer starts when both channels agree with the mono mix.
     audio_reference_aligned_speech: bool = False  # Trial: align speech when the two clean-copy timelines differ locally.
     audio_reference_matching_waveform: bool = False  # Trial: compare retained speech around local timing shifts under background sound.
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.

@@ -23,6 +23,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_ALIGNED_SPEECH,
     SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD,
     SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
+    SCHEMA_WITH_CLOSE_STEREO_AAC,
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
     SCHEMA_WITH_DENSER_STEREO_AAC,
     SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH,
@@ -100,7 +101,8 @@ def verify_export(earlier, submitted, export):
         if stereo_aac:
             stereo = _decode_stereo(submitted, proof["decoded_samples"])[:sample_count]
             reason, measured, profile, stereo_support = audio_clean_speech_stereo.locate(
-                *samples, stereo, allow_denser_windows=schema == SCHEMA_WITH_DENSER_STEREO_AAC)
+                *samples, stereo, allow_denser_windows=schema == SCHEMA_WITH_DENSER_STEREO_AAC,
+                allow_close_consensus=schema == SCHEMA_WITH_CLOSE_STEREO_AAC)
             require(result.get("stereo_support") == stereo_support, "Stereo support differs")
         else:
             reason, measured, profile = audio_clean_speech_long.locate(*samples)

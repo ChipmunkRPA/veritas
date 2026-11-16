@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Closer speech checks on both stereo channels](audio-clean-speech-close-confirmation-2026-11-15.md)
+  adds an optional earlier-copy fallback. It raises correct synthetic
+  intervals from 56/96 to 60/96 and genuine splice intervals from 28/48
+  to 30/48, with the same 0/144 ordinary flags and 2/48 room-reference
+  flags. The local app and reports preserve both channels' window starts.
+
 - [Same-speaker word replacements and lip timing](video-lip-content-transfer-2026-11-15.md)
   adds a held test of 20 different-word and 20 matched same-word splices.
   The timing check found three correct ranges. Native alignment and a

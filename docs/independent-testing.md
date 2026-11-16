@@ -44,6 +44,12 @@ exports a direct comparison and a second result requiring repeated short
 responses from different excerpts. The independent counter verifies both
 added sets of ranges against the exact sample truth.
 
+The [six- and ten-second context replay](audio-six-ten-context-2026-11-16.md#replay)
+checks both calibrations and compares all combinations on the same search
+interval. The model-independent export preserves the exact input hashes,
+source samples and edit labels, including ordinary and isolated background
+controls.
+
 The [earlier JPEG and WebP replay](image-jpeg-webp-comparison-2026-11-16.md#replay)
 recounts 1,008 pairs from 48 photos and rebuilds the exact output masks
 from the original source banks. It includes three encoding recipes and

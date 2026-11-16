@@ -53,7 +53,7 @@ def rank(*values):
     return prior.digest("/".join((SCHEMA, *map(str, values))).encode())
 
 
-def capture(annotations, output):
+def capture(annotations, output, *, additional_meetings=()):
     from concurrent.futures import ThreadPoolExecutor
     from xml.etree import ElementTree
 
@@ -66,6 +66,7 @@ def capture(annotations, output):
     grep = subprocess.check_output(["git", "grep", "-h", "-o", "-E", r"(ES|IS|TS)[0-9]{4}[a-d]", revision, "--", "docs"],
                                    cwd=ROOT, text=True)
     prior_rooms = {row["room"] for row in prior.read(PREVIOUS)["freeze"]["backgrounds"]}
+    prior_rooms.update(additional_meetings)
     excluded = set(grep.splitlines()) | prior_rooms
     output.mkdir(mode=0o700)
     selected = []
@@ -97,13 +98,21 @@ def capture(annotations, output):
                 break
     assert len(selected) == ROOMS
 
+    def retrieve(url, offset, size, total=None):
+        for attempt in range(3):
+            try:
+                return fetch(url, offset, size, total)
+            except (TimeoutError, ConnectionError):
+                if attempt == 2:
+                    raise
+
     def acquire(row):
-        header, total = fetch(row["url"], 0, 44)
+        header, total = retrieve(row["url"], 0, 44)
         *fields, size = struct.unpack("<4sI4s4sIHHIIHH4sI", header)
         rate, start = binding.RATE, row["start_sample"]
         assert tuple(fields) == (b"RIFF", total - 8, b"WAVE", b"fmt ", 16, 1, 1, rate, 2 * rate, 2, 16, b"data")
         assert 2 * (start + binding.MAXIMUM) <= size
-        raw, _ = fetch(row["url"], 44 + 2 * start, 2 * binding.MAXIMUM, total)
+        raw, _ = retrieve(row["url"], 44 + 2 * start, 2 * binding.MAXIMUM, total)
         (output / f"{row['room']}.pcm").write_bytes(raw)
         return row | {"byte_size": total, "header_sha256": prior.digest(header), "pcm_sha256": prior.digest(raw)}
     with ThreadPoolExecutor(max_workers=3) as workers:
@@ -113,14 +122,14 @@ def capture(annotations, output):
     print("Verified six publisher room clocks and competing-speech ranges.", flush=True)
 
 
-def publisher_edits(ranges, labels_path):
+def publisher_edits(ranges, labels_path, *, edit_extent=(9600, 28800), range_starts=RANGES):
     from scripts import audio_noise_window_transfer as source
     from scripts import audio_partial_publisher_transfer as publisher
 
     assert prior.digest(labels_path.read_bytes()) == source.PINS["part-b.labels.txt"]
     labels = {name: fields for name, *fields in map(str.split, labels_path.read_text().splitlines())}
     options, pins = defaultdict(list), {}
-    for start in RANGES:
+    for start in range_starts:
         archive = ranges / f"llama-{start}.tarseg"
         headers = (ranges / f"llama-{start}.headers").read_text().casefold()
         assert archive.stat().st_size == RANGE_BYTES
@@ -158,28 +167,31 @@ def publisher_edits(ranges, labels_path):
                             edits = prior.merge((a, b) for a, b, label in publisher.labels_for(labels[identity], samples) if label == "spoof")
                         except ValueError:
                             continue
-                        if any(9600 <= b - a <= 28800 for a, b in edits):
+                        if any(edit_extent[0] <= b - a <= edit_extent[1] for a, b in edits):
                             options[family].append(({"id": identity, "group": group, "family": family, "recipe": recipe, "corpus": "llama",
                                                      "edits": [list(span) for span in edits], "source_sha256": prior.digest(wav),
                                                      "native_pcm_sha256": prior.digest(pcm), "archive_start": start}, pcm))
             except (EOFError, tarfile.ReadError) as error:
                 assert isinstance(error, EOFError) or "end of data" in str(error)
-    assert set(options) == set(publisher.GENERATORS)
+    if range_starts == RANGES:
+        assert set(options) == set(publisher.GENERATORS)
     return options, pins
 
 
-def librispeech_controls(archive, excluded, earlier, exposed, occupied):
+def librispeech_controls(archive, excluded, earlier, exposed, occupied, *, count_limit=ORIGINALS - LLAMA_ORIGINALS,
+                        admit=None, subset="test-other"):
+    pins = {"test-other": LIBRISPEECH_MD5, "dev-other": "c8d0bcc9cca99d4f8b62fcc847357931"}
     with archive.open("rb") as stream:
-        assert hashlib.file_digest(stream, "md5").hexdigest() == LIBRISPEECH_MD5
+        assert hashlib.file_digest(stream, "md5").hexdigest() == pins[subset]
     options = defaultdict(list)
     with tarfile.open(archive, mode="r|gz") as collection:
         for member in collection:
-            match = re.fullmatch(r"LibriSpeech/test-other/(\d+)/(\d+)/(\d+-\d+-\d+)\.flac", member.name)
+            match = re.fullmatch(rf"LibriSpeech/{subset}/(\d+)/(\d+)/(\d+-\d+-\d+)\.flac", member.name)
             if not member.isfile() or match is None or not 42 <= member.size < 2**21:
                 continue
             reader, chapter, identity = match.groups()
             assert identity.startswith(f"{reader}-{chapter}-")
-            if reader in occupied or identity in excluded:
+            if reader in occupied or identity in excluded or (admit is not None and not admit(identity)):
                 continue
             with collection.extractfile(member) as stream:
                 header = stream.read(42)
@@ -203,11 +215,11 @@ def librispeech_controls(archive, excluded, earlier, exposed, occupied):
             assert len(pcm) == 2 * samples
             if (pcm_pin := prior.digest(pcm)) in excluded:
                 continue
-            yield {"id": identity, "group": reader, "family": None, "edits": [], "corpus": "librispeech_test_other",
+            yield {"id": identity, "group": reader, "family": None, "edits": [], "corpus": f"librispeech_{subset.replace('-', '_')}",
                    "source_sha256": source_pin, "native_pcm_sha256": pcm_pin}, pcm
             count += 1
             break
-        if count == ORIGINALS - LLAMA_ORIGINALS:
+        if count == count_limit:
             return
     raise ValueError("Insufficient complete native public audio controls")
 
@@ -394,13 +406,23 @@ def summarize(freeze, rows):
             for (condition, arm), tally in sorted(tallies.items())}
 
 
-def score(media, weights, output):
-    import numpy as np
+def score_case(case, pcm, voice, activity):
     from app.detectors.audio import extended_short_voice_review
     from app.engine.boundary import Deadline
+    from scripts.audio_radar_transfer import adapter_result
+
+    schedule = current.focused_intervals(len(pcm))
+    windows = [{"start_sample": a, "end_sample": b, "direction": adapter_result(pcm[a:b], voice, activity)["decision"]}
+               for a, b in schedule or current.intervals(len(pcm))]
+    excerpts = extended_short_voice_review.scan(pcm, activity, voice, Deadline(None))
+    return case | {"current_windows": windows, "excerpts": excerpts}
+
+
+def score(media, weights, output):
+    import numpy as np
+
     from scripts.audio_joint_generator_transfer import panels
     from scripts.audio_joint_generator_transfer import prior as previous
-    from scripts.audio_radar_transfer import adapter_result
     from scripts.run_audio_specialists_v15 import load_voice
 
     frozen = prior.read(media / "freeze.json")
@@ -413,11 +435,7 @@ def score(media, weights, output):
         raw = (media / "pcm" / f"{case['pcm_sha256']}.pcm").read_bytes()
         assert len(raw) == 2 * case["samples"] and prior.digest(raw) == case["pcm_sha256"]
         pcm = np.frombuffer(raw, "<i2").astype(np.float32) / 32768.
-        schedule = current.focused_intervals(len(pcm))
-        windows = [{"start_sample": a, "end_sample": b, "direction": adapter_result(pcm[a:b], voice, activity)["decision"]}
-                   for a, b in schedule or current.intervals(len(pcm))]
-        excerpts = extended_short_voice_review.scan(pcm, activity, voice, Deadline(None))
-        rows.append(case | {"current_windows": windows, "excerpts": excerpts})
+        rows.append(score_case(case, pcm, voice, activity))
         if index % 12 == 0:
             print(f"Compared {index}/{len(frozen['cases'])} deliveries.", flush=True)
     prior.save(output, {"freeze": frozen, "rows": rows, "model_sha256": assets, "summary": summarize(frozen, rows)})

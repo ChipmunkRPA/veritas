@@ -72,6 +72,13 @@ are not public screening promises or calibrated population probabilities.
   ordinary and other-repeat controls. The local check shows both
   ranges and four original pictures with zero AI-confidence weight.
 
+- [Six- and ten-second speech contexts](audio-six-ten-context-2026-11-16.md)
+  fit both durations to matched same-word edits and score the same
+  six-second interval. Combining both adds two useful locations at
+  −5 dB and three ordinary alerts on the 240-delivery retained panel.
+  At −10 dB it adds five ordinary alerts and no correct locations.
+  The fitted checks are in evaluation with a separate fresh panel.
+
 - [Writing changes within a document](writing-local-baseline-transfer-2026-11-16.md)
   add exact source locations when a passage stands out within the same
   file. On 40 new source-matched pairs, the added check found five more

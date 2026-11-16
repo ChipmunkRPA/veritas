@@ -32,7 +32,7 @@ FLANK_METHOD = EXPERIMENT | {"selection": "Require 300 ms flanks on both sides, 
               "cutoffs on the original calibration group before running the holdout; keep both heads frozen."}
 
 
-def frozen_encoder(weights):
+def frozen_encoder(weights, *, variable_context=False):
     import numpy as np
     import torch
 
@@ -50,10 +50,13 @@ def frozen_encoder(weights):
         waveform = torch.from_numpy(audio)[None]
         response = model(waveform, attention_mask=torch.ones_like(waveform, dtype=torch.long),
                          output_hidden_states=True, return_dict=True)
-        SOURCE.check(response.last_hidden_state.shape == (1, FRAMES, encoder.WIDTH), "Encoder clock changed")
+        frames = (len(audio) - 400) // 320 + 1 if variable_context else FRAMES
+        SOURCE.check(response.last_hidden_state.shape == (1, frames, encoder.WIDTH), "Encoder clock changed")
         encoded = torch.cat([response.hidden_states[layer][0] @ projection
                              for layer, projection in zip(LAYERS, projections, strict=True)], dim=1).numpy()
-        values = np.asarray([np.interp(head_clock, source_clock, column) for column in encoded.T], dtype="<f4")
+        source = 200 + 320 * np.arange(frames) if variable_context else source_clock
+        target = np.arange(len(audio) // parent.HOP) * parent.HOP if variable_context else head_clock
+        values = np.asarray([np.interp(target, source, column) for column in encoded.T], dtype="<f4")
         SOURCE.check(np.isfinite(values).all(), "Non-finite speech representation")
         return values
 

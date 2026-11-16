@@ -209,6 +209,57 @@ def test_flagged_packet_anchors_exact_slice_without_public_raw_score():
                                        source=mapping, pcm=pcm, mapping=mapping, asset=asset, waveform=audio_packets._chart)
     assert "window_coverage" not in legacy and legacy["interval"] == result["interval"]
 
+    nearby = canonical_json({"detector_id": binding.NEARBY_ID, "status": "ok", "details": {
+        "pcm_sha256": mapping["pcm_sha256"], "anchor": review["selected"],
+        "windows": [{"start_sample": 62720, "end_sample": 94720, "speech_samples": 22720, "logit": 0.0}],
+    }})
+    nearby_pin = sha256(nearby).hexdigest()
+    record["nearby_raw_output_sha256"] = nearby_pin
+    store = SimpleNamespace(read_bytes={pin: raw, nearby_pin: nearby}.__getitem__)
+    combined = audio_short_review.build(record, store=store, source=mapping, pcm=pcm, mapping=mapping,
+                                        asset=asset, waveform=audio_packets._chart)
+    assert combined["schema"] == binding.NEARBY_SCHEMA and combined["interval"] == result["interval"]
+    assert combined["nearby_window_review"]["status"] == "varied"
+    [shifted] = combined["nearby_window_review"]["windows"]
+    assert shifted["source_timestamp_ranges"] == [binding.source_range(mapping, 62720, 94720)]
+    assert b"logit" not in canonical_json(combined)
+    audio_short_review.verify_nearby_source(combined, pcm)
+    audio_short_review.verify(combined, record, store=store, source=mapping, pcm=pcm, mapping=mapping,
+                              read_asset=assets.__getitem__, waveform=audio_packets._chart)
+    changed = deepcopy(combined)
+    changed["nearby_window_review"]["windows"][0]["pcm_sha256"] = "0" * 64
+    with pytest.raises(ValueError, match="samples differ"):
+        audio_short_review.verify_nearby_source(changed, pcm)
+
+
+def test_nearby_failure_retains_completed_short_review(monkeypatch):
+    pcm = np.zeros(binding.SAMPLES, np.float32)
+    selected = {"start_sample": 16000, "end_sample": 48000}
+    calls = []
+
+    def run_optional(detector, ctx, **kwargs):
+        calls.append(detector.spec.id)
+        if detector.spec.id == binding.NEARBY_ID:
+            assert ctx.outputs.probe["selected"] == selected
+            assert kwargs["timeout_s"] == short_voice_review.NEARBY_BUDGET_S
+            return DetectorResult.timeout("slow")
+        return DetectorResult(status="ok", details={"short_voice_review": {"selected": selected}})
+
+    monkeypatch.setattr(audio, "run_detector", run_optional)
+    monkeypatch.setattr(settings, "audio_detector_mode", "candidate")
+    monkeypatch.setattr(audio.common, "media", lambda _: None)
+    track = AudioTrack("analysis", pcm, len(pcm))
+    ctx = SimpleNamespace(
+        profile=Profile.FULL, analysis_id="test", deadline=Deadline(100), check=lambda *_: None,
+        outputs={"probe": {"facts": {"container": "wav"}}, "decode": {"short_voice_review_source_supported": True,
+                 "short_voice_review_source_codec": "pcm_s16le"}},
+        state={"run_store": SimpleNamespace(run_id=lambda *_: "short-run")},
+        exhibits=SimpleNamespace(bind=lambda *_: None), log=SimpleNamespace(bind=lambda **_: None),
+    )
+    entries = [{"detector_id": short_voice_review.PellaVoiceDetector.spec.id, "status": "ok"}]
+    assert audio._short_voice_review(ctx, track, entries) == {"run_id": "short-run"}
+    assert calls == [binding.DETECTOR_ID, binding.NEARBY_ID]
+
 
 def test_insufficient_speech_maps_all_short_windows_without_inference():
     pcm = np.zeros(binding.SAMPLES, np.float32)

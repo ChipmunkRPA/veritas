@@ -232,6 +232,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if hashlib.sha256(waveform).hexdigest() != review["artifacts"]["waveform"]["sha256"]:
             raise ValueError("Short speech-window waveform differs from the recorded samples")
         replay_detail += " Recomputed the marked short speech-window waveform."
+        if "nearby_window_review" in review:
+            from app.evidence.audio_short_review import verify_nearby_source
+
+            verify_nearby_source(review, decoded.pcm)
+            replay_detail += " Verified the samples in each nearby speech window."
     if (review := audio.get("long_voice_review")) is not None:
         from app.evidence.audio_long_review import verify_source
         from app.evidence.audio_packets import _chart

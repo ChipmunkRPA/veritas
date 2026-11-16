@@ -160,6 +160,24 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
           </span>)}. They describe the same time in the mixed track. The cause of the speech response is undetermined.
         </p>}
       </>}
+      {rate && shortReview.nearby_window_review && <div className="mt-4 text-small">
+        <h4 className="m-0 font-medium">Nearby speech windows</h4>
+        <p className="mt-1 mb-2 text-caption text-text-muted">
+          {{ repeated: 'The elevated response repeated in every checked nearby window.',
+            varied: 'At least one nearby window fell below the review point. Small timing changes affected this finding.',
+            incomplete: 'Some nearby windows had too little detected speech to compare.' }[shortReview.nearby_window_review.status]}
+        </p>
+        <ul className="mb-0 grid list-none gap-2 p-0 sm:grid-cols-2">
+          {shortReview.nearby_window_review.windows.map((window) => <li key={window.start_sample} className="rounded-md border border-border p-2">
+            <p className="m-0 font-medium">{seconds(window.start_sample / rate)}–{seconds(window.end_sample / rate)}</p>
+            <p className="mb-0 mt-1 text-caption text-text-muted">
+              {{ elevated: 'Elevated response', below_review_point: 'Below the review point',
+                below_speech_minimum: 'Below the speech minimum' }[window.status]} · {seconds(window.speech_samples / rate)} detected speech
+            </p>
+            <SourceTimestamps ranges={window.source_timestamp_ranges} />
+          </li>)}
+        </ul>
+      </div>}
       {rate && shortReview.window_coverage ? <div className="mt-4 text-small">
         <h4 className="m-0 font-medium">Two-second window coverage</h4>
         <p className="mt-1 mb-2 text-caption text-text-muted">Each window requires at least one second of detected speech in the mixed track.</p>

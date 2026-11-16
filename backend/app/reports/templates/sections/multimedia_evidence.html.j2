@@ -181,6 +181,15 @@ Samples [{{ review.interval.start_sample }}, {{ review.interval.end_sample }}) a
 {% if review.get('recording_context') %}<p class="caption">Overlapping recording observations {% for id in review.recording_context %}<a href="#multimedia-evidence-{{ id }}">{{ id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}. They describe the same time in the mixed track. The cause of the speech response is undetermined.</p>{% endif %}
 {% if review.get('waveform') %}{{ plates([review.waveform]) }}{% endif %}
 {% endif %}
+{% if review.get('nearby_window_review') %}
+<h4>Nearby speech windows</h4>
+<p class="caption">{{ review.nearby_window_review.summary }} The original alert remains available for inspection.</p>
+{% for window in review.nearby_window_review.windows %}
+<p class="caption">{{ '%.3f' | format(window.start_sample / 16000) }}–{{ '%.3f' | format(window.end_sample / 16000) }} s.
+{{ window.label }}. Detected speech {{ '%.3f' | format(window.speech_samples / 16000) }} s.
+{% for range in window.source_timestamp_ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% endfor %}</p>
+{% endfor %}
+{% endif %}
 {% if review.get('window_coverage') %}
 <h4>Two-second window coverage</h4>
 <p class="caption">Each window requires at least one second of detected speech in the mixed track.</p>

@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Nearby readings for short speech alerts](audio-short-edit-input-views-2026-11-15.md)
+  shows how a flagged lossless window responds at the nearest 80 ms
+  shifts. The trial cleared six ordinary flags in the retained panels
+  and kept four useful locations. The fresh panel's ordinary flag
+  survived. The app presents source-linked readings without suppressing
+  the alert or adding them to confidence.
+
 - [Frozen comparison of combined short speech checks](audio-short-edit-union-holdout-2026-11-15.md)
   tests the previously suggested union and fallback on 32 new reader
   pairs with six new room recordings. Both combinations retained one

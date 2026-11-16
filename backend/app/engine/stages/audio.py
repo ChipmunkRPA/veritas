@@ -63,6 +63,7 @@ from app.evidence.audio_binding import (
 from app.evidence.audio_short_review_binding import (
     AAC_CONTAINER,
     AAC_SCOPE_REASON,
+    NEARBY_CODECS,
     SCOPE_REASON,
     supported_source,
 )
@@ -306,7 +307,21 @@ def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
     review = run_detector(detector, run_ctx, store=store, models=ctx.state.get("models"), timeout_s=short_voice_review.BUDGET_S)
     ctx.check("short voice review")
     if review.status == "ok" and (run_id := store.run_id(ctx.analysis_id, detector.spec.id)):
-        return {"run_id": run_id}
+        output = {"run_id": run_id}
+        selected = (review.details.get("short_voice_review") or {}).get("selected")
+        if selected is not None and source_codec in NEARBY_CODECS:
+            remaining = ctx.deadline.remaining()
+            budget = short_voice_review.NEARBY_BUDGET_S
+            if remaining is None or remaining >= budget + short_voice_review.PIPELINE_RESERVE_S:
+                nearby = short_voice_review.NearbyVoiceReview()
+                nearby_ctx = dataclasses.replace(run_ctx, outputs=StageOutputs(audio=track, probe={"selected": selected}),
+                                                  exhibits=ctx.exhibits.bind(nearby.spec.id),
+                                                  log=ctx.log.bind(detector_id=nearby.spec.id))
+                measured = run_detector(nearby, nearby_ctx, store=store, models=ctx.state.get("models"), timeout_s=budget)
+                ctx.check("nearby speech review")
+                if measured.status == "ok" and (nearby_id := store.run_id(ctx.analysis_id, nearby.spec.id)):
+                    output["nearby_run_id"] = nearby_id
+        return output
     reason = ("The optional short-window check ran out of analysis time." if review.status == "timeout"
               else "The optional short-window check could not complete.")
     return short_voice_review.skipped(reason)
@@ -547,8 +562,13 @@ def publish(ctx: StageContext) -> dict[str, Any]:
                     raise ValueError("A scored audio check has no stored input record")
                 raw = get_artefact(db, run.raw_output_artefact_id, analysis_id=ctx.analysis_id)
                 (records if entry["family"] == "voice" else sound_records).append({"detector_id": entry["detector_id"], "raw_output_sha256": raw.sha256})
-            short = _published_review(db, ctx, detect_output.get("short_voice_review"),
+            short_result = detect_output.get("short_voice_review")
+            short = _published_review(db, ctx, short_result,
                                       short_voice_review.skipped("The optional short-window response could not be saved."))
+            if short and short.get("raw_output_sha256") and (nearby_id := short_result.get("nearby_run_id")):
+                nearby = _published_review(db, ctx, {"run_id": nearby_id}, {})
+                if nearby:
+                    short["nearby_raw_output_sha256"] = nearby["raw_output_sha256"]
             long_result = detect_output.get("long_voice_review")
             long = _published_review(db, ctx, long_result, long_voice_review.skipped(
                 audio_long_review_binding.SKIPPED_RECEIPT,

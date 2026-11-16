@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [nearby short speech replay](audio-short-edit-input-views-2026-11-15.md#reproduce)
+recounts the timing and frequency comparisons across four panels. The
+local checkout fixture verifies that the same nearby sample ranges
+appear in the API, PDF and signed export.
+
 The [frozen short speech union replay](audio-short-edit-union-holdout-2026-11-15.md#reproduce)
 reconstructs both combined decisions and paired false alarms on 32
 additional reader pairs. It records the shape of the edit, each

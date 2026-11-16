@@ -13,10 +13,13 @@ from app.evidence.audio_short_review_binding import (
     COVERAGE_SCHEMA,
     DETECTOR_ID,
     GRID,
+    NEARBY_ID,
     NO_SPEECH_REASON,
+    RATE,
     SAMPLES,
     SCHEMA,
     TITLE,
+    nearby_windows,
     selected_range,
     speech_counts,
     supported_aac_length,
@@ -24,6 +27,7 @@ from app.evidence.audio_short_review_binding import (
 
 BUDGET_S = 15.0
 PIPELINE_RESERVE_S = 25.0
+NEARBY_BUDGET_S = 7.0
 ACTIVITY_MODEL = "silero.speech_activity"
 
 
@@ -83,4 +87,28 @@ class ShortVoiceReview(Detector):
         return DetectorResult(status="ok", details={
             "short_voice_review": review,
             "pcm_sha256": hashlib.sha256(pcm.astype("<f4").tobytes()).hexdigest(),
+        })
+
+
+class NearbyVoiceReview(ShortVoiceReview):
+    """A separately timed comparison of the reported short speech interval."""
+
+    spec = video_spec(NEARBY_ID, "Nearby speech windows", InputUnit.AUDIO_WINDOW, (),
+                      family="voice-review", model_ids=(PellaVoiceDetector.MODEL_ID, ACTIVITY_MODEL),
+                      needs=("audio",), modality=Modality.AUDIO, devices=("cpu",), timeout_s=NEARBY_BUDGET_S, version="1.0.0")
+
+    def run(self, ctx):
+        pcm = ctx.outputs.audio.pcm
+        anchor = ctx.outputs.probe["selected"]
+        windows = nearby_windows(anchor["start_sample"])
+        spans = ctx.lease.get(ACTIVITY_MODEL).obj.spans(pcm)
+        model = ctx.lease.get(PellaVoiceDetector.MODEL_ID).obj
+        rows = []
+        for (start, end), speech in zip(windows, speech_counts(spans, windows), strict=True):
+            ctx.deadline.check("nearby speech comparison")
+            chunk = pcm[start:end]
+            logit = calibration.logit(model.predict([chunk])[0]) if speech >= RATE else None
+            rows.append({"start_sample": start, "end_sample": end, "speech_samples": speech, "logit": logit})
+        return DetectorResult(status="ok", details={
+            "anchor": anchor, "windows": rows, "pcm_sha256": hashlib.sha256(pcm.astype("<f4").tobytes()).hexdigest(),
         })

@@ -27,6 +27,29 @@ def _receipt(record, store, source):
     return details["short_voice_review"]
 
 
+def _nearby(pin, *, store, source, pcm, selected):
+    raw = store.read_bytes(pin)
+    if hashlib.sha256(raw).hexdigest() != pin:
+        raise ValueError("Nearby speech-window receipt hash changed")
+    entry = json.loads(raw)
+    details = entry.get("details", {})
+    if (entry.get("detector_id") != binding.NEARBY_ID or entry.get("status") != "ok"
+            or details.get("pcm_sha256") != source["pcm_sha256"] or details.get("anchor") != selected
+            or selected is None or source.get("source_codec") not in binding.NEARBY_CODECS):
+        raise ValueError("Nearby speech-window receipt belongs to another check or source")
+    windows = []
+    for row in details["windows"]:
+        a, b, speech, logit = (row[key] for key in ("start_sample", "end_sample", "speech_samples", "logit"))
+        if ((logit is None) != (speech < binding.RATE) or
+                (logit is not None and (type(logit) not in (int, float) or not math.isfinite(logit)))):
+            raise ValueError("Invalid nearby speech-window response")
+        status = "below_speech_minimum" if logit is None else "elevated" if logit > binding.REVIEW_POINT else "below_review_point"
+        windows.append({"start_sample": a, "end_sample": b, "speech_samples": speech, "status": status,
+                        "source_timestamp_ranges": [binding.source_range(source, a, b)],
+                        "pcm_sha256": hashlib.sha256(pcm[a:b].astype("<f4").tobytes()).hexdigest()})
+    return {"status": binding.nearby_summary(windows), "windows": windows}
+
+
 def build(record, *, store, source, pcm, mapping, asset, waveform):
     raw = _receipt(record, store, source)
     responses = raw["responses"]
@@ -52,6 +75,9 @@ def build(record, *, store, source, pcm, mapping, asset, waveform):
             "waveform": asset(waveform(pcm, [], start=0, end=binding.SAMPLES, selected=(a, b), scores=False),
                               "image/png", width=960, height=280),
         }
+    if pin := record.get("nearby_raw_output_sha256"):
+        document["schema"] = binding.NEARBY_SCHEMA
+        document["nearby_window_review"] = _nearby(pin, store=store, source=source, pcm=pcm, selected=selected)
     binding.validate(document, source)
     return document
 
@@ -69,3 +95,10 @@ def verify(document, record, *, store, source, pcm, mapping, read_asset, wavefor
     expected = build(record, store=store, source=source, pcm=pcm, mapping=mapping, asset=checked, waveform=waveform)
     if expected != document:
         raise ValueError("Short speech-window presentation differs from its frozen response")
+
+
+def verify_nearby_source(review, pcm):
+    for row in review["nearby_window_review"]["windows"]:
+        actual = pcm[row["start_sample"]:row["end_sample"]]
+        if hashlib.sha256(actual.astype("<f4").tobytes()).hexdigest() != row["pcm_sha256"]:
+            raise ValueError("Nearby speech samples differ from the original audio")

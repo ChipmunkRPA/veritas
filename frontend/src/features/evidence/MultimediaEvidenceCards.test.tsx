@@ -347,6 +347,30 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
   })
 
+  it('shows timing-sensitive short speech evidence with the original alert and nearby source positions', () => {
+    const set = { ...structuredClone(audio), packets: [] }
+    const interval = { start_sample: 64000, end_sample: 96000 }
+    const shifted = { start_sample: 62720, end_sample: 94720 }
+    set.short_voice_review = {
+      schema: 'chipmunk.short-voice-review/3', status: 'flagged', title: 'Short speech-window review',
+      reason: 'A two-second speech window returned an elevated response for review.',
+      limitation: 'It carries no weight in the overall assessment.', affects_overall_confidence: false,
+      checked_windows: [interval], interval, start_s: 4, end_s: 6,
+      source_timestamp_ranges: [{ ...interval, source_start_pts: 64000, source_end_pts: 96000, time_base: '1/16000' }],
+      artifacts: { selected_clip: asset('f', 'audio/wav') },
+      nearby_window_review: { status: 'varied', windows: [{ ...shifted, speech_samples: 22720, status: 'below_review_point',
+        pcm_sha256: '7'.repeat(64), source_timestamp_ranges: [
+          { ...shifted, source_start_pts: 62720, source_end_pts: 94720, time_base: '1/16000' },
+        ] }] },
+    }
+    show(set)
+    const review = within(screen.getByRole('region', { name: 'Short speech-window review' }))
+    expect(review.getByText(/Small timing changes affected this finding/)).toBeTruthy()
+    expect(review.getByText('3.920 s–5.920 s')).toBeTruthy()
+    expect(review.getByText('Source PTS [62720, 94720) at 1/16000.')).toBeTruthy()
+    expect(review.getByLabelText('Flagged two-second speech window')).toBeTruthy()
+  })
+
   it('shows measured short-window coverage when the speech review has no eligible window', () => {
     const set = { ...structuredClone(audio), packets: [] }
     set.short_voice_review = {

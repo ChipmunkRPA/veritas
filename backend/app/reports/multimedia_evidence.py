@@ -1367,6 +1367,12 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 last = occurrence["quantity_end"] - occurrence["start"]
                 occurrence.update(before=text[:first], quantity=text[first:last], after=text[last:])
     short_voice_review = copy.deepcopy(document.get("short_voice_review"))
+    if short_voice_review and (nearby := short_voice_review.get("nearby_window_review")):
+        from app.evidence.audio_short_review_binding import NEARBY_LABELS, NEARBY_SUMMARIES
+
+        nearby["summary"] = NEARBY_SUMMARIES[nearby["status"]]
+        for window in nearby["windows"]:
+            window["label"] = NEARBY_LABELS[window["status"]]
     if short_voice_review and (asset := short_voice_review["artifacts"].get("waveform")):
         short_voice_review["waveform"] = plate("waveform", asset, "Waveform with the selected two-second window highlighted")
         interval = short_voice_review["interval"]

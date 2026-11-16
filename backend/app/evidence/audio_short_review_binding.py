@@ -9,7 +9,21 @@ SAMPLES = 6 * RATE
 GRID = tuple((start, start + 2 * RATE) for start in range(0, 5 * RATE, RATE))
 SCHEMA = "chipmunk.short-voice-review/1"
 COVERAGE_SCHEMA = "chipmunk.short-voice-review/2"
+NEARBY_SCHEMA = "chipmunk.short-voice-review/3"
 DETECTOR_ID = "aud.short_voice_review"
+NEARBY_ID = "aud.short_voice_nearby"
+NEARBY_SHIFT = 1280
+NEARBY_CODECS = {"pcm_s16le", "flac"}
+NEARBY_LABELS = {
+    "elevated": "Elevated response",
+    "below_review_point": "Below the review point",
+    "below_speech_minimum": "Below the speech minimum",
+}
+NEARBY_SUMMARIES = {
+    "repeated": "The elevated response repeated in every checked nearby window.",
+    "varied": "At least one nearby window fell below the review point. Small timing changes affected this finding.",
+    "incomplete": "Some nearby windows had too little detected speech to compare.",
+}
 REVIEW_POINT = 6.822523597593649
 MP3_REVIEW_POINT = 7.085599896496718
 MP3_ORIGIN = 1105
@@ -96,10 +110,41 @@ def source_range(source: dict, start: int, end: int) -> dict:
             "source_end_pts": origin + end, "time_base": "1/16000"}
 
 
-def speech_counts(spans) -> list[int]:
+def nearby_windows(start: int) -> list[tuple[int, int]]:
+    starts = sorted({max(0, start - NEARBY_SHIFT), min(GRID[-1][0], start + NEARBY_SHIFT)} - {start})
+    return [(point, point + 2 * RATE) for point in starts]
+
+
+def speech_counts(spans, windows=GRID) -> list[int]:
     """Count the activity pass's disjoint spans on the source sample clock."""
     sample_spans = [(round(a * RATE), round(b * RATE)) for a, b in spans]
-    return [sum(max(0, min(end, b) - max(start, a)) for a, b in sample_spans) for start, end in GRID]
+    return [sum(max(0, min(end, b) - max(start, a)) for a, b in sample_spans) for start, end in windows]
+
+
+def nearby_summary(windows: list[dict]) -> str:
+    outcomes = {row["status"] for row in windows}
+    if "below_review_point" in outcomes:
+        return "varied"
+    return "incomplete" if "below_speech_minimum" in outcomes else "repeated"
+
+
+def _validate_nearby(review: dict, source: dict, start: int) -> None:
+    nearby = review["nearby_window_review"]
+    windows = nearby["windows"]
+    if (source["source_codec"] not in NEARBY_CODECS or set(nearby) != {"status", "windows"}
+            or not isinstance(windows, list) or len(windows) != len(nearby_windows(start))):
+        raise ValueError("Unexpected nearby speech-window review")
+    for row, (a, b) in zip(windows, nearby_windows(start), strict=True):
+        if (set(row) != {"start_sample", "end_sample", "speech_samples", "status", "source_timestamp_ranges", "pcm_sha256"}
+                or (row["start_sample"], row["end_sample"]) != (a, b)
+                or any(type(row[key]) is not int for key in ("start_sample", "end_sample", "speech_samples"))
+                or not 0 <= row["speech_samples"] <= b - a or row["status"] not in NEARBY_LABELS
+                or (row["speech_samples"] < RATE) != (row["status"] == "below_speech_minimum")
+                or row["source_timestamp_ranges"] != [source_range(source, a, b)]
+                or not re.fullmatch("[a-f0-9]{64}", row["pcm_sha256"])):
+            raise ValueError("Nearby speech input differs from its source geometry")
+    if nearby["status"] != nearby_summary(windows):
+        raise ValueError("Nearby speech summary differs from its readings")
 
 
 def window_coverage(speech_counts: list[int], source: dict) -> list[dict]:
@@ -125,10 +170,13 @@ def validate(review: dict, source: dict) -> None:
 def _validate(review: dict, source: dict) -> None:
     fields = {"schema", "title", "status", "reason", "limitation", "affects_overall_confidence", "checked_windows",
               "interval", "start_s", "end_s", "source_timestamp_ranges", "artifacts"}
-    measured_coverage = review["schema"] == COVERAGE_SCHEMA
+    nearby = review["schema"] == NEARBY_SCHEMA
+    measured_coverage = review["schema"] in (COVERAGE_SCHEMA, NEARBY_SCHEMA)
     if measured_coverage:
         fields.add("window_coverage")
-    if (set(review) != fields or review["schema"] not in {SCHEMA, COVERAGE_SCHEMA}
+    if nearby:
+        fields.add("nearby_window_review")
+    if (set(review) != fields or review["schema"] not in {SCHEMA, COVERAGE_SCHEMA, NEARBY_SCHEMA}
             or review["title"] != TITLE or review["limitation"] != LIMITATION
             or review["affects_overall_confidence"] is not False or review["status"] not in {"flagged", "no_flag", "skipped"}
             or not isinstance(review["reason"], str) or not review["reason"]):
@@ -149,7 +197,8 @@ def _validate(review: dict, source: dict) -> None:
     interval = review["interval"]
     assets = review["artifacts"]
     if review["status"] != "flagged":
-        if interval is not None or assets or review["source_timestamp_ranges"] or review["start_s"] is not None or review["end_s"] is not None:
+        if (nearby or interval is not None or assets or review["source_timestamp_ranges"]
+                or review["start_s"] is not None or review["end_s"] is not None):
             raise ValueError("An unflagged short-window result includes a selected interval")
         return
     a, b = interval["start_sample"], interval["end_sample"]
@@ -163,3 +212,5 @@ def _validate(review: dict, source: dict) -> None:
             or waveform["media_type"] != "image/png" or waveform["width"] != 960 or waveform["height"] != 280
             or any(not re.fullmatch("[a-f0-9]{64}", asset["sha256"]) for asset in assets.values())):
         raise ValueError("Invalid short speech-window media")
+    if nearby:
+        _validate_nearby(review, source, a)

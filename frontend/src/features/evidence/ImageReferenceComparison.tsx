@@ -7,6 +7,7 @@ import {
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
   IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
   pngOpacitySchema, exactWebpSchema, lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema,
+  imageFramingSchema, webpColorSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -79,10 +80,12 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const detailLoss = isJpegDetailLoss(comparison.schema)
   const opacity = comparison.schema === pngOpacitySchema ? comparison.png_opacity : undefined
   const exactWebp = comparison.schema === exactWebpSchema ? comparison.exact_webp : undefined
-  const lossyWebp = comparison.schema === lossyWebpSchema ? comparison.lossy_webp : undefined
-  const resizedWebp = comparison.schema === resizedLossyWebpSchema ? comparison.lossy_webp_resize : undefined
-  const croppedWebp = comparison.schema === croppedLossyWebpSchema ? comparison.lossy_webp_crop : undefined
-  const croppedResizedWebp = comparison.schema === croppedResizedLossyWebpSchema ? comparison.lossy_webp_crop_resize : undefined
+  const framing = imageFramingSchema(comparison)
+  const lossyWebp = framing === lossyWebpSchema ? comparison.lossy_webp : undefined
+  const resizedWebp = framing === resizedLossyWebpSchema ? comparison.lossy_webp_resize : undefined
+  const croppedWebp = framing === croppedLossyWebpSchema ? comparison.lossy_webp_crop : undefined
+  const croppedResizedWebp = framing === croppedResizedLossyWebpSchema ? comparison.lossy_webp_crop_resize : undefined
+  const colorReview = comparison.schema === webpColorSchema ? comparison.color_review : undefined
   const sameJpegBlocks = (comparison.schema === sameJpegSchema || detailLoss) ? alignment : undefined
   const shiftedJpeg = comparison.schema === shiftedJpegSchema ? alignment : undefined
   const sameStructureFraming = comparison.schema === structureJpegSchema ? comparison.same_framing_structure : undefined
@@ -146,24 +149,32 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     </p>}
     {lossyWebp && <p className="mt-2 mb-0 text-small text-text-muted">
       {lossyWebp.matching_tiles.toLocaleString('en-US')} of {lossyWebp.textured_tiles.toLocaleString('en-US')} detailed areas
-      supported matching framing. The comparison highlights local brightness differences after filtering small compression variations.
+      supported matching framing. {colorReview ? 'The brightness check allows for small compression variations.' :
+        'The comparison highlights local brightness differences after filtering small compression variations.'}
       Ordinary editing can cause differences.
       This check carries no weight in the AI assessment.
     </p>}
     {resizedWebp && <p className="mt-2 mb-0 text-small text-text-muted">
       {resizedWebp.supported_kernels.length} resize filters supported the same framing after WebP compression.
-      The highlights mark brightness differences that persisted across filters. Each crop uses its own file’s native pixels.
+      {colorReview ? 'Brightness evidence requires agreement across filters.' : 'The highlights mark brightness differences that persisted across filters.'}
+      {' '}Each crop uses its own file’s native pixels.
       This comparison carries zero weight in the AI assessment.
     </p>}
     {croppedWebp && <p className="mt-2 mb-0 text-small text-text-muted">
       Matching detail in {croppedWebp.anchor_zones.length} areas of the WebP located the crop at <NativeArea area={croppedWebp.reference_crop} /> in the earlier copy.
-      {' '}The highlights show brightness differences within that crop after allowing for compression. Pixels outside the crop were unassessed.
+      {' '}{colorReview ? 'The brightness check allows for small compression variations.' :
+        'The highlights show brightness differences within that crop after allowing for compression.'} Pixels outside the crop were unassessed.
       {' '}Ordinary edits can cause these differences. This comparison carries zero weight in the AI assessment.
     </p>}
     {croppedResizedWebp && <p className="mt-2 mb-0 text-small text-text-muted">
       Matching detail located the earlier crop at <NativeArea area={croppedResizedWebp.reference_crop} />.
       {' '}{croppedResizedWebp.projection.supported_kernels.length} resize filters supported the comparison. Pixels outside the earlier crop were unassessed.
       {' '}Ordinary edits can cause these differences. This comparison carries zero weight in the AI assessment.
+    </p>}
+    {colorReview && <p className="mt-2 mb-0 text-small text-text-muted">
+      {colorReview.status === 'measured'
+        ? 'The color check allows for overall color changes. Ordinary recoloring can still produce highlights.'
+        : 'The local color check was unassessed because too few color samples agreed.'}
     </p>}
     {sameJpegFraming && <p className="mt-2 mb-0 text-small text-text-muted">
       Exact JPEG block matches support the same framing. After encoding the earlier PNG with the submitted JPEG settings,
@@ -236,9 +247,13 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       </div>}
       <ol className="mt-4 mb-0 list-none space-y-4 p-0">
         {regions.map((region, index) => <li key={index} className="rounded-md border border-border p-3">
-          <h3 className="m-0 text-small font-medium">{detailLoss ? 'Fine detail loss' : 'Difference region'} {index + 1}</h3>
+          <h3 className="m-0 text-small font-medium">{region.difference_basis === 'color' ? 'Color difference' :
+            detailLoss ? 'Fine detail loss' : 'Difference region'} {index + 1}</h3>
           {detailLoss && <p className="mt-1 mb-0 text-caption text-text-muted">
             {region.directly_measured_tiles} of {(region.selected_pixels ?? 0) / 256} tiles directly support the finding. Adjacent highlights can include small gaps.
+          </p>}
+          {region.difference_basis === 'color' && <p className="mt-1 mb-0 text-caption text-text-muted">
+            The highlighted pixels differ in color after allowing for an overall color adjustment. Brightness remains similar.
           </p>}
           <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
             <div className="min-w-0">

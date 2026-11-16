@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Local color differences in lossy WebP](image-reference-webp-color-2026-11-15.md)
+  adds optional evidence where color changes while brightness stays similar.
+  It locates 68/72 held local recolors versus 0/72 with brightness alone.
+  It adds zero flags on 108 unchanged or recompressed images and 11/108
+  on whole-image color adjustments. These highlights carry zero AI weight.
+
 - [Closer speech checks on both stereo channels](audio-clean-speech-close-confirmation-2026-11-15.md)
   adds an optional earlier-copy fallback. It raises correct synthetic
   intervals from 56/96 to 60/96 and genuine splice intervals from 28/48

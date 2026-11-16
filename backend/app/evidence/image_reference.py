@@ -33,6 +33,7 @@ from app.detectors.image import (
     reference_same_jpeg,
     reference_shifted_jpeg,
     reference_structure_jpeg,
+    reference_webp_color,
 )
 from app.engine.media import refuse_truncated_images
 
@@ -47,6 +48,8 @@ CROP_RESIZE_MAX_REFERENCE_SIDE = 768
 CROP_RESIZE_MAX_SUBMITTED_SIDE = 845
 CROP_RESIZE_MIN_SCALE = .72
 CROP_RESIZE_MAX_SCALE = 1.17
+LOSSY_WEBP_SCHEMAS = frozenset((reference_lossy_webp.SCHEMA, reference_lossy_webp_resize.SCHEMA,
+                                reference_lossy_webp_crop.SCHEMA, reference_lossy_webp_crop_resize.SCHEMA))
 
 
 @lru_cache(maxsize=4)
@@ -157,7 +160,7 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             allow_same_jpeg: bool = False, allow_jpeg_detail_loss: bool = False,
             allow_jpeg_detail_loss_extra_qualities: bool = False, allow_png_opacity: bool = False,
             allow_lossy_webp: bool = False, allow_lossy_webp_crop: bool = False,
-            allow_lossy_webp_crop_resize: bool = False) -> dict:
+            allow_lossy_webp_crop_resize: bool = False, allow_lossy_webp_color: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     refuse_truncated_images()
     before, after = _bytes(reference_path), _bytes(submitted_path)
@@ -285,6 +288,14 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                                         "shifted_jpeg": allow_shifted_jpeg, "structure_jpeg": allow_structure_jpeg}
         if schema in reference_jpeg_detail_loss.SCHEMAS:
             output["comparison_options"]["same_jpeg"] = allow_same_jpeg
+    if allow_lossy_webp_color and schema in LOSSY_WEBP_SCHEMAS and result["status"] == "comparable":
+        proof, regions, color_mask, omitted = reference_webp_color.compare(reference, submitted, result)
+        output.update(schema=reference_webp_color.SCHEMA, comparison_schema=schema, color_review=proof,
+                      regions=[*result["regions"], *regions], additional_regions=result["additional_regions"] + omitted,
+                      interpretation=("This comparison measures local brightness and color differences after matching "
+                                      "the two images. Ordinary editing can produce either difference. The comparison "
+                                      "carries zero weight in the AI assessment."))
+        mask = mask | color_mask
     if evidence_dir is not None:
         _write_evidence(evidence_dir, output, reference, submitted, mask)
     return output

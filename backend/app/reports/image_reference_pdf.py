@@ -117,6 +117,10 @@ def _summary(document, comparison, assets):
         names = ", ".join(row["kernel"] for row in proof["projection"]["supported_kernels"])
         _text(page, MARGIN, 334, f"Supported resize filters: {names}. Earlier pixels outside this area were unassessed.",
               size=10, color=MUTED)
+    if color := comparison.get("color_review"):
+        readout = ("Color differences were checked after accounting for overall color changes."
+                   if color["status"] == "measured" else "Local color was unassessed because too few samples agreed.")
+        _text(page, MARGIN, 350, readout, size=10, color=MUTED)
     if schema == reference_exact_jpeg.SCHEMA:
         proof = comparison["alignment"]
         _text(page, MARGIN, 302, "Same framing supported by exact JPEG block matches.", size=10, font="hebo")
@@ -213,7 +217,9 @@ def render(comparison: dict, assets: dict[str, bytes]) -> bytes:
         document.set_metadata({"title": "Earlier-copy image comparison", "author": "Chipmunk Verify"})
         _summary(document, comparison, assets)
         for index, region in enumerate(comparison["regions"], 1):
-            label = "Fine detail loss" if comparison["schema"] in reference_jpeg_detail_loss.SCHEMAS else "Difference region"
+            color_region = region.get("difference_basis") == "color"
+            label = ("Color difference" if color_region else
+                     "Fine detail loss" if comparison["schema"] in reference_jpeg_detail_loss.SCHEMAS else "Difference region")
             page = _page(document, f"{label} {index}", "Coordinates use each image's oriented native pixels.")
             overlay = region.get("submitted_overlay")
             for x, right, label, bounds, asset, hash_y in (
@@ -236,6 +242,9 @@ def render(comparison: dict, assets: dict[str, bytes]) -> bytes:
                     _text(page, MARGIN, 412, f"{region['directly_measured_tiles']} of {total} tiles directly support the finding.",
                           size=10, color=MUTED)
                     _text(page, MARGIN, 428, "Adjacent highlights can include small gaps.", size=10, color=MUTED)
+                if color_region:
+                    _text(page, MARGIN, 412, "Color differs after allowing for an overall", size=10, color=MUTED)
+                    _text(page, MARGIN, 428, "color change. Brightness remains similar.", size=10, color=MUTED)
                 _text(page, MARGIN, 665, "Difference overlay SHA-256", size=10, font="hebo")
                 _text(page, MARGIN, 681, overlay["sha256"], size=9, font="cour", color=MUTED)
             else:

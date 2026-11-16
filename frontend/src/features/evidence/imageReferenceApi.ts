@@ -19,6 +19,7 @@ export interface NativeImageArea {
 
 interface DifferenceRegion extends NativeImageArea {
   selected_pixels?: number
+  difference_basis?: 'color'
   directly_measured_tiles?: number
   reference_region?: NativeImageArea
   reference_crop?: ReferencePng
@@ -110,6 +111,18 @@ export interface ImageReferenceRecord {
     reference_crop: NativeImageArea & { matching_features: number; supporting_tiles: { row: number; column: number; correlation: number }[] }
     projection: LossyWebpProjection
   }
+  comparison_schema?: string
+  color_review?: {
+    status: 'measured' | 'unassessed'
+    minimum_agreeing_projections: number
+    projections: {
+      kernel: string
+      whole_image_adjustment: 'affine' | 'channel_clip' | 'brightness_preserving_clip'
+      median_color_residual: number
+      matching_sample_fraction: number
+      color_residual_point?: number
+    }[]
+  }
   affects_overall_confidence?: boolean
   additional_regions?: number
 }
@@ -132,6 +145,10 @@ export const lossyWebpSchema = 'chipmunk.image-reference-comparison/19'
 export const resizedLossyWebpSchema = 'chipmunk.image-reference-comparison/20'
 export const croppedLossyWebpSchema = 'chipmunk.image-reference-comparison/21'
 export const croppedResizedLossyWebpSchema = 'chipmunk.image-reference-comparison/22'
+export const webpColorSchema = 'chipmunk.image-reference-comparison/23'
+const lossyWebpSchemas = [lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema]
+export const imageFramingSchema = (record: ImageReferenceRecord) =>
+  record.schema === webpColorSchema ? record.comparison_schema : record.schema
 export const isJpegDetailLoss = (schema: string) =>
   schema === jpegDetailLossSchema || schema === extendedJpegDetailLossSchema
 export const IMAGE_REFERENCE_SECTION_ID = 'earlier-image-comparison'
@@ -225,6 +242,29 @@ function supportsLossyFraming(proof: LossyWebpSupport, width: number, height: nu
     && /^[a-f0-9]{64}$/.test(proof.earlier_rgb_sha256)
 }
 
+function validWebpColor(comparison: ImageReferenceRecord, framing: string | undefined) {
+  const proof = comparison.color_review
+  if (!framing || !lossyWebpSchemas.includes(framing) || comparison.status !== 'comparable' || !proof
+      || !Array.isArray(proof.projections)) return false
+  const resized = framing === croppedResizedLossyWebpSchema ? comparison.lossy_webp_crop_resize?.projection
+    : framing === resizedLossyWebpSchema ? comparison.lossy_webp_resize : undefined
+  const expected: string[] = resized?.supported_kernels.map(row => row.kernel) ?? ['native']
+  const votes = resized ? 2 : 1
+  if (proof.minimum_agreeing_projections !== votes || proof.projections.length !== expected.length
+      || new Set(proof.projections.map(row => row?.kernel)).size !== expected.length) return false
+  if (!proof.projections.every(row => row && expected.includes(row.kernel)
+      && ['affine', 'channel_clip', 'brightness_preserving_clip'].includes(row.whole_image_adjustment)
+      && Number.isFinite(row.median_color_residual) && row.median_color_residual >= 0
+      && Number.isFinite(row.matching_sample_fraction) && row.matching_sample_fraction >= 0 && row.matching_sample_fraction <= 1
+      && (row.color_residual_point === undefined || (Number.isFinite(row.color_residual_point) && row.color_residual_point >= 8)))) return false
+  const measured = proof.projections.filter(row => row.color_residual_point !== undefined).length >= votes
+  return proof.status === (measured ? 'measured' : 'unassessed') && comparison.regions.every(region => {
+    if (region.difference_basis === undefined) return true
+    const pixels = region.selected_pixels ?? 0
+    return measured && region.difference_basis === 'color' && Number.isSafeInteger(pixels) && pixels > 0 && pixels <= region.w * region.h
+  })
+}
+
 export async function compareWithEarlierImage(analysisId: string, file: File, signal: AbortSignal): Promise<ImageReferenceResult> {
   const form = new FormData()
   form.append('reference', file)
@@ -238,6 +278,7 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
     throw new Error('The server returned an incomplete image comparison.')
   }
   const proof = comparison.exact_projection
+  const framing = imageFramingSchema(comparison)
   if (comparison.schema === exactWebpSchema && comparison.status === 'comparable') {
     const webp = comparison.exact_webp
     const { width, height } = comparison.submitted
@@ -252,7 +293,7 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
       throw new Error('The server returned an incomplete lossless WebP comparison.')
     }
   }
-  if (comparison.schema === lossyWebpSchema && comparison.status === 'comparable') {
+  if (framing === lossyWebpSchema && comparison.status === 'comparable') {
     const webp = comparison.lossy_webp
     const { width, height } = comparison.submitted
     if (!webp || comparison.affects_overall_confidence !== false || ![width, height].every(
@@ -262,8 +303,8 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
       throw new Error('The server returned an incomplete lossy WebP comparison.')
     }
   }
-  const croppedResize = comparison.schema === croppedResizedLossyWebpSchema
-  if ((comparison.schema === resizedLossyWebpSchema || croppedResize) && comparison.status === 'comparable') {
+  const croppedResize = framing === croppedResizedLossyWebpSchema
+  if ((framing === resizedLossyWebpSchema || croppedResize) && comparison.status === 'comparable') {
     const crop = comparison.lossy_webp_crop_resize
     const resize = croppedResize ? crop?.projection : comparison.lossy_webp_resize
     const { width, height } = comparison.submitted
@@ -296,7 +337,7 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
       throw new Error('The server returned an incomplete resized WebP comparison.')
     }
   }
-  if (comparison.schema === croppedLossyWebpSchema && comparison.status === 'comparable') {
+  if (framing === croppedLossyWebpSchema && comparison.status === 'comparable') {
     const crop = comparison.lossy_webp_crop
     const { width, height } = comparison.submitted
     const { width: earlierWidth, height: earlierHeight } = comparison.reference
@@ -322,6 +363,9 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
         })) {
       throw new Error('The server returned an incomplete cropped WebP comparison.')
     }
+  }
+  if (comparison.schema === webpColorSchema && !validWebpColor(comparison, framing)) {
+    throw new Error('The server returned an incomplete WebP color comparison.')
   }
   if (comparison.schema === pngOpacitySchema && comparison.status === 'comparable') {
     const opacity = comparison.png_opacity

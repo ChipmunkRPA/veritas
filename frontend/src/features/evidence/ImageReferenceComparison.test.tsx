@@ -168,7 +168,7 @@ describe('earlier-copy comparison', () => {
     expect(JSON.parse(await blobText(download))).toEqual({ comparison: record, pngs: result.pngs })
   })
 
-  it('shows the earlier-image area when a WebP was cropped and resized', async () => {
+  it.each([false, true])('shows the earlier-image area when a WebP was cropped and resized (color check %s)', async (color) => {
     const result = structuredClone(comparison)
     const record = result.comparison
     record.schema = 'chipmunk.image-reference-comparison/22'
@@ -185,6 +185,15 @@ describe('earlier-copy comparison', () => {
     record.mask = artifact('difference-mask.png', 720, 600)
     record.regions[0].reference_region = { x: 163, y: 92, w: 113, h: 88 }
     record.regions[0].reference_crop = artifact('reference-01.png', 113, 88)
+    if (color) {
+      record.comparison_schema = record.schema
+      record.schema = 'chipmunk.image-reference-comparison/23'
+      record.regions[0].difference_basis = 'color'
+      record.regions[0].selected_pixels = 4500
+      record.color_review = { status: 'measured', minimum_agreeing_projections: 2,
+        projections: ['bicubic', 'lanczos'].map(kernel => ({ kernel, whole_image_adjustment: 'affine',
+          median_color_residual: .7, matching_sample_fraction: .98, color_residual_point: 8 })) }
+    }
     delete record.alignment
     vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
     show()
@@ -194,6 +203,12 @@ describe('earlier-copy comparison', () => {
     expect(screen.getByText('x 16, y 11 · 900 × 750 px')).toBeTruthy()
     expect(screen.getByText('x 163, y 92 · 113 × 88 px')).toBeTruthy()
     expect(screen.getByText('x 118, y 65 · 90 × 70 px')).toBeTruthy()
+    if (color) {
+      expect(screen.getByRole('heading', { name: 'Color difference 1' })).toBeTruthy()
+      expect(screen.getByText(/Brightness remains similar/)).toBeTruthy()
+      expect(screen.getByAltText('Earlier copy crop for region 1')).toBeTruthy()
+      expect(screen.getByRole('button', { name: 'Download comparison PDF' })).toBeTruthy()
+    }
     fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
     const [download] = vi.mocked(saveBlob).mock.calls[0]
     expect(JSON.parse(await blobText(download))).toEqual({ comparison: record, pngs: result.pngs })

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [lossy WebP color comparison replay](image-reference-webp-color-2026-11-15.md#see-or-replay-the-check)
+checks localized recolors and whole-image color adjustments against
+the old brightness comparison, then verifies the exported native pixel
+coordinates and crops using both sources.
+
 The [stereo speech confirmation replay](audio-clean-speech-close-confirmation-2026-11-15.md#replay)
 rechecks the evidence from both original channels, including whether 0.8-second
 window spacing recovers an edit or flags an unrelated reference. Its native

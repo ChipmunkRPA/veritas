@@ -31,6 +31,17 @@ def test_48khz_timing_stops_at_the_presented_end(aac_mapping):
                          time_base="1/24", source={}, mapping=aac_mapping)
 
 
+def test_articulation_uses_presented_extent_on_48khz_aac(aac_mapping):
+    raw = {"frames": [], "phones": [], "articulation_phones": [["lower_lip", 33_480, 0.9]]}
+    result = binding.measured(raw, timestamps=[], time_base="1/24", source={}, mapping=aac_mapping)
+    assert result["schema"] == binding.SCHEMA_WITH_ARTICULATION
+    assert result["inputs"]["samples"] == 33_600
+
+    raw["articulation_phones"][0][1] = 33_800
+    with pytest.raises(ValueError, match="invalid speech event"):
+        binding.measured(raw, timestamps=[], time_base="1/24", source={}, mapping=aac_mapping)
+
+
 @pytest.mark.parametrize("change", [
     {"source_duration_pts": None},
     {"source_duration_pts": 99_000},

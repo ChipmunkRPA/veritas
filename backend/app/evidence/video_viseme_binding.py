@@ -190,8 +190,8 @@ def measured(raw, *, timestamps, time_base, source, mapping):
     if articulation:
         from app.evidence import video_viseme_articulation as shape_check
 
-        if mapping["source_sample_rate"] != timing.RATE:
-            raise ValueError("Articulation observations do not use the qualified soundtrack clock")
+        # The qualified presentation above supplies the unpadded 16 kHz
+        # analysis extent for both supported source rates.
         events = raw["articulation_phones"]
         _validate_phones(events, samples, shape_check.PHONES)
         inputs["articulation_phones"] = events

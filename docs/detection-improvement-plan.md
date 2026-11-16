@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Speech-to-mouth matching on 48 kHz AAC](video-lip-carrier-transfer-2026-11-16.md)
+  locates six of 34 held word replacements, up from zero with basic
+  timing. Ordinary flags rise from 2/68 to 3/68. The local app preserves
+  the original frames, soundtrack interval and waveform with zero AI
+  confidence weight. The separate 29.97 fps MP4 variants stay in evaluation.
+
 - [Writing response sensitivity to selected Unicode formatting](writing-character-view-2026-11-15.md)
   restores the clean response on 72 held matched works across three
   formatted deliveries. On the combined delivery, both checks locate

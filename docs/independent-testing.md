@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [lip timing carrier replay](video-lip-carrier-transfer-2026-11-16.md#independent-replay)
+recounts the separate 48 kHz AAC and 29.97 fps comparisons from exact
+picture and soundtrack timestamps. It includes the later MP4 transfer
+and verifies which original frames bracket each highlighted interval.
+
 The [writing-formatting replay](writing-character-view-2026-11-15.md#local-app-and-replay)
 recounts source-aligned responses on 72 held matched works with three
 formatting variants. It verifies the exact adjusted input hashes and

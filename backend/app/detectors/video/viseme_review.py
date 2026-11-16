@@ -44,12 +44,16 @@ def assess(ctx, frame_store, mapping, audio_input, shots):
     budget = TIME_BUDGET if remaining is None else min(TIME_BUDGET, remaining - 8.)
     if budget < 12.:
         return binding.skipped("runtime")
+    source_rate = mapping["source_sample_rate"]
+    apply_articulation = settings.video_lip_articulation_review and (
+        source_rate == 16_000 or source_rate == 48_000 and settings.video_lip_aac48_articulation_review
+    )
     request = {"runtime": str(runtime.resolve()) if runtime else None, "geometry": str(geometry.resolve()),
                "checkpoint": str(model.resolve()), "frames": table.to_json(), "video": str(frame_store.path.resolve()),
                "wav": str(ctx.store.path_for(audio_input["wav_sha256"]).resolve()), "samples": mapping["samples"],
                "presented_samples": binding.presented_samples(mapping),
-               "ranked": settings.video_lip_timing_ranked and mapping["source_sample_rate"] == 16000,
-               "articulation": settings.video_lip_articulation_review and mapping["source_sample_rate"] == 16000}
+               "ranked": settings.video_lip_timing_ranked and source_rate == 16_000,
+               "articulation": apply_articulation}
     env = {"PATH": os.environ.get("PATH", os.defpath), "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1",
            "HF_HUB_DISABLE_TELEMETRY": "1", "PYTHONPATH": str(Path(__file__).resolve().parents[3]),
            "OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "VECLIB_MAXIMUM_THREADS": "1"}

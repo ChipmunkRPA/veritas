@@ -18,11 +18,28 @@ ROOT = Path(__file__).resolve().parents[2]
 ARM = "aperture_classes"
 
 
-def fixtures(output, sources, plan_path, receipt):
+def select_48k(plan_path, receipt):
+    from scripts import video_lip_delivery_transfer as transfer
+
+    packet = panel.read(receipt)
+    assert packet["study"] == "aac48" and packet["parents"]["plan"] == panel.phone.sha(plan_path)
+    assert transfer.outcomes(packet) == packet["summary"]
+    for row in packet["rows"]:
+        cases = row["cases"]
+        changed = cases["different_words"]["readings"]
+        candidate = changed["articulation"]
+        witness = candidate["witness"]
+        if (not changed["timing"]["witness"] and witness and candidate["basis"] == "local_articulation"
+                and panel.parent.overlap(row["truth"], witness["audio_source_pts"])
+                and all(cases[role]["readings"]["articulation"]["witness"] is None for role in ("original", "same_words"))):
+            return row, witness
+    raise ValueError("No held 48 kHz clip qualified for app replay")
+
+
+def select_16k(plan_path, receipt):
     packet = panel.read(receipt)
     panel.review(packet)
     assert packet["held_codec"] == "aac-lc-m4a-48k-16k-mono" and packet["plan_sha256"] == panel.phone.sha(plan_path)
-    frozen = json.loads(plan_path.read_bytes())["rows"]
     points = packet["points"]
     select = panel.parent.choose
     examples = []
@@ -34,7 +51,18 @@ def fixtures(output, sources, plan_path, receipt):
                 and all(select(row["readings"][name], ARM, points, "tight") is None for name in ("original", "same_words"))):
             examples.append((row, new))
     assert examples
-    proof, chosen = examples[0]
+    return examples[0]
+
+
+def fixtures(output, sources, plan_path, receipt, *, aac48=False):
+    frozen = json.loads(plan_path.read_bytes())["rows"]
+    if aac48:
+        from scripts.video_lip_delivery_transfer import qualified_48k
+
+        delivery, witness = select_48k(plan_path, receipt)
+        proof, chosen = {"picture_sha256": delivery["source"]}, {"span": witness["audio_source_pts"], "witness": witness}
+    else:
+        proof, chosen = select_16k(plan_path, receipt)
     row = next(item for item in frozen if item["target"]["front_sha256"] == proof["picture_sha256"])
     with (ZipFile(sources / "lombardgrid_front.zip") as front, ZipFile(sources / "lombardgrid_audio.zip") as audio):
         picture = front.read(row["target"]["front"])
@@ -44,7 +72,9 @@ def fixtures(output, sources, plan_path, receipt):
         sounds = {}
         for role in ("target", "same_words", "different_words"):
             data = audio.read(row[role]["audio"])
-            assert panel.phone.digest(data) == proof["source_audio_sha256"][role]
+            assert panel.phone.digest(data) == row[role]["audio_sha256"]
+            if not aac48:
+                assert row[role]["audio_sha256"] == proof["source_audio_sha256"][role]
             sounds[role] = panel.phone.pcm(data)
     source_pcm = sounds.pop("target")
     variants = {role: panel.parent.splice(source_pcm, row["target"]["span"], donor, row[role]["span"])
@@ -52,8 +82,12 @@ def fixtures(output, sources, plan_path, receipt):
     variants["original"] = source_pcm
     for name, pcm in variants.items():
         aac = output / f"{name}.m4a"
-        readback = aac_clocked(pcm, aac)
-        assert panel.phone.digest(readback.tobytes()) == proof["pcm"][name]
+        if aac48:
+            _, _, carrier = qualified_48k(pcm, aac)
+            assert carrier == delivery["cases"][name]["carrier"]
+        else:
+            readback = aac_clocked(pcm, aac)
+            assert panel.phone.digest(readback.tobytes()) == proof["pcm"][name]
         subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(path), "-i", str(aac),
                         "-map", "0:v:0", "-map", "1:a:0", "-c", "copy", str(output / f"{name}.mp4")], check=True, timeout=20)
     return proof, chosen
@@ -75,6 +109,13 @@ def verify(client, aid, source, output, evidence, comparison):
     # The carrier may include end padding. Its native clock still has to
     # reproduce the original window and the specific conflicting picture.
     assert comparison["span"] == review["measurement"]["span"], (comparison["span"], review["measurement"]["span"])
+    if expected := comparison.get("witness"):
+        soundtrack = evidence["audio"]["source"]
+        assert soundtrack["source_sample_rate"] == 48_000 and soundtrack["source_codec"] == "aac"
+        assert review["inputs"]["samples"] == binding.presented_samples(soundtrack)
+        assert witness["audio_source_pts"] == expected["audio_source_pts"]
+        assert witness["picture_frames"] == expected["picture_frames"]
+        assert witness["articulation"]["audio_sample"] == expected["articulation"]["audio_sample"]
     during = packet["frames"][1]["anchor"]
     assert witness["articulation"]["picture_frame"] == during["frame_index"]
     assert witness["articulation"]["picture_pts"] == during["pts"] and witness["change_samples"] == 0
@@ -118,7 +159,7 @@ def run(args):
                       VERITAS_VIDEO_LIP_TIMING_RUNTIME=str((args.assets / "runtime").resolve()), VERITAS_LOG_LEVEL="ERROR")
     if args.standard_checks:
         os.environ.update(VERITAS_DEVICE="auto", VERITAS_JOB_TIMEOUT_S="480")
-    proof, comparison = fixtures(args.output, args.sources, args.plan, args.receipt)
+    proof, comparison = fixtures(args.output, args.sources, args.plan, args.receipt, aac48=args.aac48)
 
     from fastapi.testclient import TestClient
 
@@ -155,7 +196,8 @@ def run(args):
             client.headers["X-API-Key"] = key
             db.commit()
         for active, name in [(False, "different_words"), (True, "different_words"), (True, "same_words"), (True, "original")]:
-            settings.video_lip_articulation_review = active
+            settings.video_lip_articulation_review = active or args.aac48
+            settings.video_lip_aac48_articulation_review = active and args.aac48
             source = args.output / f"{name}.mp4"
             aid = checkout(client, stub, source, filename=source.name)
             evidence = body(client.get(f"/api/v2/analyses/{aid}/evidence-packets"))
@@ -183,6 +225,8 @@ def run(args):
             browser = browser_check(args.output, app, key, browser_examples, scenario="lip-articulation-replay.mjs")
     record = {"paid_analyses": len(stub.sessions), "unpaid_jobs": 0, "price_usd": 9.99, "same_assessment": True,
               "standard_checks": args.standard_checks, "picture_sha256": proof["picture_sha256"], "checks": checks, "browser": browser}
+    if args.aac48:
+        record["source_sample_rate"] = 48_000
     panel.phone.write(args.output / "receipt.json", record)
 
 
@@ -192,4 +236,5 @@ if __name__ == "__main__":
         parser.add_argument(target, type=Path)
     parser.add_argument("--standard-checks", action="store_true")
     parser.add_argument("--browser", action="store_true")
+    parser.add_argument("--aac48", action="store_true")
     run(parser.parse_args())

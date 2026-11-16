@@ -111,6 +111,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     from app.evidence import image_copy_affine_binding as affine
     from app.evidence.image_copy_similarity_binding import (
         JPEG_BLOCK_STATUS_TEXT,
+        NATIVE_JPEG_ROTATION_VERSIONS,
         OFFGRID_STATUS_TEXT,
         SKIPPED_CREDENTIALS,
         SMALL_PNG_STATUS_TEXT,
@@ -175,6 +176,12 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 check["basis_text"] = statuses[review["status"]]
                 if turned_jpeg and (check.get("jpeg_offgrid_review") or {}).get("status") == "unsupported_profile":
                     check["basis_text"] += " The between-block translation check was outside this file’s compression profile."
+                if turned_jpeg and base_version in NATIVE_JPEG_ROTATION_VERSIONS and check.get("jpeg_offgrid_review") is None:
+                    if status == "no_pair":
+                        check["observation"] = check["basis_text"]
+                        check["basis_text"] = ""
+                    if review["status"] in {"supported_pair", "no_pair"}:
+                        check["basis_text"] += " The rotation check used the original pixel grid."
                 if check.get("basis") == TURNED_JPEG_BASIS:
                     turns = "90° counterclockwise" if check["pairs"][0]["transform"] == "rotate_90_ccw" else "180°"
                     check["observation"] = f"Area B closely matches Area A after rotating it {turns}."

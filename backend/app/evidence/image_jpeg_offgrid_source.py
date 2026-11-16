@@ -9,7 +9,13 @@ import cv2
 from PIL import Image, JpegImagePlugin
 
 from app.detectors.image import jpeg_offgrid_copy
-from app.evidence.image_copy_similarity_binding import OFFGRID_MIN_SIDE, ROLES, V8, supported_size
+from app.evidence.image_copy_similarity_binding import (
+    OFFGRID_MIN_SIDE,
+    ROLES,
+    V8,
+    native_rotation_size,
+    supported_size,
+)
 
 _STANDARD_TABLES = {
     "db12807ffe7ea7d208d803a4ad9d156e941af36754c009d3ec5de5aae4112903": 75,
@@ -20,10 +26,11 @@ _STANDARD_TABLES = {
 _QUANTIZATION_SHA256 = frozenset(digest for digest, profile in _STANDARD_TABLES.items() if profile in {75, 90})
 
 
-def _table_digest(data: bytes) -> str | None:
+def _table_digest(data: bytes, *, native_rotation: bool = False) -> str | None:
     with Image.open(io.BytesIO(data), formats=["JPEG"]) as image:
+        size_supported = native_rotation_size(*image.size) if native_rotation else supported_size(*image.size, version=V8)
         if (image.mode != "RGB" or JpegImagePlugin.get_sampling(image) != 2 or image.getexif().get(274, 1) != 1
-                or not supported_size(*image.size, version=V8) or set(image.quantization) != {0, 1}
+                or not size_supported or set(image.quantization) != {0, 1}
                 or tuple(component[3] for component in image.layer) != (0, 1, 1)
                 or any(not 0 < level <= 255 for table in image.quantization.values() for level in table)):
             return None
@@ -31,9 +38,9 @@ def _table_digest(data: bytes) -> str | None:
     return hashlib.sha256(tables).hexdigest()
 
 
-def encoded_profile(data: bytes) -> int | None:
+def encoded_profile(data: bytes, *, native_rotation: bool = False) -> int | None:
     """Identify an exact tested set of quantization tables and compatible source geometry."""
-    return _STANDARD_TABLES.get(_table_digest(data))
+    return _STANDARD_TABLES.get(_table_digest(data, native_rotation=native_rotation))
 
 
 def _minimum_crop_side(data: bytes) -> int | None:

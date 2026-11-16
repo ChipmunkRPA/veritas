@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Native-grid JPEG rotation](image-jpeg-native-rotation-2026-11-15.md)
+  adds rotation evidence for larger photos. The held comparison rose
+  from 1/60 to 26/60 correctly located edits across ten camera groups.
+  The new check added zero flags across 89 controls and kept the
+  existing geometry comparisons. The reported crop match is evidence
+  of possible copying and contributes zero AI confidence weight.
+
 - [Separate-channel replication on two other rooms](audio-stereo-channel-replication-2026-11-15.md)
   used 24 previously unselected MLS readers and fresh replacements from
   two stock generators. The tighter rule matched the existing 3/36 useful

@@ -277,6 +277,7 @@ class Settings(BaseSettings):
     image_jpeg_block_copy_review: bool = False  # Development-only exact JPEG brightness-block fallback.
     image_jpeg_offgrid_copy_review: bool = False  # Development-only texture and perimeter matching for selected JPEGs.
     image_turned_jpeg_copy_review: bool = False  # Compare closely matching areas after a quarter or half turn.
+    image_jpeg_native_rotation_review: bool = False  # Extend the development rotation check to qualified larger JPEGs.
     image_embedded_pair_review: bool = False  # Development-only exact differences between two matching PNG areas.
     image_small_png_copy_review: bool = False  # Optional local exact copy evidence for eligible PNGs.
     image_turned_png_copy_review: bool = False  # Include right-angle copies in the local small PNG check.

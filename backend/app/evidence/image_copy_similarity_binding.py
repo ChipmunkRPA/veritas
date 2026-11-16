@@ -25,9 +25,12 @@ TURNED_JPEG_COPY_VERSION = "image-evidence-24"
 TURNED_JPEG_COPY_AFFINE_VERSION = "image-evidence-25"
 EXPANDED_JPEG_ROTATION_VERSION = "image-evidence-26"
 EXPANDED_JPEG_ROTATION_AFFINE_VERSION = "image-evidence-27"
+NATIVE_JPEG_ROTATION_VERSION = "image-evidence-28"
+NATIVE_JPEG_ROTATION_AFFINE_VERSION = "image-evidence-29"
+NATIVE_JPEG_ROTATION_VERSIONS = frozenset({NATIVE_JPEG_ROTATION_VERSION, NATIVE_JPEG_ROTATION_AFFINE_VERSION})
 TURNED_PNG_VERSIONS = frozenset({TURNED_PNG_COPY_VERSION, TURNED_PNG_COPY_AFFINE_VERSION})
 SMALL_PNG_VERSIONS = TURNED_PNG_VERSIONS | {SMALL_PNG_COPY_VERSION, SMALL_PNG_COPY_AFFINE_VERSION}
-EXPANDED_JPEG_ROTATION_VERSIONS = frozenset({EXPANDED_JPEG_ROTATION_VERSION, EXPANDED_JPEG_ROTATION_AFFINE_VERSION})
+EXPANDED_JPEG_ROTATION_VERSIONS = NATIVE_JPEG_ROTATION_VERSIONS | {EXPANDED_JPEG_ROTATION_VERSION, EXPANDED_JPEG_ROTATION_AFFINE_VERSION}
 TURNED_JPEG_VERSIONS = EXPANDED_JPEG_ROTATION_VERSIONS | {TURNED_JPEG_COPY_VERSION, TURNED_JPEG_COPY_AFFINE_VERSION}
 SMALL_PNG_MIN_SIDE, SMALL_PNG_MAX_SIDE = 384, 768
 SMALL_PNG_CROP_MIN, SMALL_PNG_CROP_MAX = 16, 56
@@ -48,7 +51,8 @@ JPEG_BLOCK_VERSIONS = JPEG_OFFGRID_VERSIONS | {JPEG_BLOCK_VERSION, JPEG_BLOCK_AF
 VERSION = V12
 AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_AFFINE_VERSION,
                              SMALL_PNG_COPY_AFFINE_VERSION, TURNED_PNG_COPY_AFFINE_VERSION,
-                             TURNED_JPEG_COPY_AFFINE_VERSION, EXPANDED_JPEG_ROTATION_AFFINE_VERSION})
+                             TURNED_JPEG_COPY_AFFINE_VERSION, EXPANDED_JPEG_ROTATION_AFFINE_VERSION,
+                             NATIVE_JPEG_ROTATION_AFFINE_VERSION})
 CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12} | JPEG_BLOCK_VERSIONS | SMALL_PNG_VERSIONS
 TRANSLATION_VERSIONS = CREDENTIAL_VERSIONS | {V10, V11}
 BASIS_VERSIONS = CREDENTIAL_VERSIONS | {V11}
@@ -123,6 +127,11 @@ def supported_size(width: int, height: int, *, version: str = VERSION) -> bool:
     if long <= MAX_SIDE:
         return short >= MIN_SIDE and long >= MIN_LONG_SIDE
     return version in LARGE_IMAGE_VERSIONS and short >= LARGE_MIN_SIDE and long <= LARGE_MAX_SIDE and width * height <= LARGE_MAX_PIXELS
+
+
+def native_rotation_size(width: int, height: int) -> bool:
+    short, long = sorted((width, height))
+    return short >= 1024 and 1024 < long <= 3072
 
 
 def status_text(status: str, *, version: str) -> str:
@@ -247,8 +256,8 @@ def rotation_review_follows(offgrid_review: dict | None, *, expanded: bool) -> b
     return status == "no_pair" or expanded and status == "unsupported_profile"
 
 
-def _validate_turned_jpeg(record: dict | None, offgrid_review: dict | None, *, expanded: bool) -> bool:
-    should_run = rotation_review_follows(offgrid_review, expanded=expanded)
+def _validate_turned_jpeg(record: dict | None, offgrid_review: dict | None, *, expanded: bool, native: bool) -> bool:
+    should_run = native or rotation_review_follows(offgrid_review, expanded=expanded)
     if record is None and not should_run:
         return False
     if not should_run or not isinstance(record, dict) or set(record) != {"status", "measurement"}:
@@ -307,6 +316,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     has_offgrid_review = not reflected and document["version"] in JPEG_OFFGRID_VERSIONS
     has_turned_jpeg_review = not reflected and document["version"] in TURNED_JPEG_VERSIONS
     has_small_png_review = not reflected and document["version"] in SMALL_PNG_VERSIONS
+    native_rotation = not reflected and document["version"] in NATIVE_JPEG_ROTATION_VERSIONS and native_rotation_size(*size)
+    supported |= native_rotation
     if has_small_png_review:
         supported |= SMALL_PNG_MIN_SIDE <= min(size) <= max(size) <= SMALL_PNG_MAX_SIDE
     fields = {
@@ -355,7 +366,16 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     if offgrid_pair and len(pairs) != 1:
         raise ValueError("Between-block JPEG evidence must contain one measured pair")
     turned_jpeg_pair = has_turned_jpeg_review and _validate_turned_jpeg(
-        record["jpeg_turned_review"], record["jpeg_offgrid_review"], expanded=document["version"] in EXPANDED_JPEG_ROTATION_VERSIONS)
+        record["jpeg_turned_review"], record["jpeg_offgrid_review"], expanded=document["version"] in EXPANDED_JPEG_ROTATION_VERSIONS,
+        native=native_rotation and not skipped)
+    if native_rotation:
+        if record["jpeg_block_review"] is not None or record["jpeg_offgrid_review"] is not None:
+            raise ValueError("Native rotation evidence cannot attest to the smaller JPEG comparisons")
+        nested = record["jpeg_turned_review"]
+        if (not skipped and status != ("supported_pair" if turned_jpeg_pair else "no_pair")
+                or nested is not None and nested["status"] != "unsupported_profile"
+                and document["source"]["exif_orientation"] != 1):
+            raise ValueError("Native rotation evidence differs from its recorded source or result")
     if turned_jpeg_pair and len(pairs) != 1:
         raise ValueError("Rotated JPEG evidence must contain one measured pair")
     small_png_pair = False

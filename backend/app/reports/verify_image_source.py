@@ -17,6 +17,7 @@ from app.evidence import image_transparency_binding as transparency
 from app.evidence.image_copy_similarity_binding import (
     EXPANDED_JPEG_ROTATION_VERSIONS,
     JPEG_BLOCK_BASIS,
+    NATIVE_JPEG_ROTATION_VERSIONS,
     OFFGRID_BASIS,
     ROLES,
     SMALL_PNG_BASIS,
@@ -24,6 +25,7 @@ from app.evidence.image_copy_similarity_binding import (
     TURNED_PNG_BASIS,
     box_bounds,
     copy_records,
+    native_rotation_size,
 )
 
 MAX_SOURCE_BYTES = 60 * 1024 * 1024
@@ -223,9 +225,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
             from app.evidence.image_jpeg_turned_copy_source import verify
 
+            version = embedded_pair.base_document(evidence)["version"]
             verify(data, np.asarray(source), translation["pairs"][0], translation["jpeg_turned_review"]["measurement"],
-                   expanded=embedded_pair.base_document(evidence)["version"] in EXPANDED_JPEG_ROTATION_VERSIONS,
-                   offgrid_status=translation["jpeg_offgrid_review"]["status"])
+                   expanded=version in EXPANDED_JPEG_ROTATION_VERSIONS,
+                   offgrid_status=(translation["jpeg_offgrid_review"] or {}).get("status"),
+                   native=version in NATIVE_JPEG_ROTATION_VERSIONS and native_rotation_size(*source.size))
     if pair is not None:
         from app.evidence import image_embedded_pair_pixels as embedded_pixels
 

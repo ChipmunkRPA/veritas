@@ -601,6 +601,39 @@ def test_rotated_jpeg_replays_both_native_areas_and_rejects_changed_measurements
         {"status": "unsupported_profile", "measurement": None}, [], 0)
 
 
+@pytest.mark.parametrize(("size", "quality", "subsampling", "orientation", "supported"), [
+    ((1920, 1280), 90, 2, 1, True),
+    ((2048, 3072), 95, 2, 1, True),
+    ((3072, 2048), 85, 2, 1, False),
+    ((3072, 2048), 95, 0, 1, False),
+    ((3072, 2048), 95, 2, 6, False),
+    ((3073, 2048), 90, 2, 1, False),
+    ((1280, 1023), 90, 2, 1, False),
+    ((1024, 1024), 90, 2, 1, False),
+])
+def test_native_rotation_scope_requires_a_supported_encoded_jpeg(
+    monkeypatch, size, quality, subsampling, orientation, supported,
+):
+    from app.detectors.image import jpeg_native_turned_copy
+    from app.evidence import image_jpeg_turned_copy_source as rotated
+
+    image = Image.new("RGB", size)
+    exif = image.getexif()
+    exif[274] = orientation
+    raw = _bytes(image, format="JPEG", quality=quality, subsampling=subsampling, exif=exif)
+    calls = []
+
+    def search(rgb):
+        calls.append(rgb)
+        return "no_pair", []
+
+    monkeypatch.setattr(jpeg_native_turned_copy, "analyse", search)
+    status = "no_pair" if supported else "unsupported_profile"
+    assert rotated.review(raw, image, native=True, offgrid_status=None) == (
+        {"status": status, "measurement": None}, [], 0)
+    assert len(calls) == int(supported)
+
+
 def test_small_png_copy_preserves_exact_crops_and_rejects_unsupported_sources(evidence_http, monkeypatch):
     from app.evidence import image_exact_small_copy_source
     from app.evidence.image_copy_similarity_binding import SMALL_PNG_BASIS

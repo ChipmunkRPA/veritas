@@ -3517,3 +3517,9 @@ The [image repeatability replay](image-regional-two-reflections-2026-11-13.md#re
 recounts exact changed-pixel overlap for three approaches across 108 PNGs.
 The native procedure rebuilds each input against the original horizontal
 repeat receipt.
+
+The [larger JPEG rotation replay](image-jpeg-native-rotation-2026-11-15.md#reproduce)
+recounts both-region overlap, added control flags and missed edits
+across 149 held views. The native procedure recreates JPEG deliveries
+from the credited sources. The separate prepaid replay checks the
+same two native crops in the browser, API, PDF, JSON and signed package.

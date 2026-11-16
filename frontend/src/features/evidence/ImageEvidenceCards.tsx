@@ -205,15 +205,17 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const sectionId = `image-${field.replace('_', '-')}`
   const baseVersion = set.prior_embedded_pair_evidence?.version ?? set.version
   const turnedReview = ['image-evidence-22', 'image-evidence-23'].includes(baseVersion)
-  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27'].includes(baseVersion))
+  const nativeJpegVersion = ['image-evidence-28', 'image-evidence-29'].includes(baseVersion)
+  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29'].includes(baseVersion))
     || (reflected && (turnedReview || ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12',
       'image-evidence-13', 'image-evidence-14', 'image-evidence-16', 'image-evidence-17', 'image-evidence-18',
       'image-evidence-19', 'image-evidence-20', 'image-evidence-21', 'image-evidence-24', 'image-evidence-25',
-      'image-evidence-26', 'image-evidence-27'].includes(baseVersion)))
+      'image-evidence-26', 'image-evidence-27'].includes(baseVersion) || nativeJpegVersion))
   const basis = field === 'copy_translation' && set.copy_translation?.basis
   const jpegReview = field === 'copy_translation' && set.copy_translation?.jpeg_block_review
   const offgrid = field === 'copy_translation' ? set.copy_translation?.jpeg_offgrid_review : undefined
   const turnedJpeg = field === 'copy_translation' ? set.copy_translation?.jpeg_turned_review : undefined
+  const nativeJpeg = Boolean(nativeJpegVersion && turnedJpeg && !offgrid)
   const smallPng = field === 'copy_translation' ? set.copy_translation?.small_png_copy_review : undefined
   const turned = (basis === 'png_exact_turned_copy' || basis === 'jpeg_turned_copy') && set.copy_translation?.pairs[0]?.transform
   const rotation = turned === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'
@@ -239,10 +241,13 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   }
   return <section className="mt-5 rounded-md border border-border p-4" aria-labelledby={`${sectionId}-heading`}>
     <h3 id={`${sectionId}-heading`} className="m-0 text-body font-medium text-text">{heading}</h3>
-    <p className="mt-2 mb-0 text-small text-text">{statusText[check.status]}</p>
+    <p className="mt-2 mb-0 text-small text-text">{nativeJpeg && check.status === 'no_pair' ? basisText : statusText[check.status]}</p>
     <p className="mt-2 mb-0 text-small text-text-muted">{check.interpretation}</p>
     {!reflected && <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero weight in AI authorship confidence.</p>}
-    {basisText && <p className="mt-2 mb-0 text-caption text-text-muted">{basisText}</p>}
+    {basisText && (!nativeJpeg || check.status !== 'no_pair') && <p className="mt-2 mb-0 text-caption text-text-muted">{basisText}</p>}
+    {nativeJpeg && check.status === 'supported_pair' && <p className="mt-2 mb-0 text-caption text-text-muted">
+      The rotation check used the original pixel grid at this image size.
+    </p>}
     {turnedJpeg && offgrid?.status === 'unsupported_profile' && <p className="mt-2 mb-0 text-caption text-text-muted">
       The between-block translation check was outside this file’s compression profile.
     </p>}

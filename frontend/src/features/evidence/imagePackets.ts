@@ -111,7 +111,7 @@ export interface ImageEvidenceSet {
   schema: 'chipmunk.image-evidence/1'
   status: 'ready' | 'not_generated' | 'not_applicable'
   id: string | null
-  version: 'image-evidence-1' | 'image-evidence-2' | 'image-evidence-3' | 'image-evidence-4' | 'image-evidence-5' | 'image-evidence-6' | 'image-evidence-7' | 'image-evidence-8' | 'image-evidence-9' | 'image-evidence-10' | 'image-evidence-11' | 'image-evidence-12' | 'image-evidence-13' | 'image-evidence-14' | 'image-evidence-15' | 'image-evidence-16' | 'image-evidence-17' | 'image-evidence-18' | 'image-evidence-19' | 'image-evidence-20' | 'image-evidence-21' | 'image-evidence-22' | 'image-evidence-23' | 'image-evidence-24' | 'image-evidence-25' | 'image-evidence-26' | 'image-evidence-27'
+  version: 'image-evidence-1' | 'image-evidence-2' | 'image-evidence-3' | 'image-evidence-4' | 'image-evidence-5' | 'image-evidence-6' | 'image-evidence-7' | 'image-evidence-8' | 'image-evidence-9' | 'image-evidence-10' | 'image-evidence-11' | 'image-evidence-12' | 'image-evidence-13' | 'image-evidence-14' | 'image-evidence-15' | 'image-evidence-16' | 'image-evidence-17' | 'image-evidence-18' | 'image-evidence-19' | 'image-evidence-20' | 'image-evidence-21' | 'image-evidence-22' | 'image-evidence-23' | 'image-evidence-24' | 'image-evidence-25' | 'image-evidence-26' | 'image-evidence-27' | 'image-evidence-28' | 'image-evidence-29'
   sha256: string | null
   analysis_id: string
   revision: number
@@ -145,7 +145,7 @@ export interface ImageEvidenceSet {
     pairs: { id: string; regions: Record<'area_a' | 'area_b', Box>; selected_pixels: Record<'area_a' | 'area_b', number>
       artifacts: Record<'area_a' | 'area_b' | 'mask_a' | 'mask_b', EvidenceImage> }[]
   }
-  prior_embedded_pair_evidence?: { id: string; version: 'image-evidence-12' | 'image-evidence-13' | 'image-evidence-14' | 'image-evidence-16' | 'image-evidence-17' | 'image-evidence-18' | 'image-evidence-19' | 'image-evidence-20' | 'image-evidence-21' | 'image-evidence-22' | 'image-evidence-23' | 'image-evidence-24' | 'image-evidence-25' | 'image-evidence-26' | 'image-evidence-27'; sha256: string }
+  prior_embedded_pair_evidence?: { id: string; version: 'image-evidence-12' | 'image-evidence-13' | 'image-evidence-14' | 'image-evidence-16' | 'image-evidence-17' | 'image-evidence-18' | 'image-evidence-19' | 'image-evidence-20' | 'image-evidence-21' | 'image-evidence-22' | 'image-evidence-23' | 'image-evidence-24' | 'image-evidence-25' | 'image-evidence-26' | 'image-evidence-27' | 'image-evidence-28' | 'image-evidence-29'; sha256: string }
   embedded_pair_difference?: ImageEmbeddedPairDifference
   native_interpolation_review?: {
     record: { status: string; observation: string; scope: string; limitation: string; basis?: string | null;

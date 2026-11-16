@@ -30,6 +30,9 @@ from app.evidence.image_copy_similarity_binding import (
     JPEG_OFFGRID_AFFINE_VERSION,
     JPEG_OFFGRID_VERSION,
     JPEG_OFFGRID_VERSIONS,
+    NATIVE_JPEG_ROTATION_AFFINE_VERSION,
+    NATIVE_JPEG_ROTATION_VERSION,
+    NATIVE_JPEG_ROTATION_VERSIONS,
     NOTE,
     OFFGRID_BASIS,
     PAIR_LIMIT,
@@ -62,6 +65,7 @@ from app.evidence.image_copy_similarity_binding import (
     VERSION,
     box_bounds,
     copy_records,
+    native_rotation_size,
     prior_evidence,
     result_skip,
     rotation_review_follows,
@@ -75,7 +79,9 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
 CREATOR = "image-evidence-packets/10"
-_CREATORS = {EXPANDED_JPEG_ROTATION_AFFINE_VERSION: "image-evidence-packets/25",
+_CREATORS = {NATIVE_JPEG_ROTATION_AFFINE_VERSION: "image-evidence-packets/27",
+             NATIVE_JPEG_ROTATION_VERSION: "image-evidence-packets/26",
+             EXPANDED_JPEG_ROTATION_AFFINE_VERSION: "image-evidence-packets/25",
              EXPANDED_JPEG_ROTATION_VERSION: "image-evidence-packets/24",
              TURNED_JPEG_COPY_AFFINE_VERSION: "image-evidence-packets/23",
              TURNED_JPEG_COPY_VERSION: "image-evidence-packets/22",
@@ -104,6 +110,8 @@ def _active_version() -> str:
 
 def _analysis_version(analysis: Analysis) -> str:
     if settings.environment == "dev" and settings.image_turned_jpeg_copy_review and analysis.content_type == "image/jpeg":
+        if settings.image_jpeg_native_rotation_review:
+            return NATIVE_JPEG_ROTATION_AFFINE_VERSION if settings.image_affine_copy_review else NATIVE_JPEG_ROTATION_VERSION
         return EXPANDED_JPEG_ROTATION_AFFINE_VERSION if settings.image_affine_copy_review else EXPANDED_JPEG_ROTATION_VERSION
     if settings.environment == "dev" and settings.image_small_png_copy_review and analysis.content_type == "image/png":
         if settings.image_turned_png_copy_review:
@@ -211,7 +219,8 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
         try:
             verify(legacy._verified(store, document["source"]["sha256"]), np.asarray(source), translation["pairs"][0],
                    translation["jpeg_turned_review"]["measurement"], expanded=document["version"] in EXPANDED_JPEG_ROTATION_VERSIONS,
-                   offgrid_status=translation["jpeg_offgrid_review"]["status"])
+                   offgrid_status=(translation["jpeg_offgrid_review"] or {}).get("status"),
+                   native=document["version"] in NATIVE_JPEG_ROTATION_VERSIONS and native_rotation_size(*source.size))
         except (OSError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
 
@@ -387,6 +396,19 @@ def build_packet_set(
                             turned_jpeg_review, extra = {"status": "unavailable", "measurement": None}, []
                         if extra:
                             translation_status, translations, basis = "supported_pair", extra, TURNED_JPEG_BASIS
+    if version in NATIVE_JPEG_ROTATION_VERSIONS and not skipped and native_rotation_size(*size):
+        from app.evidence import image_jpeg_turned_copy_source
+
+        source = source if source is not None else _source(document, store)
+        data = legacy._verified(store, analysis.sha256)
+        try:
+            turned_jpeg_review, extra, turns = image_jpeg_turned_copy_source.review(
+                data, np.asarray(source), native=True, offgrid_status=None)
+        except (cv2.error, OSError, ValueError, SystemError):
+            turned_jpeg_review, extra = {"status": "unavailable", "measurement": None}, []
+        translation_status = "supported_pair" if extra else "no_pair"
+        if extra:
+            translations, basis = extra, TURNED_JPEG_BASIS
     if (version in SMALL_PNG_VERSIONS and not skipped
             and SMALL_PNG_MIN_SIDE <= min(size) <= max(size) <= SMALL_PNG_MAX_SIDE
             and translation_status in {"no_pair", "unsupported_geometry"}):

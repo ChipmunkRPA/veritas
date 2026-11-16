@@ -20,6 +20,8 @@ VERSIONS = frozenset({"document-evidence-1", "document-evidence-2", *CONTEXT_VER
 CARD_SELECTION_KEY = "balanced_passage_selection"
 CARD_SELECTION_SCHEMA = "document-balanced-passage-selection/1"
 MAX_PASSAGES = 6
+CHARACTER_REVIEW_KEY = "writing_character_review"
+CHARACTER_REVIEW_COMMITMENT = "writing_character_review_sha256"
 
 PASSAGE_COVERAGE_KEY = "local_passage_coverage"
 PASSAGE_COVERAGE_SCHEMA = "document-local-passage-coverage/1"

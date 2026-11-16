@@ -8,12 +8,11 @@ import re
 from app.core.canonical import canonical_hash
 from app.detectors.text.character_view import SCHEMA as INPUT_VIEW
 from app.detectors.text.character_view import derive
-from app.detectors.text.extract import text_hash
 from app.evidence.document_native_locations import clip_source_ranges
+from app.evidence.document_scope import CHARACTER_REVIEW_COMMITMENT as COMMITMENT
+from app.evidence.document_scope import CHARACTER_REVIEW_KEY as KEY
 from app.evidence.document_scope import check_range, mapped_email_html
 
-KEY = "writing_character_review"
-COMMITMENT = "writing_character_review_sha256"
 SCHEMA = "document-writing-character-review/1"
 MAX_RANGES = 6
 MAX_CHARS = 1800
@@ -62,6 +61,8 @@ def _locator(block, meta, start, end):
 
 def geometry(text, spans, mapping, meta):
     """Keep the center and its exact input fragments in one mapped source block."""
+    from app.detectors.text.extract import text_hash
+
     if len(spans) != 3 or not (kind := METHODS.get(meta.get("method"))):
         return None
     bounds = [check_range(span, len(text)) for span in spans]

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [noisy speech profile replay](audio-local-speech-normality-2026-11-16.md#independent-replay)
+recounts source-timed localization, false alarms and matched ordinary
+or room flags over 346 deliveries. It includes 21 additional readers,
+two frozen profile fits, and a separate cutoff sensitivity result.
+
 The [draft figure replay](document-draft-figures-2026-11-16.md#independent-replay)
 compares word anchors around values in staged edits and two published
 rewrite sets. It recounts exact figure locations, equivalent-format

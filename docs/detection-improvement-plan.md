@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Genuine speech profiles under louder conversation](audio-local-speech-normality-2026-11-16.md)
+  evaluates 137 timed edits and 21 previously unused SINE readers.
+  The frozen candidates located none. The nearby comparison at a
+  lower diagnostic point located one fresh edit and added two
+  ordinary flags and one isolated room flag. The candidates stay
+  in evaluation.
+
 - [Exact figure and date changes in earlier drafts](document-draft-figures-2026-11-16.md)
   shows both printed values and their source locations. The selected rule
   recovers 15 of 37 staged value changes and produces zero flags across

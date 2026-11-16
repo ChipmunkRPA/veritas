@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Remove directions learned from ordinary writing revisions](writing-editorial-direction-transfer-2026-11-15.md)
+  uses 180 dated editorial pairs. It reduces ordinary flags from 14/84
+  to 9/84 at the tighter point while keeping one useful location. At
+  the wider point it adds six ordinary flags and no new net useful
+  locations there. It misses all 12 fresh essay rewrites. Both
+  projections stay in evaluation.
+
 - [Short speech review for six-second 48 kHz WAV and FLAC](audio-short-lossless-48k-2026-11-15.md)
   extends local audio coverage with exact native frame-clock verification.
   Both deliveries retain all four useful ranges out of 128 staged edits,

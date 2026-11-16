@@ -214,7 +214,7 @@ def training_sets(plan, store):
     }
 
 
-def fit_heads(populations):
+def fit_heads(populations, *, use_ordinary_augmentations=True):
     import torch
     from torch import nn
     from torch.nn.functional import binary_cross_entropy_with_logits as bce
@@ -223,7 +223,8 @@ def fit_heads(populations):
     mean, scale = reference.mean(0), reference.std(0).clamp_min(0.025)
     del reference
     heads = {}
-    for arm, human in zip(ARMS, (None, "before", "after"), strict=True):
+    choices = zip(ARMS, (None, "before", "after"), strict=True) if use_ordinary_augmentations else ((ARMS[0], None),)
+    for arm, human in choices:
         torch.manual_seed(SEED)
         partitions = [("ai", 0.5), ("same_work", 0.25 if human else 0.5)]
         if human:
@@ -256,7 +257,7 @@ def measure(rows, store, fitted):
         for row in rows:
             scored = list(features(row, store))
             complete = len(scored) == len(row["sentences"])
-            readings = dict.fromkeys(ARMS)
+            readings = dict.fromkeys(heads)
             if complete:
                 for arm, head in heads.items():
                     proposals = []

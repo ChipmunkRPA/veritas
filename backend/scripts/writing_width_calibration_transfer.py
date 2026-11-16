@@ -60,24 +60,28 @@ def exposure_pins():
     return {name: pool.file_hash(pool.PANEL_DIR / name) for name in EXPOSURE}
 
 
-def assay_text(gemini, nano):
+def assay_text(gemini, nano, *, extra_exclusions=(), exclude_phrases=(), seed=ESSAYS,
+               held_per_family=COUNT // 2, held_first=False, held_position_limit=None, shard_pins=ESSAY_PINS):
+    paths = (gemini,) if nano is None else (gemini, nano)
     sources = [
         intake.shard(path, "essays", family, pin)
-        for path, (family, pin) in zip((gemini, nano), ESSAY_PINS.items(), strict=True)
+        for path, (family, pin) in zip(paths, shard_pins.items(), strict=True)
     ]
-    first, second = sources
     exposure = exposure_pins()
     known = {digest for name in exposure
              for digest in re.findall(r'"([0-9a-f]{64})"', (pool.PANEL_DIR / name).read_text())}
+    known.update(extra_exclusions)
     prior_phrases = {phrase for table in sources for key in table if pool.sha(key) in known
                      for phrase in intake.fingerprints(table[key]["v0"]["text"])}
+    prior_phrases.update(exclude_phrases)
     rows = []
-    needed = COUNT // 2
-    for family, table, limit in (("original", first | second, COUNT),
-                                 *((family, table, needed) for family, table in zip(ESSAY_PINS, sources, strict=True))):
+    calibration = ("original", {key: value for table in sources for key, value in table.items()}, COUNT)
+    held = tuple((family, table, held_per_family) for family, table in zip(shard_pins, sources, strict=True))
+    for family, table, limit in ((*held, calibration) if held_first else (calibration, *held)):
         chosen = Counter()
         role = "calibration" if family == "original" else "held"
-        order = sorted(table, key=lambda key: pool.sha(f"{ESSAYS}/{family}/{key}"))
+        position_limit = held_position_limit if role == "held" and held_position_limit is not None else limit // 3
+        order = sorted(table, key=lambda key: pool.sha(f"{seed}/{family}/{key}"))
         for key in order:
             raw, labels = pool.truth_text(table[key]["v0"])
             group = pool.sha(key)
@@ -100,7 +104,7 @@ def assay_text(gemini, nano):
                     options = intake.excerpt_options(key, table[key])
             except (KeyError, ValueError):
                 continue
-            available = [position for position in options if chosen[position] < limit // 3]
+            available = [position for position in options if chosen[position] < position_limit]
             if not available:
                 continue
             target = min(available, key=lambda position: (chosen[position], position))
@@ -120,7 +124,7 @@ def assay_text(gemini, nano):
             if sum(chosen.values()) == limit:
                 break
         require(sum(chosen.values()) == limit, f"The source lacks the required distinct {family} works: {dict(chosen)}")
-    return {"schema": ESSAYS, "sources": ESSAY_PINS, "exclusions": exposure, "rows": rows}
+    return {"schema": ESSAYS, "sources": shard_pins, "exclusions": exposure, "rows": rows}
 
 
 def save(output, data):

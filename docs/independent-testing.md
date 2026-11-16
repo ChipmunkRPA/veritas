@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [editorial direction replay](writing-editorial-direction-transfer-2026-11-15.md#replay)
+checks locality on 208 original-and-rewrite work pairs and ordinary
+alerts on 120 dated revision pairs. The native commands recreate the
+fresh essay split and all three small fits from pinned source inputs.
+
 The [48 kHz short speech replay](audio-short-lossless-48k-2026-11-15.md#reproduce)
 compares 302 paired recordings in two lossless formats at a frozen
 operating point. Native replay checks the original frame clocks and

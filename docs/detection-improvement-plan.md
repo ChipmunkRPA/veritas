@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Paired writing responses across TXT, Word and PDF](document-mixed-format-comparison-2026-11-13.md#paired-writing-responses-across-formats)
+  brings both writing checks to sentences linked by unchanged neighbors
+  across formats. Both responses reproduced in all 12 local comparisons
+  and neither rewrite reached the shared-increase level. The mapped
+  ranges, Word locations, PDF crops and export replay support the result.
+
 - [Consecutive word ranges for short rewrites](writing-structured-range-transfer-2026-11-15.md)
   located 4/84 fresh publisher rewrites versus 1/84 at the tighter point.
   Ordinary flags moved from 6/84 to 7/84. One of the three new locations

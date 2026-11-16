@@ -145,14 +145,49 @@ The app test exercised an actual local analysis worker behind simulated USD
 $9.99 Checkout and opened its completed result in Chrome. Both page 2 and
 page 3 crops loaded, and the browser downloads matched the response. A large
 optional writing detector was skipped for its memory budget in this run.
-The separate paired writing-model check still requires same-format drafts
-and, for PDFs, one upright page per draft. The multi-page comparison tests
+The multi-page comparison tests
 also reject rotation, missing text, detected multiple columns, and more than
 12 pages. Multi-page comparison declines PDFs with explicitly hidden or
 fully transparent text. Covering graphics and low-contrast text can still
 affect how the source crops look. The reading-order guard accepts a limited
 left-margin spread of 36 points on each page. Centered headings or heavily
 indented material may fall outside scope. [Multi-page receipt](evaluation-panels/document-mixed-format-multipage-2026-11-13.json)
+
+## Paired writing responses across formats
+
+In a local authenticated analysis, choose **Compare with an earlier draft**
+and enable **Include experimental paired writing check**. The option now
+supports all six ordered combinations of TXT, DOCX and PDF through the
+existing independent draft review setting. Each reviewed sentence needs
+the same unambiguous preceding and following sentence in the two
+versions. The check covers short English drafts of up to 420 words per
+side and up to four separated revisions. Word contexts must stay within
+one ordinary top-level body paragraph. PDF contexts require visible
+selectable text, one column per page and verified reading order. The
+existing continuation rules can follow a sentence across a page break.
+
+The result links to the corresponding wording changes and shows each
+side's changed words, original character offsets, Word paragraph or
+PDF page and word boxes. The linked PDF changes keep the corresponding
+source crops. The browser, comparison PDF and JSON use the same result.
+When a context cannot be paired, the comparison reports that it falls
+outside the writing check's scope. A model that cannot complete returns
+an unavailable response. The two readings carry zero weight in the
+analysis's authorship confidence.
+
+The local worker checked two known rewrites rendered in all three formats.
+They came from two generator families in the separate official test
+split. Six simulated USD 9.99 checkouts queued zero jobs before payment.
+All 12 comparisons matched the edited sentence, reproduced both writing
+responses across the six directions for each work, and verified the
+replacement ranges against the two supplied files. Neither rewrite
+reached the shared-increase level. This exercise verifies source
+mapping and delivery consistency on two works. An optional separate
+single-upload check exceeded the local worker's model memory budget.
+Tests also cover unchanged wording, explicitly hidden Word and PDF text,
+PDF page breaks and tampered offsets.
+[Local replay receipt](evaluation-panels/document-mixed-paired-app-2026-11-15.json)
+· [Publisher test selection](writing-structured-range-transfer-2026-11-15.md#sources-and-coverage)
 
 ## Reproduce
 
@@ -174,4 +209,16 @@ To verify a JSON export from the local app using the two original drafts:
 ```sh
 PYTHONPATH=backend backend/.venv/bin/python -B -m scripts.review_document_revision_export \
   "$export" "$earlier" "$analyzed"
+```
+
+To repeat native inference with simulated payment, rebuild the private
+source plan using the [writing test replay](writing-structured-range-transfer-2026-11-15.md#independent-replay).
+Run the local fixture with the previously installed writing assets. The
+JSON source verifier reconstructs geometry and saved response arithmetic.
+The worker fixture separately reruns the two models on the reconstructed
+passages.
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python -B -m scripts.replay_mixed_paired_writing_app \
+  "$source_plan" docs/evaluation-panels/writing-structured-range-transfer-2026-11-15.json.gz "$scratch/app"
 ```

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [paired writing format replay](document-mixed-format-comparison-2026-11-13.md#paired-writing-responses-across-formats)
+checks six TXT, DOCX and PDF directions against the same two source
+pairs. The JSON verifier checks exact source positions and the saved
+response arithmetic, and the worker fixture reruns both local checks.
+
 The [consecutive writing-range replay](writing-structured-range-transfer-2026-11-15.md#independent-replay)
 reconstructs the ordinary calibration and per-work localization results
 for fixed word heads on 84 new publisher test pairs and the earlier

@@ -1,0 +1,399 @@
+{
+  "billing_jobs_before_payment": 0,
+  "checkouts": 6,
+  "observations": [
+    {
+      "comparisons": [
+        {
+          "earlier_format": ".docx",
+          "input_hashes": [
+            "64c0058e66be4ff12c44f8c76989ef38d5a7b36d7199ce694469c8a3bd18bb6e",
+            "5d1c5d154e872a8bba2a6e73b1936fb0333b66d6ef483049277a55d2a1c2c77e"
+          ],
+          "later_format": ".txt",
+          "responses": [
+            {
+              "earlier": 0.019198238849639893,
+              "later": 0.05613052845001221
+            },
+            {
+              "earlier": 0.002715915208682418,
+              "later": 0.0031217338982969522
+            }
+          ],
+          "status": "no_joint_increase",
+          "verification": {
+            "body_paragraph_ranges_verified": 2,
+            "changed_token_ranges_verified": 6,
+            "changes_by_role": {
+              "body": 2
+            },
+            "coordinate_space": "per_source_unicode_codepoint",
+            "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+            "paired_word_sentence_ranges_verified": 3,
+            "source_hashes_verified": 2
+          }
+        },
+        {
+          "earlier_format": ".pdf",
+          "input_hashes": [
+            "64c0058e66be4ff12c44f8c76989ef38d5a7b36d7199ce694469c8a3bd18bb6e",
+            "5d1c5d154e872a8bba2a6e73b1936fb0333b66d6ef483049277a55d2a1c2c77e"
+          ],
+          "later_format": ".txt",
+          "responses": [
+            {
+              "earlier": 0.019198238849639893,
+              "later": 0.05613052845001221
+            },
+            {
+              "earlier": 0.002715915208682418,
+              "later": 0.0031217338982969522
+            }
+          ],
+          "status": "no_joint_increase",
+          "verification": {
+            "changed_token_ranges_verified": 6,
+            "changes_by_role": {
+              "body": 2
+            },
+            "coordinate_space": "per_source_unicode_codepoint",
+            "paired_pdf_word_regions_verified": 3,
+            "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+            "pdf_previews_verified": 2,
+            "pdf_word_regions_verified": 3,
+            "source_hashes_verified": 2
+          }
+        },
+        {
+          "earlier_format": ".txt",
+          "input_hashes": [
+            "64c0058e66be4ff12c44f8c76989ef38d5a7b36d7199ce694469c8a3bd18bb6e",
+            "5d1c5d154e872a8bba2a6e73b1936fb0333b66d6ef483049277a55d2a1c2c77e"
+          ],
+          "later_format": ".docx",
+          "responses": [
+            {
+              "earlier": 0.019198238849639893,
+              "later": 0.05613052845001221
+            },
+            {
+              "earlier": 0.002715915208682418,
+              "later": 0.0031217338982969522
+            }
+          ],
+          "status": "no_joint_increase",
+          "verification": {
+            "body_paragraph_ranges_verified": 2,
+            "changed_token_ranges_verified": 6,
+            "changes_by_role": {
+              "body": 2
+            },
+            "coordinate_space": "per_source_unicode_codepoint",
+            "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+            "paired_word_sentence_ranges_verified": 3,
+            "source_hashes_verified": 2
+          }
+        },
+        {
+          "earlier_format": ".pdf",
+          "input_hashes": [
+            "64c0058e66be4ff12c44f8c76989ef38d5a7b36d7199ce694469c8a3bd18bb6e",
+            "5d1c5d154e872a8bba2a6e73b1936fb0333b66d6ef483049277a55d2a1c2c77e"
+          ],
+          "later_format": ".docx",
+          "responses": [
+            {
+              "earlier": 0.019198238849639893,
+              "later": 0.05613052845001221
+            },
+            {
+              "earlier": 0.002715915208682418,
+              "later": 0.0031217338982969522
+            }
+          ],
+          "status": "no_joint_increase",
+          "verification": {
+            "body_paragraph_ranges_verified": 2,
+            "changed_token_ranges_verified": 6,
+            "changes_by_role": {
+              "body": 2
+            },
+            "coordinate_space": "per_source_unicode_codepoint",
+            "paired_pdf_word_regions_verified": 3,
+            "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+            "paired_word_sentence_ranges_verified": 3,
+            "pdf_previews_verified": 2,
+            "pdf_word_regions_verified": 3,
+            "source_hashes_verified": 2
+          }
+        },
+        {
+          "earlier_format": ".txt",
+          "input_hashes": [
+            "64c0058e66be4ff12c44f8c76989ef38d5a7b36d7199ce694469c8a3bd18bb6e",
+            "5d1c5d154e872a8bba2a6e73b1936fb0333b66d6ef483049277a55d2a1c2c77e"
+          ],
+          "later_format": ".pdf",
+          "responses": [
+            {
+              "earlier": 0.019198238849639893,
+              "later": 0.05613052845001221
+            },
+            {
+              "earlier": 0.002715915208682418,
+              "later": 0.0031217338982969522
+            }
+          ],
+          "status": "no_joint_increase",
+          "verification": {
+            "changed_token_ranges_verified": 6,
+            "changes_by_role": {
+              "body": 2
+            },
+            "coordinate_space": "per_source_unicode_codepoint",
+            "paired_pdf_word_regions_verified": 3,
+            "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+            "pdf_previews_verified": 2,
+            "pdf_word_regions_verified": 3,
+            "source_hashes_verified": 2
+          }
+        },
+        {
+          "earlier_format": ".docx",
+          "input_hashes": [
+            "64c0058e66be4ff12c44f8c76989ef38d5a7b36d7199ce694469c8a3bd18bb6e",
+            "5d1c5d154e872a8bba2a6e73b1936fb0333b66d6ef483049277a55d2a1c2c77e"
+          ],
+          "later_format": ".pdf",
+          "responses": [
+            {
+              "earlier": 0.019198238849639893,
+              "later": 0.05613052845001221
+            },
+            {
+              "earlier": 0.002715915208682418,
+              "later": 0.0031217338982969522
+            }
+          ],
+          "status": "no_joint_increase",
+          "verification": {
+            "body_paragraph_ranges_verified": 2,
+            "changed_token_ranges_verified": 6,
+            "changes_by_role": {
+              "body": 2
+            },
+            "coordinate_space": "per_source_unicode_codepoint",
+            "paired_pdf_word_regions_verified": 3,
+            "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+            "paired_word_sentence_ranges_verified": 3,
+            "pdf_previews_verified": 2,
+            "pdf_word_regions_verified": 3,
+            "source_hashes_verified": 2
+          }
+        }
+      ],
+      "generator": "gemini-2.5-flash",
+      "genre": "reports",
+      "group": "1c6b2d28381849f023d0a65312f2612df3c476aebaeb74bd6a9a752e335e95c7"
+    },
+    {
+      "comparisons": [
+        {
+          "earlier_format": ".docx",
+          "input_hashes": [
+            "bf3a5f8c0adcadde7bcaeff7f0f15f0aa34e328f0b52b90589c20dd2ff385bdd",
+            "953da55ee8493c36ce40621cd06f49c55f82d8ecd997c94c9f7a93ff11608178"
+          ],
+          "later_format": ".txt",
+          "responses": [
+            {
+              "earlier": 0.002534031867980957,
+              "later": 0.0020685195922851562
+            },
+            {
+              "earlier": 0.8894391059875488,
+              "later": 0.9175300002098083
+            }
+          ],
+          "status": "no_joint_increase",
+          "verification": {
+            "body_paragraph_ranges_verified": 4,
+            "changed_token_ranges_verified": 28,
+            "changes_by_role": {
+              "body": 4
+            },
+            "coordinate_space": "per_source_unicode_codepoint",
+            "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+            "paired_word_sentence_ranges_verified": 3,
+            "source_hashes_verified": 2
+          }
+        },
+        {
+          "earlier_format": ".pdf",
+          "input_hashes": [
+            "bf3a5f8c0adcadde7bcaeff7f0f15f0aa34e328f0b52b90589c20dd2ff385bdd",
+            "953da55ee8493c36ce40621cd06f49c55f82d8ecd997c94c9f7a93ff11608178"
+          ],
+          "later_format": ".txt",
+          "responses": [
+            {
+              "earlier": 0.002534031867980957,
+              "later": 0.0020685195922851562
+            },
+            {
+              "earlier": 0.8894391059875488,
+              "later": 0.9175300002098083
+            }
+          ],
+          "status": "no_joint_increase",
+          "verification": {
+            "changed_token_ranges_verified": 28,
+            "changes_by_role": {
+              "body": 4
+            },
+            "coordinate_space": "per_source_unicode_codepoint",
+            "paired_pdf_word_regions_verified": 16,
+            "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+            "pdf_previews_verified": 4,
+            "pdf_word_regions_verified": 16,
+            "source_hashes_verified": 2
+          }
+        },
+        {
+          "earlier_format": ".txt",
+          "input_hashes": [
+            "bf3a5f8c0adcadde7bcaeff7f0f15f0aa34e328f0b52b90589c20dd2ff385bdd",
+            "953da55ee8493c36ce40621cd06f49c55f82d8ecd997c94c9f7a93ff11608178"
+          ],
+          "later_format": ".docx",
+          "responses": [
+            {
+              "earlier": 0.002534031867980957,
+              "later": 0.0020685195922851562
+            },
+            {
+              "earlier": 0.8894391059875488,
+              "later": 0.9175300002098083
+            }
+          ],
+          "status": "no_joint_increase",
+          "verification": {
+            "body_paragraph_ranges_verified": 4,
+            "changed_token_ranges_verified": 28,
+            "changes_by_role": {
+              "body": 4
+            },
+            "coordinate_space": "per_source_unicode_codepoint",
+            "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+            "paired_word_sentence_ranges_verified": 3,
+            "source_hashes_verified": 2
+          }
+        },
+        {
+          "earlier_format": ".pdf",
+          "input_hashes": [
+            "bf3a5f8c0adcadde7bcaeff7f0f15f0aa34e328f0b52b90589c20dd2ff385bdd",
+            "953da55ee8493c36ce40621cd06f49c55f82d8ecd997c94c9f7a93ff11608178"
+          ],
+          "later_format": ".docx",
+          "responses": [
+            {
+              "earlier": 0.002534031867980957,
+              "later": 0.0020685195922851562
+            },
+            {
+              "earlier": 0.8894391059875488,
+              "later": 0.9175300002098083
+            }
+          ],
+          "status": "no_joint_increase",
+          "verification": {
+            "body_paragraph_ranges_verified": 4,
+            "changed_token_ranges_verified": 28,
+            "changes_by_role": {
+              "body": 4
+            },
+            "coordinate_space": "per_source_unicode_codepoint",
+            "paired_pdf_word_regions_verified": 16,
+            "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+            "paired_word_sentence_ranges_verified": 3,
+            "pdf_previews_verified": 4,
+            "pdf_word_regions_verified": 16,
+            "source_hashes_verified": 2
+          }
+        },
+        {
+          "earlier_format": ".txt",
+          "input_hashes": [
+            "bf3a5f8c0adcadde7bcaeff7f0f15f0aa34e328f0b52b90589c20dd2ff385bdd",
+            "953da55ee8493c36ce40621cd06f49c55f82d8ecd997c94c9f7a93ff11608178"
+          ],
+          "later_format": ".pdf",
+          "responses": [
+            {
+              "earlier": 0.002534031867980957,
+              "later": 0.0020685195922851562
+            },
+            {
+              "earlier": 0.8894391059875488,
+              "later": 0.9175300002098083
+            }
+          ],
+          "status": "no_joint_increase",
+          "verification": {
+            "changed_token_ranges_verified": 28,
+            "changes_by_role": {
+              "body": 4
+            },
+            "coordinate_space": "per_source_unicode_codepoint",
+            "paired_pdf_word_regions_verified": 12,
+            "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+            "pdf_previews_verified": 4,
+            "pdf_word_regions_verified": 12,
+            "source_hashes_verified": 2
+          }
+        },
+        {
+          "earlier_format": ".docx",
+          "input_hashes": [
+            "bf3a5f8c0adcadde7bcaeff7f0f15f0aa34e328f0b52b90589c20dd2ff385bdd",
+            "953da55ee8493c36ce40621cd06f49c55f82d8ecd997c94c9f7a93ff11608178"
+          ],
+          "later_format": ".pdf",
+          "responses": [
+            {
+              "earlier": 0.002534031867980957,
+              "later": 0.0020685195922851562
+            },
+            {
+              "earlier": 0.8894391059875488,
+              "later": 0.9175300002098083
+            }
+          ],
+          "status": "no_joint_increase",
+          "verification": {
+            "body_paragraph_ranges_verified": 4,
+            "changed_token_ranges_verified": 28,
+            "changes_by_role": {
+              "body": 4
+            },
+            "coordinate_space": "per_source_unicode_codepoint",
+            "paired_pdf_word_regions_verified": 12,
+            "paired_scope_and_saved_response_arithmetic": "no_joint_increase",
+            "paired_word_sentence_ranges_verified": 3,
+            "pdf_previews_verified": 4,
+            "pdf_word_regions_verified": 12,
+            "source_hashes_verified": 2
+          }
+        }
+      ],
+      "generator": "gpt-5.4",
+      "genre": "news",
+      "group": "0345f749ff574b64ffba316eebb6dd1bfdf9de5e158a8ee01b176d8713714277"
+    }
+  ],
+  "schema": "chipmunk.mixed-paired-writing-app/1",
+  "simulated_usd_cents": 999,
+  "source_plan_sha256": "45b3065d5ea5242a3ce52f89467074e4b9b7ed30f519c341b9b468de98f06491"
+}

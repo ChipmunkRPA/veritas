@@ -37,6 +37,7 @@ class DocumentRevisionAvailability(BaseModel):
     available: bool
     extension: Literal[".eml", ".txt", ".docx", ".pdf"] | None = None
     paired_check_available: bool | None = None
+    paired_mixed_formats_available: bool | None = None
     earlier_extensions: list[Literal[".eml", ".txt", ".docx", ".pdf"]] | None = None
 
 
@@ -158,6 +159,7 @@ class DraftPairedCheck(BaseModel):
         "chipmunk.paired-writing-review/3", "chipmunk.paired-writing-review/4", "chipmunk.paired-writing-review/5",
         "chipmunk.paired-writing-review/6", "chipmunk.paired-writing-review/7", "chipmunk.paired-writing-review/8",
         "chipmunk.paired-writing-review/9", "chipmunk.paired-writing-review/10",
+        "chipmunk.paired-writing-review/11",
     ] = Field(alias="schema")
     status: Literal["outside_scope", "unavailable", "no_joint_increase", "joint_increase"]
     scope: str
@@ -316,6 +318,8 @@ def availability(aid: str, request: Request):
         payload["earlier_extensions"] = list(MIXED_DRAFTS)
     if _paired_enabled(extension):
         payload["paired_check_available"] = True
+        if extension in MIXED_DRAFTS and settings.document_paired_independent_review:
+            payload["paired_mixed_formats_available"] = True
     return JSONResponse(payload, headers=NO_STORE)
 
 
@@ -334,12 +338,17 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
         raise ProblemError(409, "Original integrity check failed", "The retained document could not be read.") from None
     if len(later) != size or hashlib.sha256(later).hexdigest() != sha256:
         raise ProblemError(409, "Original integrity check failed", "The retained document no longer matches its recorded hash and size.")
-    paired_enabled = include_paired_check and earlier_extension == extension and _paired_enabled(extension)
+    paired_requested = include_paired_check and _paired_enabled(extension)
+    paired_enabled = paired_requested and earlier_extension == extension
+    mixed_paired = (paired_requested and earlier_extension != extension
+                    and earlier_extension in MIXED_DRAFTS and extension in MIXED_DRAFTS
+                    and settings.document_paired_independent_review)
     pdf_independent = paired_enabled and extension == ".pdf" and settings.document_paired_independent_review
     try:
         comparison, old_text, new_text, native_layouts = compare_with_sources(
             earlier, later, extension, earlier_extension=earlier_extension,
-            email_body_only=paired_enabled, pdf_paired_text_only=paired_enabled, pdf_independent=pdf_independent,
+            email_body_only=paired_enabled, pdf_paired_text_only=paired_enabled,
+            pdf_independent=pdf_independent, mixed_paired=mixed_paired,
         )
     except (UnicodeError, LookupError, RecursionError):
         raise ProblemError(422, "Could not compare drafts", "Use readable files in a supported draft format.") from None
@@ -347,7 +356,16 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
         raise ProblemError(422, "Could not compare drafts", str(error)) from None
     except OSError:
         raise ProblemError(500, "Earlier-draft comparison unavailable", "The local service could not stage the comparison.") from None
-    if paired_enabled:
+    if mixed_paired:
+        candidates = []
+        try:
+            candidates = paired.mixed_anchored_revisions(comparison, old_text, new_text, native_layouts)
+            responses = paired.score_separate(candidates) if candidates else None
+            comparison["paired_check"] = paired.multiple_result(candidates, responses, independent=True, draft_format="mixed")
+        except Exception as error:
+            log.warning("document_revision.paired_check_unavailable", exception=type(error).__name__)
+            comparison["paired_check"] = paired.multiple_result(candidates, independent=True, draft_format="mixed")
+    elif paired_enabled:
         candidate = None
         separate = []
         independent = False

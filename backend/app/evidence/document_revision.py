@@ -56,6 +56,7 @@ EDITED_RELOCATION_SCOPE = ("One body passage changed position relative to other 
 WordParagraphs = list[tuple[int, int, int, int]]
 WordLayouts = tuple[WordParagraphs, WordParagraphs]
 PdfLayouts = tuple[list[dict], list[dict]]
+MixedLayouts = tuple[WordParagraphs | list[dict] | None, WordParagraphs | list[dict] | None]
 
 
 def tokens(text, offsets):
@@ -294,7 +295,7 @@ def _excerpt(text: str, extent: list[int] | None, changed_tokens: list[list[int]
     return result
 
 
-def _ordinary_relocation_indices(text, layout, extension, body):
+def _ordinary_body_indices(text, layout, extension, body):
     if extension == ".txt":
         return {index for index, (start, end) in enumerate(layout)
                 if all(not line.lstrip().startswith(">") for line in text[start:end].splitlines())}
@@ -318,8 +319,8 @@ def _relocated_paragraph(earlier, later, old_layout, new_layout, extension, word
     if len(common) < 3 or [key for key in old if key in common] == [key for key in new if key in common]:
         return None
 
-    old_visible = _ordinary_relocation_indices(earlier, old_layout, extension, word_bodies[0])
-    new_visible = _ordinary_relocation_indices(later, new_layout, extension, word_bodies[1])
+    old_visible = _ordinary_body_indices(earlier, old_layout, extension, word_bodies[0])
+    new_visible = _ordinary_body_indices(later, new_layout, extension, word_bodies[1])
     common = {key for key in common if old[key][1] in old_visible and new[key][1] in new_visible}
     if len(common) < 3:
         return None
@@ -354,8 +355,8 @@ def _edited_relocation(earlier, later, old_layout, new_layout, extension, word_b
     a, b = (next(index for index, row in enumerate(side) if row not in common) for side in (left, right))
     if abs(a - b) < 2:
         return None
-    if (len(_ordinary_relocation_indices(earlier, old_layout, extension, word_bodies[0])) != len(left)
-            or len(_ordinary_relocation_indices(later, new_layout, extension, word_bodies[1])) != len(right)):
+    if (len(_ordinary_body_indices(earlier, old_layout, extension, word_bodies[0])) != len(left)
+            or len(_ordinary_body_indices(later, new_layout, extension, word_bodies[1])) != len(right)):
         return None
 
     before, after = left[a], right[b]
@@ -404,12 +405,12 @@ def compare_with_text(earlier: bytes, later: bytes, extension: str, *,
 
 def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                          email_body_only: bool = False, pdf_paired_text_only: bool = False, earlier_extension: str | None = None,
-                         pdf_independent: bool = False,
+                         pdf_independent: bool = False, mixed_paired: bool = False,
                          include_word_tables: bool = True,
                          strict_word_tables: bool = False,
                          include_relocations: bool = True,
                          include_edited_relocations: bool = True,
-                         ) -> tuple[dict, str, str, WordLayouts | PdfLayouts | None]:
+                         ) -> tuple[dict, str, str, WordLayouts | PdfLayouts | MixedLayouts | None]:
     """Return ephemeral native layouts for the requested paired sentence scope."""
     if extension not in FORMATS:
         raise ValueError(f"Choose two {SUPPORTED_DRAFTS}.")
@@ -428,8 +429,11 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     compare_word = extension == ".docx" and not mixed
     check_relocation = include_relocations and not strict_word_tables and not mixed and extension in {".txt", ".docx"}
     word_bodies = (docx_body(earlier), docx_body(later)) if compare_word and (include_word_tables or check_relocation) else (None, None)
+    if mixed and mixed_paired:
+        word_bodies = tuple(docx_body(data) if suffix == ".docx" else None
+                            for data, suffix in ((earlier, old_extension), (later, extension)))
     word_tables = None
-    if include_word_tables and word_bodies[0] is not None:
+    if compare_word and include_word_tables and word_bodies[0] is not None:
         if strict_word_tables:
             from app.evidence import document_revision_word_tables as word_table_comparator
         else:
@@ -489,7 +493,23 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
             "earlier": old_source, "later": new_source, "changes": changes,
             "scope": scope, "interpretation": INTERPRETATION}
     if mixed:
-        return result, old_text, new_text, None
+        layouts = (old_layout, new_layout)
+        verified = mixed_paired and all(
+            suffix != ".pdf" or (
+                not any(row["hidden_text_on_page"] for row in layout)
+                and document_revision_pdf.ordered_text(text, layout, page_limit=document_revision_pdf.NATIVE_COMPARISON_MAX_PAGES,
+                                                       single_column=True))
+            for suffix, text, layout in zip((old_extension, extension), (old_text, new_text), layouts, strict=True)
+        )
+        if not verified:
+            return result, old_text, new_text, None
+        paired_layouts = []
+        for suffix, text, layout, body in zip((old_extension, extension), (old_text, new_text), layouts, word_bodies, strict=True):
+            if suffix == ".docx":
+                eligible = _ordinary_body_indices(text, layout, suffix, body)
+                layout = [location for index, location in enumerate(layout) if index in eligible]
+            paired_layouts.append(layout)
+        return result, old_text, new_text, tuple(paired_layouts)
     if word_tables is not None:
         result.update(schema=word_table_comparator.SCHEMA, scope=word_table_comparator.SCOPE, word_tables=word_tables)
     if relocation:

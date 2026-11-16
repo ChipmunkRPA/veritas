@@ -275,8 +275,9 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
   </div>
 }
 
-function DraftForm({ analysisId, extension, earlierExtensions = [extension], pairedCheckAvailable }: {
-  analysisId: string; extension: DraftExtension; earlierExtensions?: DraftExtension[]; pairedCheckAvailable: boolean
+function DraftForm({ analysisId, extension, earlierExtensions = [extension], pairedCheckAvailable, pairedMixedFormatsAvailable = false }: {
+  analysisId: string; extension: DraftExtension; earlierExtensions?: DraftExtension[];
+  pairedCheckAvailable: boolean; pairedMixedFormatsAvailable?: boolean
 }) {
   const headingId = useId()
   const inputId = useId()
@@ -285,7 +286,10 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
   const [error, setError] = useState<string | null>(null)
   const [pending, setPending] = useState(false)
   const [includePairedCheck, setIncludePairedCheck] = useState(false)
-  const sameFormat = !file || file.name.toLowerCase().endsWith(extension)
+  const earlierName = file?.name.toLowerCase()
+  const sameFormat = !earlierName || earlierName.endsWith(extension)
+  const canRunPairedCheck = pairedCheckAvailable && (sameFormat || (pairedMixedFormatsAvailable &&
+    earlierExtensions.some(suffix => earlierName?.endsWith(suffix))))
   const active = useRef<AbortController | null>(null)
   useEffect(() => () => active.current?.abort(), [])
 
@@ -298,7 +302,7 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
     setError(null)
     setResult(null)
     try {
-      const comparison = await compareDraft(analysisId, file, request.signal, pairedCheckAvailable && sameFormat && includePairedCheck)
+      const comparison = await compareDraft(analysisId, file, request.signal, canRunPairedCheck && includePairedCheck)
       if (!request.signal.aborted) setResult(comparison)
     } catch (error) {
       if (!request.signal.aborted) setError(error instanceof Error ? error.message : 'Please try again.')
@@ -318,7 +322,8 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
     {extension === '.eml' && <p className="mt-2 mb-0 text-small text-text-muted">Use two plain-text emails or two HTML-only replies with two, three, five or six simple body paragraphs and a trailing blockquote.</p>}
     {extension === '.pdf' && <p className="mt-2 mb-0 text-small text-text-muted">Use unlocked PDFs with selectable text on every page, up to 12 pages each.</p>}
     {earlierExtensions.length > 1 && <p className="mt-2 mb-0 text-small text-text-muted">For drafts in different formats, use an upright PDF with selectable text. Multi-page PDFs need a single column per page and can have up to 12 pages.</p>}
-    {extension === '.pdf' && pairedCheckAvailable && <p className="mt-2 mb-0 text-small text-text-muted">For the paired writing check, use upright PDFs with selectable text in a clear reading order. In each draft, the changed sentence and its two unchanged neighbors need to share one text block on the same page.</p>}
+    {canRunPairedCheck && (extension === '.pdf' || earlierName?.endsWith('.pdf')) &&
+      <p className="mt-2 mb-0 text-small text-text-muted">The paired writing check needs visible, selectable PDF text in a clear reading order and the same neighboring sentences in both drafts.</p>}
     <form onSubmit={event => void submit(event)} className="mt-4 flex flex-wrap items-end gap-3">
       <div className="min-w-0">
         <label htmlFor={inputId} className="mb-1 block text-small font-medium">Earlier draft</label>
@@ -333,7 +338,7 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
           }} />
       </div>
       <Button type="submit" variant="primary" disabled={!file || pending}>{pending ? 'Comparing…' : 'Compare drafts'}</Button>
-      {pairedCheckAvailable && sameFormat && <label className="flex w-full items-center gap-2 text-small text-text-muted">
+      {canRunPairedCheck && <label className="flex w-full items-center gap-2 text-small text-text-muted">
         <input type="checkbox" checked={includePairedCheck} disabled={pending}
           onChange={event => setIncludePairedCheck(event.currentTarget.checked)} />
         Include experimental paired writing check

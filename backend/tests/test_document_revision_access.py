@@ -446,7 +446,10 @@ def test_independent_pdf_review_verifies_a_sentence_that_moved_to_another_page(r
         assert "Writing responses were unavailable." in "".join(page.get_text() for page in report)
 
 
-def test_paired_pdf_review_follows_a_sentence_through_a_page_break(reference_http, monkeypatch, tmp_path):
+@pytest.mark.parametrize("earlier_format", [".pdf", ".docx"])
+def test_paired_pdf_review_follows_a_sentence_through_a_page_break(reference_http, monkeypatch, tmp_path, earlier_format):
+    from scripts.rebuild_writing_word_boundary_sources import docx
+
     fixtures = _install(reference_http, monkeypatch)
     monkeypatch.setattr(settings, "text_detector_mode", "candidate")
     monkeypatch.setattr(settings, "text_window_sentences", 3)
@@ -468,7 +471,8 @@ def test_paired_pdf_review_follows_a_sentence_through_a_page_break(reference_htt
                 assert page.insert_textbox((54, 55, 530, 300), f"{left} {sentence} {right}", fontsize=10) >= 0
             return pdf.tobytes()
 
-    older, newer = draft(changed_before), draft(changed_after, page_break=True)
+    older = draft(changed_before) if earlier_format == ".pdf" else docx(f"{left} {changed_before} {right}")
+    newer = draft(changed_after, page_break=True)
     _saved(fixtures, "paired-pdf-continuation", ".pdf", newer)
     route = _url("paired-pdf-continuation")
     inputs = []
@@ -478,15 +482,15 @@ def test_paired_pdf_review_follows_a_sentence_through_a_page_break(reference_htt
         return [[{"earlier": .2, "later": .5}, {"earlier": .3, "later": .8}]]
 
     monkeypatch.setattr(paired, "score_separate", score)
-    standard = fixtures.client.post(route, headers=fixtures.viewer, files=_upload(older, ".pdf"))
+    standard = fixtures.client.post(route, headers=fixtures.viewer, files=_upload(older, earlier_format))
     assert standard.status_code == 200 and not inputs
-    response = fixtures.client.post(route, headers=fixtures.viewer, files=_upload(older, ".pdf"),
+    response = fixtures.client.post(route, headers=fixtures.viewer, files=_upload(older, earlier_format),
                                     data={"include_paired_check": "true", "include_pdf": "true"})
     assert response.status_code == 200, response.text
     payload = response.json()
     comparison = payload["comparison"]
     check = comparison["paired_check"]
-    assert check["schema"] == paired.PDF_CONTINUATION_SCHEMA
+    assert check["schema"] == (paired.PDF_CONTINUATION_SCHEMA if earlier_format == ".pdf" else paired.MIXED_DRAFT_SCHEMA)
     assert check["status"] == "joint_increase" and check["authorship_confidence_contribution"] == 0
     assert comparison["changes"] == standard.json()["comparison"]["changes"]
     candidate, = inputs
@@ -503,7 +507,7 @@ def test_paired_pdf_review_follows_a_sentence_through_a_page_break(reference_htt
         assert "Page 1" in text and "Page 2" in text and "Changed sentence 1" in text
         assert "zero authorship confidence weight" in text and "ModernBERT" not in text and "Tropa" not in text
 
-    old, new, exported = (tmp_path / name for name in ("earlier.pdf", "later.pdf", "comparison.json"))
+    old, new, exported = (tmp_path / name for name in (f"earlier{earlier_format}", "later.pdf", "comparison.json"))
     old.write_bytes(older)
     new.write_bytes(newer)
     exported.write_text(json.dumps(comparison))
@@ -514,7 +518,7 @@ def test_paired_pdf_review_follows_a_sentence_through_a_page_break(reference_htt
         review(exported, old, new)
 
     _saved(fixtures, "paired-pdf-wide-gap", ".pdf", draft(changed_after, page_break=True, line_start=116))
-    unpaired = fixtures.client.post(_url("paired-pdf-wide-gap"), headers=fixtures.viewer, files=_upload(older, ".pdf"),
+    unpaired = fixtures.client.post(_url("paired-pdf-wide-gap"), headers=fixtures.viewer, files=_upload(older, earlier_format),
                                     data={"include_paired_check": "true"}).json()
     assert unpaired["comparison"]["paired_check"]["status"] == "outside_scope"
     assert len(inputs) == 1
@@ -1136,6 +1140,7 @@ def test_auth_scope_format_mismatch_and_retained_later_integrity(reference_http,
 def test_cross_format_word_to_pdf_comparison_replays_both_source_locations(reference_http, monkeypatch, tmp_path):
     f = _install(reference_http, monkeypatch)
     monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    monkeypatch.setattr(settings, "document_paired_independent_review", False)
     from scripts.rebuild_writing_word_boundary_sources import docx
 
     earlier = docx("The shipment will use amber packaging.")
@@ -1177,10 +1182,112 @@ def test_cross_format_word_to_pdf_comparison_replays_both_source_locations(refer
     assert refused.status_code == 422
 
 
+@pytest.mark.parametrize(("old_suffix", "new_suffix"), [
+    (".txt", ".docx"), (".docx", ".txt"), (".txt", ".pdf"),
+    (".pdf", ".txt"), (".docx", ".pdf"), (".pdf", ".docx"),
+])
+def test_cross_format_paired_reviews_preserve_each_source_position(reference_http, monkeypatch, tmp_path,
+                                                            old_suffix, new_suffix):
+    from scripts.replay_document_mixed_formats import rendition
+
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    monkeypatch.setattr(settings, "document_paired_independent_review", True)
+    previous = "The regional office received the completed audit records on Monday."
+    following = "The records will be retained until the next scheduled review."
+    before = "The staff logged six shipment dates in the inspection table."
+    after = "The staff recorded eight shipment dates in the inspection table."
+
+    def draft(suffix, sentence, *, hidden=False):
+        context = " ".join((previous, sentence, following))
+        if suffix == ".docx" and hidden:
+            word = Document()
+            run = word.add_paragraph(previous + " ").add_run(sentence)
+            run.font.hidden = True
+            word.paragraphs[0].add_run(" " + following)
+            stream = BytesIO()
+            word.save(stream)
+            return stream.getvalue()
+        if suffix != ".pdf":
+            return rendition(context, suffix)
+        with pymupdf.open() as pdf:
+            page = pdf.new_page()
+            assert page.insert_textbox((60, 60, 545, 250), context, fontsize=11) >= 0
+            if hidden:
+                page.insert_text((60, 300), "Invisible text for the scope control.", render_mode=3)
+            return pdf.tobytes()
+
+    readings = [{"earlier": .2, "later": .6}, {"earlier": .3, "later": .7}]
+    evaluations = []
+
+    def score(candidates):
+        candidate, = candidates
+        evaluations.append((candidate.earlier, candidate.later))
+        assert candidate.earlier == " ".join((previous, before, following))
+        assert candidate.later == " ".join((previous, after, following))
+        return [readings]
+
+    monkeypatch.setattr(paired, "score_separate", score)
+    old, new = draft(old_suffix, before), draft(new_suffix, after)
+    _saved(f, "mixed-paired", new_suffix, new)
+    url = _url("mixed-paired")
+    assert f.client.get(url, headers=f.viewer).json()["paired_mixed_formats_available"]
+    plain = f.client.post(url, headers=f.viewer, files=_upload(old, old_suffix)).json()["comparison"]
+    assert "paired_check" not in plain and not evaluations
+    response = f.client.post(url, headers=f.viewer, files=_upload(old, old_suffix),
+                             data={"include_pdf": "true", "include_paired_check": "true"})
+    assert response.status_code == 200, response.text
+    payload = response.json()
+    report = payload["comparison"]
+    check = report.pop("paired_check")
+    assert report == plain and len(evaluations) == 1
+    assert check["schema"] == paired.MIXED_DRAFT_SCHEMA and check["authorship_confidence_contribution"] == 0
+    revision, = check["revisions"]
+    assert revision["responses"] == readings and revision["status"] == "joint_increase"
+    assert revision["change_ids"] == ["C01"]
+    for side, suffix, sentence in (("earlier", old_suffix, before), ("later", new_suffix, after)):
+        focus = revision[side]
+        assert focus["text"] == sentence
+        assert ("context_paragraphs" in focus) == (suffix == ".docx")
+        assert ("pdf_pages" in focus) == (suffix == ".pdf")
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as pdf:
+        report_text = " ".join(" ".join(page.get_text().split()) for page in pdf)
+        assert before in report_text and after in report_text
+        assert "Linked wording changes C01" in report_text and any(page.get_links() for page in pdf)
+        if ".pdf" in (old_suffix, new_suffix):
+            assert "Page 1 · highlighted source crop" in report_text
+    old_path, new_path, export = tmp_path / ("old"+old_suffix), tmp_path / ("new"+new_suffix), tmp_path / "export.json"
+    old_path.write_bytes(old)
+    new_path.write_bytes(new)
+    report["paired_check"] = check
+    export.write_text(json.dumps(report))
+    receipt = review(export, old_path, new_path)
+    assert receipt["paired_scope_and_saved_response_arithmetic"] == "joint_increase"
+    if ".pdf" in (old_suffix, new_suffix):
+        assert receipt["paired_pdf_word_regions_verified"] >= 2
+    if ".docx" in (old_suffix, new_suffix):
+        assert receipt["paired_word_sentence_ranges_verified"] == 3
+    revision["later"]["start"] -= 1
+    export.write_text(json.dumps(report))
+    with pytest.raises(ValueError, match="Mapped revisions differ"):
+        review(export, old_path, new_path)
+
+    unchanged = f.client.post(url, headers=f.viewer, files=_upload(draft(old_suffix, after), old_suffix),
+                              data={"include_paired_check": "true"}).json()["comparison"]
+    assert not unchanged["changes"] and unchanged["paired_check"]["status"] == "outside_scope"
+    if old_suffix in {".pdf", ".docx"}:
+        hidden = f.client.post(url, headers=f.viewer, files=_upload(draft(old_suffix, before, hidden=True), old_suffix),
+                               data={"include_paired_check": "true"})
+        assert hidden.status_code == 200 and hidden.json()["comparison"]["paired_check"]["status"] == "outside_scope"
+    assert len(evaluations) == 1
+
+
 def test_cross_format_word_to_pdf_locates_one_change_across_two_pages(reference_http, monkeypatch, tmp_path):
     from scripts.rebuild_writing_word_boundary_sources import docx
 
     f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    monkeypatch.setattr(settings, "document_paired_independent_review", True)
     earlier = docx("The first page keeps the yellow shipment.\n\nInstructions for packing:\n\nThe second shipment will use the blue packaging.")
     with pymupdf.open() as pdf:
         first = pdf.new_page()
@@ -1195,7 +1302,8 @@ def test_cross_format_word_to_pdf_locates_one_change_across_two_pages(reference_
     assert response.status_code == 200, response.text
     payload = response.json()
     result = payload["comparison"]
-    assert "all 2 upright, single-column pages" in result["scope"] and "paired_check" not in result
+    assert "all 2 upright, single-column pages" in result["scope"]
+    assert result["paired_check"]["status"] == "outside_scope"
     assert [[page["page"] for page in change["later"]["pdf_pages"]] for change in result["changes"]] == [[1, 2], [2]]
     with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as report:
         report_text = " ".join(" ".join(page.get_text().split()) for page in report)

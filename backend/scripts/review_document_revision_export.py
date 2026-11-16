@@ -21,6 +21,7 @@ from app.evidence.document_revision_word_tables import SCHEMA as WORD_TABLES_SCH
 from app.evidence.document_revision_writing import (
     ANCHORED_DRAFT_SCHEMA,
     INDEPENDENT_SCHEMA,
+    MIXED_DRAFT_SCHEMA,
     PDF_CONTINUATION_SCHEMA,
     PDF_INDEPENDENT_SCHEMA,
     refine_wording,
@@ -62,12 +63,14 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
     if (anchored and paired is not None and paired.get("status") != "outside_scope"
             and paired.get("schema") != INDEPENDENT_SCHEMA):
         raise ValueError("Anchored wording changes cannot carry statistical sentence responses")
-    if paired is not None and old_extension != extension:
-        raise ValueError("Paired writing responses require both drafts to have the same format")
+    mixed_paired = paired is not None and paired.get("schema") == MIXED_DRAFT_SCHEMA
+    if paired is not None and mixed_paired != (old_extension != extension):
+        raise ValueError("Paired writing responses use different source formats from the supplied drafts")
     pdf_independent = paired is not None and paired.get("schema") in (PDF_INDEPENDENT_SCHEMA, PDF_CONTINUATION_SCHEMA)
     expected, old_text, new_text, native_layouts = compare_with_sources(
         _read(earlier, MAX_BYTES), _read(later, MAX_BYTES), extension, earlier_extension=old_extension,
-        email_body_only=paired is not None, pdf_paired_text_only=paired is not None, pdf_independent=pdf_independent,
+        email_body_only=paired is not None, pdf_paired_text_only=paired is not None,
+        pdf_independent=pdf_independent, mixed_paired=mixed_paired,
         include_word_tables=(schema in {WORD_TABLES_SCHEMA, ALIGNED_WORD_TABLES_SCHEMA}
                              or relocated and "word_tables" in received),
         strict_word_tables=schema == WORD_TABLES_SCHEMA,
@@ -106,15 +109,16 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
             expected, old_text, new_text, paired,
             word_layouts=native_layouts if extension == ".docx" else None,
             pdf_layouts=native_layouts if pdf_independent else None,
+            mixed_layouts=native_layouts if mixed_paired else None,
         )
         word_ranges = sum(len(revision.get(side, {}).get("context_paragraphs", ()))
                           for revision in (paired, *paired.get("revisions", ())) for side in ("earlier", "later"))
         if word_ranges:
             result["paired_word_sentence_ranges_verified"] = word_ranges
-        if pdf_independent:
+        if pdf_independent or (mixed_paired and ".pdf" in (extension, old_extension)):
             result["paired_pdf_word_regions_verified"] = sum(
-                len(page["word_regions"]) for revision in paired["revisions"] for side in ("earlier", "later")
-                for page in revision[side]["pdf_pages"]
+                len(page["word_regions"]) for revision in paired.get("revisions", ()) for side in ("earlier", "later")
+                for page in revision[side].get("pdf_pages", ())
             )
     return result
 

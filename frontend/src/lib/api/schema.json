@@ -5545,6 +5545,17 @@
               }
             ],
             "title": "Paired Check Available"
+          },
+          "paired_mixed_formats_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Paired Mixed Formats Available"
           }
         },
         "required": [
@@ -5988,7 +5999,8 @@
               "chipmunk.paired-writing-review/7",
               "chipmunk.paired-writing-review/8",
               "chipmunk.paired-writing-review/9",
-              "chipmunk.paired-writing-review/10"
+              "chipmunk.paired-writing-review/10",
+              "chipmunk.paired-writing-review/11"
             ],
             "title": "Schema",
             "type": "string"

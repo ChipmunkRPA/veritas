@@ -9,12 +9,13 @@ export type DocumentRevisionResponse = components['schemas']['DocumentRevisionRe
 const route = '/api/v2/analyses/{aid}/document-revision-comparison'
 
 export async function draftAvailability(analysisId: string, signal: AbortSignal): Promise<{
-  extension: DraftExtension; earlierExtensions?: DraftExtension[]; pairedCheckAvailable: boolean
+  extension: DraftExtension; earlierExtensions?: DraftExtension[]; pairedCheckAvailable: boolean; pairedMixedFormatsAvailable?: boolean
 } | null> {
   const result = await unwrap(apiClient.GET(route, { params: { path: { aid: analysisId } }, signal }))
   return result.available && result.extension
     ? { extension: result.extension, earlierExtensions: result.earlier_extensions ?? [result.extension],
-      pairedCheckAvailable: result.paired_check_available === true } : null
+      pairedCheckAvailable: result.paired_check_available === true,
+      pairedMixedFormatsAvailable: result.paired_mixed_formats_available === true } : null
 }
 
 export async function compareDraft(analysisId: string, file: File, signal: AbortSignal, includePairedCheck = false): Promise<DocumentRevisionResponse> {

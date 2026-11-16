@@ -3528,6 +3528,8 @@ export interface components {
             extension?: (".eml" | ".txt" | ".docx" | ".pdf") | null;
             /** Paired Check Available */
             paired_check_available?: boolean | null;
+            /** Paired Mixed Formats Available */
+            paired_mixed_formats_available?: boolean | null;
         };
         /** DocumentRevisionResponse */
         DocumentRevisionResponse: {
@@ -3644,7 +3646,7 @@ export interface components {
              * Schema
              * @enum {string}
              */
-            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2" | "chipmunk.paired-writing-review/3" | "chipmunk.paired-writing-review/4" | "chipmunk.paired-writing-review/5" | "chipmunk.paired-writing-review/6" | "chipmunk.paired-writing-review/7" | "chipmunk.paired-writing-review/8" | "chipmunk.paired-writing-review/9" | "chipmunk.paired-writing-review/10";
+            schema: "chipmunk.paired-writing-review/1" | "chipmunk.paired-writing-review/2" | "chipmunk.paired-writing-review/3" | "chipmunk.paired-writing-review/4" | "chipmunk.paired-writing-review/5" | "chipmunk.paired-writing-review/6" | "chipmunk.paired-writing-review/7" | "chipmunk.paired-writing-review/8" | "chipmunk.paired-writing-review/9" | "chipmunk.paired-writing-review/10" | "chipmunk.paired-writing-review/11";
             /** Scope */
             scope: string;
             /**

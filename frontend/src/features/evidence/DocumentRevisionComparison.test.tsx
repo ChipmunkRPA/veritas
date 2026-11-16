@@ -247,6 +247,32 @@ it('shows separate Word and PDF locations for an earlier draft in another format
   expect(compareDraft).toHaveBeenCalledWith('draft-analysis', file, expect.any(AbortSignal), false)
 })
 
+it('requests the paired writing check across formats when the server enables it', async () => {
+  const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64),
+    decoded_characters: 20, mime_part: null }
+  vi.mocked(draftAvailability).mockResolvedValue({
+    extension: '.pdf', earlierExtensions: ['.txt', '.docx', '.pdf'],
+    pairedCheckAvailable: true, pairedMixedFormatsAvailable: true,
+  })
+  vi.mocked(compareDraft).mockResolvedValue({ comparison: {
+    schema: 'chipmunk.document-revision-comparison/3', format: 'mixed',
+    coordinate_space: 'per_source_unicode_codepoint',
+    earlier: { ...source, format: 'docx' }, later: { ...source, format: 'pdf' },
+    changes: [], scope: 'Words and punctuation.', interpretation: 'Source comparison only.',
+    paired_check: { schema: 'chipmunk.paired-writing-review/11', status: 'outside_scope',
+      summary: 'No changed sentence could be matched in both drafts.', scope: 'Only verified source positions are checked.',
+      authorship_confidence_contribution: 0 },
+  } })
+  show()
+  const input = await screen.findByLabelText('Earlier draft')
+  const file = new File(['word'], 'earlier.DOCX')
+  fireEvent.change(input, { target: { files: [file] } })
+  fireEvent.click(screen.getByRole('checkbox', { name: /Include experimental paired/ }))
+  fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
+  await screen.findByText('No changed sentence could be matched in both drafts.')
+  expect(compareDraft).toHaveBeenCalledWith('draft-analysis', file, expect.any(AbortSignal), true)
+})
+
 it('links highlighted HTML reply words to their decoded MIME positions', async () => {
   const source = { sha256: '0'.repeat(64), bytes: 400, decoded_text_sha256: '1'.repeat(64), decoded_characters: 80,
     decoded_html_sha256: '2'.repeat(64), decoded_html_characters: 140, mime_part: '1.1' }

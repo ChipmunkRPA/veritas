@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Intermediate word representations](writing-layer-transfer-2026-11-15.md)
+  compares three refitted heads on 112 new matched pairs. The middle
+  layer goes from 2/112 to 3/112 useful word locations at the wider
+  point, with ordinary flags rising from 23/112 to 38/112. The existing
+  experimental head still leads with the true sentence positions given.
+  The new readouts stay in evaluation.
+
 - [Combining word locations with the writing-pattern ratio](writing-ratio-fusion-transfer-2026-11-15.md)
   compares seven frozen rules on 113 unseen matched work pairs. The
   two-word combination went from 7/113 to 8/113 useful locations and

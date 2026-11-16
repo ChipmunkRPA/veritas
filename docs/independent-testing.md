@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [writing-layer replay](writing-layer-transfer-2026-11-15.md#independent-replay)
+recounts ordinary flags and word localization across 112 fresh matched
+works. The portable report also checks word overlap when the known
+sentence positions are supplied. The native route rebuilds all three
+small heads and verifies the pinned publisher inputs.
+
 The [word and ratio combination replay](writing-ratio-fusion-transfer-2026-11-15.md#replay)
 recalculates independent ordinary points for seven rules, then checks
 which source words each rule picked across 113 matched publisher pairs.

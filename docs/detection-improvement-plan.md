@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Small rotated and resized copies in JPEGs](image-small-affine-jpeg-2026-11-16.md)
+  locates both areas in 31 of 108 held staged edits, up from 13. The
+  new suggestions include 23 further partial locations and add no ordinary
+  flags across 198 matched and repeated-structure deliveries. The local
+  app presents the two source crops and masks without authorship weight.
+
 - [Genuine speech profiles under louder conversation](audio-local-speech-normality-2026-11-16.md)
   evaluates 137 timed edits and 21 previously unused SINE readers.
   The frozen candidates located none. The nearby comparison at a

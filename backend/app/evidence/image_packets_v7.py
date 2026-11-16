@@ -312,12 +312,23 @@ def _affine_record(db: Session, analysis: Analysis, store: ObjectStore, document
     except copy_move.CandidateBudgetExceeded:
         return {**record, "status": "unassessed_match_budget"}
     gray = copy_affine.luma(rgb) if proposals else None
-    for matrix, bounds in proposals:
+    matches = [(matrix, bounds, masks) for matrix, bounds in proposals
+               if (masks := copy_affine.dense_pair(gray, matrix, bounds)) is not None]
+    if not matches and not reduced and settings.environment == "dev" and settings.image_small_affine_copy_review:
+        from app.detectors.image import copy_affine_small
+        from app.evidence.image_jpeg_offgrid_source import encoded_profile
+
+        data = legacy._verified(store, analysis.sha256)
+        if data.startswith(b"\xff\xd8") and encoded_profile(data) in {75, 90}:
+            try:
+                extra = copy_affine_small.confirmed(rgb)
+            except copy_move.CandidateBudgetExceeded:
+                return {**record, "status": "unassessed_match_budget"}
+            if extra is not None:
+                matches.append(extra)
+    for matrix, bounds, masks in matches:
         x0, y0, x1, y1 = bounds
         seed = prior._coordinates((x0, y0, x1 - x0, y1 - y0))
-        masks = copy_affine.dense_pair(gray, matrix, bounds)
-        if masks is None:
-            continue
         regions, counts, artifacts = {}, {}, {}
         for role, mask in zip(ROLES, masks, strict=True):
             ys, xs = np.nonzero(mask)

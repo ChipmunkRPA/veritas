@@ -16,14 +16,17 @@ try {
   page.on('pageerror', error => errors.push(error.message))
   for (const { analysis_id, name, pair, pairs } of input.cases) {
     await page.goto(`${input.url}/analyses/${analysis_id}?view=plain`)
-    const evidence = page.getByRole('region', { name: 'Copy similarity without mirroring' })
     const items = pairs ?? [pair]
+    const geometric = 'matrix' in items[0]
+    const evidence = page.getByRole('region', { name: geometric ? 'Geometric copy comparison' : 'Copy similarity without mirroring' })
     if (pairs) await evidence.getByText('Two separate pairs of rotated areas share closely matching detail.', { exact: true }).waitFor()
     await evidence.getByText('This check carries zero weight in AI authorship confidence.').waitFor()
     for (const item of items) {
       const rotation = item.transform === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'
-      const card = evidence.getByRole('article').filter({ has: page.getByRole('heading', { name: `${item.id} · Rotated JPEG pair` }) })
-      if (pairs) await card.getByText(`Rotate Area B ${rotation} to align with Area A.`, { exact: false }).waitFor()
+      const title = geometric ? 'Matched source areas' : 'Rotated JPEG pair'
+      const card = evidence.getByRole('article').filter({ has: page.getByRole('heading', { name: `${item.id} · ${title}` }) })
+      if (geometric) await evidence.getByText('Matching detail was found after geometric alignment.', { exact: true }).waitFor()
+      else if (pairs) await card.getByText(`Rotate Area B ${rotation} to align with Area A.`, { exact: false }).waitFor()
       else await evidence.getByText(`Area B closely matches Area A after rotating it ${rotation}.`, { exact: true }).waitFor()
       await card.getByText('Show both areas on the original image').click()
       await card.getByText(/The outlines locate Areas A and B/).waitFor()
@@ -38,6 +41,13 @@ try {
         assert.equal(await crop.evaluate(image => image.decode().then(() => image.naturalWidth)), box.w)
         assert.equal(await crop.evaluate(image => image.naturalHeight), box.h)
         assert.ok((await crop.getAttribute('src')).includes(item.artifacts[area].sha256))
+        if (geometric) {
+          const maskKind = area === 'area_a' ? 'selected' : 'mapped'
+          const mask = card.getByRole('img', { name: `${item.id}: ${label} ${maskKind} mask` })
+          await mask.waitFor()
+          assert.equal(await mask.evaluate(image => image.decode().then(() => image.naturalWidth)), box.w)
+          assert.equal(await mask.evaluate(image => image.naturalHeight), box.h)
+        }
       }
     }
     assert.doesNotMatch(await evidence.innerText(), /matches Area A exactly|examiner.s conclusion|sign.off/i)

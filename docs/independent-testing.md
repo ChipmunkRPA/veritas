@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [small JPEG copy replay](image-small-affine-jpeg-2026-11-16.md#reproduce)
+compares both localized areas on 108 staged geometric copies. It includes
+198 ordinary deliveries and reports the two search variants separately.
+The same source crops and masks can be checked in the local application.
+
 The [noisy speech profile replay](audio-local-speech-normality-2026-11-16.md#independent-replay)
 recounts source-timed localization, false alarms and matched ordinary
 or room flags over 346 deliveries. It includes 21 additional readers,

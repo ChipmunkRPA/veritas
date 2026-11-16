@@ -15,7 +15,6 @@ from app.core.canonical import canonical_hash
 from app.evidence import (
     document_chat_markers,
     document_invisible_characters,
-    document_passage_intervals,
     document_scope,
     email_alternatives,
     face_boundary_binding,
@@ -108,7 +107,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              IMAGE_INTERPOLATION, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
                              image_animation_binding.KEY,
                              document_invisible_characters.COMMITMENT, document_chat_markers.COMMITMENT,
-                             document_scope.CHARACTER_REVIEW_COMMITMENT, document_passage_intervals.COMMITMENT,
+                             document_scope.CHARACTER_REVIEW_COMMITMENT, document_scope.PASSAGE_INTERVALS_COMMITMENT,
                              TIMING_COMMITMENT, SOUNDTRACK_PAIR_COMMITMENT},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
@@ -285,7 +284,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              "Invisible-character measurements require document evidence")
     _require(analysis["kind"] == "document" or document_scope.CHARACTER_REVIEW_COMMITMENT not in result,
              "Character-adjusted writing requires document evidence")
-    _require(analysis["kind"] == "document" or document_passage_intervals.COMMITMENT not in result,
+    _require(analysis["kind"] == "document" or document_scope.PASSAGE_INTERVALS_COMMITMENT not in result,
              "Writing passage intervals require document evidence")
     _require(analysis["kind"] == "document" or document_chat_markers.COMMITMENT not in result,
              "Chat-format marker measurements require document evidence")
@@ -341,10 +340,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             from app.evidence.document_character_review import validate as validate_character_review
 
             validate_character_review(evidence, adjusted)
-        intervals = result.get(document_passage_intervals.COMMITMENT)
-        _require(evidence["source"].get(document_passage_intervals.COMMITMENT) == intervals,
+        intervals = result.get(document_scope.PASSAGE_INTERVALS_COMMITMENT)
+        _require(evidence["source"].get(document_scope.PASSAGE_INTERVALS_COMMITMENT) == intervals,
                  "Writing passage intervals differ from the public result")
-        document_passage_intervals.validate(evidence, intervals)
+        if intervals is not None or document_scope.PASSAGE_INTERVALS_KEY in (evidence.get("coverage") or {}):
+            from app.evidence.document_passage_intervals import validate as validate_intervals
+
+            validate_intervals(evidence, intervals)
         document_chat_markers.validate(evidence, result.get(document_chat_markers.COMMITMENT))
         document_email_contexts.validate_commitment(evidence, result.get(document_email_contexts.COMMITMENT),
                                                     published_checks={check["id"] for check in result.get("checks", [])})

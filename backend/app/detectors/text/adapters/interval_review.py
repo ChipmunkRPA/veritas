@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import math
 
+from app.core.canonical import FLOAT_DP
 from app.core.config import settings
 from app.detectors.text import language_scope
 from app.detectors.text.adapters.common import FULL_DEEP
@@ -34,8 +35,9 @@ def measure(classifier, doc, sentences, context, ctx, spec, revisions):
             deadline.check("separate writing passage responses")
             if (len(values) == len(context) == len(sentences)
                     and all(math.isfinite(value) and 0 <= value <= 1 for value in (*values, *context))):
-                readings = {"context": [round(float(value), 8) for value in context],
-                            "isolated": [round(float(value), 8) for value in values]}
+                # Select from exactly the values the canonical evidence record will retain.
+                readings = {"context": [round(float(value), FLOAT_DP) for value in context],
+                            "isolated": [round(float(value), FLOAT_DP) for value in values]}
         except (DetectorTimeout, OSError, RuntimeError, ValueError):
             # The existing context and document scores are already available.
             pass

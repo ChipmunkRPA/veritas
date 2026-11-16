@@ -142,8 +142,10 @@ on all 196 held deliveries. The evidence receipt retains the
 original protocol hashes from before the shared code was extracted.
 The signed export can replay the selection from the saved responses
 and confirm the excerpts and character positions against the original
-upload. Reproducing model inference uses the separate scoring command
-below.
+upload. The signed bundle also supports offline verification from its
+saved readings with the analysis runtime unavailable. Selection uses
+the same numeric precision as the signed evidence. Reproducing model
+inference uses the separate scoring command below.
 
 The native app identified **[114, 1978)** and **[4631, 7340)** in a
 held economic report, overlapping its two labeled rewrites. The

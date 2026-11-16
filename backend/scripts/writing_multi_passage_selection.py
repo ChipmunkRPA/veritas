@@ -8,7 +8,7 @@ from collections import defaultdict
 from pathlib import Path
 from statistics import median
 
-from app.detectors.text.passage_intervals import (
+from app.evidence.passage_interval_selection import (
     CAP,
     combine_responses,
     interval_candidates,

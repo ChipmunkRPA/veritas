@@ -4,7 +4,10 @@ from __future__ import annotations
 import math
 
 from app.core.canonical import canonical_hash
-from app.detectors.text.passage_intervals import (
+from app.evidence.document_native_locations import clip_source_ranges
+from app.evidence.document_scope import PASSAGE_INTERVALS_COMMITMENT as COMMITMENT
+from app.evidence.document_scope import PASSAGE_INTERVALS_KEY as KEY
+from app.evidence.passage_interval_selection import (
     combine_responses,
     interval_candidates,
     length_bucket,
@@ -12,10 +15,7 @@ from app.detectors.text.passage_intervals import (
     probability_log_odds,
     select_intervals,
 )
-from app.evidence.document_native_locations import clip_source_ranges
 
-KEY = "writing_passage_intervals"
-COMMITMENT = "writing_passage_intervals_sha256"
 SCHEMA = "document-writing-passage-intervals/1"
 MIN_SENTENCES = 12
 MAX_SENTENCES = 128

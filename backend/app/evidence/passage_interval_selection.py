@@ -1,4 +1,4 @@
-"""Shared arithmetic for proposing disjoint writing passages."""
+"""Portable arithmetic for proposing disjoint writing passages."""
 
 from __future__ import annotations
 

@@ -22,6 +22,8 @@ CARD_SELECTION_SCHEMA = "document-balanced-passage-selection/1"
 MAX_PASSAGES = 6
 CHARACTER_REVIEW_KEY = "writing_character_review"
 CHARACTER_REVIEW_COMMITMENT = "writing_character_review_sha256"
+PASSAGE_INTERVALS_KEY = "writing_passage_intervals"
+PASSAGE_INTERVALS_COMMITMENT = "writing_passage_intervals_sha256"
 
 PASSAGE_COVERAGE_KEY = "local_passage_coverage"
 PASSAGE_COVERAGE_SCHEMA = "document-local-passage-coverage/1"

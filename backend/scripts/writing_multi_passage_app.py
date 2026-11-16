@@ -6,6 +6,8 @@ import argparse
 import hashlib
 import json
 import os
+import subprocess
+import sys
 from pathlib import Path
 from zipfile import ZipFile
 
@@ -14,6 +16,27 @@ from scripts import writing_multi_passage_panel as study
 
 ROOT = Path(__file__).resolve().parents[2]
 CASE = "6bfce7a0f53514fcc0b227be"
+
+PORTABLE_CHECK = """
+import importlib.abc
+import socket
+import sys
+from pathlib import Path
+
+class AnalysisRuntimeUnavailable(importlib.abc.MetaPathFinder):
+    def find_spec(self, name, path=None, target=None):
+        if name.startswith(("app.api", "app.detectors", "app.storage", "app.core.config", "torch", "transformers")):
+            raise RuntimeError("Offline verifier attempted to import " + name)
+
+def refuse_network(*args, **kwargs):
+    raise RuntimeError("Network unavailable")
+
+sys.meta_path.insert(0, AnalysisRuntimeUnavailable())
+socket.socket = refuse_network
+from app.reports.verify import verify_package
+result = verify_package(Path(sys.argv[1]), public_key_pem=Path(sys.argv[2]).read_bytes())
+assert result.ok, result.as_dict()
+"""
 
 
 def exports(client, aid, source, record, output):
@@ -45,6 +68,10 @@ def exports(client, aid, source, record, output):
     replay = verify_package(archive, public_key_pem=key, source_document=source)
     assert replay.ok, replay.as_dict()
     assert any("Verified writing passage selection" in check.detail for check in replay.checks)
+    public_key = output / "verification-key.pem"
+    public_key.write_bytes(key)
+    subprocess.run([sys.executable, "-B", "-c", PORTABLE_CHECK, str(archive), str(public_key)],
+                   check=True, timeout=20)
     with ZipFile(archive) as packaged:
         frozen = json.loads(packaged.read("evidence.json"))
         assert frozen["coverage"][proof.KEY] == record
@@ -114,6 +141,7 @@ def run(sources, output):
                   "source_intervals": intervals, "labeled_intervals": labels, "original_status": control["status"],
                   "authorship_contribution": 0, "same_assessment": True, "usd_test_checkouts": len(stub.sessions),
                   "no_jobs_before_payment": True, "api_json_pdf_and_original_verified": True,
+                  "offline_verified_without_analysis_runtime": True,
                   "pdf_sha256": pdf}
         (output / "receipt.json").write_text(json.dumps(result, sort_keys=True, indent=2) + "\n")
         print(json.dumps(result, sort_keys=True))

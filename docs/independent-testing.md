@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [single-upload JPEG ranking review](image-region-ranking-2026-11-16.md#replay-and-compare-another-check)
+recounts the localized edit, ordinary retouch and image-format results on
+1,008 held deliveries. It can produce standard development and confirmation
+manifests, exact local truth masks and an example response for each quality,
+so another detector can be compared on the same JPEG bytes.
+
 The [recompressed retiming replay](video-retimed-compression-2026-11-16.md#application-scope-and-replay)
 recounts 180 deliveries from 12 camera recordings and can verify the exact
 source clocks and RGB endpoint hashes. Both passes use the same source

@@ -60,6 +60,15 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Single-upload JPEG region ranking](image-region-ranking-2026-11-16.md)
+  compares visual features, residual bands, and training against the
+  strongest wrong regions and matched ordinary retouches. All four
+  methods missed the region on 336 held edit deliveries. The selected
+  check had a correctly placed candidate on 332 of those files, with
+  every such candidate below the review point. The existing localizers
+  remain in use. Both JPEG qualities now have shared-format replay
+  manifests for comparing another check on the same source pixels.
+
 - [Retimed footage after stronger recompression](video-retimed-compression-2026-11-16.md)
   adds a second search using broader picture detail when the existing check
   finds no match. On 12 separate recordings it increased correct ranges

@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Same-speaker word replacements and lip timing](video-lip-content-transfer-2026-11-15.md)
+  adds a held test of 20 different-word and 20 matched same-word splices.
+  The timing check found three correct ranges. Native alignment and a
+  common lag fitted to both sides found no additional correct ranges.
+  The new variants stay in evaluation.
+
 - [Use adjacent word features to locate rewrites](writing-word-neighbors-2026-11-15.md)
   compared two small heads and their average with the incumbent. On 48
   previously unused abstract pairs from two generators, adjacency reduced

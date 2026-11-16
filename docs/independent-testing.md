@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [same-speaker word-replacement replay](video-lip-content-transfer-2026-11-15.md#replay)
+compares exact soundtrack replacements with matched same-word edits and
+constant delays. The native picture audit checks the original frame clocks
+and mouth crops independently of the acoustic inference.
+
 The [neighboring-word replay](writing-word-neighbors-2026-11-15.md#replay)
 rebuilds the 48-work abstract holdout from two pin-checked publisher files.
 The portable reviewer compares word highlights, wrong-sentence selections,

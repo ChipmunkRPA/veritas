@@ -1367,6 +1367,11 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 last = occurrence["quantity_end"] - occurrence["start"]
                 occurrence.update(before=text[:first], quantity=text[first:last], after=text[last:])
     short_voice_review = copy.deepcopy(document.get("short_voice_review"))
+    if short_voice_review:
+        from app.evidence.audio_short_review_binding import IDENTICAL_CHANNEL_DESCRIPTION, IDENTICAL_CHANNEL_PCM
+
+        if document.get("source", {}).get(IDENTICAL_CHANNEL_PCM):
+            short_voice_review["input_note"] = IDENTICAL_CHANNEL_DESCRIPTION
     if short_voice_review and (nearby := short_voice_review.get("nearby_window_review")):
         from app.evidence.audio_short_review_binding import NEARBY_LABELS, NEARBY_SUMMARIES
 

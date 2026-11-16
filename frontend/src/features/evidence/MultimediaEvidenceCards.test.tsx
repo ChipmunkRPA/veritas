@@ -344,7 +344,11 @@ describe('ordinary multimedia evidence', () => {
     expect(review.getByText('Source PTS [48000, 80000) at 1/16000.')).toBeTruthy()
     expect(review.getByLabelText('Flagged two-second speech window').getAttribute('src')).toContain(`${'f'.repeat(64)}.wav`)
     expect(review.getByAltText('Waveform with the flagged two-second speech window marked')).toBeTruthy()
+    expect(review.queryByText('Both recorded channels contain the same samples.')).toBeNull()
     expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
+    cleanup()
+    show({ ...set, source: { ...set.source, source_channels: 2, identical_stereo_channel_pcm_sha256: '2'.repeat(64) } })
+    expect(screen.getByText('Both recorded channels contain the same samples.')).toBeTruthy()
   })
 
   it('shows timing-sensitive short speech evidence with the original alert and nearby source positions', () => {

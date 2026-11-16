@@ -14,6 +14,8 @@ DETECTOR_ID = "aud.short_voice_review"
 NEARBY_ID = "aud.short_voice_nearby"
 NEARBY_SHIFT = 1280
 NEARBY_CODECS = {"pcm_s16le", "flac"}
+IDENTICAL_CHANNEL_PCM = "identical_stereo_channel_pcm_sha256"
+IDENTICAL_CHANNEL_DESCRIPTION = "Both recorded channels contain the same samples."
 NEARBY_LABELS = {
     "elevated": "Elevated response",
     "below_review_point": "Below the review point",
@@ -35,9 +37,11 @@ TITLE = "Short speech-window review"
 LIMITATION = ("This is a clue for the complete two-second window. It cannot establish AI generation or the boundaries "
               "of an edit. It carries no weight in the overall assessment.")
 SCOPE_REASON = ("This check requires Full analysis of six continuous decoded seconds at 16 kHz. "
-                "It supports 16-bit mono WAV and FLAC and a verified 48 kb/s mono MP3 profile.")
+                "It supports 16-bit WAV and FLAC with a single channel or two identical channels, "
+                "and a verified 48 kb/s mono MP3 profile.")
 AAC_SCOPE_REASON = ("This check requires a continuous six-second source in Full analysis. It supports 16-bit mono WAV and "
-                    "FLAC, the verified 48 kb/s mono MP3 profile, and 48 kHz mono AAC-LC in M4A at the tested bit rate.")
+                    "FLAC or those lossless formats with two identical channels, the verified 48 kb/s mono MP3 profile, "
+                    "and 48 kHz mono AAC-LC in M4A at the tested bit rate.")
 NO_SPEECH_REASON = "No two-second interval contained enough detected speech."
 AFTER_COVERAGE_SKIP = {
     "flagged": "The main voice check skipped its longer windows. A shorter window returned an elevated response. "
@@ -53,6 +57,8 @@ def source_metadata(mapping: dict) -> dict:
     keys = {"flac": ("source_container", "source_bit_depth"), "pcm_s16le": ("source_container", "source_bit_depth"),
             "mp3": ("source_container", "source_bit_rate"), "aac": AAC_FIELDS}
     metadata.update({key: mapping[key] for key in keys.get(metadata["source_codec"], ()) if key in mapping})
+    if IDENTICAL_CHANNEL_PCM in mapping:
+        metadata[IDENTICAL_CHANNEL_PCM] = mapping[IDENTICAL_CHANNEL_PCM]
     return metadata
 
 
@@ -78,22 +84,35 @@ def supported_aac(source: dict) -> bool:
     )
 
 
+def _native_clock(mapping: dict, origin: int = 0) -> bool:
+    return (
+        mapping.get("samples") == SAMPLES and mapping.get("sample_rate") == mapping.get("source_sample_rate") == RATE
+        and mapping.get("channels") == 1 and len(mapping.get("audio_stream_indices", [0])) == 1
+        and mapping.get("timeline_time_base") == "1/16000"
+        and mapping.get("timeline") == [{"start_sample": 0, "end_sample": SAMPLES, "source_pts": origin}]
+    )
+
+
+def eligible_stereo_source(mapping: dict) -> bool:
+    return (
+        mapping.get("source_channels") == 2 and mapping.get("source_bit_depth") == 16
+        and (mapping.get("source_container"), mapping.get("source_codec")) in {("wav", "pcm_s16le"), ("flac", "flac")}
+        and _native_clock(mapping)
+    )
+
+
 def supported_source(mapping: dict) -> bool:
     codec = mapping.get("source_codec")
     if codec == "aac":
         return supported_aac(mapping)
+    if mapping.get("source_channels") == 2:
+        pin = mapping.get(IDENTICAL_CHANNEL_PCM)
+        return eligible_stereo_source(mapping) and isinstance(pin, str) and re.fullmatch("[a-f0-9]{64}", pin) is not None
     lossless = codec == "pcm_s16le" or (
         codec == "flac" and mapping.get("source_container") == "flac" and mapping.get("source_bit_depth") == 16
     )
     mp3 = codec == "mp3" and mapping.get("source_container") == "mp3" and mapping.get("source_bit_rate") == 48000
-    return (
-        (lossless or mp3) and mapping.get("samples") == SAMPLES
-        and mapping.get("sample_rate") == mapping.get("source_sample_rate") == RATE
-        and mapping.get("channels") == mapping.get("source_channels") == 1
-        and len(mapping.get("audio_stream_indices", [0])) == 1
-        and mapping.get("timeline_time_base") == "1/16000"
-        and mapping.get("timeline") == [{"start_sample": 0, "end_sample": SAMPLES, "source_pts": MP3_ORIGIN if mp3 else 0}]
-    )
+    return mapping.get("source_channels") == 1 and (lossless or mp3) and _native_clock(mapping, MP3_ORIGIN if mp3 else 0)
 
 
 def selected_range(responses: list[dict], codec: str | None = None) -> dict | None:

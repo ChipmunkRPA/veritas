@@ -44,6 +44,43 @@ def test_scope_excludes_lossy_stereo_multitrack_and_clock_changes():
     assert not binding.supported_source(mapping | {"timeline": [dict(mapping["timeline"][0], source_pts=1)]})
 
 
+@pytest.mark.skipif(not which("ffmpeg") or not which("ffprobe"), reason="requires FFmpeg")
+@pytest.mark.parametrize("codec", ["wav", "flac"])
+def test_short_review_requires_exact_channel_and_analyzed_input_agreement(tmp_path, codec):
+    import wave
+
+    values = ((np.arange(binding.SAMPLES) % 256) - 128).astype("<i2")
+    stereo = np.column_stack((values, values))
+
+    def decode(name, channels):
+        wav = tmp_path / f"{name}.wav"
+        with wave.open(str(wav), "wb") as stream:
+            stream.setparams((2, 2, binding.RATE, binding.SAMPLES, "NONE", "not compressed"))
+            stream.writeframes(channels.astype("<i2").tobytes())
+        path = wav
+        if codec == "flac":
+            path = wav.with_suffix(".flac")
+            run(["ffmpeg", "-v", "error", "-i", str(wav), str(path)], check=True)
+        return decode_audio(path, source_sha256=sha256(path.read_bytes()).hexdigest(),
+                            retain_stereo=True, inspect_stereo=True)
+
+    identical = decode("identical", stereo)
+    assert not binding.supported_source(identical.mapping)
+    proof = audio_short_review.identical_stereo_proof(identical)
+    assert proof == sha256(values.tobytes()).hexdigest()
+    identical.mapping[binding.IDENTICAL_CHANNEL_PCM] = proof
+    assert binding.supported_source(identical.mapping)
+    assert binding.source_metadata(identical.mapping)[binding.IDENTICAL_CHANNEL_PCM] == proof
+    np.testing.assert_array_equal(identical.pcm, values.astype(np.float32) / 32768)
+    changed = decode("minor-difference", stereo + np.array([1, -1]))
+    np.testing.assert_array_equal(changed.pcm, identical.pcm)
+    assert audio_short_review.identical_stereo_proof(changed) is None
+    assert not binding.supported_source(changed.mapping)
+    assert audio_short_review.identical_stereo_proof(SimpleNamespace(
+        mapping=identical.mapping, stereo_pcm=stereo, pcm=identical.pcm + 1 / 32768)) is None
+    assert not binding.supported_source(identical.mapping | {"source_bit_depth": 24})
+
+
 def test_mp3_uses_its_frozen_point_and_exact_source_clock():
     wav = source(np.zeros(binding.SAMPLES, np.float32))
     mp3 = wav | {"source_codec": "mp3", "source_container": "mp3", "source_bit_rate": 48000,

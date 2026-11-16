@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [identical stereo input replay](audio-short-identical-stereo-2026-11-15.md#replay)
+checks one mono and three stereo uploads with the same decoded input. It
+verifies channel admission, the flagged interval, the PDF and JSON, and
+the signed source comparison after simulated checkout.
+
 The [writing-layer replay](writing-layer-transfer-2026-11-15.md#independent-replay)
 recounts ordinary flags and word localization across 112 fresh matched
 works. The portable report also checks word overlap when the known

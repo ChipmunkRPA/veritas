@@ -140,6 +140,9 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       onPlayCapture={(event) => { if (event.target instanceof HTMLAudioElement) pauseAudio(event.target) }}>
       <h3 className="m-0 text-body font-medium">{shortReview.title}</h3>
       <p className="mt-2 mb-0 text-small">{shortReview.reason}</p>
+      {standalone && set.source.identical_stereo_channel_pcm_sha256 && <p className="mt-2 mb-0 text-small">
+        Both recorded channels contain the same samples.
+      </p>}
       {shortReview.status === 'flagged' && shortReview.interval && shortReview.start_s != null && shortReview.end_s != null && <>
         <p className="mt-2 mb-0 font-mono text-caption text-text-muted">
           Analyzed input {seconds(shortReview.start_s)}–{seconds(shortReview.end_s)} · samples [{shortReview.interval.start_sample}, {shortReview.interval.end_sample})

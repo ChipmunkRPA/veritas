@@ -1,0 +1,369 @@
+{
+  "cases": [
+    {
+      "case": "mono",
+      "channel_proof": null,
+      "evidence": {
+        "assets": {
+          "selected_clip": "bcf39a75b1e9d55628c4b6927f008222828e0de45edb6abaa1f2b69f863905ab",
+          "waveform": "d63de3b9856f19fa9737ff5483d026af4787b389209b2a970d452b6aa513a60a"
+        },
+        "interval": {
+          "end_sample": 96000,
+          "start_sample": 64000
+        },
+        "nearby_window_review": {
+          "status": "repeated",
+          "windows": [
+            {
+              "end_sample": 94720,
+              "pcm_sha256": "cbf61a93c093c92ce32e9bb85fa47b1880dc0a0b1f0db1db027779fa620fd61d",
+              "source_timestamp_ranges": [
+                {
+                  "end_sample": 94720,
+                  "source_end_pts": 94720,
+                  "source_start_pts": 62720,
+                  "start_sample": 62720,
+                  "time_base": "1/16000"
+                }
+              ],
+              "speech_samples": 32000,
+              "start_sample": 62720,
+              "status": "elevated"
+            }
+          ]
+        },
+        "window_coverage": [
+          {
+            "end_sample": 32000,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 0,
+                "start_sample": 0,
+                "time_base": "1/16000"
+              }
+            ],
+            "speech_samples": 31456,
+            "start_sample": 0,
+            "status": "checked"
+          },
+          {
+            "end_sample": 48000,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 48000,
+                "source_end_pts": 48000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "speech_samples": 32000,
+            "start_sample": 16000,
+            "status": "checked"
+          },
+          {
+            "end_sample": 64000,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 64000,
+                "source_end_pts": 64000,
+                "source_start_pts": 32000,
+                "start_sample": 32000,
+                "time_base": "1/16000"
+              }
+            ],
+            "speech_samples": 21696,
+            "start_sample": 32000,
+            "status": "checked"
+          },
+          {
+            "end_sample": 80000,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 80000,
+                "source_end_pts": 80000,
+                "source_start_pts": 48000,
+                "start_sample": 48000,
+                "time_base": "1/16000"
+              }
+            ],
+            "speech_samples": 21696,
+            "start_sample": 48000,
+            "status": "checked"
+          },
+          {
+            "end_sample": 96000,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 96000,
+                "source_end_pts": 96000,
+                "source_start_pts": 64000,
+                "start_sample": 64000,
+                "time_base": "1/16000"
+              }
+            ],
+            "speech_samples": 32000,
+            "start_sample": 64000,
+            "status": "checked"
+          }
+        ]
+      },
+      "pcm_sha256": "4f3b1578e1cab77a68d8cdd1cf1788f5a213782fa671e7ffafbfc030ae0f6278",
+      "signed_source_verified": true,
+      "source_sha256": "d577e51b4a31b52dac968f43a9bbba62d4152cf0979eabd5488b52d9a3623aa4",
+      "status": "flagged"
+    },
+    {
+      "case": "identical-wav",
+      "channel_proof": "8cc83de8105bb139438bef0589b0cb5f1cd8b53f555438b57c2000f5791f12f6",
+      "evidence": {
+        "assets": {
+          "selected_clip": "bcf39a75b1e9d55628c4b6927f008222828e0de45edb6abaa1f2b69f863905ab",
+          "waveform": "d63de3b9856f19fa9737ff5483d026af4787b389209b2a970d452b6aa513a60a"
+        },
+        "interval": {
+          "end_sample": 96000,
+          "start_sample": 64000
+        },
+        "nearby_window_review": {
+          "status": "repeated",
+          "windows": [
+            {
+              "end_sample": 94720,
+              "pcm_sha256": "cbf61a93c093c92ce32e9bb85fa47b1880dc0a0b1f0db1db027779fa620fd61d",
+              "source_timestamp_ranges": [
+                {
+                  "end_sample": 94720,
+                  "source_end_pts": 94720,
+                  "source_start_pts": 62720,
+                  "start_sample": 62720,
+                  "time_base": "1/16000"
+                }
+              ],
+              "speech_samples": 32000,
+              "start_sample": 62720,
+              "status": "elevated"
+            }
+          ]
+        },
+        "window_coverage": [
+          {
+            "end_sample": 32000,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 0,
+                "start_sample": 0,
+                "time_base": "1/16000"
+              }
+            ],
+            "speech_samples": 31456,
+            "start_sample": 0,
+            "status": "checked"
+          },
+          {
+            "end_sample": 48000,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 48000,
+                "source_end_pts": 48000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "speech_samples": 32000,
+            "start_sample": 16000,
+            "status": "checked"
+          },
+          {
+            "end_sample": 64000,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 64000,
+                "source_end_pts": 64000,
+                "source_start_pts": 32000,
+                "start_sample": 32000,
+                "time_base": "1/16000"
+              }
+            ],
+            "speech_samples": 21696,
+            "start_sample": 32000,
+            "status": "checked"
+          },
+          {
+            "end_sample": 80000,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 80000,
+                "source_end_pts": 80000,
+                "source_start_pts": 48000,
+                "start_sample": 48000,
+                "time_base": "1/16000"
+              }
+            ],
+            "speech_samples": 21696,
+            "start_sample": 48000,
+            "status": "checked"
+          },
+          {
+            "end_sample": 96000,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 96000,
+                "source_end_pts": 96000,
+                "source_start_pts": 64000,
+                "start_sample": 64000,
+                "time_base": "1/16000"
+              }
+            ],
+            "speech_samples": 32000,
+            "start_sample": 64000,
+            "status": "checked"
+          }
+        ]
+      },
+      "pcm_sha256": "4f3b1578e1cab77a68d8cdd1cf1788f5a213782fa671e7ffafbfc030ae0f6278",
+      "signed_source_verified": true,
+      "source_sha256": "679345b664dd9e9d42a0856045b502051a4c48a138d47ad73d2e1662fe53970b",
+      "status": "flagged"
+    },
+    {
+      "case": "identical-flac",
+      "channel_proof": "8cc83de8105bb139438bef0589b0cb5f1cd8b53f555438b57c2000f5791f12f6",
+      "evidence": {
+        "assets": {
+          "selected_clip": "bcf39a75b1e9d55628c4b6927f008222828e0de45edb6abaa1f2b69f863905ab",
+          "waveform": "d63de3b9856f19fa9737ff5483d026af4787b389209b2a970d452b6aa513a60a"
+        },
+        "interval": {
+          "end_sample": 96000,
+          "start_sample": 64000
+        },
+        "nearby_window_review": {
+          "status": "repeated",
+          "windows": [
+            {
+              "end_sample": 94720,
+              "pcm_sha256": "cbf61a93c093c92ce32e9bb85fa47b1880dc0a0b1f0db1db027779fa620fd61d",
+              "source_timestamp_ranges": [
+                {
+                  "end_sample": 94720,
+                  "source_end_pts": 94720,
+                  "source_start_pts": 62720,
+                  "start_sample": 62720,
+                  "time_base": "1/16000"
+                }
+              ],
+              "speech_samples": 32000,
+              "start_sample": 62720,
+              "status": "elevated"
+            }
+          ]
+        },
+        "window_coverage": [
+          {
+            "end_sample": 32000,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 32000,
+                "source_end_pts": 32000,
+                "source_start_pts": 0,
+                "start_sample": 0,
+                "time_base": "1/16000"
+              }
+            ],
+            "speech_samples": 31456,
+            "start_sample": 0,
+            "status": "checked"
+          },
+          {
+            "end_sample": 48000,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 48000,
+                "source_end_pts": 48000,
+                "source_start_pts": 16000,
+                "start_sample": 16000,
+                "time_base": "1/16000"
+              }
+            ],
+            "speech_samples": 32000,
+            "start_sample": 16000,
+            "status": "checked"
+          },
+          {
+            "end_sample": 64000,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 64000,
+                "source_end_pts": 64000,
+                "source_start_pts": 32000,
+                "start_sample": 32000,
+                "time_base": "1/16000"
+              }
+            ],
+            "speech_samples": 21696,
+            "start_sample": 32000,
+            "status": "checked"
+          },
+          {
+            "end_sample": 80000,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 80000,
+                "source_end_pts": 80000,
+                "source_start_pts": 48000,
+                "start_sample": 48000,
+                "time_base": "1/16000"
+              }
+            ],
+            "speech_samples": 21696,
+            "start_sample": 48000,
+            "status": "checked"
+          },
+          {
+            "end_sample": 96000,
+            "source_timestamp_ranges": [
+              {
+                "end_sample": 96000,
+                "source_end_pts": 96000,
+                "source_start_pts": 64000,
+                "start_sample": 64000,
+                "time_base": "1/16000"
+              }
+            ],
+            "speech_samples": 32000,
+            "start_sample": 64000,
+            "status": "checked"
+          }
+        ]
+      },
+      "pcm_sha256": "4f3b1578e1cab77a68d8cdd1cf1788f5a213782fa671e7ffafbfc030ae0f6278",
+      "signed_source_verified": true,
+      "source_sha256": "001f63fb9ceb9769d6770034349aa44de7ded45208b7215f5486199220dc43b9",
+      "status": "flagged"
+    },
+    {
+      "case": "different",
+      "channel_proof": null,
+      "evidence": {
+        "assets": {},
+        "interval": null,
+        "nearby_window_review": null,
+        "window_coverage": null
+      },
+      "pcm_sha256": "4f3b1578e1cab77a68d8cdd1cf1788f5a213782fa671e7ffafbfc030ae0f6278",
+      "signed_source_verified": true,
+      "source_sha256": "375d0ccd879cde743f7fb824b4406f0e14a2200069ebdb09b8e1f36d15eb0db8",
+      "status": "skipped"
+    }
+  ],
+  "jobs_before_payment": 0,
+  "schema": "chipmunk.audio-short-identical-app/1",
+  "simulated_payment_usd_cents": 999
+}

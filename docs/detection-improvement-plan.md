@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Short speech checks on identical stereo channels](audio-short-identical-stereo-2026-11-15.md)
+  extend the app's six-second lossless coverage. The stereo WAV and FLAC
+  replay the mono result's exact 4.000–6.000 s flag, waveform and nearby
+  readings. An unequal-channel control with the same downmix stays
+  unassessed. Signed playback verification includes both source channels.
+
 - [Intermediate word representations](writing-layer-transfer-2026-11-15.md)
   compares three refitted heads on 112 new matched pairs. The middle
   layer goes from 2/112 to 3/112 useful word locations at the wider

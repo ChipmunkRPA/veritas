@@ -10,6 +10,20 @@ from app.detectors.audio.decode import source_ranges, wav_bytes
 from app.evidence import audio_short_review_binding as binding
 
 
+def identical_stereo_proof(decoded) -> str | None:
+    if not binding.eligible_stereo_source(decoded.mapping):
+        return None
+    import numpy as np
+
+    channels = decoded.stereo_pcm
+    if channels is None or channels.shape != (binding.SAMPLES, 2):
+        return None
+    left, right = channels.T
+    if not np.array_equal(left, right) or not np.array_equal(left.astype(np.float32) / 32768, decoded.pcm):
+        return None
+    return hashlib.sha256(left.astype("<i2", copy=False).tobytes()).hexdigest()
+
+
 def _receipt(record, store, source):
     if not (pin := record.get("raw_output_sha256")):
         if (record.get("schema") != binding.SCHEMA or record.get("status") != "skipped"

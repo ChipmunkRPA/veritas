@@ -54,6 +54,7 @@ from app.evidence.face_return_binding import (
 from app.evidence.face_return_binding import validate_packet as validate_face_return
 from app.evidence.source_geometry import pixel_bounds
 from app.evidence.video_packet_versions import (
+    BOUNDARY_AVC_PROPOSAL_VERSION,
     DENSE_FACE_VERSIONS,
     GUARDED_720P30_FACE_VERSION,
     GUARDED_CODEC_FACE_VERSION,
@@ -66,7 +67,6 @@ from app.evidence.video_packet_versions import (
     SECOND_AVC_PROPOSAL_VERSION,
     SECOND_HD_FACE_VERSION,
     SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION,
-    BOUNDARY_AVC_PROPOSAL_VERSION,
     SECOND_SHORT_FACE_VERSION,
     SHORT_AVC_PROPOSAL_VERSION,
     SHORT_CARRIER_VERSION,
@@ -376,6 +376,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     reverse_sequence = hold.get(picture_sequence.REVERSE_KEY)
     motion = hold.get("motion_sequence_review")
     reverse_motion = hold.get(picture_sequence.MOTION_REVERSE_KEY)
+    retimed_motion = hold.get(picture_sequence.MOTION_RETIMED_KEY)
     local_mouth = hold.get("mouth_local_hold")
     mouth_limit = 0
     if local_mouth is not None:
@@ -387,10 +388,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     motion_encoding = None
     motion_limit = 0
     motion_reads = []
-    if motion is not None or reverse_motion is not None:
+    if motion is not None or reverse_motion is not None or retimed_motion is not None:
         delivery = delivery if delivery is not None else probe_container(original)
         motion_encoding = delivery.get("codec"), delivery.get("pix_fmt")
-        for record, exact_review in ((motion, sequence), (reverse_motion, reverse_sequence)):
+        if retimed_motion is not None and face_return.source_carrier(original) != "mp4":
+            raise ValueError("Retimed sequence review requires a verified MP4 carrier")
+        for record, exact_review in ((motion, sequence), (reverse_motion, reverse_sequence), (retimed_motion, sequence)):
             if record is None:
                 continue
             profile = picture_motion.profile(table, motion_encoding, schema=record["schema"])

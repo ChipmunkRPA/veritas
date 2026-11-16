@@ -214,6 +214,7 @@ def validate_source_clock(document: dict, table_pts: Sequence[int], interpolated
     picture_sequence.validate_clock(cover.get(picture_sequence.REVERSE_KEY), table_pts, interpolated, tb=tb)
     picture_sequence.validate_clock(cover.get("motion_sequence_review"), table_pts, interpolated, tb=tb)
     picture_sequence.validate_clock(cover.get(picture_sequence.MOTION_REVERSE_KEY), table_pts, interpolated, tb=tb)
+    picture_sequence.validate_clock(cover.get(picture_sequence.MOTION_RETIMED_KEY), table_pts, interpolated, tb=tb)
     mouth_local_hold_binding.validate_clock(cover.get("mouth_local_hold"), table_pts, interpolated)
     if "continuity_breaks" in cover:
         source = document["source"]

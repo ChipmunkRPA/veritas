@@ -10,6 +10,7 @@ from subprocess import TimeoutExpired
 
 from app.detectors.video import picture_motion
 from app.detectors.video.decode import DecodeError, FrameTable, decode_frames
+from app.detectors.video.face_return import source_carrier
 from app.evidence import mouth_local_hold_binding, picture_sequence
 from app.evidence import picture_hold_binding as binding
 
@@ -18,7 +19,8 @@ DECODE_TIMEOUT_S = 8.0
 
 def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Callable[[], None] | None = None,
             remaining_s: float | None = None, sequence_review: bool = False,
-            motion_encoding: tuple[str | None, str | None] | None = None, mouth_review: bool = False) -> dict:
+            motion_encoding: tuple[str | None, str | None] | None = None, mouth_review: bool = False,
+            retimed_review: bool = False) -> dict:
     """Try an extended native scan under the same deadline, retaining a completed opening result."""
     opening_limit = binding.frame_limit(len(table), table.width, table.height)
     tb = table.tb
@@ -33,11 +35,8 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
     mouth_profile = (next((schema for schema in mouth_local_hold_binding.SCOPES
                            if mouth_local_hold_binding.eligible(table, motion_encoding, schema=schema)), None)
                      if mouth_review and sequence_review else None)
-    if mouth_profile == mouth_local_hold_binding.HD_SCHEMA:
-        from app.detectors.video.face_return import source_carrier
-
-        if source_carrier(path) != "mp4":
-            mouth_profile = None
+    if mouth_profile == mouth_local_hold_binding.HD_SCHEMA and source_carrier(path) != "mp4":
+        mouth_profile = None
     mouth_count = mouth_local_hold_binding.SCOPES[mouth_profile][0] if mouth_profile else 0
     mouth_frames = []
     motion_profile = picture_motion.profile(table, motion_encoding) if sequence_review else None
@@ -104,10 +103,20 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                     motion = extended_motion
             cover["motion_sequence_review"] = motion
             if remaining_s is None or remaining_s - (time.monotonic() - started) > 1.0:
-                cover[picture_sequence.MOTION_REVERSE_KEY] = picture_motion.scan(
+                reverse_motion = picture_motion.scan(
                     observed[:opening_limit], descriptors[:opening_limit], tb, motion_encoding,
                     cover[picture_sequence.REVERSE_KEY]["pair"], source_profile=motion_profile,
                     schema=picture_sequence.MOTION_REVERSE_SCHEMA)
+                cover[picture_sequence.MOTION_REVERSE_KEY] = reverse_motion
+                if retimed_review and motion["pair"] is None and reverse_motion["pair"] is None and not (
+                        exact_pair or cover[picture_sequence.REVERSE_KEY]["pair"]):
+                    schema = picture_sequence.MOTION_RETIMED_SCHEMA
+                    retimed_profile = picture_motion.profile(table, motion_encoding, schema=schema)
+                    if retimed_profile is not None and source_carrier(path) == "mp4":
+                        retimed_limit = retimed_profile[1]
+                        cover[picture_sequence.MOTION_RETIMED_KEY] = picture_motion.scan(
+                            observed[:retimed_limit], descriptors[:retimed_limit], tb, motion_encoding, None,
+                            source_profile=retimed_profile, schema=schema)
         mouth_prefix = observed[:mouth_count]
         if (mouth_profile and cover["frames_scanned"] >= mouth_count and len(mouth_frames) == mouth_count
                 and all(point is not None for point, _ in mouth_prefix)):

@@ -32,6 +32,8 @@ from scripts.video_lossy_sequence_transfer import deliver, read_source
 from scripts.video_motion_late_transfer import encode as late_authored
 from scripts.video_motion_sequence_360p_transfer import authored
 from scripts.video_mouth_local_hold_panel import encode as encode_mouth_hold
+from scripts.video_picture_speed_panel import _delivery as speed_delivery
+from scripts.video_picture_speed_panel import _encode as encode_speed
 
 
 def _source(path, *, held=False, late=False, repeated=False, reverse=False):
@@ -90,21 +92,27 @@ def _mouth_source(path, monkeypatch, *, hd):
 
 
 @pytest.mark.parametrize("case", ["opening_hold", "later_hold", "moving_sequence", "reverse_sequence", "lossy_reverse", "lossy_sequence", "lossy_sequence_360p",
-                                   "lossy_sequence_360p_late", "mouth_hold", "mouth_hold_hd"])
+                                   "lossy_sequence_360p_late", "retimed_sequence", "mouth_hold", "mouth_hold_hd"])
 def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monkeypatch, case, request):
     mouth = case in {"mouth_hold", "mouth_hold_hd"}
     hd = case == "mouth_hold_hd"
     high_res = case.startswith("lossy_sequence_360p")
     extension = case == "lossy_sequence_360p_late"
     lossy_reverse = case == "lossy_reverse"
-    lossy = case.startswith("lossy_sequence") or lossy_reverse
+    retimed = case == "retimed_sequence"
+    lossy = case.startswith("lossy_sequence") or lossy_reverse or retimed
     reverse = case == "reverse_sequence"
     repeated, late = mouth or lossy or reverse or case == "moving_sequence", case != "opening_hold"
-    path = tmp_path / ("mouth-hold.mp4" if mouth else "exact-hold.mkv")
+    path = tmp_path / ("native-picture.mp4" if mouth or retimed else "exact-hold.mkv")
     if mouth:
         _mouth_source(path, monkeypatch, hd=hd)
     elif lossy:
-        if extension:
+        if retimed:
+            source = np.frombuffer(_motion_raster(226), dtype=np.uint8).reshape(226, -1)
+            frames, _ = speed_delivery(source, 26, 144, "later_fast")
+            encode_speed(path, frames)
+            indices = [26, 66, 144, 164]
+        elif extension:
             indices = late_authored(_motion_raster(450), path, 0, "late_cross", "h264")
         elif high_res:
             indices = [21, 43, 147, 169]
@@ -122,7 +130,7 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
     origin = 0. if lossy or mouth else 5.
     encoding = ("h264", "yuv420p") if lossy or mouth else None
     scan = picture_hold.inspect(store.path_for(original.sha256), table, origin=origin, sequence_review=repeated,
-                                motion_encoding=encoding, mouth_review=mouth)
+                                motion_encoding=encoding, mouth_review=mouth, retimed_review=retimed)
     assert scan["coverage"]["frames_scanned"] == len(table)
     if mouth:
         review = scan["coverage"]["mouth_local_hold"]
@@ -144,10 +152,12 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
     elif lossy:
         coverage = scan["coverage"]
         assert coverage["sequence_review"]["status"] == "no_match"
-        motion = coverage[picture_sequence.MOTION_REVERSE_KEY if lossy_reverse else "motion_sequence_review"]
-        assert motion["status"] == "matched" and motion["frames_scanned"] == (450 if extension else 225 if high_res else 180)
-        assert motion["parameters"]["frame_rate"] == (25 if high_res else 20)
-        expected_schema = (picture_sequence.MOTION_REVERSE_SCHEMA if lossy_reverse else
+        motion_key = (picture_sequence.MOTION_RETIMED_KEY if retimed else picture_sequence.MOTION_REVERSE_KEY
+                      if lossy_reverse else "motion_sequence_review")
+        motion = coverage[motion_key]
+        assert motion["status"] == "matched" and motion["frames_scanned"] == (450 if extension else 225 if high_res or retimed else 180)
+        assert motion["parameters"]["frame_rate"] == (25 if high_res or retimed else 20)
+        expected_schema = (picture_sequence.MOTION_RETIMED_SCHEMA if retimed else picture_sequence.MOTION_REVERSE_SCHEMA if lossy_reverse else
                            picture_sequence.MOTION_EXTENDED_SCHEMA if extension else picture_sequence.MOTION_SCHEMA)
         assert motion["schema"] == expected_schema
         match = motion["pair"]
@@ -201,6 +211,7 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
         assert service.load_packet_set(db, analysis, store) == document
         assert document["coverage"]["scored_frame_indices"] == []
         expected_packet = (mouth_local_hold_binding.PACKET_ID if mouth else picture_sequence.MOTION_REVERSE_PACKET_ID if lossy_reverse
+                           else picture_sequence.MOTION_RETIMED_PACKET_ID if retimed
                            else picture_sequence.MOTION_PACKET_ID if lossy
                            else picture_sequence.REVERSE_PACKET_ID if reverse
                            else picture_sequence.PACKET_ID if repeated else binding.PACKET_ID)
@@ -236,9 +247,16 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
                 assert match["order"] == "reverse"
                 assert [f["artifact_refs"]["original"] for f in packet["frames"]] == [
                     "first_start_picture", "first_end_picture", "second_start_picture", "second_end_picture"]
-            if extension:
+            if retimed:
+                assert match["frame_steps"] == {"first": 2, "second": 1}
+                altered = copy.deepcopy(document)
+                altered["picture_hold"][picture_sequence.MOTION_RETIMED_KEY]["pair"]["frame_steps"]["first"] = 1
+                altered["packets"][0]["picture_sequence"]["frame_steps"]["first"] = 1
+                with pytest.raises(ValueError, match="two-to-one frame stride"):
+                    binding.validate(altered)
+            if extension or retimed:
                 interrupted = list(table.pts)
-                interrupted[400] += 1
+                interrupted[400 if extension else 27] += 1
                 with pytest.raises(ValueError, match="complete verified native clock"):
                     picture_sequence.validate_clock(motion, interrupted, (), tb=table.tb)
         for frame in packet["frames"]:
@@ -277,6 +295,10 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
                 assert "Similar moving pictures in reverse order" in text and "VPR04" in text
                 assert "Reversed ranges 1.000-2.050 s and 6.500-7.550 s" in text
                 assert "transitions support the reversed motion" in text
+            elif retimed:
+                assert "Footage repeated at two playback speeds" in text and "VPR05" in text
+                assert "Ranges at two playback speeds 1.040-2.640 s and 5.760-6.560 s" in text
+                assert "twice the speed" in text
             elif lossy:
                 assert "Similar repeated moving sequences" in text and "VPR02" in text
                 if extension:

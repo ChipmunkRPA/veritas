@@ -1,0 +1,82 @@
+{
+  "cases": [
+    {
+      "case": "lake-later_fast",
+      "source_sha256": "a65f6938afb6d8e4f5f6c9eeb3b70df6a7b98b29447ff05cfa6bb323f1536e4a",
+      "status": "matched",
+      "time_ranges": [
+        [
+          1.16,
+          2.76
+        ],
+        [
+          5.68,
+          6.48
+        ]
+      ],
+      "frames": [
+        29,
+        69,
+        142,
+        162
+      ],
+      "source_replay": true,
+      "pdf_endpoint_frames": 4,
+      "pdf_sha256": "c72e76c22b4d79ff8755cab94785503e6bceade3865db825d681742d59719258"
+    },
+    {
+      "case": "pier-earlier_fast",
+      "source_sha256": "35b7d7b66730e00a9b62c35c20ce2de3c01e3ca0932f122a68b0d6cb6dabf00c",
+      "status": "matched",
+      "time_ranges": [
+        [
+          1.6,
+          2.4
+        ],
+        [
+          5.68,
+          7.28
+        ]
+      ],
+      "frames": [
+        40,
+        60,
+        142,
+        182
+      ],
+      "source_replay": true,
+      "pdf_endpoint_frames": 4,
+      "pdf_sha256": "92895f7d572c1c32c37d401ef6c0ace242fda8b3adf2ddef67daa4466980acda"
+    },
+    {
+      "case": "lake-original",
+      "source_sha256": "4ad76235889a62754bde8ec8956edaddca53b6814fbfb462090c13e5d183e9aa",
+      "status": "no_match"
+    },
+    {
+      "case": "lake-later_fast_tandem",
+      "source_sha256": "615e46ef2ab4bdf333b6abbd40ef121027089d3be388ec1641414962b915fa71",
+      "status": "no_match"
+    }
+  ],
+  "browser": {
+    "plain_view": [
+      {
+        "case": "lake-later_fast",
+        "frames": 4,
+        "seek_seconds": 5.68
+      },
+      {
+        "case": "pier-earlier_fast",
+        "frames": 4,
+        "seek_seconds": 5.68
+      }
+    ],
+    "page_errors": 0
+  },
+  "unchanged_decision_at_matched_scope": true,
+  "price_usd": "9.99",
+  "simulated_paid_analyses": 5,
+  "unpaid_jobs": 0,
+  "public_model_name_scan": true
+}

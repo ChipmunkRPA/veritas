@@ -1,0 +1,4067 @@
+{
+  "freeze": {
+    "new_check_sha256": "2cb42e51678d7b443180e28d623381b3752b2e4e45f1f7cbd9566faa1c4ab63b",
+    "runner_sha256": "0d772ee363cdf001e030d0655721277d3d305062a854daf3504a993aa8bb91e3",
+    "source_hashes": {
+      "lake": "c40a7f58628d9db37fea2e2b994d091061f6b0e68a9e699675abed4a2399fad5",
+      "pier": "1f6a42038ba37fcf17780f880a14c36a1252231d1d4f872ebcf0411d79bcb8dd",
+      "sprint": "40fb260d941ae5a1edd9bd8a624ad2f899f7b421d89bcc706a9582ca9cd354ff",
+      "training": "c72253267878540d1b17a015e55ad87bb323274b06eec29b09e9f164a49c3afc",
+      "camera-01": "5c948cbf162db7f21d8a1f79de8a558fd46fb7450557f1b493a329a7ca2b4c09",
+      "camera-05": "5424783d7fa9d1b7efbc19f2ff0f75bcb1f7dbc39b0cf81585065a6195f72148",
+      "camera-08": "2a8d01b821e8efb513b2d6d3bad9865487b8b49ef01d12a9863a385029458e81",
+      "camera-11": "87d9864e2a86d857aea76a00b04408ed5c7cf33e5408089312ba4b4c21fc66e5"
+    },
+    "qualification": {
+      "primary_correct_min": 16,
+      "primary_correct_sources_min": 5,
+      "new_control_flags_max": 2,
+      "new_hold_flags_max": 0,
+      "preserve_prior_results": true,
+      "intersection_over_union_per_interval": 0.5
+    }
+  },
+  "summary": {
+    "held_picture_added_alerts": 0,
+    "independently_redecoded_pictures": 5850,
+    "independently_verified_endpoints": 104,
+    "known_repeat": 16,
+    "known_repeat_added_alerts": 0,
+    "known_repeat_correct_ranges": 0,
+    "known_repeat_current_alerts": 16,
+    "known_repeat_exact_ranges": 0,
+    "ordinary": 40,
+    "ordinary_added_alerts": 0,
+    "ordinary_correct_ranges": 0,
+    "ordinary_current_alerts": 5,
+    "ordinary_exact_ranges": 0,
+    "primary": 32,
+    "primary_added_alerts": 26,
+    "primary_correct_ranges": 26,
+    "primary_correct_sources": 7,
+    "primary_current_alerts": 4,
+    "primary_exact_ranges": 19,
+    "tandem": 8,
+    "tandem_added_alerts": 0,
+    "tandem_correct_ranges": 0,
+    "tandem_current_alerts": 1,
+    "tandem_exact_ranges": 0
+  },
+  "source_dimensions": [
+    640,
+    360
+  ],
+  "frames_per_second": 25,
+  "primary_encode": "H.264 CRF 25",
+  "tandem_encode": "H.264 CRF 33",
+  "source_exposure": {
+    "new_to_project": 2,
+    "retained_earlier_use": 6
+  },
+  "sources": [
+    {
+      "id": "lake",
+      "group": "new_to_project",
+      "author": "Alexandr Ch",
+      "license": "CC BY 3.0",
+      "offset_s": 1,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Midnight_sun_on_Lake_Kolvitskoye.webm",
+      "sha256": "c40a7f58628d9db37fea2e2b994d091061f6b0e68a9e699675abed4a2399fad5",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Midnight_sun_on_Lake_Kolvitskoye.webm"
+    },
+    {
+      "id": "pier",
+      "group": "new_to_project",
+      "author": "Maoileann",
+      "license": "CC BY-SA 4.0",
+      "offset_s": 1,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Pier%2C_Dingle_Peninsula%2C_Co._Kerry%2C_Ireland-1012590.webm",
+      "sha256": "1f6a42038ba37fcf17780f880a14c36a1252231d1d4f872ebcf0411d79bcb8dd",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Pier%2C_Dingle_Peninsula%2C_Co._Kerry%2C_Ireland-1012590.webm"
+    },
+    {
+      "id": "sprint",
+      "group": "retained_earlier_use",
+      "author": "SRF/Einstein/Anatol Hug, Peter H\u00f6llrigl",
+      "license": "CC BY-SA 4.0",
+      "offset_s": 21,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/62/Was_passiert_bei_einem_Sprint.webm",
+      "sha256": "40fb260d941ae5a1edd9bd8a624ad2f899f7b421d89bcc706a9582ca9cd354ff",
+      "source_page": "https://commons.wikimedia.org/wiki/File:Was_passiert_bei_einem_Sprint.webm"
+    },
+    {
+      "id": "training",
+      "group": "retained_earlier_use",
+      "author": "Dallas J Plummer",
+      "license": "CC BY-SA 4.0",
+      "offset_s": 18,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/ae/New_York_Personal_Trainer_Joshua_Bailey_Circuit_Training.webm",
+      "sha256": "c72253267878540d1b17a015e55ad87bb323274b06eec29b09e9f164a49c3afc",
+      "source_page": "https://commons.wikimedia.org/wiki/File:New_York_Personal_Trainer_Joshua_Bailey_Circuit_Training.webm"
+    },
+    {
+      "id": "camera-01",
+      "group": "retained_earlier_use",
+      "author": "Microsoft Research VCD2 camera bank",
+      "license": "VCD2 data license",
+      "offset_s": 0,
+      "url": "https://vcdpublic.blob.core.windows.net/vcd2/benchmarking/mkv/TH/36b68b7ee1212d0af7545572f33e6bd7.mkv",
+      "sha256": "5c948cbf162db7f21d8a1f79de8a558fd46fb7450557f1b493a329a7ca2b4c09",
+      "source_page": "https://github.com/microsoft/VCD",
+      "terms_url": "https://github.com/microsoft/VCD/blob/main/LICENSE-DATA"
+    },
+    {
+      "id": "camera-05",
+      "group": "retained_earlier_use",
+      "author": "Microsoft Research VCD2 camera bank",
+      "license": "VCD2 data license",
+      "offset_s": 0,
+      "url": "https://vcdpublic.blob.core.windows.net/vcd2/benchmarking/mkv/TH/f45b71f56ca226e004695f0bc3272321.mkv",
+      "sha256": "5424783d7fa9d1b7efbc19f2ff0f75bcb1f7dbc39b0cf81585065a6195f72148",
+      "source_page": "https://github.com/microsoft/VCD",
+      "terms_url": "https://github.com/microsoft/VCD/blob/main/LICENSE-DATA"
+    },
+    {
+      "id": "camera-08",
+      "group": "retained_earlier_use",
+      "author": "Microsoft Research VCD2 camera bank",
+      "license": "VCD2 data license",
+      "offset_s": 0,
+      "url": "https://vcdpublic.blob.core.windows.net/vcd2/benchmarking/mkv/TH/d188190b29a2580f156543dfe2cabcc0.mkv",
+      "sha256": "2a8d01b821e8efb513b2d6d3bad9865487b8b49ef01d12a9863a385029458e81",
+      "source_page": "https://github.com/microsoft/VCD",
+      "terms_url": "https://github.com/microsoft/VCD/blob/main/LICENSE-DATA"
+    },
+    {
+      "id": "camera-11",
+      "group": "retained_earlier_use",
+      "author": "Microsoft Research VCD2 camera bank",
+      "license": "VCD2 data license",
+      "offset_s": 0,
+      "url": "https://vcdpublic.blob.core.windows.net/vcd2/benchmarking/mkv/TH/720ab86945e121122031f07dbf18d822.mkv",
+      "sha256": "87d9864e2a86d857aea76a00b04408ed5c7cf33e5408089312ba4b4c21fc66e5",
+      "source_page": "https://github.com/microsoft/VCD",
+      "terms_url": "https://github.com/microsoft/VCD/blob/main/LICENSE-DATA"
+    }
+  ],
+  "cases": [
+    {
+      "source": "lake",
+      "role": "later_fast",
+      "delivery": "lake-later_fast.mp4",
+      "sha256": "a65f6938afb6d8e4f5f6c9eeb3b70df6a7b98b29447ff05cfa6bb323f1536e4a",
+      "truth": [
+        [
+          29,
+          69,
+          2
+        ],
+        [
+          142,
+          162,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          29,
+          69,
+          2
+        ],
+        [
+          142,
+          162,
+          1
+        ]
+      ],
+      "added": [
+        [
+          29,
+          69,
+          2
+        ],
+        [
+          142,
+          162,
+          1
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7,
+        9,
+        11,
+        12,
+        14,
+        15,
+        16,
+        17,
+        19
+      ],
+      "candidate_ms": 2.399,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            14848,
+            "604a5c911d57f5c54954835b1d2696bad85d07b3b511bfdd7b8d5c71e4cf1ebc"
+          ],
+          [
+            35328,
+            "52c5bfed675b46e5d06d58024973ff367fa347d1679c0391225f925995a76748"
+          ]
+        ],
+        [
+          [
+            72704,
+            "b4c035c73bc0c0dc0b724d28fee92458763ff94ec61b39a8ab615f7c5a6e0825"
+          ],
+          [
+            82944,
+            "5a88e89908d5e5da74da8f366edc89383ca4ef0f39056e54cac50dda50c6bfc7"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "lake",
+      "role": "earlier_fast",
+      "delivery": "lake-earlier_fast.mp4",
+      "sha256": "98bbc98d034426f864d9f77b7ee74dee7b5e6e97a5d913e17b54e892d46d0a0d",
+      "truth": [
+        [
+          29,
+          49,
+          1
+        ],
+        [
+          142,
+          182,
+          2
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          29,
+          49,
+          1
+        ],
+        [
+          142,
+          182,
+          2
+        ]
+      ],
+      "added": [
+        [
+          29,
+          49,
+          1
+        ],
+        [
+          142,
+          182,
+          2
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.279,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            14848,
+            "a74a491567128b374a304ff77eaf201255e5b83541c551f5bb0d320c1a3780d7"
+          ],
+          [
+            25088,
+            "2b2f6f710e1025d81ed8559b11b58ad36d82d153e796b94ebcf583ee9d90347e"
+          ]
+        ],
+        [
+          [
+            72704,
+            "43d7c8c6586b22fb045ff791d0e51014fea278516c163b8941971f7da5eed50a"
+          ],
+          [
+            93184,
+            "1bc25ed2b119ffd5f89d0d7b37b37d4d7ff315de1c8ca1a038b83eb856a7147f"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "lake",
+      "role": "later_slow",
+      "delivery": "lake-later_slow.mp4",
+      "sha256": "6bf7eb3ea1fa005e63789121c00a55c23092cebab25c0e0ad6e764b8a797ac63",
+      "truth": [
+        [
+          29,
+          49,
+          1
+        ],
+        [
+          142,
+          182,
+          2
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          30,
+          49,
+          1
+        ],
+        [
+          144,
+          182,
+          2
+        ]
+      ],
+      "added": [
+        [
+          30,
+          49,
+          1
+        ],
+        [
+          144,
+          182,
+          2
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        2,
+        3,
+        5,
+        7,
+        8,
+        10,
+        12,
+        13,
+        15,
+        17,
+        18
+      ],
+      "candidate_ms": 2.315,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            15360,
+            "16830128c88dd01c0b43cfe0ec7a41a400851c52c0fd7be0f902c696553bf9cc"
+          ],
+          [
+            25088,
+            "1f580c9fdd916077893f80e219401d6ef9ac39d2627a692419016ac3162feb68"
+          ]
+        ],
+        [
+          [
+            73728,
+            "dff18a29137d716ac29c5d7946862c3df8589c93c46f1659d17fb85e94af8b9e"
+          ],
+          [
+            93184,
+            "5041b063ab962359e6e1ac36ee445b0f07a08de2fdbac25bb6d9b858df6f66d2"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "lake",
+      "role": "earlier_slow",
+      "delivery": "lake-earlier_slow.mp4",
+      "sha256": "13a51a988491c7a046436eb5826de76c5a4b57b0274aed6a6a8e54ed62648ec0",
+      "truth": [
+        [
+          29,
+          69,
+          2
+        ],
+        [
+          142,
+          162,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          29,
+          69,
+          2
+        ],
+        [
+          142,
+          162,
+          1
+        ]
+      ],
+      "added": [
+        [
+          29,
+          69,
+          2
+        ],
+        [
+          142,
+          162,
+          1
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.304,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            14848,
+            "63238ea6296f4a95e935aca335e95447df026406c364d84de3930170e6b59180"
+          ],
+          [
+            35328,
+            "14455970032fe12c6a72a7115c9bd3aefe0f2cca7099aee86cd109b06dc8d80a"
+          ]
+        ],
+        [
+          [
+            72704,
+            "d5553589b323b4f2acda480fdc4c338adc92695d91abe4ddccf36159a0dfe7ef"
+          ],
+          [
+            82944,
+            "a7ba9342d7eff137b15b5e4f8470ac0ca9b8e78c2b617734080ad26014e1e5ed"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "lake",
+      "role": "original",
+      "delivery": "lake-original.mp4",
+      "sha256": "4ad76235889a62754bde8ec8956edaddca53b6814fbfb462090c13e5d183e9aa",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.214,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "lake",
+      "role": "in_place_speed",
+      "delivery": "lake-in_place_speed.mp4",
+      "sha256": "80d5cae0ad415930b17310c968493a8802a5e979839d080e7893fd18fc99d9f1",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.202,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "lake",
+      "role": "jump_cut",
+      "delivery": "lake-jump_cut.mp4",
+      "sha256": "15acb9de0ec5437a63cdd1a9e665c794977e74fccb7ad5ea0e34dc783acc5e51",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.228,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "lake",
+      "role": "held_picture",
+      "delivery": "lake-held_picture.mp4",
+      "sha256": "8410bfbd779f02c2c227a89f1442530b391bda11fc9cae60b047e9ca69a34f4e",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.254,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "lake",
+      "role": "same_speed",
+      "delivery": "lake-same_speed.mp4",
+      "sha256": "d61ce005ef2302bbe74187e5c22c1d894e70bb55eea1b0a831c795a05147cf5a",
+      "truth": null,
+      "current": [
+        [
+          [
+            33,
+            49,
+            1
+          ],
+          [
+            146,
+            162,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.237,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "lake",
+      "role": "reverse",
+      "delivery": "lake-reverse.mp4",
+      "sha256": "ee1901bb0bc8b7ab5836c62ca559d3a1ec9c1dde4f680d588cf970172b2442eb",
+      "truth": null,
+      "current": [
+        [
+          [
+            30,
+            49,
+            1
+          ],
+          [
+            142,
+            161,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.212,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "lake",
+      "role": "original_tandem",
+      "delivery": "lake-original_tandem.mp4",
+      "sha256": "aca62eaaea1c354aa3943622595717c05c67f7116047ee84f57caa87e9181983",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.233,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "lake",
+      "role": "later_fast_tandem",
+      "delivery": "lake-later_fast_tandem.mp4",
+      "sha256": "615e46ef2ab4bdf333b6abbd40ef121027089d3be388ec1641414962b915fa71",
+      "truth": [
+        [
+          29,
+          69,
+          2
+        ],
+        [
+          142,
+          162,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.219,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "pier",
+      "role": "later_fast",
+      "delivery": "pier-later_fast.mp4",
+      "sha256": "7219722c5809b96da13c643e8013566ce463b0b02e1efff45a771d01d2961d72",
+      "truth": [
+        [
+          40,
+          80,
+          2
+        ],
+        [
+          142,
+          162,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          40,
+          80,
+          2
+        ],
+        [
+          142,
+          162,
+          1
+        ]
+      ],
+      "added": [
+        [
+          40,
+          80,
+          2
+        ],
+        [
+          142,
+          162,
+          1
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.39,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            20480,
+            "b0f1c9981f150b620285a5fdc5510f6fb97d458622ff17cf6f5251348544bb89"
+          ],
+          [
+            40960,
+            "d736e5bedb2b0e9411d6882ab90bd8b47e64c6c667b52c81cae8c3a4636cccaf"
+          ]
+        ],
+        [
+          [
+            72704,
+            "2200c18fa9621a85b97eedf08b2232a3370cd2c45d725951a885959d8bcdcbf1"
+          ],
+          [
+            82944,
+            "18db58e9d319ea94b2e45764080e93e696a18846aae2cee6bca83247141983e4"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "pier",
+      "role": "earlier_fast",
+      "delivery": "pier-earlier_fast.mp4",
+      "sha256": "35b7d7b66730e00a9b62c35c20ce2de3c01e3ca0932f122a68b0d6cb6dabf00c",
+      "truth": [
+        [
+          40,
+          60,
+          1
+        ],
+        [
+          142,
+          182,
+          2
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          40,
+          60,
+          1
+        ],
+        [
+          142,
+          182,
+          2
+        ]
+      ],
+      "added": [
+        [
+          40,
+          60,
+          1
+        ],
+        [
+          142,
+          182,
+          2
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.246,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            20480,
+            "24117803d3e50d0d33d5d14b8a4ef6527bb5592f59f04d0159a3d948e71e43f1"
+          ],
+          [
+            30720,
+            "1b002c2a2e4bfb7d7dd63c4cb64c24e4d03859ba910e22f5b8e3ace892c5f179"
+          ]
+        ],
+        [
+          [
+            72704,
+            "959c451b24fe57ed47d3d566b3e686a09ad1498568e2522935a0dfb758971010"
+          ],
+          [
+            93184,
+            "768b13754bcbb04274c0dbb34b51bb2f994f39553b4d414c7239d4009c55f5b8"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "pier",
+      "role": "later_slow",
+      "delivery": "pier-later_slow.mp4",
+      "sha256": "5783c67ba0dc4c6f98894f1764fb889014cd398d0b3418600fbba97a7579ff2b",
+      "truth": [
+        [
+          40,
+          60,
+          1
+        ],
+        [
+          142,
+          182,
+          2
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          40,
+          60,
+          1
+        ],
+        [
+          142,
+          182,
+          2
+        ]
+      ],
+      "added": [
+        [
+          40,
+          60,
+          1
+        ],
+        [
+          142,
+          182,
+          2
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.38,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            20480,
+            "b0f1c9981f150b620285a5fdc5510f6fb97d458622ff17cf6f5251348544bb89"
+          ],
+          [
+            30720,
+            "148d93fb8b5bbf56e55151d67e37c918a417c6f481719c9a80467ac974534a5f"
+          ]
+        ],
+        [
+          [
+            72704,
+            "cf3ac94894a2e06894ad09ca76d45b3ebdf41a1edec7f82505ba81947512538f"
+          ],
+          [
+            93184,
+            "dc2b21c7de42ec56248fb5f163070f61084d018a9fcfdd41779295125314e917"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "pier",
+      "role": "earlier_slow",
+      "delivery": "pier-earlier_slow.mp4",
+      "sha256": "662b2843a0fcd74b71e86bb8ecc148a7b41d0c05d754ebef76270b7de10e713c",
+      "truth": [
+        [
+          40,
+          80,
+          2
+        ],
+        [
+          142,
+          162,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          40,
+          78,
+          2
+        ],
+        [
+          142,
+          161,
+          1
+        ]
+      ],
+      "added": [
+        [
+          40,
+          78,
+          2
+        ],
+        [
+          142,
+          161,
+          1
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "candidate_ms": 2.321,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            20480,
+            "a8579981bb6c2c36ec94390378206a5b42f653daa8f77e6128ebaef2bdcc9658"
+          ],
+          [
+            39936,
+            "45e40a8a1f95bce78e0a3a280f47571ff9cbc2147919aaff5831a1140d9fb7f6"
+          ]
+        ],
+        [
+          [
+            72704,
+            "8e436d753e7b013c93169fed4faa67f02903474289aa7f5b7ea48b7e7e006bbe"
+          ],
+          [
+            82432,
+            "abe21909d2d262d9e09f7f5be07316d53eb9898a8047b46d56aebd883460bb4c"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "pier",
+      "role": "original",
+      "delivery": "pier-original.mp4",
+      "sha256": "391483184f525ce2cbf4acafcd63c9c4b45126d7f7de28d936d80fdd9042f901",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.229,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "pier",
+      "role": "in_place_speed",
+      "delivery": "pier-in_place_speed.mp4",
+      "sha256": "86e009007f25dae357cf54aed1f1380c2a02624518868aeb4697c5ec4c5582a5",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.175,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "pier",
+      "role": "jump_cut",
+      "delivery": "pier-jump_cut.mp4",
+      "sha256": "662e3bb30d0b21c2ea6195e8a3cc8696186f8708e3354bdda895725d3cf5f113",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.193,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "pier",
+      "role": "held_picture",
+      "delivery": "pier-held_picture.mp4",
+      "sha256": "be257882eb83797ef2a75659981bcb702f13ac0d91458b9a7438548fe99bbcc6",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.212,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "pier",
+      "role": "same_speed",
+      "delivery": "pier-same_speed.mp4",
+      "sha256": "2ccb1523634eb252137227e11bd6ecfee27e5d0e6234b4aef170b57c48260a60",
+      "truth": null,
+      "current": [
+        [
+          [
+            40,
+            60,
+            1
+          ],
+          [
+            142,
+            162,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.24,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "pier",
+      "role": "reverse",
+      "delivery": "pier-reverse.mp4",
+      "sha256": "4f4dfe58596d6fbea26f5b0f9d5129c16d740022d4f547494904f8759526842f",
+      "truth": null,
+      "current": [
+        [
+          [
+            40,
+            60,
+            1
+          ],
+          [
+            142,
+            162,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.203,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "pier",
+      "role": "original_tandem",
+      "delivery": "pier-original_tandem.mp4",
+      "sha256": "5bd1b6ba10b91108a0fbcff4371553dae51b8598a6bac40a8a78be32e155a04a",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.259,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "pier",
+      "role": "later_fast_tandem",
+      "delivery": "pier-later_fast_tandem.mp4",
+      "sha256": "0ac9287aeb612996540b22140bd8ccbcb112d4e3448a5d4a379251fc54e0230e",
+      "truth": [
+        [
+          40,
+          80,
+          2
+        ],
+        [
+          142,
+          162,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.166,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "sprint",
+      "role": "later_fast",
+      "delivery": "sprint-later_fast.mp4",
+      "sha256": "ce7e4d477d1b3e56ebc67e334ec1cc2c610276571d962f2d8668f489d83091c2",
+      "truth": [
+        [
+          25,
+          65,
+          2
+        ],
+        [
+          143,
+          163,
+          1
+        ]
+      ],
+      "current": [
+        [
+          [
+            165,
+            187,
+            1
+          ],
+          [
+            188,
+            210,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": [
+        [
+          25,
+          65,
+          2
+        ],
+        [
+          143,
+          163,
+          1
+        ]
+      ],
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.238,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "sprint",
+      "role": "earlier_fast",
+      "delivery": "sprint-earlier_fast.mp4",
+      "sha256": "d48b4f5fb56eab41be9d1e686e7079aea2e83c0b6a511756cea17595eb081cce",
+      "truth": [
+        [
+          25,
+          45,
+          1
+        ],
+        [
+          143,
+          183,
+          2
+        ]
+      ],
+      "current": [
+        [
+          [
+            165,
+            187,
+            1
+          ],
+          [
+            188,
+            210,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": [
+        [
+          25,
+          45,
+          1
+        ],
+        [
+          143,
+          183,
+          2
+        ]
+      ],
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.35,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "sprint",
+      "role": "later_slow",
+      "delivery": "sprint-later_slow.mp4",
+      "sha256": "dbb3e08df42e131ce2ab6a474831428b547e4092d0818a9e6f5c452cb4370b2d",
+      "truth": [
+        [
+          25,
+          45,
+          1
+        ],
+        [
+          143,
+          183,
+          2
+        ]
+      ],
+      "current": [
+        [
+          [
+            185,
+            201,
+            1
+          ],
+          [
+            208,
+            224,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": [
+        [
+          25,
+          45,
+          1
+        ],
+        [
+          143,
+          183,
+          2
+        ]
+      ],
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.245,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "sprint",
+      "role": "earlier_slow",
+      "delivery": "sprint-earlier_slow.mp4",
+      "sha256": "8465741464078c6e1856ac22c784a9b437b08bc755932ca9e8c09b14b33b1bcb",
+      "truth": [
+        [
+          25,
+          65,
+          2
+        ],
+        [
+          143,
+          163,
+          1
+        ]
+      ],
+      "current": [
+        [
+          [
+            165,
+            187,
+            1
+          ],
+          [
+            188,
+            210,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": [
+        [
+          25,
+          65,
+          2
+        ],
+        [
+          143,
+          163,
+          1
+        ]
+      ],
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.346,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "sprint",
+      "role": "original",
+      "delivery": "sprint-original.mp4",
+      "sha256": "e1ebff48c2bd85e6b23ce0b206af5035b8f3c728d2520179ef4f453665639961",
+      "truth": null,
+      "current": [
+        [
+          [
+            165,
+            187,
+            1
+          ],
+          [
+            188,
+            210,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.172,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "sprint",
+      "role": "in_place_speed",
+      "delivery": "sprint-in_place_speed.mp4",
+      "sha256": "dc93bc8df54732def866ae19dbc15cb4929244b3e32054967864c233043a668e",
+      "truth": null,
+      "current": [
+        [
+          [
+            144,
+            178,
+            1
+          ],
+          [
+            190,
+            224,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.219,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "sprint",
+      "role": "jump_cut",
+      "delivery": "sprint-jump_cut.mp4",
+      "sha256": "edc3595ed90a0d1788ca9a1a67e0f6d50bf0700cf948a40868a7da4e04d79b04",
+      "truth": null,
+      "current": [
+        [
+          [
+            144,
+            178,
+            1
+          ],
+          [
+            190,
+            224,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.134,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "sprint",
+      "role": "held_picture",
+      "delivery": "sprint-held_picture.mp4",
+      "sha256": "324afe4e7b86498a56239f742ac332ea8f88d6e38c71dcf98d96d82d8aaea2a5",
+      "truth": null,
+      "current": [
+        [
+          [
+            165,
+            187,
+            1
+          ],
+          [
+            188,
+            210,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.165,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "sprint",
+      "role": "same_speed",
+      "delivery": "sprint-same_speed.mp4",
+      "sha256": "9183391692f66b8ebdcb5b9521d89d81cd73508497d36f44cfcc3fbdfd38190f",
+      "truth": null,
+      "current": [
+        [
+          [
+            165,
+            187,
+            1
+          ],
+          [
+            188,
+            210,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.457,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "sprint",
+      "role": "reverse",
+      "delivery": "sprint-reverse.mp4",
+      "sha256": "5fadd4a2effa40193236a3462802f388089e32545f5107dc1b5c1f1ed3a2ed34",
+      "truth": null,
+      "current": [
+        [
+          [
+            165,
+            187,
+            1
+          ],
+          [
+            188,
+            210,
+            1
+          ]
+        ],
+        [
+          [
+            25,
+            45,
+            1
+          ],
+          [
+            143,
+            163,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.217,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "sprint",
+      "role": "original_tandem",
+      "delivery": "sprint-original_tandem.mp4",
+      "sha256": "bee047bf4aec5958042f42804c0266a3a1db2125e6e7e02cfc1882a81489124e",
+      "truth": null,
+      "current": [
+        [
+          [
+            165,
+            187,
+            1
+          ],
+          [
+            188,
+            210,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.252,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "sprint",
+      "role": "later_fast_tandem",
+      "delivery": "sprint-later_fast_tandem.mp4",
+      "sha256": "e552489341aea1b921ecdffc5e760dfd26a6e532f11179b84e34664b7c66ba7a",
+      "truth": [
+        [
+          25,
+          65,
+          2
+        ],
+        [
+          143,
+          163,
+          1
+        ]
+      ],
+      "current": [
+        [
+          [
+            165,
+            187,
+            1
+          ],
+          [
+            188,
+            210,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": [
+        [
+          25,
+          65,
+          2
+        ],
+        [
+          143,
+          163,
+          1
+        ]
+      ],
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.24,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "training",
+      "role": "later_fast",
+      "delivery": "training-later_fast.mp4",
+      "sha256": "4c1acf2bef75b4456ca1c5ed4c541126ab3dfabb41c44afe83f73385c0f84176",
+      "truth": [
+        [
+          32,
+          72,
+          2
+        ],
+        [
+          134,
+          154,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          32,
+          72,
+          2
+        ],
+        [
+          134,
+          154,
+          1
+        ]
+      ],
+      "added": [
+        [
+          32,
+          72,
+          2
+        ],
+        [
+          134,
+          154,
+          1
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.39,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            16384,
+            "d3736766d827e0bc0b906c7ce6d2a936f060937e14c75ff251cec98fe62fa28b"
+          ],
+          [
+            36864,
+            "69323655c73d0d7ecf3b3f175961d52537219b6eb47eeffc6cc4b7315ab6c8bd"
+          ]
+        ],
+        [
+          [
+            68608,
+            "e87b1125e857556d555cbc4d4c1739300c23557ce99c51843ffb0898d2db1bb2"
+          ],
+          [
+            78848,
+            "ce559e159ab10ccc2b5c3e96ce47aea06896377de32f354247e3fa549fcb4876"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "training",
+      "role": "earlier_fast",
+      "delivery": "training-earlier_fast.mp4",
+      "sha256": "efb32238ee92fc0cd7f2a734ce1978db8ae358d787398160f9d04766bc43e67c",
+      "truth": [
+        [
+          32,
+          52,
+          1
+        ],
+        [
+          134,
+          174,
+          2
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          32,
+          52,
+          1
+        ],
+        [
+          134,
+          174,
+          2
+        ]
+      ],
+      "added": [
+        [
+          32,
+          52,
+          1
+        ],
+        [
+          134,
+          174,
+          2
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.252,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            16384,
+            "01a974c2e3e5833c23395ae9b92ba36ef87edb9e99b6a703e0b3642a86cf55f2"
+          ],
+          [
+            26624,
+            "728a28430e7b2de5b2b5ed46c3511eca65a4bca8c74a60e321ecc39da7fc307c"
+          ]
+        ],
+        [
+          [
+            68608,
+            "c4570ea14ef2c9df742caa99b1b4a02c16a7eb81efb5d268d57c530a01510a84"
+          ],
+          [
+            89088,
+            "f2fa54b591be7360c653d5401fa264f95a96e531dd6b10876f989c61ca4803bb"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "training",
+      "role": "later_slow",
+      "delivery": "training-later_slow.mp4",
+      "sha256": "28146a2e9d67adc8fefe96ea5cb8ff9c52ff3b2cccc3589dbc42d4799b31d80b",
+      "truth": [
+        [
+          32,
+          52,
+          1
+        ],
+        [
+          134,
+          174,
+          2
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          32,
+          52,
+          1
+        ],
+        [
+          134,
+          174,
+          2
+        ]
+      ],
+      "added": [
+        [
+          32,
+          52,
+          1
+        ],
+        [
+          134,
+          174,
+          2
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.295,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            16384,
+            "d3736766d827e0bc0b906c7ce6d2a936f060937e14c75ff251cec98fe62fa28b"
+          ],
+          [
+            26624,
+            "4b9336fe3ad8d33df91a52773430d89f17ded793c0f9f383cd999995f3459c01"
+          ]
+        ],
+        [
+          [
+            68608,
+            "ddf95c30fbddcea55b28937e81c930635e94fe522a4b118e5a90e38018325f66"
+          ],
+          [
+            89088,
+            "9888cffe5eb129df963c69950622960a4008b714dee1055c8a75491d90f2c43b"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "training",
+      "role": "earlier_slow",
+      "delivery": "training-earlier_slow.mp4",
+      "sha256": "adc045f15be22f5cd6a542d7c97896d91bc75ace1a8318523b32c0e919f60fb8",
+      "truth": [
+        [
+          32,
+          72,
+          2
+        ],
+        [
+          134,
+          154,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          32,
+          72,
+          2
+        ],
+        [
+          134,
+          154,
+          1
+        ]
+      ],
+      "added": [
+        [
+          32,
+          72,
+          2
+        ],
+        [
+          134,
+          154,
+          1
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.313,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            16384,
+            "1194ec1dc981a93e775c650773e07f3ee464cd3e5234449625f0d13798638663"
+          ],
+          [
+            36864,
+            "2f0ca0f3f096bfa02bc82df47d4c6f1d75a02a16a33d1a8921ecbe7ca596e86f"
+          ]
+        ],
+        [
+          [
+            68608,
+            "c4570ea14ef2c9df742caa99b1b4a02c16a7eb81efb5d268d57c530a01510a84"
+          ],
+          [
+            78848,
+            "a3f4270ec57c0795a4e02e2b837b3317ebc04f380a8e066486a44ec638e6dc4d"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "training",
+      "role": "original",
+      "delivery": "training-original.mp4",
+      "sha256": "7ae898b504bc40a358a2e1c2f517b035978d71b18aaa869ebb54dd9ca9f54106",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.179,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "training",
+      "role": "in_place_speed",
+      "delivery": "training-in_place_speed.mp4",
+      "sha256": "7608eaa27873c55d6ef262ccdba659ef32ed8b448a9ff65dfb97662a3427018e",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.252,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "training",
+      "role": "jump_cut",
+      "delivery": "training-jump_cut.mp4",
+      "sha256": "a56b1a50b23fa8da201463865690a630e2096cf830c05760931f9312e7534b5a",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.116,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "training",
+      "role": "held_picture",
+      "delivery": "training-held_picture.mp4",
+      "sha256": "568258b2560d5167b69ecce0b5772f7a40f2b4ffe565d19ed7d75f30e7657048",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.236,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "training",
+      "role": "same_speed",
+      "delivery": "training-same_speed.mp4",
+      "sha256": "0436baaa508202fa79dae61d795f36b791ec2d8336905978de4950797d91df0a",
+      "truth": null,
+      "current": [
+        [
+          [
+            32,
+            52,
+            1
+          ],
+          [
+            134,
+            154,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.398,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "training",
+      "role": "reverse",
+      "delivery": "training-reverse.mp4",
+      "sha256": "46d72e1259ece8eae1a1c4df1d52025fddfae1c5038fe6b606d6e3f1c95afbfa",
+      "truth": null,
+      "current": [
+        [
+          [
+            32,
+            52,
+            1
+          ],
+          [
+            134,
+            154,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.227,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "training",
+      "role": "original_tandem",
+      "delivery": "training-original_tandem.mp4",
+      "sha256": "8e91f70c973544aaba230f69ead71ce34f191f8298cd9c600284cc7d9605232f",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.218,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "training",
+      "role": "later_fast_tandem",
+      "delivery": "training-later_fast_tandem.mp4",
+      "sha256": "f01ab9d3487f0944dacc8a3afe5c7c0e492f3537d34f5d5d1f695985ac92c6fe",
+      "truth": [
+        [
+          32,
+          72,
+          2
+        ],
+        [
+          134,
+          154,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.217,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-01",
+      "role": "later_fast",
+      "delivery": "camera-01-later_fast.mp4",
+      "sha256": "9fdd40b96bd14b94990f3429d81aac802d7555d77b0b10de2a44066cb29877a2",
+      "truth": [
+        [
+          37,
+          77,
+          2
+        ],
+        [
+          136,
+          156,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          37,
+          75,
+          2
+        ],
+        [
+          136,
+          155,
+          1
+        ]
+      ],
+      "added": [
+        [
+          37,
+          75,
+          2
+        ],
+        [
+          136,
+          155,
+          1
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "candidate_ms": 2.295,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            18944,
+            "dd4b75d37408c816bf10b7f4eb66d1791f8fec5f23fbc59c55eea6ff5b4a3403"
+          ],
+          [
+            38400,
+            "a023228a2fd8eeb1d70f2c340eb84523d53c62122dae262e62ac1f1e743cc3a8"
+          ]
+        ],
+        [
+          [
+            69632,
+            "481c37ff826aa9215911ada50c0ac36f3f543671c016e11fbd3ffc9c7361a0d2"
+          ],
+          [
+            79360,
+            "3d934b172447ccaa25ecbffbddc8e7c14aad8165b501a1668aecac5f1650f171"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "camera-01",
+      "role": "earlier_fast",
+      "delivery": "camera-01-earlier_fast.mp4",
+      "sha256": "ad5fab62696fba2ccbcb199d66bee8377d639f38c935004bb62b4eecda768e2f",
+      "truth": [
+        [
+          37,
+          57,
+          1
+        ],
+        [
+          136,
+          176,
+          2
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          37,
+          57,
+          1
+        ],
+        [
+          136,
+          176,
+          2
+        ]
+      ],
+      "added": [
+        [
+          37,
+          57,
+          1
+        ],
+        [
+          136,
+          176,
+          2
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.279,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            18944,
+            "d052c5c8d1ac4e26e8fdbb4546f8f0c95b25b6fb07a45e6825593c5f49c02464"
+          ],
+          [
+            29184,
+            "be630d784ac5887b26fadeeaa9280edeb971ecab316c5cfaac13fb6fa9539359"
+          ]
+        ],
+        [
+          [
+            69632,
+            "8cde0c69f40836b1da858f0cbc641fe140d0d6b561cb74c211fa447c3e59468e"
+          ],
+          [
+            90112,
+            "f2e7c341f8d0b22005079b7b0f91abe7e85551428f83922b5f0430b2f5c44c20"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "camera-01",
+      "role": "later_slow",
+      "delivery": "camera-01-later_slow.mp4",
+      "sha256": "dea8ac1873f004fb4f94254e3022f4f44aab651a6a9e95db61158b7147b295ed",
+      "truth": [
+        [
+          37,
+          57,
+          1
+        ],
+        [
+          136,
+          176,
+          2
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          37,
+          57,
+          1
+        ],
+        [
+          136,
+          176,
+          2
+        ]
+      ],
+      "added": [
+        [
+          37,
+          57,
+          1
+        ],
+        [
+          136,
+          176,
+          2
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.3,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            18944,
+            "dd4b75d37408c816bf10b7f4eb66d1791f8fec5f23fbc59c55eea6ff5b4a3403"
+          ],
+          [
+            29184,
+            "a685a930bade6fefc963095b736e99cb2d4ae3da27f725bdeb817b8cd816af1a"
+          ]
+        ],
+        [
+          [
+            69632,
+            "7e586d1aef64baa3612d76a4093332f9d4441ad6790cc59ab5d8cf8db2abf06e"
+          ],
+          [
+            90112,
+            "3330a560e3090c7f2cf67dc6ed53fd4067cb2778645b3a883393884639d1afc4"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "camera-01",
+      "role": "earlier_slow",
+      "delivery": "camera-01-earlier_slow.mp4",
+      "sha256": "8e31af0e496493a2970ddfd43fff3b7e23c0fc0d107981156930f69a2daad7a3",
+      "truth": [
+        [
+          37,
+          77,
+          2
+        ],
+        [
+          136,
+          156,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          37,
+          77,
+          2
+        ],
+        [
+          136,
+          156,
+          1
+        ]
+      ],
+      "added": [
+        [
+          37,
+          77,
+          2
+        ],
+        [
+          136,
+          156,
+          1
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.282,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            18944,
+            "2a95e654fbdf4b89be208b64401d358da7cf6b98ccc6639ed33860f1fe50d88f"
+          ],
+          [
+            39424,
+            "c76f6285b573cd380966bf2621b95208effdf9be47119d8b7d3901f915530cac"
+          ]
+        ],
+        [
+          [
+            69632,
+            "8cde0c69f40836b1da858f0cbc641fe140d0d6b561cb74c211fa447c3e59468e"
+          ],
+          [
+            79872,
+            "5e7adcf3d6e21de79b5dce7e0b41596845cde4bbff2bf367892afd214599172c"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "camera-01",
+      "role": "original",
+      "delivery": "camera-01-original.mp4",
+      "sha256": "02c7a5f68fd9187302460143faa65e876a8dafaed6661ffa89b54bec5912f3a8",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.214,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-01",
+      "role": "in_place_speed",
+      "delivery": "camera-01-in_place_speed.mp4",
+      "sha256": "87c1a12820363d259a1b7eda02d3d7f3bc92ce5d9b251274d3e182efca1a075a",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.221,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-01",
+      "role": "jump_cut",
+      "delivery": "camera-01-jump_cut.mp4",
+      "sha256": "9cb9ab44b04cb2b70b59333379a46272e0b5a1f3c5216beb37cd986efade1e0c",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.256,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-01",
+      "role": "held_picture",
+      "delivery": "camera-01-held_picture.mp4",
+      "sha256": "78ea9c0857b416912f19bcf0ee96bce1517a6813eec0d9de4b9d9b22b968360d",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.216,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-01",
+      "role": "same_speed",
+      "delivery": "camera-01-same_speed.mp4",
+      "sha256": "959f01a1c3917a233e0c78a24a807e096a3a9d39b466d016bd8a9a9be8ffbebd",
+      "truth": null,
+      "current": [
+        [
+          [
+            37,
+            57,
+            1
+          ],
+          [
+            136,
+            156,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.272,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-01",
+      "role": "reverse",
+      "delivery": "camera-01-reverse.mp4",
+      "sha256": "2c68bcadf0d9d593c1004037576e2032b435f3df8af43e467da919ba1ac97f99",
+      "truth": null,
+      "current": [
+        [
+          [
+            37,
+            57,
+            1
+          ],
+          [
+            136,
+            156,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.201,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-01",
+      "role": "original_tandem",
+      "delivery": "camera-01-original_tandem.mp4",
+      "sha256": "67cc3f85f9820711993d427717836db419495d300b71dfb0b8a4314e54ac944f",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.267,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-01",
+      "role": "later_fast_tandem",
+      "delivery": "camera-01-later_fast_tandem.mp4",
+      "sha256": "3688e16910fbeb35d8d0dce332111c6790ecfddf02c4271bfd1563e7b881e8d9",
+      "truth": [
+        [
+          37,
+          77,
+          2
+        ],
+        [
+          136,
+          156,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.229,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-05",
+      "role": "later_fast",
+      "delivery": "camera-05-later_fast.mp4",
+      "sha256": "e845f13474cd18e533d5925c0e687b0b6d1453ac83adf9f11cd35befea9d7bbe",
+      "truth": [
+        [
+          29,
+          69,
+          2
+        ],
+        [
+          136,
+          156,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          29,
+          59,
+          2
+        ],
+        [
+          136,
+          151,
+          1
+        ]
+      ],
+      "added": [
+        [
+          29,
+          59,
+          2
+        ],
+        [
+          136,
+          151,
+          1
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "candidate_ms": 2.311,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            14848,
+            "fb0d2a838a13ae41126451239809803543851b9683ebfd49628d13f8b22070bc"
+          ],
+          [
+            30208,
+            "8af0145b0afa5533f743cf788dc6e53fd9e1ee6882c9081da6a1c0bb640dfd6a"
+          ]
+        ],
+        [
+          [
+            69632,
+            "194a15789f416d014bb9c7ab4387dd43f8e987bd1a09a98c251a861fa212d2e1"
+          ],
+          [
+            77312,
+            "9c999f08f3fc8d8d92373436e1e82ce23f95f1ccd13dbdf87cd2e7c44e29c692"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "camera-05",
+      "role": "earlier_fast",
+      "delivery": "camera-05-earlier_fast.mp4",
+      "sha256": "0eeff42f9e4d30693388e44949fd0745f848cfa3ed9a92d22e28829ecfd313b6",
+      "truth": [
+        [
+          29,
+          49,
+          1
+        ],
+        [
+          136,
+          176,
+          2
+        ]
+      ],
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.27,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-05",
+      "role": "later_slow",
+      "delivery": "camera-05-later_slow.mp4",
+      "sha256": "35d30babfe93c63f485cb2776b097f845031dedce84fefaa6ae322128b1385de",
+      "truth": [
+        [
+          29,
+          49,
+          1
+        ],
+        [
+          136,
+          176,
+          2
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          29,
+          44,
+          1
+        ],
+        [
+          136,
+          166,
+          2
+        ]
+      ],
+      "added": [
+        [
+          29,
+          44,
+          1
+        ],
+        [
+          136,
+          166,
+          2
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "candidate_ms": 2.329,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            14848,
+            "fb0d2a838a13ae41126451239809803543851b9683ebfd49628d13f8b22070bc"
+          ],
+          [
+            22528,
+            "96f62b85d804523fd1b5bb448be6a6607780b65e7bb036b76ac154f88dc4d595"
+          ]
+        ],
+        [
+          [
+            69632,
+            "ff9f8fac26bb93ef845338ce5b6bfa639ed4507aea8dd9a96b8e04d915744e29"
+          ],
+          [
+            84992,
+            "a37ecb0e98f93527c88ee62b77242b64d3959c941ab30cf0491b45f2404c4c83"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "camera-05",
+      "role": "earlier_slow",
+      "delivery": "camera-05-earlier_slow.mp4",
+      "sha256": "3b26ef8fd77049ae480167c20ebf056bad9089a66f0a99a4a1d9b38608412616",
+      "truth": [
+        [
+          29,
+          69,
+          2
+        ],
+        [
+          136,
+          156,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.24,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-05",
+      "role": "original",
+      "delivery": "camera-05-original.mp4",
+      "sha256": "ed0010f2d11e873c4f38490280fc854ac702b63a49321b92c226c31571632020",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.224,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-05",
+      "role": "in_place_speed",
+      "delivery": "camera-05-in_place_speed.mp4",
+      "sha256": "7a85abffeb4e0098579aef4714b26684aa6cb9c5bb381c392353db68faa1c911",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.294,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-05",
+      "role": "jump_cut",
+      "delivery": "camera-05-jump_cut.mp4",
+      "sha256": "7c87e23a10ddff54d73a3a40771cb0703f7eb24548566b61cd1981eb787b71ab",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.229,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-05",
+      "role": "held_picture",
+      "delivery": "camera-05-held_picture.mp4",
+      "sha256": "4b62ecc1883c385d85d265c45fab1f92a6cc86b296c611253ed1ff1cc02c38da",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.209,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-05",
+      "role": "same_speed",
+      "delivery": "camera-05-same_speed.mp4",
+      "sha256": "823ded3860a6a949f07ff35e8659cd63f9907666ad25b33f029f876a89833456",
+      "truth": null,
+      "current": [
+        [
+          [
+            29,
+            44,
+            1
+          ],
+          [
+            136,
+            151,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.225,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-05",
+      "role": "reverse",
+      "delivery": "camera-05-reverse.mp4",
+      "sha256": "7c21e293cbadb7eb4cc73a384766af25f17dcc1f6f71664e50234e7c349dc324",
+      "truth": null,
+      "current": [
+        [
+          [
+            29,
+            43,
+            1
+          ],
+          [
+            142,
+            156,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.242,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-05",
+      "role": "original_tandem",
+      "delivery": "camera-05-original_tandem.mp4",
+      "sha256": "841257aa93faf7c74d33552a5dca4178d2c25eb9596fc52c4955af8d9c9b42bf",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.26,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-05",
+      "role": "later_fast_tandem",
+      "delivery": "camera-05-later_fast_tandem.mp4",
+      "sha256": "fea3f0d201e336d5f4650484ae0126e32d69f3d731e562936d689e0c72e68eaa",
+      "truth": [
+        [
+          29,
+          69,
+          2
+        ],
+        [
+          136,
+          156,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.228,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-08",
+      "role": "later_fast",
+      "delivery": "camera-08-later_fast.mp4",
+      "sha256": "b8b02ce2e6803c9fe3b0caf78673347320d69ddb2d9a9aaab12b543eec1b12b2",
+      "truth": [
+        [
+          35,
+          75,
+          2
+        ],
+        [
+          145,
+          165,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          35,
+          75,
+          2
+        ],
+        [
+          145,
+          165,
+          1
+        ]
+      ],
+      "added": [
+        [
+          35,
+          75,
+          2
+        ],
+        [
+          145,
+          165,
+          1
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.28,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            17920,
+            "60baaeffee198e31195cac16d336bb5e183d5108da465865fc7deb6a114fa84d"
+          ],
+          [
+            38400,
+            "80b531915f7f05afa09efaf948c42018a08b2be31094a8206122578ebf61e0b2"
+          ]
+        ],
+        [
+          [
+            74240,
+            "320f0cd22262f748e9342805664b46e74d4cf42da4719d447ffc355351f5beeb"
+          ],
+          [
+            84480,
+            "11a266b15d5da8b40ac3cf5f3e7dac8148524534e770dd4f4c1f4fb2fac72095"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "camera-08",
+      "role": "earlier_fast",
+      "delivery": "camera-08-earlier_fast.mp4",
+      "sha256": "f3a96f50468cbfbae842434445efd58d8219cf12664218bb456d86f3e55411aa",
+      "truth": [
+        [
+          35,
+          55,
+          1
+        ],
+        [
+          145,
+          185,
+          2
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          35,
+          55,
+          1
+        ],
+        [
+          145,
+          185,
+          2
+        ]
+      ],
+      "added": [
+        [
+          35,
+          55,
+          1
+        ],
+        [
+          145,
+          185,
+          2
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.282,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            17920,
+            "1ef5328b72425b53d45ed746a08d05d29e2daa4cebf2be21b32d9a49f0b699d4"
+          ],
+          [
+            28160,
+            "3200353d897abca990d23a111b3582259476828ee0573399a7055069429cd450"
+          ]
+        ],
+        [
+          [
+            74240,
+            "f86d0bdfbeeabdfaf6d168e13eab1a5090133b020f3e09def0ec3c04333cbafa"
+          ],
+          [
+            94720,
+            "dbc014964c223c067d4e7e58e95873abde16a7d856a672442a9bae760b28c8a5"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "camera-08",
+      "role": "later_slow",
+      "delivery": "camera-08-later_slow.mp4",
+      "sha256": "4e9f4f6e8a741963b35c277ae928f2e915b2899760d3af1fa7b2a5372cb9432e",
+      "truth": [
+        [
+          35,
+          55,
+          1
+        ],
+        [
+          145,
+          185,
+          2
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          35,
+          55,
+          1
+        ],
+        [
+          145,
+          185,
+          2
+        ]
+      ],
+      "added": [
+        [
+          35,
+          55,
+          1
+        ],
+        [
+          145,
+          185,
+          2
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.294,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            17920,
+            "60baaeffee198e31195cac16d336bb5e183d5108da465865fc7deb6a114fa84d"
+          ],
+          [
+            28160,
+            "baed048673226aff286e07bc36e973e3c23f129fc2eac724836277c7816edf0d"
+          ]
+        ],
+        [
+          [
+            74240,
+            "0ce73d0ee39b7bc0759bcdca475ca6e80d82f5e3cd1d9a6eb66360158f736a3a"
+          ],
+          [
+            94720,
+            "67db72d7a6e2e506cc02cdcb53ad96b9e2d2356ba11fa0fc78d1803e0bd63cc0"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "camera-08",
+      "role": "earlier_slow",
+      "delivery": "camera-08-earlier_slow.mp4",
+      "sha256": "9688f0dde463d219f51cd101a7ac146ecf52a9ecfc45902f97832d8459a4f7f4",
+      "truth": [
+        [
+          35,
+          75,
+          2
+        ],
+        [
+          145,
+          165,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          35,
+          75,
+          2
+        ],
+        [
+          145,
+          165,
+          1
+        ]
+      ],
+      "added": [
+        [
+          35,
+          75,
+          2
+        ],
+        [
+          145,
+          165,
+          1
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.274,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            17920,
+            "6e09393883fe7edb9f8177f907cc480d107930200d72adbfec66635459b459db"
+          ],
+          [
+            38400,
+            "d5f0ae7966aebe2640a76e2c29003866d1bc951b58cf921a3a0e229b1dea0df4"
+          ]
+        ],
+        [
+          [
+            74240,
+            "7567de2f506fbf170a30954cdb07bc3e6e7eacb8400932a120a90e748e762c03"
+          ],
+          [
+            84480,
+            "f911ea0f63318f406c9b17ed684758479058437ba436beb0daa507c91a0ffe43"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "camera-08",
+      "role": "original",
+      "delivery": "camera-08-original.mp4",
+      "sha256": "79c6125bde4057ccea203c93484e35df0b4147ecc0ca27d54a2ddfe237f9fce9",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.372,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-08",
+      "role": "in_place_speed",
+      "delivery": "camera-08-in_place_speed.mp4",
+      "sha256": "5162bc49b42b57524b66b49076d94b95893c899c49edd1eb17d3728f9987061d",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.209,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-08",
+      "role": "jump_cut",
+      "delivery": "camera-08-jump_cut.mp4",
+      "sha256": "81e38002941acd0a7987703310ba587eb69c6ab604bb9aeb9541473e4a64a015",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.212,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-08",
+      "role": "held_picture",
+      "delivery": "camera-08-held_picture.mp4",
+      "sha256": "80206d523ebc38833076c099eb89ed84904c9b0ebadabe37333c9c3658660f22",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.198,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-08",
+      "role": "same_speed",
+      "delivery": "camera-08-same_speed.mp4",
+      "sha256": "24d2aecdc91e351a5aa2763e34eff555aec4a7ecc7c1e0bba0830c25b1c85f44",
+      "truth": null,
+      "current": [
+        [
+          [
+            35,
+            55,
+            1
+          ],
+          [
+            145,
+            165,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.232,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-08",
+      "role": "reverse",
+      "delivery": "camera-08-reverse.mp4",
+      "sha256": "671b0cb7c9afdffeef4af052acd550d407f1d97cb36f8624e083bec0bafbbe17",
+      "truth": null,
+      "current": [
+        [
+          [
+            35,
+            55,
+            1
+          ],
+          [
+            145,
+            165,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.195,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-08",
+      "role": "original_tandem",
+      "delivery": "camera-08-original_tandem.mp4",
+      "sha256": "e7b012b9b7d45c7c26377b128a0e8a43237fdf59deb830cb43d7e1578377232b",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.209,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-08",
+      "role": "later_fast_tandem",
+      "delivery": "camera-08-later_fast_tandem.mp4",
+      "sha256": "2658fbd5f4210e886a49bf18caac49b387f16fcd2d6385cc677f0172453bae44",
+      "truth": [
+        [
+          35,
+          75,
+          2
+        ],
+        [
+          145,
+          165,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.231,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-11",
+      "role": "later_fast",
+      "delivery": "camera-11-later_fast.mp4",
+      "sha256": "36b0d37d7b96b7806ea5123df38cf9a520da6a7c7341d3daf8d76ed3477ab9e3",
+      "truth": [
+        [
+          32,
+          72,
+          2
+        ],
+        [
+          141,
+          161,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          34,
+          72,
+          2
+        ],
+        [
+          142,
+          161,
+          1
+        ]
+      ],
+      "added": [
+        [
+          34,
+          72,
+          2
+        ],
+        [
+          142,
+          161,
+          1
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18
+      ],
+      "candidate_ms": 2.283,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            17408,
+            "88ffee5f7be0c025429ce582cde24f2e405f989e250b13fbd25f231448d0570d"
+          ],
+          [
+            36864,
+            "5a1420970997e46fdc2605e04b62c3ab684cb099e8f0a6ec964b0f2c19e52d66"
+          ]
+        ],
+        [
+          [
+            72704,
+            "37d177e90aa83244582d22d4f6487b5770cbd96cafbb8b6a3f2c9f0623575e57"
+          ],
+          [
+            82432,
+            "e22f62e993d6c132a1a768f0bb8bd35a18accf5eac6c363eb4175a4b72fe7a24"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "camera-11",
+      "role": "earlier_fast",
+      "delivery": "camera-11-earlier_fast.mp4",
+      "sha256": "eb104ee3300957db6072786cc34e68b455dcfb88e060d21533dbd413f3f7d7ef",
+      "truth": [
+        [
+          32,
+          52,
+          1
+        ],
+        [
+          141,
+          181,
+          2
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          32,
+          52,
+          1
+        ],
+        [
+          141,
+          181,
+          2
+        ]
+      ],
+      "added": [
+        [
+          32,
+          52,
+          1
+        ],
+        [
+          141,
+          181,
+          2
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.246,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            16384,
+            "f7a5dacf18d35e3c0c96600f3a527de8da26cb9911bd4e4e252ea23d5f1bc18b"
+          ],
+          [
+            26624,
+            "a8f8e7ea91b0b6509920d265b85f492d367ad3ef3b90e376a0dadc7fc666c85d"
+          ]
+        ],
+        [
+          [
+            72192,
+            "2a7ad5789c470c1820db4b84885900e7d76526d6bc19c2f094671fe743c2a6c5"
+          ],
+          [
+            92672,
+            "848874b5fec9699444ccdf051dca703f48efb978e2b12c85f7f1fee4e69236ee"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "camera-11",
+      "role": "later_slow",
+      "delivery": "camera-11-later_slow.mp4",
+      "sha256": "2f94555f8993ffd5fbe429ea1831308828560ab0b6b533f0f5144d6d980ff198",
+      "truth": [
+        [
+          32,
+          52,
+          1
+        ],
+        [
+          141,
+          181,
+          2
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          36,
+          52,
+          1
+        ],
+        [
+          150,
+          182,
+          2
+        ]
+      ],
+      "added": [
+        [
+          36,
+          52,
+          1
+        ],
+        [
+          150,
+          182,
+          2
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "candidate_ms": 2.431,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            18432,
+            "30d23ff8e9eeeb7c545c55cda6ea5dd483874709895e59ee7c6ab1739a9b7104"
+          ],
+          [
+            26624,
+            "f7b389bbcbdc33881c709b4062a50aa0dcbeada4d4ce68f14dd0de39464554ef"
+          ]
+        ],
+        [
+          [
+            76800,
+            "c96f437d1e2b4d800fcb7b5d6d62dc01a398ccde37113fd686f39973202048e5"
+          ],
+          [
+            93184,
+            "2270a06c2a11098d45d8fff7afcde8195e98b2b56a9483d286d16cc200675670"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "camera-11",
+      "role": "earlier_slow",
+      "delivery": "camera-11-earlier_slow.mp4",
+      "sha256": "63c623d7b9995c9840d9bb573e5df6c49b9b947e162c3e07acc8f0663432f862",
+      "truth": [
+        [
+          32,
+          72,
+          2
+        ],
+        [
+          141,
+          161,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": [
+        [
+          32,
+          72,
+          2
+        ],
+        [
+          141,
+          161,
+          1
+        ]
+      ],
+      "added": [
+        [
+          32,
+          72,
+          2
+        ],
+        [
+          141,
+          161,
+          1
+        ]
+      ],
+      "useful": true,
+      "support": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19
+      ],
+      "candidate_ms": 2.322,
+      "time_base": "1/12800",
+      "anchors": [
+        [
+          [
+            16384,
+            "4a92e82eae4a9a3dd8b1356f304c6f1458f163b8eaec88ffac5149ce012fb219"
+          ],
+          [
+            36864,
+            "5bab01201b617f73fc4ff74154a6e6c8cba781c3464d3e250466b1baf9d04de7"
+          ]
+        ],
+        [
+          [
+            72192,
+            "2a7ad5789c470c1820db4b84885900e7d76526d6bc19c2f094671fe743c2a6c5"
+          ],
+          [
+            82432,
+            "f8aba10491b4a56581b5f72de4b9e112b4f7d4adb9923b23ced0b7f46348b639"
+          ]
+        ]
+      ]
+    },
+    {
+      "source": "camera-11",
+      "role": "original",
+      "delivery": "camera-11-original.mp4",
+      "sha256": "d5697af2e9cc035d4871636502247700d1ed8ef4e259b6ad7708d5ff1222093a",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.266,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-11",
+      "role": "in_place_speed",
+      "delivery": "camera-11-in_place_speed.mp4",
+      "sha256": "ea6a7083564827b3a531b694dad2879faf2a67f9e0aa34356571d86a8c9f9af7",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.295,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-11",
+      "role": "jump_cut",
+      "delivery": "camera-11-jump_cut.mp4",
+      "sha256": "a13fe6a28b051448a22de09cb6647ef12dd83b7c683cf48b246517924e8c3ee2",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.259,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-11",
+      "role": "held_picture",
+      "delivery": "camera-11-held_picture.mp4",
+      "sha256": "3b4e51bdac925140a7feb2c189fff01c9e61153a961169a97859afb669f8b1d6",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.259,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-11",
+      "role": "same_speed",
+      "delivery": "camera-11-same_speed.mp4",
+      "sha256": "e49d734ab6b9ed79ae896ec42c6911c140e63af0f948017733be07199bfbb7bb",
+      "truth": null,
+      "current": [
+        [
+          [
+            36,
+            52,
+            1
+          ],
+          [
+            145,
+            161,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.237,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-11",
+      "role": "reverse",
+      "delivery": "camera-11-reverse.mp4",
+      "sha256": "cc34cdc4acf2a3c23bb5c3cd6e28d6a139c7e4ecb6236327709ae7540dd635f0",
+      "truth": null,
+      "current": [
+        [
+          [
+            36,
+            52,
+            1
+          ],
+          [
+            141,
+            157,
+            1
+          ]
+        ]
+      ],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.249,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-11",
+      "role": "original_tandem",
+      "delivery": "camera-11-original_tandem.mp4",
+      "sha256": "dd5558524c79dfcc5d115d6aa2c6fd53ce570fb510d3a2696f00e698191f0c8f",
+      "truth": null,
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.253,
+      "time_base": "1/12800",
+      "anchors": []
+    },
+    {
+      "source": "camera-11",
+      "role": "later_fast_tandem",
+      "delivery": "camera-11-later_fast_tandem.mp4",
+      "sha256": "a48d8baea70947e657933a48b59b05ee301b5c67ff34acb58f25b0dafc1ac1be",
+      "truth": [
+        [
+          32,
+          72,
+          2
+        ],
+        [
+          141,
+          161,
+          1
+        ]
+      ],
+      "current": [],
+      "candidate_alone": null,
+      "added": null,
+      "useful": false,
+      "support": [],
+      "candidate_ms": 2.205,
+      "time_base": "1/12800",
+      "anchors": []
+    }
+  ]
+}

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [retimed footage replay](video-retimed-sequence-2026-11-16.md#reproduce)
+recounts both time ranges, the playback ratio, and ordinary alerts. It can
+independently read the endpoint clocks and exact RGB from the delivered
+videos. It includes a separate stronger-recompression result.
+
 The [learned writing prompt replay](writing-prompt-contrast-2026-11-16.md#replay)
 rebuilds exact sentence ranges from the pinned publisher files. It measures
 ordinary flags, complete sentence placement and changed-word coverage on

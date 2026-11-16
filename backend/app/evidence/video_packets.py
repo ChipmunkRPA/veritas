@@ -562,6 +562,7 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
     pair = review["pair"]
     motion = "supporting_edge_offsets" in pair
     reverse = pair.get("order") == "reverse"
+    retimed = "frame_steps" in pair
     packet_id = picture_sequence.MOTION_PACKET_ID if motion else picture_sequence.PACKET_ID
     title = "Similar moving pictures at two source ranges" if motion else "Same moving pictures at two source ranges"
     selection = "longest_pair_of_similar_moving_sequences" if motion else "longest_pair_of_exact_moving_sequences"
@@ -569,6 +570,10 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
         packet_id = picture_sequence.MOTION_REVERSE_PACKET_ID if motion else picture_sequence.REVERSE_PACKET_ID
         title = "Similar moving pictures in reverse order" if motion else "Moving pictures repeated in reverse"
         selection = "longest_pair_of_similar_reversed_moving_sequences" if motion else "longest_pair_of_reversed_moving_sequences"
+    if retimed:
+        packet_id = picture_sequence.MOTION_RETIMED_PACKET_ID
+        title = "Footage repeated at two playback speeds"
+        selection = "longest_two_to_one_pair_of_similar_moving_sequences"
     motion_limit = review["frames_scanned"] if motion else None
     frames, images, labels, assets = [], [], [], {}
     for number, (occurrence, role, index, pts, digest) in enumerate(picture_sequence.endpoints(pair), 1):
@@ -594,17 +599,24 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
     sheet.paste(first, (0, 0))
     sheet.paste(second, (0, first.height))
     assets["contact_sheet"] = _packet_image(db, store, analysis, set_id, sheet)
+    if retimed:
+        limitations = (f"The check compares whole pictures in the first {motion_limit} native frames. "
+                       "It tests a two-to-one speed ratio and can miss changes in framing or other speed ratios.")
+        measurements = [{"label": f"{label} range duration", "value": pair["span_s"] * pair["frame_steps"][side], "unit": "seconds"}
+                        for side, label in (("first", "First"), ("second", "Second"))]
+    else:
+        limitations = (f"The comparison checks whole-picture appearance and motion in the first {motion_limit} frames. "
+                       "It can miss edits that change speed, framing or the motion pattern." if motion else
+                       "The comparison requires exact decoded pixels and matching frame spacing within the scanned range.")
+        measurements = [{"label": "First-to-last source timestamp span", "value": pair["span_s"], "unit": "seconds"}]
     return {"id": packet_id, "title": title,
             "evidence_type": "anomaly", "claim_scope": "paired_frame_sequences",
             "semantics": review["schema"],
             "picture_sequence": pair, "affects_overall_confidence": False, "finding_ids": [], "signal_refs": [],
             "exhibit_refs": [], "frames": frames, "observation": picture_sequence.observation(pair),
-            "interpretation": picture_sequence.REVERSE_CONTEXT if reverse else picture_sequence.CONTEXT,
-            "limitations": [(f"The comparison checks whole-picture appearance and motion in the first {motion_limit} frames. It can miss edits "
-                             "that change speed, framing or the motion pattern." if motion else
-                             "The comparison requires exact decoded pixels and matching frame spacing within the scanned range.")],
-            "measurements": [{"label": "Matching pictures in each range", "value": pair["frame_count"], "unit": "frames"},
-                             {"label": "First-to-last source timestamp span", "value": pair["span_s"], "unit": "seconds"}],
+            "interpretation": picture_sequence.interpretation(pair),
+            "limitations": [limitations],
+            "measurements": [{"label": "Matching pictures in each range", "value": pair["frame_count"], "unit": "frames"}, *measurements],
             "artifacts": assets, "clip": {"status": "unavailable", "reason": "Use the original video to play either occurrence."},
             "derivation": {"version": VERSION, "selection": selection,
                            "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
@@ -821,7 +833,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     match = hold["match"] if hold is not None else None
     picture_reviews = document.get("picture_hold", {})
     sequence_matches = [picture_reviews[key] for key in ("sequence_review", "motion_sequence_review", picture_sequence.REVERSE_KEY,
-                                                         picture_sequence.MOTION_REVERSE_KEY)
+                                                         picture_sequence.MOTION_REVERSE_KEY, picture_sequence.MOTION_RETIMED_KEY)
                         if picture_reviews.get(key, {}).get("pair") is not None]
     mouth_review = picture_reviews.get("mouth_local_hold", {})
     mouth_match = mouth_review.get("match")

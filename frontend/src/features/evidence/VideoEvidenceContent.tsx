@@ -4,6 +4,12 @@ import { EvidenceAudio, EvidenceLimits, EvidenceMeasurements, EvidencePicture, E
 import { evidenceAssetUrl, evidenceSourceMediaUrl, hasNestedVideoEvidence, seconds, type VideoEvidenceFrame, type VideoEvidencePacket, type VideoEvidenceSet } from './multimediaPackets'
 import VideoFrameNavigator from './VideoFrameNavigator'
 
+function occurrenceLabel(sequence: NonNullable<VideoEvidencePacket['picture_sequence']>, side: 'first' | 'second') {
+  if (sequence.frame_steps) return sequence.frame_steps[side] === 1 ? 'Faster occurrence' : 'Slower occurrence'
+  if (side === 'first') return 'First occurrence'
+  return sequence.order === 'reverse' ? 'Reversed occurrence' : 'Second occurrence'
+}
+
 function PictureChangeSupport({ tiles }: { tiles: number[] }) {
   return <svg viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true"
     className="pointer-events-none absolute inset-0 h-full w-full">
@@ -80,6 +86,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
   const lipTiming = set.lip_timing_review
   const motion = hold?.motion_sequence_review
   const reverseMotion = hold?.reverse_motion_sequence_review
+  const retimedMotion = hold?.retimed_motion_sequence_review
   const motionRate = motion?.parameters.frame_rate ?? 20
   const motionLimit = motion?.frames_scanned || motionRate * 9
   const laterFrames = hold && set.coverage ? set.coverage.frame_count - hold.frames_scanned : 0
@@ -92,8 +99,8 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       const sceneSupport = frame.interval_role === 'during' && packet.scene_return
         ? packet.scene_return.tiles : null
       const navigationKnown = frame.anchor.playback_time_s != null && Number.isFinite(frame.anchor.playback_time_s) && frame.anchor.playback_time_s >= 0
-      const occurrence = packet.picture_sequence && (frame.anchor.frame_index <= packet.picture_sequence.first.end_frame_index
-        ? 'First occurrence' : packet.picture_sequence.order === 'reverse' ? 'Reversed occurrence' : 'Second occurrence')
+      const occurrence = packet.picture_sequence && occurrenceLabel(packet.picture_sequence,
+        frame.anchor.frame_index <= packet.picture_sequence.first.end_frame_index ? 'first' : 'second')
       return <div key={frame.id} className="rounded-md border border-border p-3">
         <p className="m-0 mb-3 text-small font-medium">{occurrence && `${occurrence} · `}{frame.interval_role && <span className="capitalize">{frame.interval_role} {rangeLabel} · </span>}Frame {frame.anchor.frame_index}{frame.is_peak ? ' · highest response in this sample sequence' : ''}
           {frame.score !== null && <span className="font-mono"> · response {frame.score.toFixed(3)}</span>}</p>
@@ -184,6 +191,13 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         : `This check needs verified ${1000 / motionRate} ms spacing throughout the first ${motionLimit} frames.`}</p>
       <p className="mt-2 mb-0 text-caption text-text-muted">Coverage is limited to the first {motionLimit} native {set.source.width} × {set.source.height} frames in supported {motionRate} fps video. A repeat may come from ordinary editing and carries no AI confidence weight.</p>
     </section>}
+    {retimedMotion && <section aria-labelledby="video-retimed-motion-heading" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="video-retimed-motion-heading" className="m-0 text-body font-medium">Footage repeated at two playback speeds</h3>
+      <p className="mt-2 mb-0 text-small">{retimedMotion.status === 'matched'
+        ? <a className="underline" href="#media-evidence-VPR05">Inspect the faster and slower source ranges</a>
+        : retimedMotion.status === 'no_match' ? `No match at a two-to-one speed ratio was found in the first ${retimedMotion.frames_scanned} frames.`
+        : 'This check needs regular, verified source timestamps throughout the first nine seconds.'}</p>
+    </section>}
     {!!set.coverage?.brief_face_review?.observations.length && <section aria-labelledby="video-brief-face-coverage-heading"
       className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-brief-face-coverage-heading" className="m-0 text-body font-medium">Brief face-change check</h3>
@@ -235,7 +249,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       {!packet.scene_return && !packet.lip_timing_review && <p className="mt-2 mb-0 text-small text-text-muted">{packet.picture_hold
         ? <>{packet.picture_hold.frame_count} consecutive decoded frames have identical pixels over <strong>{seconds(packet.picture_hold.span_s)}</strong> between the first and last source timestamps.</>
         : packet.picture_sequence
-        ? <>First occurrence <strong>{seconds(packet.picture_sequence.first.start_stream_s)}–{seconds(packet.picture_sequence.first.end_stream_s)}</strong> · {packet.picture_sequence.order === 'reverse' ? 'Reversed occurrence' : 'Second occurrence'} <strong>{seconds(packet.picture_sequence.second.start_stream_s)}–{seconds(packet.picture_sequence.second.end_stream_s)}</strong> on the source clock.</>
+        ? <>{occurrenceLabel(packet.picture_sequence, 'first')} <strong>{seconds(packet.picture_sequence.first.start_stream_s)}–{seconds(packet.picture_sequence.first.end_stream_s)}</strong> · {occurrenceLabel(packet.picture_sequence, 'second')} <strong>{seconds(packet.picture_sequence.second.start_stream_s)}–{seconds(packet.picture_sequence.second.end_stream_s)}</strong> on the source clock.</>
         : packet.mouth_local_hold && packet.window
         ? <>Measured mouth-region hold <strong>{seconds(packet.window.start_stream_s)}–{seconds(packet.window.end_stream_s)}</strong> on the source clock. The end is exclusive. Source frames {packet.mouth_local_hold.frames[0]}–{packet.mouth_local_hold.frames[1] - 1}.</>
         : packet.whole_face_review

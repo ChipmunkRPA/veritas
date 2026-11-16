@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Footage reused at two playback speeds](video-retimed-sequence-2026-11-16.md)
+  locates both source ranges in 26 of 32 staged 2:1 repeats, with zero
+  added alerts on 56 controls. Both time ranges and four original frames
+  appear in the local evidence view, PDF and JSON. Strong recompression
+  defeated the tested check.
+
 - [Learned prompts for locating rewritten sentences](writing-prompt-contrast-2026-11-16.md)
   compares 100 held pairs across news, abstracts and reports. At the wider
   point the learned reading locates 9/100 edits versus 7/100 current and

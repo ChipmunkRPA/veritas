@@ -7,12 +7,13 @@ from itertools import pairwise
 import numpy as np
 
 from app.core.canonical import canonical_hash
+from app.detectors.video import picture_speed
 from app.evidence import picture_sequence as binding
 
 
 def profile(table, encoding, *, schema=binding.MOTION_SCHEMA):
     dimensions = table.width, table.height
-    if (tuple(encoding or ()) not in binding.MOTION_ENCODINGS or table.rotation
+    if (not binding.motion_encoding_allowed(schema, encoding) or table.rotation
             or dimensions != (table.coded_width, table.coded_height)):
         return None
     supported = binding.motion_profile(dimensions, schema)
@@ -90,7 +91,7 @@ def _pair(values, frame_rate, *, reverse=False):
 def scan(observations, values, tb, encoding, exact_pair, *, source_profile, schema=binding.MOTION_SCHEMA):
     frame_rate, limit = source_profile
     result = {"schema": schema, "status": "unavailable", "reason": "source_clock", "frames_scanned": 0,
-              "encoding": list(encoding), "parameters": binding.MOTION_PARAMETERS | {"frame_rate": frame_rate}, "pair": None}
+              "encoding": list(encoding), "parameters": binding.motion_parameters(schema, frame_rate), "pair": None}
     if len(observations) != limit:
         return result
     ticks, hashes = zip(*observations, strict=True)
@@ -100,19 +101,30 @@ def scan(observations, values, tb, encoding, exact_pair, *, source_profile, sche
     if exact_pair is not None:
         return result | {"reason": "exact_sequence"}
     reverse = schema == binding.MOTION_REVERSE_SCHEMA
-    match = _pair(values, frame_rate, reverse=reverse)
+    retimed = schema == binding.MOTION_RETIMED_SCHEMA
+    if retimed:
+        match = picture_speed.find(values, frame_rate)
+        if match is not None:
+            occurrences, count, supports = match
+    else:
+        match = _pair(values, frame_rate, reverse=reverse)
+        if match is not None:
+            start, end, other, supports = match
+            count = end - start + 1
+            occurrences = (start, 1), (other, 1)
     if match is None:
         return result | {"status": "no_match", "reason": None, "frames_scanned": len(ticks)}
-    start, end, other, supports = match
-    count = end - start + 1
     spans = {}
-    for name, i in (("first", start), ("second", other)):
-        pts = list(ticks[i:i + count])
-        digests = hashes[i:i + count]
-        spans[name] = {"start_frame_index": i, "end_frame_index": i + count - 1, "pts": pts,
+    for name, (start, stride) in zip(("first", "second"), occurrences, strict=True):
+        end = start + stride * (count - 1)
+        pts = list(ticks[start:end + 1:stride])
+        digests = hashes[start:end + 1:stride]
+        spans[name] = {"start_frame_index": start, "end_frame_index": end, "pts": pts,
                        "start_stream_s": float(pts[0] * tb), "end_stream_s": float(pts[-1] * tb),
                        "endpoint_rgb_sha256": [digests[0], digests[-1]], "rgb_sequence_sha256": canonical_hash(digests)}
-    pair = spans | {"frame_count": count, "span_s": float((ticks[end] - ticks[start]) * tb), "supporting_edge_offsets": supports}
+    pair = spans | {"frame_count": count, "span_s": float(Fraction(count - 1, frame_rate)), "supporting_edge_offsets": supports}
     if reverse:
         pair["order"] = "reverse"
+    if retimed:
+        pair["frame_steps"] = dict(zip(("first", "second"), (stride for _, stride in occurrences), strict=True))
     return result | {"status": "matched", "reason": None, "frames_scanned": len(ticks), "pair": pair}

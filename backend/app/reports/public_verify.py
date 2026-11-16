@@ -461,6 +461,14 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             review = part['short_voice_review']
             validate_short_voice_review(review, part['source'])
             groups.append(review['artifacts'])
+        if 'focused_speech_edit_review' in part:
+            from app.evidence.audio_focused_edit_binding import validate as validate_focused_edit
+
+            _require(analysis['kind'] == 'audio' and part is evidence and (part.get('short_voice_review') or {}).get('status') == 'no_flag',
+                     'Focused speech review is outside its standalone audio scope')
+            review = part['focused_speech_edit_review']
+            validate_focused_edit(review, part['source'])
+            groups.append(review['artifacts'])
         if 'long_voice_review' in part:
             from app.evidence.audio_long_review_binding import media_windows
             from app.evidence.audio_long_review_binding import validate as validate_long_voice_review

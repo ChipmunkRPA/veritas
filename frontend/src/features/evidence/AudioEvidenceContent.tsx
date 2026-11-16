@@ -73,7 +73,8 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
   const tracks = set.source.audio_stream_indices
   const clock = set.coverage?.source_clock_context
   const shortReview = standalone ? set.short_voice_review : undefined
-  const shortInterval = shortReview?.status === 'flagged' ? shortReview.interval : null
+  const focusedEdit = standalone ? set.focused_speech_edit_review : undefined
+  const shortInterval = shortReview?.interval ?? focusedEdit?.interval
   const shortContext = shortInterval
     ? (set.acoustic_context?.events ?? []).filter(event =>
       event.interval.start_sample < shortInterval.end_sample && event.interval.end_sample > shortInterval.start_sample)
@@ -130,6 +131,36 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       <p className="mt-2 mb-0">The file contains {tracks.length} audio tracks. Audio checks used the first track (source stream index {tracks[0]}).{' '}
         {hasTrackComparison ? 'See the timing comparison between tracks below.'
           : tracks.length === 2 ? 'The second track was unassessed.' : `The other ${tracks.length - 1} tracks were unassessed.`}</p>
+    </section>}
+    {focusedEdit && <section id="media-evidence-focused-speech-edit" aria-label={focusedEdit.title}
+      className="mt-5 rounded-md border border-border p-4 scroll-mt-20"
+      onPlayCapture={(event) => { if (event.target instanceof HTMLAudioElement) pauseAudio(event.target) }}>
+      <h3 className="m-0 text-body font-medium">{focusedEdit.title}</h3>
+      <p className="mt-2 mb-0 text-small">{focusedEdit.reason}</p>
+      {focusedEdit.checked_windows > 0 && <p className="mt-2 mb-0 text-small">
+        Checked {focusedEdit.checked_windows} windows lasting 0.5 to 1 second.
+      </p>}
+      {focusedEdit.interval && focusedEdit.start_s != null && focusedEdit.end_s != null && <>
+        <p className="mt-2 mb-0 font-mono text-caption text-text-muted">
+          Flagged window {seconds(focusedEdit.start_s)}–{seconds(focusedEdit.end_s)} · samples [{focusedEdit.interval.start_sample}, {focusedEdit.interval.end_sample})
+        </p>
+        <SourceTimestamps ranges={focusedEdit.source_timestamp_ranges} />
+        {focusedEdit.artifacts.waveform && <div className="mt-4">
+          <EvidencePicture set={set} artifact={focusedEdit.artifacts.waveform} token={token} ready={mediaReady} chart
+            alt="Waveform with the focused speech window marked" />
+        </div>}
+        {focusedEdit.artifacts.selected_clip && <div className="mt-4">
+          <EvidenceAudio set={set} artifact={focusedEdit.artifacts.selected_clip} token={token} ready={mediaReady}
+            alt="Focused speech window" />
+        </div>}
+        {shortContext.length > 0 && <p className="mt-3 mb-0 text-caption text-text-muted">
+          Recording observations at the same time{' '}
+          {shortContext.map((event, index) => <span key={event.id}>{index > 0 && ', '}
+            <Link to={{ search, hash: `#media-evidence-${encodeURIComponent(event.id)}` }} className="underline underline-offset-2">{event.id}</Link>
+          </span>)}.
+        </p>}
+      </>}
+      <p className="mt-3 mb-0 text-caption text-text-muted">{focusedEdit.limitation}</p>
     </section>}
     <AudioSoundEvents set={set} token={token} mediaReady={mediaReady} pauseAudio={pauseAudio} />
     <AudioBackgroundContext set={set} token={token} mediaReady={mediaReady} pauseAudio={pauseAudio} />

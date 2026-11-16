@@ -15,7 +15,8 @@ export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: Mul
   const monoLevelDrop = stereo?.windows.some((window) => window.downmix?.strong_attenuation)
   const audio = set.schema === 'chipmunk.video-evidence/1' ? set.audio : set.schema === 'chipmunk.audio-evidence/1' ? set : undefined
   const repeatedAudio = repeatedAudioCount(audio)
-  const shortSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' && set.short_voice_review?.status === 'flagged'
+  const shortSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' &&
+    (set.short_voice_review?.status === 'flagged' || set.focused_speech_edit_review?.status === 'flagged')
   const longSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' && set.long_voice_review?.status === 'corroborated'
   const backgroundSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' && set.background_reduced_voice_review?.status === 'flagged'
   const repeatedText = set.schema === 'chipmunk.document-evidence/1' && set.repeated_passages?.status === 'matched'

@@ -246,6 +246,19 @@ Samples [{{ review.interval.start_sample }}, {{ review.interval.end_sample }}) a
 {% endif %}
 <p class="caption">{{ review.limitation }} JSON pointer <span class="mono">/short_voice_review</span>.</p>
 {% endif %}
+{% if evidence.get('focused_speech_edit_review') %}
+{% set review = evidence.focused_speech_edit_review %}
+<h3 id="multimedia-focused-speech-edit">{{ review.title }}</h3>
+<p class="caption">{{ review.reason }}{% if review.checked_windows %} Checked {{ review.checked_windows }} windows lasting 0.5 to 1 second.{% endif %}</p>
+{% if review.status == 'flagged' %}
+<p class="caption">Flagged window {{ '%.3f' | format(review.start_s) }}–{{ '%.3f' | format(review.end_s) }} s.
+Samples [{{ review.interval.start_sample }}, {{ review.interval.end_sample }}) at 16000 Hz.
+{% for range in review.source_timestamp_ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% endfor %}</p>
+{% if review.get('recording_context') %}<p class="caption">Recording observations at the same time {% for id in review.recording_context %}<a href="#multimedia-evidence-{{ id }}">{{ id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>{% endif %}
+{{ plates([review.waveform]) }}
+{% endif %}
+<p class="caption">{{ review.limitation }} JSON pointer <span class="mono">/focused_speech_edit_review</span>.</p>
+{% endif %}
 {% if evidence.get('long_voice_review') %}
 {% set review = evidence.long_voice_review %}
 <h3 id="multimedia-long-voice-review">{{ review.title }}</h3>

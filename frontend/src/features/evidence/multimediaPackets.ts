@@ -227,6 +227,14 @@ export interface ShortVoiceReview {
   source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
   artifacts: Partial<Record<'selected_clip' | 'waveform', EvidenceAsset>>
 }
+export interface FocusedSpeechEditReview {
+  schema: 'chipmunk.focused-speech-edit-review/1'
+  status: 'flagged' | 'no_flag' | 'skipped'
+  title: string; reason: string; limitation: string; affects_overall_confidence: false
+  checked_windows: number; interval: SampleInterval | null; start_s: number | null; end_s: number | null
+  source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
+  artifacts: Partial<Record<'selected_clip' | 'waveform', EvidenceAsset>>
+}
 export interface LongVoiceReview {
   schema: 'chipmunk.long-voice-review/1' | 'chipmunk.long-voice-review/2' | 'chipmunk.long-voice-review/3'; title: 'Long speech-window review'
   status: 'corroborated' | 'no_corroboration' | 'skipped'
@@ -284,6 +292,7 @@ export interface AudioEvidenceSet extends SetBase {
   stereo_repetition?: StereoRepetitionContext
   similarity_context?: AudioSimilarityContext
   short_voice_review?: ShortVoiceReview
+  focused_speech_edit_review?: FocusedSpeechEditReview
   long_voice_review?: LongVoiceReview
   background_reduced_voice_review?: BackgroundVoiceReview
 }

@@ -16,7 +16,7 @@ from PIL import Image
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.audio.coverage import interval_union
-from app.evidence import document_scope, service
+from app.evidence import audio_focused_edit_binding, document_scope, service
 from app.evidence.av_binding import (
     AUDIO_CLOCK_BREAKS,
     AV_CLOCK_DISPLAY_LIMIT,
@@ -97,8 +97,9 @@ def asset_items(document: dict[str, Any]):
         for window in (part.get("sound_events") or {}).get("windows", []):
             for role, asset in sorted(window.get("artifacts", {}).items()):
                 yield window["id"], role, asset
-        for role, asset in sorted((part.get("short_voice_review") or {}).get("artifacts", {}).items()):
-            yield None, f"short_voice_review_{role}", asset
+        for key in ("short_voice_review", audio_focused_edit_binding.KEY):
+            for role, asset in sorted((part.get(key) or {}).get("artifacts", {}).items()):
+                yield None, f"{key}_{role}", asset
         if review := part.get("long_voice_review"):
             from app.evidence.audio_long_review_binding import media_windows
 
@@ -514,6 +515,19 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                                      read_asset=assets.__getitem__, waveform=audio_packets._chart)
         except (ValueError, KeyError, TypeError) as error:
             raise ObjectIntegrityError("Frozen short speech-window evidence differs from its recorded inputs") from error
+    if (review := document.get(audio_focused_edit_binding.KEY)) is not None:
+        from app.evidence import audio_focused_edit, audio_packets
+        from app.evidence.audio_short_review_binding import source_metadata_matches
+
+        result = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+        try:
+            if not source_metadata_matches(source, mapping):
+                raise ValueError("Audio codec scope changed")
+            record = result["manifest"]["sampling"]["audio_evidence"][audio_focused_edit_binding.KEY]
+            audio_focused_edit.verify(review, record, store=store, source=source, pcm=pcm, mapping=mapping,
+                                      read_asset=assets.__getitem__, waveform=audio_packets._chart)
+        except (ValueError, KeyError, TypeError) as error:
+            raise ObjectIntegrityError("Frozen focused speech evidence differs from the saved response") from error
     if (review := document.get("long_voice_review")) is not None:
         from app.evidence import audio_long_review, audio_packets
         from app.evidence.audio_short_review_binding import source_metadata_matches
@@ -1414,6 +1428,15 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             if event["interval"]["start_sample"] < interval["end_sample"]
             and event["interval"]["end_sample"] > interval["start_sample"]
         ]
+    focused_edit = copy.deepcopy(document.get(audio_focused_edit_binding.KEY))
+    if focused_edit and (asset := focused_edit["artifacts"].get("waveform")):
+        focused_edit["waveform"] = plate("waveform", asset, "Waveform with the focused speech window highlighted")
+        interval = focused_edit["interval"]
+        focused_edit["recording_context"] = [
+            event["id"] for event in (document.get("acoustic_context") or {}).get("events", ())
+            if event["interval"]["start_sample"] < interval["end_sample"]
+            and event["interval"]["end_sample"] > interval["start_sample"]
+        ]
     long_voice_review = copy.deepcopy(document.get("long_voice_review"))
     if long_voice_review:
         from app.evidence.audio_long_review_binding import COVERAGE, COVERAGE_LABELS, LABELS, media_windows
@@ -1471,6 +1494,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "av_timing_windows": timing_view,
             "av_clock_breaks": av_clock_view,
             "short_voice_review": short_voice_review,
+            audio_focused_edit_binding.KEY: focused_edit,
             "long_voice_review": long_voice_review,
             "background_reduced_voice_review": background_review,
             "stereo_context": stereo_context,

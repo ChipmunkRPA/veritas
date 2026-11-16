@@ -59,7 +59,7 @@ _HISTORICAL_DETECTOR = re.compile(
 _ARCHITECTURE_LABEL = re.compile(
     r'(?<![\w.])(?:ViT(?:[-_/][A-Za-z0-9]+)*|VisionTransformer|ViTForImageClassification|'
     r'ConvNeXt(?:[-_][A-Za-z0-9]+)*|SegFormer|EfficientNet(?:[-_][A-Za-z0-9]+)*|'
-    r'ResNet\d*|Swin(?:[-_][A-Za-z0-9]+)*|Wav2Vec2?(?:[-_][A-Za-z0-9]+)*|'
+    r'ResNet\d*|Swin(?:[-_][A-Za-z0-9]+)*|(?:Wav2Vec2?|WavLM)(?:[-_][A-Za-z0-9]+)*|'
     r'XLS[-_]?R|HuBERT|Xception|VideoMAE|MiT[-_][A-Za-z0-9]+|LoRA|VAE|'
     r'(?-i:CLIP)|open_clip)(?![\w.])', re.I)
 _FUSION_ID = re.compile(r'(?<![\w.])fuser-(?:image|video|audio|document|text)[A-Za-z0-9_.-]*[A-Za-z0-9](?![\w])', re.I)

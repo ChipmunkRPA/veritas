@@ -52,6 +52,7 @@ from app.engine.runner import StageContext
 from app.engine.stages import common
 from app.engine.stages import video as vid
 from app.evidence import audio_background_review_binding as background_binding
+from app.evidence import audio_focused_edit_binding as focused_edit_binding
 from app.evidence import audio_long_review_binding
 from app.evidence.audio_binding import (
     MONO_VOICE_POLICY,
@@ -188,6 +189,7 @@ def decode(ctx: StageContext) -> dict[str, Any]:
             "short_voice_review_source_supported": supported_source(decoded.mapping),
             "short_voice_review_resampled_lossless": supported_resampled_lossless(decoded.mapping),
             "short_voice_review_source_codec": decoded.mapping.get("source_codec"),
+            "focused_edit_source_supported": focused_edit_binding.supported_source(decoded.mapping),
             "long_voice_review_source_supported": audio_long_review_binding.supported_source(decoded.mapping),
             "long_voice_review_resampled_source_supported": audio_long_review_binding.supported_resampled_source(decoded.mapping),
             "background_voice_review_source_supported": background_binding.supported_source(decoded.mapping),
@@ -208,10 +210,12 @@ def detect(ctx: StageContext) -> dict[str, Any]:
                                                      audio=gated),
                                 max_units=AUDIO_MAX_UNIT_SCORES)
     short = _short_voice_review(ctx, gated, output["detectors"])
+    focused_edit = short.pop(focused_edit_binding.KEY, None)
     long = _long_voice_review(ctx, track, output["detectors"])
     background = _background_voice_review(ctx, track, output["detectors"])
     return {**output, "voice_clock_policy": VOICE_CLOCK_POLICY, "short_voice_review": short,
             **({"long_voice_review": long} if long is not None else {}),
+            **({focused_edit_binding.KEY: focused_edit} if focused_edit is not None else {}),
             **({background_binding.KEY: background} if background is not None else {})}
 
 
@@ -315,7 +319,8 @@ def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
     ctx.check("short voice review")
     if review.status == "ok" and (run_id := store.run_id(ctx.analysis_id, detector.spec.id)):
         output = {"run_id": run_id}
-        selected = (review.details.get("short_voice_review") or {}).get("selected")
+        response = review.details.get("short_voice_review") or {}
+        selected = response.get("selected")
         if selected is not None and source_codec in NEARBY_CODECS:
             remaining = ctx.deadline.remaining()
             budget = short_voice_review.NEARBY_BUDGET_S
@@ -328,10 +333,37 @@ def _short_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict:
                 ctx.check("nearby speech review")
                 if measured.status == "ok" and (nearby_id := store.run_id(ctx.analysis_id, nearby.spec.id)):
                     output["nearby_run_id"] = nearby_id
+        if (settings.environment == "dev" and settings.audio_focused_edit_review and response.get("status") == "no_flag"
+                and ctx.outputs["decode"].get("focused_edit_source_supported")):
+            output[focused_edit_binding.KEY] = _focused_edit_review(ctx, run_ctx)
         return output
     reason = ("The optional short-window check ran out of analysis time." if review.status == "timeout"
               else "The optional short-window check could not complete.")
     return short_voice_review.skipped(reason)
+
+
+def _focused_edit_review(ctx: StageContext, short_ctx: RunContext) -> dict | None:
+    from app.detectors.audio import focused_edit_review
+    from app.engine.registry import get_registry
+
+    registry = get_registry()
+    model = registry.manifest.model(focused_edit_review.MODEL_ID)
+    if (focused_edit_binding.DETECTOR_ID in registry.policy.deny_detectors or model is None
+            or not registry.policy.allows_class(model.licence.class_)):
+        return None
+    remaining = ctx.deadline.remaining()
+    budget = short_voice_review.BUDGET_S
+    if remaining is not None and remaining < budget + short_voice_review.PIPELINE_RESERVE_S:
+        return {"reason": "time"}
+    detector = focused_edit_review.FocusedSpeechEditReview()
+    run_ctx = dataclasses.replace(short_ctx, outputs=StageOutputs(audio=short_ctx.outputs.audio),
+                                  exhibits=ctx.exhibits.bind(detector.spec.id), log=ctx.log.bind(detector_id=detector.spec.id))
+    store = ctx.state["run_store"]
+    review = run_detector(detector, run_ctx, store=store, models=ctx.state.get("models"), timeout_s=budget)
+    ctx.check("focused speech edit review")
+    if review.status == "ok" and (run_id := store.run_id(ctx.analysis_id, detector.spec.id)):
+        return {"run_id": run_id}
+    return {"reason": "time" if review.status == "timeout" else "unavailable"}
 
 
 # --- temporal stage ------------------------------------------------------------------------------------------------
@@ -576,6 +608,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
                 nearby = _published_review(db, ctx, {"run_id": nearby_id}, {})
                 if nearby:
                     short["nearby_raw_output_sha256"] = nearby["raw_output_sha256"]
+            focused_edit = _published_review(db, ctx, detect_output.get(focused_edit_binding.KEY),
+                                             {"reason": "unavailable"}) if short and short.get("raw_output_sha256") else None
             long_result = detect_output.get("long_voice_review")
             long = _published_review(db, ctx, long_result, long_voice_review.skipped(
                 audio_long_review_binding.SKIPPED_RECEIPT,
@@ -594,6 +628,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
             evidence[SPEECH_SELECTION] = speech_selection
         if short is not None:
             evidence["short_voice_review"] = short
+        if focused_edit is not None:
+            evidence[focused_edit_binding.KEY] = focused_edit
         if long is not None:
             evidence["long_voice_review"] = long
         if background is not None:

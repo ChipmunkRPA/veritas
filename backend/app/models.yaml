@@ -465,6 +465,26 @@ models:
     notes: ["pytorch_model.bin is byte-identical (sha256 7a653ae6…) to the root pytorch_model.bin of dima806/deepfake_vs_real_image_detection@29e4cf9; transformers loads dima806's model.safetensors, which is a different checkpoint"]
 
   # ---------------------------------------------------------------- audio
+  - id: local.focused_speech_edit_v1
+    source:
+      type: local
+      path: research/wavlm-v13
+      revision: 432bb64ef1f2e16a052d1d9ae36089bf4910ca35c2d6958ec92b83a38e285ce8
+      produced_by: "Pinned microsoft/wavlm-base-plus and local two-generator fit, docs/audio-joint-generator-transfer-2026-11-16.md"
+      files:
+        - {path: pytorch_model.bin, sha256: 3bb273a6ace99408b50cfc81afdbb7ef2de02da2eab0234e18db608ce692fe51, bytes: 377617425}
+        - {path: config.json, sha256: fea6df1c2700a3954fc07e70588aecc9055eeb28db2ff57151a2db0d19180ed4, bytes: 2232}
+        - {path: preprocessor_config.json, sha256: 99272fe8ccfab114b68b478681ea47ee3a1ce62bb788cb92dd6e4f69fb1f1da2, bytes: 215}
+        - {path: README.md, sha256: d417fc16b08e2f66f0af6b371e47a5f9f1f596f6c1c593f1214d360c41d7a27e, bytes: 3904}
+        - {path: UniSpeech-LICENSE, sha256: 74295d561f60f770a4aa7525b71c0d119ec70422e9f5c601ee3c77e1b7822c91, bytes: 21153}
+        - {path: unilm-LICENSE, sha256: 904dc4d8749877f1dba1cda48200d2462dccbeb7c134d5e4ef6fa75e0198c8fe, bytes: 1104}
+        - {path: joint-speech-head.safetensors, sha256: 432bb64ef1f2e16a052d1d9ae36089bf4910ca35c2d6958ec92b83a38e285ce8, bytes: 16272}
+    licence: {spdx: CC-BY-SA-3.0, class: commercial, notice: "The pinned encoder card links to the UniSpeech CC BY-SA 3.0 model terms. Retain the supplied notices. The local head and recordings stay local."}
+    footprint: {params_m: 94.386, fp32_mb: 361, activation_mb_per_item: 360, estimated: true}
+    devices: {cpu: ok, mps: unsupported, cuda: unsupported}
+    fp16_safe: false
+    load: {adapter_loader: "app.detectors.audio.focused_edit_review:load_model", pickle: true}
+
   - id: hf.gustking.wav2vec2_xlsr_deepfake
     source:
       type: hf

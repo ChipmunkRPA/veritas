@@ -60,13 +60,15 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
-- [Training short voice-edit checks on two generators](audio-joint-generator-transfer-2026-11-16.md)
-  raises useful locations from 10 to 20 across 224 retained edits at the
-  strict point, with ten additional alerts across 275 ordinary deliveries.
-  The separate eight-reader noisy test rises from three to five useful
-  locations on 32 edited deliveries at the same 15/48 ordinary alerts.
-  Both noise-level gains come from one voice-conversion edit. The new
-  fits remain in evaluation.
+- [Local focused speech edit review](audio-focused-edit-local-2026-11-16.md)
+  runs after a completed two-second check without a flag in supported
+  six-second mono recordings. It shows the source interval, waveform and
+  playable clip with zero confidence weight. It raises useful locations
+  from 10 to 20 across 224 retained edits, with ten additional ordinary
+  alerts across 275 deliveries. The separate eight-reader noisy test
+  rises from three to five useful locations on 32 edited deliveries at
+  the same 15/48 ordinary alerts. Both gains come from one edit in two
+  mixtures.
 
 - [Small geometric copies in a single lossy WebP](image-small-affine-webp-2026-11-16.md)
   locates both copied areas on 41 of 168 staged edits, up from 16, with

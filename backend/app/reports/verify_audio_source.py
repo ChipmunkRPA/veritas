@@ -11,6 +11,7 @@ from zipfile import ZipFile
 from app.detectors.audio.decode import decode_audio, source_ranges, wav_bytes
 from app.evidence import mouth_hold_sound, mouth_local_hold_binding
 from app.evidence.audio_binding import SPEECH_SELECTION
+from app.evidence.audio_focused_edit_binding import KEY as FOCUSED_EDIT
 from app.evidence.av_binding import AUDIO_CLOCK_BREAKS, TIMING_WINDOWS, check_audio_clock_breaks
 from app.evidence.stereo_binding import CHANNEL_SILENCE
 from app.evidence.stereo_binding import SCHEMA as STEREO_CONTEXT_SCHEMA
@@ -37,6 +38,8 @@ def _clips(audio: dict, alignment: dict) -> Iterator[tuple[str, dict, list[dict]
         yield f"{window['id']} sound clip", window, window["source_timestamp_ranges"], window["artifacts"]["selected_clip"]
     if (review := audio.get("short_voice_review")) and review["status"] == "flagged":
         yield "Short speech-window clip", review["interval"], review["source_timestamp_ranges"], review["artifacts"]["selected_clip"]
+    if (review := audio.get(FOCUSED_EDIT)) and review["status"] == "flagged":
+        yield "Focused speech edit clip", review["interval"], review["source_timestamp_ranges"], review["artifacts"]["selected_clip"]
     if review := audio.get("long_voice_review"):
         from app.evidence.audio_long_review_binding import media_windows
 
@@ -243,6 +246,14 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
             verify_nearby_source(review, decoded.pcm)
             replay_detail += " Verified the samples in each nearby speech window."
+    if (review := audio.get(FOCUSED_EDIT)) and review["status"] == "flagged":
+        from app.evidence.audio_packets import _chart
+
+        selected = (review["interval"]["start_sample"], review["interval"]["end_sample"])
+        waveform = _chart(decoded.pcm, [], start=0, end=len(decoded.pcm), selected=selected, scores=False)
+        if hashlib.sha256(waveform).hexdigest() != review["artifacts"]["waveform"]["sha256"]:
+            raise ValueError("Focused speech waveform differs from the recorded samples")
+        replay_detail += " Recomputed the marked focused speech waveform."
     if (review := audio.get("long_voice_review")) is not None:
         from app.evidence.audio_long_review import verify_source
         from app.evidence.audio_packets import _chart

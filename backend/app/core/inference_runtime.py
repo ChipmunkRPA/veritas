@@ -10,7 +10,8 @@ _lock = threading.Lock()
 
 def configure_worker() -> None:
     jpeg_review = settings.environment == "dev" and settings.image_region_jpeg_review
-    if settings.image_region_mode != "candidate" and not jpeg_review:
+    focused_speech_review = settings.environment == "dev" and settings.audio_focused_edit_review
+    if settings.image_region_mode != "candidate" and not (jpeg_review or focused_speech_review):
         return
     import torch
 

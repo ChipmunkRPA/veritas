@@ -23,6 +23,7 @@ from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.detectors.audio.coverage import interval_union
 from app.detectors.audio.decode import SAMPLE_RATE, read_wav, source_ranges, wav_bytes
+from app.evidence import audio_focused_edit_binding as focused_edit_binding
 from app.evidence.audio_binding import (
     MONO_VOICE_COVERAGE,
     MONO_VOICE_POLICY,
@@ -144,6 +145,13 @@ def validate_content(document: dict[str, Any]) -> None:
             if document.get("schema") != SCHEMA:
                 raise ValueError("Short speech-window review is for standalone audio")
             validate_short_voice_review(document["short_voice_review"], source)
+        except ValueError as error:
+            raise PacketIntegrityError(str(error)) from error
+    if focused_edit_binding.KEY in document:
+        try:
+            if document.get("schema") != SCHEMA or (document.get("short_voice_review") or {}).get("status") != "no_flag":
+                raise ValueError("Focused speech review requires a completed short-window review without a flag")
+            focused_edit_binding.validate(document[focused_edit_binding.KEY], source)
         except ValueError as error:
             raise PacketIntegrityError(str(error)) from error
     if "long_voice_review" in document:
@@ -408,6 +416,14 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
 
         document["source"].update(source_metadata(mapping))
         document["short_voice_review"] = build_short_voice_review(
+            review, store=store, source=document["source"], pcm=pcm, mapping=mapping,
+            asset=lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
+            waveform=_chart,
+        )
+    if analysis.kind == "audio" and (review := record.get(focused_edit_binding.KEY)):
+        from app.evidence.audio_focused_edit import build as build_focused_edit
+
+        document[focused_edit_binding.KEY] = build_focused_edit(
             review, store=store, source=document["source"], pcm=pcm, mapping=mapping,
             asset=lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
             waveform=_chart,

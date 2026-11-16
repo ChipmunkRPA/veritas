@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [focused speech edit app replay](audio-focused-edit-local-2026-11-16.md#replay)
+tests two noisy deliveries and their controls through checkout. It checks
+the exact source samples, both waveform renders and the signed report
+using the original WAV and FLAC uploads.
+
 The [two-generator audio replay](audio-joint-generator-transfer-2026-11-16.md#replay-and-compare-another-detector)
 publishes sample-level truth for new declared readers with same-word TTS
 and voice conversion. The exporter creates the shared evaluation format.

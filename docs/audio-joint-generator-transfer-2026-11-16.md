@@ -95,9 +95,10 @@ one additional voice-conversion edit at both noise levels. It selects
 **2.800–3.300 s** inside the known **2.645–3.355 s** edit. Neither ordinary
 resampling nor the isolated background flags at that clock. The wider point
 adds another useful location at −5 dB and flags two isolated backgrounds.
-The eight-reader result qualifies the strict fit for further local trial.
-The new models remain in evaluation. The noisy gains cover one additional
-reader in this test, and the earlier severe SINE misses remain.
+The eight-reader result qualified the strict fit for a
+[local source-evidence review](audio-focused-edit-local-2026-11-16.md).
+The noisy gains cover one additional reader in this test, and the earlier
+severe SINE misses remain.
 [Voice-conversion receipt](evaluation-panels/audio-joint-generator-conversion-2026-11-16.json.gz)
 
 ## Replay and compare another detector

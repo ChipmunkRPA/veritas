@@ -84,6 +84,7 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
     """Only declared presentation assets may be fetched; source/raw hashes are not download grants."""
     if document is None:
         return {}
+    from app.evidence.audio_focused_edit_binding import KEY as FOCUSED_EDIT
     from app.evidence.image_interpolation_binding import assets as interpolation_assets
     parts = [document]
     if document.get("version") in NESTED_VERSIONS:
@@ -110,6 +111,11 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
             if part.get("schema") != "chipmunk.audio-evidence/1" or not isinstance(review, dict):
                 raise ObjectIntegrityError("The evidence has an invalid short speech-window review")
             groups.append(review.get("artifacts") or {})
+        if FOCUSED_EDIT in part:
+            review = part[FOCUSED_EDIT]
+            if part is not document or part.get("schema") != "chipmunk.audio-evidence/1" or not isinstance(review, dict):
+                raise ObjectIntegrityError("The evidence has an invalid focused speech review")
+            groups.append(review["artifacts"])
         if "long_voice_review" in part:
             from app.evidence.audio_long_review_binding import media_windows
 

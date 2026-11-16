@@ -1,0 +1,63 @@
+{
+  "browser": {
+    "audio_seconds": 0.4,
+    "matching_audio_range": true,
+    "original_mouth_crops": 3,
+    "page_errors": 0
+  },
+  "checks": [
+    {
+      "delivery": "different_words",
+      "enabled": false,
+      "status": "no_match"
+    },
+    {
+      "delivery": "different_words",
+      "enabled": true,
+      "pdf_sha256": "4f33a30527452d149c9a76bfd31f0601abdf29a6fb7028ae593293fe3535c07e",
+      "sound_sha256": "bb1b771eb34b645509d36da0556d8ed4838ab36662629bdabc3a02306e0afc3a",
+      "source_replay": "Original SHA-256 and the source frame clock matched. Verified native frames (45), original images or crops (6), mouth patches (0), and aligned face inputs (0). Replayed every frame in the repeated-picture inspection (45). Verified the timing review's soundtrack and 45 native mouth crops. Recomputed the exact moving-sequence comparison.",
+      "status": "matched",
+      "verified_assets": 8,
+      "witness": {
+        "articulation": {
+          "audio_sample": 13640,
+          "mismatched_events": 1,
+          "picture_frame": 21,
+          "picture_pts": 21021
+        },
+        "audio_source_pts": [
+          10240,
+          16640
+        ],
+        "baseline_lag_samples": -640,
+        "change_samples": 0,
+        "picture_frames": {
+          "after": 26,
+          "before": 16,
+          "during": 21
+        },
+        "picture_source_samples": [
+          10880,
+          17280
+        ]
+      }
+    },
+    {
+      "delivery": "same_words",
+      "enabled": true,
+      "status": "no_match"
+    },
+    {
+      "delivery": "original",
+      "enabled": true,
+      "status": "no_match"
+    }
+  ],
+  "paid_analyses": 4,
+  "picture_sha256": "53e4bfbc1e76fc1b5533dc9e441ea3e82178c8e543028646e93d9f78847a41dc",
+  "price_usd": 9.99,
+  "same_assessment": true,
+  "standard_checks": false,
+  "unpaid_jobs": 0
+}

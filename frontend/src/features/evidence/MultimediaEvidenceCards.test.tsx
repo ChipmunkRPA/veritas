@@ -38,12 +38,15 @@ const show = (set: MultimediaEvidenceSet, token = 'signed token', mediaReady = t
 afterEach(cleanup)
 
 describe('ordinary multimedia evidence', () => {
-  it('links the matched speech and mouth timing ranges to exact crops and audio', () => {
+  it.each([false, true])('links speech and mouth ranges to exact crops and audio (articulation %s)', (articulation) => {
     const previous = video.packets[0]
-    show({ ...video, lip_timing_review: { status: 'matched', observation: 'A local timing change was measured.', affects_overall_confidence: false },
-      packets: [{ ...previous, id: 'VLT01', title: 'Local speech and mouth timing change', claim_scope: 'sampled_window',
+    const title = articulation ? 'Local speech and mouth mismatch' : 'Local speech and mouth timing change'
+    show({ ...video, lip_timing_review: { schema: articulation ? 'chipmunk.video-lip-timing/3' : 'chipmunk.video-lip-timing/2',
+      status: 'matched', observation: title, affects_overall_confidence: false },
+      packets: [{ ...previous, id: 'VLT01', title, claim_scope: 'sampled_window',
         observation: 'Audio source time 0.680–1.400 s. Corresponding picture time 0.520–1.240 s.',
-        lip_timing_review: { audio_source_pts: [10880, 22400], picture_source_samples: [8320, 19840], change_samples: 2560 },
+        lip_timing_review: { audio_source_pts: [10880, 22400], picture_source_samples: [8320, 19840], change_samples: articulation ? 0 : 2560,
+          ...(articulation && { articulation: { mismatched_events: 3, audio_sample: 15680, picture_frame: 6, picture_pts: 12000 } }) },
         frames: (['before', 'during', 'after'] as const).map(role => ({ ...previous.frames[0], id: `VLT01.${role}`, interval_role: role, score: null, is_peak: false })),
         artifacts: { ...previous.artifacts, lip_timing_waveform: asset('2'), lip_timing_audio: asset('3', 'audio/wav') },
       }],
@@ -53,8 +56,10 @@ describe('ordinary multimedia evidence', () => {
     const evidence = within(screen.getByRole('article'))
     expect(evidence.getByText(/Audio source time 0.680–1.400 s.*picture time 0.520–1.240 s/)).toBeTruthy()
     expect(evidence.getAllByAltText(/exact measured mouth region/)).toHaveLength(3)
-    expect(evidence.getByAltText(/Waveform on the audio source clock/)).toBeTruthy()
-    expect(evidence.getByLabelText('Listen to the soundtrack during the measured timing change').getAttribute('src')).toContain('.wav')
+    expect(evidence.getByText(articulation ? /during mismatch range/i : /during timing range/i)).toBeTruthy()
+    expect(evidence.getByAltText(articulation ? /Waveform during the speech and mouth mismatch/ : /Waveform on the audio source clock/)).toBeTruthy()
+    expect(evidence.getByLabelText(articulation ? 'Listen to the soundtrack during the speech and mouth mismatch' :
+      'Listen to the soundtrack during the measured timing change').getAttribute('src')).toContain('.wav')
   })
 
   it('shows the exact language evidence when all authorship checks were outside scope', () => {

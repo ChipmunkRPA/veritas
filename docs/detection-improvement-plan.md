@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Local mismatch between speech sounds and mouth openings](video-lip-articulation-2026-11-15.md)
+  adds seven correct ranges on 34 held PCM word replacements and raises
+  AAC recovery from 1/34 to 10/34. Ordinary alerts rise from 2/68 to
+  3/68 in each carrier. The local app records the original frames,
+  timestamped audio and waveform with zero AI confidence weight.
+
 - [Local color differences in lossy WebP](image-reference-webp-color-2026-11-15.md)
   adds optional evidence where color changes while brightness stays similar.
   It locates 68/72 held local recolors versus 0/72 with brightness alone.

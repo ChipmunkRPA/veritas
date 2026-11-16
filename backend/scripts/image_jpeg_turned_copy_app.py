@@ -44,7 +44,7 @@ def inputs(args):
     raise ValueError("No held source provided both rotations and the matched ordinary control")
 
 
-def browser_check(output, app, auth_key, cases):
+def browser_check(output, app, auth_key, cases, *, scenario="jpeg-rotation-replay.mjs"):
     import socket
     import subprocess
     import threading
@@ -67,7 +67,7 @@ def browser_check(output, app, auth_key, cases):
             if not server.started:
                 raise RuntimeError("The isolated local web server did not start")
             result = subprocess.run(
-                ["node", str(ROOT / "frontend/e2e/jpeg-rotation-replay.mjs")], check=True, text=True, timeout=85,
+                ["node", str(ROOT / "frontend/e2e" / scenario)], check=True, text=True, timeout=85,
                 input=json.dumps({"url": f"http://127.0.0.1:{port}", "key": auth_key, "output": str(output), "cases": cases}),
                 stdout=subprocess.PIPE,
             )

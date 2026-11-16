@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [speech and mouth mismatch replay](video-lip-articulation-2026-11-15.md#local-app-and-independent-replay)
+checks a new visual fit against same-speaker word replacements and
+matched ordinary, same-word and uniform-delay controls. It replays
+the geometry and source times with both PCM and AAC soundtracks.
+
 The [lossy WebP color comparison replay](image-reference-webp-color-2026-11-15.md#see-or-replay-the-check)
 checks localized recolors and whole-image color adjustments against
 the old brightness comparison, then verifies the exported native pixel

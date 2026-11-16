@@ -187,7 +187,7 @@ def splice(original, location, donor, origin):
     return result
 
 
-def pictures(path, samples, mp, task):
+def pictures(path, samples, mp, task, *, with_shape=False):
     from app.detectors.video.decode import decode_stream, probe_frames
     from app.evidence.video_reference_timing import _mesh
 
@@ -208,6 +208,8 @@ def pictures(path, samples, mp, task):
             record.update(gap=round(float(median(features[:3])), 7), mouth_box=box,
                           rgb_sha256=phone.digest(frame.rgb.tobytes()),
                           mouth_crop_sha256=phone.digest(frame.rgb[y:bottom, x:right].tobytes()))
+            if with_shape:
+                record["shape"] = [round(float(value) * timing.SCORE_UNITS) for value in features]
         frames.append(record)
     phone.require(len(frames) == frame_count, "The picture scan did not cover the full source")
     return {"frames": frames, "samples": samples, "time_base": table.time_base}

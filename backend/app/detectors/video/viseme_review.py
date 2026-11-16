@@ -48,7 +48,8 @@ def assess(ctx, frame_store, mapping, audio_input, shots):
                "checkpoint": str(model.resolve()), "frames": table.to_json(), "video": str(frame_store.path.resolve()),
                "wav": str(ctx.store.path_for(audio_input["wav_sha256"]).resolve()), "samples": mapping["samples"],
                "presented_samples": binding.presented_samples(mapping),
-               "ranked": settings.video_lip_timing_ranked and mapping["source_sample_rate"] == 16000}
+               "ranked": settings.video_lip_timing_ranked and mapping["source_sample_rate"] == 16000,
+               "articulation": settings.video_lip_articulation_review and mapping["source_sample_rate"] == 16000}
     env = {"PATH": os.environ.get("PATH", os.defpath), "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1",
            "HF_HUB_DISABLE_TELEMETRY": "1", "PYTHONPATH": str(Path(__file__).resolve().parents[3]),
            "OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "VECLIB_MAXIMUM_THREADS": "1"}

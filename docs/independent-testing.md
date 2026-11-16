@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short speech window replay](audio-short-edit-duration-transfer-2026-11-15.md#reproduce)
+checks fixed, dense, width-calibrated and context-relative intervals
+under loud competing speech. The two receipts reconstruct the operating
+points, source coordinates and false alarms alongside the current app scan.
+
 The [tracked Word paragraph break replay](document-word-paragraph-breaks-2026-11-15.md#reproduce-locally)
 compares both writing checks on independently authored accepted and tracked
 versions, then verifies the signed evidence against the original Word files.

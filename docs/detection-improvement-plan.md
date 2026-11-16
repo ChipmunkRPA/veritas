@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Shorter speech windows under competing conversation](audio-short-edit-duration-transfer-2026-11-15.md)
+  tests denser starts, width-specific calibration and nearby-speech contrast.
+  On 16 fresh noisy reader pairs, the two-second app scan found one
+  useful location with no ordinary flags. Shorter calibrated windows
+  changed which reader was recovered and added ordinary flags. The
+  experimental routes stay outside serving.
+
 - [Tracked paragraph breaks in Word](document-word-paragraph-breaks-2026-11-15.md)
   lets supported edits reach the writing checks. The accepted text follows
   each inserted or deleted break. An excerpt spanning a deleted break maps

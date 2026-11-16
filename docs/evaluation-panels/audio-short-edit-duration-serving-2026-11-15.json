@@ -1,0 +1,834 @@
+{
+  "assets": {
+    "pellav2_detector.pt": "d21aedfb52e2f87706c2753715a29665482b0f4a034800c31579df5d458559ac",
+    "silero_vad.jit": "e1122837f4154c511485fe0b9c64455f7b929c96fbb8d79fbdb336383ebd3720",
+    "w2v-bert-config.json": "f5572bd5998b68182e9c328a43127ed21fed687f6910497136b91a4e3b0e3675"
+  },
+  "cases": [
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 0,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "549e3990e523aedaa036c1b9fc3626cbfa26e6ddd45d7308ee7ef8134ed199b8",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 0,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "c9f24e92a05d33eee052418a0592bec3d6be0cac9b4f3cc8650085cd5461949a",
+      "selected": null,
+      "truth": [
+        30400,
+        41920
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 0,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "306455a045a35c39715b5dff6cd89b2f3291a7f8a634544057e7478653a797c1",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 0,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "6d4b387cc70a536733ae021611bceaa95505feb2f0a5cd174dd3ff27a6f3a20b",
+      "selected": null,
+      "truth": [
+        30400,
+        41920
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 1,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "3d2512c01e5f167fd037008ecbd4a7ba642095b4df4f72acfa047a5a5697108e",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 1,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "28ab6a9c531d543a743a1b2c98e86e18f8e0226aa71d1562e37b91b9530ae4d8",
+      "selected": null,
+      "truth": [
+        81120,
+        85280
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 1,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "ca1f43e81ab789d891aa472d83175df616dbc61be71999f430c22d3952fad813",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 1,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "8c7067298e3822401417093087f023a6d5f8bb4a0dfd5cbf3b099bd44ddcdda2",
+      "selected": null,
+      "truth": [
+        81120,
+        85280
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 2,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "0ec23f1a00d42c54c6d8c4452c1df2dc1d20004e63d15d683b0a63cb3a7acaea",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 2,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "e367dbebc67f7f004503678d619ad570df13e138241aab99ae759b091edc3adb",
+      "selected": null,
+      "truth": [
+        4640,
+        9120
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 2,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "6c0a1116de0016ba0a532182c0feadc91229eafa37d9d9761f7a265625b2de2e",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 2,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "3023100b3b3d2d70d7a3e4c097e62bda0ed26a46a1f37caef85959a9636e8a38",
+      "selected": null,
+      "truth": [
+        4640,
+        9120
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 3,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "517f3e02c28db5a7acf90af672dbe398342bbe1d3431b4653a3ae44145add67f",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 3,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "091d0869341d3acd34919d5f2f392b814ff737804fad16c5e96ac97a51cd10ab",
+      "selected": null,
+      "truth": [
+        50560,
+        56640
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 3,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "5612457845a4a027129abfb2f57cbec13ad40b9f22fd038c2233126f4aeba17d",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 3,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "9e9bd7138fd91267365d5a531e702d38adc8164c7f3b41c61b47768ead08b3ff",
+      "selected": null,
+      "truth": [
+        50560,
+        56640
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 4,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "a0ac3167797d31651d7fb42160b94d9e6020001b7c2045081abf6a262fc78c2e",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 4,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "2d91b51410d983b1c91a3f9f61b351adc9707b443862c267201a89b23b2dc995",
+      "selected": null,
+      "truth": [
+        80320,
+        90560
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 4,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "594280df9af533da987a1611590de25cb6bfd0de0330c9c3f3b8dd64c611bbe6",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 4,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "2f5f3cd549b24a2e4d8e3db05a80761040d6b6f9223dbcd0157a3a4bdaf846fc",
+      "selected": null,
+      "truth": [
+        80320,
+        90560
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 5,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "a5ac850d2837d341cc065af0d27f5bcc2b5b7d4b0bdab295f4b17ecc5b857e33",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 5,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "b552a4fc6422ebb4a42a9b08d7009988d221486e9e78a39179663e7f9c3f49d4",
+      "selected": null,
+      "truth": [
+        23200,
+        28640
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 5,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "4ba9024f01960136e7d6eefc94555dabb568bc44e33a73057e24f00a00ddae0a",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 5,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "e95048c2daae950158256d455cea3bbad6893c8ce5d680d251417625b8b788f0",
+      "selected": null,
+      "truth": [
+        23200,
+        28640
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 6,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "77f246fb4c684843c6466ac8484b3f88bb28ee87d298c64e84918249401aa46a",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 6,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "7f8df23bd2ba2f5411088a99e219a4ce4000525df7153df02025cc0a05d6d928",
+      "selected": null,
+      "truth": [
+        28000,
+        34400
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 6,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "3e116f379aa962c5897487cd3e84402b644a383da1c1bc070fa35b7500a44e5e",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 6,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "c43068756e9f52a80076199102ccd67f8c3ac85ef979093e67a242477b50a3f4",
+      "selected": null,
+      "truth": [
+        28000,
+        34400
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 7,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "8c2ee3353d1485f19848eadc1458a6d51d0bc8c463f06e229f7704c8f29062ea",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 7,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "8159b0a40502454aa926a910f740c0e7710e9351e392da2b8555e999847f15b1",
+      "selected": null,
+      "truth": [
+        35040,
+        40640
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 7,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "eb6314101d91fe3b790dcb53b269d75896baf1a050c7b437998975378920d79f",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 7,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "47c5d0ec5a8ba9a2684ddd7a637582aa24f2f9333b5e04706865f9c9ea1f5d21",
+      "selected": null,
+      "truth": [
+        35040,
+        40640
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 8,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "43c493e2ba34279d783877a5297471095a4b445c689506ec58a93910ad5d3e55",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 8,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "b5099844bc8dc0901dd52d0118c1c6023c4839e5ba3e05fc59cab2a654a017e9",
+      "selected": null,
+      "truth": [
+        64000,
+        71680
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 8,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "bb492493d9dbc770926327a644a2f61d80c99d936ab0508ed96b9ee364a98ce2",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 8,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "15aaa64ce3190e57380be6c4c1b0a00ba6f5d238bcfb640976cc41e2b1cbe12b",
+      "selected": null,
+      "truth": [
+        64000,
+        71680
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 9,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "4e81fdcf8fdb23c071e88744c5718800f9296460a475921bf49617553f6da6b2",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 9,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "b65667b92037ebe10864b8830357acedacdee43847d3bc2ac36d66ad24351516",
+      "selected": null,
+      "truth": [
+        72640,
+        80000
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 9,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "f7a70374aa22a411caa04bf0fb78c5b7ac610b510096cf4a3b57ea2ca6b022d9",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 9,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "bdb039a92ca3dba27e2f88046e778f9d035f6f793093537a71f019d0295b33cd",
+      "selected": null,
+      "truth": [
+        72640,
+        80000
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 10,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "424f430b18032f708a0f009f0c64d3f6c57a0f448c102163011175c9aa94fd70",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 10,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "86f0d1767a3fd336d2e50f472439402c87f10f0af766d4d4b67d5fa1ff0dbfa0",
+      "selected": null,
+      "truth": [
+        31520,
+        40160
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 10,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "74d3af014c404de26131b91c163a7c73d6cbe42bdbe46c623436cca88b3d3d3c",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 10,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "67b42f7d5751496f43afda06d68452ff3db228b6311faacfcc7f1d14a786343e",
+      "selected": null,
+      "truth": [
+        31520,
+        40160
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 11,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "cda0bc663a1b3b29d903ccaf94b92a646113757636ba7efeb86b68240deed8de",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 11,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "adc36e21d1e1e9799ed56a07a1ee27201e78257779ae0f9dc2e1dcd8bd539787",
+      "selected": null,
+      "truth": [
+        51040,
+        61600
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 11,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "0fc8090357c7132a22a90ae70b57100e2a5278e08279c5b8a33819cfc2175612",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 11,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "230892a13fa06878130f42d4c8f294d2ef71f647efb94c7a5510046acf2948e5",
+      "selected": null,
+      "truth": [
+        51040,
+        61600
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 12,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "ac1dc95dfaeb9e86f7f50160dd9f7b60f8d30a5afb110fd55679b55ecb9eef4c",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 12,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "d6657f3b8b422f522481d22e5e17d7a68fe6e47969975459ab1639f99aef7fe5",
+      "selected": null,
+      "truth": [
+        47840,
+        58080
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 12,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "72ff88ed3eee99826fd39de10baaef5fdc87f9b1dbc63f15c8a886c93a7b1cfb",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 12,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "a45f4c82bbe2582df3d083a4ae63e5c9a258da10264943f0a4a1927deb7ef7ee",
+      "selected": null,
+      "truth": [
+        47840,
+        58080
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 13,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "f44743bc6f6ec8538e073b2985b8a68e0ed2ee8725e8567bd1320aaed0fb33ee",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 13,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "50bc422145ef175ce805a92f69d9a357505418ec96bb36d4ddedd6fd2f718383",
+      "selected": null,
+      "truth": [
+        61920,
+        72320
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 13,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "09778992ca56086913dcb21aab7faa769c25aea4a5c9afdb5df6cdd97d41dc89",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 13,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "4ea59c37f4c23d693dc76acb7bd804fbfef5521e3c27e5a370eafbf1aabbc357",
+      "selected": [
+        48000,
+        80000
+      ],
+      "truth": [
+        61920,
+        72320
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 14,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "c967ecc848578ffb27aec67b71e58ed61f5049270b564ac0c82f471f395fb4b8",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 14,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "35d2781cad2a9f6f4d721a2edc42d02d3172d4b44fbaaca93a00522fab633c51",
+      "selected": [
+        0,
+        32000
+      ],
+      "truth": [
+        16320,
+        24160
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 14,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "45e7c5727d3d20d40eb552a67b551f9dd65fe307434899ecff1fc9b1011173b7",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 14,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "16d736a47b51910ac3ee88f4a504166d92bd5641c4e7c5058f12577433f785ea",
+      "selected": [
+        16000,
+        48000
+      ],
+      "truth": [
+        16320,
+        24160
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 15,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "a43c8ae923b46d7a6264b58a8de79c2f435d653c2250b43cd49c6d254098b502",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "dry",
+      "group": 15,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "7c22c790a3a46708723fe69015d726d981f67cd030039f19b7c40e6e4def4290",
+      "selected": null,
+      "truth": [
+        42080,
+        45280
+      ]
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 15,
+      "kind": "untouched",
+      "panel": "sine",
+      "pcm_sha256": "ea9fa0f5701f3d4c992d7e8f7cd8206bded75f43b97f402c83e801856b7f0f66",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 15,
+      "kind": "edited/sine",
+      "panel": "sine",
+      "pcm_sha256": "bb223c62e366a22ad6ae6e308591bb6ec85be4c80b98b29292762d888e93d9b0",
+      "selected": null,
+      "truth": [
+        42080,
+        45280
+      ]
+    },
+    {
+      "assessed": false,
+      "condition": "competing",
+      "group": 0,
+      "kind": "background",
+      "panel": "sine",
+      "pcm_sha256": "de2b04877314e0fbaba0661fc4eba0813ab2292a9ce2408a4d070a8795f3621a",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 1,
+      "kind": "background",
+      "panel": "sine",
+      "pcm_sha256": "12369b952aae7dfaea311030d09ceb9408fe6fc76002678c723efbb441526804",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 2,
+      "kind": "background",
+      "panel": "sine",
+      "pcm_sha256": "faefcacffb60a0c3a79ca9763d06ae7106eb9b0968c15efc5c383ecf97550a27",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": false,
+      "condition": "competing",
+      "group": 3,
+      "kind": "background",
+      "panel": "sine",
+      "pcm_sha256": "91fb01979f9d03731e57a73639f280a8476d37c53ff84bf09ab091edd149e4f4",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": false,
+      "condition": "competing",
+      "group": 4,
+      "kind": "background",
+      "panel": "sine",
+      "pcm_sha256": "1923f27457d37d39d0b9db8ec209fede58bbf759ef3e477bcd90db0e2098d1ea",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": false,
+      "condition": "competing",
+      "group": 5,
+      "kind": "background",
+      "panel": "sine",
+      "pcm_sha256": "877ac3b3afc4be53e6bb34f6d42cf70832ca6a14b20b16434b70f529042557d4",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 6,
+      "kind": "background",
+      "panel": "sine",
+      "pcm_sha256": "319b13dcf4f561cdd5fea709d8aa5ac8250aec6d5b2ddb2a82390d4b673fc6c4",
+      "selected": null,
+      "truth": null
+    },
+    {
+      "assessed": true,
+      "condition": "competing",
+      "group": 7,
+      "kind": "background",
+      "panel": "sine",
+      "pcm_sha256": "09644b648eef4d2adf4f8ed95f36378c61546804bb11e21a7c605a49af3c7244",
+      "selected": null,
+      "truth": null
+    }
+  ]
+}

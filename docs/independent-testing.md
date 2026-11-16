@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [stereo background-speech replay](audio-stereo-regression-2026-11-15.md#replay)
+separately measures physical channels and a mid-side filter on measured
+room responses and recorded competing speech. It recounts localization,
+ordinary flags and unchanged-room controls at fixed ordinary-only points.
+
 The [identical stereo input replay](audio-short-identical-stereo-2026-11-15.md#replay)
 checks one mono and three stereo uploads with the same decoded input. It
 verifies channel admission, the flagged interval, the PDF and JSON, and

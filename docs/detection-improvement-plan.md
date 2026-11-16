@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Separate stereo channel readings under loud speech](audio-stereo-regression-2026-11-15.md)
+  tested 150 held stereo deliveries. The tighter physical-channel fallback
+  raised correctly located edits from 3/80 to 5/80 and ordinary flags from
+  10/70 to 11/70. Both additional locations came from one scene. The wider
+  point reached 8/80 with 16/70 ordinary flags. The interference-reduced
+  view raised ordinary flags further and the candidates stay in evaluation.
+
 - [Short speech checks on identical stereo channels](audio-short-identical-stereo-2026-11-15.md)
   extend the app's six-second lossless coverage. The stereo WAV and FLAC
   replay the mono result's exact 4.000–6.000 s flag, waveform and nearby

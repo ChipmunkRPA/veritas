@@ -40,6 +40,7 @@
 {% for pair in check.pairs %}
 <article class="image-evidence-packet" id="image-evidence-{{ pair.id }}">
 <h4>{{ pair.id }} · {{ 'Rotated JPEG pair' if check.get('basis') == 'jpeg_turned_copy' else 'Exact rotated pair' if pair.get('transform') in ['rotate_90_ccw', 'rotate_180'] else label }}</h4>
+{% if pair.get('rotation_text') %}<p class="caption">{{ pair.rotation_text }}</p>{% endif %}
 {% if pair.get('selected_pixels') %}<p class="caption">White shows the selected comparison area. Area A contains {{ pair.selected_pixels.area_a }} selected pixels. Its projection onto Area B covers {{ pair.selected_pixels.area_b }} pixels.</p>{% endif %}
 <div class="evidence-plates {% if pair.get('selected_pixels') %}evidence-plates-four{% else %}evidence-plates-pair{% endif %}">
 {% for image in pair.images %}

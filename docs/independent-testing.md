@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [two rotated-copy pairs replay](image-jpeg-disjoint-rotation-2026-11-15.md#local-app-and-replay)
+checks both crop pairs against the labeled locations, replays the previous
+single-edit results on the same bytes, and verifies that the browser, PDF,
+JSON and signed archive use the same source crops and measurements.
+
 The [editorial direction replay](writing-editorial-direction-transfer-2026-11-15.md#replay)
 checks locality on 208 original-and-rewrite work pairs and ordinary
 alerts on 120 dated revision pairs. The native commands recreate the

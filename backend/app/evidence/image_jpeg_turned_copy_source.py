@@ -16,17 +16,21 @@ def _supported(data, *, expanded, offgrid_status, native):
     return offgrid_status == "no_pair" and (profile in {75, 90} or expanded and profile == 85)
 
 
-def review(data, rgb, *, expanded=False, offgrid_status="no_pair", native=False):
+def review(data, rgb, *, expanded=False, offgrid_status="no_pair", native=False, allow_disjoint=False):
     if not _supported(data, expanded=expanded, offgrid_status=offgrid_status, native=native):
         return {"status": "unsupported_profile", "measurement": None}, [], 0
     if native:
         from app.detectors.image import jpeg_native_turned_copy
 
-        status, candidates = jpeg_native_turned_copy.analyse(rgb)
+        status, candidates = (jpeg_native_turned_copy.analyse(rgb, allow_disjoint=True) if allow_disjoint
+                              else jpeg_native_turned_copy.analyse(rgb))
     else:
         status, candidates = jpeg_turned_copy.analyse(rgb)
     if not candidates:
         return {"status": status, "measurement": None}, [], 0
+    if len(candidates) == 2:
+        return ({"status": status, "measurement": None, "measurements": [match["measurement"] for match in candidates]},
+                [match["pair"] for match in candidates], tuple(match["turns"] for match in candidates))
     match, = candidates
     return {"status": status, "measurement": match["measurement"]}, [match["pair"]], match["turns"]
 
@@ -44,3 +48,11 @@ def verify(data, rgb, pair, measurement, *, expanded=False, offgrid_status="no_p
         raise ValueError("The original JPEG crops could not be aligned for comparison") from error
     if actual is None or actual != measurement:
         raise ValueError("Rotated JPEG color measurements differ from the submitted image")
+
+
+def verify_pairs(data, rgb, translation, *, expanded, native):
+    review = translation["jpeg_turned_review"]
+    measurements = review.get("measurements", [review["measurement"]])
+    for pair, measurement in zip(translation["pairs"], measurements, strict=True):
+        verify(data, rgb, pair, measurement, expanded=expanded, native=native,
+               offgrid_status=(translation["jpeg_offgrid_review"] or {}).get("status"))

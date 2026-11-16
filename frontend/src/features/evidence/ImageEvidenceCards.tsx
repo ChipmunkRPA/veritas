@@ -205,8 +205,8 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const sectionId = `image-${field.replace('_', '-')}`
   const baseVersion = set.prior_embedded_pair_evidence?.version ?? set.version
   const turnedReview = ['image-evidence-22', 'image-evidence-23'].includes(baseVersion)
-  const nativeJpegVersion = ['image-evidence-28', 'image-evidence-29'].includes(baseVersion)
-  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29'].includes(baseVersion))
+  const nativeJpegVersion = ['image-evidence-28', 'image-evidence-29', 'image-evidence-30', 'image-evidence-31'].includes(baseVersion)
+  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29', 'image-evidence-31'].includes(baseVersion))
     || (reflected && (turnedReview || ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12',
       'image-evidence-13', 'image-evidence-14', 'image-evidence-16', 'image-evidence-17', 'image-evidence-18',
       'image-evidence-19', 'image-evidence-20', 'image-evidence-21', 'image-evidence-24', 'image-evidence-25',
@@ -216,6 +216,7 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const offgrid = field === 'copy_translation' ? set.copy_translation?.jpeg_offgrid_review : undefined
   const turnedJpeg = field === 'copy_translation' ? set.copy_translation?.jpeg_turned_review : undefined
   const nativeJpeg = Boolean(nativeJpegVersion && turnedJpeg && !offgrid)
+  const separateMeasurements = turnedJpeg?.measurements
   const smallPng = field === 'copy_translation' ? set.copy_translation?.small_png_copy_review : undefined
   const turned = (basis === 'png_exact_turned_copy' || basis === 'jpeg_turned_copy') && set.copy_translation?.pairs[0]?.transform
   const rotation = turned === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'
@@ -229,7 +230,8 @@ function CopySimilarity({ set, field, token, mediaReady }: {
         : basis && basis in copyBasisText && check.pairs.length > 0 && copyBasisText[basis as keyof typeof copyBasisText]
   const proposalSearch = geometric ? set.copy_affine?.proposal_search : undefined
   const statusText = {
-    supported_pair: turned ? `Area B ${basis === 'jpeg_turned_copy' ? 'closely matches Area A' : 'matches Area A exactly'} after rotating it ${rotation}.`
+    supported_pair: separateMeasurements ? 'Two separate pairs of rotated areas share closely matching detail.'
+      : turned ? `Area B ${basis === 'jpeg_turned_copy' ? 'closely matches Area A' : 'matches Area A exactly'} after rotating it ${rotation}.`
       : geometric ? 'Matching detail was found after geometric alignment.'
       : reflected ? 'Similar areas were found after horizontal reflection.' : 'Similar image detail was found without mirroring.',
     no_pair: geometric ? 'None of the distinct candidates examined had enough shared detail after alignment.'
@@ -261,8 +263,13 @@ function CopySimilarity({ set, field, token, mediaReady }: {
     </p>}
     {proposalSearch?.basis === 'reduced' && <p className="mt-2 mb-0 text-caption text-text-muted">The candidate search used a {proposalSearch.width} × {proposalSearch.height} pixel working image. The check measured any matching masks on the original pixel grid.</p>}
     {check.pairs.length > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">Coordinates use native pixels in the oriented original.</p>}
-    {check.pairs.map(pair => <article key={pair.id} className="mt-4 border-t border-border pt-4">
+    {check.pairs.map((pair, pairIndex) => <article key={pair.id} className="mt-4 border-t border-border pt-4">
       <h4 className="m-0 text-small font-medium text-text">{pair.id} · {basis === 'jpeg_turned_copy' ? 'Rotated JPEG pair' : turned ? 'Exact rotated pair' : geometric ? 'Matched source areas' : reflected ? 'Reflected pair' : 'Non-mirrored pair'}</h4>
+      {separateMeasurements && 'transform' in pair && <p className="mt-2 mb-0 text-caption text-text-muted">
+        Rotate Area B {pair.transform === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'} to align with Area A.{' '}
+        Mean RGB difference inside {separateMeasurements[pairIndex].interior_mean.toFixed(2)} of 255 levels.{' '}
+        Surrounding differences (left, right, top, bottom) {separateMeasurements[pairIndex].perimeter_means.map(value => value?.toFixed(2) ?? 'unavailable').join(', ')}.
+      </p>}
       <CopyLocations set={set} sourceHash={check.source_sha256} regions={pair.regions} token={token} mediaReady={mediaReady} />
       <div className="mt-3 grid grid-cols-2 gap-4 max-[639px]:grid-cols-1">
         {copyAreas.map((role, index) => {

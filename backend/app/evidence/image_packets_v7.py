@@ -20,6 +20,9 @@ from app.evidence import image_packets_v5 as prior
 from app.evidence.image_copy_similarity_binding import (
     AFFINE_VERSIONS,
     CREDENTIAL_VERSIONS,
+    DISJOINT_JPEG_ROTATION_AFFINE_VERSION,
+    DISJOINT_JPEG_ROTATION_VERSION,
+    DISJOINT_JPEG_ROTATION_VERSIONS,
     EXPANDED_JPEG_ROTATION_AFFINE_VERSION,
     EXPANDED_JPEG_ROTATION_VERSION,
     EXPANDED_JPEG_ROTATION_VERSIONS,
@@ -79,7 +82,9 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
 CREATOR = "image-evidence-packets/10"
-_CREATORS = {NATIVE_JPEG_ROTATION_AFFINE_VERSION: "image-evidence-packets/27",
+_CREATORS = {DISJOINT_JPEG_ROTATION_AFFINE_VERSION: "image-evidence-packets/29",
+             DISJOINT_JPEG_ROTATION_VERSION: "image-evidence-packets/28",
+             NATIVE_JPEG_ROTATION_AFFINE_VERSION: "image-evidence-packets/27",
              NATIVE_JPEG_ROTATION_VERSION: "image-evidence-packets/26",
              EXPANDED_JPEG_ROTATION_AFFINE_VERSION: "image-evidence-packets/25",
              EXPANDED_JPEG_ROTATION_VERSION: "image-evidence-packets/24",
@@ -111,6 +116,8 @@ def _active_version() -> str:
 def _analysis_version(analysis: Analysis) -> str:
     if settings.environment == "dev" and settings.image_turned_jpeg_copy_review and analysis.content_type == "image/jpeg":
         if settings.image_jpeg_native_rotation_review:
+            if settings.image_jpeg_disjoint_rotation_review:
+                return DISJOINT_JPEG_ROTATION_AFFINE_VERSION if settings.image_affine_copy_review else DISJOINT_JPEG_ROTATION_VERSION
             return NATIVE_JPEG_ROTATION_AFFINE_VERSION if settings.image_affine_copy_review else NATIVE_JPEG_ROTATION_VERSION
         return EXPANDED_JPEG_ROTATION_AFFINE_VERSION if settings.image_affine_copy_review else EXPANDED_JPEG_ROTATION_VERSION
     if settings.environment == "dev" and settings.image_small_png_copy_review and analysis.content_type == "image/png":
@@ -214,13 +221,12 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
         except (OSError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
     if translation.get("basis") == TURNED_JPEG_BASIS:
-        from app.evidence.image_jpeg_turned_copy_source import verify
+        from app.evidence.image_jpeg_turned_copy_source import verify_pairs
 
         try:
-            verify(legacy._verified(store, document["source"]["sha256"]), np.asarray(source), translation["pairs"][0],
-                   translation["jpeg_turned_review"]["measurement"], expanded=document["version"] in EXPANDED_JPEG_ROTATION_VERSIONS,
-                   offgrid_status=(translation["jpeg_offgrid_review"] or {}).get("status"),
-                   native=document["version"] in NATIVE_JPEG_ROTATION_VERSIONS and native_rotation_size(*source.size))
+            verify_pairs(legacy._verified(store, document["source"]["sha256"]), np.asarray(source), translation,
+                         expanded=document["version"] in EXPANDED_JPEG_ROTATION_VERSIONS,
+                         native=document["version"] in NATIVE_JPEG_ROTATION_VERSIONS and native_rotation_size(*source.size))
         except (OSError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
 
@@ -255,9 +261,10 @@ def selected_translation_pairs(rgb: np.ndarray) -> tuple[str, list[tuple[copy_mo
 
 
 def _copy_record(db: Session, analysis: Analysis, store: ObjectStore, document: dict, source: Image.Image | None,
-                 status: str, boxes: list, *, reflected: bool, turns: int = 0) -> dict:
+                 status: str, boxes: list, *, reflected: bool, turns: int | tuple[int, ...] = 0) -> dict:
     pairs = []
-    for index, areas in enumerate(boxes, 1):
+    rotations = (turns,) * len(boxes) if isinstance(turns, int) else turns
+    for index, (areas, rotation) in enumerate(zip(boxes, rotations, strict=True), 1):
         if source is None:
             raise PacketIntegrityError("Copy similarity evidence is missing its source image")
         regions, artifacts = {}, {}
@@ -270,7 +277,7 @@ def _copy_record(db: Session, analysis: Analysis, store: ObjectStore, document: 
             artifacts[role] = {"sha256": art.sha256, "media_type": "image/png", "width": crop.width,
                                "height": crop.height, "url": url(document, art.sha256)}
         pairs.append({"id": f"{'R' if reflected else 'T'}{index:02d}",
-                      "transform": "horizontal_reflection" if reflected else PNG_COPY_TRANSFORMS[turns],
+                      "transform": "horizontal_reflection" if reflected else PNG_COPY_TRANSFORMS[rotation],
                       "regions": regions, "artifacts": artifacts})
     return {"schema": SCHEMA if reflected else TRANSLATION_SCHEMA,
             "source_sha256": analysis.sha256, "coordinate_space": "exif-oriented-original", "status": status,
@@ -403,7 +410,7 @@ def build_packet_set(
         data = legacy._verified(store, analysis.sha256)
         try:
             turned_jpeg_review, extra, turns = image_jpeg_turned_copy_source.review(
-                data, np.asarray(source), native=True, offgrid_status=None)
+                data, np.asarray(source), native=True, offgrid_status=None, allow_disjoint=version in DISJOINT_JPEG_ROTATION_VERSIONS)
         except (cv2.error, OSError, ValueError, SystemError):
             turned_jpeg_review, extra = {"status": "unavailable", "measurement": None}, []
         translation_status = "supported_pair" if extra else "no_pair"

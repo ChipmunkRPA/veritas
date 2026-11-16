@@ -12,6 +12,7 @@ from app.detectors.image import jpeg_turned_copy
 from app.detectors.image.copy_move import iou
 from app.detectors.image.exact_turned_copy import _source_box
 from app.detectors.image.jpeg_offgrid_copy import _correlation_field
+from app.evidence.image_copy_similarity_binding import disjoint_copy_regions
 
 TILE = 160
 CORNERS_PER_TILE = 28
@@ -149,7 +150,21 @@ def _regions(gray, rotated, band, rotated_band, shifts, turns):
                 yield count, area, (first, second), aligned
 
 
-def analyse(rgb):
+def select(matches, *, allow_disjoint=False):
+    if not matches:
+        return "no_pair", []
+    selected = []
+    for _, _, pair, turns, witness in sorted(matches, key=lambda item: item[:4], reverse=True):
+        if any(turns == item["turns"] and jpeg_turned_copy._same_pair(pair, item["pair"]) for item in selected):
+            continue
+        if selected and (not allow_disjoint or len(selected) == 2
+                         or not all(disjoint_copy_regions(pair, item["pair"]) for item in selected)):
+            return "ambiguous", []
+        selected.append({"pair": pair, "turns": turns, "measurement": witness})
+    return "supported_pair", selected
+
+
+def candidates(rgb):
     height, width = rgb.shape[:2]
     if not 1024 <= min(height, width) <= max(height, width) <= 3072 or max(height, width) <= 1024:
         return "unsupported_profile", []
@@ -176,12 +191,9 @@ def analyse(rgb):
                 color = jpeg_turned_copy._color(rgb)
             if witness := jpeg_turned_copy._measure(color, np.rot90(color, turns), (pair[0], aligned)):
                 matches.append((count, area, pair, turns, witness))
-    if not matches:
-        return "no_pair", []
-    _, _, pair, turns, witness = max(matches, key=lambda item: item[:4])
-    if any(
-        other_turn != turns or not jpeg_turned_copy._same_pair(other_pair, pair)
-        for _, _, other_pair, other_turn, _ in matches
-    ):
-        return "ambiguous", []
-    return "supported_pair", [{"pair": pair, "turns": turns, "measurement": witness}]
+    return "supported_pair" if matches else "no_pair", matches
+
+
+def analyse(rgb, *, allow_disjoint=False):
+    status, matches = candidates(rgb)
+    return select(matches, allow_disjoint=allow_disjoint) if matches else (status, [])

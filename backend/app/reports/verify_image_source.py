@@ -223,13 +223,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if turned_jpeg:
             import numpy as np
 
-            from app.evidence.image_jpeg_turned_copy_source import verify
+            from app.evidence.image_jpeg_turned_copy_source import verify_pairs
 
             version = embedded_pair.base_document(evidence)["version"]
-            verify(data, np.asarray(source), translation["pairs"][0], translation["jpeg_turned_review"]["measurement"],
-                   expanded=version in EXPANDED_JPEG_ROTATION_VERSIONS,
-                   offgrid_status=(translation["jpeg_offgrid_review"] or {}).get("status"),
-                   native=version in NATIVE_JPEG_ROTATION_VERSIONS and native_rotation_size(*source.size))
+            verify_pairs(data, np.asarray(source), translation, expanded=version in EXPANDED_JPEG_ROTATION_VERSIONS,
+                         native=version in NATIVE_JPEG_ROTATION_VERSIONS and native_rotation_size(*source.size))
     if pair is not None:
         from app.evidence import image_embedded_pair_pixels as embedded_pixels
 
@@ -267,7 +265,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if offgrid:
         detail += ' Recomputed the recorded color differences inside and around the two selected JPEG crops.'
     if turned_jpeg:
-        detail += " Recomputed the color differences inside and around the two selected JPEG crops after rotation."
+        number = "four" if len(translation["pairs"]) == 2 else "two"
+        detail += f" Recomputed the color differences inside and around the {number} selected JPEG crops after rotation."
     if repeated:
         detail += f' Recomputed repeat-pass overlap for {repeated} source regions from their recorded masks.'
     if quality:

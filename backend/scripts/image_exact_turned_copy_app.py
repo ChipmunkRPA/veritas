@@ -49,20 +49,25 @@ def report(client, aid, input_path, evidence, pair, exports, *, jpeg=False):
     wait(client, f"/api/v2/reports/{listed['id']}")
     pdf = fetch(client, f"/api/v2/reports/{listed['id']}/file")
     exports.with_suffix(".pdf").write_bytes(pdf)
-    images = {pixels(fetch(client, asset["url"])) for asset in pair["artifacts"].values()}
+    pairs = pair if isinstance(pair, list) else [pair]
+    images = {pixels(fetch(client, asset["url"])) for item in pairs for asset in item["artifacts"].values()}
     with pymupdf.open(stream=pdf, filetype="pdf") as document:
         words = " ".join(" ".join(page.get_text().split()) for page in document)
         scan(words)
-        direction = "90° counterclockwise" if pair["transform"] == "rotate_90_ccw" else "180°"
-        summary = "closely matches Area A" if jpeg else "matches Area A exactly"
-        assert f"Area B {summary} after rotating it {direction}." in words
-        assert ("Rotated JPEG pair" if jpeg else "Exact rotated pair") in words
-        for region in pair["regions"].values():
-            coordinates = f"x {region['x']}, y {region['y']}, {region['w']} x {region['h']} px"
-            assert coordinates in words.replace("×", "x")
+        for item in pairs:
+            direction = "90° counterclockwise" if item["transform"] == "rotate_90_ccw" else "180°"
+            if len(pairs) == 1:
+                summary = "closely matches Area A" if jpeg else "matches Area A exactly"
+                assert f"Area B {summary} after rotating it {direction}." in words
+            else:
+                assert f"Rotate Area B {direction} to align with Area A." in words
+            assert ("Rotated JPEG pair" if jpeg else "Exact rotated pair") in words
+            for region in item["regions"].values():
+                coordinates = f"x {region['x']}, y {region['y']}, {region['w']} x {region['h']} px"
+                assert coordinates in words.replace("×", "x")
         embedded = {pixels(document.extract_image(ref)["image"])
                     for ref in {image[0] for page in document for image in page.get_images(full=True)}}
-        assert images <= embedded and len(images) == 2
+        assert images <= embedded and len(images) == 2 * len(pairs)
     package = body(client.post(f"/api/v2/analyses/{aid}/packages",
                                json={"report_id": listed["id"], "kind": "draft", "include_original": False}))
     wait(client, f"/api/v2/packages/{package['id']}")

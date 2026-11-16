@@ -14,25 +14,31 @@ try {
   const errors = []
   const checked = []
   page.on('pageerror', error => errors.push(error.message))
-  for (const { analysis_id, name, pair } of input.cases) {
+  for (const { analysis_id, name, pair, pairs } of input.cases) {
     await page.goto(`${input.url}/analyses/${analysis_id}?view=plain`)
     const evidence = page.getByRole('region', { name: 'Copy similarity without mirroring' })
-    const rotation = pair.transform === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'
-    await evidence.getByText(`Area B closely matches Area A after rotating it ${rotation}.`, { exact: true }).waitFor()
+    const items = pairs ?? [pair]
+    if (pairs) await evidence.getByText('Two separate pairs of rotated areas share closely matching detail.', { exact: true }).waitFor()
     await evidence.getByText('This check carries zero weight in AI authorship confidence.').waitFor()
-    await evidence.getByText('Show both areas on the original image').click()
-    await evidence.getByText(/The outlines locate Areas A and B/).waitFor()
-    for (const [area, label] of [['area_a', 'Area A'], ['area_b', 'Area B']]) {
-      const box = pair.regions[area]
-      await evidence.getByText(`x ${box.x}, y ${box.y}, ${box.w} × ${box.h} px`, { exact: true }).first().waitFor()
-      const link = evidence.getByRole('link', { name: `Inspect ${label} in the original image` })
-      const caption = evidence.getByRole('link', { name: `${label} in the original image`, exact: true })
-      assert.equal(await link.getAttribute('href'), await caption.getAttribute('href'))
-      const crop = evidence.getByRole('img', { name: `${pair.id}: ${label} cropped from the submitted image` })
-      await crop.waitFor()
-      assert.equal(await crop.evaluate(image => image.decode().then(() => image.naturalWidth)), box.w)
-      assert.equal(await crop.evaluate(image => image.naturalHeight), box.h)
-      assert.ok((await crop.getAttribute('src')).includes(pair.artifacts[area].sha256))
+    for (const item of items) {
+      const rotation = item.transform === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'
+      const card = evidence.getByRole('article').filter({ has: page.getByRole('heading', { name: `${item.id} · Rotated JPEG pair` }) })
+      if (pairs) await card.getByText(`Rotate Area B ${rotation} to align with Area A.`, { exact: false }).waitFor()
+      else await evidence.getByText(`Area B closely matches Area A after rotating it ${rotation}.`, { exact: true }).waitFor()
+      await card.getByText('Show both areas on the original image').click()
+      await card.getByText(/The outlines locate Areas A and B/).waitFor()
+      for (const [area, label] of [['area_a', 'Area A'], ['area_b', 'Area B']]) {
+        const box = item.regions[area]
+        await card.getByText(`x ${box.x}, y ${box.y}, ${box.w} × ${box.h} px`, { exact: true }).first().waitFor()
+        const link = card.getByRole('link', { name: `Inspect ${label} in the original image` })
+        const caption = card.getByRole('link', { name: `${label} in the original image`, exact: true })
+        assert.equal(await link.getAttribute('href'), await caption.getAttribute('href'))
+        const crop = card.getByRole('img', { name: `${item.id}: ${label} cropped from the submitted image` })
+        await crop.waitFor()
+        assert.equal(await crop.evaluate(image => image.decode().then(() => image.naturalWidth)), box.w)
+        assert.equal(await crop.evaluate(image => image.naturalHeight), box.h)
+        assert.ok((await crop.getAttribute('src')).includes(item.artifacts[area].sha256))
+      }
     }
     assert.doesNotMatch(await evidence.innerText(), /matches Area A exactly|examiner.s conclusion|sign.off/i)
     await evidence.screenshot({ path: path.join(input.output, `${name}-browser.png`), animations: 'disabled' })

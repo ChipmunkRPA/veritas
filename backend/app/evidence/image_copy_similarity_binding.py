@@ -27,7 +27,11 @@ EXPANDED_JPEG_ROTATION_VERSION = "image-evidence-26"
 EXPANDED_JPEG_ROTATION_AFFINE_VERSION = "image-evidence-27"
 NATIVE_JPEG_ROTATION_VERSION = "image-evidence-28"
 NATIVE_JPEG_ROTATION_AFFINE_VERSION = "image-evidence-29"
-NATIVE_JPEG_ROTATION_VERSIONS = frozenset({NATIVE_JPEG_ROTATION_VERSION, NATIVE_JPEG_ROTATION_AFFINE_VERSION})
+DISJOINT_JPEG_ROTATION_VERSION = "image-evidence-30"
+DISJOINT_JPEG_ROTATION_AFFINE_VERSION = "image-evidence-31"
+DISJOINT_JPEG_ROTATION_VERSIONS = frozenset({DISJOINT_JPEG_ROTATION_VERSION, DISJOINT_JPEG_ROTATION_AFFINE_VERSION})
+NATIVE_JPEG_ROTATION_VERSIONS = DISJOINT_JPEG_ROTATION_VERSIONS | {NATIVE_JPEG_ROTATION_VERSION, NATIVE_JPEG_ROTATION_AFFINE_VERSION}
+DISJOINT_ROTATION_MARGIN = 16
 TURNED_PNG_VERSIONS = frozenset({TURNED_PNG_COPY_VERSION, TURNED_PNG_COPY_AFFINE_VERSION})
 SMALL_PNG_VERSIONS = TURNED_PNG_VERSIONS | {SMALL_PNG_COPY_VERSION, SMALL_PNG_COPY_AFFINE_VERSION}
 EXPANDED_JPEG_ROTATION_VERSIONS = NATIVE_JPEG_ROTATION_VERSIONS | {EXPANDED_JPEG_ROTATION_VERSION, EXPANDED_JPEG_ROTATION_AFFINE_VERSION}
@@ -52,7 +56,7 @@ VERSION = V12
 AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_AFFINE_VERSION,
                              SMALL_PNG_COPY_AFFINE_VERSION, TURNED_PNG_COPY_AFFINE_VERSION,
                              TURNED_JPEG_COPY_AFFINE_VERSION, EXPANDED_JPEG_ROTATION_AFFINE_VERSION,
-                             NATIVE_JPEG_ROTATION_AFFINE_VERSION})
+                             NATIVE_JPEG_ROTATION_AFFINE_VERSION, DISJOINT_JPEG_ROTATION_AFFINE_VERSION})
 CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12} | JPEG_BLOCK_VERSIONS | SMALL_PNG_VERSIONS
 TRANSLATION_VERSIONS = CREDENTIAL_VERSIONS | {V10, V11}
 BASIS_VERSIONS = CREDENTIAL_VERSIONS | {V11}
@@ -132,6 +136,12 @@ def supported_size(width: int, height: int, *, version: str = VERSION) -> bool:
 def native_rotation_size(width: int, height: int) -> bool:
     short, long = sorted((width, height))
     return short >= 1024 and 1024 < long <= 3072
+
+
+def disjoint_copy_regions(first, second) -> bool:
+    gap = DISJOINT_ROTATION_MARGIN
+    return all(ax + aw + gap <= bx or bx + bw + gap <= ax or ay + ah + gap <= by or by + bh + gap <= ay
+               for ax, ay, aw, ah in first for bx, by, bw, bh in second)
 
 
 def status_text(status: str, *, version: str) -> str:
@@ -256,16 +266,25 @@ def rotation_review_follows(offgrid_review: dict | None, *, expanded: bool) -> b
     return status == "no_pair" or expanded and status == "unsupported_profile"
 
 
-def _validate_turned_jpeg(record: dict | None, offgrid_review: dict | None, *, expanded: bool, native: bool) -> bool:
+def _validate_turned_jpeg(record: dict | None, offgrid_review: dict | None, *, expanded: bool, native: bool,
+                          allow_disjoint: bool) -> int:
     should_run = native or rotation_review_follows(offgrid_review, expanded=expanded)
     if record is None and not should_run:
-        return False
-    if not should_run or not isinstance(record, dict) or set(record) != {"status", "measurement"}:
+        return 0
+    if not should_run or not isinstance(record, dict):
         raise ValueError("Rotated JPEG coverage does not follow its recorded between-block comparison")
+    if set(record) == {"status", "measurement", "measurements"}:
+        values = record["measurements"]
+        if (not native or not allow_disjoint or record["status"] != "supported_pair" or record["measurement"] is not None
+                or not isinstance(values, list) or len(values) != 2 or not all(_validate_jpeg_measurement(value) for value in values)):
+            raise ValueError("Two distinct rotations require two measured pairs on the native JPEG grid")
+        return 2
+    if set(record) != {"status", "measurement"}:
+        raise ValueError("Rotated JPEG coverage has unexpected fields")
     status, measurement = record["status"], record["measurement"]
     if status not in TURNED_JPEG_STATUS_TEXT or (status == "supported_pair") != (measurement is not None):
         raise ValueError("Rotated JPEG comparison has an invalid status")
-    return _validate_jpeg_measurement(measurement)
+    return int(_validate_jpeg_measurement(measurement))
 
 
 def _validate_jpeg_measurement(measurement: dict | None) -> bool:
@@ -367,7 +386,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         raise ValueError("Between-block JPEG evidence must contain one measured pair")
     turned_jpeg_pair = has_turned_jpeg_review and _validate_turned_jpeg(
         record["jpeg_turned_review"], record["jpeg_offgrid_review"], expanded=document["version"] in EXPANDED_JPEG_ROTATION_VERSIONS,
-        native=native_rotation and not skipped)
+        native=native_rotation and not skipped, allow_disjoint=document["version"] in DISJOINT_JPEG_ROTATION_VERSIONS)
     if native_rotation:
         if record["jpeg_block_review"] is not None or record["jpeg_offgrid_review"] is not None:
             raise ValueError("Native rotation evidence cannot attest to the smaller JPEG comparisons")
@@ -376,8 +395,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
                 or nested is not None and nested["status"] != "unsupported_profile"
                 and document["source"]["exif_orientation"] != 1):
             raise ValueError("Native rotation evidence differs from its recorded source or result")
-    if turned_jpeg_pair and len(pairs) != 1:
-        raise ValueError("Rotated JPEG evidence must contain one measured pair")
+    if turned_jpeg_pair and len(pairs) != turned_jpeg_pair:
+        raise ValueError("Rotated JPEG evidence must contain the recorded measured pairs")
     small_png_pair = False
     if has_small_png_review and (review := record["small_png_copy_review"]) is not None:
         small_png_pair = _validate_small_png(review)
@@ -408,6 +427,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
                 or (jpeg_status != "unsupported_profile" and document["source"]["exif_orientation"] != 1))
                 or jpeg_pair and not pairs):
             raise ValueError("JPEG block coverage differs from the completed copy check")
+    measured_boxes = []
     for index, pair in enumerate(pairs, 1):
         turned = record.get("basis") in {TURNED_PNG_BASIS, TURNED_JPEG_BASIS}
         transforms = (("horizontal_reflection",) if reflected else
@@ -455,3 +475,6 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
             raise ValueError("Between-block JPEG pair is outside its measured geometry")
         if turned_jpeg_pair and not OFFGRID_MIN_SIDE <= min(aw, ah) <= max(aw, ah) <= OFFGRID_MAX_SIDE:
             raise ValueError("Rotated JPEG pair is outside its measured geometry")
+        measured_boxes.append(boxes)
+    if turned_jpeg_pair == 2 and not disjoint_copy_regions(*measured_boxes):
+        raise ValueError("The two rotated copy pairs must have four distinct source crops")

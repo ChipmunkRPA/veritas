@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Two rotated-copy pairs in a larger JPEG](image-jpeg-disjoint-rotation-2026-11-15.md)
+  locates both pairs in 26/40 staged double edits, up from 0/40. It adds
+  one misplaced pair and no flags on 109 ordinary controls. The local
+  app shows separate source crops and measurements for each pair in the
+  browser, PDF and JSON. The observation has zero AI confidence weight.
+
 - [Remove directions learned from ordinary writing revisions](writing-editorial-direction-transfer-2026-11-15.md)
   uses 180 dated editorial pairs. It reduces ordinary flags from 14/84
   to 9/84 at the tighter point while keeping one useful location. At

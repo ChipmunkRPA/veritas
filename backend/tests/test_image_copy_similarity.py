@@ -33,6 +33,29 @@ from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis
 
 
+def test_native_rotation_can_keep_two_disjoint_pairs_and_declines_shared_or_third_pairs():
+    from app.detectors.image.jpeg_native_turned_copy import select
+    from app.evidence.image_copy_similarity_binding import _validate_turned_jpeg
+
+    witness = {"interior_mean": 1., "interior_p90": 2., "perimeter_means": [10., 11., 12., 13.]}
+    a = ((32, 32, 48, 48), (160, 32, 48, 48))
+    b = ((32, 160, 48, 48), (160, 160, 48, 48))
+    match_a, match_b = (5, 100, a, 1, witness), (4, 90, b, 2, witness)
+    assert select([match_a, match_b]) == ("ambiguous", [])
+    status, pairs = select([match_a, match_b], allow_disjoint=True)
+    assert status == "supported_pair" and [item["turns"] for item in pairs] == [1, 2]
+    shared = (4, 90, (a[0], b[1]), 2, witness)
+    near = (4, 90, ((95, 32, 48, 48), b[1]), 2, witness)
+    third = (3, 80, ((320, 32, 48, 48), (480, 32, 48, 48)), 1, witness)
+    assert select([match_a, shared], allow_disjoint=True) == ("ambiguous", [])
+    assert select([match_a, near], allow_disjoint=True) == ("ambiguous", [])
+    assert select([match_a, match_b, third], allow_disjoint=True) == ("ambiguous", [])
+    nested = {"status": "supported_pair", "measurement": None, "measurements": [witness, witness]}
+    assert _validate_turned_jpeg(nested, None, expanded=True, native=True, allow_disjoint=True) == 2
+    with pytest.raises(ValueError, match="two measured pairs"):
+        _validate_turned_jpeg(nested, None, expanded=True, native=True, allow_disjoint=False)
+
+
 def authored_source(*, reflected: bool) -> Image.Image:
     rng = np.random.default_rng(812)
     pixels = rng.integers(0, 256, (512, 768, 3), dtype=np.uint8)

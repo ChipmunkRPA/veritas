@@ -183,8 +183,18 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                     if review["status"] in {"supported_pair", "no_pair"}:
                         check["basis_text"] += " The rotation check used the original pixel grid."
                 if check.get("basis") == TURNED_JPEG_BASIS:
-                    turns = "90° counterclockwise" if check["pairs"][0]["transform"] == "rotate_90_ccw" else "180°"
-                    check["observation"] = f"Area B closely matches Area A after rotating it {turns}."
+                    if measurements := review.get("measurements"):
+                        check["observation"] = "Two separate pairs of rotated areas share closely matching detail."
+                        for pair, measured in zip(check["pairs"], measurements, strict=True):
+                            turns = "90° counterclockwise" if pair["transform"] == "rotate_90_ccw" else "180°"
+                            perimeter = ", ".join("unavailable" if value is None else f"{value:.2f}"
+                                                  for value in measured["perimeter_means"])
+                            pair["rotation_text"] = (f"Rotate Area B {turns} to align with Area A. "
+                                                     f"Mean RGB difference inside {measured['interior_mean']:.2f} of 255 levels. "
+                                                     f"Surrounding differences (left, right, top, bottom) {perimeter}.")
+                    else:
+                        turns = "90° counterclockwise" if check["pairs"][0]["transform"] == "rotate_90_ccw" else "180°"
+                        check["observation"] = f"Area B closely matches Area A after rotating it {turns}."
                 if measured := review["measurement"]:
                     perimeter = ", ".join("unavailable" if value is None else f"{value:.2f}"
                                           for value in measured["perimeter_means"])

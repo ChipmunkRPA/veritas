@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Temporal texture on whole-clip face swaps](video-whole-face-temporal-transfer-2026-11-16.md)
+  measures 22 fresh groups with two swap engines and matched originals.
+  The temporal candidates flag 0/88 swaps. The current paired face
+  review flags 35/44 direct and 22/44 strongly recompressed swaps, with
+  5/22 and 6/22 ordinary alerts. Exact clocks and a portable verification
+  package cover the tests.
+
 - [Separate rewritten passages in one document](writing-multi-passage-transfer-2026-11-16.md)
   compares 49 held originals and their two-rewrite versions in two
   layouts. With a shared calibration, combined intervals locate 24/98

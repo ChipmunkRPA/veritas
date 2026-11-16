@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [whole-clip face-swap replay](video-whole-face-temporal-transfer-2026-11-16.md#replay)
+replays the app's six-frame comparison and nine temporal
+fits on direct and tandem encodes. Its numeric receipt can be read
+without media. A separate native replay restores the same source bytes
+using the pinned publisher index and verifies the delivered frame clocks.
+
 The [separate writing passages replay](writing-multi-passage-transfer-2026-11-16.md#replay)
 recounts one-to-one passage matches and ordinary alerts on 49 held
 excerpts. It compares both published and layout-neutral delivery and

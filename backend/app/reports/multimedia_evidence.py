@@ -1140,9 +1140,10 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                       "first_refined": position == coarse_count and boundary_count > 0,
                                       "cut_frame": position >= coarse_count + boundary_count,
                                       "first_cut": position == coarse_count + boundary_count,
-                                      "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact decoded source frame" if hold or repeated_sequence or mouth_hold or scene_return or lip_timing else "Exact analysed source frame", "context": "Frame context", "crop": "Exact measured mouth-region crop" if mouth_hold or lip_timing else "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
+                                      "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact decoded source frame" if hold or repeated_sequence or mouth_hold or scene_return or lip_timing else "Exact analysed source frame", "context": "Frame context", "crop": "Exact crop from the wider source frame" if frame["region_meaning"] == "matched_frame_crop" else "Exact measured mouth-region crop" if mouth_hold or lip_timing else "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
                                                  for role in ("original", "context", "crop", "measured_patch")
-                                                 if role in frame["artifact_refs"] and (not (hold or repeated_sequence or scene_return) or role == "original")
+                                                 if role in frame["artifact_refs"] and (not (hold or repeated_sequence or scene_return) or role == "original"
+                                                                                        or (role == "crop" and frame["region_meaning"] == "matched_frame_crop"))
                                                  and (not (mouth_hold or lip_timing) or role != "context")]})
         elif packet_kind == "audio":
             row["images"] = [plate(role, packet["artifacts"][role]) for role in ("waveform", "scores")]
@@ -1278,6 +1279,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             if repeat := row["picture_sequence"]:
                 label = ("Ranges at two playback speeds " if repeat.get("frame_steps") else
                          "Mirrored ranges " if repeat.get("spatial_transform") == "horizontal_reflection" else
+                         "Ranges with matching footage after cropping " if repeat.get("framing") else
                          "Reversed ranges " if repeat.get("order") == "reverse" else "Repeated ranges ")
                 row["locator"] = label + " and ".join(
                     f"{repeat[side]['start_stream_s']:.3f}-{repeat[side]['end_stream_s']:.3f} s" for side in ("first", "second"))

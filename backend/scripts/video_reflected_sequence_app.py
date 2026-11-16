@@ -32,7 +32,7 @@ def examples(rows, groups):
             yield next(row for row in group if (row["source"], row["role"]) == (positive["source"], role)), True
 
 
-def exports(client, aid, evidence, original, packet, output):
+def exports(client, aid, evidence, original, packet, output, *, locator="Mirrored ranges"):
     import pymupdf
 
     from app.reports.verify import verify_package
@@ -50,12 +50,18 @@ def exports(client, aid, evidence, original, packet, output):
             signature = image_signature(fetch(client, asset["url"]))
             assert signature == ((evidence["source"]["width"], evidence["source"]["height"]), frame["anchor"]["decoded_rgb_sha256"])
             images.add(signature)
+            if crop_ref := frame["artifact_refs"].get("crop"):
+                asset = packet["artifacts"][crop_ref]
+                signature = image_signature(fetch(client, asset["url"]))
+                region = frame["context_region"]
+                assert signature[0] == (region["w"], region["h"]) and min(signature[0]) > 1
+                images.add(signature)
         with pymupdf.open(stream=pdf, filetype="pdf") as document:
             words = " ".join(" ".join(page.get_text().split()) for page in document)
             scan(words)
             ranges = " and ".join(f"{pair[name]['start_stream_s']:.3f}-{pair[name]['end_stream_s']:.3f} s"
                                   for name in ("first", "second"))
-            assert f"Mirrored ranges {ranges}" in words
+            assert f"{locator} {ranges}" in words
             assert binding.observation(pair) in words
             xrefs = {image[0] for page in document for image in page.get_images(full=True)}
             assert images <= {image_signature(document.extract_image(xref)["image"]) for xref in xrefs}

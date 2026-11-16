@@ -578,6 +578,10 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
         packet_id = picture_sequence.MOTION_REFLECTED_PACKET_ID
         title = "Similar footage flipped left to right"
         selection = "longest_pair_of_similar_reflected_moving_sequences"
+    if review["schema"] == picture_sequence.MOTION_CROP_SCHEMA:
+        packet_id = picture_sequence.MOTION_CROP_PACKET_ID
+        title = "Similar footage shown with a tighter crop"
+        selection = "longest_pair_of_similar_cropped_moving_sequences"
     motion_limit = review["frames_scanned"] if motion else None
     frames, images, labels, assets = [], [], [], {}
     for number, (occurrence, role, index, pts, digest) in enumerate(picture_sequence.endpoints(pair), 1):
@@ -587,6 +591,12 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
         ref = picture_sequence.picture_ref(pair, occurrence, role)
         if ref not in assets:
             assets[ref] = _packet_image(db, store, analysis, set_id, image)
+        region = picture_sequence.crop_region(pair, occurrence, image.width, image.height)
+        refs = {"original": ref, "context": ref}
+        if region:
+            crop_ref = f"{ref}_crop"
+            assets[crop_ref] = _packet_image(db, store, analysis, set_id, image.crop(_bounds(region, image.width, image.height)))
+            refs["crop"] = crop_ref
         images.append(image)
         labels.append(f"{occurrence.title()} {role} | frame {index}")
         stream_s = pair[occurrence][f"{role}_stream_s"]
@@ -596,8 +606,8 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
             "width": source["width"], "height": source["height"], "stream_selector": source["stream_selector"],
             "coordinate_space": source["coordinate_space"], "stream_time_s": stream_s,
             "playback_time_s": None if origin is None else stream_s - origin},
-            "score": None, "is_peak": False, "context_region": None, "region_meaning": "whole_frame_context",
-            "artifact_refs": {"original": ref, "context": ref}})
+            "score": None, "is_peak": False, "context_region": region,
+            "region_meaning": "matched_frame_crop" if region else "whole_frame_context", "artifact_refs": refs})
     first, second = (_contact(images[i:i + 2], labels[i:i + 2]) for i in (0, 2))
     sheet = Image.new("RGB", (first.width, first.height + second.height))
     sheet.paste(first, (0, 0))
@@ -608,6 +618,10 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
                        "It tests a two-to-one speed ratio and can miss changes in framing or other speed ratios.")
         measurements = [{"label": f"{label} range duration", "value": pair["span_s"] * pair["frame_steps"][side], "unit": "seconds"}
                         for side, label in (("first", "First"), ("second", "Second"))]
+    elif review["schema"] == picture_sequence.MOTION_CROP_SCHEMA:
+        limitations = (f"The check compares the first {motion_limit} native frames at the same playback speed. "
+                       "It samples fixed crops and can miss other framing changes.")
+        measurements = [{"label": "Source range duration", "value": pair["span_s"], "unit": "seconds"}]
     elif review["schema"] == picture_sequence.MOTION_REFLECTED_HD_SCHEMA:
         limitations = (f"The check compares whole-picture appearance and motion in the first {motion_limit} native frames. "
                        "Changes in speed, framing or the recorded motion can affect the match.")
@@ -842,8 +856,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             "unavailable", picture_hold_binding.HISTORICAL, source["time_base"]))
     match = hold["match"] if hold is not None else None
     picture_reviews = document.get("picture_hold", {})
-    sequence_keys = ("sequence_review", "motion_sequence_review", picture_sequence.REVERSE_KEY, picture_sequence.MOTION_REVERSE_KEY,
-                     picture_sequence.MOTION_RETIMED_KEY, picture_sequence.MOTION_REFLECTED_KEY)
+    sequence_keys = ("sequence_review", picture_sequence.REVERSE_KEY, *(key for key, _, _ in picture_sequence.MOTION_REVIEWS))
     sequence_matches = [picture_reviews[key] for key in sequence_keys
                         if picture_reviews.get(key, {}).get("pair") is not None]
     mouth_review = picture_reviews.get("mouth_local_hold", {})

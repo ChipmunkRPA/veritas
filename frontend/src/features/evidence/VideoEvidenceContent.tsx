@@ -88,6 +88,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
   const reverseMotion = hold?.reverse_motion_sequence_review
   const retimedMotion = hold?.retimed_motion_sequence_review
   const reflectedMotion = hold?.reflected_motion_sequence_review
+  const croppedMotion = hold?.cropped_motion_sequence_review
   const motionRate = motion?.parameters.frame_rate ?? 20
   const motionLimit = motion?.frames_scanned || motionRate * 9
   const laterFrames = hold && set.coverage ? set.coverage.frame_count - hold.frames_scanned : 0
@@ -112,6 +113,11 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
             token={token} ready={mediaReady} alt={`${frame.id}: source frame with picture-change support tiles`}
             overlay={<PictureChangeSupport tiles={sceneSupport} />} />
             <figcaption className="mt-2 text-caption text-text-muted">The {sceneSupport.length} outlined tiles show texture measurements that support the start and end times. Ordinary cuts can produce this pattern.</figcaption>
+          </figure>}
+          {packet.picture_sequence?.framing && crop && <figure className="m-0 min-w-0">
+            <EvidencePicture set={set} artifact={crop} token={token} ready={mediaReady}
+              alt={`Frame ${frame.anchor.frame_index}: wider source cropped to the matching area`} />
+            <figcaption className="mt-2 text-caption text-text-muted">Exact crop from the wider source frame.</figcaption>
           </figure>}
           {!packet.picture_hold && !packet.picture_sequence && !packet.scene_return && <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop || packet.artifacts[frame.artifact_refs.context]} token={token} ready={mediaReady}
             alt={`${frame.id}: ${mouthCrop ? 'exact measured mouth region' : crop ? 'source face crop for context' : 'frame context with its recorded label'}`} />
@@ -204,6 +210,13 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       <p className="mt-2 mb-0 text-small">{reflectedMotion.status === 'matched'
         ? <a className="underline" href="#media-evidence-VPR06">Inspect both source ranges and frames</a>
         : reflectedMotion.status === 'no_match' ? `No mirrored repeat was found in the first ${reflectedMotion.frames_scanned} frames.`
+        : 'This check needs regular, verified source timestamps throughout the checked opening frames.'}</p>
+    </section>}
+    {croppedMotion && <section aria-labelledby="video-cropped-motion-heading" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="video-cropped-motion-heading" className="m-0 text-body font-medium">Cropped footage check</h3>
+      <p className="mt-2 mb-0 text-small">{croppedMotion.status === 'matched'
+        ? <a className="underline" href="#media-evidence-VPR07">Inspect both time ranges and matching crops</a>
+        : croppedMotion.status === 'no_match' ? `No qualifying cropped repeat was found in the first ${croppedMotion.frames_scanned} frames.`
         : 'This check needs regular, verified source timestamps throughout the checked opening frames.'}</p>
     </section>}
     {!!set.coverage?.brief_face_review?.observations.length && <section aria-labelledby="video-brief-face-coverage-heading"

@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Footage reused with a tighter crop](video-cropped-reuse-2026-11-16.md)
+  adds 27 useful paired locations on 32 offset-crop deliveries across
+  360p and 720p, with no new flags across 96 controls. Centered and
+  between-grid cases still go undetected on the held panel. The
+  development check records both times, original frames, and source
+  crops with zero AI-confidence weight.
+
 - [Mirrored footage in HD and portrait](video-mirrored-hd-2026-11-16.md)
   extends the opening scan to common HD and vertical encodes, including
   fractional-rate WebM. Across six profiles it locates 31 of 36

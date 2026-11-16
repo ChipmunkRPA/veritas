@@ -14,18 +14,20 @@ try {
   page.on('pageerror', error => errors.push(error.message))
   const cases = []
   for (const row of input.cases) {
+    const cropped = row.mode === 'crop'
     await page.goto(`${input.url}/analyses/${row.analysis_id}/media-evidence?view=plain`)
-    const coverage = page.getByRole('region', { name: 'Mirrored footage check' })
+    const coverage = page.getByRole('region', { name: cropped ? 'Cropped footage check' : 'Mirrored footage check' })
     await coverage.waitFor()
-    const finding = page.locator('#media-evidence-VPR06')
+    const finding = page.locator(cropped ? '#media-evidence-VPR07' : '#media-evidence-VPR06')
     if (!row.matched) {
-      await coverage.getByText(`No mirrored repeat was found in the first ${row.checked_frames} frames.`, { exact: true }).waitFor()
+      const subject = cropped ? 'qualifying cropped' : 'mirrored'
+      await coverage.getByText(`No ${subject} repeat was found in the first ${row.checked_frames} frames.`, { exact: true }).waitFor()
       assert.equal(await finding.count(), 0)
       cases.push({ fixture: row.name, matched: false })
       continue
     }
-    await coverage.getByRole('link', { name: 'Inspect both source ranges and frames' }).click()
-    await finding.getByRole('heading', { name: 'Similar footage flipped left to right' }).waitFor()
+    await coverage.getByRole('link', { name: cropped ? 'Inspect both time ranges and matching crops' : 'Inspect both source ranges and frames' }).click()
+    await finding.getByRole('heading', { name: cropped ? 'Similar footage shown with a tighter crop' : 'Similar footage flipped left to right' }).waitFor()
     const textSeconds = value => `${value.toFixed(3)} s`
     for (const range of row.ranges_s) {
       await finding.getByText(range.map(textSeconds).join('–'), { exact: true }).waitFor()
@@ -42,6 +44,18 @@ try {
       assert.deepEqual(dimensions, row.dimensions)
       await finding.getByRole('button', { name: `Go to frame ${frame.frame_index} in playback`, exact: true }).waitFor()
     }
+    if (cropped) {
+      const crops = finding.getByRole('img', { name: /wider source cropped to the matching area/ })
+      assert.equal(await crops.count(), 2)
+      for (const [index, dimensions] of row.crop_dimensions.entries()) {
+        const image = crops.nth(index)
+        await image.scrollIntoViewIfNeeded()
+        assert.deepEqual(await image.evaluate(async element => {
+          await element.decode()
+          return [element.naturalWidth, element.naturalHeight]
+        }), dimensions)
+      }
+    }
     let seek = null
     if (row.seek_verified_in_browser) {
       const anchor = row.frames[2]
@@ -54,7 +68,8 @@ try {
       seek = await player.evaluate(element => element.currentTime)
     }
     await finding.screenshot({ path: path.join(input.output, `${row.name}-browser.png`), animations: 'disabled' })
-    cases.push({ fixture: row.name, matched: true, source_frames: row.frames.map(frame => frame.frame_index), seek_s: seek })
+    cases.push({ fixture: row.name, matched: true, source_frames: row.frames.map(frame => frame.frame_index), seek_s: seek,
+      ...(cropped ? { crop_images: 2 } : {}) })
   }
   assert.deepEqual(errors, [])
   process.stdout.write(JSON.stringify({ cases, page_errors: errors.length }))

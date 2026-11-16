@@ -386,6 +386,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         mouth_limit = local_mouth["frames_scanned"]
     motion_encoding = None
     motion_limit = 0
+    crop_limit = 0
     motion_reads = []
     motion_descriptor = picture_motion.descriptor
     if motion_records:
@@ -393,13 +394,20 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         motion_encoding = delivery.get("codec"), delivery.get("pix_fmt")
         if hold.get(picture_sequence.MOTION_RETIMED_KEY) is not None and face_return.source_carrier(original) != "mp4":
             raise ValueError("Retimed sequence review requires a verified MP4 carrier")
+        if hold.get(picture_sequence.MOTION_CROP_KEY) is not None and face_return.source_carrier(original) != "mp4":
+            raise ValueError("Cropped sequence review requires a verified MP4 carrier")
         for key, record in motion_records:
             exact_review = reverse_sequence if key == picture_sequence.MOTION_REVERSE_KEY else sequence
             profile = picture_motion.profile(table, motion_encoding, schema=record["schema"])
             if profile is None or record["encoding"] != list(motion_encoding):
                 raise ValueError("The original video differs from its motion comparison source profile")
             motion_reads.append((record, exact_review, profile))
-            motion_limit = max(motion_limit, profile[1])
+            if record["schema"] == picture_sequence.MOTION_CROP_SCHEMA:
+                from app.detectors.video.picture_crop import luminance as crop_luminance
+
+                crop_limit = profile[1]
+            else:
+                motion_limit = max(motion_limit, profile[1])
             if record["schema"] == picture_sequence.MOTION_REFLECTED_HD_SCHEMA:
                 motion_descriptor = picture_motion.hd_descriptor
     extended = "continuity_breaks" in hold
@@ -468,10 +476,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError("The original video's codec or carrier differs from its guarded face-review scope")
     elif guarded_records:
         raise ValueError("Guarded face evidence requires its dedicated version")
-    reading_limit = max(hold_frames, motion_limit)
+    reading_limit = max(hold_frames, motion_limit, crop_limit)
     indices = set(pictures) | set(mouths) | set(faces) | set(scenes) | set(range(reading_limit)) | set(timing_frames)
     hold_observations = []
     motion_descriptors = []
+    crop_frames = []
     mouth_pictures = []
     found = set()
     images = patches = alignments = 0
@@ -489,6 +498,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 hold_observations.append((frame.pts if frame.pts_verified else None, rgb_sha))
             if index < motion_limit:
                 motion_descriptors.append(motion_descriptor(frame.rgb))
+            if index < crop_limit:
+                crop_frames.append(crop_luminance(frame.rgb))
             if index < mouth_limit:
                 _frame_anchor(frame, local_mouth["pts"][index], local_mouth["frame_hashes"][index], "Mouth-region input", rgb_sha)
                 mouth_pictures.append(frame.rgb)
@@ -536,7 +547,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 raise ValueError("The extended motion comparison displaced an opening result")
         limit = profile[1]
         exact_pair = exact_review["pair"] if exact_review is not None else None
-        reproduced = picture_motion.scan(hold_observations[:limit], motion_descriptors[:limit], table.tb, motion_encoding,
+        values = crop_frames if record["schema"] == picture_sequence.MOTION_CROP_SCHEMA else motion_descriptors
+        reproduced = picture_motion.scan(hold_observations[:limit], values[:limit], table.tb, motion_encoding,
                                          exact_pair, source_profile=profile, schema=record["schema"])
         if canonical_hash(reproduced) != canonical_hash(record):
             raise ValueError("The original video does not reproduce its similar moving-picture sequences")

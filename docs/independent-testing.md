@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [cropped-footage replay](video-cropped-reuse-2026-11-16.md#replay)
+recounts 160 deliveries and reads back the original frame timestamps
+independently. It separates crop placements the method covers from
+off-grid positives and ordinary crop edits.
+
 The [HD mirrored footage replay](video-mirrored-hd-2026-11-16.md#replay)
 offers six video delivery profiles and 144 numeric outcomes covering
 landscape, portrait, fractional rates, and paired re-encodes. The

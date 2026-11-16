@@ -8,6 +8,7 @@ from collections.abc import Sequence
 from fractions import Fraction
 
 from app.core.canonical import canonical_hash
+from app.evidence.source_geometry import pixel_bounds
 
 SCHEMA = "chipmunk.video-exact-sequence/1"
 SCAN_SCOPE = "native-sequence-prefix/1"
@@ -26,6 +27,7 @@ MOTION_REVERSE_SCHEMA = "chipmunk.video-reverse-motion-sequence/1"
 MOTION_RETIMED_SCHEMA = "chipmunk.video-retimed-motion-sequence/1"
 MOTION_REFLECTED_SCHEMA = "chipmunk.video-reflected-motion-sequence/1"
 MOTION_REFLECTED_HD_SCHEMA = "chipmunk.video-reflected-motion-sequence/2"
+MOTION_CROP_SCHEMA = "chipmunk.video-cropped-motion-sequence/1"
 MOTION_REFLECTED_SCHEMAS = frozenset({MOTION_REFLECTED_SCHEMA, MOTION_REFLECTED_HD_SCHEMA})
 MOTION_SCHEMAS = frozenset({MOTION_SCHEMA, MOTION_EXTENDED_SCHEMA})
 MOTION_PACKET_ID = "VPR02"
@@ -36,18 +38,26 @@ MOTION_RETIMED_PACKET_ID = "VPR05"
 MOTION_RETIMED_CONTEXT = "Playback speed changes are common in ordinary editing. This check carries zero weight in the AI estimate."
 MOTION_REFLECTED_KEY = "reflected_motion_sequence_review"
 MOTION_REFLECTED_PACKET_ID = "VPR06"
+MOTION_CROP_KEY = "cropped_motion_sequence_review"
+MOTION_CROP_PACKET_ID = "VPR07"
 HORIZONTAL_REFLECTION = "horizontal_reflection"
 MOTION_REFLECTED_CONTEXT = ("Ordinary editing can reuse footage in a mirrored orientation. The comparison leaves the order of creation "
                             "undetermined and carries zero weight in the AI estimate.")
+MOTION_CROP_CONTEXT = ("Ordinary editing can reuse the same footage with a tighter crop. The comparison carries zero weight "
+                       "in the AI estimate.")
 MOTION_REVIEWS = (
     ("motion_sequence_review", MOTION_PACKET_ID, MOTION_SCHEMAS),
     (MOTION_REVERSE_KEY, MOTION_REVERSE_PACKET_ID, frozenset({MOTION_REVERSE_SCHEMA})),
     (MOTION_RETIMED_KEY, MOTION_RETIMED_PACKET_ID, frozenset({MOTION_RETIMED_SCHEMA})),
     (MOTION_REFLECTED_KEY, MOTION_REFLECTED_PACKET_ID, MOTION_REFLECTED_SCHEMAS),
+    (MOTION_CROP_KEY, MOTION_CROP_PACKET_ID, frozenset({MOTION_CROP_SCHEMA})),
 )
 MOTION_PROFILES = {(320, 180): (20, 180), (640, 360): (25, 225)}
 MOTION_EXTENDED_PROFILES = {(640, 360): (25, 450)}
 MOTION_360P_PROFILES = {(640, 360): (25, 225)}
+MOTION_CROP_PROFILES = {(640, 360): (25, 225), (1280, 720): (25, 200)}
+CROP_WORK_WIDTH, CROP_WORK_HEIGHT = 192, 108
+CROP_PERCENTAGES = (70, 75, 80, 85, 90)
 MOTION_ENCODINGS = {("h264", "yuv420p"), ("vp9", "yuv420p")}
 HD_ENCODINGS = MOTION_ENCODINGS | {("hevc", "yuv420p")}
 HD_DIMENSIONS = frozenset({(1280, 720), (1920, 1080), (720, 1280), (1080, 1920)})
@@ -69,13 +79,16 @@ def motion_profile(dimensions, schema):
         return MOTION_EXTENDED_PROFILES.get(dimensions)
     if schema in {MOTION_RETIMED_SCHEMA, MOTION_REFLECTED_SCHEMA}:
         return MOTION_360P_PROFILES.get(dimensions)
+    if schema == MOTION_CROP_SCHEMA:
+        return MOTION_CROP_PROFILES.get(dimensions)
     return None
 
 
 def motion_encoding_allowed(schema, encoding):
     if schema == MOTION_REFLECTED_HD_SCHEMA:
         return tuple(encoding or ()) in HD_ENCODINGS
-    return tuple(encoding or ()) in (MOTION_ENCODINGS if schema != MOTION_RETIMED_SCHEMA else {("h264", "yuv420p")})
+    return tuple(encoding or ()) in (MOTION_ENCODINGS if schema not in {MOTION_RETIMED_SCHEMA, MOTION_CROP_SCHEMA}
+                                     else {("h264", "yuv420p")})
 
 
 def motion_parameters(schema, rate):
@@ -88,7 +101,34 @@ def motion_parameters(schema, rate):
     if schema == MOTION_REFLECTED_HD_SCHEMA:
         parameters.update(frame_rate=str(rate), minimum_motion_rms=float(Fraction(10) / rate),
                           descriptor="box_rgb8_luminance")
+    if schema == MOTION_CROP_SCHEMA:
+        parameters.update(luma_grid=[32, 18], maximum_picture_rms=3., minimum_direct_rms=7.,
+                          minimum_motion_rms=.37, minimum_motion_cosine=.82, minimum_motion_rms_ratio=.60,
+                          minimum_support_fraction=.60, crop_percentages=list(CROP_PERCENTAGES),
+                          working_grid=[CROP_WORK_WIDTH, CROP_WORK_HEIGHT])
     return parameters
+
+
+def crop_region(pair, occurrence, width, height):
+    crop = pair.get("framing")
+    if crop is None or crop["wider_range"] != occurrence:
+        return None
+    left, top, right, bottom = crop["crop_box"]
+    x, y = left * width // CROP_WORK_WIDTH, top * height // CROP_WORK_HEIGHT
+    x2, y2 = -(-right * width // CROP_WORK_WIDTH), -(-bottom * height // CROP_WORK_HEIGHT)
+    return {"x": x, "y": y, "w": x2 - x, "h": y2 - y}
+
+
+def valid_crop_box(box):
+    if not isinstance(box, list) or len(box) != 4 or any(type(value) is not int for value in box):
+        return False
+    left, top, right, bottom = box
+    for scale in CROP_PERCENTAGES:
+        width, height = round(CROP_WORK_WIDTH * scale / 100), round(CROP_WORK_HEIGHT * scale / 100)
+        spare_x, spare_y = CROP_WORK_WIDTH - width, CROP_WORK_HEIGHT - height
+        if (right - left, bottom - top) == (width, height):
+            return left in (0, spare_x // 2, spare_x) and top in (0, spare_y // 2, spare_y)
+    return False
 
 
 def hd_frame_limit(dimensions, count, rate):
@@ -225,6 +265,9 @@ def scan(observations, tb: Fraction, *, reverse=False):
 
 
 def observation(pair):
+    if framing := pair.get("framing"):
+        return (f"Cropping the {framing['wider_range']} range to the displayed area aligns {pair['frame_count']} pictures "
+                f"with the other range. {len(pair['supporting_edge_offsets'])} matching picture changes support the comparison.")
     if pair.get("spatial_transform") == HORIZONTAL_REFLECTION:
         return (f"Two separate ranges contain {pair['frame_count']} visually similar pictures after a left-to-right flip. "
                 f"{len(pair['supporting_edge_offsets'])} matching picture changes support the comparison.")
@@ -245,6 +288,8 @@ def observation(pair):
 
 
 def interpretation(pair):
+    if "framing" in pair:
+        return MOTION_CROP_CONTEXT
     if pair.get("spatial_transform") == HORIZONTAL_REFLECTION:
         return MOTION_REFLECTED_CONTEXT
     if "frame_steps" in pair:
@@ -332,7 +377,7 @@ def _validate_motion_scope(record, source, exact, scanned, *, schemas):
     rate, limit = profile
     _require(exact is not None and scanned >= limit and record["parameters"] == motion_parameters(schema, rate)
              and motion_encoding_allowed(schema, record["encoding"]), "Motion sequence has unsupported source scope or parameters")
-    exact_takes_priority = exact["status"] == "matched" and schema != MOTION_REFLECTED_SCHEMA
+    exact_takes_priority = exact["status"] == "matched" and schema not in {MOTION_REFLECTED_SCHEMA, MOTION_CROP_SCHEMA}
     if record["status"] == "unavailable":
         _require(schema != MOTION_EXTENDED_SCHEMA and record["frames_scanned"] == 0 and (record["reason"] == "source_clock"
                  or (record["reason"] == "exact_sequence" and exact_takes_priority)),
@@ -359,6 +404,7 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
     reverse = schema in {REVERSE_SCHEMA, MOTION_REVERSE_SCHEMA}
     retimed = schema == MOTION_RETIMED_SCHEMA
     reflected = schema in MOTION_REFLECTED_SCHEMAS
+    cropped = schema == MOTION_CROP_SCHEMA
     hd = schema == MOTION_REFLECTED_HD_SCHEMA
     _require(len(packets) == 1 and packets[0].get("picture_sequence") == pair,
              "Repeated sequence omits the recorded pair")
@@ -368,6 +414,11 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
     _require(("spatial_transform" not in pair and not reflected)
              or (reflected and pair.get("spatial_transform") == HORIZONTAL_REFLECTION),
              "Repeated sequence has the wrong spatial transform")
+    _require(("framing" in pair) == cropped, "Repeated sequence has unexpected crop geometry")
+    if cropped:
+        framing = pair["framing"]
+        _require(set(framing) == {"wider_range", "crop_box"} and framing["wider_range"] in {"first", "second"}
+                 and valid_crop_box(framing["crop_box"]), "Repeated sequence has an unsupported crop")
     strides = pair.get("frame_steps", {"first": 1, "second": 1})
     if retimed:
         _require(set(strides) == {"first", "second"} and all(type(step) is int for step in strides.values())
@@ -381,6 +432,8 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
         _require(all(type(value) is int for value in supports) and len(supports) >= 8 and len(supports) * 2 >= count - 1
                  and supports[0] == 0 and supports[-1] == count - 2 and all(0 < b - a <= 3 for a, b in zip(supports, supports[1:])),
                  "Motion sequence lacks enough repeated adjacent movement")
+        if cropped:
+            _require(5 * len(supports) >= 3 * (count - 1), "Cropped sequence lacks repeated adjacent movement")
     else:
         unique = pair["unique_pictures"]
         _require(type(unique) is int and MIN_UNIQUE <= unique <= count, "Repeated sequence lacks distinct pictures")
@@ -424,11 +477,23 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
              and packet.get("interpretation") == interpretation(pair),
              "Repeated sequence is misrepresented as statistical evidence")
     refs = {picture_ref(pair, occurrence, role) for occurrence, role, *_ in endpoints(pair)}
+    dimensions = source["width"], source["height"]
+    refs.update(f"{picture_ref(pair, occurrence, role)}_crop" for occurrence, role, *_ in endpoints(pair)
+                if crop_region(pair, occurrence, *dimensions) is not None)
     _require(set(packet["artifacts"]) == refs | {"contact_sheet"}, "Repeated sequence lacks endpoint images")
     for frame, (occurrence, role, i, pts, digest) in zip(packet["frames"], endpoints(pair), strict=True):
         anchor = frame["anchor"]
         ref = picture_ref(pair, occurrence, role)
         original = packet["artifacts"][ref]
+        region = crop_region(pair, occurrence, *dimensions)
+        expected_refs = {"original": ref, "context": ref}
+        if region:
+            crop_ref = f"{ref}_crop"
+            expected_refs["crop"] = crop_ref
+            asset = packet["artifacts"][crop_ref]
+            x, y, right, bottom = pixel_bounds(region, source["width"], source["height"])
+            _require(asset["media_type"] == "image/png" and (asset["width"], asset["height"]) == (right - x, bottom - y)
+                     and frame.get("region_meaning") == "matched_frame_crop", "Cropped sequence has an invalid source crop")
         origin = source.get("timeline_origin_s")
         stream_s = float(pts * tb)
         _require((anchor["frame_index"], anchor["pts"], anchor["decoded_rgb_sha256"]) == (i, pts, digest)
@@ -437,12 +502,12 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
                  and original["media_type"] == "image/png" and (original["width"], original["height"]) == (source["width"], source["height"])
                  and _close(anchor["stream_time_s"], stream_s)
                  and (anchor["playback_time_s"] is None if origin is None else _close(anchor["playback_time_s"], stream_s - origin))
-                 and frame.get("context_region") is None and frame.get("score") is None and not frame.get("is_peak")
-                 and frame["artifact_refs"] == {"original": ref, "context": ref}, "Repeated sequence endpoint differs from its image or clock")
+                 and frame.get("context_region") == region and frame.get("score") is None and not frame.get("is_peak")
+                 and frame["artifact_refs"] == expected_refs, "Repeated sequence endpoint differs from its image or clock")
 
 
 def validate_clock(record, table_pts: Sequence[int], interpolated: Sequence[int], *, tb: Fraction):
-    fixed_clock = {MOTION_EXTENDED_SCHEMA, MOTION_REVERSE_SCHEMA, MOTION_RETIMED_SCHEMA, MOTION_REFLECTED_SCHEMA}
+    fixed_clock = {MOTION_EXTENDED_SCHEMA, MOTION_REVERSE_SCHEMA, MOTION_RETIMED_SCHEMA, MOTION_REFLECTED_SCHEMA, MOTION_CROP_SCHEMA}
     if record and record["schema"] in fixed_clock and record["status"] != "unavailable":
         limit = record["frames_scanned"]
         pts = table_pts[:limit]

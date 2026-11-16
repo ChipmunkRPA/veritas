@@ -22,7 +22,7 @@ def profile(table, encoding, *, schema=binding.MOTION_SCHEMA):
     supported = binding.motion_profile(dimensions, schema)
     if supported is None or len(table) < supported[1]:
         return None
-    if schema == binding.MOTION_EXTENDED_SCHEMA:
+    if schema in {binding.MOTION_EXTENDED_SCHEMA, binding.MOTION_CROP_SCHEMA}:
         rate, limit = supported
         tb, step = table.tb, Fraction(1, rate)
         if any(i < limit for i in table.interpolated) or any(
@@ -159,11 +159,20 @@ def scan(observations, values, tb, encoding, exact_pair, *, source_profile, sche
     if not clock_ok:
         return result
     reflected = schema in binding.MOTION_REFLECTED_SCHEMAS
-    if exact_pair is not None and not reflected:
+    cropped = schema == binding.MOTION_CROP_SCHEMA
+    if exact_pair is not None and not (reflected or cropped):
         return result | {"reason": "exact_sequence"}
     reverse = schema == binding.MOTION_REVERSE_SCHEMA
     retimed = schema == binding.MOTION_RETIMED_SCHEMA
-    if retimed:
+    if cropped:
+        from app.detectors.video.picture_crop import find
+
+        match = find(values, frame_rate)
+        if match is not None:
+            occurrences = tuple((start, 1) for start, _ in match.ranges)
+            count = match.ranges[0][1] - match.ranges[0][0] + 1
+            supports = list(match.support)
+    elif retimed:
         match = picture_speed.find(values, frame_rate)
         if match is not None:
             occurrences, count, supports = match
@@ -193,4 +202,6 @@ def scan(observations, values, tb, encoding, exact_pair, *, source_profile, sche
         pair["frame_steps"] = dict(zip(("first", "second"), (stride for _, stride in occurrences), strict=True))
     if reflected:
         pair["spatial_transform"] = binding.HORIZONTAL_REFLECTION
+    if cropped:
+        pair["framing"] = {"wider_range": match.wider_range, "crop_box": list(match.crop_box)}
     return result | {"status": "matched", "reason": None, "frames_scanned": len(ticks), "pair": pair}

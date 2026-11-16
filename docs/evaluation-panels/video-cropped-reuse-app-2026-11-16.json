@@ -1,0 +1,122 @@
+{
+  "browser": {
+    "cases": [
+      {
+        "crop_images": 2,
+        "fixture": "avc-360-vcd2-428-offset_reuse-on",
+        "matched": true,
+        "seek_s": 5.52,
+        "source_frames": [
+          40,
+          70,
+          138,
+          168
+        ]
+      },
+      {
+        "fixture": "avc-360-vcd2-428-in_place_crop-on",
+        "matched": false
+      },
+      {
+        "crop_images": 2,
+        "fixture": "avc-720-vcd2-494-offset_reuse_tandem-on",
+        "matched": true,
+        "seek_s": 5.92,
+        "source_frames": [
+          36,
+          67,
+          148,
+          179
+        ]
+      },
+      {
+        "fixture": "avc-720-vcd2-494-in_place_crop-on",
+        "matched": false
+      }
+    ],
+    "page_errors": 0
+  },
+  "cases": [
+    {
+      "crops_in_pdf": 0,
+      "enabled": false,
+      "fixture": "avc-360-vcd2-428-offset_reuse-off",
+      "matched": false,
+      "original_frames_in_pdf": 0,
+      "ranges_s": [],
+      "signed_original_verified": false,
+      "source_sha256": "1ca904994d6697e2eb22a024311403f11ac94d6ab0051e3cdfe0d3dc9686aa9c"
+    },
+    {
+      "crops_in_pdf": 2,
+      "enabled": true,
+      "fixture": "avc-360-vcd2-428-offset_reuse-on",
+      "matched": true,
+      "original_frames_in_pdf": 4,
+      "ranges_s": [
+        [
+          1.6,
+          2.8
+        ],
+        [
+          5.52,
+          6.72
+        ]
+      ],
+      "signed_original_verified": true,
+      "source_sha256": "1ca904994d6697e2eb22a024311403f11ac94d6ab0051e3cdfe0d3dc9686aa9c"
+    },
+    {
+      "crops_in_pdf": 0,
+      "enabled": true,
+      "fixture": "avc-360-vcd2-428-in_place_crop-on",
+      "matched": false,
+      "original_frames_in_pdf": 0,
+      "ranges_s": [],
+      "signed_original_verified": true,
+      "source_sha256": "edce0316222bdc31251841548ff0f7f5901f381008e3dee29dde752452d415b2"
+    },
+    {
+      "crops_in_pdf": 0,
+      "enabled": false,
+      "fixture": "avc-720-vcd2-494-offset_reuse_tandem-off",
+      "matched": false,
+      "original_frames_in_pdf": 0,
+      "ranges_s": [],
+      "signed_original_verified": false,
+      "source_sha256": "fa8a3eac5b84c180e19f54ec1e63f7f1c63072d2681eea1ea8863c3d028c6098"
+    },
+    {
+      "crops_in_pdf": 2,
+      "enabled": true,
+      "fixture": "avc-720-vcd2-494-offset_reuse_tandem-on",
+      "matched": true,
+      "original_frames_in_pdf": 4,
+      "ranges_s": [
+        [
+          1.44,
+          2.68
+        ],
+        [
+          5.92,
+          7.16
+        ]
+      ],
+      "signed_original_verified": true,
+      "source_sha256": "fa8a3eac5b84c180e19f54ec1e63f7f1c63072d2681eea1ea8863c3d028c6098"
+    },
+    {
+      "crops_in_pdf": 0,
+      "enabled": true,
+      "fixture": "avc-720-vcd2-494-in_place_crop-on",
+      "matched": false,
+      "original_frames_in_pdf": 0,
+      "ranges_s": [],
+      "signed_original_verified": true,
+      "source_sha256": "20d16199603820903e174fde5335f9e374c1db4fbf7fc5341c66a14ba3130e56"
+    }
+  ],
+  "paid_analyses": 6,
+  "unchanged_assessment_on_matched_pairs": true,
+  "unpaid_jobs": 0
+}

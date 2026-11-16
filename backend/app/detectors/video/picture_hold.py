@@ -20,7 +20,7 @@ DECODE_TIMEOUT_S = 8.0
 def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Callable[[], None] | None = None,
             remaining_s: float | None = None, sequence_review: bool = False,
             motion_encoding: tuple[str | None, str | None] | None = None, mouth_review: bool = False,
-            retimed_review: bool = False, reflected_review: bool = False) -> dict:
+            retimed_review: bool = False, reflected_review: bool = False, cropped_review: bool = False) -> dict:
     """Try an extended native scan under the same deadline, retaining a completed opening result."""
     opening_limit = binding.frame_limit(len(table), table.width, table.height)
     tb = table.tb
@@ -48,6 +48,13 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                   if reflected_review and sequence_review else None)
     descriptor = picture_motion.hd_descriptor if hd_profile else picture_motion.descriptor
     descriptor_limit = hd_profile[1] if hd_profile else motion_limit
+    crop_schema = picture_sequence.MOTION_CROP_SCHEMA
+    crop_profile = (picture_motion.profile(table, motion_encoding, schema=crop_schema)
+                    if cropped_review and sequence_review and source_carrier(path) == "mp4" else None)
+    crop_limit = crop_profile[1] if crop_profile else 0
+    crop_frames = []
+    if crop_profile:
+        from app.detectors.video.picture_crop import luminance
     started = time.monotonic()
     timeout = DECODE_TIMEOUT_S if remaining_s is None else min(DECODE_TIMEOUT_S, remaining_s - 1.0)
     if timeout < 0.5 and limit:
@@ -78,6 +85,8 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                     mouth_frames.append(frame.rgb)
                 if frame.index < descriptor_limit:
                     descriptors.append(descriptor(frame.rgb))
+                if frame.index < crop_limit:
+                    crop_frames.append(luminance(frame.rgb))
                 if scanned == opening_limit and limit > opening_limit:
                     opening = _result(table, origin, opening_limit, scanned, last_pts, longest, best)
     except (DecodeError, TimeoutExpired):
@@ -144,6 +153,10 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
             cover["mouth_local_hold"] = mouth_local_hold.record(mouth_frames, table.pts[:mouth_count],
                                                                [digest for _, digest in mouth_prefix],
                                                                detector_path=detector_path, schema=mouth_profile)
+        if (crop_profile and len(crop_frames) == crop_limit and cover["frames_scanned"] >= crop_limit
+                and (remaining_s is None or remaining_s - (time.monotonic() - started) > 1.5)):
+            cover[picture_sequence.MOTION_CROP_KEY] = picture_motion.scan(
+                observed[:crop_limit], crop_frames, tb, motion_encoding, None, source_profile=crop_profile, schema=crop_schema)
     return result
 
 

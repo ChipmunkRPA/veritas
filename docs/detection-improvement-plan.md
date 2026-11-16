@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Consecutive word ranges for short rewrites](writing-structured-range-transfer-2026-11-15.md)
+  located 4/84 fresh publisher rewrites versus 1/84 at the tighter point.
+  Ordinary flags moved from 6/84 to 7/84. One of the three new locations
+  repeated on a matched original. On the earlier panel the two-run
+  selection changed which edits it located and added four ordinary flags.
+  The proposal stays in evaluation.
+
 - [Nearby readings for short speech alerts](audio-short-edit-input-views-2026-11-15.md)
   shows how a flagged lossless window responds at the nearest 80 ms
   shifts. The trial cleared six ordinary flags in the retained panels

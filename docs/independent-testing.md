@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [consecutive writing-range replay](writing-structured-range-transfer-2026-11-15.md#independent-replay)
+reconstructs the ordinary calibration and per-work localization results
+for fixed word heads on 84 new publisher test pairs and the earlier
+development and journal cases. The source replay verifies the four
+original shards separately.
+
 The [nearby short speech replay](audio-short-edit-input-views-2026-11-15.md#reproduce)
 recounts the timing and frequency comparisons across four panels. The
 local checkout fixture verifies that the same nearby sample ranges

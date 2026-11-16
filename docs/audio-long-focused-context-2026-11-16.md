@@ -65,9 +65,7 @@ highlighted inside partially edited as well as ordinary recordings.
 ## Focused review results
 
 The focused check assessed all 180 deliveries and examined 720 six-second
-excerpts. The table gives the standalone focused results. The paired
-comparison with the longer-file review and the two-second diagnostic was
-still running when this result was published.
+excerpts. The standalone results below measure the extra check by itself.
 
 | Delivery | Useful labeled locations, single / repeated | Ordinary files flagged, single / repeated | Isolated backgrounds flagged, single / repeated |
 | --- | ---: | ---: | ---: |
@@ -92,6 +90,45 @@ deviation from the nominal whole-recording ratio was 0.000033 dB.
 The portable location tool independently reproduced the event and
 genuine-time counts for both focused rules.
 
+## Completed paired comparison
+
+The full comparison scored all 180 deliveries and reproduced all 720
+focused-excerpt responses. The table tracks useful edit locations,
+ordinary files with any flag, and isolated backgrounds with any flag.
+Each row uses 18 ordinary and 18 edited recordings. The two noise
+conditions each have 36 isolated-background deliveries. All ordinary,
+edited and isolated inputs were assessed by the existing review.
+
+| Delivery and review | Useful edits /115 | Ordinary flags /18 | Isolated background flags /36 |
+| --- | ---: | ---: | ---: |
+| Original, current | 46 | 0 | — |
+| Original, add the two-second scan | 66 | 0 | — |
+| Original, add the fine-grained scan | 46 | 0 | — |
+| Original, add repeated fine-grained results | 46 | 0 | — |
+| Competing speech, −5 dB, current | 22 | 8 | 0 |
+| Competing speech, −5 dB, add the two-second scan | 36 | 12 | 1 |
+| Competing speech, −5 dB, add the fine-grained scan | 23 | 10 | 5 |
+| Competing speech, −5 dB, add repeated fine-grained results | 22 | 8 | 0 |
+| Competing speech, −10 dB, current | 10 | 8 | 0 |
+| Competing speech, −10 dB, add the two-second scan | 20 | 10 | 1 |
+| Competing speech, −10 dB, add the fine-grained scan | 11 | 8 | 5 |
+| Competing speech, −10 dB, add repeated fine-grained results | 10 | 8 | 0 |
+
+The two-second scan preserved earlier useful locations and added 20
+clean, 14 moderate and ten strongly masked locations. Each condition's
+gains span all six generator families and respectively 11, 12 and nine
+readers. The check also highlighted 7.10, 27.68 and 20.02 additional
+seconds of genuine audio across those three sets. This includes genuine
+portions of partly edited recordings. The repeated noise conditions
+share sources and room excerpts. The fine-grained comparison supplied
+only one distinct extra useful location across the two mixtures.
+
+The standard-library exporter independently reproduced the one-to-one
+event totals and exact genuine-sample counts for all four arms. The
+two-second extension is still a longer-file candidate. Application
+replay, a separate noise transfer, and confidence calibration remain
+open. [Full paired comparison receipt](evaluation-panels/audio-long-focused-context-paired-2026-11-16.json.gz)
+
 ## Reproduce
 
 Use the earlier [Part A and Part B range recipe](audio-noise-window-transfer-2026-11-12.md#replay)
@@ -109,6 +146,9 @@ export OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=2 VECLIB_MAXIMUM_THREADS=1
 receipt=docs/evaluation-panels/audio-long-focused-context-pilot-2026-11-16.json.gz
 python3 -B -S -m scripts.audio_focused_context_transfer review "$receipt"
 python3 -B -S -m scripts.export_audio_focused_context "$receipt" "$exported"
+paired=docs/evaluation-panels/audio-long-focused-context-paired-2026-11-16.json.gz
+python3 -B -S -m scripts.audio_focused_context_transfer review "$paired"
+python3 -B -S -m scripts.export_audio_focused_context "$paired" "$exported-paired"
 python3 -B -S -m scripts.independent_review count-events \
   "$exported/manifest.json" "$exported/truth.json" "$exported/focused_excerpt.json" \
   "$event_counts" --match 0.30 0.50

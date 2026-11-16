@@ -73,10 +73,12 @@ are not public screening promises or calibrated population probabilities.
   report show the original and decoded sample positions.
 
 - [Focused speech edits in longer recordings](audio-long-focused-context-2026-11-16.md)
-  compares single and repeated responses from shifted six-second
-  excerpts. One edit is located in both matched mixtures and five
-  isolated recordings flag at each level. Requiring repeat support
-  removes those isolated flags and both useful locations.
+  compares three additions to the current review on the same 180
+  deliveries. Running the two-second scan within overlapping excerpts
+  raises useful locations from 46 to 66 of 115 on clean recordings
+  with zero ordinary flags. Under the strongest competing speech it
+  raises useful locations from 10 to 20 and ordinary flags from 8 to 10
+  of 18. The extension is in local evaluation.
 
 - [Local focused speech edit review](audio-focused-edit-local-2026-11-16.md)
   runs after a completed two-second check without a flag in supported

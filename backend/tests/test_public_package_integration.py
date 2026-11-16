@@ -595,7 +595,8 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
                                  'image_copy_similarity_binding.py', 'image_copy_affine_binding.py',
                                  'image_editor_preview_binding.py', 'image_transparency_binding.py', 'image_animation_binding.py',
                                  'stereo_binding.py', 'stereo_collapse_binding.py', 'scene_return_binding.py',
-                                 'video_viseme_binding.py', 'video_viseme_ranked.py', 'video_viseme_timing.py', 'document_chat_markers.py'])
+                                 'video_viseme_binding.py', 'video_viseme_ranked.py', 'video_viseme_timing.py',
+                                 'video_viseme_articulation.py', 'picture_sequence.py', 'source_geometry.py', 'document_chat_markers.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
 
@@ -631,14 +632,18 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
     elif name == 'video_viseme_binding.py':
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.core.canonical', 'canonical_hash'), ('app.evidence', 'video_viseme_timing'),
-                         ('app.evidence', 'video_viseme_ranked')}
-    elif name == 'video_viseme_ranked.py':
+                         ('app.evidence', 'video_viseme_ranked'), ('app.evidence', 'video_viseme_articulation')}
+    elif name in {'video_viseme_ranked.py', 'video_viseme_articulation.py'}:
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.evidence', 'video_viseme_timing')}
+    elif name == 'picture_sequence.py':
+        assert imports <= sys.stdlib_module_names | {'app'}
+        assert local == {('app.core.canonical', 'canonical_hash'), ('app.evidence.source_geometry', 'pixel_bounds')}
     elif name == 'image_copy_affine_binding.py':
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.evidence.image_copy_similarity_binding', item) for item in
-                         ('TURNED_JPEG_COPY_AFFINE_VERSION', 'EXPANDED_JPEG_ROTATION_AFFINE_VERSION')}
+                         ('TURNED_JPEG_COPY_AFFINE_VERSION', 'EXPANDED_JPEG_ROTATION_AFFINE_VERSION',
+                          'NATIVE_JPEG_ROTATION_AFFINE_VERSION', 'DISJOINT_JPEG_ROTATION_AFFINE_VERSION')}
     elif name == 'document_chat_markers.py':
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.core.canonical', 'FLOAT_DP'), ('app.core.canonical', 'canonical_hash'),

@@ -86,6 +86,15 @@ returned the same customer assessment with the new evidence enabled.
 [Checkout and evidence receipt](evaluation-panels/video-lip-articulation-app-2026-11-15.json) ·
 [Full detector checkout receipt](evaluation-panels/video-lip-articulation-app-full-2026-11-15.json)
 
+On 16 November, the verifier replayed the previously signed AAC
+package with network access and the analysis libraries blocked.
+The replay authenticates the signature and verifies the committed
+articulation finding using standard-library arithmetic. The updated
+implementation reproduced both original visual fits and all 1,512
+quantized observations and proposed locations across calibration and
+held PCM and AAC deliveries. Fitting still uses NumPy in the research
+command.
+
 The portable reader checks partitioning and totals, and recomputes
 reported frame times from the committed source clock. It uses the
 standard library alone. Native replay needs the pinned publisher

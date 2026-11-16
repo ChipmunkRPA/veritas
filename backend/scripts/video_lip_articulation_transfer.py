@@ -256,6 +256,42 @@ def operating_points(rows):
     return {arm: dict(zip(LEVELS, sorted(scores.values(), reverse=True)[:2], strict=True)) for arm, scores in maxima.items()}
 
 
+def fit(train, *, shape):
+    """Fit balanced visual classes on observed events from unchanged recordings."""
+    import numpy as np
+
+    from app.evidence import video_viseme_articulation as visual
+
+    profiles = {label: [] for label in visual.LABELS}
+    speakers = {label: set() for label in visual.LABELS}
+    for row in train:
+        features = visual.visual_features(row["frames"], shape=shape)
+        if features is None:
+            continue
+        times, _, observations = features
+        for label, sample, weight in row["deliveries"]["original"]["articulation"]:
+            index = visual._index(times, sample - visual.FIT_LAG)
+            if weight >= .50 and index is not None:
+                profiles[label].append(observations[index])
+                speakers[label].add(row["speaker"])
+    counts = {label: {"events": len(values), "speakers": len(speakers[label])} for label, values in profiles.items()}
+    labels = tuple(label for label in visual.LABELS if counts[label]["events"] >= 12 and counts[label]["speakers"] >= 4)
+    if len(labels) < 3:
+        raise ValueError("The visual fit lacks enough observed shape classes")
+    data = np.vstack([profiles[label] for label in labels])
+    midpoint, scale = data.mean(axis=0), np.maximum(1e-6, data.std(axis=0))
+    groups = [(np.vstack(profiles[label]) - midpoint) / scale for label in labels]
+    centroids = np.stack([group.mean(axis=0) for group in groups])
+    # Equal weight per class and fixed shrinkage limit speaker- and
+    # recording-specific directions in the shared covariance.
+    residuals = [group - center for group, center in zip(groups, centroids, strict=True)]
+    covariance = np.mean([residual.T @ residual / len(residual) for residual in residuals], axis=0)
+    inverse = np.linalg.solve(.8 * covariance + .2 * np.eye(data.shape[1]), centroids.T)
+    bias = -.5 * np.sum(centroids * inverse.T, axis=1)
+    return {"shape": shape, "counts": counts, "labels": list(labels), "midpoint": midpoint.round(10).tolist(),
+            "scale": scale.round(10).tolist(), "coefficients": inverse.round(10).tolist(), "bias": bias.round(10).tolist()}
+
+
 def calibrate(fit_path, calibration_path, output):
     from app.evidence import video_viseme_articulation as visual
 
@@ -266,7 +302,7 @@ def calibrate(fit_path, calibration_path, output):
     groups = {row["speaker"] for row in training["rows"]}
     phone.require(len(groups) == FIT_SPEAKERS and not groups & {row["speaker"] for row in calibration["rows"]},
                   "Fit and calibration speakers overlap")
-    models = {arm: visual.fit(training["rows"], shape=arm == "full_shape") for arm in ARMS}
+    models = {arm: fit(training["rows"], shape=arm == "full_shape") for arm in ARMS}
     rows = [readout(row, models) for row in calibration["rows"]]
     record = {"schema": SCHEMA, "method": METHOD, "plan_sha256": training["plan_sha256"], "models": models,
               "fit_speakers": sorted(groups), "fit_sha256": phone.sha(fit_path), "calibration_sha256": phone.sha(calibration_path),

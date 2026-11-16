@@ -4,8 +4,7 @@
 from __future__ import annotations
 
 from bisect import bisect_left
-
-import numpy as np
+from math import exp, log
 
 from app.evidence import video_viseme_timing as timing
 
@@ -16,28 +15,51 @@ MAX_LOG_SUPPORT = 2.
 LAGS = timing.LAGS
 
 
+def _deciles(values):
+    ordered = sorted(values)
+    bounds = []
+    for percentile in (.1, .9):
+        position = percentile * (len(ordered) - 1)
+        index = int(position)
+        fraction = position - index
+        low, high = ordered[index:index + 2]
+        difference = high - low
+        bounds.append(low + difference * fraction if fraction < .5 else high - difference * (1 - fraction))
+    return bounds
+
+
+def _clip(value, low, high):
+    return min(high, max(low, value))
+
+
+def _speed(values, indices):
+    return [0., *(current - previous if i - j == 1 else 0.
+                  for current, previous, i, j in zip(values[1:], values[:-1], indices[1:], indices[:-1], strict=True))]
+
+
 def visual_features(frames, *, shape):
     rows = [(frame["index"], frame["sample"], frame["shape"]) for frame in frames if "shape" in frame]
     if len(rows) < 20:
         return None
     index, times, measurements = zip(*rows, strict=True)
-    left, center, right, width = np.asarray(measurements, dtype=np.float64).T / timing.SCORE_UNITS
-    gap = np.median([left, center, right], axis=0)
-    base, top = np.percentile(gap, [10, 90])
+    scaled = [tuple(value / timing.SCORE_UNITS for value in row) for row in measurements]
+    gap = [sorted(row[:3])[1] for row in scaled]
+    base, top = _deciles(gap)
     if top - base < .025:
         return None
-    opening = np.clip((gap - base) / (top - base), -.5, 1.5)
+    opening = [_clip((value - base) / (top - base), -.5, 1.5) for value in gap]
     # Derivatives are admitted only on contiguous picture samples.
-    adjacent = np.array([0, *np.diff(index)]) == 1
-    speed = np.where(adjacent, np.r_[0, np.diff(opening)], 0)
-    features = [gap, opening, speed]
+    features = [gap, opening, _speed(opening, index)]
     if shape:
-        lo, hi = np.percentile(width, [10, 90])
-        relative_width = np.clip((width - lo) / max(.02, hi - lo), -.5, 1.5)
-        spread_speed = np.where(adjacent, np.r_[0, np.diff(relative_width)], 0)
-        features.extend((width, relative_width, spread_speed, center / width,
-                         (center - (left + right) * .5) / (gap + .03), abs(left - right)))
-    return times, index, np.stack(features, axis=1)
+        width = [row[3] for row in scaled]
+        lo, hi = _deciles(width)
+        relative_width = [_clip((value - lo) / max(.02, hi - lo), -.5, 1.5) for value in width]
+        center_to_width = [center / w for _, center, _, w in scaled]
+        lip_curve = [(center - (left + right) * .5) / (g + .03)
+                     for (left, center, right, _), g in zip(scaled, gap, strict=True)]
+        asymmetry = [abs(left - right) for left, _, right, _ in scaled]
+        features.extend((width, relative_width, _speed(relative_width, index), center_to_width, lip_curve, asymmetry))
+    return times, index, list(zip(*features, strict=True))
 
 
 def _index(times, sample):
@@ -46,44 +68,19 @@ def _index(times, sample):
     return best if abs(times[best] - sample) <= timing.MAX_NEAREST else None
 
 
-def fit(train, *, shape):
-    """Fit balanced visual classes on observed events from unchanged recordings."""
-    profiles = {label: [] for label in LABELS}
-    speakers = {label: set() for label in LABELS}
-    for row in train:
-        visual = visual_features(row["frames"], shape=shape)
-        if visual is None:
-            continue
-        times, _, features = visual
-        for label, sample, weight in row["deliveries"]["original"]["articulation"]:
-            i = _index(times, sample - FIT_LAG)
-            if weight >= .50 and i is not None:
-                profiles[label].append(features[i])
-                speakers[label].add(row["speaker"])
-    counts = {label: {"events": len(values), "speakers": len(speakers[label])} for label, values in profiles.items()}
-    labels = tuple(label for label in LABELS if counts[label]["events"] >= 12 and counts[label]["speakers"] >= 4)
-    if len(labels) < 3:
-        raise ValueError("The visual fit lacks enough observed shape classes")
-    data = np.vstack([profiles[label] for label in labels])
-    midpoint, scale = data.mean(axis=0), np.maximum(1e-6, data.std(axis=0))
-    groups = [(np.vstack(profiles[label]) - midpoint) / scale for label in labels]
-    centroids = np.stack([group.mean(axis=0) for group in groups])
-    # Equal weight per class and fixed shrinkage limit speaker- and
-    # recording-specific directions in the shared covariance.
-    residuals = [group - center for group, center in zip(groups, centroids, strict=True)]
-    covariance = np.mean([residual.T @ residual / len(residual) for residual in residuals], axis=0)
-    inverse = np.linalg.solve(.8 * covariance + .2 * np.eye(data.shape[1]), centroids.T)
-    bias = -.5 * np.sum(centroids * inverse.T, axis=1)
-    return {"shape": shape, "counts": counts, "labels": list(labels), "midpoint": midpoint.round(10).tolist(),
-            "scale": scale.round(10).tolist(), "coefficients": inverse.round(10).tolist(), "bias": bias.round(10).tolist()}
-
-
 def _log_support(features, classifier):
-    normalized = (features - classifier["midpoint"]) / classifier["scale"]
-    logits = normalized @ classifier["coefficients"] + classifier["bias"]
-    logits -= logits.max(axis=1, keepdims=True)
-    chance = np.mean(np.exp(logits), axis=1, keepdims=True)
-    return logits - np.log(chance)
+    columns = list(zip(*classifier["coefficients"], strict=True))
+    result = []
+    for row in features:
+        normalized = [(value - midpoint) / scale
+                      for value, midpoint, scale in zip(row, classifier["midpoint"], classifier["scale"], strict=True)]
+        logits = [sum(a * b for a, b in zip(normalized, column, strict=True)) + bias
+                  for column, bias in zip(columns, classifier["bias"], strict=True)]
+        peak = max(logits)
+        shifted = [logit - peak for logit in logits]
+        chance = log(sum(exp(logit) for logit in shifted) / len(shifted))
+        result.append([logit - chance for logit in shifted])
+    return result
 
 
 def compatible(frames, sounds, classifier):
@@ -93,17 +90,18 @@ def compatible(frames, sounds, classifier):
     times, indices, features = visual
     labels = classifier["labels"]
     support = _log_support(features, classifier)
-    answer = support.argmax(axis=1)
+    answers = [max(range(len(scores)), key=scores.__getitem__) for scores in support]
+    label_index = {label: index for index, label in enumerate(labels)}
     events = []
     for label, sample, weight in sounds:
-        if label not in labels:
+        if label not in label_index:
             continue
         picture = [_index(times, sample - lag) for lag in LAGS]
         if any(i is None for i in picture):
             continue
-        scores = [round(float(np.clip(support[i, labels.index(label)], -MAX_LOG_SUPPORT, MAX_LOG_SUPPORT)
-                              * weight) * timing.SCORE_UNITS) for i in picture]
-        events.append((sample, label, scores, [indices[i] for i in picture], [labels[answer[i]] for i in picture]))
+        scores = [round(_clip(support[i][label_index[label]], -MAX_LOG_SUPPORT, MAX_LOG_SUPPORT)
+                        * weight * timing.SCORE_UNITS) for i in picture]
+        events.append((sample, label, scores, [indices[i] for i in picture], [labels[answers[i]] for i in picture]))
     return events
 
 

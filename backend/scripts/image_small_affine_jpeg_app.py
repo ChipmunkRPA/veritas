@@ -16,8 +16,8 @@ from scripts.video_short_return_encoded_app import PaymentStub, body, checkout, 
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def fixtures(receipt):
-    assert study.review(receipt) == receipt["summary"]
+def fixtures(receipt, review):
+    assert review(receipt) == receipt["summary"]
     entries = list(zip(receipt["freeze"]["rows"], receipt["observed"], strict=True))
     ordinary = {(row["group"], row["quality"]): row for row, _ in entries if row["role"] == "original"}
     for long_edge, quality in ((768, 75), (1024, 90)):
@@ -92,6 +92,13 @@ def run(args):
     from app.storage.objects import default_store
     from scripts.verify_multimedia_exports import scan
 
+    if args.webp:
+        from scripts import image_small_affine_webp
+
+        review, media_type = image_small_affine_webp.review, "image/webp"
+    else:
+        review, media_type = study.review, "image/jpeg"
+
     def decision(identifier):
         with get_session() as db:
             result = json.loads(default_store().read_bytes(db.get(Analysis, identifier).result_hash))
@@ -112,13 +119,13 @@ def run(args):
             key, _ = auth.issue_api_key(db, owner)
             db.commit()
         client.headers["X-API-Key"] = key
-        for row, matches in fixtures(receipt):
+        for row, matches in fixtures(receipt, review):
             path = args.inputs / row["file"]
             assert study.sha(path.read_bytes()) == row["sha256"]
             ids, packages = [], []
             for enabled in (False, True):
                 settings.image_small_affine_copy_review = enabled
-                identifier = checkout(client, stub, path, kind="image", media_type="image/jpeg", filename=path.name)
+                identifier = checkout(client, stub, path, kind="image", media_type=media_type, filename=path.name)
                 ids.append(identifier)
                 packages.append(body(client.get(f"/api/v2/analyses/{identifier}/evidence-packets")))
             baseline, evidence = packages
@@ -158,4 +165,5 @@ if __name__ == "__main__":
     for name in ("output", "receipt", "inputs"):
         parser.add_argument(name, type=Path)
     parser.add_argument("--browser", action="store_true")
+    parser.add_argument("--webp", action="store_true")
     run(parser.parse_args())

@@ -316,10 +316,13 @@ def _affine_record(db: Session, analysis: Analysis, store: ObjectStore, document
                if (masks := copy_affine.dense_pair(gray, matrix, bounds)) is not None]
     if not matches and not reduced and settings.environment == "dev" and settings.image_small_affine_copy_review:
         from app.detectors.image import copy_affine_small
+        from app.detectors.image.reference_lossy_webp import webp_size
         from app.evidence.image_jpeg_offgrid_source import encoded_profile
 
         data = legacy._verified(store, analysis.sha256)
-        if data.startswith(b"\xff\xd8") and encoded_profile(data) in {75, 90}:
+        jpeg_supported = data.startswith(b"\xff\xd8") and encoded_profile(data) in {75, 90}
+        webp_supported = max(source.size) >= 768 and webp_size(data, minimum_side=384) == source.size
+        if jpeg_supported or webp_supported:
             try:
                 extra = copy_affine_small.confirmed(rgb)
             except copy_move.CandidateBudgetExceeded:

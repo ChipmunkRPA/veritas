@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [WebP geometric copy replay](image-small-affine-webp-2026-11-16.md#replay)
+compares three search methods on 466 encodes from 37 photo groups. It
+reconstructs both crop locations from a single uploaded image and verifies
+the same masks in the app and the signed exports.
+
 The [native writing passage replay](writing-native-passage-locations-2026-11-16.md#reproduce)
 compares the same 49 ordinary and rewritten pairs across five formats.
 It records changed sentence inputs and checks the original Word, PDF and

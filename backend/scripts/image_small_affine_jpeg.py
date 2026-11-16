@@ -196,13 +196,9 @@ def mask_record(masks, truth):
 
 
 def observe(root, row):
-    import cv2
     import numpy as np
     from PIL import Image
 
-    from app.detectors.image import copy_affine, copy_affine_small, copy_move
-
-    cv2.setNumThreads(1)
     data = (root / row["file"]).read_bytes()
     require(sha(data) == row["sha256"], "JPEG bytes differ from the freeze")
     with Image.open(io.BytesIO(data), formats=("JPEG",)) as encoded:
@@ -213,6 +209,16 @@ def observe(root, row):
         with np.load(root / (row["file"].rsplit("-", 1)[0] + ".npz")) as labels:
             truth = tuple(labels[key] for key in ("donor", "receiver"))
         require([sha(mask.tobytes()) for mask in truth] == row["truth"], "Truth pixels differ")
+    return {"sha256": row["sha256"], **measure(pixels, truth)}
+
+
+def measure(pixels, truth):
+    import cv2
+    import numpy as np
+
+    from app.detectors.image import copy_affine, copy_affine_small, copy_move
+
+    cv2.setNumThreads(1)
     gray = copy_affine.luma(pixels)
     current, proposed = [], []
     current_assessable = fallback_assessable = True
@@ -234,7 +240,7 @@ def observe(root, row):
                     break
         except copy_move.CandidateBudgetExceeded:
             fallback_assessable = False
-    return {"sha256": row["sha256"], "truth_pixels": [int(mask.sum()) for mask in truth] if truth else None,
+    return {"truth_pixels": [int(mask.sum()) for mask in truth] if truth else None,
             "current_assessable": current_assessable, "fallback_assessable": fallback_assessable,
             "current": current, "proposed": proposed}
 
@@ -256,9 +262,13 @@ def review(record):
             "Wrong comparison roster")
     require(plan["contract"]["detail_minimum"] == MIN_DETAIL and plan["contract"]["color_error_maximum"] == MAX_COLOR_ERROR,
             "The comparison points changed")
-    distinct = len({row["sha256"] for row in plan["rows"]})
+    return tally(plan["rows"], record["observed"])
+
+
+def tally(rows, observations):
+    distinct = len({row["sha256"] for row in rows})
     stats, groups = Counter(), {}
-    for row, result in zip(plan["rows"], record["observed"], strict=True):
+    for row, result in zip(rows, observations, strict=True):
         require(row["sha256"] == result["sha256"], "Comparison rows do not match the freeze")
         current, proposed = result["current"], result["proposed"]
         selected = next((item for item in proposed if item["detail"] is not None and item["detail"][0] <= MAX_COLOR_ERROR

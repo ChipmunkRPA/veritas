@@ -60,6 +60,11 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Small geometric copies in a single lossy WebP](image-small-affine-webp-2026-11-16.md)
+  locates both copied areas on 41 of 168 staged edits, up from 16, with
+  zero flags across 298 ordinary deliveries. Both areas are shown with
+  original crops and masks. The check contributes zero authorship weight.
+
 - [Separate writing passages in native files](writing-native-passage-locations-2026-11-16.md)
   transfers the plain-text check to Word, mapped email replies and
   selectable PDFs. All 294 Word and email deliveries reproduce the

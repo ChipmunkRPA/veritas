@@ -93,7 +93,11 @@ are not public screening promises or calibrated population probabilities.
   On 312 separate deliveries, the six-second fit adds three correct
   −5 dB locations without new control alerts. At −10 dB it adds one
   correct location, one untouched alert and one ordinary-processing
-  alert. The candidate is in evaluation with original-utterance controls.
+  alert. On 112 deliveries using matched original utterances, the
+  six-second fit adds two correct locations at −5 dB and the ten-second
+  fit adds one at −10 dB. Each adds zero ordinary alerts at the level
+  where it gains those locations. Both alert on the same clean original.
+  Both candidates remain in evaluation.
 
 - [Writing changes within a document](writing-local-baseline-transfer-2026-11-16.md)
   add exact source locations when a passage stands out within the same

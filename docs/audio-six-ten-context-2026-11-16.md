@@ -112,9 +112,8 @@ six-second point adds one −5 dB location with zero added alerts
 there. Requiring agreement recovers one location at −10 dB at the
 same additional ordinary counts as the wider six-second fit.
 No variant adds an isolated-background alert. The six-second fit
-is the stronger candidate for a further test using the original
-utterances as matched controls. The app continues using its
-existing checks while that comparison is prepared.
+is the stronger candidate for a follow-up using the original
+utterances as matched controls.
 
 ## Same-utterance controls
 
@@ -141,6 +140,28 @@ The frozen panel contains 112 deliveries. Scoring uses the same
 fit and operating points. [Source matches and input commitments](evaluation-panels/audio-six-ten-context-matched-inputs-2026-11-16.json.gz)
 · [Publisher checksum](https://www.openslr.org/resources/60/checksum.md5)
 
+The app's existing check ran on all 18 deliveries where either candidate
+could change the result. The table counts additional useful edit locations
+and additional ordinary alerts across all 112 deliveries. It includes 14
+verified originals per condition and 14 isolated-background controls at
+each noise level. The edited source utterances are a subset of the earlier
+fresh comparison with new paired originals and mixtures.
+
+| Condition at the wider point | Six seconds, locations / ordinary alerts | Ten seconds, locations / ordinary alerts | Either, locations / ordinary alerts |
+| --- | ---: | ---: | ---: |
+| Clean | 0 / 1 | 0 / 1 | 0 / 1 |
+| Competing speech, −5 dB | 2 / 0 | 0 / 3 | 2 / 3 |
+| Competing speech, −10 dB | 0 / 0 | 1 / 0 | 1 / 0 |
+
+The six-second additions at −5 dB come from two source pairs. Both heads
+alert on the same clean original. Every variant adds zero isolated-background
+alerts. The tighter point adds zero correct locations and zero alerts across
+the three conditions. Requiring agreement adds only the clean ordinary
+alert at the wider point. The mixing ratios are known from preparation.
+Selecting different checks for real uploads would require a separately
+validated acoustic measurement from the delivered audio. Both candidates
+remain in evaluation. [Per-delivery changes and frozen source plan](evaluation-panels/audio-six-ten-context-matched-delta-2026-11-16.json.gz)
+
 ## Replay
 
 The portable verification reproduces the per-width and whole-input
@@ -158,6 +179,8 @@ python3 -B -S -m scripts.independent_review count-events "$review/manifest.json"
   "$review/truth.json" "$review/current_plus_ten.json" "$recount" --match 0.30 0.50
 delta=docs/evaluation-panels/audio-six-ten-context-fresh-delta-2026-11-16.json.gz
 python3 -B -S -m scripts.audio_long_context_review "$delta" --incremental
+matched=docs/evaluation-panels/audio-six-ten-context-matched-delta-2026-11-16.json.gz
+python3 -B -S -m scripts.audio_long_context_review "$matched" --incremental
 ```
 
 The matched controls use the LibriTTS dev-clean archive with

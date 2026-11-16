@@ -29,6 +29,8 @@ a { color: #285f50; }
 """
 LABELS = {"body": "Message body", "quoted": "Quoted text", "signature": "Signature"}
 FILE_LABELS = {"plain_text": "Plain text", "docx": "Word body text", "pdf": "PDF text layer"}
+VALUE_LABELS = {"number": "Number changed", "date": "Date changed", "currency": "Amount changed",
+                "percentage": "Percentage changed", "percentage_points": "Percentage points changed"}
 PNG_URL = "data:image/png;base64,"
 TABLE_SKIP = {"no_matching_position": "No table at the same body position.",
               "unsupported_layout": "Outside the supported table layout.",
@@ -77,6 +79,21 @@ def _side(label, excerpt):
     html_ranges = f'<p class="coordinates">Decoded HTML positions · {" · ".join(html_positions)}</p>' if html_positions else ""
     return (f'<div class="side"><p class="coordinates">{label} [{start}, {end})</p>'
             f'{paragraph_ranges}<p class="excerpt">{value}</p>{html_ranges}{_page_previews(excerpt)}</div>')
+
+
+def _figures(comparison):
+    if comparison is None:
+        return ""
+    compared, differences, changes = (comparison[key] for key in ("compared", "differences", "changes"))
+    rows = []
+    for change in changes:
+        title = VALUE_LABELS[change["kind"]]
+        before = escape(change["earlier_value"])
+        after = escape(change["later_value"])
+        rows.append(f'<div class="keep-together"><h2>{title} · {before} → {after}</h2>'
+                    f'{_side("Earlier draft", change["earlier"])}{_side("Analyzed version", change["later"])}</div>')
+    return (f'<section><h2>Figures and dates</h2><p>{compared} matched · {differences} changed'
+            f' · {len(changes)} shown</p><p>{escape(comparison["scope"])}</p>{"".join(rows)}</section>')
 
 
 def _paired(review: dict | None) -> str:
@@ -216,7 +233,7 @@ def render(comparison: dict) -> bytes:
 <p class="brand">CHIPMUNK VERIFY</p><h1>Earlier-draft comparison</h1>
 <p>{escape(comparison['scope'])}</p><p>{escape(comparison['interpretation'])}</p>
 <p>Highlights mark changed words and punctuation. {positions} Each range includes its start and excludes its end.</p>
-<div class="sources">{''.join(sources)}</div>{_paired(paired)}
+<div class="sources">{''.join(sources)}</div>{_figures(comparison.get("numeric_comparison"))}{_paired(paired)}
 {''.join(changes) or f'<p>{no_changes}</p>'}{''.join(relocations)}{_word_tables(word_tables)}
 </body></html>'''
 

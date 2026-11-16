@@ -27,6 +27,32 @@ it('keeps the form hidden when the authenticated comparison is unavailable', asy
   expect(screen.queryByText('Compare with an earlier draft')).toBeNull()
 })
 
+it('shows only paired value changes and marks the source figure in each draft', async () => {
+  const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64), decoded_characters: 41, mime_part: null }
+  const excerpt = (value: string) => ({ start: 10, end: 30 + value.length,
+    text: `budget for work was ${value}`, changed_tokens: [[30, 30 + value.length]] as [number, number][] })
+  const comparison: DraftComparison = {
+    schema: 'chipmunk.document-revision-comparison/1', format: 'plain_text',
+    coordinate_space: 'decoded_source_unicode_codepoint',
+    earlier: source, later: source, changes: [], scope: 'Body text.', interpretation: 'Source comparison.',
+    numeric_comparison: {
+      schema: 'chipmunk.draft-value-comparison/1', scope: 'Matched wording.', affects_overall_confidence: false,
+      compared: 2, differences: 1, changes: [{ kind: 'currency', earlier: excerpt('$800'), later: excerpt('$920'),
+        earlier_value: '$800', later_value: '$920', earlier_range: [30, 34], later_range: [30, 34] }],
+    },
+  }
+  vi.mocked(draftAvailability).mockResolvedValue({ extension: '.txt', pairedCheckAvailable: false })
+  vi.mocked(compareDraft).mockResolvedValue({ comparison })
+  show()
+  const input = await screen.findByLabelText('Earlier draft')
+  fireEvent.change(input, { target: { files: [new File(['earlier'], 'earlier.txt')] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
+  await screen.findByText('Amount changed · $800 → $920')
+  expect(screen.getByText('2 matched · 1 changed')).toBeTruthy()
+  expect(screen.getByText('$800').tagName).toBe('MARK')
+  expect(screen.getByText('$920').tagName).toBe('MARK')
+})
+
 it('shows the page and both views of the source PDF crop', async () => {
   const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64), decoded_characters: 20, mime_part: null }
   const comparison: DraftComparison = {

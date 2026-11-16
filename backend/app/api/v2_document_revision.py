@@ -109,6 +109,25 @@ class DraftChange(BaseModel):
     later: DraftExcerpt | None
 
 
+class DraftValueChange(BaseModel):
+    kind: Literal["number", "date", "currency", "percentage", "percentage_points"]
+    earlier: DraftExcerpt
+    later: DraftExcerpt
+    earlier_value: str
+    later_value: str
+    earlier_range: tuple[int, int]
+    later_range: tuple[int, int]
+
+
+class DraftValueComparison(BaseModel):
+    schema_name: Literal["chipmunk.draft-value-comparison/1"] = Field(alias="schema")
+    scope: str
+    affects_overall_confidence: Literal[False]
+    compared: int
+    differences: int
+    changes: list[DraftValueChange]
+
+
 class DraftRelocatedPassage(BaseModel):
     earlier: DraftExcerpt
     later: DraftExcerpt
@@ -248,6 +267,7 @@ class DraftComparison(BaseModel):
     paired_check: DraftPairedCheck | None = None
     word_tables: DraftWordTables | None = None
     relocated_passages: list[DraftRelocatedPassage] | None = None
+    numeric_comparison: DraftValueComparison | None = None
 
 
 class DocumentRevisionResponse(BaseModel):
@@ -351,6 +371,7 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
             earlier, later, extension, earlier_extension=earlier_extension,
             email_body_only=paired_enabled, pdf_paired_text_only=paired_enabled,
             pdf_independent=pdf_independent, mixed_paired=mixed_paired,
+            include_values=True,
         )
     except (UnicodeError, LookupError, RecursionError):
         raise ProblemError(422, "Could not compare drafts", "Use readable files in a supported draft format.") from None

@@ -236,6 +236,60 @@ def _upload(data, extension=".eml"):
     return {"earlier": ("earlier" + extension, data, "application/octet-stream")}
 
 
+def test_figure_changes_use_exact_source_ranges_across_txt_and_pdf(reference_http, monkeypatch, tmp_path):
+    from scripts.replay_document_mixed_formats import pdf
+
+    fixture = _install(reference_http, monkeypatch)
+    original = ("The agency placed the treatment date at March 4, 2020.\n\n"
+                "The board set the annual rate at 4.50 percent of loan balances.\n\n"
+                "The approved budget for the work was $1,000.")
+    revised = original.replace("March 4, 2020", "2020-03-05").replace("4.50 percent", "5.00%").replace("$1,000", "$1.00 thousand")
+    before, after = original.encode(), pdf(revised)
+    _saved(fixture, "changed-figures", ".pdf", after)
+    response = fixture.client.post(_url("changed-figures"), headers=fixture.viewer,
+                                   files=_upload(before, ".txt"), data={"include_pdf": "true"})
+    assert response.status_code == 200
+    payload = response.json()
+    proof = payload["comparison"]["numeric_comparison"]
+    assert not proof["affects_overall_confidence"] and (proof["compared"], proof["differences"]) == (3, 2)
+    assert [(row["kind"], row["earlier_value"], row["later_value"]) for row in proof["changes"]] == [
+        ("date", "March 4, 2020", "2020-03-05"), ("percentage", "4.50 percent", "5.00%")]
+    for row in proof["changes"]:
+        for side in ("earlier", "later"):
+            a, b = row[f"{side}_range"]
+            excerpt = row[side]
+            assert excerpt["text"][a - excerpt["start"]:b - excerpt["start"]] == row[f"{side}_value"]
+        assert row["later"]["pdf_pages"][0]["word_regions"]
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as rendered:
+        text = " ".join(" ".join(page.get_text().split()) for page in rendered)
+        assert "Figures and dates" in text
+        assert "Date changed · March 4, 2020 → 2020-03-05" in text
+        assert "Percentage changed · 4.50 percent → 5.00%" in text
+    earlier, later, export = (tmp_path / name for name in ("earlier.txt", "later.pdf", "comparison.json"))
+    earlier.write_bytes(before)
+    later.write_bytes(after)
+    export.write_text(json.dumps(payload["comparison"]))
+    assert review(export, earlier, later)["changed_figures_located"] == 2
+    proof["changes"][0]["later_range"][0] += 1
+    export.write_text(json.dumps(payload["comparison"]))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(export, earlier, later)
+
+
+def test_figure_comparison_withholds_duplicate_context_and_quoted_email():
+    budget = "The approved budget for the work was $1,000."
+    original = f"{budget}\n\n{budget}\n"
+    changed = original.replace("$1,000", "$1,250")
+    result, *_ = document_revision.compare_with_sources(original.encode(), changed.encode(), ".txt", include_values=True)
+    assert "numeric_comparison" not in result
+    email = f"{budget}\n\n> The published budget for the work was $1,050.\n"
+    updated = email.replace("$1,000", "$1,250").replace("$1,050", "$1,350")
+    result, *_ = document_revision.compare_with_sources(_email(email), _email(updated), ".eml", include_values=True)
+    proof = result["numeric_comparison"]
+    assert proof["compared"] == 1
+    assert [row["later_value"] for row in proof["changes"]] == ["$1,250"]
+
+
 def test_pdf_comparison_binds_repeated_text_to_both_original_pages(reference_http, monkeypatch, tmp_path):
     f = _install(reference_http, monkeypatch)
     monkeypatch.setattr(settings, "text_checkpoint_agreement_review", False)
@@ -1651,6 +1705,7 @@ def test_independent_word_draft_maps_the_changed_sentence_after_an_inserted_para
 
 def test_adjacent_sentence_pair_uses_exact_text_exports_and_preserves_legacy_replay(reference_http, monkeypatch, tmp_path):
     f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "document_paired_block_review", False)
     monkeypatch.setattr(settings, "text_detector_mode", "candidate")
     monkeypatch.setattr(settings, "text_window_sentences", 3)
     monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)

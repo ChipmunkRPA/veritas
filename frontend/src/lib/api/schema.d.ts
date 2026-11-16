@@ -3567,6 +3567,7 @@ export interface components {
             /** Interpretation */
             interpretation: string;
             later: components["schemas"]["DraftSource"];
+            numeric_comparison?: components["schemas"]["DraftValueComparison"] | null;
             paired_check?: components["schemas"]["DraftPairedCheck"] | null;
             /** Relocated Passages */
             relocated_passages?: components["schemas"]["DraftRelocatedPassage"][] | null;
@@ -3787,6 +3788,51 @@ export interface components {
             mime_part: string | null;
             /** Sha256 */
             sha256: string;
+        };
+        /** DraftValueChange */
+        DraftValueChange: {
+            earlier: components["schemas"]["DraftExcerpt"];
+            /** Earlier Range */
+            earlier_range: [
+                number,
+                number
+            ];
+            /** Earlier Value */
+            earlier_value: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "number" | "date" | "currency" | "percentage" | "percentage_points";
+            later: components["schemas"]["DraftExcerpt"];
+            /** Later Range */
+            later_range: [
+                number,
+                number
+            ];
+            /** Later Value */
+            later_value: string;
+        };
+        /** DraftValueComparison */
+        DraftValueComparison: {
+            /**
+             * Affects Overall Confidence
+             * @constant
+             */
+            affects_overall_confidence: false;
+            /** Changes */
+            changes: components["schemas"]["DraftValueChange"][];
+            /** Compared */
+            compared: number;
+            /** Differences */
+            differences: number;
+            /**
+             * Schema
+             * @constant
+             */
+            schema: "chipmunk.draft-value-comparison/1";
+            /** Scope */
+            scope: string;
         };
         /** DraftWordCellChange */
         DraftWordCellChange: {

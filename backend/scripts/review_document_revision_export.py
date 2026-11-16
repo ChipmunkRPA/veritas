@@ -79,6 +79,7 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
         strict_word_tables=schema == WORD_TABLES_SCHEMA,
         include_relocations=anchored or relocated,
         include_edited_relocations=schema == EDITED_RELOCATION_SCHEMA,
+        include_values="numeric_comparison" in received,
     )
     rebuilt = refine_wording(expected, old_text, new_text) if anchored else expected
     if json.dumps(received, sort_keys=True, allow_nan=False) != json.dumps(rebuilt, sort_keys=True, allow_nan=False):
@@ -89,6 +90,10 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
     if passages := expected.get("relocated_passages"):
         result["relocated_passages_verified"] = len(passages)
         excerpts.extend(passage[side] for passage in passages for side in ("earlier", "later"))
+    if values := expected.get("numeric_comparison"):
+        result["figures_compared"] = values["compared"]
+        result["changed_figures_located"] = len(values["changes"])
+        excerpts.extend(row[side] for row in values["changes"] for side in ("earlier", "later"))
     result["changed_token_ranges_verified"] = sum(len(excerpt["changed_tokens"]) for excerpt in excerpts)
     if ".docx" in (extension, old_extension):
         result["body_paragraph_ranges_verified"] = sum(len(excerpt.get("paragraphs", ())) for excerpt in excerpts)

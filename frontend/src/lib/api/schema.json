@@ -5673,6 +5673,16 @@
           "later": {
             "$ref": "#/components/schemas/DraftSource"
           },
+          "numeric_comparison": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DraftValueComparison"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
           "paired_check": {
             "anyOf": [
               {
@@ -6000,7 +6010,8 @@
               "chipmunk.paired-writing-review/8",
               "chipmunk.paired-writing-review/9",
               "chipmunk.paired-writing-review/10",
-              "chipmunk.paired-writing-review/11"
+              "chipmunk.paired-writing-review/11",
+              "chipmunk.paired-writing-review/12"
             ],
             "title": "Schema",
             "type": "string"
@@ -6472,6 +6483,117 @@
           "mime_part"
         ],
         "title": "DraftSource",
+        "type": "object"
+      },
+      "DraftValueChange": {
+        "properties": {
+          "earlier": {
+            "$ref": "#/components/schemas/DraftExcerpt"
+          },
+          "earlier_range": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Earlier Range",
+            "type": "array"
+          },
+          "earlier_value": {
+            "title": "Earlier Value",
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "number",
+              "date",
+              "currency",
+              "percentage",
+              "percentage_points"
+            ],
+            "title": "Kind",
+            "type": "string"
+          },
+          "later": {
+            "$ref": "#/components/schemas/DraftExcerpt"
+          },
+          "later_range": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Later Range",
+            "type": "array"
+          },
+          "later_value": {
+            "title": "Later Value",
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "earlier",
+          "later",
+          "earlier_value",
+          "later_value",
+          "earlier_range",
+          "later_range"
+        ],
+        "title": "DraftValueChange",
+        "type": "object"
+      },
+      "DraftValueComparison": {
+        "properties": {
+          "affects_overall_confidence": {
+            "const": false,
+            "title": "Affects Overall Confidence",
+            "type": "boolean"
+          },
+          "changes": {
+            "items": {
+              "$ref": "#/components/schemas/DraftValueChange"
+            },
+            "title": "Changes",
+            "type": "array"
+          },
+          "compared": {
+            "title": "Compared",
+            "type": "integer"
+          },
+          "differences": {
+            "title": "Differences",
+            "type": "integer"
+          },
+          "schema": {
+            "const": "chipmunk.draft-value-comparison/1",
+            "title": "Schema",
+            "type": "string"
+          },
+          "scope": {
+            "title": "Scope",
+            "type": "string"
+          }
+        },
+        "required": [
+          "schema",
+          "scope",
+          "affects_overall_confidence",
+          "compared",
+          "differences",
+          "changes"
+        ],
+        "title": "DraftValueComparison",
         "type": "object"
       },
       "DraftWordCellChange": {

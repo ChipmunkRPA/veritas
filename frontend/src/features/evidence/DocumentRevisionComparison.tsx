@@ -108,6 +108,36 @@ function Excerpt({ label, excerpt }: { label: string; excerpt: DraftExcerpt | nu
   </div>
 }
 
+const figureLabels = {
+  number: 'Number changed',
+  date: 'Date changed',
+  currency: 'Amount changed',
+  percentage: 'Percentage changed',
+  percentage_points: 'Percentage points changed',
+}
+
+function FigureResults({ comparison }: { comparison: NonNullable<DraftComparison['numeric_comparison']> }) {
+  return <section aria-label="Figures and dates" className="mt-4 rounded-md border border-border p-3">
+    <h3 className="m-0 text-small font-medium">Figures and dates</h3>
+    <p className="mt-1 mb-0 text-caption text-text-muted">
+      {comparison.compared} matched · {comparison.differences} changed
+      {comparison.changes.length < comparison.differences && ` · ${comparison.changes.length} shown`}
+    </p>
+    <p className="mt-1 mb-0 text-caption text-text-muted">{comparison.scope}</p>
+    {comparison.changes.map(change => (
+      <div key={change.later_range[0]} className="mt-3 border-t border-border pt-3">
+        <p className="m-0 text-small font-medium">
+          {figureLabels[change.kind]} · {change.earlier_value} → {change.later_value}
+        </p>
+        <div className="mt-2 grid gap-4 sm:grid-cols-2">
+          <Excerpt label="Earlier draft" excerpt={change.earlier} />
+          <Excerpt label="Analyzed version" excerpt={change.later} />
+        </div>
+      </div>
+    ))}
+  </section>
+}
+
 function DraftResult({ result }: { result: DocumentRevisionResponse }) {
   const anchorPrefix = useId()
   const { comparison, pdf } = result
@@ -147,6 +177,7 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
     {comparison.format === 'email' && <p className="mt-2 mb-0 text-caption text-text-muted">
       Earlier MIME part {comparison.earlier.mime_part} · Analyzed MIME part {comparison.later.mime_part}
     </p>}
+    {comparison.numeric_comparison && <FigureResults comparison={comparison.numeric_comparison} />}
     {paired && <section aria-label="Experimental paired writing check" className="mt-4 rounded-md border border-border p-3">
       <h3 className="m-0 text-small font-medium">Experimental paired writing check</h3>
       <p className="mt-2 mb-0 text-small">{paired.summary}</p>

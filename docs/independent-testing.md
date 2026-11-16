@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [draft figure replay](document-draft-figures-2026-11-16.md#independent-replay)
+compares word anchors around values in staged edits and two published
+rewrite sets. It recounts exact figure locations, equivalent-format
+controls, matched coverage and the independently recorded unit changes.
+
 The [lip timing carrier replay](video-lip-carrier-transfer-2026-11-16.md#independent-replay)
 recounts the separate 48 kHz AAC and 29.97 fps comparisons from exact
 picture and soundtrack timestamps. It includes the later MP4 transfer

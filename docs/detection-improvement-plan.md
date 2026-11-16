@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Exact figure and date changes in earlier drafts](document-draft-figures-2026-11-16.md)
+  shows both printed values and their source locations. The selected rule
+  recovers 15 of 37 staged value changes and produces zero flags across
+  145 equivalent, identical or different-article controls. It also shows
+  how short anchors can mispair numbers in substantially rewritten text.
+
 - [Speech-to-mouth matching on 48 kHz AAC](video-lip-carrier-transfer-2026-11-16.md)
   locates six of 34 held word replacements, up from zero with basic
   timing. Ordinary flags rise from 2/68 to 3/68. The local app preserves

@@ -17,7 +17,7 @@ from tempfile import TemporaryDirectory
 from zipfile import BadZipFile, ZipFile
 
 from app.detectors.text.extract import _normalise, extract, text_hash
-from app.evidence import document_revision_pdf
+from app.evidence import document_revision_pdf, document_revision_values
 from app.evidence.document_scope import email_agreement_body_spans, mapped_email_html
 from app.storage.files import check_docx_safe
 
@@ -305,6 +305,52 @@ def _ordinary_body_indices(text, layout, extension, body):
     return {index for index, (_, body_index, _, _) in enumerate(layout) if body_index in positions}
 
 
+def _figure_blocks(text, layout, by_role, extension, word_body):
+    if extension == ".txt":
+        return layout
+    if extension == ".docx":
+        visible = _ordinary_body_indices(text, layout, extension, word_body)
+        return [(a, b) for index, (_, _, a, b) in enumerate(layout) if index in visible]
+    if extension == ".pdf":
+        if (any(row["hidden_text_on_page"] for row in layout)
+                or not document_revision_pdf.ordered_text(
+                    text, layout, page_limit=document_revision_pdf.NATIVE_COMPARISON_MAX_PAGES, single_column=True)):
+            return []
+        return [(row["start"], row["end"]) for row in layout]
+    body = _email_body_prefix(text, by_role)
+    boundaries = [0, *(match.end() for match in re.finditer(r"\r?\n[ \t]*\r?\n", body)), len(body)]
+    return [(a, b) for a, b in zip(boundaries, boundaries[1:]) if a < b]
+
+
+def _figure_comparison(earlier, later):
+    versions = (earlier, later)
+    tables = [document_revision_values.readings(source[0], _figure_blocks(*source)) for source in versions]
+    paired = document_revision_values.compare(*tables)
+    if not paired:
+        return None
+    changed = [pair for pair in paired if pair[0].value != pair[1].value]
+    summary = {"schema": document_revision_values.SCHEMA, "scope": document_revision_values.SCOPE,
+               "affects_overall_confidence": False, "compared": len(paired), "differences": len(changed), "changes": []}
+    for pair in changed:
+        if len(summary["changes"]) >= document_revision_values.MAX_RESULTS:
+            break
+        excerpts = {}
+        for side, figure, (text, layout, _, extension, _) in zip(("earlier", "later"), pair, versions, strict=True):
+            a, b = figure.span
+            # The existing PDF and HTML locator accepts source word extents.
+            # A date or scaled figure can cover more than one of those words.
+            parts = [[a + part.start(), a + part.end()] for part in re.finditer(r"\S+", text[a:b])]
+            try:
+                excerpts[side] = _excerpt(text, list(figure.context), parts, layout, extension)
+            except ValueError:
+                break
+            excerpts[f"{side}_value"] = text[a:b]
+            excerpts[f"{side}_range"] = [a, b]
+        if len(excerpts) == 6:
+            summary["changes"].append({"kind": pair[0].kind, **excerpts})
+    return summary
+
+
 def _relocated_paragraph(earlier, later, old_layout, new_layout, extension, word_bodies):
     """Locate one unambiguous paragraph reorder among uniquely matched body paragraphs."""
     def paragraph_index(text, layout):
@@ -410,6 +456,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                          strict_word_tables: bool = False,
                          include_relocations: bool = True,
                          include_edited_relocations: bool = True,
+                         include_values: bool = False,
                          ) -> tuple[dict, str, str, WordLayouts | PdfLayouts | MixedLayouts | None]:
     """Return ephemeral native layouts for the requested paired sentence scope."""
     if extension not in FORMATS:
@@ -428,8 +475,8 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     mixed_pdf_scope = MIXED_PDF_SCOPE
     compare_word = extension == ".docx" and not mixed
     check_relocation = include_relocations and not strict_word_tables and not mixed and extension in {".txt", ".docx"}
-    word_bodies = (docx_body(earlier), docx_body(later)) if compare_word and (include_word_tables or check_relocation) else (None, None)
-    if mixed and mixed_paired:
+    word_bodies = (None, None)
+    if compare_word and (include_word_tables or check_relocation) or mixed_paired or include_values:
         word_bodies = tuple(docx_body(data) if suffix == ".docx" else None
                             for data, suffix in ((earlier, old_extension), (later, extension)))
     word_tables = None
@@ -464,6 +511,12 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                 raise ValueError("Use two email drafts with the same body type. Both must use plain text or supported HTML.")
             if old_layout is not None:
                 schema, scope, coordinates = HTML_SCHEMA, HTML_SCOPE, HTML_COORDINATES
+        values = None
+        if include_values:
+            values = _figure_comparison(
+                (old_text, old_layout, old_tokens, old_extension, word_bodies[0]),
+                (new_text, new_layout, new_tokens, extension, word_bodies[1]),
+            )
         if check_relocation:
             relocation = _relocated_paragraph(old_text, new_text, old_layout, new_layout, extension, word_bodies)
             if relocation is None and include_edited_relocations:
@@ -480,7 +533,11 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                 after = _excerpt(new_text, change["later"], change["later_changed_tokens"], new_layout, extension)
                 changes.append({"id": f"C{len(changes) + 1:02d}", "role": role, "earlier": before, "later": after})
         if ".pdf" in (extension, old_extension):
-            changes = document_revision_pdf.render_previews(changes, earlier_path, later_path)
+            value_rows = values["changes"] if values else []
+            rendered = document_revision_pdf.render_previews([*changes, *value_rows], earlier_path, later_path)
+            if values:
+                values["changes"] = rendered[len(changes):]
+            changes = rendered[:len(changes)]
             scope, coordinates = document_revision_pdf.SCOPE, document_revision_pdf.COORDINATES
     if extension == ".docx":
         scope, coordinates = DOCX_SCOPE, WORD_COORDINATES
@@ -492,6 +549,8 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
             "coordinate_space": coordinates,
             "earlier": old_source, "later": new_source, "changes": changes,
             "scope": scope, "interpretation": INTERPRETATION}
+    if values is not None:
+        result["numeric_comparison"] = values
     if mixed:
         layouts = (old_layout, new_layout)
         verified = mixed_paired and all(

@@ -1,0 +1,75 @@
+{
+  "browser": {
+    "audio_seconds": 0.4,
+    "matching_audio_range": true,
+    "original_mouth_crops": 3,
+    "page_errors": 0
+  },
+  "paid_analyses": 5,
+  "payment_mode": "test",
+  "presented_audio_samples": 32480,
+  "price_usd": 9.99,
+  "report_sha256": "bfd9abc1909ce1b51353f6bbf52daf3e9c8b8bde762309be0f03d26f84fb075f",
+  "results": [
+    {
+      "affects_overall_confidence": false,
+      "basis": null,
+      "delivery": "different_words.mp4",
+      "status": "unsupported"
+    },
+    {
+      "affects_overall_confidence": false,
+      "basis": "local_articulation",
+      "delivery": "different_words.mp4",
+      "status": "matched"
+    },
+    {
+      "affects_overall_confidence": false,
+      "basis": "speech_events",
+      "delivery": "same_words.mp4",
+      "status": "insufficient_events"
+    },
+    {
+      "affects_overall_confidence": false,
+      "basis": "speech_events",
+      "delivery": "original.mp4",
+      "status": "insufficient_events"
+    },
+    {
+      "affects_overall_confidence": false,
+      "basis": null,
+      "delivery": "opposed.mp4",
+      "status": "stereo_unresolved"
+    }
+  ],
+  "same_assessment": true,
+  "signed_original_replay": true,
+  "source_channels": 2,
+  "source_sample_rate": 48000,
+  "standard_checks": true,
+  "unpaid_jobs": 0,
+  "verified_assets": 8,
+  "witness": {
+    "articulation": {
+      "audio_sample": 14280,
+      "mismatched_events": 2,
+      "picture_frame": 22,
+      "picture_pts": 22022
+    },
+    "audio_source_pts": [
+      12800,
+      19200
+    ],
+    "baseline_lag_samples": -640,
+    "change_samples": 0,
+    "picture_frames": {
+      "after": 30,
+      "before": 20,
+      "during": 22
+    },
+    "picture_source_samples": [
+      13440,
+      19840
+    ]
+  }
+}

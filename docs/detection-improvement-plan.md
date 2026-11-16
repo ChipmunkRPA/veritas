@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Stereo video lip timing](video-lip-stereo-transfer-2026-11-16.md)
+  verifies both channel clocks and tests the existing timing comparison
+  under stereo delivery, panned environment and louder competing speech.
+  Fresh centered stereo found one of 19 replacements and flagged five
+  untouched clips. Matched mono found zero and flagged six. The stereo
+  path is limited to an opt-in development trial.
+
 - [Document-specific writing calibration](writing-profile-calibration-2026-11-16.md)
   compared automatic selection of genre calibrations on 18 new matched
   pairs and 56 untouched controls. The frozen choice found one more

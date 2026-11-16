@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [stereo lip timing replay](video-lip-stereo-transfer-2026-11-16.md#local-trial-and-replay)
+recounts 530 stereo deliveries and 57 matched mono comparisons from 53
+source clips. The reader rechecks audio bounds, picture anchor positions,
+channel admission and overlap with the known edits. It gives enough
+information to audit transfer without the acoustic model or source media.
+
 The [writing calibration replay](writing-profile-calibration-2026-11-16.md#replay)
 recreates the fixed automatic genre selections and recounts 184 test
 deliveries from their saved numeric inputs. The native readback can

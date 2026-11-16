@@ -539,6 +539,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.picture_hold_binding', 'app.evidence.picture_sequence',
                         'app.evidence.scene_return_binding', 'app.evidence.sound_event_binding',
                         'app.evidence.video_viseme_binding', 'app.evidence.video_viseme_ranked', 'app.evidence.video_viseme_timing',
+                        'app.evidence.video_viseme_stereo',
                         'app.evidence.stereo_binding', 'app.evidence.stereo_listening_binding',
                         'app.evidence.stereo_collapse_binding'):
             return None
@@ -596,7 +597,7 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
                                  'image_editor_preview_binding.py', 'image_transparency_binding.py', 'image_animation_binding.py',
                                  'stereo_binding.py', 'stereo_collapse_binding.py', 'scene_return_binding.py',
                                  'video_viseme_binding.py', 'video_viseme_ranked.py', 'video_viseme_timing.py',
-                                 'video_viseme_articulation.py', 'picture_sequence.py', 'source_geometry.py', 'document_chat_markers.py'])
+                                 'video_viseme_articulation.py', 'video_viseme_stereo.py', 'picture_sequence.py', 'source_geometry.py', 'document_chat_markers.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
 
@@ -632,7 +633,8 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
     elif name == 'video_viseme_binding.py':
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.core.canonical', 'canonical_hash'), ('app.evidence', 'video_viseme_timing'),
-                         ('app.evidence', 'video_viseme_ranked'), ('app.evidence', 'video_viseme_articulation')}
+                         ('app.evidence', 'video_viseme_ranked'), ('app.evidence', 'video_viseme_articulation'),
+                         ('app.evidence', 'video_viseme_stereo')}
     elif name in {'video_viseme_ranked.py', 'video_viseme_articulation.py'}:
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.evidence', 'video_viseme_timing')}

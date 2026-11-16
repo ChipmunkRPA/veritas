@@ -9,12 +9,13 @@ const browser = await chromium.launch({ headless: true })
 try {
   const context = await browser.newContext({ viewport: { width: 1366, height: 1020 },
     extraHTTPHeaders: { 'X-API-Key': input.key } })
+  context.setDefaultTimeout(15000)
   await context.route('**/*', route => new URL(route.request().url()).origin === input.url ? route.continue() : route.abort())
   const page = await context.newPage()
   const errors = []
   page.on('pageerror', error => errors.push(error.message))
   const [example] = input.cases
-  await page.goto(`${input.url}/analyses/${example.analysis_id}/media-evidence?view=plain`)
+  await page.goto(`${input.url}/analyses/${example.analysis_id}/media-evidence?view=plain`, { waitUntil: 'domcontentloaded' })
   const coverage = page.getByRole('region', { name: 'Speech and mouth comparison' })
   const support = coverage.getByRole('link', { name: 'Inspect source frames and waveform' })
   await support.waitFor()
@@ -27,10 +28,14 @@ try {
     await card.getByText(new RegExp(`${role} mismatch range · Frame ${index}`, 'i')).waitFor()
     const crop = card.getByAltText(new RegExp(`VLT01\\.${role}: exact measured mouth region`))
     await crop.waitFor()
-    await crop.evaluate(image => image.decode())
+    await crop.scrollIntoViewIfNeeded()
+    const image = await crop.elementHandle()
+    await page.waitForFunction(element => element.complete && element.naturalWidth > 0, image)
   }
   const waveform = card.getByAltText('Waveform during the speech and mouth mismatch')
-  await waveform.evaluate(image => image.decode())
+  await waveform.scrollIntoViewIfNeeded()
+  const waveImage = await waveform.elementHandle()
+  await page.waitForFunction(element => element.complete && element.naturalWidth > 0, waveImage)
   const playback = card.getByLabel('Listen to the soundtrack during the speech and mouth mismatch')
   assert.ok((await playback.getAttribute('src')).includes(example.sound_sha256))
   const audioSeconds = await playback.evaluate(async audio => {

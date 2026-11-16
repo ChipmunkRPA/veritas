@@ -7,7 +7,7 @@ import pytest
 
 from app.detectors.audio.decode import decode_audio
 from app.detectors.audio.phone_events import MODEL_BLOBS
-from app.detectors.video import viseme_review
+from app.detectors.video import viseme_review, viseme_stereo
 from app.evidence import video_viseme_binding as binding
 
 
@@ -70,3 +70,28 @@ def test_timing_reports_unavailable_assets_when_the_checkpoint_drive_is_missing(
     result = viseme_review.assess(None, SimpleNamespace(table=None), {}, {}, [])
 
     assert result == binding.skipped("assets")
+
+
+@pytest.mark.parametrize(("scale", "admitted"), [(1, True), (-1, False)])
+def test_stereo_48khz_timing_checks_both_channels_and_the_entire_clock(tmp_path, monkeypatch, scale, admitted):
+    path = tmp_path / "two-channels.m4a"
+    subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-f", "lavfi", "-i",
+                    "sine=frequency=400:sample_rate=48000:duration=2.1", "-af", f"pan=stereo|c0=c0|c1={scale}*c0",
+                    "-c:a", "aac", str(path)], check=True, timeout=20)
+    decoded = decode_audio(path, source_sha256=hashlib.sha256(path.read_bytes()).hexdigest(), inspect_stereo=True, retain_stereo=True)
+    mapping = decoded.mapping
+    scope = viseme_stereo.capture(decoded)
+    assert scope["blocks"][-1][1] == 33600
+    assert binding.audio_origin(mapping) is None
+    assert binding.audio_origin(mapping, scope) == (0 if admitted else None)
+    assert binding.audio_origin(mapping, scope | {"blocks": scope["blocks"][:-1]}) is None
+    assert binding.audio_origin(mapping | {"pcm_sha256": "9" * 64}, scope) is None
+    if admitted:
+        record = binding.measured({"frames": [], "phones": []}, timestamps=[], time_base="1/24", source={},
+                                  mapping=mapping, stereo_scope=scope)
+        assert record["schema"] == binding.SCHEMA_WITH_STEREO and record["stereo_scope"] == scope
+        assert record["affects_overall_confidence"] is False
+    else:
+        monkeypatch.setattr(viseme_review, "use_stereo", lambda: True)
+        record = viseme_review.assess(None, None, mapping, {}, [], stereo_scope=scope)
+        assert record == binding.skipped("stereo_unresolved")

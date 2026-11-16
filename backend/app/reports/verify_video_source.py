@@ -582,11 +582,16 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if lip_timing.get("inputs"):
         from app.detectors.audio.decode import VIDEO_AUDIO_MAX_SECONDS, decode_audio
         from app.detectors.video.viseme_review import audio_assets
+        from app.detectors.video.viseme_stereo import capture
 
-        decoded_audio = decode_audio(original, source_sha256=digest, max_seconds=VIDEO_AUDIO_MAX_SECONDS)
+        stereo_scope = lip_timing.get("stereo_scope")
+        decoded_audio = decode_audio(original, source_sha256=digest, max_seconds=VIDEO_AUDIO_MAX_SECONDS,
+                                     inspect_stereo=stereo_scope is not None, retain_stereo=stereo_scope is not None)
+        if stereo_scope is not None and capture(decoded_audio) != stereo_scope:
+            raise ValueError("The original video does not reproduce the timing review's stereo channel measurements")
         if (decoded_audio.mapping["pcm_sha256"] != lip_timing["pcm_sha256"]
                 or video_viseme_binding.presented_samples(decoded_audio.mapping) != lip_timing["inputs"]["samples"]
-                or video_viseme_binding.audio_origin(decoded_audio.mapping) != lip_timing["audio_origin_pts"]):
+                or video_viseme_binding.audio_origin(decoded_audio.mapping, stereo_scope) != lip_timing["audio_origin_pts"]):
             raise ValueError("The original video does not reproduce the timing review's soundtrack")
         if "source_duration_pts" in decoded_audio.mapping and any(
             decoded_audio.mapping[key] != evidence["audio"]["source"].get(key)

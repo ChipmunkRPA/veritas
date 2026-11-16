@@ -61,6 +61,12 @@ def freeze_input(ctx, decoded, *, path=None) -> dict:
 
             binding[soundtrack_binding.KEY] = pair.describe(source, reading, decoded, secondary, store_media)
         output = {'input': binding, 'destructive_mono_downmix': bool(destructive_downmix_windows(stereo_context))}
+        if settings.video_lip_stereo_aac_review and source_mapping['source_channels'] == 2:
+            from app.detectors.video.viseme_review import use_stereo
+            from app.detectors.video.viseme_stereo import capture
+
+            if use_stereo() and (scope := capture(decoded)) is not None:
+                output['lip_timing_stereo_scope'] = scope
         if stereo_context is not None:
             stereo = register_artefact(db, ctx.store, canonical_json(stereo_context), media_type='application/json',
                                        role='stage_output', created_by='video-audio-stereo/1', analysis_id=ctx.analysis_id)

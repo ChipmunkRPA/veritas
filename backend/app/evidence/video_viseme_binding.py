@@ -8,6 +8,7 @@ from fractions import Fraction
 
 from app.core.canonical import canonical_hash
 from app.evidence import video_viseme_ranked as ranked
+from app.evidence import video_viseme_stereo as stereo
 from app.evidence import video_viseme_timing as timing
 
 KEY = "lip_timing_review"
@@ -15,6 +16,7 @@ COMMITMENT = "lip_timing_review_sha256"
 SCHEMA = "chipmunk.video-lip-timing/1"
 SCHEMA_WITH_APERTURE = "chipmunk.video-lip-timing/2"
 SCHEMA_WITH_ARTICULATION = "chipmunk.video-lip-timing/3"
+SCHEMA_WITH_STEREO = "chipmunk.video-lip-timing/4"
 PACKET_ID = "VLT01"
 CLIP, WAVEFORM = "lip_timing_audio", "lip_timing_waveform"
 REFERENCE = {"closure": {"median": .000578}, "rounded": {"median": .3973106}, "spread": {"median": .9265317}}
@@ -45,6 +47,7 @@ STATUS = {
     "ambiguous_change": "Several timings fit the observations, leaving the local change uncertain.",
     "incomplete_context": "The timing estimate lacked complete before, during, and after picture evidence.",
     "unsupported": "The timing trial needs a short, continuous shot and a supported mono soundtrack.",
+    "stereo_unresolved": "A reliable timing comparison could not be made from the two soundtrack channels.",
     "assets": "The local timing trial's reference assets were unavailable.",
     "runtime": "The trial could not complete its measurements.",
     "provenance": "Trusted source credentials settled the provenance check. The local timing trial was skipped.",
@@ -81,9 +84,13 @@ def presented_samples(mapping):
     return samples if 20_000 <= samples <= 64_000 else None
 
 
-def audio_origin(mapping):
-    if (mapping.get("timeline_time_base") != "1/16000" or mapping.get("source_channels") != 1
-            or presented_samples(mapping) is None):
+def audio_origin(mapping, stereo_scope=None):
+    extent = presented_samples(mapping)
+    if mapping.get("timeline_time_base") != "1/16000" or extent is None:
+        return None
+    if stereo_scope is None and mapping.get("source_channels") != 1:
+        return None
+    if stereo_scope is not None and not stereo.qualifies(stereo_scope, mapping, extent):
         return None
     samples = mapping["samples"]
     clock = mapping.get("timeline") or []
@@ -137,8 +144,8 @@ def _validate_phones(events, samples, labels):
         last = at
 
 
-def measured(raw, *, timestamps, time_base, source, mapping):
-    origin = audio_origin(mapping)
+def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
+    origin = audio_origin(mapping, stereo_scope)
     if origin is None:
         raise ValueError("The mixed soundtrack has no supported continuous source clock")
     base = Fraction(time_base)
@@ -214,6 +221,8 @@ def measured(raw, *, timestamps, time_base, source, mapping):
                                if basis["measurement_basis"] == "local_articulation" else note["observation"])
         if note["status"] == "no_match":
             note["observation"] = "No qualifying local speech and mouth difference was found in the measured ranges."
+    if stereo_scope is not None:
+        basis.update(schema=SCHEMA_WITH_STEREO, stereo_scope=stereo_scope)
     return {**note, **basis,
             "pcm_sha256": mapping["pcm_sha256"], "audio_origin_pts": origin,
             "inputs": inputs, "measurement": candidate, "witness": witness}
@@ -223,19 +232,20 @@ def observation(record):
     witness = record["witness"]
     lo, hi = [sample / timing.RATE for sample in witness["audio_source_pts"]]
     a, b = [sample / timing.RATE for sample in witness["picture_source_samples"]]
+    soundtrack = " The excerpt and waveform show the analyzed mix of both soundtrack channels." if record.get("stereo_scope") else ""
     if anchor := witness.get("articulation"):
         count = anchor["mismatched_events"]
         return (f"Speech sounds and lip opening disagreed on {count} {'event' if count == 1 else 'events'} in this interval. "
                 f"Audio source time {lo:.3f}–{hi:.3f} s. Corresponding picture time {a:.3f}–{b:.3f} s. "
                 f"The strongest visible example is frame {anchor['picture_frame']}, compared with "
-                f"the speech event at {anchor['audio_sample'] / timing.RATE:.3f} s.")
+                f"the speech event at {anchor['audio_sample'] / timing.RATE:.3f} s." + soundtrack)
     direction = "later" if witness["change_samples"] > 0 else "earlier"
     change = abs(witness["change_samples"]) * 1000 / timing.RATE
     description = (f"Relative to the surrounding timing, the audio was approximately {change:.0f} ms {direction}. "
                    f"Audio source time {lo:.3f}–{hi:.3f} s. Corresponding picture time {a:.3f}–{b:.3f} s.")
     if record.get("measurement_basis") == "relative_mouth_opening":
         description += " Mouth opening and speech supported a different offset inside this interval than on both sides."
-    return description
+    return description + soundtrack
 
 
 def validate(document, *, timestamps=None, committed=_UNSET):
@@ -251,11 +261,11 @@ def validate(document, *, timestamps=None, committed=_UNSET):
             raise ValueError("Uncommitted lip timing evidence")
         return
     state = record["status"]
-    if (record.get("schema") not in {SCHEMA, SCHEMA_WITH_APERTURE, SCHEMA_WITH_ARTICULATION}
+    if (record.get("schema") not in {SCHEMA, SCHEMA_WITH_APERTURE, SCHEMA_WITH_ARTICULATION, SCHEMA_WITH_STEREO}
             or state not in STATUS or record.get("affects_overall_confidence") is not False):
         raise ValueError("Invalid lip timing disposition")
     if "inputs" not in record:
-        if record != skipped(state) or state not in {"unsupported", "assets", "runtime", "provenance"} or packets:
+        if record != skipped(state) or state not in {"unsupported", "stereo_unresolved", "assets", "runtime", "provenance"} or packets:
             raise ValueError("An unassessed lip timing review has unexpected details")
         return
     source_frames = record["inputs"]["frames"]
@@ -264,7 +274,8 @@ def validate(document, *, timestamps=None, committed=_UNSET):
             or (timestamps is not None and list(timestamps) != actual_pts)):
         raise ValueError("Lip timing frames do not reproduce the source clock")
     audio = document["audio"]["source"]
-    if measured(record["inputs"], timestamps=actual_pts, time_base=source["time_base"], source=source, mapping=audio) != record:
+    if measured(record["inputs"], timestamps=actual_pts, time_base=source["time_base"], source=source, mapping=audio,
+                stereo_scope=record.get("stereo_scope")) != record:
         raise ValueError("Lip timing measurements do not reproduce")
     if len(packets) != (state == "matched"):
         raise ValueError("Lip timing packet does not match its disposition")

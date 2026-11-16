@@ -133,7 +133,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
 
   return <div id="media-evidence-visual" data-testid="video-evidence-content" className="scroll-mt-20">
     {lipTiming && <section aria-labelledby="video-lip-timing-heading" className="mt-4 rounded-md border border-border p-4">
-      <h3 id="video-lip-timing-heading" className="m-0 text-body font-medium">{lipTiming.schema === 'chipmunk.video-lip-timing/3'
+      <h3 id="video-lip-timing-heading" className="m-0 text-body font-medium">{['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4'].includes(lipTiming.schema ?? '')
         ? 'Speech and mouth comparison' : 'Speech and mouth timing trial'}</h3>
       <p className="mt-2 mb-0 text-small text-text-muted">{lipTiming.observation}</p>
       {lipTiming.status === 'matched' && <a className="mt-2 inline-block text-small underline" href="#media-evidence-VLT01">Inspect source frames and waveform</a>}

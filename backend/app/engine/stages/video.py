@@ -263,7 +263,9 @@ def decode(ctx: StageContext) -> dict[str, Any]:
                       "source_mapping": audio_mapping, "evidence_input": audio_evidence.get("input"),
                       "source_clock_break_count": len(audio.clock_breaks),
                       "destructive_mono_downmix": cancelled,
-                      "stereo_context_sha256": audio_evidence.get("stereo_context_sha256")},
+                      "stereo_context_sha256": audio_evidence.get("stereo_context_sha256"),
+                      **({"lip_timing_stereo_scope": audio_evidence["lip_timing_stereo_scope"]}
+                         if "lip_timing_stereo_scope" in audio_evidence else {})},
             "artefacts": audio_evidence.get("artefacts", [])}
 
 
@@ -1211,7 +1213,8 @@ def render(ctx: StageContext) -> dict[str, Any]:
 
         timing_review = (video_viseme_binding.skipped("provenance") if provenance_gate.stop(ctx) else
                          assess(ctx, frame_store, ctx.state.get("video_audio_mapping"),
-                                decoded_audio.get("evidence_input"), shot_output.get("ranges")))
+                                decoded_audio.get("evidence_input"), shot_output.get("ranges"),
+                                stereo_scope=decoded_audio.get("lip_timing_stereo_scope")))
         if timing_review.get("witness"):
             anchors = frame_store.native_anchors()
     stereo_sha = decoded_audio.get("stereo_context_sha256")

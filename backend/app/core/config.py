@@ -257,6 +257,7 @@ class Settings(BaseSettings):
     video_lip_timing_ranked: bool = False  # Add clipwise aperture timing on supported 16 kHz soundtracks.
     video_lip_articulation_review: bool = False  # Compare visible mouth opening with brief speech events.
     video_lip_aac48_articulation_review: bool = False  # Admit that comparison on verified mono 48 kHz AAC.
+    video_lip_stereo_aac_review: bool = False  # Admit verified stereo when both channels support the analyzed mix.
     video_lip_timing_model_dir: Path | None = None
     video_lip_timing_face_asset: Path | None = None
     video_lip_timing_runtime: Path | None = None

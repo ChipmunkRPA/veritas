@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Small-edit localization across JPEG quality settings](image-cross-quality-2026-11-16.md)
+  compared three dense fits on 720 held deliveries, including 24 new
+  photos with object removals and insertions. None added a correctly
+  placed highlight. Matching corresponding cells across two JPEG
+  encodes reduced ordinary flags relative to the separate fits. The
+  new source roster reconstructs 288 exact JPEG test inputs.
+
 - [Stereo video lip timing](video-lip-stereo-transfer-2026-11-16.md)
   verifies both channel clocks and tests the existing timing comparison
   under stereo delivery, panned environment and louder competing speech.

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [cross-quality JPEG comparison](image-cross-quality-2026-11-16.md#exact-input-and-overlap-replay)
+recounts 720 held deliveries and supplies a public recipe to rebuild
+288 exact JPEGs at two quality settings. The separate native readback
+verifies 2,160 candidate intersections with the known changed pixels.
+
 The [stereo lip timing replay](video-lip-stereo-transfer-2026-11-16.md#local-trial-and-replay)
 recounts 530 stereo deliveries and 57 matched mono comparisons from 53
 source clips. The reader rechecks audio bounds, picture anchor positions,

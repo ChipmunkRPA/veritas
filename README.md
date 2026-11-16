@@ -12,16 +12,26 @@ are not prepared for use as court evidence or expert testimony.
 ## What the application provides
 
 - **Images:** original crops, region overlays, provenance and metadata observations,
-  and visual-generation and editing checks. Optional regional review also covers
+  and visual-generation and editing checks. Local options can find two regions
+  that share detail after [rotation or resizing](docs/image-small-affine-webp-2026-11-16.md).
+  Optional regional review also covers
   [supported lossless WebP stills](docs/image-regional-webp-2026-11-14.md).
   Earlier-copy comparison can locate differences in
   [supported cropped lossy WebP files](docs/image-reference-cropped-webp-2026-11-14.md).
   Overlays identify areas to inspect and can also highlight ordinary processing.
 - **Video:** sampled frames, tracked-face review intervals with before/during/after
   context where available, voice evidence, and audio/picture timing observations.
+  Local options can locate the two source ranges when footage was
+  [retimed](docs/video-retimed-compression-2026-11-16.md),
+  [mirrored](docs/video-mirrored-hd-2026-11-16.md), or
+  [reused with a tighter crop](docs/video-crop-alignment-2026-11-16.md).
 - **Audio:** selected source-bound speech windows, waveforms, spectrograms, and
-  separate background/acoustic context. Background labels do not establish AI origin.
+  separate background/acoustic context. An optional
+  [short speech edit check](docs/audio-six-ten-context-2026-11-16.md#local-six-second-check)
+  shows the selected range and plays the source excerpt. Background labels do not establish AI origin.
 - **Documents and email:** source-positioned writing observations and passage links.
+  Local [within-document review](docs/writing-local-baseline-transfer-2026-11-16.md#application-scope)
+  highlights individual passages and records their exact locations in supported input formats.
   Whole-article authorship currently lacks a supported calibrated conclusion;
   the limited English plain-text email-body calibration has a separate scope.
 - **Findings:** observed evidence, AI-leaning/original-leaning/inconclusive/context-only

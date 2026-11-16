@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Document-specific writing calibration](writing-profile-calibration-2026-11-16.md)
+  compared automatic selection of genre calibrations on 18 new matched
+  pairs and 56 untouched controls. The frozen choice found one more
+  historical passage and cut economic report alerts from 14 to eight
+  of 23. Diplomatic alerts rose from one to five of 40 after the
+  selector applied a historical profile to some correspondence. The
+  existing passage check stays active while the routing is evaluated.
+
 - [Single-upload JPEG region ranking](image-region-ranking-2026-11-16.md)
   compares visual features, residual bands, and training against the
   strongest wrong regions and matched ordinary retouches. All four

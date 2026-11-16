@@ -13,6 +13,13 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [writing calibration replay](writing-profile-calibration-2026-11-16.md#replay)
+recreates the fixed automatic genre selections and recounts 184 test
+deliveries from their saved numeric inputs. The native readback can
+verify each context hash and character range from the pinned test texts.
+The diplomatic excerpts test what happens when a document falls outside
+the genres used to fit the calibration.
+
 The [single-upload JPEG ranking review](image-region-ranking-2026-11-16.md#replay-and-compare-another-check)
 recounts the localized edit, ordinary retouch and image-format results on
 1,008 held deliveries. It can produce standard development and confirmation

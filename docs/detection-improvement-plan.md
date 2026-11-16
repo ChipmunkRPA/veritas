@@ -90,7 +90,10 @@ are not public screening promises or calibrated population probabilities.
   six-second interval. Combining both adds two useful locations at
   −5 dB and three ordinary alerts on the 240-delivery retained panel.
   At −10 dB it adds five ordinary alerts and no correct locations.
-  The fitted checks are in evaluation with a separate fresh panel.
+  On 312 separate deliveries, the six-second fit adds three correct
+  −5 dB locations without new control alerts. At −10 dB it adds one
+  correct location, one untouched alert and one ordinary-processing
+  alert. The candidate is in evaluation with original-utterance controls.
 
 - [Writing changes within a document](writing-local-baseline-transfer-2026-11-16.md)
   add exact source locations when a passage stands out within the same

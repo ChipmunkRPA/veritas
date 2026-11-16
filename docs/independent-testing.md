@@ -58,7 +58,8 @@ The [six- and ten-second context replay](audio-six-ten-context-2026-11-16.md#rep
 checks both calibrations and compares all combinations on the same search
 interval. The model-independent export preserves the exact input hashes,
 source samples and edit labels, including ordinary and isolated background
-controls.
+controls. The separate fresh recount validates all changed ranges against the
+frozen labels and reports incremental alerts by control type.
 
 The [earlier JPEG and WebP replay](image-jpeg-webp-comparison-2026-11-16.md#replay)
 recounts 1,008 pairs from 48 photos and rebuilds the exact output masks

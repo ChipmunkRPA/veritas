@@ -13,7 +13,14 @@ from scripts import audio_long_context_holdout as holdout
 from scripts import audio_long_context_inputs as data
 from scripts import audio_short_edit_ssl_transfer as model
 from scripts import audio_two_second_transfer as serving
-from scripts.audio_long_context_review import EXPERIMENT, SCHEMA, summarize
+from scripts.audio_long_context_review import (
+    EXPERIMENT,
+    POLICIES,
+    SCHEMA,
+    common_truth,
+    predictions,
+    summarize,
+)
 
 
 def official_input(folder, row):
@@ -62,15 +69,20 @@ def measurements(args):
     event.save(args.output / "files.json", observations)
 
 
-def deployed(args):
+def _current_models(weights):
     from scripts.audio_joint_generator_transfer import panels, prior
     from scripts.run_audio_specialists_v15 import load_voice
 
+    activity = teacher.runtime(weights / "silero_vad.jit")
+    assets = prior.read(panels.PRIMARY)["incumbent"]["assets"]
+    voice = load_voice({"weights": weights, "assets": assets})
+    return voice, activity, assets
+
+
+def deployed(args):
     fit.start_cpu()
     plan = event.read(args.media / "freeze.json")
-    activity = teacher.runtime(args.weights / "silero_vad.jit")
-    assets = prior.read(panels.PRIMARY)["incumbent"]["assets"]
-    voice = load_voice({"weights": args.weights, "assets": assets})
+    voice, activity, assets = _current_models(args.weights)
     rows = []
     for i, row in enumerate(plan["cases"], 1):
         rows.append(serving.score_case(row, official_input(args.media, row), voice, activity))
@@ -140,23 +152,13 @@ def common_calibration(args):
     print("Froze both pairs of operating points on the common sample scope", flush=True)
 
 
-def compare(args):
-    fit.start_cpu()
-    frozen, heads = fitted_heads(args.fit)
-    cal = event.read(args.calibration)
-    if cal["fit_sha256"] != fit.file_sha(args.fit / "freeze.json") or cal["method"] != EXPERIMENT:
-        raise ValueError("The shared points do not belong to this fit")
-    plan = event.read(args.media / "freeze.json")
-    reference = event.read(args.baseline)
+def _held_readings(args, plan, frozen, heads):
     measured = event.read(args.features / "files.json")
     lock = event.read(args.features / "freeze.json")
     if (fit.file_sha(args.media / "freeze.json") != lock["source_sha256"] or
             {str(row["group"]) for row in plan["origins"]} & set(frozen["development_readers"])):
         raise ValueError("The held input plan does not match or contains development readers")
-    rows = []
-    for case, baseline in zip(plan["cases"], reference["rows"], strict=True):
-        if not all(baseline[key] == field for key, field in case.items()):
-            raise ValueError("The serving panel differs from the held input")
+    for case in plan["cases"]:
         record = measured[case["pcm_sha256"]]
         directory = args.features / case["pcm_sha256"]
         speech = directory / "speech.json"
@@ -171,16 +173,80 @@ def compare(args):
             if fit.file_sha(filename) != record["features"][context]:
                 raise ValueError("Held feature array differs")
             readings[context] = common_reading(head, np.load(filename, allow_pickle=False), a - views[context][0], spans)
-        current = serving.locations(baseline)["adjacent_support"]
-        current_assessed = (any(item["direction"] != "unassessed" for item in baseline["current_windows"])
-                            or any(item["responses"] for item in baseline["excerpts"]))
-        rows.append(case | {"scope": [a, a + length], "readings": readings, "current": current,
-                            "current_assessed": current_assessed})
+        yield case | {"scope": [a, a + length], "readings": readings}
+
+
+def _held_protocol(args):
+    fit.start_cpu()
+    frozen, heads = fitted_heads(args.fit)
+    cal = event.read(args.calibration)
+    if cal["fit_sha256"] != fit.file_sha(args.fit / "freeze.json") or cal["method"] != EXPERIMENT:
+        raise ValueError("The shared points do not belong to this fit")
+    plan = event.read(args.media / "freeze.json")
+    return frozen, cal, plan, _held_readings(args, plan, frozen, heads)
+
+
+def _current_reading(baseline):
+    return {
+        "current": serving.locations(baseline)["adjacent_support"],
+        "current_assessed": (any(item["direction"] != "unassessed" for item in baseline["current_windows"])
+                             or any(item["responses"] for item in baseline["excerpts"])),
+    }
+
+
+def compare(args):
+    frozen, cal, plan, held = _held_protocol(args)
+    reference = event.read(args.baseline)
+    rows = []
+    for case, readout, baseline in zip(plan["cases"], held, reference["rows"], strict=True):
+        if not all(baseline[key] == field for key, field in case.items()):
+            raise ValueError("The serving panel differs from the held input")
+        rows.append(readout | _current_reading(baseline))
     summary = summarize(rows, cal["points"])
     event.save(args.output, {"schema": SCHEMA, "experiment": EXPERIMENT, "source_plan": plan,
                             "fit": frozen, "calibration": cal, "rows": rows, "summary": summary,
                             "baseline_assets": reference.get("model_sha256", reference.get("assets"))})
     print(f"Compared {len(rows)} external inputs on the shared source clock", flush=True)
+
+
+def delta(args):
+    """Measure incremental changes by running the incumbent on every candidate trigger."""
+    _, calibration, plan, held = _held_protocol(args)
+    points = calibration["points"]
+    selected = []
+    arms = ("six", "ten", "combined", "agreed")
+    for row in held:
+        options = [predictions(row | {"current": [], "current_assessed": False}, points, policy)[0] for policy in POLICIES]
+        if any(readout[arm] for readout in options for arm in arms):
+            selected.append(row)
+    print(f"{len(selected)} of {len(plan['cases'])} inputs can change when adding the new checks", flush=True)
+    voice, activity, assets = _current_models(args.weights)
+    rows = []
+    for index, row in enumerate(selected, 1):
+        baseline = serving.score_case(row, official_input(args.media, row), voice, activity)
+        rows.append(row | _current_reading(baseline))
+        if index % 5 == 0 or index == len(selected):
+            print(f"Measured the current check on {index}/{len(selected)} candidate triggers", flush=True)
+    outcomes = []
+    for row in rows:
+        truth = common_truth(row)
+        previous = event.matches(row["current"], truth)
+        for policy in POLICIES:
+            options, _ = predictions(row, points, policy)
+            for arm in arms:
+                if not options[arm]:
+                    continue
+                combined = event.matches(options[f"current_plus_{arm}"], truth)
+                outcomes.append({
+                    "case": row["id"], "condition": row["condition"], "kind": row["kind"], "policy": policy, "candidate": arm,
+                    "new_flag": not row["current"], "current_assessed": row["current_assessed"],
+                    "new_locations": [truth[i] for i in sorted(combined - previous)],
+                    "lost_locations": [truth[i] for i in sorted(previous - combined)],
+                })
+    event.save(args.output, {"schema": SCHEMA, "scope": "incremental changes only", "total_inputs": len(plan["cases"]),
+                             "inputs_with_candidate_ranges": len(rows), "baseline_assets": assets,
+                             "input_sha256": fit.file_sha(args.media / "freeze.json"),
+                             "calibration_sha256": fit.file_sha(args.calibration), "outcomes": outcomes})
 
 
 if __name__ == "__main__":
@@ -191,6 +257,7 @@ if __name__ == "__main__":
         "deployed": (deployed, ("media", "weights", "output")),
         "calibrate": (common_calibration, ("fit", "data", "cache", "output")),
         "compare": (compare, ("fit", "calibration", "media", "features", "baseline", "output")),
+        "delta": (delta, ("fit", "calibration", "media", "features", "weights", "output")),
     }
     for label, (runner, paths) in cli.items():
         command = commands.add_parser(label)

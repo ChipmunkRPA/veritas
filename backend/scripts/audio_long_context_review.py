@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
 import math
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -155,6 +157,46 @@ def verify(document):
     return summary
 
 
+def recount_delta(document):
+    """Recount recorded changes and verify their exact source and label references."""
+    result, plan = document["delta"], document["source_plan"]
+    source = json.dumps(plan, sort_keys=True, separators=(",", ":"), allow_nan=False).encode() + b"\n"
+    cases = {case["id"]: case for case in plan["cases"]}
+    if (result["schema"] != SCHEMA or result["scope"] != "incremental changes only"
+            or hashlib.sha256(source).hexdigest() != result["input_sha256"]
+            or len(cases) != len(plan["cases"]) or len(cases) != result["total_inputs"]):
+        raise ValueError("The recorded audio deltas differ from their frozen sources")
+    seen, changed_inputs = set(), set()
+    stratum, totals = defaultdict(Counter), defaultdict(Counter)
+    for case in cases.values():
+        tally = stratum[case["condition"]]
+        offset = (case["samples"] - SCOPE_SAMPLES) // 2
+        tally[case["kind"]] += 1
+        tally["labeled_intervals"] += len(common_truth(case | {"scope": [offset, offset + SCOPE_SAMPLES]}))
+    for item in result["outcomes"]:
+        case = cases[item["case"]]
+        key = item["case"], item["policy"], item["candidate"]
+        if (key in seen or item["policy"] not in POLICIES or item["candidate"] not in {"six", "ten", "combined", "agreed"}
+                or (item["condition"], item["kind"]) != (case["condition"], case["kind"])
+                or type(item["new_flag"]) is not bool or type(item["current_assessed"]) is not bool):
+            raise ValueError("Invalid recorded audio comparison")
+        seen.add(key)
+        changed_inputs.add(item["case"])
+        offset = (case["samples"] - SCOPE_SAMPLES) // 2
+        expected = common_truth(case | {"scope": [offset, offset + SCOPE_SAMPLES]})
+        gains, losses = item["new_locations"], item["lost_locations"]
+        if any(interval not in expected for interval in gains + losses) or any(interval in losses for interval in gains):
+            raise ValueError("A changed audio finding does not refer to a labeled interval in the tested scope")
+        tally = totals[item["condition"], item["policy"], item["candidate"]]
+        tally["gained"] += len(gains)
+        tally["lost"] += len(losses)
+        tally["new_flags_" + item["kind"]] += item["new_flag"]
+        tally["prior_unassessed"] += not item["current_assessed"]
+    if len(changed_inputs) != result["inputs_with_candidate_ranges"]:
+        raise ValueError("Candidate trigger counts do not match the recorded changes")
+    return {"strata": dict(stratum), "differences": {"/".join(keys): count for keys, count in sorted(totals.items())}}
+
+
 def export(document, output, policy):
     from app.bench import independent
     from app.bench.independent_locations import TRUTH_SCHEMA, count_events
@@ -219,10 +261,13 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("receipt", type=Path)
     parser.add_argument("--export", type=Path)
+    parser.add_argument("--incremental", action="store_true")
     parser.add_argument("--point", choices=POLICIES, default="wider")
     args = parser.parse_args()
     saved = event.read(args.receipt)
-    if args.export:
+    if args.incremental:
+        print(json.dumps(recount_delta(saved), indent=2, sort_keys=True))
+    elif args.export:
         export(saved, args.export, args.point)
     else:
         verify(saved)

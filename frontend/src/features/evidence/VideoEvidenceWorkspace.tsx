@@ -35,14 +35,15 @@ export default function VideoEvidenceWorkspace({ set, token, mediaReady }: {
       const acoustic = set.audio?.acoustic_context
       const drops = set.audio?.stereo_context?.windows.filter((window) => window.downmix?.strong_attenuation).length ?? 0
       const repeats = repeatedAudioCount(set.audio)
-      const shift = set.audio?.soundtrack_pair?.status === 'local_shift'
+      const trackDifference = set.audio?.soundtrack_pair?.location
       const stereoShift = set.audio?.stereo_timing_change?.measurement
-      if (acoustic || drops || repeats || shift || stereoShift) {
+      if (acoustic || drops || repeats || trackDifference || stereoShift) {
         const summary = [`${counts.voice} voice intervals`]
         if (acoustic) summary.push(`${acoustic.events.length} acoustic observations`)
         if (drops) summary.push(`${drops} mono level ${drops === 1 ? 'drop' : 'drops'}`)
         if (repeats) summary.push(`${repeats} repeated audio ${repeats === 1 ? 'pair' : 'pairs'}`)
-        if (shift) summary.push('1 soundtrack timing difference')
+        if (trackDifference) summary.push(set.audio?.soundtrack_pair?.status === 'local_difference'
+          ? '1 short difference between audio tracks' : '1 soundtrack timing difference')
         if (stereoShift) summary.push('1 temporary stereo timing change')
         return summary.join(' · ')
       }

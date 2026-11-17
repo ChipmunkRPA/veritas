@@ -283,6 +283,7 @@ class Settings(BaseSettings):
     video_lip_timing_face_asset: Path | None = None
     video_lip_timing_runtime: Path | None = None
     video_soundtrack_frequency_review: bool = False  # Check cross-band support after a missed broad timing match.
+    video_soundtrack_short_difference_review: bool = False  # Compare short, same-time differences between two mono tracks.
     video_reference_local_area: bool = False  # Qualified short 720 x 480 earlier-copy picture evidence.
     video_reference_measured_interval: bool = False  # Show strongly supported frame boundaries for qualified local picture ranges.
     video_reference_soundtrack_reencode: bool = False  # Compare local sound timing in qualified SD and 720p H.264 re-encodes.

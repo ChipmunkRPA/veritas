@@ -1107,3 +1107,41 @@ def test_real_video_soundtrack_cue_preserves_production_voice_and_av(av_source, 
             multimedia_evidence.verify_assets(omitted, f.store, result=f.result)
     finally:
         fixture.close()
+
+
+def test_short_soundtrack_difference_requires_same_time_and_two_bands():
+    from copy import deepcopy
+
+    from app.evidence import video_soundtrack_pair_binding as binding
+
+    digest = 'a' * 64
+    start, end, origin = 16_000, 21_120, 64
+    source = {'sha256': digest, 'pcm_sha256': digest, 'audio_stream_indices': [1, 2], 'samples': 48_000,
+              'timeline': [{'start_sample': 0, 'end_sample': 48_000, 'source_pts': origin}]}
+    excerpts = [
+        {'stream_index': index, 'start_sample': start, 'end_sample': end,
+         'source_timestamp_ranges': [{'start_sample': start, 'end_sample': end, 'source_start_pts': start + origin,
+                                      'source_end_pts': end + origin, 'time_base': '1/16000'}],
+         'clip': {'sha256': digest, 'media_type': 'audio/wav', 'sample_rate': 16_000, 'channels': 1, 'samples': end-start},
+         'waveform': {'sha256': digest, 'media_type': 'image/png', 'width': 960, 'height': 280}}
+        for index in (1, 2)
+    ]
+    bands = [{'band_hz': list(band), 'matching_gain': [.9, .1, .9], 'correlation': [.95, .15, .96],
+              'active_windows': [4, 5, 4], 'local_relative_gain': .111111} for band in binding.SHORT_BANDS[:2]]
+    record = {'schema': binding.SCHEMA, 'status': 'local_difference', 'source_sha256': digest, 'stream_indices': [1, 2],
+              'primary_pcm_sha256': digest, 'secondary_pcm_sha256': digest, 'limitation': binding.LIMITATION,
+              'affects_overall_confidence': False, 'measurement_basis': binding.SHORT_DIFFERENCE_BASIS,
+              'short_compared_samples': 48_000, 'location': {'bands': bands, 'excerpts': excerpts},
+              'coverage': {'candidate_windows': 147, 'matched_windows': 100, 'same_time_windows': 98,
+                           'sections_with_same_time_matches': 3}}
+    binding.validate(record, source, binding.commitment(record))
+
+    shifted = deepcopy(record)
+    shifted['location']['excerpts'][1]['start_sample'] += 1
+    with pytest.raises(ValueError, match='share the measured source time'):
+        binding.validate(shifted, source, binding.commitment(shifted))
+
+    missing = deepcopy(record)
+    missing['location']['bands'].pop()
+    with pytest.raises(ValueError, match='two distinct frequency bands'):
+        binding.validate(missing, source, binding.commitment(missing))

@@ -492,11 +492,16 @@ XML body index {{ mark.body_index }}, child path {{ mark.child_path | join(' / '
 </div>
 {% if pair %}
 <div class="multimedia-acoustic-summary" id="multimedia-evidence-soundtrack-pair">
-<h3>Timing between audio tracks</h3>
+<h3>{{ 'Differences between audio tracks' if pair.get('short_compared_samples') else 'Timing between audio tracks' }}</h3>
 <p>{{ pair.summary }}</p>
 {% if pair.coverage %}<p class="caption">{{ pair.coverage.same_time_windows }} same-time matches among {{ pair.coverage.matched_windows }} matched windows. {{ pair.coverage.candidate_windows }} windows checked.</p>{% endif %}
+{% if pair.get('short_compared_samples') and not pair.location %}<p class="caption">The short-interval comparison found no qualifying difference.</p>{% endif %}
 {% if pair.location %}
+{% if pair.status == 'local_difference' %}
+<p>The sound differs inside the marked interval in {{ pair.location.bands | length }} measured frequency bands. Those bands agree before and after the interval.</p>
+{% else %}
 <p>The matching excerpt is {{ '%.1f' | format(pair.location.offset_ms | abs) }} ms {{ 'later' if pair.location.offset_ms > 0 else 'earlier' }} in the second track (stream {{ pair.stream_indices[1] }}).</p>
+{% endif %}
 {% if pair.get('measurement_basis') == 'two-band-corroboration/1' %}
 <p class="caption">Each supporting window had at least two frequency bands that agreed on the shift. The waveforms and clips use the original decoded audio.</p>
 {% endif %}

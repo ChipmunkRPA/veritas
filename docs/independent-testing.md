@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [two-track video comparison](video-soundtrack-short-difference-2026-11-17.md)
+provides 396 input commitments with measured intervals and a separate
+GRID transfer. A signed export can also be checked against both audio
+streams of the original video.
+
 The [soundtrack word-interval comparison](video-word-soundtrack-2026-11-17.md#reproduce)
 compares three recovery methods on fixed mouth readings, two separate
 sets of utterances and the original GRID capture. The 792 native-video

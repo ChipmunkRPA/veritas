@@ -1,0 +1,96 @@
+{
+  "browser": {
+    "cases": [
+      {
+        "excerpt_lengths": [
+          0.44,
+          0.44
+        ],
+        "range": [
+          14400,
+          21440
+        ],
+        "waves": 2
+      },
+      {
+        "excerpt_lengths": [
+          0.44,
+          0.44
+        ],
+        "range": [
+          14400,
+          21440
+        ],
+        "waves": 2
+      }
+    ],
+    "page_errors": 0
+  },
+  "cases": [
+    {
+      "assets": 4,
+      "carrier": "pcm",
+      "case": "positive-pcm",
+      "compared_samples": 34080,
+      "pdf_sha256": "61f9ca658a67b1be88ab5fb095309c7467b9d0ea3d49dc0d454b125e47b29396",
+      "region": [
+        14400,
+        21440
+      ],
+      "source_replay_verified": true,
+      "source_sha256": "0081de36b07c85f1c7653c3403b7a700d76a4fa9fce25d4772ef8919dc50e849",
+      "status": "local_difference"
+    },
+    {
+      "assets": 4,
+      "carrier": "aac48",
+      "case": "positive-aac",
+      "compared_samples": 34080,
+      "pdf_sha256": "c7ed793b30d20c844e9c6c86084588a3c604cbca4ea5665d5030acc0c7b1c38f",
+      "region": [
+        14400,
+        21440
+      ],
+      "source_replay_verified": true,
+      "source_sha256": "2908abb23d942f8c262973b2be034d3bcf7ba1062a9c2ee350d0c0781b30f5c9",
+      "status": "local_difference"
+    },
+    {
+      "assets": 0,
+      "carrier": "aac48",
+      "case": "gain",
+      "compared_samples": 34080,
+      "pdf_sha256": "0148e16e4a8c39953430d2cfa1dbcb69dc93b1d6dbdaacc10f348893004228c3",
+      "region": null,
+      "source_replay_verified": true,
+      "source_sha256": "0a1e7fc2f08764165f512d1f290556032ef8d2d35593bc9f3590001b38c39cce",
+      "status": "no_local_shift"
+    },
+    {
+      "assets": 0,
+      "carrier": "pcm",
+      "case": "delay",
+      "compared_samples": 34080,
+      "pdf_sha256": "0780f6e40e738130a0a8af4da1795a4c5da6dd2ddc0c53b7817e864e6033df6f",
+      "region": null,
+      "source_replay_verified": true,
+      "source_sha256": "9b449844989f3bbba341705c04ee291967bbb138e0c39ab6449d9644e1398de6",
+      "status": "insufficient_same_time_support"
+    },
+    {
+      "assets": 0,
+      "carrier": "pcm",
+      "case": "option-off",
+      "compared_samples": null,
+      "pdf_sha256": "7c063d1bae53d9484d2086e2414f74fdfb77a2c8e08638dcb0d2bfc01b3e6194",
+      "region": null,
+      "source_replay_verified": true,
+      "source_sha256": "0081de36b07c85f1c7653c3403b7a700d76a4fa9fce25d4772ef8919dc50e849",
+      "status": "no_local_shift"
+    }
+  ],
+  "jobs_before_payment": 0,
+  "same_assessment_with_option_off": true,
+  "schema": "chipmunk.short-two-track-prepaid/1",
+  "simulated_payment_usd_cents": 999
+}

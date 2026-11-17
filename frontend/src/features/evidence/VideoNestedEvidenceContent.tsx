@@ -59,21 +59,28 @@ const soundtrackMessages: Record<SoundtrackPair['status'], string> = {
   insufficient_same_time_support: 'The tracks shared too little distinctive sound at the same times to assess a local shift.',
   no_local_shift: 'No qualifying local shift was found within the matched audio windows.',
   local_shift: 'This excerpt occurs at different times in the two soundtracks. Other matched sound is aligned on both sides.',
+  local_difference: 'The two tracks differ in this interval. The surrounding sound matches at the same times.',
 }
 
 function SoundtrackComparison({ pair, set, token, mediaReady }: {
   pair: SoundtrackPair; set: VideoEvidenceSet; token: string; mediaReady: boolean
 }) {
   const location = pair.location
-  const offsetMs = location ? location.shift_samples / 16 : 0
-  return <section id="media-evidence-soundtrack-pair" aria-label="Timing between audio tracks" className="mt-5 rounded-md border border-border p-4">
-    <h4 className="m-0 text-body font-medium">Timing between audio tracks</h4>
+  const offsetMs = location && 'shift_samples' in location ? location.shift_samples / 16 : null
+  const title = pair.short_compared_samples ? 'Differences between audio tracks' : 'Timing between audio tracks'
+  return <section id="media-evidence-soundtrack-pair" aria-label={title} className="mt-5 rounded-md border border-border p-4">
+    <h4 className="m-0 text-body font-medium">{title}</h4>
     <p className="mt-2 mb-0 text-small">{soundtrackMessages[pair.status]}</p>
     {pair.coverage.candidate_windows != null && <p className="mt-2 mb-0 text-caption text-text-muted">
       {pair.coverage.same_time_windows} same-time matches among {pair.coverage.matched_windows} matched windows.{' '}
       {pair.coverage.candidate_windows} windows checked.</p>}
+    {pair.short_compared_samples != null && !location && <p className="mt-2 mb-0 text-caption text-text-muted">
+      The short-interval comparison found no qualifying difference.</p>}
     {location && <>
-      <p className="mt-2 mb-0 text-small">The matching excerpt is {Math.abs(offsetMs).toFixed(1)} ms {offsetMs > 0 ? 'later' : 'earlier'} in the second track.</p>
+      {offsetMs != null && <p className="mt-2 mb-0 text-small">The matching excerpt is {Math.abs(offsetMs).toFixed(1)} ms {offsetMs > 0 ? 'later' : 'earlier'} in the second track.</p>}
+      {'bands' in location && <p className="mt-2 mb-0 text-small">
+        The sound differs inside the marked interval in {location.bands.length} measured frequency bands. Those bands agree before and after the interval.
+      </p>}
       {pair.measurement_basis === 'two-band-corroboration/1' && <p className="mt-2 mb-0 text-caption text-text-muted">
         Each supporting window had at least two frequency bands that agreed on the shift. The waveforms and clips use the original decoded audio.
       </p>}
@@ -92,7 +99,7 @@ function SoundtrackComparison({ pair, set, token, mediaReady }: {
             <p className="m-0 text-caption">{stream}{start != null && end != null && ` · source ${seconds(start)}–${seconds(end)}`}
               {start != null && end != null && origin != null && start >= origin && ` · playback ${seconds(start - origin)}–${seconds(end - origin)}`}</p>
             <EvidencePicture set={set} token={token} ready={mediaReady} artifact={track.waveform} alt={`${stream} waveform`} chart />
-            <EvidenceAudio set={set} token={token} ready={mediaReady} artifact={track.clip} alt={`${stream} matching excerpt`} />
+            <EvidenceAudio set={set} token={token} ready={mediaReady} artifact={track.clip} alt={`${stream} ${offsetMs != null ? 'matching ' : ''}excerpt`} />
           </div>
         })}
       </div>

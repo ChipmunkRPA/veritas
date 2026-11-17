@@ -111,7 +111,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if kind != "video":
             raise ValueError("Soundtrack pair evidence requires a video original")
         reading, secondary = pair.analyze(original, source_sha256, decoded,
-                                          use_bands=comparison.get("measurement_basis") == binding.FREQUENCY_BASIS)
+                                          use_bands=comparison.get("measurement_basis") == binding.FREQUENCY_BASIS,
+                                          use_short_difference="short_compared_samples" in comparison)
         measured = pair.describe(source, reading, decoded, secondary, pair.digested_asset)
         if binding.commitment(comparison) != binding.commitment(measured):
             raise ValueError("Soundtrack comparison differs from the original audio streams")

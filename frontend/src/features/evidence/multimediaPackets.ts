@@ -347,13 +347,17 @@ export interface AudioEvidenceSet extends SetBase {
 }
 export type VideoChannelStatus = 'ready' | 'absent' | 'unavailable' | 'not_assessed' | 'not_applicable'
 export interface SoundtrackPair {
-  status: 'duration_outside_scope' | 'second_stream_unavailable' | 'unsupported_clock' | 'insufficient_same_time_support' | 'no_local_shift' | 'local_shift'
+  status: 'duration_outside_scope' | 'second_stream_unavailable' | 'unsupported_clock' | 'insufficient_same_time_support' | 'no_local_shift' | 'local_shift' | 'local_difference'
   stream_indices: [number, number]; limitation: string
-  measurement_basis?: 'two-band-corroboration/1'
+  measurement_basis?: 'two-band-corroboration/1' | 'short-shared-sound-difference/1'
+  short_compared_samples?: number
   coverage: Partial<Record<'candidate_windows' | 'matched_windows' | 'same_time_windows' | 'sections_with_same_time_matches', number>>
-  location: { shift_samples: number; supporting_windows: number; minimum_correlation: number
+  location: ({
     excerpts: (SampleInterval & { stream_index: number; source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'];
-      clip: EvidenceAsset; waveform: EvidenceAsset })[] } | null
+      clip: EvidenceAsset; waveform: EvidenceAsset })[]
+  } & ({ shift_samples: number; supporting_windows: number; minimum_correlation: number } | {
+    bands: { band_hz: number[]; matching_gain: number[]; correlation: number[]; active_windows: number[]; local_relative_gain: number }[]
+  })) | null
 }
 export interface VideoAudioChannel {
   status: VideoChannelStatus; reason: string | null; source: AudioEvidenceSet['source']

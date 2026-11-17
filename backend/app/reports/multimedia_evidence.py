@@ -1370,7 +1370,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
 
         soundtrack_comparison["summary"] = REASONS[soundtrack_comparison["status"]]
         if location := soundtrack_comparison["location"]:
-            location["offset_ms"] = location["shift_samples"] * 1000 / RATE
+            if "shift_samples" in location:
+                location["offset_ms"] = location["shift_samples"] * 1000 / RATE
             for track in location["excerpts"]:
                 span, = track["source_timestamp_ranges"]
                 track["start_s"], track["end_s"] = (span[key] / RATE for key in ("source_start_pts", "source_end_pts"))

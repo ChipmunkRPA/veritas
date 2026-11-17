@@ -51,7 +51,8 @@ def freeze_input(ctx, decoded, *, path=None, allow_repeats=True) -> dict:
             from app.evidence import video_soundtrack_pair as pair
 
             reading, secondary = pair.analyze(path, source_mapping['source_sha256'], decoded,
-                                              use_bands=settings.video_soundtrack_frequency_review)
+                                              use_bands=settings.video_soundtrack_frequency_review,
+                                              use_short_difference=allow_repeats and settings.video_soundtrack_short_difference_review)
             source = source_mapping | {'sha256': source_mapping['source_sha256']}
             # Use the same metadata in the frozen result and customer evidence, adding URLs only at presentation time.
             def store_media(data, media_type, **metadata):

@@ -6,7 +6,12 @@ from hashlib import sha256
 
 from app.detectors.audio.decode import SAMPLE_RATE, decode_audio, source_ranges, wav_bytes
 from app.evidence import video_reference_soundtrack as timing
-from app.evidence.video_soundtrack_pair_binding import FREQUENCY_BASIS, LIMITATION, SCHEMA
+from app.evidence.video_soundtrack_pair_binding import (
+    FREQUENCY_BASIS,
+    LIMITATION,
+    SCHEMA,
+    SHORT_DIFFERENCE_BASIS,
+)
 
 MAX_SECONDS = 12
 DECODE_SECONDS = MAX_SECONDS + 1
@@ -54,7 +59,31 @@ def decode(path, source_sha256):
     return decode_audio(path, source_sha256=source_sha256, stream_position=1, max_seconds=DECODE_SECONDS)
 
 
-def analyze(path, source_sha256, primary, *, use_bands=False):
+def short_difference(primary, secondary):
+    import numpy as np
+
+    from app.evidence import video_reference_short_phrases as phrases
+    from app.evidence.video_viseme_binding import audio_origin, presented_samples
+
+    mappings = (primary.mapping, secondary.mapping)
+    if any((m["source_sample_rate"], m["source_codec"]) != (16_000, "pcm_s16le")
+           and (m["source_sample_rate"], m["source_codec"], m.get("source_profile")) != (48_000, "aac", "LC")
+           for m in mappings):
+        return {}
+    extent, other = (presented_samples(m) for m in mappings)
+    starts = [audio_origin(m) for m in mappings]
+    if extent is None or extent != other or extent < 30_000 or starts[0] is None or starts[0] != starts[1]:
+        return {}
+    first, second = (np.rint(track.pcm[:extent] * 32768.).astype('<i2') for track in (primary, secondary))
+    extra = {"short_compared_samples": extent}
+    if match := phrases.locate(first, second):
+        extra.update(status="local_difference", measurement_basis=SHORT_DIFFERENCE_BASIS,
+                     range={"earlier_samples": match["samples"], "submitted_samples": match["samples"],
+                            "bands": match["bands"]})
+    return extra
+
+
+def analyze(path, source_sha256, primary, *, use_bands=False, use_short_difference=False):
     if not timing.MIN_SAMPLES <= len(primary.pcm) <= MAX_SECONDS * SAMPLE_RATE:
         return {"status": "duration_outside_scope"}, None
     try:
@@ -62,12 +91,16 @@ def analyze(path, source_sha256, primary, *, use_bands=False):
     except (ValueError, RuntimeError):
         return {"status": "second_stream_unavailable"}, None
     result = measure(primary, secondary)
-    if use_bands and result["status"] in {"no_local_shift", "insufficient_same_time_support"}:
+    if result["status"] not in {"no_local_shift", "insufficient_same_time_support"}:
+        return result, secondary
+    if use_bands:
         from app.evidence.video_soundtrack_bands import matches
 
         candidate = select(list(matches(primary.pcm, secondary.pcm)), len(primary.pcm))
         if candidate["status"] == "local_shift":
             return candidate | {"measurement_basis": FREQUENCY_BASIS}, secondary
+    if use_short_difference:
+        result.update(short_difference(primary, secondary))
     return result, secondary
 
 
@@ -79,9 +112,12 @@ def describe(source, reading, primary, secondary, make_asset):
     doc = {"schema": SCHEMA, "status": reading["status"], "source_sha256": source["sha256"],
            "stream_indices": source["audio_stream_indices"], "primary_pcm_sha256": source["pcm_sha256"],
            "affects_overall_confidence": False, "limitation": LIMITATION, "location": None,
-           "coverage": {key: value for key, value in reading.items() if key not in {"status", "range", "measurement_basis"}}}
+           "coverage": {key: value for key, value in reading.items()
+                        if key not in {"status", "range", "measurement_basis", "short_compared_samples"}}}
     if basis := reading.get("measurement_basis"):
         doc["measurement_basis"] = basis
+    if extent := reading.get("short_compared_samples"):
+        doc["short_compared_samples"] = extent
     if secondary is not None:
         doc["secondary_pcm_sha256"] = secondary.mapping["pcm_sha256"]
     if span is None:
@@ -97,8 +133,11 @@ def describe(source, reading, primary, secondary, make_asset):
                          "clip": make_asset(wav_bytes(track.pcm[start:end]), "audio/wav", samples=end-start,
                                             sample_rate=SAMPLE_RATE, channels=1),
                          "waveform": make_asset(waveform, "image/png", width=960, height=280)})
-    doc["location"] = {"shift_samples": span["shift_samples"], "supporting_windows": span["supporting_windows"],
-                       "minimum_correlation": span["minimum_correlation"], "excerpts": excerpts}
+    if reading["status"] == "local_difference":
+        doc["location"] = {"bands": span["bands"], "excerpts": excerpts}
+    else:
+        doc["location"] = {"shift_samples": span["shift_samples"], "supporting_windows": span["supporting_windows"],
+                           "minimum_correlation": span["minimum_correlation"], "excerpts": excerpts}
     return doc
 
 

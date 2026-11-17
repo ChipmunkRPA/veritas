@@ -13,6 +13,8 @@ SCHEMA = "chipmunk.video-soundtrack-pair/1"
 BANDS = ((250, 1350), (1350, 3500), (3500, 7000))
 BAND_CORRELATION = .82
 FREQUENCY_BASIS = "two-band-corroboration/1"
+SHORT_DIFFERENCE_BASIS = "short-shared-sound-difference/1"
+SHORT_BANDS = ((300, 900), (900, 1750), (1750, 3400))
 RATE = 16_000
 LIMITATION = ("The check compares the first and second audio streams. It cannot tell which stream changed or whether either "
               "one matches the speaker's mouth. Dubbing, music and ordinary editing can affect the result. "
@@ -24,6 +26,7 @@ REASONS = {
     "insufficient_same_time_support": "The tracks shared too little distinctive sound at the same times to assess a local shift.",
     "no_local_shift": "No qualifying local shift was found within the matched audio windows.",
     "local_shift": "This excerpt occurs at different times in the two soundtracks. Other matched sound is aligned on both sides.",
+    "local_difference": "The two tracks differ in this interval. The surrounding sound matches at the same times.",
 }
 _SHA = re.compile(r"[0-9a-f]{64}")
 
@@ -51,18 +54,43 @@ def validate(doc, source, expected):
         raise ValueError("Soundtrack comparison contains missing or invalid fields") from error
 
 
+def _validate_bands(bands):
+    frequencies = {tuple(row["band_hz"]) for row in bands}
+    if not 2 <= len(bands) == len(frequencies) or not frequencies.issubset(SHORT_BANDS):
+        raise ValueError("The local difference needs support in two distinct frequency bands")
+    for row in bands:
+        if set(row) != {"band_hz", "matching_gain", "correlation", "active_windows", "local_relative_gain"}:
+            raise ValueError("Unexpected short soundtrack band measurements")
+        for key in ("matching_gain", "correlation"):
+            if len(row[key]) != 3 or any(type(n) not in {int, float} or not math.isfinite(n) for n in row[key]):
+                raise ValueError("A soundtrack band needs measurements before, during and after the interval")
+        a, b, c = row["correlation"]
+        relative = row["local_relative_gain"]
+        if (not .90 <= min(a, c) <= max(a, c) <= 1 or not -1 <= b <= .30
+                or type(relative) not in {int, float} or not math.isfinite(relative) or relative > .44
+                or len(row["active_windows"]) != 3 or any(type(v) is not int or v < 3 for v in row["active_windows"])):
+            raise ValueError("The recorded sound does not match reliably around the proposed interval")
+
+
 def _validate(doc, source, expected):
     status = doc["status"]
     location = doc["location"]
     coverage = doc["coverage"]
     streams = doc["stream_indices"]
     basis = doc.get("measurement_basis")
+    extent = doc.get("short_compared_samples")
     if (commitment(doc) != expected or doc["schema"] != SCHEMA or doc["source_sha256"] != source["sha256"]
             or doc["primary_pcm_sha256"] != source["pcm_sha256"] or streams != source["audio_stream_indices"]
             or len(streams) != 2 or doc["affects_overall_confidence"] is not False or doc["limitation"] != LIMITATION
-            or status not in REASONS or (location is not None) != (status == "local_shift")
-            or basis not in {None, FREQUENCY_BASIS} or basis is not None and location is None):
+            or status not in REASONS or (location is not None) != (status in {"local_shift", "local_difference"})
+            or basis not in {None, FREQUENCY_BASIS, SHORT_DIFFERENCE_BASIS}
+            or basis == FREQUENCY_BASIS and status != "local_shift"
+            or (basis == SHORT_DIFFERENCE_BASIS) != (status == "local_difference")):
         raise ValueError("Soundtrack comparison differs from its source or recorded disposition")
+    if ((extent is None and status == "local_difference") or extent is not None and (
+            type(extent) is not int or not 30_000 <= extent <= min(64_000, source["samples"])
+            or status not in {"local_difference", "no_local_shift", "insufficient_same_time_support"})):
+        raise ValueError("The short audio comparison has an invalid presented duration")
     in_scope = 24000 <= source["samples"] <= 12 * RATE
     if (status == "duration_outside_scope") == in_scope:
         raise ValueError("Soundtrack comparison duration differs from the committed samples")
@@ -81,19 +109,28 @@ def _validate(doc, source, expected):
     if (set(coverage) != set(names) or not all(type(value) is int for value in (total, matched, same, sections))
             or not 0 <= sections <= min(3, same) or not 0 <= same <= matched <= total
             or total != 1 + (source["samples"] - 1280) // 320
-            or (status == "insufficient_same_time_support") == (matched >= 8 and sections == 3 and 20 * same >= 11 * matched)):
+            or status != "local_difference" and (
+                (status == "insufficient_same_time_support") == (matched >= 8 and sections == 3 and 20 * same >= 11 * matched))):
         raise ValueError("Invalid matched-sound coverage")
     if location is None:
         return
-    if len(location["excerpts"]) != 2:
+    if len(location["excerpts"]) != 2 or len(source["timeline"]) != 1:
         raise ValueError("Soundtrack comparison needs one excerpt per stream")
     first, second = location["excerpts"]
-    shift, witnesses, score = (location[name] for name in ("shift_samples", "supporting_windows", "minimum_correlation"))
-    if (not all(type(value) is int for value in (shift, witnesses)) or not 1920 <= abs(shift) <= 5760
-            or not 4 <= witnesses <= matched - same or type(score) not in (int, float) or not math.isfinite(score)
-            or not (BAND_CORRELATION if basis else .86) <= score <= 1 or len(source["timeline"]) != 1
-            or second["start_sample"] - first["start_sample"] != shift or second["end_sample"] - first["end_sample"] != shift):
-        raise ValueError("Invalid local soundtrack observation")
+    if status == "local_difference":
+        a, b = first["start_sample"], first["end_sample"]
+        if (set(location) != {"excerpts", "bands"} or (a, b) != (second["start_sample"], second["end_sample"])
+                or type(a) is not int or type(b) is not int or not 0 <= a < b <= extent
+                or a % 320 or b - a not in range(2560, 7041, 640)):
+            raise ValueError("The two short excerpts do not share the measured source time")
+        _validate_bands(location["bands"])
+    else:
+        shift, witnesses, score = (location[name] for name in ("shift_samples", "supporting_windows", "minimum_correlation"))
+        if (not all(type(value) is int for value in (shift, witnesses)) or not 1920 <= abs(shift) <= 5760
+                or not 4 <= witnesses <= matched - same or type(score) not in (int, float) or not math.isfinite(score)
+                or not (BAND_CORRELATION if basis else .86) <= score <= 1
+                or second["start_sample"] - first["start_sample"] != shift or second["end_sample"] - first["end_sample"] != shift):
+            raise ValueError("Invalid local soundtrack observation")
     start_pts = source["timeline"][0]["source_pts"]
     for index, span in zip(streams, (first, second), strict=True):
         a, b = span["start_sample"], span["end_sample"]

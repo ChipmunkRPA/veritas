@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Short differences between two audio tracks](video-soundtrack-short-difference-2026-11-17.md)
+  locate 26 of 33 different-word replacements and 24 of 33 same-word
+  replacements in each of two encodings. The previous timing check locates
+  none of them. The 124 assessed controls per encoding produce zero flags.
+  The local app shows both excerpts and aligned waveforms with zero AI-score weight.
+
 - [Independent word intervals from the soundtrack](video-word-soundtrack-2026-11-17.md)
   increase correctly admitted edited digits on two Lombard panels and
   a separate GRID capture. The wider comparison adds one video edit in

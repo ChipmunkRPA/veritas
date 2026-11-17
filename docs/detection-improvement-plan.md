@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Earlier wording in two-column PDFs](writing-pdf-columns-2026-11-17.md)
+  localizes 174 of 216 known rewrite deliveries on 36 fresh report pairs
+  rendered in two layouts. It records zero wording differences on 72
+  unchanged reflows and one figure callout across 24 official PDFs.
+  The earlier comparison skipped these layouts. The new comparison
+  preserves the original page, word boxes and dated reference with
+  zero AI-score weight.
+
 - [Near-silent soundtracks with visible mouth movement](video-silent-mouth-2026-11-16.md)
   increase correct locations from 10 to 114 on 144 staged mutes in fresh
   PCM and AAC deliveries. The fallback adds zero flags on 504 controls.

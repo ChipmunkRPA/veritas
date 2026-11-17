@@ -19,9 +19,16 @@ try {
   for (const sample of input.cases) {
     await page.goto(`${input.url}/analyses/${sample.analysis_id}?view=plain#document-published-wording`)
     const section = page.getByRole('region', { name: 'Earlier published wording' })
-    await section.getByRole('link', { name: `U.S. GAO report ${sample.reference}` }).waitFor()
-    assert.equal(await section.getByText(`Published ${sample.date}`, { exact: false }).count(), 1)
+    await section.getByRole('link', { name: `U.S. GAO report ${sample.reference}` }).first().waitFor()
+    assert.equal(await section.getByText(`Published ${sample.date}`, { exact: false }).count(), sample.sections ?? 1)
     assert.equal(await section.getByText('Submitted wording', { exact: true }).count(), sample.changes)
+    if (sample.sections) {
+      assert.equal(await section.getByRole('heading', { name: /^Original PDF page / }).count(), sample.sections)
+      for (const [sourcePage, lo, hi] of sample.locations) {
+        const location = `Original PDF page ${sourcePage} · Extracted characters [${lo}, ${hi})`
+        assert.ok(await section.getByText(location, { exact: false }).count())
+      }
+    }
     if (sample.cleared) {
       const style = page.getByRole('region', { name: 'Possible AI-like writing passages' })
       assert.equal(await style.locator('blockquote').count(), 0)

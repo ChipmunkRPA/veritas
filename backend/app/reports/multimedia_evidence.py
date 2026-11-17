@@ -1580,12 +1580,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 if kind == "document" and not withheld
                 and (intervals := (document.get("coverage") or {}).get(document_passage_intervals.KEY)) else None
             ),
-            "published_wording": (
-                {**wording, "title": document_published_wording.TITLE, "scope": document_published_wording.SCOPE,
-                 "source_url": document_published_wording.archive_url(wording["reference"]["id"]),
-                 "license_url": document_published_wording.ARCHIVE_LICENSE,
-                 "method": document["source"]["method"]} if wording else None
-            ),
+            "published_wording": document_published_wording.report_view(wording, document["source"].get("method")),
             "writing_agreement": _writing_agreement_view(document.get("coverage") or {}) if kind == "document" else None,
             "email_body_alternatives": (document.get("coverage") or {}).get("email_body_alternatives") if kind == "document" else None,
             "email_classifier_input_scope": (document.get("coverage") or {}).get(EMAIL_INPUT_SCOPE) if kind == "document" else None,

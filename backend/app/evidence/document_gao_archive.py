@@ -231,7 +231,7 @@ def _context_ranges(doc, changes):
 
 
 def compare(doc: Document, upload_sha256: str, pack_sha256: str, reports, packed_index, *, accept_exact_excerpt=True,
-            resolve_competition=False):
+            resolve_competition=False, allow_unmatched_flanks=False, include_sentence_context=True):
     text = doc.text
     output = {
         "schema": SCHEMA, "status": "out_of_scope", "scope": SCOPE, "interpretation": INTERPRETATION,
@@ -292,11 +292,18 @@ def compare(doc: Document, upload_sha256: str, pack_sha256: str, reports, packed
             return output
         start = offsets.pop()
         end = start + len(words)
-        if start < 0 or cached[source_id][start:end] != words:
+        if start >= 0 and cached[source_id][start:end] == words:
+            submitted_range = _span(stream, 0, len(words))
+            transcript_range = _span(source_stream, start, end)
+            support = len(words)
+        elif allow_unmatched_flanks:
+            start, end = anchors[0][0], anchors[-1][0] + WINDOW
+            earlier_start, earlier_end = anchors[0][1], anchors[-1][1] + WINDOW
+            if words[start:end] != cached[source_id][earlier_start:earlier_end]:
+                return output
+            support = end - start
+        else:
             return output
-        submitted_range = _span(stream, 0, len(words))
-        transcript_range = _span(source_stream, start, end)
-        support = len(words)
     if len(changes) > 80:
         return output
     for a, b, c, d in changes:
@@ -313,7 +320,7 @@ def compare(doc: Document, upload_sha256: str, pack_sha256: str, reports, packed
         "transcript_range": transcript_range,
     }
     output["coverage"]["matched_words"] = support
-    if output["changes"]:
+    if output["changes"] and include_sentence_context:
         output["submitted_sentence_ranges"] = _context_ranges(doc, [
             (item["submitted"]["start"], item["submitted"]["end"]) for item in output["changes"]])
     output["status"] = "reference_bound"

@@ -2869,6 +2869,14 @@ and the source pixels behind the crop. The replay does not score authorship.
 
 ## Choose a review to reproduce
 
+### Replay wording comparisons in two-column PDFs
+
+The local PDF experiment publishes its source roster, exact file hashes,
+known rewrite positions, native word boxes and paired counts. Rebuild the
+204 deliveries from the two pinned dataset shards and the official source
+PDFs. The portable input verifier checks the full file bindings.
+[PDF columns and replay](writing-pdf-columns-2026-11-17.md#local-app-and-independent-replay)
+
 ### Replay short near-silent intervals in a video soundtrack
 
 Use the published source plan to rebuild 648 PCM and AAC deliveries from

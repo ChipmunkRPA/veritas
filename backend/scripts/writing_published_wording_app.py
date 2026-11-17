@@ -39,18 +39,23 @@ def exports(client, aid, source, directory, evidence):
     with pymupdf.open(stream=pdf, filetype="pdf") as rendered:
         text = " ".join(" ".join(page.get_text().split()) for page in rendered)
         scan(text)
-        assert wording.TITLE in text and comparison["reference"]["published_date"] in text
-        assert comparison["reference"]["id"] in text
-        for row in comparison["changes"]:
-            start, end = row["start"], row["end"]
-            position = f"[{start}, {end})" if start != end else f"Omission at extracted character {start}."
-            assert position in text
-            if source.suffix == ".pdf":
-                pages = ", ".join(map(str, sorted({place["page"] for place in row["locations"]})))
-                assert f"Original PDF pages {pages}." in text
-            else:
-                label = "Original text characters" if source.suffix == ".txt" else f"Word paragraph {row['locations'][0]['paragraph']} characters"
-                assert label in text
+        assert wording.TITLE in text
+        for section in comparison.get("sections", [comparison]):
+            assert section["reference"]["published_date"] in text and section["reference"]["id"] in text
+            for row in section["changes"]:
+                if "column" in section:
+                    for place in row["locations"]:
+                        assert f"Original PDF page {place['page']} · Extracted characters [{place['start']}, {place['end']})" in text
+                    continue
+                start, end = row["start"], row["end"]
+                position = f"[{start}, {end})" if start != end else f"Omission at extracted character {start}."
+                assert position in text
+                if source.suffix == ".pdf":
+                    pages = ", ".join(map(str, sorted({place["page"] for place in row["locations"]})))
+                    assert f"Original PDF pages {pages}." in text
+                else:
+                    label = "Original text characters" if source.suffix == ".txt" else f"Word paragraph {row['locations'][0]['paragraph']} characters"
+                    assert label in text
         if comparison["published_style_matches"]:
             assert "Writing highlights with exact published wording" in text
             assert "Inspect the highlighted passages in context." not in text

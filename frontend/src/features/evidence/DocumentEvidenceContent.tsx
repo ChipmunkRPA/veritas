@@ -7,7 +7,7 @@ import DocumentContextComparison from './DocumentContextComparison'
 import DocumentPassageCoverage from './DocumentPassageCoverage'
 import DocumentRepeatedPassages from './DocumentRepeatedPassages'
 import DocumentUnselectedResponses from './DocumentUnselectedResponses'
-import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentOriginalTextLocation, type DocumentPassagePosition, type EmailBodyAlternatives, type EmailClassifierInputScope, type PublishedWordingReview, type WritingCheckReason } from './multimediaPackets'
+import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentOriginalTextLocation, type DocumentPassagePosition, type EmailBodyAlternatives, type EmailClassifierInputScope, type PublishedWordingColumn, type PublishedWordingReview, type PublishedWordingSection, type WritingCheckReason } from './multimediaPackets'
 
 function BibliographyCoverage({ review }: { review: NonNullable<NonNullable<DocumentEvidenceSet['coverage']>['writing_bibliography']> }) {
   const { first_location: first, last_location: last } = review
@@ -282,30 +282,48 @@ function PagePlates({ set, packet, page, token, mediaReady }: { set: DocumentEvi
 }
 
 function PublishedWording({ review }: { review: PublishedWordingReview }) {
-  const source = review.reference
-  const transcript = Array.from(source.text)
-  const earlier = ([start, end]: [number, number]) => transcript.slice(start, end).join('')
+  const columns = review.schema === 'document-published-wording-review/2'
+  const sections = columns ? review.sections : [review]
   return <section id="document-published-wording" aria-labelledby="published-wording-title" className="mt-4 rounded-md border border-border p-4">
     <h3 id="published-wording-title" className="m-0 text-body font-medium">Earlier published wording</h3>
-    <p className="mt-2 mb-0 text-small"><a className="underline" href={`https://www.gao.gov/products/${encodeURIComponent(source.id)}`}>U.S. GAO report {source.id}</a> · Published {source.published_date}</p>
     <p className="mt-2 mb-0 text-small">This check compares the marked text with the cited U.S. Government Accountability Office highlight. Wording differences can result from ordinary editing, transcription or AI assistance. The comparison contributes zero weight to the overall AI assessment.</p>
-    <p className="mt-2 mb-0 text-caption text-text-muted">Compared extracted characters <span className="font-mono">[{review.submitted_range[0]}, {review.submitted_range[1]})</span>. <a className="underline" href={source.version_url}>GovReport transcript</a> · <a className="underline" href="https://gov-report-data.github.io/#license">CC BY 4.0</a></p>
-    {!!review.published_style_matches.length && <>
+    {columns && <p className="mt-2 mb-0 text-small">Only the cited spans in the listed columns were compared. The check sets aside bullets, matching wrapped words, and standalone headings without an earlier counterpart.</p>}
+    {sections.map(section => <WordingSection key={'column' in section ? `${section.page}-${section.column}` : section.reference.id}
+      section={section} matches={review.published_style_matches} />)}
+  </section>
+}
+
+function WordingSection({ section, matches }: {
+  section: PublishedWordingSection | PublishedWordingColumn
+  matches: PublishedWordingReview['published_style_matches']
+}) {
+  const source = section.reference
+  const transcript = Array.from(source.text)
+  const earlier = ([start, end]: [number, number]) => transcript.slice(start, end).join('')
+  const column = 'column' in section ? section.column : undefined
+  return <div className="mt-3">
+    {'column' in section && <h4 className="m-0 text-small font-medium">Original PDF page {section.page} · {section.column === 'both' ? 'Both columns, left to right' : `${section.column === 'left' ? 'Left' : 'Right'} column`}</h4>}
+    <p className="mt-2 mb-0 text-small"><a className="underline" href={`https://www.gao.gov/products/${encodeURIComponent(source.id)}`}>U.S. GAO report {source.id}</a> · Published {source.published_date}</p>
+    <p className="mt-2 mb-0 text-caption text-text-muted">Compared {column ? 'column' : 'extracted'} characters <span className="font-mono">[{section.submitted_range[0]}, {section.submitted_range[1]})</span>. <a className="underline" href={source.version_url}>GovReport transcript</a> · <a className="underline" href="https://gov-report-data.github.io/#license">CC BY 4.0</a></p>
+    {!!matches.length && <>
       <h4 className="mt-3 mb-0 text-small font-medium">Writing highlights with exact published wording</h4>
-      {review.published_style_matches.map(match => <div key={match.start} className="mt-2 text-small">
+      {matches.map(match => <div key={match.start} className="mt-2 text-small">
         <p className="m-0">Extracted characters <span className="font-mono">[{match.start}, {match.end})</span>. Same wording in the dated source, allowing for spacing.</p>
         <blockquote className="my-2 border-l-2 border-border pl-3 whitespace-pre-line break-words">{earlier(match.archive_range)}</blockquote>
       </div>)}
     </>}
     <h4 className="mt-3 mb-0 text-small font-medium">Wording differences</h4>
-    {!review.changes.length && <p className="mt-2 mb-0 text-small">No bounded wording differences were recorded.</p>}
-    {review.changes.map(change => {
+    {!section.changes.length && <p className="mt-2 mb-0 text-small">No bounded wording differences were recorded.</p>}
+    {section.changes.map(change => {
       const pages = [...new Set(change.locations.flatMap(place => 'page' in place ? [place.page] : []))]
       return <div key={`${change.start}-${change.end}-${change.archive_range[0]}`} className="mt-3 rounded-md border border-border p-3 text-small">
-        <p className="m-0 text-caption">{change.start === change.end
+        {!column && <p className="m-0 text-caption">{change.start === change.end
           ? `Omission at extracted character ${change.start}. Locations show the next retained character.`
-          : <>Extracted characters <span className="font-mono">[{change.start}, {change.end})</span>.</>}</p>
-        {pages.length ? <p className="m-0 text-caption">Original PDF pages {pages.join(', ')}. Word boxes are recorded in JSON.</p>
+          : <>Extracted characters <span className="font-mono">[{change.start}, {change.end})</span>.</>}</p>}
+        {column && change.start === change.end && <p className="m-0 text-caption">Omission before the indicated text.</p>}
+        {column ? change.locations.map(place => 'page' in place && <p key={place.start} className="m-0 text-caption">
+          Original PDF page {place.page} · Extracted characters <span className="font-mono">[{place.start}, {place.end})</span>. Word boxes are recorded in JSON.
+        </p>) : pages.length ? <p className="m-0 text-caption">Original PDF pages {pages.join(', ')}. Word boxes are recorded in JSON.</p>
           : change.locations.map(place => 'ranges' in place && <p key={place.start} className="m-0 text-caption">
             {place.paragraph ? `Word paragraph ${place.paragraph} characters` : 'Original text characters'} <span className="font-mono">{place.ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}</span>.
           </p>)}
@@ -315,7 +333,7 @@ function PublishedWording({ review }: { review: PublishedWordingReview }) {
         </dl>
       </div>
     })}
-  </section>
+  </div>
 }
 
 function WritingPassageIntervals({ review, method, emailHtml, wording }: {

@@ -1,0 +1,51 @@
+{
+  "USD_cents": 999,
+  "browser": {
+    "checked": [
+      "edited",
+      "ordinary"
+    ],
+    "page_errors": 0
+  },
+  "cases": {
+    "disabled": {
+      "column_comparison": false,
+      "input_sha256": "171cd18c69c1dab94a653dbde9b7f30717f5d408d3f1efff5727cdfab0183903"
+    },
+    "edited": {
+      "changes": 3,
+      "column_comparison": true,
+      "input_sha256": "171cd18c69c1dab94a653dbde9b7f30717f5d408d3f1efff5727cdfab0183903",
+      "locations": [
+        [
+          1,
+          317,
+          332
+        ],
+        [
+          1,
+          408,
+          418
+        ],
+        [
+          1,
+          2150,
+          2153
+        ]
+      ],
+      "pdf_sha256": "5e573a2ff57db42ef93428d85640a1e0d856269e92d3884a9842072c36aa62bc",
+      "source": "GAO-06-494"
+    },
+    "ordinary": {
+      "changes": 0,
+      "column_comparison": true,
+      "input_sha256": "35af80f7a7d29e070389df86e69aa24c16e02cca3cf0be425221b53ea2865729",
+      "locations": [],
+      "pdf_sha256": "fc780ceeff1cc5657fa5654f7607351f7a72e559a146b98148a5199eeb603580",
+      "source": "GAO-06-494"
+    }
+  },
+  "paid_jobs": 3,
+  "prepayment_jobs": 0,
+  "unchanged_overall_assessment": true
+}

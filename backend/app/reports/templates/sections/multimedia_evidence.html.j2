@@ -62,22 +62,28 @@
 {% if wording %}
 <div id="document-published-wording" class="multimedia-acoustic-summary">
 <h3>{{ wording.title }}</h3>
-<p><a href="{{ wording.source_url }}">U.S. GAO report {{ wording.reference.id }}</a> · Published {{ wording.reference.published_date }}</p>
 <p>{{ wording.scope }}</p>
-<p class="caption">Compared extracted characters <span class="mono">[{{ wording.submitted_range[0] }}, {{ wording.submitted_range[1] }})</span>. <a href="{{ wording.reference.version_url }}">GovReport transcript</a> · <a href="{{ wording.license_url }}">CC BY 4.0</a></p>
-{% if wording.published_style_matches %}
+{% for section in wording.sections %}
+{% if section.column is defined %}<h4>Original PDF page {{ section.page }} · {{ 'Both columns, left to right' if section.column == 'both' else section.column | capitalize ~ ' column' }}</h4>{% endif %}
+<p><a href="{{ section.source_url }}">U.S. GAO report {{ section.reference.id }}</a> · Published {{ section.reference.published_date }}</p>
+<p class="caption">Compared {{ 'column' if section.column is defined else 'extracted' }} characters <span class="mono">[{{ section.submitted_range[0] }}, {{ section.submitted_range[1] }})</span>. <a href="{{ section.reference.version_url }}">GovReport transcript</a> · <a href="{{ wording.license_url }}">CC BY 4.0</a></p>
+{% if section.get('published_style_matches') %}
 <h4>Writing highlights with exact published wording</h4>
-{% for match in wording.published_style_matches %}
+{% for match in section.published_style_matches %}
 <div class="writing-passage-excerpt">
 <p class="caption">Extracted characters <span class="mono">[{{ match.start }}, {{ match.end }})</span>. Same wording in the dated source, allowing for spacing.</p>
-<blockquote>{{ wording.reference.text[match.archive_range[0]:match.archive_range[1]] }}</blockquote>
+<blockquote>{{ section.reference.text[match.archive_range[0]:match.archive_range[1]] }}</blockquote>
 </div>
 {% endfor %}
 {% endif %}
 <h4>Wording differences</h4>
-{% if not wording.changes %}<p>No bounded wording differences were recorded.</p>{% endif %}
-{% for change in wording.changes %}
+{% if not section.changes %}<p>No bounded wording differences were recorded.</p>{% endif %}
+{% for change in section.changes %}
 <div class="writing-passage-excerpt">
+{% if section.column is defined %}
+{% if change.start == change.end %}<p class="caption">Omission before the indicated text.</p>{% endif %}
+{% for place in change.locations %}<p class="caption">Original PDF page {{ place.page }} · Extracted characters <span class="mono">[{{ place.start }}, {{ place.end }})</span>. Word boxes are recorded in JSON.</p>{% endfor %}
+{% else %}
 <p class="caption">{% if change.start == change.end %}Omission at extracted character {{ change.start }}. Locations show the next retained character.{% else %}Extracted characters <span class="mono">[{{ change.start }}, {{ change.end }})</span>.{% endif %}</p>
 {% if wording.method == 'pymupdf' %}
 <p class="caption">Original PDF pages {{ change.locations | map(attribute='page') | unique | join(', ') }}. Word boxes are recorded in JSON.</p>
@@ -87,11 +93,13 @@
 {% for span in place.ranges %}<span class="mono">[{{ span[0] }}, {{ span[1] }})</span>{{ ', ' if not loop.last else '.' }}{% endfor %}</p>
 {% endfor %}
 {% endif %}
+{% endif %}
 <p class="caption">Earlier wording</p>
-<blockquote>{{ wording.reference.text[change.archive_range[0]:change.archive_range[1]] or 'No counterpart in this part of the earlier source.' }}</blockquote>
+<blockquote>{{ section.reference.text[change.archive_range[0]:change.archive_range[1]] or 'No counterpart in this part of the earlier source.' }}</blockquote>
 <p class="caption">Submitted wording</p>
 <blockquote>{{ change.submitted or 'Omitted at this position.' }}</blockquote>
 </div>
+{% endfor %}
 {% endfor %}
 <p class="caption">JSON pointer <span class="mono">/coverage/published_wording_review</span>.</p>
 </div>

@@ -581,13 +581,16 @@ def _published_wording(ctx: StageContext, decoded: dict, intervals: dict | None)
 
     extension = Path(ctx.outputs["ingest"]["filename"]).suffix.lower()
     text, mapping, meta = decoded["text"], decoded["source_map"], decoded["meta"]
-    if (not document_published_wording.eligible(extension, text, mapping, meta, decoded.get(document_tracked_changes.KEY))
+    pdf_columns = settings.document_gao_pdf_columns_review
+    if (not document_published_wording.eligible(extension, text, mapping, meta, decoded.get(document_tracked_changes.KEY),
+                                                pdf_columns=pdf_columns)
             or not document_gao_archive.comparison_tokens(text)):
         return None
     try:
         sha = settings.document_gao_archive_sha256
         reports, index = document_gao_archive.library(settings.document_gao_archive_path, sha)
-        return document_published_wording.capture(text, decoded["paragraphs"], mapping, meta, intervals, sha, reports, index)
+        return document_published_wording.capture(text, decoded["paragraphs"], mapping, meta, intervals, sha, reports, index,
+                                                   pdf_columns=pdf_columns)
     except (document_archive.ArchiveUnavailable, ValueError, OSError) as error:
         ctx.log.warning("published_wording.omitted", error_type=type(error).__name__)
         return None

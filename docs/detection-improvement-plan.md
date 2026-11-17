@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Frame-level speech responses in loud conversation](audio-frame-logit-localization-2026-11-17.md)
+  add one correct interval out of 164 while placing ranges incorrectly in
+  four edited recordings. The stricter arm adds zero flags on 48 ordinary
+  and 48 isolated recordings. A separate segment-trained checkpoint
+  adds zero correct locations at four frozen points. Both stay in evaluation.
+
 - [Resized photos in screenshots](image-reference-scaled-screenshot-2026-11-17.md)
   adds 19–20 correct edit locations out of 24 per encoding, versus zero
   with the previous earlier-photo comparison. There were zero highlights

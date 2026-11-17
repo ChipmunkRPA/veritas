@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [frame-level speech replay](audio-frame-logit-localization-2026-11-17.md#recount-and-compare-a-different-detector)
+rebuilds two operating points and recounts positions on 120 noisy
+audio deliveries from six generation families. Its export provides
+an exact input and interval roster for comparing a separate detector.
+
 The [resized screenshot replay](image-reference-scaled-screenshot-2026-11-17.md#replay)
 uses matched Chromium captures and 864 input commitments to check placement,
 edit localization and clean-image false highlights across PNG and JPEG.

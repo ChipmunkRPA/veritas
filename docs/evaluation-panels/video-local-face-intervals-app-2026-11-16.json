@@ -1,0 +1,1681 @@
+{
+  "cases": [
+    {
+      "file": "00-inswapper-direct.mp4",
+      "input_sha256": "7fe9643f177b42ae155948e24173fc19260688ad5c63668674ee14146938be32",
+      "group": "5c8db7aa64d6a8fdb38a18030f2a2981f74701670db9ca85389c06f3feea69c0",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        14,
+        24
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          16,
+          25
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": null
+    },
+    {
+      "file": "00-inswapper-tandem.mp4",
+      "input_sha256": "a35ae74752ed0613331ba440a679ab993ff9809cae23360c5d7f46859f52f83f",
+      "group": "5c8db7aa64d6a8fdb38a18030f2a2981f74701670db9ca85389c06f3feea69c0",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        14,
+        24
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          16,
+          25
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": null
+    },
+    {
+      "file": "00-uniface-direct.mp4",
+      "input_sha256": "dfdcea46a37018a884ed1c678730e809368f66e2dd5d8846a0186657c49a7f22",
+      "group": "5c8db7aa64d6a8fdb38a18030f2a2981f74701670db9ca85389c06f3feea69c0",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        22,
+        50
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          26,
+          46
+        ],
+        [
+          23,
+          50
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "00-uniface-tandem.mp4",
+      "input_sha256": "aa8835673fe4884a7adcf55427062365822f10a8a54efb6c201ea816e7dd4c0a",
+      "group": "5c8db7aa64d6a8fdb38a18030f2a2981f74701670db9ca85389c06f3feea69c0",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        22,
+        50
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          26,
+          46
+        ],
+        [
+          23,
+          50
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "01-inswapper-direct.mp4",
+      "input_sha256": "d8ca52b9b5e6e13e24ad7592b89abdc9ef0358edbb6fac2caa39fca659f952fb",
+      "group": "071ff8677e91ca277f67e0b9188dcedaba8b37c5c2a8bf16d8d9c349bd9732a8",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        22,
+        40
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          26,
+          39
+        ],
+        [
+          23,
+          40
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "01-inswapper-tandem.mp4",
+      "input_sha256": "74d3787903a0c46e6e6223888d48e6616566974381e4cd33a7cecfcb6176131e",
+      "group": "071ff8677e91ca277f67e0b9188dcedaba8b37c5c2a8bf16d8d9c349bd9732a8",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        22,
+        40
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          26,
+          39
+        ],
+        [
+          23,
+          40
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "01-uniface-direct.mp4",
+      "input_sha256": "01734810cb0cca6cd56d4eb4301908b8570a315c491a9c8290eac76239fc834f",
+      "group": "071ff8677e91ca277f67e0b9188dcedaba8b37c5c2a8bf16d8d9c349bd9732a8",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        28,
+        68
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          66
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "03-inswapper-direct.mp4",
+      "input_sha256": "303f490e4401a4b345fc9d5f0998fabcd2f9b035537fb96c1f21fda39992b65d",
+      "group": "cca7ef0cef7e5b32de411e47ab2abd93cfe72970e0fd0b659d24a56392f1c396",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        36,
+        76
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          39,
+          72
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "03-inswapper-tandem.mp4",
+      "input_sha256": "9d4025d52ea8c345a686fa00e04fc8b32401c20f8ddbe751622a67756af4e4ce",
+      "group": "cca7ef0cef7e5b32de411e47ab2abd93cfe72970e0fd0b659d24a56392f1c396",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        36,
+        76
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          39,
+          72
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "03-uniface-direct.mp4",
+      "input_sha256": "080b4fa74e4897b29cb7026a9429e4447ef34ee4c0f96ddea9fafe21cb4229b1",
+      "group": "cca7ef0cef7e5b32de411e47ab2abd93cfe72970e0fd0b659d24a56392f1c396",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        20,
+        38
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          19,
+          33
+        ],
+        [
+          21,
+          40
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "04-inswapper-direct.mp4",
+      "input_sha256": "42a00f504c0643f1e7c7caaf26312780ca45cf17de52247887dc974e09d929aa",
+      "group": "539da820b606b30962d808e2b17348a672d1b3abab38fe311c7b0debab97c2c3",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        20,
+        30
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          19,
+          33
+        ],
+        [
+          21,
+          31
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "04-uniface-direct.mp4",
+      "input_sha256": "37cd189507ffe8030a562c48e01716e5455ff6824f116e013877da3e2357f2b2",
+      "group": "539da820b606b30962d808e2b17348a672d1b3abab38fe311c7b0debab97c2c3",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        32,
+        60
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          59
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "05-inswapper-direct.mp4",
+      "input_sha256": "3588aeafbf67041d37e6c9b2b05599be210b52e70280d5aec75f187c198986df",
+      "group": "a27d5b6a7d8e2b4f3e69d3b179f5ec44c32adb01ed2f45c72abbc1c35a59943d",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        32,
+        50
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          46
+        ],
+        [
+          33,
+          50
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "05-inswapper-tandem.mp4",
+      "input_sha256": "67b860222c17b5d9f44c873608e0727261b4c31b5e68970cf2b0bc42bbf75f7e",
+      "group": "a27d5b6a7d8e2b4f3e69d3b179f5ec44c32adb01ed2f45c72abbc1c35a59943d",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        32,
+        50
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          46
+        ],
+        [
+          33,
+          50
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "05-uniface-direct.mp4",
+      "input_sha256": "cd31978b7bbb9659b3c5d3f2be0cb6728511a4465dec6c4ea6c9293dbde97152",
+      "group": "a27d5b6a7d8e2b4f3e69d3b179f5ec44c32adb01ed2f45c72abbc1c35a59943d",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        14,
+        54
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          19,
+          52
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "05-uniface-tandem.mp4",
+      "input_sha256": "a50fc76a3f22102e436149f7998a1c673c301587561ca09dacef2aeaffd6584b",
+      "group": "a27d5b6a7d8e2b4f3e69d3b179f5ec44c32adb01ed2f45c72abbc1c35a59943d",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        14,
+        54
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          19,
+          52
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "06-different_shot-direct.mp4",
+      "input_sha256": "979a9cbe550b1495c7197e628d92d9fb20d66aa656be66fc2f55730ee460fa47",
+      "group": "7b09464c2cffebd79c25a2a25477f3d1aeace213f1817bd7676b0e8c40b8574a",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "added_range": [
+        12,
+        44
+      ],
+      "prior_ranges": [],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "localized"
+      }
+    },
+    {
+      "file": "06-different_shot-tandem.mp4",
+      "input_sha256": "2da3b8a8604d61777dbd805350a2bda6347ec278c10e4a1cc3e29d6873c49b87",
+      "group": "7b09464c2cffebd79c25a2a25477f3d1aeace213f1817bd7676b0e8c40b8574a",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "added_range": [
+        12,
+        44
+      ],
+      "prior_ranges": [],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "localized"
+      }
+    },
+    {
+      "file": "06-inswapper-direct.mp4",
+      "input_sha256": "631ab58090c481f5663d532e6e644ddf9f253b4b84e8c67bf529a47c87ac8a8a",
+      "group": "7b09464c2cffebd79c25a2a25477f3d1aeace213f1817bd7676b0e8c40b8574a",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        14,
+        42
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          19,
+          33
+        ],
+        [
+          17,
+          40
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "06-inswapper-tandem.mp4",
+      "input_sha256": "655ab0be118277954ededa35b6c3a5c1c44c5a62d1f99717ecf91e4ef78e845a",
+      "group": "7b09464c2cffebd79c25a2a25477f3d1aeace213f1817bd7676b0e8c40b8574a",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        14,
+        42
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          19,
+          33
+        ],
+        [
+          17,
+          40
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "06-uniface-direct.mp4",
+      "input_sha256": "a1dd43cc3018f7d8e49eebecedf121655e43297500a7802374ef428ef3f088eb",
+      "group": "7b09464c2cffebd79c25a2a25477f3d1aeace213f1817bd7676b0e8c40b8574a",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        22,
+        32
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          22,
+          34
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": null
+    },
+    {
+      "file": "06-uniface-tandem.mp4",
+      "input_sha256": "b29a2c9f361ca47e62eb71f27ea556d61020ba02a4949ad50671ad2fc2e43c6f",
+      "group": "7b09464c2cffebd79c25a2a25477f3d1aeace213f1817bd7676b0e8c40b8574a",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        22,
+        32
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          22,
+          34
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": null
+    },
+    {
+      "file": "07-inswapper-direct.mp4",
+      "input_sha256": "d4fc97247a140a4fb6e7fead20cb1ff4b26d9bf881293a15f565b10803affe85",
+      "group": "0300e5fa55d0513c529ec3fb6a56ff4313125ba017918055a2d763856a92d3f1",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        22,
+        62
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          26,
+          59
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "07-inswapper-tandem.mp4",
+      "input_sha256": "2745f843c5d3cb4ef772995579d85f30f381623975cff61aba15276bd138765b",
+      "group": "0300e5fa55d0513c529ec3fb6a56ff4313125ba017918055a2d763856a92d3f1",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        22,
+        62
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          26,
+          59
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "07-uniface-direct.mp4",
+      "input_sha256": "f33f1d7c10586c1036207c6bdd7c08af73af774cf536cd76f4fda3fefff3c3f5",
+      "group": "0300e5fa55d0513c529ec3fb6a56ff4313125ba017918055a2d763856a92d3f1",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        28,
+        46
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          46
+        ],
+        [
+          29,
+          46
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "07-uniface-tandem.mp4",
+      "input_sha256": "2ba8236075d6d42f30b84778ec2eafdde429b59ad0fc3c11aabae274edc69b1b",
+      "group": "0300e5fa55d0513c529ec3fb6a56ff4313125ba017918055a2d763856a92d3f1",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        28,
+        46
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          46
+        ],
+        [
+          29,
+          46
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "08-inswapper-direct.mp4",
+      "input_sha256": "60a8e0aebd9d865ce50eb46aa6422349d5371ed27b342335154e17d3c420e6c2",
+      "group": "754c734ce38320549e4c9700872776c444c490437340e7217a96815c19d68449",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        28,
+        38
+      ],
+      "added_range": [
+        28,
+        38
+      ],
+      "prior_ranges": [],
+      "new_useful_range": true,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "localized"
+      }
+    },
+    {
+      "file": "08-uniface-direct.mp4",
+      "input_sha256": "d0491fd632bac887c5594421a9e37aa1bf34ca7ab0dc59eab6fa711e24649a46",
+      "group": "754c734ce38320549e4c9700872776c444c490437340e7217a96815c19d68449",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        36,
+        64
+      ],
+      "added_range": [
+        36,
+        66
+      ],
+      "prior_ranges": [],
+      "new_useful_range": true,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "localized"
+      }
+    },
+    {
+      "file": "09-inswapper-direct.mp4",
+      "input_sha256": "2af0408f02bc2b389e3cd79dab75a57e1f53923a31d8e979a9362859eeebe958",
+      "group": "eaca3172571c68a00e2bb5869469dea425b5e7998697fe06a125d0dd6bd9a156",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        36,
+        54
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          39,
+          52
+        ],
+        [
+          37,
+          54
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "09-inswapper-tandem.mp4",
+      "input_sha256": "eb1be736e08fb312760242d16df28dba7449727d218c465f2d7cea816e8e6dd3",
+      "group": "eaca3172571c68a00e2bb5869469dea425b5e7998697fe06a125d0dd6bd9a156",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        36,
+        54
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          39,
+          52
+        ],
+        [
+          37,
+          54
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "09-uniface-direct.mp4",
+      "input_sha256": "1ea88a7a5b2e60e9d1a40ea1c370ff6601a97be3ec06d258b9be57229ffd002e",
+      "group": "eaca3172571c68a00e2bb5869469dea425b5e7998697fe06a125d0dd6bd9a156",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        20,
+        60
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          19,
+          59
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "10-inswapper-direct.mp4",
+      "input_sha256": "93af3b773733a22536c0e649ce9f3b2795bbfdb06c57bcc3a397b0d02c68175e",
+      "group": "e92316ca8e3be5e00e78c1ea3c819d6d0bd1620e0f3742dd46e80085d921c7c1",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        20,
+        48
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          19,
+          46
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "10-inswapper-tandem.mp4",
+      "input_sha256": "4b4c956a9d1bba2016f4115d9d5dd7784b60d71aebf2e9f16e3dbc79d49979d0",
+      "group": "e92316ca8e3be5e00e78c1ea3c819d6d0bd1620e0f3742dd46e80085d921c7c1",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        20,
+        48
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          19,
+          46
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "10-uniface-direct.mp4",
+      "input_sha256": "38135376e39a607e6f5d27fbaf97919c2aec4b4781a07cc00c9d752a5d872b14",
+      "group": "e92316ca8e3be5e00e78c1ea3c819d6d0bd1620e0f3742dd46e80085d921c7c1",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        32,
+        42
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          46
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "10-uniface-tandem.mp4",
+      "input_sha256": "7f35873141bc8f5b48afad9c1eff08c298006fb949b78141c87d56e278f6248e",
+      "group": "e92316ca8e3be5e00e78c1ea3c819d6d0bd1620e0f3742dd46e80085d921c7c1",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        32,
+        42
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          46
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "11-inswapper-direct.mp4",
+      "input_sha256": "4a814b3d225536260bdbba31c955c145575cf11b9a75615ec6f5152474361943",
+      "group": "4579d8826c3cebfdca7bd175b0cf2ff5a8ccce22ec534e852f444ef941807076",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        32,
+        72
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          72
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "11-inswapper-tandem.mp4",
+      "input_sha256": "f0ad9a76a4ae42c9d0656361f626af323b42393323cfab3448ab05e758d66bc3",
+      "group": "4579d8826c3cebfdca7bd175b0cf2ff5a8ccce22ec534e852f444ef941807076",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        32,
+        72
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          72
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "12-inswapper-direct.mp4",
+      "input_sha256": "0386e9ced152aaaea6e0a283cdb7538c5e0f0740d8c2d6569ac7b6f629c46768",
+      "group": "faa85ca28a0c99e9a2bc67444de74cb30963d112833efd1ed2d34a5fcf38618f",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        14,
+        24
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          16,
+          25
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": null
+    },
+    {
+      "file": "12-inswapper-tandem.mp4",
+      "input_sha256": "eb9c30b39b5f0b6d9cba82dfd8b7be04beb7e6ebc0d23848cae4759bb8d099d9",
+      "group": "faa85ca28a0c99e9a2bc67444de74cb30963d112833efd1ed2d34a5fcf38618f",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        14,
+        24
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          16,
+          25
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": null
+    },
+    {
+      "file": "12-uniface-direct.mp4",
+      "input_sha256": "df08895a8c444a52ecad8f7a308e9a25ae42a571b7000160b0af7bf81e3483a4",
+      "group": "faa85ca28a0c99e9a2bc67444de74cb30963d112833efd1ed2d34a5fcf38618f",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        22,
+        50
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          26,
+          46
+        ],
+        [
+          23,
+          50
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "12-uniface-tandem.mp4",
+      "input_sha256": "c62857e252e772408bbad20d6a02d5fc4709c43920977b733de2d5f321d74645",
+      "group": "faa85ca28a0c99e9a2bc67444de74cb30963d112833efd1ed2d34a5fcf38618f",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        22,
+        50
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          26,
+          46
+        ],
+        [
+          23,
+          50
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "13-inswapper-direct.mp4",
+      "input_sha256": "3d6a54bbcb27fef356a289e1717869bc4d234019217838cd3f4f03d6732034e1",
+      "group": "677f31c6c814fe3bf82d40d811096f4c0a64acf3102a8c93059c2eb4bf103820",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        22,
+        40
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          26,
+          39
+        ],
+        [
+          23,
+          40
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "13-inswapper-tandem.mp4",
+      "input_sha256": "9e1e5c7b6a54af9fc4126b32d0e0673d973539d021dea57676ee83786296b1f5",
+      "group": "677f31c6c814fe3bf82d40d811096f4c0a64acf3102a8c93059c2eb4bf103820",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        22,
+        40
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          26,
+          39
+        ],
+        [
+          23,
+          40
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "13-uniface-direct.mp4",
+      "input_sha256": "de8fc9aeb875ad9c5a0929b2cbf7d7d2d8c576b48d336e87eee2f991abde6d21",
+      "group": "677f31c6c814fe3bf82d40d811096f4c0a64acf3102a8c93059c2eb4bf103820",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        28,
+        68
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          66
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "13-uniface-tandem.mp4",
+      "input_sha256": "04067cacc0a7d689b04f07e7955dbfe4ecd559f24562445f0ccbb7173c785dee",
+      "group": "677f31c6c814fe3bf82d40d811096f4c0a64acf3102a8c93059c2eb4bf103820",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        28,
+        68
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          66
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "14-inswapper-direct.mp4",
+      "input_sha256": "cb7e59fd60414d57c6bfb977862aaed69c7f72b7e7a251e8fdacf993158fe187",
+      "group": "e8e4fd372d78ae3a30141a785536a8d4744394fe298ccb24f95ecced64ec9dd4",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        28,
+        56
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          52
+        ],
+        [
+          29,
+          56
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "14-inswapper-tandem.mp4",
+      "input_sha256": "5ae9cc7fa5e8a5691ce92861ee50126f61d0d682a59fd194b87fdb16a6bdac9f",
+      "group": "e8e4fd372d78ae3a30141a785536a8d4744394fe298ccb24f95ecced64ec9dd4",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        28,
+        56
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          52
+        ],
+        [
+          29,
+          56
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "14-uniface-direct.mp4",
+      "input_sha256": "0b722cbfbdd50650404b5bd6ced4f647b2ff722779763609119600d723037920",
+      "group": "e8e4fd372d78ae3a30141a785536a8d4744394fe298ccb24f95ecced64ec9dd4",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        36,
+        46
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          46
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "14-uniface-tandem.mp4",
+      "input_sha256": "5dca12a32874e183efba13e689a8dc398567765d385a7b2639de14e53f44e67e",
+      "group": "e8e4fd372d78ae3a30141a785536a8d4744394fe298ccb24f95ecced64ec9dd4",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        36,
+        46
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          46
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "15-different_shot-direct.mp4",
+      "input_sha256": "83c4ed8c50ba727d161f1df0768b2943cf9e6ea32b3dc8be65132b4c70c0e6d0",
+      "group": "9abb747f849374461d17afa8f48e7e602461e7e1b453774d57886e27b491c8b1",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "added_range": [
+        34,
+        78
+      ],
+      "prior_ranges": [],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "localized"
+      }
+    },
+    {
+      "file": "15-different_shot-tandem.mp4",
+      "input_sha256": "9479cd1d24e80046cbdc3df3140835d56aa6391091a081874e57f542d0218645",
+      "group": "9abb747f849374461d17afa8f48e7e602461e7e1b453774d57886e27b491c8b1",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "added_range": [
+        34,
+        78
+      ],
+      "prior_ranges": [],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "localized"
+      }
+    },
+    {
+      "file": "15-inswapper-direct.mp4",
+      "input_sha256": "23ad1f3c9646eae95c61614a68a26a48dc1e2482a716bb97a0f5db2bac2c1187",
+      "group": "9abb747f849374461d17afa8f48e7e602461e7e1b453774d57886e27b491c8b1",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        36,
+        76
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          39,
+          72
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "15-inswapper-tandem.mp4",
+      "input_sha256": "05d0a1a6d656e6ecde186588a295a614136dc7c351d0168d5ac6cadfe4ee3193",
+      "group": "9abb747f849374461d17afa8f48e7e602461e7e1b453774d57886e27b491c8b1",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        36,
+        76
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          39,
+          72
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "15-uniface-direct.mp4",
+      "input_sha256": "7791a11dfc5558a19948aa84ef3d77fa761914392f0ab5d9181da4596bb9153e",
+      "group": "9abb747f849374461d17afa8f48e7e602461e7e1b453774d57886e27b491c8b1",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        20,
+        38
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          19,
+          33
+        ],
+        [
+          21,
+          40
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "16-uniface-direct.mp4",
+      "input_sha256": "4193335c2ff07bb9e9cbbc6f43dfc879f8719655010c18835b0f0c1617fbb2ce",
+      "group": "4ab8f02bf668917debc148e1ce52241506a571683a54a3d1bc5ee82f0b2c558b",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        32,
+        60
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          59
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 48,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "17-inswapper-direct.mp4",
+      "input_sha256": "0c18c970453a959d66b9ee43cf5404349aa4a73717f4c0209f675b3c5d3d3427",
+      "group": "dcf43ee1ef3276b9188e595f89d02379d598fdff848f9a5e25dab5001d012e0d",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        32,
+        50
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          46
+        ],
+        [
+          33,
+          50
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "17-inswapper-tandem.mp4",
+      "input_sha256": "4f5191d9d8367db7adae7c8d2e791f94ce7f44861ae87ee662cefbbd9642ee1b",
+      "group": "dcf43ee1ef3276b9188e595f89d02379d598fdff848f9a5e25dab5001d012e0d",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        32,
+        50
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          46
+        ],
+        [
+          33,
+          50
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "17-uniface-direct.mp4",
+      "input_sha256": "d41835ca6f17fc25fa799e448e945abcd10a3546716dfa3ad46dcd6f776573e5",
+      "group": "dcf43ee1ef3276b9188e595f89d02379d598fdff848f9a5e25dab5001d012e0d",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        14,
+        54
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          19,
+          52
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "17-uniface-tandem.mp4",
+      "input_sha256": "60ea11cf23c1eeb0ca3c69546a97caae60d5f0ceaa3f5118120c45a8b64749a9",
+      "group": "dcf43ee1ef3276b9188e595f89d02379d598fdff848f9a5e25dab5001d012e0d",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        14,
+        54
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          19,
+          52
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "18-inswapper-tandem.mp4",
+      "input_sha256": "67fd8d12d71e60971925cdfb66480304dd48f216b08abed492265bdbb155dc3f",
+      "group": "99ffd9d387b421b729e1fd1d0b32c50333154cb579bc12977d2455dcb19fb2ab",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        14,
+        42
+      ],
+      "added_range": [
+        12,
+        42
+      ],
+      "prior_ranges": [],
+      "new_useful_range": true,
+      "coverage": {
+        "measured_face_frames": 34,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "localized"
+      },
+      "source_frame_crop_images_verified": 6,
+      "signed_original_replay_verified": true,
+      "playback_s": [
+        0.48,
+        1.68
+      ],
+      "anchors": [
+        10,
+        26,
+        42
+      ]
+    },
+    {
+      "file": "19-inswapper-direct.mp4",
+      "input_sha256": "42d481545720a83cf88d0512a5c1964cfee8fd9531f3aa3ccc79aa91b603af74",
+      "group": "b1c5263185346fb04eeacc8ad4ddd0c2935de8e8097c51d1f710b7582ae7fae2",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        22,
+        62
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          26,
+          59
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "19-inswapper-tandem.mp4",
+      "input_sha256": "6bcd31f880e8e22540efec0c781b9b4ccb3978d8ebe23918c26d2bb768550027",
+      "group": "b1c5263185346fb04eeacc8ad4ddd0c2935de8e8097c51d1f710b7582ae7fae2",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        22,
+        62
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          26,
+          59
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "19-uniface-direct.mp4",
+      "input_sha256": "fa026dd35be81f4bb3b7647a443bf8318f51974eafa84029aa08506b7f2ea24d",
+      "group": "b1c5263185346fb04eeacc8ad4ddd0c2935de8e8097c51d1f710b7582ae7fae2",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        28,
+        46
+      ],
+      "added_range": null,
+      "prior_ranges": [
+        [
+          33,
+          46
+        ],
+        [
+          29,
+          46
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "00-face_blur-tandem.mp4",
+      "input_sha256": "e977bba4b6b4626176e0b7d949674c404f835478ecddaa7b0dc8dee5d1e77ec8",
+      "group": "5c8db7aa64d6a8fdb38a18030f2a2981f74701670db9ca85389c06f3feea69c0",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "added_range": null,
+      "prior_ranges": [
+        [
+          16,
+          25
+        ]
+      ],
+      "new_useful_range": false,
+      "coverage": null
+    }
+  ],
+  "summary": {
+    "replayed": 64,
+    "additional_correct": 3,
+    "ordinary_new_flags": 4,
+    "edited_wrong_ranges": 0
+  },
+  "profiles": {
+    "direct": {
+      "replayed": 36,
+      "additional_correct": 2,
+      "ordinary_new_flags": 2,
+      "edited_wrong_ranges": 0
+    },
+    "tandem": {
+      "replayed": 28,
+      "additional_correct": 1,
+      "ordinary_new_flags": 2,
+      "edited_wrong_ranges": 0
+    }
+  },
+  "browser": {
+    "cases": [
+      {
+        "fixture": "18-inswapper-tandem",
+        "source_frames": 3,
+        "face_crops": 3,
+        "native_seek_s": 1.04
+      }
+    ],
+    "page_errors": 0
+  },
+  "unpaid_jobs": 0,
+  "simulated_paid_jobs": 65,
+  "assessment_toggle_verified": true
+}

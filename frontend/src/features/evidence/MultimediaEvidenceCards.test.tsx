@@ -944,8 +944,8 @@ describe('ordinary multimedia evidence', () => {
     expect(section.queryByRole('link')).toBeNull()
   })
 
-  it('shows two original time ranges and one identical recording in the video voice lane', () => {
-    const set = { ...structuredClone(video), version: 'video-evidence-10' }
+  it.each(['video-evidence-10', 'video-evidence-35'])('shows both original audio ranges in the video voice lane for %s', (version) => {
+    const set = { ...structuredClone(video), version }
     const sample = (start_sample: number) => ({ start_sample, end_sample: start_sample + 4000,
       source_timestamp_ranges: [{ start_sample, end_sample: start_sample + 4000,
         source_start_pts: 176000 + start_sample, source_end_pts: 180000 + start_sample, time_base: '1/16000' }] })

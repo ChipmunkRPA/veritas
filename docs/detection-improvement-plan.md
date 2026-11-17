@@ -60,6 +60,16 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Temporary face swaps on native source clocks](video-local-face-intervals-2026-11-16.md)
+  compares 278 direct and recompressed deliveries with known intervals.
+  The denser check raises useful locations from 12 to 60 of 80 against
+  the brief scan. Replaying every proposed addition through the
+  broader app worker finds three extra correct locations and four
+  flags on ordinary cuts. The earlier worker remains in use. The
+  independent benchmark records all case inputs and exact source ranges.
+  The video viewer also restores soundtrack and timing evidence for
+  the newest saved clip-boundary results.
+
 - [Repeated background sound after stereo alignment](audio-stereo-alignment-2026-11-16.md)
   locates 16 of 32 staged repeats at each of two panned speech levels
   versus one and zero with the earlier checks. No repeat was flagged

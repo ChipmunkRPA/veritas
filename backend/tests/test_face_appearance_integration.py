@@ -151,7 +151,7 @@ def test_inspection_response_never_acquires_probability_or_fusion_weight():
 @pytest.mark.parametrize("state", ["withheld", "retained", "unassessed"])
 def test_lower_detail_repeat_preserves_already_measured_brief_range(monkeypatch, state):
     table, coarse, _ = appearance_record()
-    brief = {"start_stream_s": 2.16, "end_stream_s": 2.4}
+    brief = {"method": adapter.face_return.METHOD, "start_stream_s": 2.16, "end_stream_s": 2.4}
     boundary = {"start_pts": coarse["start_pts"], "end_pts": coarse["end_pts"]}
     details = {"face_sequence": coarse, "face_boundary": boundary, "face_return": brief, "review_only": True}
     result = DetectorResult(status="ok", details=details, observed="Coarse appearance review.")

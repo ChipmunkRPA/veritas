@@ -10,7 +10,7 @@ PLANES = np.array([[.299, .587, .114], [-.169, -.331, .5], [.5, -.419, -.081]], 
 
 def frequency_detail(crops: np.ndarray) -> dict[str, list[float]]:
     """Reduce aligned RGB crops to median log energy and same-frame contrasts."""
-    if crops.ndim != 4 or crops.shape[-1] != 3 or min(crops.shape[:3]) < 8:
+    if crops.ndim != 4 or not len(crops) or crops.shape[-1] != 3 or min(crops.shape[1:3]) < 8:
         raise ValueError("Frequency detail needs a nonempty track of RGB crops")
     values = crops.astype(np.float32) @ PLANES.T
     absolute, relative = [], []

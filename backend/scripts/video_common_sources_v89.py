@@ -18,8 +18,6 @@ from pathlib import Path
 from urllib.parse import parse_qs, quote, unquote, urlsplit
 from urllib.request import Request, urlopen
 
-import psutil
-
 RTFS_REV = "bca865e675852666a426368b2f5614abf1c1926a"
 CREMA_REV = "1658cd342dff90010aa843eaeebd53610a08b1dc"
 RTFS = "https://huggingface.co/datasets/godmodes/rtfs-10k"
@@ -95,6 +93,8 @@ def filename(value, suffix):
 
 
 def fetch_metadata(destination):
+    import psutil
+
     require(not destination.exists(), "Preserve every existing acquisition, including partial failures")
     require(psutil.virtual_memory().available >= 3 * 1024**3
             and shutil.disk_usage(destination.parent).free >= 3 * 1024**3, "Metadata preparation headroom unavailable")

@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [temporary face-swap replay](video-local-face-intervals-2026-11-16.md#independent-replay)
+rebuilds 278 direct and recompressed videos and checks 556 source and
+submission bindings. It matches the two methods on the same labeled
+picture grid and separately recounts the actual app worker's added
+locations and ordinary flags.
+
 The [earlier-copy perspective replay](image-reference-perspective-2026-11-16.md#replay)
 rebuilds rotated and tilted JPEG deliveries from three pinned source sets.
 A standard-library command recounts all 1,440 held results and the

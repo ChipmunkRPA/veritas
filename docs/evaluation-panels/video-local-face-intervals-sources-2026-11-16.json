@@ -1,0 +1,444 @@
+{
+  "revision": "bca865e675852666a426368b2f5614abf1c1926a",
+  "recipe": {
+    "duration": 4,
+    "size": [
+      640,
+      360
+    ],
+    "fps": 25,
+    "crf": [
+      23,
+      36
+    ],
+    "source_sample_start_seconds": ".40",
+    "faces": "largest unambiguous tracked face"
+  },
+  "rules": "whole-clip-face-temporal/1",
+  "selected_groups": {
+    "development": 0,
+    "held": 20
+  },
+  "groups": [
+    {
+      "index": 0,
+      "group": "5c8db7aa64d6a8fdb38a18030f2a2981f74701670db9ca85389c06f3feea69c0",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/wB63e78zewk_00005_00020.mp4",
+          "sha256": "0f156d0655624c69a45c71cbdc713a77cc98cc94bf0886eeb129e0c998c5294a",
+          "size": 4006415
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_wB63e78zewk_00005_00020_1-729_woman.mp4",
+          "sha256": "803980ff3943a7587421705a9a82723c583def10d4c4744d83b0773e613da8a4",
+          "size": 1217835
+        },
+        "uniface": {
+          "path": "uniface/uniface_wB63e78zewk_00005_00020_1-499_woman.mp4",
+          "sha256": "0eace55dde0e2937472059509e666859a78db6038e630b0b3f4ccf523cccb37d",
+          "size": 1155707
+        }
+      }
+    },
+    {
+      "index": 1,
+      "group": "071ff8677e91ca277f67e0b9188dcedaba8b37c5c2a8bf16d8d9c349bd9732a8",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/g3r6kO1DPkc_00036_00060.mp4",
+          "sha256": "1296bd628433823e9370d809eee51b175276c164687e4b88cdf5cbd02edcd4f6",
+          "size": 626398
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_g3r6kO1DPkc_00036_00060_3-360_man.mp4",
+          "sha256": "72892877965da213dcda782538255abb9ab4496d58207f428de69727ac6a4ba1",
+          "size": 301387
+        },
+        "uniface": {
+          "path": "uniface/uniface_g3r6kO1DPkc_00036_00060_3-26_man.mp4",
+          "sha256": "20c4790fd9755cae7a743c0d57678bf8a1c7fff22d093e3ebb6626e08016e695",
+          "size": 296945
+        }
+      }
+    },
+    {
+      "index": 2,
+      "group": "9edce2856b14521de2d9bf5cbdfd29a5efeacc12f4b9b94f542a360e5277958c",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/LktGRhlm72k_00021_00035.mp4",
+          "sha256": "f1f8871eb2af50b8fc88a8908c8deaaad954b7db3063a5d1d57de71591a65019",
+          "size": 787941
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_LktGRhlm72k_00021_00035_1-415_woman.mp4",
+          "sha256": "ef0df32f4e373b3bd53dc2c7ed52f1dfc6d538c8dde588bbb90724543a04cc13",
+          "size": 331497
+        },
+        "uniface": {
+          "path": "uniface/uniface_LktGRhlm72k_00021_00035_1-247_woman.mp4",
+          "sha256": "787228fe7839881f9eb7d1ca75042c5908917744602a2fbf972c74a55bd513d8",
+          "size": 332234
+        }
+      }
+    },
+    {
+      "index": 3,
+      "group": "cca7ef0cef7e5b32de411e47ab2abd93cfe72970e0fd0b659d24a56392f1c396",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/dDLuQikrd9Q_00412_00442.mp4",
+          "sha256": "6938d63cb57d70fdbae027eede8a94b794752e05769650611c080bb599dcacf9",
+          "size": 4776395
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_dDLuQikrd9Q_00412_00442_3-779_man.mp4",
+          "sha256": "67337f2d69a13c4b7e0e3a12ad7ef3785f1dce8ad838622e4455ed55a401873d",
+          "size": 1459699
+        },
+        "uniface": {
+          "path": "uniface/uniface_dDLuQikrd9Q_00412_00442_3-414_man.mp4",
+          "sha256": "1555d0e56c3866a5dda8379e6b8ac0dae018d968c750bdb82c534eecba45e130",
+          "size": 1435171
+        }
+      }
+    },
+    {
+      "index": 4,
+      "group": "539da820b606b30962d808e2b17348a672d1b3abab38fe311c7b0debab97c2c3",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/z5FTm8XtabI_00133_00146.mp4",
+          "sha256": "d1f465acf494d6a99d0b920b1c2f7e986612a57726143ac5fa6fd6d7bc74e9a5",
+          "size": 1028990
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_z5FTm8XtabI_00133_00146_3-544_man.mp4",
+          "sha256": "c00e3551b749922b5c8c236c1f7d60f37c409f9d9b997f6297497d4c0737bfa4",
+          "size": 332265
+        },
+        "uniface": {
+          "path": "uniface/uniface_z5FTm8XtabI_00133_00146_3-6_man.mp4",
+          "sha256": "346baa9673296d9b426307dddcdd0f79b8b727fe3c666437640991c139afcfef",
+          "size": 341335
+        }
+      }
+    },
+    {
+      "index": 5,
+      "group": "a27d5b6a7d8e2b4f3e69d3b179f5ec44c32adb01ed2f45c72abbc1c35a59943d",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/FevfQck50Xc_00000_00020.mp4",
+          "sha256": "59d9182e768c7ddbde75130a3170c358b7090ad40d5e3aad459fec1b65809837",
+          "size": 4111138
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_FevfQck50Xc_00000_00020_1-432_woman.mp4",
+          "sha256": "fd5ee5b3ee2964b67e353d5e0a6058751a11b8bb47566157750aa5ed1066e8cf",
+          "size": 2132918
+        },
+        "uniface": {
+          "path": "uniface/uniface_FevfQck50Xc_00000_00020_1-538_woman.mp4",
+          "sha256": "ce881d150a0fa70181d9e32695358f4fd2553ee16cd8735bd685928727ecf3f8",
+          "size": 2484648
+        }
+      }
+    },
+    {
+      "index": 6,
+      "group": "7b09464c2cffebd79c25a2a25477f3d1aeace213f1817bd7676b0e8c40b8574a",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/YkXyWumkgtw_00063_00074.mp4",
+          "sha256": "3e4bf6267a26eb369120c6c6545bfc0c3ea9d11484c01d852c5aa69afedc5e98",
+          "size": 3126748
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_YkXyWumkgtw_00063_00074_3-791_man.mp4",
+          "sha256": "b6f749826d4d81ad5c1b12f358feb4534c4a4b25f60806ff4a34ddb2f126e85c",
+          "size": 1004628
+        },
+        "uniface": {
+          "path": "uniface/uniface_YkXyWumkgtw_00063_00074_3-476_man.mp4",
+          "sha256": "f07c92c7d264d7dd99b516be605d735c7646fc61899b7528b66bd0fc21078652",
+          "size": 1097925
+        }
+      }
+    },
+    {
+      "index": 7,
+      "group": "0300e5fa55d0513c529ec3fb6a56ff4313125ba017918055a2d763856a92d3f1",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/nxASVGZqVbQ_00003_00030.mp4",
+          "sha256": "0ad66f06d609f64bef7e398f6ddd79b257cbb6d388c90602b8b7a5678f64eb5c",
+          "size": 4271631
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_nxASVGZqVbQ_00003_00030_3-796_man.mp4",
+          "sha256": "0ba699c20d25c6ba36f42ecd1d2a9c2349d942f897cb9309ed0c8f2b191866a0",
+          "size": 1211285
+        },
+        "uniface": {
+          "path": "uniface/uniface_nxASVGZqVbQ_00003_00030_3-684_man.mp4",
+          "sha256": "d32fb01a14425d62ae03391dccac4d972d3891d2f0c235e1de91da7c88fe0fb0",
+          "size": 1197084
+        }
+      }
+    },
+    {
+      "index": 8,
+      "group": "754c734ce38320549e4c9700872776c444c490437340e7217a96815c19d68449",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/20pEy4Jd6LQ_00025_00045.mp4",
+          "sha256": "3a5713948c6f6bc259543eea7cec05d6184f6e84a8d936aaa8df374e58d14fbb",
+          "size": 900569
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_20pEy4Jd6LQ_00025_00045_3-797_man.mp4",
+          "sha256": "60cd474a895955c995124f01d61b4fe0d1f451c234ed64e1440d5fbf66141261",
+          "size": 350361
+        },
+        "uniface": {
+          "path": "uniface/uniface_20pEy4Jd6LQ_00025_00045_3-449_man.mp4",
+          "sha256": "ccc4d6b242af0cc9c9fd8b2c191f540d14ee13500fdc5e7036ea4c6601af59a8",
+          "size": 358275
+        }
+      }
+    },
+    {
+      "index": 9,
+      "group": "eaca3172571c68a00e2bb5869469dea425b5e7998697fe06a125d0dd6bd9a156",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/ecyy7zvveyk_00685_00715.mp4",
+          "sha256": "61a04dde3cc0a7bd715ffc947a58502fcbfbcee8aea7aa0bf7ade0daf8e039a4",
+          "size": 4816102
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_ecyy7zvveyk_00685_00715_1-480_woman.mp4",
+          "sha256": "9e4bd31a56a6e5ade06f585acfdd1383f3d5319c390234abb8734eed536472be",
+          "size": 1355299
+        },
+        "uniface": {
+          "path": "uniface/uniface_ecyy7zvveyk_00685_00715_1-591_woman.mp4",
+          "sha256": "78755860160ea95fe52159d1963aaf08686823ca010dd5c4d5896e926c4e8a96",
+          "size": 1628605
+        }
+      }
+    },
+    {
+      "index": 10,
+      "group": "e92316ca8e3be5e00e78c1ea3c819d6d0bd1620e0f3742dd46e80085d921c7c1",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/PVo94r_0DUc_00002_00012.mp4",
+          "sha256": "025c35c4501d52a99d1c6bd509b3e07e753d2d22a34c1b575a14d7da715b8f62",
+          "size": 730950
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_PVo94r_0DUc_00002_00012_1-390_woman.mp4",
+          "sha256": "ba6b3b9ba1a31aa4fd6c57db9dcd689cdf33cb2331c3d3dfee9db3aab0d8448a",
+          "size": 264397
+        },
+        "uniface": {
+          "path": "uniface/uniface_PVo94r_0DUc_00002_00012_1-181_woman.mp4",
+          "sha256": "570bc8f315e14efe633f63a8a7ae9ab48910ef7492a56ef426e56d3c79a10b5a",
+          "size": 251332
+        }
+      }
+    },
+    {
+      "index": 11,
+      "group": "4579d8826c3cebfdca7bd175b0cf2ff5a8ccce22ec534e852f444ef941807076",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/WS-I5v540YU_00606_00617.mp4",
+          "sha256": "c50cb3290c023bb5d3e8d36b045299c3ea2f39fc5c7158299247456591fd015e",
+          "size": 1650711
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_WS-I5v540YU_00606_00617_3-515_man.mp4",
+          "sha256": "40a9fddcb52ae003ad1ce2527cbc7d13b359c50e1a668178d9c4445a3c0b75a5",
+          "size": 628023
+        },
+        "uniface": {
+          "path": "uniface/uniface_WS-I5v540YU_00606_00617_3-451_man.mp4",
+          "sha256": "2b92fea74eb10ac9ce1d25714bbf123b631409807816bc30643aee6dcd72baf1",
+          "size": 648139
+        }
+      }
+    },
+    {
+      "index": 12,
+      "group": "faa85ca28a0c99e9a2bc67444de74cb30963d112833efd1ed2d34a5fcf38618f",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/gnM_ef3cfK4_00740_00750.mp4",
+          "sha256": "3f2c02dceb44d64f457435a82971a032f9eab53f6b4126272e181dde9c606c55",
+          "size": 1428964
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_gnM_ef3cfK4_00740_00750_3-25_man.mp4",
+          "sha256": "71abcbb80df0da784cc32335cff02f96753942063a6f2371fb5d94465e276320",
+          "size": 483838
+        },
+        "uniface": {
+          "path": "uniface/uniface_gnM_ef3cfK4_00740_00750_3-195_man.mp4",
+          "sha256": "d45fd3282ad688a47afd711935f0153a020aae5ba6e0f07c57ef980238b9ae74",
+          "size": 512934
+        }
+      }
+    },
+    {
+      "index": 13,
+      "group": "677f31c6c814fe3bf82d40d811096f4c0a64acf3102a8c93059c2eb4bf103820",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/14mQ0QzLTmc_00000_00020.mp4",
+          "sha256": "1d786bee753a027da6f332cc7f4a44df08ded1622f85393378677d0097f97a98",
+          "size": 3291065
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_14mQ0QzLTmc_00000_00020_1-595_woman.mp4",
+          "sha256": "51da340cd7ad1eaa9fa0015cef6027421becd9ca8f8cda2bd8b5662401100293",
+          "size": 811457
+        },
+        "uniface": {
+          "path": "uniface/uniface_14mQ0QzLTmc_00000_00020_1-290_woman.mp4",
+          "sha256": "517afe52e62c706bc0365824dedaec11c9abf9b9fc227819171eec67b5d4a06c",
+          "size": 800518
+        }
+      }
+    },
+    {
+      "index": 14,
+      "group": "e8e4fd372d78ae3a30141a785536a8d4744394fe298ccb24f95ecced64ec9dd4",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/5Ti-_vZdzQA_00283_00293.mp4",
+          "sha256": "d1982a42ea124d0b25886a768b4b4e8f5420fb1e3f33fec9d6d2ec70869ebd9b",
+          "size": 2661038
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_5Ti-_vZdzQA_00283_00293_3-810_man.mp4",
+          "sha256": "43f842a4c5519aae57eaf1a58b0a70408752790f98387c5ae2d8a1431d7d5bec",
+          "size": 1067721
+        },
+        "uniface": {
+          "path": "uniface/uniface_5Ti-_vZdzQA_00283_00293_3-613_man.mp4",
+          "sha256": "b5bc47f0b509a3ff5de4020d2fd481c3603f14ac9b4416ddb70058054be48beb",
+          "size": 1039842
+        }
+      }
+    },
+    {
+      "index": 15,
+      "group": "9abb747f849374461d17afa8f48e7e602461e7e1b453774d57886e27b491c8b1",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/Ne-CP84ssXg_00009_00039.mp4",
+          "sha256": "11f76e53e539ed6ae37bdb8114c6d74fed882325b1a494593842e176b817d902",
+          "size": 971070
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_Ne-CP84ssXg_00009_00039_1-467_woman.mp4",
+          "sha256": "aa03998163cacfa73474235919cf15b94b1d72939019c9bb98318bdd3e28a5ac",
+          "size": 353175
+        },
+        "uniface": {
+          "path": "uniface/uniface_Ne-CP84ssXg_00009_00039_1-148_woman.mp4",
+          "sha256": "2a524fd17bf4a2ddd2ae96293ce204f0d0f65bdcad84385d19ecf229d80595a0",
+          "size": 349308
+        }
+      }
+    },
+    {
+      "index": 16,
+      "group": "4ab8f02bf668917debc148e1ce52241506a571683a54a3d1bc5ee82f0b2c558b",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/4hjKHKh-ulY_00075_00090.mp4",
+          "sha256": "e61ab301d453782484b3ed6ba1f74398e32ebba83e5a76d6722f144bd3926122",
+          "size": 3607979
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_4hjKHKh-ulY_00075_00090_1-280_woman.mp4",
+          "sha256": "fa1ea9363d0f4686e4b77530d06b0e78565405b89f4d5bb57fdf6af6a0646782",
+          "size": 1224706
+        },
+        "uniface": {
+          "path": "uniface/uniface_4hjKHKh-ulY_00075_00090_1-620_woman.mp4",
+          "sha256": "5aba935879400912243120759a058ba028b37d4e4ce732e1d114dd9c8471424d",
+          "size": 1224230
+        }
+      }
+    },
+    {
+      "index": 17,
+      "group": "dcf43ee1ef3276b9188e595f89d02379d598fdff848f9a5e25dab5001d012e0d",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/7oKCe8canjM_00005_00015.mp4",
+          "sha256": "5131ddd522d3832fcbee1d961dd9f76294bb7ddc6cd2ada151e0335df1a06f47",
+          "size": 1095978
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_7oKCe8canjM_00005_00015_1-62_woman.mp4",
+          "sha256": "1d51756adfae49bc856e051aa199d4d1312d8b47c12b3cb7361334b6bd0f2e4c",
+          "size": 293854
+        },
+        "uniface": {
+          "path": "uniface/uniface_7oKCe8canjM_00005_00015_3-101_woman.mp4",
+          "sha256": "0f93aef29ef11932026e76cfa4dfd26d4cdfe2071bbeb0ba284fcadb0a8c2998",
+          "size": 286522
+        }
+      }
+    },
+    {
+      "index": 18,
+      "group": "99ffd9d387b421b729e1fd1d0b32c50333154cb579bc12977d2455dcb19fb2ab",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/EGytQtMXTLU_00053_00075.mp4",
+          "sha256": "d892b17406b6587ff672bc37b6c4306fbcb4f83fd4995fecc8aedf85e27e2946",
+          "size": 5673080
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_EGytQtMXTLU_00053_00075_1-266_woman.mp4",
+          "sha256": "7d2ec4294c96f86605ab57143de8008d052b1d19d9fa0bd2ff32a992744037da",
+          "size": 1692450
+        },
+        "uniface": {
+          "path": "uniface/uniface_EGytQtMXTLU_00053_00075_1-257_woman.mp4",
+          "sha256": "0f129c841b955afe4f9a4a6df577a7d16f439864476c3e072c6d62d815964e84",
+          "size": 1695994
+        }
+      }
+    },
+    {
+      "index": 19,
+      "group": "b1c5263185346fb04eeacc8ad4ddd0c2935de8e8097c51d1f710b7582ae7fae2",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/Sj-kPXcVmig_00005_00030.mp4",
+          "sha256": "93365f79aff30b006b15babf2ae7397f5c756b7a907b1c37fd5f6fc3adc53070",
+          "size": 4213664
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_Sj-kPXcVmig_00005_00030_3-162_man.mp4",
+          "sha256": "0152e63a5df1bfeca16291a3865f237fa0498026a9fa86b955e6ee51e1d0cdb6",
+          "size": 1359288
+        },
+        "uniface": {
+          "path": "uniface/uniface_Sj-kPXcVmig_00005_00030_3-180_man.mp4",
+          "sha256": "15f9b31a067f7e74e5d45c00455b00de5aa8d1b8fae781b5ab478602b1c1b8e3",
+          "size": 1403316
+        }
+      }
+    }
+  ]
+}

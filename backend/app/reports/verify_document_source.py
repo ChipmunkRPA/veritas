@@ -27,6 +27,8 @@ from app.evidence import (
     document_passage_coverage,
     document_passage_intervals,
     document_passage_position,
+    document_pdf_history,
+    document_pdf_history_binding,
     document_pdf_visibility,
     document_percentage_consistency,
     document_published_wording,
@@ -179,6 +181,17 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                                                     expected=source.get(document_tracked_changes.COMMITMENT))
 
     pdf_bytes = original.read_bytes() if extension == ".pdf" else None
+    history_detail = ""
+    if history := coverage.get(document_pdf_history_binding.KEY):
+        reading = history["inspection"]
+        if pdf_bytes is None or reading["source_bytes"] != len(pdf_bytes):
+            raise ValueError("Saved wording differs from the submitted PDF size")
+        if reading["reason"] not in {"time_limit", "reader_unavailable"}:
+            if document_pdf_history.inspect(pdf_bytes) != reading:
+                raise ValueError("Saved PDF boundaries or wording differ from the submitted document")
+            indexed = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"]}
+            document_pdf_history.verify_assets(pdf_bytes, history, lambda digest: archive.read(indexed[digest]))
+            history_detail = " Verified the retained PDF saves, wording locations, and current source crops."
 
     def read_ocr_raster(digest: str) -> bytes:
         encoded = doc.source_rasters.get(digest)
@@ -252,4 +265,4 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
             f"{tracked_detail}{word_visibility_detail}{invisible_detail}{character_detail}{interval_detail}{pdf_replacement_detail}"
-            f"{pdf_covered_detail}{percentage_detail}{marker_detail}{wording_detail}")
+            f"{pdf_covered_detail}{percentage_detail}{marker_detail}{wording_detail}{history_detail}")

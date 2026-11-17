@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [retained PDF wording replay](writing-pdf-saved-wording-2026-11-17.md#local-app-and-reproducible-check)
+rebuilds 264 held PDFs from public sources and verifies the earlier byte
+prefixes. Use Poppler to verify the selected word boxes independently.
+The app replay covers form entries, an applied redaction, and an edit
+followed by a comment save.
+
 The [temporary stereo timing replay](audio-stereo-timing-change-2026-11-17.md#local-app-and-independent-replay)
 recounts 936 held deliveries and separately verifies the exact two-channel
 inputs and timestamps. The receipts separate timing shifts, ordinary

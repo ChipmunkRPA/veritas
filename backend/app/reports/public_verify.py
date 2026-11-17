@@ -65,6 +65,8 @@ IMAGE_EDITOR_PREVIEW = 'thumbnail_evidence'
 EMAIL_CLASSIFIER_SCOPE = 'email_classifier_input_scope_sha256'
 WRITING_POSITION = 'writing_position_review_sha256'
 WORD_TRACKED_CHANGES = 'word_tracked_changes_sha256'
+PDF_SAVED_WORDING = 'pdf_saved_wording'
+PDF_SAVED_WORDING_COMMITMENT = 'pdf_saved_wording_sha256'
 WORD_TEXT_VISIBILITY = 'word_text_visibility_sha256'
 IMAGE_INTERPOLATION = 'native_interpolation_review_sha256'
 VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3', 'image-evidence-4', 'image-evidence-5',
@@ -104,7 +106,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              face_short_window_binding.COMMITMENT, scene_return_binding.COMMITMENT,
                              scene_return_binding.COVERAGE_COMMITMENT, video_viseme_binding.COMMITMENT,
                              WRITING_POSITION, WRITING_CHECK_COVERAGE,
-                             EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, WORD_TEXT_VISIBILITY,
+                             EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, WORD_TEXT_VISIBILITY, PDF_SAVED_WORDING_COMMITMENT,
                              IMAGE_INTERPOLATION, prior_grid.COMMITMENT, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
                              image_animation_binding.KEY,
                              document_invisible_characters.COMMITMENT, document_chat_markers.COMMITMENT,
@@ -286,6 +288,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              'Tracked Word edits require document evidence')
     _require(analysis['kind'] == 'document' or WORD_TEXT_VISIBILITY not in result,
              'Word text visibility requires document evidence')
+    _require(analysis['kind'] == 'document' or PDF_SAVED_WORDING_COMMITMENT not in result,
+             'Saved PDF wording requires document evidence')
     _require(analysis["kind"] == "document" or document_invisible_characters.COMMITMENT not in result,
              "Invisible-character measurements require document evidence")
     _require(analysis["kind"] == "document" or document_scope.CHARACTER_REVIEW_COMMITMENT not in result,
@@ -321,6 +325,14 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         validate_repeated_passages(evidence)
         document_percentage_consistency.validate(evidence)
         document_pdf_visibility.validate(evidence)
+        history = evidence.get("coverage", {}).get(PDF_SAVED_WORDING)
+        expected_history = result.get(PDF_SAVED_WORDING_COMMITMENT)
+        if history is not None or expected_history is not None or PDF_SAVED_WORDING_COMMITMENT in evidence["source"]:
+            from app.evidence.document_pdf_history_binding import validate as validate_saved_wording
+
+            validate_saved_wording(evidence, expected_history)
+            _require(history is not None and history["inspection"]["source_bytes"] == source.get("bytes"),
+                     "Saved wording differs from the submitted PDF size")
         document_bibliography.validate(evidence)
         validate_native_locations(evidence)
         validate_matched_context(evidence, published_checks={check['id'] for check in result.get('checks', [])})
@@ -456,6 +468,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     aligned_stereo_pairs = []
     gain_pcm = {}
     for part in parts:
+        if history := (part.get("coverage") or {}).get(PDF_SAVED_WORDING):
+            _require(analysis['kind'] == 'document' and part is evidence, 'Saved wording is outside its PDF')
+            groups.append(history['artifacts'])
         copy_base = part
         if part.get('version') == IMAGE_PAIR_VERSION:
             from app.evidence import image_embedded_pair_binding

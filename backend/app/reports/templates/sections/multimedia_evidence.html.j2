@@ -399,6 +399,42 @@ Samples [{{ window.start_sample }}, {{ window.end_sample }}) at 16000 Hz.
 <p class="caption">{% if page_coverage.additional_rows %}{{ page_coverage.additional_rows }} more rows appear in the JSON report. {% endif %}JSON pointer <span class="mono">/coverage/local_passage_coverage/pdf_pages</span>.</p>
 {% endif %}
 {% endif %}
+{% if evidence.get('pdf_saved_wording') %}
+{% set saved = evidence.pdf_saved_wording %}
+{% set history = saved.inspection %}
+<h3 id="multimedia-evidence-pdf-saved-wording">Changes across saved PDF versions</h3>
+<p>This check compares native page text across saves retained inside the uploaded PDF. Ordinary editing can change it. The comparison carries no AI confidence weight.</p>
+{% if history.status == 'no_history' %}<p>The file retains one verified save.</p>
+{% elif history.status == 'no_change' %}<p>The page wording agrees across the {{ history.saves | length }} retained saves checked.</p>
+{% elif history.status == 'unavailable' %}
+{% set reasons = {'size_limit': 'The PDF exceeds the supported file size.', 'page_limit': 'A retained save exceeds the page limit.', 'save_limit': 'Earlier saves fall outside the five-save comparison limit.', 'page_text_incomplete': 'Some pages lack reliably comparable native text.', 'unverified_chain': 'The stored PDF version boundaries could not be verified.', 'time_limit': 'The saved-version check reached its time limit.', 'reader_unavailable': 'The saved-version reader was unavailable.'} %}
+<p>{{ reasons[history.reason] }}</p>
+{% else %}
+{% set comparison = history.comparisons[-1] %}
+<p>Compared save {{ comparison.earlier_version }} with submitted save {{ history.saves[0].version }}. Checked wording on {{ comparison.checked | length }} matched page {{ 'pair' if comparison.checked | length == 1 else 'pairs' }}.</p>
+{% if comparison.unassessed %}<p class="caption">Current pages with unassessed wording {% for pair in comparison.unassessed %}{{ pair[1] }}{{ '.' if loop.last else ', ' }}{% endfor %}</p>{% endif %}
+{% if comparison.order_only %}<p class="caption">Text order differed on current pages {% for pair in comparison.order_only %}{{ pair[1] }}{{ '.' if loop.last else ', ' }}{% endfor %}</p>{% endif %}
+{% if comparison.earlier_only_pages %}<p>Earlier pages without a matching current page · {{ comparison.earlier_only_pages | join(', ') }}.</p>{% endif %}
+{% if comparison.current_only_pages %}<p>Current pages without a matching earlier page · {{ comparison.current_only_pages | join(', ') }}.</p>{% endif %}
+{% for change in comparison.changes %}
+<article class="multimedia-evidence-packet multimedia-repeat-pair" id="multimedia-evidence-pdf-save-change-{{ loop.index }}">
+<h4>{{ {'replace': 'Wording replaced', 'insert': 'Wording added', 'delete': 'Wording removed'}[change.kind] }}</h4>
+{% if change.current %}
+<blockquote>{{ change.current.excerpt }}{% if change.current.word_range[1] > change.current.excerpt_word_range[1] %}…{% endif %}</blockquote>
+<p class="caption">Current page {{ change.current.page }}, word positions [{{ change.current.word_range | join(', ') }}).</p>
+{{ plates([saved.plates['change' ~ loop.index ~ '_overlay']], wide=true) }}
+{% endif %}
+{% if change.earlier %}<p class="caption">Earlier page {{ change.earlier.page }}, word positions [{{ change.earlier.word_range | join(', ') }}).</p>{% endif %}
+</article>
+{% endfor %}
+{% if comparison.changed_ranges > comparison.changes | length %}<p class="caption">Showing {{ comparison.changes | length }} of {{ comparison.changed_ranges }} wording changes.</p>{% endif %}
+<p class="caption">Earlier wording is represented by its location in the retained save. Word positions are zero-based and the ending position is exclusive.</p>
+{% endif %}
+{% if history.saves | length > 1 %}
+{% for save in history.saves %}<p class="caption evidence-hash">Save {{ save.version }}, first {{ save.prefix_bytes }} bytes. SHA-256 <span class="mono">{{ save.sha256 }}</span>.</p>{% endfor %}
+{% endif %}
+<p class="caption">JSON pointer <span class="mono">/coverage/pdf_saved_wording</span>.</p>
+{% endif %}
 {% if evidence.get('word_tracked_changes') %}
 {% set tracked = evidence.word_tracked_changes %}
 <h3>Word tracked text changes</h3>

@@ -623,6 +623,14 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         wording = _published_wording(ctx, decoded, result.manifest.sampling.get(document_passage_intervals.KEY))
         if wording is not None:
             result.manifest.sampling[document_published_wording.KEY] = wording
+        if (settings.environment == "dev" and settings.document_pdf_saved_wording_review
+                and decoded["meta"].get("method") == "pymupdf"):
+            from app.evidence import document_pdf_history
+            from app.evidence.document_pdf_history_binding import KEY
+
+            ctx.check("saved PDF wording")
+            result.manifest.sampling[KEY] = document_pdf_history.inspect_within(
+                common.media_path(ctx), settings.document_decode_timeout_s)
     if writing_checks := document_check_coverage.capture(
         detected.get("detectors", []), PRIMARY_DETECTORS, BINOCULARS_DETECTOR,
         language=detected.get(language_scope.KEY), verified_credentials=verified_credentials,

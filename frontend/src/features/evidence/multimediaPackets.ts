@@ -546,6 +546,7 @@ export interface DocumentEvidenceSet extends SetBase {
     unselected_passage_responses?: DocumentUnselectedResponses;
     passage_position_review?: DocumentPassagePosition;
     published_wording_review?: PublishedWordingReview;
+    pdf_saved_wording?: PdfSavedWording;
     writing_passage_intervals?: {
       schema: 'document-writing-passage-intervals/1' | 'document-writing-passage-intervals/2' | 'document-writing-passage-intervals/3' | 'document-writing-passage-intervals/4';
       status: 'flagged' | 'no_ranges' | 'unassessed';
@@ -601,6 +602,22 @@ export interface DocumentEvidenceSet extends SetBase {
     ocr?: { status?: string; pages?: { page: number; status: string; coverage_scope?: 'image_region'; reason?: string | null; mean_recognition_confidence?: number;
       language?: { status?: string; language?: string; reason?: string }; [key: string]: unknown }[]; unchecked_pages?: number[] } | null
     email?: { body_part?: string; body_content_type?: 'text/plain' | 'text/html'; attachments?: unknown[]; [key: string]: unknown } | boolean | null }
+}
+
+type PdfSavedWords = { page: number; page_xref: number; word_range: [number, number]; excerpt_word_range: [number, number];
+  boxes: [number, number, number, number][] }
+export interface PdfSavedWording {
+  inspection: {
+    schema: 'chipmunk.pdf-saved-wording/1'; status: 'changed' | 'no_change' | 'no_history' | 'unavailable'
+    reason: null | 'size_limit' | 'page_limit' | 'save_limit' | 'page_text_incomplete' | 'unverified_chain' | 'time_limit' | 'reader_unavailable'
+    affects_overall_confidence: false
+    saves: { version: number; sha256: string; prefix_bytes: number; xref_offset: number; pages: number }[]
+    comparisons: { earlier_version: number; checked: [number, number][]; unassessed: [number, number][];
+      order_only: [number, number][]; earlier_only_pages: number[]; current_only_pages: number[]; changed_ranges: number;
+      changes: { kind: 'replace' | 'insert' | 'delete'; earlier: PdfSavedWords | null;
+        current: (PdfSavedWords & { excerpt: string }) | null }[] }[]
+  }
+  artifacts: Partial<Record<string, EvidenceAsset>>
 }
 
 type DocumentChatMarker = { literal: string; start: number; end: number; ranges?: [number, number][];

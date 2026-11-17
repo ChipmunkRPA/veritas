@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Wording in retained PDF saves](writing-pdf-saved-wording-2026-11-17.md)
+  localizes 96 of 96 staged changes, including edits followed by a separate
+  comment save. It reports zero wording changes on 72 ordinary saves and
+  on the 22 eligible publisher PDFs. The browser, PDF and JSON share
+  both save positions with current source crops. Earlier wording stays
+  in the original file, and the check carries zero AI confidence weight.
+
 - [Temporary stereo timing changes](audio-stereo-timing-change-2026-11-17.md)
   locate 104 of 192 staged delay changes across WAV and two AAC encodings.
   The check flags none of 519 assessed controls out of 696 control

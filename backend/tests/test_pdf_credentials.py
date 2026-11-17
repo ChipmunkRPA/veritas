@@ -147,7 +147,13 @@ def _verify_public_package(billing, analysis, db, frozen, pdf, tmp_path):
 
 @pytest.mark.parametrize("profile", ["quick", "full", "deep"])
 def test_signed_provider_pdf_waits_for_payment_and_skips_writing_models(billing, provider_pdf, profile, monkeypatch, tmp_path):
+    from app.evidence import document_pdf_history, document_pdf_history_binding
+
+    monkeypatch.setattr(settings, "environment", "dev")
     monkeypatch.setattr(settings, "document_pdf_credentials", True)
+    monkeypatch.setattr(settings, "document_pdf_saved_wording_review", True)
+    reader = Mock(side_effect=AssertionError("Unexpected saved-version reader"))
+    monkeypatch.setattr(document_pdf_history, "inspect_within", reader)
     purchase = billing.client.post("/api/v2/billing/checkout", headers={**billing.headers, "Idempotency-Key": str(uuid.uuid4())},
         data={"kind": "document", "profile": profile, "risk_accepted": "true", "risk_notice_version": purchase_notice.VERSION,
               "risk_notice_sha256": purchase_notice.SHA256}, files={"file": ("provider.pdf", provider_pdf, "application/pdf")})
@@ -168,6 +174,7 @@ def test_signed_provider_pdf_waits_for_payment_and_skips_writing_models(billing,
     outcome = pipelines.run_analysis(ident, profile=profile, sessions=billing.sessions, store=billing.store, models=models)
     assert outcome.status == "done", (outcome.status, outcome.error, outcome.stages)
     models.lease.assert_not_called()
+    reader.assert_not_called()
     assert outcome.outputs["provenance_gate"]["action"] == "stop_statistical_detection"
     assert outcome.outputs["detect"]["detectors"] and all(row["status"] == "skipped" for row in outcome.outputs["detect"]["detectors"])
     decision = outcome.outputs["fuse"]["decision"]
@@ -181,6 +188,7 @@ def test_signed_provider_pdf_waits_for_payment_and_skips_writing_models(billing,
         assert not any(name in json.dumps(public).lower() for name in ("deberta", "binoculars", "tropa", "desklib"))
         writing = raw["manifest"]["sampling"]["writing_check_coverage"]
         assert writing["reasons"]["passage_classifier"] == "verified_credentials"
+        assert document_pdf_history_binding.KEY not in raw["manifest"]["sampling"]
         if profile == "quick":
             frozen = snapshot.build(db, analysis, raw, report_id=str(uuid.uuid4()), revision=1, profile="standard",
                 redacted=False, supersedes_report_id=None, revision_reason=None, requested_at=datetime.now(UTC),

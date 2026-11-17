@@ -7,6 +7,7 @@ import DocumentContextComparison from './DocumentContextComparison'
 import DocumentPassageCoverage from './DocumentPassageCoverage'
 import DocumentRepeatedPassages from './DocumentRepeatedPassages'
 import DocumentUnselectedResponses from './DocumentUnselectedResponses'
+import PdfSavedWording from './PdfSavedWording'
 import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentOriginalTextLocation, type DocumentPassagePosition, type EmailBodyAlternatives, type EmailClassifierInputScope, type PublishedWordingColumn, type PublishedWordingReview, type PublishedWordingSection, type WritingCheckReason } from './multimediaPackets'
 
 function BibliographyCoverage({ review }: { review: NonNullable<NonNullable<DocumentEvidenceSet['coverage']>['writing_bibliography']> }) {
@@ -425,6 +426,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     {set.coverage?.writing_passage_intervals && <WritingPassageIntervals review={set.coverage.writing_passage_intervals}
       method={set.source.method} emailHtml={emailCoverage?.body_content_type === 'text/html'} wording={set.coverage.published_wording_review} />}
     {set.coverage?.published_wording_review && <PublishedWording review={set.coverage.published_wording_review} />}
+    {set.coverage?.pdf_saved_wording && <PdfSavedWording review={set.coverage.pdf_saved_wording} set={set} token={token} mediaReady={mediaReady} />}
     <EmailBodyComparison review={set.coverage?.email_body_alternatives} />
     {set.coverage?.email_classifier_input_scope && <EmailInputScope scope={set.coverage.email_classifier_input_scope} />}
     {tracked && <section aria-label="Word tracked text changes" className="mt-4 rounded-md border border-border p-4">

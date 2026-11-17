@@ -36,6 +36,8 @@ from app.evidence import (
     document_passage_coverage,
     document_passage_intervals,
     document_passage_position,
+    document_pdf_history,
+    document_pdf_history_binding,
     document_pdf_visibility,
     document_percentage_consistency,
     document_published_wording,
@@ -341,6 +343,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_repeat.validate(document)
         document_percentage_consistency.validate(document)
         document_pdf_visibility.validate(document)
+        document_pdf_history_binding.validate(document, document["source"].get(document_pdf_history_binding.COMMITMENT))
         document_bibliography.validate(document)
         document_word_visibility.validate(document, document["source"].get(document_word_visibility.COMMITMENT))
         document_invisible_characters.validate(document, document["source"].get(document_invisible_characters.COMMITMENT))
@@ -535,6 +538,14 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document_check_coverage.verify_source(document, text, decoded["sentences"])
     if visibility := decoded["meta"].get(document_pdf_visibility.KEY):
         document["coverage"][document_pdf_visibility.KEY] = visibility
+    if history := document_pdf_history_binding.from_result(result):
+        assets = {}
+        for role, payload, asset in document_pdf_history.previews(source, history):
+            art = register_artefact(db, store, payload, media_type="image/png", role="preview", created_by=CREATOR,
+                                   analysis_id=analysis.id)
+            assets[role] = {**asset, "url": f"/api/v2/analyses/{analysis.id}/evidence-packets/{document['id']}/assets/{art.sha256}.png"}
+        document["source"][document_pdf_history_binding.COMMITMENT] = canonical_hash(history)
+        document["coverage"][document_pdf_history_binding.KEY] = {"inspection": history, "artifacts": assets}
     if bibliography := decoded["meta"].get(document_bibliography.KEY):
         document["coverage"][document_bibliography.KEY] = bibliography
     if word_visibility := document_word_visibility.from_result(result):
@@ -768,6 +779,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()),
                                                           meta=decoded["meta"])
             document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
+            document_pdf_history_binding.validate(document, document_pdf_history_binding.result_commitment(result))
             document_bibliography.verify_source(document, decoded["meta"])
             document_matched_context.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_paragraph_priority.verify_source(document, decoded["text"], decoded["source_map"], result=result)

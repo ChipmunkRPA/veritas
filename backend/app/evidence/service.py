@@ -84,6 +84,7 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
     """Only declared presentation assets may be fetched; source/raw hashes are not download grants."""
     if document is None:
         return {}
+    from app.evidence import document_pdf_history_binding
     from app.evidence.audio_focused_edit_binding import KEY as FOCUSED_EDIT
     from app.evidence.audio_stereo_timing_binding import KEY as STEREO_TIMING
     from app.evidence.image_interpolation_binding import assets as interpolation_assets
@@ -96,6 +97,10 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
     for part in parts:
         groups.append(interpolation_assets(part))
         groups.append(jpeg_grid_assets(part))
+        if (history := (part.get("coverage") or {}).get(document_pdf_history_binding.KEY)) is not None:
+            if part.get("schema") != "chipmunk.document-evidence/1":
+                raise ObjectIntegrityError("Saved wording is outside the document evidence")
+            groups.append(history["artifacts"])
         groups.extend(pair["artifacts"] for record in copy_records(embedded_pair.base_document(part)) for pair in record["pairs"])
         groups.append(embedded_pair.artifacts(part))
         context = part.get("acoustic_context")

@@ -81,6 +81,10 @@ def asset_bytes(asset: dict[str, Any], store: ObjectStore) -> bytes:
 def asset_items(document: dict[str, Any]):
     """Every JSON presentation asset, including overview plots and WAVs that a static PDF cannot play."""
     service.asset_refs(document)
+    from app.evidence.document_pdf_history_binding import KEY as PDF_HISTORY
+
+    if history := (document.get("coverage") or {}).get(PDF_HISTORY):
+        yield from ((None, f"{PDF_HISTORY}_{role}", asset) for role, asset in sorted(history["artifacts"].items()))
     parts = [(None, document)]
     if document.get("version") in NESTED_VIDEO_VERSIONS:
         parts.extend((key, document[key]) for key in ("audio", "av"))
@@ -165,6 +169,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
             document_chat_markers,
             document_invisible_characters,
             document_passage_intervals,
+            document_pdf_history_binding,
             document_published_wording,
             document_tracked_changes,
             document_word_visibility,
@@ -179,6 +184,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
                 or source.get(document_character_review.COMMITMENT) != document_character_review.result_commitment(result)
                 or source.get(document_passage_intervals.COMMITMENT) != document_passage_intervals.result_commitment(result)
                 or source.get(document_published_wording.COMMITMENT) != document_published_wording.result_commitment(result)
+                or source.get(document_pdf_history_binding.COMMITMENT) != document_pdf_history_binding.result_commitment(result)
                 or source.get(document_chat_markers.COMMITMENT) != document_chat_markers.from_result(result)):
             raise ObjectIntegrityError("Document evidence does not match the published extraction commitments")
 
@@ -599,6 +605,8 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_passage_coverage,
         document_passage_intervals,
         document_passage_position,
+        document_pdf_history,
+        document_pdf_history_binding,
         document_pdf_visibility,
         document_percentage_consistency,
         document_published_wording,
@@ -640,6 +648,11 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         verify_repeated_passages(document, text, mapping)
         document_percentage_consistency.verify_source(document, text, mapping, decoded.get("sentences", ()), meta=decoded["meta"])
         document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
+        if history := coverage.get(document_pdf_history_binding.KEY):
+            submitted = _bytes(source["sha256"], store)
+            if len(submitted) != history["inspection"]["source_bytes"]:
+                raise ValueError("Saved wording differs from the submitted PDF size")
+            document_pdf_history.verify_assets(submitted, history, assets.__getitem__)
         document_bibliography.verify_source(document, decoded["meta"])
         document_word_visibility.verify_source(document, decoded["meta"].get(document_word_visibility.KEY), frozen=True)
         document_invisible_characters.verify_source(document, text, mapping, decoded["meta"])
@@ -1056,6 +1069,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     from app.evidence import document_passage_intervals, document_published_wording
     from app.evidence.document_email_contexts import KEY as EMAIL_INPUT_SCOPE
     from app.evidence.document_native_locations import KEY as ORIGINAL_TEXT_LOCATIONS
+    from app.evidence.document_pdf_history_binding import KEY as PDF_HISTORY
     from app.evidence.document_tracked_changes import KEY as TRACKED
 
     if snapshot.analysis.kind not in KINDS:
@@ -1075,6 +1089,11 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     def plate(role: str, asset: dict, label: str | None = None) -> dict:
         return {"role": role, "label": label or role.replace("_", " ").capitalize(), "sha256": asset["sha256"],
                 "uri": None if withheld else "data:image/png;base64," + base64.b64encode(verified[asset["sha256"]]).decode("ascii")}
+
+    pdf_history = copy.deepcopy((document.get("coverage") or {}).get(PDF_HISTORY)) if not withheld else None
+    if pdf_history:
+        pdf_history["plates"] = {role: plate(role, asset, "Highlighted current PDF crop")
+                                 for role, asset in pdf_history["artifacts"].items() if asset["role"] == "overlay"}
 
     def overview_label(pk: str, body: dict, role: str) -> str:
         source = body["source"]
@@ -1594,6 +1613,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 and (intervals := (document.get("coverage") or {}).get(document_passage_intervals.KEY)) else None
             ),
             "published_wording": document_published_wording.report_view(wording, document["source"].get("method")),
+            "pdf_saved_wording": pdf_history,
             "writing_agreement": _writing_agreement_view(document.get("coverage") or {}) if kind == "document" else None,
             "email_body_alternatives": (document.get("coverage") or {}).get("email_body_alternatives") if kind == "document" else None,
             "email_classifier_input_scope": (document.get("coverage") or {}).get(EMAIL_INPUT_SCOPE) if kind == "document" else None,

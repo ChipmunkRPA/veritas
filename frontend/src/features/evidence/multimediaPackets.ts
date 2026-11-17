@@ -195,11 +195,12 @@ export interface AudioRepetitionContext extends AudioRepeatRecord {
 }
 interface StereoRepetitionContext {
   schema: 'chipmunk.stereo-exact-repetition/1' | 'chipmunk.stereo-exact-repetition/2' | 'chipmunk.stereo-exact-repetition/3'
-    | 'chipmunk.stereo-exact-repetition/4' | 'chipmunk.stereo-exact-repetition/5'
+    | 'chipmunk.stereo-exact-repetition/4' | 'chipmunk.stereo-exact-repetition/5' | 'chipmunk.stereo-exact-repetition/6'
   source_sha256: string; affects_overall_confidence: false
   channels: { channel: 'left' | 'right'; measurement: AudioRepetitionContext; gain_measurement?: AudioGainRepetitionContext }[]
   difference_measurement?: AudioRepetitionContext
   aligned_measurement?: AudioAlignedRepetitionContext
+  rate_measurement?: AudioAlignedRepetitionContext
 }
 export function repeatedAudioCount(audio?: AudioEvidenceSet | VideoAudioChannel | null) {
   return (audio?.repetition_context?.pairs.length ?? 0) + (audio?.similarity_context?.pairs.length ?? 0)
@@ -207,15 +208,21 @@ export function repeatedAudioCount(audio?: AudioEvidenceSet | VideoAudioChannel 
       + (row.gain_measurement?.pairs.length ?? 0), 0) ?? 0)
     + (audio?.stereo_repetition?.difference_measurement?.pairs.length ?? 0)
     + (audio?.stereo_repetition?.aligned_measurement?.pairs.length ?? 0)
+    + (audio?.stereo_repetition?.rate_measurement?.pairs.length ?? 0)
 }
 type AlignedRepeatSpan = AudioRepeatSpan & {
   pcm_s16le_sha256: string; recorded_excerpt: AudioRepeatSpan & { pcm_s16le_sha256: string }
 }
+type RateRepeatPair = Pick<AudioRepeatPair, 'id' | 'artifacts'> & {
+  first: AlignedRepeatSpan; second: AlignedRepeatSpan
+  faster_occurrence: 'first' | 'second'; duration_numerator: number; duration_denominator: number
+}
 export interface AudioAlignedRepetitionContext extends Omit<AudioRepeatRecord, 'status' | 'pcm_sha256'> {
   schema: 'chipmunk.aligned-stereo-repetition/1' | 'chipmunk.aligned-stereo-repetition/2' | 'chipmunk.aligned-stereo-repetition/3'
+    | 'chipmunk.aligned-stereo-repetition/4'
   status: AudioRepeatRecord['status'] | 'skipped'; pcm_sha256: string | null
   alignment: { right_offset_samples: number; right_gain_numerator: number; agreeing_windows: number; usable_windows: number } | null
-  pairs: (AudioRepeatPair & { first: AlignedRepeatSpan; second: AlignedRepeatSpan })[]
+  pairs: ((AudioRepeatPair & { first: AlignedRepeatSpan; second: AlignedRepeatSpan }) | RateRepeatPair)[]
 }
 export interface StereoTimingChange {
   schema: 'chipmunk.stereo-timing-change/1'; source_sha256: string; sample_rate: 48000

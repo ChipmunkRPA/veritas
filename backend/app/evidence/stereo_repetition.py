@@ -31,6 +31,9 @@ from app.evidence.stereo_repetition_binding import (
     NATIVE_ALIGNED_SCHEMA,
     NATIVE_SCHEMAS,
     NATIVE_VERSIONS,
+    RATE_ALIGNED_SCHEMA,
+    RATE_ALIGNED_VERSION,
+    RATE_KEY,
     SCHEMA,
     validate,
 )
@@ -62,7 +65,8 @@ def freeze(db, store, analysis_id, decoded, *, native_source=None):
             schema = AAC_ALIGNED_SCHEMA
         elif settings.audio_stereo_native_repeat_review or timing:
             pcm = decode_native_stereo(native_source, decoded.mapping)
-            schema = NATIVE_ALIGNED_SCHEMA
+            schema = (RATE_ALIGNED_SCHEMA if settings.audio_stereo_native_repeat_review and settings.audio_stereo_rate_repeat_review
+                      else NATIVE_ALIGNED_SCHEMA)
     if pcm is None:
         return None
     return register_artefact(db, store, pcm, media_type="application/octet-stream", role="stage_output",
@@ -144,12 +148,13 @@ def _pcm_wav(data, *, rate=audio_exact_repetition.SAMPLE_RATE, channels=2):
     return output.getvalue()
 
 
-def _build_aligned(data, channels, source, mapping, asset, *, exact_found, schema=alignment.SCHEMA):
+def _build_aligned(data, channels, source, mapping, asset, *, exact_found, schema=alignment.SCHEMA, shared_fit=None):
     from app.evidence import audio_channel_alignment
     from app.evidence.audio_packets import _chart
 
     native = schema != alignment.SCHEMA
     aac = schema == alignment.AAC_SCHEMA
+    rate_adjusted = schema == alignment.RATE_SCHEMA
     factor = alignment.NATIVE_FACTOR if native else 1
     rate = alignment.SAMPLE_RATE * factor
     status = {"schema": schema, "source_sha256": source["sha256"],
@@ -157,7 +162,16 @@ def _build_aligned(data, channels, source, mapping, asset, *, exact_found, schem
               "alignment": None, "pcm_sha256": None, "searched_interval": None, "pairs": []}
     if exact_found:
         return status | {"status": "skipped", "reason": "exact_channel_difference_found"}
-    if aac:
+    rate_matches = ()
+    if rate_adjusted:
+        from app.evidence import audio_rate_repetition
+
+        spans = ()
+        fitted, reason = None, "insufficient_alignment"
+        if shared_fit is not None:
+            fitted, reason, rate_matches = audio_rate_repetition.search(channels, audio_channel_alignment.Alignment(**shared_fit))
+            spans = [(match.first, match.second) for match in rate_matches]
+    elif aac:
         from app.evidence import audio_aac_alignment
 
         fitted, reason, spans = audio_aac_alignment.search(channels)
@@ -198,9 +212,13 @@ def _build_aligned(data, channels, source, mapping, asset, *, exact_found, schem
                 "pcm_s16le_sha256": hashlib.sha256(payload).hexdigest()}
 
     for index, (first, second) in enumerate(spans, 1):
-        count = first[1] - first[0]
-        pair = {"id": f"AR{index:02d}", "sample_count": count, "lag_samples": second[0] - first[0],
-                "artifacts": {}}
+        if rate_adjusted:
+            match = rate_matches[index - 1]
+            pair = {"id": f"SR{index:02d}", "faster_occurrence": match.faster,
+                    "duration_numerator": match.ratio[0], "duration_denominator": match.ratio[1], "artifacts": {}}
+        else:
+            pair = {"id": f"AR{index:02d}", "sample_count": first[1] - first[0],
+                    "lag_samples": second[0] - first[0], "artifacts": {}}
         for side, (start, end) in (("first", first), ("second", second)):
             a, b = alignment.excerpt_range(start, end, shift)
             original = data[4 * a:4 * b]
@@ -211,11 +229,15 @@ def _build_aligned(data, channels, source, mapping, asset, *, exact_found, schem
                 _pcm_wav(original, rate=rate), "audio/wav", samples=b - a, sample_rate=rate, channels=2)
             clip = _pcm_wav(selected, rate=rate, channels=1) if native else wav_bytes(pcm)
             pair["artifacts"][f"{side}_clip"] = asset(
-                clip, "audio/wav", samples=count, sample_rate=rate, channels=1)
-            graph = plotted[start // factor:end // factor].astype("<f4") / np.float32(32768)
+                clip, "audio/wav", samples=end - start, sample_rate=rate, channels=1)
+            graph_samples = values[start:end] if rate_adjusted else plotted[start // factor:end // factor]
+            graph = graph_samples.astype("<f4") / np.float32(32768)
+            chart_timing = ({"sample_rate": rate, "time_precision": 3,
+                             "source_offset": pair[side]["source_timestamp_ranges"][0]["source_start_pts"]}
+                            if rate_adjusted else {})
             pair["artifacts"][f"{side}_waveform"] = asset(
                 _chart(graph, [], start=0, end=len(graph), selected=None, scores=False,
-                       title=f"{title} | {side.capitalize()} occurrence", peak_scaled=native),
+                       title=f"{title} | {side.capitalize()} occurrence", peak_scaled=native, **chart_timing),
                 "image/png", width=960, height=280,
             )
         status["pairs"].append(pair)
@@ -235,11 +257,15 @@ def build(data, source, mapping, asset, *, gain_version=None, difference_version
         raise ValueError("Unknown stereo repetition difference method")
     channels = np.frombuffer(data, dtype="<i2").reshape(-1, 2)
     if native:
-        schema = AAC_ALIGNED_SCHEMA if aac else NATIVE_ALIGNED_SCHEMA
+        schema = (AAC_ALIGNED_SCHEMA if aac else RATE_ALIGNED_SCHEMA if difference_version == RATE_ALIGNED_VERSION
+                  else NATIVE_ALIGNED_SCHEMA)
         record = {"schema": schema, "source_sha256": source["sha256"], "affects_overall_confidence": False,
                   "stereo_pcm_sha256": hashlib.sha256(data).hexdigest(), "channels": [],
                   ALIGNED_KEY: _build_aligned(data, channels, source, mapping, asset, exact_found=False,
                                               schema=NATIVE_SCHEMAS[schema])}
+        if schema == RATE_ALIGNED_SCHEMA:
+            record[RATE_KEY] = _build_aligned(data, channels, source, mapping, asset, exact_found=False,
+                                              schema=alignment.RATE_SCHEMA, shared_fit=record[ALIGNED_KEY]["alignment"])
         validate(record, source)
         return record
     rows = []

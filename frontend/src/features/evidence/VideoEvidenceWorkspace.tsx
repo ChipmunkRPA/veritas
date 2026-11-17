@@ -13,7 +13,7 @@ const lanes: { id: Lane; title: string; description: string }[] = [
 ]
 export function videoLaneForHash(hash: string): Lane | null {
   if (/^#media-evidence-(?:timing|AV\d+)/.test(hash)) return 'timing'
-  if (/^#media-evidence-(?:voice|background|sounds|stereo|soundtrack-pair|repetition|similar-audio|(?:difference|aligned)-repetition|(?:left|right)-(?:gain-)?repetition|[LR][RG]\d+|[AD]R\d+|[ABC]\d+|RS?\d+)/.test(hash)) return 'voice'
+  if (/^#media-evidence-(?:voice|background|sounds|stereo|soundtrack-pair|repetition|similar-audio|(?:difference|aligned|rate)-repetition|(?:left|right)-(?:gain-)?repetition|[LR][RG]\d+|[ADS]R\d+|[ABC]\d+|RS?\d+)/.test(hash)) return 'voice'
   if (/^#media-evidence-(?:visual|V(?:PH|LT)?\d+)/.test(hash)) return 'visual'
   if (hash === '#media-evidence-all') return 'all'
   return null

@@ -65,23 +65,31 @@
 {% if evidence.stereo_repetition.get('aligned_measurement') %}
 {% set _ = repeat_reports.append((evidence.stereo_repetition.aligned_measurement, true, 'aligned', evidence.stereo_repetition_pointer ~ '/aligned_measurement')) %}
 {% endif %}
+{% if evidence.stereo_repetition.get('rate_measurement') %}
+{% set _ = repeat_reports.append((evidence.stereo_repetition.rate_measurement, true, 'aligned', evidence.stereo_repetition_pointer ~ '/rate_measurement')) %}
+{% endif %}
 {% endif %}
 {% for context, similar, channel, pointer in repeat_reports if context %}
 {% set waveform = context.schema == 'chipmunk.audio-repeat-similarity/2' %}
 {% set gain = context.schema == 'chipmunk.audio-gain-repetition/1' %}
 {% set difference = channel == 'difference' %}
 {% set aligned = channel == 'aligned' %}
-<h3>{% if aligned %}Repeated sound after stereo alignment{% elif difference %}Repeated sound in the stereo difference{% elif channel %}{{ 'Gain-adjusted' if gain else 'Exact' }} repeats in the {{ channel }} channel{% elif similar %}Similar repeated audio{% else %}Exact repeated audio{% endif %}</h3>
-<p>{% if aligned %}This check compares quieter sounds after reducing the dominant sound shared across the stereo channels. It needs a stable timing and level relationship between channels.{% elif difference %}Subtracting the stereo channels cancels sound recorded identically in both. The match can include off-center speech, music, or background sound.{% elif gain %}This check compares the recorded channel for exact repeats after a fixed level or polarity change. Mixing new sound into that channel can hide repeats.{% elif channel %}This check compares the recorded channel before it is mixed into mono.{% elif waveform %}The exact and frequency-band searches yielded no reportable pair. A second similarity check compared waveform patterns in the same continuous 2.5–4 second mono input. Background noise can mask repeats.{% elif similar %}This check compares patterns across frequency bands in continuous 2.5–4 second mono inputs. Background noise can mask repeats.{% else %}This check compares samples in continuous 2.5–4 second mono inputs.{% endif %} Loops, recurring alerts, and editing can all repeat audio. Matches carry no AI confidence weight.</p>
+{% set adjusted = context.schema == 'chipmunk.aligned-stereo-repetition/4' %}
+{% if adjusted %}<div class="multimedia-rate-repetition">{% endif %}
+<h3>{% if adjusted %}Repeated sound at different speeds{% elif aligned %}Repeated sound after stereo alignment{% elif difference %}Repeated sound in the stereo difference{% elif channel %}{{ 'Gain-adjusted' if gain else 'Exact' }} repeats in the {{ channel }} channel{% elif similar %}Similar repeated audio{% else %}Exact repeated audio{% endif %}</h3>
+<p>{% if adjusted %}This check reduces sound shared by both stereo channels, then looks for matching quieter waveforms across frequency bands at selected playback speeds. It needs a stable timing and level relationship between channels.{% elif aligned %}This check compares quieter sounds after reducing the dominant sound shared across the stereo channels. It needs a stable timing and level relationship between channels.{% elif difference %}Subtracting the stereo channels cancels sound recorded identically in both. The match can include off-center speech, music, or background sound.{% elif gain %}This check compares the recorded channel for exact repeats after a fixed level or polarity change. Mixing new sound into that channel can hide repeats.{% elif channel %}This check compares the recorded channel before it is mixed into mono.{% elif waveform %}The exact and frequency-band searches yielded no reportable pair. A second similarity check compared waveform patterns in the same continuous 2.5–4 second mono input. Background noise can mask repeats.{% elif similar %}This check compares patterns across frequency bands in continuous 2.5–4 second mono inputs. Background noise can mask repeats.{% else %}This check compares samples in continuous 2.5–4 second mono inputs.{% endif %} Loops, recurring alerts, and editing can all repeat audio. Matches carry no AI confidence weight.</p>
 {% if aligned and context.sample_rate == 48000 %}<p class="caption">{% if context.schema == 'chipmunk.aligned-stereo-repetition/3' %}This comparison uses lower frequency bands of the presented 48 kHz stereo audio. The waveforms show those bands.{% else %}Times and excerpts use the original 48 kHz stereo recording.{% endif %} Each waveform uses its own peak scale for visibility.</p>{% endif %}
+{% if adjusted %}<p class="caption">The waveforms show the aligned excerpts at their recorded speeds on the source clock.</p>{% endif %}
 {% if aligned and context.searched_interval %}<p class="caption">Compared {{ '%.3f' | format(context.searched_interval.start_sample / context.sample_rate) }}–{{ '%.3f' | format(context.searched_interval.end_sample / context.sample_rate) }} s of analyzed audio. The right channel uses sample offset {{ context.alignment.right_offset_samples }} relative to the left.</p>{% endif %}
 {% if aligned and context.status == 'skipped' %}<p>{% if context.reason == 'exact_channel_difference_found' %}The direct stereo comparison already found a repeat.{% else %}The shared sound required no timing or level adjustment.{% endif %}</p>
 {% elif context.status == 'ambiguous' %}<p>{{ 'The waveform search could not establish a reliable pair.' if waveform else 'The search reached its comparison limit before it could establish a result.' }}</p>
 {% elif context.status == 'unavailable' %}<p>This input could not be checked within the supported duration, source timing, and signal conditions.</p>
+{% elif adjusted and not context.pairs %}<p>No qualifying repeat at a different speed was found in the checked audio.</p>
 {% elif not context.pairs %}<p>No {{ 'gain-adjusted' if gain else 'waveform' if waveform else 'similar' if similar else 'exact active' }} repeat of at least 0.15 seconds was found in the checked input.{% if waveform and context.frequency_band_search.status != 'measured' %} The frequency-band search was inconclusive.{% endif %}</p>{% endif %}
 {% for pair in context.pairs %}
 <article class="multimedia-evidence-packet multimedia-repeat-pair" id="multimedia-evidence-{{ pair.id }}">
-<h4>{{ pair.id }} · {{ '%.3f' | format(pair.sample_count / context.sample_rate) }} s of {{ 'samples matched after a gain adjustment' if gain else 'similar sound' if similar else 'identical samples' }}</h4>
+{% if adjusted %}<h4>{{ pair.id }} · The {{ pair.faster_occurrence }} occurrence plays about {{ '%.2f' | format(pair.duration_denominator / pair.duration_numerator) }}× as fast</h4>
+{% else %}<h4>{{ pair.id }} · {{ '%.3f' | format(pair.sample_count / context.sample_rate) }} s of {{ 'samples matched after a gain adjustment' if gain else 'similar sound' if similar else 'identical samples' }}</h4>{% endif %}
 {% if gain %}<p>Multiplying the {{ 'first' if pair.scaled_occurrence == 'second' else 'second' }} occurrence by {{ pair.gain_numerator }}/{{ pair.gain_denominator }} and rounding to recorded precision reproduces the {{ pair.scaled_occurrence }} occurrence. These ranges can include matching silence. The edit boundaries and order are unknown.</p>{% endif %}
 {% if pair.get('waveform') %}{{ plates([pair.waveform]) }}{% endif %}
 {% for label in ['first', 'second'] %}
@@ -101,7 +109,9 @@
 {% endfor %}
 {% if not similar and not gain %}<p class="caption evidence-hash">{% if difference %}Channel difference WAV SHA-256{% else %}{% if not evidence.withheld %}The evidence ZIP includes one WAV for both locations. {% endif %}WAV SHA-256{% endif %} <span class="mono">{{ pair.artifacts.first_clip.sha256 }}</span>. Decoded sample SHA-256 <span class="mono">{{ pair.pcm_s16le_sha256 }}</span>.</p>{% endif %}
 </article>
+{% if adjusted and loop.first %}</div>{% endif %}
 {% endfor %}
+{% if adjusted and not context.pairs %}</div>{% endif %}
 <p class="caption">JSON pointer <span class="mono">{{ pointer }}</span>.</p>
 {% endfor %}
 {% if evidence.get('stereo_timing_change') %}

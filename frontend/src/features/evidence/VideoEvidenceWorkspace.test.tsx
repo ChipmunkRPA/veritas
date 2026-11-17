@@ -38,6 +38,8 @@ it('opens the correct channel for a deep-linked audio or alignment packet', () =
   expect(videoLaneForHash('#media-evidence-DR01')).toBe('voice')
   expect(videoLaneForHash('#media-evidence-AR01')).toBe('voice')
   expect(videoLaneForHash('#media-evidence-aligned-repetition')).toBe('voice')
+  expect(videoLaneForHash('#media-evidence-rate-repetition')).toBe('voice')
+  expect(videoLaneForHash('#media-evidence-SR01')).toBe('voice')
   expect(videoLaneForHash('#finding-F2')).toBeNull()
   show('#media-evidence-A02')
   expect(screen.getByRole('tab', { name: /Voice intervals/ }).getAttribute('aria-selected')).toBe('true')

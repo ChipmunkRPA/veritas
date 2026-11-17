@@ -310,7 +310,7 @@ def verify_speech_selection(document, store, record):
 
 def _chart(pcm: np.ndarray, windows: list[dict[str, Any]], *, start: int, end: int,
            selected: tuple[int, int] | None, scores: bool, title: str | None = None,
-           source_offset: int = 0, time_precision: int = 2, peak_scaled: bool = False) -> bytes:
+           source_offset: int = 0, time_precision: int = 2, peak_scaled: bool = False, sample_rate: int = SAMPLE_RATE) -> bytes:
     im = Image.new("RGB", (960, 280), (250, 249, 245))
     draw = ImageDraw.Draw(im)
     x0, y0, x1, y1 = 58, 40, 938, 232
@@ -343,7 +343,7 @@ def _chart(pcm: np.ndarray, windows: list[dict[str, Any]], *, start: int, end: i
                 draw.line((x0 + i, mid - float(chunk.max()) * amplitude, x0 + i, mid - float(chunk.min()) * amplitude), fill=(45, 100, 78))
     for fraction in (0, 0.25, 0.5, 0.75, 1):
         x = x0 + fraction * (x1 - x0)
-        seconds = (source_offset + start + fraction * (end - start)) / SAMPLE_RATE
+        seconds = (source_offset + start + fraction * (end - start)) / sample_rate
         draw.text((x - 12, y1 + 10), f"{seconds:.{time_precision}f}s", fill=(50, 70, 60))
     buffer = io.BytesIO()
     im.save(buffer, "PNG")

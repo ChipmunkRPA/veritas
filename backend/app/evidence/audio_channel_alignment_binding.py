@@ -18,9 +18,15 @@ from app.evidence.audio_similarity_binding import (
 SCHEMA = "chipmunk.aligned-stereo-repetition/1"
 NATIVE_SCHEMA = "chipmunk.aligned-stereo-repetition/2"
 AAC_SCHEMA = "chipmunk.aligned-stereo-repetition/3"
+RATE_SCHEMA = "chipmunk.aligned-stereo-repetition/4"
 NATIVE_FACTOR = 3
 NATIVE_RATE = SAMPLE_RATE * NATIVE_FACTOR
 AAC_EDGE_MARGIN = 640
+RATE_DECIMATION = 12
+RATE_RATIOS = ((4, 5), (5, 6), (7, 8), (9, 10), (10, 11), (19, 20))
+RATE_MIN_SPAN = 8640
+RATE_EDGE_MARGIN = 720
+RATE_GAP = 960
 MAX_SHIFT = 12
 GAIN_DENOMINATOR = 1024
 ALIGNMENT_WINDOW = 1600
@@ -71,6 +77,11 @@ def excerpt_range(start: int, end: int, shift: int) -> tuple[int, int]:
     return start + min(0, shift), end + max(0, shift)
 
 
+def rate_sample(sample: int, numerator: int, denominator: int) -> int:
+    """Map one stretched search position back to the faster recorded occurrence."""
+    return (RATE_DECIMATION * sample * numerator + denominator // 2) // denominator
+
+
 def project_excerpt(stereo: bytes, shift: int, gain: int) -> bytes:
     """Recompute the derived WAV payload from one original interleaved excerpt."""
     if len(stereo) % 4 or not 4 * abs(shift) < len(stereo):
@@ -101,21 +112,39 @@ def validate(record, source, *, exact_found):
         raise ValueError("Invalid aligned stereo repetition evidence") from error
 
 
+def _validate_rate_pair(pair, first, second):
+    if set(pair) != {"id", "first", "second", "artifacts", "faster_occurrence", "duration_numerator", "duration_denominator"}:
+        raise ValueError("Rate-adjusted stereo repetition has invalid pair fields")
+    faster = pair["faster_occurrence"]
+    num, den = pair["duration_numerator"], pair["duration_denominator"]
+    if faster not in {"first", "second"} or type(num) is not int or type(den) is not int or (num, den) not in RATE_RATIOS:
+        raise ValueError("Rate-adjusted stereo repetition uses an unsupported rate")
+    shorter, longer = (first, second) if faster == "first" else (second, first)
+    length = longer[1] - longer[0]
+    divisor = RATE_DECIMATION * num
+    start = (shorter[0] * den + divisor // 2) // divisor
+    if (length < RATE_MIN_SPAN or any(end % RATE_DECIMATION for end in longer) or first[1] + RATE_GAP > second[0]
+            or shorter != (rate_sample(start, num, den), rate_sample(start + length // RATE_DECIMATION, num, den))):
+        raise ValueError("Rate-adjusted stereo repetition does not reproduce the shorter sample range")
+
+
 def _validate(record, source, exact_found):
     schema = record["schema"]
     aac = schema == AAC_SCHEMA
-    factor = NATIVE_FACTOR if schema in {NATIVE_SCHEMA, AAC_SCHEMA} else 1
+    rate_adjusted = schema == RATE_SCHEMA
+    factor = NATIVE_FACTOR if schema in {NATIVE_SCHEMA, AAC_SCHEMA, RATE_SCHEMA} else 1
     count = aac_presented_samples(source) if aac else source["samples"] * factor
     rate = SAMPLE_RATE * factor
     clock = _timeline(source, source["samples"])
     reason, pairs = record["reason"], record["pairs"]
     if (source["sample_rate"] != SAMPLE_RATE or count is None or not MIN_SAMPLES * factor <= count <= MAX_SAMPLES * factor
-            or len(clock) != 1 or schema not in {SCHEMA, NATIVE_SCHEMA, AAC_SCHEMA} or record["source_sha256"] != source["sha256"]
+            or len(clock) != 1 or schema not in {SCHEMA, NATIVE_SCHEMA, AAC_SCHEMA, RATE_SCHEMA} or record["source_sha256"] != source["sha256"]
             or record["sample_rate"] != rate or record["input_samples"] != count
             or record["projection"] != PROJECTION or reason not in STATUSES or record["status"] != STATUSES[reason]
             or not isinstance(pairs, list) or len(pairs) > MAX_PAIRS or (reason is not None and pairs)
             or exact_found != (reason == "exact_channel_difference_found")
-            or (factor > 1 and record["status"] == "skipped") or (schema == NATIVE_SCHEMA and not native_scope(source))):
+            or (factor > 1 and record["status"] == "skipped")
+            or (schema in {NATIVE_SCHEMA, RATE_SCHEMA} and not native_scope(source))):
         raise ValueError("Aligned stereo repetition differs from its source or check status")
     alignment = record["alignment"]
     if reason in {"exact_channel_difference_found", "insufficient_alignment"}:
@@ -138,22 +167,27 @@ def _validate(record, source, exact_found):
     if record["searched_interval"] != {"start_sample": low, "end_sample": high} or not _valid_hash(record["pcm_sha256"]):
         raise ValueError("Aligned stereo search does not cover the real shared clock")
     extent = {"samples": count, "source_pts": clock[0]["source_pts"] * factor, "time_base": f"1/{rate}"}
-    margin = AAC_EDGE_MARGIN if aac else 0
+    margin = RATE_EDGE_MARGIN if rate_adjusted else AAC_EDGE_MARGIN if aac else 0
     seen = set()
     for index, pair in enumerate(pairs, 1):
         first, second = (_sample_range(pair[side], **extent) for side in ("first", "second"))
-        length = first[1] - first[0]
-        if (pair["id"] != f"AR{index:02d}" or (first, second) in seen or first[0] % (HOP * factor)
-                or not low + margin <= first[0] < first[1] <= second[0] < second[1] <= high - margin
-                or length != second[1] - second[0] or length < MIN_REPEAT_SAMPLES * factor
-                or pair["sample_count"] != length or pair["lag_samples"] != second[0] - first[0]):
+        prefix = "SR" if rate_adjusted else "AR"
+        if (pair["id"] != f"{prefix}{index:02d}" or (first, second) in seen
+                or not low + margin <= first[0] < first[1] <= second[0] < second[1] <= high - margin):
             raise ValueError("Aligned stereo repetition pair differs from the reported time range")
+        if rate_adjusted:
+            _validate_rate_pair(pair, first, second)
+        elif (first[0] % (HOP * factor) or (length := first[1] - first[0]) != second[1] - second[0]
+              or length < MIN_REPEAT_SAMPLES * factor or pair["sample_count"] != length
+              or pair["lag_samples"] != second[0] - first[0]):
+            raise ValueError("Aligned stereo repetition pair differs from the reported sample count")
         seen.add((first, second))
         assets = pair["artifacts"]
         roles = {f"{side}_{suffix}" for side in ("first", "second") for suffix in ("clip", "recorded_clip", "waveform")}
         if set(assets) != roles:
             raise ValueError("Aligned stereo repetition is missing source excerpts or waveforms")
         for side, (start, end) in zip(("first", "second"), (first, second), strict=True):
+            length = end - start
             original = pair[side]["recorded_excerpt"]
             bounds = _sample_range(original, **extent)
             if (bounds != excerpt_range(start, end, shift) or not _valid_hash(original["pcm_s16le_sha256"])

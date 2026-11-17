@@ -7,12 +7,13 @@ type Props = {
 
 function RepeatCheck({ set, token, mediaReady, videoOriginS, context, channel }: Props & {
   context?: ExactContext | AudioSimilarityContext | AudioGainRepetitionContext | AudioAlignedRepetitionContext
-  channel?: 'left' | 'right' | 'difference' | 'aligned'
+  channel?: 'left' | 'right' | 'difference' | 'aligned' | 'rate'
 }) {
   if (!context || context.source_sha256 !== set.source.sha256
     || (!channel && context.pcm_sha256 !== set.source.pcm_sha256)) return null
   const aac = context.schema === 'chipmunk.aligned-stereo-repetition/3'
-  const nativeAligned = aac || context.schema === 'chipmunk.aligned-stereo-repetition/2'
+  const rateAdjusted = context.schema === 'chipmunk.aligned-stereo-repetition/4'
+  const nativeAligned = aac || rateAdjusted || context.schema === 'chipmunk.aligned-stereo-repetition/2'
   const { sample_rate: decodedRate, samples: decodedSamples } = set.source
   if (!decodedRate || !decodedSamples) return null
   const sampleRate = nativeAligned ? 48000 : decodedRate
@@ -24,7 +25,9 @@ function RepeatCheck({ set, token, mediaReady, videoOriginS, context, channel }:
   const waveform = context.schema === 'chipmunk.audio-repeat-similarity/2'
   const difference = channel === 'difference'
   const aligned = nativeAligned || context.schema === 'chipmunk.aligned-stereo-repetition/1'
-  const method = gain
+  const method = rateAdjusted
+    ? 'This check reduces sound shared by both stereo channels, then looks for matching quieter waveforms across frequency bands at selected playback speeds. It needs a stable timing and level relationship between channels.'
+    : gain
     ? 'This check compares the recorded channel for exact repeats after a fixed level or polarity change. Mixing new sound into that channel can hide repeats.'
     : waveform
       ? 'The exact and frequency-band searches yielded no reportable pair. A second similarity check compared waveform patterns in the same continuous 2.5–4 second mono input. Background noise can mask repeats.'
@@ -36,7 +39,7 @@ function RepeatCheck({ set, token, mediaReady, videoOriginS, context, channel }:
           ? 'Subtracting the stereo channels cancels sound recorded identically in both. The match can include off-center speech, music, or background sound.'
           : channel ? 'This check compares the recorded channel before it is mixed into mono.' : 'This check compares samples in continuous 2.5–4 second mono inputs.'
   const id = channel ? `media-evidence-${channel}-${gain ? 'gain-' : ''}repetition` : similar ? 'media-evidence-similar-audio' : 'media-evidence-repetition'
-  const title = aligned ? 'Repeated sound after stereo alignment'
+  const title = rateAdjusted ? 'Repeated sound at different speeds' : aligned ? 'Repeated sound after stereo alignment'
     : difference ? 'Repeated sound in the stereo difference'
     : channel ? `${gain ? 'Gain-adjusted' : 'Exact'} repeats in the ${channel} channel`
     : similar ? 'Similar repeated audio' : 'Exact repeated audio'
@@ -46,6 +49,7 @@ function RepeatCheck({ set, token, mediaReady, videoOriginS, context, channel }:
     {nativeAligned && <p className="mt-2 mb-0 text-caption text-text-muted">
       {aac ? 'This comparison uses lower frequency bands of the presented 48 kHz stereo audio. The waveforms show those bands.'
         : 'Times and excerpts use the original 48 kHz stereo recording.'} Each waveform uses its own peak scale for visibility.
+      {rateAdjusted && ' The waveforms show the aligned excerpts at their recorded speeds on the source clock.'}
     </p>}
     {aligned && context.searched_interval && context.alignment && <p className="mt-2 mb-0 text-caption text-text-muted">
       Compared {seconds(context.searched_interval.start_sample / context.sample_rate)}–{seconds(context.searched_interval.end_sample / context.sample_rate)} of analyzed audio.
@@ -60,10 +64,13 @@ function RepeatCheck({ set, token, mediaReady, videoOriginS, context, channel }:
         ? (waveform ? 'The waveform search could not establish a reliable pair.' : 'The search reached its comparison limit before it could establish a result.')
         : 'This input could not be checked within the supported duration, source timing, and signal conditions.'}</p>
       : context.pairs.length === 0
-        ? <p className="mt-2 mb-0 text-small">No {gain ? 'gain-adjusted' : waveform ? 'waveform' : similar ? 'similar' : 'exact active'} repeat of at least 0.15 seconds was found in the checked input.
+        ? <p className="mt-2 mb-0 text-small">{rateAdjusted ? 'No qualifying repeat at a different speed was found in the checked audio.'
+          : `No ${gain ? 'gain-adjusted' : waveform ? 'waveform' : similar ? 'similar' : 'exact active'} repeat of at least 0.15 seconds was found in the checked input.`}
           {waveform && context.frequency_band_search?.status !== 'measured' && ' The frequency-band search was inconclusive.'}</p>
         : <div className="mt-3 space-y-4">{context.pairs.map((pair) => <article key={pair.id} id={`media-evidence-${pair.id}`} className="border-t border-border pt-3 scroll-mt-20">
-          <h4 className="m-0 text-small font-medium">{pair.id} · {seconds(pair.sample_count / context.sample_rate)} of {gain ? 'samples matched after a gain adjustment' : similar ? 'similar sound' : 'identical samples'}</h4>
+          {'faster_occurrence' in pair
+            ? <h4 className="m-0 text-small font-medium">{pair.id} · The {pair.faster_occurrence} occurrence plays about {(pair.duration_denominator / pair.duration_numerator).toFixed(2)}× as fast</h4>
+            : <h4 className="m-0 text-small font-medium">{pair.id} · {seconds(pair.sample_count / context.sample_rate)} of {gain ? 'samples matched after a gain adjustment' : similar ? 'similar sound' : 'identical samples'}</h4>}
           {'scaled_occurrence' in pair && <p className="mt-2 mb-0 text-small">Multiplying the {pair.scaled_occurrence === 'second' ? 'first' : 'second'} occurrence by {pair.gain_numerator}/{pair.gain_denominator} and rounding to recorded precision reproduces the {pair.scaled_occurrence} occurrence. These ranges can include matching silence. The edit boundaries and order are unknown.</p>}
           {pair.artifacts.waveform && <EvidencePicture set={set} token={token} ready={mediaReady} chart
             artifact={pair.artifacts.waveform} alt={`${pair.id} · ${difference ? 'Channel difference waveform' : 'Waveform'} shared by both occurrences`} />}
@@ -153,6 +160,7 @@ export default function AudioRepetitionContext(props: Props) {
         <RepeatCheck {...props} context={row.gain_measurement} channel={row.channel} /></div>)}
       <RepeatCheck {...props} context={stereo.difference_measurement} channel="difference" />
       <RepeatCheck {...props} context={stereo.aligned_measurement} channel="aligned" />
+      <RepeatCheck {...props} context={stereo.rate_measurement} channel="rate" />
     </>}
     <StereoTimingCheck {...props} />
   </>

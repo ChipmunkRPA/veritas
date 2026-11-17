@@ -124,6 +124,58 @@ def test_repeated_sound_after_stereo_alignment(tmp_path, shift):
         stereo_repetition_binding.validate(changed, source)
 
 
+def test_rate_adjusted_repetition_keeps_both_original_sample_counts(tmp_path):
+    from scipy.signal import resample_poly
+
+    rate, shift = 48000, 7
+    first, second, length = 14347, 90131, 19200
+    rng = np.random.default_rng(7481)
+    background = rng.integers(-220, 220, size=(rate * 3, 2), dtype="<i2")
+    faster = np.rint(resample_poly(background[first:first + length].astype(float), 9, 10, axis=0))
+    background[second:second + len(faster)] = faster
+    voice = rng.integers(-5000, 5000, size=len(background))
+    recorded = (background + np.column_stack((voice, np.r_[np.zeros(shift), np.rint(.78 * voice[:-shift])]))).astype("<i2")
+    data = recorded.tobytes()
+    path = tmp_path / "different-speeds.wav"
+    with wave.open(str(path), "wb") as output:
+        output.setparams((2, 2, rate, 0, "NONE", ""))
+        output.writeframes(data)
+    pin = hashlib.sha256(path.read_bytes()).hexdigest()
+    source = decode_audio(path, source_sha256=pin).mapping | {"sha256": pin}
+    assets = {}
+
+    def asset(payload, media_type, **metadata):
+        digest = hashlib.sha256(payload).hexdigest()
+        assets[digest] = payload
+        return {"sha256": digest, "media_type": media_type, **metadata}
+
+    legacy = stereo_repetition_binding.NATIVE_ALIGNED_VERSION
+    version = stereo_repetition_binding.RATE_ALIGNED_VERSION
+    earlier = stereo_repetition.build(data, source, source, asset, difference_version=legacy)
+    current = stereo_repetition.build(data, source, source, asset, difference_version=version)
+    assert current["aligned_measurement"] == earlier["aligned_measurement"]
+    assert not current["affects_overall_confidence"] and not earlier["aligned_measurement"]["pairs"]
+    [pair] = current["rate_measurement"]["pairs"]
+    assert (pair["faster_occurrence"], pair["duration_numerator"], pair["duration_denominator"]) == ("second", 9, 10)
+    lengths = []
+    for side, expected in (("first", first), ("second", second)):
+        span = pair[side]
+        assert abs(span["start_sample"] - expected) < 960
+        lengths.append(span["end_sample"] - span["start_sample"])
+        original = span["recorded_excerpt"]
+        clip = pair["artifacts"][f"{side}_recorded_clip"]
+        with wave.open(io.BytesIO(assets[clip["sha256"]]), "rb") as wav:
+            assert (wav.getframerate(), wav.getnchannels()) == (rate, 2)
+            assert wav.readframes(wav.getnframes()) == data[4 * original["start_sample"]:4 * original["end_sample"]]
+    assert abs(lengths[1] - .9 * lengths[0]) < 1
+    stereo_repetition.verify(earlier, data, source, source, assets.__getitem__, difference_version=legacy)
+    stereo_repetition.verify(current, data, source, source, assets.__getitem__, difference_version=version)
+    edited = deepcopy(current)
+    edited["rate_measurement"]["pairs"][0].update(duration_numerator=19, duration_denominator=20)
+    with pytest.raises(ValueError, match="shorter sample range"):
+        stereo_repetition_binding.validate(edited, source)
+
+
 def _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapshot, api, pair, source_pts, source_path,
                               stereo=False, gain_pair=None):
     kind = analysis.kind

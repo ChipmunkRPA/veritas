@@ -185,6 +185,12 @@ are not public screening promises or calibrated population probabilities.
   it can assess. Local audio and video show both intervals and the paired
   waveforms with zero AI-score weight.
 
+- [Repeats at different playback speeds](audio-rate-repetition-2026-11-17.md)
+  adds 48 correct locations across 64 staged clips. It reports zero matches
+  on 176 assessed controls out of 224. Short lossless stereo recordings and
+  video soundtracks show both source ranges, original clips and waveforms.
+  The stereo comparison carries zero AI-score weight.
+
 - [Native 48 kHz stereo repeat evidence](audio-native-alignment-2026-11-17.md)
   finds 20 of 32 staged repeats at each of two louder-speech levels,
   versus zero with the existing mono checks and five and zero after

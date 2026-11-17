@@ -17,12 +17,17 @@ try {
   const errors = []
   page.on('pageerror', error => errors.push(error.message))
   const results = []
-  for (const { analysis_id, name, pairs, description = 'Times and excerpts use the original 48 kHz stereo recording.' } of input.cases) {
-    await page.goto(`${input.url}/analyses/${analysis_id}/media-evidence?view=plain#media-evidence-aligned-repetition`)
-    const card = page.getByRole('region', { name: 'Repeated sound after stereo alignment' })
+  for (const { analysis_id, name, pairs, rate, description = 'Times and excerpts use the original 48 kHz stereo recording.' } of input.cases) {
+    const anchor = rate ? 'rate-repetition' : 'aligned-repetition'
+    await page.goto(`${input.url}/analyses/${analysis_id}/media-evidence?view=plain#media-evidence-${anchor}`)
+    const card = page.getByRole('region', { name: rate ? 'Repeated sound at different speeds' : 'Repeated sound after stereo alignment' })
     await card.getByText(description, { exact: false }).waitFor()
     const clips = []
     for (const pair of pairs) {
+      if (rate) {
+        const speed = (pair.duration_denominator / pair.duration_numerator).toFixed(2)
+        await card.getByRole('heading', { name: `${pair.id} · The ${pair.faster_occurrence} occurrence plays about ${speed}× as fast` }).waitFor()
+      }
       for (const side of ['first', 'second']) {
         const label = side === 'first' ? 'First' : 'Second'
         const range = pair[side].source_timestamp_ranges[0]

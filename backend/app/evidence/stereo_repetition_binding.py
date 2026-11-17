@@ -16,19 +16,23 @@ DIFFERENCE_SCHEMA = "chipmunk.stereo-exact-repetition/2"
 ALIGNED_SCHEMA = "chipmunk.stereo-exact-repetition/3"
 NATIVE_ALIGNED_SCHEMA = "chipmunk.stereo-exact-repetition/4"
 AAC_ALIGNED_SCHEMA = "chipmunk.stereo-exact-repetition/5"
+RATE_ALIGNED_SCHEMA = "chipmunk.stereo-exact-repetition/6"
 DIFFERENCE_INPUT = "stereo_repetition_difference_version"
 DIFFERENCE_VERSION = 1
 ALIGNED_VERSION = 2
 NATIVE_ALIGNED_VERSION = 3
 AAC_ALIGNED_VERSION = 4
+RATE_ALIGNED_VERSION = 5
 DIFFERENCE_KEY = "difference_measurement"
 ALIGNED_KEY = "aligned_measurement"
+RATE_KEY = "rate_measurement"
 DIFFERENCE_VERSIONS = {
     DIFFERENCE_SCHEMA: DIFFERENCE_VERSION, ALIGNED_SCHEMA: ALIGNED_VERSION, NATIVE_ALIGNED_SCHEMA: NATIVE_ALIGNED_VERSION,
-    AAC_ALIGNED_SCHEMA: AAC_ALIGNED_VERSION,
+    AAC_ALIGNED_SCHEMA: AAC_ALIGNED_VERSION, RATE_ALIGNED_SCHEMA: RATE_ALIGNED_VERSION,
 }
-NATIVE_VERSIONS = {NATIVE_ALIGNED_VERSION, AAC_ALIGNED_VERSION}
-NATIVE_SCHEMAS = {NATIVE_ALIGNED_SCHEMA: alignment.NATIVE_SCHEMA, AAC_ALIGNED_SCHEMA: alignment.AAC_SCHEMA}
+NATIVE_VERSIONS = {NATIVE_ALIGNED_VERSION, AAC_ALIGNED_VERSION, RATE_ALIGNED_VERSION}
+NATIVE_SCHEMAS = {NATIVE_ALIGNED_SCHEMA: alignment.NATIVE_SCHEMA, AAC_ALIGNED_SCHEMA: alignment.AAC_SCHEMA,
+                  RATE_ALIGNED_SCHEMA: alignment.NATIVE_SCHEMA}
 CHANNELS = ("left", "right")
 
 
@@ -41,6 +45,8 @@ def pairs(record):
         yield from difference["pairs"]
     if aligned := record.get(ALIGNED_KEY):
         yield from aligned["pairs"]
+    if adjusted := record.get(RATE_KEY):
+        yield from adjusted["pairs"]
 
 
 def _validate_measurement(measurement, source, prefix, *, difference=False):
@@ -68,6 +74,8 @@ def _validate_measurement(measurement, source, prefix, *, difference=False):
 def validate(record, source):
     try:
         schema = record["schema"]
+        if (RATE_KEY in record) != (schema == RATE_ALIGNED_SCHEMA):
+            raise ValueError("Unexpected playback-rate repetition evidence")
         if schema in NATIVE_SCHEMAS:
             if (record["affects_overall_confidence"] is not False or record["source_sha256"] != source["sha256"]
                     or not _valid_hash(record["stereo_pcm_sha256"]) or record["channels"] != []
@@ -75,6 +83,12 @@ def validate(record, source):
                     or record[ALIGNED_KEY]["schema"] != NATIVE_SCHEMAS[schema]):
                 raise ValueError("Native stereo repetition does not match the source or its check")
             alignment.validate(record[ALIGNED_KEY], source, exact_found=False)
+            if schema == RATE_ALIGNED_SCHEMA:
+                measured = record[RATE_KEY]
+                if (measured["schema"] != alignment.RATE_SCHEMA
+                        or any(measured[key] != record[ALIGNED_KEY][key] for key in ("alignment", "pcm_sha256", "searched_interval"))):
+                    raise ValueError("Playback-rate and same-speed repetition use different stereo alignment")
+                alignment.validate(measured, source, exact_found=False)
             return
         if (schema not in {SCHEMA, *DIFFERENCE_VERSIONS} or record["affects_overall_confidence"] is not False
                 or record["source_sha256"] != source["sha256"] or source["source_channels"] != 2

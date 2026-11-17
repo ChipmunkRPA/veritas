@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Masked words and their surrounding sentences](writing-masked-context-2026-11-17.md)
+  add zero correct locations across 499 known rewrites at the frozen primary
+  point. The wider paired reading adds five locations and 35 ordinary
+  alerts. An independent export binds alternate detectors to the exact 96
+  native files in the newest report panel. The candidate stays in evaluation.
+
 - [Picture changes across saved PDF versions](pdf-saved-pictures-2026-11-17.md)
   adds 22 correct regions out of 24 staged edits per image encoding on
   24 separate source photographs. It flags none of 96 assessed metadata

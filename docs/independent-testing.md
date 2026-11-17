@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [masked-word writing replay](writing-masked-context-2026-11-17.md#independent-replay)
+reconstructs the 48 new matched report pairs byte for byte. Its export
+verifies all 96 inputs and their parent files and produces a case manifest,
+exact writing locations, and predictions for comparing another detector.
+
 The [saved PDF picture replay](pdf-saved-pictures-2026-11-17.md#reproduce-the-review)
 compares page positions across retained byte prefixes. The standard-library
 reader recounts 432 fresh PDF deliveries and checks that their photos and

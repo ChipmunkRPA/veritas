@@ -42,7 +42,7 @@ def _bounds(w, h):
     return [(0., 0.), (w - 1., 0.), (w - 1., h - 1.), (0., h - 1.)]
 
 
-def _alignment(reference, submitted):
+def _alignment(reference, submitted, *, area_range=(.52, 2.1)):
     match = matching_points(reference, submitted)
     if match is None:
         return None
@@ -60,7 +60,7 @@ def _alignment(reference, submitted):
     projected = _project(matrix, corners).astype(np.float32)
     polygon = cv2.contourArea(projected, oriented=True)
     denominators = np.column_stack((corners, np.ones(4))) @ matrix[2]
-    if (not cv2.isContourConvex(projected) or not .52 <= polygon / (w * h) <= 2.1
+    if (not cv2.isContourConvex(projected) or not area_range[0] <= polygon / (w * h) <= area_range[1]
             or min(denominators) < .75 or max(denominators) > 1.25):
         return None
     errors = np.linalg.norm(_project(matrix, points[inliers]) - target[inliers], axis=1)
@@ -120,10 +120,14 @@ def measure(reference, submitted):
     earlier_gray, observed_gray = _gray(reference), _gray(submitted)
     if (fitted := _alignment(earlier_gray, observed_gray)) is None:
         return None
-    matrix, count, median_error = fitted
-    h, w = observed_gray.shape
+    return measure_aligned(reference, submitted, *fitted)
+
+
+def measure_aligned(reference, submitted, matrix, count, median_error, *, native_matrix=None):
+    """Measure an aligned image pair and project region corners onto the earlier native grid."""
+    h, w = submitted.shape[:2]
     size = (w, h)
-    source_inner = np.zeros(earlier_gray.shape, dtype=np.uint8)
+    source_inner = np.zeros(reference.shape[:2], dtype=np.uint8)
     source_inner[3:-3, 3:-3] = 1
     coverage = cv2.warpPerspective(source_inner, matrix, size, flags=cv2.INTER_NEAREST | cv2.WARP_INVERSE_MAP)
     coverage = cv2.erode(coverage, np.ones((7, 7), np.uint8), borderType=cv2.BORDER_CONSTANT).astype(bool)
@@ -141,8 +145,9 @@ def measure(reference, submitted):
     gx = cv2.Sobel(gray_before, cv2.CV_32F, 1, 0, scale=.125)
     gy = cv2.Sobel(gray_before, cv2.CV_32F, 0, 1, scale=.125)
     difference = delta - .50 * np.hypot(gx, gy)
-    return Measurement(matrix, coverage, difference, {
-        "submitted_to_earlier_pixel_centers": matrix.tolist(),
+    native_matrix = matrix if native_matrix is None else native_matrix
+    return Measurement(native_matrix, coverage, difference, {
+        "submitted_to_earlier_pixel_centers": native_matrix.tolist(),
         "inlier_matches": count, "median_match_error_px": round(median_error, 6),
         "compared_pixels": int(coverage.sum()), "supporting_tiles": tiles,
         "tone_adjustment": np.round(tone.astype(float), 6).tolist(),

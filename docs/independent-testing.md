@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [earlier HEIC and JPEG replay](image-reference-heif-2026-11-17.md#replay)
+rebuilds 576 held deliveries from 18 source photos. The numeric receipt
+distinguishes localized edits, ordinary exports, local blur, and unmatched
+pairs. A separate export replay verifies both original files and the same
+crop and mask pixels carried through the local browser, PDF, and JSON.
+
 The [retained PDF wording replay](writing-pdf-saved-wording-2026-11-17.md#local-app-and-reproducible-check)
 rebuilds 264 held PDFs from public sources and verifies the earlier byte
 prefixes. Use Poppler to verify the selected word boxes independently.

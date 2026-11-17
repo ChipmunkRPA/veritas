@@ -1,0 +1,48 @@
+{
+  "results": {
+    "edit": {
+      "status": "comparable",
+      "regions": 1,
+      "pdf_crops_verified": 2,
+      "reference_sha256": "6e7441ac3421efe9f71d50b817ff4ba222d5af77e694d3b1e5a33feae295cfc5",
+      "submitted_sha256": "26faf1d27298b75b47c3083880e591d50a2766967b3becaf14b3093b4938982b",
+      "verified_assets": 5
+    },
+    "unrelated": {
+      "status": "heif_to_jpeg_pair_unassessed",
+      "regions": 0,
+      "pdf_crops_verified": 0,
+      "reference_sha256": "fce89e94a9f54f348e3880c13d0cd631acdfff50c17ece9a0a8661400f90deb0",
+      "submitted_sha256": "26faf1d27298b75b47c3083880e591d50a2766967b3becaf14b3093b4938982b",
+      "verified_assets": 0
+    },
+    "ordinary": {
+      "status": "comparable",
+      "regions": 0,
+      "pdf_crops_verified": 0,
+      "reference_sha256": "6e7441ac3421efe9f71d50b817ff4ba222d5af77e694d3b1e5a33feae295cfc5",
+      "submitted_sha256": "872312d9f3a30655990e97a5fe72b48adc0d8f6d743f61cfd7c69d00ac227b34",
+      "verified_assets": 1
+    },
+    "camera_export": {
+      "status": "comparable",
+      "regions": 0,
+      "pdf_crops_verified": 0,
+      "reference_sha256": "e760c80eed310e4f27c092d5487693ca8e104e7cc01d25ba4828deb28f679676",
+      "submitted_sha256": "9d99821f0f0ff0b8bf33dcb2f7eb58d41732941b814d24ad167b340d866f5945",
+      "verified_assets": 1
+    }
+  },
+  "browser": {
+    "crop_sizes_verified": 2,
+    "coverage_verified": true,
+    "json_matches_api": true,
+    "pdf_downloaded": true,
+    "page_errors": 0
+  },
+  "unpaid_jobs": 0,
+  "simulated_usd_cents": 999,
+  "simulated_paid_analyses": 3,
+  "earlier_heic_without_option_status": 422,
+  "saved_result_preserved": true
+}

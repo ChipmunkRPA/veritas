@@ -85,7 +85,9 @@ def _summary(document, comparison, assets):
         _text(page, MARGIN, y + 16, f"SHA-256 {source['sha256']}", size=9, font="cour", color=MUTED)
     schema = comparison["schema"]
     if proof := comparison.get("perspective_check"):
-        _text(page, MARGIN, 302, "Matched after correcting perspective and framing.", size=10, font="hebo")
+        method = ("Matched HEIC and JPEG framing. Crops use sRGB display colors."
+                  if proof.get("crop_color_space") == "sRGB" else "Matched after correcting perspective and framing.")
+        _text(page, MARGIN, 302, method, size=10, font="hebo")
         _text(page, MARGIN, 318, f"Matching detail in {len(proof['supporting_tiles'])} areas supported the alignment.", size=10)
         _text(page, MARGIN, 334, f"Compared {proof['compared_pixels']:,} pixels on the submitted image.", size=10, color=MUTED)
     if proof := comparison.get("png_opacity"):

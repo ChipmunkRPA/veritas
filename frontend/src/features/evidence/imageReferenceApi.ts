@@ -155,6 +155,7 @@ export const croppedResizedLossyWebpSchema = 'chipmunk.image-reference-compariso
 export const webpColorSchema = 'chipmunk.image-reference-comparison/23'
 export const earlierJpegWebpSchema = 'chipmunk.image-reference-comparison/24'
 export const perspectiveSchema = 'chipmunk.image-reference-comparison/25'
+export const earlierHeifSchema = 'chipmunk.image-reference-comparison/26'
 const lossyWebpSchemas = [lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema]
 export const imageFramingSchema = (record: ImageReferenceRecord) =>
   record.schema === webpColorSchema ? record.comparison_schema : record.schema
@@ -193,9 +194,9 @@ async function request<T>(path: string, signal: AbortSignal, body?: FormData): P
   }))
 }
 
-export async function comparisonAvailability(analysisId: string, signal: AbortSignal): Promise<boolean> {
-  const result = await request<{ available?: boolean } | null>(comparisonPath(analysisId), signal)
-  return result?.available === true
+export async function comparisonAvailability(analysisId: string, signal: AbortSignal) {
+  const result = await request<{ available?: boolean; earlier_heif?: boolean } | null>(comparisonPath(analysisId), signal)
+  return { available: result?.available === true, earlierHeif: result?.earlier_heif === true }
 }
 
 function validArea(area?: NativeImageArea): area is NativeImageArea {
@@ -519,7 +520,12 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
       throw new Error('The server returned an incomplete JPEG to PNG comparison.')
     }
   }
-  if (comparison.schema === perspectiveSchema) {
+  if (comparison.schema === earlierHeifSchema && comparison.status === 'heif_to_jpeg_pair_unassessed') {
+    if (comparison.affects_overall_confidence !== false || comparison.regions.length
+        || comparison.perspective_check || comparison.coverage_mask || comparison.mask) {
+      throw new Error('The server returned invalid HEIC comparison coverage.')
+    }
+  } else if (comparison.schema === perspectiveSchema || comparison.schema === earlierHeifSchema) {
     const perspective = comparison.perspective_check
     const coverage = comparison.coverage_mask
     const { width, height } = comparison.submitted

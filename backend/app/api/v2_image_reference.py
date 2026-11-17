@@ -35,6 +35,7 @@ router = APIRouter(prefix="/api/v2", tags=["evidence"], dependencies=[Depends(ra
 
 class Availability(BaseModel):
     available: bool
+    earlier_heif: bool = False
 
 
 class Comparison(BaseModel):
@@ -64,8 +65,20 @@ def _original(aid: str) -> tuple[str, int] | None:
         return analysis.sha256, analysis.size_bytes
 
 
-def _check_image(path: Path, *, allow_lossy_webp: bool = False) -> None:
-    with Image.open(path, formats=["PNG", "JPEG", "WEBP"]) as image:
+def _check_image(path: Path, *, allow_lossy_webp: bool = False, allow_earlier_heif: bool = False) -> bool:
+    """Validate the input and report whether it can be compared to an earlier HEIC photo."""
+    from app.detectors.image import reference_heif
+
+    formats = ["PNG", "JPEG", "WEBP"]
+    if allow_earlier_heif:
+        formats.append("HEIF")
+    with Image.open(path, formats=formats) as image:
+        if image.format == "HEIF":
+            if image.width * image.height > reference_heif.MAX_PIXELS:
+                raise ProblemError(413, "HEIC dimensions exceed the limit", "The earlier HEIC can have up to 16 megapixels.")
+            if not reference_heif.supported_source(image):
+                raise ProblemError(422, "Unsupported earlier HEIC", reference_heif.SCOPE)
+            return False
         if image.width * image.height > MAX_PIXELS:
             raise ProblemError(413, "Image dimensions exceed the limit", "Each image must be 4 megapixels or smaller.")
         if getattr(image, "n_frames", 1) != 1:
@@ -75,16 +88,17 @@ def _check_image(path: Path, *, allow_lossy_webp: bool = False) -> None:
 
             body = path.read_bytes()
             if image.mode == "RGB" and lossless_webp_size(body) == image.size:
-                return
+                return False
             if allow_lossy_webp:
                 from app.detectors.image.reference_lossy_webp import supported
                 from app.detectors.image.reference_lossy_webp_resize import MIN_SIDE
 
                 if supported(image, body, minimum_side=MIN_SIDE):
-                    return
+                    return False
             scope = ("Use a simple opaque WebP. Cropped or downsampled lossy comparisons require sides of 384 to 1,024 pixels."
                      if allow_lossy_webp else "Use a simple opaque lossless WebP with each side between 512 and 1,024 pixels.")
             raise ProblemError(422, "Unsupported WebP", scope)
+        return settings.image_reference_heif_review and reference_heif.supported_target(image)
 
 
 def _unavailable() -> ProblemError:
@@ -95,16 +109,17 @@ def _unavailable() -> ProblemError:
 def image_reference_availability(aid: str):
     original = _original(aid)
     available = False
+    earlier_heif = False
     if original is not None:
         sha256, size = original
         try:
             path = default_store().path_for(sha256)
             if path.is_file() and path.stat().st_size == size:
-                _check_image(path, allow_lossy_webp=settings.image_reference_lossy_webp)
+                earlier_heif = _check_image(path, allow_lossy_webp=settings.image_reference_lossy_webp)
                 available = True
         except (*_image_errors, ObjectStoreError, ProblemError):
             pass
-    return JSONResponse({"available": available}, headers=NO_STORE)
+    return JSONResponse({"available": available, **({"earlier_heif": True} if earlier_heif else {})}, headers=NO_STORE)
 
 
 def _copy_image(source: BinaryIO, destination: Path, byte_limit: int) -> tuple[str, int]:
@@ -145,6 +160,7 @@ def _comparison_pdf(comparison: dict, assets: dict[str, bytes]) -> str | None:
 def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool, workspace: Path) -> JSONResponse:
     from cv2 import error as OpenCVError
 
+    from app.detectors.image.reference_heif import UNASSESSED as HEIF_UNASSESSED
     from app.detectors.image.reference_lossless_webp import UNASSESSED as WEBP_UNASSESSED
     from app.detectors.image.reference_lossy_webp import UNASSESSED as LOSSY_WEBP_UNASSESSED
     from app.detectors.image.reference_png_opacity import UNASSESSED
@@ -169,9 +185,10 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
     reference_path = workspace / "reference"
     reference_sha, _ = _copy_image(reference.file, reference_path, upload_limit())
     try:
-        _check_image(reference_path)
+        _check_image(reference_path, allow_earlier_heif=settings.image_reference_heif_review)
     except _image_errors:
-        raise ProblemError(422, "Unsupported earlier copy", "Upload a readable, single-frame JPEG, PNG or lossless WebP image.") from None
+        formats = ("JPEG, PNG, lossless WebP or HEIC" if settings.image_reference_heif_review else "JPEG, PNG or lossless WebP")
+        raise ProblemError(422, "Unsupported earlier copy", f"Upload a readable, single-frame {formats} image.") from None
 
     artifacts = workspace / "evidence"
     try:
@@ -187,9 +204,10 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
                              allow_lossy_webp_crop_resize=settings.image_reference_lossy_webp_crop_resize,
                              allow_lossy_webp_color=settings.image_reference_lossy_webp_color,
                              allow_lossy_webp_earlier_jpeg=settings.image_reference_lossy_webp_earlier_jpeg,
-                             allow_perspective=settings.image_reference_perspective_review)
+                             allow_perspective=settings.image_reference_perspective_review,
+                             allow_earlier_heif=settings.image_reference_heif_review)
         if settings.image_reference_jpeg_png_envelope and comparison["status"] not in {
-            "comparable", UNASSESSED, WEBP_UNASSESSED, LOSSY_WEBP_UNASSESSED,
+            "comparable", UNASSESSED, WEBP_UNASSESSED, LOSSY_WEBP_UNASSESSED, HEIF_UNASSESSED,
         }:
             from app.evidence.image_reference_delivery_envelope import inspect as compare_delivery
 

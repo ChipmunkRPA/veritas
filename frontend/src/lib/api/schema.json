@@ -1989,6 +1989,11 @@
           "available": {
             "title": "Available",
             "type": "boolean"
+          },
+          "earlier_heif": {
+            "default": false,
+            "title": "Earlier Heif",
+            "type": "boolean"
           }
         },
         "required": [
@@ -13756,6 +13761,17 @@
               }
             ],
             "title": "Picture Insertion Available"
+          },
+          "short_native_sound_difference_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Short Native Sound Difference Available"
           },
           "sound_difference_available": {
             "anyOf": [

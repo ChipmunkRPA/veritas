@@ -2405,6 +2405,11 @@ export interface components {
         Availability: {
             /** Available */
             available: boolean;
+            /**
+             * Earlier Heif
+             * @default false
+             */
+            earlier_heif: boolean;
         };
         /** BBox */
         BBox: {
@@ -6249,6 +6254,8 @@ export interface components {
             available: boolean;
             /** Picture Insertion Available */
             picture_insertion_available?: boolean | null;
+            /** Short Native Sound Difference Available */
+            short_native_sound_difference_available?: boolean | null;
             /** Sound Difference Available */
             sound_difference_available?: boolean | null;
             /** Timing Available */

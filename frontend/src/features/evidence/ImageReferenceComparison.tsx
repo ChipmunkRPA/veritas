@@ -7,7 +7,7 @@ import {
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
   IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
   pngOpacitySchema, exactWebpSchema, lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema,
-  earlierJpegWebpSchema, imageFramingSchema, perspectiveSchema, webpColorSchema,
+  earlierHeifSchema, earlierJpegWebpSchema, imageFramingSchema, perspectiveSchema, webpColorSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -30,6 +30,7 @@ const unassessed: Record<string, string> = {
   png_opacity_unassessed: 'The opacity comparison requires two matched 8-bit RGB or RGBA PNGs with the same framing and color profile.',
   webp_framing_unassessed: 'Exact WebP comparison needs compatible opaque images with matching dimensions and enough exact shared detail.',
   webp_lossy_delivery_unassessed: 'The copies could not be reliably matched after allowing for WebP compression.',
+  heif_to_jpeg_pair_unassessed: 'The HEIC and JPEG pair did not provide enough matching detail for the comparison.',
 }
 
 function NativeArea({ area }: { area: NativeImageArea }) {
@@ -76,7 +77,8 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const orientation = comparison.schema === exactPngOrientationSchema ? comparison.exact_orientation : orientedCrop
   const embeddedPhoto = comparison.schema === embeddedPhotoSchema ? comparison.embedded_native_photo : undefined
   const delivery = comparison.schema === jpegPngEnvelopeSchema
-  const perspective = comparison.schema === perspectiveSchema ? comparison.perspective_check : undefined
+  const earlierHeif = comparison.schema === earlierHeifSchema
+  const perspective = comparison.schema === perspectiveSchema || earlierHeif ? comparison.perspective_check : undefined
   const sameJpegFraming = comparison.schema === exactJpegIdentitySchema ? alignment : undefined
   const detailLoss = isJpegDetailLoss(comparison.schema)
   const opacity = comparison.schema === pngOpacitySchema ? comparison.png_opacity : undefined
@@ -144,6 +146,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       <p className="m-0 text-small text-text-muted">
         Matching detail in {perspective.supporting_tiles.length} areas supported the perspective alignment.
         {' '}We compared {perspective.compared_pixels.toLocaleString('en-US')} submitted pixels after correcting framing and overall color.
+        {earlierHeif && ' The crops use sRGB display colors at the original pixel positions.'}
         {' '}This comparison carries zero weight in the AI assessment.
       </p>
       <details className="mt-2 text-small text-text-muted">
@@ -300,7 +303,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   </div>
 }
 
-function ComparisonForm({ analysisId }: { analysisId: string }) {
+function ComparisonForm({ analysisId, earlierHeif }: { analysisId: string; earlierHeif: boolean }) {
   const headingId = useId()
   const fileId = useId()
   const formatId = useId()
@@ -343,11 +346,14 @@ function ComparisonForm({ analysisId }: { analysisId: string }) {
     <form onSubmit={event => void compare(event)} className="mt-4 flex flex-wrap items-end gap-3">
       <div className="min-w-0">
         <label htmlFor={fileId} className="mb-1 block text-small font-medium text-text">Earlier copy</label>
-        <input id={fileId} type="file" accept="image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp" aria-describedby={formatId}
+        <input id={fileId} type="file"
+          accept={`image/png,image/jpeg,image/webp,.png,.jpg,.jpeg,.webp${earlierHeif ? ',image/heic,image/heif,.heic,.heif' : ''}`}
+          aria-describedby={formatId}
           onChange={event => chooseFile(event.currentTarget.files?.[0] ?? null)}
           className="block max-w-full text-small text-text file:mr-2 file:cursor-pointer file:rounded-sm file:border file:border-border file:bg-surface-2 file:px-2 file:py-1 file:text-text" />
         <p id={formatId} className="mt-1 mb-0 text-caption text-text-muted">
           PNG or JPEG up to 4 megapixels. Opaque lossless WebP from 512 to 1,024 pixels per side.
+          {earlierHeif && ' Earlier HEIC photos up to 16 megapixels.'}
         </p>
       </div>
       <Button type="submit" variant="primary" disabled={!file || state.status === 'pending'}>
@@ -360,7 +366,7 @@ function ComparisonForm({ analysisId }: { analysisId: string }) {
   </section>
 }
 
-export function useImageReferenceAvailability(analysisId: string, enabled = true): boolean {
+export function useImageReferenceAvailability(analysisId: string, enabled = true) {
   const availability = useQuery({
     queryKey: ['analysis', analysisId, 'image-reference-comparison'],
     queryFn: ({ signal }) => comparisonAvailability(analysisId, signal),
@@ -369,10 +375,13 @@ export function useImageReferenceAvailability(analysisId: string, enabled = true
     retry: false,
     enabled,
   })
-  return enabled && availability.isFetchedAfterMount && availability.data === true && !availability.isError
+  return enabled && availability.isFetchedAfterMount && !availability.isError ? availability.data : undefined
 }
 
-export default function ImageReferenceComparison({ analysisId, available }: { analysisId: string; available?: boolean }) {
+export default function ImageReferenceComparison({ analysisId, available, earlierHeif }: {
+  analysisId: string; available?: boolean; earlierHeif?: boolean
+}) {
   const checked = useImageReferenceAvailability(analysisId, available === undefined)
-  return (available ?? checked) ? <ComparisonForm key={analysisId} analysisId={analysisId} /> : null
+  return (available ?? checked?.available) ? <ComparisonForm key={analysisId} analysisId={analysisId}
+    earlierHeif={earlierHeif ?? checked?.earlierHeif ?? false} /> : null
 }

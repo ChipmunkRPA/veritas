@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Earlier HEIC compared with a cropped JPEG](image-reference-heif-2026-11-17.md)
+  locates 126 of 144 staged changes on 18 held source photos. The check
+  shows no highlights on 194 assessed ordinary exports out of 216 and
+  withholds all 144 incompatible pairs. The local browser, PDF, and JSON
+  show the corresponding source crops with zero AI-score weight.
+
 - [CPU reuse across writing windows](writing-cpu-window-reuse-2026-11-17.md)
   lets the previously timed-out Federal Register PDF finish in 160
   seconds under the 180-second analysis budget. The paired writing

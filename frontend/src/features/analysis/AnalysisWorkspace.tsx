@@ -94,7 +94,8 @@ export default function AnalysisWorkspace() {
   const a = q.data
   const done = a?.status === 'done'
   const v2 = done && a?.decision != null
-  const imageComparisonAvailable = useImageReferenceAvailability(id, done && a?.kind === 'image')
+  const imageComparison = useImageReferenceAvailability(id, done && a?.kind === 'image')
+  const imageComparisonAvailable = imageComparison?.available === true
   const events = useAnalysisEvents(id, !!a && !isTerminal(a.status))
   const legacy = useQuery({ queryKey: qk.legacy(id), queryFn: () => api.get(id), enabled: done, staleTime: Infinity })
   const findings = useFindings(id, done)
@@ -258,7 +259,8 @@ export default function AnalysisWorkspace() {
         </section>
 
   const expertInvitation = done ? <ExpertAnalysisInvitation analysisId={a.id} /> : null
-  const sourceComparison = !done ? null : a.kind === 'image' ? <ImageReferenceComparison key={a.id} analysisId={a.id} available={imageComparisonAvailable} />
+  const sourceComparison = !done ? null : a.kind === 'image' ? <ImageReferenceComparison key={a.id} analysisId={a.id}
+    available={imageComparisonAvailable} earlierHeif={imageComparison?.earlierHeif} />
     : a.kind === 'document' ? <>
         <DocumentRevisionComparison key={`draft-${a.id}`} analysisId={a.id} />
         {/\.(txt|docx)$/i.test(a.filename) && <DocumentArchiveComparison key={`archive-${a.id}`} analysisId={a.id} />}

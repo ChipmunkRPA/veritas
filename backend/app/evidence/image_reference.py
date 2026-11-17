@@ -17,6 +17,7 @@ from app.detectors.image import (
     reference_compare,
     reference_crop_resize,
     reference_exact_jpeg,
+    reference_heif,
     reference_jpeg_detail_loss,
     reference_lossless_webp,
     reference_lossy_webp,
@@ -48,6 +49,7 @@ INTERPRETATION = ("Regions show differences that survived the comparison setting
 CROP_RESIZE_MAX_REFERENCE_SIDE = 768
 CROP_RESIZE_MAX_SUBMITTED_SIDE = 845
 PERSPECTIVE_POINT = 18.
+HEIF_POINT = 18.
 CROP_RESIZE_MIN_SCALE = .72
 CROP_RESIZE_MAX_SCALE = 1.17
 LOSSY_WEBP_SCHEMAS = frozenset((reference_lossy_webp.SCHEMA, reference_lossy_webp_resize.SCHEMA,
@@ -165,6 +167,29 @@ def _perspective_check(earlier, questioned, reference, submitted):
     return reading, mask, measurement.coverage if reading is not None else None
 
 
+def _heif_comparison(earlier, questioned, before, after, evidence_dir):
+    reference = reference_heif.display_pixels(earlier)
+    submitted = reference_heif.display_pixels(questioned)
+    measurement = None
+    if reference_heif.supported_source(earlier) and reference_heif.supported_target(questioned):
+        measurement = reference_heif.measure(reference, submitted)
+    reading, mask = reference_perspective.compare(measurement, reference.shape[1::-1], HEIF_POINT)
+    comparison = {
+        "schema": reference_heif.SCHEMA, "coordinate_space": "exif-oriented-submitted",
+        "reference": {"format": "HEIC", "sha256": hashlib.sha256(before).hexdigest(),
+                      "width": reference.shape[1], "height": reference.shape[0]},
+        "submitted": {"format": questioned.format, "sha256": hashlib.sha256(after).hexdigest(),
+                      "width": submitted.shape[1], "height": submitted.shape[0]},
+        "affects_overall_confidence": False,
+        **(reading if reading is not None else {"status": reference_heif.UNASSESSED, "regions": []}),
+        "interpretation": reference_heif.INTERPRETATION if reading is not None else reference_heif.SCOPE,
+    }
+    if evidence_dir is not None:
+        _write_evidence(evidence_dir, comparison, reference, submitted, mask,
+                        coverage=measurement.coverage if reading is not None else None)
+    return comparison
+
+
 def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | None = None,
             allow_integer_alignment: bool = False, allow_proportional_resize: bool = False,
             allow_oriented_crop: bool = False, allow_oriented_resize: bool = False,
@@ -174,7 +199,8 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             allow_jpeg_detail_loss_extra_qualities: bool = False, allow_png_opacity: bool = False,
             allow_lossy_webp: bool = False, allow_lossy_webp_crop: bool = False,
             allow_lossy_webp_crop_resize: bool = False, allow_lossy_webp_color: bool = False,
-            allow_lossy_webp_earlier_jpeg: bool = False, allow_perspective: bool = False) -> dict:
+            allow_lossy_webp_earlier_jpeg: bool = False, allow_perspective: bool = False,
+            allow_earlier_heif: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     refuse_truncated_images()
     before, after = _bytes(reference_path), _bytes(submitted_path)
@@ -182,6 +208,8 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
     with Image.open(io.BytesIO(before)) as original, Image.open(io.BytesIO(after)) as questioned:
         if max(image.width * image.height for image in (original, questioned)) > reference_compare.MAX_PIXELS:
             raise ValueError("Reference comparison supports images up to 16 megapixels")
+        if allow_earlier_heif and original.format == "HEIF":
+            return _heif_comparison(original, questioned, before, after, evidence_dir)
         schema = None
         webp = "WEBP" in {original.format, questioned.format}
         opacity = _opacity_pair(original, questioned, before, after) if allow_png_opacity and not webp else None

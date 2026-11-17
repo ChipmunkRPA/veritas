@@ -1,0 +1,59 @@
+{
+  "recipe": "sips -s format jpeg -s formatOptions high -Z 1120",
+  "rows": [
+    {
+      "compared_pixels": 917424,
+      "name": "iphone_13_pro_max.HEIC",
+      "reference": {
+        "format": "HEIC",
+        "height": 4032,
+        "sha256": "e760c80eed310e4f27c092d5487693ca8e104e7cc01d25ba4828deb28f679676",
+        "width": 3024
+      },
+      "region_count": 0,
+      "status": "comparable",
+      "submitted": {
+        "format": "JPEG",
+        "height": 1120,
+        "sha256": "9d99821f0f0ff0b8bf33dcb2f7eb58d41732941b814d24ad167b340d866f5945",
+        "width": 840
+      }
+    },
+    {
+      "compared_pixels": 947340,
+      "name": "IMG_5195.HEIC",
+      "reference": {
+        "format": "HEIC",
+        "height": 3313,
+        "sha256": "d9b9ebe21c4127080414f2b86f6ecb900dc2ca902be82b39be93b61ccb622680",
+        "width": 2566
+      },
+      "region_count": 0,
+      "status": "comparable",
+      "submitted": {
+        "format": "JPEG",
+        "height": 1120,
+        "sha256": "d3cf497626aceb44ebc83eb154c50267ca418c1403d4fbe262ac98adaa8023cf",
+        "width": 867
+      }
+    },
+    {
+      "compared_pixels": 917411,
+      "name": "HMD_Nokia_8.3_5G.heif",
+      "reference": {
+        "format": "HEIC",
+        "height": 4608,
+        "sha256": "c2820b3e4e0368c6f031b28b62945658a97446895cb446dfc37acdcf7109e0f5",
+        "width": 3456
+      },
+      "region_count": 0,
+      "status": "comparable",
+      "submitted": {
+        "format": "JPEG",
+        "height": 1120,
+        "sha256": "cacb7481ae91ad1b67f5590cab8e88bd6bf382020093df02c459d8670a861506",
+        "width": 840
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{% if v.get('motion_photo_comparison') %}
+{% set reading = v.motion_photo_comparison %}
+<section class="chapter-cont image-evidence image-evidence-packet" aria-labelledby="motion-photo-heading">
+<h2 class="chapter-title" id="motion-photo-heading">Motion Photo still and video</h2>
+<p>{{ reading.summary }}</p>
+{% if reading.previews %}
+<div class="evidence-plates evidence-plates-four">
+{% for role, asset in reading.previews.items() %}
+<figure>
+{% if asset.uri %}<img src="{{ asset.uri }}" alt="{{ asset.title }}">{% endif %}
+<figcaption>{{ asset.title }}</figcaption>
+</figure>
+{% endfor %}
+</div>
+{% endif %}
+<p class="caption">{{ reading.scope }} {{ reading.limitation }}</p>
+</section>
+{% endif %}

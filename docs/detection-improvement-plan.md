@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Still and video in one JPEG Motion Photo](image-motion-photo-2026-11-17.md)
+  locates 21 of 24 staged changes in a held panel. It highlights none of
+  the 31 assessed ordinary deliveries out of 36. The app presents the
+  original still crop, matched video crop and exact supporting frame
+  times, with zero AI-score weight.
+
 - Separate JPEG frequency bands find zero correct locations at the frozen
   review points on 384 staged edits from two editors. The isolated coarse,
   middle and fine branches and

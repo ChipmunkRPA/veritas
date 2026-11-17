@@ -6,9 +6,12 @@ const checks = [
     pictures: ['Crop as displayed on white', 'Stored colors revealed in the same crop'] },
   { id: 'png-animation', title: 'Animated PNG opening comparison',
     pictures: ['Static fallback image', 'First animation frame'] },
+  { id: 'motion-photo', title: 'Motion Photo still and video',
+    pictures: ['Highlighted area in the still', 'Unmarked crop from the still',
+      'Corresponding crop from the matched video frame', 'Measured difference (white)'] },
 ]
 
-export default function PngDisplayEvidence({ exhibits, token, mediaReady }: {
+export default function ImageDisplayEvidence({ exhibits, token, mediaReady }: {
   exhibits: readonly ExhibitMeta[]
   token: string
   mediaReady: boolean
@@ -25,7 +28,7 @@ export default function PngDisplayEvidence({ exhibits, token, mediaReady }: {
       className="space-y-4 border-t border-border pt-8 scroll-mt-14">
       <h2 className="m-0 eyebrow" id={id + '-heading'}>{title}</h2>
       <p className="m-0 max-w-[76ch] text-body">{table.caption}</p>
-      {crops.length === 2 && <div className="grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2">
+      {crops.length === pictures.length && <div className="grid max-w-2xl grid-cols-1 gap-4 sm:grid-cols-2">
         {crops.map(crop => <figure key={crop.id} className="m-0">
           {mediaReady && <img src={exhibitUrl(crop.id, 'payload', token)} alt={crop.title} loading="lazy"
             className="max-h-56 max-w-full rounded-sm border border-border object-contain" />}

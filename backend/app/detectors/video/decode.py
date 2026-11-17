@@ -124,11 +124,11 @@ def _input(path: Path) -> str:
     return "file:" + str(Path(path).resolve())  # an explicit protocol, so a file name is never read as a URL or option
 
 
-def _stream_info(path: Path) -> dict[str, Any]:
+def _stream_info(path: Path, *, timeout_s: float = 60.) -> dict[str, Any]:
     argv = [_tool("ffprobe"), "-v", "error", "-protocol_whitelist", "file", "-select_streams", "v:0",
             "-show_entries", "stream=width,height,time_base:stream_side_data=rotation", "-of", "json", _input(path)]
     try:
-        r = subprocess.run(argv, capture_output=True, text=True, timeout=60, stdin=subprocess.DEVNULL)
+        r = subprocess.run(argv, capture_output=True, text=True, timeout=timeout_s, stdin=subprocess.DEVNULL)
         streams = json.loads(r.stdout or "{}").get("streams") or []
     except (subprocess.TimeoutExpired, json.JSONDecodeError) as e:
         raise DecodeError("Video could not be decoded: the stream probe failed") from e
@@ -150,9 +150,9 @@ def _fields(line: str) -> dict[str, str]:
 
 
 def probe_frames(path: Path, *, cap: int = MAX_TABLE_FRAMES, check: Callable[[], None] | None = None,
-                 timeout_s: float = PROBE_TIMEOUT_S, max_pixels: int | None = None) -> FrameTable:
+                 timeout_s: float = PROBE_TIMEOUT_S, max_pixels: int | None = None, stream_timeout_s: float = 60.) -> FrameTable:
     """The per-frame pts table of the first video stream (decodes every frame once, in a child process)."""
-    stream = _stream_info(path)
+    stream = _stream_info(path, timeout_s=stream_timeout_s)
     rotation = _rotation(stream)
     coded_w, coded_h = int(stream["width"]), int(stream["height"])
     width, height = (coded_h, coded_w) if abs(rotation) % 180 == 90 else (coded_w, coded_h)

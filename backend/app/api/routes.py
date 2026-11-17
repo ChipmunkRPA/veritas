@@ -265,6 +265,8 @@ def export_json(aid: str, request: Request):
         from app.evidence import (
             image_animation,
             image_animation_binding,
+            image_motion_photo,
+            image_motion_photo_binding,
             image_thumbnail_evidence,
             image_transparency,
             image_whole_review,
@@ -282,6 +284,9 @@ def export_json(aid: str, request: Request):
         animation = image_animation.from_result(stored)
         if animation and animation["source_sha256"] == a.sha256:
             evidence[image_animation_binding.KEY] = animation
+        motion = image_motion_photo.from_result(stored)
+        if motion and motion["source_sha256"] == a.sha256:
+            evidence[image_motion_photo_binding.KEY] = motion
     decision = stored.get("decision") or {}
     display_result = {**stored, "kind": getattr(a, "kind", stored.get("kind")), "status": a.status}
     if decision and not decision.get("provenance_record"):

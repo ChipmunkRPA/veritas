@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [Motion Photo replay](image-motion-photo-2026-11-17.md#local-app-use-and-replay)
+checks 18 attribution- and checksum-pinned public camera files. It verifies
+which contain comparable still and video data and measures the location of
+two staged differences under three ordinary delivery controls per supported
+source.
+
 The JPEG object-removal replay reconstructs 1,152 deliveries from 24
 attributed photographs, with two editors and matching controls at both
 JPEG qualities. It binds each JPEG

@@ -13,6 +13,7 @@ from PIL import Image, ImageOps
 from app.evidence import image_animation_binding as animation
 from app.evidence import image_embedded_pair_binding as embedded_pair
 from app.evidence import image_interpolation_binding as interpolation
+from app.evidence import image_motion_photo_binding as motion_photo
 from app.evidence import image_previous_grid_binding as prior_grid
 from app.evidence import image_transparency_binding as transparency
 from app.evidence.image_copy_similarity_binding import (
@@ -188,6 +189,13 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         verify(data, record, lambda digest: archive.read(f"assets/{digest}.png"),
                source_size=(source["width"], source["height"]))
         native_detail += " Recomputed the animated PNG opening comparison and verified any recorded previews."
+    if motion_photo.KEY in projected:
+        from app.evidence.image_motion_photo import verify
+
+        source = evidence["source"]
+        if verify(data, projected[motion_photo.KEY], lambda digest: archive.read(f"assets/{digest}.png"),
+                  source_size=(source["width"], source["height"])):
+            native_detail += " Replayed the Motion Photo times, comparison and recorded crops."
     crops = list(_crops(evidence))
     pair = (evidence.get(embedded_pair.KEY) or {}).get('pair')
     checks = (evidence.get("coverage") or {}).get("inspection_checks", [])

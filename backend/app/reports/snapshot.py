@@ -312,7 +312,7 @@ def exhibit_images(db: Session, analysis: Analysis, result: dict[str, Any], stor
     records = result.get("exhibits") or []
     preview_hashes = {}
     if getattr(analysis, "kind", None) == "image":
-        from app.evidence import image_animation, image_transparency
+        from app.evidence import image_animation, image_motion_photo, image_transparency
         from app.evidence.image_thumbnail_evidence import from_result
         from app.evidence.image_whole_review import from_result as whole_image_review
 
@@ -330,6 +330,9 @@ def exhibit_images(db: Session, analysis: Analysis, result: dict[str, Any], stor
         animation = image_animation.from_result(result)
         if animation and animation["source_sha256"] == analysis.sha256:
             preview_hashes.update({asset["exhibit_id"]: asset["sha256"] for asset in animation["previews"].values()})
+        motion = image_motion_photo.from_result(result)
+        if motion and motion["source_sha256"] == analysis.sha256:
+            preview_hashes.update({asset["exhibit_id"]: asset["sha256"] for asset in motion["previews"].values()})
     if finding_thumbnails_only:
         records = [*finding_heatmaps(result).values(), *(e for e in records if e.get("id") in preview_hashes)]
     for exhibit in records:

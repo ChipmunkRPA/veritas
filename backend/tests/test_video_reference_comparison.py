@@ -368,7 +368,7 @@ def test_second_soundtrack_keeps_exact_stream_and_source_sample_coordinates(tmp_
 
 def test_overlarge_picture_is_refused_before_per_frame_probe(monkeypatch, aligned_pair):
     earlier, later, _, _ = aligned_pair
-    monkeypatch.setattr(decode, "_stream_info", lambda _: {"width": 3840, "height": 2160, "time_base": "1/1000"})
+    monkeypatch.setattr(decode, "_stream_info", lambda _, **_kwargs: {"width": 3840, "height": 2160, "time_base": "1/1000"})
     monkeypatch.setattr(decode.subprocess, "Popen", lambda *args, **kwargs: pytest.fail("The full frame probe must not start"))
     with pytest.raises(decode.DecodeError, match="921,600 pixels"):
         video_reference.compare(earlier, later)

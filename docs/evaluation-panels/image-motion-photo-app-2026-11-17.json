@@ -1,0 +1,54 @@
+{
+  "cases": {
+    "clean": {
+      "amount_cents": 999,
+      "currency": "usd",
+      "exports": {
+        "standard": {
+          "pdf_sha256": "270baf9cd6e06dd9d1a0042ddfdcddafd226babe699b4303c3f7e843d312b7e6",
+          "same_signed_evidence": true
+        }
+      },
+      "matching_crops": 0,
+      "paid_jobs": 1,
+      "reading": "no_region",
+      "unpaid_jobs": 0
+    },
+    "disabled": {
+      "amount_cents": 999,
+      "currency": "usd",
+      "exports": {
+        "standard": {
+          "pdf_sha256": "aa16fb5bb036296bca2956b2b86aad17eb9a7a8596c4d2bc028b286801d5345e"
+        }
+      },
+      "matching_crops": 0,
+      "paid_jobs": 1,
+      "reading": null,
+      "unpaid_jobs": 0
+    },
+    "edited": {
+      "amount_cents": 999,
+      "browser": {
+        "checked_images": 4,
+        "checked_time": "1.169489 s"
+      },
+      "currency": "usd",
+      "exports": {
+        "standard": {
+          "pdf_sha256": "837dba6cc8b2670ff8cb8650fca1802a5cf1d73a71e703084c0b6ee49a533d68",
+          "same_signed_evidence": true
+        },
+        "summary": {
+          "pdf_sha256": "277dc4cc76b3372a218656a9c7312636468363001500cd8e07d23d7e74e40f14",
+          "same_signed_evidence": true
+        }
+      },
+      "matching_crops": 4,
+      "paid_jobs": 1,
+      "reading": "different",
+      "unpaid_jobs": 0
+    }
+  },
+  "same_decision": true
+}

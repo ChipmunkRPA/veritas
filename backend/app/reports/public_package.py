@@ -24,6 +24,7 @@ from app.core.config import settings
 from app.evidence import face_short_window_binding as face_windows
 from app.evidence import image_animation_binding as animation
 from app.evidence import image_editor_preview_binding as editor_preview
+from app.evidence import image_motion_photo_binding as motion_photo
 from app.evidence import image_transparency_binding as transparency
 from app.evidence import scene_return_binding, video_viseme_binding
 from app.evidence.service import ASSET_TYPES, asset_refs
@@ -193,7 +194,7 @@ def _editor_preview(db, frozen, evidence):
     return projection, indexed
 
 
-def _png_display_assets(db, frozen, evidence, *, binding, review):
+def _image_display_assets(db, frozen, evidence, *, binding, review):
     if review is None:
         return None, {}
     record = binding.projection(review)
@@ -212,7 +213,7 @@ def _png_display_assets(db, frozen, evidence, *, binding, review):
                 or artefact.role != "exhibit_payload" or artefact.media_type != "image/png"
                 or not 0 < artefact.bytes <= binding.MAX_ASSET_BYTES
                 or artefact.sha256 != digest or frozen.exhibit_images.get(exhibit_id) != digest):
-            raise legacy.PackageError("A PNG comparison image differs from the frozen report.")
+            raise legacy.PackageError("An image comparison differs from the frozen report.")
         result[digest] = asset, artefact
     return record, result
 
@@ -250,18 +251,19 @@ def build_public(db, package, *, store, key: signing.InstanceKey, exported_at: d
                 raise legacy.PackageError("Thumbnail evidence conflicts with the original provenance scope.")
             result[editor_preview.KEY] = projection
     if analysis.kind == "image":
-        from app.evidence import image_animation, image_transparency
+        from app.evidence import image_animation, image_motion_photo, image_transparency
 
-        for binding, read in ((transparency, image_transparency.from_result), (animation, image_animation.from_result)):
+        for binding, read in ((transparency, image_transparency.from_result), (animation, image_animation.from_result),
+                              (motion_photo, image_motion_photo.from_result)):
             if report.profile not in binding.REPORT_PROFILES:
                 continue
-            projection, assets = _png_display_assets(db, frozen, evidence, binding=binding, review=read(frozen.result))
+            projection, assets = _image_display_assets(db, frozen, evidence, binding=binding, review=read(frozen.result))
             if projection is not None:
                 if result["decision"].get("image_copy_coverage") is not None:
-                    raise legacy.PackageError("PNG comparison conflicts with the original provenance scope.")
+                    raise legacy.PackageError("Image comparison conflicts with the original provenance scope.")
                 result[binding.KEY] = projection
                 if any(digest in previews and previews[digest][0] != asset for digest, (asset, _) in assets.items()):
-                    raise legacy.PackageError("A PNG comparison image conflicts with other image evidence.")
+                    raise legacy.PackageError("A comparison image conflicts with other image evidence.")
                 previews.update(assets)
     if analysis.kind != 'image':
         from app.reports.multimedia_evidence import verify_assets

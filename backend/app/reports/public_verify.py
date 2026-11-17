@@ -22,6 +22,7 @@ from app.evidence import (
     face_short_window_binding,
     face_spatial_cut_binding,
     image_animation_binding,
+    image_motion_photo_binding,
     image_transparency_binding,
     scene_return_binding,
     video_viseme_binding,
@@ -108,7 +109,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              WRITING_POSITION, WRITING_CHECK_COVERAGE,
                              EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, WORD_TEXT_VISIBILITY, PDF_SAVED_WORDING_COMMITMENT,
                              IMAGE_INTERPOLATION, prior_grid.COMMITMENT, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
-                             image_animation_binding.KEY,
+                             image_animation_binding.KEY, image_motion_photo_binding.KEY,
                              document_invisible_characters.COMMITMENT, document_chat_markers.COMMITMENT,
                              document_scope.CHARACTER_REVIEW_COMMITMENT, document_scope.PASSAGE_INTERVALS_COMMITMENT,
                              document_scope.PUBLISHED_WORDING_COMMITMENT,
@@ -449,14 +450,14 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         thumbnail_groups = list(image_editor_preview_binding.asset_groups(result[IMAGE_EDITOR_PREVIEW], evidence['source']))
         thumbnail_assets = {asset['sha256'] for group in thumbnail_groups for asset in group.values()}
         groups.extend(thumbnail_groups)
-    for method in (image_transparency_binding, image_animation_binding):
+    for method in (image_transparency_binding, image_animation_binding, image_motion_photo_binding):
         if method.KEY not in result:
             continue
         reports = bundle.get("reports")
         _require(analysis["kind"] == "image" and (result.get("decision") or {}).get("image_copy_coverage") is None
                  and isinstance(reports, list) and len(reports) == 1
                  and reports[0].get("profile") in method.REPORT_PROFILES,
-                 "PNG comparison is outside an eligible image report")
+                 "The comparison is outside an eligible image report")
         assets = method.assets(result[method.KEY], evidence["source"])
         for asset in assets.values():
             digest = asset["sha256"]

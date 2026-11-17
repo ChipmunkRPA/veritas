@@ -42,12 +42,13 @@ def test_legacy_video_voice_scores_use_the_same_public_projection_as_recording_s
 
 
 def test_generated_validation_disclosures_hide_names_without_rewriting_source_text():
-    payload = {'not_validated': [{'id': 'image.localisers', 'label': 'Mesorch region maps',
-                                 'text': 'Mesorch and FUSED localisers are uncalibrated.'}],
+    payload = {'not_validated': [{'id': 'image.localisers', 'label': 'mesorch region maps',
+                                 'text': 'Mesorch and FUSED localisers are uncalibrated. The fused result has no calibration.'}],
                'text': 'The source document discusses Mesorch and FUSED.',
                'metadata': {'not_validated': [{'text': 'Mesorch was written in this source.'}]}}
     output = project(payload)
-    assert 'Mesorch' not in str(output['not_validated']) and 'FUSED' not in str(output['not_validated'])
+    assert 'mesorch' not in str(output['not_validated']).lower() and 'FUSED' not in str(output['not_validated'])
+    assert 'The fused result has no calibration.' in str(output['not_validated'])
     assert output['text'] == payload['text'] and output['metadata'] == payload['metadata']
 
 

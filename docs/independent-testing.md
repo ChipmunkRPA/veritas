@@ -20,9 +20,12 @@ ordinary sound replacements, and unmodified stereo. The app replay also
 checks a video with an offset audio track.
 
 The [earlier JPEG grid comparison](image-previous-grid-2026-11-17.md#independent-replay)
-reconstructs 216 held files and checks each proposed rectangle against the
-original changed pixels. Reviewers can compare another localizer on the
-same insertion, blur, resize, and unchanged cases.
+reconstructs 432 held files from two disjoint photo panels and checks each
+proposed rectangle against the original changed pixels. Reviewers can
+compare another localizer on the same insertion, blur, resize, and unchanged
+cases. A separate control replay covers crops and tonal changes on
+camera-derived JPEGs. The local checkout receipt reproduces the additional
+regions in the regular worker and checks the original pixels in its exports.
 
 The [short native soundtrack replay](video-short-native-soundtrack-2026-11-16.md#independent-replay)
 rebuilds 288 playable videos from 24 source recordings, verifies every

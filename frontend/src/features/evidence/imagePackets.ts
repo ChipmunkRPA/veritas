@@ -157,6 +157,15 @@ export interface ImageEvidenceSet {
       supported_cells: number; region: [number, number, number, number] | null; affects_overall_confidence: false }
     artifacts: Partial<Record<'context' | 'crop', EvidenceImage>>
   }
+  jpeg_prior_grid_review?: {
+    record: {
+      source_sha256: string; status: string; observation: string; basis: string | null
+      scope: string; limitation: string; affects_overall_confidence: false
+      region: [number, number, number, number] | null
+      measurement: { supported_cells?: [number, number] } | null
+    }
+    artifacts: Partial<Record<'context' | 'crop', EvidenceImage>>
+  }
 }
 
 export interface ImageRegionalComparison {

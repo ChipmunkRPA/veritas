@@ -68,11 +68,12 @@ are not public screening promises or calibrated population probabilities.
   source-clocked excerpts and waveforms on eligible audio and video.
 
 - [Local loss of an earlier JPEG grid](image-previous-grid-2026-11-17.md)
-  raises correct JPEG90 regions from 4 to 11 of 24 when added after
-  the existing checks. It highlights three more ordinary blur
-  controls. Stronger JPEG75 compression did not leave useful evidence
-  for the candidate. The independently replayable result supports a
-  scoped comparison based on compression history.
+  raises correct JPEG90 regions from 4 to 11 of 24 and from 10 to 16 of 24
+  on two separate source panels. It highlights five more ordinary blur
+  controls across the two panels and zero of 30 camera-derived crop and
+  contrast controls in a separate test. The local app presents the original
+  pixels, rectangle and support measurements as compression history with
+  zero AI-score weight.
 
 - [Earlier wording in two-column PDFs](writing-pdf-columns-2026-11-17.md)
   localizes 174 of 216 known rewrite deliveries on 36 fresh report pairs

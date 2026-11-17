@@ -26,6 +26,7 @@ from app.evidence import (
     scene_return_binding,
     video_viseme_binding,
 )
+from app.evidence import image_previous_grid_binding as prior_grid
 from app.evidence.audio_binding import SPEECH_SELECTION, SPEECH_SELECTION_COMMITMENT
 from app.evidence.av_binding import TIMING_COMMITMENT, TIMING_WINDOWS
 from app.evidence.document_check_coverage import COMMITMENT as WRITING_CHECK_COVERAGE
@@ -104,7 +105,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              scene_return_binding.COVERAGE_COMMITMENT, video_viseme_binding.COMMITMENT,
                              WRITING_POSITION, WRITING_CHECK_COVERAGE,
                              EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, WORD_TEXT_VISIBILITY,
-                             IMAGE_INTERPOLATION, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
+                             IMAGE_INTERPOLATION, prior_grid.COMMITMENT, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
                              image_animation_binding.KEY,
                              document_invisible_characters.COMMITMENT, document_chat_markers.COMMITMENT,
                              document_scope.CHARACTER_REVIEW_COMMITMENT, document_scope.PASSAGE_INTERVALS_COMMITMENT,
@@ -230,6 +231,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
 
         interpolation.validate(evidence, result.get(interpolation.COMMITMENT))
         scope = (result.get('decision') or {}).get('image_copy_coverage')
+        prior_grid.validate(evidence, result.get(prior_grid.COMMITMENT), stopped=scope is not None)
         if native := evidence.get(interpolation.KEY):
             _require((native['record']['status'] == 'provenance') == (scope is not None),
                      'Interpolation evidence differs from the provenance disposition')
@@ -272,6 +274,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                     _require(cue is None and 'copy_donor' not in assets, 'Copy evidence is missing its component mask')
     _require(analysis['kind'] == 'image' or IMAGE_INTERPOLATION not in result,
              'Native interpolation commitments require image evidence')
+    _require(analysis['kind'] == 'image' or prior_grid.COMMITMENT not in result and prior_grid.KEY not in evidence,
+             'JPEG compression commitments require image evidence')
     _require(analysis['kind'] == 'document' or email_alternatives.COMMITMENT not in result,
              'Email body rendition commitments require document evidence')
     _require(analysis['kind'] == 'document' or WRITING_POSITION not in result,
@@ -419,6 +423,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         groups.append(assets(evidence['audio'][SOUNDTRACK_PAIR]))
     if analysis['kind'] == 'image':
         groups.append(interpolation.assets(evidence))
+        groups.append(prior_grid.assets(evidence))
     thumbnail_assets = set()
     png_limits = {}
     if IMAGE_EDITOR_PREVIEW in result:

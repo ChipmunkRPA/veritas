@@ -13,6 +13,7 @@ from PIL import Image, ImageOps
 from app.evidence import image_animation_binding as animation
 from app.evidence import image_embedded_pair_binding as embedded_pair
 from app.evidence import image_interpolation_binding as interpolation
+from app.evidence import image_previous_grid_binding as prior_grid
 from app.evidence import image_transparency_binding as transparency
 from app.evidence.image_copy_similarity_binding import (
     EXPANDED_JPEG_ROTATION_VERSIONS,
@@ -161,6 +162,14 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         interpolation.validate(evidence, evidence["source"].get(interpolation.COMMITMENT))
         if verify(data, native_review, lambda digest: archive.read(f"assets/{digest}.png")):
             native_detail = " Recomputed the native interpolation inspection and any exact 16-bit source crop."
+    if review := evidence.get(prior_grid.KEY):
+        from app.evidence.image_previous_grid_source import verify
+
+        prior_grid.validate(evidence, evidence["source"].get(prior_grid.COMMITMENT))
+        if verify(data, review, lambda digest: archive.read(f"assets/{digest}.png")):
+            native_detail += " Replayed the local JPEG compression record from the original."
+            if review["record"]["region"] is not None:
+                native_detail += " Matched the marked image and exact source crop."
     projected = json.loads(archive.read('result.json')) if 'result.json' in archive.namelist() else {}
     preview = projected.get(IMAGE_EDITOR_PREVIEW)
     if transparency.KEY in projected:

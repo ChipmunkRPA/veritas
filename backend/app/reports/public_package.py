@@ -49,12 +49,14 @@ def public_result(result: dict) -> dict:
             source_coverage[SPEECH_SELECTION_COMMITMENT] = selection['raw_output_sha256']
     if result.get('kind') == 'image':
         from app.evidence import image_interpolation_binding as interpolation
+        from app.evidence import image_previous_grid_binding as prior_grid
         from app.evidence.image_copy_similarity_binding import result_skip
 
         if scope := result_skip(result):
             copy_coverage['image_copy_coverage'] = scope
-        if native := interpolation.from_result(result):
-            source_coverage[interpolation.COMMITMENT] = canonical_hash(native)
+        for method in (interpolation, prior_grid):
+            if reading := method.from_result(result):
+                source_coverage[method.COMMITMENT] = canonical_hash(reading)
     if result.get('kind') == 'video':
         from app.evidence.av_binding import TIMING_COMMITMENT, TIMING_WINDOWS
         from app.evidence.face_return_coverage import COMMITMENT, from_result

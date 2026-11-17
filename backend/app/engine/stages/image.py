@@ -56,6 +56,7 @@ from app.evidence import (
     image_animation,
     image_animation_binding,
     image_interpolation_binding,
+    image_previous_grid_binding,
     image_thumbnail_evidence,
     image_transparency,
     image_whole_review,
@@ -554,7 +555,7 @@ def render(ctx: StageContext) -> dict[str, Any]:
         if image_artefacts:
             common.index_artefacts(ctx, (), extra=image_artefacts)
     records.extend(image_artefacts)
-    interpolation = {}
+    local_reviews = {}
     if (settings.environment == "dev" and settings.image_native_interpolation_review
             and ingest.get("mime") == "image/png" and not ctx.state.get("refusion")):
         from app.evidence import image_interpolation_source
@@ -564,14 +565,25 @@ def render(ctx: StageContext) -> dict[str, Any]:
         remaining = ctx.deadline.remaining()
         body = _media(ctx).original_bytes() if not stopped and (remaining is None or remaining >= 2) else None
         rotation = settings.image_native_rotation_review and (remaining is None or remaining >= 15)
-        interpolation[image_interpolation_binding.KEY] = image_interpolation_source.record(
+        local_reviews[image_interpolation_binding.KEY] = image_interpolation_source.record(
             ingest["sha256"], body=body, skipped=stopped, include_rotation=rotation,
             include_quantized=rotation and settings.image_native_quantized_review,
             include_fine=settings.image_native_fine_review, include_extent=settings.image_native_extent_review,
             include_core=settings.image_native_core_review, check=ctx.check,
         )
+    if (jpeg and settings.environment == "dev" and settings.image_jpeg_prior_grid_review
+            and ctx.profile in {Profile.FULL, Profile.DEEP} and not ctx.state.get("refusion")):
+        from app.evidence import image_previous_grid_source
+
+        stopped = provenance_gate.stop(ctx)
+        remaining = ctx.deadline.remaining()
+        body = _media(ctx).original_bytes() if not stopped and (remaining is None or remaining >= 3) else None
+        prior = image_previous_grid_binding.earlier_region((ctx.outputs.get("detect") or {}).get("exhibits", []))
+        local_reviews[image_previous_grid_binding.KEY] = image_previous_grid_source.record(
+            ingest["sha256"], body, stopped=stopped, prior=prior, check=lambda: ctx.check("prior JPEG grid"),
+        )
     return {"artefacts_indexed": len(records), "bytes": sum(a["size_bytes"] for a in records), "tiles": tiles,
-            "legacy_artifacts": legacy, "exhibits": image_exhibits, "artefacts": image_artefacts, **interpolation}
+            "legacy_artifacts": legacy, "exhibits": image_exhibits, "artefacts": image_artefacts, **local_reviews}
 
 
 def build_result(ctx: StageContext) -> AnalysisResultV2:
@@ -626,8 +638,10 @@ def v1_view(ctx: StageContext, result: AnalysisResultV2) -> dict[str, Any]:
 def publish(ctx: StageContext) -> dict[str, Any]:
     """Project the evidence tables, store the canonical result and the v1 view. Reports are separate jobs (B11)."""
     result = build_result(ctx)
-    if interpolation := (ctx.outputs.get("render") or {}).get(image_interpolation_binding.KEY):
-        result.manifest.sampling[image_interpolation_binding.KEY] = interpolation
+    rendered = ctx.outputs.get("render") or {}
+    for key in (image_interpolation_binding.KEY, image_previous_grid_binding.KEY):
+        if review := rendered.get(key):
+            result.manifest.sampling[key] = review
     if provenance_gate.stop(ctx):
         result.manifest.sampling["image_copy_coverage"] = credential_skip(ctx.outputs["ingest"]["sha256"])
     return common.publish(ctx, result, v1_view(ctx, result), pipeline_version=PIPELINE_VERSION, run_stages=SIGNAL_STAGES)

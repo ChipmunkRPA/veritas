@@ -234,6 +234,7 @@ class Settings(BaseSettings):
     image_region_jpeg_review: bool = False  # Development-only regional evidence for the evaluated JPEG profile.
     image_region_jpeg90_review: bool = False  # Extend the optional JPEG review with a matching repeat view.
     image_native_interpolation_review: bool = False  # Optional local inspection of strictly profiled 16-bit PNGs.
+    image_jpeg_prior_grid_review: bool = False  # Local compression history on eligible quality-90 JPEGs.
     image_native_rotation_review: bool = False  # Also inspect supported 2048 × 1536 PNGs for a local rotation pattern.
     image_native_quantized_review: bool = False  # Also inspect qualifying PNG regions for lower-depth camera resampling.
     image_native_fine_review: bool = False  # Also check small native regions for a local interpolation shift.

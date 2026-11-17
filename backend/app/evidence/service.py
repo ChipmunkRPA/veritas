@@ -86,6 +86,7 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
         return {}
     from app.evidence.audio_focused_edit_binding import KEY as FOCUSED_EDIT
     from app.evidence.image_interpolation_binding import assets as interpolation_assets
+    from app.evidence.image_previous_grid_binding import assets as jpeg_grid_assets
     parts = [document]
     if document.get("version") in NESTED_VERSIONS:
         parts.extend(document[key] for key in ("audio", "av"))
@@ -93,6 +94,7 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
               [part.get("overview") or {}, *(packet.get("artifacts") or {} for packet in part.get("packets", []))]]
     for part in parts:
         groups.append(interpolation_assets(part))
+        groups.append(jpeg_grid_assets(part))
         groups.extend(pair["artifacts"] for record in copy_records(embedded_pair.base_document(part)) for pair in record["pairs"])
         groups.append(embedded_pair.artifacts(part))
         context = part.get("acoustic_context")

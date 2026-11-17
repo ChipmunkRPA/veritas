@@ -169,7 +169,9 @@ def neutral_text(value: str, *, candidates: Iterable[str] = (), names: Iterable[
     for original in sorted(ids, key=len, reverse=True):
         value = re.sub(r'(?<![\w.])' + re.escape(original) + r'(?![\w.])', 'analysis check', value)
     for name in names:
-        value = re.sub(r'(?<![\w])' + re.escape(name) + r'(?![\w])', 'a detection check', value)
+        # Preserve the ordinary lowercase term used in combined-error explanations.
+        flags = 0 if name == 'FUSED' else re.I
+        value = re.sub(r'(?<![\w])' + re.escape(name) + r'(?![\w])', 'a detection check', value, flags=flags)
     value = _ARCHITECTURE_LABEL.sub('a detection check', value)
     return _FUSION_ID.sub('combined assessment', value)
 

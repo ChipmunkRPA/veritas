@@ -240,7 +240,7 @@ def test_actual_audio_and_video_credentials_are_validated_before_gate(kind, requ
     assert decide({'detectors': [entry]}, kind)['action'] == 'stop_statistical_detection'
 
 
-@pytest.mark.parametrize('kind,audio_mode,encoding', [('image', 'legacy', 'png'), ('video', 'legacy', 'mp4'),
+@pytest.mark.parametrize('kind,audio_mode,encoding', [('image', 'legacy', 'png'), ('image', 'legacy', 'jpeg'), ('video', 'legacy', 'mp4'),
     *[('audio', mode, encoding) for mode in ('legacy', 'candidate') for encoding in ('wav', 'mp3', 'flac', 'm4a')]])
 @pytest.mark.parametrize('profile', ['quick', 'full', 'deep'])
 def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
@@ -250,7 +250,7 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
     from sqlalchemy.orm import Session
 
     from app.core.config import settings
-    from app.detectors.image import copy_similarity
+    from app.detectors.image import copy_similarity, jpeg_previous_grid
     from app.engine import pipelines
     from app.evidence import image_embedded_pair_binding, image_packets_v7, image_packets_v8, service
     from app.evidence.image_copy_similarity_binding import (
@@ -259,6 +259,7 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
         copy_records,
         credential_skip,
     )
+    from app.evidence.image_previous_grid_binding import KEY as JPEG_HISTORY
     from app.reports.public_package import public_result
     from app.storage.artefacts import register_artefact
     from app.storage.db import Analysis, Base, MediaObject
@@ -267,17 +268,27 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
     if kind == 'audio' and encoding != 'wav':
         data, bundle, mime = compressed_audio_assets[encoding]
     elif kind == 'image':
-        data, _, bundle = request.getfixturevalue('signed_asset')
+        data, pixels, bundle = request.getfixturevalue('signed_asset')
         mime = 'image/png'
+        if encoding == 'jpeg':
+            signer, _ = request.getfixturevalue('signing_material')
+            output = io.BytesIO()
+            Image.fromarray(pixels).save(output, 'JPEG', quality=90, subsampling=2)
+            mime = 'image/jpeg'
+            data = sign(output.getvalue(), mime, signer)
         monkeypatch.setattr(settings, 'environment', 'dev')
         monkeypatch.setattr(settings, 'image_affine_copy_review', True)
         monkeypatch.setattr(settings, 'image_jpeg_offgrid_copy_review', True)
+        monkeypatch.setattr(settings, 'image_jpeg_prior_grid_review', True)
+        monkeypatch.setattr(settings, 'image_turned_jpeg_copy_review', False)
         monkeypatch.setattr(settings, 'image_small_png_copy_review', False)
         monkeypatch.setattr(settings, 'image_embedded_pair_review', True)
         reflected = Mock(side_effect=AssertionError('Signed record must bypass the reflection matcher'))
         translated = Mock(side_effect=AssertionError('Signed record must bypass the translation matcher'))
+        jpeg_grid = Mock(side_effect=AssertionError('Signed record must bypass JPEG compression-history measurement'))
         monkeypatch.setattr(copy_similarity, 'analyse', reflected)
         monkeypatch.setattr(image_packets_v7, 'selected_translation_pairs', translated)
+        monkeypatch.setattr(jpeg_previous_grid, 'measure', jpeg_grid)
     else:
         data, bundle = request.getfixturevalue('signed_' + kind)
         mime = {'audio': 'audio/wav', 'video': 'video/mp4'}[kind]
@@ -332,6 +343,7 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
         if kind == 'image':
             reflected.assert_not_called()
             translated.assert_not_called()
+            jpeg_grid.assert_not_called()
             document = service.load_packet_set(db, result, store)
             assert document['version'] == image_embedded_pair_binding.VERSION
             base = image_embedded_pair_binding.base_document(document)
@@ -341,6 +353,12 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
                        for record in copy_records(base))
             assert document['copy_translation']['basis'] is None
             assert document['embedded_pair_difference']['status'] == SKIPPED_CREDENTIALS
+            review = document.get(JPEG_HISTORY)
+            if encoding == 'jpeg' and profile in {'full', 'deep'}:
+                assert review['record']['status'] == 'provenance'
+                assert review['record']['region'] is None and review['artifacts'] == {}
+            else:
+                assert review is None
             raw = json.loads(store.read_bytes(result.result_hash))
             scope = public_result(raw)['decision']['image_copy_coverage']
             assert scope == credential_skip(digest)
@@ -351,7 +369,7 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
                 image_packets_v8.validate_packet_source_mapping({**document, 'embedded_pair_difference': wrong_pair}, raw)
             with pytest.raises(image_packets_v8.PacketIntegrityError, match='Copy check coverage differs'):
                 image_packets_v8.validate_packet_source_mapping({**document, 'copy_translation': wrong_copy}, raw)
-            if profile == 'quick':
+            if profile == 'quick' or (encoding == 'jpeg' and profile == 'full'):
                 from test_video_nested_evidence import _check_public_zip
 
                 from app.reports import engine, image_evidence, snapshot
@@ -364,5 +382,7 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
                 pdf = engine.render_pdf(frozen)
                 text = ' '.join(engine.pdf_text(pdf.pdf).split())
                 assert text.count('The image copy checks were skipped.') == 1
+                if review:
+                    assert review['record']['observation'] in text
                 _check_public_zip(SimpleNamespace(db=db, store=store, analysis=result, frozen=frozen, document=document),
                                   tmp_path, monkeypatch, pdf.pdf)

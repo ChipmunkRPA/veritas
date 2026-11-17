@@ -515,6 +515,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.image_editor_preview_binding',
                         'app.evidence.image_transparency_binding', 'app.evidence.image_animation_binding',
                         'app.evidence.image_interpolation_binding',
+                        'app.evidence.image_previous_grid_binding',
                         'app.evidence.image_copy_affine_binding',
                         'app.evidence.document_context', 'app.evidence.document_scope', 'app.evidence.document_repeat',
                         'app.evidence.email_alternatives',

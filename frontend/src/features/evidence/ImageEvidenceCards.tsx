@@ -441,6 +441,35 @@ function EvidenceCard({ packet, set, token, mediaReady }: {
   )
 }
 
+function JpegCompressionHistory({ set, token, mediaReady }: { set: ImageEvidenceSet; token: string; mediaReady: boolean }) {
+  const review = set.jpeg_prior_grid_review
+  if (!review || review.record.source_sha256 !== set.source.sha256) return null
+  const { observation, basis, scope, limitation, region, measurement } = review.record
+  const cells = measurement?.supported_cells
+  return <section id="image-evidence-jpeg-prior-grid" aria-labelledby="jpeg-prior-grid-heading" className="mt-4 rounded-md border border-border p-4 scroll-mt-20">
+    <h3 id="jpeg-prior-grid-heading" className="m-0 text-body font-medium">Local JPEG compression history</h3>
+    <p className="mt-2 mb-0 text-small">{observation}</p>
+    {basis && <p className="mt-2 mb-0 text-small">{basis}</p>}
+    {cells && <p className="mt-2 mb-0 text-small">Compared {cells[0]} measured cells inside the rectangle and {cells[1]} around it.</p>}
+    {region && <>
+      <div className="mt-3 grid gap-4 sm:grid-cols-2">{([
+        ['context', 'Highlighted area in the submitted image'], ['crop', 'Unmarked crop from the submitted image'],
+      ] as const).map(([role, label]) => {
+        const asset = review.artifacts[role]
+        return asset && <figure key={role} className="m-0 min-w-0">
+          <EvidencePicture set={set} artifact={asset} token={token} ready={mediaReady} alt={label} />
+          <figcaption className="mt-2 text-small text-text-muted">{label}</figcaption>
+        </figure>
+      })}</div>
+      <p className="mt-2 mb-0 text-small">Source columns [{region[0]}, {region[2]}) and rows [{region[1]}, {region[3]}). Right and bottom edges are exclusive.</p>
+      <Link to={evidenceSourceUrl(set.analysis_id, { region: {
+        x: region[0], y: region[1], w: region[2] - region[0], h: region[3] - region[1],
+      } })} className="text-small font-medium text-accent underline underline-offset-[3px]">Inspect this position in the original image</Link>
+    </>}
+    <p className="mt-2 mb-0 text-small text-text-muted">{scope} {limitation}</p>
+  </section>
+}
+
 export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvidenceSet; token: string; mediaReady: boolean }) {
   const [showAll, setShowAll] = useState(false)
   const { hash, key } = useLocation()
@@ -469,7 +498,8 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
   const interpolationCells = set.source.width && set.source.height
     ? Math.floor(set.source.width / 32) * Math.floor(set.source.height / 32)
     : 0
-  const hasLocalEvidence = set.copy_similarity?.pairs.length || set.copy_translation?.pairs.length || set.copy_affine?.pairs.length || set.embedded_pair_difference?.pair || region
+  const hasLocalEvidence = set.copy_similarity?.pairs.length || set.copy_translation?.pairs.length || set.copy_affine?.pairs.length
+    || set.embedded_pair_difference?.pair || region || set.jpeg_prior_grid_review?.record.region
   const shown = showAll ? set.packets : set.packets.slice(0, 3)
   return (
     <div ref={root} data-testid="image-evidence-content" data-evidence-set={set.id ?? ''} data-evidence-hash={set.sha256 ?? ''}>
@@ -478,6 +508,7 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
       <CopySimilarity set={set} field="copy_translation" token={token} mediaReady={mediaReady} />
       <CopySimilarity set={set} field="copy_affine" token={token} mediaReady={mediaReady} />
       <EmbeddedPairDifference set={set} token={token} mediaReady={mediaReady} />
+      <JpegCompressionHistory set={set} token={token} mediaReady={mediaReady} />
       {interpolation && <section aria-label="Local pixel interpolation" className="mt-4 rounded-md border border-border p-4">
         <h3 className="m-0 text-body font-medium">Local pixel interpolation</h3>
         <p className="mt-2 mb-0 text-small">{interpolation.record.observation}</p>

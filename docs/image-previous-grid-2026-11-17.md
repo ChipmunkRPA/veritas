@@ -58,6 +58,64 @@ This is one confirmation generator family under a staged JPEG history.
 [Frozen counts and exact rectangles](evaluation-panels/image-previous-grid-2026-11-17.json.gz)
 · [Development measurements](evaluation-panels/image-previous-grid-development-2026-11-17.json.gz)
 
+## Second confirmation
+
+The reserve test uses 12 unused photos from the same pinned publisher
+roster. Acquisition excludes the first panel's source and photographer
+keys, byte and pixel hashes, and close image matches. The frozen procedure
+and operating point are the same. Both sets use the same insertion family.
+[Second source roster](evaluation-panels/image-previous-grid-reserve-sources-2026-11-17.json)
+
+| Held outcome | Current checks | Current plus the same three-sided check |
+| --- | ---: | ---: |
+| JPEG90 edits after an off-grid crop | 10/24 | 16/24 |
+| JPEG90 ordinary controls with a region | 8/72 | 10/72 |
+| JPEG90 ordinary blur controls with a region | 2/12 | 4/12 |
+| JPEG75 edits after an off-grid crop | 9/24 | 9/24 |
+
+Three sharp and three feathered edits gained a correctly located region.
+Two deliberate local blurs gained a region. Direct JPEGs, unchanged
+exports and whole-image resize controls gained no regions. The local
+result describes weaker support for the older compression grid even
+when the underlying change is known to be an ordinary edit.
+[Second held results](evaluation-panels/image-previous-grid-reserve-2026-11-17.json.gz)
+
+An additional control panel uses ten earlier CC0 camera-derived JPEGs.
+Each supplied a routine off-grid crop, a crop after a coarser save, and a
+whole-image contrast adjustment after that crop. The check returned zero
+regions on these 30 quality-90 exports. It measured an earlier grid on
+all 20 deliveries with the added coarser save. The ten crops directly
+from the retained JPEGs produced no qualifying earlier grid.
+[Camera control measurements](evaluation-panels/image-previous-grid-camera-controls-2026-11-17.json.gz)
+· [Source preparation](image-small-affine-webp-2026-11-16.md#replay)
+
+## Local analysis
+
+In development, `VERITAS_IMAGE_JPEG_PRIOR_GRID_REVIEW=true` enables the
+check in Full and Deep image analyses. It uses the tested upright baseline
+4:2:0 JPEG profile at quality 90. It can report a region when the aligned
+JPEG and regional image checks complete without selecting one. Verified
+AI credentials stop the analysis before this comparison.
+
+The ordinary view shows a rectangular outline, the unmarked crop from
+the submitted image, and a link that focuses the original on the same
+pixels. The observation explains that the earlier pattern was weaker in
+both measured directions and remained stronger on at least three sides.
+The JSON retains the underlying readings and locations. The PDF uses the
+same crops and coordinates. Signed source replay recomputes the measurement
+and checks the displayed pixels against the original JPEG.
+
+In 13 local checkouts with simulated $9.99 payments, the normal analysis
+worker reproduced all eight proposed regions from the second panel. Six
+located labeled insertions and two located deliberate blurs. The worker
+kept an earlier selected region on the precedence control and reported no
+additional region on the ordinary export, direct original, or JPEG75
+control. Enabling the check left the automated assessment unchanged on the
+paired replay. The queue held zero jobs before payment. The browser, PDF,
+JSON and signed-source comparisons reproduced the native coordinates on
+representative cases.
+[Local checkout and browser receipt](evaluation-panels/image-previous-grid-app-2026-11-17.json)
+
 ## Independent replay
 
 The public source roster contains the original and edited file commitments,
@@ -69,6 +127,7 @@ Reviewers can supply a different algorithm using these same input
 files and native rectangles. The repository includes numeric receipts.
 [Source roster](evaluation-panels/image-previous-grid-sources-2026-11-17.json)
 · [Portable file bindings](evaluation-panels/image-previous-grid-bindings-2026-11-17.json.gz)
+· [Portable bindings for the second panel](evaluation-panels/image-previous-grid-reserve-bindings-2026-11-17.json.gz)
 
 ```sh
 export PYTHONPATH=backend OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
@@ -81,4 +140,20 @@ python3 -B -S -m "$reader" freeze "$panels/image-previous-grid-development-2026-
 "$runner" -B -m "$reader" measure "$run/source-media" "$run/deliveries"
 python3 -B -S -m "$reader" assess "$run/frozen.json" "$run/deliveries/measurements.json.gz" "$run/deliveries/result.json.gz"
 "$runner" -B -m "$reader" bindings "$run/deliveries/result.json.gz" "$run/bindings.json.gz"
+```
+
+For the second panel, use `image-previous-grid-reserve-sources-2026-11-17.json`
+in the restore command. The operating point comes from the same development
+receipt. Run the serving replay against that panel's delivery folder.
+
+```sh
+npm --prefix frontend run build
+"$runner" -B -m scripts.image_previous_grid_app "$run/deliveries" "$run/app" --browser
+```
+
+For the camera controls, use the ten `*-medium-ordinary.jpg` files and
+`freeze.json` from the retained camera preparation described above.
+
+```sh
+"$runner" -B -m "$reader" camera-controls "$camera" "$run/camera-controls"
 ```

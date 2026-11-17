@@ -99,7 +99,7 @@ def qualified_download(case, deadline):
     return data, marks
 
 
-def acquire(plan, retained, output):
+def acquire(plan, retained, output, *, after=None):
     import time
     from concurrent.futures import ThreadPoolExecutor
 
@@ -110,8 +110,15 @@ def acquire(plan, retained, output):
 
     roster, images = intake.roster, intake.inputs
     frozen = read(plan)
+    plan_sha256 = digest(plan.read_bytes())
     keys, fingerprints, _ = known_sources(retained, PUBLIC / "image-cross-quality-sources-2026-11-16.json")
-    for record in read(PUBLIC / "image-removal-peer-sources-2026-11-16.json")["accepted"]:
+    exposed = read(PUBLIC / "image-removal-peer-sources-2026-11-16.json")["accepted"]
+    if after is not None:
+        previous = read(after)
+        if previous["schema"] != SCHEMA or previous["source_plan_sha256"] != plan_sha256:
+            raise ValueError("The earlier confirmation must come from the same reserved source plan")
+        exposed += previous["accepted"]
+    for record in exposed:
         keys.update(roster.source_keys(record["source"]))
         for f in record["fingerprints"].values():
             fingerprints[0].append(f)
@@ -149,8 +156,11 @@ def acquire(plan, retained, output):
                 (root / f"{role}.png").write_bytes(body)
             accepted.append({"folder": name, "source": case, "fingerprints": marks})
             counts[family] += 1
-    save(output / "qualification.json", {"schema": SCHEMA, "source_plan_sha256": digest(plan.read_bytes()),
-                                         "accepted": accepted, "count": dict(counts), "excluded": dict(excluded)})
+    qualification = {"schema": SCHEMA, "source_plan_sha256": plan_sha256, "accepted": accepted,
+                     "count": dict(counts), "excluded": dict(excluded)}
+    if after is not None:
+        qualification["earlier_confirmation_sha256"] = digest(after.read_bytes())
+    save(output / "qualification.json", qualification)
     print(dict(counts), dict(excluded), flush=True)
 
 
@@ -450,18 +460,65 @@ def bindings(receipt, output):
     print(verified, flush=True)
 
 
+def camera_controls(directory, output):
+    """Check whole-photo operations on previously qualified CC0 camera sources."""
+    import numpy as np
+    from PIL import Image, ImageEnhance
+
+    from app.evidence.image_previous_grid_source import record
+
+    plan = read(directory / "freeze.json")
+    sources = {item["group"]: item for item in plan["sources"]}
+    inputs = [row for row in plan["rows"] if row["group"] in sources and row["role"] == "ordinary" and row["geometry"] == "medium"]
+    if (len(inputs) != len(sources) or {row["group"] for row in inputs} != sources.keys()
+            or any(row["truth"] is not None for row in inputs)):
+        raise ValueError("Unexpected ordinary camera source roster")
+    output.mkdir(mode=0o700)
+    rows = []
+    for item in inputs:
+        camera = sources[item["group"]]
+        original = (directory / item["file"]).read_bytes()
+        if camera["license"] != "CC0-1.0" or digest(original) != item["sha256"]:
+            raise ValueError("The source does not match the qualified camera file or license")
+        pixels = decode(original)
+        h, w = pixels.shape[:2]
+        x, y = ((w - 776) // 16) * 8, ((h - 584) // 16) * 8
+        window = pixels[y:y + 584, x:x + 776]
+        if window.shape != (584, 776, 3):
+            raise ValueError("The delivered camera file cannot supply its native crop")
+        earlier = decode(encode(window, 55))
+        crop = np.s_[3:579, 5:773]
+        views = {"cropped_retained_jpeg": window[crop], "cropped_after_coarser_save": earlier[crop],
+                 "global_contrast_after_crop": np.array(ImageEnhance.Contrast(Image.fromarray(earlier[crop])).enhance(.88))}
+        for name, view in views.items():
+            delivered = encode(view, 90)
+            target = f'{camera["group"]}-{name}.jpg'
+            (output / target).write_bytes(delivered)
+            finding = record(digest(delivered), delivered)
+            rows.append({"camera": camera, "parent": item["file"], "parent_sha256": item["sha256"],
+                         "origin": [x + 5, y + 3], "role": name, "file": target, "reading": finding})
+    counts = Counter((row["role"], row["reading"]["status"]) for row in rows)
+    save(output / "result.json.gz", {"schema": "chipmunk.image-previous-grid-camera-controls/1", "rows": rows,
+                                    "parent_roster_sha256": digest((directory / "freeze.json").read_bytes())})
+    for (role, status), count in sorted(counts.items()):
+        print(role, status, count)
+
+
 if __name__ == "__main__":
     cli = argparse.ArgumentParser(description=__doc__)
     actions = cli.add_subparsers(dest="action", required=True)
     for command, args in (("plan", ("metadata", "retained", "output")), ("acquire", ("plan", "retained", "output")),
                           ("measure", ("part", "output")), ("freeze", ("development", "output")),
                           ("assess", ("fixed", "held", "output")), ("review", ("receipt",)),
-                          ("bindings", ("receipt", "output")), ("restore", ("roster", "output"))):
+                          ("bindings", ("receipt", "output")), ("restore", ("roster", "output")),
+                          ("camera-controls", ("directory", "output"))):
         action = actions.add_parser(command)
         for arg in args:
             action.add_argument(arg, type=Path)
         if command == "measure":
             action.add_argument("--archives", nargs=3, type=Path, default=())
+        elif command == "acquire":
+            action.add_argument("--after", type=Path)
     values = vars(cli.parse_args())
     command = values.pop("action")
     if command == "review":
@@ -472,4 +529,4 @@ if __name__ == "__main__":
         print(json.dumps(checked, sort_keys=True))
     else:
         {"plan": new_sources, "acquire": acquire, "measure": measure_inputs, "freeze": freeze,
-         "assess": assess, "bindings": bindings, "restore": restore}[command](**values)
+         "assess": assess, "bindings": bindings, "restore": restore, "camera-controls": camera_controls}[command](**values)

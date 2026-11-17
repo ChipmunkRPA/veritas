@@ -3836,6 +3836,11 @@ counts language switches recovered by short source samples, compares
 their exact ranges with the planned insertions, and tests the verdict
 and export behavior on TXT, Word, EML and PDF in the paid app.
 
+The [stereo alignment replay](audio-stereo-alignment-2026-11-16.md#application-and-replay)
+rebuilds 256 stereo deliveries from pinned licensed WAVs. It compares
+both source ranges, unassessed results, and ordinary-control flags
+against the same earlier checks.
+
 The [short word replacement benchmark](video-lip-correspondence-2026-11-16.md#rebuild-the-playable-benchmark)
 rebuilds 228 videos from licensed publisher archives. It verifies the
 compressed picture stream, every source picture timestamp, and the

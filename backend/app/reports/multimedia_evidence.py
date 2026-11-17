@@ -1346,7 +1346,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         from app.evidence.stereo_repetition_binding import pairs
 
         for pair in pairs(stereo_repeated):
-            if "scaled_occurrence" in pair:
+            if "first_waveform" in pair["artifacts"]:
                 for side in ("first", "second"):
                     role = f"{side}_waveform"
                     pair[role] = plate(role, pair["artifacts"][role], f"{side.capitalize()} occurrence waveform")

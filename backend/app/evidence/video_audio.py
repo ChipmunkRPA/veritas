@@ -17,7 +17,7 @@ from app.evidence.audio_binding import (
 from app.evidence.audio_gain_repetition_binding import GAIN_INPUT, GAIN_VERSION
 from app.evidence.av_binding import TIMING_WINDOWS
 from app.evidence.stereo_binding import destructive_downmix_windows
-from app.evidence.stereo_repetition_binding import DIFFERENCE_INPUT, DIFFERENCE_VERSION
+from app.evidence.stereo_repetition_binding import DIFFERENCE_INPUT
 from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import DetectorRun
@@ -45,8 +45,8 @@ def freeze_input(ctx, decoded, *, path=None) -> dict:
             binding[STEREO_REPEAT_INPUT] = repeated.sha256
             if settings.environment == 'dev' and settings.audio_stereo_gain_repeat_review:
                 binding[GAIN_INPUT] = GAIN_VERSION
-            if settings.environment == 'dev' and settings.audio_stereo_difference_repeat_review:
-                binding[DIFFERENCE_INPUT] = DIFFERENCE_VERSION
+            if (difference_version := settings.stereo_difference_version) is not None:
+                binding[DIFFERENCE_INPUT] = difference_version
             objects.append(repeated)
         if (path is not None and settings.environment == 'dev' and settings.video_soundtrack_pair_review
                 and len(source_mapping.get('audio_stream_indices', [])) == 2):

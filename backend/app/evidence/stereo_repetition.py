@@ -1,4 +1,4 @@
-"""Source-locked exact repeat checks on individual stereo channels."""
+"""Source-locked repeat checks on recorded and derived stereo signals."""
 
 from __future__ import annotations
 
@@ -10,10 +10,14 @@ from copy import deepcopy
 import numpy as np
 
 from app.detectors.audio.decode import source_ranges, wav_bytes
+from app.evidence import audio_channel_alignment_binding as alignment
 from app.evidence import audio_channel_difference as difference
 from app.evidence import audio_exact_repetition, audio_repetition
 from app.evidence import audio_gain_repetition_binding as gain
 from app.evidence.stereo_repetition_binding import (
+    ALIGNED_KEY,
+    ALIGNED_SCHEMA,
+    ALIGNED_VERSION,
     CHANNELS,
     DIFFERENCE_KEY,
     DIFFERENCE_SCHEMA,
@@ -100,12 +104,58 @@ def _stereo_wav(data):
     return output.getvalue()
 
 
+def _build_aligned(data, channels, source, mapping, asset, *, exact_found):
+    from app.evidence import audio_channel_alignment
+    from app.evidence.audio_packets import _chart
+
+    status = {"schema": alignment.SCHEMA, "source_sha256": source["sha256"],
+              "sample_rate": alignment.SAMPLE_RATE, "input_samples": len(channels), "projection": alignment.PROJECTION,
+              "alignment": None, "pcm_sha256": None, "searched_interval": None, "pairs": []}
+    if exact_found:
+        return status | {"status": "skipped", "reason": "exact_channel_difference_found"}
+    fitted, reason, spans = audio_channel_alignment.search(channels)
+    status.update(status=alignment.STATUSES[reason], reason=reason, alignment=vars(fitted) if fitted else None)
+    if fitted is None or status["status"] == "skipped":
+        return status
+    shift = fitted.right_offset_samples
+    low, high = alignment.overlap(len(channels), shift)
+    values = audio_channel_alignment.projection(channels, fitted)
+    status.update(searched_interval={"start_sample": low, "end_sample": high},
+                  pcm_sha256=hashlib.sha256(values.tobytes()).hexdigest())
+
+    def span_record(start, end, payload):
+        return {"start_sample": start, "end_sample": end, "source_timestamp_ranges": source_ranges(mapping, start, end),
+                "pcm_s16le_sha256": hashlib.sha256(payload).hexdigest()}
+
+    for index, span in enumerate(spans, 1):
+        count = span.first[1] - span.first[0]
+        pair = {"id": f"AR{index:02d}", "sample_count": count, "lag_samples": span.second[0] - span.first[0],
+                "artifacts": {}}
+        for side, (start, end) in (("first", span.first), ("second", span.second)):
+            a, b = alignment.excerpt_range(start, end, shift)
+            original = data[4 * a:4 * b]
+            selected = values[start:end]
+            pair[side] = span_record(start, end, selected.tobytes()) | {"recorded_excerpt": span_record(a, b, original)}
+            pcm = selected.astype("<f4") / np.float32(32768)
+            pair["artifacts"][f"{side}_recorded_clip"] = asset(
+                _stereo_wav(original), "audio/wav", samples=b - a, sample_rate=alignment.SAMPLE_RATE, channels=2)
+            pair["artifacts"][f"{side}_clip"] = asset(
+                wav_bytes(pcm), "audio/wav", samples=count, sample_rate=alignment.SAMPLE_RATE, channels=1)
+            pair["artifacts"][f"{side}_waveform"] = asset(
+                _chart(pcm, [], start=0, end=count, selected=None, scores=False,
+                       title=f"Sound after stereo alignment | {side.capitalize()} occurrence"),
+                "image/png", width=960, height=280,
+            )
+        status["pairs"].append(pair)
+    return status
+
+
 def build(data, source, mapping, asset, *, gain_version=None, difference_version=None):
     if len(data) != 4 * source["samples"]:
         raise ValueError("Stereo samples do not cover the complete recorded clock")
     if source_ranges(mapping, 0, source["samples"]) != source_ranges(source, 0, source["samples"]):
         raise ValueError("Stereo repetition source clocks differ")
-    if difference_version not in (None, DIFFERENCE_VERSION):
+    if difference_version not in (None, DIFFERENCE_VERSION, ALIGNED_VERSION):
         raise ValueError("Unknown stereo repetition difference method")
     channels = np.frombuffer(data, dtype="<i2").reshape(-1, 2)
     rows = []
@@ -117,7 +167,7 @@ def build(data, source, mapping, asset, *, gain_version=None, difference_version
         rows.append(row)
     record = {"schema": SCHEMA, "source_sha256": source["sha256"], "affects_overall_confidence": False,
               "stereo_pcm_sha256": hashlib.sha256(data).hexdigest(), "channels": rows}
-    if difference_version == DIFFERENCE_VERSION:
+    if difference_version is not None:
         values = np.frombuffer(difference.project(data), dtype="<i2")
         measurement = _build_exact(values, source, mapping, asset, "D", "Channel difference waveform")
         for pair in measurement["pairs"]:
@@ -128,6 +178,10 @@ def build(data, source, mapping, asset, *, gain_version=None, difference_version
                                                                    sample_rate=audio_exact_repetition.SAMPLE_RATE, channels=2)
         record.update(schema=DIFFERENCE_SCHEMA, difference_projection=difference.PROJECTION)
         record[DIFFERENCE_KEY] = measurement
+        if difference_version == ALIGNED_VERSION:
+            record.update(schema=ALIGNED_SCHEMA)
+            record[ALIGNED_KEY] = _build_aligned(data, channels, source, mapping, asset,
+                                                 exact_found=bool(measurement["pairs"]))
     validate(record, source)
     return record
 

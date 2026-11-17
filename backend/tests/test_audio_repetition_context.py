@@ -29,10 +29,13 @@ from app.detectors.audio.decode import SAMPLE_RATE, decode_audio, read_wav
 from app.detectors.video.decode import probe_frames
 from app.engine.stages import audio, video
 from app.evidence import (
+    audio_channel_alignment_binding,
     audio_exact_repetition,
     audio_gain_repetition_binding,
     audio_repetition,
     service,
+    stereo_repetition,
+    stereo_repetition_binding,
     video_audio,
     video_packets,
 )
@@ -67,6 +70,58 @@ def _stage_record(db, store, analysis_id, name, data):
     asset = register_artefact(db, store, canonical_json(data), media_type="application/json", role="stage_output",
                               created_by=name, analysis_id=analysis_id)
     db.add(AnalysisStage(analysis_id=analysis_id, stage=name, status="done", output_artefact_id=asset.id))
+
+
+@pytest.mark.parametrize("shift", [-7, 4])
+def test_repeated_sound_after_stereo_alignment(tmp_path, shift):
+    rng = np.random.default_rng(3842)
+    frames = 3 * SAMPLE_RATE
+    room = rng.integers(-150, 150, size=(frames, 2), dtype="<i2")
+    room[SECOND:SECOND + LENGTH] = room[FIRST:FIRST + LENGTH]
+    voice = rng.integers(-3400, 3400, size=frames)
+    shifted = np.zeros_like(voice)
+    if shift > 0:
+        shifted[shift:] = voice[:-shift]
+    else:
+        shifted[:shift] = voice[-shift:]
+    recorded = (room + np.column_stack((voice, np.rint(.8 * shifted)))).astype("<i2")
+    data = recorded.tobytes()
+    path = _wav(tmp_path / "stereo.wav", recorded)
+    pin = hashlib.sha256(path.read_bytes()).hexdigest()
+    mapping = decode_audio(path, source_sha256=pin, retain_stereo=True).mapping
+    source = mapping | {"sha256": pin}
+    assets = {}
+
+    def asset(payload, media_type, **metadata):
+        digest = hashlib.sha256(payload).hexdigest()
+        assets[digest] = payload
+        return {"sha256": digest, "media_type": media_type, **metadata}
+
+    version = stereo_repetition_binding.ALIGNED_VERSION
+    review = stereo_repetition.build(data, source, mapping, asset, difference_version=version)
+    assert not review["affects_overall_confidence"] and not review["difference_measurement"]["pairs"]
+    checked = review["aligned_measurement"]
+    assert checked["status"] == "measured" and checked["alignment"]["right_offset_samples"] == shift
+    [pair] = checked["pairs"]
+    assert pair["lag_samples"] == SECOND - FIRST
+    for side, wanted in (("first", FIRST), ("second", SECOND)):
+        start, end = pair[side]["start_sample"], pair[side]["end_sample"]
+        assert abs(start - wanted) <= 320 and abs(end - wanted - LENGTH) <= 320
+        raw = pair[side]["recorded_excerpt"]
+        a, b = raw["start_sample"], raw["end_sample"]
+        assert a == min(start, start + shift) and b == max(end, end + shift)
+        evidence = pair["artifacts"]
+        with wave.open(io.BytesIO(assets[evidence[f"{side}_recorded_clip"]["sha256"]]), "rb") as wav:
+            original = wav.readframes(wav.getnframes())
+        assert original == data[4 * a:4 * b]
+        reproduced = audio_channel_alignment_binding.project_excerpt(original, shift,
+                                                                     checked["alignment"]["right_gain_numerator"])
+        assert hashlib.sha256(reproduced).hexdigest() == pair[side]["pcm_s16le_sha256"]
+    stereo_repetition.verify(review, data, source, mapping, assets.__getitem__, difference_version=version)
+    changed = deepcopy(review)
+    changed["aligned_measurement"]["pairs"][0]["second"]["recorded_excerpt"]["source_timestamp_ranges"][0]["source_end_pts"] -= 1
+    with pytest.raises(ValueError, match="recorded source timestamps"):
+        stereo_repetition_binding.validate(changed, source)
 
 
 def _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapshot, api, pair, source_pts, source_path,

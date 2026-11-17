@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Repeated background sound after stereo alignment](audio-stereo-alignment-2026-11-16.md)
+  locates 16 of 32 staged repeats at each of two panned speech levels
+  versus one and zero with the earlier checks. No repeat was flagged
+  on 128 controls, of which the alignment could assess 69. The local
+  app reports both original intervals, audio, and waveforms with
+  zero weight in the AI estimate.
+
 - [Short changes to words in video](video-lip-correspondence-2026-11-16.md)
   compares mouth shape, motion and crop detail with the spoken
   sounds. The shape comparison adds two useful locations on an

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from app.evidence import audio_channel_alignment_binding as alignment
 from app.evidence import audio_gain_repetition_binding as gain
 from app.evidence.audio_channel_difference import PROJECTION
 from app.evidence.audio_exact_repetition import SAMPLE_RATE
@@ -12,9 +13,13 @@ KEY = "stereo_repetition"
 INPUT = "stereo_repetition_pcm_sha256"
 SCHEMA = "chipmunk.stereo-exact-repetition/1"
 DIFFERENCE_SCHEMA = "chipmunk.stereo-exact-repetition/2"
+ALIGNED_SCHEMA = "chipmunk.stereo-exact-repetition/3"
 DIFFERENCE_INPUT = "stereo_repetition_difference_version"
 DIFFERENCE_VERSION = 1
+ALIGNED_VERSION = 2
 DIFFERENCE_KEY = "difference_measurement"
+ALIGNED_KEY = "aligned_measurement"
+DIFFERENCE_VERSIONS = {DIFFERENCE_SCHEMA: DIFFERENCE_VERSION, ALIGNED_SCHEMA: ALIGNED_VERSION}
 CHANNELS = ("left", "right")
 
 
@@ -25,6 +30,8 @@ def pairs(record):
             yield from context["pairs"]
     if difference := record.get(DIFFERENCE_KEY):
         yield from difference["pairs"]
+    if aligned := record.get(ALIGNED_KEY):
+        yield from aligned["pairs"]
 
 
 def _validate_measurement(measurement, source, prefix, *, difference=False):
@@ -51,7 +58,8 @@ def _validate_measurement(measurement, source, prefix, *, difference=False):
 
 def validate(record, source):
     try:
-        if (record["schema"] not in {SCHEMA, DIFFERENCE_SCHEMA} or record["affects_overall_confidence"] is not False
+        schema = record["schema"]
+        if (schema not in {SCHEMA, *DIFFERENCE_VERSIONS} or record["affects_overall_confidence"] is not False
                 or record["source_sha256"] != source["sha256"] or source["source_channels"] != 2
                 or source["source_sample_rate"] != SAMPLE_RATE or source["sample_rate"] != SAMPLE_RATE
                 or not _valid_hash(record["stereo_pcm_sha256"]) or len(source["timeline"]) != 1
@@ -66,11 +74,15 @@ def validate(record, source):
                 gain.validate(row["gain_measurement"], source, channel, measurement["pcm_sha256"])
         if len({"gain_measurement" in row for row in record["channels"]}) != 1:
             raise ValueError("Gain repetition coverage differs between recorded channels")
-        if record["schema"] == DIFFERENCE_SCHEMA:
+        if schema in DIFFERENCE_VERSIONS:
             if record["difference_projection"] != PROJECTION:
                 raise ValueError("Unsupported audio channel difference calculation")
             _validate_measurement(record[DIFFERENCE_KEY], source, "D", difference=True)
         elif DIFFERENCE_KEY in record or "difference_projection" in record:
             raise ValueError("Unexpected audio channel difference evidence")
+        if schema == ALIGNED_SCHEMA:
+            alignment.validate(record[ALIGNED_KEY], source, exact_found=bool(record[DIFFERENCE_KEY]["pairs"]))
+        elif ALIGNED_KEY in record:
+            raise ValueError("Unexpected aligned stereo repetition evidence")
     except (AttributeError, IndexError, KeyError, TypeError) as error:
         raise ValueError("Invalid stereo repetition evidence") from error

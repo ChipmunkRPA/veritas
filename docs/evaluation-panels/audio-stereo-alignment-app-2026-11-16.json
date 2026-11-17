@@ -1,0 +1,123 @@
+{
+  "simulated_paid_analyses": 5,
+  "jobs_before_payment": 0,
+  "scoring_unchanged": true,
+  "cases": {
+    "previous": {
+      "previous_check_flagged": false
+    },
+    "aligned-audio": {
+      "status": "measured",
+      "pairs": [
+        {
+          "id": "AR01",
+          "source_pts": [
+            [
+              6880,
+              10880
+            ],
+            [
+              37612,
+              41612
+            ]
+          ],
+          "original_pts": [
+            [
+              6873,
+              10880
+            ],
+            [
+              37605,
+              41612
+            ]
+          ],
+          "lag_samples": 30732,
+          "sample_count": 4000,
+          "waveforms": 2
+        }
+      ],
+      "pdf_alignment": true,
+      "signed_replay": true
+    },
+    "ordinary-panned": {
+      "status": "measured",
+      "pairs": [],
+      "pdf_alignment": true,
+      "signed_replay": true
+    },
+    "exact-when-centered": {
+      "status": "skipped",
+      "pairs": [],
+      "pdf_alignment": true,
+      "signed_replay": true
+    },
+    "aligned-video": {
+      "status": "measured",
+      "pairs": [
+        {
+          "id": "AR01",
+          "source_pts": [
+            [
+              93280,
+              97280
+            ],
+            [
+              124012,
+              128012
+            ]
+          ],
+          "original_pts": [
+            [
+              93273,
+              97280
+            ],
+            [
+              124005,
+              128012
+            ]
+          ],
+          "lag_samples": 30732,
+          "sample_count": 4000,
+          "waveforms": 2
+        }
+      ],
+      "pdf_alignment": true,
+      "signed_replay": true
+    }
+  },
+  "browser": {
+    "cases": [
+      {
+        "name": "aligned-audio",
+        "durations": [
+          0.25,
+          0.250438,
+          0.25,
+          0.250438
+        ],
+        "images": 2
+      },
+      {
+        "name": "ordinary-panned",
+        "durations": [],
+        "images": 0
+      },
+      {
+        "name": "exact-when-centered",
+        "durations": [],
+        "images": 0
+      },
+      {
+        "name": "aligned-video",
+        "durations": [
+          0.25,
+          0.250438,
+          0.25,
+          0.250438
+        ],
+        "images": 2
+      }
+    ],
+    "page_errors": 0
+  }
+}

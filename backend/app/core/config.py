@@ -142,6 +142,18 @@ class Settings(BaseSettings):
     audio_waveform_repeat_review: bool = False  # development-only repeat evidence, with no voice confidence weight
     audio_stereo_gain_repeat_review: bool = False
     audio_stereo_difference_repeat_review: bool = False
+    audio_stereo_aligned_repeat_review: bool = False
+
+    @property
+    def stereo_difference_version(self) -> int | None:
+        from app.evidence.stereo_repetition_binding import ALIGNED_VERSION, DIFFERENCE_VERSION
+
+        if self.environment == "dev":
+            if self.audio_stereo_aligned_repeat_review:
+                return ALIGNED_VERSION
+            if self.audio_stereo_difference_repeat_review:
+                return DIFFERENCE_VERSION
+        return None
 
     @model_validator(mode="after")
     def _apply_offline_env(self):

@@ -189,13 +189,13 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if repeated is not None:
         from app.evidence.audio_gain_repetition_binding import GAIN_VERSION
         from app.evidence.stereo_repetition import native_pcm, verify
-        from app.evidence.stereo_repetition_binding import DIFFERENCE_SCHEMA, DIFFERENCE_VERSION, pairs
+        from app.evidence.stereo_repetition_binding import ALIGNED_VERSION, DIFFERENCE_VERSIONS, pairs
 
         if (data := native_pcm(decoded)) is None:
             raise ValueError("The original does not yield aligned native stereo samples for the repeat check")
         paths = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"]}
         gain_version = GAIN_VERSION if 'gain_measurement' in repeated['channels'][0] else None
-        difference_version = DIFFERENCE_VERSION if repeated["schema"] == DIFFERENCE_SCHEMA else None
+        difference_version = DIFFERENCE_VERSIONS.get(repeated["schema"])
         verify(repeated, data, source, decoded.mapping, lambda digest: archive.read(paths[digest]),
                gain_version=gain_version, difference_version=difference_version)
         for pair in pairs(repeated):
@@ -206,6 +206,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             replay_detail += " Recomputed gain-adjusted repeats on both recorded stereo channels."
         if difference_version is not None:
             replay_detail += " Recomputed the stereo channel difference and verified its repeats against both recorded excerpts."
+        if difference_version == ALIGNED_VERSION:
+            replay_detail += " Recomputed repeated-sound evidence with the stereo channels aligned."
     if (review := audio.get("background_reduced_voice_review")) is not None:
         from app.detectors.audio.decode import read_wav
         from app.evidence.audio_background_review_binding import SPAN

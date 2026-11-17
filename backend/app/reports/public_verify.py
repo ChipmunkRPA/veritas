@@ -438,6 +438,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     repeat_pcm = {}
     gain_pairs = []
     channel_difference_pairs = []
+    aligned_stereo_pairs = []
     gain_pcm = {}
     for part in parts:
         copy_base = part
@@ -507,7 +508,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                 _require(not any(intervals(stereo, key) for key in LOCAL_EXCERPTS),
                          'A selected stereo interval is missing its listening evidence')
         if 'stereo_repetition' in part:
-            from app.evidence.stereo_repetition_binding import pairs
+            from app.evidence.stereo_repetition_binding import ALIGNED_KEY, pairs
             from app.evidence.stereo_repetition_binding import validate as validate_stereo_repeat
 
             _require((analysis['kind'] == 'audio' and part is evidence) or part is evidence.get('audio'),
@@ -516,6 +517,16 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             validate_stereo_repeat(stereo_repeat, part['source'])
             for pair in pairs(stereo_repeat):
                 groups.append(pair['artifacts'])
+                if 'recorded_excerpt' in pair['first']:
+                    aligned_stereo_pairs.append((stereo_repeat[ALIGNED_KEY]['alignment'], pair))
+                    for side in ('first', 'second'):
+                        span = pair[side]
+                        for role, pcm in (('clip', span), ('recorded_clip', span['recorded_excerpt'])):
+                            digest = pair['artifacts'][f'{side}_{role}']['sha256']
+                            pcm_digest = pcm['pcm_s16le_sha256']
+                            _require(repeat_pcm.setdefault(digest, pcm_digest) == pcm_digest,
+                                     'One aligned stereo clip has conflicting PCM commitments')
+                    continue
                 if 'first_recorded_clip' in pair['artifacts']:
                     channel_difference_pairs.append(pair)
                 if 'scaled_occurrence' in pair:
@@ -629,6 +640,17 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                     pcm = audio.readframes(pair['sample_count'])
                 _require(len(pcm) == 4 * pair['sample_count'] and hashlib.sha256(project(pcm)).hexdigest() == pair['pcm_s16le_sha256'],
                          'A recorded stereo excerpt does not reproduce the repeated channel difference')
+    if aligned_stereo_pairs:
+        from app.evidence.audio_channel_alignment_binding import project_excerpt
+
+        for alignment, pair in aligned_stereo_pairs:
+            for side in ('first', 'second'):
+                digest = pair['artifacts'][f'{side}_recorded_clip']['sha256']
+                with archive.open(indexed[digest]['file']) as stream, wave.open(stream, 'rb') as audio:
+                    pcm = audio.readframes(audio.getnframes())
+                value = project_excerpt(pcm, alignment['right_offset_samples'], alignment['right_gain_numerator'])
+                _require(hashlib.sha256(value).hexdigest() == pair[side]['pcm_s16le_sha256'],
+                         'The original stereo excerpt does not reproduce the aligned channel difference')
     expected = {'README.txt', 'reproduce.md', 'bundle.json', 'evidence.json', 'result.json', 'report.pdf',
                 'instance_public_key.pem', 'manifest.sha256', 'manifest.sha256.sig', *(a['file'] for a in entries)}
     original = bundle.get('source')

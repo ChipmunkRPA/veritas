@@ -727,6 +727,7 @@ def _mouth_hold_packet(db: Session, store: ObjectStore, analysis: Analysis, set_
 def _lip_timing_packet(db, store, analysis, set_id, source, table, review, decoded, audio_input):
     from app.detectors.video.viseme_review import audio_assets
     from app.evidence import audio_packets
+    from app.evidence import video_lip_agreement as agreement
     from app.evidence import video_silent_mouth as silent
 
     binding = video_viseme_binding
@@ -762,10 +763,17 @@ def _lip_timing_packet(db, store, analysis, set_id, source, table, review, decod
     assets[binding.WAVEFORM] = audio_packets._asset(db, store, analysis, set_id, sound[binding.WAVEFORM], "image/png",
                                                    width=960, height=280, time_axis="source_pts")
     near_silent = silent.KEY in witness
+    selection = "local_speech_mouth_compatibility"
     if near_silent:
+        selection = silent.KEY
         title = silent.TITLE
         interpretation = silent.INTERPRETATION
         measures = silent.measurements(review["measurement"])
+    elif agreement.KEY in witness:
+        selection = agreement.KEY
+        title = agreement.TITLE
+        interpretation = binding.MOTION_INTERPRETATION
+        measures = binding.motion_measurements(witness)
     else:
         articulation = "articulation" in witness
         title = "Local speech and mouth mismatch" if articulation else "Local speech and mouth timing change"
@@ -782,7 +790,7 @@ def _lip_timing_packet(db, store, analysis, set_id, source, table, review, decod
             "frames": frames, "artifacts": assets, "observation": binding.observation(review),
             "interpretation": interpretation, "measurements": measures, "limitations": [binding.packet_limitation(witness)],
             "clip": {"status": "unavailable", "reason": "Use the original video for playback on the picture clock."},
-            "derivation": {"version": VERSION, "selection": silent.KEY if near_silent else "local_speech_mouth_compatibility",
+            "derivation": {"version": VERSION, "selection": selection,
                            "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks",
                            "source_pixels": "exact_native_rgb"}}
 
@@ -1184,8 +1192,15 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["packets"].append(_lip_timing_packet(db, store, analysis, set_id, source, table, timing, decoded, audio_input))
     if VERSION in NESTED_VERSIONS:
         from app.evidence import video_audio, video_av
+        from app.evidence import video_lip_agreement as agreement
 
         document["audio"] = video_audio.build_channel(db, analysis, store, result, set_id=set_id)
+        if timing and agreement.KEY in timing.get("inputs", {}):
+            from app.evidence import audio_packets
+
+            sound_input = result["manifest"]["sampling"]["video_audio_evidence"]["input"]
+            _, mapping = audio_packets._input(store, analysis, sound_input)
+            document["audio"]["source"]["source_codec"] = mapping["source_codec"]
         document["av"] = video_av.build_channel(db, analysis, store, result, set_id=set_id,
             video_source=source, table=table, anchors=anchors, audio_channel=document["audio"])
         document["coverage"]["channels"] = {

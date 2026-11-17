@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Local sound and mouth movement](video-mouth-and-sound-2026-11-17.md)
+  add seven correct PCM locations and eight AAC locations across 58
+  staged speech replacements per encoding. The stricter check adds
+  three ordinary PCM alerts and five ordinary AAC alerts among 116
+  controls per encoding. It preserves existing timing findings and
+  links the source range to three frames and an audible excerpt.
+
 - [Quality-85 JPEG compression history](image-previous-grid-2026-11-17.md#quality-85-jpegs)
   adds 13 correctly located regions on 64 staged edits. Six deliberate
   ordinary local edits also show weaker support for the prior grid, with

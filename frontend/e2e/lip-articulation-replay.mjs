@@ -20,8 +20,10 @@ try {
   const support = coverage.getByRole('link', { name: 'Inspect source frames and waveform' })
   await support.waitFor()
   assert.equal(await support.getAttribute('href'), '#media-evidence-VLT01')
+  await support.click()
+  await page.waitForURL(url => url.hash === '#media-evidence-VLT01')
   const card = page.locator('#media-evidence-VLT01')
-  await card.getByRole('heading', { name: /Local speech and mouth mismatch/ }).waitFor()
+  await card.getByRole('heading').filter({ hasText: example.title ?? 'Local speech and mouth mismatch' }).waitFor()
   const [start, end] = example.witness.audio_source_pts.map(sample => (sample / 16000).toFixed(3))
   await card.getByText(`Audio source time ${start}–${end} s.`, { exact: false }).waitFor()
   for (const [role, index] of Object.entries(example.witness.picture_frames)) {

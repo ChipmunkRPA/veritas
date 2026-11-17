@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
-from collections import defaultdict
+from collections import Counter, defaultdict
 from fractions import Fraction
 from pathlib import Path
 from zipfile import ZipFile
@@ -19,6 +19,9 @@ CLIPS = 24
 
 def input_rows(path):
     payload = receipt.read(path) if path.suffix == ".gz" else json.loads(path.read_bytes())
+    if isinstance(payload, list):
+        # The acoustic fit inventory has no picture or donor fields.
+        return [{"target": {"id": row["uid"], "audio_sha256": row["audio_sha256"]}} for row in payload]
     return payload.get("rows", payload.get("cases", []))
 
 
@@ -82,12 +85,13 @@ def matched_digit(pool, audio, front, waves, pictures, used_audio, used_pictures
     return None
 
 
-def prepare(source, fit_plan, history, output):
+def prepare(source, fit_plan, history, output, *, clips=CLIPS, separate_speakers=(), recordings_per_speaker=1):
     from scripts.lombard_mouth_source_intake import index_zip
 
     plan = receipt.read(fit_plan)
     assert plan["schema"] == training.SCHEMA
     denied = {r["speaker"] for r in plan["rows"] if r["split"] in {"fit", "calibration"}}
+    denied.update(row["speaker"] for path in separate_speakers for row in input_rows(path))
     seen_actors = {r["speaker"] for r in plan["rows"]}
     known = [entry for path in (fit_plan, *history) for row in input_rows(path)
              for key in ("target", "same_words", "different_words") if isinstance(entry := row.get(key), dict)]
@@ -109,24 +113,27 @@ def prepare(source, fit_plan, history, output):
                 data = aligned.read(labels[uid])
                 if span := digit_bounds(json.loads(data)[uid]):
                     available[actor, condition][uid] = span, data
-        used_actors = set()
+        used_actors = Counter()
         order = sorted(available, key=lambda key: (key[0] in seen_actors, training.rank(f"prospective/{key[0]}/{key[1]}")))
         for actor, condition in order:
-            if actor in used_actors:
+            if used_actors[actor] >= recordings_per_speaker:
                 continue
             pair = matched_digit(available[actor, condition], audio, front, waves, pictures, used_audio, used_pictures)
             if pair:
                 rows.append({"speaker": actor, "condition": condition, "split": "fresh", **pair})
-                used_actors.add(actor)
+                used_actors.update((actor,))
                 used_pictures.add(pair["target"]["front_sha256"])
                 used_audio.update(row["audio_sha256"] for row in pair.values())
-                if len(rows) == CLIPS:
+                if len(rows) == clips:
                     break
-    assert len(rows) >= 16 and len(rows) == len({row["speaker"] for row in rows}), len(rows)
+    assert len(rows) >= min(16, clips) and max(used_actors.values()) <= recordings_per_speaker, len(rows)
     output.mkdir(mode=0o700)
-    print(f"Selected {len(rows)} different readers including {len(used_actors - seen_actors)} outside the earlier held groups", flush=True)
+    print(f"Selected {len(rows)} recordings from {len(used_actors)} readers, "
+          f"including {len(used_actors.keys() - seen_actors)} outside the earlier held groups", flush=True)
     cases = {"schema": training.SCHEMA, "fit_plan": receipt.sha(fit_plan), "rows": rows, "publisher": plan["publisher"],
              "history": {path.name: receipt.sha(path) for path in history}}
+    if separate_speakers:
+        cases["speaker_exclusions"] = [receipt.sha(path) for path in separate_speakers]
     receipt.save(output / "plan.json.gz", cases)
     receipt.save(output / "incumbent-plan.json.gz", cases | {
         "schema": sequence.SCHEMA, "method": sequence.STUDY_METHOD, "counts": {"held": {"recordings": len(rows)}},
@@ -139,4 +146,7 @@ if __name__ == "__main__":
     for name in ("source", "fit_plan", "output"):
         parser.add_argument(name, type=Path)
     parser.add_argument("history", nargs="+", type=Path)
+    parser.add_argument("--clips", type=int, choices=range(1, 55), default=CLIPS)
+    parser.add_argument("--separate-speakers", action="append", type=Path, default=[])
+    parser.add_argument("--recordings-per-speaker", type=int, choices=(1, 2), default=1)
     prepare(**vars(parser.parse_args()))

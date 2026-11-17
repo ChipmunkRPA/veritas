@@ -13,6 +13,13 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [local sound and mouth replay](video-mouth-and-sound-2026-11-17.md#local-analysis-and-independent-replay)
+rebuilds 504 Lombard deliveries with independent input and parent byte
+checks. The separate GRID measurements test another capture setup.
+Both compare local timing against original, gain, same-word, and
+different-word examples at frozen points. The native receipts identify
+the original frame times for reported intervals.
+
 The [quality-85 JPEG replay](image-previous-grid-2026-11-17.md#quality-85-jpegs)
 binds 288 deliveries across two held panels and records exact
 pixel rectangles for generated insertions, generated removals and

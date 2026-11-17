@@ -607,6 +607,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         from app.detectors.audio.decode import VIDEO_AUDIO_MAX_SECONDS, decode_audio
         from app.detectors.video.viseme_review import audio_assets
         from app.detectors.video.viseme_stereo import capture
+        from app.evidence import video_lip_agreement as agreement
 
         stereo_scope = lip_timing.get("stereo_scope")
         decoded_audio = decode_audio(original, source_sha256=digest, max_seconds=VIDEO_AUDIO_MAX_SECONDS,
@@ -622,6 +623,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             for key in video_viseme_binding.AAC_PRESENTATION_FIELDS
         ):
             raise ValueError("The timing review's AAC presentation clock differs from the original")
+        if agreement.KEY in lip_timing["inputs"] and (
+            decoded_audio.mapping.get("source_codec") != evidence["audio"]["source"].get("source_codec")
+            or decoded_audio.mapping.get("audio_stream_indices")
+        ):
+            raise ValueError("The timing review's mono soundtrack format differs from the original")
         if lip_timing.get("witness"):
             packet = next(packet for packet in packets if packet["id"] == video_viseme_binding.PACKET_ID)
             for role, content in audio_assets(decoded_audio.pcm, decoded_audio.mapping, lip_timing).items():

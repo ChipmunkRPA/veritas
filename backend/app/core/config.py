@@ -279,6 +279,7 @@ class Settings(BaseSettings):
     video_lip_aac48_articulation_review: bool = False  # Admit that comparison on verified mono 48 kHz AAC.
     video_lip_silent_mouth_review: bool = False  # Check for near-silent sound during visible mouth movement.
     video_lip_stereo_aac_review: bool = False  # Admit verified stereo when both channels support the analyzed mix.
+    video_lip_motion_sound_models: Path | None = None  # Pinned local mouth and sound projections for short mono video.
     video_lip_timing_model_dir: Path | None = None
     video_lip_timing_face_asset: Path | None = None
     video_lip_timing_runtime: Path | None = None

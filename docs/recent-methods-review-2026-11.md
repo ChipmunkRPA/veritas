@@ -208,6 +208,17 @@ the discrepancies and confirms rejection, without clearing the failed audit.
 
 ## Video: explain the temporal features and context
 
+The frame-level lip and speech study and PVSync use comparable time
+positions and put visible articulation and sound in a common comparison.
+Our local short-interval check compares learned representations trained
+on synchronized recordings and same-speaker mismatches. One fitting
+method also uses broad speech-sound labels. We test ordinary offsets
+and same-word edits separately. The stricter shared
+reading supplies additional source-bound locations in both delivery
+formats. [Frame-level speech study](https://arxiv.org/html/2610.30872v1)
+· [PVSync study](https://arxiv.org/html/2610.09223)
+· [Local results and method](video-mouth-and-sound-2026-11-17.md)
+
 The [7 November compression study revision](https://arxiv.org/abs/2608.28685v2)
 reports separate results for genuine H.264 re-encoding and image-level JPEG
 augmentation. Its corrected, matched comparisons attribute the strongest

@@ -30,6 +30,7 @@ it('puts video, voice and timing behind visible channel selectors and mounts onl
 })
 it('opens the correct channel for a deep-linked audio or alignment packet', () => {
   expect(videoLaneForHash('#media-evidence-AV03')).toBe('timing')
+  expect(videoLaneForHash('#media-evidence-VLT01')).toBe('visual')
   expect(videoLaneForHash('#media-evidence-A02')).toBe('voice')
   expect(videoLaneForHash('#media-evidence-C02')).toBe('voice')
   expect(videoLaneForHash('#media-evidence-sounds')).toBe('voice')

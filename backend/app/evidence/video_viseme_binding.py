@@ -7,6 +7,7 @@ import re
 from fractions import Fraction
 
 from app.core.canonical import canonical_hash
+from app.evidence import video_lip_agreement as agreement
 from app.evidence import video_silent_mouth as silent
 from app.evidence import video_viseme_ranked as ranked
 from app.evidence import video_viseme_stereo as stereo
@@ -19,6 +20,7 @@ SCHEMA_WITH_APERTURE = "chipmunk.video-lip-timing/2"
 SCHEMA_WITH_ARTICULATION = "chipmunk.video-lip-timing/3"
 SCHEMA_WITH_STEREO = "chipmunk.video-lip-timing/4"
 SCHEMA_WITH_SILENCE = "chipmunk.video-lip-timing/5"
+SCHEMA_WITH_MOTION_SOUND = "chipmunk.video-lip-timing/6"
 PACKET_ID = "VLT01"
 CLIP, WAVEFORM = "lip_timing_audio", "lip_timing_waveform"
 REFERENCE = {"closure": {"median": .000578}, "rounded": {"median": .3973106}, "spread": {"median": .9265317}}
@@ -28,6 +30,9 @@ LIMITATION = "Ordinary dubbing, recording delays and offscreen speech can produc
 ARTICULATION_LIMITATION = (
     "Ordinary dubbing, offscreen speech and variation in how people form sounds can produce this pattern. "
     "This measurement carries zero weight in the AI assessment."
+)
+MOTION_INTERPRETATION = (
+    "The soundtrack and visible mouth movement agreed less in the highlighted interval than on both sides."
 )
 # Fit to unchanged Lombard Grid recordings, with a separate speaker
 # calibration. The evaluation recipe reproduces these parameters.
@@ -221,6 +226,17 @@ def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
             state = "matched"
             inputs["sound_levels"] = raw["sound_levels"]
             basis.update(schema=SCHEMA_WITH_SILENCE, measurement_basis=silent.KEY)
+    if witness is None and (motion := raw.get(agreement.KEY)) is not None:
+        delivery = agreement.carrier(mapping, origin=origin, stereo_scope=stereo_scope)
+        if delivery is None or mapping.get("audio_stream_indices") or not agreement.eligible_picture_clock(rows, time_base):
+            raise ValueError("The local mouth and speech comparison uses an unsupported source clock")
+        agreement._proposal(motion, rows, samples)
+        inputs[agreement.KEY] = motion
+        if motion["score_units"] > agreement.POINTS[delivery][0]:
+            candidate = motion
+            witness = agreement.record(motion, rows)
+            state = "matched"
+            basis.update(schema=SCHEMA_WITH_MOTION_SOUND, measurement_basis=agreement.KEY)
     # Canonical evidence rounds floats to six places. Keep seven-place inputs and fits as integers.
     if "score" in candidate:
         candidate["score_units"] = round(candidate.pop("score") * timing.SCORE_UNITS)
@@ -234,6 +250,8 @@ def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
         basis.update(schema=SCHEMA_WITH_STEREO, stereo_scope=stereo_scope)
     if basis.get("measurement_basis") == silent.KEY:
         note["observation"] = silent.observation(witness)
+    if basis.get("measurement_basis") == agreement.KEY:
+        note["observation"] = agreement.observation(witness)
     return {**note, **basis,
             "pcm_sha256": mapping["pcm_sha256"], "audio_origin_pts": origin,
             "inputs": inputs, "measurement": candidate, "witness": witness}
@@ -243,6 +261,8 @@ def observation(record):
     witness = record["witness"]
     if silent.KEY in witness:
         return silent.observation(witness)
+    if agreement.KEY in witness:
+        return agreement.observation(witness)
     lo, hi = [sample / timing.RATE for sample in witness["audio_source_pts"]]
     a, b = [sample / timing.RATE for sample in witness["picture_source_samples"]]
     soundtrack = " The excerpt and waveform show the analyzed mix of both soundtrack channels." if record.get("stereo_scope") else ""
@@ -274,7 +294,8 @@ def validate(document, *, timestamps=None, committed=_UNSET):
             raise ValueError("Uncommitted lip timing evidence")
         return
     state = record["status"]
-    if (record.get("schema") not in {SCHEMA, SCHEMA_WITH_APERTURE, SCHEMA_WITH_ARTICULATION, SCHEMA_WITH_STEREO, SCHEMA_WITH_SILENCE}
+    if (record.get("schema") not in {SCHEMA, SCHEMA_WITH_APERTURE, SCHEMA_WITH_ARTICULATION, SCHEMA_WITH_STEREO,
+                                   SCHEMA_WITH_SILENCE, SCHEMA_WITH_MOTION_SOUND}
             or state not in STATUS or record.get("affects_overall_confidence") is not False):
         raise ValueError("Invalid lip timing disposition")
     if "inputs" not in record:
@@ -303,6 +324,11 @@ def validate(document, *, timestamps=None, committed=_UNSET):
             or packet.get("measurements") != silent.measurements(record["measurement"])
         ):
             raise ValueError("Near-silent soundtrack summary differs from the measured interval")
+        if agreement.KEY in record["witness"] and (
+            packet.get("title") != agreement.TITLE or packet.get("interpretation") != MOTION_INTERPRETATION
+            or packet.get("measurements") != motion_measurements(record["witness"])
+        ):
+            raise ValueError("Local speech and mouth summary differs from the measured interval")
         frames = record["witness"]["picture_frames"]
         expected = [(role, frames[role]) for role in ROLES if frames[role] is not None]
         if [(frame.get("interval_role"), frame["anchor"]["frame_index"]) for frame in packet["frames"]] != expected:
@@ -325,4 +351,11 @@ def validate(document, *, timestamps=None, committed=_UNSET):
 def packet_limitation(witness):
     if silent.KEY in witness:
         return silent.LIMITATION
+    if agreement.KEY in witness:
+        return agreement.LIMITATION
     return ARTICULATION_LIMITATION if "articulation" in witness else LIMITATION
+
+
+def motion_measurements(witness):
+    return [{"label": f"Sound and mouth agreement {where}", "value": round(value / agreement.UNITS, 4), "unit": "relative score"}
+            for where, value in zip(("before", "within", "after"), witness[agreement.KEY]["agreement_units"], strict=True)]

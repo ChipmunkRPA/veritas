@@ -139,9 +139,10 @@ def stereo_fixtures(args):
     }
 
 
-def verify(client, aid, source, output, evidence, comparison):
+def verify(client, aid, source, output, evidence, comparison, *, motion=False):
     import pymupdf
 
+    from app.evidence import video_lip_agreement as agreement
     from app.evidence import video_viseme_binding as binding
     from app.reports.verify import verify_package
     from scripts.verify_multimedia_exports import pixels, scan, sha
@@ -150,7 +151,10 @@ def verify(client, aid, source, output, evidence, comparison):
     witness = review["witness"]
     [packet] = [item for item in evidence["packets"] if item["id"] == binding.PACKET_ID]
     schema = binding.SCHEMA_WITH_STEREO if "stereo_scope" in comparison else binding.SCHEMA_WITH_ARTICULATION
-    assert review["schema"] == schema and review["measurement_basis"] == "local_articulation"
+    selected = binding.SCHEMA_WITH_MOTION_SOUND if motion else schema
+    title = agreement.TITLE if motion else "Local speech and mouth mismatch"
+    assert review["schema"] == selected
+    assert review["measurement_basis"] == (agreement.KEY if motion else "local_articulation")
     assert review["affects_overall_confidence"] is packet["affects_overall_confidence"] is False
     assert witness == packet[binding.KEY]
     # The carrier may include end padding. Its native clock still has to
@@ -168,8 +172,13 @@ def verify(client, aid, source, output, evidence, comparison):
         assert review["stereo_scope"] == scope
         assert "mix of both soundtrack channels" in packet["observation"]
     during = packet["frames"][1]["anchor"]
-    assert witness["articulation"]["picture_frame"] == during["frame_index"]
-    assert witness["articulation"]["picture_pts"] == during["pts"] and witness["change_samples"] == 0
+    if motion:
+        assert [witness["picture_frames"][role] for role in binding.ROLES] == comparison["frames"]
+        assert [row["anchor"]["frame_index"] for row in packet["frames"]] == comparison["frames"]
+        assert during["pts"] == review["inputs"]["frames"][comparison["frames"][1]]["pts"]
+    else:
+        assert witness["articulation"]["picture_frame"] == during["frame_index"]
+        assert witness["articulation"]["picture_pts"] == during["pts"] and witness["change_samples"] == 0
     assets = {role: fetch(client, asset["url"]) for role, asset in packet["artifacts"].items()}
     assert all(sha(data) == packet["artifacts"][role]["sha256"] for role, data in assets.items())
     report = body(client.post(f"/api/v2/analyses/{aid}/reports", json={"profile": "standard"}))
@@ -180,7 +189,7 @@ def verify(client, aid, source, output, evidence, comparison):
         text = " ".join(word for page in document for word in page.get_text().split())
         scan(text)
         a, b = (sample / 16000 for sample in witness["audio_source_pts"])
-        assert all(phrase in text for phrase in ("Local speech and mouth mismatch", "Before mismatch range",
+        assert all(phrase in text for phrase in ("Speech and mouth comparison", title, "Before mismatch range",
                    "During mismatch range", "After mismatch range", f"{a:.3f}–{b:.3f} s"))
         if comparison.get("stereo_scope"):
             assert "mix of both soundtrack channels" in text

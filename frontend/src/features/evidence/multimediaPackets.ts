@@ -38,6 +38,7 @@ export interface VideoEvidencePacket extends PacketBase {
     change_samples?: number
     silent_mouth?: { near_silent_peak_units: number; visible_mouth_frames: number }
     articulation?: { mismatched_events: number; audio_sample: number; picture_frame: number; picture_pts: number }
+    motion_sound_agreement?: { agreement_units: [number, number, number] }
   }
   scene_return?: { schema: 'picture-change-return/1' | 'picture-change-return/2'; start_stream_s: number; end_stream_s: number; tiles: number[] }
   picture_sequence?: { first: PictureSequenceSpan; second: PictureSequenceSpan; frame_count: number; span_s: number; order?: 'reverse';

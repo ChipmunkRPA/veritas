@@ -207,7 +207,7 @@ def _model_bytes(model):
     return payload
 
 
-def _mesh(task, mp, rgb):
+def _mesh(task, mp, rgb, *, include_landmarks=False):
     faces = task.detect(
         mp.Image(image_format=mp.ImageFormat.SRGB, data=np.ascontiguousarray(rgb))
     ).face_landmarks
@@ -234,9 +234,10 @@ def _mesh(task, mp, rgb):
     margin = max(4.0, mouth_width * 0.22)
     x0, y0 = np.maximum(0, np.floor(points.min(axis=0) - margin)).astype(int)
     x1, y1 = np.minimum((w, h), np.ceil(points.max(axis=0) + margin)).astype(int)
-    return np.asarray([*(max(0.0, gap) for gap in gaps), mouth_width]) / scale, [
+    measured = np.asarray([*(max(0.0, gap) for gap in gaps), mouth_width]) / scale, [
         int(x) for x in (x0, y0, x1, y1)
     ]
+    return (*measured, faces) if include_landmarks else measured
 
 
 def _measure(path, table, wanted, task, mp):

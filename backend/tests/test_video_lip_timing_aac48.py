@@ -8,6 +8,7 @@ import pytest
 from app.detectors.audio.decode import decode_audio
 from app.detectors.audio.phone_events import MODEL_BLOBS
 from app.detectors.video import viseme_review, viseme_stereo
+from app.evidence import video_lip_agreement as agreement
 from app.evidence import video_viseme_binding as binding
 
 
@@ -40,6 +41,29 @@ def test_articulation_uses_presented_extent_on_48khz_aac(aac_mapping):
     raw["articulation_phones"][0][1] = 33_800
     with pytest.raises(ValueError, match="invalid speech event"):
         binding.measured(raw, timestamps=[], time_base="1/24", source={}, mapping=aac_mapping)
+
+
+def test_local_mouth_motion_has_verified_frames_and_stays_outside_the_estimate(aac_mapping):
+    frames = [{"index": i, "pts": i, "gap_units": 20_000, "mouth_box": [1, 1, 3, 3],
+               "rgb_sha256": "1" * 64, "mouth_crop_sha256": "2" * 64} for i in range(50)]
+    comparison = agreement.encode({"span": [12160, 16000], "picture_span": [19, 25],
+                                   "bracket_frames": [18, 21, 25], "lag_samples": 0,
+                                   "agreement": [0.75, 0.14, 0.70], "score": 0.56})
+    scope = {"timestamps": range(50), "time_base": "1/25", "source": {"width": 4, "height": 4},
+             "mapping": aac_mapping}
+    raw = {"frames": frames, "phones": [], agreement.KEY: comparison}
+    observed = binding.measured(raw, **scope)
+    assert observed["schema"] == binding.SCHEMA_WITH_MOTION_SOUND
+    assert observed["affects_overall_confidence"] is False
+    assert observed["witness"]["picture_frames"] == {"before": 18, "during": 21, "after": 25}
+    assert observed["witness"]["audio_source_pts"] == [12160, 16000]
+    assert "0.760–1.000 s" in binding.observation(observed)
+    assert [row["value"] for row in binding.motion_measurements(observed["witness"])] == [.75, .14, .70]
+
+    with pytest.raises(ValueError, match="native timestamps"):
+        binding.measured(raw | {agreement.KEY: comparison | {"span": [12161, 16000]}}, **scope)
+    with pytest.raises(ValueError, match="unsupported source clock"):
+        binding.measured(raw, **(scope | {"mapping": aac_mapping | {"audio_stream_indices": [1, 2]}}))
 
 
 def test_near_silent_range_needs_changing_mouth_frames_and_audible_flanks(aac_mapping):

@@ -28,6 +28,7 @@ from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, AnalysisStage, Base
 from app.storage.objects import ObjectStore
 from scripts.video_face_720p30_transfer import authored as encode_hd_hold
+from scripts.video_fractional_retiming_panel import altered as fractional_delivery
 from scripts.video_lossy_sequence_transfer import deliver, read_source
 from scripts.video_motion_late_transfer import encode as late_authored
 from scripts.video_motion_sequence_360p_transfer import authored
@@ -93,7 +94,7 @@ def _mouth_source(path, monkeypatch, *, hd):
 
 
 @pytest.mark.parametrize("case", ["opening_hold", "later_hold", "moving_sequence", "reverse_sequence", "lossy_reverse", "lossy_sequence", "lossy_sequence_360p",
-                                   "lossy_sequence_360p_late", "retimed_sequence", "reflected_sequence", "reflected_hd",
+                                   "lossy_sequence_360p_late", "retimed_sequence", "fractional_retimed_sequence", "reflected_sequence", "reflected_hd",
                                    "mouth_hold", "mouth_hold_hd"])
 def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monkeypatch, case, request):
     mouth = case in {"mouth_hold", "mouth_hold_hd"}
@@ -101,7 +102,8 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
     high_res = case.startswith("lossy_sequence_360p")
     extension = case == "lossy_sequence_360p_late"
     lossy_reverse = case == "lossy_reverse"
-    retimed = case == "retimed_sequence"
+    fractional = case == "fractional_retimed_sequence"
+    retimed = case == "retimed_sequence" or fractional
     reflected_hd = case == "reflected_hd"
     reflected = case == "reflected_sequence" or reflected_hd
     lossy = case.startswith("lossy_sequence") or lossy_reverse or retimed or reflected
@@ -113,9 +115,13 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
     elif lossy:
         if retimed:
             source = np.frombuffer(_motion_raster(226), dtype=np.uint8).reshape(226, -1)
-            frames, _ = speed_delivery(source, 26, 144, "later_fast")
+            if fractional:
+                frames, expected_pair = fractional_delivery(source, 26, 144, "later_fast_4_3")
+                indices = [index for a, b, _ in expected_pair for index in (a, b)]
+            else:
+                frames, _ = speed_delivery(source, 26, 144, "later_fast")
+                indices = [26, 66, 144, 164]
             encode_speed(path, frames)
-            indices = [26, 66, 144, 164]
         elif reflected:
             source = np.frombuffer(_motion_raster(226), dtype=np.uint8).reshape(226, -1)
             if reflected_hd:
@@ -152,6 +158,7 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
     encoding = (("vp9" if reflected_hd else "h264"), "yuv420p") if lossy or mouth else None
     scan = picture_hold.inspect(store.path_for(original.sha256), table, origin=origin, sequence_review=repeated,
                                 motion_encoding=encoding, mouth_review=mouth, retimed_review=retimed,
+                                fractional_retimed_review=fractional,
                                 reflected_review=reflected)
     assert scan["coverage"]["frames_scanned"] == len(table)
     if mouth:
@@ -180,7 +187,9 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
         assert motion["status"] == "matched" and motion["frames_scanned"] == (450 if extension else 225 if high_res or retimed or reflected else 180)
         assert motion["parameters"]["frame_rate"] == ("30000/1001" if reflected_hd else 25 if high_res or retimed or reflected else 20)
         expected_schema = (picture_sequence.MOTION_REFLECTED_HD_SCHEMA if reflected_hd
-                           else picture_sequence.MOTION_REFLECTED_SCHEMA if reflected else picture_sequence.MOTION_RETIMED_SCHEMA if retimed else picture_sequence.MOTION_REVERSE_SCHEMA if lossy_reverse else
+                           else picture_sequence.MOTION_REFLECTED_SCHEMA if reflected
+                           else picture_sequence.MOTION_RETIMED_FRACTIONAL_SCHEMA if fractional
+                           else picture_sequence.MOTION_RETIMED_SCHEMA if retimed else picture_sequence.MOTION_REVERSE_SCHEMA if lossy_reverse else
                            picture_sequence.MOTION_EXTENDED_SCHEMA if extension else picture_sequence.MOTION_SCHEMA)
         assert motion["schema"] == expected_schema
         match = motion["pair"]
@@ -273,11 +282,11 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
                 assert [f["artifact_refs"]["original"] for f in packet["frames"]] == [
                     "first_start_picture", "first_end_picture", "second_start_picture", "second_end_picture"]
             if retimed:
-                assert match["frame_steps"] == {"first": 2, "second": 1}
+                assert match["frame_steps"] == ({"first": 4, "second": 3} if fractional else {"first": 2, "second": 1})
                 altered = copy.deepcopy(document)
                 altered["picture_hold"][picture_sequence.MOTION_RETIMED_KEY]["pair"]["frame_steps"]["first"] = 1
                 altered["packets"][0]["picture_sequence"]["frame_steps"]["first"] = 1
-                with pytest.raises(ValueError, match="two-to-one frame stride"):
+                with pytest.raises(ValueError, match="unsupported playback ratio" if fractional else "two-to-one frame stride"):
                     binding.validate(altered)
             if reflected:
                 assert match["spatial_transform"] == picture_sequence.HORIZONTAL_REFLECTION
@@ -331,8 +340,9 @@ def test_encoded_picture_repeat_is_reported_exported_and_verified(tmp_path, monk
                 assert "transitions support the reversed motion" in text
             elif retimed:
                 assert "Footage repeated at two playback speeds" in text and "VPR05" in text
-                assert "Ranges at two playback speeds 1.040-2.640 s and 5.760-6.560 s" in text
-                assert "twice the speed" in text
+                ranges = "1.040-3.920 s and 5.760-7.920 s" if fractional else "1.040-2.640 s and 5.760-6.560 s"
+                assert f"Ranges at two playback speeds {ranges}" in text
+                assert ("4:3 speed ratio" if fractional else "twice the speed") in text
             elif reflected:
                 assert "Similar footage flipped left to right" in text and "VPR06" in text
                 location = "0.868-1.568 s and 4.771-5.472 s" if reflected_hd else "1.040-1.920 s and 5.760-6.640 s"

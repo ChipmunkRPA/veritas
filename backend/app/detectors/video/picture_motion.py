@@ -171,9 +171,10 @@ def scan(observations, values, tb, encoding, exact_pair, *, source_profile, sche
             count = match.ranges[0][1] - match.ranges[0][0] + 1
             supports = list(match.support)
     elif retimed:
-        if schema == binding.MOTION_RETIMED_COMPRESSED_SCHEMA:
+        if schema != binding.MOTION_RETIMED_SCHEMA:
             values = picture_speed.coarse_grid(values)
-        match = picture_speed.find(values, frame_rate, parameters=result["parameters"])
+        compare = picture_speed.fractional if schema == binding.MOTION_RETIMED_FRACTIONAL_SCHEMA else picture_speed.find
+        match = compare(values, frame_rate, parameters=result["parameters"])
         if match is not None:
             occurrences, count, supports = match
     else:

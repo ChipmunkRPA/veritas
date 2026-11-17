@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Footage repeated at 3:2 and 4:3 playback speeds](video-fractional-retiming-2026-11-16.md)
+  locates both ranges on 140 of 192 new staged edits from 12 camera
+  recordings. Two of 72 ordinary deliveries were flagged, both from
+  the same recording. The local option shows both times, relative
+  speed and the four original endpoint frames with zero AI weight.
+
 - [Speech edit checks after voice separation](audio-overlap-reconstruction-2026-11-16.md)
   compared direct voice estimates with complementary masks on the original
   spectrum. Under 10 dB louder competing speech, the masked fallback found

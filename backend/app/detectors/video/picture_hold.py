@@ -20,7 +20,8 @@ DECODE_TIMEOUT_S = 8.0
 def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Callable[[], None] | None = None,
             remaining_s: float | None = None, sequence_review: bool = False,
             motion_encoding: tuple[str | None, str | None] | None = None, mouth_review: bool = False,
-            retimed_review: bool = False, reflected_review: bool = False, cropped_review: bool = False) -> dict:
+            retimed_review: bool = False, reflected_review: bool = False, cropped_review: bool = False,
+            fractional_retimed_review: bool = False) -> dict:
     """Try an extended native scan under the same deadline, retaining a completed opening result."""
     opening_limit = binding.frame_limit(len(table), table.width, table.height)
     tb = table.tb
@@ -134,9 +135,13 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                         pictures, grid = observed[:retimed_limit], descriptors[:retimed_limit]
                         timing = picture_motion.scan(pictures, grid, tb, motion_encoding, None,
                                                      source_profile=retimed_profile, schema=schema)
-                        if timing["status"] == "no_match" and (remaining_s is None or remaining_s - (time.monotonic() - started) > 1.0):
+                        fallback_schemas = picture_sequence.MOTION_RETIMED_PASSES[1:] if fractional_retimed_review else (
+                            picture_sequence.MOTION_RETIMED_COMPRESSED_SCHEMA,)
+                        for fallback in fallback_schemas:
+                            if timing["status"] != "no_match" or (remaining_s is not None and remaining_s - (time.monotonic() - started) <= 1.0):
+                                break
                             timing = picture_motion.scan(pictures, grid, tb, motion_encoding, None, source_profile=retimed_profile,
-                                                         schema=picture_sequence.MOTION_RETIMED_COMPRESSED_SCHEMA)
+                                                         schema=fallback)
                         cover[picture_sequence.MOTION_RETIMED_KEY] = timing
             if reflected_review and (remaining_s is None or remaining_s - (time.monotonic() - started) > 1.0):
                 schema = picture_sequence.MOTION_REFLECTED_SCHEMA

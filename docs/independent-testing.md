@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [3:2 and 4:3 video replay](video-fractional-retiming-2026-11-16.md#replay)
+recounts 300 edited and control deliveries, including four newly
+acquired camera recordings. Native verification checks both playback
+ranges and their four exact original frame commitments.
+
 The [speech separation comparison](audio-overlap-reconstruction-2026-11-16.md#replay)
 recounts both detector calibrations and 186 test deliveries. Its export
 creates the sample-clock manifest, truth and method responses accepted by

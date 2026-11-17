@@ -5,7 +5,10 @@ import { evidenceAssetUrl, evidenceSourceMediaUrl, hasNestedVideoEvidence, secon
 import VideoFrameNavigator from './VideoFrameNavigator'
 
 function occurrenceLabel(sequence: NonNullable<VideoEvidencePacket['picture_sequence']>, side: 'first' | 'second') {
-  if (sequence.frame_steps) return sequence.frame_steps[side] === 1 ? 'Faster occurrence' : 'Slower occurrence'
+  if (sequence.frame_steps) {
+    const other = side === 'first' ? 'second' : 'first'
+    return sequence.frame_steps[side] < sequence.frame_steps[other] ? 'Faster occurrence' : 'Slower occurrence'
+  }
   if (side === 'first') return 'First occurrence'
   return sequence.order === 'reverse' ? 'Reversed occurrence' : 'Second occurrence'
 }
@@ -202,7 +205,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       <h3 id="video-retimed-motion-heading" className="m-0 text-body font-medium">Footage repeated at two playback speeds</h3>
       <p className="mt-2 mb-0 text-small">{retimedMotion.status === 'matched'
         ? <a className="underline" href="#media-evidence-VPR05">Inspect the faster and slower source ranges</a>
-        : retimedMotion.status === 'no_match' ? `No match at a two-to-one speed ratio was found in the first ${retimedMotion.frames_scanned} frames.`
+        : retimedMotion.status === 'no_match' ? `No match at ${retimedMotion.parameters?.playback_step_pairs ? 'a 2:1, 3:2, or 4:3' : 'a two-to-one'} speed ratio was found in the first ${retimedMotion.frames_scanned} frames.`
         : 'This check needs regular, verified source timestamps throughout the first nine seconds.'}</p>
     </section>}
     {reflectedMotion && <section aria-labelledby="video-reflected-motion-heading" className="mt-4 rounded-md border border-border p-4">

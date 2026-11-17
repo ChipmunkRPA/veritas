@@ -1148,6 +1148,7 @@ def render(ctx: StageContext) -> dict[str, Any]:
                                         check=lambda: ctx.check("repeated-picture inspection"), remaining_s=ctx.deadline.remaining(),
                                         sequence_review=True, motion_encoding=(info.get("codec"), info.get("pix_fmt")), mouth_review=True,
                                         retimed_review=settings.environment == "dev" and settings.video_retimed_sequence_review,
+                                        fractional_retimed_review=settings.video_fractional_retimed_sequence_review,
                                         reflected_review=settings.environment == "dev" and settings.video_reflected_sequence_review,
                                         cropped_review=settings.environment == "dev" and settings.video_cropped_sequence_review)
             mouth = hold["coverage"].get("mouth_local_hold")

@@ -26,7 +26,10 @@ MOTION_EXTENDED_SCHEMA = "chipmunk.video-motion-sequence/2"
 MOTION_REVERSE_SCHEMA = "chipmunk.video-reverse-motion-sequence/1"
 MOTION_RETIMED_SCHEMA = "chipmunk.video-retimed-motion-sequence/1"
 MOTION_RETIMED_COMPRESSED_SCHEMA = "chipmunk.video-retimed-motion-sequence/2"
-MOTION_RETIMED_SCHEMAS = frozenset({MOTION_RETIMED_SCHEMA, MOTION_RETIMED_COMPRESSED_SCHEMA})
+MOTION_RETIMED_FRACTIONAL_SCHEMA = "chipmunk.video-retimed-motion-sequence/3"
+MOTION_RETIMED_PASSES = (MOTION_RETIMED_SCHEMA, MOTION_RETIMED_COMPRESSED_SCHEMA, MOTION_RETIMED_FRACTIONAL_SCHEMA)
+MOTION_RETIMED_SCHEMAS = frozenset(MOTION_RETIMED_PASSES)
+FRACTIONAL_FRAME_STEPS = ((2, 3), (3, 4))
 MOTION_REFLECTED_SCHEMA = "chipmunk.video-reflected-motion-sequence/1"
 MOTION_REFLECTED_HD_SCHEMA = "chipmunk.video-reflected-motion-sequence/2"
 MOTION_CROP_SCHEMA = "chipmunk.video-cropped-motion-sequence/1"
@@ -98,11 +101,13 @@ def motion_encoding_allowed(schema, encoding):
 
 def motion_parameters(schema, rate):
     parameters = MOTION_PARAMETERS | {"frame_rate": rate}
-    if schema in MOTION_RETIMED_SCHEMAS:
+    if schema in {MOTION_RETIMED_SCHEMA, MOTION_RETIMED_COMPRESSED_SCHEMA}:
         parameters["native_frame_steps"] = [1, 2]
-    if schema == MOTION_RETIMED_COMPRESSED_SCHEMA:
+    if schema in {MOTION_RETIMED_COMPRESSED_SCHEMA, MOTION_RETIMED_FRACTIONAL_SCHEMA}:
         parameters.update(luma_grid=[20, 15], maximum_picture_rms=2.45,
                           minimum_motion_rms=.35, minimum_motion_rms_ratio=.60)
+    if schema == MOTION_RETIMED_FRACTIONAL_SCHEMA:
+        parameters["playback_step_pairs"] = [list(steps) for steps in FRACTIONAL_FRAME_STEPS]
     if schema in MOTION_REFLECTED_SCHEMAS:
         parameters.update(maximum_picture_rms=2.4, minimum_unflipped_picture_rms=4.8,
                           spatial_transform=HORIZONTAL_REFLECTION)
@@ -301,9 +306,13 @@ def observation(pair):
         return (f"Two separate ranges contain {pair['frame_count']} visually similar pictures after a left-to-right flip. "
                 f"{len(pair['supporting_edge_offsets'])} matching picture changes support the comparison.")
     if steps := pair.get("frame_steps"):
-        faster, slower = ("first", "second") if steps["first"] == 1 else ("second", "first")
-        return (f"The {faster} range shows {pair['frame_count']} matching pictures at twice the speed of the {slower} range. "
-                f"{len(pair['supporting_edge_offsets'])} matching changes across the picture support the comparison.")
+        faster, slower = ("first", "second") if steps["first"] < steps["second"] else ("second", "first")
+        short, long = steps[faster], steps[slower]
+        support = f"{len(pair['supporting_edge_offsets'])} matching changes across the picture support the comparison."
+        if (short, long) == (1, 2):
+            return f"The {faster} range shows {pair['frame_count']} matching pictures at twice the speed of the {slower} range. {support}"
+        return (f"The {faster} range shows {pair['frame_count']} matching pictures at a {long}:{short} speed ratio "
+                f"relative to the {slower} range. {support}")
     if "supporting_edge_offsets" in pair:
         if pair.get("order") == "reverse":
             return (f"The second source range contains {pair['frame_count']} visually similar pictures in reverse order. "
@@ -454,8 +463,12 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
                  "Repeated sequence has an unsupported crop")
     strides = pair.get("frame_steps", {"first": 1, "second": 1})
     if retimed:
+        fractional = schema == MOTION_RETIMED_FRACTIONAL_SCHEMA
+        allowed = FRACTIONAL_FRAME_STEPS if fractional else ((1, 2),)
         _require(set(strides) == {"first", "second"} and all(type(step) is int for step in strides.values())
-                 and sorted(strides.values()) == [1, 2], "Retimed sequence requires a two-to-one frame stride")
+                 and tuple(sorted(strides.values())) in allowed,
+                 "Retimed sequence uses an unsupported playback ratio" if fractional else
+                 "Retimed sequence requires a two-to-one frame stride")
     tb = Fraction(source["time_base"])
     count = pair["frame_count"]
     _require(type(count) is int and MIN_UNIQUE <= count <= scanned // 2,
@@ -482,7 +495,8 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
         _require(type(start) is int and type(end) is int and 0 <= start < end < scanned
                  and end - start == stride * (count - 1) and len(pts) == count
                  and all(type(p) is int for p in pts), "Repeated sequence has an invalid source interval")
-        steps = _steps(pts, tb)[1:]
+        # Verify the time between native pictures even when each sampled pair skips frames.
+        steps = _steps(pts, tb / stride)[1:]
         elapsed = (pts[-1] - pts[0]) * tb
         _require(None not in steps and elapsed / stride >= MIN_SPAN
                  and _close(span["start_stream_s"], pts[0] * tb) and _close(span["end_stream_s"], pts[-1] * tb),

@@ -1,0 +1,134 @@
+{
+  "browser": {
+    "cases": [
+      {
+        "fixture": "archive-camera-01-earlier_fast_3_2-on",
+        "matched": true,
+        "seek_s": 5.44,
+        "source_frames": [
+          37,
+          73,
+          136,
+          190
+        ]
+      },
+      {
+        "fixture": "archive-camera-02-earlier_fast_4_3_tandem-on",
+        "matched": true,
+        "seek_s": 5.64,
+        "source_frames": [
+          34,
+          76,
+          141,
+          197
+        ]
+      },
+      {
+        "fixture": "archive-camera-01-later_fast_2_1-on",
+        "matched": true,
+        "seek_s": 5.44,
+        "source_frames": [
+          37,
+          75,
+          136,
+          155
+        ]
+      },
+      {
+        "fixture": "archive-camera-01-original_tandem-on",
+        "matched": false
+      },
+      {
+        "fixture": "archive-camera-01-in_place_3_2-on",
+        "matched": false
+      }
+    ],
+    "page_errors": 0
+  },
+  "cases": [
+    {
+      "api_and_json_agree": true,
+      "fixture": "archive-camera-01-earlier_fast_3_2-off",
+      "original_frames_verified_in_pdf": 0,
+      "schema": "chipmunk.video-retimed-motion-sequence/2",
+      "signed_original_verified": false,
+      "source_ranges_s": [],
+      "source_sha256": "d157b16af7177464d1bc5b2f691b351e6e2a3df2765539bbac634d098740e5b8"
+    },
+    {
+      "api_and_json_agree": true,
+      "fixture": "archive-camera-01-earlier_fast_3_2-on",
+      "original_frames_verified_in_pdf": 4,
+      "schema": "chipmunk.video-retimed-motion-sequence/3",
+      "signed_original_verified": true,
+      "source_ranges_s": [
+        [
+          1.48,
+          2.92
+        ],
+        [
+          5.44,
+          7.6
+        ]
+      ],
+      "source_sha256": "d157b16af7177464d1bc5b2f691b351e6e2a3df2765539bbac634d098740e5b8"
+    },
+    {
+      "api_and_json_agree": true,
+      "fixture": "archive-camera-02-earlier_fast_4_3_tandem-on",
+      "original_frames_verified_in_pdf": 4,
+      "schema": "chipmunk.video-retimed-motion-sequence/3",
+      "signed_original_verified": true,
+      "source_ranges_s": [
+        [
+          1.36,
+          3.04
+        ],
+        [
+          5.64,
+          7.88
+        ]
+      ],
+      "source_sha256": "aee0e735ffe2ac3cf7ce4f27ce20f4011c7f8b00484360f2d4eb4e17ed94dcdb"
+    },
+    {
+      "api_and_json_agree": true,
+      "fixture": "archive-camera-01-later_fast_2_1-on",
+      "original_frames_verified_in_pdf": 4,
+      "schema": "chipmunk.video-retimed-motion-sequence/1",
+      "signed_original_verified": true,
+      "source_ranges_s": [
+        [
+          1.48,
+          3.0
+        ],
+        [
+          5.44,
+          6.2
+        ]
+      ],
+      "source_sha256": "9fdd40b96bd14b94990f3429d81aac802d7555d77b0b10de2a44066cb29877a2"
+    },
+    {
+      "api_and_json_agree": true,
+      "fixture": "archive-camera-01-original_tandem-on",
+      "original_frames_verified_in_pdf": 0,
+      "schema": "chipmunk.video-retimed-motion-sequence/3",
+      "signed_original_verified": true,
+      "source_ranges_s": [],
+      "source_sha256": "67cc3f85f9820711993d427717836db419495d300b71dfb0b8a4314e54ac944f"
+    },
+    {
+      "api_and_json_agree": true,
+      "fixture": "archive-camera-01-in_place_3_2-on",
+      "original_frames_verified_in_pdf": 0,
+      "schema": "chipmunk.video-retimed-motion-sequence/3",
+      "signed_original_verified": true,
+      "source_ranges_s": [],
+      "source_sha256": "e078b40de3fd68759eefda9354fccaf8688cb908d1c5d2b4fd48319dbeb6b482"
+    }
+  ],
+  "overall_assessment_unchanged_with_additional_check": true,
+  "paid_analyses": 6,
+  "unpaid_jobs": 0
+}

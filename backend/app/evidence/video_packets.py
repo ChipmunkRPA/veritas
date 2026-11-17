@@ -573,7 +573,9 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
     if retimed:
         packet_id = picture_sequence.MOTION_RETIMED_PACKET_ID
         title = "Footage repeated at two playback speeds"
-        selection = "longest_two_to_one_pair_of_similar_moving_sequences"
+        selection = ("longest_fractional_speed_pair_of_similar_moving_sequences"
+                     if review["schema"] == picture_sequence.MOTION_RETIMED_FRACTIONAL_SCHEMA
+                     else "longest_two_to_one_pair_of_similar_moving_sequences")
     if review["schema"] in picture_sequence.MOTION_REFLECTED_SCHEMAS:
         packet_id = picture_sequence.MOTION_REFLECTED_PACKET_ID
         title = "Similar footage flipped left to right"
@@ -614,9 +616,11 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
     sheet.paste(second, (0, first.height))
     assets["contact_sheet"] = _packet_image(db, store, analysis, set_id, sheet)
     if retimed:
+        ratios = ("3:2 and 4:3 speed ratios" if review["schema"] == picture_sequence.MOTION_RETIMED_FRACTIONAL_SCHEMA
+                  else "a two-to-one speed ratio")
         limitations = (f"The check compares whole pictures in the first {motion_limit} native frames. "
-                       "It tests a two-to-one speed ratio and can miss changes in framing or other speed ratios.")
-        if review["schema"] == picture_sequence.MOTION_RETIMED_COMPRESSED_SCHEMA:
+                       f"It tests {ratios} and can miss changes in framing or other speed ratios.")
+        if review["schema"] != picture_sequence.MOTION_RETIMED_SCHEMA:
             limitations = "The comparison groups nearby picture detail to reduce the effects of recompression. " + limitations
         measurements = [{"label": f"{label} range duration", "value": pair["span_s"] * pair["frame_steps"][side], "unit": "seconds"}
                         for side, label in (("first", "First"), ("second", "Second"))]

@@ -18,7 +18,7 @@ try {
     const retimed = row.mode === 'retimed'
     const labels = retimed ? {
       heading: 'Footage repeated at two playback speeds', packet: 'VPR05',
-      empty: `No match at a two-to-one speed ratio was found in the first ${row.checked_frames} frames.`,
+      empty: `No match at ${row.fractional ? 'a 2:1, 3:2, or 4:3' : 'a two-to-one'} speed ratio was found in the first ${row.checked_frames} frames.`,
       link: 'Inspect the faster and slower source ranges', title: 'Footage repeated at two playback speeds',
     } : cropped ? {
       heading: 'Cropped footage check', packet: 'VPR07',
@@ -44,6 +44,11 @@ try {
     const textSeconds = value => `${value.toFixed(3)} s`
     for (const range of row.ranges_s) {
       await finding.getByText(range.map(textSeconds).join('–'), { exact: true }).waitFor()
+    }
+    if (row.fractional) {
+      const first = row.ranges_s[0].map(textSeconds).join('–')
+      const label = row.first_is_faster ? 'Faster occurrence' : 'Slower occurrence'
+      await finding.getByText(new RegExp(`^${label} ${first}`)).waitFor()
     }
     const images = finding.getByRole('img', { name: /exact original video frame/ })
     assert.equal(await images.count(), 4)

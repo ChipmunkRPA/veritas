@@ -319,6 +319,7 @@ class Settings(BaseSettings):
     video_face_spatial_cut_context: bool = False  # Explain supported surrounding-picture changes on qualified HEVC clips.
     video_scene_return_review: bool = False  # Show brief picture changes independently of any face finding.
     video_retimed_sequence_review: bool = False  # Inspect copies with two-to-one playback after existing repeat checks.
+    video_fractional_retimed_sequence_review: bool = False  # Add three-to-two and four-to-three replay ratios in development.
     video_reflected_sequence_review: bool = False  # Inspect left-to-right footage repeats on supported native clocks.
     video_cropped_sequence_review: bool = False  # Compare footage repeated with a fixed tighter crop.
     video_face_short_window_review: bool = False  # Check overlapping native windows on supported eight-second HEVC clips.

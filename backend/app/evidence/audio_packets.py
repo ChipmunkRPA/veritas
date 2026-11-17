@@ -186,6 +186,13 @@ def validate_content(document: dict[str, Any]) -> None:
             validate(document["stereo_repetition"], source)
         except ValueError as error:
             raise PacketIntegrityError(str(error)) from error
+    if "stereo_timing_change" in document:
+        from app.evidence.audio_stereo_timing_binding import validate
+
+        try:
+            validate(document["stereo_timing_change"], source)
+        except ValueError as error:
+            raise PacketIntegrityError(str(error)) from error
     if "similarity_context" in document:
         from app.evidence.audio_similarity_binding import validate
 
@@ -571,6 +578,15 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
             gain_version=binding.get(GAIN_INPUT) or mapping.get(GAIN_INPUT),
             difference_version=version,
         )
+    from app.evidence import audio_stereo_timing_binding as timing
+
+    if digest := binding.get(timing.INPUT) or mapping.get(timing.INPUT):
+        from app.evidence.audio_short_review_binding import source_metadata
+        from app.evidence.audio_stereo_timing_source import build
+
+        document["source"].update(source_metadata(mapping))
+        document[timing.KEY] = build(_verified(store, digest), document["source"],
+            lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata))
     document["similarity_context"] = build_similarity(
         pcm, mapping, document["source"],
         lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
@@ -612,6 +628,12 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
     if mapping.get(STEREO_REPEAT_INPUT) or "stereo_repetition" in document:
         stereo_repetition.verify_frozen(store, document, mapping, mapping.get(STEREO_REPEAT_INPUT), store.read_bytes,
                                        gain_version=mapping.get(GAIN_INPUT), difference_version=mapping.get(DIFFERENCE_INPUT))
+    from app.evidence import audio_stereo_timing_binding as timing
+
+    if mapping.get(timing.INPUT) or timing.KEY in document:
+        from app.evidence.audio_stereo_timing_source import verify_frozen
+
+        verify_frozen(store, document, mapping.get(timing.INPUT), store.read_bytes)
     return document
 
 

@@ -13,6 +13,13 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [temporary stereo timing replay](audio-stereo-timing-change-2026-11-17.md#local-app-and-independent-replay)
+recounts 936 held deliveries and separately verifies the exact two-channel
+inputs and timestamps. The receipts separate timing shifts, ordinary
+edits, unassessed natural recordings, and two paired speech generation
+methods. The app replay verifies the before, during, and after excerpts
+on an MP4 with a nonzero audio start.
+
 The [short stereo AAC replay](audio-aac-repetition-2026-11-17.md#application-and-independent-replay)
 binds 512 held compressed audio deliveries to their WAV parents and
 recounts correct pairs, misplaced ranges, and assessed coverage. The app

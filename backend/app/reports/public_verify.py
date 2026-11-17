@@ -557,6 +557,18 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                 pcm_digest = pair['pcm_s16le_sha256']
                 _require(repeat_pcm.setdefault(digest, pcm_digest) == pcm_digest,
                          'One repeated-audio clip has conflicting PCM commitments')
+        if (timing_change := part.get('stereo_timing_change')) is not None:
+            from app.evidence.audio_stereo_timing_binding import validate as validate_stereo_timing
+
+            _require((analysis['kind'] == 'audio' and part is evidence) or part is evidence.get('audio'),
+                     'Stereo timing is outside the audio evidence')
+            validate_stereo_timing(timing_change, part['source'])
+            groups.append(timing_change['artifacts'])
+            for clip in timing_change['clips']:
+                digest = timing_change['artifacts'][clip['role']]['sha256']
+                pcm_digest = clip['pcm_s16le_sha256']
+                _require(repeat_pcm.setdefault(digest, pcm_digest) == pcm_digest,
+                         'One stereo timing clip has conflicting PCM commitments')
         if (repeat := part.get('repetition_context')) is not None:
             from app.evidence.audio_repetition_binding import validate as validate_repetition
 

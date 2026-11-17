@@ -97,7 +97,7 @@ def asset_items(document: dict[str, Any]):
         for window in (part.get("sound_events") or {}).get("windows", []):
             for role, asset in sorted(window.get("artifacts", {}).items()):
                 yield window["id"], role, asset
-        for key in ("short_voice_review", audio_focused_edit_binding.KEY):
+        for key in ("short_voice_review", audio_focused_edit_binding.KEY, "stereo_timing_change"):
             for role, asset in sorted((part.get(key) or {}).get("artifacts", {}).items()):
                 yield None, f"{key}_{role}", asset
         if review := part.get("long_voice_review"):
@@ -471,6 +471,13 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
 
             stereo_repetition.verify_frozen(store, document, mapping, mapping.get(INPUT), assets.__getitem__,
                                            gain_version=mapping.get(GAIN_INPUT), difference_version=mapping.get(DIFFERENCE_INPUT))
+    if "schema" in document:
+        from app.evidence import audio_stereo_timing_binding as timing
+
+        if mapping.get(timing.INPUT) or timing.KEY in document:
+            from app.evidence.audio_stereo_timing_source import verify_frozen
+
+            verify_frozen(store, document, mapping.get(timing.INPUT), assets.__getitem__)
     if stereo_context is not None:
         from app.detectors.audio.stereo import verify_mono_levels
 
@@ -1360,6 +1367,10 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                            else "Waveform shared by both occurrences")
                 pair["waveform"] = plate("waveform", pair["artifacts"]["waveform"], caption)
     video_origin_s = document["source"].get("timeline_origin_s") if kind == "video" else None
+    stereo_timing = copy.deepcopy(stereo_source.get("stereo_timing_change"))
+    if stereo_timing and stereo_timing["measurement"]:
+        stereo_timing["plots"] = [plate(role, stereo_timing["artifacts"][role], label) for role, label in (
+            ("timing_plot", "Measured channel delay"), ("waveform", "Left-channel waveform"))]
     voice_coverage = (stereo_source.get("coverage") or {}) if kind in {"audio", "video"} else {}
     rate = (stereo_source.get("source") or {}).get("sample_rate")
     stereo_listening = []
@@ -1535,6 +1546,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "repetition_context_pointer": "/audio/repetition_context" if kind == "video" else "/repetition_context",
             "stereo_repetition": stereo_repeated,
             "stereo_repetition_pointer": "/audio/stereo_repetition" if kind == "video" else "/stereo_repetition",
+            "stereo_timing_change": stereo_timing,
+            "stereo_timing_pointer": "/audio/stereo_timing_change" if kind == "video" else "/stereo_timing_change",
             "similarity_context": copy.deepcopy(stereo_source.get("similarity_context")),
             "similarity_context_pointer": "/audio/similarity_context" if kind == "video" else "/similarity_context",
             "repeated_passages": repeated_passages,

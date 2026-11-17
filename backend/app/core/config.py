@@ -145,6 +145,7 @@ class Settings(BaseSettings):
     audio_stereo_aligned_repeat_review: bool = False
     audio_stereo_native_repeat_review: bool = False  # development-only alignment of short lossless 48 kHz stereo
     audio_stereo_aac_repeat_review: bool = False  # development-only repeat evidence on verified 48 kHz AAC stereo
+    audio_stereo_timing_change_review: bool = False  # Local changes in the delay between native stereo channels.
 
     @property
     def stereo_difference_version(self) -> int | None:

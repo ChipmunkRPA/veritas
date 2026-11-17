@@ -15,6 +15,7 @@ export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: Mul
   const monoLevelDrop = stereo?.windows.some((window) => window.downmix?.strong_attenuation)
   const audio = set.schema === 'chipmunk.video-evidence/1' ? set.audio : set.schema === 'chipmunk.audio-evidence/1' ? set : undefined
   const repeatedAudio = repeatedAudioCount(audio)
+  const stereoTimingFlag = !!audio?.stereo_timing_change?.measurement
   const shortSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' &&
     (set.short_voice_review?.status === 'flagged' || set.focused_speech_edit_review?.status === 'flagged')
   const longSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' &&
@@ -29,7 +30,7 @@ export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: Mul
       Detailed evidence has not been prepared for this result. Run a new analysis to capture the exact inputs and their source positions. Unavailable evidence does not establish authenticity.
     </p> : <>
       <p className="mt-3 mb-0 text-body text-text-muted">Inspect the exact inputs behind the recorded responses, with their source context and limits. These observations do not prove that AI was used.</p>
-      {set.packets.length === 0 && !nestedCandidates && !monoLevelDrop && !repeatedAudio && !shortSpeechFlag && !longSpeechFlag && !backgroundSpeechFlag && !repeatedText && !trackedWordEdits && !chatMarkers && <p data-testid="multimedia-evidence-empty" className="mt-3 mb-0 text-small text-text-muted">
+      {set.packets.length === 0 && !nestedCandidates && !monoLevelDrop && !repeatedAudio && !stereoTimingFlag && !shortSpeechFlag && !longSpeechFlag && !backgroundSpeechFlag && !repeatedText && !trackedWordEdits && !chatMarkers && <p data-testid="multimedia-evidence-empty" className="mt-3 mb-0 text-small text-text-muted">
         No inspection candidate was selected from the recorded inputs. This does not establish authenticity; check the coverage and limitations below.
       </p>}
       {set.schema === 'chipmunk.video-evidence/1' ? nestedVideo

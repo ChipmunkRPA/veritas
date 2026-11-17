@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Temporary stereo timing changes](audio-stereo-timing-change-2026-11-17.md)
+  locate 104 of 192 staged delay changes across WAV and two AAC encodings.
+  The check flags none of 519 assessed controls out of 696 control
+  deliveries. It locates one synthetic speech splice across the three
+  encodings, so it provides timing evidence with zero AI-score weight.
+  The local audio and video views show original before, during and after
+  excerpts with a delay chart and a waveform on the same time axis.
+
 - [Repeats in short stereo AAC](audio-aac-repetition-2026-11-17.md)
   locates 34 of 128 staged background repeats with louder speech across
   96 and 160 kb/s deliveries. The serving mono checks locate none of the

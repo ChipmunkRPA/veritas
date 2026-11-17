@@ -85,6 +85,7 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
     if document is None:
         return {}
     from app.evidence.audio_focused_edit_binding import KEY as FOCUSED_EDIT
+    from app.evidence.audio_stereo_timing_binding import KEY as STEREO_TIMING
     from app.evidence.image_interpolation_binding import assets as interpolation_assets
     from app.evidence.image_previous_grid_binding import assets as jpeg_grid_assets
     parts = [document]
@@ -158,6 +159,16 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
             except ValueError as error:
                 raise ObjectIntegrityError(str(error)) from error
             groups.extend(pair["artifacts"] for pair in pairs(part["stereo_repetition"]))
+        if STEREO_TIMING in part:
+            from app.evidence.audio_stereo_timing_binding import validate
+
+            if part.get("schema") != "chipmunk.audio-evidence/1" and part is not document.get("audio"):
+                raise ObjectIntegrityError("Stereo timing is outside the audio evidence")
+            try:
+                validate(part[STEREO_TIMING], part["source"])
+            except ValueError as error:
+                raise ObjectIntegrityError(str(error)) from error
+            groups.append(part[STEREO_TIMING]["artifacts"])
         for key in ("repetition_context", "similarity_context"):
             repetition = part.get(key)
             if repetition is not None:

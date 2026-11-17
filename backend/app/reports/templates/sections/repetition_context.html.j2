@@ -104,6 +104,30 @@
 {% endfor %}
 <p class="caption">JSON pointer <span class="mono">{{ pointer }}</span>.</p>
 {% endfor %}
+{% if evidence.get('stereo_timing_change') %}
+{% set timing = evidence.stereo_timing_change %}
+{% set rate = timing.sample_rate %}
+{% set measured = timing.measurement %}
+<section class="multimedia-stereo-timing" aria-labelledby="multimedia-evidence-stereo-timing">
+<h3 id="multimedia-evidence-stereo-timing">Temporary change in stereo timing</h3>
+<p>Compared the timing of the left and right channels across {{ '%.3f' | format(timing.input_samples / rate) }} s of continuous 48 kHz stereo audio. Changing speakers, microphone positions, or ordinary edits can cause a timing change. This finding carries no AI confidence weight.</p>
+{% if measured %}
+<p>The delay shifted from {{ '%+.3f' | format(measured.before_offset_samples * 1000 / rate) }} ms to {{ '%+.3f' | format(measured.inside_offset_samples * 1000 / rate) }} ms between {{ '%.3f' | format(measured.start_sample / rate) }} s and {{ '%.3f' | format(measured.end_sample / rate) }} s of analyzed audio, then returned to {{ '%+.3f' | format(measured.after_offset_samples * 1000 / rate) }} ms. A positive delay means the right channel arrived later.</p>
+{{ plates(timing.plots, wide=true) }}
+{% for clip in timing.clips %}
+{% set range = clip.source_timestamp_ranges[0] %}
+{% set start = range.source_start_pts / rate %}
+{% set end = range.source_end_pts / rate %}
+{% set origin = evidence.stereo_context_video_origin_s %}
+<p class="caption">{{ clip.role | capitalize }} the change. Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.
+{% if origin is not none and start >= origin %}Video playback {{ '%.3f' | format(start - origin) }}–{{ '%.3f' | format(end - origin) }} s.{% endif %}</p>
+<p class="caption evidence-hash">Original stereo WAV SHA-256 <span class="mono">{{ timing.artifacts[clip.role].sha256 }}</span>.</p>
+{% endfor %}
+{% elif timing.status == 'measured' %}<p>No qualifying temporary delay change was found in the checked audio.</p>
+{% else %}<p>Too little sound was shared clearly between the two channels to assess a temporary delay change.</p>{% endif %}
+<p class="caption">JSON pointer <span class="mono">{{ evidence.stereo_timing_pointer }}</span>.</p>
+</section>
+{% endif %}
 {% if evidence.get('repeated_passages') %}
 {% set repeated = evidence.repeated_passages %}
 <h3>Exact repeated passages</h3>

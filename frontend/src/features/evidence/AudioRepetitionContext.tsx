@@ -103,6 +103,47 @@ function RepeatCheck({ set, token, mediaReady, videoOriginS, context, channel }:
   </section>
 }
 
+function StereoTimingCheck({ set, token, mediaReady, videoOriginS }: Props) {
+  const check = set.stereo_timing_change
+  if (!check || check.source_sha256 !== set.source.sha256) return null
+  const { artifacts, measurement, sample_rate: rate } = check
+  const offset = (samples: number) => `${samples >= 0 ? '+' : ''}${(samples * 1000 / rate).toFixed(3)} ms`
+  return <section id="media-evidence-stereo-timing-change" aria-labelledby="stereo-timing-heading" className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
+    <h3 id="stereo-timing-heading" className="m-0 text-body font-medium">Temporary change in stereo timing</h3>
+    <p className="mt-2 mb-0 text-small text-text-muted">Compared the timing of the left and right channels across {seconds(check.input_samples / rate)} of continuous 48 kHz stereo audio. Changing speakers, microphone positions, or ordinary edits can cause a timing change. This finding carries no AI confidence weight.</p>
+    {measurement ? <>
+      <p className="mt-2 mb-0 text-small">The delay shifted from {offset(measurement.before_offset_samples)} to {offset(measurement.inside_offset_samples)} between {seconds(measurement.start_sample / rate)} and {seconds(measurement.end_sample / rate)} of analyzed audio, then returned to {offset(measurement.after_offset_samples)}. A positive delay means the right channel arrived later.</p>
+      <div className="mt-3 space-y-3">
+        {artifacts.timing_plot && <EvidencePicture set={set} token={token} ready={mediaReady} chart artifact={artifacts.timing_plot} alt="Measured delay between the stereo channels" />}
+        {artifacts.waveform && <EvidencePicture set={set} token={token} ready={mediaReady} chart artifact={artifacts.waveform} alt="Left-channel waveform with the flagged interval highlighted" />}
+      </div>
+      <div className="mt-3 grid grid-cols-3 gap-3 max-[767px]:grid-cols-1" onPlayCapture={event => {
+        if (event.target instanceof HTMLAudioElement) {
+          event.currentTarget.querySelectorAll('audio').forEach(audio => { if (audio !== event.target && !audio.paused) audio.pause() })
+        }
+      }}>
+        {check.clips.map(clip => {
+          const asset = artifacts[clip.role]
+          const range = clip.source_timestamp_ranges[0]
+          const start = range && rationalSeconds(range.source_start_pts, range.time_base)
+          const end = range && rationalSeconds(range.source_end_pts, range.time_base)
+          const label = { before: 'Before the change', during: 'During the change', after: 'After the change' }[clip.role]
+          return <div key={clip.role}>
+            {asset && <EvidenceAudio set={set} artifact={asset} token={token} ready={mediaReady} alt={`${label} · Original stereo audio`} />}
+            {range && <p className="mt-1 mb-0 text-caption text-text-muted">
+              Source PTS [{range.source_start_pts}, {range.source_end_pts}) at {range.time_base}.
+              {videoOriginS != null && start != null && end != null && start >= videoOriginS
+                && ` Video playback ${seconds(start - videoOriginS)}–${seconds(end - videoOriginS)}.`}
+            </p>}
+          </div>
+        })}
+      </div>
+    </> : <p className="mt-2 mb-0 text-small">{check.status === 'measured'
+      ? 'No qualifying temporary delay change was found in the checked audio.'
+      : 'Too little sound was shared clearly between the two channels to assess a temporary delay change.'}</p>}
+  </section>
+}
+
 export default function AudioRepetitionContext(props: Props) {
   const stereo = props.set.stereo_repetition
   return <><RepeatCheck {...props} context={props.set.repetition_context} />
@@ -112,5 +153,7 @@ export default function AudioRepetitionContext(props: Props) {
         <RepeatCheck {...props} context={row.gain_measurement} channel={row.channel} /></div>)}
       <RepeatCheck {...props} context={stereo.difference_measurement} channel="difference" />
       <RepeatCheck {...props} context={stereo.aligned_measurement} channel="aligned" />
-    </>}</>
+    </>}
+    <StereoTimingCheck {...props} />
+  </>
 }

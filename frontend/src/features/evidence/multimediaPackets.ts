@@ -216,6 +216,15 @@ export interface AudioAlignedRepetitionContext extends Omit<AudioRepeatRecord, '
   alignment: { right_offset_samples: number; right_gain_numerator: number; agreeing_windows: number; usable_windows: number } | null
   pairs: (AudioRepeatPair & { first: AlignedRepeatSpan; second: AlignedRepeatSpan })[]
 }
+export interface StereoTimingChange {
+  schema: 'chipmunk.stereo-timing-change/1'; source_sha256: string; sample_rate: 48000
+  input_samples: number; affects_overall_confidence: false; status: 'measured' | 'unavailable'
+  measurement: (SampleInterval & {
+    before_offset_samples: number; inside_offset_samples: number; after_offset_samples: number
+  }) | null
+  clips: (AudioRepeatSpan & { role: 'before' | 'during' | 'after' })[]
+  artifacts: Partial<Record<'before' | 'during' | 'after' | 'timing_plot' | 'waveform', EvidenceAsset>>
+}
 export interface AudioGainRepetitionContext extends Omit<AudioRepeatRecord, 'searched_interval'> {
   schema: 'chipmunk.audio-gain-repetition/1'
   pairs: (AudioRepeatPair & { gain_numerator: number; gain_denominator: number; scaled_occurrence: 'first' | 'second';
@@ -324,6 +333,7 @@ export interface AudioEvidenceSet extends SetBase {
   sound_events?: SoundEventContext
   stereo_context?: StereoChannelContext
   stereo_listening?: StereoListeningContext
+  stereo_timing_change?: StereoTimingChange
   repetition_context?: AudioRepetitionContext
   stereo_repetition?: StereoRepetitionContext
   similarity_context?: AudioSimilarityContext
@@ -350,6 +360,7 @@ export interface VideoAudioChannel {
   sound_events?: SoundEventContext
   stereo_context?: StereoChannelContext
   stereo_listening?: StereoListeningContext
+  stereo_timing_change?: StereoTimingChange
   repetition_context?: AudioRepetitionContext
   stereo_repetition?: StereoRepetitionContext
   similarity_context?: AudioSimilarityContext

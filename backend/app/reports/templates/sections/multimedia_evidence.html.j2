@@ -23,7 +23,7 @@
 {% macro related_voice(ids) %}
 {% if ids %}<p class="caption">Overlapping voice-check intervals {% for id in ids %}<a href="#multimedia-evidence-{{ id }}">{{ id }}</a>{% if not loop.last %}, {% endif %}{% endfor %}. Listen to the overlapping intervals for context.</p>{% endif %}
 {% endmacro %}
-<section class="{% if evidence.packets or evidence.overview or evidence.acoustic_contexts or evidence.get('repetition_context') or evidence.get('stereo_repetition') or evidence.get('similarity_context') or evidence.get('repeated_passages') %}chapter{% else %}chapter-cont{% endif %} multimedia-evidence{% if s.report.profile in ['summary', 'newsroom'] and evidence.packets %} evidence-appendix{% endif %}" aria-labelledby="multimedia-evidence-heading">
+<section class="{% if evidence.packets or evidence.overview or evidence.acoustic_contexts or evidence.get('repetition_context') or evidence.get('stereo_repetition') or evidence.get('stereo_timing_change') or evidence.get('similarity_context') or evidence.get('repeated_passages') %}chapter{% else %}chapter-cont{% endif %} multimedia-evidence{% if s.report.profile in ['summary', 'newsroom'] and evidence.packets %} evidence-appendix{% endif %}" aria-labelledby="multimedia-evidence-heading">
 <h2 class="chapter-title" id="multimedia-evidence-heading">{% if v.get('number', {}).get('source-evidence') %}<span class="n">{{ v.number['source-evidence'] }}</span>{% endif %}{{ evidence.title }}</h2>
 <p>{{ evidence.note }}</p>
 {% if evidence.available %}

@@ -309,6 +309,7 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
     if encoding in {'m4a', 'mp4'}:
         monkeypatch.setattr(settings, 'environment', 'dev')
         monkeypatch.setattr(settings, 'audio_stereo_aac_repeat_review', True)
+        monkeypatch.setattr(settings, 'audio_stereo_timing_change_review', True)
         native_repeat = Mock(side_effect=AssertionError('Signed record must bypass additional stereo capture'))
         monkeypatch.setattr(stereo_repetition, 'decode_native_stereo', native_repeat)
     db_engine = create_engine(f'sqlite:///{tmp_path / "authored.sqlite"}', connect_args={'check_same_thread': False})

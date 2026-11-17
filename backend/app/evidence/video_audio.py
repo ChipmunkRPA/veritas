@@ -192,6 +192,12 @@ def verify_source_content(channel: dict, *, result: dict, store, source_sha256: 
     stereo_listening.verify(store, channel, binding.get('stereo_listening_pcm_sha256'), pcm, read_waveform=read_waveform)
     stereo_repetition.verify_frozen(store, channel, mapping, binding.get(STEREO_REPEAT_INPUT), store.read_bytes,
                                     gain_version=binding.get(GAIN_INPUT), difference_version=binding.get(DIFFERENCE_INPUT))
+    from app.evidence import audio_stereo_timing_binding as timing
+
+    if binding.get(timing.INPUT) or timing.KEY in channel:
+        from app.evidence.audio_stereo_timing_source import verify_frozen
+
+        verify_frozen(store, channel, binding.get(timing.INPUT), store.read_bytes)
     if channel.get('sound_events') is not None:
         from app.evidence.sound_events import verify
         verify(channel['sound_events'], store=store, record=record, binding=binding,

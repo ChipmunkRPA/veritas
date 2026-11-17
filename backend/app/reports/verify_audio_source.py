@@ -223,6 +223,18 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             replay_detail += " Recomputed the stereo channel difference and verified its repeats against both recorded excerpts."
         if difference_version == ALIGNED_VERSION:
             replay_detail += " Recomputed repeated-sound evidence with the stereo channels aligned."
+    if timing := audio.get("stereo_timing_change"):
+        from app.detectors.audio.decode import decode_native_stereo
+        from app.evidence.audio_stereo_timing_source import verify as verify_timing
+
+        data = decode_native_stereo(original, decoded.mapping, aac=decoded.mapping["source_codec"] == "aac")
+        if data is None:
+            raise ValueError("The submitted stereo track does not reproduce the measured timing clock")
+        paths = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"]}
+        verify_timing(timing, data, source, lambda digest: archive.read(paths[digest]))
+        covered.update(asset["sha256"] for asset in timing["artifacts"].values() if asset["media_type"] == "audio/wav")
+        intervals += len(timing["clips"])
+        replay_detail += " Recomputed the stereo timing change and its source excerpts."
     if (review := audio.get("background_reduced_voice_review")) is not None:
         from app.detectors.audio.decode import read_wav
         from app.evidence.audio_background_review_binding import SPAN

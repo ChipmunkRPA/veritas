@@ -14,6 +14,7 @@ from app.evidence import audio_channel_alignment_binding as alignment
 from app.evidence import audio_channel_difference as difference
 from app.evidence import audio_exact_repetition, audio_repetition
 from app.evidence import audio_gain_repetition_binding as gain
+from app.evidence.audio_stereo_timing_binding import INPUT as TIMING_CHANGE_INPUT
 from app.evidence.stereo_repetition_binding import (
     AAC_ALIGNED_SCHEMA,
     AAC_ALIGNED_VERSION,
@@ -55,10 +56,11 @@ def freeze(db, store, analysis_id, decoded, *, native_source=None):
     pcm = native_pcm(decoded)
     schema = SCHEMA
     if pcm is None and native_source is not None and settings.environment == "dev":
-        if decoded.mapping.get("source_codec") == "aac" and settings.audio_stereo_aac_repeat_review:
+        timing = settings.audio_stereo_timing_change_review
+        if decoded.mapping.get("source_codec") == "aac" and (settings.audio_stereo_aac_repeat_review or timing):
             pcm = decode_native_stereo(native_source, decoded.mapping, aac=True)
             schema = AAC_ALIGNED_SCHEMA
-        elif settings.audio_stereo_native_repeat_review:
+        elif settings.audio_stereo_native_repeat_review or timing:
             pcm = decode_native_stereo(native_source, decoded.mapping)
             schema = NATIVE_ALIGNED_SCHEMA
     if pcm is None:
@@ -70,9 +72,16 @@ def freeze(db, store, analysis_id, decoded, *, native_source=None):
 def input_binding(artefact):
     from app.core.config import settings
 
-    result = {INPUT: artefact.sha256}
     if artefact.created_by in NATIVE_SCHEMAS:
-        return result | {DIFFERENCE_INPUT: DIFFERENCE_VERSIONS[artefact.created_by]}
+        result = {}
+        repeat = (settings.audio_stereo_aac_repeat_review if artefact.created_by == AAC_ALIGNED_SCHEMA
+                  else settings.audio_stereo_native_repeat_review)
+        if repeat:
+            result.update({INPUT: artefact.sha256, DIFFERENCE_INPUT: DIFFERENCE_VERSIONS[artefact.created_by]})
+        if settings.audio_stereo_timing_change_review:
+            result[TIMING_CHANGE_INPUT] = artefact.sha256
+        return result
+    result = {INPUT: artefact.sha256}
     if settings.environment == "dev" and settings.audio_stereo_gain_repeat_review:
         result[gain.GAIN_INPUT] = gain.GAIN_VERSION
     if (version := settings.stereo_difference_version) is not None:

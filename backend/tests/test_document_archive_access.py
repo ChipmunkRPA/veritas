@@ -19,11 +19,32 @@ from app.api import v2_document_archive
 from app.billing import purchase_notice
 from app.core.config import settings
 from app.detectors.text.extract import from_string
-from app.evidence import document_archive, document_archive_word, document_gao_archive
+from app.evidence import (
+    document_archive,
+    document_archive_word,
+    document_gao_archive,
+    document_published_wording,
+)
 from app.main import app
 from app.storage.db import Analysis, Artefact, BillingOrderRow, CaseMemberRow, CaseRow, Job
 
 SOURCE = "frus1964-68v24/d585"
+
+
+def test_adjacent_archived_wording_differences_link_to_separate_source_sentences():
+    text = "The board approved the report on Thursday. The summary cited a newer figure. The index still held its original order."
+    doc = from_string(text)
+    changes = [{"start": start, "end": start + len(word)} for word in ("Thursday", "newer") for start in [text.index(word)]]
+    rows = document_published_wording._sentence_rows(
+        doc, changes, lambda a, b: document_published_wording._places("plain", doc.source_map, a, b),
+    )
+    assert [(row["sentence"], row["text"], row["differences"]) for row in rows] == [
+        (1, "The board approved the report on Thursday.", [1]), (2, "The summary cited a newer figure.", [2]),
+    ]
+    document_published_wording._validate_sentences(rows, changes, len(text))
+    rows[0]["differences"] = [2]
+    with pytest.raises(ValueError, match="links to a different wording difference"):
+        document_published_wording._validate_sentences(rows, changes, len(text))
 
 
 def _body():

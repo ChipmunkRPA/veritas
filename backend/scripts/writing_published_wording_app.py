@@ -42,6 +42,10 @@ def exports(client, aid, source, directory, evidence):
         assert wording.TITLE in text
         for section in comparison.get("sections", [comparison]):
             assert section["reference"]["published_date"] in text and section["reference"]["id"] in text
+            for sentence in section.get("changed_sentences", []):
+                assert f"Sentence {sentence['sentence']}" in text
+                assert " ".join(sentence["text"].split()) in text
+                assert all(f"Difference {number}" in text for number in sentence["differences"])
             for row in section["changes"]:
                 if "column" in section:
                     for place in row["locations"]:
@@ -132,6 +136,10 @@ def run(plan, font, output, browser):
             assert received is not None, (carrier, version, evidence["source"]["method"])
             assert received["reference"]["id"] == CASE.removeprefix("GAO_")
             assert len(received["changes"]) == (6 if version == "mixed" else 0), (carrier, len(received["changes"]))
+            assert received["schema"] == wording.SENTENCES_SCHEMA
+            sentences = received["changed_sentences"]
+            assert bool(sentences) == (version == "mixed")
+            assert {number for sentence in sentences for number in sentence["differences"]} == set(range(1, len(received["changes"]) + 1))
             assert len(received["published_style_matches"]) == (1 if version == "ordinary" else 0)
             baseline = evidence["coverage"].get(document_passage_intervals.KEY)
             if version == "ordinary":
@@ -140,9 +148,11 @@ def run(plan, font, output, browser):
             name = f"{carrier}-{version}"
             rows[name] = {"file_sha256": panel.digest(source.read_bytes()), "source": received["reference"]["id"],
                           "changes": len(received["changes"]), "published_style_matches": len(received["published_style_matches"]),
+                          "sentences": [{key: sentence[key] for key in ("sentence", "start", "end", "differences")} for sentence in sentences],
                           "pdf_sha256": exports(client, aid, source, directory, evidence)}
             browser_cases.append({"analysis_id": aid, "case": name, "reference": received["reference"]["id"],
                                   "date": received["reference"]["published_date"], "changes": len(received["changes"]),
+                                  "sentences": rows[name]["sentences"],
                                   "cleared": bool(received["published_style_matches"])})
             print(name, rows[name]["changes"], rows[name]["published_style_matches"], flush=True)
         settings.document_gao_automatic_review = False

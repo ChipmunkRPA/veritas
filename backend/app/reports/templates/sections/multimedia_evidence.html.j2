@@ -59,6 +59,16 @@
 </div>
 {% endif %}
 {% set wording = evidence.get('published_wording') %}
+{% macro published_wording_locations(locations, method) %}
+{% if method == 'pymupdf' %}
+<p class="caption">Original PDF pages {{ locations | map(attribute='page') | unique | join(', ') }}. Word boxes are recorded in JSON.</p>
+{% else %}
+{% for place in locations %}
+<p class="caption">{% if method == 'python-docx' %}Word paragraph {{ place.paragraph }} characters{% else %}Original text characters{% endif %}
+{% for span in place.ranges %}<span class="mono">[{{ span[0] }}, {{ span[1] }})</span>{{ ', ' if not loop.last else '.' }}{% endfor %}</p>
+{% endfor %}
+{% endif %}
+{% endmacro %}
 {% if wording %}
 <div id="document-published-wording" class="multimedia-acoustic-summary">
 <h3>{{ wording.title }}</h3>
@@ -76,23 +86,28 @@
 </div>
 {% endfor %}
 {% endif %}
+{% if section.get('changed_sentences') %}
+<h4>Sentences with wording differences</h4>
+{% for sentence in section.changed_sentences %}
+<div class="writing-passage-excerpt">
+<p class="caption"><strong>Sentence {{ sentence.sentence }}</strong></p>
+<blockquote>{{ sentence.text }}</blockquote>
+{{ published_wording_locations(sentence.locations, wording.method) }}
+<p class="caption">{% for number in sentence.differences %}<a href="#published-wording-difference-{{ number }}">Difference {{ number }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</p>
+</div>
+{% endfor %}
+{% endif %}
 <h4>Wording differences</h4>
 {% if not section.changes %}<p>No bounded wording differences were recorded.</p>{% endif %}
 {% for change in section.changes %}
-<div class="writing-passage-excerpt">
+<div class="writing-passage-excerpt"{% if section.get('changed_sentences') %} id="published-wording-difference-{{ loop.index }}"{% endif %}>
+{% if section.get('changed_sentences') %}<p class="caption"><strong>Difference {{ loop.index }}</strong></p>{% endif %}
 {% if section.column is defined %}
 {% if change.start == change.end %}<p class="caption">Omission before the indicated text.</p>{% endif %}
 {% for place in change.locations %}<p class="caption">Original PDF page {{ place.page }} · Extracted characters <span class="mono">[{{ place.start }}, {{ place.end }})</span>. Word boxes are recorded in JSON.</p>{% endfor %}
 {% else %}
 <p class="caption">{% if change.start == change.end %}Omission at extracted character {{ change.start }}. Locations show the next retained character.{% else %}Extracted characters <span class="mono">[{{ change.start }}, {{ change.end }})</span>.{% endif %}</p>
-{% if wording.method == 'pymupdf' %}
-<p class="caption">Original PDF pages {{ change.locations | map(attribute='page') | unique | join(', ') }}. Word boxes are recorded in JSON.</p>
-{% else %}
-{% for place in change.locations %}
-<p class="caption">{% if wording.method == 'python-docx' %}Word paragraph {{ place.paragraph }} characters{% else %}Original text characters{% endif %}
-{% for span in place.ranges %}<span class="mono">[{{ span[0] }}, {{ span[1] }})</span>{{ ', ' if not loop.last else '.' }}{% endfor %}</p>
-{% endfor %}
-{% endif %}
+{{ published_wording_locations(change.locations, wording.method) }}
 {% endif %}
 <p class="caption">Earlier wording</p>
 <blockquote>{{ section.reference.text[change.archive_range[0]:change.archive_range[1]] or 'No counterpart in this part of the earlier source.' }}</blockquote>

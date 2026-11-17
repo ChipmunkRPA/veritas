@@ -213,15 +213,21 @@ def replay_wording(text, transcript, submitted_range, transcript_range):
             for a, b, c, d in _bounded_edits(alignment, first + WINDOW, stop - WINDOW)]
 
 
-def _context_ranges(doc, changes):
+def sentence_support(doc, changes):
     from app.detectors.text.pipeline import segment_within
 
+    if changes:
+        for unit in segment_within(doc):
+            linked = [i for i, (lo, hi) in enumerate(changes, start=1)
+                      if max(lo, unit.start) < min(hi, unit.end) or (lo == hi and unit.start < lo < unit.end)]
+            if linked:
+                yield unit, linked
+
+
+def _context_ranges(doc, changes):
     ranges = []
     previous = None
-    for unit in segment_within(doc):
-        if not any(max(lo, unit.start) < min(hi, unit.end) or (lo == hi and unit.start < lo < unit.end)
-                   for lo, hi in changes):
-            continue
+    for unit, _ in sentence_support(doc, changes):
         if previous is not None and previous.idx + 1 == unit.idx and previous.paragraph == unit.paragraph:
             ranges[-1][1] = unit.end
         else:

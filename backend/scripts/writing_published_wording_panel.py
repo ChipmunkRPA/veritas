@@ -94,7 +94,8 @@ def compare(archive, development, development_readings, fresh, fresh_readings, o
             document = {"coverage": {document_published_wording.KEY: record, document_passage_intervals.KEY: style},
                         "source": {"method": "plain", "chars": len(doc.text),
                                    document_published_wording.COMMITMENT: canonical_hash(record)}}
-            document_published_wording.verify_source(document, doc.text, doc.source_map, metadata, None)
+            document_published_wording.verify_source(document, doc.text, doc.source_map, metadata, None,
+                                                    paragraphs=doc.paragraphs)
             reference = record["reference"]["id"]
             comparison = document_gao_archive._context_ranges(doc, [(v["start"], v["end"]) for v in record["changes"]])
         prefix = panel._prefix(doc.text)

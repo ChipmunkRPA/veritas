@@ -294,6 +294,19 @@ function PublishedWording({ review }: { review: PublishedWordingReview }) {
   </section>
 }
 
+function WordingLocations({ locations, column }: {
+  locations: PublishedWordingSection['changes'][number]['locations']; column?: string
+}) {
+  if (column) return locations.map(place => 'page' in place && <p key={place.start} className="m-0 text-caption">
+    Original PDF page {place.page} · Extracted characters <span className="font-mono">[{place.start}, {place.end})</span>. Word boxes are recorded in JSON.
+  </p>)
+  const pages = [...new Set(locations.flatMap(place => 'page' in place ? [place.page] : []))]
+  return pages.length ? <p className="m-0 text-caption">Original PDF pages {pages.join(', ')}. Word boxes are recorded in JSON.</p>
+    : locations.map(place => 'ranges' in place && <p key={place.start} className="m-0 text-caption">
+      {place.paragraph ? `Word paragraph ${place.paragraph} characters` : 'Original text characters'} <span className="font-mono">{place.ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}</span>.
+    </p>)
+}
+
 function WordingSection({ section, matches }: {
   section: PublishedWordingSection | PublishedWordingColumn
   matches: PublishedWordingReview['published_style_matches']
@@ -302,6 +315,7 @@ function WordingSection({ section, matches }: {
   const transcript = Array.from(source.text)
   const earlier = ([start, end]: [number, number]) => transcript.slice(start, end).join('')
   const column = 'column' in section ? section.column : undefined
+  const sentences = section.changed_sentences ?? []
   return <div className="mt-3">
     {'column' in section && <h4 className="m-0 text-small font-medium">Original PDF page {section.page} · {section.column === 'both' ? 'Both columns, left to right' : `${section.column === 'left' ? 'Left' : 'Right'} column`}</h4>}
     <p className="mt-2 mb-0 text-small"><a className="underline" href={`https://www.gao.gov/products/${encodeURIComponent(source.id)}`}>U.S. GAO report {source.id}</a> · Published {source.published_date}</p>
@@ -313,27 +327,33 @@ function WordingSection({ section, matches }: {
         <blockquote className="my-2 border-l-2 border-border pl-3 whitespace-pre-line break-words">{earlier(match.archive_range)}</blockquote>
       </div>)}
     </>}
+    {!!sentences.length && <>
+      <h4 className="mt-4 mb-0 text-small font-medium">Sentences with wording differences</h4>
+      {sentences.map(row => <div key={row.sentence} className="mt-3 rounded-md border border-border p-3 text-small">
+        <h5 className="m-0 text-small font-medium">Sentence {row.sentence}</h5>
+        <blockquote className="my-2 border-l-2 border-border pl-3 whitespace-pre-line break-words">{row.text}</blockquote>
+        <WordingLocations locations={row.locations} />
+        <p className="mt-2 mb-0 flex flex-wrap gap-x-3 text-caption">
+          {row.differences.map(number => <a key={number} className="underline" href={`#published-wording-difference-${number}`}>Difference {number}</a>)}
+        </p>
+      </div>)}
+    </>}
     <h4 className="mt-3 mb-0 text-small font-medium">Wording differences</h4>
     {!section.changes.length && <p className="mt-2 mb-0 text-small">No bounded wording differences were recorded.</p>}
-    {section.changes.map(change => {
-      const pages = [...new Set(change.locations.flatMap(place => 'page' in place ? [place.page] : []))]
-      return <div key={`${change.start}-${change.end}-${change.archive_range[0]}`} className="mt-3 rounded-md border border-border p-3 text-small">
+    {section.changes.map((change, index) =>
+      <div key={`${change.start}-${change.end}-${change.archive_range[0]}`} id={sentences.length ? `published-wording-difference-${index + 1}` : undefined}
+        className="mt-3 scroll-mt-20 rounded-md border border-border p-3 text-small">
+        {!!sentences.length && <h5 className="m-0 mb-2 text-small font-medium">Difference {index + 1}</h5>}
         {!column && <p className="m-0 text-caption">{change.start === change.end
           ? `Omission at extracted character ${change.start}. Locations show the next retained character.`
           : <>Extracted characters <span className="font-mono">[{change.start}, {change.end})</span>.</>}</p>}
         {column && change.start === change.end && <p className="m-0 text-caption">Omission before the indicated text.</p>}
-        {column ? change.locations.map(place => 'page' in place && <p key={place.start} className="m-0 text-caption">
-          Original PDF page {place.page} · Extracted characters <span className="font-mono">[{place.start}, {place.end})</span>. Word boxes are recorded in JSON.
-        </p>) : pages.length ? <p className="m-0 text-caption">Original PDF pages {pages.join(', ')}. Word boxes are recorded in JSON.</p>
-          : change.locations.map(place => 'ranges' in place && <p key={place.start} className="m-0 text-caption">
-            {place.paragraph ? `Word paragraph ${place.paragraph} characters` : 'Original text characters'} <span className="font-mono">{place.ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}</span>.
-          </p>)}
+        <WordingLocations locations={change.locations} column={column} />
         <dl className="mt-2 mb-0 grid gap-2 sm:grid-cols-2">
           <div className="min-w-0"><dt className="font-medium">Earlier wording</dt><dd className="m-0 break-words whitespace-pre-line">{earlier(change.archive_range) || 'No counterpart in this part of the earlier source.'}</dd></div>
           <div className="min-w-0"><dt className="font-medium">Submitted wording</dt><dd className="m-0 break-words whitespace-pre-line">{change.submitted || 'Omitted at this position.'}</dd></div>
         </dl>
-      </div>
-    })}
+      </div>)}
   </div>
 }
 

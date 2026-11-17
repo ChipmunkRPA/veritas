@@ -60,6 +60,17 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Separate sentences with verified wording differences](writing-archive-sentences-2026-11-17.md)
+  increase correctly located ranges from 108 to 123 out of 150 on
+  48 previously unused report pairs, with zero untouched reports flagged.
+  The ordinary results, PDF and JSON show each sentence's original
+  location and link to the exact differences in the earlier transcript.
+
+- [Next-token entropy for short rewrites](writing-entropy-prominence-2026-11-17.md)
+  adds zero correct locations at the frozen setting across 204 labeled
+  rewrites. The nearby-sentence variant at its wider setting adds two
+  locations and nine ordinary flags. The method stays in evaluation.
+
 - [Local sound and mouth movement](video-mouth-and-sound-2026-11-17.md)
   add seven correct PCM locations and eight AAC locations across 58
   staged speech replacements per encoding. The stricter check adds

@@ -17,6 +17,7 @@ from app.evidence.document_scope import PUBLISHED_WORDING_KEY as KEY
 
 SCHEMA = "document-published-wording-review/1"
 PDF_COLUMNS_SCHEMA = "document-published-wording-review/2"
+SENTENCES_SCHEMA = "document-published-wording-review/3"
 TITLE = "Earlier published wording"
 SCOPE = ("This check compares the marked text with the cited U.S. Government Accountability Office highlight. "
          "Wording differences can result from ordinary editing, transcription or AI assistance. "
@@ -138,6 +139,15 @@ def _mapped_changes(text, changes, places_at):
     return rows
 
 
+def _sentence_rows(doc, changes, places_at):
+    from app.evidence.document_gao_archive import sentence_support
+
+    spans = [(change["start"], change["end"]) for change in changes]
+    return [{"sentence": unit.idx + 1, "start": unit.start, "end": unit.end,
+             "text": doc.text[unit.start:unit.end], "locations": places, "differences": ids}
+            for unit, ids in sentence_support(doc, spans) if (places := places_at(unit.start, unit.end))]
+
+
 def _match(result, reports):
     source = result["reference"]
     transcript = reports[source["id"]]["text"]
@@ -228,11 +238,13 @@ def capture(text, paragraphs, mapping, metadata, intervals, pack_hash, reports, 
         return _capture_columns(text, mapping, metadata, pack_hash, reports, index)
     doc = Document(text, paragraphs, metadata, mapping)
     result = document_gao_archive.compare(doc, metadata["original_sha256"], pack_hash, reports, index,
-                                          resolve_competition=True)
+                                          resolve_competition=True, include_sentence_context=False)
     if result["status"] != "reference_bound":
         return None
-    record = {"schema": SCHEMA, "archive_sha256": pack_hash, **_match(result, reports),
-              "changes": _mapped_changes(text, _edits(result), lambda a, b: _places(method, mapping, a, b)),
+    places_at = partial(_places, method, mapping)
+    changes = _mapped_changes(text, _edits(result), places_at)
+    record = {"schema": SENTENCES_SCHEMA, "archive_sha256": pack_hash, **_match(result, reports),
+              "changes": changes, "changed_sentences": _sentence_rows(doc, changes, places_at),
               "published_style_matches": [], "authorship_confidence_contribution": 0}
     record["published_style_matches"] = _exact_matches(text, record, intervals)
     return record
@@ -262,6 +274,26 @@ def _validate_change(row, start, end, earlier_start, earlier_end):
             or not isinstance(row["submitted"], str) or len(row["submitted"]) != row["end"] - row["start"]
             or not row["locations"]):
         raise ValueError("An earlier wording difference has an invalid position")
+
+
+def _validate_sentences(rows, changes, chars):
+    if not isinstance(rows, list):
+        raise ValueError("The changed sentences must record their source positions")
+    previous, boundary = 0, 0
+    for row in rows:
+        index, start, end = row["sentence"], row["start"], row["end"]
+        if (set(row) != {"sentence", "start", "end", "text", "locations", "differences"}
+                or type(index) is not int or index <= previous or start < boundary or not _bounded([start, end], chars)
+                or not isinstance(row["text"], str) or len(row["text"]) != end - start
+                or not isinstance(row["locations"], list) or not row["locations"]
+                or not isinstance(row["differences"], list) or not row["differences"]):
+            raise ValueError("An earlier wording sentence has an invalid source location")
+        expected = [i for i, change in enumerate(changes, start=1)
+                    if max(start, change["start"]) < min(end, change["end"])
+                    or (change["start"] == change["end"] and start < change["start"] < end)]
+        if row["differences"] != expected:
+            raise ValueError("A changed sentence links to a different wording difference")
+        previous, boundary = index, end
 
 
 def _validate_columns(record, source):
@@ -326,8 +358,12 @@ def validate(document, expected):
     if record.get("schema") == PDF_COLUMNS_SCHEMA:
         _validate_columns(record, source)
         return
-    if (record.get("schema") != SCHEMA or set(record) != {"schema", "archive_sha256", "reference", "submitted_range",
-            "archive_range", "changes", "published_style_matches", "authorship_confidence_contribution"}
+    schema = record.get("schema")
+    required = {"schema", "archive_sha256", "reference", "submitted_range", "archive_range", "changes",
+                "published_style_matches", "authorship_confidence_contribution"}
+    if schema == SENTENCES_SCHEMA:
+        required.add("changed_sentences")
+    if (schema not in {SCHEMA, SENTENCES_SCHEMA} or set(record) != required
             or not _bounded(record["submitted_range"], source["chars"])):
         raise ValueError("The published wording comparison differs from its recorded commitment or scope")
     _validate_reference(record["reference"], record["archive_range"])
@@ -345,6 +381,8 @@ def validate(document, expected):
         seen.add(pair)
     for row in record["changes"]:
         _validate_change(row, start, end, earlier_start, earlier_end)
+    if schema == SENTENCES_SCHEMA:
+        _validate_sentences(record["changed_sentences"], record["changes"], source["chars"])
 
 
 def _verify_columns(record, text, mapping, metadata, word_review):
@@ -365,7 +403,7 @@ def _verify_columns(record, text, mapping, metadata, word_review):
             raise ValueError("An earlier wording difference differs from the retained transcript or original locations")
 
 
-def verify_source(document, text, mapping, metadata, word_review):
+def verify_source(document, text, mapping, metadata, word_review, *, paragraphs=None):
     record = (document.get("coverage") or {}).get(KEY)
     if record is None:
         return
@@ -383,8 +421,17 @@ def verify_source(document, text, mapping, metadata, word_review):
         raise ValueError("The archived matches differ from the original wording")
     expected = document_gao_archive.replay_wording(text, record["reference"]["text"], record["submitted_range"],
                                                   record["archive_range"])
-    if _mapped_changes(text, expected, lambda a, b: _places(method, mapping, a, b)) != record["changes"]:
+    places_at = partial(_places, method, mapping)
+    if _mapped_changes(text, expected, places_at) != record["changes"]:
         raise ValueError("An earlier wording difference differs from the retained transcript or original locations")
+    if record["schema"] == SENTENCES_SCHEMA:
+        from app.detectors.text.extract import Document
+
+        if paragraphs is None:
+            raise ValueError("Original paragraph positions are required to check changed sentences")
+        doc = Document(text, paragraphs, metadata, mapping)
+        if _sentence_rows(doc, record["changes"], places_at) != record["changed_sentences"]:
+            raise ValueError("The changed sentences differ from their original text, links or locations")
 
 
 def display_intervals(intervals, wording):

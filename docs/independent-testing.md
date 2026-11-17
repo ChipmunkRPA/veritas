@@ -13,6 +13,16 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [archive sentence replay](writing-archive-sentences-2026-11-17.md#replay-locally)
+recounts 330 report deliveries and verifies the submitted positions against
+the original text and earlier transcript. Separate sentences preserve the
+exact word differences for matched sources.
+
+The [next-token entropy replay](writing-entropy-prominence-2026-11-17.md#independent-replay)
+identifies the frozen comparison, matched originals and held rewrite
+positions. It allows another reader to recount the coverage, false flags
+and missed passages using only standard-library Python.
+
 The [local sound and mouth replay](video-mouth-and-sound-2026-11-17.md#local-analysis-and-independent-replay)
 rebuilds 504 Lombard deliveries with independent input and parent byte
 checks. The separate GRID measurements test another capture setup.

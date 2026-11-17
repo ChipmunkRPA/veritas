@@ -576,7 +576,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if wording := document_published_wording.from_result(result):
         document["source"][document_published_wording.COMMITMENT] = canonical_hash(wording)
         document["coverage"][document_published_wording.KEY] = wording
-        document_published_wording.verify_source(document, text, mapping, decoded["meta"], decoded.get(document_tracked_changes.KEY))
+        document_published_wording.verify_source(document, text, mapping, decoded["meta"],
+                                                 decoded.get(document_tracked_changes.KEY), paragraphs=decoded.get("paragraphs"))
     if alternative_review := email_alternatives.result_review(result):
         document["coverage"][email_alternatives.KEY] = alternative_review
         email_alternatives.validate_set(document, canonical_hash(alternative_review))
@@ -771,7 +772,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             if document["source"].get(document_published_wording.COMMITMENT) != document_published_wording.result_commitment(result):
                 raise ValueError("Earlier wording differs from the published result")
             document_published_wording.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"],
-                                                     decoded.get(document_tracked_changes.KEY))
+                                                     decoded.get(document_tracked_changes.KEY), paragraphs=decoded.get("paragraphs"))
             if document["source"].get(document_chat_markers.COMMITMENT) != document_chat_markers.from_result(result):
                 raise ValueError("Chat-format marker evidence differs from the published result")
             document_chat_markers.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])

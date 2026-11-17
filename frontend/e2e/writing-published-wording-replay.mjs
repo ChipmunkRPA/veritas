@@ -22,6 +22,20 @@ try {
     await section.getByRole('link', { name: `U.S. GAO report ${sample.reference}` }).first().waitFor()
     assert.equal(await section.getByText(`Published ${sample.date}`, { exact: false }).count(), sample.sections ?? 1)
     assert.equal(await section.getByText('Submitted wording', { exact: true }).count(), sample.changes)
+    for (const sentence of sample.sentences ?? []) {
+      await section.getByRole('heading', { name: `Sentence ${sentence.sentence}`, exact: true }).waitFor()
+      for (const number of sentence.differences) {
+        const target = `#published-wording-difference-${number}`
+        assert.ok(await section.getByRole('link', { name: `Difference ${number}`, exact: true }).count())
+        await section.locator(target).getByText('Submitted wording', { exact: true }).waitFor()
+      }
+    }
+    if (sample.sentences?.length) {
+      const link = section.getByRole('link', { name: `Difference ${sample.sentences[0].differences[0]}`, exact: true }).first()
+      const href = await link.getAttribute('href')
+      await link.click()
+      await page.waitForURL(url => url.hash === href)
+    }
     if (sample.sections) {
       assert.equal(await section.getByRole('heading', { name: /^Original PDF page / }).count(), sample.sections)
       for (const [sourcePage, lo, hi] of sample.locations) {

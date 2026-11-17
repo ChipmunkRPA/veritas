@@ -249,6 +249,16 @@ retiming with an observed event shift. Neither paper's weights or data were used
 
 ## Passages: genuine web controls and contextual transfer
 
+The October entropy study uses next-token uncertainty peaks for
+whole-text classification. We tested the author's peak-prominence
+calculation on one-to-three-sentence ranges with length and source-group
+calibration. The wider nearby-sentence comparison adds two locations and
+nine ordinary alerts across 88 held pairs. The source-bound comparison
+of already measured word changes gains 15 separate sentence locations on
+another 48 previously unused report pairs. [Entropy paper](https://arxiv.org/html/2610.33767v1#S4)
+· [Local entropy comparison](writing-entropy-prominence-2026-11-17.md)
+· [Earlier wording sentence comparison](writing-archive-sentences-2026-11-17.md)
+
 October's [PAWN++ web evaluation](https://aclanthology.org/2026.wac-1.25/) studies
 a compact supervised detector using signals from two frozen language models
 and evaluates transfer beyond curated text. This supports testing real web

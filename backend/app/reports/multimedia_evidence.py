@@ -665,7 +665,8 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_character_review.verify_source(document, text, mapping, decoded["meta"], sentences=decoded["sentences"])
         document_passage_intervals.verify_source(document, text, mapping, decoded["sentences"], metadata=decoded["meta"],
                                                  word_review=decoded.get(document_tracked_changes.KEY))
-        document_published_wording.verify_source(document, text, mapping, decoded["meta"], decoded.get(document_tracked_changes.KEY))
+        document_published_wording.verify_source(document, text, mapping, decoded["meta"],
+                                                 decoded.get(document_tracked_changes.KEY), paragraphs=decoded.get("paragraphs"))
         document_chat_markers.verify_source(document, text, mapping, decoded["meta"])
         document_native_locations.validate(document)
         document_scope.validate_card_selection(document, mapping)

@@ -507,20 +507,20 @@ type PercentageSource = { kind: 'pdf'; page: number; block: number; bbox: number
   | { kind: 'docx'; paragraph_index: number; body_path: [number]; body_paragraph: number }
   | { kind: 'email'; mime_part: string; source_start: number; source_end: number }
 type PublishedWordingRange = { start: number; end: number; archive_range: [number, number] }
+type PublishedWordingLocation = { start: number; end: number; page: number; boxes: [number, number, number, number][] }
+  | { start: number; end: number; paragraph?: number; ranges: [number, number][] }
 export interface PublishedWordingSection {
   reference: { id: string; published_date: string; version_url: string; source_record_sha256: string; transcript_sha256: string; text: string };
   submitted_range: [number, number]; archive_range: [number, number];
-  changes: (PublishedWordingRange & { submitted: string; locations: (
-    { start: number; end: number; page: number; boxes: [number, number, number, number][] } |
-    { start: number; end: number; paragraph?: number; ranges: [number, number][] }
-  )[] })[];
+  changes: (PublishedWordingRange & { submitted: string; locations: PublishedWordingLocation[] })[];
+  changed_sentences?: { sentence: number; start: number; end: number; text: string; locations: PublishedWordingLocation[]; differences: number[] }[];
 }
 export type PublishedWordingColumn = PublishedWordingSection & {
   page: number; column: 'left' | 'right' | 'both'; source_blocks: [number, number][];
 }
 export type PublishedWordingReview = {
   archive_sha256: string; authorship_confidence_contribution: 0; published_style_matches: PublishedWordingRange[];
-} & (({ schema: 'document-published-wording-review/1' } & PublishedWordingSection)
+} & (({ schema: 'document-published-wording-review/1' | 'document-published-wording-review/3' } & PublishedWordingSection)
   | { schema: 'document-published-wording-review/2'; sections: PublishedWordingColumn[] })
 export interface DocumentEvidenceSet extends SetBase {
   schema: 'chipmunk.document-evidence/1'; packets: DocumentEvidencePacket[]; omitted_windows: number

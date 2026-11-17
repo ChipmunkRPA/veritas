@@ -1,0 +1,134 @@
+{
+  "browser": {
+    "checked": [
+      "text-mixed",
+      "word-mixed",
+      "pdf-mixed",
+      "text-ordinary"
+    ],
+    "page_errors": 0
+  },
+  "cases": {
+    "pdf-mixed": {
+      "changes": 6,
+      "file_sha256": "d61d8679f84ceaba22aeb89e82b014b4a3718f0b6e4fbac4422f06aaa34500b3",
+      "pdf_sha256": "d3b2d6e59c3d96b96aa757fa91ac4a91ba4a196e242d2133137c33e185baaca9",
+      "published_style_matches": 0,
+      "sentences": [
+        {
+          "differences": [
+            1,
+            2
+          ],
+          "end": 1550,
+          "sentence": 7,
+          "start": 1094
+        },
+        {
+          "differences": [
+            3
+          ],
+          "end": 3727,
+          "sentence": 17,
+          "start": 3570
+        },
+        {
+          "differences": [
+            4,
+            5,
+            6
+          ],
+          "end": 3934,
+          "sentence": 18,
+          "start": 3728
+        }
+      ],
+      "source": "GAO-15-149"
+    },
+    "text-mixed": {
+      "changes": 6,
+      "file_sha256": "d618f07fb87746b8b3574948296d8bb91da66952bd695953e2d6f5bffbc7d2e9",
+      "pdf_sha256": "b40864302916ee7a478aa2080453c68881280c4eb28a884d3d02f61d972d778e",
+      "published_style_matches": 0,
+      "sentences": [
+        {
+          "differences": [
+            1,
+            2
+          ],
+          "end": 1550,
+          "sentence": 7,
+          "start": 1094
+        },
+        {
+          "differences": [
+            3
+          ],
+          "end": 3727,
+          "sentence": 17,
+          "start": 3570
+        },
+        {
+          "differences": [
+            4,
+            5,
+            6
+          ],
+          "end": 3934,
+          "sentence": 18,
+          "start": 3728
+        }
+      ],
+      "source": "GAO-15-149"
+    },
+    "text-ordinary": {
+      "changes": 0,
+      "file_sha256": "da493f9fb5bdf665143e7fb091e135d0c69a74a9330a29292c304894e1a49169",
+      "pdf_sha256": "17a1609cbf18cea5358ecb75d0c74120412e1c47e346fc06ce2f14cfec37734c",
+      "published_style_matches": 1,
+      "sentences": [],
+      "source": "GAO-15-149"
+    },
+    "word-mixed": {
+      "changes": 6,
+      "file_sha256": "07aa4e021b67e347a58fedc3bff386c702c046d462db1d81efc08b79a7bde1e2",
+      "pdf_sha256": "49266c8c57f3b6710a11917a377cbe25172f9a98efe09a1012aeebaa99cf00e7",
+      "published_style_matches": 0,
+      "sentences": [
+        {
+          "differences": [
+            1,
+            2
+          ],
+          "end": 1550,
+          "sentence": 7,
+          "start": 1094
+        },
+        {
+          "differences": [
+            3
+          ],
+          "end": 3727,
+          "sentence": 17,
+          "start": 3570
+        },
+        {
+          "differences": [
+            4,
+            5,
+            6
+          ],
+          "end": 3934,
+          "sentence": 18,
+          "start": 3728
+        }
+      ],
+      "source": "GAO-15-149"
+    }
+  },
+  "signed_packages_verified_with_original": 4,
+  "simulated_prepaid_analyses": 5,
+  "source_plan_sha256": "ff371d663b872c0de86af9b51c54ff5113a0232b8d42944feb0b883aed177e54",
+  "unchanged_overall_assessment": true,
+  "unpaid_jobs": 0
+}

@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [speech separation comparison](audio-overlap-reconstruction-2026-11-16.md#replay)
+recounts both detector calibrations and 186 test deliveries. Its export
+creates the sample-clock manifest, truth and method responses accepted by
+the independent event counter. It covers ordinary processing, isolated
+backgrounds and matched clean foreground diagnostics.
+
 The [cross-quality JPEG comparison](image-cross-quality-2026-11-16.md#exact-input-and-overlap-replay)
 recounts 720 held deliveries and supplies a public recipe to rebuild
 288 exact JPEGs at two quality settings. The separate native readback

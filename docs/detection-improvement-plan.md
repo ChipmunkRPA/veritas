@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Speech edit checks after voice separation](audio-overlap-reconstruction-2026-11-16.md)
+  compared direct voice estimates with complementary masks on the original
+  spectrum. Under 10 dB louder competing speech, the masked fallback found
+  13 of 73 edits versus 11, with 20 ordinary and five background-only flags
+  versus ten ordinary and zero background-only flags. Even exact clean
+  reference tracks yielded zero locations on 42 same-utterance edit
+  events at the frozen six-second point. Both approaches stay in evaluation.
+
 - [Repeat-supported JPEG90 regions](image-cross-quality-2026-11-16.md#compare-the-existing-regional-check-on-a-jpeg90-upload)
   find 11 of 48 fresh edit deliveries with zero alerts on 96 ordinary
   files, up from zero useful regions on those same JPEG90 bytes. All

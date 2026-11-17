@@ -6,6 +6,10 @@ waveform, the original excerpt, and native frames and mouth crops from
 before, during and after the interval. The finding has zero weight in the AI
 assessment. Muting, a recording dropout or quiet movement can produce it.
 
+The later [shot-level extension](video-sound-dropouts-across-cuts-2026-11-17.md)
+adds support for eligible videos with scene cuts. The measurements below
+describe the original single-shot evaluation.
+
 ## What the application checks
 
 Set `VERITAS_VIDEO_LIP_SILENT_MOUTH_REVIEW=true` on a development backend

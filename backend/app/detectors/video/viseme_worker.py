@@ -40,8 +40,7 @@ def aperture_reader(checkpoint, *, articulation=False):
     return measure, device
 
 
-def motion_agreement(directory, patches, valid, table, pcm):
-    import numpy as np
+def _motion_models(directory):
     from safetensors.torch import load
 
     from app.detectors.video import av_local_agreement
@@ -53,15 +52,75 @@ def motion_agreement(directory, patches, valid, table, pcm):
             raise ValueError("Local motion and speech weights differ from the tested assets")
         return load(value)
 
-    visual = av_local_agreement.picture_windows(
-        av_local_agreement.load_picture(state("vision")), patches, valid,
-    )
     model = av_local_agreement.Agreement()
     model.load_state_dict(state("shared"), strict=True)
+    return av_local_agreement.load_picture(state("vision")), model.eval()
+
+
+def _compare_motion(models, patches, valid, times, pcm):
+    from app.detectors.video import av_local_agreement
+    from app.evidence import video_lip_agreement
+
+    if valid.sum() < 24:
+        return "coverage", None
+    eyes, reading = models
+    visual = av_local_agreement.picture_windows(eyes, patches, valid)
+    evidence = av_local_agreement.similarities(reading, visual, av_local_agreement.sound(pcm), times)
+    status, candidate = av_local_agreement.localize(times, evidence, len(pcm))
+    return status, video_lip_agreement.encode(candidate)
+
+
+def motion_agreement(directory, patches, valid, table, pcm):
+    import numpy as np
+
     times = np.asarray([round(pts * table.tb * viseme_timing.RATE) for pts in table.pts])
-    evidence = av_local_agreement.similarities(model.eval(), visual, av_local_agreement.sound(pcm), times)
-    _, candidate = av_local_agreement.localize(times, evidence, len(pcm))
-    return video_lip_agreement.encode(candidate)
+    return _compare_motion(_motion_models(directory), patches, valid, times, pcm)[1]
+
+
+def capture_mouth_frames(video, table, geometry, *, motion, articulation=False, shots=None):
+    import numpy as np
+
+    from app.detectors.video.decode import decode_stream
+    from app.evidence import video_lip_agreement
+    from app.evidence.video_reference_timing import _landmarker, _mesh, available
+
+    if not available(geometry):
+        raise ValueError("The verified facial geometry assets are unavailable")
+    measured = []
+    eligible = np.ones(len(table), dtype=bool)
+    if shots:
+        eligible[:] = False
+        for first, stop in shots:
+            if video_lip_agreement.eligible_shot(first, stop):
+                eligible[first:stop] = True
+    patches, valid = None, None
+    if motion:
+        from app.detectors.video import viseme_patch
+
+        patches = np.zeros((len(table), viseme_patch.HEIGHT, viseme_patch.WIDTH), dtype=np.uint8)
+        valid = np.zeros(len(table), dtype=bool)
+    pictures = decode_stream(video, table, max_side=None, timeout_s=20)
+    with _landmarker(geometry) as (mp, task), closing(pictures) as frames:
+        for frame in frames:
+            if frame.index != len(measured) or not frame.pts_verified or frame.pts != table.pts[frame.index]:
+                raise ValueError("A decoded source picture differs from its timestamp")
+            record = {"index": frame.index, "pts": frame.pts, "gap_units": None}
+            observed = _mesh(task, mp, frame.rgb, include_landmarks=motion) if eligible[frame.index] else None
+            if observed:
+                features, box = observed[:2]
+                x, y, right, bottom = box
+                record.update(gap_units=round(float(median(features[:3])) * viseme_timing.SCORE_UNITS), mouth_box=box,
+                              rgb_sha256=hashlib.sha256(frame.rgb.tobytes()).hexdigest(),
+                              mouth_crop_sha256=hashlib.sha256(frame.rgb[y:bottom, x:right].tobytes()).hexdigest())
+                if articulation:
+                    record["shape"] = [round(float(value) * viseme_timing.SCORE_UNITS) for value in features]
+                if motion and (patch := viseme_patch.crop(frame.rgb, observed[2])) is not None:
+                    patches[frame.index] = patch
+                    valid[frame.index] = True
+            measured.append(record)
+    if len(measured) != len(table):
+        raise ValueError("The native picture scan is incomplete")
+    return measured, patches, valid
 
 
 def observe(request):
@@ -71,43 +130,21 @@ def observe(request):
     import numpy as np
 
     from app.detectors.audio.decode import read_wav
-    from app.detectors.video.decode import FrameTable, decode_stream
-    from app.evidence.video_reference_timing import _landmarker, _mesh, available
+    from app.detectors.video.decode import FrameTable
+    from app.evidence import video_lip_agreement
 
     table = FrameTable.from_json(request["frames"])
-    geometry = Path(request["geometry"])
-    if not available(geometry):
-        raise ValueError("The verified facial geometry assets are unavailable")
     pcm = read_wav(Path(request["wav"]).read_bytes())
     if len(pcm) != request["samples"]:
         raise ValueError("The frozen soundtrack length differs")
-    measured = []
+    shots = request.get("shot_ranges")
     models = request.get("motion_models") if len(table) >= 34 and table.pts[0] == 0 else None
-    if models:
-        from app.detectors.video import viseme_patch
-
-        patches = np.zeros((len(table), viseme_patch.HEIGHT, viseme_patch.WIDTH), dtype=np.uint8)
-        valid = np.zeros(len(table), dtype=bool)
-    pictures = decode_stream(Path(request["video"]), table, max_side=None, timeout_s=20)
-    with _landmarker(geometry) as (mp, task), closing(pictures) as frames:
-        for frame in frames:
-            if frame.index != len(measured) or not frame.pts_verified or frame.pts != table.pts[frame.index]:
-                raise ValueError("A decoded source picture differs from its timestamp")
-            record = {"index": frame.index, "pts": frame.pts, "gap_units": None}
-            if observed := _mesh(task, mp, frame.rgb, include_landmarks=bool(models)):
-                features, box = observed[:2]
-                x, y, right, bottom = box
-                record.update(gap_units=round(float(median(features[:3])) * viseme_timing.SCORE_UNITS), mouth_box=box,
-                              rgb_sha256=hashlib.sha256(frame.rgb.tobytes()).hexdigest(),
-                              mouth_crop_sha256=hashlib.sha256(frame.rgb[y:bottom, x:right].tobytes()).hexdigest())
-                if request.get("articulation"):
-                    record["shape"] = [round(float(value) * viseme_timing.SCORE_UNITS) for value in features]
-                if models and (patch := viseme_patch.crop(frame.rgb, observed[2])) is not None:
-                    patches[frame.index] = patch
-                    valid[frame.index] = True
-            measured.append(record)
-    if len(measured) != len(table):
-        raise ValueError("The native picture scan is incomplete")
+    measured, patches, valid = capture_mouth_frames(
+        Path(request["video"]), table, Path(request["geometry"]), motion=bool(models),
+        articulation=bool(request.get("articulation")), shots=shots,
+    )
+    if shots:
+        return {"frames": measured, "phones": []}
     if sum(row["gap_units"] is not None for row in measured) < 20:
         for row in measured:
             row.pop("shape", None)
@@ -116,8 +153,6 @@ def observe(request):
     # A missing or incompatible optional local model leaves the ordinary timing check available.
     extra = {}
     if models and valid.sum() >= 24:
-        from app.evidence import video_lip_agreement
-
         try:
             if candidate := motion_agreement(Path(models), patches, valid, table, values):
                 extra[video_lip_agreement.KEY] = candidate

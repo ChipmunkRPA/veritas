@@ -24,7 +24,7 @@ def nested(client, analysis):
     return evidence, exported
 
 
-def proof_files(client, analysis, path, output, evidence, expected):
+def proof_files(client, analysis, path, output, evidence, expected, *, shots=False):
     import pymupdf
 
     from app.evidence import video_viseme_binding as binding
@@ -32,7 +32,9 @@ def proof_files(client, analysis, path, output, evidence, expected):
     from scripts.verify_multimedia_exports import pixels, scan, sha
 
     review = evidence[binding.KEY]
-    assert review["status"] == "matched" and review["schema"] == binding.SCHEMA_WITH_SILENCE
+    if shots:
+        [(_, review)] = list(binding.exhibits(review))
+    assert review["status"] == "matched" and review["schema"] == (binding.SCHEMA_WITH_SHOTS if shots else binding.SCHEMA_WITH_SILENCE)
     assert review["measurement"] == expected["measurements"] and review["witness"]["picture_frames"] == expected["frames"]
     [item] = [entry for entry in evidence["packets"] if entry["id"] == binding.PACKET_ID]
     assert item.get("title") == TITLE and item["affects_overall_confidence"] is False
@@ -50,6 +52,10 @@ def proof_files(client, analysis, path, output, evidence, expected):
         assert TITLE in text and all(f"{role} near-silent range" in text for role in ("Before", "During", "After"))
         lo, hi = (value / 16000 for value in review["witness"]["audio_source_pts"])
         assert f"near-silent from {lo:.3f} to {hi:.3f} s" in text
+        if shots:
+            for shot in review["shot_coverage"]:
+                start, stop = (samples / 16000 for samples in shot["audio_samples"])
+                assert f"{start:.3f}–{stop:.3f} s. {shot['observation']}." in text
         embedded = {pixels(document.extract_image(ref)["image"])
                     for ref in {image[0] for page in document for image in page.get_images(full=True)}}
         assert {pixels(data) for role, data in assets.items() if role != binding.CLIP} <= embedded

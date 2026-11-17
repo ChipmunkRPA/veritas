@@ -403,8 +403,9 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             sound = document["audio"]["source"]
             pcm = read_wav(_bytes(sound["wav_sha256"], store))
             try:
-                expected = audio_assets(pcm, sound, document[video_viseme_binding.KEY])
-            except ValueError as error:
+                review = dict(video_viseme_binding.exhibits(document[video_viseme_binding.KEY]))[packet["id"]]
+                expected = audio_assets(pcm, sound, review)
+            except (KeyError, ValueError) as error:
                 raise ObjectIntegrityError("Lip timing audio differs from the frozen soundtrack") from error
             if any(assets[packet["artifacts"][role]["sha256"]] != data for role, data in expected.items()):
                 raise ObjectIntegrityError("Lip timing audio or waveform differs from the frozen soundtrack")

@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Brief sound dropouts in videos with cuts](video-sound-dropouts-across-cuts-2026-11-17.md)
+  adds 24 correct late-shot locations out of 36 staged edits per encoding,
+  with zero flags on 54 matched controls per encoding. The app lists covered
+  shots and links each finding to original mouth frames and a waveform.
+  A separate word-replacement comparison missed every new edit at the frozen
+  montage points and stays in evaluation.
+
 - [Separate sentences with verified wording differences](writing-archive-sentences-2026-11-17.md)
   increase correctly located ranges from 108 to 123 out of 150 on
   48 previously unused report pairs, with zero untouched reports flagged.

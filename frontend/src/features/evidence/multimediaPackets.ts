@@ -72,7 +72,10 @@ export interface VideoEvidencePacket extends PacketBase {
 type PictureSequenceSpan = { start_frame_index: number; end_frame_index: number; start_stream_s: number; end_stream_s: number }
 export interface VideoEvidenceSet extends SetBase {
   schema: 'chipmunk.video-evidence/1'; packets: VideoEvidencePacket[]; omitted_candidates: number
-  lip_timing_review?: { schema?: string; status: string; observation: string; affects_overall_confidence: false }
+  lip_timing_review?: {
+    schema?: string; status: string; observation: string; affects_overall_confidence: false
+    shot_coverage?: { frames: [number, number]; audio_samples: [number, number]; observation: string; exhibit: string | null }[]
+  }
   source: { sha256: string; time_base?: string; width?: number; height?: number; timeline_origin_s?: number | null }
   picture_hold?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number; frame_limit: number;
     last_frame_index: number | null; last_stream_time_s: number | null; last_pts: number | null; time_base: string;

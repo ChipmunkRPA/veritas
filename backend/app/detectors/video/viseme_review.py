@@ -46,7 +46,22 @@ def sound_levels(pcm, presented):
     return np.column_stack((np.abs(blocks).max(axis=1), (blocks.astype(np.int64)**2).sum(axis=1))).tolist()
 
 
-def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None):
+def supported_shots(table, mapping, shots):
+    if (table is None or not mapping or not shots or table.truncated or table.interpolated or table.rotation
+            or not 320 <= table.width <= 1280 or not 240 <= table.height <= 720 or mapping.get("audio_stream_indices")):
+        return False
+    limit = agreement.MAX_MULTISHOT_SAMPLES
+    origin = binding.audio_origin(mapping, max_samples=limit)
+    if agreement.carrier(mapping, origin=origin, stereo_scope=None) is None:
+        return False
+    try:
+        agreement.shot_audio_ranges(table.pts, table.time_base, binding.presented_samples(mapping, max_samples=limit), shots)
+    except (TypeError, ValueError):
+        return False
+    return any(agreement.eligible_shot(start, stop) for start, stop in shots)
+
+
+def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None, shot_frames=None):
     table = frame_store.table if frame_store is not None else None
     if audio_input is None:
         return binding.skipped("unsupported")
@@ -55,36 +70,40 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None):
         stereo_scope = None
     elif stereo_scope is None or binding.audio_origin(mapping, stereo_scope) is None:
         return binding.skipped("stereo_unresolved")
-    if not supported(table, mapping, shots, stereo_scope):
+    agreement_models = settings.video_lip_motion_sound_models
+    multishot = bool(settings.video_lip_silent_mouth_review and stereo_scope is None and table is not None
+                     and shot_frames == len(table) and supported_shots(table, mapping, shots))
+    if not multishot and not supported(table, mapping, shots, stereo_scope):
         return binding.skipped("unsupported")
     from app.detectors.audio.phone_events import MODEL_BLOBS
 
     model = settings.video_lip_timing_model_dir
     geometry = settings.video_lip_timing_face_asset
     runtime = settings.video_lip_timing_runtime
-    if (not model or not all((model / name).is_file() for name in (*MODEL_BLOBS, "pytorch_model.bin"))
-            or not geometry or not geometry.is_file() or (runtime and not runtime.is_dir())):
+    if (not geometry or not geometry.is_file() or (runtime and not runtime.is_dir())
+            or (not multishot and (not model or not all((model / name).is_file() for name in (*MODEL_BLOBS, "pytorch_model.bin"))))):
         return binding.skipped("assets")
     remaining = ctx.deadline.remaining()
     budget = TIME_BUDGET if remaining is None else min(TIME_BUDGET, remaining - 8.)
     if budget < 12.:
         return binding.skipped("runtime")
     source_rate = mapping["source_sample_rate"]
+    limit = agreement.MAX_MULTISHOT_SAMPLES if multishot else 64_000
     agreement_profile = agreement.carrier(
-        mapping, origin=binding.audio_origin(mapping, stereo_scope), stereo_scope=stereo_scope,
+        mapping, origin=binding.audio_origin(mapping, stereo_scope, max_samples=limit), stereo_scope=stereo_scope,
     )
-    agreement_models = settings.video_lip_motion_sound_models
-    apply_articulation = settings.video_lip_articulation_review and (
+    apply_articulation = not multishot and settings.video_lip_articulation_review and (
         source_rate == 16_000 or source_rate == 48_000 and settings.video_lip_aac48_articulation_review
     )
     request = {"runtime": str(runtime.resolve()) if runtime else None, "geometry": str(geometry.resolve()),
-               "checkpoint": str(model.resolve()), "frames": table.to_json(), "video": str(frame_store.path.resolve()),
+               "checkpoint": str(model.resolve()) if model else None, "frames": table.to_json(), "video": str(frame_store.path.resolve()),
                "wav": str(ctx.store.path_for(audio_input["wav_sha256"]).resolve()), "samples": mapping["samples"],
-               "presented_samples": binding.presented_samples(mapping),
+               "presented_samples": binding.presented_samples(mapping, max_samples=limit),
                "ranked": settings.video_lip_timing_ranked and source_rate == 16_000,
                "articulation": apply_articulation,
+               "shot_ranges": shots if multishot else None,
                "motion_models": str(agreement_models.resolve())
-               if agreement_profile and agreement_models and not mapping.get("audio_stream_indices") else None}
+               if not multishot and agreement_profile and agreement_models and not mapping.get("audio_stream_indices") else None}
     env = {"PATH": os.environ.get("PATH", os.defpath), "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1",
            "HF_HUB_DISABLE_TELEMETRY": "1", "PYTHONPATH": str(Path(__file__).resolve().parents[3]),
            "OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "VECLIB_MAXIMUM_THREADS": "1"}
@@ -97,10 +116,12 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None):
 
             pcm = read_wav(ctx.store.read_bytes(audio_input["wav_sha256"]))
             raw["sound_levels"] = sound_levels(pcm, request["presented_samples"])
+            if multishot:
+                raw[silent.SHOT_KEY] = shots
         measured = binding.measured(raw, timestamps=table.pts, time_base=table.time_base,
                                     source={"width": table.width, "height": table.height}, mapping=mapping, stereo_scope=stereo_scope)
-        if witness := measured["witness"]:
-            indices = list(witness["picture_frames"].values())
+        indices = sorted({i for _, exhibit in binding.exhibits(measured) for i in exhibit["witness"]["picture_frames"].values()})
+        if indices:
             frames = dict(frame_store.iter_many(indices, timeout_s=4.))
             if any(i not in frames or not frame_store.native_pts_verified(i)
                    or hashlib.sha256(frames[i].tobytes()).hexdigest() != measured["inputs"]["frames"][i]["rgb_sha256"]
@@ -115,8 +136,9 @@ def audio_assets(pcm, mapping, record):
     from app.detectors.audio.decode import wav_bytes
     from app.evidence.audio_packets import _chart
 
-    origin = binding.audio_origin(mapping, record.get("stereo_scope"))
-    presented = binding.presented_samples(mapping)
+    limit = binding.sample_limit(record)
+    origin = binding.audio_origin(mapping, record.get("stereo_scope"), max_samples=limit)
+    presented = binding.presented_samples(mapping, max_samples=limit)
     start, end = record["measurement"]["span"]
     if (origin is None or len(pcm) != mapping["samples"] or mapping["pcm_sha256"] != record["pcm_sha256"]
             or presented != record["inputs"]["samples"] or not 0 <= start < end <= presented

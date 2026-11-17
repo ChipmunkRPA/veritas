@@ -270,8 +270,13 @@
 {% endif %}
 {% if evidence.get('lip_timing_review') %}
 {% set review = evidence.lip_timing_review %}
-<h3>{% if review.schema in ['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4', 'chipmunk.video-lip-timing/5', 'chipmunk.video-lip-timing/6'] %}Speech and mouth comparison{% else %}Speech and mouth timing trial{% endif %}</h3>
-<p class="caption">{{ review.observation }}{% if review.status == 'matched' %} See <a href="#multimedia-evidence-VLT01">VLT01</a> for the original frames and waveform.{% endif %}</p>
+<h3>{% if review.schema in ['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4', 'chipmunk.video-lip-timing/5', 'chipmunk.video-lip-timing/6', 'chipmunk.video-lip-timing/7'] %}Speech and mouth comparison{% else %}Speech and mouth timing trial{% endif %}</h3>
+<p class="caption">{{ review.observation }}{% if review.status == 'matched' and not review.get('shot_coverage') %} See <a href="#multimedia-evidence-VLT01">VLT01</a> for the original frames and waveform.{% endif %}</p>
+{% if review.get('shot_coverage') %}
+{% for shot in review.shot_coverage %}
+<p class="caption">{{ '%.3f' | format(shot.audio_samples[0] / 16000) }}–{{ '%.3f' | format(shot.audio_samples[1] / 16000) }} s. {{ shot.observation }}.{% if shot.exhibit %} See <a href="#multimedia-evidence-{{ shot.exhibit }}">{{ shot.exhibit }}</a> for the original frames and waveform.{% endif %}</p>
+{% endfor %}
+{% endif %}
 {% endif %}
 {% set presented_scan = evidence.get('two_second_review') %}
 {% set scan = presented_scan or (evidence.get('long_voice_review') or {}).get('two_second_review') %}

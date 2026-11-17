@@ -21,6 +21,7 @@ SCHEMA_WITH_ARTICULATION = "chipmunk.video-lip-timing/3"
 SCHEMA_WITH_STEREO = "chipmunk.video-lip-timing/4"
 SCHEMA_WITH_SILENCE = "chipmunk.video-lip-timing/5"
 SCHEMA_WITH_MOTION_SOUND = "chipmunk.video-lip-timing/6"
+SCHEMA_WITH_SHOTS = "chipmunk.video-lip-timing/7"
 PACKET_ID = "VLT01"
 CLIP, WAVEFORM = "lip_timing_audio", "lip_timing_waveform"
 REFERENCE = {"closure": {"median": .000578}, "rounded": {"median": .3973106}, "spread": {"median": .9265317}}
@@ -68,7 +69,7 @@ def skipped(reason):
     return {"schema": SCHEMA, "status": reason, "observation": STATUS[reason], "affects_overall_confidence": False}
 
 
-def presented_samples(mapping):
+def presented_samples(mapping, *, max_samples=64_000):
     """Keep AAC padding outside the timing comparison and its evidence."""
     samples = mapping.get("samples")
     if type(samples) is not int:
@@ -88,11 +89,11 @@ def presented_samples(mapping):
         samples = extent
     elif rate != timing.RATE:
         return None
-    return samples if 20_000 <= samples <= 64_000 else None
+    return samples if 20_000 <= samples <= max_samples else None
 
 
-def audio_origin(mapping, stereo_scope=None):
-    extent = presented_samples(mapping)
+def audio_origin(mapping, stereo_scope=None, *, max_samples=64_000):
+    extent = presented_samples(mapping, max_samples=max_samples)
     if mapping.get("timeline_time_base") != "1/16000" or extent is None:
         return None
     if stereo_scope is None and mapping.get("source_channels") != 1:
@@ -151,8 +152,62 @@ def _validate_phones(events, samples, labels):
         last = at
 
 
+def sample_limit(record):
+    return agreement.MAX_MULTISHOT_SAMPLES if record.get("schema") == SCHEMA_WITH_SHOTS else 64_000
+
+
+def _measured_shots(raw, inputs, timestamps, time_base, mapping, origin, stereo_scope):
+    source = agreement.carrier(mapping, origin=origin, stereo_scope=stereo_scope)
+    if source is None or mapping.get("audio_stream_indices") or inputs["phones"]:
+        raise ValueError("The shot review requires one supported soundtrack")
+    ranges, levels = (raw[key] for key in (silent.SHOT_KEY, "sound_levels"))
+    samples, frames = inputs["samples"], inputs["frames"]
+    times = agreement.shot_audio_ranges(timestamps, time_base, samples, ranges)
+    # Validate the full measured sound record, even if every shot lacks a visible mouth.
+    list(silent.quiet_ranges(levels, samples))
+    coverage, findings, compared = [], [], 0
+    for (start, stop), (lo, hi) in zip(ranges, times, strict=True):
+        visible = frames[start:stop]
+        packet_id = None
+        if not agreement.eligible_shot(start, stop):
+            state, reason = "outside_scope", "Shot length outside the checked range"
+        elif sum(row["gap_units"] is not None for row in visible) < 20:
+            state, reason = "coverage", "Insufficient views of mouth movement"
+        else:
+            compared += 1
+            state, reason = "no_match", "No qualifying near-silent interval"
+            if match := silent.record(levels, visible, samples, origin, shot=(lo, hi)):
+                measurement, witness = match
+                packet_id = f"VLT{len(findings) + 1:02d}"
+                findings.append({"id": packet_id, "measurement": measurement, "witness": witness})
+                state, reason = "matched", "Mouth movement during a near-silent interval"
+        coverage.append({"frames": [start, stop], "audio_samples": [lo, hi], "status": state,
+                         "observation": reason, "exhibit": packet_id})
+    count = len(coverage)
+    message = (f"Checked {compared} of {count} detected shots for near-silence while the mouth moved. "
+               + (f"Found {len(findings)} qualifying {'interval' if len(findings) == 1 else 'intervals'}." if findings else
+                  "No qualifying interval was found." if compared else "There were too few comparable observations."))
+    return {"schema": SCHEMA_WITH_SHOTS, "status": "matched" if findings else "no_match" if compared else "insufficient_events",
+            "observation": message, "affects_overall_confidence": False, "measurement_basis": silent.KEY,
+            "pcm_sha256": mapping["pcm_sha256"], "audio_origin_pts": origin,
+            "inputs": {**inputs, silent.SHOT_KEY: ranges, "sound_levels": levels}, "shot_coverage": coverage,
+            "shot_findings": findings}
+
+
+def exhibits(record):
+    """Yield source-bound interval records for both historical and per-shot reviews."""
+    if not record or record["status"] != "matched":
+        return
+    if record.get("schema") != SCHEMA_WITH_SHOTS:
+        yield PACKET_ID, record
+        return
+    for shot in record["shot_findings"]:
+        yield shot["id"], {**record, "measurement": shot["measurement"], "witness": shot["witness"]}
+
+
 def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
-    origin = audio_origin(mapping, stereo_scope)
+    limit = agreement.MAX_MULTISHOT_SAMPLES if silent.SHOT_KEY in raw else 64_000
+    origin = audio_origin(mapping, stereo_scope, max_samples=limit)
     if origin is None:
         raise ValueError("The mixed soundtrack has no supported continuous source clock")
     base = Fraction(time_base)
@@ -179,9 +234,11 @@ def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
                     raise ValueError("Timing input has an invalid mouth shape observation")
         rows.append({**row, "sample": round(pts * base * timing.RATE) - origin})
         geometry.append({**rows[-1], "gap": None if gap is None else gap / timing.SCORE_UNITS})
-    samples = presented_samples(mapping)
+    samples = presented_samples(mapping, max_samples=limit)
     _validate_phones(raw["phones"], samples, timing.PHONES)
     inputs = {"frames": rows, "phones": raw["phones"], "samples": samples}
+    if silent.SHOT_KEY in raw:
+        return _measured_shots(raw, inputs, timestamps, time_base, mapping, origin, stereo_scope)
     picture = {"frames": geometry}
     candidate = timing.hypotheses(timing.compatible(picture, raw["phones"], REFERENCE), samples)
     state, witness = _witness(candidate, geometry, samples, origin, POINT)
@@ -284,7 +341,7 @@ def observation(record):
 def validate(document, *, timestamps=None, committed=_UNSET):
     source = document["source"]
     record = document.get(KEY)
-    packets = [packet for packet in document["packets"] if packet["id"] == PACKET_ID or KEY in packet]
+    packets = [packet for packet in document["packets"] if re.fullmatch(r"VLT[0-9]{2}", packet["id"]) or KEY in packet]
     if (canonical_hash(record) if record is not None else None) != source.get(COMMITMENT):
         raise ValueError("Lip timing differs from the committed analysis")
     if committed is not _UNSET and record != committed:
@@ -295,7 +352,7 @@ def validate(document, *, timestamps=None, committed=_UNSET):
         return
     state = record["status"]
     if (record.get("schema") not in {SCHEMA, SCHEMA_WITH_APERTURE, SCHEMA_WITH_ARTICULATION, SCHEMA_WITH_STEREO,
-                                   SCHEMA_WITH_SILENCE, SCHEMA_WITH_MOTION_SOUND}
+                                   SCHEMA_WITH_SILENCE, SCHEMA_WITH_MOTION_SOUND, SCHEMA_WITH_SHOTS}
             or state not in STATUS or record.get("affects_overall_confidence") is not False):
         raise ValueError("Invalid lip timing disposition")
     if "inputs" not in record:
@@ -311,12 +368,12 @@ def validate(document, *, timestamps=None, committed=_UNSET):
     if measured(record["inputs"], timestamps=actual_pts, time_base=source["time_base"], source=source, mapping=audio,
                 stereo_scope=record.get("stereo_scope")) != record:
         raise ValueError("Lip timing measurements do not reproduce")
-    if len(packets) != (state == "matched"):
+    intervals = list(exhibits(record))
+    if len(packets) != len(intervals):
         raise ValueError("Lip timing packet does not match its disposition")
-    if packets:
-        [packet] = packets
+    for packet, (packet_id, record) in zip(packets, intervals, strict=True):
         limitation = packet_limitation(record["witness"])
-        if (packet["id"] != PACKET_ID or packet.get(KEY) != record["witness"] or packet["affects_overall_confidence"] is not False
+        if (packet["id"] != packet_id or packet.get(KEY) != record["witness"] or packet["affects_overall_confidence"] is not False
                 or packet["observation"] != observation(record) or limitation not in packet["limitations"]):
             raise ValueError("Lip timing packet differs from the measured interval")
         if silent.KEY in record["witness"] and (

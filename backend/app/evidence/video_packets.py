@@ -724,7 +724,7 @@ def _mouth_hold_packet(db: Session, store: ObjectStore, analysis: Analysis, set_
                            "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
 
 
-def _lip_timing_packet(db, store, analysis, set_id, source, table, review, decoded, audio_input):
+def _lip_timing_packet(db, store, analysis, set_id, source, table, review, decoded, audio_input, *, packet_id):
     from app.detectors.video.viseme_review import audio_assets
     from app.evidence import audio_packets
     from app.evidence import video_lip_agreement as agreement
@@ -746,7 +746,7 @@ def _lip_timing_packet(db, store, analysis, set_id, source, table, review, decod
         assets[original_key] = _packet_image(db, store, analysis, set_id, image)
         assets[crop_key] = _packet_image(db, store, analysis, set_id, crop)
         time = table.seconds(index)
-        frames.append({"id": f"{binding.PACKET_ID}.{role}", "interval_role": role,
+        frames.append({"id": f"{packet_id}.{role}", "interval_role": role,
                        "anchor": {"frame_index": index, "pts": table.pts[index], "time_base": table.time_base,
                                   "decoded_rgb_sha256": record["rgb_sha256"], "original_sha256": source["sha256"],
                                   "width": table.width, "height": table.height, "stream_selector": "v:0",
@@ -782,7 +782,7 @@ def _lip_timing_packet(db, store, analysis, set_id, source, table, review, decod
                           "The spoken sounds and observed mouth openings support a different offset inside this interval.")
         measures = [{"label": "Speech events compared across the source clip",
                      "value": review["measurement"]["eligible_events"], "unit": "events"}]
-    return {"id": binding.PACKET_ID,
+    return {"id": packet_id,
             "title": title,
             "evidence_type": "anomaly",
             "claim_scope": "sampled_window", "semantics": binding.SCHEMA, binding.KEY: witness,
@@ -898,8 +898,9 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         scene_indices = {item["frame_index"] for item in scene["anchors"]}
         wanted.update(scene_indices)
         exact_indices.update(scene_indices)
-    if timing and timing["status"] == "matched":
-        indices = set(timing["witness"]["picture_frames"].values())
+    timing_intervals = list(video_viseme_binding.exhibits(timing))
+    for _, review in timing_intervals:
+        indices = set(review["witness"]["picture_frames"].values())
         wanted.update(indices)
         exact_indices.update(indices)
     endpoints = {match["start_frame_index"], match["end_frame_index"]} if match is not None else set()
@@ -1187,15 +1188,17 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["packets"].append(_mouth_hold_packet(db, store, analysis, set_id, source, table, mouth_review, decoded, audio_input))
     if scene is not None:
         document["packets"].append(_scene_return_packet(db, store, analysis, set_id, source, scene, decoded))
-    if timing and timing["status"] == "matched":
+    for packet_id, review in timing_intervals:
         audio_input = (result.get("manifest", {}).get("sampling", {}).get("video_audio_evidence") or {})["input"]
-        document["packets"].append(_lip_timing_packet(db, store, analysis, set_id, source, table, timing, decoded, audio_input))
+        document["packets"].append(_lip_timing_packet(db, store, analysis, set_id, source, table, review, decoded, audio_input,
+                                                      packet_id=packet_id))
     if VERSION in NESTED_VERSIONS:
         from app.evidence import video_audio, video_av
         from app.evidence import video_lip_agreement as agreement
+        from app.evidence import video_silent_mouth as silent
 
         document["audio"] = video_audio.build_channel(db, analysis, store, result, set_id=set_id)
-        if timing and agreement.KEY in timing.get("inputs", {}):
+        if timing and {agreement.KEY, silent.SHOT_KEY} & timing.get("inputs", {}).keys():
             from app.evidence import audio_packets
 
             sound_input = result["manifest"]["sampling"]["video_audio_evidence"]["input"]
@@ -1257,8 +1260,8 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         for name, asset in artifacts.items():
             held_sound = (name == mouth_hold_sound.WAV and packet.get("id") == mouth_local_hold_binding.PACKET_ID
                           and packet.get("mouth_hold_sound") and asset.get("media_type") == "audio/wav")
-            lip_sound = (name == video_viseme_binding.CLIP and packet.get("id") == video_viseme_binding.PACKET_ID
-                         and packet.get(video_viseme_binding.KEY) and asset.get("media_type") == "audio/wav")
+            lip_sound = (name == video_viseme_binding.CLIP and packet.get(video_viseme_binding.KEY)
+                         and asset.get("media_type") == "audio/wav")
             if (not _SHA.fullmatch(str(asset.get("sha256", ""))) or (not (held_sound or lip_sound) and
                     (asset.get("media_type") not in {"image/png", "video/mp4"} or min(asset.get("width", 0), asset.get("height", 0)) <= 0))):
                 raise PacketIntegrityError("Video evidence has invalid image references")

@@ -608,29 +608,38 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         from app.detectors.video.viseme_review import audio_assets
         from app.detectors.video.viseme_stereo import capture
         from app.evidence import video_lip_agreement as agreement
+        from app.evidence import video_silent_mouth as silent
 
         stereo_scope = lip_timing.get("stereo_scope")
         decoded_audio = decode_audio(original, source_sha256=digest, max_seconds=VIDEO_AUDIO_MAX_SECONDS,
                                      inspect_stereo=stereo_scope is not None, retain_stereo=stereo_scope is not None)
         if stereo_scope is not None and capture(decoded_audio) != stereo_scope:
             raise ValueError("The original video does not reproduce the timing review's stereo channel measurements")
+        limit = video_viseme_binding.sample_limit(lip_timing)
         if (decoded_audio.mapping["pcm_sha256"] != lip_timing["pcm_sha256"]
-                or video_viseme_binding.presented_samples(decoded_audio.mapping) != lip_timing["inputs"]["samples"]
-                or video_viseme_binding.audio_origin(decoded_audio.mapping, stereo_scope) != lip_timing["audio_origin_pts"]):
+                or video_viseme_binding.presented_samples(decoded_audio.mapping, max_samples=limit) != lip_timing["inputs"]["samples"]
+                or video_viseme_binding.audio_origin(decoded_audio.mapping, stereo_scope, max_samples=limit) != lip_timing["audio_origin_pts"]):
             raise ValueError("The original video does not reproduce the timing review's soundtrack")
         if "source_duration_pts" in decoded_audio.mapping and any(
             decoded_audio.mapping[key] != evidence["audio"]["source"].get(key)
             for key in video_viseme_binding.AAC_PRESENTATION_FIELDS
         ):
             raise ValueError("The timing review's AAC presentation clock differs from the original")
-        if agreement.KEY in lip_timing["inputs"] and (
+        if {agreement.KEY, silent.SHOT_KEY} & lip_timing["inputs"].keys() and (
             decoded_audio.mapping.get("source_codec") != evidence["audio"]["source"].get("source_codec")
             or decoded_audio.mapping.get("audio_stream_indices")
         ):
             raise ValueError("The timing review's mono soundtrack format differs from the original")
-        if lip_timing.get("witness"):
-            packet = next(packet for packet in packets if packet["id"] == video_viseme_binding.PACKET_ID)
-            for role, content in audio_assets(decoded_audio.pcm, decoded_audio.mapping, lip_timing).items():
+        if shot_cover := lip_timing.get("shot_coverage"):
+            from app.detectors.video.shots import detect_shots
+
+            with closing(decode_stream(original, table)) as shot_frames:
+                measured_shots = detect_shots(shot_frames, table).as_json()
+            if measured_shots["frames_scanned"] != len(table) or measured_shots["ranges"] != [row["frames"] for row in shot_cover]:
+                raise ValueError("The submitted video does not reproduce the shot review's picture boundaries")
+        for packet_id, review in video_viseme_binding.exhibits(lip_timing):
+            packet = next(packet for packet in packets if packet["id"] == packet_id)
+            for role, content in audio_assets(decoded_audio.pcm, decoded_audio.mapping, review).items():
                 if hashlib.sha256(content).hexdigest() != packet["artifacts"][role]["sha256"]:
                     raise ValueError("The timing clip or waveform differs from the supplied soundtrack")
     fine_edges = sum(_verify_scene_support(record, background_frames) for record in fine_records)

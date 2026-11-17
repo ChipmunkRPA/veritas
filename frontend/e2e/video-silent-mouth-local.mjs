@@ -13,6 +13,11 @@ try {
   page.on('pageerror', error => errors.push(error.message))
   const item = input.cases[0]
   await page.goto(`${input.url}/analyses/${item.analysis_id}/media-evidence?view=plain`)
+  if (item.shot_count) {
+    const coverage = page.getByRole('region', { name: 'Speech and mouth comparison' })
+    await coverage.getByText('Shot length outside the checked range.', { exact: false }).waitFor()
+    assert.equal(await coverage.getByRole('listitem').count(), item.shot_count)
+  }
   const link = page.getByRole('link', { name: 'Inspect source frames and waveform' })
   await link.waitFor({ timeout: 30_000 })
   assert.equal(await link.getAttribute('href'), '#media-evidence-VLT01')

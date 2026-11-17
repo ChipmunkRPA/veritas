@@ -16,6 +16,7 @@ MAX_FRAME_GAP = 960
 APERTURE_SWING = 160_000
 APERTURE_STEP = 45_000
 KEY = "silent_mouth"
+SHOT_KEY = "shot_ranges"
 TITLE = "Mouth movement with a near-silent soundtrack"
 INTERPRETATION = ("The highlighted samples have very low amplitude. The frames show how the visible mouth "
                   "changes around the same source time.")
@@ -49,11 +50,13 @@ def quiet_ranges(series, samples):
                "during_rms_units": math.isqrt(during // ((end-start) * HOP))}
 
 
-def record(series, frames, samples, origin):
+def record(series, frames, samples, origin, *, shot=None):
     eligible = [frame for frame in frames if frame["gap_units"] is not None]
     matches = []
     for event in quiet_ranges(series, samples):
         start, end = event["span"]
+        if shot is not None and not shot[0] + FLANK <= start < end <= shot[1] - FLANK:
+            continue
         before = [p for p in eligible if start - MAX_FRAME_GAP <= p["sample"] < start]
         during = [p for p in eligible if start <= p["sample"] < end]
         after = [p for p in eligible if end <= p["sample"] < end + MAX_FRAME_GAP]

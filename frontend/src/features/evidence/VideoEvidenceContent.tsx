@@ -137,10 +137,15 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
 
   return <div id="media-evidence-visual" data-testid="video-evidence-content" className="scroll-mt-20">
     {lipTiming && <section aria-labelledby="video-lip-timing-heading" className="mt-4 rounded-md border border-border p-4">
-      <h3 id="video-lip-timing-heading" className="m-0 text-body font-medium">{['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4', 'chipmunk.video-lip-timing/5', 'chipmunk.video-lip-timing/6'].includes(lipTiming.schema ?? '')
+      <h3 id="video-lip-timing-heading" className="m-0 text-body font-medium">{['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4', 'chipmunk.video-lip-timing/5', 'chipmunk.video-lip-timing/6', 'chipmunk.video-lip-timing/7'].includes(lipTiming.schema ?? '')
         ? 'Speech and mouth comparison' : 'Speech and mouth timing trial'}</h3>
       <p className="mt-2 mb-0 text-small text-text-muted">{lipTiming.observation}</p>
-      {lipTiming.status === 'matched' && <a className="mt-2 inline-block text-small underline" href="#media-evidence-VLT01">Inspect source frames and waveform</a>}
+      {lipTiming.shot_coverage ? <ul className="mt-2 mb-0 space-y-1 pl-5 text-small">
+        {lipTiming.shot_coverage.map(shot => <li key={shot.frames[0]}>
+          {seconds(shot.audio_samples[0] / 16000)}–{seconds(shot.audio_samples[1] / 16000)} · {shot.observation}.
+          {shot.exhibit && <> <a className="underline" href={`#media-evidence-${shot.exhibit}`}>Inspect source frames and waveform</a></>}
+        </li>)}
+      </ul> : lipTiming.status === 'matched' && <a className="mt-2 inline-block text-small underline" href="#media-evidence-VLT01">Inspect source frames and waveform</a>}
     </section>}
     {hold && <section aria-labelledby="video-picture-hold-heading" className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-picture-hold-heading" className="m-0 text-body font-medium">Identical consecutive frames</h3>

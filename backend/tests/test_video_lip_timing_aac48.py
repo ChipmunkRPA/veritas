@@ -66,6 +66,34 @@ def test_local_mouth_motion_has_verified_frames_and_stays_outside_the_estimate(a
         binding.measured(raw, **(scope | {"mapping": aac_mapping | {"audio_stream_indices": [1, 2]}}))
 
 
+def test_shot_evidence_keeps_multiple_intervals_and_the_unassessed_cut(aac_mapping):
+    from app.evidence import video_silent_mouth as silent
+
+    samples = 125 * 640
+    mapping = aac_mapping | {
+        "samples": samples + 4, "source_duration_pts": samples * 3,
+        "timeline": [{"start_sample": 0, "end_sample": samples + 4, "source_pts": 0}],
+    }
+    frames = [{"index": i, "pts": i, "gap_units": 20_000 + 200_000 * (i % 3), "mouth_box": [1, 1, 3, 3],
+               "rgb_sha256": "1" * 64, "mouth_crop_sha256": "2" * 64} for i in range(125)]
+    shots = [[0, 50], [50, 65], [65, 125]]
+    audible = [500, silent.HOP * 500**2]
+    levels = [audible for _ in range(samples // silent.HOP)]
+    for start, stop in ((12160, 16000), (60000, 64000), (30400, 33600)):
+        levels[start // silent.HOP:stop // silent.HOP] = [[0, 0]] * ((stop - start) // silent.HOP)
+    scope = {"timestamps": range(125), "time_base": "1/25", "source": {"width": 4, "height": 4}, "mapping": mapping}
+    raw = {"frames": frames, "phones": [], "sound_levels": levels, silent.SHOT_KEY: shots}
+    record = binding.measured(raw, **scope)
+    assert record["schema"] == binding.SCHEMA_WITH_SHOTS and not record["affects_overall_confidence"]
+    assert [row["exhibit"] for row in record["shot_coverage"]] == ["VLT01", None, "VLT02"]
+    by_id = dict(binding.exhibits(record))
+    assert by_id["VLT01"]["witness"]["audio_source_pts"] == [12160, 16000]
+    assert by_id["VLT02"]["witness"]["audio_source_pts"] == [60000, 64000]
+    assert all(65 <= frame < 125 for frame in by_id["VLT02"]["witness"]["picture_frames"].values())
+    with pytest.raises(ValueError, match="partition"):
+        binding.measured(raw | {silent.SHOT_KEY: [[0, 50], [49, 65], [65, 125]]}, **scope)
+
+
 def test_near_silent_range_needs_changing_mouth_frames_and_audible_flanks(aac_mapping):
     from app.evidence import video_silent_mouth as silent
 

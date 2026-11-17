@@ -67,6 +67,24 @@ describe('ordinary multimedia evidence', () => {
       'Listen to the soundtrack during the measured timing change').getAttribute('src')).toContain('.wav')
   })
 
+  it('shows the unassessed shot between two speech and mouth findings', () => {
+    show({ ...video, lip_timing_review: {
+      schema: 'chipmunk.video-lip-timing/7', status: 'matched', affects_overall_confidence: false,
+      observation: 'Compared speech and mouth movement in 2 of 3 detected shots. Found 2 local mismatches.',
+      shot_coverage: [
+        { frames: [0, 50], audio_samples: [0, 32000], observation: 'Local mismatch found', exhibit: 'VLT01' },
+        { frames: [50, 65], audio_samples: [32000, 41600], observation: 'Shot length outside the checked range', exhibit: null },
+        { frames: [65, 125], audio_samples: [41600, 80000], observation: 'Local mismatch found', exhibit: 'VLT02' },
+      ],
+    } })
+    const region = within(screen.getByRole('region', { name: 'Speech and mouth comparison' }))
+    const shots = region.getAllByRole('listitem')
+    expect(shots).toHaveLength(3)
+    expect(within(shots[1]).getByText(/2\.000 s–2\.600 s · Shot length outside the checked range/)).toBeTruthy()
+    expect(within(shots[1]).queryByRole('link')).toBeNull()
+    expect(region.getAllByRole('link').map(link => link.getAttribute('href'))).toEqual(['#media-evidence-VLT01', '#media-evidence-VLT02'])
+  })
+
   it('shows the exact language evidence when all authorship checks were outside scope', () => {
     show({ ...document, packets: [], coverage: { writing_check_coverage: {
       schema: 'document-writing-check-coverage/3',

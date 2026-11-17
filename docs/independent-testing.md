@@ -115,6 +115,12 @@ The local app checks unequal WAV sample counts and verifies both waveforms
 and timestamps in signed reports, including a soundtrack that starts after
 the picture.
 
+The [post-cut sound dropout replay](video-sound-dropouts-across-cuts-2026-11-17.md)
+uses a prospective source roster and independently checks the actual shot
+partition, encoded picture stream, and delivered soundtrack clock. The word
+replacement results retain the earlier operating points and the frozen
+per-montage comparison, including the missed edits.
+
 The [native 48 kHz stereo replay](audio-native-alignment-2026-11-17.md#app-and-independent-replay)
 reconstructs 288 exact audio files and tests two repeat locations on the
 original sample clock. The manifest covers louder speech, shifted channels,

@@ -1240,8 +1240,9 @@ def render(ctx: StageContext) -> dict[str, Any]:
         timing_review = (video_viseme_binding.skipped("provenance") if provenance_gate.stop(ctx) else
                          assess(ctx, frame_store, ctx.state.get("video_audio_mapping"),
                                 decoded_audio.get("evidence_input"), shot_output.get("ranges"),
-                                stereo_scope=decoded_audio.get("lip_timing_stereo_scope")))
-        if timing_review.get("witness"):
+                                stereo_scope=decoded_audio.get("lip_timing_stereo_scope"),
+                                shot_frames=shot_output.get("frames_scanned")))
+        if timing_review["status"] == "matched":
             anchors = frame_store.native_anchors()
     stereo_sha = decoded_audio.get("stereo_context_sha256")
     # A reused historical render output must not acquire evidence on publication.

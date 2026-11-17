@@ -12,6 +12,7 @@ from fractions import Fraction
 from pathlib import Path
 
 from app.core.config import settings
+from app.evidence import video_silent_mouth as silent
 from app.evidence import video_viseme_binding as binding
 from app.evidence import video_viseme_stereo as stereo
 
@@ -32,6 +33,16 @@ def supported(table, mapping, shots, stereo_scope=None):
                 for a, b in zip(table.pts, table.pts[1:]))
         and mapping.get("source_codec") in {"aac", "pcm_s16le"} and binding.audio_origin(mapping, stereo_scope) is not None
     )
+
+
+def sound_levels(pcm, presented):
+    """Return the exact peak and sum of squared values of each full 5 ms block."""
+    import numpy as np
+
+    full = presented // silent.HOP * silent.HOP
+    signed = np.rint(np.asarray(pcm[:full], np.float64) * 32768).clip(-32768, 32767).astype(np.int32)
+    blocks = signed.reshape(-1, silent.HOP)
+    return np.column_stack((np.abs(blocks).max(axis=1), (blocks.astype(np.int64)**2).sum(axis=1))).tolist()
 
 
 def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None):
@@ -73,7 +84,13 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None):
     try:
         run = subprocess.run([sys.executable, "-B", "-m", "app.detectors.video.viseme_worker"],
                              input=json.dumps(request), env=env, text=True, capture_output=True, timeout=budget, check=True)
-        measured = binding.measured(json.loads(run.stdout), timestamps=table.pts, time_base=table.time_base,
+        raw = json.loads(run.stdout)
+        if settings.video_lip_silent_mouth_review and stereo_scope is None:
+            from app.detectors.audio.decode import read_wav
+
+            pcm = read_wav(ctx.store.read_bytes(audio_input["wav_sha256"]))
+            raw["sound_levels"] = sound_levels(pcm, request["presented_samples"])
+        measured = binding.measured(raw, timestamps=table.pts, time_base=table.time_base,
                                     source={"width": table.width, "height": table.height}, mapping=mapping, stereo_scope=stereo_scope)
         if witness := measured["witness"]:
             indices = list(witness["picture_frames"].values())
@@ -98,6 +115,8 @@ def audio_assets(pcm, mapping, record):
             or presented != record["inputs"]["samples"] or not 0 <= start < end <= presented
             or record["witness"]["audio_source_pts"] != [origin + start, origin + end]):
         raise ValueError("The timing excerpt differs from its frozen soundtrack")
+    if silent.KEY in record["witness"] and sound_levels(pcm, presented) != record["inputs"]["sound_levels"]:
+        raise ValueError("The near-silent interval differs from its frozen soundtrack levels")
     return {
         binding.CLIP: wav_bytes(pcm[start:end]),
         binding.WAVEFORM: _chart(pcm, [], start=max(0, start - 3200), end=min(presented, end + 3200),

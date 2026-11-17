@@ -2869,6 +2869,14 @@ and the source pixels behind the crop. The replay does not score authorship.
 
 ## Choose a review to reproduce
 
+### Replay short near-silent intervals in a video soundtrack
+
+Use the published source plan to rebuild 648 PCM and AAC deliveries from
+the public recordings. The playable manifest binds the picture clock,
+presented samples and known locations. The standard-library reader
+recounts both the registered silence comparison and the separate
+word-replacement evaluation. [Near-silent soundtrack comparison and replay](video-silent-mouth-2026-11-16.md#reproduce-the-measurements)
+
 ### Compare alternative timing offsets in single-track video
 
 The [single-track timing ledger and replay](video-lip-lag-prominence-2026-11-14.md#recompute-the-results-and-report)

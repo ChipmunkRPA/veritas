@@ -35,7 +35,8 @@ export interface VideoEvidencePacket extends PacketBase {
   lip_timing_review?: {
     audio_source_pts: [number, number]
     picture_source_samples: [number, number]
-    change_samples: number
+    change_samples?: number
+    silent_mouth?: { near_silent_peak_units: number; visible_mouth_frames: number }
     articulation?: { mismatched_events: number; audio_sample: number; picture_frame: number; picture_pts: number }
   }
   scene_return?: { schema: 'picture-change-return/1' | 'picture-change-return/2'; start_stream_s: number; end_stream_s: number; tiles: number[] }

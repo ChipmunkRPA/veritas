@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Near-silent soundtracks with visible mouth movement](video-silent-mouth-2026-11-16.md)
+  increase correct locations from 10 to 114 on 144 staged mutes in fresh
+  PCM and AAC deliveries. The fallback adds zero flags on 504 controls.
+  The local app shows the exact time, excerpts, waveform and mouth crops
+  with zero AI-score weight. A distinct-word candidate added four correct
+  locations across the two carriers and increased ordinary flags, so it
+  remains in evaluation.
+
 - [Linked HEIC thumbnails](image-heif-thumbnail-2026-11-16.md) identify
   compact visual discrepancies from one upload. The check locates 110
   of 132 staged mismatches and flags 0 of 330 controls. The ordinary

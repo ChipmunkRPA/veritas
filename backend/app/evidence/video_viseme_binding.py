@@ -7,6 +7,7 @@ import re
 from fractions import Fraction
 
 from app.core.canonical import canonical_hash
+from app.evidence import video_silent_mouth as silent
 from app.evidence import video_viseme_ranked as ranked
 from app.evidence import video_viseme_stereo as stereo
 from app.evidence import video_viseme_timing as timing
@@ -17,6 +18,7 @@ SCHEMA = "chipmunk.video-lip-timing/1"
 SCHEMA_WITH_APERTURE = "chipmunk.video-lip-timing/2"
 SCHEMA_WITH_ARTICULATION = "chipmunk.video-lip-timing/3"
 SCHEMA_WITH_STEREO = "chipmunk.video-lip-timing/4"
+SCHEMA_WITH_SILENCE = "chipmunk.video-lip-timing/5"
 PACKET_ID = "VLT01"
 CLIP, WAVEFORM = "lip_timing_audio", "lip_timing_waveform"
 REFERENCE = {"closure": {"median": .000578}, "rounded": {"median": .3973106}, "spread": {"median": .9265317}}
@@ -212,6 +214,13 @@ def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
                 basis["measurement_basis"] = "local_articulation"
             elif disposition in {"measured", "no_supported_change"}:
                 candidate, state = extra, disposition
+    if witness is None and stereo_scope is None and "sound_levels" in raw:
+        quiet = silent.record(raw["sound_levels"], geometry, samples, origin)
+        if quiet:
+            candidate, witness = quiet
+            state = "matched"
+            inputs["sound_levels"] = raw["sound_levels"]
+            basis.update(schema=SCHEMA_WITH_SILENCE, measurement_basis=silent.KEY)
     # Canonical evidence rounds floats to six places. Keep seven-place inputs and fits as integers.
     if "score" in candidate:
         candidate["score_units"] = round(candidate.pop("score") * timing.SCORE_UNITS)
@@ -223,6 +232,8 @@ def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
             note["observation"] = "No qualifying local speech and mouth difference was found in the measured ranges."
     if stereo_scope is not None:
         basis.update(schema=SCHEMA_WITH_STEREO, stereo_scope=stereo_scope)
+    if basis.get("measurement_basis") == silent.KEY:
+        note["observation"] = silent.observation(witness)
     return {**note, **basis,
             "pcm_sha256": mapping["pcm_sha256"], "audio_origin_pts": origin,
             "inputs": inputs, "measurement": candidate, "witness": witness}
@@ -230,6 +241,8 @@ def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
 
 def observation(record):
     witness = record["witness"]
+    if silent.KEY in witness:
+        return silent.observation(witness)
     lo, hi = [sample / timing.RATE for sample in witness["audio_source_pts"]]
     a, b = [sample / timing.RATE for sample in witness["picture_source_samples"]]
     soundtrack = " The excerpt and waveform show the analyzed mix of both soundtrack channels." if record.get("stereo_scope") else ""
@@ -261,7 +274,7 @@ def validate(document, *, timestamps=None, committed=_UNSET):
             raise ValueError("Uncommitted lip timing evidence")
         return
     state = record["status"]
-    if (record.get("schema") not in {SCHEMA, SCHEMA_WITH_APERTURE, SCHEMA_WITH_ARTICULATION, SCHEMA_WITH_STEREO}
+    if (record.get("schema") not in {SCHEMA, SCHEMA_WITH_APERTURE, SCHEMA_WITH_ARTICULATION, SCHEMA_WITH_STEREO, SCHEMA_WITH_SILENCE}
             or state not in STATUS or record.get("affects_overall_confidence") is not False):
         raise ValueError("Invalid lip timing disposition")
     if "inputs" not in record:
@@ -281,10 +294,15 @@ def validate(document, *, timestamps=None, committed=_UNSET):
         raise ValueError("Lip timing packet does not match its disposition")
     if packets:
         [packet] = packets
-        limitation = ARTICULATION_LIMITATION if "articulation" in record["witness"] else LIMITATION
+        limitation = packet_limitation(record["witness"])
         if (packet["id"] != PACKET_ID or packet.get(KEY) != record["witness"] or packet["affects_overall_confidence"] is not False
                 or packet["observation"] != observation(record) or limitation not in packet["limitations"]):
             raise ValueError("Lip timing packet differs from the measured interval")
+        if silent.KEY in record["witness"] and (
+            packet.get("title") != silent.TITLE or packet.get("interpretation") != silent.INTERPRETATION
+            or packet.get("measurements") != silent.measurements(record["measurement"])
+        ):
+            raise ValueError("Near-silent soundtrack summary differs from the measured interval")
         frames = record["witness"]["picture_frames"]
         expected = [(role, frames[role]) for role in ROLES if frames[role] is not None]
         if [(frame.get("interval_role"), frame["anchor"]["frame_index"]) for frame in packet["frames"]] != expected:
@@ -302,3 +320,9 @@ def validate(document, *, timestamps=None, committed=_UNSET):
         if ((clip["media_type"], clip["samples"], clip["sample_rate"], clip["channels"]) != ("audio/wav", hi-lo, timing.RATE, 1)
                 or (plot["media_type"], plot["width"], plot["height"], plot.get("time_axis")) != ("image/png", 960, 280, "source_pts")):
             raise ValueError("Lip timing soundtrack assets do not match their exact extent")
+
+
+def packet_limitation(witness):
+    if silent.KEY in witness:
+        return silent.LIMITATION
+    return ARTICULATION_LIMITATION if "articulation" in witness else LIMITATION

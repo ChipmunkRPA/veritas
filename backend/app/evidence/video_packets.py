@@ -727,6 +727,7 @@ def _mouth_hold_packet(db: Session, store: ObjectStore, analysis: Analysis, set_
 def _lip_timing_packet(db, store, analysis, set_id, source, table, review, decoded, audio_input):
     from app.detectors.video.viseme_review import audio_assets
     from app.evidence import audio_packets
+    from app.evidence import video_silent_mouth as silent
 
     binding = video_viseme_binding
     witness = review["witness"]
@@ -760,21 +761,28 @@ def _lip_timing_packet(db, store, analysis, set_id, source, table, review, decod
                                               samples=b-a, sample_rate=16000, channels=1)
     assets[binding.WAVEFORM] = audio_packets._asset(db, store, analysis, set_id, sound[binding.WAVEFORM], "image/png",
                                                    width=960, height=280, time_axis="source_pts")
-    articulation = "articulation" in witness
+    near_silent = silent.KEY in witness
+    if near_silent:
+        title = silent.TITLE
+        interpretation = silent.INTERPRETATION
+        measures = silent.measurements(review["measurement"])
+    else:
+        articulation = "articulation" in witness
+        title = "Local speech and mouth mismatch" if articulation else "Local speech and mouth timing change"
+        interpretation = ("The visible mouth openings fit the speech sounds less closely inside this interval "
+                          "than on either side." if articulation else
+                          "The spoken sounds and observed mouth openings support a different offset inside this interval.")
+        measures = [{"label": "Speech events compared across the source clip",
+                     "value": review["measurement"]["eligible_events"], "unit": "events"}]
     return {"id": binding.PACKET_ID,
-            "title": "Local speech and mouth mismatch" if articulation else "Local speech and mouth timing change",
+            "title": title,
             "evidence_type": "anomaly",
             "claim_scope": "sampled_window", "semantics": binding.SCHEMA, binding.KEY: witness,
             "affects_overall_confidence": False, "finding_ids": [], "signal_refs": [], "exhibit_refs": [],
             "frames": frames, "artifacts": assets, "observation": binding.observation(review),
-            "interpretation": ("The visible mouth openings fit the speech sounds less closely inside this interval "
-                               "than on either side." if articulation else
-                               "The spoken sounds and observed mouth openings support a different offset inside this interval."),
-            "measurements": [{"label": "Speech events compared across the source clip",
-                              "value": review["measurement"]["eligible_events"], "unit": "events"}],
-            "limitations": [binding.ARTICULATION_LIMITATION if articulation else binding.LIMITATION],
+            "interpretation": interpretation, "measurements": measures, "limitations": [binding.packet_limitation(witness)],
             "clip": {"status": "unavailable", "reason": "Use the original video for playback on the picture clock."},
-            "derivation": {"version": VERSION, "selection": "local_speech_mouth_compatibility",
+            "derivation": {"version": VERSION, "selection": silent.KEY if near_silent else "local_speech_mouth_compatibility",
                            "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks",
                            "source_pixels": "exact_native_rgb"}}
 

@@ -42,6 +42,29 @@ def test_articulation_uses_presented_extent_on_48khz_aac(aac_mapping):
         binding.measured(raw, timestamps=[], time_base="1/24", source={}, mapping=aac_mapping)
 
 
+def test_near_silent_range_needs_changing_mouth_frames_and_audible_flanks(aac_mapping):
+    from app.evidence import video_silent_mouth as silent
+
+    fixed_gap = 200_000
+    frames = [{"index": i, "pts": i, "gap_units": fixed_gap + (180_000 if i in {16, 18} else 0),
+               "mouth_box": [0, 0, 2, 2], "rgb_sha256": "1" * 64, "mouth_crop_sha256": "2" * 64}
+              for i in range(52)]
+    levels = [[200, silent.HOP * 200**2] if not 120 <= i < 160 else [0, 0] for i in range(33_600 // silent.HOP)]
+    scope = {"timestamps": range(52), "time_base": "1/25", "source": {"width": 2, "height": 2}, "mapping": aac_mapping}
+    inputs = {"frames": frames, "phones": [], "sound_levels": levels}
+
+    flagged = binding.measured(inputs, **scope)
+    assert flagged["schema"] == binding.SCHEMA_WITH_SILENCE
+    assert flagged["witness"]["audio_source_pts"] == [9600, 12800]
+    assert flagged["witness"]["picture_frames"] == {"before": 14, "during": 17, "after": 20}
+    assert flagged["affects_overall_confidence"] is False
+    baseline = binding.measured({"frames": frames, "phones": []}, **scope)
+    sound_tail = [[0, 0]] * (len(levels) - 160)
+    assert binding.measured(inputs | {"sound_levels": levels[:160] + sound_tail}, **scope) == baseline
+    still = [row | {"gap_units": fixed_gap} for row in frames]
+    assert not binding.measured(inputs | {"frames": still}, **scope)["witness"]
+
+
 @pytest.mark.parametrize("change", [
     {"source_duration_pts": None},
     {"source_duration_pts": 99_000},

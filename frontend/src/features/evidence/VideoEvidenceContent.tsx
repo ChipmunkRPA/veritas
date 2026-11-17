@@ -100,7 +100,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       const cut = packet.face_spatial_cut_frames?.some(item => item.id === frame.id)
       const crop = frame.artifact_refs.crop && packet.artifacts[frame.artifact_refs.crop]
       const mouthCrop = (packet.mouth_local_hold || packet.lip_timing_review) && crop
-      const rangeLabel = packet.scene_return ? 'picture change' : `${cut ? 'picture-cut' : refined ? 'refined' : packet.mouth_local_hold ? 'hold' : packet.lip_timing_review?.articulation ? 'mismatch' : packet.lip_timing_review ? 'timing' : packet.face_spatial_cut ? 'review' : 'flagged'} range`
+      const rangeLabel = packet.scene_return ? 'picture change' : `${cut ? 'picture-cut' : refined ? 'refined' : packet.mouth_local_hold ? 'hold' : packet.lip_timing_review?.silent_mouth ? 'near-silent' : packet.lip_timing_review?.articulation ? 'mismatch' : packet.lip_timing_review ? 'timing' : packet.face_spatial_cut ? 'review' : 'flagged'} range`
       const sceneSupport = frame.interval_role === 'during' && packet.scene_return
         ? packet.scene_return.tiles : null
       const navigationKnown = frame.anchor.playback_time_s != null && Number.isFinite(frame.anchor.playback_time_s) && frame.anchor.playback_time_s >= 0
@@ -136,7 +136,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
 
   return <div id="media-evidence-visual" data-testid="video-evidence-content" className="scroll-mt-20">
     {lipTiming && <section aria-labelledby="video-lip-timing-heading" className="mt-4 rounded-md border border-border p-4">
-      <h3 id="video-lip-timing-heading" className="m-0 text-body font-medium">{['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4'].includes(lipTiming.schema ?? '')
+      <h3 id="video-lip-timing-heading" className="m-0 text-body font-medium">{['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4', 'chipmunk.video-lip-timing/5'].includes(lipTiming.schema ?? '')
         ? 'Speech and mouth comparison' : 'Speech and mouth timing trial'}</h3>
       <p className="mt-2 mb-0 text-small text-text-muted">{lipTiming.observation}</p>
       {lipTiming.status === 'matched' && <a className="mt-2 inline-block text-small underline" href="#media-evidence-VLT01">Inspect source frames and waveform</a>}
@@ -324,11 +324,13 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       {renderFrames(packet, packet.frames, false)}
       {packet.lip_timing_review && <div className="mt-4 space-y-3">
         <EvidencePicture set={set} artifact={packet.artifacts.lip_timing_waveform} token={token} ready={mediaReady}
-          alt={packet.lip_timing_review.articulation ? 'Waveform during the speech and mouth mismatch' :
+          alt={packet.lip_timing_review.silent_mouth ? 'Waveform around the near-silent soundtrack interval' :
+            packet.lip_timing_review.articulation ? 'Waveform during the speech and mouth mismatch' :
             'Waveform on the audio source clock during the timing change'} chart />
         <p className="m-0 text-caption text-text-muted">The shaded interval matches the playback below. The waveform is scaled to make quiet speech visible.</p>
         <EvidenceAudio set={set} artifact={packet.artifacts.lip_timing_audio} token={token} ready={mediaReady}
-          alt={packet.lip_timing_review.articulation ? 'Listen to the soundtrack during the speech and mouth mismatch' :
+          alt={packet.lip_timing_review.silent_mouth ? 'Listen to the near-silent soundtrack interval' :
+            packet.lip_timing_review.articulation ? 'Listen to the soundtrack during the speech and mouth mismatch' :
             'Listen to the soundtrack during the measured timing change'} />
       </div>}
       {packet.mouth_local_hold && packet.artifacts.mouth_hold_waveform && packet.artifacts.mouth_hold_audio &&

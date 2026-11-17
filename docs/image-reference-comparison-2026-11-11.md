@@ -28,6 +28,8 @@ The PNG fallback also covers a right-angle rotation or reflection followed by cr
 
 The tool can locate a native-scale photo inside a PNG screenshot when an earlier copy is available. The matched area in each file and the exact differences inside the photo appear in the normal view and the separate comparison PDF and JSON. Areas outside the matched photo are unassessed. [Screenshot evidence and evaluation](image-reference-screenshot-holdout-2026-11-12.md)
 
+The tool also supports proportionally reduced photos inside eligible PNG and JPEG screenshots. It shows the area compared and both native source coordinates. The same offline reviewer replays that comparison and verifies its evidence images. [Resized screenshot evidence and evaluation](image-reference-scaled-screenshot-2026-11-17.md)
+
 A local browser test used a cropped JPEG with a known edit and an earlier PNG. Simulated Stripe payment released the original analysis, and the supplemental comparison used its retained source. The browser loaded both crops and the mask and downloaded both exports. A separate HTTP test reopened the PDF and matched its embedded pixels and recorded hashes to the JSON. An identical pair returned no selected region. An unalignable pair returned an unassessed result.
 
 The [offline reviewer](independent-testing.md#verify-an-earlier-copy-image-comparison) checks the downloaded JSON against both original images using Pillow. It checks native coordinates, pixel-exact crops, mask totals and the recorded SHA-256 values. When the overlay is present, it verifies every marked and transparent pixel against the mask at the submitted crop's coordinates.

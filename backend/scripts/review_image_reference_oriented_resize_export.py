@@ -4,12 +4,14 @@
 from __future__ import annotations
 
 import argparse
+import base64
 import io
 import json
 import sys
 from collections import Counter
 from contextlib import ExitStack
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 from PIL import Image, ImageChops
 
@@ -19,6 +21,7 @@ import review_image_reference_oriented_crop_export as previous  # noqa: E402
 existing = previous.existing
 SCHEMA = "chipmunk.image-reference-comparison/8"
 SCREENSHOT_SCHEMA = "chipmunk.image-reference-comparison/9"
+SCALED_SCREENSHOT_SCHEMA = "chipmunk.image-reference-comparison/27"
 KERNELS = {"bicubic": Image.Resampling.BICUBIC, "bilinear": Image.Resampling.BILINEAR,
            "lanczos": Image.Resampling.LANCZOS, "opencv_area": None}
 
@@ -132,11 +135,34 @@ def _screenshot_assets(stack, comparison, assets, ref, sub, carrier):
                             minimum=max(48, round(area * .0004)))
 
 
+def _replay_scaled_screenshot(comparison, assets, earlier, submitted):
+    from app.evidence.image_reference import inspect
+
+    require = existing._require
+    with TemporaryDirectory() as scratch:
+        evidence = Path(scratch) / "comparison"
+        result = inspect(earlier, submitted, evidence_dir=evidence, allow_proportional_resize=True,
+                         allow_oriented_crop=True, allow_oriented_resize=True, allow_embedded_photo=True,
+                         allow_scaled_screenshot=True)
+        require(result == comparison, "Scaled screenshot measurements differ from the source replay")
+        paths = sorted(evidence.glob("*.png"))
+        require(type(assets) is dict and set(assets) == {path.name for path in paths},
+                "The exported scaled screenshot assets differ from the source replay")
+        for path in paths:
+            encoded = base64.b64encode(path.read_bytes()).decode("ascii")
+            require(assets[path.name] == encoded, f"The exported {path.name} differs from the source replay")
+    return {"reported_status": "comparable", "source_hashes_verified": 2,
+            "crops_verified": 2 * len(result["regions"]),
+            "mask_pixels_counted": sum(region["selected_pixels"] for region in result["regions"])}
+
+
 def review(export: Path, earlier: Path, submitted: Path) -> dict:
     document = json.loads(existing._read(export, existing.MAX_JSON_BYTES), object_pairs_hook=existing._record)
     existing._require(type(document) is dict and set(document) == {"comparison", "pngs"}, "Expected a comparison JSON export")
     comparison, assets = document["comparison"], document["pngs"]
     schema = comparison["schema"]
+    if schema == SCALED_SCREENSHOT_SCHEMA:
+        return _replay_scaled_screenshot(comparison, assets, earlier, submitted)
     if schema not in {SCHEMA, SCREENSHOT_SCHEMA}:
         return previous.review(export, earlier, submitted)
     existing._require(type(assets) is dict, "Expected PNG assets indexed by filename")

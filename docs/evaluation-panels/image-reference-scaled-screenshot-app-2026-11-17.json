@@ -1,0 +1,65 @@
+{
+  "simulated_prepaid_analyses": 4,
+  "jobs_before_payment": 0,
+  "browser": {
+    "browser": "153.0.8010.12",
+    "verified": [
+      "edited-png",
+      "edited-jpeg75",
+      "clean-jpeg85",
+      "empty-template"
+    ],
+    "page_errors": 0
+  },
+  "same_main_assessments": true,
+  "export_comparisons": [
+    {
+      "name": "edited-png",
+      "status": "comparable",
+      "schema": "chipmunk.image-reference-comparison/27",
+      "regions": 1,
+      "compared": {
+        "x": 95,
+        "y": 66,
+        "w": 499,
+        "h": 314
+      }
+    },
+    {
+      "name": "edited-jpeg75",
+      "status": "comparable",
+      "schema": "chipmunk.image-reference-comparison/27",
+      "regions": 1,
+      "compared": {
+        "x": 99,
+        "y": 70,
+        "w": 491,
+        "h": 306
+      }
+    },
+    {
+      "name": "clean-jpeg85",
+      "status": "comparable",
+      "schema": "chipmunk.image-reference-comparison/27",
+      "regions": 0,
+      "compared": {
+        "x": 99,
+        "y": 70,
+        "w": 491,
+        "h": 306
+      }
+    },
+    {
+      "name": "empty-template",
+      "status": "unsupported_resize_geometry",
+      "schema": "chipmunk.image-reference-comparison/3",
+      "regions": 0,
+      "compared": null
+    }
+  ],
+  "jpeg_export_source_replay": {
+    "source_hashes_verified": 2,
+    "crops_verified": 2,
+    "mask_pixels_counted": 2397
+  }
+}

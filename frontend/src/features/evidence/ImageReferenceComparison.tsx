@@ -7,7 +7,7 @@ import {
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
   IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
   pngOpacitySchema, exactWebpSchema, lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema,
-  earlierHeifSchema, earlierJpegWebpSchema, imageFramingSchema, perspectiveSchema, webpColorSchema,
+  earlierHeifSchema, earlierJpegWebpSchema, imageFramingSchema, perspectiveSchema, scaledScreenshotSchema, webpColorSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -76,6 +76,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const orientedCrop = comparison.schema === exactOrientedCropSchema ? comparison.exact_oriented_crop : orientedResize
   const orientation = comparison.schema === exactPngOrientationSchema ? comparison.exact_orientation : orientedCrop
   const embeddedPhoto = comparison.schema === embeddedPhotoSchema ? comparison.embedded_native_photo : undefined
+  const scaledScreenshot = comparison.schema === scaledScreenshotSchema ? comparison.scaled_screenshot : undefined
   const delivery = comparison.schema === jpegPngEnvelopeSchema
   const earlierHeif = comparison.schema === earlierHeifSchema
   const perspective = comparison.schema === perspectiveSchema || earlierHeif ? comparison.perspective_check : undefined
@@ -253,7 +254,26 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
         Pixels outside those areas were unassessed. Local edits or interface overlays can produce differences. AI origin remains unassessed.
       </p>
     </>}
-    {(alignment || embeddedPhoto || (comparable && regions.length > 0)) && <p className="mt-3 mb-0 text-caption text-text-muted">
+    {scaledScreenshot && <>
+      <p className="mt-3 mb-0 text-small text-text-muted">
+        Matching detail in {scaledScreenshot.support_cells.length} areas placed the resized earlier photo inside the screenshot.
+        {scaledScreenshot.jpeg_delivery_modeled && ' The comparison allowed for JPEG compression.'}
+        {scaledScreenshot.reference_profile_applied && ' The earlier crop uses sRGB display colors.'}
+        {' '}Local edits or interface overlays can produce differences. This comparison carries no weight in the AI assessment.
+      </p>
+      <dl className="mt-3 mb-0 grid grid-cols-1 gap-2 text-small text-text-muted sm:grid-cols-2">
+        <div><dt className="font-medium text-text">Screenshot photo area</dt><dd className="m-0"><NativeArea area={scaledScreenshot.submitted_bounds} /></dd></div>
+        <div><dt className="font-medium text-text">Area compared</dt><dd className="m-0"><NativeArea area={scaledScreenshot.compared_bounds} /></dd></div>
+      </dl>
+      <details className="mt-2 text-small text-text-muted">
+        <summary className="cursor-pointer">Show the area compared</summary>
+        <div className="mt-2 max-w-xl">
+          <ComparisonPicture result={result} artifact={comparison.coverage_mask} label="Compared area in submitted image coordinates" />
+          <p className="mt-2 mb-0 text-caption text-text-muted">White marks the pixels included in the comparison.</p>
+        </div>
+      </details>
+    </>}
+    {(alignment || embeddedPhoto || scaledScreenshot || (comparable && regions.length > 0)) && <p className="mt-3 mb-0 text-caption text-text-muted">
       Coordinates use each image’s own pixels, measured from the top left after correcting its stored orientation.
     </p>}
     {alignment && <dl className="mt-3 mb-0 grid grid-cols-1 gap-2 text-small text-text-muted sm:grid-cols-2">

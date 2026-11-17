@@ -13,6 +13,10 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [resized screenshot replay](image-reference-scaled-screenshot-2026-11-17.md#replay)
+uses matched Chromium captures and 864 input commitments to check placement,
+edit localization and clean-image false highlights across PNG and JPEG.
+
 The [archive sentence replay](writing-archive-sentences-2026-11-17.md#replay-locally)
 recounts 330 report deliveries and verifies the submitted positions against
 the original text and earlier transcript. Separate sentences preserve the

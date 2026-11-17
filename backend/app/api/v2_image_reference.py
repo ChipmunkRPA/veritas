@@ -194,6 +194,7 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
     try:
         comparison = inspect(reference_path, submitted_path, evidence_dir=artifacts, allow_proportional_resize=True,
                              allow_oriented_crop=True, allow_oriented_resize=True, allow_embedded_photo=True, allow_png_opacity=True,
+                             allow_scaled_screenshot=True,
                              allow_exact_jpeg_identity=settings.image_reference_exact_jpeg_identity,
                              allow_shifted_jpeg=settings.image_reference_shifted_jpeg,
                              allow_structure_jpeg=settings.image_reference_structure_jpeg,

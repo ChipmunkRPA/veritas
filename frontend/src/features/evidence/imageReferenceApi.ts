@@ -99,6 +99,16 @@ export interface ImageReferenceRecord {
     witness_cells: [number, number, number][]
     native_difference_sha256: string
   }
+  scaled_screenshot?: {
+    reference_bounds: NativeImageArea
+    submitted_bounds: NativeImageArea
+    compared_bounds: NativeImageArea
+    support_grid_size: number
+    support_cells: [number, number][]
+    aligned_features: number
+    jpeg_delivery_modeled: boolean
+    reference_profile_applied: boolean
+  }
   same_framing_structure?: {
     detailed_tiles: number
     aligned_tiles: [number, number][]
@@ -156,6 +166,7 @@ export const webpColorSchema = 'chipmunk.image-reference-comparison/23'
 export const earlierJpegWebpSchema = 'chipmunk.image-reference-comparison/24'
 export const perspectiveSchema = 'chipmunk.image-reference-comparison/25'
 export const earlierHeifSchema = 'chipmunk.image-reference-comparison/26'
+export const scaledScreenshotSchema = 'chipmunk.image-reference-comparison/27'
 const lossyWebpSchemas = [lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema]
 export const imageFramingSchema = (record: ImageReferenceRecord) =>
   record.schema === webpColorSchema ? record.comparison_schema : record.schema
@@ -507,6 +518,39 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
             || region.y + region.h > photo.y + photo.h
         })) {
       throw new Error('The server returned an incomplete screenshot comparison.')
+    }
+  }
+  if (comparison.schema === scaledScreenshotSchema) {
+    const proof = comparison.scaled_screenshot
+    const coverage = comparison.coverage_mask
+    const { width, height } = comparison.submitted
+    const { width: rw, height: rh } = comparison.reference
+    if (!proof || comparison.status !== 'comparable' || comparison.affects_overall_confidence !== false
+        || !coverage || coverage.width !== width || coverage.height !== height
+        || !validAreaWithin(proof.reference_bounds, rw, rh) || proof.reference_bounds.w !== rw || proof.reference_bounds.h !== rh
+        || !validAreaWithin(proof.submitted_bounds, width, height)
+        || typeof proof.jpeg_delivery_modeled !== 'boolean' || typeof proof.reference_profile_applied !== 'boolean'
+        || !Number.isSafeInteger(proof.aligned_features) || proof.aligned_features < 20
+        || proof.support_grid_size !== 5 || !Array.isArray(proof.support_cells) || proof.support_cells.length < 15
+        || !proof.support_cells.every(cell => Array.isArray(cell) && cell.length === 2
+          && cell.every(index => Number.isSafeInteger(index) && index >= 0 && index < proof.support_grid_size))) {
+      throw new Error('The server returned an incomplete resized screenshot comparison.')
+    }
+    const { x, y, w, h } = proof.submitted_bounds
+    const compared = proof.compared_bounds
+    const border = proof.jpeg_delivery_modeled ? 8 : 4
+    if (!validArea(compared) || compared.x !== x + border || compared.y !== y + border
+        || compared.w !== w - 2 * border || compared.h !== h - 2 * border
+        || comparison.regions.some(region => {
+          const earlier = region.reference_region
+          if (!validArea(region) || !validAreaWithin({ ...region, x: region.x - compared.x, y: region.y - compared.y },
+            compared.w, compared.h) || !validArea(earlier)) return true
+          const [left, top] = [Math.floor((region.x - x) * rw / w), Math.floor((region.y - y) * rh / h)]
+          const right = Math.ceil((region.x + region.w - x) * rw / w)
+          const bottom = Math.ceil((region.y + region.h - y) * rh / h)
+          return earlier.x !== left || earlier.y !== top || earlier.w !== right - left || earlier.h !== bottom - top
+        })) {
+      throw new Error('The server returned inconsistent resized screenshot coordinates.')
     }
   }
   if (comparison.schema === jpegPngEnvelopeSchema) {

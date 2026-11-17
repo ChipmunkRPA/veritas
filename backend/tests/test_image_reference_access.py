@@ -609,6 +609,73 @@ def test_screenshot_photo_comparison_keeps_both_native_areas_and_exports(referen
         review_oriented_resize(export, original, analyzed)
 
 
+@pytest.mark.parametrize("quality", [None, 75])
+def test_scaled_screenshot_exports_coverage_native_crops_and_overlay(reference_http, quality, tmp_path):
+    f = reference_http
+    earlier = f.reference_pixels.copy()
+    edited = earlier.copy()
+    edited[72:122, 101:148] = (221, 41, 150)
+    x, y, width, height = 101, 82, 301, 201
+    screen = np.full((415, 534, 3), (238, 222, 242), np.uint8)
+    screen[y:y+height, x:x+width] = np.asarray(Image.fromarray(edited).resize((width, height), Image.Resampling.BICUBIC))
+    body = io.BytesIO()
+    if quality:
+        Image.fromarray(screen).save(body, format="JPEG", quality=quality, subsampling=2)
+    else:
+        body.write(_png(screen))
+    stored = f.store.put_bytes(body.getvalue())
+    with Session(f.engine) as db:
+        analysis = db.get(Analysis, "image-a")
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        db.commit()
+
+    reply = f.client.post(_url(), files=_upload(f.reference), headers=f.viewer, data={"include_pdf": "true"})
+    assert reply.status_code == 200
+    payload = reply.json()
+    comparison = payload["comparison"]
+    assert comparison["schema"] == "chipmunk.image-reference-comparison/27"
+    assert comparison["affects_overall_confidence"] is False
+    proof = comparison["scaled_screenshot"]
+    assert proof["submitted_bounds"] == {"x": x, "y": y, "w": width, "h": height}
+    assert proof["jpeg_delivery_modeled"] is bool(quality)
+    border = 8 if quality else 4
+    expected = np.zeros(screen.shape[:2], bool)
+    expected[y+border:y+height-border, x+border:x+width-border] = True
+    decoded = []
+    for asset in [comparison["coverage_mask"], comparison["mask"]]:
+        encoded = _asset_bytes(payload, asset)
+        assert hashlib.sha256(encoded).hexdigest() == asset["sha256"]
+        with Image.open(io.BytesIO(encoded)) as source:
+            decoded.append(np.asarray(source) == 255)
+    coverage, difference = decoded
+    np.testing.assert_array_equal(coverage, expected)
+    assert np.all(~difference | coverage)
+    [region] = comparison["regions"]
+    assert region["selected_pixels"] == difference.sum()
+    for label, pixels, bounds in (("reference", earlier, region["reference_region"]),
+                                  ("submitted", np.asarray(Image.open(body).convert("RGB")), region)):
+        rx, ry, rw, rh = (bounds[key] for key in ("x", "y", "w", "h"))
+        with Image.open(io.BytesIO(_asset_bytes(payload, region[f"{label}_crop"]))) as crop:
+            np.testing.assert_array_equal(np.asarray(crop), pixels[ry:ry+rh, rx:rx+rw])
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as pdf:
+        assert "Screenshot area compared" in pdf[0].get_text()
+        assert ("allowed for JPEG compression" in pdf[0].get_text()) is bool(quality)
+        _assert_pdf_assets(pdf, pdf[0], [comparison["coverage_mask"], comparison["mask"]], payload)
+        _assert_pdf_assets(pdf, pdf[1], [region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")], payload)
+    export, original, analyzed = (tmp_path / name for name in ("comparison.json", "earlier.png", "submitted"))
+    payload.pop("pdf")
+    export.write_text(json.dumps(payload))
+    original.write_bytes(f.reference)
+    analyzed.write_bytes(body.getvalue())
+    receipt = review_oriented_resize(export, original, analyzed)
+    assert receipt["source_hashes_verified"] == 2 and receipt["crops_verified"] == 2
+    assert receipt["mask_pixels_counted"] == difference.sum()
+    proof["compared_bounds"]["x"] += 1
+    export.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="measurements differ from the source replay"):
+        review_oriented_resize(export, original, analyzed)
+
+
 def test_gate_requires_opt_in_completed_image_and_retained_original(reference_http, monkeypatch):
     f = reference_http
     response = f.client.get(_url(), headers=f.viewer)

@@ -33,6 +33,7 @@ from app.detectors.image import (
     reference_png_screenshot,
     reference_resize,
     reference_same_jpeg,
+    reference_scaled_screenshot,
     reference_shifted_jpeg,
     reference_structure_jpeg,
     reference_webp_color,
@@ -193,7 +194,7 @@ def _heif_comparison(earlier, questioned, before, after, evidence_dir):
 def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | None = None,
             allow_integer_alignment: bool = False, allow_proportional_resize: bool = False,
             allow_oriented_crop: bool = False, allow_oriented_resize: bool = False,
-            allow_embedded_photo: bool = False, allow_exact_jpeg_identity: bool = False,
+            allow_embedded_photo: bool = False, allow_scaled_screenshot: bool = False, allow_exact_jpeg_identity: bool = False,
             allow_shifted_jpeg: bool = False, allow_structure_jpeg: bool = False,
             allow_same_jpeg: bool = False, allow_jpeg_detail_loss: bool = False,
             allow_jpeg_detail_loss_extra_qualities: bool = False, allow_png_opacity: bool = False,
@@ -248,7 +249,7 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                 result, mask = reference_lossless_webp.compare(reference, submitted)
             result["affects_overall_confidence"] = False
         elif opacity is None and (allow_integer_alignment or allow_proportional_resize or allow_oriented_crop
-                                or allow_oriented_resize or allow_embedded_photo
+                                or allow_oriented_resize or allow_embedded_photo or allow_scaled_screenshot
                 ) and not np.array_equal(reference, submitted):
             result, mask = (reference_png_orientation.compare(reference, submitted, questioned)
                             if allow_proportional_resize else (None, None))
@@ -280,6 +281,16 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                 embedded_photo, selection = reference_png_screenshot.compare(reference, submitted, questioned)
                 if embedded_photo is not None:
                     result, mask, schema = embedded_photo, selection, reference_png_screenshot.SCHEMA
+            if allow_scaled_screenshot and result["status"] != "comparable":
+                scaled_photo, selection, display_reference = reference_scaled_screenshot.compare(
+                    reference, submitted, original, questioned)
+                if scaled_photo is not None:
+                    result, mask, schema = scaled_photo, selection, reference_scaled_screenshot.SCHEMA
+                    reference = display_reference
+                    area = result["scaled_screenshot"]["compared_bounds"]
+                    x, y, w, h = (area[key] for key in ("x", "y", "w", "h"))
+                    coverage = np.zeros(submitted.shape[:2], dtype=bool)
+                    coverage[y:y+h, x:x+w] = True
         elif opacity is None:
             result, mask = reference_compare.compare_across_deliveries(reference, submitted, questioned)
         if not webp and allow_exact_jpeg_identity and result["status"] == "integer_alignment_unresolved":
@@ -298,7 +309,7 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             exact, selection = reference_same_jpeg.compare(original, questioned, before, after)
             if exact is not None:
                 result, mask, schema = exact, selection, reference_same_jpeg.SCHEMA
-        if not webp and allow_jpeg_detail_loss and not result["regions"]:
+        if not webp and allow_jpeg_detail_loss and not result["regions"] and schema != reference_scaled_screenshot.SCHEMA:
             detailed, selection = reference_jpeg_detail_loss.compare(original, questioned, before, after)
             if detailed is not None:
                 result, mask, schema = detailed, selection, reference_jpeg_detail_loss.SCHEMA
@@ -318,6 +329,7 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
     interpretation = {reference_structure_jpeg.SCHEMA: reference_structure_jpeg.INTERPRETATION,
                       reference_same_jpeg.SCHEMA: reference_same_jpeg.INTERPRETATION,
                       reference_perspective.SCHEMA: reference_perspective.INTERPRETATION,
+                      reference_scaled_screenshot.SCHEMA: reference_scaled_screenshot.INTERPRETATION,
                       reference_lossless_webp.SCHEMA: (reference_lossless_webp.INTERPRETATION
                                                        if result["status"] == "comparable" else reference_lossless_webp.LIMITATION),
                       reference_lossy_webp.SCHEMA: (reference_lossy_webp.INTERPRETATION

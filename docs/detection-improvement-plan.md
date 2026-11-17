@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Resized photos in screenshots](image-reference-scaled-screenshot-2026-11-17.md)
+  adds 19–20 correct edit locations out of 24 per encoding, versus zero
+  with the previous earlier-photo comparison. There were zero highlights
+  on 192 clean captures. The app, comparison PDF and JSON show native
+  crops and the screenshot area compared.
+
 - [Brief sound dropouts in videos with cuts](video-sound-dropouts-across-cuts-2026-11-17.md)
   adds 24 correct late-shot locations out of 36 staged edits per encoding,
   with zero flags on 54 matched controls per encoding. The app lists covered

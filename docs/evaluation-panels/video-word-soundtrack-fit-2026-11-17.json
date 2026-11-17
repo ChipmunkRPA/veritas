@@ -1,0 +1,63 @@
+{
+  "exact_reproduction_from_publisher_archives": true,
+  "fitted_streams_by_split": {
+    "calibration": 13,
+    "fit": 1162
+  },
+  "history": [
+    {
+      "controls": 65,
+      "correct_digits": 11,
+      "digits": 13,
+      "epoch": 4,
+      "loss": 0.687406,
+      "non_digit_flags": 1
+    },
+    {
+      "controls": 65,
+      "correct_digits": 9,
+      "digits": 13,
+      "epoch": 8,
+      "loss": 0.627478,
+      "non_digit_flags": 2
+    },
+    {
+      "controls": 65,
+      "correct_digits": 11,
+      "digits": 13,
+      "epoch": 12,
+      "loss": 0.604198,
+      "non_digit_flags": 3
+    },
+    {
+      "controls": 65,
+      "correct_digits": 9,
+      "digits": 13,
+      "epoch": 16,
+      "loss": 0.585517,
+      "non_digit_flags": 1
+    },
+    {
+      "controls": 65,
+      "correct_digits": 9,
+      "digits": 13,
+      "epoch": 20,
+      "loss": 0.578221,
+      "non_digit_flags": 1
+    },
+    {
+      "controls": 65,
+      "correct_digits": 9,
+      "digits": 13,
+      "epoch": 22,
+      "loss": 0.575997,
+      "non_digit_flags": 2
+    }
+  ],
+  "licence": "CC BY 4.0",
+  "prepared_observations": 34256,
+  "publisher": "https://zenodo.org/records/3736465",
+  "schema": "chipmunk.video-word-short-window-fit/1",
+  "source_plan_sha256": "fe0988db44cc68437ec7cf2a186394836da87d291f1386f20a0d81633c2269f5",
+  "weight_sha256": "bb359004de18c4a93126905c3ab24423e63e90cd1db546869294663764b789fa"
+}

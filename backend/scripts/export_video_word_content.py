@@ -10,6 +10,7 @@ from collections import Counter
 from hashlib import sha256
 from pathlib import Path
 
+from app.bench import video_word_soundtrack as soundtrack
 from app.bench.video_word_content import ARMS, CARRIERS, MATCH, ROLES, overlap, read, review
 from app.detectors.video.decode import decode_frames, probe_frames
 from scripts import export_video_lip_correspondence as export
@@ -31,10 +32,7 @@ def frames(path, chosen):
     ]
 
 
-def run(plan, frozen, measured, sources, output):
-    review(measured, frozen)
-    captured = read(measured)
-    selected = read(plan)["rows"]
+def bound_inputs(plan, captured):
     if sha256(plan.read_bytes()).hexdigest() != captured["source"]:
         raise ValueError("The native replay must use the held source plan")
     cases = {}
@@ -56,6 +54,18 @@ def run(plan, frozen, measured, sources, output):
                     "audible_digit": source["expected_audible"],
                     **row,
                 }
+    selected = read(plan)["rows"]
+    if {row["target"]["front_sha256"] for row in selected} != {
+        row["source_sha256"] for row in captured["rows"]
+    }:
+        raise ValueError("The native replay roster differs from the measured sources")
+    return selected, cases
+
+
+def run(plan, frozen, measured, sources, output):
+    review(measured, frozen)
+    captured = read(measured)
+    selected, cases = bound_inputs(plan, captured)
     output.mkdir(mode=0o700)
     entries, correct = [], Counter()
     for path, original, times, row in delivery._readbacks(selected, cases, sources, output):
@@ -92,8 +102,71 @@ def run(plan, frozen, measured, sources, output):
     print(json.dumps({key: value for key, value in result.items() if key != "deliveries"}, sort_keys=True))
 
 
+def run_soundtrack(plan, frozen, measured, sources, output, previous):
+    soundtrack.review(measured, previous, frozen)
+    captured = read(measured)
+    selected, cases = bound_inputs(plan, captured)
+    output.mkdir(mode=0o700)
+    entries, locations = [], Counter()
+    for path, _, times, row in delivery._readbacks(selected, cases, sources, output):
+        carrier, role = row["carrier"], row["role"]
+        selected_points = {
+            "primary": 0.0,
+            "independent_scan": captured["points"]["independent_scan"][carrier],
+        }
+        references, evidence = {}, {}
+        for method, point in selected_points.items():
+            speech, mouth = soundtrack.selected(row, method, point)
+            for arm in ARMS:
+                if mouth is None or mouth[arm] <= captured["visual_points"][arm][carrier]:
+                    continue
+                bounds = export.frame_range(speech["span"], times)
+                truth = export.frame_range(row["truth"], times) if role == "different_words" else None
+                recognized = (
+                    speech["digit"] == row["audible_digit"] and mouth["visible_digit"] == row["visual_digit"]
+                )
+                hit = truth is not None and recognized and overlap(bounds, truth) >= MATCH
+                key = f"{method}/{arm}"
+                locations[f"{carrier}/{key}"] += bool(hit)
+                if tuple(bounds) not in evidence:
+                    evidence[tuple(bounds)] = frames(path, bounds)
+                references[key] = {
+                    "source_audio_samples": speech["span"],
+                    "frames_half_open": bounds,
+                    "truth_frames_half_open": truth,
+                    "correct": hit,
+                    "before_during_after": evidence[tuple(bounds)],
+                }
+        entries.append(
+            {
+                "file": path.name,
+                "file_sha256": sha256(path.read_bytes()).hexdigest(),
+                "source_sha256": row["picture_sha256"],
+                "source_pcm_sha256": row["source_pcm_sha256"],
+                "references": references,
+            }
+        )
+    result = {
+        "schema": "chipmunk.video-word-soundtrack-native/1",
+        "held_receipt_sha256": sha256(measured.read_bytes()).hexdigest(),
+        "verified_videos": len(entries),
+        "rechecked_sources": len(selected),
+        "correct_on_frame_grid": dict(locations),
+        "deliveries": entries,
+    }
+    raw = (json.dumps(result, sort_keys=True, indent=1) + "\n").encode()
+    (output / "native.json.gz").write_bytes(gzip.compress(raw, mtime=0))
+    print(json.dumps({key: value for key, value in result.items() if key != "deliveries"}, sort_keys=True))
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("plan", "frozen", "measured", "sources", "output"):
         parser.add_argument(name, type=Path)
-    run(**vars(parser.parse_args()))
+    parser.add_argument("--soundtrack-previous", type=Path)
+    arguments = vars(parser.parse_args())
+    previous = arguments.pop("soundtrack_previous")
+    if previous is not None:
+        run_soundtrack(**arguments, previous=previous)
+    else:
+        run(**arguments)

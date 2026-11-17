@@ -14,22 +14,21 @@ import numpy as np
 import torch
 from safetensors.torch import load_file
 
-from app.bench.video_word_content import CARRIERS, ROLES, cutoffs, recount
+from app.bench.video_word_content import AUDIO_MARGIN, AUDIO_MIN, CARRIERS, ROLES, cutoffs, recount
 from scripts.video_lip_delivery_transfer import qualified_48k
 from scripts.video_lip_sequence_panel import make_soundtracks
 from scripts.video_word_content_model import (
     AcousticDigits,
     WordSequence,
-    infer,
+    frame_logits,
     json_file,
     pin,
+    predict,
     word_tensor,
 )
 
 BOUNDARY_SHIFTS = (-320, 320)
 DELAY_TEST_SAMPLES = (-3840, -3200, -2560, -1920, -1280, 1280, 1920, 2560, 3200, 3840)
-AUDIO_MIN = 0.55
-AUDIO_MARGIN = 0.20
 VISUAL_MIN = 0.50
 
 
@@ -61,7 +60,12 @@ def lookup_weights(runner, config):
 def visual_read(patches, valid, samples, voice, assess, digits):
     if not voice or voice["posterior"] < AUDIO_MIN or voice["margin"] < AUDIO_MARGIN:
         return None
-    begin, end = voice["span"]
+    return word_window(patches, valid, samples, voice["span"], voice["digit"], assess, digits)
+
+
+def word_window(patches, valid, samples, span, audible_digit, assess, digits):
+    """Measure the fixed visual check at an independently qualified sound interval."""
+    begin, end = span
     shifts = (0, *BOUNDARY_SHIFTS, *DELAY_TEST_SAMPLES)
     observations = {}
     for shift in shifts:
@@ -72,7 +76,7 @@ def visual_read(patches, valid, samples, voice, assess, digits):
         return None
     predictions = dict(zip(observations, assess(list(observations.values())), strict=True))
     principal = predictions[0]
-    named = digits.index(voice["digit"])
+    named = digits.index(audible_digit)
     visible = int(np.argmax(principal))
 
     def score(row):
@@ -98,7 +102,7 @@ def visual_read(patches, valid, samples, voice, assess, digits):
     }
 
 
-def collect(folder, source_dir, plan, visuals, baseline, freeze=None, phase="calibration"):
+def collect(folder, source_dir, plan, visuals, baseline, freeze=None, phase="calibration", *, observe=None):
     config = {"visual_epoch": 15, "audio_epoch": 8} if freeze is None else freeze["configuration"]
     acoustic, visible, digits, weights = lookup_weights(folder, config)
     if baseline.suffix != ".gz":
@@ -150,13 +154,17 @@ def collect(folder, source_dir, plan, visuals, baseline, freeze=None, phase="cal
                             assert encoded == baseline_values["carrier_sha256"]
                         baseline_span = baseline_values["baseline"]
                         state = baseline_values["baseline_status"]
-                    voice = infer(acoustic, pcm)
-                    read = visual_read(patches, valid, samples, voice, visible, digits)
+                    frame_reading = frame_logits(acoustic, pcm)
+                    voice = predict(*frame_reading) if frame_reading is not None else None
+                    if observe is None:
+                        reading = {"mouth": visual_read(patches, valid, samples, voice, visible, digits)}
+                    else:
+                        reading = observe(pcm, patches, valid, samples, voice, visible, digits, frame_reading)
                     if voice:
                         voice = {k: (round(v, 6) if isinstance(v, float) else v) for k, v in voice.items()}
                     readings[role] = {
+                        **reading,
                         "speech": voice,
-                        "mouth": read,
                         "sha256": pcm_pin,
                         "baseline": baseline_span,
                         "baseline_status": state,

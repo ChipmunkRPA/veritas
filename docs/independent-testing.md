@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [soundtrack word-interval comparison](video-word-soundtrack-2026-11-17.md#reproduce)
+compares three recovery methods on fixed mouth readings, two separate
+sets of utterances and the original GRID capture. The 792 native-video
+replays and the model-free decision recount cover the exact selected
+audio ranges and their surrounding frames.
+
 The [whole-word replay](video-word-content-2026-11-17.md#reproduce) checks
 the same scripted digit substitution under PCM and AAC delivery. It
 separates correct word and time evidence from a misplaced range or a

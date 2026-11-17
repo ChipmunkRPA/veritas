@@ -397,7 +397,7 @@ def predict(scores, length, *, mask_point=0.5):
     return None
 
 
-def infer(model, pcm):
+def frame_logits(model, pcm):
     x = features(pcm)
     if len(x) >= LENGTH:
         return None
@@ -405,7 +405,12 @@ def infer(model, pcm):
     item[: len(x)] = x
     with torch.inference_mode():
         scores = model(torch.from_numpy(item)[None])[0]
-    return predict(scores, len(x))
+    return scores, len(x)
+
+
+def infer(model, pcm):
+    measured = frame_logits(model, pcm)
+    return predict(*measured) if measured is not None else None
 
 
 def train_acoustic(output):

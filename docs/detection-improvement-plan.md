@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Independent word intervals from the soundtrack](video-word-soundtrack-2026-11-17.md)
+  increase correctly admitted edited digits on two Lombard panels and
+  a separate GRID capture. The wider comparison adds one video edit in
+  each carrier on the first panel, one PCM edit on the second, and one
+  per carrier on GRID. Extra alerts and zero gain in the stricter arm
+  keep the single-video word comparison in evaluation.
+
 - [Whole-word sound and mouth comparison](video-word-content-2026-11-17.md)
   locates two of 24 fresh, duration-matched digit substitutions in each
   carrier, from zero with the current timing check. The stricter arm

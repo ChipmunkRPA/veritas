@@ -14,6 +14,8 @@ ARMS = ("one_window", "nearby_time_check")
 CARRIERS = ("pcm", "aac48")
 ROLES = ("original", "gain", "same_words", "different_words", "global_early", "global_late")
 MATCH = 0.40
+AUDIO_MIN = 0.55
+AUDIO_MARGIN = 0.20
 
 
 def overlap(first, second):

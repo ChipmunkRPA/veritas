@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import hashlib
 from dataclasses import replace
+from functools import cache
 
 from app.detectors.audio import short_voice_review
 from app.engine.detector import Applicability, DetectorResult
@@ -19,13 +20,18 @@ def pcm_sha256(pcm):
 
 
 def scan(pcm, activity, classifier, deadline):
+    @cache
+    def score(start, end):
+        return short_voice_review.voice_logit(classifier, pcm[start:end])
+
     readings = []
     for start in binding.excerpt_starts(len(pcm)):
         deadline.check("two-second speech scan")
         excerpt = pcm[start:start + SAMPLES]
-        row = short_voice_review.scan(excerpt, activity.spans(excerpt), classifier, deadline)
+        counts = short_voice_review.speech_counts(activity.spans(excerpt))
+        responses = short_voice_review.score_windows(counts, lambda a, b, offset=start: score(offset + a, offset + b), deadline)
         readings.append({"start_sample": start, "pcm_sha256": pcm_sha256(excerpt),
-                         "speech_samples": row["speech_counts"], "responses": row["responses"]})
+                         "speech_samples": counts, "responses": responses})
     return readings
 
 
@@ -33,21 +39,27 @@ class ExtendedShortVoiceReview(short_voice_review.ShortVoiceReview):
     spec = replace(BASE_SPEC, id=binding.DETECTOR_ID, name=binding.TITLE, version="1.0.0",
                    requirements=replace(BASE_SPEC.requirements, timeout_s=BUDGET_S))
 
-    def __init__(self, *, schema=binding.SCHEMA):
+    def __init__(self, *, schema=binding.SCHEMA, presentation_samples=None):
         self.schema = schema
+        self.presentation_samples = presentation_samples
         if schema == binding.CONFIRMED_SCHEMA:
             self.spec = replace(self.spec, version="1.1.0")
+        elif schema == binding.PRESENTED_SCHEMA:
+            self.spec = replace(self.spec, version="1.2.0")
 
     def applicable(self, ctx):
         track = ctx.outputs.audio
-        ok = track is not None and track.pcm is not None and not track.clock_breaks and bool(binding.excerpt_starts(len(track.pcm)))
+        ok = track is not None and track.pcm is not None and not track.clock_breaks
+        if ok:
+            extent = len(track.pcm) if self.presentation_samples is None else self.presentation_samples
+            ok = extent <= len(track.pcm) and bool(binding.excerpt_starts(extent))
         return Applicability(ok, None if ok else "The two-second scan needs a continuous recording from nine to fourteen seconds.")
 
     def run(self, ctx):
         pcm = ctx.outputs.audio.pcm
         activity = ctx.lease.get(short_voice_review.ACTIVITY_MODEL).obj
         voice = ctx.lease.get(short_voice_review.PellaVoiceDetector.MODEL_ID).obj
-        readings = scan(pcm, activity, voice, ctx.deadline)
+        readings = scan(pcm[:self.presentation_samples], activity, voice, ctx.deadline)
         return DetectorResult(status="ok", details={
             binding.KEY: {"schema": self.schema, "excerpts": readings},
             "pcm_sha256": pcm_sha256(pcm),

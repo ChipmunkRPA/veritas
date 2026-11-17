@@ -24,6 +24,7 @@ from app.core.config import settings
 from app.detectors.audio.coverage import interval_union
 from app.detectors.audio.decode import SAMPLE_RATE, read_wav, source_ranges, wav_bytes
 from app.evidence import audio_focused_edit_binding as focused_edit_binding
+from app.evidence import audio_two_second_binding as two_second
 from app.evidence.audio_binding import (
     MONO_VOICE_COVERAGE,
     MONO_VOICE_POLICY,
@@ -162,6 +163,15 @@ def validate_content(document: dict[str, Any]) -> None:
         try:
             validate_long_voice_review(document["long_voice_review"], source)
         except ValueError as error:
+            raise PacketIntegrityError(str(error)) from error
+    if two_second.KEY in document:
+        review = document[two_second.KEY]
+        try:
+            if (document.get("schema") != SCHEMA or review.get("schema") != two_second.PRESENTED_SCHEMA
+                    or two_second.KEY in (document.get("long_voice_review") or {})):
+                raise ValueError("Native-clock speech-window review is outside standalone audio")
+            two_second.validate(review, source)
+        except (AttributeError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
     if "background_reduced_voice_review" in document:
         from app.evidence.audio_background_review_binding import validate as validate_background_review
@@ -447,6 +457,16 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
 
         document["source"].update(source_metadata(mapping))
         document["long_voice_review"] = build_long_voice_review(
+            review, store=store, source=document["source"], pcm=pcm, mapping=mapping,
+            asset=lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
+            waveform=_chart,
+        )
+    if analysis.kind == "audio" and (review := record.get(two_second.KEY)):
+        from app.evidence.audio_long_review import build_presented
+        from app.evidence.audio_short_review_binding import source_metadata
+
+        document["source"].update(source_metadata(mapping))
+        document[two_second.KEY] = build_presented(
             review, store=store, source=document["source"], pcm=pcm, mapping=mapping,
             asset=lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
             waveform=_chart,

@@ -271,7 +271,15 @@ export interface FocusedSpeechEditReview {
 interface TwoSecondSpeechWindow extends SampleInterval {
   supporting_excerpts: number[]; pcm_sha256: string
   source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
+  native_source_range?: { start_pts: number; end_pts: number; time_base: '1/48000' }
   artifacts: Record<'selected_clip' | 'waveform', EvidenceAsset>
+}
+interface TwoSecondSpeechReview {
+  schema: 'chipmunk.extended-short-voice-review/1' | 'chipmunk.extended-short-voice-review/2' | 'chipmunk.extended-short-voice-review/3'
+  title: string; status: 'flagged' | 'no_flag' | 'unassessed' | 'skipped'
+  reason: string; limitation: string; affects_overall_confidence: false
+  excerpts: { start_sample: number; pcm_sha256: string; speech_samples: number[]; selected_window: number | null; elevated_windows?: number[] }[]
+  regions: (TwoSecondSpeechWindow & { confirming_window?: TwoSecondSpeechWindow; same_pair_as?: number })[]
 }
 export interface LongVoiceReview {
   schema: 'chipmunk.long-voice-review/1' | 'chipmunk.long-voice-review/2' | 'chipmunk.long-voice-review/3'; title: 'Long speech-window review'
@@ -292,13 +300,7 @@ export interface LongVoiceReview {
     source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
     artifacts: Record<'selected_clip' | 'waveform', EvidenceAsset>
   })[]
-  two_second_review?: {
-    schema: 'chipmunk.extended-short-voice-review/1' | 'chipmunk.extended-short-voice-review/2'
-    title: string; status: 'flagged' | 'no_flag' | 'unassessed' | 'skipped'
-    reason: string; limitation: string; affects_overall_confidence: false
-    excerpts: { start_sample: number; pcm_sha256: string; speech_samples: number[]; selected_window: number | null; elevated_windows?: number[] }[]
-    regions: (TwoSecondSpeechWindow & { confirming_window?: TwoSecondSpeechWindow; same_pair_as?: number })[]
-  }
+  two_second_review?: TwoSecondSpeechReview
 }
 export type LongVoiceCoverageStatus = 'directional' | 'inconclusive' | 'below_speech_minimum' | 'outside_schedule'
 export interface BackgroundVoiceReview {
@@ -340,6 +342,7 @@ export interface AudioEvidenceSet extends SetBase {
   short_voice_review?: ShortVoiceReview
   focused_speech_edit_review?: FocusedSpeechEditReview
   long_voice_review?: LongVoiceReview
+  two_second_review?: TwoSecondSpeechReview
   background_reduced_voice_review?: BackgroundVoiceReview
 }
 export type VideoChannelStatus = 'ready' | 'absent' | 'unavailable' | 'not_assessed' | 'not_applicable'

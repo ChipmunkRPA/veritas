@@ -258,8 +258,9 @@
 <h3>{% if review.schema in ['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4', 'chipmunk.video-lip-timing/5'] %}Speech and mouth comparison{% else %}Speech and mouth timing trial{% endif %}</h3>
 <p class="caption">{{ review.observation }}{% if review.status == 'matched' %} See <a href="#multimedia-evidence-VLT01">VLT01</a> for the original frames and waveform.{% endif %}</p>
 {% endif %}
-{% if (evidence.get('long_voice_review') or {}).get('two_second_review') %}
-{% set scan = evidence.long_voice_review.two_second_review %}
+{% set presented_scan = evidence.get('two_second_review') %}
+{% set scan = presented_scan or (evidence.get('long_voice_review') or {}).get('two_second_review') %}
+{% if scan %}
 <h3 id="multimedia-two-second-speech-review">{{ scan.title }}</h3>
 <p class="caption">{% if scan.status == 'skipped' %}Skipped. {% endif %}{{ scan.reason }}
 {% if scan.excerpts %}Completed {{ scan.checked_windows }} window checks across {{ scan.excerpts | length }} overlapping six-second excerpts.{% endif %}</p>
@@ -269,13 +270,15 @@
 {% for window in ([region, region.confirming_window] if region.get('confirming_window') else [region]) %}
 <p class="caption"><strong>{{ 'AI-like speech response' if loop.first else 'Confirming response' }}</strong>. {{ seconds_format | format(window.start_sample / 16000) }}–{{ seconds_format | format(window.end_sample / 16000) }} s.
 Samples [{{ window.start_sample }}, {{ window.end_sample }}) at 16000 Hz.
-{% for range in window.source_timestamp_ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% endfor %}</p>
+{% if window.get('native_source_range') %}
+Original source ticks [{{ window.native_source_range.start_pts }}, {{ window.native_source_range.end_pts }}) at {{ window.native_source_range.time_base }}.
+{% else %}{% for range in window.source_timestamp_ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% endfor %}{% endif %}</p>
 {% if window.waveform %}{{ plates([window.waveform]) }}{% endif %}
 {% endfor %}
 {% if region.recording_context %}<p class="caption">Overlapping recording observations {{ region.recording_context | join(', ') }}.</p>{% endif %}
 </div>
 {% endfor %}
-<p class="caption">{{ scan.limitation }} JSON pointer <span class="mono">/long_voice_review/two_second_review</span>.</p>
+<p class="caption">{{ scan.limitation }} JSON pointer <span class="mono">{{ '/two_second_review' if presented_scan else '/long_voice_review/two_second_review' }}</span>.</p>
 {% endif %}
 {% if evidence.get('short_voice_review') %}
 {% set review = evidence.short_voice_review %}

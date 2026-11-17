@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [48 kHz speech replay](audio-two-second-carriers-2026-11-17.md#reproduce-the-comparison)
+rebuilds 192 WAV and AAC deliveries and checks their exact native frame
+clock and decoded input commitments. The portable reader exports reference
+intervals and paired predictions for a separate detector. The local replay
+also checks the same source ticks in both waveforms and the PDF report.
+
 The [earlier HEIC and JPEG replay](image-reference-heif-2026-11-17.md#replay)
 rebuilds 576 held deliveries from 18 source photos. The numeric receipt
 distinguishes localized edits, ordinary exports, local blur, and unmatched

@@ -511,6 +511,16 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             review = part['long_voice_review']
             validate_long_voice_review(review, part['source'])
             groups.extend(window['artifacts'] for window in all_media_windows(review))
+        if 'two_second_review' in part:
+            from app.evidence import audio_two_second_binding as two_second
+
+            review = part[two_second.KEY]
+            _require(analysis['kind'] == 'audio' and part is evidence and isinstance(review, dict)
+                     and review.get('schema') == two_second.PRESENTED_SCHEMA
+                     and two_second.KEY not in (part.get('long_voice_review') or {}),
+                     'Native-clock speech-window review is outside standalone audio')
+            two_second.validate(review, part['source'])
+            groups.extend(window['artifacts'] for window in two_second.media_windows(review))
         if 'background_reduced_voice_review' in part:
             from app.evidence.audio_background_review_binding import validate as validate_background_review
 

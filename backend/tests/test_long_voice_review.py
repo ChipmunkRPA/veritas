@@ -5,9 +5,12 @@ from types import SimpleNamespace
 
 import numpy as np
 import pytest
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
+
 from app.core.canonical import canonical_json
 from app.core.config import settings
-from app.detectors.audio import long_voice_review
+from app.detectors.audio import extended_short_voice_review, long_voice_review, short_voice_review
 from app.detectors.audio.decode import decode_audio, read_wav, wav_bytes
 from app.engine import runs
 from app.engine.boundary import Deadline
@@ -20,8 +23,6 @@ from app.evidence import audio_two_second_binding as two_second
 from app.storage.artefacts import register_artefact
 from app.storage.db import Analysis, AnalysisStage, Base, DetectorRun
 from app.storage.objects import ObjectStore
-from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
 
 
 def native_source(samples):
@@ -345,3 +346,73 @@ def test_two_second_reciprocal_windows_share_one_exhibit():
     assert "same_pair_as" not in first and repeat["same_pair_as"] == first["start_sample"]
     assert first["confirming_window"]["start_sample"] == repeat["start_sample"]
     assert repeat["confirming_window"]["start_sample"] == first["start_sample"]
+
+
+def test_two_second_scan_reuses_only_identical_source_windows():
+    pcm = np.linspace(0, .5, 160_001, dtype="<f4")
+    spans = [(0, 6)]
+
+    class Classifier:
+        def __init__(self):
+            self.starts = []
+
+        def predict(self, chunks):
+            window, = chunks
+            first = float(window[0])
+            self.starts.append(first)
+            return [.2 + first]
+
+    cached, independent = Classifier(), Classifier()
+    rows = extended_short_voice_review.scan(pcm, SimpleNamespace(spans=lambda _: spans), cached, Deadline(None))
+    for row in rows:
+        start = row["start_sample"]
+        expected = short_voice_review.scan(pcm[start:start + short.SAMPLES], spans, independent, Deadline(None))
+        assert row["responses"] == expected["responses"] and row["speech_samples"] == expected["speech_counts"]
+    assert set(cached.starts) == set(independent.starts)
+    assert len(cached.starts) == len(set(cached.starts)) < len(independent.starts)
+
+
+def test_two_second_aac_review_ends_at_presented_samples_and_binds_native_ticks():
+    presented = 160_001
+    pcm = np.linspace(-.5, .5, presented + 127, dtype="<f4")
+    source = native_source(len(pcm)) | {
+        "source_container": short.AAC_CONTAINER, "source_codec": "aac", "source_profile": "LC",
+        "source_sample_rate": 48_000, "source_time_base": "1/48000", "source_bit_rate": 96_000,
+        "source_start_pts": 0, "source_duration_pts": 3 * presented, short.LOSSLESS_NATIVE_CLOCK: True,
+        "pcm_sha256": sha256(pcm.tobytes()).hexdigest(),
+    }
+    assert two_second.presented_samples(source) == presented
+    assert two_second.presented_samples(source | {short.LOSSLESS_NATIVE_CLOCK: False}) is None
+    assert two_second.presented_samples(source | {"source_duration_pts": 3 * presented + 1}) is None
+    assert two_second.presented_samples(source | {"source_start_pts": 480}) is None
+    assert two_second.presented_samples(source | {"source_bit_rate": 160_000}) is None
+
+    readings = []
+    for start in two_second.excerpt_starts(presented):
+        excerpt = pcm[start:start + short.SAMPLES]
+        scores = [{"start_sample": a, "end_sample": b, "logit": short.AAC_REVIEW_POINT + (1 if i > 2 else -1)}
+                  for i, (a, b) in enumerate(short.GRID)]
+        readings.append({"start_sample": start, "pcm_sha256": sha256(excerpt.tobytes()).hexdigest(),
+                         "speech_samples": [short.RATE] * len(short.GRID), "responses": scores})
+    raw = canonical_json({"detector_id": two_second.DETECTOR_ID, "status": "ok", "details": {
+        "pcm_sha256": source["pcm_sha256"], two_second.KEY: {"schema": two_second.PRESENTED_SCHEMA, "excerpts": readings}}})
+    pin = sha256(raw).hexdigest()
+    store, assets = SimpleNamespace(read_bytes={pin: raw}.__getitem__), {}
+
+    def asset(data, media_type, **metadata):
+        digest = sha256(data).hexdigest()
+        assets[digest] = data
+        return {"sha256": digest, "media_type": media_type, **metadata}
+
+    record = {"raw_output_sha256": pin}
+    review = audio_long_review.build_presented(record, store=store, source=source, pcm=pcm, mapping=source,
+                                             asset=asset, waveform=audio_packets._chart)
+    assert review["status"] == "flagged"
+    assert review["excerpts"][-1]["start_sample"] + short.SAMPLES == presented
+    assert all(window["end_sample"] <= presented for window in two_second.media_windows(review))
+    audio_long_review.verify(review, record, store=store, source=source, pcm=pcm, mapping=source,
+                             read_asset=assets.__getitem__, waveform=audio_packets._chart)
+    audio_long_review.verify_presented_source(review, pcm=pcm, mapping=source, waveform=audio_packets._chart)
+    review["regions"][0]["confirming_window"]["native_source_range"]["end_pts"] += 1
+    with pytest.raises(ValueError, match="differs from the native source clock"):
+        two_second.validate(review, source)

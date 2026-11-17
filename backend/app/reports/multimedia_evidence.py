@@ -110,6 +110,10 @@ def asset_items(document: dict[str, Any]):
             for index, window in enumerate(all_media_windows(review)):
                 for role, asset in sorted(window["artifacts"].items()):
                     yield None, f"long_voice_review_{index}_{role}", asset
+        if review := part.get(audio_two_second_binding.KEY):
+            for index, window in enumerate(audio_two_second_binding.media_windows(review)):
+                for role, asset in sorted(window["artifacts"].items()):
+                    yield None, f"two_second_review_{index}_{role}", asset
         for role, asset in sorted((part.get("background_reduced_voice_review") or {}).get("artifacts", {}).items()):
             yield None, f"background_reduced_voice_review_{role}", asset
         for window in (part.get("stereo_listening") or {}).get("windows", []):
@@ -547,7 +551,9 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                                       read_asset=assets.__getitem__, waveform=audio_packets._chart)
         except (ValueError, KeyError, TypeError) as error:
             raise ObjectIntegrityError("Frozen focused speech evidence differs from the saved response") from error
-    if (review := document.get("long_voice_review")) is not None:
+    for key in ("long_voice_review", audio_two_second_binding.KEY):
+        if (review := document.get(key)) is None:
+            continue
         from app.evidence import audio_long_review, audio_packets
         from app.evidence.audio_short_review_binding import source_metadata_matches
 
@@ -555,11 +561,11 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         try:
             if not source_metadata_matches(source, mapping):
                 raise ValueError("Audio codec scope changed")
-            record = result["manifest"]["sampling"]["audio_evidence"]["long_voice_review"]
+            record = result["manifest"]["sampling"]["audio_evidence"][key]
             audio_long_review.verify(review, record, store=store, source=source, pcm=pcm, mapping=mapping,
                                      read_asset=assets.__getitem__, waveform=audio_packets._chart)
         except (ValueError, KeyError, TypeError) as error:
-            raise ObjectIntegrityError("Frozen long speech-window evidence differs from its recorded inputs") from error
+            raise ObjectIntegrityError("Frozen speech-window evidence differs from its recorded inputs") from error
     if (review := document.get("background_reduced_voice_review")) is not None:
         from app.evidence import audio_background_review, audio_packets
         from app.evidence.audio_short_review_binding import source_metadata_matches
@@ -1482,6 +1488,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             and event["interval"]["end_sample"] > interval["start_sample"]
         ]
     long_voice_review = copy.deepcopy(document.get("long_voice_review"))
+    presented_two_second = copy.deepcopy(document.get(audio_two_second_binding.KEY))
     if long_voice_review:
         from app.evidence.audio_long_review_binding import COVERAGE, COVERAGE_LABELS, LABELS, media_windows
 
@@ -1495,22 +1502,22 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             if asset := window["artifacts"].get("waveform"):
                 caption = "Waveform with the selected speech range highlighted" if focused else "Waveform with the reviewed three-second window highlighted"
                 window["waveform"] = plate("waveform", asset, caption)
-        if review := long_voice_review.get(audio_two_second_binding.KEY):
-            review["checked_windows"] = sum(count >= audio_two_second_binding.RATE
-                                            for excerpt in review["excerpts"] for count in excerpt["speech_samples"])
-            review["regions"] = [region for region in review["regions"] if "same_pair_as" not in region]
-            for region in review["regions"]:
-                region["waveform"] = plate("waveform", region["artifacts"]["waveform"], "Waveform with the two-second window highlighted")
-                confirming = region.get("confirming_window")
-                if confirming is not None:
-                    confirming["waveform"] = plate("waveform", confirming["artifacts"]["waveform"],
-                                                  "Waveform with the confirming window highlighted")
-                windows = (region, confirming) if confirming is not None else (region,)
-                region["recording_context"] = [
-                    event["id"] for event in (document.get("acoustic_context") or {}).get("events", ())
-                    if any(event["interval"]["start_sample"] < window["end_sample"]
-                           and event["interval"]["end_sample"] > window["start_sample"] for window in windows)
-                ]
+    if review := presented_two_second or (long_voice_review or {}).get(audio_two_second_binding.KEY):
+        review["checked_windows"] = sum(count >= audio_two_second_binding.RATE
+                                        for excerpt in review["excerpts"] for count in excerpt["speech_samples"])
+        review["regions"] = [region for region in review["regions"] if "same_pair_as" not in region]
+        for region in review["regions"]:
+            region["waveform"] = plate("waveform", region["artifacts"]["waveform"], "Waveform with the two-second window highlighted")
+            confirming = region.get("confirming_window")
+            if confirming is not None:
+                confirming["waveform"] = plate("waveform", confirming["artifacts"]["waveform"],
+                                              "Waveform with the confirming window highlighted")
+            windows = (region, confirming) if confirming is not None else (region,)
+            region["recording_context"] = [
+                event["id"] for event in (document.get("acoustic_context") or {}).get("events", ())
+                if any(event["interval"]["start_sample"] < window["end_sample"]
+                       and event["interval"]["end_sample"] > window["start_sample"] for window in windows)
+            ]
     background_review = copy.deepcopy(document.get("background_reduced_voice_review"))
     if background_review and (asset := background_review["artifacts"].get("waveform")):
         background_review["waveform"] = plate("waveform", asset, "Original waveform across the flagged three-second interval")
@@ -1556,6 +1563,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "short_voice_review": short_voice_review,
             audio_focused_edit_binding.KEY: focused_edit,
             "long_voice_review": long_voice_review,
+            audio_two_second_binding.KEY: presented_two_second,
             "background_reduced_voice_review": background_review,
             "stereo_context": stereo_context,
             "stereo_listening": stereo_listening,

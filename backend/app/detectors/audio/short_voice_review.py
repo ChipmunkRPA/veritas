@@ -35,16 +35,25 @@ def skipped(reason: str) -> dict:
     return {"schema": SCHEMA, "status": "skipped", "reason": reason, "responses": [], "selected": None}
 
 
-def scan(pcm, spans, classifier, deadline, *, codec=None) -> dict:
-    counts = speech_counts(spans)
+def voice_logit(classifier, pcm):
+    probability, = classifier.predict([pcm])
+    return calibration.logit(probability)
+
+
+def score_windows(counts, score, deadline):
     responses = []
     for (a, b), speech in zip(GRID, counts, strict=True):
         if 2 * speech < b - a:
             continue
         deadline.check("short voice review")
-        probability, = classifier.predict([pcm[a:b]])
-        responses.append({"start_sample": a, "end_sample": b, "logit": calibration.logit(probability)})
+        responses.append({"start_sample": a, "end_sample": b, "logit": score(a, b)})
     deadline.check("short voice review")
+    return responses
+
+
+def scan(pcm, spans, classifier, deadline, *, codec=None) -> dict:
+    counts = speech_counts(spans)
+    responses = score_windows(counts, lambda a, b: voice_logit(classifier, pcm[a:b]), deadline)
     selected = selected_range(responses, codec)
     if not responses:
         status, reason = "skipped", NO_SPEECH_REASON

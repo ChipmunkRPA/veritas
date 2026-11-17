@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Confirmed speech windows on 48 kHz mono audio](audio-two-second-carriers-2026-11-17.md)
+  increase useful locations under louder competing speech from 20 to 25 of
+  157 in WAV and from 22 to 25 in AAC across two source-separated cohorts.
+  The same ordinary control gained a flag in both carriers. The local app
+  reports both windows on the native clock for supported WAV, FLAC and AAC,
+  with zero AI-score weight. Most short edits under strong noise remain missed.
+
 - [Earlier HEIC compared with a cropped JPEG](image-reference-heif-2026-11-17.md)
   locates 126 of 144 staged changes on 18 held source photos. The check
   shows no highlights on 194 assessed ordinary exports out of 216 and

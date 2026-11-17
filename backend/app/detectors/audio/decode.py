@@ -23,7 +23,15 @@ from typing import Any
 import numpy as np
 
 from app.detectors.video.decode import _input
-from app.evidence.audio_short_review_binding import LOSSLESS_FORMATS, LOSSLESS_NATIVE_CLOCK, LOSSLESS_RATE
+from app.evidence.audio_short_review_binding import (
+    AAC_CONTAINER,
+    AAC_FRAME,
+    LOSSLESS_FORMATS,
+    LOSSLESS_NATIVE_CLOCK,
+    LOSSLESS_RATE,
+)
+from app.evidence.audio_two_second_binding import MAXIMUM as LONG_WINDOW_MAXIMUM
+from app.evidence.audio_two_second_binding import MINIMUM as LONG_WINDOW_MINIMUM
 from app.evidence.stereo_binding import MAX_SECONDS as STEREO_MAX_SECONDS
 
 SAMPLE_RATE = 16_000
@@ -163,6 +171,11 @@ def _exact_zero_based_clock(log: str, samples: int) -> bool:
         return False
 
 
+def _native_presentation_clock(log: str, extent: int, padding: int) -> bool:
+    total = sum(int(count) for _, _, count in _FRAME.findall(log))
+    return extent <= total <= extent + padding and _exact_zero_based_clock(log, total)
+
+
 def _read_stereo(path: Path, limit: int, *, rate: int = SAMPLE_RATE) -> np.ndarray:
     with wave.open(str(path), "rb") as wav:
         count = wav.getnframes()
@@ -238,12 +251,18 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
         maximum = math.floor(max_seconds * SAMPLE_RATE)
         filters = f"aformat=sample_fmts=s16:channel_layouts=mono,aresample={SAMPLE_RATE},atrim=end_sample={maximum},ashowinfo,asetpts=N/SR/TB"
         layout = stream.get("channel_layout")
-        native_extent = 6 * LOSSLESS_RATE
+        source_format = (fmt.get("format_name"), stream.get("codec_name"))
+        native_extent = stream.get("duration_ts")
+        lossless_clock = source_format in LOSSLESS_FORMATS
+        aac_clock = (source_format == (AAC_CONTAINER, "aac") and stream.get("profile") == "LC"
+                     and stream.get("start_pts") == 0)
+        longer_extent = (type(native_extent) is int and native_extent % 3 == 0
+                         and LONG_WINDOW_MINIMUM <= native_extent // 3 <= LONG_WINDOW_MAXIMUM)
+        six_second_lossless = lossless_clock and native_extent == 6 * LOSSLESS_RATE and max_seconds >= 7
         inspect_native_clock = (
-            len(streams) == 1 and max_seconds >= 7
-            and (fmt.get("format_name"), stream.get("codec_name")) in LOSSLESS_FORMATS
-            and (stream.get("channels"), stream.get("sample_rate"), stream.get("time_base"), stream.get("duration_ts"))
-            == (1, str(LOSSLESS_RATE), f"1/{LOSSLESS_RATE}", native_extent)
+            len(streams) == 1 and (stream.get("channels"), stream.get("sample_rate"), stream.get("time_base"))
+            == (1, str(LOSSLESS_RATE), f"1/{LOSSLESS_RATE}")
+            and (six_second_lossless or (longer_extent and max_seconds >= 15 and (lossless_clock or aac_clock)))
         )
         native_clock_verified = False
         stereo_pcm, stereo_clock = None, None
@@ -291,7 +310,9 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
                 pcm = read_wav(output.read_bytes())
                 timeline = _mapping(_named_timeline(run.stderr, "mono") if inspect_native_clock else run.stderr, len(pcm))
                 if inspect_native_clock:
-                    native_clock_verified = _exact_zero_based_clock(_named_timeline(run.stderr, "original"), native_extent)
+                    native_clock_verified = _native_presentation_clock(
+                        _named_timeline(run.stderr, "original"), native_extent, AAC_FRAME - 1 if aac_clock else 0,
+                    )
         mapping = {
             "version": VERSION, "source_sha256": source_sha256,
             "sample_rate": SAMPLE_RATE, "channels": 1, "sample_format": "s16le",

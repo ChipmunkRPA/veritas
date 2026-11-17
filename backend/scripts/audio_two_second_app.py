@@ -103,6 +103,7 @@ def without_asset_urls(value):
 
 def verify_exports(client, route, media, evidence, pcm, signer):
     import pymupdf
+
     from app.reports.engine import pdf_text
     from app.reports.verify import verify_package
     from scripts.verify_multimedia_exports import pixels, scan
@@ -112,7 +113,8 @@ def verify_exports(client, route, media, evidence, pcm, signer):
     pdf = fetch(client, f"/api/v2/reports/{report['id']}/file")
     words = " ".join(pdf_text(pdf).split())
     scan(words)
-    review = evidence["long_voice_review"][binding.KEY]
+    presented = binding.KEY in evidence
+    review = evidence[binding.KEY] if presented else evidence["long_voice_review"][binding.KEY]
     assert binding.TITLE in words and review["reason"] in words
     assert words.count("Confirming response") == sum("confirming_window" in region and "same_pair_as" not in region
                                                      for region in review["regions"])
@@ -131,7 +133,9 @@ def verify_exports(client, route, media, evidence, pcm, signer):
                     assert (stream.getframerate(), stream.getnchannels(), stream.getsampwidth()) == (binding.RATE, 1, 2)
                     assert stream.readframes(stream.getnframes()) == pcm[2 * start:2 * end]
                 chart = pixels(fetch(client, window["artifacts"]["waveform"]["url"]))
-                witnesses.append((f"Source PTS [{start}, {end}) at 1/16000.", chart))
+                caption = (f"Original source ticks [{start * 3}, {end * 3}) at 1/48000." if presented
+                           else f"Source PTS [{start}, {end}) at 1/16000.")
+                witnesses.append((caption, chart))
             assert any(all(caption in text and chart in charts for caption, chart in witnesses)
                        and (len(witnesses) == 1 or "Confirming response" in text) for text, charts in pages)
     bundle = body(client.post(f"{route}/packages", json={"report_id": report["id"], "kind": "draft", "include_original": False}))
@@ -142,7 +146,9 @@ def verify_exports(client, route, media, evidence, pcm, signer):
     checked = verify_package(archive, public_key_pem=signer["public_key_pem"].encode(),
                              expect_key_id=signer["key_id"], source_audio=media)
     assert checked.outcome == "verified", checked.as_dict()
-    assert any(f"{len(review['regions'])} marked two-second windows" in check.detail for check in checked.checks)
+    check_text = ("original 48 kHz presentation clock" if presented
+                  else f"{len(review['regions'])} marked two-second windows")
+    assert any(check_text in check.detail for check in checked.checks)
     if review["schema"] == binding.CONFIRMED_SCHEMA and review["regions"]:
         assert any(f"{len(review['regions'])} confirming two-second windows" in check.detail for check in checked.checks)
     with ZipFile(archive) as exported:
@@ -157,13 +163,14 @@ def run(args):
                       VERITAS_AUDIO_FOCUSED_LONG_REVIEW="true", VERITAS_LOG_LEVEL="WARNING")
 
     import torch
+    from fastapi.testclient import TestClient
+
     from app.api import auth
     from app.billing import service
     from app.core.config import settings
     from app.main import app
     from app.storage.db import Analysis, get_session
     from app.storage.objects import default_store
-    from fastapi.testclient import TestClient
     from scripts.verify_multimedia_exports import scan
 
     torch.set_num_threads(2)

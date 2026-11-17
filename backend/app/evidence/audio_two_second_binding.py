@@ -11,6 +11,8 @@ from app.evidence import audio_short_review_binding as short
 KEY = "two_second_review"
 SCHEMA = "chipmunk.extended-short-voice-review/1"
 CONFIRMED_SCHEMA = "chipmunk.extended-short-voice-review/2"
+PRESENTED_SCHEMA = "chipmunk.extended-short-voice-review/3"
+CONFIRMATION_SCHEMAS = frozenset({CONFIRMED_SCHEMA, PRESENTED_SCHEMA})
 DETECTOR_ID = "aud.extended_short_voice_review"
 TITLE = "Two-second speech windows"
 RATE = short.RATE
@@ -27,6 +29,8 @@ LIMITATIONS = {
     CONFIRMED_SCHEMA: ("Both windows contain some of the same audio. Overlapping voices and ordinary editing can "
                        "produce similar responses. The review carries zero weight in the overall AI assessment."),
 }
+LIMITATIONS[PRESENTED_SCHEMA] = ("The two windows come from the 48 kHz source decoded to 16 kHz mono. "
+                                 + LIMITATIONS[CONFIRMED_SCHEMA])
 REASONS_BY_SCHEMA = {
     SCHEMA: REASONS,
     CONFIRMED_SCHEMA: {
@@ -35,6 +39,7 @@ REASONS_BY_SCHEMA = {
         "no_flag": "No elevated window was confirmed by a second overlapping response. Edits can remain undetected.",
     },
 }
+REASONS_BY_SCHEMA[PRESENTED_SCHEMA] = REASONS_BY_SCHEMA[CONFIRMED_SCHEMA]
 TIMEOUT = "The two-second scan ran out of analysis time."
 TIME_BUDGET = "The two-second scan did not have enough analysis time."
 UNAVAILABLE = "The optional two-second scan could not complete."
@@ -49,9 +54,39 @@ def excerpt_starts(samples):
     return sorted({*range(0, end + 1, 2 * RATE), end})
 
 
-def supported_source(source):
+def presented_samples(source):
+    """Length of a verified continuous 48 kHz presentation on the analysed clock."""
+    rate = short.LOSSLESS_RATE
+    factor = rate // RATE
+    duration, samples = source.get("source_duration_pts"), source.get("samples")
+    if (type(duration) is not int or duration % factor or type(samples) is not int
+            or not MINIMUM <= duration // factor <= MAXIMUM
+            or source.get(short.LOSSLESS_NATIVE_CLOCK) is not True
+            or source.get("source_sample_rate") != rate or source.get("source_time_base") != f"1/{rate}"
+            or source.get("source_channels") != 1 or source.get("channels") != 1 or source.get("sample_rate") != RATE
+            or len(source.get("audio_stream_indices", [0])) != 1 or source.get("timeline_time_base") != f"1/{RATE}"
+            or source.get("timeline") != [{"start_sample": 0, "end_sample": samples, "source_pts": 0}]):
+        return None
+    presented = duration // factor
+    container, codec, origin = (source.get(key) for key in ("source_container", "source_codec", "source_start_pts"))
+    zero_start = type(origin) is int and origin == 0
+    if (container, codec) in short.LOSSLESS_FORMATS:
+        if (source.get("source_bit_depth") == 16 and samples == presented
+                and (zero_start or (container == "wav" and origin is None))):
+            return presented
+    elif zero_start and (container, codec, source.get("source_profile")) == (short.AAC_CONTAINER, "aac", "LC"):
+        bit_rate = source.get("source_bit_rate")
+        if (type(bit_rate) is int and 80_000 <= bit_rate <= 112_000
+                and presented <= samples <= presented + (short.AAC_FRAME + factor - 1) // factor):
+            return presented
+    return None
+
+
+def supported_source(source, schema=SCHEMA):
     from app.evidence.audio_long_review_binding import supported_source as supported_long_source
 
+    if schema == PRESENTED_SCHEMA:
+        return presented_samples(source) is not None
     return bool(excerpt_starts(source.get("samples"))) and supported_long_source(source)
 
 
@@ -71,7 +106,7 @@ def regions(excerpts, *, schema=SCHEMA):
     for index, excerpt in enumerate(excerpts):
         if (chosen := excerpt["selected_window"]) is not None:
             selected[_absolute_range(excerpt, chosen)].append(index)
-        if schema == CONFIRMED_SCHEMA:
+        if schema in CONFIRMATION_SCHEMAS:
             for window in excerpt["elevated_windows"]:
                 elevated[_absolute_range(excerpt, window)].append(index)
     if schema == SCHEMA:
@@ -106,7 +141,7 @@ def status(excerpts, marked):
 
 
 def skipped(reason, *, schema):
-    return {"reason": reason, **({"schema": schema} if schema == CONFIRMED_SCHEMA else {})}
+    return {"reason": reason, **({"schema": schema} if schema in CONFIRMATION_SCHEMAS else {})}
 
 
 def _require(valid, message):
@@ -123,7 +158,7 @@ def _validate_excerpt(row, start):
              "Invalid two-second speech excerpt or admission counts")
 
 
-def summarize_readings(readings, samples, *, schema=SCHEMA):
+def summarize_readings(readings, samples, *, schema=SCHEMA, codec=None):
     """Convert the exact admitted model readings into public window locations."""
     starts = excerpt_starts(samples)
     _require(bool(starts) and isinstance(readings, list) and len(readings) == len(starts), "Unexpected speech excerpt schedule")
@@ -138,21 +173,31 @@ def summarize_readings(readings, samples, *, schema=SCHEMA):
             a, b, logit = reading["start_sample"], reading["end_sample"], reading["logit"]
             _require(set(reading) == {"start_sample", "end_sample", "logit"} and type(a) is type(b) is int
                      and (a, b) == pair and type(logit) in (int, float) and math.isfinite(logit), "Invalid two-second window response")
-        chosen = short.selected_range(row["responses"])
+        chosen = short.selected_range(row["responses"], codec)
         public = {key: row[key] for key in ("start_sample", "pcm_sha256", "speech_samples")}
         public["selected_window"] = short.GRID.index((chosen["start_sample"], chosen["end_sample"])) if chosen else None
-        if schema == CONFIRMED_SCHEMA:
+        if schema in CONFIRMATION_SCHEMAS:
+            point = short.AAC_REVIEW_POINT if codec == "aac" else short.REVIEW_POINT
             public["elevated_windows"] = [short.GRID.index(pair) for reading, pair in zip(row["responses"], eligible, strict=True)
-                                          if reading["logit"] > short.REVIEW_POINT]
+                                          if reading["logit"] > point]
         summary.append(public)
     return summary
 
 
-def _validate_window(row, planned, source):
+def native_range(start, end):
+    factor = short.LOSSLESS_RATE // RATE
+    return {"start_pts": start * factor, "end_pts": end * factor, "time_base": f"1/{short.LOSSLESS_RATE}"}
+
+
+def _validate_window(row, planned, source, *, schema):
     from app.evidence.audio_long_review_binding import _validate_assets
 
     start, end, support = (row[key] for key in ("start_sample", "end_sample", "supporting_excerpts"))
-    _require(set(row) == {*planned, "pcm_sha256", "source_timestamp_ranges", "artifacts"}
+    fields = {*planned, "pcm_sha256", "source_timestamp_ranges", "artifacts"}
+    if schema == PRESENTED_SCHEMA:
+        fields.add("native_source_range")
+        _require(row.get("native_source_range") == native_range(start, end), "Speech window differs from the native source clock")
+    _require(set(row) == fields
              and type(start) is type(end) is int and isinstance(support, list) and all(type(i) is int for i in support)
              and all(row[key] == planned[key] for key in ("start_sample", "end_sample", "supporting_excerpts"))
              and SHA.fullmatch(row["pcm_sha256"])
@@ -163,7 +208,7 @@ def _validate_window(row, planned, source):
         _require(type(row["same_pair_as"]) is int and row["same_pair_as"] == planned["same_pair_as"],
                  "Repeated presentation does not refer to the same two speech windows")
     if (confirming := planned.get("confirming_window")) is not None:
-        _validate_window(row["confirming_window"], confirming, source)
+        _validate_window(row["confirming_window"], confirming, source, schema=schema)
 
 
 def _validate_elevated(row):
@@ -179,17 +224,18 @@ def validate(review, source):
         schema = review["schema"]
         _require(set(review) == {"schema", "title", "status", "reason", "limitation", "affects_overall_confidence", "excerpts", "regions"}
                  and schema in LIMITATIONS and review["title"] == TITLE and review["limitation"] == LIMITATIONS[schema]
-                 and review["affects_overall_confidence"] is False and supported_source(source),
+                 and review["affects_overall_confidence"] is False and supported_source(source, schema),
                  "Two-second evidence is outside its native source scope")
         excerpts, shown = review["excerpts"], review["regions"]
         _require(isinstance(excerpts, list) and isinstance(shown, list), "Invalid two-second evidence lists")
         if review["status"] == "skipped":
             _require(not excerpts and not shown and review["reason"] in SKIP_REASONS, "Skipped two-second scan carries measurements")
             return
-        starts = excerpt_starts(source["samples"])
+        scope = presented_samples(source) if schema == PRESENTED_SCHEMA else source["samples"]
+        starts = excerpt_starts(scope)
         _require(len(excerpts) == len(starts), "Incomplete set of speech excerpts")
         fields = {"start_sample", "pcm_sha256", "speech_samples", "selected_window"}
-        if schema == CONFIRMED_SCHEMA:
+        if schema in CONFIRMATION_SCHEMAS:
             fields.add("elevated_windows")
         for row, start in zip(excerpts, starts, strict=True):
             _require(set(row) == fields, "Unexpected public speech excerpt fields")
@@ -197,13 +243,13 @@ def validate(review, source):
             index = row["selected_window"]
             _require(index is None or (type(index) is int and 0 <= index < len(short.GRID) and row["speech_samples"][index] >= RATE),
                      "Flagged window has insufficient speech or falls outside its excerpt")
-            if schema == CONFIRMED_SCHEMA:
+            if schema in CONFIRMATION_SCHEMAS:
                 _validate_elevated(row)
         expected = regions(excerpts, schema=schema)
         wanted = status(excerpts, expected)
         _require(review["status"] == wanted and review["reason"] == REASONS_BY_SCHEMA[schema][wanted]
                  and len(shown) == len(expected), "Public two-second status or ranges differ from the excerpt selections")
         for row, planned in zip(shown, expected, strict=True):
-            _validate_window(row, planned, source)
+            _validate_window(row, planned, source, schema=schema)
     except (TypeError, KeyError, AttributeError) as error:
         raise ValueError("Incomplete two-second speech evidence") from error

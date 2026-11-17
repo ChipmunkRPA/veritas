@@ -52,23 +52,28 @@ def _check_excerpt_inputs(excerpts, pcm):
 
 
 def _two_second_review(record, *, store, source, pcm, mapping, artifacts):
-    if not two_second.supported_source(source) or not two_second.supported_source(mapping):
-        raise ValueError("Two-second scan is outside its source profile")
     skipped = set(record) in ({"reason"}, {"reason", "schema"}) and record["reason"] in two_second.SKIP_REASONS
     raw = None if skipped else _receipt(record, store, source, detector_id=two_second.DETECTOR_ID, key=two_second.KEY)
     schema = record.get("schema", two_second.SCHEMA) if skipped else raw.get("schema")
     if schema not in two_second.LIMITATIONS or (raw is not None and set(raw) != {"schema", "excerpts"}):
         raise ValueError("Malformed two-second scan receipt")
+    if not two_second.supported_source(source, schema) or not two_second.supported_source(mapping, schema):
+        raise ValueError("Two-second scan is outside its source profile")
     public = {"schema": schema, "title": two_second.TITLE, "limitation": two_second.LIMITATIONS[schema],
               "affects_overall_confidence": False}
     if skipped:
         return {**public, "status": "skipped", "reason": record["reason"], "excerpts": [], "regions": []}
-    excerpts = two_second.summarize_readings(raw["excerpts"], len(pcm), schema=schema)
+    presented = schema == two_second.PRESENTED_SCHEMA
+    extent = two_second.presented_samples(mapping) if presented else len(pcm)
+    codec = mapping.get("source_codec") if presented else None
+    excerpts = two_second.summarize_readings(raw["excerpts"], extent, schema=schema, codec=codec)
     _check_excerpt_inputs(excerpts, pcm)
 
     def freeze_window(region):
         start, end = region["start_sample"], region["end_sample"]
         window = {**region, "pcm_sha256": _digest(pcm[start:end].astype("<f4").tobytes())}
+        if presented:
+            window["native_source_range"] = two_second.native_range(start, end)
         return {**window, "source_timestamp_ranges": _sample_witness(window, pcm, mapping), "artifacts": artifacts(window)}
 
     regions = []
@@ -79,6 +84,22 @@ def _two_second_review(record, *, store, source, pcm, mapping, artifacts):
         regions.append(selected)
     status = two_second.status(excerpts, regions)
     return {**public, "status": status, "reason": two_second.REASONS_BY_SCHEMA[schema][status], "excerpts": excerpts, "regions": regions}
+
+
+def _artifacts(reading, pcm, waveform, asset):
+    start, end = reading["start_sample"], reading["end_sample"]
+    return {"selected_clip": asset(wav_bytes(pcm[start:end]), "audio/wav", samples=end - start, sample_rate=binding.RATE, channels=1),
+            "waveform": asset(_waveform(reading, pcm, waveform), "image/png", width=960, height=280)}
+
+
+def build_presented(record, *, store, source, pcm, mapping, asset, waveform):
+    extent = two_second.presented_samples(mapping)
+    review = _two_second_review(record, store=store, source=source, pcm=pcm, mapping=mapping,
+                                artifacts=lambda row: _artifacts(row, pcm[:extent], waveform, asset))
+    if review["schema"] != two_second.PRESENTED_SCHEMA:
+        raise ValueError("Presented audio requires the native-clock two-second review")
+    two_second.validate(review, source)
+    return review
 
 
 def build(record, *, store, source, pcm, mapping, asset, waveform, include_sample_coverage=True):
@@ -92,10 +113,7 @@ def build(record, *, store, source, pcm, mapping, asset, waveform, include_sampl
         raise ValueError("Long speech-window receipt is outside its source profile")
 
     def artifacts(reading):
-        start, end = reading["start_sample"], reading["end_sample"]
-        return {"selected_clip": asset(wav_bytes(pcm[start:end]), "audio/wav", samples=end - start,
-                                      sample_rate=binding.RATE, channels=1),
-                "waveform": asset(_waveform(reading, pcm, waveform), "image/png", width=960, height=280)}
+        return _artifacts(reading, pcm, waveform, asset)
 
     windows = []
     for reading in raw["windows"]:
@@ -122,7 +140,9 @@ def build(record, *, store, source, pcm, mapping, asset, waveform, include_sampl
 
 
 def verify(document, record, *, store, source, pcm, mapping, read_asset, waveform):
-    assets = {item["sha256"]: item for window in binding.all_media_windows(document) for item in window["artifacts"].values()}
+    presented = document["schema"] == two_second.PRESENTED_SCHEMA
+    windows = two_second.media_windows(document) if presented else binding.all_media_windows(document)
+    assets = {item["sha256"]: item for window in windows for item in window["artifacts"].values()}
 
     def checked(data, media_type, **metadata):
         pin = _digest(data)
@@ -132,8 +152,11 @@ def verify(document, record, *, store, source, pcm, mapping, read_asset, wavefor
             raise ValueError("Long speech-window asset differs from its recorded samples")
         return asset
 
-    expected = build(record, store=store, source=source, pcm=pcm, mapping=mapping, asset=checked, waveform=waveform,
-                     include_sample_coverage=binding.COVERAGE in document)
+    if presented:
+        expected = build_presented(record, store=store, source=source, pcm=pcm, mapping=mapping, asset=checked, waveform=waveform)
+    else:
+        expected = build(record, store=store, source=source, pcm=pcm, mapping=mapping, asset=checked, waveform=waveform,
+                         include_sample_coverage=binding.COVERAGE in document)
     if expected != document:
         raise ValueError("Long speech-window presentation differs from its frozen response")
 
@@ -148,3 +171,13 @@ def verify_source(document, *, pcm, mapping, waveform):
             raise ValueError("Long speech-window source timestamps differ from the original clock")
         if (asset := window["artifacts"].get("waveform")) and _digest(_waveform(window, pcm, waveform)) != asset["sha256"]:
             raise ValueError("Long speech-window waveform differs from the original audio")
+
+
+def verify_presented_source(document, *, pcm, mapping, waveform):
+    two_second.validate(document, mapping)
+    extent = two_second.presented_samples(mapping)
+    _check_excerpt_inputs(document["excerpts"], pcm)
+    for window in two_second.media_windows(document):
+        if _sample_witness(window, pcm, mapping) != window["source_timestamp_ranges"] or (
+                _digest(_waveform(window, pcm[:extent], waveform)) != window["artifacts"]["waveform"]["sha256"]):
+            raise ValueError("Presented speech-window evidence differs from the original audio")

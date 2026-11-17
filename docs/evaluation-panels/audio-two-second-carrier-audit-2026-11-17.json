@@ -1,0 +1,40 @@
+{
+  "legacy_app": {
+    "browser_errors": 0,
+    "jobs_before_payment": 0,
+    "paid_analyses": 8,
+    "same_assessment_and_baseline": true
+  },
+  "native_carriers": [
+    {
+      "carrier": "wav",
+      "event_matches": {
+        "baseline": {
+          "reencoded": 10,
+          "transfer": 10
+        },
+        "combined": {
+          "reencoded": 12,
+          "transfer": 13
+        }
+      },
+      "files": 96,
+      "max_native_padding_ticks": 0
+    },
+    {
+      "carrier": "m4a",
+      "event_matches": {
+        "baseline": {
+          "reencoded": 12,
+          "transfer": 10
+        },
+        "combined": {
+          "reencoded": 13,
+          "transfer": 12
+        }
+      },
+      "files": 96,
+      "max_native_padding_ticks": 992
+    }
+  ]
+}

@@ -159,6 +159,8 @@ def validate_window_fields(window, *extra):
 def validate(review: dict, source: dict) -> None:
     try:
         if two_second.KEY in review:
+            _require(review[two_second.KEY]["schema"] in {two_second.SCHEMA, two_second.CONFIRMED_SCHEMA},
+                     "Native-clock two-second review belongs in its own section")
             two_second.validate(review[two_second.KEY], source)
             review = {key: value for key, value in review.items() if key != two_second.KEY}
         if COVERAGE in review:

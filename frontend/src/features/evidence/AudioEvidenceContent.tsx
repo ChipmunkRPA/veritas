@@ -80,7 +80,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       event.interval.start_sample < shortInterval.end_sample && event.interval.end_sample > shortInterval.start_sample)
     : []
   const longReview = standalone ? set.long_voice_review : undefined
-  const twoSecond = longReview?.two_second_review
+  const twoSecond = standalone ? set.two_second_review ?? longReview?.two_second_review : undefined
   const twoSecondCount = twoSecond?.excerpts.reduce((total, row) =>
     total + row.speech_samples.filter(samples => samples >= longVoiceSampleRate).length, 0)
   const focusedSpeech = Array.isArray(longReview?.regions)
@@ -263,7 +263,9 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
               return <div key={window.start_sample} className={index > 0 ? 'mt-4 border-t border-border pt-3' : undefined}>
                 <p className="m-0 text-small font-medium">{index === 0 ? 'AI-like speech response' : 'Confirming response'} at {span}</p>
                 <p className="mt-1 mb-0 font-mono text-caption text-text-muted">Samples [{window.start_sample}, {window.end_sample})</p>
-                <SourceTimestamps ranges={window.source_timestamp_ranges} />
+                {window.native_source_range ? <p className="mt-1 mb-0 font-mono text-caption text-text-muted">
+                  Original source ticks [{window.native_source_range.start_pts}, {window.native_source_range.end_pts}) at {window.native_source_range.time_base}
+                </p> : <SourceTimestamps ranges={window.source_timestamp_ranges} />}
                 <div className="mt-3"><EvidencePicture set={set} artifact={window.artifacts.waveform} token={token} ready={mediaReady}
                   chart alt={`Waveform for the ${waveformLabel} at ${span}`} /></div>
                 <div className="mt-3"><EvidenceAudio set={set} artifact={window.artifacts.selected_clip} token={token} ready={mediaReady}

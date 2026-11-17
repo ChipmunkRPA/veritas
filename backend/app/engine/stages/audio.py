@@ -190,6 +190,7 @@ def decode(ctx: StageContext) -> dict[str, Any]:
             "focused_edit_source_supported": focused_edit_binding.supported_source(decoded.mapping),
             "long_voice_review_source_supported": audio_long_review_binding.supported_source(decoded.mapping),
             "long_voice_review_resampled_source_supported": audio_long_review_binding.supported_resampled_source(decoded.mapping),
+            "two_second_presentation_samples": audio_two_second_binding.presented_samples(decoded.mapping),
             "background_voice_review_source_supported": background_binding.supported_source(decoded.mapping),
             "sha256": hashlib.sha256(pcm.tobytes()).hexdigest(), "evidence_input": binding, "artefacts": objects,
             "source_clock_break_count": len(clock_breaks)}
@@ -211,7 +212,7 @@ def detect(ctx: StageContext) -> dict[str, Any]:
     focused_edit = short.pop(focused_edit_binding.KEY, None)
     long = _long_voice_review(ctx, track, output["detectors"])
     background = _background_voice_review(ctx, track, output["detectors"])
-    two_second = _long_two_second_review(ctx, track) if long is not None else None
+    two_second = _long_two_second_review(ctx, track, native_long_available=long is not None)
     if (settings.environment == "dev" and settings.audio_centered_speech_edit_review
             and settings.audio_detector_mode == "candidate" and Profile(ctx.profile) is Profile.FULL
             and ctx.outputs["decode"].get("long_voice_review_source_supported")
@@ -289,22 +290,32 @@ def _long_voice_review(ctx: StageContext, track, entries: list[dict]) -> dict | 
     return long_voice_review.skipped(reason, schema=schema)
 
 
-def _long_two_second_review(ctx: StageContext, track) -> dict | None:
+def _long_two_second_review(ctx: StageContext, track, *, native_long_available: bool) -> dict | None:
     binding = audio_two_second_binding
+    decoded = ctx.outputs["decode"]
     if (settings.environment != "dev" or not settings.audio_two_second_long_review
-            or not ctx.outputs["decode"].get("long_voice_review_source_supported")
-            or track.pcm is None or not binding.excerpt_starts(len(track.pcm))):
+            or settings.audio_detector_mode != "candidate" or Profile(ctx.profile) is not Profile.FULL
+            or provenance_gate.stop(ctx) or track.pcm is None):
+        return None
+    presented = decoded.get("two_second_presentation_samples")
+    if presented is not None:
+        aac = decoded.get("short_voice_review_source_codec") == "aac"
+        if not (settings.audio_two_second_long_aac48_review if aac else settings.audio_two_second_long_48k_review):
+            return None
+        schema = binding.PRESENTED_SCHEMA
+    elif native_long_available and decoded.get("long_voice_review_source_supported") and binding.excerpt_starts(len(track.pcm)):
+        schema = binding.CONFIRMED_SCHEMA if settings.audio_two_second_long_confirmation else binding.SCHEMA
+    else:
         return None
     from app.detectors.audio.extended_short_voice_review import BUDGET_S, ExtendedShortVoiceReview
     from app.engine.registry import get_registry
 
     if binding.DETECTOR_ID in get_registry().policy.deny_detectors:
         return None
-    schema = binding.CONFIRMED_SCHEMA if settings.audio_two_second_long_confirmation else binding.SCHEMA
     remaining = ctx.deadline.remaining()
     if remaining is not None and remaining < BUDGET_S + long_voice_review.PIPELINE_RESERVE_S:
         return binding.skipped(binding.TIME_BUDGET, schema=schema)
-    detector = ExtendedShortVoiceReview(schema=schema)
+    detector = ExtendedShortVoiceReview(schema=schema, presentation_samples=presented)
     run_ctx = RunContext(analysis_id=ctx.analysis_id, media=common.media(ctx), profile=ctx.profile, device="cpu",
                          dtype=None, lease=None, outputs=StageOutputs(audio=track), deadline=ctx.deadline,
                          exhibits=ctx.exhibits.bind(detector.spec.id), log=ctx.log.bind(detector_id=detector.spec.id))
@@ -312,7 +323,7 @@ def _long_two_second_review(ctx: StageContext, track) -> dict | None:
     review = run_detector(detector, run_ctx, store=store, models=ctx.state.get("models"), timeout_s=BUDGET_S)
     ctx.check("two-second speech scan")
     if review.status == "ok" and (run_id := store.run_id(ctx.analysis_id, detector.spec.id)):
-        return {"run_id": run_id, "schema": schema} if schema == binding.CONFIRMED_SCHEMA else {"run_id": run_id}
+        return {"run_id": run_id, **({"schema": schema} if schema in binding.CONFIRMATION_SCHEMAS else {})}
     return binding.skipped(binding.TIMEOUT if review.status == "timeout" else binding.UNAVAILABLE, schema=schema)
 
 
@@ -655,11 +666,17 @@ def publish(ctx: StageContext) -> dict[str, Any]:
             long = _published_review(db, ctx, long_result, long_voice_review.skipped(
                 audio_long_review_binding.SKIPPED_RECEIPT,
                 schema=(long_result or {}).get("schema", audio_long_review_binding.SCHEMA)))
-            if long is not None and (two_second_result := detect_output.get(audio_two_second_binding.KEY)) is not None:
+            two_second = None
+            if (two_second_result := detect_output.get(audio_two_second_binding.KEY)) is not None:
+                schema = two_second_result.get("schema", audio_two_second_binding.SCHEMA)
                 fallback = audio_two_second_binding.skipped(
-                    audio_two_second_binding.UNAVAILABLE, schema=two_second_result.get("schema", audio_two_second_binding.SCHEMA),
+                    audio_two_second_binding.UNAVAILABLE, schema=schema,
                 )
-                long = long | {audio_two_second_binding.KEY: _published_review(db, ctx, two_second_result, fallback)}
+                measured = _published_review(db, ctx, two_second_result, fallback)
+                if schema == audio_two_second_binding.PRESENTED_SCHEMA:
+                    two_second = measured
+                elif long is not None:
+                    long = long | {audio_two_second_binding.KEY: measured}
             background_result = detect_output.get(background_binding.KEY)
             background = _published_review(db, ctx, background_result,
                                            background_voice_review.skipped(background_binding.SKIPPED_RECEIPT))
@@ -678,6 +695,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
             evidence[focused_edit_binding.KEY] = focused_edit
         if long is not None:
             evidence["long_voice_review"] = long
+        if two_second is not None:
+            evidence[audio_two_second_binding.KEY] = two_second
         if background is not None:
             evidence[background_binding.KEY] = background
         if detect_output.get("voice_clock_policy") == VOICE_CLOCK_POLICY:

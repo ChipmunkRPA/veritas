@@ -19,7 +19,8 @@ export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: Mul
   const shortSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' &&
     (set.short_voice_review?.status === 'flagged' || set.focused_speech_edit_review?.status === 'flagged')
   const longSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' &&
-    (set.long_voice_review?.status === 'corroborated' || set.long_voice_review?.two_second_review?.status === 'flagged')
+    (set.long_voice_review?.status === 'corroborated' || set.long_voice_review?.two_second_review?.status === 'flagged' ||
+      set.two_second_review?.status === 'flagged')
   const backgroundSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' && set.background_reduced_voice_review?.status === 'flagged'
   const repeatedText = set.schema === 'chipmunk.document-evidence/1' && set.repeated_passages?.status === 'matched'
   const tracked = set.schema === 'chipmunk.document-evidence/1' ? set.coverage?.word_tracked_changes : undefined

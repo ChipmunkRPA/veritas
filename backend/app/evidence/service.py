@@ -139,6 +139,18 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
                 except ValueError as error:
                     raise ObjectIntegrityError(str(error)) from error
             groups.extend(window["artifacts"] for window in all_media_windows(review))
+        from app.evidence import audio_two_second_binding as two_second
+
+        if two_second.KEY in part:
+            review = part[two_second.KEY]
+            if (part is not document or part.get("schema") != "chipmunk.audio-evidence/1"
+                    or not isinstance(review, dict) or review.get("schema") != two_second.PRESENTED_SCHEMA):
+                raise ObjectIntegrityError("The evidence has an invalid native-clock speech-window review")
+            try:
+                two_second.validate(review, part["source"])
+            except ValueError as error:
+                raise ObjectIntegrityError(str(error)) from error
+            groups.extend(window["artifacts"] for window in two_second.media_windows(review))
         if "background_reduced_voice_review" in part:
             review = part["background_reduced_voice_review"]
             if (part is not document or part.get("schema") != "chipmunk.audio-evidence/1" or not isinstance(review, dict)):

@@ -29,7 +29,10 @@ try {
         const span = `${seconds(start)}–${seconds(end)}`
         const label = role === 0 ? 'Two-second speech window' : 'Confirming two-second speech window'
         const imageLabel = `Waveform for the ${label.toLowerCase()} at ${span}`
-        await finding.getByText(`Source PTS [${start}, ${end}) at 1/16000.`).waitFor()
+        const ticks = window.native_source_range
+        const timestamp = ticks ? `Original source ticks [${ticks.start_pts}, ${ticks.end_pts}) at ${ticks.time_base}`
+          : `Source PTS [${start}, ${end}) at 1/16000.`
+        await finding.getByText(timestamp).waitFor()
         const waveform = finding.getByRole('img', { name: imageLabel, exact: true })
         await waveform.scrollIntoViewIfNeeded()
         assert.ok((await waveform.getAttribute('src')).includes(artifacts.waveform.sha256))

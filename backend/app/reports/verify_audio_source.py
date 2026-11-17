@@ -9,6 +9,7 @@ from pathlib import Path
 from zipfile import ZipFile
 
 from app.detectors.audio.decode import decode_audio, source_ranges, wav_bytes
+from app.evidence import audio_two_second_binding as two_second
 from app.evidence import mouth_hold_sound, mouth_local_hold_binding
 from app.evidence.audio_binding import SPEECH_SELECTION
 from app.evidence.audio_focused_edit_binding import KEY as FOCUSED_EDIT
@@ -46,6 +47,9 @@ def _clips(audio: dict, alignment: dict) -> Iterator[tuple[str, dict, list[dict]
         for window in all_media_windows(review):
             if clip := window["artifacts"].get("selected_clip"):
                 yield "Long speech-window clip", window, window["source_timestamp_ranges"], clip
+    if review := audio.get(two_second.KEY):
+        for window in two_second.media_windows(review):
+            yield "Two-second speech-window clip", window, window["source_timestamp_ranges"], window["artifacts"]["selected_clip"]
     if (review := audio.get("background_reduced_voice_review")) and review["status"] == "flagged":
         yield "Original background-reduced review clip", review["interval"], review["source_timestamp_ranges"], review["artifacts"]["selected_clip"]
     for name in ("repetition_context", "similarity_context"):
@@ -291,17 +295,22 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if (review := audio.get("long_voice_review")) is not None:
         from app.evidence.audio_long_review import verify_source
         from app.evidence.audio_packets import _chart
-        from app.evidence.audio_two_second_binding import KEY as TWO_SECOND
 
         verify_source(review, pcm=decoded.pcm, mapping=decoded.mapping, waveform=_chart)
         replay_detail += f" Verified {len(review['windows'])} long speech-window input ranges and their marked waveforms."
         if "regions" in review:
             replay_detail += f" Verified {len(review['regions'])} selected speech ranges against the same original samples."
-        if (scan := review.get(TWO_SECOND)) and scan["excerpts"]:
+        if (scan := review.get(two_second.KEY)) and scan["excerpts"]:
             replay_detail += (f" Verified {len(scan['excerpts'])} six-second speech excerpts and "
                               f"{len(scan['regions'])} marked two-second windows.")
             if confirmed := sum("confirming_window" in region for region in scan["regions"]):
                 replay_detail += f" Verified {confirmed} confirming two-second windows against the original samples."
+    if (scan := audio.get(two_second.KEY)) is not None:
+        from app.evidence.audio_long_review import verify_presented_source
+        from app.evidence.audio_packets import _chart
+
+        verify_presented_source(scan, pcm=decoded.pcm, mapping=decoded.mapping, waveform=_chart)
+        replay_detail += " Verified the two-second speech excerpts and waveforms on the original 48 kHz presentation clock."
     from app.evidence import audio_silence_binding as silence
     from app.evidence import audio_tonal_phase_binding as tonal
     from app.evidence.audio_bandwidth_binding import BANDWIDTH_SCHEMAS

@@ -168,6 +168,67 @@ def test_refused_dual_lease_replays_identical_cpu_ranges_with_one_model_pinned(m
     assert refused.status == "skipped" and refused.reason == "memory budget"
 
 
+@pytest.mark.parametrize("exact_head", [True, False])
+def test_cpu_groups_keep_exact_losses_and_release_reservations(monkeypatch, tmp_path, exact_head):
+    import torch
+    from transformers import Qwen2Config, Qwen2ForCausalLM
+
+    from app.core.config import settings
+    from app.detectors.text import compact_cpu
+
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(binoculars, "CTX", 24)
+    monkeypatch.setattr(binoculars, "STRIDE", 16)
+    monkeypatch.setattr(compact_cpu, "CTX", 24)
+    monkeypatch.setattr(BinocularsDetector, "VOCABULARY_SIZE", 256)
+    monkeypatch.setattr(BinocularsDetector, "HIDDEN_SIZE", 32)
+    detector = BinocularsDetector()
+    keys = (detector.OBSERVER, detector.PERFORMER)
+    doc = from_string("An exact writing comparison uses several contexts. 😀 The last context has separate offsets.")
+    config = Qwen2Config(vocab_size=256, hidden_size=32, intermediate_size=64, num_hidden_layers=1,
+                         num_attention_heads=4, num_key_value_heads=2, head_dim=8, max_position_embeddings=64)
+    with torch.random.fork_rng(devices=[]), torch.no_grad():
+        torch.manual_seed(17)
+        checkpoints = {key: Qwen2ForCausalLM(config).bfloat16().float().eval() for key in keys}
+        if not exact_head:
+            checkpoints[detector.PERFORMER].lm_head.weight[0, 0] = 0.1234567
+
+    def execute(grouped, *, status="ok"):
+        loads = []
+
+        def build(key, device, dtype):
+            assert (device, dtype) == ("cpu", "float32")
+            loads.append(key)
+            return SimpleNamespace(obj=(CharacterTokenizer(), checkpoints[key]), revision="fixture")
+
+        monkeypatch.setattr(settings, "text_ratio_compact_cpu", grouped)
+        entries = [ManagedModel(key, fp32_bytes=200_000, activation_bytes_per_item=45_000) for key in keys]
+        models = ModelManager(budget_bytes=420_000, models=entries, loader_for=lambda _: build,
+                              store=FootprintStore(tmp_path / f"grouped-{grouped}.json"))
+        ctx = RunContext("sample", None, Profile.FULL, "cpu", "float32", None, context(doc).outputs, Deadline(), None, None)
+        result = run_detector(detector, ctx, store=InMemoryRunStore(), models=models)
+        assert result.status == status, result.reason
+        assert all(row.pins == 0 for row in models.snapshot())
+        assert models.free_bytes() == models.budget_bytes - sum(row.bytes_declared for row in models.snapshot())
+        return result, loads
+
+    reference, per_window = execute(False)
+    result, grouped = execute(True)
+    assert result.details == reference.details
+    assert result.unit_scores == reference.unit_scores and result.aggregate == reference.aggregate
+    if exact_head:
+        assert grouped == list(keys) and len(per_window) > 4
+
+        def stopped(*args):
+            raise DetectorTimeout("test stopped during the reserved projection")
+
+        monkeypatch.setattr(compact_cpu, "_project", stopped)
+        cancelled, _ = execute(True, status="timeout")
+        assert cancelled.aggregate is None and not cancelled.details
+    else:
+        assert grouped == [*keys, *per_window]
+
+
 def test_adapter_freezes_raw_ratio_threshold_and_matching_paired_tokenization(monkeypatch):
     monkeypatch.setattr(binoculars.Binoculars, "_chunk_scores", fake_losses)
     doc = from_string("😀 This sentence contains enough characters for the language check. Yes we can.")

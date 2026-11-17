@@ -394,6 +394,7 @@ class Settings(BaseSettings):
     text_secondary_classifier_id: str | None = "Hello-SimpleAI/chatgpt-detector-roberta"  # a second text classifier (HF Hub); unset: none
     text_secondary_weight: float = 0.3  # ChatGPT-2022 era; votes 'human' on modern text
     binoculars_enabled: bool = True  # run the Binoculars zero-shot check on text
+    text_ratio_compact_cpu: bool = True  # Reuse exactly represented writing model outputs after a dual lease refusal.
     binoculars_observer_id: str = "Qwen/Qwen2.5-1.5B"  # its observer model (HF Hub)
     binoculars_performer_id: str = "Qwen/Qwen2.5-1.5B-Instruct"  # its performer model (HF Hub)
     binoculars_weight: float = 0.6  # zero-shot corroboration; weak on frontier-model prose (docs/evaluation.md)

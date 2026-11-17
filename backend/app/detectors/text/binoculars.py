@@ -9,7 +9,7 @@ context of the whole document.
 """
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Callable, Iterable
 from contextlib import AbstractContextManager
 from dataclasses import dataclass, field
 from typing import Any
@@ -29,6 +29,8 @@ CTX = 1024
 STRIDE = 768
 LOSS_BLOCK_TOKENS = 32
 MAX_EVIDENCE_TOKENS = 262144
+MIN_SENTENCE_TOKENS = 12
+Losses = tuple[np.ndarray, np.ndarray]
 
 
 @dataclass
@@ -246,12 +248,15 @@ class Binoculars:
             raw = logp_obs = p_perf = None
 
     def token_scores(self, text: str, *, check: Callable[[str], None] | None = None,
-                     score_chunk: Callable[[torch.Tensor], tuple[np.ndarray, np.ndarray]] | None = None) -> TokenScores:
+                     score_chunk: Callable[[torch.Tensor], Losses] | None = None,
+                     score_windows: Callable[[Iterable[torch.Tensor]], Iterable[Losses]] | None = None) -> TokenScores:
         """Score complete rolling coverage, checking the caller's deadline between expensive operations.
 
         Omitted callbacks retain the legacy context deadline. The v2 adapter passes
         its nested deadline; no check can pre-empt a native forward already running.
         """
+        if score_chunk is not None and score_windows is not None:
+            raise ValueError("Choose one Binoculars window scorer")
         checkpoint = deadline.check if check is None else check
         checkpoint("Binoculars tokenization")
         enc = self.tok(text, return_offsets_mapping=True, add_special_tokens=False)
@@ -269,17 +274,27 @@ class Binoculars:
         anchor = [self.tok.eos_token_id] if self.tok.eos_token_id is not None else []
         body = CTX - len(anchor)
         contexts = []
-        start = 0
-        while start < n:
-            checkpoint("Binoculars token window")
+        windows = []
+        for start in range(0, n, STRIDE):
             end = min(start + STRIDE, n)
-            ctx_start = max(0, end - body)  # include up to (body - STRIDE) tokens of left context
+            # Include up to (body - STRIDE) tokens of left context.
+            windows.append((start, end, max(0, end - body)))
+
+        def inputs():
+            for _, end, ctx_start in windows:
+                checkpoint("Binoculars token window")
+                yield torch.tensor([anchor + ids[ctx_start:end]], dtype=torch.long)
+
+        if score_windows is None:
+            def score_windows(tokens):
+                for sequence in tokens:
+                    if score_chunk is not None:
+                        yield score_chunk(sequence)
+                    else:
+                        yield self._chunk_scores(sequence) if check is None else self._chunk_scores(sequence, check=check)
+
+        for (start, end, ctx_start), (a, b) in zip(windows, score_windows(inputs()), strict=True):
             chunk = anchor + ids[ctx_start:end]
-            tokens = torch.tensor([chunk], dtype=torch.long)
-            if score_chunk is not None:
-                a, b = score_chunk(tokens)
-            else:
-                a, b = self._chunk_scores(tokens) if check is None else self._chunk_scores(tokens, check=check)
             checkpoint("completed Binoculars token window")
             _check_losses(a, b, len(chunk) - 1)
             # a[k] scores chunk[k+1]. With an anchor, chunk[k+1] == ids[ctx_start + k]; without, ids[ctx_start + k + 1].
@@ -300,7 +315,6 @@ class Binoculars:
                 di = ctx_start + k + shift
                 if start <= di < end:
                     nll[di], xent[di] = a[k], b[k]
-            start = end
         checkpoint("perplexity scoring")
         scores = TokenScores(offsets, nll, xent, unscored_first_token=bool(n and not anchor), input_contexts=contexts,
                              source_token_ids=list(ids), evidence_limit_exceeded=n > MAX_EVIDENCE_TOKENS)
@@ -309,7 +323,7 @@ class Binoculars:
         return scores
 
     @staticmethod
-    def score_span(ts: TokenScores, start: int, end: int, min_tokens: int = 12) -> tuple[float | None, int]:
+    def score_span(ts: TokenScores, start: int, end: int, min_tokens: int = MIN_SENTENCE_TOKENS) -> tuple[float | None, int]:
         """Binoculars score over tokens whose char spans overlap [start, end). Returns (score, n_tokens)."""
         valid = ts.valid_mask()
         idx = [i for i, (a, b) in enumerate(ts.offsets) if b > start and a < end and valid[i]]
@@ -349,14 +363,19 @@ def sentence_score_records(ts: TokenScores, sents: list) -> list[dict[str, Any]]
     """
     out: list[dict[str, Any]] = [{} for _ in sents]
     valid = ts.valid_mask()
+    starts, ends = np.asarray(ts.offsets, dtype=np.int64).reshape(-1, 2).T
+
+    def overlap(lo, hi):
+        return np.flatnonzero(valid & (ends > lo) & (starts < hi)).tolist()
+
     for s in sents:
         lo, hi = s.start, s.end
-        sc, _n = Binoculars.score_span(ts, s.start, s.end)
-        if sc is None and s.n_words >= 3:  # short sentence: include neighbours for a stable estimate
+        indices = overlap(lo, hi)
+        if len(indices) < MIN_SENTENCE_TOKENS and s.n_words >= 3:  # short sentence: include neighbours
             lo = sents[max(0, s.idx - 1)].start
             hi = sents[min(len(sents) - 1, s.idx + 1)].end
-            sc, _n = Binoculars.score_span(ts, lo, hi)
-        indices = [i for i, (a, b) in enumerate(ts.offsets) if b > lo and a < hi and valid[i]]
+            indices = overlap(lo, hi)
+        sc = _ratio(ts.obs_nll[indices], ts.xent[indices]) if len(indices) >= MIN_SENTENCE_TOKENS else None
         out[s.idx] = {"score": sc, "scored_spans": [{"start": lo, "end": hi}],
                       "scored_token_indices": indices, "tokens_scored": len(indices),
                       "neighbor_expansion": (lo, hi) != (s.start, s.end),

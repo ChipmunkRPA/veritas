@@ -2902,6 +2902,14 @@ and the source pixels behind the crop. The replay does not score authorship.
 
 ## Choose a review to reproduce
 
+### Compare longer writing analyses on CPU
+
+Replay the same public Federal Register PDF with each loading schedule
+at a fixed model-memory allowance. The published receipt binds every
+loss array and recorded input window through hashes. A standard-library
+reader checks the paired results and the prepaid PDF and JSON deliveries.
+[CPU replay and recorded inputs](writing-cpu-window-reuse-2026-11-17.md)
+
 ### Replay temporary face changes and ordinary cuts
 
 Rebuild direct and recompressed videos with the pinned publisher assets.

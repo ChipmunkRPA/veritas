@@ -9,6 +9,7 @@ RoBERTa classifier and Binoculars.
 """
 from __future__ import annotations
 
+from functools import partial
 from typing import TYPE_CHECKING, Any, ClassVar
 
 from app.core.config import settings
@@ -216,6 +217,7 @@ class HelloSimpleAIDetector(_SequenceClassifier):
 class BinocularsDetector(Detector):
     OBSERVER, PERFORMER = "hf.qwen.qwen2_5_1_5b", "hf.qwen.qwen2_5_1_5b_instruct"
     VOCABULARY_SIZE = 151936  # Both pinned output heads include padding beyond the tokenizer's vocabulary.
+    HIDDEN_SIZE = 1536
     spec = text_spec("txt.binoculars", "Binoculars zero-shot (Qwen2.5-1.5B observer / 1.5B-Instruct performer)", InputUnit.DOCUMENT,
                      model_ids=(OBSERVER, PERFORMER), timeout_s=180.0, profiles=FULL_DEEP, version="0.4.1")
 
@@ -262,9 +264,17 @@ class BinocularsDetector(Detector):
         pins = {}
         counterpart = None
 
+        def model_for(lease, model_id):
+            nonlocal counterpart
+            member = lease.get(model_id)
+            pins[model_id] = str(member.revision)
+            if model_id == self.PERFORMER and counterpart is None:
+                counterpart = member.obj[0]
+                self._check_vocabulary(tokenizer, counterpart)
+            return member.obj[1]
+
         @torch.inference_mode()
         def score_chunk(ids):
-            nonlocal counterpart
             reserved = ids.numel() * self.VOCABULARY_SIZE * 4
             # The observer logits stay reserved even after its weights can be evicted.
             with borrow((), reserved):
@@ -273,9 +283,8 @@ class BinocularsDetector(Detector):
                     check("paired writing observer lease")
                     with borrow((self.OBSERVER,), allowances[self.OBSERVER]) as observer_lease:
                         check("paired writing observer forward")
-                        loaded = observer_lease.get(self.OBSERVER)
-                        pins[self.OBSERVER] = str(loaded.revision)
-                        observed = loaded.obj[1](ids).logits
+                        loaded = model_for(observer_lease, self.OBSERVER)
+                        observed = loaded(ids).logits
                         loaded = None
                         check("completed paired writing observer forward")
                     if observed.device.type != "cpu" or observed.numel() * observed.element_size() > reserved:
@@ -283,12 +292,8 @@ class BinocularsDetector(Detector):
                     check("paired writing performer lease")
                     with borrow((self.PERFORMER,), allowances[self.PERFORMER]) as performer_lease:
                         check("paired writing performer forward")
-                        loaded = performer_lease.get(self.PERFORMER)
-                        pins[self.PERFORMER] = str(loaded.revision)
-                        if counterpart is None:
-                            counterpart = loaded.obj[0]
-                            self._check_vocabulary(tokenizer, counterpart)
-                        performed = loaded.obj[1](ids).logits
+                        loaded = model_for(performer_lease, self.PERFORMER)
+                        performed = loaded(ids).logits
                         loaded = None
                         check("completed paired writing performer forward")
                         losses = _losses_from_logits(observed, performed, ids)
@@ -297,7 +302,18 @@ class BinocularsDetector(Detector):
                 finally:
                     observed = performed = loaded = None
 
-        ts = runtime.token_scores(doc.text, check=check, score_chunk=score_chunk)
+        grouped = None
+        if settings.text_ratio_compact_cpu:
+            from app.detectors.text.compact_cpu import PairedLayout, grouped_losses
+
+            layout = PairedLayout(self.VOCABULARY_SIZE, self.HIDDEN_SIZE)
+            largest_lease = max(weight + allowances[key] for key, weight in terms.weights)
+            limit = layout.window_limit(models.budget_bytes - largest_lease)
+            if limit >= 2:
+                grouped = partial(grouped_losses, layout=layout, limit=limit, allowances=allowances,
+                                  borrow=borrow, model_for=model_for, check=check, fallback=score_chunk)
+        ts = runtime.token_scores(doc.text, check=check, score_chunk=score_chunk if grouped is None else None,
+                                  score_windows=grouped)
         if counterpart is None:
             result = DetectorResult.not_applicable(f"fewer than {MIN_DOCUMENT_TOKENS} scored tokens")
         else:

@@ -58,12 +58,12 @@ def history():
         }
 
 
-def scan(text):
-    # Source quotations must remain verbatim. These controlled QA sources contain
-    # no implementation names, so scanning their entire public exports is safe.
+def scan(text, *, source_names=()):
+    # Source quotations remain verbatim. Callers may supply names found in their
+    # independently extracted source. Internal identifiers stay subject to the scan.
     text = text.replace("FUSED ERROR RATES IN TESTING", "COMBINED ERROR RATES IN TESTING")
     ids, names = _identities()
-    for value in set(ids) | set(names) | {"wav2vec", "Gustking", "Tesseract", "SyncNet", "AV-HuBERT"}:
+    for value in set(ids) | (set(names) - set(source_names)) | {"wav2vec", "Gustking", "Tesseract", "SyncNet", "AV-HuBERT"}:
         flags = 0 if value == "FUSED" else re.I
         assert re.search(r"(?<!\w)" + re.escape(value) + r"(?!\w)", text, flags) is None, f"Private implementation name: {value}"
     for pattern in (_ARCHITECTURE_LABEL, _FUSION_ID):

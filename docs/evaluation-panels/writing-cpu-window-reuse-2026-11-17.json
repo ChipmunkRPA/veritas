@@ -1,0 +1,307 @@
+{
+  "additional_app": {
+    "app_timeout_s": 180,
+    "cases": [
+      {
+        "analysis_seconds": 39.369,
+        "context_count": 3,
+        "document_evidence_sha256": "c2634c4f376bc2f57fbc8070fc23a8bc506aedf2d00715a85f35738b8d3a0bb3",
+        "filename": "2025-10609-source.pdf",
+        "pdf_sha256": "2bd7ff006f23c8447bf2e27c4d6b6d74c2d8aaf490b4f01f7384192ccd6081e6",
+        "sha256": "14944c3e96874b8eb2c2e106aa65e9580815078468d9d4d3f4140688807049c5",
+        "signed_source_replay": true,
+        "token_count": 1735,
+        "writing_coverage": {
+          "passage_classifier": "completed",
+          "writing_pattern_ratio": "completed"
+        }
+      },
+      {
+        "analysis_seconds": 40.774,
+        "context_count": 2,
+        "document_evidence_sha256": "0345d84a32d30885b30bbfbcdd45f9f66deae401c477be0083887f2e0ed01b20",
+        "filename": "benchmark-original.txt",
+        "pdf_sha256": "a1a37687020bf91d26da98cc2949e550e26a6b432707cc422e332a1a6cf69c20",
+        "sha256": "7a5349685a8e45cb9eee2361bf54f7afd6e1c757c458738ceea0e358a02df599",
+        "signed_source_replay": true,
+        "token_count": 832,
+        "writing_coverage": {
+          "passage_classifier": "completed",
+          "writing_pattern_ratio": "completed"
+        }
+      },
+      {
+        "analysis_seconds": 31.765,
+        "context_count": 2,
+        "document_evidence_sha256": "fc119ff846252755c845b7458fc23efbf44e104282da0dd274158e8b12906c51",
+        "filename": "benchmark-edited.txt",
+        "pdf_sha256": "8d2c1fe6e4fe9cff7c123cab698352ce16aa566da46a3cdf4213ab2707e3a71b",
+        "sha256": "08598862926c830b6cdf5eb7acad2d543a121358baad680709278abb65c0cb9a",
+        "signed_source_replay": true,
+        "token_count": 839,
+        "writing_coverage": {
+          "passage_classifier": "completed",
+          "writing_pattern_ratio": "completed"
+        }
+      }
+    ],
+    "memory_limit_mb": 7600,
+    "simulated_usd_cents": 999,
+    "unpaid_jobs": 0
+  },
+  "calculations": [
+    {
+      "case": "federal_register",
+      "grouped": {
+        "calculation_timeout_s": 600,
+        "context_count": 16,
+        "contexts_sha256": "3c53c128107e75005ddda3e43ba5f446ed6072df92bccfe813b5d50b27e28cd9",
+        "cpu_threads": 2,
+        "cross_entropy_sha256": "8daa39aa2d3136a9417704d32ac4af98e3e8d6d53b4c05872494c30fb7a4a153",
+        "document_evidence_sha256": "f40ff3f904953b138253a5c3246d707919124e043dae63102c8bca4989019652",
+        "document_score_hex": "0x1.00fc560000000p+0",
+        "elapsed_s": 94.4711,
+        "memory_limit_mb": 7600,
+        "mode": "grouped",
+        "nll_sha256": "8409dd43bbc74a4d76e5a25366bbddba8ddc5dfa2b30f999d8501dc65f805ebf",
+        "sentence_scores": 336,
+        "source_sha256": "a49bf3b474e9533768eb4dd5828d88226ee85e84f0ac03349380c58c12e4b545",
+        "token_count": 11843,
+        "writing_model_load_order": [
+          0,
+          1
+        ],
+        "writing_model_loads": 2
+      },
+      "per_window": {
+        "calculation_timeout_s": 600,
+        "context_count": 16,
+        "contexts_sha256": "3c53c128107e75005ddda3e43ba5f446ed6072df92bccfe813b5d50b27e28cd9",
+        "cpu_threads": 2,
+        "cross_entropy_sha256": "8daa39aa2d3136a9417704d32ac4af98e3e8d6d53b4c05872494c30fb7a4a153",
+        "document_evidence_sha256": "f40ff3f904953b138253a5c3246d707919124e043dae63102c8bca4989019652",
+        "document_score_hex": "0x1.00fc560000000p+0",
+        "elapsed_s": 215.7181,
+        "memory_limit_mb": 7600,
+        "mode": "per_window",
+        "nll_sha256": "8409dd43bbc74a4d76e5a25366bbddba8ddc5dfa2b30f999d8501dc65f805ebf",
+        "sentence_scores": 336,
+        "source_sha256": "a49bf3b474e9533768eb4dd5828d88226ee85e84f0ac03349380c58c12e4b545",
+        "token_count": 11843,
+        "writing_model_load_order": [
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          1
+        ],
+        "writing_model_loads": 32
+      }
+    },
+    {
+      "case": "original_text",
+      "grouped": {
+        "calculation_timeout_s": 600,
+        "context_count": 2,
+        "contexts_sha256": "e9d9239e0cb5a8d5d43195c62bbdc00ef1764d0a89789c8d318fe18a9c321515",
+        "cpu_threads": 2,
+        "cross_entropy_sha256": "2c5aa3e84a43586a138a53f529dc9b6f9de698379a186731ae977cf609b66984",
+        "document_evidence_sha256": "0345d84a32d30885b30bbfbcdd45f9f66deae401c477be0083887f2e0ed01b20",
+        "document_score_hex": "0x1.04fb5e0000000p+0",
+        "elapsed_s": 15.7905,
+        "memory_limit_mb": 7600,
+        "mode": "grouped",
+        "nll_sha256": "d0802bc64d4b31f537b29ecd65ec56f8ffcf94f15f62df31b78e6d627e08a6bd",
+        "sentence_scores": 24,
+        "source_sha256": "7a5349685a8e45cb9eee2361bf54f7afd6e1c757c458738ceea0e358a02df599",
+        "token_count": 832,
+        "writing_model_load_order": [
+          0,
+          1
+        ],
+        "writing_model_loads": 2
+      },
+      "per_window": {
+        "calculation_timeout_s": 600,
+        "context_count": 2,
+        "contexts_sha256": "e9d9239e0cb5a8d5d43195c62bbdc00ef1764d0a89789c8d318fe18a9c321515",
+        "cpu_threads": 2,
+        "cross_entropy_sha256": "2c5aa3e84a43586a138a53f529dc9b6f9de698379a186731ae977cf609b66984",
+        "document_evidence_sha256": "0345d84a32d30885b30bbfbcdd45f9f66deae401c477be0083887f2e0ed01b20",
+        "document_score_hex": "0x1.04fb5e0000000p+0",
+        "elapsed_s": 24.988,
+        "memory_limit_mb": 7600,
+        "mode": "per_window",
+        "nll_sha256": "d0802bc64d4b31f537b29ecd65ec56f8ffcf94f15f62df31b78e6d627e08a6bd",
+        "sentence_scores": 24,
+        "source_sha256": "7a5349685a8e45cb9eee2361bf54f7afd6e1c757c458738ceea0e358a02df599",
+        "token_count": 832,
+        "writing_model_load_order": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "writing_model_loads": 4
+      }
+    },
+    {
+      "case": "edited_text",
+      "grouped": {
+        "calculation_timeout_s": 600,
+        "context_count": 2,
+        "contexts_sha256": "bbeea6ace5d6891a7016ab0f67bd6a19afeef38311aab5157bfefd7eec5a7fbf",
+        "cpu_threads": 2,
+        "cross_entropy_sha256": "fac91617f03d5f318823714dcd452b84b1b71159286c8a2fbe0dec4841e2848b",
+        "document_evidence_sha256": "fc119ff846252755c845b7458fc23efbf44e104282da0dd274158e8b12906c51",
+        "document_score_hex": "0x1.03d36e0000000p+0",
+        "elapsed_s": 16.9916,
+        "memory_limit_mb": 7600,
+        "mode": "grouped",
+        "nll_sha256": "de1cba52c53446a2c9f69b8fbabf01f2455a8bd5f63caa2c4c75ff5bf5710388",
+        "sentence_scores": 24,
+        "source_sha256": "08598862926c830b6cdf5eb7acad2d543a121358baad680709278abb65c0cb9a",
+        "token_count": 839,
+        "writing_model_load_order": [
+          0,
+          1
+        ],
+        "writing_model_loads": 2
+      },
+      "per_window": {
+        "calculation_timeout_s": 600,
+        "context_count": 2,
+        "contexts_sha256": "bbeea6ace5d6891a7016ab0f67bd6a19afeef38311aab5157bfefd7eec5a7fbf",
+        "cpu_threads": 2,
+        "cross_entropy_sha256": "fac91617f03d5f318823714dcd452b84b1b71159286c8a2fbe0dec4841e2848b",
+        "document_evidence_sha256": "fc119ff846252755c845b7458fc23efbf44e104282da0dd274158e8b12906c51",
+        "document_score_hex": "0x1.03d36e0000000p+0",
+        "elapsed_s": 23.07,
+        "memory_limit_mb": 7600,
+        "mode": "per_window",
+        "nll_sha256": "de1cba52c53446a2c9f69b8fbabf01f2455a8bd5f63caa2c4c75ff5bf5710388",
+        "sentence_scores": 24,
+        "source_sha256": "08598862926c830b6cdf5eb7acad2d543a121358baad680709278abb65c0cb9a",
+        "token_count": 839,
+        "writing_model_load_order": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "writing_model_loads": 4
+      }
+    }
+  ],
+  "earlier_app_failure": {
+    "source_sha256": "a49bf3b474e9533768eb4dd5828d88226ee85e84f0ac03349380c58c12e4b545",
+    "status": "failed",
+    "writing_check_duration_ms": 119325,
+    "writing_check_reason": "exceeded 119s budget",
+    "writing_check_status": "timeout"
+  },
+  "long_app": {
+    "analysis_seconds": 159.893,
+    "app_timeout_s": 180,
+    "context_count": 16,
+    "document_evidence_sha256": "f40ff3f904953b138253a5c3246d707919124e043dae63102c8bca4989019652",
+    "memory_limit_mb": 7600,
+    "pdf_sha256": "f1b512453196c57bfecbea0dd52389563a29181b159bd6193c391c6ee1dd045f",
+    "sha256": "a49bf3b474e9533768eb4dd5828d88226ee85e84f0ac03349380c58c12e4b545",
+    "signed_source_replay": true,
+    "simulated_usd_cents": 999,
+    "token_count": 11843,
+    "unpaid_jobs": 0,
+    "writing_coverage": {
+      "passage_classifier": "completed",
+      "writing_pattern_ratio": "completed"
+    }
+  },
+  "mixed_sources": {
+    "groups": [
+      {
+        "edited_sha256": "51b52e7f842212ec67c61ca702f33842b5b4fdd752ea7ece53e055e688daef68",
+        "generator": "gemini-2.5-flash",
+        "genre": "news",
+        "group": "fe95101fa2322c137710557e21bcdb55e21d2ff2a4533d93616b84189f2be93e",
+        "original_sha256": "12bd1b459a0a1aa1d55580327fd94b594f951f92ba92c95e6e6f949118498fb7"
+      },
+      {
+        "edited_sha256": "c9caed36f6c402718d65f0cbbe20acb2de77b713e00e48190d26af2292a021ed",
+        "generator": "gpt-5.4",
+        "genre": "news",
+        "group": "ed2e52854ede8c5d53252e2f5a729841d29bf2438ad00beef0d47b5130ae3845",
+        "original_sha256": "143e1396b1a06af9e8fd228b179f641d02172d60d2040d4fe40ceb88becc9d45"
+      },
+      {
+        "edited_sha256": "632c1680bb8435f7b8990ab8ca84fec7315e44c7dcf3dacc716b5a1b095c8b67",
+        "generator": "gemini-2.5-flash",
+        "genre": "reports",
+        "group": "f5968add0bd4d96c7b3ff2f77fc9457574e30e4181af0d8c47a6c6ba41fcc57a",
+        "original_sha256": "a79072e21aa6d0c1936a76481f927c8bcb78f720ab4912b1aabb79a65e00fffe"
+      },
+      {
+        "edited_sha256": "b7523d676cdffd9b7c15450fc365edc10645c8218acd6fd063dfa9d7233ed629",
+        "generator": "gpt-5.4",
+        "genre": "reports",
+        "group": "54e6d110a861bd26258a900515a71951902ff199de879e6c2f9991259b00de62",
+        "original_sha256": "cd044056306a6b0d5d8c012f06496fa1db8469f2b3e4b84eed6681653703c29d"
+      }
+    ],
+    "inputs": {
+      "benchmark-edited.txt": {
+        "sha256": "08598862926c830b6cdf5eb7acad2d543a121358baad680709278abb65c0cb9a",
+        "words": 653
+      },
+      "benchmark-original.txt": {
+        "sha256": "7a5349685a8e45cb9eee2361bf54f7afd6e1c757c458738ceea0e358a02df599",
+        "words": 651
+      }
+    },
+    "pair_manifest_sha256": "45b3065d5ea5242a3ce52f89467074e4b9b7ed30f519c341b9b468de98f06491",
+    "publisher_revision": "072c03c7051409346aaba05168d183cf6d863ee9"
+  },
+  "platform": "macOS arm64",
+  "public_pdfs": [
+    {
+      "bytes": 251649,
+      "name": "2025-10477",
+      "sha256": "a49bf3b474e9533768eb4dd5828d88226ee85e84f0ac03349380c58c12e4b545",
+      "url": "https://www.govinfo.gov/content/pkg/FR-2025-06-12/pdf/2025-10477.pdf"
+    },
+    {
+      "bytes": 186324,
+      "name": "2025-10609",
+      "sha256": "14944c3e96874b8eb2c2e106aa65e9580815078468d9d4d3f4140688807049c5",
+      "url": "https://www.govinfo.gov/content/pkg/FR-2025-06-12/pdf/2025-10609.pdf"
+    }
+  ],
+  "schema": "chipmunk.writing-cpu-window-reuse/1"
+}

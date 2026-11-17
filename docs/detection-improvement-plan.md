@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [CPU reuse across writing windows](writing-cpu-window-reuse-2026-11-17.md)
+  lets the previously timed-out Federal Register PDF finish in 160
+  seconds under the 180-second analysis budget. The paired writing
+  check reduces 32 model loads to two and reproduces all 11,843 token
+  losses and 336 sentence records. Local prepaid PDF and JSON delivery
+  and signed-source verification exercise the normal analysis path.
+
 - [Temporary face changes within one shot](video-face-shot-continuity-2026-11-17.md)
   adds two exact locations to the existing video face worker on 224
   fresh paired deliveries. The shot check dismisses six ordinary cut

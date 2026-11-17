@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Confirming writing highlights in economic reports](writing-report-confirmation-2026-11-16.md)
+  applies the economic-report reference only when the document fits its
+  writing profile. It clears two false highlights among 24 fresh Board
+  reports and leaves the 22 held GAO pairs on the general check. Neither
+  comparison finds the new short rewrites. The optional local evidence
+  explains when the selected report reference applies.
+
 - [Texture comparison for small JPEG object removals](image-removal-peer-2026-11-16.md)
   tests a removal-specific fit and a version comparing visually similar
   patches in the same image. On nine new photo groups across both JPEG

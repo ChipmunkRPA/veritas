@@ -286,11 +286,16 @@ function WritingPassageIntervals({ review, method, emailHtml }: {
   method?: string
   emailHtml: boolean
 }) {
+  const summary = {
+    'document-writing-passage-intervals/3': 'It also looks for passages that stand out within the document.',
+    'document-writing-passage-intervals/4': 'This file matched the writing patterns of the economic-report reference set. Each displayed passage also stood out against that reference.',
+  } as const
+  const approach = review.schema === 'document-writing-passage-intervals/3' || review.schema === 'document-writing-passage-intervals/4'
+    ? summary[review.schema]
+    : 'Sustained AI-like patterns can highlight separate passages for review.'
   return <section id="document-writing-passage-intervals" aria-labelledby="writing-passage-intervals-title" className="mt-4 rounded-md border border-border p-4">
     <h3 id="writing-passage-intervals-title" className="m-0 text-body font-medium">Possible AI-like writing passages</h3>
-    <p className="mt-2 mb-0 text-small">This optional check combines readings of individual sentences and their surrounding text. {review.schema === 'document-writing-passage-intervals/3'
-      ? 'It also looks for passages that stand out within the document.'
-      : 'Sustained AI-like patterns can highlight separate passages for review.'}</p>
+    <p className="mt-2 mb-0 text-small">This optional check combines readings of individual sentences and their surrounding text. {approach}</p>
     {method === 'email' && <p className="mt-2 mb-0 text-small">This check covers the mapped reply body.</p>}
     <p className="mt-2 mb-0 text-small">{review.status === 'flagged' ? 'Inspect the highlighted passages in context.'
       : review.status === 'no_ranges' ? 'No passage was selected. Authorship remains undetermined by this check.'

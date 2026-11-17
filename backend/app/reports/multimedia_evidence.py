@@ -1564,9 +1564,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             if kind == "document" else None,
             "writing_passage_intervals": (
                 {**intervals, "title": document_passage_intervals.TITLE,
-                 "explanation": (document_passage_intervals.BASELINE_EXPLANATION
-                                 if intervals["schema"] == document_passage_intervals.DOCUMENT_BASELINE_SCHEMA
-                                 else document_passage_intervals.EXPLANATION),
+                 "explanation": document_passage_intervals.explanation(intervals["schema"]),
                  "baseline_reason": document_passage_intervals.BASELINE_REASON,
                  "status_note": document_passage_intervals.STATUS[intervals["status"]],
                  "method": document["source"]["method"],

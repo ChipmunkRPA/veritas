@@ -1,0 +1,272 @@
+{
+  "browser": {
+    "checked": [
+      "original-text",
+      "original-pdf",
+      "edited-word"
+    ],
+    "page_errors": 0
+  },
+  "cases": {
+    "control-text": {
+      "locations": [
+        {
+          "basis": "pooled",
+          "end": 4911,
+          "source_end": 4911,
+          "source_start": 149,
+          "start": 149
+        }
+      ],
+      "pdf_sha256": "97e7ffdb0210f8b37134444cd861d00c2322373d6287726deb0009acb454eda2",
+      "schema": "document-writing-passage-intervals/3",
+      "status": "flagged"
+    },
+    "control-word": {
+      "locations": [
+        {
+          "basis": "pooled",
+          "end": 5297,
+          "locations": [
+            {
+              "body_path": [
+                2
+              ],
+              "end": 2039,
+              "paragraph": 3,
+              "ranges": [
+                [
+                  0,
+                  438
+                ]
+              ],
+              "start": 1601
+            },
+            {
+              "body_path": [
+                3
+              ],
+              "end": 2369,
+              "paragraph": 4,
+              "ranges": [
+                [
+                  0,
+                  328
+                ]
+              ],
+              "start": 2041
+            },
+            {
+              "body_path": [
+                4
+              ],
+              "end": 2719,
+              "paragraph": 5,
+              "ranges": [
+                [
+                  0,
+                  348
+                ]
+              ],
+              "start": 2371
+            },
+            {
+              "body_path": [
+                5
+              ],
+              "end": 3600,
+              "paragraph": 6,
+              "ranges": [
+                [
+                  0,
+                  879
+                ]
+              ],
+              "start": 2721
+            },
+            {
+              "body_path": [
+                6
+              ],
+              "end": 4408,
+              "paragraph": 7,
+              "ranges": [
+                [
+                  0,
+                  806
+                ]
+              ],
+              "start": 3602
+            },
+            {
+              "body_path": [
+                7
+              ],
+              "end": 5116,
+              "paragraph": 8,
+              "ranges": [
+                [
+                  0,
+                  706
+                ]
+              ],
+              "start": 4410
+            },
+            {
+              "body_path": [
+                8
+              ],
+              "end": 5297,
+              "paragraph": 9,
+              "ranges": [
+                [
+                  0,
+                  179
+                ]
+              ],
+              "start": 5118
+            }
+          ],
+          "start": 1601
+        }
+      ],
+      "pdf_sha256": "f3136ad5e790041924f9acda77b4544a967265a5b26d08f63e97832ab53c77c4",
+      "schema": "document-writing-passage-intervals/3",
+      "status": "flagged"
+    },
+    "edited-word": {
+      "locations": [
+        {
+          "basis": "pooled",
+          "end": 5297,
+          "locations": [
+            {
+              "body_path": [
+                2
+              ],
+              "end": 2039,
+              "paragraph": 3,
+              "ranges": [
+                [
+                  0,
+                  438
+                ]
+              ],
+              "start": 1601
+            },
+            {
+              "body_path": [
+                3
+              ],
+              "end": 2369,
+              "paragraph": 4,
+              "ranges": [
+                [
+                  0,
+                  328
+                ]
+              ],
+              "start": 2041
+            },
+            {
+              "body_path": [
+                4
+              ],
+              "end": 2719,
+              "paragraph": 5,
+              "ranges": [
+                [
+                  0,
+                  348
+                ]
+              ],
+              "start": 2371
+            },
+            {
+              "body_path": [
+                5
+              ],
+              "end": 3600,
+              "paragraph": 6,
+              "ranges": [
+                [
+                  0,
+                  879
+                ]
+              ],
+              "start": 2721
+            },
+            {
+              "body_path": [
+                6
+              ],
+              "end": 4408,
+              "paragraph": 7,
+              "ranges": [
+                [
+                  0,
+                  806
+                ]
+              ],
+              "start": 3602
+            },
+            {
+              "body_path": [
+                7
+              ],
+              "end": 5116,
+              "paragraph": 8,
+              "ranges": [
+                [
+                  0,
+                  706
+                ]
+              ],
+              "start": 4410
+            },
+            {
+              "body_path": [
+                8
+              ],
+              "end": 5297,
+              "paragraph": 9,
+              "ranges": [
+                [
+                  0,
+                  179
+                ]
+              ],
+              "start": 5118
+            }
+          ],
+          "start": 1601
+        }
+      ],
+      "pdf_sha256": "003b8bb35755b8dcc50ff20ecbac00d8de1bdc9d6076f50709280a5f6909b1fe",
+      "schema": "document-writing-passage-intervals/4",
+      "status": "flagged"
+    },
+    "original-pdf": {
+      "locations": [],
+      "pdf_sha256": "5ccb6de9175e327b44392a434b9be8d953a8bd7dd7c4cef3ff6f1121ea0cc45d",
+      "schema": "document-writing-passage-intervals/4",
+      "status": "no_ranges"
+    },
+    "original-text": {
+      "locations": [],
+      "pdf_sha256": "c7ad077e792ad2e12ad252b7eea22b9bfe0c9d1641b90078c3d8492d2f57f0aa",
+      "schema": "document-writing-passage-intervals/4",
+      "status": "no_ranges"
+    },
+    "other-report": {
+      "locations": [],
+      "pdf_sha256": "15ab37f3366a2c38918e89af79cd6551fec5b5c188eb27ca5e6da6b6be9b1164",
+      "schema": "document-writing-passage-intervals/3",
+      "status": "no_ranges"
+    }
+  },
+  "same_overall_assessment": true,
+  "signed_packages_verified": 6,
+  "simulated_prepaid_analyses": 6,
+  "unpaid_jobs": 0
+}

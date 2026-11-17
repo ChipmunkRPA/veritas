@@ -21,8 +21,13 @@ try {
   for (const sample of input.cases) {
     await page.goto(`${input.url}/analyses/${sample.analysis_id}?view=plain#document-writing-passage-intervals`)
     const section = page.getByRole('region', { name: 'Possible AI-like writing passages' })
-    await section.getByText('Inspect the highlighted passages in context.').waitFor()
-    assert.equal(await section.getByText(reason, { exact: true }).count(), sample.previews.length)
+    const status = sample.previews.length ? 'Inspect the highlighted passages in context.'
+      : 'No passage was selected. Authorship remains undetermined by this check.'
+    await section.getByText(status).waitFor()
+    if (sample.reportContext) {
+      await section.getByText('This file matched the writing patterns of the economic-report reference set.', { exact: false }).waitFor()
+    }
+    assert.equal(await section.getByText(reason, { exact: true }).count(), sample.relativeCount ?? sample.previews.length)
     const actual = await section.locator('blockquote').allTextContents()
     assert.equal(actual.length, sample.previews.length)
     for (const [index, preview] of sample.previews.entries()) {

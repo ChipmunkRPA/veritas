@@ -28,6 +28,8 @@ def policy() -> str | bool:
     if not enabled():
         return False
     if settings.text_passage_document_baseline_review:
+        if settings.text_passage_report_review:
+            return document_passage_intervals.REPORT_SCHEMA
         return document_passage_intervals.DOCUMENT_BASELINE_SCHEMA
     return document_passage_intervals.NATIVE_SCHEMA
 
@@ -73,4 +75,5 @@ def measure(classifier, doc, sentences, context, ctx, spec, revisions):
     return document_passage_intervals.capture(
         doc.text, doc.source_map, geometry, readings, method=method, checked_end=end,
         document_baseline=settings.text_passage_document_baseline_review,
+        report_review=settings.text_passage_report_review,
     )

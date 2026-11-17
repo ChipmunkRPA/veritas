@@ -356,6 +356,7 @@ class Settings(BaseSettings):
     text_character_adjusted_review: bool = False
     text_passage_intervals_review: bool = False  # Optional isolated and contextual writing ranges in development.
     text_passage_document_baseline_review: bool = False  # Add separate ranges using the document's own baseline.
+    text_passage_report_review: bool = False  # Confirm ranges against the economic-report reference when it fits.
     text_passage_position_review: bool = False
     text_long_passage_position_review: bool = False
     text_bibliography_scope_review: bool = False  # Keep qualified terminal citations out of body writing inference.

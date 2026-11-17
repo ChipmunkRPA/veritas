@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [economic-report comparison](writing-report-confirmation-2026-11-16.md#local-review-and-reproduction)
+recounts 156 document versions from 46 previously unused report groups.
+The exact-source readback checks the context windows and native positions.
+The portable receipt includes separate untouched, edited and out-of-profile
+results and fixes the method before comparing the reports.
+
 The [small JPEG removal replay](image-removal-peer-2026-11-16.md#replay)
 provides a public-source recipe for 108 deliveries and a standard-library
 recount of the two texture comparisons. The receipt preserves the exact

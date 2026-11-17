@@ -53,7 +53,8 @@ def exports(client, aid, source, record, output):
     with pymupdf.open(stream=pdf, filetype="pdf") as rendered:
         text = " ".join(" ".join(page.get_text().split()) for page in rendered)
         scan(text)
-        assert proof.TITLE in text and proof.STATUS["flagged"] in text
+        assert proof.TITLE in text and proof.STATUS[record["status"]] in text
+        assert proof.explanation(record["schema"]) in text
         for row in record["ranges"]:
             if "locations" not in row:
                 assert f"Original text characters [{row['source_start']}, {row['source_end']})" in text

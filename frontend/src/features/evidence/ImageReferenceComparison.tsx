@@ -7,7 +7,7 @@ import {
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
   IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
   pngOpacitySchema, exactWebpSchema, lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema,
-  earlierJpegWebpSchema, imageFramingSchema, webpColorSchema,
+  earlierJpegWebpSchema, imageFramingSchema, perspectiveSchema, webpColorSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
 } from './imageReferenceApi'
 
@@ -76,6 +76,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const orientation = comparison.schema === exactPngOrientationSchema ? comparison.exact_orientation : orientedCrop
   const embeddedPhoto = comparison.schema === embeddedPhotoSchema ? comparison.embedded_native_photo : undefined
   const delivery = comparison.schema === jpegPngEnvelopeSchema
+  const perspective = comparison.schema === perspectiveSchema ? comparison.perspective_check : undefined
   const sameJpegFraming = comparison.schema === exactJpegIdentitySchema ? alignment : undefined
   const detailLoss = isJpegDetailLoss(comparison.schema)
   const opacity = comparison.schema === pngOpacitySchema ? comparison.png_opacity : undefined
@@ -139,6 +140,20 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       We compared color differences across plausible resize, tone and compression variations.
       Ordinary processing can still cause highlights. This comparison does not assess AI authorship.
     </p>}
+    {perspective && <div className="mt-2">
+      <p className="m-0 text-small text-text-muted">
+        Matching detail in {perspective.supporting_tiles.length} areas supported the perspective alignment.
+        {' '}We compared {perspective.compared_pixels.toLocaleString('en-US')} submitted pixels after correcting framing and overall color.
+        {' '}This comparison carries zero weight in the AI assessment.
+      </p>
+      <details className="mt-2 text-small text-text-muted">
+        <summary className="cursor-pointer">Show the area compared</summary>
+        <div className="mt-2 max-w-xl">
+          <ComparisonPicture result={result} artifact={comparison.coverage_mask} label="Compared area in submitted image coordinates" />
+          <p className="mt-2 mb-0 text-caption text-text-muted">White marks the pixels included in the comparison.</p>
+        </div>
+      </details>
+    </div>}
     {opacity && <p className="mt-2 mb-0 text-small text-text-muted">
       {opacity.opacity_changed_pixels.toLocaleString('en-US')} pixels changed opacity.
       {' '}{opacity.matched_tiles.length} matching textured areas supported the framing. Crops are shown on white.

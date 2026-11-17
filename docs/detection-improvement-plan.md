@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Locating edits after a rotated or tilted JPEG crop](image-reference-perspective-2026-11-16.md)
+  compares an earlier and submitted copy when the existing registration
+  checks cannot align them. It locates 265 of 360 staged removal deliveries
+  across 45 held photos, with two highlights on 540 ordinary deliveries.
+  The previous comparison abstained on these deliveries. The new
+  comparison shows the checked area and native crops in both images,
+  with zero AI confidence weight.
+
 - [Repeated background sound under centered speech](audio-channel-difference-2026-11-16.md)
   adds a source-clocked stereo check to the app. It finds 27 of 32
   staged copies at each of two centered-speech levels, with zero

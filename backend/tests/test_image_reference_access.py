@@ -25,6 +25,7 @@ from app.detectors.image import (
     reference_lossy_webp,
     reference_lossy_webp_crop,
     reference_lossy_webp_resize,
+    reference_perspective,
     reference_png_opacity,
     reference_png_orientation,
     reference_same_jpeg,
@@ -37,6 +38,7 @@ from app.storage.objects import ObjectStore
 from scripts.review_image_reference_export import review
 from scripts.review_image_reference_oriented_crop_export import review as review_oriented_crop
 from scripts.review_image_reference_oriented_resize_export import review as review_oriented_resize
+from scripts.review_image_reference_perspective_export import review as review_perspective
 
 
 def _png(pixels):
@@ -135,6 +137,66 @@ def _assert_pdf_assets(pdf, page, assets, payload):
             else:
                 assert pixmap.samples == png.tobytes()
         assert asset["sha256"] in page.get_text()
+
+
+@pytest.mark.parametrize("edited", [False, True])
+def test_tilted_jpeg_comparison_preserves_source_crops_and_coverage(reference_http, tmp_path, monkeypatch, edited):
+    from scripts.image_reference_perspective_panel import geometry, jpeg
+
+    f = reference_http
+    earlier = cv2.resize(f.reference_pixels, (640, 480), interpolation=cv2.INTER_CUBIC)
+    candidate = earlier.copy()
+    if edited:
+        candidate[216:275, 278:348] = (214, 43, 157)
+    matrix, size = geometry(earlier.shape[1::-1], "perspective_crop", False)
+    later = cv2.warpPerspective(candidate, matrix, size, flags=cv2.WARP_INVERSE_MAP | cv2.INTER_CUBIC)
+    earlier_bytes, later_bytes = jpeg(earlier, 90), jpeg(later, 75)
+    source = f.store.put_bytes(later_bytes)
+    with Session(f.engine) as db:
+        analysis = db.get(Analysis, "image-a")
+        analysis.sha256, analysis.size_bytes, analysis.content_type = source.sha256, source.size_bytes, "image/jpeg"
+        db.commit()
+    files = {"reference": ("earlier.jpg", earlier_bytes, "image/jpeg")}
+    monkeypatch.setattr(settings, "image_reference_perspective_review", False)
+    prior = f.client.post(_url(), headers=f.viewer, files=files)
+    assert prior.status_code == 200 and prior.json()["comparison"]["status"] != "comparable"
+    monkeypatch.setattr(settings, "image_reference_perspective_review", True)
+    response = f.client.post(_url(), headers=f.viewer, files=files, data={"include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    payload = response.json()
+    measured = payload["comparison"]
+    assert measured["schema"] == reference_perspective.SCHEMA and measured["affects_overall_confidence"] is False
+    assert bool(measured["regions"]) == edited
+    coverage = measured["coverage_mask"]
+    with Image.open(io.BytesIO(_asset_bytes(payload, coverage))) as support:
+        tested = np.asarray(support) > 0
+        assert support.size == size and tested.sum() == measured["perspective_check"]["compared_pixels"]
+    assets = [coverage]
+    if edited:
+        mask = measured["mask"]
+        assets.append(mask)
+        with Image.open(io.BytesIO(_asset_bytes(payload, mask))) as selected:
+            selection = np.asarray(selected) > 0
+        assert not (selection & ~tested).any()
+        assert int(selection.sum()) == sum(region["selected_pixels"] for region in measured["regions"])
+        [region] = measured["regions"]
+        polygon = np.asarray(region["earlier_pixel_centers"])
+        assert np.all(np.linalg.norm(polygon.mean(axis=0) - (313, 245), axis=0) < 10)
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"], validate=True), filetype="pdf") as pdf:
+        assert "Matched after correcting perspective" in pdf[0].get_text()
+        _assert_pdf_assets(pdf, pdf[0], assets, payload)
+        if edited:
+            _assert_pdf_assets(pdf, pdf[1], [region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")], payload)
+    export = {"comparison": measured, "pngs": payload["pngs"]}
+    output, original, submitted = (tmp_path / name for name in ("export.json", "earlier.jpg", "submitted.jpg"))
+    output.write_text(json.dumps(export))
+    original.write_bytes(earlier_bytes)
+    submitted.write_bytes(later_bytes)
+    assert review_perspective(output, original, submitted)["verified_assets"] == len(payload["pngs"])
+    export["pngs"][coverage["file"]] = ""
+    output.write_text(json.dumps(export))
+    with pytest.raises(ValueError, match="exported masks or crops"):
+        review_perspective(output, original, submitted)
 
 
 @pytest.mark.parametrize("scenario", ["edited", "webp_earlier", "identical", "wrong_framing", "other_photo", "lossy", "jpeg_earlier"])

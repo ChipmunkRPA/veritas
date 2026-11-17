@@ -21,7 +21,8 @@ MIN_MARGIN = .00006
 MAX_VALIDATION_FRACTION = .14
 
 
-def _rough_bounds(reference, submitted):
+def matching_points(reference, submitted):
+    """Find distinctive, two-way keypoint correspondences on the two native grids."""
     extractor = cv2.SIFT_create(nfeatures=1000, contrastThreshold=.018)
     ref, ref_features = extractor.detectAndCompute(reference, None)
     sub, sub_features = extractor.detectAndCompute(submitted, None)
@@ -39,12 +40,20 @@ def _rough_bounds(reference, submitted):
         return None
     points = np.array([sub[index].pt for index, _ in matches], dtype=np.float32)
     target = np.array([ref[partner].pt for _, partner in matches], dtype=np.float32)
+    return points, target
+
+
+def _rough_bounds(reference, submitted):
+    matches = matching_points(reference, submitted)
+    if matches is None:
+        return None
+    points, target = matches
     affine, inside = cv2.estimateAffine2D(points, target, ransacReprojThreshold=1.6, maxIters=1200, confidence=.995)
     if affine is None or inside is None:
         return None
     valid = inside.ravel() > 0
     height, width = submitted.shape
-    if (valid.sum() < max(MIN_FEATURES, MIN_INLIER_SHARE * len(matches))
+    if (valid.sum() < max(MIN_FEATURES, MIN_INLIER_SHARE * len(points))
             or np.any(np.ptp(points[valid], axis=0) < MIN_FEATURE_SPAN * np.array((width, height)))):
         return None
     sx, sy = affine[0, 0], affine[1, 1]

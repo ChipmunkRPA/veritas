@@ -229,6 +229,7 @@ class Settings(BaseSettings):
     image_sharp_boundary_enabled: bool = False
     image_reference_comparison_enabled: bool = False  # Development-only comparison of an uploaded earlier copy.
     image_reference_jpeg_png_envelope: bool = False  # Optional earlier standard JPEG to cropped PNG color differences.
+    image_reference_perspective_review: bool = False  # Optional comparison of JPEGs after perspective alignment.
     image_reference_exact_jpeg_identity: bool = False  # Optional same-framing PNG to standard JPEG identity comparison.
     image_reference_shifted_jpeg: bool = False  # Optional bounded comparison of a whole-pixel translated JPEG.
     image_reference_structure_jpeg: bool = False  # Optional same-framing JPEG comparison after global tone changes.

@@ -13,6 +13,13 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [earlier-copy perspective replay](image-reference-perspective-2026-11-16.md#replay)
+rebuilds rotated and tilted JPEG deliveries from three pinned source sets.
+A standard-library command recounts all 1,440 held results and the
+separate operating-point selection. For a specific report, the native
+replay also checks the two originals, the estimated transform, and every
+exported crop and mask.
+
 The [background repetition replay](audio-channel-difference-2026-11-16.md#use-and-reproduce)
 rebuilds 224 stereo deliveries from first-party AMI microphone WAVs. It
 compares the original channels and downmix with a separate channel-difference

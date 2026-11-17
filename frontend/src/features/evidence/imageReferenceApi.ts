@@ -57,6 +57,12 @@ export interface ImageReferenceRecord {
   submitted: ImageSource
   regions: DifferenceRegion[]
   mask?: ReferencePng
+  coverage_mask?: ReferencePng
+  perspective_check?: {
+    inlier_matches: number
+    compared_pixels: number
+    supporting_tiles: { row: number; column: number; correlation: number }[]
+  }
   alignment?: {
     submitted_overlap: NativeImageArea
     reference_overlap: NativeImageArea
@@ -148,6 +154,7 @@ export const croppedLossyWebpSchema = 'chipmunk.image-reference-comparison/21'
 export const croppedResizedLossyWebpSchema = 'chipmunk.image-reference-comparison/22'
 export const webpColorSchema = 'chipmunk.image-reference-comparison/23'
 export const earlierJpegWebpSchema = 'chipmunk.image-reference-comparison/24'
+export const perspectiveSchema = 'chipmunk.image-reference-comparison/25'
 const lossyWebpSchemas = [lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema]
 export const imageFramingSchema = (record: ImageReferenceRecord) =>
   record.schema === webpColorSchema ? record.comparison_schema : record.schema
@@ -512,6 +519,21 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
       throw new Error('The server returned an incomplete JPEG to PNG comparison.')
     }
   }
+  if (comparison.schema === perspectiveSchema) {
+    const perspective = comparison.perspective_check
+    const coverage = comparison.coverage_mask
+    const { width, height } = comparison.submitted
+    if (comparison.status !== 'comparable' || comparison.affects_overall_confidence !== false || !perspective || !coverage
+        || coverage.width !== width || coverage.height !== height || !pngData(result.pngs, coverage)
+        || !Number.isSafeInteger(perspective.compared_pixels) || perspective.compared_pixels < .70 * width * height
+        || perspective.compared_pixels > width * height || !Number.isSafeInteger(perspective.inlier_matches)
+        || perspective.inlier_matches < 28 || !Array.isArray(perspective.supporting_tiles) || perspective.supporting_tiles.length < 10
+        || comparison.regions.some(region => !validAreaWithin(region, width, height)
+          || !validArea(region.reference_region)
+          || !validAreaWithin(region.reference_region, comparison.reference.width, comparison.reference.height))) {
+      throw new Error('The server returned an incomplete perspective comparison.')
+    }
+  }
   return result
 }
 
@@ -534,7 +556,8 @@ export function referencePngSrc(pngs: ImageReferenceResult['pngs'], artifact?: R
 
 export function imageReferenceExport(result: ImageReferenceResult): ImageReferenceResult {
   const { comparison, pngs } = result
-  const artifacts = [comparison.mask, ...comparison.regions.flatMap(region => [region.reference_crop, region.submitted_crop, region.submitted_overlay])]
+  const artifacts = [comparison.mask, comparison.coverage_mask,
+    ...comparison.regions.flatMap(region => [region.reference_crop, region.submitted_crop, region.submitted_overlay])]
   const attached: ImageReferenceResult['pngs'] = {}
   for (const artifact of artifacts) {
     const base64 = pngData(pngs, artifact)

@@ -23,6 +23,7 @@ from app.detectors.image import (
     reference_lossy_webp_crop,
     reference_lossy_webp_crop_resize,
     reference_lossy_webp_resize,
+    reference_perspective,
     reference_png_exact_resize,
     reference_png_opacity,
     reference_png_orientation,
@@ -46,6 +47,7 @@ INTERPRETATION = ("Regions show differences that survived the comparison setting
                   "differences. The earlier file's authenticity and the cause of changes require separate evidence.")
 CROP_RESIZE_MAX_REFERENCE_SIDE = 768
 CROP_RESIZE_MAX_SUBMITTED_SIDE = 845
+PERSPECTIVE_POINT = 18.
 CROP_RESIZE_MIN_SCALE = .72
 CROP_RESIZE_MAX_SCALE = 1.17
 LOSSY_WEBP_SCHEMAS = frozenset((reference_lossy_webp.SCHEMA, reference_lossy_webp_resize.SCHEMA,
@@ -101,12 +103,14 @@ def _png(path: Path, pixels: np.ndarray) -> dict:
     return {"file": path.name, "sha256": digest, "width": pixels.shape[1], "height": pixels.shape[0]}
 
 
-def _write_evidence(directory, comparison, reference, submitted, mask):
+def _write_evidence(directory, comparison, reference, submitted, mask, *, coverage=None):
     if directory.exists() or directory.is_symlink():
         raise FileExistsError(f"Evidence directory already exists: {directory}")
     with tempfile.TemporaryDirectory(prefix=".image-comparison-", dir=directory.parent) as workspace:
         staged = Path(workspace) / "evidence"
         staged.mkdir()
+        if coverage is not None:
+            comparison["coverage_mask"] = _png(staged / "compared-area.png", coverage.astype(np.uint8) * 255)
         if mask is not None and mask.any():
             comparison["mask"] = _png(staged / "difference-mask.png", mask.astype(np.uint8) * 255)
             for i, region in enumerate(comparison["regions"], 1):
@@ -152,6 +156,15 @@ def _oriented_rgb(image):
         return np.array(rgb)
 
 
+def _perspective_check(earlier, questioned, reference, submitted):
+    if not (_color_jpeg420(earlier) and earlier.quantization == _jpeg_tables(90)
+            and _color_jpeg420(questioned) and questioned.quantization in (_jpeg_tables(75), _jpeg_tables(90))):
+        return None, None, None
+    measurement = reference_perspective.measure(reference, submitted)
+    reading, mask = reference_perspective.compare(measurement, reference.shape[1::-1], PERSPECTIVE_POINT)
+    return reading, mask, measurement.coverage if reading is not None else None
+
+
 def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | None = None,
             allow_integer_alignment: bool = False, allow_proportional_resize: bool = False,
             allow_oriented_crop: bool = False, allow_oriented_resize: bool = False,
@@ -161,10 +174,11 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             allow_jpeg_detail_loss_extra_qualities: bool = False, allow_png_opacity: bool = False,
             allow_lossy_webp: bool = False, allow_lossy_webp_crop: bool = False,
             allow_lossy_webp_crop_resize: bool = False, allow_lossy_webp_color: bool = False,
-            allow_lossy_webp_earlier_jpeg: bool = False) -> dict:
+            allow_lossy_webp_earlier_jpeg: bool = False, allow_perspective: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     refuse_truncated_images()
     before, after = _bytes(reference_path), _bytes(submitted_path)
+    coverage = None
     with Image.open(io.BytesIO(before)) as original, Image.open(io.BytesIO(after)) as questioned:
         if max(image.width * image.height for image in (original, questioned)) > reference_compare.MAX_PIXELS:
             raise ValueError("Reference comparison supports images up to 16 megapixels")
@@ -268,9 +282,14 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                         detailed["alignment"]["jpeg_quality"] = quality
                         result, mask, schema = detailed, selection, reference_jpeg_detail_loss.EXTENDED_SCHEMA
                         break
+        if allow_perspective and result["status"] != "comparable":
+            perspective, selection, coverage = _perspective_check(original, questioned, reference, submitted)
+            if perspective is not None:
+                result, mask, schema = perspective, selection, reference_perspective.SCHEMA
     aligned = "alignment" in result
     interpretation = {reference_structure_jpeg.SCHEMA: reference_structure_jpeg.INTERPRETATION,
                       reference_same_jpeg.SCHEMA: reference_same_jpeg.INTERPRETATION,
+                      reference_perspective.SCHEMA: reference_perspective.INTERPRETATION,
                       reference_lossless_webp.SCHEMA: (reference_lossless_webp.INTERPRETATION
                                                        if result["status"] == "comparable" else reference_lossless_webp.LIMITATION),
                       reference_lossy_webp.SCHEMA: (reference_lossy_webp.INTERPRETATION
@@ -304,5 +323,5 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                                       "carries zero weight in the AI assessment."))
         mask = mask | color_mask
     if evidence_dir is not None:
-        _write_evidence(evidence_dir, output, reference, submitted, mask)
+        _write_evidence(evidence_dir, output, reference, submitted, mask, coverage=coverage)
     return output

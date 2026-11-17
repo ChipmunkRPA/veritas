@@ -13,6 +13,13 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The JPEG object-removal replay reconstructs 1,152 deliveries from 24
+attributed photographs, with two editors and matching controls at both
+JPEG qualities. It binds each JPEG
+to its parent photo and provides exact changed-pixel masks for comparing
+a different detector on the same full and small partial removals.
+[Replay the JPEG benchmark](image-jpeg-frequency-bands-2026-11-17.md#replay-and-independent-comparison)
+
 The [short earlier-video soundtrack replay](video-short-phrase-comparison-2026-11-17.md#replay)
 checks 432 earlier/current pairs from 24 previously unused utterances. The
 receipts distinguish same-word splices, different-word splices, gain changes,

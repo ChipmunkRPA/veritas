@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
+from dataclasses import replace
 from pathlib import Path
 
 from scripts.video_face_temporal_fit import read, sha
@@ -14,14 +16,16 @@ def intersections(selected, truth):
     return {"selected": int(selected.sum()), "intersection": int((selected & truth).sum()), "truth": int(truth.sum())}
 
 
-def measure(study, output):
+def measure(study, output, *, repeat_jpeg90=False):
     import cv2
     import numpy as np
     import torch
-    from app.detectors.image import jpeg_dq, regional
-    from app.detectors.image.adapters.regional import RegionalDetector, evaluated_jpeg
-    from app.detectors.image.regional_support import readout
     from PIL import Image
+
+    from app.detectors.image import jpeg_dq, regional
+    from app.detectors.image.adapters.regional import RegionalDetector, evaluated_jpeg, repeat_components
+    from app.detectors.image.regional_support import readout
+    from app.evidence.image_regional_jpeg import reencode
 
     cv2.setNumThreads(1)
     torch.set_num_threads(2)
@@ -33,6 +37,9 @@ def measure(study, output):
     tag = {"manifest_sha256": sha(manifest), "code_sha256": sha(Path(__file__)),
            "regional_sha256": regional.CHECKPOINT_SHA256, "jpeg_sha256": sha(Path(jpeg_dq.__file__)),
            "regional_rule_sha256": sha(Path(readout.__code__.co_filename))}
+    if repeat_jpeg90:
+        tag["repeat_jpeg90"] = True
+        tag["repeat_rule_sha256"] = sha(Path(repeat_components.__code__.co_filename))
     existing = set()
     if output.exists():
         with output.open() as stream:
@@ -59,12 +66,26 @@ def measure(study, output):
                     selected[8*box.y:8*(box.y + box.h), 8*box.x:8*(box.x + box.w)] = True
                 physical = intersections(selected, truth)
             learned = None
-            if evaluated_jpeg(data):
+            jpeg90 = repeat_jpeg90 and evaluated_jpeg(data, quality=90)
+            if jpeg90 or evaluated_jpeg(data):
                 with Image.open(study / row["file"]) as source:
                     image = source.convert("RGB")
                 prediction = model.predict(image)
+                rgb = np.asarray(image)
                 measured = readout(prediction.raw_mask, prediction.candidate_eligibility["eligible"],
-                                   RegionalDetector.REGION_THRESHOLD, data, np.array(image))
+                                   RegionalDetector.REGION_THRESHOLD, data, rgb)
+                if jpeg90 and measured.regions:
+                    with Image.open(io.BytesIO(reencode(image))) as encoded:
+                        second = model.predict(encoded.convert("RGB"))
+                    repeated = readout(second.raw_mask, second.candidate_eligibility["eligible"],
+                                       RegionalDetector.REGION_THRESHOLD, data, rgb)
+                    aligned = repeated.selected_grid_mask
+                    _, _, support = repeat_components(measured, aligned)
+                    selected = np.zeros_like(aligned)
+                    for row_support, component in zip(support["candidates"], measured.component_masks, strict=True):
+                        if row_support["retained"]:
+                            selected |= component
+                    measured = replace(measured, selected_grid_mask=selected)
                 learned = intersections(measured.source_mask(*image.size), truth)
             stream.write(json.dumps({"file": row["file"], "sha256": row["sha256"], "jpeg": physical, "regional": learned},
                                     sort_keys=True) + "\n")
@@ -77,5 +98,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("deliveries", type=Path)
     parser.add_argument("journal", type=Path)
+    parser.add_argument("--repeat-jpeg90", action="store_true", help="Include the app's quality-90 repeat confirmation when applicable")
     args = parser.parse_args()
-    measure(args.deliveries, args.journal)
+    measure(args.deliveries, args.journal, repeat_jpeg90=args.repeat_jpeg90)

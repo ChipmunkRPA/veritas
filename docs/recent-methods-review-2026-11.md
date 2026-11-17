@@ -31,6 +31,14 @@ not measured provider-watermark robustness.
 
 ## Image editing under real delivery formats
 
+The multi-frequency inpainting study trains separate branches and varies
+JPEG quality during training.
+We tested that design with three independently fitted native-coefficient
+branches on generated full and partial removals. At the selected points
+the local comparison added zero correct locations. Its exact masks and paired
+JPEG controls are replayable. [Published study](https://pubmed.ncbi.nlm.nih.gov/42335053/)
+· [Local comparison](image-jpeg-frequency-bands-2026-11-17.md)
+
 The published Relative Patch Response Learning comparison reports
 file-level balanced accuracy on locally edited photos across JPEG
 qualities. That result leaves precise region localization unverified.

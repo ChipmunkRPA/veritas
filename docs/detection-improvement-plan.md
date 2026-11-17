@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- Separate JPEG frequency bands find zero correct locations at the frozen
+  review points on 384 staged edits from two editors. The isolated coarse,
+  middle and fine branches and
+  their average were compared before selection. The 24-photo replay now
+  covers full and small partial removals with exact source masks at both
+  JPEG qualities. The candidate remains in evaluation.
+  [Object-removal comparison](image-jpeg-frequency-bands-2026-11-17.md)
+
 - [Brief soundtrack changes against an earlier video](video-short-phrase-comparison-2026-11-17.md)
   increase correct earlier-copy locations from 12 to 19 of 24 fresh
   staged word substitutions in each PCM/AAC pairing. The new check adds

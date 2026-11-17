@@ -310,6 +310,7 @@ def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(t
     monkeypatch.setattr(settings, "environment", "dev")
     monkeypatch.setattr(settings, "audio_stereo_gain_repeat_review", gain)
     monkeypatch.setattr(settings, "audio_stereo_difference_repeat_review", difference)
+    monkeypatch.setattr(settings, "audio_stereo_aligned_repeat_review", False)
     monkeypatch.setattr(settings, "audio_waveform_repeat_review", False)
     if stereo:
         pcm = np.append(pcm, np.arange(1231, dtype="<i2"))

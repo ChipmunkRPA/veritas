@@ -21,7 +21,7 @@ TARGET = 12
 PUBLIC = Path(__file__).resolve().parents[2] / "docs/evaluation-panels"
 
 
-def known_sources(retained):
+def known_sources(retained, after=None):
     keys, known, pins = intake.exposure()
     plan = deliveries.read(retained)
     keys.update(("original_sha256", row["source"]) for row in plan["groups"])
@@ -33,14 +33,25 @@ def known_sources(retained):
         identity = item.get("flickr_photo_id")
         if identity:
             keys.add(("photo", str(identity)))
-    return keys, known, pins | {"retained-deliveries": deliveries.sha(retained), "later-padding": deliveries.sha(prior)}
+    pins.update({"retained-deliveries": deliveries.sha(retained), "later-padding": deliveries.sha(prior)})
+    if after is not None:
+        for item in deliveries.read(after)["accepted"]:
+            keys.update(intake.roster.source_keys(item["source"]))
+            for fingerprint in item["fingerprints"].values():
+                known[0].append(fingerprint)
+                known[1].add(fingerprint["encoded_sha256"])
+                known[2].add(fingerprint["rgb_sha256"])
+        pins["previous-confirmation"] = deliveries.sha(after)
+    return keys, known, pins
 
 
-def plan(metadata, retained, output):
+def plan(metadata, retained, output, *, after=None):
     import yaml
 
     roster = intake.roster
-    keys, _, pins = known_sources(retained)
+    keys, _, pins = known_sources(retained, after)
+    families = FAMILIES if after is None else {("big-lama", "object_removal"): "lama"}
+    min_side = 512 if after is None else 384
     names = roster.METADATA
     hashes = {name: roster.sha(metadata / name) for name in names}
     if any(hashes[name] != entry[2] for name, entry in names.items()):
@@ -55,9 +66,9 @@ def plan(metadata, retained, output):
         raise ValueError("The published edit generator pins changed")
     candidates = defaultdict(list)
     for edited in rows:
-        family = FAMILIES.get((edited["generator"], edited["edit_kind"]))
+        family = families.get((edited["generator"], edited["edit_kind"]))
         if (not family or edited["family"] != "F5" or not roster.base_png(edited)
-                or not .002 <= float(edited["edit_area"]) <= .08 or min(roster.dimensions(edited)) < 512):
+                or not .002 <= float(edited["edit_area"]) <= .08 or min(roster.dimensions(edited)) < min_side):
             continue
         source = edited["source_image_id"]
         try:
@@ -70,7 +81,7 @@ def plan(metadata, retained, output):
     ordered = []
     independent = set(keys)
     available = {}
-    for family in FAMILIES.values():
+    for family in families.values():
         eligible, _ = roster.select(candidates[family], independent)
         eligible.sort(key=lambda row: (row["publisher_split"] not in roster.TEST_SPLITS,
                                        hashlib.sha256(f"{SCHEMA}/{row['recipient']}".encode()).hexdigest()))
@@ -85,13 +96,13 @@ def plan(metadata, retained, output):
     print(json.dumps({"independent_eligible": available, "reserved": len(ordered)}, sort_keys=True), flush=True)
 
 
-def acquire(study, retained):
+def acquire(study, retained, *, after=None):
     import cv2
     import requests
 
     roster, transport, inputs = intake.roster, intake.transport, intake.inputs
     manifest = deliveries.read(study / "source-plan.json")
-    keys, known, pins = known_sources(retained)
+    keys, known, pins = known_sources(retained, after)
     assert manifest["source_revision"] == roster.REVISION and manifest["exposures"] == pins
     if manifest["schema"] != SCHEMA:
         raise ValueError("Unknown fresh source contract")
@@ -212,13 +223,14 @@ if __name__ == "__main__":
     for command in (choose, fetch):
         command.add_argument("retained", type=Path)
         command.add_argument("study", type=Path)
+        command.add_argument("--after", type=Path, help="Repeat for small removals, excluding this prior qualification")
     replay = commands.add_parser("restore")
     replay.add_argument("receipt", type=Path)
     replay.add_argument("directory", type=Path)
     args = cli.parse_args()
     if args.step == "plan":
-        plan(args.metadata, args.retained, args.study)
+        plan(args.metadata, args.retained, args.study, after=args.after)
     elif args.step == "restore":
         restore(args.receipt, args.directory)
     else:
-        acquire(args.study, args.retained)
+        acquire(args.study, args.retained, after=args.after)

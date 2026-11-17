@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [small JPEG removal replay](image-removal-peer-2026-11-16.md#replay)
+provides a public-source recipe for 108 deliveries and a standard-library
+recount of the two texture comparisons. The receipt preserves the exact
+search rectangles, held outcomes and separation from the fit and selection
+groups.
+
 The [face detail replay](video-face-frequency-2026-11-16.md#independent-replay)
 exports the 216 confirmation deliveries into the common review format.
 It compares two delivery qualities, composes the paired decisions and

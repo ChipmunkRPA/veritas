@@ -319,6 +319,7 @@ def test_worker_configuration_legacy_is_noop_and_candidate_only_changes_threads(
     monkeypatch.setattr(torch, "get_num_threads", lambda: 6)
     monkeypatch.setattr(settings, "image_region_mode", "legacy")
     monkeypatch.setattr(settings, "image_region_jpeg_review", False)
+    monkeypatch.setattr(settings, "audio_focused_edit_review", False)
     configure_worker()
     assert observed == []
     monkeypatch.setattr(settings, "image_region_mode", "candidate")

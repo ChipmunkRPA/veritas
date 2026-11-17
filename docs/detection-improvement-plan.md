@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Texture comparison for small JPEG object removals](image-removal-peer-2026-11-16.md)
+  tests a removal-specific fit and a version comparing visually similar
+  patches in the same image. On nine new photo groups across both JPEG
+  qualities, the selected checks add zero correct locations on 36 edited
+  deliveries and eight ordinary alerts on 72 controls. All eight additional
+  alerts share one photo. The candidate stays in evaluation.
+
 - [Facial detail after strong video recompression](video-face-frequency-2026-11-16.md)
   combines measured face detail and regional appearance with the existing
   two readings. It raises strongly recompressed swap alerts from 27 to 37

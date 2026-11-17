@@ -69,7 +69,7 @@ type SoundtrackTiming = {
     paired_pictures?: Record<'before' | 'during' | 'after', Record<Side, SoundtrackPicture>>
   }
 }
-type SoundtrackDifference = Pick<SoundtrackTiming, 'summary' | 'scope' | 'picture_profile'> & {
+type SoundtrackDifference = Pick<SoundtrackTiming, 'summary' | 'scope' | 'picture_profile' | 'waveform_note'> & {
   affects_overall_confidence: false
 } & ({ status: 'localized_difference'
   range: NonNullable<SoundtrackTiming['range']> & {
@@ -171,7 +171,7 @@ type Comparison = {
     | 'chipmunk.video-reference-comparison/7' | 'chipmunk.video-reference-comparison/8' | 'chipmunk.video-reference-comparison/9'
     | 'chipmunk.video-reference-comparison/10' | 'chipmunk.video-reference-comparison/11' | 'chipmunk.video-reference-comparison/12'
     | 'chipmunk.video-reference-comparison/13' | 'chipmunk.video-reference-comparison/14' | 'chipmunk.video-reference-comparison/15'
-    | 'chipmunk.video-reference-comparison/16'
+    | 'chipmunk.video-reference-comparison/16' | 'chipmunk.video-reference-comparison/17'
   submitted: PictureDimensions
   picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
   picture_insertion?: PictureInsertion
@@ -218,6 +218,7 @@ type Comparison = {
 })
 type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: string | null }
 type Availability = { available: boolean; timing_available?: boolean; picture_insertion_available?: boolean; sound_difference_available?: boolean
+  short_native_sound_difference_available?: boolean;
   clean_speech_available?: boolean; long_clean_speech_available?: boolean; aligned_speech_available?: boolean; clean_speech_aac_available?: boolean
   clean_speech_stereo_aac_available?: boolean }
 const sourceSeconds = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 7, useGrouping: false })
@@ -611,7 +612,8 @@ function ResultView({ result }: { result: Result }) {
       (!comparison.channel_timing?.ranges.length || comparison.soundtrack_alignment.range) &&
       <SoundtrackTimingEvidence timing={comparison.soundtrack_alignment} assets={assets} />}
     {comparison.sound_difference && <SoundtrackTimingEvidence timing={{ ...comparison.sound_difference,
-      waveform_note: comparison.sound_difference.range && `Matching sound fell in the ${comparison.sound_difference.range.bands.map(({ band_hz: [low, high] }) => `${low}–${high}`).join(', ')} Hz bands.` }}
+      waveform_note: [comparison.sound_difference.waveform_note, comparison.sound_difference.range &&
+        `Matching sound fell in the ${comparison.sound_difference.range.bands.map(({ band_hz: [low, high] }) => `${low}–${high}`).join(', ')} Hz bands.`].filter(Boolean).join(' ') }}
       assets={assets} title={comparison.sound_difference.range?.selection === 'strong_flanks_first' ? 'Soundtrack difference with unresolved cause'
         : comparison.sound_difference.range ? 'Soundtrack difference over matching pictures' : 'Experimental soundtrack comparison'}
       excerpt="soundtrack excerpt" />}
@@ -774,11 +776,12 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
 }
 
 function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertionAvailable, cleanSpeechAvailable, longCleanSpeechAvailable,
-  alignedSpeechAvailable, cleanSpeechAacAvailable, cleanSpeechStereoAacAvailable, soundDifferenceAvailable }: {
+  alignedSpeechAvailable, cleanSpeechAacAvailable, cleanSpeechStereoAacAvailable, soundDifferenceAvailable, shortNativeSoundDifferenceAvailable }: {
   analysisId: string; kind: Kind; timingAvailable: boolean; pictureInsertionAvailable: boolean
   cleanSpeechAvailable: boolean; longCleanSpeechAvailable: boolean; alignedSpeechAvailable: boolean; cleanSpeechAacAvailable: boolean
   cleanSpeechStereoAacAvailable: boolean
   soundDifferenceAvailable: boolean
+  shortNativeSoundDifferenceAvailable: boolean
 }) {
   const heading = useId()
   const input = useId()
@@ -813,7 +816,8 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const versionedSchema = response?.comparison?.schema
       const recovered = versionedSchema === 'chipmunk.video-reference-comparison/16'
-      const hasCoverage = recovered || versionedSchema === 'chipmunk.video-reference-comparison/15'
+      const hasCoverage = recovered || versionedSchema === 'chipmunk.video-reference-comparison/15' ||
+        versionedSchema === 'chipmunk.video-reference-comparison/17'
       const hasSpeechAlignment = versionedSchema === 'chipmunk.audio-reference-comparison/14'
       const hasWaveform = versionedSchema === 'chipmunk.audio-reference-comparison/15'
       const schema = hasCoverage || hasSpeechAlignment || hasWaveform ? response.comparison.comparison_schema : versionedSchema
@@ -1002,7 +1006,10 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
           Include experimental soundtrack comparison
         </label>
         <p id={soundInput + '-hint'} className="mt-1 mb-0 text-caption text-text-muted">
-          Requires two four-second 720p25 H.264 clips with identical pictures and matching audio clocks. Background noise can hide differences.
+          {shortNativeSoundDifferenceAvailable
+            ? 'Use matching four-second 720p25 H.264 clips or 720 × 480 H.264 clips near 24 fps with about two to four seconds of matching mono PCM or AAC timing. The decoded pictures must match.'
+            : 'Requires two four-second 720p25 H.264 clips with identical pictures and matching audio clocks.'}{' '}
+          Background noise can hide differences.
         </p>
       </div>}
       <Button type="submit" variant="primary" disabled={!file || pending}>{pending ? 'Comparing…' : kind === 'audio' ? 'Compare recordings' : 'Compare videos'}</Button>
@@ -1025,6 +1032,7 @@ export default function MediaReferenceComparison({ analysisId, kind }: { analysi
       timingAvailable={kind === 'video' && availability.data.timing_available === true}
       pictureInsertionAvailable={kind === 'video' && availability.data.picture_insertion_available === true}
       soundDifferenceAvailable={kind === 'video' && availability.data.sound_difference_available === true}
+      shortNativeSoundDifferenceAvailable={kind === 'video' && availability.data.short_native_sound_difference_available === true}
       cleanSpeechAvailable={kind === 'audio' && availability.data.clean_speech_available === true}
       cleanSpeechAacAvailable={kind === 'audio' && availability.data.clean_speech_aac_available === true}
       cleanSpeechStereoAacAvailable={kind === 'audio' && availability.data.clean_speech_stereo_aac_available === true}

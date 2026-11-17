@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short native soundtrack replay](video-short-native-soundtrack-2026-11-16.md#independent-replay)
+rebuilds 288 playable videos from 24 source recordings, verifies every
+sample clock and picture timestamp, and recounts local evidence across 432
+earlier-copy pairs. The manifest supports independent detector comparisons.
+
 The [earlier published wording replay](writing-published-wording-2026-11-16.md)
 recounts 117 paired government reports and 108 mixed-source controls.
 It shows which passages link to a dated source, which wording differs,

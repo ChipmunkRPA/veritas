@@ -53,6 +53,7 @@ class VideoReferenceAvailability(MediaReferenceAvailability):
     timing_available: bool | None = None
     picture_insertion_available: bool | None = None
     sound_difference_available: bool | None = None
+    short_native_sound_difference_available: bool | None = None
 
 
 class MediaReferenceResponse(BaseModel):
@@ -127,6 +128,8 @@ def availability(aid: str, request: Request):
         result["picture_insertion_available"] = True
     if available and kind == "video" and settings.video_reference_sound_difference:
         result["sound_difference_available"] = True
+        if settings.video_reference_short_native_sound_difference:
+            result["short_native_sound_difference_available"] = True
     if available and kind == "video" and settings.video_reference_timing_model_path is not None:
         from app.evidence.video_reference_timing import available as timing_available
 
@@ -208,6 +211,7 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         include_short_soundtrack=settings.video_reference_short_soundtrack,
                         include_sound_difference=include_sound_difference,
                         recover_sound_difference=include_sound_difference,
+                        include_short_native_sound_difference=settings.video_reference_short_native_sound_difference,
                         include_picture_insertion=settings.video_reference_picture_insertion,
                     )
                 else:

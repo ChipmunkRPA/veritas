@@ -7,6 +7,7 @@ from app.evidence import audio_clean_speech as speech
 
 RATE = speech.RATE
 SAMPLES = 4 * RATE
+SHORT_MIN_SAMPLES = 30_000
 WINDOW, HOP = 1920, 640
 WEIGHT = np.hanning(WINDOW)
 WIDTHS = (8, 12, 16, 20)
@@ -52,12 +53,14 @@ def _band_reading(stats, bounds):
             "local_relative_gain": round(float(gain[1] / flank_gain), 6)}
 
 
-def measure(earlier, submitted, *, recover_supported=False):
+def measure(earlier, submitted, *, recover_supported=False, short_native=False):
     """Compare known shared-time sound on either side of a possible local source change."""
-    if len(earlier) != SAMPLES or len(submitted) != SAMPLES:
+    samples = len(earlier)
+    minimum = SHORT_MIN_SAMPLES if short_native else SAMPLES
+    if samples != len(submitted) or not minimum <= samples <= SAMPLES:
         return "outside_scope", None
     statistics = [_band_statistics(earlier, submitted, band) for band in speech.BANDS]
-    count = 1 + (SAMPLES - WINDOW) // HOP
+    count = 1 + (samples - WINDOW) // HOP
     best = None
     supported = None
     measured = False

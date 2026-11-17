@@ -16,6 +16,7 @@ from app.evidence.video_reference import (
     SCHEMA_WITH_CHANNEL_TIMING,
     SCHEMA_WITH_INSERTION_RETENTION,
     SCHEMA_WITH_MARKED_SOUND_FALLBACK,
+    SCHEMA_WITH_NATIVE_SOUND_DIFFERENCE,
     SCHEMA_WITH_PICTURE_INSERTION,
     SCHEMA_WITH_RECOVERED_SOUND_DIFFERENCE,
     SCHEMA_WITH_REENCODED_SOUNDTRACK,
@@ -89,7 +90,8 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         event_seconds = None
         if isinstance(record, dict):
             schema = record.get("schema")
-            recovered = schema == SCHEMA_WITH_RECOVERED_SOUND_DIFFERENCE
+            native = schema == SCHEMA_WITH_NATIVE_SOUND_DIFFERENCE
+            recovered = schema == SCHEMA_WITH_RECOVERED_SOUND_DIFFERENCE or native
             difference_coverage = recovered or schema == SCHEMA_WITH_SOUND_DIFFERENCE_COVERAGE
             if difference_coverage:
                 schema = record.get("comparison_schema")
@@ -97,6 +99,7 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
             options["include_sound_difference"] = difference or difference_coverage
             options["include_sound_difference_coverage"] = difference_coverage
             options["recover_sound_difference"] = recovered
+            options["include_short_native_sound_difference"] = native
             options["include_picture_insertion"] = schema in (SCHEMA_WITH_PICTURE_INSERTION, SCHEMA_WITH_INSERTION_RETENTION)
             options["verify_picture_insertion_retention"] = schema == SCHEMA_WITH_INSERTION_RETENTION
             reencoded_soundtrack = schema == SCHEMA_WITH_REENCODED_SOUNDTRACK

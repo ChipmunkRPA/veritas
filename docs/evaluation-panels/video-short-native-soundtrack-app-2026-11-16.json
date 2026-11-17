@@ -1,0 +1,66 @@
+{
+  "browser": {
+    "excerpt_durations_s": [
+      0.32,
+      0.32
+    ],
+    "native_frames": 6,
+    "page_errors": 0
+  },
+  "cases": {
+    "ordinary": {
+      "presentations": {
+        "earlier": {
+          "decoded_samples": 43200,
+          "presented_samples": 43200
+        },
+        "submitted": {
+          "aac48": {
+            "channels": 1,
+            "presentation_end_exclusive_pts": 129600,
+            "sample_rate": 48000,
+            "time_base": "1/48000"
+          },
+          "decoded_samples": 43349,
+          "presented_samples": 43200
+        }
+      },
+      "reference_sha256": "4864168a16f488a75a9873971989bb16bbf7e678278155a12fee27fee26fc2e7",
+      "report_sha256": "936877bc3fc6c3c95431a990d1c654c6b475f699d36a5c8459e2a0ad33d56be5",
+      "samples": null,
+      "source_sha256": "f1f3ee9614f2576cc8f3b5f7c66cbfb5bf936bb930ef3403675caa16a3b540f5",
+      "status": "no_local_range"
+    },
+    "replacement": {
+      "presentations": {
+        "earlier": {
+          "decoded_samples": 43200,
+          "presented_samples": 43200
+        },
+        "submitted": {
+          "aac48": {
+            "channels": 1,
+            "presentation_end_exclusive_pts": 129600,
+            "sample_rate": 48000,
+            "time_base": "1/48000"
+          },
+          "decoded_samples": 43349,
+          "presented_samples": 43200
+        }
+      },
+      "reference_sha256": "4864168a16f488a75a9873971989bb16bbf7e678278155a12fee27fee26fc2e7",
+      "report_sha256": "fc5230b87fdc772c357dbb18b8298a79dc2e8c36befa51e19edc9efd096b6433",
+      "samples": [
+        22400,
+        27520
+      ],
+      "source_sha256": "898c589d8e35a196a02f98045adb6ddb678e1be905e1777e2ed6794d7179034f",
+      "status": "localized_difference"
+    }
+  },
+  "comparison_jobs": 0,
+  "earlier_profile_result": "unsupported_picture_profile",
+  "replayed_checkout_records": 2,
+  "trial_checkouts_usd_9_99": 2,
+  "unpaid_jobs": 0
+}

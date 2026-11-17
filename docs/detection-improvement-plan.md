@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Short native soundtrack differences](video-short-native-soundtrack-2026-11-16.md)
+  extend the earlier-copy check to matching 720 × 480 pairs near 24 fps.
+  It locates 15 of 24 staged replacements in each of three delivery pairs,
+  with zero ranges on 48 untouched and gain controls per delivery. The app
+  preserves presented audio lengths, exact excerpts and six source frames.
+  A separate single-upload experiment adds two useful AAC locations and
+  six same-word or whole-delay flags, so it stays experimental.
+
 - [Earlier published wording in normal document results](writing-published-wording-2026-11-16.md)
   locates 97 of 161 short edits on 48 previously unused report pairs.
   The style check locates one additional edit. The new review moves both

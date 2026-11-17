@@ -50,6 +50,7 @@ SCHEMA_WITH_INSERTION_RETENTION = "chipmunk.video-reference-comparison/13"
 SCHEMA_WITH_SOUND_DIFFERENCE = "chipmunk.video-reference-comparison/14"
 SCHEMA_WITH_SOUND_DIFFERENCE_COVERAGE = "chipmunk.video-reference-comparison/15"
 SCHEMA_WITH_RECOVERED_SOUND_DIFFERENCE = "chipmunk.video-reference-comparison/16"
+SCHEMA_WITH_NATIVE_SOUND_DIFFERENCE = "chipmunk.video-reference-comparison/17"
 MAX_COMPARED_SOUNDTRACKS = 2
 MAX_BYTES = 48 * 1024 * 1024
 MAX_FRAMES = 360
@@ -412,6 +413,7 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             include_sound_difference: bool = False,
             include_sound_difference_coverage: bool = True,
             recover_sound_difference: bool = False,
+            include_short_native_sound_difference: bool = False,
             include_picture_insertion: bool = False,
             verify_picture_insertion_retention: bool = True) -> tuple[dict, dict[str, bytes]]:
     """Report decoded differences on matching clocks or within a verified trimmed overlap."""
@@ -419,6 +421,7 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
     sources = tuple(_identity(path) for path in paths)
     tables = tuple(probe_frames(path, cap=MAX_FRAMES, timeout_s=30, max_pixels=MAX_PIXELS) for path in paths)
     status = _comparison_issue(tables) or "measured"
+    use_native_sound_difference = include_short_native_sound_difference and include_sound_difference_coverage
     assets: dict[str, bytes] = {}
     record = {"schema": SCHEMA, "status": status,
               "earlier": {**sources[0], **_reference(tables[0])}, "submitted": {**sources[1], **_reference(tables[1])},
@@ -433,9 +436,12 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
                            "summary": "The two supplied clips did not pass the matching picture clock check.",
                            "scope": DIFFERENCE_UNASSESSED_SCOPE, "affects_overall_confidence": False}
         if applicable and include_sound_difference_coverage:
-            schema = (SCHEMA_WITH_RECOVERED_SOUND_DIFFERENCE
-                      if disposition.get("range", {}).get("selection") == "strong_flanks_first"
-                      else SCHEMA_WITH_SOUND_DIFFERENCE_COVERAGE)
+            if use_native_sound_difference:
+                schema = SCHEMA_WITH_NATIVE_SOUND_DIFFERENCE
+            elif disposition.get("range", {}).get("selection") == "strong_flanks_first":
+                schema = SCHEMA_WITH_RECOVERED_SOUND_DIFFERENCE
+            else:
+                schema = SCHEMA_WITH_SOUND_DIFFERENCE_COVERAGE
             record.update(schema=schema, sound_difference=disposition,
                           comparison_schema=record["schema"])
         elif applicable and disposition and disposition["status"] == "localized_difference":
@@ -587,7 +593,9 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             with_sound_difference()
         else:
             with_sound_difference(assess_difference(paths, tables, record, tracks, assets,
-                                                   recover_supported=recover_sound_difference and include_sound_difference_coverage))
+                                                   recover_supported=(recover_sound_difference or use_native_sound_difference)
+                                                   and include_sound_difference_coverage,
+                                                   native_decoded=decoded if use_native_sound_difference else None))
     if sources != tuple(_identity(path) for path in paths):
         raise ValueError("One of the clips changed while the comparison was running.")
     return record, assets

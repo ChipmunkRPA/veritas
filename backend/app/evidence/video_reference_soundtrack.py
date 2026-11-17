@@ -7,13 +7,14 @@ from bisect import bisect_left, bisect_right
 from contextlib import closing
 from fractions import Fraction
 from hashlib import sha256
+from subprocess import SubprocessError
 
 import numpy as np
 from PIL import Image
 from scipy.signal import correlate
 
 from app.core.canonical import canonical_hash
-from app.detectors.audio.decode import SAMPLE_RATE, wav_bytes
+from app.detectors.audio.decode import SAMPLE_RATE, aac48_presentation, wav_bytes
 from app.detectors.audio.waveform import envelope
 from app.detectors.video.decode import DecodeError, decode_frames
 from app.evidence import video_reference_soundtrack_reencode as reencode
@@ -234,34 +235,102 @@ DIFFERENCE_SCOPE = ("This compares the first soundtrack in two supplied clips. M
                     "This comparison carries zero weight in the AI estimate.")
 DIFFERENCE_UNASSESSED_SCOPE = ("This compares the first soundtrack in two supplied clips. Missing or weak evidence can leave a "
                               "soundtrack change unresolved. This comparison carries zero weight in the AI estimate.")
+NATIVE_DIFFERENCE_BASIS = "short_native_picture_and_sound/1"
+NATIVE_PICTURE_SIZE = (720, 480)
+NATIVE_FPS = (Fraction("23.8"), Fraction("24.2"))
 
 
-def assess_difference(paths, tables, comparison, tracks, assets, *, recover_supported=False):
+def native_difference_profile(paths, tables):
+    from app.evidence.video_reference_local import _carrier
+
+    earlier, submitted = tables
+    if len(earlier) != len(submitted) or not 45 <= len(earlier) <= 96:
+        return None
+    step = (earlier.pts[1] - earlier.pts[0]) * earlier.tb
+    if step <= 0 or not NATIVE_FPS[0] <= 1 / step <= NATIVE_FPS[1] or any(
+        (table.width, table.height) != NATIVE_PICTURE_SIZE or table.rotation or table.truncated or table.interpolated
+        or any((pts - table.pts[0]) * table.tb != i * step for i, pts in enumerate(table.pts)) for table in tables
+    ):
+        return None
+    try:
+        if any(_carrier(path) != [("h264", "yuv420p")] for path in paths):
+            return None
+    except (DecodeError, OSError, ValueError, SubprocessError):
+        return None
+    return {"width": earlier.width, "height": earlier.height, "pictures": len(earlier),
+            "frames_per_second": round(float(1 / step), 3), "frame_step": str(step)}
+
+
+def native_difference_audio(paths, decoded, profile):
+    """Get equal mono presentation lengths from a verified common origin."""
+    from app.evidence.video_reference_sound_difference import SAMPLES, SHORT_MIN_SAMPLES
+
+    step = Fraction(profile["frame_step"])
+    tracks, measurements = [], []
+    for path, (track, _, exact_pcm, stream_info, _) in zip(paths, decoded, strict=True):
+        if track[0] != "measured" or track[2]["relative_start"] != "0" or stream_info[0]["channels"] != 1:
+            return None
+        length = len(track[1])
+        proof = {"decoded_samples": length, "presented_samples": length}
+        if not exact_pcm:
+            native = aac48_presentation(path)
+            if native is None or native["channels"] != 1:
+                return None
+            length = native["presentation_end_exclusive_pts"] // 3
+            if not 0 <= len(track[1]) - length <= 342:
+                return None
+            proof.update(presented_samples=length, aac48=native)
+        if (not SHORT_MIN_SAMPLES <= length <= SAMPLES
+                or abs(Fraction(length, SAMPLE_RATE) - profile["pictures"] * step) > 3 * step):
+            return None
+        tracks.append((track[0], track[1][:length], track[2]))
+        measurements.append(proof)
+    if len(tracks[0][1]) != len(tracks[1][1]):
+        return None
+    return tracks, dict(zip(("earlier", "submitted"), measurements, strict=True))
+
+
+def assess_difference(paths, tables, comparison, tracks, assets, *, recover_supported=False, native_decoded=None):
     """Attach a corroborated acoustic difference to exact clock-matched pictures."""
     from app.evidence import video_reference_sound_difference as difference
 
+    context = {}
+
     def disposition(reason, summary, *, status="unassessed"):
         return {"status": status, "reason": reason, "summary": summary, "scope": DIFFERENCE_UNASSESSED_SCOPE,
-                "affects_overall_confidence": False}
+                "affects_overall_confidence": False, **context}
 
     qualified = reencode.profile(tables, allow_hd=True)
-    if (not qualified or qualified["size"] != reencode.HD_PICTURE_SIZE or qualified["rate"] != 25
-            or not reencode.eligible(paths, tables, allow_hd=True)):
-        return disposition("unsupported_picture_profile", "The trial requires two four-second 720p25 H.264 clips.")
+    standard = (qualified and qualified["size"] == reencode.HD_PICTURE_SIZE and qualified["rate"] == 25
+                and reencode.eligible(paths, tables, allow_hd=True))
+    native = native_difference_profile(paths, tables) if native_decoded is not None and not standard else None
+    if not standard and native is None:
+        summary = ("Use two four-second 720p25 H.264 clips or a matching short 720×480 H.264 pair near 24 fps."
+                   if native_decoded is not None else "The trial requires two four-second 720p25 H.264 clips.")
+        return disposition("unsupported_picture_profile", summary)
+    if native is not None:
+        context = {"basis": NATIVE_DIFFERENCE_BASIS, "picture_profile": native}
     if comparison["picture"]["changed_frames"]:
         return disposition("pictures_differ", "The decoded pictures differ. The trial requires matching pictures.")
-    if (comparison["audio"]["status"] != "measured" or any(
+    if native is not None:
+        presented = native_difference_audio(paths, native_decoded, native)
+        if presented is None:
+            return disposition("soundtrack_clock_unavailable", "The trial needs matching mono audio presentations from the first picture.")
+        tracks, context["audio_presentation"] = presented
+        context["waveform_note"] = f"Common presented audio duration {len(tracks[0][1]) / SAMPLE_RATE:.3f} s."
+    elif (comparison["audio"]["status"] != "measured" or any(
             track[2]["relative_start"] != "0" or not difference.SAMPLES <= len(track[1]) <= difference.SAMPLES + 1024
             for track in tracks)):
         return disposition("soundtrack_clock_unavailable", "The trial needs continuous soundtracks on the same clock as the pictures.")
     if comparison.get("soundtrack_alignment", {}).get("status") == "local_shift":
         return disposition("timing_difference", "The timing comparison found the same sound at different times. See Local soundtrack timing.")
     # Use the short timing search independently of the configured display profile.
-    decoded = [track[1][:difference.SAMPLES] for track in tracks]
+    decoded = [track[1] if native is not None else track[1][:difference.SAMPLES] for track in tracks]
     shifted, _ = measure(*decoded, window=SHORT_WINDOW, step=SHORT_STEP, min_rms=QUIET_RMS)
     if shifted:
         return disposition("timing_difference", "The short timing search matched the same sound at different times within the clip.")
-    status, reading = difference.measure(*[(pcm * 32768).astype("<i2") for pcm in decoded], recover_supported=recover_supported)
+    status, reading = difference.measure(*[(pcm * 32768).astype("<i2") for pcm in decoded],
+                                         recover_supported=recover_supported, short_native=native is not None)
     if status == "matching_flanks_unavailable":
         return disposition(status, "Too little matching sound was found on either side to assess a local difference.")
     if reading is None:
@@ -286,5 +355,5 @@ def assess_difference(paths, tables, comparison, tracks, assets, *, recover_supp
     return {"status": status, "scope": scope, "affects_overall_confidence": False, "sample_rate": SAMPLE_RATE,
             "picture_pair_sha256": comparison["picture"]["frame_pairs_sha256"],
             "summary": f"The two soundtracks differ from {start / SAMPLE_RATE:.3f} to {end / SAMPLE_RATE:.3f} s while the decoded pictures match.",
-            "picture_profile": reencode.hd_report_profile(tables),
+            "picture_profile": native or reencode.hd_report_profile(tables), **context,
             "range": {**reading, **clips, "paired_pictures": witnesses, "support_sha256": canonical_hash(reading)}}

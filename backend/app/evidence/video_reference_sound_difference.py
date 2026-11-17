@@ -25,21 +25,23 @@ def strong_flanks(reading, floor=CLEAN_FLANK_CORRELATION):
     return sum(min(band["correlation"][0], band["correlation"][2]) >= floor for band in reading["bands"]) >= 2
 
 
-def _band_statistics(earlier, submitted, band):
-    frames = [speech._frames(pcm, band, WEIGHT, hop=HOP) * np.sqrt(WEIGHT) for pcm in (earlier, submitted)]
+def _band_statistics(earlier, submitted, band, *, weight=WEIGHT, hop=HOP, floor=.14):
+    frames = [speech._frames(pcm, band, weight, hop=hop) * np.sqrt(weight) for pcm in (earlier, submitted)]
     power = np.square(frames[0]).sum(axis=1)
     delivered = np.square(frames[1]).sum(axis=1)
     cross = (frames[0] * frames[1]).sum(axis=1)
-    active = power >= max(WEIGHT.sum() * 12**2, np.quantile(power, .85) * .14)
-    weight = np.minimum(power, np.quantile(power, .90)) * active
+    active = power >= max(weight.sum() * 12**2, np.quantile(power, .85) * floor)
+    active_weight = np.minimum(power, np.quantile(power, .90)) * active
     gain = cross / np.maximum(power, 1e-10)
     correlation = cross / np.sqrt(np.maximum(power * delivered, 1e-10))
-    return [np.r_[0, np.cumsum(values)] for values in (active, weight, weight * gain, weight * correlation, delivered * active)]
+    return [np.r_[0, np.cumsum(values)] for values in (
+        active, active_weight, active_weight * gain, active_weight * correlation, delivered * active,
+    )]
 
 
-def _band_reading(stats, bounds):
+def _band_reading(stats, bounds, *, min_support=MIN_SUPPORT):
     support, weight, gain, agreement, delivered = (prefix[bounds[:, 1]] - prefix[bounds[:, 0]] for prefix in stats)
-    if min(support) < MIN_SUPPORT or np.any(weight <= 0):
+    if min(support) < min_support or np.any(weight <= 0):
         return None
     gain, agreement = gain / weight, agreement / weight
     flank_gain = min(gain[0], gain[2])

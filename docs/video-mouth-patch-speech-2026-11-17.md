@@ -51,6 +51,37 @@ constant alignments were outside that search. This version stays in
 evaluation. [Frozen points](evaluation-panels/video-mouth-patch-selection-2026-11-17.json.gz) ·
 [Held locations and controls](evaluation-panels/video-mouth-patch-held-2026-11-17.json.gz)
 
+## Wider alignment and unused source recordings
+
+The wider comparison searches offsets through 360 ms in either direction
+and checks whether the same whole-track offset explains both halves of the
+clip. We selected both variants on the same 13 calibration recordings before
+measuring a new panel of 24 single-digit replacements in 24 separate readers.
+All 24 readers are outside the fit and calibration groups. Eight are also
+outside the earlier held groups. The target and donor utterances are absent
+from the prior source rosters. Each staged change replaces one digit with
+another rendition by the same speaker in the same recording condition.
+The panel also contains a same-digit replacement, unchanged and gain-only
+tracks, and both directions of a whole-track 200 ms delay.
+[Source positions and digests](evaluation-panels/video-mouth-patch-fresh-sources-2026-11-17.json.gz)
+
+| Fresh delivery | Correct locations, existing / narrow / wide | Ordinary flags, existing / narrow / wide | Whole-track delay flags, existing / narrow / wide |
+| --- | ---: | ---: | ---: |
+| PCM | 0 / 0 / 0 of 24 | 4 / 6 / 4 of 48 | 10 / 11 / 10 of 48 |
+| 48 kHz AAC | 0 / 0 / 0 of 24 | 4 / 6 / 4 of 48 | 8 / 9 / 8 of 48 |
+
+Both variants leave the two same-digit flags in each carrier unchanged.
+The narrow variant adds one misplaced region per carrier. The wider variant
+adds zero regions on these fresh deliveries, and adds zero useful locations
+on the two earlier held panels. The single-upload app keeps its existing
+check. A separate comparison with an earlier video recovers brief changes
+on these same native clocks. [Narrow points](evaluation-panels/video-mouth-patch-narrow-selection-2026-11-17.json.gz) ·
+[Wide points](evaluation-panels/video-mouth-patch-wide-selection-2026-11-17.json.gz) ·
+[Fresh narrow outcomes](evaluation-panels/video-mouth-patch-fresh-narrow-2026-11-17.json.gz) ·
+[Fresh wide outcomes](evaluation-panels/video-mouth-patch-fresh-wide-2026-11-17.json.gz) ·
+[Earlier wide outcomes](evaluation-panels/video-mouth-patch-wide-held-2026-11-17.json.gz) ·
+[Earlier video comparison](video-short-phrase-comparison-2026-11-17.md)
+
 ## Reproduce
 
 Use the exact [source archives](video-neural-phone-clock-2026-11-14.md#independent-replay)
@@ -73,4 +104,25 @@ python3 -B -S -m "$module" review "$panels/video-mouth-patch-held-2026-11-17.jso
 plan="$panels/video-mouth-patch-sources-2026-11-17.json.gz"
 "$runner" -B -m scripts.video_visual_speech_train capture "$plan" "$sources" "$assets" "$run/fit-pictures" --phase fit
 "$runner" -B -m scripts.video_visual_speech_train train "$run/fit-pictures" "$run/fit"
+```
+
+The initial narrow fit and comparison can be reproduced from
+[the recorded version](https://github.com/ChipmunkRPA/veritas/commit/8fa5d385784b81026885352692c4c8e04a6eb73f).
+The new source recipe rebuilds 288 playable files with the original picture
+bitstream and frame ticks. It verifies 576 source and submission bindings,
+including the exact PCM and AAC presentation samples. The reader can recount
+the predicted ranges on the frame grid with the same overlap rule. Both the
+existing and combined checks locate zero of the 48 different-digit deliveries
+on that grid. [Playable source and event commitments](evaluation-panels/video-mouth-patch-fresh-playable-2026-11-17.json.gz)
+
+```sh
+fresh="$panels/video-mouth-patch-fresh-sources-2026-11-17.json.gz"
+wide="$panels/video-mouth-patch-wide-selection-2026-11-17.json.gz"
+result="$panels/video-mouth-patch-fresh-wide-2026-11-17.json.gz"
+python3 -B -S -m "$module" review "$wide"
+python3 -B -S -m "$module" review "$result"
+"$runner" -B -m scripts.export_video_visual_speech_fresh "$fresh" "$wide" "$result" "$sources" "$run/visual-fresh"
+python3 -B -S -m scripts.independent_review count-events \
+  "$run/visual-fresh/manifest.json" "$run/visual-fresh/truth.json" \
+  "$run/visual-fresh/combined.json" "$run/visual-fresh-events.json" --match .40 .40
 ```

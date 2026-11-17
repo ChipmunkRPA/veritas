@@ -290,7 +290,8 @@ def native_difference_audio(paths, decoded, profile):
     return tracks, dict(zip(("earlier", "submitted"), measurements, strict=True))
 
 
-def assess_difference(paths, tables, comparison, tracks, assets, *, recover_supported=False, native_decoded=None):
+def assess_difference(paths, tables, comparison, tracks, assets, *, recover_supported=False, native_decoded=None,
+                      include_short_phrase_difference=False):
     """Attach a corroborated acoustic difference to exact clock-matched pictures."""
     from app.evidence import video_reference_sound_difference as difference
 
@@ -329,8 +330,17 @@ def assess_difference(paths, tables, comparison, tracks, assets, *, recover_supp
     shifted, _ = measure(*decoded, window=SHORT_WINDOW, step=SHORT_STEP, min_rms=QUIET_RMS)
     if shifted:
         return disposition("timing_difference", "The short timing search matched the same sound at different times within the clip.")
-    status, reading = difference.measure(*[(pcm * 32768).astype("<i2") for pcm in decoded],
-                                         recover_supported=recover_supported, short_native=native is not None)
+    pcm = [(track * 32768).astype("<i2") for track in decoded]
+    status, reading = difference.measure(*pcm, recover_supported=recover_supported, short_native=native is not None)
+    scope = DIFFERENCE_SCOPE
+    if (native is not None and include_short_phrase_difference
+            and (reading is None or not difference.strong_flanks(reading))):
+        from app.evidence import video_reference_short_phrases
+
+        if short_reading := video_reference_short_phrases.locate(*pcm):
+            status, reading = "localized_difference", short_reading
+            scope = ("The sound matches before and after this short difference in at least two frequency bands. "
+                     "The cause remains unresolved. This comparison carries zero weight in the AI estimate.")
     if status == "matching_flanks_unavailable":
         return disposition(status, "Too little matching sound was found on either side to assess a local difference.")
     if reading is None:
@@ -348,7 +358,6 @@ def assess_difference(paths, tables, comparison, tracks, assets, *, recover_supp
              for side, track in zip(("earlier", "submitted"), tracks, strict=True)}
     assets.update(pending)
     start, end = interval
-    scope = DIFFERENCE_SCOPE
     if reading.get("selection") == "strong_flanks_first":
         scope = ("Matching audio on both sides supports inspection of this interval. A local delay, replacement, or other edit "
                  "could cause the difference. The cause remains unresolved. This comparison carries zero weight in the AI estimate.")

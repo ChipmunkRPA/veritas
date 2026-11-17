@@ -60,6 +60,15 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Brief soundtrack changes against an earlier video](video-short-phrase-comparison-2026-11-17.md)
+  increase correct earlier-copy locations from 12 to 19 of 24 fresh
+  staged word substitutions in each PCM/AAC pairing. The new check adds
+  one misplaced location and zero alerts on 96 unchanged, gain or timing
+  controls per pairing. The app shows corresponding frames and sound from
+  both copies with zero AI-score weight. The separate [single-upload mouth
+  image candidate](video-mouth-patch-speech-2026-11-17.md) found no new locations
+  on this panel and stays in evaluation.
+
 - [Confirmed speech windows on 48 kHz mono audio](audio-two-second-carriers-2026-11-17.md)
   increase useful locations under louder competing speech from 20 to 25 of
   157 in WAV and from 22 to 25 in AAC across two source-separated cohorts.

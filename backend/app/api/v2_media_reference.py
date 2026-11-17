@@ -212,6 +212,7 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         include_sound_difference=include_sound_difference,
                         recover_sound_difference=include_sound_difference,
                         include_short_native_sound_difference=settings.video_reference_short_native_sound_difference,
+                        include_short_phrase_difference=settings.video_reference_short_phrase_difference,
                         include_picture_insertion=settings.video_reference_picture_insertion,
                     )
                 else:

@@ -366,7 +366,9 @@ def _soundtrack_timing_page(document, timing, assets, *, title="Local soundtrack
     _text(page, MARGIN, 720, "Waveforms share one scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
     if bands := span.get("bands"):
         frequencies = ", ".join(f"{band['band_hz'][0]}-{band['band_hz'][1]}" for band in bands)
-        _text(page, MARGIN, 736, f"Matching sound fell in the {frequencies} Hz bands.", size=9, color=MUTED)
+        note = (f"Sound matched before and after the interval in the {frequencies} Hz bands."
+                if span.get("measurement_basis") else f"Matching sound fell in the {frequencies} Hz bands.")
+        _text(page, MARGIN, 736, note, size=9, color=MUTED)
 
 
 def _audio_local_timing_page(document, timing, *, scope=None, stream_indices=None):

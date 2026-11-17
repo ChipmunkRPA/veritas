@@ -36,7 +36,7 @@ def overlaps(span, truth):
     return 5 * (min(b, d) - max(a, c)) >= 2 * (max(b, d) - min(a, c))
 
 
-def measure(visual, acoustic, fit, priority, *, fresh_plan=None):
+def measure(visual, acoustic, fit, priority, *, fresh_plan=None, wide_offset=False):
     import numpy as np
     import torch
     from safetensors.torch import load_file
@@ -83,7 +83,7 @@ def measure(visual, acoustic, fit, priority, *, fresh_plan=None):
                 classes[split][group + "_correct"] += int(((posteriors.argmax(1) == index) & truth).sum())
             for carrier, cases in row["cases"].items():
                 for name, info in sorted(cases.items()):
-                    choices = align.locate(posteriors, clock, mask, info["events"], row["samples"])
+                    choices = align.locate(posteriors, clock, mask, info["events"], row["samples"], wide_offset=wide_offset)
                     fields = ("picture_sha256", "speaker", "split", "pts", "time_base", "truth", "samples", "condition")
                     measured.append({key: row[key] for key in fields} | {"carrier": carrier, "role": name,
                         "audio_sha256": info["audio_sha256"], "carrier_sha256": info["carrier_sha256"], "baseline": info["baseline"],
@@ -159,13 +159,14 @@ def selected_point(calibration):
     return winner["selected"], choices
 
 
-def freeze(visual, acoustic, fit, output):
-    rows, classes = measure(visual, acoustic, fit, {"calibration"})
+def freeze(visual, acoustic, fit, output, wide_offset=False):
+    rows, classes = measure(visual, acoustic, fit, {"calibration"}, wide_offset=wide_offset)
     assert sum(row["role"] == "original" for row in rows) == 26
     winner, alternatives = selected_point(rows)
     code = (Path(__file__), Path(__file__).resolve().parents[1] / "app/detectors/video/viseme_patch_alignment.py")
     value = {"schema": training.SCHEMA, "method": METHOD, "fit": receipt.sha(fit / "fit.json.gz"),
              "weight": receipt.sha(fit / "visual-speech.safetensors"), "rows": rows,
+             "wide_offset": wide_offset,
              "selected": winner, "alternatives": alternatives, "visual_classes": classes,
              "source": {"visual": receipt.sha(visual / "capture.json.gz"), "acoustic": receipt.sha(acoustic)},
              "code": {p.name: receipt.sha(p) for p in code}}
@@ -182,10 +183,12 @@ def assess(visual, acoustic, fit, frozen, output, fresh_plan=None):
     assert selected == candidate["selected"] and alternatives == candidate["alternatives"]
     code = (Path(__file__), Path(__file__).resolve().parents[1] / "app/detectors/video/viseme_patch_alignment.py")
     assert candidate["code"] == {p.name: receipt.sha(p) for p in code}
-    rows, classes = measure(visual, acoustic, fit, {"first", "second"} if fresh_plan is None else {"fresh"}, fresh_plan=fresh_plan)
+    rows, classes = measure(visual, acoustic, fit, {"first", "second"} if fresh_plan is None else {"fresh"},
+                            fresh_plan=fresh_plan, wide_offset=candidate["wide_offset"])
     expected = 43 if fresh_plan is None else len(receipt.read(fresh_plan)["rows"])
     assert sum(row["role"] == "original" for row in rows) == 2 * expected
     result = {"schema": training.SCHEMA, "freeze": receipt.sha(frozen), "selected": selected, "rows": rows,
+              "wide_offset": candidate["wide_offset"],
               "visual_classes": classes, "summary": counts(rows, selected)}
     receipt.save(output, result)
     print(json.dumps(result["summary"], indent=2))
@@ -212,5 +215,7 @@ if __name__ == "__main__":
             cmd.add_argument(name, type=Path)
         if mode == "assess":
             cmd.add_argument("--fresh-plan", type=Path)
+        if mode == "freeze":
+            cmd.add_argument("--wide-offset", action="store_true")
     args = vars(parser.parse_args())
     {"freeze": freeze, "assess": assess, "review": review}[args.pop("mode")](**args)

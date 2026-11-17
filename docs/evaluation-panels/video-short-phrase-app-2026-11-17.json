@@ -1,0 +1,68 @@
+{
+  "browser": {
+    "excerpt_durations_s": [
+      0.44,
+      0.44
+    ],
+    "json_source_replay": true,
+    "native_frames": 6,
+    "page_errors": 0,
+    "pdf_interval_verified": true
+  },
+  "cases": {
+    "ordinary": {
+      "presentations": {
+        "earlier": {
+          "decoded_samples": 42560,
+          "presented_samples": 42560
+        },
+        "submitted": {
+          "aac48": {
+            "channels": 1,
+            "presentation_end_exclusive_pts": 127680,
+            "sample_rate": 48000,
+            "time_base": "1/48000"
+          },
+          "decoded_samples": 42667,
+          "presented_samples": 42560
+        }
+      },
+      "reference_sha256": "c28821cbc2830be2e2515bbad0bdd39bc0795130b67ba63ca8adf05d3f9700de",
+      "report_sha256": "60d0d63e7d5fce86f65ef0e6bb4eccff6e251c3c91e4e72521b68ded466a045f",
+      "samples": null,
+      "source_sha256": "b9a5e7c434fbbe9c792542d8ac5af5a4d863cc0e16b138ad73f56128f754d13b",
+      "status": "no_local_range"
+    },
+    "replacement": {
+      "presentations": {
+        "earlier": {
+          "decoded_samples": 42560,
+          "presented_samples": 42560
+        },
+        "submitted": {
+          "aac48": {
+            "channels": 1,
+            "presentation_end_exclusive_pts": 127680,
+            "sample_rate": 48000,
+            "time_base": "1/48000"
+          },
+          "decoded_samples": 42667,
+          "presented_samples": 42560
+        }
+      },
+      "reference_sha256": "c28821cbc2830be2e2515bbad0bdd39bc0795130b67ba63ca8adf05d3f9700de",
+      "report_sha256": "dab7dba1b543e59d5493837ebdd89fd7f38a21aebcec61f7c274c8f6f5033f54",
+      "samples": [
+        23360,
+        30400
+      ],
+      "source_sha256": "94a3bd6ddf967a1897c32ac9b63aac2539d19867ca2cdaf4b92a3fb0f2777ab3",
+      "status": "localized_difference"
+    }
+  },
+  "comparison_jobs": 0,
+  "earlier_profile_result": "unsupported_picture_profile",
+  "replayed_checkout_records": 0,
+  "trial_checkouts_usd_9_99": 2,
+  "unpaid_jobs": 0
+}

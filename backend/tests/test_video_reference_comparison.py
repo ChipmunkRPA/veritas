@@ -447,6 +447,7 @@ def test_matching_pictures_bind_a_local_soundtrack_difference_and_replay(tmp_pat
     monkeypatch.setattr(v2_media_reference, 'default_store', lambda: fixture.store)
     monkeypatch.setattr(v2_media_reference, 'get_session', sessions)
     monkeypatch.setattr(settings, 'video_reference_sound_difference', True)
+    monkeypatch.setattr(settings, 'video_reference_short_native_sound_difference', False)
     with sessions() as db:
         analysis = db.get(Analysis, 'other-kind')
         analysis.kind, analysis.status, analysis.filename = 'video', 'done', submitted.name

@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short earlier-video soundtrack replay](video-short-phrase-comparison-2026-11-17.md#replay)
+checks 432 earlier/current pairs from 24 previously unused utterances. The
+receipts distinguish same-word splices, different-word splices, gain changes,
+unchanged tracks and whole-track timing changes. The linked single-upload
+replay verifies 288 native clips on the original frame and audio clocks.
+
 The [48 kHz speech replay](audio-two-second-carriers-2026-11-17.md#reproduce-the-comparison)
 rebuilds 192 WAV and AAC deliveries and checks their exact native frame
 clock and decoded input commitments. The portable reader exports reference

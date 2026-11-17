@@ -7,16 +7,17 @@ import numpy as np
 GROUPS = ("closure", "open", "rounded", "spread", "lower_lip")
 ARMS = ("relative", "alternative")
 LAGS = np.arange(-2240, 2241, 320)
+WIDE_LAGS = np.arange(-5760, 5761, 320)
 WIDTHS = (5760, 7040, 8320, 9600, 10880, 12160)
 STEP = 640
 FLANK = 11520
 
 
-def support_matrix(readings, sample_times, kept, events):
+def support_matrix(readings, sample_times, kept, events, lags):
     mass = np.asarray([row[2] for row in events])
     clock = np.asarray([row[1] for row in events])
     labels = np.asarray([GROUPS.index(row[0]) for row in events])
-    candidates = clock[:, None] - LAGS[None, :]
+    candidates = clock[:, None] - lags[None, :]
     after = np.searchsorted(sample_times, candidates).clip(1, len(sample_times) - 1)
     before = after - 1
     valid = ((candidates >= sample_times[0]) & (candidates <= sample_times[-1]) & kept[before] & kept[after])
@@ -41,13 +42,33 @@ def observed_context(kept):
     return result
 
 
-def locate(readings, sample_times, kept, events, samples):
+def clip_alignment(times, energies, valid, stable, means, lags):
+    """Keep plausible whole-clip alignments and recognize a persistent offset."""
+    midpoint = (times[0] + times[-1]) / 2
+    halves = (np.array((times < midpoint, times >= midpoint))[:, :, None] & valid)
+    counts = halves.sum(axis=1)
+    shared = (counts.min(axis=0) >= 2) & stable
+    plausibility = shared & (means >= max(means) - .16)
+    near = shared & (np.abs(lags) <= 1280)
+    distant = plausibility & (np.abs(lags) >= 2560)
+    if near.any() and distant.any():
+        support = (energies * halves).sum(axis=1) / counts.clip(1)
+        near_peak = support[:, near].max(axis=1)
+        improvement = support[:, distant] - near_peak[:, None]
+        if np.any(np.min(improvement, axis=0) >= .12):
+            return np.zeros_like(plausibility)
+    return plausibility
+
+
+def locate(readings, sample_times, kept, events, samples, *, wide_offset=False):
     events = [row for row in events if row[0] in GROUPS and row[2] >= .35]
     kept = observed_context(kept)
     if (len(events) < 7 or kept.sum() < 28 or len(sample_times) != len(kept)
             or not np.all(np.diff(sample_times) > 0)):
         return {}
-    times, labels, nearest, valid, probabilities, scores = support_matrix(readings, sample_times, kept, events)
+    lags = WIDE_LAGS if wide_offset else LAGS
+    widths = (4480, 5120, *WIDTHS) if wide_offset else WIDTHS
+    times, labels, nearest, valid, probabilities, scores = support_matrix(readings, sample_times, kept, events, lags)
     outcomes = {}
     for name, energies in zip(ARMS, scores, strict=True):
         possible = []
@@ -56,7 +77,11 @@ def locate(readings, sample_times, kept, events, samples):
         if not np.any(stable):
             continue
         all_means = np.where(stable, (energies * valid).sum(axis=0) / any_lag.clip(1), -np.inf)
-        for width in WIDTHS:
+        if wide_offset:
+            stable = clip_alignment(times, energies, valid, stable, all_means, lags)
+            if not stable.any():
+                continue
+        for width in widths:
             for start in range(4480, samples - width - 3839, STEP):
                 end = start + width
                 left = (times < start) & (times >= start - FLANK)
@@ -69,7 +94,7 @@ def locate(readings, sample_times, kept, events, samples):
                     continue
                 before, inside, after = (energies * sections).sum(axis=1) / counts.clip(1)
                 flank = np.minimum(before, after)
-                lane = max(np.flatnonzero(supported), key=lambda j: (flank[j], all_means[j], -abs(int(LAGS[j]))))
+                lane = max(np.flatnonzero(supported), key=lambda j: (flank[j], all_means[j], -abs(int(lags[j]))))
                 neighbors = slice(max(0, lane - 2), lane + 3)
                 inner = max(inside[neighbors][counts[1, neighbors] >= 2])
                 if flank[lane] < (-.25 if name == "alternative" else -.10) or inner >= -.07:
@@ -85,7 +110,7 @@ def locate(readings, sample_times, kept, events, samples):
                     continue
                 compatibility = float(flank[lane] - inner)
                 item = {"score": round(compatibility, 7), "span": [start, end], "frames": brackets,
-                        "lag_samples": int(LAGS[lane]), "checked_events": list(map(int, counts[:, lane])),
+                        "lag_samples": int(lags[lane]), "checked_events": list(map(int, counts[:, lane])),
                         "speech_sample": int(times[during]), "heard": GROUPS[labels[during]],
                         "strongest_visual_group": GROUPS[int(probabilities[during, lane, :len(GROUPS)].argmax())],
                         "local_support": round(float(inner), 7), "flank_support": round(float(flank[lane]), 7)}

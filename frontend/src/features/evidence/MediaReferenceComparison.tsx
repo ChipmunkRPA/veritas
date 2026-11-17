@@ -75,6 +75,7 @@ type SoundtrackDifference = Pick<SoundtrackTiming, 'summary' | 'scope' | 'pictur
   range: NonNullable<SoundtrackTiming['range']> & {
     bands: { band_hz: [number, number] }[]
     selection?: 'strong_flanks_first'
+    measurement_basis?: 'short_phrase_correlation/1'
   }
 } | { status: 'unassessed' | 'no_local_range'; reason: string; range?: never })
 type CleanSpeechComparison = {
@@ -171,7 +172,7 @@ type Comparison = {
     | 'chipmunk.video-reference-comparison/7' | 'chipmunk.video-reference-comparison/8' | 'chipmunk.video-reference-comparison/9'
     | 'chipmunk.video-reference-comparison/10' | 'chipmunk.video-reference-comparison/11' | 'chipmunk.video-reference-comparison/12'
     | 'chipmunk.video-reference-comparison/13' | 'chipmunk.video-reference-comparison/14' | 'chipmunk.video-reference-comparison/15'
-    | 'chipmunk.video-reference-comparison/16' | 'chipmunk.video-reference-comparison/17'
+    | 'chipmunk.video-reference-comparison/16' | 'chipmunk.video-reference-comparison/17' | 'chipmunk.video-reference-comparison/18'
   submitted: PictureDimensions
   picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
   picture_insertion?: PictureInsertion
@@ -571,7 +572,7 @@ function InsertionEvidence({ insertion, assets }: { insertion: PictureInsertion;
 
 function ResultView({ result }: { result: Result }) {
   const { comparison, assets, pdf } = result
-  const { picture, audio } = comparison
+  const { picture, audio, sound_difference: soundDifference } = comparison
   const isAudio = comparison.schema.startsWith('chipmunk.audio-reference-comparison/')
   const alignment = isAudio ? audio?.trim_alignment : undefined
   const pictureTrim = comparison.trim_alignment
@@ -581,6 +582,11 @@ function ResultView({ result }: { result: Result }) {
   const firstAudioRange = audio?.ranges?.[0]
   const wholeRecording = audio?.ranges?.length === 1 && firstAudioRange?.start_sample === 0
     && firstAudioRange.end_sample === (alignment?.compared_samples ?? audio.submitted?.samples)
+  const differenceRange = soundDifference?.range
+  const bands = differenceRange?.bands.map(({ band_hz: [low, high] }) => `${low}–${high}`).join(', ')
+  const matchingSoundNote = differenceRange?.measurement_basis
+    ? `Sound matched before and after the interval in the ${bands} Hz bands.`
+    : bands && `Matching sound fell in the ${bands} Hz bands.`
   return <div className="mt-5 space-y-4 border-t border-border pt-4">
     <div className="flex flex-wrap gap-2">
       <Button onClick={() => saveBlob(new Blob([JSON.stringify({ comparison, assets }, null, 2) + '\n'],
@@ -611,11 +617,10 @@ function ResultView({ result }: { result: Result }) {
     {comparison.soundtrack_alignment && !comparison.timing?.changed_audio_samples &&
       (!comparison.channel_timing?.ranges.length || comparison.soundtrack_alignment.range) &&
       <SoundtrackTimingEvidence timing={comparison.soundtrack_alignment} assets={assets} />}
-    {comparison.sound_difference && <SoundtrackTimingEvidence timing={{ ...comparison.sound_difference,
-      waveform_note: [comparison.sound_difference.waveform_note, comparison.sound_difference.range &&
-        `Matching sound fell in the ${comparison.sound_difference.range.bands.map(({ band_hz: [low, high] }) => `${low}–${high}`).join(', ')} Hz bands.`].filter(Boolean).join(' ') }}
-      assets={assets} title={comparison.sound_difference.range?.selection === 'strong_flanks_first' ? 'Soundtrack difference with unresolved cause'
-        : comparison.sound_difference.range ? 'Soundtrack difference over matching pictures' : 'Experimental soundtrack comparison'}
+    {soundDifference && <SoundtrackTimingEvidence timing={{ ...soundDifference,
+      waveform_note: [soundDifference.waveform_note, matchingSoundNote].filter(Boolean).join(' ') }}
+      assets={assets} title={differenceRange?.selection === 'strong_flanks_first' ? 'Soundtrack difference with unresolved cause'
+        : differenceRange ? 'Soundtrack difference over matching pictures' : 'Experimental soundtrack comparison'}
       excerpt="soundtrack excerpt" />}
     {comparison.channel_timing && <ChannelTimingEvidence timing={comparison.channel_timing} assets={assets} audioOnly={isAudio} />}
     {comparison.local_timing && (!comparison.channel_timing || comparison.local_timing.range) &&
@@ -816,8 +821,9 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const versionedSchema = response?.comparison?.schema
       const recovered = versionedSchema === 'chipmunk.video-reference-comparison/16'
+      const shortPhrase = versionedSchema === 'chipmunk.video-reference-comparison/18'
       const hasCoverage = recovered || versionedSchema === 'chipmunk.video-reference-comparison/15' ||
-        versionedSchema === 'chipmunk.video-reference-comparison/17'
+        versionedSchema === 'chipmunk.video-reference-comparison/17' || shortPhrase
       const hasSpeechAlignment = versionedSchema === 'chipmunk.audio-reference-comparison/14'
       const hasWaveform = versionedSchema === 'chipmunk.audio-reference-comparison/15'
       const schema = hasCoverage || hasSpeechAlignment || hasWaveform ? response.comparison.comparison_schema : versionedSchema
@@ -916,6 +922,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
         const difference = response.comparison.sound_difference
         const span = difference?.range
         if (!difference || difference.affects_overall_confidence !== false || !difference.scope || !difference.summary ||
+            (span?.measurement_basis && (!shortPhrase || span.measurement_basis !== 'short_phrase_correlation/1')) ||
             (recovered && (difference.status !== 'localized_difference' || span?.selection !== 'strong_flanks_first')) ||
             (difference.status !== 'localized_difference' && (!hasCoverage || span || !difference.reason ||
               !['unassessed', 'no_local_range'].includes(difference.status))) ||

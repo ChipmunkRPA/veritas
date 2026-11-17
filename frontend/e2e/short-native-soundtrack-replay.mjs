@@ -22,8 +22,17 @@ try {
   await upload.getByRole('checkbox', { name: 'Include experimental soundtrack comparison' }).check()
   await upload.getByRole('button', { name: 'Compare videos' }).click()
   const proof = upload.getByRole('region', { name: /^Soundtrack difference/ })
-  await proof.getByText(/Common presented audio duration 2\.700 s/).waitFor()
-  await proof.getByText(/1\.400 to 1\.720 s/).waitFor()
+  const presented = sample.presented_s ?? '2.700'
+  const [start, end] = sample.range_s ?? ['1.400', '1.720']
+  await proof.getByText(`Common presented audio duration ${presented} s.`, { exact: false }).waitFor()
+  await proof.getByText(`${start} to ${end} s`, { exact: false }).first().waitFor()
+  if (sample.range_s) {
+    await proof.getByText(/Sound matched before and after the interval/).waitFor()
+    for (const [label, file] of [['Download JSON evidence', 'browser-comparison.json'], ['Download PDF', 'browser-comparison.pdf']]) {
+      const [download] = await Promise.all([page.waitForEvent('download'), upload.getByRole('button', { name: label }).click()])
+      await download.saveAs(path.join(input.output, file))
+    }
+  }
   const stills = proof.locator('img')
   assert.equal(await stills.count(), 6)
   for (const still of await stills.all()) await still.scrollIntoViewIfNeeded()
@@ -33,7 +42,8 @@ try {
     audio.addEventListener('error', () => reject(new Error('Soundtrack excerpt did not decode')), { once: true })
     audio.load()
   }))))
-  assert.ok(lengths.length === 2 && lengths.every(duration => Math.abs(duration - .320) < .001))
+  const duration = Number(end) - Number(start)
+  assert.ok(lengths.length === 2 && lengths.every(length => Math.abs(length - duration) < .001))
   await proof.screenshot({ path: path.join(input.output, 'native-soundtrack-evidence.png'), animations: 'disabled' })
   assert.deepEqual(errors, [])
   process.stdout.write(JSON.stringify({ native_frames: 6, excerpt_durations_s: lengths, page_errors: errors.length }))

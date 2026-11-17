@@ -14,7 +14,7 @@ FAMILIES = ("inswapper", "uniface")
 SALT = "chipmunk-video-face-residuals-2026-11-16/"
 
 
-def plan(base, output, retained):
+def plan(base, output, retained, *, group_count=HELD_GROUPS, selection_salt=SALT):
     common = base / "video-common-sources-v89"
     permissions = common / "permissions"
     public_files = base / "video-common-acquisition-v91"
@@ -64,15 +64,15 @@ def plan(base, output, retained):
         return previous.digest(previous.RULE + "/" + video["id"])
 
     videos = [row for row in sources.table(permissions / "rtfs-videos.csv") if key(row) not in used_groups
-              and 5 <= float(row["end_time"]) - float(row["start_time"]) and qualified("original_videos/" + row["filename"])]
+              and float(row["end_time"]) - float(row["start_time"]) >= 5 and qualified("original_videos/" + row["filename"])]
     targets = {row["filename"] for row in videos}
     swaps = {family: [row for row in sources.table(permissions / f"rtfs-{family}.csv")
                       if row["video"] in targets and row["success"] == "True" and qualified(family + "/" + row["filename"])]
              for family in FAMILIES}
     candidates = sources.paired_targets(videos, swaps, photos, history)
-    candidates.sort(key=lambda row: previous.digest(SALT + key(row["target"])))
+    candidates.sort(key=lambda row: previous.digest(selection_salt + key(row["target"])))
     chosen = []
-    for index, row in enumerate(candidates[:HELD_GROUPS]):
+    for index, row in enumerate(candidates[:group_count]):
         video = row["target"]
         names = {"ordinary": "original_videos/" + video["filename"]} | {
             item["generator"]: item["generator"] + "/" + item["filename"] for item in row["swaps"]}
@@ -80,12 +80,12 @@ def plan(base, output, retained):
                   for family, path in names.items() for sha, size in (hf_object(file_info[path]),)}
         chosen.append({"group": key(video), "role": "held", "source_video_url": video["original_link"],
                        "index": index, "donors": row["donor_source_keys"], "files": assets})
-    if (len(chosen) != HELD_GROUPS or len({key for row in chosen for key in row["donors"]}) != 2 * HELD_GROUPS
-            or len({asset["sha256"] for row in chosen for asset in row["files"].values()}) != 3 * HELD_GROUPS):
+    if (len(chosen) != group_count or len({key for row in chosen for key in row["donors"]}) != 2 * group_count
+            or len({asset["sha256"] for row in chosen for asset in row["files"].values()}) != 3 * group_count):
         raise ValueError(f"Incomplete selection or overlapping publisher identities among {len(candidates)} candidates")
     sources.write(output, {"recipe": previous.RECIPE, "rules": previous.RULE, "revision": sources.RTFS_REV,
-                           "selected_groups": {"development": 0, "held": HELD_GROUPS}, "groups": chosen,
-                           "selection_salt": SALT, "retained_plan_sha256": [sources.sha(path) for path in retained],
+                           "selected_groups": {"development": 0, "held": group_count}, "groups": chosen,
+                           "selection_salt": selection_salt, "retained_plan_sha256": [sources.sha(path) for path in retained],
                            "historical_groups_excluded": len({row["group"] for row in history}),
                            "metadata_sha256": pins, "publisher_file_info_sha256": sources.sha(file_index)})
     print(f"Froze {len(chosen)} fresh targets and {len(chosen) * 2} separate recorded donor keys.", flush=True)
@@ -96,5 +96,9 @@ if __name__ == "__main__":
     parser.add_argument("base", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("retained", nargs="+", type=Path)
+    parser.add_argument("--group-count", type=int, default=HELD_GROUPS)
+    parser.add_argument("--selection-salt", default=SALT)
     args = parser.parse_args()
-    plan(args.base, args.output, args.retained)
+    if args.group_count < 1 or not args.selection_salt:
+        parser.error("Supply a positive group count and a nonempty selection salt")
+    plan(args.base, args.output, args.retained, group_count=args.group_count, selection_salt=args.selection_salt)

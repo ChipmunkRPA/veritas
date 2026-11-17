@@ -60,6 +60,20 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Facial detail after strong video recompression](video-face-frequency-2026-11-16.md)
+  combines measured face detail and regional appearance with the existing
+  two readings. It raises strongly recompressed swap alerts from 27 to 37
+  of 64, with one more alert on 32 matched originals and zero added alerts
+  on the separate camera panel. The native and model-independent replays
+  cover the exact delivered files.
+
+- [Direct ranking of short speech intervals](audio-interval-ranking-2026-11-16.md)
+  adds one correct location under a competing voice 10 dB louder on
+  312 retained deliveries. The gain did not repeat on the 112-delivery
+  matched-utterance diagnostic, where the wider candidate only found
+  one extra clean location and added misplaced ranges. This remains an
+  experimental audio check.
+
 - [Footage repeated at 3:2 and 4:3 playback speeds](video-fractional-retiming-2026-11-16.md)
   locates both ranges on 140 of 192 new staged edits from 12 camera
   recordings. Two of 72 ordinary deliveries were flagged, both from

@@ -13,6 +13,16 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [face detail replay](video-face-frequency-2026-11-16.md#independent-replay)
+exports the 216 confirmation deliveries into the common review format.
+It compares two delivery qualities, composes the paired decisions and
+estimates the difference by resampling entire source groups.
+
+The [speech interval ranking replay](audio-interval-ranking-2026-11-16.md#replay)
+recounts three fixed interval fits on 312 retained deliveries and verifies
+112 matched original and edited utterance deliveries. The reader checks
+the sample-clock locations alongside misses and ordinary alerts.
+
 The [3:2 and 4:3 video replay](video-fractional-retiming-2026-11-16.md#replay)
 recounts 300 edited and control deliveries, including four newly
 acquired camera recordings. Native verification checks both playback

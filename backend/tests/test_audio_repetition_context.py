@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import io
 import json
 import subprocess
 import sys
@@ -72,12 +73,18 @@ def _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapsh
                               stereo=False, gain_pair=None):
     kind = analysis.kind
     clip = pair["artifacts"]["first_clip"]
+    difference = "first_recorded_clip" in pair["artifacts"]
     monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
     rendered = engine.render_pdf(snapshot)
     text = " ".join(engine.pdf_text(rendered.pdf).split())
     title = "Exact repeats in the left channel" if stereo else "Exact repeated audio"
+    if difference:
+        title = "Repeated sound in the stereo difference"
     assert title in text and "0.200 s of identical samples" in text
-    if stereo:
+    if difference:
+        assert "Channel difference waveform shared by both occurrences" in text
+        assert text.count("Original stereo excerpt SHA-256") == 2
+    elif stereo:
         assert "Waveform shared by both occurrences" in text
     if gain_pair:
         assert "Gain-adjusted repeats in the right channel" in text
@@ -90,6 +97,8 @@ def _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapsh
     compact = "".join(text.split())
     assert all(digest in compact for digest in (clip["sha256"], pair["pcm_s16le_sha256"], api["sha256"]))
     field = "stereo_repetition/channels/0/measurement" if stereo else "repetition_context"
+    if difference:
+        field = "stereo_repetition/difference_measurement"
     assert (("/audio/" if kind == "video" else "/") + field) in text
     if kind == "video":
         assert "Video playback 0.720–0.920 s" in text and "Video playback 2.160–2.360 s" in text
@@ -131,6 +140,10 @@ def _signed_report_and_export(tmp_path, monkeypatch, db, store, analysis, snapsh
             for asset in gain_pair["artifacts"].values():
                 ext = "wav" if asset["media_type"] == "audio/wav" else "png"
                 assert archive.read(f"assets/{asset['sha256']}.{ext}") == store.read_bytes(asset["sha256"])
+        if difference:
+            for side in ("first", "second"):
+                artifact = pair["artifacts"][f"{side}_recorded_clip"]
+                assert archive.read(f"assets/{artifact['sha256']}.wav") == store.read_bytes(artifact["sha256"])
 
     trusted = tmp_path / "trusted.pem"
     trusted.write_bytes(key.public_pem())
@@ -157,11 +170,18 @@ sys.exit(0 if result.ok else 1)
         assert "Verified 4 published playback intervals across 3 WAV assets" in verified.checks[-1].detail
     if gain_pair:
         assert "Recomputed gain-adjusted repeats" in verified.checks[-1].detail
+    if difference:
+        assert "verified its repeats against both recorded excerpts" in verified.checks[-1].detail
 
     def change_pair(files, field):
         evidence, bundle = json.loads(files["evidence.json"]), json.loads(files["bundle.json"])
         body = evidence if kind == "audio" else evidence["audio"]
-        record = body["stereo_repetition"]["channels"][0]["measurement"] if stereo else body["repetition_context"]
+        if difference:
+            record = body["stereo_repetition"]["difference_measurement"]
+        elif stereo:
+            record = body["stereo_repetition"]["channels"][0]["measurement"]
+        else:
+            record = body["repetition_context"]
         altered_pair = record["pairs"][0]
         if field == "source_time":
             altered_pair["second"]["source_timestamp_ranges"][0]["source_start_pts"] += 1
@@ -169,6 +189,15 @@ sys.exit(0 if result.ok else 1)
             altered_pair["pcm_s16le_sha256"] = "f" * 64
         elif field == "gain_ratio":
             body["stereo_repetition"]["channels"][1]["gain_measurement"]["pairs"][0]["gain_numerator"] = 3
+        elif field == "stereo_excerpt":
+            reference = altered_pair["artifacts"]["first_recorded_clip"]
+            old = reference["sha256"]
+            data = bytearray(files.pop(f"assets/{old}.wav"))
+            data[-4] ^= 8
+            digest = reference["sha256"] = hashlib.sha256(data).hexdigest()
+            files[f"assets/{digest}.wav"] = bytes(data)
+            entry = next(entry for entry in bundle["artifacts"] if entry["sha256"] == old)
+            entry.update(sha256=digest, file=f"assets/{digest}.wav")
         else:
             for side in ("first", "second"):
                 interval = altered_pair[side]
@@ -191,6 +220,12 @@ sys.exit(0 if result.ok else 1)
         altered = rewrite(exported.path, tmp_path / "changed-ratio.zip", partial(change_pair, field="gain_ratio"), key)
         failed = verify.verify_package(altered, public_key_pem=key.public_pem())
         assert failed.outcome == "not_verified" and any("stated gain relationship" in check.detail for check in failed.checks)
+    if difference:
+        altered = rewrite(exported.path, tmp_path / "changed-stereo-excerpt.zip",
+                          partial(change_pair, field="stereo_excerpt"), key)
+        failed = verify.verify_package(altered, public_key_pem=key.public_pem())
+        assert failed.outcome == "not_verified"
+        assert any("does not reproduce the repeated channel difference" in check.detail for check in failed.checks)
     shifted = rewrite(exported.path, tmp_path / "shifted-repetition.zip", partial(change_pair, field="coordinates"), key)
     assert verify.verify_package(shifted, public_key_pem=key.public_pem()).ok
     failed = verify.verify_package(shifted, public_key_pem=key.public_pem(), source_audio=source_path)
@@ -210,13 +245,16 @@ def test_serving_method_preserves_exact_historical_algorithm_bytes():
 
 
 @pytest.mark.parametrize("kind", ["audio", "video"])
-@pytest.mark.parametrize("stereo,gain", [(False, False), (True, False), (True, True)], ids=["mono", "stereo", "stereo-gain"])
-def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(tmp_path, monkeypatch, kind, stereo, gain):
+@pytest.mark.parametrize("stereo,gain,difference", [
+    (False, False, False), (True, False, False), (True, True, False), (True, False, True),
+], ids=["mono", "stereo", "stereo-gain", "stereo-difference"])
+def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(tmp_path, monkeypatch, kind, stereo, gain, difference):
     pcm = _authored()
     carrier = pcm
     gain_pair = None
     monkeypatch.setattr(settings, "environment", "dev")
     monkeypatch.setattr(settings, "audio_stereo_gain_repeat_review", gain)
+    monkeypatch.setattr(settings, "audio_stereo_difference_repeat_review", difference)
     monkeypatch.setattr(settings, "audio_waveform_repeat_review", False)
     if stereo:
         pcm = np.append(pcm, np.arange(1231, dtype="<i2"))
@@ -224,6 +262,8 @@ def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(t
         if gain:
             background[SECOND + 16:SECOND + 16 + LENGTH] = np.rint(background[FIRST + 16:FIRST + 16 + LENGTH] * (-3 / 4))
         carrier = np.column_stack((pcm, background))
+        if difference:
+            carrier = np.column_stack((background + pcm, background - pcm))
     source_path = _wav(tmp_path / "source.wav", carrier)
     source_pts = 0
     if kind == "video":
@@ -304,12 +344,17 @@ def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(t
                 assert audio_gain_repetition_binding.matches_clips(gain_pair, background[FIRST + 16:FIRST + 16 + LENGTH].tobytes(),
                                                                   background[SECOND + 16:SECOND + 16 + LENGTH].tobytes())
             context = left["measurement"]
+            if difference:
+                assert not context["pairs"]
+                context = check["difference_measurement"]
+            else:
+                assert "difference_measurement" not in check
         else:
             assert "stereo_repetition" not in part
         assert context["status"] == "measured" and context["affects_overall_confidence"] is False
         assert context["searched_interval"] == {"start_sample": 0, "end_sample": len(pcm)}
         [pair] = context["pairs"]
-        assert pair["id"] == ("LR01" if stereo else "R01")
+        assert pair["id"] == ("DR01" if difference else "LR01" if stereo else "R01")
         assert pair["sample_count"] == LENGTH and pair["lag_samples"] == SECOND - FIRST
         for name, start in (("first", FIRST), ("second", SECOND)):
             assert pair[name] == {"start_sample": start, "end_sample": start + LENGTH, "source_timestamp_ranges": [
@@ -323,6 +368,13 @@ def test_production_packet_and_asset_read_use_the_exact_repeated_source_ranges(t
         assert service.asset_refs(api)[clip["sha256"]] == clip
         assert pair["pcm_s16le_sha256"] == hashlib.sha256(pcm[FIRST:FIRST + LENGTH].tobytes()).hexdigest()
         np.testing.assert_array_equal(read_wav(store.read_bytes(clip["sha256"])), pcm[FIRST:FIRST + LENGTH] / 32768)
+        if difference:
+            for side, start in (("first", FIRST), ("second", SECOND)):
+                asset = pair["artifacts"][f"{side}_recorded_clip"]
+                assert service.asset_refs(api)[asset["sha256"]] == asset
+                with wave.open(io.BytesIO(store.read_bytes(asset["sha256"])), "rb") as wav:
+                    assert wav.getnchannels() == 2 and wav.getnframes() == LENGTH
+                    assert wav.readframes(LENGTH) == carrier[start:start + LENGTH].tobytes()
 
         frozen = read_wav(store.read_bytes(binding["wav_sha256"]))
         mapping = json.loads(store.read_bytes(binding["mapping_sha256"]))

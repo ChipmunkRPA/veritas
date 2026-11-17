@@ -59,12 +59,16 @@
 {% set _ = repeat_reports.append((row.measurement, false, row.channel, evidence.stereo_repetition_pointer ~ '/channels/' ~ loop.index0 ~ '/measurement')) %}
 {% if row.get('gain_measurement') %}{% set _ = repeat_reports.append((row.gain_measurement, false, row.channel, evidence.stereo_repetition_pointer ~ '/channels/' ~ loop.index0 ~ '/gain_measurement')) %}{% endif %}
 {% endfor %}
+{% if evidence.stereo_repetition.get('difference_measurement') %}
+{% set _ = repeat_reports.append((evidence.stereo_repetition.difference_measurement, false, 'difference', evidence.stereo_repetition_pointer ~ '/difference_measurement')) %}
+{% endif %}
 {% endif %}
 {% for context, similar, channel, pointer in repeat_reports if context %}
 {% set waveform = context.schema == 'chipmunk.audio-repeat-similarity/2' %}
 {% set gain = context.schema == 'chipmunk.audio-gain-repetition/1' %}
-<h3>{% if channel %}{{ 'Gain-adjusted' if gain else 'Exact' }} repeats in the {{ channel }} channel{% elif similar %}Similar repeated audio{% else %}Exact repeated audio{% endif %}</h3>
-<p>{% if gain %}This check compares the recorded channel for exact repeats after a fixed level or polarity change. Mixing new sound into that channel can hide repeats.{% elif channel %}This check compares the recorded channel before it is mixed into mono.{% elif waveform %}The exact and frequency-band searches yielded no reportable pair. A second similarity check compared waveform patterns in the same continuous 2.5–4 second mono input. Background noise can mask repeats.{% elif similar %}This check compares patterns across frequency bands in continuous 2.5–4 second mono inputs. Background noise can mask repeats.{% else %}This check compares samples in continuous 2.5–4 second mono inputs.{% endif %} Loops, recurring alerts, and editing can all repeat audio. Matches carry no AI confidence weight.</p>
+{% set difference = channel == 'difference' %}
+<h3>{% if difference %}Repeated sound in the stereo difference{% elif channel %}{{ 'Gain-adjusted' if gain else 'Exact' }} repeats in the {{ channel }} channel{% elif similar %}Similar repeated audio{% else %}Exact repeated audio{% endif %}</h3>
+<p>{% if difference %}Subtracting the stereo channels cancels sound recorded identically in both. The match can include off-center speech, music, or background sound.{% elif gain %}This check compares the recorded channel for exact repeats after a fixed level or polarity change. Mixing new sound into that channel can hide repeats.{% elif channel %}This check compares the recorded channel before it is mixed into mono.{% elif waveform %}The exact and frequency-band searches yielded no reportable pair. A second similarity check compared waveform patterns in the same continuous 2.5–4 second mono input. Background noise can mask repeats.{% elif similar %}This check compares patterns across frequency bands in continuous 2.5–4 second mono inputs. Background noise can mask repeats.{% else %}This check compares samples in continuous 2.5–4 second mono inputs.{% endif %} Loops, recurring alerts, and editing can all repeat audio. Matches carry no AI confidence weight.</p>
 {% if context.status == 'ambiguous' %}<p>{{ 'The waveform search could not establish a reliable pair.' if waveform else 'The search reached its comparison limit before it could establish a result.' }}</p>
 {% elif context.status == 'unavailable' %}<p>This input could not be checked within the supported duration, source timing, and signal conditions.</p>
 {% elif not context.pairs %}<p>No {{ 'gain-adjusted' if gain else 'waveform' if waveform else 'similar' if similar else 'exact active' }} repeat of at least 0.15 seconds was found in the checked input.{% if waveform and context.frequency_band_search.status != 'measured' %} The frequency-band search was inconclusive.{% endif %}</p>{% endif %}
@@ -85,8 +89,9 @@
 {% if origin is not none and start >= origin %}Video playback {{ '%.3f' | format(start - origin) }}–{{ '%.3f' | format(end - origin) }} s.{% endif %}</p>
 {% endfor %}
 {% if similar or gain %}<p class="caption evidence-hash">WAV SHA-256 <span class="mono">{{ pair.artifacts[label ~ '_clip'].sha256 }}</span>. Decoded sample SHA-256 <span class="mono">{{ span.pcm_s16le_sha256 }}</span>.</p>{% endif %}
+{% if difference %}<p class="caption evidence-hash">Original stereo excerpt SHA-256 <span class="mono">{{ pair.artifacts[label ~ '_recorded_clip'].sha256 }}</span>.</p>{% endif %}
 {% endfor %}
-{% if not similar and not gain %}<p class="caption evidence-hash">{% if not evidence.withheld %}The evidence ZIP includes one WAV for both locations. {% endif %}WAV SHA-256 <span class="mono">{{ pair.artifacts.first_clip.sha256 }}</span>. Decoded sample SHA-256 <span class="mono">{{ pair.pcm_s16le_sha256 }}</span>.</p>{% endif %}
+{% if not similar and not gain %}<p class="caption evidence-hash">{% if difference %}Channel difference WAV SHA-256{% else %}{% if not evidence.withheld %}The evidence ZIP includes one WAV for both locations. {% endif %}WAV SHA-256{% endif %} <span class="mono">{{ pair.artifacts.first_clip.sha256 }}</span>. Decoded sample SHA-256 <span class="mono">{{ pair.pcm_s16le_sha256 }}</span>.</p>{% endif %}
 </article>
 {% endfor %}
 <p class="caption">JSON pointer <span class="mono">{{ pointer }}</span>.</p>

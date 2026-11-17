@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [background repetition replay](audio-channel-difference-2026-11-16.md#use-and-reproduce)
+rebuilds 224 stereo deliveries from first-party AMI microphone WAVs. It
+compares the original channels and downmix with a separate channel-difference
+readout and checks the exact endpoints on both source ranges. The offset and
+dual-mono cases expose where the check cannot find a match.
+
 The [short government report comparison](writing-short-intervals-2026-11-16.md#replay-locally)
 recounts a frozen writing-style comparison and a separate public-source
 comparison. The exact source intake preserves corresponding originals,

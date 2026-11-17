@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Repeated background sound under centered speech](audio-channel-difference-2026-11-16.md)
+  adds a source-clocked stereo check to the app. It finds 27 of 32
+  staged copies at each of two centered-speech levels, with zero
+  alerts on 96 ordinary stereo controls. The previous checks find
+  none of these copies. A small channel delay and level difference
+  defeat this check. Evidence includes both original excerpts and
+  a shared waveform with zero AI confidence weight.
+
 - [Short edits in government reports](writing-short-intervals-2026-11-16.md)
   tests sentence-scale selection on 212 labeled locations from 69 held
   reports. The selected writing-style candidate adds three locations

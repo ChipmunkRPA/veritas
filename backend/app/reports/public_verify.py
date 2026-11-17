@@ -437,6 +437,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         groups.append(assets)
     repeat_pcm = {}
     gain_pairs = []
+    channel_difference_pairs = []
     gain_pcm = {}
     for part in parts:
         copy_base = part
@@ -515,6 +516,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             validate_stereo_repeat(stereo_repeat, part['source'])
             for pair in pairs(stereo_repeat):
                 groups.append(pair['artifacts'])
+                if 'first_recorded_clip' in pair['artifacts']:
+                    channel_difference_pairs.append(pair)
                 if 'scaled_occurrence' in pair:
                     gain_pairs.append(pair)
                     for side in ('first', 'second'):
@@ -616,6 +619,16 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             first, second = (gain_pcm[pair['artifacts'][side + '_clip']['sha256']] for side in ('first', 'second'))
             _require(first is not None and second is not None and matches_clips(pair, first, second),
                      'The recorded clips do not match the stated gain relationship')
+    if channel_difference_pairs:
+        from app.evidence.audio_channel_difference import project
+
+        for pair in channel_difference_pairs:
+            for side in ('first', 'second'):
+                digest = pair['artifacts'][side + '_recorded_clip']['sha256']
+                with archive.open(indexed[digest]['file']) as stream, wave.open(stream, 'rb') as audio:
+                    pcm = audio.readframes(pair['sample_count'])
+                _require(len(pcm) == 4 * pair['sample_count'] and hashlib.sha256(project(pcm)).hexdigest() == pair['pcm_s16le_sha256'],
+                         'A recorded stereo excerpt does not reproduce the repeated channel difference')
     expected = {'README.txt', 'reproduce.md', 'bundle.json', 'evidence.json', 'result.json', 'report.pdf',
                 'instance_public_key.pem', 'manifest.sha256', 'manifest.sha256.sig', *(a['file'] for a in entries)}
     original = bundle.get('source')

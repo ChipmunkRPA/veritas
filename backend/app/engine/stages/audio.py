@@ -154,6 +154,7 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     from app.evidence import stereo_listening, stereo_repetition
     from app.evidence.audio_gain_repetition_binding import GAIN_INPUT, GAIN_VERSION
     from app.evidence.audio_short_review import identical_stereo_proof
+    from app.evidence.stereo_repetition_binding import DIFFERENCE_INPUT, DIFFERENCE_VERSION
     from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
 
     source_sha = ctx.outputs["ingest"]["sha256"]
@@ -176,6 +177,8 @@ def decode(ctx: StageContext) -> dict[str, Any]:
             decoded.mapping[STEREO_REPEAT_INPUT] = repeated.sha256
             if settings.environment == "dev" and settings.audio_stereo_gain_repeat_review:
                 decoded.mapping[GAIN_INPUT] = GAIN_VERSION
+            if settings.environment == "dev" and settings.audio_stereo_difference_repeat_review:
+                decoded.mapping[DIFFERENCE_INPUT] = DIFFERENCE_VERSION
         mapping = register_artefact(db, ctx.store, canonical_json(decoded.mapping), media_type="application/json", role="stage_output",
                                    created_by="audio-input/1", analysis_id=ctx.analysis_id)
         binding = {"version": "audio-input/1", "pcm_sha256": decoded.mapping["pcm_sha256"],

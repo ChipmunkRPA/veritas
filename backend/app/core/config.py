@@ -141,6 +141,7 @@ class Settings(BaseSettings):
     offline: bool | None = None
     audio_waveform_repeat_review: bool = False  # development-only repeat evidence, with no voice confidence weight
     audio_stereo_gain_repeat_review: bool = False
+    audio_stereo_difference_repeat_review: bool = False
 
     @model_validator(mode="after")
     def _apply_offline_env(self):

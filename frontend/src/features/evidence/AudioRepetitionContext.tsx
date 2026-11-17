@@ -6,22 +6,26 @@ type Props = {
 }
 
 function RepeatCheck({ set, token, mediaReady, videoOriginS, context, channel }: Props & {
-  context?: ExactContext | AudioSimilarityContext | AudioGainRepetitionContext; channel?: 'left' | 'right'
+  context?: ExactContext | AudioSimilarityContext | AudioGainRepetitionContext; channel?: 'left' | 'right' | 'difference'
 }) {
   if (!context || context.source_sha256 !== set.source.sha256 || (!channel && context.pcm_sha256 !== set.source.pcm_sha256)
     || context.sample_rate !== set.source.sample_rate || context.input_samples !== set.source.samples) return null
   const gain = context.schema === 'chipmunk.audio-gain-repetition/1'
   const similar = !gain && context.schema !== 'chipmunk.audio-exact-repetition/1'
   const waveform = context.schema === 'chipmunk.audio-repeat-similarity/2'
+  const difference = channel === 'difference'
   const method = gain
     ? 'This check compares the recorded channel for exact repeats after a fixed level or polarity change. Mixing new sound into that channel can hide repeats.'
     : waveform
       ? 'The exact and frequency-band searches yielded no reportable pair. A second similarity check compared waveform patterns in the same continuous 2.5–4 second mono input. Background noise can mask repeats.'
       : similar
         ? 'This check compares patterns across frequency bands in continuous 2.5–4 second mono inputs. Background noise can mask repeats.'
-        : channel ? 'This check compares the recorded channel before it is mixed into mono.' : 'This check compares samples in continuous 2.5–4 second mono inputs.'
+        : difference
+          ? 'Subtracting the stereo channels cancels sound recorded identically in both. The match can include off-center speech, music, or background sound.'
+          : channel ? 'This check compares the recorded channel before it is mixed into mono.' : 'This check compares samples in continuous 2.5–4 second mono inputs.'
   const id = channel ? `media-evidence-${channel}-${gain ? 'gain-' : ''}repetition` : similar ? 'media-evidence-similar-audio' : 'media-evidence-repetition'
-  const title = channel ? `${gain ? 'Gain-adjusted' : 'Exact'} repeats in the ${channel} channel`
+  const title = difference ? 'Repeated sound in the stereo difference'
+    : channel ? `${gain ? 'Gain-adjusted' : 'Exact'} repeats in the ${channel} channel`
     : similar ? 'Similar repeated audio' : 'Exact repeated audio'
   return <section id={id} aria-labelledby={`${id}-heading`} className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
     <h3 id={`${id}-heading`} className="m-0 text-body font-medium">{title}</h3>
@@ -37,15 +41,23 @@ function RepeatCheck({ set, token, mediaReady, videoOriginS, context, channel }:
           <h4 className="m-0 text-small font-medium">{pair.id} · {seconds(pair.sample_count / context.sample_rate)} of {gain ? 'samples matched after a gain adjustment' : similar ? 'similar sound' : 'identical samples'}</h4>
           {'scaled_occurrence' in pair && <p className="mt-2 mb-0 text-small">Multiplying the {pair.scaled_occurrence === 'second' ? 'first' : 'second'} occurrence by {pair.gain_numerator}/{pair.gain_denominator} and rounding to recorded precision reproduces the {pair.scaled_occurrence} occurrence. These ranges can include matching silence. The edit boundaries and order are unknown.</p>}
           {pair.artifacts.waveform && <EvidencePicture set={set} token={token} ready={mediaReady} chart
-            artifact={pair.artifacts.waveform} alt={`${pair.id} · Waveform shared by both occurrences`} />}
+            artifact={pair.artifacts.waveform} alt={`${pair.id} · ${difference ? 'Channel difference waveform' : 'Waveform'} shared by both occurrences`} />}
           <div className={`${evidenceGrid} mt-3`}>{(['first', 'second'] as const).map((side) => {
             const span = pair[side]
             const chart = 'scaled_occurrence' in pair ? pair.artifacts[`${side}_waveform`] : undefined
+            const recorded = pair.artifacts[`${side}_recorded_clip`]
+            const occurrence = side === 'first' ? 'First occurrence' : 'Second occurrence'
             return <div key={side}>
               {chart && <EvidencePicture set={set} token={token} ready={mediaReady} chart
                 artifact={chart} alt={`${pair.id} · ${side === 'first' ? 'First' : 'Second'} occurrence waveform`} />}
+              {difference && <p className="mt-2 mb-1 text-caption">Channel difference</p>}
               <EvidenceAudio set={set} artifact={pair.artifacts[`${side}_clip`]} token={token} ready={mediaReady}
-                alt={`${pair.id} · ${side === 'first' ? 'First' : 'Second'} occurrence`} />
+                alt={`${pair.id} · ${occurrence}${difference ? ' in the channel difference' : ''}`} />
+              {recorded && <>
+                <p className="mt-2 mb-1 text-caption">Original stereo recording</p>
+                <EvidenceAudio set={set} artifact={recorded} token={token} ready={mediaReady}
+                  alt={`${pair.id} · ${occurrence} in the original recording`} />
+              </>}
               <p className="mt-2 mb-0 text-caption">Analyzed audio {seconds(span.start_sample / context.sample_rate)}–{seconds(span.end_sample / context.sample_rate)}.</p>
               {span.source_timestamp_ranges.map((range) => {
                 const start = rationalSeconds(range.source_start_pts, range.time_base)
@@ -66,7 +78,11 @@ export default function AudioRepetitionContext(props: Props) {
   const stereo = props.set.stereo_repetition
   return <><RepeatCheck {...props} context={props.set.repetition_context} />
     <RepeatCheck {...props} context={props.set.similarity_context} />
-    {stereo?.schema === 'chipmunk.stereo-exact-repetition/1' && stereo.source_sha256 === props.set.source.sha256
-      && stereo.channels.map(row => <div key={row.channel}><RepeatCheck {...props} context={row.measurement} channel={row.channel} />
-        <RepeatCheck {...props} context={row.gain_measurement} channel={row.channel} /></div>)}</>
+    {(stereo?.schema === 'chipmunk.stereo-exact-repetition/1' || stereo?.schema === 'chipmunk.stereo-exact-repetition/2')
+      && stereo.source_sha256 === props.set.source.sha256 && <>
+      {stereo.channels.map(row => <div key={row.channel}><RepeatCheck {...props} context={row.measurement} channel={row.channel} />
+        <RepeatCheck {...props} context={row.gain_measurement} channel={row.channel} /></div>)}
+      {stereo.schema === 'chipmunk.stereo-exact-repetition/2'
+        && <RepeatCheck {...props} context={stereo.difference_measurement} channel="difference" />}
+    </>}</>
 }

@@ -3,14 +3,25 @@
 from __future__ import annotations
 
 import hashlib
+import io
+import wave
 from copy import deepcopy
 
 import numpy as np
 
 from app.detectors.audio.decode import source_ranges, wav_bytes
+from app.evidence import audio_channel_difference as difference
 from app.evidence import audio_exact_repetition, audio_repetition
 from app.evidence import audio_gain_repetition_binding as gain
-from app.evidence.stereo_repetition_binding import CHANNELS, KEY, SCHEMA, validate
+from app.evidence.stereo_repetition_binding import (
+    CHANNELS,
+    DIFFERENCE_KEY,
+    DIFFERENCE_SCHEMA,
+    DIFFERENCE_VERSION,
+    KEY,
+    SCHEMA,
+    validate,
+)
 from app.storage.artefacts import register_artefact
 from app.storage.objects import ObjectIntegrityError
 
@@ -63,44 +74,71 @@ def _build_gain(values, source, mapping, channel, pcm_sha256, asset):
             "status": result.status, "reason": result.reason, "pairs": pairs}
 
 
-def build(data, source, mapping, asset, *, gain_version=None):
+def _build_exact(values, source, mapping, asset, prefix, title):
     from app.evidence.audio_packets import _chart
 
+    pcm = values.astype("<f4") / np.float32(32768)
+    binding = {**source, "pcm_sha256": hashlib.sha256(pcm.tobytes()).hexdigest()}
+    measurement = audio_repetition.build(pcm, mapping, binding, asset)
+    for pair in measurement["pairs"]:
+        pair["id"] = prefix + pair["id"]
+        first = pair["first"]
+        excerpt = pcm[first["start_sample"]:first["end_sample"]]
+        pair["artifacts"]["waveform"] = asset(
+            _chart(excerpt, [], start=0, end=len(excerpt), selected=None, scores=False,
+                   title=f"{title} | Time within excerpt"),
+            "image/png", width=960, height=280,
+        )
+    return measurement
+
+
+def _stereo_wav(data):
+    output = io.BytesIO()
+    with wave.open(output, "wb") as audio:
+        audio.setparams((2, 2, audio_exact_repetition.SAMPLE_RATE, 0, "NONE", "not compressed"))
+        audio.writeframes(data)
+    return output.getvalue()
+
+
+def build(data, source, mapping, asset, *, gain_version=None, difference_version=None):
     if len(data) != 4 * source["samples"]:
         raise ValueError("Stereo samples do not cover the complete recorded clock")
     if source_ranges(mapping, 0, source["samples"]) != source_ranges(source, 0, source["samples"]):
         raise ValueError("Stereo repetition source clocks differ")
+    if difference_version not in (None, DIFFERENCE_VERSION):
+        raise ValueError("Unknown stereo repetition difference method")
     channels = np.frombuffer(data, dtype="<i2").reshape(-1, 2)
     rows = []
     for channel, values in zip(CHANNELS, channels.T, strict=True):
-        pcm = values.astype("<f4") / np.float32(32768)
-        binding = {**source, "pcm_sha256": hashlib.sha256(pcm.tobytes()).hexdigest()}
-        measurement = audio_repetition.build(pcm, mapping, binding, asset)
-        for pair in measurement["pairs"]:
-            pair["id"] = channel[0].upper() + pair["id"]
-            first = pair["first"]
-            excerpt = pcm[first["start_sample"]:first["end_sample"]]
-            pair["artifacts"]["waveform"] = asset(
-                _chart(excerpt, [], start=0, end=len(excerpt), selected=None, scores=False,
-                       title=f"Recorded {channel} channel waveform | Time within excerpt"),
-                "image/png", width=960, height=280,
-            )
+        measurement = _build_exact(values, source, mapping, asset, channel[0].upper(), f"Recorded {channel} channel waveform")
         row = {"channel": channel, "measurement": measurement}
         if gain_version == gain.GAIN_VERSION:
-            row["gain_measurement"] = _build_gain(values, source, mapping, channel, binding["pcm_sha256"], asset)
+            row["gain_measurement"] = _build_gain(values, source, mapping, channel, measurement["pcm_sha256"], asset)
         rows.append(row)
     record = {"schema": SCHEMA, "source_sha256": source["sha256"], "affects_overall_confidence": False,
               "stereo_pcm_sha256": hashlib.sha256(data).hexdigest(), "channels": rows}
+    if difference_version == DIFFERENCE_VERSION:
+        values = np.frombuffer(difference.project(data), dtype="<i2")
+        measurement = _build_exact(values, source, mapping, asset, "D", "Channel difference waveform")
+        for pair in measurement["pairs"]:
+            for side in ("first", "second"):
+                span = pair[side]
+                original = _stereo_wav(data[4 * span["start_sample"]:4 * span["end_sample"]])
+                pair["artifacts"][f"{side}_recorded_clip"] = asset(original, "audio/wav", samples=pair["sample_count"],
+                                                                   sample_rate=audio_exact_repetition.SAMPLE_RATE, channels=2)
+        record.update(schema=DIFFERENCE_SCHEMA, difference_projection=difference.PROJECTION)
+        record[DIFFERENCE_KEY] = measurement
     validate(record, source)
     return record
 
 
-def build_from_store(store, digest, source, mapping, asset, *, gain_version=None):
+def build_from_store(store, digest, source, mapping, asset, *, gain_version=None, difference_version=None):
     store.verify(digest)
-    return build(store.read_bytes(digest), source, mapping, asset, gain_version=gain_version)
+    return build(store.read_bytes(digest), source, mapping, asset, gain_version=gain_version,
+                 difference_version=difference_version)
 
 
-def verify(record, data, source, mapping, read_asset, *, gain_version=None):
+def verify(record, data, source, mapping, read_asset, *, gain_version=None, difference_version=None):
     def checked(data, media_type, **metadata):
         digest = hashlib.sha256(data).hexdigest()
         if read_asset(digest) != data:
@@ -114,11 +152,11 @@ def verify(record, data, source, mapping, read_asset, *, gain_version=None):
     for pair in pairs(published):
         for asset in pair["artifacts"].values():
             asset.pop("url", None)
-    if build(data, source, mapping, checked, gain_version=gain_version) != published:
+    if build(data, source, mapping, checked, gain_version=gain_version, difference_version=difference_version) != published:
         raise ValueError("Stereo repetition differs from the recorded channels")
 
 
-def verify_frozen(store, document, mapping, digest, read_asset, *, gain_version=None):
+def verify_frozen(store, document, mapping, digest, read_asset, *, gain_version=None, difference_version=None):
     record = document.get(KEY)
     if (digest is None) != (record is None):
         raise ObjectIntegrityError("Stereo repetition availability differs from the frozen audio input")
@@ -127,6 +165,7 @@ def verify_frozen(store, document, mapping, digest, read_asset, *, gain_version=
             raise ObjectIntegrityError("Stereo repetition commits to different recorded channels")
         store.verify(digest)
         try:
-            verify(record, store.read_bytes(digest), document["source"], mapping, read_asset, gain_version=gain_version)
+            verify(record, store.read_bytes(digest), document["source"], mapping, read_asset, gain_version=gain_version,
+                   difference_version=difference_version)
         except (KeyError, ValueError) as error:
             raise ObjectIntegrityError("Stereo repetition differs from its frozen channels") from error

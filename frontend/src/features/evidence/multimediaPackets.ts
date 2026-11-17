@@ -181,7 +181,8 @@ interface StereoListeningContext {
 type AudioRepeatSpan = SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] }
 interface AudioRepeatPair {
   id: string; first: AudioRepeatSpan; second: AudioRepeatSpan; sample_count: number; lag_samples: number
-  artifacts: Record<'first_clip' | 'second_clip', EvidenceAsset> & { waveform?: EvidenceAsset }
+  artifacts: Record<'first_clip' | 'second_clip', EvidenceAsset>
+    & Partial<Record<'waveform' | 'first_recorded_clip' | 'second_recorded_clip', EvidenceAsset>>
 }
 interface AudioRepeatRecord {
   status: 'measured' | 'unavailable' | 'ambiguous'; reason: string | null
@@ -191,13 +192,16 @@ export interface AudioRepetitionContext extends AudioRepeatRecord {
   schema: 'chipmunk.audio-exact-repetition/1'; pairs: (AudioRepeatPair & { pcm_s16le_sha256: string })[]
 }
 interface StereoRepetitionContext {
-  schema: 'chipmunk.stereo-exact-repetition/1'; source_sha256: string; affects_overall_confidence: false
+  schema: 'chipmunk.stereo-exact-repetition/1' | 'chipmunk.stereo-exact-repetition/2'
+  source_sha256: string; affects_overall_confidence: false
   channels: { channel: 'left' | 'right'; measurement: AudioRepetitionContext; gain_measurement?: AudioGainRepetitionContext }[]
+  difference_measurement?: AudioRepetitionContext
 }
 export function repeatedAudioCount(audio?: AudioEvidenceSet | VideoAudioChannel | null) {
   return (audio?.repetition_context?.pairs.length ?? 0) + (audio?.similarity_context?.pairs.length ?? 0)
     + (audio?.stereo_repetition?.channels.reduce((count, row) => count + row.measurement.pairs.length
       + (row.gain_measurement?.pairs.length ?? 0), 0) ?? 0)
+    + (audio?.stereo_repetition?.difference_measurement?.pairs.length ?? 0)
 }
 export interface AudioGainRepetitionContext extends Omit<AudioRepeatRecord, 'searched_interval'> {
   schema: 'chipmunk.audio-gain-repetition/1'

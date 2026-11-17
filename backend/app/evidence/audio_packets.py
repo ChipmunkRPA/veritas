@@ -556,6 +556,7 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
     )
     from app.evidence.audio_gain_repetition_binding import GAIN_INPUT
     from app.evidence.stereo_repetition import build_from_store
+    from app.evidence.stereo_repetition_binding import DIFFERENCE_INPUT
     from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
 
     if digest := binding.get(STEREO_REPEAT_INPUT) or mapping.get(STEREO_REPEAT_INPUT):
@@ -563,6 +564,7 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
             store, digest, document["source"], mapping,
             lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
             gain_version=binding.get(GAIN_INPUT) or mapping.get(GAIN_INPUT),
+            difference_version=binding.get(DIFFERENCE_INPUT) or mapping.get(DIFFERENCE_INPUT),
         )
     document["similarity_context"] = build_similarity(
         pcm, mapping, document["source"],
@@ -599,11 +601,12 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
         stereo_listening.verify(store, document, listening_digest, read_wav(_verified(store, document["source"]["wav_sha256"])))
     from app.evidence import stereo_repetition
     from app.evidence.audio_gain_repetition_binding import GAIN_INPUT
+    from app.evidence.stereo_repetition_binding import DIFFERENCE_INPUT
     from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
 
     if mapping.get(STEREO_REPEAT_INPUT) or "stereo_repetition" in document:
         stereo_repetition.verify_frozen(store, document, mapping, mapping.get(STEREO_REPEAT_INPUT), store.read_bytes,
-                                       gain_version=mapping.get(GAIN_INPUT))
+                                       gain_version=mapping.get(GAIN_INPUT), difference_version=mapping.get(DIFFERENCE_INPUT))
     return document
 
 

@@ -189,19 +189,23 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if repeated is not None:
         from app.evidence.audio_gain_repetition_binding import GAIN_VERSION
         from app.evidence.stereo_repetition import native_pcm, verify
-        from app.evidence.stereo_repetition_binding import pairs
+        from app.evidence.stereo_repetition_binding import DIFFERENCE_SCHEMA, DIFFERENCE_VERSION, pairs
 
         if (data := native_pcm(decoded)) is None:
             raise ValueError("The original does not yield aligned native stereo samples for the repeat check")
         paths = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"]}
         gain_version = GAIN_VERSION if 'gain_measurement' in repeated['channels'][0] else None
-        verify(repeated, data, source, decoded.mapping, lambda digest: archive.read(paths[digest]), gain_version=gain_version)
+        difference_version = DIFFERENCE_VERSION if repeated["schema"] == DIFFERENCE_SCHEMA else None
+        verify(repeated, data, source, decoded.mapping, lambda digest: archive.read(paths[digest]),
+               gain_version=gain_version, difference_version=difference_version)
         for pair in pairs(repeated):
-            covered.update(pair["artifacts"][f"{side}_clip"]["sha256"] for side in ("first", "second"))
+            covered.update(asset["sha256"] for asset in pair["artifacts"].values() if asset["media_type"] == "audio/wav")
             intervals += 2
         replay_detail += " Recomputed the exact repeat search on both recorded stereo channels."
         if gain_version is not None:
             replay_detail += " Recomputed gain-adjusted repeats on both recorded stereo channels."
+        if difference_version is not None:
+            replay_detail += " Recomputed the stereo channel difference and verified its repeats against both recorded excerpts."
     if (review := audio.get("background_reduced_voice_review")) is not None:
         from app.detectors.audio.decode import read_wav
         from app.evidence.audio_background_review_binding import SPAN

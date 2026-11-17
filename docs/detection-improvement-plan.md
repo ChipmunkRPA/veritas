@@ -151,9 +151,10 @@ are not public screening promises or calibrated population probabilities.
   raises correct JPEG90 regions from 4 to 11 of 24 and from 10 to 16 of 24
   on two separate source panels. It highlights five more ordinary blur
   controls across the two panels and zero of 30 camera-derived crop and
-  contrast controls in a separate test. The local app presents the original
-  pixels, rectangle and support measurements as compression history with
-  zero AI-score weight.
+  contrast controls in a separate test. The check also accepts complete
+  progressive JPEGs and EXIF orientations on the same quality-90 profile.
+  The local app presents the original pixels, rectangle and support
+  measurements as compression history with zero AI-score weight.
 
 - [Earlier wording in two-column PDFs](writing-pdf-columns-2026-11-17.md)
   localizes 174 of 216 known rewrite deliveries on 36 fresh report pairs

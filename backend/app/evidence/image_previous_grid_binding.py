@@ -10,9 +10,13 @@ from app.core.canonical import canonical_hash
 
 KEY = "jpeg_prior_grid_review"
 COMMITMENT = "jpeg_prior_grid_review_sha256"
-SCHEMA = "image-jpeg-prior-grid/1"
+LEGACY_SCHEMA = "image-jpeg-prior-grid/1"
+SCHEMA = "image-jpeg-prior-grid/2"
 TITLE = "Local JPEG compression history"
-SCOPE = "This check compares an earlier JPEG grid across supported upright JPEG images."
+SCOPES = {
+    LEGACY_SCHEMA: "This check compares an earlier JPEG grid across supported upright JPEG images.",
+    SCHEMA: "The grid is measured in the JPEG's stored pixel order. The outline follows the displayed image orientation.",
+}
 LIMITATION = "Blur, retouching, and other ordinary edits can change the grid. This observation carries zero AI confidence weight."
 STATUS_TEXT = {
     "matched": "The highlighted area retains less of the earlier JPEG block pattern than the surrounding image.",
@@ -44,6 +48,19 @@ def earlier_region(exhibits):
                for item in exhibits)
 
 
+def orient_region(region, orientation, width, height):
+    """Map a half-open rectangle between the stored and displayed pixel grids."""
+    left, top, right, bottom = region
+    if orientation in (5, 6, 7, 8):
+        left, top, right, bottom = top, left, bottom, right
+        width, height = height, width
+    if orientation in (2, 3, 6, 7):
+        left, right = width - right, width - left
+    if orientation in (3, 4, 7, 8):
+        top, bottom = height - bottom, height - top
+    return [left, top, right, bottom]
+
+
 def _numbers(value, size, lo, hi):
     return (isinstance(value, list) and len(value) == size
             and all(type(number) in {int, float} and math.isfinite(number) and lo <= number <= hi for number in value))
@@ -51,8 +68,11 @@ def _numbers(value, size, lo, hi):
 
 def _validate_reading(record, source, pictures):
     width, height = source["width"], source["height"]
+    orientation = source.get("exif_orientation")
+    orientations = (1,) if record["schema"] == LEGACY_SCHEMA else range(1, 9)
     status, measurement, region = (record[key] for key in ("status", "measurement", "region"))
-    if status in _ASSESSABLE and (source.get("exif_orientation") != 1 or min(width, height) < 320 or width * height > 1_048_576):
+    if status in _ASSESSABLE and (type(orientation) is not int or orientation not in orientations
+                                 or min(width, height) < 320 or width * height > 1_048_576):
         raise ValueError("The JPEG compression reading uses an unsupported source geometry")
     if status not in {"matched", "no_region"}:
         if measurement is not None or region is not None or pictures:
@@ -74,8 +94,10 @@ def _validate_reading(record, source, pictures):
         raise ValueError("Invalid JPEG region measurements")
     x, y, right, bottom = region
     size = right - x, bottom - y
+    inverse = {6: 8, 8: 6}.get(orientation, orientation)
+    stored_x, stored_y, _, _ = orient_region(region, inverse, width, height)
     if (not 0 <= x < right <= width or not 0 <= y < bottom <= height
-            or x % 16 != offset[0] or y % 16 != offset[1]
+            or stored_x % 16 != offset[0] or stored_y % 16 != offset[1]
             or any(n not in {32, 48, 64, 80, 96, 128, 160} for n in size)):
         raise ValueError("The JPEG region does not follow its measured pixel grid")
     inside, outside = measurement["inside_support"], measurement["surrounding_support"]
@@ -108,10 +130,10 @@ def validate(document, commitment, *, stopped=None):
             or set(record) != {"schema", "source_sha256", "affects_overall_confidence", "status", "observation",
                               "scope", "limitation", "basis", "measurement", "region"}
             or canonical_hash(record) != commitment or source.get(COMMITMENT) != commitment
-            or record["schema"] != SCHEMA or record["source_sha256"] != source["sha256"]
+            or record["schema"] not in SCOPES or record["source_sha256"] != source["sha256"]
             or record["affects_overall_confidence"] is not False
             or record["observation"] != STATUS_TEXT.get(status) or status not in STATUS_TEXT
-            or record["scope"] != SCOPE or record["limitation"] != LIMITATION
+            or record["scope"] != SCOPES[record["schema"]] or record["limitation"] != LIMITATION
             or record["basis"] != (BASIS if status == "matched" else None)
             or (stopped is not None and (status == "provenance") != stopped)):
         raise ValueError("JPEG compression history differs from its source commitment")

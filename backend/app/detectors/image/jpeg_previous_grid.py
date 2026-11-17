@@ -59,10 +59,11 @@ def _bases():
 
 
 def read_luma(data):
+    """Read the stored JPEG raster without applying its display orientation."""
     with Image.open(io.BytesIO(data)) as image:
         w, h = image.size
         if (image.format != "JPEG" or image.mode not in {"RGB", "L"} or image.bits != 8
-                or min(w, h) < 320 or w * h > 1_048_576 or int(image.getexif().get(274, 1)) != 1
+                or min(w, h) < 320 or w * h > 1_048_576
                 or (image.mode == "RGB" and tuple(layer[0] for layer in image.layer) != (1, 2, 3))):
             return None
         final = np.asarray(image.quantization[image.layer[0][3]], dtype=np.float64).reshape(8, 8)

@@ -92,8 +92,9 @@ from the retained JPEGs produced no qualifying earlier grid.
 ## Local analysis
 
 In development, `VERITAS_IMAGE_JPEG_PRIOR_GRID_REVIEW=true` enables the
-check in Full and Deep image analyses. It uses the tested upright baseline
-4:2:0 JPEG profile at quality 90. It can report a region when the aligned
+check in Full and Deep image analyses. It accepts the tested quality-90
+4:2:0 tables in baseline JPEGs and in complete progressive JPEGs with
+fixed quantization tables. It can report a region when the aligned
 JPEG and regional image checks complete without selecting one. Verified
 AI credentials stop the analysis before this comparison.
 
@@ -115,6 +116,37 @@ paired replay. The queue held zero jobs before payment. The browser, PDF,
 JSON and signed-source comparisons reproduced the native coordinates on
 representative cases.
 [Local checkout and browser receipt](evaluation-panels/image-previous-grid-app-2026-11-17.json)
+
+### Progressive JPEGs and EXIF orientation
+
+The detector measures the JPEG block grid in the stored raster. The app
+maps the region to the image as displayed, including the eight supported
+EXIF orientations. JSON keeps the grid offset in stored order and the
+rectangle in displayed coordinates. Earlier signed reports still verify
+under the file eligibility rules used when they were made.
+[Pillow orientation mapping](https://pillow.readthedocs.io/en/stable/reference/ImageOps.html#PIL.ImageOps.exif_transpose)
+
+The format transfer used all 108 quality-90 reserve inputs and 30
+camera-derived controls. Each input was delivered three ways with a
+lossless progressive scan conversion, an EXIF orientation tag, and both.
+The tags cycle through orientations 2–8. All 414 deliveries preserved the
+stored luminance, quantization tables, measured status and scalar readings.
+All selected rectangles enclosed the same pixels in the new orientation.
+Seven staged edits and two deliberate blurs yielded a region per delivery
+variant when this check was run by itself. The 30 camera-derived controls
+yielded no regions in any of the three variants. These results measure
+format handling on the previously evaluated sources.
+[libjpeg-turbo conversion tool](https://github.com/libjpeg-turbo/libjpeg-turbo/blob/main/doc/usage.txt) ·
+[Format transfer measurements](evaluation-panels/image-previous-grid-deliveries-2026-11-17.json.gz)
+
+Seven simulated $9.99 checkouts exercised the normal local worker. One
+staged edit was submitted as progressive, rotated baseline, and rotated
+progressive JPEGs. The browser, PDF, JSON and signed-source replay agreed
+on the highlighted rectangle and the crop in each delivery. An ordinary
+progressive rotation produced no highlight. The quality-75 control was
+outside the comparison profile. The queue held zero jobs before payment,
+and the on/off pair returned the same automated assessment.
+[Local delivery replay](evaluation-panels/image-previous-grid-deliveries-app-2026-11-17.json)
 
 ## Independent replay
 

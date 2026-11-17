@@ -42,7 +42,7 @@ def cases(panel):
 
 def exported_evidence(client, route, name, path, evidence, check, signer, output):
     import pymupdf
-    from PIL import Image
+    from PIL import Image, ImageOps
 
     from app.evidence import image_previous_grid_binding as binding
     from app.reports.verify import verify_package
@@ -70,7 +70,8 @@ def exported_evidence(client, route, name, path, evidence, check, signer, output
                         assert (image.width, image.height, digest(image.tobytes())) in embedded
                         if role == "crop":
                             with Image.open(path) as source:
-                                assert image.tobytes() == source.convert("RGB").crop(tuple(region)).tobytes()
+                                original = ImageOps.exif_transpose(source).convert("RGB")
+                                assert image.tobytes() == original.crop(tuple(region)).tobytes()
     (output / f"{name}.pdf").write_bytes(pdf)
     package = body(client.post(f"{route}/packages", json={"report_id": report_id, "kind": "draft", "include_original": False}))
     package_id = wait(client, f"/api/v2/packages/{package['id']}")["id"]

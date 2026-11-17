@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [whole-word replay](video-word-content-2026-11-17.md#reproduce) checks
+the same scripted digit substitution under PCM and AAC delivery. It
+separates correct word and time evidence from a misplaced range or a
+wrong word reading. The source plan, selection and held counts support
+replay without including face crops or audio features.
+
 The [Motion Photo replay](image-motion-photo-2026-11-17.md#local-app-use-and-replay)
 checks 18 attribution- and checksum-pinned public camera files. It verifies
 which contain comparable still and video data and measures the location of

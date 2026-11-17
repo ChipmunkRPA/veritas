@@ -1,0 +1,99 @@
+# SPDX-License-Identifier: Apache-2.0
+"""Rebuild the held native videos and verify the whole-word evidence clocks."""
+
+from __future__ import annotations
+
+import argparse
+import gzip
+import json
+from collections import Counter
+from hashlib import sha256
+from pathlib import Path
+
+from app.bench.video_word_content import ARMS, CARRIERS, MATCH, ROLES, overlap, read, review
+from app.detectors.video.decode import decode_frames, probe_frames
+from scripts import export_video_lip_correspondence as export
+from scripts import export_video_lip_sequence as delivery
+
+
+def frames(path, chosen):
+    table = probe_frames(path, cap=120, timeout_s=12, max_pixels=1280 * 720)
+    start, end = chosen
+    indices = [max(0, start - 1), (start + end - 1) // 2, min(len(table) - 1, end)]
+    source = list(decode_frames(path, table, indices, timeout_s=12, max_pixels=1280 * 720))
+    if [picture.index for picture in source] != indices or not all(
+        picture.pts_verified for picture in source
+    ):
+        raise ValueError("The submitted video did not reproduce the selected picture evidence")
+    return [
+        {"frame": item.index, "pts": item.pts, "rgb_sha256": sha256(item.rgb.tobytes()).hexdigest()}
+        for item in source
+    ]
+
+
+def run(plan, frozen, measured, sources, output):
+    review(measured, frozen)
+    captured = read(measured)
+    selected = read(plan)["rows"]
+    if sha256(plan.read_bytes()).hexdigest() != captured["source"]:
+        raise ValueError("The native replay must use the held source plan")
+    cases = {}
+    for source in captured["rows"]:
+        picture = source["source_sha256"]
+        for codec in CARRIERS:
+            for role in ROLES:
+                row = source["cases"][codec][role]
+                cases[picture, codec, role] = {
+                    "picture_sha256": picture,
+                    "carrier": codec,
+                    "role": role,
+                    "pts": source["source_clock"]["pts"],
+                    "time_base": source["source_clock"]["time_base"],
+                    "truth": source["truth"],
+                    "source_pcm_sha256": row["sha256"],
+                    "carrier_sha256": row["encoded_sha256"],
+                    "visual_digit": source["expected_visual"],
+                    "audible_digit": source["expected_audible"],
+                    **row,
+                }
+    output.mkdir(mode=0o700)
+    entries, correct = [], Counter()
+    for path, original, times, row in delivery._readbacks(selected, cases, sources, output):
+        record = {"file": path.name, "file_sha256": sha256(path.read_bytes()).hexdigest(), "references": {}}
+        mouth, speech = row["mouth"], row["speech"]
+        for arm in ARMS:
+            if mouth is None or mouth[arm] <= captured["points"][arm][row["carrier"]]:
+                continue
+            found = export.frame_range(speech["span"], times)
+            truth = export.frame_range(row["truth"], times) if row["role"] == "different_words" else None
+            recognized = (
+                speech["digit"] == row["audible_digit"] and mouth["visible_digit"] == row["visual_digit"]
+            )
+            hit = truth is not None and recognized and overlap(found, truth) >= MATCH
+            correct[f"{row['carrier']}/{arm}"] += bool(hit)
+            record["references"][arm] = {
+                "frames_half_open": found,
+                "truth_frames_half_open": truth,
+                "correct": hit,
+            }
+        if record["references"]:
+            record["before_during_after"] = frames(path, found)
+        entries.append(record)
+    result = {
+        "schema": "chipmunk.video-word-content-native/1",
+        "held_receipt_sha256": sha256(measured.read_bytes()).hexdigest(),
+        "verified_videos": len(entries),
+        "rechecked_sources": len(selected),
+        "correct_on_frame_grid": dict(correct),
+        "deliveries": entries,
+    }
+    raw = (json.dumps(result, sort_keys=True, indent=1) + "\n").encode()
+    (output / "native.json.gz").write_bytes(gzip.compress(raw, mtime=0))
+    print(json.dumps({key: value for key, value in result.items() if key != "deliveries"}, sort_keys=True))
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    for name in ("plan", "frozen", "measured", "sources", "output"):
+        parser.add_argument(name, type=Path)
+    run(**vars(parser.parse_args()))

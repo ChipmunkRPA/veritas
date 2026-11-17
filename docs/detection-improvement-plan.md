@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Whole-word sound and mouth comparison](video-word-content-2026-11-17.md)
+  locates two of 24 fresh, duration-matched digit substitutions in each
+  carrier, from zero with the current timing check. The stricter arm
+  adds one correct location with zero added untouched or gain flags.
+  Both arms have limited joint coverage and stay in evaluation.
+
 - [Still and video in one JPEG Motion Photo](image-motion-photo-2026-11-17.md)
   locates 21 of 24 staged changes in a held panel. It highlights none of
   the 31 assessed ordinary deliveries out of 36. The app presents the

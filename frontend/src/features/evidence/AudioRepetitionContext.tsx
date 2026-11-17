@@ -11,11 +11,12 @@ function RepeatCheck({ set, token, mediaReady, videoOriginS, context, channel }:
 }) {
   if (!context || context.source_sha256 !== set.source.sha256
     || (!channel && context.pcm_sha256 !== set.source.pcm_sha256)) return null
-  const nativeAligned = context.schema === 'chipmunk.aligned-stereo-repetition/2'
+  const aac = context.schema === 'chipmunk.aligned-stereo-repetition/3'
+  const nativeAligned = aac || context.schema === 'chipmunk.aligned-stereo-repetition/2'
   const { sample_rate: decodedRate, samples: decodedSamples } = set.source
   if (!decodedRate || !decodedSamples) return null
   const sampleRate = nativeAligned ? 48000 : decodedRate
-  const sampleCount = decodedSamples * sampleRate / decodedRate
+  const sampleCount = aac ? set.source.source_duration_pts : decodedSamples * sampleRate / decodedRate
   if (context.sample_rate !== sampleRate || context.input_samples !== sampleCount
     || (nativeAligned && set.source.source_sample_rate !== sampleRate)) return null
   const gain = context.schema === 'chipmunk.audio-gain-repetition/1'
@@ -43,7 +44,8 @@ function RepeatCheck({ set, token, mediaReady, videoOriginS, context, channel }:
     <h3 id={`${id}-heading`} className="m-0 text-body font-medium">{title}</h3>
     <p className="mt-2 mb-0 text-small text-text-muted">{method} Loops, recurring alerts, and editing can all repeat audio. Matches carry no AI confidence weight.</p>
     {nativeAligned && <p className="mt-2 mb-0 text-caption text-text-muted">
-      Times and excerpts use the original 48 kHz stereo recording. Each waveform uses its own peak scale for visibility.
+      {aac ? 'This comparison uses lower frequency bands of the presented 48 kHz stereo audio. The waveforms show those bands.'
+        : 'Times and excerpts use the original 48 kHz stereo recording.'} Each waveform uses its own peak scale for visibility.
     </p>}
     {aligned && context.searched_interval && context.alignment && <p className="mt-2 mb-0 text-caption text-text-muted">
       Compared {seconds(context.searched_interval.start_sample / context.sample_rate)}–{seconds(context.searched_interval.end_sample / context.sample_rate)} of analyzed audio.

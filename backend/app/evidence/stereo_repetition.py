@@ -15,6 +15,8 @@ from app.evidence import audio_channel_difference as difference
 from app.evidence import audio_exact_repetition, audio_repetition
 from app.evidence import audio_gain_repetition_binding as gain
 from app.evidence.stereo_repetition_binding import (
+    AAC_ALIGNED_SCHEMA,
+    AAC_ALIGNED_VERSION,
     ALIGNED_KEY,
     ALIGNED_SCHEMA,
     ALIGNED_VERSION,
@@ -22,11 +24,12 @@ from app.evidence.stereo_repetition_binding import (
     DIFFERENCE_INPUT,
     DIFFERENCE_KEY,
     DIFFERENCE_SCHEMA,
-    DIFFERENCE_VERSION,
+    DIFFERENCE_VERSIONS,
     INPUT,
     KEY,
     NATIVE_ALIGNED_SCHEMA,
-    NATIVE_ALIGNED_VERSION,
+    NATIVE_SCHEMAS,
+    NATIVE_VERSIONS,
     SCHEMA,
     validate,
 )
@@ -51,9 +54,13 @@ def freeze(db, store, analysis_id, decoded, *, native_source=None):
 
     pcm = native_pcm(decoded)
     schema = SCHEMA
-    if pcm is None and native_source is not None and settings.environment == "dev" and settings.audio_stereo_native_repeat_review:
-        pcm = decode_native_stereo(native_source, decoded.mapping)
-        schema = NATIVE_ALIGNED_SCHEMA
+    if pcm is None and native_source is not None and settings.environment == "dev":
+        if decoded.mapping.get("source_codec") == "aac" and settings.audio_stereo_aac_repeat_review:
+            pcm = decode_native_stereo(native_source, decoded.mapping, aac=True)
+            schema = AAC_ALIGNED_SCHEMA
+        elif settings.audio_stereo_native_repeat_review:
+            pcm = decode_native_stereo(native_source, decoded.mapping)
+            schema = NATIVE_ALIGNED_SCHEMA
     if pcm is None:
         return None
     return register_artefact(db, store, pcm, media_type="application/octet-stream", role="stage_output",
@@ -64,8 +71,8 @@ def input_binding(artefact):
     from app.core.config import settings
 
     result = {INPUT: artefact.sha256}
-    if artefact.created_by == NATIVE_ALIGNED_SCHEMA:
-        return result | {DIFFERENCE_INPUT: NATIVE_ALIGNED_VERSION}
+    if artefact.created_by in NATIVE_SCHEMAS:
+        return result | {DIFFERENCE_INPUT: DIFFERENCE_VERSIONS[artefact.created_by]}
     if settings.environment == "dev" and settings.audio_stereo_gain_repeat_review:
         result[gain.GAIN_INPUT] = gain.GAIN_VERSION
     if (version := settings.stereo_difference_version) is not None:
@@ -128,18 +135,24 @@ def _pcm_wav(data, *, rate=audio_exact_repetition.SAMPLE_RATE, channels=2):
     return output.getvalue()
 
 
-def _build_aligned(data, channels, source, mapping, asset, *, exact_found, native=False):
+def _build_aligned(data, channels, source, mapping, asset, *, exact_found, schema=alignment.SCHEMA):
     from app.evidence import audio_channel_alignment
     from app.evidence.audio_packets import _chart
 
+    native = schema != alignment.SCHEMA
+    aac = schema == alignment.AAC_SCHEMA
     factor = alignment.NATIVE_FACTOR if native else 1
     rate = alignment.SAMPLE_RATE * factor
-    status = {"schema": alignment.NATIVE_SCHEMA if native else alignment.SCHEMA, "source_sha256": source["sha256"],
+    status = {"schema": schema, "source_sha256": source["sha256"],
               "sample_rate": rate, "input_samples": len(channels), "projection": alignment.PROJECTION,
               "alignment": None, "pcm_sha256": None, "searched_interval": None, "pairs": []}
     if exact_found:
         return status | {"status": "skipped", "reason": "exact_channel_difference_found"}
-    if native:
+    if aac:
+        from app.evidence import audio_aac_alignment
+
+        fitted, reason, spans = audio_aac_alignment.search(channels)
+    elif native:
         from app.evidence import audio_native_alignment
 
         fitted, reason, spans = audio_native_alignment.search(channels)
@@ -154,6 +167,16 @@ def _build_aligned(data, channels, source, mapping, asset, *, exact_found, nativ
     values = audio_channel_alignment.projection(channels, fitted)
     status.update(searched_interval={"start_sample": low, "end_sample": high},
                   pcm_sha256=hashlib.sha256(values.tobytes()).hexdigest())
+    plotted = values[::factor]
+    title = "Sound after stereo alignment"
+    if aac and spans:
+        from scipy.signal import sosfiltfilt
+
+        from app.evidence.audio_native_alignment import narrowband
+
+        downsampled = narrowband(values)[::factor]
+        plotted = np.sum([sosfiltfilt(filt, downsampled) for filt in audio_aac_alignment.FILTERS], axis=0)
+        title = "Sound in the compared frequency bands"
 
     def span_record(start, end, payload):
         if native:
@@ -180,9 +203,10 @@ def _build_aligned(data, channels, source, mapping, asset, *, exact_found, nativ
             clip = _pcm_wav(selected, rate=rate, channels=1) if native else wav_bytes(pcm)
             pair["artifacts"][f"{side}_clip"] = asset(
                 clip, "audio/wav", samples=count, sample_rate=rate, channels=1)
+            graph = plotted[start // factor:end // factor].astype("<f4") / np.float32(32768)
             pair["artifacts"][f"{side}_waveform"] = asset(
-                _chart(pcm, [], start=0, end=len(pcm), selected=None, scores=False,
-                       title=f"Sound after stereo alignment | {side.capitalize()} occurrence", peak_scaled=native),
+                _chart(graph, [], start=0, end=len(graph), selected=None, scores=False,
+                       title=f"{title} | {side.capitalize()} occurrence", peak_scaled=native),
                 "image/png", width=960, height=280,
             )
         status["pairs"].append(pair)
@@ -190,19 +214,23 @@ def _build_aligned(data, channels, source, mapping, asset, *, exact_found, nativ
 
 
 def build(data, source, mapping, asset, *, gain_version=None, difference_version=None):
-    native = difference_version == NATIVE_ALIGNED_VERSION
+    native = difference_version in NATIVE_VERSIONS
+    aac = difference_version == AAC_ALIGNED_VERSION
     factor = alignment.NATIVE_FACTOR if native else 1
-    if len(data) != 4 * source["samples"] * factor:
+    count = alignment.aac_presented_samples(source) if aac else source["samples"] * factor
+    if count is None or len(data) != 4 * count:
         raise ValueError("Stereo samples do not cover the complete recorded clock")
     if source_ranges(mapping, 0, source["samples"]) != source_ranges(source, 0, source["samples"]):
         raise ValueError("Stereo repetition source clocks differ")
-    if difference_version not in (None, DIFFERENCE_VERSION, ALIGNED_VERSION, NATIVE_ALIGNED_VERSION):
+    if difference_version is not None and difference_version not in DIFFERENCE_VERSIONS.values():
         raise ValueError("Unknown stereo repetition difference method")
     channels = np.frombuffer(data, dtype="<i2").reshape(-1, 2)
     if native:
-        record = {"schema": NATIVE_ALIGNED_SCHEMA, "source_sha256": source["sha256"], "affects_overall_confidence": False,
+        schema = AAC_ALIGNED_SCHEMA if aac else NATIVE_ALIGNED_SCHEMA
+        record = {"schema": schema, "source_sha256": source["sha256"], "affects_overall_confidence": False,
                   "stereo_pcm_sha256": hashlib.sha256(data).hexdigest(), "channels": [],
-                  ALIGNED_KEY: _build_aligned(data, channels, source, mapping, asset, exact_found=False, native=True)}
+                  ALIGNED_KEY: _build_aligned(data, channels, source, mapping, asset, exact_found=False,
+                                              schema=NATIVE_SCHEMAS[schema])}
         validate(record, source)
         return record
     rows = []

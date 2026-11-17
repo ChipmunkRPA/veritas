@@ -15,15 +15,20 @@ SCHEMA = "chipmunk.stereo-exact-repetition/1"
 DIFFERENCE_SCHEMA = "chipmunk.stereo-exact-repetition/2"
 ALIGNED_SCHEMA = "chipmunk.stereo-exact-repetition/3"
 NATIVE_ALIGNED_SCHEMA = "chipmunk.stereo-exact-repetition/4"
+AAC_ALIGNED_SCHEMA = "chipmunk.stereo-exact-repetition/5"
 DIFFERENCE_INPUT = "stereo_repetition_difference_version"
 DIFFERENCE_VERSION = 1
 ALIGNED_VERSION = 2
 NATIVE_ALIGNED_VERSION = 3
+AAC_ALIGNED_VERSION = 4
 DIFFERENCE_KEY = "difference_measurement"
 ALIGNED_KEY = "aligned_measurement"
 DIFFERENCE_VERSIONS = {
     DIFFERENCE_SCHEMA: DIFFERENCE_VERSION, ALIGNED_SCHEMA: ALIGNED_VERSION, NATIVE_ALIGNED_SCHEMA: NATIVE_ALIGNED_VERSION,
+    AAC_ALIGNED_SCHEMA: AAC_ALIGNED_VERSION,
 }
+NATIVE_VERSIONS = {NATIVE_ALIGNED_VERSION, AAC_ALIGNED_VERSION}
+NATIVE_SCHEMAS = {NATIVE_ALIGNED_SCHEMA: alignment.NATIVE_SCHEMA, AAC_ALIGNED_SCHEMA: alignment.AAC_SCHEMA}
 CHANNELS = ("left", "right")
 
 
@@ -63,11 +68,11 @@ def _validate_measurement(measurement, source, prefix, *, difference=False):
 def validate(record, source):
     try:
         schema = record["schema"]
-        if schema == NATIVE_ALIGNED_SCHEMA:
+        if schema in NATIVE_SCHEMAS:
             if (record["affects_overall_confidence"] is not False or record["source_sha256"] != source["sha256"]
                     or not _valid_hash(record["stereo_pcm_sha256"]) or record["channels"] != []
                     or DIFFERENCE_KEY in record or "difference_projection" in record
-                    or record[ALIGNED_KEY]["schema"] != alignment.NATIVE_SCHEMA):
+                    or record[ALIGNED_KEY]["schema"] != NATIVE_SCHEMAS[schema]):
                 raise ValueError("Native stereo repetition does not match the source or its check")
             alignment.validate(record[ALIGNED_KEY], source, exact_found=False)
             return

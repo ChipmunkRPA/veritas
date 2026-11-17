@@ -175,15 +175,26 @@ def _read_stereo(path: Path, limit: int, *, rate: int = SAMPLE_RATE) -> np.ndarr
     return np.frombuffer(frames, dtype="<i2").reshape(-1, 2)
 
 
-def decode_native_stereo(path: Path, mapping: dict[str, Any]) -> bytes | None:
-    """Keep short lossless 48 kHz sources only when both decoded clocks agree."""
-    from app.evidence.audio_channel_alignment_binding import NATIVE_FACTOR, NATIVE_RATE, native_scope
+def decode_native_stereo(path: Path, mapping: dict[str, Any], *, aac: bool = False) -> bytes | None:
+    """Keep short 48 kHz stereo samples only when both decoded clocks agree."""
+    from app.evidence.audio_channel_alignment_binding import (
+        NATIVE_FACTOR,
+        NATIVE_RATE,
+        aac_presented_samples,
+        native_scope,
+    )
 
-    if not native_scope(mapping):
+    if aac:
+        count = aac_presented_samples(mapping)
+    else:
+        count = mapping["samples"] * NATIVE_FACTOR if native_scope(mapping) else None
+    if count is None:
         return None
-    count = mapping["samples"] * NATIVE_FACTOR
     expected_pts = mapping["timeline"][0]["source_pts"] * NATIVE_FACTOR
-    filters = (f"aformat=sample_fmts=s16,asettb=1/{NATIVE_RATE},atrim=end_sample={count + 1},"
+    # AAC can decode beyond the presented final sample. Lossless inputs must
+    # end on the same sample in both decodes without trimming any extra samples.
+    limit = count if aac else count + 1
+    filters = (f"aformat=sample_fmts=s16,asettb=1/{NATIVE_RATE},atrim=end_sample={limit},"
                "ashowinfo,asetpts=N/SR/TB")
     try:
         with tempfile.TemporaryDirectory() as temp:
@@ -193,7 +204,7 @@ def decode_native_stereo(path: Path, mapping: dict[str, Any]) -> bytes | None:
                  "-map", f"0:{mapping['source_stream_index']}", "-af", filters, "-vn", "-c:a", "pcm_s16le", "-f", "wav", str(output)],
                 capture_output=True, text=True, timeout=20, check=True, stdin=subprocess.DEVNULL,
             )
-            pcm = _read_stereo(output, count + 1, rate=NATIVE_RATE)
+            pcm = _read_stereo(output, limit, rate=NATIVE_RATE)
         if (len(pcm) != count or _mapping(run.stderr, count) != [
                 {"start_sample": 0, "end_sample": count, "source_pts": expected_pts}]):
             return None

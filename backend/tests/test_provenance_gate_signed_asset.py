@@ -103,8 +103,9 @@ def compressed_audio_assets(signing_material, signed_audio, tmp_path_factory):
         directory = tmp_path_factory.mktemp('authored-audio-' + suffix)
         source, destination = directory / 'source.wav', directory / ('source.' + suffix)
         source.write_bytes(signed_audio[0])
+        options = ['-af', 'apad=pad_dur=2.75', '-ar', '48000', '-ac', '2'] if suffix == 'm4a' else []
         subprocess.run(['ffmpeg', '-v', 'error', '-nostdin', '-i', str(source), '-map_metadata', '-1',
-            '-threads', '1', str(destination)], check=True, timeout=30)
+            *options, '-threads', '1', str(destination)], check=True, timeout=30)
         assets[suffix] = sign(destination.read_bytes(), mime, signer), bundle, mime
     return assets
 
@@ -167,8 +168,9 @@ def signed_video(signing_material, tmp_path_factory):
     signer, bundle = signing_material
     path = tmp_path_factory.mktemp('authored-video') / 'source.mp4'
     subprocess.run(['ffmpeg', '-v', 'error', '-nostdin', '-f', 'lavfi', '-i',
-        'testsrc2=size=128x96:rate=24:duration=1', '-c:v', 'libx264', '-threads', '1',
-        '-preset', 'ultrafast', '-pix_fmt', 'yuv420p', str(path)], check=True, timeout=30)
+        'testsrc2=size=128x96:rate=24:duration=3.75', '-f', 'lavfi', '-i', 'sine=frequency=440:sample_rate=48000:duration=3.75',
+        '-c:v', 'libx264', '-threads', '1', '-preset', 'ultrafast', '-pix_fmt', 'yuv420p', '-c:a', 'aac', '-ac', '2',
+        str(path)], check=True, timeout=30)
     return sign(path.read_bytes(), 'video/mp4', signer), bundle
 
 
@@ -252,7 +254,13 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
     from app.core.config import settings
     from app.detectors.image import copy_similarity, jpeg_previous_grid
     from app.engine import pipelines
-    from app.evidence import image_embedded_pair_binding, image_packets_v7, image_packets_v8, service
+    from app.evidence import (
+        image_embedded_pair_binding,
+        image_packets_v7,
+        image_packets_v8,
+        service,
+        stereo_repetition,
+    )
     from app.evidence.image_copy_similarity_binding import (
         JPEG_OFFGRID_AFFINE_VERSION,
         SKIPPED_CREDENTIALS,
@@ -298,6 +306,11 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
     monkeypatch.setattr(settings, 'min_free_bytes', 0)
     monkeypatch.setattr(settings, 'audio_detector_mode', audio_mode)
     monkeypatch.setattr(settings, 'audio_short_admission_review', True)
+    if encoding in {'m4a', 'mp4'}:
+        monkeypatch.setattr(settings, 'environment', 'dev')
+        monkeypatch.setattr(settings, 'audio_stereo_aac_repeat_review', True)
+        native_repeat = Mock(side_effect=AssertionError('Signed record must bypass additional stereo capture'))
+        monkeypatch.setattr(stereo_repetition, 'decode_native_stereo', native_repeat)
     db_engine = create_engine(f'sqlite:///{tmp_path / "authored.sqlite"}', connect_args={'check_same_thread': False})
     Base.metadata.create_all(db_engine)
     store = ObjectStore(tmp_path / 'objects')
@@ -329,6 +342,8 @@ def test_full_pipeline_signed_record_reaches_result_without_model_acquisition(
     outcome = pipelines.run_analysis(analysis_id, profile=profile, sessions=sessions, store=store, models=NeverAcquire())
     assert outcome.status == 'done', (outcome.status, outcome.error, outcome.stages)
     assert outcome.outputs['provenance_gate']['action'] == 'stop_statistical_detection'
+    if encoding in {'m4a', 'mp4'}:
+        native_repeat.assert_not_called()
     assert all(r['status'] == 'skipped' for r in outcome.outputs['detect']['detectors'])
     if kind == 'audio' and audio_mode == 'candidate':
         assert outcome.outputs['detect']['short_voice_review']['reason'] == SKIP_REASON

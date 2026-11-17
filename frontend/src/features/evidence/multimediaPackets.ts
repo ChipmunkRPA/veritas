@@ -193,7 +193,8 @@ export interface AudioRepetitionContext extends AudioRepeatRecord {
   schema: 'chipmunk.audio-exact-repetition/1'; pairs: (AudioRepeatPair & { pcm_s16le_sha256: string })[]
 }
 interface StereoRepetitionContext {
-  schema: 'chipmunk.stereo-exact-repetition/1' | 'chipmunk.stereo-exact-repetition/2' | 'chipmunk.stereo-exact-repetition/3' | 'chipmunk.stereo-exact-repetition/4'
+  schema: 'chipmunk.stereo-exact-repetition/1' | 'chipmunk.stereo-exact-repetition/2' | 'chipmunk.stereo-exact-repetition/3'
+    | 'chipmunk.stereo-exact-repetition/4' | 'chipmunk.stereo-exact-repetition/5'
   source_sha256: string; affects_overall_confidence: false
   channels: { channel: 'left' | 'right'; measurement: AudioRepetitionContext; gain_measurement?: AudioGainRepetitionContext }[]
   difference_measurement?: AudioRepetitionContext
@@ -210,7 +211,7 @@ type AlignedRepeatSpan = AudioRepeatSpan & {
   pcm_s16le_sha256: string; recorded_excerpt: AudioRepeatSpan & { pcm_s16le_sha256: string }
 }
 export interface AudioAlignedRepetitionContext extends Omit<AudioRepeatRecord, 'status' | 'pcm_sha256'> {
-  schema: 'chipmunk.aligned-stereo-repetition/1' | 'chipmunk.aligned-stereo-repetition/2'
+  schema: 'chipmunk.aligned-stereo-repetition/1' | 'chipmunk.aligned-stereo-repetition/2' | 'chipmunk.aligned-stereo-repetition/3'
   status: AudioRepeatRecord['status'] | 'skipped'; pcm_sha256: string | null
   alignment: { right_offset_samples: number; right_gain_numerator: number; agreeing_windows: number; usable_windows: number } | null
   pairs: (AudioRepeatPair & { first: AlignedRepeatSpan; second: AlignedRepeatSpan })[]
@@ -304,7 +305,7 @@ export interface AudioEvidenceSet extends SetBase {
   schema: 'chipmunk.audio-evidence/1'; packets: AudioEvidencePacket[]; omitted_windows: number
   source: { sha256: string; pcm_sha256?: string; samples?: number; sample_rate?: number; source_channels?: number; source_sample_rate?: number;
     source_duration_s?: number | null; source_stream_index?: number; audio_stream_indices?: number[]; transform?: string; timeline_time_base?: string;
-    identical_stereo_channel_pcm_sha256?: string;
+    identical_stereo_channel_pcm_sha256?: string; source_duration_pts?: number;
     timeline?: (SampleInterval & { source_pts: number })[] }
   coverage?: { decoded_samples: number; scored_samples: number; unscored_samples: number; decode_limit_reached: boolean;
     selection_threshold: number; windows: (SampleInterval & { score: number; signal_refs: EvidenceRef[] })[];

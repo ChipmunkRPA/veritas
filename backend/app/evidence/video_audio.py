@@ -23,7 +23,7 @@ from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import DetectorRun
 
 
-def freeze_input(ctx, decoded, *, path=None) -> dict:
+def freeze_input(ctx, decoded, *, path=None, allow_repeats=True) -> dict:
     """Persist the analyzed PCM and any bounded comparison with a second source stream."""
     source_mapping = dict(decoded.mapping)
     stereo_context = source_mapping.pop('stereo_context', None)
@@ -41,7 +41,9 @@ def freeze_input(ctx, decoded, *, path=None) -> dict:
             # Preserve the mono-only mapping hash used by the AV timing proof.
             binding['stereo_listening_pcm_sha256'] = listening.sha256
             objects.append(listening)
-        if repeated := stereo_repetition.freeze(db, ctx.store, ctx.analysis_id, decoded, native_source=path):
+        if allow_repeats and (
+            repeated := stereo_repetition.freeze(db, ctx.store, ctx.analysis_id, decoded, native_source=path)
+        ):
             binding.update(stereo_repetition.input_binding(repeated))
             objects.append(repeated)
         if (path is not None and settings.environment == 'dev' and settings.video_soundtrack_pair_review

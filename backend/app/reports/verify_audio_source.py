@@ -191,15 +191,19 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         from app.evidence.audio_gain_repetition_binding import GAIN_VERSION
         from app.evidence.stereo_repetition import native_pcm, verify
         from app.evidence.stereo_repetition_binding import (
+            AAC_ALIGNED_VERSION,
             ALIGNED_VERSION,
             DIFFERENCE_VERSIONS,
-            NATIVE_ALIGNED_VERSION,
+            NATIVE_VERSIONS,
             pairs,
         )
 
         difference_version = DIFFERENCE_VERSIONS.get(repeated["schema"])
-        use_native = difference_version == NATIVE_ALIGNED_VERSION
-        data = decode_native_stereo(original, decoded.mapping) if use_native else native_pcm(decoded)
+        use_native = difference_version in NATIVE_VERSIONS
+        if use_native:
+            data = decode_native_stereo(original, decoded.mapping, aac=difference_version == AAC_ALIGNED_VERSION)
+        else:
+            data = native_pcm(decoded)
         if data is None:
             raise ValueError("The original does not yield aligned native stereo samples for the repeat check")
         paths = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"]}

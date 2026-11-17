@@ -556,12 +556,12 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
     )
     from app.evidence.audio_gain_repetition_binding import GAIN_INPUT
     from app.evidence.stereo_repetition import build_from_store
-    from app.evidence.stereo_repetition_binding import DIFFERENCE_INPUT, NATIVE_ALIGNED_VERSION
+    from app.evidence.stereo_repetition_binding import DIFFERENCE_INPUT, NATIVE_VERSIONS
     from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
 
     if digest := binding.get(STEREO_REPEAT_INPUT) or mapping.get(STEREO_REPEAT_INPUT):
         version = binding.get(DIFFERENCE_INPUT) or mapping.get(DIFFERENCE_INPUT)
-        if version == NATIVE_ALIGNED_VERSION:
+        if version in NATIVE_VERSIONS:
             from app.evidence.audio_short_review_binding import source_metadata
 
             document["source"].update(source_metadata(mapping))

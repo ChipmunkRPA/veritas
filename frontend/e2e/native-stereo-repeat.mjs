@@ -17,10 +17,10 @@ try {
   const errors = []
   page.on('pageerror', error => errors.push(error.message))
   const results = []
-  for (const { analysis_id, name, pairs } of input.cases) {
+  for (const { analysis_id, name, pairs, description = 'Times and excerpts use the original 48 kHz stereo recording.' } of input.cases) {
     await page.goto(`${input.url}/analyses/${analysis_id}/media-evidence?view=plain#media-evidence-aligned-repetition`)
     const card = page.getByRole('region', { name: 'Repeated sound after stereo alignment' })
-    await card.getByText('Times and excerpts use the original 48 kHz stereo recording.', { exact: false }).waitFor()
+    await card.getByText(description, { exact: false }).waitFor()
     const clips = []
     for (const pair of pairs) {
       for (const side of ['first', 'second']) {

@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Repeats in short stereo AAC](audio-aac-repetition-2026-11-17.md)
+  locates 34 of 128 staged background repeats with louder speech across
+  96 and 160 kb/s deliveries. The serving mono checks locate none of the
+  background repeats and the lossless stereo method locates 13. The new
+  comparison produces zero control highlights on the 214 of 384 controls
+  it can assess. Local audio and video show both intervals and the paired
+  waveforms with zero AI-score weight.
+
 - [Native 48 kHz stereo repeat evidence](audio-native-alignment-2026-11-17.md)
   finds 20 of 32 staged repeats at each of two louder-speech levels,
   versus zero with the existing mono checks and five and zero after

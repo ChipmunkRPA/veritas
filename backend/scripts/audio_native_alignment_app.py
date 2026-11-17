@@ -19,6 +19,7 @@ from scripts.video_short_return_encoded_app import PaymentStub, body, checkout, 
 
 ROOT = Path(__file__).resolve().parents[2]
 DESCRIPTION = "Times and excerpts use the original 48 kHz stereo recording."
+AAC_DESCRIPTION = "This comparison uses lower frequency bands of the presented 48 kHz stereo audio."
 
 
 def fixtures(panel, output):
@@ -50,7 +51,45 @@ def fixtures(panel, output):
     yield "off", edited, "audio", "audio/wav", False, None
 
 
-def verify_exports(client, route, name, source_file, evidence, check, signer, output, origin):
+def aac_fixtures(panel, output):
+    import numpy as np
+
+    from app.detectors.audio.decode import decode_audio, decode_native_stereo
+    from app.evidence.audio_aac_alignment import search
+
+    rows = {row["delivery"]: row for row in read(panel / "result.json.gz")["rows"]}
+    edited, compressed, ordinary = (panel / name for name in (
+        "STRAFFIC-1-repeat_10db-160.m4a", "STRAFFIC-7-repeat_18db-96.m4a", "STRAFFIC-1-ordinary_panned-160.m4a"))
+    for path in (edited, compressed, ordinary):
+        assert digest(path) == rows[path.name]["input_sha256"]
+    main = rows[edited.name]["responses"]["lower_band_stereo"]["spans"]
+    quiet = rows[compressed.name]["responses"]["lower_band_stereo"]["spans"]
+    assert len(main) == len(quiet) == 1 and not rows[ordinary.name]["responses"]["lower_band_stereo"]["spans"]
+    video, resampled = output / "offset-edit.mp4", output / "same-edit-44100.m4a"
+    commands = [
+        ["-f", "lavfi", "-i", "testsrc2=size=320x240:rate=25:duration=4.4",
+         "-itsoffset", "0.4", "-i", str(edited), "-map", "0:v", "-map", "1:a",
+         "-c:v", "libx264", "-pix_fmt", "yuv420p", "-c:a", "copy", str(video)],
+        ["-i", str(edited), "-c:a", "aac", "-ar", "44100", str(resampled)],
+    ]
+    for command in commands:
+        subprocess.run(["ffmpeg", "-nostdin", "-v", "error", *command], check=True, timeout=20)
+    mapped = decode_audio(video, source_sha256=digest(video)).mapping
+    data = decode_native_stereo(video, mapped, aac=True)
+    _, reason, pairs = search(np.frombuffer(data, dtype="<i2").reshape(-1, 2))
+    assert reason is None and len(pairs) == 1
+    for pair, expected in zip(pairs[0], main[0], strict=True):
+        assert all(abs(sample + mapped["source_start_pts"] - nominal - 19200) <= 480
+                   for sample, nominal in zip(pair, expected, strict=True))
+    yield "aac160", edited, "audio", "audio/mp4", True, main
+    yield "aac96", compressed, "audio", "audio/mp4", True, quiet
+    yield "offset-video", video, "video", "video/mp4", True, [[list(span) for span in pair] for pair in pairs]
+    yield "ordinary", ordinary, "audio", "audio/mp4", True, []
+    yield "different-rate", resampled, "audio", "audio/mp4", True, None
+    yield "off", edited, "audio", "audio/mp4", False, None
+
+
+def verify_exports(client, route, name, source_file, evidence, check, signer, output, origin, *, description):
     import pymupdf
 
     from app.reports.engine import pdf_text
@@ -62,7 +101,7 @@ def verify_exports(client, route, name, source_file, evidence, check, signer, ou
     pdf = fetch(client, f"/api/v2/reports/{report_id}/file")
     words = " ".join(pdf_text(pdf).split())
     scan(words)
-    assert (DESCRIPTION in words) == (check is not None)
+    assert (description in words) == (check is not None)
     if check:
         charts = []
         for pair in check["pairs"]:
@@ -98,7 +137,7 @@ def verify_exports(client, route, name, source_file, evidence, check, signer, ou
     return hashlib.sha256(pdf).hexdigest()
 
 
-def run(panel, output, *, browser):
+def run(panel, output, *, browser, aac=False):
     configure(output, ROOT)
     os.environ.update(VERITAS_ENVIRONMENT="dev", VERITAS_LOG_LEVEL="WARNING", VERITAS_PUBLIC_PDF_LAYOUT="standard",
                       HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1")
@@ -126,8 +165,11 @@ def run(panel, output, *, browser):
             db.commit()
         client.headers["X-API-Key"] = key
         signer = body(client.get("/api/v2/instance/public-key"))
-        for name, media, kind, mime, enabled, expected in fixtures(panel, output):
-            settings.audio_stereo_native_repeat_review = enabled
+        cases = aac_fixtures(panel, output) if aac else fixtures(panel, output)
+        description = AAC_DESCRIPTION if aac else DESCRIPTION
+        for name, media, kind, mime, enabled, expected in cases:
+            settings.audio_stereo_aac_repeat_review = enabled and aac
+            settings.audio_stereo_native_repeat_review = enabled and not aac
             aid = checkout(client, stub, media, kind=kind, media_type=mime, filename=media.name)
             route = f"/api/v2/analyses/{aid}"
             evidence = body(client.get(f"{route}/evidence-packets"))
@@ -147,22 +189,28 @@ def run(panel, output, *, browser):
                 assert packet["affects_overall_confidence"] is False
                 check = packet["aligned_measurement"]
                 assert check["sample_rate"] == 48000
+                if aac:
+                    assert check["input_samples"] == audio["source"]["source_duration_pts"]
+                    assert check["input_samples"] != audio["source"]["samples"] * 3
                 actual = [[[pair[side]["start_sample"], pair[side]["end_sample"]] for side in ("first", "second")]
                           for pair in check["pairs"]]
                 assert actual == expected
                 bounds = check["pairs"]
                 if bounds:
-                    browser_cases.append({"analysis_id": aid, "kind": kind, "name": name, "pairs": bounds})
+                    browser_cases.append({"analysis_id": aid, "kind": kind, "name": name, "pairs": bounds,
+                                          "description": description})
             origin = float(evidence["source"]["timeline_origin_s"]) if kind == "video" else None
-            report_sha = verify_exports(client, route, name, media, evidence, check, signer, output, origin)
+            report_sha = verify_exports(client, route, name, media, evidence, check, signer, output, origin,
+                                        description=description)
             rows.append({"case": name, "source_sha256": digest(media), "measured": check is not None,
                          "ranges": expected, "source_times": [
                              [pair[s]["source_timestamp_ranges"] for s in ("first", "second")] for pair in check["pairs"]
                          ] if check else [], "pdf_sha256": report_sha})
             print(name, "verified", expected, flush=True)
-        assert decisions["off"] == decisions["wav"] and len(rows) == len(stub.sessions)
+        assert decisions["off"] == decisions["aac160" if aac else "wav"] and len(rows) == len(stub.sessions)
         browser_results = browser_check(output, app, key, browser_cases, scenario="native-stereo-repeat.mjs") if browser else None
-    save(output / "receipt.json", {"schema": "chipmunk.native-stereo-local-checkout/1", "cases": rows,
+    save(output / "receipt.json", {"schema": "chipmunk.aac-stereo-local-checkout/1" if aac
+                                   else "chipmunk.native-stereo-local-checkout/1", "cases": rows,
                                    "same_assessment_with_option_off": True, "simulated_payment_usd_cents": 999,
                                    "jobs_before_payment": 0, "browser": browser_results})
 
@@ -172,4 +220,5 @@ if __name__ == "__main__":
     cli.add_argument("panel", type=Path)
     cli.add_argument("output", type=Path)
     cli.add_argument("--browser", action="store_true")
+    cli.add_argument("--aac", action="store_true")
     run(**vars(cli.parse_args()))

@@ -80,7 +80,7 @@ VIDEO_STAGES: tuple[StageDef, ...] = (
     StageDef("probe", vid.probe, after=("ingest",), critical=True, weight=0.5),
     StageDef("provenance", vid.provenance, after=("probe", "source_labels"), weight=0.5, reuse_if=vid.current_provenance_output),
     StageDef("provenance_gate", provenance_gate.run, after=("provenance",), weight=0.1),
-    StageDef("decode", vid.decode, after=("probe",), persist=False, critical=True),
+    StageDef("decode", vid.decode, after=("probe", "provenance_gate"), persist=False, critical=True),
     StageDef("shots", vid.shots, after=("probe",), profiles=FULL_DEEP, weight=0.5),
     StageDef("tracks", vid.tracks, after=("probe", "shots", "provenance_gate"), lane="accelerator", profiles=FULL_DEEP, weight=2.0),
     StageDef("faces", vid.faces, after=("decode", "provenance_gate")),
@@ -101,7 +101,7 @@ AUDIO_STAGES: tuple[StageDef, ...] = (
     StageDef("probe", aud.probe, after=("ingest",), critical=True, weight=0.5),
     StageDef("provenance", aud.provenance, after=("probe", "source_labels"), weight=0.5),
     StageDef("provenance_gate", provenance_gate.run, after=("provenance",), weight=0.1),
-    StageDef("decode", aud.decode, after=("probe",), persist=False, critical=True),
+    StageDef("decode", aud.decode, after=("probe", "provenance_gate"), persist=False, critical=True),
     StageDef("condition", cond.audio, after=("probe", "decode"), critical=True, weight=0.5),  # detect reads its speech gate
     StageDef("detect", aud.detect, after=("probe", "decode", "condition", "provenance_gate"), lane="mixed", weight=4.0),
     StageDef("temporal", aud.temporal, after=("condition", "detect"), weight=0.5),

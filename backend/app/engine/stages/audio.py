@@ -170,7 +170,8 @@ def decode(ctx: StageContext) -> dict[str, Any]:
         listening = stereo_listening.freeze(db, ctx.store, ctx.analysis_id, decoded)
         if listening is not None:
             decoded.mapping["stereo_listening_pcm_sha256"] = listening.sha256
-        repeated = stereo_repetition.freeze(db, ctx.store, ctx.analysis_id, decoded, native_source=source_path)
+        repeated = (None if provenance_gate.stop(ctx) else
+                    stereo_repetition.freeze(db, ctx.store, ctx.analysis_id, decoded, native_source=source_path))
         if repeated is not None:
             decoded.mapping.update(stereo_repetition.input_binding(repeated))
         mapping = register_artefact(db, ctx.store, canonical_json(decoded.mapping), media_type="application/json", role="stage_output",

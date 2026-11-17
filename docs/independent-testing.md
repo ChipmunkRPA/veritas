@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short stereo AAC replay](audio-aac-repetition-2026-11-17.md#application-and-independent-replay)
+binds 512 held compressed audio deliveries to their WAV parents and
+recounts correct pairs, misplaced ranges, and assessed coverage. The app
+receipt also shows time, excerpts, and frequency-band waveforms on an
+MP4 with an offset audio track.
+
 The [native 48 kHz stereo replay](audio-native-alignment-2026-11-17.md#app-and-independent-replay)
 reconstructs 288 exact audio files and tests two repeat locations on the
 original sample clock. The manifest covers louder speech, shifted channels,

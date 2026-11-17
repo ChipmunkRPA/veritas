@@ -250,8 +250,10 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     from app.evidence.video_audio import freeze_input
 
     audio_evidence = {}
+    allow_repeats = not provenance_gate.stop(ctx)
     audio, audio_mapping = _audio(path, bool(probed["info"].get("has_audio")), source_sha256=ctx.outputs["ingest"]["sha256"],
-                                  capture=lambda decoded: audio_evidence.update(freeze_input(ctx, decoded, path=path)))
+                                  capture=lambda decoded: audio_evidence.update(freeze_input(
+                                      ctx, decoded, path=path, allow_repeats=allow_repeats)))
     cancelled = audio_evidence.get("destructive_mono_downmix", False)
     if cancelled and audio.status == "silent":
         audio = dataclasses.replace(audio, status="cancelled")

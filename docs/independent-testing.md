@@ -3257,6 +3257,10 @@ assets. [Video replay instructions](video-face-hd-sparse-retry-2026-11-12.md#rep
 
 ### Replay four measured panels from a clean checkout
 
+The [linked HEIC thumbnail study](image-heif-thumbnail-2026-11-16.md#replay)
+also provides a standard-Python recount and a native replay. Compare known
+locations and control flags against the disclosed source commitments.
+
 Run these commands from the repository root with Python 3.11 or later. They use
 public scalar receipts from local experiments. The commands need only the
 standard library, with no media, model downloads, accounts, or running app.

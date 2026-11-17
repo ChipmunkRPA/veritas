@@ -198,6 +198,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             return 'Original SHA-256 matched.' + _preview_detail(preview_proof, preview["preview_carrier"]) + native_detail
     else:
         preview_proof = None
+    if data[4:8] == b"ftyp":
+        from pillow_heif import register_heif_opener
+
+        register_heif_opener()
     with Image.open(io.BytesIO(data)) as raw:
         if raw.width * raw.height > MAX_SOURCE_PIXELS:
             raise ValueError('The original exceeds the image pixel limit')
@@ -283,9 +287,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
 
 def _preview_detail(proof, carrier):
-    from app.evidence.image_editor_preview_binding import PNG_CARRIER
+    from app.evidence.image_editor_preview_binding import HEIF_CARRIER, PNG_CARRIER
 
     count = proof["footprints"]
-    label = "PNG Exif preview" if carrier == PNG_CARRIER else "editor-preview"
+    label = {HEIF_CARRIER: "linked HEIC thumbnail", PNG_CARRIER: "PNG Exif preview"}.get(carrier, "editor-preview")
     return (f' Matched {proof["source_crops"]} main-image and stored thumbnail crops. '
             f'Recomputed {count} saved {label} {"footprint" if count == 1 else "footprints"}.')

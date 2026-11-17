@@ -18,6 +18,7 @@ from typing import Any
 
 import numpy as np
 from PIL import Image, ImageFile, ImageOps
+from pillow_heif import register_heif_opener
 
 from app.core.logging import get_logger
 from app.storage.objects import ObjectStore
@@ -25,6 +26,7 @@ from app.storage.objects import ObjectStore
 MAX_SIDE = 4096
 MAX_PIXELS = 80_000_000
 log = get_logger(__name__)
+register_heif_opener()
 
 
 def refuse_truncated_images() -> None:

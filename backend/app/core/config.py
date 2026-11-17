@@ -309,6 +309,7 @@ class Settings(BaseSettings):
     image_small_png_copy_review: bool = False  # Optional local exact copy evidence for eligible PNGs.
     image_turned_png_copy_review: bool = False  # Include right-angle copies in the local small PNG check.
     image_png_exif_preview_review: bool = False  # Optional native PNG comparison with its saved Exif thumbnail.
+    image_heif_thumbnail_review: bool = False  # Compare an eligible HEIC still with its linked thumbnail.
     image_whole_review_python: Path | None = None  # Optional local Python environment for the supplementary image check.
     image_whole_png_review_enabled: bool = False  # Also review eligible upright RGB PNGs in development.
 

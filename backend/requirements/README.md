@@ -21,6 +21,8 @@ Every change of a lock needs `make audit` afterwards: the suite compares the rec
 
 - **2026-11-08, add einops 0.8.2:** promoted the already installed MIT helper from development to runtime for the vendored regional graph. Official PyPI 0.8.2 metadata declares no dependencies; both locks add exactly this one package with its published wheel and source hashes. Existing pins and hashes are unchanged. This is a one-node lock extension, not a rerun of Linux dependency resolution or Linux execution. The installed Darwin snapshot includes the same version; local serving parity is recorded separately in the v47 study.
 
+- **2026-11-16, Pillow HEIF 1.5.0 → 1.8.1.** The update exposes the linked thumbnail API. The Python wheel metadata retains compatibility with the existing Pillow pin. Both Linux locks and the Darwin version constraint move this one package to the official release hashes. The [local HEIC evaluation](../../docs/image-heif-thumbnail-2026-11-16.md) records the macOS results.
+
 ## Recheck or deliberately refresh
 
 The locks were generated with uv 0.11.7. Use the project's Python 3.12 interpreter and a private cache; never install the Linux lock into the local Darwin development environment. The commands below perform dependency resolution, not Docker builds or deployment. Run from the repository root; choose `cpu` or `cu126` explicitly.

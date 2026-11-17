@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Conservatively localize differences between a JPEG and its embedded preview."""
+"""Conservatively localize differences between a still image and its embedded preview."""
 
 from __future__ import annotations
 
@@ -10,7 +10,7 @@ import numpy as np
 from PIL import Image
 
 from app.detectors.image.reference_compare import _regions, _tone
-from app.evidence.image_editor_preview_binding import PNG_CARRIER
+from app.evidence.image_editor_preview_binding import HEIF_CARRIER, PNG_CARRIER
 from app.provenance import jpeg_editor_thumbnail, png_exif_thumbnail
 from app.provenance.exiftool import _pillow_thumbnail
 
@@ -55,6 +55,10 @@ def _preview(blob, native_size, operation=0):
             return None
         rgb = image.convert("RGB")
         image = np.asarray(rgb.transpose(TRANSFORMS[operation]) if operation else rgb)
+    return _preview_grid(image, native_size)
+
+
+def _preview_grid(image, native_size):
     native_aspect = native_size[0] / native_size[1]
     if abs((image.shape[1] / image.shape[0]) / native_aspect - 1) <= MAX_ASPECT_DELTA:
         h, w = image.shape[:2]
@@ -193,6 +197,18 @@ def retained_preview(source, exif):
             return None, None
     editor_preview = jpeg_editor_thumbnail.extract(source)
     return ("jpeg_editor_resource", editor_preview) if editor_preview is not None else (None, None)
+
+
+def measure_heif(main, preview, *, minimum_component_fraction):
+    """Measure a linked thumbnail in the decoder's displayed pixel axes."""
+    grid = _preview_grid(np.asarray(preview), main.size)
+    if grid is None:
+        return {"status": "unsupported_thumbnail"}, None
+    before, trim = grid
+    result, masks = _projected(main, before, trim, main.size, minimum_component_fraction)
+    if masks is not None:
+        result["preview_carrier"] = HEIF_CARRIER
+    return result, masks
 
 
 def measure_png(data, *, minimum_component_fraction):

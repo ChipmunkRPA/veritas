@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Linked HEIC thumbnails](image-heif-thumbnail-2026-11-16.md) identify
+  compact visual discrepancies from one upload. The check locates 110
+  of 132 staged mismatches and flags 0 of 330 controls. The ordinary
+  interface, PDF, and JSON link each region to the two native crops and
+  aligned footprint. The comparison has zero AI-score weight.
+
 - [Short native soundtrack differences](video-short-native-soundtrack-2026-11-16.md)
   extend the earlier-copy check to matching 720 × 480 pairs near 24 fps.
   It locates 15 of 24 staged replacements in each of three delivery pairs,

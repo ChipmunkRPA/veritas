@@ -5,15 +5,16 @@ from __future__ import annotations
 import io
 import math
 import struct
+from contextlib import ExitStack
 
 import cv2
 import numpy as np
 from PIL import Image, ImageOps
 
 from app.engine.exhibits import ExhibitBudgetExceeded
-from app.evidence.image_editor_preview_binding import CARRIER_SCHEMAS, PNG_CARRIER
+from app.evidence.image_editor_preview_binding import CARRIER_SCHEMAS, HEIF_CARRIER, PNG_CARRIER
+from app.provenance import heif_thumbnail, png_exif_thumbnail
 from app.provenance import image_thumbnail_localization as localization
-from app.provenance import png_exif_thumbnail
 
 # Keep this in the render stage namespace. On resume the shared writer starts
 # with empty counters even when the earlier detector exhibits are reused.
@@ -38,6 +39,9 @@ EDITOR_INTERPRETATION = ("The saved editor thumbnail in this JPEG and the main i
 PNG_INTERPRETATION = ("The PNG’s saved Exif preview and main image differ in these areas. The preview is a lower-resolution "
                       "view carried in the submitted file. Its date and origin are unknown. Ordinary editing and image "
                       "processing can produce these differences. This evidence carries zero AI authorship weight.")
+HEIF_INTERPRETATION = ("The HEIC file’s linked thumbnail and displayed main image differ in these areas. The crops show "
+                       "the difference at each image’s own pixel coordinates. The file does not establish when or how "
+                       "the difference arose. This finding does not indicate AI authorship.")
 MAX_REGIONS = 3
 DISPLAY_EDGE = 384
 BOX_KEYS = ("x", "y", "w", "h")
@@ -104,34 +108,47 @@ def _footprint(region, trim, labels, stats):
         return dict(zip(BOX_KEYS, (x, y, w, h), strict=True)), output.getvalue()
 
 
-def add_exhibits(data, writer, *, png=False):
+def add_exhibits(data, writer, *, png=False, heif=False):
     """Keep local evidence separate from metadata anomalies and score inputs."""
     try:
-        measure = localization.measure_png if png else localization.measure
-        measurement, masks = measure(data, minimum_component_fraction=localization.CONFIRMATION_COMPONENT_FRACTION)
-        if not measurement.get("regions"):
-            return []
-        _, labels, stats, _ = cv2.connectedComponentsWithStats(masks[0].astype(np.uint8), connectivity=8)
-        with Image.open(io.BytesIO(data)) as source:
-            carrier, embedded = ((PNG_CARRIER, png_exif_thumbnail.extract(data)) if png
-                                 else localization.retained_preview(source, source.getexif()))
-            if embedded is None or carrier != measurement.get("preview_carrier", "exif"):
+        floor = localization.CONFIRMATION_COMPONENT_FRACTION
+        with ExitStack() as images:
+            if heif:
+                _, pair = images.enter_context(heif_thumbnail.read_pair(data))
+                if pair is None:
+                    return []
+                main, preview = pair
+                carrier = HEIF_CARRIER
+                measurement, masks = localization.measure_heif(main, preview, minimum_component_fraction=floor)
+            else:
+                measure = localization.measure_png if png else localization.measure
+                measurement, masks = measure(data, minimum_component_fraction=floor)
+                if not measurement.get("regions"):
+                    return []
+                source = images.enter_context(Image.open(io.BytesIO(data)))
+                carrier, embedded = ((PNG_CARRIER, png_exif_thumbnail.extract(data)) if png
+                                     else localization.retained_preview(source, source.getexif()))
+                if embedded is None or carrier != measurement.get("preview_carrier", "exif"):
+                    return []
+                main = images.enter_context(ImageOps.exif_transpose(source)) if measurement.get("main_orientation") else source
+                preview = images.enter_context(Image.open(io.BytesIO(embedded)))
+            if not measurement.get("regions"):
                 return []
-            main = ImageOps.exif_transpose(source) if measurement.get("main_orientation") else source
-            with Image.open(io.BytesIO(embedded)) as preview:
-                prepared = []
-                for region in measurement["regions"][:MAX_REGIONS]:
-                    native = region["submitted"]
-                    thumbnail = _stored_preview_bounds(region, measurement)
-                    footprint = _footprint(region, measurement["trim"], labels, stats)
-                    prepared.append((native, thumbnail, region["selected_thumbnail_pixels"], _crop(main, native), _crop(preview, thumbnail), footprint))
+            _, labels, stats, _ = cv2.connectedComponentsWithStats(masks[0].astype(np.uint8), connectivity=8)
+            prepared = []
+            for region in measurement["regions"][:MAX_REGIONS]:
+                native = region["submitted"]
+                thumbnail = _stored_preview_bounds(region, measurement)
+                footprint = _footprint(region, measurement["trim"], labels, stats)
+                prepared.append((native, thumbnail, region["selected_thumbnail_pixels"], _crop(main, native), _crop(preview, thumbnail), footprint))
     except (OSError, ValueError, TypeError, SyntaxError, KeyError, IndexError, OverflowError, struct.error,
-            Image.DecompressionBombError, cv2.error):
-        # An unreadable preview must not change the existing metadata finding or score.
+            Image.DecompressionBombError, cv2.error, EOFError, RuntimeError):
+        # An unreadable preview leaves the metadata and statistical checks independent.
         return []
 
     identified_carrier = carrier in CARRIER_SCHEMAS
-    note = {PNG_CARRIER: PNG_INTERPRETATION, "jpeg_editor_resource": EDITOR_INTERPRETATION}.get(carrier, INTERPRETATION)
+    note = {PNG_CARRIER: PNG_INTERPRETATION, "jpeg_editor_resource": EDITOR_INTERPRETATION,
+            HEIF_CARRIER: HEIF_INTERPRETATION}.get(carrier, INTERPRETATION)
     exhibit_ids, rows, regions = [], [], []
     for n, (main, thumb, marked, main_crop, thumb_crop, footprint) in enumerate(prepared, 1):
         try:
@@ -219,8 +236,10 @@ def from_result(result):
     if len(orientations) != 1 or len(carriers) != int(has_carrier):
         return None
     main_orientation, preview_orientation = next(iter(orientations))
+    heif = HEIF_CARRIER in carriers
     return {"source_sha256": (result.get("input") or {}).get("sha256"), "coordinate_exhibit_id": table["id"],
             **({"preview_carrier": next(iter(carriers))} if has_carrier else {}),
-            "main_coordinate_space": "exif-oriented-main-image", "preview_coordinate_space": "stored-embedded-preview",
+            "main_coordinate_space": "decoded-heif-main-image" if heif else "exif-oriented-main-image",
+            "preview_coordinate_space": "decoded-heif-thumbnail" if heif else "stored-embedded-preview",
             "main_exif_orientation": main_orientation, "preview_alignment_orientation": preview_orientation,
             "regions": rows, "interpretation": table.get("caption", INTERPRETATION), "authorship_confidence_contribution": 0} if rows else None

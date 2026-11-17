@@ -523,17 +523,18 @@ def render(ctx: StageContext) -> dict[str, Any]:
     ingest = ctx.outputs.get("ingest") or {}
     jpeg = ingest.get("mime") == "image/jpeg"
     png_preview = ingest.get("mime") == "image/png" and settings.image_png_exif_preview_review
+    heif_preview = ingest.get("mime") in ("image/heic", "image/heif") and settings.image_heif_thumbnail_review
     whole_review = (settings.image_whole_review_python is not None and settings.environment == "dev"
                     and ctx.profile == Profile.FULL)
     probed = ctx.outputs.get("probe") or {}
     rgba = (ingest.get("mime") == "image/png" and probed.get("mode") == "RGBA"
             and probed.get("n_frames") == 1)
     animated_png = ingest.get("mime") in {"image/png", "image/apng"} and (probed.get("n_frames") or 0) > 1
-    if (jpeg or png_preview or whole_review or rgba or animated_png) and not ctx.state.get("refusion") and not provenance_gate.stop(ctx):
+    if (jpeg or png_preview or heif_preview or whole_review or rgba or animated_png) and not ctx.state.get("refusion") and not provenance_gate.stop(ctx):
         ids = set()
-        if jpeg or png_preview:
+        if jpeg or png_preview or heif_preview:
             ids.update(image_thumbnail_evidence.add_exhibits(bytes(_media(ctx).original_bytes()),
-                                                            ctx.exhibits.bind(image_thumbnail_evidence.CREATOR), png=png_preview))
+                                                            ctx.exhibits.bind(image_thumbnail_evidence.CREATOR), png=png_preview, heif=heif_preview))
         if whole_review:
             sha = ingest["sha256"]
             ids.update(image_whole_review.add_exhibits(ctx.store.path_for(sha), sha,

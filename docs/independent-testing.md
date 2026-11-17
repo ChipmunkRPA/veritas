@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [quality-85 JPEG replay](image-previous-grid-2026-11-17.md#quality-85-jpegs)
+binds 288 deliveries across two held panels and records exact
+pixel rectangles for generated insertions, generated removals and
+matched ordinary edits. A separate camera panel checks crops, resaves,
+and whole-image contrast.
+
 The [JPEG boundary comparison](image-jpeg-boundary-2026-11-17.md#replay)
 provides reproducible input and truth bindings for 560 deliveries.
 Traditional inpainting, ordinary retouching and AI removal use the same

@@ -12,12 +12,13 @@ from app.core.canonical import canonical_hash
 from app.detectors.image import jpeg_bitstream, jpeg_previous_grid
 from app.evidence import image_previous_grid_binding as binding
 
-_REVIEW_POINT = 0.4593661360933643
+_REVIEW_POINTS = {85: 0.34823856868844094, 90: 0.4593661360933643}
 
 
 def _geometry(body, schema):
     jpeg = jpeg_bitstream.read(body)
-    if (jpeg is None or jpeg.precision != 8 or jpeg.ijg_quality != 90
+    qualities = _REVIEW_POINTS if schema == binding.SCHEMA else (90,)
+    if (jpeg is None or jpeg.precision != 8 or jpeg.ijg_quality not in qualities
             or min(jpeg.width, jpeg.height) < 320 or jpeg.width * jpeg.height > 1_048_576
             or [(c.id, c.h, c.v) for c in jpeg.components] != [(1, 2, 2), (2, 1, 1), (3, 1, 1)]
             or any(jpeg.table_bits.get(c.table_id) != 8 for c in jpeg.components)
@@ -31,7 +32,7 @@ def _geometry(body, schema):
         orientations = (1,) if schema == binding.LEGACY_SCHEMA else range(1, 9)
         if image.mode != "RGB" or type(orientation) is not int or orientation not in orientations:
             return None
-        return jpeg.width, jpeg.height, orientation
+        return jpeg.width, jpeg.height, orientation, jpeg.ijg_quality
 
 
 def record(source_sha256, body=None, *, stopped=False, prior=False, check=None, schema=binding.SCHEMA):
@@ -50,11 +51,13 @@ def record(source_sha256, body=None, *, stopped=False, prior=False, check=None, 
                 status = "no_region"
                 measurement = {"grid_offset": list(measured.phase), "estimated_earlier_quality": measured.previous_quality,
                                "background_support": [round(measured.background, 6), round(measured.separated_from_next, 6)]}
+                width, height, orientation, quality = geometry
+                if schema == binding.SCHEMA:
+                    measurement["delivery_quality"] = quality
                 region = measured.regions["surrounded_scan"]
-                if region is not None and region.score > _REVIEW_POINT:
+                if region is not None and region.score > _REVIEW_POINTS[quality]:
                     status = "matched"
                     x, y, w, h = region.box
-                    width, height, orientation = geometry
                     bounds = binding.orient_region([x, y, x + w, y + h], orientation, width, height)
                     measurement.update(inside_support=[round(n, 6) for n in region.inside],
                                        surrounding_support=[round(n, 6) for n in region.surrounding],

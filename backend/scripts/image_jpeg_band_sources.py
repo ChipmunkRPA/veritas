@@ -39,9 +39,15 @@ def exposures(retained, previous_intakes=()):
         digest = files.sha(path)
         pins[f"prior-intake/{digest}"] = digest
         intake = files.read(path)
-        if intake.get("schema") != SCHEMA or not intake["cases"]:
+        if intake.get("schema") == SCHEMA:
+            cases = intake["cases"]
+        elif intake.get("schema") == "chipmunk.image-previous-grid/1":
+            cases = intake["accepted"]
+        else:
+            cases = []
+        if not cases:
             raise ValueError("Expected a completed JPEG source intake")
-        for row in intake["cases"]:
+        for row in cases:
             keys.update(roster.source_keys(row["source"]))
             for record in row["fingerprints"].values():
                 fingerprints[0].append(record)
@@ -191,7 +197,7 @@ def small_subject_area(subject, digest):
     return compact
 
 
-def prepare(intake, models, output, *, partial=False):
+def removal_inputs(intake, models, *, partial, one_engine_per_photo=False):
     import cv2
     import numpy as np
 
@@ -199,9 +205,7 @@ def prepare(intake, models, output, *, partial=False):
 
     assembler = editors(models)
     dossier = files.read(intake / "intake.json")
-    output.mkdir(mode=0o700)
     cv2.setNumThreads(1)
-    groups, rows, receipts = [], [], []
     for index, record in enumerate(dossier["cases"]):
         key, row = record["tag"], record["source"]
         raw = (intake / f"{key}.png").read_bytes()
@@ -217,7 +221,10 @@ def prepare(intake, models, output, *, partial=False):
         height, width = support.shape
         y0, y1 = max(0, yy.min() - 96), min(height, yy.max() + 97)
         x0, x1 = max(0, xx.min() - 96), min(width, xx.max() + 97)
-        for name, remove in assembler.items():
+        operations = list(assembler.items())
+        if one_engine_per_photo:
+            operations = [operations[index % len(operations)]]
+        for name, remove in operations:
             crop = (slice(y0, y1), slice(x0, x1))
             generated = remove(original[crop], support[crop])
             if generated.shape != original[crop].shape or generated.dtype != np.uint8:
@@ -227,13 +234,46 @@ def prepare(intake, models, output, *, partial=False):
             truth = (original != edited).any(axis=-1)
             if np.any(truth & ~support) or not .01 < truth.mean() < (.08 if partial else .23):
                 raise ValueError("Rendered object replacement differs from the bounded subject mask")
-            prepared = record | {"group": f"confirmation-{name}-{index:02d}", "source": row | {"generator": name}}
-            group, encoded = sources.render(output, prepared, {"original": original, "edited": edited}, truth)
-            groups.append(group | {"split": "confirmation"})
-            rows.extend(encoded)
-            receipts.append({"group": group["tag"], "editor": name, "source": record["fingerprints"]["original"]["rgb_sha256"],
-                             "region": [int(x0), int(y0), int(x1), int(y1)], "pixels": int(truth.sum())})
-        print(f"Rendered both held removals from {index + 1}/{len(dossier['cases'])} photos", flush=True)
+            bounds = [int(x0), int(y0), int(x1), int(y1)]
+            yield index, record, name, original, edited, truth, bounds
+
+
+def native_pairs(intake, models, output, *, partial):
+    from PIL import Image
+
+    output.mkdir(mode=0o700)
+    accepted = []
+    for index, record, name, _, edited, truth, bounds in removal_inputs(
+        intake, models, partial=partial, one_engine_per_photo=True,
+    ):
+        folder = output / f"{index:02d}"
+        folder.mkdir()
+        original = (intake / f"{record['tag']}.png").read_bytes()
+        if hashlib.sha256(original).hexdigest() != record["source"]["original"]["sha256"]:
+            raise ValueError("The original PNG changed while deriving the removal")
+        (folder / "original.png").write_bytes(original)
+        child = folder / "edited.png"
+        Image.fromarray(edited).save(child)
+        accepted.append({"folder": folder.name, "source": record["source"] | {"generator": name,
+                         "edited": {"sha256": files.sha(child)}}, "region": bounds, "pixels": int(truth.sum())})
+        print(f"Rendered native pair {index + 1}", flush=True)
+    files.save(output / "qualification.json", {"accepted": accepted, "editors": EDITOR_WEIGHTS,
+               "intake_sha256": files.sha(intake / "intake.json"), "partial_subject": partial})
+
+
+def prepare(intake, models, output, *, partial=False, as_pairs=False):
+    if as_pairs:
+        return native_pairs(intake, models, output, partial=partial)
+    output.mkdir(mode=0o700)
+    groups, rows, receipts = [], [], []
+    for index, record, name, original, edited, truth, bounds in removal_inputs(intake, models, partial=partial):
+        prepared = record | {"group": f"confirmation-{name}-{index:02d}", "source": record["source"] | {"generator": name}}
+        group, encoded = sources.render(output, prepared, {"original": original, "edited": edited}, truth)
+        groups.append(group | {"split": "confirmation"})
+        rows.extend(encoded)
+        receipts.append({"group": group["tag"], "editor": name, "source": record["fingerprints"]["original"]["rgb_sha256"],
+                         "region": bounds, "pixels": int(truth.sum())})
+        print(f"Rendered {name} removal from photo {index + 1}", flush=True)
     files.save(output / "manifest.json", {"schema": files.SCHEMA, "groups": groups, "images": rows,
                "source_manifests": {"intake": files.sha(intake / "intake.json")}})
     record = {"schema": SCHEMA, "editors": EDITOR_WEIGHTS, "rows": receipts}
@@ -256,5 +296,6 @@ if __name__ == "__main__":
             stage.add_argument("--target", type=int, choices=range(1, 49), default=TARGET)
         if mode == "prepare":
             stage.add_argument("--partial", action="store_true", help="Render an independently fixed smaller part of the same subject")
+            stage.add_argument("--as-pairs", action="store_true", help="Retain one original and edited PNG pair per photo")
     values = vars(command.parse_args())
     {"reserve": reserve, "acquire": acquire, "prepare": prepare}[values.pop("step")](**values)

@@ -94,7 +94,8 @@ from the retained JPEGs produced no qualifying earlier grid.
 In development, `VERITAS_IMAGE_JPEG_PRIOR_GRID_REVIEW=true` enables the
 check in Full and Deep image analyses. It accepts the tested quality-90
 4:2:0 tables in baseline JPEGs and in complete progressive JPEGs with
-fixed quantization tables. It can report a region when the aligned
+fixed quantization tables. The quality-85 profile below uses the same
+formats. It can report a region when the aligned
 JPEG and regional image checks complete without selecting one. Verified
 AI credentials stop the analysis before this comparison.
 
@@ -147,6 +148,96 @@ progressive rotation produced no highlight. The quality-75 control was
 outside the comparison profile. The queue held zero jobs before payment,
 and the on/off pair returned the same automated assessment.
 [Local delivery replay](evaluation-panels/image-previous-grid-deliveries-app-2026-11-17.json)
+
+### Quality-85 JPEGs
+
+The check now also covers standard quality-85 luma and chroma tables.
+It uses a separate operating point for that final compression profile.
+Version 3 of the signed source record includes the detected final JPEG
+quality when it measures an earlier grid. Earlier signed results replay
+with their original eligibility rules and operating point.
+
+The quality-85 point was set on 12 source photos and evaluated on 12
+different photos from the reserve insertion panel. A separate transfer
+uses 20 additional attributed photos. Acquisition excludes the earlier
+quality-85 sources, source photographers, byte and pixel matches, and
+near duplicates. LaMa and MI-GAN each supply removals on ten distinct
+photos. The staged target replaces a small selected part of a subject.
+Direct saves use no planned earlier grid. The staged histories crop a
+coarser save before making the local edit and the final quality-85 save.
+The same frozen point and 30% intersection over union and 50% recall
+requirements apply to both held panels.
+
+| Quality-85 inputs | Existing checks | With the earlier-grid comparison |
+| --- | ---: | ---: |
+| Staged insertions after cropping | 0/24 correct | 3/24 correct |
+| Small staged removals after cropping | 0/40 correct | 10/40 correct |
+| Ordinary controls in the insertion panel | 0/72 regions | 0/72 regions |
+| Ordinary controls in the removal panel | 0/120 regions | 6/120 regions |
+| Camera-derived crops, resaves and whole-image contrast changes | — | 0/30 regions |
+
+All 13 useful regions matched staged edits from seven source photos.
+No edited file received a misplaced region. Four deliberate local blurs
+and two ordinary local copies from four source photos also showed a
+weaker local grid. No unchanged ordinary export, direct original,
+global resize or whole-image contrast adjustment was flagged. The
+separate camera test applies the earlier-grid check itself. These results
+support local compression-history evidence under the tested conditions.
+The finding carries zero weight in the AI assessment. It can miss edits
+after the earlier grid is lost or where the upload has only one save.
+
+The serving code reproduced all 288 insertion and removal results from
+the original JPEG bytes. Five lossless progressive conversions with
+EXIF rotation preserved the result and the corresponding crop pixels.
+Six simulated prepaid analyses reproduced all three insertion regions
+and withheld evidence on the two controls. Two visible browser findings
+matched the PDF, JSON and signed source replay. The queue held zero
+jobs before payment, and the on/off pair returned the same automated
+assessment.
+[Serving and format readback](evaluation-panels/image-previous-grid-85-source-replay-2026-11-17.json)
+· [Local browser and checkout receipt](evaluation-panels/image-previous-grid-85-app-2026-11-17.json)
+
+[Quality-85 selection](evaluation-panels/image-previous-grid-85-selection-2026-11-17.json.gz)
+· [Insertion results](evaluation-panels/image-previous-grid-85-insertions-2026-11-17.json.gz)
+· [Removal results](evaluation-panels/image-previous-grid-85-removals-2026-11-17.json.gz)
+· [Removal reservation](evaluation-panels/image-previous-grid-85-removal-reservation-2026-11-17.json.gz)
+· [Removal source roster](evaluation-panels/image-previous-grid-85-removal-sources-2026-11-17.json.gz)
+· [Camera controls](evaluation-panels/image-previous-grid-85-cameras-2026-11-17.json.gz)
+
+To reproduce, restore the two published insertion source rosters as
+`$run/selection-sources` and `$run/insertion-sources`. Prepare the
+earlier removal-study archive and preserve its intake as `$previous/intake`.
+The removal reservation binds the earlier JPEG boundary intake and both
+insertion intakes by SHA-256. The two held replays verify 576 input and
+parent bindings and independently recompute all candidate overlaps.
+[Insertion bindings](evaluation-panels/image-previous-grid-85-insertion-bindings-2026-11-17.json.gz)
+· [Removal bindings](evaluation-panels/image-previous-grid-85-removal-bindings-2026-11-17.json.gz)
+
+```sh
+export PYTHONPATH=backend OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+runner=backend/.venv/bin/python
+reader=scripts.image_previous_grid_panel
+panels=docs/evaluation-panels
+stem=image-previous-grid-85
+"$runner" -B -m scripts.image_jpeg_band_sources acquire "$panels/$stem-removal-reservation-2026-11-17.json.gz" \
+  "$retained/deliveries/manifest.json" "$run/removal-intake" \
+  --previous-intake "$previous/intake/intake.json" \
+  --previous-intake "$panels/image-jpeg-boundary-source-intake-2026-11-17.json.gz" \
+  --previous-intake "$panels/image-previous-grid-sources-2026-11-17.json" \
+  --previous-intake "$panels/image-previous-grid-reserve-sources-2026-11-17.json"
+PYTHONPATH="$ort:backend" "$runner" -B -m scripts.image_jpeg_band_sources prepare \
+  "$run/removal-intake" "$editors" "$run/removal-sources" --partial --as-pairs
+"$runner" -B -m "$reader" measure "$run/selection-sources" "$run/q85-selection" --quality 85
+python3 -B -S -m "$reader" freeze "$run/q85-selection/measurements.json.gz" "$run/q85-freeze.json"
+for profile in insertion removal; do
+  "$runner" -B -m "$reader" measure "$run/$profile-sources" "$run/q85-$profile" --quality 85
+  python3 -B -S -m "$reader" assess "$run/q85-freeze.json" \
+    "$run/q85-$profile/measurements.json.gz" "$run/q85-$profile/result.json.gz"
+  "$runner" -B -m "$reader" bindings "$run/q85-$profile/result.json.gz" "$run/q85-$profile/bindings.json.gz"
+done
+npm --prefix frontend run build
+"$runner" -B -m scripts.image_previous_grid_app "$run/q85-insertion" "$run/q85-app" --quality 85 --browser
+```
 
 ## Independent replay
 

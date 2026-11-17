@@ -16,18 +16,18 @@ SIZE = (369, 335)
 STORED_REGION = (37, 19, 85, 51)
 
 
-def jpeg(orientation, *, progressive):
+def jpeg(orientation, *, progressive, quality=90):
     image = Image.linear_gradient("L").resize(SIZE).convert("RGB")
     exif = Image.Exif()
     exif[274] = orientation
     output = BytesIO()
-    image.save(output, "JPEG", quality=90, subsampling=2, exif=exif, progressive=progressive)
+    image.save(output, "JPEG", quality=quality, subsampling=2, exif=exif, progressive=progressive)
     return output.getvalue()
 
 
-def positive_measurement(monkeypatch):
+def positive_measurement(monkeypatch, *, score=0.75):
     region = jpeg_previous_grid.Region(
-        (37, 19, 48, 32), 0.75, (0.18, 0.19), (0.52, 0.54), (2, 5), None,
+        (37, 19, 48, 32), score, (0.18, 0.19), (0.52, 0.54), (2, 5), None,
     )
     measured = jpeg_previous_grid.Measurement((5, 3), 55, 0.6, 0.25, {"surrounded_scan": region})
     monkeypatch.setattr(jpeg_previous_grid, "measure", lambda *args, **kwargs: measured)
@@ -83,3 +83,19 @@ def test_existing_reports_replay_with_their_original_profile(monkeypatch):
 
     incomplete = data[:-2]
     assert source.record(sha256(incomplete).hexdigest(), incomplete)["status"] == "outside_profile"
+
+
+@pytest.mark.parametrize(("quality", "status"), [(75, "outside_profile"), (85, "matched"), (90, "no_region")])
+def test_prior_grid_uses_the_point_for_the_actual_jpeg_quality(monkeypatch, quality, status):
+    positive_measurement(monkeypatch, score=0.40)
+    uploaded = jpeg(6, progressive=True, quality=quality)
+    digest = sha256(uploaded).hexdigest()
+    record = source.record(digest, uploaded)
+    earlier = source.record(digest, uploaded, schema=binding.ORIENTED_SCHEMA)
+    assert record["status"] == status
+    assert earlier["status"] == ("no_region" if quality == 90 else "outside_profile")
+    if record["measurement"]:
+        assert record["measurement"]["delivery_quality"] == quality
+    if earlier["measurement"]:
+        assert "delivery_quality" not in earlier["measurement"]
+    assert source.verify(uploaded, {"record": earlier, "artifacts": {}}, {}.__getitem__)

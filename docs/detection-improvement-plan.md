@@ -60,8 +60,15 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Quality-85 JPEG compression history](image-previous-grid-2026-11-17.md#quality-85-jpegs)
+  adds 13 correctly located regions on 64 staged edits. Six deliberate
+  ordinary local edits also show weaker support for the prior grid, with
+  zero flags on unchanged exports and 30 separate camera controls.
+  The local Full and Deep analyses show the source region and crop
+  without affecting the AI assessment.
+
 - [JPEG object-removal boundaries](image-jpeg-boundary-2026-11-17.md)
-  compare three fitted region methods on 160 fresh deliveries from two
+  compare three fitted region methods on 160 held deliveries from two
   removal engines. All three add zero correct locations at the frozen
   points. The selected comparisons add false alerts on ordinary edits
   from one photograph and stay out of the app. Traditional fills are

@@ -265,7 +265,7 @@ def sources(path, extra=()):
             yield (media / Path(files["original"]["file"]).parent, checked[1], checked[2], files["edited"]["sha256"])
 
 
-def measure_inputs(part, output, archives=()):
+def measure_inputs(part, output, archives=(), *, qualities=QUALITIES):
     import io
     from dataclasses import asdict
 
@@ -290,7 +290,7 @@ def measure_inputs(part, output, archives=()):
         physical = jpeg_dq.analyse(body)
         if physical is not None and physical.width % 8 == physical.height % 8 == 0 and (area := physical.localised):
             anchors.append(measure_box(tuple(8 * coordinate for coordinate in (area.x, area.y, area.w, area.h)), truth))
-        if evaluated_jpeg(body, quality=quality):
+        if quality in QUALITIES and evaluated_jpeg(body, quality=quality):
             if model is None:
                 model = regional.load_regional(regional.MODEL_ID, "cpu", "float32").obj
             with Image.open(io.BytesIO(body)) as image:
@@ -339,7 +339,7 @@ def measure_inputs(part, output, archives=()):
                 truth = np.zeros(pixels.shape[:2], dtype=bool)
             truth_path = captured / f"{role}.png"
             Image.fromarray(truth.astype(np.uint8) * 255).save(truth_path)
-            for quality in QUALITIES:
+            for quality in qualities:
                 data = encode(pixels, quality)
                 target = captured / f"{role}-{quality}.jpg"
                 target.write_bytes(data)
@@ -383,7 +383,7 @@ def freeze(development, output):
     data = read(development)
     arms = sorted({key for row in data["rows"] if row["new"] for key in row["new"]["regions"]})
     values = {}
-    for quality in QUALITIES:
+    for quality in sorted({row["quality"] for row in data["rows"]}):
         cohort = [row for row in data["rows"] if row["quality"] == quality]
         for arm in arms:
             maxima = defaultdict(float)
@@ -460,11 +460,12 @@ def bindings(receipt, output):
     print(verified, flush=True)
 
 
-def camera_controls(directory, output):
+def camera_controls(directory, output, *, quality=90):
     """Check whole-photo operations on previously qualified CC0 camera sources."""
     import numpy as np
     from PIL import Image, ImageEnhance
 
+    from app.evidence.image_previous_grid_binding import LEGACY_SCHEMA, SCHEMA
     from app.evidence.image_previous_grid_source import record
 
     plan = read(directory / "freeze.json")
@@ -491,10 +492,10 @@ def camera_controls(directory, output):
         views = {"cropped_retained_jpeg": window[crop], "cropped_after_coarser_save": earlier[crop],
                  "global_contrast_after_crop": np.array(ImageEnhance.Contrast(Image.fromarray(earlier[crop])).enhance(.88))}
         for name, view in views.items():
-            delivered = encode(view, 90)
+            delivered = encode(view, quality)
             target = f'{camera["group"]}-{name}.jpg'
             (output / target).write_bytes(delivered)
-            finding = record(digest(delivered), delivered)
+            finding = record(digest(delivered), delivered, schema=LEGACY_SCHEMA if quality == 90 else SCHEMA)
             rows.append({"camera": camera, "parent": item["file"], "parent_sha256": item["sha256"],
                          "origin": [x + 5, y + 3], "role": name, "file": target, "reading": finding})
     counts = Counter((row["role"], row["reading"]["status"]) for row in rows)
@@ -517,10 +518,15 @@ if __name__ == "__main__":
             action.add_argument(arg, type=Path)
         if command == "measure":
             action.add_argument("--archives", nargs=3, type=Path, default=())
+            action.add_argument("--quality", dest="qualities", action="append", type=int, choices=(75, 85, 90))
+        elif command == "camera-controls":
+            action.add_argument("--quality", type=int, default=90, choices=(85, 90))
         elif command == "acquire":
             action.add_argument("--after", type=Path)
     values = vars(cli.parse_args())
     command = values.pop("action")
+    if command == "measure" and values["qualities"] is None:
+        del values["qualities"]
     if command == "review":
         data = read(values["receipt"])
         checked = results(data["rows"], data["freeze"]["points"])

@@ -18,25 +18,28 @@ from scripts.video_short_return_encoded_app import PaymentStub, body, checkout, 
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def cases(panel):
+def cases(panel, quality):
     result = read(panel / "result.json.gz")
-    point = result["freeze"]["points"]["90/surrounded_scan"]["stricter"]
-    rows = result["rows"]
+    threshold = "wider" if quality == 85 else "stricter"
+    point = result["freeze"]["points"][f"{quality}/surrounded_scan"][threshold]
+    rows = [row for row in result["rows"] if row["quality"] == quality]
     flagged = []
     for row in rows:
         candidate = (row["new"] or {}).get("regions", {}).get("surrounded_scan")
-        if row["quality"] == 90 and not row["current"] and candidate and candidate["score"] > point:
+        if not row["current"] and candidate and candidate["score"] > point:
             x, y, w, h = candidate["box"]
             flagged.append((row, [x, y, x + w, y + h], useful(candidate["numbers"])))
     first = next(row for row, _, correct in flagged if correct)
-    old = next(row for row in rows if row["quality"] == 90 and row["role"] == "sharp" and row["current"])
-    peers = {(row["source"], row["role"], row["quality"]): row for row in rows}
+    old = next((row for row in rows if row["role"] == "sharp" and row["current"]), None)
+    peers = {(row["source"], row["role"], row["quality"]): row for row in result["rows"]}
     for index, (row, region, correct) in enumerate(flagged, 1):
         yield f"proposal-{index:02d}-{row['role']}", row, region, correct, True
-    yield "current-region", old, None, False, True
-    yield "ordinary", peers[first["source"], "ordinary", 90], None, False, True
-    yield "direct-original", peers[first["source"], "direct_original", 90], None, False, True
-    yield "quality-75", peers[first["source"], first["role"], 75], None, False, True
+    if old is not None:
+        yield "current-region", old, None, False, True
+    yield "ordinary", peers[first["source"], "ordinary", quality], None, False, True
+    yield "direct-original", peers[first["source"], "direct_original", quality], None, False, True
+    if q75 := peers.get((first["source"], first["role"], 75)):
+        yield "quality-75", q75, None, False, True
     yield "option-off", first, None, False, False
 
 
@@ -89,7 +92,7 @@ def exported_evidence(client, route, name, path, evidence, check, signer, output
     return digest(pdf)
 
 
-def run(panel, output, *, browser):
+def run(panel, output, *, browser, quality):
     configure(output, ROOT)
     os.environ.update(VERITAS_ENVIRONMENT="dev", VERITAS_LOG_LEVEL="WARNING", VERITAS_IMAGE_REGION_MODE="candidate",
                       VERITAS_IMAGE_REGION_JPEG_REVIEW="true", VERITAS_IMAGE_REGION_JPEG90_REVIEW="true",
@@ -121,7 +124,7 @@ def run(panel, output, *, browser):
             db.commit()
         client.headers["X-API-Key"] = key
         signer = body(client.get("/api/v2/instance/public-key"))
-        for name, row, proposed, correct, enabled in cases(panel):
+        for name, row, proposed, correct, enabled in cases(panel, quality):
             file = panel / row["file"]
             assert digest(file.read_bytes()) == row["input_sha256"]
             settings.image_jpeg_prior_grid_review = enabled
@@ -141,6 +144,8 @@ def run(panel, output, *, browser):
             elif enabled:
                 assert status in {"earlier_region", "no_region", "no_prior_grid", "outside_profile"}, (name, status)
                 assert region is None
+            if observed.get("measurement"):
+                assert observed["measurement"]["delivery_quality"] == row["quality"]
             if name == "quality-75":
                 assert status == "outside_profile"
             if name == "current-region":
@@ -176,4 +181,5 @@ if __name__ == "__main__":
     cli.add_argument("panel", type=Path)
     cli.add_argument("output", type=Path)
     cli.add_argument("--browser", action="store_true")
+    cli.add_argument("--quality", type=int, choices=(85, 90), default=90)
     run(**vars(cli.parse_args()))

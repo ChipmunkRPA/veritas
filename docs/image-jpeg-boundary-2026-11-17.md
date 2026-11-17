@@ -35,9 +35,11 @@ four candidate points allowing up to four added ordinary source groups
 during selection. The choice favors useful extra regions on calibration
 photos, with misplaced regions and ordinary alerts counted separately.
 
-The held comparison uses 20 different source photos. Their source IDs,
-photographers, byte and pixel hashes, and close image matches were checked
-against previous intakes. Each picture supplies a small removal from LaMa
+The held comparison uses 20 source photos excluded from fitting and
+selection. Their IDs, photographers, byte and pixel hashes, and close
+image matches were checked against the preceding removal studies. A later
+cross-check found seven of these photos in separate prior-grid studies.
+Each picture supplies a small removal from LaMa
 and MI-GAN. MI-GAN is absent during fitting and selection. Sharp and
 inward-feathered edits are encoded at both JPEG qualities. The controls
 include the untouched photo, local blur, local tone, local copying, and

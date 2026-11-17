@@ -1,0 +1,175 @@
+{
+  "schema": "chipmunk.video-face-shot-guard/1",
+  "frozen_comparison_sha256": "321b69af438f8773fc99a11e41b25066cc463417f8d357a4057043825eb098de",
+  "manifest_sha256": "a798442a00b1fe4606957bf701a1af97d888b507a63d6305550db0d78bf81c68",
+  "rows": [
+    {
+      "file": "06-different_shot-direct.mp4",
+      "group": "7b09464c2cffebd79c25a2a25477f3d1aeace213f1817bd7676b0e8c40b8574a",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3e4bf6267a26eb369120c6c6545bfc0c3ea9d11484c01d852c5aa69afedc5e98",
+      "input_sha256": "979a9cbe550b1495c7197e628d92d9fb20d66aa656be66fc2f55730ee460fa47",
+      "proposal": [
+        12,
+        44
+      ],
+      "considered": true,
+      "cuts": [
+        14,
+        42
+      ]
+    },
+    {
+      "file": "06-different_shot-tandem.mp4",
+      "group": "7b09464c2cffebd79c25a2a25477f3d1aeace213f1817bd7676b0e8c40b8574a",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3e4bf6267a26eb369120c6c6545bfc0c3ea9d11484c01d852c5aa69afedc5e98",
+      "input_sha256": "2da3b8a8604d61777dbd805350a2bda6347ec278c10e4a1cc3e29d6873c49b87",
+      "proposal": [
+        12,
+        44
+      ],
+      "considered": true,
+      "cuts": [
+        14,
+        42
+      ]
+    },
+    {
+      "file": "08-inswapper-direct.mp4",
+      "group": "754c734ce38320549e4c9700872776c444c490437340e7217a96815c19d68449",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        28,
+        38
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3a5713948c6f6bc259543eea7cec05d6184f6e84a8d936aaa8df374e58d14fbb",
+      "input_sha256": "60a8e0aebd9d865ce50eb46aa6422349d5371ed27b342335154e17d3c420e6c2",
+      "proposal": [
+        28,
+        38
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "08-uniface-direct.mp4",
+      "group": "754c734ce38320549e4c9700872776c444c490437340e7217a96815c19d68449",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        36,
+        64
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3a5713948c6f6bc259543eea7cec05d6184f6e84a8d936aaa8df374e58d14fbb",
+      "input_sha256": "d0491fd632bac887c5594421a9e37aa1bf34ca7ab0dc59eab6fa711e24649a46",
+      "proposal": [
+        36,
+        66
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "15-different_shot-direct.mp4",
+      "group": "9abb747f849374461d17afa8f48e7e602461e7e1b453774d57886e27b491c8b1",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "11f76e53e539ed6ae37bdb8114c6d74fed882325b1a494593842e176b817d902",
+      "input_sha256": "83c4ed8c50ba727d161f1df0768b2943cf9e6ea32b3dc8be65132b4c70c0e6d0",
+      "proposal": [
+        34,
+        78
+      ],
+      "considered": true,
+      "cuts": [
+        36,
+        76
+      ]
+    },
+    {
+      "file": "15-different_shot-tandem.mp4",
+      "group": "9abb747f849374461d17afa8f48e7e602461e7e1b453774d57886e27b491c8b1",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "11f76e53e539ed6ae37bdb8114c6d74fed882325b1a494593842e176b817d902",
+      "input_sha256": "9479cd1d24e80046cbdc3df3140835d56aa6391091a081874e57f542d0218645",
+      "proposal": [
+        34,
+        78
+      ],
+      "considered": true,
+      "cuts": [
+        36,
+        76
+      ]
+    },
+    {
+      "file": "18-inswapper-tandem.mp4",
+      "group": "99ffd9d387b421b729e1fd1d0b32c50333154cb579bc12977d2455dcb19fb2ab",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        14,
+        42
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "d892b17406b6587ff672bc37b6c4306fbcb4f83fd4995fecc8aedf85e27e2946",
+      "input_sha256": "67fd8d12d71e60971925cdfb66480304dd48f216b08abed492265bdbb155dc3f",
+      "proposal": [
+        12,
+        42
+      ],
+      "considered": true,
+      "cuts": []
+    }
+  ],
+  "counts": {
+    "direct": {
+      "edited": 2,
+      "control": 2,
+      "old_useful": 0,
+      "old_ordinary_flags": 0,
+      "ungated_useful": 2,
+      "ungated_ordinary_flags": 2,
+      "guarded_useful": 2,
+      "guarded_ordinary_flags": 0,
+      "above_point": 4,
+      "crossed_cut": 2,
+      "reviewed_face_context": 4
+    },
+    "tandem": {
+      "edited": 1,
+      "control": 2,
+      "old_useful": 0,
+      "old_ordinary_flags": 0,
+      "ungated_useful": 1,
+      "ungated_ordinary_flags": 2,
+      "guarded_useful": 1,
+      "guarded_ordinary_flags": 0,
+      "above_point": 3,
+      "crossed_cut": 2,
+      "reviewed_face_context": 3
+    }
+  }
+}

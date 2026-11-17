@@ -4,6 +4,8 @@ import numpy as np
 import pytest
 
 from app.detectors.image.faces import Face
+from app.detectors.video import face_local_detail
+from app.detectors.video.decode import DecodedFrame, DecodeError, FrameTable
 from scripts import video_face_return_transfer as trial
 
 
@@ -72,3 +74,25 @@ def test_point_and_localization_outcomes_are_distinct():
     assert trial.classify(finding, .5, ["3/2", "2"]) == "wrong_interval"
     assert trial.classify(finding, .5, None) == "false_flag"
     assert trial.classify(None, .5, None) == "unassessed"
+
+
+def test_dense_face_review_checks_one_picture_cuts_and_native_timestamps(monkeypatch, tmp_path):
+    table = FrameTable(time_base="1/25", pts=tuple(range(100)), key_frames=(0,), pict_types="I" * 100,
+                       width=64, height=48, coded_width=64, coded_height=48, rotation=0, interpolated=())
+    red = np.full((48, 64, 3), (255, 0, 0), dtype=np.uint8)
+    blue = np.full_like(red, (0, 0, 255))
+
+    def install(verified):
+        def decode(path, table, indices, **kwargs):
+            assert list(indices) == list(range(12, 47))
+            for i in indices:
+                # The first support picture begins a new shot. Only the later cuts cross the support.
+                yield DecodedFrame(i, table.pts[i], blue if i == 21 else red, pts_verified=verified or i != 21)
+
+        monkeypatch.setattr(face_local_detail, "decode_frames", decode)
+
+    install(True)
+    assert face_local_detail.shot_changes(tmp_path / "source.mp4", table, 20, 40) == (21, 22)
+    install(False)
+    with pytest.raises(DecodeError, match="source clock"):
+        face_local_detail.shot_changes(tmp_path / "source.mp4", table, 20, 40)

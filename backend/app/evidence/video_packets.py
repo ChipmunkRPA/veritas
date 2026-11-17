@@ -1140,6 +1140,14 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 packet["interpretation"] += " This interval overlaps the brief change on the other tracked face."
             if face_return["method"] == face_short_proposal_binding.BOUNDARY_AVC_METHOD:
                 packet["title"] = "Brief face change near the start or end of the clip"
+            if face_return["method"] == face_return_binding.local.METHOD:
+                packet["title"] = "Temporary face appearance change"
+                packet["interpretation"] += (
+                    " Adjacent source frames around the range showed no abrupt shot change."
+                )
+                for name, value in zip(("Start", "End"), face_return["scene_correlations"], strict=True):
+                    packet["measurements"].append({"label": f"{name} background similarity",
+                                                   "value": round(value, 4), "unit": "correlation"})
             if face_return["method"] == face_return_binding.FINE_SCENE_METHOD:
                 packet["interpretation"] += " Smaller areas outside the face supplied background detail at one or both boundaries."
                 for name, edge in zip(("Entry", "Exit"), face_return["fine_scene_edges"], strict=True):

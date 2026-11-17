@@ -99,7 +99,7 @@ def checkout(client, stub, path, *, kind="video", media_type="video/mp4", filena
     return aid
 
 
-def read_result(aid, expected):
+def read_result(aid, expected, *, require_signal=True):
     from app.storage.db import Analysis, AnalysisStage, Artefact, get_session
     from app.storage.objects import default_store
     from sqlalchemy import select
@@ -112,8 +112,10 @@ def read_result(aid, expected):
         assert stage.status == "done"
         output = json.loads(store.read_bytes(db.get(Artefact, stage.output_artefact_id).sha256))
         [entry] = [row for row in output["detectors"] if row["detector_id"] == "vid.review.face_appearance"]
-        [signal] = [row for row in result["signals"] if row["detector_id"] == "vid.review.face_appearance"]
-        assert signal["effective_weight"] == 0 and signal["calibrated_probability"] is None
+        signals = [row for row in result["signals"] if row["detector_id"] == "vid.review.face_appearance"]
+        if signals or require_signal:
+            [signal] = signals
+            assert signal["effective_weight"] == 0 and signal["calibrated_probability"] is None
         return result["decision"], entry
 
 
@@ -132,7 +134,7 @@ def proof_files(client, packet, folder):
     return images
 
 
-def encode_report(client, aid, source, evidence, images, folder):
+def encode_report(client, aid, source, evidence, images, folder, *, expected_text=None):
     from zipfile import ZipFile
 
     import pymupdf
@@ -150,6 +152,8 @@ def encode_report(client, aid, source, evidence, images, folder):
         words = " ".join(" ".join(page.get_text().split()) for page in doc)
         scan(words)
         assert "The brief face-change range spans" in words and "with an exclusive end" in words
+        if expected_text is not None:
+            assert expected_text in words
         extracted = {signature(Image.open(io.BytesIO(doc.extract_image(xref)["image"])))
                      for xref in {img[0] for page in doc for img in page.get_images(full=True)}}
         assert targets <= extracted

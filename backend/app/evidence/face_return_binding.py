@@ -6,6 +6,7 @@ import math
 import re
 from fractions import Fraction
 
+from app.evidence import face_local_return_binding as local
 from app.evidence import face_short_carrier_binding as carriers
 from app.evidence import face_short_proposal_binding as proposal
 from app.evidence import face_short_window_binding as short_windows
@@ -18,6 +19,7 @@ from app.evidence.video_packet_versions import (
     FINE_SCENE_FACE_VERSION,
     GUARDED_720P30_FACE_VERSION,
     GUARDED_CODEC_FACE_VERSION,
+    LOCAL_FACE_RETURN_VERSION,
     MOVING_AVC_PROPOSAL_VERSION,
     OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION,
     OVERLAPPING_PANE_TRACK_AVC_PROPOSAL_VERSION,
@@ -88,7 +90,8 @@ METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VE
                    proposal.SECOND_PANE_TRACK_AVC_METHOD: SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION,
                    proposal.OPPOSITE_PANE_TRACK_AVC_METHOD: OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION,
                    proposal.OVERLAPPING_PANE_TRACK_AVC_METHOD: OVERLAPPING_PANE_TRACK_AVC_PROPOSAL_VERSION,
-                   proposal.BOUNDARY_AVC_METHOD: BOUNDARY_AVC_PROPOSAL_VERSION}
+                   proposal.BOUNDARY_AVC_METHOD: BOUNDARY_AVC_PROPOSAL_VERSION,
+                   local.METHOD: LOCAL_FACE_RETURN_VERSION}
 WINDOW_METHODS = frozenset((short_windows.METHOD, carriers.METHOD))
 POINT = 0.10
 SCENE_POINT = 0.55
@@ -304,8 +307,56 @@ def _validate_guarded_scene(record):
         _exact(value, hex_value, GUARDED_SCENE_QUARTILE_POINT, min(1.00001, float.fromhex(correlation) + 1e-6))
 
 
+def _validate_local_return(record, source, table_pts, interpolated, rotation, truncated):
+    base = Fraction(source["time_base"])
+    _require((source["width"], source["height"]) == local.DIMENSIONS and source["frame_count"] == local.FRAME_COUNT
+             and not (rotation or truncated or interpolated) and record["time_base"] == source["time_base"]
+             and record["scheduled_frame_indices"] == list(local.SCHEDULE)
+             and tuple(record["source_encoding"]) == DENSE_ENCODING,
+             "Local face-change evidence requires the measured upright native video profile")
+    if table_pts is not None:
+        _require(len(table_pts) == local.FRAME_COUNT and all((tick - table_pts[0]) * base == i * local.STEP
+                 for i, tick in enumerate(table_pts)), "Local face-change evidence has a different native picture clock")
+    start, end = record["start_frame_index"], record["end_frame_index"]
+    before, during, after = local.support(start, end)
+    features = [float.fromhex(value) for value in record["features_hex"]]
+    _require(len(features) == 2 and all(-2.000001 <= value <= 2.000001 for value in features),
+             "Local face-change measurements are outside their expected range")
+    response = local.response(features)
+    _require(response > local.POINT and response.hex() == record["response_hex"] and _time(record["response"], response),
+             "Local face-change response differs from the frozen comparison")
+    _require(record["support_indices"] == dict(zip(ROLES, (before, during, after), strict=True))
+             and record["anchors"] == dict(zip(ROLES, (before[-1], during[len(during)//2], after[0]), strict=True)),
+             "Local face-change range lacks its before, during and after positions")
+    faces = _native_inputs(record["frame_inputs"], source, table_pts, interpolated)
+    scene = _native_inputs(record["scene_frame_inputs"], source, table_pts, interpolated)
+    _require(list(faces) == before + during + after and list(scene) == [start - 2, start, end - 2, end],
+             "Local face-change source positions disagree with the sampled intervals")
+    first = faces[start]["pts"]
+    for index, item in faces.items():
+        validate_face_input(item, source, appearance=True)
+        _require((item["pts"] - first) * base == (index - start) * local.STEP,
+                 "Local face input differs from the native source clock")
+    for i, item in scene.items():
+        face = faces[i]
+        _require(all(item[key] == face[key] for key in ("pts", "decoded_rgb_sha256")),
+                 "Local face and scene measurements disagree on a source picture")
+    _validate_scene_boxes(faces, scene, local.DIMENSIONS)
+    values, exact = record["scene_correlations"], record["scene_correlations_hex"]
+    _require(len(values) == len(exact) == 2, "Local face evidence needs two background comparisons")
+    for value, hex_value in zip(values, exact, strict=True):
+        _exact(value, hex_value, local.SCENE_POINT, 1.00001)
+    _require((record["start_pts"], record["end_pts"]) == (first, faces[end]["pts"])
+             and _time(record["start_stream_s"], float(first * base))
+             and _time(record["end_stream_s"], float(faces[end]["pts"] * base)),
+             "Local face-change interval differs from its original timestamps")
+
+
 def validate_record(record, source, *, table_pts=None, interpolated=(), rotation=0, truncated=False):
     method = record["method"]
+    if method == local.METHOD:
+        _validate_local_return(record, source, table_pts, interpolated, rotation, truncated)
+        return
     if method == carriers.METHOD:
         carriers.validate_record(record,source,table_pts=table_pts,interpolated=interpolated,rotation=rotation,truncated=truncated)
         return

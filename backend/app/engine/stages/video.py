@@ -54,6 +54,7 @@ from app.detectors.video.adapters import swap as swap_lane
 from app.detectors.video.adapters.codec import CodecInputs
 from app.detectors.video.adapters.common import AudioTrack, SampledFrame
 from app.detectors.video.adapters.face_appearance import DETECTOR as APPEARANCE_REVIEW
+from app.detectors.video.adapters.face_appearance import local_return_enabled
 from app.detectors.video.adapters.face_detail import DETECTOR as FACE_DETAIL_REVIEW
 from app.detectors.video.adapters.face_detail import FAMILY as FACE_DETAIL_FAMILY
 from app.detectors.video.adapters.face_detail import detail_enabled
@@ -430,12 +431,14 @@ def faces(ctx: StageContext) -> dict[str, Any]:
 AUDIO_UNDECODABLE = "the sound track could not be decoded"
 WHOLE_FACE_SAME_FRAME_POLICY = "whole_face_same_frame_review"
 WHOLE_FACE_DETAIL_POLICY = "whole_face_detail_review"
+LOCAL_FACE_RETURN_POLICY = "local_face_return_review"
 
 
 def current_detect_output(output) -> bool:
     return (current_voice_detection_output(output)
             and output.get(WHOLE_FACE_SAME_FRAME_POLICY, False) is same_frame_enabled()
-            and output.get(WHOLE_FACE_DETAIL_POLICY, False) is detail_enabled())
+            and output.get(WHOLE_FACE_DETAIL_POLICY, False) is detail_enabled()
+            and output.get(LOCAL_FACE_RETURN_POLICY, False) is local_return_enabled())
 
 
 def detect(ctx: StageContext) -> dict[str, Any]:
@@ -445,7 +448,7 @@ def detect(ctx: StageContext) -> dict[str, Any]:
     audio_failure = AUDIO_UNDECODABLE if audio is not None and audio.status == "unreadable" else None
     outputs = _outputs(ctx)
     policies = {"voice_clock_policy": VOICE_CLOCK_POLICY, WHOLE_FACE_SAME_FRAME_POLICY: same_frame_enabled(),
-                WHOLE_FACE_DETAIL_POLICY: detail_enabled()}
+                WHOLE_FACE_DETAIL_POLICY: detail_enabled(), LOCAL_FACE_RETURN_POLICY: local_return_enabled()}
     out = common.run_detectors(ctx, (Modality.VIDEO, Modality.AUDIO),
                                exclude={"provenance", "face-detection", "face-tracking", SEQUENCE_FAMILY, WHOLE_FACE_FAMILY, FACE_DETAIL_FAMILY},
                                outputs=outputs, max_units=VIDEO_MAX_UNIT_SCORES, face_failure=common.face_stage_failure(ctx),

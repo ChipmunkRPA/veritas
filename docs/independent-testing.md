@@ -2902,6 +2902,14 @@ and the source pixels behind the crop. The replay does not score authorship.
 
 ## Choose a review to reproduce
 
+### Replay temporary face changes and ordinary cuts
+
+Rebuild direct and recompressed videos with the pinned publisher assets.
+The source roster, labeled native frame ranges and shot decisions travel
+with the comparison. A standard-library reader checks the experiment and
+can recount the separate prepaid app replay.
+[Source frames, results and commands](video-face-shot-continuity-2026-11-17.md#reproduce-the-comparison)
+
 ### Replay wording comparisons in two-column PDFs
 
 The local PDF experiment publishes its source roster, exact file hashes,

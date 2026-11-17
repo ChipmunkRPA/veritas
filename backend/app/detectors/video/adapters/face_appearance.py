@@ -26,6 +26,7 @@ from app.detectors.video.adapters.face_sequence import FAMILY, FaceSequenceRevie
 from app.detectors.video.decode import DecodeError
 from app.engine.boundary import Deadline, DetectorTimeout
 from app.engine.detector import ActivationUse, Applicability, DetectorResult, InputUnit, UnitScore
+from app.evidence import face_local_return_binding as local
 from app.evidence import face_paired_edge_binding as paired
 from app.evidence import face_primary_track_binding
 from app.evidence import face_short_carrier_binding as short_carriers
@@ -382,7 +383,108 @@ def _with_return(result, inputs, yunet, recognizer, deadline):
         return result
     if settings.video_face_short_return_review:
         _inspect_return(result.details, inputs, yunet, recognizer, deadline, result.details.get('face_sequence'))
+        if (local_return_enabled() and not result.details.get("face_return")
+                and result.details["face_return_check"]["status"] != "not_applicable"):
+            _inspect_local_return(result.details, inputs, yunet, recognizer, deadline)
     return _describe_return(result)
+
+
+def local_return_enabled():
+    return (settings.environment == "dev" and settings.video_face_short_return_review
+            and settings.video_face_local_return_review and settings.face_min_size == 48)
+
+
+def _inspect_local_return(details, inputs, yunet, recognizer, deadline):
+    from app.detectors.video import face_local_detail
+
+    table = inputs.table
+    path = getattr(inputs.store, "path", None)
+    if path is None or not face_local_detail.supported(table, inputs.encoding) or face_return.source_carrier(path) != "mp4":
+        return
+    coverage = {"status": "unassessed", "reason": "time_budget", "scheduled_frames": len(local.SCHEDULE),
+                "measured_face_frames": 0}
+    details["face_return_check"]["local_duration_fallback"] = coverage
+    remaining = deadline.remaining() if deadline is not None else None
+    limit = 10. if remaining is None else min(10., remaining - COARSE_RESULT_RESERVE_S)
+    if limit <= 0:
+        return
+    stop = time.monotonic() + limit
+
+    def check():
+        if time.monotonic() >= stop:
+            raise TimeoutError("Local face comparison reached its time limit")
+        if deadline is not None:
+            deadline.check("local face comparison")
+
+    samples, detail = {}, {}
+    try:
+        with closing(inputs.store.iter_many(local.SCHEDULE, timeout_s=limit)) as frames:
+            for index, rgb in frames:
+                check()
+                if not inputs.store.native_pts_verified(index):
+                    coverage["reason"] = "native_timestamp_unverified"
+                    return
+                sample, frequency, _, _ = face_local_detail.observe(rgb, yunet, recognizer, with_texture=True)
+                samples[index] = sample
+                if frequency is not None:
+                    detail[index] = frequency
+                    coverage["measured_face_frames"] += 1
+        if samples.keys() != set(local.SCHEDULE):
+            coverage["reason"] = "incomplete_native_decode"
+            return
+        candidates = face_local_detail.proposals(samples, detail, review=check)
+        if not candidates:
+            coverage["reason"] = "insufficient_same_shot_context"
+            return
+        scored = [(local.response([round(x, 9) for x in item.features[:2]]), item) for item in candidates]
+        response, candidate = max(scored, key=lambda row: (row[0], row[1].end - row[1].start, -row[1].start))
+        a, b = candidate.start, candidate.end
+        if response <= local.POINT or _duplicates_local_return(details, table, a, b):
+            coverage.update(status="no_distinct_range", reason=None)
+            return
+        check()
+        if face_local_detail.shot_changes(path, table, a, b, timeout_s=stop - time.monotonic(), check=check):
+            coverage.update(status="no_distinct_range", reason="local_shot_change")
+            return
+        boundaries = (a - 2, a, b - 2, b)
+        scores = tuple(face_return.scene_lower_quartile(samples[x], samples[y])
+                       for x, y in (boundaries[:2], boundaries[2:]))
+        supported = [i for group in candidate.support for i in group]
+        face_rows = {}
+        with closing(inputs.store.iter_many(supported, timeout_s=max(.001, stop - time.monotonic()))) as frames:
+            for index, rgb in frames:
+                check()
+                if not inputs.store.native_pts_verified(index):
+                    coverage["reason"] = "native_timestamp_unverified"
+                    return
+                pixels = cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR)
+                observed = _measure(rgb, pixels, index, table, samples[index].face, recognizer)
+                if observed is not None:
+                    _, face_rows[index] = observed
+        if set(face_rows) != set(supported):
+            coverage["reason"] = "incomplete_native_decode"
+            return
+        scene_rows = {i: {key: face_rows[i][key] for key in ("frame_index", "pts", "decoded_rgb_sha256")}
+                      | {"face_box": list(samples[i].face.box())} for i in boundaries}
+        selected = face_return.Range(a, b, response, scores, candidate.support, boundaries)
+        result = _return_record(table, local.SCHEDULE, selected, local.METHOD, face_rows, scene_rows)
+        result.update(features_hex=[round(x, 9).hex() for x in candidate.features[:2]], source_encoding=list(inputs.encoding))
+        details["face_return"] = result
+        coverage.update(status="localized", reason=None)
+    except (DetectorTimeout, TimeoutError):
+        return
+    except (DecodeError, cv2.error, ValueError):
+        coverage["reason"] = "native_measurement_unavailable"
+
+
+def _duplicates_local_return(details, table, start, end):
+    a, b = table.pts[start], table.pts[end]
+    for key in ("face_sequence", "face_boundary"):
+        if earlier := details.get(key):
+            c, d = earlier["start_pts"], earlier["end_pts"]
+            if 2 * max(0, min(b, d) - max(a, c)) >= max(b, d) - min(a, c):
+                return True
+    return False
 
 
 def _describe_return(result):
@@ -1110,6 +1212,8 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
             'One native aligned face at a time; 128 float32 appearance values per retained frame',
             (f'At most 192 coarse face inputs and {face_boundary.MAX_FRAMES} optional timing inputs.{return_inputs}',
              'An enabled lower-detail repeat reads the same input frames from the selected coarse range.',
+             *(("The local face comparison can sample 50 faces and check adjacent pictures for cuts.",)
+               if local_return_enabled() else ()),
              *((f'The enabled paired-edge timing refinement reads at most {paired.MAX_READS} additional native frames.',)
                if settings.video_face_paired_edge_refinement else ()),
              *((f'The enabled brief proposal reads 120 pixel inputs and measures at most {proposal.MAX_FACE_READS} face inputs.',)

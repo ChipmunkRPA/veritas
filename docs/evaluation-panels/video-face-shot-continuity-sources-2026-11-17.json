@@ -1,0 +1,453 @@
+{
+  "revision": "bca865e675852666a426368b2f5614abf1c1926a",
+  "recipe": {
+    "duration": 4,
+    "size": [
+      640,
+      360
+    ],
+    "fps": 25,
+    "crf": [
+      23,
+      36
+    ],
+    "source_sample_start_seconds": ".40",
+    "faces": "largest unambiguous tracked face"
+  },
+  "rules": "whole-clip-face-temporal/1",
+  "groups": [
+    {
+      "group": "1846f0648a741a92b349fe38b47750102509112fbeeaf1d88f0b7fcb2eb84d3b",
+      "index": 0,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/XNAj9ocJSUk_00124_00154.mp4",
+          "sha256": "b3213efe2a729231770bc9451917413664227fef2a8dbf8cdd5366baef122d00",
+          "size": 4861983
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_XNAj9ocJSUk_00124_00154_3-771_man.mp4",
+          "sha256": "9d4772df0e6bf975e43bfa8ba1cf0676b12cd7c60e7f4541ac16cbfec3edeee8",
+          "size": 1658200
+        },
+        "uniface": {
+          "path": "uniface/uniface_XNAj9ocJSUk_00124_00154_3-848_man.mp4",
+          "sha256": "5f8552d9c3743c21ff3dfc2f97063b1ba6af3aa62355cff58a21016aa4d14f84",
+          "size": 1686825
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:3-771.jpg",
+        "rtfs-photo-filename:3-848.jpg"
+      ],
+      "source_video_url": "https://www.youtube.com/watch?v=XNAj9ocJSUk"
+    },
+    {
+      "group": "1d48e9b151c6d22fcd53617066d8ea92bcc3504147fbdd6f08f8122d9c51729d",
+      "index": 1,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/aYWZBbhlU44_00075_00092.mp4",
+          "sha256": "ac208aebcfa2a2f6e2c712abaeedc80437de557add34468cba8712bb6e374884",
+          "size": 1719401
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_aYWZBbhlU44_00075_00092_3-245_man.mp4",
+          "sha256": "662923b7b5b137de3e7fef63d0673a0f280c726f597911920890610f0091db57",
+          "size": 518326
+        },
+        "uniface": {
+          "path": "uniface/uniface_aYWZBbhlU44_00075_00092_3-664_man.mp4",
+          "sha256": "c7790983d79190c273896ef1c21455a5ba3835c6fb7256109b35be329a5eb3c8",
+          "size": 504469
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:3-245.jpg",
+        "rtfs-photo-filename:3-664.jpg"
+      ],
+      "source_video_url": "https://www.youtube.com/watch?v=aYWZBbhlU44"
+    },
+    {
+      "group": "2235e3469f9c8fac4e14191323a57a594efebf7f2e9068eb340d0ea3b8d270d6",
+      "index": 2,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/StIc4eAMYG8_00558_00588.mp4",
+          "sha256": "b8d1c2b3b715d76dce86cdda8d2077c04ae25d62ee52d2cb918dd9e7bfd49786",
+          "size": 2690593
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_StIc4eAMYG8_00558_00588_1-369_woman.mp4",
+          "sha256": "cb41b0a28f9e053d3cc49bcda49551b29fa4b72794677366a3dd1e9ef6bccabd",
+          "size": 952379
+        },
+        "uniface": {
+          "path": "uniface/uniface_StIc4eAMYG8_00558_00588_1-634_woman.mp4",
+          "sha256": "edc6f5ca5cdb4a71c0cf5886fce8740a645c0a3b9dce4e604315497eade5b982",
+          "size": 939498
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:1-369.jpg",
+        "rtfs-photo-filename:1-634.jpg"
+      ],
+      "source_video_url": "https://www.youtube.com/watch?v=StIc4eAMYG8"
+    },
+    {
+      "group": "273be9cf1423dcb8699ba176461b7e69f562c11fdf23829245a338fb39a40cd9",
+      "index": 3,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/9vgxCBEFg4s_00002_00012.mp4",
+          "sha256": "a5173378fcf684f6ddbe1fe6036e819134aed1cfe061eadf9976bd26fab6f126",
+          "size": 669072
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_9vgxCBEFg4s_00002_00012_2-50_woman.mp4",
+          "sha256": "cfd4fa04de14060e8c764be633b2a027faa99d69a6bfcd77d9a6f39942a2d44a",
+          "size": 244490
+        },
+        "uniface": {
+          "path": "uniface/uniface_9vgxCBEFg4s_00002_00012_1-204_woman.mp4",
+          "sha256": "a3e63a8c6df9d505c772008929dc87d738056d9263a4267676b8214a3327549e",
+          "size": 239823
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:2-50.jpg",
+        "rtfs-photo-filename:1-204.jpg"
+      ],
+      "source_video_url": "https://www.youtube.com/watch?v=9vgxCBEFg4s&list=PLKrWTzPCyDSKhoBQnJaF5AZtmrQiUeUfR&index=537&ab_channel=MosNaim%D0%9A%D0%B0%D0%B4%D1%80%D0%BE%D0%B2%D0%BE%D0%B5%D0%90%D0%B3%D0%B5%D0%BD%D1%82%D1%81%D1%82%D0%B2%D0%BE"
+    },
+    {
+      "group": "2d93b119d8de0013f4aca93871671aa0c52fc1cbd7d441629fea2256eefc13b8",
+      "index": 4,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/mGS5P7beBOU_02922_02952.mp4",
+          "sha256": "c658ab908759f320cbe73bd9e898aa556236c1fa9150298cacfa954eaf640b46",
+          "size": 4624000
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_mGS5P7beBOU_02922_02952_1-610_woman.mp4",
+          "sha256": "29025d4051a48ebb2f88c1120a132180a75aa9a69ac293a39984e47a84358033",
+          "size": 1220267
+        },
+        "uniface": {
+          "path": "uniface/uniface_mGS5P7beBOU_02922_02952_1-186_woman.mp4",
+          "sha256": "1137631d0c6f1c657572f6377ae934cab1669de90a596cf125b3241918fc8c64",
+          "size": 1212235
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:1-610.jpg",
+        "rtfs-photo-filename:1-186.jpg"
+      ],
+      "source_video_url": "https://www.youtube.com/watch?v=mGS5P7beBOU"
+    },
+    {
+      "group": "2e7d16eab1d59ff2eb5cc4a6bdf1a47943c3650090d3c64f54d5f60d87a426ea",
+      "index": 5,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/NAyxhLRco6k_00037_00059.mp4",
+          "sha256": "b340cb9ca82cfb1b7aefa549593a6850253c343a90d169d28eb9726614e344a7",
+          "size": 6612502
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_NAyxhLRco6k_00037_00059_1-542_woman.mp4",
+          "sha256": "69c5ffa2b12f8e44a38503021b624be2832e94d3a525892cab7e044621081c93",
+          "size": 2216843
+        },
+        "uniface": {
+          "path": "uniface/uniface_NAyxhLRco6k_00037_00059_1-131_woman.mp4",
+          "sha256": "ad316169fa3362de395a07018ccaa6e4b5658c7bf857411d34b75b8d4cd19538",
+          "size": 2226756
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:1-542.jpg",
+        "rtfs-photo-filename:1-131.jpg"
+      ],
+      "source_video_url": "https://youtu.be/NAyxhLRco6k?si=zUuCYE5XZgCVe6Pk"
+    },
+    {
+      "group": "31c6616a84e2a1ec56eb114405d3f9f471d308fd771fa1485a24ee5579911d94",
+      "index": 6,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/vlr-H7GDr-I_00033_00053.mp4",
+          "sha256": "b36d6cc5dd9f1b219f84c3a9d745f9f14c1c1befaa898e0bb879ceb59c9b4573",
+          "size": 1897277
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_vlr-H7GDr-I_00033_00053_3-284_man.mp4",
+          "sha256": "42cfb606f976d548035bfd81ed4338c29f3324c7fcd05b829b11920c57f83833",
+          "size": 652237
+        },
+        "uniface": {
+          "path": "uniface/uniface_vlr-H7GDr-I_00033_00053_3-413_man.mp4",
+          "sha256": "f6fe49a8f779954b2cbbe677984c3a02141ba99fac97333e2f2f445982b1ff34",
+          "size": 636647
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:3-284.jpg",
+        "rtfs-photo-filename:3-413.jpg"
+      ],
+      "source_video_url": "https://www.youtube.com/watch?v=vlr-H7GDr-I"
+    },
+    {
+      "group": "4c2110072234cc2d09dd57fb9b615cf060a5314535ee6cf4289c339b810bf8df",
+      "index": 7,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/ZrFxJijti2E_01185_01215.mp4",
+          "sha256": "3eb11d1d6385a4237c3ab1b8724467765222285e78fc09910267ac04f2e43837",
+          "size": 2729314
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_ZrFxJijti2E_01185_01215_3-740_man.mp4",
+          "sha256": "5a5c7703c8ec20b6fe3171db54ef6d6c763c67f03b116c53fc509a27cb7479d7",
+          "size": 1007666
+        },
+        "uniface": {
+          "path": "uniface/uniface_ZrFxJijti2E_01185_01215_3-715_man.mp4",
+          "sha256": "8a36c131dbe5ad88c1404c362613ae75775357f5db2d6eac7b708cc6d55fc343",
+          "size": 1082194
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:3-740.jpg",
+        "rtfs-photo-filename:3-715.jpg"
+      ],
+      "source_video_url": "https://www.youtube.com/watch?v=ZrFxJijti2E"
+    },
+    {
+      "group": "541ba27b631aa8a528553084817a247ac79fdaa58c1dce19d29641875d2fd6bd",
+      "index": 8,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/sMMVL7EImNg_00000_00010.mp4",
+          "sha256": "821f53317ccde5d1aac710b995bb30884f84698f7d839f2b3c2ec0ea83dace49",
+          "size": 2767747
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_sMMVL7EImNg_00000_00010_1-550_woman.mp4",
+          "sha256": "f09ec05d531f1321fc6dfac9243552ae6c8216006c2c8760dab75d8528f45e60",
+          "size": 1534141
+        },
+        "uniface": {
+          "path": "uniface/uniface_sMMVL7EImNg_00000_00010_1-30_woman.mp4",
+          "sha256": "64c7414ab163237b1276db2190c9fc1a21bb5c718125da0b259b5feb4de52925",
+          "size": 1702567
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:1-550.jpg",
+        "rtfs-photo-filename:1-30.jpg"
+      ],
+      "source_video_url": "https://youtu.be/sMMVL7EImNg?feature=shared"
+    },
+    {
+      "group": "5a645d3886a7c58c8f6af98fe40230d68ff07e14b0586968966b8e56973374e7",
+      "index": 9,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/z5ovPya7P1M_02100_02114.mp4",
+          "sha256": "72e2e2d17db9cf97c7d76c21f61e2aa0ed6c30ddb0b48af31766029652660920",
+          "size": 2570559
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_z5ovPya7P1M_02100_02114_3-119_man.mp4",
+          "sha256": "38e7d64b1e07eab57b15adcc504f736ad6afe8caf5e7f2ba4ed64c1f66d6a12b",
+          "size": 642409
+        },
+        "uniface": {
+          "path": "uniface/uniface_z5ovPya7P1M_02100_02114_3-312_man.mp4",
+          "sha256": "f4dcdd649497dc29a8020fbb9befdbe6db9b444cfd8782a5c94e3a59b90e8e04",
+          "size": 636597
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:3-119.jpg",
+        "rtfs-photo-filename:3-312.jpg"
+      ],
+      "source_video_url": "https://www.youtube.com/watch?v=z5ovPya7P1M"
+    },
+    {
+      "group": "6dc838a436f651cbc05eadc84ac2d7dd59f052d4fe30e5fe8edd30b130099d1b",
+      "index": 10,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/ruzujFkImKE_00018_00034.mp4",
+          "sha256": "fcb02e0a263fa83d6029547fcb5a95638fe5a8f135050e9267539f4ad0b78f91",
+          "size": 2688498
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_ruzujFkImKE_00018_00034_1-228_woman.mp4",
+          "sha256": "d23354f8d2b877e925ca7d68ddca6550b9c17b436e64d86f9fa049b317ac2c09",
+          "size": 1087434
+        },
+        "uniface": {
+          "path": "uniface/uniface_ruzujFkImKE_00018_00034_1-724_woman.mp4",
+          "sha256": "d70d622042a7822cbf2121616133dc12c6333cd4c4c41733b2952552efba77df",
+          "size": 1071662
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:1-228.jpg",
+        "rtfs-photo-filename:1-724.jpg"
+      ],
+      "source_video_url": "https://www.youtube.com/watch?v=ruzujFkImKE"
+    },
+    {
+      "group": "70da7d7025bda7f176a00d0c7b32453a5c356da56fd3a9bad5ec818870164bde",
+      "index": 11,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/tT1LrovqBAM_00000_00020.mp4",
+          "sha256": "17f08aee9298792ad8df0727f640b64dce9a5f1e8c36cec293b876f01aa9d90e",
+          "size": 3863143
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_tT1LrovqBAM_00000_00020_1-448_woman.mp4",
+          "sha256": "5441b08716b309634869b9121ec7619b25040af74455cde4bc24fc19947d6486",
+          "size": 1298901
+        },
+        "uniface": {
+          "path": "uniface/uniface_tT1LrovqBAM_00000_00020_1-462_woman.mp4",
+          "sha256": "1c2e42e027bc74efacd18c010b3e1daa276cbec88a2edf8051ec5d0e1f75f3da",
+          "size": 1292003
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:1-448.jpg",
+        "rtfs-photo-filename:1-462.jpg"
+      ],
+      "source_video_url": "https://www.youtube.com/watch?v=tT1LrovqBAM&list=PLKrWTzPCyDSKhoBQnJaF5AZtmrQiUeUfR&index=228"
+    },
+    {
+      "group": "71d603f94a633f17f019ced572f87a2c51bd85c82ebd4ab7d01266213997b772",
+      "index": 12,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/tkN3x0SQ7RE_00209_00220.mp4",
+          "sha256": "34d6fefba936e2dcc04c2231ea2514a382c28da8e50c39161cc94b08839f1f00",
+          "size": 2029252
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_tkN3x0SQ7RE_00209_00220_3-94_man.mp4",
+          "sha256": "4d3b0597ef11b81d028090ed7b80cdf599aa64771ab791ed0a5482ccf721a282",
+          "size": 597110
+        },
+        "uniface": {
+          "path": "uniface/uniface_tkN3x0SQ7RE_00209_00220_3-577_man.mp4",
+          "sha256": "1cb4f0116a140e5876f5872ef2011a10673a2a09fc3b5d821e91cbf74a53f415",
+          "size": 591150
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:3-94.jpg",
+        "rtfs-photo-filename:3-577.jpg"
+      ],
+      "source_video_url": "https://youtu.be/tkN3x0SQ7RE?si=7MnNdYiX-N9ecAwh"
+    },
+    {
+      "group": "7a24281950793459756bf3996ff35867dd8d5ebf1af7672126b9d1a7be8b7f13",
+      "index": 13,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/pYaXMIQ1sso_00000_00010.mp4",
+          "sha256": "53fce8569a8d9cccd45270181e796c9a1b2c14a5847d8a3255866ca34afa6318",
+          "size": 1603724
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_pYaXMIQ1sso_00000_00010_1-556_woman.mp4",
+          "sha256": "022565c54b45eedb20ccd7f1c380a92a58646a4f79ca1aa151d43c75e03d094c",
+          "size": 447978
+        },
+        "uniface": {
+          "path": "uniface/uniface_pYaXMIQ1sso_00000_00010_1-515_woman.mp4",
+          "sha256": "2a7c5e487a655ab85a3fb0f514e3c1d64c6087600383027e72eb0a474e269878",
+          "size": 441981
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:1-556.jpg",
+        "rtfs-photo-filename:1-515.jpg"
+      ],
+      "source_video_url": "https://www.youtube.com/watch?v=pYaXMIQ1sso&list=PLKrWTzPCyDSKhoBQnJaF5AZtmrQiUeUfR&index=69"
+    },
+    {
+      "group": "81432bac6aca4546af0a3f6ac793bd7acc4eeaa9c14732e5a7e695be5a0883e7",
+      "index": 14,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/6WjaMsVog4E_00260_00270.mp4",
+          "sha256": "08b5772d8b1597d636800185ed2c4aede9ceba28a66aae4d2ea6bc2ecd06d4e7",
+          "size": 2763797
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_6WjaMsVog4E_00260_00270_1-722_woman.mp4",
+          "sha256": "dbab63ac6db55a24040fe01934d6b212d34d1f842a9f1c06aec7dc7e46efa36d",
+          "size": 797678
+        },
+        "uniface": {
+          "path": "uniface/uniface_6WjaMsVog4E_00260_00270_1-688_woman.mp4",
+          "sha256": "3d206f624e676581044a2981bc3a3a774daf42da0ea32df3c282df372c68c444",
+          "size": 800268
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:1-722.jpg",
+        "rtfs-photo-filename:1-688.jpg"
+      ],
+      "source_video_url": "https://www.youtube.com/watch?v=6WjaMsVog4E"
+    },
+    {
+      "group": "8ad6e536223f9ed295f8f666a88bd6dac4f4ed59beb3df0c026e8689268198bc",
+      "index": 15,
+      "role": "held",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/HmC9r0J5POw_00684_00694.mp4",
+          "sha256": "df5bd9c9b47b28b5e2e302a471e121b990114ce3795ca503b1b788f93c5e8a55",
+          "size": 2444059
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_HmC9r0J5POw_00684_00694_1-376_woman.mp4",
+          "sha256": "34780c4bc511995ed18dbcce98cd67e094ee9ab6235aa75ca6582684a4d85807",
+          "size": 963190
+        },
+        "uniface": {
+          "path": "uniface/uniface_HmC9r0J5POw_00684_00694_2-387_woman.mp4",
+          "sha256": "816ec02dedc3fb5b1e8adc0e1f599226dda8dba145ed1cdacfa1bd0eafb0dcde",
+          "size": 965881
+        }
+      },
+      "donors": [
+        "rtfs-photo-filename:1-376.jpg",
+        "rtfs-photo-filename:2-387.jpg"
+      ],
+      "source_video_url": "https://www.youtube.com/watch?v=HmC9r0J5POw"
+    }
+  ],
+  "source_selection": "Fixed hash order of the previously committed confirmation role. Source videos, donors and media digests excluded against the two prior face interval banks."
+}

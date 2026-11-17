@@ -1,0 +1,3621 @@
+{
+  "schema": "chipmunk.video-face-shot-guard/1",
+  "frozen_comparison_sha256": "321b69af438f8773fc99a11e41b25066cc463417f8d357a4057043825eb098de",
+  "manifest_sha256": "52dd8697c7f0ee035e6f5baac8c89adfa8d7b239be068898e5e97b948685db9d",
+  "rows": [
+    {
+      "file": "00-original-direct.mp4",
+      "group": "1846f0648a741a92b349fe38b47750102509112fbeeaf1d88f0b7fcb2eb84d3b",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b3213efe2a729231770bc9451917413664227fef2a8dbf8cdd5366baef122d00",
+      "input_sha256": "ab8599e5349636e126e486193b79143b94c7b88b26ec0bd6774ae532512ba106",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "00-original-tandem.mp4",
+      "group": "1846f0648a741a92b349fe38b47750102509112fbeeaf1d88f0b7fcb2eb84d3b",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b3213efe2a729231770bc9451917413664227fef2a8dbf8cdd5366baef122d00",
+      "input_sha256": "93b09533bddcf5dbee595d019a939ceb38f5ed64594e17baddd235f09b08f3bb",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "00-gain-direct.mp4",
+      "group": "1846f0648a741a92b349fe38b47750102509112fbeeaf1d88f0b7fcb2eb84d3b",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b3213efe2a729231770bc9451917413664227fef2a8dbf8cdd5366baef122d00",
+      "input_sha256": "24c1f834b02af66372c60bc73076c13d0b1dfd708b1e43fb91d83dc6a7c1b1c5",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "00-gain-tandem.mp4",
+      "group": "1846f0648a741a92b349fe38b47750102509112fbeeaf1d88f0b7fcb2eb84d3b",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b3213efe2a729231770bc9451917413664227fef2a8dbf8cdd5366baef122d00",
+      "input_sha256": "2475c33a2d7a2ce3d5e47589ee297ef32e5bbd7a4e254258fe3716074f792ae3",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "00-picture_jump-direct.mp4",
+      "group": "1846f0648a741a92b349fe38b47750102509112fbeeaf1d88f0b7fcb2eb84d3b",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b3213efe2a729231770bc9451917413664227fef2a8dbf8cdd5366baef122d00",
+      "input_sha256": "cf9a7f74f2cf528b40cda745dfda2faeeebc5dee16680169b93b24397ccdc345",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "00-picture_jump-tandem.mp4",
+      "group": "1846f0648a741a92b349fe38b47750102509112fbeeaf1d88f0b7fcb2eb84d3b",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b3213efe2a729231770bc9451917413664227fef2a8dbf8cdd5366baef122d00",
+      "input_sha256": "9d784e723771fb841639f8fd00706e9b3a8cd46695b6dea216ec2bcf88ab7b4e",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "00-different_shot-direct.mp4",
+      "group": "1846f0648a741a92b349fe38b47750102509112fbeeaf1d88f0b7fcb2eb84d3b",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b3213efe2a729231770bc9451917413664227fef2a8dbf8cdd5366baef122d00",
+      "input_sha256": "bc663f4a7b240cc181b05b3a278678fb749c86dab1b755c5c1c080b8ba2e1b63",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "00-different_shot-tandem.mp4",
+      "group": "1846f0648a741a92b349fe38b47750102509112fbeeaf1d88f0b7fcb2eb84d3b",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b3213efe2a729231770bc9451917413664227fef2a8dbf8cdd5366baef122d00",
+      "input_sha256": "a2abbb0fbd9e9d1e337d6febb171a01d907bd292af050b3a6e97ab02468e847c",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "00-face_blur-direct.mp4",
+      "group": "1846f0648a741a92b349fe38b47750102509112fbeeaf1d88f0b7fcb2eb84d3b",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": [
+        16,
+        25
+      ],
+      "existing_assessed": true,
+      "source_sha256": "b3213efe2a729231770bc9451917413664227fef2a8dbf8cdd5366baef122d00",
+      "input_sha256": "aefe1065db0181a2e111d6af3f91d4f5c9ae1c6209d91fd60da21c09d5fcd486",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "00-face_blur-tandem.mp4",
+      "group": "1846f0648a741a92b349fe38b47750102509112fbeeaf1d88f0b7fcb2eb84d3b",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": [
+        16,
+        25
+      ],
+      "existing_assessed": true,
+      "source_sha256": "b3213efe2a729231770bc9451917413664227fef2a8dbf8cdd5366baef122d00",
+      "input_sha256": "dd30d4ed041f31bc89ad932511ad57b3eb8093b2e7011c233b8206aa5dd54b69",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "00-inswapper-direct.mp4",
+      "group": "1846f0648a741a92b349fe38b47750102509112fbeeaf1d88f0b7fcb2eb84d3b",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        14,
+        24
+      ],
+      "existing": [
+        16,
+        25
+      ],
+      "existing_assessed": true,
+      "source_sha256": "b3213efe2a729231770bc9451917413664227fef2a8dbf8cdd5366baef122d00",
+      "input_sha256": "8a880fbbe7bf57a4c3b76dabbb5a2655d51f70d5546d56b5c402ae18290dd3f2",
+      "proposal": [
+        14,
+        24
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "00-inswapper-tandem.mp4",
+      "group": "1846f0648a741a92b349fe38b47750102509112fbeeaf1d88f0b7fcb2eb84d3b",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        14,
+        24
+      ],
+      "existing": [
+        16,
+        25
+      ],
+      "existing_assessed": true,
+      "source_sha256": "b3213efe2a729231770bc9451917413664227fef2a8dbf8cdd5366baef122d00",
+      "input_sha256": "9f8d62969681191357199f54bb5827e251fd69fa935f515b1c6f3ecd8c543294",
+      "proposal": [
+        14,
+        24
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "00-uniface-direct.mp4",
+      "group": "1846f0648a741a92b349fe38b47750102509112fbeeaf1d88f0b7fcb2eb84d3b",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        22,
+        50
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b3213efe2a729231770bc9451917413664227fef2a8dbf8cdd5366baef122d00",
+      "input_sha256": "c79dc856d33d049e7056579651fb7ba119f1d0d3d1323a3ac2cc89b3c44496b0",
+      "proposal": [
+        22,
+        52
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "00-uniface-tandem.mp4",
+      "group": "1846f0648a741a92b349fe38b47750102509112fbeeaf1d88f0b7fcb2eb84d3b",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        22,
+        50
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b3213efe2a729231770bc9451917413664227fef2a8dbf8cdd5366baef122d00",
+      "input_sha256": "e0a4a015b632626a5c01347e874bde004171f63072ab4a7c6aa2a2ced0d2fad8",
+      "proposal": [
+        22,
+        54
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "01-original-direct.mp4",
+      "group": "1d48e9b151c6d22fcd53617066d8ea92bcc3504147fbdd6f08f8122d9c51729d",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "ac208aebcfa2a2f6e2c712abaeedc80437de557add34468cba8712bb6e374884",
+      "input_sha256": "4662257955b0e37ea2d2f4bc276a8f94878911535b6d6164d3852ba04f6bc734",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "01-original-tandem.mp4",
+      "group": "1d48e9b151c6d22fcd53617066d8ea92bcc3504147fbdd6f08f8122d9c51729d",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "ac208aebcfa2a2f6e2c712abaeedc80437de557add34468cba8712bb6e374884",
+      "input_sha256": "1ad80298cc14d0b1c22597a01aa2219c63f489fc74bf477fcf6bd245f9b42297",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "01-gain-direct.mp4",
+      "group": "1d48e9b151c6d22fcd53617066d8ea92bcc3504147fbdd6f08f8122d9c51729d",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "ac208aebcfa2a2f6e2c712abaeedc80437de557add34468cba8712bb6e374884",
+      "input_sha256": "38c5be7aba9e0ed8c1ea2761455f11bad8e87f7818a5ed6edf30d9ecf13c3883",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "01-gain-tandem.mp4",
+      "group": "1d48e9b151c6d22fcd53617066d8ea92bcc3504147fbdd6f08f8122d9c51729d",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "ac208aebcfa2a2f6e2c712abaeedc80437de557add34468cba8712bb6e374884",
+      "input_sha256": "5d12b72cb5cd609ff5f65206eaa69b7a1dfef6e78a15189c2ae1595bac85872d",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "01-picture_jump-direct.mp4",
+      "group": "1d48e9b151c6d22fcd53617066d8ea92bcc3504147fbdd6f08f8122d9c51729d",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "ac208aebcfa2a2f6e2c712abaeedc80437de557add34468cba8712bb6e374884",
+      "input_sha256": "ebc510cef644219ff92e42f62a2bd1ae3a8ce4d2af5ddf9d6c668d11bac09f53",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "01-picture_jump-tandem.mp4",
+      "group": "1d48e9b151c6d22fcd53617066d8ea92bcc3504147fbdd6f08f8122d9c51729d",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "ac208aebcfa2a2f6e2c712abaeedc80437de557add34468cba8712bb6e374884",
+      "input_sha256": "9ebdcea0a85b819e340e5853389da76e67c4035b8b4f13b9f3d667d99ff5b5ad",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "01-different_shot-direct.mp4",
+      "group": "1d48e9b151c6d22fcd53617066d8ea92bcc3504147fbdd6f08f8122d9c51729d",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "ac208aebcfa2a2f6e2c712abaeedc80437de557add34468cba8712bb6e374884",
+      "input_sha256": "5a633540e8fccbebf7c0bf5db8c83f87c12866ecca9dd43df842ecc3489947ed",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "01-different_shot-tandem.mp4",
+      "group": "1d48e9b151c6d22fcd53617066d8ea92bcc3504147fbdd6f08f8122d9c51729d",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "ac208aebcfa2a2f6e2c712abaeedc80437de557add34468cba8712bb6e374884",
+      "input_sha256": "d993513f75051e1d6cbbc28a0eef305d1db5ccbf1f5074c720bfb7d38260d37c",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "01-face_blur-direct.mp4",
+      "group": "1d48e9b151c6d22fcd53617066d8ea92bcc3504147fbdd6f08f8122d9c51729d",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "ac208aebcfa2a2f6e2c712abaeedc80437de557add34468cba8712bb6e374884",
+      "input_sha256": "26c269efd82ef5c5ab8bd729da7282ca566d08dce5edf10acdc595e930bded96",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "01-face_blur-tandem.mp4",
+      "group": "1d48e9b151c6d22fcd53617066d8ea92bcc3504147fbdd6f08f8122d9c51729d",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "ac208aebcfa2a2f6e2c712abaeedc80437de557add34468cba8712bb6e374884",
+      "input_sha256": "dbb0f022e146adb763d06b6f7017a790feb33a3cd3d763b43d410933d3119da6",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "01-inswapper-direct.mp4",
+      "group": "1d48e9b151c6d22fcd53617066d8ea92bcc3504147fbdd6f08f8122d9c51729d",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        22,
+        40
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "ac208aebcfa2a2f6e2c712abaeedc80437de557add34468cba8712bb6e374884",
+      "input_sha256": "a1d3e824f4ee267bb70bd69186520603188538cd90ca62820d3dcc69341fe039",
+      "proposal": [
+        22,
+        42
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "01-inswapper-tandem.mp4",
+      "group": "1d48e9b151c6d22fcd53617066d8ea92bcc3504147fbdd6f08f8122d9c51729d",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        22,
+        40
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "ac208aebcfa2a2f6e2c712abaeedc80437de557add34468cba8712bb6e374884",
+      "input_sha256": "cad2f650dabb7a2202026cbe07d46ae3f7a11efb5aaab58081f0ca683008138b",
+      "proposal": [
+        22,
+        42
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "01-uniface-direct.mp4",
+      "group": "1d48e9b151c6d22fcd53617066d8ea92bcc3504147fbdd6f08f8122d9c51729d",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        28,
+        68
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "ac208aebcfa2a2f6e2c712abaeedc80437de557add34468cba8712bb6e374884",
+      "input_sha256": "e8deb55831d07ab9aa6ce609f89b72747bc3574d445d4da994241935e1fc0c20",
+      "proposal": [
+        28,
+        70
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "01-uniface-tandem.mp4",
+      "group": "1d48e9b151c6d22fcd53617066d8ea92bcc3504147fbdd6f08f8122d9c51729d",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        28,
+        68
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "ac208aebcfa2a2f6e2c712abaeedc80437de557add34468cba8712bb6e374884",
+      "input_sha256": "4aaea4de016613cbe598b42cd0d29303b37426a3eecadff0bfe44d0374559e33",
+      "proposal": [
+        28,
+        70
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "02-original-direct.mp4",
+      "group": "2235e3469f9c8fac4e14191323a57a594efebf7f2e9068eb340d0ea3b8d270d6",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b8d1c2b3b715d76dce86cdda8d2077c04ae25d62ee52d2cb918dd9e7bfd49786",
+      "input_sha256": "59509db1a2ebe115663905c1c9612fb3391db6c77af48aec9a00d8158981073a",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "02-original-tandem.mp4",
+      "group": "2235e3469f9c8fac4e14191323a57a594efebf7f2e9068eb340d0ea3b8d270d6",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b8d1c2b3b715d76dce86cdda8d2077c04ae25d62ee52d2cb918dd9e7bfd49786",
+      "input_sha256": "766d635b5fb12d026eac04f9ef29268c6d45f88a83fdd101954c04edebd075ba",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "02-gain-direct.mp4",
+      "group": "2235e3469f9c8fac4e14191323a57a594efebf7f2e9068eb340d0ea3b8d270d6",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b8d1c2b3b715d76dce86cdda8d2077c04ae25d62ee52d2cb918dd9e7bfd49786",
+      "input_sha256": "3dbb4a904d3caeb4ea507857e4a8a8956ea702a73a458f415dcb3b96e3c17e0f",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "02-gain-tandem.mp4",
+      "group": "2235e3469f9c8fac4e14191323a57a594efebf7f2e9068eb340d0ea3b8d270d6",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b8d1c2b3b715d76dce86cdda8d2077c04ae25d62ee52d2cb918dd9e7bfd49786",
+      "input_sha256": "9d654cd207bfda5b7bd0b69a31356818f7cbfa07c03dedb6524ed055f1637e15",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "02-picture_jump-direct.mp4",
+      "group": "2235e3469f9c8fac4e14191323a57a594efebf7f2e9068eb340d0ea3b8d270d6",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b8d1c2b3b715d76dce86cdda8d2077c04ae25d62ee52d2cb918dd9e7bfd49786",
+      "input_sha256": "0c3034dbd9570a38e0ebbefe5ce57ba33f708219d1f00ef3be689e150739c157",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "02-picture_jump-tandem.mp4",
+      "group": "2235e3469f9c8fac4e14191323a57a594efebf7f2e9068eb340d0ea3b8d270d6",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b8d1c2b3b715d76dce86cdda8d2077c04ae25d62ee52d2cb918dd9e7bfd49786",
+      "input_sha256": "fe373bd85906490e9a49cea361b5c878bfa8da6627d579f872de5213f26e1457",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "02-different_shot-direct.mp4",
+      "group": "2235e3469f9c8fac4e14191323a57a594efebf7f2e9068eb340d0ea3b8d270d6",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b8d1c2b3b715d76dce86cdda8d2077c04ae25d62ee52d2cb918dd9e7bfd49786",
+      "input_sha256": "642b22d8343d72741eb5a8bf18b3f1599d8381b70a54fc5eddcaaf690fe82210",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "02-different_shot-tandem.mp4",
+      "group": "2235e3469f9c8fac4e14191323a57a594efebf7f2e9068eb340d0ea3b8d270d6",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b8d1c2b3b715d76dce86cdda8d2077c04ae25d62ee52d2cb918dd9e7bfd49786",
+      "input_sha256": "0329b431c22ca9e25442a62ce83f025127c1ca5336e25e3b38ceb749fc208c7d",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "02-face_blur-direct.mp4",
+      "group": "2235e3469f9c8fac4e14191323a57a594efebf7f2e9068eb340d0ea3b8d270d6",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b8d1c2b3b715d76dce86cdda8d2077c04ae25d62ee52d2cb918dd9e7bfd49786",
+      "input_sha256": "aa49d52ea10943b293cbd4b4ab5eb7a8b0e9a06cf1564e1805a8d220127f09e9",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "02-face_blur-tandem.mp4",
+      "group": "2235e3469f9c8fac4e14191323a57a594efebf7f2e9068eb340d0ea3b8d270d6",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b8d1c2b3b715d76dce86cdda8d2077c04ae25d62ee52d2cb918dd9e7bfd49786",
+      "input_sha256": "0d0f4d2cdb1ca787edb07b6588363b9c0790b32c67a9db00fcf41c71d06d872f",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "02-inswapper-direct.mp4",
+      "group": "2235e3469f9c8fac4e14191323a57a594efebf7f2e9068eb340d0ea3b8d270d6",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        28,
+        56
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b8d1c2b3b715d76dce86cdda8d2077c04ae25d62ee52d2cb918dd9e7bfd49786",
+      "input_sha256": "7c10246b033a147465b7ec1a477b2738a5bb7fc4c5fa4cc3f558f8451a2ed49f",
+      "proposal": [
+        28,
+        60
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "02-inswapper-tandem.mp4",
+      "group": "2235e3469f9c8fac4e14191323a57a594efebf7f2e9068eb340d0ea3b8d270d6",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        28,
+        56
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b8d1c2b3b715d76dce86cdda8d2077c04ae25d62ee52d2cb918dd9e7bfd49786",
+      "input_sha256": "fc378ef5380c6011f0997c58d51344965e9ae025a39d8a8abad357a8cb5dcb59",
+      "proposal": [
+        28,
+        58
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "02-uniface-direct.mp4",
+      "group": "2235e3469f9c8fac4e14191323a57a594efebf7f2e9068eb340d0ea3b8d270d6",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        36,
+        46
+      ],
+      "existing": [
+        37,
+        47
+      ],
+      "existing_assessed": true,
+      "source_sha256": "b8d1c2b3b715d76dce86cdda8d2077c04ae25d62ee52d2cb918dd9e7bfd49786",
+      "input_sha256": "826d63761e2f6123f2bb18eaf8fbf7f8b021b9dbc7b2b976aa1c1b2b6b99f81b",
+      "proposal": [
+        36,
+        46
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "02-uniface-tandem.mp4",
+      "group": "2235e3469f9c8fac4e14191323a57a594efebf7f2e9068eb340d0ea3b8d270d6",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        36,
+        46
+      ],
+      "existing": [
+        37,
+        47
+      ],
+      "existing_assessed": true,
+      "source_sha256": "b8d1c2b3b715d76dce86cdda8d2077c04ae25d62ee52d2cb918dd9e7bfd49786",
+      "input_sha256": "27fc50a85420b058989195852cc19ed8d064fb9d2695cbde34a37a7f17643c23",
+      "proposal": [
+        36,
+        46
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "03-original-direct.mp4",
+      "group": "273be9cf1423dcb8699ba176461b7e69f562c11fdf23829245a338fb39a40cd9",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": false,
+      "source_sha256": "a5173378fcf684f6ddbe1fe6036e819134aed1cfe061eadf9976bd26fab6f126",
+      "input_sha256": "ba6e29d22e26cdcf7a7d5b3e8b665aac666b7d4a014be61d3ba7c709d8f265d2",
+      "proposal": null,
+      "considered": false,
+      "cuts": null
+    },
+    {
+      "file": "03-original-tandem.mp4",
+      "group": "273be9cf1423dcb8699ba176461b7e69f562c11fdf23829245a338fb39a40cd9",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": false,
+      "source_sha256": "a5173378fcf684f6ddbe1fe6036e819134aed1cfe061eadf9976bd26fab6f126",
+      "input_sha256": "46f901dd0eacb9ca2e98fb05119cdaad5e6bfe64699479e37ad67b1f7f0ded8a",
+      "proposal": null,
+      "considered": false,
+      "cuts": null
+    },
+    {
+      "file": "03-gain-direct.mp4",
+      "group": "273be9cf1423dcb8699ba176461b7e69f562c11fdf23829245a338fb39a40cd9",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": false,
+      "source_sha256": "a5173378fcf684f6ddbe1fe6036e819134aed1cfe061eadf9976bd26fab6f126",
+      "input_sha256": "d021dae91675264a79fe9c907dc7c5b678d18e84c3a0625d19dabfac1cc800ff",
+      "proposal": null,
+      "considered": false,
+      "cuts": null
+    },
+    {
+      "file": "03-gain-tandem.mp4",
+      "group": "273be9cf1423dcb8699ba176461b7e69f562c11fdf23829245a338fb39a40cd9",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": false,
+      "source_sha256": "a5173378fcf684f6ddbe1fe6036e819134aed1cfe061eadf9976bd26fab6f126",
+      "input_sha256": "475326601132a7fcd5b3803bec9f5c7eddbc3e1c593da4f9621fcf79eb69c0d6",
+      "proposal": null,
+      "considered": false,
+      "cuts": null
+    },
+    {
+      "file": "03-picture_jump-direct.mp4",
+      "group": "273be9cf1423dcb8699ba176461b7e69f562c11fdf23829245a338fb39a40cd9",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": false,
+      "source_sha256": "a5173378fcf684f6ddbe1fe6036e819134aed1cfe061eadf9976bd26fab6f126",
+      "input_sha256": "f6c81d0c4f65c08b58f30c4dd9049a4d84478822a3f047bf61d8d324b0e3fb29",
+      "proposal": null,
+      "considered": false,
+      "cuts": null
+    },
+    {
+      "file": "03-picture_jump-tandem.mp4",
+      "group": "273be9cf1423dcb8699ba176461b7e69f562c11fdf23829245a338fb39a40cd9",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": false,
+      "source_sha256": "a5173378fcf684f6ddbe1fe6036e819134aed1cfe061eadf9976bd26fab6f126",
+      "input_sha256": "fb7fd4ebf5544e397aa6d0b22ee340ee61692ecf1b9e077556d7aefd106cb4d3",
+      "proposal": null,
+      "considered": false,
+      "cuts": null
+    },
+    {
+      "file": "03-different_shot-direct.mp4",
+      "group": "273be9cf1423dcb8699ba176461b7e69f562c11fdf23829245a338fb39a40cd9",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "a5173378fcf684f6ddbe1fe6036e819134aed1cfe061eadf9976bd26fab6f126",
+      "input_sha256": "9d4319f96e9eae0f7d930c2a5245f9d1775c895b85a567c92bb1d67033e19695",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "03-different_shot-tandem.mp4",
+      "group": "273be9cf1423dcb8699ba176461b7e69f562c11fdf23829245a338fb39a40cd9",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "a5173378fcf684f6ddbe1fe6036e819134aed1cfe061eadf9976bd26fab6f126",
+      "input_sha256": "9e26745e18302a3a2ea805028ce8af3195af93f1aa9c3a7e6980b06953cf9367",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "03-face_blur-direct.mp4",
+      "group": "273be9cf1423dcb8699ba176461b7e69f562c11fdf23829245a338fb39a40cd9",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": false,
+      "source_sha256": "a5173378fcf684f6ddbe1fe6036e819134aed1cfe061eadf9976bd26fab6f126",
+      "input_sha256": "f1b6e9df4ccc9113d3f48101a44839a395aeb3418d5dbd562b2a52416dd42b91",
+      "proposal": null,
+      "considered": false,
+      "cuts": null
+    },
+    {
+      "file": "03-face_blur-tandem.mp4",
+      "group": "273be9cf1423dcb8699ba176461b7e69f562c11fdf23829245a338fb39a40cd9",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": false,
+      "source_sha256": "a5173378fcf684f6ddbe1fe6036e819134aed1cfe061eadf9976bd26fab6f126",
+      "input_sha256": "729a8c4af418616076366592c85bd3f37176fe77006594655093c65afce0dfc4",
+      "proposal": null,
+      "considered": false,
+      "cuts": null
+    },
+    {
+      "file": "03-inswapper-direct.mp4",
+      "group": "273be9cf1423dcb8699ba176461b7e69f562c11fdf23829245a338fb39a40cd9",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        36,
+        76
+      ],
+      "existing": null,
+      "existing_assessed": false,
+      "source_sha256": "a5173378fcf684f6ddbe1fe6036e819134aed1cfe061eadf9976bd26fab6f126",
+      "input_sha256": "43fec428c318ca3b46a59820577987a6262c011c87437e4c54f29baa1c523371",
+      "proposal": null,
+      "considered": false,
+      "cuts": null
+    },
+    {
+      "file": "03-inswapper-tandem.mp4",
+      "group": "273be9cf1423dcb8699ba176461b7e69f562c11fdf23829245a338fb39a40cd9",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        36,
+        76
+      ],
+      "existing": null,
+      "existing_assessed": false,
+      "source_sha256": "a5173378fcf684f6ddbe1fe6036e819134aed1cfe061eadf9976bd26fab6f126",
+      "input_sha256": "b59dab214b4c795670ee645e422976caaf38fc9bc58253290fe9e317df0e118f",
+      "proposal": null,
+      "considered": false,
+      "cuts": null
+    },
+    {
+      "file": "03-uniface-direct.mp4",
+      "group": "273be9cf1423dcb8699ba176461b7e69f562c11fdf23829245a338fb39a40cd9",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        20,
+        38
+      ],
+      "existing": null,
+      "existing_assessed": false,
+      "source_sha256": "a5173378fcf684f6ddbe1fe6036e819134aed1cfe061eadf9976bd26fab6f126",
+      "input_sha256": "930f735404789b629697c698c4e6506150444252e2d8000176161e6d2d13e473",
+      "proposal": null,
+      "considered": false,
+      "cuts": null
+    },
+    {
+      "file": "03-uniface-tandem.mp4",
+      "group": "273be9cf1423dcb8699ba176461b7e69f562c11fdf23829245a338fb39a40cd9",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        20,
+        38
+      ],
+      "existing": null,
+      "existing_assessed": false,
+      "source_sha256": "a5173378fcf684f6ddbe1fe6036e819134aed1cfe061eadf9976bd26fab6f126",
+      "input_sha256": "e41151af3d2996285d23181ef27452b01e660b144a408125f4745e3d0e40ad05",
+      "proposal": null,
+      "considered": false,
+      "cuts": null
+    },
+    {
+      "file": "04-original-direct.mp4",
+      "group": "2d93b119d8de0013f4aca93871671aa0c52fc1cbd7d441629fea2256eefc13b8",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "c658ab908759f320cbe73bd9e898aa556236c1fa9150298cacfa954eaf640b46",
+      "input_sha256": "185452844b1e3e6eaa8f928025aab7d2d31c86a9836f5cdc29ade8c3e3a04d8d",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "04-original-tandem.mp4",
+      "group": "2d93b119d8de0013f4aca93871671aa0c52fc1cbd7d441629fea2256eefc13b8",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "c658ab908759f320cbe73bd9e898aa556236c1fa9150298cacfa954eaf640b46",
+      "input_sha256": "fa375bda8fddc631a8eeafa9b08faba825419fb1c9c29d5b20fd8b02e196d48b",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "04-gain-direct.mp4",
+      "group": "2d93b119d8de0013f4aca93871671aa0c52fc1cbd7d441629fea2256eefc13b8",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "c658ab908759f320cbe73bd9e898aa556236c1fa9150298cacfa954eaf640b46",
+      "input_sha256": "49a36d7457098e48862453ff62d7777b182fb967ff2687a42f8fea670225d908",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "04-gain-tandem.mp4",
+      "group": "2d93b119d8de0013f4aca93871671aa0c52fc1cbd7d441629fea2256eefc13b8",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "c658ab908759f320cbe73bd9e898aa556236c1fa9150298cacfa954eaf640b46",
+      "input_sha256": "203fb2ec560524f3a41f75cc52875f05e383b81b3bbe93b46f6fd818be5b3c58",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "04-picture_jump-direct.mp4",
+      "group": "2d93b119d8de0013f4aca93871671aa0c52fc1cbd7d441629fea2256eefc13b8",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "c658ab908759f320cbe73bd9e898aa556236c1fa9150298cacfa954eaf640b46",
+      "input_sha256": "dfe1416f63a990505eb51f2568140ac3b7444af54c42d8603199ddbe02e57802",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "04-picture_jump-tandem.mp4",
+      "group": "2d93b119d8de0013f4aca93871671aa0c52fc1cbd7d441629fea2256eefc13b8",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "c658ab908759f320cbe73bd9e898aa556236c1fa9150298cacfa954eaf640b46",
+      "input_sha256": "525466796918f21272fb4929425d965b63ebefcaac302adcf911d1466ccc771c",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "04-different_shot-direct.mp4",
+      "group": "2d93b119d8de0013f4aca93871671aa0c52fc1cbd7d441629fea2256eefc13b8",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "c658ab908759f320cbe73bd9e898aa556236c1fa9150298cacfa954eaf640b46",
+      "input_sha256": "ad02d8bce1df0b6391ef3c9c937e5b03149972a8d0dab2b12ed54c778e1cb29a",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "04-different_shot-tandem.mp4",
+      "group": "2d93b119d8de0013f4aca93871671aa0c52fc1cbd7d441629fea2256eefc13b8",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "c658ab908759f320cbe73bd9e898aa556236c1fa9150298cacfa954eaf640b46",
+      "input_sha256": "3fc84542295093e275bfc60f42b67dbbaf7bdd242f383b5a310df8b7b68c6fd8",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "04-face_blur-direct.mp4",
+      "group": "2d93b119d8de0013f4aca93871671aa0c52fc1cbd7d441629fea2256eefc13b8",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": [
+        22,
+        31
+      ],
+      "existing_assessed": true,
+      "source_sha256": "c658ab908759f320cbe73bd9e898aa556236c1fa9150298cacfa954eaf640b46",
+      "input_sha256": "146fc77084a7181ad5d76275c2d89dd6078afbdecf4a97967665caa6d066ff0e",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "04-face_blur-tandem.mp4",
+      "group": "2d93b119d8de0013f4aca93871671aa0c52fc1cbd7d441629fea2256eefc13b8",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "c658ab908759f320cbe73bd9e898aa556236c1fa9150298cacfa954eaf640b46",
+      "input_sha256": "ab759a0edf2b9b5a50d3fa21c05ebdef9813ed5fcbf309ac9730eee5a49c1ee2",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "04-inswapper-direct.mp4",
+      "group": "2d93b119d8de0013f4aca93871671aa0c52fc1cbd7d441629fea2256eefc13b8",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        20,
+        30
+      ],
+      "existing": [
+        22,
+        31
+      ],
+      "existing_assessed": true,
+      "source_sha256": "c658ab908759f320cbe73bd9e898aa556236c1fa9150298cacfa954eaf640b46",
+      "input_sha256": "e2fe171c9057c16e2cb26f44b5d1c190598b23dce2f06860b128f94b7fbd51d1",
+      "proposal": [
+        20,
+        30
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "04-inswapper-tandem.mp4",
+      "group": "2d93b119d8de0013f4aca93871671aa0c52fc1cbd7d441629fea2256eefc13b8",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        20,
+        30
+      ],
+      "existing": [
+        22,
+        31
+      ],
+      "existing_assessed": true,
+      "source_sha256": "c658ab908759f320cbe73bd9e898aa556236c1fa9150298cacfa954eaf640b46",
+      "input_sha256": "36c11ea988738fd8a08c0b2475a93546534ec37ab5ba7ee960e8d1599eccc72e",
+      "proposal": [
+        20,
+        30
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "04-uniface-direct.mp4",
+      "group": "2d93b119d8de0013f4aca93871671aa0c52fc1cbd7d441629fea2256eefc13b8",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        32,
+        60
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "c658ab908759f320cbe73bd9e898aa556236c1fa9150298cacfa954eaf640b46",
+      "input_sha256": "e1af30450fac88d211cb8c7720b48568a09303f4e717f30a226387a640d0a9e9",
+      "proposal": [
+        30,
+        62
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "04-uniface-tandem.mp4",
+      "group": "2d93b119d8de0013f4aca93871671aa0c52fc1cbd7d441629fea2256eefc13b8",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        32,
+        60
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "c658ab908759f320cbe73bd9e898aa556236c1fa9150298cacfa954eaf640b46",
+      "input_sha256": "3f4fa67c62e6b33164212a88c2764bd25c63cd179af433e029c7f0b770c1670b",
+      "proposal": [
+        32,
+        64
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "05-original-direct.mp4",
+      "group": "2e7d16eab1d59ff2eb5cc4a6bdf1a47943c3650090d3c64f54d5f60d87a426ea",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b340cb9ca82cfb1b7aefa549593a6850253c343a90d169d28eb9726614e344a7",
+      "input_sha256": "202a0b4ff222a82958ecea992aff7838bd16139a61b12abc44607acbc7058790",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "05-original-tandem.mp4",
+      "group": "2e7d16eab1d59ff2eb5cc4a6bdf1a47943c3650090d3c64f54d5f60d87a426ea",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b340cb9ca82cfb1b7aefa549593a6850253c343a90d169d28eb9726614e344a7",
+      "input_sha256": "bc95e589abf893878b18cbc903de5164c6d667d8486d4ed5799c593f7d0ccd9f",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "05-gain-direct.mp4",
+      "group": "2e7d16eab1d59ff2eb5cc4a6bdf1a47943c3650090d3c64f54d5f60d87a426ea",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b340cb9ca82cfb1b7aefa549593a6850253c343a90d169d28eb9726614e344a7",
+      "input_sha256": "665db072a1170937d1da30f6c7f33d6651742fdb26ffcdbe3c18abd201bd4663",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "05-gain-tandem.mp4",
+      "group": "2e7d16eab1d59ff2eb5cc4a6bdf1a47943c3650090d3c64f54d5f60d87a426ea",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b340cb9ca82cfb1b7aefa549593a6850253c343a90d169d28eb9726614e344a7",
+      "input_sha256": "c6715d1d1bc2a323ede0fa3568aa814d31105eec27b18cd6c3b8b430d33f5a38",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "05-picture_jump-direct.mp4",
+      "group": "2e7d16eab1d59ff2eb5cc4a6bdf1a47943c3650090d3c64f54d5f60d87a426ea",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b340cb9ca82cfb1b7aefa549593a6850253c343a90d169d28eb9726614e344a7",
+      "input_sha256": "9a6f1f5cb8a6ef45eef7d3479ba645e6533be75d40a3586be80f4a488414f13b",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "05-picture_jump-tandem.mp4",
+      "group": "2e7d16eab1d59ff2eb5cc4a6bdf1a47943c3650090d3c64f54d5f60d87a426ea",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b340cb9ca82cfb1b7aefa549593a6850253c343a90d169d28eb9726614e344a7",
+      "input_sha256": "1f2a98bed260f53238c267873fb8f367266ec1a73a0cf1318aa0efbbc4afcc5c",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "05-different_shot-direct.mp4",
+      "group": "2e7d16eab1d59ff2eb5cc4a6bdf1a47943c3650090d3c64f54d5f60d87a426ea",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b340cb9ca82cfb1b7aefa549593a6850253c343a90d169d28eb9726614e344a7",
+      "input_sha256": "85d7341e1ff27d91b9f7bd65fd6c4639a73f2c139fe11a75d2ff30895df7a947",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "05-different_shot-tandem.mp4",
+      "group": "2e7d16eab1d59ff2eb5cc4a6bdf1a47943c3650090d3c64f54d5f60d87a426ea",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b340cb9ca82cfb1b7aefa549593a6850253c343a90d169d28eb9726614e344a7",
+      "input_sha256": "5f051d68aba53a54fc412bcf18aff2bb66ee5a668960d2e1a674a9b5ad6472c1",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "05-face_blur-direct.mp4",
+      "group": "2e7d16eab1d59ff2eb5cc4a6bdf1a47943c3650090d3c64f54d5f60d87a426ea",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b340cb9ca82cfb1b7aefa549593a6850253c343a90d169d28eb9726614e344a7",
+      "input_sha256": "3cf05ed18104df132f1eb89b39258908a3b8f02c473fd0baa833a63269da5d66",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "05-face_blur-tandem.mp4",
+      "group": "2e7d16eab1d59ff2eb5cc4a6bdf1a47943c3650090d3c64f54d5f60d87a426ea",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b340cb9ca82cfb1b7aefa549593a6850253c343a90d169d28eb9726614e344a7",
+      "input_sha256": "13d3c071d45959fac6b7c372757696003c53baa84aca8be2d1c488db59605d50",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "05-inswapper-direct.mp4",
+      "group": "2e7d16eab1d59ff2eb5cc4a6bdf1a47943c3650090d3c64f54d5f60d87a426ea",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        32,
+        50
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b340cb9ca82cfb1b7aefa549593a6850253c343a90d169d28eb9726614e344a7",
+      "input_sha256": "d7184034dff1cda23da465e15b4a7b3bb305d92cb002e8fd961a388d56687863",
+      "proposal": [
+        30,
+        50
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "05-inswapper-tandem.mp4",
+      "group": "2e7d16eab1d59ff2eb5cc4a6bdf1a47943c3650090d3c64f54d5f60d87a426ea",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        32,
+        50
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b340cb9ca82cfb1b7aefa549593a6850253c343a90d169d28eb9726614e344a7",
+      "input_sha256": "51f3f741e6bd06581abc2a3d3970fb475b6c3097a0db32a593afedfa93b0a43d",
+      "proposal": [
+        30,
+        50
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "05-uniface-direct.mp4",
+      "group": "2e7d16eab1d59ff2eb5cc4a6bdf1a47943c3650090d3c64f54d5f60d87a426ea",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        14,
+        54
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b340cb9ca82cfb1b7aefa549593a6850253c343a90d169d28eb9726614e344a7",
+      "input_sha256": "2fc592cc123a40b258c4e0b17bd609765500442b1d5719091acc570ae4357da3",
+      "proposal": [
+        14,
+        56
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "05-uniface-tandem.mp4",
+      "group": "2e7d16eab1d59ff2eb5cc4a6bdf1a47943c3650090d3c64f54d5f60d87a426ea",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        14,
+        54
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b340cb9ca82cfb1b7aefa549593a6850253c343a90d169d28eb9726614e344a7",
+      "input_sha256": "dd5b2c1b62d1d5700605623a6fe0da6cb28ac66d0c55619d7af7c48d26b140d6",
+      "proposal": [
+        12,
+        54
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "06-original-direct.mp4",
+      "group": "31c6616a84e2a1ec56eb114405d3f9f471d308fd771fa1485a24ee5579911d94",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b36d6cc5dd9f1b219f84c3a9d745f9f14c1c1befaa898e0bb879ceb59c9b4573",
+      "input_sha256": "6898f0739d7422d3e2063c110440395a4e964d31b1320e5f732c1a54e7ea2b3d",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "06-original-tandem.mp4",
+      "group": "31c6616a84e2a1ec56eb114405d3f9f471d308fd771fa1485a24ee5579911d94",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b36d6cc5dd9f1b219f84c3a9d745f9f14c1c1befaa898e0bb879ceb59c9b4573",
+      "input_sha256": "0c5133f18df574f275e77ae79e57e6302dd39ecd5c44441e262d40464e73a750",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "06-gain-direct.mp4",
+      "group": "31c6616a84e2a1ec56eb114405d3f9f471d308fd771fa1485a24ee5579911d94",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b36d6cc5dd9f1b219f84c3a9d745f9f14c1c1befaa898e0bb879ceb59c9b4573",
+      "input_sha256": "a2cf61f87808c6d9455df3603b858262b425f6007f745e5d9f360a06b849512a",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "06-gain-tandem.mp4",
+      "group": "31c6616a84e2a1ec56eb114405d3f9f471d308fd771fa1485a24ee5579911d94",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b36d6cc5dd9f1b219f84c3a9d745f9f14c1c1befaa898e0bb879ceb59c9b4573",
+      "input_sha256": "54fc0068f7c351d2db5561cbca749858f37e8752bd3c8fd88bec0214035743c5",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "06-picture_jump-direct.mp4",
+      "group": "31c6616a84e2a1ec56eb114405d3f9f471d308fd771fa1485a24ee5579911d94",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b36d6cc5dd9f1b219f84c3a9d745f9f14c1c1befaa898e0bb879ceb59c9b4573",
+      "input_sha256": "59c41d3ce450cd2e8b930fd47ac16034facc9cdf2207f35c0c54a35d133ffa22",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "06-picture_jump-tandem.mp4",
+      "group": "31c6616a84e2a1ec56eb114405d3f9f471d308fd771fa1485a24ee5579911d94",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b36d6cc5dd9f1b219f84c3a9d745f9f14c1c1befaa898e0bb879ceb59c9b4573",
+      "input_sha256": "92e51167bb1ae9739a447507eaff377fe1dc5c22c0933370ee01970898394746",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "06-different_shot-direct.mp4",
+      "group": "31c6616a84e2a1ec56eb114405d3f9f471d308fd771fa1485a24ee5579911d94",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b36d6cc5dd9f1b219f84c3a9d745f9f14c1c1befaa898e0bb879ceb59c9b4573",
+      "input_sha256": "ff4daca2499eb5eba55476a80a85c9cf4591a2c25a6c8b9eebe21aed42865997",
+      "proposal": [
+        12,
+        44
+      ],
+      "considered": true,
+      "cuts": [
+        14,
+        42
+      ]
+    },
+    {
+      "file": "06-different_shot-tandem.mp4",
+      "group": "31c6616a84e2a1ec56eb114405d3f9f471d308fd771fa1485a24ee5579911d94",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b36d6cc5dd9f1b219f84c3a9d745f9f14c1c1befaa898e0bb879ceb59c9b4573",
+      "input_sha256": "cc1c1f6872902b8ae0d106855ea9372e808c7bc249634c0d1cf276618f7eb679",
+      "proposal": [
+        12,
+        44
+      ],
+      "considered": true,
+      "cuts": [
+        14,
+        42
+      ]
+    },
+    {
+      "file": "06-face_blur-direct.mp4",
+      "group": "31c6616a84e2a1ec56eb114405d3f9f471d308fd771fa1485a24ee5579911d94",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b36d6cc5dd9f1b219f84c3a9d745f9f14c1c1befaa898e0bb879ceb59c9b4573",
+      "input_sha256": "8b5b4b689d0fdbc5787dc25530c972b59da8b415dea2a33d28ed11d0a3505033",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "06-face_blur-tandem.mp4",
+      "group": "31c6616a84e2a1ec56eb114405d3f9f471d308fd771fa1485a24ee5579911d94",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b36d6cc5dd9f1b219f84c3a9d745f9f14c1c1befaa898e0bb879ceb59c9b4573",
+      "input_sha256": "b2ad5a57f1c987a184074c411434285079cca01129a9c23807f3538108292610",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "06-inswapper-direct.mp4",
+      "group": "31c6616a84e2a1ec56eb114405d3f9f471d308fd771fa1485a24ee5579911d94",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        14,
+        42
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b36d6cc5dd9f1b219f84c3a9d745f9f14c1c1befaa898e0bb879ceb59c9b4573",
+      "input_sha256": "ea06bf854be981b3bc3d3a6332e45b0d02148eaecf717776fe26c15f21e7ade1",
+      "proposal": [
+        12,
+        42
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "06-inswapper-tandem.mp4",
+      "group": "31c6616a84e2a1ec56eb114405d3f9f471d308fd771fa1485a24ee5579911d94",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        14,
+        42
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "b36d6cc5dd9f1b219f84c3a9d745f9f14c1c1befaa898e0bb879ceb59c9b4573",
+      "input_sha256": "bc3523962518d8cce13f8a9d49e49d91ef3f24a5edf93a8df39271feda090e0b",
+      "proposal": [
+        12,
+        44
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "06-uniface-direct.mp4",
+      "group": "31c6616a84e2a1ec56eb114405d3f9f471d308fd771fa1485a24ee5579911d94",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        22,
+        32
+      ],
+      "existing": [
+        22,
+        34
+      ],
+      "existing_assessed": true,
+      "source_sha256": "b36d6cc5dd9f1b219f84c3a9d745f9f14c1c1befaa898e0bb879ceb59c9b4573",
+      "input_sha256": "5a6f654daeccbf8e7180ef0c749f57cb8231c457e320215d0625c38630848862",
+      "proposal": [
+        22,
+        32
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "06-uniface-tandem.mp4",
+      "group": "31c6616a84e2a1ec56eb114405d3f9f471d308fd771fa1485a24ee5579911d94",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        22,
+        32
+      ],
+      "existing": [
+        22,
+        34
+      ],
+      "existing_assessed": true,
+      "source_sha256": "b36d6cc5dd9f1b219f84c3a9d745f9f14c1c1befaa898e0bb879ceb59c9b4573",
+      "input_sha256": "9c7154df8a73df9e4f0cb566f3c18103af6fbe29ee03b58f4c0e50d72ebcff6a",
+      "proposal": [
+        22,
+        32
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "07-original-direct.mp4",
+      "group": "4c2110072234cc2d09dd57fb9b615cf060a5314535ee6cf4289c339b810bf8df",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3eb11d1d6385a4237c3ab1b8724467765222285e78fc09910267ac04f2e43837",
+      "input_sha256": "2280c310a1c4d586ad27863d235d928f31d5e825fd807d81867f5f26d3cc982a",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "07-original-tandem.mp4",
+      "group": "4c2110072234cc2d09dd57fb9b615cf060a5314535ee6cf4289c339b810bf8df",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3eb11d1d6385a4237c3ab1b8724467765222285e78fc09910267ac04f2e43837",
+      "input_sha256": "04c30f2ed9898cc614ee4f0c585ce173f6abe6c677dc336a403b73b3dc376030",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "07-gain-direct.mp4",
+      "group": "4c2110072234cc2d09dd57fb9b615cf060a5314535ee6cf4289c339b810bf8df",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3eb11d1d6385a4237c3ab1b8724467765222285e78fc09910267ac04f2e43837",
+      "input_sha256": "50de38ad3cbaa49af8d4f6cf400f142fd919c2f9d056b78ea0c681364b795ab0",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "07-gain-tandem.mp4",
+      "group": "4c2110072234cc2d09dd57fb9b615cf060a5314535ee6cf4289c339b810bf8df",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3eb11d1d6385a4237c3ab1b8724467765222285e78fc09910267ac04f2e43837",
+      "input_sha256": "01d829bb0a6f7782a304d89a89dba34f38574f1bca502b1e8b0dfc1fd782ff08",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "07-picture_jump-direct.mp4",
+      "group": "4c2110072234cc2d09dd57fb9b615cf060a5314535ee6cf4289c339b810bf8df",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3eb11d1d6385a4237c3ab1b8724467765222285e78fc09910267ac04f2e43837",
+      "input_sha256": "4bc7cc25217824939bfa5ac76ccd4989ca3af43f52d22d623fb24871fc5259e2",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "07-picture_jump-tandem.mp4",
+      "group": "4c2110072234cc2d09dd57fb9b615cf060a5314535ee6cf4289c339b810bf8df",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3eb11d1d6385a4237c3ab1b8724467765222285e78fc09910267ac04f2e43837",
+      "input_sha256": "1a97eadeceebb7c0e3d4c56b70983d7a56827620394002c01bb5ad4beb04b27f",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "07-different_shot-direct.mp4",
+      "group": "4c2110072234cc2d09dd57fb9b615cf060a5314535ee6cf4289c339b810bf8df",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3eb11d1d6385a4237c3ab1b8724467765222285e78fc09910267ac04f2e43837",
+      "input_sha256": "ebb7af168dfd5f3e06e06e0940b399f4589354f731d795630ab5a7f2e25cf108",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "07-different_shot-tandem.mp4",
+      "group": "4c2110072234cc2d09dd57fb9b615cf060a5314535ee6cf4289c339b810bf8df",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3eb11d1d6385a4237c3ab1b8724467765222285e78fc09910267ac04f2e43837",
+      "input_sha256": "e5e78e440144dfdf44fa6372bfea9feb2ea93c22bd6ffb3b3876e7bdf462a01c",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "07-face_blur-direct.mp4",
+      "group": "4c2110072234cc2d09dd57fb9b615cf060a5314535ee6cf4289c339b810bf8df",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3eb11d1d6385a4237c3ab1b8724467765222285e78fc09910267ac04f2e43837",
+      "input_sha256": "eed788ce53c49084f5263745a00d1e8fd8264fb74937c5b782b0f8e2b081a151",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "07-face_blur-tandem.mp4",
+      "group": "4c2110072234cc2d09dd57fb9b615cf060a5314535ee6cf4289c339b810bf8df",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3eb11d1d6385a4237c3ab1b8724467765222285e78fc09910267ac04f2e43837",
+      "input_sha256": "ec5da84fa440040ff7337e0f9a34c6d769a8db405e99c739ed912643d98dca3c",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "07-inswapper-direct.mp4",
+      "group": "4c2110072234cc2d09dd57fb9b615cf060a5314535ee6cf4289c339b810bf8df",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        22,
+        62
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3eb11d1d6385a4237c3ab1b8724467765222285e78fc09910267ac04f2e43837",
+      "input_sha256": "0b16034545f3d41aaac643648f9099ade4c9c18a8ebfa13785dcbfc60d28bda4",
+      "proposal": [
+        22,
+        66
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "07-inswapper-tandem.mp4",
+      "group": "4c2110072234cc2d09dd57fb9b615cf060a5314535ee6cf4289c339b810bf8df",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        22,
+        62
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3eb11d1d6385a4237c3ab1b8724467765222285e78fc09910267ac04f2e43837",
+      "input_sha256": "93bb8ff6c8c83dfb17026b9667d02896705ba998ca37cb2f0fa4c1899aa97dfc",
+      "proposal": [
+        22,
+        66
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "07-uniface-direct.mp4",
+      "group": "4c2110072234cc2d09dd57fb9b615cf060a5314535ee6cf4289c339b810bf8df",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        28,
+        46
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3eb11d1d6385a4237c3ab1b8724467765222285e78fc09910267ac04f2e43837",
+      "input_sha256": "c4a3083e465a32bc4c37e7f7d65d59508e8c2a480463e172cbb7080adef1a5b3",
+      "proposal": [
+        26,
+        46
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "07-uniface-tandem.mp4",
+      "group": "4c2110072234cc2d09dd57fb9b615cf060a5314535ee6cf4289c339b810bf8df",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        28,
+        46
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "3eb11d1d6385a4237c3ab1b8724467765222285e78fc09910267ac04f2e43837",
+      "input_sha256": "2ff064800c1a9b86eaf688dd5df3a2c3ec6bf0fbb5411a562e3eb5767ac311a1",
+      "proposal": [
+        28,
+        48
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "08-original-direct.mp4",
+      "group": "541ba27b631aa8a528553084817a247ac79fdaa58c1dce19d29641875d2fd6bd",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "821f53317ccde5d1aac710b995bb30884f84698f7d839f2b3c2ec0ea83dace49",
+      "input_sha256": "85e1f1b61951244fceb3182fa8e36d8cae45954cddcffb56ec12c723f626855e",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "08-original-tandem.mp4",
+      "group": "541ba27b631aa8a528553084817a247ac79fdaa58c1dce19d29641875d2fd6bd",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "821f53317ccde5d1aac710b995bb30884f84698f7d839f2b3c2ec0ea83dace49",
+      "input_sha256": "4ee11df94c1fae5cd6ea44140abae408131c36bcfb0bcfc7b631d58b23e87881",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "08-gain-direct.mp4",
+      "group": "541ba27b631aa8a528553084817a247ac79fdaa58c1dce19d29641875d2fd6bd",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "821f53317ccde5d1aac710b995bb30884f84698f7d839f2b3c2ec0ea83dace49",
+      "input_sha256": "42b971061cf7ada782e6583236d96ffe7198a2caccc19e11e00a54f4d55f9098",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "08-gain-tandem.mp4",
+      "group": "541ba27b631aa8a528553084817a247ac79fdaa58c1dce19d29641875d2fd6bd",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "821f53317ccde5d1aac710b995bb30884f84698f7d839f2b3c2ec0ea83dace49",
+      "input_sha256": "ace4bb1b8d51347c8728f4866192b2f659ca2de8eeac1e3929b7309fc0c4dcb6",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "08-picture_jump-direct.mp4",
+      "group": "541ba27b631aa8a528553084817a247ac79fdaa58c1dce19d29641875d2fd6bd",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "821f53317ccde5d1aac710b995bb30884f84698f7d839f2b3c2ec0ea83dace49",
+      "input_sha256": "195cbe8dc4c055e39f55e3b2044135724ee706b19fa399de691a7d53d0da0479",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "08-picture_jump-tandem.mp4",
+      "group": "541ba27b631aa8a528553084817a247ac79fdaa58c1dce19d29641875d2fd6bd",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "821f53317ccde5d1aac710b995bb30884f84698f7d839f2b3c2ec0ea83dace49",
+      "input_sha256": "921ca05b9dc3da0415b955c2ff64e3780c4e13b85a5b2bec5caaf55f1204a36c",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "08-different_shot-direct.mp4",
+      "group": "541ba27b631aa8a528553084817a247ac79fdaa58c1dce19d29641875d2fd6bd",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "821f53317ccde5d1aac710b995bb30884f84698f7d839f2b3c2ec0ea83dace49",
+      "input_sha256": "c61128afa01412945c8fb7fe3e8e063f2d9e2b910b0816e870880a3cde87f930",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "08-different_shot-tandem.mp4",
+      "group": "541ba27b631aa8a528553084817a247ac79fdaa58c1dce19d29641875d2fd6bd",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "821f53317ccde5d1aac710b995bb30884f84698f7d839f2b3c2ec0ea83dace49",
+      "input_sha256": "dc503df28fbc91dcf3d123e55dde7e27f1d67b72a1bc4f826d8bd24628b21833",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "08-face_blur-direct.mp4",
+      "group": "541ba27b631aa8a528553084817a247ac79fdaa58c1dce19d29641875d2fd6bd",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "821f53317ccde5d1aac710b995bb30884f84698f7d839f2b3c2ec0ea83dace49",
+      "input_sha256": "43430a534edf4c847d02de96ec23d54b19310926f89caf1ba542c77f266d6439",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "08-face_blur-tandem.mp4",
+      "group": "541ba27b631aa8a528553084817a247ac79fdaa58c1dce19d29641875d2fd6bd",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "821f53317ccde5d1aac710b995bb30884f84698f7d839f2b3c2ec0ea83dace49",
+      "input_sha256": "aadfe4d5f29454046a6670bda4f7265c9d07b893a1db3188422c4dfdf42c441c",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "08-inswapper-direct.mp4",
+      "group": "541ba27b631aa8a528553084817a247ac79fdaa58c1dce19d29641875d2fd6bd",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        28,
+        38
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "821f53317ccde5d1aac710b995bb30884f84698f7d839f2b3c2ec0ea83dace49",
+      "input_sha256": "5e044fbb84df23ea124f570fa352e8ae9c0ad949475677b6c2ad97ee6d99e75b",
+      "proposal": [
+        28,
+        38
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "08-inswapper-tandem.mp4",
+      "group": "541ba27b631aa8a528553084817a247ac79fdaa58c1dce19d29641875d2fd6bd",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        28,
+        38
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "821f53317ccde5d1aac710b995bb30884f84698f7d839f2b3c2ec0ea83dace49",
+      "input_sha256": "7b049f8c460500bb5bfd70a8089c9f7bee6a8c2d9215838291e798b220522504",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "08-uniface-direct.mp4",
+      "group": "541ba27b631aa8a528553084817a247ac79fdaa58c1dce19d29641875d2fd6bd",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        36,
+        64
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "821f53317ccde5d1aac710b995bb30884f84698f7d839f2b3c2ec0ea83dace49",
+      "input_sha256": "eb70ee225f50939e152fdc27304fa513b8a01b7ee1e8e2526ae809b153fae941",
+      "proposal": [
+        36,
+        66
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "08-uniface-tandem.mp4",
+      "group": "541ba27b631aa8a528553084817a247ac79fdaa58c1dce19d29641875d2fd6bd",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        36,
+        64
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "821f53317ccde5d1aac710b995bb30884f84698f7d839f2b3c2ec0ea83dace49",
+      "input_sha256": "7415b3b6470f39d61f0d68865e472f16220f7513136767b01ff0de8b8577b848",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "09-original-direct.mp4",
+      "group": "5a645d3886a7c58c8f6af98fe40230d68ff07e14b0586968966b8e56973374e7",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "72e2e2d17db9cf97c7d76c21f61e2aa0ed6c30ddb0b48af31766029652660920",
+      "input_sha256": "ed82a709080bde413c9978473877955d51fde22181ca9d083cea8a5ab6c623b8",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "09-original-tandem.mp4",
+      "group": "5a645d3886a7c58c8f6af98fe40230d68ff07e14b0586968966b8e56973374e7",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "72e2e2d17db9cf97c7d76c21f61e2aa0ed6c30ddb0b48af31766029652660920",
+      "input_sha256": "1087dec4d875e0dc526a8e1252e2549c716016081b8013a95efd31c31147f11c",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "09-gain-direct.mp4",
+      "group": "5a645d3886a7c58c8f6af98fe40230d68ff07e14b0586968966b8e56973374e7",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "72e2e2d17db9cf97c7d76c21f61e2aa0ed6c30ddb0b48af31766029652660920",
+      "input_sha256": "f03e0a0833c15b4f5fcf4749433f693ff52b6b590524283820552fdfc957f1ec",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "09-gain-tandem.mp4",
+      "group": "5a645d3886a7c58c8f6af98fe40230d68ff07e14b0586968966b8e56973374e7",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "72e2e2d17db9cf97c7d76c21f61e2aa0ed6c30ddb0b48af31766029652660920",
+      "input_sha256": "5552797b666c8666ba607d21cd872efa889c2b11bae39262408d6583af9f9a92",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "09-picture_jump-direct.mp4",
+      "group": "5a645d3886a7c58c8f6af98fe40230d68ff07e14b0586968966b8e56973374e7",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "72e2e2d17db9cf97c7d76c21f61e2aa0ed6c30ddb0b48af31766029652660920",
+      "input_sha256": "28c03119d24b8bfcd1edaba90c110a8c9b6b6b789d46fbd1d43abdc1817e166e",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "09-picture_jump-tandem.mp4",
+      "group": "5a645d3886a7c58c8f6af98fe40230d68ff07e14b0586968966b8e56973374e7",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "72e2e2d17db9cf97c7d76c21f61e2aa0ed6c30ddb0b48af31766029652660920",
+      "input_sha256": "7e152a79f25bfce9e31df0471a4bf58c3a98d54710cd26ae655660fd924d9be5",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "09-different_shot-direct.mp4",
+      "group": "5a645d3886a7c58c8f6af98fe40230d68ff07e14b0586968966b8e56973374e7",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "72e2e2d17db9cf97c7d76c21f61e2aa0ed6c30ddb0b48af31766029652660920",
+      "input_sha256": "04221dfa0841dbb450f9cc487117520ed2032f01bdd8397a0a1c251341588dc8",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "09-different_shot-tandem.mp4",
+      "group": "5a645d3886a7c58c8f6af98fe40230d68ff07e14b0586968966b8e56973374e7",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "72e2e2d17db9cf97c7d76c21f61e2aa0ed6c30ddb0b48af31766029652660920",
+      "input_sha256": "6274c43f32a16dc155d115739ecae8f3f23089bb4557211c139d6252313f6acd",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "09-face_blur-direct.mp4",
+      "group": "5a645d3886a7c58c8f6af98fe40230d68ff07e14b0586968966b8e56973374e7",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "72e2e2d17db9cf97c7d76c21f61e2aa0ed6c30ddb0b48af31766029652660920",
+      "input_sha256": "db3b7a712d1457cad40dc41475600f81c9e0781464ee3ea542f751145bc5eab5",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "09-face_blur-tandem.mp4",
+      "group": "5a645d3886a7c58c8f6af98fe40230d68ff07e14b0586968966b8e56973374e7",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "72e2e2d17db9cf97c7d76c21f61e2aa0ed6c30ddb0b48af31766029652660920",
+      "input_sha256": "ec0597f9d37277f7694bf1a5a16f2fb55ab99a6aaa03e02a7cab1c7d25ba6c2a",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "09-inswapper-direct.mp4",
+      "group": "5a645d3886a7c58c8f6af98fe40230d68ff07e14b0586968966b8e56973374e7",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        36,
+        54
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "72e2e2d17db9cf97c7d76c21f61e2aa0ed6c30ddb0b48af31766029652660920",
+      "input_sha256": "e26b9301821422570557174c65a906b7a8aadb35fcb7ec1d0a5be3d4c7cbefd4",
+      "proposal": [
+        36,
+        56
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "09-inswapper-tandem.mp4",
+      "group": "5a645d3886a7c58c8f6af98fe40230d68ff07e14b0586968966b8e56973374e7",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        36,
+        54
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "72e2e2d17db9cf97c7d76c21f61e2aa0ed6c30ddb0b48af31766029652660920",
+      "input_sha256": "7eea351561e7304d0197ee7bc89df581e867783c6a3dad307ad73f26ae089ffd",
+      "proposal": [
+        36,
+        56
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "09-uniface-direct.mp4",
+      "group": "5a645d3886a7c58c8f6af98fe40230d68ff07e14b0586968966b8e56973374e7",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        20,
+        60
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "72e2e2d17db9cf97c7d76c21f61e2aa0ed6c30ddb0b48af31766029652660920",
+      "input_sha256": "6029d3a216217fb3ebabcdf318f8b9285628a53dafd1153a81bcff46c94a6967",
+      "proposal": [
+        20,
+        64
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "09-uniface-tandem.mp4",
+      "group": "5a645d3886a7c58c8f6af98fe40230d68ff07e14b0586968966b8e56973374e7",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        20,
+        60
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "72e2e2d17db9cf97c7d76c21f61e2aa0ed6c30ddb0b48af31766029652660920",
+      "input_sha256": "fdc9da4ee331d00ca9e353a0a2ab690e18008fd5c765c00815909f01ab440cf3",
+      "proposal": [
+        20,
+        62
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "10-original-direct.mp4",
+      "group": "6dc838a436f651cbc05eadc84ac2d7dd59f052d4fe30e5fe8edd30b130099d1b",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "fcb02e0a263fa83d6029547fcb5a95638fe5a8f135050e9267539f4ad0b78f91",
+      "input_sha256": "c2e7563e9f37ccdffaf24e49e706a5a666dab8c4cd737a6b90337107d70fb114",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "10-original-tandem.mp4",
+      "group": "6dc838a436f651cbc05eadc84ac2d7dd59f052d4fe30e5fe8edd30b130099d1b",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "fcb02e0a263fa83d6029547fcb5a95638fe5a8f135050e9267539f4ad0b78f91",
+      "input_sha256": "39f2963afb6bb5e580c214528917b505606500cbdaf390082eb05310ce91b42c",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "10-gain-direct.mp4",
+      "group": "6dc838a436f651cbc05eadc84ac2d7dd59f052d4fe30e5fe8edd30b130099d1b",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "fcb02e0a263fa83d6029547fcb5a95638fe5a8f135050e9267539f4ad0b78f91",
+      "input_sha256": "48be8d4472974bae3c6642b7629131b040d3e17ea1953848b54fed0a7d6fe6b1",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "10-gain-tandem.mp4",
+      "group": "6dc838a436f651cbc05eadc84ac2d7dd59f052d4fe30e5fe8edd30b130099d1b",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "fcb02e0a263fa83d6029547fcb5a95638fe5a8f135050e9267539f4ad0b78f91",
+      "input_sha256": "dd2f7b9f25505cfe66918bb397322dda3d2828325ff09c39375fc35915bf1db0",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "10-picture_jump-direct.mp4",
+      "group": "6dc838a436f651cbc05eadc84ac2d7dd59f052d4fe30e5fe8edd30b130099d1b",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "fcb02e0a263fa83d6029547fcb5a95638fe5a8f135050e9267539f4ad0b78f91",
+      "input_sha256": "06cc4e40caef84191ad66d17711fefa4120262e07b66a95eb8ecfaf3a67ed085",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "10-picture_jump-tandem.mp4",
+      "group": "6dc838a436f651cbc05eadc84ac2d7dd59f052d4fe30e5fe8edd30b130099d1b",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "fcb02e0a263fa83d6029547fcb5a95638fe5a8f135050e9267539f4ad0b78f91",
+      "input_sha256": "d672b7389a11a15eb0374233696b3da6603c3a3371cf51c323e3e249f82ff232",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "10-different_shot-direct.mp4",
+      "group": "6dc838a436f651cbc05eadc84ac2d7dd59f052d4fe30e5fe8edd30b130099d1b",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "fcb02e0a263fa83d6029547fcb5a95638fe5a8f135050e9267539f4ad0b78f91",
+      "input_sha256": "387b45b58170d0e75ebcbd190aa874ce37ce34b2588cf69f148bf50d6bf8193d",
+      "proposal": [
+        18,
+        50
+      ],
+      "considered": true,
+      "cuts": [
+        20,
+        48
+      ]
+    },
+    {
+      "file": "10-different_shot-tandem.mp4",
+      "group": "6dc838a436f651cbc05eadc84ac2d7dd59f052d4fe30e5fe8edd30b130099d1b",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "fcb02e0a263fa83d6029547fcb5a95638fe5a8f135050e9267539f4ad0b78f91",
+      "input_sha256": "8408584de096283d70ea804e44280068b202fcd16831f340186665fe91d9e451",
+      "proposal": [
+        18,
+        50
+      ],
+      "considered": true,
+      "cuts": [
+        20,
+        48
+      ]
+    },
+    {
+      "file": "10-face_blur-direct.mp4",
+      "group": "6dc838a436f651cbc05eadc84ac2d7dd59f052d4fe30e5fe8edd30b130099d1b",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "fcb02e0a263fa83d6029547fcb5a95638fe5a8f135050e9267539f4ad0b78f91",
+      "input_sha256": "ae7ef3a7edca072fe43c71f9f6270182bc084e7e257b0ae03c234684ed0007b3",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "10-face_blur-tandem.mp4",
+      "group": "6dc838a436f651cbc05eadc84ac2d7dd59f052d4fe30e5fe8edd30b130099d1b",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "fcb02e0a263fa83d6029547fcb5a95638fe5a8f135050e9267539f4ad0b78f91",
+      "input_sha256": "0af7e45990dd3390813ddefb805a3a7f4bd4d316db562e13156d8bd424f16958",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "10-inswapper-direct.mp4",
+      "group": "6dc838a436f651cbc05eadc84ac2d7dd59f052d4fe30e5fe8edd30b130099d1b",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        20,
+        48
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "fcb02e0a263fa83d6029547fcb5a95638fe5a8f135050e9267539f4ad0b78f91",
+      "input_sha256": "61f11d77b7aa47dbe70be363dc0703a79533d9d7779549c7fb9e8fc0acad0826",
+      "proposal": [
+        18,
+        48
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "10-inswapper-tandem.mp4",
+      "group": "6dc838a436f651cbc05eadc84ac2d7dd59f052d4fe30e5fe8edd30b130099d1b",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        20,
+        48
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "fcb02e0a263fa83d6029547fcb5a95638fe5a8f135050e9267539f4ad0b78f91",
+      "input_sha256": "99846a4e663f9ef6a4241ebbd4aa95caa3f40e30112f94ae0a3a535e276f6306",
+      "proposal": [
+        20,
+        52
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "10-uniface-direct.mp4",
+      "group": "6dc838a436f651cbc05eadc84ac2d7dd59f052d4fe30e5fe8edd30b130099d1b",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        32,
+        42
+      ],
+      "existing": [
+        34,
+        44
+      ],
+      "existing_assessed": true,
+      "source_sha256": "fcb02e0a263fa83d6029547fcb5a95638fe5a8f135050e9267539f4ad0b78f91",
+      "input_sha256": "6cf8de19859ee19943ff3ca90448f20c75f4d3210a7021e57808a948236294ea",
+      "proposal": [
+        32,
+        42
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "10-uniface-tandem.mp4",
+      "group": "6dc838a436f651cbc05eadc84ac2d7dd59f052d4fe30e5fe8edd30b130099d1b",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        32,
+        42
+      ],
+      "existing": [
+        34,
+        44
+      ],
+      "existing_assessed": true,
+      "source_sha256": "fcb02e0a263fa83d6029547fcb5a95638fe5a8f135050e9267539f4ad0b78f91",
+      "input_sha256": "e882af323a42c06554cc71e1e4ef06149a7923d275876a28f97f5468d74c1021",
+      "proposal": [
+        32,
+        42
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "11-original-direct.mp4",
+      "group": "70da7d7025bda7f176a00d0c7b32453a5c356da56fd3a9bad5ec818870164bde",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "17f08aee9298792ad8df0727f640b64dce9a5f1e8c36cec293b876f01aa9d90e",
+      "input_sha256": "a8c0bf4f5c62200b9f3a7a9fd59514afe00f51e2d819e9975b2ff413a774f678",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "11-original-tandem.mp4",
+      "group": "70da7d7025bda7f176a00d0c7b32453a5c356da56fd3a9bad5ec818870164bde",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "17f08aee9298792ad8df0727f640b64dce9a5f1e8c36cec293b876f01aa9d90e",
+      "input_sha256": "585bef15775a6e1789c2c8ed9bcdf93ffb238bd72c38f30fa4627a0e841151a9",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "11-gain-direct.mp4",
+      "group": "70da7d7025bda7f176a00d0c7b32453a5c356da56fd3a9bad5ec818870164bde",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "17f08aee9298792ad8df0727f640b64dce9a5f1e8c36cec293b876f01aa9d90e",
+      "input_sha256": "7d5d7afe62b51557d73b4c4b846e6fe38149276381224fcd31886b20d7a40f52",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "11-gain-tandem.mp4",
+      "group": "70da7d7025bda7f176a00d0c7b32453a5c356da56fd3a9bad5ec818870164bde",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "17f08aee9298792ad8df0727f640b64dce9a5f1e8c36cec293b876f01aa9d90e",
+      "input_sha256": "bd28795b6de93983a522bb840b746991d7537fd03cbba6b1db21a09645c48102",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "11-picture_jump-direct.mp4",
+      "group": "70da7d7025bda7f176a00d0c7b32453a5c356da56fd3a9bad5ec818870164bde",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "17f08aee9298792ad8df0727f640b64dce9a5f1e8c36cec293b876f01aa9d90e",
+      "input_sha256": "ba59413e0a4b0c53c292d55847a36f3b214cc07fcd6bc9dea662eb5c95fb82cb",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "11-picture_jump-tandem.mp4",
+      "group": "70da7d7025bda7f176a00d0c7b32453a5c356da56fd3a9bad5ec818870164bde",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "17f08aee9298792ad8df0727f640b64dce9a5f1e8c36cec293b876f01aa9d90e",
+      "input_sha256": "7d2efb0418be235c72435136551099da925099f2a6a62aaef57a2101a3b2a01b",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "11-different_shot-direct.mp4",
+      "group": "70da7d7025bda7f176a00d0c7b32453a5c356da56fd3a9bad5ec818870164bde",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "17f08aee9298792ad8df0727f640b64dce9a5f1e8c36cec293b876f01aa9d90e",
+      "input_sha256": "6d94ed8d5ecdfd2a5756403a80c049e1a0e2f650f30e75750884390c67452fd1",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "11-different_shot-tandem.mp4",
+      "group": "70da7d7025bda7f176a00d0c7b32453a5c356da56fd3a9bad5ec818870164bde",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "17f08aee9298792ad8df0727f640b64dce9a5f1e8c36cec293b876f01aa9d90e",
+      "input_sha256": "bf1e4398bf45d4af5d06ac305a2754e969dcfdb7705187c9ef48853b5c86601d",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "11-face_blur-direct.mp4",
+      "group": "70da7d7025bda7f176a00d0c7b32453a5c356da56fd3a9bad5ec818870164bde",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "17f08aee9298792ad8df0727f640b64dce9a5f1e8c36cec293b876f01aa9d90e",
+      "input_sha256": "d89f8998549e27755c6e21315d1a597f1913a5774873a4cf5ab68f7426ca0b1c",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "11-face_blur-tandem.mp4",
+      "group": "70da7d7025bda7f176a00d0c7b32453a5c356da56fd3a9bad5ec818870164bde",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "17f08aee9298792ad8df0727f640b64dce9a5f1e8c36cec293b876f01aa9d90e",
+      "input_sha256": "63d90c939f979d1ae2d628ae3a74ddee8203c9bf4ec830af023d069cffa24caf",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "11-inswapper-direct.mp4",
+      "group": "70da7d7025bda7f176a00d0c7b32453a5c356da56fd3a9bad5ec818870164bde",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        32,
+        72
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "17f08aee9298792ad8df0727f640b64dce9a5f1e8c36cec293b876f01aa9d90e",
+      "input_sha256": "540181ba36f8bb11fb0e27199eef1e5a62ed44d0fd47c686b62383c6e0349e80",
+      "proposal": [
+        32,
+        76
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "11-inswapper-tandem.mp4",
+      "group": "70da7d7025bda7f176a00d0c7b32453a5c356da56fd3a9bad5ec818870164bde",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        32,
+        72
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "17f08aee9298792ad8df0727f640b64dce9a5f1e8c36cec293b876f01aa9d90e",
+      "input_sha256": "42a89080968746034191f4732ec7ef9f5ccc46bb6108db7fe24f2ae91be3de4c",
+      "proposal": [
+        32,
+        74
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "11-uniface-direct.mp4",
+      "group": "70da7d7025bda7f176a00d0c7b32453a5c356da56fd3a9bad5ec818870164bde",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        14,
+        32
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "17f08aee9298792ad8df0727f640b64dce9a5f1e8c36cec293b876f01aa9d90e",
+      "input_sha256": "ba105b703c0be054e0070b87ec4d023a9b6bd8b4b7d139ca45d16906ffae8e14",
+      "proposal": [
+        12,
+        32
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "11-uniface-tandem.mp4",
+      "group": "70da7d7025bda7f176a00d0c7b32453a5c356da56fd3a9bad5ec818870164bde",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        14,
+        32
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "17f08aee9298792ad8df0727f640b64dce9a5f1e8c36cec293b876f01aa9d90e",
+      "input_sha256": "db2ea332f1ac63a3c5079ed37e91e37951dce35fffaa836db041a7b1db4980af",
+      "proposal": [
+        14,
+        34
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "12-original-direct.mp4",
+      "group": "71d603f94a633f17f019ced572f87a2c51bd85c82ebd4ab7d01266213997b772",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "34d6fefba936e2dcc04c2231ea2514a382c28da8e50c39161cc94b08839f1f00",
+      "input_sha256": "9ef4fa93bee6b7a3b69789d7ada248d1eb0ebcf5628a6f5eb32910c888a76f33",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "12-original-tandem.mp4",
+      "group": "71d603f94a633f17f019ced572f87a2c51bd85c82ebd4ab7d01266213997b772",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "34d6fefba936e2dcc04c2231ea2514a382c28da8e50c39161cc94b08839f1f00",
+      "input_sha256": "42662aa5b667bc474f3577d6cf43e6fb9ef1ce8dad320fc8a59cbd5e4518ed98",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "12-gain-direct.mp4",
+      "group": "71d603f94a633f17f019ced572f87a2c51bd85c82ebd4ab7d01266213997b772",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "34d6fefba936e2dcc04c2231ea2514a382c28da8e50c39161cc94b08839f1f00",
+      "input_sha256": "445f64c5adea42b07d62778f5e8640a6e0dd27430c96eb99828fa9242261e8c0",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "12-gain-tandem.mp4",
+      "group": "71d603f94a633f17f019ced572f87a2c51bd85c82ebd4ab7d01266213997b772",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "34d6fefba936e2dcc04c2231ea2514a382c28da8e50c39161cc94b08839f1f00",
+      "input_sha256": "b3a5595f09275ea0978766e030ce479f6ee16d34a2954cb3b507fcd93652bc54",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "12-picture_jump-direct.mp4",
+      "group": "71d603f94a633f17f019ced572f87a2c51bd85c82ebd4ab7d01266213997b772",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "34d6fefba936e2dcc04c2231ea2514a382c28da8e50c39161cc94b08839f1f00",
+      "input_sha256": "485c32fa437579fe1374e5e158e4071d94470a4a8d9a1280eeec31a84ba7a682",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "12-picture_jump-tandem.mp4",
+      "group": "71d603f94a633f17f019ced572f87a2c51bd85c82ebd4ab7d01266213997b772",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "34d6fefba936e2dcc04c2231ea2514a382c28da8e50c39161cc94b08839f1f00",
+      "input_sha256": "901cfbd6e4c59c412999007ce99cba8bf3b1fd7b590a974b192b5d92f0aef0d2",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "12-different_shot-direct.mp4",
+      "group": "71d603f94a633f17f019ced572f87a2c51bd85c82ebd4ab7d01266213997b772",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "34d6fefba936e2dcc04c2231ea2514a382c28da8e50c39161cc94b08839f1f00",
+      "input_sha256": "1718443e40ef7bf741af1dfdddc69090cb3e9d01c873c1eda99bd830615c965e",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "12-different_shot-tandem.mp4",
+      "group": "71d603f94a633f17f019ced572f87a2c51bd85c82ebd4ab7d01266213997b772",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "34d6fefba936e2dcc04c2231ea2514a382c28da8e50c39161cc94b08839f1f00",
+      "input_sha256": "4f1927cf4c427c3c3a8528a147d187a2b4041ae17a949dbcc3e7ebaab3c3c2c2",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "12-face_blur-direct.mp4",
+      "group": "71d603f94a633f17f019ced572f87a2c51bd85c82ebd4ab7d01266213997b772",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": [
+        16,
+        25
+      ],
+      "existing_assessed": true,
+      "source_sha256": "34d6fefba936e2dcc04c2231ea2514a382c28da8e50c39161cc94b08839f1f00",
+      "input_sha256": "a87f54c4626cba34d4250b10b459a41daba126576eab3e2af031fa7655207ec6",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "12-face_blur-tandem.mp4",
+      "group": "71d603f94a633f17f019ced572f87a2c51bd85c82ebd4ab7d01266213997b772",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "34d6fefba936e2dcc04c2231ea2514a382c28da8e50c39161cc94b08839f1f00",
+      "input_sha256": "0fb59a93037e44f856a1d5a0b036ad0f68bcba2b0d1d48682d0ed8f038254c4b",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "12-inswapper-direct.mp4",
+      "group": "71d603f94a633f17f019ced572f87a2c51bd85c82ebd4ab7d01266213997b772",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        14,
+        24
+      ],
+      "existing": [
+        16,
+        25
+      ],
+      "existing_assessed": true,
+      "source_sha256": "34d6fefba936e2dcc04c2231ea2514a382c28da8e50c39161cc94b08839f1f00",
+      "input_sha256": "b0693b43de05df9d70abd409edccdf7b80ae2fbfc1d629c23c650d053737d549",
+      "proposal": [
+        14,
+        24
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "12-inswapper-tandem.mp4",
+      "group": "71d603f94a633f17f019ced572f87a2c51bd85c82ebd4ab7d01266213997b772",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        14,
+        24
+      ],
+      "existing": [
+        16,
+        25
+      ],
+      "existing_assessed": true,
+      "source_sha256": "34d6fefba936e2dcc04c2231ea2514a382c28da8e50c39161cc94b08839f1f00",
+      "input_sha256": "39d86b658c2883661eeb961236d77e4a9ccb932b6f25682cf888b1221f530977",
+      "proposal": [
+        14,
+        24
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "12-uniface-direct.mp4",
+      "group": "71d603f94a633f17f019ced572f87a2c51bd85c82ebd4ab7d01266213997b772",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        22,
+        50
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "34d6fefba936e2dcc04c2231ea2514a382c28da8e50c39161cc94b08839f1f00",
+      "input_sha256": "cd40742d0d0dc7a14519fbc23afcb7abc9678bb83a841c1a8bb216fb78a0c0da",
+      "proposal": [
+        20,
+        50
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "12-uniface-tandem.mp4",
+      "group": "71d603f94a633f17f019ced572f87a2c51bd85c82ebd4ab7d01266213997b772",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        22,
+        50
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "34d6fefba936e2dcc04c2231ea2514a382c28da8e50c39161cc94b08839f1f00",
+      "input_sha256": "997416434b6e9e492b73c482e518b77920062afa9df5fa56dab651f61f12841d",
+      "proposal": [
+        22,
+        52
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "13-original-direct.mp4",
+      "group": "7a24281950793459756bf3996ff35867dd8d5ebf1af7672126b9d1a7be8b7f13",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "53fce8569a8d9cccd45270181e796c9a1b2c14a5847d8a3255866ca34afa6318",
+      "input_sha256": "9fbef2955fcbf9d8895b792f290064e9c144de9aac1a278068643b03d7f5d1ac",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "13-original-tandem.mp4",
+      "group": "7a24281950793459756bf3996ff35867dd8d5ebf1af7672126b9d1a7be8b7f13",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "53fce8569a8d9cccd45270181e796c9a1b2c14a5847d8a3255866ca34afa6318",
+      "input_sha256": "714f5f0cd574ab22b3ea198c5cf9a1708dca8b26c8a2a585c339ea48b218a4d4",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "13-gain-direct.mp4",
+      "group": "7a24281950793459756bf3996ff35867dd8d5ebf1af7672126b9d1a7be8b7f13",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "53fce8569a8d9cccd45270181e796c9a1b2c14a5847d8a3255866ca34afa6318",
+      "input_sha256": "93583c1b073cd1e516222916d4d6374b3f62f9f33addf794fd8b534da1352c01",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "13-gain-tandem.mp4",
+      "group": "7a24281950793459756bf3996ff35867dd8d5ebf1af7672126b9d1a7be8b7f13",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "53fce8569a8d9cccd45270181e796c9a1b2c14a5847d8a3255866ca34afa6318",
+      "input_sha256": "b652a8d46dff2100afe89d381e8ac0caabbebbe6c2a1c9e465cf031bcf39577f",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "13-picture_jump-direct.mp4",
+      "group": "7a24281950793459756bf3996ff35867dd8d5ebf1af7672126b9d1a7be8b7f13",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "53fce8569a8d9cccd45270181e796c9a1b2c14a5847d8a3255866ca34afa6318",
+      "input_sha256": "2d2aca8477d59c5111a0eb6684faadb54a2d9f872bfb3bb25f5c577dd1dd9bf6",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "13-picture_jump-tandem.mp4",
+      "group": "7a24281950793459756bf3996ff35867dd8d5ebf1af7672126b9d1a7be8b7f13",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "53fce8569a8d9cccd45270181e796c9a1b2c14a5847d8a3255866ca34afa6318",
+      "input_sha256": "b97f7615fb13684978747b3a582c2986abc5f4952d5e93b871aa2c42db873c8d",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "13-different_shot-direct.mp4",
+      "group": "7a24281950793459756bf3996ff35867dd8d5ebf1af7672126b9d1a7be8b7f13",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "53fce8569a8d9cccd45270181e796c9a1b2c14a5847d8a3255866ca34afa6318",
+      "input_sha256": "4f585671fe5b17f24ac6891f78fa290494e2079aac30bf91d6acfcad33dfab9c",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "13-different_shot-tandem.mp4",
+      "group": "7a24281950793459756bf3996ff35867dd8d5ebf1af7672126b9d1a7be8b7f13",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "53fce8569a8d9cccd45270181e796c9a1b2c14a5847d8a3255866ca34afa6318",
+      "input_sha256": "a1e390be4677d0dc9348c6bb6e56cc228bb0f655e65c546d46d1d113ae9d7748",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "13-face_blur-direct.mp4",
+      "group": "7a24281950793459756bf3996ff35867dd8d5ebf1af7672126b9d1a7be8b7f13",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "53fce8569a8d9cccd45270181e796c9a1b2c14a5847d8a3255866ca34afa6318",
+      "input_sha256": "ebb705a7b9d7ff4e267d016b379ff935819c685e870f82e4b44f57751c46c213",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "13-face_blur-tandem.mp4",
+      "group": "7a24281950793459756bf3996ff35867dd8d5ebf1af7672126b9d1a7be8b7f13",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "53fce8569a8d9cccd45270181e796c9a1b2c14a5847d8a3255866ca34afa6318",
+      "input_sha256": "e99227c257d727d2a520c94c7935736a3d25a12e5bab5181741c37cea00fa44f",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "13-inswapper-direct.mp4",
+      "group": "7a24281950793459756bf3996ff35867dd8d5ebf1af7672126b9d1a7be8b7f13",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        22,
+        40
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "53fce8569a8d9cccd45270181e796c9a1b2c14a5847d8a3255866ca34afa6318",
+      "input_sha256": "66f636e50987d2bb23ef3848669c29314db34f193264b9deeed9130aec9c0b97",
+      "proposal": [
+        20,
+        40
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "13-inswapper-tandem.mp4",
+      "group": "7a24281950793459756bf3996ff35867dd8d5ebf1af7672126b9d1a7be8b7f13",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        22,
+        40
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "53fce8569a8d9cccd45270181e796c9a1b2c14a5847d8a3255866ca34afa6318",
+      "input_sha256": "67fc64622b442261cd8839fd4c5df83c98d00a9b618a8a85f87f80365134cf75",
+      "proposal": [
+        20,
+        40
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "13-uniface-direct.mp4",
+      "group": "7a24281950793459756bf3996ff35867dd8d5ebf1af7672126b9d1a7be8b7f13",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        28,
+        68
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "53fce8569a8d9cccd45270181e796c9a1b2c14a5847d8a3255866ca34afa6318",
+      "input_sha256": "4a10cbe42cdf4ae75476f69cf5aaec97c14bfbdc49cfd3dab55bed6673ce1951",
+      "proposal": [
+        26,
+        70
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "13-uniface-tandem.mp4",
+      "group": "7a24281950793459756bf3996ff35867dd8d5ebf1af7672126b9d1a7be8b7f13",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        28,
+        68
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "53fce8569a8d9cccd45270181e796c9a1b2c14a5847d8a3255866ca34afa6318",
+      "input_sha256": "42bccd175ae4dd81fc76f1032d27ce00c282116215d32e4242717dfbb967579d",
+      "proposal": [
+        28,
+        72
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "14-original-direct.mp4",
+      "group": "81432bac6aca4546af0a3f6ac793bd7acc4eeaa9c14732e5a7e695be5a0883e7",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "08b5772d8b1597d636800185ed2c4aede9ceba28a66aae4d2ea6bc2ecd06d4e7",
+      "input_sha256": "32b43a9bf9b102e4e236c7027a7c96673d72472bd869e3ccaeb822f53ca5b93a",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "14-original-tandem.mp4",
+      "group": "81432bac6aca4546af0a3f6ac793bd7acc4eeaa9c14732e5a7e695be5a0883e7",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "08b5772d8b1597d636800185ed2c4aede9ceba28a66aae4d2ea6bc2ecd06d4e7",
+      "input_sha256": "1325a5ae8f736870ff5d44713ef5463fb59ed4806f9fe2c7278091815fa3e5fd",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "14-gain-direct.mp4",
+      "group": "81432bac6aca4546af0a3f6ac793bd7acc4eeaa9c14732e5a7e695be5a0883e7",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "08b5772d8b1597d636800185ed2c4aede9ceba28a66aae4d2ea6bc2ecd06d4e7",
+      "input_sha256": "515f1659f6c9507b8340cf8d9411001f7eabdde8d7a089b11cca5aafe26b329a",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "14-gain-tandem.mp4",
+      "group": "81432bac6aca4546af0a3f6ac793bd7acc4eeaa9c14732e5a7e695be5a0883e7",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "08b5772d8b1597d636800185ed2c4aede9ceba28a66aae4d2ea6bc2ecd06d4e7",
+      "input_sha256": "530938349fc7af2dcf7b47d04cb14d60e712bd18c8aba4b2094160cdba0c413c",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "14-picture_jump-direct.mp4",
+      "group": "81432bac6aca4546af0a3f6ac793bd7acc4eeaa9c14732e5a7e695be5a0883e7",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "08b5772d8b1597d636800185ed2c4aede9ceba28a66aae4d2ea6bc2ecd06d4e7",
+      "input_sha256": "d30823423af4a1cb18397f9ed4a5872e79846ed13c87b45615ff939f8d42c204",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "14-picture_jump-tandem.mp4",
+      "group": "81432bac6aca4546af0a3f6ac793bd7acc4eeaa9c14732e5a7e695be5a0883e7",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "08b5772d8b1597d636800185ed2c4aede9ceba28a66aae4d2ea6bc2ecd06d4e7",
+      "input_sha256": "4614668a62a5a315274d874899a47db1ea556577b635a4fe8d4349c2b264b08a",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "14-different_shot-direct.mp4",
+      "group": "81432bac6aca4546af0a3f6ac793bd7acc4eeaa9c14732e5a7e695be5a0883e7",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "08b5772d8b1597d636800185ed2c4aede9ceba28a66aae4d2ea6bc2ecd06d4e7",
+      "input_sha256": "2434b79690546ef80ea8759a7aa874393ffb87912fe9277768dbde1c951fb8fd",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "14-different_shot-tandem.mp4",
+      "group": "81432bac6aca4546af0a3f6ac793bd7acc4eeaa9c14732e5a7e695be5a0883e7",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "08b5772d8b1597d636800185ed2c4aede9ceba28a66aae4d2ea6bc2ecd06d4e7",
+      "input_sha256": "0fe5e63d13e500cd4fee589d3b60a72e5ab917444f75d005e294200776c75ce5",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "14-face_blur-direct.mp4",
+      "group": "81432bac6aca4546af0a3f6ac793bd7acc4eeaa9c14732e5a7e695be5a0883e7",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "08b5772d8b1597d636800185ed2c4aede9ceba28a66aae4d2ea6bc2ecd06d4e7",
+      "input_sha256": "8521e68029c80590a13e6ba5ed21f7f5ffb3d99e07fdeac45384e446b37af4f4",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "14-face_blur-tandem.mp4",
+      "group": "81432bac6aca4546af0a3f6ac793bd7acc4eeaa9c14732e5a7e695be5a0883e7",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "08b5772d8b1597d636800185ed2c4aede9ceba28a66aae4d2ea6bc2ecd06d4e7",
+      "input_sha256": "0ee26e320b8e7add1578549a897884be7860dd73aa4041c5da4bfc2710bdd529",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "14-inswapper-direct.mp4",
+      "group": "81432bac6aca4546af0a3f6ac793bd7acc4eeaa9c14732e5a7e695be5a0883e7",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        28,
+        56
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "08b5772d8b1597d636800185ed2c4aede9ceba28a66aae4d2ea6bc2ecd06d4e7",
+      "input_sha256": "e9a692c4b20a083bf2afb5a37bda42f5dd0ea6c04fa7c0ef40fb4225dee948b6",
+      "proposal": [
+        26,
+        58
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "14-inswapper-tandem.mp4",
+      "group": "81432bac6aca4546af0a3f6ac793bd7acc4eeaa9c14732e5a7e695be5a0883e7",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        28,
+        56
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "08b5772d8b1597d636800185ed2c4aede9ceba28a66aae4d2ea6bc2ecd06d4e7",
+      "input_sha256": "ac9d63e7e3e3f72d10f1c295af2d8c45177e70bff12e4ce96420951442d9c21b",
+      "proposal": [
+        26,
+        58
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "14-uniface-direct.mp4",
+      "group": "81432bac6aca4546af0a3f6ac793bd7acc4eeaa9c14732e5a7e695be5a0883e7",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        36,
+        46
+      ],
+      "existing": [
+        37,
+        47
+      ],
+      "existing_assessed": true,
+      "source_sha256": "08b5772d8b1597d636800185ed2c4aede9ceba28a66aae4d2ea6bc2ecd06d4e7",
+      "input_sha256": "642681f04685e63a359fd604329a804ac4d9f297b3fd742ffa57218b80a7cf4a",
+      "proposal": [
+        36,
+        46
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "14-uniface-tandem.mp4",
+      "group": "81432bac6aca4546af0a3f6ac793bd7acc4eeaa9c14732e5a7e695be5a0883e7",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        36,
+        46
+      ],
+      "existing": [
+        37,
+        47
+      ],
+      "existing_assessed": true,
+      "source_sha256": "08b5772d8b1597d636800185ed2c4aede9ceba28a66aae4d2ea6bc2ecd06d4e7",
+      "input_sha256": "0a23ba12e2513e6411a3589759d25d912d49ad733de68c20b2f869370281108d",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "15-original-direct.mp4",
+      "group": "8ad6e536223f9ed295f8f666a88bd6dac4f4ed59beb3df0c026e8689268198bc",
+      "family": "original",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "df5bd9c9b47b28b5e2e302a471e121b990114ce3795ca503b1b788f93c5e8a55",
+      "input_sha256": "4d2740643c4016ae1056438a3ab946fae723496fc03ad43b4dc5f317561d17f7",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "15-original-tandem.mp4",
+      "group": "8ad6e536223f9ed295f8f666a88bd6dac4f4ed59beb3df0c026e8689268198bc",
+      "family": "original",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "df5bd9c9b47b28b5e2e302a471e121b990114ce3795ca503b1b788f93c5e8a55",
+      "input_sha256": "af5327b23b60bedb66f29d8e04a92fb634235672fbbd22f6a674377017d4b1ba",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "15-gain-direct.mp4",
+      "group": "8ad6e536223f9ed295f8f666a88bd6dac4f4ed59beb3df0c026e8689268198bc",
+      "family": "gain",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "df5bd9c9b47b28b5e2e302a471e121b990114ce3795ca503b1b788f93c5e8a55",
+      "input_sha256": "bb6b584b06f1a5effdeb635c3573153e44d56b072f9daf28b127f12e414d241c",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "15-gain-tandem.mp4",
+      "group": "8ad6e536223f9ed295f8f666a88bd6dac4f4ed59beb3df0c026e8689268198bc",
+      "family": "gain",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "df5bd9c9b47b28b5e2e302a471e121b990114ce3795ca503b1b788f93c5e8a55",
+      "input_sha256": "55b95f12571f979d2da9f6d71be7e766ad81db4ee2a0948673f940efabe81875",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "15-picture_jump-direct.mp4",
+      "group": "8ad6e536223f9ed295f8f666a88bd6dac4f4ed59beb3df0c026e8689268198bc",
+      "family": "picture_jump",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "df5bd9c9b47b28b5e2e302a471e121b990114ce3795ca503b1b788f93c5e8a55",
+      "input_sha256": "874c2cebcb9d78ff6bf11b21ff3eaac49a7fa5c093ca1f4e7cdff124272aef07",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "15-picture_jump-tandem.mp4",
+      "group": "8ad6e536223f9ed295f8f666a88bd6dac4f4ed59beb3df0c026e8689268198bc",
+      "family": "picture_jump",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "df5bd9c9b47b28b5e2e302a471e121b990114ce3795ca503b1b788f93c5e8a55",
+      "input_sha256": "6445b225510813baa677a2c44674a1cdc796ad8aee98ddaf1db1930f042537f4",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "15-different_shot-direct.mp4",
+      "group": "8ad6e536223f9ed295f8f666a88bd6dac4f4ed59beb3df0c026e8689268198bc",
+      "family": "different_shot",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "df5bd9c9b47b28b5e2e302a471e121b990114ce3795ca503b1b788f93c5e8a55",
+      "input_sha256": "1cddbdd993a4fb73e0412f1e956bc559c2e1cd2276b1aa3555ecdc051426f924",
+      "proposal": [
+        34,
+        78
+      ],
+      "considered": true,
+      "cuts": [
+        36,
+        76
+      ]
+    },
+    {
+      "file": "15-different_shot-tandem.mp4",
+      "group": "8ad6e536223f9ed295f8f666a88bd6dac4f4ed59beb3df0c026e8689268198bc",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "df5bd9c9b47b28b5e2e302a471e121b990114ce3795ca503b1b788f93c5e8a55",
+      "input_sha256": "82304eb9371bd769df557b812847abb0991924e7f71b618faa77aca39d33a46d",
+      "proposal": [
+        34,
+        78
+      ],
+      "considered": true,
+      "cuts": [
+        36,
+        76
+      ]
+    },
+    {
+      "file": "15-face_blur-direct.mp4",
+      "group": "8ad6e536223f9ed295f8f666a88bd6dac4f4ed59beb3df0c026e8689268198bc",
+      "family": "face_blur",
+      "delivery": "direct",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "df5bd9c9b47b28b5e2e302a471e121b990114ce3795ca503b1b788f93c5e8a55",
+      "input_sha256": "8e92ac2dc0ff3243a4765768c40cdc50f7b53a784339d44441e9e744c07334d4",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "15-face_blur-tandem.mp4",
+      "group": "8ad6e536223f9ed295f8f666a88bd6dac4f4ed59beb3df0c026e8689268198bc",
+      "family": "face_blur",
+      "delivery": "tandem",
+      "truth": null,
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "df5bd9c9b47b28b5e2e302a471e121b990114ce3795ca503b1b788f93c5e8a55",
+      "input_sha256": "f621071f5bd3f3e71f4b51b193c2dc433cb86c82b7de561cc879a776adc3124f",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    },
+    {
+      "file": "15-inswapper-direct.mp4",
+      "group": "8ad6e536223f9ed295f8f666a88bd6dac4f4ed59beb3df0c026e8689268198bc",
+      "family": "inswapper",
+      "delivery": "direct",
+      "truth": [
+        36,
+        76
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "df5bd9c9b47b28b5e2e302a471e121b990114ce3795ca503b1b788f93c5e8a55",
+      "input_sha256": "ab1e0e4a28f4e7b3080cb6d15c289424f564b3f6807b1fea628d83a27cdc86d5",
+      "proposal": [
+        32,
+        76
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "15-inswapper-tandem.mp4",
+      "group": "8ad6e536223f9ed295f8f666a88bd6dac4f4ed59beb3df0c026e8689268198bc",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "truth": [
+        36,
+        76
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "df5bd9c9b47b28b5e2e302a471e121b990114ce3795ca503b1b788f93c5e8a55",
+      "input_sha256": "3ec212ffa577d73bb760c4ba16fbbfce88ee2e16cb28e15eea821933ea2e9127",
+      "proposal": [
+        36,
+        78
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "15-uniface-direct.mp4",
+      "group": "8ad6e536223f9ed295f8f666a88bd6dac4f4ed59beb3df0c026e8689268198bc",
+      "family": "uniface",
+      "delivery": "direct",
+      "truth": [
+        20,
+        38
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "df5bd9c9b47b28b5e2e302a471e121b990114ce3795ca503b1b788f93c5e8a55",
+      "input_sha256": "9c3a352ccd8ff1a416209af73f4b203f7ea33dba17fe5f124ab2b6b662d35d92",
+      "proposal": [
+        18,
+        38
+      ],
+      "considered": true,
+      "cuts": []
+    },
+    {
+      "file": "15-uniface-tandem.mp4",
+      "group": "8ad6e536223f9ed295f8f666a88bd6dac4f4ed59beb3df0c026e8689268198bc",
+      "family": "uniface",
+      "delivery": "tandem",
+      "truth": [
+        20,
+        38
+      ],
+      "existing": null,
+      "existing_assessed": true,
+      "source_sha256": "df5bd9c9b47b28b5e2e302a471e121b990114ce3795ca503b1b788f93c5e8a55",
+      "input_sha256": "77d907488e9813da8fe8f6cdffdf78b0a53bef14f8e5db8043d1f6417ada5aa6",
+      "proposal": null,
+      "considered": true,
+      "cuts": null
+    }
+  ],
+  "counts": {
+    "direct": {
+      "edited": 32,
+      "control": 80,
+      "old_useful": 7,
+      "old_ordinary_flags": 3,
+      "ungated_useful": 30,
+      "ungated_ordinary_flags": 6,
+      "guarded_useful": 30,
+      "guarded_ordinary_flags": 3,
+      "above_point": 33,
+      "crossed_cut": 3,
+      "reviewed_face_context": 106
+    },
+    "tandem": {
+      "edited": 32,
+      "control": 80,
+      "old_useful": 7,
+      "old_ordinary_flags": 1,
+      "ungated_useful": 27,
+      "ungated_ordinary_flags": 4,
+      "guarded_useful": 27,
+      "guarded_ordinary_flags": 1,
+      "above_point": 29,
+      "crossed_cut": 3,
+      "reviewed_face_context": 106
+    }
+  }
+}

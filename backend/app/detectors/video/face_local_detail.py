@@ -3,22 +3,20 @@
 from __future__ import annotations
 
 import hashlib
+from contextlib import closing
 from dataclasses import dataclass
-from fractions import Fraction
 
 import cv2
 import numpy as np
 
 from app.detectors.image.faces import detect_faces, iou
 from app.detectors.video import face_appearance, face_detail_inputs, face_frequency, face_return
+from app.detectors.video.decode import DecodeError, decode_frames
+from app.detectors.video.shots import ShotDetector
+from app.evidence import face_local_return_binding as local
 
-DIMENSIONS = (640, 360)
-COUNT = 100
-STEP = Fraction(1, 25)
-SCHEDULE = tuple(range(0, COUNT, 2))
-FLANK = 4
-CORE_MIN, CORE_MAX = 4, 22
-SCENE_POINT = .60
+DIMENSIONS, COUNT, STEP, SCHEDULE = local.DIMENSIONS, local.FRAME_COUNT, local.STEP, local.SCHEDULE
+FLANK, CORE_MIN, CORE_MAX, SCENE_POINT = local.FLANK, local.CORE_MIN, local.CORE_MAX, local.SCENE_POINT
 MODES = ("same_appearance", "relative_detail", "combined")
 
 
@@ -39,6 +37,25 @@ def supported(table, encoding):
             and (table.width, table.height) == (table.coded_width, table.coded_height) == DIMENSIONS
             and not (table.rotation or table.truncated or table.interpolated) and len(table) == COUNT
             and all((pts - table.pts[0]) * table.tb == index * STEP for index, pts in enumerate(table.pts)))
+
+
+def shot_changes(path, table, start, end, *, timeout_s=10., check=None):
+    """Read every picture in the candidate and its flanks to find abrupt shot changes."""
+    before, _, after = local.support(start, end)
+    indices = range(before[0], after[-1] + 1)
+    # Short intervening shots matter even when too brief to enter the sampling plan.
+    detector = ShotDetector(table, min_shot_s=0.)
+    first = indices.start
+    with closing(decode_frames(path, table, indices, timeout_s=timeout_s, check=check)) as frames:
+        for offset, frame in enumerate(frames):
+            if check is not None:
+                check()
+            if frame.index != first + offset or not frame.pts_verified or frame.pts != table.pts[frame.index]:
+                raise DecodeError("The source clock could not be verified throughout the face comparison")
+            detector.update(frame.index, frame.rgb)
+    if detector.frames_seen != len(indices):
+        raise DecodeError("The face comparison is missing pictures around its proposed range")
+    return tuple(row["frame_index"] for row in detector.boundaries)
 
 
 def observe(pixels, locator, recognizer, *, with_texture):

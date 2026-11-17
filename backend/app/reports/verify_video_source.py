@@ -31,6 +31,7 @@ from app.detectors.video.frames import probe as probe_container
 from app.detectors.video.lipsync import source_mouth_patch
 from app.evidence import (
     face_boundary_binding,
+    face_local_return_binding,
     face_paired_edge_binding,
     face_short_carrier_binding,
     face_short_proposal_binding,
@@ -416,7 +417,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         picture_hold_binding.validate_source_clock(evidence, table.pts, table.interpolated)
         hold_frames = hold["frames_scanned"]
     pictures, mouths, faces, scenes = defaultdict(list), defaultdict(list), defaultdict(list), defaultdict(list)
-    fine_records, guarded_records, paired_records, background_indices, background_frames = [], [], [], set(), {}
+    fine_records, guarded_records, local_records, paired_records, background_indices, background_frames = [], [], [], [], set(), {}
     proposal_records, paired_indices, paired_pixels = [], set(), {}
     window_records = []
     cut_records, cut_indices, cut_pixels = [], set(), {}
@@ -470,6 +471,15 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             background_indices.update(row["frame_index"] for row in record["scene_frame_inputs"])
         elif record.get("method") in GUARDED_METHODS:
             guarded_records.append(record)
+            background_indices.update(row["frame_index"] for row in record["scene_frame_inputs"])
+        elif record.get("method") == face_local_return_binding.METHOD:
+            from app.detectors.video.face_local_detail import supported
+
+            delivery = probe_container(original, include_codec_tag=True)
+            encoding = delivery.get("codec"), delivery.get("pix_fmt")
+            if not supported(table, encoding) or face_return.source_carrier(original) != "mp4":
+                raise ValueError("The original video differs from the local face review profile")
+            local_records.append(record)
             background_indices.update(row["frame_index"] for row in record["scene_frame_inputs"])
     if guarded_codec:
         expected = 2 if evidence["version"] == SECOND_HD_FACE_VERSION else 1
@@ -620,6 +630,16 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     fine_edges = sum(_verify_scene_support(record, background_frames) for record in fine_records)
     for record in guarded_records:
         _verify_guarded_scene(record, background_frames)
+    for record in local_records:
+        from app.detectors.video.face_local_detail import shot_changes
+
+        samples = [_scene_sample(row, background_frames) for row in record["scene_frame_inputs"]]
+        for pair, pin in zip((samples[:2], samples[2:]), record["scene_correlations_hex"], strict=True):
+            observed = face_return.scene_lower_quartile(*pair)
+            if observed is None or not math.isclose(observed, float.fromhex(pin), abs_tol=1e-6, rel_tol=0):
+                raise ValueError("Local face background support differs from the original video")
+        if shot_changes(original, table, record["start_frame_index"], record["end_frame_index"]):
+            raise ValueError("The original video shows a shot change during the local face comparison")
     for record in paired_records:
         _verify_paired_motion(record, {row["frame_index"]:paired_pixels[row["frame_index"]] for row in record["scene_frame_inputs"]})
     if len(proposal_records) != expected_proposals:

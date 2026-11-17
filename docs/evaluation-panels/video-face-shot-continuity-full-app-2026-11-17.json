@@ -1,0 +1,78 @@
+{
+  "comparisons": 2,
+  "cases": [
+    {
+      "file": "06-different_shot-tandem.mp4",
+      "group": "7b09464c2cffebd79c25a2a25477f3d1aeace213f1817bd7676b0e8c40b8574a",
+      "family": "different_shot",
+      "delivery": "tandem",
+      "input_sha256": "2da3b8a8604d61777dbd805350a2bda6347ec278c10e4a1cc3e29d6873c49b87",
+      "truth": null,
+      "prior_ranges": [],
+      "new_range": null,
+      "extra_useful": false,
+      "coverage": {
+        "measured_face_frames": 50,
+        "reason": "local_shot_change",
+        "scheduled_frames": 50,
+        "status": "no_distinct_range"
+      }
+    },
+    {
+      "file": "18-inswapper-tandem.mp4",
+      "group": "99ffd9d387b421b729e1fd1d0b32c50333154cb579bc12977d2455dcb19fb2ab",
+      "family": "inswapper",
+      "delivery": "tandem",
+      "input_sha256": "67fd8d12d71e60971925cdfb66480304dd48f216b08abed492265bdbb155dc3f",
+      "truth": [
+        14,
+        42
+      ],
+      "prior_ranges": [],
+      "new_range": [
+        12,
+        42
+      ],
+      "extra_useful": true,
+      "coverage": {
+        "measured_face_frames": 34,
+        "reason": null,
+        "scheduled_frames": 50,
+        "status": "localized"
+      },
+      "source_frame_crop_images_verified": 6,
+      "signed_original_replay_verified": true,
+      "playback_s": [
+        0.48,
+        1.68
+      ],
+      "anchors": [
+        10,
+        26,
+        42
+      ]
+    }
+  ],
+  "counts": {
+    "extra_useful": 1,
+    "ordinary_new_flags": 0,
+    "misplaced_edit_ranges": 0,
+    "shot_vetoes": 1
+  },
+  "browser": {
+    "cases": [
+      {
+        "fixture": "18-inswapper-tandem",
+        "source_frames": 3,
+        "face_crops": 3,
+        "native_seek_s": 1.04
+      }
+    ],
+    "page_errors": 0
+  },
+  "comparison_sha256": "cb0940e5b86f252f7979c3e9716e834af065dd877d6467567cb614adf9aa262d",
+  "simulated_paid_jobs": 3,
+  "unpaid_jobs": 0,
+  "confidence_toggle_verified": true,
+  "all_checks": true
+}

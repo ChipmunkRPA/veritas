@@ -697,7 +697,7 @@ describe('ordinary multimedia evidence', () => {
     ['video-evidence-29', 'face-short-return/16'], ['video-evidence-30', 'face-short-return/17'],
     ['video-evidence-31', 'face-short-return/18'], ['video-evidence-32', 'face-short-return/19'],
     ['video-evidence-33', 'face-short-return/20'], ['video-evidence-34', 'face-short-return/21'],
-    ['video-evidence-35', 'face-short-return/22']])(
+    ['video-evidence-35', 'face-short-return/22'], ['video-evidence-36', 'face-short-return/23']])(
     'distinguishes native motion inputs from face samples in %s', (version, method) => {
     const set = { ...structuredClone(video), version }
     const packet = set.packets[0]
@@ -974,7 +974,7 @@ describe('ordinary multimedia evidence', () => {
     expect(section.queryByRole('link')).toBeNull()
   })
 
-  it.each(['video-evidence-10', 'video-evidence-35'])('shows both original audio ranges in the video voice lane for %s', (version) => {
+  it.each(['video-evidence-10', 'video-evidence-35', 'video-evidence-36'])('shows both original audio ranges in the video voice lane for %s', (version) => {
     const set = { ...structuredClone(video), version }
     const sample = (start_sample: number) => ({ start_sample, end_sample: start_sample + 4000,
       source_timestamp_ranges: [{ start_sample, end_sample: start_sample + 4000,

@@ -19,9 +19,11 @@ _REASONS = {
     "insufficient_same_shot_context": "The sampled pictures did not provide enough comparable single-face context.",
     "insufficient_face_track_context": "The sampled pictures did not provide enough comparable views of the same face.",
     "surrounding_scene_changed": "The surrounding picture changed too much to support the range.",
+    "local_shot_change": "An abrupt shot change crossed the proposed range or its supporting pictures.",
     "sparse_range_outside_profile": "The initial scan found a possible change. That scan alone cannot support a brief range for this video profile.",
 }
-_FOLLOWUPS = ("dense_fallback", "fine_scene_fallback")
+_FOLLOWUPS = ("dense_fallback", "fine_scene_fallback", "local_duration_fallback")
+_NO_RANGE_REASONS = {"surrounding_scene_changed", "local_shot_change"}
 BOUNDED = "bounded_proposal"
 SECOND_AVC = "second_avc"
 
@@ -34,8 +36,8 @@ def _pass(status, reason, scheduled_frames, measured_face_frames, frame_count):
         if reason != "native_scope" or scheduled_frames:
             raise ValueError("Invalid brief face-change scope")
     elif (not scheduled_frames or (status == "localized" and (reason is not None or measured_face_frames < 9))
-          or (status == "no_distinct_range" and reason not in {None, "surrounding_scene_changed"})
-          or (status == "unassessed" and reason not in _REASONS.keys()-{"native_scope", "surrounding_scene_changed"})):
+          or (status == "no_distinct_range" and reason not in {None, *_NO_RANGE_REASONS})
+          or (status == "unassessed" and reason not in _REASONS.keys() - {"native_scope"} - _NO_RANGE_REASONS)):
         raise ValueError("Invalid brief face-change disposition")
     return {"status": status, "reason": reason, "scheduled_frames": scheduled_frames,
             "measured_face_frames": measured_face_frames}
@@ -148,7 +150,8 @@ def validate_commitment(document, expected_hash):
 
 def observations(record):
     lines = []
-    labels = {"initial": "Initial scan", "dense_fallback": "Denser scan", "fine_scene_fallback": "Finer background scan"}
+    labels = {"initial": "Initial scan", "dense_fallback": "Denser scan", "fine_scene_fallback": "Finer background scan",
+              "local_duration_fallback": "Same-scene face comparison"}
     for name in ("initial", *_FOLLOWUPS):
         if name not in record:
             continue

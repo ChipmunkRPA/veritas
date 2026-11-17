@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Temporary face changes within one shot](video-face-shot-continuity-2026-11-17.md)
+  adds two exact locations to the existing video face worker on 224
+  fresh paired deliveries. The shot check dismisses six ordinary cut
+  proposals and adds no ordinary alerts. Earlier replay recovers
+  three more locations and dismisses four cut alerts. The supported
+  local option shows the measured range and three original frames and
+  crops with zero AI-score weight.
+
 - [Wording in retained PDF saves](writing-pdf-saved-wording-2026-11-17.md)
   localizes 96 of 96 staged changes, including edits followed by a separate
   comment save. It reports zero wording changes on 72 ordinary saves and

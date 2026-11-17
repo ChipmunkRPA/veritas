@@ -457,6 +457,38 @@ Samples [{{ window.start_sample }}, {{ window.end_sample }}) at 16000 Hz.
 {% for save in history.saves %}<p class="caption evidence-hash">Save {{ save.version }}, first {{ save.prefix_bytes }} bytes. SHA-256 <span class="mono">{{ save.sha256 }}</span>.</p>{% endfor %}
 {% endif %}
 <p class="caption">JSON pointer <span class="mono">/coverage/pdf_saved_wording</span>.</p>
+{% if history.get('pictures') %}
+{% set pictures = history.pictures %}
+<h3 id="multimedia-evidence-pdf-saved-pictures">Pictures across saved PDF versions</h3>
+<p>Highlighted pixels mark visible differences in a picture found at the same position in two retained saves. Ordinary editing and AI editing can both produce differences. This check contributes zero weight to the AI assessment.</p>
+{% if pictures.status == 'unavailable' %}
+{% set picture_reasons = {'no_comparable_pictures': 'The check found no comparable pictures in at least one retained save.', 'partial_picture_coverage': 'Some pictures or pages could not be compared. No local changes were found in the areas checked.', 'time_limit': 'The picture comparison reached its time limit.', 'save_limit': 'Some earlier saves were outside the comparison limit.', 'page_limit': 'A retained save exceeds the supported page count.'} %}
+<p>{{ picture_reasons.get(pictures.reason, 'The saved pictures could not be assessed.') }}</p>
+{% elif pictures.status == 'no_change' %}
+<p>No local picture differences were found in the areas checked across {{ pictures.saves | length }} verified saves.</p>
+{% elif pictures.status == 'changed' %}
+{% set comparison = pictures.comparisons[-1] %}
+<p>Compared save {{ comparison.earlier_version }} with submitted save {{ pictures.saves[0].version }}.</p>
+{% for change in comparison.changes %}
+<article class="multimedia-evidence-packet multimedia-repeat-pair" id="multimedia-evidence-pdf-picture-change-{{ loop.index }}">
+<h4>Picture change {{ loop.index }}</h4>
+<p>Earlier page {{ change.earlier_page }} · submitted page {{ change.current_page }}.</p>
+<p class="caption">Region [{{ change.region_pixels | join(', ') }}] at {{ change.render_scale }} rendered pixels per PDF point, from the unrotated page’s top left. {{ change.marked_pixels }} highlighted pixels.</p>
+<p class="caption">{{ change.matching_tiles }} of {{ change.tested_tiles }} picture tiles matched pixel for pixel between these saves.</p>
+{{ plates([saved.plates['picture' ~ loop.index ~ '_overlay'], saved.plates['picture' ~ loop.index ~ '_crop']]) }}
+</article>
+{% endfor %}
+{% if comparison.changed_regions > comparison.changes | length %}<p>Showing {{ comparison.changes | length }} of {{ comparison.changed_regions }} picture regions.</p>{% endif %}
+{% set earlier_picture_save = pictures.saves[-1] %}
+<p class="caption evidence-hash">Earlier picture save {{ earlier_picture_save.version }}, first {{ earlier_picture_save.prefix_bytes }} bytes. SHA-256 <span class="mono">{{ earlier_picture_save.sha256 }}</span>.</p>
+{% endif %}
+{% for comparison in pictures.comparisons %}
+{% set checked = comparison.pages | sum(attribute='compared') %}
+{% set skipped = comparison.pages | sum(attribute='skipped') %}
+<p class="caption">Save {{ comparison.earlier_version }} comparison · {{ checked }} picture {{ 'placement' if checked == 1 else 'placements' }} checked. {% if skipped %}{{ skipped }} placements or pages unassessed. {% endif %}{% if comparison.unpaired_pages[0] or comparison.unpaired_pages[1] %}Some pages had no matching page in the other save. {% endif %}</p>
+{% endfor %}
+<p class="caption">Earlier pictures can be checked in the submitted file’s retained bytes. JSON pointer <span class="mono">/coverage/pdf_saved_wording/inspection/pictures</span>.</p>
+{% endif %}
 {% endif %}
 {% if evidence.get('word_tracked_changes') %}
 {% set tracked = evidence.word_tracked_changes %}

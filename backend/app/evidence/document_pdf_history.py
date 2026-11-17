@@ -173,11 +173,10 @@ def _compare(previous, latest, current_pages):
     return report
 
 
-def inspect(data):
-    """Compare recent byte-exact saves with the submitted PDF's current pages."""
+def scan_saves(data, result, compare, changed, incomplete):
+    """Follow the verified incremental chain and compare each prior save with the submitted one."""
     import pymupdf
 
-    result = _unavailable(len(data), None)
     if len(data) > MAX_BYTES:
         return result | {"reason": "size_limit"}
     endings = list(islice(_END.finditer(data), 65))
@@ -202,9 +201,9 @@ def inspect(data):
                     result["saves"].append(earlier)
                     if not 1 <= len(previous) <= MAX_PAGES:
                         return result | {"reason": "page_limit"}
-                    comparison = _compare(previous, latest, current_pages)
+                    comparison = compare(previous, latest, current_pages)
                     result["comparisons"].append(comparison)
-                    if _has_changes(comparison):
+                    if changed(comparison):
                         return result | {"status": "changed"}
                     revision = earlier
                     if revision["version"] == 1:
@@ -212,11 +211,22 @@ def inspect(data):
                     ending = _previous(previous, endings, revision)
     except (RuntimeError, ValueError, OverflowError):
         return result | {"reason": "unverified_chain"}
-    if any(row["unassessed"] or row["order_only"] or not row["checked"] for row in result["comparisons"]):
-        return result | {"reason": "page_text_incomplete"}
+    if reason := incomplete(result["comparisons"]):
+        return result | {"reason": reason}
     if result["saves"][-1]["version"] != 1:
         return result | {"reason": "save_limit"}
     return result | {"status": "no_change"}
+
+
+def _incomplete_text(comparisons):
+    if any(row["unassessed"] or row["order_only"] or not row["checked"] for row in comparisons):
+        return "page_text_incomplete"
+    return None
+
+
+def inspect(data):
+    """Compare recent byte-exact saves with the submitted PDF's current wording."""
+    return scan_saves(data, _unavailable(len(data), None), _compare, _has_changes, _incomplete_text)
 
 
 def _unavailable(size, reason):
@@ -231,16 +241,22 @@ def inspect_path(path):
     return inspect(path.read_bytes())
 
 
-def inspect_within(path, timeout):
+def inspect_within(path, timeout, *, pictures=False):
+    target = [sys.executable, "-I", "-m", "app.evidence.document_pdf_history", str(path)]
+    unavailable = _unavailable
+    if pictures:
+        from app.evidence import document_pdf_picture_history
+
+        unavailable = document_pdf_picture_history.unavailable
+        target.append("--pictures")
     try:
         child = subprocess.run(  # noqa: S603 - fixed interpreter, module, and staged source path
-            [sys.executable, "-I", "-m", "app.evidence.document_pdf_history", str(path)],
-            check=True, capture_output=True, timeout=timeout)
+            target, check=True, capture_output=True, timeout=timeout)
         return json.loads(child.stdout)
     except subprocess.TimeoutExpired:
-        return _unavailable(path.stat().st_size, "time_limit")
+        return unavailable(path.stat().st_size, "time_limit")
     except (subprocess.CalledProcessError, ValueError):
-        return _unavailable(path.stat().st_size, "reader_unavailable")
+        return unavailable(path.stat().st_size, "reader_unavailable")
 
 
 def previews(data, record):
@@ -256,6 +272,23 @@ def previews(data, record):
             payload = _png(image)
             yield f"change{index}_{role}", payload, {"media_type": "image/png", "sha256": _sha(payload),
                                                     "width": image.width, "height": image.height, **geometry}
+    if pictures := record.get("pictures"):
+        from app.evidence import document_pdf_picture_history
+
+        yield from document_pdf_picture_history.previews(data, pictures)
+
+
+def verify_inspection(data, reading):
+    unrepeatable = {"time_limit", "reader_unavailable"}
+    wording = {key: value for key, value in reading.items() if key != "pictures"}
+    if wording["reason"] not in unrepeatable and inspect(data) != wording:
+        raise ValueError("Saved PDF boundaries or wording differ from the submitted document")
+    if (pictures := reading.get("pictures")) and pictures["reason"] not in unrepeatable:
+        from app.evidence import document_pdf_picture_history
+
+        observed, _ = document_pdf_picture_history.inspect(data)
+        if observed != pictures:
+            raise ValueError("Saved PDF boundaries or picture locations differ from the submitted document")
 
 
 def verify_assets(data, review, read_asset):
@@ -267,4 +300,15 @@ def verify_assets(data, review, read_asset):
 
 
 if __name__ == "__main__":
-    print(json.dumps(inspect_path(Path(sys.argv[1]))))
+    # Import through its canonical name so both readers share one chain walker.
+    from app.evidence import document_pdf_history, document_pdf_picture_history
+
+    path = Path(sys.argv[1])
+    if "--pictures" in sys.argv[2:]:
+        if (size := path.stat().st_size) > MAX_BYTES:
+            print(json.dumps(document_pdf_picture_history.unavailable(size, "size_limit")))
+        else:
+            reading, _ = document_pdf_picture_history.inspect(path.read_bytes())
+            print(json.dumps(reading))
+    else:
+        print(json.dumps(document_pdf_history.inspect_path(path)))

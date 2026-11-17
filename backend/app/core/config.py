@@ -309,7 +309,7 @@ class Settings(BaseSettings):
     document_gao_archive_resolve_competition: bool = False  # Compare a strongly supported source when another has only short matches.
     document_gao_automatic_review: bool = False  # Include qualified earlier wording in local document evidence.
     document_gao_pdf_columns_review: bool = False  # Include bounded, mapped PDF columns in earlier wording evidence.
-    document_pdf_saved_wording_review: bool = False  # Compare retained saves inside the PDF.
+    document_pdf_saved_wording_review: bool = False  # Compare wording and pictures across retained PDF saves.
     image_affine_copy_review: bool = False  # Development-only dense masks for same-image geometric copies.
     image_small_affine_copy_review: bool = False  # Also search small rotated/resized regions in selected JPEG and WebP images.
     image_jpeg_block_copy_review: bool = False  # Development-only exact JPEG brightness-block fallback.

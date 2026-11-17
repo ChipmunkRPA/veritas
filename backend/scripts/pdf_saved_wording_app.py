@@ -92,11 +92,16 @@ def check_exports(client, route, output, source, evidence, review, signer):
                     if location := change[side]:
                         a, b = location["word_range"]
                         assert f"{side.capitalize()} page {location['page']}, word positions [{a}, {b})." in text
-            for asset in review["artifacts"].values():
-                raw = paid.fetch(client, asset["url"])
-                assert hashlib.sha256(raw).hexdigest() == asset["sha256"]
-                if asset["role"] == "overlay":
-                    images.append(pixels(raw))
+        for role, asset in review["artifacts"].items():
+            raw = paid.fetch(client, asset["url"])
+            assert hashlib.sha256(raw).hexdigest() == asset["sha256"]
+            if asset["role"] == "overlay" or role.startswith("picture"):
+                images.append(pixels(raw))
+        if (pictures := record.get("pictures")) and pictures["status"] == "changed":
+            for change in pictures["comparisons"][-1]["changes"]:
+                assert f"Earlier page {change['earlier_page']} · submitted page {change['current_page']}." in text
+                coords = ", ".join(str(value) for value in change["region_pixels"])
+                assert f"Region [{coords}] at {change['render_scale']} rendered pixels per PDF point" in text
         with pymupdf.open(stream=pdf, filetype="pdf") as doc:
             embedded = {((pic.width, pic.height), hashlib.sha256(pic.samples).hexdigest()) for page in doc
                         for entry in page.get_images() for pic in [pymupdf.Pixmap(doc, entry[0])] if pic.n == 3}
@@ -110,10 +115,12 @@ def check_exports(client, route, output, source, evidence, review, signer):
                            source_document=source)
     assert proof.outcome == "verified", proof.as_dict()
     assert any("retained PDF saves" in check.detail for check in proof.checks) == (review is not None)
+    picture_verification = any("saved picture review" in check.detail for check in proof.checks)
     with ZipFile(path) as archive:
         assert json.loads(archive.read("evidence.json")) == evidence and archive.read("report.pdf") == pdf
         assert all(ARCHIVED_TOKEN.encode() not in archive.read(name) for name in archive.namelist() if name.endswith(".json"))
-    return {"pdf_sha256": hashlib.sha256(pdf).hexdigest(), "verified_pdf_crops": len(images), "signed_replay": True}
+    return {"pdf_sha256": hashlib.sha256(pdf).hexdigest(), "verified_pdf_crops": len(images), "signed_replay": True,
+            "saved_picture_source_verified": picture_verification}
 
 
 def execute(held, output):
@@ -160,7 +167,7 @@ def execute(held, output):
             detailed = paid.body(client.get(route))
             decisions[name] = (detailed["decision"], detailed.get("customer_assessment"))
             review = evidence["coverage"].get(history.KEY)
-            assert (review["inspection"] if review else None) == expected
+            assert ({key: value for key, value in review["inspection"].items() if key != "pictures"} if review else None) == expected
             results[name] = {"input_sha256": digest(source), "status": expected["status"] if expected else "absent",
                              **check_exports(client, route, output / name, source, evidence, review, signer)}
             if name in {"changed", "form", "redaction"}:

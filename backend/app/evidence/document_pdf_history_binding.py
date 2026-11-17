@@ -108,6 +108,32 @@ def validate(evidence, expected):
             or record["status"] not in {"unavailable", "changed", "no_change", "no_history"}
             or type(record["source_bytes"]) is not int or record["source_bytes"] < 1):
         raise ValueError("Saved wording is outside its PDF source or scope")
+    saves, comparisons = validate_saves(record)
+    if ((record["status"] == "changed") != bool(comparisons and _has_changes(comparisons[-1]))
+            or any(_has_changes(row) for row in comparisons[:-1])):
+        raise ValueError("PDF wording changes require the corresponding comparison")
+    for row, earlier in zip(comparisons, saves[1:]):
+        if not 1 <= max(saves[0]["pages"], earlier["pages"]) <= MAX_PAGES:
+            raise ValueError("A wording comparison exceeds its page scope")
+        _validate_comparison(row, earlier, saves[0])
+    targets = {f"change{index}_{role}": side["page"] for index, side in current_locations(record) for role in ("crop", "overlay")}
+    artifacts = review["artifacts"]
+    if "pictures" in record:
+        from app.evidence import document_pdf_picture_binding
+
+        picture_assets = {key: value for key, value in artifacts.items() if key.startswith("picture")}
+        document_pdf_picture_binding.validate(record["pictures"], picture_assets, size=record["source_bytes"])
+        artifacts = {key: value for key, value in artifacts.items() if key not in picture_assets}
+    if set(artifacts) != set(targets):
+        raise ValueError("PDF wording changes require their corresponding page crops")
+    for key, asset in artifacts.items():
+        if (asset["media_type"] != "image/png" or not _HASH.fullmatch(asset["sha256"]) or asset["page"] != targets[key]
+                or asset["role"] != key.rsplit("_", 1)[1] or min(asset["width"], asset["height"]) <= 0
+                or max(asset["width"], asset["height"]) > 1200):
+            raise ValueError("A wording preview differs from the current PDF page")
+
+
+def validate_saves(record):
     saves, comparisons = record["saves"], record["comparisons"]
     levels = len(saves), len(comparisons)
     if not 0 <= levels[0] <= MAX_SAVES or not max(0, levels[0] - 2) <= levels[1] <= max(0, levels[0] - 1):
@@ -122,19 +148,4 @@ def validate(evidence, expected):
         before = save
     if record["status"] == "no_history" and (levels != (1, 0) or saves[0]["version"] != 1):
         raise ValueError("PDF history status disagrees with its recorded saves")
-    if ((record["status"] == "changed") != bool(comparisons and _has_changes(comparisons[-1]))
-            or any(_has_changes(row) for row in comparisons[:-1])):
-        raise ValueError("PDF wording changes require the corresponding comparison")
-    for row, earlier in zip(comparisons, saves[1:]):
-        if not 1 <= max(saves[0]["pages"], earlier["pages"]) <= MAX_PAGES:
-            raise ValueError("A wording comparison exceeds its page scope")
-        _validate_comparison(row, earlier, saves[0])
-    targets = {f"change{index}_{role}": side["page"] for index, side in current_locations(record) for role in ("crop", "overlay")}
-    artifacts = review["artifacts"]
-    if set(artifacts) != set(targets):
-        raise ValueError("PDF wording changes require their corresponding page crops")
-    for key, asset in artifacts.items():
-        if (asset["media_type"] != "image/png" or not _HASH.fullmatch(asset["sha256"]) or asset["page"] != targets[key]
-                or asset["role"] != key.rsplit("_", 1)[1] or min(asset["width"], asset["height"]) <= 0
-                or max(asset["width"], asset["height"]) > 1200):
-            raise ValueError("A wording preview differs from the current PDF page")
+    return saves, comparisons

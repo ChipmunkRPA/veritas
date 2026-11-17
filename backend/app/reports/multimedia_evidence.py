@@ -1100,8 +1100,15 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
 
     pdf_history = copy.deepcopy((document.get("coverage") or {}).get(PDF_HISTORY)) if not withheld else None
     if pdf_history:
-        pdf_history["plates"] = {role: plate(role, asset, "Highlighted current PDF crop")
-                                 for role, asset in pdf_history["artifacts"].items() if asset["role"] == "overlay"}
+        pdf_history["plates"] = {}
+        for role, asset in pdf_history["artifacts"].items():
+            if role.startswith("picture"):
+                label = "Submitted picture with the measured difference highlighted" if asset["role"] == "overlay" else "Unmarked crop from the submitted PDF"
+            elif asset["role"] == "overlay":
+                label = "Highlighted current PDF crop"
+            else:
+                continue
+            pdf_history["plates"][role] = plate(role, asset, label)
 
     def overview_label(pk: str, body: dict, role: str) -> str:
         source = body["source"]

@@ -624,16 +624,31 @@ export interface DocumentEvidenceSet extends SetBase {
 
 type PdfSavedWords = { page: number; page_xref: number; word_range: [number, number]; excerpt_word_range: [number, number];
   boxes: [number, number, number, number][] }
+type PdfSave = { version: number; sha256: string; prefix_bytes: number; xref_offset: number; pages: number }
+export interface PdfSavedPictures {
+  schema: 'chipmunk.pdf-saved-pictures/1'
+  status: 'changed' | 'no_change' | 'no_history' | 'unavailable'
+  affects_overall_confidence: false
+  reason: null | 'size_limit' | 'page_limit' | 'save_limit' | 'unverified_chain' | 'time_limit' | 'reader_unavailable'
+    | 'no_comparable_pictures' | 'partial_picture_coverage'
+  saves: PdfSave[]
+  comparisons: { earlier_version: number; pages: { earlier: number; current: number; compared: number; skipped: number }[];
+    unpaired_pages: [number[], number[]]; changed_regions: number;
+    changes: { current_page: number; earlier_page: number; page_rotation: number; render_scale: number;
+      picture_box: [number, number, number, number]; region_pixels: [number, number, number, number]; marked_pixels: number;
+      matching_tiles: number; tested_tiles: number }[] }[]
+}
 export interface PdfSavedWording {
   inspection: {
     schema: 'chipmunk.pdf-saved-wording/1'; status: 'changed' | 'no_change' | 'no_history' | 'unavailable'
     reason: null | 'size_limit' | 'page_limit' | 'save_limit' | 'page_text_incomplete' | 'unverified_chain' | 'time_limit' | 'reader_unavailable'
     affects_overall_confidence: false
-    saves: { version: number; sha256: string; prefix_bytes: number; xref_offset: number; pages: number }[]
+    saves: PdfSave[]
     comparisons: { earlier_version: number; checked: [number, number][]; unassessed: [number, number][];
       order_only: [number, number][]; earlier_only_pages: number[]; current_only_pages: number[]; changed_ranges: number;
       changes: { kind: 'replace' | 'insert' | 'delete'; earlier: PdfSavedWords | null;
         current: (PdfSavedWords & { excerpt: string }) | null }[] }[]
+    pictures?: PdfSavedPictures
   }
   artifacts: Partial<Record<string, EvidenceAsset>>
 }

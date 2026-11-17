@@ -60,6 +60,18 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Picture changes across saved PDF versions](pdf-saved-pictures-2026-11-17.md)
+  adds 22 correct regions out of 24 staged edits per image encoding on
+  24 separate source photographs. It flags none of 96 assessed metadata
+  and comment saves. The ordinary view, JSON and signed PDF link matching
+  page coordinates and current source crops.
+
+- [Segment responses after separating stereo voices](audio-separated-segments-2026-11-17.md)
+  increase correct locations from two to six out of 64 by combining two
+  separated views at their strict points. Ordinary flags rise from three
+  to five out of 32. The method recovers limited locations from one held
+  cohort and stays in evaluation.
+
 - [Frame-level speech responses in loud conversation](audio-frame-logit-localization-2026-11-17.md)
   add one correct interval out of 164 while placing ranges incorrectly in
   four edited recordings. The stricter arm adds zero flags on 48 ordinary

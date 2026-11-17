@@ -55,7 +55,7 @@ from app.evidence import (
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p39"
+PIPELINE_VERSION = "doc-2.0-p40"
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 BIBLIOGRAPHY_POLICY = "writing_bibliography_review_enabled"
 CLAUSE_POLICY = "writing_within_sentence_language_review_enabled"
@@ -629,8 +629,15 @@ def publish(ctx: StageContext) -> dict[str, Any]:
             from app.evidence.document_pdf_history_binding import KEY
 
             ctx.check("saved PDF wording")
-            result.manifest.sampling[KEY] = document_pdf_history.inspect_within(
-                common.media_path(ctx), settings.document_decode_timeout_s)
+            path = common.media_path(ctx)
+            history = document_pdf_history.inspect_within(path, settings.document_decode_timeout_s)
+            if history["saves"] and history["saves"][0]["version"] > 1:
+                remaining = ctx.deadline.remaining()
+                budget = min(settings.document_decode_timeout_s, 12.0)
+                if remaining is not None:
+                    budget = min(budget, max(0., remaining - 1.))
+                history["pictures"] = document_pdf_history.inspect_within(path, budget, pictures=True)
+            result.manifest.sampling[KEY] = history
     if writing_checks := document_check_coverage.capture(
         detected.get("detectors", []), PRIMARY_DETECTORS, BINOCULARS_DETECTOR,
         language=detected.get(language_scope.KEY), verified_credentials=verified_credentials,

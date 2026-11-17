@@ -13,6 +13,15 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [saved PDF picture replay](pdf-saved-pictures-2026-11-17.md#reproduce-the-review)
+compares page positions across retained byte prefixes. The standard-library
+reader recounts 432 fresh PDF deliveries and checks that their photos and
+contributors are separate from those in the earlier comparison.
+
+The [stereo voice separation replay](audio-separated-segments-2026-11-17.md#recount-and-replay)
+recalculates per-view operating points and matches measured intervals to
+64 edit events in a stereo mixture with louder competing speech.
+
 The [frame-level speech replay](audio-frame-logit-localization-2026-11-17.md#recount-and-compare-a-different-detector)
 rebuilds two operating points and recounts positions on 120 noisy
 audio deliveries from six generation families. Its export provides

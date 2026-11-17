@@ -186,12 +186,13 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         reading = history["inspection"]
         if pdf_bytes is None or reading["source_bytes"] != len(pdf_bytes):
             raise ValueError("Saved wording differs from the submitted PDF size")
+        document_pdf_history.verify_inspection(pdf_bytes, reading)
+        indexed = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"]}
+        document_pdf_history.verify_assets(pdf_bytes, history, lambda digest: archive.read(indexed[digest]))
         if reading["reason"] not in {"time_limit", "reader_unavailable"}:
-            if document_pdf_history.inspect(pdf_bytes) != reading:
-                raise ValueError("Saved PDF boundaries or wording differ from the submitted document")
-            indexed = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"]}
-            document_pdf_history.verify_assets(pdf_bytes, history, lambda digest: archive.read(indexed[digest]))
             history_detail = " Verified the retained PDF saves, wording locations, and current source crops."
+        if (pictures := reading.get("pictures")) and pictures["reason"] not in {"time_limit", "reader_unavailable"}:
+            history_detail += " Verified the saved picture review, page locations, and current picture crops."
 
     def read_ocr_raster(digest: str) -> bytes:
         encoded = doc.source_rasters.get(digest)

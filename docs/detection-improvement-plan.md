@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Short changes to words in video](video-lip-correspondence-2026-11-16.md)
+  compares mouth shape, motion and crop detail with the spoken
+  sounds. The shape comparison adds two useful locations on an
+  earlier 34-clip PCM panel, then finds zero additional locations
+  among 19 separate clips in either delivery. The current app check
+  stays in use. Source clocks and exact presented audio are replayable
+  on 228 reconstructed videos.
+
 - [Locating edits after a rotated or tilted JPEG crop](image-reference-perspective-2026-11-16.md)
   compares an earlier and submitted copy when the existing registration
   checks cannot align them. It locates 265 of 360 staged removal deliveries

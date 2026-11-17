@@ -3836,6 +3836,12 @@ counts language switches recovered by short source samples, compares
 their exact ranges with the planned insertions, and tests the verdict
 and export behavior on TXT, Word, EML and PDF in the paid app.
 
+The [short word replacement benchmark](video-lip-correspondence-2026-11-16.md#rebuild-the-playable-benchmark)
+rebuilds 228 videos from licensed publisher archives. It verifies the
+compressed picture stream, every source picture timestamp, and the
+presented PCM for each lossless and AAC delivery. The public file
+commitments and frame ranges support a separate event recount.
+
 The [historical editorial controls replay](writing-historical-editorial-negatives-2026-11-15.md#replay)
 checks all 300 public Wikipedia revision identities, measures false
 flags before and after ordinary rewriting, and recounts combinations

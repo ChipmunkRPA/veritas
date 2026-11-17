@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [JPEG boundary comparison](image-jpeg-boundary-2026-11-17.md#replay)
+provides reproducible input and truth bindings for 560 deliveries.
+Traditional inpainting, ordinary retouching and AI removal use the same
+planned source areas. The local exporter recovers the selected pixel
+masks so another detector can be compared at the same locations.
+
 The [two-track video comparison](video-soundtrack-short-difference-2026-11-17.md)
 provides 396 input commitments with measured intervals and a separate
 GRID transfer. A signed export can also be checked against both audio

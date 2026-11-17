@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [JPEG object-removal boundaries](image-jpeg-boundary-2026-11-17.md)
+  compare three fitted region methods on 160 fresh deliveries from two
+  removal engines. All three add zero correct locations at the frozen
+  points. The selected comparisons add false alerts on ordinary edits
+  from one photograph and stay out of the app. Traditional fills are
+  now included in matched image controls.
+
 - [Short differences between two audio tracks](video-soundtrack-short-difference-2026-11-17.md)
   locate 26 of 33 different-word replacements and 24 of 33 same-word
   replacements in each of two encodings. The previous timing check locates

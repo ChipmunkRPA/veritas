@@ -25,7 +25,7 @@ EDITOR_WEIGHTS = {
 }
 
 
-def exposures(retained):
+def exposures(retained, previous_intakes=()):
     directory = sources.PUBLIC
     keys, fingerprints, pins = sources.known_sources(retained, directory / "image-removal-peer-sources-2026-11-16.json")
     further = directory / "image-cross-quality-sources-2026-11-16.json"
@@ -35,13 +35,25 @@ def exposures(retained):
             fingerprints[0].append(record)
             fingerprints[1].add(record["encoded_sha256"])
             fingerprints[2].add(record["rgb_sha256"])
+    for path in previous_intakes:
+        digest = files.sha(path)
+        pins[f"prior-intake/{digest}"] = digest
+        intake = files.read(path)
+        if intake.get("schema") != SCHEMA or not intake["cases"]:
+            raise ValueError("Expected a completed JPEG source intake")
+        for row in intake["cases"]:
+            keys.update(roster.source_keys(row["source"]))
+            for record in row["fingerprints"].values():
+                fingerprints[0].append(record)
+                fingerprints[1].add(record["encoded_sha256"])
+                fingerprints[2].add(record["rgb_sha256"])
     return keys, fingerprints, pins | {further.name: files.sha(further)}
 
 
-def reserve(metadata, retained, output):
+def reserve(metadata, retained, output, *, previous_intakes=(), target=TARGET):
     import yaml
 
-    excluded, _, pins = exposures(retained)
+    excluded, _, pins = exposures(retained, previous_intakes)
     hashes = {name: files.sha(metadata / name) for name in roster.METADATA}
     if any(digest != roster.METADATA[name][2] for name, digest in hashes.items()):
         raise ValueError("BG-REAL metadata differs from the reviewed release")
@@ -76,19 +88,19 @@ def reserve(metadata, retained, output):
     qualified.sort(key=lambda row: (row["publisher_split"] not in roster.TEST_SPLITS,
                                     hashlib.sha256(f"{SCHEMA}/{row['recipient']}".encode()).hexdigest()))
     plan = {"schema": SCHEMA, "revision": roster.REVISION, "metadata": hashes, "exposure": pins,
-            "editors": EDITOR_WEIGHTS, "target": TARGET, "eligible": len(qualified), "cases": qualified[:TARGET * 2]}
+            "editors": EDITOR_WEIGHTS, "target": target, "eligible": len(qualified), "cases": qualified[:target * 2]}
     files.save(output, plan)
     print(f"Reserved {len(plan['cases'])} photos from {len(qualified)} eligible groups", flush=True)
 
 
-def acquire(plan_path, retained, output):
+def acquire(plan_path, retained, output, *, previous_intakes=()):
     import requests
 
     from scripts.image_bg_real_acquisition_v221 import fingerprint, near, png_pixels, prior_matches
     from scripts.image_bg_real_transport_v225 import download
 
     plan = files.read(plan_path)
-    keys, known, pins = exposures(retained)
+    keys, known, pins = exposures(retained, previous_intakes)
     if plan["schema"] != SCHEMA or plan["exposure"] != pins or plan["revision"] != roster.REVISION:
         raise ValueError("The source plan or earlier exposure changed")
     output.mkdir(mode=0o700)
@@ -238,6 +250,10 @@ if __name__ == "__main__":
         stage = modes.add_parser(mode)
         for name in fields:
             stage.add_argument(name, type=Path)
+        if mode != "prepare":
+            stage.add_argument("--previous-intake", dest="previous_intakes", action="append", type=Path, default=[])
+        if mode == "reserve":
+            stage.add_argument("--target", type=int, choices=range(1, 49), default=TARGET)
         if mode == "prepare":
             stage.add_argument("--partial", action="store_true", help="Render an independently fixed smaller part of the same subject")
     values = vars(command.parse_args())

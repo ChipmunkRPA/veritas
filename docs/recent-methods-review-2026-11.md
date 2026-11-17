@@ -31,6 +31,16 @@ not measured provider-watermark robustness.
 
 ## Image editing under real delivery formats
 
+The edge-contrast evaluation in recent copy-move research motivates
+separate interior and boundary supervision. Our matched-area trial fits
+native JPEG texture and color transitions using the same source crop
+before and after generating an edit. It tests traditional fills as ordinary
+controls and holds one removal engine out of fitting and selection. None of
+the tested region and boundary variants adds a correct held location at
+its frozen points.
+[Edge-contrast study](https://www.mdpi.com/2313-433X/12/10/480)
+· [Paired JPEG comparison](image-jpeg-boundary-2026-11-17.md)
+
 The multi-frequency inpainting study trains separate branches and varies
 JPEG quality during training.
 We tested that design with three independently fitted native-coefficient

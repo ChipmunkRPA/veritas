@@ -1,0 +1,102 @@
+{
+  "browser": {
+    "cases": [
+      {
+        "face_crops": 3,
+        "fixture": "09-inswapper-tandem-on",
+        "native_seek_s": 2.12,
+        "source_frames": 3
+      },
+      {
+        "face_crops": 3,
+        "fixture": "21-uniface-tandem-on",
+        "native_seek_s": 2.12,
+        "source_frames": 3
+      },
+      {
+        "face_crops": 3,
+        "fixture": "09-ordinary-tandem-on",
+        "native_seek_s": 2.12,
+        "source_frames": 3
+      }
+    ],
+    "page_errors": 0
+  },
+  "cases": [
+    {
+      "detail_enabled": false,
+      "existing_flag": false,
+      "name": "09-inswapper-tandem-off",
+      "source_sha256": "b08d6aee0a4addcf59b7c89ba194d95be169f2e9e7c9cb81549b67f06ab42d1d"
+    },
+    {
+      "detail_enabled": true,
+      "detail_flag": true,
+      "evidence_window_s": [
+        0.2,
+        3.8
+      ],
+      "existing_flag": false,
+      "measured_frames": 16,
+      "name": "09-inswapper-tandem-on",
+      "pdf_api_json_agree": true,
+      "signed_source_verification": true,
+      "six_exact_images": true,
+      "source_samples": [
+        5,
+        53,
+        95
+      ],
+      "source_sha256": "b08d6aee0a4addcf59b7c89ba194d95be169f2e9e7c9cb81549b67f06ab42d1d"
+    },
+    {
+      "detail_enabled": true,
+      "detail_flag": true,
+      "evidence_window_s": [
+        0.2,
+        3.8
+      ],
+      "existing_flag": false,
+      "measured_frames": 16,
+      "name": "21-uniface-tandem-on",
+      "pdf_api_json_agree": true,
+      "signed_source_verification": true,
+      "six_exact_images": true,
+      "source_samples": [
+        5,
+        53,
+        95
+      ],
+      "source_sha256": "593cb1bff5b4ab2dbe5631652ff9b4e479e946ace55e062986d2bd6b56bab05f"
+    },
+    {
+      "detail_enabled": true,
+      "detail_flag": false,
+      "evidence_window_s": [
+        0.2,
+        3.8
+      ],
+      "existing_flag": false,
+      "measured_frames": 16,
+      "name": "09-ordinary-tandem-on",
+      "pdf_api_json_agree": true,
+      "signed_source_verification": true,
+      "six_exact_images": true,
+      "source_samples": [
+        5,
+        53,
+        95
+      ],
+      "source_sha256": "ee2a9e3b5c88d4590ddaa3d634cc4d78b432211103e2bdb32e4b3d06215732b1"
+    },
+    {
+      "detail_enabled": true,
+      "existing_flag": true,
+      "name": "00-uniface-direct-on",
+      "source_sha256": "c1ef8fcd231e2ddbb7962b3b2d015bd8dc308e18d8a9dc3269afc21b093716fb"
+    }
+  ],
+  "simulated_paid_jobs": 5,
+  "unchanged_overall_for_toggle": true,
+  "unpaid_jobs": 0
+}

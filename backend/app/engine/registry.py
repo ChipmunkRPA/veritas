@@ -120,7 +120,10 @@ class DetectorRegistry:
         allow_listed = detector_id in policy.allow_detectors
         sequence_review = (detector_id == "vid.review.face_sequence" and settings.video_face_review_mode == "sequence"
                            or detector_id == "vid.review.face_appearance" and settings.video_face_review_mode == "appearance"
-                           or detector_id == "vid.review.whole_face" and settings.video_whole_face_review)
+                           or detector_id == "vid.review.whole_face" and settings.video_whole_face_review
+                           or detector_id == "vid.review.face_detail" and settings.environment == "dev"
+                           and settings.video_whole_face_detail_review and settings.video_whole_face_review
+                           and settings.video_whole_face_same_frame_review)
         regional_review = (detector_id in {"loc.native_regional", "loc.splice"}
                            and settings.image_region_mode == "candidate"
                            or detector_id == "loc.native_regional"

@@ -176,7 +176,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                                  for check in result.get('checks', [])),
                              'Short face-change evidence differs from its corresponding public check')
             if packet.get('whole_face_review') is not None or packet.get('semantics') in (
-                    'paired-whole-face-samples/1', 'same-frame-face-samples/1'):
+                    'paired-whole-face-samples/1', 'same-frame-face-samples/1', 'relative-face-detail-samples/1'):
                 from app.evidence.whole_face_binding import validate_packet as validate_whole_face
 
                 validate_whole_face(packet, evidence['source'])

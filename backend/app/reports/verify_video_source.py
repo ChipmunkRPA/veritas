@@ -422,7 +422,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     cut_records, cut_indices, cut_pixels = [], set(), {}
     interpolated = set(table.interpolated)
     packets = [*evidence["packets"], *(evidence.get("av") or {}).get("packets", [])]
-    if any(packet.get("semantics") == whole_face_binding.SAME_FRAME_METHOD for packet in packets):
+    if any(packet.get("semantics") in {whole_face_binding.SAME_FRAME_METHOD, whole_face_binding.DETAIL_METHOD} for packet in packets):
         delivery = probe_container(original, include_codec_tag=True)
         encoding = delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag")
         if not whole_face_binding.same_frame_source(table, encoding, face_return.source_carrier(original)):
@@ -430,6 +430,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     for packet in packets:
         _verify_clip_clock(packet, table, interpolated)
         whole_face_binding.validate_packet(packet, source, pts=table.pts)
+        if packet.get("semantics") == whole_face_binding.DETAIL_METHOD:
+            for row in packet["whole_face_review"]["samples"]:
+                faces[row["frame_index"]].append(row)
         validate_face_boundary(packet, source, evidence["version"], table_pts=table.pts, interpolated=interpolated)
         face_spatial_cut_binding.validate_packet(packet, source, evidence["version"], table_pts=table.pts, interpolated=interpolated)
         validate_face_return(packet, source, table_pts=table.pts, interpolated=interpolated,
@@ -517,7 +520,15 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 patches += 1
             for row in faces[index]:
                 _frame_anchor(frame, row["pts"], row["decoded_rgb_sha256"], "Aligned face", rgb_sha)
-                _verify_aligned_face(frame.rgb, row)
+                if "eyes_hex" in row:
+                    from app.detectors.video.face_detail_inputs import align
+                    from app.evidence.face_detail_binding import eyes
+
+                    crop = align(frame.rgb, eyes(row, table.width, table.height))
+                    if crop is None or hashlib.sha256(crop.tobytes()).hexdigest() != row["aligned_rgb_sha256"]:
+                        raise ValueError("A recorded facial detail crop differs from the source")
+                else:
+                    _verify_aligned_face(frame.rgb, row)
                 alignments += 1
             for row in scenes[index]:
                 _frame_anchor(frame, row["pts"], row["decoded_rgb_sha256"], "Scene boundary", rgb_sha)

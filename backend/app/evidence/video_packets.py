@@ -273,19 +273,24 @@ def _whole_face_candidate(result: dict, table: FrameTable, source: dict, anchors
                if signal.get("status", "ok") == "ok" and (signal.get("details") or {}).get("whole_face_review") is not None]
     if not matches:
         return []
-    if len(matches) != 1:
-        raise PacketIntegrityError("Expected one paired face review")
-    signal, record = matches[0]
-    indices = whole_face_binding.validate(record, source, pts=table.pts)
-    if (signal.get("effective_weight") != 0.0 or set(indices) & set(table.interpolated)
-            or any(index not in anchors for index in indices)):
-        raise PacketIntegrityError("Paired face review lacks the committed native inputs or inspection-only scope")
-    samples = whole_face_binding.representatives(record)
-    return [{"signals": [signal], "exhibit": {"id": None}, "series_name": "paired_face_review", "track_id": None,
-             "whole_face_review": record, "window": {"frame_indices": list(indices)},
-             "rows": [{"frame_index": row["frame_index"], "score": None, "box": row["box"]} for row in samples],
-             "peak": {"frame_index": samples[1]["frame_index"], "score": float.fromhex(record["score_hex"])},
-             "scored_frame_count": len(indices), "threshold": whole_face_binding.review_point(record["schema"])}]
+    base = [record for _, record in matches if record["schema"] != whole_face_binding.DETAIL_METHOD]
+    detail = [record for _, record in matches if record["schema"] == whole_face_binding.DETAIL_METHOD]
+    if len(base) != 1 or len(detail) > 1 or (detail and detail[0]["prior"] != base[0]):
+        raise PacketIntegrityError("Face detail evidence requires exactly one corresponding earlier review")
+    candidates = []
+    for signal, record in matches:
+        indices = whole_face_binding.validate(record, source, pts=table.pts)
+        if (signal.get("effective_weight") != 0.0 or set(indices) & set(table.interpolated)
+                or any(index not in anchors for index in indices)):
+            raise PacketIntegrityError("Paired face review lacks the committed native inputs or inspection-only scope")
+        samples = whole_face_binding.representatives(record)
+        series = "face_detail" if record["schema"] == whole_face_binding.DETAIL_METHOD else "paired_face_review"
+        candidates.append({"signals": [signal], "exhibit": {"id": None}, "series_name": series, "track_id": None,
+            "whole_face_review": record, "window": {"frame_indices": list(indices)},
+            "rows": [{"frame_index": row["frame_index"], "score": None, "box": row["box"]} for row in samples],
+            "peak": {"frame_index": samples[1]["frame_index"], "score": float.fromhex(record["score_hex"])},
+            "scored_frame_count": len(indices), "threshold": whole_face_binding.review_point(record["schema"])})
+    return candidates
 
 
 def _window_observations(result: dict, table: FrameTable, anchors: dict) -> tuple[list[dict], set[int]]:
@@ -812,7 +817,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     return_candidates, return_frames = _return_observations(result, table, source, anchors)
     whole_candidates = _whole_face_candidate(result, table, source, anchors)
     window_frames.update(row["frame_index"] for candidate in whole_candidates for row in candidate["whole_face_review"]["samples"]
-                         if any(value is not None for value in row["responses_hex"]))
+                         if candidate["series_name"] == "face_detail" or any(value is not None for value in row["responses_hex"]))
     window_frames |= sequence_frames | return_frames
     sequence_checks = sum(1 for signal in result.get("signals", []) if signal.get("status", "ok") == "ok"
                           and (signal.get("details") or {}).get("face_sequence_binding_version") in face_interval_binding.SEQUENCE_METHODS
@@ -997,22 +1002,28 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             indices = candidate["window"]["frame_indices"]
             origin = source["timeline_origin_s"]
             start, end = table.seconds(indices[0]), table.seconds(indices[-1])
-            packet.update(title="Sampled faces to review" if whole["flagged"] else "Sampled face review",
+            detail = whole["schema"] == whole_face_binding.DETAIL_METHOD
+            title = ("Face detail to review" if whole["flagged"] else "Face detail review") if detail else (
+                "Sampled faces to review" if whole["flagged"] else "Sampled face review")
+            measurements = ([{"label": "Aligned positions in the measured face track", "value": len(indices), "unit": "frames"}]
+                            if detail else [{"label": "Planned face-check positions", "value": len(indices), "unit": "frames"},
+                            *[{"label": f"Usable positions for check {arm + 1}",
+                               "value": sum(row["responses_hex"][arm] is not None for row in whole["samples"]),
+                               "unit": "frames"} for arm in range(2)]])
+            packet.update(title=title,
                           evidence_type="anomaly", claim_scope="sampled_window", semantics=whole["schema"],
                           whole_face_review=whole, affects_overall_confidence=False,
                           observation=candidate["signals"][0]["observed"],
                           interpretation="The source frames show the faces at sampled positions. The check compares responses across the clip and carries no weight in overall AI confidence.",
-                          measurements=[{"label": "Planned face-check positions", "value": len(indices), "unit": "frames"},
-                                        *[{"label": f"Usable positions for check {arm + 1}",
-                                           "value": sum(row["responses_hex"][arm] is not None for row in whole["samples"]),
-                                           "unit": "frames"} for arm in range(2)]],
+                          measurements=measurements,
                           window={"frame_indices": indices, "time_base": table.time_base,
                                   "start_pts": table.pts[indices[0]], "end_pts": table.pts[indices[-1]],
                                   "start_stream_s": start, "end_stream_s": end,
                                   "start_playback_s": None if origin is None else start - origin,
                                   "end_playback_s": None if origin is None else end - origin},
-                          limitations=["The check assesses the largest detected face at each sampled position. These samples provide neither a continuous edit range nor an identity comparison."],
-                          derivation={**packet["derivation"], "selection": "representative_paired_face_samples"},
+                          limitations=(["The measured track shows sample coverage. The timing of any edit remains undetermined."] if detail else
+                                       ["The check assesses the largest detected face at each sampled position. These samples provide neither a continuous edit range nor an identity comparison."]),
+                          derivation={**packet["derivation"], "selection": "representative_face_track_samples" if detail else "representative_paired_face_samples"},
                           clip={"status": "unavailable", "reason": "Use the original video for playback at the sampled positions"})
             document["packets"].append(packet)
             continue

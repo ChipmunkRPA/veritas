@@ -275,6 +275,10 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             whole_face_binding.validate_packet(packet, source, pts=table.pts)
             if any(i not in by_index or i in table.interpolated for i in packet["window"]["frame_indices"]):
                 raise ObjectIntegrityError("Paired face samples lack native source anchors")
+            if whole["schema"] == whole_face_binding.DETAIL_METHOD and any(
+                    row["decoded_rgb_sha256"] != by_index[row["frame_index"]]["decoded_rgb_sha256"]
+                    for row in whole["samples"]):
+                raise ObjectIntegrityError("Face detail differs from the frozen source pixels")
             frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
             if not any((signal.get("details") or {}).get("whole_face_review") == whole
                        and signal.get("effective_weight") == 0.0 and alias_signal(signal["id"]) == packet["signal_refs"][0]["id"]

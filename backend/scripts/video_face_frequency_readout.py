@@ -13,6 +13,7 @@ from scripts.video_face_residual_fit import journal
 from scripts.video_face_temporal_fit import read, save, sha
 
 SCHEMA = "chipmunk.face-frequency-observations/1"
+RETAINED_TRACK_CODE = "4e68ec968c44ae0de309222a79296596b0283f470ca07d5c455699bf280288ba"
 
 
 def camera_panel(roster, output):
@@ -68,7 +69,7 @@ def measure(folder, output, *, saved=None, device="mps"):
     if saved is not None:
         original, prior = journal(saved)
         if (set(inputs) != {row["file"] for row in prior} or original["manifest_sha256"] != sha(manifest)
-                or original["weights"] != weights or original["code_sha256"] != sha(Path(track.__file__))):
+                or original["weights"] != weights or original["code_sha256"] not in {RETAINED_TRACK_CODE, sha(Path(track.__file__))}):
             raise ValueError("The retained appearance responses use different inputs or assets")
         cached = {row["file"]: row for row in prior}
     else:
@@ -112,7 +113,7 @@ def measure(folder, output, *, saved=None, device="mps"):
                         raise ValueError("The retained response does not reproduce exact aligned crops")
                     appearance = row["features"]["appearance"]
                 else:
-                    appearance = track.representation(encoder(crops))["appearance"]
+                    appearance = track.appearance(encoder(crops))
                 response = face_frequency.frequency_detail(crops) | {"appearance": appearance}
             elif saved is not None and cached[name]["features"] is not None:
                 raise ValueError("Face coverage differs from the retained response")

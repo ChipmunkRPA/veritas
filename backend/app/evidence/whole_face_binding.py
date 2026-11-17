@@ -8,12 +8,15 @@ from fractions import Fraction
 from math import isfinite
 from statistics import median
 
+from app.evidence import face_detail_binding
+
 FRAME_COUNT = 6
 MIN_SCORED_FRAMES = 4
 MIN_FACE_PX = 48
 METHOD = "paired-whole-face-samples/1"
 SAME_FRAME_METHOD = "same-frame-face-samples/1"
-METHODS = frozenset({METHOD, SAME_FRAME_METHOD})
+DETAIL_METHOD = face_detail_binding.METHOD
+METHODS = frozenset({METHOD, SAME_FRAME_METHOD, DETAIL_METHOD})
 SAME_FRAME_ENCODING = ("h264", "yuv420p", "avc1")
 SAME_FRAME_DIMENSIONS = (640, 360)
 SAME_FRAME_PICTURES = 100
@@ -42,6 +45,8 @@ def same_frame_source(table, encoding, carrier) -> bool:
 
 
 def review_point(schema: str) -> float:
+    if schema == DETAIL_METHOD:
+        return face_detail_binding.POINT
     return SAME_FRAME_POINT if schema == SAME_FRAME_METHOD else REVIEW_POINT
 
 
@@ -86,6 +91,8 @@ def same_frame_score(reference: Sequence[float | None], complement: Sequence[flo
 
 def validate(record: dict, source: dict, *, pts: Sequence[int] | None = None) -> tuple[int, ...]:
     """Verify recorded source positions, per-arm support and the paired result."""
+    if record.get("schema") == DETAIL_METHOD:
+        return face_detail_binding.validate(record, source, pts=pts)
     if (record.get("schema") not in METHODS or record.get("time_base") != source["time_base"]
             or type(record.get("flagged")) is not bool or not isinstance(record.get("score_hex"), str)):
         raise ValueError("Paired face evidence has an invalid schema or source clock")
@@ -136,7 +143,8 @@ def validate(record: dict, source: dict, *, pts: Sequence[int] | None = None) ->
 
 
 def representatives(record: dict) -> list[dict]:
-    measured = [row for row in record["samples"] if all(value is not None for value in row["responses_hex"])]
+    measured = (record["samples"] if record["schema"] == DETAIL_METHOD else
+                [row for row in record["samples"] if all(value is not None for value in row["responses_hex"])])
     return [measured[0], measured[len(measured) // 2], measured[-1]]
 
 
@@ -174,6 +182,7 @@ def validate_packet(packet: dict, source: dict, *, pts: Sequence[int] | None = N
         stream_s = float(expected["pts"] * time_base)
         if (anchor["frame_index"] != expected["frame_index"] or anchor["pts"] != expected["pts"]
                 or anchor["time_base"] != source["time_base"]
+                or (record["schema"] == DETAIL_METHOD and anchor["decoded_rgb_sha256"] != expected["decoded_rgb_sha256"])
                 or not check_time(anchor["stream_time_s"], stream_s)
                 or not check_time(anchor["playback_time_s"], None if origin is None else stream_s - origin)
                 or frame.get("context_region") != expected["box"] or frame.get("score") is not None or frame.get("is_peak")

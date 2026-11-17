@@ -69,6 +69,32 @@ All 64 original-to-swap source pairs had comparable picture cadence.
 The released receipt carries derived scores, calibration, timing and
 hashes. Face crops and intermediate embeddings stay with the local run.
 
+## Local application
+
+`VERITAS_VIDEO_WHOLE_FACE_DETAIL_REVIEW=true` enables the fallback in
+development alongside `VERITAS_VIDEO_WHOLE_FACE_REVIEW` and
+`VERITAS_VIDEO_WHOLE_FACE_SAME_FRAME_REVIEW`. Both earlier checks must
+finish without a flag. The finding gives the measured native timestamps
+and three original frames with face crops. The check contributes zero
+weight to the combined AI assessment. The earlier checks can serve on
+their own by turning off the fallback setting.
+
+Five simulated USD 9.99 purchases exercised the normal worker with the
+face checks selected. No analysis queued before simulated payment. The
+two recovered swaps both displayed 16 source positions from **0.200 to
+3.800 s**, with original frames and face crops at **5, 53 and 95**.
+The browser sought to **2.120 s**. The PDF and JSON matched the API, and
+the signed verifier reproduced each aligned input from the original
+video. A matched original produced a completed face-detail check with
+no flag. A previously flagged swap kept its earlier finding. The
+on/off replay on the same file agreed on the overall assessment.
+[Local checkout and export receipt](evaluation-panels/video-face-frequency-app-2026-11-16.json)
+
+The app shares its crop and feature extraction with the benchmark.
+Replaying that extractor reproduced all 216 held and camera readings.
+The source inspection sorts frames by native index before joining
+the face track, including when some frames are already cached.
+
 ## Independent replay
 
 The standard-library reader recalculates the decisions and grouped
@@ -101,6 +127,7 @@ pinned snapshots to rerun measurements. The reported run used MPS for
 the learned feature extractor and CUDA-free source decoding on Apple
 Silicon. The native audit also runs without any model weights.
 [Pinned source index and earlier readout commands](video-face-detail-comparison-2026-11-16.md#replay)
+· [Frozen research implementation](https://github.com/ChipmunkRPA/veritas/commit/dcce309707e41083a96742d0ede90364f5ecf5fa)
 
 ```sh
 runner=backend/.venv/bin/python
@@ -111,4 +138,6 @@ for panel in held camera; do
     "$run/$panel" "$run/$panel-reference.jsonl" held --device mps
 done
 python3 -B -S -m scripts.video_face_frequency_review native "$run" "$run/native-audit.json"
+npm --prefix frontend run build
+"$runner" -B -m scripts.video_face_frequency_app "$run/held" "$receipt" "$local/paid" --browser
 ```

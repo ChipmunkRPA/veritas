@@ -54,6 +54,9 @@ from app.detectors.video.adapters import swap as swap_lane
 from app.detectors.video.adapters.codec import CodecInputs
 from app.detectors.video.adapters.common import AudioTrack, SampledFrame
 from app.detectors.video.adapters.face_appearance import DETECTOR as APPEARANCE_REVIEW
+from app.detectors.video.adapters.face_detail import DETECTOR as FACE_DETAIL_REVIEW
+from app.detectors.video.adapters.face_detail import FAMILY as FACE_DETAIL_FAMILY
+from app.detectors.video.adapters.face_detail import detail_enabled
 from app.detectors.video.adapters.face_sequence import DETECTOR as SEQUENCE_REVIEW
 from app.detectors.video.adapters.face_sequence import FAMILY as SEQUENCE_FAMILY
 from app.detectors.video.adapters.face_sequence import SequenceInputs
@@ -424,11 +427,13 @@ def faces(ctx: StageContext) -> dict[str, Any]:
 
 AUDIO_UNDECODABLE = "the sound track could not be decoded"
 WHOLE_FACE_SAME_FRAME_POLICY = "whole_face_same_frame_review"
+WHOLE_FACE_DETAIL_POLICY = "whole_face_detail_review"
 
 
 def current_detect_output(output) -> bool:
     return (current_voice_detection_output(output)
-            and output.get(WHOLE_FACE_SAME_FRAME_POLICY, False) is same_frame_enabled())
+            and output.get(WHOLE_FACE_SAME_FRAME_POLICY, False) is same_frame_enabled()
+            and output.get(WHOLE_FACE_DETAIL_POLICY, False) is detail_enabled())
 
 
 def detect(ctx: StageContext) -> dict[str, Any]:
@@ -437,9 +442,10 @@ def detect(ctx: StageContext) -> dict[str, Any]:
     audio = ctx.state.get("audio")
     audio_failure = AUDIO_UNDECODABLE if audio is not None and audio.status == "unreadable" else None
     outputs = _outputs(ctx)
-    policies = {"voice_clock_policy": VOICE_CLOCK_POLICY, WHOLE_FACE_SAME_FRAME_POLICY: same_frame_enabled()}
+    policies = {"voice_clock_policy": VOICE_CLOCK_POLICY, WHOLE_FACE_SAME_FRAME_POLICY: same_frame_enabled(),
+                WHOLE_FACE_DETAIL_POLICY: detail_enabled()}
     out = common.run_detectors(ctx, (Modality.VIDEO, Modality.AUDIO),
-                               exclude={"provenance", "face-detection", "face-tracking", SEQUENCE_FAMILY, WHOLE_FACE_FAMILY},
+                               exclude={"provenance", "face-detection", "face-tracking", SEQUENCE_FAMILY, WHOLE_FACE_FAMILY, FACE_DETAIL_FAMILY},
                                outputs=outputs, max_units=VIDEO_MAX_UNIT_SCORES, face_failure=common.face_stage_failure(ctx),
                                audio_failure=audio_failure)
     if not {SEQUENCE_REVIEW, APPEARANCE_REVIEW, WHOLE_FACE_REVIEW}.intersection(ctx.state["registry"].enabled(Modality.VIDEO, ctx.profile)):
@@ -459,7 +465,14 @@ def detect(ctx: StageContext) -> dict[str, Any]:
     review = common.run_detectors(ctx, (Modality.VIDEO,), include={SEQUENCE_FAMILY, WHOLE_FACE_FAMILY},
                                   outputs=dataclasses.replace(outputs, face_review=inputs),
                                   max_units=VIDEO_MAX_UNIT_SCORES, face_failure=common.face_stage_failure(ctx))
-    merged = {key: [*out.get(key, []), *review.get(key, [])] for key in ("detectors", "exhibits", "artefacts")}
+    detail_review = {}
+    if inputs is not None and detail_enabled():
+        prior = next((row["details"].get("whole_face_review") for row in review["detectors"]
+                      if row["detector_id"] == WHOLE_FACE_REVIEW and row["status"] == "ok"), None)
+        if prior is not None and not prior["flagged"]:
+            detail_review = common.run_detectors(ctx, (Modality.VIDEO,), include={FACE_DETAIL_FAMILY},
+                outputs=dataclasses.replace(outputs, face_review=dataclasses.replace(inputs, baseline=prior)), max_units=VIDEO_MAX_UNIT_SCORES)
+    merged = {key: [*out.get(key, []), *review.get(key, []), *detail_review.get(key, [])] for key in ("detectors", "exhibits", "artefacts")}
     return {**merged, **policies}
 
 
@@ -655,7 +668,7 @@ SYNTHESIS_DETECTORS = {"vid.synth.d3_xclip": "temporal", "vid.synth.frames.commf
 
 
 AUDIO_INSPECTION_DETECTORS = {"aud.pella_v2": "model"}
-REVIEW_DETECTORS = {SEQUENCE_REVIEW: "temporal", APPEARANCE_REVIEW: "temporal", WHOLE_FACE_REVIEW: "face"}
+REVIEW_DETECTORS = {SEQUENCE_REVIEW: "temporal", APPEARANCE_REVIEW: "temporal", WHOLE_FACE_REVIEW: "face", FACE_DETAIL_REVIEW: "face"}
 
 
 def synthesis_signals(ctx: StageContext, first: int) -> list[dict[str, Any]]:
@@ -1007,8 +1020,12 @@ def synthesise(ctx: StageContext) -> dict[str, Any]:
                 continue
             if whole:
                 first = signal["observed"]
-                second = "The six source frames show the sampled positions. This check carries no weight in the overall AI assessment."
-                finding.update(title="Sampled faces to review" if whole["flagged"] else "Sampled face review",
+                detail = signal["detector_id"] == FACE_DETAIL_REVIEW
+                second = ("The source frames and crops show representative inputs. " if detail else "The six source frames show the sampled positions. ")
+                second += "This check carries no weight in the overall AI assessment."
+                title = ("Face detail to review" if whole["flagged"] else "Face detail review") if detail else (
+                    "Sampled faces to review" if whole["flagged"] else "Sampled face review")
+                finding.update(title=title,
                                statement=f"{first} {second}", probability=None, direction="neutral", strength="none",
                                review_priority="medium" if whole["flagged"] else "info", standalone_strength=None, standalone_direction=None,
                                sentences=[{"text": text, "evidence_ids": finding["evidence_ids"]} for text in (first, second)])
@@ -1071,6 +1088,9 @@ def _native_render_anchors(ctx: StageContext, frame_store: FrameStore) -> list[d
     for entry in (ctx.outputs.get("detect") or {}).get("detectors", []):
         details = entry.get("details") or {}
         inputs = []
+        if entry.get("detector_id") == FACE_DETAIL_REVIEW and (face_detail := details.get("whole_face_review")):
+            inputs.extend(face_detail["samples"])
+            refined_indices.update(row["frame_index"] for row in face_detail["samples"])
         if cut := details.get("face_spatial_cut"):
             inputs.extend(cut["frame_inputs"])
             refined_indices.update(row["frame_index"] for row in cut["frame_inputs"])

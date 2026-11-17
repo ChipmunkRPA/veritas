@@ -55,8 +55,13 @@ def verify_deliveries(client, aid, source, evidence, packet, output):
     with pymupdf.open(stream=pdf, filetype="pdf") as document:
         words = " ".join(" ".join(page.get_text().split()) for page in document)
         scan(words)
-        assert "Both readings were combined at each jointly measured face." in words
-        assert "Planned native frame indices 14, 28, 42, 57, 71, 85." in words
+        if packet["semantics"] == "relative-face-detail-samples/1":
+            measured = ", ".join(map(str, packet["window"]["frame_indices"]))
+            assert f"Measured native frame indices {measured}." in words
+            assert "The comparison measures detail and visual appearance relative to the surrounding picture." in words
+        else:
+            assert "Both readings were combined at each jointly measured face." in words
+            assert "Planned native frame indices 14, 28, 42, 57, 71, 85." in words
         xrefs = {item[0] for page in document for item in page.get_images(full=True)}
         assert signatures <= {image_signature(document.extract_image(xref)["image"]) for xref in xrefs}
     package = body(client.post(f"/api/v2/analyses/{aid}/packages",

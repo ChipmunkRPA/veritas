@@ -1666,6 +1666,28 @@ detectors:
     citation: "Yermakov et al., Deepfake Detection that Generalizes Across Benchmarks, WACV 2026. Selim Seferbekov DFDC reference ensemble."
     admission: {decision: pending, evidence: "Local face-swap inspection only, opt-in and no authenticity fusion."}
 
+  - id: vid.review.face_detail
+    adapter: app.detectors.video.adapters.face_detail:FaceDetailReviewDetector
+    version: 0.1.0
+    name: "Face detail after recompression"
+    modality: video
+    family: face-detail-review
+    hypotheses: []
+    models: [yunet.2023mar, dinov2.small]
+    profiles: [quick, full, deep]
+    default_enabled: false
+    legacy_weight: 0.0
+    known_limitations: ["Sampled-face evidence. The response has zero weight in the combined AI assessment. The check covers a validated H.264 delivery profile and leaves the edit boundaries undetermined."]
+    source_url: https://github.com/ChipmunkRPA/veritas/blob/main/docs/video-face-frequency-2026-11-16.md
+    threat: [face_swap]
+    training_data: "Frozen linear comparison fitted on matched public RTFS-10K face-swap and original deliveries. No upstream weights were retrained."
+    coverage_date: "2026-11-16 fresh local transfer"
+    input_constraints: ["Upright 640x360 H.264 MP4 with 100 verified frames at a regular 25 fps. At least eight consecutive aligned face samples on the fixed six-frame schedule."]
+    contamination_sets: [RTFS-10K, "upstream face identities unknown"]
+    fp_modes: ["Compression, lighting and ordinary camera processing can change face detail and appearances."]
+    citation: "docs/video-face-frequency-2026-11-16.md"
+    admission: {decision: pending, evidence: "Optional local evidence with source frames and no AI-confidence admission."}
+
   - id: vid.swap.gend_clip_l14
     adapter: app.detectors.video.adapters.swap:GenDTrackDetector
     version: 0.4.0

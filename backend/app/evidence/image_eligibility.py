@@ -12,6 +12,11 @@ _SHA = re.compile(r"[a-f0-9]{64}")
 RESPONSE_GATE = "image-candidate-eligibility/1"
 AREA_GATE = "image-candidate-eligibility/2"
 FLIP_CONSISTENCY = "image-flip-consistency/1"
+JPEG_REPEAT_CONSISTENCY = "image-jpeg-reencode-consistency/1"
+REPEAT_FIELDS = {
+    "flip_consistency": (FLIP_CONSISTENCY, "reflected_input_sha256"),
+    "jpeg_reencode_consistency": (JPEG_REPEAT_CONSISTENCY, "reencoded_jpeg_sha256"),
+}
 SOURCE_QUALITY = "image-source-quality/1"
 LOSSLESS_WEBP_SCOPE = "This check reviewed the decoded pixels of a single lossless WebP image."
 QUALITY_LABELS = {
@@ -77,11 +82,23 @@ def validate_gate(gate: dict, *, source_sha256: str | None = None,
             raise ValueError("The image candidate gate is bound to a different source or response map")
 
 
-def validate_flip_consistency(review: dict, raw_eligible: int, width: int, height: int) -> int:
-    if (not isinstance(review, dict) or review.get("schema") != FLIP_CONSISTENCY
+def repeat_pass(record: dict) -> tuple[str | None, dict | None]:
+    keys = REPEAT_FIELDS.keys() & record.keys()
+    if len(keys) > 1:
+        raise ValueError("Image inspection has conflicting repeat passes")
+    key = next(iter(keys), None)
+    if key is not None and not isinstance(record[key], dict):
+        raise ValueError("Image inspection has an invalid repeat pass")
+    return key, record[key] if key is not None else None
+
+
+def validate_repeat_pass(key: str, review: dict, raw_eligible: int, width: int, height: int) -> int:
+    schema, view_hash = REPEAT_FIELDS[key]
+    proof = review.get("aligned_mask_png_sha256")
+    if (review.get("schema") != schema
             or max(width, height) != 768 or min(width, height) < 512
-            or any(not _SHA.fullmatch(str(review.get(key, ""))) for key in ("aligned_mask_sha256", "reflected_input_sha256"))
-            or ("aligned_mask_png_sha256" in review and not _SHA.fullmatch(str(review["aligned_mask_png_sha256"])))):
+            or any(not _SHA.fullmatch(str(review.get(field, ""))) for field in ("aligned_mask_sha256", view_hash))
+            or ((schema == JPEG_REPEAT_CONSISTENCY or "aligned_mask_png_sha256" in review) and not _SHA.fullmatch(str(proof)))):
         raise ValueError("The image repeat pass has an unsupported scope or commitment")
     rows = review.get("candidates")
     if not isinstance(rows, list) or not 1 <= len(rows) == min(raw_eligible, 2):
@@ -144,11 +161,19 @@ def validate_inspection_coverage(document: dict) -> None:
         if gate is not None:
             validate_gate(gate, source_sha256=document["source"]["sha256"], scalar_map_sha256=check.get("scalar_map_sha256"))
         expected = raw if gate is None or gate["eligible"] else 0
-        repeat = check.get("flip_consistency")
+        repeat_key, repeat = repeat_pass(check)
+        policy = check.get("resolution_policy", {})
+        jpeg_repeat = policy.get("source_jpeg_quality") == 90
+        if jpeg_repeat and policy.get("source_format") != "JPEG":
+            raise ValueError("The JPEG repeat pass lacks the supported source profile")
         if repeat is not None:
             if gate is None or not gate["eligible"]:
                 raise ValueError("The image repeat pass requires an eligible original map")
-            expected = validate_flip_consistency(repeat, expected, document["source"]["width"], document["source"]["height"])
+            if jpeg_repeat != (repeat_key == "jpeg_reencode_consistency"):
+                raise ValueError("The JPEG repeat pass lacks the supported source profile")
+            expected = validate_repeat_pass(repeat_key, repeat, expected, document["source"]["width"], document["source"]["height"])
+        elif jpeg_repeat and expected:
+            raise ValueError("The eligible JPEG90 regions require a recorded repeat pass")
         if eligible != expected or selected > eligible or omitted != eligible - selected:
             raise ValueError("Image inspection coverage contradicts candidate selection")
         packets = [p for p in document.get("packets", []) if p.get("evidence_type") == "localisation"
@@ -160,11 +185,11 @@ def validate_inspection_coverage(document: dict) -> None:
                 raise ValueError("A selected region has different image candidate eligibility")
             if packet.get("anchor", {}).get("scalar_sha256") != check.get("scalar_map_sha256"):
                 raise ValueError("A selected region uses a different response map")
-            selection = packet.get("localisation", {}).get("flip_consistency")
+            selection_key, selection = repeat_pass(packet.get("localisation", {}))
             if repeat is not None:
                 region = packet.get("region") or {}
                 bounds = [region.get(key) for key in ("x", "y", "w", "h")]
-                if (selection not in repeat["candidates"] or not selection["retained"] or selection["bounds"] != bounds
+                if (selection_key != repeat_key or selection not in repeat["candidates"] or not selection["retained"] or selection["bounds"] != bounds
                         or selection["source_pixels"] != packet["localisation"].get("region_cells")):
                     raise ValueError("A displayed region differs from the retained image repeat pass")
             elif selection is not None:

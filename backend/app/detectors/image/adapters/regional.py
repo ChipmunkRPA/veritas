@@ -2,35 +2,27 @@
 from __future__ import annotations
 
 import hashlib
+import io
 from typing import Any
 
 import numpy as np
 from PIL import Image
 
 from app.core.config import settings
-from app.detectors.image import jpeg_bitstream, regional
 from app.detectors.image import localiser as loc
+from app.detectors.image import regional
 from app.detectors.image.adapters.common import H2, image_spec, original_bytes
 from app.detectors.image.adapters.localisers import PNG_SIGNATURE, LocaliserDetector
 from app.detectors.image.lossless_webp import lossless_webp_size
 from app.detectors.image.regional_support import readout
 from app.engine.detector import Applicability, InputUnit, RunContext
-from app.evidence.image_eligibility import FLIP_CONSISTENCY, LOSSLESS_WEBP_SCOPE
+from app.evidence.image_eligibility import FLIP_CONSISTENCY, JPEG_REPEAT_CONSISTENCY, LOSSLESS_WEBP_SCOPE
+from app.evidence.image_regional_jpeg import evaluated_jpeg, reencode
 
 JPEG_SIGNATURE = b"\xff\xd8"
 
 
-def evaluated_jpeg(data: bytes) -> bool:
-    structure = jpeg_bitstream.read(data)
-    return bool(structure and structure.frame in {"baseline", "progressive"} and structure.precision == 8
-                and max(structure.width, structure.height) == 768 and min(structure.width, structure.height) >= 512
-                and [(c.id, c.h, c.v) for c in structure.components] == [(1, 2, 2), (2, 1, 1), (3, 1, 1)]
-                and all(structure.table_bits.get(c.table_id) == 8 for c in structure.components)
-                and structure.ijg_quality == 75 and structure.table(2) == structure.table(1)
-                and (structure.frame == "baseline" or jpeg_bitstream.progressive_frame(data) is not None))
-
-
-def flip_components(measured, aligned):
+def repeat_components(measured, aligned, *, schema=FLIP_CONSISTENCY):
     """Keep original top-two component geometry when the repeat supports half its pixels."""
     rows, retained, stats = [], [], []
     for region, stat, component in zip(measured.regions[:2], measured.stats[:2], measured.component_masks, strict=True):
@@ -43,10 +35,13 @@ def flip_components(measured, aligned):
         if supported:
             retained.append(region)
             stats.append(stat)
-    review = {"schema": FLIP_CONSISTENCY, "candidates": rows, "inspected_components": len(rows),
+    review = {"schema": schema, "candidates": rows, "inspected_components": len(rows),
               "supported_components": len(retained), "withheld_components": len(rows) - len(retained),
               "aligned_mask_sha256": hashlib.sha256(aligned.tobytes()).hexdigest()}
     return retained, stats, review
+
+
+flip_components = repeat_components  # Historical flip evaluation imports the original name.
 
 
 class RegionalDetector(LocaliserDetector):
@@ -59,7 +54,7 @@ class RegionalDetector(LocaliserDetector):
                  "previous check. Highlights are editing cues; AI authorship remains inconclusive from this check alone. "
                  "Unmarked areas are not confirmed original. The response is not an authorship confidence score.")
     spec = image_spec("loc.native_regional", METHOD, "localiser", InputUnit.IMAGE, (H2,), ("heatmap", "regions"),
-                      model_ids=(MODEL,), devices=("cpu",), lane="cpu", timeout_s=180., version="0.1.2")
+                      model_ids=(MODEL,), devices=("cpu",), lane="cpu", timeout_s=180., version="0.1.3")
 
     def applicable(self, ctx: RunContext) -> Applicability:
         data = original_bytes(ctx)
@@ -71,7 +66,7 @@ class RegionalDetector(LocaliserDetector):
                 if self.spec.id not in get_registry().policy.allow_detectors:
                     return Applicability(False, "The optional regional review is enabled for eligible JPEG images")
             return super().applicable(ctx)
-        if jpeg_review and evaluated_jpeg(data):
+        if jpeg_review and (evaluated_jpeg(data) or (settings.image_region_jpeg90_review and evaluated_jpeg(data, quality=90))):
             info = ctx.media.info()
             if info["mode"] == "RGB" and info["exif_orientation"] == 1:
                 return super().applicable(ctx)
@@ -87,7 +82,8 @@ class RegionalDetector(LocaliserDetector):
 
     def localise(self, ctx: RunContext, pixels: np.ndarray) -> loc.LocaliserOutput:
         loaded = ctx.lease.get(self.MODEL)
-        prediction = loaded.obj.predict(Image.fromarray(pixels))
+        image = Image.fromarray(pixels)
+        prediction = loaded.obj.predict(image)
         height, width = pixels.shape[:2]
         if prediction.raw_mask.shape != (height, width):
             raise ValueError("Regional response is not registered to this source")
@@ -97,6 +93,8 @@ class RegionalDetector(LocaliserDetector):
                            self.REGION_THRESHOLD, data, pixels)
         regions, stats = measured.regions, measured.stats
         repeat = {}
+        jpeg90 = (container == "JPEG" and settings.environment == "dev" and settings.image_region_jpeg_review
+                  and settings.image_region_jpeg90_review and evaluated_jpeg(data, quality=90))
         if (data.startswith(PNG_SIGNATURE) and settings.environment == "dev" and settings.image_region_flip_review and regions
                 and max(width, height) == 768 and min(width, height) >= 512):
             ctx.deadline.check("regional repeatability check")
@@ -105,12 +103,24 @@ class RegionalDetector(LocaliserDetector):
             reflected_readout = readout(reflected_prediction.raw_mask, reflected_prediction.candidate_eligibility["eligible"],
                                         self.REGION_THRESHOLD, data, reflected)
             aligned = np.ascontiguousarray(reflected_readout.selected_grid_mask[:, ::-1])
-            regions, stats, review = flip_components(measured, aligned)
+            regions, stats, review = repeat_components(measured, aligned)
             proof = ctx.exhibits.binary_mask(aligned)
             repeat = {
                 "flip_consistency": {**review, "aligned_mask_png_sha256": proof.sha256,
                                      "reflected_input_sha256": reflected_prediction.geometry["input_float32_sha256"]},
             }
+        if jpeg90 and regions:
+            ctx.deadline.check("JPEG repeatability check")
+            encoded = reencode(image)
+            with Image.open(io.BytesIO(encoded)) as decoded:
+                repeated_prediction = loaded.obj.predict(decoded.convert("RGB"))
+            repeated = readout(repeated_prediction.raw_mask, repeated_prediction.candidate_eligibility["eligible"],
+                               self.REGION_THRESHOLD, data, pixels)
+            aligned = repeated.selected_grid_mask
+            regions, stats, review = repeat_components(measured, aligned, schema=JPEG_REPEAT_CONSISTENCY)
+            proof = ctx.exhibits.binary_mask(aligned)
+            repeat = {"jpeg_reencode_consistency": {**review, "aligned_mask_png_sha256": proof.sha256,
+                                                    "reencoded_jpeg_sha256": hashlib.sha256(encoded).hexdigest()}}
         return loc.LocaliserOutput(
             anomaly_map=measured.floating, reliable=measured.reliable, reliability_source="conditions",
             integrity_score=loc.integrity_score(measured.floating, measured.reliable), regions=regions,
@@ -123,6 +133,7 @@ class RegionalDetector(LocaliserDetector):
                                "source_rgb_sha256": prediction.geometry["source_rgb_sha256"],
                                "input_float32_sha256": prediction.geometry["input_float32_sha256"],
                                **({"source_format": container} if container else {}),
+                               **({"source_jpeg_quality": 90} if jpeg90 else {}),
                                "native_binding": prediction.binding, **repeat})
 
     def run(self, ctx: RunContext):
@@ -154,4 +165,7 @@ class RegionalDetector(LocaliserDetector):
         if (review := policy.get("flip_consistency")) is not None:
             result.reasoning += (f" A horizontally flipped repeat pass supported {review['supported_components']} "
                                  f"of {review['inspected_components']} inspected regions on the original pixel grid.")
+        if policy.get("source_jpeg_quality") == 90:
+            result.reasoning += (" This JPEG review requires candidate regions to recur in a second compression of the same image. "
+                                 "The two views share the same source. Agreement is a reason to inspect the region.")
         return result

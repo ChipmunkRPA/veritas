@@ -11,6 +11,7 @@ from PIL import Image
 from app.core.canonical import canonical_hash
 from app.evidence import image_embedded_pair_binding as embedded_pair
 from app.evidence import image_interpolation_binding as interpolation
+from app.evidence.image_eligibility import repeat_pass
 from app.reports.image_eligibility import eligibility_view, inspection_check_view
 from app.storage.objects import ObjectIntegrityError, ObjectStore, default_store
 
@@ -242,8 +243,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     overview = (document.get("overview") or {}).values()
     for check in (document.get("coverage") or {}).get("inspection_checks", []):
         display = inspection_check_view(check)
+        _, repeat = repeat_pass(check)
         masks = {"coverage_map": check.get("reliability_mask_sha256"),
-                 "repeat_mask": (check.get("flip_consistency") or {}).get("aligned_mask_png_sha256")}
+                 "repeat_mask": (repeat or {}).get("aligned_mask_png_sha256")}
         if display["map_grid"] and not withheld:
             for name, sha in masks.items():
                 if sha:

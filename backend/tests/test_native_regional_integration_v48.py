@@ -116,12 +116,16 @@ def test_jpeg_scope_requires_opt_in_and_evaluated_encoding(monkeypatch, quality,
     detector = RegionalDetector()
     monkeypatch.setattr(settings, "environment", "dev")
     monkeypatch.setattr(settings, "image_region_mode", "candidate")
+    monkeypatch.setattr(settings, "image_region_jpeg90_review", False)
     monkeypatch.setattr(settings, "image_region_jpeg_review", False)
     assert not detector.applicable(ctx).ok
     monkeypatch.setattr(settings, "image_region_jpeg_review", True)
     assert detector.applicable(ctx).ok is supported
     monkeypatch.setattr(settings, "image_region_mode", "legacy")
     assert detector.applicable(ctx).ok is supported
+    monkeypatch.setattr(settings, "image_region_jpeg90_review", True)
+    baseline_90 = quality == 90 and not progressive
+    assert detector.applicable(ctx).ok is (supported or baseline_90)
     monkeypatch.setattr(settings, "image_region_mode", "candidate")
     monkeypatch.setattr(settings, "environment", "prod")
     assert not detector.applicable(ctx).ok

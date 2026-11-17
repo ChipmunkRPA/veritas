@@ -17,6 +17,9 @@ The [cross-quality JPEG comparison](image-cross-quality-2026-11-16.md#exact-inpu
 recounts 720 held deliveries and supplies a public recipe to rebuild
 288 exact JPEGs at two quality settings. The separate native readback
 verifies 2,160 candidate intersections with the known changed pixels.
+The [JPEG90 repeat comparison](image-cross-quality-2026-11-16.md#compare-the-existing-regional-check-on-a-jpeg90-upload)
+recounts 360 quality-90 deliveries and exercises the signed source crop
+and overlap evidence through a simulated paid analysis.
 
 The [stereo lip timing replay](video-lip-stereo-transfer-2026-11-16.md#local-trial-and-replay)
 recounts 530 stereo deliveries and 57 matched mono comparisons from 53

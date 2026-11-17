@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Repeat-supported JPEG90 regions](image-cross-quality-2026-11-16.md#compare-the-existing-regional-check-on-a-jpeg90-upload)
+  find 11 of 48 fresh edit deliveries with zero alerts on 96 ordinary
+  files, up from zero useful regions on those same JPEG90 bytes. All
+  gains are insertions. The separate removal panel finds zero edits
+  and adds three ordinary alerts. The local option records a native
+  crop and repeat-mask overlap with zero authorship weight.
+
 - [Small-edit localization across JPEG quality settings](image-cross-quality-2026-11-16.md)
   compared three dense fits on 720 held deliveries, including 24 new
   photos with object removals and insertions. None added a correctly

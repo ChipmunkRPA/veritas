@@ -32,7 +32,7 @@ from app.engine.detector import (
     RunContext,
     UnitScore,
 )
-from app.evidence.image_eligibility import AREA_GATE, SOURCE_QUALITY, area_gate, validate_gate
+from app.evidence.image_eligibility import AREA_GATE, REPEAT_FIELDS, SOURCE_QUALITY, area_gate, validate_gate
 
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 
@@ -149,7 +149,7 @@ class LocaliserDetector(Detector):
                                        "tiles": float(out.resolution_policy["tiles"]),
                                        "screening_scale": round(self.INPUT / max(width, height), 4)})
         region_ids = ([str(region["display_id"]).removeprefix("R") for region in out.regions]
-                      if "flip_consistency" in out.resolution_policy else list(range(1, n + 1)))
+                      if out.resolution_policy.keys() & REPEAT_FIELDS.keys() else list(range(1, n + 1)))
         units = [UnitScore(f"region:{region_id}", stat["mean"], "score",
                            quality={"area_share": stat["area_share"], "max": stat["max"]})
                  for region_id, stat in zip(region_ids, out.region_stats, strict=True)]

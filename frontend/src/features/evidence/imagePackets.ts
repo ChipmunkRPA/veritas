@@ -30,19 +30,21 @@ export interface CandidateEligibility {
   input_cells?: number
 }
 
+interface RepeatCoverage {
+  candidates: { region_id: 'R1' | 'R2'; bounds: [number, number, number, number];
+    source_pixels: number; shared_pixels: number; retained: boolean }[]
+  inspected_components: number
+  supported_components: number
+  withheld_components: number
+  aligned_mask_png_sha256?: string
+}
+
 export interface ImageInspectionCheck {
   signal_refs: { id: string; display_id: string | null }[]
   exhibit_ref: string
   candidate_eligibility?: CandidateEligibility
-  flip_consistency?: {
-    schema: 'image-flip-consistency/1'
-    candidates: { region_id: 'R1' | 'R2'; bounds: [number, number, number, number];
-      source_pixels: number; shared_pixels: number; retained: boolean }[]
-    inspected_components: number
-    supported_components: number
-    withheld_components: number
-    aligned_mask_png_sha256?: string
-  }
+  flip_consistency?: RepeatCoverage & { schema: 'image-flip-consistency/1' }
+  jpeg_reencode_consistency?: RepeatCoverage & { schema: 'image-jpeg-reencode-consistency/1' }
   map_grid?: [number, number]
   source_quality?: {
     schema: 'image-source-quality/1'
@@ -74,7 +76,7 @@ export interface ImageEvidencePacket {
   artifacts: { context: EvidenceImage; crop: EvidenceImage; overlay: EvidenceImage; mask?: EvidenceImage; copy_donor?: EvidenceImage }
   localisation?: { threshold: number; grid: [number, number]; region_cells: number; region_area_fraction: number;
     reliable_area_fraction: number; source_pixels_per_cell: [number, number]; validation_status: string;
-    candidate_eligibility?: CandidateEligibility }
+    candidate_eligibility?: CandidateEligibility; jpeg_reencode_consistency?: RepeatCoverage['candidates'][number] }
 }
 
 interface ImageCopyEvidence<Schema, Transform> {

@@ -15,7 +15,8 @@ are not prepared for use as court evidence or expert testimony.
   and visual-generation and editing checks. Local options can find two regions
   that share detail after [rotation or resizing](docs/image-small-affine-webp-2026-11-16.md).
   Optional regional review also covers
-  [supported lossless WebP stills](docs/image-regional-webp-2026-11-14.md).
+  [supported lossless WebP stills](docs/image-regional-webp-2026-11-14.md) and
+  [selected quality-90 JPEGs](docs/image-cross-quality-2026-11-16.md#see-the-check-in-chipmunk-verify).
   Earlier-copy comparison can locate differences in
   [supported cropped lossy WebP files](docs/image-reference-cropped-webp-2026-11-14.md).
   Overlays identify areas to inspect and can also highlight ordinary processing.

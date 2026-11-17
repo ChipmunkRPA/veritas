@@ -218,6 +218,7 @@ class Settings(BaseSettings):
     image_region_mode: Literal["legacy", "candidate"] = "legacy"
     image_region_flip_review: bool = False  # Development-only repeatability filter for sensitive PNG regions.
     image_region_jpeg_review: bool = False  # Development-only regional evidence for the evaluated JPEG profile.
+    image_region_jpeg90_review: bool = False  # Extend the optional JPEG review with a matching repeat view.
     image_native_interpolation_review: bool = False  # Optional local inspection of strictly profiled 16-bit PNGs.
     image_native_rotation_review: bool = False  # Also inspect supported 2048 × 1536 PNGs for a local rotation pattern.
     image_native_quantized_review: bool = False  # Also inspect qualifying PNG regions for lower-depth camera resampling.

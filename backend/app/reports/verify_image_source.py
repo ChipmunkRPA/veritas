@@ -27,6 +27,7 @@ from app.evidence.image_copy_similarity_binding import (
     copy_records,
     native_rotation_size,
 )
+from app.evidence.image_eligibility import repeat_pass
 
 MAX_SOURCE_BYTES = 60 * 1024 * 1024
 MAX_SOURCE_PIXELS = 80_000_000
@@ -93,18 +94,22 @@ def _verify_geometric_masks(archive, evidence, source):
     return 2 * len(pairs)
 
 
-def _verify_flip_masks(archive, checks, size):
+def _verify_repeat_masks(archive, checks, source, data, orientation):
     if not checks:
         return 0
     from app.evidence.image_flip_mask import png_grid, verify_overlap
+    from app.evidence.image_regional_jpeg import evaluated_jpeg, reencode
 
     regions = 0
-    for check in checks:
-        repeat = check["flip_consistency"]
+    for check, key, repeat in checks:
+        if key == "jpeg_reencode_consistency" and (
+                orientation != 1 or not evaluated_jpeg(data, quality=90)
+                or hashlib.sha256(reencode(source)).hexdigest() != repeat["reencoded_jpeg_sha256"]):
+            raise ValueError("The JPEG repeat view differs from the supported original and committed re-encoding")
         scalar = archive.read(f"assets/{check['scalar_map_sha256']}.png")
         reliable = archive.read(f"assets/{check['reliability_mask_sha256']}.png")
         aligned = archive.read(f"assets/{repeat['aligned_mask_png_sha256']}.png")
-        verify_overlap(png_grid(scalar, size).astype(float) * (1 / 255.0), png_grid(reliable, size) > 127,
+        verify_overlap(png_grid(scalar, source.size).astype(float) * (1 / 255.0), png_grid(reliable, source.size) > 127,
                        check["selection_rule"]["threshold"], repeat, aligned)
         regions += len(repeat["candidates"])
     return regions
@@ -176,8 +181,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         native_detail += " Recomputed the animated PNG opening comparison and verified any recorded previews."
     crops = list(_crops(evidence))
     pair = (evidence.get(embedded_pair.KEY) or {}).get('pair')
-    repeat_checks = [check for check in (evidence.get("coverage") or {}).get("inspection_checks", [])
-                     if (check.get("flip_consistency") or {}).get("aligned_mask_png_sha256")]
+    checks = (evidence.get("coverage") or {}).get("inspection_checks", [])
+    repeat_checks = [(check, key, repeat) for check in checks for key, repeat in (repeat_pass(check),)
+                     if repeat and repeat.get("aligned_mask_png_sha256")]
     quality_checks = [check for check in (evidence.get("coverage") or {}).get("inspection_checks", [])
                       if check.get("source_quality") is not None]
     if not crops and not repeat_checks and not quality_checks and pair is None and preview is None:
@@ -212,7 +218,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 if not _matches(source, bounds, plate):
                     raise ValueError(f'{label} differs from pixels at its recorded source coordinates')
         masks = _verify_geometric_masks(archive, evidence, source)
-        repeated = _verify_flip_masks(archive, repeat_checks, source.size)
+        repeated = _verify_repeat_masks(archive, repeat_checks, source, data, orientation)
         quality = _verify_source_quality(archive, quality_checks, source, data)
         if offgrid:
             import numpy as np
@@ -269,6 +275,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         detail += f" Recomputed the color differences inside and around the {number} selected JPEG crops after rotation."
     if repeated:
         detail += f' Recomputed repeat-pass overlap for {repeated} source regions from their recorded masks.'
+    if any(key == "jpeg_reencode_consistency" for _, key, _ in repeat_checks):
+        detail += ' Reproduced the second JPEG view from the supplied image.'
     if quality:
         detail += f' Recomputed source quality masks for {quality} image {"check" if quality == 1 else "checks"}.'
     return detail + native_detail

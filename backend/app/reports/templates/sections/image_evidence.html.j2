@@ -116,21 +116,25 @@
 <div><dt>Measured regions before image gate</dt><dd>{{ check.counts.raw }}</dd></div>
 <div><dt>{{ check.eligible_count_label }}</dt><dd>{{ check.counts.eligible }}</dd></div>
 <div><dt>Shown in these evidence cards</dt><dd>{{ check.counts.selected }}</dd></div>
-<div><dt>{{ 'Supported regions not shown' if check.has_flip else 'Eligible regions not shown' }}</dt><dd>{{ check.counts.omitted }}</dd></div>
+<div><dt>{{ 'Supported regions not shown' if check.has_repeat else 'Eligible regions not shown' }}</dt><dd>{{ check.counts.omitted }}</dd></div>
 </dl>
 {% if check.counts.suppressed %}<p class="caption">{{ check.counts.suppressed }} measured region(s) were withheld by the image gate. The raw map remains in the evidence record; withheld regions are not cleared as authentic.</p>{% endif %}
-{% if check.flip %}
+{% if check.repeat %}
+{% if check.jpeg_repeat %}
+<p class="caption">The JPEG re-encoding check uses a second compression of the same upload and keeps an original region when at least half its measured cells recur. Agreement contributes no AI authorship weight.</p>
+{% else %}
 <p class="caption">The flip check uses the same detector on a horizontal flip. It retains a region when at least 50% of its measured grid cells overlap after mapping back. It contributes no AI authorship weight.</p>
-<p class="caption">The flip check withheld {{ check.flip.withheld }} of {{ check.flip.inspected }} candidate regions.</p>
+{% endif %}
+<p class="caption">The {{ check.repeat_label }} withheld {{ check.repeat.withheld }} of {{ check.repeat.inspected }} candidate regions.</p>
 <ul class="caption">
-{% for candidate in check.flip.candidates %}
+{% for candidate in check.repeat.candidates %}
 <li>Initial candidate {{ loop.index }}. {{ '{:,}'.format(candidate.shared_pixels) }} of {{ '{:,}'.format(candidate.source_pixels) }} measured cells overlapped. {{ 'Supported by the repeat.' if candidate.retained else 'Withheld after the repeat.' }}
 <span class="mono">Source x {{ candidate.bounds[0] }}, y {{ candidate.bounds[1] }} · {{ candidate.bounds[2] }} × {{ candidate.bounds[3] }} px</span></li>
 {% endfor %}
 </ul>
-{% if check.flip.outside_limit %}<p class="caption">{{ check.flip.outside_limit }} measured {{ 'region was' if check.flip.outside_limit == 1 else 'regions were' }} outside the two-candidate review limit.</p>{% endif %}
-{% elif check.has_flip %}<p class="caption">Flip-check coverage is unavailable.</p>{% endif %}
-{% if check.counts.omitted %}<p class="caption">{{ check.counts.omitted }} {{ 'supported' if check.has_flip else 'eligible' }} {{ 'region is' if check.counts.omitted == 1 else 'regions are' }} not shown because of display limits or evidence requirements. These cards are not an exhaustive map of possible edits.</p>{% endif %}
+{% if check.repeat.outside_limit %}<p class="caption">{{ check.repeat.outside_limit }} measured {{ 'region was' if check.repeat.outside_limit == 1 else 'regions were' }} outside the two-candidate review limit.</p>{% endif %}
+{% elif check.has_repeat %}<p class="caption">Repeat-check coverage is unavailable.</p>{% endif %}
+{% if check.counts.omitted %}<p class="caption">{{ check.counts.omitted }} {{ 'supported' if check.has_repeat else 'eligible' }} {{ 'region is' if check.counts.omitted == 1 else 'regions are' }} not shown because of display limits or evidence requirements. These cards are not an exhaustive map of possible edits.</p>{% endif %}
 {% else %}<p class="caption">Region coverage counts are unavailable. Missing counts do not establish that no regions were measured.</p>{% endif %}
 {% if check.map_grid %}<p class="caption">Measured grid {{ check.map_grid | join(' × ') }}. Displaying a larger image does not add detection detail.</p>{% endif %}
 {% if check.excluded_percent is not none %}<p class="caption">{{ check.excluded_percent }}% of the measured grid was excluded as less reliable. Those areas were not cleared.</p>{% endif %}
@@ -148,7 +152,7 @@
 {% endif %}
 {% if check.get('repeat_mask') %}
 <figure class="inspection-coverage-map">
-<img src="{{ check.repeat_mask }}" alt="Horizontal repeat mask aligned to the submitted image">
+<img src="{{ check.repeat_mask }}" alt="{{ 'JPEG repeat mask' if check.jpeg_repeat else 'Horizontal repeat mask aligned to the submitted image' }}">
 <figcaption class="caption">White marks cells selected in the repeated check after mapping back to the submitted image.</figcaption>
 </figure>
 {% endif %}
@@ -176,7 +180,7 @@
 <p class="evidence-position caption">Region: x {{ packet.region.x }}, y {{ packet.region.y }}, width {{ packet.region.w }}, height {{ packet.region.h }} px. Crop: x {{ packet.crop_region.x }}, y {{ packet.crop_region.y }}, width {{ packet.crop_region.w }}, height {{ packet.crop_region.h }} px.</p>
 <p><strong>Observed:</strong> {{ packet.observation }}</p>
 <p><strong>Interpretation:</strong> {{ packet.interpretation }}</p>
-{% if packet.get('localisation') %}<p class="caption">Measured grid {{ packet.localisation.grid | join(' × ') }} · selected area {{ '%.2f' | format(packet.localisation.region_area_fraction * 100) }}% · operating threshold {{ packet.localisation.threshold }} (uncalibrated). White mask cells mark this selected region; black does not mean verified authentic.</p>{% endif %}
+{% if packet.get('localisation') %}<p class="caption">Measured grid {{ packet.localisation.grid | join(' × ') }} · selected area {{ '%.2f' | format(packet.localisation.region_area_fraction * 100) }}%{% if not packet.localisation.get('jpeg_reencode_consistency') %} · operating threshold {{ packet.localisation.threshold }} (uncalibrated){% endif %}. White mask cells mark this selected region; black does not mean verified authentic.</p>{% endif %}
 {% if packet.get('eligibility_view') %}
 <div class="image-eligibility-note"><p class="caption"><strong>{{ packet.eligibility_view.title }}.</strong>{% if packet.eligibility_view.score is not none %}{% if packet.eligibility_view.get('score_kind') == 'area_cells' %} Measured positions above the response cutoff <span class="mono">{{ packet.eligibility_view.score }}</span> of <span class="mono">{{ packet.eligibility_view.total_cells }}</span>. Minimum for showing candidates <span class="mono">{{ packet.eligibility_view.threshold }}</span> positions.{% else %} Whole-image response <span class="mono">{{ packet.eligibility_view.score }}</span> · display threshold <span class="mono">{{ packet.eligibility_view.threshold }}</span>. This response is uncalibrated; it is not a region or pixel probability.{% endif %}{% endif %} {{ packet.eligibility_view.explanation }}</p></div>
 {% endif %}

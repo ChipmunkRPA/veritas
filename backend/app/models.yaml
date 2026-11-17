@@ -1055,7 +1055,7 @@ detectors:
 
   - id: loc.native_regional
     adapter: app.detectors.image.adapters.regional:RegionalDetector
-    version: 0.1.2
+    version: 0.1.3
     name: Sensitive regional screening
     modality: image
     family: localiser
@@ -1067,7 +1067,7 @@ detectors:
     calibration: {method: none}
     known_limitations:
       - "Regional editing cues, not AI-specific attribution; ordinary edits and untouched photographs can trigger highlights. Unmarked pixels are not confirmed original."
-      - "Upright RGB PNG inputs at least 64 px each side, an optional development-only JPEG profile, and simple opaque lossless WebP stills in candidate mode. 1024 canvas, preserved aspect, top-left source, padding excluded. Other carriers and devices/dtypes need separate validation."
+      - "Upright RGB PNG inputs at least 64 px each side, selected development-only JPEG profiles, and simple opaque lossless WebP stills in candidate mode. The quality-90 repeat view was useful on some object insertions and missed all tested object removals."
       - "The selected native gate is a response-area rule, not public confidence or a screening accuracy claim. Zero whole-file authorship-confidence weight."
     source_url: https://github.com/WenOOI/RelayFormer/tree/23c973fc956195537d85148d124d6a146243f6c9
     threat: [partial_edit]

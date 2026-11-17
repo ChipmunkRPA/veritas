@@ -32,6 +32,17 @@ try {
   await card.getByRole('button', { name: `Show measured mask for ${input.packet_id}` }).click()
   await checkImage(`${input.packet_id}: selected connected region on the full measured grid`, input.mask_sha256)
   await card.screenshot({ path: path.join(folder, 'app-measured-mask.png'), animations: 'disabled' })
+  if (input.repeat_mask_sha256) {
+    const coverage = page.getByTestId('image-inspection-checks')
+    await coverage.getByText('The JPEG re-encoding check withheld 1 of 2 candidate regions.').waitFor()
+    await coverage.getByText(/8,658 of 8,668 measured cells overlapped/).waitFor()
+    await coverage.getByText('Show the JPEG repeat mask').click()
+    const mask = coverage.getByRole('img', { name: 'JPEG repeat mask aligned to the submitted image' })
+    await mask.scrollIntoViewIfNeeded()
+    await page.waitForFunction(([label, sha]) => [...document.images].some(image =>
+      image.alt === label && image.src.includes(sha) && image.complete && image.naturalWidth > 0),
+    ['JPEG repeat mask aligned to the submitted image', input.repeat_mask_sha256])
+  }
   if (input.earlier_png) {
     const comparison = page.getByRole('region', { name: 'Compare with an earlier copy' })
     async function compare(filename) {

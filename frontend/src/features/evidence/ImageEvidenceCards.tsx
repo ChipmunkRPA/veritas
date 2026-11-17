@@ -408,7 +408,8 @@ function EvidenceCard({ packet, set, token, mediaReady }: {
           <h4 className="m-0 text-small font-medium text-text">What supports this region</h4>
           <p className="mt-2 mb-0 text-small text-text">{packet.interpretation}</p>
           {packet.localisation && <p className="mt-2 mb-0 text-small text-text-muted">
-            Measured grid {packet.localisation.grid.join(' × ')} · selected area {measurementValue(packet.localisation.region_area_fraction * 100)}% · operating threshold {measurementValue(packet.localisation.threshold)} (uncalibrated).
+            Measured grid {packet.localisation.grid.join(' × ')} · selected area {measurementValue(packet.localisation.region_area_fraction * 100)}%
+            {!packet.localisation.jpeg_reencode_consistency && <> · operating threshold {measurementValue(packet.localisation.threshold)} (uncalibrated)</>}.
           </p>}
           {packet.localisation?.candidate_eligibility && <CandidateEligibilityNote gate={packet.localisation.candidate_eligibility} />}
           {packet.measurements.length > 0 && <dl className="mt-3 mb-0 space-y-1.5">
@@ -523,6 +524,9 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
           { sha: check.flip_consistency?.aligned_mask_png_sha256, action: 'Show the aligned repeat mask',
             label: 'Horizontal repeat mask aligned to the submitted image',
             caption: 'White marks cells selected in the repeated check after mapping back to the submitted image.' },
+          { sha: check.jpeg_reencode_consistency?.aligned_mask_png_sha256, action: 'Show the JPEG repeat mask',
+            label: 'JPEG repeat mask aligned to the submitted image',
+            caption: 'White marks cells selected after re-encoding the same image. Coordinates match the uploaded file.' },
         ].map(({ sha, action, label, caption }) => {
           if (!sha) return null
           const asset = Object.values(set.overview ?? {}).find(item => item.sha256 === sha && item.media_type === 'image/png'

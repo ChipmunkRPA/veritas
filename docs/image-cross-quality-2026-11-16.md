@@ -2,8 +2,8 @@
 
 Three dense image checks found no additional correctly placed highlights on
 720 held JPEG deliveries. They used exact luminance coefficients and decoded
-color residuals. The app keeps its existing image checks while this approach
-remains in evaluation.
+color residuals. Those three fits remain in evaluation. The separate
+JPEG90 repeat check below is available in local development.
 
 ## Method and source groups
 
@@ -102,4 +102,68 @@ runner=backend/.venv/bin/python
   "$retained" "$run/fresh" "$run/fresh-reference.jsonl" "$run/results.json.gz"
 "$runner" -B -m scripts.audit_image_cross_quality "$retained/deliveries" "$run/fresh" \
   "$run/results.json.gz" "$run/native-audit.json"
+```
+
+## Compare the existing regional check on a JPEG90 upload
+
+The previous regional study compared JPEG90 variants with an optional
+regional pass on JPEG75 originals. This replay compares the JPEG90
+variants with what the app actually runs on the same JPEG90 bytes.
+It applies the earlier region and agreement rules without new fitting.
+[Earlier agreement study](image-regional-jpeg90-quality-agreement-2026-11-13.md)
+
+Measure the native image and a same-size JPEG75 re-encoding. Both passes
+use the original JPEG90's quality exclusions. The primary comparison
+keeps the exact native component if at least half its measured cells
+also appear in the second pass. It also records the native and re-encoded
+regions separately. This is a sensitivity check with one image and the
+same weights, so an agreeing region carries zero AI-authorship weight.
+
+| JPEG90 panel | Correct regions, current / native / re-encoded / agreement | Ordinary flags, current / native / re-encoded / agreement |
+| --- | --- | --- |
+| 24 fresh sources | 0 / 11 / 11 / 11 of 48 | 0 / 24 / 3 / 0 of 96 |
+| 36 retained LaMa sources | 0 / 0 / 0 / 0 of 72 | 0 / 29 / 15 / 3 of 144 |
+
+The agreement rule finds 11 of 24 insertion variants from six new source
+photos, with one additional misplaced highlight. It finds zero of the
+24 new removal variants. It assesses all 144 fresh JPEG90 deliveries
+and 198 of 216 retained deliveries. The remaining 18 fall below the
+minimum image size. There are two retained ordinary source groups with
+flags. These results support a limited local inspection option for the
+tested JPEG profile. Reliable coverage of object removals and other
+encoding profiles remains open. [JPEG90 results](evaluation-panels/image-jpeg90-agreement-2026-11-16.json.gz)
+
+### See the check in Chipmunk Verify
+
+Enable `VERITAS_IMAGE_REGION_JPEG90_REVIEW=true` and
+`VERITAS_IMAGE_REGION_JPEG_REVIEW=true` in development and run Full
+analysis. The option covers upright 8-bit RGB baseline 4:2:0 JPEGs with
+the standard quality-90 tables, a 768-pixel long side and a short side of
+at least 512 pixels. The existing quality-75 path is separate.
+
+The evidence card shows the original crop and the exact retained area.
+The browser and Standard PDF say why the area was selected and state the
+limits. JSON includes source bounds, overlap counts and the second view's
+hash. With the original and the same JPEG encoder, the signed package
+verifier checks the crop pixels, rebuilds the second JPEG view and
+recounts overlap from the stored masks. That verification uses no model
+inference.
+
+The simulated USD 9.99 checkout replay queued no analysis before a paid
+event. In the tested edit it kept the region at **x 377, y 456**, with
+size **128 × 76 pixels**. **8,658 of 8,668** measured cells overlapped.
+The second native region was withheld. The browser, PDF and JSON showed
+the same coordinates and measurements, with model names omitted.
+[App replay receipt](evaluation-panels/image-jpeg90-agreement-app-2026-11-16.json)
+
+```sh
+export PYTHONPATH=backend
+published=docs/evaluation-panels
+python3 -B -S -m scripts.image_jpeg90_agreement_holdout verify "$published/image-jpeg90-agreement-2026-11-16.json.gz"
+backend/.venv/bin/python -B -m scripts.image_jpeg90_agreement_holdout score \
+  "$retained" "$run/fresh" "$run/fresh-reference.jsonl" "$run/agreement.json.gz"
+npm --prefix frontend run build
+export CHIPMUNK_REGIONAL_JPEG90_FLOW_INPUT="$run/fresh/fresh-018/sharp-90.jpg"
+export VERITAS_DEVICE=cpu HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
+backend/.venv/bin/pytest backend/tests/test_native_regional_jpeg_paid.py -o addopts='' -m slow -k jpeg90-repeat
 ```

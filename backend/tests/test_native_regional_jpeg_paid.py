@@ -41,7 +41,10 @@ from app.storage.db import Analysis, BillingOrderRow, DetectorRun, ReportRow
     ("CHIPMUNK_REGIONAL_PROGRESSIVE_FLOW_INPUT", "CHIPMUNK_REGIONAL_PROGRESSIVE_FLOW_PROOF",
      "8bd8de273e668a77aa63e4caacd7a87374a6801930a2cc38124722fad247ad6b",
      "a872832fbaf89e4631b0b10bacb3850eb4cafc7f10b55472be574b901a7a9233"),
-], ids=["baseline", "progressive"])
+    ("CHIPMUNK_REGIONAL_JPEG90_FLOW_INPUT", "CHIPMUNK_REGIONAL_JPEG90_FLOW_PROOF",
+     "0deee9ea4b7d6da5fbc86fa65cc7474ed19b6655ec87af9ed41c3c23b72a2850",
+     "925b086aaf176be90469b0f5a1245454f00ad5205a222b07392696d108acad32"),
+], ids=["baseline", "progressive", "jpeg90-repeat"])
 def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
     billing, monkeypatch, tmp_path, input_var, proof_var, expected_source, expected_mask,
 ):
@@ -55,9 +58,11 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
     source = Path(path).read_bytes()
     source_hash = hashlib.sha256(source).hexdigest()
     assert source_hash == expected_source
+    jpeg90 = input_var == "CHIPMUNK_REGIONAL_JPEG90_FLOW_INPUT"
     f = billing
     for key, value in {"environment": "dev", "device": "cpu", "image_region_mode": "legacy",
                        "image_region_jpeg_review": True, "image_region_flip_review": True,
+                       "image_region_jpeg90_review": jpeg90,
                        "model_memory_budget_mb": "4096", "worker_threads": 1, "job_timeout_s": 600,
                        "run_worker": False, "offline": True, "webhooks_enabled": False}.items():
         monkeypatch.setattr(settings, key, value)
@@ -101,9 +106,10 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
         require_paid()
         state["forwards"] += 1
         result = native_predict(self, image)
-        selected = regional_support.readout(result.raw_mask, result.candidate_eligibility["eligible"],
-                                            regional.PIXEL_THRESHOLD, source, np.asarray(image))
-        state["source_mask"] = selected.source_mask(*image.size)
+        if not jpeg90:
+            selected = regional_support.readout(result.raw_mask, result.candidate_eligibility["eligible"],
+                                                regional.PIXEL_THRESHOLD, source, np.asarray(image))
+            state["source_mask"] = selected.source_mask(*image.size)
         return result
 
     monkeypatch.setattr(models, "_import_callable", import_loader)
@@ -135,8 +141,9 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
 
         status, error, result_hash = wait_for(terminal_analysis, lambda row: row[0] in {"done", "failed"}, "JPEG analysis")
         assert status == "done", error
-        assert state["forwards"] == 1
-        assert hashlib.sha256(state["source_mask"].tobytes()).hexdigest() == expected_mask
+        assert state["forwards"] == (2 if jpeg90 else 1)
+        if not jpeg90:
+            assert hashlib.sha256(state["source_mask"].tobytes()).hexdigest() == expected_mask
         result = json.loads(f.store.read_bytes(result_hash))
         with f.sessions() as db:
             run = db.query(DetectorRun).filter_by(analysis_id=aid, detector_id="loc.native_regional").one()
@@ -166,7 +173,17 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
         response = f.client.get(asset["url"], headers=f.headers)
         with Image.open(io.BytesIO(response.content)) as measured, Image.open(io.BytesIO(source)) as original:
             restored = np.asarray(measured.convert("L").resize(original.size, Image.Resampling.NEAREST)) > 0
-        assert np.array_equal(restored, state["source_mask"])
+        browser_repeat = {}
+        if jpeg90:
+            repeat = next(check["jpeg_reencode_consistency"] for check in document["coverage"]["inspection_checks"]
+                          if "jpeg_reencode_consistency" in check)
+            browser_repeat = {"repeat_mask_sha256": repeat["aligned_mask_png_sha256"]}
+            assert repeat["reencoded_jpeg_sha256"] == "1a06d3c9c4cb905d25c6a474b7719e94cd33d9aff5d948bd2e6f4a02677b7e72"
+            assert [(row["source_pixels"], row["shared_pixels"], row["retained"]) for row in repeat["candidates"]] == [
+                (8668, 8658, True), (6491, 0, False)]
+            assert hashlib.sha256(restored.tobytes()).hexdigest() == expected_mask
+        else:
+            assert np.array_equal(restored, state["source_mask"])
 
         requested = f.client.post(f"/api/v2/analyses/{aid}/reports", headers=f.headers, json={"profile": "standard"})
         assert requested.status_code == 202, requested.text
@@ -194,6 +211,27 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
         with f.sessions() as db:
             frozen = snapshot.load(f.store.read_bytes(db.get(ReportRow, report_id).snapshot_hash))
         assert frozen.image_evidence == document
+        if jpeg90:
+            assert "The JPEG re-encoding check withheld 1 of 2 candidate regions" in pdf_text
+            assert "8,658 of 8,668 measured cells overlapped" in pdf_text
+            from app.reports.verify import verify_package
+
+            created = f.client.post(f"/api/v2/analyses/{aid}/packages", headers=f.headers,
+                                    json={"report_id": report_id, "kind": "draft"})
+            assert created.status_code == 202, created.text
+            package_id = created.json()["id"]
+            package = wait_for(lambda: f.client.get(f"/api/v2/packages/{package_id}", headers=f.headers).json(),
+                               lambda row: row["status"] in {"done", "failed"}, "JPEG repeat evidence package")
+            assert package["status"] == "done", package
+            archive = f.client.get(f"/api/v2/packages/{package_id}/file", headers=f.headers)
+            assert archive.status_code == 200
+            package_path = tmp_path / "jpeg-repeat-evidence.zip"
+            package_path.write_bytes(archive.content)
+            verified = verify_package(package_path, public_key_pem=key.json()["public_key_pem"].encode(),
+                                      source_image=Path(path))
+            assert verified.outcome == "verified", verified.as_dict()
+            assert any(check.name == "original image crops" and "Reproduced the second JPEG view" in check.detail
+                       for check in verified.checks)
 
         server = uvicorn.Server(uvicorn.Config(app, host="127.0.0.1", port=8164, lifespan="off",
                                                log_config=None, access_log=False))
@@ -203,6 +241,7 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
             wait_for(lambda: server.started, bool, "isolated browser server", 20)
             credentials = tmp_path / "browser-input.json"
             credentials.write_text(json.dumps({"analysis_id": aid, "headers": f.headers, "packet_id": packet["id"],
+                                               **browser_repeat,
                                                **{f"{role}_sha256": packet["artifacts"][role]["sha256"]
                                                   for role in ("context", "crop", "mask")}}))
             credentials.chmod(0o600)
@@ -221,6 +260,9 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
                            "payment_before_weight_load_and_inference": True, "regional_forwards": state["forwards"],
                            "original_crop_overlay_mask_hashes_verified": True, "exact_source_mask_replayed": True,
                            "pdf_signature_verified": True, "browser_crop_and_mask_verified": True,
+                           **({"native_regions": 2, "retained_regions": 1, "signed_jpeg_repeat_replayed": True,
+                               "region": packet["region"], "overlap_cells": [8658, 8668], "browser_repeat_mask_verified": True}
+                              if jpeg90 else {}),
                            "json_and_pdf_snapshot_match": True, "model_names_hidden": True}, output, indent=2)
                 output.write("\n")
     finally:

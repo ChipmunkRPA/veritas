@@ -30,9 +30,10 @@ from app.evidence import image_flip_mask
 from app.evidence import image_interpolation_binding as interpolation
 from app.evidence.image_eligibility import (
     SOURCE_QUALITY,
-    validate_flip_consistency,
+    repeat_pass,
     validate_gate,
     validate_inspection_coverage,
+    validate_repeat_pass,
     validate_source_quality,
 )
 from app.evidence.source_geometry import pixel_bounds
@@ -270,7 +271,7 @@ def _localisation_component(signals: list[dict], values: np.ndarray, reliable: n
     if len(matches) != 1:
         raise PacketIntegrityError("The recorded region cannot be matched to one local editing component")
     component = labels == matches[0]
-    repeat = rule.get("resolution_policy", {}).get("flip_consistency")
+    repeat_key, repeat = repeat_pass(rule.get("resolution_policy", {}))
     retained = None
     if repeat is not None:
         bounds = list(_box(rect).values())
@@ -286,7 +287,7 @@ def _localisation_component(signals: list[dict], values: np.ndarray, reliable: n
                        "selection": "connected_component", "connectivity": 8,
                        "capability": "ai_inpainting" if rule.get("capability") == "ai_inpainting" else "local_editing",
                        "validation_status": "limited_local_evaluation" if gate else "local_evaluation_pending",
-                       **({"flip_consistency": retained} if retained is not None else {}),
+                       **({repeat_key: retained} if retained is not None else {}),
                        **({"candidate_eligibility": gate} if gate is not None else {})}
 
 
@@ -313,10 +314,10 @@ def _inspection_record(signals: list[dict], heat: dict, values: np.ndarray, reli
     minimum = max(1, math.ceil(rule["minimum_region_fraction"] * values.size))
     raw = sum(int(s[cv2.CC_STAT_AREA]) >= minimum for s in stats[1:])
     eligible = raw if gate is None or gate["eligible"] else 0
-    repeat = rule.get("resolution_policy", {}).get("flip_consistency")
+    repeat_key, repeat = repeat_pass(rule.get("resolution_policy", {}))
     if repeat is not None:
         try:
-            eligible = validate_flip_consistency(repeat, eligible, values.shape[1], values.shape[0])
+            eligible = validate_repeat_pass(repeat_key, repeat, eligible, values.shape[1], values.shape[0])
         except ValueError as exc:
             raise PacketIntegrityError(str(exc)) from exc
     quality = _source_quality(rule)
@@ -329,7 +330,7 @@ def _inspection_record(signals: list[dict], heat: dict, values: np.ndarray, reli
             "raw_components": raw, "eligible_components": eligible, "selected_components": 0,
             "omitted_components": eligible,
             **({"source_quality": quality} if quality is not None else {}),
-            **({"flip_consistency": repeat} if repeat is not None else {}),
+            **({repeat_key: repeat} if repeat is not None else {}),
             **({"candidate_eligibility": gate} if gate is not None else {})}
 
 
@@ -432,7 +433,7 @@ def validate_packet_source_mapping(document: dict[str, Any], result: dict[str, A
         rules = [s.get("details", {}).get("localisation", {}) for s in signals]
         if not rules or any(r.get("candidate_eligibility") != check.get("candidate_eligibility") for r in rules):
             raise PacketIntegrityError("Image inspection eligibility differs from the frozen check")
-        if any(r.get("resolution_policy", {}).get("flip_consistency") != check.get("flip_consistency") for r in rules):
+        if any(repeat_pass(r.get("resolution_policy", {})) != repeat_pass(check) for r in rules):
             raise PacketIntegrityError("Image repeat-pass evidence differs from the frozen check")
         if any(_source_quality(rule) != check.get("source_quality") for rule in rules):
             raise PacketIntegrityError("Image source quality differs from the frozen check")
@@ -512,7 +513,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 inspection = _inspection_record(signals, heat, values, reliable, scalar_sha, analysis.sha256)
                 inspection["reliability_mask_sha256"] = mask_sha
                 validate_source_quality(inspection)
-                repeat = inspection.get("flip_consistency") or {}
+                repeat_key, repeat = repeat_pass(inspection)
+                repeat = repeat or {}
                 if proof_sha := repeat.get("aligned_mask_png_sha256"):
                     proof = db.scalar(select(Artefact.id).where(
                         Artefact.analysis_id == analysis.id, Artefact.sha256 == proof_sha,
@@ -528,7 +530,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 continue
             index = len(document["coverage"]["inspection_checks"]) + 1
             document["coverage"]["inspection_checks"].append(inspection)
-            for role, sha in (("response", scalar_sha), ("reliability", mask_sha), ("aligned_flip_mask", proof_sha)):
+            mask_role = "aligned_jpeg_repeat_mask" if repeat_key == "jpeg_reencode_consistency" else "aligned_flip_mask"
+            for role, sha in (("response", scalar_sha), ("reliability", mask_sha), (mask_role, proof_sha)):
                 if sha is None:
                     continue
                 # Give exactly these declared measurement bytes a presentation
@@ -615,6 +618,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 measurements = [{"label": f"{measure}: region mean", "value": mean, "unit": unit},
                                 {"label": "Region peak", "value": round(float(measured.max()), 6), "unit": unit}]
                 observation = f"{measure} averages {mean:.3f} in the outlined region"
+                jpeg_repeat = (localisation or {}).get("jpeg_reencode_consistency")
                 if localisation:
                     observation = (f"A local editing check marked {100 * localisation['region_area_fraction']:.2f}% of the image "
                                    f"in this connected region at score ≥ {localisation['threshold']:.2f}; "
@@ -623,6 +627,13 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                         overlap = round(100 * flip["shared_pixels"] / flip["source_pixels"], 3)
                         measurements.append({"label": "Flipped-pass overlap on the source grid", "value": overlap, "unit": "%"})
                         limits.append("The same check supported this region after a horizontal flip. This measures repeatability and carries zero weight in AI authorship confidence.")
+                    if jpeg_repeat:
+                        overlap = round(100 * jpeg_repeat["shared_pixels"] / jpeg_repeat["source_pixels"], 3)
+                        measurements.append({"label": "JPEG repeat overlap on the source grid", "value": overlap, "unit": "%"})
+                        observation = "The same area was highlighted in the uploaded JPEG and after re-encoding it"
+                        interpretation = ("The repeated highlight makes this area a candidate for closer inspection. "
+                                          "Ordinary processing can create the same result.")
+                        limits.append("Both views come from the same source. Agreement carries zero weight in AI authorship confidence.")
                     limits.append(f"The measured mask grid is {gw} × {gh}; displayed boundaries are resampled to the original, not original-pixel certainty.")
                     limits.append("This check is not validated for general AI editing detection. Local testing found missed edits and false alarms on authentic images.")
                     if np.ptp(values[reliable]) == 0:
@@ -635,7 +646,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 if around.size:
                     nearby = round(float(around.mean()), 6)
                     measurements.append({"label": "Nearby context mean", "value": nearby, "unit": unit})
-                    observation += f", compared with {nearby:.3f} in the surrounding crop"
+                    if not jpeg_repeat:
+                        observation += f", compared with {nearby:.3f} in the surrounding crop"
                     limits.append("The surrounding crop is context, not a matched control; texture and lighting may differ.")
                 observation += "."
                 if jpeg_history:

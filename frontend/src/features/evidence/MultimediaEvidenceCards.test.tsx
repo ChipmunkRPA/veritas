@@ -159,6 +159,36 @@ describe('ordinary multimedia evidence', () => {
     expect(section.getByText('Across pages')).toBeTruthy()
   })
 
+  it('moves exact dated wording out of style highlights while preserving a different flagged passage', () => {
+    show({ ...document, packets: [], source: { ...document.source, method: 'plain' }, coverage: {
+      writing_passage_intervals: {
+        schema: 'document-writing-passage-intervals/1', status: 'flagged', authorship_confidence_contribution: 0,
+        ranges: [
+          { start: 10, end: 28, source_start: 10, source_end: 28, preview: 'Published wording.' },
+          { start: 31, end: 49, source_start: 31, source_end: 49, preview: 'Another paragraph.' },
+        ],
+      },
+      published_wording_review: {
+        schema: 'document-published-wording-review/1', authorship_confidence_contribution: 0, archive_sha256: 'b'.repeat(64),
+        reference: { id: 'GAO-16-123', published_date: '2016-01-01', version_url: 'https://huggingface.co/',
+          text: '😀 Published wording.', source_record_sha256: 'd'.repeat(64), transcript_sha256: 'e'.repeat(64) },
+        submitted_range: [0, 54], archive_range: [0, 20],
+        published_style_matches: [{ start: 10, end: 28, archive_range: [2, 20] }],
+        changes: [{ start: 31, end: 49, submitted: 'Another paragraph.', archive_range: [2, 11],
+          locations: [{ start: 31, end: 49, ranges: [[31, 49]] }] }],
+      },
+    } })
+    const style = within(screen.getByRole('region', { name: 'Possible AI-like writing passages' }))
+    expect(style.queryByText('Published wording.')).toBeNull()
+    expect(style.getByText('Another paragraph.')).toBeTruthy()
+    expect(style.getByRole('link', { name: 'source comparison' }).getAttribute('href')).toBe('#document-published-wording')
+    const source = within(screen.getByRole('region', { name: 'Earlier published wording' }))
+    expect(source.getByText('Published wording.')).toBeTruthy()
+    expect(source.getByText('Another paragraph.')).toBeTruthy()
+    expect(source.getAllByText('[31, 49)')).toHaveLength(2)
+    expect(source.getByRole('link', { name: 'U.S. GAO report GAO-16-123' }).getAttribute('href')).toBe('https://www.gao.gov/products/GAO-16-123')
+  })
+
   it('explains a passage found by comparing writing within the file', () => {
     show({ ...document, packets: [], coverage: {
       writing_passage_intervals: {

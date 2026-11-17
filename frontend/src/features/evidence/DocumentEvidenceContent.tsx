@@ -7,7 +7,7 @@ import DocumentContextComparison from './DocumentContextComparison'
 import DocumentPassageCoverage from './DocumentPassageCoverage'
 import DocumentRepeatedPassages from './DocumentRepeatedPassages'
 import DocumentUnselectedResponses from './DocumentUnselectedResponses'
-import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentOriginalTextLocation, type DocumentPassagePosition, type EmailBodyAlternatives, type EmailClassifierInputScope, type WritingCheckReason } from './multimediaPackets'
+import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentOriginalTextLocation, type DocumentPassagePosition, type EmailBodyAlternatives, type EmailClassifierInputScope, type PublishedWordingReview, type WritingCheckReason } from './multimediaPackets'
 
 function BibliographyCoverage({ review }: { review: NonNullable<NonNullable<DocumentEvidenceSet['coverage']>['writing_bibliography']> }) {
   const { first_location: first, last_location: last } = review
@@ -281,10 +281,48 @@ function PagePlates({ set, packet, page, token, mediaReady }: { set: DocumentEvi
   </div>
 }
 
-function WritingPassageIntervals({ review, method, emailHtml }: {
+function PublishedWording({ review }: { review: PublishedWordingReview }) {
+  const source = review.reference
+  const transcript = Array.from(source.text)
+  const earlier = ([start, end]: [number, number]) => transcript.slice(start, end).join('')
+  return <section id="document-published-wording" aria-labelledby="published-wording-title" className="mt-4 rounded-md border border-border p-4">
+    <h3 id="published-wording-title" className="m-0 text-body font-medium">Earlier published wording</h3>
+    <p className="mt-2 mb-0 text-small"><a className="underline" href={`https://www.gao.gov/products/${encodeURIComponent(source.id)}`}>U.S. GAO report {source.id}</a> · Published {source.published_date}</p>
+    <p className="mt-2 mb-0 text-small">This check compares the marked text with the cited U.S. Government Accountability Office highlight. Wording differences can result from ordinary editing, transcription or AI assistance. The comparison contributes zero weight to the overall AI assessment.</p>
+    <p className="mt-2 mb-0 text-caption text-text-muted">Compared extracted characters <span className="font-mono">[{review.submitted_range[0]}, {review.submitted_range[1]})</span>. <a className="underline" href={source.version_url}>GovReport transcript</a> · <a className="underline" href="https://gov-report-data.github.io/#license">CC BY 4.0</a></p>
+    {!!review.published_style_matches.length && <>
+      <h4 className="mt-3 mb-0 text-small font-medium">Writing highlights with exact published wording</h4>
+      {review.published_style_matches.map(match => <div key={match.start} className="mt-2 text-small">
+        <p className="m-0">Extracted characters <span className="font-mono">[{match.start}, {match.end})</span>. Same wording in the dated source, allowing for spacing.</p>
+        <blockquote className="my-2 border-l-2 border-border pl-3 whitespace-pre-line break-words">{earlier(match.archive_range)}</blockquote>
+      </div>)}
+    </>}
+    <h4 className="mt-3 mb-0 text-small font-medium">Wording differences</h4>
+    {!review.changes.length && <p className="mt-2 mb-0 text-small">No bounded wording differences were recorded.</p>}
+    {review.changes.map(change => {
+      const pages = [...new Set(change.locations.flatMap(place => 'page' in place ? [place.page] : []))]
+      return <div key={`${change.start}-${change.end}-${change.archive_range[0]}`} className="mt-3 rounded-md border border-border p-3 text-small">
+        <p className="m-0 text-caption">{change.start === change.end
+          ? `Omission at extracted character ${change.start}. Locations show the next retained character.`
+          : <>Extracted characters <span className="font-mono">[{change.start}, {change.end})</span>.</>}</p>
+        {pages.length ? <p className="m-0 text-caption">Original PDF pages {pages.join(', ')}. Word boxes are recorded in JSON.</p>
+          : change.locations.map(place => 'ranges' in place && <p key={place.start} className="m-0 text-caption">
+            {place.paragraph ? `Word paragraph ${place.paragraph} characters` : 'Original text characters'} <span className="font-mono">{place.ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}</span>.
+          </p>)}
+        <dl className="mt-2 mb-0 grid gap-2 sm:grid-cols-2">
+          <div className="min-w-0"><dt className="font-medium">Earlier wording</dt><dd className="m-0 break-words whitespace-pre-line">{earlier(change.archive_range) || 'No counterpart in this part of the earlier source.'}</dd></div>
+          <div className="min-w-0"><dt className="font-medium">Submitted wording</dt><dd className="m-0 break-words whitespace-pre-line">{change.submitted || 'Omitted at this position.'}</dd></div>
+        </dl>
+      </div>
+    })}
+  </section>
+}
+
+function WritingPassageIntervals({ review, method, emailHtml, wording }: {
   review: NonNullable<NonNullable<DocumentEvidenceSet['coverage']>['writing_passage_intervals']>
   method?: string
   emailHtml: boolean
+  wording?: PublishedWordingReview
 }) {
   const summary = {
     'document-writing-passage-intervals/3': 'It also looks for passages that stand out within the document.',
@@ -293,14 +331,16 @@ function WritingPassageIntervals({ review, method, emailHtml }: {
   const approach = review.schema === 'document-writing-passage-intervals/3' || review.schema === 'document-writing-passage-intervals/4'
     ? summary[review.schema]
     : 'Sustained AI-like patterns can highlight separate passages for review.'
+  const ranges = review.ranges.filter(range => !wording?.published_style_matches.some(match => match.start === range.start && match.end === range.end))
   return <section id="document-writing-passage-intervals" aria-labelledby="writing-passage-intervals-title" className="mt-4 rounded-md border border-border p-4">
     <h3 id="writing-passage-intervals-title" className="m-0 text-body font-medium">Possible AI-like writing passages</h3>
     <p className="mt-2 mb-0 text-small">This optional check combines readings of individual sentences and their surrounding text. {approach}</p>
     {method === 'email' && <p className="mt-2 mb-0 text-small">This check covers the mapped reply body.</p>}
-    <p className="mt-2 mb-0 text-small">{review.status === 'flagged' ? 'Inspect the highlighted passages in context.'
+    {(ranges.length > 0 || !wording?.published_style_matches.length) && <p className="mt-2 mb-0 text-small">{review.status === 'flagged' ? 'Inspect the highlighted passages in context.'
       : review.status === 'no_ranges' ? 'No passage was selected. Authorship remains undetermined by this check.'
-      : 'Complete readings or original passage positions were unavailable.'}</p>
-    {review.ranges.map(range => {
+      : 'Complete readings or original passage positions were unavailable.'}</p>}
+    {!!wording?.published_style_matches.length && <p className="mt-2 mb-0 text-small">Passages that match dated published wording appear in the <a className="underline" href="#document-published-wording">source comparison</a>.</p>}
+    {ranges.map(range => {
       const pages = 'locations' in range ? [...new Set(range.locations.flatMap(place => 'page' in place ? [place.page] : []))] : []
       return <div key={range.start} className="mt-3">
         {'source_start' in range
@@ -365,7 +405,8 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const usesOcr = ocrPages.some((page) => page.status === 'extracted') || set.packets.some((packet) => packet.anchors.some((anchor) => anchor.extraction === 'ocr'))
   return <div data-testid="document-evidence-content">
     {set.coverage?.writing_passage_intervals && <WritingPassageIntervals review={set.coverage.writing_passage_intervals}
-      method={set.source.method} emailHtml={emailCoverage?.body_content_type === 'text/html'} />}
+      method={set.source.method} emailHtml={emailCoverage?.body_content_type === 'text/html'} wording={set.coverage.published_wording_review} />}
+    {set.coverage?.published_wording_review && <PublishedWording review={set.coverage.published_wording_review} />}
     <EmailBodyComparison review={set.coverage?.email_body_alternatives} />
     {set.coverage?.email_classifier_input_scope && <EmailInputScope scope={set.coverage.email_classifier_input_scope} />}
     {tracked && <section aria-label="Word tracked text changes" className="mt-4 rounded-md border border-border p-4">

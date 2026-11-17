@@ -60,6 +60,14 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Earlier published wording in normal document results](writing-published-wording-2026-11-16.md)
+  locates 97 of 161 short edits on 48 previously unused report pairs.
+  The style check locates one additional edit. The new review moves both
+  ordinary style highlights to their dated source and records zero
+  differences on the 48 unmodified files. An extended competing-source
+  check withholds a qualified single source on 108 two-source controls.
+  The app, PDF and JSON preserve original locations with zero AI-score weight.
+
 - [Temporary face swaps on native source clocks](video-local-face-intervals-2026-11-16.md)
   compares 278 direct and recompressed deliveries with known intervals.
   The denser check raises useful locations from 12 to 60 of 80 against

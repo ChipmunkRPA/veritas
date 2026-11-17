@@ -82,6 +82,7 @@ def public_result(result: dict) -> dict:
             document_invisible_characters,
             document_passage_intervals,
             document_passage_position,
+            document_published_wording,
             document_tracked_changes,
             document_word_visibility,
         )
@@ -103,6 +104,8 @@ def public_result(result: dict) -> dict:
             source_coverage[document_character_review.COMMITMENT] = adjusted
         if intervals := document_passage_intervals.result_commitment(result):
             source_coverage[document_passage_intervals.COMMITMENT] = intervals
+        if wording := document_published_wording.result_commitment(result):
+            source_coverage[document_published_wording.COMMITMENT] = wording
         if markers := document_chat_markers.from_result(result):
             source_coverage[document_chat_markers.COMMITMENT] = markers
     checks = [{k: s[k] for k in ('id', 'display_id', 'category', 'family', 'scope', 'status', 'raw_score',

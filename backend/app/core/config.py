@@ -296,6 +296,7 @@ class Settings(BaseSettings):
     document_gao_archive_path: Path | None = None  # Optional locally built GovReport highlights pack for TXT.
     document_gao_archive_sha256: str | None = None  # Expected SHA-256 of the local GAO highlights pack.
     document_gao_archive_resolve_competition: bool = False  # Compare a strongly supported source when another has only short matches.
+    document_gao_automatic_review: bool = False  # Include qualified earlier wording in local document evidence.
     image_affine_copy_review: bool = False  # Development-only dense masks for same-image geometric copies.
     image_small_affine_copy_review: bool = False  # Also search small rotated/resized regions in selected JPEG and WebP images.
     image_jpeg_block_copy_review: bool = False  # Development-only exact JPEG brightness-block fallback.

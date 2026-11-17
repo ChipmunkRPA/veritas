@@ -5,6 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+import threading
 import unicodedata
 from array import array
 from collections import defaultdict
@@ -29,6 +30,7 @@ HASH = re.compile(r"[0-9a-f]{64}")
 REPORT_ID = re.compile(r"[A-Z0-9][A-Z0-9-]{2,39}")
 DATE = re.compile(r"[0-9]{4}-[0-9]{2}-[0-9]{2}")
 WINDOW = 8
+LONG_SECONDARY_RUN = 32
 SLOT_COUNT = 1 << 24
 SLOT_MASK = SLOT_COUNT - 1
 MAX_INDEX_KEYS = SLOT_COUNT // 2
@@ -39,6 +41,7 @@ INTERPRETATION = ("Differences describe wording relative to the cited source. Or
 COMPETITION_SCOPE = ("A second archive source matched a small part of the differing wording. Exact matches to the cited "
                      "source surround those differences and cover most of the uploaded passage.")
 _CHARACTERS = str.maketrans({"’": "'", "“": '"', "”": '"'})
+_LIBRARY_LOCK = threading.Lock()
 
 
 def normalize(token):
@@ -51,6 +54,13 @@ def token_stream(text):
 
 def token_values(stream):
     return [value for value, _, _ in stream]
+
+
+def comparison_tokens(text):
+    if len(text) > 20_000 or any(line.lstrip().startswith(">") for line in text.splitlines()):
+        return []
+    stream = token_stream(text)
+    return stream if 64 <= len(stream) <= 1400 else []
 
 
 def _window(values, start):
@@ -82,8 +92,13 @@ def build_index(reports):
     return keys, locations, identities
 
 
-@lru_cache(maxsize=1)
 def library(path: Path, sha256: str):
+    with _LIBRARY_LOCK:
+        return _library(path, sha256)
+
+
+@lru_cache(maxsize=1)
+def _library(path: Path, sha256: str):
     try:
         if not isinstance(sha256, str) or not HASH.fullmatch(sha256):
             raise ValueError("A pinned GAO pack hash is required")
@@ -142,6 +157,24 @@ def _competing_source(votes, extent):
     return source, others
 
 
+def _long_secondary_match(votes, primary, submitted, cached):
+    for name, anchors in votes.items():
+        if name == primary:
+            continue
+        earlier = cached[name]
+        for start, offset in anchors:
+            left, right = 0, WINDOW
+            while (start + left > 0 and offset + left > 0
+                   and submitted[start + left - 1] == earlier[offset + left - 1]):
+                left -= 1
+            while (start + right < len(submitted) and offset + right < len(earlier)
+                   and submitted[start + right] == earlier[offset + right]):
+                right += 1
+            if right - left >= LONG_SECONDARY_RUN:
+                return True
+    return False
+
+
 def _span(stream, start, end):
     point = stream[start][1] if start < len(stream) else stream[-1][2]
     return [point, stream[end - 1][2] if start < end else point]
@@ -150,6 +183,34 @@ def _span(stream, start, end):
 def _excerpt(text, span, changed):
     start, end = span
     return {"start": start, "end": end, "text": text[start:end], "changed_tokens": [span] if changed and start < end else []}
+
+
+def _bounded_edits(opcodes, first, last):
+    return [(a, b, c, d) for tag, a, b, c, d in opcodes if tag != "equal" and first <= c <= d <= last
+            and max(b - a, d - c) <= 96]
+
+
+def replay_wording(text, transcript, submitted_range, transcript_range):
+    """Reproduce bounded differences against the retained transcript, without the corpus index."""
+    query, source = token_stream(text), token_stream(transcript)
+
+    def boundaries(stream, span):
+        left = next((i for i, (_, start, _) in enumerate(stream) if start == span[0]), None)
+        right = next((i + 1 for i, (_, _, end) in enumerate(stream) if end == span[1]), None)
+        if left is None or right is None or right - left < 2 * WINDOW:
+            raise ValueError("Earlier wording boundaries do not enclose enough matching terms")
+        return left, right
+
+    first, stop = boundaries(query, submitted_range)
+    left, right = boundaries(source, transcript_range)
+    words, earlier = token_values(query), token_values(source)
+    alignment = SequenceMatcher(None, earlier, words, autojunk=False).get_opcodes()
+    for column, row in ((left, first), (right - WINDOW, stop - WINDOW)):
+        if not any(tag == "equal" and a <= column <= b - WINDOW and row == c + column - a
+                   for tag, a, b, c, _ in alignment):
+            raise ValueError("Earlier wording boundaries differ from their archived text anchors")
+    return [(_span(query, c, d), _span(source, a, b))
+            for a, b, c, d in _bounded_edits(alignment, first + WINDOW, stop - WINDOW)]
 
 
 def _context_ranges(doc, changes):
@@ -184,10 +245,8 @@ def compare(doc: Document, upload_sha256: str, pack_sha256: str, reports, packed
         "coverage": {"body_paragraphs": len(doc.paragraphs), "body_words": 0, "matched_words": 0},
         "reference": None, "aligned_paragraphs": [], "changes": [], "submitted_sentence_ranges": [],
     }
-    if len(text) > 20_000 or any(line.lstrip().startswith(">") for line in text.splitlines()):
-        return output
-    stream = token_stream(text)
-    if not 64 <= len(stream) <= 1400:
+    stream = comparison_tokens(text)
+    if not stream:
         return output
     words = token_values(stream)
     output["coverage"]["body_words"] = len(words)
@@ -201,7 +260,7 @@ def compare(doc: Document, upload_sha256: str, pack_sha256: str, reports, packed
         if not resolve_competition:
             return output
         source_id, competing = _competing_source(votes, len(words))
-        if source_id is None:
+        if source_id is None or _long_secondary_match(votes, source_id, words, cached):
             return output
     else:
         source_id = next(iter(votes))
@@ -218,8 +277,7 @@ def compare(doc: Document, upload_sha256: str, pack_sha256: str, reports, packed
     reference = source["text"]
     source_stream = token_stream(reference)
     first, last = anchors[0][0] + WINDOW, anchors[-1][0]
-    changes = [(a, b, c, d) for tag, a, b, c, d in opcodes if tag != "equal" and first <= c <= d <= last
-               and max(b - a, d - c) <= 96]
+    changes = _bounded_edits(opcodes, first, last)
     if competing and not all(first <= start and start + WINDOW <= last
                              and any(c < start + WINDOW and start < d for _, _, c, d in changes)
                              for start in competing):

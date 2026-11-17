@@ -32,11 +32,13 @@
 {% for note in evidence.coverage_details %}<p class="caption">{{ note }}</p>{% endfor %}
 {% if evidence.get('writing_passage_intervals') %}
 {% set intervals = evidence.writing_passage_intervals %}
+{% set wording = evidence.get('published_wording') %}
 <div class="multimedia-acoustic-summary" id="document-writing-passage-intervals">
 <h3>{{ intervals.title }}</h3>
 <p>{{ intervals.explanation }}</p>
 {% if intervals.method == 'email' %}<p class="caption">This check covers the mapped reply body.</p>{% endif %}
-<p>{{ intervals.status_note }}</p>
+{% if intervals.ranges or not (wording and wording.published_style_matches) %}<p>{{ intervals.status_note }}</p>{% endif %}
+{% if wording and wording.published_style_matches %}<p>Passages that match dated published wording appear in the <a href="#document-published-wording">source comparison</a>.</p>{% endif %}
 {% for range in intervals.ranges %}
 <div class="writing-passage-excerpt">
 {% if range.locations is not defined %}
@@ -54,6 +56,44 @@
 </div>
 {% endfor %}
 <p class="caption">Positions are zero-based with the end excluded. JSON pointer <span class="mono">/coverage/writing_passage_intervals</span>.</p>
+</div>
+{% endif %}
+{% set wording = evidence.get('published_wording') %}
+{% if wording %}
+<div id="document-published-wording" class="multimedia-acoustic-summary">
+<h3>{{ wording.title }}</h3>
+<p><a href="{{ wording.source_url }}">U.S. GAO report {{ wording.reference.id }}</a> · Published {{ wording.reference.published_date }}</p>
+<p>{{ wording.scope }}</p>
+<p class="caption">Compared extracted characters <span class="mono">[{{ wording.submitted_range[0] }}, {{ wording.submitted_range[1] }})</span>. <a href="{{ wording.reference.version_url }}">GovReport transcript</a> · <a href="{{ wording.license_url }}">CC BY 4.0</a></p>
+{% if wording.published_style_matches %}
+<h4>Writing highlights with exact published wording</h4>
+{% for match in wording.published_style_matches %}
+<div class="writing-passage-excerpt">
+<p class="caption">Extracted characters <span class="mono">[{{ match.start }}, {{ match.end }})</span>. Same wording in the dated source, allowing for spacing.</p>
+<blockquote>{{ wording.reference.text[match.archive_range[0]:match.archive_range[1]] }}</blockquote>
+</div>
+{% endfor %}
+{% endif %}
+<h4>Wording differences</h4>
+{% if not wording.changes %}<p>No bounded wording differences were recorded.</p>{% endif %}
+{% for change in wording.changes %}
+<div class="writing-passage-excerpt">
+<p class="caption">{% if change.start == change.end %}Omission at extracted character {{ change.start }}. Locations show the next retained character.{% else %}Extracted characters <span class="mono">[{{ change.start }}, {{ change.end }})</span>.{% endif %}</p>
+{% if wording.method == 'pymupdf' %}
+<p class="caption">Original PDF pages {{ change.locations | map(attribute='page') | unique | join(', ') }}. Word boxes are recorded in JSON.</p>
+{% else %}
+{% for place in change.locations %}
+<p class="caption">{% if wording.method == 'python-docx' %}Word paragraph {{ place.paragraph }} characters{% else %}Original text characters{% endif %}
+{% for span in place.ranges %}<span class="mono">[{{ span[0] }}, {{ span[1] }})</span>{{ ', ' if not loop.last else '.' }}{% endfor %}</p>
+{% endfor %}
+{% endif %}
+<p class="caption">Earlier wording</p>
+<blockquote>{{ wording.reference.text[change.archive_range[0]:change.archive_range[1]] or 'No counterpart in this part of the earlier source.' }}</blockquote>
+<p class="caption">Submitted wording</p>
+<blockquote>{{ change.submitted or 'Omitted at this position.' }}</blockquote>
+</div>
+{% endfor %}
+<p class="caption">JSON pointer <span class="mono">/coverage/published_wording_review</span>.</p>
 </div>
 {% endif %}
 {% set chat = evidence.get('chat_format_markers') %}

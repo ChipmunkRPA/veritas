@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [earlier published wording replay](writing-published-wording-2026-11-16.md)
+recounts 117 paired government reports and 108 mixed-source controls.
+It shows which passages link to a dated source, which wording differs,
+and which style highlights still need inspection. The local app receipt
+verifies authoritative source binding in the ordinary results, PDF and JSON.
+
 The [temporary face-swap replay](video-local-face-intervals-2026-11-16.md#independent-replay)
 rebuilds 278 direct and recompressed videos and checks 556 source and
 submission bindings. It matches the two methods on the same labeled

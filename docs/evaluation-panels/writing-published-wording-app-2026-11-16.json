@@ -1,0 +1,46 @@
+{
+  "browser": {
+    "checked": [
+      "text-mixed",
+      "word-mixed",
+      "pdf-mixed",
+      "text-ordinary"
+    ],
+    "page_errors": 0
+  },
+  "cases": {
+    "pdf-mixed": {
+      "changes": 6,
+      "file_sha256": "c5fce43b938e4bbd6164e19b8442882de7236e328f4b28dad5a88afd2ba62825",
+      "pdf_sha256": "588f26775b232a1d8c2e7b24152c59ac1c6944ab8c407c1a0bad0351742d61ce",
+      "published_style_matches": 0,
+      "source": "GAO-15-149"
+    },
+    "text-mixed": {
+      "changes": 6,
+      "file_sha256": "d618f07fb87746b8b3574948296d8bb91da66952bd695953e2d6f5bffbc7d2e9",
+      "pdf_sha256": "d2d7b79159b37696686262b760f00b76e864cc531a26a4d8906b4e05ce399d43",
+      "published_style_matches": 0,
+      "source": "GAO-15-149"
+    },
+    "text-ordinary": {
+      "changes": 0,
+      "file_sha256": "da493f9fb5bdf665143e7fb091e135d0c69a74a9330a29292c304894e1a49169",
+      "pdf_sha256": "8e0a303e5709e46086c0e54e0440ab367bba12408574dfe4eab97feb72152f74",
+      "published_style_matches": 1,
+      "source": "GAO-15-149"
+    },
+    "word-mixed": {
+      "changes": 6,
+      "file_sha256": "07aa4e021b67e347a58fedc3bff386c702c046d462db1d81efc08b79a7bde1e2",
+      "pdf_sha256": "0fc39b62ef164443bf8141ca5885ca189418efcbdd4334f7b0515e48c7bc6998",
+      "published_style_matches": 0,
+      "source": "GAO-15-149"
+    }
+  },
+  "signed_packages_verified_with_original": 4,
+  "simulated_prepaid_analyses": 5,
+  "source_plan_sha256": "ff371d663b872c0de86af9b51c54ff5113a0232b8d42944feb0b883aed177e54",
+  "unchanged_overall_assessment": true,
+  "unpaid_jobs": 0
+}

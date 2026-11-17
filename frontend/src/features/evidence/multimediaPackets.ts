@@ -484,6 +484,16 @@ export interface EmailClassifierInputScope {
 type PercentageSource = { kind: 'pdf'; page: number; block: number; bbox: number[]; coordinate_space: 'unrotated-page-points' }
   | { kind: 'docx'; paragraph_index: number; body_path: [number]; body_paragraph: number }
   | { kind: 'email'; mime_part: string; source_start: number; source_end: number }
+type PublishedWordingRange = { start: number; end: number; archive_range: [number, number] }
+export interface PublishedWordingReview {
+  schema: 'document-published-wording-review/1'; archive_sha256: string; authorship_confidence_contribution: 0;
+  reference: { id: string; published_date: string; version_url: string; source_record_sha256: string; transcript_sha256: string; text: string };
+  submitted_range: [number, number]; archive_range: [number, number]; published_style_matches: PublishedWordingRange[];
+  changes: (PublishedWordingRange & { submitted: string; locations: (
+    { start: number; end: number; page: number; boxes: [number, number, number, number][] } |
+    { start: number; end: number; paragraph?: number; ranges: [number, number][] }
+  )[] })[];
+}
 export interface DocumentEvidenceSet extends SetBase {
   schema: 'chipmunk.document-evidence/1'; packets: DocumentEvidencePacket[]; omitted_windows: number
   source: { sha256: string; chars?: number; method?: string; offset_unit: 'unicode_codepoint' }
@@ -515,6 +525,7 @@ export interface DocumentEvidenceSet extends SetBase {
     local_passage_coverage?: DocumentPassageCoverage;
     unselected_passage_responses?: DocumentUnselectedResponses;
     passage_position_review?: DocumentPassagePosition;
+    published_wording_review?: PublishedWordingReview;
     writing_passage_intervals?: {
       schema: 'document-writing-passage-intervals/1' | 'document-writing-passage-intervals/2' | 'document-writing-passage-intervals/3' | 'document-writing-passage-intervals/4';
       status: 'flagged' | 'no_ranges' | 'unassessed';

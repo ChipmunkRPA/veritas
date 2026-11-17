@@ -38,6 +38,7 @@ from app.evidence import (
     document_passage_position,
     document_pdf_visibility,
     document_percentage_consistency,
+    document_published_wording,
     document_repeat,
     document_scope,
     document_selection,
@@ -345,6 +346,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_invisible_characters.validate(document, document["source"].get(document_invisible_characters.COMMITMENT))
         document_character_review.validate(document, document["source"].get(document_character_review.COMMITMENT))
         document_passage_intervals.validate(document, document["source"].get(document_passage_intervals.COMMITMENT))
+        document_published_wording.validate(document, document["source"].get(document_published_wording.COMMITMENT))
         document_chat_markers.validate(document, document["source"].get(document_chat_markers.COMMITMENT))
         document_matched_context.validate(document)
         document_paragraph_priority.validate(document)
@@ -560,6 +562,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][document_passage_intervals.KEY] = intervals
         document_passage_intervals.verify_source(document, text, mapping, decoded["sentences"], metadata=decoded["meta"],
                                                  word_review=decoded.get(document_tracked_changes.KEY))
+    if wording := document_published_wording.from_result(result):
+        document["source"][document_published_wording.COMMITMENT] = canonical_hash(wording)
+        document["coverage"][document_published_wording.KEY] = wording
+        document_published_wording.verify_source(document, text, mapping, decoded["meta"], decoded.get(document_tracked_changes.KEY))
     if alternative_review := email_alternatives.result_review(result):
         document["coverage"][email_alternatives.KEY] = alternative_review
         email_alternatives.validate_set(document, canonical_hash(alternative_review))
@@ -751,6 +757,10 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
                 raise ValueError("Writing passage intervals differ from the published result")
             document_passage_intervals.verify_source(document, decoded["text"], decoded["source_map"], decoded["sentences"],
                                                      metadata=decoded["meta"], word_review=decoded.get(document_tracked_changes.KEY))
+            if document["source"].get(document_published_wording.COMMITMENT) != document_published_wording.result_commitment(result):
+                raise ValueError("Earlier wording differs from the published result")
+            document_published_wording.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"],
+                                                     decoded.get(document_tracked_changes.KEY))
             if document["source"].get(document_chat_markers.COMMITMENT) != document_chat_markers.from_result(result):
                 raise ValueError("Chat-format marker evidence differs from the published result")
             document_chat_markers.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])

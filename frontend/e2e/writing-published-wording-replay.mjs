@@ -1,0 +1,38 @@
+import assert from 'node:assert/strict'
+import fs from 'node:fs'
+import path from 'node:path'
+import { chromium } from 'playwright'
+
+const input = JSON.parse(fs.readFileSync(0, 'utf8'))
+const browser = await chromium.launch({ headless: true })
+try {
+  const context = await browser.newContext({
+    viewport: { width: 1280, height: 900 },
+    extraHTTPHeaders: { 'X-API-Key': input.key },
+  })
+  await context.route('**/*', route =>
+    new URL(route.request().url()).origin === input.url ? route.continue() : route.abort())
+  const page = await context.newPage()
+  const errors = []
+  const checked = []
+  page.on('pageerror', error => errors.push(error.message))
+  for (const sample of input.cases) {
+    await page.goto(`${input.url}/analyses/${sample.analysis_id}?view=plain#document-published-wording`)
+    const section = page.getByRole('region', { name: 'Earlier published wording' })
+    await section.getByRole('link', { name: `U.S. GAO report ${sample.reference}` }).waitFor()
+    assert.equal(await section.getByText(`Published ${sample.date}`, { exact: false }).count(), 1)
+    assert.equal(await section.getByText('Submitted wording', { exact: true }).count(), sample.changes)
+    if (sample.cleared) {
+      const style = page.getByRole('region', { name: 'Possible AI-like writing passages' })
+      assert.equal(await style.locator('blockquote').count(), 0)
+      assert.equal(await style.getByRole('link', { name: 'source comparison' }).getAttribute('href'), '#document-published-wording')
+    }
+    const image = path.join(input.output, `${sample.case}-evidence.png`)
+    await section.screenshot({ path: image, animations: 'disabled' })
+    checked.push(sample.case)
+  }
+  assert.deepEqual(errors, [])
+  process.stdout.write(JSON.stringify({ checked, page_errors: errors.length }))
+} finally {
+  await browser.close()
+}

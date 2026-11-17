@@ -48,6 +48,7 @@ from app.evidence import (
     document_invisible_characters,
     document_passage_intervals,
     document_pdf_visibility,
+    document_published_wording,
     document_tracked_changes,
     document_word_visibility,
 )
@@ -572,6 +573,26 @@ def v1_view(ctx: StageContext, result: AnalysisResultV2) -> dict[str, Any]:
     return view
 
 
+def _published_wording(ctx: StageContext, decoded: dict, intervals: dict | None) -> dict | None:
+    if (settings.environment != "dev" or not settings.document_gao_automatic_review
+            or settings.document_gao_archive_path is None):
+        return None
+    from app.evidence import document_archive, document_gao_archive
+
+    extension = Path(ctx.outputs["ingest"]["filename"]).suffix.lower()
+    text, mapping, meta = decoded["text"], decoded["source_map"], decoded["meta"]
+    if (not document_published_wording.eligible(extension, text, mapping, meta, decoded.get(document_tracked_changes.KEY))
+            or not document_gao_archive.comparison_tokens(text)):
+        return None
+    try:
+        sha = settings.document_gao_archive_sha256
+        reports, index = document_gao_archive.library(settings.document_gao_archive_path, sha)
+        return document_published_wording.capture(text, decoded["paragraphs"], mapping, meta, intervals, sha, reports, index)
+    except (document_archive.ArchiveUnavailable, ValueError, OSError) as error:
+        ctx.log.warning("published_wording.omitted", error_type=type(error).__name__)
+        return None
+
+
 def publish(ctx: StageContext) -> dict[str, Any]:
     result = common.build_result(ctx, kind="document", pipeline_version=PIPELINE_VERSION, entry_stages=ENTRY_STAGES,
                                  exhibit_stages=EXHIBIT_STAGES)
@@ -596,6 +617,9 @@ def publish(ctx: StageContext) -> dict[str, Any]:
                     and (intervals := (entry.get("details") or {}).get(document_passage_intervals.KEY))):
                 result.manifest.sampling[document_passage_intervals.KEY] = intervals
                 break
+        wording = _published_wording(ctx, decoded, result.manifest.sampling.get(document_passage_intervals.KEY))
+        if wording is not None:
+            result.manifest.sampling[document_published_wording.KEY] = wording
     if writing_checks := document_check_coverage.capture(
         detected.get("detectors", []), PRIMARY_DETECTORS, BINOCULARS_DETECTOR,
         language=detected.get(language_scope.KEY), verified_credentials=verified_credentials,

@@ -29,6 +29,7 @@ from app.evidence import (
     document_passage_position,
     document_pdf_visibility,
     document_percentage_consistency,
+    document_published_wording,
     document_repeat,
     document_scope,
     document_tracked_changes,
@@ -151,6 +152,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         sentences = [asdict(row) for row in segment_within(doc)]
         document_character_review.verify_source(evidence, text, mapping, doc.meta, sentences=sentences)
         document_passage_intervals.verify_source(evidence, text, mapping, sentences, metadata=doc.meta, word_review=doc.word_review)
+    document_published_wording.verify_source(evidence, text, mapping, doc.meta, doc.word_review)
     document_chat_markers.verify_source(evidence, text, mapping, doc.meta)
     from app.evidence import document_check_coverage
 
@@ -237,6 +239,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                         if document_character_review.KEY in coverage else "")
     interval_detail = (" Verified writing passage selection from the saved responses and positions in the original text."
                        if document_passage_intervals.KEY in coverage else "")
+    wording_detail = (" Verified earlier wording against the retained transcript and submitted locations."
+                      if document_published_wording.KEY in coverage else "")
     pdf_visibility = coverage.get(document_pdf_visibility.KEY, {})
     pdf_replacement_detail = (" Verified the PDF copyable-text comparison and retained page locations."
                               if "replacement_examined_pages" in pdf_visibility else "")
@@ -248,4 +252,4 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
             f"{tracked_detail}{word_visibility_detail}{invisible_detail}{character_detail}{interval_detail}{pdf_replacement_detail}"
-            f"{pdf_covered_detail}{percentage_detail}{marker_detail}")
+            f"{pdf_covered_detail}{percentage_detail}{marker_detail}{wording_detail}")

@@ -108,6 +108,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              image_animation_binding.KEY,
                              document_invisible_characters.COMMITMENT, document_chat_markers.COMMITMENT,
                              document_scope.CHARACTER_REVIEW_COMMITMENT, document_scope.PASSAGE_INTERVALS_COMMITMENT,
+                             document_scope.PUBLISHED_WORDING_COMMITMENT,
                              TIMING_COMMITMENT, SOUNDTRACK_PAIR_COMMITMENT},
              'The public result contains unsupported internal fields')
     evidence = _document(archive, names, bundle.get('evidence'), 'evidence.json')
@@ -287,6 +288,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              "Character-adjusted writing requires document evidence")
     _require(analysis["kind"] == "document" or document_scope.PASSAGE_INTERVALS_COMMITMENT not in result,
              "Writing passage intervals require document evidence")
+    _require(analysis["kind"] == "document" or document_scope.PUBLISHED_WORDING_COMMITMENT not in result,
+             "Earlier wording comparisons require document evidence")
     _require(analysis["kind"] == "document" or document_chat_markers.COMMITMENT not in result,
              "Chat-format marker measurements require document evidence")
     _require(analysis['kind'] == 'document' or EMAIL_CLASSIFIER_SCOPE not in result,
@@ -348,6 +351,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             from app.evidence.document_passage_intervals import validate as validate_intervals
 
             validate_intervals(evidence, intervals)
+        wording = result.get(document_scope.PUBLISHED_WORDING_COMMITMENT)
+        _require(evidence["source"].get(document_scope.PUBLISHED_WORDING_COMMITMENT) == wording,
+                 "Earlier wording differs from the public result")
+        if wording is not None or document_scope.PUBLISHED_WORDING_KEY in (evidence.get("coverage") or {}):
+            from app.evidence.document_published_wording import validate as validate_published_wording
+
+            validate_published_wording(evidence, wording)
         document_chat_markers.validate(evidence, result.get(document_chat_markers.COMMITMENT))
         document_email_contexts.validate_commitment(evidence, result.get(document_email_contexts.COMMITMENT),
                                                     published_checks={check["id"] for check in result.get("checks", [])})

@@ -152,13 +152,11 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     """Decode once, preserving the exact checked PCM and its rational source timeline."""
     from app.detectors.video.adapters.common import AudioTrack
     from app.evidence import stereo_listening, stereo_repetition
-    from app.evidence.audio_gain_repetition_binding import GAIN_INPUT, GAIN_VERSION
     from app.evidence.audio_short_review import identical_stereo_proof
-    from app.evidence.stereo_repetition_binding import DIFFERENCE_INPUT
-    from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
 
     source_sha = ctx.outputs["ingest"]["sha256"]
-    decoded = decode_audio(ctx.store.path_for(source_sha), source_sha256=source_sha, max_seconds=AUDIO_MAX_SECONDS,
+    source_path = ctx.store.path_for(source_sha)
+    decoded = decode_audio(source_path, source_sha256=source_sha, max_seconds=AUDIO_MAX_SECONDS,
                            inspect_stereo=True, retain_stereo=True)
     pcm = decoded.pcm
     ctx.check("audio decoding")
@@ -172,13 +170,9 @@ def decode(ctx: StageContext) -> dict[str, Any]:
         listening = stereo_listening.freeze(db, ctx.store, ctx.analysis_id, decoded)
         if listening is not None:
             decoded.mapping["stereo_listening_pcm_sha256"] = listening.sha256
-        repeated = stereo_repetition.freeze(db, ctx.store, ctx.analysis_id, decoded)
+        repeated = stereo_repetition.freeze(db, ctx.store, ctx.analysis_id, decoded, native_source=source_path)
         if repeated is not None:
-            decoded.mapping[STEREO_REPEAT_INPUT] = repeated.sha256
-            if settings.environment == "dev" and settings.audio_stereo_gain_repeat_review:
-                decoded.mapping[GAIN_INPUT] = GAIN_VERSION
-            if (difference_version := settings.stereo_difference_version) is not None:
-                decoded.mapping[DIFFERENCE_INPUT] = difference_version
+            decoded.mapping.update(stereo_repetition.input_binding(repeated))
         mapping = register_artefact(db, ctx.store, canonical_json(decoded.mapping), media_type="application/json", role="stage_output",
                                    created_by="audio-input/1", analysis_id=ctx.analysis_id)
         binding = {"version": "audio-input/1", "pcm_sha256": decoded.mapping["pcm_sha256"],

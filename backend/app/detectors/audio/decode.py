@@ -163,16 +163,43 @@ def _exact_zero_based_clock(log: str, samples: int) -> bool:
         return False
 
 
-def _read_stereo(path: Path, limit: int) -> np.ndarray:
+def _read_stereo(path: Path, limit: int, *, rate: int = SAMPLE_RATE) -> np.ndarray:
     with wave.open(str(path), "rb") as wav:
         count = wav.getnframes()
         if ((wav.getnchannels(), wav.getsampwidth(), wav.getframerate(), wav.getcomptype())
-                != (2, 2, SAMPLE_RATE, "NONE") or not 0 < count <= limit):
+                != (2, 2, rate, "NONE") or not 0 < count <= limit):
             raise ValueError("The stereo evidence PCM format or duration is invalid")
         frames = wav.readframes(count)
         if len(frames) != 4 * count:
             raise ValueError("The stereo evidence PCM is truncated")
     return np.frombuffer(frames, dtype="<i2").reshape(-1, 2)
+
+
+def decode_native_stereo(path: Path, mapping: dict[str, Any]) -> bytes | None:
+    """Keep short lossless 48 kHz sources only when both decoded clocks agree."""
+    from app.evidence.audio_channel_alignment_binding import NATIVE_FACTOR, NATIVE_RATE, native_scope
+
+    if not native_scope(mapping):
+        return None
+    count = mapping["samples"] * NATIVE_FACTOR
+    expected_pts = mapping["timeline"][0]["source_pts"] * NATIVE_FACTOR
+    filters = (f"aformat=sample_fmts=s16,asettb=1/{NATIVE_RATE},atrim=end_sample={count + 1},"
+               "ashowinfo,asetpts=N/SR/TB")
+    try:
+        with tempfile.TemporaryDirectory() as temp:
+            output = Path(temp) / "native-stereo.wav"
+            run = subprocess.run(
+                ["ffmpeg", "-nostdin", "-v", "info", "-y", "-protocol_whitelist", "file", "-copyts", "-i", _input(path),
+                 "-map", f"0:{mapping['source_stream_index']}", "-af", filters, "-vn", "-c:a", "pcm_s16le", "-f", "wav", str(output)],
+                capture_output=True, text=True, timeout=20, check=True, stdin=subprocess.DEVNULL,
+            )
+            pcm = _read_stereo(output, count + 1, rate=NATIVE_RATE)
+        if (len(pcm) != count or _mapping(run.stderr, count) != [
+                {"start_sample": 0, "end_sample": count, "source_pts": expected_pts}]):
+            return None
+    except (subprocess.SubprocessError, OSError, ValueError, wave.Error, EOFError):
+        return None
+    return pcm.tobytes()
 
 
 def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,

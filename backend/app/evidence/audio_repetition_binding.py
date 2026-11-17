@@ -43,12 +43,12 @@ def _timeline(source: dict[str, Any], samples: int) -> list[dict[str, int]]:
     return timeline
 
 
-def _sample_range(span: dict[str, Any], *, samples: int, source_pts: int) -> tuple[int, int]:
+def _sample_range(span: dict[str, Any], *, samples: int, source_pts: int, time_base: str = "1/16000") -> tuple[int, int]:
     start, end = span["start_sample"], span["end_sample"]
     if type(start) is not int or type(end) is not int or not 0 <= start < end <= samples:
         raise ValueError("Repetition interval is outside decoded audio")
     expected = [{"start_sample": start, "end_sample": end, "source_start_pts": source_pts + start,
-                 "source_end_pts": source_pts + end, "time_base": "1/16000"}]
+                 "source_end_pts": source_pts + end, "time_base": time_base}]
     if span["source_timestamp_ranges"] != expected:
         raise ValueError("Repetition intervals differ from the recorded source timestamps")
     return start, end

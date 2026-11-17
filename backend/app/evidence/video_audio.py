@@ -14,7 +14,7 @@ from app.evidence.audio_binding import (
     VOICE_CLOCK_POLICY,
     mono_voice_coverage_limit,
 )
-from app.evidence.audio_gain_repetition_binding import GAIN_INPUT, GAIN_VERSION
+from app.evidence.audio_gain_repetition_binding import GAIN_INPUT
 from app.evidence.av_binding import TIMING_WINDOWS
 from app.evidence.stereo_binding import destructive_downmix_windows
 from app.evidence.stereo_repetition_binding import DIFFERENCE_INPUT
@@ -41,12 +41,8 @@ def freeze_input(ctx, decoded, *, path=None) -> dict:
             # Preserve the mono-only mapping hash used by the AV timing proof.
             binding['stereo_listening_pcm_sha256'] = listening.sha256
             objects.append(listening)
-        if repeated := stereo_repetition.freeze(db, ctx.store, ctx.analysis_id, decoded):
-            binding[STEREO_REPEAT_INPUT] = repeated.sha256
-            if settings.environment == 'dev' and settings.audio_stereo_gain_repeat_review:
-                binding[GAIN_INPUT] = GAIN_VERSION
-            if (difference_version := settings.stereo_difference_version) is not None:
-                binding[DIFFERENCE_INPUT] = difference_version
+        if repeated := stereo_repetition.freeze(db, ctx.store, ctx.analysis_id, decoded, native_source=path):
+            binding.update(stereo_repetition.input_binding(repeated))
             objects.append(repeated)
         if (path is not None and settings.environment == 'dev' and settings.video_soundtrack_pair_review
                 and len(source_mapping.get('audio_stream_indices', [])) == 2):

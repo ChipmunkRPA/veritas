@@ -60,6 +60,20 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Native 48 kHz stereo repeat evidence](audio-native-alignment-2026-11-17.md)
+  finds 20 of 32 staged repeats at each of two louder-speech levels,
+  versus zero with the existing mono checks and five and zero after
+  aligning reduced samples at 16 kHz. It adds no control highlights
+  across 128 files, of which it assessed 81. The local worker shows both
+  source-clocked excerpts and waveforms on eligible audio and video.
+
+- [Local loss of an earlier JPEG grid](image-previous-grid-2026-11-17.md)
+  raises correct JPEG90 regions from 4 to 11 of 24 when added after
+  the existing checks. It highlights three more ordinary blur
+  controls. Stronger JPEG75 compression did not leave useful evidence
+  for the candidate. The independently replayable result supports a
+  scoped comparison based on compression history.
+
 - [Earlier wording in two-column PDFs](writing-pdf-columns-2026-11-17.md)
   localizes 174 of 216 known rewrite deliveries on 36 fresh report pairs
   rendered in two layouts. It records zero wording differences on 72

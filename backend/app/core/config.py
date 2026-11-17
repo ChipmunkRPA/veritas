@@ -143,6 +143,7 @@ class Settings(BaseSettings):
     audio_stereo_gain_repeat_review: bool = False
     audio_stereo_difference_repeat_review: bool = False
     audio_stereo_aligned_repeat_review: bool = False
+    audio_stereo_native_repeat_review: bool = False  # development-only alignment of short lossless 48 kHz stereo
 
     @property
     def stereo_difference_version(self) -> int | None:

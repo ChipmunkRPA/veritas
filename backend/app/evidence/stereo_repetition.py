@@ -9,7 +9,7 @@ from copy import deepcopy
 
 import numpy as np
 
-from app.detectors.audio.decode import source_ranges, wav_bytes
+from app.detectors.audio.decode import decode_native_stereo, source_ranges, wav_bytes
 from app.evidence import audio_channel_alignment_binding as alignment
 from app.evidence import audio_channel_difference as difference
 from app.evidence import audio_exact_repetition, audio_repetition
@@ -19,10 +19,14 @@ from app.evidence.stereo_repetition_binding import (
     ALIGNED_SCHEMA,
     ALIGNED_VERSION,
     CHANNELS,
+    DIFFERENCE_INPUT,
     DIFFERENCE_KEY,
     DIFFERENCE_SCHEMA,
     DIFFERENCE_VERSION,
+    INPUT,
     KEY,
+    NATIVE_ALIGNED_SCHEMA,
+    NATIVE_ALIGNED_VERSION,
     SCHEMA,
     validate,
 )
@@ -42,11 +46,31 @@ def native_pcm(decoded):
     return channels.astype("<i2", copy=False).tobytes()
 
 
-def freeze(db, store, analysis_id, decoded):
-    if (pcm := native_pcm(decoded)) is None:
+def freeze(db, store, analysis_id, decoded, *, native_source=None):
+    from app.core.config import settings
+
+    pcm = native_pcm(decoded)
+    schema = SCHEMA
+    if pcm is None and native_source is not None and settings.environment == "dev" and settings.audio_stereo_native_repeat_review:
+        pcm = decode_native_stereo(native_source, decoded.mapping)
+        schema = NATIVE_ALIGNED_SCHEMA
+    if pcm is None:
         return None
     return register_artefact(db, store, pcm, media_type="application/octet-stream", role="stage_output",
-                             created_by=SCHEMA, analysis_id=analysis_id)
+                             created_by=schema, analysis_id=analysis_id)
+
+
+def input_binding(artefact):
+    from app.core.config import settings
+
+    result = {INPUT: artefact.sha256}
+    if artefact.created_by == NATIVE_ALIGNED_SCHEMA:
+        return result | {DIFFERENCE_INPUT: NATIVE_ALIGNED_VERSION}
+    if settings.environment == "dev" and settings.audio_stereo_gain_repeat_review:
+        result[gain.GAIN_INPUT] = gain.GAIN_VERSION
+    if (version := settings.stereo_difference_version) is not None:
+        result[DIFFERENCE_INPUT] = version
+    return result
 
 
 def _build_gain(values, source, mapping, channel, pcm_sha256, asset):
@@ -96,24 +120,32 @@ def _build_exact(values, source, mapping, asset, prefix, title):
     return measurement
 
 
-def _stereo_wav(data):
+def _pcm_wav(data, *, rate=audio_exact_repetition.SAMPLE_RATE, channels=2):
     output = io.BytesIO()
     with wave.open(output, "wb") as audio:
-        audio.setparams((2, 2, audio_exact_repetition.SAMPLE_RATE, 0, "NONE", "not compressed"))
+        audio.setparams((channels, 2, rate, 0, "NONE", "not compressed"))
         audio.writeframes(data)
     return output.getvalue()
 
 
-def _build_aligned(data, channels, source, mapping, asset, *, exact_found):
+def _build_aligned(data, channels, source, mapping, asset, *, exact_found, native=False):
     from app.evidence import audio_channel_alignment
     from app.evidence.audio_packets import _chart
 
-    status = {"schema": alignment.SCHEMA, "source_sha256": source["sha256"],
-              "sample_rate": alignment.SAMPLE_RATE, "input_samples": len(channels), "projection": alignment.PROJECTION,
+    factor = alignment.NATIVE_FACTOR if native else 1
+    rate = alignment.SAMPLE_RATE * factor
+    status = {"schema": alignment.NATIVE_SCHEMA if native else alignment.SCHEMA, "source_sha256": source["sha256"],
+              "sample_rate": rate, "input_samples": len(channels), "projection": alignment.PROJECTION,
               "alignment": None, "pcm_sha256": None, "searched_interval": None, "pairs": []}
     if exact_found:
         return status | {"status": "skipped", "reason": "exact_channel_difference_found"}
-    fitted, reason, spans = audio_channel_alignment.search(channels)
+    if native:
+        from app.evidence import audio_native_alignment
+
+        fitted, reason, spans = audio_native_alignment.search(channels)
+    else:
+        fitted, reason, located = audio_channel_alignment.search(channels)
+        spans = [(span.first, span.second) for span in located]
     status.update(status=alignment.STATUSES[reason], reason=reason, alignment=vars(fitted) if fitted else None)
     if fitted is None or status["status"] == "skipped":
         return status
@@ -124,26 +156,33 @@ def _build_aligned(data, channels, source, mapping, asset, *, exact_found):
                   pcm_sha256=hashlib.sha256(values.tobytes()).hexdigest())
 
     def span_record(start, end, payload):
-        return {"start_sample": start, "end_sample": end, "source_timestamp_ranges": source_ranges(mapping, start, end),
+        if native:
+            origin = mapping["timeline"][0]["source_pts"] * factor
+            ranges = [{"start_sample": start, "end_sample": end, "source_start_pts": origin + start,
+                       "source_end_pts": origin + end, "time_base": f"1/{rate}"}]
+        else:
+            ranges = source_ranges(mapping, start, end)
+        return {"start_sample": start, "end_sample": end, "source_timestamp_ranges": ranges,
                 "pcm_s16le_sha256": hashlib.sha256(payload).hexdigest()}
 
-    for index, span in enumerate(spans, 1):
-        count = span.first[1] - span.first[0]
-        pair = {"id": f"AR{index:02d}", "sample_count": count, "lag_samples": span.second[0] - span.first[0],
+    for index, (first, second) in enumerate(spans, 1):
+        count = first[1] - first[0]
+        pair = {"id": f"AR{index:02d}", "sample_count": count, "lag_samples": second[0] - first[0],
                 "artifacts": {}}
-        for side, (start, end) in (("first", span.first), ("second", span.second)):
+        for side, (start, end) in (("first", first), ("second", second)):
             a, b = alignment.excerpt_range(start, end, shift)
             original = data[4 * a:4 * b]
-            selected = values[start:end]
-            pair[side] = span_record(start, end, selected.tobytes()) | {"recorded_excerpt": span_record(a, b, original)}
-            pcm = selected.astype("<f4") / np.float32(32768)
+            selected = values[start:end].tobytes()
+            pair[side] = span_record(start, end, selected) | {"recorded_excerpt": span_record(a, b, original)}
+            pcm = values[start:end:factor].astype("<f4") / np.float32(32768)
             pair["artifacts"][f"{side}_recorded_clip"] = asset(
-                _stereo_wav(original), "audio/wav", samples=b - a, sample_rate=alignment.SAMPLE_RATE, channels=2)
+                _pcm_wav(original, rate=rate), "audio/wav", samples=b - a, sample_rate=rate, channels=2)
+            clip = _pcm_wav(selected, rate=rate, channels=1) if native else wav_bytes(pcm)
             pair["artifacts"][f"{side}_clip"] = asset(
-                wav_bytes(pcm), "audio/wav", samples=count, sample_rate=alignment.SAMPLE_RATE, channels=1)
+                clip, "audio/wav", samples=count, sample_rate=rate, channels=1)
             pair["artifacts"][f"{side}_waveform"] = asset(
-                _chart(pcm, [], start=0, end=count, selected=None, scores=False,
-                       title=f"Sound after stereo alignment | {side.capitalize()} occurrence"),
+                _chart(pcm, [], start=0, end=len(pcm), selected=None, scores=False,
+                       title=f"Sound after stereo alignment | {side.capitalize()} occurrence", peak_scaled=native),
                 "image/png", width=960, height=280,
             )
         status["pairs"].append(pair)
@@ -151,13 +190,21 @@ def _build_aligned(data, channels, source, mapping, asset, *, exact_found):
 
 
 def build(data, source, mapping, asset, *, gain_version=None, difference_version=None):
-    if len(data) != 4 * source["samples"]:
+    native = difference_version == NATIVE_ALIGNED_VERSION
+    factor = alignment.NATIVE_FACTOR if native else 1
+    if len(data) != 4 * source["samples"] * factor:
         raise ValueError("Stereo samples do not cover the complete recorded clock")
     if source_ranges(mapping, 0, source["samples"]) != source_ranges(source, 0, source["samples"]):
         raise ValueError("Stereo repetition source clocks differ")
-    if difference_version not in (None, DIFFERENCE_VERSION, ALIGNED_VERSION):
+    if difference_version not in (None, DIFFERENCE_VERSION, ALIGNED_VERSION, NATIVE_ALIGNED_VERSION):
         raise ValueError("Unknown stereo repetition difference method")
     channels = np.frombuffer(data, dtype="<i2").reshape(-1, 2)
+    if native:
+        record = {"schema": NATIVE_ALIGNED_SCHEMA, "source_sha256": source["sha256"], "affects_overall_confidence": False,
+                  "stereo_pcm_sha256": hashlib.sha256(data).hexdigest(), "channels": [],
+                  ALIGNED_KEY: _build_aligned(data, channels, source, mapping, asset, exact_found=False, native=True)}
+        validate(record, source)
+        return record
     rows = []
     for channel, values in zip(CHANNELS, channels.T, strict=True):
         measurement = _build_exact(values, source, mapping, asset, channel[0].upper(), f"Recorded {channel} channel waveform")
@@ -173,7 +220,7 @@ def build(data, source, mapping, asset, *, gain_version=None, difference_version
         for pair in measurement["pairs"]:
             for side in ("first", "second"):
                 span = pair[side]
-                original = _stereo_wav(data[4 * span["start_sample"]:4 * span["end_sample"]])
+                original = _pcm_wav(data[4 * span["start_sample"]:4 * span["end_sample"]])
                 pair["artifacts"][f"{side}_recorded_clip"] = asset(original, "audio/wav", samples=pair["sample_count"],
                                                                    sample_rate=audio_exact_repetition.SAMPLE_RATE, channels=2)
         record.update(schema=DIFFERENCE_SCHEMA, difference_projection=difference.PROJECTION)

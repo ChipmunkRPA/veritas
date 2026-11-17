@@ -13,6 +13,17 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [native 48 kHz stereo replay](audio-native-alignment-2026-11-17.md#app-and-independent-replay)
+reconstructs 288 exact audio files and tests two repeat locations on the
+original sample clock. The manifest covers louder speech, shifted channels,
+ordinary sound replacements, and unmodified stereo. The app replay also
+checks a video with an offset audio track.
+
+The [earlier JPEG grid comparison](image-previous-grid-2026-11-17.md#independent-replay)
+reconstructs 216 held files and checks each proposed rectangle against the
+original changed pixels. Reviewers can compare another localizer on the
+same insertion, blur, resize, and unchanged cases.
+
 The [short native soundtrack replay](video-short-native-soundtrack-2026-11-16.md#independent-replay)
 rebuilds 288 playable videos from 24 source recordings, verifies every
 sample clock and picture timestamp, and recounts local evidence across 432

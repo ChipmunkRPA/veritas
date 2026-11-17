@@ -187,24 +187,35 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError(str(error)) from error
         intervals += sum(len(assets) - 1 for assets in all_artifacts(listening))
     if repeated is not None:
+        from app.detectors.audio.decode import decode_native_stereo
         from app.evidence.audio_gain_repetition_binding import GAIN_VERSION
         from app.evidence.stereo_repetition import native_pcm, verify
-        from app.evidence.stereo_repetition_binding import ALIGNED_VERSION, DIFFERENCE_VERSIONS, pairs
+        from app.evidence.stereo_repetition_binding import (
+            ALIGNED_VERSION,
+            DIFFERENCE_VERSIONS,
+            NATIVE_ALIGNED_VERSION,
+            pairs,
+        )
 
-        if (data := native_pcm(decoded)) is None:
+        difference_version = DIFFERENCE_VERSIONS.get(repeated["schema"])
+        use_native = difference_version == NATIVE_ALIGNED_VERSION
+        data = decode_native_stereo(original, decoded.mapping) if use_native else native_pcm(decoded)
+        if data is None:
             raise ValueError("The original does not yield aligned native stereo samples for the repeat check")
         paths = {entry["sha256"]: entry["file"] for entry in bundle["artifacts"]}
-        gain_version = GAIN_VERSION if 'gain_measurement' in repeated['channels'][0] else None
-        difference_version = DIFFERENCE_VERSIONS.get(repeated["schema"])
+        gain_version = GAIN_VERSION if any("gain_measurement" in channel for channel in repeated["channels"]) else None
         verify(repeated, data, source, decoded.mapping, lambda digest: archive.read(paths[digest]),
                gain_version=gain_version, difference_version=difference_version)
         for pair in pairs(repeated):
             covered.update(asset["sha256"] for asset in pair["artifacts"].values() if asset["media_type"] == "audio/wav")
             intervals += 2
-        replay_detail += " Recomputed the exact repeat search on both recorded stereo channels."
+        if use_native:
+            replay_detail += " Recomputed repeated-sound evidence and original excerpts on the 48 kHz stereo clock."
+        else:
+            replay_detail += " Recomputed the exact repeat search on both recorded stereo channels."
         if gain_version is not None:
             replay_detail += " Recomputed gain-adjusted repeats on both recorded stereo channels."
-        if difference_version is not None:
+        if difference_version is not None and not use_native:
             replay_detail += " Recomputed the stereo channel difference and verified its repeats against both recorded excerpts."
         if difference_version == ALIGNED_VERSION:
             replay_detail += " Recomputed repeated-sound evidence with the stereo channels aligned."

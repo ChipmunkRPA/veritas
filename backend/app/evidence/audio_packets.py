@@ -556,15 +556,20 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
     )
     from app.evidence.audio_gain_repetition_binding import GAIN_INPUT
     from app.evidence.stereo_repetition import build_from_store
-    from app.evidence.stereo_repetition_binding import DIFFERENCE_INPUT
+    from app.evidence.stereo_repetition_binding import DIFFERENCE_INPUT, NATIVE_ALIGNED_VERSION
     from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
 
     if digest := binding.get(STEREO_REPEAT_INPUT) or mapping.get(STEREO_REPEAT_INPUT):
+        version = binding.get(DIFFERENCE_INPUT) or mapping.get(DIFFERENCE_INPUT)
+        if version == NATIVE_ALIGNED_VERSION:
+            from app.evidence.audio_short_review_binding import source_metadata
+
+            document["source"].update(source_metadata(mapping))
         document["stereo_repetition"] = build_from_store(
             store, digest, document["source"], mapping,
             lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),
             gain_version=binding.get(GAIN_INPUT) or mapping.get(GAIN_INPUT),
-            difference_version=binding.get(DIFFERENCE_INPUT) or mapping.get(DIFFERENCE_INPUT),
+            difference_version=version,
         )
     document["similarity_context"] = build_similarity(
         pcm, mapping, document["source"],

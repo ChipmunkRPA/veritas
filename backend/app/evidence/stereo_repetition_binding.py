@@ -14,12 +14,16 @@ INPUT = "stereo_repetition_pcm_sha256"
 SCHEMA = "chipmunk.stereo-exact-repetition/1"
 DIFFERENCE_SCHEMA = "chipmunk.stereo-exact-repetition/2"
 ALIGNED_SCHEMA = "chipmunk.stereo-exact-repetition/3"
+NATIVE_ALIGNED_SCHEMA = "chipmunk.stereo-exact-repetition/4"
 DIFFERENCE_INPUT = "stereo_repetition_difference_version"
 DIFFERENCE_VERSION = 1
 ALIGNED_VERSION = 2
+NATIVE_ALIGNED_VERSION = 3
 DIFFERENCE_KEY = "difference_measurement"
 ALIGNED_KEY = "aligned_measurement"
-DIFFERENCE_VERSIONS = {DIFFERENCE_SCHEMA: DIFFERENCE_VERSION, ALIGNED_SCHEMA: ALIGNED_VERSION}
+DIFFERENCE_VERSIONS = {
+    DIFFERENCE_SCHEMA: DIFFERENCE_VERSION, ALIGNED_SCHEMA: ALIGNED_VERSION, NATIVE_ALIGNED_SCHEMA: NATIVE_ALIGNED_VERSION,
+}
 CHANNELS = ("left", "right")
 
 
@@ -59,6 +63,14 @@ def _validate_measurement(measurement, source, prefix, *, difference=False):
 def validate(record, source):
     try:
         schema = record["schema"]
+        if schema == NATIVE_ALIGNED_SCHEMA:
+            if (record["affects_overall_confidence"] is not False or record["source_sha256"] != source["sha256"]
+                    or not _valid_hash(record["stereo_pcm_sha256"]) or record["channels"] != []
+                    or DIFFERENCE_KEY in record or "difference_projection" in record
+                    or record[ALIGNED_KEY]["schema"] != alignment.NATIVE_SCHEMA):
+                raise ValueError("Native stereo repetition does not match the source or its check")
+            alignment.validate(record[ALIGNED_KEY], source, exact_found=False)
+            return
         if (schema not in {SCHEMA, *DIFFERENCE_VERSIONS} or record["affects_overall_confidence"] is not False
                 or record["source_sha256"] != source["sha256"] or source["source_channels"] != 2
                 or source["source_sample_rate"] != SAMPLE_RATE or source["sample_rate"] != SAMPLE_RATE
@@ -81,6 +93,8 @@ def validate(record, source):
         elif DIFFERENCE_KEY in record or "difference_projection" in record:
             raise ValueError("Unexpected audio channel difference evidence")
         if schema == ALIGNED_SCHEMA:
+            if record[ALIGNED_KEY]["schema"] != alignment.SCHEMA:
+                raise ValueError("Aligned stereo evidence requires its historical sample clock")
             alignment.validate(record[ALIGNED_KEY], source, exact_found=bool(record[DIFFERENCE_KEY]["pairs"]))
         elif ALIGNED_KEY in record:
             raise ValueError("Unexpected aligned stereo repetition evidence")

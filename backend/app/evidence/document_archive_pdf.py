@@ -10,7 +10,7 @@ SCOPE = ("The PDF comparison reads visible selectable text in a clear reading or
          "Image text and formatting are outside this comparison. Page crops highlight source word boxes.")
 
 
-def compare(data: bytes, upload_sha256: str, *, gao_archive=None):
+def compare(data: bytes, upload_sha256: str, *, gao_archive=None, resolve_competition=False):
     with TemporaryDirectory(prefix="chipmunk-archive-pdf-") as directory:
         path = Path(directory) / "retained.pdf"
         doc = document_revision_pdf.extract_native(path, data, visible_text_only=True)
@@ -19,7 +19,8 @@ def compare(data: bytes, upload_sha256: str, *, gao_archive=None):
             doc.text, doc.source_map, page_limit=limit, single_column=True,
         ):
             raise ValueError("Use a PDF with visible selectable text in a clear reading order.")
-        result = (document_gao_archive.compare(doc, upload_sha256, *gao_archive) if gao_archive is not None
+        result = (document_gao_archive.compare(doc, upload_sha256, *gao_archive, resolve_competition=resolve_competition)
+                  if gao_archive is not None
                   else document_archive.compare(doc, upload_sha256))
         result["scope"] += " " + SCOPE
         if result["status"] != "reference_bound":

@@ -28,18 +28,30 @@ GAO_SHA256 = "671287085feaa971c501be2e2db7d50a36ca2a9adba0642c9540f4add35b341e"
 GAO_REVIEW_PER_GENERATOR = 16
 
 
-def exposed_reports(folder):
+def exposed_reports(folder, *, commitments=None):
     reports, digests, inputs = set(), set(), {}
-    for path in sorted(folder.iterdir()):
+    if commitments is None:
+        paths = sorted(folder.iterdir())
+    else:
+        if any(Path(name).name != name for name in commitments):
+            raise ValueError("Exposure commitments must name receipt files in the public panel folder")
+        paths = sorted(folder / name for name in commitments)
+    for path in paths:
         if (not path.name.startswith(("writing-", "text-", "document-gao-"))
-                or path.suffix not in {".gz", ".json"} or path.name.startswith("writing-report-confirmation-")):
+                or path.suffix not in {".gz", ".json"} or path.name.startswith(
+                    ("writing-report-confirmation-", "writing-short-intervals-", "writing-archive-competition-"),
+                )):
             continue
         data = path.read_bytes()
         inputs[path.name] = panel.digest(data)
+        if commitments is not None and inputs[path.name] != commitments[path.name]:
+            raise ValueError("An earlier result differs from its recorded study exposure")
         content = gzip.decompress(data) if path.suffix == ".gz" else data
         for identifier in re.findall(rb"(?:GAO_|gao\.gov/products/)([A-Za-z]+-[0-9A-Za-z-]+)", content, re.I):
             reports.add(identifier.decode().upper())
         digests.update(value.decode() for value in re.findall(rb'\b[0-9a-f]{64}\b', content))
+    if commitments is not None and inputs.keys() != commitments.keys():
+        raise ValueError("Some recorded exposure receipts could not be replayed")
     return reports, digests, inputs
 
 
@@ -62,9 +74,46 @@ def test_pairs(path, family, split, digest):
     return sources
 
 
-def gao(cache, pack, output, *, additional=None):
+def verified_gao_work(key, versions, authority, family, split, *, max_edits=2, changed_only=False):
     from scripts.writing_revision_trajectory_transfer import publisher_case
 
+    original, altered = versions["v0"], versions["v1"]
+    if (not authority or authority["published_date"] > "2020-12-31"
+            or panel.compact(authority["text"]) != panel.compact(original["text"])):
+        return None, "unbound_original"
+    try:
+        seed, ordinary_truth = publisher_case(original)
+        edit, truth = publisher_case(altered)
+    except ValueError:
+        return None, "invalid_publisher_coordinates"
+    starts, revised = (json.loads(row["sentences"]) for row in (original, altered))
+    labels = json.loads(altered["sentence_labels"])
+    if ordinary_truth or len(starts) != len(revised):
+        return None, "unsupported_edit_geometry"
+    deltas = [(before != after, mark) for before, after, mark in zip(starts, revised, labels, strict=True)]
+    if any(changed and not mark for changed, mark in deltas):
+        return None, "unsupported_edit_geometry"
+    kept = [span for span, changed in zip(truth, (change for change, mark in deltas if mark), strict=True) if changed]
+    if changed_only:
+        truth = kept
+    if len(truth) != len(kept) or not 1 <= len(truth) <= max_edits:
+        return None, "unsupported_edit_geometry"
+    untouched = variants(seed, (), version="ordinary")
+    synthetic = variants(edit, truth, version="mixed", generator=family)
+    if untouched is None or synthetic is None:
+        return None, "unsupported_extraction"
+    reference_id = key.removeprefix("GAO_").lower()
+    return {
+        "document": key, "group_sha256": panel.digest(key.encode()), "split": "test", "genre": "gao_report",
+        "source_reference": f"https://www.gao.gov/products/{reference_id}",
+        "source_record_sha256": authority["source_record_sha256"], "publisher_split": split,
+        "published_date": authority["published_date"],
+        "publisher_ids": {version: row["record_id"] for version, row in versions.items()},
+        "variants": untouched + synthetic,
+    }, None
+
+
+def gao(cache, pack, output, *, additional=None):
     if panel.digest(pack.read_bytes()) != GAO_SHA256:
         raise ValueError("Expected the independently pinned GovReport highlights")
     upstream = panel.read(pack)
@@ -89,37 +138,11 @@ def gao(cache, pack, output, *, additional=None):
             if reference_id in previous or document_hashes & digests:
                 rejected["earlier_source_or_text"] += 1
                 continue
-            authority = upstream["reports"].get(reference_id)
-            if (not authority or authority["published_date"] > "2020-12-31"
-                    or panel.compact(authority["text"]) != panel.compact(original["text"])):
-                rejected["unbound_original"] += 1
+            work, reason = verified_gao_work(key, versions, upstream["reports"].get(reference_id), family, split)
+            if work is None:
+                rejected[reason] += 1
                 continue
-            try:
-                seed, ordinary_truth = publisher_case(original)
-                edit, truth = publisher_case(altered)
-            except ValueError:
-                rejected["invalid_publisher_coordinates"] += 1
-                continue
-            starts, revised = (json.loads(row["sentences"]) for row in (original, altered))
-            labels = json.loads(altered["sentence_labels"])
-            if ordinary_truth or not 1 <= len(truth) <= 2 or len(starts) != len(revised) or not all(
-                (before != after) == bool(mark) for before, after, mark in zip(starts, revised, labels, strict=True)
-            ):
-                rejected["unsupported_edit_geometry"] += 1
-                continue
-            untouched = variants(seed, (), version="ordinary")
-            synthetic = variants(edit, truth, version="mixed", generator=family)
-            if untouched is None or synthetic is None:
-                rejected["unsupported_extraction"] += 1
-                continue
-            works.append({
-                "document": key, "group_sha256": panel.digest(key.encode()), "split": "test", "genre": "gao_report",
-                "source_reference": f"https://www.gao.gov/products/{reference_id.lower()}",
-                "source_record_sha256": authority["source_record_sha256"], "publisher_split": split,
-                "published_date": authority["published_date"],
-                "publisher_ids": {version: row["record_id"] for version, row in versions.items()},
-                "variants": untouched + synthetic,
-            })
+            works.append(work)
             previous.add(reference_id)
             additions[family] += 1
     panel.save(output, {"schema": SCHEMA, "opai_revision": OPAI_REVISION,

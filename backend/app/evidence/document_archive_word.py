@@ -149,9 +149,10 @@ def _change_locations(doc, change, *, allow_multi_paragraph, allow_boundary_dele
 
 
 def compare_gao(data: bytes, upload_sha256: str, pack_sha256: str, reports, index, *,
-                allow_multi_paragraph=True, allow_boundary_deletion=True) -> dict:
+                allow_multi_paragraph=True, allow_boundary_deletion=True, resolve_competition=False) -> dict:
     doc = _body(data)
-    result = document_gao_archive.compare(doc, upload_sha256, pack_sha256, reports, index)
+    result = document_gao_archive.compare(doc, upload_sha256, pack_sha256, reports, index,
+                                          resolve_competition=resolve_competition)
     result["scope"] += " " + WORD_SCOPE + (GAO_WORD_SCOPE if allow_multi_paragraph else LEGACY_GAO_WORD_SCOPE)
     if allow_multi_paragraph and allow_boundary_deletion:
         result["scope"] += GAO_WORD_BOUNDARY_SCOPE

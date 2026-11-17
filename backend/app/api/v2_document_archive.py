@@ -243,13 +243,16 @@ def _compare(aid: str, owner: str, original: tuple[str, int, str, str], include_
         raise ProblemError(409, "Original integrity check failed", "The retained document differs from its recorded hash and size.")
     try:
         gao_archive = None
+        resolve_competition = False
         if collection == "gao":
             pack_sha256 = settings.document_gao_archive_sha256
             gao_archive = (pack_sha256, *document_gao_archive.library(settings.document_gao_archive_path, pack_sha256))
+            resolve_competition = settings.document_gao_archive_resolve_competition
         if extension == ".pdf":
-            comparison = document_archive_pdf.compare(data, sha, gao_archive=gao_archive)
+            comparison = document_archive_pdf.compare(data, sha, gao_archive=gao_archive, resolve_competition=resolve_competition)
         elif extension == ".docx":
-            comparison = (document_archive_word.compare_gao(data, sha, *gao_archive) if gao_archive is not None
+            comparison = (document_archive_word.compare_gao(data, sha, *gao_archive, resolve_competition=resolve_competition)
+                          if gao_archive is not None
                           else document_archive_word.compare(data, sha))
         else:
             with TemporaryDirectory(prefix="chipmunk-archive-") as directory:
@@ -258,7 +261,8 @@ def _compare(aid: str, owner: str, original: tuple[str, int, str, str], include_
                 doc = extract(path, ".txt")
                 if "\ufffd" in doc.text or "\x00" in doc.text:
                     raise ValueError("The file contains undecodable text.")
-                comparison = (document_gao_archive.compare(doc, sha, *gao_archive) if gao_archive is not None
+                comparison = (document_gao_archive.compare(doc, sha, *gao_archive, resolve_competition=resolve_competition)
+                              if gao_archive is not None
                               else document_archive.compare(doc, sha))
     except document_archive.ArchiveUnavailable:
         raise ProblemError(503, "Archive library unavailable", "The local archive library could not be verified.") from None

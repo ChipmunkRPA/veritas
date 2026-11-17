@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Short edits in government reports](writing-short-intervals-2026-11-16.md)
+  tests sentence-scale selection on 212 labeled locations from 69 held
+  reports. The selected writing-style candidate adds three locations
+  and seven false highlights. Resolving brief competing archive
+  matches instead raises correct wording locations from 144 to 161,
+  with zero difference flags on the untouched paired reports.
+
 - [Confirming writing highlights in economic reports](writing-report-confirmation-2026-11-16.md)
   applies the economic-report reference only when the document fits its
   writing profile. It clears two false highlights among 24 fresh Board

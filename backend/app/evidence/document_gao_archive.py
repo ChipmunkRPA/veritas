@@ -36,6 +36,8 @@ SCOPE = ("Compares wording in the bounded passage of a matching U.S. Government 
          "as transcribed in the pinned GovReport dataset. The comparison excludes recommendations and text outside matched boundaries.")
 INTERPRETATION = ("Differences describe wording relative to the cited source. Ordinary edits can produce the same evidence. "
                   "This comparison carries zero AI-authorship weight.")
+COMPETITION_SCOPE = ("A second archive source matched a small part of the differing wording. Exact matches to the cited "
+                     "source surround those differences and cover most of the uploaded passage.")
 _CHARACTERS = str.maketrans({"’": "'", "“": '"', "”": '"'})
 
 
@@ -102,7 +104,7 @@ def library(path: Path, sha256: str):
     return reports, build_index(reports)
 
 
-def _votes(query, packed_index, reports):
+def _votes(query, packed_index, reports, *, complete=False):
     keys, locations, identities = packed_index
     votes = defaultdict(list)
     cached = {}
@@ -120,9 +122,24 @@ def _votes(query, packed_index, reports):
             cached[key] = token_values(token_stream(reports[key]["text"]))
         if query[start:start + WINDOW] == cached[key][position:position + WINDOW]:
             votes[key].append((start, position))
-            if len(votes) > 1:
+            if len(votes) > 1 and not complete:
                 break
     return votes, cached
+
+
+def _competing_source(votes, extent):
+    def covered(anchors):
+        return {position for start, _ in anchors for position in range(start, start + WINDOW)}
+
+    support = {source: covered(anchors) for source, anchors in votes.items()}
+    source = max(support, key=lambda item: len(support[item]))
+    others = [start for other, anchors in votes.items() if other != source for start, _ in anchors]
+    stray = covered((start, 0) for start in others)
+    first, last = votes[source][0][0], votes[source][-1][0] + WINDOW
+    if (3 * len(support[source]) < 2 * extent or len(stray) > min(32, extent // 10)
+            or first > extent // 8 or extent - last > extent // 8):
+        return None, ()
+    return source, others
 
 
 def _span(stream, start, end):
@@ -152,7 +169,8 @@ def _context_ranges(doc, changes):
     return ranges
 
 
-def compare(doc: Document, upload_sha256: str, pack_sha256: str, reports, packed_index, *, accept_exact_excerpt=True):
+def compare(doc: Document, upload_sha256: str, pack_sha256: str, reports, packed_index, *, accept_exact_excerpt=True,
+            resolve_competition=False):
     text = doc.text
     output = {
         "schema": SCHEMA, "status": "out_of_scope", "scope": SCOPE, "interpretation": INTERPRETATION,
@@ -174,13 +192,20 @@ def compare(doc: Document, upload_sha256: str, pack_sha256: str, reports, packed
     words = token_values(stream)
     output["coverage"]["body_words"] = len(words)
     output["status"] = "no_qualified_reference"
-    votes, cached = _votes(words, packed_index, reports)
-    if len(votes) > 1:
-        output["status"] = "ambiguous_reference"
-        return output
+    votes, cached = _votes(words, packed_index, reports, complete=resolve_competition)
     if not votes:
         return output
-    source_id, anchors = next(iter(votes.items()))
+    competing = ()
+    if len(votes) > 1:
+        output["status"] = "ambiguous_reference"
+        if not resolve_competition:
+            return output
+        source_id, competing = _competing_source(votes, len(words))
+        if source_id is None:
+            return output
+    else:
+        source_id = next(iter(votes))
+    anchors = votes[source_id]
     support = len({i for start, _ in anchors for i in range(start, start + WINDOW)})
     if support < 40 or support * 100 < len(words) * 55 or anchors[-1][0] - anchors[0][0] < 24:
         return output
@@ -195,6 +220,10 @@ def compare(doc: Document, upload_sha256: str, pack_sha256: str, reports, packed
     first, last = anchors[0][0] + WINDOW, anchors[-1][0]
     changes = [(a, b, c, d) for tag, a, b, c, d in opcodes if tag != "equal" and first <= c <= d <= last
                and max(b - a, d - c) <= 96]
+    if competing and not all(first <= start and start + WINDOW <= last
+                             and any(c < start + WINDOW and start < d for _, _, c, d in changes)
+                             for start in competing):
+        return output
     submitted_range = _span(stream, anchors[0][0], anchors[-1][0] + WINDOW)
     transcript_range = _span(source_stream, anchors[0][1], anchors[-1][1] + WINDOW)
     if not changes and cached[source_id] != words:
@@ -230,4 +259,6 @@ def compare(doc: Document, upload_sha256: str, pack_sha256: str, reports, packed
         output["submitted_sentence_ranges"] = _context_ranges(doc, [
             (item["submitted"]["start"], item["submitted"]["end"]) for item in output["changes"]])
     output["status"] = "reference_bound"
+    if competing:
+        output["scope"] += " " + COMPETITION_SCOPE
     return output

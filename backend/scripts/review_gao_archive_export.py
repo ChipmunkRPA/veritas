@@ -30,14 +30,16 @@ def review(export: Path, submitted: Path, pack: Path, sha256: str):
         raise ValueError("Expected a GAO comparison object")
     catalog, index = gao.library(pack, sha256)
     upload_sha256 = hashlib.sha256(original).hexdigest()
+    scope = proof.get("scope")
+    resolve_competition = isinstance(scope, str) and gao.COMPETITION_SCOPE in scope
     if extension == ".pdf":
-        expected = document_archive_pdf.compare(original, upload_sha256, gao_archive=(sha256, catalog, index))
+        expected = document_archive_pdf.compare(original, upload_sha256, gao_archive=(sha256, catalog, index),
+                                                resolve_competition=resolve_competition)
     elif extension == ".docx":
-        scope = proof.get("scope")
         legacy = isinstance(scope, str) and scope.endswith(LEGACY_GAO_WORD_SCOPE)
         allow_boundary_deletion = isinstance(scope, str) and scope.endswith(GAO_WORD_BOUNDARY_SCOPE)
         expected = compare_gao(original, upload_sha256, sha256, catalog, index, allow_multi_paragraph=not legacy,
-                               allow_boundary_deletion=allow_boundary_deletion)
+                               allow_boundary_deletion=allow_boundary_deletion, resolve_competition=resolve_competition)
     else:
         with TemporaryDirectory(prefix="chipmunk-gao-review-") as directory:
             staged = Path(directory) / "retained.txt"
@@ -45,7 +47,7 @@ def review(export: Path, submitted: Path, pack: Path, sha256: str):
             doc = extract(staged, ".txt")
         if "\ufffd" in doc.text or "\x00" in doc.text:
             raise ValueError("The file contains undecodable text")
-        expected = gao.compare(doc, upload_sha256, sha256, catalog, index)
+        expected = gao.compare(doc, upload_sha256, sha256, catalog, index, resolve_competition=resolve_competition)
         if (proof != expected and proof.get("status") == "no_qualified_reference"
                 and expected["status"] == "reference_bound" and not expected["changes"]):
             # Previously, the same exact excerpt could have received an abstention.

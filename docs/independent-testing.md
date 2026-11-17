@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [short government report comparison](writing-short-intervals-2026-11-16.md#replay-locally)
+recounts a frozen writing-style comparison and a separate public-source
+comparison. The exact source intake preserves corresponding originals,
+short edit positions, and layout variants. The archive study also checks
+uploads containing wording from two separate sources.
+
 The [economic-report comparison](writing-report-confirmation-2026-11-16.md#local-review-and-reproduction)
 recounts 156 document versions from 46 previously unused report groups.
 The exact-source readback checks the context windows and native positions.

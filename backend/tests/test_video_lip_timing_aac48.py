@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: MIT
 import hashlib
 import subprocess
+from fractions import Fraction
 from types import SimpleNamespace
 
 import pytest
@@ -92,6 +93,32 @@ def test_shot_evidence_keeps_multiple_intervals_and_the_unassessed_cut(aac_mappi
     assert all(65 <= frame < 125 for frame in by_id["VLT02"]["witness"]["picture_frames"].values())
     with pytest.raises(ValueError, match="partition"):
         binding.measured(raw | {silent.SHOT_KEY: [[0, 50], [49, 65], [65, 125]]}, **scope)
+
+
+@pytest.mark.parametrize(("time_base", "timestamps"), [
+    ("1/1000", [round(Fraction(i * 1001, 30)) for i in range(63)]),
+    ("1/30000", [i * 1000 for i in range(63)]),
+])
+def test_single_shot_dropout_tracks_original_fast_picture_clock(aac_mapping, time_base, timestamps):
+    from app.evidence import video_silent_mouth as silent
+
+    frames = [{"index": i, "pts": pts, "gap_units": 20_000 + 200_000 * (i % 3), "mouth_box": [1, 1, 3, 3],
+               "rgb_sha256": "1" * 64, "mouth_crop_sha256": "2" * 64} for i, pts in enumerate(timestamps)]
+    levels = [[0, 0] if 120 <= i < 160 else [200, silent.HOP * 200**2] for i in range(33_600 // silent.HOP)]
+    raw = {"frames": frames, "phones": [], "sound_levels": levels, silent.SHOT_KEY: [[0, 63]]}
+    review = binding.measured(raw, timestamps=timestamps, time_base=time_base,
+                              source={"width": 4, "height": 4}, mapping=aac_mapping)
+    assert review["shot_coverage"][0]["audio_samples"] == [0, 33_600]
+    [(_, finding)] = binding.exhibits(review)
+    assert finding["witness"]["audio_source_pts"] == [9600, 12800]
+    assert finding["affects_overall_confidence"] is False
+    brackets = finding["witness"]["picture_frames"]
+    picture_times = {role: timestamps[index] * Fraction(time_base) for role, index in brackets.items()}
+    assert picture_times["before"] < Fraction(3, 5) <= picture_times["during"] < Fraction(4, 5) <= picture_times["after"]
+
+    dropped_picture = timestamps[:30] + timestamps[31:]
+    with pytest.raises(ValueError, match="continuous picture timing"):
+        agreement.shot_audio_ranges(dropped_picture, time_base, 33_600, [[0, 62]])
 
 
 def test_near_silent_range_needs_changing_mouth_frames_and_audible_flanks(aac_mapping):

@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Soundtrack dropouts on 29.97 and 30 fps video](video-sound-dropouts-30fps-2026-11-17.md)
+  adds 142 correctly located short mutes out of 152 staged cases per audio
+  encoding in videos that the prior scope skipped. It flags none of 240
+  matched controls per encoding. The new coverage uses the original frame
+  timestamps and the existing near-silence and mouth-motion measurements.
+
 - [Masked words and their surrounding sentences](writing-masked-context-2026-11-17.md)
   add zero correct locations across 499 known rewrites at the frozen primary
   point. The wider paired reading adds five locations and 35 ordinary

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [29.97 and 30 fps soundtrack replay](video-sound-dropouts-30fps-2026-11-17.md#reproduce-the-checks)
+verifies the publisher recordings and compares 784 deliveries with retained
+picture clocks, exact edit intervals and matched ordinary controls. The results
+include the shots that were covered and shots outside the checked range.
+
 The [masked-word writing replay](writing-masked-context-2026-11-17.md#independent-replay)
 reconstructs the 48 new matched report pairs byte for byte. Its export
 verifies all 96 inputs and their parent files and produces a case manifest,

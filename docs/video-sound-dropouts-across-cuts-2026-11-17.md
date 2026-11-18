@@ -16,6 +16,7 @@ must fit within the same shot. Eligible source audio is 16 kHz PCM or 48 kHz
 AAC. Muting, quiet movement and recording dropouts can produce this finding.
 It contributes zero weight to the AI assessment.
 [Single-shot measurement and supported assets](video-silent-mouth-2026-11-16.md)
+[Additional coverage for 29.97 and 30 fps](video-sound-dropouts-30fps-2026-11-17.md)
 
 ## Local confirmation
 

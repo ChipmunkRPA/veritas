@@ -71,9 +71,9 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None, 
     elif stereo_scope is None or binding.audio_origin(mapping, stereo_scope) is None:
         return binding.skipped("stereo_unresolved")
     agreement_models = settings.video_lip_motion_sound_models
-    multishot = bool(settings.video_lip_silent_mouth_review and stereo_scope is None and table is not None
-                     and shot_frames == len(table) and supported_shots(table, mapping, shots))
-    if not multishot and not supported(table, mapping, shots, stereo_scope):
+    shot_based_silence = bool(settings.video_lip_silent_mouth_review and stereo_scope is None and table is not None
+                              and shot_frames == len(table) and supported_shots(table, mapping, shots))
+    if not shot_based_silence and not supported(table, mapping, shots, stereo_scope):
         return binding.skipped("unsupported")
     from app.detectors.audio.phone_events import MODEL_BLOBS
 
@@ -81,18 +81,18 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None, 
     geometry = settings.video_lip_timing_face_asset
     runtime = settings.video_lip_timing_runtime
     if (not geometry or not geometry.is_file() or (runtime and not runtime.is_dir())
-            or (not multishot and (not model or not all((model / name).is_file() for name in (*MODEL_BLOBS, "pytorch_model.bin"))))):
+            or (not shot_based_silence and (not model or not all((model / name).is_file() for name in (*MODEL_BLOBS, "pytorch_model.bin"))))):
         return binding.skipped("assets")
     remaining = ctx.deadline.remaining()
     budget = TIME_BUDGET if remaining is None else min(TIME_BUDGET, remaining - 8.)
     if budget < 12.:
         return binding.skipped("runtime")
     source_rate = mapping["source_sample_rate"]
-    limit = agreement.MAX_MULTISHOT_SAMPLES if multishot else 64_000
+    limit = agreement.MAX_MULTISHOT_SAMPLES if shot_based_silence else 64_000
     agreement_profile = agreement.carrier(
         mapping, origin=binding.audio_origin(mapping, stereo_scope, max_samples=limit), stereo_scope=stereo_scope,
     )
-    apply_articulation = not multishot and settings.video_lip_articulation_review and (
+    apply_articulation = not shot_based_silence and settings.video_lip_articulation_review and (
         source_rate == 16_000 or source_rate == 48_000 and settings.video_lip_aac48_articulation_review
     )
     request = {"runtime": str(runtime.resolve()) if runtime else None, "geometry": str(geometry.resolve()),
@@ -101,9 +101,9 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None, 
                "presented_samples": binding.presented_samples(mapping, max_samples=limit),
                "ranked": settings.video_lip_timing_ranked and source_rate == 16_000,
                "articulation": apply_articulation,
-               "shot_ranges": shots if multishot else None,
+               "shot_ranges": shots if shot_based_silence else None,
                "motion_models": str(agreement_models.resolve())
-               if not multishot and agreement_profile and agreement_models and not mapping.get("audio_stream_indices") else None}
+               if not shot_based_silence and agreement_profile and agreement_models and not mapping.get("audio_stream_indices") else None}
     env = {"PATH": os.environ.get("PATH", os.defpath), "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1",
            "HF_HUB_DISABLE_TELEMETRY": "1", "PYTHONPATH": str(Path(__file__).resolve().parents[3]),
            "OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "VECLIB_MAXIMUM_THREADS": "1"}
@@ -116,7 +116,7 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None, 
 
             pcm = read_wav(ctx.store.read_bytes(audio_input["wav_sha256"]))
             raw["sound_levels"] = sound_levels(pcm, request["presented_samples"])
-            if multishot:
+            if shot_based_silence:
                 raw[silent.SHOT_KEY] = shots
         measured = binding.measured(raw, timestamps=table.pts, time_base=table.time_base,
                                     source={"width": table.width, "height": table.height}, mapping=mapping, stereo_scope=stereo_scope)

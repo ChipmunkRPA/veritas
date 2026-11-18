@@ -18,6 +18,8 @@ MAX_SHOT_FRAMES = 120
 MIN_SHOT_FRAMES = 34
 MAX_MULTISHOT_SAMPLES = 240_000
 MAX_MULTISHOT_FRAMES = 360
+SILENCE_FRAME_PERIODS = (Fraction(1001, 30_000), Fraction(1, 30))
+SILENCE_CLOCK_TOLERANCE = Fraction(3, 2000)  # Includes rebased millisecond-quantized timestamps.
 WEIGHT_PINS = {
     "vision": "bc58acf5926044b6680e7b1c5588f67894b1cbdd43bb6dfe54ff25c5b6ab0a70",
     "shared": "d924e379f8a6a2d861401a8f25504c73012c4ab50d37e04b5aac5ecb19d9bbd4",
@@ -131,16 +133,25 @@ def eligible_picture_clock(frames, time_base):
 
 
 def shot_audio_ranges(timestamps, time_base, samples, shots):
-    """Validate a short montage and map each source shot onto the shared sound clock."""
+    """Validate the near-silence review's picture clock and map its shot boundaries to audio."""
     count = len(timestamps)
-    if (not 2 <= len(shots) <= 5 or not MIN_SHOT_FRAMES < count <= MAX_MULTISHOT_FRAMES
+    if (not 1 <= len(shots) <= 5 or not MIN_SHOT_FRAMES < count <= MAX_MULTISHOT_FRAMES
             or type(samples) is not int or not 20_000 <= samples <= MAX_MULTISHOT_SAMPLES or timestamps[0] != 0):
         raise ValueError("The shot review requires a bounded zero-start picture and sound clock")
     base = Fraction(time_base)
-    if not all(Fraction(1, 28) <= (b - a) * base <= Fraction(1, 22)
-               for a, b in zip(timestamps, timestamps[1:])):
+    if base <= 0:
+        raise ValueError("The shot review requires a positive picture time base")
+    picture_clock = [pts * base for pts in timestamps]
+    legacy_montage = len(shots) >= 2 and all(
+        Fraction(1, 28) <= end - start <= Fraction(1, 22)
+        for start, end in zip(picture_clock, picture_clock[1:])
+    )
+    if not legacy_montage and not any(
+        all(abs(pts - i * period) <= SILENCE_CLOCK_TOLERANCE for i, pts in enumerate(picture_clock))
+        for period in SILENCE_FRAME_PERIODS
+    ):
         raise ValueError("The shot review requires continuous picture timing")
-    times = [round(pts * base * RATE) for pts in timestamps]
+    times = [round(pts * RATE) for pts in picture_clock]
     if not times[-1] < samples <= times[-1] + 2 * max(b - a for a, b in zip(times, times[1:])):
         raise ValueError("The shot review's picture and sound durations do not agree")
     offsets = times + [samples]

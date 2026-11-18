@@ -16,8 +16,10 @@ from scripts.video_silent_mouth_app import nested, proof_files
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def examples(panel):
+def examples(panel, clock=None):
     rows = read(panel / "result.json.gz")["rows"]
+    if clock:
+        rows = [row for row in rows if row.get("clock") == clock]
     for carrier in CARRIERS:
         by_case = {(row["group"], row["role"]): row for row in rows if row["carrier"] == carrier}
         for (group, role), row in sorted(by_case.items()):
@@ -28,7 +30,7 @@ def examples(panel):
                 break
 
 
-def run(panel, assets, output, *, browser):
+def run(panel, assets, output, *, browser, clock=None):
     configure(output, ROOT)
     timing_assets = assets
     os.environ.update(
@@ -54,9 +56,9 @@ def run(panel, assets, output, *, browser):
             result = json.loads(default_store().read_bytes(db.get(Analysis, aid).result_hash))
         return result["decision"], result.get("customer_assessment")
 
-    selected = list(examples(panel))
-    if not selected:
-        raise ValueError("The confirmation panel has no correct late near-silent interval for app replay")
+    selected = list(examples(panel, clock))
+    if not selected or (clock and len(selected) != len(CARRIERS)):
+        raise ValueError("The confirmation panel needs a matched dropout and ordinary control in each encoding")
     stub = PaymentStub()
     service._stripe = stub
     receipts = []
@@ -102,6 +104,7 @@ def run(panel, assets, output, *, browser):
                     if browser:
                         result["browser"] = browser_check(evidence_dir, app, key, [{
                             "analysis_id": aid, "frames": result["frames"], "shot_count": len(review["shot_coverage"]),
+                            "shots_outside_scope": sum(shot["status"] == "outside_scope" for shot in review["shot_coverage"]),
                         }], scenario="video-silent-mouth-local.mjs")
                     (evidence_dir / "near-silent.json").write_text(json.dumps(exported, allow_nan=False))
                 elif name == "normal":
@@ -121,4 +124,5 @@ if __name__ == "__main__":
     for name in ("panel", "assets", "output"):
         cli.add_argument(name, type=Path)
     cli.add_argument("--browser", action="store_true")
+    cli.add_argument("--clock", choices=("native-29.97", "exact-30", "montage-30"))
     run(**vars(cli.parse_args()))

@@ -246,6 +246,13 @@ regexes = [
   '''^tokenizer_config\.json": "d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432"$''',
 ]
 
+[[rules.allowlists]]
+description = "Recomputed SHA-256 of the public base and instruction tokenizer files"
+condition = "AND"
+paths = ['''(^|/)backend/scripts/writing_alignment_preference\.py$''']
+regexTarget = "match"
+regexes = ['''^TOKENIZER_SHA256 = "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"$''']
+
 # Exact SHA-256 fingerprints of the pinned public MiniLM tokenizer files.
 [[allowlists]]
 description = "Writing transition benchmark tokenizer SHA-256 fingerprints"

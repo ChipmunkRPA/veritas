@@ -66,6 +66,26 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- Word files without a default paragraph style now finish analysis.
+  OpenDocument and Rich Text findings include exact decoded paragraph
+  positions. All eight formats and a separate scanned PDF completed the
+  local paid flow with matching exports and signed original-file replay.
+  [Document format review](document-formats-2026-11-17.md)
+
+- The narrow stereo Opus fallback found 24 of 48 edits, up from 20, with
+  zero new flags among 228 controls. It retained 23 of the 35 matched AAC
+  locations and remains in evaluation. [Sparse lag study](audio-stereo-sparse-lag-2026-11-18.md)
+
+- The centered crop and reverse playback comparison found 15 of 24 staged
+  edits with zero added alerts among 56 controls. Five source groups had
+  useful matches, one below the frozen six-group release criterion.
+  [Cropped reverse video](video-cropped-reverse-2026-11-18.md)
+
+- An independent implementation of an alignment comparison found zero
+  additional correct rewrite locations in 43 assessed documents. Its
+  weighted reading added three genuine-file alerts. The current comparator
+  localized one of 19 edits. [Writing preference comparison](writing-alignment-preference-2026-11-18.md)
+
 - [Content Credentials timestamps](content-credentials-timestamps-2026-11-18.md)
   verified four additional signature timestamps using the separate C2PA
   timestamp authority list. All 21 earlier gate decisions reproduced. A

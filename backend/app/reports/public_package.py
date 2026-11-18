@@ -83,6 +83,7 @@ def public_result(result: dict) -> dict:
             document_character_review,
             document_chat_markers,
             document_check_coverage,
+            document_doi_reference,
             document_invisible_characters,
             document_passage_intervals,
             document_passage_position,
@@ -101,6 +102,8 @@ def public_result(result: dict) -> dict:
             source_coverage[document_passage_position.COMMITMENT] = canonical_hash(position)
         if tracked := document_tracked_changes.from_result(result):
             source_coverage[document_tracked_changes.COMMITMENT] = tracked
+        if doi_reference := document_doi_reference.from_result(result):
+            source_coverage[document_doi_reference.COMMITMENT] = doi_reference
         if word_visibility := document_word_visibility.from_result(result):
             source_coverage[document_word_visibility.COMMITMENT] = word_visibility
         if invisible := document_invisible_characters.from_result(result):

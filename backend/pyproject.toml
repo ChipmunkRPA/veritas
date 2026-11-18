@@ -82,7 +82,15 @@ include = ["app*"]
 "app.detectors.audio" = ["calibrations/*.json"]
 "app.detectors.text" = ["calibrations/*.json"]
 "app.detectors.image.regional_graph" = ["LICENSE-*", "ORIGINS.json"]
-"app.evidence" = ["data/frus-archive.json", "data/frus-archive.LICENSE.md", "data/frus-archive.NOTICE.md", "data/unicode-license-v3.txt", "data/face-swap-detail-v1.json"]
+"app.evidence" = [
+    "data/frus-archive.json",
+    "data/frus-archive.LICENSE.md",
+    "data/frus-archive.NOTICE.md",
+    "data/unicode-license-v3.txt",
+    "data/face-swap-detail-v1.json",
+    "data/crossref-citations-2026-11-18.json",
+    "data/crossref-citations-2026-11-18.NOTICE.md",
+]
 
 [tool.setuptools.dynamic]
 version = {attr = "app.version.VERSION"}

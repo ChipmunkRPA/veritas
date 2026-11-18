@@ -594,6 +594,15 @@ export interface DocumentEvidenceSet extends SetBase {
         | 'decoded_html' | 'odt_paragraph' | 'rtf_paragraph' }
     })[]
   }
+  doi_reference_consistency?: {
+    schema: 'document-doi-reference/1'; affects_overall_confidence: false; scope: string; limitation: string
+    snapshot: { provider: 'Crossref'; as_of: string; sha256: string; records: number }
+    references: number; consistent: number; different_work: number; unassessed: number
+    locations: (Omit<MappedTextFinding, 'anchor'> & { title_start: number; title_end: number; cited_title: string;
+      anchor: Omit<MappedTextFinding['anchor'], 'kind'> & { kind: MappedTextFinding['anchor']['kind']
+        | 'decoded_html' | 'odt_paragraph' | 'rtf_paragraph' }
+      title_location: MappedTextFinding['location']; printed: { doi: string; title: string }; cited: { doi: string; title: string } })[]
+  }
   percentage_consistency?: { schema: 'document-percentage-consistency/1' | 'document-percentage-consistency/2' | 'document-percentage-consistency/3'; status: 'different_values' | 'checked' | 'not_assessed';
     scope: string; limitation: string; authorship_confidence_contribution: 0; checked_sentences: number;
     excluded_blocks: number; different_claims: number; comparable_claims: number;

@@ -407,6 +407,7 @@ class Settings(BaseSettings):
     text_passage_position_review: bool = False
     text_long_passage_position_review: bool = False
     text_bibliography_scope_review: bool = False  # Keep qualified terminal citations out of body writing inference.
+    text_doi_reference_review: bool = False  # Review mapped citations against a pinned local Crossref snapshot.
     text_within_sentence_language_review: bool = False  # Check shorter language switches in local writing input.
     text_classifier_id: str = "desklib/ai-text-detector-v1.01"  # base checkpoint (HF Hub)
     # fine-tuned on 2025-26 LLM output (scripts/finetune_text_detector.py); used automatically when present

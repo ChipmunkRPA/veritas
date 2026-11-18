@@ -70,6 +70,7 @@ WORD_TRACKED_CHANGES = 'word_tracked_changes_sha256'
 PDF_SAVED_WORDING = 'pdf_saved_wording'
 PDF_SAVED_WORDING_COMMITMENT = 'pdf_saved_wording_sha256'
 WORD_TEXT_VISIBILITY = 'word_text_visibility_sha256'
+DOI_REFERENCE_COMMITMENT = 'doi_reference_consistency_sha256'
 IMAGE_INTERPOLATION = 'native_interpolation_review_sha256'
 VERSIONS = {'image': {'image-evidence-1', 'image-evidence-2', 'image-evidence-3', 'image-evidence-4', 'image-evidence-5',
                       'image-evidence-6', IMAGE_PAIR_VERSION} | REFLECTION_VERSIONS, 'video': VIDEO_VERSIONS,
@@ -110,6 +111,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              *face_single_boundary_binding.COMMITMENTS,
                              WRITING_POSITION, WRITING_CHECK_COVERAGE,
                              EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, WORD_TEXT_VISIBILITY, PDF_SAVED_WORDING_COMMITMENT,
+                             DOI_REFERENCE_COMMITMENT,
                              IMAGE_INTERPOLATION, prior_grid.COMMITMENT, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
                              image_animation_binding.KEY, image_motion_photo_binding.KEY,
                              document_invisible_characters.COMMITMENT, document_chat_markers.COMMITMENT,
@@ -294,6 +296,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              'Tracked Word edits require document evidence')
     _require(analysis['kind'] == 'document' or WORD_TEXT_VISIBILITY not in result,
              'Word text visibility requires document evidence')
+    _require(analysis['kind'] == 'document' or DOI_REFERENCE_COMMITMENT not in result,
+             'DOI reference commitments require document evidence')
     _require(analysis['kind'] == 'document' or PDF_SAVED_WORDING_COMMITMENT not in result,
              'Saved PDF wording requires document evidence')
     _require(analysis["kind"] == "document" or document_invisible_characters.COMMITMENT not in result,
@@ -338,6 +342,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
             from app.evidence.document_publication_ids import validate as validate_identifiers
 
             validate_identifiers(evidence)
+        if ("doi_reference_consistency" in evidence or DOI_REFERENCE_COMMITMENT in result
+                or DOI_REFERENCE_COMMITMENT in evidence["source"]):
+            from app.evidence import document_doi_reference
+
+            _require(evidence["source"].get(DOI_REFERENCE_COMMITMENT) == result.get(DOI_REFERENCE_COMMITMENT),
+                     "DOI reference evidence differs from the public result commitment")
+            document_doi_reference.validate(evidence)
         document_pdf_visibility.validate(evidence)
         history = evidence.get("coverage", {}).get(PDF_SAVED_WORDING)
         expected_history = result.get(PDF_SAVED_WORDING_COMMITMENT)

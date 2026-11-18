@@ -30,6 +30,7 @@ from app.evidence import (
     document_character_review,
     document_chat_markers,
     document_check_coverage,
+    document_doi_reference,
     document_email_contexts,
     document_invisible_characters,
     document_matched_context,
@@ -348,6 +349,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_calendar.validate(document)
         document_arithmetic.validate(document)
         document_publication_ids.validate(document)
+        document_doi_reference.validate(document)
         document_pdf_visibility.validate(document)
         document_pdf_history_binding.validate(document, document["source"].get(document_pdf_history_binding.COMMITMENT))
         document_bibliography.validate(document)
@@ -638,6 +640,11 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document[document_arithmetic.KEY] = document_arithmetic.build(document["source"], text, mapping, include_lengths=True)
     if identifiers := document_publication_ids.build(document["source"], text, mapping, decoded["meta"]):
         document[document_publication_ids.KEY] = identifiers
+    doi_reference = decoded.get(document_doi_reference.KEY)
+    doi_commitment = document_doi_reference.from_result(result)
+    if doi_reference is not None or doi_commitment is not None:
+        document[document_doi_reference.KEY] = doi_reference
+        document["source"][document_doi_reference.COMMITMENT] = doi_commitment
     if (settings.environment == "dev" and settings.document_percentage_consistency
             and document_percentage_consistency.supported(document["source"]["method"], decoded["meta"].get("email"))):
         document[document_percentage_consistency.KEY] = document_percentage_consistency.build(
@@ -806,6 +813,8 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_calendar.verify_source(document, decoded["text"], decoded["source_map"])
             document_arithmetic.verify_source(document, decoded["text"], decoded["source_map"])
             document_publication_ids.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])
+            document_doi_reference.verify_record(document, decoded.get(document_doi_reference.KEY),
+                                                commitment=document_doi_reference.from_result(result))
             document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()),
                                                           meta=decoded["meta"])
             document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)

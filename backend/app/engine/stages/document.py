@@ -52,6 +52,7 @@ from app.evidence import (
     document_character_review,
     document_chat_markers,
     document_check_coverage,
+    document_doi_reference,
     document_invisible_characters,
     document_native_locations,
     document_passage_intervals,
@@ -91,7 +92,12 @@ SPANS_CAPTION = ("Per-sentence p(AI) from the legacy fuser after contextual smoo
 def decode(ctx: StageContext) -> dict[str, Any]:
     path = common.media_path(ctx)
     prose_only = settings.environment == "dev" and settings.text_bibliography_scope_review
-    doc, sents = decode_document(path, path.suffix, prose_only=prose_only) if prose_only else decode_document(path, path.suffix)
+    doi_enabled = settings.environment == "dev" and settings.text_doi_reference_review
+    policies = {"prose_only": True} if prose_only else {}
+    if doi_enabled and not provenance_gate.stop(ctx):
+        policies["doi_review"] = True
+    doc, sents = decode_document(path, path.suffix, **policies)
+    doi_record = doc.meta.pop(document_doi_reference.KEY, None)
     if (doc.meta.get(document_pdf_visibility.KEY, {}).get("covered_locations")
             or document_tracked_changes.unsupported(doc.word_review) or document_tracked_changes.projected(doc.word_review)):
         # Retain source evidence even when little usable writing remains.
@@ -111,6 +117,8 @@ def decode(ctx: StageContext) -> dict[str, Any]:
             "sentences": [dataclasses.asdict(s) for s in sents], "words": words, "source_map": doc.source_map,
             "artefacts": artifacts,
             **({BIBLIOGRAPHY_POLICY: True} if prose_only else {}),
+            **({document_doi_reference.POLICY: True} if doi_enabled else {}),
+            **({document_doi_reference.KEY: doi_record} if doi_record else {}),
             **({document_tracked_changes.KEY: doc.word_review} if doc.word_review is not None else {})}
 
 
@@ -119,6 +127,8 @@ def current_decode_output(output: Any) -> bool:
     if not isinstance(output, dict) or output.get("meta", {}).get("extraction_version") != EXTRACTION_VERSION:
         return False
     if output.get(BIBLIOGRAPHY_POLICY, False) is not (settings.environment == "dev" and settings.text_bibliography_scope_review):
+        return False
+    if output.get(document_doi_reference.POLICY, False) is not (settings.environment == "dev" and settings.text_doi_reference_review):
         return False
     if output["meta"].get("method") == "html" and output["meta"].get(html_article.READER) != html_article.POLICY:
         return False
@@ -651,6 +661,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
     }
     if tracked := decoded.get(document_tracked_changes.KEY):
         result.manifest.sampling[document_tracked_changes.COMMITMENT] = canonical_hash(tracked)
+    if doi_reference := decoded.get(document_doi_reference.KEY):
+        result.manifest.sampling[document_doi_reference.COMMITMENT] = canonical_hash(doi_reference)
     detected = ctx.outputs.get("detect") or {}
     verified_credentials = provenance_gate.stop(ctx)
     if not verified_credentials and (reading := detected.get(document_character_review.KEY)):

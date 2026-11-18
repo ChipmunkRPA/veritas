@@ -560,12 +560,20 @@ def prepare_document(path: Path, ext: str) -> Document:
     return doc
 
 
-def decode_document(path: Path, ext: str, *, prose_only: bool = False) -> tuple[Document, list[Sentence]]:
+def decode_document(path: Path, ext: str, *, prose_only: bool = False, doi_review: bool = False) -> tuple[Document, list[Sentence]]:
     """One document of a request, read and segmented: both in child processes that are killed, within
     `document_decode_timeout_s` together. The order is read, `check_document_size`, segment: a document over the size
     limit is never segmented."""
     started = time.monotonic()
     doc = prepare_document(path, ext)
+    if doi_review:
+        from app.evidence import document_doi_reference
+
+        try:
+            if reference := document_doi_reference.capture(doc):
+                doc.meta[document_doi_reference.KEY] = reference
+        except (OSError, ValueError) as error:
+            log.warning("document.doi_snapshot_unavailable", error_type=type(error).__name__)
     if prose_only:
         from app.evidence.document_bibliography import body_view
 

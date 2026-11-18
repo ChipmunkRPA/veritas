@@ -530,6 +530,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.document_percentage_consistency', 'app.evidence.document_calendar',
                         'app.evidence.document_arithmetic', 'app.evidence.document_length',
                         'app.evidence.document_publication_ids',
+                        'app.evidence.document_doi_reference',
                         'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.av_lag_support',
                         'app.evidence.audio_background_binding', 'app.evidence.audio_bandwidth_binding', 'app.evidence.audio_silence_binding',
                         'app.evidence.audio_tonal_phase_binding',

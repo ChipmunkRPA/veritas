@@ -59,6 +59,35 @@ title positions** agreed. The DOCX ledger retained the original body paths and
 within-paragraph character ranges. The local evaluation used the existing
 document extractor with Python 3.12.6 and python-docx 1.2.0 on Apple Silicon.
 
+## Local application
+
+Enable `VERITAS_TEXT_DOI_REFERENCE_REVIEW=true` in a development instance.
+The check reads the original extracted references separately from the writing
+assessment. It works with native Word, plain text, OpenDocument, Rich Text,
+and PDFs whose selectable text retains mapped reference blocks. The ordinary
+evidence view and Standard PDF show the submitted DOI, the title of its
+registered publication, the work identified by the citation, and both source
+positions. JSON retains the same evidence and identifies the local snapshot.
+Redacted PDFs preserve counts and omit the source excerpts.
+
+The packaged snapshot holds 364 Crossref bibliographic records and their
+relevant DOI relationships. It contains title and first family name fields
+used for matching. The application loads the dated local file, with no lookup
+request during analysis. Using the packaged data and matcher reproduced all
+1,477 reference-entry outcomes across 25 frozen DOCX and TXT inputs. Signed
+verification re-extracts the submitted reference positions and repeats the
+comparison against the same snapshot. [Crossref reuse terms](https://www.crossref.org/documentation/retrieve-metadata/)
+
+Nine local worker tests exercised simulated USD 9.99 checkout. No analysis
+started before payment confirmation. Chrome displayed five positive source
+locations across the five formats. The genuine Word control showed all five
+references matched. In the unknown-DOI control, the fifth reference stayed
+unassessed. Every signed package verified against its original file. The
+same Word upload produced the same writing assessment with the check enabled
+or disabled. A two-case Word retest also verified the final PDF typography
+and its unchanged native source positions.
+[Local browser and export receipt](evaluation-panels/writing-doi-reference-app-2026-11-18.json)
+
 ## Independent recount
 
 The numeric receipt retains anonymous citation groups, source, DOI and

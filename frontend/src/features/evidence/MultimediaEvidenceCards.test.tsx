@@ -175,6 +175,56 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText(/Ordinary editing and polished writing can produce a similar response/)).toBeTruthy()
   })
 
+  it('links mismatched DOI evidence to both original Word ranges and the local registry scope', () => {
+    const set = { ...document, packets: [], source: { ...document.source, chars: 250 }, coverage: {
+      writing_bibliography: { schema: 'chipmunk.writing-bibliography/1', heading: 'References', entry_count: 3,
+        section_start: 40, section_end: 220, first_location: { kind: 'docx', body_index: 5 },
+        last_location: { kind: 'docx', body_index: 7 } },
+    } } satisfies DocumentEvidenceSet
+    const review = {
+      schema: 'document-doi-reference/1', affects_overall_confidence: false,
+      scope: 'Compares visible DOI references against a frozen local registry.',
+      limitation: 'This reference observation carries zero AI confidence weight.',
+      snapshot: { provider: 'Crossref', as_of: '2026-11-18', sha256: 'e'.repeat(64), records: 364 },
+      references: 3, consistent: 1, different_work: 1, unassessed: 1,
+      locations: [{
+        start: 190, end: 207, title_start: 104, title_end: 138, text: '10.1234/example.1',
+        cited_title: 'A long title in the written citation',
+        anchor: { kind: 'docx', body_path: [6] },
+        location: { ranges: [[94, 111]] }, title_location: { ranges: [[8, 42]] },
+        printed: { doi: '10.1234/example.1', title: 'Different work found by the printed DOI' },
+        cited: { doi: '10.1234/example.2', title: 'Publication matched by title and author' },
+      }],
+    } satisfies NonNullable<DocumentEvidenceSet['doi_reference_consistency']>
+    const { rerender } = show({ ...set, doi_reference_consistency: review })
+    const doi = within(screen.getByRole('region', { name: 'DOI reference check' }))
+    expect(doi.getByText(/3 bibliography entries.*1 matched.*1 pointed to a different work.*1 was unassessed/)).toBeTruthy()
+    expect(doi.getByText('10.1234/example.1').tagName).toBe('MARK')
+    expect(doi.getByText('Different work found by the printed DOI')).toBeTruthy()
+    expect(doi.getByText('10.1234/example.2')).toBeTruthy()
+    expect(doi.getByText('Word body path 6')).toBeTruthy()
+    expect(doi.getByText('Printed DOI · Extracted characters [190, 207) · Original characters [94, 111)')).toBeTruthy()
+    expect(doi.getByText('Cited title · Extracted characters [104, 138) · Original characters [8, 42)')).toBeTruthy()
+    expect(doi.getByText(/Local Crossref snapshot dated 2026-11-18 with 364 registry records.*zero AI confidence weight/)).toBeTruthy()
+    expect(screen.getByRole('link', { name: 'See the DOI reference check.' }).getAttribute('href')).toBe('#document-doi-review')
+    expect(screen.queryByText(/Citation accuracy was not assessed/)).toBeNull()
+    expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
+    for (const [kind, label] of [
+      ['odt_paragraph', 'Decoded OpenDocument paragraph 7'],
+      ['rtf_paragraph', 'Decoded Rich Text block 7'],
+    ] as const) {
+      rerender(<MemoryRouter><MultimediaEvidenceContent set={{ ...set, doi_reference_consistency: {
+        ...review, locations: [{ ...review.locations[0], anchor: { kind, paragraph_index: 6 } }],
+      } }} token="signed token" mediaReady /></MemoryRouter>)
+      expect(screen.getByText(label)).toBeTruthy()
+    }
+    rerender(<MemoryRouter><MultimediaEvidenceContent set={{ ...set, doi_reference_consistency: {
+      ...review, consistent: 0, different_work: 0, unassessed: 3, locations: [],
+    } }} token="signed token" mediaReady /></MemoryRouter>)
+    expect(screen.getByText(/0 matched.*0 pointed to a different work.*3 were unassessed/)).toBeTruthy()
+    expect(screen.queryByText('10.1234/example.1')).toBeNull()
+  })
+
   it('shows separate writing ranges and keeps an empty review inconclusive', () => {
     const coverage = (status: 'flagged' | 'no_ranges'): DocumentEvidenceSet['coverage'] => ({
       writing_passage_intervals: {

@@ -172,6 +172,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
         from app.evidence import (
             document_character_review,
             document_chat_markers,
+            document_doi_reference,
             document_invisible_characters,
             document_passage_intervals,
             document_pdf_history_binding,
@@ -184,6 +185,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
         if binding.get("source_sha256") != source_sha256 or any(source.get(key) != binding.get(key) or not source.get(key)
                 for key in ("extracted_text_sha256", "source_map_sha256", "decode_sha256")) or (
                 source.get(document_tracked_changes.COMMITMENT) != document_tracked_changes.from_result(result)
+                or source.get(document_doi_reference.COMMITMENT) != document_doi_reference.from_result(result)
                 or source.get(document_word_visibility.COMMITMENT) != document_word_visibility.from_result(result)
                 or source.get(document_invisible_characters.COMMITMENT) != document_invisible_characters.from_result(result)
                 or source.get(document_character_review.COMMITMENT) != document_character_review.result_commitment(result)
@@ -622,6 +624,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_character_review,
         document_chat_markers,
         document_check_coverage,
+        document_doi_reference,
         document_email_contexts,
         document_invisible_characters,
         document_matched_context,
@@ -685,6 +688,8 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_calendar.verify_source(document, text, mapping)
         document_arithmetic.verify_source(document, text, mapping)
         document_publication_ids.verify_source(document, text, mapping, decoded["meta"])
+        document_doi_reference.verify_record(document, decoded.get(document_doi_reference.KEY),
+            commitment=document_doi_reference.from_result(result) if result is not None else source.get(document_doi_reference.COMMITMENT))
         document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
         if history := coverage.get(document_pdf_history_binding.KEY):
             submitted = _bytes(source["sha256"], store)
@@ -824,9 +829,10 @@ def manifest(snapshot: ReportSnapshot) -> dict[str, Any] | None:
 
 
 def quoted_values(snapshot: ReportSnapshot) -> list[str]:
-    """Verbatim submitted text is exempt from generated-prose vocabulary checks."""
+    """Verbatim source text and quoted registry titles are exempt from generated-prose vocabulary checks."""
     if snapshot.analysis.kind != "document" or snapshot.evidence is None:
         return []
+    from app.evidence.document_doi_reference import KEY as DOI_REFERENCE
     from app.evidence.document_passage_position import KEY as PASSAGE_POSITION
     from app.evidence.document_tracked_changes import KEY as TRACKED
     from app.evidence.document_unselected_responses import KEY as UNSELECTED_RESPONSES
@@ -838,6 +844,8 @@ def quoted_values(snapshot: ReportSnapshot) -> list[str]:
     excerpts.extend(row["text"] for group in (snapshot.evidence.get("percentage_consistency") or {}).get("groups", ()) for row in group)
     excerpts.extend(row["text"] for row in (snapshot.evidence.get("calendar_consistency") or {}).get("locations", ()))
     excerpts.extend(row["text"] for row in (snapshot.evidence.get("arithmetic_consistency") or {}).get("locations", ()))
+    for row in (snapshot.evidence.get(DOI_REFERENCE) or {}).get("locations", ()):
+        excerpts.extend((row["text"], row["cited_title"], row["printed"]["title"], row["cited"]["title"]))
     excerpts.extend(row["text"] for row in ((snapshot.evidence.get("coverage") or {}).get(TRACKED) or {}).get("rows", ()))
     if (position := (snapshot.evidence.get("coverage") or {}).get(PASSAGE_POSITION)) and (focus := position.get("focus_text")):
         excerpts.append(focus)
@@ -928,7 +936,7 @@ def _chat_markers_view(coverage: dict) -> dict | None:
                           for pair in record["locations"]]}
 
 
-def _document_coverage_details(coverage: dict) -> list[str]:
+def _document_coverage_details(coverage: dict, *, doi_reviewed: bool = False) -> list[str]:
     from app.evidence import (
         document_bibliography,
         document_check_coverage,
@@ -951,8 +959,9 @@ def _document_coverage_details(coverage: dict) -> list[str]:
     if witness := writing.get("language_witness"):
         notes.append(document_check_coverage.witness_description(witness))
     if bibliography := coverage.get(document_bibliography.KEY):
+        citation_note = " See the DOI reference check." if doi_reviewed else " Citation accuracy was not assessed."
         notes.append(f"{document_bibliography.notice(bibliography)} Location in original: "
-                     f"{document_bibliography.location_label(bibliography)}. Citation accuracy was not assessed.")
+                     f"{document_bibliography.location_label(bibliography)}.{citation_note}")
     if review := coverage.get("matched_context_review"):
         notes.append(f"Short-passage review selected {review['selected_sentences']} of {review['eligible_sentences']} "
                      "eligible sentences. This evidence has zero weight in the overall assessment.")
@@ -1662,6 +1671,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "calendar_consistency": document.get("calendar_consistency"),
             "arithmetic_consistency": document.get("arithmetic_consistency"),
             "publication_identifier_consistency": document.get("publication_identifier_consistency"),
+            "doi_reference_consistency": document.get("doi_reference_consistency"),
             "picture_hold": copy.deepcopy(document.get("picture_hold")),
             "scene_return_review": (document.get("coverage") or {}).get("scene_return_review") if kind == "video" else None,
             "lip_timing_review": document.get("lip_timing_review") if kind == "video" else None,
@@ -1724,7 +1734,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "coverage_details": ([f"{'Voice evidence' if key == 'audio' else 'Audio/video synchronization evidence'}: {channel['reason']}"
                                   for key, channel in (document.get("coverage", {}).get("channels") or {}).items()]
                                  if kind == "video" else
-                                 _document_coverage_details(document.get("coverage") or {})
+                                 _document_coverage_details(document.get("coverage") or {},
+                                                            doi_reviewed="doi_reference_consistency" in document)
                                  if kind == "document" else []),
             "overview": [{**plate(role, asset, overview_label(pk, part, role)),
                           "anchor": "multimedia-evidence-voice-waveform" if pk == "audio" and role == "waveform" else None}

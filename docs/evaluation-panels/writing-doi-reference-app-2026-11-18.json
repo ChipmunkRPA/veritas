@@ -1,0 +1,447 @@
+{
+  "browser": {
+    "browser_errors": 0,
+    "cases": [
+      {
+        "case": "word",
+        "evidence_visible": true,
+        "exact_location": true
+      },
+      {
+        "case": "word-disabled",
+        "evidence_visible": false,
+        "exact_location": false
+      },
+      {
+        "case": "word-genuine",
+        "evidence_visible": true,
+        "exact_location": false
+      },
+      {
+        "case": "txt",
+        "evidence_visible": true,
+        "exact_location": true
+      },
+      {
+        "case": "odt",
+        "evidence_visible": true,
+        "exact_location": true
+      },
+      {
+        "case": "rtf",
+        "evidence_visible": true,
+        "exact_location": true
+      },
+      {
+        "case": "pdf",
+        "evidence_visible": true,
+        "exact_location": true
+      },
+      {
+        "case": "absent-heading",
+        "evidence_visible": false,
+        "exact_location": false
+      },
+      {
+        "case": "unknown-doi",
+        "evidence_visible": true,
+        "exact_location": false
+      }
+    ]
+  },
+  "cases": [
+    {
+      "bibliography_excluded_from_writing": true,
+      "case": "word",
+      "completed_writing_checks": 2,
+      "coverage": {
+        "consistent": 4,
+        "different_work": 1,
+        "references": 5,
+        "unassessed": 0
+      },
+      "format": "docx",
+      "rejected_different_original": true,
+      "retained_locations": 1,
+      "signed_original_replayed": true,
+      "source_positions": [
+        {
+          "anchor": {
+            "body_path": [
+              3
+            ],
+            "kind": "docx",
+            "paragraph_index": 3
+          },
+          "end": 859,
+          "location": {
+            "ranges": [
+              [
+                198,
+                222
+              ]
+            ]
+          },
+          "start": 835,
+          "title_end": 790,
+          "title_location": {
+            "ranges": [
+              [
+                35,
+                153
+              ]
+            ]
+          },
+          "title_start": 672
+        }
+      ]
+    },
+    {
+      "bibliography_excluded_from_writing": true,
+      "case": "word-disabled",
+      "completed_writing_checks": 2,
+      "coverage": null,
+      "format": "docx",
+      "rejected_different_original": false,
+      "retained_locations": 0,
+      "signed_original_replayed": true,
+      "source_positions": []
+    },
+    {
+      "bibliography_excluded_from_writing": true,
+      "case": "word-genuine",
+      "completed_writing_checks": 2,
+      "coverage": {
+        "consistent": 5,
+        "different_work": 0,
+        "references": 5,
+        "unassessed": 0
+      },
+      "format": "docx",
+      "rejected_different_original": false,
+      "retained_locations": 0,
+      "signed_original_replayed": true,
+      "source_positions": []
+    },
+    {
+      "bibliography_excluded_from_writing": false,
+      "case": "txt",
+      "completed_writing_checks": 2,
+      "coverage": {
+        "consistent": 4,
+        "different_work": 1,
+        "references": 5,
+        "unassessed": 0
+      },
+      "format": "txt",
+      "rejected_different_original": false,
+      "retained_locations": 1,
+      "signed_original_replayed": true,
+      "source_positions": [
+        {
+          "anchor": {
+            "kind": "text",
+            "source_end": 868,
+            "source_start": 637
+          },
+          "end": 859,
+          "location": {
+            "ranges": [
+              [
+                835,
+                859
+              ]
+            ]
+          },
+          "start": 835,
+          "title_end": 790,
+          "title_location": {
+            "ranges": [
+              [
+                672,
+                790
+              ]
+            ]
+          },
+          "title_start": 672
+        }
+      ]
+    },
+    {
+      "bibliography_excluded_from_writing": false,
+      "case": "odt",
+      "completed_writing_checks": 2,
+      "coverage": {
+        "consistent": 4,
+        "different_work": 1,
+        "references": 5,
+        "unassessed": 0
+      },
+      "format": "odt",
+      "rejected_different_original": false,
+      "retained_locations": 1,
+      "signed_original_replayed": true,
+      "source_positions": [
+        {
+          "anchor": {
+            "kind": "odt_paragraph",
+            "paragraph_index": 3
+          },
+          "end": 859,
+          "location": {
+            "ranges": [
+              [
+                198,
+                222
+              ]
+            ]
+          },
+          "start": 835,
+          "title_end": 790,
+          "title_location": {
+            "ranges": [
+              [
+                35,
+                153
+              ]
+            ]
+          },
+          "title_start": 672
+        }
+      ]
+    },
+    {
+      "bibliography_excluded_from_writing": false,
+      "case": "rtf",
+      "completed_writing_checks": 2,
+      "coverage": {
+        "consistent": 4,
+        "different_work": 1,
+        "references": 5,
+        "unassessed": 0
+      },
+      "format": "rtf",
+      "rejected_different_original": false,
+      "retained_locations": 1,
+      "signed_original_replayed": true,
+      "source_positions": [
+        {
+          "anchor": {
+            "kind": "rtf_paragraph",
+            "paragraph_index": 3
+          },
+          "end": 859,
+          "location": {
+            "ranges": [
+              [
+                198,
+                222
+              ]
+            ]
+          },
+          "start": 835,
+          "title_end": 790,
+          "title_location": {
+            "ranges": [
+              [
+                35,
+                153
+              ]
+            ]
+          },
+          "title_start": 672
+        }
+      ]
+    },
+    {
+      "bibliography_excluded_from_writing": true,
+      "case": "pdf",
+      "completed_writing_checks": 2,
+      "coverage": {
+        "consistent": 4,
+        "different_work": 1,
+        "references": 5,
+        "unassessed": 0
+      },
+      "format": "pdf",
+      "rejected_different_original": false,
+      "retained_locations": 1,
+      "signed_original_replayed": true,
+      "source_positions": [
+        {
+          "anchor": {
+            "bbox": [
+              48.0,
+              208.764008,
+              730.259705,
+              241.376999
+            ],
+            "block": 3,
+            "coordinate_space": "unrotated-page-points",
+            "kind": "pdf",
+            "page": 1
+          },
+          "end": 859,
+          "location": {
+            "boxes": [
+              [
+                440.891907,
+                224.889008,
+                582.99585,
+                241.376999
+              ]
+            ]
+          },
+          "start": 835,
+          "title_end": 790,
+          "title_location": {
+            "boxes": [
+              [
+                234.719986,
+                208.764008,
+                290.075989,
+                225.251999
+              ],
+              [
+                293.411987,
+                208.764008,
+                344.087982,
+                225.251999
+              ],
+              [
+                347.423981,
+                208.764008,
+                357.431976,
+                225.251999
+              ],
+              [
+                360.767975,
+                208.764008,
+                386.783966,
+                225.251999
+              ],
+              [
+                390.119965,
+                208.764008,
+                426.131958,
+                225.251999
+              ],
+              [
+                429.467957,
+                208.764008,
+                449.483948,
+                225.251999
+              ],
+              [
+                452.819946,
+                208.764008,
+                563.53186,
+                225.251999
+              ],
+              [
+                566.867859,
+                208.764008,
+                632.231812,
+                225.251999
+              ],
+              [
+                635.56781,
+                208.764008,
+                645.575806,
+                225.251999
+              ],
+              [
+                648.911804,
+                208.764008,
+                730.259705,
+                225.251999
+              ],
+              [
+                48.0,
+                224.889008,
+                116.699997,
+                241.376999
+              ],
+              [
+                120.035995,
+                224.889008,
+                130.043991,
+                241.376999
+              ],
+              [
+                133.37999,
+                224.889008,
+                209.423965,
+                241.376999
+              ]
+            ]
+          },
+          "title_start": 672
+        }
+      ]
+    },
+    {
+      "bibliography_excluded_from_writing": false,
+      "case": "absent-heading",
+      "completed_writing_checks": 2,
+      "coverage": null,
+      "format": "txt",
+      "rejected_different_original": false,
+      "retained_locations": 0,
+      "signed_original_replayed": true,
+      "source_positions": []
+    },
+    {
+      "bibliography_excluded_from_writing": false,
+      "case": "unknown-doi",
+      "completed_writing_checks": 2,
+      "coverage": {
+        "consistent": 4,
+        "different_work": 0,
+        "references": 5,
+        "unassessed": 1
+      },
+      "format": "txt",
+      "rejected_different_original": false,
+      "retained_locations": 0,
+      "signed_original_replayed": true,
+      "source_positions": []
+    }
+  ],
+  "paid_jobs": 9,
+  "registry_replay": {
+    "documents": 25,
+    "exact_retained_location_checks": 68,
+    "held_discrepancies": 52,
+    "held_discrepancies_total": 60,
+    "reference_entries": 1477,
+    "unchanged_alerts": 0,
+    "unchanged_references": 369
+  },
+  "schema": "chipmunk.local-paid-doi-reference/1",
+  "simulated_usd_cents": 999,
+  "unchanged_assessment_with_check": true,
+  "unpaid_jobs": 0,
+  "updated_word_report_retest": {
+    "browser": {
+      "browser_errors": 0,
+      "cases": [
+        {
+          "case": "word",
+          "evidence_visible": true,
+          "exact_location": true
+        },
+        {
+          "case": "word-disabled",
+          "evidence_visible": false,
+          "exact_location": false
+        }
+      ]
+    },
+    "exact_positions_unchanged": true,
+    "paid_jobs": 2,
+    "rendered_pdf_hyphen_verified": true,
+    "signed_json_original_title_retained": true,
+    "unpaid_jobs": 0
+  }
+}

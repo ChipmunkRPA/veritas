@@ -10,7 +10,10 @@ import DocumentUnselectedResponses from './DocumentUnselectedResponses'
 import PdfSavedWording from './PdfSavedWording'
 import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentOriginalTextLocation, type DocumentPassagePosition, type EmailBodyAlternatives, type EmailClassifierInputScope, type MappedTextFinding, type PublishedWordingColumn, type PublishedWordingReview, type PublishedWordingSection, type WritingCheckReason } from './multimediaPackets'
 
-function BibliographyCoverage({ review }: { review: NonNullable<NonNullable<DocumentEvidenceSet['coverage']>['writing_bibliography']> }) {
+function BibliographyCoverage({ review, doiReviewed }: {
+  review: NonNullable<NonNullable<DocumentEvidenceSet['coverage']>['writing_bibliography']>
+  doiReviewed: boolean
+}) {
   const { first_location: first, last_location: last } = review
   let location: string | undefined
   if (first.kind === 'pdf' && last.kind === 'pdf') {
@@ -23,7 +26,8 @@ function BibliographyCoverage({ review }: { review: NonNullable<NonNullable<Docu
   return <section className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
     <h3 className="m-0 text-body font-medium text-text">Excluded references</h3>
     <p className="mt-2 mb-0">The writing input excluded a terminal reference list with {review.entry_count} citation entries.
-      {location && ` ${location}.`} Citation accuracy was not assessed.</p>
+      {location && ` ${location}.`}{' '}
+      {doiReviewed ? <a href="#document-doi-review" className="underline">See the DOI reference check.</a> : 'Citation accuracy was not assessed.'}</p>
   </section>
 }
 
@@ -249,6 +253,54 @@ function PublicationIdentifiers({ review }: { review: NonNullable<DocumentEviden
     {review.disagreements > review.locations.length && <p className="mt-2 mb-0 text-caption text-text-muted">
       Showing the first {review.locations.length} disagreements.</p>}
     <p className="mt-2 mb-0 text-caption text-text-muted">{review.limitation}</p>
+  </section>
+}
+
+function DoiSourcePosition({ label, start, end, location }: {
+  label: string; start: number; end: number; location: MappedTextFinding['location']
+}) {
+  return <p className="mt-1 mb-0 text-caption text-text-muted">{label} · Extracted characters [{start}, {end})
+    {'ranges' in location
+      ? ` · Original characters ${location.ranges.map(([first, last]) => `[${first}, ${last})`).join(', ')}`
+      : ` · PDF text bounds in page points ${location.boxes.map(box => `[${box.map(value => value.toFixed(2)).join(', ')}]`).join(', ')}`}
+  </p>
+}
+
+function DoiReferenceCheck({ review }: { review: NonNullable<DocumentEvidenceSet['doi_reference_consistency']> }) {
+  return <section id="document-doi-review" aria-labelledby="document-doi-heading" className="mt-4 rounded-md border border-border p-4 scroll-mt-20">
+    <h3 id="document-doi-heading" className="m-0 text-body font-medium">DOI reference check</h3>
+    <p className="mt-2 mb-0 text-small">{review.scope}</p>
+    <p className="mt-2 mb-0 text-small">{review.references} bibliography {review.references === 1 ? 'entry' : 'entries'}.
+      {' '}{review.consistent} matched, {review.different_work} pointed to a different work, and {review.unassessed} {review.unassessed === 1 ? 'was' : 'were'} unassessed.</p>
+    {review.locations.map(row => {
+      const anchor = row.anchor
+      const place = anchor.kind === 'docx' ? `Word body path ${anchor.body_path?.join(' / ') ?? ''}`
+        : anchor.kind === 'pdf' ? `PDF page ${anchor.page}` : anchor.kind === 'email' ? `Email body part ${anchor.mime_part}`
+        : anchor.kind === 'odt_paragraph' ? `Decoded OpenDocument paragraph ${(anchor.paragraph_index ?? 0) + 1}`
+        : anchor.kind === 'rtf_paragraph' ? `Decoded Rich Text block ${(anchor.paragraph_index ?? 0) + 1}`
+        : anchor.kind === 'decoded_html' ? 'Decoded article HTML' : 'Plain text'
+      return <article key={row.start} className="mt-3 space-y-2 border-t border-border pt-3">
+        <blockquote className="m-0 break-words text-small"><mark>{row.text}</mark> · Cited title “{row.cited_title}”</blockquote>
+        <dl className="m-0 grid gap-3 text-small sm:grid-cols-2">
+          <div className="min-w-0 break-words">
+            <dt className="font-medium">Work registered under the printed DOI</dt>
+            <dd className="m-0">{row.printed.title}</dd>
+          </div>
+          <div className="min-w-0 break-words">
+            <dt className="font-medium">Work matching the title and first author</dt>
+            <dd className="m-0">{row.cited.title} · <span className="font-mono">{row.cited.doi}</span></dd>
+          </div>
+        </dl>
+        <div>
+          <p className="m-0 text-caption text-text-muted">{place}</p>
+          <DoiSourcePosition label="Printed DOI" start={row.start} end={row.end} location={row.location} />
+          <DoiSourcePosition label="Cited title" start={row.title_start} end={row.title_end} location={row.title_location} />
+        </div>
+      </article>
+    })}
+    {review.different_work > review.locations.length && <p className="mt-2 mb-0 text-caption text-text-muted">
+      Showing {review.locations.length} of {review.different_work} different-work observations.</p>}
+    <p className="mt-2 mb-0 text-caption text-text-muted">Local {review.snapshot.provider} snapshot dated {review.snapshot.as_of} with {review.snapshot.records} registry records. {review.limitation}</p>
   </section>
 }
 
@@ -601,6 +653,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     {set.calendar_consistency && <CalendarConsistency review={set.calendar_consistency} />}
     {set.arithmetic_consistency && <ArithmeticConsistency review={set.arithmetic_consistency} />}
     {set.publication_identifier_consistency && <PublicationIdentifiers review={set.publication_identifier_consistency} />}
+    {set.doi_reference_consistency && <DoiReferenceCheck review={set.doi_reference_consistency} />}
     {set.coverage?.chat_format_markers && <ChatFormatMarkers review={set.coverage.chat_format_markers} />}
     {invisible && <section aria-labelledby="document-invisible-characters" className="mt-4 rounded-md border border-border p-4">
       <h3 id="document-invisible-characters" className="m-0 text-body font-medium">
@@ -735,7 +788,8 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
       </div>}
     </section>}
     <DocumentInspectionMap packets={set.packets} selectedId={selectedId} onSelect={selectPassage} />
-    {set.coverage?.writing_bibliography && <BibliographyCoverage review={set.coverage.writing_bibliography} />}
+    {set.coverage?.writing_bibliography && <BibliographyCoverage review={set.coverage.writing_bibliography}
+      doiReviewed={!!set.doi_reference_consistency} />}
     <DocumentPassageCoverage coverage={set.coverage?.local_passage_coverage} />
     <DocumentUnselectedResponses responses={set.coverage?.unselected_passage_responses} />
     {set.coverage?.passage_position_review && <PassagePosition review={set.coverage.passage_position_review} />}

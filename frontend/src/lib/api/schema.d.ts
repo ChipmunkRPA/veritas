@@ -3530,9 +3530,9 @@ export interface components {
             /** Available */
             available: boolean;
             /** Earlier Extensions */
-            earlier_extensions?: (".eml" | ".txt" | ".docx" | ".odt" | ".pdf" | ".rtf")[] | null;
+            earlier_extensions?: (".eml" | ".txt" | ".docx" | ".odt" | ".pdf" | ".rtf" | ".html" | ".htm")[] | null;
             /** Extension */
-            extension?: (".eml" | ".txt" | ".docx" | ".odt" | ".pdf" | ".rtf") | null;
+            extension?: (".eml" | ".txt" | ".docx" | ".odt" | ".pdf" | ".rtf" | ".html" | ".htm") | null;
             /** Paired Check Available */
             paired_check_available?: boolean | null;
             /** Paired Mixed Formats Available */
@@ -3564,13 +3564,13 @@ export interface components {
              * Coordinate Space
              * @enum {string}
              */
-            coordinate_space: "decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "odt_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint" | "email_html_extracted_text_unicode_codepoint" | "rtf_extracted_text_unicode_codepoint" | "per_source_unicode_codepoint";
+            coordinate_space: "decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "odt_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint" | "email_html_extracted_text_unicode_codepoint" | "rtf_extracted_text_unicode_codepoint" | "html_article_extracted_text_unicode_codepoint" | "per_source_unicode_codepoint";
             earlier: components["schemas"]["DraftSource"];
             /**
              * Format
              * @enum {string}
              */
-            format: "email" | "plain_text" | "docx" | "odt" | "pdf" | "rtf" | "mixed";
+            format: "email" | "plain_text" | "docx" | "odt" | "pdf" | "rtf" | "html" | "mixed";
             /** Interpretation */
             interpretation: string;
             later: components["schemas"]["DraftSource"];
@@ -3582,7 +3582,7 @@ export interface components {
              * Schema
              * @enum {string}
              */
-            schema: "chipmunk.document-revision-comparison/1" | "chipmunk.document-revision-comparison/2" | "chipmunk.document-revision-comparison/3" | "chipmunk.document-revision-comparison/4" | "chipmunk.document-revision-comparison/5" | "chipmunk.document-revision-comparison/6" | "chipmunk.document-revision-comparison/7" | "chipmunk.document-revision-comparison/8";
+            schema: "chipmunk.document-revision-comparison/1" | "chipmunk.document-revision-comparison/2" | "chipmunk.document-revision-comparison/3" | "chipmunk.document-revision-comparison/4" | "chipmunk.document-revision-comparison/5" | "chipmunk.document-revision-comparison/6" | "chipmunk.document-revision-comparison/7" | "chipmunk.document-revision-comparison/8" | "chipmunk.document-revision-comparison/9";
             /** Scope */
             scope: string;
             word_tables?: components["schemas"]["DraftWordTables"] | null;
@@ -3606,6 +3606,28 @@ export interface components {
             start: number;
             /** Text */
             text: string;
+        };
+        /** DraftHtmlArticleScope */
+        DraftHtmlArticleScope: {
+            /**
+             * Element
+             * @enum {string}
+             */
+            element: "article" | "main";
+            /** Included Blocks */
+            included_blocks: number;
+            /**
+             * Policy
+             * @constant
+             */
+            policy: "static-html-article/1";
+            /** Scope */
+            scope: [
+                number,
+                number
+            ];
+            /** Unmapped Text */
+            unmapped_text: boolean;
         };
         /** DraftHtmlToken */
         DraftHtmlToken: {
@@ -3791,6 +3813,7 @@ export interface components {
             decoded_text_sha256: string;
             /** Format */
             format?: ("plain_text" | "docx" | "odt" | "pdf" | "rtf") | null;
+            html_article_scope?: components["schemas"]["DraftHtmlArticleScope"] | null;
             /** Mime Part */
             mime_part: string | null;
             /** Sha256 */
@@ -7864,7 +7887,7 @@ export interface operations {
                 "multipart/form-data": {
                     /**
                      * Format: binary
-                     * @description Earlier version. TXT, DOCX, ODT, RTF and PDF may be mixed. Use EML with EML.
+                     * @description Earlier version. TXT, DOCX, ODT, RTF and PDF may be mixed. Compare EML with EML and HTML with HTML.
                      */
                     earlier: string;
                     /**

@@ -9,12 +9,14 @@ from collections import Counter
 from pathlib import Path
 
 from app.evidence.document_revision import (
+    ARTICLE_COORDINATES,
     EDITED_RELOCATION_SCHEMA,
     FORMATS,
     HTML_COORDINATES,
     MAX_BYTES,
     RELOCATION_SCHEMA,
     compare_with_sources,
+    draft_extension,
 )
 from app.evidence.document_revision_word_alignment import SCHEMA as ALIGNED_WORD_TABLES_SCHEMA
 from app.evidence.document_revision_word_tables import SCHEMA as WORD_TABLES_SCHEMA
@@ -50,10 +52,10 @@ def _unique(fields):
 
 
 def review(export: Path, earlier: Path, later: Path) -> dict:
-    extension = later.suffix.lower()
-    old_extension = earlier.suffix.lower()
+    extension = draft_extension(later)
+    old_extension = draft_extension(earlier)
     if extension not in FORMATS or old_extension not in FORMATS:
-        raise ValueError("Use the original files in TXT, DOCX, ODT, RTF, PDF or EML format")
+        raise ValueError("Use the original files in TXT, DOCX, ODT, RTF, PDF, EML or HTML format")
     received = json.loads(_read(export, MAX_PDF_EXPORT if ".pdf" in (extension, old_extension) else MAX_EXPORT), object_pairs_hook=_unique)
     if "paired_check" in received and not isinstance(received["paired_check"], dict):
         raise ValueError("The optional paired writing check has invalid fields")
@@ -101,7 +103,7 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
         pages = [page for excerpt in excerpts for page in excerpt.get("pdf_pages", ())]
         result["pdf_word_regions_verified"] = sum(len(page["word_regions"]) for page in pages)
         result["pdf_previews_verified"] = sum("preview" in page for page in pages)
-    if expected["coordinate_space"] == HTML_COORDINATES:
+    if expected["coordinate_space"] in {HTML_COORDINATES, ARTICLE_COORDINATES}:
         result["decoded_html_ranges_verified"] = sum(
             len(token["source_ranges"]) for excerpt in excerpts for token in excerpt["html_tokens"]
         )

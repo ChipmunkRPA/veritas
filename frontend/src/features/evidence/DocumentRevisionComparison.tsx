@@ -6,7 +6,7 @@ import { compareDraft, draftAvailability, type DraftComparison, type DraftExcerp
 
 const labels = { body: 'Message body', quoted: 'Quoted text', signature: 'Signature' }
 const sourceFormats = { plain_text: 'Plain text', docx: 'Word body text', odt: 'OpenDocument body text', pdf: 'PDF text layer', rtf: 'Rich Text passage' }
-const changeLabels = { ...sourceFormats, email: null, plain_text: 'Text', pdf: 'PDF text', mixed: 'Wording change' }
+const changeLabels = { ...sourceFormats, email: null, plain_text: 'Text', pdf: 'PDF text', html: 'HTML article', mixed: 'Wording change' }
 const pairedMixedFormats: DraftExtension[] = ['.txt', '.docx', '.pdf']
 const contextLabels = ['Previous sentence', 'Changed sentence', 'Next sentence']
 const tableSkips = {
@@ -147,7 +147,8 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
   const mixed = comparison.format === 'mixed'
   const docx = comparison.format === 'docx'
   const pdfText = comparison.format === 'pdf'
-  const html = comparison.coordinate_space === 'email_html_extracted_text_unicode_codepoint'
+  const htmlReply = comparison.coordinate_space === 'email_html_extracted_text_unicode_codepoint'
+  const htmlArticle = comparison.format === 'html'
   const wordTables = comparison.word_tables
   const relocated = comparison.relocated_passages ?? []
   const editedRelocation = comparison.schema === 'chipmunk.document-revision-comparison/8'
@@ -163,7 +164,7 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
     <div className="flex flex-wrap items-baseline justify-between gap-3">
       <p className="m-0 text-small font-medium" role="status">
         {editedRelocation && 'One body passage was reordered and edited. '}
-        {changeCount === 0 ? `${editedRelocation ? 'No other' : 'No'} word or punctuation changes found${html ? ' in the reply body' : wordTables ? ' in the compared Word text' : ''}`
+        {changeCount === 0 ? `${editedRelocation ? 'No other' : 'No'} word or punctuation changes found${htmlReply ? ' in the reply body' : htmlArticle ? ' in the compared article text' : wordTables ? ' in the compared Word text' : ''}`
           : `${changeCount} ${changeCount === 1 ? 'change' : 'changes'} found`}
         {!editedRelocation && relocated.length > 0 && '. One reordered body passage found.'}
       </p>
@@ -179,6 +180,12 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
     {comparison.format === 'email' && <p className="mt-2 mb-0 text-caption text-text-muted">
       Earlier MIME part {comparison.earlier.mime_part} · Analyzed MIME part {comparison.later.mime_part}
     </p>}
+    {htmlArticle && comparison.earlier.html_article_scope && comparison.later.html_article_scope &&
+      <p className="mt-2 mb-0 text-caption text-text-muted">
+        Compared text blocks · Earlier {comparison.earlier.html_article_scope.included_blocks} · Analyzed {comparison.later.html_article_scope.included_blocks}.
+        {(comparison.earlier.html_article_scope.unmapped_text || comparison.later.html_article_scope.unmapped_text)
+          && ' Additional text outside supported blocks was skipped.'}
+      </p>}
     {comparison.numeric_comparison && <FigureResults comparison={comparison.numeric_comparison} />}
     {paired && <section aria-label="Experimental paired writing check" className="mt-4 rounded-md border border-border p-3">
       <h3 className="m-0 text-small font-medium">Experimental paired writing check</h3>
@@ -293,7 +300,8 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
       <p className="mt-2 mb-0 text-caption text-text-muted">Highlights mark changed words and punctuation. {docx
         ? 'Word offsets count Unicode code points in the body text. Two line breaks separate included paragraphs. Paragraph ranges start within each paragraph.'
         : comparison.format === 'odt' ? 'OpenDocument offsets count Unicode code points in the extracted body and within each listed paragraph.'
-        : html ? 'The first range gives the position in the extracted reply. The ranges after the arrow give the positions in the decoded HTML MIME part. Both count Unicode code points.'
+        : htmlReply ? 'The first range gives the position in the extracted reply. The ranges after the arrow give the positions in the decoded HTML MIME part. Both count Unicode code points.'
+        : htmlArticle ? 'The first range gives the position in the extracted article. The ranges after the arrow give the positions in the decoded HTML file. Both count Unicode code points.'
         : pdfText ? 'Offsets count Unicode code points in the extracted text. Page previews cover selected regions.'
         : mixed ? 'Each side uses its own Unicode character offsets and source positions.'
         : 'Offsets count decoded Unicode code points.'} The end of each range is excluded.</p>
@@ -358,8 +366,9 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
     {extension === '.rtf' && <p className="mt-2 mb-0 text-small text-text-muted">Rich Text positions refer to paragraphs in the extracted text.</p>}
     {(extension === '.txt' || extension === '.docx') && sameFormat && <p className="mt-2 mb-0 text-small text-text-muted">Matching file formats can also show where an unchanged body paragraph moved.</p>}
     {extension === '.eml' && <p className="mt-2 mb-0 text-small text-text-muted">Use two plain-text emails or two HTML-only replies with two, three, five or six simple body paragraphs and a trailing blockquote.</p>}
+    {extension === '.html' && <p className="mt-2 mb-0 text-small text-text-muted">Use two saved HTML files with readable paragraphs in one marked article or main area.</p>}
     {extension === '.pdf' && <p className="mt-2 mb-0 text-small text-text-muted">Use unlocked PDFs with selectable text on every page, up to 12 pages each.</p>}
-    {earlierExtensions.length > 1 && <p className="mt-2 mb-0 text-small text-text-muted">For drafts in different formats, use an upright PDF with selectable text. Multi-page PDFs need a single column per page and can have up to 12 pages.</p>}
+    {earlierExtensions.length > 1 && extension !== '.html' && <p className="mt-2 mb-0 text-small text-text-muted">For drafts in different formats, use an upright PDF with selectable text. Multi-page PDFs need a single column per page and can have up to 12 pages.</p>}
     {canRunPairedCheck && (extension === '.pdf' || earlierName?.endsWith('.pdf')) &&
       <p className="mt-2 mb-0 text-small text-text-muted">The paired writing check needs visible, selectable PDF text in a clear reading order and the same neighboring sentences in both drafts.</p>}
     <form onSubmit={event => void submit(event)} className="mt-4 flex flex-wrap items-end gap-3">

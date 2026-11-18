@@ -5524,7 +5524,9 @@
                     ".docx",
                     ".odt",
                     ".pdf",
-                    ".rtf"
+                    ".rtf",
+                    ".html",
+                    ".htm"
                   ],
                   "type": "string"
                 },
@@ -5545,7 +5547,9 @@
                   ".docx",
                   ".odt",
                   ".pdf",
-                  ".rtf"
+                  ".rtf",
+                  ".html",
+                  ".htm"
                 ],
                 "type": "string"
               },
@@ -5669,6 +5673,7 @@
               "pdf_native_text_unicode_codepoint",
               "email_html_extracted_text_unicode_codepoint",
               "rtf_extracted_text_unicode_codepoint",
+              "html_article_extracted_text_unicode_codepoint",
               "per_source_unicode_codepoint"
             ],
             "title": "Coordinate Space",
@@ -5685,6 +5690,7 @@
               "odt",
               "pdf",
               "rtf",
+              "html",
               "mixed"
             ],
             "title": "Format",
@@ -5740,7 +5746,8 @@
               "chipmunk.document-revision-comparison/5",
               "chipmunk.document-revision-comparison/6",
               "chipmunk.document-revision-comparison/7",
-              "chipmunk.document-revision-comparison/8"
+              "chipmunk.document-revision-comparison/8",
+              "chipmunk.document-revision-comparison/9"
             ],
             "title": "Schema",
             "type": "string"
@@ -5854,6 +5861,54 @@
           "changed_tokens"
         ],
         "title": "DraftExcerpt",
+        "type": "object"
+      },
+      "DraftHtmlArticleScope": {
+        "properties": {
+          "element": {
+            "enum": [
+              "article",
+              "main"
+            ],
+            "title": "Element",
+            "type": "string"
+          },
+          "included_blocks": {
+            "title": "Included Blocks",
+            "type": "integer"
+          },
+          "policy": {
+            "const": "static-html-article/1",
+            "title": "Policy",
+            "type": "string"
+          },
+          "scope": {
+            "maxItems": 2,
+            "minItems": 2,
+            "prefixItems": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "integer"
+              }
+            ],
+            "title": "Scope",
+            "type": "array"
+          },
+          "unmapped_text": {
+            "title": "Unmapped Text",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "policy",
+          "element",
+          "scope",
+          "included_blocks",
+          "unmapped_text"
+        ],
+        "title": "DraftHtmlArticleScope",
         "type": "object"
       },
       "DraftHtmlToken": {
@@ -6486,6 +6541,16 @@
               }
             ],
             "title": "Format"
+          },
+          "html_article_scope": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DraftHtmlArticleScope"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "mime_part": {
             "anyOf": [
@@ -16213,7 +16278,7 @@
               "schema": {
                 "properties": {
                   "earlier": {
-                    "description": "Earlier version. TXT, DOCX, ODT, RTF and PDF may be mixed. Use EML with EML.",
+                    "description": "Earlier version. TXT, DOCX, ODT, RTF and PDF may be mixed. Compare EML with EML and HTML with HTML.",
                     "format": "binary",
                     "type": "string"
                   },

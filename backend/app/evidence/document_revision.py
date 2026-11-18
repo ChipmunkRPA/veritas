@@ -17,9 +17,14 @@ from tempfile import TemporaryDirectory
 from zipfile import BadZipFile, ZipFile
 
 from app.core.deadline import StepTimeout
-from app.detectors.text.extract import _normalise, extract, text_hash
+from app.detectors.text import html_article
+from app.detectors.text.extract import _join_mapped, _normalise, extract, text_hash
 from app.evidence import document_revision_pdf, document_revision_values
-from app.evidence.document_scope import email_agreement_body_spans, mapped_email_html
+from app.evidence.document_scope import (
+    email_agreement_body_spans,
+    mapped_email_html,
+    valid_html_article_scope,
+)
 from app.storage.files import check_docx_safe
 
 SCHEMA = "chipmunk.document-revision-comparison/1"
@@ -27,7 +32,9 @@ HTML_SCHEMA = "chipmunk.document-revision-comparison/2"
 MIXED_SCHEMA = "chipmunk.document-revision-comparison/3"
 RELOCATION_SCHEMA = "chipmunk.document-revision-comparison/6"
 EDITED_RELOCATION_SCHEMA = "chipmunk.document-revision-comparison/8"
+ARTICLE_SCHEMA = "chipmunk.document-revision-comparison/9"
 HTML_COORDINATES = "email_html_extracted_text_unicode_codepoint"
+ARTICLE_COORDINATES = "html_article_extracted_text_unicode_codepoint"
 MIXED_COORDINATES = "per_source_unicode_codepoint"
 TOKENS = re.compile(r"\w+(?:[’'-]\w+)*|[^\w\s]")
 MAX_BYTES = 1024 * 1024
@@ -35,7 +42,7 @@ MAX_CHARS = 30_000
 MAX_TOKENS = 2_000
 MAX_DOCX_XML_BYTES = 2 * 1024 * 1024
 ROLES = ("body", "quoted", "signature")
-FORMATS = {".eml": "email", ".txt": "plain_text", ".docx": "docx", ".odt": "odt", ".pdf": "pdf", ".rtf": "rtf"}
+FORMATS = {".eml": "email", ".txt": "plain_text", ".docx": "docx", ".odt": "odt", ".pdf": "pdf", ".rtf": "rtf", ".html": "html"}
 MIXED_DRAFTS = (".txt", ".docx", ".pdf")
 EXTRACTED_PARAGRAPH_DRAFTS = {".odt": "OpenDocument", ".rtf": "Rich Text"}
 COMPARABLE_DRAFTS = (*MIXED_DRAFTS, *EXTRACTED_PARAGRAPH_DRAFTS)
@@ -43,10 +50,13 @@ TEXT_COORDINATES = "decoded_source_unicode_codepoint"
 WORD_COORDINATES = "docx_body_unicode_codepoint"
 ODT_COORDINATES = "odt_body_unicode_codepoint"
 RTF_COORDINATES = "rtf_extracted_text_unicode_codepoint"
-SUPPORTED_DRAFTS = "matching .eml, .txt, .docx, .odt, .rtf or .pdf files"
+SUPPORTED_DRAFTS = "matching .eml, .txt, .docx, .odt, .rtf, .pdf or HTML files"
 SCOPE = "Compares words and punctuation in the decoded text. Email body, quoted text and signatures are mapped separately."
 HTML_SCOPE = ("Compares visible words and punctuation in the reply body. Quoted text, attachments, headers and "
               "formatting are outside this comparison.")
+ARTICLE_SCOPE = ("Compares words and punctuation in supported paragraphs, headings, lists and descriptions within one "
+                 "marked HTML article or main area in each saved file. Navigation, quotations, figures, tables, "
+                 "and explicitly hidden content are outside the comparison. Scripts and linked resources stay unloaded.")
 DOCX_SCOPE = ("Compares words and punctuation in top-level Word body paragraphs. Tables, headers, footers, text boxes, "
               "embedded content, formatting and tracked revision markup are outside this comparison.")
 ODT_SCOPE = ("OpenDocument coverage includes extracted body paragraphs, headings, lists and table text in reading order. "
@@ -67,6 +77,11 @@ WordParagraphs = list[tuple[int, int, int, int]]
 WordLayouts = tuple[WordParagraphs, WordParagraphs]
 PdfLayouts = tuple[list[dict], list[dict]]
 MixedLayouts = tuple[WordParagraphs | list[dict] | None, WordParagraphs | list[dict] | None]
+
+
+def draft_extension(filename: str | Path) -> str:
+    suffix = Path(filename).suffix.lower()
+    return ".html" if suffix == ".htm" else suffix
 
 
 def tokens(text, offsets):
@@ -103,6 +118,8 @@ def _sentence_anchors(text, layout, extension, body):
 
     if extension == ".docx" or extension in EXTRACTED_PARAGRAPH_DRAFTS:
         blocks = [(start, end) for _, _, start, end in layout]
+    elif extension == ".html":
+        blocks = layout[2]
     elif extension == ".pdf":
         blocks = [(row["start"], row["end"]) for row in layout]
     else:
@@ -257,8 +274,28 @@ def _html_source(data, decoded, doc, mime_part):
     return doc.text, {"body": body, "quoted": [], "signature": []}, record, (decoded, mapping)
 
 
+def _article_source(data):
+    encoding = "utf-16" if data.startswith((b"\xff\xfe", b"\xfe\xff")) else "utf-8-sig"
+    decoded = data.decode(encoding)
+    article = html_article.read(decoded)
+    if article is None or not valid_html_article_scope(article[1]):
+        raise ValueError("Use saved HTML files with readable paragraphs in one marked article or main area.")
+    doc = _join_mapped(article[0])
+    if not 0 < len(doc.text) <= MAX_CHARS:
+        raise ValueError(f"Each article needs readable text and at most {MAX_CHARS:,} extracted characters.")
+    body = tokens(doc.text, doc.paragraphs)
+    if len(body) > MAX_TOKENS:
+        raise ValueError(f"Each article can contain up to {MAX_TOKENS:,} words and punctuation tokens.")
+    mapping = [row for block in doc.source_map for row in block["source_ranges"]]
+    record = _source_record(data, doc.text) | {
+        "decoded_html_sha256": text_hash(decoded), "decoded_html_characters": len(decoded),
+        "html_article_scope": {**article[1], "included_blocks": len(doc.paragraphs), "unmapped_text": article[2]},
+    }
+    return doc.text, {"body": body, "quoted": [], "signature": []}, record, (decoded, mapping, doc.paragraphs)
+
+
 def _html_token_sources(text, layout, changed_tokens):
-    decoded, mapping = layout
+    decoded, mapping = layout[:2]
     located = []
     for start, end in changed_tokens:
         spans = []
@@ -281,12 +318,14 @@ def _html_token_sources(text, layout, changed_tokens):
                 spans.append([lo, hi])
             cursor = stop
         if cursor != end:
-            raise ValueError("A changed token could not be mapped to the decoded HTML reply.")
+            raise ValueError("A changed token could not be mapped to the decoded HTML source.")
         located.append({"start": start, "end": end, "source_ranges": spans})
     return located
 
 
 def _source(path: Path, data: bytes, extension: str, *, mixed: bool = False, word_body=None, allow_empty_word_body=False):
+    if extension == ".html":
+        return _article_source(data)
     if extension == ".docx":
         return _docx_source(data, body=word_body, allow_empty=allow_empty_word_body)
     if extension in EXTRACTED_PARAGRAPH_DRAFTS:
@@ -380,7 +419,7 @@ def _excerpt(text: str, extent: list[int] | None, changed_tokens: list[list[int]
             for paragraph, index, a, b in layout
             if max(start, a) < min(end, b) or start == end and a <= start <= b
         ]
-    elif extension == ".eml" and layout is not None:
+    elif extension in {".eml", ".html"} and layout is not None:
         result["html_tokens"] = _html_token_sources(text, layout, changed_tokens)
     return result
 
@@ -403,6 +442,8 @@ def _figure_blocks(text, layout, by_role, extension, word_body):
         return [(a, b) for index, (_, _, a, b) in enumerate(layout) if index in visible]
     if extension in EXTRACTED_PARAGRAPH_DRAFTS:
         return [(a, b) for _, _, a, b in layout]
+    if extension == ".html":
+        return layout[2]
     if extension == ".pdf":
         if (any(row["hidden_text_on_page"] for row in layout)
                 or not document_revision_pdf.ordered_text(
@@ -556,7 +597,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     old_extension = extension if earlier_extension is None else earlier_extension
     mixed = old_extension != extension
     if mixed and any(value not in COMPARABLE_DRAFTS for value in (old_extension, extension)):
-        raise ValueError("Use TXT, DOCX, ODT, RTF or PDF when comparing drafts across formats. Email drafts require matching EML files.")
+        raise ValueError("Use TXT, DOCX, ODT, RTF or PDF when comparing different formats. Compare email with email and HTML with HTML.")
     mixed_paired = mixed_paired and all(value in MIXED_DRAFTS for value in (old_extension, extension))
     if any(not 0 < len(item) <= MAX_BYTES for item in (earlier, later)):
         raise ValueError("Each version must be nonempty and at most 1 MiB.")
@@ -605,6 +646,8 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                 raise ValueError("Use two email drafts with the same body type. Both must use plain text or supported HTML.")
             if old_layout is not None:
                 schema, scope, coordinates = HTML_SCHEMA, HTML_SCOPE, HTML_COORDINATES
+        if extension == ".html":
+            schema, scope, coordinates = ARTICLE_SCHEMA, ARTICLE_SCOPE, ARTICLE_COORDINATES
         values = None
         if include_values:
             values = _figure_comparison(
@@ -622,7 +665,8 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                     by_role["body"] = [token for token in by_role["body"]
                                        if token[2] <= excerpt["start"] or token[1] >= excerpt["end"]]
         for role in ROLES:
-            if role == "body" and (old_extension in EXTRACTED_PARAGRAPH_DRAFTS or extension in EXTRACTED_PARAGRAPH_DRAFTS):
+            if role == "body" and (extension == ".html" or old_extension in EXTRACTED_PARAGRAPH_DRAFTS
+                                   or extension in EXTRACTED_PARAGRAPH_DRAFTS):
                 edit_rows = _localized_body_differences(old_text, new_text, old_layout, new_layout, old_extension,
                                                         extension, old_tokens[role], new_tokens[role])
             else:

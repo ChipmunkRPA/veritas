@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from html import escape
 
-from app.evidence.document_revision import EDITED_RELOCATION_SCHEMA, HTML_COORDINATES
+from app.evidence.document_revision import ARTICLE_COORDINATES, EDITED_RELOCATION_SCHEMA, HTML_COORDINATES
 from app.evidence.document_revision_writing import BLOCK_DRAFT_SCHEMA, PDF_CONTINUATION_SCHEMA, STATUS_TEXT
 from app.reports.engine import _restricted_fetcher, load_weasyprint
 
@@ -195,9 +195,10 @@ def render(comparison: dict) -> bytes:
                                        or paired.get("earlier", {}).get("context_paragraphs"))
     change_class = ' class="keep-together"' if keep_changes_together else ""
     html_reply = comparison["coordinate_space"] == HTML_COORDINATES
+    html_article = comparison["coordinate_space"] == ARTICLE_COORDINATES
     mixed = comparison["format"] == "mixed"
     format_label = {"plain_text": "Text", "docx": "Word body text", "odt": "OpenDocument body text",
-                    "pdf": "PDF text", "rtf": "Rich Text passage", "mixed": "Wording change"}.get(comparison["format"])
+                    "pdf": "PDF text", "rtf": "Rich Text passage", "html": "HTML article", "mixed": "Wording change"}.get(comparison["format"])
     for change in comparison["changes"]:
         label = format_label or LABELS[change["role"]]
         anchor = escape(change["id"])
@@ -214,6 +215,10 @@ def render(comparison: dict) -> bytes:
         part = f' · MIME part {escape(source["mime_part"])}' if source["mime_part"] else ""
         if mixed:
             part = f' · {FILE_LABELS[source["format"]]}'
+        if article := source.get("html_article_scope"):
+            part = f' · {article["included_blocks"]} compared text blocks'
+            if article["unmapped_text"]:
+                part += " · Additional text outside supported blocks was skipped."
         sources.append(f'<p><strong>{label}</strong>{part}<br>SHA-256 <span class="hash">{escape(source["sha256"])}</span></p>')
     positions = ("Word offsets count Unicode code points in the body text. Two line breaks separate included paragraphs. "
                  "Each paragraph range uses offsets within that paragraph." if docx else "Ranges use decoded Unicode code points.")
@@ -227,13 +232,18 @@ def render(comparison: dict) -> bytes:
     if html_reply:
         positions = ("The first range gives the position in the extracted reply. The ranges after the arrow give the positions "
                      "in the decoded HTML MIME part. Both count Unicode code points.")
+    if html_article:
+        positions = ("The first range gives the position in the extracted article. The ranges after the arrow give the positions "
+                     "in the decoded HTML file. Both count Unicode code points.")
     if mixed:
         positions = ("Each side uses its own Unicode character offsets. Paragraph ranges start within the listed paragraph. "
                      "PDF source boxes use unrotated page coordinates.")
     word_tables = comparison.get("word_tables")
     no_changes = ("No other word or punctuation changes found." if edited_relocation else
                   "No word or punctuation changes found in the top-level body paragraphs." if word_tables else
-                  "No word or punctuation changes found in the reply body." if html_reply else "No word or punctuation changes found.")
+                  "No word or punctuation changes found in the reply body." if html_reply else
+                  "No word or punctuation changes found in the compared article text." if html_article
+                  else "No word or punctuation changes found.")
     content = f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Earlier-draft comparison</title>
 <meta name="author" content="Chipmunk Verify"><style>{STYLE}</style></head><body>
 <p class="brand">CHIPMUNK VERIFY</p><h1>Earlier-draft comparison</h1>

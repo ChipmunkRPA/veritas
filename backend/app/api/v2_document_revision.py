@@ -5,7 +5,6 @@ from __future__ import annotations
 import base64
 import hashlib
 import threading
-from pathlib import Path
 from typing import Literal
 
 from fastapi import APIRouter, Depends, Request
@@ -20,7 +19,13 @@ from app.api.v2_evidence import _analysis
 from app.cases import review
 from app.core.config import settings
 from app.core.logging import get_logger
-from app.evidence.document_revision import COMPARABLE_DRAFTS, FORMATS, MAX_BYTES, MIXED_DRAFTS
+from app.evidence.document_revision import (
+    COMPARABLE_DRAFTS,
+    FORMATS,
+    MAX_BYTES,
+    MIXED_DRAFTS,
+    draft_extension,
+)
 from app.storage.db import get_session
 from app.storage.objects import ObjectNotFound, ObjectStoreError, default_store
 
@@ -33,7 +38,7 @@ router = APIRouter(prefix="/api/v2", tags=["evidence"], dependencies=[Depends(ra
                    route_class=CheckedRoute)
 
 
-DraftExtension = Literal[".eml", ".txt", ".docx", ".odt", ".pdf", ".rtf"]
+DraftExtension = Literal[".eml", ".txt", ".docx", ".odt", ".pdf", ".rtf", ".html", ".htm"]
 
 
 class DocumentRevisionAvailability(BaseModel):
@@ -44,6 +49,14 @@ class DocumentRevisionAvailability(BaseModel):
     earlier_extensions: list[DraftExtension] | None = None
 
 
+class DraftHtmlArticleScope(BaseModel):
+    policy: Literal["static-html-article/1"]
+    element: Literal["article", "main"]
+    scope: tuple[int, int]
+    included_blocks: int
+    unmapped_text: bool
+
+
 class DraftSource(BaseModel):
     sha256: str
     bytes: int
@@ -52,6 +65,7 @@ class DraftSource(BaseModel):
     mime_part: str | None
     decoded_html_sha256: str | None = None
     decoded_html_characters: int | None = None
+    html_article_scope: DraftHtmlArticleScope | None = None
     format: Literal["plain_text", "docx", "odt", "pdf", "rtf"] | None = None
     coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint", "odt_body_unicode_codepoint",
                               "pdf_native_text_unicode_codepoint", "rtf_extracted_text_unicode_codepoint"] | None = None
@@ -257,11 +271,13 @@ class DraftComparison(BaseModel):
     schema_name: Literal["chipmunk.document-revision-comparison/1", "chipmunk.document-revision-comparison/2",
                          "chipmunk.document-revision-comparison/3", "chipmunk.document-revision-comparison/4",
                          "chipmunk.document-revision-comparison/5", "chipmunk.document-revision-comparison/6",
-                         "chipmunk.document-revision-comparison/7", "chipmunk.document-revision-comparison/8"] = Field(alias="schema")
-    format: Literal["email", "plain_text", "docx", "odt", "pdf", "rtf", "mixed"]
+                         "chipmunk.document-revision-comparison/7", "chipmunk.document-revision-comparison/8",
+                         "chipmunk.document-revision-comparison/9"] = Field(alias="schema")
+    format: Literal["email", "plain_text", "docx", "odt", "pdf", "rtf", "html", "mixed"]
     coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint", "odt_body_unicode_codepoint",
                               "pdf_native_text_unicode_codepoint", "email_html_extracted_text_unicode_codepoint",
-                              "rtf_extracted_text_unicode_codepoint", "per_source_unicode_codepoint"]
+                              "rtf_extracted_text_unicode_codepoint", "html_article_extracted_text_unicode_codepoint",
+                              "per_source_unicode_codepoint"]
     earlier: DraftSource
     later: DraftSource
     changes: list[DraftChange]
@@ -297,7 +313,7 @@ def _authenticated(request: Request) -> bool:
 def _original(aid: str, *, reject_inactive: bool = False) -> tuple[str, int, str] | None:
     with get_session() as db:
         analysis = _analysis(db, aid)
-        extension = Path(analysis.filename).suffix.lower()
+        extension = draft_extension(analysis.filename)
         if (not enabled() or analysis.kind != "document" or analysis.status != "done" or not analysis.result_hash
                 or extension not in FORMATS or not 0 < analysis.size_bytes <= upload_limit()):
             return None
@@ -314,7 +330,7 @@ def _original(aid: str, *, reject_inactive: bool = False) -> tuple[str, int, str
 
 def _unavailable() -> ProblemError:
     return ProblemError(404, "Earlier-draft comparison unavailable",
-                        "A retained, completed, active .eml, .txt, .docx, .odt, .rtf or .pdf analysis is required.")
+                        "A retained, completed, active EML, TXT, DOCX, ODT, RTF, PDF or HTML analysis is required.")
 
 
 def _paired_enabled(extension: str | None) -> bool:
@@ -340,6 +356,8 @@ def availability(aid: str, request: Request):
     payload = {"available": extension is not None, "extension": extension}
     if extension in COMPARABLE_DRAFTS:
         payload["earlier_extensions"] = list(COMPARABLE_DRAFTS)
+    elif extension == ".html":
+        payload["earlier_extensions"] = [".html", ".htm"]
     if _paired_enabled(extension):
         payload["paired_check_available"] = True
         if extension in MIXED_DRAFTS and settings.document_paired_independent_review:
@@ -473,7 +491,9 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
     ROUTE, response_model=DocumentRevisionResponse, responses=problem_responses(400, 401, 404, 409, 413, 422, 429, 500),
     openapi_extra={"requestBody": {"required": True, "content": {"multipart/form-data": {"schema": {
         "type": "object", "required": ["earlier"], "properties": {
-            "earlier": {"type": "string", "format": "binary", "description": "Earlier version. TXT, DOCX, ODT, RTF and PDF may be mixed. Use EML with EML."},
+            "earlier": {"type": "string", "format": "binary", "description": (
+                "Earlier version. TXT, DOCX, ODT, RTF and PDF may be mixed. Compare EML with EML and HTML with HTML."
+            )},
             "include_pdf": {"type": "string", "enum": ["true", "false"], "default": "false"},
             "include_paired_check": {"type": "string", "enum": ["true", "false"], "default": "false"},
         },
@@ -497,7 +517,7 @@ async def comparison(aid: str, request: Request):
                     or set(form) - {"earlier", "include_pdf", "include_paired_check"}
                     or any(len(form.getlist(key)) > 1 for key in form)):
                 raise ProblemError(422, "Earlier draft required", "Upload a single earlier draft to compare.")
-            earlier_extension = Path(earlier.filename or "").suffix.lower()
+            earlier_extension = draft_extension(earlier.filename or "")
             if earlier_extension != original[2] and any(suffix not in COMPARABLE_DRAFTS for suffix in (earlier_extension, original[2])):
                 raise ProblemError(422, "Draft formats differ", f"Choose an earlier {original[2]} file to match the retained document.")
             limit = upload_limit()

@@ -11,7 +11,7 @@ from app.evidence.document_scope import HTML_ARTICLE_KEY as KEY
 from app.evidence.document_scope import HTML_ARTICLE_MAX_SOURCE as MAX_HTML
 from app.evidence.document_scope import HTML_ARTICLE_POLICY as POLICY
 
-__all__ = ["KEY", "LIMITATION", "POLICY", "READER", "parts"]
+__all__ = ["KEY", "LIMITATION", "POLICY", "READER", "parts", "read"]
 
 READER = "html_article_reader"
 LIMITATION = ("Writing checks read paragraphs, headings, lists and descriptions in one marked HTML article or main area. "
@@ -156,8 +156,8 @@ class _Paragraphs(_StaticHTML):
         self._entity(f"&#{name};")
 
 
-def parts(raw):
-    """Return literal text ranges within one qualified article or main element."""
+def read(raw):
+    """Return literal text ranges and any unmapped text inside the selected area."""
     if len(raw) > MAX_HTML or "\ufffd" in raw or "\x00" in raw:
         return None
     try:
@@ -176,4 +176,9 @@ def parts(raw):
         return None
     if parser.unmapped and not any(text.strip() for text, _ in parser.parts):
         return None
-    return parser.parts, {"policy": POLICY, "element": selected["tag"], "scope": [start, end]}
+    return parser.parts, {"policy": POLICY, "element": selected["tag"], "scope": [start, end]}, parser.unmapped
+
+
+def parts(raw):
+    result = read(raw)
+    return result[:2] if result is not None else None

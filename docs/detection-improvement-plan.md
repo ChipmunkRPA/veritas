@@ -66,6 +66,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- Comparing two saved HTML articles now preserves the original positions
+  of changed words in both files. It found wording changes within all 19
+  known rewrites when supplied their earlier copies. The comparison also
+  reproduced exact single-word positions on 25 saved publisher pages.
+  [Earlier HTML drafts](writing-html-draft-2026-11-18.md)
+
 - Word files without a default paragraph style now finish analysis.
   Findings identify exact character ranges in OpenDocument paragraphs and
   Rich Text blocks. All eight formats and a separate scanned PDF completed the

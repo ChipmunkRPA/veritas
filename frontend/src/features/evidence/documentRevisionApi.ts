@@ -34,11 +34,15 @@ export async function compareDraft(analysisId: string, file: File, signal: Abort
   if ((schema !== 'chipmunk.document-revision-comparison/1' && schema !== 'chipmunk.document-revision-comparison/2'
       && schema !== 'chipmunk.document-revision-comparison/3' && schema !== 'chipmunk.document-revision-comparison/4'
       && schema !== 'chipmunk.document-revision-comparison/5' && schema !== 'chipmunk.document-revision-comparison/6'
-      && schema !== 'chipmunk.document-revision-comparison/7' && schema !== 'chipmunk.document-revision-comparison/8')
+      && schema !== 'chipmunk.document-revision-comparison/7' && schema !== 'chipmunk.document-revision-comparison/8'
+      && schema !== 'chipmunk.document-revision-comparison/9')
       || !Array.isArray(result.comparison.changes)
       || ((schema === 'chipmunk.document-revision-comparison/6' || schema === 'chipmunk.document-revision-comparison/8')
         && !result.comparison.relocated_passages?.length)
       || (schema === 'chipmunk.document-revision-comparison/7' && result.comparison.format !== 'plain_text')
+      || (schema === 'chipmunk.document-revision-comparison/9'
+        && (result.comparison.format !== 'html' || result.comparison.coordinate_space !== 'html_article_extracted_text_unicode_codepoint'
+          || !result.comparison.earlier.html_article_scope || !result.comparison.later.html_article_scope))
       || ((schema === 'chipmunk.document-revision-comparison/4' || schema === 'chipmunk.document-revision-comparison/5')
         && !result.comparison.word_tables)) {
     throw new Error('The server returned an incomplete draft comparison.')

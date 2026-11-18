@@ -238,6 +238,66 @@ def _upload(data, extension=".eml"):
     return {"earlier": ("earlier" + extension, data, "application/octet-stream")}
 
 
+def test_saved_html_draft_comparison_replays_exact_markup_positions(reference_http, monkeypatch, tmp_path):
+    fixture = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    monkeypatch.setattr(paired, "score", lambda _: pytest.fail("HTML article comparison needs no writing model"))
+    earlier = ("<nav>Earlier menu</nav><main><article><h1>Visitor guide</h1>"
+               "<p>Café guests use the <b>nor</b>th gate until the repairs are complete.</p>"
+               "<p>Store each receipt until Monday and file it in the office.</p></article></main>")
+    later = (earlier.replace("Earlier menu", "Later menu").replace("<b>nor</b>th", "<em>sou</em>th")
+                    .replace("</article>", "<div>Additional unmapped text</div></article>"))
+    _saved(fixture, "html-article", ".htm", later.encode("utf-16"))
+    route = _url("html-article")
+    assert fixture.client.get(route, headers=fixture.viewer).json() == {
+        "available": True, "extension": ".html", "earlier_extensions": [".html", ".htm"]
+    }
+    response = fixture.client.post(route, headers=fixture.viewer, files=_upload(earlier.encode(), ".html"),
+                                   data={"include_pdf": "true", "include_paired_check": "true"})
+    assert response.status_code == 200, response.text
+    result = response.json()
+    comparison = result["comparison"]
+    assert comparison["schema"] == document_revision.ARTICLE_SCHEMA
+    assert comparison["coordinate_space"] == document_revision.ARTICLE_COORDINATES
+    assert comparison["earlier"]["html_article_scope"]["unmapped_text"] is False
+    assert comparison["later"]["html_article_scope"]["unmapped_text"] is True
+    assert comparison["later"]["html_article_scope"]["included_blocks"] == 3
+    assert "paired_check" not in comparison
+    (change,) = comparison["changes"]
+    assert change["role"] == "body"
+    for side, raw, word in (("earlier", earlier, "north"), ("later", later, "south")):
+        excerpt = change[side]
+        (token,) = excerpt["html_tokens"]
+        assert excerpt["text"] == word
+        assert [token["start"], token["end"]] == excerpt["changed_tokens"][0]
+        assert len(token["source_ranges"]) == 2
+        assert "".join(raw[a:b] for a, b in token["source_ranges"]) == word
+    with pymupdf.open(stream=base64.b64decode(result["pdf"]), filetype="pdf") as pdf:
+        words = " ".join(word for page in pdf for word in page.get_text().split())
+    assert all(part in words for part in ("HTML article", "north", "south", "decoded HTML file", "Decoded HTML positions"))
+    assert "Additional text outside supported blocks was skipped." in words
+    assert "Additional unmapped text" not in words and "Later menu" not in words and "Earlier menu" not in words
+    export, old, new = (tmp_path / name for name in ("comparison.json", "old.html", "new.htm"))
+    export.write_text(json.dumps(comparison))
+    old.write_bytes(earlier.encode())
+    new.write_bytes(later.encode("utf-16"))
+    assert review(export, old, new)["decoded_html_ranges_verified"] == 4
+    change["later"]["html_tokens"][0]["source_ranges"][0][0] += 1
+    export.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(export, old, new)
+
+
+@pytest.mark.parametrize("partial", [
+    b"<main>Only body words outside supported paragraphs.</main>",
+    b"<main><article><p>First story.</p></article><article><p>Second story.</p></article></main>",
+])
+def test_saved_html_draft_refuses_ambiguous_or_unmapped_article(partial):
+    earlier = b"<main><p>Readable earlier paragraph.</p></main>"
+    with pytest.raises(ValueError, match="one marked article or main area"):
+        document_revision.compare(earlier, partial, ".html")
+
+
 def test_figure_changes_use_exact_source_ranges_across_txt_and_pdf(reference_http, monkeypatch, tmp_path):
     from scripts.replay_document_mixed_formats import pdf
 

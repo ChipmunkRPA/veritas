@@ -47,6 +47,10 @@ The local batch tool also accepts native DOCX and ODT packages.
 character ranges for uniquely mapped article passages without changing the text
 sent to the writing checks.
 
+The local app also compares two saved HTML articles when an earlier copy is
+available. It marks wording changes in both decoded sources and gives the
+number of compared text blocks. [Earlier HTML drafts](writing-html-draft-2026-11-18.md)
+
 The local development app can check ODT for earlier published wording when
 automatic review and the GovReport archive are enabled. When a dated U.S. GAO
 highlight qualifies, the report pairs each difference with the earlier

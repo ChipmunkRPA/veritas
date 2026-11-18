@@ -1,0 +1,2954 @@
+{
+  "device": "local CPU",
+  "paired_serving_stage": {
+    "rows": [
+      {
+        "additional": [
+          {
+            "anchors": {
+              "after": 98,
+              "before": 89,
+              "during": 94
+            },
+            "key": "face_return_secondary",
+            "method": "face-short-return/14",
+            "span": [
+              90,
+              98
+            ]
+          }
+        ],
+        "group": 1,
+        "input_sha256": "58488a3dbb007606d4971bf6358261355633d32abcec9502df4e0915cf0c138c",
+        "prior_scores": [
+          {
+            "quality": {},
+            "raw": 0.09411348034604715,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          },
+          {
+            "quality": {},
+            "raw": 0.09411348034604715,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          }
+        ],
+        "received": [
+          {
+            "key": "face_return",
+            "method": "face-short-return/13",
+            "span": [
+              62,
+              68
+            ]
+          }
+        ],
+        "role": "two_swaps",
+        "supplemented": [
+          {
+            "key": "face_return",
+            "method": "face-short-return/13",
+            "span": [
+              62,
+              68
+            ]
+          },
+          {
+            "anchors": {
+              "after": 98,
+              "before": 89,
+              "during": 94
+            },
+            "key": "face_return_secondary",
+            "method": "face-short-return/14",
+            "span": [
+              90,
+              98
+            ]
+          }
+        ],
+        "truth": [
+          [
+            62,
+            68
+          ],
+          [
+            90,
+            98
+          ]
+        ]
+      },
+      {
+        "additional": [],
+        "group": 1,
+        "input_sha256": "67c1e5b1159d3e4ef293c36b51204d5f5e7c716e2491ee4e5bfd28189457a8e8",
+        "prior_scores": [
+          {
+            "quality": {},
+            "raw": 0.010420453850403001,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          },
+          {
+            "quality": {},
+            "raw": 0.010420453850403001,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          }
+        ],
+        "received": [],
+        "role": "cross_recording_cuts",
+        "supplemented": [],
+        "truth": []
+      },
+      {
+        "additional": [],
+        "group": 1,
+        "input_sha256": "1cc709f016b2c89fd2bb27fccfdb3555e98cc6150b32955d3cbf814b4fd61686",
+        "prior_scores": [
+          {
+            "quality": {},
+            "raw": 0.024556133412235684,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          },
+          {
+            "quality": {},
+            "raw": 0.024556133412235684,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          }
+        ],
+        "received": [],
+        "role": "original",
+        "supplemented": [],
+        "truth": []
+      },
+      {
+        "additional": [
+          {
+            "anchors": {
+              "after": 100,
+              "before": 93,
+              "during": 97
+            },
+            "key": "face_return_secondary",
+            "method": "face-short-return/14",
+            "span": [
+              94,
+              100
+            ]
+          }
+        ],
+        "group": 2,
+        "input_sha256": "d15a439847ca15b0a6835d1688eb8a994204af9f2fa3400ed387b93a46264a91",
+        "prior_scores": [
+          {
+            "quality": {},
+            "raw": 0.13306742733013016,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          },
+          {
+            "quality": {},
+            "raw": 0.13306742733013016,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          }
+        ],
+        "received": [
+          {
+            "key": "face_sequence",
+            "method": "face-appearance-change/1",
+            "span": [
+              71,
+              95
+            ]
+          },
+          {
+            "key": "face_return",
+            "method": "face-short-return/6",
+            "span": [
+              68,
+              76
+            ]
+          }
+        ],
+        "role": "tandem_two_swaps",
+        "supplemented": [
+          {
+            "key": "face_sequence",
+            "method": "face-appearance-change/1",
+            "span": [
+              71,
+              95
+            ]
+          },
+          {
+            "key": "face_return",
+            "method": "face-short-return/6",
+            "span": [
+              68,
+              76
+            ]
+          },
+          {
+            "anchors": {
+              "after": 100,
+              "before": 93,
+              "during": 97
+            },
+            "key": "face_return_secondary",
+            "method": "face-short-return/14",
+            "span": [
+              94,
+              100
+            ]
+          }
+        ],
+        "truth": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ]
+      },
+      {
+        "additional": [],
+        "group": 2,
+        "input_sha256": "24b7a49c2781ba6eb9f17b1977fab27021d93ecfa5dc75b234d1e1ee060fb8e5",
+        "prior_scores": [
+          {
+            "quality": {},
+            "raw": 0.0899610372377352,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          },
+          {
+            "quality": {},
+            "raw": 0.0899610372377352,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          }
+        ],
+        "received": [
+          {
+            "key": "face_return",
+            "method": "face-short-return/6",
+            "span": [
+              68,
+              76
+            ]
+          }
+        ],
+        "role": "swap_then_jump",
+        "supplemented": [
+          {
+            "key": "face_return",
+            "method": "face-short-return/6",
+            "span": [
+              68,
+              76
+            ]
+          }
+        ],
+        "truth": [
+          [
+            67,
+            75
+          ]
+        ]
+      },
+      {
+        "additional": [],
+        "group": 2,
+        "input_sha256": "86c4272bfeac3920b8f532f55bb005b5d7eb9021ed88049a6bd391571e802207",
+        "prior_scores": [
+          {
+            "quality": {},
+            "raw": 0.013058671488499375,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          },
+          {
+            "quality": {},
+            "raw": 0.013058671488499375,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          }
+        ],
+        "received": [],
+        "role": "same_source_cuts",
+        "supplemented": [],
+        "truth": []
+      },
+      {
+        "additional": [
+          {
+            "anchors": {
+              "after": 100,
+              "before": 93,
+              "during": 97
+            },
+            "key": "face_return_secondary",
+            "method": "face-short-return/14",
+            "span": [
+              94,
+              100
+            ]
+          }
+        ],
+        "group": 6,
+        "input_sha256": "0cd6f717c88f39a3a500b35a6b48ee5bc30991eeb4c7e80b919f7f90d12976b6",
+        "prior_scores": [
+          {
+            "quality": {},
+            "raw": 0.14192196792872305,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          },
+          {
+            "quality": {},
+            "raw": 0.14192196792872305,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          }
+        ],
+        "received": [
+          {
+            "key": "face_sequence",
+            "method": "face-appearance-change/1",
+            "span": [
+              71,
+              95
+            ]
+          },
+          {
+            "key": "face_return",
+            "method": "face-short-return/6",
+            "span": [
+              68,
+              76
+            ]
+          }
+        ],
+        "role": "two_swaps",
+        "supplemented": [
+          {
+            "key": "face_sequence",
+            "method": "face-appearance-change/1",
+            "span": [
+              71,
+              95
+            ]
+          },
+          {
+            "key": "face_return",
+            "method": "face-short-return/6",
+            "span": [
+              68,
+              76
+            ]
+          },
+          {
+            "anchors": {
+              "after": 100,
+              "before": 93,
+              "during": 97
+            },
+            "key": "face_return_secondary",
+            "method": "face-short-return/14",
+            "span": [
+              94,
+              100
+            ]
+          }
+        ],
+        "truth": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ]
+      },
+      {
+        "additional": [],
+        "group": 6,
+        "input_sha256": "915361740cfbca5848884c2c0efd8f66b69a50ee7ef2a04276faf46630a4aa6a",
+        "prior_scores": [
+          {
+            "quality": {},
+            "raw": 0.16184766994774302,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          },
+          {
+            "quality": {},
+            "raw": 0.16184766994774302,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          }
+        ],
+        "received": [
+          {
+            "key": "face_sequence",
+            "method": "face-appearance-change/1",
+            "span": [
+              71,
+              95
+            ]
+          },
+          {
+            "key": "face_return",
+            "method": "face-short-return/6",
+            "span": [
+              68,
+              76
+            ]
+          }
+        ],
+        "role": "tandem_two_swaps",
+        "supplemented": [
+          {
+            "key": "face_sequence",
+            "method": "face-appearance-change/1",
+            "span": [
+              71,
+              95
+            ]
+          },
+          {
+            "key": "face_return",
+            "method": "face-short-return/6",
+            "span": [
+              68,
+              76
+            ]
+          }
+        ],
+        "truth": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ]
+      },
+      {
+        "additional": [],
+        "group": 6,
+        "input_sha256": "526b1c167f78686e478fa011b89e982ce06320d46025f959561967cd1cecae8a",
+        "prior_scores": [
+          {
+            "quality": {},
+            "raw": 0.014398963303276797,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          },
+          {
+            "quality": {},
+            "raw": 0.014398963303276797,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          }
+        ],
+        "received": [],
+        "role": "original",
+        "supplemented": [],
+        "truth": []
+      },
+      {
+        "additional": [
+          {
+            "anchors": {
+              "after": 97,
+              "before": 90,
+              "during": 94
+            },
+            "key": "face_return_secondary",
+            "method": "face-short-return/14",
+            "span": [
+              91,
+              97
+            ]
+          }
+        ],
+        "group": 8,
+        "input_sha256": "2b30074c487f993432efa6fe9429c3f7ddaa34ff430ff5d133402df16648c253",
+        "prior_scores": [
+          {
+            "quality": {},
+            "raw": 0.12287256556411634,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          },
+          {
+            "quality": {},
+            "raw": 0.12287256556411634,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          }
+        ],
+        "received": [
+          {
+            "key": "face_sequence",
+            "method": "face-appearance-change/1",
+            "span": [
+              71,
+              95
+            ]
+          },
+          {
+            "key": "face_return",
+            "method": "face-short-return/6",
+            "span": [
+              66,
+              74
+            ]
+          }
+        ],
+        "role": "two_swaps",
+        "supplemented": [
+          {
+            "key": "face_sequence",
+            "method": "face-appearance-change/1",
+            "span": [
+              71,
+              95
+            ]
+          },
+          {
+            "key": "face_return",
+            "method": "face-short-return/6",
+            "span": [
+              66,
+              74
+            ]
+          },
+          {
+            "anchors": {
+              "after": 97,
+              "before": 90,
+              "during": 94
+            },
+            "key": "face_return_secondary",
+            "method": "face-short-return/14",
+            "span": [
+              91,
+              97
+            ]
+          }
+        ],
+        "truth": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ]
+      },
+      {
+        "additional": [],
+        "group": 8,
+        "input_sha256": "4b0e9fa3304e3ebea08727ec3479ba2bf6ded1c2416b61fee4b936ba80a9edd9",
+        "prior_scores": [
+          {
+            "quality": {},
+            "raw": 0.10584538163603505,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          },
+          {
+            "quality": {},
+            "raw": 0.10584538163603505,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          }
+        ],
+        "received": [
+          {
+            "key": "face_return",
+            "method": "face-short-return/6",
+            "span": [
+              66,
+              74
+            ]
+          },
+          {
+            "key": "face_return_secondary",
+            "method": "face-short-return/8",
+            "span": [
+              92,
+              98
+            ]
+          }
+        ],
+        "role": "tandem_two_swaps",
+        "supplemented": [
+          {
+            "key": "face_return",
+            "method": "face-short-return/6",
+            "span": [
+              66,
+              74
+            ]
+          },
+          {
+            "key": "face_return_secondary",
+            "method": "face-short-return/8",
+            "span": [
+              92,
+              98
+            ]
+          }
+        ],
+        "truth": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ]
+      },
+      {
+        "additional": [],
+        "group": 8,
+        "input_sha256": "f5e29d274add2b65f317433f7e60898a6cb53a27f1f6fa91d284e92df362f5f8",
+        "prior_scores": [
+          {
+            "quality": {},
+            "raw": 0.012822676841540315,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          },
+          {
+            "quality": {},
+            "raw": 0.012822676841540315,
+            "raw_kind": "score",
+            "unit_ref": "global"
+          }
+        ],
+        "received": [],
+        "role": "cross_recording_cuts",
+        "supplemented": [],
+        "truth": []
+      }
+    ],
+    "source": "retained and previously tested RTFS sources"
+  },
+  "prepaid_checkout": {
+    "checks": {
+      "deep": {
+        "browser": {
+          "cases": [
+            {
+              "case": "g1-two_swaps.mp4",
+              "face_crops": 3,
+              "seek_s": 3.1333333333333333,
+              "source_frames": 3
+            }
+          ],
+          "page_errors": 0
+        },
+        "matched_assessment_pairs": 2,
+        "ordinary_matched_pairs": 1,
+        "pdf_json_and_signed_original_successes": 1,
+        "profile_preserved": true,
+        "reported_face_range_weight": 0,
+        "simulated_paid": 4,
+        "source_images_verified": 12,
+        "unpaid": 0
+      },
+      "full": {
+        "browser": {
+          "cases": [
+            {
+              "case": "g1-two_swaps.mp4",
+              "face_crops": 3,
+              "seek_s": 3.1333333333333333,
+              "source_frames": 3
+            },
+            {
+              "case": "g2-tandem_two_swaps.mp4",
+              "face_crops": 3,
+              "seek_s": 3.2333333333333334,
+              "source_frames": 3
+            }
+          ],
+          "page_errors": 0
+        },
+        "matched_assessment_pairs": 4,
+        "ordinary_matched_pairs": 2,
+        "pdf_json_and_signed_original_successes": 2,
+        "profile_preserved": true,
+        "reported_face_range_weight": 0,
+        "simulated_paid": 8,
+        "source_images_verified": 24,
+        "unpaid": 0
+      }
+    },
+    "disclosure": "Full API smoke used a temporary lower reserve in its isolated app. Chromium readbacks and Deep ran at the normal 1 GiB reserve. Live environment unchanged.",
+    "format": "four seconds, 120 source frames, 1280x720 H.264 avc1 4:2:0, confirmed 30 fps"
+  },
+  "schema": "chipmunk.video-face-current-ranges/1",
+  "split_screen_transfer": {
+    "rows": [
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "dominant": null,
+        "group": 1,
+        "incumbent": [],
+        "input_sha256": "9e637fb3123aa60e15becd152ce581fd9b9c377c4e782461ceeab5a462c77c35",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "100": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "host",
+            "guest"
+          ],
+          "71": [
+            "guest",
+            "host"
+          ],
+          "75": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "host",
+            "guest"
+          ],
+          "97": [
+            "guest",
+            "host"
+          ]
+        },
+        "role": "original",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "dominant": null,
+        "group": 1,
+        "incumbent": [],
+        "input_sha256": "d992ef237355faad973a3782fb7cb387879c9353edba9841545fb246375243db",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "100": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "host",
+            "guest"
+          ],
+          "71": [
+            "guest",
+            "host"
+          ],
+          "75": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "host",
+            "guest"
+          ],
+          "97": [
+            "guest",
+            "host"
+          ]
+        },
+        "role": "host_jump",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "dominant": null,
+        "group": 1,
+        "incumbent": [],
+        "input_sha256": "5b205b0f47a3f17f3a9271363165ec2bf7432784e3d9b0efe695cd91be91d722",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "100": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "host",
+            "guest"
+          ],
+          "71": [
+            "guest",
+            "host"
+          ],
+          "75": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "host",
+            "guest"
+          ],
+          "97": [
+            "guest",
+            "host"
+          ]
+        },
+        "role": "host_cut",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "dominant": null,
+        "group": 1,
+        "incumbent": [],
+        "input_sha256": "724fc18b4e7ea120223f7f3bbb3b9edd48b6bcda846240eca7bc2b527135545e",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "100": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "host",
+            "guest"
+          ],
+          "71": [
+            "guest",
+            "host"
+          ],
+          "75": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "host",
+            "guest"
+          ],
+          "97": [
+            "guest",
+            "host"
+          ]
+        },
+        "role": "guest_jump",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [
+          [
+            94,
+            100
+          ],
+          [
+            67,
+            75
+          ]
+        ],
+        "crossovers": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "dominant": null,
+        "group": 1,
+        "incumbent": [
+          [
+            94,
+            100
+          ],
+          [
+            67,
+            75
+          ]
+        ],
+        "input_sha256": "79e59dd824b6b5f5468d11ece4d30f1270e8d363a4287f0bf31dd12a0bf74927",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "100": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "host",
+            "guest"
+          ],
+          "71": [
+            "guest",
+            "host"
+          ],
+          "75": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "host",
+            "guest"
+          ],
+          "97": [
+            "guest",
+            "host"
+          ]
+        },
+        "role": "swap",
+        "routed": false,
+        "truth": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ]
+      },
+      {
+        "brief": [
+          [
+            94,
+            100
+          ],
+          [
+            67,
+            75
+          ]
+        ],
+        "crossovers": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "dominant": null,
+        "group": 1,
+        "incumbent": [
+          [
+            94,
+            100
+          ],
+          [
+            67,
+            75
+          ]
+        ],
+        "input_sha256": "df7c555ed239f54298c54dcb663bd8076af11e0d63d93ff58ae24315d4d9dd1f",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "100": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "host",
+            "guest"
+          ],
+          "71": [
+            "guest",
+            "host"
+          ],
+          "75": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "host",
+            "guest"
+          ],
+          "97": [
+            "guest",
+            "host"
+          ]
+        },
+        "role": "swap_tandem",
+        "routed": false,
+        "truth": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ]
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            64,
+            70
+          ],
+          [
+            88,
+            96
+          ]
+        ],
+        "dominant": null,
+        "group": 2,
+        "incumbent": [],
+        "input_sha256": "261fbd5a650aa817264cb37bf30d78a54e903b901160f7af3b5ebd36e449e15a",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "62": [
+            "host",
+            "guest"
+          ],
+          "67": [
+            "guest",
+            "host"
+          ],
+          "70": [
+            "host",
+            "guest"
+          ],
+          "86": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "guest",
+            "host"
+          ],
+          "96": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "original",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            64,
+            70
+          ],
+          [
+            88,
+            96
+          ]
+        ],
+        "dominant": null,
+        "group": 2,
+        "incumbent": [],
+        "input_sha256": "f2c6ea8d2f640d9f5b564d8cf558dd53d0bd0355fe2c5898e89f0fded881bcb5",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "62": [
+            "host",
+            "guest"
+          ],
+          "67": [
+            "guest",
+            "host"
+          ],
+          "70": [
+            "host",
+            "guest"
+          ],
+          "86": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "guest",
+            "host"
+          ],
+          "96": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "host_jump",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            64,
+            70
+          ],
+          [
+            88,
+            96
+          ]
+        ],
+        "dominant": null,
+        "group": 2,
+        "incumbent": [],
+        "input_sha256": "5080f4a6b6a352f88146d7b045f9dc2ff0f610275bd3186c0640be7c41769e04",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "62": [
+            "host",
+            "guest"
+          ],
+          "67": [
+            "guest",
+            "host"
+          ],
+          "70": [
+            "host",
+            "guest"
+          ],
+          "86": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "guest",
+            "host"
+          ],
+          "96": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "host_cut",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            64,
+            70
+          ],
+          [
+            88,
+            96
+          ]
+        ],
+        "dominant": null,
+        "group": 2,
+        "incumbent": [],
+        "input_sha256": "040a0569b798fb731ab7931c8ef624c796360311859e267c044297ca36c47be5",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "62": [
+            "host",
+            "guest"
+          ],
+          "67": [
+            "guest",
+            "host"
+          ],
+          "70": [
+            "host",
+            "guest"
+          ],
+          "86": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "guest",
+            "host"
+          ],
+          "96": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "guest_jump",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [
+          [
+            64,
+            70
+          ],
+          [
+            88,
+            96
+          ]
+        ],
+        "crossovers": [
+          [
+            64,
+            70
+          ],
+          [
+            88,
+            96
+          ]
+        ],
+        "dominant": null,
+        "group": 2,
+        "incumbent": [
+          [
+            64,
+            70
+          ],
+          [
+            88,
+            96
+          ]
+        ],
+        "input_sha256": "06e50439c7551030bea9374ae71b71c2ca613d1746424a86901c4b515bd92b96",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "62": [
+            "host",
+            "guest"
+          ],
+          "67": [
+            "guest",
+            "host"
+          ],
+          "70": [
+            "host",
+            "guest"
+          ],
+          "86": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "guest",
+            "host"
+          ],
+          "96": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "swap",
+        "routed": false,
+        "truth": [
+          [
+            64,
+            70
+          ],
+          [
+            88,
+            96
+          ]
+        ]
+      },
+      {
+        "brief": [
+          [
+            64,
+            70
+          ],
+          [
+            88,
+            96
+          ]
+        ],
+        "crossovers": [
+          [
+            64,
+            70
+          ],
+          [
+            88,
+            96
+          ]
+        ],
+        "dominant": null,
+        "group": 2,
+        "incumbent": [
+          [
+            64,
+            70
+          ],
+          [
+            88,
+            96
+          ]
+        ],
+        "input_sha256": "939d8bf2a674c578fbd83198e92f4c206a7e731e3a4eac4309e5beb85560732e",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "62": [
+            "host",
+            "guest"
+          ],
+          "67": [
+            "guest",
+            "host"
+          ],
+          "70": [
+            "host",
+            "guest"
+          ],
+          "86": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "guest",
+            "host"
+          ],
+          "96": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "swap_tandem",
+        "routed": false,
+        "truth": [
+          [
+            64,
+            70
+          ],
+          [
+            88,
+            96
+          ]
+        ]
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "dominant": null,
+        "group": 3,
+        "incumbent": [],
+        "input_sha256": "f7e56cf8968ad62149edd5c9f0475416fcd26c6a8cbd0910f3f75c2c430d0311",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "63": [
+            "host",
+            "guest"
+          ],
+          "69": [
+            "guest",
+            "host"
+          ],
+          "73": [
+            "host",
+            "guest"
+          ],
+          "89": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "97": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "original",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "dominant": null,
+        "group": 3,
+        "incumbent": [],
+        "input_sha256": "f8cc737c889dd6b283db500b35b2563a406b2156f43b64884f8ef6ff23d8621b",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "63": [
+            "host",
+            "guest"
+          ],
+          "69": [
+            "guest",
+            "host"
+          ],
+          "73": [
+            "host",
+            "guest"
+          ],
+          "89": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "97": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "host_jump",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "dominant": null,
+        "group": 3,
+        "incumbent": [],
+        "input_sha256": "bcab86c27f08e84c676329908eda117381aac967e59c0d1d8ac02b677888bee4",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "63": [
+            "host",
+            "guest"
+          ],
+          "69": [
+            "guest",
+            "host"
+          ],
+          "73": [
+            "host",
+            "guest"
+          ],
+          "89": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "97": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "host_cut",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "dominant": null,
+        "group": 3,
+        "incumbent": [],
+        "input_sha256": "49e297accd0825bd66e9d208ca663c604c080d2a76f3dcba5a29f6e36b017275",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "63": [
+            "host",
+            "guest"
+          ],
+          "69": [
+            "guest",
+            "host"
+          ],
+          "73": [
+            "host",
+            "guest"
+          ],
+          "89": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "97": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "guest_jump",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "crossovers": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "dominant": null,
+        "group": 3,
+        "incumbent": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "input_sha256": "4406629911a53ebff32e59dfe0c88d56b5623851ddcb67d4cd5dbae6bbcf85bf",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "63": [
+            "host",
+            "guest"
+          ],
+          "69": [
+            "guest",
+            "host"
+          ],
+          "73": [
+            "host",
+            "guest"
+          ],
+          "89": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "97": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "swap",
+        "routed": false,
+        "truth": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ]
+      },
+      {
+        "brief": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "crossovers": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "dominant": null,
+        "group": 3,
+        "incumbent": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "input_sha256": "eddbe232ad85e5985283c7543e7d1a00a13332a0881cbc63c4dbb9538cb5307b",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "63": [
+            "host",
+            "guest"
+          ],
+          "69": [
+            "guest",
+            "host"
+          ],
+          "73": [
+            "host",
+            "guest"
+          ],
+          "89": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "97": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "swap_tandem",
+        "routed": false,
+        "truth": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ]
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            62,
+            68
+          ],
+          [
+            90,
+            98
+          ]
+        ],
+        "dominant": null,
+        "group": 4,
+        "incumbent": [],
+        "input_sha256": "e7edf133c01c22544a9b93aa5fce9375ca9388ef46b6f46dedb4adf2262b1f70",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "60": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "guest",
+            "host"
+          ],
+          "68": [
+            "host",
+            "guest"
+          ],
+          "88": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "98": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "original",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            62,
+            68
+          ],
+          [
+            90,
+            98
+          ]
+        ],
+        "dominant": null,
+        "group": 4,
+        "incumbent": [],
+        "input_sha256": "1fdfdf9e0c1ea59df1d9b9d412afbae939181bf160c15e52ec1fda9422b1b745",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "60": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "guest",
+            "host"
+          ],
+          "68": [
+            "host",
+            "guest"
+          ],
+          "88": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "98": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "host_jump",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            62,
+            68
+          ],
+          [
+            90,
+            98
+          ]
+        ],
+        "dominant": null,
+        "group": 4,
+        "incumbent": [],
+        "input_sha256": "bbf644a787643c1cca944094d660c396887b47fd22e1ed4e8cb2ce2da89d63aa",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "60": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "guest",
+            "host"
+          ],
+          "68": [
+            "host",
+            "guest"
+          ],
+          "88": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "98": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "host_cut",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            62,
+            68
+          ],
+          [
+            90,
+            98
+          ]
+        ],
+        "dominant": null,
+        "group": 4,
+        "incumbent": [],
+        "input_sha256": "65dbad632555919550ac70c278a124621d3291959c2b09281c74b960ca0e93b8",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "60": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "guest",
+            "host"
+          ],
+          "68": [
+            "host",
+            "guest"
+          ],
+          "88": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "98": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "guest_jump",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [
+          [
+            62,
+            68
+          ],
+          [
+            90,
+            98
+          ]
+        ],
+        "crossovers": [
+          [
+            62,
+            68
+          ],
+          [
+            90,
+            98
+          ]
+        ],
+        "dominant": null,
+        "group": 4,
+        "incumbent": [
+          [
+            62,
+            68
+          ],
+          [
+            90,
+            98
+          ]
+        ],
+        "input_sha256": "f795f8da2dee6aab29fadcf532a8b4e80584eb47b38dfa84e767d138cdbeca56",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "60": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "guest",
+            "host"
+          ],
+          "68": [
+            "host",
+            "guest"
+          ],
+          "88": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "98": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "swap",
+        "routed": false,
+        "truth": [
+          [
+            62,
+            68
+          ],
+          [
+            90,
+            98
+          ]
+        ]
+      },
+      {
+        "brief": [
+          [
+            62,
+            68
+          ],
+          [
+            90,
+            98
+          ]
+        ],
+        "crossovers": [
+          [
+            62,
+            68
+          ],
+          [
+            90,
+            98
+          ]
+        ],
+        "dominant": null,
+        "group": 4,
+        "incumbent": [
+          [
+            62,
+            68
+          ],
+          [
+            90,
+            98
+          ]
+        ],
+        "input_sha256": "02d7d1e047b0638572bb525c881120b18b1130d3647ad6c7732934170e3b2033",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "60": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "guest",
+            "host"
+          ],
+          "68": [
+            "host",
+            "guest"
+          ],
+          "88": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "98": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "swap_tandem",
+        "routed": false,
+        "truth": [
+          [
+            62,
+            68
+          ],
+          [
+            90,
+            98
+          ]
+        ]
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "dominant": null,
+        "group": 5,
+        "incumbent": [],
+        "input_sha256": "cb7a3219cb32d085a4fa0f4b0aad9abeb4e0dfac98c71ca9cc3fb651cfdfd73f",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "100": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "host",
+            "guest"
+          ],
+          "71": [
+            "guest",
+            "host"
+          ],
+          "75": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "host",
+            "guest"
+          ],
+          "97": [
+            "guest",
+            "host"
+          ]
+        },
+        "role": "original",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "dominant": null,
+        "group": 5,
+        "incumbent": [],
+        "input_sha256": "4f667cb618a4f9b9f3c0d4071d2f38c266463fab40edcceee2472f29871c8cb9",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "100": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "host",
+            "guest"
+          ],
+          "71": [
+            "guest",
+            "host"
+          ],
+          "75": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "host",
+            "guest"
+          ],
+          "97": [
+            "guest",
+            "host"
+          ]
+        },
+        "role": "host_jump",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "dominant": null,
+        "group": 5,
+        "incumbent": [
+          [
+            71,
+            95
+          ]
+        ],
+        "input_sha256": "fb65edb2322e95289e9006792663cbafbb901d80724471d9f71534e95a5da2d4",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "100": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "host",
+            "guest"
+          ],
+          "71": [
+            "host",
+            "guest"
+          ],
+          "75": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "host",
+            "guest"
+          ],
+          "97": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "host_cut",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "dominant": null,
+        "group": 5,
+        "incumbent": [],
+        "input_sha256": "0215d35708e127d4d0523525c96a405b65d09dd21f5cf91492af0321002411b2",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "100": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "host",
+            "guest"
+          ],
+          "71": [
+            "guest",
+            "host"
+          ],
+          "75": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "host",
+            "guest"
+          ],
+          "97": [
+            "guest",
+            "host"
+          ]
+        },
+        "role": "guest_jump",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "crossovers": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "dominant": null,
+        "group": 5,
+        "incumbent": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "input_sha256": "215fdcef5ee23c3f167d90c4307600bec7268aea3231d3cec1f2ad0b4fe85ba4",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "100": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "host",
+            "guest"
+          ],
+          "71": [
+            "guest",
+            "host"
+          ],
+          "75": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "host",
+            "guest"
+          ],
+          "97": [
+            "guest",
+            "host"
+          ]
+        },
+        "role": "swap",
+        "routed": false,
+        "truth": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ]
+      },
+      {
+        "brief": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "crossovers": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "dominant": null,
+        "group": 5,
+        "incumbent": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ],
+        "input_sha256": "b89b4af703569e03db0a9c5336f3cb95c5c8ffbfce915b609e57fcb34e18f46e",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "100": [
+            "host",
+            "guest"
+          ],
+          "65": [
+            "host",
+            "guest"
+          ],
+          "71": [
+            "guest",
+            "host"
+          ],
+          "75": [
+            "host",
+            "guest"
+          ],
+          "92": [
+            "host",
+            "guest"
+          ],
+          "97": [
+            "guest",
+            "host"
+          ]
+        },
+        "role": "swap_tandem",
+        "routed": false,
+        "truth": [
+          [
+            67,
+            75
+          ],
+          [
+            94,
+            100
+          ]
+        ]
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "dominant": null,
+        "group": 6,
+        "incumbent": [],
+        "input_sha256": "5bdfac2a9996ce6cce7ca9bc2724b84451e0ff00c8d3128afd386d86421fb11e",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "63": [
+            "host",
+            "guest"
+          ],
+          "69": [
+            "guest",
+            "host"
+          ],
+          "73": [
+            "host",
+            "guest"
+          ],
+          "89": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "97": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "original",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "dominant": null,
+        "group": 6,
+        "incumbent": [],
+        "input_sha256": "c9984bc16331236eacc23b92dad6f34e5bc2b8144cc9c28e88b969c46beda708",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "63": [
+            "host",
+            "guest"
+          ],
+          "69": [
+            "guest",
+            "host"
+          ],
+          "73": [
+            "host",
+            "guest"
+          ],
+          "89": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "97": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "host_jump",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "dominant": null,
+        "group": 6,
+        "incumbent": [],
+        "input_sha256": "457f2d233e1777e97c4de35ceef4be7d511268609149e4d6d4b3875ed75c82ff",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "63": [
+            "host",
+            "guest"
+          ],
+          "69": [
+            "guest",
+            "host"
+          ],
+          "73": [
+            "host",
+            "guest"
+          ],
+          "89": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "97": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "host_cut",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [],
+        "crossovers": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "dominant": null,
+        "group": 6,
+        "incumbent": [],
+        "input_sha256": "2f8ce4c8309c86a9c97d241337a8de6883a61738769ba2216ba7993565a7f9d5",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "63": [
+            "host",
+            "guest"
+          ],
+          "69": [
+            "guest",
+            "host"
+          ],
+          "73": [
+            "host",
+            "guest"
+          ],
+          "89": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "97": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "guest_jump",
+        "routed": true,
+        "truth": []
+      },
+      {
+        "brief": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "crossovers": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "dominant": null,
+        "group": 6,
+        "incumbent": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "input_sha256": "8f087a25b15fd13bcf917aefbef0d53e0fe0c4d3062292cf1d294c258b21d1c2",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "63": [
+            "host",
+            "guest"
+          ],
+          "69": [
+            "guest",
+            "host"
+          ],
+          "73": [
+            "host",
+            "guest"
+          ],
+          "89": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "97": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "swap",
+        "routed": false,
+        "truth": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ]
+      },
+      {
+        "brief": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "crossovers": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "dominant": null,
+        "group": 6,
+        "incumbent": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ],
+        "input_sha256": "13dcd1b50108c9e5548b4c7fc12d88d685826196cdc2671205855c56ae35e78d",
+        "largest": null,
+        "picture_clock": [
+          120,
+          0,
+          1000,
+          "1/30000"
+        ],
+        "rank": {
+          "63": [
+            "host",
+            "guest"
+          ],
+          "69": [
+            "guest",
+            "host"
+          ],
+          "73": [
+            "host",
+            "guest"
+          ],
+          "89": [
+            "host",
+            "guest"
+          ],
+          "94": [
+            "guest",
+            "host"
+          ],
+          "97": [
+            "host",
+            "guest"
+          ]
+        },
+        "role": "swap_tandem",
+        "routed": false,
+        "truth": [
+          [
+            65,
+            73
+          ],
+          [
+            91,
+            97
+          ]
+        ]
+      }
+    ],
+    "source": "new derived split-screen renderings of different retained RTFS sources"
+  }
+}

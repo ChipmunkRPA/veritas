@@ -431,7 +431,8 @@ def test_optional_review_is_applicable_without_coarse_inputs(monkeypatch):
 def test_secondary_only_result_requires_a_measured_selected_range(monkeypatch):
     monkeypatch.setattr(face_appearance.settings, "video_face_short_return_review", True)
     result = DetectorResult.not_applicable("coarse review lacked context")
-    monkeypatch.setattr(face_appearance, "_inspect_return", lambda *args: None)
+    monkeypatch.setattr(face_appearance, "_inspect_return",
+                        lambda details, *args: details.update(face_return_check={"status": "not_applicable"}))
     assert face_appearance._with_return(result, None, None, None, None) is result
     assert result.aggregate is None and result.status == "not_applicable"
 

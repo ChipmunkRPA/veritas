@@ -10,8 +10,9 @@ qualifying second range, and an unassessed search. The existing ranges
 and the overall AI assessment are preserved. The measurements describe
 appearance changes and contribute zero weight to that assessment.
 
-The trial covers only upright, 120-picture, 1280 × 720, 30 fps MP4 with
-verified native presentation timestamps, H.264 `avc1` and 8-bit 4:2:0.
+The trial covers upright, 120-picture, 1280 × 720 MP4 at 30 or 30000/1001
+fps, with verified native presentation timestamps, H.264 `avc1` and 8-bit
+4:2:0.
 Set `VERITAS_VIDEO_FACE_SECOND_AVC_REVIEW=true` with
 `VERITAS_VIDEO_FACE_SHORT_AVC_REVIEW=true` and appearance mode on a local
 instance. The older second-range route takes precedence where it works.
@@ -96,6 +97,46 @@ sets of original images and face crops. The jump and genuine cuts
 gained no additional range. The same eight on/off runs used simulated
 prepaid checkout and queued zero unpaid jobs.
 [Local customer-flow receipt](evaluation-panels/video-face-distinct-avc-app-2026-11-13.json)
+
+## Comparison with the current face review
+
+The November 18 Full replay toggled only the second-range setting on 12
+retained four-second H.264 files. These had prior project exposure. All
+earlier ranges and appearance scores were preserved. At half temporal
+intersection over union, located edits rose from 8 to 12 of 13. Exact
+matches at both boundaries rose from 1 to 5 of 13, with four additions
+from four source groups. Five ordinary files received zero ranges in
+either run. No new range landed on a labeled ordinary jump or cut.
+
+The current customer flow also completed eight simulated paid Full runs
+and four Deep runs with the setting off and on. All jobs started after
+simulated payment. Both profiles preserved the original appearance
+evidence and overall assessment. The two Full witnesses and one Deep
+witness showed three native frames and three face crops for the second
+range in Chromium. The Standard PDF, JSON and signed original-file
+replay verified the same selected ranges and images. The ordinary and
+mixed jump controls gained no second range. The locally tested setting
+is an opt-in for the stated source profile. The shipped default is off.
+
+A separate 36-file split-screen test used six different retained hosts,
+with the guest moving from smaller to larger than the host. Native face
+measurements verified rank changes for all six original hosts. The
+current side-by-side review found all 24 authored ranges at their exact
+boundaries in 12 edited files. One ordinary host cut received a broad
+appearance range, and none of the 24 ordinary files received a brief
+face range. The two proposed fallback strategies would run only after
+a missing brief range. Neither had an eligible edited file in this test
+and neither added an ordinary alert. This measures incremental benefit
+for those layouts.
+
+Recount the comparisons from the numeric receipt in the project checkout.
+
+```sh
+python3 -B -IS backend/scripts/review_video_face_current_ranges.py \
+  docs/evaluation-panels/video-face-current-ranges-2026-11-18.json
+```
+
+[Native frame-range receipt](evaluation-panels/video-face-current-ranges-2026-11-18.json)
 
 ## Independent replay
 

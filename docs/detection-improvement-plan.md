@@ -66,6 +66,21 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- Comparing an eye region with nearby motion removed all 15 ordinary
+  eye alerts across 118 controls and retained 20 of 29 useful results
+  among 57 staged edits. The reading remains experimental.
+  [Eye-region context](video-eye-context-guard-2026-11-18.md)
+
+- Reflected 750 ms audio windows found 6 of 55 edits, up from 2, under
+  competing speech. They added a false flag on one genuine recording
+  and one isolated background. Results remain experimental.
+  [Short noisy speech](audio-reflected-short-opus-2026-11-18.md)
+
+- Iterative semantic rewriting recovered zero of 23 known AI-edited
+  sentences. A one-step variant found one and added four flags on
+  ordinary files. Both readings remain experimental.
+  [Sentence rewrite response](writing-rewrite-response-2026-11-18.md)
+
 - Comparing two saved HTML articles now preserves the original positions
   of changed words in both files. It found wording changes within all 19
   known rewrites when supplied their earlier copies. The comparison also

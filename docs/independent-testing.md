@@ -13,6 +13,15 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+Three model-free receipts let reviewers reproduce the latest research
+decisions without the source media. The [video eye-region replay](video-eye-context-guard-2026-11-18.md#reproduce)
+recalculates the selected rule and its outcomes on two held sets. The
+[short speech replay](audio-reflected-short-opus-2026-11-18.md#replay)
+recounts exact 16 kHz locations in loud competing speech. The
+[sentence rewrite replay](writing-rewrite-response-2026-11-18.md#replay)
+recalculates passage selection and false flags against logged character
+ranges. Each report includes the observed limitations.
+
 The [signed evidence example](evaluation-panels/signed-evidence-example/README.md)
 provides a small, authored image, its signed ZIP and its separate example key.
 Verify the key and the crop, then confirm that verification refuses a changed

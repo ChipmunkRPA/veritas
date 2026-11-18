@@ -26,13 +26,21 @@ describe('automated customer conclusion', () => {
       ['signer', 'Example Media Signing Services'], ['claim generator', 'Example Packaging Service'],
       ['digital source types', 'trainedAlgorithmicMedia (ai)'], ['actions', 'c2pa.opened, c2pa.resized'],
       ['hash binding', 'matches the current file bytes'],
+      ['signature timestamp', 'Verified at 2026-09-12T21:45:46+00:00'],
     ])
     const { rerender } = render(<C2paChain state="trusted" checked credentials={credentials} chain={[]} />)
     expect(screen.getByText('Verified signer: Example Media Signing Services')).toBeTruthy()
     expect(screen.getByText('The signed record declares AI involvement in this file.')).toBeTruthy()
+    expect(screen.getByText('Verified at 2026-09-12T21:45:46+00:00')).toBeTruthy()
+    credentials.set('recorded validation failures', '1')
+    rerender(<C2paChain state="trusted" checked credentials={credentials} chain={[]} />)
+    expect(screen.queryByText('Documentary')).toBeNull()
+    expect(screen.getByText('Inspection only')).toBeTruthy()
+    credentials.set('signature timestamp', 'Present, but its trust or binding could not be verified')
     rerender(<C2paChain state="invalid" checked credentials={credentials} chain={[]} />)
     expect(screen.queryByText(/Verified signer/)).toBeNull()
     expect(screen.getByText('Signer named in the record: Example Media Signing Services')).toBeTruthy()
+    expect(screen.getByText('Present, but its trust or binding could not be verified')).toBeTruthy()
     credentials.set('hash binding', 'not verified for the current file bytes')
     rerender(<C2paChain state="trusted" checked credentials={credentials} chain={[]} />)
     expect(screen.queryByText(/Verified signer/)).toBeNull()

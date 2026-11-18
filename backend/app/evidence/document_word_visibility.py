@@ -1,6 +1,7 @@
 """Exact locations of extracted Word runs with direct hidden formatting."""
 
 from app.core.canonical import canonical_hash
+from app.evidence.document_repeat import word_path_order
 from app.evidence.document_tracked_changes import PART_NAME
 
 KEY = "word_text_visibility"
@@ -40,25 +41,6 @@ def from_result(result):
     return result.get("manifest", {}).get("sampling", {}).get(COMMITMENT)
 
 
-def _native_path(path):
-    if not isinstance(path, list) or not path:
-        raise ValueError("Invalid Word body path")
-    order = [path[0]]
-    i = 1
-    while i < len(path):
-        if path[i] == "control" and i + 1 < len(path):
-            order.append(path[i + 1])
-            i += 2
-        elif path[i] == "row" and i + 4 < len(path) and path[i + 2] == "cell":
-            order.extend((path[i + 1], path[i + 3], path[i + 4]))
-            i += 5
-        else:
-            raise ValueError("Invalid Word body path")
-    if any(type(value) is not int or value < 0 for value in order):
-        raise ValueError("Invalid Word body position")
-    return tuple(order)
-
-
 def validate(document, expected):
     record = document.get("coverage", {}).get(KEY)
     if record is None and expected is None:
@@ -77,7 +59,7 @@ def validate(document, expected):
         required = {"body_path", "body_paragraph", "run", "source_start", "source_end"}
         if set(row) != required and (set(row) != required | {"run_basis"} or row["run_basis"] != "extracted"):
             raise ValueError("Invalid hidden Word text location")
-        path = _native_path(row["body_path"])
+        path = word_path_order(row["body_path"])
         if not ((len(path) > 1 and row["body_paragraph"] is None) or
                 (len(path) == 1 and type(row["body_paragraph"]) is int and 1 <= row["body_paragraph"] <= path[0] + 1)):
             raise ValueError("Invalid hidden Word paragraph number")

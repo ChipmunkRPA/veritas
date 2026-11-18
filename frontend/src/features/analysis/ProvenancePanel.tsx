@@ -98,7 +98,7 @@ export function C2paChain({ state, checked, credentials, chain }: { state: C2paS
   const ai = declaresAi(sourceTypes)
   const fileBound = checked && state === 'trusted' && credentials?.get('hash binding') === 'matches the current file bytes'
   const signer = credentials?.get('signer')
-  const documentary = ai && fileBound
+  const documentary = ai && fileBound && (credentials?.get('recorded validation failures') ?? '0') === '0'
   const selfDeclared = ai && checked && state === 'valid'
   const ingredients = chain.filter((n) => n.depth > 0)
   const { root, onKeyDown } = useTreeKeys(() => undefined)
@@ -115,7 +115,7 @@ export function C2paChain({ state, checked, credentials, chain }: { state: C2paS
             {ai && <span className="eyebrow">{documentary ? 'Documentary' : selfDeclared ? 'Self-declared' : 'Inspection only'}</span>}
           </p>
           <dl className="mt-2 m-0 grid grid-cols-[136px_minmax(0,1fr)] gap-x-4 gap-y-1 text-small max-[639px]:grid-cols-1">
-            {['claim generator', 'signed at', 'actions', 'digital source types', 'hash binding', 'issuer', 'legacy trust'].filter((k) => credentials.has(k)).map((k) => (
+            {['claim generator', 'signature timestamp', 'actions', 'digital source types', 'hash binding', 'recorded validation failures', 'issuer', 'legacy trust'].filter((k) => credentials.has(k)).map((k) => (
               <div key={k} className="contents"><dt className="text-text-muted">{k.charAt(0).toUpperCase() + k.slice(1)}</dt><dd className="m-0 text-text break-words">{credentials.get(k)}</dd></div>
             ))}
           </dl>
@@ -124,7 +124,7 @@ export function C2paChain({ state, checked, credentials, chain }: { state: C2paS
               ? 'The signed record declares AI involvement in this file.'
               : selfDeclared
                 ? 'The record declares AI involvement. The signer’s identity is unverified.'
-                : 'The record contains an AI declaration for inspection. A trusted signature and a matching file hash are required to use it as evidence.'}
+                : 'The record contains an AI declaration for inspection. It needs a trusted signature, a matching file hash, and zero validation failures before it can decide the analysis.'}
           </p>}
         </div>
       )}

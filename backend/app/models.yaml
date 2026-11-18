@@ -1241,7 +1241,7 @@ detectors:
 
   - id: prov.c2pa
     adapter: app.detectors.image.adapters.provenance:C2PADetector
-    version: 0.4.4
+    version: 0.4.5
     name: C2PA Content Credentials
     modality: image
     family: provenance
@@ -1252,7 +1252,7 @@ detectors:
     legacy_weight: 0.5
     known_limitations:
       - "Trusted means the signer chains to the bundled C2PA Trust List snapshot (app/provenance/trust/snapshot.json); every result names the snapshot revision"
-      - "revocation (OCSP) is not checked and remote manifests are not fetched (offline, D-15)"
+      - "Live revocation queries and remote manifest retrieval are disabled (offline, D-15)"
       - "the legacy CAI interim list is reported separately and never makes a manifest Trusted"
       - "a Trusted signer can still sign content it did not capture (IF §4.4: Nikon Z6III suspension, 2025-09-05); no revoked-signer deny list is shipped yet"
       - "CAWG identity assertions are not parsed yet"
@@ -1509,7 +1509,7 @@ detectors:
   # ---------------------------------------------------------------- video (v0.3 frame sampling, P-6)
   - id: prov.c2pa.video
     adapter: app.detectors.video.adapters.metadata:C2PAVideoDetector
-    version: 0.4.4
+    version: 0.4.5
     name: C2PA Content Credentials (video containers)
     modality: video
     family: provenance
@@ -1520,7 +1520,7 @@ detectors:
     legacy_weight: 0.5
     known_limitations:
       - "Trusted means the signer chains to the bundled C2PA Trust List snapshot (app/provenance/trust/snapshot.json); every result names the snapshot revision"
-      - "revocation (OCSP) is not checked and remote manifests are not fetched (offline, D-15)"
+      - "Live revocation queries and remote manifest retrieval are disabled (offline, D-15)"
       - "the legacy CAI interim list is reported separately and never makes a manifest Trusted"
       - "fragmented MP4 (DASH/HLS segments) needs the init segment and every fragment; only single files are read"
     source_url: https://github.com/contentauth/c2pa-python
@@ -2106,7 +2106,7 @@ detectors:
   # ---------------------------------------------------------------- audio
   - id: prov.c2pa.audio
     adapter: app.detectors.audio.provenance_adapter:AudioCredentialsDetector
-    version: 0.4.5
+    version: 0.4.6
     name: Content Credentials on the audio file
     modality: audio
     family: provenance
@@ -2117,7 +2117,7 @@ detectors:
     legacy_weight: 0.0
     known_limitations:
       - "Offline validation on original WAV, M4A, MP3 and FLAC bitstreams; unsupported containers are explicitly unassessed"
-      - "Bundled C2PA Trust List snapshot; revocation and remote manifests are not checked"
+      - "Bundled C2PA trust lists. Live revocation queries and remote manifest retrieval are disabled."
       - "Absence of credentials never proves a recording is original; provider-private audio watermarks are not decoded"
     source_url: https://github.com/contentauth/c2pa-python
     threat: [voice]
@@ -2179,7 +2179,7 @@ detectors:
   # ---------------------------------------------------------------- text
   - id: prov.c2pa.office
     adapter: app.detectors.text.adapters.provenance:OfficeCredentialsDetector
-    version: 1.0.0
+    version: 1.0.1
     name: Content Credentials on the Word or OpenDocument file
     modality: text
     family: provenance
@@ -2188,7 +2188,7 @@ detectors:
     profiles: [quick, full, deep]
     default_enabled: true
     legacy_weight: 0.0
-    known_limitations: ["Requires an embedded collection hash binding the document package. Offline trust; revocation and remote manifests are outside this check."]
+    known_limitations: ["Requires an embedded collection hash binding the document package. Live revocation queries and remote manifest retrieval are disabled."]
     source_url: https://github.com/contentauth/c2pa-python
     threat: [ai_text]
     training_data: "None (signed provenance verification)"
@@ -2201,7 +2201,7 @@ detectors:
 
   - id: prov.c2pa.pdf
     adapter: app.detectors.text.adapters.provenance:PdfCredentialsDetector
-    version: 1.0.0
+    version: 1.0.1
     name: Content Credentials on the PDF
     modality: text
     family: provenance

@@ -240,6 +240,7 @@ def export_json(aid: str, request: Request):
     _verified(aid, "export", actor)
     from app.api.public_projection import project
     from app.engine.customer_assessment import customer_assessment
+    from app.engine.provenance_gate import recorded_signature_timestamp
     from app.reports import view as report_view
 
     # Analysis.result is the compatibility/v1 result. The confidence rule must
@@ -294,6 +295,8 @@ def export_json(aid: str, request: Request):
             decision, list(stored.get("assessments") or []), list(stored.get("signals") or []))
     summary = a.to_summary()
     summary.setdefault('result_hash', getattr(a, 'result_hash', None))
+    if timestamp := recorded_signature_timestamp(stored):
+        evidence['content_credentials'] = {'signature_timestamp': timestamp}
     response = JSONResponse({**project({**summary, "result": a.result}), **evidence,
                              "customer_assessment": customer_assessment(display_result),
                              "projection": {"view": "customer", "result_hash": "hashes the original stored result"}},

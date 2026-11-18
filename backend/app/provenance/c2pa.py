@@ -1,12 +1,11 @@
 """Offline C2PA validation (I-2; IF §4.4; D-15; DC-06).
 
-- **Offline.** Every read uses `verify.remote_manifest_fetch=false`, `verify.ocsp_fetch=false` and `verify.verify_trust=true`.
-  A manifest stored only at a remote URL is reported as `remote` (not fetched); revocation is never checked.
+- **Offline.** Every read disables remote manifest retrieval and live revocation queries. The SDK can use
+  certificate status responses embedded with the credential.
 - **Trust lists.** The C2PA conformance Trust List decides Trusted. The legacy CAI interim list (frozen 2026-01-01) is read
   only for manifests that are valid but untrusted, and reported separately as `legacy_trusted`. Both are bundled under
-  `trust/` and verified against `trust/snapshot.json` (SHA-256) before use. The C2PA TSA list is bundled and recorded but
-  not merged into the claim-signer anchors: c2pa-rs has no separate TSA anchor setting, and an untrusted timestamp is
-  informational (`timeStamp.untrusted`) without changing the state.
+  `trust/` and verified against `trust/snapshot.json` (SHA-256) before use. The official C2PA timestamp authority
+  list is supplied separately from the claim-signing anchors.
 - **States.** `trusted` (valid and the signer chains to the Trust List), `valid` (intact, signer not on the list), `invalid`
   (a validation failure, including certificate/trust failures as well as changed content), `absent`, `remote`, `unreadable`.
 - **Content.** Validation codes (success / informational / failure, active manifest and ingredient deltas), the ingredient
@@ -28,8 +27,9 @@ from app.storage.files import untrusted_text
 
 TRUST_DIR = Path(__file__).resolve().parent / "trust"
 OFFICIAL, LEGACY = "c2pa", "cai-legacy"
-OFFLINE_VERIFY = {"remote_manifest_fetch": False, "ocsp_fetch": False, "verify_trust": True}
-REVOCATION_NOTE = "Revocation status was not checked (offline)."
+OFFLINE_VERIFY = {"remote_manifest_fetch": False, "ocsp_fetch": False, "ocsp_fetch_should_override": False,
+                  "verify_trust": True, "verify_timestamp_trust": True}
+REVOCATION_NOTE = "Live revocation checks were not performed. An embedded certificate status response can be used."
 IPTC_PREFIXES = ("http://cv.iptc.org/newscodes/digitalsourcetype/", "https://cv.iptc.org/newscodes/digitalsourcetype/")
 HARD_BINDING_MATCH = frozenset({"assertion.dataHash.match", "assertion.bmffHash.match", "assertion.boxesHash.match",
                                 "assertion.collectionHash.match"})
@@ -61,6 +61,8 @@ class TrustBundle:
     list_issue_date: str | None = None
     allowed_list: str | None = None
     trust_config: str | None = None
+    tsa_anchors_pem: str | None = None
+    tsa_anchors_sha256: str | None = None
 
     def summary(self) -> str:
         issued = f", list issued {self.list_issue_date[:10]}" if self.list_issue_date else ""
@@ -113,6 +115,15 @@ class C2PAReport:
     codes: list[ValidationCode] = field(default_factory=list)
     chain: list[ChainNode] = field(default_factory=list)
     thumbnails: list[tuple[str, str, bytes]] = field(default_factory=list)  # (title, media type, bytes)
+    timestamp_status: str = "not_recorded"
+
+    @property
+    def timestamp_description(self) -> str:
+        if self.timestamp_status == "verified":
+            return "Verified" + (f" at {self.signer['time']}" if self.signer.get("time") else "")
+        if self.timestamp_status == "unverified":
+            return "Present, but its trust or binding could not be verified"
+        return "No verified timestamp recorded"
 
     @property
     def ai_declared(self) -> bool:
@@ -182,11 +193,14 @@ def load_bundle(name: str) -> TrustBundle:
         raise TrustBundleError(f"unknown trust bundle {name!r}")
     files = {Path(f["file"]).name: _verified_text(f["file"], f["sha256"]) for f in record["files"]}
     sha = {Path(f["file"]).name: f["sha256"] for f in record["files"]}
+    tsa = record.get("tsa_anchors")
     return TrustBundle(name=name, label=record["label"], revision=record["revision"], retrieved=record["retrieved"],
                        anchors_pem=files[record["anchors"]], anchors_sha256=sha[record["anchors"]],
                        list_issue_date=record.get("list_issue_date"),
                        allowed_list=files.get(record.get("allowed_list") or ""),
-                       trust_config=files.get(record.get("trust_config") or ""))
+                       trust_config=files.get(record.get("trust_config") or ""),
+                       tsa_anchors_pem=files[tsa] if tsa else None,
+                       tsa_anchors_sha256=sha[tsa] if tsa else None)
 
 
 @functools.cache
@@ -206,7 +220,10 @@ def source_type(uri: str) -> SourceType:
 def settings(bundle: TrustBundle | None) -> dict[str, Any]:
     out: dict[str, Any] = {"verify": dict(OFFLINE_VERIFY)}
     if bundle is not None:
-        trust = {"trust_anchors": bundle.anchors_pem}
+        trust: dict[str, Any] = {"trust_anchors": bundle.anchors_pem}
+        if bundle.tsa_anchors_pem:
+            trust = {"anchors": [{"trust_kind": "manifest", "trust_anchors": bundle.anchors_pem},
+                                 {"trust_kind": "tsa", "trust_anchors": bundle.tsa_anchors_pem}]}
         if bundle.allowed_list:
             trust["allowed_list"] = bundle.allowed_list
         if bundle.trust_config:
@@ -441,23 +458,42 @@ def _state(store: dict[str, Any], codes: list[ValidationCode]) -> str:
 
 
 def _codes(store: dict[str, Any]) -> list[ValidationCode]:
-    rows: list[ValidationCode] = []
     results = store.get("validation_results")
-    if isinstance(results, dict):
-        active = results.get("activeManifest") or {}
-        for level in LEVELS:
-            rows += [ValidationCode(level, str(c.get("code", "")), "active manifest", str(c.get("explanation", "")),
-                                    str(c.get("url", ""))) for c in active.get(level) or []]
-        for delta in results.get("ingredientDeltas") or []:
-            scope = "ingredient " + str(delta.get("ingredientAssertionURI", "")).rsplit("/", 1)[-1]
-            deltas = delta.get("validationDeltas") or {}
-            for level in LEVELS:
-                rows += [ValidationCode(level, str(c.get("code", "")), scope, str(c.get("explanation", "")),
-                                        str(c.get("url", ""))) for c in deltas.get(level) or []]
-    else:  # older stores: a flat validation_status list of failures
-        rows += [ValidationCode("failure", str(c.get("code", "")), "active manifest", str(c.get("explanation", "")),
-                                str(c.get("url", ""))) for c in store.get("validation_status") or []]
-    return rows[:MAX_CODES]
+    if not isinstance(results, dict):
+        results = {"activeManifest": {"failure": store.get("validation_status")}}
+    sections = [("active manifest", results.get("activeManifest") or {})]
+    for delta in results.get("ingredientDeltas") or []:
+        name = str(delta.get("ingredientAssertionURI", "")).rsplit("/", 1)[-1]
+        sections.append(("ingredient " + name, delta.get("validationDeltas") or {}))
+    # A bounded exhibit must preserve failures even when successful checks fill the table.
+    rows: list[ValidationCode] = []
+    for level in LEVELS:
+        for scope, section in sections:
+            for row in section.get(level) or []:
+                rows.append(ValidationCode(level, str(row.get("code", "")), scope,
+                                           str(row.get("explanation", "")), str(row.get("url", ""))))
+                if len(rows) >= MAX_CODES:
+                    return rows
+    return rows
+
+
+def _timestamp_status(store: dict[str, Any], reported_time: str | None) -> str:
+    active = store.get("active_manifest")
+    signature = f"self#jumbf=/c2pa/{active}/c2pa.signature"
+    validation = store.get("validation_results")
+    results = (validation.get("activeManifest") or {}) if isinstance(validation, dict) else {}
+
+    # Use only timestamp diagnostics tied to the active claim signature. The SDK can
+    # extract a date for display even if the timestamp's certificate is untrusted.
+    def codes(level):
+        return {row["code"] for row in results.get(level) or []
+                if row.get("url") == signature and str(row.get("code", "")).startswith("timeStamp.")}
+
+    successful = codes("success")
+    unresolved = codes("failure") | codes("informational")
+    if active and not unresolved and {"timeStamp.validated", "timeStamp.trusted"} <= successful:
+        return "verified"
+    return "unverified" if reported_time or successful or unresolved else "not_recorded"
 
 
 def _software(agent: Any) -> str:
@@ -552,10 +588,11 @@ def read(data: bytes | memoryview, mime: str, *, bundle: TrustBundle | None = No
         return C2PAReport(state="unreadable", error=message[:200])
     manifest = (store.get("manifests") or {}).get(store.get("active_manifest") or "") or {}
     codes = _codes(store)
+    signer = _signer(manifest)
     report = C2PAReport(state=_state(store, codes), claim_generator=_generator(manifest), title=str(manifest.get("title") or ""),
-                        format=str(manifest.get("format") or mime), signer=_signer(manifest), actions=_actions(manifest),
+                        format=str(manifest.get("format") or mime), signer=signer, actions=_actions(manifest),
                         source_types=[source_type(u) for u in _source_type_uris(manifest)], codes=codes, chain=_chain(store),
-                        thumbnails=thumbs if thumbnails else [])
+                        thumbnails=thumbs if thumbnails else [], timestamp_status=_timestamp_status(store, signer.get("time")))
     if report.state == "valid" and legacy is not None:
         with contextlib.suppress(Exception):
             legacy_store, _ = _read_store(payload, mime, legacy)

@@ -7,6 +7,10 @@ Six files passed the trusted AI-declaration gate. The replay verified only
 embedded credentials. Provider watermark verifiers and remote manifests
 received zero requests.
 
+The [November 18 follow-up](content-credentials-timestamps-2026-11-18.md)
+connected the separate timestamp authority list, reproduced the 21
+pipeline decisions and published ten exact timestamp replays.
+
 ## Files with signed records
 
 | Provider and download | Local result | Consequence |

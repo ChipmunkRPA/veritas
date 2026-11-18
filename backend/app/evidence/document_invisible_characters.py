@@ -193,9 +193,9 @@ def validate(document, expected):
         if method == "email" and row["mime_part"] != email.get("body_part"):
             raise ValueError("Invisible character has a different email source part")
         if method == "python-docx":
-            from app.evidence.document_word_visibility import _native_path
+            from app.evidence.document_repeat import word_path_order
 
-            _native_path(row["body_path"])
+            word_path_order(row["body_path"])
         previous = row["text_offset"]
 
 

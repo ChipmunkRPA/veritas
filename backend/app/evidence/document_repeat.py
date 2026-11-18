@@ -8,7 +8,7 @@ import re
 from collections import defaultdict
 
 from app.core.canonical import canonical_hash, canonical_json
-from app.evidence import document_scope, document_word_visibility
+from app.evidence import document_scope
 
 SCHEMA = "document-repeated-passages/1"
 MIN_WORDS = 30
@@ -132,9 +132,28 @@ def build(source: dict, text: str, mapping: list[dict]) -> dict:
     }
 
 
+def word_path_order(path):
+    if not isinstance(path, list) or not path:
+        raise ValueError("Invalid Word body path")
+    order = [path[0]]
+    i = 1
+    while i < len(path):
+        if path[i] == "control" and i + 1 < len(path):
+            order.append(path[i + 1])
+            i += 2
+        elif path[i] == "row" and i + 4 < len(path) and path[i + 2] == "cell":
+            order.extend((path[i + 1], path[i + 3], path[i + 4]))
+            i += 5
+        else:
+            raise ValueError("Invalid Word body path")
+    if not all(_count(value) for value in order):
+        raise ValueError("Invalid Word body position")
+    return tuple(order)
+
+
 def _valid_docx_path(path) -> bool:
     try:
-        document_word_visibility._native_path(path)
+        word_path_order(path)
     except ValueError:
         return False
     return True

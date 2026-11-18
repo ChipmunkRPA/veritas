@@ -10,6 +10,7 @@ import subprocess
 import uuid
 import wave
 from contextlib import contextmanager
+from dataclasses import replace
 from datetime import UTC, datetime, timedelta
 from types import SimpleNamespace
 from unittest.mock import Mock
@@ -93,6 +94,54 @@ def signed_audio(signing_material):
         samples = (np.sin(np.arange(16000) * 2 * np.pi * 440 / 16000) * 12000).astype('<i2')
         audio.writeframes(samples.tobytes())
     return sign(output.getvalue(), 'audio/wav', signer), bundle
+
+
+def test_bundled_timestamp_authorities_stay_separate_from_claim_signing(signed_asset):
+    data, _, author_bundle = signed_asset
+    official = verifier.load_bundle(verifier.OFFICIAL)
+    assert hashlib.sha256(official.tsa_anchors_pem.encode()).hexdigest() == official.tsa_anchors_sha256
+    settings = verifier.settings(official)
+    assert settings['trust']['anchors'] == [
+        {'trust_kind': 'manifest', 'trust_anchors': official.anchors_pem},
+        {'trust_kind': 'tsa', 'trust_anchors': official.tsa_anchors_pem},
+    ]
+    assert settings['verify']['verify_timestamp_trust'] is True
+    assert settings['verify']['ocsp_fetch'] is settings['verify']['ocsp_fetch_should_override'] is False
+    timestamp_only = replace(official, tsa_anchors_pem=author_bundle.anchors_pem,
+                             tsa_anchors_sha256=author_bundle.anchors_sha256)
+    report = verifier.read(data, 'image/png', bundle=timestamp_only, thumbnails=False)
+    assert report.state == 'valid' and 'signingCredential.untrusted' in report.failure_codes
+    assert report.ai_declared and report.covers_bytes and report.timestamp_status == 'not_recorded'
+
+
+def test_timestamp_status_requires_trust_and_binding_on_the_active_signature():
+    label = 'urn:c2pa:active'
+    signature = 'self#jumbf=/c2pa/' + label + '/c2pa.signature'
+    other_signature = signature.replace(':active/', ':ingredient/')
+    timestamp = '2026-09-12T21:45:46+00:00'
+    match = {'code': 'timeStamp.validated', 'url': signature}
+    trusted = {'code': 'timeStamp.trusted', 'url': signature}
+    active = {'success': [match, {**trusted, 'url': other_signature}]}
+    store = {'active_manifest': label, 'validation_results': {'activeManifest': active}}
+    assert verifier._timestamp_status(store, timestamp) == 'unverified'
+    active['success'].append(trusted)
+    assert verifier._timestamp_status(store, timestamp) == 'verified'
+    active['informational'] = [{'code': 'timeStamp.untrusted', 'url': signature}]
+    status = verifier._timestamp_status(store, timestamp)
+    assert status == 'unverified'
+    assert timestamp not in verifier.C2PAReport('valid', signer={'time': timestamp}, timestamp_status=status).timestamp_description
+
+
+def test_exhibit_limit_preserves_ingredient_failures_before_successes():
+    failure = {'code': 'assertion.dataHash.mismatch'}
+    store = {'validation_state': 'Trusted', 'validation_results': {
+        'activeManifest': {'success': [{'code': 'assertion.hashedURI.match'}] * verifier.MAX_CODES},
+        'ingredientDeltas': [{'ingredientAssertionURI': 'ref/ingredient', 'validationDeltas': {'failure': [failure]}}],
+    }}
+    codes = verifier._codes(store)
+    assert len(codes) == verifier.MAX_CODES
+    assert codes[0].code == failure['code'] and codes[0].scope == 'ingredient ingredient'
+    assert verifier.C2PAReport('trusted', codes=codes).failure_codes == [failure['code']]
 
 
 @pytest.fixture(scope='module')

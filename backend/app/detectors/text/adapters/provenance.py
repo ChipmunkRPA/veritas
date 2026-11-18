@@ -11,7 +11,7 @@ ID = "prov.c2pa.pdf"
 
 
 class PdfCredentialsDetector(Detector):
-    spec = replace(C2PADetector.spec, id=ID, version="1.0.0", modality=Modality.TEXT,
+    spec = replace(C2PADetector.spec, id=ID, version="1.0.1", modality=Modality.TEXT,
                    name="Content Credentials on the PDF")
 
     def run(self, ctx):
@@ -23,7 +23,7 @@ class PdfCredentialsDetector(Detector):
 
 
 class OfficeCredentialsDetector(Detector):
-    spec = replace(C2PADetector.spec, id="prov.c2pa.office", version="1.0.0", modality=Modality.TEXT,
+    spec = replace(C2PADetector.spec, id="prov.c2pa.office", version="1.0.1", modality=Modality.TEXT,
                    name="Content Credentials on the Word or OpenDocument file")
 
     def run(self, ctx):

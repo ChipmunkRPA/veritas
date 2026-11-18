@@ -1,0 +1,347 @@
+{
+  "schema": "chipmunk.public-credentials-replay/2",
+  "date": "2026-11-18",
+  "sdk": "0.92.0",
+  "trust_snapshot_sha256": "9f4745249988f0d8bea52bb8b9eae1e4e203b4d7a3a36dc033607a8a9d63cd69",
+  "trust_anchors_sha256": {
+    "c2pa": "75cacc98b79ecac33713c7ecfb58d4a0ef383f3c1f886e7409f9e37e8664aea5",
+    "cai-legacy": "db57e50b9bd4e4c786cbb91f38fd85e2af6a9d5412438a8cddcc42688df07ae5"
+  },
+  "timestamp_anchors_sha256": "c688d3555f4a2f1f8d663472bbd37888ff234abdd234c25934c0f9292e4eb5c9",
+  "samples": [
+    {
+      "id": "aiwatermark_audio",
+      "url": "https://aiwatermark.com/samples/aiwatermark-sample-audio.mp3?v=20260914",
+      "timestamp_status_without_tsa_list": "unverified",
+      "verification": {
+        "sha256": "552a78b1a666cdc6c8407ef8434a108a228c52c0b9b2559c759e586739a737ce",
+        "bytes": 138378,
+        "media_type": "audio/mpeg",
+        "state": "invalid",
+        "signer": "AIWatermark",
+        "claim_generator": "AIWatermark 1.0",
+        "legacy_trusted": null,
+        "binding": "matched",
+        "document_binding": null,
+        "ai_declared": false,
+        "source_types": [],
+        "failures": [
+          "assertion.action.softBindingMissing"
+        ],
+        "actions": [
+          "c2pa.opened",
+          "c2pa.watermarked"
+        ],
+        "pipeline_action": "continue_detection",
+        "signature_timestamp": {
+          "status": "verified",
+          "verified_time": "2026-09-14T15:04:46+00:00"
+        }
+      }
+    },
+    {
+      "id": "aiwatermark_image",
+      "url": "https://aiwatermark.com/samples/aiwatermark-sample-image.png",
+      "timestamp_status_without_tsa_list": "unverified",
+      "verification": {
+        "sha256": "4f1c34d0ad628c7ca7f88de77bb7288d4f51d0e8dfc2c33d4b8ce7480d2437fb",
+        "bytes": 277085,
+        "media_type": "image/png",
+        "state": "invalid",
+        "signer": "AIWatermark",
+        "claim_generator": "AIWatermark 1.0",
+        "legacy_trusted": null,
+        "binding": "matched",
+        "document_binding": null,
+        "ai_declared": false,
+        "source_types": [],
+        "failures": [
+          "assertion.action.softBindingMissing"
+        ],
+        "actions": [
+          "c2pa.opened",
+          "c2pa.watermarked"
+        ],
+        "pipeline_action": "continue_detection",
+        "signature_timestamp": {
+          "status": "verified",
+          "verified_time": "2026-09-14T15:04:45+00:00"
+        }
+      }
+    },
+    {
+      "id": "archive_gpt_image",
+      "url": "https://huggingface.co/datasets/bigdatamark/synthid-research/resolve/af707a1b8823b277f260a1ebfbae3c9877d3d897/gpt-image-2/001.png",
+      "timestamp_status_without_tsa_list": "unverified",
+      "verification": {
+        "sha256": "f04884b89da72520fa7106c10698be26d4c21b47f72e011123b8a1a6e5c94021",
+        "bytes": 2154142,
+        "media_type": "image/png",
+        "state": "trusted",
+        "signer": "OpenAI Media Service",
+        "claim_generator": "OpenAI Media Service API",
+        "legacy_trusted": null,
+        "binding": "matched",
+        "document_binding": null,
+        "ai_declared": true,
+        "source_types": [
+          "trainedAlgorithmicMedia"
+        ],
+        "failures": [],
+        "actions": [
+          "c2pa.created",
+          "c2pa.converted",
+          "c2pa.watermarked.unbound"
+        ],
+        "pipeline_action": "stop_statistical_detection",
+        "signature_timestamp": {
+          "status": "unverified",
+          "verified_time": null
+        }
+      }
+    },
+    {
+      "id": "cai_sora",
+      "url": "https://raw.githubusercontent.com/contentauth/example-assets/c37f93e115289ac1ef00f899a860e6e08ab9886f/videos/sora.MP4",
+      "timestamp_status_without_tsa_list": "unverified",
+      "verification": {
+        "sha256": "7d750b0c9cb9c1ab162a067cf128213590da2b858f2e1de336190427a77f75cf",
+        "bytes": 5278370,
+        "media_type": "video/mp4",
+        "state": "invalid",
+        "signer": "Truepic Lens CLI in Sora",
+        "claim_generator": "Sora",
+        "legacy_trusted": null,
+        "binding": "matched",
+        "document_binding": null,
+        "ai_declared": true,
+        "source_types": [
+          "trainedAlgorithmicMedia"
+        ],
+        "failures": [
+          "signingCredential.expired",
+          "signingCredential.untrusted"
+        ],
+        "actions": [
+          "c2pa.created"
+        ],
+        "pipeline_action": "continue_detection",
+        "signature_timestamp": {
+          "status": "unverified",
+          "verified_time": null
+        }
+      }
+    },
+    {
+      "id": "gemini_synthid_001",
+      "url": "https://huggingface.co/datasets/bigdatamark/synthid-research/resolve/af707a1b8823b277f260a1ebfbae3c9877d3d897/gemini-3.1-flash-image/001.jpg",
+      "timestamp_status_without_tsa_list": "unverified",
+      "verification": {
+        "sha256": "f9d706f27893ec68b713841df96a6e9b23c830b66e556473e295642d1660042c",
+        "bytes": 3668542,
+        "media_type": "image/jpeg",
+        "state": "trusted",
+        "signer": "Google Media Processing Services",
+        "claim_generator": "Google C2PA Core Generator Library 979545726:979545726",
+        "legacy_trusted": null,
+        "binding": "matched",
+        "document_binding": null,
+        "ai_declared": true,
+        "source_types": [
+          "trainedAlgorithmicMedia"
+        ],
+        "failures": [],
+        "actions": [
+          "c2pa.opened",
+          "c2pa.resized"
+        ],
+        "pipeline_action": "stop_statistical_detection",
+        "signature_timestamp": {
+          "status": "verified",
+          "verified_time": "2026-09-12T21:45:46+00:00"
+        }
+      }
+    },
+    {
+      "id": "gemini_synthid_002",
+      "url": "https://huggingface.co/datasets/bigdatamark/synthid-research/resolve/af707a1b8823b277f260a1ebfbae3c9877d3d897/gemini-3.1-flash-image/002.jpg",
+      "timestamp_status_without_tsa_list": "unverified",
+      "verification": {
+        "sha256": "58e43a26d1c214b4dda89828e433f6955f84e8d98adedce50339be61c4179637",
+        "bytes": 3529190,
+        "media_type": "image/jpeg",
+        "state": "trusted",
+        "signer": "Google Media Processing Services",
+        "claim_generator": "Google C2PA Core Generator Library 977245686:977245686",
+        "legacy_trusted": null,
+        "binding": "matched",
+        "document_binding": null,
+        "ai_declared": true,
+        "source_types": [
+          "trainedAlgorithmicMedia"
+        ],
+        "failures": [],
+        "actions": [
+          "c2pa.opened",
+          "c2pa.resized"
+        ],
+        "pipeline_action": "stop_statistical_detection",
+        "signature_timestamp": {
+          "status": "verified",
+          "verified_time": "2026-09-11T19:40:25+00:00"
+        }
+      }
+    },
+    {
+      "id": "openai_pdf",
+      "url": "https://raw.githubusercontent.com/richardwooding/c2pa/1119ea0c86b3ede12461b477b9069cefc3ee9e95/testdata/c2pa_chatgpt.pdf",
+      "timestamp_status_without_tsa_list": "not_recorded",
+      "verification": {
+        "sha256": "148974fecd2dca20e4e8050e4ee98d59ad0e2afbad7fa672dc9d9f5acffe284e",
+        "bytes": 67302,
+        "media_type": "application/pdf",
+        "state": "trusted",
+        "signer": "OpenAI Media Service",
+        "claim_generator": "ChatGPT",
+        "legacy_trusted": null,
+        "binding": "matched",
+        "document_binding": true,
+        "ai_declared": true,
+        "source_types": [
+          "trainedAlgorithmicMedia"
+        ],
+        "failures": [],
+        "actions": [
+          "c2pa.created"
+        ],
+        "pipeline_action": "stop_statistical_detection",
+        "signature_timestamp": {
+          "status": "not_recorded",
+          "verified_time": null
+        }
+      }
+    },
+    {
+      "id": "rapidata_veo_09",
+      "url": "https://huggingface.co/datasets/Rapidata/text-2-video-human-preferences-veo3.1/resolve/9b5ffd5a1ce186b746990e554dba2a03ee74434d/videos/veo31_09_0.mp4",
+      "timestamp_status_without_tsa_list": "not_recorded",
+      "verification": {
+        "sha256": "57b22a0f83e006de7599777b1370e5422f20717b3d420d23fa918374fecfc7c3",
+        "bytes": 6769416,
+        "media_type": "video/mp4",
+        "state": "absent",
+        "signer": null,
+        "claim_generator": null,
+        "legacy_trusted": null,
+        "binding": "not_verified",
+        "document_binding": null,
+        "ai_declared": false,
+        "source_types": [],
+        "failures": [],
+        "actions": [],
+        "pipeline_action": "continue_detection",
+        "signature_timestamp": {
+          "status": "not_recorded",
+          "verified_time": null
+        }
+      }
+    },
+    {
+      "id": "rapidata_veo_12",
+      "url": "https://huggingface.co/datasets/Rapidata/text-2-video-human-preferences-veo3.1/resolve/9b5ffd5a1ce186b746990e554dba2a03ee74434d/videos/veo31_12_0.mp4",
+      "timestamp_status_without_tsa_list": "not_recorded",
+      "verification": {
+        "sha256": "484121187c1ba579e7dc24e8cfba107c71bc89fc34c70d6814b917e4ac569e32",
+        "bytes": 2538016,
+        "media_type": "video/mp4",
+        "state": "absent",
+        "signer": null,
+        "claim_generator": null,
+        "legacy_trusted": null,
+        "binding": "not_verified",
+        "document_binding": null,
+        "ai_declared": false,
+        "source_types": [],
+        "failures": [],
+        "actions": [],
+        "pipeline_action": "continue_detection",
+        "signature_timestamp": {
+          "status": "not_recorded",
+          "verified_time": null
+        }
+      }
+    },
+    {
+      "id": "rapidata_veo_34",
+      "url": "https://huggingface.co/datasets/Rapidata/text-2-video-human-preferences-veo3.1/resolve/9b5ffd5a1ce186b746990e554dba2a03ee74434d/videos/veo31_34_0.mp4",
+      "timestamp_status_without_tsa_list": "not_recorded",
+      "verification": {
+        "sha256": "cc2f3ce5b978293bc1d9d5e3cf0909e215efba4bc099c8931ea475fee37416c5",
+        "bytes": 10598031,
+        "media_type": "video/mp4",
+        "state": "absent",
+        "signer": null,
+        "claim_generator": null,
+        "legacy_trusted": null,
+        "binding": "not_verified",
+        "document_binding": null,
+        "ai_declared": false,
+        "source_types": [],
+        "failures": [],
+        "actions": [],
+        "pipeline_action": "continue_detection",
+        "signature_timestamp": {
+          "status": "not_recorded",
+          "verified_time": null
+        }
+      }
+    }
+  ],
+  "local_app": {
+    "samples": [
+      {
+        "sample": "archive_gpt_image",
+        "sha256": "f04884b89da72520fa7106c10698be26d4c21b47f72e011123b8a1a6e5c94021",
+        "gate": "stop_statistical_detection",
+        "statistical_confidence": null,
+        "signature_timestamp": {
+          "status": "unverified",
+          "verified_time": null
+        },
+        "pdf_matches": true,
+        "json_matches": true
+      },
+      {
+        "sample": "gemini_synthid_001",
+        "sha256": "f9d706f27893ec68b713841df96a6e9b23c830b66e556473e295642d1660042c",
+        "gate": "stop_statistical_detection",
+        "statistical_confidence": null,
+        "signature_timestamp": {
+          "status": "verified",
+          "verified_time": "2026-09-12T21:45:46+00:00"
+        },
+        "pdf_matches": true,
+        "json_matches": true
+      },
+      {
+        "sample": "openai_pdf",
+        "sha256": "148974fecd2dca20e4e8050e4ee98d59ad0e2afbad7fa672dc9d9f5acffe284e",
+        "gate": "stop_statistical_detection",
+        "statistical_confidence": null,
+        "signature_timestamp": {
+          "status": "not_recorded",
+          "verified_time": null
+        },
+        "pdf_matches": true,
+        "json_matches": true
+      }
+    ],
+    "simulated_paid_jobs": 3,
+    "unpaid_jobs": 0,
+    "statistical_model_leases": 0,
+    "browser": {
+      "plain_view_records": 3,
+      "page_errors": 0
+    }
+  }
+}

@@ -14,12 +14,24 @@ CREDENTIALS = {'image': 'prov.c2pa', 'video': 'prov.c2pa.video', 'audio': 'prov.
 OFFICE_CREDENTIALS = 'prov.c2pa.office'
 DOCUMENT_BINDINGS = {CREDENTIALS['document']: 'pdf_document_binding', OFFICE_CREDENTIALS: 'office_document_binding'}
 DOCUMENT_DETECTORS = {'.pdf': CREDENTIALS['document'], '.docx': OFFICE_CREDENTIALS, '.odt': OFFICE_CREDENTIALS}
+CREDENTIALS_TITLE = 'C2PA Content Credentials'
 SKIP_REASON = ('Further detection was not run: trusted Content Credentials bound to this file declare AI involvement. '
     'The record does not locate edited regions or establish the complete history of the file.')
 
 
 def document_detector(filename: str) -> str | None:
     return DOCUMENT_DETECTORS.get(Path(filename).suffix.lower())
+
+
+def recorded_signature_timestamp(result: dict) -> str | None:
+    """Read the timestamp finding from the saved active credential exhibit."""
+    credential_detectors = (*CREDENTIALS.values(), OFFICE_CREDENTIALS)
+    tables = [exhibit for exhibit in result.get('exhibits') or [] if exhibit.get('kind') == 'table'
+              and exhibit.get('title') == CREDENTIALS_TITLE and exhibit.get('created_by') in credential_detectors]
+    if len(tables) != 1:
+        return None
+    timestamps = [row[1] for row in tables[0].get('rows') or [] if len(row) == 2 and row[0] == 'signature timestamp']
+    return timestamps[0] if len(timestamps) == 1 and isinstance(timestamps[0], str) else None
 
 
 def decide(provenance: Any, kind: str) -> dict:
@@ -60,7 +72,8 @@ def decide(provenance: Any, kind: str) -> dict:
         return {**result, 'reason': 'No trusted, valid, asset-bound AI declaration; continue statistical detection. Absence is not proof of originality.'}
     return {**result, 'action': 'stop_statistical_detection', 'basis': 'trusted_asset_bound_ai_declaration',
         'record_detector_id': detector_id, 'reason': SKIP_REASON,
-        'limitation': 'Offline trust-list validation; revocation and remote manifests are not checked.'}
+        'limitation': 'Offline validation uses trust lists and available embedded certificate status. '
+                      'Live revocation and remote manifest checks were not performed.'}
 
 
 def run(ctx):

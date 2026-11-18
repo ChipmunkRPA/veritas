@@ -66,6 +66,17 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Content Credentials timestamps](content-credentials-timestamps-2026-11-18.md)
+  verified four additional signature timestamps using the separate C2PA
+  timestamp authority list. All 21 earlier gate decisions reproduced. A
+  changed Gemini JPEG kept its verified timestamp while failing file binding
+  and continued to further analysis.
+
+- [Time-local stereo repeat search](audio-stereo-local-lag-2026-11-18.md)
+  located 12 of 48 staged repeats in held Opus clips, up from 10. It added
+  three ordinary alerts and one misplaced edited-file alert on the same
+  metro source group. The method remains experimental.
+
 - [Word and other document formats](document-formats-2026-11-17.md) includes
   saved text in filled Word forms and preserves the original body paths and
   character ranges for findings. The older extraction remains available for

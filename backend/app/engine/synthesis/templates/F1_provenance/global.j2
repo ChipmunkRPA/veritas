@@ -10,15 +10,15 @@
 {{ cite(w.s.id) }}The file's Content Credentials, validated against the trust list, declare AI generation: “{{ w.s.observed }}”.
 {{ cite(w.s.id, "decision") }}Chipmunk Verify treats this documentary record as deciding the result; {{ w.statistical_clause }}.
 {{ cite(w.s.id) }}Credentials record what the signing software declared; they do not describe the scene or who directed it.
-{{ cite(w.s.id) }}Revocation status was not checked (offline).
+{{ cite(w.s.id) }}Live revocation checks were not performed.
 {% elif w.variant == "trusted_capture" %}
 {{ cite(w.s.id) }}The file's Content Credentials, validated against the trust list, record a capture of these bytes: “{{ w.s.observed }}”.
 {{ cite(w.s.id, "decision") }}This is strong support against AI generation of the signed content; the record describes what the capture device declared.
-{{ cite(w.s.id) }}Revocation status was not checked (offline).
+{{ cite(w.s.id) }}Live revocation checks were not performed.
 {% elif w.variant == "trusted_other" %}
 {{ cite(w.s.id) }}The file's Content Credentials validate against the trust list but declare neither a capture of these bytes nor AI generation: “{{ w.s.observed }}”.
 {{ m.strength_sentence(w) }}
-{{ cite(w.s.id) }}Revocation status was not checked (offline).
+{{ cite(w.s.id) }}Live revocation checks were not performed.
 {% elif w.variant == "invalid" %}
 {{ cite(w.s.id) }}Content Credentials are present, but one or more verification checks failed.
 {% if w.s.certificate_expired %}

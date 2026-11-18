@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import re
 from collections.abc import Callable, Iterator
+from itertools import combinations
 
 V7 = "image-evidence-7"
 V8 = "image-evidence-8"
@@ -37,8 +38,15 @@ PNG_MULTI_EXACT_VERSION = "image-evidence-38"
 PNG_MULTI_EXACT_AFFINE_VERSION = "image-evidence-39"
 WEBP_MULTI_EXACT_VERSION = "image-evidence-40"
 WEBP_MULTI_EXACT_AFFINE_VERSION = "image-evidence-41"
-PNG_MULTI_EXACT_VERSIONS = frozenset({PNG_MULTI_EXACT_VERSION, PNG_MULTI_EXACT_AFFINE_VERSION})
-WEBP_MULTI_EXACT_VERSIONS = frozenset({WEBP_MULTI_EXACT_VERSION, WEBP_MULTI_EXACT_AFFINE_VERSION})
+PNG_THREE_EXACT_VERSION = "image-evidence-42"
+PNG_THREE_EXACT_AFFINE_VERSION = "image-evidence-43"
+WEBP_THREE_EXACT_VERSION = "image-evidence-44"
+WEBP_THREE_EXACT_AFFINE_VERSION = "image-evidence-45"
+PNG_THREE_EXACT_VERSIONS = frozenset({PNG_THREE_EXACT_VERSION, PNG_THREE_EXACT_AFFINE_VERSION})
+WEBP_THREE_EXACT_VERSIONS = frozenset({WEBP_THREE_EXACT_VERSION, WEBP_THREE_EXACT_AFFINE_VERSION})
+THREE_EXACT_VERSIONS = PNG_THREE_EXACT_VERSIONS | WEBP_THREE_EXACT_VERSIONS
+PNG_MULTI_EXACT_VERSIONS = PNG_THREE_EXACT_VERSIONS | {PNG_MULTI_EXACT_VERSION, PNG_MULTI_EXACT_AFFINE_VERSION}
+WEBP_MULTI_EXACT_VERSIONS = WEBP_THREE_EXACT_VERSIONS | {WEBP_MULTI_EXACT_VERSION, WEBP_MULTI_EXACT_AFFINE_VERSION}
 MULTI_EXACT_VERSIONS = PNG_MULTI_EXACT_VERSIONS | WEBP_MULTI_EXACT_VERSIONS
 WEBP_EXACT_REFLECTION_VERSIONS = WEBP_MULTI_EXACT_VERSIONS | {WEBP_EXACT_REFLECTION_VERSION, WEBP_EXACT_REFLECTION_AFFINE_VERSION}
 WEBP_EXACT_COPY_VERSIONS = WEBP_EXACT_REFLECTION_VERSIONS | {WEBP_EXACT_COPY_VERSION, WEBP_EXACT_COPY_AFFINE_VERSION}
@@ -73,6 +81,12 @@ PNG_COPY_TRANSFORMS = {0: "same_orientation", 1: "rotate_90_ccw", 2: "rotate_180
 PNG_COPY_TURNS = {transform: turns for turns, transform in PNG_COPY_TRANSFORMS.items()}
 MULTI_EXACT_KEY = "multi_exact_review"
 MULTI_EXACT_BASIS = "lossless_exact_disjoint"
+THREE_EXACT_SIZE = (512, 512)
+THREE_EXACT_TRANSFORMS = frozenset({
+    frozenset({"same_orientation", "vertical_reflection", "horizontal_reflection"}),
+    frozenset({"same_orientation", "vertical_reflection", "rotate_180"}),
+})
+THREE_EXACT_OBSERVATION = "Three separate pairs of textured areas match pixel for pixel after alignment."
 MULTI_EXACT_NOTE = ("Repeated areas can come from copying, intentional symmetry or naturally repeated patterns. "
                     "Other areas can fall outside the search. The pairs do not establish which area came first, "
                     "whether the image was edited or whether AI was involved.")
@@ -83,6 +97,12 @@ MULTI_EXACT_STATUS = {
     "unsupported_profile": "The source was outside the supported upright, opaque lossless image profile.",
     "unassessed_match_budget": "Too many matching areas prevented a distinct two-pair comparison.",
     "unavailable": "The exact two-pair comparison could not complete.",
+}
+THREE_EXACT_STATUS = {
+    **MULTI_EXACT_STATUS,
+    "ambiguous_pairs": "The matches did not meet the supported combination or spacing for a distinct exact comparison.",
+    "unassessed_match_budget": "Too many matching areas prevented a distinct exact comparison.",
+    "unavailable": "The exact copy-pair comparison could not complete.",
 }
 SMALL_PNG_STATUS_TEXT = {
     "supported_pair": "Every RGB pixel in the two crops matches exactly. Pixels outside the crops differ on at least three sides.",
@@ -116,7 +136,8 @@ AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_A
                              TURNED_JPEG_COPY_AFFINE_VERSION, EXPANDED_JPEG_ROTATION_AFFINE_VERSION,
                              NATIVE_JPEG_ROTATION_AFFINE_VERSION, DISJOINT_JPEG_ROTATION_AFFINE_VERSION,
                              WEBP_EXACT_COPY_AFFINE_VERSION, WEBP_EXACT_REFLECTION_AFFINE_VERSION, PNG_EXACT_REFLECTION_AFFINE_VERSION,
-                             PNG_MULTI_EXACT_AFFINE_VERSION, WEBP_MULTI_EXACT_AFFINE_VERSION})
+                             PNG_MULTI_EXACT_AFFINE_VERSION, WEBP_MULTI_EXACT_AFFINE_VERSION,
+                             PNG_THREE_EXACT_AFFINE_VERSION, WEBP_THREE_EXACT_AFFINE_VERSION})
 CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12} | JPEG_BLOCK_VERSIONS | SMALL_PNG_VERSIONS | WEBP_EXACT_COPY_VERSIONS
 TRANSLATION_VERSIONS = CREDENTIAL_VERSIONS | {V10, V11}
 BASIS_VERSIONS = CREDENTIAL_VERSIONS | {V11}
@@ -207,6 +228,10 @@ def disjoint_copy_regions(first, second) -> bool:
     gap = DISJOINT_ROTATION_MARGIN
     return all(ax + aw + gap <= bx or bx + bw + gap <= ax or ay + ah + gap <= by or by + bh + gap <= ay
                for ax, ay, aw, ah in first for bx, by, bw, bh in second)
+
+
+def three_exact_profile(size, transforms) -> bool:
+    return size == THREE_EXACT_SIZE and frozenset(transforms) in THREE_EXACT_TRANSFORMS
 
 
 def status_text(status: str, *, version: str) -> str:
@@ -467,11 +492,13 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
                 or multi["status"] not in MULTI_EXACT_STATUS or not isinstance(multi["measurements"], list)
                 or not exact_size or skipped or (multi["status"] != "unsupported_profile"
                                                 and document["source"]["exif_orientation"] != 1)):
-            raise ValueError("Exact two-pair coverage is outside its native source profile")
+            raise ValueError("Exact copy-pair coverage is outside its native source profile")
         multi_values = multi["measurements"]
         if multi["status"] == "supported_pair":
-            if len(multi_values) != 2 or len(pairs) != 2 or record[exact_key] is not None or record[reflection_key] is not None:
-                raise ValueError("Exact two-pair coverage requires two separate measured pairs")
+            allowed_counts = {2, 3} if document["version"] in THREE_EXACT_VERSIONS else {2}
+            if (len(multi_values) != len(pairs) or len(pairs) not in allowed_counts
+                    or record[exact_key] is not None or record[reflection_key] is not None):
+                raise ValueError("Exact copy-pair coverage requires a supported number of separate measured pairs")
             for measurement in multi_values:
                 _validate_exact_measurement(measurement)
         elif multi_values:
@@ -604,7 +631,9 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         if turned_jpeg_pair and not OFFGRID_MIN_SIDE <= min(aw, ah) <= max(aw, ah) <= OFFGRID_MAX_SIDE:
             raise ValueError("Rotated JPEG pair is outside its measured geometry")
         measured_boxes.append(boxes)
-    if multi_values and not disjoint_copy_regions(*measured_boxes):
-        raise ValueError("The two exact pairs must have four distinct source crops")
+    if len(multi_values) == 3 and not three_exact_profile(size, (pair["transform"] for pair in pairs)):
+        raise ValueError("The three exact copy pairs are outside the supported raster or transform profile")
+    if multi_values and not all(disjoint_copy_regions(a, b) for a, b in combinations(measured_boxes, 2)):
+        raise ValueError("Exact copy pairs must have distinct source crops at least 16 pixels apart across pairs")
     if turned_jpeg_pair == 2 and not disjoint_copy_regions(*measured_boxes):
         raise ValueError("The two rotated copy pairs must have four distinct source crops")

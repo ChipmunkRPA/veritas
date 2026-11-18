@@ -292,6 +292,7 @@ class Settings(BaseSettings):
     video_soundtrack_frequency_review: bool = False  # Check cross-band support after a missed broad timing match.
     video_soundtrack_short_difference_review: bool = False  # Compare short, same-time differences between two mono tracks.
     video_reference_local_area: bool = False  # Qualified short 720 x 480 earlier-copy picture evidence.
+    video_reference_short30_local_area: bool = False  # Earlier-copy picture evidence for short portrait and square 30 fps clips.
     video_reference_measured_interval: bool = False  # Show strongly supported frame boundaries for qualified local picture ranges.
     video_reference_soundtrack_reencode: bool = False  # Compare local sound timing in qualified SD and 720p H.264 re-encodes.
     video_reference_short_soundtrack: bool = False  # Additional short-window pass for qualified 720p25 pairs.
@@ -331,6 +332,7 @@ class Settings(BaseSettings):
     image_lossless_webp_reflection_review: bool = False  # Optional native lossless WebP copy evidence with exact reflection.
     image_png_reflection_review: bool = False  # Optional native PNG copy evidence with exact reflection.
     image_disjoint_exact_copy_review: bool = False  # Optional independent pixel matches in two pairs of lossless crops.
+    image_three_exact_copy_review: bool = False  # Also check for three distinct exact copy pairs in supported 512 × 512 lossless images.
     image_turned_png_copy_review: bool = False  # Include right-angle copies in the local small PNG check.
     image_png_exif_preview_review: bool = False  # Optional native PNG comparison with its saved Exif thumbnail.
     image_heif_thumbnail_review: bool = False  # Compare an eligible HEIC still with its linked thumbnail.

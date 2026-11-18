@@ -23,7 +23,12 @@ from app.core.canonical import canonical_json
 from app.core.config import settings
 from app.detectors.audio.decode import read_wav, wav_bytes
 from app.detectors.video import decode
-from app.evidence import video_reference, video_reference_local, video_reference_timing
+from app.evidence import (
+    video_reference,
+    video_reference_local,
+    video_reference_photometric,
+    video_reference_timing,
+)
 from app.reports.media_reference_pdf import render as render_comparison
 from app.storage.db import Analysis, Artefact, BillingOrderRow, Job, utcnow
 from scripts.compare_video_references import run
@@ -681,31 +686,36 @@ def test_hd_reencode_profile_reaches_authorized_comparison_and_original_replay(
     assert run(earlier, submitted, export, verify=True) == record
 
 
-@pytest.mark.parametrize(("lossless", "local_area"), [(True, False), (False, False), (False, True)],
-                         ids=["earlier-ffv1", "earlier-h264", "earlier-h264-local-area"])
+@pytest.mark.parametrize(("lossless", "local_area", "short30"),
+                         [(True, False, None), (False, False, None), (False, True, None),
+                          (False, False, (640, 360)), (False, False, (480, 480))],
+                         ids=["earlier-ffv1", "earlier-h264", "earlier-h264-local-area", "portrait-30", "square-30"])
 def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(
-    tmp_path, reference_http, monkeypatch, lossless, local_area
+    tmp_path, reference_http, monkeypatch, lossless, local_area, short30
 ):
-    yy, xx = np.indices((480, 720) if local_area else (288, 360))
-    shade = 42 + xx * (.12 if local_area else .27) + yy * (.13 if local_area else .21) + 18 * np.cos(xx / 13) * np.sin(yy / 15)
+    is_area = local_area or short30 is not None
+    options = {"include_local_area": local_area, "include_short30_local_area": short30 is not None}
+    yy, xx = np.indices(short30 or ((480, 720) if local_area else (288, 360)))
+    shade = 42 + xx * (.12 if is_area else .27) + yy * (.13 if is_area else .21) + 18 * np.cos(xx / 13) * np.sin(yy / 15)
     base = np.uint8(np.stack((shade, shade + 7, shade - 5), axis=-1))
     earlier_frames = np.stack([np.roll(base, i % 4, axis=1) for i in range(68)])
     later_frames = earlier_frames.copy()
-    y0, y1, x0, x1 = (176, 288, 110, 290) if local_area else (176, 220, 110, 174)
+    y0, y1, x0, x1 = (176, 288, 110, 290) if is_area else (176, 220, 110, 174)
     later_frames[24:44, y0:y1, x0:x1] = (224, 223, 219)
     extension, mime = ("mkv", "video/x-matroska") if lossless else ("mp4", "video/mp4")
-    rate = 24 if local_area else 25
+    rate = 30 if short30 else 24 if local_area else 25
     earlier = encode_lossy_comparison(tmp_path / f"earlier.{extension}", earlier_frames, lossless=lossless, crf=23, rate=rate)
     later = encode_lossy_comparison(tmp_path / f"submitted.{extension}", later_frames, lossless=False, rate=rate)
     neutral = encode_lossy_comparison(tmp_path / f"reencoded.{extension}", earlier_frames, lossless=False, rate=rate)
     wrong = encode_lossy_comparison(tmp_path / f"different.{extension}", 255 - earlier_frames, lossless=lossless, crf=23, rate=rate)
 
-    record, assets = video_reference.compare(earlier, later, include_local_area=local_area)
+    record, assets = video_reference.compare(earlier, later, **options)
     local = record["picture"]["local_comparison"]
     assert record["schema"] == video_reference.SCHEMA_WITH_LOCAL
     assert record["affects_overall_confidence"] is False and local["status"] == "local_difference"
-    if local_area:
-        assert local["basis"] == "paired_h264_local_area/1"
+    if is_area:
+        expected_basis = video_reference_photometric.SHORT30_BASIS if short30 else video_reference_photometric.BASIS
+        assert local["basis"] == expected_basis
         assert "overall brightness and contrast" in local["scope"]
         assert "local_comparison" not in video_reference.compare(earlier, later)[0]["picture"]
     else:
@@ -714,7 +724,7 @@ def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(
     assert record["picture"]["matching_frames"] == 0
     assert max(span["start_s"], .96) < min(span["end_s"], 1.76)
     x, y, w, h = (span["tile"][key] for key in ("x", "y", "w", "h"))
-    if local_area:
+    if is_area:
         assert x <= x0 < x1 <= x + w and y <= y0 < y1 <= y + h
     else:
         assert x0 <= x < x1 and y0 <= y < y1
@@ -737,6 +747,8 @@ def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(
     stored = f.store.put_file(later)
     monkeypatch.setattr(settings, "video_reference_comparison_enabled", True)
     monkeypatch.setattr(settings, "video_reference_local_area", local_area)
+    monkeypatch.setattr(settings, "video_reference_short30_local_area", short30 is not None)
+    monkeypatch.setattr(settings, "video_reference_measured_interval", short30 is not None)
 
     @contextmanager
     def sessions():
@@ -770,6 +782,14 @@ def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(
     export.write_text(json.dumps(payload))
     assert run(earlier, later, export, verify=True) == record
     assert verify_comparison(earlier, later, payload)["native_crops_verified"] == 6
+    if short30:
+        assert "measured_interval" not in local
+        combined, combined_assets = video_reference.compare(earlier, later, **options, include_sound_difference=True)
+        assert combined["sound_difference"]["status"] == "unassessed"
+        assert combined["picture"]["local_comparison"] == local
+        combined_export = {"comparison": combined, "assets": {key: base64.b64encode(value).decode()
+                                                               for key, value in combined_assets.items()}}
+        assert verify_comparison(earlier, later, combined_export)["native_crops_verified"] == 6
     if local_area:
         monkeypatch.setattr(settings, "video_reference_measured_interval", True)
         supported = later_frames.copy()
@@ -832,8 +852,26 @@ def test_bounded_lossy_pair_keeps_exact_results_and_replays_local_native_crops(
     for name, data in {"comparison.json": canonical_json(v1) + b"\n", **v1_assets}.items():
         (historical / name).write_bytes(data)
     assert run(earlier, later, historical, verify=True) == v1
-    assert video_reference.compare(earlier, neutral, include_local_area=local_area)[0]["picture"]["local_comparison"]["status"] == "no_local_range"
-    assert video_reference.compare(wrong, later, include_local_area=local_area)[0]["picture"]["local_comparison"]["status"] == "insufficient_shared_picture_content"
+    assert video_reference.compare(earlier, neutral, **options)[0]["picture"]["local_comparison"]["status"] == "no_local_range"
+    assert video_reference.compare(wrong, later, **options)[0]["picture"]["local_comparison"]["status"] == "insufficient_shared_picture_content"
+
+
+def test_short30_local_area_requires_verified_scope(monkeypatch):
+    def table(shape=(360, 640), *, frames=68, ticks=24, rotation=0):
+        width, height = shape
+        return decode.FrameTable("1/720", tuple(range(0, frames * ticks, ticks)), (0,), "I" + "P" * (frames - 1),
+                                 width, height, width, height, rotation=rotation)
+
+    paths = Path("earlier"), Path("submitted")
+    monkeypatch.setattr(video_reference_local, "_carrier", lambda _: [("h264", "yuv420p")])
+    valid = table()
+    assert video_reference_photometric.eligible_short30(paths, (valid, valid), video_reference._elapsed(valid))
+    for unsupported in (table(ticks=30), table(frames=64), table(frames=92), table((640, 360)), table(rotation=90)):
+        assert not video_reference_photometric.eligible_short30(paths, (unsupported, unsupported),
+                                                                video_reference._elapsed(unsupported))
+    assert not video_reference_photometric.eligible_short30(paths, (table((480, 480)), valid), video_reference._elapsed(valid))
+    monkeypatch.setattr(video_reference_local, "_carrier", lambda _: [("h264", "yuv420p10le")])
+    assert not video_reference_photometric.eligible_short30(paths, (valid, valid), video_reference._elapsed(valid))
 
 
 @pytest.mark.parametrize(("width", "height", "step"), [(360, 288, 400001), (480, 360, 333333)])

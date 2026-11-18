@@ -101,13 +101,13 @@ def review_reflection(data, *, webp=True):
     return {"status": item["status"], "measurement": match["measurement"]}, [match["pair"]], match["transform"]
 
 
-def review_multiple(data, *, webp=False):
+def review_multiple(data, *, webp=False, allow_three=False):
     from app.detectors.image import exact_multi_copy
 
     pixels = webp_rgb(data) if webp else native_rgb(data)
     if pixels is None:
         return {"status": "unsupported_profile", "measurements": []}, []
-    result = exact_multi_copy.analyse(pixels)
+    result = exact_multi_copy.analyse(pixels, allow_three=allow_three)
     pairs = result["pairs"]
     return {"status": result["status"], "measurements": [pair["measurement"] for pair in pairs]}, pairs
 

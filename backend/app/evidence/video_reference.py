@@ -227,17 +227,23 @@ def _trimmed_pairs(paths, tables, offset):
             yield first, second
 
 
-def _picture(paths, tables, assets, *, include_local, include_local_area=False, include_measured_interval=False,
+def _picture(paths, tables, assets, *, include_local, include_local_area=False, include_short30_local_area=False,
+             include_measured_interval=False,
              include_soundtrack_reencode=False, include_short_phrase_reencode=False,
              trim_offset=None, trim_reencoded=False):
     clock = _elapsed(tables[1])
     earlier_clock = _elapsed(tables[0]) if trim_offset is not None else None
     earlier_offset = trim_offset if trim_offset is not None else 0
     local_check = video_reference_local.eligible(paths, tables, clock) if include_local else None
-    area_check = trim_reencoded or (
+    area_basis = None
+    if trim_reencoded or (
         include_local and include_local_area and video_reference_photometric.eligible(paths, tables, clock)
-    )
-    rects = video_reference_local.rectangles(tables[0].height, tables[0].width) if local_check or area_check else None
+    ):
+        area_basis = video_reference_photometric.BASIS
+    elif (include_local and include_short30_local_area
+          and video_reference_photometric.eligible_short30(paths, tables, clock)):
+        area_basis = video_reference_photometric.SHORT30_BASIS
+    rects = video_reference_local.rectangles(tables[0].height, tables[0].width) if local_check or area_basis else None
     measurements = []
     signals, background_errors, cells = [], [], []
     hd_profile = (video_reference_soundtrack_reencode.hd_report_profile(tables)
@@ -266,7 +272,7 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
             for grid, observations in zip(video_reference_short_reencode.GRIDS, phrase_differences, strict=True):
                 observations.append(video_reference_soundtrack_reencode.picture_difference(first.rgb, second.rgb, grid=grid))
         if rects is not None:
-            if area_check:
+            if area_basis:
                 signal, background, grid = video_reference_photometric.measurements(first.rgb, second.rgb, rects)
                 cells.append(grid)
             else:
@@ -301,17 +307,18 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
 
     local = choice = precise = None
     if rects is not None:
-        if area_check:
-            scope = video_reference_photometric.SCOPE
+        if area_basis:
+            scope = (video_reference_photometric.SHORT30_SCOPE if area_basis == video_reference_photometric.SHORT30_BASIS
+                     else video_reference_photometric.SCOPE)
             status, choice = video_reference_photometric.assess(signals, background_errors, rects)
         else:
             dt, scope = local_check
             status, choice = video_reference_local.assess(signals, background_errors, dt, rects)
         local = {"status": status, "summary": video_reference_local.STATUS[status], "scope": scope}
-        if area_check:
-            local["basis"] = video_reference_photometric.BASIS
+        if area_basis:
+            local["basis"] = area_basis
             if choice:
-                if include_measured_interval and not trim_reencoded:
+                if include_measured_interval and area_basis == video_reference_photometric.BASIS and not trim_reencoded:
                     xs, ys, _, _ = rects
                     seed = np.flatnonzero((xs == choice["tile"]["x"]) & (ys == choice["tile"]["y"]))
                     refined = (video_reference_measured_interval.refine(np.asarray(signals)[:, int(seed[0])], choice["frames"])
@@ -341,7 +348,7 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
                 if choice and index in crop_indices:
                     x, y, w, h = (choice["tile"][key] for key in ("x", "y", "w", "h"))
                     crops.setdefault(index, {})[side] = _image(
-                        assets, f"{side}-local-crop-{frame.index:03d}.png", frame.rgb[y:y+h, x:x+w], native=area_check
+                        assets, f"{side}-local-crop-{frame.index:03d}.png", frame.rgb[y:y+h, x:x+w], native=bool(area_basis)
                     )
     if set(previews) != needed or any(len(pictures) != 2 for pictures in previews.values()):
         raise DecodeError("Video could not be decoded with all requested evidence pictures.")
@@ -410,6 +417,7 @@ def _additional_soundtracks(paths, sources, tables, assets):
 
 def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             include_local_area: bool = False,
+            include_short30_local_area: bool = False,
             include_measured_interval: bool = False,
             timing_event_s: Fraction | None = None, timing_model: Path | None = None,
             timing_short_fallback: bool = False, include_soundtrack: bool = True,
@@ -524,6 +532,7 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             compare_phrase_pictures = native_difference_profile(paths, tables) is not None
         record["picture"] = _picture(paths, tables, assets, include_local=include_local,
                                      include_local_area=include_local_area and timing_event_s is None,
+                                     include_short30_local_area=include_short30_local_area and timing_event_s is None,
                                      include_measured_interval=include_measured_interval,
                                      include_soundtrack_reencode=compare_timing_pictures,
                                      include_short_phrase_reencode=compare_phrase_pictures)

@@ -12,6 +12,9 @@ from app.detectors.video.decode import DecodeError
 from app.evidence import video_reference_local as local
 
 BASIS = "paired_h264_local_area/1"
+SHORT30_BASIS = "paired_h264_short30_local_area/1"
+SHORT30_SHAPES = {(360, 640), (480, 480)}
+SHORT30_MIN_FRAMES, SHORT30_MAX_FRAMES = 65, 91
 POINT = 1.5712549522005277
 FLANK = 5
 WIDTHS = (8, 12, 16, 20)
@@ -19,6 +22,16 @@ CELL = 8
 SCOPE = ("Compares two upright 720 x 480 H.264 clips with the same verified picture clock, at 23–25 fps. "
          "The highlighted area estimates where a short visual difference persists after accounting for overall "
          "brightness and contrast. The difference may reflect ordinary editing and adds no AI confidence.")
+SHORT30_SCOPE = ("Compares two upright 360 x 640 portrait or 480 x 480 square H.264 clips, with 65 to 91 pictures "
+                 "and matching verified timestamps at 30 fps. Highlights a short visual change after accounting for "
+                 "overall brightness and contrast. Ordinary editing can produce this evidence. It adds no AI confidence.")
+
+
+def _h264_pair(paths):
+    try:
+        return all(local._carrier(path) == [("h264", "yuv420p")] for path in paths)
+    except (DecodeError, OSError, ValueError, subprocess.SubprocessError):
+        return False
 
 
 def eligible(paths, tables, clock):
@@ -29,10 +42,17 @@ def eligible(paths, tables, clock):
     step = clock[1] - clock[0]
     if not Fraction(1, 25) <= step <= Fraction(1, 23) or any(b - a != step for a, b in pairwise(clock)):
         return False
-    try:
-        return all(local._carrier(path) == [("h264", "yuv420p")] for path in paths)
-    except (DecodeError, OSError, ValueError, subprocess.SubprocessError):
+    return _h264_pair(paths)
+
+
+def eligible_short30(paths, tables, clock):
+    shape = tables[1].width, tables[1].height
+    if not SHORT30_MIN_FRAMES <= len(clock) <= SHORT30_MAX_FRAMES or shape not in SHORT30_SHAPES or any(
+        table.rotation or (table.width, table.height) != shape for table in tables
+    ):
         return False
+    step = Fraction(1, 30)
+    return all(b - a == step for a, b in pairwise(clock)) and _h264_pair(paths)
 
 
 def assess(signals, background_errors, rects):

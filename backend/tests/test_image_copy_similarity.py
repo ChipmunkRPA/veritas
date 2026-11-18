@@ -837,6 +837,69 @@ def test_two_exact_pairs_bind_each_transform_and_both_source_witnesses(evidence_
 
 
 @pytest.mark.parametrize("webp", [False, True], ids=["png", "webp"])
+@pytest.mark.parametrize("affine", [False, True])
+def test_three_exact_pairs_preserve_legacy_packages_and_bind_each_native_crop(evidence_http, monkeypatch, webp, affine):
+    from app.evidence.image_copy_similarity_binding import MULTI_EXACT_BASIS, MULTI_EXACT_KEY
+    from app.evidence.image_exact_small_copy_source import review_multiple, verify_multiple
+
+    f = evidence_http
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "image_disjoint_exact_copy_review", True)
+    monkeypatch.setattr(settings, "image_affine_copy_review", affine)
+    monkeypatch.setattr(settings, "image_embedded_pair_review", True)
+    monkeypatch.setattr(settings, "image_three_exact_copy_review", False)
+    rgb = np.random.default_rng(4222).integers(0, 256, (512, 512, 3), dtype=np.uint8)
+    rgb[84:117, 371:414] = rgb[57:90, 56:99]
+    rgb[297:331, 362:399] = rgb[305:339, 64:101][::-1, ::-1]
+    rgb[170:207, 372:415] = rgb[166:203, 158:201][::-1]
+    carrier = "WEBP" if webp else "PNG"
+    encoded = _bytes(Image.fromarray(rgb), format=carrier, lossless=True)
+    assert review_multiple(encoded, webp=webp)[0]["status"] == "ambiguous_pairs"
+    outside = _bytes(Image.fromarray(rgb[:500]), format=carrier, lossless=True)
+    assert not review_multiple(outside, webp=webp, allow_three=True)[1]
+    with Session(f.engine) as db:
+        analysis = db.get(Analysis, "image-unprepared")
+        analysis.content_type = "image/webp" if webp else "image/png"
+        stored = f.store.put_bytes(encoded)
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        result = copy.deepcopy(specimen("image", "standard").result)
+        result.update(exhibits=[], signals=[], findings=[])
+        result["input"]["sha256"] = stored.sha256
+        analysis.result_hash = canonical_hash(result)
+        f.store.put_bytes(canonical_json(result))
+        old = service.persist_packet_set(db, analysis, f.store, result=result)
+        assert base_document(old)["version"] == f"image-evidence-{(40 if webp else 38) + affine}"
+        assert base_document(old)["copy_translation"]["basis"] != MULTI_EXACT_BASIS
+
+        monkeypatch.setattr(settings, "image_three_exact_copy_review", True)
+        new_analysis = Analysis(id="image-three-pairs", kind=analysis.kind, filename=analysis.filename,
+                                content_type=analysis.content_type, size_bytes=analysis.size_bytes,
+                                sha256=analysis.sha256, status="done", revision=analysis.revision,
+                                result_schema_version=analysis.result_schema_version, result_hash=analysis.result_hash)
+        db.add(new_analysis)
+        db.flush()
+        document = service.persist_packet_set(db, new_analysis, f.store, result=result)
+        base = base_document(document)
+        assert base["version"] == f"image-evidence-{(44 if webp else 42) + affine}"
+        check = base["copy_translation"]
+        assert check["basis"] == MULTI_EXACT_BASIS and check["authorship_confidence_contribution"] == 0
+        assert [pair["id"] for pair in check["pairs"]] == ["T01", "T02", "T03"]
+        assert [pair["transform"] for pair in check["pairs"]] == ["same_orientation", "rotate_180", "vertical_reflection"]
+        assert [m["matching_pixels"] for m in check[MULTI_EXACT_KEY]["measurements"]] == [1419, 1258, 1591]
+        verify_multiple(encoded, check, webp=webp)
+        for pair in check["pairs"]:
+            for role, artifact in pair["artifacts"].items():
+                x, y, w, h = (pair["regions"][role][field] for field in "xywh")
+                with Image.open(io.BytesIO(f.store.read_bytes(artifact["sha256"]))) as crop:
+                    assert crop.tobytes() == rgb[y:y+h, x:x+w].tobytes()
+        assert service.load_packet_set(db, analysis, f.store, set_id=old["id"]) == old
+        altered = copy.deepcopy(check)
+        altered["pairs"][2]["transform"] = "horizontal_reflection"
+        with pytest.raises(ValueError, match="differs from the submitted RGB pixels"):
+            verify_multiple(encoded, altered, webp=webp)
+
+
+@pytest.mark.parametrize("webp", [False, True], ids=["png", "webp"])
 def test_rotated_exact_copy_binds_direction_and_untouched_rectangular_crops(evidence_http, monkeypatch, webp):
     from app.evidence import image_exact_small_copy_source
     from app.evidence.image_copy_similarity_binding import (

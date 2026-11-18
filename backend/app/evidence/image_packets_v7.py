@@ -52,6 +52,8 @@ from app.evidence.image_copy_similarity_binding import (
     PNG_EXACT_REFLECTION_VERSION,
     PNG_MULTI_EXACT_AFFINE_VERSION,
     PNG_MULTI_EXACT_VERSION,
+    PNG_THREE_EXACT_AFFINE_VERSION,
+    PNG_THREE_EXACT_VERSION,
     REFLECTION_VERSIONS,
     ROLES,
     SCHEMA,
@@ -60,6 +62,7 @@ from app.evidence.image_copy_similarity_binding import (
     SMALL_PNG_COPY_AFFINE_VERSION,
     SMALL_PNG_COPY_VERSION,
     SMALL_PNG_VERSIONS,
+    THREE_EXACT_VERSIONS,
     TRANSLATION_NOTE,
     TRANSLATION_SCHEMA,
     TURNED_JPEG_BASIS,
@@ -87,6 +90,8 @@ from app.evidence.image_copy_similarity_binding import (
     WEBP_EXACT_REFLECTION_VERSION,
     WEBP_MULTI_EXACT_AFFINE_VERSION,
     WEBP_MULTI_EXACT_VERSION,
+    WEBP_THREE_EXACT_AFFINE_VERSION,
+    WEBP_THREE_EXACT_VERSION,
     box_bounds,
     copy_records,
     exact_copy_size,
@@ -104,7 +109,9 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
 CREATOR = "image-evidence-packets/10"
-_CREATORS = {WEBP_MULTI_EXACT_AFFINE_VERSION: "image-evidence-packets/39", WEBP_MULTI_EXACT_VERSION: "image-evidence-packets/38",
+_CREATORS = {WEBP_THREE_EXACT_AFFINE_VERSION: "image-evidence-packets/43", WEBP_THREE_EXACT_VERSION: "image-evidence-packets/42",
+             PNG_THREE_EXACT_AFFINE_VERSION: "image-evidence-packets/41", PNG_THREE_EXACT_VERSION: "image-evidence-packets/40",
+             WEBP_MULTI_EXACT_AFFINE_VERSION: "image-evidence-packets/39", WEBP_MULTI_EXACT_VERSION: "image-evidence-packets/38",
              PNG_MULTI_EXACT_AFFINE_VERSION: "image-evidence-packets/37", PNG_MULTI_EXACT_VERSION: "image-evidence-packets/36",
              PNG_EXACT_REFLECTION_AFFINE_VERSION: "image-evidence-packets/35",
              PNG_EXACT_REFLECTION_VERSION: "image-evidence-packets/34",
@@ -146,8 +153,12 @@ def _active_version() -> str:
 def _analysis_version(analysis: Analysis) -> str:
     if settings.environment == "dev" and settings.image_disjoint_exact_copy_review:
         if analysis.content_type == "image/png":
+            if settings.image_three_exact_copy_review:
+                return PNG_THREE_EXACT_AFFINE_VERSION if settings.image_affine_copy_review else PNG_THREE_EXACT_VERSION
             return PNG_MULTI_EXACT_AFFINE_VERSION if settings.image_affine_copy_review else PNG_MULTI_EXACT_VERSION
         if analysis.content_type == "image/webp":
+            if settings.image_three_exact_copy_review:
+                return WEBP_THREE_EXACT_AFFINE_VERSION if settings.image_affine_copy_review else WEBP_THREE_EXACT_VERSION
             return WEBP_MULTI_EXACT_AFFINE_VERSION if settings.image_affine_copy_review else WEBP_MULTI_EXACT_VERSION
     if settings.environment == "dev" and settings.image_png_reflection_review and analysis.content_type == "image/png":
         return PNG_EXACT_REFLECTION_AFFINE_VERSION if settings.image_affine_copy_review else PNG_EXACT_REFLECTION_VERSION
@@ -497,7 +508,8 @@ def build_packet_set(
         from app.evidence.image_exact_small_copy_source import review_multiple
 
         try:
-            multi_review, matches = review_multiple(legacy._verified(store, analysis.sha256), webp=webp)
+            multi_review, matches = review_multiple(legacy._verified(store, analysis.sha256), webp=webp,
+                                                   allow_three=version in THREE_EXACT_VERSIONS)
         except (cv2.error, OSError, ValueError, SystemError):
             multi_review, matches = {"status": "unavailable", "measurements": []}, []
         if matches:

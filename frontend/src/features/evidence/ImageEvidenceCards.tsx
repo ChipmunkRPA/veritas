@@ -216,14 +216,16 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const geometric = field === 'copy_affine'
   const sectionId = `image-${field.replace('_', '-')}`
   const baseVersion = set.prior_embedded_pair_evidence?.version ?? set.version
-  const webpReflectionVersion = ['image-evidence-34', 'image-evidence-35', 'image-evidence-40', 'image-evidence-41'].includes(baseVersion)
-  const pngReflectionVersion = ['image-evidence-36', 'image-evidence-37', 'image-evidence-38', 'image-evidence-39'].includes(baseVersion)
+  const webpReflectionVersion = ['image-evidence-34', 'image-evidence-35', 'image-evidence-40', 'image-evidence-41', 'image-evidence-44', 'image-evidence-45'].includes(baseVersion)
+  const pngReflectionVersion = ['image-evidence-36', 'image-evidence-37', 'image-evidence-38', 'image-evidence-39', 'image-evidence-42', 'image-evidence-43'].includes(baseVersion)
+  const threePairScope = ['image-evidence-42', 'image-evidence-43', 'image-evidence-44', 'image-evidence-45'].includes(baseVersion)
+    && set.source.width === 512 && set.source.height === 512
   const heading = geometric ? 'Geometric copy comparison' : reflected ? 'Same-image copy similarity'
     : webpReflectionVersion || pngReflectionVersion ? 'Exact and geometric copy comparisons' : 'Copy similarity without mirroring'
   const turnedReview = pngReflectionVersion || ['image-evidence-22', 'image-evidence-23'].includes(baseVersion)
   const nativeJpegVersion = ['image-evidence-28', 'image-evidence-29', 'image-evidence-30', 'image-evidence-31'].includes(baseVersion)
   const webpVersion = baseVersion === 'image-evidence-32' || baseVersion === 'image-evidence-33' || webpReflectionVersion
-  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29', 'image-evidence-31', 'image-evidence-33', 'image-evidence-35', 'image-evidence-37', 'image-evidence-39', 'image-evidence-41'].includes(baseVersion))
+  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29', 'image-evidence-31', 'image-evidence-33', 'image-evidence-35', 'image-evidence-37', 'image-evidence-39', 'image-evidence-41', 'image-evidence-43', 'image-evidence-45'].includes(baseVersion))
     || (reflected && (turnedReview || ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12',
       'image-evidence-13', 'image-evidence-14', 'image-evidence-16', 'image-evidence-17', 'image-evidence-18',
       'image-evidence-19', 'image-evidence-20', 'image-evidence-21', 'image-evidence-24', 'image-evidence-25',
@@ -236,12 +238,17 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const separateMeasurements = turnedJpeg?.measurements
   const multi = field === 'copy_translation' ? set.copy_translation?.multi_exact_review : undefined
   const multiStatus = {
-    supported_pair: 'Two separate pairs of textured areas match pixel for pixel after alignment.',
+    supported_pair: multi?.measurements.length === 3
+      ? 'Three separate pairs of textured areas match pixel for pixel after alignment.'
+      : 'Two separate pairs of textured areas match pixel for pixel after alignment.',
     no_second_pair: 'The exact comparison did not find two distinct pairs.',
-    ambiguous_pairs: 'Competing or nearby exact matches prevented a distinct two-pair comparison.',
+    ambiguous_pairs: threePairScope
+      ? 'The matches did not meet the supported combination or spacing for a distinct exact comparison.'
+      : 'Competing or nearby exact matches prevented a distinct two-pair comparison.',
     unsupported_profile: 'The source was outside the supported upright, opaque lossless image profile.',
-    unassessed_match_budget: 'Too many matching areas prevented a distinct two-pair comparison.',
-    unavailable: 'The exact two-pair comparison could not complete.',
+    unassessed_match_budget: threePairScope ? 'Too many matching areas prevented a distinct exact comparison.'
+      : 'Too many matching areas prevented a distinct two-pair comparison.',
+    unavailable: threePairScope ? 'The exact copy-pair comparison could not complete.' : 'The exact two-pair comparison could not complete.',
   }
   const multiAlignments = {
     same_orientation: ['Exact copy pair', 'The two crops match in their original orientation.'],

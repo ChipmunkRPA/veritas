@@ -16,7 +16,11 @@ from tempfile import TemporaryDirectory
 SCHEMA = "chipmunk.native-video-interval/1"
 COMPARISON_SCHEMA = "chipmunk.video-reference-comparison/2"
 TRIM_REENCODE_SCHEMA = "chipmunk.video-reference-comparison/10"
+ADDITIONAL_SOUNDTRACK_SCHEMA = "chipmunk.video-reference-comparison/6"
+SOUND_DIFFERENCE_WRAPPERS = {f"chipmunk.video-reference-comparison/{number}" for number in range(15, 20)}
 LOCAL_AREA_BASIS = "paired_h264_local_area/1"
+SHORT30_BASIS = "paired_h264_short30_local_area/1"
+SHORT30_SHAPES = {(360, 640), (480, 480)}
 MEASURED_INTERVAL_BASIS = "paired_h264_measured_picture_interval/1"
 ROLES = ("before", "during", "after")
 SHA = re.compile(r"[0-9a-f]{64}")
@@ -52,7 +56,7 @@ def run(command):
 def probe(path):
     report = run([
         "ffprobe", "-v", "error", "-protocol_whitelist", "file", "-select_streams", "v:0",
-        "-show_entries", "stream=width,height,time_base,codec_name:stream_side_data=rotation:frame=pts",
+        "-show_entries", "stream=width,height,time_base,codec_name,pix_fmt:stream_side_data=rotation:frame=pts",
         "-show_frames", "-show_streams", "-of", "json", str(path.resolve()),
     ])
     document = json.loads(report.stdout)
@@ -68,7 +72,7 @@ def probe(path):
             "Source pictures need explicit, strictly increasing presentation timestamps")
     base = Fraction(stream["time_base"])
     require(base > 0, "The native time base must be positive")
-    return width, height, base, pts, stream["codec_name"]
+    return width, height, base, pts, stream["codec_name"], stream.get("pix_fmt")
 
 
 def decode_rgb_frames(path, indices, pts, time_base, frame_bytes):
@@ -124,7 +128,7 @@ def verify(source_path, receipt, exhibits=None):
             and source_path.is_file() and source_path.stat().st_size == source["bytes"]
             and sha_file(source_path) == source["sha256"],
             "Source file does not match the receipt")
-    width, height, time_base, pts, codec = probe(source_path)
+    width, height, time_base, pts, codec, _ = probe(source_path)
     require((width, height, str(time_base), len(pts), clock_sha256(pts)) ==
             (source["width"], source["height"], source["time_base"], source["frames"], source["pts_sha256"]),
             "Native geometry, time base or presentation clock differs from the receipt")
@@ -161,14 +165,17 @@ def verify(source_path, receipt, exhibits=None):
     }
 
 
-def comparison_source(path, source, *, local_area=False):
+def comparison_source(path, source, *, local_area=False, short30=False):
     require(0 < path.stat().st_size == source["bytes"] <= MAX_COMPARISON_BYTES
             and sha_file(path) == source["sha256"], "Comparison source bytes do not match")
-    width, height, base, pts, codec = probe(path)
-    shapes = {(720, 480)} if local_area else {(360, 288), (480, 360)}
+    width, height, base, pts, codec, pix_fmt = probe(path)
+    shapes = SHORT30_SHAPES if short30 else {(720, 480)} if local_area else {(360, 288), (480, 360)}
     require((width, height) in shapes and len(pts) <= 100,
             "Source lies outside the local comparison dimensions or frame limit")
-    if local_area:
+    if short30:
+        require(codec == "h264" and pix_fmt == "yuv420p" and 65 <= len(pts) <= 91
+                and all((b - a) * base == Fraction(1, 30) for a, b in pairwise(pts)), "Unsupported portrait or square clock")
+    elif local_area:
         step = (pts[1] - pts[0]) * base
         require(codec == "h264" and len(pts) >= 40 and Fraction(1, 25) <= step <= Fraction(1, 23)
                 and all((b - a) * base == step for a, b in pairwise(pts)), "Unsupported local area clock")
@@ -185,16 +192,23 @@ def native_crop(frame, width, x, y, w, h):
 
 def verify_comparison(earlier, submitted, export):
     record, assets = export["comparison"], export["assets"]
-    trimmed = record["schema"] == TRIM_REENCODE_SCHEMA
-    require(record["schema"] in (COMPARISON_SCHEMA, TRIM_REENCODE_SCHEMA) and record["status"] == "measured"
-            and record["affects_overall_confidence"] is False, "Expected a measured local video comparison")
     local = record["picture"]["local_comparison"]
-    local_area = local.get("basis") == LOCAL_AREA_BASIS
+    basis = local.get("basis")
+    local_area = basis in {LOCAL_AREA_BASIS, SHORT30_BASIS}
+    short30 = basis == SHORT30_BASIS
+    schema = record["schema"]
+    if short30 and schema in SOUND_DIFFERENCE_WRAPPERS:
+        schema = record.get("comparison_schema")
+    trimmed = schema == TRIM_REENCODE_SCHEMA
+    supported = ((COMPARISON_SCHEMA, ADDITIONAL_SOUNDTRACK_SCHEMA) if short30 else (COMPARISON_SCHEMA, TRIM_REENCODE_SCHEMA))
+    require(schema in supported and record["status"] == "measured"
+            and record["affects_overall_confidence"] is False, "Expected a measured local video comparison")
     require(local["status"] == "local_difference", "The export has no measured local picture interval")
-    result = _verify_comparison_range(earlier, submitted, record, assets, local["range"], local_area=local_area, trimmed=trimmed)
+    result = _verify_comparison_range(earlier, submitted, record, assets, local["range"],
+                                      local_area=local_area, trimmed=trimmed, short30=short30)
     if precise := local.get("measured_interval"):
         coarse = local["range"]
-        require(local_area and not trimmed and precise.get("basis") == MEASURED_INTERVAL_BASIS
+        require(basis == LOCAL_AREA_BASIS and not trimmed and precise.get("basis") == MEASURED_INTERVAL_BASIS
                 and precise["id"] == coarse["id"] + "-M" and precise["tile"] == coarse["tile"],
                 "Measured picture interval differs from the initial local area")
         changes = [abs(precise[key] - coarse[key]) for key in ("start_frame", "end_frame_exclusive")]
@@ -206,7 +220,7 @@ def verify_comparison(earlier, submitted, export):
     return result
 
 
-def _verify_comparison_range(earlier, submitted, record, assets, region, *, local_area, trimmed=False, measured=False):
+def _verify_comparison_range(earlier, submitted, record, assets, region, *, local_area, trimmed=False, measured=False, short30=False):
     start, end = region["start_frame"], region["end_frame_exclusive"]
     require(type(start) is type(end) is int and 0 < start < end, "Invalid half-open comparison interval")
     previews = region["previews"]
@@ -235,7 +249,7 @@ def _verify_comparison_range(earlier, submitted, record, assets, region, *, loca
         offsets["earlier"] = offset
     clocks = []
     for side, path in (("earlier", earlier), ("submitted", submitted)):
-        width, height, base, pts = comparison_source(path, record[side], local_area=local_area)
+        width, height, base, pts = comparison_source(path, record[side], local_area=local_area, short30=short30)
         offset = offsets[side]
         begin, stop = start + offset, end + offset
         require(stop < len(pts) and x + w <= width and y + h <= height, "Interval or crop lies outside the source")

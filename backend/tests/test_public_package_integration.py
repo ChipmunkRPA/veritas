@@ -666,7 +666,7 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
                           'NATIVE_JPEG_ROTATION_AFFINE_VERSION', 'DISJOINT_JPEG_ROTATION_AFFINE_VERSION',
                           'WEBP_EXACT_COPY_AFFINE_VERSION', 'WEBP_EXACT_REFLECTION_AFFINE_VERSION',
                           'PNG_EXACT_REFLECTION_AFFINE_VERSION', 'PNG_MULTI_EXACT_AFFINE_VERSION',
-                          'WEBP_MULTI_EXACT_AFFINE_VERSION')}
+                          'WEBP_MULTI_EXACT_AFFINE_VERSION', 'PNG_THREE_EXACT_AFFINE_VERSION', 'WEBP_THREE_EXACT_AFFINE_VERSION')}
     elif name == 'document_chat_markers.py':
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.core.canonical', 'FLOAT_DP'), ('app.core.canonical', 'canonical_hash'),

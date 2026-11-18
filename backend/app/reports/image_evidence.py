@@ -125,6 +125,10 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         SMALL_PNG_CROP_MAX,
         SMALL_PNG_CROP_MIN,
         SMALL_PNG_STATUS_TEXT,
+        THREE_EXACT_OBSERVATION,
+        THREE_EXACT_SIZE,
+        THREE_EXACT_STATUS,
+        THREE_EXACT_VERSIONS,
         TURNED_JPEG_BASIS,
         TURNED_JPEG_STATUS_TEXT,
         TURNED_PNG_BASIS,
@@ -270,7 +274,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 else:
                     check["basis_text"] = " ".join(filter(None, (check.get("basis_text"), scope)))
             if multi_confirmed:
-                check["observation"] = MULTI_EXACT_STATUS["supported_pair"]
+                check["observation"] = (THREE_EXACT_OBSERVATION if len(multi["measurements"]) == 3
+                                        else MULTI_EXACT_STATUS["supported_pair"])
                 alignments = {"same_orientation": "The two crops match in their original orientation.",
                               "horizontal_reflection": "Flip Area B horizontally to align with Area A.",
                               "vertical_reflection": "Flip Area B vertically to align with Area A.",
@@ -281,7 +286,10 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                     pair["rotation_text"] = (f"{alignments[pair['transform']]} Compared {measured['matching_pixels']:,} RGB pixels in each crop. "
                                              f"Mean surrounding differences (top, bottom, left, right) {perimeter} of 255 levels.")
             elif multi:
-                check["basis_text"] = " ".join(filter(None, (check.get("basis_text"), MULTI_EXACT_STATUS[multi["status"]])))
+                messages = (THREE_EXACT_STATUS if base_version in THREE_EXACT_VERSIONS
+                            and (document["source"]["width"], document["source"]["height"]) == THREE_EXACT_SIZE
+                            else MULTI_EXACT_STATUS)
+                check["basis_text"] = " ".join(filter(None, (check.get("basis_text"), messages[multi["status"]])))
         if field == "copy_translation" and base_version in EXACT_REFLECTION_VERSIONS:
             check["title"] = "Exact and geometric copy comparisons"
         for pair in check["pairs"]:

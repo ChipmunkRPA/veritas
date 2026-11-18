@@ -11,7 +11,9 @@ import pytest
 from docx import Document
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
+from docx.shared import Inches
 from test_document_packets import packet_factory as packet_factory
+from test_strict_word import _strict_package
 from test_stripe_billing import billing as billing
 from test_stripe_billing import counts, event_for, signed
 
@@ -22,6 +24,7 @@ from app.detectors.text import extract as extraction
 from app.engine import pipelines
 from app.engine.customer_assessment import customer_assessment
 from app.engine.stages import document as stage
+from app.evidence import document_native_locations as locations
 from app.evidence import document_word_visibility as visibility
 from app.evidence.document_packets import build_packet_set, load_packet_set, packet_hash
 from app.reports import engine, multimedia_evidence, public_package, public_verify, verify_document_source
@@ -74,6 +77,8 @@ def test_local_word_visibility_keeps_exact_coordinates_and_ignores_explicit_off(
     assert stage.current_decode_output(decoded)
     old_meta = {key: value for key, value in doc.meta.items() if key != visibility.KEY}
     assert not stage.current_decode_output({**decoded, "meta": old_meta})
+    old_grid = {key: value for key, value in doc.meta.items() if key != locations.WORD_TABLE_GRID_KEY}
+    assert not stage.current_decode_output({**decoded, "meta": old_grid})
     for code in ("ai_supported", "no_ai_indicators"):
         decision = {"code": code, "verbal": "Fixture tendency", "reason": "Fixture",
                     "band": "uncertain", "confidence": "medium", "fusion_mode": "fallback",
@@ -88,15 +93,34 @@ def test_local_word_visibility_keeps_exact_coordinates_and_ignores_explicit_off(
         assert report["signals"][0]["calibrated_probability"] is None
 
 
-def test_word_visibility_coordinates_replay_in_evidence_pdf_and_json(packet_factory, hidden_docx, monkeypatch, tmp_path):
+@pytest.mark.parametrize("word_format", ["standard", "omitted-leading-cell", "strict-omitted-leading-cell"])
+def test_word_visibility_coordinates_replay_in_evidence_pdf_and_json(packet_factory, hidden_docx, monkeypatch, tmp_path, word_format):
+    column = 0
+    if word_format != "standard":
+        word = Document(hidden_docx)
+        table = word.tables[0]
+        table.add_column(Inches(1))
+        row = table.rows[0]._tr
+        row.remove(row.tc_lst[-1])
+        omitted = OxmlElement("w:gridBefore")
+        omitted.set(qn("w:val"), "1")
+        row.get_or_add_trPr().append(omitted)
+        path = tmp_path / "omitted.docx"
+        word.save(path)
+        if word_format.startswith("strict"):
+            path.write_bytes(_strict_package(path.read_bytes()))
+        hidden_docx = path
+        column = 1
     db, store, analysis, result, decoded, _ = packet_factory(".docx", scores=(), source_pdf=hidden_docx)
     record = decoded["meta"][visibility.KEY]
+    assert record["locations"][1]["body_path"] == [1, "row", 0, "cell", column, 1]
     commitment = canonical_hash(record)
     result["manifest"]["sampling"][visibility.COMMITMENT] = commitment
     analysis.result_hash = store.put_bytes(canonical_json(result)).sha256
     evidence = build_packet_set(db, analysis, store, result)
     assert load_packet_set(db, analysis, store) == evidence
     assert evidence["coverage"][visibility.KEY] == record
+    assert evidence["coverage"][locations.WORD_TABLE_GRID_KEY] == locations.WORD_TABLE_GRID
     assert evidence["source"][visibility.COMMITMENT] == commitment
 
     for change in ("omit", "relocate"):
@@ -128,8 +152,8 @@ def test_word_visibility_coordinates_replay_in_evidence_pdf_and_json(packet_fact
     assert not rendered.refused
     pdf_text = " ".join(engine.pdf_text(rendered.pdf).split())
     assert "Word text visibility. Checked 2 extracted paragraphs and found 2 text runs marked hidden." in pdf_text
-    assert "Table cell at row 1, column 1, run 1, characters" in pdf_text
-    assert "Body path 1 / row / 0 / cell / 0 / 1" in pdf_text
+    assert f"Table cell at row 1, column {column + 1}, run 1, characters" in pdf_text
+    assert f"Body path 1 / row / 0 / cell / {column} / 1" in pdf_text
     assert "Hidden link wording." not in pdf_text
     assert "PRIVATE MODEL" not in pdf_text
 

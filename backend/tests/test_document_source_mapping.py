@@ -92,6 +92,32 @@ def test_docx_body_order_merged_cells_and_structure_anchors(tmp_path):
     assert "no stable page numbers" in extracted.meta["coverage_warning"]
 
 
+def test_docx_grid_omissions_keep_cells_in_their_native_rows(tmp_path):
+    path = tmp_path / "omitted-cells.docx"
+    document = docx.Document()
+    table = document.add_table(rows=3, cols=3)
+    table.cell(0, 0).text = "Top left."
+    table.cell(0, 1).text = "Top center."
+    table.cell(0, 2).text = "Top right."
+    table.cell(1, 1).merge(table.cell(1, 2)).text = "Middle merged value."
+    table.cell(2, 0).text = "Bottom left."
+    table.cell(2, 1).text = "Bottom center."
+    for row_number, cell_index, tag in ((1, 0, "gridBefore"), (2, -1, "gridAfter")):
+        row = table.rows[row_number]._tr
+        row.remove(row.tc_lst[cell_index])
+        omitted = OxmlElement(f"w:{tag}")
+        omitted.set(qn("w:val"), "1")
+        row.get_or_add_trPr().append(omitted)
+    document.save(path)
+
+    extracted = extract(path, ".docx")
+    assert [(block["body_path"], extracted.text[block["start"]:block["end"]]) for block in extracted.source_map] == [
+        ([0, "row", 0, "cell", 0, 1], "Top left."), ([0, "row", 0, "cell", 1, 1], "Top center."),
+        ([0, "row", 0, "cell", 2, 1], "Top right."), ([0, "row", 1, "cell", 1, 1], "Middle merged value."),
+        ([0, "row", 2, "cell", 0, 1], "Bottom left."), ([0, "row", 2, "cell", 1, 1], "Bottom center."),
+    ]
+
+
 def word_control(nodes, *, placeholder=False):
     control, properties, content = (OxmlElement(tag) for tag in ("w:sdt", "w:sdtPr", "w:sdtContent"))
     if placeholder:

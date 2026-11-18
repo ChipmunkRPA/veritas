@@ -122,7 +122,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                                                            document_tracked_changes.PARAGRAPH_SCHEMA),
                           project_word_breaks=schema == document_tracked_changes.PARAGRAPH_SCHEMA,
                           include_word_content_controls=coverage.get(WORD_CONTENT_CONTROLS_KEY) == WORD_CONTENT_CONTROLS,
-                          include_word_saved_fields=document_native_locations.SAVED_FIELDS_KEY in coverage)
+                          include_word_saved_fields=document_native_locations.SAVED_FIELDS_KEY in coverage,
+                          map_word_table_grid=coverage.get(document_native_locations.WORD_TABLE_GRID_KEY)
+                          == document_native_locations.WORD_TABLE_GRID)
         except (OpcError, XMLSyntaxError) as error:
             raise ValueError("The supplied DOCX cannot be parsed locally") from error
     else:
@@ -149,7 +151,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("Re-extracted text or source mapping differs from the committed extraction")
     fields = {"email": None, "ocr": None, "unmapped_pages": [], "partially_checked_pages": [],
               WORD_CONTENT_CONTROLS_KEY: None, document_scope.HTML_ARTICLE_KEY: None,
-              document_native_locations.PARAGRAPH_MAP_KEY: None}
+              document_native_locations.PARAGRAPH_MAP_KEY: None, document_native_locations.WORD_TABLE_GRID_KEY: None}
     local_coverage = {**doc.meta, "ocr": public_ocr_coverage(doc.meta)}
     if any(canonical_hash(coverage.get(key, default)) != canonical_hash(local_coverage.get(key, default))
            for key, default in fields.items()):

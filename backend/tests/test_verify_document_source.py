@@ -7,6 +7,8 @@ from datetime import UTC, datetime
 
 import pytest
 from docx import Document
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
 from test_document_packets import packet_factory as packet_factory
 from test_document_source_mapping import word_control
 from test_public_evidence_package import rewrite
@@ -15,7 +17,7 @@ from test_public_package_integration import multimedia_package as multimedia_pac
 from app.cli import main
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.text.extract import WORD_CONTENT_CONTROLS_KEY, extract, text_hash
-from app.evidence import document_repeat, document_scope
+from app.evidence import document_native_locations, document_repeat, document_scope
 from app.evidence.document_packets import build_packet_set, packet_hash
 from app.reports import package, public_verify, verify, verify_document_source
 
@@ -71,6 +73,56 @@ def test_original_replay_uses_the_recorded_word_control_projection(modern, tmp_p
         archive.writestr("evidence.json", canonical_json(evidence))
     with zipfile.ZipFile(archive_path) as archive:
         assert "extracted text and source mapping matched" in verify_document_source.check(archive, bundle, original)
+
+
+@pytest.mark.parametrize("modern", [True, False])
+def test_original_replay_uses_the_recorded_word_table_grid(modern, tmp_path):
+    original = tmp_path / "omitted-grid-cell.docx"
+    native = Document()
+    repeated = " ".join(f"reading{i}" for i in range(30))
+    native.add_paragraph(repeated)
+    table = native.add_table(rows=1, cols=3)
+    table.cell(0, 1).text = "First visible value."
+    table.cell(0, 2).text = repeated
+    row = table.rows[0]._tr
+    row.remove(row.tc_lst[0])
+    omitted = OxmlElement("w:gridBefore")
+    omitted.set(qn("w:val"), "1")
+    row.get_or_add_trPr().append(omitted)
+    native.save(original)
+
+    decoded = extract(original, ".docx", map_word_table_grid=modern)
+    column = int(modern)
+    assert [anchor["body_path"] for anchor in decoded.source_map] == [
+        [0], [1, "row", 0, "cell", column, 1], [1, "row", 0, "cell", column + 1, 1],
+    ]
+    assert decoded.text == f"{repeated}\n\nFirst visible value.\n\n{repeated}"
+    source = {"method": "python-docx", "sha256": decoded.meta["original_sha256"],
+              "extracted_text_sha256": text_hash(decoded.text), "source_map_sha256": canonical_hash(decoded.source_map),
+              "chars": len(decoded.text)}
+    key = document_native_locations.WORD_TABLE_GRID_KEY
+    coverage = {WORD_CONTENT_CONTROLS_KEY: decoded.meta[WORD_CONTENT_CONTROLS_KEY]}
+    if modern:
+        coverage[key] = decoded.meta[key]
+    evidence = {"source": source, "version": document_scope.VERSION, "packets": [], "coverage": coverage,
+                "repeated_passages": document_repeat.build(source, decoded.text, decoded.source_map)}
+    assert evidence["repeated_passages"]["status"] == "matched"
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"sha256": source["sha256"], "bytes": original.stat().st_size}}
+    archive_path = tmp_path / "grid-evidence.zip"
+    def replay():
+        with zipfile.ZipFile(archive_path, "w") as archive:
+            archive.writestr("evidence.json", canonical_json(evidence))
+        with zipfile.ZipFile(archive_path) as archive:
+            return verify_document_source.check(archive, bundle, original)
+
+    assert "extracted text and source mapping matched" in replay()
+    if modern:
+        del coverage[key]
+    else:
+        coverage[key] = document_native_locations.WORD_TABLE_GRID
+    with pytest.raises(ValueError, match="source mapping differs"):
+        replay()
 
 
 @pytest.mark.parametrize("multimedia_package", ["document"], indirect=True)

@@ -13,7 +13,7 @@ import { cx } from '../lib/cx'
 import { Button, Disclosure, Eyebrow, Select, Tabs } from '../components/ui'
 import { MediaIcon } from '../components/MediaTypes'
 import SourcePreview from '../components/SourcePreview'
-import { beginBlocked, intakeKind, PROFILES, TABS, validate } from './intakeOptions'
+import { beginBlocked, documentCoverageNotice, intakeKind, PROFILES, TABS, validate } from './intakeOptions'
 import IntakeChecks from '../features/intake/IntakeChecks'
 import IntakeFields from '../features/cases/IntakeFields'
 import NewCaseDialog from '../features/cases/NewCaseDialog'
@@ -63,6 +63,8 @@ export default function Upload() {
   const words = wordCount(text)
   const isBatch = batch.length > 1
   const batchBytes = batch.reduce((n, f) => n + f.size, 0)
+  const coverage = file && kind === 'document' ? documentCoverageNotice(file.name) : undefined
+  const batchCoverage = [...new Set(batch.map((item) => documentCoverageNotice(item.name)))].filter((notice) => notice !== undefined)
   const usingText = kind === 'document' && !file && !isBatch && text.trim().length > 0
   const problem = !paid && caseId && !isBatch ? draftProblem(draft) : null
   const sourceReady = isBatch ? !paid && batch.length <= MAX_BATCH_FILES : (!!file || (kind === 'document' && words >= MIN_WORDS)) && !problem
@@ -227,12 +229,12 @@ export default function Upload() {
         )}
         {file && <SourcePreview file={file} kind={kind} />}
         {kind === 'document' && !isBatch && <div className="mt-2 text-caption text-text-muted">
-          <p className="m-0">Writing checks need at least {MIN_WORDS} readable words. For scans or image-only slides, upload a PDF for local text recognition.</p>
+          <p className="m-0">Writing checks need at least {MIN_WORDS} readable words.{!file && ' For scans or image-only slides, upload a PDF for text recognition.'}</p>
           {!file && <details className="mt-1">
             <summary className="cursor-pointer">Export from Google Docs, Pages, older Office, or Outlook</summary>
             <p className="mt-1 mb-0">Export Google Docs, Apple Pages, or older Word (.doc) files as DOCX or PDF. Export Google Slides, Keynote, or older PowerPoint files as PPTX or PDF. Export Outlook (.msg) messages as EML or PDF.</p>
           </details>}
-          {file && /\.docx$/i.test(file.name) && <p className="mt-1 mb-0">Word coverage includes body paragraphs and tables. For text boxes, headers, or footers, export and upload a PDF.</p>}
+          {coverage && <p className="mt-1 mb-0">{coverage}</p>}
         </div>}
         {error && <p className="mt-2 text-caption text-danger" role="alert">{error}</p>}
         {isBatch && (
@@ -240,6 +242,12 @@ export default function Upload() {
             Each file&apos;s kind is detected from its contents, and every file is analysed in one case. Files that cannot be taken in are listed with the reason.
           </p>
         )}
+        {isBatch && batchCoverage.length > 0 && <details className="mt-2 text-caption text-text-muted">
+          <summary className="cursor-pointer">What the document checks cover</summary>
+          <ul className="mt-1 mb-0 pl-5">
+            {batchCoverage.map((notice) => <li key={notice}>{notice}</li>)}
+          </ul>
+        </details>}
 
         {kind === 'document' && !file && !isBatch && (
           <div className="mt-8">

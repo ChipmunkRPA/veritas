@@ -37,6 +37,20 @@ export const TABS: TabSpec[] = [
 
 const sheetExport = 'Export the sheets containing writing as PDF, or paste the passages you want analysed.'
 
+const documentCoverage = new Map(Object.entries({
+  docx: 'Word checks body paragraphs and supported tables. Export to PDF to include rendered text boxes, headers, footers, or tables with controls around rows or cells.',
+  pdf: 'PDF checks selectable text and can try to recognize text on scans. Some pages or areas may remain unchecked.',
+  pptx: 'PowerPoint checks editable text on visible slides, including tables. Export to PDF to include writing that appears only in images.',
+  epub: 'EPUB checks the main reading text. Navigation, optional chapters, and text in images are outside this check.',
+  eml: 'Email checks the message body. Upload any attachment you want checked as a separate file.',
+}))
+
+const fileExtension = (filename: string) => filename.split('.').pop()?.toLowerCase() ?? ''
+
+export function documentCoverageNotice(filename: string): string | undefined {
+  return documentCoverage.get(fileExtension(filename))
+}
+
 const documentExport = new Map(Object.entries({
   doc: 'Save the older Word file as DOCX or PDF, then upload it.',
   docm: 'Save the Word file as a macro-free DOCX or PDF, then upload it.',
@@ -53,7 +67,7 @@ const documentExport = new Map(Object.entries({
 }))
 
 export function validate(f: File, t: TabSpec): string | null {
-  const ext = f.name.split('.').pop()?.toLowerCase() ?? ''
+  const ext = fileExtension(f.name)
   const mimeOk = t.mimePrefix ? f.type.startsWith(t.mimePrefix) : false
   if (!mimeOk && !t.exts.includes(ext)) {
     const exportHelp = t.kind === 'document' ? documentExport.get(ext) : undefined

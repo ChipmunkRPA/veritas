@@ -540,6 +540,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"]["partially_checked_pages"] = partially_checked
     if word_controls := decoded["meta"].get(WORD_CONTENT_CONTROLS_KEY):
         document["coverage"][WORD_CONTENT_CONTROLS_KEY] = word_controls
+    if word_grid := decoded["meta"].get(document_native_locations.WORD_TABLE_GRID_KEY):
+        document["coverage"][document_native_locations.WORD_TABLE_GRID_KEY] = word_grid
     if saved_fields := decoded["meta"].get(document_native_locations.SAVED_FIELDS_KEY):
         document["coverage"][document_native_locations.SAVED_FIELDS_KEY] = saved_fields
     if article := decoded["meta"].get(document_scope.HTML_ARTICLE_KEY):

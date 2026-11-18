@@ -691,7 +691,22 @@ def _project_word_inline_controls(container):
     return changed
 
 
-def docx_paragraphs(parent, elements, body_path=(), *, include_content_controls=True):
+def _docx_grid_cells(table, row, columns):
+    from docx.oxml.ns import qn
+    from docx.table import _Cell
+
+    omitted = row._tr.find(f"{qn('w:trPr')}/{qn('w:gridBefore')}")
+    skipped = int(omitted.get(qn("w:val"), "0")) if omitted is not None else 0
+    column = skipped if 0 <= skipped <= columns else 0
+    # Older python-docx releases flatten rows and can shift cells into another
+    # row when the native grid omits cells. Use the actual row's XML here.
+    for cell in row._tr.tc_lst:
+        if cell.vMerge != "continue":
+            yield column, _Cell(cell, table)
+        column += cell.grid_span
+
+
+def docx_paragraphs(parent, elements, body_path=(), *, include_content_controls=True, map_table_grid=True):
     from docx.oxml.ns import qn
     from docx.table import Table
     from docx.text.paragraph import Paragraph
@@ -703,25 +718,30 @@ def docx_paragraphs(parent, elements, body_path=(), *, include_content_controls=
             yield Paragraph(element, parent), path, projected
         elif include_content_controls and element.tag == qn("w:sdt"):
             if (content := _word_control_content(element)) is not None:
-                yield from docx_paragraphs(parent, content, [*path, "control"])
+                yield from docx_paragraphs(parent, content, [*path, "control"], map_table_grid=map_table_grid)
         elif element.tag == qn("w:tbl"):
             # A wrapped row or cell is omitted by python-docx's table grid.
             # Reading the siblings would assign their text the wrong locations.
             if include_content_controls and element.xpath("./w:sdt | ./w:tr/w:sdt"):
                 continue
             table = Table(element, parent)
+            grid = element.find(qn("w:tblGrid")) if map_table_grid else None
+            columns = len(grid.findall(qn("w:gridCol"))) if grid is not None else 0
+            ragged = columns and element.xpath("./w:tr/w:trPr/w:gridBefore | ./w:tr/w:trPr/w:gridAfter")
             seen = set()
             for row_i, row in enumerate(table.rows):
-                for col_i, cell in enumerate(row.cells):
+                cells = _docx_grid_cells(table, row, columns) if ragged else enumerate(row.cells)
+                for col_i, cell in cells:
                     if cell._tc in seen:
                         continue
                     seen.add(cell._tc)
                     yield from docx_paragraphs(cell, cell._tc, [*path, "row", row_i, "cell", col_i],
-                                               include_content_controls=include_content_controls)
+                                               include_content_controls=include_content_controls, map_table_grid=map_table_grid)
 
 
 def extract_docx(path: Path, *, project_word_revisions: bool = True, project_word_breaks: bool = True,
-                 include_word_content_controls: bool = True, include_word_saved_fields: bool = True) -> Document:
+                 include_word_content_controls: bool = True, include_word_saved_fields: bool = True,
+                 map_word_table_grid: bool = True) -> Document:
     from bisect import bisect_left
 
     from app.detectors.text import word_saved_fields
@@ -745,7 +765,7 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
 
     continued = False
     for paragraph, path_here, projected_control in docx_paragraphs(
-            d, d.element.body, include_content_controls=include_word_content_controls):
+            d, d.element.body, include_content_controls=include_word_content_controls, map_table_grid=map_word_table_grid):
         top_level = len(path_here) == 1
         saved = (word_saved_fields.project(paragraph, document_native_locations.MAX_SAVED_FIELDS - fields_included)
                  if can_project_fields and top_level and not projected_control and paragraph._p not in complex_field_blocks else [])
@@ -797,6 +817,8 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
                                          "placeholders, external data and tables with controls around entire rows or cells.")
     if include_word_saved_fields:
         doc.meta[document_native_locations.SAVED_FIELDS_READER] = document_native_locations.SAVED_FIELDS_SCHEMA
+    if map_word_table_grid:
+        doc.meta[document_native_locations.WORD_TABLE_GRID_KEY] = document_native_locations.WORD_TABLE_GRID
     if fields_found and PART_NAME.fullmatch(part):
         locations = []
         for block in doc.source_map:
@@ -1121,13 +1143,14 @@ def extract_eml(path: Path) -> Document:
 def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True,
             project_word_revisions: bool = True, project_word_breaks: bool = True,
             include_word_content_controls: bool = True, include_word_saved_fields: bool = True, include_html_article: bool = True,
-            map_body_paragraphs: bool = True) -> Document:
+            map_body_paragraphs: bool = True, map_word_table_grid: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
     elif ext == ".docx":
         d = extract_docx(path, project_word_revisions=project_word_revisions, project_word_breaks=project_word_breaks,
-                         include_word_content_controls=include_word_content_controls, include_word_saved_fields=include_word_saved_fields)
+                         include_word_content_controls=include_word_content_controls, include_word_saved_fields=include_word_saved_fields,
+                         map_word_table_grid=map_word_table_grid)
     elif ext == ".odt":
         from app.detectors.text.opendocument import body_paragraphs
 

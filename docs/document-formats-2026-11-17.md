@@ -30,6 +30,10 @@ range. Word body text remains readable in exports without a default
 paragraph style. The original-file verifier applies the extraction recorded
 when the report was created. [Microsoft's Word control structure](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.sdtblock?view=openxml-3.0.1)
 
+When a Word table row starts after an omitted grid column, new evidence
+uses the cell's actual table column. The report records which coordinate
+rule it used so the signed package can be verified against the original.
+
 Word's **Strict Open XML Document** option also saves a `.docx` file.
 Upload it directly for analysis or an earlier-draft comparison. The reader
 maps the Strict body and style markup for text extraction and retains the
@@ -105,6 +109,13 @@ and a signed package that verified against the original. Word preserved 17
 exact positions, including two in a table. The isolated replay used generated
 fixtures and the available CPU checks, with the optional large model pair
 disabled. [Prepaid document position receipt](evaluation-panels/document-format-prepaid-positions-2026-11-18.json)
+
+The next local replay completed analysis for all 13 advertised extensions,
+including both Markdown extensions and all three HTML extensions. Every
+fixture produced matching PDF and JSON evidence and a signed package that
+verified against the original. All 13 jobs began after simulated checkout.
+Separate scanned and hybrid PDF tests verified the recognized text and its
+page positions against the original file.
 
 The local app also compares two saved HTML articles when an earlier copy is
 available. It marks wording changes in both decoded sources and gives the

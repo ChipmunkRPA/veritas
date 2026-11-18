@@ -40,7 +40,7 @@ function mount() {
 }
 beforeEach(() => {
   fixtures.billing.data.purchase_notice = JSON.parse(readFileSync('../backend/tests/fixtures/purchase_notice.json', 'utf8'))
-  fixtures.billing.isPending = false; fixtures.billing.isError = false; fixtures.billing.data.ready = true
+  fixtures.billing.isPending = false; fixtures.billing.isError = false; fixtures.billing.data.ready = true; fixtures.billing.data.enabled = true
   fixtures.me.auth = 'session'; fixtures.me.unauthenticated_instance = false
 })
 afterEach(() => { cleanup(); clients.forEach((c) => c.clear()); clients.length = 0; vi.resetAllMocks() })
@@ -49,13 +49,29 @@ describe('paid analysis intake', () => {
   it('accepts Word and saved XHTML, and guides users who choose an older Word file', () => {
     const { container } = mount()
     const input = container.querySelector<HTMLInputElement>('input[type="file"]')!
-    expect(input.accept.split(',')).toEqual(expect.arrayContaining(['.docx', '.pdf', '.odt', '.pptx', '.rtf', '.xhtml', '.eml']))
+    expect(input.accept.split(',')).toEqual(expect.arrayContaining(['.docx', '.pdf', '.odt', '.pptx', '.epub', '.rtf', '.txt', '.md', '.html', '.xhtml', '.eml']))
     fireEvent.change(input, { target: { files: [new File(['old Word'], 'draft.DOC')] } })
     expect(screen.getByRole('alert').textContent).toContain('Save the older Word file as DOCX or PDF')
-    fireEvent.change(input, { target: { files: [new File(['saved article'], 'article.XHTML', { type: 'application/xhtml+xml' })] } })
+    fireEvent.change(input, { target: { files: [new File(['Word'], 'draft.DOCX')] } })
+    expect(screen.getByText(/Word checks body paragraphs and supported tables/)).toBeTruthy()
+    const replacement = container.querySelector<HTMLInputElement>('input[type="file"]')!
+    fireEvent.change(replacement, { target: { files: [new File(['saved article'], 'article.XHTML', { type: 'application/xhtml+xml' })] } })
     expect(screen.getByText('article.XHTML')).toBeTruthy()
+    expect(screen.queryByText(/Word checks body paragraphs/)).toBeNull()
     expect(screen.queryByRole('alert')).toBeNull()
     expect(billingApi.checkout).not.toHaveBeenCalled()
+  })
+  it('shows one coverage notice per format in a document batch', () => {
+    fixtures.billing.data.enabled = false
+    const { container } = mount()
+    const input = container.querySelector<HTMLInputElement>('input[type="file"]')!
+    fireEvent.change(input, { target: { files: [
+      new File(['Word'], 'first.docx'), new File(['Word'], 'second.DOCX'), new File(['Slides'], 'brief.pptx'),
+    ] } })
+    const guidance = screen.getByText('What the document checks cover').parentElement!
+    expect(guidance.querySelectorAll('li')).toHaveLength(2)
+    expect(guidance.textContent).toContain('Word checks body paragraphs and supported tables')
+    expect(guidance.textContent).toContain('PowerPoint checks editable text on visible slides')
   })
   it('requires an unchecked limitations acknowledgement and resets it for a changed source', () => {
     mount()

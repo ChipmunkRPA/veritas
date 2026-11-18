@@ -667,6 +667,9 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     email = coverage.get("email")
     if isinstance(email, dict) and canonical_hash(email) != canonical_hash(decoded.get("meta", {}).get("email")):
         raise ObjectIntegrityError("Frozen email coverage differs from the recorded extraction")
+    word_grid_key = document_native_locations.WORD_TABLE_GRID_KEY
+    if coverage.get(word_grid_key) != decoded["meta"].get(word_grid_key):
+        raise ObjectIntegrityError("Frozen Word table grid mapping differs from the recorded extraction")
     try:
         document_check_coverage.verify_source(document, text, decoded["sentences"])
         document_tracked_changes.verify_source(document, decoded.get(document_tracked_changes.KEY),

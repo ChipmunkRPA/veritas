@@ -17,6 +17,8 @@ PACKAGE_LABELS = {"slide": "Slide", "epub_entry": "EPUB reading entry"}
 SAVED_FIELDS_KEY = "word_saved_fields"
 SAVED_FIELDS_SCHEMA = "document-word-saved-fields/1"
 SAVED_FIELDS_READER = "word_saved_fields_reader"
+WORD_TABLE_GRID_KEY = "word_table_grid"
+WORD_TABLE_GRID = "word-table-grid/1"
 MAX_SAVED_FIELDS = 256
 MAX_SAVED_FIELD_LOCATIONS = 16
 MAX_SAVED_FIELD_CHARS = 256
@@ -157,6 +159,9 @@ def build(document):
 def validate(document):
     validate_saved_fields(document)
     coverage = document.get("coverage") or {}
+    if WORD_TABLE_GRID_KEY in coverage and (coverage[WORD_TABLE_GRID_KEY] != WORD_TABLE_GRID
+            or document.get("source", {}).get("method") != "python-docx"):
+        raise ValueError("Invalid Word table grid mapping")
     if PARAGRAPH_MAP_KEY in coverage and (coverage[PARAGRAPH_MAP_KEY] != PARAGRAPH_MAP
             or document.get("source", {}).get("method") not in PARAGRAPH_COORDINATES):
         raise ValueError("Invalid decoded body paragraph mapping")

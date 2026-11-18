@@ -82,6 +82,12 @@ are not public screening promises or calibrated population probabilities.
   remains experimental after the confirmation produced 15 alerts among
   60 ordinary controls. [Eye-texture evaluation](video-eye-texture-hold-2026-11-18.md)
 
+- In the 96-file Opus trial, the stricter two-second speech check found
+  23 of 157 annotated edits, up from 20 on the same files, and added one
+  alert among 24 genuine speech files. It retained 21 of 25 useful AAC
+  locations and 19 of 25 useful WAV locations. Both tested readings
+  remain experimental. [Standalone speech in Opus](audio-two-second-opus-transfer-2026-11-18.md)
+
 - Word files without a default paragraph style now finish analysis.
   Findings identify exact character ranges in OpenDocument paragraphs and
   Rich Text blocks. All eight formats and a separate scanned PDF completed the

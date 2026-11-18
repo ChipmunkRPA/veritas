@@ -95,3 +95,67 @@ and obtain the selected public corpus copies with
 release documented for the [previous series](video-stereo-covariance-2026-11-17.md#reproduce).
 The `measure` subcommand uses those sources, the pinned local model and
 picture assets, and the previous stereo freeze. Its `--help` lists inputs.
+
+### Compare another detector
+
+The [portable comparison](evaluation-panels/video-mono-speech-activity-independent-2026-11-17.json.gz)
+contains the exact-input manifest, the intervention intervals, the native
+picture and audio clocks, and predictions for the candidate, the existing
+near-silence check, and the combined policy. The export rechecks each delivered
+file, publisher clip and original room recording. It verifies that every
+picture stream matches the conformed frames and that the conformed RGB frames
+match the publisher clips. It also reconstructs the intervention from the
+publisher speech and verifies that the clean mute changes only that sample
+range. Audio coordinates are half-open ranges on the 16 kHz presentation
+clock. Candidate picture brackets carry the frame index, presentation
+timestamp on the 1/30,000 clock, and corresponding audio sample index. AAC
+samples decoded beyond the presentation end are counted separately.
+
+The prediction receipts are intended for comparing location and coverage.
+An assessed file with no reported region has an empty list. The retained
+near-silence measurements record a range when one was found. Coverage for its
+other files is unknown, including those labeled `not_applicable` in its
+portable response. The paired results count files and distinct speakers so
+the two encodings and two edits per original can be interpreted in context.
+Any tuning informed by these public labels needs a separate holdout.
+
+The extract below can recount a reference response or score another detector
+on the same files. Preserve each case ID and exact input hash. Use the matching
+rule shown below and retain abstention reasons alongside any findings.
+
+```sh
+review=$(mktemp -d)
+base=docs/evaluation-panels/video-mono-speech-activity
+python3 -B -S - "$base-independent-2026-11-17.json.gz" "$review" <<'PY'
+import gzip
+import json
+import sys
+from pathlib import Path
+
+with gzip.open(sys.argv[1], "rt", encoding="utf-8") as stream:
+    receipt = json.load(stream)
+directory = Path(sys.argv[2])
+parts = {key: receipt[key] for key in ("manifest", "truth", "file_index")}
+for key, document in (parts | receipt["readings"]).items():
+    (directory / f"{key}.json").write_text(json.dumps(document), encoding="utf-8")
+PY
+python3 -B -IS backend/scripts/independent_review.py count-events \
+  "$review/manifest.json" "$review/truth.json" "$review/preserve_near_silence.json" \
+  "$review/counts.json" --match 0.4 0.4
+```
+
+To rehash the original inputs, set `local_media` to the directory with sibling
+`held` and `sources` folders and set `archive` to the DCASE stereo archive. The
+full export uses Python 3.11 or later, FFmpeg, and FFprobe. It compares the
+originally measured files without loading model weights. The local readback
+used FFmpeg 7.0.2.
+
+```sh
+python3 -B -IS backend/scripts/independent_review.py verify-inputs \
+  "$review/manifest.json" "$review/file_index.json" "$review/file-checks.json" --root "$local_media"
+PYTHONPATH=backend python3 -B -S -m scripts.export_video_mono_activity_review \
+  "$base-held-2026-11-17.json.gz" \
+  "docs/evaluation-panels/video-speech-activity-gap-development-2026-11-17.json.gz" \
+  "$base-plan-2026-11-17.json.gz" "$base-sources-2026-11-17.json.gz" \
+  "$archive" "$local_media" "$review/rebuilt.json.gz"
+```

@@ -1,7 +1,7 @@
 # Document formats and signed source records
 
 Chipmunk Verify accepts Word (`.docx`), OpenDocument Text (`.odt`), PDF,
-Rich Text (`.rtf`), plain text, Markdown, HTML, and email (`.eml`). These use the same local
+PowerPoint (`.pptx`), EPUB, Rich Text (`.rtf`), plain text, Markdown, HTML, and email (`.eml`). These use the same local
 writing pipeline and produce PDF and JSON reports. The document upload
 limit is 25 MB in the standard configuration.
 
@@ -10,6 +10,8 @@ limit is 25 MB in the standard configuration.
 | DOCX | Body paragraphs, tables, saved text in filled paragraph and inline controls, and supported saved field values in standard and Strict Open XML DOCX. Separate Word revision and visibility checks cover their supported structures. | Word body path, paragraph characters, and available run coordinates |
 | ODT | Body paragraphs, headings, lists, and tables | Decoded body paragraph number and character range |
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
+| PPTX | Editable text boxes and tables on visible slides | Slide in presentation order, text block, and decoded character range |
+| EPUB | XHTML text in the main reading order | Reading-order entry, text block, and decoded character range |
 | RTF | Extracted writing from standard Rich Text files | Decoded text block number and character range |
 | EML | The selected plain-text or HTML message body | Decoded text and supported HTML source positions |
 | TXT | Decoded Unicode text | Decoded character offsets |
@@ -52,13 +54,38 @@ breaks. The web view, PDF and JSON use the same ranges. The signed package can
 replay them against the original file.
 
 Export Google Docs, Apple Pages, and older Word (`.doc`) files as DOCX or
-PDF before uploading. Export Outlook (`.msg`) files as EML or PDF. Keep the
+PDF before uploading. Export Google Slides and Keynote as PowerPoint or PDF.
+Export Outlook (`.msg`) files as EML or PDF. Keep the
 original file if its native provenance matters.
 Checkout rejects Word and ODT files without readable body text and checks
 the text extracted from RTF, Markdown, HTML and HTML email bodies before
 starting payment. Scanned documents can be uploaded as PDF for local OCR.
 Rich Text files with binary data should be saved as DOCX or PDF.
 The local batch tool also accepts native DOCX and ODT packages.
+
+PowerPoint findings use the order shown in the presentation. Hidden slides,
+speaker notes, charts, SmartArt, and image text are outside the writing check.
+EPUB findings use the original main reading order, skipping navigation and
+optional entries. EPUB styling, image text, and SVG chapters are outside the
+writing check. Slide and EPUB entry numbers in the web view and PDF are
+one-based. JSON includes zero-based part and text-block indices and
+half-open Unicode character ranges in the decoded text block.
+The original-file verifier reconstructs these positions from the submission.
+The writing check requires at least 15 readable words. Longer ebooks can
+be submitted as excerpts within the configured writing limit. Checkout
+rejects unreadable packages and protected EPUB chapter text before payment.
+[Microsoft's slide order and text reference](https://learn.microsoft.com/en-us/office/open-xml/presentation/how-to-get-all-the-text-in-all-slides-in-a-presentation)
+· [W3C EPUB 3.3 package specification](https://www.w3.org/TR/epub-33/#sec-pkg-spine)
+
+An isolated local browser run accepted a 224-word fixture in all ten formats.
+Ten simulated USD 9.99 payments preceded analysis. Each case produced PDF and
+JSON exports and a signed package that verified against the original. The
+PowerPoint and EPUB cases each preserved six text locations, including the
+same decoded character ranges in PDF and JSON. An excerpt from the W3C sample
+book yielded 54 mapped text blocks from five reading-order entries. The full
+sample exceeded the configured writing limit.
+[Local browser and export receipt](evaluation-panels/document-format-upload-app-2026-11-18.json)
+· [W3C EPUB samples](https://idpf.github.io/epub3-samples/30/samples.html)
 
 [Saved HTML evidence](writing-saved-html-scope-2026-11-18.md) preserves original
 character ranges for uniquely mapped article passages without changing the text

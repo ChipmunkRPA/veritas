@@ -438,12 +438,14 @@ export interface TextSpan { start: number; end: number; text: string }
 export interface DocumentAnchor {
   kind: string; page?: number; paragraph?: number; mime_part?: string; quote_role?: string; extraction?: string
   paragraph_index?: number; body_path?: (string | number)[]
+  part_kind?: 'slide' | 'epub_entry'; part_index?: number
   selected_start?: number; selected_end?: number; highlight_boxes?: number[][]
   ocr_word_confidence?: number | number[]
 }
 export interface DocumentOriginalTextLocation {
   anchor_index: number
-  coordinate: 'decoded_text' | 'word_paragraph' | 'odt_paragraph' | 'rtf_paragraph' | 'decoded_email' | 'decoded_email_html' | 'decoded_html'
+  coordinate: 'decoded_text' | 'word_paragraph' | 'odt_paragraph' | 'rtf_paragraph' | 'pptx_block' | 'epub_block' |
+    'decoded_email' | 'decoded_email_html' | 'decoded_html'
   ranges: [number, number][]
 }
 export interface DocumentEvidencePacket extends PacketBase {
@@ -571,6 +573,15 @@ export interface DocumentEvidenceSet extends SetBase {
     checked_equations: number; disagreements: number
     length_conversions_checked?: number; length_conversion_disagreements?: number
     locations: (MappedTextFinding & { stated: string; calculated: string })[]
+  }
+  publication_identifier_consistency?: {
+    schema: 'document-publication-identifiers/1'; affects_overall_confidence: false; scope: string; limitation: string
+    checked: number; disagreements: number
+    locations: (Omit<MappedTextFinding, 'anchor'> & {
+      kind: 'ISBN-10' | 'ISBN-13' | 'ISSN'; written: string; expected: string
+      anchor: Omit<MappedTextFinding['anchor'], 'kind'> & { kind: MappedTextFinding['anchor']['kind']
+        | 'decoded_html' | 'odt_paragraph' | 'rtf_paragraph' }
+    })[]
   }
   percentage_consistency?: { schema: 'document-percentage-consistency/1' | 'document-percentage-consistency/2' | 'document-percentage-consistency/3'; status: 'different_values' | 'checked' | 'not_assessed';
     scope: string; limitation: string; authorship_confidence_contribution: 0; checked_sentences: number;

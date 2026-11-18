@@ -194,6 +194,18 @@ def _document(path: Path, extension: str) -> None:
         if not any(readable(paragraph) for paragraph in paragraphs):
             raise PreflightError("The ODT document has no readable body text. For scanned pages, upload a PDF before paying.")
         return
+    if extension in {".pptx", ".epub"}:
+        from app.detectors.text.extract import extract
+        from app.detectors.text.segment import MIN_WORDS, segment
+
+        try:
+            document = extract(path, extension)
+        except ValueError as error:
+            raise PreflightError(str(error)) from None
+        if not readable(document.text) or sum(sentence.n_words for sentence in segment(document)) < MIN_WORDS:
+            raise PreflightError(f"The {extension[1:].upper()} needs at least {MIN_WORDS} readable words for writing analysis. "
+                                 "For image-only pages or slides, upload a PDF for text recognition. No payment was started.")
+        return
     from app.detectors.text.extract import rtf_text, text_like_content
 
     raw = path.read_bytes()

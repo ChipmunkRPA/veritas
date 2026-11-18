@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react'
 import { Button } from '../../components/ui'
-import type { DocumentEvidencePacket, DocumentEvidenceWindow } from './multimediaPackets'
+import type { DocumentAnchor, DocumentEvidencePacket, DocumentEvidenceWindow } from './multimediaPackets'
 
 export function windowInspectionDirection(window: DocumentEvidenceWindow): boolean | null {
   if (typeof window.matched_context_selected === 'boolean') return window.score_exact_hex ? window.matched_context_selected : null
@@ -15,11 +15,17 @@ export function writingPatternOnly(packet: DocumentEvidencePacket): boolean {
   return supporting.length > 0 && supporting.every((window) => window.score_kind === 'perplexity_ratio')
 }
 
+export function packageAnchorLabel(anchor: DocumentAnchor): string | null {
+  const label = anchor.part_kind === 'slide' ? 'Slide' : anchor.part_kind === 'epub_entry' ? 'EPUB reading entry' : null
+  if (!label || anchor.part_index == null || anchor.paragraph_index == null) return null
+  return `${label} ${anchor.part_index + 1}, text block ${anchor.paragraph_index + 1}`
+}
+
 export function passageLocation(packet: DocumentEvidencePacket): string {
   const locations = packet.anchors.map((anchor) => {
-    const place = anchor.page != null ? `Page ${anchor.page}`
+    const place = packageAnchorLabel(anchor) ?? (anchor.page != null ? `Page ${anchor.page}`
       : anchor.paragraph_index != null ? `Paragraph ${anchor.paragraph_index + 1}`
-        : anchor.paragraph != null ? `Paragraph ${anchor.paragraph}` : null
+        : anchor.paragraph != null ? `Paragraph ${anchor.paragraph}` : null)
     const email = anchor.mime_part ? `Email part ${anchor.mime_part}` : null
     return [place, email, anchor.quote_role].filter(Boolean).join(' · ')
   }).filter(Boolean)

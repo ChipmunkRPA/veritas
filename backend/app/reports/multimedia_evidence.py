@@ -619,6 +619,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_pdf_history_binding,
         document_pdf_visibility,
         document_percentage_consistency,
+        document_publication_ids,
         document_published_wording,
         document_tracked_changes,
         document_unselected_responses,
@@ -659,6 +660,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_percentage_consistency.verify_source(document, text, mapping, decoded.get("sentences", ()), meta=decoded["meta"])
         document_calendar.verify_source(document, text, mapping)
         document_arithmetic.verify_source(document, text, mapping)
+        document_publication_ids.verify_source(document, text, mapping, decoded["meta"])
         document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
         if history := coverage.get(document_pdf_history_binding.KEY):
             submitted = _bytes(source["sha256"], store)
@@ -1290,6 +1292,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                     segments.append({"text": context["text"][cursor - context["start"]:], "highlight": False})
                     row["context"]["segments"] = segments
                 row["source_locations"] = copy.deepcopy(packet["anchors"])
+                for anchor in row["source_locations"]:
+                    if label := document_native_locations.package_anchor_label(anchor):
+                        anchor["package_location"] = label
                 original = (part.get("coverage", {}).get(ORIGINAL_TEXT_LOCATIONS) or {}).get("packets", {})
                 for location in original.get(packet["id"], []):
                     row["source_locations"][location["anchor_index"]]["original_location"] = location
@@ -1358,7 +1363,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         else:
             locations = []
             for anchor in packet["anchors"]:
-                label = (f"page {anchor['page']}" if anchor["kind"] == "pdf" else
+                label = document_native_locations.package_anchor_label(anchor) or (
+                         f"page {anchor['page']}" if anchor["kind"] == "pdf" else
                          f"paragraph {anchor['paragraph_index'] + 1}" if anchor["kind"] == "docx" else
                          f"MIME {anchor.get('mime_part', 'body')}" if anchor["kind"] in {"email", "markup"} else
                          str(anchor["kind"]))
@@ -1608,6 +1614,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "percentage_consistency": percentage_consistency,
             "calendar_consistency": document.get("calendar_consistency"),
             "arithmetic_consistency": document.get("arithmetic_consistency"),
+            "publication_identifier_consistency": document.get("publication_identifier_consistency"),
             "picture_hold": copy.deepcopy(document.get("picture_hold")),
             "scene_return_review": (document.get("coverage") or {}).get("scene_return_review") if kind == "video" else None,
             "lip_timing_review": document.get("lip_timing_review") if kind == "video" else None,

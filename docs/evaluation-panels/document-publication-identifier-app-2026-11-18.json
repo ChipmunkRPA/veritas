@@ -1,0 +1,194 @@
+{
+  "schema": "chipmunk.publication-identifier-app-verification/1",
+  "date": "2026-11-18",
+  "scope": "Local evidence pipeline with simulated Stripe. No commercial payments or model accuracy tested.",
+  "simulated_paid_analyses": 8,
+  "analyses_before_payment": 0,
+  "local_evidence_only_cases": [
+    "txt",
+    "pdf",
+    "strict-docx"
+  ],
+  "checks_passed_per_case": {
+    "simulated_payment_required_before_analysis": true,
+    "browser_evidence": true,
+    "json_evidence_matches_api": true,
+    "rendered_pdf_evidence": true,
+    "signed_package_matches_json_and_pdf": true,
+    "original_source_recomputed_with_local_key_pin": true
+  },
+  "cases": [
+    {
+      "format": "docx",
+      "source_sha256": "03c03b35f9b4dab4c5c8a7969580434768523c8b1bbc9fd2963c6195e59220dd",
+      "identifier": "978-1-5286-4958-3",
+      "written": "3",
+      "computed": "2",
+      "coordinate_kind": "docx",
+      "extracted_character_range": [
+        64,
+        81
+      ],
+      "native_coordinates": {
+        "ranges": [
+          [
+            64,
+            81
+          ]
+        ]
+      }
+    },
+    {
+      "format": "odt",
+      "source_sha256": "b5f204ea1a0a83a4fe8517d9c6ecd6318681f008b4f82bd77ca0b3434d904e82",
+      "identifier": "978-1-5286-4958-3",
+      "written": "3",
+      "computed": "2",
+      "coordinate_kind": "odt_paragraph",
+      "extracted_character_range": [
+        64,
+        81
+      ],
+      "native_coordinates": {
+        "ranges": [
+          [
+            64,
+            81
+          ]
+        ]
+      }
+    },
+    {
+      "format": "rtf",
+      "source_sha256": "753b10793db2ab253e9bedff83618417dbc76428f603538ba78b020ea8a1fb8c",
+      "identifier": "978-1-5286-4958-3",
+      "written": "3",
+      "computed": "2",
+      "coordinate_kind": "rtf_paragraph",
+      "extracted_character_range": [
+        64,
+        81
+      ],
+      "native_coordinates": {
+        "ranges": [
+          [
+            64,
+            81
+          ]
+        ]
+      }
+    },
+    {
+      "format": "html",
+      "source_sha256": "3878b7aecc1a3866fe952cbb41606732133fb0a1f2385c667eb39ea0f327107b",
+      "identifier": "978-1-5286-4958-3",
+      "written": "3",
+      "computed": "2",
+      "coordinate_kind": "decoded_html",
+      "extracted_character_range": [
+        64,
+        81
+      ],
+      "native_coordinates": {
+        "ranges": [
+          [
+            88,
+            94
+          ],
+          [
+            98,
+            102
+          ],
+          [
+            107,
+            114
+          ]
+        ]
+      }
+    },
+    {
+      "format": "eml",
+      "source_sha256": "4b568053986c63ea36e9adbb4309b261adf90c3e595aefa81e0d4b61be2a62c1",
+      "identifier": "978-1-5286-4958-3",
+      "written": "3",
+      "computed": "2",
+      "coordinate_kind": "email",
+      "extracted_character_range": [
+        64,
+        81
+      ],
+      "native_coordinates": {
+        "ranges": [
+          [
+            64,
+            81
+          ]
+        ]
+      }
+    },
+    {
+      "format": "txt",
+      "source_sha256": "77bd98f40b0812832c7278e982936961bd255dee5ce465004abb5539582c6296",
+      "identifier": "978-1-5286-4958-3",
+      "written": "3",
+      "computed": "2",
+      "coordinate_kind": "text",
+      "extracted_character_range": [
+        64,
+        81
+      ],
+      "native_coordinates": {
+        "ranges": [
+          [
+            64,
+            81
+          ]
+        ]
+      }
+    },
+    {
+      "format": "pdf",
+      "source_sha256": "ba5918f1d20faf983053fcce008bc993b6a39684cd73707a03c422097046f8c1",
+      "identifier": "92-95055-02-5",
+      "written": "5",
+      "computed": "0",
+      "coordinate_kind": "pdf",
+      "extracted_character_range": [
+        1019,
+        1032
+      ],
+      "native_coordinates": {
+        "boxes": [
+          [
+            394.880066,
+            395.380005,
+            454.950043,
+            407.579987
+          ]
+        ]
+      },
+      "source_page": 47,
+      "submitted_page": 1
+    },
+    {
+      "format": "strict-docx",
+      "source_sha256": "f126b814ed8775cacb4a6ac67f34b5c19fb152626cbbef7f39846e16d87e778f",
+      "identifier": "978-1-5286-4958-3",
+      "written": "3",
+      "computed": "2",
+      "coordinate_kind": "docx",
+      "extracted_character_range": [
+        64,
+        81
+      ],
+      "native_coordinates": {
+        "ranges": [
+          [
+            64,
+            81
+          ]
+        ]
+      }
+    }
+  ]
+}

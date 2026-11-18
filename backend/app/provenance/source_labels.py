@@ -527,7 +527,7 @@ def inspect_file(path: Path, kind: str, expected_sha256: str, check=None) -> dic
                 reader.flac()
             elif kind == 'audio' and magic.startswith(b'OggS'):
                 reader.ogg()
-            elif kind == 'document' and magic.startswith(b'PK\x03\x04') and path.suffix.lower() != '.odt':
+            elif kind == 'document' and magic.startswith(b'PK\x03\x04') and path.suffix.lower() in {'.docx', '.pptx'}:
                 reader.docx()
             elif kind == 'document' and magic.startswith(b'%PDF-'):
                 reader.pdf(path)

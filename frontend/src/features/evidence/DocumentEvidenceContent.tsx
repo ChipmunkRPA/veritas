@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Button } from '../../components/ui'
 import { EvidenceLimits, EvidencePicture, EvidenceReferences, evidenceCard, evidenceGrid } from './EvidenceMedia'
-import DocumentInspectionMap, { passageLocation, RecordedPassage, windowInspectionDirection } from './DocumentInspectionMap'
+import DocumentInspectionMap, { packageAnchorLabel, passageLocation, RecordedPassage, windowInspectionDirection } from './DocumentInspectionMap'
 import DocumentContextComparison from './DocumentContextComparison'
 import DocumentPassageCoverage from './DocumentPassageCoverage'
 import DocumentRepeatedPassages from './DocumentRepeatedPassages'
@@ -32,6 +32,8 @@ const originalLocationLabels: Record<DocumentOriginalTextLocation['coordinate'],
   word_paragraph: 'Original Word paragraph characters',
   odt_paragraph: 'Decoded OpenDocument paragraph characters',
   rtf_paragraph: 'Decoded Rich Text block characters',
+  pptx_block: 'Decoded slide text characters',
+  epub_block: 'Decoded EPUB text characters',
   decoded_email: 'Decoded email part characters',
   decoded_email_html: 'Decoded email HTML source characters',
   decoded_html: 'Original HTML source characters',
@@ -212,6 +214,41 @@ function PercentageConsistency({ review }: { review: NonNullable<DocumentEvidenc
     {review.different_claims > review.groups.length && <p className="mt-2 mb-0 text-caption text-text-muted">
       {review.different_claims - review.groups.length} additional statements exceed the display limit.</p>}
     <p className="mt-2 mb-0 text-caption text-text-muted">{review.limitation} Positions use extracted Unicode characters.</p>
+  </section>
+}
+
+function PublicationIdentifiers({ review }: { review: NonNullable<DocumentEvidenceSet['publication_identifier_consistency']> }) {
+  return <section aria-labelledby="document-publication-identifiers" className="mt-4 rounded-md border border-border p-4">
+    <h3 id="document-publication-identifiers" className="m-0 text-body font-medium">Publication identifier check</h3>
+    <p className="mt-2 mb-0 text-small">{review.scope}</p>
+    <p className="mt-2 mb-0 text-small">Checked {review.checked} {review.checked === 1 ? 'identifier' : 'identifiers'}.
+      {' '}Found {review.disagreements} {review.disagreements === 1 ? 'disagreement' : 'disagreements'}.</p>
+    {review.locations.map(row => {
+      const source = row.anchor
+      const place = {
+        pdf: `PDF page ${source.page}`,
+        docx: `Word body block ${Number(source.body_path?.[0] ?? 0) + 1}`,
+        email: `Email body part ${source.mime_part}`,
+        text: 'Plain text',
+        decoded_html: 'Decoded article HTML',
+        odt_paragraph: `Decoded OpenDocument paragraph ${(source.paragraph_index ?? 0) + 1}`,
+        rtf_paragraph: `Decoded Rich Text block ${(source.paragraph_index ?? 0) + 1}`,
+      }[source.kind]
+      return <article key={row.start} className="mt-3 border-t border-border pt-3">
+        <blockquote className="m-0 break-words text-small"><mark>{row.text}</mark></blockquote>
+        <p className="mt-2 mb-0 text-small">The {row.kind} ends in {row.written}. The preceding digits give a check digit of {row.expected}.</p>
+        <p className="mt-1 mb-0 text-caption text-text-muted">{place} · Extracted characters [{row.start}, {row.end})</p>
+        {'ranges' in row.location && <p className="mt-1 mb-0 text-caption text-text-muted">
+          Original text positions {row.location.ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}
+        </p>}
+        {'boxes' in row.location && <p className="mt-1 mb-0 text-caption text-text-muted">
+          PDF text bounds in page points {row.location.boxes.map(box => `[${box.map(value => value.toFixed(2)).join(', ')}]`).join(', ')}
+        </p>}
+      </article>
+    })}
+    {review.disagreements > review.locations.length && <p className="mt-2 mb-0 text-caption text-text-muted">
+      Showing the first {review.locations.length} disagreements.</p>}
+    <p className="mt-2 mb-0 text-caption text-text-muted">{review.limitation}</p>
   </section>
 }
 
@@ -563,6 +600,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     {set.percentage_consistency && <PercentageConsistency review={set.percentage_consistency} />}
     {set.calendar_consistency && <CalendarConsistency review={set.calendar_consistency} />}
     {set.arithmetic_consistency && <ArithmeticConsistency review={set.arithmetic_consistency} />}
+    {set.publication_identifier_consistency && <PublicationIdentifiers review={set.publication_identifier_consistency} />}
     {set.coverage?.chat_format_markers && <ChatFormatMarkers review={set.coverage.chat_format_markers} />}
     {invisible && <section aria-labelledby="document-invisible-characters" className="mt-4 rounded-md border border-border p-4">
       <h3 id="document-invisible-characters" className="m-0 text-body font-medium">
@@ -802,9 +840,9 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
           <ul className="pl-4 list-disc">{packet.anchors.map((anchor, index) => {
             const original = set.coverage?.original_text_locations?.packets[packet.id]?.find((row) => row.anchor_index === index)
             return <li key={index}>
-              {anchor.page != null ? `Page ${anchor.page}` : anchor.paragraph_index != null
+              {packageAnchorLabel(anchor) ?? (anchor.page != null ? `Page ${anchor.page}` : anchor.paragraph_index != null
                 ? `${original?.coordinate === 'rtf_paragraph' ? 'Text block' : 'Paragraph'} ${anchor.paragraph_index + 1}`
-                : anchor.paragraph != null ? `Paragraph ${anchor.paragraph}` : 'Recorded source passage'}
+                : anchor.paragraph != null ? `Paragraph ${anchor.paragraph}` : 'Recorded source passage')}
               {anchor.kind === 'docx' && anchor.body_path && ` · document path ${anchor.body_path.join(' / ')}`}
               {anchor.mime_part != null && ` · email part ${anchor.mime_part}`}{anchor.quote_role && ` · ${anchor.quote_role}`}
               {anchor.extraction === 'ocr' && ' · text recognized from the page image'}

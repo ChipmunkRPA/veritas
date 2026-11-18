@@ -329,6 +329,10 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         document_percentage_consistency.validate(evidence)
         document_calendar.validate(evidence)
         document_arithmetic.validate(evidence)
+        if "publication_identifier_consistency" in evidence:
+            from app.evidence.document_publication_ids import validate as validate_identifiers
+
+            validate_identifiers(evidence)
         document_pdf_visibility.validate(evidence)
         history = evidence.get("coverage", {}).get(PDF_SAVED_WORDING)
         expected_history = result.get(PDF_SAVED_WORDING_COMMITMENT)

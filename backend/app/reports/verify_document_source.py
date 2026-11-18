@@ -33,6 +33,7 @@ from app.evidence import (
     document_pdf_history_binding,
     document_pdf_visibility,
     document_percentage_consistency,
+    document_publication_ids,
     document_published_wording,
     document_repeat,
     document_scope,
@@ -54,7 +55,7 @@ from app.reports.public_verify import SCHEMA
 from app.storage.files import check_docx_safe
 
 EXTENSIONS = {"plain": ".txt", "python-docx": ".docx", "odt": ".odt", "markdown": ".md", "html": ".html",
-              "rtf": ".rtf", "email": ".eml", "pymupdf": ".pdf"}
+              "rtf": ".rtf", "email": ".eml", "pymupdf": ".pdf", "pptx": ".pptx", "epub": ".epub"}
 MAX_SOURCE_BYTES = 25 * 1024 * 1024
 
 
@@ -103,7 +104,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     source, coverage = evidence["source"], evidence.get("coverage") or {}
     extension = EXTENSIONS.get(source.get("method"))
     if extension is None:
-        raise ValueError("Original-document verification supports TXT, DOCX, ODT, RTF, Markdown, HTML, EML and PDF")
+        raise ValueError("Original-document verification supports TXT, DOCX, ODT, PPTX, EPUB, RTF, Markdown, HTML, EML and PDF")
     ocr_pages = (coverage.get("ocr") or {}).get("pages", [])
     page_coverage = (coverage.get(document_passage_coverage.KEY) or {}).get(document_scope.PDF_PAGE_COVERAGE_KEY)
     used_ocr = extension == ".pdf" and any(row.get("status") == "extracted" for row in ocr_pages)
@@ -156,6 +157,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_repeat.verify_source(evidence, text, mapping)
     document_calendar.verify_source(evidence, text, mapping)
     document_arithmetic.verify_source(evidence, text, mapping)
+    document_publication_ids.verify_source(evidence, text, mapping, doc.meta)
     document_pdf_visibility.verify_source(evidence, doc.meta)
     document_word_visibility.verify_source(evidence, doc.meta.get(document_word_visibility.KEY))
     document_native_locations.verify_saved_fields(evidence, text, mapping, doc.meta)
@@ -279,9 +281,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     percentage_detail = " Verified repeated percentage statements and their value ranges." if document_percentage_consistency.KEY in evidence else ""
     calendar_detail = " Verified the calendar date check and its source positions." if document_calendar.KEY in evidence else ""
     arithmetic_detail = " Verified the arithmetic check and its source positions." if document_arithmetic.KEY in evidence else ""
+    identifier_detail = (" Recomputed publication identifier check digits and verified any retained source positions."
+                         if document_publication_ids.KEY in evidence else "")
     marker_detail = " Verified chat formatting markers and retained source positions." if document_chat_markers.KEY in coverage else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
             f"{tracked_detail}{word_visibility_detail}{saved_fields_detail}{invisible_detail}{character_detail}{interval_detail}{pdf_replacement_detail}"
-            f"{pdf_covered_detail}{percentage_detail}{calendar_detail}{arithmetic_detail}{marker_detail}{wording_detail}{history_detail}")
+            f"{pdf_covered_detail}{percentage_detail}{calendar_detail}{arithmetic_detail}{identifier_detail}"
+            f"{marker_detail}{wording_detail}{history_detail}")

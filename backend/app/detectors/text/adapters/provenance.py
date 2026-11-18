@@ -5,7 +5,7 @@ from dataclasses import replace
 from app.detectors.image.adapters.provenance import C2PADetector, c2pa_result
 from app.engine.detector import Detector, DetectorResult, Modality
 from app.provenance.pdf_credentials import MIME
-from app.storage.files import DOCUMENT_ARCHIVE_EXTENSIONS
+from app.storage.files import OFFICE_CREDENTIAL_EXTENSIONS
 
 ID = "prov.c2pa.pdf"
 
@@ -28,6 +28,6 @@ class OfficeCredentialsDetector(Detector):
 
     def run(self, ctx):
         mime = (ctx.outputs.probe or {}).get("mime")
-        if mime not in DOCUMENT_ARCHIVE_EXTENSIONS:
+        if mime not in OFFICE_CREDENTIAL_EXTENSIONS:
             return DetectorResult.not_applicable("Whole-document Content Credentials are checked on DOCX and ODT packages")
         return c2pa_result(ctx, ctx.media.original_bytes(), mime_override=mime, require_office_document=True)

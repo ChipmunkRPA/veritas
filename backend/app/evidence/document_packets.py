@@ -42,6 +42,7 @@ from app.evidence import (
     document_pdf_history_binding,
     document_pdf_visibility,
     document_percentage_consistency,
+    document_publication_ids,
     document_published_wording,
     document_repeat,
     document_scope,
@@ -346,6 +347,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_percentage_consistency.validate(document)
         document_calendar.validate(document)
         document_arithmetic.validate(document)
+        document_publication_ids.validate(document)
         document_pdf_visibility.validate(document)
         document_pdf_history_binding.validate(document, document["source"].get(document_pdf_history_binding.COMMITMENT))
         document_bibliography.validate(document)
@@ -628,6 +630,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document[document_calendar.KEY] = document_calendar.build(document["source"], text, mapping)
     if document["source"]["method"] in document_arithmetic.METHODS:
         document[document_arithmetic.KEY] = document_arithmetic.build(document["source"], text, mapping, include_lengths=True)
+    if identifiers := document_publication_ids.build(document["source"], text, mapping, decoded["meta"]):
+        document[document_publication_ids.KEY] = identifiers
     if (settings.environment == "dev" and settings.document_percentage_consistency
             and document_percentage_consistency.supported(document["source"]["method"], decoded["meta"].get("email"))):
         document[document_percentage_consistency.KEY] = document_percentage_consistency.build(
@@ -795,6 +799,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_repeat.verify_source(document, decoded["text"], decoded["source_map"])
             document_calendar.verify_source(document, decoded["text"], decoded["source_map"])
             document_arithmetic.verify_source(document, decoded["text"], decoded["source_map"])
+            document_publication_ids.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])
             document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()),
                                                           meta=decoded["meta"])
             document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)

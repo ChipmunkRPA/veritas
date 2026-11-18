@@ -1121,6 +1121,20 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
                   "Headers, footers, notes, tracked revisions and embedded objects were outside this check."}
         if map_body_paragraphs:
             d.meta[document_native_locations.PARAGRAPH_MAP_KEY] = document_native_locations.PARAGRAPH_MAP
+    elif ext in {".pptx", ".epub"}:
+        from app.detectors.text.reading_packages import body_parts
+
+        parts = body_parts(path, ext)
+        d = _join_mapped(parts, map_paragraphs=True)
+        warning = (
+            "The writing check reads saved text boxes and tables on visible slides in presentation order. "
+            "Speaker notes, master slides, charts, SmartArt, images and embedded objects are outside this check."
+            if ext == ".pptx" else
+            "The writing check reads main XHTML chapters in EPUB reading order. Navigation, optional entries, image text, "
+            "SVG chapters and styling are outside this check."
+        )
+        d.meta = {"method": ext[1:], "paragraph_count": len(parts), "coverage_warning": warning,
+                  document_native_locations.PARAGRAPH_MAP_KEY: document_native_locations.PARAGRAPH_MAP}
     elif ext == ".eml":
         d = extract_eml(path)
     else:

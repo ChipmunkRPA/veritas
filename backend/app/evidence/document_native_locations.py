@@ -11,7 +11,9 @@ PARAGRAPH_MAP_KEY = "decoded_paragraph_locations"
 PARAGRAPH_MAP = "decoded-body-paragraphs/1"
 # The RTF reader returns the same decoded line breaks for soft breaks and paragraph breaks.
 # The saved coordinate describes a decoded text block.
-PARAGRAPH_COORDINATES = {"odt": "odt_paragraph", "rtf": "rtf_paragraph"}
+PARAGRAPH_COORDINATES = {"odt": "odt_paragraph", "rtf": "rtf_paragraph", "pptx": "pptx_block", "epub": "epub_block"}
+PACKAGE_METHODS = {"pptx": "slide", "epub": "epub_entry"}
+PACKAGE_LABELS = {"slide": "Slide", "epub_entry": "EPUB reading entry"}
 SAVED_FIELDS_KEY = "word_saved_fields"
 SAVED_FIELDS_SCHEMA = "document-word-saved-fields/1"
 SAVED_FIELDS_READER = "word_saved_fields_reader"
@@ -110,6 +112,9 @@ def _coordinate(source, coverage, anchor):
         return "word_paragraph"
     if (kind == "markup" and coverage.get(PARAGRAPH_MAP_KEY) == PARAGRAPH_MAP
             and type(anchor.get("paragraph_index")) is int and anchor["paragraph_index"] >= 0):
+        if method in PACKAGE_METHODS and (anchor.get("part_kind") != PACKAGE_METHODS[method]
+                or type(anchor.get("part_index")) is not int or anchor["part_index"] < 0):
+            raise ValueError("Missing slide or reading-order position")
         return PARAGRAPH_COORDINATES.get(method)
     if method == "html" and kind == "markup" and valid_html_article_scope(coverage.get(HTML_ARTICLE_KEY)):
         return "decoded_html"
@@ -121,6 +126,13 @@ def _coordinate(source, coverage, anchor):
             return "decoded_email"
         if email.get("body_content_type") == "text/html" and email.get("body_coordinates") == EMAIL_HTML_COORDINATES:
             return "decoded_email_html"
+    return None
+
+
+def package_anchor_label(anchor):
+    label = PACKAGE_LABELS.get(anchor.get("part_kind"))
+    if label and anchor.get("kind") == "markup" and "part_index" in anchor:
+        return f"{label} {anchor['part_index'] + 1}, text block {anchor['paragraph_index'] + 1}"
     return None
 
 

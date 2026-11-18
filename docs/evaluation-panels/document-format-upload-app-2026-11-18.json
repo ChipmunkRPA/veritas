@@ -1,0 +1,116 @@
+{
+  "browser": {
+    "accepted_by_picker": 10,
+    "page_errors": 0,
+    "plain_results": 10
+  },
+  "cases": [
+    {
+      "assessment": "inconclusive",
+      "completed_checks": 3,
+      "format": "pptx",
+      "json": true,
+      "method": "pptx",
+      "new_format_location_records_verified": 6,
+      "package_original_replayed": true,
+      "pdf": true,
+      "words": 224
+    },
+    {
+      "assessment": "inconclusive",
+      "completed_checks": 3,
+      "format": "epub",
+      "json": true,
+      "method": "epub",
+      "new_format_location_records_verified": 6,
+      "package_original_replayed": true,
+      "pdf": true,
+      "words": 224
+    },
+    {
+      "assessment": "inconclusive",
+      "completed_checks": 3,
+      "format": "docx",
+      "json": true,
+      "method": "python-docx",
+      "package_original_replayed": true,
+      "pdf": true,
+      "words": 224
+    },
+    {
+      "assessment": "inconclusive",
+      "completed_checks": 3,
+      "format": "odt",
+      "json": true,
+      "method": "odt",
+      "package_original_replayed": true,
+      "pdf": true,
+      "words": 224
+    },
+    {
+      "assessment": "inconclusive",
+      "completed_checks": 3,
+      "format": "eml",
+      "json": true,
+      "method": "email",
+      "package_original_replayed": true,
+      "pdf": true,
+      "words": 224
+    },
+    {
+      "assessment": "inconclusive",
+      "completed_checks": 3,
+      "format": "txt",
+      "json": true,
+      "method": "plain",
+      "package_original_replayed": true,
+      "pdf": true,
+      "words": 224
+    },
+    {
+      "assessment": "inconclusive",
+      "completed_checks": 3,
+      "format": "md",
+      "json": true,
+      "method": "markdown",
+      "package_original_replayed": true,
+      "pdf": true,
+      "words": 224
+    },
+    {
+      "assessment": "inconclusive",
+      "completed_checks": 3,
+      "format": "html",
+      "json": true,
+      "method": "html",
+      "package_original_replayed": true,
+      "pdf": true,
+      "words": 224
+    },
+    {
+      "assessment": "inconclusive",
+      "completed_checks": 3,
+      "format": "pdf",
+      "json": true,
+      "method": "pymupdf",
+      "package_original_replayed": true,
+      "pdf": true,
+      "words": 224
+    },
+    {
+      "assessment": "inconclusive",
+      "completed_checks": 3,
+      "format": "rtf",
+      "json": true,
+      "method": "rtf",
+      "package_original_replayed": true,
+      "pdf": true,
+      "words": 224
+    }
+  ],
+  "runtime": "isolated offline CPU writing checks with optional large model pair disabled",
+  "schema": "chipmunk.document-format-local-replay/1",
+  "simulated_paid_jobs": 10,
+  "simulated_payment_usd_cents": 999,
+  "unpaid_jobs": 0
+}

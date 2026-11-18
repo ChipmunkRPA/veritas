@@ -111,5 +111,13 @@ def test_portrait_face_review_requires_exact_upright_video_presentation():
     assert not face_portrait_return_binding.supported(replace(table, time_base="1/30001"), encoding)
     assert not face_portrait_return_binding.supported(replace(table, rotation=90), encoding)
     assert not face_portrait_return_binding.supported(table, ("hevc", "yuv420p"))
+    hevc = ("hevc", "yuv420p", "hvc1", "Main")
+    assert face_portrait_return_binding.hevc_supported(table, hevc)
+    assert not face_portrait_return_binding.hevc_supported(table, ("hevc", "yuv420p", "hev1", "Main"))
+    assert not face_portrait_return_binding.hevc_supported(table, ("hevc", "yuv420p10le", "hvc1", "Main 10"))
+    assert not face_portrait_return_binding.hevc_supported(replace(table, pts=tuple(p + 1000 for p in table.pts)), hevc)
+    assert not face_portrait_return_binding.hevc_supported(replace(table, rotation=90), hevc)
+    assert not face_portrait_return_binding.hevc_supported(
+        replace(table, width=720, height=1280, coded_width=720, coded_height=1280), hevc)
     before, during, after = PORTRAIT.support(20, 40)
     assert before == [10, 12, 14, 16, 18] and during == list(range(20, 40, 2)) and after == [40, 42, 44, 46, 48]

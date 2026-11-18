@@ -789,7 +789,7 @@ describe('ordinary multimedia evidence', () => {
     ['video-evidence-31', 'face-short-return/18'], ['video-evidence-32', 'face-short-return/19'],
     ['video-evidence-33', 'face-short-return/20'], ['video-evidence-34', 'face-short-return/21'],
     ['video-evidence-35', 'face-short-return/22'], ['video-evidence-36', 'face-short-return/23'],
-    ['video-evidence-37', 'face-short-return/24']])(
+    ['video-evidence-37', 'face-short-return/24'], ['video-evidence-38', 'face-short-return/25']])(
     'distinguishes native motion inputs from face samples in %s', (version, method) => {
     const set = { ...structuredClone(video), version }
     const packet = set.packets[0]
@@ -1270,8 +1270,12 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText(/Continuous playback does not establish continuous analysis coverage/)).toBeTruthy()
     expect(screen.getByText(/1 displayed evidence frame\(s\) occur in this clip/)).toBeTruthy()
     expect(screen.getByText(/No frozen synchronization windows/)).toBeTruthy()
+    fireEvent.error(screen.getByLabelText('Original video evidence playback'))
+    expect(screen.getByRole('link', { name: 'Open the playable context clip' }).getAttribute('href')).toBe('#media-evidence-P01')
+    expect((screen.getByRole('button', { name: 'Go to frame 6 in playback' }) as HTMLButtonElement).disabled).toBe(true)
+    expect(screen.getByAltText('V01.1: exact original video frame')).toBeTruthy()
     fireEvent.error(player)
-    expect(screen.getByRole('alert').textContent).toContain('context clip could not be loaded')
+    expect(screen.getByText(/The context clip could not be loaded/)).toBeTruthy()
   })
 
   it('shows a context export failure alongside the exact frames and waits for secure media access', () => {

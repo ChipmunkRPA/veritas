@@ -465,7 +465,7 @@ def detect(ctx: StageContext) -> dict[str, Any]:
     probe = outputs.probe or {}
     encoding = probe.get("codec"), probe.get("pix_fmt")
     inputs = (SequenceInputs(store.table, store, centers, tuple(common.stage_exhibit_list(ctx, ("tracks",))), encoding,
-                             probe.get("codec_tag"))
+                             probe.get("codec_tag"), codec_profile=probe.get("profile"))
               if store is not None else None)
     review = common.run_detectors(ctx, (Modality.VIDEO,), include={SEQUENCE_FAMILY, WHOLE_FACE_FAMILY},
                                   outputs=dataclasses.replace(outputs, face_review=inputs),

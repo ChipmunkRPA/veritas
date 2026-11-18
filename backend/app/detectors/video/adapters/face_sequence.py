@@ -39,6 +39,7 @@ class SequenceInputs:
     encoding: tuple[str | None, str | None] = (None, None)
     codec_tag: str | None = None
     baseline: dict | None = None
+    codec_profile: str | None = None
 
 
 def record(window: dict, table: FrameTable, inputs: dict[int, dict]) -> dict:

@@ -74,6 +74,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
   const [attempt, setAttempt] = useState(0)
   useEffect(() => { const media = player.current; return () => { if (media && !media.paused) media.pause() } }, [mediaReady, token, attempt, failed])
   const target = selected?.anchor.playback_time_s
+  const playableContext = set.packets.find(packet => packet.clip?.status === 'ready')
   const seek = () => {
     if (player.current && target != null && Number.isFinite(target) && target >= 0) player.current.currentTime = target
   }
@@ -133,7 +134,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
               : 'Source context with a navigation label; no local edit mask is available.'}</figcaption></figure>}
         </div>
         <p className="mt-3 mb-0 text-caption font-mono text-text-muted">Source {seconds(frame.anchor.stream_time_s)} · PTS {frame.anchor.pts} at {frame.anchor.time_base} · player {navigationKnown ? seconds(frame.anchor.playback_time_s!) : 'mapping unavailable'}</p>
-        <Button variant="text" className="mt-2" disabled={!navigationKnown || !mediaReady} onClick={() => chooseFrame(frame)}>Go to frame {frame.anchor.frame_index} in playback</Button>
+        <Button variant="text" className="mt-2" disabled={!navigationKnown || !mediaReady || failed} onClick={() => chooseFrame(frame)}>Go to frame {frame.anchor.frame_index} in playback</Button>
         {!navigationKnown && <p className="mt-1 mb-0 text-caption text-text-muted">Playback timing is not verified for this frame. Use the exact source image above.</p>}
       </div>
     })}</div>
@@ -269,7 +270,8 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     {set.packets.length > 0 && <div className="mt-5">
       <h3 className="m-0 mb-2 text-small font-medium">Original video for context</h3>
       {!mediaReady ? <p className="text-small text-text-muted">Preparing secure media links…</p>
-        : failed ? <div role="alert" className="text-small text-text-muted">The original video could not be played. Exact recorded frame images remain below.
+        : failed ? <div role="alert" className="text-small text-text-muted">Original video playback is unavailable. Exact recorded frame images remain below.
+          {playableContext && <> <a className="underline" href={`#media-evidence-${playableContext.id}`}>Open the playable context clip</a>.</>}
           <Button variant="text" onClick={() => { setFailed(false); setAttempt((v) => v + 1) }}>Retry video</Button></div>
           : <video key={`${token}:${attempt}`} ref={player} controls preload="metadata" playsInline aria-label="Original video evidence playback"
             src={evidenceSourceMediaUrl(set.analysis_id, token)} className="w-full max-h-80 rounded-md bg-surface-2"

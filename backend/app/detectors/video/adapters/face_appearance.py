@@ -383,8 +383,8 @@ def _with_return(result, inputs, yunet, recognizer, deadline):
     if result.status not in {'ok', 'not_applicable'}:
         return result
     if settings.video_face_short_return_review:
-        if _portrait_source(inputs):
-            _inspect_local_return(result.details, inputs, yunet, recognizer, deadline, portrait=True)
+        if method := _portrait_source(inputs):
+            _inspect_local_return(result.details, inputs, yunet, recognizer, deadline, portrait_method=method)
         else:
             _inspect_return(result.details, inputs, yunet, recognizer, deadline, result.details.get('face_sequence'))
             if (local_return_enabled() and not result.details.get("face_return")
@@ -400,27 +400,33 @@ def local_return_enabled():
 
 def _portrait_source(inputs):
     if (settings.environment != "dev" or not settings.video_face_portrait_return_review or settings.face_min_size != 48
-            or not isinstance(inputs, SequenceInputs) or not portrait_return.supported(inputs.table, inputs.encoding)):
-        return False
+            or not isinstance(inputs, SequenceInputs)):
+        return None
+    if portrait_return.supported(inputs.table, inputs.encoding):
+        method = portrait_return.METHOD
+    elif portrait_return.hevc_supported(inputs.table, (*inputs.encoding, inputs.codec_tag, inputs.codec_profile)):
+        method = portrait_return.HEVC_METHOD
+    else:
+        return None
     path = getattr(inputs.store, "path", None)
-    return path is not None and face_return.source_carrier(path) == "mp4"
+    return method if path is not None and face_return.source_carrier(path) == "mp4" else None
 
 
-def _inspect_local_return(details, inputs, yunet, recognizer, deadline, *, portrait=False):
+def _inspect_local_return(details, inputs, yunet, recognizer, deadline, *, portrait_method=None):
     from app.detectors.video import face_local_detail
 
     table = inputs.table
     path = getattr(inputs.store, "path", None)
     geometry, method, point = local.LANDSCAPE, local.METHOD, local.POINT
-    if portrait:
-        geometry, method = local.PORTRAIT, portrait_return.METHOD
+    if portrait_method:
+        geometry, method = local.PORTRAIT, portrait_method
         point = portrait_return.POINTS[table.width, table.height]
     elif path is None or not face_local_detail.supported(table, inputs.encoding) or face_return.source_carrier(path) != "mp4":
         return
     schedule = geometry.schedule
     coverage = {"status": "unassessed", "reason": "time_budget", "scheduled_frames": len(schedule),
                 "measured_face_frames": 0}
-    if portrait:
+    if portrait_method:
         details["face_return_check"] = coverage
     else:
         details["face_return_check"]["local_duration_fallback"] = coverage
@@ -488,7 +494,8 @@ def _inspect_local_return(details, inputs, yunet, recognizer, deadline, *, portr
                       | {"face_box": list(samples[i].face.box())} for i in boundaries}
         selected = face_return.Range(a, b, response, scores, candidate.support, boundaries)
         result = _return_record(table, schedule, selected, method, face_rows, scene_rows)
-        result.update(features_hex=[round(x, 9).hex() for x in candidate.features[:2]], source_encoding=list(inputs.encoding))
+        encoding = (*inputs.encoding, inputs.codec_tag, inputs.codec_profile) if method == portrait_return.HEVC_METHOD else inputs.encoding
+        result.update(features_hex=[round(x, 9).hex() for x in candidate.features[:2]], source_encoding=list(encoding))
         details["face_return"] = result
         coverage.update(status="localized", reason=None)
     except (DetectorTimeout, TimeoutError):

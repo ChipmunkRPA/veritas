@@ -1,0 +1,70 @@
+{
+  "schema": "chipmunk.portrait-hevc-checkout/1",
+  "held_sha256": "dc07b9274ecb476376170d4ee9411dec3e9eea89bc0725f0147f73e273cf4401",
+  "cases": [
+    {
+      "case": "known-edit",
+      "file": "10-inswapper-hevc.mp4",
+      "input_sha256": "ffca54aa3d92190686af5e7212f3ddf33e2e65da449c80f24c8cd93cc8cc2c7d",
+      "labeled_frames": [
+        16,
+        28
+      ],
+      "selected_frames": [
+        16,
+        28
+      ],
+      "source_frame_crop_images_verified": 6,
+      "signed_original_replay_verified": true,
+      "anchors": {
+        "after": [
+          28,
+          28000,
+          "c6fc65977ec1a26a46d905a1d4338ab3c7c62f24c0f272b66ba19a9f7296922c"
+        ],
+        "before": [
+          14,
+          14000,
+          "1655ffaaf51ef2da20cae8f914a9f2a3183c62a80d9f3ff8e218901c6ce2d970"
+        ],
+        "during": [
+          22,
+          22000,
+          "ee1cc963ac5b929d5c9b2549b91ea05102f595e5d6dde27bc71afee9093c9f51"
+        ]
+      },
+      "time_base": "1/30000",
+      "confidence_identical": true
+    },
+    {
+      "case": "unchanged",
+      "file": "10-original-hevc.mp4",
+      "input_sha256": "bfeb7c570bc6e4bb576346ceccbaad540aa99c66616fb0577e5341d4aae2cccd",
+      "labeled_frames": null,
+      "selected_frames": null,
+      "confidence_identical": true
+    },
+    {
+      "case": "ordinary-cut",
+      "file": "10-different_shot-hevc.mp4",
+      "input_sha256": "d35b5068a6da97ec30cc4e54d6e70589007bfac5fb68223cedff48ac7291e73d",
+      "labeled_frames": null,
+      "selected_frames": null,
+      "confidence_identical": true
+    }
+  ],
+  "browser": {
+    "cases": [
+      {
+        "fixture": "known-edit",
+        "source_frames": 3,
+        "face_crops": 3,
+        "context_seek_s": 0.7333333333333333,
+        "original_playback_fallback": true
+      }
+    ],
+    "page_errors": 0
+  },
+  "simulated_paid_jobs": 6,
+  "unpaid_jobs": 0
+}

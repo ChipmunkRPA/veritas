@@ -31,12 +31,29 @@ try {
         }))
       }
     }
-    await section.getByRole('button', { name: `Go to frame ${item.target.frame_index} in playback`, exact: true }).click()
-    await page.waitForFunction(time => {
-      const video = document.querySelector('video[aria-label="Original video evidence playback"]')
-      return video?.readyState >= 1 && !video.seeking && Math.abs(video.currentTime - time) < .003
-    }, item.target.playback_time_s)
-    cases.push({ fixture: item.name, source_frames: 3, face_crops: 3, native_seek_s: item.target.playback_time_s })
+    if (item.context_seek_s != null) {
+      await section.getByRole('heading', { name: 'Playable visual context · no audio' }).waitFor()
+      await section.getByRole('button', { name: `Inspect frame ${item.target.frame_index} in clip`, exact: true }).click()
+      await page.waitForFunction(({ label, time }) => {
+        const video = Array.from(document.querySelectorAll('video')).find(player => player.getAttribute('aria-label') === label)
+        return video?.readyState >= 1 && !video.seeking && Math.abs(video.currentTime - time) < .003
+      }, { label: `${item.packet}: silent source-derived context clip`, time: item.context_seek_s })
+      const fallback = page.getByRole('link', { name: 'Open the playable context clip', exact: true })
+      const fallbackVisible = await fallback.isVisible()
+      if (fallbackVisible) {
+        assert.equal(await fallback.getAttribute('href'), `#media-evidence-${item.packet}`)
+        assert.ok(await section.getByRole('button', { name: `Go to frame ${item.target.frame_index} in playback`, exact: true }).isDisabled())
+      }
+      cases.push({ fixture: item.name, source_frames: 3, face_crops: 3, context_seek_s: item.context_seek_s,
+        original_playback_fallback: fallbackVisible })
+    } else {
+      await section.getByRole('button', { name: `Go to frame ${item.target.frame_index} in playback`, exact: true }).click()
+      await page.waitForFunction(time => {
+        const video = document.querySelector('video[aria-label="Original video evidence playback"]')
+        return video?.readyState >= 1 && !video.seeking && Math.abs(video.currentTime - time) < .003
+      }, item.target.playback_time_s)
+      cases.push({ fixture: item.name, source_frames: 3, face_crops: 3, native_seek_s: item.target.playback_time_s })
+    }
   }
   assert.deepEqual(errors, [])
   process.stdout.write(JSON.stringify({ cases, page_errors: errors.length }))

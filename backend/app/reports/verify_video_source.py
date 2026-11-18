@@ -473,12 +473,16 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         elif record.get("method") in GUARDED_METHODS:
             guarded_records.append(record)
             background_indices.update(row["frame_index"] for row in record["scene_frame_inputs"])
-        elif record.get("method") in {face_local_return_binding.METHOD, face_portrait_return_binding.METHOD}:
+        elif record.get("method") in face_portrait_return_binding.METHODS | {face_local_return_binding.METHOD}:
             from app.detectors.video.face_local_detail import supported
 
             delivery = probe_container(original, include_codec_tag=True)
             encoding = delivery.get("codec"), delivery.get("pix_fmt")
-            accepts = face_portrait_return_binding.supported if record["method"] == face_portrait_return_binding.METHOD else supported
+            if record["method"] == face_portrait_return_binding.HEVC_METHOD:
+                encoding = (*encoding, delivery.get("codec_tag"), delivery.get("profile"))
+                accepts = face_portrait_return_binding.hevc_supported
+            else:
+                accepts = face_portrait_return_binding.supported if record["method"] == face_portrait_return_binding.METHOD else supported
             if not accepts(table, encoding) or face_return.source_carrier(original) != "mp4":
                 raise ValueError("The original video differs from the local face review profile")
             local_records.append(record)
@@ -676,7 +680,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             observed = face_return.scene_lower_quartile(*pair)
             if observed is None or not math.isclose(observed, float.fromhex(pin), abs_tol=1e-6, rel_tol=0):
                 raise ValueError("Local face background support differs from the original video")
-        geometry = (face_local_return_binding.PORTRAIT if record["method"] == face_portrait_return_binding.METHOD
+        geometry = (face_local_return_binding.PORTRAIT if record["method"] in face_portrait_return_binding.METHODS
                     else face_local_return_binding.LANDSCAPE)
         if shot_changes(original, table, record["start_frame_index"], record["end_frame_index"], geometry=geometry):
             raise ValueError("The original video shows a shot change during the local face comparison")

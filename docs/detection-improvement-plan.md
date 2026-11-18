@@ -67,10 +67,16 @@ are not public screening promises or calibrated population probabilities.
 ## Latest checks added and evaluated locally
 
 - Word files without a default paragraph style now finish analysis.
-  OpenDocument and Rich Text findings include exact decoded paragraph
-  positions. All eight formats and a separate scanned PDF completed the
+  Findings identify exact character ranges in OpenDocument paragraphs and
+  Rich Text blocks. All eight formats and a separate scanned PDF completed the
   local paid flow with matching exports and signed original-file replay.
   [Document format review](document-formats-2026-11-17.md)
+
+- The optional HEIC linked-thumbnail check handles supported 10-bit SDR
+  uploads. It located 38 of 44 edits at the larger tested thumbnail size
+  with zero alerts on 110 matched controls per depth pairing. Both
+  pairings passed paid local browser and signed source replay checks.
+  [10-bit HEIC](image-heif-depth-2026-11-18.md)
 
 - The narrow stereo Opus fallback found 24 of 48 edits, up from 20, with
   zero new flags among 228 controls. It retained 23 of the 35 matched AAC

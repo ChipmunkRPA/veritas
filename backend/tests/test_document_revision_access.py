@@ -828,7 +828,7 @@ def test_draft_changes_replay_extracted_paragraphs(reference_http, monkeypatch, 
         paragraphs = ("Test heading", text, "Known table cell")
         if extension == ".rtf":
             rich_body = text.replace("résumé", r"r\'e9sum\'e9")
-            return (r"{\rtf1\ansi\ansicpg1252 Test heading\par {\b " + rich_body + r"}\par Known table cell}").encode("ascii")
+            return (r"{\rtf1\ansi\ansicpg1252 Test heading\par\par {\b " + rich_body + r"}\par Known table cell}").encode("ascii")
         if extension == ".pdf":
             with pymupdf.open() as document:
                 page = document.new_page()

@@ -31,7 +31,7 @@ const originalLocationLabels: Record<DocumentOriginalTextLocation['coordinate'],
   decoded_text: 'Original decoded text characters',
   word_paragraph: 'Original Word paragraph characters',
   odt_paragraph: 'Decoded OpenDocument paragraph characters',
-  rtf_paragraph: 'Decoded Rich Text paragraph characters',
+  rtf_paragraph: 'Decoded Rich Text block characters',
   decoded_email: 'Decoded email part characters',
   decoded_email_html: 'Decoded email HTML source characters',
   decoded_html: 'Original HTML source characters',
@@ -788,7 +788,8 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
           <ul className="pl-4 list-disc">{packet.anchors.map((anchor, index) => {
             const original = set.coverage?.original_text_locations?.packets[packet.id]?.find((row) => row.anchor_index === index)
             return <li key={index}>
-              {anchor.page != null ? `Page ${anchor.page}` : anchor.paragraph_index != null ? `Paragraph ${anchor.paragraph_index + 1}`
+              {anchor.page != null ? `Page ${anchor.page}` : anchor.paragraph_index != null
+                ? `${original?.coordinate === 'rtf_paragraph' ? 'Text block' : 'Paragraph'} ${anchor.paragraph_index + 1}`
                 : anchor.paragraph != null ? `Paragraph ${anchor.paragraph}` : 'Recorded source passage'}
               {anchor.kind === 'docx' && anchor.body_path && ` · document path ${anchor.body_path.join(' / ')}`}
               {anchor.mime_part != null && ` · email part ${anchor.mime_part}`}{anchor.quote_role && ` · ${anchor.quote_role}`}

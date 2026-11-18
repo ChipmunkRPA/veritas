@@ -9,6 +9,8 @@ SCHEMA = "document-original-text-locations/1"
 MAX_RANGES = 16
 PARAGRAPH_MAP_KEY = "decoded_paragraph_locations"
 PARAGRAPH_MAP = "decoded-body-paragraphs/1"
+# The RTF reader returns the same decoded line breaks for soft breaks and paragraph breaks.
+# The saved coordinate describes a decoded text block.
 PARAGRAPH_COORDINATES = {"odt": "odt_paragraph", "rtf": "rtf_paragraph"}
 
 

@@ -102,8 +102,9 @@ def _prepare(ext, path):
                   </office:text></office:body>
                 </office:document-content>''')
     elif ext == ".rtf":
+        # A soft line break starts another decoded text block within the same authored paragraph.
         first = FIRST.replace("😀", r"\u-10179?\u-8704?")
-        path.write_bytes((r"{\rtf1\ansi\uc1 " + first + r"\par " + MIDDLE + r"\par " + LAST + "}").encode("ascii"))
+        path.write_bytes((r"{\rtf1\ansi\uc1 " + first + r"\line " + MIDDLE + r"\par " + LAST + "}").encode("ascii"))
     else:
         message = EmailMessage(policy=policy.SMTP)
         message.set_content(
@@ -154,7 +155,7 @@ def _snapshot(evidence, analysis, result):
         (".txt", "decoded_text", "Original decoded text characters"),
         (".docx", "word_paragraph", "Original Word paragraph characters"),
         (".odt", "odt_paragraph", "Decoded OpenDocument paragraph characters"),
-        (".rtf", "rtf_paragraph", "Decoded Rich Text paragraph characters"),
+        (".rtf", "rtf_paragraph", "Decoded Rich Text block characters"),
         (".eml", "decoded_email_html", "Decoded email HTML source characters"),
     ],
 )
@@ -200,6 +201,8 @@ def test_original_text_locations_follow_native_source_in_exports_and_replay(
     rendered = engine.render_pdf(snapshot)
     pdf = " ".join(engine.pdf_text(rendered.pdf).split())
     assert not rendered.refused and label in pdf
+    if ext == ".rtf":
+        assert "Decoded Rich Text block 2." in pdf
     assert f"). {label}" in pdf
     assert all(f"[{a}, {b})" in pdf for row in native for a, b in row["ranges"])
 

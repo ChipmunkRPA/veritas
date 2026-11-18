@@ -305,7 +305,8 @@ def _source(path: Path, data: bytes, extension: str, *, mixed: bool = False, wor
             raise ValueError(f"Each {label} version needs readable body text and at most {MAX_CHARS:,} extracted characters.")
         anchors = []
         for index, row in enumerate(doc.source_map):
-            paragraph_index = row.get("paragraph_index", index)
+            # The draft format has always numbered the nonempty decoded RTF blocks consecutively.
+            paragraph_index = index if extension == ".rtf" else row.get("paragraph_index", index)
             anchors.append((paragraph_index + 1, paragraph_index, row["start"], row["end"]))
         body = tokens(doc.text, [(start, end) for _, _, start, end in anchors])
         if len(body) > MAX_TOKENS:

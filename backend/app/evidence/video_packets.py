@@ -1149,7 +1149,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 packet["interpretation"] += " This interval overlaps the brief change on the other tracked face."
             if face_return["method"] == face_short_proposal_binding.BOUNDARY_AVC_METHOD:
                 packet["title"] = "Brief face change near the start or end of the clip"
-            if face_return["method"] == face_return_binding.local.METHOD:
+            if face_return["method"] in face_return_binding.LOCAL_METHODS:
                 packet["title"] = "Temporary face appearance change"
                 packet["interpretation"] += (
                     " Adjacent source frames around the range showed no abrupt shot change."

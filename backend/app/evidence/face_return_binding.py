@@ -7,6 +7,7 @@ import re
 from fractions import Fraction
 
 from app.evidence import face_local_return_binding as local
+from app.evidence import face_portrait_return_binding as portrait
 from app.evidence import face_short_carrier_binding as carriers
 from app.evidence import face_short_proposal_binding as proposal
 from app.evidence import face_short_window_binding as short_windows
@@ -24,6 +25,7 @@ from app.evidence.video_packet_versions import (
     OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION,
     OVERLAPPING_PANE_TRACK_AVC_PROPOSAL_VERSION,
     PANE_TRACK_AVC_PROPOSAL_VERSION,
+    PORTRAIT_FACE_RETURN_VERSION,
     POSITION_TRACK_AVC_PROPOSAL_VERSION,
     PRIMARY_TRACK_AVC_PROPOSAL_VERSION,
     SECOND_AVC_PROPOSAL_VERSION,
@@ -91,7 +93,8 @@ METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VE
                    proposal.OPPOSITE_PANE_TRACK_AVC_METHOD: OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION,
                    proposal.OVERLAPPING_PANE_TRACK_AVC_METHOD: OVERLAPPING_PANE_TRACK_AVC_PROPOSAL_VERSION,
                    proposal.BOUNDARY_AVC_METHOD: BOUNDARY_AVC_PROPOSAL_VERSION,
-                   local.METHOD: LOCAL_FACE_RETURN_VERSION}
+                   local.METHOD: LOCAL_FACE_RETURN_VERSION, portrait.METHOD: PORTRAIT_FACE_RETURN_VERSION}
+LOCAL_METHODS = frozenset({local.METHOD, portrait.METHOD})
 WINDOW_METHODS = frozenset((short_windows.METHOD, carriers.METHOD))
 POINT = 0.10
 SCENE_POINT = 0.55
@@ -309,21 +312,25 @@ def _validate_guarded_scene(record):
 
 def _validate_local_return(record, source, table_pts, interpolated, rotation, truncated):
     base = Fraction(source["time_base"])
-    _require((source["width"], source["height"]) == local.DIMENSIONS and source["frame_count"] == local.FRAME_COUNT
+    dimensions = source["width"], source["height"]
+    geometry = local.PORTRAIT if record["method"] == portrait.METHOD else local.LANDSCAPE
+    point = portrait.POINTS.get(dimensions) if record["method"] == portrait.METHOD else (
+        local.POINT if dimensions == local.DIMENSIONS else None)
+    _require(point is not None and source["frame_count"] == geometry.frame_count
              and not (rotation or truncated or interpolated) and record["time_base"] == source["time_base"]
-             and record["scheduled_frame_indices"] == list(local.SCHEDULE)
+             and record["scheduled_frame_indices"] == list(geometry.schedule)
              and tuple(record["source_encoding"]) == DENSE_ENCODING,
              "Local face-change evidence requires the measured upright native video profile")
     if table_pts is not None:
-        _require(len(table_pts) == local.FRAME_COUNT and all((tick - table_pts[0]) * base == i * local.STEP
+        _require(len(table_pts) == geometry.frame_count and all((tick - table_pts[0]) * base == i * geometry.step
                  for i, tick in enumerate(table_pts)), "Local face-change evidence has a different native picture clock")
     start, end = record["start_frame_index"], record["end_frame_index"]
-    before, during, after = local.support(start, end)
+    before, during, after = geometry.support(start, end)
     features = [float.fromhex(value) for value in record["features_hex"]]
     _require(len(features) == 2 and all(-2.000001 <= value <= 2.000001 for value in features),
              "Local face-change measurements are outside their expected range")
     response = local.response(features)
-    _require(response > local.POINT and response.hex() == record["response_hex"] and _time(record["response"], response),
+    _require(response > point and response.hex() == record["response_hex"] and _time(record["response"], response),
              "Local face-change response differs from the frozen comparison")
     _require(record["support_indices"] == dict(zip(ROLES, (before, during, after), strict=True))
              and record["anchors"] == dict(zip(ROLES, (before[-1], during[len(during)//2], after[0]), strict=True)),
@@ -335,13 +342,13 @@ def _validate_local_return(record, source, table_pts, interpolated, rotation, tr
     first = faces[start]["pts"]
     for index, item in faces.items():
         validate_face_input(item, source, appearance=True)
-        _require((item["pts"] - first) * base == (index - start) * local.STEP,
+        _require((item["pts"] - first) * base == (index - start) * geometry.step,
                  "Local face input differs from the native source clock")
     for i, item in scene.items():
         face = faces[i]
         _require(all(item[key] == face[key] for key in ("pts", "decoded_rgb_sha256")),
                  "Local face and scene measurements disagree on a source picture")
-    _validate_scene_boxes(faces, scene, local.DIMENSIONS)
+    _validate_scene_boxes(faces, scene, dimensions)
     values, exact = record["scene_correlations"], record["scene_correlations_hex"]
     _require(len(values) == len(exact) == 2, "Local face evidence needs two background comparisons")
     for value, hex_value in zip(values, exact, strict=True):
@@ -354,7 +361,7 @@ def _validate_local_return(record, source, table_pts, interpolated, rotation, tr
 
 def validate_record(record, source, *, table_pts=None, interpolated=(), rotation=0, truncated=False):
     method = record["method"]
-    if method == local.METHOD:
+    if method in LOCAL_METHODS:
         _validate_local_return(record, source, table_pts, interpolated, rotation, truncated)
         return
     if method == carriers.METHOD:

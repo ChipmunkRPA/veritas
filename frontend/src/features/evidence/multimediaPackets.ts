@@ -721,6 +721,7 @@ nestedVideoVersions.add('video-evidence-33')
 nestedVideoVersions.add('video-evidence-34')
 nestedVideoVersions.add('video-evidence-35')
 nestedVideoVersions.add('video-evidence-36')
+nestedVideoVersions.add('video-evidence-37')
 export function hasNestedVideoEvidence(version: string): boolean { return nestedVideoVersions.has(version) }
 
 export async function getMultimediaEvidence(analysisId: string, kind: EvidenceKind): Promise<MultimediaEvidenceSet> {

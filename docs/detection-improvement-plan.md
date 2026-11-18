@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Short portrait-video face changes](video-face-portrait-2026-11-17.md)
+  add opt-in timestamps and before, during, and after frames to the local
+  worker. At 360 × 640 the isolated check finds 20 of 36 direct edits and
+  19 of 36 recompressed edits, with zero flags among 90 ordinary controls
+  per encoding. At 720 × 1280 it finds 17 and 16 edits, with two and one
+  ordinary alerts, respectively.
+
 - [Explicit arithmetic in documents](document-arithmetic-evidence-2026-11-17.md)
   locates the source expression and recalculates the result. It finds all
   2,973 staged changes to human-worked arithmetic with zero flags on the

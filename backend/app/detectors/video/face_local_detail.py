@@ -39,9 +39,9 @@ def supported(table, encoding):
             and all((pts - table.pts[0]) * table.tb == index * STEP for index, pts in enumerate(table.pts)))
 
 
-def shot_changes(path, table, start, end, *, timeout_s=10., check=None):
+def shot_changes(path, table, start, end, *, timeout_s=10., check=None, geometry=local.LANDSCAPE):
     """Read every picture in the candidate and its flanks to find abrupt shot changes."""
-    before, _, after = local.support(start, end)
+    before, _, after = geometry.support(start, end)
     indices = range(before[0], after[-1] + 1)
     # Short intervening shots matter even when too brief to enter the sampling plan.
     detector = ShotDetector(table, min_shot_s=0.)
@@ -91,12 +91,14 @@ def _summarize(distances, left, middle, right):
     return float(shared_change - max(outside, internal)), float(paired_edges - outside)
 
 
-def proposals(samples, details, *, review=lambda: None):
+def proposals(samples, details, *, review=lambda: None, geometry=local.LANDSCAPE):
     """Use fixed native slots and require the surrounding scene on both sides."""
-    support = np.array([i in details for i in SCHEDULE])
-    if np.count_nonzero(support) < 2 * FLANK + CORE_MIN:
+    schedule = geometry.schedule
+    flank = geometry.flank
+    support = np.array([i in details for i in schedule])
+    if np.count_nonzero(support) < 2 * flank + geometry.minimum:
         return []
-    available = [i for i in SCHEDULE if i in details]
+    available = [i for i in schedule if i in details]
     raw = np.stack([details[i] for i in available]).astype(np.float64)
     vectors = np.stack([samples[i].vector for i in available])
     identities = 1 - np.clip(vectors @ vectors.T, -1, 1)
@@ -104,24 +106,24 @@ def proposals(samples, details, *, review=lambda: None):
     contrast = np.abs(raw[:, None] - raw[None, :]).mean(axis=-1)
     positions = {index: offset for offset, index in enumerate(available)}
     crossings = {}
-    for a, b in zip(SCHEDULE, SCHEDULE[1:]):
+    for a, b in zip(schedule, schedule[1:]):
         if a in positions and b in positions and iou(samples[a].face, samples[b].face) >= .30:
             crossings[b] = face_return.scene_lower_quartile(samples[a], samples[b])
     results = []
-    for start in range(FLANK, len(SCHEDULE) - CORE_MIN - FLANK + 1):
+    for start in range(flank, len(schedule) - geometry.minimum - flank + 1):
         review()
-        onset = SCHEDULE[start]
+        onset = schedule[start]
         entry = crossings.get(onset)
         if entry is None or entry < SCENE_POINT:
             continue
-        for stop in range(start + CORE_MIN, min(start + CORE_MAX, len(SCHEDULE) - FLANK) + 1):
-            end = SCHEDULE[stop]
+        for stop in range(start + geometry.minimum, min(start + geometry.maximum, len(schedule) - flank) + 1):
+            end = schedule[stop]
             exit_score = crossings.get(end)
-            if exit_score is None or exit_score < SCENE_POINT or not support[start - FLANK:stop + FLANK].all():
+            if exit_score is None or exit_score < SCENE_POINT or not support[start - flank:stop + flank].all():
                 continue
-            if any(crossings.get(k) is None for k in SCHEDULE[start - FLANK + 1:stop + FLANK]):
+            if any(crossings.get(k) is None for k in schedule[start - flank + 1:stop + flank]):
                 continue
-            groups = SCHEDULE[start - FLANK:start], SCHEDULE[start:stop], SCHEDULE[stop:stop + FLANK]
+            groups = schedule[start - flank:start], schedule[start:stop], schedule[stop:stop + flank]
             indexed = tuple([positions[i] for i in group] for group in groups)
             identity = _summarize(identities, *indexed)
             texture = _summarize(contrast, *indexed)

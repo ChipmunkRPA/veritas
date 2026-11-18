@@ -28,6 +28,7 @@ from app.engine.boundary import Deadline, DetectorTimeout
 from app.engine.detector import ActivationUse, Applicability, DetectorResult, InputUnit, UnitScore
 from app.evidence import face_local_return_binding as local
 from app.evidence import face_paired_edge_binding as paired
+from app.evidence import face_portrait_return_binding as portrait_return
 from app.evidence import face_primary_track_binding
 from app.evidence import face_short_carrier_binding as short_carriers
 from app.evidence import face_short_proposal_binding as proposal
@@ -382,10 +383,13 @@ def _with_return(result, inputs, yunet, recognizer, deadline):
     if result.status not in {'ok', 'not_applicable'}:
         return result
     if settings.video_face_short_return_review:
-        _inspect_return(result.details, inputs, yunet, recognizer, deadline, result.details.get('face_sequence'))
-        if (local_return_enabled() and not result.details.get("face_return")
-                and result.details["face_return_check"]["status"] != "not_applicable"):
-            _inspect_local_return(result.details, inputs, yunet, recognizer, deadline)
+        if _portrait_source(inputs):
+            _inspect_local_return(result.details, inputs, yunet, recognizer, deadline, portrait=True)
+        else:
+            _inspect_return(result.details, inputs, yunet, recognizer, deadline, result.details.get('face_sequence'))
+            if (local_return_enabled() and not result.details.get("face_return")
+                    and result.details["face_return_check"]["status"] != "not_applicable"):
+                _inspect_local_return(result.details, inputs, yunet, recognizer, deadline)
     return _describe_return(result)
 
 
@@ -394,16 +398,32 @@ def local_return_enabled():
             and settings.video_face_local_return_review and settings.face_min_size == 48)
 
 
-def _inspect_local_return(details, inputs, yunet, recognizer, deadline):
+def _portrait_source(inputs):
+    if (settings.environment != "dev" or not settings.video_face_portrait_return_review or settings.face_min_size != 48
+            or not isinstance(inputs, SequenceInputs) or not portrait_return.supported(inputs.table, inputs.encoding)):
+        return False
+    path = getattr(inputs.store, "path", None)
+    return path is not None and face_return.source_carrier(path) == "mp4"
+
+
+def _inspect_local_return(details, inputs, yunet, recognizer, deadline, *, portrait=False):
     from app.detectors.video import face_local_detail
 
     table = inputs.table
     path = getattr(inputs.store, "path", None)
-    if path is None or not face_local_detail.supported(table, inputs.encoding) or face_return.source_carrier(path) != "mp4":
+    geometry, method, point = local.LANDSCAPE, local.METHOD, local.POINT
+    if portrait:
+        geometry, method = local.PORTRAIT, portrait_return.METHOD
+        point = portrait_return.POINTS[table.width, table.height]
+    elif path is None or not face_local_detail.supported(table, inputs.encoding) or face_return.source_carrier(path) != "mp4":
         return
-    coverage = {"status": "unassessed", "reason": "time_budget", "scheduled_frames": len(local.SCHEDULE),
+    schedule = geometry.schedule
+    coverage = {"status": "unassessed", "reason": "time_budget", "scheduled_frames": len(schedule),
                 "measured_face_frames": 0}
-    details["face_return_check"]["local_duration_fallback"] = coverage
+    if portrait:
+        details["face_return_check"] = coverage
+    else:
+        details["face_return_check"]["local_duration_fallback"] = coverage
     remaining = deadline.remaining() if deadline is not None else None
     limit = 10. if remaining is None else min(10., remaining - COARSE_RESULT_RESERVE_S)
     if limit <= 0:
@@ -418,7 +438,7 @@ def _inspect_local_return(details, inputs, yunet, recognizer, deadline):
 
     samples, detail = {}, {}
     try:
-        with closing(inputs.store.iter_many(local.SCHEDULE, timeout_s=limit)) as frames:
+        with closing(inputs.store.iter_many(schedule, timeout_s=limit)) as frames:
             for index, rgb in frames:
                 check()
                 if not inputs.store.native_pts_verified(index):
@@ -429,21 +449,21 @@ def _inspect_local_return(details, inputs, yunet, recognizer, deadline):
                 if frequency is not None:
                     detail[index] = frequency
                     coverage["measured_face_frames"] += 1
-        if samples.keys() != set(local.SCHEDULE):
+        if samples.keys() != set(schedule):
             coverage["reason"] = "incomplete_native_decode"
             return
-        candidates = face_local_detail.proposals(samples, detail, review=check)
+        candidates = face_local_detail.proposals(samples, detail, review=check, geometry=geometry)
         if not candidates:
             coverage["reason"] = "insufficient_same_shot_context"
             return
         scored = [(local.response([round(x, 9) for x in item.features[:2]]), item) for item in candidates]
         response, candidate = max(scored, key=lambda row: (row[0], row[1].end - row[1].start, -row[1].start))
         a, b = candidate.start, candidate.end
-        if response <= local.POINT or _duplicates_local_return(details, table, a, b):
+        if response <= point or _duplicates_local_return(details, table, a, b):
             coverage.update(status="no_distinct_range", reason=None)
             return
         check()
-        if face_local_detail.shot_changes(path, table, a, b, timeout_s=stop - time.monotonic(), check=check):
+        if face_local_detail.shot_changes(path, table, a, b, timeout_s=stop - time.monotonic(), check=check, geometry=geometry):
             coverage.update(status="no_distinct_range", reason="local_shot_change")
             return
         boundaries = (a - 2, a, b - 2, b)
@@ -467,7 +487,7 @@ def _inspect_local_return(details, inputs, yunet, recognizer, deadline):
         scene_rows = {i: {key: face_rows[i][key] for key in ("frame_index", "pts", "decoded_rgb_sha256")}
                       | {"face_box": list(samples[i].face.box())} for i in boundaries}
         selected = face_return.Range(a, b, response, scores, candidate.support, boundaries)
-        result = _return_record(table, local.SCHEDULE, selected, local.METHOD, face_rows, scene_rows)
+        result = _return_record(table, schedule, selected, method, face_rows, scene_rows)
         result.update(features_hex=[round(x, 9).hex() for x in candidate.features[:2]], source_encoding=list(inputs.encoding))
         details["face_return"] = result
         coverage.update(status="localized", reason=None)
@@ -1198,7 +1218,7 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
                                  or _window_source(inputs)):
             return Applicability(True)
         if (not incumbent.ok and settings.video_face_short_return_review and settings.face_min_size == 48
-                and isinstance(inputs, SequenceInputs) and (face_return.schedule(inputs.table) is not None
+                and isinstance(inputs, SequenceInputs) and (_portrait_source(inputs) or face_return.schedule(inputs.table) is not None
                      or face_return.guarded_720p30_schedule(inputs.table, inputs.encoding, getattr(inputs.store, "path", None)) is not None)):
             return Applicability(True)
         return incumbent
@@ -1214,6 +1234,8 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
              'An enabled lower-detail repeat reads the same input frames from the selected coarse range.',
              *(("The local face comparison can sample 50 faces and check adjacent pictures for cuts.",)
                if local_return_enabled() else ()),
+             *(("The portrait face comparison can sample 60 faces and check adjacent pictures for cuts.",)
+               if settings.video_face_short_return_review and settings.video_face_portrait_return_review else ()),
              *((f'The enabled paired-edge timing refinement reads at most {paired.MAX_READS} additional native frames.',)
                if settings.video_face_paired_edge_refinement else ()),
              *((f'The enabled brief proposal reads 120 pixel inputs and measures at most {proposal.MAX_FACE_READS} face inputs.',)

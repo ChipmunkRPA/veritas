@@ -1,3 +1,4 @@
+from dataclasses import replace
 from fractions import Fraction
 
 import numpy as np
@@ -6,6 +7,8 @@ import pytest
 from app.detectors.image.faces import Face
 from app.detectors.video import face_local_detail
 from app.detectors.video.decode import DecodedFrame, DecodeError, FrameTable
+from app.evidence import face_portrait_return_binding
+from app.evidence.face_local_return_binding import PORTRAIT
 from scripts import video_face_return_transfer as trial
 
 
@@ -96,3 +99,17 @@ def test_dense_face_review_checks_one_picture_cuts_and_native_timestamps(monkeyp
     install(False)
     with pytest.raises(DecodeError, match="source clock"):
         face_local_detail.shot_changes(tmp_path / "source.mp4", table, 20, 40)
+
+
+def test_portrait_face_review_requires_exact_upright_video_presentation():
+    table = FrameTable(time_base="1/30000", pts=tuple(1000 * i for i in range(120)), key_frames=(0,),
+                       pict_types="I" * 120, width=360, height=640, coded_width=360, coded_height=640,
+                       rotation=0, interpolated=())
+    encoding = "h264", "yuv420p"
+    assert face_portrait_return_binding.supported(table, encoding)
+    assert not face_local_detail.supported(table, encoding)
+    assert not face_portrait_return_binding.supported(replace(table, time_base="1/30001"), encoding)
+    assert not face_portrait_return_binding.supported(replace(table, rotation=90), encoding)
+    assert not face_portrait_return_binding.supported(table, ("hevc", "yuv420p"))
+    before, during, after = PORTRAIT.support(20, 40)
+    assert before == [10, 12, 14, 16, 18] and during == list(range(20, 40, 2)) and after == [40, 42, 44, 46, 48]

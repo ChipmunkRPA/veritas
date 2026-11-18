@@ -1,0 +1,186 @@
+{
+  "schema": "chipmunk.portrait-face-checkout/1",
+  "held_sha256": "aaac59d611359f7b121879e58c248a96039d89a88bdeacbe982d49c1d76840ec",
+  "cases": [
+    {
+      "file": "10-inswapper-direct.mp4",
+      "input_sha256": "cbda870a649f26c725d8c0452c3053a82e615ab52641c7092c28c7bf56b1ba1d",
+      "dimensions": [
+        360,
+        640
+      ],
+      "labeled_frames": [
+        16,
+        28
+      ],
+      "selected_frames": [
+        16,
+        28
+      ],
+      "previous_ranges_seconds": [],
+      "anchors": {
+        "after": [
+          28,
+          28000,
+          "b271c8f8f758df104c807f9659e7c55c90ff1fea71185dfae5cefe03c9212724"
+        ],
+        "before": [
+          14,
+          14000,
+          "01e68b786a1da9c45654ec23300bee2f12632f15fac079f339efa5846f68231b"
+        ],
+        "during": [
+          22,
+          22000,
+          "0033df53728d65be86e01e6f680d2efeb4ed539f4204d5bfa4ac3ee6abb0d7e3"
+        ]
+      },
+      "confidence_identical": true,
+      "source_frame_crop_images_verified": 6,
+      "signed_original_replay_verified": true
+    },
+    {
+      "file": "10-inswapper-tandem.mp4",
+      "input_sha256": "3631c7eaf52b669120399ec90ea37770ae08eb14a42ae626d344bce0c8d332ab",
+      "dimensions": [
+        360,
+        640
+      ],
+      "labeled_frames": [
+        16,
+        28
+      ],
+      "selected_frames": [
+        16,
+        28
+      ],
+      "previous_ranges_seconds": [],
+      "anchors": {
+        "after": [
+          28,
+          28000,
+          "77422aa6022c03904afb820c79d86cb1a23ec870077f35dabe78c9e098ccdcc2"
+        ],
+        "before": [
+          14,
+          14000,
+          "371fdb19b43e10af8982d55ba6997c652f2d0627ad2b2e5ef631975f3e257079"
+        ],
+        "during": [
+          22,
+          22000,
+          "104994a7bd75e30037d1e0b3776047350a60a2e365c837d71ccebba2420b3c9d"
+        ]
+      },
+      "confidence_identical": true,
+      "source_frame_crop_images_verified": 6,
+      "signed_original_replay_verified": true
+    },
+    {
+      "file": "10-inswapper-direct.mp4",
+      "input_sha256": "08e5dce377f2b3b3cd758313c73afee5e72089391a4cee88c257d248ac84f09d",
+      "dimensions": [
+        720,
+        1280
+      ],
+      "labeled_frames": [
+        16,
+        28
+      ],
+      "selected_frames": [
+        16,
+        28
+      ],
+      "previous_ranges_seconds": [],
+      "anchors": {
+        "after": [
+          28,
+          28000,
+          "ffe5bb345db97551fc15666f7905d445d557d65e1f0a8d12ad067d292b88ed6f"
+        ],
+        "before": [
+          14,
+          14000,
+          "e279a0163db47f85f7a39ad3c72189dc1cc00bec105e0c2a37a216dd1bc106f3"
+        ],
+        "during": [
+          22,
+          22000,
+          "ca701f04771e5930f27be81f1e23450d50d8359b7dcb14bae2274e1a7f19f1fc"
+        ]
+      },
+      "confidence_identical": true,
+      "source_frame_crop_images_verified": 6,
+      "signed_original_replay_verified": true
+    },
+    {
+      "file": "10-inswapper-tandem.mp4",
+      "input_sha256": "358b90c6d0627c284616640b309a8d2adc564861be288468083ec43cce4d3d7c",
+      "dimensions": [
+        720,
+        1280
+      ],
+      "labeled_frames": [
+        16,
+        28
+      ],
+      "selected_frames": [
+        16,
+        28
+      ],
+      "previous_ranges_seconds": [],
+      "anchors": {
+        "after": [
+          28,
+          28000,
+          "2a86f57acb93fa75a2ed6a49e6d9739ae43bf70ade556fa47404d535114555e0"
+        ],
+        "before": [
+          14,
+          14000,
+          "e24a802526bfb292b4b6a011ae5c0bb33f830c5be6b4ea8303bcca056a9e1a5e"
+        ],
+        "during": [
+          22,
+          22000,
+          "30d368d1f06d30356d94f111846beb80bec0ecb80f1e2cd3dda5faae39f0dcbe"
+        ]
+      },
+      "confidence_identical": true,
+      "source_frame_crop_images_verified": 6,
+      "signed_original_replay_verified": true
+    }
+  ],
+  "browser": {
+    "cases": [
+      {
+        "fixture": "640-10-inswapper-direct",
+        "source_frames": 3,
+        "face_crops": 3,
+        "native_seek_s": 0.733333
+      },
+      {
+        "fixture": "640-10-inswapper-tandem",
+        "source_frames": 3,
+        "face_crops": 3,
+        "native_seek_s": 0.733333
+      },
+      {
+        "fixture": "1280-10-inswapper-direct",
+        "source_frames": 3,
+        "face_crops": 3,
+        "native_seek_s": 0.733333
+      },
+      {
+        "fixture": "1280-10-inswapper-tandem",
+        "source_frames": 3,
+        "face_crops": 3,
+        "native_seek_s": 0.733333
+      }
+    ],
+    "page_errors": 0
+  },
+  "all_checks": false,
+  "simulated_paid_jobs": 8,
+  "unpaid_jobs": 0
+}

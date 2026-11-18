@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [portrait face-change replay](video-face-portrait-2026-11-17.md#reproduce)
+checks input hashes, native frame intervals and ordinary shot controls on
+504 held deliveries. Its export provides the frozen measurements and
+time-aligned labels for comparison with another detector.
+
 The [document arithmetic replay](document-arithmetic-evidence-2026-11-17.md#reproduce)
 uses the publisher's exact test split and an independent rational
 calculation. It verifies all 2,973 staged differences at their source

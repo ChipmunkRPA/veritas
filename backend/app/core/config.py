@@ -374,6 +374,7 @@ class Settings(BaseSettings):
     video_whole_face_same_frame_review: bool = False  # Optional fallback combining both readings at the same sampled face.
     video_whole_face_detail_review: bool = False  # Optional face detail fallback in the verified 360p/25 fps H.264 profile.
     video_face_local_return_review: bool = False  # Optional face comparison on fixed four-second 360p sources.
+    video_face_portrait_return_review: bool = False  # Optional face comparison on qualified four-second portrait MP4.
     audio_weight: float = 0.8  # docs/eval_audio.md: fused AUC 0.92 on ASVspoof-DF + in-the-wild, FPR ~10 % in the wild
     audio_classifiers: list[str] = [  # HuggingFace audio-classification checkpoints, each "repo_id|positive_label_substring|weight"
         "Gustking/wav2vec2-large-xlsr-deepfake-audio-classification|fake|1.0",  # AUC 0.917 overall / 0.974 ASVspoof-DF

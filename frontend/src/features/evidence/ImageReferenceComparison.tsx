@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 import { Button } from '../../components/ui'
 import { saveBlob } from '../../lib/api/reports'
 import {
-  compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
+  axisResizeSchema, compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
   IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, nativeJpegDifferenceSchema, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
   pngOpacitySchema, exactWebpSchema, lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema,
@@ -85,6 +85,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const nativeJpegDifference = comparison.schema === nativeJpegDifferenceSchema
   const opacity = comparison.schema === pngOpacitySchema ? comparison.png_opacity : undefined
   const exactWebp = comparison.schema === exactWebpSchema ? comparison.exact_webp : undefined
+  const axis = comparison.schema === axisResizeSchema ? comparison.axis_resize : undefined
   const framing = imageFramingSchema(comparison)
   const earlierJpegWebp = framing === earlierJpegWebpSchema
   const lossyWebp = framing === lossyWebpSchema || earlierJpegWebp ? comparison.lossy_webp : undefined
@@ -99,16 +100,20 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     ? comparison.reference_crop_bounds : undefined
   const resized = comparable && (Boolean(cropped || resizedWebp || croppedResizedWebp) || comparison.schema === 'chipmunk.image-reference-comparison/3')
   const completeMatch = (exact ?? orientation)?.matched_pixels === submitted.width * submitted.height
+    || axis?.basis === 'exact_full_grid'
     || opacity?.matched_pixels === submitted.width * submitted.height
     || exactWebp?.changed_pixels === 0
     || (embeddedPhoto && embeddedPhoto.exact_pixels === embeddedPhoto.submitted_bounds.w * embeddedPhoto.submitted_bounds.h)
   const kernels = (orientedResize?.kernels ?? comparison.supported_resize_kernels)?.map(kernel => kernel === 'opencv_area' ? 'area' : kernel).join(', ')
   const maskDescription = delivery ? 'White marks color differences outside the expected delivery range.'
-    : (exact || orientedResize) ? 'White marks retained differences from the reproduced resize.'
+    : (exact || orientedResize || axis) ? 'White marks retained differences from the reproduced resize.'
     : resized ? 'White marks differences flagged by at least two tested resizes.' : 'White marks the selected differences.'
   const genericReason = Object.prototype.hasOwnProperty.call(unassessed, comparison.status)
     ? unassessed[comparison.status] : 'The selected copies could not be compared reliably.'
   const reason = (earlierJpegWebp && comparison.interpretation) || genericReason
+  const summary = !comparable ? 'Comparison unassessed'
+    : regions.length ? `${regions.length} difference ${regions.length === 1 ? 'region' : 'regions'} found`
+      : axis?.basis === 'exact_full_grid' ? 'All pixels match after resizing' : 'No localized differences found'
   const pdf = comparisonPdfData(result)
   const download = () => {
     const json = JSON.stringify(imageReferenceExport(result), null, 2) + '\n'
@@ -116,10 +121,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   }
   return <div className="mt-5 border-t border-border pt-4">
     <div className="flex flex-wrap items-baseline justify-between gap-3">
-      <p className="m-0 text-small font-medium text-text" role="status">
-        {comparable ? regions.length === 0 ? 'No localized differences found' : `${regions.length} difference ${regions.length === 1 ? 'region' : 'regions'} found`
-          : 'Comparison unassessed'}
-      </p>
+      <p className="m-0 text-small font-medium text-text" role="status">{summary}</p>
       <div className="flex flex-wrap gap-x-4 gap-y-1">
         {pdf && <Button variant="text" onClick={() => {
           const decoded = atob(pdf)
@@ -168,6 +170,12 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       {exactWebp.changed_pixels === 0 ? 'All decoded RGB pixels match.' :
         `${exactWebp.changed_pixels.toLocaleString('en-US')} decoded pixels differ. ${exactWebp.matched_tiles.length} matching detailed areas supported the framing.`}
       {' '}Ordinary edits can produce these differences. This check carries no weight in the AI assessment.
+    </p>}
+    {axis && <p className="mt-2 mb-0 text-small text-text-muted">
+      The earlier copy was resized separately in width and height. The submitted width is {(100 * submitted.width / reference.width).toFixed(1)}%
+      {' '}and its height is {(100 * submitted.height / reference.height).toFixed(1)}% of the earlier copy.
+      {axis.basis === 'exact_distributed_texture' && ` ${axis.matched_pixels.toLocaleString('en-US')} RGB pixels matched, including ${axis.matched_tiles.length} detailed areas.`}
+      {' '}Each crop shows native pixels from its own file. Ordinary editing can produce differences. This comparison carries no weight in the AI assessment.
     </p>}
     {lossyWebp && <p className="mt-2 mb-0 text-small text-text-muted">
       {lossyWebp.matching_tiles.toLocaleString('en-US')} of {lossyWebp.textured_tiles.toLocaleString('en-US')} detailed areas
@@ -287,7 +295,8 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     {comparable && regions.length > 0 && <>
       {mask && <div className="mt-4 max-w-xl">
         <ComparisonPicture result={result} artifact={mask} label="Difference mask in submitted image coordinates" />
-        <p className="mt-2 mb-0 text-caption text-text-muted">{maskDescription} Black includes unselected and potentially unassessed pixels.</p>
+        <p className="mt-2 mb-0 text-caption text-text-muted">{maskDescription}{' '}
+          {axis ? 'Black includes pixels that matched and differences too small to retain.' : 'Black includes unselected and potentially unassessed pixels.'}</p>
       </div>}
       <ol className="mt-4 mb-0 list-none space-y-4 p-0">
         {regions.map((region, index) => <li key={index} className="rounded-md border border-border p-3">

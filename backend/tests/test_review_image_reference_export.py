@@ -92,6 +92,38 @@ def test_reports_measured_empty_and_unassessed_separately(tmp_path):
         assert result == {"reported_status": status, "source_hashes_verified": 2, "crops_verified": 0, "mask_pixels_counted": 0}
 
 
+@pytest.mark.parametrize("extension", ["png", "webp"])
+@pytest.mark.parametrize("edited", [False, True])
+def test_replays_width_and_height_resize_with_native_crops(tmp_path, extension, edited):
+    from app.evidence.image_reference import AXIS_RESIZE_SCHEMA
+
+    rng = np.random.default_rng(587)
+    pixels = rng.integers(40, 220, (576, 512, 3), dtype=np.uint8)
+    reference = tmp_path / "earlier.png"
+    submitted = tmp_path / f"submitted.{extension}"
+    Image.fromarray(pixels).save(reference)
+    if edited:
+        pixels[210:258, 180:241] = (130, 32, 170)
+    Image.fromarray(pixels).resize((576, 512), Image.Resampling.BICUBIC).save(submitted, lossless=True)
+    assert inspect(reference, submitted, allow_proportional_resize=True)["status"] != "comparable"
+    evidence = tmp_path / "evidence"
+    result = inspect(reference, submitted, evidence_dir=evidence, allow_proportional_resize=True, allow_axis_resize=True)
+    assert result["schema"] == AXIS_RESIZE_SCHEMA and result["affects_overall_confidence"] is False
+    proof = result["axis_resize"]
+    assert proof["submitted_over_reference_xy"] == [[576, 512], [512, 576]]
+    assert proof["basis"] == ("exact_distributed_texture" if edited else "exact_full_grid")
+    export = tmp_path / "export.json"
+    bundle = {"comparison": result, "pngs": {png.name: base64.b64encode(png.read_bytes()).decode("ascii")
+                                             for png in evidence.glob("*.png")}}
+    _write(export, bundle)
+    assertion = review(export, reference, submitted)
+    assert assertion["source_hashes_verified"] == 2 and (assertion["crops_verified"] > 0) is edited
+    proof["projected_rgb_sha256"] = "0" * 64
+    _write(export, bundle)
+    with pytest.raises(ValueError, match="measurements differ from the supplied sources"):
+        review(export, reference, submitted)
+
+
 @pytest.mark.parametrize("variant,status", [("resize", "comparable"), ("aspect", "unsupported_resize_geometry"),
                                               ("rotated", "same_framing_unresolved")])
 def test_resize_reviewer_recomputes_empty_comparison_status(tmp_path, variant, status):

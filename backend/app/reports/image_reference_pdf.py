@@ -72,6 +72,8 @@ def _summary(document, comparison, assets):
     if comparison["status"] != "comparable":
         status = RESIZE_UNASSESSED.get(comparison["status"],
                                       "Comparison unassessed. The inputs did not meet the alignment or delivery checks.")
+    elif comparison.get("axis_resize", {}).get("basis") == "exact_full_grid":
+        status = "All pixels match after separate width and height resizing."
     elif regions:
         count = len(regions)
         status = f"{count} difference {'region' if count == 1 else 'regions'} retained."
@@ -105,6 +107,15 @@ def _summary(document, comparison, assets):
         if changed:
             _text(page, MARGIN, 318, f"{len(proof['matched_tiles'])} matching detailed areas supported the framing.",
                   size=10, color=MUTED)
+    if proof := comparison.get("axis_resize"):
+        horizontal, vertical = proof["submitted_over_reference_xy"]
+        scales = f"Width {horizontal[0] / horizontal[1]:.1%} of earlier copy. Height {vertical[0] / vertical[1]:.1%}."
+        _text(page, MARGIN, 302, "Compared after separate width and height resizing.", size=10, font="hebo")
+        _text(page, MARGIN, 318, scales, size=10)
+        finding = ("Every submitted RGB pixel matches the resized earlier copy." if proof["basis"] == "exact_full_grid" else
+                   f"{proof['matched_pixels']:,} RGB pixels match, including {len(proof['matched_tiles'])} detailed areas.")
+        _text(page, MARGIN, 334, finding, size=10, color=MUTED)
+        _text(page, MARGIN, 350, "Crops use their original source pixels. Zero weight in AI assessment.", size=10, color=MUTED)
     if proof := comparison.get("lossy_webp"):
         note = ("Matching framing across the earlier JPEG and submitted WebP."
                 if schema == reference_lossy_webp.EARLIER_JPEG_SCHEMA else "The comparison allows for lossy WebP compression.")

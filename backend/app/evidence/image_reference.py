@@ -45,6 +45,7 @@ MAX_INPUT_BYTES = 60 * 1024 * 1024
 RESIZE_SCHEMA = "chipmunk.image-reference-comparison/3"
 CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/4"
 EXACT_PNG_CROP_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/5"
+AXIS_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/29"
 DIFFERENCE_MARK = (255, 173, 46, 144)
 INTERPRETATION = ("Regions show differences that survived the comparison settings. Ordinary processing can produce "
                   "differences. The earlier file's authenticity and the cause of changes require separate evidence.")
@@ -202,7 +203,7 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             allow_lossy_webp: bool = False, allow_lossy_webp_crop: bool = False,
             allow_lossy_webp_crop_resize: bool = False, allow_lossy_webp_color: bool = False,
             allow_lossy_webp_earlier_jpeg: bool = False, allow_perspective: bool = False,
-            allow_earlier_heif: bool = False, allow_native_jpeg: bool = False) -> dict:
+            allow_earlier_heif: bool = False, allow_native_jpeg: bool = False, allow_axis_resize: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     refuse_truncated_images()
     before, after = _bytes(reference_path), _bytes(submitted_path)
@@ -330,8 +331,17 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             native_difference, selection = reference_native_jpeg.compare(original, questioned, before, after)
             if native_difference is not None:
                 result, mask, schema, coverage = native_difference, selection, reference_native_jpeg.SCHEMA, None
+        if allow_axis_resize and result["status"] != "comparable" and opacity is None:
+            from app.detectors.image import reference_axis_resize
+
+            stretched, selection = reference_axis_resize.compare(original, questioned, before, after)
+            if stretched is not None:
+                result, mask, schema, coverage = stretched, selection, AXIS_RESIZE_SCHEMA, None
     aligned = "alignment" in result
-    interpretation = {reference_structure_jpeg.SCHEMA: reference_structure_jpeg.INTERPRETATION,
+    interpretation = {AXIS_RESIZE_SCHEMA: ("The earlier copy was resized separately in width and height for comparison. "
+                                          "Changes may reflect ordinary editing. The origin and authenticity of either file "
+                                          "require separate evidence."),
+                      reference_structure_jpeg.SCHEMA: reference_structure_jpeg.INTERPRETATION,
                       reference_same_jpeg.SCHEMA: reference_same_jpeg.INTERPRETATION,
                       reference_native_jpeg.SCHEMA: reference_native_jpeg.INTERPRETATION,
                       reference_perspective.SCHEMA: reference_perspective.INTERPRETATION,

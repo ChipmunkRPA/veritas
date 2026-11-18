@@ -1,0 +1,163 @@
+{
+  "additional_jobs_for_comparisons": 0,
+  "analysis_jobs_total": 4,
+  "browser": {
+    "page_errors": 0,
+    "replays": [
+      {
+        "basis": "exact_distributed_texture",
+        "fractions": [
+          [
+            837,
+            768
+          ],
+          [
+            410,
+            512
+          ]
+        ],
+        "matched_pixels": 341055,
+        "regions": 1,
+        "role": "png-edited",
+        "status": "comparable"
+      },
+      {
+        "basis": "exact_full_grid",
+        "fractions": [
+          [
+            699,
+            768
+          ],
+          [
+            563,
+            512
+          ]
+        ],
+        "matched_pixels": 393537,
+        "regions": 0,
+        "role": "png-clean",
+        "status": "comparable"
+      },
+      {
+        "basis": "exact_distributed_texture",
+        "fractions": [
+          [
+            614,
+            768
+          ],
+          [
+            563,
+            512
+          ]
+        ],
+        "matched_pixels": 343583,
+        "regions": 1,
+        "role": "webp-edited",
+        "status": "comparable"
+      },
+      {
+        "basis": "exact_full_grid",
+        "fractions": [
+          [
+            699,
+            768
+          ],
+          [
+            563,
+            512
+          ]
+        ],
+        "matched_pixels": 393537,
+        "regions": 0,
+        "role": "webp-clean",
+        "status": "comparable"
+      }
+    ]
+  },
+  "jobs_before_payment": 0,
+  "original_results_assessments_and_confidence_unchanged": true,
+  "purchase_price_usd_cent": 999,
+  "reports": {
+    "png-clean": {
+      "basis": "exact_full_grid",
+      "cold_status": "unsupported_resize_geometry",
+      "fractions": [
+        [
+          699,
+          768
+        ],
+        [
+          563,
+          512
+        ]
+      ],
+      "mask_pixels": 0,
+      "matched_pixels": 393537,
+      "pdf_original_crops_verified": 0,
+      "pdf_pages": 1,
+      "region_count": 0,
+      "source_hashes_verified": 2
+    },
+    "png-edited": {
+      "basis": "exact_distributed_texture",
+      "cold_status": "unsupported_resize_geometry",
+      "fractions": [
+        [
+          837,
+          768
+        ],
+        [
+          410,
+          512
+        ]
+      ],
+      "mask_pixels": 2113,
+      "matched_pixels": 341055,
+      "pdf_original_crops_verified": 2,
+      "pdf_pages": 2,
+      "region_count": 1,
+      "source_hashes_verified": 2
+    },
+    "webp-clean": {
+      "basis": "exact_full_grid",
+      "cold_status": "webp_framing_unassessed",
+      "fractions": [
+        [
+          699,
+          768
+        ],
+        [
+          563,
+          512
+        ]
+      ],
+      "mask_pixels": 0,
+      "matched_pixels": 393537,
+      "pdf_original_crops_verified": 0,
+      "pdf_pages": 1,
+      "region_count": 0,
+      "source_hashes_verified": 2
+    },
+    "webp-edited": {
+      "basis": "exact_distributed_texture",
+      "cold_status": "webp_framing_unassessed",
+      "fractions": [
+        [
+          614,
+          768
+        ],
+        [
+          563,
+          512
+        ]
+      ],
+      "mask_pixels": 2099,
+      "matched_pixels": 343583,
+      "pdf_original_crops_verified": 2,
+      "pdf_pages": 2,
+      "region_count": 1,
+      "source_hashes_verified": 2
+    }
+  },
+  "simulated_purchases": 4
+}

@@ -246,6 +246,7 @@ class Settings(BaseSettings):
     image_native_core_review: bool = False  # Check compact cell groups when the earlier native scans have no region.
     image_sharp_boundary_enabled: bool = False
     image_reference_comparison_enabled: bool = False  # Development-only comparison of an uploaded earlier copy.
+    image_reference_axis_resize: bool = False  # Compare earlier lossless photos stretched by different amounts across axes.
     image_reference_jpeg_png_envelope: bool = False  # Optional earlier standard JPEG to cropped PNG color differences.
     image_reference_perspective_review: bool = False  # Optional comparison of JPEGs after perspective alignment.
     image_reference_heif_review: bool = False  # Compare an earlier HEIC photo with a JPEG export.

@@ -53,6 +53,7 @@ interface LossyWebpProjection {
 export interface ImageReferenceRecord {
   schema: string
   status: string
+  coordinate_space?: 'exif-oriented-original' | 'exif-oriented-submitted'
   reference: ImageSource
   submitted: ImageSource
   regions: DifferenceRegion[]
@@ -83,6 +84,15 @@ export interface ImageReferenceRecord {
     matched_pixels: number
     matched_tiles: [number, number][]
     rgb_sha256: string
+  }
+  axis_resize?: {
+    basis: 'exact_full_grid' | 'exact_distributed_texture'
+    submitted_over_reference_xy: [[number, number], [number, number]]
+    matched_pixels: number
+    matched_tiles: [number, number][]
+    supported_resize_kernels: string[]
+    projected_rgb_sha256: string
+    difference_mask_sha256: string
   }
   exact_orientation?: {
     transform: keyof typeof orientationLabels
@@ -168,6 +178,7 @@ export const perspectiveSchema = 'chipmunk.image-reference-comparison/25'
 export const earlierHeifSchema = 'chipmunk.image-reference-comparison/26'
 export const scaledScreenshotSchema = 'chipmunk.image-reference-comparison/27'
 export const nativeJpegDifferenceSchema = 'chipmunk.image-reference-comparison/28'
+export const axisResizeSchema = 'chipmunk.image-reference-comparison/29'
 const lossyWebpSchemas = [lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema]
 export const imageFramingSchema = (record: ImageReferenceRecord) =>
   record.schema === webpColorSchema ? record.comparison_schema : record.schema
@@ -218,6 +229,35 @@ function validArea(area?: NativeImageArea): area is NativeImageArea {
 
 function validAreaWithin(area: NativeImageArea, width: number, height: number): boolean {
   return validArea(area) && area.x + area.w <= width && area.y + area.h <= height
+}
+
+function validAxisResize(comparison: ImageReferenceRecord): boolean {
+  const proof = comparison.axis_resize
+  const { reference, submitted, regions, mask } = comparison
+  const dimensions = [[submitted.width, reference.width], [submitted.height, reference.height]]
+  if (!proof || comparison.status !== 'comparable' || comparison.affects_overall_confidence !== false
+    || comparison.coordinate_space !== 'exif-oriented-submitted'
+    || !dimensions.flat().every(value => Number.isSafeInteger(value) && value >= 160)
+    || Math.max(reference.width, reference.height) > 768 || Math.max(submitted.width, submitted.height) > 845
+    || !Array.isArray(proof.submitted_over_reference_xy) || proof.submitted_over_reference_xy.length !== 2
+    || !dimensions.every(([out, source], index) => {
+      const pair = proof.submitted_over_reference_xy[index]
+      return Array.isArray(pair) && pair.length === 2 && pair[0] === out && pair[1] === source
+    })
+    || !Array.isArray(proof.supported_resize_kernels) || proof.supported_resize_kernels.length === 0
+    || !proof.supported_resize_kernels.every(kernel => ['bicubic', 'bilinear', 'lanczos', 'opencv_area'].includes(kernel))
+    || ![proof.projected_rgb_sha256, proof.difference_mask_sha256].every(digest => /^[a-f0-9]{64}$/.test(digest))
+    || !Array.isArray(proof.matched_tiles) || !Number.isSafeInteger(proof.matched_pixels)) return false
+  const total = submitted.width * submitted.height
+  if (proof.basis === 'exact_full_grid') {
+    return proof.matched_pixels === total && proof.matched_tiles.length === 0 && regions.length === 0 && !mask
+  }
+  return proof.basis === 'exact_distributed_texture' && proof.matched_pixels >= .65 * total && proof.matched_pixels < total
+    && proof.matched_tiles.length >= 12 && proof.matched_tiles.length <= 25
+    && proof.matched_tiles.every(tile => Array.isArray(tile) && tile.length === 2
+      && tile.every(value => Number.isSafeInteger(value) && value >= 0 && value < 5))
+    && Boolean(mask) === (regions.length > 0) && regions.every(region => validAreaWithin(region, submitted.width, submitted.height)
+      && region.reference_region && validAreaWithin(region.reference_region, reference.width, reference.height))
 }
 
 function validSameJpegProof(comparison: ImageReferenceRecord): boolean {
@@ -309,6 +349,9 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
   }
   const proof = comparison.exact_projection
   const framing = imageFramingSchema(comparison)
+  if (comparison.schema === axisResizeSchema && !validAxisResize(comparison)) {
+    throw new Error('The server returned an incomplete width and height resize comparison.')
+  }
   if (comparison.schema === exactWebpSchema && comparison.status === 'comparable') {
     const webp = comparison.exact_webp
     const { width, height } = comparison.submitted

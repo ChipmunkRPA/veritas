@@ -75,6 +75,14 @@ exports, replays the signed packages against the original audio, and
 opens both the positive and unsupported cases in a browser.
 [App verification receipt](evaluation-panels/audio-stereo-opus-repeat-app-2026-11-18.json)
 
+A separate local replay passed the 52 repeat and stereo regression tests
+and all four simulated checkout cases. Chromium played both original stereo
+and background-reduced evidence clips. Their waveforms, PDF, JSON and signed
+source package agreed on source sample ranges [18,720, 27,360) and
+[105,516, 114,156) on the 48 kHz clock. The two settings returned the same
+overall assessment for the same original. The ordinary file returned no
+repeat and the variable-rate file showed the unavailable coverage message.
+
 The standard-library reviewer reconstructs counts and exact sample
 coordinates from the published numbers. It needs no source audio.
 

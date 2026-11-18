@@ -66,6 +66,40 @@ afterEach(() => {
 })
 
 describe('earlier-copy comparison', () => {
+  it.each([false, true])('shows the evidence for independent axis resizing (edited %s)', async edited => {
+    const result = structuredClone(comparison)
+    const record = result.comparison
+    record.schema = 'chipmunk.image-reference-comparison/29'
+    record.coordinate_space = 'exif-oriented-submitted'
+    record.reference = { ...record.reference, width: 512, height: 576 }
+    record.submitted = { ...record.submitted, width: 576, height: 512 }
+    record.affects_overall_confidence = false
+    record.axis_resize = { basis: edited ? 'exact_distributed_texture' : 'exact_full_grid',
+      submitted_over_reference_xy: [[576, 512], [512, 576]], matched_pixels: edited ? 287000 : 576 * 512,
+      matched_tiles: edited ? Array.from({ length: 12 }, (_, index) => [Math.floor(index / 4), index % 4]) : [],
+      supported_resize_kernels: ['bicubic'], projected_rgb_sha256: hash, difference_mask_sha256: 'd'.repeat(64) }
+    delete record.alignment
+    if (edited) record.mask = artifact('difference-mask.png', 576, 512)
+    else {
+      delete record.mask
+      record.regions = []
+      result.pngs = {}
+    }
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText(/submitted width is 112.5% and its height is 88.9%/)).toBeTruthy()
+    if (edited) {
+      expect(screen.getByText(/287,000 RGB pixels matched/)).toBeTruthy()
+      expect(screen.getByAltText('Earlier copy crop for region 1')).toBeTruthy()
+      expect(screen.getByAltText('Submitted image crop for region 1')).toBeTruthy()
+    } else {
+      expect(screen.getByText('All pixels match after resizing')).toBeTruthy()
+      expect(screen.queryByAltText('Difference mask in submitted image coordinates')).toBeNull()
+    }
+  })
+
   it('shows exact WebP pixel differences with the source crop and mask', async () => {
     const result = structuredClone(comparison)
     const record = result.comparison

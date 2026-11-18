@@ -66,6 +66,30 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Paired edit-location review](independent-testing.md#compare-exact-edit-coverage-from-two-detectors)
+  compares the same held files under two checks and their combined proposals.
+  In the mono soundtrack panel the combination kept 48 of 120 edit locations,
+  eight more than the stronger individual check. In the portrait panel it
+  restored four ordinary flags without adding a correct location, validating
+  the role of the shot check. The published receipts can be recounted without
+  model weights or private source files.
+
+- [Short HEVC portrait face changes](video-face-portrait-hevc-2026-11-18.md)
+  extend the optional local review to the tested 360 × 640 clips. HEVC found
+  19 of 36 staged edits and flagged zero of 90 ordinary controls. The app
+  shows exact original frames when the submitted file cannot be played in
+  the browser.
+
+- [Earlier-copy evidence for Apple AAC](audio-gapless-aac-2026-11-18.md)
+  verifies packet timing and playback timestamps on qualifying mono clips.
+  The higher-quality encoder setting preserved all 40 lossless locations
+  under background sound, with no flags on 117 unchanged clips.
+
+- [BEA and Census wording comparison](writing-economic-release-wording-2026-11-18.md)
+  locates all 33 staged rewrite sentences when a supported excerpt identifies
+  its verified publisher release. It also reports ordinary human wording
+  changes and contributes zero weight to AI confidence.
+
 - [Sound levels during a video speech decline](video-speech-activity-gaps-2026-11-17.md#sound-levels-in-the-submitted-channels)
   show original left, right and channel-difference sound before, during and
   after the same flagged range. [Mono transfer](video-mono-speech-activity-2026-11-17.md)

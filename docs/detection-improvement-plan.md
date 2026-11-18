@@ -83,6 +83,11 @@ are not public screening promises or calibrated population probabilities.
   controls. The app pinpointed one edit at 0.667–1.067 seconds when the
   previous range only partly covered it.
 
+- [Saved HTML source positions](writing-saved-html-scope-2026-11-18.md)
+  mapped 17 of 17 held target paragraphs to the uploaded HTML. All 17
+  writing inputs matched the earlier reader. The paid local replay
+  verified 11 exact source ranges across app and report outputs.
+
 - [Word and other document formats](document-formats-2026-11-17.md) includes
   saved text in filled Word forms and preserves the original body paths and
   character ranges for findings. The older extraction remains available for

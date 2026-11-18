@@ -45,6 +45,18 @@ CHECKPOINT_AGREEMENT_HTML_SCHEMAS = frozenset({
     CHECKPOINT_AGREEMENT_HTML_SCHEMA, CHECKPOINT_AGREEMENT_HTML_SHORT_LAYOUT_SCHEMA,
 })
 EMAIL_HTML_COORDINATES = "decoded-html-codepoint"
+HTML_ARTICLE_KEY = "html_article_scope"
+HTML_ARTICLE_POLICY = "static-html-article/1"
+HTML_ARTICLE_MAX_SOURCE = 512 * 1024
+
+
+def valid_html_article_scope(record):
+    if (not isinstance(record, dict) or set(record) != {"policy", "element", "scope"}
+            or record["policy"] != HTML_ARTICLE_POLICY or record["element"] not in {"article", "main"}):
+        return False
+    positions = record["scope"]
+    return (isinstance(positions, list) and len(positions) == 2 and all(type(value) is int for value in positions)
+            and 0 <= positions[0] <= positions[1] <= HTML_ARTICLE_MAX_SOURCE)
 CHECKPOINT_AGREEMENT_EMAIL_PARAGRAPHS = {
     CHECKPOINT_AGREEMENT_EMAIL_SCHEMA: frozenset({1, 4}),
     CHECKPOINT_AGREEMENT_EMAIL_LAYOUT_SCHEMA: frozenset({2, 3, 5, 6}),

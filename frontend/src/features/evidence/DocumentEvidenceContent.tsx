@@ -32,6 +32,7 @@ const originalLocationLabels: Record<DocumentOriginalTextLocation['coordinate'],
   word_paragraph: 'Original Word paragraph characters',
   decoded_email: 'Decoded email part characters',
   decoded_email_html: 'Decoded email HTML source characters',
+  decoded_html: 'Original HTML source characters',
 }
 
 const invisibleCharacterNames: Record<string, string> = {

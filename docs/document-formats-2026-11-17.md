@@ -13,7 +13,8 @@ limit is 25 MB in the standard configuration.
 | RTF | Extracted writing from standard Rich Text files | Paragraph and character position in the extracted text |
 | EML | The selected plain-text or HTML message body | Decoded text and supported HTML source positions |
 | TXT | Decoded Unicode text | Decoded character offsets |
-| Markdown and HTML | Text extracted from the markup | Paragraph and character position in the extracted text |
+| Markdown | Text extracted from the markup | Paragraph and character position in the extracted text |
+| HTML | Text extracted from the saved markup | Original HTML character ranges for uniquely mapped article passages, otherwise extracted-text positions |
 
 For email, attachments can be submitted separately. Word and ODT use body
 text for writing checks. Document packages are read locally without opening
@@ -34,6 +35,10 @@ the text extracted from RTF, Markdown, HTML and HTML email bodies before
 starting payment. Scanned documents can be uploaded as PDF for local OCR.
 Rich Text files with binary data should be saved as DOCX or PDF.
 The local batch tool also accepts native DOCX and ODT packages.
+
+[Saved HTML evidence](writing-saved-html-scope-2026-11-18.md) preserves original
+character ranges for uniquely mapped article passages without changing the text
+sent to the writing checks.
 
 The local development app can check ODT for earlier published wording when
 automatic review and the GovReport archive are enabled. When a dated U.S. GAO

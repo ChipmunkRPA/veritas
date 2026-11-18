@@ -538,6 +538,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"]["partially_checked_pages"] = partially_checked
     if word_controls := decoded["meta"].get(WORD_CONTENT_CONTROLS_KEY):
         document["coverage"][WORD_CONTENT_CONTROLS_KEY] = word_controls
+    if article := decoded["meta"].get(document_scope.HTML_ARTICLE_KEY):
+        document["coverage"][document_scope.HTML_ARTICLE_KEY] = article
     if writing_checks := document_check_coverage.from_result(result):
         document["coverage"][document_check_coverage.KEY] = writing_checks
         document["source"][document_check_coverage.COMMITMENT] = document_check_coverage.commitment(writing_checks)

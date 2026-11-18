@@ -20,7 +20,7 @@ from typing import Any
 
 from app.core.canonical import canonical_hash
 from app.core.config import settings
-from app.detectors.text import language_scope
+from app.detectors.text import html_article, language_scope
 from app.detectors.text.adapters.stylometry import LEXICON_TITLE, SPANS_TITLE
 from app.detectors.text.extract import (
     EXTRACTION_VERSION,
@@ -118,6 +118,8 @@ def current_decode_output(output: Any) -> bool:
     if not isinstance(output, dict) or output.get("meta", {}).get("extraction_version") != EXTRACTION_VERSION:
         return False
     if output.get(BIBLIOGRAPHY_POLICY, False) is not (settings.environment == "dev" and settings.text_bibliography_scope_review):
+        return False
+    if output["meta"].get("method") == "html" and output["meta"].get(html_article.READER) != html_article.POLICY:
         return False
     if (output["meta"].get("method") == "python-docx" and
             (output["meta"].get(WORD_CONTENT_CONTROLS_KEY) != WORD_CONTENT_CONTROLS

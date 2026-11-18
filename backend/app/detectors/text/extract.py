@@ -15,13 +15,15 @@ import shutil
 import subprocess
 import tempfile
 import time
+from collections import Counter
 from dataclasses import dataclass, field
 from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 
+from app.detectors.text import html_article
 from app.evidence import document_pdf_visibility
-from app.evidence.document_scope import EMAIL_HTML_COORDINATES
+from app.evidence.document_scope import EMAIL_HTML_COORDINATES, valid_html_article_scope
 
 
 @dataclass
@@ -140,7 +142,7 @@ def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False) ->
             continue
         entry = {k: v for k, v in source.items() if k not in {"glyphs", "ocr_words", "html_origins"}}
         entry.update(start=pos, end=pos + len(text), offset_unit="unicode_codepoint")
-        if source.get("kind") in {"text", "email", "docx"}:
+        if source.get("kind") in {"text", "email", "docx"} or source.get("html_origins") is not None:
             # Consecutive 1:1 stretches are compacted; collapsed whitespace keeps
             # its entire source range. These are decoded codepoints, not bytes.
             entry["source_ranges"] = _source_ranges(raw, text, origins, pos, base=source.get("source_start", 0),
@@ -927,7 +929,34 @@ def rtf_text(data: bytes) -> str:
         raise ValueError("The RTF text could not be decoded. Save it as DOCX or PDF.") from error
 
 
-def extract_text_like(path: Path, ext: str) -> Document:
+def _attach_html_source_ranges(doc: Document, raw: str) -> None:
+    candidate = html_article.parts(raw)
+    if candidate is None or not valid_html_article_scope(candidate[1]):
+        return
+    parts, scope = candidate
+    mapped = _join_mapped(parts)
+    texts = [doc.text[block["start"]:block["end"]] for block in doc.source_map]
+    body = [mapped.text[block["start"]:block["end"]] for block in mapped.source_map]
+    full_counts, body_counts = Counter(texts), Counter(body)
+    indexed = {value: block for value, block in zip(body, mapped.source_map, strict=True) if body_counts[value] == 1}
+    attached = False
+    for value, block in zip(texts, doc.source_map, strict=True):
+        match = indexed.get(value)
+        if match is None or full_counts[value] != 1:
+            continue
+        source_text = "".join(unescape(raw[a:b]) for _, _, a, b in match["source_ranges"])
+        if _normalise(source_text)[0] != value:
+            continue
+        shift = block["start"] - match["start"]
+        block["source_ranges"] = [[a + shift, b + shift, lo, hi] for a, b, lo, hi in match["source_ranges"]]
+        attached = True
+    if attached:
+        doc.meta.update({html_article.KEY: scope, "decoded_source_sha256": text_hash(raw), "coverage_warning": (
+            "Original HTML source positions are available for uniquely matched article passages. Other positions refer to the "
+            "extracted text, which can include page navigation and hidden markup text. Scripts and linked content were not loaded.")})
+
+
+def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True) -> Document:
     data = path.read_bytes()
     if ext == ".rtf":
         # RTF \par becomes a newline. Keep those breaks as passage boundaries.
@@ -942,12 +971,16 @@ def extract_text_like(path: Path, ext: str) -> Document:
         encoding = "utf-8-sig"
     else:
         encoding = "utf-8"
-    raw, method = text_like_content(data.decode(encoding, errors="replace"), ext)
+    decoded = data.decode(encoding, errors="replace")
+    raw, method = text_like_content(decoded, ext)
     d = _join_mapped(_text_parts(raw, kind="text" if method == "plain" else "markup"))
     d.meta = {"method": method, "encoding": encoding,
               "decoded_source_sha256": text_hash(raw) if method == "plain" else None}
     if method != "plain":
         d.meta["coverage_warning"] = "Markup was converted to text. Excerpts map to the extracted text, not exact HTML or Markdown source positions."
+    if method == "html" and include_html_article:
+        d.meta[html_article.READER] = html_article.POLICY
+        _attach_html_source_ranges(d, decoded)
     return d
 
 
@@ -1028,7 +1061,7 @@ def extract_eml(path: Path) -> Document:
 
 def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True,
             project_word_revisions: bool = True, project_word_breaks: bool = True,
-            include_word_content_controls: bool = True) -> Document:
+            include_word_content_controls: bool = True, include_html_article: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
@@ -1046,7 +1079,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
     elif ext == ".eml":
         d = extract_eml(path)
     else:
-        d = extract_text_like(path, ext)
+        d = extract_text_like(path, ext, include_html_article=include_html_article)
     d.meta.update({"chars": len(d.text), "words": len(d.text.split()), "paragraphs": len(d.paragraphs)})
     return _seal(d, original_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
 

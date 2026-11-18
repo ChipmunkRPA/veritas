@@ -441,7 +441,7 @@ export interface DocumentAnchor {
 }
 export interface DocumentOriginalTextLocation {
   anchor_index: number
-  coordinate: 'decoded_text' | 'word_paragraph' | 'decoded_email' | 'decoded_email_html'
+  coordinate: 'decoded_text' | 'word_paragraph' | 'decoded_email' | 'decoded_email_html' | 'decoded_html'
   ranges: [number, number][]
 }
 export interface DocumentEvidencePacket extends PacketBase {

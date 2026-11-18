@@ -528,7 +528,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.document_tracked_changes', 'app.evidence.document_pdf_visibility', 'app.evidence.document_word_visibility',
                         'app.evidence.document_bibliography',
                         'app.evidence.document_percentage_consistency', 'app.evidence.document_calendar',
-                        'app.evidence.document_arithmetic',
+                        'app.evidence.document_arithmetic', 'app.evidence.document_length',
                         'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.av_lag_support',
                         'app.evidence.audio_background_binding', 'app.evidence.audio_bandwidth_binding', 'app.evidence.audio_silence_binding',
                         'app.evidence.audio_tonal_phase_binding',
@@ -677,7 +677,7 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
                          ('app.evidence.document_repeat', 'block_anchor'),
                          ('app.evidence.document_repeat', 'validate_block_anchor')} | (
                              {('app.evidence.document_percentage_consistency', 'validate_value_location')}
-                             if name == 'document_arithmetic.py' else set())
+                             | {('app.evidence', 'document_length')} if name == 'document_arithmetic.py' else set())
     else:
         assert imports <= sys.stdlib_module_names
 

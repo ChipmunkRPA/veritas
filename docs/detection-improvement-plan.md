@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Masked reconstruction of small JPEG regions](image-masked-reconstruction-2026-11-17.md)
+  compares two fixed readings and two paired readouts on 756 held
+  deliveries. All four miss the correct area on 216 staged removals before
+  thresholding. The candidate stays in evaluation. The restore command
+  lets reviewers fetch the exact published source photos and masks
+  without the development archive.
+
 - [Small JPEG removals with four-scale localization](image-jpeg-pscc-localization-2026-11-17.md)
   add four useful locations from one photo and 48 ordinary alerts across
   1,092 held deliveries. The localizer stays in evaluation. The app's

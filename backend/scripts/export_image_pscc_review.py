@@ -11,7 +11,7 @@ from shutil import copyfile
 from app.bench import image_pscc_localization as detector
 from app.bench import independent
 from app.bench.independent_inputs import INDEX_SCHEMA, verify_inputs
-from app.bench.independent_locations import TRUTH_SCHEMA, count_locations
+from app.bench.independent_locations import TRUTH_SCHEMA, _mask, count_locations
 from scripts.audio_native_alignment_panel import digest, read, save
 from scripts.export_image_region_rank_review import pack_truth
 from scripts.image_cross_quality_fit import load_mask
@@ -28,8 +28,38 @@ def _copy_verified(source, signature, destination):
     return destination
 
 
-def export(banks, intake, frozen, outcome, output):
-    review(outcome, frozen)
+def unchanged_regions(rows, arm, masks):
+    """Measure agreement with the top region in the unchanged copy of each edit."""
+    original = {(row["source_group"], row["quality"]): row["checks"][arm]["mask"]
+                for row in rows if row["role"] == "ordinary"}
+    compared, overlap = 0, 0
+    for row in rows:
+        if row["role"] not in POSITIVE:
+            continue
+        before = original[row["source_group"], row["quality"]]
+        after = row["checks"][arm]["mask"]
+        if before and after:
+            extent = row["shape"][::-1]
+            earlier, edited = (_mask(pin, extent, masks) for pin in (before, after))
+            union = sum((x | y).bit_count() for x, y in zip(earlier, edited, strict=True))
+            intersection = sum((x & y).bit_count() for x, y in zip(earlier, edited, strict=True))
+            compared += 1
+            overlap += 2 * intersection >= union
+    return {"pairs_with_two_proposals": compared, "pairs_with_iou_at_least_half": overlap}
+
+
+def export(banks, intake, frozen, outcome, output, *, reconstruction=False):
+    if reconstruction:
+        from app.bench import image_masked_reconstruction
+        from scripts import image_masked_reconstruction_panel
+
+        image_masked_reconstruction_panel.review(outcome, frozen)
+        arms = image_masked_reconstruction.ARMS
+        publisher = f"https://huggingface.co/{image_masked_reconstruction.MODEL}/tree/{image_masked_reconstruction.REVISION}"
+        model_name = "Masked reconstruction"
+    else:
+        review(outcome, frozen)
+        arms, publisher, model_name = detector.ARMS, detector.PUBLISHER, "PSCC-Net"
     result = read(outcome)
     if [digest(bank / "manifest.json") for bank in banks] != [source["manifest_sha256"] for source in result["inputs"]]:
         raise ValueError("The exported inputs must be the same banks scored in the held comparison")
@@ -41,8 +71,8 @@ def export(banks, intake, frozen, outcome, output):
     for folder in (masks, files):
         folder.mkdir(mode=0o700)
     cases, index, truths = [], [], []
-    records = {arm: [] for arm in detector.ARMS}
-    expected = {arm: {} for arm in detector.ARMS}
+    records = {arm: [] for arm in arms}
+    expected = {arm: {} for arm in arms}
     for bank in banks:
         for directory, item, group in _inputs(bank):
             name, sha = item["file"], item["sha256"]
@@ -97,10 +127,14 @@ def export(banks, intake, frozen, outcome, output):
         save(output / f"{filename}.json", content)
 
     receipt = {"processed_inputs": inputs, "groups": audited["groups"], "held_result_sha256": digest(outcome),
-               "publisher": detector.PUBLISHER, "readouts": {}}
-    weights = [commitment for name, commitment in result["method"]["source_files"].items() if name.endswith(".pth")]
+               "publisher": publisher, "readouts": {}}
+    publisher_weights = [commitment for name, commitment in result["method"]["source_files"].items()
+                         if name.endswith((".pth", ".safetensors"))]
     for arm, predictions in records.items():
-        response = binding | {"system": f"PSCC-Net {arm}", "method_kind": "weighted",
+        weights = [] if arm == "texture_only" else publisher_weights.copy()
+        if arm in result.get("heads", {}):
+            weights.append(independent.digest(result["heads"][arm]))
+        response = binding | {"system": f"{model_name} {arm}", "method_kind": "weighted",
                               "implementation_sha256": result["method"]["inference_sha256"],
                               "weight_sha256": weights, "response_units": "Uncalibrated region response",
                               "score_kind": "raw", "predictions": predictions}
@@ -114,6 +148,8 @@ def export(banks, intake, frozen, outcome, output):
         receipt["readouts"][arm] = {"checked_cases": len(predictions),
                                    "nonempty_masks": sum(count > 0 for count, _ in expected[arm].values()),
                                    "recount_sha256": independent.digest(areas)}
+        if reconstruction:
+            receipt["readouts"][arm]["unchanged_pair_agreement"] = unchanged_regions(result["rows"], arm, masks)
     save(output / "summary.json", receipt)
     print(json.dumps(receipt, sort_keys=True))
 
@@ -123,4 +159,5 @@ if __name__ == "__main__":
     for field in ("intake", "frozen", "outcome", "output"):
         parser.add_argument(field, type=Path)
     parser.add_argument("--bank", action="append", required=True, type=Path, dest="banks")
+    parser.add_argument("--reconstruction", action="store_true")
     export(**vars(parser.parse_args()))

@@ -1,0 +1,149 @@
+{
+  "fresh": {
+    "groups": 12,
+    "held_result_sha256": "0b2a9cd34e6012ecf116e15ea34be14f6bc8980eb1ea349f96fb8bf83a86170d",
+    "processed_inputs": {
+      "manifest_sha256": "17d6e6aeab6ccaec8ed48da5026aee188e86bab0dee05bb39800d8ff982ea4af",
+      "schema": "chipmunk.independent-input-verification/1",
+      "verified_cases": 336,
+      "verified_file_bindings": 672
+    },
+    "publisher": "https://huggingface.co/microsoft/swin-base-simmim-window6-192/tree/6c7c8dea55b6bc1fb8e20c21dae660cc2a45cada",
+    "readouts": {
+      "deficit": {
+        "checked_cases": 336,
+        "nonempty_masks": 336,
+        "recount_sha256": "995a58ae89944fcb887a252192b683d3c17d7dae3d43ef8a1ea6a4603d154025",
+        "unchanged_pair_agreement": {
+          "pairs_with_iou_at_least_half": 69,
+          "pairs_with_two_proposals": 96
+        }
+      },
+      "excess": {
+        "checked_cases": 336,
+        "nonempty_masks": 336,
+        "recount_sha256": "98df07ea6022ad88e44cfba79be4a24d49590518380883163a4af0532f3a5e10",
+        "unchanged_pair_agreement": {
+          "pairs_with_iou_at_least_half": 69,
+          "pairs_with_two_proposals": 96
+        }
+      },
+      "paired_context": {
+        "checked_cases": 336,
+        "nonempty_masks": 336,
+        "recount_sha256": "8f0da4e041760a9e37f9aee8867b8654b17eedc973b43c61cb7e09acf89cb07a",
+        "unchanged_pair_agreement": {
+          "pairs_with_iou_at_least_half": 89,
+          "pairs_with_two_proposals": 96
+        }
+      },
+      "texture_only": {
+        "checked_cases": 336,
+        "nonempty_masks": 336,
+        "recount_sha256": "435260c8c5f0c7104d61c141ad07d9a2125c806a9bdf381848a51889d99f343f",
+        "unchanged_pair_agreement": {
+          "pairs_with_iou_at_least_half": 90,
+          "pairs_with_two_proposals": 96
+        }
+      }
+    }
+  },
+  "earlier_text": {
+    "groups": 14,
+    "held_result_sha256": "863235cae54cda934c7e94c7d4ccc59f9e0feab8ada4ee8823a0ab674fd99c37",
+    "processed_inputs": {
+      "manifest_sha256": "dc688c62ab90d2fb216cb545323608d913ed914e754d1eb91de7edffe22cfaef",
+      "schema": "chipmunk.independent-input-verification/1",
+      "verified_cases": 196,
+      "verified_file_bindings": 392
+    },
+    "publisher": "https://huggingface.co/microsoft/swin-base-simmim-window6-192/tree/6c7c8dea55b6bc1fb8e20c21dae660cc2a45cada",
+    "readouts": {
+      "deficit": {
+        "checked_cases": 196,
+        "nonempty_masks": 196,
+        "recount_sha256": "6e34424f99d542285dbdbaa62f1f51c836426c54b0d52c22e5ef4aab93e84ab5",
+        "unchanged_pair_agreement": {
+          "pairs_with_iou_at_least_half": 44,
+          "pairs_with_two_proposals": 56
+        }
+      },
+      "excess": {
+        "checked_cases": 196,
+        "nonempty_masks": 196,
+        "recount_sha256": "ef86902d70f4c7d4415e4340cfc4eb0a88f22ec4f6613132f140651442934207",
+        "unchanged_pair_agreement": {
+          "pairs_with_iou_at_least_half": 40,
+          "pairs_with_two_proposals": 56
+        }
+      },
+      "paired_context": {
+        "checked_cases": 196,
+        "nonempty_masks": 196,
+        "recount_sha256": "9a3ce5e8ecbb3b58c5f85f9de4a505b0f2379fa98e15035c2f0b2246790271ea",
+        "unchanged_pair_agreement": {
+          "pairs_with_iou_at_least_half": 52,
+          "pairs_with_two_proposals": 56
+        }
+      },
+      "texture_only": {
+        "checked_cases": 196,
+        "nonempty_masks": 196,
+        "recount_sha256": "cfec24cdc515e721ed70720204ac06aa1711ab06b90b461bed2e3319dcabcffb",
+        "unchanged_pair_agreement": {
+          "pairs_with_iou_at_least_half": 56,
+          "pairs_with_two_proposals": 56
+        }
+      }
+    }
+  },
+  "fresh_text": {
+    "groups": 16,
+    "held_result_sha256": "8aa90efd4feefbf742376a74480dcf6dddceb5af62dc6b34a09f0dafe7c1e828",
+    "processed_inputs": {
+      "manifest_sha256": "4075e4a2061c1e2b081d7791d546eb44115efd667382d9a5c4f528396b6c3e94",
+      "schema": "chipmunk.independent-input-verification/1",
+      "verified_cases": 224,
+      "verified_file_bindings": 448
+    },
+    "publisher": "https://huggingface.co/microsoft/swin-base-simmim-window6-192/tree/6c7c8dea55b6bc1fb8e20c21dae660cc2a45cada",
+    "readouts": {
+      "deficit": {
+        "checked_cases": 224,
+        "nonempty_masks": 224,
+        "recount_sha256": "c5014bb90d2afb5d28180e61395eeba9be249a1f6ad4b633101975418d9cf325",
+        "unchanged_pair_agreement": {
+          "pairs_with_iou_at_least_half": 60,
+          "pairs_with_two_proposals": 64
+        }
+      },
+      "excess": {
+        "checked_cases": 224,
+        "nonempty_masks": 224,
+        "recount_sha256": "e7a5b3c1535037ad81863778beec8bfcbb67258e1cdcb886bdc7d0248d090d24",
+        "unchanged_pair_agreement": {
+          "pairs_with_iou_at_least_half": 54,
+          "pairs_with_two_proposals": 64
+        }
+      },
+      "paired_context": {
+        "checked_cases": 224,
+        "nonempty_masks": 224,
+        "recount_sha256": "8c573df2803308ccf25696a59a36f8f86d8677883e2ae7599fe6f63bb6924508",
+        "unchanged_pair_agreement": {
+          "pairs_with_iou_at_least_half": 49,
+          "pairs_with_two_proposals": 64
+        }
+      },
+      "texture_only": {
+        "checked_cases": 224,
+        "nonempty_masks": 224,
+        "recount_sha256": "cd5add6223323b1ad8693bbb8e1d401bfdd5f0ee3eee8576dddd685227abaf83",
+        "unchanged_pair_agreement": {
+          "pairs_with_iou_at_least_half": 51,
+          "pairs_with_two_proposals": 64
+        }
+      }
+    }
+  }
+}

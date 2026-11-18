@@ -98,7 +98,7 @@ def render(group, pair, directory):
     return row
 
 
-def build(index, output):
+def build(index, output, *, start=0, previous_intake=None):
     import cv2
 
     if files.sha(index) != INDEX_SHA:
@@ -106,14 +106,24 @@ def build(index, output):
     cv2.setNumThreads(1)
     inventory = {row["path"]: row for row in files.read(index) if row["type"] == "file"}
     stems = [Path(path).stem for path in inventory if re.fullmatch(r"shot/[0-9]{5}\.png", path)]
-    roster = sorted(stems, key=lambda stem: hashlib.sha256(f"scene-text-edit-transfer/1/{stem}".encode()).digest())[:PLANNED]
+    ranked = sorted(stems, key=lambda stem: hashlib.sha256(f"scene-text-edit-transfer/1/{stem}".encode()).digest())
+    if not 0 <= start <= len(ranked) - PLANNED:
+        raise ValueError("The requested slice is outside the publisher roster")
+    roster = ranked[start:start + PLANNED]
+    prior = files.read(previous_intake) if previous_intake else None
+    if prior and (prior["revision"] != REVISION or set(roster) & {row["case"] for row in prior["dispositions"]}):
+        raise ValueError("The reserve overlaps the previous publisher inputs")
     output.mkdir(mode=0o700)
     intake, deliveries = output / "intake", output / "deliveries"
     intake.mkdir(mode=0o700)
     deliveries.mkdir(mode=0o700)
     plan = {stem: [inventory[f"{field}/{stem}.png"] for field in FIELDS] for stem in roster}
-    files.save(output / "plan.json", {"revision": REVISION, "index_sha256": INDEX_SHA, "cases": plan})
-    groups, rows, checked, cases, seen = [], [], [], [], set()
+    reservation = {"revision": REVISION, "index_sha256": INDEX_SHA, "cases": plan}
+    if start or previous_intake:
+        reservation.update(start=start, previous_intake_sha256=files.sha(previous_intake) if previous_intake else None)
+    files.save(output / "plan.json", reservation)
+    groups, rows, checked, cases = [], [], [], []
+    seen = {row["fingerprints"]["original"]["rgb_sha256"] for row in prior["cases"]} if prior else set()
     with ThreadPoolExecutor(max_workers=5) as pool:
         for stem in roster:
             assets = plan[stem]
@@ -200,6 +210,8 @@ if __name__ == "__main__":
     prepare = commands.add_parser("prepare")
     prepare.add_argument("index", type=Path)
     prepare.add_argument("output", type=Path)
+    prepare.add_argument("--start", type=int, default=0)
+    prepare.add_argument("--previous-intake", type=Path)
     compare = commands.add_parser("compare-pairs")
     compare.add_argument("deliveries", type=Path)
     compare.add_argument("output", type=Path)

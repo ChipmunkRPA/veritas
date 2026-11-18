@@ -13,6 +13,12 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [masked reconstruction replay](image-masked-reconstruction-2026-11-17.md#reproduce)
+includes a direct reconstruction of a completed public photo intake. It
+verifies the original photos and matched subject masks before recreating
+the local edits. The exact-location exporter recounts all four predictions
+on the same 756 held JPEGs for comparison with a separate detector.
+
 The [pretrained JPEG localizer replay](image-jpeg-pscc-localization-2026-11-17.md#reproduce)
 binds three readings to the same 1,092 held inputs and exact changed-pixel
 masks. The local exporter verifies the submitted and parent files so a

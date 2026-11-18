@@ -77,6 +77,11 @@ are not public screening promises or calibrated population probabilities.
   experimental. Exact before, during and after frames and crops replayed
   for every recorded finding. [Eye-region evaluation](video-eye-hold-2026-11-18.md)
 
+- The subsequent eye-texture method located 48 of 60 staged holds and
+  flagged 18 of 120 controls across two disjoint capture rosters. It
+  remains experimental after the confirmation produced 15 alerts among
+  60 ordinary controls. [Eye-texture evaluation](video-eye-texture-hold-2026-11-18.md)
+
 - Word files without a default paragraph style now finish analysis.
   Findings identify exact character ranges in OpenDocument paragraphs and
   Rich Text blocks. All eight formats and a separate scanned PDF completed the

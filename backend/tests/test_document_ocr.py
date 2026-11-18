@@ -124,7 +124,7 @@ def test_decode_freezes_rasters_and_resume_requires_them(tmp_path, monkeypatch):
     doc.source_rasters[digest] = base64.b64encode(raw).decode()
     doc.meta["ocr"] = {"pages": [{"raster": {"sha256": digest}}]}
     monkeypatch.setattr(stage.common, "media_path", lambda ctx: path)
-    monkeypatch.setattr(stage, "decode_document", lambda *args: (doc, segment(doc)))
+    monkeypatch.setattr(stage, "decode_document", lambda *args, **kwargs: (doc, segment(doc)))
     store = ObjectStore(tmp_path / "objects")
     output = stage.decode(SimpleNamespace(analysis_id="ocr-test", store=store))
     assert output["artefacts"][0]["sha256"] == digest and store.read_bytes(digest) == raw

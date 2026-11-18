@@ -9,6 +9,7 @@ from html import unescape
 
 import docx
 import pytest
+from docx.oxml.ns import qn
 from test_document_packets import packet_factory as packet_factory
 
 from app.core.canonical import canonical_hash, canonical_json
@@ -79,6 +80,9 @@ def _prepare(ext, path):
         path.write_bytes(("  " + FIRST + "\r\n\r\n" + MIDDLE + " " + LAST + "\r\n").encode("utf-16"))
     elif ext == ".docx":
         document = docx.Document()
+        # Minimal Word exports can define styles without a default paragraph style.
+        for style in document.styles:
+            style.element.attrib.pop(qn("w:default"), None)
         document.add_paragraph(FIRST)
         table = document.add_table(rows=1, cols=1)
         paragraph = table.cell(0, 0).paragraphs[0]
@@ -86,6 +90,20 @@ def _prepare(ext, path):
         paragraph.add_run(" middle sentence includes a source position.")
         document.add_paragraph(LAST)
         document.save(path)
+    elif ext == ".odt":
+        with zipfile.ZipFile(path, "w") as archive:
+            archive.writestr("mimetype", "application/vnd.oasis.opendocument.text")
+            archive.writestr("content.xml", f'''
+                <office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
+                                          xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0">
+                  <office:body><office:text><text:h>{FIRST}</text:h>
+                    <text:list><text:list-item><text:p>  {MIDDLE}</text:p></text:list-item></text:list>
+                    <text:p>{LAST}</text:p>
+                  </office:text></office:body>
+                </office:document-content>''')
+    elif ext == ".rtf":
+        first = FIRST.replace("😀", r"\u-10179?\u-8704?")
+        path.write_bytes((r"{\rtf1\ansi\uc1 " + first + r"\par " + MIDDLE + r"\par " + LAST + "}").encode("ascii"))
     else:
         message = EmailMessage(policy=policy.SMTP)
         message.set_content(
@@ -135,6 +153,8 @@ def _snapshot(evidence, analysis, result):
     [
         (".txt", "decoded_text", "Original decoded text characters"),
         (".docx", "word_paragraph", "Original Word paragraph characters"),
+        (".odt", "odt_paragraph", "Decoded OpenDocument paragraph characters"),
+        (".rtf", "rtf_paragraph", "Decoded Rich Text paragraph characters"),
         (".eml", "decoded_email_html", "Decoded email HTML source characters"),
     ],
 )
@@ -158,6 +178,10 @@ def test_original_text_locations_follow_native_source_in_exports_and_replay(
             text = [FIRST, "  " + MIDDLE, LAST][anchor["paragraph_index"]]
             if anchor["paragraph_index"] == 1:
                 assert "cell" in anchor["body_path"]
+        elif ext == ".odt":
+            text = [FIRST, "  " + MIDDLE, LAST][anchor["paragraph_index"]]
+        elif ext == ".rtf":
+            text = [FIRST, MIDDLE, LAST][anchor["paragraph_index"]]
         else:
             message = BytesParser(policy=policy.default).parsebytes(original.read_bytes())
             text = message.get_body(preferencelist=("html",)).get_content()
@@ -191,6 +215,25 @@ def test_original_text_locations_follow_native_source_in_exports_and_replay(
         assert "Verified decoded original text locations" in verify_document_source.check(
             archive, bundle, original
         )
+
+
+@pytest.mark.parametrize("ext", [".odt", ".rtf"])
+def test_original_document_replay_preserves_historical_unmapped_paragraphs(packet_factory, tmp_path, ext):
+    original = tmp_path / ("source" + ext)
+    _prepare(ext, original)
+    db, store, analysis, result, decoded, _ = packet_factory(ext, source_pdf=original, map_body_paragraphs=False)
+    evidence = build_packet_set(db, analysis, store, result)
+    assert locations.KEY not in evidence["coverage"]
+    assert locations.PARAGRAPH_MAP_KEY not in evidence["coverage"]
+    changed = extract(original, ext)
+    assert changed.text == decoded["text"] and changed.source_map != decoded["source_map"]
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"sha256": analysis.sha256, "bytes": analysis.size_bytes}}
+    path = tmp_path / "earlier-evidence.zip"
+    with zipfile.ZipFile(path, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(evidence))
+    with zipfile.ZipFile(path) as archive:
+        assert "Verified" in verify_document_source.check(archive, bundle, original)
 
 
 def test_location_malformed_gaps_abstain_and_drift_is_rejected(packet_factory):

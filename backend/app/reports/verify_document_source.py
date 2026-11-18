@@ -126,7 +126,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     else:
         covered_schema = coverage.get(document_pdf_visibility.KEY, {}).get("schema") == document_pdf_visibility.SCHEMA
         doc = extract(original, extension, allow_ocr=replay_ocr, inspect_pdf_covers=covered_schema,
-                      include_html_article=document_scope.HTML_ARTICLE_KEY in coverage)
+                      include_html_article=document_scope.HTML_ARTICLE_KEY in coverage,
+                      map_body_paragraphs=document_native_locations.PARAGRAPH_MAP_KEY in coverage)
     if used_ocr and not doc.source_rasters:
         raise ValueError("The local OCR runtime could not reproduce the original scan. Check that the verified OCR data are installed.")
     unassigned_email_roles = (
@@ -145,7 +146,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             or canonical_hash(mapping) != source["source_map_sha256"]):
         raise ValueError("Re-extracted text or source mapping differs from the committed extraction")
     fields = {"email": None, "ocr": None, "unmapped_pages": [], "partially_checked_pages": [],
-              WORD_CONTENT_CONTROLS_KEY: None, document_scope.HTML_ARTICLE_KEY: None}
+              WORD_CONTENT_CONTROLS_KEY: None, document_scope.HTML_ARTICLE_KEY: None,
+              document_native_locations.PARAGRAPH_MAP_KEY: None}
     local_coverage = {**doc.meta, "ocr": public_ocr_coverage(doc.meta)}
     if any(canonical_hash(coverage.get(key, default)) != canonical_hash(local_coverage.get(key, default))
            for key, default in fields.items()):

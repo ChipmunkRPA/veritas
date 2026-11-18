@@ -22,7 +22,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 
 from app.detectors.text import html_article
-from app.evidence import document_pdf_visibility
+from app.evidence import document_native_locations, document_pdf_visibility
 from app.evidence.document_scope import EMAIL_HTML_COORDINATES, valid_html_article_scope
 
 
@@ -120,7 +120,7 @@ def _joined_word_mapping(group, text, origins, pos):
         first, source_start = last, source_end
 
 
-def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False) -> Document:
+def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False, map_paragraphs: bool = False) -> Document:
     texts: list[str] = []
     spans: list[tuple[int, int]] = []
     mapping: list[dict] = []
@@ -142,7 +142,7 @@ def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False) ->
             continue
         entry = {k: v for k, v in source.items() if k not in {"glyphs", "ocr_words", "html_origins"}}
         entry.update(start=pos, end=pos + len(text), offset_unit="unicode_codepoint")
-        if source.get("kind") in {"text", "email", "docx"} or source.get("html_origins") is not None:
+        if map_paragraphs or source.get("kind") in {"text", "email", "docx"} or source.get("html_origins") is not None:
             # Consecutive 1:1 stretches are compacted; collapsed whitespace keeps
             # its entire source range. These are decoded codepoints, not bytes.
             entry["source_ranges"] = _source_ranges(raw, text, origins, pos, base=source.get("source_start", 0),
@@ -734,7 +734,8 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
                     hidden_locations.append(location)
         joins_next = joined is not None and paragraph._p in joined
         if top_level:
-            eligible = paragraph.style.style_id.casefold() in {"normal", "bodytext", "bodytext2", "bodytext3"}
+            style = paragraph.style
+            eligible = style is not None and style.style_id.casefold() in {"normal", "bodytext", "bodytext2", "bodytext3"}
             percentage_body_paragraphs.append(path_here[0] if eligible and not (continued or joins_next or projected_control)
                                               and ordinary_body_paragraph(paragraph) else None)
             continued = joins_next
@@ -956,14 +957,18 @@ def _attach_html_source_ranges(doc: Document, raw: str) -> None:
             "extracted text, which can include page navigation and hidden markup text. Scripts and linked content were not loaded.")})
 
 
-def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True) -> Document:
+def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True, map_body_paragraphs: bool = True) -> Document:
     data = path.read_bytes()
     if ext == ".rtf":
         # RTF \par becomes a newline. Keep those breaks as passage boundaries.
-        doc = _join_mapped([(text, {"kind": "markup"}) for text in rtf_text(data).splitlines()])
+        paragraphs = rtf_text(data).splitlines()
+        doc = _join_mapped([(value, {"kind": "markup", **({"paragraph_index": index} if map_body_paragraphs else {})})
+                            for index, value in enumerate(paragraphs)], map_paragraphs=map_body_paragraphs)
         doc.meta = {"method": "rtf", "coverage_warning": (
             "Rich Text was converted to text. Passage locations refer to the extracted text. "
             "Layout, formatting and embedded objects were outside this check.")}
+        if map_body_paragraphs:
+            doc.meta[document_native_locations.PARAGRAPH_MAP_KEY] = document_native_locations.PARAGRAPH_MAP
         return doc
     if data.startswith((b"\xff\xfe", b"\xfe\xff")):
         encoding = "utf-16"
@@ -1061,7 +1066,8 @@ def extract_eml(path: Path) -> Document:
 
 def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True,
             project_word_revisions: bool = True, project_word_breaks: bool = True,
-            include_word_content_controls: bool = True, include_html_article: bool = True) -> Document:
+            include_word_content_controls: bool = True, include_html_article: bool = True,
+            map_body_paragraphs: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
@@ -1072,14 +1078,17 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
         from app.detectors.text.opendocument import body_paragraphs
 
         paragraphs = body_paragraphs(path)
-        d = _join_mapped([(value, {"kind": "markup", "paragraph_index": index}) for index, value in enumerate(paragraphs)])
+        d = _join_mapped([(value, {"kind": "markup", "paragraph_index": index}) for index, value in enumerate(paragraphs)],
+                         map_paragraphs=map_body_paragraphs)
         d.meta = {"method": "odt", "paragraph_count": len(paragraphs), "coverage_warning":
                   "ODT body paragraphs, headings, lists and tables were read in order. Locations refer to the extracted text. "
                   "Headers, footers, notes, tracked revisions and embedded objects were outside this check."}
+        if map_body_paragraphs:
+            d.meta[document_native_locations.PARAGRAPH_MAP_KEY] = document_native_locations.PARAGRAPH_MAP
     elif ext == ".eml":
         d = extract_eml(path)
     else:
-        d = extract_text_like(path, ext, include_html_article=include_html_article)
+        d = extract_text_like(path, ext, include_html_article=include_html_article, map_body_paragraphs=map_body_paragraphs)
     d.meta.update({"chars": len(d.text), "words": len(d.text.split()), "paragraphs": len(d.paragraphs)})
     return _seal(d, original_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
 

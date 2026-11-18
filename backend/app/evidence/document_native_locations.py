@@ -7,6 +7,9 @@ from app.evidence.document_scope import EMAIL_HTML_COORDINATES, HTML_ARTICLE_KEY
 KEY = "original_text_locations"
 SCHEMA = "document-original-text-locations/1"
 MAX_RANGES = 16
+PARAGRAPH_MAP_KEY = "decoded_paragraph_locations"
+PARAGRAPH_MAP = "decoded-body-paragraphs/1"
+PARAGRAPH_COORDINATES = {"odt": "odt_paragraph", "rtf": "rtf_paragraph"}
 
 
 def clip_source_ranges(ranges, start, end):
@@ -46,6 +49,9 @@ def _coordinate(source, coverage, anchor):
         return "decoded_text"
     if method == "python-docx" and kind == "docx":
         return "word_paragraph"
+    if (kind == "markup" and coverage.get(PARAGRAPH_MAP_KEY) == PARAGRAPH_MAP
+            and type(anchor.get("paragraph_index")) is int and anchor["paragraph_index"] >= 0):
+        return PARAGRAPH_COORDINATES.get(method)
     if method == "html" and kind == "markup" and valid_html_article_scope(coverage.get(HTML_ARTICLE_KEY)):
         return "decoded_html"
     if method == "email" and kind == "email":
@@ -79,11 +85,14 @@ def build(document):
 
 def validate(document):
     coverage = document.get("coverage") or {}
+    if PARAGRAPH_MAP_KEY in coverage and (coverage[PARAGRAPH_MAP_KEY] != PARAGRAPH_MAP
+            or document.get("source", {}).get("method") not in PARAGRAPH_COORDINATES):
+        raise ValueError("Invalid decoded body paragraph mapping")
     article = coverage.get(HTML_ARTICLE_KEY)
     if article is not None and (document.get("source", {}).get("method") != "html" or not valid_html_article_scope(article)):
         raise ValueError("Invalid saved HTML article boundaries")
     record = coverage.get(KEY)
-    if (record is not None or article is not None) and record != build(document):
+    if (record is not None or article is not None or PARAGRAPH_MAP_KEY in coverage) and record != build(document):
         raise ValueError("Original text locations differ from their mapped evidence spans")
     if article is not None and record is not None:
         start, end = article["scope"]

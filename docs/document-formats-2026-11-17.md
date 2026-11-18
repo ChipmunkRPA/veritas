@@ -8,9 +8,9 @@ limit is 25 MB in the standard configuration.
 | Format | Writing examined | Source position in reports |
 | --- | --- | --- |
 | DOCX | Body paragraphs, tables, and saved text in filled paragraph and inline controls. Separate Word revision and visibility checks cover their supported structures. | Word body path, paragraph characters, and available run coordinates |
-| ODT | Body paragraphs, headings, lists, and tables | Paragraph and character position in the extracted text |
+| ODT | Body paragraphs, headings, lists, and tables | Decoded body paragraph number and character range |
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
-| RTF | Extracted writing from standard Rich Text files | Paragraph and character position in the extracted text |
+| RTF | Extracted writing from standard Rich Text files | Decoded paragraph number and character range |
 | EML | The selected plain-text or HTML message body | Decoded text and supported HTML source positions |
 | TXT | Decoded Unicode text | Decoded character offsets |
 | Markdown | Text extracted from the markup | Paragraph and character position in the extracted text |
@@ -24,8 +24,14 @@ Word form placeholders and tables with controls around entire rows or cells
 are outside the writing check. A paragraph mixing inline controls and
 tracked edits is outside the accepted-revision projection. Evidence for
 supported controls preserves the Word body path and paragraph character
-range. The original-file verifier applies the extraction recorded when the
-report was created. [Microsoft's Word control structure](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.sdtblock?view=openxml-3.0.1)
+range. Word body text remains readable in exports without a default
+paragraph style. The original-file verifier applies the extraction recorded
+when the report was created. [Microsoft's Word control structure](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.sdtblock?view=openxml-3.0.1)
+
+New ODT and RTF reports show the paragraph number and Unicode character
+ranges before the analysis normalizes whitespace. The web view, PDF and JSON
+use the same ranges. The signed package can replay them against the original
+file. The positions refer to decoded body text. Stable page numbers require PDF.
 
 Export Google Docs, Apple Pages, and older Word (`.doc`) files as DOCX or
 PDF before uploading. Export Outlook (`.msg`) files as EML or PDF. Keep the
@@ -67,6 +73,15 @@ USD 9.99 checkout. Each PDF rendered, each JSON export matched the app's
 evidence, and each signed package verified against its original file. A
 finding inside a filled Word field retained body path `1 / control / 0`
 and its paragraph character positions in the report and JSON.
+
+A follow-up replay tested all eight formats plus a separate scanned PDF.
+All nine opened in the browser after nine simulated USD 9.99 payments, and
+each signed package verified against the original. OCR completed on both
+scanned pages. The Word fixture had no default paragraph style and included a
+table. Nine saved character ranges each for Word, OpenDocument and Rich Text
+matched their decoded paragraphs and appeared in the PDF. The same location
+labels appeared in the browser. A header-only DOCX, a blank ODT, an invalid
+RTF and a blank RTF were rejected before checkout.
 
 ## Earlier OpenDocument drafts
 

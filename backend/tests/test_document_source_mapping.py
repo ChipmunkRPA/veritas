@@ -187,7 +187,8 @@ def test_rtf_codepage_unicode_paragraphs_and_extracted_locations(tmp_path):
     assert document.text == "Café report 😀.\n\nNext paragraph."
     assert [document.text[start:end] for start, end in document.paragraphs] == ["Café report 😀.", "Next paragraph."]
     assert document.meta["method"] == "rtf"
-    assert all(anchor["kind"] == "markup" and "source_ranges" not in anchor for anchor in document.source_map)
+    assert all(anchor["kind"] == "markup" and anchor["source_ranges"] for anchor in document.source_map)
+    assert [anchor["paragraph_index"] for anchor in document.source_map] == [0, 1]
 
 
 def test_email_prefers_plain_body_keeps_quotes_and_does_not_authenticate_headers(tmp_path):

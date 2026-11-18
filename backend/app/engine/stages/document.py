@@ -53,6 +53,7 @@ from app.evidence import (
     document_chat_markers,
     document_check_coverage,
     document_invisible_characters,
+    document_native_locations,
     document_passage_intervals,
     document_pdf_visibility,
     document_published_wording,
@@ -120,6 +121,9 @@ def current_decode_output(output: Any) -> bool:
     if output.get(BIBLIOGRAPHY_POLICY, False) is not (settings.environment == "dev" and settings.text_bibliography_scope_review):
         return False
     if output["meta"].get("method") == "html" and output["meta"].get(html_article.READER) != html_article.POLICY:
+        return False
+    if (output["meta"].get("method") in document_native_locations.PARAGRAPH_COORDINATES
+            and output["meta"].get(document_native_locations.PARAGRAPH_MAP_KEY) != document_native_locations.PARAGRAPH_MAP):
         return False
     if (output["meta"].get("method") == "python-docx" and
             (output["meta"].get(WORD_CONTENT_CONTROLS_KEY) != WORD_CONTENT_CONTROLS

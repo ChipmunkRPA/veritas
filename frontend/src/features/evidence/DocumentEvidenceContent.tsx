@@ -30,6 +30,8 @@ function BibliographyCoverage({ review }: { review: NonNullable<NonNullable<Docu
 const originalLocationLabels: Record<DocumentOriginalTextLocation['coordinate'], string> = {
   decoded_text: 'Original decoded text characters',
   word_paragraph: 'Original Word paragraph characters',
+  odt_paragraph: 'Decoded OpenDocument paragraph characters',
+  rtf_paragraph: 'Decoded Rich Text paragraph characters',
   decoded_email: 'Decoded email part characters',
   decoded_email_html: 'Decoded email HTML source characters',
   decoded_html: 'Original HTML source characters',

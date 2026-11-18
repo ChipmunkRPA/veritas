@@ -540,6 +540,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][WORD_CONTENT_CONTROLS_KEY] = word_controls
     if article := decoded["meta"].get(document_scope.HTML_ARTICLE_KEY):
         document["coverage"][document_scope.HTML_ARTICLE_KEY] = article
+    if policy := decoded["meta"].get(document_native_locations.PARAGRAPH_MAP_KEY):
+        document["coverage"][document_native_locations.PARAGRAPH_MAP_KEY] = policy
     if writing_checks := document_check_coverage.from_result(result):
         document["coverage"][document_check_coverage.KEY] = writing_checks
         document["source"][document_check_coverage.COMMITMENT] = document_check_coverage.commitment(writing_checks)

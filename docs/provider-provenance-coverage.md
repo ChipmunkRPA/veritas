@@ -44,9 +44,10 @@ An optional [whole-document PDF credential check](pdf-content-credentials-2026-1
 also stops statistical writing checks when a trusted embedded declaration covers
 the submitted PDF. This was verified offline on a pinned public provider PDF.
 The accepted layout requires a single catalog-associated store and a signed byte
-hash covering the file outside that store. Credentials on embedded objects,
-Office documents, ordinary article spacing and production text watermarks do
-not use this shortcut.
+hash covering the file outside that store. [Word DOCX and OpenDocument ODT](document-formats-2026-11-17.md)
+also qualify when an embedded C2PA store verifies the whole document archive.
+Ordinary article spacing, editable package metadata and credentials on embedded
+objects do not qualify.
 
 The gate remains inside the prepaid analysis pipeline. The initial inventory
 review made no provider-verification calls. A [separate frozen qualification](provider-provenance-v1-result.md)

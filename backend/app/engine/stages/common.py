@@ -316,7 +316,7 @@ def fusion_entries(ctx: StageContext, stages: tuple[str, ...]) -> list[dict[str,
 def run_detectors(ctx: StageContext, modalities: Iterable[Modality] = (Modality.IMAGE,), *, include: set[str] | None = None,
                   exclude: set[str] = frozenset(), outputs: StageOutputs | None = None,
                   max_units: int = MAX_UNIT_SCORES, face_failure: str | None = None,
-                  audio_failure: str | None = None) -> dict[str, Any]:
+                  audio_failure: str | None = None, detector_id_only: str | None = None) -> dict[str, Any]:
     """`face_failure` (`face_stage_failure`): detectors that need faces are recorded as failed instead of running.
     `audio_failure` (D-49; the video `detect` stage): detectors that need audio are recorded as failed with this reason, without
     loading a model, when the probe reports a sound track that could not be decoded."""
@@ -332,6 +332,8 @@ def run_detectors(ctx: StageContext, modalities: Iterable[Modality] = (Modality.
     first_provenance_stop = None
     for modality in modalities:
         for detector_id in registry.enabled(modality, ctx.profile):
+            if detector_id_only is not None and detector_id != detector_id_only:
+                continue
             detector = registry.instance(detector_id)
             family = detector.spec.family
             if (include is not None and family not in include) or family in exclude:
@@ -787,11 +789,14 @@ def _profile_omissions(ctx: StageContext, kind: str, detector_entries: list[dict
                 expected.add(card.id)
                 policy_omitted.add(card.id)
 
+    if kind == "document":
+        filename = (ctx.outputs.get("ingest") or {}).get("filename", "")
+        outside = set(provenance_gate.DOCUMENT_BINDINGS) - {provenance_gate.document_detector(filename)}
+        expected -= outside
+        policy_omitted -= outside
     selected = set(expected)
     detected = ctx.outputs.get("detect") or {}
     content = (ctx.outputs.get("condition") or {}).get("content") or {}
-    if kind == "document" and (ctx.outputs.get("provenance") or {}).get("out_of_scope") is True:
-        expected.discard(provenance_gate.CREDENTIALS[kind])
     if kind == "audio" and content.get("assessable") is False and detected.get("not_run"):
         # audio.detect deliberately emits no rows after its persisted content-applicability gate.
         exempt = {d for d in expected if registry.detector_family(d) != "provenance"}

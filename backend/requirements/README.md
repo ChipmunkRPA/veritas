@@ -23,6 +23,8 @@ Every change of a lock needs `make audit` afterwards: the suite compares the rec
 
 - **2026-11-16, Pillow HEIF 1.5.0 → 1.8.1.** The update exposes the linked thumbnail API. The Python wheel metadata retains compatibility with the existing Pillow pin. Both Linux locks and the Darwin version constraint move this one package to the official release hashes. The [local HEIC evaluation](../../docs/image-heif-thumbnail-2026-11-16.md) records the macOS results.
 
+- **2026-11-17, c2pa-python 0.37.7 → 0.39.0 and certifi 2026.7.22 → 2026.10.19.** The new validator reads package signatures in DOCX and ODT. Both Linux locks use the publisher's wheel hashes, including the updated certificate bundle required by the release. The Mac installed the exact pinned releases and passed `pip check`, the document regressions, and the public credential replay. [Local document-format results](../../docs/document-formats-2026-11-17.md)
+
 ## Recheck or deliberately refresh
 
 The locks were generated with uv 0.11.7. Use the project's Python 3.12 interpreter and a private cache; never install the Linux lock into the local Darwin development environment. The commands below perform dependency resolution, not Docker builds or deployment. Run from the repository root; choose `cpu` or `cu126` explicitly.

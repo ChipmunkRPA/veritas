@@ -29,8 +29,9 @@ export const TABS: TabSpec[] = [
     formats: 'WAV · MP3 · M4A · OGG · OPUS · FLAC · up to 150 MB',
   },
   {
-    kind: 'document', label: 'Document', noun: 'a document', accept: '.pdf,.docx,.txt,.md,.html', exts: ['pdf', 'docx', 'txt', 'md', 'html', 'htm'], maxBytes: 25 * MB,
-    formats: 'PDF · DOCX · TXT · MD · HTML · up to 25 MB',
+    kind: 'document', label: 'Document', noun: 'a document', accept: '.pdf,.docx,.odt,.txt,.md,.markdown,.html,.htm,.eml',
+    exts: ['pdf', 'docx', 'odt', 'txt', 'md', 'markdown', 'html', 'htm', 'eml'], maxBytes: 25 * MB,
+    formats: 'Word (DOCX) · PDF · ODT · TXT · Markdown · HTML · Email (EML) · up to 25 MB',
   },
 ]
 

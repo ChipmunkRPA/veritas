@@ -1,4 +1,4 @@
-"""Document text extraction preserving paragraph boundaries and character offsets (PDF, DOCX, TXT, MD, HTML).
+"""Document text extraction preserving paragraph boundaries and character offsets.
 
 This file imports nothing of the application: `pipeline.extract_within` runs it as a script in a child process
 (`python -I extract.py <path> <ext>`), which prints the document, or the error, as one JSON object (N-10; SEC-04)."""
@@ -928,6 +928,14 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
     elif ext == ".docx":
         d = extract_docx(path, project_word_revisions=project_word_revisions, project_word_breaks=project_word_breaks)
+    elif ext == ".odt":
+        from app.detectors.text.opendocument import body_paragraphs
+
+        paragraphs = body_paragraphs(path)
+        d = _join_mapped([(value, {"kind": "markup", "paragraph_index": index}) for index, value in enumerate(paragraphs)])
+        d.meta = {"method": "odt", "paragraph_count": len(paragraphs), "coverage_warning":
+                  "ODT body paragraphs, headings, lists and tables were read in order. Locations refer to the extracted text. "
+                  "Headers, footers, notes, tracked revisions and embedded objects were outside this check."}
     elif ext == ".eml":
         d = extract_eml(path)
     else:

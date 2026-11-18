@@ -55,7 +55,7 @@ from app.evidence import (
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p40"
+PIPELINE_VERSION = "doc-2.0-p41"
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 BIBLIOGRAPHY_POLICY = "writing_bibliography_review_enabled"
 CLAUSE_POLICY = "writing_within_sentence_language_review_enabled"
@@ -142,20 +142,23 @@ def condition(ctx: StageContext) -> dict[str, Any]:
 def provenance(ctx: StageContext) -> dict[str, Any]:
     if ctx.state.get("refusion"):
         return {"detectors": [], "exhibits": [], "artefacts": []}
-    if Path(ctx.outputs["ingest"]["filename"]).suffix.lower() != ".pdf":
+    ingest = ctx.outputs["ingest"]
+    detector_id = provenance_gate.document_detector(ingest["filename"])
+    if detector_id is None:
         return {"detectors": [], "exhibits": [], "artefacts": [], "out_of_scope": True}
-    return common.run_detectors(ctx, (Modality.TEXT,), include={"provenance"})
+    return common.run_detectors(ctx, (Modality.TEXT,), include={"provenance"}, detector_id_only=detector_id,
+                                outputs=StageOutputs(probe={"mime": ingest.get("mime")}))
 
 
-def current_provenance_output(output: Any, *, expected: bool) -> bool:
-    from app.detectors.text.adapters.provenance import PdfCredentialsDetector
+def current_provenance_output(output: Any, *, expected: str | None) -> bool:
+    from app.detectors.text.adapters.provenance import OfficeCredentialsDetector, PdfCredentialsDetector
 
     if not isinstance(output, dict) or not isinstance(output.get("detectors"), list):
         return False
-    spec = PdfCredentialsDetector.spec
     rows = output["detectors"]
-    if not expected or output.get("out_of_scope") is True:
+    if expected is None:
         return not rows
+    spec = OfficeCredentialsDetector.spec if expected == provenance_gate.OFFICE_CREDENTIALS else PdfCredentialsDetector.spec
     return (len(rows) == 1 and isinstance(rows[0], dict) and rows[0].get("detector_id") == spec.id
             and rows[0].get("version") == spec.version)
 
@@ -429,7 +432,7 @@ def fuse(ctx: StageContext) -> dict[str, Any]:
     pin = ctx.state.get("fuser_pin")
     if pin == document_screening.RETIRED_ARTICLE_PIN:
         raise ValueError(document_screening.RETIRED_ARTICLE_REASON)
-    if (documentary := pdf_documentary_result(ctx)) is not None:
+    if (documentary := documentary_result(ctx)) is not None:
         return documentary
     detected = ctx.outputs.get("detect") or {}
     doc, sents = document_input(ctx)
@@ -523,7 +526,7 @@ def unassessed_language_fusion(
             "v1": {key: legacy[key] for key in ("verdict", "signals", "sentences", "stats", "document")}}
 
 
-def pdf_documentary_result(ctx: StageContext) -> dict[str, Any] | None:
+def documentary_result(ctx: StageContext) -> dict[str, Any] | None:
     provenance = ctx.outputs.get("provenance")
     gate = (provenance_gate.decide(provenance, "document") if ctx.state.get("refusion")
             else ctx.outputs.get("provenance_gate") or {})
@@ -532,7 +535,8 @@ def pdf_documentary_result(ctx: StageContext) -> dict[str, Any] | None:
     ):
         return None
     entry = next(row for row in provenance["detectors"] if row["detector_id"] == gate["record_detector_id"])
-    reason = ("The trusted signed record covers this PDF and declares AI generation or editing. "
+    file = "the document" if entry["detector_id"] == provenance_gate.OFFICE_CREDENTIALS else "this PDF"
+    reason = (f"The trusted signed record covers {file} and declares AI generation or editing. "
               "Statistical writing checks were skipped. The record does not identify which passages were written or edited with AI.")
     decision, signal = provenance_gate.documentary_fields(
         entry, {**gate, "source_sha256": ctx.outputs["ingest"]["sha256"]}, modality="text", reason=reason,

@@ -6,12 +6,20 @@ cannot activate this gate. Provider-private watermark APIs are not simulated.
 from __future__ import annotations
 
 from collections.abc import Mapping
+from pathlib import Path
 from typing import Any
 
 VERSION = 'provenance-first/1'
 CREDENTIALS = {'image': 'prov.c2pa', 'video': 'prov.c2pa.video', 'audio': 'prov.c2pa.audio', 'document': 'prov.c2pa.pdf'}
+OFFICE_CREDENTIALS = 'prov.c2pa.office'
+DOCUMENT_BINDINGS = {CREDENTIALS['document']: 'pdf_document_binding', OFFICE_CREDENTIALS: 'office_document_binding'}
+DOCUMENT_DETECTORS = {'.pdf': CREDENTIALS['document'], '.docx': OFFICE_CREDENTIALS, '.odt': OFFICE_CREDENTIALS}
 SKIP_REASON = ('Further detection was not run: trusted Content Credentials bound to this file declare AI involvement. '
     'The record does not locate edited regions or establish the complete history of the file.')
+
+
+def document_detector(filename: str) -> str | None:
+    return DOCUMENT_DETECTORS.get(Path(filename).suffix.lower())
 
 
 def decide(provenance: Any, kind: str) -> dict:
@@ -24,10 +32,13 @@ def decide(provenance: Any, kind: str) -> dict:
     entries = provenance.get('detectors', []) if isinstance(provenance, Mapping) else []
     if not isinstance(entries, (list, tuple)):
         return {**result, 'reason': 'Content Credentials output is unavailable; continue statistical detection.'}
-    matching = [e for e in entries if isinstance(e, Mapping) and e.get('detector_id') == expected]
+    allowed = DOCUMENT_BINDINGS if kind == 'document' else (expected,)
+    matching = [e for e in entries if isinstance(e, Mapping) and isinstance(e.get('detector_id'), str)
+                and e['detector_id'] in allowed]
     if len(matching) != 1:
         return {**result, 'reason': 'No single usable Content Credentials check; continue statistical detection.'}
     entry = matching[0]
+    detector_id = entry['detector_id']
     metrics = entry.get('metrics')
     if not isinstance(metrics, Mapping):
         return {**result, 'reason': 'Content Credentials verification is incomplete; continue statistical detection.'}
@@ -44,11 +55,11 @@ def decide(provenance: Any, kind: str) -> dict:
     verified = (entry.get('status') == 'ok' and entry.get('provenance_override') == 'decisive_ai'
         and all(one(k) for k in ('trusted', 'valid', 'ai_declared', 'covers_bytes'))
         and all(zero(k) for k in ('invalid', 'remote_reference', 'failure_codes'))
-        and (kind != 'document' or one('pdf_document_binding')))
+        and (kind != 'document' or one(DOCUMENT_BINDINGS[detector_id])))
     if not verified:
         return {**result, 'reason': 'No trusted, valid, asset-bound AI declaration; continue statistical detection. Absence is not proof of originality.'}
     return {**result, 'action': 'stop_statistical_detection', 'basis': 'trusted_asset_bound_ai_declaration',
-        'record_detector_id': expected, 'reason': SKIP_REASON,
+        'record_detector_id': detector_id, 'reason': SKIP_REASON,
         'limitation': 'Offline trust-list validation; revocation and remote manifests are not checked.'}
 
 

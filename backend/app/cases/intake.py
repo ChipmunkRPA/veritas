@@ -349,8 +349,8 @@ def take_in(src: BinaryIO, filename: str, kind: str, *, principal_id: str, case_
         raise IntakeError(400, "Empty upload", "Empty upload")
     try:
         mime, ext = files.validate_kind(kind, head, filename, size=size)
-        if ext == ".docx":
-            files.check_docx_safe(src)
+        if ext in files.DOCUMENT_ARCHIVES:
+            files.check_document_archive_safe(src, ext)
     except ValueError as e:
         raise IntakeError(415, "Unsupported media type", str(e)) from e
     client = acquisition.client_sha256.lower() if acquisition.client_sha256 else None

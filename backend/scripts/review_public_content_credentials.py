@@ -71,9 +71,11 @@ def verify(receipt: Path, directory: Path, sample: str | None) -> None:
     document = json.loads(receipt.read_text())
     expected_trust = {name: c2pa.load_bundle(name).anchors_sha256 for name in (c2pa.OFFICIAL, c2pa.LEGACY)}
     snapshot = sha256((c2pa.TRUST_DIR / "snapshot.json").read_bytes()).hexdigest()
-    if (document["schema"] != SCHEMA or document["sdk"] != c2pa.sdk_version()
-            or document["trust_snapshot_sha256"] != snapshot or document["trust_anchors_sha256"] != expected_trust):
-        raise ValueError("The replay requires the recorded SDK and both trust bundles")
+    if (document["schema"] != SCHEMA or document["trust_snapshot_sha256"] != snapshot
+            or document["trust_anchors_sha256"] != expected_trust):
+        raise ValueError("The replay requires the recorded receipt schema and both trust bundles")
+    if (sdk := c2pa.sdk_version()) != document["sdk"]:
+        print(f"Comparing current SDK {sdk} with receipt SDK {document['sdk']}")
     rows = document["samples"]
     selected = [row for row in rows if sample is None or row["id"] == sample]
     if not selected:

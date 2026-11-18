@@ -16,11 +16,15 @@ from app.core.config import settings
 IMAGE_MIMES = {"image/jpeg", "image/png", "image/apng", "image/webp", "image/heic", "image/heif",
                "image/tiff", "image/bmp", "image/gif", "image/avif"}
 VIDEO_MIMES = {"video/mp4", "video/quicktime", "video/x-matroska", "video/webm", "video/x-msvideo", "video/mpeg", "video/3gpp", "video/x-m4v"}
-DOC_EXTS = {".pdf", ".docx", ".txt", ".md", ".markdown", ".html", ".htm", ".eml"}
+DOCX_MIME = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+ODT_MIME = "application/vnd.oasis.opendocument.text"
+DOCUMENT_ARCHIVES = {".docx": DOCX_MIME, ".odt": ODT_MIME}
+DOCUMENT_ARCHIVE_EXTENSIONS = {mime: extension for extension, mime in DOCUMENT_ARCHIVES.items()}
+DOC_EXTS = {".pdf", ".txt", ".md", ".markdown", ".html", ".htm", ".eml", *DOCUMENT_ARCHIVES}
 M4A_BRANDS = {b"M4A ", b"M4B "}
 ISO_BRANDS = {b"isom", b"iso2", b"iso4", b"iso5", b"iso6", b"mp41", b"mp42", b"dash"}
 M4A_EXTS = {".m4a", ".m4b"}
-MAX_DOCX_UNCOMPRESSED = 200 * 1024 * 1024  # zip-bomb guard
+MAX_DOCUMENT_ARCHIVE_UNCOMPRESSED = 200 * 1024 * 1024
 
 _SAFE = re.compile(r"[^A-Za-z0-9._-]+")
 
@@ -203,17 +207,18 @@ def validate_kind(kind: str, data: bytes, filename: str, size: int | None = None
             raise ValueError(f"Document exceeds {settings.max_document_bytes // 1048576} MB limit")
         if mime == "application/pdf":
             ext = ".pdf"
-        elif (mime in ("application/zip", "application/vnd.openxmlformats-officedocument.wordprocessingml.document") and Path(filename).suffix.lower() == ".docx") or (mime or "").endswith("wordprocessingml.document"):
-            ext = ".docx"
-            mime = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-        elif ext == ".eml" and mime is None:
+        elif mime in DOCUMENT_ARCHIVE_EXTENSIONS:
+            ext = DOCUMENT_ARCHIVE_EXTENSIONS[mime]
+        elif mime == "application/zip" and (archive_ext := Path(filename).suffix.lower()) in DOCUMENT_ARCHIVES:
+            ext, mime = archive_ext, DOCUMENT_ARCHIVES[archive_ext]
+        elif ext == ".eml" and mime in (None, "message/rfc822"):
             mime = "message/rfc822"
-        elif mime is None and ext in DOC_EXTS:
+        elif mime is None and ext in DOC_EXTS and ext not in DOCUMENT_ARCHIVES:
             pass
         elif mime and mime.startswith("text/"):
             ext = ext if ext in DOC_EXTS else ".txt"
         else:
-            raise ValueError(f"Unsupported document type ({mime or ext}); accepted: PDF, DOCX, TXT, MD, HTML, EML")
+            raise ValueError(f"Unsupported document type ({mime or ext}); accepted: PDF, DOCX, ODT, TXT, MD, HTML, EML")
         mime = mime or "text/plain"
     else:
         raise ValueError("Unknown analysis kind")
@@ -259,18 +264,28 @@ def stream_upload(analysis_id: str, filename: str, src, limit: int) -> tuple[Pat
     return p, head, h.hexdigest(), size
 
 
-def check_docx_safe(path: Path | BinaryIO) -> None:
-    """Reject DOCX archives whose uncompressed size is implausible (zip bomb). Accepts a path or a seekable binary file."""
+def check_document_archive_safe(path: Path | BinaryIO, extension: str, *, check_crc: bool = False) -> None:
+    """Bound a document ZIP before reading members. Accept a path or seekable binary file."""
     import zipfile
 
+    label = extension.lstrip(".").upper()
     try:
-        with zipfile.ZipFile(path) as z:
-            total = sum(i.file_size for i in z.infolist())
-            compressed = max(1, sum(i.compress_size for i in z.infolist()))
+        with zipfile.ZipFile(path) as archive:
+            entries = archive.infolist()
+            total = sum(entry.file_size for entry in entries)
+            compressed = max(1, sum(entry.compress_size for entry in entries))
+            if len(entries) > 10000 or total > MAX_DOCUMENT_ARCHIVE_UNCOMPRESSED or total / compressed > 200:
+                raise ValueError(f"The {label} file expands to an implausible size and was rejected")
+            if len({entry.filename for entry in entries}) != len(entries) or any(entry.flag_bits & 1 for entry in entries):
+                raise ValueError(f"The {label} file contains duplicate or encrypted archive entries")
+            if check_crc and archive.testzip() is not None:
+                raise ValueError(f"The {label} archive is damaged")
     except zipfile.BadZipFile as e:
-        raise ValueError("The DOCX file is not a valid archive") from e
-    if total > MAX_DOCX_UNCOMPRESSED or total / compressed > 200:
-        raise ValueError("The DOCX file expands to an implausible size and was rejected")
+        raise ValueError(f"The {label} file is not a valid archive") from e
+
+
+def check_docx_safe(path: Path | BinaryIO) -> None:
+    check_document_archive_safe(path, ".docx")
 
 
 def artifact_dir(analysis_id: str) -> Path:

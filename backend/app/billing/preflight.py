@@ -22,7 +22,6 @@ from typing import BinaryIO
 WALL_SECONDS = 15
 PARSER_CPU_SECONDS = 12
 MAX_IMAGE_PIXELS = 80_000_000  # Matches engine.media.StoredMedia.
-MAX_DOCX_EXPANDED = 200 * 1024 * 1024  # Matches storage.files.check_docx_safe.
 CHUNK = 1024 * 1024
 
 
@@ -167,18 +166,17 @@ def _document(path: Path, extension: str) -> None:
             document.load_page(0)
         return
     if extension == ".docx":
-        import zipfile
-
         from docx import Document
-        with zipfile.ZipFile(path) as archive:
-            entries = archive.infolist()
-            expanded = sum(entry.file_size for entry in entries)
-            compressed = max(1, sum(entry.compress_size for entry in entries))
-            if expanded > MAX_DOCX_EXPANDED or expanded / compressed > 200 or len(entries) > 10000:
-                raise PreflightError("This document exceeds the safe archive expansion limit. Re-export it before paying.")
-            if archive.testzip() is not None:
-                raise PreflightError("The document archive is damaged. Re-export it before paying.")
+
+        from app.storage.files import check_document_archive_safe
+
+        check_document_archive_safe(path, extension, check_crc=True)
         Document(path)
+        return
+    if extension == ".odt":
+        from app.detectors.text.opendocument import body_paragraphs
+
+        body_paragraphs(path, check_crc=True)
         return
     raw = path.read_bytes()
     if extension == ".eml":

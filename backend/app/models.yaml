@@ -1258,7 +1258,7 @@ detectors:
       - "CAWG identity assertions are not parsed yet"
     source_url: https://github.com/contentauth/c2pa-python
     threat: [full_synthesis, partial_edit]
-    training_data: "none (documentary validator: c2pa-python 0.37.7, c2pa-rs 0.90.14)"
+    training_data: "none (documentary validator: c2pa-python, c2pa-rs)"
     coverage_date: "C2PA Trust List revision 99927caef670 (list issued 2026-08-05, retrieved 2026-09-12)"
     input_constraints: ["original bitstream; JPEG, PNG, WebP, TIFF, GIF, HEIF/AVIF and the other containers c2pa-rs reads"]
     contamination_sets: []
@@ -1525,7 +1525,7 @@ detectors:
       - "fragmented MP4 (DASH/HLS segments) needs the init segment and every fragment; only single files are read"
     source_url: https://github.com/contentauth/c2pa-python
     threat: [face_swap, lip_sync, t2v]
-    training_data: "none (documentary validator: c2pa-python 0.37.7, c2pa-rs 0.90.14)"
+    training_data: "none (documentary validator: c2pa-python, c2pa-rs)"
     coverage_date: "C2PA Trust List revision 99927caef670 (list issued 2026-08-05, retrieved 2026-09-12)"
     input_constraints: ["original bitstream; MP4, MOV (ISO BMFF) and the other video containers c2pa-rs reads"]
     contamination_sets: []
@@ -2177,6 +2177,28 @@ detectors:
     admission: {decision: rejected, date: "2026-09-14", evidence: "A-1 audio admission on vb-1.0-core fit ∪ cal (docs/v2/bench/admissions/ablation-aud.mo_thecreator_w2v2.md): A3a / A3b not established (no audio LGO folds), A4 fail (A-bonafide, on its CI); out-of-fold AUC 0.7822 with vs 0.7904 without; decided before the lockbox run; automated record pending human review"}
 
   # ---------------------------------------------------------------- text
+  - id: prov.c2pa.office
+    adapter: app.detectors.text.adapters.provenance:OfficeCredentialsDetector
+    version: 1.0.0
+    name: Content Credentials on the Word or OpenDocument file
+    modality: text
+    family: provenance
+    hypotheses: [H3_provenance_integrity]
+    models: []
+    profiles: [quick, full, deep]
+    default_enabled: true
+    legacy_weight: 0.0
+    known_limitations: ["Requires an embedded collection hash binding the document package. Offline trust; revocation and remote manifests are outside this check."]
+    source_url: https://github.com/contentauth/c2pa-python
+    threat: [ai_text]
+    training_data: "None (signed provenance verification)"
+    coverage_date: "Bundled C2PA Trust List snapshot; see app/provenance/trust/snapshot.json"
+    input_constraints: ["Original DOCX or ODT; only a credential covering the document ZIP package qualifies"]
+    contamination_sets: []
+    fp_modes: ["Trusted signer makes an incorrect declaration or loses control of their key"]
+    citation: "C2PA Technical Specification, Appendix A.6"
+    admission: {decision: pending, evidence: "Whole-document documentary verification; no statistical weight"}
+
   - id: prov.c2pa.pdf
     adapter: app.detectors.text.adapters.provenance:PdfCredentialsDetector
     version: 1.0.0

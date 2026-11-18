@@ -148,7 +148,7 @@ def run_analysis(analysis_id: str, *, deadline: Deadline | None = None, profile:
         analysis = db.get(Analysis, analysis_id)
         if analysis is None:
             raise LookupError(f"analysis {analysis_id} not found")
-        kind = analysis.kind
+        kind, filename = analysis.kind, analysis.filename
         stages = PIPELINES.get(kind)
         if stages is None:
             raise ValueError(f"no v2 pipeline for kind {kind!r}")
@@ -192,8 +192,9 @@ def run_analysis(analysis_id: str, *, deadline: Deadline | None = None, profile:
         reuse = vid.current_detect_output if kind == "video" else current_voice_detection_output
         stages = tuple(dataclasses.replace(s, reuse_if=reuse) if s.id == "detect" else s for s in stages)
     elif kind == "document":
-        expected = provenance_gate.CREDENTIALS[kind] in active_registry.enabled("text", resolved)
-        reuse = partial(doc.current_provenance_output, expected=expected)
+        expected = provenance_gate.document_detector(filename)
+        enabled = active_registry.enabled("text", resolved)
+        reuse = partial(doc.current_provenance_output, expected=expected if expected in enabled else None)
         predicates = {"provenance": reuse, "detect": doc.current_detect_output}
         stages = tuple(dataclasses.replace(s, reuse_if=predicates[s.id]) if s.id in predicates else s for s in stages)
     state: dict[str, Any] = {"registry": active_registry, "run_store": common.DbRunStore(sessions, store),

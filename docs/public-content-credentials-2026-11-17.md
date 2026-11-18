@@ -59,7 +59,9 @@ The [verification receipt](evaluation-panels/public-content-credentials-2026-11-
 names each exact URL, SHA-256, certificate identity, validation outcome and
 gate disposition. Save a chosen sample as `<id>.asset` in a scratch directory.
 Then run the offline replay from the project root with its backend environment.
-Certificate dates and trust lists can change the outcome on a later replay.
+The [current document-format update](document-formats-2026-11-17.md) reverified
+all 21 samples on SDK 0.92.0. Certificate dates and trust lists can change the
+outcome on a later replay.
 
 ```sh
 scratch=$(mktemp -d)

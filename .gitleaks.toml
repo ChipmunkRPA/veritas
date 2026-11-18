@@ -54,6 +54,13 @@ paths = ['''(^|/)docs/evaluation-panels/video-face-square-sources-2026-11-18\.js
 regexTarget = "match"
 regexes = ['''^capture_key_sha256": "[0-9a-f]{64}"$''']
 
+[[rules.allowlists]]
+description = "Eight-second portrait public capture-link digests verified against the pinned publisher CSV"
+condition = "AND"
+paths = ['''(^|/)docs/evaluation-panels/video-face-portrait-eight-second-sources-2026-11-18\.json$''']
+regexTarget = "match"
+regexes = ['''^capture_key_sha256": "[0-9a-f]{64}"$''']
+
 # All thirteen initial findings were recomputed from pinned local model assets
 # and installed tokenizer implementations. Restrict to exact field/value pairs.
 [[rules.allowlists]]

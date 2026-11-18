@@ -484,6 +484,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             elif record["method"] == face_portrait_return_binding.SQUARE_METHOD:
                 encoding = (*encoding, delivery.get("codec_tag"))
                 accepts = face_portrait_return_binding.square_supported
+            elif record["method"] == face_portrait_return_binding.EIGHT_SECOND_METHOD:
+                encoding = (*encoding, delivery.get("codec_tag"))
+                accepts = face_portrait_return_binding.eight_second_supported
             else:
                 accepts = face_portrait_return_binding.supported if record["method"] == face_portrait_return_binding.METHOD else supported
             if not accepts(table, encoding) or face_return.source_carrier(original) != "mp4":
@@ -683,7 +686,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             observed = face_return.scene_lower_quartile(*pair)
             if observed is None or not math.isclose(observed, float.fromhex(pin), abs_tol=1e-6, rel_tol=0):
                 raise ValueError("Local face background support differs from the original video")
-        geometry = (face_local_return_binding.PORTRAIT if record["method"] in face_portrait_return_binding.METHODS
+        geometry = (face_portrait_return_binding.geometry(record["method"]) if record["method"] in face_portrait_return_binding.METHODS
                     else face_local_return_binding.LANDSCAPE)
         if shot_changes(original, table, record["start_frame_index"], record["end_frame_index"], geometry=geometry):
             raise ValueError("The original video shows a shot change during the local face comparison")

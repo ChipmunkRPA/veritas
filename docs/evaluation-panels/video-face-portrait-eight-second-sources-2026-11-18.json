@@ -1,0 +1,247 @@
+{
+  "recipe": {
+    "duration": 4,
+    "size": [
+      640,
+      360
+    ],
+    "fps": 25,
+    "crf": [
+      23,
+      36
+    ],
+    "source_sample_start_seconds": ".40",
+    "faces": "largest unambiguous tracked face"
+  },
+  "rules": "whole-clip-face-temporal/1",
+  "revision": "bca865e675852666a426368b2f5614abf1c1926a",
+  "purpose": "chipmunk.portrait-eight-second-return/1",
+  "groups": [
+    {
+      "group": "c6880ed01583831afd664f931b5e53a1cc45f9945a912255b536d5f5b83642e6",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/TSk_py3CDbk_00615_00630.mp4",
+          "sha256": "434816758a2add7c36b49a3539c847e2d7ffa2dd778810a46e99dd222a631692",
+          "size": 609174
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_TSk_py3CDbk_00615_00630_3-239_man.mp4",
+          "sha256": "1aa8cddc6f067c2876fc4076dfb7724d1691514e2422375cdd3f5fae22f62ccc",
+          "size": 275441
+        },
+        "uniface": {
+          "path": "uniface/uniface_TSk_py3CDbk_00615_00630_3-658_man.mp4",
+          "sha256": "a3cca73c6c8797e2aa5681ebd3e5391e238856f68ee6c09b8679f53492d23911",
+          "size": 267997
+        }
+      },
+      "capture_key_sha256": "7a997b6a1a688f36a7fdbc2ee7a13e6739bc24ae037d462c801b9eeecc37d208",
+      "donor_key_sha256s": [
+        "9b673acd9656db550337ab1282467329c03b7c469d1d04d6d0661bef185f8071",
+        "3e4f9a13c2c25b4bc5c1a96e965198287bde78440fff103ce7b316a63c0ebfa9"
+      ],
+      "role": "held",
+      "index": 0
+    },
+    {
+      "group": "de06b6ed60c6f4d52de1c7ee90503d4f1b1066657c1148dd51f9914b5ae6dfe9",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/YIV1VamiLiU_00643_00657.mp4",
+          "sha256": "5c0be11ebd88d43caa095084ba9b62f1fc446309e868a4cabbf2d3e76d0384f6",
+          "size": 881026
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_YIV1VamiLiU_00643_00657_3-319_man.mp4",
+          "sha256": "06d9c1a0bc928fc86a4afc14da938460d40a260fc01c682c19f1556b7c2e1957",
+          "size": 282174
+        },
+        "uniface": {
+          "path": "uniface/uniface_YIV1VamiLiU_00643_00657_3-377_man.mp4",
+          "sha256": "0c68740fc19aab4cb65a3e2f307c816c8512f0e2283de28a821b6784c29e1259",
+          "size": 278875
+        }
+      },
+      "capture_key_sha256": "f693e44cc92b2717902d3cd816d5e452aa9ea7d8ff80fb64ab371a68e1322075",
+      "donor_key_sha256s": [
+        "0b370359b8b2e744c3f35e29eb055efe7441661458a7460227ad329a4c5d953c",
+        "ea53296d247c6bff52316529211ce9515faca439020e365c0e59728011cd1413"
+      ],
+      "role": "held",
+      "index": 1
+    },
+    {
+      "group": "5571a33c030181606a454edbf3cbd317ab0f3743393ea05049d13bfa75191ce5",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/4mswXKDAQpc_02995_03010.mp4",
+          "sha256": "5ab6af06561cd5f349db4d7a27baf01ef6301367b94eaed083c248abeb28b66c",
+          "size": 854545
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_4mswXKDAQpc_02995_03010_3-527_man.mp4",
+          "sha256": "08802e4f45ec885414e277bba04ed00d98d7886eaf252959cfa693ede42148bb",
+          "size": 291855
+        },
+        "uniface": {
+          "path": "uniface/uniface_4mswXKDAQpc_02995_03010_3-565_man.mp4",
+          "sha256": "77c3559116f9bbefbe70ee665665b0ac267313e167e22c38ec4c1d8f43b99324",
+          "size": 306158
+        }
+      },
+      "capture_key_sha256": "023645009e2aa4f75856f48f9aaa33173d6fa48ba84acc2006960b273b5026db",
+      "donor_key_sha256s": [
+        "4924737645b252e00ad42b01bedbb2f5a699dd850dddb5822a2e570ed355d9b7",
+        "20b32ab8a9f5bf35c2e1ef1c7ec095e70561da4b3a4cf3fa7f88d2e64e4b4241"
+      ],
+      "role": "held",
+      "index": 2
+    },
+    {
+      "group": "e912021cc81be9314a2da9610e21f4e701bf0bd590b263f724d615f6188fccb0",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/6WNAOxXiic4_00007_00023.mp4",
+          "sha256": "9b59685d324efa3f83566bae4207cac26c24f6ed8af27a3ee35ee573920ef3cb",
+          "size": 954245
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_6WNAOxXiic4_00007_00023_2-320_woman.mp4",
+          "sha256": "acc01b3e8d491d810bad98d52fab8559336d67911bb5eacaa16a64f3666f12c3",
+          "size": 252585
+        },
+        "uniface": {
+          "path": "uniface/uniface_6WNAOxXiic4_00007_00023_1-141_woman.mp4",
+          "sha256": "946f31faacaa5b508a297c8d604b7c31f751952ab34bbe2febfe45f3cdc1f96f",
+          "size": 256139
+        }
+      },
+      "capture_key_sha256": "4fb747099094c4eac2d9b50078d1604c9a81c41be9fce2277f68e78bb6085423",
+      "donor_key_sha256s": [
+        "7203c5b246a3a1e41e3676fc391d942ff8b468fa8a66bbe4efb4ad6b84959601",
+        "ee8310a9c38aebd449bf523c496e44e76339d068c9de217771977c500939849c"
+      ],
+      "role": "held",
+      "index": 3
+    },
+    {
+      "group": "e3ff583a559c3ae9acf5617424975a188e2f6fc1e738f97ab47b58b1501837bd",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/8F1HaNr9fzE_00040_00055.mp4",
+          "sha256": "e179f00aa0f2f17b0c687c3180f0b4be80ddab4960e9f24196813851c8daf4fc",
+          "size": 835945
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_8F1HaNr9fzE_00040_00055_1-516_woman.mp4",
+          "sha256": "5caa0d1780438c59b2dec67ac15baed67bc0ffab2f7d658162f09ff52e19a0ae",
+          "size": 329671
+        },
+        "uniface": {
+          "path": "uniface/uniface_8F1HaNr9fzE_00040_00055_1-243_woman.mp4",
+          "sha256": "dad653def921d27d2a7f8d8df5b91b6b02bbcd93746e9cd456292293727ea5ab",
+          "size": 330196
+        }
+      },
+      "capture_key_sha256": "bd96b8a2e32ca0c75bfdb16ab7f37d26aabf37e9f2d14cc9cebcaf97a76c819d",
+      "donor_key_sha256s": [
+        "1a88391e9647e36f97d1b42084e09f00e4063236ad016ffe05b431e2afbced1f",
+        "d3eef5eb865d5ee517609378e62457e3ff758e2277be4a31b2f778378dec7942"
+      ],
+      "role": "held",
+      "index": 4
+    },
+    {
+      "group": "840de70cec3f1001ea1be733c232ed17fd2328cf917c21d81061723a6ed4f92f",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/k8VYXshAu8A_00025_00038.mp4",
+          "sha256": "3db4f412d18a547d9c164d6343bca5f05ee8060e4dc329eaf17ce38feb1b76b8",
+          "size": 908236
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_k8VYXshAu8A_00025_00038_1-31_woman.mp4",
+          "sha256": "95e4dac4c9b79d25598a2dbeb99b7ac275a2be23fbed918e4067cc6b3e273462",
+          "size": 310578
+        },
+        "uniface": {
+          "path": "uniface/uniface_k8VYXshAu8A_00025_00038_2-45_woman.mp4",
+          "sha256": "5baf1a2e7f98f9c8d0b1fc581cedeecd39516663d0cd22b6660bd8cbd564d3ee",
+          "size": 329661
+        }
+      },
+      "capture_key_sha256": "e01766b1c5cfe928ceedccb682e96fe14cb8f411405d9c351796643856c5aaac",
+      "donor_key_sha256s": [
+        "aed00b1a1e8fcaced6dbb4a17fe4919754800bb5f742c0600bc74090645b5f5b",
+        "c1047b715d7353c251ed783a72c56a4511ee4c8f7839e411d6af98125b78b0ff"
+      ],
+      "role": "held",
+      "index": 5
+    },
+    {
+      "group": "6d6aefcafa30007ecad5162ef77047c7f49b07592410c1b86e1a47f24b6f3026",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/0bUSHXGKXz4_00450_00467.mp4",
+          "sha256": "84195455092e261e9b7f108af7e17a50e4bb74133d7d43f2139ff9ec0dbad630",
+          "size": 944940
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_0bUSHXGKXz4_00450_00467_3-359_man.mp4",
+          "sha256": "63dbfeadb159063dc8fdfa11018af75169e7add5a589c4c9172d502e403ecaa0",
+          "size": 305132
+        },
+        "uniface": {
+          "path": "uniface/uniface_0bUSHXGKXz4_00450_00467_2-79_man.mp4",
+          "sha256": "3c8915ac711f94d0a6de5c51190d68b497617e3989b2c15a69dea62aba08234b",
+          "size": 313536
+        }
+      },
+      "capture_key_sha256": "e6de9bbe78dda993620648f9bd848ee01375e01cd0045fb09ca9ae335b667c15",
+      "donor_key_sha256s": [
+        "4ef482b2950c476ae1e33b341c99389749cafb55d9a8a56f056458197ac07da1",
+        "904fd8dd325a217acfd4e3253d68c88e1ba5c63a709bdcb88ed139c8165f5407"
+      ],
+      "role": "held",
+      "index": 6
+    },
+    {
+      "group": "b1f20ffb1d767b48a3d637b706c321183a52bebd07a7390bbaeff3c426a0467d",
+      "files": {
+        "ordinary": {
+          "path": "original_videos/YGzb6c_sK0k_00180_00210.mp4",
+          "sha256": "91720521a1e89f8496eda49a9a130ff9ad180ac61152983385ae3dee42dc362e",
+          "size": 975421
+        },
+        "inswapper": {
+          "path": "inswapper/inswapper_YGzb6c_sK0k_00180_00210_3-194_man.mp4",
+          "sha256": "74005c6f4866cac154105d5262a4bd6cde490f4eee9e3c888a381e5ec446d7c8",
+          "size": 471662
+        },
+        "uniface": {
+          "path": "uniface/uniface_YGzb6c_sK0k_00180_00210_3-624_man.mp4",
+          "sha256": "71144138c05fb52c265d90598aa5b11e44988942c5e8d3da5e4d18f116a6493d",
+          "size": 483967
+        }
+      },
+      "capture_key_sha256": "441b786d543741efa32d0e0f441b59a856ae2a30ac09115aed2a43cf6942b27a",
+      "donor_key_sha256s": [
+        "47b01fc8923f7668a06ed78bf5b3c55a4e475844873d5d43a7977376681478c7",
+        "31a9660231bebc6dc4cca6d54c41e67e697e73f2fdce5508b6c6e0064217ac84"
+      ],
+      "role": "held",
+      "index": 7
+    }
+  ],
+  "selected_groups": {
+    "held": 8
+  },
+  "publisher_file_info_sha256": "3ac457019e4ec3df0c6ddff523eb26453b753b9cbfd25848b827060d6c4d2c00",
+  "prior_rosters": {
+    "video-face-portrait-sources-2026-11-17.json": "e4de1a37df3dc0cafae817ccb4f7c8d15e18d66e7538fa3f93c93522e6252ed8",
+    "video-face-shot-continuity-sources-2026-11-17.json": "50a7400d2ebad0ebcd13cb439dc0fd8604fa4fc38d9becfcc628e7e79fd82936",
+    "video-face-square-sources-2026-11-18.json": "9ebdcb8809ff697bae2b22ddc096c8288d6ac4d43800324591f9f0c1ab241db6"
+  },
+  "permission_card_sha256": "72f7a92dab5b5ec9c7a82b05fb2095513a6d7f7650088588ae1984132b4bb6ae"
+}

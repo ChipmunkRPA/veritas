@@ -77,6 +77,12 @@ are not public screening promises or calibrated population probabilities.
   three ordinary alerts and one misplaced edited-file alert on the same
   metro source group. The method remains experimental.
 
+- [Eight-second portrait video](video-face-portrait-eight-seconds-2026-11-18.md)
+  extends the optional local face-change check to the qualified native
+  profile. It located 9 of 16 staged edits and flagged none of 40 ordinary
+  controls. The app pinpointed one edit at 0.667–1.067 seconds when the
+  previous range only partly covered it.
+
 - [Word and other document formats](document-formats-2026-11-17.md) includes
   saved text in filled Word forms and preserves the original body paths and
   character ranges for findings. The older extraction remains available for

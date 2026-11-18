@@ -1,0 +1,38 @@
+{
+  "schema": "chipmunk.portrait-eight-second-return/1",
+  "source_roster_sha256": "f65ebbff8c86f5a7eaf1c33c2099b695fbdd023a61e18b3963b0697aa953b27e",
+  "script_sha256": "6c9c04da34fa4893bde2159fab0d22f742473396ed88c65fba6bf2f9c16b839f",
+  "source_groups": 8,
+  "clock": {
+    "codec_name": "h264",
+    "codec_tag_string": "avc1",
+    "width": 360,
+    "height": 640,
+    "pix_fmt": "yuv420p",
+    "start_pts": 0,
+    "duration_ts": 240000,
+    "time_base": "1/30000"
+  },
+  "frames": 240,
+  "geometry": {
+    "step": "1/30",
+    "sampling_stride_pictures": 2,
+    "flank_samples": 5,
+    "inside_samples": [
+      5,
+      26
+    ]
+  },
+  "point": "0x1.81f19cb4084c6p-5",
+  "rule": {
+    "minimum_locations": 7,
+    "minimum_in_latter_half": 3,
+    "minimum_edit_groups": 4,
+    "maximum_ordinary_flags": 2,
+    "maximum_cut_or_jump_flags": 0,
+    "maximum_misplaced": 1
+  },
+  "criterion": "At least 0.50 temporal intersection-over-union on the native delivered clock",
+  "comparison": "The existing four-second portrait method is outside scope on every 240-picture file. A separate app replay compares enabled and disabled production evidence.",
+  "scope": "Source-disjoint, visually paired controlled replacements and ordinary controls rendered to 360 by 640 H.264 MP4"
+}

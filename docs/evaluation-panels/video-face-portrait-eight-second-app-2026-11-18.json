@@ -1,0 +1,146 @@
+{
+  "schema": "chipmunk.portrait-eight-second-app/1",
+  "held_sha256": "9ffb0a6c1c0c1fcb670a9f3dc52eff7d054eba79773665bf6d85d7a81324fd2a",
+  "cases": [
+    {
+      "name": "known-edit",
+      "file": "00-inswapper.mp4",
+      "input_sha256": "d716f9ff953f76fa110609389d29b8ecb3282f5368feb11113880bfd5c6c490e",
+      "known_range_frames": [
+        20,
+        32
+      ],
+      "selected_frames": [
+        20,
+        32
+      ],
+      "source_frame_crop_images_verified": 6,
+      "signed_original_replay_verified": true,
+      "anchors": {
+        "after": [
+          32,
+          32000,
+          "239f7af904f018c3cdc8e3634c6239f5d2ca17ec094b647c6a41951f43f69ba8"
+        ],
+        "before": [
+          18,
+          18000,
+          "665ef7b0b7440bd9364b40f700a48b5e9c3afc27e85201e34d87698e6c46800f"
+        ],
+        "during": [
+          26,
+          26000,
+          "95c9ac73b95eb56fbde75beed84ff20ecf420106a16c57e639d5d8508ec3421f"
+        ]
+      },
+      "time_base": "1/30000",
+      "confidence_identical": true
+    },
+    {
+      "name": "unchanged",
+      "file": "00-original.mp4",
+      "input_sha256": "a6a58e5a30cb0cd56b5f06fcb5e0bfc458b6d56d9b244b46233e7807054c2cf3",
+      "known_range_frames": null,
+      "selected_frames": null,
+      "confidence_identical": true
+    },
+    {
+      "name": "ordinary-cut",
+      "file": "00-different_shot.mp4",
+      "input_sha256": "b181eb19c616689e0ef244a4f0dc842e38a84a4bc220c8021a3d5d3b9f1de642",
+      "known_range_frames": null,
+      "selected_frames": null,
+      "confidence_identical": true
+    }
+  ],
+  "attempted_edits": [
+    {
+      "file": "00-uniface.mp4",
+      "input_sha256": "3e02197fb872dd12fdbb2495e3f0bf6f07a3476c6c02a5d7585e41aa6c607d9c",
+      "existing_range_ticks": [
+        [
+          131000,
+          154000
+        ],
+        [
+          130000,
+          157000
+        ]
+      ],
+      "retained_new_range": false
+    },
+    {
+      "file": "01-inswapper.mp4",
+      "input_sha256": "42fd3faf288a219b1404c59215e5a4cb1e2174c874f16035bfcc77e7c97b3d83",
+      "existing_range_ticks": [
+        [
+          138000,
+          161000
+        ],
+        [
+          142000,
+          162000
+        ]
+      ],
+      "retained_new_range": false
+    },
+    {
+      "file": "04-uniface.mp4",
+      "input_sha256": "db8755e883100a054982f6e5bdfa39ba473a166a697b7dc07841f43349c7ba44",
+      "existing_range_ticks": [
+        [
+          131000,
+          154000
+        ],
+        [
+          132000,
+          160000
+        ]
+      ],
+      "retained_new_range": false
+    },
+    {
+      "file": "05-inswapper.mp4",
+      "input_sha256": "e43b98138e807870010916d829e4dbee300c3157946cf1148707cd553324250d",
+      "existing_range_ticks": [
+        [
+          146000,
+          169000
+        ],
+        [
+          147000,
+          167000
+        ]
+      ],
+      "retained_new_range": false
+    },
+    {
+      "file": "00-inswapper.mp4",
+      "input_sha256": "d716f9ff953f76fa110609389d29b8ecb3282f5368feb11113880bfd5c6c490e",
+      "existing_range_ticks": [
+        [
+          23000,
+          46000
+        ],
+        [
+          20000,
+          47000
+        ]
+      ],
+      "retained_new_range": true
+    }
+  ],
+  "browser": {
+    "cases": [
+      {
+        "fixture": "known-edit",
+        "source_frames": 3,
+        "face_crops": 3,
+        "native_seek_s": 0.866667
+      }
+    ],
+    "page_errors": 0
+  },
+  "simulated_paid_jobs": 10,
+  "unpaid_jobs": 0
+}

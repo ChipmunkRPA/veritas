@@ -25,6 +25,7 @@ from app.evidence.video_packet_versions import (
     OPPOSITE_PANE_TRACK_AVC_PROPOSAL_VERSION,
     OVERLAPPING_PANE_TRACK_AVC_PROPOSAL_VERSION,
     PANE_TRACK_AVC_PROPOSAL_VERSION,
+    PORTRAIT_EIGHT_SECOND_RETURN_VERSION,
     PORTRAIT_FACE_RETURN_VERSION,
     PORTRAIT_HEVC_FACE_RETURN_VERSION,
     POSITION_TRACK_AVC_PROPOSAL_VERSION,
@@ -96,7 +97,8 @@ METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VE
                    proposal.OVERLAPPING_PANE_TRACK_AVC_METHOD: OVERLAPPING_PANE_TRACK_AVC_PROPOSAL_VERSION,
                    proposal.BOUNDARY_AVC_METHOD: BOUNDARY_AVC_PROPOSAL_VERSION,
                    local.METHOD: LOCAL_FACE_RETURN_VERSION, portrait.METHOD: PORTRAIT_FACE_RETURN_VERSION,
-                   portrait.HEVC_METHOD: PORTRAIT_HEVC_FACE_RETURN_VERSION, portrait.SQUARE_METHOD: SQUARE_FACE_RETURN_VERSION}
+                   portrait.HEVC_METHOD: PORTRAIT_HEVC_FACE_RETURN_VERSION, portrait.SQUARE_METHOD: SQUARE_FACE_RETURN_VERSION,
+                   portrait.EIGHT_SECOND_METHOD: PORTRAIT_EIGHT_SECOND_RETURN_VERSION}
 LOCAL_METHODS = portrait.METHODS | {local.METHOD}
 WINDOW_METHODS = frozenset((short_windows.METHOD, carriers.METHOD))
 POINT = 0.10
@@ -319,10 +321,14 @@ def _validate_local_return(record, source, table_pts, interpolated, rotation, tr
     method = record["method"]
     hevc = method == portrait.HEVC_METHOD
     square = method == portrait.SQUARE_METHOD
-    geometry = local.PORTRAIT if method in portrait.METHODS else local.LANDSCAPE
+    eight_second = method == portrait.EIGHT_SECOND_METHOD
+    geometry = portrait.geometry(method) if method in portrait.METHODS else local.LANDSCAPE
     if square:
         point = portrait.SQUARE_POINT if dimensions == portrait.SQUARE_DIMENSIONS else None
         encoding = portrait.SQUARE_ENCODING
+    elif eight_second:
+        point = portrait.EIGHT_SECOND_POINT if dimensions == portrait.EIGHT_SECOND_DIMENSIONS else None
+        encoding = portrait.EIGHT_SECOND_ENCODING
     else:
         point = portrait.POINTS.get(dimensions) if method in portrait.METHODS else (
             local.POINT if dimensions == local.DIMENSIONS else None)
@@ -353,6 +359,7 @@ def _validate_local_return(record, source, table_pts, interpolated, rotation, tr
     first = faces[start]["pts"]
     _require(not hevc or first * base == start * geometry.step, "HEVC face evidence requires a zero-origin clock")
     _require(not square or first * base == start * geometry.step, "Square face evidence requires a zero-origin clock")
+    _require(not eight_second or first * base == start * geometry.step, "Eight-second face evidence requires a zero-origin clock")
     for index, item in faces.items():
         validate_face_input(item, source, appearance=True)
         _require((item["pts"] - first) * base == (index - start) * geometry.step,

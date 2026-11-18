@@ -137,3 +137,22 @@ def test_square_face_review_requires_the_measured_avc1_raster_and_zero_origin():
     assert not qualified(replace(table, rotation=90), encoding)
     assert not qualified(replace(table, time_base="1/30001"), encoding)
     assert not qualified(replace(table, pts=tuple(p + 1000 for p in table.pts)), encoding)
+
+
+def test_eight_second_portrait_face_review_preserves_the_complete_native_clock():
+    table = FrameTable(time_base="1/30000", pts=tuple(1000 * i for i in range(240)), key_frames=(0,),
+                       pict_types="I" * 240, width=360, height=640, coded_width=360, coded_height=640,
+                       rotation=0, interpolated=())
+    qualified = face_portrait_return_binding.eight_second_supported
+    encoding = ("h264", "yuv420p", "avc1")
+    assert qualified(table, encoding)
+    assert not face_portrait_return_binding.supported(table, encoding)
+    assert not qualified(replace(table, pts=table.pts[:-1]), encoding)
+    assert not qualified(replace(table, interpolated=(120,)), encoding)
+    assert not qualified(replace(table, pts=tuple(p + 1000 for p in table.pts)), encoding)
+    assert not qualified(replace(table, rotation=90), encoding)
+    assert not qualified(replace(table, width=480, height=480, coded_width=480, coded_height=480), encoding)
+    assert not qualified(table, ("h264", "yuv420p", "avc3"))
+    scan = face_portrait_return_binding.geometry(face_portrait_return_binding.EIGHT_SECOND_METHOD)
+    before, inside, after = scan.support(176, 204)
+    assert (before[-1], inside[len(inside) // 2], after[0]) == (174, 190, 204)

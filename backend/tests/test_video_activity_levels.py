@@ -3,7 +3,7 @@
 import numpy as np
 import pytest
 
-from app.bench.video_speech_activity_gap import BLOCK
+from app.bench.video_speech_activity_gap import BLOCK, scan
 from app.evidence import video_activity_levels as levels
 
 
@@ -32,3 +32,18 @@ def test_stereo_measurement_rejects_clock_length_and_power_outside_signed_pcm():
     trace[0] = [32_768**2 * BLOCK + 1, 0, 0]
     with pytest.raises(ValueError, match="signed sample range"):
         levels.validate(trace, BLOCK * 10)
+
+
+def test_public_speech_activity_replay_matches_the_frozen_two_channel_scan():
+    random = np.random.default_rng(101)
+    pictures = [{"index": index, "sample": index * 533, "gap_units": 40_000 + 120_000 * (index % 3)}
+                for index in range(120)]
+    observed = []
+    for start in (13, 22, 36, 54, 71):
+        signals = random.uniform(.55, 1.0, (2, 120))
+        signals[:, start:start + 13] = random.uniform(0, .3, (2, 13))
+        original, enhanced = signals.tolist()
+        old = scan(original, enhanced, pictures)["both"]
+        assert levels.scan_both(original, enhanced, pictures) == old
+        observed.append(old["reading"]["span"])
+    assert len({tuple(span) for span in observed}) == 5

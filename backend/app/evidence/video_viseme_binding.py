@@ -156,8 +156,6 @@ def activity_profile(timestamps, time_base, mapping):
 
 
 def _activity(raw, inputs, mapping, profile):
-    from app.bench.video_speech_activity_gap import BLOCK, scan
-
     traces = raw[ACTIVITY_KEY]
     if (not isinstance(traces, dict) or set(traces) - {activity_levels.SQUARES} != {"original", "reduced", "stereo_sha256"}
             or not _SHA.fullmatch(str(traces["stereo_sha256"])) or inputs["phones"]):
@@ -168,14 +166,14 @@ def _activity(raw, inputs, mapping, profile):
     values = []
     for name in ("original", "reduced"):
         trace = traces[name]
-        if (not isinstance(trace, list) or len(trace) != inputs["samples"] // BLOCK
+        if (not isinstance(trace, list) or len(trace) != inputs["samples"] // activity_levels.BLOCK
                 or any(not isinstance(item, str) or len(item) > 28 for item in trace)):
             raise ValueError("Speech activity does not match the measured sample clock")
         try:
             values.append([float.fromhex(item) for item in trace])
         except (ValueError, OverflowError) as error:
             raise ValueError("Invalid speech activity value") from error
-    result = scan(*values, inputs["frames"])["both"]
+    result = activity_levels.scan_both(*values, inputs["frames"])
     chosen = result["reading"]
     if chosen and chosen["margin_millionths"] > ACTIVITY_POINTS[profile]:
         witness = {"audio_source_pts": chosen["span"], "picture_source_samples": chosen["span"],

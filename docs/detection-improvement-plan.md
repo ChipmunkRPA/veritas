@@ -66,6 +66,16 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Standalone low-power audio](audio-local-floor-return-2026-11-18.md)
+  tested 32 speech edits and 32 room replacements with matched ordinary
+  controls. Both readings located zero at their frozen points. The exact
+  search grid could represent every annotated range before scoring.
+
+- [Standalone checklist items](writing-list-item-2026-11-18.md)
+  tested scoring each item alone and relative to similar-length items.
+  Neither reading located any of five admitted rewrites. The new readings
+  added alerts on four and three of nine ordinary groups, respectively.
+
 - [Short face changes in square MP4](video-face-square-transfer-2026-11-18.md)
   extends the optional local check to the tested 480 × 480 four-second
   H.264 profile. The square test located 28 of 36 paired staged edits and

@@ -19,13 +19,15 @@ VIDEO_MIMES = {"video/mp4", "video/quicktime", "video/x-matroska", "video/webm",
 DOCX_MIME = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 ODT_MIME = "application/vnd.oasis.opendocument.text"
 PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+XLSX_MIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 EPUB_MIME = "application/epub+zip"
 RTF_MIME = "application/rtf"
 OFFICE_CREDENTIAL_EXTENSIONS = {DOCX_MIME: ".docx", ODT_MIME: ".odt"}
-DOCUMENT_ARCHIVES = {".docx": DOCX_MIME, ".odt": ODT_MIME, ".pptx": PPTX_MIME, ".epub": EPUB_MIME}
+DOCUMENT_ARCHIVES = {".docx": DOCX_MIME, ".odt": ODT_MIME, ".pptx": PPTX_MIME, ".epub": EPUB_MIME, ".xlsx": XLSX_MIME}
 DOCUMENT_ARCHIVE_EXTENSIONS = {mime: extension for extension, mime in DOCUMENT_ARCHIVES.items()}
+DELIMITED_TEXT = {".csv": "text/csv", ".tsv": "text/tab-separated-values"}
 HTML_EXTS = (".html", ".htm", ".xhtml")
-DOC_EXTS = {".pdf", ".txt", ".md", ".markdown", ".eml", ".rtf", *HTML_EXTS, *DOCUMENT_ARCHIVES}
+DOC_EXTS = {".pdf", ".txt", ".md", ".markdown", ".eml", ".rtf", *HTML_EXTS, *DOCUMENT_ARCHIVES, *DELIMITED_TEXT}
 RTF_HEADER = re.compile(rb"\{\\rtf1(?=[\\{}\s])")
 M4A_BRANDS = {b"M4A ", b"M4B "}
 ISO_BRANDS = {b"isom", b"iso2", b"iso4", b"iso5", b"iso6", b"mp41", b"mp42", b"dash"}
@@ -236,6 +238,8 @@ def validate_kind(kind: str, data: bytes, filename: str, size: int | None = None
             raise ValueError("This file is not a readable Rich Text (RTF) document. Save it as RTF, DOCX or PDF.")
         elif ext == ".eml" and mime in (None, "message/rfc822"):
             mime = "message/rfc822"
+        elif ext in DELIMITED_TEXT and (mime is None or mime.startswith("text/")):
+            mime = DELIMITED_TEXT[ext]
         elif mime is None and ext in DOC_EXTS and ext not in DOCUMENT_ARCHIVES:
             pass
         elif mime and mime.startswith("text/"):
@@ -245,8 +249,8 @@ def validate_kind(kind: str, data: bytes, filename: str, size: int | None = None
             if upload_ext in {".doc", ".docm", ".pages", ".msg", ".ppt", ".pptm", ".key", ".odp"}:
                 raise ValueError("Export Word or Pages files as DOCX or PDF, presentations as PPTX or PDF, and Outlook messages as EML or PDF.")
             if upload_ext in {".xls", ".xlsx", ".xlsm", ".ods"}:
-                raise ValueError("Export the sheets containing writing as PDF, or paste the passages you want analysed.")
-            raise ValueError(f"Unsupported document type ({mime or ext}). Choose PDF, DOCX, ODT, PPTX, EPUB, RTF, TXT, Markdown, HTML/XHTML or EML.")
+                raise ValueError("Save the spreadsheet as a macro-free XLSX, CSV or PDF containing the writing you want checked.")
+            raise ValueError(f"Unsupported document type ({mime or ext}). Choose PDF, DOCX, ODT, PPTX, XLSX, CSV, TSV, EPUB, RTF, TXT, Markdown, HTML/XHTML or EML.")
         mime = mime or "text/plain"
     else:
         raise ValueError("Unknown analysis kind")

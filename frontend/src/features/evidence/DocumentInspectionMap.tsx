@@ -16,6 +16,12 @@ export function writingPatternOnly(packet: DocumentEvidencePacket): boolean {
 }
 
 export function packageAnchorLabel(anchor: DocumentAnchor): string | null {
+  if (anchor.row != null && anchor.column != null) {
+    if (anchor.part_kind === 'spreadsheet_cell' && anchor.part_index != null) {
+      return `Sheet ${anchor.part_index + 1}, row ${anchor.row}, column ${anchor.column}`
+    }
+    if (anchor.part_kind === 'delimited_cell') return `Row ${anchor.row}, column ${anchor.column}`
+  }
   const label = anchor.part_kind === 'slide' ? 'Slide' : anchor.part_kind === 'epub_entry' ? 'EPUB reading entry' : null
   if (!label || anchor.part_index == null || anchor.paragraph_index == null) return null
   return `${label} ${anchor.part_index + 1}, text block ${anchor.paragraph_index + 1}`

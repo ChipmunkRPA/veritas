@@ -1,7 +1,8 @@
 # Document formats and signed source records
 
 Chipmunk Verify accepts Word (`.docx`), OpenDocument Text (`.odt`), PDF,
-PowerPoint (`.pptx`), EPUB, Rich Text (`.rtf`), plain text, Markdown, HTML and XHTML, and email (`.eml`). These use the same local
+PowerPoint (`.pptx`), Excel (`.xlsx`), CSV, TSV, EPUB, Rich Text (`.rtf`), plain text,
+Markdown, HTML and XHTML, and email (`.eml`). These use the same local
 writing pipeline and produce PDF and JSON reports. The document upload
 limit is 25 MB in the standard configuration.
 
@@ -11,6 +12,8 @@ limit is 25 MB in the standard configuration.
 | ODT | Body paragraphs, headings, lists, and tables | Decoded body paragraph number and character range |
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
 | PPTX | Editable text boxes and tables on visible slides | Slide in presentation order, text block, and decoded character range |
+| XLSX | Literal text on visible worksheet tabs, rows and columns | Workbook sheet order, row, column and saved cell character range |
+| CSV and TSV | Text fields in UTF-8 or BOM-marked UTF-16 delimited files | Record, field and decoded character range |
 | EPUB | XHTML text in the main reading order | Reading-order entry, text block, and decoded character range |
 | RTF | Extracted writing from standard Rich Text files | Decoded text block number and character range |
 | EML | The selected plain-text or HTML message body | Decoded text and supported HTML source positions |
@@ -66,9 +69,9 @@ Export Google Docs, Apple Pages, and older Word (`.doc`) files as DOCX or
 PDF before uploading. Export Google Slides and Keynote as PowerPoint or PDF.
 Export Outlook (`.msg`) files as EML or PDF. Keep the
 original file if its native provenance matters. A PDF export can also include
-Word text boxes, headers and footers in their rendered layout.
-For spreadsheets, export the sheets containing writing as PDF or paste the
-passages to assess.
+Word footnotes, text boxes, headers and footers in their rendered layout.
+For older, macro-enabled or OpenDocument spreadsheets, save the sheets with
+writing as macro-free XLSX, CSV or PDF.
 Before creating a payment, checkout checks that writing files have at least
 15 readable words and fit within the configured extracted-text limit, normally
 120,000 characters. Some Word files can still produce native revision evidence
@@ -135,6 +138,34 @@ of the analysis and both exports. All 15 signed packages verified against
 their original files. The run used the local CPU writing checks with the
 optional large model pair disabled.
 [Browser, export, and original-file receipt](evaluation-panels/document-format-browser-checkout-2026-11-18.json)
+
+### Spreadsheet writing
+
+Excel writing checks read literal shared and inline text. Formula results,
+numeric cells, hidden sheets, rows and columns, comments, charts, drawings
+and images are outside this check. The reader preserves the saved workbook
+order even when some sheets are hidden. It opens no links and runs no formulas.
+CSV and TSV checks read text fields in consecutive records, including quoted
+line breaks within a field. Headers and blank records count toward row numbers.
+Numeric, link-only and formula-looking fields are skipped. Use comma-separated
+CSV or tab-separated TSV for predictable import.
+
+The web view and PDF show one-based sheet, row and column labels. JSON
+records `part_index` as a zero-based workbook index for Excel, one-based rows
+and columns for all three formats, and decoded Unicode character ranges.
+The signed package can replay those ranges against the submitted original.
+The writing results concern only the passages the app could read.
+[Microsoft's shared text reference](https://learn.microsoft.com/en-us/office/open-xml/spreadsheet/working-with-the-shared-string-table)
+· [CSV syntax reference](https://www.rfc-editor.org/rfc/rfc4180)
+
+A local Chromium test submitted DOCX, XLSX, CSV and TSV through four simulated
+USD 9.99 checkouts. Zero jobs started before payment. All four produced a PDF,
+matching JSON and a signed package that verified against its original. Excel,
+CSV and TSV each retained 18 exact cell locations. Text from hidden Excel
+cells and a cached formula stayed out of the evidence. An XLSX written by
+LibreOffice separately matched the source CSV at all six mapped cells.
+The browser test used local CPU writing checks with the optional large model
+pair disabled.
 
 The local app also compares two saved HTML articles when an earlier copy is
 available. It marks wording changes in both decoded sources and gives the

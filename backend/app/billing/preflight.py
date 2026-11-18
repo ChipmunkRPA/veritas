@@ -211,6 +211,9 @@ def _document(path: Path, extension: str) -> None:
     if extension in {".pptx", ".epub"}:
         too_short = (f"The {extension[1:].upper()} needs at least {MIN_WORDS} readable words for writing analysis. "
                      "For image-only pages or slides, upload a PDF for text recognition. No payment was started.")
+    elif extension in {".xlsx", ".csv", ".tsv"}:
+        too_short = (f"The {extension[1:].upper()} needs at least {MIN_WORDS} readable words in supported text cells. "
+                     "No payment was started.")
     elif extension == ".docx" and not readable:
         raise PreflightError("The Word document has no readable body text. Save scanned pages or unsupported layouts as a PDF before paying.")
     elif extension == ".odt" and not readable:

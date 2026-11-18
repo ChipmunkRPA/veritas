@@ -80,11 +80,11 @@ class _Package:
         root = self.xml(name)
         rows = {}
         if root.tag != RELATIONSHIPS + "Relationships":
-            raise ValueError("The presentation has an invalid relationship table")
+            raise ValueError("The document has an invalid relationship table")
         for row in root.findall(RELATIONSHIPS + "Relationship"):
             key = row.get("Id")
             if not key or key in rows:
-                raise ValueError("The presentation has ambiguous relationships")
+                raise ValueError("The document has ambiguous relationships")
             rows[key] = row
         return rows
 

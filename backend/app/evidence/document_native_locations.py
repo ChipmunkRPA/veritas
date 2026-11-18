@@ -11,7 +11,9 @@ PARAGRAPH_MAP_KEY = "decoded_paragraph_locations"
 PARAGRAPH_MAP = "decoded-body-paragraphs/1"
 # The RTF reader returns the same decoded line breaks for soft breaks and paragraph breaks.
 # The saved coordinate describes a decoded text block.
-PARAGRAPH_COORDINATES = {"odt": "odt_paragraph", "rtf": "rtf_paragraph", "pptx": "pptx_block", "epub": "epub_block"}
+CELL_METHODS = {"xlsx": "spreadsheet_cell", "csv": "delimited_cell", "tsv": "delimited_cell"}
+PARAGRAPH_COORDINATES = {"odt": "odt_paragraph", "rtf": "rtf_paragraph", "pptx": "pptx_block", "epub": "epub_block",
+                         **{method: f"{method}_cell" for method in CELL_METHODS}}
 PACKAGE_METHODS = {"pptx": "slide", "epub": "epub_entry"}
 PACKAGE_LABELS = {"slide": "Slide", "epub_entry": "EPUB reading entry"}
 PPTX_VISIBILITY_KEY = "pptx_visibility"
@@ -121,6 +123,10 @@ def _coordinate(source, coverage, anchor):
         if method in PACKAGE_METHODS and (anchor.get("part_kind") != PACKAGE_METHODS[method]
                 or type(anchor.get("part_index")) is not int or anchor["part_index"] < 0):
             raise ValueError("Missing slide or reading-order position")
+        if method in CELL_METHODS and (anchor.get("part_kind") != CELL_METHODS[method]
+                or any(type(anchor.get(axis)) is not int or anchor[axis] < 1 for axis in ("row", "column"))
+                or (method == "xlsx" and (type(anchor.get("part_index")) is not int or anchor["part_index"] < 0))):
+            raise ValueError("Missing spreadsheet cell position")
         return PARAGRAPH_COORDINATES.get(method)
     if method == "html" and kind == "markup" and valid_html_article_scope(coverage.get(HTML_ARTICLE_KEY)):
         return "decoded_html"
@@ -136,7 +142,13 @@ def _coordinate(source, coverage, anchor):
 
 
 def package_anchor_label(anchor):
-    label = PACKAGE_LABELS.get(anchor.get("part_kind"))
+    kind = anchor.get("part_kind")
+    if anchor.get("kind") == "markup" and kind in CELL_METHODS.values() and {"row", "column"} <= anchor.keys():
+        if kind == "spreadsheet_cell" and "part_index" in anchor:
+            return f"Sheet {anchor['part_index'] + 1}, row {anchor['row']}, column {anchor['column']}"
+        if kind == "delimited_cell":
+            return f"Row {anchor['row']}, column {anchor['column']}"
+    label = PACKAGE_LABELS.get(kind)
     if label and anchor.get("kind") == "markup" and "part_index" in anchor:
         return f"{label} {anchor['part_index'] + 1}, text block {anchor['paragraph_index'] + 1}"
     return None

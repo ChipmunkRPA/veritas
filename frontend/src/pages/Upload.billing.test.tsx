@@ -49,7 +49,7 @@ describe('paid analysis intake', () => {
   it('accepts Word and saved XHTML, and guides users who choose an older Word file', () => {
     const { container } = mount()
     const input = container.querySelector<HTMLInputElement>('input[type="file"]')!
-    expect(input.accept.split(',')).toEqual(expect.arrayContaining(['.docx', '.pdf', '.odt', '.pptx', '.epub', '.rtf', '.txt', '.md', '.html', '.xhtml', '.eml']))
+    expect(input.accept.split(',')).toEqual(expect.arrayContaining(['.docx', '.pdf', '.odt', '.pptx', '.xlsx', '.csv', '.tsv', '.epub', '.rtf', '.txt', '.md', '.html', '.xhtml', '.eml']))
     fireEvent.change(input, { target: { files: [new File(['old Word'], 'draft.DOC')] } })
     expect(screen.getByRole('alert').textContent).toContain('Save the older Word file as DOCX or PDF')
     fireEvent.change(input, { target: { files: [new File(['Word'], 'draft.DOCX')] } })
@@ -60,6 +60,15 @@ describe('paid analysis intake', () => {
     expect(screen.queryByText(/Word checks body paragraphs/)).toBeNull()
     expect(screen.queryByRole('alert')).toBeNull()
     expect(billingApi.checkout).not.toHaveBeenCalled()
+  })
+  it('explains the scope of Excel writing checks and how to upload older spreadsheets', () => {
+    const { container } = mount()
+    const input = container.querySelector<HTMLInputElement>('input[type="file"]')!
+    fireEvent.change(input, { target: { files: [new File(['old workbook'], 'notes.xls')] } })
+    expect(screen.getByRole('alert').textContent).toContain('macro-free XLSX, CSV or PDF')
+    fireEvent.change(input, { target: { files: [new File(['workbook'], 'notes.XLSX')] } })
+    expect(screen.queryByRole('alert')).toBeNull()
+    expect(screen.getByText(/Excel checks saved writing on visible sheets, rows and columns/)).toBeTruthy()
   })
   it('shows one coverage notice per format in a document batch', () => {
     fixtures.billing.data.enabled = false

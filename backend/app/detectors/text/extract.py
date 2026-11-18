@@ -810,7 +810,7 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
             "The file contains Word revision marks. The writing checks may omit text within those marks.")
     doc.meta = {"method": "python-docx", "paragraph_count": len(parts) - len(joined or ()),
                 "percentage_body_paragraphs": percentage_body_paragraphs,
-                "coverage_warning": ("Body paragraphs and tables were extracted in document order. Headers, footers, text boxes and "
+                "coverage_warning": ("Body paragraphs and tables were extracted in document order. Headers, footers, notes, text boxes and "
                                      "embedded attachments were not checked; DOCX has no stable page numbers." + word_warning)}
     if include_word_content_controls:
         doc.meta[WORD_CONTENT_CONTROLS_KEY] = WORD_CONTENT_CONTROLS
@@ -1183,6 +1183,25 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
         if ext == ".pptx" and skip_hidden_slide_groups:
             d.meta[document_native_locations.PPTX_VISIBILITY_KEY] = document_native_locations.PPTX_VISIBILITY
             d.meta["coverage_warning"] += " Hidden groups and their contents are excluded."
+    elif ext in {".xlsx", ".csv", ".tsv"}:
+        from app.core.config import settings
+        limit = settings.max_document_chars
+        if ext == ".xlsx":
+            from app.detectors.text import spreadsheet_cells
+
+            parts = spreadsheet_cells.read(path, max_chars=limit)
+        else:
+            from app.detectors.text import delimited_cells
+
+            parts = delimited_cells.read(path, ext, max_chars=limit)
+        warning = ("The writing check reads saved text in cells on visible worksheets, rows and columns. "
+                   "Formulas, calculated results, numbers, comments, charts, drawings and images are outside this check."
+                   if ext == ".xlsx" else
+                   "The writing check reads text fields as separate passages. Row numbers count records, including headings and blank records. "
+                   "Numeric-only and formula-like fields are excluded.")
+        d = _join_mapped(parts, map_paragraphs=True)
+        d.meta = {"method": ext[1:], "paragraph_count": len(parts), "coverage_warning": warning,
+                  document_native_locations.PARAGRAPH_MAP_KEY: document_native_locations.PARAGRAPH_MAP}
     elif ext == ".eml":
         d = extract_eml(path)
     else:

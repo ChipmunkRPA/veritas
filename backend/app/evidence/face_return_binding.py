@@ -39,6 +39,7 @@ from app.evidence.video_packet_versions import (
     SHORT_PROPOSAL_VERSION,
     SHORT_WEBM_PROPOSAL_VERSION,
     SHORT_WINDOW_VERSION,
+    SQUARE_FACE_RETURN_VERSION,
 )
 
 METHOD = "face-short-return/1"
@@ -95,7 +96,7 @@ METHOD_VERSIONS = {METHOD: SHORT_FACE_VERSION, DENSE_METHOD: DENSE_SHORT_FACE_VE
                    proposal.OVERLAPPING_PANE_TRACK_AVC_METHOD: OVERLAPPING_PANE_TRACK_AVC_PROPOSAL_VERSION,
                    proposal.BOUNDARY_AVC_METHOD: BOUNDARY_AVC_PROPOSAL_VERSION,
                    local.METHOD: LOCAL_FACE_RETURN_VERSION, portrait.METHOD: PORTRAIT_FACE_RETURN_VERSION,
-                   portrait.HEVC_METHOD: PORTRAIT_HEVC_FACE_RETURN_VERSION}
+                   portrait.HEVC_METHOD: PORTRAIT_HEVC_FACE_RETURN_VERSION, portrait.SQUARE_METHOD: SQUARE_FACE_RETURN_VERSION}
 LOCAL_METHODS = portrait.METHODS | {local.METHOD}
 WINDOW_METHODS = frozenset((short_windows.METHOD, carriers.METHOD))
 POINT = 0.10
@@ -317,10 +318,15 @@ def _validate_local_return(record, source, table_pts, interpolated, rotation, tr
     dimensions = source["width"], source["height"]
     method = record["method"]
     hevc = method == portrait.HEVC_METHOD
+    square = method == portrait.SQUARE_METHOD
     geometry = local.PORTRAIT if method in portrait.METHODS else local.LANDSCAPE
-    point = portrait.POINTS.get(dimensions) if method in portrait.METHODS else (
-        local.POINT if dimensions == local.DIMENSIONS else None)
-    encoding = portrait.HEVC_ENCODING if hevc else DENSE_ENCODING
+    if square:
+        point = portrait.SQUARE_POINT if dimensions == portrait.SQUARE_DIMENSIONS else None
+        encoding = portrait.SQUARE_ENCODING
+    else:
+        point = portrait.POINTS.get(dimensions) if method in portrait.METHODS else (
+            local.POINT if dimensions == local.DIMENSIONS else None)
+        encoding = portrait.HEVC_ENCODING if hevc else DENSE_ENCODING
     _require(point is not None and source["frame_count"] == geometry.frame_count and (not hevc or dimensions == portrait.HEVC_DIMENSIONS)
              and not (rotation or truncated or interpolated) and record["time_base"] == source["time_base"]
              and record["scheduled_frame_indices"] == list(geometry.schedule)
@@ -346,6 +352,7 @@ def _validate_local_return(record, source, table_pts, interpolated, rotation, tr
              "Local face-change source positions disagree with the sampled intervals")
     first = faces[start]["pts"]
     _require(not hevc or first * base == start * geometry.step, "HEVC face evidence requires a zero-origin clock")
+    _require(not square or first * base == start * geometry.step, "Square face evidence requires a zero-origin clock")
     for index, item in faces.items():
         validate_face_input(item, source, appearance=True)
         _require((item["pts"] - first) * base == (index - start) * geometry.step,

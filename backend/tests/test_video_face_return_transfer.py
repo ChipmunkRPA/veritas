@@ -121,3 +121,19 @@ def test_portrait_face_review_requires_exact_upright_video_presentation():
         replace(table, width=720, height=1280, coded_width=720, coded_height=1280), hevc)
     before, during, after = PORTRAIT.support(20, 40)
     assert before == [10, 12, 14, 16, 18] and during == list(range(20, 40, 2)) and after == [40, 42, 44, 46, 48]
+
+
+def test_square_face_review_requires_the_measured_avc1_raster_and_zero_origin():
+    table = FrameTable(time_base="1/30000", pts=tuple(1000 * i for i in range(120)), key_frames=(0,),
+                       pict_types="I" * 120, width=480, height=480, coded_width=480, coded_height=480,
+                       rotation=0, interpolated=())
+    qualified = face_portrait_return_binding.square_supported
+    encoding = ("h264", "yuv420p", "avc1")
+    assert qualified(table, encoding)
+    assert not face_portrait_return_binding.supported(table, encoding[:2])
+    assert not qualified(table, ("h264", "yuv420p", "avc3"))
+    assert not qualified(replace(table, width=496, coded_width=496), encoding)
+    assert not qualified(replace(table, coded_width=496), encoding)
+    assert not qualified(replace(table, rotation=90), encoding)
+    assert not qualified(replace(table, time_base="1/30001"), encoding)
+    assert not qualified(replace(table, pts=tuple(p + 1000 for p in table.pts)), encoding)

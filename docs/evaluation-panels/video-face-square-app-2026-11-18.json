@@ -1,0 +1,69 @@
+{
+  "schema": "chipmunk.square-face-checkout/1",
+  "held_sha256": "3260f511eb867c3b484f72d70a988b7b59e9bb64cbdef37231166bc113453b47",
+  "cases": [
+    {
+      "case": "known-edit",
+      "file": "00-inswapper.mp4",
+      "input_sha256": "38f80313a51bebe684121a4bdefa8786328cf9d6c667216c0696c122f9ebe93f",
+      "labeled_frames": [
+        16,
+        28
+      ],
+      "selected_frames": [
+        16,
+        28
+      ],
+      "source_frame_crop_images_verified": 6,
+      "signed_original_replay_verified": true,
+      "anchors": {
+        "after": [
+          28,
+          28000,
+          "1aad0afa99b78247621ab800e81c0e1670cb7c2026c6cde12ec70b36d21c29cb"
+        ],
+        "before": [
+          14,
+          14000,
+          "2c6254e27c7f04483aaef9fa72038430e65d07b21c9f0ca8f97c30cae4d08119"
+        ],
+        "during": [
+          22,
+          22000,
+          "9dd8096fd45f3c851e858155c4b02168af3836722ceaa12283b3d0a6db744e8d"
+        ]
+      },
+      "time_base": "1/30000",
+      "confidence_identical": true
+    },
+    {
+      "case": "unchanged",
+      "file": "00-original.mp4",
+      "input_sha256": "b136801c26f26ecee99bc2407fae63f45dbd5b516461021f74b1ace076c2ba6b",
+      "labeled_frames": null,
+      "selected_frames": null,
+      "confidence_identical": true
+    },
+    {
+      "case": "ordinary-cut",
+      "file": "00-different_shot.mp4",
+      "input_sha256": "34a0e318c6174c5dbe3941e7ba4be55e30965b7dc5d5c1c74c281438cf2b7dce",
+      "labeled_frames": null,
+      "selected_frames": null,
+      "confidence_identical": true
+    }
+  ],
+  "browser": {
+    "cases": [
+      {
+        "fixture": "known-edit",
+        "source_frames": 3,
+        "face_crops": 3,
+        "native_seek_s": 0.733333
+      }
+    ],
+    "page_errors": 0
+  },
+  "simulated_paid_jobs": 6,
+  "unpaid_jobs": 0
+}

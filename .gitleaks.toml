@@ -47,6 +47,13 @@ paths = ['''(^|/)docs/evaluation-panels/audio-v8-source-plan\.json$''']
 regexTarget = "match"
 regexes = ['''^(?:voice_key_sha256|source_key_sha256)": "[0-9a-f]{64}"$''']
 
+[[rules.allowlists]]
+description = "Square video public capture-link SHA-256 commitments verified against the pinned publisher CSV"
+condition = "AND"
+paths = ['''(^|/)docs/evaluation-panels/video-face-square-sources-2026-11-18\.json$''']
+regexTarget = "match"
+regexes = ['''^capture_key_sha256": "[0-9a-f]{64}"$''']
+
 # All thirteen initial findings were recomputed from pinned local model assets
 # and installed tokenizer implementations. Restrict to exact field/value pairs.
 [[rules.allowlists]]

@@ -481,6 +481,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             if record["method"] == face_portrait_return_binding.HEVC_METHOD:
                 encoding = (*encoding, delivery.get("codec_tag"), delivery.get("profile"))
                 accepts = face_portrait_return_binding.hevc_supported
+            elif record["method"] == face_portrait_return_binding.SQUARE_METHOD:
+                encoding = (*encoding, delivery.get("codec_tag"))
+                accepts = face_portrait_return_binding.square_supported
             else:
                 accepts = face_portrait_return_binding.supported if record["method"] == face_portrait_return_binding.METHOD else supported
             if not accepts(table, encoding) or face_return.source_carrier(original) != "mp4":

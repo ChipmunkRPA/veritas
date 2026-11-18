@@ -1,0 +1,36 @@
+{
+  "schema": "chipmunk.square-face-transfer/1",
+  "fresh_sha256": "9ebdcb8809ff697bae2b22ddc096c8288d6ac4d43800324591f9f0c1ab241db6",
+  "roster_sha256": "e4de1a37df3dc0cafae817ccb4f7c8d15e18d66e7538fa3f93c93522e6252ed8",
+  "calibration_sha256": "51cc2931f2d8aab4d6eb346fee02032dce4a7177700fe711e72960cbbd445d46",
+  "held_sha256": "aaac59d611359f7b121879e58c248a96039d89a88bdeacbe982d49c1d76840ec",
+  "point": "0x1.81f19cb4084c6p-5",
+  "size": [
+    480,
+    480
+  ],
+  "clock": {
+    "codec_name": "h264",
+    "codec_tag_string": "avc1",
+    "width": 480,
+    "height": 480,
+    "pix_fmt": "yuv420p",
+    "start_pts": 0,
+    "duration_ts": 120000,
+    "time_base": "1/30000"
+  },
+  "rules": {
+    "minimum_paired_located_retention": 0.7,
+    "maximum_ordinary_paired": 2,
+    "minimum_fresh_located": 4,
+    "minimum_fresh_groups": 3,
+    "maximum_ordinary_fresh": 1,
+    "maximum_cut_or_jump": 0,
+    "maximum_misplaced_per_cohort": 1
+  },
+  "script_sha256": "1cc3f9295850d77403de0b29c8f0919e49166553a87a3a51dcfdfde0f2b0c195",
+  "sample_start": "0.40 seconds into the pinned capture",
+  "minimum_temporal_iou": 0.5,
+  "edits": "Same contiguous H.264 staged replacements and ordinary edits as the portrait panel.",
+  "scope": "Eighteen earlier matched recordings at a new crop, plus eight reserved recordings. The inherited portrait point and adjacent picture check are held fixed."
+}

@@ -66,6 +66,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Short face changes in square MP4](video-face-square-transfer-2026-11-18.md)
+  extends the optional local check to the tested 480 × 480 four-second
+  H.264 profile. The square test located 28 of 36 paired staged edits and
+  16 of 16 staged edits on reserved captures, with zero flags among the
+  90 paired and 40 reserved ordinary controls.
+
 - [Earlier-copy waveform evidence for Ogg Opus](audio-reference-waveform-opus-2026-11-18.md)
   extends the six-second mono check to the verified 64 kbps profile. It
   retained 15 of 16 lossless speech edit locations under room sound and

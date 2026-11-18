@@ -406,6 +406,8 @@ def _portrait_source(inputs):
         method = portrait_return.METHOD
     elif portrait_return.hevc_supported(inputs.table, (*inputs.encoding, inputs.codec_tag, inputs.codec_profile)):
         method = portrait_return.HEVC_METHOD
+    elif portrait_return.square_supported(inputs.table, (*inputs.encoding, inputs.codec_tag)):
+        method = portrait_return.SQUARE_METHOD
     else:
         return None
     path = getattr(inputs.store, "path", None)
@@ -420,7 +422,8 @@ def _inspect_local_return(details, inputs, yunet, recognizer, deadline, *, portr
     geometry, method, point = local.LANDSCAPE, local.METHOD, local.POINT
     if portrait_method:
         geometry, method = local.PORTRAIT, portrait_method
-        point = portrait_return.POINTS[table.width, table.height]
+        point = (portrait_return.SQUARE_POINT if method == portrait_return.SQUARE_METHOD
+                 else portrait_return.POINTS[table.width, table.height])
     elif path is None or not face_local_detail.supported(table, inputs.encoding) or face_return.source_carrier(path) != "mp4":
         return
     schedule = geometry.schedule
@@ -494,7 +497,11 @@ def _inspect_local_return(details, inputs, yunet, recognizer, deadline, *, portr
                       | {"face_box": list(samples[i].face.box())} for i in boundaries}
         selected = face_return.Range(a, b, response, scores, candidate.support, boundaries)
         result = _return_record(table, schedule, selected, method, face_rows, scene_rows)
-        encoding = (*inputs.encoding, inputs.codec_tag, inputs.codec_profile) if method == portrait_return.HEVC_METHOD else inputs.encoding
+        encoding = inputs.encoding
+        if method == portrait_return.HEVC_METHOD:
+            encoding = (*encoding, inputs.codec_tag, inputs.codec_profile)
+        elif method == portrait_return.SQUARE_METHOD:
+            encoding = (*encoding, inputs.codec_tag)
         result.update(features_hex=[round(x, 9).hex() for x in candidate.features[:2]], source_encoding=list(encoding))
         details["face_return"] = result
         coverage.update(status="localized", reason=None)

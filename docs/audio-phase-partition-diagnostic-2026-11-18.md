@@ -4,7 +4,8 @@ At the stricter development point, adding a time-aligned enhancement view
 found four of 78 known edits in the strongest competing speech, compared
 with two on the original mixture. On the less severe mixtures it found
 nine instead of six and flagged three additional ordinary recordings. The
-comparison uses previously scored Opus sources and informs a fresh holdout.
+comparison uses previously scored Opus sources and informs a
+[separately frozen fresh holdout](audio-phase-partition-fresh-protocol-2026-11-18.md).
 
 ## Method
 

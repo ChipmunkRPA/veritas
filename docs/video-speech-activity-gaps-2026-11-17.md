@@ -126,6 +126,33 @@ measurement using the prescribed activity and noise-reduction assets.
 Use `scripts.video_speech_activity_gap_app --help` to replay the four local
 checkouts, PDF and JSON exports, and browser verification.
 
+### Sound levels in the submitted channels
+
+New stereo findings include sound levels before, during and after the same
+speech decline. They measure the decoded source left and right channels and
+half the difference between them. The three levels use RMS decibels relative
+to full scale. Lower values indicate quieter sound. Each flank covers
+160 ms and ends or begins 32 ms away from the flagged interval to match the
+speech-activity observation. The comparison identifies how much sound was
+still present. Room sound, offscreen voices, music and panning can all affect
+the measured difference.
+
+The web finding and PDF show the three level readings in source order.
+JSON gives the same levels and the precise half-open 16 kHz sample ranges.
+The original-file replay re-decodes both channels and verifies every
+recorded block of squared samples before recomputing the displayed levels.
+Older packages retain their original speech-activity evidence. The new
+measurements leave the selected range and the AI assessment unchanged.
+
+In the local paid replay, AAC and PCM both retained the previous
+**0.832–1.344 s** highlight and source frames **24, 33 and 41**. For AAC,
+the left and right channels measured −36.06 and −37.04 dBFS RMS inside
+the interval. The difference measured −40.28 dBFS RMS. The browser showed
+all three level sequences. The PDF, JSON and original-file replay matched
+the source samples. The ordinary and disabled controls preserved their
+previous outcomes, and an earlier signed package still replayed.
+[Stereo level replay](evaluation-panels/video-speech-activity-levels-app-2026-11-17.json)
+
 A separate standard-library recount verified 616 delivery hashes, the source
 reservation and freeze, both carrier comparisons, and the mouth frame and
 sample brackets. It reproduced gains and losses by speaker.

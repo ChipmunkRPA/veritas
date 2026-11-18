@@ -231,3 +231,15 @@ regexes = [
   '''^tokenizer\.json": "2c070ff353c36f85e20919da787a30e1e8e52b626d0e026e044f373378f6d0bf"$''',
   '''^tokenizer_config\.json": "d8089020d294f20cb21eca751b5f7f68a0b62ea2716a78576cbd587605382432"$''',
 ]
+
+# Exact SHA-256 fingerprints of the pinned public MiniLM tokenizer files.
+[[allowlists]]
+description = "Writing transition benchmark tokenizer SHA-256 fingerprints"
+condition = "AND"
+paths = ['''(^|/)backend/scripts/writing_transition_deviation\.py$''']
+regexTarget = "line"
+regexes = [
+  '''^\s*"special_tokens_map\.json": "303df45a03609e4ead04bc3dc1536d0ab19b5358db685b6f3da123d05ec200e3",?\s*$''',
+  '''^\s*"tokenizer\.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",?\s*$''',
+  '''^\s*"tokenizer_config\.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",?\s*$''',
+]

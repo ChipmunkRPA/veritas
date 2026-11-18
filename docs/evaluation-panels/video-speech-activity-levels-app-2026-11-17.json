@@ -1,0 +1,125 @@
+{
+  "USD_cents": 999,
+  "aac": {
+    "asset_count": 8,
+    "frames": {
+      "after": 41,
+      "before": 24,
+      "during": 33
+    },
+    "input_sha256": "1920dff08c7675c2d7783f1968548d21ee4fbf3fb96d23b08b4d5d4f89b68720",
+    "paid_jobs": 1,
+    "pdf_sha256": "8fefdc24acac1ead122f780847a3364552b2847b87b6371d2c663949b7690b89",
+    "prepayment_jobs": 0,
+    "range": [
+      13312,
+      21504
+    ],
+    "source_replay": true,
+    "stereo_levels": [
+      {
+        "rms_dbfs": [
+          -34.15,
+          -35.08,
+          -38.85
+        ],
+        "source_samples": [
+          10240,
+          12800
+        ]
+      },
+      {
+        "rms_dbfs": [
+          -36.06,
+          -37.04,
+          -40.28
+        ],
+        "source_samples": [
+          13312,
+          21504
+        ]
+      },
+      {
+        "rms_dbfs": [
+          -34.63,
+          -36.41,
+          -40.92
+        ],
+        "source_samples": [
+          22016,
+          24576
+        ]
+      }
+    ]
+  },
+  "browser": {
+    "audio_ready": true,
+    "chromium": "157.0.8103.79",
+    "decoded_images": 7,
+    "ordinary_view": true,
+    "stereo_levels_visible": true
+  },
+  "decision_unchanged": true,
+  "disabled": {
+    "input_sha256": "1920dff08c7675c2d7783f1968548d21ee4fbf3fb96d23b08b4d5d4f89b68720",
+    "paid_jobs": 1,
+    "prepayment_jobs": 0
+  },
+  "ordinary": {
+    "input_sha256": "a7204bb2ccf99e7f3e8e93c9d264e1eaee6b845bd467153b62886f2f0f63810c",
+    "paid_jobs": 1,
+    "prepayment_jobs": 0
+  },
+  "pcm": {
+    "asset_count": 8,
+    "frames": {
+      "after": 41,
+      "before": 24,
+      "during": 33
+    },
+    "input_sha256": "cd1aff4841cc7c886bf7993157616af9596e129b3ef2ac266ffac100b3753429",
+    "paid_jobs": 1,
+    "pdf_sha256": "4c43cf8ea222c3bb274c6b492fae98a48a1b7d70613321efda22e0fbac419cd5",
+    "prepayment_jobs": 0,
+    "range": [
+      13312,
+      21504
+    ],
+    "source_replay": true,
+    "stereo_levels": [
+      {
+        "rms_dbfs": [
+          -34.02,
+          -35.06,
+          -38.71
+        ],
+        "source_samples": [
+          10240,
+          12800
+        ]
+      },
+      {
+        "rms_dbfs": [
+          -36.0,
+          -36.99,
+          -40.2
+        ],
+        "source_samples": [
+          13312,
+          21504
+        ]
+      },
+      {
+        "rms_dbfs": [
+          -34.56,
+          -36.39,
+          -40.89
+        ],
+        "source_samples": [
+          22016,
+          24576
+        ]
+      }
+    ]
+  }
+}

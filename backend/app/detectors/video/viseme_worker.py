@@ -184,6 +184,7 @@ def observe_activity(request):
 
     from app.detectors.audio.decode import decode_audio
     from app.detectors.video.decode import FrameTable
+    from app.evidence import video_activity_levels as levels
     from app.evidence import video_viseme_binding as binding
     from scripts import audio_noise_view_v4 as reducer
     from scripts.video_speech_activity_gap_panel import VAD_SHA, activity, file_hash
@@ -212,6 +213,7 @@ def observe_activity(request):
         "original": [float(value).hex() for value in original],
         "reduced": [float(value).hex() for value in enhanced],
         "stereo_sha256": hashlib.sha256(samples.astype("<i2", copy=False).tobytes()).hexdigest(),
+        levels.SQUARES: levels.squared_samples(samples),
     }}
 
 

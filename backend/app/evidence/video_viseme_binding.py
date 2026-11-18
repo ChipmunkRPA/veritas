@@ -7,6 +7,7 @@ import re
 from fractions import Fraction
 
 from app.core.canonical import canonical_hash
+from app.evidence import video_activity_levels as activity_levels
 from app.evidence import video_lip_agreement as agreement
 from app.evidence import video_silent_mouth as silent
 from app.evidence import video_viseme_ranked as ranked
@@ -23,6 +24,8 @@ SCHEMA_WITH_SILENCE = "chipmunk.video-lip-timing/5"
 SCHEMA_WITH_MOTION_SOUND = "chipmunk.video-lip-timing/6"
 SCHEMA_WITH_SHOTS = "chipmunk.video-lip-timing/7"
 SCHEMA_WITH_ACTIVITY = "chipmunk.video-lip-timing/8"
+SCHEMA_WITH_ACTIVITY_LEVELS = "chipmunk.video-lip-timing/9"
+ACTIVITY_SCHEMAS = frozenset({SCHEMA_WITH_ACTIVITY, SCHEMA_WITH_ACTIVITY_LEVELS})
 ACTIVITY_KEY = "speech_activity_gap"
 ACTIVITY_TITLE = "Reduced speech activity during visible mouth movement"
 ACTIVITY_INTERPRETATION = ("The highlighted interval had lower measured speech activity than nearby portions of the "
@@ -156,9 +159,12 @@ def _activity(raw, inputs, mapping, profile):
     from app.bench.video_speech_activity_gap import BLOCK, scan
 
     traces = raw[ACTIVITY_KEY]
-    if (not isinstance(traces, dict) or set(traces) != {"original", "reduced", "stereo_sha256"}
+    if (not isinstance(traces, dict) or set(traces) - {activity_levels.SQUARES} != {"original", "reduced", "stereo_sha256"}
             or not _SHA.fullmatch(str(traces["stereo_sha256"])) or inputs["phones"]):
         raise ValueError("Invalid speech-activity measurement")
+    have_levels = activity_levels.SQUARES in traces
+    if have_levels:
+        activity_levels.validate(traces[activity_levels.SQUARES], inputs["samples"])
     values = []
     for name in ("original", "reduced"):
         trace = traces[name]
@@ -177,6 +183,8 @@ def _activity(raw, inputs, mapping, profile):
                    ACTIVITY_KEY: {"activity_millionths": chosen["activity_millionths"],
                                   "margin_millionths": chosen["margin_millionths"],
                                   "visible_mouth_frames": chosen["mouth_frames"]}}
+        if have_levels:
+            witness[ACTIVITY_KEY][activity_levels.KEY] = activity_levels.measure(traces[activity_levels.SQUARES], chosen["span"])
         note = {**skipped("matched"), "observation": _activity_observation(witness)}
     else:
         witness = None
@@ -185,15 +193,19 @@ def _activity(raw, inputs, mapping, profile):
         else:
             note = {**skipped("insufficient_events"),
                     "observation": "The soundtrack and picture did not provide enough comparable speech and mouth activity."}
-    return {**note, "schema": SCHEMA_WITH_ACTIVITY, "measurement_basis": ACTIVITY_KEY,
+    return {**note, "schema": SCHEMA_WITH_ACTIVITY_LEVELS if have_levels else SCHEMA_WITH_ACTIVITY, "measurement_basis": ACTIVITY_KEY,
             "inputs": {**inputs, ACTIVITY_KEY: traces}, "measurement": chosen, "witness": witness,
             "audio_origin_pts": 0, "pcm_sha256": mapping["pcm_sha256"]}
 
 
 def _activity_observation(witness):
     start, end = (sample / timing.RATE for sample in witness["audio_source_pts"])
-    return (f"Speech activity fell in both audio readings between {start:.3f} and {end:.3f} s, while mouth movement "
-            f"continued across {witness[ACTIVITY_KEY]['visible_mouth_frames']} submitted frames.")
+    reading = witness[ACTIVITY_KEY]
+    observation = (f"Speech activity fell in both audio readings between {start:.3f} and {end:.3f} s, while mouth movement "
+                   f"continued across {reading['visible_mouth_frames']} submitted frames.")
+    if (levels := reading.get(activity_levels.KEY)) and all(value is not None for value in levels[1]["rms_dbfs"][:2]):
+        observation += " The submitted left and right channels both contained measurable sound during this interval."
+    return observation
 
 
 def _witness(candidate, pictures, samples, origin, point):
@@ -442,7 +454,7 @@ def validate(document, *, timestamps=None, committed=_UNSET):
         return
     state = record["status"]
     if (record.get("schema") not in {SCHEMA, SCHEMA_WITH_APERTURE, SCHEMA_WITH_ARTICULATION, SCHEMA_WITH_STEREO,
-                                   SCHEMA_WITH_SILENCE, SCHEMA_WITH_MOTION_SOUND, SCHEMA_WITH_SHOTS, SCHEMA_WITH_ACTIVITY}
+                                   SCHEMA_WITH_SILENCE, SCHEMA_WITH_MOTION_SOUND, SCHEMA_WITH_SHOTS, *ACTIVITY_SCHEMAS}
             or state not in STATUS or record.get("affects_overall_confidence") is not False):
         raise ValueError("Invalid lip timing disposition")
     if "inputs" not in record:
@@ -502,6 +514,9 @@ def validate(document, *, timestamps=None, committed=_UNSET):
 
 def packet_limitation(witness):
     if ACTIVITY_KEY in witness:
+        if activity_levels.KEY in witness[ACTIVITY_KEY]:
+            return (ACTIVITY_LIMITATION + " Channel difference measures half the difference between left and right. "
+                    "Room sound, panning and other sources can contribute to this measurement.")
         return ACTIVITY_LIMITATION
     if silent.KEY in witness:
         return silent.LIMITATION
@@ -516,8 +531,11 @@ def motion_measurements(witness):
 
 
 def activity_measurements(witness):
-    readings = witness[ACTIVITY_KEY]["activity_millionths"]
-    return [{"label": f"Speech activity {where}, {audio}", "value": round(value / 1_000_000, 4),
-             "unit": "relative score"}
-            for where, pair in zip(("before", "within", "after"), readings, strict=True)
-            for audio, value in zip(("original", "noise-reduced"), pair, strict=True)]
+    reading = witness[ACTIVITY_KEY]
+    values = [{"label": f"Speech activity {where}, {audio}", "value": round(value / 1_000_000, 4),
+               "unit": "relative score"}
+              for where, pair in zip(("before", "within", "after"), reading["activity_millionths"], strict=True)
+              for audio, value in zip(("original", "noise-reduced"), pair, strict=True)]
+    if levels := reading.get(activity_levels.KEY):
+        values.extend(activity_levels.measurements(levels))
+    return values

@@ -19,17 +19,31 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def report(client, analysis, source, output, evidence, label):
+    import math
+
+    import numpy as np
     import pymupdf
 
+    from app.detectors.audio.decode import decode_audio
+    from app.evidence import video_activity_levels
     from app.evidence import video_viseme_binding as binding
     from app.reports.verify import verify_package
     from scripts.verify_multimedia_exports import pixels, scan, sha
 
     review = evidence[binding.KEY]
     witness = review["witness"]
-    assert review["schema"] == binding.SCHEMA_WITH_ACTIVITY and review["affects_overall_confidence"] is False
+    assert review["schema"] == binding.SCHEMA_WITH_ACTIVITY_LEVELS and review["affects_overall_confidence"] is False
     packet = next(entry for entry in evidence["packets"] if entry["id"] == binding.PACKET_ID)
     assert packet[binding.KEY] == witness and packet["affects_overall_confidence"] is False
+    submitted = decode_audio(source, source_sha256=sha(source.read_bytes()), retain_stereo=True).stereo_pcm
+    levels = witness[binding.ACTIVITY_KEY][video_activity_levels.KEY]
+    assert levels[1]["source_samples"] == witness["audio_source_pts"]
+    for row in levels:
+        start, end = row["source_samples"]
+        left, right = submitted[start:end].astype(np.float64).T / 32768
+        reference = [round(10 * math.log10(power), 2) if power else None
+                     for power in (np.mean(view**2) for view in (left, right, (left - right) / 2))]
+        assert reference == row["rms_dbfs"]
     assets = {role: fetch(client, asset["url"]) for role, asset in packet["artifacts"].items()}
     assert all(sha(value) == packet["artifacts"][role]["sha256"] for role, value in assets.items())
     report_id = body(client.post(f"/api/v2/analyses/{analysis}/reports", json={"profile": "standard"}))["id"]
@@ -41,6 +55,7 @@ def report(client, analysis, source, output, evidence, label):
         scan(text)
         assert binding.ACTIVITY_TITLE in text
         assert all(f"{role} reduced speech activity range" in text for role in ("Before", "During", "After"))
+        assert all(name in text for name in video_activity_levels.CHANNELS)
         lo, hi = (value / 16000 for value in witness["audio_source_pts"])
         assert f"between {lo:.3f} and {hi:.3f} s" in text
         embedded = {pixels(document.extract_image(ref)["image"])
@@ -57,7 +72,7 @@ def report(client, analysis, source, output, evidence, label):
     with ZipFile(archive) as bundle:
         assert json.loads(bundle.read("evidence.json")) == evidence
     return {"range": witness["audio_source_pts"], "frames": witness["picture_frames"],
-            "asset_count": len(assets), "source_replay": True, "pdf_sha256": sha(pdf)}
+            "asset_count": len(assets), "source_replay": True, "pdf_sha256": sha(pdf), "stereo_levels": levels}
 
 
 def process(held, media, assets, enhancer, output):
@@ -108,7 +123,7 @@ def process(held, media, assets, enhancer, output):
                 assert evidence[KEY]["measurement"] == expected
                 outcome[label].update(report(client, analysis, source, output, evidence, label))
                 if label == "aac":
-                    browser_case = {"analysis_id": analysis, "frames": expected["picture_frames"], "activity": True}
+                    browser_case = {"analysis_id": analysis, "frames": expected["picture_frames"], "activity": True, "stereo_levels": True}
             elif label == "ordinary":
                 assert evidence[KEY]["status"] == "no_match" and evidence[KEY]["witness"] is None
             else:

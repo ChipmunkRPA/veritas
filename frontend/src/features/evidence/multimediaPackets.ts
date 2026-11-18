@@ -41,6 +41,7 @@ export interface VideoEvidencePacket extends PacketBase {
       activity_millionths: [[number, number], [number, number], [number, number]]
       visible_mouth_frames: number
       margin_millionths: number
+      stereo_levels?: { source_samples: [number, number]; rms_dbfs: [number | null, number | null, number | null] }[]
     }
     articulation?: { mismatched_events: number; audio_sample: number; picture_frame: number; picture_pts: number }
     motion_sound_agreement?: { agreement_units: [number, number, number] }

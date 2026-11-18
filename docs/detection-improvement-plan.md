@@ -66,6 +66,22 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Sound levels during a video speech decline](video-speech-activity-gaps-2026-11-17.md#sound-levels-in-the-submitted-channels)
+  show original left, right and channel-difference sound before, during and
+  after the same flagged range. [Mono transfer](video-mono-speech-activity-2026-11-17.md)
+  found 11 of 24 quiet-room edits per encoding but two loud-room edits from
+  one speaker. The mono detector remains experimental.
+
+- [Source-separated speech in a third room](audio-separated-segments-transfer-2026-11-17.md)
+  found zero of 56 intervals across six generator families. All 70
+  deliveries were assessed. The combined readings produced one ordinary
+  alert and remain out of the local audio scoring.
+
+- [Sentence-transition changes](writing-transition-deviation-2026-11-17.md)
+  gave the joint reading coverage on all 54 economic files when allowed to
+  read nearby paragraphs. It added no correct localizations and one
+  ordinary alert in that panel. The candidate remains experimental.
+
 - [OpenDocument earlier-draft comparison](document-formats-2026-11-17.md#earlier-opendocument-drafts)
   adds precise marked text and source offsets across ODT, Word, TXT, and PDF
   pairs. With an earlier copy supplied, it marked changes inside 33 of 33 fresh

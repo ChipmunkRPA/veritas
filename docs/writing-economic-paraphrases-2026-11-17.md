@@ -114,3 +114,61 @@ done
 "$runner" -B -m "$study" run "$out/held.json.gz" "$checkpoint" "$prior/fit" \
   "$freeze" "$out/baseline.json.gz" "$out/held-results.json.gz" --device mps
 ```
+
+## Compare another detector
+
+The portable package binds 54 exact UTF-8 deliveries to 22 verified publisher
+HTML files. To build it, the exporter reread those publisher bytes, checked the
+normalized excerpt on each page, reconstructed all 17 same-article human
+substitutions and checked all 15 admitted rewrites against the retained editor
+replies. It also rechecked the seven unusable replies. The package holds file
+hashes, source groups, truth ranges, whitespace positions and reference
+predictions. The publisher pages, delivered prose and editor replies stay in
+the local replay directory.
+[Model-independent package](evaluation-panels/writing-economic-paraphrase-independent-2026-11-17.json.gz)
+
+Submit offsets as half-open Unicode character ranges in the exact delivered
+text. Keep the manifest commitment, case ID and input hash in each response.
+Use an empty regions list for a successful check without a finding. Give a
+reason and a null response for any unassessed input. The scoring command
+validates the native ranges and then removes whitespace from their extents
+before applying the original event matching rule. The reference results are
+one of 33 for the current check and zero of 33 for the frozen tuned check.
+
+```sh
+review=$(mktemp -d)
+panels=docs/evaluation-panels
+packet="$panels/writing-economic-paraphrase-independent-2026-11-17.json.gz"
+python3 -B -S - "$packet" "$review" <<'PY'
+import gzip
+import json
+import sys
+from pathlib import Path
+
+with gzip.open(sys.argv[1], "rt", encoding="utf-8") as stream:
+    receipt = json.load(stream)
+directory = Path(sys.argv[2])
+parts = {key: receipt[key] for key in ("manifest", "truth", "file_index")}
+for key, value in (parts | receipt["predictions"]).items():
+    (directory / f"{key}.json").write_text(json.dumps(value), encoding="utf-8")
+PY
+PYTHONPATH=backend python3 -B -S -m scripts.export_writing_economic_review score \
+  "$packet" "$review/incumbent.json"
+```
+
+Rebuild the package and write the exact local input files from the verified
+reservation above. The public receipts bind the earlier fit and the held
+operating point. The command refuses different inputs or editor replies.
+
+```sh
+PYTHONPATH=backend backend/.venv/bin/python -B -m scripts.export_writing_economic_review export \
+  "$out/held.json.gz" "$out/intake" \
+  "$panels/writing-token-supervision-calibration-2026-11-17.json.gz" \
+  "$panels/writing-token-supervision-fit-2026-11-17.json" \
+  "$panels/writing-economic-paraphrase-held-2026-11-17.json.gz" \
+  "$panels/writing-economic-paraphrase-sources-2026-11-17.json.gz" \
+  "$review/files" "$review/rebuilt.json.gz"
+python3 -B -IS backend/scripts/independent_review.py verify-inputs \
+  "$review/manifest.json" "$review/file_index.json" "$review/file-checks.json" \
+  --root "$review/files"
+```

@@ -178,7 +178,7 @@ def audio_assets(pcm, mapping, record):
     from app.evidence.audio_packets import _chart
 
     limit = binding.sample_limit(record)
-    origin = (0 if record["schema"] == binding.SCHEMA_WITH_ACTIVITY else
+    origin = (0 if record["schema"] in binding.ACTIVITY_SCHEMAS else
               binding.audio_origin(mapping, record.get("stereo_scope"), max_samples=limit))
     presented = binding.presented_samples(mapping, max_samples=limit)
     start, end = record["measurement"]["span"]

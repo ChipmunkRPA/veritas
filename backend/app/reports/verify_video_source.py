@@ -623,6 +623,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if activity:
             from app.detectors.video.shots import detect_shots
             from app.detectors.video.viseme_review import activity_eligible
+            from app.evidence import video_activity_levels
 
             with closing(decode_stream(original, table)) as shot_frames:
                 shots = detect_shots(shot_frames, table).as_json()
@@ -632,6 +633,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                     or hashlib.sha256(stereo_pcm[:presented].astype("<i2", copy=False).tobytes()).hexdigest()
                     != activity["stereo_sha256"]):
                 raise ValueError("The source does not reproduce the speech activity review's picture and stereo recording")
+            if (video_activity_levels.SQUARES in activity and
+                    video_activity_levels.squared_samples(stereo_pcm[:presented]) != activity[video_activity_levels.SQUARES]):
+                raise ValueError("The original video does not reproduce the stereo sound levels")
         origin = 0 if activity else video_viseme_binding.audio_origin(decoded_audio.mapping, stereo_scope, max_samples=limit)
         if (decoded_audio.mapping["pcm_sha256"] != lip_timing["pcm_sha256"]
                 or presented != lip_timing["inputs"]["samples"] or origin != lip_timing["audio_origin_pts"]):

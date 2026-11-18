@@ -1209,7 +1209,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
             sound_input = result["manifest"]["sampling"]["video_audio_evidence"]["input"]
             _, mapping = audio_packets._input(store, analysis, sound_input)
             document["audio"]["source"]["source_codec"] = mapping["source_codec"]
-            if timing["schema"] == video_viseme_binding.SCHEMA_WITH_ACTIVITY:
+            if timing["schema"] in video_viseme_binding.ACTIVITY_SCHEMAS:
                 document["audio"]["source"].update(source_time_base=mapping["source_time_base"],
                                                   source_start_pts=mapping["source_start_pts"])
         document["av"] = video_av.build_channel(db, analysis, store, result, set_id=set_id,

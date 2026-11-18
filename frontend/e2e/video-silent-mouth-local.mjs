@@ -27,6 +27,12 @@ try {
   await link.click()
   const card = page.locator('#media-evidence-VLT01')
   assert((await card.innerText()).includes(title))
+  if (item.stereo_levels) {
+    for (const name of ['Left channel', 'Right channel', 'Channel difference']) {
+      await card.getByText(`${name} sound level, before → during → after`, { exact: true }).waitFor()
+    }
+    await card.getByText('both contained measurable sound', { exact: false }).waitFor()
+  }
   const pictures = []
   for (const [role, index] of Object.entries(item.frames)) {
     assert.match(await card.innerText(), new RegExp(`${role} ${range} range · Frame ${index}`, 'i'))
@@ -47,7 +53,8 @@ try {
   await page.waitForFunction(() => document.querySelector('#media-evidence-VLT01 audio')?.readyState >= 1)
   assert.deepEqual(errors, [])
   await card.screenshot({ path: path.join(input.output, `${item.activity ? 'reduced-activity' : 'near-silent'}-browser.png`), animations: 'disabled' })
-  console.log(JSON.stringify({ chromium: browser.version(), ordinary_view: true, decoded_images: pictures.length, audio_ready: true }))
+  console.log(JSON.stringify({ chromium: browser.version(), ordinary_view: true, decoded_images: pictures.length, audio_ready: true,
+    ...(item.stereo_levels ? { stereo_levels_visible: true } : {}) }))
 } finally {
   await browser.close()
 }

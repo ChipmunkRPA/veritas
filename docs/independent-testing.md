@@ -36,6 +36,16 @@ lets reviewers verify two supplied originals against the same marked words
 and paragraph ranges. The paired replay includes fresh official prose,
 staged localized rewrites, same-work human revisions, and restyling controls.
 
+The [economic-rewrite comparison](writing-economic-paraphrases-2026-11-17.md#compare-another-detector)
+gives reviewers a model-independent package for 54 exact files and 22
+publisher originals. It scores native character offsets with the original
+non-whitespace matching rule.
+
+The [mono speech-activity trial](video-mono-speech-activity-2026-11-17.md#replay)
+recounts 384 files and documents the native picture and sample readback.
+The [source-separated audio transfer](audio-separated-segments-transfer-2026-11-17.md#replay)
+preserves the source and PCM fingerprints of all 70 held audio files.
+
 The [portrait face-change replay](video-face-portrait-2026-11-17.md#reproduce)
 checks input hashes, native frame intervals and ordinary shot controls on
 504 held deliveries. Its export provides the frozen measurements and

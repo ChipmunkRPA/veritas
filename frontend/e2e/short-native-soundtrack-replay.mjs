@@ -10,6 +10,9 @@ try {
     viewport: { width: 1366, height: 1024 },
     extraHTTPHeaders: { 'X-API-Key': input.key },
   })
+  await context.addInitScript(({ origin, key }) => {
+    if (location.origin === origin) localStorage.setItem('veritas_api_key', key)
+  }, { origin: input.url, key: input.key })
   await context.route('**/*', route =>
     new URL(route.request().url()).origin === input.url ? route.continue() : route.abort())
   const [sample] = input.cases
@@ -20,8 +23,14 @@ try {
   const upload = page.getByRole('region', { name: 'Compare with an earlier video' })
   await upload.getByLabel('Earlier video', { exact: true }).setInputFiles(sample.reference)
   await upload.getByRole('checkbox', { name: 'Include experimental soundtrack comparison' }).check()
+  const comparison = page.waitForResponse(response => response.request().method() === 'POST'
+    && new URL(response.url()).pathname.endsWith('/video-reference-comparison'))
   await upload.getByRole('button', { name: 'Compare videos' }).click()
-  const proof = upload.getByRole('region', { name: /^Soundtrack difference/ })
+  const response = await comparison
+  assert.ok(response.ok(), `Soundtrack comparison returned HTTP ${response.status()}`)
+  const { comparison: record } = await response.json()
+  assert.equal(record.sound_difference?.status, 'localized_difference', record.sound_difference?.reason)
+  const proof = upload.getByRole('region', { name: sample.title ?? /^Soundtrack difference/ })
   const presented = sample.presented_s ?? '2.700'
   const [start, end] = sample.range_s ?? ['1.400', '1.720']
   await proof.getByText(`Common presented audio duration ${presented} s.`, { exact: false }).waitFor()
@@ -36,7 +45,7 @@ try {
   const stills = proof.locator('img')
   assert.equal(await stills.count(), 6)
   for (const still of await stills.all()) await still.scrollIntoViewIfNeeded()
-  await page.waitForFunction(() => [...document.querySelectorAll('section[aria-label^="Soundtrack difference"] img')].every(img => img.naturalWidth > 0))
+  await Promise.all((await stills.all()).map(still => still.evaluate(img => img.decode())))
   const lengths = await proof.locator('audio').evaluateAll(players => Promise.all(players.map(audio => new Promise((resolve, reject) => {
     audio.addEventListener('loadedmetadata', () => resolve(audio.duration), { once: true })
     audio.addEventListener('error', () => reject(new Error('Soundtrack excerpt did not decode')), { once: true })

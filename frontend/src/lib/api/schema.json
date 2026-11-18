@@ -13861,6 +13861,17 @@
             ],
             "title": "Short Native Sound Difference Available"
           },
+          "short_phrase_reencode_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Short Phrase Reencode Available"
+          },
           "sound_difference_available": {
             "anyOf": [
               {

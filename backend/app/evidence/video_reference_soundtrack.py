@@ -292,7 +292,7 @@ def native_difference_audio(paths, decoded, profile):
 
 def assess_difference(paths, tables, comparison, tracks, assets, *, recover_supported=False, native_decoded=None,
                       include_short_phrase_difference=False):
-    """Attach a corroborated acoustic difference to exact clock-matched pictures."""
+    """Attach a corroborated acoustic difference to clock-matched pictures."""
     from app.evidence import video_reference_sound_difference as difference
 
     context = {}
@@ -311,8 +311,15 @@ def assess_difference(paths, tables, comparison, tracks, assets, *, recover_supp
         return disposition("unsupported_picture_profile", summary)
     if native is not None:
         context = {"basis": NATIVE_DIFFERENCE_BASIS, "picture_profile": native}
+    picture_correspondence = None
     if comparison["picture"]["changed_frames"]:
-        return disposition("pictures_differ", "The decoded pictures differ. The trial requires matching pictures.")
+        picture_correspondence = comparison["picture"].get("short_soundtrack_picture_comparison")
+        if native is None or not include_short_phrase_difference or picture_correspondence is None:
+            return disposition("pictures_differ", "The decoded pictures differ. The trial requires matching pictures.")
+        if not picture_correspondence["within_bounds"]:
+            return disposition("picture_correspondence_unavailable",
+                               "The two picture tracks differ beyond the measured re-encoding limits.")
+        context["picture_correspondence_basis"] = picture_correspondence["basis"]
     if native is not None:
         presented = native_difference_audio(paths, native_decoded, native)
         if presented is None:
@@ -348,6 +355,10 @@ def assess_difference(paths, tables, comparison, tracks, assets, *, recover_supp
     if not difference.strong_flanks(reading):
         return disposition("weak_flanks", "A possible difference had insufficient matching sound on either side to report a range.")
     interval = reading["samples"]
+    if picture_correspondence and any(
+        Fraction(interval[1], SAMPLE_RATE) > (table.pts[-1] - table.pts[0]) * table.tb for table in tables
+    ):
+        return disposition("source_frames_unavailable", "The measured sound extends beyond the last verified picture.")
     pending = {}
     prefix = "soundtrack-difference"
     try:
@@ -361,8 +372,10 @@ def assess_difference(paths, tables, comparison, tracks, assets, *, recover_supp
     if reading.get("selection") == "strong_flanks_first":
         scope = ("Matching audio on both sides supports inspection of this interval. A local delay, replacement, or other edit "
                  "could cause the difference. The cause remains unresolved. This comparison carries zero weight in the AI estimate.")
+    picture_note = ("over corresponding pictures within the measured re-encoding limits."
+                    if picture_correspondence else "while the decoded pictures match.")
     return {"status": status, "scope": scope, "affects_overall_confidence": False, "sample_rate": SAMPLE_RATE,
             "picture_pair_sha256": comparison["picture"]["frame_pairs_sha256"],
-            "summary": f"The two soundtracks differ from {start / SAMPLE_RATE:.3f} to {end / SAMPLE_RATE:.3f} s while the decoded pictures match.",
+            "summary": f"The two soundtracks differ from {start / SAMPLE_RATE:.3f} to {end / SAMPLE_RATE:.3f} s {picture_note}",
             "picture_profile": native or reencode.hd_report_profile(tables), **context,
             "range": {**reading, **clips, "paired_pictures": witnesses, "support_sha256": canonical_hash(reading)}}

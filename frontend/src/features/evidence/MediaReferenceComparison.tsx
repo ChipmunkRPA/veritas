@@ -81,6 +81,7 @@ type SoundtrackTiming = {
 }
 type SoundtrackDifference = Pick<SoundtrackTiming, 'summary' | 'scope' | 'picture_profile' | 'waveform_note'> & {
   affects_overall_confidence: false
+  picture_correspondence_basis?: string
 } & ({ status: 'localized_difference'
   range: NonNullable<SoundtrackTiming['range']> & {
     bands: { band_hz: [number, number] }[]
@@ -185,8 +186,10 @@ type Comparison = {
     | 'chipmunk.video-reference-comparison/10' | 'chipmunk.video-reference-comparison/11' | 'chipmunk.video-reference-comparison/12'
     | 'chipmunk.video-reference-comparison/13' | 'chipmunk.video-reference-comparison/14' | 'chipmunk.video-reference-comparison/15'
     | 'chipmunk.video-reference-comparison/16' | 'chipmunk.video-reference-comparison/17' | 'chipmunk.video-reference-comparison/18'
+    | 'chipmunk.video-reference-comparison/19'
   submitted: PictureDimensions
-  picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison }
+  picture?: { matching_frames: number; changed_frames: number; ranges: PictureRange[]; local_comparison?: LocalComparison;
+    short_soundtrack_picture_comparison?: { basis: 'short_h264_soundtrack_picture_grid/1'; within_bounds: boolean } }
   picture_insertion?: PictureInsertion
   insertion_retention?: { window_frames: number }
   timing?: TimingComparison
@@ -234,6 +237,7 @@ type Comparison = {
 type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: string | null }
 type Availability = { available: boolean; timing_available?: boolean; picture_insertion_available?: boolean; sound_difference_available?: boolean
   short_native_sound_difference_available?: boolean;
+  short_phrase_reencode_available?: boolean;
   clean_speech_available?: boolean; long_clean_speech_available?: boolean; aligned_speech_available?: boolean; clean_speech_aac_available?: boolean
   clean_speech_stereo_aac_available?: boolean; matching_waveform_aac_available?: boolean }
 const sourceSeconds = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 7, useGrouping: false })
@@ -613,6 +617,10 @@ function ResultView({ result }: { result: Result }) {
   const matchingSoundNote = differenceRange?.measurement_basis
     ? `Sound matched before and after the interval in the ${bands} Hz bands.`
     : bands && `Matching sound fell in the ${bands} Hz bands.`
+  const differenceTitle = !differenceRange ? 'Experimental soundtrack comparison'
+    : soundDifference?.picture_correspondence_basis ? 'Local soundtrack difference'
+      : differenceRange.selection === 'strong_flanks_first' ? 'Soundtrack difference with unresolved cause'
+        : 'Soundtrack difference over matching pictures'
   return <div className="mt-5 space-y-4 border-t border-border pt-4">
     <div className="flex flex-wrap gap-2">
       <Button onClick={() => saveBlob(new Blob([JSON.stringify({ comparison, assets }, null, 2) + '\n'],
@@ -648,13 +656,13 @@ function ResultView({ result }: { result: Result }) {
       <SoundtrackTimingEvidence timing={comparison.soundtrack_alignment} assets={assets} />}
     {soundDifference && <SoundtrackTimingEvidence timing={{ ...soundDifference,
       waveform_note: [soundDifference.waveform_note, matchingSoundNote].filter(Boolean).join(' ') }}
-      assets={assets} title={differenceRange?.selection === 'strong_flanks_first' ? 'Soundtrack difference with unresolved cause'
-        : differenceRange ? 'Soundtrack difference over matching pictures' : 'Experimental soundtrack comparison'}
+      assets={assets} title={differenceTitle}
       excerpt="soundtrack excerpt" />}
     {comparison.channel_timing && <ChannelTimingEvidence timing={comparison.channel_timing} assets={assets} audioOnly={isAudio} />}
     {comparison.local_timing && (!comparison.channel_timing || comparison.local_timing.range) &&
       <SoundtrackTimingEvidence timing={comparison.local_timing} assets={assets} audioOnly />}
-    {picture && !comparison.trim_alignment && !comparison.soundtrack_alignment && (picture.changed_frames > 0 || audio?.status !== 'measured') &&
+    {picture && !comparison.trim_alignment && !comparison.soundtrack_alignment && !soundDifference?.picture_correspondence_basis
+      && (picture.changed_frames > 0 || audio?.status !== 'measured') &&
       <p className="m-0 text-caption text-text-muted">{picture.changed_frames > 0
         ? 'Local soundtrack timing was skipped because the decoded pictures differ.'
         : 'Local soundtrack timing requires two continuous soundtracks with matching start times and sample counts.'}</p>}
@@ -811,13 +819,14 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
 
 function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertionAvailable, cleanSpeechAvailable, longCleanSpeechAvailable,
   alignedSpeechAvailable, cleanSpeechAacAvailable, cleanSpeechStereoAacAvailable, matchingWaveformAacAvailable,
-  soundDifferenceAvailable, shortNativeSoundDifferenceAvailable }: {
+  soundDifferenceAvailable, shortNativeSoundDifferenceAvailable, shortPhraseReencodeAvailable }: {
   analysisId: string; kind: Kind; timingAvailable: boolean; pictureInsertionAvailable: boolean
   cleanSpeechAvailable: boolean; longCleanSpeechAvailable: boolean; alignedSpeechAvailable: boolean; cleanSpeechAacAvailable: boolean
   cleanSpeechStereoAacAvailable: boolean
   matchingWaveformAacAvailable: boolean
   soundDifferenceAvailable: boolean
   shortNativeSoundDifferenceAvailable: boolean
+  shortPhraseReencodeAvailable: boolean
 }) {
   const heading = useId()
   const input = useId()
@@ -852,7 +861,8 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       const response = await request<Result>(route(analysisId, kind), { method: 'POST', headers: authHeaders('POST'), body, signal: controller.signal })
       const versionedSchema = response?.comparison?.schema
       const recovered = versionedSchema === 'chipmunk.video-reference-comparison/16'
-      const shortPhrase = versionedSchema === 'chipmunk.video-reference-comparison/18'
+      const shortPhraseReencode = versionedSchema === 'chipmunk.video-reference-comparison/19'
+      const shortPhrase = shortPhraseReencode || versionedSchema === 'chipmunk.video-reference-comparison/18'
       const hasCoverage = recovered || versionedSchema === 'chipmunk.video-reference-comparison/15' ||
         versionedSchema === 'chipmunk.video-reference-comparison/17' || shortPhrase
       const hasSpeechAlignment = versionedSchema === 'chipmunk.audio-reference-comparison/14'
@@ -985,7 +995,11 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       if (schema === 'chipmunk.video-reference-comparison/14' || hasCoverage) {
         const difference = response.comparison.sound_difference
         const span = difference?.range
+        const pictureGuard = response.comparison.picture?.short_soundtrack_picture_comparison
         if (!difference || difference.affects_overall_confidence !== false || !difference.scope || !difference.summary ||
+            (shortPhraseReencode && (pictureGuard?.basis !== 'short_h264_soundtrack_picture_grid/1' ||
+              (pictureGuard.within_bounds ? difference.picture_correspondence_basis !== pictureGuard.basis
+                : difference.status !== 'unassessed' || difference.reason !== 'picture_correspondence_unavailable'))) ||
             (span?.measurement_basis && (!shortPhrase || span.measurement_basis !== 'short_phrase_correlation/1')) ||
             (recovered && (difference.status !== 'localized_difference' || span?.selection !== 'strong_flanks_first')) ||
             (difference.status !== 'localized_difference' && (!hasCoverage || span || !difference.reason ||
@@ -1079,8 +1093,11 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
         </label>
         <p id={soundInput + '-hint'} className="mt-1 mb-0 text-caption text-text-muted">
           {shortNativeSoundDifferenceAvailable
-            ? 'Use matching four-second 720p25 H.264 clips or 720 × 480 H.264 clips near 24 fps with about two to four seconds of matching mono PCM or AAC timing. The decoded pictures must match.'
+            ? 'Use matching four-second 720p25 H.264 clips or 720 × 480 H.264 clips near 24 fps with about two to four seconds of matching mono PCM or AAC timing.'
             : 'Requires two four-second 720p25 H.264 clips with identical pictures and matching audio clocks.'}{' '}
+          {shortPhraseReencodeAvailable
+            ? 'Small encoding differences are supported on 720 × 480 copies with 53 to 72 corresponding pictures. '
+            : shortNativeSoundDifferenceAvailable && 'The decoded pictures must match. '}
           Background noise can hide differences.
         </p>
       </div>}
@@ -1105,6 +1122,7 @@ export default function MediaReferenceComparison({ analysisId, kind }: { analysi
       pictureInsertionAvailable={kind === 'video' && availability.data.picture_insertion_available === true}
       soundDifferenceAvailable={kind === 'video' && availability.data.sound_difference_available === true}
       shortNativeSoundDifferenceAvailable={kind === 'video' && availability.data.short_native_sound_difference_available === true}
+      shortPhraseReencodeAvailable={kind === 'video' && availability.data.short_phrase_reencode_available === true}
       cleanSpeechAvailable={kind === 'audio' && availability.data.clean_speech_available === true}
       cleanSpeechAacAvailable={kind === 'audio' && availability.data.clean_speech_aac_available === true}
       cleanSpeechStereoAacAvailable={kind === 'audio' && availability.data.clean_speech_stereo_aac_available === true}

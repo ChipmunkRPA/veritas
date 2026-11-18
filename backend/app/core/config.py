@@ -295,6 +295,7 @@ class Settings(BaseSettings):
     video_reference_sound_difference: bool = False  # Local soundtrack difference on identical 720p25 picture pairs.
     video_reference_short_native_sound_difference: bool = False  # Also compare exact short 720x480 picture pairs.
     video_reference_short_phrase_difference: bool = False  # Resolve brief differences between matching sound on both sides.
+    video_reference_short_phrase_reencode: bool = False  # Also compare short H.264 copies with close pictures and the same native clock.
     video_reference_picture_insertion: bool = False  # Locate one longer picture interval across matching H.264 copies.
     video_reference_timing_model_path: Path | None = None  # Optional pinned local landmark task for a marked earlier closure.
     document_revision_comparison_enabled: bool = False  # Authenticated development-only earlier-draft comparison.

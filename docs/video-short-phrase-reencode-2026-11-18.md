@@ -65,7 +65,7 @@ decisions from measured picture differences. Only 12 of the 56 ordinary
 audio controls per carrier reached the acoustic check at CRF 34.
 [Held measurements and counts](evaluation-panels/video-short-phrase-reencode-held-2026-11-18.json.gz)
 
-The current exact-picture application replay reported **0.980–1.340 s**
+The exact-picture application replay reported **0.980–1.340 s**
 on the identical-picture copy. It withheld the same audio replacement when
 all 53 pictures differed through independent encoding. The prospective
 comparison verified both copies' original frames at native indices **22,
@@ -88,6 +88,22 @@ during and after the reported interval. The ordinary view and JSON include
 both playable excerpts. Use `scripts.compare_video_references --verify` with
 both supplied originals to recompute the picture and audio evidence in the
 downloaded JSON. Set the option to `false` to restore exact-picture admission.
+
+## Evidence in the local app
+
+Four simulated USD 9.99 purchases ran through the local app. The analysis
+jobs entered the queue after confirmed test payment. The earlier-copy
+comparison itself used the completed analysis and created zero jobs.
+
+Chromium showed the **0.980–1.340 s** comparison with six original frames
+and two waveform excerpts. Both playable excerpts were **0.360 s**. The
+PDF contains the corresponding six source frames and both waveform views.
+The downloaded JSON replayed against both original video files. Substituting
+a different source file or an earlier frame's hash caused verification to
+fail. The unchanged soundtrack returned no localized range, and the
+deliberately altered pictures were unassessed. The exact-picture comparison
+returned identical JSON and source assets with the option enabled and disabled.
+[Local application receipt](evaluation-panels/video-short-phrase-reencode-app-2026-11-18.json)
 
 ## Reproduce
 

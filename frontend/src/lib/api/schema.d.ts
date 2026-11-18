@@ -6281,6 +6281,8 @@ export interface components {
             picture_insertion_available?: boolean | null;
             /** Short Native Sound Difference Available */
             short_native_sound_difference_available?: boolean | null;
+            /** Short Phrase Reencode Available */
+            short_phrase_reencode_available?: boolean | null;
             /** Sound Difference Available */
             sound_difference_available?: boolean | null;
             /** Timing Available */

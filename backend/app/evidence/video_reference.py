@@ -22,6 +22,7 @@ from app.evidence import (
     video_reference_local,
     video_reference_measured_interval,
     video_reference_photometric,
+    video_reference_short_reencode,
     video_reference_soundtrack_reencode,
     video_reference_trimmed,
 )
@@ -52,6 +53,7 @@ SCHEMA_WITH_SOUND_DIFFERENCE_COVERAGE = "chipmunk.video-reference-comparison/15"
 SCHEMA_WITH_RECOVERED_SOUND_DIFFERENCE = "chipmunk.video-reference-comparison/16"
 SCHEMA_WITH_NATIVE_SOUND_DIFFERENCE = "chipmunk.video-reference-comparison/17"
 SCHEMA_WITH_SHORT_PHRASE_DIFFERENCE = "chipmunk.video-reference-comparison/18"
+SCHEMA_WITH_SHORT_PHRASE_REENCODE = "chipmunk.video-reference-comparison/19"
 MAX_COMPARED_SOUNDTRACKS = 2
 MAX_BYTES = 48 * 1024 * 1024
 MAX_FRAMES = 360
@@ -226,7 +228,8 @@ def _trimmed_pairs(paths, tables, offset):
 
 
 def _picture(paths, tables, assets, *, include_local, include_local_area=False, include_measured_interval=False,
-             include_soundtrack_reencode=False, trim_offset=None, trim_reencoded=False):
+             include_soundtrack_reencode=False, include_short_phrase_reencode=False,
+             trim_offset=None, trim_reencoded=False):
     clock = _elapsed(tables[1])
     earlier_clock = _elapsed(tables[0]) if trim_offset is not None else None
     earlier_offset = trim_offset if trim_offset is not None else 0
@@ -242,6 +245,7 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
                   == video_reference_soundtrack_reencode.HD_PICTURE_SIZE else None)
     timing_differences = [] if include_soundtrack_reencode else None
     fine_timing_differences = [] if hd_profile is not None else None
+    phrase_differences = [[] for _ in video_reference_short_reencode.GRIDS] if include_short_phrase_reencode else []
     pairs = _frame_pairs(paths, tables) if trim_offset is None else _trimmed_pairs(paths, tables, earlier_offset)
     for first, second in pairs:
         difference = first.rgb != second.rgb
@@ -258,6 +262,9 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
         if fine_timing_differences is not None:
             fine_timing_differences.append(video_reference_soundtrack_reencode.picture_difference(
                 first.rgb, second.rgb, grid=video_reference_soundtrack_reencode.HD_GRID))
+        if phrase_differences:
+            for grid, observations in zip(video_reference_short_reencode.GRIDS, phrase_differences, strict=True):
+                observations.append(video_reference_soundtrack_reencode.picture_difference(first.rgb, second.rgb, grid=grid))
         if rects is not None:
             if area_check:
                 signal, background, grid = video_reference_photometric.measurements(first.rgb, second.rgb, rects)
@@ -345,6 +352,8 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
     changed = sum(size > 0 for size in sizes)
     picture = {"status": "measured", "matching_frames": len(sizes) - changed, "changed_frames": changed,
                "frame_pairs_sha256": canonical_hash(measurements), "ranges": output}
+    if phrase_differences and changed:
+        picture["short_soundtrack_picture_comparison"] = video_reference_short_reencode.summarize_grids(phrase_differences)
     if timing_differences is not None and changed:
         comparison = video_reference_soundtrack_reencode.summarize(timing_differences)
         picture["soundtrack_picture_comparison"] = comparison
@@ -416,6 +425,7 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             recover_sound_difference: bool = False,
             include_short_native_sound_difference: bool = False,
             include_short_phrase_difference: bool = False,
+            include_short_phrase_reencode: bool = False,
             include_picture_insertion: bool = False,
             verify_picture_insertion_retention: bool = True) -> tuple[dict, dict[str, bytes]]:
     """Report decoded differences on matching clocks or within a verified trimmed overlap."""
@@ -439,7 +449,9 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
                            "summary": "The two supplied clips did not pass the matching picture clock check.",
                            "scope": DIFFERENCE_UNASSESSED_SCOPE, "affects_overall_confidence": False}
         if applicable and include_sound_difference_coverage:
-            if use_short_phrase_difference:
+            if record.get("picture", {}).get("short_soundtrack_picture_comparison"):
+                schema = SCHEMA_WITH_SHORT_PHRASE_REENCODE
+            elif use_short_phrase_difference:
                 schema = SCHEMA_WITH_SHORT_PHRASE_DIFFERENCE
             elif use_native_sound_difference:
                 schema = SCHEMA_WITH_NATIVE_SOUND_DIFFERENCE
@@ -503,10 +515,18 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
         compare_timing_pictures = (include_soundtrack and include_soundtrack_reencode and timing_event_s is None
                                    and video_reference_soundtrack_reencode.eligible(
                                        paths, tables, allow_hd=include_hd_soundtrack_reencode))
+        compare_phrase_pictures = False
+        if (include_sound_difference and use_short_phrase_difference and include_short_phrase_reencode
+                and timing_event_s is None and video_reference_short_reencode.MIN_PICTURES <= len(tables[1])
+                <= video_reference_short_reencode.MAX_PICTURES):
+            from app.evidence.video_reference_soundtrack import native_difference_profile
+
+            compare_phrase_pictures = native_difference_profile(paths, tables) is not None
         record["picture"] = _picture(paths, tables, assets, include_local=include_local,
                                      include_local_area=include_local_area and timing_event_s is None,
                                      include_measured_interval=include_measured_interval,
-                                     include_soundtrack_reencode=compare_timing_pictures)
+                                     include_soundtrack_reencode=compare_timing_pictures,
+                                     include_short_phrase_reencode=compare_phrase_pictures)
         if "local_comparison" in record["picture"]:
             record["schema"] = SCHEMA_WITH_LOCAL
         decoded = [

@@ -731,8 +731,12 @@ def render(record, assets):
             _soundtrack_timing_page(document, record["soundtrack_alignment"], assets)
         difference = record.get("sound_difference")
         if difference and difference["status"] == "localized_difference":
-            title = ("Soundtrack difference with unresolved cause" if difference["range"].get("selection") == "strong_flanks_first"
-                     else "Soundtrack difference over matching pictures")
+            if difference.get("picture_correspondence_basis"):
+                title = "Local soundtrack difference"
+            else:
+                title = ("Soundtrack difference with unresolved cause"
+                         if difference["range"].get("selection") == "strong_flanks_first"
+                         else "Soundtrack difference over matching pictures")
             _soundtrack_timing_page(document, difference, assets, title=title)
         if "additional_soundtrack" in record:
             _additional_soundtrack_pages(document, record["additional_soundtrack"])

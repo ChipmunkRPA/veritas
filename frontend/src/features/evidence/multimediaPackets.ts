@@ -457,7 +457,7 @@ export interface DocumentAnchor {
 }
 export interface DocumentOriginalTextLocation {
   anchor_index: number
-  coordinate: 'decoded_text' | 'word_paragraph' | 'odt_paragraph' | 'rtf_paragraph' | 'pptx_block' | 'epub_block' |
+  coordinate: 'decoded_text' | 'word_paragraph' | 'odt_paragraph' | 'rtf_paragraph' | 'pptx_block' | 'odp_block' | 'epub_block' |
     'xlsx_cell' | 'ods_cell' | 'csv_cell' | 'tsv_cell' | 'decoded_email' | 'decoded_email_html' | 'decoded_html' | 'word_note_paragraph'
   ranges: [number, number][]
 }

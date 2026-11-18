@@ -1,8 +1,9 @@
 # Document formats and signed source records
 
 Chipmunk Verify accepts Word (`.docx`), OpenDocument Text (`.odt`), PDF,
-PowerPoint (`.pptx`), Excel (`.xlsx`), OpenDocument Spreadsheet (`.ods`), CSV, TSV, EPUB, Rich Text (`.rtf`), plain text,
-Markdown, HTML and XHTML, and email (`.eml`). These use the same local
+PowerPoint (`.pptx`), LibreOffice Impress (`.odp`), Excel (`.xlsx`),
+OpenDocument Spreadsheet (`.ods`), CSV, TSV, EPUB, Rich Text (`.rtf`), plain
+text, Markdown, HTML, XHTML, and email (`.eml`). These use the same local
 writing pipeline and produce PDF and JSON reports. The document upload
 limit is 25 MB in the standard configuration.
 
@@ -12,6 +13,7 @@ limit is 25 MB in the standard configuration.
 | ODT | Body paragraphs, headings, lists, and tables outside hidden and conditionally displayed sections | Decoded body paragraph number and character range |
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
 | PPTX | Editable text boxes and tables on visible slides | Slide in presentation order, text block, and decoded character range |
+| ODP | Saved text in supported slide shapes and tables. Hidden slides, hidden layers and speaker notes are excluded. | Slide in the deck's stored order, text block, and decoded character range |
 | XLSX | Literal text on visible worksheet tabs, rows and columns | Workbook sheet order, row, column and saved cell character range |
 | ODS | Literal text on visible sheets, rows and columns. Linked sheets, formulas and calculated values are outside the check. | Workbook sheet order, row, column and saved cell character range |
 | CSV and TSV | Text fields in UTF-8 or BOM-marked UTF-16 delimited files | Record, field and decoded character range |
@@ -139,6 +141,25 @@ hidden groups, speaker notes, charts, SmartArt, and image text are outside the
 writing check. Text in hidden groups does not count toward checkout's readable
 word minimum. Earlier signed reports use the visibility policy recorded at
 the time of analysis.
+
+Impress findings retain the slide number even when an earlier slide is
+hidden. The reader uses saved slide text and drawing-page visibility. It
+skips hidden or print-only layers, placeholders, and speaker notes. Animation,
+custom show order, image text, embedded objects, and master-slide content are
+outside this check. The report records offsets in the decoded text block, and
+the signed package can reproduce them from the original ODP. A file with
+fewer than 15 readable words in scope cannot start checkout.
+[OpenDocument slide visibility](https://docs.oasis-open.org/office/OpenDocument/v1.3/os/part3-schema/OpenDocument-v1.3-os-part3-schema.html)
+
+A local Chromium test completed an ODP upload and analysis after simulated
+USD 9.99 checkout. The browser, PDF and JSON matched all ten text locations
+on slides 1 and 3. The hidden slide at position 2, hidden layer, placeholder,
+and speaker notes stayed outside the writing input. The signed package
+verified against the original. Three additional LibreOffice regression files
+confirmed text-box and shape extraction and rejection before checkout when
+there were too few readable words.
+[LibreOffice Impress regression fixtures](https://github.com/LibreOffice/core/tree/master/sd/qa/unit/data/odp)
+
 EPUB findings use the original main reading order, skipping navigation and
 optional entries. EPUB styling, image text, and SVG chapters are outside the
 writing check. Slide and EPUB entry numbers in the web view and PDF are

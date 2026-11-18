@@ -9,6 +9,7 @@ from zipfile import BadZipFile, ZipFile
 from lxml import etree
 
 from app.core.config import settings
+from app.detectors.text.opendocument_presentation import slide_text
 from app.storage.files import EPUB_MIME, check_document_archive_safe
 
 PRESENTATION_NAMESPACES = {
@@ -240,16 +241,19 @@ def _ebook(package: _Package):
 def body_parts(path: Path, extension: str, *, check_crc: bool = False,
                skip_hidden_slide_groups: bool = True) -> list[tuple[str, dict]]:
     check_document_archive_safe(path, extension, check_crc=check_crc)
-    presentation = extension == ".pptx"
-    part_kind = "slide" if presentation else "epub_entry"
+    part_kind = "epub_entry" if extension == ".epub" else "slide"
     parts = []
     characters = raw_characters = 0
     limit = settings.max_document_chars
     try:
         with ZipFile(path) as archive:
             package = _Package(archive)
-            paragraphs = (_powerpoint(package, skip_hidden_slide_groups=skip_hidden_slide_groups)
-                          if presentation else _ebook(package))
+            if extension == ".pptx":
+                paragraphs = _powerpoint(package, skip_hidden_slide_groups=skip_hidden_slide_groups)
+            elif extension == ".odp":
+                paragraphs = slide_text(package, max_slides=MAX_TEXT_PARTS, max_chars=limit)
+            else:
+                paragraphs = _ebook(package)
             for text, index, paragraph_index in paragraphs:
                 if not text.strip():
                     continue

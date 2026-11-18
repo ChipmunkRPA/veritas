@@ -29,9 +29,9 @@ export const TABS: TabSpec[] = [
     formats: 'WAV · MP3 · M4A · OGG · OPUS · FLAC · up to 150 MB',
   },
   {
-    kind: 'document', label: 'Document', noun: 'a document', accept: '.pdf,.docx,.odt,.pptx,.xlsx,.ods,.csv,.tsv,.epub,.rtf,.txt,.md,.markdown,.html,.htm,.xhtml,.eml',
-    exts: ['pdf', 'docx', 'odt', 'pptx', 'xlsx', 'ods', 'csv', 'tsv', 'epub', 'rtf', 'txt', 'md', 'markdown', 'html', 'htm', 'xhtml', 'eml'], maxBytes: 25 * MB,
-    formats: 'Word (DOCX) · PDF · ODT · PowerPoint (PPTX) · Excel (XLSX) · LibreOffice Calc (ODS) · CSV/TSV · EPUB · RTF · TXT · Markdown · HTML/XHTML · Email (EML) · up to 25 MB',
+    kind: 'document', label: 'Document', noun: 'a document', accept: '.pdf,.docx,.odt,.pptx,.odp,.xlsx,.ods,.csv,.tsv,.epub,.rtf,.txt,.md,.markdown,.html,.htm,.xhtml,.eml',
+    exts: ['pdf', 'docx', 'odt', 'pptx', 'odp', 'xlsx', 'ods', 'csv', 'tsv', 'epub', 'rtf', 'txt', 'md', 'markdown', 'html', 'htm', 'xhtml', 'eml'], maxBytes: 25 * MB,
+    formats: 'Word (DOCX) · PDF · ODT · PowerPoint (PPTX) · LibreOffice Impress (ODP) · Excel (XLSX) · LibreOffice Calc (ODS) · CSV/TSV · EPUB · RTF · TXT · Markdown · HTML/XHTML · Email (EML) · up to 25 MB',
   },
 ]
 
@@ -43,6 +43,7 @@ const documentCoverage = new Map(Object.entries({
   odt: 'OpenDocument checks the saved body text. Hidden and conditionally displayed sections are outside this check.',
   pdf: 'PDF checks selectable text and can try to recognize text on scans. Some pages or areas may remain unchecked.',
   pptx: 'PowerPoint checks editable text and tables on visible slides. Hidden groups are excluded. Export to PDF to include writing that appears only in images.',
+  odp: 'Impress checks saved text in supported shapes and tables. Hidden slides, hidden layers and speaker notes are outside this check.',
   xlsx: 'Excel checks saved writing on visible sheets, rows and columns. Cells directly formatted to hide their values are excluded. Formulas, calculated results, comments and images are outside this check.',
   ods: 'OpenDocument spreadsheets check saved writing on visible sheets, rows and columns. Linked sheets, formulas, comments and images are outside this check.',
   csv: delimitedCoverage,
@@ -64,7 +65,6 @@ const documentExport = new Map(Object.entries({
   ppt: 'Save the older PowerPoint file as PPTX or PDF, then upload it.',
   pptm: 'Save the presentation as a macro-free PPTX or PDF, then upload it.',
   key: 'Export the Keynote file as PowerPoint (PPTX) or PDF, then upload it.',
-  odp: 'Export the OpenDocument presentation as PPTX or PDF, then upload it.',
   msg: 'Export the Outlook message as EML or PDF, then upload it.',
   xls: sheetExport,
   xlsm: sheetExport,

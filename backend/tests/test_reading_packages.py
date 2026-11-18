@@ -22,7 +22,7 @@ from app.detectors.text.reading_packages import (
 from app.evidence import document_native_locations
 from app.evidence.document_packets import _source_anchors, build_packet_set
 from app.reports import public_verify, verify_document_source
-from app.storage.files import EPUB_MIME, PPTX_MIME, validate_kind
+from app.storage.files import EPUB_MIME, ODP_MIME, PPTX_MIME, validate_kind
 
 PASSAGE = ("The community library stays open until eight on Thursday evenings. "
            "The volunteers use a separate entrance near the parking lot to deliver new books.")
@@ -89,8 +89,41 @@ def epub(path, passages=(PASSAGE, PASSAGE), *, protected=False):
                              '</e:CipherData></e:EncryptedData></encryption>')
 
 
+def impress(path, passages=(PASSAGE, PASSAGE), *, mime=ODP_MIME, oversized=False):
+    namespaces = " ".join(f'xmlns:{prefix}="urn:oasis:names:tc:opendocument:xmlns:{name}:1.0"' for prefix, name in (
+        ("office", "office"), ("style", "style"), ("draw", "drawing"), ("presentation", "presentation"),
+        ("text", "text"), ("table", "table"),
+    ))
+    table, box = (escape(value).replace("   ", '<text:s text:c="3"/>') for value in passages)
+    if oversized:
+        box += '<text:s text:c="2000000"/>'
+    with ZipFile(path, "w", compression=ZIP_DEFLATED) as archive:
+        archive.writestr("mimetype", mime, compress_type=ZIP_STORED)
+        archive.writestr("styles.xml", f'<office:document-styles {namespaces}><office:styles>'
+                         '<style:style style:name="Hidden" style:family="drawing-page">'
+                         '<style:drawing-page-properties presentation:visibility="hidden"/></style:style></office:styles>'
+                         '<office:master-styles><draw:layer-set><draw:layer draw:name="Private" draw:display="none"/>'
+                         '</draw:layer-set></office:master-styles></office:document-styles>')
+        archive.writestr("content.xml", f'<office:document-content {namespaces}><office:automatic-styles>'
+                         '<style:style style:name="HiddenChild" style:family="drawing-page" style:parent-style-name="Hidden"/>'
+                         '</office:automatic-styles><office:body><office:presentation>'
+                         f'<draw:page><draw:g draw:layer="Private"><draw:custom-shape><text:p>{HIDDEN_GROUP_TEXT}'
+                         '</text:p></draw:custom-shape></draw:g><draw:frame presentation:placeholder="true">'
+                         f'<draw:text-box><text:p>{HIDDEN_GROUP_TEXT}</text:p></draw:text-box></draw:frame>'
+                         f'<draw:frame><draw:text-box><text:list><text:list-item><text:p>{box}</text:p>'
+                         '</text:list-item></text:list></draw:text-box></draw:frame>'
+                         f'<presentation:notes><draw:frame><draw:text-box><text:p>{HIDDEN_GROUP_TEXT}'
+                         '</text:p></draw:text-box></draw:frame></presentation:notes></draw:page>'
+                         f'<draw:page draw:style-name="HiddenChild"><draw:custom-shape><text:p>{HIDDEN_GROUP_TEXT}'
+                         '</text:p></draw:custom-shape></draw:page>'
+                         f'<draw:page><draw:frame><table:table><table:table-row><table:table-cell><text:p>{table}</text:p>'
+                         '</table:table-cell></table:table-row></table:table></draw:frame></draw:page>'
+                         '</office:presentation></office:body></office:document-content>')
+
+
 @pytest.mark.parametrize(("extension", "make", "mime", "part_kind", "coordinate"), [
     (".pptx", powerpoint, PPTX_MIME, "slide", "pptx_block"),
+    (".odp", impress, ODP_MIME, "slide", "odp_block"),
     (".epub", epub, EPUB_MIME, "epub_entry", "epub_block"),
 ])
 def test_order_scope_and_exact_positions(tmp_path, extension, make, mime, part_kind, coordinate):
@@ -167,6 +200,9 @@ def test_powerpoint_evidence_replays_its_recorded_visibility_policy(tmp_path, pa
     (".pptx", powerpoint, {"external": True}, "internal slide relationship"),
     (".pptx", powerpoint, {"macro": True}, "macro-free"),
     (".pptx", powerpoint, {"passages": ("", "")}, "at least 15 readable words"),
+    (".odp", impress, {"mime": "application/zip"}, "not an OpenDocument Presentation"),
+    (".odp", impress, {"oversized": True}, "writing limit for whitespace"),
+    (".odp", impress, {"passages": ("", "")}, "at least 15 readable words"),
     (".epub", epub, {"protected": True}, "protected reading text"),
     (".epub", epub, {"passages": ("", "")}, "at least 15 readable words"),
 ])

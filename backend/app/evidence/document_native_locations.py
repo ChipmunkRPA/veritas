@@ -12,9 +12,9 @@ PARAGRAPH_MAP = "decoded-body-paragraphs/1"
 # The RTF reader returns the same decoded line breaks for soft breaks and paragraph breaks.
 # The saved coordinate describes a decoded text block.
 CELL_METHODS = {"xlsx": "spreadsheet_cell", "ods": "spreadsheet_cell", "csv": "delimited_cell", "tsv": "delimited_cell"}
-PARAGRAPH_COORDINATES = {"odt": "odt_paragraph", "rtf": "rtf_paragraph", "pptx": "pptx_block", "epub": "epub_block",
+PARAGRAPH_COORDINATES = {"odt": "odt_paragraph", "rtf": "rtf_paragraph", "pptx": "pptx_block", "odp": "odp_block", "epub": "epub_block",
                          **{method: f"{method}_cell" for method in CELL_METHODS}}
-PACKAGE_METHODS = {"pptx": "slide", "epub": "epub_entry"}
+PACKAGE_METHODS = {"pptx": "slide", "odp": "slide", "epub": "epub_entry"}
 PACKAGE_LABELS = {"slide": "Slide", "epub_entry": "EPUB reading entry"}
 PPTX_VISIBILITY_KEY = "pptx_visibility"
 PPTX_VISIBILITY = "visible-slide-groups/1"

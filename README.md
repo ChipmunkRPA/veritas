@@ -32,7 +32,8 @@ are not prepared for use as court evidence or expert testimony.
   shows the selected range and plays the source excerpt. Background labels do not establish AI origin.
 - **Documents and email:** source-positioned writing observations and passage links.
   Upload Word (standard or Strict Open XML DOCX), PDF, ODT, PowerPoint (PPTX),
-  Excel (XLSX), CSV, TSV, EPUB, RTF, TXT, Markdown, HTML, XHTML or email (EML).
+  Impress (ODP), Excel (XLSX), Calc (ODS), CSV, TSV, EPUB, RTF, TXT, Markdown,
+  HTML, XHTML or email (EML).
   Word evidence identifies body paragraphs, supported table cells, and linked
   footnotes and endnotes. Spreadsheet evidence identifies cells.
   [Document format coverage](docs/document-formats-2026-11-17.md) explains which

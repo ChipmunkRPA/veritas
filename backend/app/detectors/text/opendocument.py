@@ -10,6 +10,7 @@ from lxml import etree
 from app.storage.files import ODT_MIME, check_document_archive_safe
 
 OFFICE = "{urn:oasis:names:tc:opendocument:xmlns:office:1.0}"
+STYLE = "{urn:oasis:names:tc:opendocument:xmlns:style:1.0}"
 TEXT = "{urn:oasis:names:tc:opendocument:xmlns:text:1.0}"
 TABLE = "{urn:oasis:names:tc:opendocument:xmlns:table:1.0}"
 BODY_CONTAINERS = frozenset({TEXT + name for name in ("section", "list", "list-item", "list-header")}

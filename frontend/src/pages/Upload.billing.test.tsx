@@ -49,7 +49,7 @@ describe('paid analysis intake', () => {
   it('accepts Word and saved XHTML, and guides users who choose an older Word file', () => {
     const { container } = mount()
     const input = container.querySelector<HTMLInputElement>('input[type="file"]')!
-    expect(input.accept.split(',')).toEqual(expect.arrayContaining(['.docx', '.pdf', '.odt', '.pptx', '.xlsx', '.csv', '.tsv', '.epub', '.rtf', '.txt', '.md', '.html', '.xhtml', '.eml']))
+    expect(input.accept.split(',')).toEqual(expect.arrayContaining(['.docx', '.pdf', '.odt', '.pptx', '.odp', '.xlsx', '.ods', '.csv', '.tsv', '.epub', '.rtf', '.txt', '.md', '.html', '.xhtml', '.eml']))
     fireEvent.change(input, { target: { files: [new File(['old Word'], 'draft.DOC')] } })
     expect(screen.getByRole('alert').textContent).toContain('Save the older Word file as DOCX or PDF')
     fireEvent.change(input, { target: { files: [new File(['Word'], 'draft.DOCX')] } })

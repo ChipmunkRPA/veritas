@@ -6,12 +6,11 @@ import re
 from bisect import bisect_left
 
 from app.core.config import settings
-from app.detectors.text.opendocument import OFFICE, PARAGRAPHS, TABLE, TEXT, _visible_text
+from app.detectors.text.opendocument import OFFICE, PARAGRAPHS, STYLE, TABLE, TEXT, _visible_text
 from app.detectors.text.reading_packages import MAX_TEXT_PARTS
 from app.detectors.text.spreadsheet_cells import MAX_COLUMNS, MAX_ROWS
 from app.storage.files import ODS_MIME
 
-STYLE = "{urn:oasis:names:tc:opendocument:xmlns:style:1.0}"
 HIDDEN = frozenset({"false", "0"})
 
 

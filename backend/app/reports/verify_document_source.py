@@ -56,7 +56,7 @@ from app.reports.public_verify import SCHEMA
 from app.storage.files import check_docx_safe
 
 EXTENSIONS = {"plain": ".txt", "python-docx": ".docx", "odt": ".odt", "markdown": ".md", "html": ".html",
-              "rtf": ".rtf", "email": ".eml", "pymupdf": ".pdf", "pptx": ".pptx", "epub": ".epub",
+              "rtf": ".rtf", "email": ".eml", "pymupdf": ".pdf", "pptx": ".pptx", "odp": ".odp", "epub": ".epub",
               "xlsx": ".xlsx", "ods": ".ods", "csv": ".csv", "tsv": ".tsv"}
 MAX_SOURCE_BYTES = 25 * 1024 * 1024
 

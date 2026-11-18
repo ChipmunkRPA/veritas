@@ -192,28 +192,35 @@ def _read_stereo(path: Path, limit: int, *, rate: int = SAMPLE_RATE) -> np.ndarr
     return np.frombuffer(frames, dtype="<i2").reshape(-1, 2)
 
 
-def decode_native_stereo(path: Path, mapping: dict[str, Any], *, aac: bool = False) -> bytes | None:
+def decode_native_stereo(path: Path, mapping: dict[str, Any], *, aac: bool = False, opus: bool = False) -> bytes | None:
     """Keep short 48 kHz stereo samples only when both decoded clocks agree."""
     from app.evidence.audio_channel_alignment_binding import (
         NATIVE_FACTOR,
         NATIVE_RATE,
         aac_presented_samples,
         native_scope,
+        opus_presented_samples,
     )
 
-    if aac:
+    if opus:
+        count = opus_presented_samples(mapping)
+    elif aac:
         count = aac_presented_samples(mapping)
     else:
         count = mapping["samples"] * NATIVE_FACTOR if native_scope(mapping) else None
     if count is None:
         return None
     expected_pts = mapping["timeline"][0]["source_pts"] * NATIVE_FACTOR
-    # AAC can decode beyond the presented final sample. Lossless inputs must
-    # end on the same sample in both decodes without trimming any extra samples.
+    # AAC can decode beyond the presented final sample. Other supported
+    # inputs must end on the same sample in both decodes.
     limit = count if aac else count + 1
     filters = (f"aformat=sample_fmts=s16,asettb=1/{NATIVE_RATE},atrim=end_sample={limit},"
                "ashowinfo,asetpts=N/SR/TB")
     try:
+        if opus:
+            from app.detectors.audio.ogg_opus_reference import native_clock
+
+            native_clock(path, channels=2, presented=count, packet_bytes=400)
         with tempfile.TemporaryDirectory() as temp:
             output = Path(temp) / "native-stereo.wav"
             run = subprocess.run(
@@ -354,6 +361,8 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
             mapping["source_bit_depth"] = int(bits) if bits is not None else None
         if mapping["source_codec"] == "pcm_s16le" and fmt.get("format_name") == "wav":
             mapping.update(source_container="wav", source_bit_depth=16)
+        if mapping["source_codec"] == "opus" and fmt.get("format_name") == "ogg":
+            mapping["source_container"] = "ogg"
         if ((mapping.get("source_container"), mapping["source_codec"]) in LOSSLESS_FORMATS
                 and mapping["source_sample_rate"] == LOSSLESS_RATE and type(stream.get("duration_ts")) is int):
             mapping["source_duration_pts"] = stream["duration_ts"]

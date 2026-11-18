@@ -1599,6 +1599,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "repetition_context_pointer": "/audio/repetition_context" if kind == "video" else "/repetition_context",
             "stereo_repetition": stereo_repeated,
             "stereo_repetition_pointer": "/audio/stereo_repetition" if kind == "video" else "/stereo_repetition",
+            "stereo_opus_repeat_unavailable": kind == "audio" and stereo_source.get("stereo_opus_repeat_unavailable") is True,
             "stereo_timing_change": stereo_timing,
             "stereo_timing_pointer": "/audio/stereo_timing_change" if kind == "video" else "/stereo_timing_change",
             "similarity_context": copy.deepcopy(stereo_source.get("similarity_context")),

@@ -17,9 +17,18 @@ try {
   const errors = []
   page.on('pageerror', error => errors.push(error.message))
   const results = []
-  for (const { analysis_id, name, pairs, rate, description = 'Times and excerpts use the original 48 kHz stereo recording.' } of input.cases) {
+  for (const { analysis_id, name, pairs, rate, unavailable, description = 'Times and excerpts use the original 48 kHz stereo recording.' } of input.cases) {
     const anchor = rate ? 'rate-repetition' : 'aligned-repetition'
     await page.goto(`${input.url}/analyses/${analysis_id}/media-evidence?view=plain#media-evidence-${anchor}`)
+    if (unavailable) {
+      const heading = 'Stereo Opus repeat check unavailable'
+      const skipped = page.getByRole('region', { name: heading })
+      await skipped.getByRole('heading', { name: heading }).waitFor()
+      await skipped.getByText(/continuous 3–4 second stereo Ogg Opus/).waitFor()
+      assert.equal(await page.getByRole('region', { name: 'Repeated sound after stereo alignment' }).count(), 0)
+      results.push({ case: name, unavailable: true })
+      continue
+    }
     const card = page.getByRole('region', { name: rate ? 'Repeated sound at different speeds' : 'Repeated sound after stereo alignment' })
     await card.getByText(description, { exact: false }).waitFor()
     const clips = []

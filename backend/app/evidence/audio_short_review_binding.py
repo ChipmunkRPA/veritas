@@ -59,7 +59,8 @@ AFTER_COVERAGE_SKIP = {
 def source_metadata(mapping: dict) -> dict:
     metadata = {"source_codec": mapping.get("source_codec")}
     keys = {"flac": ("source_container", "source_bit_depth"), "pcm_s16le": ("source_container", "source_bit_depth"),
-            "mp3": ("source_container", "source_bit_rate"), "aac": AAC_FIELDS}
+            "mp3": ("source_container", "source_bit_rate"), "aac": AAC_FIELDS,
+            "opus": ("source_container", "source_time_base", "source_start_pts")}
     metadata.update({key: mapping[key] for key in keys.get(metadata["source_codec"], ()) if key in mapping})
     if mapping.get("source_sample_rate") == LOSSLESS_RATE and metadata["source_codec"] in NEARBY_CODECS:
         metadata.update({key: mapping[key] for key in ("source_time_base", "source_start_pts", "source_duration_pts")

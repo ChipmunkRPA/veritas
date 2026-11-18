@@ -196,6 +196,14 @@ def validate_content(document: dict[str, Any]) -> None:
             validate(document["stereo_repetition"], source)
         except ValueError as error:
             raise PacketIntegrityError(str(error)) from error
+    from app.evidence.stereo_repetition_binding import OPUS_UNAVAILABLE
+
+    if OPUS_UNAVAILABLE in document and (
+        document.get("schema") != SCHEMA or document[OPUS_UNAVAILABLE] is not True
+        or (source.get("source_codec"), source.get("source_container")) != ("opus", "ogg")
+        or "stereo_repetition" in document
+    ):
+        raise PacketIntegrityError("Invalid stereo Opus repeat coverage")
     if "stereo_timing_change" in document:
         from app.evidence.audio_stereo_timing_binding import validate
 
@@ -586,7 +594,7 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
     )
     from app.evidence.audio_gain_repetition_binding import GAIN_INPUT
     from app.evidence.stereo_repetition import build_from_store
-    from app.evidence.stereo_repetition_binding import DIFFERENCE_INPUT, NATIVE_VERSIONS
+    from app.evidence.stereo_repetition_binding import DIFFERENCE_INPUT, NATIVE_VERSIONS, OPUS_UNAVAILABLE
     from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
 
     if digest := binding.get(STEREO_REPEAT_INPUT) or mapping.get(STEREO_REPEAT_INPUT):
@@ -601,6 +609,11 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
             gain_version=binding.get(GAIN_INPUT) or mapping.get(GAIN_INPUT),
             difference_version=version,
         )
+    if mapping.get(OPUS_UNAVAILABLE) is True:
+        from app.evidence.audio_short_review_binding import source_metadata
+
+        document["source"].update(source_metadata(mapping))
+        document[OPUS_UNAVAILABLE] = True
     from app.evidence import audio_stereo_timing_binding as timing
 
     if digest := binding.get(timing.INPUT) or mapping.get(timing.INPUT):
@@ -645,12 +658,14 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
         stereo_listening.verify(store, document, listening_digest, read_wav(_verified(store, document["source"]["wav_sha256"])))
     from app.evidence import stereo_repetition
     from app.evidence.audio_gain_repetition_binding import GAIN_INPUT
-    from app.evidence.stereo_repetition_binding import DIFFERENCE_INPUT
+    from app.evidence.stereo_repetition_binding import DIFFERENCE_INPUT, OPUS_UNAVAILABLE
     from app.evidence.stereo_repetition_binding import INPUT as STEREO_REPEAT_INPUT
 
     if mapping.get(STEREO_REPEAT_INPUT) or "stereo_repetition" in document:
         stereo_repetition.verify_frozen(store, document, mapping, mapping.get(STEREO_REPEAT_INPUT), store.read_bytes,
                                        gain_version=mapping.get(GAIN_INPUT), difference_version=mapping.get(DIFFERENCE_INPUT))
+    if mapping.get(OPUS_UNAVAILABLE) != document.get(OPUS_UNAVAILABLE):
+        raise PacketIntegrityError("Stereo Opus repeat coverage differs from the frozen audio input mapping")
     from app.evidence import audio_stereo_timing_binding as timing
 
     if mapping.get(timing.INPUT) or timing.KEY in document:

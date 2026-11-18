@@ -19,6 +19,7 @@ SCHEMA = "chipmunk.aligned-stereo-repetition/1"
 NATIVE_SCHEMA = "chipmunk.aligned-stereo-repetition/2"
 AAC_SCHEMA = "chipmunk.aligned-stereo-repetition/3"
 RATE_SCHEMA = "chipmunk.aligned-stereo-repetition/4"
+OPUS_SCHEMA = "chipmunk.aligned-stereo-repetition/5"
 NATIVE_FACTOR = 3
 NATIVE_RATE = SAMPLE_RATE * NATIVE_FACTOR
 AAC_EDGE_MARGIN = 640
@@ -67,6 +68,20 @@ def aac_presented_samples(mapping):
             or not -2 <= decoded * NATIVE_FACTOR - count <= AAC_FRAME + 2):
         return None
     return count
+
+
+def opus_presented_samples(mapping):
+    """Admit the bounded zero-origin clock used by the stereo Opus comparison."""
+    if (mapping.get("source_codec"), mapping.get("source_container"), mapping.get("source_channels"),
+            mapping.get("source_sample_rate"), mapping.get("source_time_base"), mapping.get("source_start_pts")) != (
+            "opus", "ogg", 2, NATIVE_RATE, f"1/{NATIVE_RATE}", 0) or "audio_stream_indices" in mapping:
+        return None
+    decoded = mapping.get("samples")
+    if type(decoded) is not int or not 3 * SAMPLE_RATE <= decoded <= MAX_SAMPLES:
+        return None
+    if mapping.get("timeline") != [{"start_sample": 0, "end_sample": decoded, "source_pts": 0}]:
+        return None
+    return decoded * NATIVE_FACTOR
 
 
 def overlap(count: int, shift: int) -> tuple[int, int]:
@@ -131,14 +146,16 @@ def _validate_rate_pair(pair, first, second):
 def _validate(record, source, exact_found):
     schema = record["schema"]
     aac = schema == AAC_SCHEMA
+    opus = schema == OPUS_SCHEMA
     rate_adjusted = schema == RATE_SCHEMA
-    factor = NATIVE_FACTOR if schema in {NATIVE_SCHEMA, AAC_SCHEMA, RATE_SCHEMA} else 1
-    count = aac_presented_samples(source) if aac else source["samples"] * factor
+    factor = NATIVE_FACTOR if schema in {NATIVE_SCHEMA, AAC_SCHEMA, RATE_SCHEMA, OPUS_SCHEMA} else 1
+    count = opus_presented_samples(source) if opus else aac_presented_samples(source) if aac else source["samples"] * factor
     rate = SAMPLE_RATE * factor
     clock = _timeline(source, source["samples"])
     reason, pairs = record["reason"], record["pairs"]
     if (source["sample_rate"] != SAMPLE_RATE or count is None or not MIN_SAMPLES * factor <= count <= MAX_SAMPLES * factor
-            or len(clock) != 1 or schema not in {SCHEMA, NATIVE_SCHEMA, AAC_SCHEMA, RATE_SCHEMA} or record["source_sha256"] != source["sha256"]
+            or len(clock) != 1 or schema not in {SCHEMA, NATIVE_SCHEMA, AAC_SCHEMA, RATE_SCHEMA, OPUS_SCHEMA}
+            or record["source_sha256"] != source["sha256"]
             or record["sample_rate"] != rate or record["input_samples"] != count
             or record["projection"] != PROJECTION or reason not in STATUSES or record["status"] != STATUSES[reason]
             or not isinstance(pairs, list) or len(pairs) > MAX_PAIRS or (reason is not None and pairs)
@@ -167,7 +184,7 @@ def _validate(record, source, exact_found):
     if record["searched_interval"] != {"start_sample": low, "end_sample": high} or not _valid_hash(record["pcm_sha256"]):
         raise ValueError("Aligned stereo search does not cover the real shared clock")
     extent = {"samples": count, "source_pts": clock[0]["source_pts"] * factor, "time_base": f"1/{rate}"}
-    margin = RATE_EDGE_MARGIN if rate_adjusted else AAC_EDGE_MARGIN if aac else 0
+    margin = RATE_EDGE_MARGIN if rate_adjusted else AAC_EDGE_MARGIN if aac or opus else 0
     seen = set()
     for index, pair in enumerate(pairs, 1):
         first, second = (_sample_range(pair[side], **extent) for side in ("first", "second"))

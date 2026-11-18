@@ -214,6 +214,7 @@ export interface AudioRepetitionContext extends AudioRepeatRecord {
 interface StereoRepetitionContext {
   schema: 'chipmunk.stereo-exact-repetition/1' | 'chipmunk.stereo-exact-repetition/2' | 'chipmunk.stereo-exact-repetition/3'
     | 'chipmunk.stereo-exact-repetition/4' | 'chipmunk.stereo-exact-repetition/5' | 'chipmunk.stereo-exact-repetition/6'
+    | 'chipmunk.stereo-exact-repetition/7'
   source_sha256: string; affects_overall_confidence: false
   channels: { channel: 'left' | 'right'; measurement: AudioRepetitionContext; gain_measurement?: AudioGainRepetitionContext }[]
   difference_measurement?: AudioRepetitionContext
@@ -237,7 +238,7 @@ type RateRepeatPair = Pick<AudioRepeatPair, 'id' | 'artifacts'> & {
 }
 export interface AudioAlignedRepetitionContext extends Omit<AudioRepeatRecord, 'status' | 'pcm_sha256'> {
   schema: 'chipmunk.aligned-stereo-repetition/1' | 'chipmunk.aligned-stereo-repetition/2' | 'chipmunk.aligned-stereo-repetition/3'
-    | 'chipmunk.aligned-stereo-repetition/4'
+    | 'chipmunk.aligned-stereo-repetition/4' | 'chipmunk.aligned-stereo-repetition/5'
   status: AudioRepeatRecord['status'] | 'skipped'; pcm_sha256: string | null
   alignment: { right_offset_samples: number; right_gain_numerator: number; agreeing_windows: number; usable_windows: number } | null
   pairs: ((AudioRepeatPair & { first: AlignedRepeatSpan; second: AlignedRepeatSpan }) | RateRepeatPair)[]
@@ -364,6 +365,7 @@ export interface AudioEvidenceSet extends SetBase {
   stereo_timing_change?: StereoTimingChange
   repetition_context?: AudioRepetitionContext
   stereo_repetition?: StereoRepetitionContext
+  stereo_opus_repeat_unavailable?: true
   similarity_context?: AudioSimilarityContext
   short_voice_review?: ShortVoiceReview
   focused_speech_edit_review?: FocusedSpeechEditReview

@@ -12,8 +12,9 @@ function RepeatCheck({ set, token, mediaReady, videoOriginS, context, channel }:
   if (!context || context.source_sha256 !== set.source.sha256
     || (!channel && context.pcm_sha256 !== set.source.pcm_sha256)) return null
   const aac = context.schema === 'chipmunk.aligned-stereo-repetition/3'
+  const opus = context.schema === 'chipmunk.aligned-stereo-repetition/5'
   const rateAdjusted = context.schema === 'chipmunk.aligned-stereo-repetition/4'
-  const nativeAligned = aac || rateAdjusted || context.schema === 'chipmunk.aligned-stereo-repetition/2'
+  const nativeAligned = aac || opus || rateAdjusted || context.schema === 'chipmunk.aligned-stereo-repetition/2'
   const { sample_rate: decodedRate, samples: decodedSamples } = set.source
   if (!decodedRate || !decodedSamples) return null
   const sampleRate = nativeAligned ? 48000 : decodedRate
@@ -47,7 +48,7 @@ function RepeatCheck({ set, token, mediaReady, videoOriginS, context, channel }:
     <h3 id={`${id}-heading`} className="m-0 text-body font-medium">{title}</h3>
     <p className="mt-2 mb-0 text-small text-text-muted">{method} Loops, recurring alerts, and editing can all repeat audio. Matches carry no AI confidence weight.</p>
     {nativeAligned && <p className="mt-2 mb-0 text-caption text-text-muted">
-      {aac ? 'This comparison uses lower frequency bands of the presented 48 kHz stereo audio. The waveforms show those bands.'
+      {aac || opus ? 'This comparison uses lower frequency bands of the presented 48 kHz stereo audio. The waveforms show those bands.'
         : 'Times and excerpts use the original 48 kHz stereo recording.'} Each waveform uses its own peak scale for visibility.
       {rateAdjusted && ' The waveforms show the aligned excerpts at their recorded speeds on the source clock.'}
     </p>}
@@ -155,6 +156,13 @@ export default function AudioRepetitionContext(props: Props) {
   const stereo = props.set.stereo_repetition
   return <><RepeatCheck {...props} context={props.set.repetition_context} />
     <RepeatCheck {...props} context={props.set.similarity_context} />
+    {props.set.stereo_opus_repeat_unavailable && <section aria-labelledby="stereo-opus-repeat-unavailable"
+      className="mt-5 rounded-md border border-border p-4">
+      <h3 id="stereo-opus-repeat-unavailable" className="m-0 text-body font-medium">Stereo Opus repeat check unavailable</h3>
+      <p className="mt-2 mb-0 text-small text-text-muted">
+        This check needs continuous 3–4 second stereo Ogg Opus at a constant 160 kb/s with a verified playback clock.
+      </p>
+    </section>}
     {stereo?.source_sha256 === props.set.source.sha256 && <>
       {stereo.channels.map(row => <div key={row.channel}><RepeatCheck {...props} context={row.measurement} channel={row.channel} />
         <RepeatCheck {...props} context={row.gain_measurement} channel={row.channel} /></div>)}

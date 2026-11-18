@@ -77,6 +77,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     stereo = audio.get("stereo_context")
     repeated = audio.get("stereo_repetition")
     from app.evidence.audio_short_review_binding import IDENTICAL_CHANNEL_PCM, source_metadata_matches
+    from app.evidence.stereo_repetition_binding import OPUS_UNAVAILABLE
 
     identical_channels = IDENTICAL_CHANNEL_PCM in source
     decoded = decode_audio(original, source_sha256=source_sha256, max_seconds=600.0 if kind == "audio" else 120.0,
@@ -195,6 +196,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         except ObjectIntegrityError as error:
             raise ValueError(str(error)) from error
         intervals += sum(len(assets) - 1 for assets in all_artifacts(listening))
+    if audio.get(OPUS_UNAVAILABLE):
+        from app.detectors.audio.decode import decode_native_stereo
+
+        if decode_native_stereo(original, decoded.mapping, opus=True) is not None:
+            raise ValueError("The original qualifies for the unfrozen stereo Opus repeat check")
+        replay_detail += " Confirmed the original falls outside the supported stereo Opus repeat input."
     if repeated is not None:
         from app.detectors.audio.decode import decode_native_stereo
         from app.evidence.audio_gain_repetition_binding import GAIN_VERSION
@@ -204,13 +211,15 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             ALIGNED_VERSION,
             DIFFERENCE_VERSIONS,
             NATIVE_VERSIONS,
+            OPUS_ALIGNED_VERSION,
             pairs,
         )
 
         difference_version = DIFFERENCE_VERSIONS.get(repeated["schema"])
         use_native = difference_version in NATIVE_VERSIONS
         if use_native:
-            data = decode_native_stereo(original, decoded.mapping, aac=difference_version == AAC_ALIGNED_VERSION)
+            data = decode_native_stereo(original, decoded.mapping, aac=difference_version == AAC_ALIGNED_VERSION,
+                                        opus=difference_version == OPUS_ALIGNED_VERSION)
         else:
             data = native_pcm(decoded)
         if data is None:

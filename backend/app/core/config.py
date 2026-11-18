@@ -146,6 +146,7 @@ class Settings(BaseSettings):
     audio_stereo_native_repeat_review: bool = False  # development-only alignment of short lossless 48 kHz stereo
     audio_stereo_rate_repeat_review: bool = True  # also compare playback rates on the verified lossless clock
     audio_stereo_aac_repeat_review: bool = False  # development-only repeat evidence on verified 48 kHz AAC stereo
+    audio_stereo_opus_repeat_review: bool = False  # Development-only repeat evidence on verified short stereo Ogg Opus.
     audio_stereo_timing_change_review: bool = False  # Local changes in the delay between native stereo channels.
 
     @property

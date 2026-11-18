@@ -16,7 +16,8 @@ from app.evidence.image_editor_preview_binding import (
     BOX,
     CARRIER_SCHEMAS,
     DISPLAY_EDGE,
-    HEIF_CARRIER,
+    HEIF_10BIT_CARRIER,
+    HEIF_CARRIERS,
     MAX_REGIONS,
     PNG_CARRIER,
 )
@@ -62,8 +63,8 @@ def verify(body, document, assets, *, source_size=None):
     try:
         with ExitStack() as opened:
             floor = localization.CONFIRMATION_COMPONENT_FRACTION
-            if carrier == HEIF_CARRIER:
-                _, pair = opened.enter_context(heif_thumbnail.read_pair(body))
+            if carrier in HEIF_CARRIERS:
+                _, pair = opened.enter_context(heif_thumbnail.read_pair(body, allow_10bit_sdr=carrier == HEIF_10BIT_CARRIER))
                 require(pair is not None, "Submitted file has no comparable linked HEIC thumbnail")
                 source, preview = pair
                 measurement, masks = localization.measure_heif(source, preview, minimum_component_fraction=floor)

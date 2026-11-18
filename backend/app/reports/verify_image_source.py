@@ -304,9 +304,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
 
 def _preview_detail(proof, carrier):
-    from app.evidence.image_editor_preview_binding import HEIF_CARRIER, PNG_CARRIER
+    from app.evidence.image_editor_preview_binding import HEIF_CARRIERS, PNG_CARRIER
 
     count = proof["footprints"]
-    label = {HEIF_CARRIER: "linked HEIC thumbnail", PNG_CARRIER: "PNG Exif preview"}.get(carrier, "editor-preview")
+    label = "linked HEIC thumbnail" if carrier in HEIF_CARRIERS else "PNG Exif preview" if carrier == PNG_CARRIER else "editor-preview"
     return (f' Matched {proof["source_crops"]} main-image and stored thumbnail crops. '
             f'Recomputed {count} saved {label} {"footprint" if count == 1 else "footprints"}.')

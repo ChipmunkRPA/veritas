@@ -29,22 +29,23 @@ def pixels(data):
         return image.size, digest(image.convert("RGB").tobytes())
 
 
-def report_and_package(client, folder, name, analysis, source, expected):
+def report_and_package(client, folder, name, analysis, source, expected_carrier):
     import pymupdf
 
-    from app.evidence.image_editor_preview_binding import CARRIER_SCHEMAS, HEIF_CARRIER, KEY
+    from app.evidence.image_editor_preview_binding import CARRIER_SCHEMAS, KEY
     from app.evidence.image_editor_preview_source import verify
     from app.reports.verify import verify_package
     from scripts.verify_multimedia_exports import scan
 
     exported = body(client.get(f"/api/analyses/{analysis}/export.json"))
     preview = exported.get(KEY)
+    expected = expected_carrier is not None
     assert bool(preview) == expected
     exhibits = body(client.get(f"/api/v2/analyses/{analysis}/exhibits"))["items"]
     assert any(item["title"] == "Main image preview differences" and item["kind"] == "regions" for item in exhibits) == expected
     source_crops, footprint, plates = 0, 0, {}
     if preview:
-        assert preview["authorship_confidence_contribution"] == 0 and preview["preview_carrier"] == HEIF_CARRIER
+        assert preview["authorship_confidence_contribution"] == 0 and preview["preview_carrier"] == expected_carrier
         assert preview["main_coordinate_space"] == "decoded-heif-main-image"
         assert preview["preview_coordinate_space"] == "decoded-heif-thumbnail"
         for region in preview["regions"]:
@@ -89,9 +90,10 @@ def report_and_package(client, folder, name, analysis, source, expected):
         projection = json.loads(archive.read("result.json")).get(KEY)
         assert bool(projection) == expected and archive.read("report.pdf") == pdf
         if projection:
-            assert projection["schema"] == CARRIER_SCHEMAS[HEIF_CARRIER]
+            assert projection["schema"] == CARRIER_SCHEMAS[expected_carrier]
             assert verify(source.read_bytes(), projection, lambda pin: archive.read(f"assets/{pin}.png")) == proof
-    return preview, {"source_crops": source_crops, "footprints": footprint, "pdf_sha256": digest(pdf), "signed_replay": True}
+    return preview, {"source_sha256": digest(source.read_bytes()), "preview_carrier": expected_carrier,
+                     "source_crops": source_crops, "footprints": footprint, "pdf_sha256": digest(pdf), "signed_replay": True}
 
 
 def verify_browser(app, root, folder, key, analysis, preview):
@@ -122,9 +124,13 @@ def verify_browser(app, root, folder, key, analysis, preview):
 
 
 def main():
+    from app.evidence.image_editor_preview_binding import HEIF_CARRIER, HEIF_CARRIERS
+
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("edited", "agreeing", "without_preview", "output"):
         parser.add_argument(name, type=Path)
+    parser.add_argument("--expected-carrier", choices=sorted(HEIF_CARRIERS), default=HEIF_CARRIER)
+    parser.add_argument("--skip-browser", action="store_true", help="Run API and report checks without opening Chrome.")
     args = parser.parse_args()
     folder = args.output.resolve()
     root = Path(__file__).resolve().parents[2]
@@ -143,8 +149,8 @@ def main():
     stub = PaymentStub()
     service._stripe = stub
     receipts, decisions = {}, {}
-    entries = (("changed", args.edited, True), ("agreeing", args.agreeing, False),
-               ("absent", args.without_preview, False), ("opt_out", args.edited, False))
+    entries = (("changed", args.edited, args.expected_carrier), ("agreeing", args.agreeing, None),
+               ("absent", args.without_preview, None), ("opt_out", args.edited, None))
     with TestClient(app, client=("127.0.0.1", 50000)) as client:
         with get_session() as db:
             owner = auth.new_principal("heic-preview-" + uuid.uuid4().hex[:8], "examiner")
@@ -162,12 +168,13 @@ def main():
             decisions[name] = detail["decision"]
             preview, row = report_and_package(client, folder, name, aid, source, expected)
             receipts[name] = {"prepayment_jobs": 0, "paid_jobs": 1, "preview_regions": len(preview["regions"]) if preview else 0, **row}
-            if preview:
+            if preview and not args.skip_browser:
                 receipts[name]["browser"] = verify_browser(app, root, folder, key, aid, preview)
                 (folder / "analysis-id.txt").write_text(aid + "\n")
             print(name, receipts[name], flush=True)
     assert decisions["changed"] == decisions["opt_out"]
-    (folder / "receipt.json").write_text(json.dumps({"amount_cents": 999, "currency": "usd", "same_decision_with_check_disabled": True,
+    (folder / "receipt.json").write_text(json.dumps({"amount_cents": 999, "currency": "usd", "browser_skipped": args.skip_browser,
+                                                    "same_decision_with_check_disabled": True,
                                                     "cases": receipts}, sort_keys=True, indent=2) + "\n")
 
 

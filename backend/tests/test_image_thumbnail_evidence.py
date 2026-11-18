@@ -14,9 +14,11 @@ from app.engine.exhibits import ExhibitWriter
 from app.engine.stages import image as image_stage
 from app.evidence import image_thumbnail_evidence as evidence
 from app.evidence.image_editor_preview_binding import PNG_CARRIER
+from app.provenance import heif_thumbnail
 from app.provenance import image_thumbnail_localization as localization
 from app.reports import engine, figures
 from app.reports.specimens import specimen
+from app.storage import files
 from app.storage.objects import ObjectStore
 from scripts.image_editor_preview_transfer import adversarial, attach, segment, without_exif
 from scripts.image_png_exif_preview_transfer import corrupt_crc, png, xmp_oriented_png
@@ -51,6 +53,8 @@ def _run(store, source, monkeypatch, *, mime="image/jpeg"):
     original_exhibits = [item.model_dump(mode="json") for item in writer.exhibits]
     events = []
     monkeypatch.setattr(image_stage.settings, "image_whole_review_python", None)
+    for setting in ("image_motion_photo_review", "image_native_interpolation_review", "image_jpeg_prior_grid_review"):
+        monkeypatch.setattr(image_stage.settings, setting, False)
     monkeypatch.setattr(image_stage, "_legacy_artifacts", lambda _: events.append("legacy") or {})
     monkeypatch.setattr(image_stage.common, "index_artefacts", lambda *_args, **_kw: events.append("preview"))
     context = SimpleNamespace(analysis_id="thumbnail-test", exhibits=writer, state={"media": media},
@@ -231,3 +235,30 @@ def test_png_thumbnail_opt_in_keeps_bound_crops_and_reports_difference(tmp_path,
     for negative in (plain_png, alpha_png, clean_png, xmp_rotation, corrupt_crc(edited_png, b"IDAT"), corrupt_crc(edited_png, b"IEND")):
         _, result = _run(store, negative, monkeypatch, mime="image/png")
         assert evidence.from_result(result) is None
+
+
+def test_heic_main10_upload_sniffs_both_valid_still_brands():
+    for brands in (b"heix\x00\x00\x00\x00mif1", b"mif1\x00\x00\x00\x00heix"):
+        header = b"\x00\x00\x00\x14ftyp" + brands
+        assert files.sniff(header, "photo.hif") == ("image/heic", ".heic")
+        assert files.sniff(header[:-1], "photo.hif")[0] is None
+
+
+@pytest.mark.parametrize("extra", [
+    {"nclx_profile": {"transfer_characteristics": 16}},
+    {"nclx_profile": {"transfer_characteristics": 18}},
+    {"aux": {"urn:com:apple:photo:2020:aux:hdrgainmap": [2]}},
+])
+def test_heic_10bit_hdr_and_auxiliary_images_leave_thumbnail_evidence_unavailable(monkeypatch, extra):
+    import pillow_heif
+
+    class Container(list):
+        mimetype = "image/heic"
+        primary_index = 0
+
+    # The first item deliberately lacks a thumbnail loader. Unsupported
+    # high-bit-depth profiles must leave before requesting a thumbnail.
+    item = SimpleNamespace(mode="RGB", size=(256, 256), info={"bit_depth": 10, "thumbnails": [1], **extra})
+    monkeypatch.setattr(pillow_heif, "open_heif", lambda *args, **options: Container([item]))
+    with heif_thumbnail.read_pair(b"\x00\x00\x00\x10ftypheix\x00\x00\x00\x00", allow_10bit_sdr=True) as reading:
+        assert reading == ("unsupported_carrier", None)

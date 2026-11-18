@@ -10,7 +10,7 @@ import numpy as np
 from PIL import Image
 
 from app.detectors.image.reference_compare import _regions, _tone
-from app.evidence.image_editor_preview_binding import HEIF_CARRIER, PNG_CARRIER
+from app.evidence.image_editor_preview_binding import HEIF_10BIT_CARRIER, HEIF_CARRIER, PNG_CARRIER
 from app.provenance import jpeg_editor_thumbnail, png_exif_thumbnail
 from app.provenance.exiftool import _pillow_thumbnail
 
@@ -207,7 +207,7 @@ def measure_heif(main, preview, *, minimum_component_fraction):
     before, trim = grid
     result, masks = _projected(main, before, trim, main.size, minimum_component_fraction)
     if masks is not None:
-        result["preview_carrier"] = HEIF_CARRIER
+        result["preview_carrier"] = HEIF_10BIT_CARRIER if main.info.get("bit_depth") == 10 else HEIF_CARRIER
     return result, masks
 
 

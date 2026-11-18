@@ -12,7 +12,13 @@ import numpy as np
 from PIL import Image, ImageOps
 
 from app.engine.exhibits import ExhibitBudgetExceeded
-from app.evidence.image_editor_preview_binding import CARRIER_SCHEMAS, HEIF_CARRIER, PNG_CARRIER
+from app.evidence.image_editor_preview_binding import (
+    CARRIER_SCHEMAS,
+    HEIF_10BIT_CARRIER,
+    HEIF_CARRIER,
+    HEIF_CARRIERS,
+    PNG_CARRIER,
+)
 from app.provenance import heif_thumbnail, png_exif_thumbnail
 from app.provenance import image_thumbnail_localization as localization
 
@@ -114,12 +120,12 @@ def add_exhibits(data, writer, *, png=False, heif=False):
         floor = localization.CONFIRMATION_COMPONENT_FRACTION
         with ExitStack() as images:
             if heif:
-                _, pair = images.enter_context(heif_thumbnail.read_pair(data))
+                _, pair = images.enter_context(heif_thumbnail.read_pair(data, allow_10bit_sdr=True))
                 if pair is None:
                     return []
                 main, preview = pair
-                carrier = HEIF_CARRIER
                 measurement, masks = localization.measure_heif(main, preview, minimum_component_fraction=floor)
+                carrier = measurement.get("preview_carrier")
             else:
                 measure = localization.measure_png if png else localization.measure
                 measurement, masks = measure(data, minimum_component_fraction=floor)
@@ -148,7 +154,8 @@ def add_exhibits(data, writer, *, png=False, heif=False):
 
     identified_carrier = carrier in CARRIER_SCHEMAS
     note = {PNG_CARRIER: PNG_INTERPRETATION, "jpeg_editor_resource": EDITOR_INTERPRETATION,
-            HEIF_CARRIER: HEIF_INTERPRETATION}.get(carrier, INTERPRETATION)
+            HEIF_CARRIER: HEIF_INTERPRETATION,
+            HEIF_10BIT_CARRIER: HEIF_INTERPRETATION + " The comparison renders the 10-bit still and its thumbnail as 8-bit RGB."}.get(carrier, INTERPRETATION)
     exhibit_ids, rows, regions = [], [], []
     for n, (main, thumb, marked, main_crop, thumb_crop, footprint) in enumerate(prepared, 1):
         try:
@@ -236,7 +243,7 @@ def from_result(result):
     if len(orientations) != 1 or len(carriers) != int(has_carrier):
         return None
     main_orientation, preview_orientation = next(iter(orientations))
-    heif = HEIF_CARRIER in carriers
+    heif = bool(HEIF_CARRIERS & carriers)
     return {"source_sha256": (result.get("input") or {}).get("sha256"), "coordinate_exhibit_id": table["id"],
             **({"preview_carrier": next(iter(carriers))} if has_carrier else {}),
             "main_coordinate_space": "decoded-heif-main-image" if heif else "exif-oriented-main-image",

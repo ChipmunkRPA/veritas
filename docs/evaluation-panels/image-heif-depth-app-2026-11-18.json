@@ -1,0 +1,128 @@
+{
+  "cases_by_primary_thumbnail_depth": {
+    "10-10": {
+      "amount_cents": 999,
+      "browser_skipped": false,
+      "cases": {
+        "absent": {
+          "footprints": 0,
+          "paid_jobs": 1,
+          "pdf_sha256": "dda2afa0b181ab5e2ae3801bcb1efca875b66829660d1fb8101467b3d16847e2",
+          "prepayment_jobs": 0,
+          "preview_carrier": null,
+          "preview_regions": 0,
+          "signed_replay": true,
+          "source_crops": 0,
+          "source_sha256": "eb3a889d4833996f087951b4f680546ea51e8af71dedf2f078a71224408e6154"
+        },
+        "agreeing": {
+          "footprints": 0,
+          "paid_jobs": 1,
+          "pdf_sha256": "63d6537c5693cccc055fb34d53fe268c8c9ec024187f3b0f04ad8a70ba3b7bb5",
+          "prepayment_jobs": 0,
+          "preview_carrier": null,
+          "preview_regions": 0,
+          "signed_replay": true,
+          "source_crops": 0,
+          "source_sha256": "c7d157e02e2b8341f06899ad9f82b33c9f62f3325cb3c2230f9567f3c2415577"
+        },
+        "changed": {
+          "browser": {
+            "browser": "157.0.8103.79",
+            "decoded_images": 3,
+            "ordinary_view": true
+          },
+          "footprints": 1,
+          "paid_jobs": 1,
+          "pdf_sha256": "14d7c30312f07a484c1089534b1438744083e5e59648fcea42fe91c7fa09db19",
+          "prepayment_jobs": 0,
+          "preview_carrier": "heif_10bit_sdr_thumbnail",
+          "preview_regions": 1,
+          "signed_replay": true,
+          "source_crops": 2,
+          "source_sha256": "13dd2348f689a8971142e8e48c5942fddee2fbc60dd6b6d818d491e4dc1e88f1"
+        },
+        "opt_out": {
+          "footprints": 0,
+          "paid_jobs": 1,
+          "pdf_sha256": "2a4fb88e97ca66ac2ae36b236b9927cdd0fce3fde69580562264b63d9a7f22c1",
+          "prepayment_jobs": 0,
+          "preview_carrier": null,
+          "preview_regions": 0,
+          "signed_replay": true,
+          "source_crops": 0,
+          "source_sha256": "13dd2348f689a8971142e8e48c5942fddee2fbc60dd6b6d818d491e4dc1e88f1"
+        }
+      },
+      "currency": "usd",
+      "same_decision_with_check_disabled": true
+    },
+    "10-8": {
+      "amount_cents": 999,
+      "browser_skipped": false,
+      "cases": {
+        "absent": {
+          "footprints": 0,
+          "paid_jobs": 1,
+          "pdf_sha256": "b065763906c0ffa77bef5a797e5519960679a8134dbc4a087c15466587749bc8",
+          "prepayment_jobs": 0,
+          "preview_carrier": null,
+          "preview_regions": 0,
+          "signed_replay": true,
+          "source_crops": 0,
+          "source_sha256": "ad1a2e753f04071074c2c7cac8ac0b28d1c31b4dcc40ab3cb8894aad47b7e3a1"
+        },
+        "agreeing": {
+          "footprints": 0,
+          "paid_jobs": 1,
+          "pdf_sha256": "8d9a13d3e227723b008c9179b8c4f31c61a4bee4b04d85e9451550239dc01b5e",
+          "prepayment_jobs": 0,
+          "preview_carrier": null,
+          "preview_regions": 0,
+          "signed_replay": true,
+          "source_crops": 0,
+          "source_sha256": "e64bd57ad3f20bbda54821163969c10d4bbb00c284c3bea6965d5f4e5ad8ef99"
+        },
+        "changed": {
+          "browser": {
+            "browser": "157.0.8103.79",
+            "decoded_images": 3,
+            "ordinary_view": true
+          },
+          "footprints": 1,
+          "paid_jobs": 1,
+          "pdf_sha256": "0070700d511edfe756eb9e6503161146506df24ec4c47aa2f49ceb51e232b6e5",
+          "prepayment_jobs": 0,
+          "preview_carrier": "heif_10bit_sdr_thumbnail",
+          "preview_regions": 1,
+          "signed_replay": true,
+          "source_crops": 2,
+          "source_sha256": "40a3ad1c6e6c196077a710692ee33f5ff4a382ee66cb59f5070f2a55672b8fbe"
+        },
+        "opt_out": {
+          "footprints": 0,
+          "paid_jobs": 1,
+          "pdf_sha256": "0cd3bbc0f57f5af20de27eaeaa5d3123fcfa059084183b8574a5de740cbdc301",
+          "prepayment_jobs": 0,
+          "preview_carrier": null,
+          "preview_regions": 0,
+          "signed_replay": true,
+          "source_crops": 0,
+          "source_sha256": "40a3ad1c6e6c196077a710692ee33f5ff4a382ee66cb59f5070f2a55672b8fbe"
+        }
+      },
+      "currency": "usd",
+      "same_decision_with_check_disabled": true
+    }
+  },
+  "legacy_8bit": {
+    "package_sha256": "8108b15e4e1c24c797332f8e6f9458d65d9fa56cba82d38ae179c0598c52db37",
+    "preview_carrier": "heif_linked_thumbnail",
+    "signed_original_replay": true,
+    "source_file": "removal-fresh-000-feather-320.heic",
+    "source_sha256": "22a12cbba8b2230ae4f96b13b3d33265ae4027d770a8a3a0db303ebf153fcc25"
+  },
+  "payment_simulated": true,
+  "schema": "chipmunk.heif-thumbnail-depth-serving/1",
+  "scope": "Local heuristic and reduced learned-detector policy for UI, exports and source verification."
+}

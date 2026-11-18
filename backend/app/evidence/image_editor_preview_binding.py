@@ -10,7 +10,14 @@ REPORT_PROFILES = frozenset({"standard", "summary", "forensic"})
 CARRIER = "jpeg_editor_resource"
 PNG_CARRIER = "png_exif_thumbnail"
 HEIF_CARRIER = "heif_linked_thumbnail"
-CARRIER_SCHEMAS = {CARRIER: SCHEMA, PNG_CARRIER: "chipmunk.png-exif-thumbnail/1", HEIF_CARRIER: "chipmunk.heif-linked-thumbnail/1"}
+HEIF_10BIT_CARRIER = "heif_10bit_sdr_thumbnail"
+HEIF_CARRIERS = frozenset({HEIF_CARRIER, HEIF_10BIT_CARRIER})
+CARRIER_SCHEMAS = {
+    CARRIER: SCHEMA,
+    PNG_CARRIER: "chipmunk.png-exif-thumbnail/1",
+    HEIF_CARRIER: "chipmunk.heif-linked-thumbnail/1",
+    HEIF_10BIT_CARRIER: "chipmunk.heif-linked-thumbnail/2",
+}
 BOX = ("x", "y", "w", "h")
 SOURCE_ROLES = ("main_image", "embedded_preview")
 FOOTPRINT = "measured_footprint"

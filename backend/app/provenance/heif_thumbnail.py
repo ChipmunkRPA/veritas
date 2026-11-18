@@ -17,9 +17,9 @@ def _color_space(info):
 
 
 @contextmanager
-def read_pair(data: bytes):
+def read_pair(data: bytes, *, allow_10bit_sdr: bool = False):
     """Yield a reason and a decoded pair, with identical color interpretation."""
-    status, pair = _decode(data)
+    status, pair = _decode(data, allow_10bit_sdr=allow_10bit_sdr)
     if pair is None:
         yield status, None
     else:
@@ -28,19 +28,24 @@ def read_pair(data: bytes):
             yield status, pair
 
 
-def _decode(data):
+def _decode(data, *, allow_10bit_sdr):
     from pillow_heif import open_heif
 
     if len(data) > MAX_BYTES or data[4:8] != b"ftyp":
         return "unsupported_carrier", None
-    container = open_heif(io.BytesIO(data), convert_hdr_to_8bit=False)
+    # Use the same rendered RGB as the upload viewer. The original bit depth
+    # remains available in each item's metadata for admission and source replay.
+    container = open_heif(io.BytesIO(data), convert_hdr_to_8bit=allow_10bit_sdr)
     if container.mimetype not in MIMES or len(container) != 1:
         return "unsupported_carrier", None
     primary = container[container.primary_index]
     width, height = primary.size
     info = primary.info
-    if (primary.mode != "RGB" or info.get("bit_depth") != 8 or min(width, height) < 160
+    depth = info.get("bit_depth")
+    color = _color_space(info)
+    if (primary.mode != "RGB" or depth not in ((8, 10) if allow_10bit_sdr else (8,)) or min(width, height) < 160
             or width * height > 24_000_000 or _HDR.intersection(info)
+            or (depth == 10 and (color[-1] in (16, 18) or info.get("aux")))
             or info.get("pixel_aspect_ratio") not in (None, (1, 1))):
         return "unsupported_carrier", None
     thumbnails = info.get("thumbnails", ())
@@ -50,8 +55,8 @@ def _decode(data):
         return "unsupported_thumbnail", None
     thumbnail = primary.get_thumbnail(0)
     tw, th = thumbnail.size
-    color = _color_space(info)
-    if (thumbnail.mode != "RGB" or thumbnail.info.get("bit_depth") != 8
+    preview_depths = (8, 10) if depth == 10 else (8,)
+    if (thumbnail.mode != "RGB" or thumbnail.info.get("bit_depth") not in preview_depths
             or not 64 <= min(tw, th) <= max(tw, th) <= 512 or not (tw < width and th < height)
             or color != _color_space(thumbnail.info) or color[-1] in (16, 18)):
         return "unsupported_thumbnail", None

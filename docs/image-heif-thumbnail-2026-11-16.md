@@ -10,13 +10,14 @@ crops can show what changed visually. The file alone leaves the order and
 cause uncertain. The comparison contributes zero weight to AI confidence.
 
 The local setting is `VERITAS_IMAGE_HEIF_THUMBNAIL_REVIEW=true`.
-The check requires an 8-bit RGB still with compatible color profiles
+The initial check used an 8-bit RGB still with compatible color profiles
 and a thumbnail between 64 and 512 pixels on each side. It skips ambiguous
 thumbnail sets and files it cannot register. Coordinates follow each
 item's decoded orientation. The serving worker now opens HEIC by the same
 decoder as payment preflight. The update uses the public thumbnail API
 in Pillow HEIF 1.8.1 and requires no model weights.
-[Thumbnail API](https://github.com/bigcat88/pillow_heif/blob/master/CHANGELOG.md)
+[10-bit SDR extension](image-heif-depth-2026-11-18.md)
+· [Thumbnail API](https://github.com/bigcat88/pillow_heif/blob/master/CHANGELOG.md)
 
 ## Local measurements
 

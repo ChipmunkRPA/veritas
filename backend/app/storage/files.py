@@ -131,10 +131,19 @@ def sha256_bytes(data: bytes) -> str:
 
 def sniff(data: bytes, filename: str) -> tuple[str | None, str]:
     """Return (mime, ext) from magic bytes, falling back to extension for text-like docs."""
-    kind = filetype.guess(data[:8192])
+    head = data[:8192]
+    kind = filetype.guess(head)
     ext = Path(filename).suffix.lower()
     if kind:
         return kind.mime, f".{kind.extension}"
+    if head[4:8] == b"ftyp":
+        end = int.from_bytes(head[:4], "big")
+        if 16 <= end <= len(head) and end % 4 == 0:
+            major_brand = head[8:12]
+            # filetype recognizes heic but does not recognize the HEVC Main 10 still brand.
+            if major_brand == b"heix" or (major_brand == b"mif1"
+                    and any(head[index:index + 4] == b"heix" for index in range(16, end, 4))):
+                return "image/heic", ".heic"
     return None, ext
 
 

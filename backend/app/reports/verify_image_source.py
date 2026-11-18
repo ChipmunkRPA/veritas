@@ -25,6 +25,8 @@ from app.evidence.image_copy_similarity_binding import (
     SMALL_PNG_BASIS,
     TURNED_JPEG_BASIS,
     TURNED_PNG_BASIS,
+    WEBP_EXACT_COPY_BASIS,
+    WEBP_EXACT_COPY_KEY,
     box_bounds,
     copy_records,
     native_rotation_size,
@@ -264,10 +266,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         with original_png:
             embedded_pixels.verify(original_png, pair, lambda digest: archive.read(f'assets/{digest}.png'))
     small_png = translation.get("basis") in {SMALL_PNG_BASIS, TURNED_PNG_BASIS}
-    if small_png:
+    exact_webp = translation.get("basis") == WEBP_EXACT_COPY_BASIS
+    if small_png or exact_webp:
         from app.evidence.image_exact_small_copy_source import verify
 
-        verify(data, translation["pairs"][0], translation["small_png_copy_review"]["measurement"])
+        key = WEBP_EXACT_COPY_KEY if exact_webp else "small_png_copy_review"
+        verify(data, translation["pairs"][0], translation[key]["measurement"], webp=exact_webp)
     matched_blocks = 0
     if translation.get('basis') == JPEG_BLOCK_BASIS:
         from app.evidence.image_jpeg_copy_blocks_source import verify
@@ -289,6 +293,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if small_png:
         alignment = " after rotation" if translation.get("basis") == TURNED_PNG_BASIS else ""
         detail += f" Recomputed the exact matching RGB pixels and surrounding differences{alignment} on the submitted PNG."
+    if exact_webp:
+        alignment = " after rotation" if translation["pairs"][0]["transform"] != "same_orientation" else ""
+        detail += f" Recomputed the exact matching RGB pixels and surrounding differences{alignment} on the submitted lossless WebP."
     if offgrid:
         detail += ' Recomputed the recorded color differences inside and around the two selected JPEG crops.'
     if turned_jpeg:

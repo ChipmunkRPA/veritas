@@ -1,0 +1,115 @@
+{
+  "browser": {
+    "cases": {
+      "half_36x28": {
+        "coordinates_and_both_crops": true,
+        "matching_state": "supported_pair"
+      },
+      "lossy": {
+        "coordinates_and_both_crops": false,
+        "matching_state": "unsupported_profile"
+      },
+      "ordinary": {
+        "coordinates_and_both_crops": false,
+        "matching_state": "no_pair"
+      },
+      "quarter_24x28": {
+        "coordinates_and_both_crops": true,
+        "matching_state": "supported_pair"
+      },
+      "straight": {
+        "coordinates_and_both_crops": true,
+        "matching_state": "supported_pair"
+      }
+    },
+    "page_errors": 0
+  },
+  "cases": {
+    "half_36x28": {
+      "matching_pixels": 1008,
+      "pdf_sha256": "affb8e697e5938aeaaf88644e3f721ddd25b7e490d808cb745b27bab11255004",
+      "regions": {
+        "area_a": {
+          "h": 28,
+          "w": 36,
+          "x": 35,
+          "y": 30
+        },
+        "area_b": {
+          "h": 28,
+          "w": 36,
+          "x": 438,
+          "y": 440
+        }
+      },
+      "signed_source_verified": true,
+      "source_sha256": "eb8eea097e7eb33520b2f821c89c2e6c0aeea73bac23e23fe2fec02f379c5a5e",
+      "status": "supported_pair",
+      "transform": "rotate_180",
+      "unique_native_crops_in_pdf": 2
+    },
+    "lossy": {
+      "pdf_sha256": "06a2037c6e2401141db79462e67dcd16758629f9640234b8a920ad5101394f57",
+      "signed_source_verified": true,
+      "source_sha256": "106133859dd9dda683190e1e0bfd752cd3a28505192b7c8d5fb85f71748b9c4a",
+      "status": "unsupported_profile",
+      "unique_native_crops_in_pdf": 0
+    },
+    "ordinary": {
+      "pdf_sha256": "8a8f12ba5330b67b28e573de3f4ba6c3fbdb31d267ed57e51191417da9ad1aa0",
+      "signed_source_verified": true,
+      "source_sha256": "8aebe3f2835cf90881f209bbf93564d4e2f9dc02dca682446035500c94fe0e2b",
+      "status": "no_pair",
+      "unique_native_crops_in_pdf": 0
+    },
+    "quarter_24x28": {
+      "matching_pixels": 672,
+      "overall_assessment_preserved": true,
+      "pdf_sha256": "046c160a2551866db368e40b614640a6a74219f17b6ebfb6a562e60f2c1b156f",
+      "regions": {
+        "area_a": {
+          "h": 28,
+          "w": 24,
+          "x": 35,
+          "y": 30
+        },
+        "area_b": {
+          "h": 24,
+          "w": 28,
+          "x": 446,
+          "y": 444
+        }
+      },
+      "signed_source_verified": true,
+      "source_sha256": "1ccd288b8b9307cce31511162d3673d98b5c898660f29036b3368adc80d4538e",
+      "status": "supported_pair",
+      "transform": "rotate_90_ccw",
+      "unique_native_crops_in_pdf": 2
+    },
+    "straight": {
+      "matching_pixels": 1088,
+      "pdf_sha256": "cac0673c99c597a36c4f5f28307e266b1d5829023bd9837af8345a0a554edb4a",
+      "regions": {
+        "area_a": {
+          "h": 34,
+          "w": 32,
+          "x": 82,
+          "y": 92
+        },
+        "area_b": {
+          "h": 34,
+          "w": 32,
+          "x": 400,
+          "y": 386
+        }
+      },
+      "signed_source_verified": true,
+      "source_sha256": "18ac98ba310eeccb7801745e3259169762d2632b09496113146fd7e71b300d16",
+      "status": "supported_pair",
+      "transform": "same_orientation",
+      "unique_native_crops_in_pdf": 1
+    }
+  },
+  "simulated_paid_analyses": 6,
+  "unpaid_jobs": 0
+}

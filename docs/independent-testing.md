@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [lossless WebP comparison](image-exact-webp-copy-2026-11-18.md#replay)
+recounts copy locations against exact edit boxes on 212 deliveries
+using Python's standard library. The native replay checks the
+measured RGB pixels and surrounding differences.
+
 Three model-free receipts let reviewers reproduce the latest research
 decisions without the source media. The [video eye-region replay](video-eye-context-guard-2026-11-18.md#reproduce)
 recalculates the selected rule and its outcomes on two held sets. The

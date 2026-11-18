@@ -666,6 +666,7 @@ def test_small_png_copy_preserves_exact_crops_and_rejects_unsupported_sources(ev
     aid = "image-unprepared"
     monkeypatch.setattr(settings, "environment", "dev")
     monkeypatch.setattr(settings, "image_small_png_copy_review", True)
+    monkeypatch.setattr(settings, "image_turned_png_copy_review", False)
     monkeypatch.setattr(settings, "image_affine_copy_review", True)
     monkeypatch.setattr(settings, "image_embedded_pair_review", True)
     rng = np.random.default_rng(1532)
@@ -718,26 +719,35 @@ def test_small_png_copy_preserves_exact_crops_and_rejects_unsupported_sources(ev
             assert output.tobytes() == image.crop(bounds).tobytes()
 
 
-def test_rotated_png_copy_binds_direction_and_untouched_rectangular_crops(evidence_http, monkeypatch):
+@pytest.mark.parametrize("webp", [False, True], ids=["png", "webp"])
+def test_rotated_exact_copy_binds_direction_and_untouched_rectangular_crops(evidence_http, monkeypatch, webp):
     from app.evidence import image_exact_small_copy_source
-    from app.evidence.image_copy_similarity_binding import TURNED_PNG_BASIS
+    from app.evidence.image_copy_similarity_binding import (
+        TURNED_PNG_BASIS,
+        WEBP_EXACT_COPY_BASIS,
+        WEBP_EXACT_COPY_KEY,
+    )
 
     f = evidence_http
     aid = "image-unprepared"
     monkeypatch.setattr(settings, "environment", "dev")
     monkeypatch.setattr(settings, "image_small_png_copy_review", True)
     monkeypatch.setattr(settings, "image_turned_png_copy_review", True)
-    monkeypatch.setattr(settings, "image_affine_copy_review", False)
-    monkeypatch.setattr(settings, "image_embedded_pair_review", False)
+    monkeypatch.setattr(settings, "image_lossless_webp_copy_review", webp)
+    monkeypatch.setattr(settings, "image_affine_copy_review", webp)
+    monkeypatch.setattr(settings, "image_embedded_pair_review", webp)
     rng = np.random.default_rng(1592)
-    rgb = rng.integers(0, 256, (384, 512, 3), dtype=np.uint8)
+    rgb = rng.integers(0, 256, (512 if webp else 384, 512, 3), dtype=np.uint8)
     rgb[74:104, 85:109] = np.rot90(rgb[240:264, 335:365])
     image = Image.fromarray(rgb)
-    encoded = _bytes(image, format="PNG")
-    assert image_exact_small_copy_source.review(encoded)[0]["status"] == "no_pair"
+    encoded = _bytes(image, format="WEBP", lossless=True) if webp else _bytes(image, format="PNG")
+    if webp:
+        lossy = _bytes(image, format="WEBP", lossless=False)
+        assert image_exact_small_copy_source.review(lossy, webp=True)[0]["status"] == "unsupported_profile"
+    assert image_exact_small_copy_source.review(encoded, webp=webp)[0]["status"] == "no_pair"
     with Session(f.engine) as db:
         analysis = db.get(Analysis, aid)
-        analysis.content_type = "image/png"
+        analysis.content_type = "image/webp" if webp else "image/png"
         stored = f.store.put_bytes(encoded)
         analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
         result = copy.deepcopy(specimen("image", "standard").result)
@@ -746,23 +756,25 @@ def test_rotated_png_copy_binds_direction_and_untouched_rectangular_crops(eviden
         analysis.result_hash = canonical_hash(result)
         f.store.put_bytes(canonical_json(result))
         document = service.persist_packet_set(db, analysis, f.store, result=result)
-        assert document["version"] == "image-evidence-22"
-        check = document["copy_translation"]
-        assert check["basis"] == TURNED_PNG_BASIS and check["authorship_confidence_contribution"] == 0
+        base = base_document(document)
+        assert base["version"] == ("image-evidence-33" if webp else "image-evidence-22")
+        check = base["copy_translation"]
+        assert check["basis"] == (WEBP_EXACT_COPY_BASIS if webp else TURNED_PNG_BASIS)
+        assert check["authorship_confidence_contribution"] == 0
         pair, = check["pairs"]
         assert pair["transform"] == "rotate_90_ccw"
         assert pair["regions"] == {"area_a": {"x": 85, "y": 74, "w": 24, "h": 30},
                                    "area_b": {"x": 335, "y": 240, "w": 30, "h": 24}}
-        measurement = check["small_png_copy_review"]["measurement"]
+        measurement = check[WEBP_EXACT_COPY_KEY if webp else "small_png_copy_review"]["measurement"]
         assert measurement["matching_pixels"] == 24 * 30
-        changed = copy.deepcopy(document)
+        changed = copy.deepcopy(base)
         changed["copy_translation"]["pairs"][0]["transform"] = "rotate_180"
         with pytest.raises(image_packets_v7.PacketIntegrityError, match="share a native size"):
             image_packets_v7.validate_packet_set(changed, **image_packets_v5._binding(analysis))
         wrong = copy.deepcopy(pair)
         wrong["regions"]["area_b"]["y"] += 1
         with pytest.raises(ValueError, match="measurement differs"):
-            image_exact_small_copy_source.verify(encoded, wrong, measurement)
+            image_exact_small_copy_source.verify(encoded, wrong, measurement, webp=webp)
         db.commit()
     evidence = f.client.get(f"/api/v2/analyses/{aid}/evidence-packets", headers=f.viewer)
     assert evidence.status_code == 200 and evidence.json() == document

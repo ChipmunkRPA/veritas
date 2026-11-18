@@ -115,6 +115,12 @@ const smallPngCoverageText = {
   unassessed_match_budget: 'Too many competing offsets prevented a distinct small-copy comparison.',
 }
 
+const webpExactCoverageText = {
+  ...smallPngCoverageText,
+  no_pair: 'The lossless WebP check found no qualifying exact pair with or without right-angle rotation.',
+  unsupported_profile: 'Exact comparison requires an opaque lossless WebP still with sides from 512 to 768 pixels. The image must be upright.',
+}
+
 const copyAreaLabels = { area_a: 'Area A', area_b: 'Area B' } as const
 const copyAreas = ['area_a', 'area_b'] as const
 
@@ -206,11 +212,12 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const baseVersion = set.prior_embedded_pair_evidence?.version ?? set.version
   const turnedReview = ['image-evidence-22', 'image-evidence-23'].includes(baseVersion)
   const nativeJpegVersion = ['image-evidence-28', 'image-evidence-29', 'image-evidence-30', 'image-evidence-31'].includes(baseVersion)
-  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29', 'image-evidence-31'].includes(baseVersion))
+  const webpVersion = baseVersion === 'image-evidence-32' || baseVersion === 'image-evidence-33'
+  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29', 'image-evidence-31', 'image-evidence-33'].includes(baseVersion))
     || (reflected && (turnedReview || ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12',
       'image-evidence-13', 'image-evidence-14', 'image-evidence-16', 'image-evidence-17', 'image-evidence-18',
       'image-evidence-19', 'image-evidence-20', 'image-evidence-21', 'image-evidence-24', 'image-evidence-25',
-      'image-evidence-26', 'image-evidence-27'].includes(baseVersion) || nativeJpegVersion))
+      'image-evidence-26', 'image-evidence-27'].includes(baseVersion) || nativeJpegVersion || webpVersion))
   const basis = field === 'copy_translation' && set.copy_translation?.basis
   const jpegReview = field === 'copy_translation' && set.copy_translation?.jpeg_block_review
   const offgrid = field === 'copy_translation' ? set.copy_translation?.jpeg_offgrid_review : undefined
@@ -218,10 +225,33 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const nativeJpeg = Boolean(nativeJpegVersion && turnedJpeg && !offgrid)
   const separateMeasurements = turnedJpeg?.measurements
   const smallPng = field === 'copy_translation' ? set.copy_translation?.small_png_copy_review : undefined
-  const turned = (basis === 'png_exact_turned_copy' || basis === 'jpeg_turned_copy') && set.copy_translation?.pairs[0]?.transform
+  const webpReview = field === 'copy_translation' ? set.copy_translation?.webp_exact_copy_review : undefined
+  const transform = set.copy_translation?.pairs[0]?.transform
+  const turned = (basis === 'png_exact_turned_copy' || basis === 'jpeg_turned_copy' || (basis === 'webp_exact_copy' && transform !== 'same_orientation')) && transform
   const rotation = turned === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'
+  let webpObservation: string | undefined
+  let webpScope: string | undefined
+  if (webpReview?.status === 'supported_pair') {
+    webpObservation = turned
+      ? `Rotating Area B ${rotation} aligns every RGB pixel with Area A in the lossless WebP.`
+      : 'The two lossless WebP crops match exactly in their original orientation.'
+  } else if (webpReview) {
+    webpObservation = webpExactCoverageText[webpReview.status]
+    if (webpReview.status === 'no_pair') webpScope = 'This check covers separated, textured crops with sides from 16 to 56 pixels.'
+  } else if (field === 'copy_translation' && webpVersion) {
+    const outsideExactSize = [set.source.width, set.source.height].some(side => side == null || side < 512 || side > 768)
+    if (outsideExactSize && check.status === 'unsupported_geometry') {
+      webpObservation = webpExactCoverageText.unsupported_profile
+    } else {
+      webpScope = outsideExactSize ? webpExactCoverageText.unsupported_profile : 'Exact lossless WebP comparison did not run for this result.'
+    }
+  }
+  const exactMeasurement = webpReview?.measurement ?? smallPng?.measurement
+  const interpretation = field === 'copy_translation' && webpVersion && !check.pairs.length
+    ? 'Copy comparisons look for repeated image detail. The origin of the image and AI involvement remain undetermined.'
+    : check.interpretation
   const colorMeasurement = turnedJpeg?.measurement ?? offgrid?.measurement
-  const basisText = smallPng
+  const basisText = webpReview?.status === 'supported_pair' ? 'Pixels outside the aligned crops differ on at least three sides.' : smallPng
     ? turned ? 'After alignment, pixels outside the crops differ on at least three sides.'
       : turnedReview && smallPng.status === 'no_pair' ? 'The small-copy check found no qualifying exact pair with or without right-angle rotation.'
         : smallPngCoverageText[smallPng.status]
@@ -243,19 +273,20 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   }
   return <section className="mt-5 rounded-md border border-border p-4" aria-labelledby={`${sectionId}-heading`}>
     <h3 id={`${sectionId}-heading`} className="m-0 text-body font-medium text-text">{heading}</h3>
-    <p className="mt-2 mb-0 text-small text-text">{nativeJpeg && check.status === 'no_pair' ? basisText : statusText[check.status]}</p>
-    <p className="mt-2 mb-0 text-small text-text-muted">{check.interpretation}</p>
+    <p className="mt-2 mb-0 text-small text-text">{webpObservation ?? (nativeJpeg && check.status === 'no_pair' ? basisText : statusText[check.status])}</p>
+    <p className="mt-2 mb-0 text-small text-text-muted">{interpretation}</p>
     {!reflected && <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero weight in AI authorship confidence.</p>}
     {basisText && (!nativeJpeg || check.status !== 'no_pair') && <p className="mt-2 mb-0 text-caption text-text-muted">{basisText}</p>}
+    {webpScope && <p className="mt-2 mb-0 text-caption text-text-muted">{webpScope}</p>}
     {nativeJpeg && check.status === 'supported_pair' && <p className="mt-2 mb-0 text-caption text-text-muted">
       The rotation check used the original pixel grid at this image size.
     </p>}
     {turnedJpeg && offgrid?.status === 'unsupported_profile' && <p className="mt-2 mb-0 text-caption text-text-muted">
       The between-block translation check was outside this file’s compression profile.
     </p>}
-    {smallPng?.measurement && <p className="mt-2 mb-0 text-caption text-text-muted">
-      Compared {smallPng.measurement.matching_pixels.toLocaleString('en-US')} RGB pixels in each crop.
-      Mean surrounding differences (top, bottom, left, right) {smallPng.measurement.perimeter_mean_absolute_difference.map(value => value.toFixed(2)).join(', ')} of 255 levels.
+    {exactMeasurement && <p className="mt-2 mb-0 text-caption text-text-muted">
+      Compared {exactMeasurement.matching_pixels.toLocaleString('en-US')} RGB pixels in each crop.
+      Mean surrounding differences (top, bottom, left, right) {exactMeasurement.perimeter_mean_absolute_difference.map(value => value.toFixed(2)).join(', ')} of 255 levels.
     </p>}
     {colorMeasurement && <p className="mt-2 mb-0 text-caption text-text-muted">
       Mean RGB difference inside {colorMeasurement.interior_mean.toFixed(2)} of 255 levels.
@@ -264,7 +295,7 @@ function CopySimilarity({ set, field, token, mediaReady }: {
     {proposalSearch?.basis === 'reduced' && <p className="mt-2 mb-0 text-caption text-text-muted">The candidate search used a {proposalSearch.width} × {proposalSearch.height} pixel working image. The check measured any matching masks on the original pixel grid.</p>}
     {check.pairs.length > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">Coordinates use native pixels in the oriented original.</p>}
     {check.pairs.map((pair, pairIndex) => <article key={pair.id} className="mt-4 border-t border-border pt-4">
-      <h4 className="m-0 text-small font-medium text-text">{pair.id} · {basis === 'jpeg_turned_copy' ? 'Rotated JPEG pair' : turned ? 'Exact rotated pair' : geometric ? 'Matched source areas' : reflected ? 'Reflected pair' : 'Non-mirrored pair'}</h4>
+      <h4 className="m-0 text-small font-medium text-text">{pair.id} · {basis === 'jpeg_turned_copy' ? 'Rotated JPEG pair' : turned ? 'Exact rotated pair' : basis === 'webp_exact_copy' ? 'Exact copy pair' : geometric ? 'Matched source areas' : reflected ? 'Reflected pair' : 'Non-mirrored pair'}</h4>
       {separateMeasurements && 'transform' in pair && <p className="mt-2 mb-0 text-caption text-text-muted">
         Rotate Area B {pair.transform === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'} to align with Area A.{' '}
         Mean RGB difference inside {separateMeasurements[pairIndex].interior_mean.toFixed(2)} of 255 levels.{' '}

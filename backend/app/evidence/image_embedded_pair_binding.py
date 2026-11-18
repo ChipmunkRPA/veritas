@@ -8,6 +8,7 @@ from app.evidence.image_copy_similarity_binding import (
     JPEG_BLOCK_VERSIONS,
     SKIPPED_CREDENTIALS,
     SMALL_PNG_VERSIONS,
+    WEBP_EXACT_COPY_VERSIONS,
     box_bounds,
     url,
 )
@@ -16,7 +17,8 @@ VERSION = "image-evidence-15"
 KEY = "embedded_pair_difference"
 BASE = "prior_embedded_pair_evidence"
 SCHEMA = "same-image-exact-difference/1"
-BASE_VERSIONS = frozenset({"image-evidence-12", "image-evidence-13", "image-evidence-14"}) | JPEG_BLOCK_VERSIONS | SMALL_PNG_VERSIONS
+BASE_VERSIONS = (frozenset({"image-evidence-12", "image-evidence-13", "image-evidence-14"})
+                 | JPEG_BLOCK_VERSIONS | SMALL_PNG_VERSIONS | WEBP_EXACT_COPY_VERSIONS)
 # Native held scope, including the two separately replayed archived canvas sizes.
 SIZES = frozenset({(768, 640), (768, 768), (1088, 688), (944, 944)})
 NOTE = "Matching areas are aligned on the source pixel grid. The highlighted pixels differ between those areas. Either area may have come first. The comparison carries zero weight in AI authorship confidence."

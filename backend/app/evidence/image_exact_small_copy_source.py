@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Validate an exact small copy against the submitted static RGB PNG."""
+"""Validate an exact small copy against the submitted static RGB still."""
 
 from __future__ import annotations
 
@@ -11,15 +11,22 @@ import numpy as np
 from PIL import Image
 
 from app.detectors.image import exact_small_copy
-from app.evidence.image_copy_similarity_binding import PNG_COPY_TURNS, ROLES, SMALL_PNG_MAX_SIDE, SMALL_PNG_MIN_SIDE
+from app.detectors.image.lossless_webp import lossless_webp_size
+from app.evidence.image_copy_similarity_binding import (
+    PNG_COPY_TURNS,
+    ROLES,
+    SMALL_PNG_MAX_SIDE,
+    SMALL_PNG_MIN_SIDE,
+    exact_copy_size,
+)
 
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
-MAX_PNG_BYTES = 4 * 1024 * 1024
+MAX_ENCODED_BYTES = 4 * 1024 * 1024
 MAX_CHUNKS = 4096
 
 
 def native_rgb(data):
-    if len(data) > MAX_PNG_BYTES or not data.startswith(PNG_SIGNATURE):
+    if len(data) > MAX_ENCODED_BYTES or not data.startswith(PNG_SIGNATURE):
         return None
     chunks = memoryview(data)
     offset = len(PNG_SIGNATURE)
@@ -57,8 +64,17 @@ def native_rgb(data):
         return np.array(image)
 
 
-def review(data, *, include_rotation=False):
-    pixels = native_rgb(data)
+def webp_rgb(data):
+    if len(data) > MAX_ENCODED_BYTES or (size := lossless_webp_size(data)) is None or not exact_copy_size(*size, webp=True):
+        return None
+    with Image.open(io.BytesIO(data), formats=["WEBP"]) as image:
+        if image.size != size or image.mode != "RGB" or image.n_frames != 1 or image.getexif().get(274, 1) != 1:
+            return None
+        return np.array(image)
+
+
+def review(data, *, include_rotation=False, webp=False):
+    pixels = webp_rgb(data) if webp else native_rgb(data)
     if pixels is None:
         return {"status": "unsupported_profile", "measurement": None}, [], 0
     item = exact_small_copy.analyse(pixels)
@@ -72,10 +88,11 @@ def review(data, *, include_rotation=False):
     return {"status": item["status"], "measurement": match["measurement"]}, [match["pair"]], match.get("turns", 0)
 
 
-def verify(data, pair, measurement):
-    pixels = native_rgb(data)
+def verify(data, pair, measurement, *, webp=False):
+    pixels = webp_rgb(data) if webp else native_rgb(data)
     if pixels is None:
-        raise ValueError("Exact copy comparison requires an upright static RGB PNG within its tested size.")
+        carrier = "lossless WebP" if webp else "PNG"
+        raise ValueError(f"Exact copy comparison requires an upright static RGB {carrier} within its tested size.")
     boxes = [tuple(pair["regions"][role][key] for key in "xywh") for role in ROLES]
     turns = PNG_COPY_TURNS.get(pair.get("transform"))
     if turns is None or exact_small_copy.witness(pixels, *boxes, turns=turns) != measurement:

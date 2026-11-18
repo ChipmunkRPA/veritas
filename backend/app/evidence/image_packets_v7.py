@@ -47,8 +47,6 @@ from app.evidence.image_copy_similarity_binding import (
     SMALL_PNG_BASIS,
     SMALL_PNG_COPY_AFFINE_VERSION,
     SMALL_PNG_COPY_VERSION,
-    SMALL_PNG_MAX_SIDE,
-    SMALL_PNG_MIN_SIDE,
     SMALL_PNG_VERSIONS,
     TRANSLATION_NOTE,
     TRANSLATION_SCHEMA,
@@ -66,8 +64,14 @@ from app.evidence.image_copy_similarity_binding import (
     V10,
     V11,
     VERSION,
+    WEBP_EXACT_COPY_AFFINE_VERSION,
+    WEBP_EXACT_COPY_BASIS,
+    WEBP_EXACT_COPY_KEY,
+    WEBP_EXACT_COPY_VERSION,
+    WEBP_EXACT_COPY_VERSIONS,
     box_bounds,
     copy_records,
+    exact_copy_size,
     native_rotation_size,
     prior_evidence,
     result_skip,
@@ -82,7 +86,9 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
 CREATOR = "image-evidence-packets/10"
-_CREATORS = {DISJOINT_JPEG_ROTATION_AFFINE_VERSION: "image-evidence-packets/29",
+_CREATORS = {WEBP_EXACT_COPY_AFFINE_VERSION: "image-evidence-packets/31",
+             WEBP_EXACT_COPY_VERSION: "image-evidence-packets/30",
+             DISJOINT_JPEG_ROTATION_AFFINE_VERSION: "image-evidence-packets/29",
              DISJOINT_JPEG_ROTATION_VERSION: "image-evidence-packets/28",
              NATIVE_JPEG_ROTATION_AFFINE_VERSION: "image-evidence-packets/27",
              NATIVE_JPEG_ROTATION_VERSION: "image-evidence-packets/26",
@@ -114,6 +120,8 @@ def _active_version() -> str:
 
 
 def _analysis_version(analysis: Analysis) -> str:
+    if settings.environment == "dev" and settings.image_lossless_webp_copy_review and analysis.content_type == "image/webp":
+        return WEBP_EXACT_COPY_AFFINE_VERSION if settings.image_affine_copy_review else WEBP_EXACT_COPY_VERSION
     if settings.environment == "dev" and settings.image_turned_jpeg_copy_review and analysis.content_type == "image/jpeg":
         if settings.image_jpeg_native_rotation_review:
             if settings.image_jpeg_disjoint_rotation_review:
@@ -204,12 +212,14 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
             verify(legacy._verified(store, document["source"]["sha256"]), translation["pairs"])
         except (OSError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
-    if translation.get("basis") in {SMALL_PNG_BASIS, TURNED_PNG_BASIS}:
+    if translation.get("basis") in {SMALL_PNG_BASIS, TURNED_PNG_BASIS, WEBP_EXACT_COPY_BASIS}:
         from app.evidence.image_exact_small_copy_source import verify
 
+        webp = translation["basis"] == WEBP_EXACT_COPY_BASIS
+        key = WEBP_EXACT_COPY_KEY if webp else "small_png_copy_review"
         try:
             verify(legacy._verified(store, document["source"]["sha256"]), translation["pairs"][0],
-                   translation["small_png_copy_review"]["measurement"])
+                   translation[key]["measurement"], webp=webp)
         except (OSError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
     if translation.get("basis") == OFFGRID_BASIS:
@@ -376,7 +386,8 @@ def build_packet_set(
     size = document["source"]["width"], document["source"]["height"]
     status, boxes = "unsupported_geometry", []
     translation_status, translations, basis, source = "unsupported_geometry", [], None, None
-    jpeg_status = offgrid_review = turned_jpeg_review = small_png_review = None
+    jpeg_status = offgrid_review = turned_jpeg_review = exact_review = None
+    webp = version in WEBP_EXACT_COPY_VERSIONS
     turns = 0
     skipped = result_skip(result) is not None
     if skipped:
@@ -430,20 +441,19 @@ def build_packet_set(
         translation_status = "supported_pair" if extra else "no_pair"
         if extra:
             translations, basis = extra, TURNED_JPEG_BASIS
-    if (version in SMALL_PNG_VERSIONS and not skipped
-            and SMALL_PNG_MIN_SIDE <= min(size) <= max(size) <= SMALL_PNG_MAX_SIDE
+    if ((webp or version in SMALL_PNG_VERSIONS) and not skipped and exact_copy_size(*size, webp=webp)
             and translation_status in {"no_pair", "unsupported_geometry"}):
         from app.evidence.image_exact_small_copy_source import review
 
         try:
-            small_png_review, extra, turns = review(legacy._verified(store, analysis.sha256),
-                                                  include_rotation=version in TURNED_PNG_VERSIONS)
+            exact_review, extra, turns = review(legacy._verified(store, analysis.sha256),
+                                               include_rotation=webp or version in TURNED_PNG_VERSIONS, webp=webp)
         except (cv2.error, OSError, ValueError, SystemError):
-            small_png_review, extra = {"status": "unavailable", "measurement": None}, []
+            exact_review, extra = {"status": "unavailable", "measurement": None}, []
         translation_status = "supported_pair" if extra else "no_pair"
         if extra:
             source = source if source is not None else _source(document, store)
-            translations, basis = extra, TURNED_PNG_BASIS if turns else SMALL_PNG_BASIS
+            translations, basis = extra, WEBP_EXACT_COPY_BASIS if webp else (TURNED_PNG_BASIS if turns else SMALL_PNG_BASIS)
     document["copy_similarity"] = _copy_record(db, analysis, store, document, source, status, boxes, reflected=True)
     document["copy_translation"] = _copy_record(db, analysis, store, document, source, translation_status,
                                                 translations, reflected=False, turns=turns)
@@ -455,7 +465,9 @@ def build_packet_set(
     if version in TURNED_JPEG_VERSIONS:
         document["copy_translation"]["jpeg_turned_review"] = turned_jpeg_review
     if version in SMALL_PNG_VERSIONS:
-        document["copy_translation"]["small_png_copy_review"] = small_png_review
+        document["copy_translation"]["small_png_copy_review"] = exact_review
+    if webp:
+        document["copy_translation"][WEBP_EXACT_COPY_KEY] = exact_review
     if version in AFFINE_VERSIONS:
         document[affine.KEY] = _affine_record(db, analysis, store, document, source, skip=skipped)
     document = json.loads(canonical_json(document))

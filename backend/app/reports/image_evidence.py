@@ -116,11 +116,17 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         NATIVE_JPEG_ROTATION_VERSIONS,
         OFFGRID_STATUS_TEXT,
         SKIPPED_CREDENTIALS,
+        SMALL_PNG_CROP_MAX,
+        SMALL_PNG_CROP_MIN,
         SMALL_PNG_STATUS_TEXT,
         TURNED_JPEG_BASIS,
         TURNED_JPEG_STATUS_TEXT,
         TURNED_PNG_BASIS,
         TURNED_PNG_VERSIONS,
+        WEBP_EXACT_COPY_KEY,
+        WEBP_EXACT_COPY_STATUS_TEXT,
+        WEBP_EXACT_COPY_VERSIONS,
+        exact_copy_size,
         status_text,
     )
     from app.evidence.image_packets_v8 import validate_assets
@@ -150,6 +156,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     comparison = copy.deepcopy(document.get("comparison"))
     copy_checks = {field: copy.deepcopy(document.get(field)) for field in COPY_CHECKS}
     base_version = embedded_pair.base_document(document)["version"]
+    webp_scope = WEBP_EXACT_COPY_STATUS_TEXT["unsupported_profile"] + " The image must be upright."
     for field, check in copy_checks.items():
         if check is None:
             continue
@@ -163,7 +170,25 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                     if field == "copy_similarity" or status == SKIPPED_CREDENTIALS
                                     else TRANSLATION_STATUS[status])
         if field == "copy_translation":
-            if small_review := check.get("small_png_copy_review"):
+            if webp_review := check.get(WEBP_EXACT_COPY_KEY):
+                review_status = webp_review["status"]
+                check["observation"] = (webp_scope if review_status == "unsupported_profile"
+                                        else WEBP_EXACT_COPY_STATUS_TEXT[review_status])
+                if measured := webp_review["measurement"]:
+                    transform = check["pairs"][0]["transform"]
+                    if transform == "same_orientation":
+                        check["observation"] = "The two lossless WebP crops match exactly in their original orientation."
+                    else:
+                        rotation = "90° counterclockwise" if transform == "rotate_90_ccw" else "180°"
+                        check["observation"] = f"Rotating Area B {rotation} aligns every RGB pixel with Area A in the lossless WebP."
+                    perimeter = ", ".join(f"{value:.2f}" for value in measured["perimeter_mean_absolute_difference"])
+                    check["basis_text"] = ("Pixels outside the aligned crops differ on at least three sides. "
+                                           f"Compared {measured['matching_pixels']:,} RGB pixels in each crop. "
+                                           f"Mean surrounding differences (top, bottom, left, right) {perimeter} of 255 levels.")
+                elif review_status == "no_pair":
+                    check["basis_text"] = (f"This check covers separated, textured crops with sides from {SMALL_PNG_CROP_MIN}"
+                                           f" to {SMALL_PNG_CROP_MAX} pixels.")
+            elif small_review := check.get("small_png_copy_review"):
                 check["basis_text"] = SMALL_PNG_STATUS_TEXT[small_review["status"]]
                 if check.get("basis") == TURNED_PNG_BASIS:
                     turns = "90° counterclockwise" if check["pairs"][0]["transform"] == "rotate_90_ccw" else "180°"
@@ -209,6 +234,15 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 check["basis_text"] = JPEG_BLOCK_STATUS_TEXT[jpeg_review]
             elif check["pairs"] and (basis := check.get("basis")) in TRANSLATION_BASIS_TEXT:
                 check["basis_text"] = TRANSLATION_BASIS_TEXT[basis]
+            if base_version in WEBP_EXACT_COPY_VERSIONS and not check.get(WEBP_EXACT_COPY_KEY) and status != SKIPPED_CREDENTIALS:
+                outside_size = not exact_copy_size(document["source"]["width"], document["source"]["height"], webp=True)
+                if outside_size and status == "unsupported_geometry":
+                    check["observation"] = webp_scope
+                else:
+                    scope = webp_scope if outside_size else "Exact lossless WebP comparison did not run for this result."
+                    check["basis_text"] = " ".join(filter(None, (check.get("basis_text"), scope)))
+            if base_version in WEBP_EXACT_COPY_VERSIONS and not check["pairs"] and status != SKIPPED_CREDENTIALS:
+                check["interpretation"] = "Copy comparisons look for repeated image detail. The origin of the image and AI involvement remain undetermined."
         for pair in check["pairs"]:
             pair["images"] = []
             for role, label in (("area_a", "Area A"), ("area_b", "Area B")):

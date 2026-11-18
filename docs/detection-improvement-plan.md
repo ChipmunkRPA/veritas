@@ -66,6 +66,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- The lossless WebP copy fallback raised useful locations from 2 to 75 of
+  88 staged edits with zero additional flags in 124 controls. The browser,
+  PDF, and JSON show the measured crops and the original pixel locations.
+  This development check carries zero AI authorship weight.
+  [Exact WebP copies](image-exact-webp-copy-2026-11-18.md)
+
 - Comparing an eye region with nearby motion removed all 15 ordinary
   eye alerts across 118 controls and retained 20 of 29 useful results
   among 57 staged edits. The reading remains experimental.

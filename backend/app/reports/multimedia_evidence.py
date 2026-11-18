@@ -26,6 +26,7 @@ from app.evidence.av_binding import (
     TIMING_WINDOWS,
 )
 from app.evidence.stereo_listening_binding import LOCAL_EXCERPTS
+from app.evidence.stereo_difference_binding import KEY as STEREO_DIFFERENCE_REDUCTION
 from app.evidence.video_packet_versions import NESTED_VERSIONS as NESTED_VIDEO_VERSIONS
 from app.storage.objects import ObjectIntegrityError, ObjectStore, default_store
 
@@ -1429,7 +1430,10 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             for index, (row, excerpt) in enumerate(zip(measurement["selected"],
                     (stereo_source.get("stereo_listening") or {}).get(key, []), strict=True)):
                 interval = _voice_interval_view(row, rate, video_origin_s)
-                caption = (f"Left, right and analyzed mono. Highlighted interval: "
+                traces = "Left, right and analyzed mono"
+                if key == STEREO_DIFFERENCE_REDUCTION:
+                    traces += ", with channel difference at the display scale shown"
+                caption = (f"{traces}. Highlighted interval: "
                            f"{interval['start_s']:.3f}–{interval['end_s']:.3f} s of decoded audio.")
                 excerpts.append({**row, **interval, "waveform": plate("waveform", excerpt["artifacts"]["waveform"], caption),
                                  "json_pointer": f"{stereo_prefix}/stereo_context/{key}/selected/{index}"})

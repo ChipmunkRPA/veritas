@@ -23,7 +23,7 @@ from app.detectors.audio import decode as audio_decode
 from app.detectors.audio import stereo
 from app.detectors.audio.decode import SAMPLE_RATE, decode_audio, read_wav, source_ranges, wav_bytes
 from app.engine.stages import audio
-from app.evidence import audio_packets, service, stereo_binding, stereo_listening
+from app.evidence import audio_packets, service, stereo_binding, stereo_difference_binding, stereo_listening
 from app.evidence.audio_binding import (
     MONO_VOICE_COVERAGE,
     MONO_VOICE_LIMIT,
@@ -156,6 +156,7 @@ def test_legacy_stereo_context_remains_readable_and_rejects_unversioned_downmix(
     legacy.update(schema=stereo_binding.LEGACY_SCHEMA, silence_floor_dbfs=stereo_binding.LEGACY_SILENCE_FLOOR_DBFS)
     del legacy["mono_pcm_sha256"], legacy["strong_downmix_attenuation_db"], legacy["channel_silence"]
     del legacy["identical_channel_interval"]
+    del legacy[stereo_difference_binding.KEY]
     for row in legacy["windows"]:
         del row["downmix"]
     stereo.validate(legacy, decoded.mapping)

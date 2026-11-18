@@ -3,12 +3,14 @@ from __future__ import annotations
 
 import hashlib
 import io
+import math
 
 import numpy as np
 from PIL import Image, ImageDraw
 
 from app.detectors.audio.decode import SAMPLE_RATE, wav_bytes
 from app.evidence.stereo_binding import destructive_downmix_windows
+from app.evidence.stereo_difference_binding import KEY as DIFFERENCE_REDUCTION
 from app.evidence.stereo_listening_binding import (
     CHANNELS,
     DIFFERENCE_DIMENSIONS,
@@ -51,12 +53,19 @@ def freeze(db, store, analysis_id: str, decoded):
                              created_by=SCHEMA, analysis_id=analysis_id)
 
 
-def _waveform(tracks: tuple[np.ndarray, ...], *, flank: int = 0) -> bytes:
+def _waveform(tracks: tuple[np.ndarray, ...], *, flank: int = 0, show_difference_detail: bool = False) -> bytes:
     dimensions = DIFFERENCE_DIMENSIONS if len(tracks) > len(CHANNELS) else DIMENSIONS
     im = Image.new("RGB", dimensions, "#faf9f5")
     draw = ImageDraw.Draw(im)
     x0, x1 = PLOT_BOX[0], PLOT_BOX[2] - 1
-    draw.text((x0, 10), "Same amplitude scale | Time within clip", fill="#203b30")
+    legend = "Same amplitude scale | Time within clip"
+    if show_difference_detail:
+        difference = tracks[-1]
+        peak = float(np.max(np.abs(difference)))
+        gain = 2 ** min(8, max(0, math.floor(math.log2(1. / peak)))) if peak else 1
+        legend = f"Channel difference waveform ×{gain} | Time within clip"
+        tracks = (*tracks[:-1], difference * gain)
+    draw.text((x0, 10), legend, fill="#203b30")
     labels = ("Left channel", "Right channel", "Analyzed mono", "Channel difference")[:len(tracks)]
     colors = ("#176853", "#315b96", "#9b511e", "#74518a")[:len(tracks)]
     sample_count = len(tracks[0])
@@ -90,12 +99,13 @@ def payloads(data: bytes, stereo: dict, pcm: np.ndarray, *, waveform: bool = Tru
         offset += count
         tracks = (pair[:, 0].astype(np.float32) / 32768, pair[:, 1].astype(np.float32) / 32768, pcm[start:end])
         files = {name: wav_bytes(track) for name, track in zip(CHANNELS, tracks, strict=True)}
-        if index in cancelled:
+        if index in cancelled or index == DIFFERENCE_REDUCTION:
             difference = (tracks[0] - tracks[1]) / 2
             files["difference"] = wav_bytes(difference)
             tracks = (*tracks, difference)
         if waveform:
-            files["waveform"] = _waveform(tracks, flank=LOCAL_EXCERPTS.get(index, 0))
+            files["waveform"] = _waveform(tracks, flank=LOCAL_EXCERPTS.get(index, 0),
+                                          show_difference_detail=index == DIFFERENCE_REDUCTION)
         yield index, count, files
 
 

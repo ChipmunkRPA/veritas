@@ -41,6 +41,9 @@ export default function AudioStereoContext({ set, token, mediaReady, videoOrigin
   const silenceAssets = listening?.channel_silence
   const identical = context.identical_channel_interval
   const identicalAssets = listening?.identical_channel_interval
+  const reduction = context.stereo_difference_reduction
+  const reductionRow = reduction?.selected[0]
+  const reductionAssets = listening?.stereo_difference_reduction?.[0]?.artifacts
   return <section id="media-evidence-stereo" aria-labelledby="media-evidence-stereo-heading" className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
     <h3 id="media-evidence-stereo-heading" className="m-0 text-body font-medium">Stereo channel comparison</h3>
     {!bound ? <p role="alert" className="mt-2 mb-0 text-small text-text-muted">The channel measurements do not match this analyzed audio input.</p>
@@ -136,6 +139,49 @@ export default function AudioStereoContext({ set, token, mediaReady, videoOrigin
                 </>}
               </article>
             })}
+          </section>}
+        {reduction?.schema === 'chipmunk.stereo-difference-reduction/1' && reduction.affects_overall_confidence === false
+          && <section id="media-evidence-stereo-difference" className="mt-4 scroll-mt-20 text-small">
+            <h4 className="m-0 font-medium">Brief narrowing of stereo sound</h4>
+            <p className="mt-2 mb-0 text-text-muted">{reduction.status === 'unassessed'
+              ? 'The inspected audio did not contain enough comparable shared and separate sound for this check.'
+              : <>Inspected {seconds(reduction.checked_samples / context.sample_rate)} of aligned stereo audio.
+                {reduction.status === 'no_qualifying_change' && ' No qualifying reduction in stereo difference was found in the comparable sound.'}</>}</p>
+            {reductionRow && <article className="mt-3 border-t border-border pt-3" onPlayCapture={(event) => {
+              if (event.target instanceof HTMLAudioElement) pauseAudio(event.target)
+            }}>
+              <h5 className="m-0 font-medium">Stereo differences narrowed, decoded audio {range(reductionRow)}</h5>
+              <p className="mt-2 mb-0 text-text-muted">Sound shared by the channels remained audible while their differences weakened across at least two frequency bands. Mixing, moving sounds and noise processing can produce this observation. It carries no weight in the AI assessment.</p>
+              {reductionRow.source_timestamp_ranges.map((item) => {
+                const start = rationalSeconds(item.source_start_pts, item.time_base)
+                const end = rationalSeconds(item.source_end_pts, item.time_base)
+                return <p key={item.start_sample} className="mt-1 mb-0 text-caption text-text-muted">
+                  Source PTS [{item.source_start_pts}, {item.source_end_pts}) at {item.time_base}.
+                  {typeof videoOriginS === 'number' && Number.isFinite(videoOriginS) && start !== null && end !== null
+                    && start >= videoOriginS && ` Video playback ${seconds(start - videoOriginS)}–${seconds(end - videoOriginS)}.`}
+                </p>
+              })}
+              <table className="mt-3 w-full max-w-lg text-left">
+                <thead><tr><th scope="col">Signal level (dBFS)</th><th scope="col">Before</th><th scope="col">During</th><th scope="col">After</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row" className="font-medium">Channel difference</th>{reductionRow.side_dbfs.map((value, index) => <td key={index}>{value.toFixed(1)}</td>)}</tr>
+                  <tr><th scope="row" className="font-medium">Shared sound</th>{reductionRow.common_dbfs.map((value, index) => <td key={index}>{value.toFixed(1)}</td>)}</tr>
+                </tbody>
+              </table>
+              <p className="mt-2 mb-0 text-caption text-text-muted">dBFS measures level relative to digital full scale. Subtracting the channels reduces centered sound. The difference can still contain off-center speech, music or background sound.</p>
+              {reductionAssets && <>
+                <figure className="m-0 mt-3">
+                  <EvidencePicture set={set} artifact={reductionAssets.waveform} token={token} ready={mediaReady} chart
+                    alt={`Stereo and channel difference waveforms with the interval ${range(reductionRow)} highlighted`} />
+                  <figcaption className="text-caption text-text-muted">The waveform and clips include 0.2 seconds before and after the highlighted interval. The chart shows the display scale for the channel difference.</figcaption>
+                </figure>
+                <div className="mt-3 grid gap-3 min-[900px]:grid-cols-3">
+                  <EvidenceAudio set={set} artifact={reductionAssets.left} token={token} ready={mediaReady} alt={channels.left} />
+                  <EvidenceAudio set={set} artifact={reductionAssets.right} token={token} ready={mediaReady} alt={channels.right} />
+                  <EvidenceAudio set={set} artifact={reductionAssets.difference} token={token} ready={mediaReady} alt="Channel difference" />
+                </div>
+              </>}
+            </article>}
           </section>}
         {comparisons.length > 0 && <details className="mt-3 text-small"
           onPlayCapture={(event) => {

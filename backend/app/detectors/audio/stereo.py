@@ -8,10 +8,11 @@ from typing import Any
 
 import numpy as np
 
+from app.detectors.audio import stereo_ambience
 from app.detectors.audio.decode import SAMPLE_RATE, source_ranges
 from app.detectors.audio.stereo_collapse import measure as measure_identical
 from app.evidence import stereo_binding as binding
-from app.evidence import stereo_collapse_binding
+from app.evidence import stereo_collapse_binding, stereo_difference_binding
 from app.evidence.audio_silence_binding import FLANK, MIN_FLANK_DBFS, MINIMUM
 
 
@@ -75,6 +76,28 @@ def channel_silence(stereo: np.ndarray, timeline: list[dict], ranges) -> dict:
             "qualifying_intervals": len(candidates), "selected": selected}
 
 
+def difference_reduction(stereo: np.ndarray, timeline: list[dict], ranges) -> dict:
+    """Locate the strongest supported change in the aligned stereo prefix."""
+    spec = stereo_difference_binding
+    spans = spec.spans(timeline, len(stereo))
+    assessed, selected = False, None
+    for start, end in spans:
+        comparable, candidates = stereo_ambience.search(stereo_ambience.frames(stereo[start:end]))
+        assessed |= comparable
+        event = candidates["reduction"]
+        if (event and event["score"] > spec.OPERATING_POINT_DB
+                and (selected is None or event["score"] > selected["score"])):
+            selected = {**event, "start_sample": event["start_sample"] + start,
+                        "end_sample": event["end_sample"] + start}
+    status = "no_qualifying_change" if assessed else "unassessed"
+    if selected:
+        selected["source_timestamp_ranges"] = ranges(selected["start_sample"], selected["end_sample"])
+        status = "measured_change"
+    return {"schema": spec.SCHEMA, "method": spec.METHOD, "affects_overall_confidence": False,
+            "status": status, "checked_samples": sum(end - start for start, end in spans),
+            "selected": [selected] if selected else []}
+
+
 def build(mapping: dict[str, Any], mono: np.ndarray, layout: str | None, stereo: np.ndarray | None,
           stereo_mapping: dict[str, Any] | None) -> dict[str, Any]:
     """Bind a bounded PCM prefix to the exact input and analysed source clock."""
@@ -131,6 +154,8 @@ def build(mapping: dict[str, Any], mono: np.ndarray, layout: str | None, stereo:
 
     context[binding.CHANNEL_SILENCE] = channel_silence(stereo[:end], mapping["timeline"], ranges)
     context[stereo_collapse_binding.KEY] = measure_identical(stereo[:end], mapping["timeline"], ranges)
+    if mapping.get("source_codec") in stereo_difference_binding.CODECS:
+        context[stereo_difference_binding.KEY] = difference_reduction(stereo[:end], mapping["timeline"], ranges)
     return context
 
 

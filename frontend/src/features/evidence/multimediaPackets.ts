@@ -169,6 +169,14 @@ export interface StereoChannelContext {
       source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
     })[]
   }
+  stereo_difference_reduction?: {
+    schema: 'chipmunk.stereo-difference-reduction/1'; affects_overall_confidence: false
+    status: 'unassessed' | 'no_qualifying_change' | 'measured_change'; checked_samples: number
+    selected: (SampleInterval & {
+      side_dbfs: [number, number, number]; common_dbfs: [number, number, number]
+      source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
+    })[]
+  }
   windows: (SampleInterval & {
     status: 'strong_imbalance' | 'measured' | 'quiet'
     left_rms_dbfs: number; right_rms_dbfs: number; level_gap_db: number | null; correlation: number | null
@@ -182,6 +190,7 @@ interface StereoListeningContext {
   windows: { stereo_window_index: number; artifacts: Record<'left' | 'right' | 'mono' | 'waveform', EvidenceAsset> & { difference?: EvidenceAsset } }[]
   channel_silence?: { artifacts: Record<'left' | 'right' | 'mono' | 'waveform', EvidenceAsset> }[]
   identical_channel_interval?: { artifacts: Record<'left' | 'right' | 'mono' | 'waveform', EvidenceAsset> }[]
+  stereo_difference_reduction?: { artifacts: Record<'left' | 'right' | 'mono' | 'difference' | 'waveform', EvidenceAsset> }[]
 }
 type AudioRepeatSpan = SampleInterval & { source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'] }
 interface AudioRepeatPair {

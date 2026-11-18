@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import re
 
-from app.evidence import stereo_collapse_binding
+from app.evidence import stereo_collapse_binding, stereo_difference_binding
 from app.evidence.audio_silence_binding import FLANK
 from app.evidence.stereo_binding import CHANNEL_SILENCE, SAMPLE_RATE, destructive_downmix_windows
 from app.evidence.stereo_binding import SCHEMA as STEREO_SCHEMA
@@ -14,7 +14,11 @@ DIMENSIONS = (960, 290)
 DIFFERENCE_DIMENSIONS = (960, 370)
 CHANNELS = ("left", "right", "mono")
 MAX_WINDOWS = 3
-LOCAL_EXCERPTS = {CHANNEL_SILENCE: FLANK, stereo_collapse_binding.KEY: stereo_collapse_binding.FLANK}
+LOCAL_EXCERPTS = {
+    CHANNEL_SILENCE: FLANK,
+    stereo_collapse_binding.KEY: stereo_collapse_binding.FLANK,
+    stereo_difference_binding.KEY: stereo_difference_binding.FLANK,
+}
 
 
 def select_windows(stereo: dict | None) -> list[int]:
@@ -69,7 +73,7 @@ def validate(listening: dict, stereo: dict | None) -> None:
             for row, (start, end) in zip(section, spans, strict=True):
                 if set(row) != {"artifacts"}:
                     raise ValueError("Stereo excerpt assets are incomplete")
-                _validate_assets(row["artifacts"], end - start)
+                _validate_assets(row["artifacts"], end - start, difference=key == stereo_difference_binding.KEY)
     except (KeyError, AttributeError, IndexError, TypeError) as error:
         raise ValueError("Stereo listening evidence has invalid fields") from error
 

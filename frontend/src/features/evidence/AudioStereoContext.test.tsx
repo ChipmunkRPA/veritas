@@ -226,3 +226,37 @@ it('shows an identical-channel interval at the measured source and video playbac
   expect(item.getByAltText(/identical channels highlighted/)).toBeTruthy()
   expect(item.getByLabelText('Decoded left channel').getAttribute('src')).toContain(`/${'1'.repeat(64)}.wav?`)
 })
+
+it('links a brief stereo reduction to its waveform, clip, and video playback time', () => {
+  const set = fixture()
+  set.source.pcm_sha256 = 'd'.repeat(64)
+  const clip = (hash: string): EvidenceAsset => ({
+    sha256: hash.repeat(64), media_type: 'audio/wav', url: '', samples: 9600, channels: 1, sample_rate: 16000,
+  })
+  set.stereo_context = {
+    ...set.stereo_context!, schema: 'chipmunk.stereo-channel-context/2', mono_pcm_sha256: set.source.pcm_sha256,
+    stereo_difference_reduction: {
+      schema: 'chipmunk.stereo-difference-reduction/1', affects_overall_confidence: false, status: 'measured_change',
+      checked_samples: 16000,
+      selected: [{ start_sample: 4800, end_sample: 8000, side_dbfs: [-42, -63, -41], common_dbfs: [-25, -24, -27],
+        source_timestamp_ranges: [{
+          start_sample: 4800, end_sample: 8000, source_start_pts: 36800, source_end_pts: 40000, time_base: '1/16000',
+        }],
+      }],
+    },
+  }
+  set.stereo_listening = {
+    schema: 'chipmunk.stereo-listening/1', affects_overall_confidence: false, windows: [],
+    stereo_difference_reduction: [{ artifacts: {
+      left: clip('1'), right: clip('2'), mono: clip('3'), difference: clip('4'),
+      waveform: { sha256: '5'.repeat(64), media_type: 'image/png', url: '', width: 960, height: 370 },
+    } }],
+  }
+  render(<MemoryRouter><AudioEvidenceContent set={set} token="signed token" mediaReady videoOriginS={1.5} /></MemoryRouter>)
+  const item = within(screen.getByText(/Stereo differences narrowed, decoded audio/).closest('article')!)
+  expect(item.getByText(/Video playback 0\.800 s–1\.000 s/)).toBeTruthy()
+  expect(item.getByAltText(/channel difference waveforms with the interval/)).toBeTruthy()
+  expect(item.getByLabelText('Channel difference').getAttribute('src')).toContain(`/${'4'.repeat(64)}.wav?`)
+  expect(within(item.getByRole('row', { name: /Channel difference/ })).getByText('-63.0')).toBeTruthy()
+  expect(item.getByText(/carries no weight in the AI assessment/)).toBeTruthy()
+})

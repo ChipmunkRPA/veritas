@@ -17,6 +17,7 @@ from app.evidence.av_binding import AUDIO_CLOCK_BREAKS, TIMING_WINDOWS, check_au
 from app.evidence.stereo_binding import CHANNEL_SILENCE
 from app.evidence.stereo_binding import SCHEMA as STEREO_CONTEXT_SCHEMA
 from app.evidence.stereo_collapse_binding import KEY as IDENTICAL_CHANNEL_INTERVAL
+from app.evidence.stereo_difference_binding import KEY as DIFFERENCE_REDUCTION
 from app.reports.public_verify import SCHEMA
 
 SOURCE_FIELDS = ("samples", "sample_rate", "channels", "source_stream_index", "source_sample_rate", "source_channels",
@@ -141,7 +142,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         replay_detail += f" Verified source times for {len(selection['windows'])} recorded speech windows."
     if stereo and stereo["schema"] == STEREO_CONTEXT_SCHEMA and stereo["stereo_pcm_sha256"] is not None:
         measured = dict(decoded.mapping.get("stereo_context", {}))
-        for key in (CHANNEL_SILENCE, IDENTICAL_CHANNEL_INTERVAL):
+        for key in (CHANNEL_SILENCE, IDENTICAL_CHANNEL_INTERVAL, DIFFERENCE_REDUCTION):
             if key not in stereo:
                 measured.pop(key, None)  # Earlier signed exports predate these measurements.
         if stereo != measured:
@@ -153,6 +154,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if IDENTICAL_CHANNEL_INTERVAL in stereo:
             count = len(stereo[IDENTICAL_CHANNEL_INTERVAL]["selected"])
             replay_detail += f" Recomputed identical-channel audio and validated {count} selected intervals."
+        if DIFFERENCE_REDUCTION in stereo:
+            count = len(stereo[DIFFERENCE_REDUCTION]["selected"])
+            replay_detail += f" Recomputed the stereo difference reduction and validated {count} selected intervals."
     for label, span, timestamps, asset in _clips(audio, alignment):
         start, end = span["start_sample"], span["end_sample"]
         if any(type(i) is not int for i in (start, end)) or not 0 <= start < end <= len(decoded.pcm):

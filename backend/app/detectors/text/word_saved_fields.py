@@ -41,10 +41,7 @@ def complex_field_blocks(body) -> set:
     return affected
 
 
-def _body_style_allows_visible_runs(paragraph) -> bool:
-    if paragraph._p.xpath(f"./w:pPr/w:rPr/{_VISIBILITY_NODES}"):
-        return False
-    style = paragraph.style
+def style_allows_visible_runs(style) -> bool:
     visited = set()
     while style is not None:
         if style.style_id in visited or len(visited) >= 32:
@@ -54,6 +51,11 @@ def _body_style_allows_visible_runs(paragraph) -> bool:
         visited.add(style.style_id)
         style = style.base_style
     return True
+
+
+def paragraph_allows_visible_runs(paragraph) -> bool:
+    return (not paragraph._p.xpath(f"./w:pPr/w:rPr/{_VISIBILITY_NODES}")
+            and style_allows_visible_runs(paragraph.style))
 
 
 def _saved_value(field) -> str | None:
@@ -77,7 +79,7 @@ def project(paragraph, slots: int) -> list[tuple[int, int, int]]:
     """Move supported saved runs into the in-memory paragraph, in source order."""
     element = paragraph._p
     if (element.find(_SIMPLE) is None or element.xpath(".//w:fldChar | .//w:instrText | .//w:sdt")
-            or not _body_style_allows_visible_runs(paragraph)):
+            or not paragraph_allows_visible_runs(paragraph)):
         return []
     selected = []
     offset = 0

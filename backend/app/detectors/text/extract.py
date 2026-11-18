@@ -784,11 +784,11 @@ def docx_paragraphs(parent, elements, body_path=(), *, include_content_controls=
 def extract_docx(path: Path, *, project_word_revisions: bool = True, project_word_breaks: bool = True,
                  include_word_content_controls: bool = True, include_word_saved_fields: bool = True,
                  map_word_table_grid: bool = True, map_word_table_controls: bool = True,
-                 map_word_hyperlink_runs: bool = True) -> Document:
+                 map_word_hyperlink_runs: bool = True, include_word_linked_notes: bool = True) -> Document:
     from bisect import bisect_left
 
-    from app.detectors.text import word_saved_fields
-    from app.evidence import document_word_visibility
+    from app.detectors.text import word_linked_notes, word_saved_fields
+    from app.evidence import document_bibliography, document_word_visibility
     from app.evidence.document_archive_word import ordinary_body_paragraph
     from app.evidence.document_tracked_changes import INPUT_NOTICES, JOINED_PARAGRAPHS, PART_NAME
 
@@ -802,9 +802,14 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
     fields_found = int(d.element.body.xpath("count(.//w:fldSimple)")) if include_word_saved_fields else 0
     can_project_fields = bool(fields_found and review and review["status"] == "no_match"
                               and word_saved_fields.defaults_allow_visible_runs(d))
-    complex_field_blocks = word_saved_fields.complex_field_blocks(d.element.body) if can_project_fields else set()
     field_ranges = {}
     fields_included = 0
+    note_refs = {}
+    read_notes = (include_word_linked_notes and review is not None and review["status"] == "no_match"
+                  and word_saved_fields.defaults_allow_visible_runs(d)
+                  and bool(d.element.body.xpath(".//w:footnoteReference | .//w:endnoteReference")))
+    complex_field_blocks = (word_saved_fields.complex_field_blocks(d.element.body)
+                            if can_project_fields or read_notes else set())
 
     continued = False
     for paragraph, path_here, projected_control in docx_paragraphs(
@@ -834,6 +839,11 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
             percentage_body_paragraphs.append(path_here[0] if eligible and not (continued or joins_next or projected)
                                               and ordinary_body_paragraph(paragraph) else None)
             continued = joins_next
+            if read_notes and not projected and paragraph._p not in complex_field_blocks:
+                for kind, note_id, run, child in word_linked_notes.references(paragraph):
+                    if len(note_refs) == word_linked_notes.MAX_REFERENCES:
+                        break
+                    note_refs.setdefault((kind, note_id), (path_here[0], run, child))
         cursor, runs = 0, []
         paragraph_runs = document_word_visibility.paragraph_run_elements(paragraph) if map_word_hyperlink_runs else paragraph.runs
         for ri, run in enumerate(paragraph_runs):
@@ -847,15 +857,42 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
             source["join_following_paragraph"] = True
         parts.append((text, source))
     doc = _join_mapped(parts)
+    note_parts = word_linked_notes.paragraphs(path, d, note_refs)
+    if note_parts:
+        # Keep a terminal bibliography contiguous for the existing prose-only policy.
+        doc.meta["method"] = "python-docx"
+        bibliography = document_bibliography.measure(doc)
+        insertion = len(parts)
+        if bibliography is not None:
+            heading = bibliography["first_location"]["body_index"]
+            insertion = next(index for index, (_, source) in enumerate(parts) if source["body_path"][0] == heading)
+        parts[insertion:insertion] = note_parts
+        for index, (_, source) in enumerate(parts[insertion:], insertion):
+            source["paragraph_index"] = index
+        doc = _join_mapped(parts, map_paragraphs=True)
     doc.word_review = review
     word_warning = ""
     if review and review["status"] != "no_match":
         word_warning = " " + INPUT_NOTICES.get(review.get("writing_input"),
             "The file contains Word revision marks. The writing checks may omit text within those marks.")
+    outside = ("Headers, footers, text boxes and embedded attachments were outside this check."
+               if include_word_linked_notes else
+               "Headers, footers, notes, text boxes and embedded attachments were not checked.")
     doc.meta = {"method": "python-docx", "paragraph_count": len(parts) - len(joined or ()),
                 "percentage_body_paragraphs": percentage_body_paragraphs,
-                "coverage_warning": ("Body paragraphs and tables were extracted in document order. Headers, footers, notes, text boxes and "
-                                     "embedded attachments were not checked; DOCX has no stable page numbers." + word_warning)}
+                "coverage_warning": ("Body paragraphs and tables were extracted in document order. "
+                                     f"{outside} DOCX has no stable page numbers." + word_warning)}
+    if include_word_linked_notes:
+        included_notes = len({(source["part_kind"], source["note_id"]) for _, source in note_parts})
+        doc.meta[document_native_locations.WORD_NOTES_KEY] = {
+            "schema": document_native_locations.WORD_NOTES, "references": len(note_refs),
+            "included": included_notes, "paragraphs": len(note_parts),
+        }
+        doc.meta["coverage_warning"] += (" Includes supported saved footnotes and endnotes linked from ordinary body paragraphs. "
+                                         "Unlinked notes, tracked revisions and unsupported note layouts are outside this check.")
+        if note_refs:
+            doc.meta["coverage_warning"] += (f" Read {len(note_parts)} saved note paragraphs from "
+                                             f"{included_notes} of {len(note_refs)} eligible Word note references.")
     if include_word_content_controls:
         doc.meta[WORD_CONTENT_CONTROLS_KEY] = WORD_CONTENT_CONTROLS
         if map_word_table_grid and map_word_table_controls:
@@ -875,7 +912,7 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
     if fields_found and PART_NAME.fullmatch(part):
         locations = []
         for block in doc.source_map:
-            if len(block["body_path"]) != 1 or block["body_path"][0] not in field_ranges:
+            if block["kind"] != "docx" or len(block["body_path"]) != 1 or block["body_path"][0] not in field_ranges:
                 continue
             index = block["body_path"][0]
             _, origins = _normalise(parts[block["paragraph_index"]][0])
@@ -1198,7 +1235,8 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             include_word_content_controls: bool = True, include_word_saved_fields: bool = True, include_html_article: bool = True,
             map_body_paragraphs: bool = True, map_word_table_grid: bool = True,
             skip_hidden_slide_groups: bool = True, map_word_hyperlink_runs: bool = True,
-            map_word_table_controls: bool = True, skip_hidden_odt_sections: bool = True) -> Document:
+            map_word_table_controls: bool = True, skip_hidden_odt_sections: bool = True,
+            include_word_linked_notes: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
@@ -1206,7 +1244,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
         d = extract_docx(path, project_word_revisions=project_word_revisions, project_word_breaks=project_word_breaks,
                          include_word_content_controls=include_word_content_controls, include_word_saved_fields=include_word_saved_fields,
                          map_word_table_grid=map_word_table_grid, map_word_hyperlink_runs=map_word_hyperlink_runs,
-                         map_word_table_controls=map_word_table_controls)
+                         map_word_table_controls=map_word_table_controls, include_word_linked_notes=include_word_linked_notes)
     elif ext == ".odt":
         from app.detectors.text.opendocument import body_paragraphs
 

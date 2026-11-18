@@ -16,6 +16,10 @@ export function writingPatternOnly(packet: DocumentEvidencePacket): boolean {
 }
 
 export function packageAnchorLabel(anchor: DocumentAnchor): string | null {
+  if ((anchor.part_kind === 'footnote' || anchor.part_kind === 'endnote')
+      && anchor.note_id != null && anchor.note_paragraph_index != null && anchor.reference_body_index != null) {
+    return `Word ${anchor.part_kind} ID ${anchor.note_id}, paragraph ${anchor.note_paragraph_index + 1}. Reference in Word body block ${anchor.reference_body_index + 1}`
+  }
   if (anchor.row != null && anchor.column != null) {
     if (anchor.part_kind === 'spreadsheet_cell' && anchor.part_index != null) {
       return `Sheet ${anchor.part_index + 1}, row ${anchor.row}, column ${anchor.column}`

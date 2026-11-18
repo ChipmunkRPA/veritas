@@ -449,7 +449,8 @@ export interface TextSpan { start: number; end: number; text: string }
 export interface DocumentAnchor {
   kind: string; page?: number; paragraph?: number; mime_part?: string; quote_role?: string; extraction?: string
   paragraph_index?: number; body_path?: (string | number)[]
-  part_kind?: 'slide' | 'epub_entry' | 'spreadsheet_cell' | 'delimited_cell'; part_index?: number
+  part_kind?: 'slide' | 'epub_entry' | 'spreadsheet_cell' | 'delimited_cell' | 'footnote' | 'endnote'; part_index?: number
+  note_id?: number; note_paragraph_index?: number; reference_body_index?: number
   row?: number; column?: number
   selected_start?: number; selected_end?: number; highlight_boxes?: number[][]
   ocr_word_confidence?: number | number[]
@@ -457,7 +458,7 @@ export interface DocumentAnchor {
 export interface DocumentOriginalTextLocation {
   anchor_index: number
   coordinate: 'decoded_text' | 'word_paragraph' | 'odt_paragraph' | 'rtf_paragraph' | 'pptx_block' | 'epub_block' |
-    'xlsx_cell' | 'csv_cell' | 'tsv_cell' | 'decoded_email' | 'decoded_email_html' | 'decoded_html'
+    'xlsx_cell' | 'csv_cell' | 'tsv_cell' | 'decoded_email' | 'decoded_email_html' | 'decoded_html' | 'word_note_paragraph'
   ranges: [number, number][]
 }
 export interface DocumentEvidencePacket extends PacketBase {

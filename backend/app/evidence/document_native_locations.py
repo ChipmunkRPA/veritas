@@ -30,6 +30,10 @@ WORD_TABLE_GRID = "word-table-grid/2"
 WORD_TABLE_GRID_VERSIONS = (WORD_TABLE_GRID_V1, WORD_TABLE_GRID)
 WORD_RUN_MAP_KEY = "word_run_map"
 WORD_RUN_MAP = "word-paragraph-runs/1"
+WORD_NOTES_KEY = "word_linked_notes"
+WORD_NOTES = "word-linked-notes/1"
+WORD_NOTE_LABELS = {"footnote": "Word footnote", "endnote": "Word endnote"}
+WORD_NOTE_FIELDS = ("note_id", "note_paragraph_index", "reference_body_index", "reference_run_index", "reference_child_index")
 MAX_SAVED_FIELDS = 256
 MAX_SAVED_FIELD_LOCATIONS = 16
 MAX_SAVED_FIELD_CHARS = 256
@@ -123,6 +127,12 @@ def _coordinate(source, coverage, anchor):
         return "decoded_text"
     if method == "python-docx" and kind == "docx":
         return "word_paragraph"
+    if kind == "markup" and anchor.get("part_kind") in WORD_NOTE_LABELS:
+        notes = coverage.get(WORD_NOTES_KEY) or {}
+        if (method != "python-docx" or notes.get("schema") != WORD_NOTES or not notes.get("included")
+                or any(type(anchor.get(field)) is not int or anchor[field] < 0 for field in WORD_NOTE_FIELDS)):
+            raise ValueError("Missing Word footnote or endnote source position")
+        return "word_note_paragraph"
     if (kind == "markup" and coverage.get(PARAGRAPH_MAP_KEY) == PARAGRAPH_MAP
             and type(anchor.get("paragraph_index")) is int and anchor["paragraph_index"] >= 0):
         if method in PACKAGE_METHODS and (anchor.get("part_kind") != PACKAGE_METHODS[method]
@@ -148,6 +158,9 @@ def _coordinate(source, coverage, anchor):
 
 def package_anchor_label(anchor):
     kind = anchor.get("part_kind")
+    if anchor.get("kind") == "markup" and kind in WORD_NOTE_LABELS:
+        return (f"{WORD_NOTE_LABELS[kind]} ID {anchor['note_id']}, paragraph {anchor['note_paragraph_index'] + 1}. "
+                f"Reference in Word body block {anchor['reference_body_index'] + 1}")
     if anchor.get("kind") == "markup" and kind in CELL_METHODS.values() and {"row", "column"} <= anchor.keys():
         if kind == "spreadsheet_cell" and "part_index" in anchor:
             return f"Sheet {anchor['part_index'] + 1}, row {anchor['row']}, column {anchor['column']}"
@@ -186,6 +199,15 @@ def validate(document):
     if WORD_RUN_MAP_KEY in coverage and (coverage[WORD_RUN_MAP_KEY] != WORD_RUN_MAP
             or document.get("source", {}).get("method") != "python-docx"):
         raise ValueError("Invalid Word paragraph run mapping")
+    if WORD_NOTES_KEY in coverage:
+        notes = coverage[WORD_NOTES_KEY]
+        if (not isinstance(notes, dict) or set(notes) != {"schema", "references", "included", "paragraphs"}
+                or notes["schema"] != WORD_NOTES or document.get("source", {}).get("method") != "python-docx"
+                or any(type(notes[key]) is not int or not 0 <= notes[key] <= 4096
+                       for key in ("references", "included", "paragraphs"))
+                or notes["included"] > min(notes["references"], notes["paragraphs"])
+                or bool(notes["included"]) != bool(notes["paragraphs"])):
+            raise ValueError("Invalid linked Word note coverage")
     if PARAGRAPH_MAP_KEY in coverage and (coverage[PARAGRAPH_MAP_KEY] != PARAGRAPH_MAP
             or document.get("source", {}).get("method") not in PARAGRAPH_COORDINATES):
         raise ValueError("Invalid decoded body paragraph mapping")
@@ -199,7 +221,8 @@ def validate(document):
     if article is not None and (document.get("source", {}).get("method") != "html" or not valid_html_article_scope(article)):
         raise ValueError("Invalid saved HTML article boundaries")
     record = coverage.get(KEY)
-    if (record is not None or article is not None or PARAGRAPH_MAP_KEY in coverage) and record != build(document):
+    if (record is not None or article is not None
+            or PARAGRAPH_MAP_KEY in coverage or WORD_NOTES_KEY in coverage) and record != build(document):
         raise ValueError("Original text locations differ from their mapped evidence spans")
     if article is not None and record is not None:
         start, end = article["scope"]

@@ -146,6 +146,7 @@ def current_decode_output(output: Any) -> bool:
              or output["meta"].get(document_native_locations.SAVED_FIELDS_READER) != document_native_locations.SAVED_FIELDS_SCHEMA
              or output["meta"].get(document_native_locations.WORD_TABLE_GRID_KEY) != document_native_locations.WORD_TABLE_GRID
              or output["meta"].get(document_native_locations.WORD_RUN_MAP_KEY) != document_native_locations.WORD_RUN_MAP
+             or (output["meta"].get(document_native_locations.WORD_NOTES_KEY) or {}).get("schema") != document_native_locations.WORD_NOTES
              or (output.get(document_tracked_changes.KEY) or {}).get("schema") != document_tracked_changes.PARAGRAPH_SCHEMA
              or (output["meta"].get(document_word_visibility.KEY) or {}).get("schema") != document_word_visibility.SCHEMA)):
         return False

@@ -1,0 +1,62 @@
+{
+  "browser": {
+    "pages": 4,
+    "pdf_downloads": 4,
+    "json_links": 4,
+    "page_errors": 0,
+    "evidence_checked": 4,
+    "evidence_missing": []
+  },
+  "simulated_checkout_price_cents": 999,
+  "paid_jobs": 4,
+  "unpaid_jobs": 0,
+  "cases": [
+    {
+      "case": "standard-notes",
+      "readable_words": 316,
+      "detectors_completed": 2,
+      "note_locations": 5,
+      "note_types": [
+        "endnote",
+        "footnote"
+      ],
+      "matching_signed_report_and_original": true
+    },
+    {
+      "case": "strict-notes",
+      "readable_words": 316,
+      "detectors_completed": 2,
+      "note_locations": 5,
+      "note_types": [
+        "endnote",
+        "footnote"
+      ],
+      "matching_signed_report_and_original": true
+    },
+    {
+      "case": "footnote-only",
+      "readable_words": 140,
+      "detectors_completed": 2,
+      "note_locations": 17,
+      "note_types": [
+        "footnote"
+      ],
+      "matching_signed_report_and_original": true
+    },
+    {
+      "case": "endnote-only",
+      "readable_words": 198,
+      "detectors_completed": 2,
+      "note_locations": 17,
+      "note_types": [
+        "endnote"
+      ],
+      "matching_signed_report_and_original": true
+    }
+  ],
+  "scope": "Locally authored sets using real offline writing checks and simulated checkout. Extra large model pair was disabled.",
+  "historical_signed_packages_verified": [
+    "DOCX",
+    "Strict DOCX"
+  ]
+}

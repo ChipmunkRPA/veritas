@@ -128,6 +128,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                           include_word_saved_fields=document_native_locations.SAVED_FIELDS_KEY in coverage,
                           map_word_table_grid=table_grid in document_native_locations.WORD_TABLE_GRID_VERSIONS,
                           map_word_table_controls=table_grid == document_native_locations.WORD_TABLE_GRID,
+                          include_word_linked_notes=document_native_locations.WORD_NOTES_KEY in coverage,
                           map_word_hyperlink_runs=coverage.get(document_native_locations.WORD_RUN_MAP_KEY)
                           == document_native_locations.WORD_RUN_MAP)
         except (OpcError, XMLSyntaxError) as error:
@@ -163,7 +164,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
               WORD_CONTENT_CONTROLS_KEY: None, document_scope.HTML_ARTICLE_KEY: None,
               document_native_locations.PARAGRAPH_MAP_KEY: None, document_native_locations.WORD_TABLE_GRID_KEY: None,
               document_native_locations.PPTX_VISIBILITY_KEY: None, document_native_locations.WORD_RUN_MAP_KEY: None,
-              document_native_locations.ODT_VISIBILITY_KEY: None}
+              document_native_locations.ODT_VISIBILITY_KEY: None, document_native_locations.WORD_NOTES_KEY: None}
     local_coverage = {**doc.meta, "ocr": public_ocr_coverage(doc.meta)}
     if any(canonical_hash(coverage.get(key, default)) != canonical_hash(local_coverage.get(key, default))
            for key, default in fields.items()):

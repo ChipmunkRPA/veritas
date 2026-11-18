@@ -517,6 +517,13 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     disagreements, classifier_support = document_selection.directions(groups, candidates)
     method = decoded["meta"].get("method")
     blocks = document_scope.source_blocks(candidates, mapping) if method in {"plain", "python-docx", "pymupdf"} else {}
+    note_priorities = {}
+    if (decoded["meta"].get(document_native_locations.WORD_NOTES_KEY) or {}).get("included"):
+        for location in sorted(blocks, key=lambda location: (location not in classifier_support, location)):
+            kind = mapping[blocks[location] - 1].get("part_kind")
+            if kind in document_native_locations.WORD_NOTE_LABELS:
+                note_priorities.setdefault(kind, location)
+    priority = list(dict.fromkeys([*priority, *note_priorities.values()]))
     selected, distribution = document_selection.select(candidates, disagreements, classifier_support, priority, blocks)
     opposing_total = sum(document_scope.inspection_direction(w) is False for values in groups.values() for w in values)
     opposing_shown = sum(document_scope.inspection_direction(w) is False for key in selected for w in groups[key])
@@ -538,6 +545,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if distribution is not None:
         document["coverage"][document_scope.CARD_SELECTION_KEY] = distribution
         document["coverage"]["selection_policy"] = document_selection.BALANCED_POLICY
+    if note_priorities:
+        document["coverage"]["selection_policy"] += " The display also gives priority to a qualifying passage from each available Word note type."
     if partially_checked := decoded["meta"].get("partially_checked_pages"):
         document["coverage"]["partially_checked_pages"] = partially_checked
     if word_controls := decoded["meta"].get(WORD_CONTENT_CONTROLS_KEY):
@@ -546,6 +555,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][document_native_locations.WORD_TABLE_GRID_KEY] = word_grid
     if word_runs := decoded["meta"].get(document_native_locations.WORD_RUN_MAP_KEY):
         document["coverage"][document_native_locations.WORD_RUN_MAP_KEY] = word_runs
+    if word_notes := decoded["meta"].get(document_native_locations.WORD_NOTES_KEY):
+        document["coverage"][document_native_locations.WORD_NOTES_KEY] = word_notes
     if saved_fields := decoded["meta"].get(document_native_locations.SAVED_FIELDS_KEY):
         document["coverage"][document_native_locations.SAVED_FIELDS_KEY] = saved_fields
     if article := decoded["meta"].get(document_scope.HTML_ARTICLE_KEY):

@@ -676,6 +676,9 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     word_run_key = document_native_locations.WORD_RUN_MAP_KEY
     if coverage.get(word_run_key) != decoded["meta"].get(word_run_key):
         raise ObjectIntegrityError("Frozen Word paragraph run mapping differs from the recorded extraction")
+    word_notes_key = document_native_locations.WORD_NOTES_KEY
+    if coverage.get(word_notes_key) != decoded["meta"].get(word_notes_key):
+        raise ObjectIntegrityError("Frozen linked Word notes differ from the recorded extraction")
     slide_visibility_key = document_native_locations.PPTX_VISIBILITY_KEY
     if coverage.get(slide_visibility_key) != decoded["meta"].get(slide_visibility_key):
         raise ObjectIntegrityError("Frozen PowerPoint visibility policy differs from the recorded extraction")

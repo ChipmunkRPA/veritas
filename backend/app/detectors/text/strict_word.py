@@ -13,6 +13,7 @@ from app.storage.files import check_docx_safe
 STRICT = "http://purl.oclc.org/ooxml/"
 WORD = STRICT + "wordprocessingml/main"
 RELATIONSHIP = STRICT + "officeDocument/relationships/"
+TRANSITIONAL_RELATIONSHIP = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/"
 RELATIONS = "{http://schemas.openxmlformats.org/package/2006/relationships}"
 CONTENT_TYPES = "{http://schemas.openxmlformats.org/package/2006/content-types}"
 MAIN_TYPE = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
@@ -38,11 +39,11 @@ def _read_xml(archive: ZipFile, name: str, limit: int):
     return root
 
 
-def _target(relationships, name: str, directory: str = "") -> str | None:
+def _target(relationships, name: str, directory: str = "", *, namespace: str = RELATIONSHIP) -> str | None:
     if relationships.tag != RELATIONS + "Relationships":
         return None
     matches = [node for node in relationships.findall(RELATIONS + "Relationship")
-               if node.get("Type") == RELATIONSHIP + name]
+               if node.get("Type") == namespace + name]
     if not matches:
         return None
     target = matches[0].get("Target", "")
@@ -60,12 +61,15 @@ def _mapped_name(name: str) -> str:
     return f"{{{replacement}}}{local}" if replacement else name
 
 
-def _word_xml(archive: ZipFile, path: str, tag: str, limit: int):
+def _word_xml(archive: ZipFile, path: str, tag: str, limit: int, *, strict: bool = True):
     from docx.oxml import parse_xml
 
     root = _read_xml(archive, path, limit)
-    if root.tag != f"{{{WORD}}}{tag}":
-        raise ValueError("The Strict Word document contains an unexpected XML part.")
+    namespace = WORD if strict else NAMESPACES[WORD]
+    if root.tag != f"{{{namespace}}}{tag}":
+        raise ValueError("The Word document contains an unexpected XML part.")
+    if not strict:
+        return parse_xml(etree.tostring(root))
     for element in root.iter(etree.Element):
         element.tag = _mapped_name(element.tag)
         for name in list(element.attrib):

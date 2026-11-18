@@ -206,7 +206,7 @@ def _document(path: Path, extension: str) -> None:
 
     text = document.text
     readable = any(char.isprintable() and not char.isspace() for char in text)
-    scope = {".docx": "The Word body", ".odt": "The OpenDocument body", ".eml": "The selected email body"}
+    scope = {".docx": "The Word document", ".odt": "The OpenDocument body", ".eml": "The selected email body"}
     too_short = f"{scope.get(extension, 'This document')} needs at least {MIN_WORDS} readable words for writing analysis. No payment was started."
     if extension in {".pptx", ".epub"}:
         too_short = (f"The {extension[1:].upper()} needs at least {MIN_WORDS} readable words for writing analysis. "

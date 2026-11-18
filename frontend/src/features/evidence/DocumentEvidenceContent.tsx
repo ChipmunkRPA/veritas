@@ -34,6 +34,7 @@ function BibliographyCoverage({ review, doiReviewed }: {
 const originalLocationLabels: Record<DocumentOriginalTextLocation['coordinate'], string> = {
   decoded_text: 'Original decoded text characters',
   word_paragraph: 'Original Word paragraph characters',
+  word_note_paragraph: 'Original Word note paragraph characters',
   odt_paragraph: 'Decoded OpenDocument paragraph characters',
   rtf_paragraph: 'Decoded Rich Text block characters',
   pptx_block: 'Decoded slide text characters',

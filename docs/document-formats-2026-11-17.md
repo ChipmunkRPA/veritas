@@ -8,7 +8,7 @@ limit is 25 MB in the standard configuration.
 
 | Format | Writing examined | Source position in reports |
 | --- | --- | --- |
-| DOCX | Body paragraphs, tables, saved text in filled controls around paragraphs, runs, rows or cells, and supported saved field values in standard and Strict Open XML DOCX. Separate Word revision and visibility checks cover their supported structures. | Word body path, paragraph characters, and available run coordinates, including saved hyperlink labels |
+| DOCX | Body paragraphs, tables, filled form controls, supported saved fields, and supported linked footnotes and endnotes in standard and Strict Open XML DOCX. Separate revision and visibility checks cover supported structures. | Word body paths, paragraph characters, available run coordinates, and the note's paragraph characters and reference |
 | ODT | Body paragraphs, headings, lists, and tables outside hidden and conditionally displayed sections | Decoded body paragraph number and character range |
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
 | PPTX | Editable text boxes and tables on visible slides | Slide in presentation order, text block, and decoded character range |
@@ -21,9 +21,9 @@ limit is 25 MB in the standard configuration.
 | Markdown | Text extracted from the markup | Paragraph and character position in the extracted text |
 | HTML and XHTML | Text extracted from saved `.html`, `.htm`, or `.xhtml` markup | Original markup character ranges for uniquely mapped article passages, otherwise extracted-text positions |
 
-For email, attachments can be submitted separately. Word and ODT use body
-text for writing checks. Document packages are read locally without opening
-Office, fetching linked content, or executing macros.
+For email, attachments can be submitted separately. Word reads supported
+body and note text. ODT uses body text. Document packages are read locally
+without opening Office, fetching linked content, or executing macros.
 
 The writing check reads saved text in supported Word form controls and
 skips placeholder text. A paragraph mixing inline controls and tracked
@@ -43,6 +43,31 @@ Word passage locations include the saved label text within hyperlinks and
 the exact offsets of the text that follows. The reader uses the stored text
 and never opens the hyperlink destination. Signed reports record the
 mapping rule so earlier evidence can replay with its original coordinates.
+
+### Linked Word notes
+
+The writing check reads supported saved footnote and endnote paragraphs
+linked from ordinary visible Word body paragraphs. Its coverage records
+how many eligible references led to readable note text. Findings can
+identify the Word file's internal note ID, the note paragraph, its Unicode
+character range, and the source body block that contains the reference.
+The browser and PDF use the same positions as the JSON evidence. A signed
+package can replay those positions against the original DOCX. Earlier
+reports use the extraction rules recorded when they were created.
+
+Links in tracked documents, hidden references, duplicate note IDs within
+a note type, placeholders, fields, unlinked notes, and unsupported note
+layouts are outside this check. Earlier-draft comparison uses Word body
+text. [Word document parts](https://learn.microsoft.com/en-us/office/open-xml/word/structure-of-a-wordprocessingml-document) ·
+[Word note types](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.footnoteendnotetype.type?view=openxml-3.0.1)
+
+A Chromium test submitted standard and Strict DOCX, a file with readable
+text only in footnotes, and a file with readable text only in endnotes.
+Each ran after simulated checkout. The test verified note character
+ranges and reference locations in the browser, PDF, and JSON, then
+verified the signed packages against their original files. Two earlier
+signed reports also replayed with their original reading rules.
+[Word notes checkout and export test](evaluation-panels/document-word-notes-app-2026-11-18.json)
 
 Word's **Strict Open XML Document** option also saves a `.docx` file.
 Upload it directly for analysis or an earlier-draft comparison. The reader
@@ -76,8 +101,9 @@ replay them against the original file.
 Export Google Docs, Apple Pages, and older Word (`.doc`) files as DOCX or
 PDF before uploading. Export Google Slides and Keynote as PowerPoint or PDF.
 Export Outlook (`.msg`) files as EML or PDF. Keep the
-original file if its native provenance matters. A PDF export can also include
-Word footnotes, text boxes, headers and footers in their rendered layout.
+original file if its native provenance matters. A PDF export can include
+Word notes outside the native check, text boxes, headers and footers in
+their rendered layout.
 For older, macro-enabled or OpenDocument spreadsheets, save the sheets with
 writing as macro-free XLSX, CSV or PDF.
 Before creating a payment, checkout checks that writing files have at least

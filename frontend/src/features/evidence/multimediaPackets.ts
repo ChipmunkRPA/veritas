@@ -544,6 +544,13 @@ export type PublishedWordingReview = {
 export interface DocumentEvidenceSet extends SetBase {
   schema: 'chipmunk.document-evidence/1'; packets: DocumentEvidencePacket[]; omitted_windows: number
   source: { sha256: string; chars?: number; method?: string; offset_unit: 'unicode_codepoint' }
+  calendar_consistency?: {
+    schema: 'document-calendar-consistency/1'; affects_overall_confidence: false; scope: string; limitation: string
+    mapped_blocks: number; checked_dates: number; disagreements: number
+    locations: { start: number; end: number; text: string; stated_weekday: string; expected_weekday: string | null; iso_date: string | null;
+      reason: 'weekday_mismatch' | 'invalid_date'; anchor: { kind: 'text' | 'docx' | 'pdf' | 'email'; page?: number; block?: number;
+        paragraph_index?: number; mime_part?: string }; location: { boxes: number[][] } | { ranges: [number, number][] } }[]
+  }
   percentage_consistency?: { schema: 'document-percentage-consistency/1' | 'document-percentage-consistency/2' | 'document-percentage-consistency/3'; status: 'different_values' | 'checked' | 'not_assessed';
     scope: string; limitation: string; authorship_confidence_contribution: 0; checked_sentences: number;
     excluded_blocks: number; different_claims: number; comparable_claims: number;

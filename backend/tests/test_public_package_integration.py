@@ -527,7 +527,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.document_passage_position', 'app.evidence.document_long_passage_position',
                         'app.evidence.document_tracked_changes', 'app.evidence.document_pdf_visibility', 'app.evidence.document_word_visibility',
                         'app.evidence.document_bibliography',
-                        'app.evidence.document_percentage_consistency',
+                        'app.evidence.document_percentage_consistency', 'app.evidence.document_calendar',
                         'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.av_lag_support',
                         'app.evidence.audio_background_binding', 'app.evidence.audio_bandwidth_binding', 'app.evidence.audio_silence_binding',
                         'app.evidence.audio_tonal_phase_binding',
@@ -545,7 +545,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.video_viseme_stereo', 'app.evidence.video_silent_mouth',
                         'app.evidence.video_lip_agreement',
                         'app.evidence.stereo_binding', 'app.evidence.stereo_listening_binding',
-                        'app.evidence.stereo_collapse_binding'):
+                        'app.evidence.stereo_collapse_binding', 'app.evidence.stereo_difference_binding'):
             return None
         if fullname.startswith(('app.storage', 'app.core.config', 'app.detectors', 'app.evidence', 'app.api',
                                 'torch', 'numpy', 'cv2', 'transformers', 'fastapi', 'sqlalchemy', 'pymupdf')):
@@ -600,11 +600,11 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
                                  'image_copy_similarity_binding.py', 'image_copy_affine_binding.py',
                                  'image_editor_preview_binding.py', 'image_transparency_binding.py', 'image_animation_binding.py',
                                  'image_motion_photo_binding.py',
-                                 'stereo_binding.py', 'stereo_collapse_binding.py', 'scene_return_binding.py',
+                                 'stereo_binding.py', 'stereo_collapse_binding.py', 'stereo_difference_binding.py', 'scene_return_binding.py',
                                  'video_viseme_binding.py', 'video_viseme_ranked.py', 'video_viseme_timing.py',
                                  'video_lip_agreement.py',
                                  'video_viseme_articulation.py', 'video_viseme_stereo.py', 'video_silent_mouth.py',
-                                 'picture_sequence.py', 'source_geometry.py', 'document_chat_markers.py'])
+                                 'picture_sequence.py', 'source_geometry.py', 'document_chat_markers.py', 'document_calendar.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
 
@@ -630,8 +630,9 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
         assert local == {('app.evidence.audio_silence_binding', item)
                          for item in ('FLANK', 'MIN_FLANK_DBFS', 'MINIMUM', 'continuous_spans')} | {
                              ('app.evidence', 'stereo_collapse_binding'),
+                             ('app.evidence', 'stereo_difference_binding'),
                          }
-    elif name == 'stereo_collapse_binding.py':
+    elif name in {'stereo_collapse_binding.py', 'stereo_difference_binding.py'}:
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.evidence.audio_silence_binding', 'continuous_spans')}
     elif name == 'document_scope.py':
@@ -662,6 +663,12 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
                          ('app.evidence.document_repeat', 'block_anchor'),
                          ('app.evidence.document_repeat', 'validate_block_anchor'),
                          ('app.evidence.document_scope', 'mapped_email_html')}
+    elif name == 'document_calendar.py':
+        assert imports <= sys.stdlib_module_names | {'app'}
+        assert local == {('app.core.canonical', 'FLOAT_DP'),
+                         ('app.evidence.document_percentage_consistency', 'value_location'),
+                         ('app.evidence.document_repeat', 'block_anchor'),
+                         ('app.evidence.document_repeat', 'validate_block_anchor')}
     else:
         assert imports <= sys.stdlib_module_names
 

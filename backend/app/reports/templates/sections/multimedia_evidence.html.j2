@@ -203,6 +203,23 @@
 {% if timing.unlisted %}<p class="caption">{{ timing.unlisted }} more unassessed windows are listed in the JSON.</p>{% endif %}
 <p class="caption">JSON pointer <span class="mono">/av/coverage/timing_windows</span>.</p>
 {% endif %}
+{% set calendar = evidence.get('calendar_consistency') %}
+{% if calendar and calendar.checked_dates %}
+<h3 id="document-calendar-consistency">Calendar date check</h3>
+<p>Checked {{ calendar.checked_dates }} explicit weekday and date {{ 'pair' if calendar.checked_dates == 1 else 'pairs' }}. Found {{ calendar.disagreements }} {{ 'disagreement' if calendar.disagreements == 1 else 'disagreements' }}.</p>
+{% if not evidence.withheld %}
+{% for row in calendar.locations %}
+<article class="multimedia-evidence-packet">
+<blockquote><mark>{{ row.text }}</mark></blockquote>
+<p>{% if row.reason == 'weekday_mismatch' %}The stated date fell on {{ row.expected_weekday }}. The text says {{ row.stated_weekday }}.{% else %}The stated day does not exist in that month and year on the Gregorian calendar.{% endif %}</p>
+<p class="caption">{% if row.anchor.kind == 'pdf' %}PDF page {{ row.anchor.page }}, text block {{ row.anchor.block }} · {% elif row.anchor.kind == 'docx' %}Word paragraph {{ row.anchor.paragraph_index + 1 }} · {% elif row.anchor.kind == 'email' %}Email body part {{ row.anchor.mime_part }} · {% endif %}Extracted characters [{{ row.start }}, {{ row.end }}). JSON pointer <span class="mono">/calendar_consistency/locations/{{ loop.index0 }}</span>.</p>
+{% if row.location.ranges is defined %}<p class="caption">Original text positions {% for start, end in row.location.ranges %}[{{ start }}, {{ end }}){% if not loop.last %}, {% endif %}{% endfor %}.</p>{% endif %}
+</article>
+{% endfor %}
+{% if calendar.disagreements > calendar.locations | length %}<p class="caption">Showing the first {{ calendar.locations | length }} disagreements.</p>{% endif %}
+{% endif %}
+<p class="caption">{{ calendar.limitation }}</p>
+{% endif %}
 {% set quantities = evidence.get('percentage_consistency') %}
 {% if quantities %}
 <h3 id="document-percentage-consistency">Repeated percentage statements</h3>

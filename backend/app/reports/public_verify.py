@@ -306,6 +306,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     if analysis['kind'] == 'document':
         from app.evidence import (
             document_bibliography,
+            document_calendar,
             document_check_coverage,
             document_email_contexts,
             document_passage_position,
@@ -325,6 +326,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                  "Writing check coverage differs from the public result commitment")
         validate_repeated_passages(evidence)
         document_percentage_consistency.validate(evidence)
+        document_calendar.validate(evidence)
         document_pdf_visibility.validate(evidence)
         history = evidence.get("coverage", {}).get(PDF_SAVED_WORDING)
         expected_history = result.get(PDF_SAVED_WORDING_COMMITMENT)

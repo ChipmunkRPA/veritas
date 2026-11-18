@@ -25,6 +25,7 @@ from app.core.config import settings
 from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
 from app.evidence import (
     document_bibliography,
+    document_calendar,
     document_character_review,
     document_chat_markers,
     document_check_coverage,
@@ -342,6 +343,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_check_coverage.verify(document, document["source"].get(document_check_coverage.COMMITMENT))
         document_repeat.validate(document)
         document_percentage_consistency.validate(document)
+        document_calendar.validate(document)
         document_pdf_visibility.validate(document)
         document_pdf_history_binding.validate(document, document["source"].get(document_pdf_history_binding.COMMITMENT))
         document_bibliography.validate(document)
@@ -612,6 +614,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     except (ValueError, KeyError, TypeError) as error:
         raise DocumentPacketIntegrityError("Local passage coverage differs from the frozen inputs") from error
     document["repeated_passages"] = document_repeat.build(document["source"], text, mapping)
+    if document["source"]["method"] in document_calendar.METHODS:
+        document[document_calendar.KEY] = document_calendar.build(document["source"], text, mapping)
     if (settings.environment == "dev" and settings.document_percentage_consistency
             and document_percentage_consistency.supported(document["source"]["method"], decoded["meta"].get("email"))):
         document[document_percentage_consistency.KEY] = document_percentage_consistency.build(
@@ -777,6 +781,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
                 raise ValueError("Chat-format marker evidence differs from the published result")
             document_chat_markers.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])
             document_repeat.verify_source(document, decoded["text"], decoded["source_map"])
+            document_calendar.verify_source(document, decoded["text"], decoded["source_map"])
             document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()),
                                                           meta=decoded["meta"])
             document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)

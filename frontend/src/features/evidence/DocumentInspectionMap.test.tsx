@@ -187,6 +187,23 @@ describe('ordinary document passage inspection', () => {
     expect(Array.from(section.querySelectorAll('mark'), item => item.textContent)).toEqual(['47', '37'])
   })
 
+  it('marks the exact date phrase and shows the supplied and expected weekday at its PDF location', () => {
+    const text = 'Tuesday, September 24, 2018'
+    show({ ...evidence([]), calendar_consistency: {
+      schema: 'document-calendar-consistency/1', affects_overall_confidence: false,
+      mapped_blocks: 3, checked_dates: 2, disagreements: 1, scope: 'Checks explicit weekday and date pairs.',
+      limitation: 'This observation carries zero weight in the AI assessment.',
+      locations: [{ start: 17, end: 17 + text.length, text, stated_weekday: 'Tuesday', expected_weekday: 'Monday',
+        iso_date: '2018-09-24', reason: 'weekday_mismatch', anchor: { kind: 'pdf', page: 3, block: 9 },
+        location: { boxes: [[18, 30, 230, 44]] } }],
+    } })
+    const section = screen.getByRole('region', { name: 'Calendar date check' })
+    expect(section.querySelector('mark')?.textContent).toBe(text)
+    expect(within(section).getByText('The stated date fell on Monday. The text says Tuesday.')).toBeTruthy()
+    expect(within(section).getByText(/^PDF page 3, text block 9 · Extracted characters/)).toBeTruthy()
+    expect(within(section).getByText(/zero weight in the AI assessment/)).toBeTruthy()
+  })
+
   it('marks all three measured sentences and leaves the navigation focus separate', () => {
     const item: DocumentEvidencePacket = { ...packet, inspection_scope: { basis: 'scored_context',
       spans: [{ start: 108, end: 122 }, { start: 123, end: 137 }, { start: 138, end: 142 }] } }

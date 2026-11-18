@@ -408,7 +408,7 @@ def test_opt_in_paragraph_review_preserves_detector_scores_and_binds_both_inputs
 
     classifier = Classifier()
     monkeypatch.setattr(FourClassTextDetector, "backend", lambda self, ctx: classifier)
-    context = SimpleNamespace(outputs=SimpleNamespace(document=decoded), deadline=Deadline(),
+    context = SimpleNamespace(profile="full", outputs=SimpleNamespace(document=decoded), deadline=Deadline(),
                               lease={FourClassTextDetector.MODEL_ID: SimpleNamespace(revision="test")})
     assert Settings.model_fields["text_isolated_paragraph_review"].default is False
     monkeypatch.setattr(settings, "text_isolated_paragraph_review", False)

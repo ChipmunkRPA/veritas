@@ -34,7 +34,9 @@ MOTION_REFLECTED_SCHEMA = "chipmunk.video-reflected-motion-sequence/1"
 MOTION_REFLECTED_HD_SCHEMA = "chipmunk.video-reflected-motion-sequence/2"
 MOTION_CROP_SCHEMA = "chipmunk.video-cropped-motion-sequence/1"
 MOTION_CROP_ALIGNED_SCHEMA = "chipmunk.video-cropped-motion-sequence/2"
-MOTION_CROP_SCHEMAS = frozenset({MOTION_CROP_SCHEMA, MOTION_CROP_ALIGNED_SCHEMA})
+MOTION_CROP_REVERSE_SCHEMA = "chipmunk.video-cropped-motion-sequence/3"
+MOTION_CROP_SCHEMAS = frozenset({MOTION_CROP_SCHEMA, MOTION_CROP_ALIGNED_SCHEMA, MOTION_CROP_REVERSE_SCHEMA})
+MOTION_CROP_FORWARD_PASSES = (MOTION_CROP_SCHEMA, MOTION_CROP_ALIGNED_SCHEMA)
 MOTION_REFLECTED_SCHEMAS = frozenset({MOTION_REFLECTED_SCHEMA, MOTION_REFLECTED_HD_SCHEMA})
 MOTION_SCHEMAS = frozenset({MOTION_SCHEMA, MOTION_EXTENDED_SCHEMA})
 MOTION_PACKET_ID = "VPR02"
@@ -52,6 +54,8 @@ MOTION_REFLECTED_CONTEXT = ("Ordinary editing can reuse footage in a mirrored or
                             "undetermined and carries zero weight in the AI estimate.")
 MOTION_CROP_CONTEXT = ("Ordinary editing can reuse the same footage with a tighter crop. The comparison carries zero weight "
                        "in the AI estimate.")
+MOTION_CROP_REVERSE_CONTEXT = ("Ordinary editing can produce this combination of cropping and reverse playback. "
+                               "The comparison leaves the order of creation undetermined and carries zero weight in the AI estimate.")
 MOTION_REVIEWS = (
     ("motion_sequence_review", MOTION_PACKET_ID, MOTION_SCHEMAS),
     (MOTION_REVERSE_KEY, MOTION_REVERSE_PACKET_ID, frozenset({MOTION_REVERSE_SCHEMA})),
@@ -65,6 +69,7 @@ MOTION_360P_PROFILES = {(640, 360): (25, 225)}
 MOTION_CROP_PROFILES = {(640, 360): (25, 225), (1280, 720): (25, 200)}
 CROP_WORK_WIDTH, CROP_WORK_HEIGHT = 192, 108
 CROP_PERCENTAGES = (70, 75, 80, 85, 90)
+REVERSE_CROP_PERCENTAGES = (80, 85, 90)
 CROP_ALIGNED_UNIT = 32
 MOTION_ENCODINGS = {("h264", "yuv420p"), ("vp9", "yuv420p")}
 HD_ENCODINGS = MOTION_ENCODINGS | {("hevc", "yuv420p")}
@@ -85,7 +90,7 @@ def motion_profile(dimensions, schema):
         return MOTION_PROFILES.get(dimensions)
     if schema == MOTION_EXTENDED_SCHEMA:
         return MOTION_EXTENDED_PROFILES.get(dimensions)
-    if schema in {*MOTION_RETIMED_SCHEMAS, MOTION_REFLECTED_SCHEMA}:
+    if schema in {*MOTION_RETIMED_SCHEMAS, MOTION_REFLECTED_SCHEMA, MOTION_CROP_REVERSE_SCHEMA}:
         return MOTION_360P_PROFILES.get(dimensions)
     if schema in MOTION_CROP_SCHEMAS:
         return MOTION_CROP_PROFILES.get(dimensions)
@@ -122,6 +127,9 @@ def motion_parameters(schema, rate):
     if schema == MOTION_CROP_ALIGNED_SCHEMA:
         parameters.update(maximum_picture_rms=3.25, crop_units_per_working_pixel=CROP_ALIGNED_UNIT,
                           landmark_frame_step=6, maximum_landmark_features=100, maximum_crop_proposals=16)
+    if schema == MOTION_CROP_REVERSE_SCHEMA:
+        parameters.update(maximum_picture_rms=3.25, crop_units_per_working_pixel=CROP_ALIGNED_UNIT,
+                          crop_percentages=list(REVERSE_CROP_PERCENTAGES), temporal_order="reverse")
     return parameters
 
 
@@ -137,7 +145,7 @@ def crop_region(pair, occurrence, width, height):
     return {"x": x, "y": y, "w": x2 - x, "h": y2 - y}
 
 
-def valid_crop_box(box, *, alignment=None):
+def valid_crop_box(box, *, alignment=None, percentages=CROP_PERCENTAGES):
     if not isinstance(box, list) or len(box) != 4 or any(type(value) is not int for value in box):
         return False
     left, top, right, bottom = box
@@ -149,7 +157,7 @@ def valid_crop_box(box, *, alignment=None):
                 and abs(CROP_WORK_HEIGHT * (right - left) - CROP_WORK_WIDTH * (bottom - top))
                 <= CROP_WORK_HEIGHT + CROP_WORK_WIDTH)
     if alignment == "centered":
-        for percent in CROP_PERCENTAGES:
+        for percent in percentages:
             w, h = CROP_WORK_WIDTH * CROP_ALIGNED_UNIT, CROP_WORK_HEIGHT * CROP_ALIGNED_UNIT
             outside = (100 - percent) / 200
             if box == [round(w * outside), round(h * outside), round(w * (1 - outside)), round(h * (1 - outside))]:
@@ -300,6 +308,10 @@ def scan(observations, tb: Fraction, *, reverse=False):
 
 def observation(pair):
     if framing := pair.get("framing"):
+        if pair.get("order") == "reverse":
+            return (f"After cropping the {framing['wider_range']} range to the displayed area, "
+                    f"{pair['frame_count']} pictures match the other range in reverse order. "
+                    f"{len(pair['supporting_edge_offsets'])} matching picture changes support the comparison.")
         return (f"Cropping the {framing['wider_range']} range to the displayed area aligns {pair['frame_count']} pictures "
                 f"with the other range. {len(pair['supporting_edge_offsets'])} matching picture changes support the comparison.")
     if pair.get("spatial_transform") == HORIZONTAL_REFLECTION:
@@ -327,7 +339,7 @@ def observation(pair):
 
 def interpretation(pair):
     if "framing" in pair:
-        return MOTION_CROP_CONTEXT
+        return MOTION_CROP_REVERSE_CONTEXT if pair.get("order") == "reverse" else MOTION_CROP_CONTEXT
     if pair.get("spatial_transform") == HORIZONTAL_REFLECTION:
         return MOTION_REFLECTED_CONTEXT
     if "frame_steps" in pair:
@@ -439,7 +451,7 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
                  "Repeated sequence evidence disagrees with its status")
         return
     pair = record["pair"]
-    reverse = schema in {REVERSE_SCHEMA, MOTION_REVERSE_SCHEMA}
+    reverse = schema in {REVERSE_SCHEMA, MOTION_REVERSE_SCHEMA, MOTION_CROP_REVERSE_SCHEMA}
     retimed = schema in MOTION_RETIMED_SCHEMAS
     reflected = schema in MOTION_REFLECTED_SCHEMAS
     cropped = schema in MOTION_CROP_SCHEMAS
@@ -455,11 +467,13 @@ def _validate_pair(record, source, scanned, packets, *, schemas, motion_rate=Non
     _require(("framing" in pair) == cropped, "Repeated sequence has unexpected crop geometry")
     if cropped:
         framing = pair["framing"]
-        aligned = schema == MOTION_CROP_ALIGNED_SCHEMA
+        aligned = schema != MOTION_CROP_SCHEMA
         fields = {"wider_range", "crop_box"} | ({"alignment"} if aligned else set())
+        alignments = {"centered"} if reverse else {"centered", "landmarks"}
+        percentages = REVERSE_CROP_PERCENTAGES if reverse else CROP_PERCENTAGES
         _require(set(framing) == fields and framing["wider_range"] in {"first", "second"}
-                 and (not aligned or framing["alignment"] in {"centered", "landmarks"})
-                 and valid_crop_box(framing["crop_box"], alignment=framing.get("alignment")),
+                 and (not aligned or framing["alignment"] in alignments)
+                 and valid_crop_box(framing["crop_box"], alignment=framing.get("alignment"), percentages=percentages),
                  "Repeated sequence has an unsupported crop")
     strides = pair.get("frame_steps", {"first": 1, "second": 1})
     if retimed:

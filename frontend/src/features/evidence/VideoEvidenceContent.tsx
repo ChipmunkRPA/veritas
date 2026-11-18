@@ -9,6 +9,11 @@ function occurrenceLabel(sequence: NonNullable<VideoEvidencePacket['picture_sequ
     const other = side === 'first' ? 'second' : 'first'
     return sequence.frame_steps[side] < sequence.frame_steps[other] ? 'Faster occurrence' : 'Slower occurrence'
   }
+  if (sequence.framing && sequence.order === 'reverse') {
+    const position = side === 'first' ? 'First range' : 'Second range'
+    const framing = sequence.framing.wider_range === side ? 'wider framing' : 'tighter framing'
+    return `${position} · ${framing}`
+  }
   if (side === 'first') return 'First occurrence'
   return sequence.order === 'reverse' ? 'Reversed occurrence' : 'Second occurrence'
 }

@@ -581,11 +581,14 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         limit = profile[1]
         exact_pair = exact_review["pair"] if exact_review is not None else None
         values = crop_frames if record["schema"] in picture_sequence.MOTION_CROP_SCHEMAS else motion_descriptors
-        if record["schema"] == picture_sequence.MOTION_CROP_ALIGNED_SCHEMA:
-            fixed = picture_motion.scan(hold_observations[:limit], values[:limit], table.tb, motion_encoding,
-                                        exact_pair, source_profile=profile, schema=picture_sequence.MOTION_CROP_SCHEMA)
-            if fixed["status"] != "no_match":
-                raise ValueError("The aligned copy review displaced a fixed crop result")
+        if record["schema"] in {picture_sequence.MOTION_CROP_ALIGNED_SCHEMA, picture_sequence.MOTION_CROP_REVERSE_SCHEMA}:
+            for earlier in picture_sequence.MOTION_CROP_FORWARD_PASSES:
+                if earlier == record["schema"]:
+                    break
+                prior = picture_motion.scan(hold_observations[:limit], values[:limit], table.tb, motion_encoding,
+                                            exact_pair, source_profile=profile, schema=earlier)
+                if prior["status"] != "no_match":
+                    raise ValueError("The crop review displaced an earlier crop result")
         if record["schema"] in picture_sequence.MOTION_RETIMED_SCHEMAS:
             for earlier in picture_sequence.MOTION_RETIMED_PASSES:
                 if earlier == record["schema"]:

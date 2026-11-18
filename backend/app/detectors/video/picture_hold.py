@@ -21,7 +21,7 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
             remaining_s: float | None = None, sequence_review: bool = False,
             motion_encoding: tuple[str | None, str | None] | None = None, mouth_review: bool = False,
             retimed_review: bool = False, reflected_review: bool = False, cropped_review: bool = False,
-            fractional_retimed_review: bool = False) -> dict:
+            fractional_retimed_review: bool = False, reversed_cropped_review: bool = False) -> dict:
     """Try an extended native scan under the same deadline, retaining a completed opening result."""
     opening_limit = binding.frame_limit(len(table), table.width, table.height)
     tb = table.tb
@@ -173,6 +173,13 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                 with suppress(OpenCVError):
                     crop = picture_motion.scan(observed[:crop_limit], crop_frames, tb, motion_encoding, None,
                                                source_profile=crop_profile, schema=picture_sequence.MOTION_CROP_ALIGNED_SCHEMA)
+            if (reversed_cropped_review and crop["status"] == "no_match"
+                    and (remaining_s is None or remaining_s - (time.monotonic() - started) > 1.0)):
+                reverse_schema = picture_sequence.MOTION_CROP_REVERSE_SCHEMA
+                reverse_profile = picture_motion.profile(table, motion_encoding, schema=reverse_schema)
+                if reverse_profile == crop_profile:
+                    crop = picture_motion.scan(observed[:crop_limit], crop_frames, tb, motion_encoding, None,
+                                               source_profile=reverse_profile, schema=reverse_schema)
             cover[picture_sequence.MOTION_CROP_KEY] = crop
     return result
 

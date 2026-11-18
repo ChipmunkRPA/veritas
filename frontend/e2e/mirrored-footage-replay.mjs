@@ -14,7 +14,7 @@ try {
   page.on('pageerror', error => errors.push(error.message))
   const cases = []
   for (const row of input.cases) {
-    const cropped = row.mode === 'crop'
+    const cropped = row.mode === 'crop' || row.mode === 'crop_reverse'
     const retimed = row.mode === 'retimed'
     const labels = retimed ? {
       heading: 'Footage repeated at two playback speeds', packet: 'VPR05',
@@ -23,7 +23,8 @@ try {
     } : cropped ? {
       heading: 'Cropped footage check', packet: 'VPR07',
       empty: `No qualifying cropped repeat was found in the first ${row.checked_frames} frames.`,
-      link: 'Inspect both time ranges and matching crops', title: 'Similar footage shown with a tighter crop',
+      link: 'Inspect both time ranges and matching crops',
+      title: row.mode === 'crop_reverse' ? 'Cropped footage in reverse order' : 'Similar footage shown with a tighter crop',
     } : {
       heading: 'Mirrored footage check', packet: 'VPR06',
       empty: `No mirrored repeat was found in the first ${row.checked_frames} frames.`,

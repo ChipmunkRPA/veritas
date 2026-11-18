@@ -84,7 +84,11 @@ are not public screening promises or calibrated population probabilities.
 
 - The centered crop and reverse playback comparison found 15 of 24 staged
   edits with zero added alerts among 56 controls. Five source groups had
-  useful matches, one below the frozen six-group release criterion.
+  useful matches, one below the frozen six-group release criterion. A
+  separate confirmation using the same method and criteria found 18 of 24
+  edits across six groups and added zero alerts among 56 controls. The
+  optional local check now shows both ranges and their matching crops on
+  supported 640 × 360 H.264 MP4 uploads.
   [Cropped reverse video](video-cropped-reverse-2026-11-18.md)
 
 - An independent implementation of an alignment comparison found zero

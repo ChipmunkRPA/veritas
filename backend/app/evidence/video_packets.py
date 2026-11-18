@@ -587,8 +587,9 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
         selection = "longest_pair_of_similar_reflected_moving_sequences"
     if review["schema"] in picture_sequence.MOTION_CROP_SCHEMAS:
         packet_id = picture_sequence.MOTION_CROP_PACKET_ID
-        title = "Similar footage shown with a tighter crop"
-        selection = "longest_pair_of_similar_cropped_moving_sequences"
+        title = "Cropped footage in reverse order" if reverse else "Similar footage shown with a tighter crop"
+        selection = ("longest_pair_of_center_cropped_reversed_sequences" if reverse
+                     else "longest_pair_of_similar_cropped_moving_sequences")
     motion_limit = review["frames_scanned"] if motion else None
     frames, images, labels, assets = [], [], [], {}
     for number, (occurrence, role, index, pts, digest) in enumerate(picture_sequence.endpoints(pair), 1):
@@ -631,6 +632,9 @@ def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis
                         for side, label in (("first", "First"), ("second", "Second"))]
     elif review["schema"] in picture_sequence.MOTION_CROP_SCHEMAS:
         limitations = (f"The check compares the first {motion_limit} native frames at the same playback speed. "
+                       "It checks three fixed centered crop sizes in reverse order and can miss other framing changes."
+                       if reverse else
+                       f"The check compares the first {motion_limit} native frames at the same playback speed. "
                        "It compares crops that stay fixed through both ranges and can miss other framing changes.")
         measurements = [{"label": "Source range duration", "value": pair["span_s"], "unit": "seconds"}]
     elif review["schema"] == picture_sequence.MOTION_REFLECTED_HD_SCHEMA:

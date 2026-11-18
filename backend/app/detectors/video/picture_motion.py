@@ -162,7 +162,7 @@ def scan(observations, values, tb, encoding, exact_pair, *, source_profile, sche
     cropped = schema in binding.MOTION_CROP_SCHEMAS
     if exact_pair is not None and not (reflected or cropped):
         return result | {"reason": "exact_sequence"}
-    reverse = schema == binding.MOTION_REVERSE_SCHEMA
+    reverse = schema in {binding.MOTION_REVERSE_SCHEMA, binding.MOTION_CROP_REVERSE_SCHEMA}
     retimed = schema in binding.MOTION_RETIMED_SCHEMAS
     if cropped:
         match, alignment = _crop_match(values, frame_rate, schema)
@@ -215,6 +215,10 @@ def _crop_match(values, frame_rate, schema):
         from app.detectors.video.picture_crop import find
 
         return find(values, frame_rate), None
+    if schema == binding.MOTION_CROP_REVERSE_SCHEMA:
+        from app.detectors.video.picture_crop_reverse import find
+
+        return find(values)
     from app.detectors.video.picture_crop_aligned import find as aligned
 
     matches = [(match, method) for method, match in aligned(values).items() if match]

@@ -80,11 +80,52 @@ The centered method added zero alerts on 40 ordinary or in-place edit
 controls and 16 reverse-only or crop-only controls. The 15 findings
 came from five source recordings. The result cleared the frozen minimum
 of 14 useful matches, but missed the separate requirement of six
-distinct source recordings with a match. It remains evaluation-only.
+distinct source recordings with a match. This panel alone did not
+qualify the local check.
 An independent decode matched all 60 source endpoints. The median
 added comparison time was 0.049 seconds after decoding. These staged
 results show how the test handled a fixed framing change. They do not
 estimate detection rates for undisclosed real-world edits.
+
+## Confirmation on another eight camera recordings
+
+The same centered method, controls, and gates ran on a third disjoint
+roster. The new captures show a passing train, farm equipment, a
+speedboat, two separate football games, a bee, park aerial footage,
+and waves. Existing comparisons located 0 of 24 compound edits. The
+centered method found both ranges and the right crop in 18 of 24 cases,
+with 10 exact locations. It found six of eight edits at each preset
+size and six distinct capture groups. None of the 40 ordinary or
+in-place edit controls or the 16 simpler repeat controls acquired a
+new alert. All 72 endpoint picture hashes agreed with a separate
+decode. The median comparison took 0.042 seconds after decoding.
+[Confirmation receipt and source credits](evaluation-panels/video-cropped-reverse-confirmation-2026-11-18.json.gz)
+
+This confirmation met the same frozen gate. The optional local
+`VERITAS_VIDEO_CROPPED_SEQUENCE_REVIEW` setting now adds the validated
+80%, 85%, and 90% centered reverse comparisons after the existing
+forward-crop comparison finds no match. It uses the opening 225
+pictures of the qualified 640 × 360 MP4 profile. Off-center compound
+edits and other formats remain outside this check. The browser
+identifies both ranges by their position and which one has wider
+framing. The evidence displays four exact source frames, two exact
+crops from the wider range, and the matching time ranges. This
+observation carries zero weight in the AI estimate.
+
+## Local app verification
+
+Six analyses ran after simulated USD 9.99 checkout. No analysis
+queued before payment. One checked clip placed the wider range
+first, with **1.400–2.160 s and 5.960–6.720 s**. The other placed it
+second, with **0.960–1.960 s and 5.640–6.640 s**. The Standard PDF,
+JSON export, and browser displayed the same four frames and two
+crops for both cases. The browser sought to the recorded positions
+in the original videos. Neither in-place control produced a
+compound finding. The signed packages verified against their
+original files, and altered crop coordinates or a removed
+reverse-order field failed source-evidence validation.
+The paired runs produced the same AI estimate.
+[Local app replay receipt](evaluation-panels/video-cropped-reverse-app-2026-11-18.json)
 
 ## Replay
 
@@ -96,6 +137,8 @@ PYTHONPATH=backend python3 -m scripts.video_cropped_reverse_panel verify \
   docs/evaluation-panels/video-cropped-reverse-2026-11-18.json.gz
 PYTHONPATH=backend python3 -m scripts.video_cropped_reverse_panel verify \
   docs/evaluation-panels/video-cropped-reverse-centered-2026-11-18.json.gz
+PYTHONPATH=backend python3 -m scripts.video_cropped_reverse_panel verify \
+  docs/evaluation-panels/video-cropped-reverse-confirmation-2026-11-18.json.gz
 ```
 
 To rerender, recover the publisher downloads from the receipt and store

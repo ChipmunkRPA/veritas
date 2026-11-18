@@ -81,6 +81,7 @@ def _method_paths():
     return [backend / name for name in (
         "scripts/video_cropped_reverse_panel.py", "scripts/video_cropped_reverse_compare.py",
         "app/detectors/video/picture_crop.py", "app/detectors/video/picture_crop_aligned.py",
+        "app/detectors/video/picture_crop_reverse.py",
     )]
 
 

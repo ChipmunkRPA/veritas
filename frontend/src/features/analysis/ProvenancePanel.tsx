@@ -98,7 +98,7 @@ export function C2paChain({ state, checked, credentials, chain }: { state: C2paS
   const ai = declaresAi(sourceTypes)
   const fileBound = checked && state === 'trusted' && credentials?.get('hash binding') === 'matches the current file bytes'
   const signer = credentials?.get('signer')
-  const documentary = ai && fileBound && (credentials?.get('recorded validation failures') ?? '0') === '0'
+  const documentary = ai && fileBound && credentials?.get('recorded validation failures') === '0'
   const selfDeclared = ai && checked && state === 'valid'
   const ingredients = chain.filter((n) => n.depth > 0)
   const { root, onKeyDown } = useTreeKeys(() => undefined)

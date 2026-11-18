@@ -86,14 +86,16 @@ def _verified_document_binding(data: bytes, bundle: verifier.TrustBundle) -> boo
         return False
 
 
-def read(data: bytes) -> tuple[verifier.C2PAReport, bool]:
+def read(data: bytes, *, use_timestamp_authorities: bool = True) -> tuple[verifier.C2PAReport, bool]:
     """Validate a PDF in a time-bounded process without opening its attachments in the worker."""
     from dataclasses import fields
 
     try:
+        command = [sys.executable, "-B", "-m", "app.provenance.pdf_credentials"]
+        if not use_timestamp_authorities:
+            command.append("--without-timestamp-authorities")
         reply = subprocess.run(  # noqa: S603 - fixed interpreter and module, bytes passed on stdin
-            [sys.executable, "-B", "-m", "app.provenance.pdf_credentials"], input=data, capture_output=True,
-            check=True, timeout=TIMEOUT,
+            command, input=data, capture_output=True, check=True, timeout=TIMEOUT,
         )
         packet = json.loads(reply.stdout)
         payload = packet["report"]
@@ -113,6 +115,8 @@ def _main():
 
     data = sys.stdin.buffer.read()
     official = verifier.load_bundle(verifier.OFFICIAL)
+    if sys.argv[1:] == ["--without-timestamp-authorities"]:
+        official = official.without_timestamp_authorities()
     report = verifier.read(data, MIME, bundle=official, thumbnails=False)
     bound = report.state == "trusted" and report.covers_bytes and _verified_document_binding(data, official)
     print(json.dumps({"report": asdict(report), "verified_document_binding": bound}, ensure_ascii=True))

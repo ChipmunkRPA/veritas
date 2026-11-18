@@ -27,6 +27,7 @@ describe('automated customer conclusion', () => {
       ['digital source types', 'trainedAlgorithmicMedia (ai)'], ['actions', 'c2pa.opened, c2pa.resized'],
       ['hash binding', 'matches the current file bytes'],
       ['signature timestamp', 'Verified at 2026-09-12T21:45:46+00:00'],
+      ['recorded validation failures', '0'],
     ])
     const { rerender } = render(<C2paChain state="trusted" checked credentials={credentials} chain={[]} />)
     expect(screen.getByText('Verified signer: Example Media Signing Services')).toBeTruthy()
@@ -36,6 +37,9 @@ describe('automated customer conclusion', () => {
     rerender(<C2paChain state="trusted" checked credentials={credentials} chain={[]} />)
     expect(screen.queryByText('Documentary')).toBeNull()
     expect(screen.getByText('Inspection only')).toBeTruthy()
+    credentials.delete('recorded validation failures')
+    rerender(<C2paChain state="trusted" checked credentials={credentials} chain={[]} />)
+    expect(screen.queryByText('Documentary')).toBeNull()
     credentials.set('signature timestamp', 'Present, but its trust or binding could not be verified')
     rerender(<C2paChain state="invalid" checked credentials={credentials} chain={[]} />)
     expect(screen.queryByText(/Verified signer/)).toBeNull()

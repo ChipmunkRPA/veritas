@@ -216,16 +216,21 @@ def c2pa_result(ctx: RunContext, data: bytes | memoryview, *, mime_override: str
         override = ("decisive_ai" if trusted and report.ai_declared and report.covers_bytes
                     and not report.failure_codes else "self_declared_ai")
         aggregate = UnitScore("global", 1.0, "score", quality={"trusted": float(trusted), "valid": 1.0})
-        declared = ", ".join(s.term for s in report.source_types if s.tier == "ai") or ("generator named: " + ", ".join(names))
+        declared_terms = ", ".join(s.term for s in report.source_types if s.tier == "ai")
+        declaration = (f"The signed record declares AI involvement ({declared_terms})." if report.ai_declared
+                       else f"The signed record names a generator ({', '.join(names)}).")
         reference = "Camera and editor manifests carry capture or edit source types, never a generative-AI source type"
         if override == "decisive_ai":
             qualifier = " The manifest validates against the C2PA Trust List, so this is documentary evidence."
+        elif trusted and report.ai_declared:
+            qualifier = (" Validation failures keep this declaration for inspection only." if report.failure_codes
+                         else " A matching file hash was not established for this declaration.")
         elif trusted:
             qualifier = (" The manifest validates against the C2PA Trust List but declares no generative-AI source type, so the "
                          "named generator counts as self-declared.")
         else:
             qualifier = " The signer is not on the C2PA Trust List, so the declaration counts as self-declared."
-        reasoning = f"The file's C2PA manifest declares generative AI ({declared}).{qualifier}"
+        reasoning = declaration + qualifier
     elif trusted and report.capture_declared and report.covers_bytes:
         override = "trusted_capture"
         aggregate = UnitScore("global", 1.0, "score", quality={"trusted": 1.0, "valid": 1.0})

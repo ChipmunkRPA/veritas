@@ -19,7 +19,7 @@ import hashlib
 import io
 import json
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Any
 
@@ -69,6 +69,9 @@ class TrustBundle:
         revision = self.revision[:12] if len(self.revision) == 40 else self.revision
         return f"{self.label} (revision {revision}{issued}; retrieved {self.retrieved}; anchors sha256 {self.anchors_sha256[:12]})"
 
+    def without_timestamp_authorities(self) -> TrustBundle:
+        return replace(self, tsa_anchors_pem=None, tsa_anchors_sha256=None)
+
 
 @dataclass(frozen=True)
 class SourceType:
@@ -116,6 +119,7 @@ class C2PAReport:
     chain: list[ChainNode] = field(default_factory=list)
     thumbnails: list[tuple[str, str, bytes]] = field(default_factory=list)  # (title, media type, bytes)
     timestamp_status: str = "not_recorded"
+    active_binding_status: str | None = None
 
     @property
     def timestamp_description(self) -> str:
@@ -145,12 +149,12 @@ class C2PAReport:
         An ingredient's matching hash does not bind the current uploaded asset.
         Only explicit active-manifest mismatch codes establish a mismatch.
         """
-        active = [c for c in self.codes if c.scope == "active manifest"]
-        if any(c.level == "failure" and c.code in HARD_BINDING_MISMATCH for c in active):
-            return "mismatch"
-        if any(c.level == "success" and c.code in HARD_BINDING_MATCH for c in active):
-            return "matched"
-        return "not_verified"
+        if self.active_binding_status is not None:
+            return self.active_binding_status
+        return _binding_status(
+            (c.code for c in self.codes if c.scope == "active manifest" and c.level == "failure"),
+            (c.code for c in self.codes if c.scope == "active manifest" and c.level == "success"),
+        )
 
     @property
     def binding_description(self) -> str:
@@ -477,11 +481,31 @@ def _codes(store: dict[str, Any]) -> list[ValidationCode]:
     return rows
 
 
+def _active_validation(store: dict[str, Any]) -> dict:
+    validation = store.get("validation_results")
+    if isinstance(validation, dict):
+        return validation.get("activeManifest") or {}
+    return {"failure": store.get("validation_status")}
+
+
+def _binding_status(failures, successes) -> str:
+    if not HARD_BINDING_MISMATCH.isdisjoint(failures):
+        return "mismatch"
+    if not HARD_BINDING_MATCH.isdisjoint(successes):
+        return "matched"
+    return "not_verified"
+
+
+def _native_binding_status(store: dict[str, Any]) -> str:
+    active = _active_validation(store)
+    return _binding_status((row.get("code") for row in active.get("failure") or []),
+                           (row.get("code") for row in active.get("success") or []))
+
+
 def _timestamp_status(store: dict[str, Any], reported_time: str | None) -> str:
     active = store.get("active_manifest")
     signature = f"self#jumbf=/c2pa/{active}/c2pa.signature"
-    validation = store.get("validation_results")
-    results = (validation.get("activeManifest") or {}) if isinstance(validation, dict) else {}
+    results = _active_validation(store)
 
     # Use only timestamp diagnostics tied to the active claim signature. The SDK can
     # extract a date for display even if the timestamp's certificate is untrusted.
@@ -592,7 +616,8 @@ def read(data: bytes | memoryview, mime: str, *, bundle: TrustBundle | None = No
     report = C2PAReport(state=_state(store, codes), claim_generator=_generator(manifest), title=str(manifest.get("title") or ""),
                         format=str(manifest.get("format") or mime), signer=signer, actions=_actions(manifest),
                         source_types=[source_type(u) for u in _source_type_uris(manifest)], codes=codes, chain=_chain(store),
-                        thumbnails=thumbs if thumbnails else [], timestamp_status=_timestamp_status(store, signer.get("time")))
+                        thumbnails=thumbs if thumbnails else [], timestamp_status=_timestamp_status(store, signer.get("time")),
+                        active_binding_status=_native_binding_status(store))
     if report.state == "valid" and legacy is not None:
         with contextlib.suppress(Exception):
             legacy_store, _ = _read_store(payload, mime, legacy)

@@ -2,10 +2,10 @@
 
 Chipmunk Verify now uses the bundled C2PA Timestamp Authority List for
 signature timestamps. Claim-signing certificates use the separate C2PA
-Trust List. The two checks are visible in the evidence. A displayed
-verified timestamp attests to the existence of the claim signature by
-that time. File binding and the signed AI declaration are evaluated
-separately. [C2PA trust lists](https://opensource.contentauthenticity.org/docs/conformance/trust-lists/) ·
+Trust List. A displayed verified timestamp records a time attested by a
+trusted authority. Depending on the credential version, the token covers
+the claim or the signature. File binding and the signed AI declaration
+are evaluated separately. [C2PA trust lists](https://opensource.contentauthenticity.org/docs/conformance/trust-lists/) ·
 [Signature timestamp validation](https://spec.c2pa.org/specifications/specifications/2.5/specs/ContentCredentials.html)
 
 The verifier stays offline. It may use certificate status evidence
@@ -53,8 +53,9 @@ payment and used zero statistical model leases.
 The [receipt](evaluation-panels/public-content-timestamps-2026-11-18.json)
 records ten download URLs, original byte hashes, the two signing
 trust bundles, and the timestamp authority list. It also records the
-decision to run further analysis or skip it. Download a file by its
-sample ID and compare it to the receipt from the project root.
+decision to run further analysis or skip it. The replay recomputes
+both timestamp readings. Download a file by its sample ID and compare
+it to the receipt from the project root.
 
 ```sh
 scratch=$(mktemp -d)

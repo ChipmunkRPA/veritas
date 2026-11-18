@@ -135,13 +135,16 @@ def test_timestamp_status_requires_trust_and_binding_on_the_active_signature():
 def test_exhibit_limit_preserves_ingredient_failures_before_successes():
     failure = {'code': 'assertion.dataHash.mismatch'}
     store = {'validation_state': 'Trusted', 'validation_results': {
-        'activeManifest': {'success': [{'code': 'assertion.hashedURI.match'}] * verifier.MAX_CODES},
+        'activeManifest': {'success': [{'code': 'assertion.hashedURI.match'}] * verifier.MAX_CODES
+                           + [{'code': 'assertion.dataHash.match'}]},
         'ingredientDeltas': [{'ingredientAssertionURI': 'ref/ingredient', 'validationDeltas': {'failure': [failure]}}],
     }}
     codes = verifier._codes(store)
     assert len(codes) == verifier.MAX_CODES
     assert codes[0].code == failure['code'] and codes[0].scope == 'ingredient ingredient'
     assert verifier.C2PAReport('trusted', codes=codes).failure_codes == [failure['code']]
+    assert {'assertion.dataHash.match'}.isdisjoint(c.code for c in codes)
+    assert verifier._native_binding_status(store) == 'matched'
 
 
 @pytest.fixture(scope='module')

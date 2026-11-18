@@ -30,7 +30,7 @@ def _discard_exhibit(*args, **kwargs):
 
 
 def inspect(path: Path, expected_sha256: str | None = None, *, office_extension: str | None = None,
-            include_timestamp: bool = False) -> dict:
+            include_timestamp: bool = False, compare_without_timestamp_authorities: bool = False) -> dict:
     extension = office_extension or path.suffix.lower()
     limit = settings.max_document_bytes if extension in DOCUMENT_ARCHIVES else MAX_FIXTURE_BYTES
     with path.open("rb") as stream:
@@ -90,6 +90,15 @@ def inspect(path: Path, expected_sha256: str | None = None, *, office_extension:
             "status": report.timestamp_status,
             "verified_time": report.signer.get("time") if report.timestamp_status == "verified" else None,
         }
+    if compare_without_timestamp_authorities:
+        if mime == pdf_credentials.MIME:
+            baseline, _ = pdf_credentials.read(data, use_timestamp_authorities=False)
+        else:
+            bundle = c2pa.load_bundle(c2pa.OFFICIAL).without_timestamp_authorities()
+            baseline = c2pa.read(data, mime, bundle=bundle, thumbnails=False)
+        if baseline.state == "unreadable":
+            raise ValueError("The comparison without timestamp authorities could not verify the file")
+        result["timestamp_status_without_tsa_list"] = baseline.timestamp_status
     return result
 
 
@@ -125,7 +134,10 @@ def verify(receipt: Path, directory: Path, sample: str | None) -> None:
         expected = row["verification"]
         actual = inspect(directory / f"{name}.asset", expected["sha256"],
                          office_extension=DOCUMENT_ARCHIVE_EXTENSIONS.get(expected["media_type"]),
-                         include_timestamp=include_timestamp)
+                         include_timestamp=include_timestamp,
+                         compare_without_timestamp_authorities=include_timestamp)
+        if include_timestamp and actual.pop("timestamp_status_without_tsa_list") != row["timestamp_status_without_tsa_list"]:
+            raise ValueError(f"{name}: the replay without timestamp authorities differs from the receipt")
         if actual != expected:
             raise ValueError(f"{name}: live validation differs from the historical receipt")
         print(name, actual["state"], actual["binding"], actual["pipeline_action"])

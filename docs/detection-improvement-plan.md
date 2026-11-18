@@ -72,6 +72,11 @@ are not public screening promises or calibrated population probabilities.
   reproduced exact single-word positions on 25 saved publisher pages.
   [Earlier HTML drafts](writing-html-draft-2026-11-18.md)
 
+- A frozen comparison for held eye regions located 3 of 30 staged edits
+  in single-face video and raised two alerts on 60 controls. It remains
+  experimental. Exact before, during and after frames and crops replayed
+  for every recorded finding. [Eye-region evaluation](video-eye-hold-2026-11-18.md)
+
 - Word files without a default paragraph style now finish analysis.
   Findings identify exact character ranges in OpenDocument paragraphs and
   Rich Text blocks. All eight formats and a separate scanned PDF completed the

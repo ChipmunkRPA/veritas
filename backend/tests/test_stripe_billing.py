@@ -99,15 +99,15 @@ def billing(tmp_path, monkeypatch):
 
 
 def upload(f, *, request_key=None, headers=None, content=None, filename="private-name.png", acknowledgement=True,
-           notice_version=None, notice_sha256=None):
-    data = {"kind": "image", "profile": "full"}
+           notice_version=None, notice_sha256=None, kind="image", mime="image/png"):
+    data = {"kind": kind, "profile": "full"}
     if acknowledgement is not None:
         data.update(risk_accepted=str(acknowledgement).lower(), risk_notice_version=notice_version or purchase_notice.VERSION,
                     risk_notice_sha256=notice_sha256 or purchase_notice.SHA256)
     return f.client.post("/api/v2/billing/checkout", headers={**(headers or f.headers),
                          "Idempotency-Key": request_key or str(uuid.uuid4())},
                          data=data,
-                         files={"file": (filename, content if content is not None else f.image, "image/png")})
+                         files={"file": (filename, content if content is not None else f.image, mime)})
 
 
 @pytest.mark.parametrize("options", [
@@ -529,6 +529,15 @@ def test_truncated_image_never_reaches_payment_provider(billing):
     response = upload(billing, filename="truncated.png", content=billing.image[:40])
     assert response.status_code == 422
     assert "decoded" in response.json()["detail"]
+    assert not billing.created and counts(billing) == (0, 0, 0)
+    with billing.sessions() as db:
+        assert db.query(BillingOrderRow).count() == 0
+
+
+def test_markup_without_readable_writing_never_reaches_payment_provider(billing):
+    response = upload(billing, filename="empty.html", content=b"<body><!-- no content --></body>", kind="document", mime="text/html")
+    assert response.status_code == 422
+    assert "no readable text" in response.json()["detail"]
     assert not billing.created and counts(billing) == (0, 0, 0)
     with billing.sessions() as db:
         assert db.query(BillingOrderRow).count() == 0

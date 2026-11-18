@@ -18,6 +18,12 @@ For email, attachments can be submitted separately. Word and ODT use body
 text for writing checks. Document packages are read locally without opening
 Office, fetching linked content, or executing macros.
 
+Export Google Docs, Apple Pages, and older Word (`.doc`) files as DOCX or
+PDF before uploading. Keep the original file if its native provenance matters.
+Checkout checks the extracted writing for HTML, Markdown, and HTML email
+bodies so files that yield no readable writing are rejected before payment.
+The local batch tool also accepts native DOCX and ODT packages.
+
 The local development app can check ODT for earlier published wording when
 automatic review and the GovReport archive are enabled. When a dated U.S. GAO
 highlight qualifies, the report pairs each difference with the earlier
@@ -34,9 +40,10 @@ all six.
 The local app replay used the same 224-word sample in all seven formats.
 Three writing checks finished per format and every result remained
 inconclusive. All PDF and JSON exports opened successfully. The browser
-accepted each format and displayed its result. The ODT, Markdown and HTML
-evidence packages also verified against their original files. All seven jobs
-followed simulated payment.
+accepted each format and displayed its result. A later local replay verified
+the evidence packages against the originals in all seven formats. The Word
+replay checked exact body paragraph locations, and the PDF replay checked
+the mapped page images. All seven jobs followed simulated payment.
 
 ## Earlier OpenDocument drafts
 

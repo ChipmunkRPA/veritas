@@ -101,17 +101,18 @@ def max_item_bytes() -> int:
 
 def detect_kind(head: bytes, filename: str) -> str | None:
     """image, audio, video or document from the first bytes (and the extension for text documents), else None."""
-    mime, ext = files.sniff(head, filename)
+    mime, _ = files.sniff(head, filename)
     if mime in files.IMAGE_MIMES:
         return "image"
     if files.sniff_audio(head, filename) is not None:
         return "audio"
     if mime in files.VIDEO_MIMES:
         return "video"
-    if ext in files.DOC_EXTS and (mime is None or mime in ("application/pdf", "application/zip")
-                                  or mime.startswith("application/vnd.openxmlformats")):
-        return "document"
-    return None
+    try:
+        files.validate_kind("document", head, filename)
+    except ValueError:
+        return None
+    return "document"
 
 
 def _skipped(name: str) -> bool:

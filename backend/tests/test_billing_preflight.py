@@ -120,6 +120,18 @@ def test_text_checks_encoding_and_readability_without_running_models():
             verify(data, "article.txt", "document")
 
 
+@pytest.mark.parametrize(("name", "readable", "empty"), [
+    ("article.html", b"<main><p>A readable article.</p></main>", b"<!-- comment --><style>section {color: red}</style>"),
+    ("article.markdown", b"# A readable heading", b"```python\ncode_without_prose()\n```"),
+    ("article.eml", b"Content-Type: text/html\r\n\r\n<p>A readable body.</p>",
+     b"Content-Type: text/html\r\n\r\n<script>hidden content</script><p>&nbsp;</p>"),
+])
+def test_checkout_checks_extracted_writing_instead_of_markup(name, readable, empty):
+    verify(readable, name, "document")
+    with pytest.raises(preflight.PreflightError, match="no readable text"):
+        verify(empty, name, "document")
+
+
 def test_email_uses_mime_charset_and_requires_a_readable_body():
     email = (b"From: author@example.com\r\nTo: reader@example.com\r\nSubject: Example\r\n"
              b"Content-Type: text/plain; charset=iso-8859-1\r\nContent-Transfer-Encoding: 8bit\r\n\r\n"

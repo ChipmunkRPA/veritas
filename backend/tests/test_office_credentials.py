@@ -16,6 +16,7 @@ from test_provenance_gate_signed_asset import signing_material as signing_materi
 from test_stripe_billing import billing as billing
 from test_stripe_billing import counts, event_for, signed
 
+from app.batches.service import detect_kind
 from app.billing import purchase_notice
 from app.detectors.text.adapters.provenance import OfficeCredentialsDetector
 from app.detectors.text.extract import extract
@@ -53,6 +54,11 @@ def source(extension):
             archive.writestr("mimetype", DOCUMENT_ARCHIVES[extension])
             archive.writestr("content.xml", ODT_XML.format(paragraph=PARAGRAPH))
     return output.getvalue()
+
+
+@pytest.mark.parametrize("extension", [".docx", ".odt"])
+def test_batch_accepts_native_document_package(extension):
+    assert detect_kind(source(extension)[:8192], f"source{extension.upper()}") == "document"
 
 
 @pytest.fixture(params=[".docx", ".odt"])

@@ -814,28 +814,32 @@ def _mapped_email_html(raw, mime_part, text):
     return candidate if candidate.text == text and candidate.source_map else None
 
 
+def _html_text(raw: str) -> str:
+    parser = _HTMLText()
+    parser.feed(raw)
+    return "".join(parser.parts)
+
+
+def text_like_content(raw: str, ext: str) -> tuple[str, str]:
+    """Project text-like input without constructing a per-character source map."""
+    if ext in (".html", ".htm"):
+        return _html_text(raw), "html"
+    if ext in (".md", ".markdown"):
+        for rx, rep in _MD_INLINE:
+            raw = rx.sub(rep, raw)
+        return raw, "markdown"
+    return raw, "plain"
+
+
 def extract_text_like(path: Path, ext: str) -> Document:
     data = path.read_bytes()
     if data.startswith((b"\xff\xfe", b"\xfe\xff")):
-        raw = data.decode("utf-16", errors="replace")
         encoding = "utf-16"
     elif data.startswith(b"\xef\xbb\xbf"):
-        raw = data.decode("utf-8-sig", errors="replace")
         encoding = "utf-8-sig"
     else:
-        raw = data.decode("utf-8", errors="replace")
         encoding = "utf-8"
-    if ext in (".html", ".htm"):
-        h = _HTMLText()
-        h.feed(raw)
-        raw = "".join(h.parts)
-        method = "html"
-    elif ext in (".md", ".markdown"):
-        for rx, rep in _MD_INLINE:
-            raw = rx.sub(rep, raw)
-        method = "markdown"
-    else:
-        method = "plain"
+    raw, method = text_like_content(data.decode(encoding, errors="replace"), ext)
     d = _join_mapped(_text_parts(raw, kind="text" if method == "plain" else "markup"))
     d.meta = {"method": method, "encoding": encoding,
               "decoded_source_sha256": text_hash(raw) if method == "plain" else None}
@@ -875,9 +879,7 @@ def extract_eml(path: Path) -> Document:
         raise ValueError("This email body could not be decoded as text.")
     is_html = body.get_content_type() == "text/html"
     if is_html:
-        parser = _HTMLText()
-        parser.feed(raw)
-        parts = _text_parts("".join(parser.parts), kind="markup", mime_part=mime_part, quote_role="unknown")
+        parts = _text_parts(_html_text(raw), kind="markup", mime_part=mime_part, quote_role="unknown")
     else:
         # Quotation detection is a navigation aid, never an authorship assertion.
         # Keep the '>' prefixes and signature text rather than silently deleting it.

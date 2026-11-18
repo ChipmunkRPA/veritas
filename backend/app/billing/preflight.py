@@ -178,6 +178,9 @@ def _document(path: Path, extension: str) -> None:
 
         body_paragraphs(path, check_crc=True)
         return
+    from app.detectors.text.extract import text_like_content
+    from app.evidence.document_invisible_characters import ENCODED_FORMATTING
+
     raw = path.read_bytes()
     if extension == ".eml":
         from email import policy
@@ -190,10 +193,12 @@ def _document(path: Path, extension: str) -> None:
         text = body.get_content()
         if not isinstance(text, str):
             raise PreflightError("This email body could not be decoded as text. Re-export it before paying.")
+        if body.get_content_type() == "text/html":
+            extension = ".html"
     else:
         text = raw.decode("utf-16") if raw.startswith((b"\xff\xfe", b"\xfe\xff")) else raw.decode("utf-8-sig")
-    from app.evidence.document_invisible_characters import ENCODED_FORMATTING
 
+    text, _ = text_like_content(text, extension)
     readable = sum(char.isprintable() and not char.isspace() for char in text)
     unusual = sum(not (char.isprintable() or char.isspace() or char in ENCODED_FORMATTING) for char in text)
     if not readable or "\x00" in text or unusual > max(1, len(text) // 100):

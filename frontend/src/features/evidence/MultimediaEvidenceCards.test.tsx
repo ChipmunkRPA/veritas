@@ -357,6 +357,25 @@ describe('ordinary multimedia evidence', () => {
   })
 
   it.each([
+    ['odt', 'Decoded OpenDocument paragraph'],
+    ['rtf', 'Decoded Rich Text block'],
+  ])('shows a passage in the original decoded %s blocks', (method, label) => {
+    show({ ...document, source: { ...document.source, method }, packets: [], coverage: {
+      writing_passage_intervals: {
+        schema: 'document-writing-passage-intervals/3', status: 'flagged', authorship_confidence_contribution: 0,
+        ranges: [{ start: 12, end: 34, preview: 'A selected passage.',
+          locations: [{ paragraph: 2, ranges: [[12, 17]] }, { paragraph: 4, ranges: [[0, 15]] }] }],
+      },
+    } })
+    const section = within(screen.getByRole('region', { name: 'Possible AI-like writing passages' }))
+    expect(section.getByText(`${label} 2 characters`, { exact: false })).toBeTruthy()
+    expect(section.getByText(`${label} 4 characters`, { exact: false })).toBeTruthy()
+    expect(section.getByText('[12, 17)')).toBeTruthy()
+    expect(section.getByText('[0, 15)')).toBeTruthy()
+    expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
+  })
+
+  it.each([
     [{ kind: 'docx', paragraph_index: 0, body_path: [0] }, /Word body paragraph 1/],
     [{ kind: 'email', mime_part: '1.2' }, /decoded email MIME part 1\.2/],
   ] as const)('shows the original sentence location for %o', (locator, label) => {

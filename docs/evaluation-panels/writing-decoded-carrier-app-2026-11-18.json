@@ -1,0 +1,74 @@
+{
+  "browser": {
+    "errors": 0,
+    "json_downloads": 4,
+    "pdf_downloads": 4,
+    "positions": 4,
+    "states": 4
+  },
+  "reports": [
+    {
+      "api_pdf_json_signed_original_verified": true,
+      "authorship_weight": 0,
+      "case": "ordinary",
+      "format": ".odt",
+      "native_positions": [],
+      "ranges": [],
+      "source_sha256": "f51a8d0bebb54b555e29f5951292fdf981eb55bb4a307f1238990c14d321bada",
+      "status": "no_ranges"
+    },
+    {
+      "api_pdf_json_signed_original_verified": true,
+      "authorship_weight": 0,
+      "case": "ordinary",
+      "format": ".rtf",
+      "native_positions": [],
+      "ranges": [],
+      "source_sha256": "a665b86304ba48aebf01d57fb95e3c81b7d5ca69a4c8495b41f949fe861ece98",
+      "status": "no_ranges"
+    },
+    {
+      "api_pdf_json_signed_original_verified": true,
+      "authorship_weight": 0,
+      "case": "mixed",
+      "format": ".odt",
+      "native_positions": [
+        "Decoded OpenDocument paragraph 2 characters [24, 566)",
+        "Decoded OpenDocument paragraph 3 characters [0, 553)"
+      ],
+      "ranges": [
+        [
+          587,
+          1684,
+          "document_baseline"
+        ]
+      ],
+      "source_sha256": "52b95bfaa9591e7c5c14fd1ecf6bc83835d88abf4a2515119b4fdcbce5695b95",
+      "status": "flagged"
+    },
+    {
+      "api_pdf_json_signed_original_verified": true,
+      "authorship_weight": 0,
+      "case": "mixed",
+      "format": ".rtf",
+      "native_positions": [
+        "Decoded Rich Text block 3 characters [24, 566)",
+        "Decoded Rich Text block 4 characters [0, 553)"
+      ],
+      "ranges": [
+        [
+          587,
+          1684,
+          "document_baseline"
+        ]
+      ],
+      "source_sha256": "243d47776d71746ea206a78ca43fc7321f2266bd71a8cc4e89395d8a479d7e0f",
+      "status": "flagged"
+    }
+  ],
+  "schema": "chipmunk.decoded-carrier-local-checkout/1",
+  "simulated_paid_analyses": 6,
+  "simulated_price_cents": 999,
+  "unchanged_assessments": 2,
+  "unpaid_jobs": 0
+}

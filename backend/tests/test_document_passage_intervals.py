@@ -3,6 +3,8 @@ from dataclasses import asdict
 from types import SimpleNamespace
 
 import pytest
+from test_odt_section_visibility import odt
+
 from app.core.canonical import canonical_hash
 from app.detectors.text import language_scope
 from app.detectors.text.adapters import interval_review
@@ -82,11 +84,18 @@ def test_pdf_locations_use_the_same_precision_before_and_after_export():
     assert from_source == from_frozen_mapping == json.loads(canonical_json(from_source))
 
 
-@pytest.mark.parametrize("suffix", [".txt", ".docx"])
+@pytest.mark.parametrize("suffix", [".txt", ".docx", ".odt", ".rtf"])
 def test_document_baseline_preserves_prior_ranges_and_replays_original_locations(tmp_path, suffix):
     path = tmp_path / f"passages{suffix}"
-    path.write_bytes(BODY.encode() if suffix == ".txt" else fixture("word", BODY, None))
+    if suffix == ".odt":
+        odt(path, visible=BODY.split("\n\n"))
+    elif suffix == ".rtf":
+        first, second, third = BODY.split("\n\n")
+        path.write_text(r"{\rtf1\ansi " + r"\par ".join((first, r"{\v " + QUOTE + "}", second, third)) + "}")
+    else:
+        path.write_bytes(BODY.encode() if suffix == ".txt" else fixture("word", BODY, None))
     doc = extract(path, suffix)
+    assert doc.text == BODY
     sentences = segment(doc)
     geometry = [[row.start, row.end, row.n_words] for row in sentences]
     assert len(geometry) == 18
@@ -95,6 +104,11 @@ def test_document_baseline_preserves_prior_ranges_and_replays_original_locations
     response[11:13] = [.85, .85]
     readings = {"context": response, "isolated": response}
     method = doc.meta["method"]
+    if suffix in {".odt", ".rtf"}:
+        assert native.checked_end(method, doc.text, doc.source_map, doc.meta) == len(BODY)
+        key, _ = native.DECODED_BODY_POLICIES[method]
+        historical_metadata = {name: value for name, value in doc.meta.items() if name != key}
+        assert native.checked_end(method, doc.text, doc.source_map, historical_metadata) is None
     options = {"method": method, "checked_end": len(doc.text)}
     original = proof.capture(doc.text, doc.source_map, geometry, readings, **options)
     expanded = proof.capture(doc.text, doc.source_map, geometry, readings, document_baseline=True, **options)
@@ -105,8 +119,8 @@ def test_document_baseline_preserves_prior_ranges_and_replays_original_locations
     assert (additional["start"], additional["end"], additional["basis"]) == (
         sentences[11].start, sentences[12].end, "document_baseline",
     )
-    if suffix == ".docx":
-        assert [place["paragraph"] for place in additional["locations"]] == [2, 3]
+    if suffix != ".txt":
+        assert [place["paragraph"] for place in additional["locations"]] == ([3, 4] if suffix == ".rtf" else [2, 3])
     assert expanded["authorship_confidence_contribution"] == 0
 
     def evidence(record):
@@ -120,3 +134,8 @@ def test_document_baseline_preserves_prior_ranges_and_replays_original_locations
     forged["ranges"][1]["basis"] = "pooled"
     with pytest.raises(ValueError, match="invalid highlighted ranges"):
         proof.verify_source(evidence(forged), doc.text, doc.source_map, positions, metadata=doc.meta)
+    if suffix in {".odt", ".rtf"}:
+        forged = deepcopy(expanded)
+        forged["ranges"][1]["locations"][1]["ranges"][0][1] += 1
+        with pytest.raises(ValueError, match="differ from the source text"):
+            proof.verify_source(evidence(forged), doc.text, doc.source_map, positions, metadata=doc.meta)

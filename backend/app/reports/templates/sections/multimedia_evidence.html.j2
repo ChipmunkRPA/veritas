@@ -58,7 +58,7 @@
 <p>Original PDF pages {{ range.locations | map(attribute='page') | unique | join(', ') }}. Exact word boxes are recorded in JSON.</p>
 {% else %}
 {% for location in range.locations %}
-<p class="caption">{% if intervals.method == 'python-docx' %}Word paragraph {{ location.paragraph }}{% else %}Decoded email {{ 'HTML ' if intervals.email_html else '' }}body part {{ location.mime_part }}{% endif %} characters
+<p class="caption">{% if intervals.method == 'python-docx' %}Word paragraph {{ location.paragraph }}{% elif intervals.method == 'odt' %}Decoded OpenDocument paragraph {{ location.paragraph }}{% elif intervals.method == 'rtf' %}Decoded Rich Text block {{ location.paragraph }}{% else %}Decoded email {{ 'HTML ' if intervals.email_html else '' }}body part {{ location.mime_part }}{% endif %} characters
 {% for span in location.ranges %}<span class="mono">[{{ span[0] }}, {{ span[1] }})</span>{{ ', ' if not loop.last else '.' }}{% endfor %}</p>
 {% endfor %}
 {% endif %}

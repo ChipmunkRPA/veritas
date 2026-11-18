@@ -146,6 +146,9 @@ RTF numbers decoded text blocks, including blocks separated by soft line
 breaks. The web view, PDF and JSON use the same ranges. The signed package can
 replay them against the original file.
 
+The optional writing passage check also uses these exact decoded positions
+for supported ODT and RTF. [Passage format transfer and checkout](writing-decoded-carrier-transfer-2026-11-18.md)
+
 The RTF reader leaves out text marked hidden by the file's direct character
 formatting. It reads the saved display text for fields such as hyperlink
 labels. The same rules apply before checkout, during analysis, and when

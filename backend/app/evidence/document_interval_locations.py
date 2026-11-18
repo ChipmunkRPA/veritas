@@ -5,16 +5,24 @@ from __future__ import annotations
 from math import isfinite
 
 from app.core.canonical import FLOAT_DP
-from app.evidence import document_pdf_visibility, document_word_visibility
+from app.evidence import document_native_locations, document_pdf_visibility, document_word_visibility
 from app.evidence.document_native_locations import clip_source_ranges
 from app.evidence.document_scope import _complete_pdf_fragments, mapped_email_html
 
-KINDS = {"python-docx": "docx", "email": "email", "pymupdf": "pdf"}
+DECODED_BODY_POLICIES = {
+    "odt": (document_native_locations.ODT_VISIBILITY_KEY, document_native_locations.ODT_VISIBILITY),
+    "rtf": (document_native_locations.RTF_VISIBILITY_KEY, document_native_locations.RTF_VISIBILITY),
+}
+KINDS = {"python-docx": "docx", "email": "email", "pymupdf": "pdf", **dict.fromkeys(DECODED_BODY_POLICIES, "markup")}
 PDF_POINTS = "unrotated-page-points"
 MAX_BOXES = 3000
 
 
 def eligible_source(method, metadata, word_review=None):
+    if method in DECODED_BODY_POLICIES:
+        key, value = DECODED_BODY_POLICIES[method]
+        return (metadata.get(document_native_locations.PARAGRAPH_MAP_KEY) == document_native_locations.PARAGRAPH_MAP
+                and metadata.get(key) == value)
     if method == "python-docx":
         visibility = metadata.get(document_word_visibility.KEY) or {}
         return bool(visibility) and not visibility.get("hidden_runs") and (
@@ -45,6 +53,7 @@ def checked_end(method, text, mapping, metadata, word_review=None):
     kind = KINDS[method]
     previous = 0
     body_end = 0
+    decoded_index = -1
     trailing_email = False
     for block in mapping:
         start, end = block["start"], block["end"]
@@ -65,6 +74,12 @@ def checked_end(method, text, mapping, metadata, word_review=None):
                 body_end = end
             else:
                 return None
+        elif kind == "markup":
+            index = block.get("paragraph_index")
+            if (type(index) is not int or index <= decoded_index
+                    or not clip_source_ranges(block.get("source_ranges") or [], start, end)):
+                return None
+            decoded_index = index
         elif (block.get("extraction") != "text_layer" or block.get("page_rotation") != 0
               or not _complete_pdf_fragments(block, text, start, end)):
             return None
@@ -97,6 +112,8 @@ def locate(method, mapping, a, b):
             place["ranges"] = ranges
             if method == "python-docx":
                 place.update(paragraph=block["paragraph_index"] + 1, body_path=block["body_path"])
+            elif method in DECODED_BODY_POLICIES:
+                place["paragraph"] = block["paragraph_index"] + 1
             else:
                 place["mime_part"] = block["mime_part"]
         places.append(place)
@@ -153,6 +170,12 @@ def validate(method, metadata, places, start, end):
                     or not isinstance(path, list) or len(path) != 1 or type(path[0]) is not int or path[0] <= native_position):
                 raise ValueError("Invalid Word paragraph location")
             native_position = path[0]
+        elif method in DECODED_BODY_POLICIES:
+            paragraph = place.get("paragraph")
+            if (set(place) != {"start", "end", "ranges", "paragraph"} or not _positive(paragraph)
+                    or paragraph <= native_position):
+                raise ValueError("Invalid decoded writing passage block")
+            native_position = paragraph
         elif (set(place) != {"start", "end", "ranges", "mime_part"}
               or place["mime_part"] != metadata["email"]["body_part"]
               or place["ranges"][0][0] <= native_position):

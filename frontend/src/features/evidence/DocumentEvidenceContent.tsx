@@ -536,6 +536,7 @@ function WritingPassageIntervals({ review, method, emailHtml, wording }: {
   const approach = review.schema === 'document-writing-passage-intervals/3' || review.schema === 'document-writing-passage-intervals/4'
     ? summary[review.schema]
     : 'Sustained AI-like patterns can highlight separate passages for review.'
+  const paragraphLabel = method === 'odt' ? 'Decoded OpenDocument paragraph' : method === 'rtf' ? 'Decoded Rich Text block' : 'Word paragraph'
   const ranges = review.ranges.filter(range => !wording?.published_style_matches.some(match => match.start === range.start && match.end === range.end))
   return <section id="document-writing-passage-intervals" aria-labelledby="writing-passage-intervals-title" className="mt-4 rounded-md border border-border p-4">
     <h3 id="writing-passage-intervals-title" className="m-0 text-body font-medium">Possible AI-like writing passages</h3>
@@ -553,7 +554,7 @@ function WritingPassageIntervals({ review, method, emailHtml, wording }: {
           : pages.length > 0
             ? <p className="m-0 text-small">Original PDF pages {pages.join(', ')}. Exact word boxes are recorded in JSON.</p>
             : <ul className="m-0 list-none pl-0 text-small">{range.locations.map((place, index) => 'ranges' in place &&
-              <li key={index}>{'paragraph' in place ? `Word paragraph ${place.paragraph}` : `Decoded email ${emailHtml ? 'HTML ' : ''}body part ${place.mime_part}`} characters <span className="font-mono">{place.ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}</span>.</li>
+              <li key={index}>{'paragraph' in place ? `${paragraphLabel} ${place.paragraph}` : `Decoded email ${emailHtml ? 'HTML ' : ''}body part ${place.mime_part}`} characters <span className="font-mono">{place.ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}</span>.</li>
             )}</ul>}
         {range.basis === 'document_baseline' && <p className="m-0 text-small">Selected by comparing this passage with the writing patterns elsewhere in this file.</p>}
         <blockquote className="my-2 border-l-2 border-border pl-3 whitespace-pre-line break-words text-small">{range.preview}{range.end - range.start > Array.from(range.preview).length ? '…' : ''}</blockquote>

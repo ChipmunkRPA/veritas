@@ -35,10 +35,14 @@ WEBP_EXACT_REFLECTION_VERSION = "image-evidence-34"
 WEBP_EXACT_REFLECTION_AFFINE_VERSION = "image-evidence-35"
 WEBP_EXACT_REFLECTION_VERSIONS = frozenset({WEBP_EXACT_REFLECTION_VERSION, WEBP_EXACT_REFLECTION_AFFINE_VERSION})
 WEBP_EXACT_COPY_VERSIONS = WEBP_EXACT_REFLECTION_VERSIONS | {WEBP_EXACT_COPY_VERSION, WEBP_EXACT_COPY_AFFINE_VERSION}
+PNG_EXACT_REFLECTION_VERSION = "image-evidence-36"
+PNG_EXACT_REFLECTION_AFFINE_VERSION = "image-evidence-37"
+PNG_EXACT_REFLECTION_VERSIONS = frozenset({PNG_EXACT_REFLECTION_VERSION, PNG_EXACT_REFLECTION_AFFINE_VERSION})
+EXACT_REFLECTION_VERSIONS = WEBP_EXACT_REFLECTION_VERSIONS | PNG_EXACT_REFLECTION_VERSIONS
 DISJOINT_JPEG_ROTATION_VERSIONS = frozenset({DISJOINT_JPEG_ROTATION_VERSION, DISJOINT_JPEG_ROTATION_AFFINE_VERSION})
 NATIVE_JPEG_ROTATION_VERSIONS = DISJOINT_JPEG_ROTATION_VERSIONS | {NATIVE_JPEG_ROTATION_VERSION, NATIVE_JPEG_ROTATION_AFFINE_VERSION}
 DISJOINT_ROTATION_MARGIN = 16
-TURNED_PNG_VERSIONS = frozenset({TURNED_PNG_COPY_VERSION, TURNED_PNG_COPY_AFFINE_VERSION})
+TURNED_PNG_VERSIONS = PNG_EXACT_REFLECTION_VERSIONS | {TURNED_PNG_COPY_VERSION, TURNED_PNG_COPY_AFFINE_VERSION}
 SMALL_PNG_VERSIONS = TURNED_PNG_VERSIONS | {SMALL_PNG_COPY_VERSION, SMALL_PNG_COPY_AFFINE_VERSION}
 EXPANDED_JPEG_ROTATION_VERSIONS = NATIVE_JPEG_ROTATION_VERSIONS | {EXPANDED_JPEG_ROTATION_VERSION, EXPANDED_JPEG_ROTATION_AFFINE_VERSION}
 TURNED_JPEG_VERSIONS = EXPANDED_JPEG_ROTATION_VERSIONS | {TURNED_JPEG_COPY_VERSION, TURNED_JPEG_COPY_AFFINE_VERSION}
@@ -51,8 +55,10 @@ WEBP_EXACT_COPY_BASIS = "webp_exact_copy"
 WEBP_EXACT_COPY_KEY = "webp_exact_copy_review"
 WEBP_EXACT_REFLECTION_BASIS = "webp_exact_reflected_copy"
 WEBP_EXACT_REFLECTION_KEY = "webp_exact_reflection_review"
-WEBP_REFLECTION_TRANSFORMS = ("horizontal_reflection", "vertical_reflection")
-WEBP_EXACT_REFLECTION_NOTE = (
+PNG_EXACT_REFLECTION_BASIS = "png_exact_reflected_copy"
+PNG_EXACT_REFLECTION_KEY = "png_exact_reflection_review"
+REFLECTION_TRANSFORMS = ("horizontal_reflection", "vertical_reflection")
+EXACT_REFLECTION_NOTE = (
     "The displayed crops match after reflection. Reflected copies or repeated graphic elements can produce a match. "
     "The comparison cannot establish which area came first or whether AI was involved."
 )
@@ -78,6 +84,10 @@ WEBP_EXACT_REFLECTION_STATUS_TEXT = {
     "ambiguous_pairs": "Several reflected pairs met the evidence requirements, so no single pair is shown.",
     "unavailable": "The exact reflection check could not complete.",
 }
+PNG_EXACT_REFLECTION_STATUS_TEXT = {
+    **WEBP_EXACT_REFLECTION_STATUS_TEXT,
+    "unsupported_profile": SMALL_PNG_STATUS_TEXT["unsupported_profile"],
+}
 JPEG_OFFGRID_VERSIONS = TURNED_JPEG_VERSIONS | {JPEG_OFFGRID_VERSION, JPEG_OFFGRID_AFFINE_VERSION}
 JPEG_BLOCK_VERSIONS = JPEG_OFFGRID_VERSIONS | {JPEG_BLOCK_VERSION, JPEG_BLOCK_AFFINE_VERSION}
 VERSION = V12
@@ -85,7 +95,7 @@ AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_A
                              SMALL_PNG_COPY_AFFINE_VERSION, TURNED_PNG_COPY_AFFINE_VERSION,
                              TURNED_JPEG_COPY_AFFINE_VERSION, EXPANDED_JPEG_ROTATION_AFFINE_VERSION,
                              NATIVE_JPEG_ROTATION_AFFINE_VERSION, DISJOINT_JPEG_ROTATION_AFFINE_VERSION,
-                             WEBP_EXACT_COPY_AFFINE_VERSION, WEBP_EXACT_REFLECTION_AFFINE_VERSION})
+                             WEBP_EXACT_COPY_AFFINE_VERSION, WEBP_EXACT_REFLECTION_AFFINE_VERSION, PNG_EXACT_REFLECTION_AFFINE_VERSION})
 CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12} | JPEG_BLOCK_VERSIONS | SMALL_PNG_VERSIONS | WEBP_EXACT_COPY_VERSIONS
 TRANSLATION_VERSIONS = CREDENTIAL_VERSIONS | {V10, V11}
 BASIS_VERSIONS = CREDENTIAL_VERSIONS | {V11}
@@ -369,7 +379,9 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     has_offgrid_review = not reflected and document["version"] in JPEG_OFFGRID_VERSIONS
     has_turned_jpeg_review = not reflected and document["version"] in TURNED_JPEG_VERSIONS
     webp = not reflected and document["version"] in WEBP_EXACT_COPY_VERSIONS
-    reflection_review = not reflected and document["version"] in WEBP_EXACT_REFLECTION_VERSIONS
+    reflection_review = not reflected and document["version"] in EXACT_REFLECTION_VERSIONS
+    reflection_key = WEBP_EXACT_REFLECTION_KEY if webp else PNG_EXACT_REFLECTION_KEY
+    reflection_basis = WEBP_EXACT_REFLECTION_BASIS if webp else PNG_EXACT_REFLECTION_BASIS
     has_exact_review = webp or (not reflected and document["version"] in SMALL_PNG_VERSIONS)
     exact_key = WEBP_EXACT_COPY_KEY if webp else "small_png_copy_review"
     exact_size = has_exact_review and exact_copy_size(*size, webp=webp)
@@ -396,7 +408,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     if has_exact_review:
         fields.add(exact_key)
     if reflection_review:
-        fields.add(WEBP_EXACT_REFLECTION_KEY)
+        fields.add(reflection_key)
     if not isinstance(record, dict) or set(record) != fields:
         raise ValueError("Copy similarity has an invalid record")
     status, pairs = record["status"], record["pairs"]
@@ -407,8 +419,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         or record["coordinate_space"] != "exif-oriented-original"
         or type(record["authorship_confidence_contribution"]) is not int
         or record["authorship_confidence_contribution"] != 0
-        or record["interpretation"] != (NOTE if reflected else WEBP_EXACT_REFLECTION_NOTE
-                                       if reflection_review and record.get("basis") == WEBP_EXACT_REFLECTION_BASIS else TRANSLATION_NOTE)
+        or record["interpretation"] != (NOTE if reflected else EXACT_REFLECTION_NOTE
+                                       if reflection_review and record.get("basis") == reflection_basis else TRANSLATION_NOTE)
         or status not in STATUS_TEXT
         or (skipped and document["version"] not in CREDENTIAL_VERSIONS)
         or (not skipped and (status == "unsupported_geometry") == supported)
@@ -438,7 +450,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     if turned_jpeg_pair and len(pairs) != turned_jpeg_pair:
         raise ValueError("Rotated JPEG evidence must contain the recorded measured pairs")
     reflected_exact_pair = False
-    if reflection_review and (reflection := record[WEBP_EXACT_REFLECTION_KEY]) is not None:
+    if reflection_review and (reflection := record[reflection_key]) is not None:
         reflected_exact_pair = _validate_exact_copy(reflection)
         legacy_review = record[exact_key]
         previous = "unsupported_profile" if reflection["status"] == "unsupported_profile" else "no_pair"
@@ -472,7 +484,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
                 expected = ((SMALL_PNG_BASIS, TURNED_PNG_BASIS) if document["version"] in TURNED_PNG_VERSIONS
                             else (SMALL_PNG_BASIS,))
         if reflected_exact_pair:
-            expected = (WEBP_EXACT_REFLECTION_BASIS,)
+            expected = (reflection_basis,)
         if basis not in expected:
             raise ValueError("Copy similarity has an invalid matching basis")
     jpeg_pair = has_jpeg_review and record["jpeg_block_review"] == "supported_pair"
@@ -487,7 +499,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     for index, pair in enumerate(pairs, 1):
         turned = record.get("basis") in {TURNED_PNG_BASIS, TURNED_JPEG_BASIS}
         transforms = (("horizontal_reflection",) if reflected else
-                      WEBP_REFLECTION_TRANSFORMS if reflected_exact_pair else
+                      REFLECTION_TRANSFORMS if reflected_exact_pair else
                       tuple(PNG_COPY_TRANSFORMS.values()) if record.get("basis") == WEBP_EXACT_COPY_BASIS else
                       (PNG_COPY_TRANSFORMS[1], PNG_COPY_TRANSFORMS[2]) if turned else ("same_orientation",))
         if (
@@ -522,7 +534,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         aligned_size = (bh, bw) if pair["transform"] == PNG_COPY_TRANSFORMS[1] else (bw, bh)
         if overlaps or (equal_size and (aw, ah) != aligned_size):
             raise ValueError("The paired areas must be separate and aligned areas must share a native size")
-        measurement_key = WEBP_EXACT_REFLECTION_KEY if reflected_exact_pair else exact_key
+        measurement_key = reflection_key if reflected_exact_pair else exact_key
         if (exact_pair or reflected_exact_pair) and (not SMALL_PNG_CROP_MIN <= min(aw, ah) <= max(aw, ah) <= SMALL_PNG_CROP_MAX
                            or record[measurement_key]["measurement"]["matching_pixels"] != aw * ah
                            or (pair["transform"] == PNG_COPY_TRANSFORMS[0]

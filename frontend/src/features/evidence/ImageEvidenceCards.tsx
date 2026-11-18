@@ -216,13 +216,14 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const geometric = field === 'copy_affine'
   const sectionId = `image-${field.replace('_', '-')}`
   const baseVersion = set.prior_embedded_pair_evidence?.version ?? set.version
-  const reflectionVersion = baseVersion === 'image-evidence-34' || baseVersion === 'image-evidence-35'
+  const webpReflectionVersion = baseVersion === 'image-evidence-34' || baseVersion === 'image-evidence-35'
+  const pngReflectionVersion = baseVersion === 'image-evidence-36' || baseVersion === 'image-evidence-37'
   const heading = geometric ? 'Geometric copy comparison' : reflected ? 'Same-image copy similarity'
-    : reflectionVersion ? 'Exact and geometric copy comparisons' : 'Copy similarity without mirroring'
-  const turnedReview = ['image-evidence-22', 'image-evidence-23'].includes(baseVersion)
+    : webpReflectionVersion || pngReflectionVersion ? 'Exact and geometric copy comparisons' : 'Copy similarity without mirroring'
+  const turnedReview = pngReflectionVersion || ['image-evidence-22', 'image-evidence-23'].includes(baseVersion)
   const nativeJpegVersion = ['image-evidence-28', 'image-evidence-29', 'image-evidence-30', 'image-evidence-31'].includes(baseVersion)
-  const webpVersion = baseVersion === 'image-evidence-32' || baseVersion === 'image-evidence-33' || reflectionVersion
-  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29', 'image-evidence-31', 'image-evidence-33', 'image-evidence-35'].includes(baseVersion))
+  const webpVersion = baseVersion === 'image-evidence-32' || baseVersion === 'image-evidence-33' || webpReflectionVersion
+  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29', 'image-evidence-31', 'image-evidence-33', 'image-evidence-35', 'image-evidence-37'].includes(baseVersion))
     || (reflected && (turnedReview || ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12',
       'image-evidence-13', 'image-evidence-14', 'image-evidence-16', 'image-evidence-17', 'image-evidence-18',
       'image-evidence-19', 'image-evidence-20', 'image-evidence-21', 'image-evidence-24', 'image-evidence-25',
@@ -234,37 +235,48 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const nativeJpeg = Boolean(nativeJpegVersion && turnedJpeg && !offgrid)
   const separateMeasurements = turnedJpeg?.measurements
   const smallPng = field === 'copy_translation' ? set.copy_translation?.small_png_copy_review : undefined
+  const pngReflection = field === 'copy_translation' ? set.copy_translation?.png_exact_reflection_review : undefined
   const webpReflection = field === 'copy_translation' ? set.copy_translation?.webp_exact_reflection_review : undefined
-  const exactReflection = basis === 'webp_exact_reflected_copy'
-  const webpReview = webpReflection ?? (field === 'copy_translation' ? set.copy_translation?.webp_exact_copy_review : undefined)
+  const reflection = pngReflection ?? webpReflection
+  const exactReflection = basis === 'webp_exact_reflected_copy' || basis === 'png_exact_reflected_copy'
+  const exactReview = reflection ?? (field === 'copy_translation' ? set.copy_translation?.webp_exact_copy_review : undefined)
   const transform = set.copy_translation?.pairs[0]?.transform
   const turned = (basis === 'png_exact_turned_copy' || basis === 'jpeg_turned_copy' || (basis === 'webp_exact_copy' && transform !== 'same_orientation')) && transform
   const rotation = turned === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'
-  let webpObservation: string | undefined
-  let webpScope: string | undefined
-  if (webpReview?.status === 'supported_pair') {
-    webpObservation = exactReflection
-      ? `Flipping Area B ${transform === 'horizontal_reflection' ? 'horizontally' : 'vertically'} aligns every RGB pixel with Area A in the lossless WebP.`
+  let exactObservation: string | undefined
+  let exactScope: string | undefined
+  if (exactReview?.status === 'supported_pair') {
+    exactObservation = exactReflection
+      ? `Flipping Area B ${transform === 'horizontal_reflection' ? 'horizontally' : 'vertically'} aligns every RGB pixel with Area A in the ${pngReflection ? 'PNG' : 'lossless WebP'}.`
       : turned
       ? `Rotating Area B ${rotation} aligns every RGB pixel with Area A in the lossless WebP.`
       : 'The two lossless WebP crops match exactly in their original orientation.'
-  } else if (webpReview) {
-    webpObservation = (webpReflection ? webpReflectionCoverageText : webpExactCoverageText)[webpReview.status]
-    if (webpReview.status === 'no_pair') webpScope = 'This check covers separated, textured crops with sides from 16 to 56 pixels.'
+  } else if (exactReview) {
+    exactObservation = pngReflection && exactReview.status === 'unsupported_profile'
+      ? smallPngCoverageText.unsupported_profile
+      : (reflection ? webpReflectionCoverageText : webpExactCoverageText)[exactReview.status]
+    if (exactReview.status === 'no_pair') exactScope = 'This check covers separated, textured crops with sides from 16 to 56 pixels.'
   } else if (field === 'copy_translation' && webpVersion) {
     const outsideExactSize = [set.source.width, set.source.height].some(side => side == null || side < 512 || side > 768)
     if (outsideExactSize && check.status === 'unsupported_geometry') {
-      webpObservation = webpExactCoverageText.unsupported_profile
+      exactObservation = webpExactCoverageText.unsupported_profile
     } else {
-      webpScope = outsideExactSize ? webpExactCoverageText.unsupported_profile : 'Exact lossless WebP comparison did not run for this result.'
+      exactScope = outsideExactSize ? webpExactCoverageText.unsupported_profile : 'Exact lossless WebP comparison did not run for this result.'
+    }
+  } else if (field === 'copy_translation' && pngReflectionVersion) {
+    const outsideExactSize = [set.source.width, set.source.height].some(side => side == null || side < 384 || side > 768)
+    if (outsideExactSize && check.status === 'unsupported_geometry') {
+      exactObservation = smallPngCoverageText.unsupported_profile
+    } else {
+      exactScope = outsideExactSize ? smallPngCoverageText.unsupported_profile : 'The exact PNG reflection check did not run for this result.'
     }
   }
-  const exactMeasurement = webpReview?.measurement ?? smallPng?.measurement
-  const interpretation = field === 'copy_translation' && webpVersion && !check.pairs.length
+  const exactMeasurement = exactReview?.measurement ?? smallPng?.measurement
+  const interpretation = field === 'copy_translation' && (webpVersion || pngReflectionVersion) && !check.pairs.length
     ? 'Copy comparisons look for repeated image detail. The origin of the image and AI involvement remain undetermined.'
     : check.interpretation
   const colorMeasurement = turnedJpeg?.measurement ?? offgrid?.measurement
-  const basisText = webpReview?.status === 'supported_pair' ? 'Pixels outside the aligned crops differ on at least three sides.' : smallPng
+  const basisText = exactReview?.status === 'supported_pair' ? 'Pixels outside the aligned crops differ on at least three sides.' : smallPng && !reflection
     ? turned ? 'After alignment, pixels outside the crops differ on at least three sides.'
       : turnedReview && smallPng.status === 'no_pair' ? 'The small-copy check found no qualifying exact pair with or without right-angle rotation.'
         : smallPngCoverageText[smallPng.status]
@@ -286,11 +298,11 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   }
   return <section className="mt-5 rounded-md border border-border p-4" aria-labelledby={`${sectionId}-heading`}>
     <h3 id={`${sectionId}-heading`} className="m-0 text-body font-medium text-text">{heading}</h3>
-    <p className="mt-2 mb-0 text-small text-text">{webpObservation ?? (nativeJpeg && check.status === 'no_pair' ? basisText : statusText[check.status])}</p>
+    <p className="mt-2 mb-0 text-small text-text">{exactObservation ?? (nativeJpeg && check.status === 'no_pair' ? basisText : statusText[check.status])}</p>
     <p className="mt-2 mb-0 text-small text-text-muted">{interpretation}</p>
     {!reflected && <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero weight in AI authorship confidence.</p>}
     {basisText && (!nativeJpeg || check.status !== 'no_pair') && <p className="mt-2 mb-0 text-caption text-text-muted">{basisText}</p>}
-    {webpScope && <p className="mt-2 mb-0 text-caption text-text-muted">{webpScope}</p>}
+    {exactScope && <p className="mt-2 mb-0 text-caption text-text-muted">{exactScope}</p>}
     {nativeJpeg && check.status === 'supported_pair' && <p className="mt-2 mb-0 text-caption text-text-muted">
       The rotation check used the original pixel grid at this image size.
     </p>}

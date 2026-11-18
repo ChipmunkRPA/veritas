@@ -1,0 +1,138 @@
+{
+  "browser": true,
+  "cases": {
+    "alpha": {
+      "copy_transform": null,
+      "coverage": "unsupported_profile",
+      "embedded_crop_count": 0,
+      "native_regions": null,
+      "pdf_sha256": "7cadc3679cbc029b53b9d681b44949516b76316ba2e6cbdd66eab986450bd2aa",
+      "signed_source_verified": true,
+      "source_sha256": "122a773904661252b8fd4cd60d0cbc02e99c9bc467c96151729f0c1f7cce9160"
+    },
+    "ambiguity": {
+      "copy_transform": null,
+      "coverage": "ambiguous_pairs",
+      "embedded_crop_count": 0,
+      "native_regions": null,
+      "pdf_sha256": "165561c801180202e1fc31220bd8b3d0e5fe31870dd36136801d306bd2128930",
+      "signed_source_verified": true,
+      "source_sha256": "5c149449a00e2227bd93f1076cee0903c06605e157b27c9c87fa285231cd28e8"
+    },
+    "feathered_vertical": {
+      "copy_transform": "vertical_reflection",
+      "coverage": "supported_pair",
+      "embedded_crop_count": 2,
+      "native_regions": {
+        "area_a": {
+          "h": 38,
+          "w": 40,
+          "x": 53,
+          "y": 63
+        },
+        "area_b": {
+          "h": 38,
+          "w": 40,
+          "x": 377,
+          "y": 379
+        }
+      },
+      "pdf_sha256": "1fe8080b0dd174de8015487c6fc52d4789c53c3e96daa748104a1c6a8bfcb5a8",
+      "signed_source_verified": true,
+      "source_sha256": "1f11c8f74601d5c177563d82760b92f9d1d70951ceca100d1f8ac242c4cb1690"
+    },
+    "horizontal": {
+      "assessment_preserved": true,
+      "copy_transform": "horizontal_reflection",
+      "coverage": "supported_pair",
+      "embedded_crop_count": 2,
+      "native_regions": {
+        "area_a": {
+          "h": 34,
+          "w": 30,
+          "x": 48,
+          "y": 58
+        },
+        "area_b": {
+          "h": 34,
+          "w": 30,
+          "x": 372,
+          "y": 374
+        }
+      },
+      "pdf_sha256": "9c796d596d4c34c7c6e324b2e1f8162813f9bfa34681793abba8f33ad90fa3a4",
+      "scored_components": 0,
+      "signed_source_verified": true,
+      "source_sha256": "17a723bd9f13f9952cab03386e27e94db9d0aa66f1a5c7f2f95ada28f76f4921"
+    },
+    "ordinary": {
+      "copy_transform": null,
+      "coverage": "no_pair",
+      "embedded_crop_count": 0,
+      "native_regions": null,
+      "pdf_sha256": "9a944cc835eefc51b9cfcdc329e6a36898cec5cf08114c173048b9c476b0d248",
+      "signed_source_verified": true,
+      "source_sha256": "a3510adf70adf64c7bb1b397636e198951d68f8047512b449f04c2bfb4bc6601"
+    },
+    "rotation": {
+      "copy_transform": "rotate_90_ccw",
+      "coverage": "prior_selected",
+      "embedded_crop_count": 2,
+      "native_regions": {
+        "area_a": {
+          "h": 32,
+          "w": 34,
+          "x": 372,
+          "y": 374
+        },
+        "area_b": {
+          "h": 34,
+          "w": 32,
+          "x": 48,
+          "y": 58
+        }
+      },
+      "pdf_sha256": "8604e4ee32afa175a94c8a77375dc330d3cdfce8b2f308dc8b3e2f95186303a7",
+      "signed_source_verified": true,
+      "source_sha256": "a26456fb08b848483cf8444ba02d7ec788bcf7da6e7d906d2e7ae1c4877220f0"
+    },
+    "symmetry": {
+      "copy_transform": null,
+      "coverage": "unassessed_match_budget",
+      "embedded_crop_count": 0,
+      "native_regions": null,
+      "pdf_sha256": "6013a1fc7af4cbf1aad7bfa34610703a3700f81b61c31f8a8900093d1f4625ac",
+      "signed_source_verified": true,
+      "source_sha256": "e23739b7c0c9457686df102315b02c9ff9c40c0b43c0385d97eaf7bad702b31c"
+    },
+    "vertical": {
+      "assessment_preserved": true,
+      "copy_transform": "vertical_reflection",
+      "coverage": "supported_pair",
+      "embedded_crop_count": 2,
+      "native_regions": {
+        "area_a": {
+          "h": 28,
+          "w": 32,
+          "x": 48,
+          "y": 58
+        },
+        "area_b": {
+          "h": 28,
+          "w": 32,
+          "x": 372,
+          "y": 374
+        }
+      },
+      "pdf_sha256": "923dad0c7edaf02ae3b5d31c002a276bdefc9ef9fe5c4cf05cb86230e06d2d1d",
+      "scored_components": 0,
+      "signed_source_verified": true,
+      "source_sha256": "8288f3d4fcfc3754bb6ddaf930532bf186a16e23bbecffcab932f81c9974b915"
+    }
+  },
+  "currency": "usd",
+  "price_minor": 999,
+  "schema": "chipmunk.image-png-reflection-local-app/1",
+  "simulated_paid_analyses": 10,
+  "unpaid_jobs": 0
+}

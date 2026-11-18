@@ -23,6 +23,8 @@ from app.evidence.image_copy_similarity_binding import (
     DISJOINT_JPEG_ROTATION_AFFINE_VERSION,
     DISJOINT_JPEG_ROTATION_VERSION,
     DISJOINT_JPEG_ROTATION_VERSIONS,
+    EXACT_REFLECTION_NOTE,
+    EXACT_REFLECTION_VERSIONS,
     EXPANDED_JPEG_ROTATION_AFFINE_VERSION,
     EXPANDED_JPEG_ROTATION_VERSION,
     EXPANDED_JPEG_ROTATION_VERSIONS,
@@ -40,6 +42,10 @@ from app.evidence.image_copy_similarity_binding import (
     OFFGRID_BASIS,
     PAIR_LIMIT,
     PNG_COPY_TRANSFORMS,
+    PNG_EXACT_REFLECTION_AFFINE_VERSION,
+    PNG_EXACT_REFLECTION_BASIS,
+    PNG_EXACT_REFLECTION_KEY,
+    PNG_EXACT_REFLECTION_VERSION,
     REFLECTION_VERSIONS,
     ROLES,
     SCHEMA,
@@ -72,9 +78,7 @@ from app.evidence.image_copy_similarity_binding import (
     WEBP_EXACT_REFLECTION_AFFINE_VERSION,
     WEBP_EXACT_REFLECTION_BASIS,
     WEBP_EXACT_REFLECTION_KEY,
-    WEBP_EXACT_REFLECTION_NOTE,
     WEBP_EXACT_REFLECTION_VERSION,
-    WEBP_EXACT_REFLECTION_VERSIONS,
     box_bounds,
     copy_records,
     exact_copy_size,
@@ -92,7 +96,9 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
 CREATOR = "image-evidence-packets/10"
-_CREATORS = {WEBP_EXACT_REFLECTION_AFFINE_VERSION: "image-evidence-packets/33",
+_CREATORS = {PNG_EXACT_REFLECTION_AFFINE_VERSION: "image-evidence-packets/35",
+             PNG_EXACT_REFLECTION_VERSION: "image-evidence-packets/34",
+             WEBP_EXACT_REFLECTION_AFFINE_VERSION: "image-evidence-packets/33",
              WEBP_EXACT_REFLECTION_VERSION: "image-evidence-packets/32",
              WEBP_EXACT_COPY_AFFINE_VERSION: "image-evidence-packets/31",
              WEBP_EXACT_COPY_VERSION: "image-evidence-packets/30",
@@ -128,6 +134,8 @@ def _active_version() -> str:
 
 
 def _analysis_version(analysis: Analysis) -> str:
+    if settings.environment == "dev" and settings.image_png_reflection_review and analysis.content_type == "image/png":
+        return PNG_EXACT_REFLECTION_AFFINE_VERSION if settings.image_affine_copy_review else PNG_EXACT_REFLECTION_VERSION
     if settings.environment == "dev" and settings.image_lossless_webp_reflection_review and analysis.content_type == "image/webp":
         return WEBP_EXACT_REFLECTION_AFFINE_VERSION if settings.image_affine_copy_review else WEBP_EXACT_REFLECTION_VERSION
     if settings.environment == "dev" and settings.image_lossless_webp_copy_review and analysis.content_type == "image/webp":
@@ -222,12 +230,15 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
             verify(legacy._verified(store, document["source"]["sha256"]), translation["pairs"])
         except (OSError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
-    if translation.get("basis") in {SMALL_PNG_BASIS, TURNED_PNG_BASIS, WEBP_EXACT_COPY_BASIS, WEBP_EXACT_REFLECTION_BASIS}:
+    if translation.get("basis") in {SMALL_PNG_BASIS, TURNED_PNG_BASIS, PNG_EXACT_REFLECTION_BASIS,
+                                    WEBP_EXACT_COPY_BASIS, WEBP_EXACT_REFLECTION_BASIS}:
         from app.evidence.image_exact_small_copy_source import verify
 
-        reflected = translation["basis"] == WEBP_EXACT_REFLECTION_BASIS
-        webp = reflected or translation["basis"] == WEBP_EXACT_COPY_BASIS
-        key = WEBP_EXACT_REFLECTION_KEY if reflected else WEBP_EXACT_COPY_KEY if webp else "small_png_copy_review"
+        basis = translation["basis"]
+        reflected = basis in {PNG_EXACT_REFLECTION_BASIS, WEBP_EXACT_REFLECTION_BASIS}
+        webp = basis in {WEBP_EXACT_COPY_BASIS, WEBP_EXACT_REFLECTION_BASIS}
+        key = {WEBP_EXACT_REFLECTION_BASIS: WEBP_EXACT_REFLECTION_KEY, WEBP_EXACT_COPY_BASIS: WEBP_EXACT_COPY_KEY,
+               PNG_EXACT_REFLECTION_BASIS: PNG_EXACT_REFLECTION_KEY}.get(basis, "small_png_copy_review")
         try:
             verify(legacy._verified(store, document["source"]["sha256"]), translation["pairs"][0],
                    translation[key]["measurement"], webp=webp, reflected=reflected)
@@ -304,7 +315,7 @@ def _copy_record(db: Session, analysis: Analysis, store: ObjectStore, document: 
     return {"schema": SCHEMA if reflected else TRANSLATION_SCHEMA,
             "source_sha256": analysis.sha256, "coordinate_space": "exif-oriented-original", "status": status,
             "authorship_confidence_contribution": 0, "pairs": pairs,
-            "interpretation": WEBP_EXACT_REFLECTION_NOTE if exact_reflection else NOTE if reflected else TRANSLATION_NOTE}
+            "interpretation": EXACT_REFLECTION_NOTE if exact_reflection else NOTE if reflected else TRANSLATION_NOTE}
 
 
 def _affine_record(db: Session, analysis: Analysis, store: ObjectStore, document: dict,
@@ -401,7 +412,7 @@ def build_packet_set(
     translation_status, translations, basis, source = "unsupported_geometry", [], None, None
     jpeg_status = offgrid_review = turned_jpeg_review = exact_review = reflection_review = exact_reflection = None
     webp = version in WEBP_EXACT_COPY_VERSIONS
-    webp_reflection = version in WEBP_EXACT_REFLECTION_VERSIONS
+    exact_reflection_enabled = version in EXACT_REFLECTION_VERSIONS
     turns = 0
     skipped = result_skip(result) is not None
     if skipped:
@@ -468,10 +479,10 @@ def build_packet_set(
         if extra:
             source = source if source is not None else _source(document, store)
             translations, basis = extra, WEBP_EXACT_COPY_BASIS if webp else (TURNED_PNG_BASIS if turns else SMALL_PNG_BASIS)
-    if webp_reflection and version in AFFINE_VERSIONS:
+    if exact_reflection_enabled and version in AFFINE_VERSIONS:
         document[affine.KEY] = _affine_record(db, analysis, store, document, source, skip=skipped)
     affine_status = (document.get(affine.KEY) or {}).get("status")
-    if (webp_reflection and exact_review and status in {"no_pair", "unsupported_geometry"}
+    if (exact_reflection_enabled and exact_review and status in {"no_pair", "unsupported_geometry"}
             and affine_status in {None, "no_pair", "unsupported_geometry"}):
         if exact_review["status"] == "unsupported_profile":
             reflection_review = exact_review
@@ -479,12 +490,13 @@ def build_packet_set(
             from app.evidence.image_exact_small_copy_source import review_reflection
 
             try:
-                reflection_review, extra, exact_reflection = review_reflection(legacy._verified(store, analysis.sha256))
+                reflection_review, extra, exact_reflection = review_reflection(legacy._verified(store, analysis.sha256), webp=webp)
             except (cv2.error, OSError, ValueError, SystemError):
                 reflection_review, extra = {"status": "unavailable", "measurement": None}, []
             if extra:
                 source = source if source is not None else _source(document, store)
-                translation_status, translations, basis = "supported_pair", extra, WEBP_EXACT_REFLECTION_BASIS
+                translation_status, translations = "supported_pair", extra
+                basis = WEBP_EXACT_REFLECTION_BASIS if webp else PNG_EXACT_REFLECTION_BASIS
     document["copy_similarity"] = _copy_record(db, analysis, store, document, source, status, boxes, reflected=True)
     document["copy_translation"] = _copy_record(db, analysis, store, document, source, translation_status,
                                                 translations, reflected=False, turns=turns, exact_reflection=exact_reflection)
@@ -499,9 +511,10 @@ def build_packet_set(
         document["copy_translation"]["small_png_copy_review"] = exact_review
     if webp:
         document["copy_translation"][WEBP_EXACT_COPY_KEY] = exact_review
-    if webp_reflection:
-        document["copy_translation"][WEBP_EXACT_REFLECTION_KEY] = reflection_review
-    if not webp_reflection and version in AFFINE_VERSIONS:
+    if exact_reflection_enabled:
+        key = WEBP_EXACT_REFLECTION_KEY if webp else PNG_EXACT_REFLECTION_KEY
+        document["copy_translation"][key] = reflection_review
+    if not exact_reflection_enabled and version in AFFINE_VERSIONS:
         document[affine.KEY] = _affine_record(db, analysis, store, document, source, skip=skipped)
     document = json.loads(canonical_json(document))
     document["sha256"] = prior.packet_hash(document)

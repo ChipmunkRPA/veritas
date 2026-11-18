@@ -723,9 +723,12 @@ def test_small_png_copy_preserves_exact_crops_and_rejects_unsupported_sources(ev
 
 @pytest.mark.parametrize("axis, transform", [(1, "horizontal_reflection"), (0, "vertical_reflection")])
 @pytest.mark.parametrize("affine", [False, True], ids=["exact-profile", "exact-and-geometric-profile"])
-def test_reflected_webp_pair_binds_original_crops_and_exact_axis(evidence_http, monkeypatch, axis, transform, affine):
+@pytest.mark.parametrize("webp", [False, True], ids=["png", "webp"])
+def test_reflected_pair_binds_original_crops_and_exact_axis(evidence_http, monkeypatch, axis, transform, affine, webp):
     from app.evidence import image_exact_small_copy_source
     from app.evidence.image_copy_similarity_binding import (
+        PNG_EXACT_REFLECTION_BASIS,
+        PNG_EXACT_REFLECTION_KEY,
         WEBP_EXACT_COPY_KEY,
         WEBP_EXACT_REFLECTION_BASIS,
         WEBP_EXACT_REFLECTION_KEY,
@@ -733,17 +736,18 @@ def test_reflected_webp_pair_binds_original_crops_and_exact_axis(evidence_http, 
 
     f = evidence_http
     monkeypatch.setattr(settings, "environment", "dev")
-    monkeypatch.setattr(settings, "image_lossless_webp_reflection_review", True)
+    monkeypatch.setattr(settings, "image_lossless_webp_reflection_review", webp)
+    monkeypatch.setattr(settings, "image_png_reflection_review", not webp)
     monkeypatch.setattr(settings, "image_affine_copy_review", affine)
     monkeypatch.setattr(settings, "image_embedded_pair_review", True)
     rgb = np.random.default_rng(4206).integers(0, 256, (512, 512, 3), dtype=np.uint8)
     rgb[72:100, 81:117] = np.flip(rgb[246:274, 351:387], axis=axis)
     image = Image.fromarray(rgb)
-    encoded = _bytes(image, format="WEBP", lossless=True)
-    assert image_exact_small_copy_source.review(encoded, webp=True, include_rotation=True)[0]["status"] == "no_pair"
+    encoded = _bytes(image, format="WEBP", lossless=True) if webp else _bytes(image, format="PNG")
+    assert image_exact_small_copy_source.review(encoded, webp=webp, include_rotation=True)[0]["status"] == "no_pair"
     with Session(f.engine) as db:
         analysis = db.get(Analysis, "image-unprepared")
-        analysis.content_type = "image/webp"
+        analysis.content_type = "image/webp" if webp else "image/png"
         stored = f.store.put_bytes(encoded)
         analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
         result = copy.deepcopy(specimen("image", "standard").result)
@@ -753,11 +757,12 @@ def test_reflected_webp_pair_binds_original_crops_and_exact_axis(evidence_http, 
         f.store.put_bytes(canonical_json(result))
         document = service.persist_packet_set(db, analysis, f.store, result=result)
         base = base_document(document)
-        assert base["version"] == ("image-evidence-35" if affine else "image-evidence-34")
+        assert base["version"] == f"image-evidence-{(34 if webp else 36) + affine}"
         check = base["copy_translation"]
-        assert check["basis"] == WEBP_EXACT_REFLECTION_BASIS and check["authorship_confidence_contribution"] == 0
-        assert check[WEBP_EXACT_COPY_KEY] == {"status": "no_pair", "measurement": None}
-        measured = check[WEBP_EXACT_REFLECTION_KEY]["measurement"]
+        assert check["basis"] == (WEBP_EXACT_REFLECTION_BASIS if webp else PNG_EXACT_REFLECTION_BASIS)
+        assert check["authorship_confidence_contribution"] == 0
+        assert check[WEBP_EXACT_COPY_KEY if webp else "small_png_copy_review"] == {"status": "no_pair", "measurement": None}
+        measured = check[WEBP_EXACT_REFLECTION_KEY if webp else PNG_EXACT_REFLECTION_KEY]["measurement"]
         assert measured["matching_pixels"] == 36 * 28
         pair, = check["pairs"]
         assert pair["transform"] == transform
@@ -765,27 +770,30 @@ def test_reflected_webp_pair_binds_original_crops_and_exact_axis(evidence_http, 
                                    "area_b": {"x": 351, "y": 246, "w": 36, "h": 28}}
         flipped = {**pair, "transform": "vertical_reflection" if axis == 1 else "horizontal_reflection"}
         with pytest.raises(ValueError, match="measurement differs"):
-            image_exact_small_copy_source.verify(encoded, flipped, measured, webp=True, reflected=True)
+            image_exact_small_copy_source.verify(encoded, flipped, measured, webp=webp, reflected=True)
         for role, crop in pair["artifacts"].items():
             bounds = image_packets_v7.box_bounds(pair["regions"][role], *image.size)
             with Image.open(io.BytesIO(f.store.read_bytes(crop["sha256"]))) as actual:
                 assert actual.tobytes() == image.crop(bounds).tobytes()
 
 
-def test_reflection_review_withholds_symmetry_and_competing_exact_pairs():
+@pytest.mark.parametrize("webp", [False, True], ids=["png", "webp"])
+def test_reflection_review_withholds_symmetry_and_competing_exact_pairs(webp):
     from app.evidence.image_exact_small_copy_source import review_reflection
 
     rgb = np.random.default_rng(1206).integers(0, 256, (512, 512, 3), dtype=np.uint8)
     symmetrical = rgb.copy()
     symmetrical[:, 256:] = symmetrical[:, :256][:, ::-1]
-    encoded = _bytes(Image.fromarray(symmetrical), format="WEBP", lossless=True)
-    assert review_reflection(encoded)[0] == {"status": "unassessed_match_budget", "measurement": None}
+    carrier = "WEBP" if webp else "PNG"
+    encoded = _bytes(Image.fromarray(symmetrical), format=carrier, lossless=True)
+    assert review_reflection(encoded, webp=webp)[0] == {"status": "unassessed_match_budget", "measurement": None}
     rgb[72:100, 81:117] = rgb[246:274, 351:387][:, ::-1]
     rgb[114:134, 383:407] = rgb[289:309, 119:143][::-1]
-    encoded = _bytes(Image.fromarray(rgb), format="WEBP", lossless=True)
-    assert review_reflection(encoded)[0] == {"status": "ambiguous_pairs", "measurement": None}
-    lossy = _bytes(Image.fromarray(rgb), format="WEBP", lossless=False)
-    assert review_reflection(lossy)[0] == {"status": "unsupported_profile", "measurement": None}
+    encoded = _bytes(Image.fromarray(rgb), format=carrier, lossless=True)
+    assert review_reflection(encoded, webp=webp)[0] == {"status": "ambiguous_pairs", "measurement": None}
+    outside = (_bytes(Image.fromarray(rgb), format=carrier, lossless=False) if webp else
+               _bytes(Image.fromarray(rgb).convert("RGBA"), format="PNG"))
+    assert review_reflection(outside, webp=webp)[0] == {"status": "unsupported_profile", "measurement": None}
 
 
 @pytest.mark.parametrize("webp", [False, True], ids=["png", "webp"])

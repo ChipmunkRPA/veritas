@@ -88,10 +88,10 @@ def review(data, *, include_rotation=False, webp=False):
     return {"status": item["status"], "measurement": match["measurement"]}, [match["pair"]], match.get("turns", 0)
 
 
-def review_reflection(data):
+def review_reflection(data, *, webp=True):
     from app.detectors.image import exact_reflected_copy
 
-    pixels = webp_rgb(data)
+    pixels = webp_rgb(data) if webp else native_rgb(data)
     if pixels is None:
         return {"status": "unsupported_profile", "measurement": None}, [], None
     item = exact_reflected_copy.analyse(pixels)
@@ -112,7 +112,7 @@ def verify(data, pair, measurement, *, webp=False, reflected=False):
         from app.detectors.image.exact_reflected_copy import AXES
 
         axis = AXES.get(transform)
-        recorded = exact_small_copy.witness(pixels, *boxes, reflection_axis=axis) if webp and axis is not None else None
+        recorded = exact_small_copy.witness(pixels, *boxes, reflection_axis=axis) if axis is not None else None
     else:
         turns = PNG_COPY_TURNS.get(transform)
         recorded = exact_small_copy.witness(pixels, *boxes, turns=turns) if turns is not None else None

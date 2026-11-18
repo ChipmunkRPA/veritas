@@ -21,6 +21,8 @@ from app.evidence.image_copy_similarity_binding import (
     JPEG_BLOCK_BASIS,
     NATIVE_JPEG_ROTATION_VERSIONS,
     OFFGRID_BASIS,
+    PNG_EXACT_REFLECTION_BASIS,
+    PNG_EXACT_REFLECTION_KEY,
     ROLES,
     SMALL_PNG_BASIS,
     TURNED_JPEG_BASIS,
@@ -267,14 +269,16 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError('Exact two-area evidence requires a PNG within the tested source scope')
         with original_png:
             embedded_pixels.verify(original_png, pair, lambda digest: archive.read(f'assets/{digest}.png'))
-    small_png = translation.get("basis") in {SMALL_PNG_BASIS, TURNED_PNG_BASIS}
-    reflected_webp = translation.get("basis") == WEBP_EXACT_REFLECTION_BASIS
-    exact_webp = reflected_webp or translation.get("basis") == WEBP_EXACT_COPY_BASIS
+    basis = translation.get("basis")
+    small_png = basis in {SMALL_PNG_BASIS, TURNED_PNG_BASIS, PNG_EXACT_REFLECTION_BASIS}
+    exact_webp = basis in {WEBP_EXACT_COPY_BASIS, WEBP_EXACT_REFLECTION_BASIS}
+    reflected = basis in {PNG_EXACT_REFLECTION_BASIS, WEBP_EXACT_REFLECTION_BASIS}
     if small_png or exact_webp:
         from app.evidence.image_exact_small_copy_source import verify
 
-        key = WEBP_EXACT_REFLECTION_KEY if reflected_webp else WEBP_EXACT_COPY_KEY if exact_webp else "small_png_copy_review"
-        verify(data, translation["pairs"][0], translation[key]["measurement"], webp=exact_webp, reflected=reflected_webp)
+        key = {WEBP_EXACT_REFLECTION_BASIS: WEBP_EXACT_REFLECTION_KEY, WEBP_EXACT_COPY_BASIS: WEBP_EXACT_COPY_KEY,
+               PNG_EXACT_REFLECTION_BASIS: PNG_EXACT_REFLECTION_KEY}.get(basis, "small_png_copy_review")
+        verify(data, translation["pairs"][0], translation[key]["measurement"], webp=exact_webp, reflected=reflected)
     matched_blocks = 0
     if translation.get('basis') == JPEG_BLOCK_BASIS:
         from app.evidence.image_jpeg_copy_blocks_source import verify
@@ -293,13 +297,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         detail += f' Recomputed {masks} geometric copy masks from the source image.'
     if matched_blocks:
         detail += f' Reproduced {matched_blocks} matching encoded JPEG brightness blocks per paired area in total.'
-    if small_png:
-        alignment = " after rotation" if translation.get("basis") == TURNED_PNG_BASIS else ""
-        detail += f" Recomputed the exact matching RGB pixels and surrounding differences{alignment} on the submitted PNG."
-    if exact_webp:
+    if small_png or exact_webp:
         transform = translation["pairs"][0]["transform"]
-        alignment = f" after {transform.replace('_', ' ')}" if reflected_webp else " after rotation" if transform != "same_orientation" else ""
-        detail += f" Recomputed the exact matching RGB pixels and surrounding differences{alignment} on the submitted lossless WebP."
+        alignment = f" after {transform.replace('_', ' ')}" if reflected else " after rotation" if transform != "same_orientation" else ""
+        carrier = "lossless WebP" if exact_webp else "PNG"
+        detail += f" Recomputed the exact matching RGB pixels and surrounding differences{alignment} on the submitted {carrier}."
     if offgrid:
         detail += ' Recomputed the recorded color differences inside and around the two selected JPEG crops.'
     if turned_jpeg:

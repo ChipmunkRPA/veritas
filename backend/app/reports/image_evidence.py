@@ -112,9 +112,13 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     store.verify(document["source"]["sha256"])
     from app.evidence import image_copy_affine_binding as affine
     from app.evidence.image_copy_similarity_binding import (
+        EXACT_REFLECTION_VERSIONS,
         JPEG_BLOCK_STATUS_TEXT,
         NATIVE_JPEG_ROTATION_VERSIONS,
         OFFGRID_STATUS_TEXT,
+        PNG_EXACT_REFLECTION_KEY,
+        PNG_EXACT_REFLECTION_STATUS_TEXT,
+        PNG_EXACT_REFLECTION_VERSIONS,
         SKIPPED_CREDENTIALS,
         SMALL_PNG_CROP_MAX,
         SMALL_PNG_CROP_MIN,
@@ -128,7 +132,6 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         WEBP_EXACT_COPY_VERSIONS,
         WEBP_EXACT_REFLECTION_KEY,
         WEBP_EXACT_REFLECTION_STATUS_TEXT,
-        WEBP_EXACT_REFLECTION_VERSIONS,
         exact_copy_size,
         status_text,
     )
@@ -174,16 +177,19 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                     else TRANSLATION_STATUS[status])
         if field == "copy_translation":
             reflected_webp = check.get(WEBP_EXACT_REFLECTION_KEY)
-            if webp_review := reflected_webp or check.get(WEBP_EXACT_COPY_KEY):
-                review_status = webp_review["status"]
-                coverage_text = WEBP_EXACT_REFLECTION_STATUS_TEXT if reflected_webp else WEBP_EXACT_COPY_STATUS_TEXT
-                check["observation"] = (webp_scope if review_status == "unsupported_profile"
+            reflected_png = check.get(PNG_EXACT_REFLECTION_KEY)
+            if exact_review := reflected_png or reflected_webp or check.get(WEBP_EXACT_COPY_KEY):
+                review_status = exact_review["status"]
+                coverage_text = (PNG_EXACT_REFLECTION_STATUS_TEXT if reflected_png else
+                                 WEBP_EXACT_REFLECTION_STATUS_TEXT if reflected_webp else WEBP_EXACT_COPY_STATUS_TEXT)
+                check["observation"] = (webp_scope if review_status == "unsupported_profile" and not reflected_png
                                         else coverage_text[review_status])
-                if measured := webp_review["measurement"]:
+                if measured := exact_review["measurement"]:
                     transform = check["pairs"][0]["transform"]
-                    if reflected_webp:
+                    if reflected_webp or reflected_png:
                         direction = "horizontally" if transform == "horizontal_reflection" else "vertically"
-                        check["observation"] = f"Flipping Area B {direction} aligns every RGB pixel with Area A in the lossless WebP."
+                        carrier = "PNG" if reflected_png else "lossless WebP"
+                        check["observation"] = f"Flipping Area B {direction} aligns every RGB pixel with Area A in the {carrier}."
                     elif transform == "same_orientation":
                         check["observation"] = "The two lossless WebP crops match exactly in their original orientation."
                     else:
@@ -251,7 +257,15 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                     check["basis_text"] = " ".join(filter(None, (check.get("basis_text"), scope)))
             if base_version in WEBP_EXACT_COPY_VERSIONS and not check["pairs"] and status != SKIPPED_CREDENTIALS:
                 check["interpretation"] = "Copy comparisons look for repeated image detail. The origin of the image and AI involvement remain undetermined."
-        if field == "copy_translation" and base_version in WEBP_EXACT_REFLECTION_VERSIONS:
+            if base_version in PNG_EXACT_REFLECTION_VERSIONS and not reflected_png and status != SKIPPED_CREDENTIALS:
+                outside_size = not exact_copy_size(document["source"]["width"], document["source"]["height"], webp=False)
+                scope = (SMALL_PNG_STATUS_TEXT["unsupported_profile"] if outside_size
+                         else "The exact PNG reflection check did not run for this result.")
+                if outside_size and status == "unsupported_geometry":
+                    check["observation"] = scope
+                else:
+                    check["basis_text"] = " ".join(filter(None, (check.get("basis_text"), scope)))
+        if field == "copy_translation" and base_version in EXACT_REFLECTION_VERSIONS:
             check["title"] = "Exact and geometric copy comparisons"
         for pair in check["pairs"]:
             pair["images"] = []

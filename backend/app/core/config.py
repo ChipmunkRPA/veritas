@@ -310,6 +310,8 @@ class Settings(BaseSettings):
     document_gao_archive_sha256: str | None = None  # Expected SHA-256 of the local GAO highlights pack.
     document_gao_archive_resolve_competition: bool = False  # Compare a strongly supported source when another has only short matches.
     document_gao_automatic_review: bool = False  # Include qualified earlier wording in local document evidence.
+    document_economic_archive_path: Path | None = None  # Optional local BEA and Census release pack.
+    document_economic_archive_sha256: str | None = None  # Expected SHA-256 of the local release pack.
     document_gao_pdf_columns_review: bool = False  # Include bounded, mapped PDF columns in earlier wording evidence.
     document_pdf_saved_wording_review: bool = False  # Compare wording and pictures across retained PDF saves.
     image_affine_copy_review: bool = False  # Development-only dense masks for same-image geometric copies.

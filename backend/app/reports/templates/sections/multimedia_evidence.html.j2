@@ -75,8 +75,14 @@
 <p>{{ wording.scope }}</p>
 {% for section in wording.sections %}
 {% if section.column is defined %}<h4>Original PDF page {{ section.page }} · {{ 'Both columns, left to right' if section.column == 'both' else section.column | capitalize ~ ' column' }}</h4>{% endif %}
+{% if section.publisher is defined %}
+<p><a href="{{ section.source_url }}">{{ section.reference.title }}</a> · {{ section.publisher }} · Published {{ section.reference.published_date }}</p>
+<p class="caption">Compared extracted characters <span class="mono">[{{ section.submitted_range[0] }}, {{ section.submitted_range[1] }})</span>. <a href="{{ wording.license_url }}">Publisher reuse and citation guidance</a>.</p>
+<p class="caption">Retained publisher page SHA-256 <span class="mono">{{ section.reference.source_record_sha256 }}</span>. The current publisher page may include later corrections.</p>
+{% else %}
 <p><a href="{{ section.source_url }}">U.S. GAO report {{ section.reference.id }}</a> · Published {{ section.reference.published_date }}</p>
 <p class="caption">Compared {{ 'column' if section.column is defined else 'extracted' }} characters <span class="mono">[{{ section.submitted_range[0] }}, {{ section.submitted_range[1] }})</span>. <a href="{{ section.reference.version_url }}">GovReport transcript</a> · <a href="{{ wording.license_url }}">CC BY 4.0</a></p>
+{% endif %}
 {% if section.get('published_style_matches') %}
 <h4>Writing highlights with exact published wording</h4>
 {% for match in section.published_style_matches %}

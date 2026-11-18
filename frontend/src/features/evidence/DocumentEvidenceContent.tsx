@@ -333,9 +333,11 @@ function PagePlates({ set, packet, page, token, mediaReady }: { set: DocumentEvi
 function PublishedWording({ review, method }: { review: PublishedWordingReview; method?: string }) {
   const columns = review.schema === 'document-published-wording-review/2'
   const sections = columns ? review.sections : [review]
+  const earlierSource = review.schema === 'document-published-wording-review/4'
+    ? 'a locally retained copy of the cited federal release' : 'the cited U.S. Government Accountability Office highlight'
   return <section id="document-published-wording" aria-labelledby="published-wording-title" className="mt-4 rounded-md border border-border p-4">
     <h3 id="published-wording-title" className="m-0 text-body font-medium">Earlier published wording</h3>
-    <p className="mt-2 mb-0 text-small">This check compares the marked text with the cited U.S. Government Accountability Office highlight. Wording differences can result from ordinary editing, transcription or AI assistance. The comparison contributes zero weight to the overall AI assessment.</p>
+    <p className="mt-2 mb-0 text-small">This check compares the marked text with {earlierSource}. Wording differences can result from ordinary editing, transcription or AI assistance. The comparison contributes zero weight to the overall AI assessment.</p>
     {columns && <p className="mt-2 mb-0 text-small">Only the cited spans in the listed columns were compared. The check sets aside bullets, matching wrapped words, and standalone headings without an earlier counterpart.</p>}
     {method === 'odt' && <p className="mt-2 mb-0 text-small">Locations count characters within extracted OpenDocument body paragraphs in reading order.</p>}
     {sections.map(section => <WordingSection key={'column' in section ? `${section.page}-${section.column}` : section.reference.id}
@@ -371,10 +373,16 @@ function WordingSection({ section, matches }: {
   const earlier = ([start, end]: [number, number]) => transcript.slice(start, end).join('')
   const column = 'column' in section ? section.column : undefined
   const sentences = section.changed_sentences ?? []
+  const isRelease = 'publisher' in source
   return <div className="mt-3">
     {'column' in section && <h4 className="m-0 text-small font-medium">Original PDF page {section.page} · {section.column === 'both' ? 'Both columns, left to right' : `${section.column === 'left' ? 'Left' : 'Right'} column`}</h4>}
-    <p className="mt-2 mb-0 text-small"><a className="underline" href={`https://www.gao.gov/products/${encodeURIComponent(source.id)}`}>U.S. GAO report {source.id}</a> · Published {source.published_date}</p>
-    <p className="mt-2 mb-0 text-caption text-text-muted">Compared {column ? 'column' : 'extracted'} characters <span className="font-mono">[{section.submitted_range[0]}, {section.submitted_range[1]})</span>. <a className="underline" href={source.version_url}>GovReport transcript</a> · <a className="underline" href="https://gov-report-data.github.io/#license">CC BY 4.0</a></p>
+    {isRelease ? <>
+      <p className="mt-2 mb-0 text-small"><a className="underline" href={source.source_url}>{source.title}</a> · {source.publisher === 'bea' ? 'U.S. Bureau of Economic Analysis' : 'U.S. Census Bureau'} · Published {source.published_date}</p>
+      <p className="mt-2 mb-0 text-caption text-text-muted break-words">Retained publisher page SHA-256 <span className="font-mono">{source.source_record_sha256}</span>. The current publisher page may include later corrections.</p>
+    </> : <p className="mt-2 mb-0 text-small"><a className="underline" href={`https://www.gao.gov/products/${encodeURIComponent(source.id)}`}>U.S. GAO report {source.id}</a> · Published {source.published_date}</p>}
+    <p className="mt-2 mb-0 text-caption text-text-muted">Compared {column ? 'column' : 'extracted'} characters <span className="font-mono">[{section.submitted_range[0]}, {section.submitted_range[1]})</span>. {isRelease
+      ? <a className="underline" href={source.publisher === 'bea' ? 'https://www.bea.gov/help/faq/145' : 'https://www.census.gov/about/policies/citation.html'}>Publisher reuse and citation guidance</a>
+      : <><a className="underline" href={source.version_url}>GovReport transcript</a> · <a className="underline" href="https://gov-report-data.github.io/#license">CC BY 4.0</a></>}</p>
     {!!matches.length && <>
       <h4 className="mt-3 mb-0 text-small font-medium">Writing highlights with exact published wording</h4>
       {matches.map(match => <div key={match.start} className="mt-2 text-small">

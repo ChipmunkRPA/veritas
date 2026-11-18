@@ -578,21 +578,38 @@ def v1_view(ctx: StageContext, result: AnalysisResultV2) -> dict[str, Any]:
 
 
 def _published_wording(ctx: StageContext, decoded: dict, intervals: dict | None) -> dict | None:
-    if (settings.environment != "dev" or not settings.document_gao_automatic_review
-            or settings.document_gao_archive_path is None):
+    if settings.environment != "dev":
         return None
-    from app.evidence import document_archive, document_gao_archive
+    release_path = settings.document_economic_archive_path
+    release_sha = settings.document_economic_archive_sha256
+    gao_archive = settings.document_gao_archive_path if settings.document_gao_automatic_review else None
+    if not (release_path is not None and release_sha is not None) and gao_archive is None:
+        return None
+    from app.evidence import document_archive, document_economic_archive, document_gao_archive
 
     extension = Path(ctx.outputs["ingest"]["filename"]).suffix.lower()
     text, mapping, meta = decoded["text"], decoded["source_map"], decoded["meta"]
+    word_review = decoded.get(document_tracked_changes.KEY)
+    if (release_path is not None and release_sha is not None and document_economic_archive.HEADER.match(text)
+            and document_published_wording.eligible(extension, text, mapping, meta, word_review)):
+        try:
+            releases = document_economic_archive.library(release_path, release_sha)
+            record = document_published_wording.capture_release(text, decoded["paragraphs"], mapping, meta, release_sha, releases)
+            if record is not None:
+                return record
+        except (document_archive.ArchiveUnavailable, ValueError, OSError) as error:
+            ctx.log.warning("published_release.omitted", error_type=type(error).__name__)
+
+    if gao_archive is None:
+        return None
     pdf_columns = settings.document_gao_pdf_columns_review
-    if (not document_published_wording.eligible(extension, text, mapping, meta, decoded.get(document_tracked_changes.KEY),
+    if (not document_published_wording.eligible(extension, text, mapping, meta, word_review,
                                                 pdf_columns=pdf_columns)
             or not document_gao_archive.comparison_tokens(text)):
         return None
     try:
         sha = settings.document_gao_archive_sha256
-        reports, index = document_gao_archive.library(settings.document_gao_archive_path, sha)
+        reports, index = document_gao_archive.library(gao_archive, sha)
         return document_published_wording.capture(text, decoded["paragraphs"], mapping, meta, intervals, sha, reports, index,
                                                    pdf_columns=pdf_columns)
     except (document_archive.ArchiveUnavailable, ValueError, OSError) as error:

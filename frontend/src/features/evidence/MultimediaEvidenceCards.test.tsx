@@ -259,6 +259,27 @@ describe('ordinary multimedia evidence', () => {
     expect(section.getByText('Monday')).toBeTruthy()
   })
 
+  it('shows the cited federal release, pinned version and original Word location', () => {
+    const url = 'https://www.bea.gov/news/2018/personal-income-and-outlays-july-2018'
+    show({ ...document, packets: [], source: { ...document.source, method: 'python-docx' }, coverage: {
+      published_wording_review: {
+        schema: 'document-published-wording-review/4', authorship_confidence_contribution: 0, archive_sha256: 'b'.repeat(64),
+        reference: { id: 'c'.repeat(64), publisher: 'bea', title: 'Personal Income and Outlays, July 2018', source_url: url,
+          published_date: '2018-08-30', text: 'Monday', source_record_sha256: 'd'.repeat(64), transcript_sha256: 'e'.repeat(64) },
+        submitted_range: [0, 39], archive_range: [0, 6], published_style_matches: [],
+        changes: [{ start: 31, end: 39, submitted: 'Thursday', archive_range: [0, 6], locations: [
+          { start: 31, end: 39, paragraph: 2, ranges: [[12, 20]] },
+        ] }],
+      },
+    } })
+    const section = within(screen.getByRole('region', { name: 'Earlier published wording' }))
+    expect(section.getByRole('link', { name: 'Personal Income and Outlays, July 2018' }).getAttribute('href')).toBe(url)
+    expect(section.getByText(/contributes zero weight/)).toBeTruthy()
+    expect(section.getByText(/Word paragraph 2 characters/)).toBeTruthy()
+    expect(section.getByText('d'.repeat(64))).toBeTruthy()
+    expect(section.queryByRole('link', { name: 'GovReport transcript' })).toBeNull()
+  })
+
   it('explains a passage found by comparing writing within the file', () => {
     show({ ...document, packets: [], coverage: {
       writing_passage_intervals: {

@@ -536,7 +536,8 @@ type PublishedWordingLocation = { start: number; end: number; page: number; boxe
   | { start: number; end: number; paragraph?: number; ranges: [number, number][];
       coordinate_space?: 'extracted-paragraph-codepoints' }
 export interface PublishedWordingSection {
-  reference: { id: string; published_date: string; version_url: string; source_record_sha256: string; transcript_sha256: string; text: string };
+  reference: { id: string; published_date: string; source_record_sha256: string; transcript_sha256: string; text: string }
+    & ({ version_url: string } | { publisher: 'bea' | 'census'; title: string; source_url: string });
   submitted_range: [number, number]; archive_range: [number, number];
   changes: (PublishedWordingRange & { submitted: string; locations: PublishedWordingLocation[] })[];
   changed_sentences?: { sentence: number; start: number; end: number; text: string; locations: PublishedWordingLocation[]; differences: number[] }[];
@@ -546,7 +547,7 @@ export type PublishedWordingColumn = PublishedWordingSection & {
 }
 export type PublishedWordingReview = {
   archive_sha256: string; authorship_confidence_contribution: 0; published_style_matches: PublishedWordingRange[];
-} & (({ schema: 'document-published-wording-review/1' | 'document-published-wording-review/3' } & PublishedWordingSection)
+} & (({ schema: 'document-published-wording-review/1' | 'document-published-wording-review/3' | 'document-published-wording-review/4' } & PublishedWordingSection)
   | { schema: 'document-published-wording-review/2'; sections: PublishedWordingColumn[] })
 export type MappedTextFinding = {
   start: number; end: number; text: string

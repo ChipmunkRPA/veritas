@@ -18,6 +18,7 @@ from app.evidence.document_scope import PUBLISHED_WORDING_KEY as KEY
 SCHEMA = "document-published-wording-review/1"
 PDF_COLUMNS_SCHEMA = "document-published-wording-review/2"
 SENTENCES_SCHEMA = "document-published-wording-review/3"
+RELEASE_SCHEMA = "document-published-wording-review/4"
 TITLE = "Earlier published wording"
 SCOPE = ("This check compares the marked text with the cited U.S. Government Accountability Office highlight. "
          "Wording differences can result from ordinary editing, transcription or AI assistance. "
@@ -51,6 +52,14 @@ def report_view(record, method):
     if record is None:
         return None
     columns = record["schema"] == PDF_COLUMNS_SCHEMA
+    if record["schema"] == RELEASE_SCHEMA:
+        from app.evidence import document_economic_archive as release
+
+        reference = record["reference"]
+        publisher, rights, _ = release.ARCHIVES[reference["publisher"]]
+        return {"title": TITLE, "scope": release.SCOPE + (" " + ODT_SCOPE if method == "odt" else ""),
+                "license_url": rights, "method": method, "published_style_matches": [],
+                "sections": [{**record, "source_url": reference["source_url"], "publisher": publisher}]}
     sections = record["sections"] if columns else [record]
     layout_scope = PDF_COLUMNS_SCOPE if columns else ODT_SCOPE if method == "odt" else ""
     return {"title": TITLE, "scope": SCOPE + (" " + layout_scope if layout_scope else ""),
@@ -268,6 +277,26 @@ def capture(text, paragraphs, mapping, metadata, intervals, pack_hash, reports, 
     return record
 
 
+def capture_release(text, paragraphs, mapping, metadata, pack_hash, releases):
+    from app.detectors.text.extract import Document
+    from app.evidence import document_economic_archive as release
+
+    reference = release.select(text, releases)
+    alignment = release.align(text, reference) if reference is not None else None
+    if alignment is None:
+        return None
+    submitted, archived, edits = alignment
+    places_at = partial(_places, metadata["method"], mapping)
+    changes = _mapped_changes(text, edits, places_at)
+    if len(changes) != len(edits):
+        return None
+    doc = Document(text, paragraphs, metadata, mapping)
+    return {"schema": RELEASE_SCHEMA, "archive_sha256": pack_hash, "reference": reference,
+            "submitted_range": submitted, "archive_range": archived, "changes": changes,
+            "changed_sentences": _sentence_rows(doc, changes, places_at), "published_style_matches": [],
+            "authorship_confidence_contribution": 0}
+
+
 def _bounded(value, limit, *, empty=False):
     return (isinstance(value, list) and len(value) == 2 and all(type(v) is int for v in value)
             and 0 <= value[0] <= value[1] <= limit and (empty or value[0] < value[1]))
@@ -401,12 +430,20 @@ def validate(document, expected):
     schema = record.get("schema")
     required = {"schema", "archive_sha256", "reference", "submitted_range", "archive_range", "changes",
                 "published_style_matches", "authorship_confidence_contribution"}
-    if schema == SENTENCES_SCHEMA:
+    if schema in {SENTENCES_SCHEMA, RELEASE_SCHEMA}:
         required.add("changed_sentences")
-    if (schema not in {SCHEMA, SENTENCES_SCHEMA} or set(record) != required
+    if (schema not in {SCHEMA, SENTENCES_SCHEMA, RELEASE_SCHEMA} or set(record) != required
             or not _bounded(record["submitted_range"], source["chars"])):
         raise ValueError("The published wording comparison differs from its recorded commitment or scope")
-    _validate_reference(record["reference"], record["archive_range"])
+    if schema == RELEASE_SCHEMA:
+        from app.evidence import document_economic_archive as release
+
+        release.validate_reference(record["reference"])
+        if (record["published_style_matches"] != [] or len(record["changes"]) > release.MAX_EDITS
+                or not _bounded(record["archive_range"], len(record["reference"]["text"]))):
+            raise ValueError("The archived release comparison has an invalid scope")
+    else:
+        _validate_reference(record["reference"], record["archive_range"])
     start, end = record["submitted_range"]
     earlier_start, earlier_end = record["archive_range"]
     intervals = coverage.get(PASSAGE_INTERVALS_KEY) or {}
@@ -421,10 +458,10 @@ def validate(document, expected):
         seen.add(pair)
     for row in record["changes"]:
         _validate_change(row, start, end, earlier_start, earlier_end)
-    if schema == SENTENCES_SCHEMA:
+    if schema in {SENTENCES_SCHEMA, RELEASE_SCHEMA}:
         _validate_sentences(record["changed_sentences"], record["changes"], source["chars"])
     if source["method"] == "odt":
-        if schema != SENTENCES_SCHEMA:
+        if schema not in {SENTENCES_SCHEMA, RELEASE_SCHEMA}:
             raise ValueError("OpenDocument wording comparison requires extracted paragraph locations")
         for row in record["changes"] + record["changed_sentences"]:
             _validate_odt_locations(row)
@@ -460,6 +497,13 @@ def verify_source(document, text, mapping, metadata, word_review, *, paragraphs=
         return
     method = document["source"]["method"]
     extension = next(ext for ext, name in FORMATS.items() if method == name)
+    if record["schema"] == RELEASE_SCHEMA:
+        reference = record["reference"]
+        if (paragraphs is None or not eligible(extension, text, mapping, metadata, word_review)
+                or capture_release(text, paragraphs, mapping, metadata, record["archive_sha256"],
+                                   {reference["source_url"]: reference}) != record):
+            raise ValueError("Official release attribution, wording or locations differ from the original file")
+        return
     intervals = document["coverage"].get(PASSAGE_INTERVALS_KEY)
     if (not eligible(extension, text, mapping, metadata, word_review)
             or _exact_matches(text, record, intervals) != record["published_style_matches"]):

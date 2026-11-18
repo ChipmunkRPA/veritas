@@ -219,6 +219,7 @@
 <blockquote><mark>{{ row.text }}</mark></blockquote>
 <p>{% if row.reason == 'weekday_mismatch' %}The stated date fell on {{ row.expected_weekday }}. The text says {{ row.stated_weekday }}.{% else %}The stated day does not exist in that month and year on the Gregorian calendar.{% endif %}</p>
 <p class="caption">{% if row.anchor.kind == 'pdf' %}PDF page {{ row.anchor.page }}, text block {{ row.anchor.block }} · {% elif row.anchor.kind == 'docx' %}Word paragraph {{ row.anchor.paragraph_index + 1 }} · {% elif row.anchor.kind == 'email' %}Email body part {{ row.anchor.mime_part }} · {% endif %}Extracted characters [{{ row.start }}, {{ row.end }}). JSON pointer <span class="mono">/calendar_consistency/locations/{{ loop.index0 }}</span>.</p>
+{% if 'control' in row.anchor.get('body_path', []) %}<p class="caption">Word body path {{ row.anchor.body_path | join(' / ') }}.</p>{% endif %}
 {% if row.location.ranges is defined %}<p class="caption">Original text positions {% for start, end in row.location.ranges %}[{{ start }}, {{ end }}){% if not loop.last %}, {% endif %}{% endfor %}.</p>{% endif %}
 </article>
 {% endfor %}
@@ -230,12 +231,14 @@
 {% if arithmetic and arithmetic.checked_equations %}
 <h3 id="document-arithmetic-consistency">Arithmetic check</h3>
 <p>Checked {{ arithmetic.checked_equations }} explicit {{ 'equation' if arithmetic.checked_equations == 1 else 'equations' }}. Found {{ arithmetic.disagreements }} {{ 'disagreement' if arithmetic.disagreements == 1 else 'disagreements' }}.</p>
+{% if arithmetic.get('length_conversions_checked') %}<p>Includes {{ arithmetic.length_conversions_checked }} {{ 'length conversion' if arithmetic.length_conversions_checked == 1 else 'length conversions' }}. Expected values use standard length units and the precision shown in the document.</p>{% endif %}
 {% if not evidence.withheld %}
 {% for row in arithmetic.locations %}
 <article class="multimedia-evidence-packet">
 <blockquote><mark>{{ row.text }}</mark></blockquote>
 <p>The calculation gives {{ row.calculated }}. The document states {{ row.stated }}.</p>
 <p class="caption">{% if row.anchor.kind == 'pdf' %}PDF page {{ row.anchor.page }}, text block {{ row.anchor.block }} · {% elif row.anchor.kind == 'docx' %}Word paragraph {{ row.anchor.paragraph_index + 1 }} · {% elif row.anchor.kind == 'email' %}Email body part {{ row.anchor.mime_part }} · {% endif %}Extracted characters [{{ row.start }}, {{ row.end }}). JSON pointer <span class="mono">/arithmetic_consistency/locations/{{ loop.index0 }}</span>.</p>
+{% if 'control' in row.anchor.get('body_path', []) %}<p class="caption">Word body path {{ row.anchor.body_path | join(' / ') }}.</p>{% endif %}
 {% if row.location.ranges is defined %}<p class="caption">Original text positions {% for start, end in row.location.ranges %}[{{ start }}, {{ end }}){% if not loop.last %}, {% endif %}{% endfor %}.</p>{% endif %}
 </article>
 {% endfor %}

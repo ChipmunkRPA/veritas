@@ -176,8 +176,8 @@ def _document(path: Path, extension: str) -> None:
 
         check_document_archive_safe(path, extension, check_crc=True)
         document, _, _, _ = docx_body(path)
-        if not any(readable(paragraph.text) for paragraph, _ in docx_paragraphs(document, document.element.body)):
-            raise PreflightError("The Word document has no readable body text. For scanned pages, upload a PDF before paying.")
+        if not any(readable(paragraph.text) for paragraph, _, _ in docx_paragraphs(document, document.element.body)):
+            raise PreflightError("The Word document has no readable body text. Save scanned pages or unsupported layouts as a PDF before paying.")
         return
     if extension == ".odt":
         from app.detectors.text.opendocument import body_paragraphs

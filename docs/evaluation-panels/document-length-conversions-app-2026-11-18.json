@@ -1,0 +1,327 @@
+{
+  "checkout": {
+    "cases": {
+      "control": {
+        "checked": 1,
+        "disagreements": 0,
+        "input_sha256": "5dd370b8b038db2f8dae8fd78e40f21f643a291c14539a93b4cd16effbb63e5e",
+        "locations": [],
+        "signed_source_verified": true
+      },
+      "docx": {
+        "checked": 2,
+        "disagreements": 1,
+        "input_sha256": "303e2e8e6a3db005b6220a6e9a430081d9192642571bd52e7f1ecf95b204a3e1",
+        "locations": [
+          {
+            "anchor": {
+              "body_path": [
+                1
+              ],
+              "kind": "docx",
+              "paragraph_index": 1
+            },
+            "calculated": "30.48 cm",
+            "end": 150,
+            "location": {
+              "ranges": [
+                [
+                  0,
+                  16
+                ]
+              ]
+            },
+            "start": 134,
+            "stated": "35.00 cm",
+            "text": "12 in = 35.00 cm"
+          }
+        ],
+        "signed_source_verified": true
+      },
+      "eml": {
+        "checked": 2,
+        "disagreements": 1,
+        "input_sha256": "39277912caa8d1825eb472c1c17b76f09125460645267ec9dd247050148cc9d2",
+        "locations": [
+          {
+            "anchor": {
+              "kind": "email",
+              "mime_part": "1",
+              "source_end": 169,
+              "source_start": 0
+            },
+            "calculated": "30.48 cm",
+            "end": 167,
+            "location": {
+              "ranges": [
+                [
+                  151,
+                  167
+                ]
+              ]
+            },
+            "start": 151,
+            "stated": "35.00 cm",
+            "text": "12 in = 35.00 cm"
+          }
+        ],
+        "signed_source_verified": true
+      },
+      "pdf": {
+        "checked": 2,
+        "disagreements": 1,
+        "input_sha256": "5b282016f20aea04ebbd2dd89ad33901dd380395cb7d93565f72481c6a6a8bd8",
+        "locations": [
+          {
+            "anchor": {
+              "bbox": [
+                70.0,
+                116.175003,
+                151.630981,
+                131.289001
+              ],
+              "block": 1,
+              "coordinate_space": "unrotated-page-points",
+              "kind": "pdf",
+              "page": 1
+            },
+            "calculated": "30.48 cm",
+            "end": 127,
+            "location": {
+              "boxes": [
+                [
+                  70.0,
+                  116.175003,
+                  82.231995,
+                  131.289001
+                ],
+                [
+                  85.289993,
+                  116.175003,
+                  93.847992,
+                  131.289001
+                ],
+                [
+                  96.905991,
+                  116.175003,
+                  103.329994,
+                  131.289001
+                ],
+                [
+                  106.387993,
+                  116.175003,
+                  133.909988,
+                  131.289001
+                ],
+                [
+                  136.967987,
+                  116.175003,
+                  151.630981,
+                  131.289001
+                ]
+              ]
+            },
+            "start": 111,
+            "stated": "35.00 cm",
+            "text": "12 in = 35.00 cm"
+          }
+        ],
+        "signed_source_verified": true
+      },
+      "txt": {
+        "checked": 2,
+        "disagreements": 1,
+        "input_sha256": "b622cb0793f1c25d116cf4f5abcd41df5a8c37b3b6a1aaadd40408beb52ba654",
+        "locations": [
+          {
+            "anchor": {
+              "kind": "text",
+              "source_end": 169,
+              "source_start": 0
+            },
+            "calculated": "30.48 cm",
+            "end": 167,
+            "location": {
+              "ranges": [
+                [
+                  151,
+                  167
+                ]
+              ]
+            },
+            "start": 151,
+            "stated": "35.00 cm",
+            "text": "12 in = 35.00 cm"
+          }
+        ],
+        "signed_source_verified": true
+      }
+    },
+    "jobs_before_payment": 0,
+    "redacted_pdf_verified": true,
+    "schema": "chipmunk.document-length-local-checkout/1",
+    "usd_cents": 999
+  },
+  "updated_report": {
+    "browser": {
+      "expected_value_and_precision": true,
+      "page_errors": 0,
+      "source_coordinates": true
+    },
+    "docx": {
+      "checked_lengths": 2,
+      "disagreements": 1,
+      "r168_package_download_equal": true,
+      "r168_report_download_equal": true,
+      "ranges": [
+        {
+          "anchor": {
+            "body_path": [
+              1
+            ],
+            "kind": "docx",
+            "paragraph_index": 1
+          },
+          "calculated": "30.48 cm",
+          "end": 150,
+          "location": {
+            "ranges": [
+              [
+                0,
+                16
+              ]
+            ]
+          },
+          "start": 134,
+          "stated": "35.00 cm",
+          "text": "12 in = 35.00 cm"
+        }
+      ],
+      "source_sha256": "303e2e8e6a3db005b6220a6e9a430081d9192642571bd52e7f1ecf95b204a3e1"
+    },
+    "eml": {
+      "checked_lengths": 2,
+      "disagreements": 1,
+      "r168_package_download_equal": true,
+      "r168_report_download_equal": true,
+      "ranges": [
+        {
+          "anchor": {
+            "kind": "email",
+            "mime_part": "1",
+            "source_end": 169,
+            "source_start": 0
+          },
+          "calculated": "30.48 cm",
+          "end": 167,
+          "location": {
+            "ranges": [
+              [
+                151,
+                167
+              ]
+            ]
+          },
+          "start": 151,
+          "stated": "35.00 cm",
+          "text": "12 in = 35.00 cm"
+        }
+      ],
+      "source_sha256": "39277912caa8d1825eb472c1c17b76f09125460645267ec9dd247050148cc9d2"
+    },
+    "pdf": {
+      "checked_lengths": 2,
+      "disagreements": 1,
+      "r168_package_download_equal": true,
+      "r168_report_download_equal": true,
+      "ranges": [
+        {
+          "anchor": {
+            "bbox": [
+              70.0,
+              116.175003,
+              151.630981,
+              131.289001
+            ],
+            "block": 1,
+            "coordinate_space": "unrotated-page-points",
+            "kind": "pdf",
+            "page": 1
+          },
+          "calculated": "30.48 cm",
+          "end": 127,
+          "location": {
+            "boxes": [
+              [
+                70.0,
+                116.175003,
+                82.231995,
+                131.289001
+              ],
+              [
+                85.289993,
+                116.175003,
+                93.847992,
+                131.289001
+              ],
+              [
+                96.905991,
+                116.175003,
+                103.329994,
+                131.289001
+              ],
+              [
+                106.387993,
+                116.175003,
+                133.909988,
+                131.289001
+              ],
+              [
+                136.967987,
+                116.175003,
+                151.630981,
+                131.289001
+              ]
+            ]
+          },
+          "start": 111,
+          "stated": "35.00 cm",
+          "text": "12 in = 35.00 cm"
+        }
+      ],
+      "source_sha256": "5b282016f20aea04ebbd2dd89ad33901dd380395cb7d93565f72481c6a6a8bd8"
+    },
+    "r169_word_signed_source_verified": true,
+    "schema": "chipmunk.document-length-release/1",
+    "txt": {
+      "checked_lengths": 2,
+      "disagreements": 1,
+      "r168_package_download_equal": true,
+      "r168_report_download_equal": true,
+      "ranges": [
+        {
+          "anchor": {
+            "kind": "text",
+            "source_end": 169,
+            "source_start": 0
+          },
+          "calculated": "30.48 cm",
+          "end": 167,
+          "location": {
+            "ranges": [
+              [
+                151,
+                167
+              ]
+            ]
+          },
+          "start": 151,
+          "stated": "35.00 cm",
+          "text": "12 in = 35.00 cm"
+        }
+      ],
+      "source_sha256": "b622cb0793f1c25d116cf4f5abcd41df5a8c37b3b6a1aaadd40408beb52ba654"
+    },
+    "unchanged_checked_zero_disagreements": true
+  }
+}

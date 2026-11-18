@@ -7,7 +7,7 @@ limit is 25 MB in the standard configuration.
 
 | Format | Writing examined | Source position in reports |
 | --- | --- | --- |
-| DOCX | Body paragraphs and tables, with separate supported Word revision and visibility evidence | Word paragraph and available run coordinates |
+| DOCX | Body paragraphs, tables, and saved text in filled paragraph and inline controls. Separate Word revision and visibility checks cover their supported structures. | Word body path, paragraph characters, and available run coordinates |
 | ODT | Body paragraphs, headings, lists, and tables | Paragraph and character position in the extracted text |
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
 | RTF | Extracted writing from standard Rich Text files | Paragraph and character position in the extracted text |
@@ -18,6 +18,13 @@ limit is 25 MB in the standard configuration.
 For email, attachments can be submitted separately. Word and ODT use body
 text for writing checks. Document packages are read locally without opening
 Office, fetching linked content, or executing macros.
+
+Word form placeholders and tables with controls around entire rows or cells
+are outside the writing check. A paragraph mixing inline controls and
+tracked edits is outside the accepted-revision projection. Evidence for
+supported controls preserves the Word body path and paragraph character
+range. The original-file verifier applies the extraction recorded when the
+report was created. [Microsoft's Word control structure](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.sdtblock?view=openxml-3.0.1)
 
 Export Google Docs, Apple Pages, and older Word (`.doc`) files as DOCX or
 PDF before uploading. Export Outlook (`.msg`) files as EML or PDF. Keep the
@@ -48,6 +55,13 @@ accepted each format and displayed its result. A later local replay verified
 the evidence packages against the originals in all seven formats. The Word
 replay checked exact body paragraph locations, and the PDF replay checked
 the mapped page images. All seven jobs followed simulated payment.
+
+The November 18 replay covered all eight formats in the table, including
+Rich Text. Both writing checks finished for each original after simulated
+USD 9.99 checkout. Each PDF rendered, each JSON export matched the app's
+evidence, and each signed package verified against its original file. A
+finding inside a filled Word field retained body path `1 / control / 0`
+and its paragraph character positions in the report and JSON.
 
 ## Earlier OpenDocument drafts
 

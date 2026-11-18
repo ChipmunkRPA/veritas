@@ -220,6 +220,24 @@ describe('ordinary document passage inspection', () => {
     expect(within(section).getByText(/Original text positions/)).toBeTruthy()
   })
 
+  it('distinguishes a length conversion and displays its location in a Word form', () => {
+    const text = '12 in = 35.00 cm'
+    show({ ...evidence([]), arithmetic_consistency: {
+      schema: 'document-arithmetic-consistency/2', affects_overall_confidence: false,
+      checked_equations: 1, disagreements: 1, length_conversions_checked: 1, length_conversion_disagreements: 1,
+      scope: 'Checks explicit length conversions.', limitation: 'This check carries zero weight in the AI assessment.',
+      locations: [{ start: 3, end: 3 + text.length, text, stated: '35.00 cm', calculated: '30.48 cm',
+        anchor: { kind: 'docx', paragraph_index: 1, body_path: [1, 'control', 0] },
+        location: { ranges: [[1, 1 + text.length]] } }],
+    } })
+    const section = screen.getByRole('region', { name: 'Arithmetic check' })
+    expect(section.querySelector('mark')?.textContent).toBe(text)
+    expect(within(section).getByText(/Includes 1 length conversion/)).toBeTruthy()
+    expect(within(section).getByText('The calculation gives 30.48 cm. The document states 35.00 cm.')).toBeTruthy()
+    expect(within(section).getByText(/^Word paragraph 2 · Extracted characters/)).toBeTruthy()
+    expect(within(section).getByText('Word body path 1 / control / 0')).toBeTruthy()
+  })
+
   it('marks all three measured sentences and leaves the navigation focus separate', () => {
     const item: DocumentEvidencePacket = { ...packet, inspection_scope: { basis: 'scored_context',
       spans: [{ start: 108, end: 122 }, { start: 123, end: 137 }, { start: 138, end: 142 }] } }

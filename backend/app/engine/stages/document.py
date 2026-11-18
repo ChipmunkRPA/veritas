@@ -22,7 +22,14 @@ from app.core.canonical import canonical_hash
 from app.core.config import settings
 from app.detectors.text import language_scope
 from app.detectors.text.adapters.stylometry import LEXICON_TITLE, SPANS_TITLE
-from app.detectors.text.extract import EXTRACTION_VERSION, Document, hybrid_ocr_notice, partial_pdf_notice
+from app.detectors.text.extract import (
+    EXTRACTION_VERSION,
+    WORD_CONTENT_CONTROLS,
+    WORD_CONTENT_CONTROLS_KEY,
+    Document,
+    hybrid_ocr_notice,
+    partial_pdf_notice,
+)
 from app.detectors.text.pipeline import (
     MIN_WORDS,
     DocumentScores,
@@ -113,7 +120,8 @@ def current_decode_output(output: Any) -> bool:
     if output.get(BIBLIOGRAPHY_POLICY, False) is not (settings.environment == "dev" and settings.text_bibliography_scope_review):
         return False
     if (output["meta"].get("method") == "python-docx" and
-            ((output.get(document_tracked_changes.KEY) or {}).get("schema") != document_tracked_changes.PARAGRAPH_SCHEMA
+            (output["meta"].get(WORD_CONTENT_CONTROLS_KEY) != WORD_CONTENT_CONTROLS
+             or (output.get(document_tracked_changes.KEY) or {}).get("schema") != document_tracked_changes.PARAGRAPH_SCHEMA
              or (output["meta"].get(document_word_visibility.KEY) or {}).get("schema") != document_word_visibility.SCHEMA)):
         return False
     if (output["meta"].get("method") == "pymupdf"

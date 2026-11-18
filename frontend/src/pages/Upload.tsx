@@ -212,7 +212,7 @@ export default function Upload() {
             <p className="text-caption text-text-muted mt-1">
               {tab.formats}{paid ? ' · one file per checkout' : <> · several files or a{' '}<Button variant="text" className="text-caption" onClick={pickFolder}>folder</Button>{' '}make a batch</>}
             </p>
-            {kind === 'document' && <p className="text-caption text-text-muted mt-1 mb-0">Export Google Docs, Pages, or older Word files as DOCX or PDF before uploading.</p>}
+            {kind === 'document' && <p className="text-caption text-text-muted mt-1 mb-0">Export Google Docs, Apple Pages, or older Word (.doc) files as DOCX or PDF. Export Outlook (.msg) messages as EML or PDF.</p>}
           </div>
         ) : (
           <div className="h-14 flex items-center gap-3 px-4 rounded-md bg-surface-2 border border-border">

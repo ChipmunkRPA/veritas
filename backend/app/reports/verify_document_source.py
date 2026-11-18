@@ -13,7 +13,7 @@ from zipfile import ZipFile
 from PIL import Image
 
 from app.core.canonical import canonical_hash
-from app.detectors.text.extract import extract, text_hash
+from app.detectors.text.extract import WORD_CONTENT_CONTROLS, WORD_CONTENT_CONTROLS_KEY, extract, text_hash
 from app.evidence import (
     document_arithmetic,
     document_bibliography,
@@ -119,7 +119,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             doc = extract(original, extension, allow_ocr=False,
                           project_word_revisions=schema in (document_tracked_changes.PROJECTION_SCHEMA,
                                                            document_tracked_changes.PARAGRAPH_SCHEMA),
-                          project_word_breaks=schema == document_tracked_changes.PARAGRAPH_SCHEMA)
+                          project_word_breaks=schema == document_tracked_changes.PARAGRAPH_SCHEMA,
+                          include_word_content_controls=coverage.get(WORD_CONTENT_CONTROLS_KEY) == WORD_CONTENT_CONTROLS)
         except (OpcError, XMLSyntaxError) as error:
             raise ValueError("The supplied DOCX cannot be parsed locally") from error
     else:
@@ -142,7 +143,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             or doc.meta.get("method") != source["method"] or text_hash(text) != source["extracted_text_sha256"]
             or canonical_hash(mapping) != source["source_map_sha256"]):
         raise ValueError("Re-extracted text or source mapping differs from the committed extraction")
-    fields = {"email": None, "ocr": None, "unmapped_pages": [], "partially_checked_pages": []}
+    fields = {"email": None, "ocr": None, "unmapped_pages": [], "partially_checked_pages": [],
+              WORD_CONTENT_CONTROLS_KEY: None}
     local_coverage = {**doc.meta, "ocr": public_ocr_coverage(doc.meta)}
     if any(canonical_hash(coverage.get(key, default)) != canonical_hash(local_coverage.get(key, default))
            for key, default in fields.items()):

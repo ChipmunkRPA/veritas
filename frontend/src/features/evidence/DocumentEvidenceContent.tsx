@@ -135,6 +135,9 @@ function MappedFindingLocation({ row }: { row: MappedTextFinding }) {
     ? `Word paragraph ${(source.paragraph_index ?? 0) + 1}` : source.kind === 'email' ? `Email body part ${source.mime_part}` : 'Plain text'
   return <>
     <p className="mt-1 mb-0 text-caption text-text-muted">{place} · Extracted characters [{row.start}, {row.end})</p>
+    {source.body_path?.includes('control') && <p className="mt-1 mb-0 text-caption text-text-muted">
+      Word body path {source.body_path.join(' / ')}
+    </p>}
     {'ranges' in row.location && <p className="mt-1 mb-0 text-caption text-text-muted">
       Original text positions {row.location.ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}
     </p>}
@@ -165,6 +168,7 @@ function ArithmeticConsistency({ review }: { review: NonNullable<DocumentEvidenc
   return <section id="document-arithmetic-consistency" aria-labelledby="document-arithmetic-heading" className="mt-4 rounded-md border border-border p-4 scroll-mt-20">
     <h3 id="document-arithmetic-heading" className="m-0 text-body font-medium">Arithmetic check</h3>
     <p className="mt-2 mb-0 text-small">Checked {review.checked_equations} explicit {review.checked_equations === 1 ? 'equation' : 'equations'}. Found {review.disagreements} {review.disagreements === 1 ? 'disagreement' : 'disagreements'}.</p>
+    {!!review.length_conversions_checked && <p className="mt-2 mb-0 text-small">Includes {review.length_conversions_checked} {review.length_conversions_checked === 1 ? 'length conversion' : 'length conversions'}. Expected values use standard length units and the precision shown in the document.</p>}
     {review.locations.map(row =>
       <article key={row.start} className="mt-3 border-t border-border pt-3">
         <blockquote className="m-0 break-words text-small"><mark>{row.text}</mark></blockquote>
@@ -599,9 +603,9 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
       {wordVisibility.locations.length > 0 && <>
         <ul className="mt-2 mb-0 pl-5 text-small">
           {wordVisibility.locations.map(row => <li key={`${row.body_path.join('/')}:${row.run}`}>
-            {row.body_path.length > 1
+            {row.body_path.includes('control') ? 'Word content control' : row.body_path.length > 1
               ? `Table cell (row ${Number(row.body_path.at(-4)) + 1}, column ${Number(row.body_path.at(-2)) + 1})`
-              : `Body paragraph ${row.body_paragraph}`} · Run {row.run + 1} · Characters {row.source_start + 1}–{row.source_end}
+              : `Body paragraph ${row.body_paragraph}`} · {row.run_basis === 'extracted' ? 'Extracted run' : 'Run'} {row.run + 1} · Characters {row.source_start + 1}–{row.source_end}
             <p className="mt-1 mb-2 font-mono text-caption text-text-muted">
               {wordVisibility.part} · Body path {row.body_path.join(' / ')} (zero-based)
             </p>

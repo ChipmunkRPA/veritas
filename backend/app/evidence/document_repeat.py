@@ -8,7 +8,7 @@ import re
 from collections import defaultdict
 
 from app.core.canonical import canonical_hash, canonical_json
-from app.evidence import document_scope
+from app.evidence import document_scope, document_word_visibility
 
 SCHEMA = "document-repeated-passages/1"
 MIN_WORDS = 30
@@ -133,12 +133,10 @@ def build(source: dict, text: str, mapping: list[dict]) -> dict:
 
 
 def _valid_docx_path(path) -> bool:
-    if not isinstance(path, list) or not path or not _count(path[0]) or (len(path) - 1) % 5:
+    try:
+        document_word_visibility._native_path(path)
+    except ValueError:
         return False
-    for offset in range(1, len(path), 5):
-        row, r, cell, c, paragraph = path[offset : offset + 5]
-        if row != "row" or cell != "cell" or not all(_count(i) for i in (r, c, paragraph)):
-            return False
     return True
 
 

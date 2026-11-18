@@ -92,7 +92,7 @@ def _child_index(node):
     return sum(isinstance(sibling.tag, str) for sibling in node.itersiblings(preceding=True))
 
 
-def inspect(body, part, *, project_inline=False, joined_paragraphs=None):
+def inspect(body, part, *, project_inline=False, joined_paragraphs=None, include_word_content_controls=False):
     """Record native positions and populate the join plan for the accepted text when requested."""
     from docx.oxml.ns import qn
     inline_names = ("p", "pPr", "r", "rPr", "ins", "del", "t", "delText", "tab", "br", "type")
@@ -113,6 +113,9 @@ def inspect(body, part, *, project_inline=False, joined_paragraphs=None):
         if parent.tag != tag["p"]:
             continue
         paragraph += 1
+        # Accepted-edit offsets are defined for the ordinary paragraph projection.
+        # A control in the same paragraph can change those offsets.
+        mixed_control = project_inline and include_word_content_controls and bool(parent.xpath("./w:sdt | ./w:hyperlink/w:sdt"))
         if joined_paragraphs is not None:
             following = elements[body_index + 1] if body_index + 1 < len(elements) else None
             if match := _break_mark(parent, following, tag, kinds):
@@ -129,7 +132,7 @@ def inspect(body, part, *, project_inline=False, joined_paragraphs=None):
                 continue
             visited.add(item)
             text = _revision_text(item, kind, tag)
-            if not text or not text.strip():
+            if mixed_control or not text or not text.strip():
                 unsupported += 1
                 continue
             totals[kind] += 1

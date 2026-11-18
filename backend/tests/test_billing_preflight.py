@@ -139,6 +139,25 @@ def test_rtf_preflight_requires_the_signature_and_readable_body():
             verify(data, "article.rtf", "document")
 
 
+@pytest.mark.parametrize("inline", [True, False])
+def test_docx_checkout_reads_filled_controls_but_rejects_placeholder_only(inline):
+    from docx import Document
+    from test_document_source_mapping import word_control
+
+    for placeholder in (False, True):
+        document = Document()
+        paragraph = document.add_paragraph()
+        run = paragraph.add_run("Saved answers in this completed form should be available to the writing checks.")
+        word_control([run._r if inline else paragraph._p], placeholder=placeholder)
+        package = io.BytesIO()
+        document.save(package)
+        if placeholder:
+            with pytest.raises(preflight.PreflightError, match="no readable body text"):
+                verify(package.getvalue(), "blank.docx", "document")
+        else:
+            verify(package.getvalue(), "filled.docx", "document")
+
+
 def test_text_checks_encoding_and_readability_without_running_models():
     verify("A UTF-8 document — with punctuation.".encode(), "article.txt", "document")
     verify("A UTF-16 document with punctuation.".encode("utf-16"), "article.txt", "document")

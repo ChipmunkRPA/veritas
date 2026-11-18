@@ -974,9 +974,14 @@ def _document_coverage_details(coverage: dict) -> list[str]:
                      f"{document_word_visibility.SCOPE} {document_word_visibility.LIMITATION}")
         for row in visibility["locations"]:
             path = " / ".join(map(str, row["body_path"]))
-            location = (f"Body paragraph {row['body_paragraph']}" if row["body_paragraph"] is not None
-                        else f"Table cell at row {row['body_path'][-4] + 1}, column {row['body_path'][-2] + 1}")
-            notes.append(f"{location}, run {row['run'] + 1}, characters {row['source_start'] + 1}–{row['source_end']}. "
+            if row["body_paragraph"] is not None:
+                location = f"Body paragraph {row['body_paragraph']}"
+            elif "control" in row["body_path"]:
+                location = "Word content control"
+            else:
+                location = f"Table cell at row {row['body_path'][-4] + 1}, column {row['body_path'][-2] + 1}"
+            run_label = "extracted run" if row.get("run_basis") == "extracted" else "run"
+            notes.append(f"{location}, {run_label} {row['run'] + 1}, characters {row['source_start'] + 1}–{row['source_end']}. "
                          f"{visibility['part']}. Body path {path} (zero-based).")
         if omitted := visibility["hidden_runs"] - len(visibility["locations"]):
             notes.append(f"{omitted} additional hidden text runs exceed the location display limit.")

@@ -551,7 +551,8 @@ export type PublishedWordingReview = {
   | { schema: 'document-published-wording-review/2'; sections: PublishedWordingColumn[] })
 export type MappedTextFinding = {
   start: number; end: number; text: string
-  anchor: { kind: 'text' | 'docx' | 'pdf' | 'email'; page?: number; block?: number; paragraph_index?: number; mime_part?: string }
+  anchor: { kind: 'text' | 'docx' | 'pdf' | 'email'; page?: number; block?: number; paragraph_index?: number;
+    body_path?: (number | 'row' | 'cell' | 'control')[]; mime_part?: string }
   location: { boxes: number[][] } | { ranges: [number, number][] }
 }
 export interface DocumentEvidenceSet extends SetBase {
@@ -564,8 +565,9 @@ export interface DocumentEvidenceSet extends SetBase {
       reason: 'weekday_mismatch' | 'invalid_date' })[]
   }
   arithmetic_consistency?: {
-    schema: 'document-arithmetic-consistency/1'; affects_overall_confidence: false; scope: string; limitation: string
+    schema: 'document-arithmetic-consistency/1' | 'document-arithmetic-consistency/2'; affects_overall_confidence: false; scope: string; limitation: string
     checked_equations: number; disagreements: number
+    length_conversions_checked?: number; length_conversion_disagreements?: number
     locations: (MappedTextFinding & { stated: string; calculated: string })[]
   }
   percentage_consistency?: { schema: 'document-percentage-consistency/1' | 'document-percentage-consistency/2' | 'document-percentage-consistency/3'; status: 'different_values' | 'checked' | 'not_assessed';
@@ -631,13 +633,14 @@ export interface DocumentEvidenceSet extends SetBase {
       covered_locations?: { page: number; covered_spans: number; boxes: [number, number, number, number][] }[];
       coordinate_space: 'unrotated-page-points'; authorship_confidence_contribution: 0 };
     word_text_visibility?: { schema: 'document-word-text-visibility/1'; part: string; checked_paragraphs: number; hidden_runs: number;
-      locations: { body_path: (number | 'row' | 'cell')[]; body_paragraph: number | null; run: number; source_start: number; source_end: number }[];
+      locations: { body_path: (number | 'row' | 'cell' | 'control')[]; body_paragraph: number | null; run: number;
+        run_basis?: 'extracted'; source_start: number; source_end: number }[];
       authorship_confidence_contribution: 0 };
     invisible_characters?: { schema: 'document-invisible-characters/1' | 'document-invisible-characters/2';
       coordinate_space: 'decoded_text' | 'word_paragraph' | 'decoded_email' | 'decoded_email_html';
       checked_blocks: number; checked_chars: number; matches: number; authorship_confidence_contribution: 0;
       locations: { text_offset: number; source_start: number; source_end: number; codepoint: string; looks_like?: string;
-        body_path?: (number | 'row' | 'cell')[]; mime_part?: string }[] };
+        body_path?: (number | 'row' | 'cell' | 'control')[]; mime_part?: string }[] };
     writing_character_review?: { schema: 'document-writing-character-review/1'; authorship_confidence_contribution: 0;
       input_view: 'english-writing-character-view/1';
       ranges: { spans: { start: number; end: number }[]; excerpt: string;
@@ -687,7 +690,7 @@ export interface PdfSavedWording {
 }
 
 type DocumentChatMarker = { literal: string; start: number; end: number; ranges?: [number, number][];
-  anchor: { kind: 'text' } | { kind: 'docx'; body_path: (number | 'row' | 'cell')[] }
+  anchor: { kind: 'text' } | { kind: 'docx'; body_path: (number | 'row' | 'cell' | 'control')[] }
     | { kind: 'pdf'; page: number; block: number } | { kind: 'email'; mime_part: string } };
 
 type BibliographySource = { kind: 'pdf'; page: number } | { kind: 'docx'; body_index: number } | { kind: 'text'; start: number; end: number }

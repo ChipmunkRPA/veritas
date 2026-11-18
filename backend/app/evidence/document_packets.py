@@ -22,7 +22,7 @@ from sqlalchemy.orm import Session
 from app.api.public_projection import alias_signal
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
-from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
+from app.detectors.text.extract import SOURCE_MAP_VERSION, WORD_CONTENT_CONTROLS_KEY, text_hash
 from app.evidence import (
     document_arithmetic,
     document_bibliography,
@@ -536,6 +536,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"]["selection_policy"] = document_selection.BALANCED_POLICY
     if partially_checked := decoded["meta"].get("partially_checked_pages"):
         document["coverage"]["partially_checked_pages"] = partially_checked
+    if word_controls := decoded["meta"].get(WORD_CONTENT_CONTROLS_KEY):
+        document["coverage"][WORD_CONTENT_CONTROLS_KEY] = word_controls
     if writing_checks := document_check_coverage.from_result(result):
         document["coverage"][document_check_coverage.KEY] = writing_checks
         document["source"][document_check_coverage.COMMITMENT] = document_check_coverage.commitment(writing_checks)
@@ -619,7 +621,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if document["source"]["method"] in document_calendar.METHODS:
         document[document_calendar.KEY] = document_calendar.build(document["source"], text, mapping)
     if document["source"]["method"] in document_arithmetic.METHODS:
-        document[document_arithmetic.KEY] = document_arithmetic.build(document["source"], text, mapping)
+        document[document_arithmetic.KEY] = document_arithmetic.build(document["source"], text, mapping, include_lengths=True)
     if (settings.environment == "dev" and settings.document_percentage_consistency
             and document_percentage_consistency.supported(document["source"]["method"], decoded["meta"].get("email"))):
         document[document_percentage_consistency.KEY] = document_percentage_consistency.build(

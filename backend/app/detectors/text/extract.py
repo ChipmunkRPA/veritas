@@ -36,6 +36,8 @@ class Document:
 
 SOURCE_MAP_VERSION = "document-source/1"
 EXTRACTION_VERSION = "document-extraction/4"
+WORD_CONTENT_CONTROLS_KEY = "word_content_controls"
+WORD_CONTENT_CONTROLS = "stored-text/1"
 OCR_VERSION = "local-ocr/1"
 OCR_MIN_MEAN_CONFIDENCE = 75.0
 OCR_MAX_PAGES = 12
@@ -628,7 +630,8 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool 
     return d
 
 
-def docx_body(path: Path, *, project_word_revisions: bool = True, project_word_breaks: bool = True):
+def docx_body(path: Path, *, project_word_revisions: bool = True, project_word_breaks: bool = True,
+              include_word_content_controls: bool = True):
     import docx
 
     from app.evidence.document_tracked_changes import PART_NAME, inspect
@@ -636,12 +639,42 @@ def docx_body(path: Path, *, project_word_revisions: bool = True, project_word_b
     document = docx.Document(str(path))
     part = str(document.part.partname).removeprefix("/")
     joined = set() if project_word_revisions and project_word_breaks else None
-    review = (inspect(document.element.body, part, project_inline=project_word_revisions, joined_paragraphs=joined)
+    review = (inspect(document.element.body, part, project_inline=project_word_revisions, joined_paragraphs=joined,
+                      include_word_content_controls=include_word_content_controls)
               if PART_NAME.fullmatch(part) else None)
     return document, part, review, joined
 
 
-def docx_paragraphs(parent, elements, body_path=()):
+def _word_control_content(element):
+    from docx.oxml.ns import qn
+
+    placeholder = element.find(f"{qn('w:sdtPr')}/{qn('w:showingPlcHdr')}")
+    if placeholder is not None and placeholder.get(qn("w:val")) not in {"0", "false", "off"}:
+        return None
+    return element.find(qn("w:sdtContent"))
+
+
+def _project_word_inline_controls(container):
+    """Use saved visible runs from filled controls in their paragraph order."""
+    from docx.oxml.ns import qn
+
+    changed = False
+    for child in list(container):
+        if child.tag == qn("w:hyperlink"):
+            changed |= _project_word_inline_controls(child)
+        elif child.tag == qn("w:sdt"):
+            content = _word_control_content(child)
+            if content is not None:
+                _project_word_inline_controls(content)
+                for run in list(content):
+                    if run.tag in {qn("w:r"), qn("w:hyperlink")}:
+                        child.addprevious(run)
+            container.remove(child)
+            changed = True
+    return changed
+
+
+def docx_paragraphs(parent, elements, body_path=(), *, include_content_controls=True):
     from docx.oxml.ns import qn
     from docx.table import Table
     from docx.text.paragraph import Paragraph
@@ -649,8 +682,16 @@ def docx_paragraphs(parent, elements, body_path=()):
     for index, element in enumerate(elements):
         path = [*body_path, index]
         if element.tag == qn("w:p"):
-            yield Paragraph(element, parent), path
+            projected = include_content_controls and _project_word_inline_controls(element)
+            yield Paragraph(element, parent), path, projected
+        elif include_content_controls and element.tag == qn("w:sdt"):
+            if (content := _word_control_content(element)) is not None:
+                yield from docx_paragraphs(parent, content, [*path, "control"])
         elif element.tag == qn("w:tbl"):
+            # A wrapped row or cell is omitted by python-docx's table grid.
+            # Reading the siblings would assign their text the wrong locations.
+            if include_content_controls and element.xpath("./w:sdt | ./w:tr/w:sdt"):
+                continue
             table = Table(element, parent)
             seen = set()
             for row_i, row in enumerate(table.rows):
@@ -658,36 +699,41 @@ def docx_paragraphs(parent, elements, body_path=()):
                     if cell._tc in seen:
                         continue
                     seen.add(cell._tc)
-                    yield from docx_paragraphs(cell, cell._tc, [*path, "row", row_i, "cell", col_i])
+                    yield from docx_paragraphs(cell, cell._tc, [*path, "row", row_i, "cell", col_i],
+                                               include_content_controls=include_content_controls)
 
 
-def extract_docx(path: Path, *, project_word_revisions: bool = True, project_word_breaks: bool = True) -> Document:
+def extract_docx(path: Path, *, project_word_revisions: bool = True, project_word_breaks: bool = True,
+                 include_word_content_controls: bool = True) -> Document:
     from app.evidence import document_word_visibility
     from app.evidence.document_archive_word import ordinary_body_paragraph
     from app.evidence.document_tracked_changes import INPUT_NOTICES, JOINED_PARAGRAPHS, PART_NAME
 
     d, part, review, joined = docx_body(path, project_word_revisions=project_word_revisions,
-                                      project_word_breaks=project_word_breaks)
+                                      project_word_breaks=project_word_breaks,
+                                      include_word_content_controls=include_word_content_controls)
     parts: list[tuple[str, dict]] = []
     percentage_body_paragraphs = []
     hidden_locations = []
     checked_paragraphs = hidden_runs = 0
 
     continued = False
-    for paragraph, path_here in docx_paragraphs(d, d.element.body):
+    for paragraph, path_here, projected_control in docx_paragraphs(
+            d, d.element.body, include_content_controls=include_word_content_controls):
         text = paragraph.text
         top_level = len(path_here) == 1
         body_paragraph = len(percentage_body_paragraphs) + 1 if top_level else None
         if text.strip():
             checked_paragraphs += 1
-            for location in document_word_visibility.inspect_paragraph(paragraph, path_here, body_paragraph):
+            for location in document_word_visibility.inspect_paragraph(
+                    paragraph, path_here, body_paragraph, projected_control=projected_control):
                 hidden_runs += 1
                 if len(hidden_locations) < document_word_visibility.MAX_LOCATIONS:
                     hidden_locations.append(location)
         joins_next = joined is not None and paragraph._p in joined
         if top_level:
             eligible = paragraph.style.style_id.casefold() in {"normal", "bodytext", "bodytext2", "bodytext3"}
-            percentage_body_paragraphs.append(path_here[0] if eligible and not (continued or joins_next)
+            percentage_body_paragraphs.append(path_here[0] if eligible and not (continued or joins_next or projected_control)
                                               and ordinary_body_paragraph(paragraph) else None)
             continued = joins_next
         cursor, runs = 0, []
@@ -696,7 +742,8 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
             runs.append({"run": ri, "start": cursor, "end": cursor + length})
             cursor += length
         source = {"kind": "docx", "body_path": path_here, "paragraph_index": len(parts),
-                  "runs": runs, "run_mapping_complete": cursor == len(text)}
+                  "runs": [] if projected_control else runs,
+                  "run_mapping_complete": not projected_control and cursor == len(text)}
         if joins_next:
             source["join_following_paragraph"] = True
         parts.append((text, source))
@@ -710,6 +757,10 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
                 "percentage_body_paragraphs": percentage_body_paragraphs,
                 "coverage_warning": ("Body paragraphs and tables were extracted in document order. Headers, footers, text boxes and "
                                      "embedded attachments were not checked; DOCX has no stable page numbers." + word_warning)}
+    if include_word_content_controls:
+        doc.meta[WORD_CONTENT_CONTROLS_KEY] = WORD_CONTENT_CONTROLS
+        doc.meta["coverage_warning"] += (" Filled paragraph and inline controls use their saved text. This check excludes "
+                                         "placeholders, external data and tables with controls around entire rows or cells.")
     if joined:
         doc.meta[JOINED_PARAGRAPHS] = len(joined)
     if PART_NAME.fullmatch(part):
@@ -976,12 +1027,14 @@ def extract_eml(path: Path) -> Document:
 
 
 def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True,
-            project_word_revisions: bool = True, project_word_breaks: bool = True) -> Document:
+            project_word_revisions: bool = True, project_word_breaks: bool = True,
+            include_word_content_controls: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
     elif ext == ".docx":
-        d = extract_docx(path, project_word_revisions=project_word_revisions, project_word_breaks=project_word_breaks)
+        d = extract_docx(path, project_word_revisions=project_word_revisions, project_word_breaks=project_word_breaks,
+                         include_word_content_controls=include_word_content_controls)
     elif ext == ".odt":
         from app.detectors.text.opendocument import body_paragraphs
 

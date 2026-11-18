@@ -12,7 +12,7 @@ SCOPE = "Checks extracted Word body and table text for direct hidden formatting.
 LIMITATION = "Word can show hidden text when its display settings allow it. This check carries zero AI-authorship weight."
 
 
-def inspect_paragraph(paragraph, body_path, body_paragraph):
+def inspect_paragraph(paragraph, body_path, body_paragraph, *, projected_control=False):
     from docx.oxml.ns import qn
     from docx.text.run import Run
 
@@ -23,8 +23,11 @@ def inspect_paragraph(paragraph, body_path, body_paragraph):
         mark = element.xpath("./w:rPr/w:vanish")
         if (text.strip() and len(mark) == 1
                 and mark[0].get(qn("w:val"), "true") in {"true", "1", "on"}):
-            yield {"body_path": body_path, "body_paragraph": body_paragraph,
-                   "run": index, "source_start": offset, "source_end": end}
+            location = {"body_path": body_path, "body_paragraph": body_paragraph,
+                        "run": index, "source_start": offset, "source_end": end}
+            if projected_control:
+                location["run_basis"] = "extracted"
+            yield location
         offset = end
 
 
@@ -38,14 +41,19 @@ def from_result(result):
 
 
 def _native_path(path):
-    if not isinstance(path, list) or not path or (len(path) - 1) % 5:
+    if not isinstance(path, list) or not path:
         raise ValueError("Invalid Word body path")
     order = [path[0]]
-    for i in range(1, len(path), 5):
-        row_label, row, cell_label, cell, element = path[i:i + 5]
-        if (row_label, cell_label) != ("row", "cell"):
-            raise ValueError("Invalid Word table path")
-        order.extend((row, cell, element))
+    i = 1
+    while i < len(path):
+        if path[i] == "control" and i + 1 < len(path):
+            order.append(path[i + 1])
+            i += 2
+        elif path[i] == "row" and i + 4 < len(path) and path[i + 2] == "cell":
+            order.extend((path[i + 1], path[i + 3], path[i + 4]))
+            i += 5
+        else:
+            raise ValueError("Invalid Word body path")
     if any(type(value) is not int or value < 0 for value in order):
         raise ValueError("Invalid Word body position")
     return tuple(order)
@@ -66,7 +74,8 @@ def validate(document, expected):
     previous_path, previous_run, previous_end = (), -1, 0
     paths = set()
     for row in record["locations"]:
-        if set(row) != {"body_path", "body_paragraph", "run", "source_start", "source_end"}:
+        required = {"body_path", "body_paragraph", "run", "source_start", "source_end"}
+        if set(row) != required and (set(row) != required | {"run_basis"} or row["run_basis"] != "extracted"):
             raise ValueError("Invalid hidden Word text location")
         path = _native_path(row["body_path"])
         if not ((len(path) > 1 and row["body_paragraph"] is None) or

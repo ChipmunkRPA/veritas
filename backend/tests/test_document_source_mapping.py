@@ -7,6 +7,8 @@ from types import SimpleNamespace
 
 import docx
 import pymupdf
+from docx.oxml import OxmlElement
+from docx.oxml.ns import qn
 from PIL import Image
 
 from app.detectors.text.adapters import learned
@@ -88,6 +90,93 @@ def test_docx_body_order_merged_cells_and_structure_anchors(tmp_path):
     assert "cell" in extracted.source_map[1]["body_path"]
     assert all(a["run_mapping_complete"] for a in extracted.source_map)
     assert "no stable page numbers" in extracted.meta["coverage_warning"]
+
+
+def word_control(nodes, *, placeholder=False):
+    control, properties, content = (OxmlElement(tag) for tag in ("w:sdt", "w:sdtPr", "w:sdtContent"))
+    if placeholder:
+        properties.append(OxmlElement("w:showingPlcHdr"))
+    control.extend((properties, content))
+    nodes[0].addprevious(control)
+    content.extend(nodes)
+    return control
+
+
+def test_docx_reads_stored_control_text_without_placeholders(tmp_path):
+    path = tmp_path / "filled-form.docx"
+    document = docx.Document()
+    first = document.add_paragraph("Project office: ")
+    inline_hidden = first.add_run("Mérida 😀")
+    inline_hidden.font.hidden = True
+    word_control([inline_hidden._r])
+    first.add_run(" was confirmed.")
+    word_control([first.add_run("Choose an office")._r], placeholder=True)
+    block = document.add_paragraph("Stored field answer.")
+    hidden = block.add_run(" Private field note.")
+    hidden.font.hidden = True
+    control = word_control([block._p])
+    binding = OxmlElement("w:dataBinding")
+    binding.set(qn("w:xpath"), "/ignored/source")
+    control.find(qn("w:sdtPr")).append(binding)
+    word_control([document.add_paragraph("Enter your answer")._p], placeholder=True)
+    table = document.add_table(rows=1, cols=1)
+    cell = table.cell(0, 0)
+    cell_p = cell.add_paragraph("Table field answer.")
+    word_control([word_control([cell_p._p])])
+    table_path = [3, "row", 0, "cell", 0, 2, "control", 0, "control", 0]
+    document.save(path)
+
+    result = extract_within(path, ".docx")
+    assert result.text == "Project office: Mérida 😀 was confirmed.\n\nStored field answer. Private field note.\n\nTable field answer."
+    assert [block["body_path"] for block in result.source_map] == [[0], [1, "control", 0], table_path]
+    inline = result.source_map[0]
+    assert not inline["run_mapping_complete"] and inline["runs"] == []
+    assert inline["source_ranges"] == [[0, len("Project office: Mérida 😀 was confirmed."), 0, len("Project office: Mérida 😀 was confirmed.")]]
+    assert result.meta["word_text_visibility"]["locations"] == [
+        {"body_path": [0], "body_paragraph": 1, "run": 1, "run_basis": "extracted",
+         "source_start": len("Project office: "), "source_end": len("Project office: Mérida 😀")},
+        {"body_path": [1, "control", 0], "body_paragraph": None, "run": 1,
+         "source_start": len("Stored field answer."), "source_end": len("Stored field answer. Private field note.")}
+    ]
+    assert extract(path, ".docx", include_word_content_controls=False).text == "Project office: was confirmed."
+
+
+def test_docx_skips_accepted_revision_ranges_in_a_paragraph_with_controls(tmp_path):
+    path = tmp_path / "filled-and-tracked.docx"
+    document = docx.Document()
+    paragraph = document.add_paragraph()
+    word_control([paragraph.add_run("Text from a filled control. ")._r])
+    inserted = paragraph.add_run("A tracked sentence.")._r
+    revision = OxmlElement("w:ins")
+    inserted.addprevious(revision)
+    revision.append(inserted)
+    document.save(path)
+
+    result = extract_within(path, ".docx")
+    assert result.text == "Text from a filled control."
+    assert result.word_review["writing_input"] == "unsupported_tracked_changes"
+    assert result.word_review["unsupported_marks"] == 1
+    assert result.word_review["rows"] == []
+
+
+def test_docx_does_not_relabel_cells_or_rows_around_wrapped_table_parts(tmp_path):
+    path = tmp_path / "wrapped-table.docx"
+    document = docx.Document()
+    document.add_paragraph("Useful introduction.")
+    table = document.add_table(rows=1, cols=2)
+    table.cell(0, 0).text = "The first cell is wrapped."
+    table.cell(0, 1).text = "The second cell must not be relabeled."
+    word_control([table.cell(0, 0)._tc])
+    second_table = document.add_table(rows=2, cols=1)
+    second_table.cell(1, 0).text = "The second row must not be relabeled."
+    word_control([second_table.rows[0]._tr])
+    document.add_paragraph("Useful conclusion.")
+    document.save(path)
+
+    result = extract_within(path, ".docx")
+    assert result.text == "Useful introduction.\n\nUseful conclusion."
+    assert [block["body_path"] for block in result.source_map] == [[0], [3]]
+    assert "tables with controls around entire rows or cells" in result.meta["coverage_warning"]
 
 
 def test_rtf_codepage_unicode_paragraphs_and_extracted_locations(tmp_path):

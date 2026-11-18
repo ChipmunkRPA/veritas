@@ -670,6 +670,12 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     word_grid_key = document_native_locations.WORD_TABLE_GRID_KEY
     if coverage.get(word_grid_key) != decoded["meta"].get(word_grid_key):
         raise ObjectIntegrityError("Frozen Word table grid mapping differs from the recorded extraction")
+    word_run_key = document_native_locations.WORD_RUN_MAP_KEY
+    if coverage.get(word_run_key) != decoded["meta"].get(word_run_key):
+        raise ObjectIntegrityError("Frozen Word paragraph run mapping differs from the recorded extraction")
+    slide_visibility_key = document_native_locations.PPTX_VISIBILITY_KEY
+    if coverage.get(slide_visibility_key) != decoded["meta"].get(slide_visibility_key):
+        raise ObjectIntegrityError("Frozen PowerPoint visibility policy differs from the recorded extraction")
     try:
         document_check_coverage.verify_source(document, text, decoded["sentences"])
         document_tracked_changes.verify_source(document, decoded.get(document_tracked_changes.KEY),

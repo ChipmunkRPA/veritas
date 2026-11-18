@@ -741,7 +741,7 @@ def docx_paragraphs(parent, elements, body_path=(), *, include_content_controls=
 
 def extract_docx(path: Path, *, project_word_revisions: bool = True, project_word_breaks: bool = True,
                  include_word_content_controls: bool = True, include_word_saved_fields: bool = True,
-                 map_word_table_grid: bool = True) -> Document:
+                 map_word_table_grid: bool = True, map_word_hyperlink_runs: bool = True) -> Document:
     from bisect import bisect_left
 
     from app.detectors.text import word_saved_fields
@@ -791,7 +791,8 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
                                               and ordinary_body_paragraph(paragraph) else None)
             continued = joins_next
         cursor, runs = 0, []
-        for ri, run in enumerate(paragraph.runs):
+        paragraph_runs = document_word_visibility.paragraph_run_elements(paragraph) if map_word_hyperlink_runs else paragraph.runs
+        for ri, run in enumerate(paragraph_runs):
             length = len(run.text)
             runs.append({"run": ri, "start": cursor, "end": cursor + length})
             cursor += length
@@ -819,6 +820,8 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
         doc.meta[document_native_locations.SAVED_FIELDS_READER] = document_native_locations.SAVED_FIELDS_SCHEMA
     if map_word_table_grid:
         doc.meta[document_native_locations.WORD_TABLE_GRID_KEY] = document_native_locations.WORD_TABLE_GRID
+    if map_word_hyperlink_runs:
+        doc.meta[document_native_locations.WORD_RUN_MAP_KEY] = document_native_locations.WORD_RUN_MAP
     if fields_found and PART_NAME.fullmatch(part):
         locations = []
         for block in doc.source_map:
@@ -1143,14 +1146,15 @@ def extract_eml(path: Path) -> Document:
 def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True,
             project_word_revisions: bool = True, project_word_breaks: bool = True,
             include_word_content_controls: bool = True, include_word_saved_fields: bool = True, include_html_article: bool = True,
-            map_body_paragraphs: bool = True, map_word_table_grid: bool = True) -> Document:
+            map_body_paragraphs: bool = True, map_word_table_grid: bool = True,
+            skip_hidden_slide_groups: bool = True, map_word_hyperlink_runs: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
     elif ext == ".docx":
         d = extract_docx(path, project_word_revisions=project_word_revisions, project_word_breaks=project_word_breaks,
                          include_word_content_controls=include_word_content_controls, include_word_saved_fields=include_word_saved_fields,
-                         map_word_table_grid=map_word_table_grid)
+                         map_word_table_grid=map_word_table_grid, map_word_hyperlink_runs=map_word_hyperlink_runs)
     elif ext == ".odt":
         from app.detectors.text.opendocument import body_paragraphs
 
@@ -1165,7 +1169,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
     elif ext in {".pptx", ".epub"}:
         from app.detectors.text.reading_packages import body_parts
 
-        parts = body_parts(path, ext)
+        parts = body_parts(path, ext, skip_hidden_slide_groups=skip_hidden_slide_groups)
         d = _join_mapped(parts, map_paragraphs=True)
         warning = (
             "The writing check reads saved text boxes and tables on visible slides in presentation order. "
@@ -1176,6 +1180,9 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
         )
         d.meta = {"method": ext[1:], "paragraph_count": len(parts), "coverage_warning": warning,
                   document_native_locations.PARAGRAPH_MAP_KEY: document_native_locations.PARAGRAPH_MAP}
+        if ext == ".pptx" and skip_hidden_slide_groups:
+            d.meta[document_native_locations.PPTX_VISIBILITY_KEY] = document_native_locations.PPTX_VISIBILITY
+            d.meta["coverage_warning"] += " Hidden groups and their contents are excluded."
     elif ext == ".eml":
         d = extract_eml(path)
     else:

@@ -14,11 +14,15 @@ PARAGRAPH_MAP = "decoded-body-paragraphs/1"
 PARAGRAPH_COORDINATES = {"odt": "odt_paragraph", "rtf": "rtf_paragraph", "pptx": "pptx_block", "epub": "epub_block"}
 PACKAGE_METHODS = {"pptx": "slide", "epub": "epub_entry"}
 PACKAGE_LABELS = {"slide": "Slide", "epub_entry": "EPUB reading entry"}
+PPTX_VISIBILITY_KEY = "pptx_visibility"
+PPTX_VISIBILITY = "visible-slide-groups/1"
 SAVED_FIELDS_KEY = "word_saved_fields"
 SAVED_FIELDS_SCHEMA = "document-word-saved-fields/1"
 SAVED_FIELDS_READER = "word_saved_fields_reader"
 WORD_TABLE_GRID_KEY = "word_table_grid"
 WORD_TABLE_GRID = "word-table-grid/1"
+WORD_RUN_MAP_KEY = "word_run_map"
+WORD_RUN_MAP = "word-paragraph-runs/1"
 MAX_SAVED_FIELDS = 256
 MAX_SAVED_FIELD_LOCATIONS = 16
 MAX_SAVED_FIELD_CHARS = 256
@@ -162,9 +166,15 @@ def validate(document):
     if WORD_TABLE_GRID_KEY in coverage and (coverage[WORD_TABLE_GRID_KEY] != WORD_TABLE_GRID
             or document.get("source", {}).get("method") != "python-docx"):
         raise ValueError("Invalid Word table grid mapping")
+    if WORD_RUN_MAP_KEY in coverage and (coverage[WORD_RUN_MAP_KEY] != WORD_RUN_MAP
+            or document.get("source", {}).get("method") != "python-docx"):
+        raise ValueError("Invalid Word paragraph run mapping")
     if PARAGRAPH_MAP_KEY in coverage and (coverage[PARAGRAPH_MAP_KEY] != PARAGRAPH_MAP
             or document.get("source", {}).get("method") not in PARAGRAPH_COORDINATES):
         raise ValueError("Invalid decoded body paragraph mapping")
+    if PPTX_VISIBILITY_KEY in coverage and (coverage[PPTX_VISIBILITY_KEY] != PPTX_VISIBILITY
+            or document.get("source", {}).get("method") != "pptx"):
+        raise ValueError("Invalid PowerPoint visibility policy")
     article = coverage.get(HTML_ARTICLE_KEY)
     if article is not None and (document.get("source", {}).get("method") != "html" or not valid_html_article_scope(article)):
         raise ValueError("Invalid saved HTML article boundaries")

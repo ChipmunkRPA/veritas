@@ -7,6 +7,7 @@ from types import SimpleNamespace
 
 import docx
 import pymupdf
+from docx.opc.constants import RELATIONSHIP_TYPE
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from PIL import Image
@@ -15,6 +16,8 @@ from app.detectors.text.adapters import learned
 from app.detectors.text.extract import extract, from_string, text_hash
 from app.detectors.text.pipeline import extract_within
 from app.detectors.text.segment import segment
+from app.evidence import document_native_locations
+from app.evidence.document_packets import _source_anchors
 
 
 def test_unicode_offsets_and_whitespace_map_to_decoded_source(tmp_path):
@@ -90,6 +93,49 @@ def test_docx_body_order_merged_cells_and_structure_anchors(tmp_path):
     assert "cell" in extracted.source_map[1]["body_path"]
     assert all(a["run_mapping_complete"] for a in extracted.source_map)
     assert "no stable page numbers" in extracted.meta["coverage_warning"]
+
+
+def word_hyperlink(paragraph, *labels):
+    hyperlink = OxmlElement("w:hyperlink")
+    hyperlink.set(qn("r:id"), paragraph.part.relate_to(
+        "https://example.invalid/word-source", RELATIONSHIP_TYPE.HYPERLINK, is_external=True))
+    for label in labels:
+        hyperlink.append(paragraph.add_run(label)._r)
+    paragraph._p.append(hyperlink)
+
+
+def test_docx_saved_hyperlink_text_preserves_runs_and_unicode_source_ranges(tmp_path):
+    path = tmp_path / "linked.docx"
+    document = docx.Document()
+    before, first, second, after = "A reference 😀 to  ", "the café", " 📘 source", " remains in this paragraph."
+    paragraph = document.add_paragraph(before)
+    word_hyperlink(paragraph, first, second)
+    paragraph.add_run(after)
+    document.save(path)
+
+    extracted = extract_within(path, ".docx")
+    assert extracted.text == "A reference 😀 to the café 📘 source remains in this paragraph."
+    assert extracted.meta[document_native_locations.WORD_RUN_MAP_KEY] == document_native_locations.WORD_RUN_MAP
+    block, = extracted.source_map
+    assert block["run_mapping_complete"]
+    expected_ends = [len(before), len(before + first), len(before + first + second), len(before + first + second + after)]
+    assert block["runs"] == [
+        {"run": i, "start": start, "end": end}
+        for i, (start, end) in enumerate(zip([0, *expected_ends[:-1]], expected_ends, strict=True))
+    ]
+
+    packets = []
+    for identifier, value in (("T01", "café 📘"), ("T02", "remains")):
+        offset = extracted.text.index(value)
+        packets.append({"id": identifier, "anchors": _source_anchors(
+            extracted.source_map, offset, offset + len(value), len(extracted.text),
+        )})
+    locations = document_native_locations.build({"source": {"method": "python-docx"}, "packets": packets})["packets"]
+    original = before + first + second + after
+    for identifier, value in (("T01", "café 📘"), ("T02", "remains")):
+        item, = locations[identifier]
+        assert item == {"anchor_index": 0, "coordinate": "word_paragraph",
+                        "ranges": [[original.index(value), original.index(value) + len(value)]]}
 
 
 def test_docx_grid_omissions_keep_cells_in_their_native_rows(tmp_path):

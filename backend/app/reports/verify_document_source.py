@@ -124,14 +124,18 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                           include_word_content_controls=coverage.get(WORD_CONTENT_CONTROLS_KEY) == WORD_CONTENT_CONTROLS,
                           include_word_saved_fields=document_native_locations.SAVED_FIELDS_KEY in coverage,
                           map_word_table_grid=coverage.get(document_native_locations.WORD_TABLE_GRID_KEY)
-                          == document_native_locations.WORD_TABLE_GRID)
+                          == document_native_locations.WORD_TABLE_GRID,
+                          map_word_hyperlink_runs=coverage.get(document_native_locations.WORD_RUN_MAP_KEY)
+                          == document_native_locations.WORD_RUN_MAP)
         except (OpcError, XMLSyntaxError) as error:
             raise ValueError("The supplied DOCX cannot be parsed locally") from error
     else:
         covered_schema = coverage.get(document_pdf_visibility.KEY, {}).get("schema") == document_pdf_visibility.SCHEMA
         doc = extract(original, extension, allow_ocr=replay_ocr, inspect_pdf_covers=covered_schema,
                       include_html_article=document_scope.HTML_ARTICLE_KEY in coverage,
-                      map_body_paragraphs=document_native_locations.PARAGRAPH_MAP_KEY in coverage)
+                      map_body_paragraphs=document_native_locations.PARAGRAPH_MAP_KEY in coverage,
+                      skip_hidden_slide_groups=coverage.get(document_native_locations.PPTX_VISIBILITY_KEY)
+                      == document_native_locations.PPTX_VISIBILITY)
     if used_ocr and not doc.source_rasters:
         raise ValueError("The local OCR runtime could not reproduce the original scan. Check that the verified OCR data are installed.")
     unassigned_email_roles = (
@@ -151,7 +155,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("Re-extracted text or source mapping differs from the committed extraction")
     fields = {"email": None, "ocr": None, "unmapped_pages": [], "partially_checked_pages": [],
               WORD_CONTENT_CONTROLS_KEY: None, document_scope.HTML_ARTICLE_KEY: None,
-              document_native_locations.PARAGRAPH_MAP_KEY: None, document_native_locations.WORD_TABLE_GRID_KEY: None}
+              document_native_locations.PARAGRAPH_MAP_KEY: None, document_native_locations.WORD_TABLE_GRID_KEY: None,
+              document_native_locations.PPTX_VISIBILITY_KEY: None, document_native_locations.WORD_RUN_MAP_KEY: None}
     local_coverage = {**doc.meta, "ocr": public_ocr_coverage(doc.meta)}
     if any(canonical_hash(coverage.get(key, default)) != canonical_hash(local_coverage.get(key, default))
            for key, default in fields.items()):

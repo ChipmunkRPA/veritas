@@ -542,12 +542,16 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][WORD_CONTENT_CONTROLS_KEY] = word_controls
     if word_grid := decoded["meta"].get(document_native_locations.WORD_TABLE_GRID_KEY):
         document["coverage"][document_native_locations.WORD_TABLE_GRID_KEY] = word_grid
+    if word_runs := decoded["meta"].get(document_native_locations.WORD_RUN_MAP_KEY):
+        document["coverage"][document_native_locations.WORD_RUN_MAP_KEY] = word_runs
     if saved_fields := decoded["meta"].get(document_native_locations.SAVED_FIELDS_KEY):
         document["coverage"][document_native_locations.SAVED_FIELDS_KEY] = saved_fields
     if article := decoded["meta"].get(document_scope.HTML_ARTICLE_KEY):
         document["coverage"][document_scope.HTML_ARTICLE_KEY] = article
     if policy := decoded["meta"].get(document_native_locations.PARAGRAPH_MAP_KEY):
         document["coverage"][document_native_locations.PARAGRAPH_MAP_KEY] = policy
+    if slide_visibility := decoded["meta"].get(document_native_locations.PPTX_VISIBILITY_KEY):
+        document["coverage"][document_native_locations.PPTX_VISIBILITY_KEY] = slide_visibility
     if writing_checks := document_check_coverage.from_result(result):
         document["coverage"][document_check_coverage.KEY] = writing_checks
         document["source"][document_check_coverage.COMMITMENT] = document_check_coverage.commitment(writing_checks)

@@ -4,8 +4,10 @@ from html import escape
 from zipfile import ZIP_DEFLATED, ZIP_STORED, ZipFile
 
 import pytest
+from test_document_packets import packet_factory as packet_factory
 
 from app.billing.preflight import PreflightError, _document
+from app.core.canonical import canonical_json
 from app.detectors.text.extract import extract
 from app.detectors.text.reading_packages import (
     CONTAINER,
@@ -18,14 +20,16 @@ from app.detectors.text.reading_packages import (
     XHTML,
 )
 from app.evidence import document_native_locations
-from app.evidence.document_packets import _source_anchors
+from app.evidence.document_packets import _source_anchors, build_packet_set
+from app.reports import public_verify, verify_document_source
 from app.storage.files import EPUB_MIME, PPTX_MIME, validate_kind
 
 PASSAGE = ("The community library stays open until eight on Thursday evenings. "
            "The volunteers use a separate entrance near the parking lot to deliver new books.")
+HIDDEN_GROUP_TEXT = "This hidden briefing paragraph is long enough to be scored if the reader accidentally includes its words."
 
 
-def powerpoint(path, passages=(PASSAGE, PASSAGE), *, strict=False, external=False, macro=False):
+def powerpoint(path, passages=(PASSAGE, PASSAGE), *, strict=False, external=False, macro=False, hidden_group=False):
     p, (a, r) = list(PRESENTATION_NAMESPACES.items())[int(strict)]
     p, a = p[1:-1], a[1:-1]
     main_type = PRESENTATION_TYPE if not macro else "application/vnd.ms-powerpoint.presentation.macroEnabled.main+xml"
@@ -50,6 +54,12 @@ def powerpoint(path, passages=(PASSAGE, PASSAGE), *, strict=False, external=Fals
             shapes = (f'<p:sp><p:txBody>{stanza}</p:txBody></p:sp>' if index != 1 else
                       f'<p:graphicFrame><a:graphic><a:graphicData><a:tbl><a:tr><a:tc><a:txBody>{stanza}'
                       '</a:txBody></a:tc></a:tr></a:tbl></a:graphicData></a:graphic></p:graphicFrame>')
+            if hidden_group and index == 2:
+                visibility = "true" if strict else "1"
+                shapes = (f'<p:grpSp><p:nvGrpSpPr><p:cNvPr hidden="0"/></p:nvGrpSpPr>'
+                          f'<p:grpSp><p:nvGrpSpPr><p:cNvPr hidden="{visibility}"/></p:nvGrpSpPr>'
+                          f'<p:sp><p:txBody><a:p><a:r><a:t>{HIDDEN_GROUP_TEXT}</a:t></a:r></a:p></p:txBody></p:sp>'
+                          f'</p:grpSp>{shapes}</p:grpSp>')
             show = ' show="0"' if index == 3 else ''
             archive.writestr(f"ppt/slides/slide{index}.xml", f'<p:sld xmlns:p="{p}" xmlns:a="{a}"{show}>'
                              f'<p:cSld><p:spTree>{shapes}</p:spTree></p:cSld></p:sld>')
@@ -105,6 +115,52 @@ def test_strict_powerpoint_body(tmp_path):
     path = tmp_path / "strict.pptx"
     powerpoint(path, strict=True)
     assert extract(path, ".pptx").text == f"{PASSAGE}\n\n{PASSAGE}"
+
+
+@pytest.mark.parametrize("strict", [False, True])
+def test_powerpoint_omits_hidden_nested_group_and_keeps_visible_text(tmp_path, strict):
+    path = tmp_path / "grouped.pptx"
+    powerpoint(path, strict=strict, hidden_group=True)
+    document = extract(path, ".pptx")
+    assert document.text == f"{PASSAGE}\n\n{PASSAGE}"
+    assert [(row["part_index"], row["paragraph_index"]) for row in document.source_map] == [(0, 0), (2, 0)]
+    assert document.meta[document_native_locations.PPTX_VISIBILITY_KEY] == document_native_locations.PPTX_VISIBILITY
+
+
+def test_hidden_powerpoint_group_alone_cannot_start_checkout(tmp_path):
+    path = tmp_path / "hidden-groups.pptx"
+    powerpoint(path, ("", ""), hidden_group=True)
+    with pytest.raises(PreflightError, match="at least 15 readable words.*No payment was started"):
+        _document(path, ".pptx")
+
+
+@pytest.mark.parametrize("skip_hidden", [True, False])
+def test_powerpoint_evidence_replays_its_recorded_visibility_policy(tmp_path, packet_factory, skip_hidden):
+    path = tmp_path / "grouped.pptx"
+    powerpoint(path, hidden_group=True)
+    db, store, analysis, result, decoded, _ = packet_factory(".pptx", source_pdf=path, skip_hidden_slide_groups=skip_hidden)
+    evidence = build_packet_set(db, analysis, store, result)
+    key = document_native_locations.PPTX_VISIBILITY_KEY
+    assert (HIDDEN_GROUP_TEXT in decoded["text"]) == (not skip_hidden)
+    assert (key in evidence["coverage"]) == skip_hidden
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"sha256": analysis.sha256, "bytes": analysis.size_bytes}}
+    archive_path = tmp_path / "proof.zip"
+
+    def write_evidence():
+        with ZipFile(archive_path, "w") as archive:
+            archive.writestr("evidence.json", canonical_json(evidence))
+
+    write_evidence()
+    with ZipFile(archive_path) as archive:
+        assert verify_document_source.check(archive, bundle, path)
+    if skip_hidden:
+        del evidence["coverage"][key]
+    else:
+        evidence["coverage"][key] = document_native_locations.PPTX_VISIBILITY
+    write_evidence()
+    with ZipFile(archive_path) as archive, pytest.raises(ValueError, match="source mapping differs"):
+        verify_document_source.check(archive, bundle, path)
 
 
 @pytest.mark.parametrize(("extension", "make", "options", "message"), [

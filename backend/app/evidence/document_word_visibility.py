@@ -13,12 +13,17 @@ SCOPE = "Checks extracted Word body and table text for direct hidden formatting.
 LIMITATION = "Word can show hidden text when its display settings allow it. This check carries zero AI-authorship weight."
 
 
+def paragraph_run_elements(paragraph):
+    """Return the runs used by Word paragraph text, including saved hyperlink labels."""
+    return paragraph._p.xpath("./w:r | ./w:hyperlink/w:r")
+
+
 def inspect_paragraph(paragraph, body_path, body_paragraph, *, projected_control=False):
     from docx.oxml.ns import qn
     from docx.text.run import Run
 
     offset = 0
-    for index, element in enumerate(paragraph._p.xpath("./w:r | ./w:hyperlink/w:r")):
+    for index, element in enumerate(paragraph_run_elements(paragraph)):
         text = Run(element, paragraph).text
         end = offset + len(text)
         mark = element.xpath("./w:rPr/w:vanish")

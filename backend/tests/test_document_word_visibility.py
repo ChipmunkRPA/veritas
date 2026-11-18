@@ -79,6 +79,8 @@ def test_local_word_visibility_keeps_exact_coordinates_and_ignores_explicit_off(
     assert not stage.current_decode_output({**decoded, "meta": old_meta})
     old_grid = {key: value for key, value in doc.meta.items() if key != locations.WORD_TABLE_GRID_KEY}
     assert not stage.current_decode_output({**decoded, "meta": old_grid})
+    old_runs = {key: value for key, value in doc.meta.items() if key != locations.WORD_RUN_MAP_KEY}
+    assert not stage.current_decode_output({**decoded, "meta": old_runs})
     for code in ("ai_supported", "no_ai_indicators"):
         decision = {"code": code, "verbal": "Fixture tendency", "reason": "Fixture",
                     "band": "uncertain", "confidence": "medium", "fusion_mode": "fallback",
@@ -121,6 +123,7 @@ def test_word_visibility_coordinates_replay_in_evidence_pdf_and_json(packet_fact
     assert load_packet_set(db, analysis, store) == evidence
     assert evidence["coverage"][visibility.KEY] == record
     assert evidence["coverage"][locations.WORD_TABLE_GRID_KEY] == locations.WORD_TABLE_GRID
+    assert evidence["coverage"][locations.WORD_RUN_MAP_KEY] == locations.WORD_RUN_MAP
     assert evidence["source"][visibility.COMMITMENT] == commitment
 
     for change in ("omit", "relocate"):

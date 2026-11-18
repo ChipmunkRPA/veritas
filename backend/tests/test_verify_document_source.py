@@ -10,9 +10,10 @@ from docx import Document
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from test_document_packets import packet_factory as packet_factory
-from test_document_source_mapping import word_control
+from test_document_source_mapping import word_control, word_hyperlink
 from test_public_evidence_package import rewrite
 from test_public_package_integration import multimedia_package as multimedia_package
+from test_strict_word import _strict_package
 
 from app.cli import main
 from app.core.canonical import canonical_hash, canonical_json
@@ -121,6 +122,45 @@ def test_original_replay_uses_the_recorded_word_table_grid(modern, tmp_path):
         del coverage[key]
     else:
         coverage[key] = document_native_locations.WORD_TABLE_GRID
+    with pytest.raises(ValueError, match="source mapping differs"):
+        replay()
+
+
+@pytest.mark.parametrize("strict", [False, True])
+@pytest.mark.parametrize("modern", [False, True])
+def test_original_replay_uses_the_recorded_word_run_mapping(modern, strict, tmp_path):
+    original = tmp_path / "linked.docx"
+    native = Document()
+    paragraph = native.add_paragraph("Please review the current reference 😀 to ")
+    word_hyperlink(paragraph, "the café", " 📘 source")
+    paragraph.add_run(" for full information about the schedule.")
+    native.save(original)
+    if strict:
+        original.write_bytes(_strict_package(original.read_bytes()))
+
+    decoded = extract(original, ".docx", map_word_hyperlink_runs=modern)
+    assert decoded.text == "Please review the current reference 😀 to the café 📘 source for full information about the schedule."
+    assert decoded.source_map[0]["run_mapping_complete"] is modern
+    assert len(decoded.source_map[0]["runs"]) == (4 if modern else 2)
+    source = {"method": "python-docx", "sha256": decoded.meta["original_sha256"],
+              "extracted_text_sha256": text_hash(decoded.text), "source_map_sha256": canonical_hash(decoded.source_map),
+              "chars": len(decoded.text)}
+    key = document_native_locations.WORD_RUN_MAP_KEY
+    evidence = {"source": source, "version": document_scope.VERSION, "packets": [],
+                "coverage": {key: decoded.meta[key]} if modern else {},
+                "repeated_passages": document_repeat.build(source, decoded.text, decoded.source_map)}
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"sha256": source["sha256"], "bytes": original.stat().st_size}}
+    archive_path = tmp_path / "run-map.zip"
+
+    def replay():
+        with zipfile.ZipFile(archive_path, "w") as archive:
+            archive.writestr("evidence.json", canonical_json(evidence))
+        with zipfile.ZipFile(archive_path) as archive:
+            return verify_document_source.check(archive, bundle, original)
+
+    assert "extracted text and source mapping matched" in replay()
+    evidence["coverage"] = {} if modern else {key: document_native_locations.WORD_RUN_MAP}
     with pytest.raises(ValueError, match="source mapping differs"):
         replay()
 

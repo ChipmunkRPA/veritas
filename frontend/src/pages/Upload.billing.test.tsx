@@ -71,7 +71,7 @@ describe('paid analysis intake', () => {
     const guidance = screen.getByText('What the document checks cover').parentElement!
     expect(guidance.querySelectorAll('li')).toHaveLength(2)
     expect(guidance.textContent).toContain('Word checks body paragraphs and supported tables')
-    expect(guidance.textContent).toContain('PowerPoint checks editable text on visible slides')
+    expect(guidance.textContent).toContain('Hidden groups are excluded')
   })
   it('requires an unchecked limitations acknowledgement and resets it for a changed source', () => {
     mount()

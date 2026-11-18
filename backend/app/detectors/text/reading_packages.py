@@ -89,10 +89,13 @@ class _Package:
         return rows
 
 
-def _slide_paragraphs(shapes, presentation, drawing):
+def _slide_paragraphs(shapes, presentation, drawing, *, skip_hidden_slide_groups):
     for shape in shapes:
         if shape.tag == presentation + "grpSp":
-            yield from _slide_paragraphs(shape, presentation, drawing)
+            properties = shape.find(f"{presentation}nvGrpSpPr/{presentation}cNvPr")
+            if skip_hidden_slide_groups and properties is not None and properties.get("hidden") in ("1", "true"):
+                continue
+            yield from _slide_paragraphs(shape, presentation, drawing, skip_hidden_slide_groups=skip_hidden_slide_groups)
         elif shape.tag == presentation + "sp":
             properties = shape.find(f"{presentation}nvSpPr/{presentation}cNvPr")
             if properties is None or properties.get("hidden") not in ("1", "true"):
@@ -109,7 +112,7 @@ def _slide_paragraphs(shapes, presentation, drawing):
                     yield from cell.findall(f"{drawing}txBody/{drawing}p")
 
 
-def _powerpoint(package: _Package):
+def _powerpoint(package: _Package, *, skip_hidden_slide_groups: bool):
     main = [
         row for row in package.relationships("_rels/.rels").values()
         if row.get("Type") in {f"{value[1]}/officeDocument" for value in PRESENTATION_NAMESPACES.values()}
@@ -150,7 +153,8 @@ def _powerpoint(package: _Package):
             raise ValueError("The PPTX has an unreadable slide")
         if slide.get("show") in ("0", "false"):
             continue
-        for paragraph_index, paragraph in enumerate(_slide_paragraphs(tree, presentation, drawing)):
+        paragraphs = _slide_paragraphs(tree, presentation, drawing, skip_hidden_slide_groups=skip_hidden_slide_groups)
+        for paragraph_index, paragraph in enumerate(paragraphs):
             value = "".join(
                 "\n" if child.tag == drawing + "br" else child.findtext(drawing + "t", default="")
                 for child in paragraph if child.tag in {drawing + "r", drawing + "fld", drawing + "br"}
@@ -233,16 +237,20 @@ def _ebook(package: _Package):
             yield text, index, paragraph_index
 
 
-def body_parts(path: Path, extension: str, *, check_crc: bool = False) -> list[tuple[str, dict]]:
+def body_parts(path: Path, extension: str, *, check_crc: bool = False,
+               skip_hidden_slide_groups: bool = True) -> list[tuple[str, dict]]:
     check_document_archive_safe(path, extension, check_crc=check_crc)
-    reader = {".pptx": _powerpoint, ".epub": _ebook}[extension]
-    part_kind = "slide" if extension == ".pptx" else "epub_entry"
+    presentation = extension == ".pptx"
+    part_kind = "slide" if presentation else "epub_entry"
     parts = []
     characters = raw_characters = 0
     limit = settings.max_document_chars
     try:
         with ZipFile(path) as archive:
-            for text, index, paragraph_index in reader(_Package(archive)):
+            package = _Package(archive)
+            paragraphs = (_powerpoint(package, skip_hidden_slide_groups=skip_hidden_slide_groups)
+                          if presentation else _ebook(package))
+            for text, index, paragraph_index in paragraphs:
                 if not text.strip():
                     continue
                 raw_characters += len(text)

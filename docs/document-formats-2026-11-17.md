@@ -7,7 +7,7 @@ limit is 25 MB in the standard configuration.
 
 | Format | Writing examined | Source position in reports |
 | --- | --- | --- |
-| DOCX | Body paragraphs, tables, saved text in filled paragraph and inline controls, and supported saved field values in standard and Strict Open XML DOCX. Separate Word revision and visibility checks cover their supported structures. | Word body path, paragraph characters, and available run coordinates |
+| DOCX | Body paragraphs, tables, saved text in filled paragraph and inline controls, and supported saved field values in standard and Strict Open XML DOCX. Separate Word revision and visibility checks cover their supported structures. | Word body path, paragraph characters, and available run coordinates, including saved hyperlink labels |
 | ODT | Body paragraphs, headings, lists, and tables | Decoded body paragraph number and character range |
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
 | PPTX | Editable text boxes and tables on visible slides | Slide in presentation order, text block, and decoded character range |
@@ -33,6 +33,11 @@ when the report was created. [Microsoft's Word control structure](https://learn.
 When a Word table row starts after an omitted grid column, new evidence
 uses the cell's actual table column. The report records which coordinate
 rule it used so the signed package can be verified against the original.
+
+Word passage locations include the saved label text within hyperlinks and
+the exact offsets of the text that follows. The reader uses the stored text
+and never opens the hyperlink destination. Signed reports record the
+mapping rule so earlier evidence can replay with its original coordinates.
 
 Word's **Strict Open XML Document** option also saves a `.docx` file.
 Upload it directly for analysis or an earlier-draft comparison. The reader
@@ -74,7 +79,10 @@ Rich Text files with binary data should be saved as DOCX or PDF.
 The local batch tool also accepts native DOCX and ODT packages.
 
 PowerPoint findings use the order shown in the presentation. Hidden slides,
-speaker notes, charts, SmartArt, and image text are outside the writing check.
+hidden groups, speaker notes, charts, SmartArt, and image text are outside the
+writing check. Text in hidden groups does not count toward checkout's readable
+word minimum. Earlier signed reports use the visibility policy recorded at
+the time of analysis.
 EPUB findings use the original main reading order, skipping navigation and
 optional entries. EPUB styling, image text, and SVG chapters are outside the
 writing check. Slide and EPUB entry numbers in the web view and PDF are
@@ -85,6 +93,7 @@ The writing check requires at least 15 readable words. Longer ebooks can
 be submitted as excerpts within the configured writing limit. Checkout
 rejects unreadable packages and protected EPUB chapter text before payment.
 [Microsoft's slide order and text reference](https://learn.microsoft.com/en-us/office/open-xml/presentation/how-to-get-all-the-text-in-all-slides-in-a-presentation)
+· [Microsoft's hidden drawing property](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.drawing.nonvisualdrawingproperties?view=openxml-3.0.1)
 · [W3C EPUB 3.3 package specification](https://www.w3.org/TR/epub-33/#sec-pkg-spine)
 
 An isolated local browser run accepted a 224-word fixture in all ten formats.
@@ -116,6 +125,16 @@ fixture produced matching PDF and JSON evidence and a signed package that
 verified against the original. All 13 jobs began after simulated checkout.
 Separate scanned and hybrid PDF tests verified the recognized text and its
 page positions against the original file.
+
+The follow-up Chromium run submitted all 13 extensions through the upload
+form, plus a Strict Word file and a scanned PDF. No analysis started until
+its simulated USD 9.99 payment cleared. Both Word cases preserved 17 source
+ranges, including two in a table, and kept the saved hyperlink positions.
+PowerPoint preserved ten visible positions and left the hidden group out
+of the analysis and both exports. All 15 signed packages verified against
+their original files. The run used the local CPU writing checks with the
+optional large model pair disabled.
+[Browser, export, and original-file receipt](evaluation-panels/document-format-browser-checkout-2026-11-18.json)
 
 The local app also compares two saved HTML articles when an earlier copy is
 available. It marks wording changes in both decoded sources and gives the

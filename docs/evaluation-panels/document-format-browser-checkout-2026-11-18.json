@@ -1,0 +1,130 @@
+{
+  "schema": "chipmunk.document-browser-format-checkout/1",
+  "fixture_scope": "Generated files with normal and Strict Word, visible and hidden PowerPoint groups, and native and scanned PDFs",
+  "execution": "Offline CPU writing checks with optional large model pair disabled",
+  "simulated_checkout": {
+    "currency": "USD",
+    "amount_cents": 999,
+    "browser_orders": 15,
+    "paid_jobs": 15,
+    "unpaid_jobs": 0
+  },
+  "verified_pdf_json_and_signed_original": 15,
+  "browser": {
+    "pages": 15,
+    "pdf_downloads": 15,
+    "json_links": 15,
+    "page_errors": 0,
+    "evidence_checked": 15,
+    "evidence_missing": []
+  },
+  "cases": [
+    {
+      "format": "docx",
+      "words": 273,
+      "completed_checks": 2,
+      "native_ranges": 17,
+      "word_table_ranges": 2,
+      "ocr_word_boxes": 0
+    },
+    {
+      "format": "odt",
+      "words": 273,
+      "completed_checks": 2,
+      "native_ranges": 17,
+      "ocr_word_boxes": 0
+    },
+    {
+      "format": "eml",
+      "words": 273,
+      "completed_checks": 2,
+      "native_ranges": 17,
+      "ocr_word_boxes": 0
+    },
+    {
+      "format": "txt",
+      "words": 273,
+      "completed_checks": 2,
+      "native_ranges": 17,
+      "ocr_word_boxes": 0
+    },
+    {
+      "format": "md",
+      "words": 273,
+      "completed_checks": 2,
+      "native_ranges": 0,
+      "ocr_word_boxes": 0
+    },
+    {
+      "format": "html",
+      "words": 273,
+      "completed_checks": 2,
+      "native_ranges": 0,
+      "ocr_word_boxes": 0
+    },
+    {
+      "format": "pdf",
+      "words": 273,
+      "completed_checks": 2,
+      "native_ranges": 0,
+      "ocr_word_boxes": 0
+    },
+    {
+      "format": "rtf",
+      "words": 273,
+      "completed_checks": 2,
+      "native_ranges": 17,
+      "ocr_word_boxes": 0
+    },
+    {
+      "format": "pptx",
+      "words": 71,
+      "completed_checks": 2,
+      "native_ranges": 10,
+      "ocr_word_boxes": 0
+    },
+    {
+      "format": "epub",
+      "words": 71,
+      "completed_checks": 2,
+      "native_ranges": 10,
+      "ocr_word_boxes": 0
+    },
+    {
+      "format": "markdown",
+      "words": 273,
+      "completed_checks": 2,
+      "native_ranges": 0,
+      "ocr_word_boxes": 0
+    },
+    {
+      "format": "htm",
+      "words": 273,
+      "completed_checks": 2,
+      "native_ranges": 0,
+      "ocr_word_boxes": 0
+    },
+    {
+      "format": "xhtml",
+      "words": 275,
+      "completed_checks": 2,
+      "native_ranges": 15,
+      "ocr_word_boxes": 0
+    },
+    {
+      "format": "strict-docx",
+      "words": 273,
+      "completed_checks": 2,
+      "native_ranges": 17,
+      "word_table_ranges": 2,
+      "ocr_word_boxes": 0
+    },
+    {
+      "format": "scan-pdf",
+      "words": 273,
+      "completed_checks": 2,
+      "native_ranges": 0,
+      "ocr_word_boxes": 287
+    }
+  ]
+}

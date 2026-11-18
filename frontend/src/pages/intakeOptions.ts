@@ -40,7 +40,7 @@ const sheetExport = 'Export the sheets containing writing as PDF, or paste the p
 const documentCoverage = new Map(Object.entries({
   docx: 'Word checks body paragraphs and supported tables. Export to PDF to include rendered text boxes, headers, footers, or tables with controls around rows or cells.',
   pdf: 'PDF checks selectable text and can try to recognize text on scans. Some pages or areas may remain unchecked.',
-  pptx: 'PowerPoint checks editable text on visible slides, including tables. Export to PDF to include writing that appears only in images.',
+  pptx: 'PowerPoint checks editable text and tables on visible slides. Hidden groups are excluded. Export to PDF to include writing that appears only in images.',
   epub: 'EPUB checks the main reading text. Navigation, optional chapters, and text in images are outside this check.',
   eml: 'Email checks the message body. Upload any attachment you want checked as a separate file.',
 }))

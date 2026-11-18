@@ -125,10 +125,14 @@ def current_decode_output(output: Any) -> bool:
     if (output["meta"].get("method") in document_native_locations.PARAGRAPH_COORDINATES
             and output["meta"].get(document_native_locations.PARAGRAPH_MAP_KEY) != document_native_locations.PARAGRAPH_MAP):
         return False
+    if (output["meta"].get("method") == "pptx"
+            and output["meta"].get(document_native_locations.PPTX_VISIBILITY_KEY) != document_native_locations.PPTX_VISIBILITY):
+        return False
     if (output["meta"].get("method") == "python-docx" and
             (output["meta"].get(WORD_CONTENT_CONTROLS_KEY) != WORD_CONTENT_CONTROLS
              or output["meta"].get(document_native_locations.SAVED_FIELDS_READER) != document_native_locations.SAVED_FIELDS_SCHEMA
              or output["meta"].get(document_native_locations.WORD_TABLE_GRID_KEY) != document_native_locations.WORD_TABLE_GRID
+             or output["meta"].get(document_native_locations.WORD_RUN_MAP_KEY) != document_native_locations.WORD_RUN_MAP
              or (output.get(document_tracked_changes.KEY) or {}).get("schema") != document_tracked_changes.PARAGRAPH_SCHEMA
              or (output["meta"].get(document_word_visibility.KEY) or {}).get("schema") != document_word_visibility.SCHEMA)):
         return False

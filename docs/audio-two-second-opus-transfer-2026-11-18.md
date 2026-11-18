@@ -60,6 +60,73 @@ commitments, all native frame clocks, four operating-point cells and both
 advancement decisions.
 [Complete local measurements](evaluation-panels/audio-two-second-opus-transfer-2026-11-18.json.gz)
 
+## Fresh Opus holdout
+
+A second trial tested 138 encoded files from 24 foreground readers, six
+synthesis families, six ordinary resampling controls and two room
+recordings. Readers and rooms were separate from the two earlier Opus
+roles. Some sources appeared in other project tests. Each of the three
+conditions used the same 12 edited files, 12 genuine files and six
+resampling controls. The two background conditions also included 24
+room-only files each. The three-second comparator and the stricter
+inherited two-second point were fixed before scoring.
+
+| Sound condition | Edit locations out of 78 | Edited files with a correct location out of 12 | Ordinary and resampled files flagged out of 18 | Isolated room files flagged |
+| --- | ---: | ---: | ---: | ---: |
+| Clean | 24 → 31 | 10 → 12 | 0 → 0 | — |
+| Speech 5 dB below interference | 16 → 20 | 8 → 9 | 3 → 3 | 0 → 0 of 24 |
+| Speech 10 dB below interference | 8 → 8 | 6 → 6 | 1 → 2 | 0 → 0 of 24 |
+
+The arrows compare the same-carrier three-second schedule with the
+combined schedule. The comparison schedule approximates the existing
+check and can inspect more windows than the app currently routes on
+Opus. All 138 files passed exact native clock and decoded-waveform checks
+before scoring. A separate reader reproduced the counts without model
+inference. The procedure completed 2,846 classifier forwards.
+
+The supplement retained every baseline label and produced useful clean
+and moderate-background gains. The strongest interference condition
+added a misplaced edit highlight and a flag on an ordinary resampling
+control. It fell short of the predefined minimum of two new locations
+across two readers. At most 43 of the 78 target ranges per condition could
+be reached by the current matching rule and two-second schedule, even if
+every window passed the speech check. The Opus supplement remains
+experimental. It carries zero weight in the overall confidence score.
+[Fresh Opus comparison receipt](evaluation-panels/audio-two-second-opus-confirmation-2026-11-18.json.gz)
+
+An isolated app test on a previously measured Opus file reproduced the
+selected sample ranges, PDF waveform and signed original verification.
+The source clock and the decoded clock were checked separately. The
+variable-bitrate control stayed outside the profile. This tests evidence
+delivery. The held comparison determines accuracy for its declared
+conditions. Codec research on asymmetric errors between genuine and
+synthetic speech also supports reporting missed edits and false alerts
+separately for each background condition. The cited study examined
+neural codecs. [Codec robustness study](https://arxiv.org/abs/2609.39651)
+
+Recount the fresh holdout without audio or detector weights.
+
+```sh
+review=$(mktemp -d)
+panel=docs/evaluation-panels/audio-two-second-opus-confirmation-2026-11-18.json.gz
+python3 -B -S - "$panel" "$review" <<'PY'
+import gzip
+import json
+import sys
+from pathlib import Path
+
+with gzip.open(sys.argv[1], "rt", encoding="utf-8") as stream:
+    receipt = json.load(stream)
+out = Path(sys.argv[2])
+parts = {name: receipt[name] for name in ("manifest", "truth")}
+for name, data in (parts | receipt["readings"]).items():
+    (out / f"{name}.json").write_text(json.dumps(data), encoding="utf-8")
+PY
+python3 -B -IS backend/scripts/independent_review.py compare-events \
+  "$review/manifest.json" "$review/truth.json" "$review/three-second.json" \
+  "$review/with-two-second.json" "$review/paired.json" --match 0.3 0.5
+```
+
 ## Replay
 
 Use the two source directories and published matching receipts from

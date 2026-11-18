@@ -38,6 +38,14 @@ def fixture():
     return manifest, receipt
 
 
+def test_historical_matcher_keeps_one_to_one_counts_with_zero_minimum_recall():
+    labels = [(0, 10), (10, 20)]
+    proposals = [(5, 15), (0, 10)]
+    assert locations._matches(labels, proposals, .30, 0.) == 2
+    assert locations._matches(labels, proposals[:1], .30, 0.) == 1
+    assert locations._matches(labels, proposals, .30, .51) == 1
+
+
 def test_coordinate_locations_count_shared_area_once_and_remove_private_positions():
     manifest, receipt = fixture()
     for case in manifest["cases"]:

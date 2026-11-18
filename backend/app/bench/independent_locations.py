@@ -297,6 +297,12 @@ def _event_assignment(reference, detected, minimum_iou, minimum_recall, overlap_
     return edges, assigned
 
 
+def _matches(reference, detected, minimum_iou, minimum_recall):
+    """Count one-to-one matches for existing evaluation runners."""
+    _, assigned = _event_assignment(reference, detected, minimum_iou, minimum_recall)
+    return len(assigned)
+
+
 def _event_membership(reference, proposals, minimum_iou, minimum_recall, overlap_for=_event_overlap):
     edges, assigned = _event_assignment(reference, proposals, minimum_iou, minimum_recall, overlap_for)
     matched = set(assigned.values())

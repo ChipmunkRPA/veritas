@@ -3823,6 +3823,56 @@ as unmatched. Inputs represented only by a PBM mask still have a union count.
 For the event count, masks are reported as unavailable instance geometry
 because they do not declare separate edits.
 
+### Compare exact edit coverage from two detectors
+
+Use `compare-events` on two sets of locations from the same input manifest
+and truth file. It records each check's matched edits, missed edits, flags
+on ordinary inputs, and unassessed coverage. The combined reading uses the
+union of distinct proposed regions. A combined case is assessed when either
+check returns exact locations or an assessed empty list. Identical proposals
+appear once in the combined reading.
+
+```sh
+python3 -IS "$review" compare-events "$scratch/example/manifest.json" \
+  "$scratch/example/location-truth.json" "$scratch/example/baseline-locations.json" \
+  "$scratch/example/candidate-locations.json" "$scratch/paired-events.json" --match .30 .50
+cmp "$scratch/example/event-comparison.json" "$scratch/paired-events.json"
+```
+
+Individual edit transitions count an edit as retained, found by only one
+check, or missed by both when its status is determined by the matching
+rule. A broad proposal can fit different annotations in equally large
+one-to-one assignments. Those targets count as ambiguous. The maximum
+number of located edits still applies. For union masks without separate
+instances, the report counts the case under unavailable instance geometry.
+`count-locations` measures the union on those same masks.
+
+The tool recounts supplied locations for these exact files. Freeze each
+check and the overlap rule before scoring a new held panel. Keep the
+native responses and source media locally. The summary preserves input
+commitments and aggregate group counts. Review free-text condition labels
+before sharing the summary.
+
+Two replays on retained real inputs show why the combined reading matters.
+In the mono soundtrack study, the two checks found different removals.
+The combined reading retained both sets of locations. In the portrait
+study, the shot check removed ordinary cut flags. Combining its results
+with the unguarded proposals brought those flags back with equal edit
+coverage. [Paired replay receipt](evaluation-panels/paired-edit-replay-2026-11-18.json) ·
+[Mono soundtrack inputs](video-mono-speech-activity-2026-11-17.md#compare-another-detector) ·
+[Portrait inputs](video-face-portrait-2026-11-17.md#reproduce)
+
+| Retained panel | Known edits located by baseline, candidate, and combined | Ordinary files flagged by baseline, candidate, and combined |
+| --- | --- | --- |
+| Mono soundtrack, near-silence and speech-activity checks | 22, 40, and 48 of 120 | 0, 1, and 1 of 264 |
+| Portrait face changes, before and after the shot check | 72, 72, and 72 of 144 | 7, 3, and 7 of 360 |
+
+The source archives contain the separate `manifest`, `truth` and `readings`
+objects. For the mono replay, extract the two named readings and run the same
+command at the original 0.40 IoU and 0.40 recall. The portrait replay uses
+the original 0.50 temporal IoU, which also requires at least 0.50 recall.
+The paired receipt names the exact readings used in each replay.
+
 For an irregular image region, use a binary PBM mask in the original
 image geometry. Truth or response can use a mask in place of `regions`.
 The other side can be another mask or a set of rectangles. Use the

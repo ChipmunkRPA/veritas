@@ -13,6 +13,7 @@ from app.bench import independent
 
 TRUTH_SCHEMA = "chipmunk.independent-location-truth/1"
 EVENTS_SCHEMA = "chipmunk.independent-location-events/1"
+EVENT_COMPARISON_SCHEMA = "chipmunk.independent-event-comparison/1"
 MAX_REGIONS = 256
 MAX_MASK_SIDE = 16_384
 MAX_MASK_PIXELS = 64_000_000
@@ -216,7 +217,7 @@ def count_locations(manifest, truth, response, *, mask_directory: Path | None = 
     return _count_locations(manifest, truth, response, mask_directory)[0]
 
 
-def _matches(reference, detected, minimum_iou, minimum_recall):
+def _event_assignment(reference, detected, minimum_iou, minimum_recall):
     # Eligible pairs form a bipartite graph. Reassign earlier matches when
     # needed so that a broad proposal cannot block two narrower matches.
     edges = []
@@ -239,13 +240,41 @@ def _matches(reference, detected, minimum_iou, minimum_recall):
                 return True
         return False
 
-    return sum(assign(target, set()) for target in range(len(reference)))
+    for target in range(len(reference)):
+        assign(target, set())
+    return edges, assigned
+
+
+def _event_membership(reference, proposals, minimum_iou, minimum_recall):
+    edges, assigned = _event_assignment(reference, proposals, minimum_iou, minimum_recall)
+    matched = set(assigned.values())
+    # Starting at an unmatched target, an alternating path can swap which
+    # endpoint is located without changing the maximum number of matches.
+    optional = {target for target, options in enumerate(edges) if options and target not in matched}
+    frontier = list(optional)
+    while frontier:
+        target = frontier.pop()
+        for proposal in edges[target]:
+            other = assigned[proposal]  # A reachable unused proposal would improve the maximum matching.
+            if other not in optional:
+                optional.add(other)
+                frontier.append(other)
+    return len(matched), matched - optional, optional
+
+
+def _event_limits(minimum_iou, minimum_recall):
+    if any(type(value) not in (float, int) or not 0 < value <= 1 for value in (minimum_iou, minimum_recall)):
+        raise ValueError("Minimum event IoU and recall must each be greater than zero and at most one")
+
+
+def _unique_events(reference):
+    if len({tuple(event) for event in reference}) != len(reference):
+        raise ValueError("Event truth contains identical duplicate annotations")
 
 
 def count_events(manifest, truth, response, *, minimum_iou, minimum_recall, mask_directory: Path | None = None):
     """Summarize separate annotations and proposals without emitting their coordinates."""
-    if any(type(value) not in (float, int) or not 0 < value <= 1 for value in (minimum_iou, minimum_recall)):
-        raise ValueError("Minimum event IoU and recall must each be greater than zero and at most one")
+    _event_limits(minimum_iou, minimum_recall)
     grouped = defaultdict(Counter)
     groups = defaultdict(set)
 
@@ -257,15 +286,15 @@ def count_events(manifest, truth, response, *, minimum_iou, minimum_recall, mask
         if isinstance(reference, tuple) or isinstance(detected, tuple):
             group["unavailable_instance_geometry"] += 1
             return
-        if len({tuple(event) for event in reference}) != len(reference):
-            raise ValueError("Event truth contains identical duplicate annotations")
+        _unique_events(reference)
         group["target_events"] += len(reference)
         if detected is None:
             group["unassessed"] += 1
             return
         group["assessed"] += 1
         distinct_proposals = list(dict.fromkeys(map(tuple, detected)))
-        matched = _matches(reference, distinct_proposals, minimum_iou, minimum_recall)
+        _, assigned = _event_assignment(reference, distinct_proposals, minimum_iou, minimum_recall)
+        matched = len(assigned)
         group["reported_events"] += len(detected)
         group["matched_events"] += matched
         group["complete_positive_inputs"] += bool(reference) and matched == len(reference)
@@ -284,3 +313,67 @@ def count_events(manifest, truth, response, *, minimum_iou, minimum_recall, mask
             "truth_sha256": independent.digest(truth), "response_sha256": independent.digest(response),
             "split": response["split"], "minimum_iou": minimum_iou, "minimum_recall": minimum_recall,
             "matching": "maximum one-to-one matches", "strata": strata}
+
+
+def _record_events(counts, reference, reported, minimum_iou, minimum_recall):
+    if reported is None:
+        counts["unassessed"] += 1
+        return set(), set()
+    proposals = sorted({tuple(item) for item in reported})
+    matches, certain, optional = _event_membership(reference, proposals, minimum_iou, minimum_recall)
+    counts.update(assessed=1, flagged_inputs=bool(reported), reported_events=len(reported), matched_events=matches,
+                  unmatched_proposals=len(reported) - matches, complete_positive_inputs=bool(reference) and matches == len(reference))
+    return certain, optional
+
+
+def compare_events(manifest, truth, baseline, candidate, *, minimum_iou, minimum_recall, mask_directory: Path | None = None):
+    """Compare exact edit coverage, including the union of two sets of proposals."""
+    _event_limits(minimum_iou, minimum_recall)
+    prior = {}
+
+    def capture(case, reference, detected):
+        prior[case["id"]] = detected
+
+    _count_locations(manifest, truth, baseline, mask_directory, collect_events=capture)
+    if candidate.get("split") != baseline["split"]:
+        raise ValueError("Both event readings must use the same split")
+    strata = defaultdict(lambda: (set(), Counter(), defaultdict(Counter), Counter()))
+
+    def collect(case, reference, detected):
+        earlier = prior[case["id"]]
+        key = case["modality"], case["condition"], case["label"]
+        groups, totals, methods, transitions = strata[key]
+        groups.add(case["group"])
+        totals["planned"] += 1
+        if any(isinstance(reading, tuple) for reading in (reference, earlier, detected)):
+            totals["unavailable_instance_geometry"] += 1
+            return
+        _unique_events(reference)
+        totals["target_events"] += len(reference)
+        before, before_optional = _record_events(methods["baseline"], reference, earlier, minimum_iou, minimum_recall)
+        after, after_optional = _record_events(methods["candidate"], reference, detected, minimum_iou, minimum_recall)
+        combined = None
+        if earlier is not None or detected is not None:
+            combined = sorted({tuple(item) for item in (*(earlier or []), *(detected or []))})
+        _record_events(methods["combined"], reference, combined, minimum_iou, minimum_recall)
+        uncertain = before_optional | after_optional
+        transitions.update(ambiguous_match=len(uncertain), retained=len((before & after) - uncertain),
+                           baseline_only=len((before - after) - uncertain), candidate_only=len((after - before) - uncertain),
+                           missed_by_both=len(reference) - len(before | after | uncertain))
+
+    _count_locations(manifest, truth, candidate, mask_directory, collect_events=collect)
+    fields = ("assessed", "unassessed", "flagged_inputs", "reported_events", "matched_events", "unmatched_proposals", "complete_positive_inputs")
+    comparisons = []
+    for (modality, condition, label), (groups, totals, methods, transitions) in sorted(strata.items()):
+        readings = {name: {**{key: methods[name][key] for key in fields},
+                           "missed_events": totals["target_events"] - methods[name]["matched_events"]}
+                    for name in ("baseline", "candidate", "combined")}
+        comparisons.append({"modality": modality, "condition": condition, "label": label, "source_groups": len(groups),
+                            "planned": totals["planned"], "target_events": totals["target_events"],
+                            "unavailable_instance_geometry": totals["unavailable_instance_geometry"], **readings,
+                            "event_transitions": {key: transitions[key] for key in (
+                                "retained", "baseline_only", "candidate_only", "missed_by_both", "ambiguous_match")}})
+    return {"schema": EVENT_COMPARISON_SCHEMA, "manifest_sha256": independent.digest(manifest),
+            "truth_sha256": independent.digest(truth), "baseline_sha256": independent.digest(baseline),
+            "candidate_sha256": independent.digest(candidate), "split": baseline["split"],
+            "minimum_iou": minimum_iou, "minimum_recall": minimum_recall, "strata": comparisons}

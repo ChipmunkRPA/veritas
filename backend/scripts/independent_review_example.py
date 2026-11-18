@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from app.bench.independent import LOCALIZATION_UNITS, SCHEMA, compare, digest, freeze
-from app.bench.independent_locations import TRUTH_SCHEMA, count_events
+from app.bench.independent_locations import TRUTH_SCHEMA, compare_events, count_events
 from app.bench.independent_replication import replicate_locations
 
 EXTENTS = {"audio": 48_000, "image": 1_000, "text": 500, "video": 100}
@@ -85,7 +85,7 @@ def create(directory, write):
     points = dict.fromkeys(EXTENTS, .5)
     write(directory / "manifest.json", manifest)
     write(directory / "points.json", points)
-    systems = []
+    systems, localization = [], {}
     for name, values in (("baseline", BASELINE), ("candidate", CANDIDATE)):
         system = f"authored example {name}"
         development = _receipt(manifest, system, "development", ((.2, 0, 0), (.8, 9, 7)))
@@ -94,14 +94,17 @@ def create(directory, write):
         confirmation["freeze_sha256"] = digest(lock)
         for suffix, data in (("development", development), ("freeze", lock), ("confirmation", confirmation)):
             write(directory / f"{name}-{suffix}.json", data)
+        truth, response = _location_example(manifest, confirmation, moved=name == "baseline")
+        localization[name] = response
+        write(directory / f"{name}-locations.json", response)
         if name == "candidate":
-            truth, response = _location_example(manifest, confirmation)
             _, repeated = _location_example(manifest, confirmation, moved=True)
             write(directory / "location-truth.json", truth)
-            write(directory / "candidate-locations.json", response)
             write(directory / "candidate-repeat-locations.json", repeated)
             write(directory / "location-replication.json", replicate_locations(manifest, truth, response, repeated, lock))
             write(directory / "candidate-event-counts.json", count_events(manifest, truth, response, minimum_iou=.30,
                                                                          minimum_recall=.50))
         systems.extend((confirmation, lock))
     write(directory / "comparison.json", compare(manifest, *systems, require_freeze_commitment=True))
+    write(directory / "event-comparison.json", compare_events(manifest, truth, localization["baseline"], localization["candidate"],
+                                                              minimum_iou=.30, minimum_recall=.50))

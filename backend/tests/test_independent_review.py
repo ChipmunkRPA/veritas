@@ -109,6 +109,9 @@ def test_exact_image_masks_and_rectangles_use_the_same_native_geometry(tmp_path)
                                           mask_directory=tmp_path)
     assert event_report["strata"][0]["unavailable_instance_geometry"] == 1
     assert event_report["strata"][0]["target_events"] == 0
+    paired = locations.compare_events(manifest, truth, response, response, minimum_iou=.3, minimum_recall=.5, mask_directory=tmp_path)
+    assert paired["strata"][0]["planned"] == paired["strata"][0]["unavailable_instance_geometry"] == 1
+    assert paired["strata"][0]["combined"]["assessed"] == 0
     source.pop("mask")
     source["regions"] = [[0, 0, 2, 2]]
     run(3, 1)
@@ -158,6 +161,55 @@ def test_instance_counts_detect_merged_edits_and_unmatched_proposals():
     assert all(case["input_sha256"] not in str(result) for case in selected)
     with pytest.raises(ValueError, match="Minimum event"):
         locations.count_events(manifest, truth, response, minimum_iou=0, minimum_recall=.5)
+
+
+def test_paired_edit_comparison_counts_complementary_ranges_and_ambiguous_assignments():
+    manifest, receipt = fixture()
+    selected = [case for case in manifest["cases"] if case["modality"] == "audio" and case["split"] == "confirmation"]
+    for case in selected:
+        case["localization_truth"] = {"unit": "samples", "source_units": 100, "target_units": 20 * case["label"]}
+    truth = {"schema": locations.TRUTH_SCHEMA, "split": "confirmation", "manifest_sha256": review.digest(manifest),
+             "cases": [{"id": case["id"], "input_sha256": case["input_sha256"], "extent": [100],
+                        "regions": [[10, 20], [25, 35]] if case["label"] else []} for case in selected]}
+    baseline, candidate = receipt("confirmation"), receipt("confirmation", "candidate")
+    original, alternate = ({row["id"]: row for row in reading["predictions"]} for reading in (baseline, candidate))
+    for case in selected:
+        ident = case["id"]
+        if case["condition"] == "clean":
+            original[ident]["localization"] = {"status": "ok", "regions": [[10, 20]] * (1 if case["label"] else 2)}
+            alternate[ident]["localization"] = {"status": "ok", "regions": [[25, 35]] if case["label"] else [[10, 20]]}
+        elif case["label"]:
+            original[ident]["localization"] = {"status": "ok", "regions": [[10, 35]]}
+            alternate[ident]["localization"] = {"status": "ok", "regions": [[25, 35]]}
+        else:
+            original[ident]["localization"] = {"status": "inconclusive", "reason": "Unverified sample clock"}
+            alternate[ident]["localization"] = {"status": "ok", "regions": []}
+
+    def compare():
+        return locations.compare_events(manifest, truth, baseline, candidate, minimum_iou=.3, minimum_recall=.5)
+
+    result = compare()
+    clean_control, clean_edit, processed_control, processed_edit = result["strata"]
+    assert clean_control["baseline"]["unmatched_proposals"] == 2
+    assert clean_control["combined"]["unmatched_proposals"] == clean_control["combined"]["flagged_inputs"] == 1
+    assert (clean_edit["baseline"]["matched_events"], clean_edit["candidate"]["matched_events"],
+            clean_edit["combined"]["matched_events"]) == (1, 1, 2)
+    assert clean_edit["event_transitions"] == {"retained": 0, "baseline_only": 1, "candidate_only": 1,
+                                               "missed_by_both": 0, "ambiguous_match": 0}
+    assert processed_control["baseline"]["unassessed"] == 1 and processed_control["combined"]["assessed"] == 1
+    assert processed_edit["event_transitions"]["ambiguous_match"] == 2
+    assert processed_edit["combined"]["complete_positive_inputs"] == 1
+    assert all(case["id"] not in str(result) and case["input_sha256"] not in str(result) for case in selected)
+
+    for case in truth["cases"]:
+        case["regions"].reverse()
+    for prediction in baseline["predictions"]:
+        if prediction.get("localization", {}).get("regions"):
+            prediction["localization"]["regions"].reverse()
+    assert compare()["strata"] == result["strata"]
+    alternate[selected[0]["id"]]["input_sha256"] = "0" * 64
+    with pytest.raises(ValueError, match="Changed input bytes"):
+        compare()
 
 
 def test_four_media_fixture_audits_and_summarizes_without_loading_models():

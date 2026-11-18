@@ -61,6 +61,12 @@ def main() -> None:
     events.add_argument("--match", nargs=2, type=float, required=True, metavar=("IOU", "RECALL"),
                         help="Declare the minimum per-event IoU and recall")
     events.add_argument("--image-mask-dir", type=Path, help="Local directory for explicitly declared binary PBM masks")
+    paired_events = commands.add_parser("compare-events", help="Compare two localizers and their combined edit locations")
+    for field in ("manifest", "truth", "baseline", "candidate", "output"):
+        paired_events.add_argument(field, type=Path)
+    paired_events.add_argument("--match", nargs=2, type=float, required=True, metavar=("IOU", "RECALL"),
+                               help="Declare the minimum per-event IoU and recall")
+    paired_events.add_argument("--image-mask-dir", type=Path, help="Local directory for explicitly declared binary PBM masks")
     inputs = commands.add_parser("verify-inputs", help="Rehash every planned input and parent source on disk")
     inputs.add_argument("manifest", type=Path)
     inputs.add_argument("file_index", type=Path)
@@ -113,6 +119,11 @@ def main() -> None:
 
         result = count_events(manifest, read(args.truth), read(args.response), mask_directory=args.image_mask_dir,
                               minimum_iou=args.match[0], minimum_recall=args.match[1])
+    elif args.command == "compare-events":
+        from app.bench.independent_locations import compare_events
+
+        result = compare_events(manifest, read(args.truth), read(args.baseline), read(args.candidate),
+                                mask_directory=args.image_mask_dir, minimum_iou=args.match[0], minimum_recall=args.match[1])
     elif args.command == "replicate":
         from app.bench.independent_replication import replicate
 

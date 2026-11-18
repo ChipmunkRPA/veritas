@@ -1,0 +1,1878 @@
+{
+  "comparisons": [
+    {
+      "source": "video-mono-speech-activity-independent-2026-11-17.json.gz",
+      "baseline": "near_silence",
+      "candidate": "candidate",
+      "comparison": {
+        "schema": "chipmunk.independent-event-comparison/1",
+        "manifest_sha256": "07c8851e6976bff0855e8d7db3ec28b911886928182b42f32ac4ab19b31067cf",
+        "truth_sha256": "f9f47690588b2af7b3419d3b5131d39b52ff2e55a66cbf1e6138f4c1e873c84d",
+        "baseline_sha256": "f9a65ef04a66c7956df3ead4f3ad28effed2897acfb47a0ae0710e7a1770b807",
+        "candidate_sha256": "2b7ecf4299ef8486548169b9da52f5efeac1fede33fbafbc5ea8621edc07adfd",
+        "split": "confirmation",
+        "minimum_iou": 0.4,
+        "minimum_recall": 0.4,
+        "strata": [
+          {
+            "modality": "audio",
+            "condition": "aac48/-5",
+            "label": 0,
+            "source_groups": 12,
+            "planned": 60,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 0,
+              "unassessed": 60,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 33,
+              "unassessed": 27,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 33,
+              "unassessed": 27,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "audio",
+            "condition": "aac48/-5",
+            "label": 1,
+            "source_groups": 12,
+            "planned": 24,
+            "target_events": 24,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 0,
+              "unassessed": 24,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 24
+            },
+            "candidate": {
+              "assessed": 10,
+              "unassessed": 14,
+              "flagged_inputs": 2,
+              "reported_events": 2,
+              "matched_events": 2,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 2,
+              "missed_events": 22
+            },
+            "combined": {
+              "assessed": 10,
+              "unassessed": 14,
+              "flagged_inputs": 2,
+              "reported_events": 2,
+              "matched_events": 2,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 2,
+              "missed_events": 22
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 2,
+              "missed_by_both": 22,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "audio",
+            "condition": "aac48/100",
+            "label": 0,
+            "source_groups": 12,
+            "planned": 12,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 0,
+              "unassessed": 12,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 0,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 0,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "audio",
+            "condition": "aac48/100",
+            "label": 1,
+            "source_groups": 12,
+            "planned": 12,
+            "target_events": 12,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 11,
+              "unassessed": 1,
+              "flagged_inputs": 11,
+              "reported_events": 11,
+              "matched_events": 11,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 11,
+              "missed_events": 1
+            },
+            "candidate": {
+              "assessed": 10,
+              "unassessed": 2,
+              "flagged_inputs": 8,
+              "reported_events": 8,
+              "matched_events": 7,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 7,
+              "missed_events": 5
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 0,
+              "flagged_inputs": 12,
+              "reported_events": 19,
+              "matched_events": 11,
+              "unmatched_proposals": 8,
+              "complete_positive_inputs": 11,
+              "missed_events": 1
+            },
+            "event_transitions": {
+              "retained": 7,
+              "baseline_only": 4,
+              "candidate_only": 0,
+              "missed_by_both": 1,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "audio",
+            "condition": "aac48/8",
+            "label": 0,
+            "source_groups": 12,
+            "planned": 60,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 0,
+              "unassessed": 60,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 59,
+              "unassessed": 1,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 59,
+              "unassessed": 1,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "audio",
+            "condition": "aac48/8",
+            "label": 1,
+            "source_groups": 12,
+            "planned": 24,
+            "target_events": 24,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 0,
+              "unassessed": 24,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 24
+            },
+            "candidate": {
+              "assessed": 23,
+              "unassessed": 1,
+              "flagged_inputs": 12,
+              "reported_events": 12,
+              "matched_events": 11,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 11,
+              "missed_events": 13
+            },
+            "combined": {
+              "assessed": 23,
+              "unassessed": 1,
+              "flagged_inputs": 12,
+              "reported_events": 12,
+              "matched_events": 11,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 11,
+              "missed_events": 13
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 11,
+              "missed_by_both": 13,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "audio",
+            "condition": "pcm/-5",
+            "label": 0,
+            "source_groups": 12,
+            "planned": 60,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 0,
+              "unassessed": 60,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 34,
+              "unassessed": 26,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 34,
+              "unassessed": 26,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "audio",
+            "condition": "pcm/-5",
+            "label": 1,
+            "source_groups": 12,
+            "planned": 24,
+            "target_events": 24,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 0,
+              "unassessed": 24,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 24
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 12,
+              "flagged_inputs": 2,
+              "reported_events": 2,
+              "matched_events": 2,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 2,
+              "missed_events": 22
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 12,
+              "flagged_inputs": 2,
+              "reported_events": 2,
+              "matched_events": 2,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 2,
+              "missed_events": 22
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 2,
+              "missed_by_both": 22,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "audio",
+            "condition": "pcm/100",
+            "label": 0,
+            "source_groups": 12,
+            "planned": 12,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 0,
+              "unassessed": 12,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 0,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 0,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "audio",
+            "condition": "pcm/100",
+            "label": 1,
+            "source_groups": 12,
+            "planned": 12,
+            "target_events": 12,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 11,
+              "unassessed": 1,
+              "flagged_inputs": 11,
+              "reported_events": 11,
+              "matched_events": 11,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 11,
+              "missed_events": 1
+            },
+            "candidate": {
+              "assessed": 10,
+              "unassessed": 2,
+              "flagged_inputs": 8,
+              "reported_events": 8,
+              "matched_events": 7,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 7,
+              "missed_events": 5
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 0,
+              "flagged_inputs": 12,
+              "reported_events": 19,
+              "matched_events": 11,
+              "unmatched_proposals": 8,
+              "complete_positive_inputs": 11,
+              "missed_events": 1
+            },
+            "event_transitions": {
+              "retained": 7,
+              "baseline_only": 4,
+              "candidate_only": 0,
+              "missed_by_both": 1,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "audio",
+            "condition": "pcm/8",
+            "label": 0,
+            "source_groups": 12,
+            "planned": 60,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 0,
+              "unassessed": 60,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 59,
+              "unassessed": 1,
+              "flagged_inputs": 1,
+              "reported_events": 1,
+              "matched_events": 0,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 59,
+              "unassessed": 1,
+              "flagged_inputs": 1,
+              "reported_events": 1,
+              "matched_events": 0,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "audio",
+            "condition": "pcm/8",
+            "label": 1,
+            "source_groups": 12,
+            "planned": 24,
+            "target_events": 24,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 0,
+              "unassessed": 24,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 24
+            },
+            "candidate": {
+              "assessed": 23,
+              "unassessed": 1,
+              "flagged_inputs": 12,
+              "reported_events": 12,
+              "matched_events": 11,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 11,
+              "missed_events": 13
+            },
+            "combined": {
+              "assessed": 23,
+              "unassessed": 1,
+              "flagged_inputs": 12,
+              "reported_events": 12,
+              "matched_events": 11,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 11,
+              "missed_events": 13
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 11,
+              "missed_by_both": 13,
+              "ambiguous_match": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "source": "video-face-portrait-independent-2026-11-17.json.gz",
+      "baseline": "without_shot_check",
+      "candidate": "with_shot_check",
+      "comparison": {
+        "schema": "chipmunk.independent-event-comparison/1",
+        "manifest_sha256": "1b047c85c54df4daadabceb0872018f8536656477624ff06f48915155aa2a13a",
+        "truth_sha256": "f4aebc22a14c6688cf378584e2617e72a3b9aabb2f56a956cac4e13324c5d373",
+        "baseline_sha256": "ab66513a514c33a56f2567c28880638db1fc1a1f5a8dcbd3b477bd415c3285a5",
+        "candidate_sha256": "25ad679189ca2f8635708d68f072e3799674e04c959469e27581f1b2b98229ae",
+        "split": "confirmation",
+        "minimum_iou": 0.5,
+        "minimum_recall": 0.5,
+        "strata": [
+          {
+            "modality": "video",
+            "condition": "1280p/direct/different_shot",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 14,
+              "unassessed": 4,
+              "flagged_inputs": 1,
+              "reported_events": 1,
+              "matched_events": 0,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 14,
+              "unassessed": 4,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 14,
+              "unassessed": 4,
+              "flagged_inputs": 1,
+              "reported_events": 1,
+              "matched_events": 0,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "1280p/direct/face_blur",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 11,
+              "unassessed": 7,
+              "flagged_inputs": 2,
+              "reported_events": 2,
+              "matched_events": 0,
+              "unmatched_proposals": 2,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 11,
+              "unassessed": 7,
+              "flagged_inputs": 2,
+              "reported_events": 2,
+              "matched_events": 0,
+              "unmatched_proposals": 2,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 11,
+              "unassessed": 7,
+              "flagged_inputs": 2,
+              "reported_events": 2,
+              "matched_events": 0,
+              "unmatched_proposals": 2,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "1280p/direct/gain",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 13,
+              "unassessed": 5,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 13,
+              "unassessed": 5,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 13,
+              "unassessed": 5,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "1280p/direct/inswapper",
+            "label": 1,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 18,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 13,
+              "unassessed": 5,
+              "flagged_inputs": 9,
+              "reported_events": 9,
+              "matched_events": 9,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 9,
+              "missed_events": 9
+            },
+            "candidate": {
+              "assessed": 13,
+              "unassessed": 5,
+              "flagged_inputs": 9,
+              "reported_events": 9,
+              "matched_events": 9,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 9,
+              "missed_events": 9
+            },
+            "combined": {
+              "assessed": 13,
+              "unassessed": 5,
+              "flagged_inputs": 9,
+              "reported_events": 9,
+              "matched_events": 9,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 9,
+              "missed_events": 9
+            },
+            "event_transitions": {
+              "retained": 9,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 9,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "1280p/direct/original",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 13,
+              "unassessed": 5,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 13,
+              "unassessed": 5,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 13,
+              "unassessed": 5,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "1280p/direct/picture_jump",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 14,
+              "unassessed": 4,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 14,
+              "unassessed": 4,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 14,
+              "unassessed": 4,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "1280p/direct/uniface",
+            "label": 1,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 18,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 8,
+              "reported_events": 8,
+              "matched_events": 8,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 8,
+              "missed_events": 10
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 8,
+              "reported_events": 8,
+              "matched_events": 8,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 8,
+              "missed_events": 10
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 8,
+              "reported_events": 8,
+              "matched_events": 8,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 8,
+              "missed_events": 10
+            },
+            "event_transitions": {
+              "retained": 8,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 10,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "1280p/tandem/different_shot",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 1,
+              "reported_events": 1,
+              "matched_events": 0,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 1,
+              "reported_events": 1,
+              "matched_events": 0,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "1280p/tandem/face_blur",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 11,
+              "unassessed": 7,
+              "flagged_inputs": 1,
+              "reported_events": 1,
+              "matched_events": 0,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 11,
+              "unassessed": 7,
+              "flagged_inputs": 1,
+              "reported_events": 1,
+              "matched_events": 0,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 11,
+              "unassessed": 7,
+              "flagged_inputs": 1,
+              "reported_events": 1,
+              "matched_events": 0,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "1280p/tandem/gain",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "1280p/tandem/inswapper",
+            "label": 1,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 18,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 8,
+              "reported_events": 8,
+              "matched_events": 8,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 8,
+              "missed_events": 10
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 8,
+              "reported_events": 8,
+              "matched_events": 8,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 8,
+              "missed_events": 10
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 8,
+              "reported_events": 8,
+              "matched_events": 8,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 8,
+              "missed_events": 10
+            },
+            "event_transitions": {
+              "retained": 8,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 10,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "1280p/tandem/original",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 11,
+              "unassessed": 7,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 11,
+              "unassessed": 7,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 11,
+              "unassessed": 7,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "1280p/tandem/picture_jump",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "1280p/tandem/uniface",
+            "label": 1,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 18,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 11,
+              "unassessed": 7,
+              "flagged_inputs": 8,
+              "reported_events": 8,
+              "matched_events": 8,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 8,
+              "missed_events": 10
+            },
+            "candidate": {
+              "assessed": 11,
+              "unassessed": 7,
+              "flagged_inputs": 8,
+              "reported_events": 8,
+              "matched_events": 8,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 8,
+              "missed_events": 10
+            },
+            "combined": {
+              "assessed": 11,
+              "unassessed": 7,
+              "flagged_inputs": 8,
+              "reported_events": 8,
+              "matched_events": 8,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 8,
+              "missed_events": 10
+            },
+            "event_transitions": {
+              "retained": 8,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 10,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "640p/direct/different_shot",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 15,
+              "unassessed": 3,
+              "flagged_inputs": 1,
+              "reported_events": 1,
+              "matched_events": 0,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 15,
+              "unassessed": 3,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 15,
+              "unassessed": 3,
+              "flagged_inputs": 1,
+              "reported_events": 1,
+              "matched_events": 0,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "640p/direct/face_blur",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "640p/direct/gain",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "640p/direct/inswapper",
+            "label": 1,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 18,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 11,
+              "reported_events": 11,
+              "matched_events": 11,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 11,
+              "missed_events": 7
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 11,
+              "reported_events": 11,
+              "matched_events": 11,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 11,
+              "missed_events": 7
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 11,
+              "reported_events": 11,
+              "matched_events": 11,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 11,
+              "missed_events": 7
+            },
+            "event_transitions": {
+              "retained": 11,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 7,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "640p/direct/original",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "640p/direct/picture_jump",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "640p/direct/uniface",
+            "label": 1,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 18,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 9,
+              "reported_events": 9,
+              "matched_events": 9,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 9,
+              "missed_events": 9
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 9,
+              "reported_events": 9,
+              "matched_events": 9,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 9,
+              "missed_events": 9
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 9,
+              "reported_events": 9,
+              "matched_events": 9,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 9,
+              "missed_events": 9
+            },
+            "event_transitions": {
+              "retained": 9,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 9,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "640p/tandem/different_shot",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 15,
+              "unassessed": 3,
+              "flagged_inputs": 1,
+              "reported_events": 1,
+              "matched_events": 0,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 15,
+              "unassessed": 3,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 15,
+              "unassessed": 3,
+              "flagged_inputs": 1,
+              "reported_events": 1,
+              "matched_events": 0,
+              "unmatched_proposals": 1,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "640p/tandem/face_blur",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "640p/tandem/gain",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "640p/tandem/inswapper",
+            "label": 1,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 18,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 10,
+              "reported_events": 10,
+              "matched_events": 10,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 10,
+              "missed_events": 8
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 10,
+              "reported_events": 10,
+              "matched_events": 10,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 10,
+              "missed_events": 8
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 10,
+              "reported_events": 10,
+              "matched_events": 10,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 10,
+              "missed_events": 8
+            },
+            "event_transitions": {
+              "retained": 10,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 8,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "640p/tandem/original",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "640p/tandem/picture_jump",
+            "label": 0,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 0,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 0,
+              "reported_events": 0,
+              "matched_events": 0,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 0,
+              "missed_events": 0
+            },
+            "event_transitions": {
+              "retained": 0,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 0,
+              "ambiguous_match": 0
+            }
+          },
+          {
+            "modality": "video",
+            "condition": "640p/tandem/uniface",
+            "label": 1,
+            "source_groups": 18,
+            "planned": 18,
+            "target_events": 18,
+            "unavailable_instance_geometry": 0,
+            "baseline": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 9,
+              "reported_events": 9,
+              "matched_events": 9,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 9,
+              "missed_events": 9
+            },
+            "candidate": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 9,
+              "reported_events": 9,
+              "matched_events": 9,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 9,
+              "missed_events": 9
+            },
+            "combined": {
+              "assessed": 12,
+              "unassessed": 6,
+              "flagged_inputs": 9,
+              "reported_events": 9,
+              "matched_events": 9,
+              "unmatched_proposals": 0,
+              "complete_positive_inputs": 9,
+              "missed_events": 9
+            },
+            "event_transitions": {
+              "retained": 9,
+              "baseline_only": 0,
+              "candidate_only": 0,
+              "missed_by_both": 9,
+              "ambiguous_match": 0
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

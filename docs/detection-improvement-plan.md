@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Sentence and changed-word supervision](writing-token-supervision-2026-11-17.md)
+  improves report localization from zero to 20 of 705 edits at the medium
+  point, with ordinary flags falling from eight to six across 96 fresh
+  originals. The same point finds zero of 149 fresh offline paraphrases
+  from two editors and raises one extra ordinary flag. The candidate stays
+  in evaluation and has a 266-file independent input export.
+
 - [Soundtrack dropouts on 29.97 and 30 fps video](video-sound-dropouts-30fps-2026-11-17.md)
   adds 142 correctly located short mutes out of 152 staged cases per audio
   encoding in videos that the prior scope skipped. It flags none of 240

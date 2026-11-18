@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [changed-word and sentence replay](writing-token-supervision-2026-11-17.md#reproduce-the-local-comparison)
+provides 266 exact input files, source commitments, and separate truth and
+prediction files for comparing another writing detector. It also recounts
+the second test with 110 deliveries from two local editors.
+
 The [29.97 and 30 fps soundtrack replay](video-sound-dropouts-30fps-2026-11-17.md#reproduce-the-checks)
 verifies the publisher recordings and compares 784 deliveries with retained
 picture clocks, exact edit intervals and matched ordinary controls. The results

@@ -249,6 +249,16 @@ retiming with an observed event shift. Neither paper's weights or data were used
 
 ## Passages: genuine web controls and contextual transfer
 
+The [Pangram 4 report](https://arxiv.org/html/2607.27183v1#S3.SS5) uses
+matched originals and clause-level labels for AI-assisted writing.
+[HACo-Det](https://aclanthology.org/2025.acl-long.1069/) compares word and
+sentence supervision with a frozen-encoder ablation. Our independently
+implemented comparison finds 20 locations in 705 fresh report edits
+at the medium point, with six ordinary reports flagged. It finds zero
+of 149 paraphrase locations from two separate local editors, so the
+candidate stays in evaluation.
+[Local supervised comparison](writing-token-supervision-2026-11-17.md)
+
 The October entropy study uses next-token uncertainty peaks for
 whole-text classification. We tested the author's peak-prominence
 calculation on one-to-three-sentence ranges with length and source-group

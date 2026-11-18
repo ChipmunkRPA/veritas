@@ -37,6 +37,7 @@ from app.evidence import (
     face_short_carrier_binding,
     face_short_proposal_binding,
     face_short_window_binding,
+    face_single_boundary_binding,
     face_spatial_cut_binding,
     mouth_hold_sound,
     mouth_local_hold_binding,
@@ -423,6 +424,18 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     window_records = []
     cut_records, cut_indices, cut_pixels = [], set(), {}
     interpolated = set(table.interpolated)
+    face_single_boundary_binding.validate(evidence, canonical_hash, table_pts=table.pts,
+        interpolated=interpolated, rotation=table.rotation, truncated=table.truncated)
+    transition = next((p[face_single_boundary_binding.KEY] for p in evidence["packets"]
+                       if face_single_boundary_binding.KEY in p), None)
+    transition_frames, transition_scenes = {}, {}
+    if transition is not None:
+        from app.detectors.video.face_local_detail import supported
+
+        delivery = delivery if delivery is not None else probe_container(original)
+        if not supported(table, (delivery.get("codec"), delivery.get("pix_fmt"))) or face_return.source_carrier(original) != "mp4":
+            raise ValueError("The original video differs from its single face transition profile")
+        transition_frames = {row["index"]: row for row in transition["source_frames"].values()}
     packets = [*evidence["packets"], *(evidence.get("av") or {}).get("packets", [])]
     if any(packet.get("semantics") in {whole_face_binding.SAME_FRAME_METHOD, whole_face_binding.DETAIL_METHOD} for packet in packets):
         delivery = probe_container(original, include_codec_tag=True)
@@ -536,6 +549,19 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                             raise ValueError(f"{item['id']} is bound to a different video source or stream")
                         _frame_anchor(frame, anchor["pts"], anchor["decoded_rgb_sha256"], item["id"], rgb_sha)
                         images += _verify_images(archive, image, packet, item)
+            if index in transition_frames:
+                from app.detectors.video.face_detail_inputs import align
+
+                row = transition_frames[index]
+                _frame_anchor(frame, row["pts"], row["decoded_rgb_sha256"], "Face appearance transition", rgb_sha)
+                crop = align(frame.rgb, face_single_boundary_binding.eyes(row))
+                if crop is None or hashlib.sha256(crop.tobytes()).hexdigest() != row["aligned_rgb_sha256"]:
+                    raise ValueError("The original video does not reproduce the face transition crop")
+                alignments += 1
+                if index in {transition["boundary"] - 1, transition["boundary"]}:
+                    box = row["box"]
+                    face = Face(box["x"], box["y"], box["w"], box["h"], 0.)
+                    transition_scenes[index] = face_return.Sample(face, None, face_return.scene(frame.rgb, face))
             for packet, row in mouths[index]:
                 _frame_anchor(frame, row["frame_pts"], row["decoded_rgb_sha256"], packet["id"], rgb_sha)
                 _verify_mouth(archive, frame.rgb, packet, row)
@@ -564,6 +590,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("The decoder did not return every referenced native frame")
     if _sha(original) != digest:
         raise ValueError("The supplied original changed during decoding")
+    if transition is not None:
+        edge = transition["boundary"]
+        similarity = face_return.scene_lower_quartile(transition_scenes[edge - 1], transition_scenes[edge])
+        if similarity is None or not math.isclose(similarity, face_single_boundary_binding.reading(transition, "fine_scene"),
+                                                  abs_tol=1e-8, rel_tol=0):
+            raise ValueError("The source surroundings differ from the recorded face transition comparison")
     if extended:
         _verify_picture_hold(evidence, table, hold_observations[:hold_frames])
     if sequence is not None and canonical_hash(picture_sequence.scan(hold_observations[:hold_frames], table.tb)) != canonical_hash(sequence):
@@ -717,6 +749,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             raise ValueError("The original video does not reproduce its surrounding-picture cut context")
     return (f"Original SHA-256 and the source frame clock matched. Verified native frames ({len(found)}), "
             f"original images or crops ({images}), mouth patches ({patches}), and aligned face inputs ({alignments})."
+            + (" Verified the face appearance transition frames, aligned inputs and nearby picture similarity." if transition else "")
             + (f" Recomputed picture-clock coverage for {len(timing['windows'])} timing windows." if timing else "")
             + (f" Recomputed fine background boundaries ({fine_edges})." if fine_edges else "")
             + (" Recomputed 4 guarded background boundaries and verified the source carrier." if len(guarded_records) == 2 else

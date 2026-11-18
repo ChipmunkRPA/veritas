@@ -36,6 +36,7 @@ from contextlib import suppress
 from pathlib import Path
 from typing import Any
 
+import cv2
 import numpy as np
 from PIL import Image
 
@@ -46,7 +47,13 @@ from app.detectors.audio.decode import VIDEO_AUDIO_MAX_SECONDS, decode_audio
 from app.detectors.common.fusion import prob_to_signal_fields
 from app.detectors.image.classifiers import specs as classifier_specs
 from app.detectors.image.scoring import dfdc_frame_weight, face_frame_weight, frame_weight, fuse_frame_scores
-from app.detectors.video import picture_hold, sampling, scene_return, scene_return_carrier
+from app.detectors.video import (
+    face_single_boundary,
+    picture_hold,
+    sampling,
+    scene_return,
+    scene_return_carrier,
+)
 from app.detectors.video import segments as temporal_segments
 from app.detectors.video.adapters import lipsync as lipsync_lane
 from app.detectors.video.adapters import lipsync_xcorr as xcorr_lane
@@ -432,13 +439,81 @@ AUDIO_UNDECODABLE = "the sound track could not be decoded"
 WHOLE_FACE_SAME_FRAME_POLICY = "whole_face_same_frame_review"
 WHOLE_FACE_DETAIL_POLICY = "whole_face_detail_review"
 LOCAL_FACE_RETURN_POLICY = "local_face_return_review"
+SINGLE_FACE_BOUNDARY_POLICY = "single_face_boundary_review"
+
+
+def single_face_boundary_enabled():
+    return settings.environment == "dev" and settings.video_face_single_boundary_review
 
 
 def current_detect_output(output) -> bool:
     return (current_voice_detection_output(output)
             and output.get(WHOLE_FACE_SAME_FRAME_POLICY, False) is same_frame_enabled()
             and output.get(WHOLE_FACE_DETAIL_POLICY, False) is detail_enabled()
-            and output.get(LOCAL_FACE_RETURN_POLICY, False) is local_return_enabled())
+            and output.get(LOCAL_FACE_RETURN_POLICY, False) is local_return_enabled()
+            and output.get(SINGLE_FACE_BOUNDARY_POLICY, False) is single_face_boundary_enabled())
+
+
+def _single_boundary_review(ctx: StageContext) -> dict:
+    if not single_face_boundary_enabled():
+        return {}
+    method = face_single_boundary
+
+    def unavailable(reason):
+        return {method.COVERAGE: method.coverage("unavailable", reason)}
+
+    if provenance_gate.stop(ctx):
+        return unavailable("provenance")
+    if ctx.profile not in {Profile.FULL, Profile.DEEP}:
+        return unavailable("profile")
+    store = ctx.state.get("frame_store")
+    path = store.path if store is not None else None
+    info = (ctx.outputs.get("probe") or {}).get("info") or {}
+    if path is None or not path.is_file():
+        return unavailable("unsupported_video")
+    if not method.supported(path, store.table, (info.get("codec"), info.get("pix_fmt"))):
+        return unavailable("profile")
+    from app.detectors.video.adapters.loaders import load_face_appearance
+    from app.engine.fetchers import FetchError, WeightIntegrityError, ensure_verified
+    from app.engine.models import MemoryBudgetExceeded, ModelUnavailable
+
+    registry, models = ctx.state["registry"], ctx.state.get("models")
+    locator_id, appearance_id = method.MODEL_IDS
+    locator_entry, appearance_entry = (registry.manifest.model(model_id) for model_id in method.MODEL_IDS)
+    if (models is None or APPEARANCE_REVIEW in registry.policy.deny_detectors
+            or not registry.policy.allows_class("commercial")
+            or any(entry is None or entry.licence.class_ != "commercial" for entry in (locator_entry, appearance_entry))):
+        return unavailable("models_unavailable")
+
+    remaining = ctx.deadline.remaining()
+    budget = 12. if remaining is None else min(12., remaining - 1.)
+    if budget <= 0:
+        return unavailable("time_budget")
+    deadline = ctx.deadline.nested(budget)
+
+    def check():
+        deadline.check("single face boundary review")
+
+    def timeout_s():
+        check()
+        return max(.001, deadline.remaining() or 0.)
+
+    # Reserve the separately loaded recognizer and the native RGB/face observation scratch.
+    try:
+        activation = models.declared_bytes(appearance_id, "cpu", "float32") + 8 * 1024**2
+        with models.lease((locator_id,), prefer="cpu", activation_bytes=activation) as lease:
+            check()
+            locator = lease.get(locator_id).obj
+            # A separate mutable CPU recognizer keeps this optional scan isolated from other face checks.
+            ensure_verified(appearance_entry)
+            encoder = load_face_appearance(appearance_id, "cpu", "float32").obj
+            check()
+            record, disposition = method.inspect(path, store.table, locator, encoder, check=check, timeout_s=timeout_s)
+    except DetectorTimeout:
+        return unavailable("time_budget")
+    except (FetchError, WeightIntegrityError, MemoryBudgetExceeded, ModelUnavailable, cv2.error, OSError):
+        return unavailable("models_unavailable")
+    return {method.COVERAGE: disposition, **({method.KEY: record} if record is not None else {})}
 
 
 def detect(ctx: StageContext) -> dict[str, Any]:
@@ -448,13 +523,14 @@ def detect(ctx: StageContext) -> dict[str, Any]:
     audio_failure = AUDIO_UNDECODABLE if audio is not None and audio.status == "unreadable" else None
     outputs = _outputs(ctx)
     policies = {"voice_clock_policy": VOICE_CLOCK_POLICY, WHOLE_FACE_SAME_FRAME_POLICY: same_frame_enabled(),
-                WHOLE_FACE_DETAIL_POLICY: detail_enabled(), LOCAL_FACE_RETURN_POLICY: local_return_enabled()}
+                WHOLE_FACE_DETAIL_POLICY: detail_enabled(), LOCAL_FACE_RETURN_POLICY: local_return_enabled(),
+                SINGLE_FACE_BOUNDARY_POLICY: single_face_boundary_enabled()}
     out = common.run_detectors(ctx, (Modality.VIDEO, Modality.AUDIO),
                                exclude={"provenance", "face-detection", "face-tracking", SEQUENCE_FAMILY, WHOLE_FACE_FAMILY, FACE_DETAIL_FAMILY},
                                outputs=outputs, max_units=VIDEO_MAX_UNIT_SCORES, face_failure=common.face_stage_failure(ctx),
                                audio_failure=audio_failure)
     if not {SEQUENCE_REVIEW, APPEARANCE_REVIEW, WHOLE_FACE_REVIEW}.intersection(ctx.state["registry"].enabled(Modality.VIDEO, ctx.profile)):
-        return {**out, **policies}
+        return {**out, **policies, **_single_boundary_review(ctx)}
     store = ctx.state.get("frame_store")
     sampled = ctx.state.get("frames") or []
     # The frozen experiment used these largest-face positions. No classifier
@@ -478,7 +554,7 @@ def detect(ctx: StageContext) -> dict[str, Any]:
             detail_review = common.run_detectors(ctx, (Modality.VIDEO,), include={FACE_DETAIL_FAMILY},
                 outputs=dataclasses.replace(outputs, face_review=dataclasses.replace(inputs, baseline=prior)), max_units=VIDEO_MAX_UNIT_SCORES)
     merged = {key: [*out.get(key, []), *review.get(key, []), *detail_review.get(key, [])] for key in ("detectors", "exhibits", "artefacts")}
-    return {**merged, **policies}
+    return {**merged, **policies, **_single_boundary_review(ctx)}
 
 
 # --- legacy fuser ------------------------------------------------------------------------------------------
@@ -1256,6 +1332,8 @@ def render(ctx: StageContext) -> dict[str, Any]:
     stereo_sha = decoded_audio.get("stereo_context_sha256")
     # A reused historical render output must not acquire evidence on publication.
     stereo_objects = [obj for obj in decode_output.get("artefacts", []) if obj["sha256"] == stereo_sha]
+    anchors, single_boundary = _render_single_boundary(ctx.outputs.get("detect") or {}, anchors,
+                                                       frame_store.table if frame_store is not None else None)
     return {**out, **stills, "legacy_artifacts": artifacts, "key_frame_times": key_times,
             "artefacts": stills["artefacts"] + stereo_objects,
             "frame_anchor_version": "stream-pts-rgb24/1", "frame_anchors": anchors,
@@ -1263,8 +1341,36 @@ def render(ctx: StageContext) -> dict[str, Any]:
             **({scene_return_binding.KEY: scene} if scene is not None else {}),
             **({scene_return_binding.COVERAGE: scene_coverage} if scene_coverage is not None else {}),
             **({video_viseme_binding.KEY: timing_review} if timing_review is not None else {}),
+            **single_boundary,
             "audio_mapping": ctx.state.get("video_audio_mapping"), "audio_status": decoded_audio.get("status"),
             "audio_stereo_context_sha256": stereo_sha}
+
+
+def _render_single_boundary(detected: dict, anchors: list[dict], table: FrameTable | None) -> tuple[list[dict], dict]:
+    method = face_single_boundary
+    disposition = detected.get(method.COVERAGE)
+    if disposition is None:
+        return anchors, {}
+    transition = detected.get(method.KEY)
+    if transition is None:
+        return anchors, {method.COVERAGE: disposition}
+    by_index = {item["frame_index"]: item for item in anchors}
+    consistent = table is not None and transition["time_base"] == table.time_base
+    if consistent:
+        for pin in transition["source_frames"].values():
+            index = pin["index"]
+            if not 0 <= index < len(table) or pin["pts"] != table.pts[index]:
+                consistent = False
+                break
+            anchor = {"frame_index": index, "pts": pin["pts"], "time_base": table.time_base,
+                      "width": table.width, "height": table.height,
+                      "decoded_rgb_sha256": pin["decoded_rgb_sha256"]}
+            if by_index.setdefault(index, anchor) != anchor:
+                consistent = False
+                break
+    if not consistent:
+        return anchors, {method.COVERAGE: disposition | {"status": "unavailable", "reason": "native_measurement_unavailable"}}
+    return [by_index[index] for index in sorted(by_index)], {method.KEY: transition, method.COVERAGE: disposition}
 
 
 def v1_view(ctx: StageContext, result: AnalysisResultV2) -> dict[str, Any]:
@@ -1294,6 +1400,10 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         result.manifest.sampling[scene_return_binding.COVERAGE_COMMITMENT] = canonical_hash(rendered[scene_return_binding.COVERAGE])
     if rendered.get(video_viseme_binding.KEY) is not None:
         result.manifest.sampling[video_viseme_binding.COMMITMENT] = canonical_hash(rendered[video_viseme_binding.KEY])
+    if rendered.get(face_single_boundary.KEY) is not None:
+        result.manifest.sampling[face_single_boundary.COMMITMENT] = canonical_hash(rendered[face_single_boundary.KEY])
+    if rendered.get(face_single_boundary.COVERAGE) is not None:
+        result.manifest.sampling[face_single_boundary.COVERAGE_COMMITMENT] = canonical_hash(rendered[face_single_boundary.COVERAGE])
     for entry in (ctx.outputs.get("detect") or {}).get("detectors", []):
         if entry["detector_id"] != APPEARANCE_REVIEW:
             continue

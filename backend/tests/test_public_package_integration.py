@@ -543,7 +543,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.mouth_hold_sound', 'app.evidence.mouth_local_hold_binding', 'app.evidence.source_geometry',
                         'app.evidence.video_packet_versions', 'app.evidence.video_soundtrack_pair_binding',
                         'app.evidence.picture_hold_binding', 'app.evidence.picture_sequence',
-                        'app.evidence.scene_return_binding', 'app.evidence.sound_event_binding',
+                        'app.evidence.scene_return_binding', 'app.evidence.face_single_boundary_binding', 'app.evidence.sound_event_binding',
                         'app.evidence.video_viseme_binding', 'app.evidence.video_activity_levels',
                         'app.evidence.video_viseme_ranked', 'app.evidence.video_viseme_timing',
                         'app.evidence.video_viseme_stereo', 'app.evidence.video_silent_mouth',
@@ -607,7 +607,7 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
                                  'video_lip_agreement.py',
                                  'video_viseme_articulation.py', 'video_viseme_stereo.py', 'video_silent_mouth.py',
                                  'picture_sequence.py', 'source_geometry.py', 'document_chat_markers.py', 'document_calendar.py',
-                                 'document_arithmetic.py', 'document_publication_ids.py'])
+                                 'document_arithmetic.py', 'document_publication_ids.py', 'face_single_boundary_binding.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
 

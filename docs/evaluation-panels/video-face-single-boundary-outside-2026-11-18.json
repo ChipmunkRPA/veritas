@@ -1,0 +1,555 @@
+{
+  "diagnostic": {
+    "direct_publisher_control": {
+      "adjacent_box_matches": 29,
+      "maximum_shared_textured_tiles": 5,
+      "measurable_pairs": 0
+    },
+    "direct_publisher_suffix_36": {
+      "adjacent_box_matches": 29,
+      "maximum_shared_textured_tiles": 4,
+      "measurable_pairs": 0
+    },
+    "minimum_shared_textured_tiles": 8
+  },
+  "frozen_source_sha256": {
+    "camera-1": "830897083ea090cc146ae86c604f40d88a0b27b78c5124f19cdc30e11e2d499f",
+    "camera-2": "6ba920aad2379ce06d546f4d6c3965bb0656220e4fd41c8e88e89935aa48f381",
+    "camera-3": "0ee307ea377b3dc78899287e1e5f1e81adf38451d7de1e55f1cec35b7f8760d1",
+    "camera-4": "2a9804d78c4042b94027f4964ca4943a0ac6dd99dfaeed692c242a6a1e7bdf05",
+    "camera-5": "d473a7d302a3c2961436782c7db321a259a2f2d8740fc389a693478854bcd6c6",
+    "camera-6": "112862b01a64bc7092dcd935c452a78734a96fc1fb0cbf86e501fadf384df581",
+    "camera-7": "d990c89fc6d89bfd03f483fca6375f536880c7e5d513d5e4dc175b824aaeb434",
+    "camera-8": "23beeec684f844f3ddc9ecf87e949bf3faa1f498f13e59021ddf3bf0953c943f",
+    "motion-1": "31267aa4120a514f57b4228c5f6e9f41252f2482be4da869bbbf76d083437cbe",
+    "motion-2": "7503cae0aa520daef062cd1803ab0fc749aa1bcfd934af4b242a8cdb5736a0ac",
+    "motion-3": "4d20640e71b5a841cf9b19897f4701e699ca53617c7b20d2c5a26f3de0b8eeed",
+    "motion-4": "69cbf12aec2f02769ef4d8020f3734a83563d6a5cf04d81fe3ce95c4bc2f0a15",
+    "publisher-original": "3a8cefeb1e69d433ff171f2639c15c9d45e9d87932dba8c046c4105653af7f1f",
+    "publisher-swap": "8cd3b9ac4dfdc62c635d5bf0e00cb01b3c6ecd23cc08efdb0ec1dccd1592ad77"
+  },
+  "lock_sha256": "b6ff77bb1b51f1380c7adccc01e4619a5db3a707ea7745e154a712248d9d789f",
+  "point": 0.165750624,
+  "rows": [
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "direct",
+      "expected_frame": null,
+      "id": "5b2099060d557d459b82c4742ac36fc2ee28f501debcda1fd87fb3fd3495010a",
+      "observed_frame": null,
+      "persistent": -0.025710481,
+      "role": "original",
+      "source": "camera-1"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "tandem",
+      "expected_frame": null,
+      "id": "c309c9182f83499b7f97ff6932e94959e0af4ccd51cd62c886d8ccefb8c27f0b",
+      "observed_frame": null,
+      "persistent": -0.030943152,
+      "role": "original",
+      "source": "camera-1"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 48,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "direct",
+      "expected_frame": null,
+      "id": "dca66ac7f1e0a5dac8c548e39130c8546e586dbdc0a37ba0165c6625f8ceb454",
+      "observed_frame": null,
+      "persistent": 0.00274268,
+      "role": "original",
+      "source": "camera-2"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "tandem",
+      "expected_frame": null,
+      "id": "3a81e7c4327c8e082220ef279fc3e0dc36143f506f47513dd5fc092167c18d59",
+      "observed_frame": null,
+      "persistent": 0.01239219,
+      "role": "original",
+      "source": "camera-2"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "direct",
+      "expected_frame": null,
+      "id": "150036012723d186f7b97f160351015b8867076f322489a8bc3cb3c6652efb69",
+      "observed_frame": null,
+      "persistent": -0.006547263,
+      "role": "original",
+      "source": "camera-3"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "tandem",
+      "expected_frame": null,
+      "id": "a681268d0c2bcd804d9c1336675cce64e26d1028eee6b044b0ae87c6b5a5b28f",
+      "observed_frame": null,
+      "persistent": 0.047469741,
+      "role": "original",
+      "source": "camera-3"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "direct",
+      "expected_frame": null,
+      "id": "293654e370e88b0e85ca74f4725d06fe65fb265bb67eb4a1e14a0b22ddab6ed9",
+      "observed_frame": null,
+      "persistent": 0.001673196,
+      "role": "original",
+      "source": "camera-4"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "tandem",
+      "expected_frame": null,
+      "id": "d620f1cafa7442cdbe6467d370eb7dd65aa95e91f0ecd81377ca1cec75d639ea",
+      "observed_frame": null,
+      "persistent": 0.05847919,
+      "role": "original",
+      "source": "camera-4"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "direct",
+      "expected_frame": null,
+      "id": "1f5488bb1d41dd864606dcbfdec2d466b59cb5a02c740b2200fa448d40aabe08",
+      "observed_frame": null,
+      "persistent": -0.010633689,
+      "role": "original",
+      "source": "camera-5"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "tandem",
+      "expected_frame": null,
+      "id": "49b2bf23fd27bc9e55dce6e9adef9f68cb3deb3e3582773d4039de891374d9f3",
+      "observed_frame": null,
+      "persistent": -0.009588916,
+      "role": "original",
+      "source": "camera-5"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "direct",
+      "expected_frame": null,
+      "id": "bceae221d036ab91de835f01d4b4ddc4c8da781b77cb12234a0c9dfc2eaf77c6",
+      "observed_frame": null,
+      "persistent": 0.010369863,
+      "role": "original",
+      "source": "camera-6"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "tandem",
+      "expected_frame": null,
+      "id": "2a7444d180aa6ad3b6b1177eb454d2d8a4c8f9f6cf1e8d20ce9cb2fb0bb70abd",
+      "observed_frame": null,
+      "persistent": 0.069873221,
+      "role": "original",
+      "source": "camera-6"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "direct",
+      "expected_frame": null,
+      "id": "c0d5937d4e0625d307ec51754c3765a55d5d608d4f1bbb85ea10042146699e31",
+      "observed_frame": null,
+      "persistent": -0.00836574,
+      "role": "original",
+      "source": "camera-7"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "tandem",
+      "expected_frame": null,
+      "id": "7c9d43f36a1002dc186f1c21f50ace76dcbc43f8cd6c3542231aa26273bc9b40",
+      "observed_frame": null,
+      "persistent": 0.054428153,
+      "role": "original",
+      "source": "camera-7"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "direct",
+      "expected_frame": null,
+      "id": "db9d4aaba64141f494483621b0ffe1f4d5ebc6afe7fa13e254819a5e170d49b6",
+      "observed_frame": null,
+      "persistent": -0.020093411,
+      "role": "original",
+      "source": "camera-8"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "tandem",
+      "expected_frame": null,
+      "id": "3d15e15bd5aa19d330940551b5db724e223a57f321e2de2f14feddcbfbf1c2f6",
+      "observed_frame": null,
+      "persistent": 0.017850497,
+      "role": "original",
+      "source": "camera-8"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_native_boundary",
+        "status": "unavailable"
+      },
+      "delivery": "direct",
+      "expected_frame": null,
+      "id": "98f35500d43d2c6932a7fdf1b42cbbbcf2ca1d6ace658a04f0d43faa759533a5",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "original",
+      "source": "motion-1"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_native_boundary",
+        "status": "unavailable"
+      },
+      "delivery": "tandem",
+      "expected_frame": null,
+      "id": "c0d304671ced691b6693fe3301d94ffd1ab25f83601584701c142499fe299393",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "original",
+      "source": "motion-1"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_face_context",
+        "status": "unavailable"
+      },
+      "delivery": "direct",
+      "expected_frame": null,
+      "id": "95698cf72ac1c2f64b49a4e738d7b77995fc97b643dafd1ddfff29cf7bfb8bdd",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "original",
+      "source": "motion-2"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_face_context",
+        "status": "unavailable"
+      },
+      "delivery": "tandem",
+      "expected_frame": null,
+      "id": "ff0c52cc15c03b68f0a2bb4bcd2d7a6ac1052bbab36400c082fff784999d7b5e",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "original",
+      "source": "motion-2"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_face_context",
+        "status": "unavailable"
+      },
+      "delivery": "direct",
+      "expected_frame": null,
+      "id": "cdb796479ca836579aaa88ac94de122e59a7edae4760dee02c3047531738938d",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "original",
+      "source": "motion-3"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_face_context",
+        "status": "unavailable"
+      },
+      "delivery": "tandem",
+      "expected_frame": null,
+      "id": "81d658e8d691a13ef731ae4ce4f1b1fa4438f1cd6a1d8cf94a1ee6b4b00f96ad",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "original",
+      "source": "motion-3"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "direct",
+      "expected_frame": null,
+      "id": "60f47b7516d16949c2dbf80e05e79e2aea32e8ce5e453c618a43ec8a333a95b9",
+      "observed_frame": null,
+      "persistent": -0.071245083,
+      "role": "original",
+      "source": "motion-4"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "no_match"
+      },
+      "delivery": "tandem",
+      "expected_frame": null,
+      "id": "11b765d7f656438fa99a93288b9acb0458aebf33afb2c01d688a66f6985d6ab3",
+      "observed_frame": null,
+      "persistent": -0.007615406,
+      "role": "original",
+      "source": "motion-4"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_face_context",
+        "status": "unavailable"
+      },
+      "delivery": "direct",
+      "expected_frame": null,
+      "id": "de8f99b064341e0b1201e6bb89a26081c644977dba879edfa0414143ea39c997",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "original",
+      "source": "publisher-original"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_face_context",
+        "status": "unavailable"
+      },
+      "delivery": "tandem",
+      "expected_frame": null,
+      "id": "f390aef7f84f248f0abe744d2444d506cabb26e8b0480bb26c19d7a7976d3442",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "original",
+      "source": "publisher-original"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_face_context",
+        "status": "unavailable"
+      },
+      "delivery": "direct",
+      "expected_frame": 36,
+      "id": "4ccb88dc1d9ebbdf032053570fc316146441dc1c3017586c70bc33c1be319fca",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "prefix-36",
+      "source": "publisher-swap"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_face_context",
+        "status": "unavailable"
+      },
+      "delivery": "tandem",
+      "expected_frame": 36,
+      "id": "3919e4eff386cc6535293cd73ea92453754291f585bd832cbb04966f00dac382",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "prefix-36",
+      "source": "publisher-swap"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_face_context",
+        "status": "unavailable"
+      },
+      "delivery": "direct",
+      "expected_frame": 36,
+      "id": "b5f43f3b3689d0a7b084a2f8a81321679e73e6d60cb04d1ea82ee07ae3787665",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "suffix-36",
+      "source": "publisher-swap"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_face_context",
+        "status": "unavailable"
+      },
+      "delivery": "tandem",
+      "expected_frame": 36,
+      "id": "d906b7f9f8687d3b2c167544efa47bdd4369efbbc9a0581bc8e754e52fdc4aef",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "suffix-36",
+      "source": "publisher-swap"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_face_context",
+        "status": "unavailable"
+      },
+      "delivery": "direct",
+      "expected_frame": 62,
+      "id": "e36c6e8e7480eb4c815110ff897fcfa2dee04865405910e29d5dacaaa8eda11b",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "prefix-62",
+      "source": "publisher-swap"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_face_context",
+        "status": "unavailable"
+      },
+      "delivery": "tandem",
+      "expected_frame": 62,
+      "id": "82b52e5ec0a61079cb3d891e0465268134986ec2faa40bac6b48883bcc9847eb",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "prefix-62",
+      "source": "publisher-swap"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_face_context",
+        "status": "unavailable"
+      },
+      "delivery": "direct",
+      "expected_frame": 62,
+      "id": "2b2a4110233a99a198e26f8be5d04fe93170692d5129ea92b5d2551648453c67",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "suffix-62",
+      "source": "publisher-swap"
+    },
+    {
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": "insufficient_face_context",
+        "status": "unavailable"
+      },
+      "delivery": "tandem",
+      "expected_frame": 62,
+      "id": "bfa7a0b3bd61fa995d651900ab07de613897a6be2d97887f77d1bb1017f61b90",
+      "observed_frame": null,
+      "persistent": null,
+      "role": "suffix-62",
+      "source": "publisher-swap"
+    }
+  ],
+  "schema": "chipmunk.face-transition-outside-cohorts/1",
+  "summary": {
+    "native_pictures_checked": 3400,
+    "ordinary_alerts": 0,
+    "ordinary_camera_assessed": 18,
+    "ordinary_camera_deliveries": 24,
+    "outside_publisher_edits": 8,
+    "outside_publisher_edits_unassessed": 8,
+    "outside_publisher_unchanged_deliveries_unassessed": 2
+  }
+}

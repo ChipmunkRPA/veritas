@@ -1,0 +1,140 @@
+{
+  "browser": {
+    "cases": [
+      {
+        "face_crops": 3,
+        "fixture": "tandem",
+        "native_seek_s": [
+          1.24,
+          1.28,
+          1.72
+        ],
+        "packet_visible": true,
+        "source_frames": 3,
+        "status": "localized"
+      },
+      {
+        "fixture": "off",
+        "packet_visible": false,
+        "status": null
+      },
+      {
+        "face_crops": 3,
+        "fixture": "direct",
+        "native_seek_s": [
+          2.24,
+          2.28,
+          2.76
+        ],
+        "packet_visible": true,
+        "source_frames": 3,
+        "status": "localized"
+      },
+      {
+        "fixture": "ordinary",
+        "packet_visible": false,
+        "status": "no_match"
+      },
+      {
+        "fixture": "hard-cut",
+        "packet_visible": false,
+        "status": "unavailable"
+      }
+    ],
+    "page_errors": 0
+  },
+  "cases": [
+    {
+      "background_similarity": 0.992477,
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 49,
+        "reason": null,
+        "status": "localized"
+      },
+      "matching_pdf_plates": 6,
+      "name": "tandem",
+      "original_crop_pixels_verified": 6,
+      "pdf_sha256": "3d8812958548cf8c3d71044544fc6fa3ab9058ed564d35ad34fad0335bbac00c",
+      "signed_original_replay": true,
+      "source_frames": [
+        31,
+        32,
+        43
+      ],
+      "source_sha256": "141c29340923360780c8b00892611150379816be50f9072396b6b5a05b48728f",
+      "transition_time_s": 1.28
+    },
+    {
+      "background_similarity": null,
+      "coverage": null,
+      "matching_pdf_plates": 0,
+      "name": "off",
+      "original_crop_pixels_verified": 0,
+      "pdf_sha256": "4dde1eb03b3597596a1a9fd151abc26394f06d681a4f8a39f0ca769445b7ae7a",
+      "signed_original_replay": true,
+      "source_frames": [],
+      "source_sha256": "141c29340923360780c8b00892611150379816be50f9072396b6b5a05b48728f",
+      "transition_time_s": null
+    },
+    {
+      "background_similarity": 0.996422,
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 50,
+        "reason": null,
+        "status": "localized"
+      },
+      "matching_pdf_plates": 6,
+      "name": "direct",
+      "original_crop_pixels_verified": 6,
+      "pdf_sha256": "62236ffcd4d84426ef9a277c81f01fa915553ac8d018063bc7eef24bd66492d8",
+      "signed_original_replay": true,
+      "source_frames": [
+        56,
+        57,
+        69
+      ],
+      "source_sha256": "6fb6e9e378022bd8a6c0aeb160bd7fe52e77725d966a4f4c5f08a565ebb7b412",
+      "transition_time_s": 2.28
+    },
+    {
+      "background_similarity": null,
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 49,
+        "reason": null,
+        "status": "no_match"
+      },
+      "matching_pdf_plates": 0,
+      "name": "ordinary",
+      "original_crop_pixels_verified": 0,
+      "pdf_sha256": "15bf2c3ee1a58d14dc74114b180a77121eb359a5185982f6e44fab9033cd0e5d",
+      "signed_original_replay": true,
+      "source_frames": [],
+      "source_sha256": "496435f7c792157788e26ee08a881207c755576c2c93dbdacd6657c5b072900f",
+      "transition_time_s": null
+    },
+    {
+      "background_similarity": null,
+      "coverage": {
+        "frames_scanned": 100,
+        "measured_face_frames": 49,
+        "reason": "shot_change",
+        "status": "unavailable"
+      },
+      "matching_pdf_plates": 0,
+      "name": "hard-cut",
+      "original_crop_pixels_verified": 0,
+      "pdf_sha256": "17ed06553fe7027026cf7d2c0219142f914f1fe1b86a26fe575438d81dda0308",
+      "signed_original_replay": true,
+      "source_frames": [],
+      "source_sha256": "189dee4e228dc933c6943d44ebdf2846d1a004e14185aa3465cafb541ee2dd55",
+      "transition_time_s": null
+    }
+  ],
+  "confidence_parity": true,
+  "job_created_before_paid": false,
+  "schema": "chipmunk.face-single-boundary-local-checkout/1",
+  "simulated_payment_usd_cents": 999
+}

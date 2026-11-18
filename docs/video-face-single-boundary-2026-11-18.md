@@ -74,7 +74,30 @@ localization method can produce other findings. All controls, including
 clips without sufficient evidence, remain in the denominators. Both
 encodes share the same source groups. Further testing on unstaged
 footage and additional capture setups would establish broader coverage.
-The check is at the evaluation stage.
+
+## Transfer to other recordings
+
+The frozen app check also received 24 ordinary deliveries from eight
+additional webcam recordings and four controlled head-movement sources.
+These sources had prior project exposure for other checks. A separate
+publisher provided one synthetic, aligned unswapped/swap pair. At frames
+36 and 62, the test combined the publisher's paired pictures to form
+four new prefix or suffix edits. All source excerpts start at 0.40 s
+using the nearest native timestamps, with direct H.264 and a second
+strongly compressed delivery of each case. The decoder verified all
+3,400 test picture timestamps. [Webcam data terms](https://github.com/microsoft/VCD/blob/main/LICENSE-DATA)
+· [Head movement recordings](https://www.mdpi.com/2306-5729/4/3/130)
+· [Publisher pair and rights](https://faceswapai.com/resources/video-face-swap-continuity-study)
+
+The check assessed 18 of 24 ordinary camera deliveries and flagged none.
+It abstained on all eight staged outside-publisher deliveries and both
+encodes of their matched unchanged synthetic source. In a follow-up
+check of the direct unchanged and frame-36 suffix deliveries, all 29
+candidate positions had matching adjacent face boxes. At most five and
+four shared textured background tiles were available, respectively.
+The frozen comparison needs eight. This identifies a coverage gap for
+portrait footage against a plain background. The eight staged deliveries
+share one publisher target. [Case results and source commitments](evaluation-panels/video-face-single-boundary-outside-2026-11-18.json)
 
 ## Native evidence
 
@@ -88,6 +111,41 @@ renderers. The two readbacks verified all 200 native timestamps,
 six exact RGB frame hashes and six aligned crop hashes. The receipt
 retains the time base, native picture positions and crop geometry.
 [Native evidence readback](evaluation-panels/video-face-single-boundary-native-2026-11-18.json)
+
+## App verification
+
+The local Full and Deep profiles can enable this check in development
+with `VERITAS_VIDEO_FACE_SINGLE_BOUNDARY_REVIEW=true`. The supported
+delivery is upright, four-second 640 × 360 H.264 MP4 with an exact
+25 fps source clock. The check needs a single continuous shot and
+enough comparable views of the face. The evidence view reports the
+coverage outcome when a required condition is missing.
+
+The app displays the source timestamp, last frame before the change,
+first frame at the transition, and a later supporting frame. Each
+view includes an unmarked original and an exact face crop. The PDF and
+JSON share those frame positions and the surrounding-picture reading.
+The signed original-file replay verifies exact frame clocks, original
+and cropped pixels, aligned face inputs, and nearby picture similarity.
+The app records a single appearance boundary and leaves the cause
+and affected side undetermined. The check contributes zero overall
+AI-confidence weight.
+
+The local test completed five simulated USD 9.99 purchases before
+starting analysis. It localized both held edited files at their exact
+source frames, produced matching PDF and JSON reports, and independently
+replayed both signed packages against the originals. The browser checked
+all six playback seeks and the visible original images and crops. The
+ordinary control had no match and the hard cut was shown as unavailable.
+The same input returned an identical overall assessment with the check
+disabled and enabled. [Local checkout and browser receipt](evaluation-panels/video-face-single-boundary-app-2026-11-18.json)
+
+The serving implementation also rebuilt and matched the 216 held
+deliveries, their recorded measurements, and 21,600 native timestamps.
+It matched 510 original-frame and 510 aligned-crop hashes. A separate
+35-delivery comparison matched the unrounded measures. The serving
+replay retained 82 observations, including the one misplaced transition
+from the held comparison. [Serving parity receipt](evaluation-panels/video-face-single-boundary-serving-2026-11-18.json)
 
 ## Reproduce
 

@@ -1,0 +1,52 @@
+{
+  "affects_overall_confidence": false,
+  "checks": {
+    "canonical_deliveries": 216,
+    "preselected_records_checked_after_storage": 82,
+    "refined_aligned_crop_hash_matches": 510,
+    "refined_source_frame_hash_matches": 510,
+    "unrounded_deliveries": 35,
+    "unrounded_groups": 12,
+    "verifiable_native_timestamps": 21600
+  },
+  "comparison_scope": {
+    "carrier": "H.264 MP4",
+    "frames": 100,
+    "frames_per_second": 25,
+    "frozen_point": 0.165750624,
+    "height": 360,
+    "maximum_review_seconds": 12,
+    "minimum_face_size_px": 48,
+    "sampling_step_frames": 2,
+    "width": 640
+  },
+  "coverage": {
+    "localized/-": 82,
+    "no_match/-": 88,
+    "unavailable/insufficient_face_context": 16,
+    "unavailable/insufficient_native_boundary": 4,
+    "unavailable/shot_change": 26
+  },
+  "held_source_groups": 12,
+  "managed_stage_smoke": {
+    "localized_transitions": [
+      {
+        "frame": 57,
+        "source_time_s": 2.28
+      },
+      {
+        "frame": 32,
+        "source_time_s": 1.28
+      }
+    ],
+    "no_match": 1,
+    "shot_change": 1
+  },
+  "maximum_detector_s": 2.34,
+  "median_detector_s": 0.916,
+  "production_algorithm_sha256": "c68b2ed9fa08e91b7c30063eb889d9208c9155507aa52b87a92e5c4c3ec9e7f2",
+  "published_held_receipt_sha256": "9ad9f4cbd68a0c66ec716161a6e68f166d8a493f9e84e4f831cc4ced17e4a23c",
+  "schema": "chipmunk.video-face-single-boundary-serving/1",
+  "strict_unrounded_selection": "The strongest, closest to the frozen point and an ordinary measured reading per source group. For the group without readings, one ordinary clip and one edited clip.",
+  "test_count": 95
+}

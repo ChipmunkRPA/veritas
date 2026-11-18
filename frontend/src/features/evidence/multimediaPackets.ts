@@ -21,7 +21,7 @@ interface SetBase {
 }
 export interface VideoEvidenceFrame {
   id: string; score: number | null; is_peak: boolean; region_meaning: string
-  interval_role?: 'before' | 'during' | 'after'
+  interval_role?: 'before' | 'during' | 'transition' | 'after'
   anchor: { frame_index: number; pts: number; time_base: string; stream_time_s: number; playback_time_s: number | null }
   artifact_refs: { original: string; context: string; crop?: string }
   context_region: { x: number; y: number; w: number; h: number } | null
@@ -47,6 +47,8 @@ export interface VideoEvidencePacket extends PacketBase {
     motion_sound_agreement?: { agreement_units: [number, number, number] }
   }
   scene_return?: { schema: 'picture-change-return/1' | 'picture-change-return/2'; start_stream_s: number; end_stream_s: number; tiles: number[] }
+  face_single_boundary?: { method: 'single-face-boundary/1'; boundary: number; pts: number; time_base: string;
+    time_s: number; affects_overall_confidence: false }
   picture_sequence?: { first: PictureSequenceSpan; second: PictureSequenceSpan; frame_count: number; span_s: number; order?: 'reverse';
     frame_steps?: Record<'first' | 'second', 1 | 2 | 3 | 4>; spatial_transform?: 'horizontal_reflection';
     framing?: { wider_range: 'first' | 'second'; crop_box: [number, number, number, number]; alignment?: 'centered' | 'landmarks' } }
@@ -105,6 +107,9 @@ export interface VideoEvidenceSet extends SetBase {
       affects_overall_confidence: false };
     brief_face_review?: { observations: string[]; affects_overall_confidence: false };
     brief_face_windows?: { observations: string[]; affects_overall_confidence: false };
+    face_single_boundary_coverage?: { status: 'localized' | 'no_match' | 'unavailable'; frames_scanned: number;
+      measured_face_frames: number; reason: 'provenance' | 'profile' | 'unsupported_video' | 'models_unavailable'
+        | 'time_budget' | 'native_measurement_unavailable' | 'shot_change' | 'insufficient_face_context' | 'insufficient_native_boundary' | null };
     scene_return_review?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number;
       reason: 'unsupported_video' | 'profile' | 'provenance' | 'scan_unavailable' | 'incomplete_decode' | 'missing_anchors' | null;
       packet_id: 'VSC01' | null; observation: string; limitation: string; affects_overall_confidence: false };

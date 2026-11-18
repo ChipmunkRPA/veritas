@@ -152,7 +152,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
     source = document["source"]
     sampling = result.get("manifest", {}).get("sampling", {})
     if kind == "video":
-        from app.evidence import scene_return_binding, video_viseme_binding
+        from app.evidence import face_single_boundary_binding, scene_return_binding, video_viseme_binding
 
         if (sampling.get("frame_anchor_version") != "stream-pts-rgb24/1"
                 or any(source.get(key) != sampling.get(key) or not source.get(key)
@@ -160,7 +160,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
                 or source.get("timeline_origin_s") != sampling.get("timeline_origin_s")
                 or any(source.get(key) != sampling.get(key)
                        for key in (scene_return_binding.COMMITMENT, scene_return_binding.COVERAGE_COMMITMENT,
-                                   video_viseme_binding.COMMITMENT))
+                                   video_viseme_binding.COMMITMENT, *face_single_boundary_binding.COMMITMENTS))
                 or ("picture_hold" in document and source.get("picture_hold_sha256") != sampling.get("picture_hold_sha256"))):
             raise ObjectIntegrityError("Video evidence does not match the published source-frame commitments")
     elif kind == "audio":
@@ -213,6 +213,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         face_return_coverage,
         face_short_carrier_binding,
         face_short_window_binding,
+        face_single_boundary_binding,
         face_spatial_cut_binding,
         mouth_hold_sound,
         picture_hold_binding,
@@ -271,6 +272,13 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         scene_return_binding.validate_coverage(document, canonical_hash=canonical_hash, pts=table.pts)
         if records["render"].get(scene_return_binding.COVERAGE) != document["coverage"].get(scene_return_binding.COVERAGE):
             raise ValueError("Picture-change coverage differs from the frozen render output")
+        face_single_boundary_binding.validate(document, canonical_hash, table_pts=table.pts,
+            interpolated=table.interpolated, rotation=table.rotation, truncated=table.truncated)
+        transition = next((p[face_single_boundary_binding.KEY] for p in document["packets"]
+                           if face_single_boundary_binding.KEY in p), None)
+        if (transition != records["render"].get(face_single_boundary_binding.KEY)
+                or coverage.get(face_single_boundary_binding.COVERAGE) != records["render"].get(face_single_boundary_binding.COVERAGE)):
+            raise ValueError("Face transition differs from the frozen render output")
     except (ValueError, KeyError, TypeError) as error:
         raise ObjectIntegrityError("Picture evidence differs from the recorded native inspection") from error
     for packet in document["packets"]:
@@ -389,6 +397,13 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                                          (112, 112), interpolation=cv2.INTER_AREA)
                     if hashlib.sha256(aligned.tobytes()).hexdigest() != item["aligned_rgb_sha256"]:
                         raise ObjectIntegrityError("Recorded face features refer to a different aligned source crop")
+                if transition := packet.get(face_single_boundary_binding.KEY):
+                    from app.detectors.video.face_detail_inputs import align
+
+                    item = transition["source_frames"][frame["interval_role"]]
+                    aligned = align(np.asarray(rgb), face_single_boundary_binding.eyes(item))
+                    if aligned is None or hashlib.sha256(aligned.tobytes()).hexdigest() != item["aligned_rgb_sha256"]:
+                        raise ObjectIntegrityError("Face transition refers to a different aligned source crop")
                 if "crop" in frame["artifact_refs"]:
                     crop_asset = packet["artifacts"][frame["artifact_refs"]["crop"]]
                     with Image.open(io.BytesIO(assets[crop_asset["sha256"]])) as crop:
@@ -1089,7 +1104,12 @@ def _voice_interval_view(interval: dict, rate: int, video_origin_s: float | None
 
 
 def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[str, Any] | None:
-    from app.evidence import document_native_locations, document_passage_intervals, document_published_wording
+    from app.evidence import (
+        document_native_locations,
+        document_passage_intervals,
+        document_published_wording,
+        face_single_boundary_binding,
+    )
     from app.evidence.document_email_contexts import KEY as EMAIL_INPUT_SCOPE
     from app.evidence.document_native_locations import KEY as ORIGINAL_TEXT_LOCATIONS
     from app.evidence.document_pdf_history_binding import KEY as PDF_HISTORY
@@ -1194,6 +1214,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["face_spatial_cut"] = copy.deepcopy(packet.get("face_spatial_cut"))
             if packet.get("face_return"):
                 row["face_return"] = copy.deepcopy(packet["face_return"])
+            if transition := packet.get(face_single_boundary_binding.KEY):
+                row[face_single_boundary_binding.KEY] = copy.deepcopy(transition)
             row["whole_face_review"] = copy.deepcopy(packet.get("whole_face_review"))
             row["clip"] = copy.deepcopy(packet.get("clip"))
             coarse_count = len(packet["frames"])
@@ -1209,7 +1231,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                                  for role in ("original", "context", "crop", "measured_patch")
                                                  if role in frame["artifact_refs"] and (not (hold or repeated_sequence or scene_return) or role == "original"
                                                                                         or (role == "crop" and frame["region_meaning"] == "matched_frame_crop"))
-                                                 and (not (mouth_hold or lip_timing) or role != "context")]})
+                                                 and (not (mouth_hold or lip_timing or packet.get(face_single_boundary_binding.KEY)) or role != "context")]})
         elif packet_kind == "audio":
             row["images"] = [plate(role, packet["artifacts"][role]) for role in ("waveform", "scores")]
             row["audio"] = {"interval": copy.deepcopy(packet["interval"]), "context_interval": copy.deepcopy(packet["context_interval"]),
@@ -1355,6 +1377,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 row["locator"] = f"Mouth-region hold {row['window']['start_stream_s']:.3f}-{row['window']['end_stream_s']:.3f} s"
             if scene_return:
                 row["locator"] = f"Picture change {scene_return['start_stream_s']:.3f}-{scene_return['end_stream_s']:.3f} s"
+            if transition := packet.get(face_single_boundary_binding.KEY):
+                row["locator"] = f"Face appearance transition at {transition['time_s']:.3f} s, source frame {transition['boundary']}"
             if lip_timing:
                 from app.evidence.video_viseme_timing import RATE
 
@@ -1588,6 +1612,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                              "end_s": f"{interval['source_end_pts'] / 16000:.3f}",
                                              "reason": TIMING_REASONS[row["status"]]})
     av_coverage = (document.get("av") or {}).get("coverage") or {}
+    face_transition_coverage = (document.get("coverage") or {}).get(face_single_boundary_binding.COVERAGE) if kind == "video" else None
     return {"available": True, "kind": kind, "title": f"{kind.capitalize()} evidence", "id": document["id"],
             "av_repeated_offsets": copy.deepcopy(av_coverage.get(REPEATED_OFFSETS, [])),
             "av_timing_windows": timing_view,
@@ -1620,6 +1645,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "lip_timing_review": document.get("lip_timing_review") if kind == "video" else None,
             "brief_face_review": (document.get("coverage") or {}).get("brief_face_review") if kind == "video" else None,
             "brief_face_windows": (document.get("coverage") or {}).get("brief_face_windows") if kind == "video" else None,
+            face_single_boundary_binding.COVERAGE: ({**face_transition_coverage,
+                "message": face_single_boundary_binding.coverage_text(face_transition_coverage)}
+                if face_transition_coverage is not None else None),
             "picture_frame_count": document["source"].get("frame_count", 0) if kind == "video" else 0,
             "picture_dimensions": (document["source"]["width"], document["source"]["height"]) if kind == "video" else None,
             "voice_gaps": voice_gaps,

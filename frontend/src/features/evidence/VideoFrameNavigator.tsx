@@ -6,7 +6,7 @@ export default function VideoFrameNavigator({ set, token, mediaReady, selected, 
   onSelect: (frame: VideoEvidenceFrame) => void
 }) {
   const entries = set.packets.flatMap((packet) => [
-    ...packet.frames.map((frame) => ({ packet, frame, role: packet.scene_return ? 'picture-change' : packet.face_spatial_cut ? 'review' : 'flagged' })),
+    ...packet.frames.map((frame) => ({ packet, frame, role: packet.face_single_boundary ? 'face-transition' : packet.scene_return ? 'picture-change' : packet.face_spatial_cut ? 'review' : 'flagged' })),
     ...(packet.face_boundary?.method === 'face-appearance-paired-edge/1' ? packet.face_boundary_frames ?? [] : [])
       .map((frame) => ({ packet, frame, role: 'refined' })),
     ...(packet.face_spatial_cut_frames ?? []).map((frame) => ({ packet, frame, role: 'picture-cut' })),
@@ -28,7 +28,9 @@ export default function VideoFrameNavigator({ set, token, mediaReady, selected, 
         <span className="block font-mono text-small">{seconds(frame.anchor.stream_time_s)}</span>
         <span className="block text-caption text-text-muted">{frame.id}{frame.is_peak ? ' · peak sample' : ''}
           {frame.region_meaning === 'detected_face_context' ? ' · face review' : ''}</span>
-        <span className="block text-caption">{frame.interval_role ? `${frame.interval_role[0].toUpperCase()}${frame.interval_role.slice(1)} ${role} range`
+        <span className="block text-caption">{role === 'face-transition'
+          ? frame.interval_role === 'before' ? 'Before transition' : frame.interval_role === 'transition' ? 'At transition' : 'Later supporting frame'
+          : frame.interval_role ? `${frame.interval_role[0].toUpperCase()}${frame.interval_role.slice(1)} ${role} range`
           : packet.claim_scope === 'sampled_window' || frame.score == null ? 'Context for a scored window' : `Response ${frame.score.toFixed(3)}`}</span>
       </button>
     })}</div>
@@ -43,9 +45,13 @@ export default function VideoFrameNavigator({ set, token, mediaReady, selected, 
             : 'The outline locates the area inspected. It is not a pixel-level edit mask.'}</figcaption></figure>
         {current.frame.artifact_refs.crop && <figure className="m-0"><EvidencePicture set={set} artifact={current.packet.artifacts[current.frame.artifact_refs.crop]} token={token} ready={mediaReady}
           alt={`${current.frame.id}: selected original face crop`} />
-          <figcaption className="mt-2 text-caption text-text-muted">Original source crop for checking the suspicious sample against its surroundings.</figcaption></figure>}
+          <figcaption className="mt-2 text-caption text-text-muted">{current.packet.face_single_boundary
+            ? 'Exact crop of the face from this source frame.'
+            : 'Original source crop for checking the suspicious sample against its surroundings.'}</figcaption></figure>}
       </div>
-      <p className="mt-3 mb-0 text-caption text-text-muted">{pictureChange
+      <p className="mt-3 mb-0 text-caption text-text-muted">{current.packet.face_single_boundary
+        ? 'Compare the last frame before the transition, the first frame of the new appearance, and a later supporting frame.'
+        : pictureChange
         ? 'Compare the exact source frames before, during, and after the change. The first frame of the return marks the end.'
         : pictureCut
         ? 'Compare the surrounding picture before, during, and after the measured cut. The interval ends at the first frame after the cut.'

@@ -91,6 +91,8 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
   }
   const hold = set.picture_hold
   const sceneReview = set.coverage?.scene_return_review
+  const transitionReview = set.coverage?.face_single_boundary_coverage
+  const transition = set.packets.find(packet => packet.face_single_boundary)?.face_single_boundary
   const mouthHold = hold?.mouth_local_hold
   const lipTiming = set.lip_timing_review
   const motion = hold?.motion_sequence_review
@@ -116,8 +118,12 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       const navigationKnown = frame.anchor.playback_time_s != null && Number.isFinite(frame.anchor.playback_time_s) && frame.anchor.playback_time_s >= 0
       const occurrence = packet.picture_sequence && occurrenceLabel(packet.picture_sequence,
         frame.anchor.frame_index <= packet.picture_sequence.first.end_frame_index ? 'first' : 'second')
+      const transitionLabel = packet.face_single_boundary
+        ? frame.interval_role === 'before' ? 'Last frame before transition' : frame.interval_role === 'transition'
+          ? 'First frame at transition' : 'Later supporting frame' : null
       return <div key={frame.id} className="rounded-md border border-border p-3">
-        <p className="m-0 mb-3 text-small font-medium">{occurrence && `${occurrence} · `}{frame.interval_role && <span className="capitalize">{frame.interval_role} {rangeLabel} · </span>}Frame {frame.anchor.frame_index}{frame.is_peak ? ' · highest response in this sample sequence' : ''}
+        <p className="m-0 mb-3 text-small font-medium">{occurrence && `${occurrence} · `}{transitionLabel
+          ? `${transitionLabel} · ` : frame.interval_role && <span className="capitalize">{frame.interval_role} {rangeLabel} · </span>}Frame {frame.anchor.frame_index}{frame.is_peak ? ' · highest response in this sample sequence' : ''}
           {frame.score !== null && <span className="font-mono"> · response {frame.score.toFixed(3)}</span>}</p>
         <div className={evidenceGrid}>
           <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={packet.artifacts[frame.artifact_refs.original]} token={token} ready={mediaReady} alt={`${frame.id}: exact original video frame`} />
@@ -135,6 +141,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
           {!packet.picture_hold && !packet.picture_sequence && !packet.scene_return && <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop || packet.artifacts[frame.artifact_refs.context]} token={token} ready={mediaReady}
             alt={`${frame.id}: ${mouthCrop ? 'exact measured mouth region' : crop ? 'source face crop for context' : 'frame context with its recorded label'}`} />
             <figcaption className="mt-2 text-caption text-text-muted">{mouthCrop ? 'Exact pixels of the measured mouth region.'
+              : packet.face_single_boundary ? 'Exact crop of the face from this source frame.'
               : crop ? 'Detected-face crop for inspection; not an edit boundary or the exact aligned classifier input.'
               : 'Source context with a navigation label; no local edit mask is available.'}</figcaption></figure>}
         </div>
@@ -145,6 +152,22 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     })}</div>
 
   return <div id="media-evidence-visual" data-testid="video-evidence-content" className="scroll-mt-20">
+    {transitionReview && <section aria-labelledby="video-face-transition-heading" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="video-face-transition-heading" className="m-0 text-body font-medium">Face transition check</h3>
+      <p className="mt-2 mb-0 text-small">{transition
+        ? <><a className="underline" href="#media-evidence-VFB01">Inspect the transition</a> at <strong>{seconds(transition.time_s)}</strong> on the source clock, frame {transition.boundary}.</>
+        : transitionReview.status === 'no_match' ? 'No qualifying face appearance transition was found in the portion checked.'
+        : transitionReview.reason === 'shot_change' ? 'This check requires one continuous shot. A shot change was detected.'
+        : transitionReview.reason === 'profile' ? 'This check covers four-second, 640 × 360 H.264 MP4 with a verified 25 fps clock.'
+        : transitionReview.reason === 'provenance' ? 'Verified source credentials determined the analysis path.'
+        : transitionReview.reason === 'insufficient_face_context' ? 'The face views and surrounding picture did not support a stable comparison.'
+        : transitionReview.reason === 'insufficient_native_boundary' ? 'The nearby source frames did not establish a precise transition.'
+        : 'The face transition check was unavailable for this upload.'}</p>
+      {transitionReview.frames_scanned > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">
+        The check read {transitionReview.frames_scanned} native pictures for shot changes and measured {transitionReview.measured_face_frames} usable face views.
+      </p>}
+      <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero AI confidence weight.</p>
+    </section>}
     {lipTiming && <section aria-labelledby="video-lip-timing-heading" className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-lip-timing-heading" className="m-0 text-body font-medium">{lipTiming.schema === 'chipmunk.video-lip-timing/8'
         ? 'Speech activity and visible mouth movement'
@@ -288,7 +311,10 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     <div className="mt-6 space-y-7">{set.packets.map((packet) => <article key={packet.id} id={`media-evidence-${packet.id}`} className={evidenceCard}>
       <h3 className="m-0 text-body font-medium"><span className="font-mono text-accent mr-3">{packet.id}</span>{packet.title}</h3>
       {!packet.picture_hold && <p className="mt-2 mb-0 text-body">{packet.observation}</p>}
-      {!packet.scene_return && !packet.lip_timing_review && <p className="mt-2 mb-0 text-small text-text-muted">{packet.picture_hold
+      {packet.face_single_boundary && <p className="mt-2 mb-0 text-small text-text-muted">
+        Transition at <strong>{seconds(packet.face_single_boundary.time_s)}</strong> on the source clock · frame {packet.face_single_boundary.boundary}.
+      </p>}
+      {!packet.scene_return && !packet.lip_timing_review && !packet.face_single_boundary && <p className="mt-2 mb-0 text-small text-text-muted">{packet.picture_hold
         ? <>{packet.picture_hold.frame_count} consecutive decoded frames have identical pixels over <strong>{seconds(packet.picture_hold.span_s)}</strong> between the first and last source timestamps.</>
         : packet.picture_sequence
         ? <>{occurrenceLabel(packet.picture_sequence, 'first')} <strong>{seconds(packet.picture_sequence.first.start_stream_s)}–{seconds(packet.picture_sequence.first.end_stream_s)}</strong> · {occurrenceLabel(packet.picture_sequence, 'second')} <strong>{seconds(packet.picture_sequence.second.start_stream_s)}–{seconds(packet.picture_sequence.second.end_stream_s)}</strong> on the source clock.</>
@@ -324,7 +350,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         <p className="mt-1 mb-0">End of change · frames {packet.face_return.edges.exit.frame_indices.join(', ')}</p>
         <p className="mt-2 mb-0 text-caption text-text-muted">At each boundary the check compared the first three frames with the last three.</p>
       </div>}
-      {!packet.picture_hold && !packet.picture_sequence && !packet.whole_face_review && !packet.scene_return && !packet.lip_timing_review && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
+      {!packet.picture_hold && !packet.picture_sequence && !packet.whole_face_review && !packet.scene_return && !packet.lip_timing_review && !packet.face_single_boundary && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
       {packet.face_spatial_cut && packet.face_spatial_cut_frames && <section className="mt-5 rounded-md border border-border p-3">
         <h4 className="m-0 text-small font-medium">Picture-cut context</h4>
         <p className="mt-2 mb-0 text-small text-text-muted">Picture detail outside the face changed at both ends of <strong>{seconds(packet.face_spatial_cut.start_stream_s)}–{seconds(packet.face_spatial_cut.end_stream_s)}</strong> on the source clock, with an exclusive end. A cut between shots is one plausible explanation for this face change.</p>

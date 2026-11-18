@@ -50,6 +50,25 @@ def quiet_ranges(series, samples):
                "during_rms_units": math.isqrt(during // ((end-start) * HOP))}
 
 
+def mouth_motion(eligible, start, end):
+    before = [p for p in eligible if start - MAX_FRAME_GAP <= p["sample"] < start]
+    during = [p for p in eligible if start <= p["sample"] < end]
+    after = [p for p in eligible if end <= p["sample"] < end + MAX_FRAME_GAP]
+    if not (before and after and len(during) >= 4):
+        return None
+    involved = [before[-1], *during, after[0]]
+    if any(b["sample"] - a["sample"] > MAX_FRAME_GAP for a, b in pairwise(involved)):
+        return None
+    gaps = [p["gap_units"] for p in during]
+    swing = max(gaps) - min(gaps)
+    changes = sum(abs(a - b) >= APERTURE_STEP for a, b in pairwise(gaps))
+    if swing < APERTURE_SWING or changes < 2:
+        return None
+    middle = min(during, key=lambda p: (abs(p["sample"] * 2 - start - end), p["index"]))
+    return ({"mouth_frames": len(during), "aperture_swing_units": swing, "mouth_steps": changes},
+            {"before": before[-1]["index"], "during": middle["index"], "after": after[0]["index"]})
+
+
 def record(series, frames, samples, origin, *, shot=None):
     eligible = [frame for frame in frames if frame["gap_units"] is not None]
     matches = []
@@ -57,25 +76,14 @@ def record(series, frames, samples, origin, *, shot=None):
         start, end = event["span"]
         if shot is not None and not shot[0] + FLANK <= start < end <= shot[1] - FLANK:
             continue
-        before = [p for p in eligible if start - MAX_FRAME_GAP <= p["sample"] < start]
-        during = [p for p in eligible if start <= p["sample"] < end]
-        after = [p for p in eligible if end <= p["sample"] < end + MAX_FRAME_GAP]
-        if not (before and after and len(during) >= 4):
+        support = mouth_motion(eligible, start, end)
+        if support is None:
             continue
-        involved = [before[-1], *during, after[0]]
-        if any(b["sample"] - a["sample"] > MAX_FRAME_GAP for a, b in pairwise(involved)):
-            continue
-        gaps = [p["gap_units"] for p in during]
-        swing = max(gaps) - min(gaps)
-        changes = sum(abs(a - b) >= APERTURE_STEP for a, b in pairwise(gaps))
-        if swing < APERTURE_SWING or changes < 2:
-            continue
-        middle = min(during, key=lambda p: (abs(p["sample"] * 2 - start - end), p["index"]))
-        measurement = {"status": "measured", **event, "mouth_frames": len(during), "aperture_swing_units": swing,
-                       "mouth_steps": changes}
+        motion, brackets = support
+        measurement = {"status": "measured", **event, **motion}
         witness = {"audio_source_pts": [origin + start, origin + end], "picture_source_samples": [origin + start, origin + end],
-                   "picture_frames": {"before": before[-1]["index"], "during": middle["index"], "after": after[0]["index"]},
-                   KEY: {"near_silent_peak_units": event["peak_units"], "visible_mouth_frames": len(during)}}
+                   "picture_frames": brackets, KEY: {"near_silent_peak_units": event["peak_units"],
+                                                       "visible_mouth_frames": motion["mouth_frames"]}}
         matches.append((measurement, witness))
     return max(matches, key=lambda pair: (pair[0]["span"][1] - pair[0]["span"][0], -pair[0]["span"][0]), default=None)
 

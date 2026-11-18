@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [stereo speech-dropout replay](video-shared-sound-background-2026-11-17.md#reproduce)
+verifies 392 held input videos and their sources, then recounts the exact
+edit ranges on both the audio and picture clocks. It includes three
+prediction files in one receipt for comparing another timing check.
+
 The [masked reconstruction replay](image-masked-reconstruction-2026-11-17.md#reproduce)
 includes a direct reconstruction of a completed public photo intake. It
 verifies the original photos and matched subject masks before recreating

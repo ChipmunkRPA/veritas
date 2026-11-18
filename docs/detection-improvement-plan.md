@@ -60,6 +60,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Local speech dropouts under continuing ambience](video-shared-sound-background-2026-11-17.md)
+  locates five of 28 staged edits per encoding with quieter room sound,
+  with ten ordinary alerts in 70 matched controls and two misplaced
+  edit ranges. It locates zero of 28 edits per encoding under louder
+  ambience. The candidate stays in evaluation. The independent file
+  export verifies all 392 exact held deliveries.
+
 - [Masked reconstruction of small JPEG regions](image-masked-reconstruction-2026-11-17.md)
   compares two fixed readings and two paired readouts on 756 held
   deliveries. All four miss the correct area on 216 staged removals before

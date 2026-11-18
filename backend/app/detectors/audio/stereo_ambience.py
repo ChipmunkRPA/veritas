@@ -18,8 +18,8 @@ MINIMUM_FRAMES = WIDTHS[0] + 2 * (FLANK + GAP)
 KINDS = ("reduction", "spectrum")
 
 
-def frames(stereo):
-    """Common and difference energy per frequency band, in dBFS, on the aligned clock."""
+def band_powers(stereo):
+    """Compute the common and difference component powers on one aligned clock."""
     if stereo.ndim != 2 or stereo.shape[1] != 2 or len(stereo) < FRAME:
         raise ValueError("Expected two continuous decoded audio channels")
     signal = stereo.astype(np.float64) / 65536.0
@@ -35,7 +35,12 @@ def frames(stereo):
         powers = np.abs(np.fft.rfft(values * window)) ** 2
         return scale * np.stack([powers[:, (bins >= lo) & (bins < hi)].sum(axis=1) for lo, hi in BANDS], axis=1)
 
-    mid, side = energy(common), energy(difference)
+    return energy(common), energy(difference)
+
+
+def frames(stereo):
+    """Common and difference energy per frequency band, in dBFS, on the aligned clock."""
+    mid, side = band_powers(stereo)
     levels = np.column_stack((side, mid.sum(axis=1), side.sum(axis=1)))
     return 10 * np.log10(np.maximum(levels, 1e-14))
 

@@ -440,10 +440,15 @@ WHOLE_FACE_SAME_FRAME_POLICY = "whole_face_same_frame_review"
 WHOLE_FACE_DETAIL_POLICY = "whole_face_detail_review"
 LOCAL_FACE_RETURN_POLICY = "local_face_return_review"
 SINGLE_FACE_BOUNDARY_POLICY = "single_face_boundary_review"
+SINGLE_FACE_SPARSE_POLICY = "single_face_sparse_context_review"
 
 
 def single_face_boundary_enabled():
     return settings.environment == "dev" and settings.video_face_single_boundary_review
+
+
+def single_face_sparse_enabled():
+    return single_face_boundary_enabled() and settings.video_face_single_sparse_context_review
 
 
 def current_detect_output(output) -> bool:
@@ -451,16 +456,18 @@ def current_detect_output(output) -> bool:
             and output.get(WHOLE_FACE_SAME_FRAME_POLICY, False) is same_frame_enabled()
             and output.get(WHOLE_FACE_DETAIL_POLICY, False) is detail_enabled()
             and output.get(LOCAL_FACE_RETURN_POLICY, False) is local_return_enabled()
-            and output.get(SINGLE_FACE_BOUNDARY_POLICY, False) is single_face_boundary_enabled())
+            and output.get(SINGLE_FACE_BOUNDARY_POLICY, False) is single_face_boundary_enabled()
+            and output.get(SINGLE_FACE_SPARSE_POLICY, False) is single_face_sparse_enabled())
 
 
 def _single_boundary_review(ctx: StageContext) -> dict:
     if not single_face_boundary_enabled():
         return {}
     method = face_single_boundary
+    use_sparse = single_face_sparse_enabled()
 
     def unavailable(reason):
-        return {method.COVERAGE: method.coverage("unavailable", reason)}
+        return {method.COVERAGE: method.coverage("unavailable", reason, sparse=use_sparse)}
 
     if provenance_gate.stop(ctx):
         return unavailable("provenance")
@@ -498,9 +505,9 @@ def _single_boundary_review(ctx: StageContext) -> dict:
         check()
         return max(.001, deadline.remaining() or 0.)
 
-    # Reserve the separately loaded recognizer and the native RGB/face observation scratch.
-    try:
-        activation = models.declared_bytes(appearance_id, "cpu", "float32") + 8 * 1024**2
+    def scan(sparse):
+        # A full sparse scan retains 100 bounded RGB frames and small context caches.
+        activation = models.declared_bytes(appearance_id, "cpu", "float32") + (160 if sparse else 8) * 1024**2
         with models.lease((locator_id,), prefer="cpu", activation_bytes=activation) as lease:
             check()
             locator = lease.get(locator_id).obj
@@ -508,7 +515,15 @@ def _single_boundary_review(ctx: StageContext) -> dict:
             ensure_verified(appearance_entry)
             encoder = load_face_appearance(appearance_id, "cpu", "float32").obj
             check()
-            record, disposition = method.inspect(path, store.table, locator, encoder, check=check, timeout_s=timeout_s)
+            return method.inspect(path, store.table, locator, encoder, check=check, timeout_s=timeout_s, sparse=sparse)
+
+    try:
+        try:
+            record, disposition = scan(use_sparse)
+        except MemoryBudgetExceeded:
+            if not use_sparse:
+                raise
+            record, disposition = scan(False)
     except DetectorTimeout:
         return unavailable("time_budget")
     except (FetchError, WeightIntegrityError, MemoryBudgetExceeded, ModelUnavailable, cv2.error, OSError):
@@ -524,7 +539,7 @@ def detect(ctx: StageContext) -> dict[str, Any]:
     outputs = _outputs(ctx)
     policies = {"voice_clock_policy": VOICE_CLOCK_POLICY, WHOLE_FACE_SAME_FRAME_POLICY: same_frame_enabled(),
                 WHOLE_FACE_DETAIL_POLICY: detail_enabled(), LOCAL_FACE_RETURN_POLICY: local_return_enabled(),
-                SINGLE_FACE_BOUNDARY_POLICY: single_face_boundary_enabled()}
+                SINGLE_FACE_BOUNDARY_POLICY: single_face_boundary_enabled(), SINGLE_FACE_SPARSE_POLICY: single_face_sparse_enabled()}
     out = common.run_detectors(ctx, (Modality.VIDEO, Modality.AUDIO),
                                exclude={"provenance", "face-detection", "face-tracking", SEQUENCE_FAMILY, WHOLE_FACE_FAMILY, FACE_DETAIL_FAMILY},
                                outputs=outputs, max_units=VIDEO_MAX_UNIT_SCORES, face_failure=common.face_stage_failure(ctx),

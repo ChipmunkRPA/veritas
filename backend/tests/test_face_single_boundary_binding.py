@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import json
 from fractions import Fraction
 
 import pytest
 
-from app.core.canonical import canonical_hash
+from app.core.canonical import canonical_hash, canonical_json
 from app.evidence import face_single_boundary_binding as binding
 
 
@@ -51,10 +52,6 @@ def test_valid_single_frame_and_offsets(observation):
 
 
 def test_retains_exact_alignment_and_boundary_margin_after_serialization(observation):
-    import json
-
-    from app.core.canonical import canonical_json
-
     evidence, clock = observation
     packet = evidence["packets"][0]
     record = packet[binding.KEY]
@@ -104,3 +101,94 @@ def test_skipped_profile_has_no_visible_score():
                 "coverage": {binding.COVERAGE: coverage}}
     binding.validate(document, canonical_hash)
     assert "verified 25 fps clock" in binding.coverage_text(coverage)
+
+
+@pytest.fixture
+def sparse_observation(observation):
+    evidence, clock = observation
+    packet = evidence["packets"][0]
+    record = packet[binding.KEY]
+    record["method"] = binding.SPARSE_METHOD
+    record["scene_context"] = {
+        "arm": binding.MOTION_CONTEXT, "coarse": binding.MOTION_CONTEXT, "boundary": binding.COARSE_CONTEXT,
+        "coarse_boxes": [{"x": 198, "y": 80, "w": 120, "h": 150}, {"x": 200, "y": 80, "w": 120, "h": 150}],
+    }
+    packet.update(semantics=record["method"], derivation={"selection": record["method"]},
+                  observation=binding.observation(record), measurements=binding.measurements(record))
+    coverage = evidence["coverage"][binding.COVERAGE]
+    coverage["method"] = binding.SPARSE_METHOD
+    evidence["source"].update({binding.COMMITMENT: canonical_hash(record), binding.COVERAGE_COMMITMENT: canonical_hash(coverage)})
+    return evidence, clock
+
+
+def test_sparse_coarse_context_keeps_exact_boundary_measurement(sparse_observation):
+    evidence, clock = sparse_observation
+    frozen = json.loads(canonical_json(evidence))
+    binding.validate(frozen, canonical_hash, table_pts=clock)
+    packet = frozen["packets"][0]
+    assert "detail below the face" in packet["observation"]
+    assert packet["measurements"][1]["label"] == "Surrounding picture similarity at the transition"
+    assert [frame["anchor"]["frame_index"] for frame in packet["frames"]] == [32, 33, 43]
+    assert packet["affects_overall_confidence"] is False
+
+
+def test_incumbent_record_replays_with_original_and_sparse_coverage(observation):
+    evidence, clock = observation
+    frozen = json.loads(canonical_json(evidence))
+    binding.validate(frozen, canonical_hash, table_pts=clock)
+    coverage = frozen["coverage"][binding.COVERAGE]
+    coverage["method"] = binding.SPARSE_METHOD
+    frozen["source"][binding.COVERAGE_COMMITMENT] = canonical_hash(coverage)
+    binding.validate(frozen, canonical_hash, table_pts=clock)
+    assert frozen["source"][binding.COMMITMENT] == evidence["source"][binding.COMMITMENT]
+    assert frozen["packets"][0]["semantics"] == binding.METHOD
+
+
+def test_sparse_record_cannot_downgrade_coverage(sparse_observation):
+    evidence, clock = sparse_observation
+    coverage = evidence["coverage"][binding.COVERAGE]
+    del coverage["method"]
+    evidence["source"][binding.COVERAGE_COMMITMENT] = canonical_hash(coverage)
+    with pytest.raises(ValueError, match="Sparse face transition requires matching coverage"):
+        binding.validate(evidence, canonical_hash, table_pts=clock)
+
+
+@pytest.mark.parametrize(("field", "legacy_value"), [
+    ("semantics", binding.METHOD),
+    ("derivation", {"selection": binding.METHOD}),
+    ("observation", binding.OBSERVATION),
+])
+def test_sparse_packet_cannot_present_legacy_method(sparse_observation, field, legacy_value):
+    evidence, clock = sparse_observation
+    evidence["packets"][0][field] = legacy_value
+    with pytest.raises(ValueError, match="single confidence-neutral boundary"):
+        binding.validate(evidence, canonical_hash, table_pts=clock)
+
+
+@pytest.mark.parametrize(("field", "invalid_value"), [
+    ("boundary", binding.FINE_CONTEXT),
+    ("coarse", binding.COARSE_CONTEXT),
+    ("coarse_boxes", [{"x": -1, "y": 80, "w": 120, "h": 150}, {"x": 200, "y": 80, "w": 120, "h": 150}]),
+])
+def test_sparse_context_rejects_tampered_basis_and_geometry(sparse_observation, field, invalid_value):
+    evidence, clock = sparse_observation
+    record = evidence["packets"][0][binding.KEY]
+    record["scene_context"][field] = invalid_value
+    with pytest.raises(ValueError, match="published commitments"):
+        binding.validate(evidence, canonical_hash, table_pts=clock)
+    evidence["source"][binding.COMMITMENT] = canonical_hash(record)
+    with pytest.raises(ValueError, match="Invalid sparse scene context"):
+        binding.validate(evidence, canonical_hash, table_pts=clock)
+
+
+def test_conflicting_context_abstention_requires_sparse_coverage():
+    coverage = {"status": "unavailable", "reason": "conflicting_boundary_context", "frames_scanned": 100,
+                "measured_face_frames": 49, "method": binding.SPARSE_METHOD}
+    source = {"width": 640, "height": 360, "frame_count": 100, "time_base": "1/25000",
+              binding.COVERAGE_COMMITMENT: canonical_hash(coverage)}
+    evidence = {"source": source, "coverage": {binding.COVERAGE: coverage}, "packets": []}
+    binding.validate(evidence, canonical_hash)
+    del coverage["method"]
+    source[binding.COVERAGE_COMMITMENT] = canonical_hash(coverage)
+    with pytest.raises(ValueError, match="Invalid face transition coverage"):
+        binding.validate(evidence, canonical_hash)

@@ -22,6 +22,7 @@ from app.detectors.video import (
     face_return,
     face_return_fine_scene,
     face_short_proposal,
+    face_single_context,
     face_spatial_cut,
     picture_motion,
     scene_return_carrier,
@@ -29,6 +30,7 @@ from app.detectors.video import (
 from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, decode_stream, probe_frames
 from app.detectors.video.frames import probe as probe_container
 from app.detectors.video.lipsync import source_mouth_patch
+from app.detectors.video.shots import ShotDetector
 from app.evidence import (
     face_boundary_binding,
     face_local_return_binding,
@@ -428,7 +430,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         interpolated=interpolated, rotation=table.rotation, truncated=table.truncated)
     transition = next((p[face_single_boundary_binding.KEY] for p in evidence["packets"]
                        if face_single_boundary_binding.KEY in p), None)
-    transition_frames, transition_scenes = {}, {}
+    transition_frames, transition_scenes, sparse_pixels = {}, {}, {}
+    sparse_indices = set()
+    transition_shots = None
     if transition is not None:
         from app.detectors.video.face_local_detail import supported
 
@@ -436,6 +440,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if not supported(table, (delivery.get("codec"), delivery.get("pix_fmt"))) or face_return.source_carrier(original) != "mp4":
             raise ValueError("The original video differs from its single face transition profile")
         transition_frames = {row["index"]: row for row in transition["source_frames"].values()}
+        if transition["method"] == face_single_boundary_binding.SPARSE_METHOD:
+            sparse_indices = face_single_context.required_frames(transition)
+            transition_shots = ShotDetector(table, min_shot_s=0.)
     packets = [*evidence["packets"], *(evidence.get("av") or {}).get("packets", [])]
     if any(packet.get("semantics") in {whole_face_binding.SAME_FRAME_METHOD, whole_face_binding.DETAIL_METHOD} for packet in packets):
         delivery = probe_container(original, include_codec_tag=True)
@@ -516,6 +523,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("Guarded face evidence requires its dedicated version")
     reading_limit = max(hold_frames, motion_limit, crop_limit)
     indices = set(pictures) | set(mouths) | set(faces) | set(scenes) | set(range(reading_limit)) | set(timing_frames)
+    if transition_shots is not None:
+        indices.update(range(len(table)))
     hold_observations = []
     motion_descriptors = []
     crop_frames = []
@@ -527,6 +536,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             index = frame.index
             found.add(index)
             rgb_sha = hashlib.sha256(frame.rgb).hexdigest()
+            if transition_shots is not None:
+                if not frame.pts_verified or frame.pts != table.pts[index]:
+                    raise ValueError("Sparse face transition requires a verified native picture clock")
+                transition_shots.update(index, frame.rgb)
+                if index in sparse_indices:
+                    sparse_pixels[index] = frame.rgb
             if row := timing_frames.get(index):
                 _frame_anchor(frame, row["pts"], row["rgb_sha256"], "Speech and mouth timing input", rgb_sha)
                 x, y, right, bottom = row["mouth_box"]
@@ -558,7 +573,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 if crop is None or hashlib.sha256(crop.tobytes()).hexdigest() != row["aligned_rgb_sha256"]:
                     raise ValueError("The original video does not reproduce the face transition crop")
                 alignments += 1
-                if index in {transition["boundary"] - 1, transition["boundary"]}:
+                if transition_shots is None and index in {transition["boundary"] - 1, transition["boundary"]}:
                     box = row["box"]
                     face = Face(box["x"], box["y"], box["w"], box["h"], 0.)
                     transition_scenes[index] = face_return.Sample(face, None, face_return.scene(frame.rgb, face))
@@ -591,11 +606,16 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if _sha(original) != digest:
         raise ValueError("The supplied original changed during decoding")
     if transition is not None:
-        edge = transition["boundary"]
-        similarity = face_return.scene_lower_quartile(transition_scenes[edge - 1], transition_scenes[edge])
-        if similarity is None or not math.isclose(similarity, face_single_boundary_binding.reading(transition, "fine_scene"),
-                                                  abs_tol=1e-8, rel_tol=0):
-            raise ValueError("The source surroundings differ from the recorded face transition comparison")
+        if transition_shots is not None:
+            if transition_shots.frames_seen != len(table) or transition_shots.boundaries or set(sparse_pixels) != sparse_indices:
+                raise ValueError("The original must reproduce one continuous shot for the sparse face transition")
+            face_single_context.verify(transition, sparse_pixels)
+        else:
+            edge = transition["boundary"]
+            similarity = face_return.scene_lower_quartile(transition_scenes[edge - 1], transition_scenes[edge])
+            if similarity is None or not math.isclose(similarity, face_single_boundary_binding.reading(transition, "fine_scene"),
+                                                      abs_tol=1e-8, rel_tol=0):
+                raise ValueError("The source surroundings differ from the recorded face transition comparison")
     if extended:
         _verify_picture_hold(evidence, table, hold_observations[:hold_frames])
     if sequence is not None and canonical_hash(picture_sequence.scan(hold_observations[:hold_frames], table.tb)) != canonical_hash(sequence):

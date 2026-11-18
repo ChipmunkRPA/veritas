@@ -383,6 +383,7 @@ class Settings(BaseSettings):
     video_whole_face_detail_review: bool = False  # Optional face detail fallback in the verified 360p/25 fps H.264 profile.
     video_face_local_return_review: bool = False  # Optional face comparison on fixed four-second 360p sources.
     video_face_single_boundary_review: bool = False  # Review one sustained face change on qualified four-second 360p MP4.
+    video_face_single_sparse_context_review: bool = False  # Add bounded sparse-background witnesses to this review.
     video_face_portrait_return_review: bool = False  # Optional face comparison on qualified portrait or square MP4.
     audio_weight: float = 0.8  # docs/eval_audio.md: fused AUC 0.92 on ASVspoof-DF + in-the-wild, FPR ~10 % in the wild
     audio_classifiers: list[str] = [  # HuggingFace audio-classification checkpoints, each "repo_id|positive_label_substring|weight"

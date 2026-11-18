@@ -1,0 +1,126 @@
+{
+  "schema": "chipmunk.sparse-face-transition-app-verification/1",
+  "scope": "Isolated local development instance, four-second 640 × 360 H.264 MP4 at 25 fps.",
+  "sample_purpose": "Integration checks on selected fixtures, with accuracy measured separately on the frozen evaluation panels.",
+  "payment": {
+    "mode": "simulated",
+    "currency": "USD",
+    "amount_cents_per_analysis": 999,
+    "job_created_before_paid": false,
+    "duplicate_paid_webhook_created_extra_jobs": false
+  },
+  "checks": {
+    "cases_completed": 7,
+    "browser_startup_errors": 0,
+    "browser_page_errors": 0,
+    "same_evidence_in_api_json_export_and_signed_package": true,
+    "no_model_names_found_in_reviewed_public_outputs": true,
+    "confidence_and_assessment_equal_in_two_enabled_disabled_pairs": true,
+    "visually_reviewed_pdf_evidence_pages": [
+      "off_face_motion",
+      "fine_background_tiles"
+    ]
+  },
+  "cases": [
+    {
+      "case": "off_face_motion",
+      "coverage_status": "localized",
+      "packet_visible": true,
+      "matching_original_images_and_crops_in_pdf": 6,
+      "signed_original_replay_verified": true,
+      "coverage_reason": null,
+      "native_frames_scanned": 100,
+      "packet_method": "single-face-boundary/2",
+      "source_frame_indices": [
+        33,
+        34,
+        45
+      ],
+      "native_seek_seconds": [
+        1.32,
+        1.36,
+        1.8
+      ],
+      "affects_overall_confidence": false,
+      "different_original_rejected": true
+    },
+    {
+      "case": "same_clip_incumbent_only",
+      "coverage_status": "unavailable",
+      "packet_visible": false,
+      "matching_original_images_and_crops_in_pdf": 0,
+      "signed_original_replay_verified": true,
+      "coverage_reason": "insufficient_face_context",
+      "native_frames_scanned": 100
+    },
+    {
+      "case": "fine_background_tiles",
+      "coverage_status": "localized",
+      "packet_visible": true,
+      "matching_original_images_and_crops_in_pdf": 6,
+      "signed_original_replay_verified": true,
+      "coverage_reason": null,
+      "native_frames_scanned": 100,
+      "packet_method": "single-face-boundary/2",
+      "source_frame_indices": [
+        33,
+        34,
+        45
+      ],
+      "native_seek_seconds": [
+        1.32,
+        1.36,
+        1.8
+      ],
+      "affects_overall_confidence": false,
+      "different_original_rejected": true
+    },
+    {
+      "case": "ordinary_shot_cut",
+      "coverage_status": "unavailable",
+      "packet_visible": false,
+      "matching_original_images_and_crops_in_pdf": 0,
+      "signed_original_replay_verified": true,
+      "coverage_reason": "shot_change",
+      "native_frames_scanned": 100
+    },
+    {
+      "case": "retained_incumbent_with_expanded_coverage",
+      "coverage_status": "localized",
+      "packet_visible": true,
+      "matching_original_images_and_crops_in_pdf": 6,
+      "signed_original_replay_verified": true,
+      "coverage_reason": null,
+      "native_frames_scanned": 100,
+      "packet_method": "single-face-boundary/1",
+      "source_frame_indices": [
+        31,
+        32,
+        43
+      ],
+      "native_seek_seconds": [
+        1.24,
+        1.28,
+        1.72
+      ],
+      "affects_overall_confidence": false,
+      "different_original_rejected": true
+    },
+    {
+      "case": "same_incumbent_clip_review_disabled",
+      "coverage_status": "disabled",
+      "packet_visible": false,
+      "matching_original_images_and_crops_in_pdf": 0,
+      "signed_original_replay_verified": true
+    },
+    {
+      "case": "continuous_ordinary_clip",
+      "coverage_status": "no_match",
+      "packet_visible": false,
+      "matching_original_images_and_crops_in_pdf": 0,
+      "signed_original_replay_verified": true,
+      "coverage_reason": null,
+      "native_frames_scanned": 100
+    }
+  ]
+}

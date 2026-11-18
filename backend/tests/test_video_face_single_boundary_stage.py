@@ -2,6 +2,8 @@ import json
 from fractions import Fraction
 from types import SimpleNamespace
 
+import pytest
+
 from app.core.canonical import canonical_json
 from app.core.config import settings
 from app.detectors.video import face_single_boundary as review
@@ -13,6 +15,7 @@ from app.engine.stages import video
 def test_single_boundary_records_provenance_and_profile_exclusions(monkeypatch, tmp_path):
     monkeypatch.setattr(settings, "environment", "dev")
     monkeypatch.setattr(settings, "video_face_single_boundary_review", True)
+    monkeypatch.setattr(settings, "video_face_single_sparse_context_review", False)
     ctx = SimpleNamespace(profile=Profile.FULL, state={}, outputs={})
     monkeypatch.setattr(video.provenance_gate, "stop", lambda _: True)
     assert video._single_boundary_review(ctx) == {review.COVERAGE: review.coverage("unavailable", "provenance")}
@@ -26,8 +29,54 @@ def test_single_boundary_records_provenance_and_profile_exclusions(monkeypatch, 
     ctx.state["frame_store"] = SimpleNamespace(path=path, table=None)
     assert video._single_boundary_review(ctx) == {review.COVERAGE: review.coverage("unavailable", "profile")}
 
+    monkeypatch.setattr(settings, "video_face_single_sparse_context_review", True)
+    assert video._single_boundary_review(ctx) == {review.COVERAGE: review.coverage("unavailable", "profile", sparse=True)}
+
     monkeypatch.setattr(settings, "video_face_single_boundary_review", False)
     assert video._single_boundary_review(ctx) == {}
+
+
+def test_single_boundary_sparse_switch_invalidates_saved_detection(monkeypatch):
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "video_face_single_boundary_review", True)
+    monkeypatch.setattr(settings, "video_face_single_sparse_context_review", False)
+    monkeypatch.setattr(video, "current_voice_detection_output", lambda _: True)
+    monkeypatch.setattr(video, "same_frame_enabled", lambda: False)
+    monkeypatch.setattr(video, "detail_enabled", lambda: False)
+    monkeypatch.setattr(video, "local_return_enabled", lambda: False)
+    old = {video.SINGLE_FACE_BOUNDARY_POLICY: True}
+    assert video.current_detect_output(old)
+    monkeypatch.setattr(settings, "video_face_single_sparse_context_review", True)
+    assert not video.current_detect_output(old)
+    assert video.current_detect_output(old | {video.SINGLE_FACE_SPARSE_POLICY: True})
+
+
+@pytest.mark.parametrize(("incumbent", "alternatives", "localized", "status", "reason"), [
+    (.4, (34, 40), 32, "localized", None),
+    (.1, (34, 35), 34, "localized", None),
+    (.1, (34, 40), None, "unavailable", "conflicting_boundary_context"),
+    (.1, (), 32, "no_match", None),
+])
+def test_sparse_selection_preserves_incumbent_and_rejects_disagreement(monkeypatch, incumbent, alternatives, localized, status, reason):
+    source = FrameTable(time_base="1/25", pts=tuple(range(100)), key_frames=(0,), pict_types="I" + "P" * 99,
+                        width=640, height=360, coded_width=640, coded_height=360)
+    shot = SimpleNamespace(frames_seen=100, boundaries=[], update=lambda *_: None)
+    monkeypatch.setattr(review, "ShotDetector", lambda *_args, **_kwargs: shot)
+    monkeypatch.setattr(review, "decode_frames", lambda *_args, **_kwargs: (
+        SimpleNamespace(index=index, pts=index, pts_verified=True, rgb=None) for index in source.pts))
+    monkeypatch.setattr(review.face_local_detail, "observe", lambda *_args, **_kwargs: (SimpleNamespace(vector=True), None, None, False))
+    proposal = {"coarse": 32, "persistent": incumbent, "jump_excess": .2}
+    monkeypatch.setattr(review, "proposals", lambda *_: [proposal])
+    monkeypatch.setattr(review, "_refine", lambda *_args, **_kwargs: proposal | {"boundary": 32})
+
+    def extra(*_args, **_kwargs):
+        assert incumbent < review.POINT
+        return [{"persistent": .4, "boundary": edge} for edge in alternatives]
+
+    monkeypatch.setattr(review, "_sparse_readings", extra)
+    reading, disposition = review.measure(None, source, None, None, check=lambda: None, timeout_s=lambda: 1., sparse=True)
+    assert (reading["boundary"] if reading else None) == localized
+    assert disposition == review.coverage(status, reason, frames_scanned=100, measured_face_frames=50, sparse=True)
 
 
 def test_single_boundary_merges_source_pins_without_overwriting_a_conflict():

@@ -595,12 +595,12 @@ def _single_face_boundary_packet(db, store, analysis, set_id, source, record, an
             "score": None, "is_peak": False, "context_region": box, "region_meaning": "detected_face_context",
             "artifact_refs": refs})
     return {"id": packet_id, "title": binding.TITLE, "evidence_type": "anomaly", "claim_scope": "sampled_window",
-            "semantics": binding.METHOD, binding.KEY: record, "affects_overall_confidence": False,
+            "semantics": record["method"], binding.KEY: record, "affects_overall_confidence": False,
             "finding_ids": [], "signal_refs": [], "exhibit_refs": [], "frames": frames, "artifacts": artifacts,
-            "observation": binding.OBSERVATION, "interpretation": binding.INTERPRETATION,
+            "observation": binding.observation(record), "interpretation": binding.INTERPRETATION,
             "measurements": binding.measurements(record), "limitations": [binding.LIMITATION],
             "clip": {"status": "unavailable", "reason": "Use the original video to inspect this transition."},
-            "derivation": {"version": VERSION, "selection": binding.METHOD,
+            "derivation": {"version": VERSION, "selection": record["method"],
                            "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
 
 

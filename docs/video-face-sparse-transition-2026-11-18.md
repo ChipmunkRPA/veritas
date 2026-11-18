@@ -60,9 +60,67 @@ source groups, so broader coverage for tightly framed clips still needs testing.
 
 These results apply to the exact short, standardized video profile and the
 two manipulation renderers used here. The figures describe location accuracy,
-without an estimate of AI authorship. The released analysis still uses its
-current check. The stronger options are ready to test in the source-bound
-browser, PDF, JSON, and signed-original workflow.
+without an estimate of AI authorship.
+
+## Fresh check of the combined selector
+
+The combined selector keeps any qualifying existing result. Otherwise it checks
+motion and finer tiles at the existing face comparison point and uses the
+qualifying motion result first. If two alternative results differ by more than
+one frame, it withholds the transition. On the earlier held set, this
+retrospective selection located 78 of 96 edits, misplaced one, and raised no
+alerts among 150 ordinary deliveries. Where both additions identified an edit,
+they agreed on the exact frame in all 36 deliveries. The combination was chosen
+after those results and was then frozen for the confirmation below.
+
+The confirmation used 54 direct H.264 files from six previously unscored
+camera captures and distinct published donor keys. The ordinary captures had
+previously been screened for native framing eligibility. The crop boundaries
+and edits were new to the measurements. There were 24 deliberately staged edits
+from two publisher renderers and 30 ordinary controls, including six cuts. All
+edits switched at frame 34. Person overlap remains unverified, and the test
+used prepared crops with a single edit position.
+
+| Framing | Existing | Finer tiles | Motion | Combined |
+| --- | ---: | ---: | ---: | ---: |
+| 1.60× crop, 12 edits | 0 | 9 | 4 | 12 |
+| 1.35× crop, 12 edits | 0 | 4 | 0 | 4 |
+| All 24 edits | 0 | 13 | 4 | 16 |
+| Alerts among 30 ordinary controls | 0 | 0 | 0 | 0 |
+
+Each found boundary matched the reference frame exactly. Combined gains
+covered four groups, including one group in the tighter crop. The serving
+code reproduced every outcome and preserved the same witness type and face
+separation scores. On the local CPU, the median measurement took 1.77 seconds
+and all 54 completed within the 12-second budget. This timing excludes model
+loading and the source probe. The combined review was unavailable on 20 of
+the 54 files, six of which contained ordinary cuts.
+[Fresh confirmation receipt](evaluation-panels/video-face-sparse-transition-confirmation-2026-11-18.json)
+
+```sh
+PYTHONPATH=backend python3 -B -S -m scripts.review_video_face_sparse_confirmation \
+  docs/evaluation-panels/video-face-sparse-transition-confirmation-2026-11-18.json
+```
+
+## Local application
+
+Enable `VERITAS_VIDEO_FACE_SINGLE_BOUNDARY_REVIEW` and
+`VERITAS_VIDEO_FACE_SINGLE_SPARSE_CONTEXT_REVIEW` in development to use the
+additional checks on new Full or Deep analyses of the qualified four-second
+profile. The additional setting defaults off. The report shows the source
+timestamp and the before, transition, and after frames, and names the
+background measurement that supported the location. JSON preserves the
+method for the coarse and exact comparisons. The signed-original check
+reconstructs both background comparisons from native frames and verifies
+that the source is one continuous shot. Existing records use their original
+verification procedure. The check contributes zero weight to AI confidence.
+
+Seven isolated USD 9.99 simulated checkouts tested both additions, ordinary
+footage, a cut, and the previous face transition paths. All cases opened in
+the browser and verified their PDF, JSON and signed package. Both additions
+reported 1.36 seconds at frame 34, with source frames 33, 34 and 45 shown
+consistently across the browser and reports. No analysis started before its
+simulated payment. [Local application receipt](evaluation-panels/video-face-sparse-transition-app-2026-11-18.json)
 
 The compact receipt contains file digests, source groups, reference frames,
 and the numeric scores used to reproduce this table. The recount needs

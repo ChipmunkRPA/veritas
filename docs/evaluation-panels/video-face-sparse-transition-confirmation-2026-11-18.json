@@ -1,0 +1,1183 @@
+{
+  "aggregate_commitments_sha256": {
+    "historical_fine_context": "b73ef1070516c6092b57ad5bc121ed48b465644ff3e85e2ff0ea4e3e7d81365d",
+    "historical_incumbent": "c68b2ed9fa08e91b7c30063eb889d9208c9155507aa52b87a92e5c4c3ec9e7f2",
+    "historical_scorer": "92353f531b63d8ded2bc957bb707685d5562e72f792bdff5b24d17c36f5c8785",
+    "historical_scoring_lock": "a6bee5ff7a3e10bdaabe55843894943ae27dc26a7765185599e5a8a86506a272",
+    "independent_clock_replay": "6ec6c2ae8ad575b659d568b00b18b60271eee8f8d2ad8ab14eef1878ab24e895",
+    "independent_recount": "6c0710357031bf4fc76cc2395da0883b897843e56f61865c529ec90b6c46c9ac",
+    "native_source_tables": "81d197ec4e8d10e4631b7da349bd1354d62ab9da9b3e9664dc21e500fdd7ba96",
+    "sealed_comparison": "8a637d625379554167424fbd1cd42176e2dffc595118680691d86575ee1a94e3",
+    "serving_binding": "626c4cc4f2cd71c7e1b961f4d566165a6ea69f5cca2604ddb9cc90b13c82e989",
+    "serving_context": "aea5ee54390d3c491628572736c5f08b4aa6edf5b7568261ffd0c4299e4c58d7",
+    "serving_measurement": "a24689443bb16e75f0be35217559243aa26efb993a362c9602b628916de851cd",
+    "serving_replay_journal": "abf61f645067d04766746c90bd08d07a0ead195be1e1ad4af3439f74b029935f",
+    "source_intake": "efee30689f9f665e8908c3959e575273218c4939df8dc0a10b66d8c0ed2beba2",
+    "source_selection": "8d1755aaeb62ea663717043bd227cd7357abe812c6e82fdcc3abe2bd566fcb9e"
+  },
+  "basis_order": [
+    "incumbent",
+    "fine_tiles",
+    "off_face_motion"
+  ],
+  "combined_selection": [
+    "incumbent",
+    "off_face_motion",
+    "fine_tiles"
+  ],
+  "locked_operating_point_hex": "0x1.5375102af905ap-3",
+  "native_delivery_clocks_verified": 54,
+  "recording_groups": [
+    {
+      "cases": [
+        [
+          "authentic",
+          null,
+          [
+            null,
+            [
+              79,
+              "-0x1.7680ce24435eep-7"
+            ],
+            [
+              79,
+              "-0x1.7680ce24435eep-7"
+            ]
+          ],
+          null,
+          null,
+          null,
+          1.577831
+        ],
+        [
+          "same_source_jump",
+          null,
+          [
+            null,
+            [
+              79,
+              "-0x1.5d00566714e21p-7"
+            ],
+            [
+              79,
+              "-0x1.5d00566714e21p-7"
+            ]
+          ],
+          null,
+          null,
+          null,
+          1.567622
+        ],
+        [
+          "exposure_step",
+          null,
+          [
+            null,
+            [
+              33,
+              "-0x1.fc35d7389cbacp-8"
+            ],
+            [
+              33,
+              "-0x1.fc35d7389cbacp-8"
+            ]
+          ],
+          null,
+          null,
+          null,
+          1.559949
+        ],
+        [
+          "focus_step",
+          null,
+          [
+            null,
+            [
+              34,
+              "-0x1.8a77b95b3c220p-8"
+            ],
+            [
+              34,
+              "-0x1.8a77b95b3c220p-8"
+            ]
+          ],
+          null,
+          null,
+          null,
+          1.64681
+        ],
+        [
+          "similar_background_cut",
+          null,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.44557
+        ],
+        [
+          "prefix",
+          34,
+          [
+            null,
+            [
+              34,
+              "0x1.0f2a223d6c9d1p-1"
+            ],
+            null
+          ],
+          34,
+          "fine_tiles",
+          [
+            33,
+            34,
+            45
+          ],
+          1.825487
+        ],
+        [
+          "suffix",
+          34,
+          [
+            null,
+            [
+              34,
+              "0x1.227d81be8f250p-1"
+            ],
+            null
+          ],
+          34,
+          "fine_tiles",
+          [
+            33,
+            34,
+            45
+          ],
+          2.020574
+        ],
+        [
+          "prefix",
+          34,
+          [
+            null,
+            [
+              34,
+              "0x1.8c916e26fa14ep-1"
+            ],
+            null
+          ],
+          34,
+          "fine_tiles",
+          [
+            33,
+            34,
+            45
+          ],
+          1.839521
+        ],
+        [
+          "suffix",
+          34,
+          [
+            null,
+            [
+              34,
+              "0x1.91022e13cac95p-1"
+            ],
+            null
+          ],
+          34,
+          "fine_tiles",
+          [
+            33,
+            34,
+            45
+          ],
+          1.899837
+        ]
+      ],
+      "profile": "crop160"
+    },
+    {
+      "cases": [
+        [
+          "authentic",
+          null,
+          [
+            null,
+            [
+              42,
+              "-0x1.ab6de56959688p-6"
+            ],
+            [
+              32,
+              "-0x1.6f72bf0f49f4fp-8"
+            ]
+          ],
+          null,
+          null,
+          null,
+          1.757154
+        ],
+        [
+          "same_source_jump",
+          null,
+          [
+            null,
+            null,
+            [
+              30,
+              "-0x1.a9b952d8a6301p-7"
+            ]
+          ],
+          null,
+          null,
+          null,
+          1.741833
+        ],
+        [
+          "exposure_step",
+          null,
+          [
+            [
+              42,
+              "-0x1.309da1e6f00eap-6"
+            ],
+            [
+              33,
+              "-0x1.5a90c9802af77p-8"
+            ],
+            [
+              30,
+              "-0x1.52fda8e2b7c5bp-8"
+            ]
+          ],
+          null,
+          null,
+          null,
+          1.868562
+        ],
+        [
+          "focus_step",
+          null,
+          [
+            null,
+            [
+              42,
+              "-0x1.302f67f78b117p-6"
+            ],
+            [
+              32,
+              "-0x1.2ec3572d38726p-7"
+            ]
+          ],
+          null,
+          null,
+          null,
+          1.769455
+        ],
+        [
+          "similar_background_cut",
+          null,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.34675
+        ],
+        [
+          "prefix",
+          34,
+          [
+            null,
+            null,
+            [
+              34,
+              "0x1.289915b2912ebp-1"
+            ]
+          ],
+          34,
+          "off_face_motion",
+          [
+            33,
+            34,
+            45
+          ],
+          1.694338
+        ],
+        [
+          "suffix",
+          34,
+          [
+            null,
+            null,
+            [
+              34,
+              "0x1.4579118631aa4p-1"
+            ]
+          ],
+          34,
+          "off_face_motion",
+          [
+            33,
+            34,
+            45
+          ],
+          1.692536
+        ],
+        [
+          "prefix",
+          34,
+          [
+            null,
+            null,
+            [
+              34,
+              "0x1.49f0488588733p-1"
+            ]
+          ],
+          34,
+          "off_face_motion",
+          [
+            33,
+            34,
+            45
+          ],
+          1.713785
+        ],
+        [
+          "suffix",
+          34,
+          [
+            null,
+            [
+              34,
+              "0x1.64fa924f44d92p-1"
+            ],
+            [
+              34,
+              "0x1.64fa924f44d92p-1"
+            ]
+          ],
+          34,
+          "off_face_motion",
+          [
+            33,
+            34,
+            45
+          ],
+          1.70019
+        ]
+      ],
+      "profile": "crop160"
+    },
+    {
+      "cases": [
+        [
+          "authentic",
+          null,
+          [
+            null,
+            [
+              77,
+              "-0x1.fca4fd6125701p-7"
+            ],
+            [
+              77,
+              "-0x1.fca4fd6125701p-7"
+            ]
+          ],
+          null,
+          null,
+          null,
+          1.640989
+        ],
+        [
+          "same_source_jump",
+          null,
+          [
+            null,
+            [
+              26,
+              "-0x1.0a0f7dcc5e92ep-6"
+            ],
+            [
+              26,
+              "-0x1.0a0f7dcc5e92ep-6"
+            ]
+          ],
+          null,
+          null,
+          null,
+          1.754484
+        ],
+        [
+          "exposure_step",
+          null,
+          [
+            null,
+            [
+              76,
+              "-0x1.636a7dcd35527p-7"
+            ],
+            [
+              76,
+              "-0x1.636a7dcd35527p-7"
+            ]
+          ],
+          null,
+          null,
+          null,
+          2.370571
+        ],
+        [
+          "focus_step",
+          null,
+          [
+            null,
+            [
+              32,
+              "-0x1.f48bdcdc53416p-7"
+            ],
+            [
+              32,
+              "-0x1.f48bdcdc53416p-7"
+            ]
+          ],
+          null,
+          null,
+          null,
+          1.982771
+        ],
+        [
+          "similar_background_cut",
+          null,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.489798
+        ],
+        [
+          "prefix",
+          34,
+          [
+            null,
+            [
+              34,
+              "0x1.7d5fe4f596225p-1"
+            ],
+            null
+          ],
+          34,
+          "fine_tiles",
+          [
+            33,
+            34,
+            45
+          ],
+          2.026067
+        ],
+        [
+          "suffix",
+          34,
+          [
+            null,
+            [
+              34,
+              "0x1.87db049df4723p-1"
+            ],
+            null
+          ],
+          34,
+          "fine_tiles",
+          [
+            33,
+            34,
+            45
+          ],
+          1.76724
+        ],
+        [
+          "prefix",
+          34,
+          [
+            null,
+            [
+              34,
+              "0x1.53d21b85057cbp-1"
+            ],
+            null
+          ],
+          34,
+          "fine_tiles",
+          [
+            33,
+            34,
+            45
+          ],
+          1.747246
+        ],
+        [
+          "suffix",
+          34,
+          [
+            null,
+            [
+              34,
+              "0x1.650049a6e80bcp-1"
+            ],
+            null
+          ],
+          34,
+          "fine_tiles",
+          [
+            33,
+            34,
+            45
+          ],
+          1.819998
+        ]
+      ],
+      "profile": "crop160"
+    },
+    {
+      "cases": [
+        [
+          "authentic",
+          null,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.545714
+        ],
+        [
+          "same_source_jump",
+          null,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.40166
+        ],
+        [
+          "exposure_step",
+          null,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.358572
+        ],
+        [
+          "focus_step",
+          null,
+          [
+            [
+              76,
+              "-0x1.145858a06ee4bp-5"
+            ],
+            [
+              76,
+              "-0x1.145858a06ee4bp-5"
+            ],
+            [
+              76,
+              "-0x1.145858a06ee4bp-5"
+            ]
+          ],
+          null,
+          null,
+          null,
+          1.81218
+        ],
+        [
+          "similar_background_cut",
+          null,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.368081
+        ],
+        [
+          "prefix",
+          34,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.388698
+        ],
+        [
+          "suffix",
+          34,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.373431
+        ],
+        [
+          "prefix",
+          34,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.393725
+        ],
+        [
+          "suffix",
+          34,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.364675
+        ]
+      ],
+      "profile": "crop135"
+    },
+    {
+      "cases": [
+        [
+          "authentic",
+          null,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.787848
+        ],
+        [
+          "same_source_jump",
+          null,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.78963
+        ],
+        [
+          "exposure_step",
+          null,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.790757
+        ],
+        [
+          "focus_step",
+          null,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.780359
+        ],
+        [
+          "similar_background_cut",
+          null,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.383675
+        ],
+        [
+          "prefix",
+          34,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.777387
+        ],
+        [
+          "suffix",
+          34,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.81446
+        ],
+        [
+          "prefix",
+          34,
+          [
+            null,
+            [
+              34,
+              "-0x1.266ac53d2dd54p-6"
+            ],
+            null
+          ],
+          null,
+          null,
+          null,
+          2.406354
+        ],
+        [
+          "suffix",
+          34,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.857409
+        ]
+      ],
+      "profile": "crop135"
+    },
+    {
+      "cases": [
+        [
+          "authentic",
+          null,
+          [
+            [
+              25,
+              "-0x1.4f856f1dcda3fp-5"
+            ],
+            [
+              51,
+              "-0x1.3294a4003eae0p-5"
+            ],
+            [
+              25,
+              "-0x1.4f856f1dcda3fp-5"
+            ]
+          ],
+          null,
+          null,
+          null,
+          2.036667
+        ],
+        [
+          "same_source_jump",
+          null,
+          [
+            [
+              23,
+              "-0x1.3d9e0b1861f69p-5"
+            ],
+            [
+              23,
+              "-0x1.3d9e0b1861f69p-5"
+            ],
+            [
+              23,
+              "-0x1.3d9e0b1861f69p-5"
+            ]
+          ],
+          null,
+          null,
+          null,
+          2.027207
+        ],
+        [
+          "exposure_step",
+          null,
+          [
+            [
+              51,
+              "-0x1.f99753a1c6417p-6"
+            ],
+            [
+              51,
+              "-0x1.f99753a1c6417p-6"
+            ],
+            [
+              51,
+              "-0x1.f99753a1c6417p-6"
+            ]
+          ],
+          null,
+          null,
+          null,
+          1.809234
+        ],
+        [
+          "focus_step",
+          null,
+          [
+            [
+              26,
+              "-0x1.2b429d783a3d3p-5"
+            ],
+            [
+              27,
+              "-0x1.0fb9c31e92003p-5"
+            ],
+            [
+              26,
+              "-0x1.2b429d783a3d3p-5"
+            ]
+          ],
+          null,
+          null,
+          null,
+          1.946337
+        ],
+        [
+          "similar_background_cut",
+          null,
+          [
+            null,
+            null,
+            null
+          ],
+          null,
+          null,
+          null,
+          1.355111
+        ],
+        [
+          "prefix",
+          34,
+          [
+            null,
+            [
+              34,
+              "0x1.01b9bc9388775p-1"
+            ],
+            null
+          ],
+          34,
+          "fine_tiles",
+          [
+            33,
+            34,
+            45
+          ],
+          2.014903
+        ],
+        [
+          "suffix",
+          34,
+          [
+            [
+              26,
+              "-0x1.0ce4fbfecfba8p-1"
+            ],
+            [
+              34,
+              "0x1.f41532d34d2acp-2"
+            ],
+            [
+              26,
+              "-0x1.0ce4fbfecfba8p-1"
+            ]
+          ],
+          34,
+          "fine_tiles",
+          [
+            33,
+            34,
+            45
+          ],
+          2.076933
+        ],
+        [
+          "prefix",
+          34,
+          [
+            null,
+            [
+              34,
+              "0x1.4ac4fe102a896p-1"
+            ],
+            null
+          ],
+          34,
+          "fine_tiles",
+          [
+            33,
+            34,
+            45
+          ],
+          1.993417
+        ],
+        [
+          "suffix",
+          34,
+          [
+            null,
+            [
+              34,
+              "0x1.49e246ba2c3edp-1"
+            ],
+            null
+          ],
+          34,
+          "fine_tiles",
+          [
+            33,
+            34,
+            45
+          ],
+          1.966401
+        ]
+      ],
+      "profile": "crop135"
+    }
+  ],
+  "results": {
+    "all": {
+      "fine_tiles": {
+        "localized_exact_frame": 13,
+        "localized_groups": 4,
+        "localized_within_one_frame": 13,
+        "mislocalized_edits": 0,
+        "missed_edits": 11,
+        "ordinary_alert_groups": 0,
+        "ordinary_alerts": 0,
+        "ordinary_cut_alerts": 0
+      },
+      "incumbent": {
+        "localized_exact_frame": 0,
+        "localized_groups": 0,
+        "localized_within_one_frame": 0,
+        "mislocalized_edits": 0,
+        "missed_edits": 24,
+        "ordinary_alert_groups": 0,
+        "ordinary_alerts": 0,
+        "ordinary_cut_alerts": 0
+      },
+      "off_face_motion": {
+        "localized_exact_frame": 4,
+        "localized_groups": 1,
+        "localized_within_one_frame": 4,
+        "mislocalized_edits": 0,
+        "missed_edits": 20,
+        "ordinary_alert_groups": 0,
+        "ordinary_alerts": 0,
+        "ordinary_cut_alerts": 0
+      },
+      "off_face_motion_then_fine": {
+        "localized_exact_frame": 16,
+        "localized_groups": 4,
+        "localized_within_one_frame": 16,
+        "mislocalized_edits": 0,
+        "missed_edits": 8,
+        "ordinary_alert_groups": 0,
+        "ordinary_alerts": 0,
+        "ordinary_cut_alerts": 0
+      }
+    },
+    "crop135": {
+      "fine_tiles": {
+        "localized_exact_frame": 4,
+        "localized_groups": 1,
+        "localized_within_one_frame": 4,
+        "mislocalized_edits": 0,
+        "missed_edits": 8,
+        "ordinary_alert_groups": 0,
+        "ordinary_alerts": 0,
+        "ordinary_cut_alerts": 0
+      },
+      "incumbent": {
+        "localized_exact_frame": 0,
+        "localized_groups": 0,
+        "localized_within_one_frame": 0,
+        "mislocalized_edits": 0,
+        "missed_edits": 12,
+        "ordinary_alert_groups": 0,
+        "ordinary_alerts": 0,
+        "ordinary_cut_alerts": 0
+      },
+      "off_face_motion": {
+        "localized_exact_frame": 0,
+        "localized_groups": 0,
+        "localized_within_one_frame": 0,
+        "mislocalized_edits": 0,
+        "missed_edits": 12,
+        "ordinary_alert_groups": 0,
+        "ordinary_alerts": 0,
+        "ordinary_cut_alerts": 0
+      },
+      "off_face_motion_then_fine": {
+        "localized_exact_frame": 4,
+        "localized_groups": 1,
+        "localized_within_one_frame": 4,
+        "mislocalized_edits": 0,
+        "missed_edits": 8,
+        "ordinary_alert_groups": 0,
+        "ordinary_alerts": 0,
+        "ordinary_cut_alerts": 0
+      }
+    },
+    "crop160": {
+      "fine_tiles": {
+        "localized_exact_frame": 9,
+        "localized_groups": 3,
+        "localized_within_one_frame": 9,
+        "mislocalized_edits": 0,
+        "missed_edits": 3,
+        "ordinary_alert_groups": 0,
+        "ordinary_alerts": 0,
+        "ordinary_cut_alerts": 0
+      },
+      "incumbent": {
+        "localized_exact_frame": 0,
+        "localized_groups": 0,
+        "localized_within_one_frame": 0,
+        "mislocalized_edits": 0,
+        "missed_edits": 12,
+        "ordinary_alert_groups": 0,
+        "ordinary_alerts": 0,
+        "ordinary_cut_alerts": 0
+      },
+      "off_face_motion": {
+        "localized_exact_frame": 4,
+        "localized_groups": 1,
+        "localized_within_one_frame": 4,
+        "mislocalized_edits": 0,
+        "missed_edits": 8,
+        "ordinary_alert_groups": 0,
+        "ordinary_alerts": 0,
+        "ordinary_cut_alerts": 0
+      },
+      "off_face_motion_then_fine": {
+        "localized_exact_frame": 12,
+        "localized_groups": 3,
+        "localized_within_one_frame": 12,
+        "mislocalized_edits": 0,
+        "missed_edits": 0,
+        "ordinary_alert_groups": 0,
+        "ordinary_alerts": 0,
+        "ordinary_cut_alerts": 0
+      }
+    }
+  },
+  "row_fields": [
+    "role",
+    "reference_frame",
+    "readings_by_basis_each_frame_and_score_hex",
+    "serving_frame",
+    "serving_basis",
+    "before_transition_after_frames",
+    "serving_seconds"
+  ],
+  "schema": "chipmunk.video-face-sparse-transition-confirmation/1",
+  "scope": {
+    "attribution": "The archived publisher declares CC BY-SA 4.0 for the face-swap corpus. The local replay redistributes no media.",
+    "delivery": "H.264 640×360, 25 frames/s, 100 native pictures; one direct encode per case",
+    "freshness": "No repeated capture keys, publisher donor keys or exact source digests in the previous scored sparse study. These recordings had a prior native framing eligibility screen only. Participants may overlap.",
+    "known_edit": "One source-clock boundary switching between an archived publisher swap and the ordinary recording",
+    "labels": "Negative controls represent unchanged capture and controlled ordinary jump, exposure, focus and cut derivatives.",
+    "selection": "Six new paired source groups from 13 screened, three each in two fixed crops. Each selected the first authorized edit at picture 34. All cuts use other ordinary recordings in the same crop arm."
+  },
+  "serving_replay": {
+    "budget_seconds": 12.0,
+    "coverage": {
+      "localized": 16,
+      "no_match": 18,
+      "unavailable": 20
+    },
+    "exact_localizations": 16,
+    "localized_arms": {
+      "fine_tiles": 12,
+      "off_face_motion": 4
+    },
+    "longest_probe_seconds": 0.238281,
+    "measurement_seconds": {
+      "max": 2.406354,
+      "median": 1.768347,
+      "min": 1.34675
+    },
+    "native_source_witnesses_checked": 48,
+    "ordinary_alerts": 0,
+    "rows": 54,
+    "same_predictions": 54,
+    "unavailable_reasons": {
+      "insufficient_face_context": 7,
+      "insufficient_native_boundary": 7,
+      "shot_change": 6
+    },
+    "within_12_seconds": 54,
+    "worktree_code_stable_during_run": true,
+    "wrong_edit_locations": 0
+  },
+  "tolerance_native_frames": 1
+}

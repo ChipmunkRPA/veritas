@@ -162,6 +162,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         : transitionReview.reason === 'provenance' ? 'Verified source credentials determined the analysis path.'
         : transitionReview.reason === 'insufficient_face_context' ? 'The face views and surrounding picture did not support a stable comparison.'
         : transitionReview.reason === 'insufficient_native_boundary' ? 'The nearby source frames did not establish a precise transition.'
+        : transitionReview.reason === 'conflicting_boundary_context' ? 'The background checks pointed to different source frames, so this check did not display a transition.'
         : 'The face transition check was unavailable for this upload.'}</p>
       {transitionReview.frames_scanned > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">
         The check read {transitionReview.frames_scanned} native pictures for shot changes and measured {transitionReview.measured_face_frames} usable face views.

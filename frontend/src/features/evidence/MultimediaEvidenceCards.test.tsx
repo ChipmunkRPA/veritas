@@ -1037,6 +1037,55 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText(/Selected frame 8 · source 12\.000 s · player 2\.000 s/)).toBeTruthy()
   })
 
+  it('links the measured eye region to source frames, crops, and the original clock', () => {
+    const set = structuredClone(video)
+    set.picture_hold = { status: 'no_match', frames_scanned: 60, frame_limit: 60, last_frame_index: 59,
+      last_stream_time_s: 59 / 30, last_pts: 59, time_base: '1/30', reason: null, packet_id: null,
+      eye_local_hold: { schema: 'chipmunk.video-eye-local-hold/1', status: 'matched', frames_scanned: 60,
+        packet_id: 'VPH03', affects_overall_confidence: false } }
+    const item = set.packets[0]
+    item.id = 'VPH03'
+    item.title = 'Eye-region picture hold'
+    item.claim_scope = 'sampled_window'
+    item.eye_local_hold = { frames: [16, 32], anchors: [15, 24, 32], box: [120, 96, 44, 28] }
+    item.window = { frame_indices: Array.from({ length: 16 }, (_, i) => 16 + i), start_pts: 16, end_pts: 32,
+      time_base: '1/30', start_stream_s: 16 / 30, end_stream_s: 32 / 30, start_playback_s: 16 / 30, end_playback_s: 32 / 30 }
+    item.frames = (['before', 'during', 'after'] as const).map((interval_role, i) => {
+      const frame_index = [15, 24, 32][i]
+      return { ...item.frames[0], id: `VPH03.${i + 1}`, interval_role, score: null, is_peak: false,
+        anchor: { frame_index, pts: frame_index, time_base: '1/30', stream_time_s: frame_index / 30, playback_time_s: frame_index / 30 } }
+    })
+    show(set)
+    const overview = within(screen.getByRole('region', { name: 'Eye-region picture hold' }))
+    expect(overview.getByRole('link', { name: 'Inspect the measured eye-region hold' }).getAttribute('href')).toBe('#media-evidence-VPH03')
+    expect(overview.getByText(/Checked 60 verified source frames.*zero AI confidence weight/)).toBeTruthy()
+    const detail = within(screen.getByRole('article'))
+    expect(detail.getByText('0.533 s–1.067 s')).toBeTruthy()
+    expect(detail.getByText(/The end is exclusive\. Source frames 16–31/)).toBeTruthy()
+    expect(detail.getByText('Source PTS [16, 32) at 1/30. Measured crop: x 120, y 96, 44 × 28 pixels.')).toBeTruthy()
+    for (const role of ['before', 'during', 'after']) expect(detail.getByText(new RegExp(`${role} hold range`))).toBeTruthy()
+    expect(detail.getAllByAltText(/exact original video frame/)).toHaveLength(3)
+    expect(detail.getAllByAltText(/exact measured eye region/)).toHaveLength(3)
+    expect(detail.queryByAltText(/source face crop for context/)).toBeNull()
+  })
+
+  it.each([
+    ['outside_scope', 0, 'This upload falls outside the supported video profile for this check.'],
+    ['no_stable_face', 60, 'The check could not track a stable eye region in the checked frames.'],
+    ['no_match', 60, 'No qualifying eye-region hold was found in the checked frames.'],
+  ] as const)('states eye-region coverage for %s without offering a finding', (status, frames_scanned, message) => {
+    const set = structuredClone(video)
+    set.picture_hold = { status: 'no_match', frames_scanned: 60, frame_limit: 60, last_frame_index: 59,
+      last_stream_time_s: 59 / 30, last_pts: 59, time_base: '1/30', reason: null, packet_id: null,
+      eye_local_hold: { schema: 'chipmunk.video-eye-local-hold/1', status, frames_scanned, packet_id: null, affects_overall_confidence: false } }
+    show(set)
+    const overview = within(screen.getByRole('region', { name: 'Eye-region picture hold' }))
+    expect(overview.getByText(message)).toBeTruthy()
+    expect(overview.getByText(/480 × 360 H\.264 MP4 at 30 fps/)).toBeTruthy()
+    expect(overview.queryByRole('link')).toBeNull()
+    expect(Boolean(overview.queryByText(/Checked 60 verified source frames/))).toBe(frames_scanned > 0)
+  })
+
   it.each([
     ['no_match', 'No qualifying mouth-region hold was found in the checked frames.'],
     ['no_stable_face', 'A stable mouth region could not be tracked in the checked frames.'],

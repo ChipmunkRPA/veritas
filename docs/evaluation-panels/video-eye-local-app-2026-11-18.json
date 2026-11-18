@@ -1,0 +1,159 @@
+{
+  "assessment_and_fusion_unchanged": true,
+  "browser": {
+    "cases": [
+      {
+        "decoded_crops": 3,
+        "decoded_originals": 3,
+        "evidence_visible": true,
+        "name": "positive",
+        "native_seek_times_s": [
+          0.5,
+          0.8,
+          1.066667
+        ],
+        "status": "matched"
+      },
+      {
+        "evidence_visible": false,
+        "name": "ordinary",
+        "status": "no_match"
+      },
+      {
+        "evidence_visible": false,
+        "name": "jump",
+        "status": "no_match"
+      },
+      {
+        "evidence_visible": false,
+        "name": "out-of-scope",
+        "status": "outside_scope"
+      },
+      {
+        "evidence_visible": false,
+        "name": "disabled",
+        "status": "disabled"
+      }
+    ],
+    "page_errors": 0
+  },
+  "cases": [
+    {
+      "case": "positive",
+      "evidence_frames": [
+        {
+          "index": 15,
+          "pts": 15000,
+          "seek": 0.5
+        },
+        {
+          "index": 24,
+          "pts": 24000,
+          "seek": 0.8
+        },
+        {
+          "index": 32,
+          "pts": 32000,
+          "seek": 1.066667
+        }
+      ],
+      "matching_pdf_plates": 6,
+      "measured_frames": 60,
+      "recomputed_eye_region_measurements": true,
+      "rejected_other_original": true,
+      "reported_frame_range": [
+        16,
+        32
+      ],
+      "signed_original_replay": true,
+      "source_window": {
+        "end_playback_s": 1.066667,
+        "end_pts": 32000,
+        "end_stream_s": 1.066667,
+        "frame_indices": [
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32
+        ],
+        "start_playback_s": 0.533333,
+        "start_pts": 16000,
+        "start_stream_s": 0.533333,
+        "time_base": "1/30000"
+      },
+      "status": "matched"
+    },
+    {
+      "case": "ordinary",
+      "evidence_frames": [],
+      "matching_pdf_plates": 0,
+      "measured_frames": 60,
+      "recomputed_eye_region_measurements": false,
+      "rejected_other_original": false,
+      "reported_frame_range": null,
+      "signed_original_replay": true,
+      "source_window": null,
+      "status": "no_match"
+    },
+    {
+      "case": "jump",
+      "evidence_frames": [],
+      "matching_pdf_plates": 0,
+      "measured_frames": 60,
+      "recomputed_eye_region_measurements": false,
+      "rejected_other_original": false,
+      "reported_frame_range": null,
+      "signed_original_replay": true,
+      "source_window": null,
+      "status": "no_match"
+    },
+    {
+      "case": "out-of-scope",
+      "evidence_frames": [],
+      "matching_pdf_plates": 0,
+      "measured_frames": 0,
+      "recomputed_eye_region_measurements": false,
+      "rejected_other_original": false,
+      "reported_frame_range": null,
+      "signed_original_replay": true,
+      "source_window": null,
+      "status": "outside_scope"
+    },
+    {
+      "case": "disabled",
+      "evidence_frames": [],
+      "matching_pdf_plates": 0,
+      "measured_frames": 0,
+      "recomputed_eye_region_measurements": false,
+      "rejected_other_original": false,
+      "reported_frame_range": null,
+      "signed_original_replay": true,
+      "source_window": null,
+      "status": "disabled"
+    }
+  ],
+  "completed_paid_jobs": 5,
+  "schema": "chipmunk.eye-local-hold-app-smoke/1",
+  "simulated_payment_usd_cents": 999,
+  "unpaid_jobs": 0,
+  "worker_only": false,
+  "scoring_replay": {
+    "deliveries": 210,
+    "recomputed_matches": 42,
+    "different_decisions": 0
+  }
+}

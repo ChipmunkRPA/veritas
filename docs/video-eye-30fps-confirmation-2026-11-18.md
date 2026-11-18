@@ -68,6 +68,36 @@ regions. These staged changes use earlier pixels from the same recording.
 Accuracy on smoothly redrawn eyes and AI authorship remain outside this
 measurement.
 
+## Local application
+
+`VERITAS_VIDEO_EYE_LOCAL_HOLD_REVIEW=true` enables the observation in a
+development instance. The app verifies 60 consecutive native timestamps on
+an exact 30 fps clock and requires upright 480 × 360 H.264 4:2:0 MP4 video.
+It distinguishes an input outside that scope, unavailable measurement, an
+unstable face, and an assessed input without a match. The overall confidence
+does not use this observation.
+
+For a match, the evidence view and Standard PDF identify the source clock
+range, measured crop and original frames from before, during and after the
+hold. The JSON and signed package retain the same data. Original-file
+verification checks all 60 decoded RGB hashes and timestamps, the six
+exported images, and the recorded texture and motion measurements. Positive
+measurement verification uses the native pixels and requires no face weights.
+The source ranges identify unusual stability in the measured eye region.
+Ordinary motion, compression and editing can produce similar measurements.
+
+The application implementation reproduced all 210 predeclared decisions and
+all 42 selected measurements across the two banks. Three of those matches
+were ordinary controls. Five local app cases exercised simulated USD 9.99
+checkout, with zero jobs before payment. Chromium displayed the three source
+frames and matching crops in the staged hold. In that case, frame 15 served
+as context before the measured range `[16, 32)`, and frame 32 served as the
+first picture after it. All five signed exports verified against their
+original files. The untouched clip and the ordinary jump produced no flag,
+and the 25 fps control was outside scope. Turning the check on for the same
+upload preserved its assessment and confidence inputs.
+[Local worker, Chromium, and export receipt](evaluation-panels/video-eye-local-app-2026-11-18.json)
+
 ## Portable replay
 
 The numeric receipt contains anonymous group numbers, exact clock offsets,

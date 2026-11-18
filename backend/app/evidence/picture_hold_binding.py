@@ -7,7 +7,7 @@ from collections.abc import Callable, Sequence
 from fractions import Fraction
 
 from app.core.canonical import canonical_hash
-from app.evidence import mouth_local_hold_binding, picture_sequence
+from app.evidence import eye_local_hold_binding, mouth_local_hold_binding, picture_sequence
 from app.evidence.video_packet_versions import PICTURE_HOLD_VERSIONS
 
 METHOD = "exact-native-picture-hold/1"
@@ -139,6 +139,7 @@ def validate(document: dict) -> None:
     """Validate signed evidence structure without media, models or application services."""
     picture_sequence.validate(document.get("picture_hold") or {}, document)
     mouth_local_hold_binding.validate(document.get("picture_hold") or {}, document)
+    eye_local_hold_binding.validate(document.get("picture_hold") or {}, document)
     packets = [p for p in document["packets"] if p.get("id") == PACKET_ID or "picture_hold" in p
                or p.get("claim_scope") == "consecutive_frames" or p.get("semantics") == METHOD]
     source = document["source"]
@@ -215,6 +216,7 @@ def validate_source_clock(document: dict, table_pts: Sequence[int], interpolated
     for key, _, _ in picture_sequence.MOTION_REVIEWS:
         picture_sequence.validate_clock(cover.get(key), table_pts, interpolated, tb=tb)
     mouth_local_hold_binding.validate_clock(cover.get("mouth_local_hold"), table_pts, interpolated)
+    eye_local_hold_binding.validate_clock(cover.get(eye_local_hold_binding.KEY), table_pts, interpolated)
     if "continuity_breaks" in cover:
         source = document["source"]
         expected = extended_frame_limit(table_pts, tb, source["width"], source["height"])

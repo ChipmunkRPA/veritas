@@ -11,7 +11,7 @@ from subprocess import TimeoutExpired
 from app.detectors.video import picture_motion
 from app.detectors.video.decode import DecodeError, FrameTable, decode_frames
 from app.detectors.video.face_return import source_carrier
-from app.evidence import mouth_local_hold_binding, picture_sequence
+from app.evidence import eye_local_hold_binding, mouth_local_hold_binding, picture_sequence
 from app.evidence import picture_hold_binding as binding
 
 DECODE_TIMEOUT_S = 8.0
@@ -21,7 +21,8 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
             remaining_s: float | None = None, sequence_review: bool = False,
             motion_encoding: tuple[str | None, str | None] | None = None, mouth_review: bool = False,
             retimed_review: bool = False, reflected_review: bool = False, cropped_review: bool = False,
-            fractional_retimed_review: bool = False, reversed_cropped_review: bool = False) -> dict:
+            fractional_retimed_review: bool = False, reversed_cropped_review: bool = False,
+            eye_review: bool = False) -> dict:
     """Try an extended native scan under the same deadline, retaining a completed opening result."""
     opening_limit = binding.frame_limit(len(table), table.width, table.height)
     tb = table.tb
@@ -40,6 +41,8 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
         mouth_profile = None
     mouth_count = mouth_local_hold_binding.SCOPES[mouth_profile][0] if mouth_profile else 0
     mouth_frames = []
+    eye_eligible = eye_review and eye_local_hold_binding.eligible(table, motion_encoding, source_carrier(path))
+    eye_frames = []
     motion_profile = picture_motion.profile(table, motion_encoding) if sequence_review else None
     extended_profile = (picture_motion.profile(table, motion_encoding, schema=picture_sequence.MOTION_EXTENDED_SCHEMA)
                         if motion_profile is not None else None)
@@ -59,7 +62,10 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
     started = time.monotonic()
     timeout = DECODE_TIMEOUT_S if remaining_s is None else min(DECODE_TIMEOUT_S, remaining_s - 1.0)
     if timeout < 0.5 and limit:
-        return {"coverage": binding.coverage("unavailable", binding.INCOMPLETE, table.time_base, limit=opening_limit), "match": None}
+        cover = binding.coverage("unavailable", binding.INCOMPLETE, table.time_base, limit=opening_limit)
+        if eye_review:
+            cover[eye_local_hold_binding.KEY] = eye_local_hold_binding.record("unavailable" if eye_eligible else "outside_scope")
+        return {"coverage": cover, "match": None}
     try:
         with closing(decode_frames(path, table, range(limit), check=check, timeout_s=timeout)) as frames:
             for frame in frames:
@@ -80,10 +86,12 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                     elapsed = point - table.pts[equal_start]
                     if elapsed * tb >= binding.MIN_SPAN and (best is None or elapsed > best[1] - table.pts[best[0]]):
                         best = equal_start, point, frame.index, digest
-                if sequence_review:
+                if sequence_review or eye_eligible:
                     observed.append((point, digest))
                 if frame.index < mouth_count:
                     mouth_frames.append(frame.rgb)
+                if eye_eligible:
+                    eye_frames.append(frame.rgb)
                 if frame.index < descriptor_limit:
                     descriptors.append(descriptor(frame.rgb))
                 if frame.index < crop_limit:
@@ -181,6 +189,16 @@ def inspect(path: Path, table: FrameTable, *, origin: float | None, check: Calla
                     crop = picture_motion.scan(observed[:crop_limit], crop_frames, tb, motion_encoding, None,
                                                source_profile=reverse_profile, schema=reverse_schema)
             cover[picture_sequence.MOTION_CROP_KEY] = crop
+    if eye_review:
+        key = eye_local_hold_binding.KEY
+        cover[key] = eye_local_hold_binding.record("unavailable" if eye_eligible else "outside_scope")
+        available = 3.0 if remaining_s is None else min(3.0, remaining_s - (time.monotonic() - started) - 1.0)
+        if (eye_eligible and len(eye_frames) == eye_local_hold_binding.FRAME_COUNT and available > 0
+                and all(point == pts for (point, _), pts in zip(observed, table.pts, strict=True))):
+            from app.detectors.video import eye_local_hold
+
+            cover[key] = eye_local_hold.record(eye_frames, table.pts, [digest for _, digest in observed],
+                                              budget_s=available, check=check)
     return result
 
 

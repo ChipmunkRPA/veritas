@@ -541,6 +541,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.face_portrait_return_binding',
                         'app.evidence.face_primary_track_binding',
                         'app.evidence.mouth_hold_sound', 'app.evidence.mouth_local_hold_binding', 'app.evidence.source_geometry',
+                        'app.evidence.eye_local_hold_binding',
                         'app.evidence.video_packet_versions', 'app.evidence.video_soundtrack_pair_binding',
                         'app.evidence.picture_hold_binding', 'app.evidence.picture_sequence',
                         'app.evidence.scene_return_binding', 'app.evidence.face_single_boundary_binding', 'app.evidence.sound_event_binding',
@@ -607,7 +608,8 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
                                  'video_lip_agreement.py',
                                  'video_viseme_articulation.py', 'video_viseme_stereo.py', 'video_silent_mouth.py',
                                  'picture_sequence.py', 'source_geometry.py', 'document_chat_markers.py', 'document_calendar.py',
-                                 'document_arithmetic.py', 'document_publication_ids.py', 'face_single_boundary_binding.py'])
+                                 'document_arithmetic.py', 'document_publication_ids.py', 'face_single_boundary_binding.py',
+                                 'eye_local_hold_binding.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
 
@@ -653,7 +655,7 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
     elif name in {'video_viseme_ranked.py', 'video_viseme_articulation.py'}:
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.evidence', 'video_viseme_timing')}
-    elif name == 'picture_sequence.py':
+    elif name in {'picture_sequence.py', 'eye_local_hold_binding.py'}:
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.core.canonical', 'canonical_hash'), ('app.evidence.source_geometry', 'pixel_bounds')}
     elif name == 'image_copy_affine_binding.py':

@@ -276,6 +276,7 @@ class Settings(BaseSettings):
     video_reference_comparison_enabled: bool = False  # Authenticated development-only comparison of a short earlier clip.
     video_soundtrack_pair_review: bool = False  # Compare two matching audio streams in one short video.
     video_mouth_hold_speech_context: bool = False  # Trial: measure speech activity at a verified mouth hold.
+    video_eye_local_hold_review: bool = False  # Trial: source-bound eye-region holds in exact short 30 fps MP4s.
     video_lip_timing_review: bool = False  # Local trial on short single-shot clips with exact source timing.
     video_speech_activity_gap_enhancer: Path | None = None  # Opt in to the short stereo review using the pinned local noise reducer.
     video_lip_timing_ranked: bool = False  # Add clipwise aperture timing on supported 16 kHz soundtracks.

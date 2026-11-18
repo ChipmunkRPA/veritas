@@ -32,6 +32,7 @@ from app.detectors.video.frames import probe as probe_container
 from app.detectors.video.lipsync import source_mouth_patch
 from app.detectors.video.shots import ShotDetector
 from app.evidence import (
+    eye_local_hold_binding,
     face_boundary_binding,
     face_local_return_binding,
     face_paired_edge_binding,
@@ -389,6 +390,15 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 or (local_mouth["schema"] == mouth_local_hold_binding.HD_SCHEMA and face_return.source_carrier(original) != "mp4")):
             raise ValueError("The original video differs from the mouth-region review profile")
         mouth_limit = local_mouth["frames_scanned"]
+    local_eye = hold.get(eye_local_hold_binding.KEY) or {}
+    eye_limit = local_eye.get("frames_scanned", 0)
+    if eye_limit:
+        delivery = delivery if delivery is not None else probe_container(original)
+        if not eye_local_hold_binding.eligible(
+            table, (delivery.get("codec"), delivery.get("pix_fmt")), face_return.source_carrier(original),
+        ):
+            raise ValueError("The original video differs from the eye-region review profile")
+    eye_match = local_eye.get("match")
     motion_encoding = None
     motion_limit = 0
     crop_limit = 0
@@ -417,7 +427,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 motion_descriptor = picture_motion.hd_descriptor
     extended = "continuity_breaks" in hold
     hold_frames = 0
-    if extended or sequence is not None or local_mouth is not None or motion_records:
+    if extended or sequence is not None or local_mouth is not None or eye_limit or motion_records:
         picture_hold_binding.validate_source_clock(evidence, table.pts, table.interpolated)
         hold_frames = hold["frames_scanned"]
     pictures, mouths, faces, scenes = defaultdict(list), defaultdict(list), defaultdict(list), defaultdict(list)
@@ -522,13 +532,14 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     elif guarded_records:
         raise ValueError("Guarded face evidence requires its dedicated version")
     reading_limit = max(hold_frames, motion_limit, crop_limit)
-    indices = set(pictures) | set(mouths) | set(faces) | set(scenes) | set(range(reading_limit)) | set(timing_frames)
+    indices = set(pictures) | set(mouths) | set(faces) | set(scenes) | set(range(max(reading_limit, eye_limit))) | set(timing_frames)
     if transition_shots is not None:
         indices.update(range(len(table)))
     hold_observations = []
     motion_descriptors = []
     crop_frames = []
     mouth_pictures = []
+    eye_pictures = []
     found = set()
     images = patches = alignments = 0
     with closing(decode_frames(original, table, sorted(indices))) as stream:
@@ -556,6 +567,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             if index < mouth_limit:
                 _frame_anchor(frame, local_mouth["pts"][index], local_mouth["frame_hashes"][index], "Mouth-region input", rgb_sha)
                 mouth_pictures.append(frame.rgb)
+            if index < eye_limit:
+                _frame_anchor(frame, local_eye["pts"][index], local_eye["frame_hashes"][index], "Eye-region input", rgb_sha)
+                if eye_match is not None:
+                    eye_pictures.append(frame.rgb)
             if index in pictures:
                 with Image.fromarray(frame.rgb) as image:
                     for packet, item in pictures[index]:
@@ -670,6 +685,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             for role, content in measured.items():
                 if hashlib.sha256(content).hexdigest() != packet["artifacts"][role]["sha256"]:
                     raise ValueError("The sound clip or waveform differs from the supplied soundtrack")
+    if eye_match is not None:
+        from app.detectors.video.eye_local_hold import verify_measurements as verify_eye_measurements
+
+        verify_eye_measurements(eye_pictures, eye_match)
     if lip_timing.get("inputs"):
         from app.detectors.audio.decode import VIDEO_AUDIO_MAX_SECONDS, decode_audio
         from app.detectors.video.viseme_review import audio_assets
@@ -788,6 +807,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             + (" Recomputed the surrounding-picture cut context and both native boundaries." if cut_records else "")
             + (f" Replayed every frame in the repeated-picture inspection ({hold_frames})." if hold_frames else "")
             + (" Recomputed the held mouth-region pixel measurements." if local_mouth and local_mouth["match"] else "")
+            + (" Recomputed the held eye-region pixel measurements." if eye_match is not None else
+               " Verified the eye-region input clock and pictures." if eye_limit else "")
             + (f" Verified the timing review's soundtrack and {len(timing_frames)} native mouth crops."
                if lip_timing.get("inputs") else "")
             + (" Recomputed the exact moving-sequence comparison." if sequence is not None else "")

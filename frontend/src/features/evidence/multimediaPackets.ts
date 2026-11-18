@@ -32,6 +32,7 @@ export interface VideoEvidencePacket extends PacketBase {
     start_stream_s: number; end_stream_s: number; start_playback_s: number | null; end_playback_s: number | null;
     span_s: number; frame_count: number; decoded_rgb_sha256: string; pts: number[] }
   mouth_local_hold?: { frames: [number, number]; box: [number, number, number, number] }
+  eye_local_hold?: { frames: [number, number]; anchors: [number, number, number]; box: [number, number, number, number] }
   lip_timing_review?: {
     audio_source_pts: [number, number]
     picture_source_samples: [number, number]
@@ -98,6 +99,9 @@ export interface VideoEvidenceSet extends SetBase {
     cropped_motion_sequence_review?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number }
     mouth_local_hold?: { status: 'matched' | 'no_match' | 'no_stable_face' | 'unavailable'; frames_scanned: number;
       packet_id: 'VPH02' | null; affects_overall_confidence: false; assessed_window_starts?: number[] }
+    eye_local_hold?: { schema: 'chipmunk.video-eye-local-hold/1';
+      status: 'matched' | 'no_match' | 'no_stable_face' | 'outside_scope' | 'unavailable'; frames_scanned: number;
+      packet_id: 'VPH03' | null; affects_overall_confidence: false }
     motion_sequence_review?: { status: 'matched' | 'no_match' | 'unavailable'; frames_scanned: number; parameters: { frame_rate: 20 | 25 }
       reason: 'source_clock' | 'exact_sequence' | null } }
   coverage?: { frame_count: number; scored_frame_count: number; window_frame_indices: number[]; window_check_count: number;

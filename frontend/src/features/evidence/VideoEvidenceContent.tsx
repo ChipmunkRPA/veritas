@@ -94,6 +94,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
   const transitionReview = set.coverage?.face_single_boundary_coverage
   const transition = set.packets.find(packet => packet.face_single_boundary)?.face_single_boundary
   const mouthHold = hold?.mouth_local_hold
+  const eyeHold = hold?.eye_local_hold
   const lipTiming = set.lip_timing_review
   const motion = hold?.motion_sequence_review
   const reverseMotion = hold?.reverse_motion_sequence_review
@@ -107,12 +108,12 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     <div className="mt-5 space-y-5">{frames.map((frame) => {
       const cut = packet.face_spatial_cut_frames?.some(item => item.id === frame.id)
       const crop = frame.artifact_refs.crop && packet.artifacts[frame.artifact_refs.crop]
-      const mouthCrop = (packet.mouth_local_hold || packet.lip_timing_review) && crop
+      const measuredRegion = crop && (packet.eye_local_hold ? 'eye' : (packet.mouth_local_hold || packet.lip_timing_review) ? 'mouth' : null)
       const mismatch = packet.lip_timing_review?.articulation || packet.lip_timing_review?.motion_sound_agreement
       const timingLabel = packet.lip_timing_review?.speech_activity_gap ? 'reduced speech activity'
         : packet.lip_timing_review?.silent_mouth ? 'near-silent' : mismatch ? 'mismatch' : 'timing'
       const rangeLabel = packet.scene_return ? 'picture change'
-        : `${cut ? 'picture-cut' : refined ? 'refined' : packet.mouth_local_hold ? 'hold' : packet.lip_timing_review ? timingLabel : packet.face_spatial_cut ? 'review' : 'flagged'} range`
+        : `${cut ? 'picture-cut' : refined ? 'refined' : packet.mouth_local_hold || packet.eye_local_hold ? 'hold' : packet.lip_timing_review ? timingLabel : packet.face_spatial_cut ? 'review' : 'flagged'} range`
       const sceneSupport = frame.interval_role === 'during' && packet.scene_return
         ? packet.scene_return.tiles : null
       const navigationKnown = frame.anchor.playback_time_s != null && Number.isFinite(frame.anchor.playback_time_s) && frame.anchor.playback_time_s >= 0
@@ -139,8 +140,8 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
             <figcaption className="mt-2 text-caption text-text-muted">Exact crop from the wider source frame.</figcaption>
           </figure>}
           {!packet.picture_hold && !packet.picture_sequence && !packet.scene_return && <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop || packet.artifacts[frame.artifact_refs.context]} token={token} ready={mediaReady}
-            alt={`${frame.id}: ${mouthCrop ? 'exact measured mouth region' : crop ? 'source face crop for context' : 'frame context with its recorded label'}`} />
-            <figcaption className="mt-2 text-caption text-text-muted">{mouthCrop ? 'Exact pixels of the measured mouth region.'
+            alt={`${frame.id}: ${measuredRegion ? `exact measured ${measuredRegion} region` : crop ? 'source face crop for context' : 'frame context with its recorded label'}`} />
+            <figcaption className="mt-2 text-caption text-text-muted">{measuredRegion ? `Exact pixels of the measured ${measuredRegion} region.`
               : packet.face_single_boundary ? 'Exact crop of the face from this source frame.'
               : crop ? 'Detected-face crop for inspection; not an edit boundary or the exact aligned classifier input.'
               : 'Source context with a navigation label; no local edit mask is available.'}</figcaption></figure>}
@@ -209,6 +210,20 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         Mouth geometry was measured in {mouthHold.assessed_window_starts.length} of 3 overlapping windows.
         {' '}Source frames {mouthHold.assessed_window_starts.map(start => `${start}–${start + 59}`).join(', ')}.
       </p>}
+    </section>}
+    {eyeHold && <section aria-labelledby="video-eye-local-hold-heading" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="video-eye-local-hold-heading" className="m-0 text-body font-medium">Eye-region picture hold</h3>
+      <p className="mt-2 mb-0 text-small">{eyeHold.status === 'matched' && eyeHold.packet_id
+        ? <a className="underline" href={`#media-evidence-${eyeHold.packet_id}`}>Inspect the measured eye-region hold</a>
+        : eyeHold.status === 'no_match' ? 'No qualifying eye-region hold was found in the checked frames.'
+        : eyeHold.status === 'no_stable_face' ? 'The check could not track a stable eye region in the checked frames.'
+        : eyeHold.status === 'outside_scope' ? 'This upload falls outside the supported video profile for this check.'
+        : 'The eye-region check was unavailable for this analysis.'}</p>
+      <p className="mt-2 mb-0 text-caption text-text-muted">
+        {eyeHold.frames_scanned > 0 && <>Checked {eyeHold.frames_scanned} verified source frames. </>}
+        This check covers two-second, upright 480 × 360 H.264 MP4 at 30 fps with 4:2:0 chroma and a verified frame clock.
+        {' '}Ordinary blur or re-encoding can produce a similar pattern. This check carries zero AI confidence weight.
+      </p>
     </section>}
     {hold?.sequence_review && <section aria-labelledby="video-picture-sequence-heading" className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-picture-sequence-heading" className="m-0 text-body font-medium">Repeated moving sequences</h3>
@@ -321,6 +336,8 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         ? <>{occurrenceLabel(packet.picture_sequence, 'first')} <strong>{seconds(packet.picture_sequence.first.start_stream_s)}–{seconds(packet.picture_sequence.first.end_stream_s)}</strong> · {occurrenceLabel(packet.picture_sequence, 'second')} <strong>{seconds(packet.picture_sequence.second.start_stream_s)}–{seconds(packet.picture_sequence.second.end_stream_s)}</strong> on the source clock.</>
         : packet.mouth_local_hold && packet.window
         ? <>Measured mouth-region hold <strong>{seconds(packet.window.start_stream_s)}–{seconds(packet.window.end_stream_s)}</strong> on the source clock. The end is exclusive. Source frames {packet.mouth_local_hold.frames[0]}–{packet.mouth_local_hold.frames[1] - 1}.</>
+        : packet.eye_local_hold && packet.window
+        ? <>Measured eye-region hold <strong>{seconds(packet.window.start_stream_s)}–{seconds(packet.window.end_stream_s)}</strong> on the source clock. The end is exclusive. Source frames {packet.eye_local_hold.frames[0]}–{packet.eye_local_hold.frames[1] - 1}.</>
         : packet.whole_face_review
         ? packet.whole_face_review.schema === 'same-frame-face-samples/1'
           ? 'Both readings were combined at each jointly measured face. The three frames below show representative inputs.'
@@ -338,9 +355,12 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         : 'Individual sampled-frame responses. A face crop is context, not a mask of edited pixels.'}</p>}
       {packet.window && <details className="mt-3 text-small text-text-muted"><summary className="cursor-pointer">Exact window coverage</summary>
         <p className="mt-2 mb-0">Source timestamps {seconds(packet.window.start_stream_s)}–{seconds(packet.window.end_stream_s)}. {packet.whole_face_review && packet.whole_face_review.schema !== 'relative-face-detail-samples/1' ? 'Planned frame indices' : 'Input frame indices'}: {packet.window.frame_indices.join(', ')}.</p>
+        {packet.eye_local_hold && <p className="mt-2 mb-0">Source PTS [{packet.window.start_pts}, {packet.window.end_pts}) at {packet.window.time_base}.
+          {' '}Measured crop: x {packet.eye_local_hold.box[0]}, y {packet.eye_local_hold.box[1]}, {packet.eye_local_hold.box[2]} × {packet.eye_local_hold.box[3]} pixels.</p>}
         <p className="mt-2 mb-0">{packet.face_return?.edges || (packet.face_return && ['face-short-return/9', 'face-short-return/10', 'face-short-return/11', 'face-short-return/12', 'face-short-return/13'].includes(packet.face_return.method ?? ''))
           ? `Nearby motion was reviewed in ${packet.face_return.scene_frame_inputs?.length ?? 0} native pictures. Face appearances were measured in ${packet.face_return.frame_inputs.length} sampled pictures.`
           : packet.mouth_local_hold ? 'The recorded window lists the source frames used for the mouth-region measurement.'
+          : packet.eye_local_hold ? 'The recorded window lists the source frames used for the eye-region measurement.'
           : packet.whole_face_review?.schema === 'relative-face-detail-samples/1' ? 'These sampled faces define the measured track. The timing of any edit remains undetermined.'
           : packet.whole_face_review ? 'These positions show sample coverage. Some frames may lack a usable face, and intervals between samples were unassessed.'
           : 'Only these frames were input to this window. This does not establish continuous coverage between them.'}</p>
@@ -351,7 +371,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         <p className="mt-1 mb-0">End of change · frames {packet.face_return.edges.exit.frame_indices.join(', ')}</p>
         <p className="mt-2 mb-0 text-caption text-text-muted">At each boundary the check compared the first three frames with the last three.</p>
       </div>}
-      {!packet.picture_hold && !packet.picture_sequence && !packet.whole_face_review && !packet.scene_return && !packet.lip_timing_review && !packet.face_single_boundary && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
+      {!packet.picture_hold && !packet.picture_sequence && !packet.whole_face_review && !packet.scene_return && !packet.lip_timing_review && !packet.face_single_boundary && !packet.eye_local_hold && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
       {packet.face_spatial_cut && packet.face_spatial_cut_frames && <section className="mt-5 rounded-md border border-border p-3">
         <h4 className="m-0 text-small font-medium">Picture-cut context</h4>
         <p className="mt-2 mb-0 text-small text-text-muted">Picture detail outside the face changed at both ends of <strong>{seconds(packet.face_spatial_cut.start_stream_s)}–{seconds(packet.face_spatial_cut.end_stream_s)}</strong> on the source clock, with an exclusive end. A cut between shots is one plausible explanation for this face change.</p>

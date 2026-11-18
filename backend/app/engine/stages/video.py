@@ -1267,6 +1267,7 @@ def render(ctx: StageContext) -> dict[str, Any]:
                                         fractional_retimed_review=settings.video_fractional_retimed_sequence_review,
                                         reflected_review=settings.environment == "dev" and settings.video_reflected_sequence_review,
                                         cropped_review=settings.environment == "dev" and settings.video_cropped_sequence_review,
+                                        eye_review=settings.environment == "dev" and settings.video_eye_local_hold_review,
                                         reversed_cropped_review=True)
             mouth = hold["coverage"].get("mouth_local_hold")
             audio = ctx.state.get("audio")

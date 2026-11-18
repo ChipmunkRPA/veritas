@@ -369,7 +369,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             if end < len(table) and clip["last_frame_duration"]["ticks"] != (table.pts[end] - table.pts[end - 1]) * table.tb.numerator:
                 raise ObjectIntegrityError("Video context final duration differs from the next source frame")
         brightness_inputs = {}
-        repetition = any(key in packet for key in ("picture_hold", "picture_sequence", "mouth_local_hold"))
+        repetition = any(key in packet for key in ("picture_hold", "picture_sequence", "mouth_local_hold", "eye_local_hold"))
         coarse_frames = len(packet["frames"])
         boundary_count = len(packet.get("face_boundary_frames", ()))
         for position, frame in enumerate((*packet["frames"], *packet.get("face_boundary_frames", ()), *packet.get("face_spatial_cut_frames", ()))):
@@ -1201,6 +1201,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             repeated_sequence = packet.get("picture_sequence")
             row["picture_sequence"] = copy.deepcopy(repeated_sequence)
             mouth_hold = packet.get("mouth_local_hold")
+            eye_hold = packet.get("eye_local_hold")
+            if eye_hold is not None:
+                row["eye_local_hold"] = copy.deepcopy(eye_hold)
             scene_return = packet.get("scene_return")
             lip_timing = packet.get("lip_timing_review")
             if lip_timing is not None:
@@ -1229,18 +1232,26 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             row["clip"] = copy.deepcopy(packet.get("clip"))
             coarse_count = len(packet["frames"])
             boundary_count = len(packet.get("face_boundary_frames", ()))
+            source_frame_label = ("Exact decoded source frame" if hold or repeated_sequence or mouth_hold
+                                  or eye_hold or scene_return or lip_timing else "Exact analysed source frame")
             for position, frame in enumerate((*packet["frames"], *packet.get("face_boundary_frames", ()), *packet.get("face_spatial_cut_frames", ()))):
+                crop_label = ("Exact crop from the wider source frame" if frame["region_meaning"] == "matched_frame_crop"
+                              else "Exact measured eye-region crop" if eye_hold
+                              else "Exact measured mouth-region crop" if mouth_hold or lip_timing
+                              else "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop")
+                labels = {"original": source_frame_label, "context": "Frame context",
+                          "crop": crop_label, "measured_patch": "Exact measured gray mouth patch"}
                 row["frames"].append({"id": frame["id"], "anchor": copy.deepcopy(frame["anchor"]), "score": frame["score"],
                                       "region_meaning": frame["region_meaning"], "context_region": frame.get("context_region"),
                                       "interval_role": frame.get("interval_role"), "refined": coarse_count <= position < coarse_count + boundary_count,
                                       "first_refined": position == coarse_count and boundary_count > 0,
                                       "cut_frame": position >= coarse_count + boundary_count,
                                       "first_cut": position == coarse_count + boundary_count,
-                                      "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], {"original": "Exact decoded source frame" if hold or repeated_sequence or mouth_hold or scene_return or lip_timing else "Exact analysed source frame", "context": "Frame context", "crop": "Exact crop from the wider source frame" if frame["region_meaning"] == "matched_frame_crop" else "Exact measured mouth-region crop" if mouth_hold or lip_timing else "Original mouth-input crop" if packet_kind == "av" else "Original face-context crop", "measured_patch": "Exact measured gray mouth patch"}[role])
+                                      "images": [plate(role, packet["artifacts"][frame["artifact_refs"][role]], labels[role])
                                                  for role in ("original", "context", "crop", "measured_patch")
                                                  if role in frame["artifact_refs"] and (not (hold or repeated_sequence or scene_return) or role == "original"
                                                                                         or (role == "crop" and frame["region_meaning"] == "matched_frame_crop"))
-                                                 and (not (mouth_hold or lip_timing or packet.get(face_single_boundary_binding.KEY)) or role != "context")]})
+                                                 and (not (mouth_hold or eye_hold or lip_timing or packet.get(face_single_boundary_binding.KEY)) or role != "context")]})
         elif packet_kind == "audio":
             row["images"] = [plate(role, packet["artifacts"][role]) for role in ("waveform", "scores")]
             row["audio"] = {"interval": copy.deepcopy(packet["interval"]), "context_interval": copy.deepcopy(packet["context_interval"]),
@@ -1384,6 +1395,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                     f"{repeat[side]['start_stream_s']:.3f}-{repeat[side]['end_stream_s']:.3f} s" for side in ("first", "second"))
             if packet.get("mouth_local_hold"):
                 row["locator"] = f"Mouth-region hold {row['window']['start_stream_s']:.3f}-{row['window']['end_stream_s']:.3f} s"
+            if packet.get("eye_local_hold"):
+                row["locator"] = f"Eye-region hold {row['window']['start_stream_s']:.3f}-{row['window']['end_stream_s']:.3f} s"
             if scene_return:
                 row["locator"] = f"Picture change {scene_return['start_stream_s']:.3f}-{scene_return['end_stream_s']:.3f} s"
             if transition := packet.get(face_single_boundary_binding.KEY):

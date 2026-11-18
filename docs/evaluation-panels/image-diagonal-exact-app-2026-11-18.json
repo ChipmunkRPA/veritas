@@ -1,0 +1,87 @@
+{
+  "browser": {
+    "checked_cases": 8,
+    "page_errors": 0,
+    "verified_crop_links": 4
+  },
+  "cases": {
+    "off:png-diagonal.png": {
+      "diagonal_pair_count": 0,
+      "json_exact": true,
+      "original_crop_count": 0,
+      "pdf_exact": true,
+      "signed_original": true
+    },
+    "off:webp-anti_diagonal.webp": {
+      "diagonal_pair_count": 0,
+      "json_exact": true,
+      "original_crop_count": 0,
+      "pdf_exact": true,
+      "signed_original": true
+    },
+    "on:competing.png": {
+      "diagonal_pair_count": 0,
+      "json_exact": true,
+      "original_crop_count": 0,
+      "pdf_exact": true,
+      "signed_original": true
+    },
+    "on:png-diagonal-unchanged.png": {
+      "diagonal_pair_count": 0,
+      "json_exact": true,
+      "original_crop_count": 0,
+      "pdf_exact": true,
+      "signed_original": true
+    },
+    "on:png-diagonal.png": {
+      "diagonal_pair_count": 1,
+      "json_exact": true,
+      "original_crop_count": 2,
+      "pdf_exact": true,
+      "signed_original": true
+    },
+    "on:webp-anti_diagonal-unchanged.webp": {
+      "diagonal_pair_count": 0,
+      "json_exact": true,
+      "original_crop_count": 0,
+      "pdf_exact": true,
+      "signed_original": true
+    },
+    "on:webp-anti_diagonal.webp": {
+      "diagonal_pair_count": 1,
+      "json_exact": true,
+      "original_crop_count": 2,
+      "pdf_exact": true,
+      "signed_original": true
+    },
+    "on:whole_diagonal.png": {
+      "diagonal_pair_count": 0,
+      "json_exact": true,
+      "original_crop_count": 0,
+      "pdf_exact": true,
+      "signed_original": true
+    }
+  },
+  "native_production_parity": {
+    "matched_encoded_uploads": 148,
+    "positive_runtime_native_replays": 36,
+    "unchanged_existing_pairs_or_scope": 112
+  },
+  "scope": {
+    "affects_overall_confidence": false,
+    "carriers": [
+      "PNG",
+      "lossless WebP"
+    ],
+    "evidence_versions": [
+      "image-evidence-46",
+      "image-evidence-47"
+    ],
+    "live_default_changed": false,
+    "side_pixels_max": 672,
+    "side_pixels_min": 512
+  },
+  "simulated_paid": 8,
+  "unchanged_assessments": 2,
+  "unpaid": 0
+}

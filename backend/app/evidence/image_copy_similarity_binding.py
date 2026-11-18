@@ -42,8 +42,11 @@ PNG_THREE_EXACT_VERSION = "image-evidence-42"
 PNG_THREE_EXACT_AFFINE_VERSION = "image-evidence-43"
 WEBP_THREE_EXACT_VERSION = "image-evidence-44"
 WEBP_THREE_EXACT_AFFINE_VERSION = "image-evidence-45"
-PNG_THREE_EXACT_VERSIONS = frozenset({PNG_THREE_EXACT_VERSION, PNG_THREE_EXACT_AFFINE_VERSION})
-WEBP_THREE_EXACT_VERSIONS = frozenset({WEBP_THREE_EXACT_VERSION, WEBP_THREE_EXACT_AFFINE_VERSION})
+PNG_DIAGONAL_EXACT_VERSION = "image-evidence-46"
+WEBP_DIAGONAL_EXACT_VERSION = "image-evidence-47"
+DIAGONAL_EXACT_VERSIONS = frozenset({PNG_DIAGONAL_EXACT_VERSION, WEBP_DIAGONAL_EXACT_VERSION})
+PNG_THREE_EXACT_VERSIONS = frozenset({PNG_THREE_EXACT_VERSION, PNG_THREE_EXACT_AFFINE_VERSION, PNG_DIAGONAL_EXACT_VERSION})
+WEBP_THREE_EXACT_VERSIONS = frozenset({WEBP_THREE_EXACT_VERSION, WEBP_THREE_EXACT_AFFINE_VERSION, WEBP_DIAGONAL_EXACT_VERSION})
 THREE_EXACT_VERSIONS = PNG_THREE_EXACT_VERSIONS | WEBP_THREE_EXACT_VERSIONS
 PNG_MULTI_EXACT_VERSIONS = PNG_THREE_EXACT_VERSIONS | {PNG_MULTI_EXACT_VERSION, PNG_MULTI_EXACT_AFFINE_VERSION}
 WEBP_MULTI_EXACT_VERSIONS = WEBP_THREE_EXACT_VERSIONS | {WEBP_MULTI_EXACT_VERSION, WEBP_MULTI_EXACT_AFFINE_VERSION}
@@ -73,6 +76,12 @@ WEBP_EXACT_REFLECTION_KEY = "webp_exact_reflection_review"
 PNG_EXACT_REFLECTION_BASIS = "png_exact_reflected_copy"
 PNG_EXACT_REFLECTION_KEY = "png_exact_reflection_review"
 REFLECTION_TRANSFORMS = ("horizontal_reflection", "vertical_reflection")
+DIAGONAL_AXES = {"top_left_to_bottom_right": 0, "top_right_to_bottom_left": 1}
+DIAGONAL_TRANSFORMS = tuple(DIAGONAL_AXES)
+EXACT_DIAGONAL_NOTE = (
+    "The displayed crops match after a diagonal reflection. This shows one verified pair. "
+    "Other copies may be present. Repeated graphics or ordinary editing can also produce exact matches."
+)
 EXACT_REFLECTION_NOTE = (
     "The displayed crops match after reflection. Reflected copies or repeated graphic elements can produce a match. "
     "The comparison cannot establish which area came first or whether AI was involved."
@@ -137,7 +146,7 @@ AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_A
                              NATIVE_JPEG_ROTATION_AFFINE_VERSION, DISJOINT_JPEG_ROTATION_AFFINE_VERSION,
                              WEBP_EXACT_COPY_AFFINE_VERSION, WEBP_EXACT_REFLECTION_AFFINE_VERSION, PNG_EXACT_REFLECTION_AFFINE_VERSION,
                              PNG_MULTI_EXACT_AFFINE_VERSION, WEBP_MULTI_EXACT_AFFINE_VERSION,
-                             PNG_THREE_EXACT_AFFINE_VERSION, WEBP_THREE_EXACT_AFFINE_VERSION})
+                             PNG_THREE_EXACT_AFFINE_VERSION, WEBP_THREE_EXACT_AFFINE_VERSION}) | DIAGONAL_EXACT_VERSIONS
 CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12} | JPEG_BLOCK_VERSIONS | SMALL_PNG_VERSIONS | WEBP_EXACT_COPY_VERSIONS
 TRANSLATION_VERSIONS = CREDENTIAL_VERSIONS | {V10, V11}
 BASIS_VERSIONS = CREDENTIAL_VERSIONS | {V11}
@@ -222,6 +231,10 @@ def native_rotation_size(width: int, height: int) -> bool:
 def exact_copy_size(width: int, height: int, *, webp: bool) -> bool:
     lower, upper = (WEBP_EXACT_COPY_MIN, WEBP_EXACT_COPY_MAX) if webp else (SMALL_PNG_MIN_SIDE, SMALL_PNG_MAX_SIDE)
     return lower <= min(width, height) <= max(width, height) <= upper
+
+
+def exact_diagonal_size(width: int, height: int) -> bool:
+    return 512 <= min(width, height) <= max(width, height) <= 672
 
 
 def disjoint_copy_regions(first, second) -> bool:
@@ -466,9 +479,12 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         raise ValueError("Copy similarity has an invalid record")
     status, pairs = record["status"], record["pairs"]
     skipped = status == SKIPPED_CREDENTIALS
+    diagonal_enabled = document["version"] in DIAGONAL_EXACT_VERSIONS and exact_diagonal_size(*size)
+    diagonal_pair = (diagonal_enabled and isinstance(pairs, list) and len(pairs) == 1
+                     and isinstance(pairs[0], dict) and pairs[0].get("transform") in DIAGONAL_TRANSFORMS)
     interpretation = NOTE if reflected else TRANSLATION_NOTE
     if reflection_review and record.get("basis") == reflection_basis:
-        interpretation = EXACT_REFLECTION_NOTE
+        interpretation = EXACT_DIAGONAL_NOTE if diagonal_pair else EXACT_REFLECTION_NOTE
     if multi_enabled and record.get("basis") == MULTI_EXACT_BASIS:
         interpretation = MULTI_EXACT_NOTE
     if (
@@ -576,6 +592,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         turned = record.get("basis") in {TURNED_PNG_BASIS, TURNED_JPEG_BASIS}
         transforms = (("horizontal_reflection",) if reflected else
                       (*REFLECTION_TRANSFORMS, *PNG_COPY_TURNS) if multi_values else
+                      (*REFLECTION_TRANSFORMS, *DIAGONAL_TRANSFORMS) if reflected_exact_pair and diagonal_enabled else
                       REFLECTION_TRANSFORMS if reflected_exact_pair else
                       tuple(PNG_COPY_TRANSFORMS.values()) if record.get("basis") == WEBP_EXACT_COPY_BASIS else
                       (PNG_COPY_TRANSFORMS[1], PNG_COPY_TRANSFORMS[2]) if turned else ("same_orientation",))
@@ -608,7 +625,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         overlaps = ax < bx + bw and bx < ax + aw and ay < by + bh and by < ay + ah
         equal_size = (reflected or offgrid_pair or exact_pair or reflected_exact_pair or bool(multi_values) or turned_jpeg_pair
                       or record.get("basis") in {"native_patch_alignment", JPEG_BLOCK_BASIS})
-        aligned_size = (bh, bw) if pair["transform"] == PNG_COPY_TRANSFORMS[1] else (bw, bh)
+        swaps_dimensions = pair["transform"] == PNG_COPY_TRANSFORMS[1] or pair["transform"] in DIAGONAL_TRANSFORMS
+        aligned_size = (bh, bw) if swaps_dimensions else (bw, bh)
         if overlaps or (equal_size and (aw, ah) != aligned_size):
             raise ValueError("The paired areas must be separate and aligned areas must share a native size")
         measured_exact = None

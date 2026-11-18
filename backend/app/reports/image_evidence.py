@@ -112,6 +112,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     store.verify(document["source"]["sha256"])
     from app.evidence import image_copy_affine_binding as affine
     from app.evidence.image_copy_similarity_binding import (
+        DIAGONAL_TRANSFORMS,
         EXACT_REFLECTION_VERSIONS,
         JPEG_BLOCK_STATUS_TEXT,
         MULTI_EXACT_KEY,
@@ -195,9 +196,16 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 if measured := exact_review["measurement"]:
                     transform = check["pairs"][0]["transform"]
                     if reflected_webp or reflected_png:
-                        direction = "horizontally" if transform == "horizontal_reflection" else "vertically"
                         carrier = "PNG" if reflected_png else "lossless WebP"
-                        check["observation"] = f"Flipping Area B {direction} aligns every RGB pixel with Area A in the {carrier}."
+                        if transform in DIAGONAL_TRANSFORMS:
+                            check["diagonal_reflection"] = True
+                            axis = ("top-left to bottom-right" if transform == "top_left_to_bottom_right"
+                                    else "top-right to bottom-left")
+                            check["observation"] = (f"Reflecting Area B across its {axis} diagonal aligns every RGB pixel "
+                                                    f"with Area A in the {carrier}.")
+                        else:
+                            direction = "horizontally" if transform == "horizontal_reflection" else "vertically"
+                            check["observation"] = f"Flipping Area B {direction} aligns every RGB pixel with Area A in the {carrier}."
                     elif transform == "same_orientation":
                         check["observation"] = "The two lossless WebP crops match exactly in their original orientation."
                     else:

@@ -333,6 +333,7 @@ class Settings(BaseSettings):
     image_png_reflection_review: bool = False  # Optional native PNG copy evidence with exact reflection.
     image_disjoint_exact_copy_review: bool = False  # Optional independent pixel matches in two pairs of lossless crops.
     image_three_exact_copy_review: bool = False  # Also check for three distinct exact copy pairs in supported 512 × 512 lossless images.
+    image_diagonal_exact_copy_review: bool = False  # Add a bounded exact diagonal reflection check after the lossless copy searches.
     image_turned_png_copy_review: bool = False  # Include right-angle copies in the local small PNG check.
     image_png_exif_preview_review: bool = False  # Optional native PNG comparison with its saved Exif thumbnail.
     image_heif_thumbnail_review: bool = False  # Compare an eligible HEIC still with its linked thumbnail.

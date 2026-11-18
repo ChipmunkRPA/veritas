@@ -13,11 +13,13 @@ from PIL import Image
 from app.detectors.image import exact_small_copy
 from app.detectors.image.lossless_webp import lossless_webp_size
 from app.evidence.image_copy_similarity_binding import (
+    DIAGONAL_TRANSFORMS,
     PNG_COPY_TURNS,
     ROLES,
     SMALL_PNG_MAX_SIDE,
     SMALL_PNG_MIN_SIDE,
     exact_copy_size,
+    exact_diagonal_size,
 )
 
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
@@ -88,13 +90,17 @@ def review(data, *, include_rotation=False, webp=False):
     return {"status": item["status"], "measurement": match["measurement"]}, [match["pair"]], match.get("turns", 0)
 
 
-def review_reflection(data, *, webp=True):
+def review_reflection(data, *, webp=True, include_diagonal=False):
     from app.detectors.image import exact_reflected_copy
 
     pixels = webp_rgb(data) if webp else native_rgb(data)
     if pixels is None:
         return {"status": "unsupported_profile", "measurement": None}, [], None
     item = exact_reflected_copy.analyse(pixels)
+    if include_diagonal and item["status"] == "no_pair" and exact_diagonal_size(*pixels.shape[:2]):
+        from app.detectors.image import exact_diagonal_copy
+
+        return exact_diagonal_copy.analyse(pixels)
     if not item["pairs"]:
         return {"status": item["status"], "measurement": None}, [], None
     match, = item["pairs"]
@@ -112,8 +118,9 @@ def review_multiple(data, *, webp=False, allow_three=False):
     return {"status": result["status"], "measurements": [pair["measurement"] for pair in pairs]}, pairs
 
 
-def verify(data, pair, measurement, *, webp=False, reflected=False):
-    _verify(_verified_pixels(data, webp=webp), pair, measurement, reflected=reflected)
+def verify(data, pair, measurement, *, webp=False, reflected=False, include_diagonal=False):
+    _verify(_verified_pixels(data, webp=webp), pair, measurement, reflected=reflected,
+            include_diagonal=include_diagonal)
 
 
 def _verified_pixels(data, *, webp):
@@ -124,10 +131,14 @@ def _verified_pixels(data, *, webp):
     return pixels
 
 
-def _verify(pixels, pair, measurement, *, reflected):
+def _verify(pixels, pair, measurement, *, reflected, include_diagonal=False):
     boxes = [tuple(pair["regions"][role][key] for key in "xywh") for role in ROLES]
     transform = pair.get("transform")
-    if reflected:
+    if reflected and include_diagonal and transform in DIAGONAL_TRANSFORMS:
+        from app.detectors.image import exact_diagonal_copy
+
+        recorded = exact_diagonal_copy.measure(pixels, *boxes, transform)
+    elif reflected:
         from app.detectors.image.exact_reflected_copy import AXES
 
         axis = AXES.get(transform)

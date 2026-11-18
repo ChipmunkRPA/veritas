@@ -387,6 +387,49 @@ describe('image evidence cards', () => {
     expect(check.getByRole('link', { name: 'Area B in the original image' })).toBeTruthy()
   })
 
+  it.each([
+    ['image-evidence-46', 'top_left_to_bottom_right', 'top-left to bottom-right', 'PNG', 'png_exact_reflected_copy', 'png_exact_reflection_review'],
+    ['image-evidence-47', 'top_right_to_bottom_left', 'top-right to bottom-left', 'lossless WebP', 'webp_exact_reflected_copy', 'webp_exact_reflection_review'],
+  ] as const)('shows the verified diagonal and native crop dimensions for %s', (version, transform, diagonal, carrier, basis, key) => {
+    const regions = { area_a: { x: 64, y: 96, w: 32, h: 24 }, area_b: { x: 348, y: 264, w: 24, h: 32 } }
+    const artifacts = { area_a: { ...artifact('5'), width: 32, height: 24 }, area_b: { ...artifact('6'), width: 24, height: 32 } }
+    show({ ...evidence, version, packets: [], source: { ...evidence.source, width: 512, height: 576 }, copy_translation: {
+      ...translated, basis, pairs: [{ id: 'T01', transform, regions, artifacts }],
+      interpretation: 'The displayed crops match after a diagonal reflection. This shows one verified pair. Other copies may be present. Repeated graphics or ordinary editing can also produce exact matches.',
+      [key]: { status: 'supported_pair', measurement: { matching_pixels: 768, different_color_values: 740,
+        perimeter_mean_absolute_difference: [6.74, 40.29, 41.18, 24.47] } },
+    } })
+    const check = within(screen.getByRole('region', { name: 'Exact and geometric copy comparisons' }))
+    expect(check.getByRole('heading', { name: 'T01 · Exact diagonally reflected pair' })).toBeTruthy()
+    expect(check.getByText(`Reflecting Area B across the ${diagonal} diagonal aligns every RGB pixel with Area A in the ${carrier}.`)).toBeTruthy()
+    expect(check.getByText(/This shows one verified pair. Other copies may be present./)).toBeTruthy()
+    expect(check.getByText(/zero weight in AI authorship confidence/)).toBeTruthy()
+    expect(check.getByText(/Compared 768 RGB pixels in each crop/)).toBeTruthy()
+    for (const [role, label] of [['area_a', 'Area A'], ['area_b', 'Area B']] as const) {
+      const { x, y, w, h } = regions[role]
+      const crop = check.getByRole('img', { name: `T01: ${label} cropped from the submitted image` })
+      expect(crop.getAttribute('width')).toBe(String(w))
+      expect(crop.getAttribute('height')).toBe(String(h))
+      expect(crop.getAttribute('src')).toContain(`/${artifacts[role].sha256}.png?token=signed%20token`)
+      const link = check.getByRole('link', { name: `${label} in the original image`, description: `x ${x}, y ${y}, ${w} × ${h} px` })
+      expect(parseViewerState(new URL(link.getAttribute('href')!, 'https://local.invalid').searchParams).focus).toEqual(regions[role])
+    }
+  })
+
+  it.each([
+    ['image-evidence-37', 576, 'horizontal or vertical'],
+    ['image-evidence-46', 700, 'horizontal or vertical'],
+    ['image-evidence-46', 576, 'horizontal, vertical, or diagonal'],
+  ] as const)('shows reflection coverage for %s with a %i px side', (version, height, scope) => {
+    show({ ...evidence, version, packets: [], source: { ...evidence.source, width: 512, height }, copy_translation: {
+      ...translated, basis: null, status: 'no_pair', pairs: [],
+      png_exact_reflection_review: { status: 'no_pair', measurement: null },
+    } })
+    const check = within(screen.getByRole('region', { name: 'Exact and geometric copy comparisons' }))
+    expect(check.getByText(`The reflection check found no qualifying exact pair after a ${scope} flip.`)).toBeTruthy()
+    expect(check.queryByRole('img')).toBeNull()
+  })
+
   it('pairs each geometric comparison mask with the native source crop and exact area link', () => {
     show({ ...copyOnly, version: 'image-evidence-13', copy_affine: geometric })
     const check = within(screen.getByRole('region', { name: 'Geometric copy comparison' }))

@@ -797,6 +797,70 @@ def test_reflection_review_withholds_symmetry_and_competing_exact_pairs(webp):
 
 
 @pytest.mark.parametrize("webp", [False, True], ids=["png", "webp"])
+def test_diagonal_reflection_uses_new_packets_and_replays_exact_swapped_crops(evidence_http, monkeypatch, webp):
+    from app.evidence.image_copy_similarity_binding import (
+        EXACT_DIAGONAL_NOTE,
+        PNG_DIAGONAL_EXACT_VERSION,
+        PNG_EXACT_REFLECTION_KEY,
+        WEBP_DIAGONAL_EXACT_VERSION,
+        WEBP_EXACT_REFLECTION_KEY,
+    )
+    from app.evidence.image_exact_small_copy_source import review_reflection, verify
+
+    f = evidence_http
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "image_disjoint_exact_copy_review", True)
+    monkeypatch.setattr(settings, "image_affine_copy_review", True)
+    monkeypatch.setattr(settings, "image_three_exact_copy_review", True)
+    monkeypatch.setattr(settings, "image_diagonal_exact_copy_review", False)
+    rgb = np.random.default_rng(1297).integers(0, 256, (512, 512, 3), dtype=np.uint8)
+    aligned = rgb[72:100, 81:117].transpose(1, 0, 2)
+    rgb[246:282, 351:379] = aligned[::-1, ::-1] if webp else aligned
+    image = Image.fromarray(rgb)
+    encoded = _bytes(image, format="WEBP" if webp else "PNG", lossless=True)
+    assert review_reflection(encoded, webp=webp)[0]["status"] == "no_pair"
+    with Session(f.engine) as db:
+        analysis = db.get(Analysis, "image-unprepared")
+        analysis.content_type = "image/webp" if webp else "image/png"
+        stored = f.store.put_bytes(encoded)
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        result = copy.deepcopy(specimen("image", "standard").result)
+        result.update(exhibits=[], signals=[], findings=[])
+        result["input"]["sha256"] = stored.sha256
+        analysis.result_hash = canonical_hash(result)
+        f.store.put_bytes(canonical_json(result))
+        old = service.persist_packet_set(db, analysis, f.store, result=result)
+        assert base_document(old)["copy_translation"]["pairs"] == []
+
+        monkeypatch.setattr(settings, "image_diagonal_exact_copy_review", True)
+        new_analysis = Analysis(id="image-diagonal-copy", kind=analysis.kind, filename=analysis.filename,
+                                content_type=analysis.content_type, size_bytes=analysis.size_bytes,
+                                sha256=analysis.sha256, status="done", revision=analysis.revision,
+                                result_schema_version=analysis.result_schema_version, result_hash=analysis.result_hash)
+        db.add(new_analysis)
+        db.flush()
+        document = service.persist_packet_set(db, new_analysis, f.store, result=result)
+        base = base_document(document)
+        assert base["version"] == (WEBP_DIAGONAL_EXACT_VERSION if webp else PNG_DIAGONAL_EXACT_VERSION)
+        assert document["id"] != old["id"]
+        check = base["copy_translation"]
+        assert check["interpretation"] == EXACT_DIAGONAL_NOTE and check["authorship_confidence_contribution"] == 0
+        pair, = check["pairs"]
+        assert pair["transform"] == ("top_right_to_bottom_left" if webp else "top_left_to_bottom_right")
+        assert pair["regions"] == {"area_a": {"x": 81, "y": 72, "w": 36, "h": 28},
+                                   "area_b": {"x": 351, "y": 246, "w": 28, "h": 36}}
+        measured = check[WEBP_EXACT_REFLECTION_KEY if webp else PNG_EXACT_REFLECTION_KEY]["measurement"]
+        verify(encoded, pair, measured, webp=webp, reflected=True, include_diagonal=True)
+        with pytest.raises(ValueError, match="measurement differs"):
+            verify(encoded, pair, measured, webp=webp, reflected=True)
+        for role, crop in pair["artifacts"].items():
+            bounds = image_packets_v7.box_bounds(pair["regions"][role], *image.size)
+            with Image.open(io.BytesIO(f.store.read_bytes(crop["sha256"]))) as actual:
+                assert actual.tobytes() == image.crop(bounds).tobytes()
+        assert service.load_packet_set(db, analysis, f.store, set_id=old["id"]) == old
+
+
+@pytest.mark.parametrize("webp", [False, True], ids=["png", "webp"])
 @pytest.mark.parametrize("affine", [False, True])
 def test_two_exact_pairs_bind_each_transform_and_both_source_witnesses(evidence_http, monkeypatch, webp, affine):
     from app.evidence.image_copy_similarity_binding import MULTI_EXACT_BASIS, MULTI_EXACT_KEY

@@ -17,6 +17,8 @@ from app.evidence import image_motion_photo_binding as motion_photo
 from app.evidence import image_previous_grid_binding as prior_grid
 from app.evidence import image_transparency_binding as transparency
 from app.evidence.image_copy_similarity_binding import (
+    DIAGONAL_EXACT_VERSIONS,
+    DIAGONAL_TRANSFORMS,
     EXPANDED_JPEG_ROTATION_VERSIONS,
     JPEG_BLOCK_BASIS,
     MULTI_EXACT_BASIS,
@@ -286,7 +288,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
         key = {WEBP_EXACT_REFLECTION_BASIS: WEBP_EXACT_REFLECTION_KEY, WEBP_EXACT_COPY_BASIS: WEBP_EXACT_COPY_KEY,
                PNG_EXACT_REFLECTION_BASIS: PNG_EXACT_REFLECTION_KEY}.get(basis, "small_png_copy_review")
-        verify(data, translation["pairs"][0], translation[key]["measurement"], webp=exact_webp, reflected=reflected)
+        verify(data, translation["pairs"][0], translation[key]["measurement"], webp=exact_webp, reflected=reflected,
+               include_diagonal=embedded_pair.base_document(evidence)["version"] in DIAGONAL_EXACT_VERSIONS)
     matched_blocks = 0
     if translation.get('basis') == JPEG_BLOCK_BASIS:
         from app.evidence.image_jpeg_copy_blocks_source import verify
@@ -308,6 +311,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if small_png or exact_webp:
         transform = translation["pairs"][0]["transform"]
         alignment = f" after {transform.replace('_', ' ')}" if reflected else " after rotation" if transform != "same_orientation" else ""
+        if transform in DIAGONAL_TRANSFORMS:
+            alignment += " diagonal reflection"
         carrier = "lossless WebP" if exact_webp else "PNG"
         detail += f" Recomputed the exact matching RGB pixels and surrounding differences{alignment} on the submitted {carrier}."
     if multi:

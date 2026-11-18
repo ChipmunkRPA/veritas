@@ -125,8 +125,8 @@ Export Outlook (`.msg`) files as EML or PDF. Keep the
 original file if its native provenance matters. A PDF export can include
 Word notes outside the native check, text boxes, headers and footers in
 their rendered layout.
-For older, macro-enabled or OpenDocument spreadsheets, save the sheets with
-writing as macro-free XLSX, CSV or PDF.
+For older Excel or macro-enabled spreadsheets, save the sheets with writing
+as macro-free XLSX, CSV or PDF.
 Before creating a payment, checkout checks that writing files have at least
 15 readable words and fit within the configured extracted-text limit, normally
 120,000 characters. Some Word files can still produce native revision evidence

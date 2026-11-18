@@ -50,6 +50,15 @@ union. The score and matching criteria apply only to the passage check.
 | Matched Qwen sentence rewrite | 8/8 | 1/8 | 0/8 |
 | Matched SmolLM2 sentence rewrite | 1/1 | 0/1 | 0/1 |
 
+A follow-up verified that one Qwen delivery exactly reproduced the dated
+2020 revision in its source group. The table records the original runs.
+For independent accuracy counts, exclude all three deliveries from that
+group. The historical earlier and revised arms each then have 14 assessed
+files, one flagged file, and zero correct edited locations. The Qwen arm
+has seven assessed files, one flagged file, and zero correct locations.
+The publisher chronology establishes when the wording was present.
+[Exact content overlap and revised evaluation](writing-remote-semantic-transfer-2026-11-18.md)
+
 The same historical work produced the only ordinary alert before and after
 editing. No historical pair acquired a flag after its actual edit. In the
 separate generated lane, each offline editor attempted one revision at

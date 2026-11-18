@@ -1,0 +1,41 @@
+{
+  "after_publisher_commit": "60833fbc5680a60dab793fca8cffd3e0979fbf5d",
+  "after_publisher_date": "2020-11-26T23:46:40Z",
+  "archive_parent_verified": true,
+  "baseline_earlier_alert": false,
+  "baseline_same_revised_alert": false,
+  "baseline_shared_focus_alert": 0,
+  "baseline_shared_ranges_exactly_equal": true,
+  "before_delivery_sha256": "c373a299977b43d881d2674161e459f59d2383b6272d3e5fdba13a4371ce7709",
+  "before_publisher_commit": "e67da5d46cbcc51b4b1c06aa07bced2edbc43166",
+  "before_publisher_date": "2020-11-26T18:00:58Z",
+  "earlier_target_codepoint_span": [
+    653,
+    742
+  ],
+  "earlier_target_sha256": "00229787c0d59dc886d1d5de9fe63a9dc388e5b61e065a4964275d38e4af572c",
+  "equivalent_delivery_sha256": "f556634b115e053f2fcf9f95af537441fa8132dafcbf783df3a78a9a54c110ed",
+  "equivalent_nonspace_delivery_sha256": "f22b04b44b0f690b9da7392af294bc272a5720ed359bd4a12bccd70af7f1f165",
+  "evaluation_policy": "Exclude the entire group of earlier, later and synthetic deliveries from standalone accuracy. Retain the ambiguity as a distinct evidence result.",
+  "generated_plan_sha256": "244e670beceb4514d2b48cb3f27028c76630923dc93ca33ec5adc842911dcb05",
+  "generated_transcript_sha256": "f467e117bf699d64ccc99ec8137e2738f9cafe84eb950cc4287f23c699ddc0ce",
+  "identical_bytes": true,
+  "input_publication": "The Turing Way Community documentation",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "publisher_file_sha256": [
+    "be8d82f94ed2ae121811d8f489a8194725a9cae613e9451b28c63f2ec45665e8",
+    "1985847de5ca4720aac059cb5d5555f4e38d18286db2264aff5d611033e0ccdc"
+  ],
+  "publisher_license_file_sha256": [
+    "5c76d2122bed91dc4598aa43431b61344c9daa39622d52f65e96b0ea23ffed1a",
+    "5c76d2122bed91dc4598aa43431b61344c9daa39622d52f65e96b0ea23ffed1a"
+  ],
+  "same_change_relative_to_earlier_source": true,
+  "schema": "chipmunk.writing-origin-collision/1",
+  "shared_revised_target_codepoint_span": [
+    653,
+    743
+  ],
+  "shared_revised_target_sha256": "d7baad9634963b0dff5825061c3ca1967673f6edb82c11736d85cac111423227",
+  "source_witness_scope": "The exact earlier/later wording is demonstrable from retained publisher commits. The generation transcript demonstrates a later procedure reproduced those words. Historical tools and possible generator pretraining exposure are unobserved; the same bytes do not identify the process."
+}

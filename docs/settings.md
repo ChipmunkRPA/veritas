@@ -144,6 +144,7 @@ The service defines its settings in `backend/app/core/config.py`.
 | `VERITAS_GRADCAM_ENABLED` | `true` \| `false` | `true` | v0.3 image pipeline: draw Grad-CAM heat maps for the ViT classifiers |
 | `VERITAS_IMAGE_DISJOINT_EXACT_COPY_REVIEW` | `true` \| `false` | `false` | Optional development-only evidence for independent pixel matches in two pairs of lossless crops. |
 | `VERITAS_IMAGE_THREE_EXACT_COPY_REVIEW` | `true` \| `false` | `false` | Also check for three distinct exact copy pairs in supported 512 × 512 upright lossless PNG or WebP images when disjoint copy review is enabled. |
+| `VERITAS_IMAGE_DIAGONAL_EXACT_COPY_REVIEW` | `true` \| `false` | `false` | Optional development-only exact diagonal copy evidence for upright, opaque PNG or lossless WebP with each side from 512 to 672 pixels. Requires disjoint, three-pair, and affine copy review. |
 
 ## Metadata (I-3)
 

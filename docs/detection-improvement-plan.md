@@ -5,9 +5,10 @@ and the evidence supporting it before expanding hosting.
 
 The [stereo covariance comparison](video-stereo-covariance-2026-11-17.md)
 confirms missed speech removals under loud room sound on 12 further speakers.
-The [document format review](document-formats-2026-11-17.md) records ten
-local upload formats including PowerPoint and EPUB, signed original-file
-verification, and exact earlier-wording locations for qualifying ODT documents.
+The [document format review](document-formats-2026-11-17.md) records local
+upload coverage from Word and PDF to spreadsheets and saved email, signed
+original-file verification, and exact earlier-wording locations for
+qualifying ODT documents.
 
 ## Requirements and order
 
@@ -65,6 +66,12 @@ test cases or rewrite a failure as a pass. Internal predeclared research setting
 are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
+
+- The diagonal reflection check located all 18 staged pixel copies in
+  each lossless encoding on the held panel. It added no alerts across
+  50 ordinary and earlier-transform controls per encoding. The optional
+  local check shows two original crops with zero AI-assessment weight.
+  [Diagonal reflection evidence](image-diagonal-exact-2026-11-18.md)
 
 - The single-transition face check located 81 of 96 staged one-sided
   swaps within one frame and flagged none of 120 held ordinary controls.

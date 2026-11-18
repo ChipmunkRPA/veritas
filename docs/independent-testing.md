@@ -50,6 +50,11 @@ recounts copy locations against exact edit boxes on 212 deliveries
 using Python's standard library. The native replay checks the
 measured RGB pixels and surrounding differences.
 
+The [diagonal copy comparison](image-diagonal-exact-2026-11-18.md)
+recounts two lossless-image panels on 324 deliveries. It includes separate
+counts for ordinary controls, multiple planted copies, and cases where
+the search could not resolve a pair.
+
 Three model-free receipts let reviewers reproduce the latest research
 decisions without the source media. The [video eye-region replay](video-eye-context-guard-2026-11-18.md#reproduce)
 recalculates the selected rule and its outcomes on two held sets. The

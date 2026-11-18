@@ -13,6 +13,16 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [document credential replay](document-formats-2026-11-17.md#independent-replay)
+lets reviewers check their own original Word and OpenDocument files offline.
+It reports the file hash, credential binding, trust snapshot and gate decision.
+Two upstream unsigned reference files and the locally signed controls are
+available for comparison.
+
+The [stereo covariance replay](video-stereo-covariance-2026-11-17.md#reproduce)
+compares three ways to locate speech removals while room audio continues. Its
+336 held deliveries have pinned sources, edit intervals, and per-clip results.
+
 The [portrait face-change replay](video-face-portrait-2026-11-17.md#reproduce)
 checks input hashes, native frame intervals and ordinary shot controls on
 504 held deliveries. Its export provides the frozen measurements and

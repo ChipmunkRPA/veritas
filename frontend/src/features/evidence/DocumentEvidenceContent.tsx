@@ -330,13 +330,14 @@ function PagePlates({ set, packet, page, token, mediaReady }: { set: DocumentEvi
   </div>
 }
 
-function PublishedWording({ review }: { review: PublishedWordingReview }) {
+function PublishedWording({ review, method }: { review: PublishedWordingReview; method?: string }) {
   const columns = review.schema === 'document-published-wording-review/2'
   const sections = columns ? review.sections : [review]
   return <section id="document-published-wording" aria-labelledby="published-wording-title" className="mt-4 rounded-md border border-border p-4">
     <h3 id="published-wording-title" className="m-0 text-body font-medium">Earlier published wording</h3>
     <p className="mt-2 mb-0 text-small">This check compares the marked text with the cited U.S. Government Accountability Office highlight. Wording differences can result from ordinary editing, transcription or AI assistance. The comparison contributes zero weight to the overall AI assessment.</p>
     {columns && <p className="mt-2 mb-0 text-small">Only the cited spans in the listed columns were compared. The check sets aside bullets, matching wrapped words, and standalone headings without an earlier counterpart.</p>}
+    {method === 'odt' && <p className="mt-2 mb-0 text-small">Locations count characters within extracted OpenDocument body paragraphs in reading order.</p>}
     {sections.map(section => <WordingSection key={'column' in section ? `${section.page}-${section.column}` : section.reference.id}
       section={section} matches={review.published_style_matches} />)}
   </section>
@@ -350,9 +351,15 @@ function WordingLocations({ locations, column }: {
   </p>)
   const pages = [...new Set(locations.flatMap(place => 'page' in place ? [place.page] : []))]
   return pages.length ? <p className="m-0 text-caption">Original PDF pages {pages.join(', ')}. Word boxes are recorded in JSON.</p>
-    : locations.map(place => 'ranges' in place && <p key={place.start} className="m-0 text-caption">
-      {place.paragraph ? `Word paragraph ${place.paragraph} characters` : 'Original text characters'} <span className="font-mono">{place.ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}</span>.
-    </p>)
+    : locations.map(place => {
+      if (!('ranges' in place)) return null
+      const label = place.coordinate_space === 'extracted-paragraph-codepoints'
+        ? `Extracted OpenDocument paragraph ${place.paragraph} characters`
+        : place.paragraph ? `Word paragraph ${place.paragraph} characters` : 'Original text characters'
+      return <p key={place.start} className="m-0 text-caption">
+        {label} <span className="font-mono">{place.ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}</span>.
+      </p>
+    })
 }
 
 function WordingSection({ section, matches }: {
@@ -493,7 +500,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   return <div data-testid="document-evidence-content">
     {set.coverage?.writing_passage_intervals && <WritingPassageIntervals review={set.coverage.writing_passage_intervals}
       method={set.source.method} emailHtml={emailCoverage?.body_content_type === 'text/html'} wording={set.coverage.published_wording_review} />}
-    {set.coverage?.published_wording_review && <PublishedWording review={set.coverage.published_wording_review} />}
+    {set.coverage?.published_wording_review && <PublishedWording review={set.coverage.published_wording_review} method={set.source.method} />}
     {set.coverage?.pdf_saved_wording && <PdfSavedWording review={set.coverage.pdf_saved_wording} set={set} token={token} mediaReady={mediaReady} />}
     <EmailBodyComparison review={set.coverage?.email_body_alternatives} />
     {set.coverage?.email_classifier_input_scope && <EmailInputScope scope={set.coverage.email_classifier_input_scope} />}

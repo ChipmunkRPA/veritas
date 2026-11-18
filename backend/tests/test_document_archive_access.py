@@ -47,6 +47,121 @@ def test_adjacent_archived_wording_differences_link_to_separate_source_sentences
         document_published_wording._validate_sentences(rows, changes, len(text))
 
 
+def test_paid_odt_publishes_extracted_wording_locations(billing, monkeypatch, tmp_path):
+    import json
+    from copy import deepcopy
+    from types import SimpleNamespace
+    from zipfile import ZipFile
+
+    from test_office_credentials import ODT_XML
+
+    from app.core.canonical import canonical_hash
+    from app.detectors.text.extract import extract
+    from app.engine import pipelines
+    from app.engine.fetchers import ModelNotInstalled
+    from app.reports import engine, multimedia_evidence, public_package, snapshot, verify_document_source
+    from app.storage.files import ODT_MIME
+
+    earlier = ("The regional audit office gathered records from several different departments and invited all "
+               "program administrators to comment on the analysis. The board reviewed the accounting process "
+               "in detail and approved its updated policy on Monday. The final review confirmed that the "
+               "field officers had recorded complete findings and resolved every outstanding concern in the "
+               "original worksheet. Several departments retained copies of that worksheet for their own records.")
+    paragraphs = ["Test heading", earlier, "Known table cell"]
+    transcript = "\n\n".join(paragraphs)
+    reports = {"GAO-16-442": {"text": transcript, "published_date": "2016-04-18", "split": "train",
+                              "source_record_sha256": "1" * 64}}
+    pack = {"schema": document_gao_archive.PACK_SCHEMA, "revision": document_gao_archive.REVISION, "reports": reports}
+    pack_path = tmp_path / "gao-pack.json"
+    pack_path.write_text(json.dumps(pack))
+    pack_sha = hashlib.sha256(pack_path.read_bytes()).hexdigest()
+    monkeypatch.setattr(document_gao_archive, "REPORT_COUNT", 1)
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "document_gao_automatic_review", True)
+    monkeypatch.setattr(settings, "document_gao_archive_path", pack_path)
+    monkeypatch.setattr(settings, "document_gao_archive_sha256", pack_sha)
+
+    def odt_bytes(body):
+        buffer = BytesIO()
+        with ZipFile(buffer, "w") as archive:
+            archive.writestr("mimetype", ODT_MIME)
+            archive.writestr("content.xml", ODT_XML.format(paragraph=body))
+        return buffer.getvalue()
+
+    original = tmp_path / "copy.odt"
+    original.write_bytes(odt_bytes(earlier))
+    exact = extract(original, ".odt")
+    exact_record = document_published_wording.capture(exact.text, exact.paragraphs, exact.source_map, exact.meta,
+        None, pack_sha, reports, document_gao_archive.build_index(reports))
+    assert exact_record["changes"] == exact_record["changed_sentences"] == []
+
+    original.write_bytes(odt_bytes(earlier.replace("on Monday", "on  <text:span>Thurs</text:span>day")))
+    purchase = billing.client.post("/api/v2/billing/checkout",
+        headers={**billing.headers, "Idempotency-Key": str(uuid.uuid4())},
+        data={"kind": "document", "profile": "quick", "risk_accepted": "true",
+              "risk_notice_version": purchase_notice.VERSION, "risk_notice_sha256": purchase_notice.SHA256},
+        files={"file": (original.name, original.read_bytes(), ODT_MIME)})
+    assert purchase.status_code == 201, purchase.text
+    assert counts(billing) == (0, 0, 0)
+    order = purchase.json()["order_id"]
+    assert signed(billing, event_for(billing, order)).status_code == 200
+    ident = billing.client.get(f"/api/v2/billing/orders/{order}", headers=billing.headers).json()["analysis_id"]
+
+    def missing(*args, **kwargs):
+        raise ModelNotInstalled("isolated test without writing weights")
+
+    models = SimpleNamespace(default_device="cpu", activation_bytes_for_items=lambda _: 0, lease=missing)
+    outcome = pipelines.run_analysis(ident, profile="quick", sessions=billing.sessions, store=billing.store, models=models)
+    assert outcome.status == "done", (outcome.error, outcome.stages)
+    with billing.sessions() as db:
+        analysis = db.get(Analysis, ident)
+        result = json.loads(billing.store.read_bytes(analysis.result_hash))
+        frozen = snapshot.build(db, analysis, result, report_id=str(uuid.uuid4()), revision=1, profile="standard",
+            redacted=False, supersedes_report_id=None, revision_reason=None, requested_at=datetime.now(UTC),
+            requested_by="local-test", template_set=engine.TEMPLATE_SET, veritas_version="test", store=billing.store)
+    evidence = multimedia_evidence.verified_set(frozen)
+    record = evidence["coverage"][document_published_wording.KEY]
+    assert record["authorship_confidence_contribution"] == 0
+    assert record["reference"]["id"] == "GAO-16-442"
+    assert public_package.public_result(result)[document_published_wording.COMMITMENT] == canonical_hash(record)
+    assert result["decision"]["probability_ai_calibrated"] is None
+    [change] = record["changes"]
+    [sentence] = record["changed_sentences"]
+    offset = earlier.index("Monday")
+    assert change["submitted"] == "Thursday"
+    start, end = change["archive_range"]
+    assert transcript[start:end] == "Monday"
+    assert change["locations"] == [{
+        "start": change["start"], "end": change["end"], "paragraph": 2,
+        "coordinate_space": "extracted-paragraph-codepoints", "ranges": [[offset, offset + len("Thursday")]],
+    }]
+    assert sentence["differences"] == [1] and sentence["locations"][0]["paragraph"] == 2
+    assert sentence["text"].endswith("on Thursday.")
+    rendered = engine.render_pdf(frozen)
+    assert not rendered.refused
+    pdf_text = " ".join(engine.pdf_text(rendered.pdf).split())
+    assert "Extracted OpenDocument paragraph 2 characters" in pdf_text
+    assert f"[{offset}, {offset + len('Thursday')})" in pdf_text
+
+    bundle = {"schema": verify_document_source.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"bytes": original.stat().st_size, "sha256": analysis.sha256}}
+    changed_evidence = deepcopy(evidence)
+    changed_record = changed_evidence["coverage"][document_published_wording.KEY]
+    changed_record["changes"][0]["locations"][0]["paragraph"] = 1
+    changed_evidence["source"][document_published_wording.COMMITMENT] = canonical_hash(changed_record)
+    for exported in (evidence, changed_evidence):
+        stream = BytesIO()
+        with ZipFile(stream, "w") as archive:
+            archive.writestr("evidence.json", json.dumps(exported))
+        with ZipFile(stream) as archive:
+            if exported is evidence:
+                verified = verify_document_source.check(archive, bundle, original)
+                assert "Verified earlier wording" in verified
+            else:
+                with pytest.raises(ValueError, match="original locations"):
+                    verify_document_source.check(archive, bundle, original)
+
+
 def _body():
     catalog, _ = document_archive.library()
     return "\n\n".join(row["text"] for row in catalog[SOURCE]["paragraphs"])

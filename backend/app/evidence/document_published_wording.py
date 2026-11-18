@@ -24,8 +24,10 @@ SCOPE = ("This check compares the marked text with the cited U.S. Government Acc
          "The comparison contributes zero weight to the overall AI assessment.")
 PDF_COLUMNS_SCOPE = ("Only the cited spans in the listed columns were compared. "
                      "The check sets aside bullets, matching wrapped words, and standalone headings without an earlier counterpart.")
+ODT_SCOPE = "Locations count characters within extracted OpenDocument body paragraphs in reading order."
+ODT_COORDINATES = "extracted-paragraph-codepoints"
 ARCHIVE_LICENSE = "https://gov-report-data.github.io/#license"
-FORMATS = {".txt": "plain", ".docx": "python-docx", ".pdf": "pymupdf"}
+FORMATS = {".txt": "plain", ".docx": "python-docx", ".odt": "odt", ".pdf": "pymupdf"}
 REPORT_ID = re.compile(r"[A-Z0-9][A-Z0-9-]{2,39}")
 HASH = re.compile(r"[0-9a-f]{64}")
 _TYPOGRAPHY = str.maketrans({**{c: bytes([c]).decode("cp1252", errors="replace") for c in range(0x80, 0xA0)},
@@ -50,7 +52,8 @@ def report_view(record, method):
         return None
     columns = record["schema"] == PDF_COLUMNS_SCHEMA
     sections = record["sections"] if columns else [record]
-    return {"title": TITLE, "scope": SCOPE + (" " + PDF_COLUMNS_SCOPE if columns else ""),
+    layout_scope = PDF_COLUMNS_SCOPE if columns else ODT_SCOPE if method == "odt" else ""
+    return {"title": TITLE, "scope": SCOPE + (" " + layout_scope if layout_scope else ""),
             "license_url": ARCHIVE_LICENSE, "method": method, "published_style_matches": record["published_style_matches"],
             "sections": [{**section, "source_url": archive_url(section["reference"]["id"])} for section in sections]}
 
@@ -73,6 +76,16 @@ def _mapped_source(extension, text, mapping, metadata, word_review):
     if (method is None or method != metadata.get("method") or not 0 < len(text) <= 20_000 or not mapping
             or "\ufffd" in text or "\x00" in text):
         return False
+    if method == "odt":
+        previous = 0
+        for index, block in enumerate(mapping):
+            start, end = block["start"], block["end"]
+            if (block.get("kind") != "markup" or block.get("paragraph_index") != index
+                    or start != (previous + 2 if index else 0) or not start < end <= len(text)
+                    or text[previous:start] != ("\n\n" if index else "")):
+                return False
+            previous = end
+        return previous == len(text) and len(mapping) == metadata.get("paragraph_count")
     return method == "plain" or native.checked_end(method, text, mapping, metadata, word_review) == len(text)
 
 
@@ -86,12 +99,17 @@ def eligible(extension, text, mapping, metadata, word_review, *, pdf_columns=Fal
 def _places(method, mapping, start, end):
     # A deletion has no submitted characters. Locate the next surviving character.
     stop = max(end, start + 1)
-    if method != "plain":
+    if method not in {"plain", "odt"}:
         return native.locate(method, mapping, start, stop)
     places = []
     for block in mapping:
         a, b = max(start, block["start"]), min(stop, block["end"])
         if a < b:
+            if method == "odt":
+                places.append({"start": a, "end": b, "paragraph": block["paragraph_index"] + 1,
+                               "coordinate_space": ODT_COORDINATES,
+                               "ranges": [[a - block["start"], b - block["start"]]]})
+                continue
             ranges = clip_source_ranges(block["source_ranges"], a, b)
             if not ranges:
                 return []
@@ -296,6 +314,28 @@ def _validate_sentences(rows, changes, chars):
         previous, boundary = index, end
 
 
+def _validate_odt_locations(row):
+    start, end = row["start"], max(row["start"] + 1, row["end"])
+    paragraph = 0
+    cursor = start
+    for place in row["locations"]:
+        if (not isinstance(place, dict) or set(place) != {"start", "end", "paragraph", "coordinate_space", "ranges"}
+                or place["coordinate_space"] != ODT_COORDINATES
+                or place["start"] != cursor or not _bounded([place["start"], place["end"]], end)
+                or type(place["paragraph"]) is not int or place["paragraph"] <= paragraph
+                or (paragraph and place["paragraph"] != paragraph + 1)):
+            raise ValueError("Invalid extracted OpenDocument paragraph location")
+        ranges = place["ranges"]
+        if (not isinstance(ranges, list) or len(ranges) != 1 or not _bounded(ranges[0], place["end"])
+                or ranges[0][1] - ranges[0][0] != place["end"] - place["start"]
+                or (paragraph and ranges[0][0] != 0)):
+            raise ValueError("Invalid extracted OpenDocument paragraph character range")
+        paragraph = place["paragraph"]
+        cursor = place["end"] + 2
+    if cursor - 2 != end:
+        raise ValueError("Extracted OpenDocument paragraph locations do not cover the marked span")
+
+
 def _validate_columns(record, source):
     sections = record.get("sections")
     if (set(record) != {"schema", "archive_sha256", "sections", "published_style_matches", "authorship_confidence_contribution"}
@@ -383,6 +423,11 @@ def validate(document, expected):
         _validate_change(row, start, end, earlier_start, earlier_end)
     if schema == SENTENCES_SCHEMA:
         _validate_sentences(record["changed_sentences"], record["changes"], source["chars"])
+    if source["method"] == "odt":
+        if schema != SENTENCES_SCHEMA:
+            raise ValueError("OpenDocument wording comparison requires extracted paragraph locations")
+        for row in record["changes"] + record["changed_sentences"]:
+            _validate_odt_locations(row)
 
 
 def _verify_columns(record, text, mapping, metadata, word_review):

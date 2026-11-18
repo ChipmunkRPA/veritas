@@ -527,7 +527,8 @@ type PercentageSource = { kind: 'pdf'; page: number; block: number; bbox: number
   | { kind: 'email'; mime_part: string; source_start: number; source_end: number }
 type PublishedWordingRange = { start: number; end: number; archive_range: [number, number] }
 type PublishedWordingLocation = { start: number; end: number; page: number; boxes: [number, number, number, number][] }
-  | { start: number; end: number; paragraph?: number; ranges: [number, number][] }
+  | { start: number; end: number; paragraph?: number; ranges: [number, number][];
+      coordinate_space?: 'extracted-paragraph-codepoints' }
 export interface PublishedWordingSection {
   reference: { id: string; published_date: string; version_url: string; source_record_sha256: string; transcript_sha256: string; text: string };
   submitted_range: [number, number]; archive_range: [number, number];

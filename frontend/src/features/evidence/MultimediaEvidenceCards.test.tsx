@@ -212,6 +212,26 @@ describe('ordinary multimedia evidence', () => {
     expect(source.getByRole('link', { name: 'U.S. GAO report GAO-16-123' }).getAttribute('href')).toBe('https://www.gao.gov/products/GAO-16-123')
   })
 
+  it('labels the paragraph positions of OpenDocument wording differences', () => {
+    show({ ...document, packets: [], source: { ...document.source, method: 'odt' }, coverage: {
+      published_wording_review: {
+        schema: 'document-published-wording-review/3', authorship_confidence_contribution: 0, archive_sha256: 'b'.repeat(64),
+        reference: { id: 'GAO-16-123', published_date: '2016-01-01', version_url: 'https://huggingface.co/',
+          text: 'Monday', source_record_sha256: 'd'.repeat(64), transcript_sha256: 'e'.repeat(64) },
+        submitted_range: [0, 39], archive_range: [0, 6], published_style_matches: [],
+        changes: [{ start: 31, end: 39, submitted: 'Thursday', archive_range: [0, 6], locations: [
+          { start: 31, end: 39, paragraph: 2, ranges: [[12, 20]], coordinate_space: 'extracted-paragraph-codepoints' },
+        ] }],
+      },
+    } })
+    const section = within(screen.getByRole('region', { name: 'Earlier published wording' }))
+    expect(section.getByText(/within extracted OpenDocument body paragraphs/)).toBeTruthy()
+    expect(section.getByText(/Extracted OpenDocument paragraph 2 characters/)).toBeTruthy()
+    expect(section.getByText('[12, 20)')).toBeTruthy()
+    expect(section.getByText('Thursday')).toBeTruthy()
+    expect(section.getByText('Monday')).toBeTruthy()
+  })
+
   it('explains a passage found by comparing writing within the file', () => {
     show({ ...document, packets: [], coverage: {
       writing_passage_intervals: {

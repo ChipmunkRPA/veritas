@@ -26,6 +26,7 @@ from app.provenance import c2pa, office_credentials
 from app.reports import engine, public_package, snapshot
 from app.storage.db import Analysis
 from app.storage.files import DOCUMENT_ARCHIVES
+from scripts.review_public_content_credentials import inspect
 
 PARAGRAPH = "This locally authored paragraph gives the document reader enough ordinary prose to preserve its exact position."
 ODT_XML = """<office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
@@ -69,6 +70,23 @@ def entry(data, mime):
     ctx = SimpleNamespace(media=SimpleNamespace(original_bytes=lambda: data), outputs=StageOutputs(probe={"mime": mime}),
                           exhibits=SimpleNamespace(table=Mock(return_value="table")))
     return detector_entry(adapter.spec, adapter.run(ctx), None)
+
+
+def test_office_credentials_reviewer_reads_original(office, tmp_path):
+    extension, mime, _, content, _ = office
+    path = tmp_path / ("original" + extension)
+    path.write_bytes(content)
+
+    result = inspect(path)
+
+    assert result["media_type"] == mime
+    assert result["document_binding"] is True
+    assert result["pipeline_action"] == "stop_statistical_detection"
+    reserved_sample = tmp_path / "receipt.asset"
+    reserved_sample.write_bytes(content)
+    assert inspect(reserved_sample, result["sha256"], office_extension=extension) == result
+    with pytest.raises(ValueError, match="expected original SHA-256"):
+        inspect(path, "0" * 64)
 
 
 def test_scope_binding_and_changed_document(office, tmp_path):

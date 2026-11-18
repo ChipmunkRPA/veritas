@@ -64,7 +64,7 @@
 <p class="caption">Original PDF pages {{ locations | map(attribute='page') | unique | join(', ') }}. Word boxes are recorded in JSON.</p>
 {% else %}
 {% for place in locations %}
-<p class="caption">{% if method == 'python-docx' %}Word paragraph {{ place.paragraph }} characters{% else %}Original text characters{% endif %}
+<p class="caption">{% if method == 'python-docx' %}Word paragraph {{ place.paragraph }} characters{% elif method == 'odt' %}Extracted OpenDocument paragraph {{ place.paragraph }} characters{% else %}Original text characters{% endif %}
 {% for span in place.ranges %}<span class="mono">[{{ span[0] }}, {{ span[1] }})</span>{{ ', ' if not loop.last else '.' }}{% endfor %}</p>
 {% endfor %}
 {% endif %}

@@ -3,6 +3,12 @@
 Started 5 November 2026. GCP deployment is deferred. This work improves detection
 and the evidence supporting it before expanding hosting.
 
+The [stereo covariance comparison](video-stereo-covariance-2026-11-17.md)
+confirms missed speech removals under loud room sound on 12 further speakers.
+The [document format review](document-formats-2026-11-17.md) records the seven
+local upload formats, including signed Word and ODT verification and exact
+earlier-wording locations for qualifying ODT documents.
+
 ## Requirements and order
 
 On 7 November the user added three priorities: verified provider provenance

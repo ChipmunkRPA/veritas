@@ -17,10 +17,14 @@ _REVIEW_POINTS = {85: 0.34823856868844094, 90: 0.4593661360933643}
 
 def _geometry(body, schema):
     jpeg = jpeg_bitstream.read(body)
-    qualities = _REVIEW_POINTS if schema == binding.SCHEMA else (90,)
-    if (jpeg is None or jpeg.precision != 8 or jpeg.ijg_quality not in qualities
+    if jpeg is None:
+        return None
+    qualities = _REVIEW_POINTS if schema in {binding.QUALITY_SCHEMA, binding.SCHEMA} else (90,)
+    sampling = jpeg.subsampling
+    factors = binding.SUBSAMPLING.get(sampling) if schema == binding.SCHEMA else (2, 2)
+    if (factors is None or jpeg.precision != 8 or jpeg.ijg_quality not in qualities
             or min(jpeg.width, jpeg.height) < 320 or jpeg.width * jpeg.height > 1_048_576
-            or [(c.id, c.h, c.v) for c in jpeg.components] != [(1, 2, 2), (2, 1, 1), (3, 1, 1)]
+            or [(c.id, c.h, c.v) for c in jpeg.components] != [(1, *factors), (2, 1, 1), (3, 1, 1)]
             or any(jpeg.table_bits.get(c.table_id) != 8 for c in jpeg.components)
             or jpeg.table(1) != jpeg.table(2)):
         return None
@@ -30,9 +34,10 @@ def _geometry(body, schema):
     with Image.open(io.BytesIO(body)) as image:
         orientation = image.getexif().get(274, 1)
         orientations = (1,) if schema == binding.LEGACY_SCHEMA else range(1, 9)
-        if image.mode != "RGB" or type(orientation) is not int or orientation not in orientations:
+        if (image.mode != "RGB" or type(orientation) is not int or orientation not in orientations
+                or sampling != "4:2:0" and image.info.get("adobe_transform") not in {None, 1}):
             return None
-        return jpeg.width, jpeg.height, orientation, jpeg.ijg_quality
+        return jpeg.width, jpeg.height, orientation, jpeg.ijg_quality, sampling
 
 
 def record(source_sha256, body=None, *, stopped=False, prior=False, check=None, schema=binding.SCHEMA):
@@ -51,9 +56,11 @@ def record(source_sha256, body=None, *, stopped=False, prior=False, check=None, 
                 status = "no_region"
                 measurement = {"grid_offset": list(measured.phase), "estimated_earlier_quality": measured.previous_quality,
                                "background_support": [round(measured.background, 6), round(measured.separated_from_next, 6)]}
-                width, height, orientation, quality = geometry
-                if schema == binding.SCHEMA:
+                width, height, orientation, quality, sampling = geometry
+                if schema in {binding.QUALITY_SCHEMA, binding.SCHEMA}:
                     measurement["delivery_quality"] = quality
+                if schema == binding.SCHEMA:
+                    measurement["delivery_subsampling"] = sampling
                 region = measured.regions["surrounded_scan"]
                 if region is not None and region.score > _REVIEW_POINTS[quality]:
                     status = "matched"

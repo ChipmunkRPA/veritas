@@ -66,6 +66,17 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [OpenDocument earlier-draft comparison](document-formats-2026-11-17.md#earlier-opendocument-drafts)
+  adds precise marked text and source offsets across ODT, Word, TXT, and PDF
+  pairs. With an earlier copy supplied, it marked changes inside 33 of 33 fresh
+  rewritten sentences and all 17 human revisions. The standalone trial found
+  one of the 33 at its separate localization criterion.
+
+- [JPEG color export coverage](image-previous-grid-2026-11-17.md#422-and-444-color-exports)
+  extends the compression evidence to the tested 4:2:2 and 4:4:4 formats.
+  All 2,424 added deliveries reproduced their corresponding brightness
+  measurements and displayed crop coordinates.
+
 - [Speech-activity gaps during loud room sound](video-speech-activity-gaps-2026-11-17.md)
   located six of 24 staged removals where voice was 5 dB below the room
   recording, compared with two for the previous stereo check. Ordinary flags

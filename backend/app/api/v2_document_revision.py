@@ -20,7 +20,7 @@ from app.api.v2_evidence import _analysis
 from app.cases import review
 from app.core.config import settings
 from app.core.logging import get_logger
-from app.evidence.document_revision import FORMATS, MAX_BYTES, MIXED_DRAFTS
+from app.evidence.document_revision import COMPARABLE_DRAFTS, FORMATS, MAX_BYTES, MIXED_DRAFTS
 from app.storage.db import get_session
 from app.storage.objects import ObjectNotFound, ObjectStoreError, default_store
 
@@ -35,10 +35,10 @@ router = APIRouter(prefix="/api/v2", tags=["evidence"], dependencies=[Depends(ra
 
 class DocumentRevisionAvailability(BaseModel):
     available: bool
-    extension: Literal[".eml", ".txt", ".docx", ".pdf"] | None = None
+    extension: Literal[".eml", ".txt", ".docx", ".odt", ".pdf"] | None = None
     paired_check_available: bool | None = None
     paired_mixed_formats_available: bool | None = None
-    earlier_extensions: list[Literal[".eml", ".txt", ".docx", ".pdf"]] | None = None
+    earlier_extensions: list[Literal[".eml", ".txt", ".docx", ".odt", ".pdf"]] | None = None
 
 
 class DraftSource(BaseModel):
@@ -49,8 +49,8 @@ class DraftSource(BaseModel):
     mime_part: str | None
     decoded_html_sha256: str | None = None
     decoded_html_characters: int | None = None
-    format: Literal["plain_text", "docx", "pdf"] | None = None
-    coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint",
+    format: Literal["plain_text", "docx", "odt", "pdf"] | None = None
+    coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint", "odt_body_unicode_codepoint",
                               "pdf_native_text_unicode_codepoint"] | None = None
 
 
@@ -255,8 +255,8 @@ class DraftComparison(BaseModel):
                          "chipmunk.document-revision-comparison/3", "chipmunk.document-revision-comparison/4",
                          "chipmunk.document-revision-comparison/5", "chipmunk.document-revision-comparison/6",
                          "chipmunk.document-revision-comparison/7", "chipmunk.document-revision-comparison/8"] = Field(alias="schema")
-    format: Literal["email", "plain_text", "docx", "pdf", "mixed"]
-    coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint",
+    format: Literal["email", "plain_text", "docx", "odt", "pdf", "mixed"]
+    coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint", "odt_body_unicode_codepoint",
                               "pdf_native_text_unicode_codepoint", "email_html_extracted_text_unicode_codepoint",
                               "per_source_unicode_codepoint"]
     earlier: DraftSource
@@ -310,7 +310,8 @@ def _original(aid: str, *, reject_inactive: bool = False) -> tuple[str, int, str
 
 
 def _unavailable() -> ProblemError:
-    return ProblemError(404, "Earlier-draft comparison unavailable", "A retained, completed, active .eml, .txt, .docx or .pdf analysis is required.")
+    return ProblemError(404, "Earlier-draft comparison unavailable",
+                        "A retained, completed, active .eml, .txt, .docx, .odt or .pdf analysis is required.")
 
 
 def _paired_enabled(extension: str | None) -> bool:
@@ -334,8 +335,8 @@ def availability(aid: str, request: Request):
         except (OSError, ObjectStoreError):
             pass
     payload = {"available": extension is not None, "extension": extension}
-    if extension in MIXED_DRAFTS:
-        payload["earlier_extensions"] = list(MIXED_DRAFTS)
+    if extension in COMPARABLE_DRAFTS:
+        payload["earlier_extensions"] = list(COMPARABLE_DRAFTS)
     if _paired_enabled(extension):
         payload["paired_check_available"] = True
         if extension in MIXED_DRAFTS and settings.document_paired_independent_review:
@@ -469,7 +470,7 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
     ROUTE, response_model=DocumentRevisionResponse, responses=problem_responses(400, 401, 404, 409, 413, 422, 429, 500),
     openapi_extra={"requestBody": {"required": True, "content": {"multipart/form-data": {"schema": {
         "type": "object", "required": ["earlier"], "properties": {
-            "earlier": {"type": "string", "format": "binary", "description": "Earlier version. TXT, DOCX and PDF may be mixed. Use EML with EML."},
+            "earlier": {"type": "string", "format": "binary", "description": "Earlier version. TXT, DOCX, ODT and PDF may be mixed. Use EML with EML."},
             "include_pdf": {"type": "string", "enum": ["true", "false"], "default": "false"},
             "include_paired_check": {"type": "string", "enum": ["true", "false"], "default": "false"},
         },
@@ -494,7 +495,7 @@ async def comparison(aid: str, request: Request):
                     or any(len(form.getlist(key)) > 1 for key in form)):
                 raise ProblemError(422, "Earlier draft required", "Upload a single earlier draft to compare.")
             earlier_extension = Path(earlier.filename or "").suffix.lower()
-            if earlier_extension != original[2] and any(suffix not in MIXED_DRAFTS for suffix in (earlier_extension, original[2])):
+            if earlier_extension != original[2] and any(suffix not in COMPARABLE_DRAFTS for suffix in (earlier_extension, original[2])):
                 raise ProblemError(422, "Draft formats differ", f"Choose an earlier {original[2]} file to match the retained document.")
             limit = upload_limit()
             data = await earlier.read(limit + 1)

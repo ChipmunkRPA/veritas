@@ -28,7 +28,13 @@ detector on the same files without loading this project's models.
 
 The [speech-activity gap comparison](video-speech-activity-gaps-2026-11-17.md#replay)
 reserves 12 additional speaker groups and evaluates three frozen readings.
-The replay gives per-file clock, coverage and outcome for both encodings.
+The export independently verifies the native clock and stereo sample hash
+of all 336 videos and gives model-independent truth and response inputs.
+
+The [OpenDocument draft comparison](document-formats-2026-11-17.md#earlier-opendocument-drafts)
+lets reviewers verify two supplied originals against the same marked words
+and paragraph ranges. The paired replay includes fresh official prose,
+staged localized rewrites, same-work human revisions, and restyling controls.
 
 The [portrait face-change replay](video-face-portrait-2026-11-17.md#reproduce)
 checks input hashes, native frame intervals and ordinary shot controls on

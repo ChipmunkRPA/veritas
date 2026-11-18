@@ -5,7 +5,8 @@ import { saveBlob } from '../../lib/api/reports'
 import { compareDraft, draftAvailability, type DraftComparison, type DraftExcerpt, type DraftExtension, type DocumentRevisionResponse } from './documentRevisionApi'
 
 const labels = { body: 'Message body', quoted: 'Quoted text', signature: 'Signature' }
-const sourceFormats = { plain_text: 'Plain text', docx: 'Word body text', pdf: 'PDF text layer' }
+const sourceFormats = { plain_text: 'Plain text', docx: 'Word body text', odt: 'OpenDocument body text', pdf: 'PDF text layer' }
+const changeLabels = { email: null, plain_text: 'Text', docx: 'Word body text', odt: 'OpenDocument body text', pdf: 'PDF text', mixed: 'Wording change' }
 const contextLabels = ['Previous sentence', 'Changed sentence', 'Next sentence']
 const tableSkips = {
   no_matching_position: 'No table at the same body position.',
@@ -150,7 +151,7 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
   const relocated = comparison.relocated_passages ?? []
   const editedRelocation = comparison.schema === 'chipmunk.document-revision-comparison/8'
   const changeCount = comparison.changes.length + (wordTables?.compared.reduce((sum, table) => sum + table.changes.length, 0) ?? 0)
-  const formatLabel = mixed ? 'Wording change' : docx ? 'Word body text' : pdfText ? 'PDF text' : comparison.format === 'plain_text' ? 'Text' : null
+  const formatLabel = changeLabels[comparison.format]
   const downloadJson = () => saveBlob(new Blob([JSON.stringify(comparison, null, 2) + '\n'], { type: 'application/json' }),
     'chipmunk-verify-draft-comparison.json')
   const downloadPdf = (body: string) => {
@@ -290,6 +291,7 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
     {!!comparison.changes.length && <>
       <p className="mt-2 mb-0 text-caption text-text-muted">Highlights mark changed words and punctuation. {docx
         ? 'Word offsets count Unicode code points in the body text. Two line breaks separate included paragraphs. Paragraph ranges start within each paragraph.'
+        : comparison.format === 'odt' ? 'OpenDocument offsets count Unicode code points in the extracted body and within each listed paragraph.'
         : html ? 'The first range gives the position in the extracted reply. The ranges after the arrow give the positions in the decoded HTML MIME part. Both count Unicode code points.'
         : pdfText ? 'Offsets count Unicode code points in the extracted text. Page previews cover selected regions.'
         : mixed ? 'Each side uses its own Unicode character offsets and source positions.'
@@ -321,8 +323,8 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
   const [includePairedCheck, setIncludePairedCheck] = useState(false)
   const earlierName = file?.name.toLowerCase()
   const sameFormat = !earlierName || earlierName.endsWith(extension)
-  const canRunPairedCheck = pairedCheckAvailable && (sameFormat || (pairedMixedFormatsAvailable &&
-    earlierExtensions.some(suffix => earlierName?.endsWith(suffix))))
+  const canRunPairedCheck = pairedCheckAvailable && (sameFormat || (pairedMixedFormatsAvailable
+    && earlierExtensions.some(suffix => suffix !== '.odt' && earlierName?.endsWith(suffix))))
   const active = useRef<AbortController | null>(null)
   useEffect(() => () => active.current?.abort(), [])
 
@@ -349,8 +351,9 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
 
   return <section aria-labelledby={headingId} className="rounded-md border border-border p-4">
     <h2 id={headingId} className="m-0 text-body font-medium">Compare with an earlier draft</h2>
-    <p className="mt-2 mb-0 text-small text-text-muted">Choose an earlier {earlierExtensions.length > 1 ? 'TXT, DOCX or PDF' : extension} file, up to 1 MiB, to see where the wording changed.</p>
+    <p className="mt-2 mb-0 text-small text-text-muted">Choose an earlier {earlierExtensions.length > 1 ? 'TXT, DOCX, ODT or PDF' : extension} file, up to 1 MiB, to see where the wording changed.</p>
     {extension === '.docx' && <p className="mt-2 mb-0 text-small text-text-muted">Checks body wording and matches simple Word tables by exact row and column labels. A moved table needs the same unique Word caption.</p>}
+    {extension === '.odt' && <p className="mt-2 mb-0 text-small text-text-muted">Checks wording in extracted OpenDocument body paragraphs, headings, lists and tables.</p>}
     {(extension === '.txt' || extension === '.docx') && sameFormat && <p className="mt-2 mb-0 text-small text-text-muted">Matching file formats can also show where an unchanged body paragraph moved.</p>}
     {extension === '.eml' && <p className="mt-2 mb-0 text-small text-text-muted">Use two plain-text emails or two HTML-only replies with two, three, five or six simple body paragraphs and a trailing blockquote.</p>}
     {extension === '.pdf' && <p className="mt-2 mb-0 text-small text-text-muted">Use unlocked PDFs with selectable text on every page, up to 12 pages each.</p>}

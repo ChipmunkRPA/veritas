@@ -129,3 +129,66 @@ checkouts, PDF and JSON exports, and browser verification.
 A separate standard-library recount verified 616 delivery hashes, the source
 reservation and freeze, both carrier comparisons, and the mouth frame and
 sample brackets. It reproduced gains and losses by speaker.
+
+### Compare another detector
+
+The [portable comparison](evaluation-panels/video-speech-activity-gap-independent-2026-11-17.json.gz)
+contains the held manifest, exact edit intervals, file index, native clocks
+and predictions from all three checks. This export rehashed all 336 videos
+and their 12 original parent files. A separate FFmpeg readback verified every
+presented stereo sample against its commitment and every picture timestamp
+against the reserved 30 fps clock. AAC padding is recorded separately from the
+presented extent. The soundtrack ranges are half-open intervals on the exact
+16 kHz sample clock. Picture anchors carry frame indexes and native PTS on the
+1/30,000 time base.
+
+The paired receipt records where a check gained or lost a correct location,
+raised an ordinary alert, or assessed a clip the other check could not assess.
+Under louder room sound, both checks assessed 16 of 24 edits per encoding. The
+speech-activity check alone assessed two and the prior stereo check alone
+assessed four. Both skipped two. Each encoding gained four correctly located
+edits across two speakers and lost zero. With quieter room sound, the
+speech-activity check gained ten correct locations on PCM and eleven on AAC,
+and lost one on each. The near-silence comparator records coverage only when
+it retains a proposal.
+
+Use the standard-library reviewer to recount the reference or score your own
+response on the same inputs. Preserve each case ID and input hash in your
+response. Use `regions: []` for clips you assessed without producing a range.
+For an unassessed clip, set the response to `null` and record a reason.
+
+```sh
+review=$(mktemp -d)
+receipt=docs/evaluation-panels/video-speech-activity-gap-independent-2026-11-17.json.gz
+python3 -B -S - "$receipt" "$review" <<'PY'
+import gzip
+import json
+import sys
+from pathlib import Path
+
+with gzip.open(sys.argv[1], "rt", encoding="utf-8") as stream:
+    receipt = json.load(stream)
+directory = Path(sys.argv[2])
+parts = {key: receipt[key] for key in ("manifest", "truth", "file_index")}
+for key, value in (parts | receipt["readings"]).items():
+    (directory / f"{key}.json").write_text(json.dumps(value), encoding="utf-8")
+PY
+python3 -B -IS backend/scripts/independent_review.py count-events \
+  "$review/manifest.json" "$review/truth.json" "$review/speech_activity_gap.json" \
+  "$review/counts.json" --match 0.4 0.4
+```
+
+To verify the local bytes before running a detector, use `verify-inputs` with
+the unpacked manifest and file index. The local media root contains the sibling
+`held` and `sources` folders from the preparation recipe. Rebuild the full
+portable receipt with FFmpeg and FFprobe on that local media root.
+
+```sh
+python3 -B -IS backend/scripts/independent_review.py verify-inputs \
+  "$review/manifest.json" "$review/file_index.json" "$review/file-checks.json" --root "$local_media"
+base=docs/evaluation-panels/video-speech-activity-gap
+PYTHONPATH=backend python3 -B -S -m scripts.export_video_speech_activity_review \
+  "$base-held-2026-11-17.json.gz" "$base-development-2026-11-17.json.gz" \
+  "$base-inputs-2026-11-17.json.gz" "$base-plan-2026-11-17.json.gz" \
+  "$local_media" "$review/rebuilt.json.gz"
+```

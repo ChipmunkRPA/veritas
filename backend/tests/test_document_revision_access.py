@@ -11,6 +11,7 @@ from email.parser import BytesParser
 from html import unescape
 from io import BytesIO
 from tempfile import TemporaryDirectory
+from zipfile import ZipFile
 
 import pymupdf
 import pytest
@@ -28,6 +29,7 @@ from app.evidence import document_revision
 from app.evidence import document_revision_writing as paired
 from app.reports.document_revision_pdf import _side
 from app.storage.db import Analysis, Artefact, BillingOrderRow
+from app.storage.files import ODT_MIME
 from scripts.review_document_revision_export import review
 
 
@@ -297,7 +299,7 @@ def test_pdf_comparison_binds_repeated_text_to_both_original_pages(reference_htt
     retained = _saved(f, "pdf-draft", ".pdf", later)
     url = _url("pdf-draft")
     assert f.client.get(url, headers=f.viewer).json() == {
-        "available": True, "extension": ".pdf", "earlier_extensions": [".txt", ".docx", ".pdf"],
+        "available": True, "extension": ".pdf", "earlier_extensions": [".txt", ".docx", ".pdf", ".odt"],
     }
     response = f.client.post(url, headers=f.viewer, files=_upload(earlier, ".pdf"), data={"include_pdf": "true"})
     assert response.status_code == 200, response.text
@@ -767,7 +769,7 @@ def test_word_comparison_uses_exact_body_paragraph_coordinates_in_api_pdf_and_re
     _saved(f, "word-draft", ".DOCX", later)
     url = _url("word-draft")
     assert f.client.get(url, headers=f.viewer).json() == {
-        "available": True, "extension": ".docx", "earlier_extensions": [".txt", ".docx", ".pdf"],
+        "available": True, "extension": ".docx", "earlier_extensions": [".txt", ".docx", ".pdf", ".odt"],
     }
     wrong = f.client.post(url, headers=f.viewer, files=_upload(earlier, ".txt"))
     assert wrong.status_code == 422
@@ -807,6 +809,115 @@ def test_word_comparison_uses_exact_body_paragraph_coordinates_in_api_pdf_and_re
     export.write_text(json.dumps(comparison))
     with pytest.raises(ValueError, match="does not replay"):
         review(export, old_path, new_path)
+
+
+@pytest.mark.parametrize(("old_extension", "new_extension"), [
+    (".odt", ".odt"), (".docx", ".odt"), (".odt", ".docx"), (".pdf", ".odt"), (".odt", ".pdf"),
+])
+def test_odt_draft_changes_replay_original_paragraphs(reference_http, monkeypatch, tmp_path, old_extension, new_extension):
+    from test_office_credentials import ODT_XML
+
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    monkeypatch.setattr(paired, "score", lambda _: pytest.fail("ODT text changes must not request statistical responses"))
+    opening = "Please send the résumé on "
+    texts = (opening + "Monday.", opening + "Thursday.")
+
+    def build(extension, text):
+        paragraphs = ("Test heading", text, "Known table cell")
+        if extension == ".pdf":
+            with pymupdf.open() as document:
+                page = document.new_page()
+                for row, paragraph in enumerate(paragraphs, 1):
+                    page.insert_text((60, row * 60), paragraph)
+                return document.tobytes()
+        buffer = BytesIO()
+        if extension == ".docx":
+            word = Document()
+            for paragraph in paragraphs:
+                word.add_paragraph(paragraph)
+            word.save(buffer)
+        else:
+            with ZipFile(buffer, "w") as archive:
+                archive.writestr("mimetype", ODT_MIME)
+                archive.writestr("content.xml", ODT_XML.format(paragraph=text.replace("résumé", "<text:span>ré</text:span>sumé")))
+        return buffer.getvalue()
+
+    earlier, later = build(old_extension, texts[0]), build(new_extension, texts[1])
+    _saved(f, "odt-draft", new_extension, later)
+    url = _url("odt-draft")
+    availability = f.client.get(url, headers=f.viewer).json()
+    assert availability["extension"] == new_extension and ".odt" in availability["earlier_extensions"]
+    if new_extension == ".odt":
+        assert not availability.get("paired_check_available")
+
+    result = f.client.post(url, headers=f.viewer, files=_upload(earlier, old_extension),
+                           data={"include_pdf": "true", "include_paired_check": "true"})
+    assert result.status_code == 200, result.text
+    assert result.headers["cache-control"] == "no-store"
+    content = result.json()
+    report = content["comparison"]
+    assert "paired_check" not in report and "Annotation text" not in result.text
+    (change,) = report["changes"]
+    spaces = {".odt": document_revision.ODT_COORDINATES, ".docx": document_revision.WORD_COORDINATES,
+              ".pdf": document_revision.document_revision_pdf.COORDINATES}
+    for side, extension, paragraph in zip(("earlier", "later"), (old_extension, new_extension), texts, strict=True):
+        if old_extension != new_extension:
+            assert report[side]["coordinate_space"] == spaces[extension]
+        else:
+            assert report["coordinate_space"] == document_revision.ODT_COORDINATES
+        excerpt = change[side]
+        if extension == ".pdf":
+            (page,) = excerpt["pdf_pages"]
+            assert page["page"] == 1 and len(page["word_regions"]) == 1
+            assert excerpt["text"] in paragraph
+            continue
+        (anchor,) = excerpt["paragraphs"]
+        assert anchor["paragraph"] == 2 and anchor["body_index"] == 1
+        assert paragraph[anchor["start"]:anchor["end"]] == excerpt["text"]
+        assert excerpt["start"] == len("Test heading\n\n") + anchor["start"]
+    with pymupdf.open(stream=base64.b64decode(content["pdf"]), filetype="pdf") as pdf:
+        printed = " ".join(word for page in pdf for word in page.get_text().split())
+    assert all(value in printed for value in ("OpenDocument body text", "Monday", "Thursday", "Paragraph 2"))
+
+    old_path = tmp_path / f"earlier{old_extension}"
+    new_path = tmp_path / f"later{new_extension}"
+    export = tmp_path / "comparison.json"
+    old_path.write_bytes(earlier)
+    new_path.write_bytes(later)
+    export.write_text(json.dumps(report))
+    rebuilt = review(export, old_path, new_path)
+    pdf_present = ".pdf" in (old_extension, new_extension)
+    assert rebuilt["body_paragraph_ranges_verified"] == (1 if pdf_present else 2)
+    if pdf_present:
+        assert rebuilt["pdf_word_regions_verified"] == 1
+    odt_side = "earlier" if old_extension == ".odt" else "later"
+    change[odt_side]["paragraphs"][0]["start"] += 1
+    export.write_text(json.dumps(report))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(export, old_path, new_path)
+    unchanged = document_revision.compare(earlier, build(old_extension, texts[0]), old_extension)
+    assert unchanged["changes"] == []
+
+
+def test_odt_moved_unchanged_sentences_keep_their_words_unmarked():
+    from scripts.writing_odt_draft_transfer import odt
+
+    first = "The board completed its review of the revised timeline."
+    moved = "Several teams checked the recommended procedures against their existing plans."
+    changed = "The agency published the final public notice on Monday."
+    ending = "The office sent a copy of the notice to every participant."
+    old = " ".join((first, moved, changed, ending))
+    new = " ".join((first, changed.replace("Monday", "Tuesday"), moved, ending))
+
+    result, _, submitted, _ = document_revision.compare_with_sources(odt(old), odt(new), ".odt")
+
+    moved_start = submitted.index(moved)
+    marked = [(start, end) for row in result["changes"] for start, end in row["later"]["changed_tokens"]]
+    assert any(submitted[start:end] == "Tuesday" for start, end in marked)
+    assert all(end <= moved_start or start >= moved_start + len(moved) for start, end in marked)
+    reordered = " ".join((first, changed, moved, ending))
+    assert document_revision.compare(odt(old), odt(reordered), ".odt")["changes"] == []
 
 
 def _word_with_table(value, *, label="Review", layout="simple", bold=False, body=True):

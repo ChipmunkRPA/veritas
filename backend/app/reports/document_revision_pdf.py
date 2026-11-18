@@ -28,7 +28,7 @@ a { color: #285f50; }
 .page-preview figcaption { color: #526658; font-size: 8.5pt; }
 """
 LABELS = {"body": "Message body", "quoted": "Quoted text", "signature": "Signature"}
-FILE_LABELS = {"plain_text": "Plain text", "docx": "Word body text", "pdf": "PDF text layer"}
+FILE_LABELS = {"plain_text": "Plain text", "docx": "Word body text", "odt": "OpenDocument body text", "pdf": "PDF text layer"}
 VALUE_LABELS = {"number": "Number changed", "date": "Date changed", "currency": "Amount changed",
                 "percentage": "Percentage changed", "percentage_points": "Percentage points changed"}
 PNG_URL = "data:image/png;base64,"
@@ -195,7 +195,8 @@ def render(comparison: dict) -> bytes:
     change_class = ' class="keep-together"' if keep_changes_together else ""
     html_reply = comparison["coordinate_space"] == HTML_COORDINATES
     mixed = comparison["format"] == "mixed"
-    format_label = {"plain_text": "Text", "docx": "Word body text", "pdf": "PDF text", "mixed": "Wording change"}.get(comparison["format"])
+    format_label = {"plain_text": "Text", "docx": "Word body text", "odt": "OpenDocument body text",
+                    "pdf": "PDF text", "mixed": "Wording change"}.get(comparison["format"])
     for change in comparison["changes"]:
         label = format_label or LABELS[change["role"]]
         anchor = escape(change["id"])
@@ -218,11 +219,13 @@ def render(comparison: dict) -> bytes:
     if comparison["format"] == "pdf":
         positions = ("Ranges use Unicode code points in the extracted text. Source boxes use unrotated PDF page points. "
                      "Previews show selected source regions.")
+    if comparison["format"] == "odt":
+        positions = "OpenDocument offsets count Unicode code points in the extracted body and within each listed paragraph."
     if html_reply:
         positions = ("The first range gives the position in the extracted reply. The ranges after the arrow give the positions "
                      "in the decoded HTML MIME part. Both count Unicode code points.")
     if mixed:
-        positions = ("Each side uses its own Unicode character offsets. Word paragraph offsets start within the paragraph. "
+        positions = ("Each side uses its own Unicode character offsets. Paragraph ranges start within the listed paragraph. "
                      "PDF source boxes use unrotated page coordinates.")
     word_tables = comparison.get("word_tables")
     no_changes = ("No other word or punctuation changes found." if edited_relocation else

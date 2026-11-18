@@ -3528,9 +3528,9 @@ export interface components {
             /** Available */
             available: boolean;
             /** Earlier Extensions */
-            earlier_extensions?: (".eml" | ".txt" | ".docx" | ".pdf")[] | null;
+            earlier_extensions?: (".eml" | ".txt" | ".docx" | ".odt" | ".pdf")[] | null;
             /** Extension */
-            extension?: (".eml" | ".txt" | ".docx" | ".pdf") | null;
+            extension?: (".eml" | ".txt" | ".docx" | ".odt" | ".pdf") | null;
             /** Paired Check Available */
             paired_check_available?: boolean | null;
             /** Paired Mixed Formats Available */
@@ -3562,13 +3562,13 @@ export interface components {
              * Coordinate Space
              * @enum {string}
              */
-            coordinate_space: "decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint" | "email_html_extracted_text_unicode_codepoint" | "per_source_unicode_codepoint";
+            coordinate_space: "decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "odt_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint" | "email_html_extracted_text_unicode_codepoint" | "per_source_unicode_codepoint";
             earlier: components["schemas"]["DraftSource"];
             /**
              * Format
              * @enum {string}
              */
-            format: "email" | "plain_text" | "docx" | "pdf" | "mixed";
+            format: "email" | "plain_text" | "docx" | "odt" | "pdf" | "mixed";
             /** Interpretation */
             interpretation: string;
             later: components["schemas"]["DraftSource"];
@@ -3778,7 +3778,7 @@ export interface components {
             /** Bytes */
             bytes: number;
             /** Coordinate Space */
-            coordinate_space?: ("decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint") | null;
+            coordinate_space?: ("decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "odt_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint") | null;
             /** Decoded Characters */
             decoded_characters: number;
             /** Decoded Html Characters */
@@ -3788,7 +3788,7 @@ export interface components {
             /** Decoded Text Sha256 */
             decoded_text_sha256: string;
             /** Format */
-            format?: ("plain_text" | "docx" | "pdf") | null;
+            format?: ("plain_text" | "docx" | "odt" | "pdf") | null;
             /** Mime Part */
             mime_part: string | null;
             /** Sha256 */
@@ -7862,7 +7862,7 @@ export interface operations {
                 "multipart/form-data": {
                     /**
                      * Format: binary
-                     * @description Earlier version. TXT, DOCX and PDF may be mixed. Use EML with EML.
+                     * @description Earlier version. TXT, DOCX, ODT and PDF may be mixed. Use EML with EML.
                      */
                     earlier: string;
                     /**

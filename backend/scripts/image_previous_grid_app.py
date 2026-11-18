@@ -92,7 +92,7 @@ def exported_evidence(client, route, name, path, evidence, check, signer, output
     return digest(pdf)
 
 
-def run(panel, output, *, browser, quality):
+def run(panel, output, *, browser, quality=90, case_rows=None):
     configure(output, ROOT)
     os.environ.update(VERITAS_ENVIRONMENT="dev", VERITAS_LOG_LEVEL="WARNING", VERITAS_IMAGE_REGION_MODE="candidate",
                       VERITAS_IMAGE_REGION_JPEG_REVIEW="true", VERITAS_IMAGE_REGION_JPEG90_REVIEW="true",
@@ -124,7 +124,7 @@ def run(panel, output, *, browser, quality):
             db.commit()
         client.headers["X-API-Key"] = key
         signer = body(client.get("/api/v2/instance/public-key"))
-        for name, row, proposed, correct, enabled in cases(panel, quality):
+        for name, row, proposed, correct, enabled in (cases(panel, quality) if case_rows is None else case_rows):
             file = panel / row["file"]
             assert digest(file.read_bytes()) == row["input_sha256"]
             settings.image_jpeg_prior_grid_review = enabled
@@ -146,6 +146,8 @@ def run(panel, output, *, browser, quality):
                 assert region is None
             if observed.get("measurement"):
                 assert observed["measurement"]["delivery_quality"] == row["quality"]
+                if "subsampling" in row:
+                    assert observed["measurement"]["delivery_subsampling"] == row["subsampling"]
             if name == "quality-75":
                 assert status == "outside_profile"
             if name == "current-region":

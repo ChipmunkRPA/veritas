@@ -5511,6 +5511,7 @@
                     ".eml",
                     ".txt",
                     ".docx",
+                    ".odt",
                     ".pdf"
                   ],
                   "type": "string"
@@ -5530,6 +5531,7 @@
                   ".eml",
                   ".txt",
                   ".docx",
+                  ".odt",
                   ".pdf"
                 ],
                 "type": "string"
@@ -5650,6 +5652,7 @@
             "enum": [
               "decoded_source_unicode_codepoint",
               "docx_body_unicode_codepoint",
+              "odt_body_unicode_codepoint",
               "pdf_native_text_unicode_codepoint",
               "email_html_extracted_text_unicode_codepoint",
               "per_source_unicode_codepoint"
@@ -5665,6 +5668,7 @@
               "email",
               "plain_text",
               "docx",
+              "odt",
               "pdf",
               "mixed"
             ],
@@ -6408,6 +6412,7 @@
                 "enum": [
                   "decoded_source_unicode_codepoint",
                   "docx_body_unicode_codepoint",
+                  "odt_body_unicode_codepoint",
                   "pdf_native_text_unicode_codepoint"
                 ],
                 "type": "string"
@@ -6454,6 +6459,7 @@
                 "enum": [
                   "plain_text",
                   "docx",
+                  "odt",
                   "pdf"
                 ],
                 "type": "string"
@@ -16190,7 +16196,7 @@
               "schema": {
                 "properties": {
                   "earlier": {
-                    "description": "Earlier version. TXT, DOCX and PDF may be mixed. Use EML with EML.",
+                    "description": "Earlier version. TXT, DOCX, ODT and PDF may be mixed. Use EML with EML.",
                     "format": "binary",
                     "type": "string"
                   },

@@ -16,12 +16,12 @@ SIZE = (369, 335)
 STORED_REGION = (37, 19, 85, 51)
 
 
-def jpeg(orientation, *, progressive, quality=90):
+def jpeg(orientation, *, progressive, quality=90, subsampling=2):
     image = Image.linear_gradient("L").resize(SIZE).convert("RGB")
     exif = Image.Exif()
     exif[274] = orientation
     output = BytesIO()
-    image.save(output, "JPEG", quality=quality, subsampling=2, exif=exif, progressive=progressive)
+    image.save(output, "JPEG", quality=quality, subsampling=subsampling, exif=exif, progressive=progressive)
     return output.getvalue()
 
 
@@ -36,7 +36,7 @@ def positive_measurement(monkeypatch, *, score=0.75):
 @pytest.mark.parametrize("orientation", range(1, 9))
 def test_previous_grid_uses_stored_measurement_and_oriented_crop(monkeypatch, orientation):
     positive_measurement(monkeypatch)
-    data = jpeg(orientation, progressive=orientation % 2 == 1)
+    data = jpeg(orientation, progressive=orientation % 2 == 1, subsampling=orientation % 3)
     record = source.record(sha256(data).hexdigest(), data)
     assert record["status"] == "matched"
     assert record["measurement"]["grid_offset"] == [5, 3]
@@ -99,3 +99,22 @@ def test_prior_grid_uses_the_point_for_the_actual_jpeg_quality(monkeypatch, qual
     if earlier["measurement"]:
         assert "delivery_quality" not in earlier["measurement"]
     assert source.verify(uploaded, {"record": earlier, "artifacts": {}}, {}.__getitem__)
+
+
+@pytest.mark.parametrize(("sampling", "label"), [(0, "4:4:4"), (1, "4:2:2"), (2, "4:2:0")])
+def test_sampled_color_profile_preserves_quality_schema_replay(monkeypatch, sampling, label):
+    positive_measurement(monkeypatch, score=0.40)
+    data = jpeg(6, progressive=True, quality=90, subsampling=sampling)
+    pin = sha256(data).hexdigest()
+    updated = source.record(pin, data)
+    earlier = source.record(pin, data, schema=binding.QUALITY_SCHEMA)
+
+    assert updated["status"] == "no_region"
+    assert updated["measurement"]["delivery_subsampling"] == label
+    assert earlier["status"] == ("no_region" if sampling == 2 else "outside_profile")
+    assert source.verify(data, {"record": earlier, "artifacts": {}}, {}.__getitem__)
+    assert source.verify(data, {"record": updated, "artifacts": {}}, {}.__getitem__)
+
+    updated["measurement"]["delivery_subsampling"] = "4:2:2" if sampling == 0 else "4:4:4"
+    with pytest.raises(ValueError, match="did not replay"):
+        source.verify(data, {"record": updated, "artifacts": {}}, {}.__getitem__)

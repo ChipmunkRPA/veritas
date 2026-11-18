@@ -93,11 +93,11 @@ from the retained JPEGs produced no qualifying earlier grid.
 
 The check runs by default in local Full and Deep image analyses. Set
 `VERITAS_IMAGE_JPEG_PRIOR_GRID_REVIEW=false` to disable it. It accepts the
-tested quality-85 and quality-90 4:2:0 tables in baseline JPEGs and in
-complete progressive JPEGs with fixed quantization tables. It can report a
-region when the aligned JPEG and regional image checks complete without
-selecting one. Verified AI credentials stop the analysis before this
-comparison.
+tested quality-85 and quality-90 tables with 4:2:0, 4:2:2, or 4:4:4 color
+sampling in baseline JPEGs and complete progressive JPEGs with fixed
+quantization tables. It can report a region when the aligned JPEG and
+regional image checks complete without selecting one. Verified AI
+credentials stop the analysis before this comparison.
 
 The ordinary view shows a rectangular outline, the unmarked crop from
 the submitted image, and a link that focuses the original on the same
@@ -159,13 +159,64 @@ outside the comparison profile. The queue held zero jobs before payment,
 and the on/off pair returned the same automated assessment.
 [Local delivery replay](evaluation-panels/image-previous-grid-deliveries-app-2026-11-17.json)
 
+### 4:2:2 and 4:4:4 color exports
+
+The prior-grid check uses the stored brightness plane. For the color sampling
+comparison, each delivery comes from the original prepared RGB pixels. The
+4:2:0 reference reproduces the published JPEG bytes. The 4:2:2 and 4:4:4
+exports use the same quantization tables and existing quality-specific points,
+with both baseline and progressive encodings. The progressive inputs also
+exercise EXIF orientation. The odd-size inputs remove the last row and column
+and compare all three samplings at that new size.
+
+The transfer uses both quality-90 insertion panels, the quality-85 insertion
+and independent removal panels, and the 30 camera controls per quality.
+It measures sampling and format handling on the same images used for the
+original assessment. The resulting evidence describes local compression
+history and carries zero AI weight. Earlier signed reports retain their
+original 4:2:0 eligibility. [Pillow JPEG encoding options](https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html#jpeg)
+
+All 2,424 new files preserved the exact decoded brightness, quantization
+table, detector measurements, status, and corresponding rectangle of their
+4:2:0 reference at the same size. This includes 2,256 files made from 564
+original-size inputs and 168 files made from 42 odd-size inputs. At the
+original sizes, each of the four delivery variants localized 31 of 112
+staged edits. Ten ordinary local blurs and two ordinary local copies showed
+the same compression clue. The check returned no highlights on any of the
+60 camera controls per variant. [Format transfer receipt](evaluation-panels/image-previous-grid-chroma-transfer-2026-11-17.json.gz)
+
+Six simulated USD 9.99 checkouts reproduced four edit regions, one ordinary
+control without a region, and an opt-out run on the same edited bytes. The
+browser, PDF, JSON and signed original-file replay reproduced each reported
+crop and its displayed coordinates. The opt-out retained the same automated
+assessment. Each analysis entered the queue after the simulated payment.
+Three earlier schema-3 report packages also verified against their original
+files. [Local app and browser receipt](evaluation-panels/image-previous-grid-chroma-app-2026-11-17.json)
+
+Use the four paired-source folders from the quality-90 and quality-85
+preparations above and below, plus the retained camera source folder. The
+portable verifier checks coverage against the six published source manifests
+and reproduces the counts and transformed positions from retained data.
+
+```sh
+export PYTHONPATH=backend OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
+runner=backend/.venv/bin/python
+module=scripts.image_previous_grid_chroma
+python3 -B -S -m "$module" verify docs/evaluation-panels/image-previous-grid-chroma-transfer-2026-11-17.json.gz
+"$runner" -B -m "$module" measure "$first_sources" "$reserve_sources" "$insertion85_sources" \
+  "$removal85_sources" "$camera" "$run/chroma.json.gz" --assets "$run/chroma-assets"
+npm --prefix frontend run build
+"$runner" -B -m "$module" app "$run/chroma.json.gz" "$run/chroma-assets" "$run/chroma-app"
+```
+
 ### Quality-85 JPEGs
 
 The check now also covers standard quality-85 luma and chroma tables.
 It uses a separate operating point for that final compression profile.
-Version 3 of the signed source record includes the detected final JPEG
-quality when it measures an earlier grid. Earlier signed results replay
-with their original eligibility rules and operating point.
+The signed source record includes the detected final JPEG quality when it
+measures an earlier grid. Version 4 also records the final color sampling.
+Earlier signed results replay with their original eligibility rules and
+operating point.
 
 The quality-85 point was set on 12 source photos and evaluated on 12
 different photos from the reserve insertion panel. A separate transfer

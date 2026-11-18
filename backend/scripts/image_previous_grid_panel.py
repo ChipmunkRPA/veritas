@@ -465,7 +465,7 @@ def camera_controls(directory, output, *, quality=90):
     import numpy as np
     from PIL import Image, ImageEnhance
 
-    from app.evidence.image_previous_grid_binding import LEGACY_SCHEMA, SCHEMA
+    from app.evidence.image_previous_grid_binding import LEGACY_SCHEMA, QUALITY_SCHEMA
     from app.evidence.image_previous_grid_source import record
 
     plan = read(directory / "freeze.json")
@@ -495,7 +495,7 @@ def camera_controls(directory, output, *, quality=90):
             delivered = encode(view, quality)
             target = f'{camera["group"]}-{name}.jpg'
             (output / target).write_bytes(delivered)
-            finding = record(digest(delivered), delivered, schema=LEGACY_SCHEMA if quality == 90 else SCHEMA)
+            finding = record(digest(delivered), delivered, schema=LEGACY_SCHEMA if quality == 90 else QUALITY_SCHEMA)
             rows.append({"camera": camera, "parent": item["file"], "parent_sha256": item["sha256"],
                          "origin": [x + 5, y + 3], "role": name, "file": target, "reading": finding})
     counts = Counter((row["role"], row["reading"]["status"]) for row in rows)

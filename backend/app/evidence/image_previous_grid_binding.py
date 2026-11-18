@@ -12,13 +12,17 @@ KEY = "jpeg_prior_grid_review"
 COMMITMENT = "jpeg_prior_grid_review_sha256"
 LEGACY_SCHEMA = "image-jpeg-prior-grid/1"
 ORIENTED_SCHEMA = "image-jpeg-prior-grid/2"
-SCHEMA = "image-jpeg-prior-grid/3"
+QUALITY_SCHEMA = "image-jpeg-prior-grid/3"
+SCHEMA = "image-jpeg-prior-grid/4"
+SUBSAMPLING = {"4:2:0": (2, 2), "4:2:2": (2, 1), "4:4:4": (1, 1)}
 TITLE = "Local JPEG compression history"
 SCOPES = {
     LEGACY_SCHEMA: "This check compares an earlier JPEG grid across supported upright JPEG images.",
     ORIENTED_SCHEMA: "The grid is measured in the JPEG's stored pixel order. The outline follows the displayed image orientation.",
-    SCHEMA: ("This check covers supported JPEG85 and JPEG90 files. The grid is measured in stored pixel order. "
-             "The outline follows the displayed image orientation."),
+    QUALITY_SCHEMA: ("This check covers supported JPEG85 and JPEG90 files. The grid is measured in stored pixel order. "
+                     "The outline follows the displayed image orientation."),
+    SCHEMA: ("This check uses brightness information in supported JPEG85 and JPEG90 files with 4:2:0, 4:2:2 or 4:4:4 color sampling. "
+             "The grid is measured in stored pixel order. The outline follows the displayed image orientation."),
 }
 LIMITATION = "Blur, retouching, and other ordinary edits can change the grid. This observation carries zero AI confidence weight."
 STATUS_TEXT = {
@@ -88,10 +92,14 @@ def _validate_reading(record, source, pictures):
             or not _numbers(measurement["background_support"], 2, 0., 2.)):
         raise ValueError("Invalid JPEG compression history measurements")
     expected = {"grid_offset", "estimated_earlier_quality", "background_support"}
-    if record["schema"] == SCHEMA:
+    if record["schema"] in {QUALITY_SCHEMA, SCHEMA}:
         expected.add("delivery_quality")
         if type(measurement.get("delivery_quality")) is not int or measurement["delivery_quality"] not in (85, 90):
             raise ValueError("The current JPEG compression quality falls outside the review profile")
+    if record["schema"] == SCHEMA:
+        expected.add("delivery_subsampling")
+        if not isinstance(measurement.get("delivery_subsampling"), str) or measurement["delivery_subsampling"] not in SUBSAMPLING:
+            raise ValueError("The JPEG color sampling falls outside the review profile")
     if status == "no_region":
         if set(measurement) != expected or region is not None or pictures:
             raise ValueError("A JPEG review without a region has unexpected local evidence")

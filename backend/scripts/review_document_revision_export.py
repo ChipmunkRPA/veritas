@@ -53,7 +53,7 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
     extension = later.suffix.lower()
     old_extension = earlier.suffix.lower()
     if extension not in FORMATS or old_extension not in FORMATS:
-        raise ValueError("Use the original files in TXT, DOCX, PDF or EML format")
+        raise ValueError("Use the original files in TXT, DOCX, ODT, PDF or EML format")
     received = json.loads(_read(export, MAX_PDF_EXPORT if ".pdf" in (extension, old_extension) else MAX_EXPORT), object_pairs_hook=_unique)
     if "paired_check" in received and not isinstance(received["paired_check"], dict):
         raise ValueError("The optional paired writing check has invalid fields")
@@ -95,7 +95,7 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
         result["changed_figures_located"] = len(values["changes"])
         excerpts.extend(row[side] for row in values["changes"] for side in ("earlier", "later"))
     result["changed_token_ranges_verified"] = sum(len(excerpt["changed_tokens"]) for excerpt in excerpts)
-    if ".docx" in (extension, old_extension):
+    if {".docx", ".odt"} & {extension, old_extension}:
         result["body_paragraph_ranges_verified"] = sum(len(excerpt.get("paragraphs", ())) for excerpt in excerpts)
     if ".pdf" in (extension, old_extension):
         pages = [page for excerpt in excerpts for page in excerpt.get("pdf_pages", ())]

@@ -38,6 +38,52 @@ accepted each format and displayed its result. The ODT, Markdown and HTML
 evidence packages also verified against their original files. All seven jobs
 followed simulated payment.
 
+## Earlier OpenDocument drafts
+
+After a document analysis, **Compare with an earlier draft** accepts ODT
+alongside Word DOCX, plain text, and PDFs with selectable text. Each version
+can be up to 1 MiB. For ODT, the comparison checks extracted body paragraphs,
+headings, lists and tables. The browser and comparison PDF identify the same
+paragraph offsets and mark the same words as the JSON export. These ranges
+count Unicode characters in the extracted text and within each listed
+paragraph. ODT offsets use extracted reading order. Word and PDF retain
+their own native positions.
+
+The comparison uses exact unchanged sentences to constrain word matching.
+When a uniquely matched sentence moves, its existing words stay unmarked.
+An additional copy can still appear as an insertion. The comparison
+identifies changes between the two supplied files and carries zero weight in
+the automated AI assessment.
+
+| Replay with the earlier draft supplied | Rewritten sentences containing a marked word | Human wording changes located | Restyled originals with wording marks |
+| --- | ---: | ---: | ---: |
+| Earlier GAO paraphrase panel | 148/149 | — | 0/55 |
+| Fresh BEA and Census paraphrase panel | 33/33 | 17/17 | 0/22 |
+
+Both ODT-to-ODT and TXT-to-ODT tests gave the same submitted token ranges.
+In the GAO panel, 123 marked tokens outside the known rewrite positions
+came from four additional copies of earlier sentences. In the fresh
+panel every marked token in an admitted AI rewrite stayed within a
+labeled rewritten sentence. These counts measure version comparison
+with both originals. The [standalone writing trial](writing-economic-paraphrases-2026-11-17.md)
+uses a different localization criterion and receives only the submitted file.
+[Earlier panel replay](evaluation-panels/writing-odt-draft-gao-2026-11-17.json.gz) ·
+[Fresh panel replay](evaluation-panels/writing-odt-draft-economic-2026-11-17.json.gz)
+
+The local paid replay purchased one simulated USD 9.99 analysis and queued
+zero jobs before payment. The completed analysis accepted the earlier ODT
+in Chrome. The browser download matched the API JSON and the comparison PDF
+showed the same wording and offsets. Offline replay verified both original
+hashes and 68 marked token positions across both versions. The comparison
+created zero additional analysis jobs and preserved the assessment.
+[Local checkout and browser receipt](evaluation-panels/writing-odt-draft-app-2026-11-17.json)
+
+An offline reviewer can verify the downloaded comparison against the two
+actual files with `scripts.review_document_revision_export`. Use
+`scripts.writing_odt_draft_transfer` with the original result plan from
+either linked writing study to reproduce the aggregate range counts. Both
+commands take file paths and provide usage through `--help`.
+
 ## Content Credentials
 
 The offline verifier checks DOCX and ODT for the standard embedded C2PA

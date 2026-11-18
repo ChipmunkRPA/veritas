@@ -41,6 +41,7 @@ dependencies = [
     "jpeglib>=1.0.2,<2",  # DCT coefficients for the aligned double-JPEG map (I-4); MPL-2.0, bundles libjpeg
     "pymupdf>=1.24",
     "python-docx>=1.1",
+    "striprtf==0.0.35",  # pinned for repeatable passage extraction
     "pysbd>=0.3.4",
     "langid==1.1.6",  # local OCR language coverage gate; recognition is not AI evidence
     "reportlab>=4.2",

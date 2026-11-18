@@ -90,6 +90,17 @@ def test_docx_body_order_merged_cells_and_structure_anchors(tmp_path):
     assert "no stable page numbers" in extracted.meta["coverage_warning"]
 
 
+def test_rtf_codepage_unicode_paragraphs_and_extracted_locations(tmp_path):
+    path = tmp_path / "article.rtf"
+    path.write_bytes(rb"{\rtf1\ansi\ansicpg1252\uc1{\info{\title Metadata is outside the body}} "
+                     b"Caf\xe9 " + rb"report \u-10179?\u-8704?.\par Next \b paragraph\b0.}")
+    document = extract_within(path, ".rtf")
+    assert document.text == "Café report 😀.\n\nNext paragraph."
+    assert [document.text[start:end] for start, end in document.paragraphs] == ["Café report 😀.", "Next paragraph."]
+    assert document.meta["method"] == "rtf"
+    assert all(anchor["kind"] == "markup" and "source_ranges" not in anchor for anchor in document.source_map)
+
+
 def test_email_prefers_plain_body_keeps_quotes_and_does_not_authenticate_headers(tmp_path):
     path = tmp_path / "message.eml"
     mail = EmailMessage()

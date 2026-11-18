@@ -273,12 +273,18 @@ def test_native_pdf_repeat_offsets_match_the_rendered_report_and_signed_evidence
         schema_id=package.PUBLIC_SCHEMA,
     )
     bundle = package.build(db, row, store=store, key=key, exported_at=now)
-    checked = verify.verify_package(bundle.path, public_key_pem=key.public_pem())
+    checked = verify.verify_package(bundle.path, public_key_pem=key.public_pem(), source_document=path)
     assert checked.ok, checked.as_dict()
     with zipfile.ZipFile(bundle.path) as archive:
         assert archive.read("report.pdf") == full.pdf
         public = json.loads(archive.read("evidence.json"))
         assert public == evidence and public["repeated_passages"]["groups"][0]["text"] == PASSAGE
+        original = extract(path, ".pdf", allow_ocr=False)
+        saved_bounds = public["repeated_passages"]["groups"][0]["occurrences"][0]["anchor"]["bbox"]
+        assert saved_bounds != original.source_map[0]["bbox"]  # The signed JSON rounds native page points.
+        saved_bounds[0] += 0.000001
+        with pytest.raises(ValueError, match="frozen text or source mapping"):
+            document_repeat.verify_source(public, original.text, original.source_map)
         for name in ("evidence.json", "result.json", "bundle.json"):
             assert b"PRIVATE MODEL NAME" not in archive.read(name) and b"txt.desklib" not in archive.read(
                 name

@@ -4,12 +4,12 @@ These contracts bind future **Linux amd64 / CPython 3.12** backend images to the
 
 | File | Purpose |
 |---|---|
-| `tested-versions.txt` | 120 installed version constraints from the reachable production/PostgreSQL dependency graph on Darwin arm64, plus build tooling. Linux-only torch dependencies were excluded from this initial snapshot and resolved from the selected wheel metadata. |
+| `tested-versions.txt` | 121 installed version constraints from the reachable production/PostgreSQL dependency graph on Darwin arm64, plus build tooling. Linux-only torch dependencies were excluded from this snapshot and resolved from the selected wheel metadata. |
 | `cpu.in`, `cu126.in` | Official torch 2.13.0 / torchvision 0.28.0 CPython 3.12 Linux wheel URLs, with upstream SHA256 fragments and explicit accelerator suffixes. |
-| `runtime-cpu.lock`, `runtime-cu126.lock` | Reviewed dependency graphs: 121 CPU / 140 CUDA packages, exact versions and published distribution hashes; initial resolver outputs plus the documented one-node extension. |
+| `runtime-cpu.lock`, `runtime-cu126.lock` | Reviewed dependency graphs: 122 CPU / 141 CUDA packages, exact versions and published distribution hashes. |
 | `build.in`, `build.lock` | Pinned pip 26.2.1, setuptools 84.0.0, wheel 0.48.0 and packaging 26.3, installed before source builds. |
 
-Both Linux graphs preserve all 120 tested package versions, except the intentional torch/torchvision accelerator suffixes. CPU adds greenlet 3.5.6, absent from the Darwin environment. CUDA additionally includes 19 dependencies resolved from the cu126 wheel. Those Linux-only packages are resolved and pinned, **not locally executed or model-validated**. Pytest is present because the installed c2pa-python package declares it as an unconditional dependency; it was not added as a Veritas development extra.
+Both Linux graphs preserve all 121 tested package versions, except the intentional torch/torchvision accelerator suffixes. CPU adds greenlet 3.5.6, absent from the Darwin environment. CUDA additionally includes 19 dependencies resolved from the cu126 wheel. Those Linux-only packages are resolved and pinned, **not locally executed or model-validated**. Pytest is present because the installed c2pa-python package declares it as an unconditional dependency; it was not added as a Veritas development extra.
 
 The Dockerfile installs hash-checked build tools, then the full runtime lock. Only Grad-CAM may build from source; every other package must have a compatible wheel. Grad-CAM 1.5.7 declares setuptools/wheel build requirements. `--no-build-isolation` prevents a second unpinned build environment. Installing the local project with `--no-deps --no-build-isolation` prevents its broad development constraints from replacing the locked runtime. The final `runtime_contract.py` check verifies every installed version, `pip check`, torch's compiled CUDA identity, and torchvision's native CPU NMS result. It does not require a GPU on the builder.
 
@@ -24,6 +24,8 @@ Every change of a lock needs `make audit` afterwards: the suite compares the rec
 - **2026-11-16, Pillow HEIF 1.5.0 → 1.8.1.** The update exposes the linked thumbnail API. The Python wheel metadata retains compatibility with the existing Pillow pin. Both Linux locks and the Darwin version constraint move this one package to the official release hashes. The [local HEIC evaluation](../../docs/image-heif-thumbnail-2026-11-16.md) records the macOS results.
 
 - **2026-11-17, c2pa-python 0.37.7 → 0.39.0 and certifi 2026.7.22 → 2026.10.19.** The new validator reads package signatures in DOCX and ODT. Both Linux locks use the publisher's wheel hashes, including the updated certificate bundle required by the release. The Mac installed the exact pinned releases and passed `pip check`, the document regressions, and the public credential replay. [Local document-format results](../../docs/document-formats-2026-11-17.md)
+
+- **2026-11-18, add striprtf 0.0.35.** The BSD-3-Clause package extracts Rich Text locally and has no runtime dependencies. Both Linux locks add the published distribution hashes, and macOS was tested with the verified universal wheel. [PyPI release](https://pypi.org/project/striprtf/0.0.35/)
 
 ## Recheck or deliberately refresh
 

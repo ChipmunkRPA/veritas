@@ -54,7 +54,7 @@ from app.reports.public_verify import SCHEMA
 from app.storage.files import check_docx_safe
 
 EXTENSIONS = {"plain": ".txt", "python-docx": ".docx", "odt": ".odt", "markdown": ".md", "html": ".html",
-              "email": ".eml", "pymupdf": ".pdf"}
+              "rtf": ".rtf", "email": ".eml", "pymupdf": ".pdf"}
 MAX_SOURCE_BYTES = 25 * 1024 * 1024
 
 
@@ -103,7 +103,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     source, coverage = evidence["source"], evidence.get("coverage") or {}
     extension = EXTENSIONS.get(source.get("method"))
     if extension is None:
-        raise ValueError("Original-document verification supports TXT, DOCX, ODT, Markdown, HTML, EML and PDF")
+        raise ValueError("Original-document verification supports TXT, DOCX, ODT, RTF, Markdown, HTML, EML and PDF")
     ocr_pages = (coverage.get("ocr") or {}).get("pages", [])
     page_coverage = (coverage.get(document_passage_coverage.KEY) or {}).get(document_scope.PDF_PAGE_COVERAGE_KEY)
     used_ocr = extension == ".pdf" and any(row.get("status") == "extracted" for row in ocr_pages)

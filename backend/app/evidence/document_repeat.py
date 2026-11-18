@@ -7,7 +7,7 @@ import math
 import re
 from collections import defaultdict
 
-from app.core.canonical import canonical_hash
+from app.core.canonical import canonical_hash, canonical_json
 from app.evidence import document_scope
 
 SCHEMA = "document-repeated-passages/1"
@@ -279,7 +279,10 @@ def verify_source(document: dict, text: str, mapping: list[dict]) -> None:
     """Verify actual excerpts and anchors against the immutable extraction."""
     validate(document)
     if document.get("version") in document_scope.REPEAT_VERSIONS:
+        # PDF block coordinates replay at full precision. Compare them at the
+        # same precision that is committed by the signed evidence JSON.
+        rebuilt = build(document["source"], text, mapping)
         _require(
-            document["repeated_passages"] == build(document["source"], text, mapping),
+            canonical_json(document["repeated_passages"]) == canonical_json(rebuilt),
             "Repeated passages differ from the frozen text or source mapping",
         )

@@ -628,66 +628,78 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool 
     return d
 
 
-def extract_docx(path: Path, *, project_word_revisions: bool = True, project_word_breaks: bool = True) -> Document:
+def docx_body(path: Path, *, project_word_revisions: bool = True, project_word_breaks: bool = True):
     import docx
+
+    from app.evidence.document_tracked_changes import PART_NAME, inspect
+
+    document = docx.Document(str(path))
+    part = str(document.part.partname).removeprefix("/")
+    joined = set() if project_word_revisions and project_word_breaks else None
+    review = (inspect(document.element.body, part, project_inline=project_word_revisions, joined_paragraphs=joined)
+              if PART_NAME.fullmatch(part) else None)
+    return document, part, review, joined
+
+
+def docx_paragraphs(parent, elements, body_path=()):
     from docx.oxml.ns import qn
     from docx.table import Table
     from docx.text.paragraph import Paragraph
 
+    for index, element in enumerate(elements):
+        path = [*body_path, index]
+        if element.tag == qn("w:p"):
+            yield Paragraph(element, parent), path
+        elif element.tag == qn("w:tbl"):
+            table = Table(element, parent)
+            seen = set()
+            for row_i, row in enumerate(table.rows):
+                for col_i, cell in enumerate(row.cells):
+                    if cell._tc in seen:
+                        continue
+                    seen.add(cell._tc)
+                    yield from docx_paragraphs(cell, cell._tc, [*path, "row", row_i, "cell", col_i])
+
+
+def extract_docx(path: Path, *, project_word_revisions: bool = True, project_word_breaks: bool = True) -> Document:
     from app.evidence import document_word_visibility
     from app.evidence.document_archive_word import ordinary_body_paragraph
-    from app.evidence.document_tracked_changes import INPUT_NOTICES, JOINED_PARAGRAPHS, PART_NAME, inspect
+    from app.evidence.document_tracked_changes import INPUT_NOTICES, JOINED_PARAGRAPHS, PART_NAME
 
-    d = docx.Document(str(path))
-    part = str(d.part.partname).removeprefix("/")
-    joined = set() if project_word_revisions and project_word_breaks else None
-    review = (inspect(d.element.body, part, project_inline=project_word_revisions, joined_paragraphs=joined)
-              if PART_NAME.fullmatch(part) else None)
+    d, part, review, joined = docx_body(path, project_word_revisions=project_word_revisions,
+                                      project_word_breaks=project_word_breaks)
     parts: list[tuple[str, dict]] = []
     percentage_body_paragraphs = []
     hidden_locations = []
     checked_paragraphs = hidden_runs = 0
 
-    def walk(parent, elements, path_parts):
-        nonlocal checked_paragraphs, hidden_runs
-        continued = False
-        for index, element in enumerate(elements):
-            path_here = [*path_parts, index]
-            if element.tag == qn("w:p"):
-                paragraph = Paragraph(element, parent)
-                body_paragraph = len(percentage_body_paragraphs) + 1 if not path_parts else None
-                if paragraph.text.strip():
-                    checked_paragraphs += 1
-                    for location in document_word_visibility.inspect_paragraph(paragraph, path_here, body_paragraph):
-                        hidden_runs += 1
-                        if len(hidden_locations) < document_word_visibility.MAX_LOCATIONS:
-                            hidden_locations.append(location)
-                joins_next = joined is not None and element in joined
-                if not path_parts:
-                    eligible = paragraph.style.style_id.casefold() in {"normal", "bodytext", "bodytext2", "bodytext3"}
-                    percentage_body_paragraphs.append(index if eligible and not (continued or joins_next)
-                                                      and ordinary_body_paragraph(paragraph) else None)
-                continued = joins_next
-                cursor, runs = 0, []
-                for ri, run in enumerate(paragraph.runs):
-                    runs.append({"run": ri, "start": cursor, "end": cursor + len(run.text)})
-                    cursor += len(run.text)
-                source = {"kind": "docx", "body_path": path_here, "paragraph_index": len(parts),
-                          "runs": runs, "run_mapping_complete": cursor == len(paragraph.text)}
-                if joins_next:
-                    source["join_following_paragraph"] = True
-                parts.append((paragraph.text, source))
-            elif element.tag == qn("w:tbl"):
-                table = Table(element, parent)
-                seen = set()
-                for row_i, row in enumerate(table.rows):
-                    for col_i, cell in enumerate(row.cells):
-                        if cell._tc in seen:
-                            continue
-                        seen.add(cell._tc)
-                        walk(cell, cell._tc, [*path_here, "row", row_i, "cell", col_i])
-
-    walk(d, d.element.body, [])
+    continued = False
+    for paragraph, path_here in docx_paragraphs(d, d.element.body):
+        text = paragraph.text
+        top_level = len(path_here) == 1
+        body_paragraph = len(percentage_body_paragraphs) + 1 if top_level else None
+        if text.strip():
+            checked_paragraphs += 1
+            for location in document_word_visibility.inspect_paragraph(paragraph, path_here, body_paragraph):
+                hidden_runs += 1
+                if len(hidden_locations) < document_word_visibility.MAX_LOCATIONS:
+                    hidden_locations.append(location)
+        joins_next = joined is not None and paragraph._p in joined
+        if top_level:
+            eligible = paragraph.style.style_id.casefold() in {"normal", "bodytext", "bodytext2", "bodytext3"}
+            percentage_body_paragraphs.append(path_here[0] if eligible and not (continued or joins_next)
+                                              and ordinary_body_paragraph(paragraph) else None)
+            continued = joins_next
+        cursor, runs = 0, []
+        for ri, run in enumerate(paragraph.runs):
+            length = len(run.text)
+            runs.append({"run": ri, "start": cursor, "end": cursor + length})
+            cursor += length
+        source = {"kind": "docx", "body_path": path_here, "paragraph_index": len(parts),
+                  "runs": runs, "run_mapping_complete": cursor == len(text)}
+        if joins_next:
+            source["join_following_paragraph"] = True
+        parts.append((text, source))
     doc = _join_mapped(parts)
     doc.word_review = review
     word_warning = ""
@@ -831,8 +843,48 @@ def text_like_content(raw: str, ext: str) -> tuple[str, str]:
     return raw, "plain"
 
 
+def rtf_text(data: bytes) -> str:
+    from striprtf.striprtf import rtf_to_text
+
+    from app.storage.files import RTF_HEADER, rtf_body
+
+    body = rtf_body(data)
+    if not RTF_HEADER.match(body):
+        raise ValueError("This file is not a readable Rich Text (RTF) document.")
+    depth = 0
+    for token in re.finditer(rb"\\[\\{}]|\\bin(?=-?[0-9])|[{}]", body):
+        match token.group():
+            case b"\\bin":
+                raise ValueError("This RTF contains binary content. Save it as DOCX or PDF for analysis.")
+            case b"{":
+                depth += 1
+            case b"}":
+                depth -= 1
+                if depth == 0:
+                    body = body[:token.end()]
+                    break
+    if depth:
+        raise ValueError("This RTF is incomplete. Save it again as RTF, DOCX or PDF.")
+    # Present raw ANSI bytes as hex escapes so the parser applies the declared codepage.
+    encoded = re.sub(r"[\x80-\xff]", lambda match: f"\\'{ord(match[0]):02x}", body.decode("latin-1"))
+    try:
+        text = rtf_to_text(encoded)
+        if re.search(r"[\ud800-\udfff]", text):
+            text = text.encode("utf-16-le", "surrogatepass").decode("utf-16-le")
+        return text
+    except (LookupError, ValueError) as error:
+        raise ValueError("The RTF text could not be decoded. Save it as DOCX or PDF.") from error
+
+
 def extract_text_like(path: Path, ext: str) -> Document:
     data = path.read_bytes()
+    if ext == ".rtf":
+        # RTF \par becomes a newline. Keep those breaks as passage boundaries.
+        doc = _join_mapped([(text, {"kind": "markup"}) for text in rtf_text(data).splitlines()])
+        doc.meta = {"method": "rtf", "coverage_warning": (
+            "Rich Text was converted to text. Passage locations refer to the extracted text. "
+            "Layout, formatting and embedded objects were outside this check.")}
+        return doc
     if data.startswith((b"\xff\xfe", b"\xfe\xff")):
         encoding = "utf-16"
     elif data.startswith(b"\xef\xbb\xbf"):

@@ -110,6 +110,35 @@ def test_docx_requires_a_readable_document_package():
         verify(good.getvalue()[:100], "truncated.docx", "document")
 
 
+def test_docx_requires_readable_body_text_but_accepts_a_table():
+    from docx import Document
+
+    document = Document()
+    document.sections[0].header.paragraphs[0].text = "A readable header outside the writing check."
+    document.add_paragraph("\u200b \t")
+    content = io.BytesIO()
+    document.save(content)
+    with pytest.raises(preflight.PreflightError, match="no readable body text"):
+        verify(content.getvalue(), "header-only.docx", "document")
+
+    document.add_table(rows=1, cols=1).cell(0, 0).text = "The text is in a table cell."
+    content = io.BytesIO()
+    document.save(content)
+    verify(content.getvalue(), "table-only.docx", "document")
+
+
+def test_rtf_preflight_requires_the_signature_and_readable_body():
+    verify(rb"{\rtf1\ansi A readable rich text document with literal braces \{ and \}.}", "article.RTF", "document")
+    for data, reason in (
+        (b"Plain text saved with the wrong extension.", "not a readable Rich Text"),
+        (rb"{\rtf1\ansi{\info{\title Readable title only}} }", "no readable text"),
+        (rb"{\rtf1\ansi This document lacks a closing brace.", "incomplete"),
+        (rb"{\rtf1\ansi Body text with an embedded {\*\object\bin3 xyz}.}", "binary content"),
+    ):
+        with pytest.raises(preflight.PreflightError, match=reason):
+            verify(data, "article.rtf", "document")
+
+
 def test_text_checks_encoding_and_readability_without_running_models():
     verify("A UTF-8 document — with punctuation.".encode(), "article.txt", "document")
     verify("A UTF-16 document with punctuation.".encode("utf-16"), "article.txt", "document")

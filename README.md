@@ -31,6 +31,9 @@ are not prepared for use as court evidence or expert testimony.
   [short speech edit check](docs/audio-six-ten-context-2026-11-16.md#local-six-second-check)
   shows the selected range and plays the source excerpt. Background labels do not establish AI origin.
 - **Documents and email:** source-positioned writing observations and passage links.
+  Upload Word (DOCX), PDF, ODT, RTF, TXT, Markdown, HTML or email (EML).
+  Word evidence identifies body paragraphs or table cells. ODT, RTF, Markdown and
+  HTML evidence uses locations in the extracted text.
   Local [within-document review](docs/writing-local-baseline-transfer-2026-11-16.md#application-scope)
   highlights individual passages and records their exact locations in supported input formats.
   Whole-article authorship currently lacks a supported calibrated conclusion;

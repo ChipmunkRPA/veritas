@@ -18,9 +18,11 @@ IMAGE_MIMES = {"image/jpeg", "image/png", "image/apng", "image/webp", "image/hei
 VIDEO_MIMES = {"video/mp4", "video/quicktime", "video/x-matroska", "video/webm", "video/x-msvideo", "video/mpeg", "video/3gpp", "video/x-m4v"}
 DOCX_MIME = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 ODT_MIME = "application/vnd.oasis.opendocument.text"
+RTF_MIME = "application/rtf"
 DOCUMENT_ARCHIVES = {".docx": DOCX_MIME, ".odt": ODT_MIME}
 DOCUMENT_ARCHIVE_EXTENSIONS = {mime: extension for extension, mime in DOCUMENT_ARCHIVES.items()}
-DOC_EXTS = {".pdf", ".txt", ".md", ".markdown", ".html", ".htm", ".eml", *DOCUMENT_ARCHIVES}
+DOC_EXTS = {".pdf", ".txt", ".md", ".markdown", ".html", ".htm", ".eml", ".rtf", *DOCUMENT_ARCHIVES}
+RTF_HEADER = re.compile(rb"\{\\rtf1(?=[\\{}\s])")
 M4A_BRANDS = {b"M4A ", b"M4B "}
 ISO_BRANDS = {b"isom", b"iso2", b"iso4", b"iso5", b"iso6", b"mp41", b"mp42", b"dash"}
 M4A_EXTS = {".m4a", ".m4b"}
@@ -136,6 +138,10 @@ def sniff(data: bytes, filename: str) -> tuple[str | None, str]:
     return None, ext
 
 
+def rtf_body(data: bytes) -> bytes:
+    return data.removeprefix(b"\xef\xbb\xbf").lstrip()
+
+
 def _mpeg_layer3(head: bytes) -> bool:
     """An MPEG audio layer III frame header: frame sync, a valid version, bitrate and sample-rate index."""
     if len(head) < 4 or head[0] != 0xFF or (head[1] & 0xE0) != 0xE0:
@@ -211,6 +217,10 @@ def validate_kind(kind: str, data: bytes, filename: str, size: int | None = None
             ext = DOCUMENT_ARCHIVE_EXTENSIONS[mime]
         elif mime == "application/zip" and (archive_ext := Path(filename).suffix.lower()) in DOCUMENT_ARCHIVES:
             ext, mime = archive_ext, DOCUMENT_ARCHIVES[archive_ext]
+        elif RTF_HEADER.match(rtf_body(data)):
+            ext, mime = ".rtf", RTF_MIME
+        elif ext == ".rtf":
+            raise ValueError("This file is not a readable Rich Text (RTF) document. Save it as RTF, DOCX or PDF.")
         elif ext == ".eml" and mime in (None, "message/rfc822"):
             mime = "message/rfc822"
         elif mime is None and ext in DOC_EXTS and ext not in DOCUMENT_ARCHIVES:
@@ -218,7 +228,9 @@ def validate_kind(kind: str, data: bytes, filename: str, size: int | None = None
         elif mime and mime.startswith("text/"):
             ext = ext if ext in DOC_EXTS else ".txt"
         else:
-            raise ValueError(f"Unsupported document type ({mime or ext}); accepted: PDF, DOCX, ODT, TXT, MD, HTML, EML")
+            if Path(filename).suffix.lower() in {".doc", ".docm", ".pages", ".msg"}:
+                raise ValueError("Save Word or Pages files as DOCX or PDF, and Outlook messages as EML or PDF.")
+            raise ValueError(f"Unsupported document type ({mime or ext}). Choose PDF, DOCX, ODT, RTF, TXT, Markdown, HTML or EML.")
         mime = mime or "text/plain"
     else:
         raise ValueError("Unknown analysis kind")

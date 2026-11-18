@@ -157,6 +157,11 @@ def _av(path: Path, kind: str) -> None:
 
 
 def _document(path: Path, extension: str) -> None:
+    from app.evidence.document_invisible_characters import ENCODED_FORMATTING
+
+    def readable(text: str) -> bool:
+        return any(char.isprintable() and not char.isspace() for char in text)
+
     if extension == ".pdf":
         import pymupdf
         with pymupdf.open(path) as document:
@@ -166,20 +171,25 @@ def _document(path: Path, extension: str) -> None:
             document.load_page(0)
         return
     if extension == ".docx":
-        from docx import Document
-
+        from app.detectors.text.extract import docx_body, docx_paragraphs
         from app.storage.files import check_document_archive_safe
 
         check_document_archive_safe(path, extension, check_crc=True)
-        Document(path)
+        document, _, _, _ = docx_body(path)
+        if not any(readable(paragraph.text) for paragraph, _ in docx_paragraphs(document, document.element.body)):
+            raise PreflightError("The Word document has no readable body text. For scanned pages, upload a PDF before paying.")
         return
     if extension == ".odt":
         from app.detectors.text.opendocument import body_paragraphs
 
-        body_paragraphs(path, check_crc=True)
+        try:
+            paragraphs = body_paragraphs(path, check_crc=True)
+        except ValueError as error:
+            raise PreflightError(str(error)) from None
+        if not any(readable(paragraph) for paragraph in paragraphs):
+            raise PreflightError("The ODT document has no readable body text. For scanned pages, upload a PDF before paying.")
         return
-    from app.detectors.text.extract import text_like_content
-    from app.evidence.document_invisible_characters import ENCODED_FORMATTING
+    from app.detectors.text.extract import rtf_text, text_like_content
 
     raw = path.read_bytes()
     if extension == ".eml":
@@ -195,13 +205,17 @@ def _document(path: Path, extension: str) -> None:
             raise PreflightError("This email body could not be decoded as text. Re-export it before paying.")
         if body.get_content_type() == "text/html":
             extension = ".html"
+    elif extension == ".rtf":
+        try:
+            text = rtf_text(raw)
+        except ValueError as error:
+            raise PreflightError(str(error)) from None
     else:
         text = raw.decode("utf-16") if raw.startswith((b"\xff\xfe", b"\xfe\xff")) else raw.decode("utf-8-sig")
 
     text, _ = text_like_content(text, extension)
-    readable = sum(char.isprintable() and not char.isspace() for char in text)
     unusual = sum(not (char.isprintable() or char.isspace() or char in ENCODED_FORMATTING) for char in text)
-    if not readable or "\x00" in text or unusual > max(1, len(text) // 100):
+    if not readable(text) or "\x00" in text or unusual > max(1, len(text) // 100):
         raise PreflightError("This document has no readable text. Export it as UTF-8 text, PDF or DOCX before paying.")
 
 

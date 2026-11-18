@@ -1,7 +1,7 @@
 # Document formats and signed source records
 
 Chipmunk Verify accepts Word (`.docx`), OpenDocument Text (`.odt`), PDF,
-plain text, Markdown, HTML, and email (`.eml`). These use the same local
+Rich Text (`.rtf`), plain text, Markdown, HTML, and email (`.eml`). These use the same local
 writing pipeline and produce PDF and JSON reports. The document upload
 limit is 25 MB in the standard configuration.
 
@@ -10,6 +10,7 @@ limit is 25 MB in the standard configuration.
 | DOCX | Body paragraphs and tables, with separate supported Word revision and visibility evidence | Word paragraph and available run coordinates |
 | ODT | Body paragraphs, headings, lists, and tables | Paragraph and character position in the extracted text |
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
+| RTF | Extracted writing from standard Rich Text files | Paragraph and character position in the extracted text |
 | EML | The selected plain-text or HTML message body | Decoded text and supported HTML source positions |
 | TXT | Decoded Unicode text | Decoded character offsets |
 | Markdown and HTML | Text extracted from the markup | Paragraph and character position in the extracted text |
@@ -19,9 +20,12 @@ text for writing checks. Document packages are read locally without opening
 Office, fetching linked content, or executing macros.
 
 Export Google Docs, Apple Pages, and older Word (`.doc`) files as DOCX or
-PDF before uploading. Keep the original file if its native provenance matters.
-Checkout checks the extracted writing for HTML, Markdown, and HTML email
-bodies so files that yield no readable writing are rejected before payment.
+PDF before uploading. Export Outlook (`.msg`) files as EML or PDF. Keep the
+original file if its native provenance matters.
+Checkout rejects Word and ODT files without readable body text and checks
+the text extracted from RTF, Markdown, HTML and HTML email bodies before
+starting payment. Scanned documents can be uploaded as PDF for local OCR.
+Rich Text files with binary data should be saved as DOCX or PDF.
 The local batch tool also accepts native DOCX and ODT packages.
 
 The local development app can check ODT for earlier published wording when

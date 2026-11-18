@@ -61,6 +61,7 @@ def hidden_docx(tmp_path):
 
 def test_local_word_visibility_keeps_exact_coordinates_and_ignores_explicit_off(hidden_docx, monkeypatch):
     monkeypatch.setattr(stage.settings, "text_bibliography_scope_review", False)
+    monkeypatch.setattr(stage.settings, "text_doi_reference_review", False)
     doc = extraction.extract(hidden_docx, ".docx")
     record = doc.meta[visibility.KEY]
     assert record["checked_paragraphs"] == 2

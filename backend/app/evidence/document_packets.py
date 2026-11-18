@@ -567,6 +567,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][document_native_locations.PPTX_VISIBILITY_KEY] = slide_visibility
     if section_visibility := decoded["meta"].get(document_native_locations.ODT_VISIBILITY_KEY):
         document["coverage"][document_native_locations.ODT_VISIBILITY_KEY] = section_visibility
+    if cell_visibility := decoded["meta"].get(document_native_locations.XLSX_VISIBILITY_KEY):
+        document["coverage"][document_native_locations.XLSX_VISIBILITY_KEY] = cell_visibility
     if writing_checks := document_check_coverage.from_result(result):
         document["coverage"][document_check_coverage.KEY] = writing_checks
         document["source"][document_check_coverage.COMMITMENT] = document_check_coverage.commitment(writing_checks)

@@ -18,12 +18,14 @@ IMAGE_MIMES = {"image/jpeg", "image/png", "image/apng", "image/webp", "image/hei
 VIDEO_MIMES = {"video/mp4", "video/quicktime", "video/x-matroska", "video/webm", "video/x-msvideo", "video/mpeg", "video/3gpp", "video/x-m4v"}
 DOCX_MIME = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
 ODT_MIME = "application/vnd.oasis.opendocument.text"
+ODS_MIME = "application/vnd.oasis.opendocument.spreadsheet"
 PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
 XLSX_MIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 EPUB_MIME = "application/epub+zip"
 RTF_MIME = "application/rtf"
 OFFICE_CREDENTIAL_EXTENSIONS = {DOCX_MIME: ".docx", ODT_MIME: ".odt"}
-DOCUMENT_ARCHIVES = {".docx": DOCX_MIME, ".odt": ODT_MIME, ".pptx": PPTX_MIME, ".epub": EPUB_MIME, ".xlsx": XLSX_MIME}
+DOCUMENT_ARCHIVES = {".docx": DOCX_MIME, ".odt": ODT_MIME, ".ods": ODS_MIME, ".pptx": PPTX_MIME,
+                     ".epub": EPUB_MIME, ".xlsx": XLSX_MIME}
 DOCUMENT_ARCHIVE_EXTENSIONS = {mime: extension for extension, mime in DOCUMENT_ARCHIVES.items()}
 DELIMITED_TEXT = {".csv": "text/csv", ".tsv": "text/tab-separated-values"}
 HTML_EXTS = (".html", ".htm", ".xhtml")
@@ -249,8 +251,8 @@ def validate_kind(kind: str, data: bytes, filename: str, size: int | None = None
             if upload_ext in {".doc", ".docm", ".pages", ".msg", ".ppt", ".pptm", ".key", ".odp"}:
                 raise ValueError("Export Word or Pages files as DOCX or PDF, presentations as PPTX or PDF, and Outlook messages as EML or PDF.")
             if upload_ext in {".xls", ".xlsx", ".xlsm", ".ods"}:
-                raise ValueError("Save the spreadsheet as a macro-free XLSX, CSV or PDF containing the writing you want checked.")
-            raise ValueError(f"Unsupported document type ({mime or ext}). Choose PDF, DOCX, ODT, PPTX, XLSX, CSV, TSV, EPUB, RTF, TXT, Markdown, HTML/XHTML or EML.")
+                raise ValueError("Save the spreadsheet as a readable XLSX, ODS, CSV or PDF containing the writing you want checked.")
+            raise ValueError(f"Unsupported document type ({mime or ext}). Choose PDF, DOCX, ODT, PPTX, XLSX, ODS, CSV, TSV, EPUB, RTF, TXT, Markdown, HTML/XHTML or EML.")
         mime = mime or "text/plain"
     else:
         raise ValueError("Unknown analysis kind")

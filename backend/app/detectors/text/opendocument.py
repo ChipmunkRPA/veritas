@@ -20,13 +20,13 @@ INLINE_SPACE = frozenset({TEXT + "s", TEXT + "tab", TEXT + "line-break"})
 MAX_BODY_XML_BYTES = 20 * 1024 * 1024
 
 
-def _visible_text(element):
+def _visible_text(element, decode_space=None):
     yield element.text or ""
     for child in element:
         if child.tag in INLINE_TEXT:
-            yield from _visible_text(child)
+            yield from _visible_text(child, decode_space)
         elif child.tag in INLINE_SPACE:
-            yield " "
+            yield decode_space(child) if decode_space is not None else " "
         yield child.tail or ""
 
 

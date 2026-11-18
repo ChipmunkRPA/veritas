@@ -57,7 +57,7 @@ from app.storage.files import check_docx_safe
 
 EXTENSIONS = {"plain": ".txt", "python-docx": ".docx", "odt": ".odt", "markdown": ".md", "html": ".html",
               "rtf": ".rtf", "email": ".eml", "pymupdf": ".pdf", "pptx": ".pptx", "epub": ".epub",
-              "xlsx": ".xlsx", "csv": ".csv", "tsv": ".tsv"}
+              "xlsx": ".xlsx", "ods": ".ods", "csv": ".csv", "tsv": ".tsv"}
 MAX_SOURCE_BYTES = 25 * 1024 * 1024
 
 
@@ -106,7 +106,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     source, coverage = evidence["source"], evidence.get("coverage") or {}
     extension = EXTENSIONS.get(source.get("method"))
     if extension is None:
-        raise ValueError("Original-document verification supports TXT, DOCX, ODT, PPTX, XLSX, CSV, TSV, EPUB, RTF, Markdown, HTML, EML and PDF")
+        raise ValueError("Original-document verification supports TXT, DOCX, ODT, PPTX, XLSX, ODS, CSV, TSV, EPUB, RTF, Markdown, HTML, EML and PDF")
     ocr_pages = (coverage.get("ocr") or {}).get("pages", [])
     page_coverage = (coverage.get(document_passage_coverage.KEY) or {}).get(document_scope.PDF_PAGE_COVERAGE_KEY)
     used_ocr = extension == ".pdf" and any(row.get("status") == "extracted" for row in ocr_pages)
@@ -141,7 +141,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                       skip_hidden_slide_groups=coverage.get(document_native_locations.PPTX_VISIBILITY_KEY)
                       == document_native_locations.PPTX_VISIBILITY,
                       skip_hidden_odt_sections=coverage.get(document_native_locations.ODT_VISIBILITY_KEY)
-                      == document_native_locations.ODT_VISIBILITY)
+                      == document_native_locations.ODT_VISIBILITY,
+                      skip_hidden_xlsx_cell_formats=coverage.get(document_native_locations.XLSX_VISIBILITY_KEY)
+                      == document_native_locations.XLSX_VISIBILITY)
     if used_ocr and not doc.source_rasters:
         raise ValueError("The local OCR runtime could not reproduce the original scan. Check that the verified OCR data are installed.")
     unassigned_email_roles = (
@@ -164,7 +166,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
               WORD_CONTENT_CONTROLS_KEY: None, document_scope.HTML_ARTICLE_KEY: None,
               document_native_locations.PARAGRAPH_MAP_KEY: None, document_native_locations.WORD_TABLE_GRID_KEY: None,
               document_native_locations.PPTX_VISIBILITY_KEY: None, document_native_locations.WORD_RUN_MAP_KEY: None,
-              document_native_locations.ODT_VISIBILITY_KEY: None, document_native_locations.WORD_NOTES_KEY: None}
+              document_native_locations.ODT_VISIBILITY_KEY: None, document_native_locations.WORD_NOTES_KEY: None,
+              document_native_locations.XLSX_VISIBILITY_KEY: None}
     local_coverage = {**doc.meta, "ocr": public_ocr_coverage(doc.meta)}
     if any(canonical_hash(coverage.get(key, default)) != canonical_hash(local_coverage.get(key, default))
            for key, default in fields.items()):

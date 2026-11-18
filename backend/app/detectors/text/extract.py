@@ -1236,7 +1236,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             map_body_paragraphs: bool = True, map_word_table_grid: bool = True,
             skip_hidden_slide_groups: bool = True, map_word_hyperlink_runs: bool = True,
             map_word_table_controls: bool = True, skip_hidden_odt_sections: bool = True,
-            include_word_linked_notes: bool = True) -> Document:
+            include_word_linked_notes: bool = True, skip_hidden_xlsx_cell_formats: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
@@ -1276,25 +1276,31 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
         if ext == ".pptx" and skip_hidden_slide_groups:
             d.meta[document_native_locations.PPTX_VISIBILITY_KEY] = document_native_locations.PPTX_VISIBILITY
             d.meta["coverage_warning"] += " Hidden groups and their contents are excluded."
-    elif ext in {".xlsx", ".csv", ".tsv"}:
+    elif ext in {".xlsx", ".ods", ".csv", ".tsv"}:
         from app.core.config import settings
         limit = settings.max_document_chars
-        if ext == ".xlsx":
+        if ext in {".xlsx", ".ods"}:
             from app.detectors.text import spreadsheet_cells
 
-            parts = spreadsheet_cells.read(path, max_chars=limit)
+            parts = spreadsheet_cells.read(path, max_chars=limit, extension=ext,
+                                           skip_hidden_cell_formats=skip_hidden_xlsx_cell_formats)
+            warning = ("The writing check reads saved text in cells on visible worksheets, rows and columns. "
+                       "Formulas, calculated results, numbers, comments, charts, drawings and images are outside this check.")
+            if ext == ".ods":
+                warning += " Hidden row and column groups and linked sheets are excluded."
         else:
             from app.detectors.text import delimited_cells
 
             parts = delimited_cells.read(path, ext, max_chars=limit)
-        warning = ("The writing check reads saved text in cells on visible worksheets, rows and columns. "
-                   "Formulas, calculated results, numbers, comments, charts, drawings and images are outside this check."
-                   if ext == ".xlsx" else
-                   "The writing check reads text fields as separate passages. Row numbers count records, including headings and blank records. "
-                   "Numeric-only and formula-like fields are excluded.")
+            warning = ("The writing check reads text fields as separate passages. "
+                       "Row numbers count records, including headings and blank records. "
+                       "Numeric-only and formula-like fields are excluded.")
         d = _join_mapped(parts, map_paragraphs=True)
         d.meta = {"method": ext[1:], "paragraph_count": len(parts), "coverage_warning": warning,
                   document_native_locations.PARAGRAPH_MAP_KEY: document_native_locations.PARAGRAPH_MAP}
+        if ext == ".xlsx" and skip_hidden_xlsx_cell_formats:
+            d.meta[document_native_locations.XLSX_VISIBILITY_KEY] = document_native_locations.XLSX_VISIBILITY
+            d.meta["coverage_warning"] += " " + document_native_locations.XLSX_VISIBILITY_SCOPE
     elif ext == ".eml":
         d = extract_eml(path)
     else:

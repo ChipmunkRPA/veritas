@@ -1,8 +1,9 @@
-"""Read literal prose cells from macro-free SpreadsheetML packages offline."""
+"""Read literal prose cells from Excel and OpenDocument spreadsheets offline."""
 
 from __future__ import annotations
 
 import re
+from functools import partial
 from itertools import accumulate
 from pathlib import Path, PurePosixPath
 from zipfile import BadZipFile, ZipFile
@@ -71,7 +72,33 @@ def _hidden_columns(sheet, ns: str) -> list[int]:
     return list(accumulate(changes))
 
 
-def _worksheet_cells(sheet, ns: str, shared: list[str]):
+def _style_index(value: str) -> int | None:
+    match = re.fullmatch(r"\+?[0-9]{1,10}", value.strip())
+    return int(match[0]) if match else None
+
+
+def _hidden_cell_styles(package: _Package, workbook_name: str, links, ns: str, relationship: str) -> set[int]:
+    styles_links = [link for link in links.values() if link.get("Type") == relationship + "/styles"]
+    if not styles_links:
+        return set()
+    if len(styles_links) != 1:
+        raise ValueError("The XLSX workbook has ambiguous cell styles")
+    styles = package.xml(_target(workbook_name, styles_links[0]))
+    if styles.tag != ns + "styleSheet":
+        raise ValueError("The XLSX workbook has an unreadable cell styles part")
+    hidden_formats = set()
+    for number_format in styles.iterfind(f"{ns}numFmts/{ns}numFmt"):
+        number_id = _style_index(number_format.get("numFmtId", ""))
+        if number_id is not None and number_format.get("formatCode") == ";;;":
+            hidden_formats.add(number_id)
+    return {
+        index for index, cell_format in enumerate(styles.iterfind(f"{ns}cellXfs/{ns}xf"))
+        if cell_format.get("applyNumberFormat") not in {"0", "false"}
+        and _style_index(cell_format.get("numFmtId", "")) in hidden_formats
+    }
+
+
+def _worksheet_cells(sheet, ns: str, shared: list[str], hidden_styles: set[int]):
     rows = sheet.find(ns + "sheetData")
     if sheet.tag != ns + "worksheet" or rows is None:
         raise ValueError("The XLSX workbook contains an unreadable worksheet")
@@ -108,6 +135,8 @@ def _worksheet_cells(sheet, ns: str, shared: list[str]):
             previous_column = column
             if hidden_columns[column] or cell.find(ns + "f") is not None:
                 continue
+            if hidden_styles and _style_index(cell.get("s", "")) in hidden_styles:
+                continue
             cell_type = cell.get("t")
             if cell_type == "inlineStr":
                 value = _string(cell.find(ns + "is"), ns)
@@ -119,7 +148,7 @@ def _worksheet_cells(sheet, ns: str, shared: list[str]):
                 yield value, row_number, column
 
 
-def _workbook_cells(package: _Package):
+def _workbook_cells(package: _Package, *, skip_hidden_cell_formats: bool):
     offices = {relationship + "/officeDocument" for relationship in NAMESPACES.values()}
     workbook_links = [link for link in package.relationships("_rels/.rels").values() if link.get("Type") in offices]
     if len(workbook_links) != 1:
@@ -138,6 +167,7 @@ def _workbook_cells(package: _Package):
     relationship = NAMESPACES[ns]
     part = PurePosixPath(name)
     links = package.relationships(str(part.parent / "_rels" / (part.name + ".rels")))
+    hidden_styles = _hidden_cell_styles(package, name, links, ns, relationship) if skip_hidden_cell_formats else set()
     sheets = workbook.findall(f"{ns}sheets/{ns}sheet")
     if not 0 < len(sheets) <= MAX_TEXT_PARTS:
         raise ValueError(f"Upload an XLSX workbook with between 1 and {MAX_TEXT_PARTS} sheets")
@@ -167,23 +197,30 @@ def _workbook_cells(package: _Package):
         if target in seen:
             raise ValueError("The XLSX workbook repeats a worksheet relationship")
         seen.add(target)
-        for value, row, column in _worksheet_cells(package.xml(target), ns, shared):
+        for value, row, column in _worksheet_cells(package.xml(target), ns, shared, hidden_styles):
             yield value, index, row, column
 
 
-def read(path: Path, *, max_chars: int) -> list[tuple[str, dict]]:
-    check_document_archive_safe(path, ".xlsx")
+def read(path: Path, *, max_chars: int, extension: str = ".xlsx",
+         skip_hidden_cell_formats: bool = True) -> list[tuple[str, dict]]:
+    check_document_archive_safe(path, extension)
+    read_cells = partial(_workbook_cells, skip_hidden_cell_formats=skip_hidden_cell_formats)
+    if extension == ".ods":
+        from app.detectors.text.opendocument_spreadsheet import workbook_cells
+
+        read_cells = workbook_cells
+    label = extension[1:].upper()
     parts = []
     characters = raw_characters = 0
     try:
         with ZipFile(path) as archive:
-            for value, sheet, row, column in _workbook_cells(_Package(archive)):
+            for value, sheet, row, column in read_cells(_Package(archive)):
                 raw_characters += len(value)
                 characters += len(" ".join(value.split())) + (2 if parts else 0)
                 if characters > max_chars or raw_characters > 4 * max_chars or len(parts) == MAX_BLOCKS:
-                    raise ValueError("The XLSX workbook exceeds the writing limit. Upload fewer cells or a shorter excerpt.")
+                    raise ValueError(f"The {label} workbook exceeds the writing limit. Upload fewer cells or a shorter excerpt.")
                 parts.append((value, {"kind": "markup", "part_kind": "spreadsheet_cell", "part_index": sheet,
                                       "paragraph_index": len(parts), "row": row, "column": column}))
     except (KeyError, BadZipFile, NotImplementedError, etree.XMLSyntaxError) as error:
-        raise ValueError("The XLSX workbook is damaged or uses unsupported text parts") from error
+        raise ValueError(f"The {label} workbook is damaged or uses unsupported text parts") from error
     return parts

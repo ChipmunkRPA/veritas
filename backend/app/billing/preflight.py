@@ -211,7 +211,7 @@ def _document(path: Path, extension: str) -> None:
     if extension in {".pptx", ".epub"}:
         too_short = (f"The {extension[1:].upper()} needs at least {MIN_WORDS} readable words for writing analysis. "
                      "For image-only pages or slides, upload a PDF for text recognition. No payment was started.")
-    elif extension in {".xlsx", ".csv", ".tsv"}:
+    elif extension in {".xlsx", ".ods", ".csv", ".tsv"}:
         too_short = (f"The {extension[1:].upper()} needs at least {MIN_WORDS} readable words in supported text cells. "
                      "No payment was started.")
     elif extension == ".docx" and not readable:

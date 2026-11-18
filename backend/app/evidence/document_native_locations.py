@@ -11,7 +11,7 @@ PARAGRAPH_MAP_KEY = "decoded_paragraph_locations"
 PARAGRAPH_MAP = "decoded-body-paragraphs/1"
 # The RTF reader returns the same decoded line breaks for soft breaks and paragraph breaks.
 # The saved coordinate describes a decoded text block.
-CELL_METHODS = {"xlsx": "spreadsheet_cell", "csv": "delimited_cell", "tsv": "delimited_cell"}
+CELL_METHODS = {"xlsx": "spreadsheet_cell", "ods": "spreadsheet_cell", "csv": "delimited_cell", "tsv": "delimited_cell"}
 PARAGRAPH_COORDINATES = {"odt": "odt_paragraph", "rtf": "rtf_paragraph", "pptx": "pptx_block", "epub": "epub_block",
                          **{method: f"{method}_cell" for method in CELL_METHODS}}
 PACKAGE_METHODS = {"pptx": "slide", "epub": "epub_entry"}
@@ -21,6 +21,10 @@ PPTX_VISIBILITY = "visible-slide-groups/1"
 ODT_VISIBILITY_KEY = "odt_section_visibility"
 ODT_VISIBILITY = "visible-odt-sections/1"
 ODT_VISIBILITY_SCOPE = "Hidden and conditional sections are excluded. The reader does not evaluate display conditions."
+XLSX_VISIBILITY_KEY = "xlsx_cell_visibility"
+XLSX_VISIBILITY = "visible-xlsx-direct-cell-formats/1"
+XLSX_VISIBILITY_SCOPE = ("Cells with Excel's directly applied hide-value format are excluded. Other display formatting, "
+                         "including conditional and inherited styles, may differ from the saved text checked here.")
 SAVED_FIELDS_KEY = "word_saved_fields"
 SAVED_FIELDS_SCHEMA = "document-word-saved-fields/1"
 SAVED_FIELDS_READER = "word_saved_fields_reader"
@@ -140,7 +144,8 @@ def _coordinate(source, coverage, anchor):
             raise ValueError("Missing slide or reading-order position")
         if method in CELL_METHODS and (anchor.get("part_kind") != CELL_METHODS[method]
                 or any(type(anchor.get(axis)) is not int or anchor[axis] < 1 for axis in ("row", "column"))
-                or (method == "xlsx" and (type(anchor.get("part_index")) is not int or anchor["part_index"] < 0))):
+                or (CELL_METHODS[method] == "spreadsheet_cell"
+                    and (type(anchor.get("part_index")) is not int or anchor["part_index"] < 0))):
             raise ValueError("Missing spreadsheet cell position")
         return PARAGRAPH_COORDINATES.get(method)
     if method == "html" and kind == "markup" and valid_html_article_scope(coverage.get(HTML_ARTICLE_KEY)):
@@ -217,6 +222,9 @@ def validate(document):
     if ODT_VISIBILITY_KEY in coverage and (coverage[ODT_VISIBILITY_KEY] != ODT_VISIBILITY
             or document.get("source", {}).get("method") != "odt"):
         raise ValueError("Invalid OpenDocument section visibility policy")
+    if XLSX_VISIBILITY_KEY in coverage and (coverage[XLSX_VISIBILITY_KEY] != XLSX_VISIBILITY
+            or document.get("source", {}).get("method") != "xlsx"):
+        raise ValueError("Invalid Excel cell visibility policy")
     article = coverage.get(HTML_ARTICLE_KEY)
     if article is not None and (document.get("source", {}).get("method") != "html" or not valid_html_article_scope(article)):
         raise ValueError("Invalid saved HTML article boundaries")

@@ -685,6 +685,9 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     odt_visibility_key = document_native_locations.ODT_VISIBILITY_KEY
     if coverage.get(odt_visibility_key) != decoded["meta"].get(odt_visibility_key):
         raise ObjectIntegrityError("Frozen OpenDocument section visibility policy differs from the recorded extraction")
+    xlsx_visibility_key = document_native_locations.XLSX_VISIBILITY_KEY
+    if coverage.get(xlsx_visibility_key) != decoded["meta"].get(xlsx_visibility_key):
+        raise ObjectIntegrityError("Frozen Excel cell visibility policy differs from the recorded extraction")
     try:
         document_check_coverage.verify_source(document, text, decoded["sentences"])
         document_tracked_changes.verify_source(document, decoded.get(document_tracked_changes.KEY),

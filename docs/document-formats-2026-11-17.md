@@ -1,7 +1,7 @@
 # Document formats and signed source records
 
 Chipmunk Verify accepts Word (`.docx`), OpenDocument Text (`.odt`), PDF,
-PowerPoint (`.pptx`), Excel (`.xlsx`), CSV, TSV, EPUB, Rich Text (`.rtf`), plain text,
+PowerPoint (`.pptx`), Excel (`.xlsx`), OpenDocument Spreadsheet (`.ods`), CSV, TSV, EPUB, Rich Text (`.rtf`), plain text,
 Markdown, HTML and XHTML, and email (`.eml`). These use the same local
 writing pipeline and produce PDF and JSON reports. The document upload
 limit is 25 MB in the standard configuration.
@@ -13,6 +13,7 @@ limit is 25 MB in the standard configuration.
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
 | PPTX | Editable text boxes and tables on visible slides | Slide in presentation order, text block, and decoded character range |
 | XLSX | Literal text on visible worksheet tabs, rows and columns | Workbook sheet order, row, column and saved cell character range |
+| ODS | Literal text on visible sheets, rows and columns. Linked sheets, formulas and calculated values are outside the check. | Workbook sheet order, row, column and saved cell character range |
 | CSV and TSV | Text fields in UTF-8 or BOM-marked UTF-16 delimited files | Record, field and decoded character range |
 | EPUB | XHTML text in the main reading order | Reading-order entry, text block, and decoded character range |
 | RTF | Extracted writing from standard Rich Text files | Decoded text block number and character range |
@@ -20,6 +21,24 @@ limit is 25 MB in the standard configuration.
 | TXT | Decoded Unicode text | Decoded character offsets |
 | Markdown | Text extracted from the markup | Paragraph and character position in the extracted text |
 | HTML and XHTML | Text extracted from saved `.html`, `.htm`, or `.xhtml` markup | Original markup character ranges for uniquely mapped article passages, otherwise extracted-text positions |
+
+ODS row and column positions follow the saved grid, including repeated or
+hidden rows and columns before a finding. The writing check excludes
+explicitly hidden groups and reads text saved in cells on locally stored
+sheets. [OpenDocument spreadsheet schema](https://docs.oasis-open.org/office/OpenDocument/v1.3/OpenDocument-v1.3-part3-schema.html)
+
+A local Chromium run completed Word, Excel, ODS, CSV and TSV writing
+analyses after simulated USD 9.99 checkout. Each result displayed source
+positions in the browser and exported both a PDF and JSON. All five signed
+packages verified against their original files. A separate ODS saved by
+LibreOffice reproduced the same four visible cell addresses and exact text
+as its source workbook. Hidden sheets, rows and columns and a cached
+formula stayed outside the extracted text.
+
+XLSX also excludes cells with Excel's hide-value format applied directly.
+Other display formatting, including inherited and conditional styles, can
+differ from the saved writing. Existing signed reports replay using their
+original extraction rules. [Excel's hide-value format](https://support.microsoft.com/en-us/excel/hide-or-display-cell-values)
 
 For email, attachments can be submitted separately. Word reads supported
 body and note text. ODT uses body text. Document packages are read locally

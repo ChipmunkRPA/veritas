@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [document arithmetic replay](document-arithmetic-evidence-2026-11-17.md#reproduce)
+uses the publisher's exact test split and an independent rational
+calculation. It verifies all 2,973 staged differences at their source
+positions and checks the corresponding correct and approximate expressions.
+
 The [stereo speech-dropout replay](video-shared-sound-background-2026-11-17.md#reproduce)
 verifies 392 held input videos and their sources, then recounts the exact
 edit ranges on both the audio and picture clocks. It includes three

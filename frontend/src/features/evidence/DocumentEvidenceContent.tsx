@@ -8,7 +8,7 @@ import DocumentPassageCoverage from './DocumentPassageCoverage'
 import DocumentRepeatedPassages from './DocumentRepeatedPassages'
 import DocumentUnselectedResponses from './DocumentUnselectedResponses'
 import PdfSavedWording from './PdfSavedWording'
-import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentOriginalTextLocation, type DocumentPassagePosition, type EmailBodyAlternatives, type EmailClassifierInputScope, type PublishedWordingColumn, type PublishedWordingReview, type PublishedWordingSection, type WritingCheckReason } from './multimediaPackets'
+import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentOriginalTextLocation, type DocumentPassagePosition, type EmailBodyAlternatives, type EmailClassifierInputScope, type MappedTextFinding, type PublishedWordingColumn, type PublishedWordingReview, type PublishedWordingSection, type WritingCheckReason } from './multimediaPackets'
 
 function BibliographyCoverage({ review }: { review: NonNullable<NonNullable<DocumentEvidenceSet['coverage']>['writing_bibliography']> }) {
   const { first_location: first, last_location: last } = review
@@ -129,26 +129,48 @@ function PassagePosition({ review }: { review: DocumentPassagePosition }) {
   </section>
 }
 
+function MappedFindingLocation({ row }: { row: MappedTextFinding }) {
+  const source = row.anchor
+  const place = source.kind === 'pdf' ? `PDF page ${source.page}, text block ${source.block}` : source.kind === 'docx'
+    ? `Word paragraph ${(source.paragraph_index ?? 0) + 1}` : source.kind === 'email' ? `Email body part ${source.mime_part}` : 'Plain text'
+  return <>
+    <p className="mt-1 mb-0 text-caption text-text-muted">{place} · Extracted characters [{row.start}, {row.end})</p>
+    {'ranges' in row.location && <p className="mt-1 mb-0 text-caption text-text-muted">
+      Original text positions {row.location.ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}
+    </p>}
+  </>
+}
+
 function CalendarConsistency({ review }: { review: NonNullable<DocumentEvidenceSet['calendar_consistency']> }) {
   if (!review.checked_dates) return null
   return <section id="document-calendar-consistency" aria-labelledby="document-calendar-heading" className="mt-4 rounded-md border border-border p-4 scroll-mt-20">
     <h3 className="m-0 text-body font-medium" id="document-calendar-heading">Calendar date check</h3>
     <p className="mt-2 mb-0 text-small">Checked {review.checked_dates} explicit {review.checked_dates === 1 ? 'weekday and date pair' : 'weekday and date pairs'}. Found {review.disagreements} {review.disagreements === 1 ? 'disagreement' : 'disagreements'}.</p>
-    {review.locations.map(row => {
-      const source = row.anchor
-      const place = source.kind === 'pdf' ? `PDF page ${source.page}, text block ${source.block}` : source.kind === 'docx'
-        ? `Word paragraph ${(source.paragraph_index ?? 0) + 1}` : source.kind === 'email' ? `Email body part ${source.mime_part}` : 'Plain text'
-      return <article key={row.start} className="mt-3 border-t border-border pt-3">
+    {review.locations.map(row =>
+      <article key={row.start} className="mt-3 border-t border-border pt-3">
         <blockquote className="m-0 break-words text-small"><mark>{row.text}</mark></blockquote>
         <p className="mt-2 mb-0 text-small">{row.reason === 'weekday_mismatch'
           ? `The stated date fell on ${row.expected_weekday}. The text says ${row.stated_weekday}.`
           : 'The stated day does not exist in that month and year on the Gregorian calendar.'}</p>
-        <p className="mt-1 mb-0 text-caption text-text-muted">{place} · Extracted characters [{row.start}, {row.end})</p>
-        {'ranges' in row.location && <p className="mt-1 mb-0 text-caption text-text-muted">
-          Original text positions {row.location.ranges.map(([start, end]) => `[${start}, ${end})`).join(', ')}
-        </p>}
-      </article>
-    })}
+        <MappedFindingLocation row={row} />
+      </article>)}
+    {review.disagreements > review.locations.length && <p className="mt-2 mb-0 text-caption text-text-muted">
+      Showing the first {review.locations.length} disagreements.</p>}
+    <p className="mt-2 mb-0 text-caption text-text-muted">{review.limitation}</p>
+  </section>
+}
+
+function ArithmeticConsistency({ review }: { review: NonNullable<DocumentEvidenceSet['arithmetic_consistency']> }) {
+  if (!review.checked_equations) return null
+  return <section id="document-arithmetic-consistency" aria-labelledby="document-arithmetic-heading" className="mt-4 rounded-md border border-border p-4 scroll-mt-20">
+    <h3 id="document-arithmetic-heading" className="m-0 text-body font-medium">Arithmetic check</h3>
+    <p className="mt-2 mb-0 text-small">Checked {review.checked_equations} explicit {review.checked_equations === 1 ? 'equation' : 'equations'}. Found {review.disagreements} {review.disagreements === 1 ? 'disagreement' : 'disagreements'}.</p>
+    {review.locations.map(row =>
+      <article key={row.start} className="mt-3 border-t border-border pt-3">
+        <blockquote className="m-0 break-words text-small"><mark>{row.text}</mark></blockquote>
+        <p className="mt-2 mb-0 text-small">The calculation gives {row.calculated}. The document states {row.stated}.</p>
+        <MappedFindingLocation row={row} />
+      </article>)}
     {review.disagreements > review.locations.length && <p className="mt-2 mb-0 text-caption text-text-muted">
       Showing the first {review.locations.length} disagreements.</p>}
     <p className="mt-2 mb-0 text-caption text-text-muted">{review.limitation}</p>
@@ -504,6 +526,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     <DocumentRepeatedPassages result={set.repeated_passages} />
     {set.percentage_consistency && <PercentageConsistency review={set.percentage_consistency} />}
     {set.calendar_consistency && <CalendarConsistency review={set.calendar_consistency} />}
+    {set.arithmetic_consistency && <ArithmeticConsistency review={set.arithmetic_consistency} />}
     {set.coverage?.chat_format_markers && <ChatFormatMarkers review={set.coverage.chat_format_markers} />}
     {invisible && <section aria-labelledby="document-invisible-characters" className="mt-4 rounded-md border border-border p-4">
       <h3 id="document-invisible-characters" className="m-0 text-body font-medium">

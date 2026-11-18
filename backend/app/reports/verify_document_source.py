@@ -15,6 +15,7 @@ from PIL import Image
 from app.core.canonical import canonical_hash
 from app.detectors.text.extract import extract, text_hash
 from app.evidence import (
+    document_arithmetic,
     document_bibliography,
     document_calendar,
     document_character_review,
@@ -147,6 +148,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("Recorded document coverage differs from the re-extracted original")
     document_repeat.verify_source(evidence, text, mapping)
     document_calendar.verify_source(evidence, text, mapping)
+    document_arithmetic.verify_source(evidence, text, mapping)
     document_pdf_visibility.verify_source(evidence, doc.meta)
     document_word_visibility.verify_source(evidence, doc.meta.get(document_word_visibility.KEY))
     document_invisible_characters.verify_source(evidence, text, mapping, doc.meta)
@@ -264,9 +266,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                           if "covered_examined_pages" in pdf_visibility else "")
     percentage_detail = " Verified repeated percentage statements and their value ranges." if document_percentage_consistency.KEY in evidence else ""
     calendar_detail = " Verified the calendar date check and its source positions." if document_calendar.KEY in evidence else ""
+    arithmetic_detail = " Verified the arithmetic check and its source positions." if document_arithmetic.KEY in evidence else ""
     marker_detail = " Verified chat formatting markers and retained source positions." if document_chat_markers.KEY in coverage else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
             f"{tracked_detail}{word_visibility_detail}{invisible_detail}{character_detail}{interval_detail}{pdf_replacement_detail}"
-            f"{pdf_covered_detail}{percentage_detail}{calendar_detail}{marker_detail}{wording_detail}{history_detail}")
+            f"{pdf_covered_detail}{percentage_detail}{calendar_detail}{arithmetic_detail}{marker_detail}{wording_detail}{history_detail}")

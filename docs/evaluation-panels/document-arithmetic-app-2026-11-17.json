@@ -1,0 +1,163 @@
+{
+  "cases": {
+    "control": {
+      "checked": 1,
+      "disagreements": 0,
+      "input_sha256": "06ab015e88cb6321f0d4c545939ada4f4032879faa804e68cb7178a952eb9a53",
+      "locations": [],
+      "signed_source_verified": true
+    },
+    "docx": {
+      "checked": 2,
+      "disagreements": 1,
+      "input_sha256": "5b0c397d3e0c50c29394d43cf984b545a9d1945217fd7d2b54f3d2b6ceffc48c",
+      "locations": [
+        {
+          "anchor": {
+            "body_path": [
+              1
+            ],
+            "kind": "docx",
+            "paragraph_index": 1
+          },
+          "calculated": "$1,625.75",
+          "end": 60,
+          "location": {
+            "ranges": [
+              [
+                0,
+                31
+              ]
+            ]
+          },
+          "start": 29,
+          "stated": "$1,700.00",
+          "text": "$1,250.50 + $375.25 = $1,700.00"
+        }
+      ],
+      "signed_source_verified": true
+    },
+    "eml": {
+      "checked": 2,
+      "disagreements": 1,
+      "input_sha256": "7833b9a2789451a05fda3b0a61eb1009f6797c876ce93f558863dc68cf8ba00d",
+      "locations": [
+        {
+          "anchor": {
+            "kind": "email",
+            "mime_part": "1",
+            "source_end": 62,
+            "source_start": 0
+          },
+          "calculated": "$1,625.75",
+          "end": 60,
+          "location": {
+            "ranges": [
+              [
+                29,
+                60
+              ]
+            ]
+          },
+          "start": 29,
+          "stated": "$1,700.00",
+          "text": "$1,250.50 + $375.25 = $1,700.00"
+        }
+      ],
+      "signed_source_verified": true
+    },
+    "pdf": {
+      "checked": 2,
+      "disagreements": 1,
+      "input_sha256": "4c8b310c2c2eee09f7cce4e8110150aff7641cd078bc8800e73e3a1e3b829286",
+      "locations": [
+        {
+          "anchor": {
+            "bbox": [
+              70.0,
+              116.175003,
+              232.689926,
+              131.289001
+            ],
+            "block": 1,
+            "coordinate_space": "unrotated-page-points",
+            "kind": "pdf",
+            "page": 1
+          },
+          "calculated": "$1,625.75",
+          "end": 60,
+          "location": {
+            "boxes": [
+              [
+                70.0,
+                116.175003,
+                118.927979,
+                131.289001
+              ],
+              [
+                121.985977,
+                116.175003,
+                128.409973,
+                131.289001
+              ],
+              [
+                131.467972,
+                116.175003,
+                171.221954,
+                131.289001
+              ],
+              [
+                174.279953,
+                116.175003,
+                180.703949,
+                131.289001
+              ],
+              [
+                183.761948,
+                116.175003,
+                232.689926,
+                131.289001
+              ]
+            ]
+          },
+          "start": 29,
+          "stated": "$1,700.00",
+          "text": "$1,250.50 + $375.25 = $1,700.00"
+        }
+      ],
+      "signed_source_verified": true
+    },
+    "txt": {
+      "checked": 2,
+      "disagreements": 1,
+      "input_sha256": "a9c09f00609a652c601a26bca960f51707b8c07596b613f9b8c4c50d9be5f8ed",
+      "locations": [
+        {
+          "anchor": {
+            "kind": "text",
+            "source_end": 62,
+            "source_start": 0
+          },
+          "calculated": "$1,625.75",
+          "end": 60,
+          "location": {
+            "ranges": [
+              [
+                29,
+                60
+              ]
+            ]
+          },
+          "start": 29,
+          "stated": "$1,700.00",
+          "text": "$1,250.50 + $375.25 = $1,700.00"
+        }
+      ],
+      "signed_source_verified": true
+    }
+  },
+  "jobs_before_payment": 0,
+  "redacted_pdf_verified": true,
+  "schema": "chipmunk.document-arithmetic-local-checkout/1",
+  "usd_cents": 999
+}

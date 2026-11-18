@@ -305,6 +305,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              'Email classifier input commitments require document evidence')
     if analysis['kind'] == 'document':
         from app.evidence import (
+            document_arithmetic,
             document_bibliography,
             document_calendar,
             document_check_coverage,
@@ -327,6 +328,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         validate_repeated_passages(evidence)
         document_percentage_consistency.validate(evidence)
         document_calendar.validate(evidence)
+        document_arithmetic.validate(evidence)
         document_pdf_visibility.validate(evidence)
         history = evidence.get("coverage", {}).get(PDF_SAVED_WORDING)
         expected_history = result.get(PDF_SAVED_WORDING_COMMITMENT)

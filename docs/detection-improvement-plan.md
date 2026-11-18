@@ -60,6 +60,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Explicit arithmetic in documents](document-arithmetic-evidence-2026-11-17.md)
+  locates the source expression and recalculates the result. It finds all
+  2,973 staged changes to human-worked arithmetic with zero flags on the
+  matching restyled equations. The result is available through the analysis
+  view, PDF, and JSON at zero AI-confidence weight.
+
 - [Local speech dropouts under continuing ambience](video-shared-sound-background-2026-11-17.md)
   locates five of 28 staged edits per encoding with quieter room sound,
   with ten ordinary alerts in 70 matched controls and two misplaced

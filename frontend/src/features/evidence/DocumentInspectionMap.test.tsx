@@ -204,6 +204,22 @@ describe('ordinary document passage inspection', () => {
     expect(within(section).getByText(/zero weight in the AI assessment/)).toBeTruthy()
   })
 
+  it('shows an arithmetic disagreement and the location of its source expression', () => {
+    const text = '$1,250.50 + $375.25 = $1,700'
+    show({ ...evidence([]), arithmetic_consistency: {
+      schema: 'document-arithmetic-consistency/1', affects_overall_confidence: false,
+      checked_equations: 2, disagreements: 1, scope: 'Checks explicit equations.',
+      limitation: 'This check carries zero weight in the AI assessment.',
+      locations: [{ start: 48, end: 48 + text.length, text, stated: '$1,700', calculated: '$1,625.75',
+        anchor: { kind: 'email', mime_part: '1.1' }, location: { ranges: [[63, 63 + text.length]] } }],
+    } })
+    const section = screen.getByRole('region', { name: 'Arithmetic check' })
+    expect(section.querySelector('mark')?.textContent).toBe(text)
+    expect(within(section).getByText('The calculation gives $1,625.75. The document states $1,700.')).toBeTruthy()
+    expect(within(section).getByText(/^Email body part 1.1 · Extracted characters/)).toBeTruthy()
+    expect(within(section).getByText(/Original text positions/)).toBeTruthy()
+  })
+
   it('marks all three measured sentences and leaves the navigation focus separate', () => {
     const item: DocumentEvidencePacket = { ...packet, inspection_scope: { basis: 'scored_context',
       spans: [{ start: 108, end: 122 }, { start: 123, end: 137 }, { start: 138, end: 142 }] } }

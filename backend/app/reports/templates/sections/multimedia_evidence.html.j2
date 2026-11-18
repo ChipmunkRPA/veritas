@@ -220,6 +220,23 @@
 {% endif %}
 <p class="caption">{{ calendar.limitation }}</p>
 {% endif %}
+{% set arithmetic = evidence.get('arithmetic_consistency') %}
+{% if arithmetic and arithmetic.checked_equations %}
+<h3 id="document-arithmetic-consistency">Arithmetic check</h3>
+<p>Checked {{ arithmetic.checked_equations }} explicit {{ 'equation' if arithmetic.checked_equations == 1 else 'equations' }}. Found {{ arithmetic.disagreements }} {{ 'disagreement' if arithmetic.disagreements == 1 else 'disagreements' }}.</p>
+{% if not evidence.withheld %}
+{% for row in arithmetic.locations %}
+<article class="multimedia-evidence-packet">
+<blockquote><mark>{{ row.text }}</mark></blockquote>
+<p>The calculation gives {{ row.calculated }}. The document states {{ row.stated }}.</p>
+<p class="caption">{% if row.anchor.kind == 'pdf' %}PDF page {{ row.anchor.page }}, text block {{ row.anchor.block }} · {% elif row.anchor.kind == 'docx' %}Word paragraph {{ row.anchor.paragraph_index + 1 }} · {% elif row.anchor.kind == 'email' %}Email body part {{ row.anchor.mime_part }} · {% endif %}Extracted characters [{{ row.start }}, {{ row.end }}). JSON pointer <span class="mono">/arithmetic_consistency/locations/{{ loop.index0 }}</span>.</p>
+{% if row.location.ranges is defined %}<p class="caption">Original text positions {% for start, end in row.location.ranges %}[{{ start }}, {{ end }}){% if not loop.last %}, {% endif %}{% endfor %}.</p>{% endif %}
+</article>
+{% endfor %}
+{% if arithmetic.disagreements > arithmetic.locations | length %}<p class="caption">Showing the first {{ arithmetic.locations | length }} disagreements.</p>{% endif %}
+{% endif %}
+<p class="caption">{{ arithmetic.limitation }}</p>
+{% endif %}
 {% set quantities = evidence.get('percentage_consistency') %}
 {% if quantities %}
 <h3 id="document-percentage-consistency">Repeated percentage statements</h3>

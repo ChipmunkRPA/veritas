@@ -528,6 +528,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.document_tracked_changes', 'app.evidence.document_pdf_visibility', 'app.evidence.document_word_visibility',
                         'app.evidence.document_bibliography',
                         'app.evidence.document_percentage_consistency', 'app.evidence.document_calendar',
+                        'app.evidence.document_arithmetic',
                         'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.av_lag_support',
                         'app.evidence.audio_background_binding', 'app.evidence.audio_bandwidth_binding', 'app.evidence.audio_silence_binding',
                         'app.evidence.audio_tonal_phase_binding',
@@ -604,7 +605,8 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
                                  'video_viseme_binding.py', 'video_viseme_ranked.py', 'video_viseme_timing.py',
                                  'video_lip_agreement.py',
                                  'video_viseme_articulation.py', 'video_viseme_stereo.py', 'video_silent_mouth.py',
-                                 'picture_sequence.py', 'source_geometry.py', 'document_chat_markers.py', 'document_calendar.py'])
+                                 'picture_sequence.py', 'source_geometry.py', 'document_chat_markers.py', 'document_calendar.py',
+                                 'document_arithmetic.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
 
@@ -663,12 +665,14 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
                          ('app.evidence.document_repeat', 'block_anchor'),
                          ('app.evidence.document_repeat', 'validate_block_anchor'),
                          ('app.evidence.document_scope', 'mapped_email_html')}
-    elif name == 'document_calendar.py':
+    elif name in {'document_calendar.py', 'document_arithmetic.py'}:
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.core.canonical', 'FLOAT_DP'),
                          ('app.evidence.document_percentage_consistency', 'value_location'),
                          ('app.evidence.document_repeat', 'block_anchor'),
-                         ('app.evidence.document_repeat', 'validate_block_anchor')}
+                         ('app.evidence.document_repeat', 'validate_block_anchor')} | (
+                             {('app.evidence.document_percentage_consistency', 'validate_value_location')}
+                             if name == 'document_arithmetic.py' else set())
     else:
         assert imports <= sys.stdlib_module_names
 

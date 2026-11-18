@@ -24,6 +24,7 @@ from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.detectors.text.extract import SOURCE_MAP_VERSION, text_hash
 from app.evidence import (
+    document_arithmetic,
     document_bibliography,
     document_calendar,
     document_character_review,
@@ -344,6 +345,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_repeat.validate(document)
         document_percentage_consistency.validate(document)
         document_calendar.validate(document)
+        document_arithmetic.validate(document)
         document_pdf_visibility.validate(document)
         document_pdf_history_binding.validate(document, document["source"].get(document_pdf_history_binding.COMMITMENT))
         document_bibliography.validate(document)
@@ -616,6 +618,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     document["repeated_passages"] = document_repeat.build(document["source"], text, mapping)
     if document["source"]["method"] in document_calendar.METHODS:
         document[document_calendar.KEY] = document_calendar.build(document["source"], text, mapping)
+    if document["source"]["method"] in document_arithmetic.METHODS:
+        document[document_arithmetic.KEY] = document_arithmetic.build(document["source"], text, mapping)
     if (settings.environment == "dev" and settings.document_percentage_consistency
             and document_percentage_consistency.supported(document["source"]["method"], decoded["meta"].get("email"))):
         document[document_percentage_consistency.KEY] = document_percentage_consistency.build(
@@ -782,6 +786,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_chat_markers.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])
             document_repeat.verify_source(document, decoded["text"], decoded["source_map"])
             document_calendar.verify_source(document, decoded["text"], decoded["source_map"])
+            document_arithmetic.verify_source(document, decoded["text"], decoded["source_map"])
             document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()),
                                                           meta=decoded["meta"])
             document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)

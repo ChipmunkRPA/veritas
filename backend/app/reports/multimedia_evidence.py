@@ -25,8 +25,8 @@ from app.evidence.av_binding import (
     TIMING_REASONS,
     TIMING_WINDOWS,
 )
-from app.evidence.stereo_listening_binding import LOCAL_EXCERPTS
 from app.evidence.stereo_difference_binding import KEY as STEREO_DIFFERENCE_REDUCTION
+from app.evidence.stereo_listening_binding import LOCAL_EXCERPTS
 from app.evidence.video_packet_versions import NESTED_VERSIONS as NESTED_VIDEO_VERSIONS
 from app.storage.objects import ObjectIntegrityError, ObjectStore, default_store
 
@@ -601,6 +601,7 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
 def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes], *, result: dict | None = None) -> None:
     from app.detectors.text.extract import text_hash
     from app.evidence import (
+        document_arithmetic,
         document_bibliography,
         document_calendar,
         document_character_review,
@@ -657,6 +658,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         verify_repeated_passages(document, text, mapping)
         document_percentage_consistency.verify_source(document, text, mapping, decoded.get("sentences", ()), meta=decoded["meta"])
         document_calendar.verify_source(document, text, mapping)
+        document_arithmetic.verify_source(document, text, mapping)
         document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
         if history := coverage.get(document_pdf_history_binding.KEY):
             submitted = _bytes(source["sha256"], store)
@@ -808,6 +810,7 @@ def quoted_values(snapshot: ReportSnapshot) -> list[str]:
     excerpts = [row["text"][:REPORT_EXCERPT_CHARS] for row in extra]
     excerpts.extend(row["text"] for group in (snapshot.evidence.get("percentage_consistency") or {}).get("groups", ()) for row in group)
     excerpts.extend(row["text"] for row in (snapshot.evidence.get("calendar_consistency") or {}).get("locations", ()))
+    excerpts.extend(row["text"] for row in (snapshot.evidence.get("arithmetic_consistency") or {}).get("locations", ()))
     excerpts.extend(row["text"] for row in ((snapshot.evidence.get("coverage") or {}).get(TRACKED) or {}).get("rows", ()))
     if (position := (snapshot.evidence.get("coverage") or {}).get(PASSAGE_POSITION)) and (focus := position.get("focus_text")):
         excerpts.append(focus)
@@ -1597,6 +1600,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "repeated_passages": repeated_passages,
             "percentage_consistency": percentage_consistency,
             "calendar_consistency": document.get("calendar_consistency"),
+            "arithmetic_consistency": document.get("arithmetic_consistency"),
             "picture_hold": copy.deepcopy(document.get("picture_hold")),
             "scene_return_review": (document.get("coverage") or {}).get("scene_return_review") if kind == "video" else None,
             "lip_timing_review": document.get("lip_timing_review") if kind == "video" else None,

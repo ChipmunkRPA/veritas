@@ -120,7 +120,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                           project_word_revisions=schema in (document_tracked_changes.PROJECTION_SCHEMA,
                                                            document_tracked_changes.PARAGRAPH_SCHEMA),
                           project_word_breaks=schema == document_tracked_changes.PARAGRAPH_SCHEMA,
-                          include_word_content_controls=coverage.get(WORD_CONTENT_CONTROLS_KEY) == WORD_CONTENT_CONTROLS)
+                          include_word_content_controls=coverage.get(WORD_CONTENT_CONTROLS_KEY) == WORD_CONTENT_CONTROLS,
+                          include_word_saved_fields=document_native_locations.SAVED_FIELDS_KEY in coverage)
         except (OpcError, XMLSyntaxError) as error:
             raise ValueError("The supplied DOCX cannot be parsed locally") from error
     else:
@@ -157,6 +158,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     document_arithmetic.verify_source(evidence, text, mapping)
     document_pdf_visibility.verify_source(evidence, doc.meta)
     document_word_visibility.verify_source(evidence, doc.meta.get(document_word_visibility.KEY))
+    document_native_locations.verify_saved_fields(evidence, text, mapping, doc.meta)
     document_invisible_characters.verify_source(evidence, text, mapping, doc.meta)
     if document_character_review.KEY in coverage or document_passage_intervals.KEY in coverage:
         from app.detectors.text.pipeline import segment_within
@@ -253,6 +255,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     email_input_detail = f" Verified source roles and text hashes for {email_inputs} classifier inputs." if email_inputs else ""
     tracked_detail = f" Verified {tracked} retained tracked Word edit locations against the source XML." if tracked else ""
     word_visibility_detail = " Verified direct Word hidden formatting and retained run locations." if document_word_visibility.KEY in coverage else ""
+    saved_fields_detail = ""
+    if saved_fields := coverage.get(document_native_locations.SAVED_FIELDS_KEY):
+        saved_fields_detail = (" Verified the saved Word field display values and retained text locations."
+                               if saved_fields["included"] else " Verified saved Word field coverage.")
     characters = coverage.get(document_invisible_characters.KEY) or {}
     invisible_detail = (
         " Verified invisible and look-alike Unicode characters and retained source positions."
@@ -277,5 +283,5 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
-            f"{tracked_detail}{word_visibility_detail}{invisible_detail}{character_detail}{interval_detail}{pdf_replacement_detail}"
+            f"{tracked_detail}{word_visibility_detail}{saved_fields_detail}{invisible_detail}{character_detail}{interval_detail}{pdf_replacement_detail}"
             f"{pdf_covered_detail}{percentage_detail}{calendar_detail}{arithmetic_detail}{marker_detail}{wording_detail}{history_detail}")

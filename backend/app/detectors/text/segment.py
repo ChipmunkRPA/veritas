@@ -21,6 +21,7 @@ if TYPE_CHECKING:
 _seg = pysbd.Segmenter(language="en", clean=False, char_span=True)
 _WORD = re.compile(r"\w[\w'’-]*", re.UNICODE)  # unicode-aware: CJK characters count as words
 MAX_UNITS = 1500  # beyond this, adjacent sentences are merged so cost stays bounded for huge documents
+MIN_WORDS = 15
 
 
 _CJK = re.compile(r"[぀-ヿ㐀-䶿一-鿿가-힯]")

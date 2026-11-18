@@ -12,6 +12,14 @@ PARAGRAPH_MAP = "decoded-body-paragraphs/1"
 # The RTF reader returns the same decoded line breaks for soft breaks and paragraph breaks.
 # The saved coordinate describes a decoded text block.
 PARAGRAPH_COORDINATES = {"odt": "odt_paragraph", "rtf": "rtf_paragraph"}
+SAVED_FIELDS_KEY = "word_saved_fields"
+SAVED_FIELDS_SCHEMA = "document-word-saved-fields/1"
+SAVED_FIELDS_READER = "word_saved_fields_reader"
+MAX_SAVED_FIELDS = 256
+MAX_SAVED_FIELD_LOCATIONS = 16
+MAX_SAVED_FIELD_CHARS = 256
+SAVED_FIELDS_SCOPE = ("Includes saved values from supported simple fields in ordinary Word body paragraphs. "
+                      "Field formulas and links are never run. The displayed values can be out of date.")
 
 
 def clip_source_ranges(ranges, start, end):
@@ -42,6 +50,55 @@ def clip_source_ranges(ranges, start, end):
         if cursor == end:
             return clipped
     return []
+
+
+def validate_saved_fields(document):
+    record = (document.get("coverage") or {}).get(SAVED_FIELDS_KEY)
+    if record is None:
+        return
+    from app.evidence.document_tracked_changes import PART_NAME
+
+    source = document["source"]
+    if (not isinstance(record, dict) or set(record) != {"schema", "part", "found", "included", "locations"}
+            or record["schema"] != SAVED_FIELDS_SCHEMA or source["method"] != "python-docx"
+            or not isinstance(record["part"], str) or not PART_NAME.fullmatch(record["part"])
+            or type(record["found"]) is not int or type(record["included"]) is not int
+            or record["found"] <= 0 or not 0 <= record["included"] <= min(record["found"], MAX_SAVED_FIELDS)
+            or not isinstance(record["locations"], list)
+            or len(record["locations"]) != min(record["included"], MAX_SAVED_FIELD_LOCATIONS)):
+        raise ValueError("Invalid saved Word field coverage")
+    last_end = 0
+    last_native = (-1, -1)
+    for row in record["locations"]:
+        if set(row) != {"body_index", "field_index", "source_start", "source_end", "start", "end", "text"}:
+            raise ValueError("Invalid saved Word field location")
+        body, field, native_start, native_end, start, end = (
+            row[key] for key in ("body_index", "field_index", "source_start", "source_end", "start", "end"))
+        if (any(type(n) is not int for n in (body, field, native_start, native_end, start, end))
+                or min(body, field) < 0 or (body, field) <= last_native
+                or not last_end <= start < end <= source["chars"]
+                or not 0 <= native_start < native_end
+                or not isinstance(row["text"], str) or len(row["text"]) != end - start
+                or not end - start <= native_end - native_start <= MAX_SAVED_FIELD_CHARS):
+            raise ValueError("Saved Word field exceeds its source text or coordinates")
+        last_end, last_native = end, (body, field)
+
+
+def verify_saved_fields(document, text, mapping, meta):
+    validate_saved_fields(document)
+    record = (document.get("coverage") or {}).get(SAVED_FIELDS_KEY)
+    if record != meta.get(SAVED_FIELDS_KEY):
+        raise ValueError("Saved Word fields differ from the verified extraction")
+    if not record:
+        return
+    blocks = {block["body_path"][0]: block for block in mapping if block.get("kind") == "docx" and len(block["body_path"]) == 1}
+    for row in record["locations"]:
+        block = blocks.get(row["body_index"])
+        start, end = row["start"], row["end"]
+        if (block is None or not block["start"] <= start < end <= block["end"]
+                or text[start:end] != row["text"]
+                or clip_source_ranges(block["source_ranges"], start, end) != [[row["source_start"], row["source_end"]]]):
+            raise ValueError("Saved Word field differs from its retained text range")
 
 
 def _coordinate(source, coverage, anchor):
@@ -86,6 +143,7 @@ def build(document):
 
 
 def validate(document):
+    validate_saved_fields(document)
     coverage = document.get("coverage") or {}
     if PARAGRAPH_MAP_KEY in coverage and (coverage[PARAGRAPH_MAP_KEY] != PARAGRAPH_MAP
             or document.get("source", {}).get("method") not in PARAGRAPH_COORDINATES):

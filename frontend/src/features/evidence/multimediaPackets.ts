@@ -632,6 +632,9 @@ export interface DocumentEvidenceSet extends SetBase {
       covered_examined_pages?: number[];
       covered_locations?: { page: number; covered_spans: number; boxes: [number, number, number, number][] }[];
       coordinate_space: 'unrotated-page-points'; authorship_confidence_contribution: 0 };
+    word_saved_fields?: { schema: 'document-word-saved-fields/1'; part: string; found: number; included: number;
+      locations: { body_index: number; field_index: number; source_start: number; source_end: number;
+        start: number; end: number; text: string }[] };
     word_text_visibility?: { schema: 'document-word-text-visibility/1'; part: string; checked_paragraphs: number; hidden_runs: number;
       locations: { body_path: (number | 'row' | 'cell' | 'control')[]; body_paragraph: number | null; run: number;
         run_basis?: 'extracted'; source_start: number; source_end: number }[];

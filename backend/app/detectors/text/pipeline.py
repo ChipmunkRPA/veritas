@@ -38,7 +38,7 @@ from app.detectors.text import segment as segment_module
 from app.detectors.text.binoculars import Binoculars, borrow_binoculars, document_score, sentence_scores
 from app.detectors.text.classifier import borrow_primary, borrow_secondary
 from app.detectors.text.extract import Document, from_string
-from app.detectors.text.segment import Sentence, segment, sentences
+from app.detectors.text.segment import MIN_WORDS, Sentence, segment, sentences
 
 # Folio palette for figures (matches frontend/design/direction-b-stripe-notion.md)
 INK, MUTED, RULE, PAPER = "#1B1A17", "#625D54", "#E4E0D7", "#FCFBF9"
@@ -62,7 +62,6 @@ def _style(ax, fig=None) -> None:
 
 log = get_logger(__name__)
 AI_T, HUMAN_T = 0.65, 0.40
-MIN_WORDS = 15
 PRIMARY_CHUNK_MAX_LEN = 768
 
 

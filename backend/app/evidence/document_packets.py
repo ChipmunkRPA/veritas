@@ -538,6 +538,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"]["partially_checked_pages"] = partially_checked
     if word_controls := decoded["meta"].get(WORD_CONTENT_CONTROLS_KEY):
         document["coverage"][WORD_CONTENT_CONTROLS_KEY] = word_controls
+    if saved_fields := decoded["meta"].get(document_native_locations.SAVED_FIELDS_KEY):
+        document["coverage"][document_native_locations.SAVED_FIELDS_KEY] = saved_fields
     if article := decoded["meta"].get(document_scope.HTML_ARTICLE_KEY):
         document["coverage"][document_scope.HTML_ARTICLE_KEY] = article
     if policy := decoded["meta"].get(document_native_locations.PARAGRAPH_MAP_KEY):
@@ -798,6 +800,7 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
             document_pdf_history_binding.validate(document, document_pdf_history_binding.result_commitment(result))
             document_bibliography.verify_source(document, decoded["meta"])
+            document_native_locations.verify_saved_fields(document, decoded["text"], decoded["source_map"], decoded["meta"])
             document_matched_context.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_paragraph_priority.verify_source(document, decoded["text"], decoded["source_map"], result=result)
             document_scope.validate_card_selection(document, decoded["source_map"])

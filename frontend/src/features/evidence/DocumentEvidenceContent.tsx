@@ -510,6 +510,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const scoredWindows = set.coverage?.scored_windows
   const balancedSelection = set.coverage?.balanced_passage_selection
   const tracked = set.coverage?.word_tracked_changes
+  const savedFields = set.coverage?.word_saved_fields
   const selectablePages = [...new Set(writingAgreement?.pdf_spans?.map((span) => span.page) ?? [])]
   const usesOcr = ocrPages.some((page) => page.status === 'extracted') || set.packets.some((packet) => packet.anchors.some((anchor) => anchor.extraction === 'ocr'))
   return <div data-testid="document-evidence-content">
@@ -519,6 +520,19 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     {set.coverage?.pdf_saved_wording && <PdfSavedWording review={set.coverage.pdf_saved_wording} set={set} token={token} mediaReady={mediaReady} />}
     <EmailBodyComparison review={set.coverage?.email_body_alternatives} />
     {set.coverage?.email_classifier_input_scope && <EmailInputScope scope={set.coverage.email_classifier_input_scope} />}
+    {savedFields && <section aria-label="Saved Word field values" className="mt-4 rounded-md border border-border p-4">
+      <h3 className="m-0 text-body font-medium">Saved Word field values</h3>
+      <p className="mt-2 mb-0 text-small">{savedFields.included} of {savedFields.found} saved fields included in the extracted text.</p>
+      <p className="mt-2 mb-0 text-small text-text-muted">Includes saved values from supported simple fields in ordinary Word body paragraphs.
+        {' '}Field formulas and links are never run. The displayed values can be out of date.</p>
+      {savedFields.locations.length > 0 && <ul className="mt-3 mb-0 list-none space-y-3 p-0">
+        {savedFields.locations.map(row => <li key={row.start} className="border-t border-border pt-3">
+          <blockquote className="m-0 break-words text-small">{row.text}</blockquote>
+          <p className="mt-2 mb-0 text-caption text-text-muted">{savedFields.part} · Body block {row.body_index}, field child {row.field_index} (zero-based).
+            {' '}Word characters [{row.source_start}, {row.source_end}). Extracted characters [{row.start}, {row.end}).</p>
+        </li>)}
+      </ul>}
+    </section>}
     {tracked && <section aria-label="Word tracked text changes" className="mt-4 rounded-md border border-border p-4">
       <h3 className="m-0 text-body font-medium">Word tracked text changes</h3>
       {tracked.writing_input === 'accepted_inline_changes' && <p className="mt-2 mb-0 text-small">Writing checks use the version with these inline insertions included and deletions excluded.</p>}

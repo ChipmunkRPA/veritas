@@ -667,6 +667,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
             document_pdf_history.verify_assets(submitted, history, assets.__getitem__)
         document_bibliography.verify_source(document, decoded["meta"])
         document_word_visibility.verify_source(document, decoded["meta"].get(document_word_visibility.KEY), frozen=True)
+        document_native_locations.verify_saved_fields(document, text, mapping, decoded["meta"])
         document_invisible_characters.verify_source(document, text, mapping, decoded["meta"])
         document_character_review.verify_source(document, text, mapping, decoded["meta"], sentences=decoded["sentences"])
         document_passage_intervals.verify_source(document, text, mapping, decoded["sentences"], metadata=decoded["meta"],
@@ -1086,7 +1087,7 @@ def _voice_interval_view(interval: dict, rate: int, video_origin_s: float | None
 
 
 def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[str, Any] | None:
-    from app.evidence import document_passage_intervals, document_published_wording
+    from app.evidence import document_native_locations, document_passage_intervals, document_published_wording
     from app.evidence.document_email_contexts import KEY as EMAIL_INPUT_SCOPE
     from app.evidence.document_native_locations import KEY as ORIGINAL_TEXT_LOCATIONS
     from app.evidence.document_pdf_history_binding import KEY as PDF_HISTORY
@@ -1653,6 +1654,11 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "email_body_alternatives": (document.get("coverage") or {}).get("email_body_alternatives") if kind == "document" else None,
             "email_classifier_input_scope": (document.get("coverage") or {}).get(EMAIL_INPUT_SCOPE) if kind == "document" else None,
             "word_tracked_changes": (document.get("coverage") or {}).get(TRACKED) if kind == "document" and not withheld else None,
+            "word_saved_fields": (
+                {**saved_fields, "scope": document_native_locations.SAVED_FIELDS_SCOPE}
+                if kind == "document" and not withheld
+                and (saved_fields := (document.get("coverage") or {}).get(document_native_locations.SAVED_FIELDS_KEY)) else None
+            ),
             "invisible_characters": _invisible_characters_view(document.get("coverage") or {}) if kind == "document" else None,
             "writing_character_review": _character_review_view(document.get("coverage") or {})
             if kind == "document" and not withheld else None,

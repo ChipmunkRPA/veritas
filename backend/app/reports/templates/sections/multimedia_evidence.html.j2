@@ -30,6 +30,17 @@
 <p class="caption">Evidence set {{ evidence.version }} - SHA-256 <span class="mono evidence-hash">{{ evidence.sha256 }}</span></p>
 <p class="caption"{% if evidence.kind == 'audio' %} id="multimedia-evidence-voice-coverage"{% endif %}>{{ evidence.coverage_note }}</p>
 {% for note in evidence.coverage_details %}<p class="caption">{{ note }}</p>{% endfor %}
+{% if evidence.get('word_saved_fields') %}
+{% set fields = evidence.word_saved_fields %}
+<div class="multimedia-acoustic-summary" id="document-word-saved-fields">
+<h3>Saved Word field values</h3>
+<p>{{ fields.included }} of {{ fields.found }} saved fields included in the extracted text. {{ fields.scope }}</p>
+{% for row in fields.locations %}
+<blockquote>{{ row.text }}</blockquote>
+<p class="caption">{{ fields.part }}. Body block {{ row.body_index }}, field child {{ row.field_index }} (zero-based). Word characters <span class="mono">[{{ row.source_start }}, {{ row.source_end }})</span>. Extracted characters <span class="mono">[{{ row.start }}, {{ row.end }})</span>.</p>
+{% endfor %}
+</div>
+{% endif %}
 {% if evidence.get('writing_passage_intervals') %}
 {% set intervals = evidence.writing_passage_intervals %}
 {% set wording = evidence.get('published_wording') %}

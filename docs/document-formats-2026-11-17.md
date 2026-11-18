@@ -7,7 +7,7 @@ limit is 25 MB in the standard configuration.
 
 | Format | Writing examined | Source position in reports |
 | --- | --- | --- |
-| DOCX | Body paragraphs, tables, and saved text in filled paragraph and inline controls in standard and Strict Open XML DOCX. Separate Word revision and visibility checks cover their supported structures. | Word body path, paragraph characters, and available run coordinates |
+| DOCX | Body paragraphs, tables, saved text in filled paragraph and inline controls, and supported saved field values in standard and Strict Open XML DOCX. Separate Word revision and visibility checks cover their supported structures. | Word body path, paragraph characters, and available run coordinates |
 | ODT | Body paragraphs, headings, lists, and tables | Decoded body paragraph number and character range |
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
 | RTF | Extracted writing from standard Rich Text files | Decoded text block number and character range |
@@ -34,6 +34,16 @@ maps the Strict body and style markup for text extraction and retains the
 submitted bytes for Content Credentials, hashing, and original-file review.
 [Microsoft's Word format reference](https://learn.microsoft.com/en-us/office/compatibility/office-file-format-reference) ·
 [Open XML SDK Strict DOCX test fixture](https://github.com/dotnet/Open-XML-SDK/blob/431ab05cf160248cc3885a4a766026d4f8243792/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/Strict01.docx)
+
+New analyses also read the saved display text of supported simple fields in
+ordinary body paragraphs, including dates, sequence numbers, and cross-references.
+The evidence page, PDF and JSON show the retained values with zero-based Word
+body and field indices and character ranges. These are the values stored
+in the submitted file. Formulas, external references, nested fields, table fields,
+and fields in tracked documents stay outside this check. The original-file
+verifier follows the extraction policy recorded in each report.
+[Microsoft's SimpleField reference](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.simplefield?view=openxml-3.0.1)
+· [Open XML SDK field fixture](https://github.com/dotnet/Open-XML-SDK/blob/431ab05cf160248cc3885a4a766026d4f8243792/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/field/simple-field.docx)
 
 New ODT and RTF reports show Unicode character ranges before the analysis
 normalizes whitespace. ODT numbers readable body paragraphs in reading order.

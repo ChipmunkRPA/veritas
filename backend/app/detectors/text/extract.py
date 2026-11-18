@@ -705,7 +705,10 @@ def docx_paragraphs(parent, elements, body_path=(), *, include_content_controls=
 
 
 def extract_docx(path: Path, *, project_word_revisions: bool = True, project_word_breaks: bool = True,
-                 include_word_content_controls: bool = True) -> Document:
+                 include_word_content_controls: bool = True, include_word_saved_fields: bool = True) -> Document:
+    from bisect import bisect_left
+
+    from app.detectors.text import word_saved_fields
     from app.evidence import document_word_visibility
     from app.evidence.document_archive_word import ordinary_body_paragraph
     from app.evidence.document_tracked_changes import INPUT_NOTICES, JOINED_PARAGRAPHS, PART_NAME
@@ -717,17 +720,30 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
     percentage_body_paragraphs = []
     hidden_locations = []
     checked_paragraphs = hidden_runs = 0
+    fields_found = int(d.element.body.xpath("count(.//w:fldSimple)")) if include_word_saved_fields else 0
+    can_project_fields = bool(fields_found and review and review["status"] == "no_match"
+                              and word_saved_fields.defaults_allow_visible_runs(d))
+    complex_field_blocks = word_saved_fields.complex_field_blocks(d.element.body) if can_project_fields else set()
+    field_ranges = {}
+    fields_included = 0
 
     continued = False
     for paragraph, path_here, projected_control in docx_paragraphs(
             d, d.element.body, include_content_controls=include_word_content_controls):
-        text = paragraph.text
         top_level = len(path_here) == 1
+        saved = (word_saved_fields.project(paragraph, document_native_locations.MAX_SAVED_FIELDS - fields_included)
+                 if can_project_fields and top_level and not projected_control and paragraph._p not in complex_field_blocks else [])
+        text = paragraph.text
+        if saved:
+            fields_included += len(saved)
+            if len(field_ranges) < document_native_locations.MAX_SAVED_FIELD_LOCATIONS:
+                field_ranges[path_here[0]] = saved
+        projected = projected_control or bool(saved)
         body_paragraph = len(percentage_body_paragraphs) + 1 if top_level else None
         if text.strip():
             checked_paragraphs += 1
             for location in document_word_visibility.inspect_paragraph(
-                    paragraph, path_here, body_paragraph, projected_control=projected_control):
+                    paragraph, path_here, body_paragraph, projected_control=projected):
                 hidden_runs += 1
                 if len(hidden_locations) < document_word_visibility.MAX_LOCATIONS:
                     hidden_locations.append(location)
@@ -735,7 +751,7 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
         if top_level:
             style = paragraph.style
             eligible = style is not None and style.style_id.casefold() in {"normal", "bodytext", "bodytext2", "bodytext3"}
-            percentage_body_paragraphs.append(path_here[0] if eligible and not (continued or joins_next or projected_control)
+            percentage_body_paragraphs.append(path_here[0] if eligible and not (continued or joins_next or projected)
                                               and ordinary_body_paragraph(paragraph) else None)
             continued = joins_next
         cursor, runs = 0, []
@@ -744,8 +760,8 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
             runs.append({"run": ri, "start": cursor, "end": cursor + length})
             cursor += length
         source = {"kind": "docx", "body_path": path_here, "paragraph_index": len(parts),
-                  "runs": [] if projected_control else runs,
-                  "run_mapping_complete": not projected_control and cursor == len(text)}
+                  "runs": [] if projected else runs,
+                  "run_mapping_complete": not projected and cursor == len(text)}
         if joins_next:
             source["join_following_paragraph"] = True
         parts.append((text, source))
@@ -763,6 +779,27 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
         doc.meta[WORD_CONTENT_CONTROLS_KEY] = WORD_CONTENT_CONTROLS
         doc.meta["coverage_warning"] += (" Filled paragraph and inline controls use their saved text. This check excludes "
                                          "placeholders, external data and tables with controls around entire rows or cells.")
+    if include_word_saved_fields:
+        doc.meta[document_native_locations.SAVED_FIELDS_READER] = document_native_locations.SAVED_FIELDS_SCHEMA
+    if fields_found and PART_NAME.fullmatch(part):
+        locations = []
+        for block in doc.source_map:
+            if len(block["body_path"]) != 1 or block["body_path"][0] not in field_ranges:
+                continue
+            index = block["body_path"][0]
+            _, origins = _normalise(parts[block["paragraph_index"]][0])
+            for field_index, source_start, source_end in field_ranges[index]:
+                if len(locations) == document_native_locations.MAX_SAVED_FIELD_LOCATIONS:
+                    break
+                start = block["start"] + bisect_left(origins, (source_start,))
+                end = block["start"] + bisect_left(origins, (source_end,))
+                locations.append({"body_index": index, "field_index": field_index, "source_start": source_start,
+                                  "source_end": source_end, "start": start, "end": end, "text": doc.text[start:end]})
+        doc.meta[document_native_locations.SAVED_FIELDS_KEY] = {
+            "schema": document_native_locations.SAVED_FIELDS_SCHEMA, "part": part,
+            "found": fields_found, "included": fields_included, "locations": locations,
+        }
+        doc.meta["coverage_warning"] += " " + document_native_locations.SAVED_FIELDS_SCOPE
     if joined:
         doc.meta[JOINED_PARAGRAPHS] = len(joined)
     if PART_NAME.fullmatch(part):
@@ -1065,14 +1102,14 @@ def extract_eml(path: Path) -> Document:
 
 def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True,
             project_word_revisions: bool = True, project_word_breaks: bool = True,
-            include_word_content_controls: bool = True, include_html_article: bool = True,
+            include_word_content_controls: bool = True, include_word_saved_fields: bool = True, include_html_article: bool = True,
             map_body_paragraphs: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
     elif ext == ".docx":
         d = extract_docx(path, project_word_revisions=project_word_revisions, project_word_breaks=project_word_breaks,
-                         include_word_content_controls=include_word_content_controls)
+                         include_word_content_controls=include_word_content_controls, include_word_saved_fields=include_word_saved_fields)
     elif ext == ".odt":
         from app.detectors.text.opendocument import body_paragraphs
 

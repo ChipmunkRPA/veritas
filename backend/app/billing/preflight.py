@@ -171,13 +171,18 @@ def _document(path: Path, extension: str) -> None:
             document.load_page(0)
         return
     if extension == ".docx":
-        from app.detectors.text.extract import docx_body, docx_paragraphs
+        from app.detectors.text.extract import extract_docx
+        from app.detectors.text.segment import MIN_WORDS, segment
+        from app.evidence.document_native_locations import SAVED_FIELDS_KEY
         from app.storage.files import check_document_archive_safe
 
         check_document_archive_safe(path, extension, check_crc=True)
-        document, _, _, _ = docx_body(path)
-        if not any(readable(paragraph.text) for paragraph, _, _ in docx_paragraphs(document, document.element.body)):
+        document = extract_docx(path)
+        if not readable(document.text):
             raise PreflightError("The Word document has no readable body text. Save scanned pages or unsupported layouts as a PDF before paying.")
+        if (document.meta.get(SAVED_FIELDS_KEY, {}).get("included")
+                and sum(sentence.n_words for sentence in segment(document)) < MIN_WORDS):
+            raise PreflightError(f"The Word document includes saved field text but fewer than {MIN_WORDS} readable words. No payment was started.")
         return
     if extension == ".odt":
         from app.detectors.text.opendocument import body_paragraphs

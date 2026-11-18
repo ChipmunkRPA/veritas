@@ -50,9 +50,11 @@ An issue or pull request does not automatically change a serving calibration or 
 
 For independent testing, use the [portable evaluation contract](docs/independent-testing.md)
 and the repository's **Independent evaluation or detection failure** issue form.
+Start with the [signed evidence example](docs/evaluation-panels/signed-evidence-example/README.md)
+to verify a package and source crop offline without an app account or model files.
 For a new panel with known edit positions, the [location counter](docs/independent-testing.md#count-exact-locations-on-your-own-files)
 recomputes overlap from your annotations before you share an aggregate result.
-Start with the [single-upload replay and reference receipt](docs/independent-testing.md#replay-the-four-single-upload-comparisons)
+Use the [single-upload replay and reference receipt](docs/independent-testing.md#replay-the-four-single-upload-comparisons)
 to compare your results on all four media types and format a reproducible issue.
 The contract checks source separation, complete denominators, and frozen system
 identities across all four media types. The [active improvement plan](docs/detection-improvement-plan.md)

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [signed evidence example](evaluation-panels/signed-evidence-example/README.md)
+provides a small, authored image, its signed ZIP and its separate example key.
+Verify the key and the crop, then confirm that verification refuses a changed
+copy. It needs Python with signature and image libraries and runs offline.
+
 The [document credential replay](document-formats-2026-11-17.md#independent-replay)
 lets reviewers check their own original Word and OpenDocument files offline.
 It reports the file hash, credential binding, trust snapshot and gate decision.
@@ -3087,9 +3092,13 @@ With the project dependencies installed, this compares the original's SHA-256,
 re-extracted text and source mapping with the signed record. It checks the exact
 excerpts, positions, supporting input ranges, repeated passages and any PDF
 page images in the package. It supports plain text, DOCX, source-mapped EML,
-and PDF. PDFs with OCR evidence require the project's verified OCR data and
-a compatible local renderer and recognizer. Replay checks the exact OCR input
-and the source pixels behind the crop. The replay does not score authorship.
+OpenDocument Text, Rich Text, HTML, Markdown, and PDF. The exact native locations
+depend on the format and the evidence recorded at analysis time.
+[Document format guide](document-formats-2026-11-17.md)
+
+PDFs with OCR evidence require the project's verified OCR data and a compatible
+local renderer and recognizer. Replay checks the exact OCR input and the source
+pixels behind the crop. The replay does not score authorship.
 
 ## Choose a review to reproduce
 

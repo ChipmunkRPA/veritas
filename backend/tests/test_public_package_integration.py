@@ -503,13 +503,13 @@ def test_multimedia_zip_matches_frozen_set_and_verifies_without_application_runt
     # A fresh process blocks runtime imports and networking: verification consumes
     # only the ZIP and independently supplied signing key, with no live API/DB/model.
     offline = subprocess.run([sys.executable, "-c", """
-import importlib.abc, json, socket, sys
-from pathlib import Path
+import importlib.abc, runpy, socket, sys
+package, key, embedded = sys.argv[1:]
 class RuntimeUnavailable(importlib.abc.MetaPathFinder):
     def find_spec(self, fullname, path=None, target=None):
         # This bounded MP4 metadata reader is deliberately pure stdlib. The
         # package initializer is empty; all model/runtime evidence modules stay blocked.
-        if fullname == 'app.evidence.image_embedded_pair_binding' and sys.argv[3] == 'True':
+        if fullname == 'app.evidence.image_embedded_pair_binding' and embedded == 'True':
             return None
         if fullname in ('app.evidence', 'app.evidence.mp4', 'app.evidence.image_eligibility', 'app.evidence.image_copy_similarity_binding',
                         'app.evidence.image_editor_preview_binding',
@@ -557,10 +557,8 @@ sys.meta_path.insert(0, RuntimeUnavailable())
 def no_network(*args, **kwargs):
     raise RuntimeError('Offline verification attempted networking')
 socket.socket = no_network
-from app.reports.verify import verify_package
-result = verify_package(Path(sys.argv[1]), public_key_pem=Path(sys.argv[2]).read_bytes())
-print(json.dumps(result.as_dict()))
-sys.exit(0 if result.ok else 1)
+sys.argv = ['app.cli', 'verify', package, '--public-key', key, '--json']
+runpy.run_module('app.cli', run_name='__main__')
 """, str(built.path), str(trusted_key), str(embedded)], cwd=Path(__file__).resolve().parents[1],
         capture_output=True, text=True, timeout=20)
     assert offline.returncode == 0, offline.stdout + offline.stderr

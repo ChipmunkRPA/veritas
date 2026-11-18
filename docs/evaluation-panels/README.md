@@ -1,10 +1,11 @@
 # Public evaluation source references
 
 These are public dataset references, selection metadata, file hashes, and known
-edit positions for the new local comparisons. **No source media, customer uploads,
-or upstream model checkpoints are included.** The v6 fitting capsule includes
-derived numerical features and fitted linear parameters, with separate data
-terms. These resources let independent reviewers identify the
+edit positions for the new local comparisons. **Customer uploads and upstream model
+checkpoints are excluded.** Media here is limited to project-authored examples
+such as the [signed evidence fixture](signed-evidence-example/README.md).
+The v6 fitting capsule includes derived numerical features and fitted linear
+parameters, with separate data terms. These resources let independent reviewers identify the
 same inputs and audit source separation, rather than relying on aggregate numbers
 or a generic dataset link.
 

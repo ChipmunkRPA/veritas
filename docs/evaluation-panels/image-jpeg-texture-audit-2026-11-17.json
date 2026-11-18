@@ -1,0 +1,272 @@
+{
+  "fresh": {
+    "areas_sha256": "2e76d5a07ae29db4970b9d89f383427df182efb1b6e6667ac5c53a2fb64fe2b6",
+    "evaluation_sha256": "dc89de5341ef6902b08edf1a7cd689772c654a9ff61e2ae2f4c3245647239b35",
+    "groups": 12,
+    "independently_recounted_regions": 0,
+    "oracle_detail": {
+      "75/lama": {
+        "joint_deficit": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 3,
+          "higher_than_both": 2,
+          "higher_than_original": 8
+        },
+        "neighbor_deficit": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 10,
+          "higher_than_both": 2,
+          "higher_than_original": 2
+        },
+        "texture_deficit": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 0,
+          "higher_than_both": 0,
+          "higher_than_original": 11
+        },
+        "texture_surprise": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 18,
+          "higher_than_both": 2,
+          "higher_than_original": 2
+        }
+      },
+      "75/migan": {
+        "joint_deficit": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 0,
+          "higher_than_both": 0,
+          "higher_than_original": 8
+        },
+        "neighbor_deficit": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 12,
+          "higher_than_both": 2,
+          "higher_than_original": 2
+        },
+        "texture_deficit": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 0,
+          "higher_than_both": 0,
+          "higher_than_original": 11
+        },
+        "texture_surprise": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 20,
+          "higher_than_both": 4,
+          "higher_than_original": 4
+        }
+      },
+      "90/lama": {
+        "joint_deficit": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 0,
+          "higher_than_both": 0,
+          "higher_than_original": 11
+        },
+        "neighbor_deficit": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 3,
+          "higher_than_both": 2,
+          "higher_than_original": 4
+        },
+        "texture_deficit": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 0,
+          "higher_than_both": 0,
+          "higher_than_original": 16
+        },
+        "texture_surprise": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 20,
+          "higher_than_both": 2,
+          "higher_than_original": 3
+        }
+      },
+      "90/migan": {
+        "joint_deficit": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 0,
+          "higher_than_both": 0,
+          "higher_than_original": 14
+        },
+        "neighbor_deficit": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 8,
+          "higher_than_both": 6,
+          "higher_than_original": 9
+        },
+        "texture_deficit": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 0,
+          "higher_than_both": 0,
+          "higher_than_original": 12
+        },
+        "texture_surprise": {
+          "edited": 24,
+          "grid_can_localize": 24,
+          "higher_than_blur": 19,
+          "higher_than_both": 6,
+          "higher_than_original": 8
+        }
+      }
+    },
+    "processed_inputs": {
+      "manifest_sha256": "bff34cb669f96141f17aa0f6eaf74d4a58196f4247606c6c917e2d20d2f766ff",
+      "schema": "chipmunk.independent-input-verification/1",
+      "verified_cases": 336,
+      "verified_file_bindings": 672
+    },
+    "source_mask_storage": "local PBM derived from exact pre-final-encode changes"
+  },
+  "retained": {
+    "areas_sha256": "f2d7e035bdf1b197b88084cdc59789411e98949fa24310fadf2648d6f41f3c11",
+    "evaluation_sha256": "2adc38f6c1e7d34ba23d7dd06b6802f4cca0870cf51c6b24a4d6ceb2a3696cf8",
+    "groups": 20,
+    "independently_recounted_regions": 14,
+    "oracle_detail": {
+      "75/lama": {
+        "joint_deficit": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 2,
+          "higher_than_both": 1,
+          "higher_than_original": 18
+        },
+        "neighbor_deficit": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 12,
+          "higher_than_both": 5,
+          "higher_than_original": 7
+        },
+        "texture_deficit": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 0,
+          "higher_than_both": 0,
+          "higher_than_original": 21
+        },
+        "texture_surprise": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 33,
+          "higher_than_both": 4,
+          "higher_than_original": 4
+        }
+      },
+      "75/migan": {
+        "joint_deficit": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 4,
+          "higher_than_both": 4,
+          "higher_than_original": 27
+        },
+        "neighbor_deficit": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 14,
+          "higher_than_both": 14,
+          "higher_than_original": 23
+        },
+        "texture_deficit": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 0,
+          "higher_than_both": 0,
+          "higher_than_original": 33
+        },
+        "texture_surprise": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 34,
+          "higher_than_both": 10,
+          "higher_than_original": 10
+        }
+      },
+      "90/lama": {
+        "joint_deficit": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 0,
+          "higher_than_both": 0,
+          "higher_than_original": 21
+        },
+        "neighbor_deficit": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 4,
+          "higher_than_both": 4,
+          "higher_than_original": 12
+        },
+        "texture_deficit": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 0,
+          "higher_than_both": 0,
+          "higher_than_original": 23
+        },
+        "texture_surprise": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 32,
+          "higher_than_both": 4,
+          "higher_than_original": 4
+        }
+      },
+      "90/migan": {
+        "joint_deficit": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 0,
+          "higher_than_both": 0,
+          "higher_than_original": 29
+        },
+        "neighbor_deficit": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 7,
+          "higher_than_both": 7,
+          "higher_than_original": 26
+        },
+        "texture_deficit": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 0,
+          "higher_than_both": 0,
+          "higher_than_original": 28
+        },
+        "texture_surprise": {
+          "edited": 40,
+          "grid_can_localize": 40,
+          "higher_than_blur": 36,
+          "higher_than_both": 10,
+          "higher_than_original": 10
+        }
+      }
+    },
+    "processed_inputs": {
+      "manifest_sha256": "0e5570967ac4431b41c8112de122413c672adea53500a1f89a7134fabe171b4e",
+      "schema": "chipmunk.independent-input-verification/1",
+      "verified_cases": 560,
+      "verified_file_bindings": 1120
+    },
+    "source_mask_storage": "local PBM derived from exact pre-final-encode changes"
+  }
+}

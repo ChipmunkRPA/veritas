@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [JPEG texture replay](image-jpeg-texture-prediction-2026-11-17.md#reproduce)
+recounts two held panels with 896 deliveries. It binds the exact changed
+pixels to intact and traditionally edited versions of each photo for
+comparison with a different JPEG localizer.
+
 The [changed-word and sentence replay](writing-token-supervision-2026-11-17.md#reproduce-the-local-comparison)
 provides 266 exact input files, source commitments, and separate truth and
 prediction files for comparing another writing detector. It also recounts

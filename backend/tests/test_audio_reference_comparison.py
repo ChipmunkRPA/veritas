@@ -5,6 +5,7 @@ import shutil
 import subprocess
 import wave
 from contextlib import contextmanager
+from copy import deepcopy
 from fractions import Fraction
 from pathlib import Path
 
@@ -18,6 +19,7 @@ from test_image_reference_access import reference_http as reference_http
 from app.api import auth, v2_media_reference
 from app.core.canonical import canonical_hash
 from app.core.config import settings
+from app.detectors.audio import gapless_aac
 from app.detectors.audio.decode import read_wav, wav_bytes
 from app.evidence import audio_reference
 from app.evidence import video_reference_soundtrack as reference_timing
@@ -43,6 +45,26 @@ def save_stereo(folder, name, samples):
         output.setparams((2, 2, 16000, 0, "NONE", ""))
         output.writeframes(samples.astype("<i2", copy=False).tobytes())
     return path
+
+
+def test_gapless_metadata_requires_the_packet_clock_and_decoder_skip_to_agree():
+    streams = [{"codec_name": "aac", "profile": "LC", "channels": 1, "channel_layout": "mono", "sample_rate": "48000",
+                "time_base": "1/48000", "start_pts": 2112, "duration_ts": 290816, "bit_rate": "77488", "nb_frames": "284"}]
+    table = " 00000000 00000840 000002C0 0000000000046500" + " 00000000" * 8
+    packets = [{"pts": i * 1024, "dts": i * 1024, "duration": 1024} for i in range(284)]
+    packets[0]["side_data_list"] = [{"side_data_type": "Skip Samples", "skip_samples": 2112, "discard_padding": 0}]
+    asset = {"format": {"format_name": "mov,mp4,m4a,3gp,3g2,mj2", "tags": {"iTunSMPB": table, "major_brand": "M4A "}},
+             "streams": streams, "packets": packets}
+    proof = gapless_aac._clock(asset)
+    assert (proof["presentation_start_pts"], proof["presentation_end_exclusive_pts"]) == (2112, 290112)
+    for edit in (lambda row: row["packets"][5].update(pts=5121),
+                 lambda row: row["packets"].pop(),
+                 lambda row: row["packets"][0]["side_data_list"][0].update(skip_samples=2113),
+                 lambda row: row["streams"][0].update(start_pts=0),
+                 lambda row: row["format"]["tags"].update(iTunSMPB=table.replace("000002C0", "000002C1"))):
+        rejected = deepcopy(asset)
+        edit(rejected)
+        assert gapless_aac._clock(rejected) is None
 
 
 def test_matching_waveform_aac_requires_a_six_second_mono_clock_and_replays_exact_excerpts(tmp_path):

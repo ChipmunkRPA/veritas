@@ -16,7 +16,7 @@ from scripts.video_short_return_encoded_app import PaymentStub, body, checkout, 
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def run(output: Path, inputs: Path, *, browser: bool = False):
+def run(output: Path, inputs: Path, *, browser: bool = False, gapless: bool = False):
     configure(output, ROOT)
     os.environ.update(VERITAS_ENVIRONMENT="dev", VERITAS_AUDIO_DETECTOR_MODE="candidate", VERITAS_LOG_LEVEL="WARNING",
                       VERITAS_AUDIO_REFERENCE_COMPARISON_ENABLED="true", VERITAS_AUDIO_REFERENCE_CLEAN_SPEECH="true",
@@ -29,7 +29,12 @@ def run(output: Path, inputs: Path, *, browser: bool = False):
     from app.api import auth
     from app.billing import service
     from app.detectors.audio.decode import read_wav
-    from app.evidence.audio_reference import SCHEMA_WITH_AAC_MATCHING_WAVEFORM, _identity, read_track
+    from app.evidence.audio_reference import (
+        SCHEMA_WITH_AAC_MATCHING_WAVEFORM,
+        SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM,
+        _identity,
+        read_track,
+    )
     from app.main import app
     from app.storage.db import Analysis, get_session
     from scripts.compare_audio_references import run as replay
@@ -38,6 +43,7 @@ def run(output: Path, inputs: Path, *, browser: bool = False):
     torch.set_num_threads(2)
     torch.set_num_interop_threads(1)
     source = inputs / "earlier.flac"
+    schema = SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM if gapless else SCHEMA_WITH_AAC_MATCHING_WAVEFORM
     stub = service._stripe = PaymentStub()
     cases, results = [], {}
     with TestClient(app, client=("127.0.0.1", 50000)) as client:
@@ -60,7 +66,7 @@ def run(output: Path, inputs: Path, *, browser: bool = False):
             payload = body(client.post(endpoint, files=files, data={"include_pdf": "true", "earlier_has_clean_speech": "true"}))
             record = payload["comparison"]
             waveform = record["matching_waveform"]
-            assert record["schema"] == SCHEMA_WITH_AAC_MATCHING_WAVEFORM and waveform["status"] == status
+            assert record["schema"] == schema and waveform["status"] == status
             assert not waveform["affects_overall_confidence"] and not record["affects_overall_confidence"]
             scan(json.dumps(record))
             evidence = output / f"{role}.json"
@@ -72,7 +78,8 @@ def run(output: Path, inputs: Path, *, browser: bool = False):
                 [page] = [page for page in report if "Matching speech waveform" in page.get_text()]
                 text = " ".join(page.get_text().split())
                 scan(text)
-                assert waveform["summary"] in text and "48 kHz AAC presentation clock" in text and "zero weight" in text
+                note = "Playback begins after 2,112 priming samples" if gapless else "48 kHz AAC presentation clock"
+                assert waveform["summary"] in text and note in text and "zero weight" in text
                 if span := waveform.get("range"):
                     assert sum(len(drawing["items"]) > 20 for drawing in page.get_drawings()) == 2
                     for side, original in (("earlier", source), ("submitted", path)):
@@ -105,5 +112,6 @@ if __name__ == "__main__":
     parser.add_argument("output", type=Path)
     parser.add_argument("inputs", type=Path)
     parser.add_argument("--browser", action="store_true")
+    parser.add_argument("--gapless", action="store_true")
     arguments = parser.parse_args()
-    run(arguments.output, arguments.inputs, browser=arguments.browser)
+    run(arguments.output, arguments.inputs, browser=arguments.browser, gapless=arguments.gapless)

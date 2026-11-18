@@ -20,6 +20,9 @@ try {
     const region = page.getByRole('region', { name: 'Matching speech waveform' })
     await region.getByText(waveform.summary, { exact: true }).waitFor()
     await region.getByText(/6\.000 s · 48 kHz mono source/).waitFor()
+    if (waveform.aac_presentation.native_clock.priming_samples) {
+      await region.getByText(/Playback starts after 2,112 priming samples/).waitFor()
+    }
     assert.equal(await region.getByRole('img', { name: /matching waveform excerpt waveform/ }).count(), flagged ? 2 : 0)
     if (flagged) {
       const [start, end] = waveform.range.submitted.native_source_pts

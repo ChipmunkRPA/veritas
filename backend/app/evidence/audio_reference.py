@@ -44,6 +44,7 @@ SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/18"
 SCHEMA_WITH_DENSER_STEREO_AAC = "chipmunk.audio-reference-comparison/19"
 SCHEMA_WITH_CLOSE_STEREO_AAC = "chipmunk.audio-reference-comparison/20"
 SCHEMA_WITH_AAC_MATCHING_WAVEFORM = "chipmunk.audio-reference-comparison/21"
+SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM = "chipmunk.audio-reference-comparison/22"
 WAVEFORM_AAC_MIN_BIT_RATE = 60_000
 STEREO_AAC_SPEECH_SCHEMAS = frozenset({SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH, SCHEMA_WITH_DENSER_STEREO_AAC,
                                      SCHEMA_WITH_CLOSE_STEREO_AAC})
@@ -485,6 +486,29 @@ def _aac_presented_tracks(paths, decoded, *, high_rate=False, include_bit_rate=F
     return trimmed, proof
 
 
+def _gapless_waveform_tracks(submitted_path, decoded):
+    from app.detectors.audio import gapless_aac
+
+    earlier, submitted = (item[0] for item in decoded)
+    duration = gapless_aac.VALID_SAMPLES // 3
+    start = gapless_aac.PRIMING // 3
+    if (not decoded[0][4] or earlier[0] != "measured" or submitted[0] != "measured"
+            or earlier[2]["source_pts"] != 0 or len(earlier[1]) != duration or submitted[2]["source_pts"] != start):
+        return None
+    clock = gapless_aac.read(submitted_path)
+    if clock is None:
+        return None
+    padding = (clock["remainder_samples"] + 2) // 3
+    if len(submitted[1]) != duration + padding:
+        return None
+    bit_rate = clock.pop("bit_rate")
+    presented = earlier, (submitted[0], submitted[1][:duration], submitted[2])
+    return presented, {"side": "submitted", "sample_rate": AUDIO_RATE, "time_base": f"1/{AUDIO_RATE}",
+                       "presentation_start_pts": start, "presentation_end_exclusive_pts": start + duration,
+                       "decoded_samples": len(submitted[1]), "excluded_trailing_samples": padding,
+                       "native_clock": clock, "bit_rate": bit_rate}
+
+
 def _local_timing(decoded, audio, assets, *, aac_tracks=None):
     from app.evidence import video_reference_soundtrack as timing
 
@@ -740,7 +764,8 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             allow_close_stereo_consensus: bool = False,
             include_aligned_speech: bool = False,
             include_matching_waveform: bool = False,
-            include_matching_waveform_aac: bool = False) -> tuple[dict, dict[str, bytes]]:
+            include_matching_waveform_aac: bool = False,
+            include_matching_waveform_gapless_aac: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Compare continuous recordings and recover a small, exactly supported edge trim."""
     paths = earlier, submitted
     filenames = filenames or (earlier.name, submitted.name)
@@ -821,12 +846,18 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
     if include_matching_waveform:
         # The transfer study measured six-second pairs with one native mono source and mono AAC-LC.
         waveform_aac = None
+        schema = SCHEMA_WITH_MATCHING_WAVEFORM
         if (want_waveform_aac and native_aac and native_bit_rate is not None and native_bit_rate >= WAVEFORM_AAC_MIN_BIT_RATE
                 and native_aac[1]["native_clock"]["channels"] == 1
                 and native_aac[1]["presentation_end_exclusive_pts"] == 6 * AUDIO_RATE):
             tracks, proof = native_aac
             waveform_aac = tracks, proof | {"bit_rate": native_bit_rate}
-        record.update(schema=SCHEMA_WITH_AAC_MATCHING_WAVEFORM if waveform_aac else SCHEMA_WITH_MATCHING_WAVEFORM,
+            schema = SCHEMA_WITH_AAC_MATCHING_WAVEFORM
+        elif include_matching_waveform_gapless_aac:
+            candidate = _gapless_waveform_tracks(submitted, (first, second))
+            if candidate and candidate[1]["bit_rate"] >= WAVEFORM_AAC_MIN_BIT_RATE:
+                waveform_aac, schema = candidate, SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM
+        record.update(schema=schema,
                       matching_waveform=_matching_waveform((first, second), assets, aac_tracks=waveform_aac))
     if sources != tuple(_identity(path, name) for path, name in zip(paths, filenames, strict=True)):
         raise ValueError("One of the recordings changed while the comparison was running.")

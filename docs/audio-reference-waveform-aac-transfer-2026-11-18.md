@@ -71,6 +71,10 @@ room excerpts to measure transport on matched files. Other edit generators,
 arbitrary recordings and unverified AAC clocks are outside the test scope.
 The receipts contain measurements and hashes.
 
+The [follow-up Apple AAC trial](audio-gapless-aac-2026-11-18.md) verified
+the gapless table and native playback range at two AudioToolbox encoder
+bitrate settings.
+
 ## Evidence in the local app
 
 The earlier-copy waveform check accepts six-second mono 48 kHz AAC-LC in

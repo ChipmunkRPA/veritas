@@ -376,7 +376,8 @@
 {% set review = evidence.face_single_boundary_coverage %}
 <h3>Face transition coverage</h3>
 <p class="caption">{{ review.message }}{% if review.status == 'localized' %} See <a href="#multimedia-evidence-VFB01">VFB01</a> for the timestamp and original frames.{% endif %}</p>
-{% if review.frames_scanned %}<p class="caption">The check read {{ review.frames_scanned }} native pictures for shot changes and measured {{ review.measured_face_frames }} usable face views on its sampling grid.</p>{% endif %}
+{% if review.frames_scanned %}<p class="caption">The check read {{ review.frames_scanned }} native pictures for shot changes and measured {{ review.measured_face_frames }} usable face views on its sampling grid.{% if review.get('method') == 'single-face-boundary/3' %} Source timing was verified at 30 frames per second.{% endif %}</p>{% endif %}
+{% if review.status == 'localized' and review.get('method') == 'single-face-boundary/3' %}<p class="caption">Ordinary changes in focus can produce this pattern.</p>{% endif %}
 <p class="caption">This check carries zero AI confidence weight. JSON pointer <span class="mono">/coverage/face_single_boundary_coverage</span>.</p>
 {% endif %}
 {% if evidence.get('scene_return_review') %}

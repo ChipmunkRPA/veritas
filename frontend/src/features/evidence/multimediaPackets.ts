@@ -48,7 +48,7 @@ export interface VideoEvidencePacket extends PacketBase {
     motion_sound_agreement?: { agreement_units: [number, number, number] }
   }
   scene_return?: { schema: 'picture-change-return/1' | 'picture-change-return/2'; start_stream_s: number; end_stream_s: number; tiles: number[] }
-  face_single_boundary?: { method: 'single-face-boundary/1' | 'single-face-boundary/2'; boundary: number; pts: number; time_base: string;
+  face_single_boundary?: { method: 'single-face-boundary/1' | 'single-face-boundary/2' | 'single-face-boundary/3'; boundary: number; pts: number; time_base: string;
     time_s: number; affects_overall_confidence: false }
   picture_sequence?: { first: PictureSequenceSpan; second: PictureSequenceSpan; frame_count: number; span_s: number; order?: 'reverse';
     frame_steps?: Record<'first' | 'second', 1 | 2 | 3 | 4>; spatial_transform?: 'horizontal_reflection';
@@ -112,7 +112,7 @@ export interface VideoEvidenceSet extends SetBase {
     brief_face_review?: { observations: string[]; affects_overall_confidence: false };
     brief_face_windows?: { observations: string[]; affects_overall_confidence: false };
     face_single_boundary_coverage?: { status: 'localized' | 'no_match' | 'unavailable'; frames_scanned: number;
-      method?: 'single-face-boundary/2';
+      method?: 'single-face-boundary/2' | 'single-face-boundary/3';
       measured_face_frames: number; reason: 'provenance' | 'profile' | 'unsupported_video' | 'models_unavailable'
         | 'time_budget' | 'native_measurement_unavailable' | 'shot_change' | 'insufficient_face_context' | 'insufficient_native_boundary'
         | 'conflicting_boundary_context' | null };

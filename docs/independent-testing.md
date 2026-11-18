@@ -34,6 +34,14 @@ The [prediction comparison](video-face-single-boundary-2026-11-18.md#compare-ano
 accepts results from a separate detector and scores the same source files by
 frame, ordinary alert type, and paired gains and losses.
 
+The [30 fps face transition replay](video-face-single-boundary-30fps-2026-11-18.md#replay-the-counts)
+recounts both detectors' results across 98 direct and recompressed deliveries.
+It includes ordinary focus changes, exposure changes, and cuts.
+
+The [OpenDocument and Rich Text passage transfer](writing-decoded-carrier-transfer-2026-11-18.md#recount)
+recounts all 464 carrier comparisons and distinguishes mixed-length rewrites,
+short rewrites, and human revisions.
+
 The [statistical reporting replay](document-chi-square-2026-11-18.md#replay-the-measurements)
 checks published numerical discrepancies and staged controls against the
 recorded document locations. It measures consistency of a printed result.

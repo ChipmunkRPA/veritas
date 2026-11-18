@@ -25,6 +25,7 @@ METHOD = binding.METHOD
 MODEL_IDS = ("yunet.2023mar", "opencv.sface.2021dec")
 POINT = binding.POINT
 SAMPLE = tuple(range(0, binding.FRAME_COUNT, 2))
+NATIVE30_SAMPLE = tuple(range(0, binding.NATIVE30_FRAME_COUNT, 2))
 FLANK = 6
 MINIMUM_PRESENCE = .76
 MINIMUM_IOU = binding.MINIMUM_FACE_IOU
@@ -35,10 +36,15 @@ def supported(path: Path, table: FrameTable, encoding: tuple[str | None, str | N
     return face_local_detail.supported(table, encoding) and face_return.source_carrier(path) == "mp4"
 
 
+def supported_native30(path: Path, table: FrameTable, encoding: tuple[str | None, str | None, str | None]) -> bool:
+    return binding.native30_source(table, encoding, face_return.source_carrier(path))
+
+
 def coverage(status: str, reason: str | None = None, *, frames_scanned: int = 0, measured_face_frames: int = 0,
-             sparse: bool = False) -> dict:
+             sparse: bool = False, native30: bool = False) -> dict:
+    method = binding.NATIVE30_METHOD if native30 else binding.SPARSE_METHOD if sparse else None
     return {"status": status, "reason": reason, "frames_scanned": frames_scanned,
-            "measured_face_frames": measured_face_frames, **({"method": binding.SPARSE_METHOD} if sparse else {})}
+            "measured_face_frames": measured_face_frames, **({"method": method} if method else {})}
 
 
 def _scene(samples, onset):
@@ -49,8 +55,11 @@ def _scene(samples, onset):
     return result if result is not None and result >= MINIMUM_SCENE else None
 
 
-def _appearance_proposals(samples: Mapping[int, face_return.Sample], check: Callable[[], None]) -> list[dict]:
-    present = [index for index in SAMPLE if samples[index].vector is not None]
+def _appearance_proposals(samples: Mapping[int, face_return.Sample], check: Callable[[], None], *, native30=False) -> list[dict]:
+    sample = NATIVE30_SAMPLE if native30 else SAMPLE
+    grid = binding.NATIVE30_COARSE_GRID if native30 else binding.COARSE_GRID
+    frame_count = binding.NATIVE30_FRAME_COUNT if native30 else binding.FRAME_COUNT
+    present = [index for index in sample if samples[index].vector is not None]
     if len(present) < 2 * FLANK:
         return []
     vectors = np.stack([samples[index].vector for index in present])
@@ -65,7 +74,7 @@ def _appearance_proposals(samples: Mapping[int, face_return.Sample], check: Call
         return float(np.quantile(distances[np.ix_(before, after)], .25) - max(within(before), within(after)))
 
     result = []
-    for edge in range(22, 79, 2):
+    for edge in grid:
         check()
         near_before = list(range(edge - 2 * FLANK, edge, 2))
         near_after = list(range(edge, edge + 2 * FLANK, 2))
@@ -73,7 +82,7 @@ def _appearance_proposals(samples: Mapping[int, face_return.Sample], check: Call
             continue
         before = [positions[index] for index in present if index < edge]
         after = [positions[index] for index in present if index >= edge]
-        if min(len(before) / (edge // 2), len(after) / ((binding.FRAME_COUNT - edge) // 2)) < MINIMUM_PRESENCE:
+        if min(len(before) / (edge // 2), len(after) / ((frame_count - edge) // 2)) < MINIMUM_PRESENCE:
             continue
         left, right = ([positions[index] for index in group] for group in (near_before, near_after))
         persistent = min(separation(before, after), separation(left, right))
@@ -84,9 +93,9 @@ def _appearance_proposals(samples: Mapping[int, face_return.Sample], check: Call
     return result
 
 
-def proposals(samples: Mapping[int, face_return.Sample], check: Callable[[], None]) -> list[dict]:
+def proposals(samples: Mapping[int, face_return.Sample], check: Callable[[], None], *, native30=False) -> list[dict]:
     """Reproduce the persistent-state proposals with the original coarse context requirement."""
-    return [row | {"scene": round(scene, 9)} for row in _appearance_proposals(samples, check)
+    return [row | {"scene": round(scene, 9)} for row in _appearance_proposals(samples, check, native30=native30)
             if (scene := _scene(samples, row["coarse"])) is not None]
 
 
@@ -156,10 +165,10 @@ def _rank(row):
     return row["persistent"], row["jump_excess"], -row["coarse"]
 
 
-def _sparse_readings(path, table, samples, rgb, locator, encoder, *, check, timeout_s):
+def _sparse_readings(path, table, samples, rgb, locator, encoder, *, check, timeout_s, native30=False):
     background = face_single_context.Background(rgb)
     choices = {}
-    for row in _appearance_proposals(samples, check):
+    for row in _appearance_proposals(samples, check, native30=native30):
         check()
         i = row["coarse"]
         before, after = samples[i - 2], samples[i]
@@ -180,15 +189,17 @@ def _sparse_readings(path, table, samples, rgb, locator, encoder, *, check, time
     return readings
 
 
-def measure(path, table, locator, encoder, *, check, timeout_s, sparse=False) -> tuple[dict | None, dict]:
+def measure(path, table, locator, encoder, *, check, timeout_s, sparse=False, native30=False) -> tuple[dict | None, dict]:
     """Return the refined measurement before applying the point, plus its actual coverage."""
+    schedule = NATIVE30_SAMPLE if native30 else SAMPLE
+    sparse = sparse or native30
     observer = ShotDetector(table, min_shot_s=0.)
     samples = {}
     rgb = {}
     scanned = measured = 0
 
     def result(status, reason=None):
-        return coverage(status, reason, frames_scanned=scanned, measured_face_frames=measured, sparse=sparse)
+        return coverage(status, reason, frames_scanned=scanned, measured_face_frames=measured, sparse=sparse, native30=native30)
 
     try:
         with closing(decode_frames(path, table, None, check=check, timeout_s=timeout_s())) as frames:
@@ -200,23 +211,24 @@ def measure(path, table, locator, encoder, *, check, timeout_s, sparse=False) ->
                 scanned += 1
                 if sparse:
                     rgb[index] = frame.rgb
-                if index in SAMPLE:
+                if index in schedule:
                     # Only the unused frequency output is omitted on the coarse scan.
                     sample, _, _, _ = face_local_detail.observe(frame.rgb, locator, encoder, with_texture=False)
                     samples[index] = sample
                     measured += sample.vector is not None
-        if observer.frames_seen != len(table) or set(samples) != set(SAMPLE):
+        if observer.frames_seen != len(table) or set(samples) != set(schedule):
             raise DecodeError("Native decode omitted a planned comparison picture")
         if observer.boundaries:
             return None, result("unavailable", "shot_change")
-        candidates = proposals(samples, check)
+        candidates = proposals(samples, check, native30=native30)
         incumbent = (_refine(path, table, samples, max(candidates, key=_rank), locator, encoder,
                              check=check, timeout_s=timeout_s) if candidates else None)
         if incumbent is not None and incumbent["persistent"] > POINT:
             return incumbent, result("localized")
         if sparse:
             try:
-                alternatives = _sparse_readings(path, table, samples, rgb, locator, encoder, check=check, timeout_s=timeout_s)
+                alternatives = _sparse_readings(path, table, samples, rgb, locator, encoder,
+                                                check=check, timeout_s=timeout_s, native30=native30)
             except (DetectorTimeout, DecodeError, cv2.error, ValueError):
                 if incumbent is not None:
                     return incumbent, result("no_match")
@@ -237,8 +249,8 @@ def measure(path, table, locator, encoder, *, check, timeout_s, sparse=False) ->
         return None, result("unavailable", "native_measurement_unavailable")
 
 
-def inspect(path, table, locator, encoder, *, check, timeout_s, sparse=False) -> tuple[dict | None, dict]:
-    reading, disposition = measure(path, table, locator, encoder, check=check, timeout_s=timeout_s, sparse=sparse)
+def inspect(path, table, locator, encoder, *, check, timeout_s, sparse=False, native30=False) -> tuple[dict | None, dict]:
+    reading, disposition = measure(path, table, locator, encoder, check=check, timeout_s=timeout_s, sparse=sparse, native30=native30)
     if disposition["status"] != "localized" or reading is None:
         return None, disposition
     # Canonical JSON rounds numeric displays. Preserve precise source geometry and measurements for replay.
@@ -247,7 +259,7 @@ def inspect(path, table, locator, encoder, *, check, timeout_s, sparse=False) ->
         for role, row in reading["source_frames"].items()
     }
     return reading | {
-        "method": binding.SPARSE_METHOD if "scene_context" in reading else METHOD,
+        "method": binding.NATIVE30_METHOD if native30 else binding.SPARSE_METHOD if "scene_context" in reading else METHOD,
         "time_s": float(reading["pts"] * table.tb),
         "affects_overall_confidence": False,
         "source_frames": frames,

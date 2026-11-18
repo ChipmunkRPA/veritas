@@ -1,21 +1,24 @@
 import json
+from dataclasses import replace
 from fractions import Fraction
 from types import SimpleNamespace
 
 import pytest
 
-from app.core.canonical import canonical_json
+from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
 from app.detectors.video import face_single_boundary as review
 from app.detectors.video.decode import FrameTable
 from app.engine.detector import Profile
 from app.engine.stages import video
+from app.evidence import face_single_boundary_binding as binding
 
 
 def test_single_boundary_records_provenance_and_profile_exclusions(monkeypatch, tmp_path):
     monkeypatch.setattr(settings, "environment", "dev")
     monkeypatch.setattr(settings, "video_face_single_boundary_review", True)
     monkeypatch.setattr(settings, "video_face_single_sparse_context_review", False)
+    monkeypatch.setattr(settings, "video_face_single_boundary_native30_review", False)
     ctx = SimpleNamespace(profile=Profile.FULL, state={}, outputs={})
     monkeypatch.setattr(video.provenance_gate, "stop", lambda _: True)
     assert video._single_boundary_review(ctx) == {review.COVERAGE: review.coverage("unavailable", "provenance")}
@@ -40,6 +43,7 @@ def test_single_boundary_sparse_switch_invalidates_saved_detection(monkeypatch):
     monkeypatch.setattr(settings, "environment", "dev")
     monkeypatch.setattr(settings, "video_face_single_boundary_review", True)
     monkeypatch.setattr(settings, "video_face_single_sparse_context_review", False)
+    monkeypatch.setattr(settings, "video_face_single_boundary_native30_review", False)
     monkeypatch.setattr(video, "current_voice_detection_output", lambda _: True)
     monkeypatch.setattr(video, "same_frame_enabled", lambda: False)
     monkeypatch.setattr(video, "detail_enabled", lambda: False)
@@ -49,6 +53,68 @@ def test_single_boundary_sparse_switch_invalidates_saved_detection(monkeypatch):
     monkeypatch.setattr(settings, "video_face_single_sparse_context_review", True)
     assert not video.current_detect_output(old)
     assert video.current_detect_output(old | {video.SINGLE_FACE_SPARSE_POLICY: True})
+    monkeypatch.setattr(settings, "video_face_single_boundary_native30_review", True)
+    current_sparse = old | {video.SINGLE_FACE_SPARSE_POLICY: True}
+    assert not video.current_detect_output(current_sparse)
+    assert video.current_detect_output(current_sparse | {video.SINGLE_FACE_NATIVE30_POLICY: True})
+
+
+def _native30_table():
+    return FrameTable(time_base="1/30000", pts=tuple(range(0, 120000, 1000)), key_frames=(0,),
+                      pict_types="I" + "P" * 119, width=640, height=360, coded_width=640, coded_height=360)
+
+
+def test_native30_review_is_opt_in_full_and_requires_the_exact_source(monkeypatch, tmp_path):
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "video_face_single_boundary_review", True)
+    monkeypatch.setattr(settings, "video_face_single_sparse_context_review", True)
+    monkeypatch.setattr(settings, "video_face_single_boundary_native30_review", False)
+    monkeypatch.setattr(video.provenance_gate, "stop", lambda _: False)
+    path = tmp_path / "source.mp4"
+    path.write_bytes(b"\x00\x00\x00\x18ftypisom\x00\x00\x02\x00isommp41")
+    table = _native30_table()
+    encoding = ("h264", "yuv420p", "avc1")
+    info = dict(zip(("codec", "pix_fmt", "codec_tag"), encoding, strict=True))
+    ctx = SimpleNamespace(profile=Profile.FULL, outputs={"probe": {"info": info}}, state={
+        "frame_store": SimpleNamespace(path=path, table=table),
+        "registry": SimpleNamespace(manifest=SimpleNamespace(model=lambda _: None)),
+    })
+    assert binding.native30_source(table, encoding, "mp4")
+    assert not binding.native30_source(replace(table, pts=tuple(1000 + v for v in table.pts)), encoding, "mp4")
+    assert not binding.native30_source(replace(table, time_base="1/29970"), encoding, "mp4")
+    assert not binding.native30_source(replace(table, interpolated=(17,)), encoding, "mp4")
+    assert not binding.native30_source(replace(table, coded_width=656), encoding, "mp4")
+    assert not binding.native30_source(table, encoding, "webm")
+    assert video._single_boundary_review(ctx)[review.COVERAGE] == review.coverage("unavailable", "profile", sparse=True)
+
+    monkeypatch.setattr(settings, "video_face_single_boundary_native30_review", True)
+    assert video._single_boundary_review(ctx)[review.COVERAGE] == review.coverage("unavailable", "models_unavailable", native30=True)
+    info["codec_tag"] = "avc3"
+    assert video._single_boundary_review(ctx)[review.COVERAGE] == review.coverage("unavailable", "profile", native30=True)
+    info["codec_tag"] = "avc1"
+    ctx.profile = Profile.DEEP
+    assert video._single_boundary_review(ctx)[review.COVERAGE] == review.coverage("unavailable", "profile", sparse=True)
+
+    ctx.profile = Profile.FULL
+    ctx.state["frame_store"].table = replace(table, time_base="1/25", pts=tuple(range(100)))
+    assert video._single_boundary_review(ctx)[review.COVERAGE] == review.coverage("unavailable", "models_unavailable", sparse=True)
+
+
+def test_native30_coverage_rejects_legacy_clock_and_incomplete_measurement():
+    table = _native30_table()
+    coverage = review.coverage("no_match", frames_scanned=120, measured_face_frames=46, native30=True)
+    evidence = {"source": {"time_base": table.time_base, "frame_count": 120, "width": 640, "height": 360,
+                           binding.COVERAGE_COMMITMENT: canonical_hash(coverage)},
+                "packets": [], "coverage": {binding.COVERAGE: coverage}}
+    binding.validate(evidence, canonical_hash, table_pts=table.pts)
+    with pytest.raises(ValueError, match="30 fps source clock"):
+        binding.validate(evidence, canonical_hash, table_pts=tuple(1000 + v for v in table.pts))
+    for field, value in (("frames_scanned", 119), ("measured_face_frames", 45), ("method", binding.SPARSE_METHOD)):
+        edited = coverage | {field: value}
+        tampered = evidence | {"source": evidence["source"] | {binding.COVERAGE_COMMITMENT: canonical_hash(edited)},
+                               "coverage": {binding.COVERAGE: edited}}
+        with pytest.raises(ValueError, match="Invalid face transition coverage"):
+            binding.validate(tampered, canonical_hash, table_pts=table.pts)
 
 
 @pytest.mark.parametrize(("incumbent", "alternatives", "localized", "status", "reason"), [
@@ -66,7 +132,7 @@ def test_sparse_selection_preserves_incumbent_and_rejects_disagreement(monkeypat
         SimpleNamespace(index=index, pts=index, pts_verified=True, rgb=None) for index in source.pts))
     monkeypatch.setattr(review.face_local_detail, "observe", lambda *_args, **_kwargs: (SimpleNamespace(vector=True), None, None, False))
     proposal = {"coarse": 32, "persistent": incumbent, "jump_excess": .2}
-    monkeypatch.setattr(review, "proposals", lambda *_: [proposal])
+    monkeypatch.setattr(review, "proposals", lambda *_args, **_kwargs: [proposal])
     monkeypatch.setattr(review, "_refine", lambda *_args, **_kwargs: proposal | {"boundary": 32})
 
     def extra(*_args, **_kwargs):

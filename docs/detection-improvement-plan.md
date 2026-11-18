@@ -67,6 +67,16 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- The 30 fps face transition check added 14 useful boundaries in 14 direct
+  edits and 12 in 14 tandem encodes. The current Full check found one other
+  tandem edit. One ordinary focus change produced an alert in both carriers.
+  [30 fps transition comparison](video-face-single-boundary-30fps-2026-11-18.md)
+
+- OpenDocument and Rich Text now show the existing passage check's exact
+  decoded positions. The 464-format transfer preserved 19 of 55 useful
+  mixed-length rewrite locations and found none of eight short rewrites.
+  [Writing carrier transfer](writing-decoded-carrier-transfer-2026-11-18.md)
+
 - The diagonal reflection check located all 18 staged pixel copies in
   each lossless encoding on the held panel. It added no alerts across
   50 ordinary and earlier-transform controls per encoding. The optional

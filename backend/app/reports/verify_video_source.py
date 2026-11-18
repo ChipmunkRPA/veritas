@@ -443,15 +443,25 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     transition_frames, transition_scenes, sparse_pixels = {}, {}, {}
     sparse_indices = set()
     transition_shots = None
+    coverage = (evidence.get("coverage") or {}).get(face_single_boundary_binding.COVERAGE, {})
+    native30 = coverage.get("method") == face_single_boundary_binding.NATIVE30_METHOD
+    if native30 and coverage["frames_scanned"] > 0:
+        if delivery is None or "codec_tag" not in delivery:
+            delivery = probe_container(original, include_codec_tag=True)
+        encoding = (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag"))
+        if not face_single_boundary_binding.native30_source(table, encoding, face_return.source_carrier(original)):
+            raise ValueError("The original video differs from its 30 fps face transition profile")
     if transition is not None:
-        from app.detectors.video.face_local_detail import supported
+        if not native30:
+            from app.detectors.video.face_local_detail import supported
 
-        delivery = delivery if delivery is not None else probe_container(original)
-        if not supported(table, (delivery.get("codec"), delivery.get("pix_fmt"))) or face_return.source_carrier(original) != "mp4":
-            raise ValueError("The original video differs from its single face transition profile")
+            delivery = delivery if delivery is not None else probe_container(original)
+            if not supported(table, (delivery.get("codec"), delivery.get("pix_fmt"))) or face_return.source_carrier(original) != "mp4":
+                raise ValueError("The original video differs from its single face transition profile")
         transition_frames = {row["index"]: row for row in transition["source_frames"].values()}
-        if transition["method"] == face_single_boundary_binding.SPARSE_METHOD:
+        if "scene_context" in transition:
             sparse_indices = face_single_context.required_frames(transition)
+        if native30 or sparse_indices:
             transition_shots = ShotDetector(table, min_shot_s=0.)
     packets = [*evidence["packets"], *(evidence.get("av") or {}).get("packets", [])]
     if any(packet.get("semantics") in {whole_face_binding.SAME_FRAME_METHOD, whole_face_binding.DETAIL_METHOD} for packet in packets):
@@ -549,7 +559,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             rgb_sha = hashlib.sha256(frame.rgb).hexdigest()
             if transition_shots is not None:
                 if not frame.pts_verified or frame.pts != table.pts[index]:
-                    raise ValueError("Sparse face transition requires a verified native picture clock")
+                    raise ValueError("Face transition requires a verified native picture clock")
                 transition_shots.update(index, frame.rgb)
                 if index in sparse_indices:
                     sparse_pixels[index] = frame.rgb
@@ -588,7 +598,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 if crop is None or hashlib.sha256(crop.tobytes()).hexdigest() != row["aligned_rgb_sha256"]:
                     raise ValueError("The original video does not reproduce the face transition crop")
                 alignments += 1
-                if transition_shots is None and index in {transition["boundary"] - 1, transition["boundary"]}:
+                if not sparse_indices and index in {transition["boundary"] - 1, transition["boundary"]}:
                     box = row["box"]
                     face = Face(box["x"], box["y"], box["w"], box["h"], 0.)
                     transition_scenes[index] = face_return.Sample(face, None, face_return.scene(frame.rgb, face))
@@ -621,9 +631,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if _sha(original) != digest:
         raise ValueError("The supplied original changed during decoding")
     if transition is not None:
-        if transition_shots is not None:
-            if transition_shots.frames_seen != len(table) or transition_shots.boundaries or set(sparse_pixels) != sparse_indices:
-                raise ValueError("The original must reproduce one continuous shot for the sparse face transition")
+        if transition_shots is not None and (transition_shots.frames_seen != len(table) or transition_shots.boundaries
+                                             or set(sparse_pixels) != sparse_indices):
+            raise ValueError("The original must reproduce one continuous shot for the face transition")
+        if sparse_indices:
             face_single_context.verify(transition, sparse_pixels)
         else:
             edge = transition["boundary"]

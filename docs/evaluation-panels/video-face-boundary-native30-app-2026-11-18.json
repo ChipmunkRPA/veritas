@@ -1,0 +1,120 @@
+{
+  "additional_simulated_jobs": 1,
+  "baseline_retry": {
+    "browser": {
+      "original_images_and_crops": 0,
+      "page_errors": 0,
+      "pages": 1
+    },
+    "cases": {
+      "g01-prefix-direct.mp4": {
+        "assessment": "inconclusive",
+        "coverage": "unavailable",
+        "frames": [],
+        "reason": "profile",
+        "signed_original": true
+      }
+    },
+    "simulated_paid": 1,
+    "unpaid": 0
+  },
+  "browser_views": 8,
+  "matched_assessments": 3,
+  "matching_exported_rgb_images_and_crops": 18,
+  "original_replay_cases": 8,
+  "simulated_jobs": 8,
+  "states": {
+    "off": {
+      "browser": {
+        "original_images_and_crops": 0,
+        "page_errors": 0,
+        "pages": 3
+      },
+      "cases": {
+        "g01-prefix-direct.mp4": {
+          "assessment": "inconclusive",
+          "coverage": "unavailable",
+          "frames": [],
+          "reason": "profile",
+          "signed_original": true
+        },
+        "g02-suffix-tandem.mp4": {
+          "assessment": "inconclusive",
+          "coverage": "unavailable",
+          "frames": [],
+          "reason": "profile",
+          "signed_original": true
+        },
+        "g06-focus-direct.mp4": {
+          "assessment": "inconclusive",
+          "coverage": "unavailable",
+          "frames": [],
+          "reason": "profile",
+          "signed_original": true
+        }
+      },
+      "simulated_paid": 3,
+      "unpaid": 0
+    },
+    "on": {
+      "browser": {
+        "original_images_and_crops": 18,
+        "page_errors": 0,
+        "pages": 5
+      },
+      "cases": {
+        "g01-cross_recording_cut-direct.mp4": {
+          "assessment": "inconclusive",
+          "coverage": "unavailable",
+          "frames": [],
+          "reason": "shot_change",
+          "signed_original": true
+        },
+        "g01-original-direct.mp4": {
+          "assessment": "inconclusive",
+          "coverage": "no_match",
+          "frames": [],
+          "reason": null,
+          "signed_original": true
+        },
+        "g01-prefix-direct.mp4": {
+          "assessment": "inconclusive",
+          "coverage": "localized",
+          "frames": [
+            35,
+            36,
+            47
+          ],
+          "reason": null,
+          "signed_original": true
+        },
+        "g02-suffix-tandem.mp4": {
+          "assessment": "inconclusive",
+          "coverage": "localized",
+          "frames": [
+            63,
+            64,
+            75
+          ],
+          "reason": null,
+          "signed_original": true
+        },
+        "g06-focus-direct.mp4": {
+          "assessment": "inconclusive",
+          "coverage": "localized",
+          "frames": [
+            77,
+            78,
+            89
+          ],
+          "reason": null,
+          "signed_original": true
+        }
+      },
+      "simulated_paid": 5,
+      "unpaid": 0
+    }
+  },
+  "superseded_baseline_jobs": 1,
+  "unpaid_jobs": 0
+}

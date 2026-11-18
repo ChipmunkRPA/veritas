@@ -391,6 +391,7 @@ class Settings(BaseSettings):
     video_face_local_return_review: bool = False  # Optional face comparison on fixed four-second 360p sources.
     video_face_single_boundary_review: bool = False  # Review one sustained face change on qualified four-second 360p MP4.
     video_face_single_sparse_context_review: bool = False  # Add bounded sparse-background witnesses to this review.
+    video_face_single_boundary_native30_review: bool = False  # Extend the local Full face transition review to qualified 30 fps AVC sources.
     video_face_portrait_return_review: bool = False  # Optional face comparison on qualified portrait or square MP4.
     audio_weight: float = 0.8  # docs/eval_audio.md: fused AUC 0.92 on ASVspoof-DF + in-the-wild, FPR ~10 % in the wild
     audio_classifiers: list[str] = [  # HuggingFace audio-classification checkpoints, each "repo_id|positive_label_substring|weight"

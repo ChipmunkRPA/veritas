@@ -223,6 +223,9 @@ def _document(path: Path, extension: str) -> None:
         if not readable or "\x00" in text or unusual > max(1, len(text) // 100):
             if extension == ".eml":
                 raise PreflightError("The selected email body has no readable text. Export the message as EML or PDF before paying.")
+            if extension == ".rtf":
+                raise PreflightError("The Rich Text file has no readable text in its supported body. "
+                                     "Save the displayed text as DOCX or PDF before paying.")
             raise PreflightError("This document has no readable text. Export it as UTF-8 text, PDF or DOCX before paying.")
     if saved_fields:
         too_short = (f"The Word document includes saved field text but fewer than {MIN_WORDS} readable words. "

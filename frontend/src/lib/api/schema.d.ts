@@ -3580,6 +3580,8 @@ export interface components {
             paired_check?: components["schemas"]["DraftPairedCheck"] | null;
             /** Relocated Passages */
             relocated_passages?: components["schemas"]["DraftRelocatedPassage"][] | null;
+            /** Rtf Run Visibility */
+            rtf_run_visibility?: "visible-rtf-direct-runs/1" | null;
             /**
              * Schema
              * @enum {string}

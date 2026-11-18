@@ -18,7 +18,7 @@ limit is 25 MB in the standard configuration.
 | ODS | Literal text on visible sheets, rows and columns. Linked sheets, formulas and calculated values are outside the check. | Workbook sheet order, row, column and saved cell character range |
 | CSV and TSV | Text fields in UTF-8 or BOM-marked UTF-16 delimited files | Record, field and decoded character range |
 | EPUB | XHTML text in the main reading order | Reading-order entry, text block, and decoded character range |
-| RTF | Extracted writing from standard Rich Text files | Decoded text block number and character range |
+| RTF | Saved body writing outside directly hidden runs | Decoded text block number and character range |
 | EML | The selected plain-text or HTML message body | Decoded text and supported HTML source positions |
 | TXT | Decoded Unicode text | Decoded character offsets |
 | Markdown | Text extracted from the markup | Paragraph and character position in the extracted text |
@@ -145,6 +145,23 @@ retain the extraction policy used for their source positions.
 RTF numbers decoded text blocks, including blocks separated by soft line
 breaks. The web view, PDF and JSON use the same ranges. The signed package can
 replay them against the original file.
+
+The RTF reader leaves out text marked hidden by the file's direct character
+formatting. It reads the saved display text for fields such as hyperlink
+labels. The same rules apply before checkout, during analysis, and when
+comparing drafts. Visibility inherited from styles and viewer settings is
+outside this check. Signed packages and draft exports retain the extraction
+rules for their positions. [Microsoft Rich Text character formatting](https://learn.microsoft.com/en-us/windows/win32/controls/about-text-object-model)
+
+A local browser replay checked all 18 advertised filename extensions, with
+separate Strict DOCX and scanned PDF fixtures. All 20 jobs followed simulated
+checkout. Chromium opened every evidence page, the PDF and JSON downloads
+matched the saved evidence, and all signed packages verified against their
+originals. Both DOCX cases preserved the five ranges in filled table controls.
+The scanned PDF preserved 287 OCR word boxes. The RTF case left four directly
+hidden runs out of the writing and kept 17 visible source anchors. A separate
+RTF with only hidden writing could not start checkout.
+[Current local format and export receipt](evaluation-panels/document-formats-current-2026-11-18.json)
 
 Export Google Docs, Apple Pages, and older Word (`.doc`) files as DOCX or
 PDF before uploading. Export Google Slides and Keynote as PowerPoint or PDF.

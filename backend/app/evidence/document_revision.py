@@ -339,7 +339,7 @@ def _html_token_sources(text, layout, changed_tokens):
 
 
 def _source(path: Path, data: bytes, extension: str, *, mixed: bool = False, word_body=None, allow_empty_word_body=False,
-            skip_hidden_odt_sections: bool = True):
+            skip_hidden_odt_sections: bool = True, skip_hidden_rtf_runs: bool = True):
     if extension == ".html":
         return _article_source(data)
     if extension == ".docx":
@@ -351,7 +351,7 @@ def _source(path: Path, data: bytes, extension: str, *, mixed: bool = False, wor
             from app.detectors.text.pipeline import extract_within
 
             try:
-                doc = extract_within(path, extension)
+                doc = extract_within(path, extension, skip_hidden_rtf_runs=skip_hidden_rtf_runs)
             except (RuntimeError, StepTimeout):
                 raise ValueError("The Rich Text draft could not be read. Save it as DOCX or TXT and try again.") from None
         else:
@@ -607,6 +607,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                          include_edited_relocations: bool = True,
                          include_values: bool = False,
                          skip_hidden_odt_sections: bool = True,
+                         skip_hidden_rtf_runs: bool = True,
                          ) -> tuple[dict, str, str, WordLayouts | PdfLayouts | MixedLayouts | None]:
     """Return ephemeral native layouts for the requested paired sentence scope."""
     if extension not in FORMATS:
@@ -642,9 +643,11 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
         directory = Path(staging)
         earlier_path, later_path = directory / f"earlier{old_extension}", directory / f"later{extension}"
         old_text, old_tokens, old_source, old_layout = _source(earlier_path, earlier, old_extension, mixed=mixed,
-            word_body=word_bodies[0], allow_empty_word_body=has_compared_table, skip_hidden_odt_sections=skip_hidden_odt_sections)
+            word_body=word_bodies[0], allow_empty_word_body=has_compared_table, skip_hidden_odt_sections=skip_hidden_odt_sections,
+            skip_hidden_rtf_runs=skip_hidden_rtf_runs)
         new_text, new_tokens, new_source, new_layout = _source(later_path, later, extension, mixed=mixed,
-            word_body=word_bodies[1], allow_empty_word_body=has_compared_table, skip_hidden_odt_sections=skip_hidden_odt_sections)
+            word_body=word_bodies[1], allow_empty_word_body=has_compared_table, skip_hidden_odt_sections=skip_hidden_odt_sections,
+            skip_hidden_rtf_runs=skip_hidden_rtf_runs)
         if mixed:
             spaces = {".txt": TEXT_COORDINATES, ".docx": WORD_COORDINATES, ".odt": ODT_COORDINATES,
                       ".rtf": RTF_COORDINATES, ".pdf": document_revision_pdf.COORDINATES}
@@ -716,6 +719,9 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     if skip_hidden_odt_sections and ".odt" in (old_extension, extension):
         result[document_native_locations.ODT_VISIBILITY_KEY] = document_native_locations.ODT_VISIBILITY
         result["scope"] += " " + document_native_locations.ODT_VISIBILITY_SCOPE
+    if skip_hidden_rtf_runs and ".rtf" in (old_extension, extension):
+        result[document_native_locations.RTF_VISIBILITY_KEY] = document_native_locations.RTF_VISIBILITY
+        result["scope"] += " " + document_native_locations.RTF_VISIBILITY_SCOPE
     if values is not None:
         result["numeric_comparison"] = values
     if mixed:

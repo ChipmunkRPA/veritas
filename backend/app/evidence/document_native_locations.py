@@ -21,6 +21,10 @@ PPTX_VISIBILITY = "visible-slide-groups/1"
 ODT_VISIBILITY_KEY = "odt_section_visibility"
 ODT_VISIBILITY = "visible-odt-sections/1"
 ODT_VISIBILITY_SCOPE = "Hidden and conditional sections are excluded. The reader does not evaluate display conditions."
+RTF_VISIBILITY_KEY = "rtf_run_visibility"
+RTF_VISIBILITY = "visible-rtf-direct-runs/1"
+RTF_VISIBILITY_SCOPE = ("The reader excludes directly hidden Rich Text runs and uses saved field display text. "
+                        "Visibility from styles and viewer settings is outside this check.")
 XLSX_VISIBILITY_KEY = "xlsx_cell_visibility"
 XLSX_VISIBILITY = "visible-xlsx-direct-cell-formats/1"
 XLSX_VISIBILITY_SCOPE = ("Cells with Excel's directly applied hide-value format are excluded. Other display formatting, "
@@ -222,6 +226,9 @@ def validate(document):
     if ODT_VISIBILITY_KEY in coverage and (coverage[ODT_VISIBILITY_KEY] != ODT_VISIBILITY
             or document.get("source", {}).get("method") != "odt"):
         raise ValueError("Invalid OpenDocument section visibility policy")
+    if RTF_VISIBILITY_KEY in coverage and (coverage[RTF_VISIBILITY_KEY] != RTF_VISIBILITY
+            or document.get("source", {}).get("method") != "rtf"):
+        raise ValueError("Invalid Rich Text run visibility policy")
     if XLSX_VISIBILITY_KEY in coverage and (coverage[XLSX_VISIBILITY_KEY] != XLSX_VISIBILITY
             or document.get("source", {}).get("method") != "xlsx"):
         raise ValueError("Invalid Excel cell visibility policy")

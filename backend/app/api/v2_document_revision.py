@@ -288,6 +288,7 @@ class DraftComparison(BaseModel):
     relocated_passages: list[DraftRelocatedPassage] | None = None
     numeric_comparison: DraftValueComparison | None = None
     odt_section_visibility: Literal["visible-odt-sections/1"] | None = None
+    rtf_run_visibility: Literal["visible-rtf-direct-runs/1"] | None = None
 
 
 class DocumentRevisionResponse(BaseModel):

@@ -155,6 +155,9 @@ def current_decode_output(output: Any) -> bool:
     if (output["meta"].get("method") == "odt"
             and output["meta"].get(document_native_locations.ODT_VISIBILITY_KEY) != document_native_locations.ODT_VISIBILITY):
         return False
+    if (output["meta"].get("method") == "rtf"
+            and output["meta"].get(document_native_locations.RTF_VISIBILITY_KEY) != document_native_locations.RTF_VISIBILITY):
+        return False
     if (output["meta"].get("method") == "xlsx"
             and output["meta"].get(document_native_locations.XLSX_VISIBILITY_KEY) != document_native_locations.XLSX_VISIBILITY):
         return False

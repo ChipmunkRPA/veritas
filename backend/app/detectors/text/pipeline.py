@@ -471,7 +471,8 @@ def extract_command(path: Path, ext: str) -> list[str]:
     return [sys.executable, "-I", str(EXTRACT_SCRIPT), str(path), ext]
 
 
-def extract_within(path: Path, ext: str, *, native_pdf_only: bool = False) -> Document:
+def extract_within(path: Path, ext: str, *, native_pdf_only: bool = False,
+                   skip_hidden_rtf_runs: bool = True) -> Document:
     """`extract` in a child process with a hard limit (`document_decode_timeout_s`). A parser or a pattern that does not
     end holds the interpreter of whoever runs it, and a deadline that is checked between stages cannot interrupt it; a
     child is killed. An error of the reader is raised here under its own class name, a `ValueError` as a `ValueError`,
@@ -480,6 +481,8 @@ def extract_within(path: Path, ext: str, *, native_pdf_only: bool = False) -> Do
     command = extract_command(path, ext)
     if native_pdf_only:
         command.append("--native-pdf")
+    elif ext == ".rtf" and not skip_hidden_rtf_runs:
+        command.append("--legacy-rtf-visibility")
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                start_new_session=os.name == "posix")  # noqa: S603
     try:

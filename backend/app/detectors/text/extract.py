@@ -1063,7 +1063,7 @@ def text_like_content(raw: str, ext: str) -> tuple[str, str]:
     return raw, "plain"
 
 
-def rtf_text(data: bytes) -> str:
+def rtf_text(data: bytes, *, skip_hidden_rtf_runs: bool = True) -> str:
     from striprtf.striprtf import rtf_to_text
 
     from app.storage.files import RTF_HEADER, rtf_body
@@ -1087,6 +1087,10 @@ def rtf_text(data: bytes) -> str:
         raise ValueError("This RTF is incomplete. Save it again as RTF, DOCX or PDF.")
     # Present raw ANSI bytes as hex escapes so the parser applies the declared codepage.
     encoded = re.sub(r"[\x80-\xff]", lambda match: f"\\'{ord(match[0]):02x}", body.decode("latin-1"))
+    if skip_hidden_rtf_runs:
+        from app.detectors.text.rtf_visibility import visible_runs
+
+        encoded = visible_runs(encoded)
     try:
         text = rtf_to_text(encoded)
         if re.search(r"[\ud800-\udfff]", text):
@@ -1123,11 +1127,12 @@ def _attach_html_source_ranges(doc: Document, raw: str) -> None:
             "extracted text, which can include page navigation and hidden markup text. Scripts and linked content were not loaded.")})
 
 
-def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True, map_body_paragraphs: bool = True) -> Document:
+def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True, map_body_paragraphs: bool = True,
+                      skip_hidden_rtf_runs: bool = True) -> Document:
     data = path.read_bytes()
     if ext == ".rtf":
         # RTF \par becomes a newline. Keep those breaks as passage boundaries.
-        paragraphs = rtf_text(data).splitlines()
+        paragraphs = rtf_text(data, skip_hidden_rtf_runs=skip_hidden_rtf_runs).splitlines()
         doc = _join_mapped([(value, {"kind": "markup", **({"paragraph_index": index} if map_body_paragraphs else {})})
                             for index, value in enumerate(paragraphs)], map_paragraphs=map_body_paragraphs)
         doc.meta = {"method": "rtf", "coverage_warning": (
@@ -1135,6 +1140,9 @@ def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True
             "Layout, formatting and embedded objects were outside this check.")}
         if map_body_paragraphs:
             doc.meta[document_native_locations.PARAGRAPH_MAP_KEY] = document_native_locations.PARAGRAPH_MAP
+        if skip_hidden_rtf_runs:
+            doc.meta[document_native_locations.RTF_VISIBILITY_KEY] = document_native_locations.RTF_VISIBILITY
+            doc.meta["coverage_warning"] += " " + document_native_locations.RTF_VISIBILITY_SCOPE
         return doc
     if data.startswith((b"\xff\xfe", b"\xfe\xff")):
         encoding = "utf-16"
@@ -1236,7 +1244,8 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             map_body_paragraphs: bool = True, map_word_table_grid: bool = True,
             skip_hidden_slide_groups: bool = True, map_word_hyperlink_runs: bool = True,
             map_word_table_controls: bool = True, skip_hidden_odt_sections: bool = True,
-            include_word_linked_notes: bool = True, skip_hidden_xlsx_cell_formats: bool = True) -> Document:
+            include_word_linked_notes: bool = True, skip_hidden_xlsx_cell_formats: bool = True,
+            skip_hidden_rtf_runs: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
@@ -1307,7 +1316,8 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
     elif ext == ".eml":
         d = extract_eml(path)
     else:
-        d = extract_text_like(path, ext, include_html_article=include_html_article, map_body_paragraphs=map_body_paragraphs)
+        d = extract_text_like(path, ext, include_html_article=include_html_article, map_body_paragraphs=map_body_paragraphs,
+                              skip_hidden_rtf_runs=skip_hidden_rtf_runs)
     d.meta.update({"chars": len(d.text), "words": len(d.text.split()), "paragraphs": len(d.paragraphs)})
     return _seal(d, original_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
 
@@ -1338,7 +1348,7 @@ def _child(argv: list[str]) -> int:
             d = extract(path, ext, allow_ocr=False)
             d.meta["hidden_text_pages"] = hidden_text_pages
         else:
-            d = extract(path, ext)
+            d = extract(path, ext, skip_hidden_rtf_runs=argv[3:] != ["--legacy-rtf-visibility"])
         out: dict = {"text": d.text, "paragraphs": d.paragraphs, "meta": d.meta, "source_map": d.source_map,
                      "source_rasters": d.source_rasters, "word_review": d.word_review}
     except Exception as e:  # noqa: BLE001 - handed to the parent, which raises it again

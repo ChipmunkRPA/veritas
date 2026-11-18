@@ -85,6 +85,8 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
         include_values="numeric_comparison" in received,
         skip_hidden_odt_sections=received.get(document_native_locations.ODT_VISIBILITY_KEY)
         == document_native_locations.ODT_VISIBILITY,
+        skip_hidden_rtf_runs=received.get(document_native_locations.RTF_VISIBILITY_KEY)
+        == document_native_locations.RTF_VISIBILITY,
     )
     rebuilt = refine_wording(expected, old_text, new_text) if anchored else expected
     if json.dumps(received, sort_keys=True, allow_nan=False) != json.dumps(rebuilt, sort_keys=True, allow_nan=False):

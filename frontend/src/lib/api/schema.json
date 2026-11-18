@@ -5751,6 +5751,18 @@
             ],
             "title": "Relocated Passages"
           },
+          "rtf_run_visibility": {
+            "anyOf": [
+              {
+                "const": "visible-rtf-direct-runs/1",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Rtf Run Visibility"
+          },
           "schema": {
             "enum": [
               "chipmunk.document-revision-comparison/1",

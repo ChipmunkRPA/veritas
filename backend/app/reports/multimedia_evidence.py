@@ -177,7 +177,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
             document_passage_intervals,
             document_pdf_history_binding,
             document_published_wording,
-            document_saved_link_hosts,
+            document_saved_link_hosts_binding,
             document_tracked_changes,
             document_word_visibility,
         )
@@ -187,7 +187,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
                 for key in ("extracted_text_sha256", "source_map_sha256", "decode_sha256")) or (
                 source.get(document_tracked_changes.COMMITMENT) != document_tracked_changes.from_result(result)
                 or source.get(document_doi_reference.COMMITMENT) != document_doi_reference.from_result(result)
-                or source.get(document_saved_link_hosts.COMMITMENT) != document_saved_link_hosts.from_result(result)
+                or source.get(document_saved_link_hosts_binding.COMMITMENT) != document_saved_link_hosts_binding.from_result(result)
                 or source.get(document_word_visibility.COMMITMENT) != document_word_visibility.from_result(result)
                 or source.get(document_invisible_characters.COMMITMENT) != document_invisible_characters.from_result(result)
                 or source.get(document_character_review.COMMITMENT) != document_character_review.result_commitment(result)
@@ -641,7 +641,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_percentage_consistency,
         document_publication_ids,
         document_published_wording,
-        document_saved_link_hosts,
+        document_saved_link_hosts_binding,
         document_tracked_changes,
         document_unselected_responses,
         document_word_visibility,
@@ -702,8 +702,8 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_publication_ids.verify_source(document, text, mapping, decoded["meta"])
         document_doi_reference.verify_record(document, decoded.get(document_doi_reference.KEY),
             commitment=document_doi_reference.from_result(result) if result is not None else source.get(document_doi_reference.COMMITMENT))
-        document_saved_link_hosts.verify_record(document, decoded.get(document_saved_link_hosts.KEY),
-            commitment=document_saved_link_hosts.from_result(result) if result is not None else source.get(document_saved_link_hosts.COMMITMENT))
+        document_saved_link_hosts_binding.verify_record(document, decoded.get(document_saved_link_hosts_binding.KEY),
+            commitment=document_saved_link_hosts_binding.from_result(result) if result is not None else source.get(document_saved_link_hosts_binding.COMMITMENT))
         document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
         if history := coverage.get(document_pdf_history_binding.KEY):
             submitted = _bytes(source["sha256"], store)
@@ -848,7 +848,7 @@ def quoted_values(snapshot: ReportSnapshot) -> list[str]:
         return []
     from app.evidence.document_doi_reference import KEY as DOI_REFERENCE
     from app.evidence.document_passage_position import KEY as PASSAGE_POSITION
-    from app.evidence.document_saved_link_hosts import KEY as SAVED_LINK_HOSTS
+    from app.evidence.document_saved_link_hosts_binding import KEY as SAVED_LINK_HOSTS
     from app.evidence.document_tracked_changes import KEY as TRACKED
     from app.evidence.document_unselected_responses import KEY as UNSELECTED_RESPONSES
     from app.evidence.document_unselected_responses import REPORT_EXCERPT_CHARS

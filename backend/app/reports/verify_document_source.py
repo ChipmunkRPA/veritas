@@ -38,6 +38,7 @@ from app.evidence import (
     document_published_wording,
     document_repeat,
     document_saved_link_hosts,
+    document_saved_link_hosts_binding,
     document_scope,
     document_tracked_changes,
     document_unselected_responses,
@@ -305,7 +306,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                          if document_publication_ids.KEY in evidence else "")
     marker_detail = " Verified chat formatting markers and retained source positions." if document_chat_markers.KEY in coverage else ""
     doi_detail = " Verified the DOI reference comparison and retained source positions." if document_doi_reference.KEY in evidence else ""
-    links_detail = " Verified saved link hostnames and their original label positions." if document_saved_link_hosts.KEY in evidence else ""
+    links_detail = " Verified saved link hostnames and their original label positions." if document_saved_link_hosts_binding.KEY in evidence else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"

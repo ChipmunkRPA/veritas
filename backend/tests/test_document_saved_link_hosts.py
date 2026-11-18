@@ -19,7 +19,8 @@ from test_strict_word import _strict_package
 
 from app.core.canonical import canonical_hash
 from app.detectors.text.extract import extract
-from app.evidence import document_saved_link_hosts as binding
+from app.evidence import document_saved_link_hosts as reader
+from app.evidence import document_saved_link_hosts_binding as binding
 from app.evidence.document_saved_link_hosts import inspect
 
 # The host pairs, outcomes and exact source spellings were committed before running the scanner.
@@ -245,11 +246,11 @@ def test_saved_host_commitment_and_original_replay_reject_changes(tmp_path):
     capture = inspect(path, ".html")
     packet = {"source": {"method": "html", binding.COMMITMENT: canonical_hash(capture)}, binding.KEY: capture}
     binding.validate(packet)
-    binding.verify_original(packet, path, ".html")
+    reader.verify_original(packet, path, ".html")
 
     path.write_text(path.read_text().replace("relay.example.net", "changed.example.net"), encoding="utf-8")
     with pytest.raises(ValueError, match="frozen original-file inspection"):
-        binding.verify_original(packet, path, ".html")
+        reader.verify_original(packet, path, ".html")
 
     capture["findings"][0]["saved_host"] += "/hidden?token=dropped"
     packet["source"][binding.COMMITMENT] = canonical_hash(capture)
@@ -263,17 +264,17 @@ def test_optional_reader_discards_results_when_its_subprocess_exceeds_budget(tmp
     def timed_out(*args, **kwargs):
         raise subprocess.TimeoutExpired(args[0], kwargs["timeout"])
 
-    monkeypatch.setattr(binding.subprocess, "run", timed_out)
-    assert binding.inspect_within(tmp_path / "site.html", timeout=0.05, source_sha256="a" * 64) is None
+    monkeypatch.setattr(reader.subprocess, "run", timed_out)
+    assert reader.inspect_within(tmp_path / "site.html", timeout=0.05, source_sha256="a" * 64) is None
 
 
 def test_optional_reader_checks_the_exact_extracted_source(tmp_path):
     path = tmp_path / "site.html"
     path.write_text(_html(CASES[:1]), encoding="utf-8")
     source = hashlib.sha256(path.read_bytes()).hexdigest()
-    assert binding.inspect_within(path, timeout=4, source_sha256=source) == inspect(path, ".html")
+    assert reader.inspect_within(path, timeout=4, source_sha256=source) == inspect(path, ".html")
     path.write_text(_html(CASES[:2]), encoding="utf-8")
-    assert binding.inspect_within(path, timeout=4, source_sha256=source) is None
+    assert reader.inspect_within(path, timeout=4, source_sha256=source) is None
 
 
 @pytest.mark.parametrize("format_name", ("html", "html_utf16", "eml", "docx", "strict_docx"))

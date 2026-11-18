@@ -530,7 +530,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.document_percentage_consistency', 'app.evidence.document_calendar',
                         'app.evidence.document_arithmetic', 'app.evidence.document_length',
                         'app.evidence.document_publication_ids',
-                        'app.evidence.document_doi_reference',
+                        'app.evidence.document_doi_reference', 'app.evidence.document_saved_link_hosts_binding',
                         'app.evidence.audio_binding', 'app.evidence.av_binding', 'app.evidence.av_lag_support',
                         'app.evidence.audio_background_binding', 'app.evidence.audio_bandwidth_binding', 'app.evidence.audio_silence_binding',
                         'app.evidence.audio_tonal_phase_binding',
@@ -609,7 +609,8 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
                                  'video_lip_agreement.py',
                                  'video_viseme_articulation.py', 'video_viseme_stereo.py', 'video_silent_mouth.py',
                                  'picture_sequence.py', 'source_geometry.py', 'document_chat_markers.py', 'document_calendar.py',
-                                 'document_arithmetic.py', 'document_publication_ids.py', 'face_single_boundary_binding.py',
+                                 'document_arithmetic.py', 'document_publication_ids.py', 'document_saved_link_hosts_binding.py',
+                                 'face_single_boundary_binding.py',
                                  'eye_local_hold_binding.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
@@ -644,6 +645,9 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
     elif name == 'document_scope.py':
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.evidence', 'document_pdf_visibility')}
+    elif name == 'document_saved_link_hosts_binding.py':
+        assert imports <= sys.stdlib_module_names | {'app'}
+        assert local == {('app.core.canonical', 'canonical_hash')}
     elif name == 'video_viseme_binding.py':
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.core.canonical', 'canonical_hash'), ('app.evidence', 'video_viseme_timing'),

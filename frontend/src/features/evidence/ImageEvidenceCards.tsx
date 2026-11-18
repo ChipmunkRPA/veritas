@@ -216,14 +216,14 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const geometric = field === 'copy_affine'
   const sectionId = `image-${field.replace('_', '-')}`
   const baseVersion = set.prior_embedded_pair_evidence?.version ?? set.version
-  const webpReflectionVersion = baseVersion === 'image-evidence-34' || baseVersion === 'image-evidence-35'
-  const pngReflectionVersion = baseVersion === 'image-evidence-36' || baseVersion === 'image-evidence-37'
+  const webpReflectionVersion = ['image-evidence-34', 'image-evidence-35', 'image-evidence-40', 'image-evidence-41'].includes(baseVersion)
+  const pngReflectionVersion = ['image-evidence-36', 'image-evidence-37', 'image-evidence-38', 'image-evidence-39'].includes(baseVersion)
   const heading = geometric ? 'Geometric copy comparison' : reflected ? 'Same-image copy similarity'
     : webpReflectionVersion || pngReflectionVersion ? 'Exact and geometric copy comparisons' : 'Copy similarity without mirroring'
   const turnedReview = pngReflectionVersion || ['image-evidence-22', 'image-evidence-23'].includes(baseVersion)
   const nativeJpegVersion = ['image-evidence-28', 'image-evidence-29', 'image-evidence-30', 'image-evidence-31'].includes(baseVersion)
   const webpVersion = baseVersion === 'image-evidence-32' || baseVersion === 'image-evidence-33' || webpReflectionVersion
-  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29', 'image-evidence-31', 'image-evidence-33', 'image-evidence-35', 'image-evidence-37'].includes(baseVersion))
+  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29', 'image-evidence-31', 'image-evidence-33', 'image-evidence-35', 'image-evidence-37', 'image-evidence-39', 'image-evidence-41'].includes(baseVersion))
     || (reflected && (turnedReview || ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12',
       'image-evidence-13', 'image-evidence-14', 'image-evidence-16', 'image-evidence-17', 'image-evidence-18',
       'image-evidence-19', 'image-evidence-20', 'image-evidence-21', 'image-evidence-24', 'image-evidence-25',
@@ -234,6 +234,22 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const turnedJpeg = field === 'copy_translation' ? set.copy_translation?.jpeg_turned_review : undefined
   const nativeJpeg = Boolean(nativeJpegVersion && turnedJpeg && !offgrid)
   const separateMeasurements = turnedJpeg?.measurements
+  const multi = field === 'copy_translation' ? set.copy_translation?.multi_exact_review : undefined
+  const multiStatus = {
+    supported_pair: 'Two separate pairs of textured areas match pixel for pixel after alignment.',
+    no_second_pair: 'The exact comparison did not find two distinct pairs.',
+    ambiguous_pairs: 'Competing or nearby exact matches prevented a distinct two-pair comparison.',
+    unsupported_profile: 'The source was outside the supported upright, opaque lossless image profile.',
+    unassessed_match_budget: 'Too many matching areas prevented a distinct two-pair comparison.',
+    unavailable: 'The exact two-pair comparison could not complete.',
+  }
+  const multiAlignments = {
+    same_orientation: ['Exact copy pair', 'The two crops match in their original orientation.'],
+    horizontal_reflection: ['Exact reflected pair', 'Flip Area B horizontally to align with Area A.'],
+    vertical_reflection: ['Exact reflected pair', 'Flip Area B vertically to align with Area A.'],
+    rotate_90_ccw: ['Exact rotated pair', 'Rotate Area B 90° counterclockwise to align with Area A.'],
+    rotate_180: ['Exact rotated pair', 'Rotate Area B 180° to align with Area A.'],
+  }
   const smallPng = field === 'copy_translation' ? set.copy_translation?.small_png_copy_review : undefined
   const pngReflection = field === 'copy_translation' ? set.copy_translation?.png_exact_reflection_review : undefined
   const webpReflection = field === 'copy_translation' ? set.copy_translation?.webp_exact_reflection_review : undefined
@@ -256,14 +272,14 @@ function CopySimilarity({ set, field, token, mediaReady }: {
       ? smallPngCoverageText.unsupported_profile
       : (reflection ? webpReflectionCoverageText : webpExactCoverageText)[exactReview.status]
     if (exactReview.status === 'no_pair') exactScope = 'This check covers separated, textured crops with sides from 16 to 56 pixels.'
-  } else if (field === 'copy_translation' && webpVersion) {
+  } else if (!multi && field === 'copy_translation' && webpVersion) {
     const outsideExactSize = [set.source.width, set.source.height].some(side => side == null || side < 512 || side > 768)
     if (outsideExactSize && check.status === 'unsupported_geometry') {
       exactObservation = webpExactCoverageText.unsupported_profile
     } else {
       exactScope = outsideExactSize ? webpExactCoverageText.unsupported_profile : 'Exact lossless WebP comparison did not run for this result.'
     }
-  } else if (field === 'copy_translation' && pngReflectionVersion) {
+  } else if (!multi && field === 'copy_translation' && pngReflectionVersion) {
     const outsideExactSize = [set.source.width, set.source.height].some(side => side == null || side < 384 || side > 768)
     if (outsideExactSize && check.status === 'unsupported_geometry') {
       exactObservation = smallPngCoverageText.unsupported_profile
@@ -298,11 +314,13 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   }
   return <section className="mt-5 rounded-md border border-border p-4" aria-labelledby={`${sectionId}-heading`}>
     <h3 id={`${sectionId}-heading`} className="m-0 text-body font-medium text-text">{heading}</h3>
-    <p className="mt-2 mb-0 text-small text-text">{exactObservation ?? (nativeJpeg && check.status === 'no_pair' ? basisText : statusText[check.status])}</p>
+    <p className="mt-2 mb-0 text-small text-text">{multi?.status === 'supported_pair' ? multiStatus.supported_pair
+      : exactObservation ?? (nativeJpeg && check.status === 'no_pair' ? basisText : statusText[check.status])}</p>
     <p className="mt-2 mb-0 text-small text-text-muted">{interpretation}</p>
     {!reflected && <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero weight in AI authorship confidence.</p>}
     {basisText && (!nativeJpeg || check.status !== 'no_pair') && <p className="mt-2 mb-0 text-caption text-text-muted">{basisText}</p>}
     {exactScope && <p className="mt-2 mb-0 text-caption text-text-muted">{exactScope}</p>}
+    {multi && multi.status !== 'supported_pair' && <p className="mt-2 mb-0 text-caption text-text-muted">{multiStatus[multi.status]}</p>}
     {nativeJpeg && check.status === 'supported_pair' && <p className="mt-2 mb-0 text-caption text-text-muted">
       The rotation check used the original pixel grid at this image size.
     </p>}
@@ -319,38 +337,46 @@ function CopySimilarity({ set, field, token, mediaReady }: {
     </p>}
     {proposalSearch?.basis === 'reduced' && <p className="mt-2 mb-0 text-caption text-text-muted">The candidate search used a {proposalSearch.width} × {proposalSearch.height} pixel working image. The check measured any matching masks on the original pixel grid.</p>}
     {check.pairs.length > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">Coordinates use native pixels in the oriented original.</p>}
-    {check.pairs.map((pair, pairIndex) => <article key={pair.id} className="mt-4 border-t border-border pt-4">
-      <h4 className="m-0 text-small font-medium text-text">{pair.id} · {exactReflection ? 'Exact reflected pair' : basis === 'jpeg_turned_copy' ? 'Rotated JPEG pair' : turned ? 'Exact rotated pair' : basis === 'webp_exact_copy' ? 'Exact copy pair' : geometric ? 'Matched source areas' : reflected ? 'Reflected pair' : 'Non-mirrored pair'}</h4>
-      {separateMeasurements && 'transform' in pair && <p className="mt-2 mb-0 text-caption text-text-muted">
-        Rotate Area B {pair.transform === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'} to align with Area A.{' '}
-        Mean RGB difference inside {separateMeasurements[pairIndex].interior_mean.toFixed(2)} of 255 levels.{' '}
-        Surrounding differences (left, right, top, bottom) {separateMeasurements[pairIndex].perimeter_means.map(value => value?.toFixed(2) ?? 'unavailable').join(', ')}.
-      </p>}
-      <CopyLocations set={set} sourceHash={check.source_sha256} regions={pair.regions} token={token} mediaReady={mediaReady} />
-      <div className="mt-3 grid grid-cols-2 gap-4 max-[639px]:grid-cols-1">
-        {copyAreas.map((role, index) => {
-          const region = pair.regions[role]
-          const label = copyAreaLabels[role]
-          const coordinatesId = `${sectionId}-${pair.id}-${role}-coordinates`
-          const mask = 'selected_pixels' in pair ? pair.artifacts[index === 0 ? 'mask_a' : 'mask_b'] : undefined
-          return <figure key={role} className="m-0 min-w-0">
-            <EvidencePicture key={`${pair.artifacts[role].sha256}:${token}`} set={set} artifact={pair.artifacts[role]} token={token} ready={mediaReady}
-              alt={`${pair.id}: ${label} cropped from the submitted image`} />
-            <figcaption className="mt-2 text-small text-text-muted">
-              <Link to={evidenceSourceUrl(set.analysis_id, { region })} aria-describedby={coordinatesId}
-                className="underline underline-offset-[3px]">{label} in the original image</Link>
-              <span id={coordinatesId} className="block font-mono text-caption">x {region.x}, y {region.y}, {region.w} × {region.h} px</span>
-            </figcaption>
-            {mask && 'selected_pixels' in pair && <div className="mt-3">
-              <EvidencePicture set={set} artifact={mask} token={token} ready={mediaReady} alt={`${pair.id}: ${label} ${index === 0 ? 'selected' : 'mapped'} mask`} />
-              <p className="mt-2 mb-0 text-caption text-text-muted">{index === 0
-                ? `White marks ${pair.selected_pixels[role]} pixels selected from neighborhoods that matched after alignment.`
-                : `White shows the same selection mapped to ${pair.selected_pixels[role]} pixels in Area B.`}</p>
-            </div>}
-          </figure>
-        })}
-      </div>
-    </article>)}
+    {check.pairs.map((pair, pairIndex) => {
+      const exactPair = multi?.measurements[pairIndex]
+      const alignment = exactPair && 'transform' in pair ? multiAlignments[pair.transform] : undefined
+      return <article key={pair.id} className="mt-4 border-t border-border pt-4">
+        <h4 className="m-0 text-small font-medium text-text">{pair.id} · {alignment?.[0] ?? (exactReflection ? 'Exact reflected pair' : basis === 'jpeg_turned_copy' ? 'Rotated JPEG pair' : turned ? 'Exact rotated pair' : basis === 'webp_exact_copy' ? 'Exact copy pair' : geometric ? 'Matched source areas' : reflected ? 'Reflected pair' : 'Non-mirrored pair')}</h4>
+        {exactPair && alignment && <p className="mt-2 mb-0 text-caption text-text-muted">
+          {alignment[1]} Compared {exactPair.matching_pixels.toLocaleString('en-US')} RGB pixels in each crop.{' '}
+          Mean surrounding differences (top, bottom, left, right) {exactPair.perimeter_mean_absolute_difference.map(value => value.toFixed(2)).join(', ')} of 255 levels.
+        </p>}
+        {separateMeasurements && 'transform' in pair && <p className="mt-2 mb-0 text-caption text-text-muted">
+          Rotate Area B {pair.transform === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'} to align with Area A.{' '}
+          Mean RGB difference inside {separateMeasurements[pairIndex].interior_mean.toFixed(2)} of 255 levels.{' '}
+          Surrounding differences (left, right, top, bottom) {separateMeasurements[pairIndex].perimeter_means.map(value => value?.toFixed(2) ?? 'unavailable').join(', ')}.
+        </p>}
+        <CopyLocations set={set} sourceHash={check.source_sha256} regions={pair.regions} token={token} mediaReady={mediaReady} />
+        <div className="mt-3 grid grid-cols-2 gap-4 max-[639px]:grid-cols-1">
+          {copyAreas.map((role, index) => {
+            const region = pair.regions[role]
+            const label = copyAreaLabels[role]
+            const coordinatesId = `${sectionId}-${pair.id}-${role}-coordinates`
+            const mask = 'selected_pixels' in pair ? pair.artifacts[index === 0 ? 'mask_a' : 'mask_b'] : undefined
+            return <figure key={role} className="m-0 min-w-0">
+              <EvidencePicture key={`${pair.artifacts[role].sha256}:${token}`} set={set} artifact={pair.artifacts[role]} token={token} ready={mediaReady}
+                alt={`${pair.id}: ${label} cropped from the submitted image`} />
+              <figcaption className="mt-2 text-small text-text-muted">
+                <Link to={evidenceSourceUrl(set.analysis_id, { region })} aria-describedby={coordinatesId}
+                  className="underline underline-offset-[3px]">{label} in the original image</Link>
+                <span id={coordinatesId} className="block font-mono text-caption">x {region.x}, y {region.y}, {region.w} × {region.h} px</span>
+              </figcaption>
+              {mask && 'selected_pixels' in pair && <div className="mt-3">
+                <EvidencePicture set={set} artifact={mask} token={token} ready={mediaReady} alt={`${pair.id}: ${label} ${index === 0 ? 'selected' : 'mapped'} mask`} />
+                <p className="mt-2 mb-0 text-caption text-text-muted">{index === 0
+                  ? `White marks ${pair.selected_pixels[role]} pixels selected from neighborhoods that matched after alignment.`
+                  : `White shows the same selection mapped to ${pair.selected_pixels[role]} pixels in Area B.`}</p>
+              </div>}
+            </figure>
+          })}
+        </div>
+      </article>
+    })}
   </section>
 }
 

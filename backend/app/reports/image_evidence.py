@@ -114,6 +114,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     from app.evidence.image_copy_similarity_binding import (
         EXACT_REFLECTION_VERSIONS,
         JPEG_BLOCK_STATUS_TEXT,
+        MULTI_EXACT_KEY,
+        MULTI_EXACT_STATUS,
         NATIVE_JPEG_ROTATION_VERSIONS,
         OFFGRID_STATUS_TEXT,
         PNG_EXACT_REFLECTION_KEY,
@@ -176,6 +178,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                     if field == "copy_similarity" or status == SKIPPED_CREDENTIALS
                                     else TRANSLATION_STATUS[status])
         if field == "copy_translation":
+            multi = check.get(MULTI_EXACT_KEY)
+            multi_confirmed = multi is not None and multi["status"] == "supported_pair"
             reflected_webp = check.get(WEBP_EXACT_REFLECTION_KEY)
             reflected_png = check.get(PNG_EXACT_REFLECTION_KEY)
             if exact_review := reflected_png or reflected_webp or check.get(WEBP_EXACT_COPY_KEY):
@@ -248,7 +252,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 check["basis_text"] = JPEG_BLOCK_STATUS_TEXT[jpeg_review]
             elif check["pairs"] and (basis := check.get("basis")) in TRANSLATION_BASIS_TEXT:
                 check["basis_text"] = TRANSLATION_BASIS_TEXT[basis]
-            if base_version in WEBP_EXACT_COPY_VERSIONS and not check.get(WEBP_EXACT_COPY_KEY) and status != SKIPPED_CREDENTIALS:
+            if base_version in WEBP_EXACT_COPY_VERSIONS and not check.get(WEBP_EXACT_COPY_KEY) and not multi and status != SKIPPED_CREDENTIALS:
                 outside_size = not exact_copy_size(document["source"]["width"], document["source"]["height"], webp=True)
                 if outside_size and status == "unsupported_geometry":
                     check["observation"] = webp_scope
@@ -257,7 +261,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                     check["basis_text"] = " ".join(filter(None, (check.get("basis_text"), scope)))
             if base_version in WEBP_EXACT_COPY_VERSIONS and not check["pairs"] and status != SKIPPED_CREDENTIALS:
                 check["interpretation"] = "Copy comparisons look for repeated image detail. The origin of the image and AI involvement remain undetermined."
-            if base_version in PNG_EXACT_REFLECTION_VERSIONS and not reflected_png and status != SKIPPED_CREDENTIALS:
+            if base_version in PNG_EXACT_REFLECTION_VERSIONS and not reflected_png and not multi and status != SKIPPED_CREDENTIALS:
                 outside_size = not exact_copy_size(document["source"]["width"], document["source"]["height"], webp=False)
                 scope = (SMALL_PNG_STATUS_TEXT["unsupported_profile"] if outside_size
                          else "The exact PNG reflection check did not run for this result.")
@@ -265,6 +269,19 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                     check["observation"] = scope
                 else:
                     check["basis_text"] = " ".join(filter(None, (check.get("basis_text"), scope)))
+            if multi_confirmed:
+                check["observation"] = MULTI_EXACT_STATUS["supported_pair"]
+                alignments = {"same_orientation": "The two crops match in their original orientation.",
+                              "horizontal_reflection": "Flip Area B horizontally to align with Area A.",
+                              "vertical_reflection": "Flip Area B vertically to align with Area A.",
+                              "rotate_90_ccw": "Rotate Area B 90° counterclockwise to align with Area A.",
+                              "rotate_180": "Rotate Area B 180° to align with Area A."}
+                for pair, measured in zip(check["pairs"], multi["measurements"], strict=True):
+                    perimeter = ", ".join(f"{value:.2f}" for value in measured["perimeter_mean_absolute_difference"])
+                    pair["rotation_text"] = (f"{alignments[pair['transform']]} Compared {measured['matching_pixels']:,} RGB pixels in each crop. "
+                                             f"Mean surrounding differences (top, bottom, left, right) {perimeter} of 255 levels.")
+            elif multi:
+                check["basis_text"] = " ".join(filter(None, (check.get("basis_text"), MULTI_EXACT_STATUS[multi["status"]])))
         if field == "copy_translation" and base_version in EXACT_REFLECTION_VERSIONS:
             check["title"] = "Exact and geometric copy comparisons"
         for pair in check["pairs"]:

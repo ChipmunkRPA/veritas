@@ -329,6 +329,7 @@ class Settings(BaseSettings):
     image_lossless_webp_copy_review: bool = False  # Optional local exact copy evidence on the native WebP grid.
     image_lossless_webp_reflection_review: bool = False  # Optional native lossless WebP copy evidence with exact reflection.
     image_png_reflection_review: bool = False  # Optional native PNG copy evidence with exact reflection.
+    image_disjoint_exact_copy_review: bool = False  # Optional independent pixel matches in two pairs of lossless crops.
     image_turned_png_copy_review: bool = False  # Include right-angle copies in the local small PNG check.
     image_png_exif_preview_review: bool = False  # Optional native PNG comparison with its saved Exif thumbnail.
     image_heif_thumbnail_review: bool = False  # Compare an eligible HEIC still with its linked thumbnail.

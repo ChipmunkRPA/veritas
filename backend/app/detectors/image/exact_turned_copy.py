@@ -35,11 +35,11 @@ def _source_box(box, height, width, turns):
     return width - x - w, height - y - h, w, h
 
 
-def analyse(rgb):
+def analyse(rgb, *, allow_multiple=False, seeds=None):
     height, width = rgb.shape[:2]
     if not exact.MIN_SIDE <= min(height, width) <= max(height, width) <= exact.MAX_SIDE:
         return {"status": "unsupported_geometry", "pairs": []}
-    seeds = _unique_seeds(rgb)
+    seeds = _unique_seeds(rgb) if seeds is None else seeds
     matches = {}
     # Every clockwise 90 degree match is also counterclockwise when
     # swapping the two areas. A single quarter-turn search covers both.
@@ -56,10 +56,12 @@ def analyse(rgb):
                     # Use the same crop order for both half-turn offsets.
                     pair = second, first
                 key = tuple(sorted(pair))
+                if allow_multiple:
+                    key = turns, key
                 if key in matches:
                     continue
                 if (measurement := exact.witness(rgb, *pair, turns=turns)) is not None:
                     matches[key] = {"pair": pair, "measurement": measurement, "turns": turns}
-                    if len(matches) > 1:
+                    if len(matches) > (2 if allow_multiple else 1):
                         return {"status": "ambiguous_pairs", "pairs": []}
     return {"status": "supported_pair" if matches else "no_pair", "pairs": list(matches.values())}

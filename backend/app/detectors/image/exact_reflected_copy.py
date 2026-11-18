@@ -11,9 +11,9 @@ from app.detectors.image.exact_turned_copy import _offsets, _unique_seeds
 AXES = {"horizontal_reflection": 1, "vertical_reflection": 0}
 
 
-def analyse(rgb):
+def analyse(rgb, *, allow_multiple=False, seeds=None):
     height, width = rgb.shape[:2]
-    seeds = _unique_seeds(rgb)
+    seeds = _unique_seeds(rgb) if seeds is None else seeds
     matches = {}
     for transform, axis in AXES.items():
         reflected = np.flip(rgb, axis=axis)
@@ -30,6 +30,6 @@ def analyse(rgb):
                     continue
                 if (measurement := exact.witness(rgb, *pair, reflection_axis=axis)) is not None:
                     matches[key] = {"pair": pair, "transform": transform, "measurement": measurement}
-                    if len(matches) > 1:
+                    if len(matches) > (2 if allow_multiple else 1):
                         return {"status": "ambiguous_pairs", "pairs": []}
     return {"status": "supported_pair" if matches else "no_pair", "pairs": list(matches.values())}

@@ -35,6 +35,10 @@ from app.evidence.image_copy_similarity_binding import (
     JPEG_OFFGRID_AFFINE_VERSION,
     JPEG_OFFGRID_VERSION,
     JPEG_OFFGRID_VERSIONS,
+    MULTI_EXACT_BASIS,
+    MULTI_EXACT_KEY,
+    MULTI_EXACT_NOTE,
+    MULTI_EXACT_VERSIONS,
     NATIVE_JPEG_ROTATION_AFFINE_VERSION,
     NATIVE_JPEG_ROTATION_VERSION,
     NATIVE_JPEG_ROTATION_VERSIONS,
@@ -46,6 +50,8 @@ from app.evidence.image_copy_similarity_binding import (
     PNG_EXACT_REFLECTION_BASIS,
     PNG_EXACT_REFLECTION_KEY,
     PNG_EXACT_REFLECTION_VERSION,
+    PNG_MULTI_EXACT_AFFINE_VERSION,
+    PNG_MULTI_EXACT_VERSION,
     REFLECTION_VERSIONS,
     ROLES,
     SCHEMA,
@@ -79,6 +85,8 @@ from app.evidence.image_copy_similarity_binding import (
     WEBP_EXACT_REFLECTION_BASIS,
     WEBP_EXACT_REFLECTION_KEY,
     WEBP_EXACT_REFLECTION_VERSION,
+    WEBP_MULTI_EXACT_AFFINE_VERSION,
+    WEBP_MULTI_EXACT_VERSION,
     box_bounds,
     copy_records,
     exact_copy_size,
@@ -96,7 +104,9 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
 CREATOR = "image-evidence-packets/10"
-_CREATORS = {PNG_EXACT_REFLECTION_AFFINE_VERSION: "image-evidence-packets/35",
+_CREATORS = {WEBP_MULTI_EXACT_AFFINE_VERSION: "image-evidence-packets/39", WEBP_MULTI_EXACT_VERSION: "image-evidence-packets/38",
+             PNG_MULTI_EXACT_AFFINE_VERSION: "image-evidence-packets/37", PNG_MULTI_EXACT_VERSION: "image-evidence-packets/36",
+             PNG_EXACT_REFLECTION_AFFINE_VERSION: "image-evidence-packets/35",
              PNG_EXACT_REFLECTION_VERSION: "image-evidence-packets/34",
              WEBP_EXACT_REFLECTION_AFFINE_VERSION: "image-evidence-packets/33",
              WEBP_EXACT_REFLECTION_VERSION: "image-evidence-packets/32",
@@ -134,6 +144,11 @@ def _active_version() -> str:
 
 
 def _analysis_version(analysis: Analysis) -> str:
+    if settings.environment == "dev" and settings.image_disjoint_exact_copy_review:
+        if analysis.content_type == "image/png":
+            return PNG_MULTI_EXACT_AFFINE_VERSION if settings.image_affine_copy_review else PNG_MULTI_EXACT_VERSION
+        if analysis.content_type == "image/webp":
+            return WEBP_MULTI_EXACT_AFFINE_VERSION if settings.image_affine_copy_review else WEBP_MULTI_EXACT_VERSION
     if settings.environment == "dev" and settings.image_png_reflection_review and analysis.content_type == "image/png":
         return PNG_EXACT_REFLECTION_AFFINE_VERSION if settings.image_affine_copy_review else PNG_EXACT_REFLECTION_VERSION
     if settings.environment == "dev" and settings.image_lossless_webp_reflection_review and analysis.content_type == "image/webp":
@@ -223,6 +238,14 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
                         or int(np.count_nonzero(pixels)) != pair["selected_pixels"][role]):
                     raise PacketIntegrityError("Geometric copy mask differs from its recorded geometry")
     translation = document.get("copy_translation") or {}
+    if translation.get("basis") == MULTI_EXACT_BASIS:
+        from app.evidence.image_exact_small_copy_source import verify_multiple
+
+        try:
+            verify_multiple(legacy._verified(store, document["source"]["sha256"]), translation,
+                            webp=document["version"] in WEBP_EXACT_COPY_VERSIONS)
+        except (OSError, ValueError) as error:
+            raise PacketIntegrityError(str(error)) from error
     if translation.get("basis") == JPEG_BLOCK_BASIS:
         from app.evidence.image_jpeg_copy_blocks_source import verify
 
@@ -294,10 +317,12 @@ def selected_translation_pairs(rgb: np.ndarray) -> tuple[str, list[tuple[copy_mo
 
 def _copy_record(db: Session, analysis: Analysis, store: ObjectStore, document: dict, source: Image.Image | None,
                  status: str, boxes: list, *, reflected: bool, turns: int | tuple[int, ...] = 0,
-                 exact_reflection: str | None = None) -> dict:
+                 exact_reflection: str | None = None, exact_transforms: tuple[str, ...] = ()) -> dict:
     pairs = []
     rotations = (turns,) * len(boxes) if isinstance(turns, int) else turns
-    for index, (areas, rotation) in enumerate(zip(boxes, rotations, strict=True), 1):
+    transforms = exact_transforms or tuple(exact_reflection or ("horizontal_reflection" if reflected else PNG_COPY_TRANSFORMS[rotation])
+                                          for rotation in rotations)
+    for index, (areas, transform) in enumerate(zip(boxes, transforms, strict=True), 1):
         if source is None:
             raise PacketIntegrityError("Copy similarity evidence is missing its source image")
         regions, artifacts = {}, {}
@@ -310,12 +335,13 @@ def _copy_record(db: Session, analysis: Analysis, store: ObjectStore, document: 
             artifacts[role] = {"sha256": art.sha256, "media_type": "image/png", "width": crop.width,
                                "height": crop.height, "url": url(document, art.sha256)}
         pairs.append({"id": f"{'R' if reflected else 'T'}{index:02d}",
-                      "transform": exact_reflection or ("horizontal_reflection" if reflected else PNG_COPY_TRANSFORMS[rotation]),
+                      "transform": transform,
                       "regions": regions, "artifacts": artifacts})
     return {"schema": SCHEMA if reflected else TRANSLATION_SCHEMA,
             "source_sha256": analysis.sha256, "coordinate_space": "exif-oriented-original", "status": status,
             "authorship_confidence_contribution": 0, "pairs": pairs,
-            "interpretation": EXACT_REFLECTION_NOTE if exact_reflection else NOTE if reflected else TRANSLATION_NOTE}
+            "interpretation": (MULTI_EXACT_NOTE if exact_transforms else EXACT_REFLECTION_NOTE if exact_reflection
+                               else NOTE if reflected else TRANSLATION_NOTE)}
 
 
 def _affine_record(db: Session, analysis: Analysis, store: ObjectStore, document: dict,
@@ -413,6 +439,7 @@ def build_packet_set(
     jpeg_status = offgrid_review = turned_jpeg_review = exact_review = reflection_review = exact_reflection = None
     webp = version in WEBP_EXACT_COPY_VERSIONS
     exact_reflection_enabled = version in EXACT_REFLECTION_VERSIONS
+    multi_review, multi_transforms = None, ()
     turns = 0
     skipped = result_skip(result) is not None
     if skipped:
@@ -466,6 +493,18 @@ def build_packet_set(
         translation_status = "supported_pair" if extra else "no_pair"
         if extra:
             translations, basis = extra, TURNED_JPEG_BASIS
+    if version in MULTI_EXACT_VERSIONS and not skipped and exact_copy_size(*size, webp=webp) and len(translations) < 2:
+        from app.evidence.image_exact_small_copy_source import review_multiple
+
+        try:
+            multi_review, matches = review_multiple(legacy._verified(store, analysis.sha256), webp=webp)
+        except (cv2.error, OSError, ValueError, SystemError):
+            multi_review, matches = {"status": "unavailable", "measurements": []}, []
+        if matches:
+            source = source if source is not None else _source(document, store)
+            translation_status, basis = "supported_pair", MULTI_EXACT_BASIS
+            translations = [match["pair"] for match in matches]
+            multi_transforms = tuple(match["transform"] for match in matches)
     if ((webp or version in SMALL_PNG_VERSIONS) and not skipped and exact_copy_size(*size, webp=webp)
             and translation_status in {"no_pair", "unsupported_geometry"}):
         from app.evidence.image_exact_small_copy_source import review
@@ -499,7 +538,8 @@ def build_packet_set(
                 basis = WEBP_EXACT_REFLECTION_BASIS if webp else PNG_EXACT_REFLECTION_BASIS
     document["copy_similarity"] = _copy_record(db, analysis, store, document, source, status, boxes, reflected=True)
     document["copy_translation"] = _copy_record(db, analysis, store, document, source, translation_status,
-                                                translations, reflected=False, turns=turns, exact_reflection=exact_reflection)
+                                                translations, reflected=False, turns=turns, exact_reflection=exact_reflection,
+                                                exact_transforms=multi_transforms)
     document["copy_translation"]["basis"] = basis
     if version in JPEG_BLOCK_VERSIONS:
         document["copy_translation"]["jpeg_block_review"] = jpeg_status
@@ -514,6 +554,8 @@ def build_packet_set(
     if exact_reflection_enabled:
         key = WEBP_EXACT_REFLECTION_KEY if webp else PNG_EXACT_REFLECTION_KEY
         document["copy_translation"][key] = reflection_review
+    if version in MULTI_EXACT_VERSIONS:
+        document["copy_translation"][MULTI_EXACT_KEY] = multi_review
     if not exact_reflection_enabled and version in AFFINE_VERSIONS:
         document[affine.KEY] = _affine_record(db, analysis, store, document, source, skip=skipped)
     document = json.loads(canonical_json(document))

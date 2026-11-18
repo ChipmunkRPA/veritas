@@ -1,0 +1,51 @@
+{
+  "cases": [
+    {
+      "format": "png",
+      "old_pairs": 1,
+      "pairs": 2,
+      "native_crop_positions": 4,
+      "matching_pixels": [
+        672,
+        1008
+      ],
+      "old_evidence_preserved": true,
+      "overall_assessment_preserved": true,
+      "json": true,
+      "pdf": true,
+      "signed_original_replay": true,
+      "pdf_crop_interpolation_consistent": true
+    },
+    {
+      "format": "webp",
+      "old_pairs": 1,
+      "pairs": 2,
+      "native_crop_positions": 4,
+      "matching_pixels": [
+        672,
+        1008
+      ],
+      "old_evidence_preserved": true,
+      "overall_assessment_preserved": true,
+      "json": true,
+      "pdf": true,
+      "signed_original_replay": true,
+      "pdf_crop_interpolation_consistent": true
+    }
+  ],
+  "browser_checkouts": 2,
+  "simulated_paid_jobs": 4,
+  "unpaid_jobs": 0,
+  "browser": {
+    "pages": 2,
+    "pairs": 4,
+    "crops": 8,
+    "pdf_downloads": 2,
+    "json_links": 2,
+    "page_errors": 0,
+    "source_overlays": true,
+    "source_focus_links": true
+  },
+  "runtime": "Isolated real local CPU workers, authored lossless RGB fixtures, Stripe simulated locally",
+  "verification_note": "Backend/export verification completed on the fresh final run with API-trusted signing key; browser read-back reused those exact frozen results and files after correcting test-only DOM selectors; no analyses or reports were rerun"
+}

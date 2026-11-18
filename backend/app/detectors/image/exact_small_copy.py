@@ -107,7 +107,7 @@ def matching_regions(rgb, comparison, dx, dy):
             yield (x + left, y + top, w, h), (x + left + dx, y + top + dy, w, h)
 
 
-def analyse(rgb):
+def analyse(rgb, *, allow_multiple=False):
     height, width = rgb.shape[:2]
     if not MIN_SIDE <= min(height, width) <= max(height, width) <= MAX_SIDE:
         return {"status": "unsupported_geometry", "pairs": []}
@@ -119,6 +119,8 @@ def analyse(rgb):
         for first, second in matching_regions(rgb, rgb, dx, dy):
             if (proof := witness(rgb, first, second)) is not None:
                 pairs.append({"pair": (first, second), "measurement": proof})
-    if len(pairs) > 1:
+                if allow_multiple and len(pairs) > 2:
+                    return {"status": "ambiguous_pairs", "pairs": []}
+    if not allow_multiple and len(pairs) > 1:
         return {"status": "ambiguous_pairs", "pairs": []}
     return {"status": "supported_pair" if pairs else "no_pair", "pairs": pairs}

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [pretrained JPEG localizer replay](image-jpeg-pscc-localization-2026-11-17.md#reproduce)
+binds three readings to the same 1,092 held inputs and exact changed-pixel
+masks. The local exporter verifies the submitted and parent files so a
+separate detector can use the exact same JPEGs.
+
 The [44.1 kHz video soundtrack replay](video-sound-dropouts-aac441-2026-11-17.md#reproduce)
 compares 392 new AAC encodes with the corresponding 48 kHz cases. It checks
 the original picture timestamps, the presented audio extent and each

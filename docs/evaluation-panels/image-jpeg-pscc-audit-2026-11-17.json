@@ -1,0 +1,86 @@
+{
+  "retained": {
+    "groups": 20,
+    "held_result_sha256": "43508c429b1b231c5b655f819723dfac4287e49616aa093bdf54c6a980244bd4",
+    "processed_inputs": {
+      "manifest_sha256": "0e5570967ac4431b41c8112de122413c672adea53500a1f89a7134fabe171b4e",
+      "schema": "chipmunk.independent-input-verification/1",
+      "verified_cases": 560,
+      "verified_file_bindings": 1120
+    },
+    "publisher": "https://raw.githubusercontent.com/proteus1991/PSCC-Net/53e5ff77d8dc5feddda060cd085f9b765761f816",
+    "readouts": {
+      "finest_map": {
+        "checked_cases": 560,
+        "nonempty_masks": 497,
+        "recount_sha256": "18c1a27e576f00e7596fb98ee9e8757e01ca12c102856e5346eddb95d199002b"
+      },
+      "fixed_mask": {
+        "checked_cases": 560,
+        "nonempty_masks": 29,
+        "recount_sha256": "2690990c84c262df107bf00178e1b34d3e5d107b24a097944a3d9ab4683033b8"
+      },
+      "scale_agreement": {
+        "checked_cases": 560,
+        "nonempty_masks": 558,
+        "recount_sha256": "9dd11ca2ac0463d241fd0b9e5cf8e90cc677986656d816f7aa68cd1252fab6e7"
+      }
+    }
+  },
+  "fresh": {
+    "groups": 12,
+    "held_result_sha256": "dc5a326eece1ba465bc71976371e9cd59a641456fcfda73da4afd222dfc340a0",
+    "processed_inputs": {
+      "manifest_sha256": "d58dbc0ca55a04c966abfd06c174106a6c15be9aff4bbc4f82556e6278ea6632",
+      "schema": "chipmunk.independent-input-verification/1",
+      "verified_cases": 336,
+      "verified_file_bindings": 672
+    },
+    "publisher": "https://raw.githubusercontent.com/proteus1991/PSCC-Net/53e5ff77d8dc5feddda060cd085f9b765761f816",
+    "readouts": {
+      "finest_map": {
+        "checked_cases": 336,
+        "nonempty_masks": 328,
+        "recount_sha256": "26a25db2766279ddc5e49aac63048729d4110c632501a3f9c5df9be9a844f4f0"
+      },
+      "fixed_mask": {
+        "checked_cases": 336,
+        "nonempty_masks": 44,
+        "recount_sha256": "05a894c8a0e1e132ec87e4cc873a4cbbb81c05b013e7a317fc8f598d5e4aa92c"
+      },
+      "scale_agreement": {
+        "checked_cases": 336,
+        "nonempty_masks": 336,
+        "recount_sha256": "dab78d6eb801a6d678cb9365418bf41edfebe724005fa2d11bea8537b31ec7c6"
+      }
+    }
+  },
+  "provider": {
+    "groups": 14,
+    "held_result_sha256": "b50b6a848e6669aedece221c488e46fc7f8654a388614f2094441c1aae9b0c10",
+    "processed_inputs": {
+      "manifest_sha256": "dc688c62ab90d2fb216cb545323608d913ed914e754d1eb91de7edffe22cfaef",
+      "schema": "chipmunk.independent-input-verification/1",
+      "verified_cases": 196,
+      "verified_file_bindings": 392
+    },
+    "publisher": "https://raw.githubusercontent.com/proteus1991/PSCC-Net/53e5ff77d8dc5feddda060cd085f9b765761f816",
+    "readouts": {
+      "finest_map": {
+        "checked_cases": 196,
+        "nonempty_masks": 147,
+        "recount_sha256": "4334d79aea74eca7f6c54f849df963d4c87b68463369d59d0d0beac2f7efe81e"
+      },
+      "fixed_mask": {
+        "checked_cases": 196,
+        "nonempty_masks": 4,
+        "recount_sha256": "468b5e65f7250b76296f9a8934b9e0c487481a7ef3036b36d68a9fba50e1c1b4"
+      },
+      "scale_agreement": {
+        "checked_cases": 196,
+        "nonempty_masks": 196,
+        "recount_sha256": "b31bb59407b412586122a8383773637ab2d5d5b9496885f8b3f6ba3e9a40b92b"
+      }
+    }
+  }
+}

@@ -60,6 +60,16 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Small JPEG removals with four-scale localization](image-jpeg-pscc-localization-2026-11-17.md)
+  add four useful locations from one photo and 48 ordinary alerts across
+  1,092 held deliveries. The localizer stays in evaluation. The app's
+  earlier-copy tool located 45 of the 56 scene-text edits when supplied
+  with the matching earlier image.
+
+- [44.1 kHz video soundtrack dropouts](video-sound-dropouts-aac441-2026-11-17.md)
+  extend the local check to this AAC encoding. The app replay links the
+  original pictures and measured sound to the same PDF and JSON ranges.
+
 - [Sentence and changed-word supervision](writing-token-supervision-2026-11-17.md)
   improves report localization from zero to 20 of 705 edits at the medium
   point, with ordinary flags falling from eight to six across 96 fresh

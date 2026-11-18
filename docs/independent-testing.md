@@ -13,6 +13,14 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [paired soundtrack replay](video-short-phrase-reencode-2026-11-18.md#reproduce)
+recounts exact 16 kHz analysis locations under three audio-carrier pairings.
+It includes two independent picture encodes with the same frame clock,
+short speech replacements, and deliberately mismatched picture controls.
+
+The [frequency-dependent stereo replay](audio-stereo-complex-projection-2026-11-18.md#replay)
+reproduces the paired sample-range counts for 160 Opus deliveries.
+
 The [lossless WebP comparison](image-exact-webp-copy-2026-11-18.md#replay)
 recounts copy locations against exact edit boxes on 212 deliveries
 using Python's standard library. The native replay checks the

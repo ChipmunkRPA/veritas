@@ -66,6 +66,19 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- Frequency-dependent stereo foreground cancellation recovered the same
+  7 of 24 staged background repeats as the existing comparison on the
+  transfer recordings. Neither reading flagged any of the 72 controls.
+  The alternative remains in evaluation.
+  [Stereo foreground projection](audio-stereo-complex-projection-2026-11-18.md)
+
+- The paired short-phrase comparison preserved all 27 locations across
+  28 staged soundtrack edits when the matching picture tracks were
+  independently encoded at the moderate tested quality. Neither the 56
+  ordinary sound controls nor the 28 picture mismatch controls produced
+  an added alert. The stronger encode passed the picture scope on three
+  of 14 source clips. [Paired short-phrase re-encoding trial](video-short-phrase-reencode-2026-11-18.md)
+
 - The lossless WebP copy fallback raised useful locations from 2 to 75 of
   88 staged edits with zero additional flags in 124 controls. The browser,
   PDF, and JSON show the measured crops and the original pixel locations.

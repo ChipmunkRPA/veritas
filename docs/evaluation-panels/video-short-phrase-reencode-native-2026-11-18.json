@@ -1,0 +1,130 @@
+{
+  "exact_edit": {
+    "status": "localized_difference",
+    "reason": null,
+    "changed_frames": 0,
+    "qualified_picture_candidate": true,
+    "input_sha256": {
+      "earlier": "94104cce7e9bdd8b0eb6259c51cbb8e499c49d9596cc642999573bb5dc029f1b",
+      "submitted": "e5db6cd57db700433597b8b8ef463d4e0508c9077d4f0a4926f0e7a7cd4c41dd"
+    },
+    "reported_range": [
+      15680,
+      21440
+    ]
+  },
+  "changed_edit": {
+    "status": "unassessed",
+    "reason": "pictures_differ",
+    "changed_frames": 53,
+    "qualified_picture_candidate": true,
+    "input_sha256": {
+      "earlier": "94104cce7e9bdd8b0eb6259c51cbb8e499c49d9596cc642999573bb5dc029f1b",
+      "submitted": "69166fc3796859aab6ee503e143b7c0c4ddd4156185b31f462f439090dbc7c94"
+    },
+    "candidate_samples": [
+      15680,
+      21440
+    ],
+    "candidate_frames": {
+      "before": {
+        "earlier": {
+          "frame_index": 22,
+          "pts": 16896,
+          "time_base": "1/18304",
+          "time_s": 0.9230769230769231,
+          "rgb_sha256": "bd1b6000976c06440be91f5f50ef1a7ef67023dc6c763ceddadc2ade2824b2d4",
+          "asset": {
+            "file": "soundtrack-shift-earlier-before-022.png",
+            "sha256": "a85be6860f364182f80813307e5f20e28fff3d0f1c7e6a241e9c2197e7acec08",
+            "media_type": "image/png"
+          }
+        },
+        "submitted": {
+          "frame_index": 22,
+          "pts": 16896,
+          "time_base": "1/18304",
+          "time_s": 0.9230769230769231,
+          "rgb_sha256": "1b4c0ec6600d7acd7a2374686b51696b354fe652dbd872b6562f5c858d1062db",
+          "asset": {
+            "file": "soundtrack-shift-submitted-before-022.png",
+            "sha256": "3c9e6f99547fd64ef09e5d91f2d4477b853dfb3a715702728c5a99dff29705ff",
+            "media_type": "image/png"
+          }
+        }
+      },
+      "during": {
+        "earlier": {
+          "frame_index": 27,
+          "pts": 20736,
+          "time_base": "1/18304",
+          "time_s": 1.132867132867133,
+          "rgb_sha256": "8e02cad947eb3bba3c432cef845dd732a17167b960ce105ffac3c7d819900607",
+          "asset": {
+            "file": "soundtrack-shift-earlier-during-027.png",
+            "sha256": "4dbe47b743d4756df0ba9073058e8fe29a35ae5e338d14e510c3f2d378a59a6c",
+            "media_type": "image/png"
+          }
+        },
+        "submitted": {
+          "frame_index": 27,
+          "pts": 20736,
+          "time_base": "1/18304",
+          "time_s": 1.132867132867133,
+          "rgb_sha256": "0f0e481330f563f7dc4fc34361d316c95ba34b7dcec86a80fe5a5145069533b3",
+          "asset": {
+            "file": "soundtrack-shift-submitted-during-027.png",
+            "sha256": "bf2bbbb77648e42caf98a0238133abda7825bbb63df5684aa476432a3fd3b999",
+            "media_type": "image/png"
+          }
+        }
+      },
+      "after": {
+        "earlier": {
+          "frame_index": 32,
+          "pts": 24576,
+          "time_base": "1/18304",
+          "time_s": 1.3426573426573427,
+          "rgb_sha256": "b6ff8ec16f733436e071d6a92c6940cfcdb5cc9149b14b72faaf96349bc3ce06",
+          "asset": {
+            "file": "soundtrack-shift-earlier-after-032.png",
+            "sha256": "0a79e46d14ef62960b477be8f65da35889c6a37a2f4f2646b8b9629f2c9b1913",
+            "media_type": "image/png"
+          }
+        },
+        "submitted": {
+          "frame_index": 32,
+          "pts": 24576,
+          "time_base": "1/18304",
+          "time_s": 1.3426573426573427,
+          "rgb_sha256": "9cbc2a43f2756bbacc5f8e8bc1c5b6412555191ec35ed2900e9cc0f4b21a7b17",
+          "asset": {
+            "file": "soundtrack-shift-submitted-after-032.png",
+            "sha256": "98d12f80373cde5646af9623d1fd1e2a16c955b0050340c83e69832ce77a2a04",
+            "media_type": "image/png"
+          }
+        }
+      }
+    }
+  },
+  "changed_control": {
+    "status": "unassessed",
+    "reason": "pictures_differ",
+    "changed_frames": 53,
+    "qualified_picture_candidate": true,
+    "input_sha256": {
+      "earlier": "94104cce7e9bdd8b0eb6259c51cbb8e499c49d9596cc642999573bb5dc029f1b",
+      "submitted": "062f46e3bb256d4df33329df511d1d5979aabb82aa9f4b1b42a74ffafd8beeb8"
+    }
+  },
+  "picture_edit": {
+    "status": "unassessed",
+    "reason": "pictures_differ",
+    "changed_frames": 53,
+    "qualified_picture_candidate": false,
+    "input_sha256": {
+      "earlier": "94104cce7e9bdd8b0eb6259c51cbb8e499c49d9596cc642999573bb5dc029f1b",
+      "submitted": "f515cf376bb461667af202a9ff0eb061d5c3e4456fe4f03b81f5966db6f374bb"
+    }
+  }
+}

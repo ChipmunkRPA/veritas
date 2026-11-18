@@ -243,3 +243,15 @@ regexes = [
   '''^\s*"tokenizer\.json": "be50c3628f2bf5bb5e3a7f17b1f74611b2561a3a27eeab05e5aa30f411572037",?\s*$''',
   '''^\s*"tokenizer_config\.json": "acb92769e8195aabd29b7b2137a9e6d6e25c476a4f15aa4355c233426c61576b",?\s*$''',
 ]
+
+# Exact SHA-256 fingerprints of the pinned public LUSR tokenizer files.
+[[allowlists]]
+description = "Writing style benchmark tokenizer SHA-256 fingerprints"
+condition = "AND"
+paths = ['''(^|/)backend/scripts/writing_style_prototypes\.py$''']
+regexTarget = "line"
+regexes = [
+  '''^\s*"special_tokens_map\.json": "06e405a36dfe4b9604f484f6a1e619af1a7f7d09e34a8555eb0b77b66318067f",?\s*$''',
+  '''^\s*"tokenizer\.json": "727009a8214ddfa5af1deedf1006d4d06e8e51e54aa5f03566263d4e19bfcdce",?\s*$''',
+  '''^\s*"tokenizer_config\.json": "4ea8648e4067230942ac6b32dd61328675bc99ae0a9f4cc665c30a95f0f68712",?\s*$''',
+]

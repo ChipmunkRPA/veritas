@@ -5,8 +5,8 @@ and the evidence supporting it before expanding hosting.
 
 The [stereo covariance comparison](video-stereo-covariance-2026-11-17.md)
 confirms missed speech removals under loud room sound on 12 further speakers.
-The [document format review](document-formats-2026-11-17.md) records the seven
-local upload formats, including signed Word and ODT verification and exact
+The [document format review](document-formats-2026-11-17.md) records eight
+local upload formats including Rich Text, signed Word and ODT verification and exact
 earlier-wording locations for qualifying ODT documents.
 
 ## Requirements and order
@@ -65,6 +65,12 @@ test cases or rewrite a failure as a pass. Internal predeclared research setting
 are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
+
+- [Two separate edits in one JPEG](image-multiple-edit-replay-2026-11-18.md)
+  adds an independently replayable per-edit measurement for irregular masks.
+  The existing earlier-copy check located 27 of 28 staged edits. The
+  exact-delivery candidate added no locations, and neither method flagged
+  any of 28 unchanged or re-encoded controls.
 
 - [Paired edit-location review](independent-testing.md#compare-exact-edit-coverage-from-two-detectors)
   compares the same held files under two checks and their combined proposals.

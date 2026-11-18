@@ -135,6 +135,57 @@ def test_exact_image_masks_and_rectangles_use_the_same_native_geometry(tmp_path)
         locations.count_locations(manifest, truth, response, mask_directory=tmp_path)
 
 
+def test_image_instances_compare_irregular_masks_with_rectangular_proposals(tmp_path):
+    manifest, receipt = fixture()
+    case = next(row for row in manifest["cases"] if row["modality"] == "image"
+                and row["split"] == "confirmation" and row["label"] == 1)
+    case["localization_truth"] = {"unit": "pixels", "source_units": 24, "target_units": 5}
+
+    def save(name, rows):
+        body = b"P4\n8 3\n" + bytes(rows)
+        (tmp_path / name).write_bytes(body)
+        return {"file": name, "sha256": hashlib.sha256(body).hexdigest()}
+
+    first = save("edit-one.pbm", [0b11000000, 0b10000000, 0])
+    second = save("edit-two.pbm", [0, 0, 0b00000110])
+    same_as_rectangle = save("same-pixels-as-rectangle.pbm", [0b11000000, 0b11000000, 0])
+    row = {"id": case["id"], "input_sha256": case["input_sha256"], "extent": [8, 3],
+           "instance_masks": [first, second]}
+    truth = {"schema": locations.TRUTH_SCHEMA, "manifest_sha256": review.digest(manifest),
+             "split": "confirmation", "cases": [row]}
+    baseline, candidate = (receipt("confirmation", method) for method in ("baseline", "candidate"))
+    next(entry for entry in baseline["predictions"] if entry["id"] == case["id"])["localization"] = {
+        "status": "ok", "regions": [[0, 0, 2, 2]]}
+    proposal = {"status": "ok", "instance_masks": [same_as_rectangle, second, second]}
+    next(entry for entry in candidate["predictions"] if entry["id"] == case["id"])["localization"] = proposal
+    counts = locations.count_locations(manifest, truth, candidate, mask_directory=tmp_path)
+    assert next(entry["localization"] for entry in counts["predictions"] if entry["id"] == case["id"]) == {
+        "status": "ok", "reported_units": 6, "overlap_units": 5}
+
+    def compare():
+        return locations.compare_events(manifest, truth, baseline, candidate, minimum_iou=.70,
+                                        minimum_recall=.85, mask_directory=tmp_path)["strata"][0]
+
+    result = compare()
+    assert result["target_events"] == 2
+    assert result["baseline"]["matched_events"] == 1
+    assert result["candidate"]["matched_events"] == 2
+    assert result["candidate"]["unmatched_proposals"] == 1  # Duplicate detections only match once.
+    assert result["combined"]["reported_events"] == 2  # Same exact pixels across formats form one proposal.
+    assert result["event_transitions"] == {"retained": 1, "baseline_only": 0, "candidate_only": 1,
+                                             "missed_by_both": 0, "ambiguous_match": 0}
+    row["instance_masks"] = [same_as_rectangle, first, second]  # Overlap counts only once in the union.
+    with pytest.raises(ValueError, match="target extent"):
+        compare()
+    row["instance_masks"] = [first, first, second]
+    with pytest.raises(ValueError, match="duplicate annotations"):
+        compare()
+    row["instance_masks"] = [first, second]
+    proposal["instance_masks"] = [save("empty.pbm", [0, 0, 0])]
+    with pytest.raises(ValueError, match="selected pixel"):
+        compare()
+
+
 def test_instance_counts_detect_merged_edits_and_unmatched_proposals():
     manifest, receipt = fixture()
     selected = [case for case in manifest["cases"] if case["modality"] == "audio" and case["split"] == "confirmation"]

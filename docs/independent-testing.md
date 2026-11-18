@@ -3819,9 +3819,17 @@ cmp "$scratch/example/candidate-event-counts.json" "$scratch/event-counts.json"
 The example has two separately annotated adjacent edit ranges per positive
 input. The regular region count still measures their union. The event count
 treats repeated identical proposals as one for matching and counts duplicates
-as unmatched. Inputs represented only by a PBM mask still have a union count.
-For the event count, masks are reported as unavailable instance geometry
-because they do not declare separate edits.
+as unmatched. A single union PBM mask still has a union count. It is reported
+as unavailable instance geometry because it does not declare separate edits.
+
+For irregular image edits, use `instance_masks` in place of `regions` in
+the truth or response. Each member is a `{ "file": "edit-1.pbm", "sha256": "…" }`
+record for a nonempty native-size P4 PBM. Pass `--image-mask-dir` to the
+counter. Use an empty `instance_masks` list for an assessed file with no
+edit or proposal. Use at most 32 masks per reading and 128 million raster
+pixels summed over those masks. The union counts overlapping pixels once.
+Event matching treats an identical rectangle and mask as the same shape
+and keeps distinct, overlapping edits as separate targets.
 
 ### Compare exact edit coverage from two detectors
 
@@ -3866,6 +3874,12 @@ coverage. [Paired replay receipt](evaluation-panels/paired-edit-replay-2026-11-1
 | --- | --- | --- |
 | Mono soundtrack, near-silence and speech-activity checks | 22, 40, and 48 of 120 | 0, 1, and 1 of 264 |
 | Portrait face changes, before and after the shot check | 72, 72, and 72 of 144 | 7, 3, and 7 of 360 |
+
+The [two-edit JPEG replay](image-multiple-edit-replay-2026-11-18.md)
+uses separately committed irregular masks on 42 deliveries. Both readings
+use the earlier PNG. Combining their proposals found the same 27 of 28
+edit locations as the existing check, with 32 unmatched proposals versus
+two for the existing check. No ordinary exports were flagged.
 
 The source archives contain the separate `manifest`, `truth` and `readings`
 objects. For the mono replay, extract the two named readings and run the same

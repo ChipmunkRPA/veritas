@@ -1,0 +1,54 @@
+{
+  "code_sha256": "7f7ca46503a2424bf57cd5001e7309773993840e9da594148939d3c2e6281f1c",
+  "excluded": [
+    {
+      "reason": "annotation_outside_small_edit_scope",
+      "source": "00080"
+    },
+    {
+      "reason": "annotation_outside_small_edit_scope",
+      "source": "00137"
+    },
+    {
+      "reason": "annotation_outside_small_edit_scope",
+      "source": "00059"
+    },
+    {
+      "reason": "annotation_outside_small_edit_scope",
+      "source": "00108"
+    },
+    {
+      "reason": "annotation_outside_small_edit_scope",
+      "source": "00048"
+    },
+    {
+      "reason": "annotation_outside_small_edit_scope",
+      "source": "00004"
+    },
+    {
+      "reason": "annotation_outside_small_edit_scope",
+      "source": "00031"
+    },
+    {
+      "reason": "annotation_outside_small_edit_scope",
+      "source": "00141"
+    },
+    {
+      "reason": "annotation_outside_small_edit_scope",
+      "source": "00147"
+    },
+    {
+      "reason": "annotation_outside_small_edit_scope",
+      "source": "00070"
+    }
+  ],
+  "input_manifest_sha256": "fc6ace74b3eaf6ffdb48aa152db1a0a08adfba8436f3665bfe288935114f01a7",
+  "manifest_sha256": "36d7d688c0b988836cbd825b60c21978da455955b9d2b1a93fa457a49f9a34a4",
+  "match": {
+    "minimum_iou": 0.3,
+    "minimum_recall": 0.5
+  },
+  "schema": "chipmunk.image-multiple-edit-replay/1",
+  "scope": "staged changes under a matched delivery",
+  "truth_sha256": "f658252e4bf639355c957a9478299f942bd8bde4b7b4f7b5161ef7a0ac694546"
+}

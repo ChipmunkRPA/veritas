@@ -1,0 +1,163 @@
+{
+  "application_code": {
+    "app.detectors.image.reference_alignment": "5c2504e09d2f6392dbb4e3948016ceb7b8c592947732a29fe2d8f7d401507428",
+    "app.detectors.image.reference_compare": "e436052ad1a0b70ab29c180be88c72e868ed8f701031c6e1f10cecda5bb47063",
+    "app.detectors.image.reference_exact_jpeg": "04c6390df1c1056daac5a7e5a2edd68bc247f66557bdd0c3256ab3db46a0e00b",
+    "app.evidence.image_reference": "8fcfba8f0797836aa053780faa087af318f67634d7836bdb0992b03dd3e30aec"
+  },
+  "excluded_before_scoring": 10,
+  "freeze_sha256": "b50643b889d6e96ffc9af393d5b00a7a3972e111d106e22a1b62ac3f27f5c5e9",
+  "geometry": {
+    "baseline_sha256": "c265d77ccf9ce1e35cab5e99d69d5cf2e6c0325980ebd308f14b8f6e59436506",
+    "candidate_sha256": "18a4ba11e64e9493565a88d34200c888089940fc74fe897440f103b7041bd429",
+    "manifest_sha256": "36d7d688c0b988836cbd825b60c21978da455955b9d2b1a93fa457a49f9a34a4",
+    "minimum_iou": 0.3,
+    "minimum_recall": 0.5,
+    "schema": "chipmunk.independent-event-comparison/1",
+    "split": "confirmation",
+    "strata": [
+      {
+        "baseline": {
+          "assessed": 14,
+          "complete_positive_inputs": 0,
+          "flagged_inputs": 0,
+          "matched_events": 0,
+          "missed_events": 0,
+          "reported_events": 0,
+          "unassessed": 0,
+          "unmatched_proposals": 0
+        },
+        "candidate": {
+          "assessed": 14,
+          "complete_positive_inputs": 0,
+          "flagged_inputs": 0,
+          "matched_events": 0,
+          "missed_events": 0,
+          "reported_events": 0,
+          "unassessed": 0,
+          "unmatched_proposals": 0
+        },
+        "combined": {
+          "assessed": 14,
+          "complete_positive_inputs": 0,
+          "flagged_inputs": 0,
+          "matched_events": 0,
+          "missed_events": 0,
+          "reported_events": 0,
+          "unassessed": 0,
+          "unmatched_proposals": 0
+        },
+        "condition": "ordinary_second_export",
+        "event_transitions": {
+          "ambiguous_match": 0,
+          "baseline_only": 0,
+          "candidate_only": 0,
+          "missed_by_both": 0,
+          "retained": 0
+        },
+        "label": 0,
+        "modality": "image",
+        "planned": 14,
+        "source_groups": 14,
+        "target_events": 0,
+        "unavailable_instance_geometry": 0
+      },
+      {
+        "baseline": {
+          "assessed": 14,
+          "complete_positive_inputs": 13,
+          "flagged_inputs": 14,
+          "matched_events": 27,
+          "missed_events": 1,
+          "reported_events": 29,
+          "unassessed": 0,
+          "unmatched_proposals": 2
+        },
+        "candidate": {
+          "assessed": 11,
+          "complete_positive_inputs": 10,
+          "flagged_inputs": 11,
+          "matched_events": 21,
+          "missed_events": 7,
+          "reported_events": 30,
+          "unassessed": 3,
+          "unmatched_proposals": 9
+        },
+        "combined": {
+          "assessed": 14,
+          "complete_positive_inputs": 13,
+          "flagged_inputs": 14,
+          "matched_events": 27,
+          "missed_events": 1,
+          "reported_events": 59,
+          "unassessed": 0,
+          "unmatched_proposals": 32
+        },
+        "condition": "two_staged_changes",
+        "event_transitions": {
+          "ambiguous_match": 0,
+          "baseline_only": 6,
+          "candidate_only": 0,
+          "missed_by_both": 1,
+          "retained": 21
+        },
+        "label": 1,
+        "modality": "image",
+        "planned": 14,
+        "source_groups": 14,
+        "target_events": 28,
+        "unavailable_instance_geometry": 0
+      },
+      {
+        "baseline": {
+          "assessed": 14,
+          "complete_positive_inputs": 0,
+          "flagged_inputs": 0,
+          "matched_events": 0,
+          "missed_events": 0,
+          "reported_events": 0,
+          "unassessed": 0,
+          "unmatched_proposals": 0
+        },
+        "candidate": {
+          "assessed": 14,
+          "complete_positive_inputs": 0,
+          "flagged_inputs": 0,
+          "matched_events": 0,
+          "missed_events": 0,
+          "reported_events": 0,
+          "unassessed": 0,
+          "unmatched_proposals": 0
+        },
+        "combined": {
+          "assessed": 14,
+          "complete_positive_inputs": 0,
+          "flagged_inputs": 0,
+          "matched_events": 0,
+          "missed_events": 0,
+          "reported_events": 0,
+          "unassessed": 0,
+          "unmatched_proposals": 0
+        },
+        "condition": "unchanged_export",
+        "event_transitions": {
+          "ambiguous_match": 0,
+          "baseline_only": 0,
+          "candidate_only": 0,
+          "missed_by_both": 0,
+          "retained": 0
+        },
+        "label": 0,
+        "modality": "image",
+        "planned": 14,
+        "source_groups": 14,
+        "target_events": 0,
+        "unavailable_instance_geometry": 0
+      }
+    ],
+    "truth_sha256": "f658252e4bf639355c957a9478299f942bd8bde4b7b4f7b5161ef7a0ac694546"
+  },
+  "planned_files": 42,
+  "schema": "chipmunk.image-multiple-edit-replay/1",
+  "source_groups": 14
+}

@@ -6,6 +6,8 @@ import hashlib
 import re
 from collections import Counter, defaultdict
 from copy import deepcopy
+from dataclasses import dataclass
+from functools import partial
 from itertools import pairwise
 from pathlib import Path
 
@@ -17,7 +19,15 @@ EVENT_COMPARISON_SCHEMA = "chipmunk.independent-event-comparison/1"
 MAX_REGIONS = 256
 MAX_MASK_SIDE = 16_384
 MAX_MASK_PIXELS = 64_000_000
+MAX_INSTANCE_MASKS = 32
+MAX_INSTANCE_PIXELS = 128_000_000
 MASK_FILE = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{0,123}\.pbm")
+LOCATION_FIELDS = ("regions", "mask", "instance_masks")
+
+
+@dataclass(frozen=True)
+class MaskInstances:
+    masks: tuple[tuple[int, ...], ...]
 
 
 def intervals(regions):
@@ -105,28 +115,46 @@ def _mask(value, extent, directory):
 
 
 def _location(row, extent, directory):
+    if "instance_masks" in row:
+        instances = row["instance_masks"]
+        if len(extent) != 2 or directory is None:
+            raise ValueError("Image mask instances need image extent and an explicitly supplied mask directory")
+        if (not isinstance(instances, list) or len(instances) > MAX_INSTANCE_MASKS
+                or max(extent) > MAX_MASK_SIDE or extent[0] * extent[1] > MAX_MASK_PIXELS
+                or len(instances) * extent[0] * extent[1] > MAX_INSTANCE_PIXELS):
+            raise ValueError("Image mask instances exceed their count or aggregate size limit")
+        masks = tuple(_mask(instance, extent, directory) for instance in instances)
+        if any(not any(mask) for mask in masks):
+            raise ValueError("An image mask instance must contain at least one selected pixel")
+        return MaskInstances(masks)
     if "mask" in row:
         return _mask(row["mask"], extent, directory)
     return _regions(row["regions"], extent)
 
 
-def _area(truth, reported, extent):
-    if not isinstance(truth, tuple) and not isinstance(reported, tuple):
-        return measures(truth, reported)
-
-    def packed(location):
-        if isinstance(location, tuple):
-            return location
-        width, height = extent
-        rows = [0] * height
+def _packed(location, extent):
+    if isinstance(location, tuple):
+        return location
+    width, height = extent
+    rows = [0] * height
+    if isinstance(location, MaskInstances):
+        for mask in location.masks:
+            for index, bits in enumerate(mask):
+                rows[index] |= bits
+    else:
         for x0, y0, x1, y1 in location:
             bits = ((1 << (x1 - x0)) - 1) << (width - x1)
-            for row in range(y0, y1):
-                rows[row] |= bits
-        return rows
+            for index in range(y0, y1):
+                rows[index] |= bits
+    return rows
+
+
+def _area(truth, reported, extent):
+    if isinstance(truth, list) and isinstance(reported, list):
+        return measures(truth, reported)
 
     target = detected = intersection = 0
-    for first, second in zip(packed(truth), packed(reported), strict=True):
+    for first, second in zip(_packed(truth, extent), _packed(reported, extent), strict=True):
         target += first.bit_count()
         detected += second.bit_count()
         intersection += (first & second).bit_count()
@@ -141,7 +169,7 @@ def _truth_rows(document, expected, manifest_hash, split):
     rows = {}
     keys = {"id", "input_sha256", "extent"}
     for row in document["cases"]:
-        if (not isinstance(row, dict) or row.keys() not in (keys | {"regions"}, keys | {"mask"})
+        if (not isinstance(row, dict) or not any(row.keys() == keys | {field} for field in LOCATION_FIELDS)
                 or not isinstance(row["id"], str) or row["id"] not in expected or row["id"] in rows):
             raise ValueError("Unexpected or duplicate planned location truth")
         case = expected[row["id"]]
@@ -189,22 +217,22 @@ def _count_locations(manifest, truth, response, mask_directory, *, retain_locati
         truth_row = rows[row["id"]]
         extent = truth_row["extent"]
         reference = _location(truth_row, extent, directory)
-        target_units = (sum(value.bit_count() for value in reference) if isinstance(reference, tuple)
-                        else measures(reference, [])[0])
+        target_units = (measures(reference, [])[0] if isinstance(reference, list)
+                        else sum(value.bit_count() for value in _packed(reference, extent)))
         if target_units != expected[row["id"]]["localization_truth"]["target_units"]:
             raise ValueError("Location truth union differs from the declared target extent")
         if location["status"] != "ok":
             if location.keys() != {"status", "reason"}:
                 raise ValueError("Unassessed locations need a reason without coordinates")
             if collect_events is not None:
-                collect_events(expected[row["id"]], reference, None)
+                collect_events(expected[row["id"]], extent, reference, None)
             continue
-        if location.keys() not in ({"status", "regions"}, {"status", "mask"}):
+        if not any(location.keys() == {"status", field} for field in LOCATION_FIELDS):
             raise ValueError("Measured locations need exact regions or an image mask")
         detected = _location(location, extent, directory)
         _, reported, overlap = _area(reference, detected, extent)
         if collect_events is not None:
-            collect_events(expected[row["id"]], reference, detected)
+            collect_events(expected[row["id"]], extent, reference, detected)
         if retain_locations:
             exact_locations[row["id"]] = (extent, location, directory)
         row["localization"] = {"status": "ok", "reported_units": reported, "overlap_units": overlap}
@@ -217,14 +245,38 @@ def count_locations(manifest, truth, response, *, mask_directory: Path | None = 
     return _count_locations(manifest, truth, response, mask_directory)[0]
 
 
-def _event_assignment(reference, detected, minimum_iou, minimum_recall):
+def _event_overlap(target, proposal):
+    return measures([target], [proposal])
+
+
+def _event_shapes(extent, *readings):
+    if not any(isinstance(reading, MaskInstances) for reading in readings):
+        return _event_overlap, [None if reading is None else list(map(tuple, reading)) for reading in readings]
+
+    width, height = extent
+
+    def packed_instances(reading):
+        if reading is None:
+            return None
+        if isinstance(reading, MaskInstances):
+            return reading.masks
+        masks = []
+        for left, top, right, bottom in reading:
+            bits = ((1 << (right - left)) - 1) << (width - right)
+            masks.append((0,) * top + (bits,) * (bottom - top) + (0,) * (height - bottom))
+        return masks
+
+    return partial(_area, extent=extent), [packed_instances(reading) for reading in readings]
+
+
+def _event_assignment(reference, detected, minimum_iou, minimum_recall, overlap_for=_event_overlap):
     # Eligible pairs form a bipartite graph. Reassign earlier matches when
     # needed so that a broad proposal cannot block two narrower matches.
     edges = []
     for target in reference:
         compatible = []
         for index, proposal in enumerate(detected):
-            target_units, reported_units, overlap = measures([target], [proposal])
+            target_units, reported_units, overlap = overlap_for(target, proposal)
             if overlap / (target_units + reported_units - overlap) >= minimum_iou and overlap / target_units >= minimum_recall:
                 compatible.append(index)
         edges.append(compatible)
@@ -245,8 +297,8 @@ def _event_assignment(reference, detected, minimum_iou, minimum_recall):
     return edges, assigned
 
 
-def _event_membership(reference, proposals, minimum_iou, minimum_recall):
-    edges, assigned = _event_assignment(reference, proposals, minimum_iou, minimum_recall)
+def _event_membership(reference, proposals, minimum_iou, minimum_recall, overlap_for=_event_overlap):
+    edges, assigned = _event_assignment(reference, proposals, minimum_iou, minimum_recall, overlap_for)
     matched = set(assigned.values())
     # Starting at an unmatched target, an alternating path can swap which
     # endpoint is located without changing the maximum number of matches.
@@ -268,7 +320,7 @@ def _event_limits(minimum_iou, minimum_recall):
 
 
 def _unique_events(reference):
-    if len({tuple(event) for event in reference}) != len(reference):
+    if len(set(reference)) != len(reference):
         raise ValueError("Event truth contains identical duplicate annotations")
 
 
@@ -278,7 +330,7 @@ def count_events(manifest, truth, response, *, minimum_iou, minimum_recall, mask
     grouped = defaultdict(Counter)
     groups = defaultdict(set)
 
-    def collect(case, reference, detected):
+    def collect(case, extent, reference, detected):
         stratum = case["modality"], case["condition"], case["label"]
         group = grouped[stratum]
         group["planned"] += 1
@@ -286,14 +338,15 @@ def count_events(manifest, truth, response, *, minimum_iou, minimum_recall, mask
         if isinstance(reference, tuple) or isinstance(detected, tuple):
             group["unavailable_instance_geometry"] += 1
             return
+        overlap_for, (reference, detected) = _event_shapes(extent, reference, detected)
         _unique_events(reference)
         group["target_events"] += len(reference)
         if detected is None:
             group["unassessed"] += 1
             return
         group["assessed"] += 1
-        distinct_proposals = list(dict.fromkeys(map(tuple, detected)))
-        _, assigned = _event_assignment(reference, distinct_proposals, minimum_iou, minimum_recall)
+        distinct_proposals = list(dict.fromkeys(detected))
+        _, assigned = _event_assignment(reference, distinct_proposals, minimum_iou, minimum_recall, overlap_for)
         matched = len(assigned)
         group["reported_events"] += len(detected)
         group["matched_events"] += matched
@@ -315,12 +368,12 @@ def count_events(manifest, truth, response, *, minimum_iou, minimum_recall, mask
             "matching": "maximum one-to-one matches", "strata": strata}
 
 
-def _record_events(counts, reference, reported, minimum_iou, minimum_recall):
+def _record_events(counts, reference, reported, minimum_iou, minimum_recall, overlap_for):
     if reported is None:
         counts["unassessed"] += 1
         return set(), set()
-    proposals = sorted({tuple(item) for item in reported})
-    matches, certain, optional = _event_membership(reference, proposals, minimum_iou, minimum_recall)
+    proposals = sorted(set(reported))
+    matches, certain, optional = _event_membership(reference, proposals, minimum_iou, minimum_recall, overlap_for)
     counts.update(assessed=1, flagged_inputs=bool(reported), reported_events=len(reported), matched_events=matches,
                   unmatched_proposals=len(reported) - matches, complete_positive_inputs=bool(reference) and matches == len(reference))
     return certain, optional
@@ -329,18 +382,14 @@ def _record_events(counts, reference, reported, minimum_iou, minimum_recall):
 def compare_events(manifest, truth, baseline, candidate, *, minimum_iou, minimum_recall, mask_directory: Path | None = None):
     """Compare exact edit coverage, including the union of two sets of proposals."""
     _event_limits(minimum_iou, minimum_recall)
-    prior = {}
-
-    def capture(case, reference, detected):
-        prior[case["id"]] = detected
-
-    _count_locations(manifest, truth, baseline, mask_directory, collect_events=capture)
-    if candidate.get("split") != baseline["split"]:
+    if candidate.get("split") != baseline.get("split"):
         raise ValueError("Both event readings must use the same split")
+    _, prior = _count_locations(manifest, truth, baseline, mask_directory, retain_locations=True)
     strata = defaultdict(lambda: (set(), Counter(), defaultdict(Counter), Counter()))
 
-    def collect(case, reference, detected):
-        earlier = prior[case["id"]]
+    def collect(case, extent, reference, detected):
+        item = prior.get(case["id"])
+        earlier = _location(item[1], extent, item[2]) if item is not None else None
         key = case["modality"], case["condition"], case["label"]
         groups, totals, methods, transitions = strata[key]
         groups.add(case["group"])
@@ -348,14 +397,15 @@ def compare_events(manifest, truth, baseline, candidate, *, minimum_iou, minimum
         if any(isinstance(reading, tuple) for reading in (reference, earlier, detected)):
             totals["unavailable_instance_geometry"] += 1
             return
+        overlap_for, (reference, earlier, detected) = _event_shapes(extent, reference, earlier, detected)
         _unique_events(reference)
         totals["target_events"] += len(reference)
-        before, before_optional = _record_events(methods["baseline"], reference, earlier, minimum_iou, minimum_recall)
-        after, after_optional = _record_events(methods["candidate"], reference, detected, minimum_iou, minimum_recall)
+        before, before_optional = _record_events(methods["baseline"], reference, earlier, minimum_iou, minimum_recall, overlap_for)
+        after, after_optional = _record_events(methods["candidate"], reference, detected, minimum_iou, minimum_recall, overlap_for)
         combined = None
         if earlier is not None or detected is not None:
-            combined = sorted({tuple(item) for item in (*(earlier or []), *(detected or []))})
-        _record_events(methods["combined"], reference, combined, minimum_iou, minimum_recall)
+            combined = sorted({*(earlier or []), *(detected or [])})
+        _record_events(methods["combined"], reference, combined, minimum_iou, minimum_recall, overlap_for)
         uncertain = before_optional | after_optional
         transitions.update(ambiguous_match=len(uncertain), retained=len((before & after) - uncertain),
                            baseline_only=len((before - after) - uncertain), candidate_only=len((after - before) - uncertain),

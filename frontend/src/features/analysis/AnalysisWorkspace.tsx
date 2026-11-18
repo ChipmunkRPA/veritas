@@ -35,7 +35,7 @@ import WholeImageReview from './WholeImageReview'
 import ProgressRail from './ProgressRail'
 import CancelAnalysis from './CancelAnalysis'
 import CustodianHashNotice from '../cases/CustodianHashNotice'
-import ProvenancePanel from './ProvenancePanel'
+import ProvenancePanel, { PlainContentCredentials } from './ProvenancePanel'
 import TechnicalAppendix from './TechnicalAppendix'
 import MethodsPanel from './MethodsPanel'
 import ExportDialog from '../reports/ExportDialog'
@@ -283,6 +283,7 @@ export default function AnalysisWorkspace() {
           onExpert={view === 'plain' ? () => chooseView('expert') : undefined} imageComparisonAvailable={imageComparisonAvailable}
           extra={a.kind === 'document' && r?.stats ? <DocumentShare stats={r.stats} estimate={a.decision && a.decision.code !== 'not_assessable' ? estimateOf(a.decision) : null} /> : undefined} />
         : <section id="section-summary" className="scroll-mt-14 border-b border-border pb-8"><SkeletonRows /></section>}
+      {view === 'plain' && <PlainContentCredentials analysis={a} exhibits={exhibits.data ?? []} runs={runs.data ?? []} />}
       {expertInvitation}
       {view === 'plain' && (
         <section data-testid="plain-more" aria-labelledby="plain-more-heading" className="border-t border-border pt-8">

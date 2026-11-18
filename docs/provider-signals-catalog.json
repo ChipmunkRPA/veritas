@@ -1,6 +1,6 @@
 {
   "schema": "provider-signals/1",
-  "reviewed_utc": "2026-11-08",
+  "reviewed_utc": "2026-11-18",
   "provider_families": 82,
   "purpose": "Research and implementation inventory; never uploaded-file evidence or a guarantee of universal provider coverage.",
   "coverage_warning": "All four modalities are recorded for every provider, including gaps. A documented signal is not equivalent to a locally verified detector or complete product coverage. This is a curated provider-family inventory, not an exhaustive market census. Provider verification scores and watermark-family hits are distinct from trusted documentary declarations.",
@@ -13,7 +13,7 @@
       "MP3",
       "FLAC"
     ],
-    "local_document_c2pa": "not integrated; plain text has no file credentials, and supported structured document metadata remains unverified",
+    "local_document_c2pa": "Optional whole-document validation on supported PDFs. Plain and pasted text have no file credential.",
     "public_audioseal": "isolated authored-signal evaluation completed; not admitted to serving or confidence",
     "unchanged": "Statistical calibrations, model weights, prepayment requirement and cloud deployment.",
     "public_visual_wam": "isolated authored image/video contract completed; not admitted to serving, AI confidence or early stopping",
@@ -63,8 +63,8 @@
           "source_urls": [
             "https://developers.openai.com/api/docs/guides/content-provenance"
           ],
-          "limitations": "Local C2PA only when present, supported, trusted, asset-bound and explicitly declaring AI; no provider-wide compatibility claim.",
-          "runtime_status": "generic_local_path_only",
+          "limitations": "Three current signed images passed local trust, active-file binding and AI declaration checks. An older CAI image has an expired certificate and no active AI declaration. Verify each original.",
+          "runtime_status": "local C2PA gate verified on three pinned public images",
           "automated_shortcut": "only_after_all_local_credential_requirements"
         },
         {
@@ -116,7 +116,7 @@
             "https://openai.com/index/creating-with-sora-safely/",
             "https://deploymentsafety.openai.com/sora-2/provenance-and-transparency-initiatives"
           ],
-          "limitations": "System cards describe video credentials. The current safety page says the Sora product became unavailable on 2026-04-26. Historical files may still carry verifiable credentials. Actual trust, AI declaration and current-file binding are required; no genuine provider fixture was qualified.",
+          "limitations": "Historical Sora exports can contain a signed AI declaration. The checked CAI video matches the declared asset hash but its certificate is expired and untrusted in our snapshot. No general current Sora export coverage.",
           "runtime_status": "generic_local_path_only",
           "automated_shortcut": "only_after_all_local_credential_requirements",
           "availability": "historical"
@@ -153,6 +153,20 @@
           "automated_shortcut": "disabled",
           "availability": "historical",
           "container_scope": "Sora video and its sound; no separate audio-file verifier inferred"
+        },
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "text"
+          ],
+          "product_scope": "Supported ChatGPT and Responses API PDF exports",
+          "verification_route": "local_c2pa",
+          "source_urls": [
+            "https://developers.openai.com/api/docs/guides/content-provenance"
+          ],
+          "limitations": "Some supported exports are re-deliveries of unchanged PDFs, so OpenAI processing alone does not imply AI authorship. The opt-in check requires an explicit AI declaration and whole-document binding; verified for one pinned public file.",
+          "runtime_status": "optional whole-document PDF path verified on a pinned public PDF",
+          "automated_shortcut": "only_after_all_local_credential_requirements"
         }
       ],
       "review_status": "scoped_documentation",
@@ -162,7 +176,7 @@
         "audio": "scoped_signal_documented",
         "text": "scoped_signal_documented"
       },
-      "reviewed_utc": "2026-11-08",
+      "reviewed_utc": "2026-11-18",
       "search_queries": [
         "site:developers.openai.com C2PA watermark image video Sora",
         "site:platform.openai.com watermark audio text",
@@ -196,13 +210,13 @@
           "modalities": [
             "image"
           ],
-          "product_scope": "Supported Claude-generated image files such as PNG/JPEG/SVG",
+          "product_scope": "Supported Claude-generated or processed files such as PNG/JPEG/SVG",
           "verification_route": "local_c2pa",
           "source_urls": [
             "https://www.anthropic.com/news/claude-text-watermark",
-            "https://www.anthropic.com/news/claude-text-watermark?gsid=c8c05ab2-f266-425f-8453-12ae96c34905"
+            "https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool"
           ],
-          "limitations": "A credential says Claude made or processed a file, not authorship of every pixel. This image-file example does not establish a document-format or text-watermark decoder.",
+          "limitations": "Two public Files API examples carry a valid signature and document delivery through Claude, with no explicit AI source declaration and no trusted chain under our bundled lists. Handling a file can produce a credential.",
           "runtime_status": "generic_local_path_only",
           "automated_shortcut": "only_after_all_local_credential_requirements"
         }
@@ -214,7 +228,7 @@
         "audio": "not_established_by_this_review",
         "text": "scoped_signal_documented"
       },
-      "reviewed_utc": "2026-11-08",
+      "reviewed_utc": "2026-11-18",
       "search_queries": [
         "site:support.anthropic.com Claude watermark hidden text spaces",
         "site:anthropic.com Claude text watermark hidden characters detection"
@@ -283,9 +297,9 @@
           "source_urls": [
             "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/content-credentials"
           ],
-          "limitations": "Only the listed products/versions and supported containers. General mention of documents/audio and Lyria in the model list does not establish a tested standalone audio/document export. Signer identity, AI declaration, trust and exact asset binding must all validate; a Google name is insufficient.",
-          "runtime_status": "not_integrated",
-          "automated_shortcut": "disabled"
+          "limitations": "Listed product versions only. Two pinned Gemini JPEG files passed the production C2PA gate with Google Media Processing Services as signer. No hosted Veo video or standalone audio credential was verified in this file review.",
+          "runtime_status": "local C2PA gate verified on two pinned public Gemini images",
+          "automated_shortcut": "only_after_all_local_credential_requirements"
         },
         {
           "kind": "provider_classifier",
@@ -312,7 +326,7 @@
         "audio": "scoped_signal_documented",
         "text": "scoped_signal_documented"
       },
-      "reviewed_utc": "2026-11-08",
+      "reviewed_utc": "2026-11-18",
       "search_queries": [
         "site:deepmind.google SynthID detector verifier watermark text image audio video access",
         "watermark detection verify image video audio API SynthID [domains: docs.cloud.google.com, cloud.google.com, ai.google.dev]",
@@ -336,7 +350,7 @@
             "https://ai.meta.com/blog/introducing-muse-image-muse-video-msl/",
             "https://www.meta.ai/identification/"
           ],
-          "limitations": "Official Muse Image announcement links an identification portal. Its upload UI accepts image/video/audio, but that does not establish Muse Video/audio watermark verification or a public API. Public research weights do not establish Muse production compatibility; no files were submitted.",
+          "limitations": "Official Muse Image announcement links the identification portal. Two blog previews contained no C2PA. The invisible Content Seal watermark is a separate signal; the file replay did not exercise the portal. Public research weights do not establish Muse production compatibility.",
           "runtime_status": "not_integrated",
           "automated_shortcut": "disabled",
           "portal": "https://www.meta.ai/identification/"
@@ -385,7 +399,7 @@
         "audio": "scoped_signal_documented",
         "text": "scoped_signal_documented"
       },
-      "reviewed_utc": "2026-11-08",
+      "reviewed_utc": "2026-11-18",
       "search_queries": [
         "https://facebookresearch.github.io/content-seal/",
         "https://github.com/facebookresearch/content-seal",
@@ -407,14 +421,13 @@
           "source_urls": [
             "https://docs.x.ai/developers/advanced-api-usage/watermarking"
           ],
-          "limitations": "Keyed token-choice signal; detection access is by application and can return uncertain. No extra hidden characters. Supported model/team/date settings matter. Copied x-watermark headers cannot authenticate uploaded text.",
+          "limitations": "Opt-in keyed SynthID Text on eligible text APIs. Access to verification is by application and a result can be uncertain. The response header describes the original API request and cannot authenticate an uploaded passage.",
           "runtime_status": "not_integrated",
           "automated_shortcut": "disabled",
           "generation_controls": {
-            "documented_start_date": "2026-11-07",
-            "default": "on for the listed supported models",
-            "team_opt_out": "per model; locked-model exceptions exist",
-            "transport_indicator": "x-watermark response header; not an uploaded-passage signature"
+            "documentation_updated": "2026-11-13",
+            "default": "off for the listed text models",
+            "transport_indicator": "x-watermark on the generation response"
           }
         },
         {
@@ -428,8 +441,23 @@
           "source_urls": [
             "https://docs.x.ai/grok/faq"
           ],
-          "limitations": "Visible marks can be copied, removed or cropped; no early stop from a logo.",
+          "limitations": "Visible marks are a visual clue only. Two public Grok Imagine MP4 previews contained no embedded C2PA; their status does not establish the state of native exports.",
           "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "provider_watermark",
+          "modalities": [
+            "audio"
+          ],
+          "product_scope": "Grok Voice API text-to-speech and speech-to-speech",
+          "verification_route": "public_reference_code",
+          "source_urls": [
+            "https://docs.x.ai/developers/advanced-api-usage/watermarking",
+            "https://github.com/facebookresearch/audioseal"
+          ],
+          "limitations": "Provider documents AudioSeal by default for these audio APIs. The generation response header describes the request. Public weights can test the watermark family, while a family match cannot identify xAI as the origin. Native marked outputs and unmarked controls are needed to verify deployment compatibility.",
+          "runtime_status": "public AudioSeal baseline evaluated in isolation; Grok-specific compatibility unqualified",
           "automated_shortcut": "disabled"
         }
       ],
@@ -437,10 +465,10 @@
       "modality_review": {
         "image": "scoped_signal_documented",
         "video": "scoped_signal_documented",
-        "audio": "not_established_by_this_review",
+        "audio": "scoped_signal_documented",
         "text": "scoped_signal_documented"
       },
-      "reviewed_utc": "2026-11-08",
+      "reviewed_utc": "2026-11-18",
       "search_queries": [
         "site:x.ai Grok imagine watermark C2PA metadata",
         "https://docs.x.ai/developers/advanced-api-usage/watermarking",
@@ -544,7 +572,7 @@
             "https://docs.aws.amazon.com/nova/latest/userguide/image-generation.html",
             "https://docs.aws.amazon.com/ai/responsible-ai/nova-reel/overview.html"
           ],
-          "limitations": "Current product/service-card documentation describes invisible marks. No compatible local production decoder, qualified response or general Bedrock coverage is established.",
+          "limitations": "Service cards describe invisible marks. AWS now lists Nova Canvas as retired. No compatible local production decoder, qualified response or general Bedrock coverage is established.",
           "runtime_status": "not_integrated",
           "automated_shortcut": "disabled"
         },
@@ -575,6 +603,22 @@
           "limitations": "The service card explicitly documents video Content Credentials for version 1.1. Exact supported-file trust, binding and AI declaration must validate; no genuine provider fixture was qualified. This does not establish every Nova video version or speech credential.",
           "runtime_status": "not_integrated",
           "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "image"
+          ],
+          "product_scope": "Historical Amazon Nova Canvas image outputs",
+          "verification_route": "local_c2pa",
+          "source_urls": [
+            "https://docs.aws.amazon.com/ai/responsible-ai/nova-canvas/overview.html",
+            "https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-canvas.html"
+          ],
+          "limitations": "AWS documents C2PA on retained Nova Canvas images. The Bedrock model card records end of life on September 30, 2026. No original from this scope was replayed.",
+          "runtime_status": "generic local C2PA path only",
+          "automated_shortcut": "only_after_all_local_credential_requirements",
+          "availability": "historical"
         }
       ],
       "review_status": "scoped_documentation",
@@ -584,7 +628,7 @@
         "audio": "scoped_signal_documented",
         "text": "scoped_signal_documented"
       },
-      "reviewed_utc": "2026-11-08",
+      "reviewed_utc": "2026-11-18",
       "search_queries": [
         "site:docs.aws.amazon.com nova watermark detection C2PA"
       ]
@@ -603,7 +647,7 @@
           "source_urls": [
             "https://helpx.adobe.com/firefly/web/get-started/learn-the-basics/content-credentials-overview.html"
           ],
-          "limitations": "Some credentials describe capture or ordinary editing. Require explicit AI source type plus trusted byte binding; do not extend this image-specific page to all partner media.",
+          "limitations": "The pinned CAI Firefly example contains a matching AI declaration trusted under the legacy CAI list only. It continues detection under the official bundled trust list. Verify the actual export and its signer.",
           "runtime_status": "generic_local_path_only",
           "automated_shortcut": "only_after_all_local_credential_requirements"
         },
@@ -631,7 +675,7 @@
         "audio": "scoped_signal_documented",
         "text": "not_established_by_this_review"
       },
-      "reviewed_utc": "2026-11-08",
+      "reviewed_utc": "2026-11-18",
       "search_queries": [
         "site:helpx.adobe.com firefly video audio Content Credentials automatically"
       ]
@@ -1110,9 +1154,10 @@
           "product_scope": "Platform-generated content labeling terms",
           "verification_route": "metadata_reader",
           "source_urls": [
-            "https://cdn.deepseek.com/policies/zh-CN/deepseek-terms-of-use.html"
+            "https://cdn.deepseek.com/policies/zh-CN/deepseek-terms-of-use.html",
+            "https://cdn.deepseek.com/policies/en-US/model-algorithm-disclosure.html"
           ],
-          "limitations": "Terms are not a public production detector/key specification. No universal copied-text spacing mark established; unsigned fields cannot authenticate origin.",
+          "limitations": "Provider describes generated-content labels, including visible disclosures on its official service. No verified production C2PA, public text watermark key, or whitespace decoder was established.",
           "runtime_status": "generic_unverified_metadata_path_only",
           "automated_shortcut": "disabled"
         }
@@ -1124,7 +1169,7 @@
         "audio": "not_established_by_this_review",
         "text": "scoped_signal_documented"
       },
-      "reviewed_utc": "2026-11-08",
+      "reviewed_utc": "2026-11-18",
       "search_queries": [
         "site:deepseek.com watermark 标识 隐式 生成 内容"
       ]
@@ -1176,6 +1221,20 @@
               "PropagateID"
             ]
           }
+        },
+        {
+          "kind": "structured_label",
+          "modalities": [
+            "image"
+          ],
+          "product_scope": "Alibaba Cloud Guardrails implicit AIGC image identifiers",
+          "verification_route": "authenticated_api",
+          "source_urls": [
+            "https://help.aliyun.com/en/document_detail/2979119.html"
+          ],
+          "limitations": "The vendor API reports implicit AIGC metadata separately from statistical image traces. It requires enabled Cloud moderation; it is not a universal origin verifier or a signed default for every Qwen/Wan output. A researcher-labeled Qwen PNG had no embedded C2PA.",
+          "runtime_status": "not_integrated",
+          "automated_shortcut": "disabled"
         }
       ],
       "review_status": "scoped_documentation",
@@ -1185,7 +1244,7 @@
         "audio": "scoped_signal_documented",
         "text": "not_established_by_this_review"
       },
-      "reviewed_utc": "2026-11-08",
+      "reviewed_utc": "2026-11-18",
       "search_queries": [
         "Qwen Wan TTS watermark add_watermark implicit 元数据 [domains: help.aliyun.com, alibabacloud.com, qwen.ai]",
         "\"enable_aigc_tag\" \"qwen\" \"watermark\" [domains: alibabacloud.com, help.aliyun.com]"
@@ -1317,13 +1376,14 @@
             "video",
             "audio"
           ],
-          "product_scope": "Supported CapCut-family media credentials checked by the public preview",
+          "product_scope": "Named CapCut-family media including Dreamina Seedance 2.5 and Dola Seedream 5.0 Pro rollout",
           "verification_route": "local_c2pa",
           "source_urls": [
             "https://ai-generated-detect.capcut.com/",
-            "https://www.capcut.com/resource/ai-image-detector-guide"
+            "https://www.capcut.com/resource/ai-image-detector-guide",
+            "https://www.capcut.com/newsroom/giving-creators-more-control-with-dreamina-seedance-2-5-and-dola-seedream-5-0-pro"
           ],
-          "limitations": "The provider describes C2PA alongside invisible watermarks. This is not proof every app, export or listed format has a credential. Generic supported local validation is available; actual provider fixtures remain unqualified.",
+          "limitations": "CapCut describes C2PA, invisible marks and visible labels for these hosted tools. The separate public media portal handles scoped exports. Native signed samples were not replayed; this does not extend to every Doubao, TikTok, or ByteDance API output.",
           "runtime_status": "not_integrated",
           "automated_shortcut": "disabled"
         },
@@ -1349,7 +1409,7 @@
         "audio": "scoped_signal_documented",
         "text": "not_established_by_this_review"
       },
-      "reviewed_utc": "2026-11-08",
+      "reviewed_utc": "2026-11-18",
       "search_queries": [
         "site:capcut.com AI generated content invisible watermark metadata"
       ]
@@ -1574,6 +1634,20 @@
           "limitations": "Paid generation can omit visible mark. No general hidden-verification contract established from this source.",
           "runtime_status": "not_integrated",
           "automated_shortcut": "disabled"
+        },
+        {
+          "kind": "signed_credentials",
+          "modalities": [
+            "video"
+          ],
+          "product_scope": "Runway Dev API video outputs",
+          "verification_route": "local_c2pa",
+          "source_urls": [
+            "https://dev.runwayml.com/learn/generate-ugc-videos"
+          ],
+          "limitations": "Runway documents signed AI declarations in native output and says generation can succeed if signing fails. Two re-encoded page previews contain no embedded credential; a signed native export remains unverified.",
+          "runtime_status": "generic local C2PA path; no credential-bearing Runway fixture verified",
+          "automated_shortcut": "only_after_all_local_credential_requirements"
         }
       ],
       "review_status": "scoped_documentation",
@@ -1583,7 +1657,7 @@
         "audio": "not_established_by_this_review",
         "text": "not_established_by_this_review"
       },
-      "reviewed_utc": "2026-11-07"
+      "reviewed_utc": "2026-11-18"
     },
     {
       "id": "pika",
@@ -3495,6 +3569,12 @@
       "provider_families": 71,
       "signal_records": 101,
       "note": "Snapshot before the additional audio, mobile-device and regional-provider sweep."
+    },
+    {
+      "reviewed_utc": "2026-11-08",
+      "provider_families": 82,
+      "signal_records": 105,
+      "note": "Additional provider- and modality-focused primary-source sweep: eleven new families, Deepgram Flux TTS public checker, Sarvam video-only overlay, vivo notices and Tencent image/media/document metadata queries. No new external verifier qualified or enabled."
     }
   ],
   "supplemental_review": "provider-signal-review-2026-11-08.md",
@@ -3622,14 +3702,14 @@
     "early_stop_enabled": false
   },
   "latest_search": {
-    "date": "2026-11-08",
-    "report": "provider-signal-followup-2026-11-08.md",
+    "date": "2026-11-18",
+    "report": "public-content-credentials-2026-11-17.md",
     "families": 82,
-    "scoped_records": 105,
+    "scoped_records": 110,
     "families_with_no_scoped_specification": 28,
     "provider_verification_requests": 0,
     "customer_uploads": 0,
     "external_customer_routes_enabled": 0,
-    "scope": "Additional provider- and modality-focused primary-source sweep: eleven new families, Deepgram Flux TTS public checker, Sarvam video-only overlay, vivo notices and Tencent image/media/document metadata queries. No new external verifier qualified or enabled."
+    "scope": "Public files replayed with the local gate, plus updated primary documentation for image, video, speech and writing. Individual review dates identify the rows revisited."
   }
 }

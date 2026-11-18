@@ -141,9 +141,9 @@ export const SPECIMEN_TREE = table('Metadata tree', ['group', 'tag', 'value', 's
 ], 'Specimen tree: synthetic fields and severities.')
 
 export const SPECIMEN_CREDENTIALS = table('C2PA Content Credentials', ['field', 'value'], [
-  ['state', 'valid'], ['signer', 'Specimen Signer Inc.'], ['issuer', 'Specimen CA'], ['signed at', '2026-08-22T09:10:00Z'],
+  ['state', 'trusted'], ['signer', 'Specimen Signer Inc.'], ['issuer', 'Specimen CA'], ['signed at', '2026-08-22T09:10:00Z'],
   ['claim generator', 'Specimen Generator 1.0'], ['actions', 'c2pa.created, c2pa.cropped'], ['digital source types', 'trainedAlgorithmicMedia (current)'],
-  ['hash binding', 'matches the current bytes'],
+  ['hash binding', 'matches the current file bytes'],
 ])
 
 export const SPECIMEN_CHAIN = table('C2PA ingredient chain', ['depth', 'title', 'relationship', 'format', 'signer', 'digital source types', 'recorded validation failures', 'manifest'], [

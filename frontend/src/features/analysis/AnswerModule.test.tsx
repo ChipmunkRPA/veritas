@@ -7,6 +7,7 @@ import type { AnalysisDetail, Finding } from '../../lib/api/queries'
 import AnswerModule from './AnswerModule'
 import { invalidSentence } from './answer'
 import { customerAssessment } from './customerAssessment'
+import { C2paChain } from './ProvenancePanel'
 import { c2paState, c2paWords } from './provenance'
 
 afterEach(cleanup)
@@ -20,6 +21,23 @@ const wholeSignals = [{ id: 'whole:global', family: 'learned-whole-image', hypot
 const contributions = [{ kind: 'detector', signal_id: 'whole:global', counted: true, logit: 1 }]
 
 describe('automated customer conclusion', () => {
+  it('identifies the signer of a bound declaration without attributing a generation action to the signing software', () => {
+    const credentials = new Map([
+      ['signer', 'Example Media Signing Services'], ['claim generator', 'Example Packaging Service'],
+      ['digital source types', 'trainedAlgorithmicMedia (ai)'], ['actions', 'c2pa.opened, c2pa.resized'],
+      ['hash binding', 'matches the current file bytes'],
+    ])
+    const { rerender } = render(<C2paChain state="trusted" checked credentials={credentials} chain={[]} />)
+    expect(screen.getByText('Verified signer: Example Media Signing Services')).toBeTruthy()
+    expect(screen.getByText('The signed record declares AI involvement in this file.')).toBeTruthy()
+    rerender(<C2paChain state="invalid" checked credentials={credentials} chain={[]} />)
+    expect(screen.queryByText(/Verified signer/)).toBeNull()
+    expect(screen.getByText('Signer named in the record: Example Media Signing Services')).toBeTruthy()
+    credentials.set('hash binding', 'not verified for the current file bytes')
+    rerender(<C2paChain state="trusted" checked credentials={credentials} chain={[]} />)
+    expect(screen.queryByText(/Verified signer/)).toBeNull()
+    expect(screen.queryByText('Documentary')).toBeNull()
+  })
   it('explains invalid audio credentials without inferring changed content', () => {
     const finding = { id: 'F1', title: 'Content Credentials that do not validate', family: 'F1_provenance', strength: 'strong', direction: 'for', rank: 1,
       evidence_ids: ['prov.c2pa.audio:global'] } as unknown as Finding

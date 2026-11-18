@@ -1,14 +1,14 @@
 # Provider signals and the provenance-first gate
 
-Updated 8 November 2026. The [machine-readable catalog](provider-signals-catalog.json)
-covers **82 provider families**, all four modality fields, **105 scoped signal
+Updated 17 November 2026 (Pacific time). The [machine-readable catalog](provider-signals-catalog.json)
+covers **82 provider families**, all four modality fields, **110 scoped signal
 records**, primary-source URLs, verification routes and explicit gaps.
 Fifty-four families have scoped documentation, including announcements or
 policies with unresolved export scope; twenty-eight remain review gaps.
 These numbers count research records, not working detectors.
 This is a broader inventory, not a claim to decode every provider or every export.
 The [four-modality matrix](provider-signal-matrix.md) and
-[latest broader search](provider-signal-followup-2026-11-08.md) distinguish current
+[latest public-file review](public-content-credentials-2026-11-17.md) distinguish current
 marking documentation, future commitments and missing verification routes.
 Individual provider rows retain their actual review dates.
 
@@ -68,13 +68,13 @@ carry zero authorship weight and cannot trigger the fast gate.
 
 | Provider family | Collected signals and verification route | Important qualification |
 |---|---|---|
-| OpenAI / ChatGPT / Sora | [Image C2PA; image/audio SynthID; Content Provenance API; restricted text access](https://developers.openai.com/api/docs/guides/content-provenance); [historical Sora video credentials and marks](https://openai.com/index/creating-with-sora-safely/) | The documented endpoint covers images/audio, not a universal Sora video detector. Historical Sora credentials remain worth inspecting on retained files; internal tracing is not a public decoder. |
-| Anthropic / Claude | [Keyed token-choice watermark](https://www.anthropic.com/news/claude-text-watermark); [supported image-file credentials](https://www.anthropic.com/news/claude-text-watermark?gsid=c8c05ab2-f266-425f-8453-12ae96c34905) | No hidden characters. Private-preview text access differs from ordinary local credential validation. |
-| Google / Gemini / Imagen / Veo / Lyria / NotebookLM | [SynthID for supported image, video, audio and text; public verification portal](https://deepmind.google/models/synthid/) | Public text reference code does not contain the production Gemini key. |
+| OpenAI / ChatGPT / Sora | [Image/PDF C2PA, image/audio SynthID and Content Provenance API](https://developers.openai.com/api/docs/guides/content-provenance), [restricted text access](https://openai.com/index/eu-text-provenance/), [historical Sora video credentials](https://openai.com/index/creating-with-sora-safely/) | Three current OpenAI images and one PDF passed the trusted local gate. The archived Sora certificate expired. A signed record of PDF processing can also cover an unchanged file. |
+| Anthropic / Claude | [Keyed token-choice watermark and supported file credentials](https://www.anthropic.com/news/claude-text-watermark) | Two public files have signed delivery records. Neither explicitly declares AI origin. Text verification is in private preview. |
+| Google / Gemini / Imagen / Veo / Lyria / NotebookLM | [SynthID for supported image, video, audio and text](https://deepmind.google/models/synthid/), [hosted image and video Content Credentials](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/content-credentials) | Two public Gemini images passed the trusted local gate. The public text reference uses its own configuration. |
 | Meta / Muse | [Custom Muse Image marking and public Content Seal research schemes](https://github.com/facebookresearch/content-seal) | Public AudioSeal/image/video/text research implementations do not automatically match Muse production. |
-| xAI / Grok | [Supported API text watermark and access-controlled verifier](https://docs.x.ai/developers/advanced-api-usage/watermarking); [visible image/video marks](https://docs.x.ai/grok/faq) | A copied response header or logo is not file authentication. |
+| xAI / Grok | [Opt-in API text watermark, restricted text verification, and AudioSeal on voice API output](https://docs.x.ai/developers/advanced-api-usage/watermarking), [visible image/video marks](https://docs.x.ai/grok/faq) | Two Imagine previews lacked embedded credentials. AudioSeal family detection alone does not attribute the file to Grok. |
 | Microsoft / Azure / Copilot | [Selected hosted C2PA and invisible marks](https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/content-safety/provenance-disclosure); [verification API](https://learn.microsoft.com/en-us/azure/ai-services/content-safety/how-to/how-to-provenance-detection) | Resource/Entra access is required; product availability varies. Indexed GPT request controls remain unresolved by the retrieved page. |
-| Amazon / Nova / Bedrock | [Sonic speech marks and selected Claude text marks](https://docs.aws.amazon.com/en_en/bedrock/latest/userguide/watermarking.html); [Reel 1.1 video credentials and watermark](https://docs.aws.amazon.com/ai/responsible-ai/nova-reel/overview.html) | Sonic verification requires AWS contact. Actual provider fixtures/verifiers remain unqualified. Transcripts are not marked by Sonic. |
+| Amazon / Nova / Bedrock | [Sonic speech and selected Claude text marks](https://docs.aws.amazon.com/en_en/bedrock/latest/userguide/watermarking.html), [Reel 1.1 video credentials](https://docs.aws.amazon.com/ai/responsible-ai/nova-reel/overview.html), [historical Canvas image credentials](https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-canvas.html) | Sonic verification requires AWS access through its account team. The speech watermark does not cover transcripts. |
 | Adobe / Firefly | [Image credentials](https://helpx.adobe.com/firefly/web/get-started/learn-the-basics/content-credentials-overview.html); [Translate Audio/Video credentials](https://helpx.adobe.com/firefly/web/work-with-audio-and-video/work-with-audio/about-translate-audio-and-translate-video.html) | The audio/video workflow describes AI voices, translation and lip edits. This does not establish whole-file synthesis or every partner product. |
 | Stability AI | [Current hosted image/video/audio C2PA](https://kb.stability.ai/knowledge-base/content-credentials-c2pa-faq); legacy SDXL reference marker | Current hosted FAQ says C2PA rather than invisible marks. Legacy pipelines and self-hosted open weights have different behavior. |
 | Black Forest Labs / FLUX | [Service credential terms](https://bfl.ai/legal/developer-terms-of-service) and selected Azure-hosted FLUX provenance | Does not establish every checkpoint/export. |
@@ -92,7 +92,7 @@ carry zero authorship weight and cannot trigger the fast gate.
 | Kuaishou / Kling | [Invisible image/video marks and detection portal](https://kling.ai/docs/ai-content-detection) | No compatible local public decoder or tested API contract established. |
 | Synthesia | [Automatic C2PA and separate visible video notices](https://help.synthesia.io/en/articles/17634791-how-do-i-add-an-ai-label-to-my-videos) | Editor, API and dubbed visible-label behavior differs; actual credentials still need validation. |
 | HeyGen | [Default/removable video logos](https://help.heygen.com/en/articles/11057301-how-to-remove-the-heygen-watermark) | Paid workflow may omit the logo. |
-| Runway | [Free-plan video watermark](https://help.runwayml.com/hc/en-us/articles/50404627334547-Free-plan-details) | Paid exports may be unmarked. |
+| Runway | [Signed C2PA in native Runway Dev outputs](https://dev.runwayml.com/learn/generate-ugc-videos), [free-plan video watermark](https://help.runwayml.com/hc/en-us/articles/50404627334547-Free-plan-details) | Two documented re-encoded previews had no embedded credentials. A successfully signed native export is required. |
 | Pika | [Current support says exports have no watermark](https://pika.art/support) | Older FAQ differs; do not assume marks survive across plans/dates. |
 | Moonshot / Kimi | [Explicit notices and implicit metadata rules](https://www.kimi.com/user/agreement/modelUse?version=v2) | Platform terms are not a public decoder/key or proof of all self-hosted output. |
 | NVIDIA | [Hosted Cosmos3 Nano visual SynthID](https://build.nvidia.com/nvidia/cosmos3-nano/modelcard) | Named hosted image/video generation; no automatic audio, text, numeric-action or downloadable-checkpoint coverage. |
@@ -171,18 +171,16 @@ stripped credentials cannot activate the gate. These are locally authored
 declarations under a test authority, not genuine provider fixtures or a detector
 accuracy benchmark. The test authority is never added to production trust.
 
-Next priority is qualifying real-provider fixtures for Suno/Bria/Cartesia and the
-available public watermark schemes, then integrating supported routes with
-clear scope and data handling. Restricted production text verification, Muse
-compatibility and the twenty-eight review gaps remain open. No new weights,
-statistical calibration, public confidence threshold or GCP deployment was
-introduced by this inventory.
+The [public-file replay](public-content-credentials-2026-11-17.md) now verifies
+the local gate on six exact public files from Google and OpenAI. Qualifying
+native signed video and audio from additional providers, production text
+verification, and Muse watermark compatibility remain open.
 
 The [LTX public marking contract](ltx-marking-audio-v1-result.md) adds two
 scoped audio/video records. At that stage, the inventory had 67 families/98 records;
 the initial [follow-up search](provider-signal-followup-2026-11-08.md) expanded it
 to 71 families/101 records. The additional speech/mobile/regional sweep now
-records 82 families/105 records, including Deepgram's public speech checker,
+recorded 82 families/105 records, including Deepgram's public speech checker,
 Sarvam's video-only overlay, vivo notices and Tencent metadata-query scopes.
 Its audio code runs locally with exact compatible cached weights; generic
 presence, public-payload recovery and origin authentication remain separate.

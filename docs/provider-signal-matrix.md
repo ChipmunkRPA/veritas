@@ -1,24 +1,24 @@
 # Provider marking coverage matrix
 
-Inventory updated 2026-11-08: **82 families, 105 scoped records**, with **28 families remaining explicit review gaps**.
+Inventory updated 2026-11-18: **82 families, 110 scoped records**, with **28 families remaining explicit review gaps**.
 Records include planned features, public research and visible notices; these counts are not working detectors.
 
 Each cell records documentation scope, not measured accuracy or verified production compatibility. “Gap” means not established by this review, including where the provider does not offer that modality. “Planned” means an announcement only; “Historical” is not current export coverage. “Research” identifies a released scheme, without claiming production-provider compatibility. “Export mark” leaves the marking mechanism unresolved; “version-limited” is conditional on the documented software version. “Metadata service” identifies customer-applied tags, without establishing default model-output marking. A generic policy with unresolved export scope does not fill the four cells.
 
 All external verification routes are disabled for customer files. Only the existing trusted, valid, current-file-bound, explicitly AI-declaring Content Credentials gate can skip statistical checks. A video-container audio check covers sound only. A provider classifier score is not a verified watermark hit.
 
-See the [source catalog](provider-signals-catalog.json), [coverage and gate](provider-provenance-coverage.md) and [latest search findings](provider-signal-followup-2026-11-08.md) for exact products, controls, dates, limits, contradictions and qualification requirements.
+See the [source catalog](provider-signals-catalog.json), [coverage and gate](provider-provenance-coverage.md) and [public-file verification](public-content-credentials-2026-11-17.md) for exact products, controls, dates, limits, contradictions and qualification requirements.
 
 | Provider family | Image | Video | Audio | Writing | Reviewed |
 |---|---|---|---|---|---|
-| [OpenAI / ChatGPT / Sora](https://developers.openai.com/api/docs/guides/content-provenance) | Credentials, Watermark | Historical | Watermark | Keyed text | 2026-11-08 |
-| [Anthropic / Claude](https://www.anthropic.com/news/claude-text-watermark) | Credentials | Gap | Gap | Keyed text | 2026-11-08 |
-| [Google / Gemini / Imagen / Veo / Lyria / NotebookLM / Genie](https://deepmind.google/models/synthid/) | Watermark, Credentials, Classifier | Watermark, Credentials | Watermark | Keyed text | 2026-11-08 |
-| [Meta / Muse](https://github.com/facebookresearch/content-seal) | Watermark, Research | Research | Research | Research | 2026-11-08 |
-| [xAI / Grok](https://docs.x.ai/developers/advanced-api-usage/watermarking) | Visible label | Visible label | Gap | Keyed text | 2026-11-08 |
+| [OpenAI / ChatGPT / Sora](https://developers.openai.com/api/docs/guides/content-provenance) | Credentials, Watermark | Historical | Watermark | Keyed text, Credentials | 2026-11-18 |
+| [Anthropic / Claude](https://www.anthropic.com/news/claude-text-watermark) | Credentials | Gap | Gap | Keyed text | 2026-11-18 |
+| [Google / Gemini / Imagen / Veo / Lyria / NotebookLM / Genie](https://deepmind.google/models/synthid/) | Watermark, Credentials, Classifier | Watermark, Credentials | Watermark | Keyed text | 2026-11-18 |
+| [Meta / Muse](https://github.com/facebookresearch/content-seal) | Watermark, Research | Research | Research | Research | 2026-11-18 |
+| [xAI / Grok](https://docs.x.ai/developers/advanced-api-usage/watermarking) | Visible label | Visible label | Watermark | Keyed text | 2026-11-18 |
 | [Microsoft / Azure / Copilot](https://learn.microsoft.com/en-us/azure/foundry/responsible-ai/content-safety/provenance-disclosure) | Credentials, Watermark | Credentials, Watermark | Credentials, Watermark | Keyed text | 2026-11-08 |
-| [Amazon / Nova / Bedrock](https://docs.aws.amazon.com/en_en/bedrock/latest/userguide/watermarking.html) | Watermark | Watermark, Credentials | Watermark | Keyed text | 2026-11-08 |
-| [Adobe / Firefly](https://helpx.adobe.com/firefly/web/get-started/learn-the-basics/content-credentials-overview.html) | Credentials | Credentials | Credentials | Gap | 2026-11-08 |
+| [Amazon / Nova / Bedrock](https://docs.aws.amazon.com/en_en/bedrock/latest/userguide/watermarking.html) | Watermark | Watermark, Credentials | Watermark | Keyed text | 2026-11-18 |
+| [Adobe / Firefly](https://helpx.adobe.com/firefly/web/get-started/learn-the-basics/content-credentials-overview.html) | Credentials | Credentials | Credentials | Gap | 2026-11-18 |
 | [Stability AI](https://kb.stability.ai/knowledge-base/content-credentials-c2pa-faq) | Credentials, Research | Credentials | Credentials | Gap | 2026-11-08 |
 | [Black Forest Labs / FLUX](https://bfl.ai/legal/developer-terms-of-service) | Credentials, Research | Gap | Gap | Gap | 2026-11-08 |
 | [Bria](https://docs.bria.ai/visual-verification-overview) | Credentials, Watermark | Credentials, Watermark | Gap | Gap | 2026-11-07 |
@@ -27,15 +27,15 @@ See the [source catalog](provider-signals-catalog.json), [coverage and gate](pro
 | [Resemble AI / Chatterbox](https://github.com/resemble-ai/Perth) | Watermark | Watermark | Research, Watermark | Watermark | 2026-11-07 |
 | [Suno](https://suno.com/suno-credentials) | Gap | Gap | Credentials | Gap | 2026-11-07 |
 | [MiniMax / Hailuo](https://github.com/MiniMax-AI/cli/blob/main/src/commands/image/generate.ts) | Visible label | Export mark | Audible label | Gap | 2026-11-08 |
-| [DeepSeek](https://cdn.deepseek.com/policies/zh-CN/deepseek-terms-of-use.html) | Gap | Gap | Gap | Label policy | 2026-11-08 |
-| [Alibaba / Qwen / Wan](https://help.aliyun.cn/zh/model-studio/text-to-image-v2-api-reference) | Visible label | Visible label | Label policy | Gap | 2026-11-08 |
-| [ByteDance / Doubao / Seedance / Seedream / CapCut / Dreamina](https://docs.volcengine.com/docs/lake-ai-service/video-generation-enhanced-edition-basic-edition?lang=en) | Label policy, Watermark, Credentials, Visible label | Visible label, Custom mark, Label policy, Watermark, Credentials | Audible label, Label policy, Watermark, Credentials | Gap | 2026-11-08 |
+| [DeepSeek](https://cdn.deepseek.com/policies/zh-CN/deepseek-terms-of-use.html) | Gap | Gap | Gap | Label policy | 2026-11-18 |
+| [Alibaba / Qwen / Wan](https://help.aliyun.cn/zh/model-studio/text-to-image-v2-api-reference) | Visible label, Label policy | Visible label | Label policy | Gap | 2026-11-18 |
+| [ByteDance / Doubao / Seedance / Seedream / CapCut / Dreamina](https://docs.volcengine.com/docs/lake-ai-service/video-generation-enhanced-edition-basic-edition?lang=en) | Label policy, Watermark, Credentials, Visible label | Visible label, Custom mark, Label policy, Watermark, Credentials | Audible label, Label policy, Watermark, Credentials | Gap | 2026-11-18 |
 | [Tencent / Hunyuan](https://cloud.tencent.com/document/api/1616/119001) | Metadata service | Visible label, Metadata service | Metadata service | Metadata service | 2026-11-08 |
 | [Baidu / ERNIE](https://ai.baidu.com/ai-doc/NLP/Ml9i5amtk) | Watermark | Gap | Gap | Gap | 2026-11-07 |
 | [Kuaishou / Kling](https://kling.ai/docs/ai-content-detection) | Watermark | Watermark | Gap | Gap | 2026-11-07 |
 | [Synthesia](https://help.synthesia.io/en/articles/17634791-how-do-i-add-an-ai-label-to-my-videos) | Gap | Credentials, Visible label | Gap | Gap | 2026-11-07 |
 | [HeyGen](https://help.heygen.com/en/articles/11057301-how-to-remove-the-heygen-watermark) | Gap | Visible label | Gap | Gap | 2026-11-07 |
-| [Runway](https://help.runwayml.com/hc/en-us/articles/50404627334547-Free-plan-details) | Gap | Visible label | Gap | Gap | 2026-11-07 |
+| [Runway](https://help.runwayml.com/hc/en-us/articles/50404627334547-Free-plan-details) | Gap | Visible label, Credentials | Gap | Gap | 2026-11-18 |
 | [Pika](https://pika.art/support) | Gap | Historical | Gap | Gap | 2026-11-07 |
 | [Moonshot / Kimi](https://www.kimi.com/user/agreement/modelUse?version=v2) | Label policy | Label policy | Label policy | Label policy | 2026-11-07 |
 | [NVIDIA](https://deepmind.google/models/synthid/) | Watermark | Watermark | Gap | Gap | 2026-11-08 |

@@ -96,7 +96,9 @@ export function C2paChain({ state, checked, credentials, chain }: { state: C2paS
   // Only an active (depth 0) legacy chain row may supply a missing field. Ingredient declarations never classify this file.
   const sourceTypes = credentials?.get('digital source types') ?? chain.find((n) => n.depth === 0)?.sourceTypes ?? ''
   const ai = declaresAi(sourceTypes)
-  const documentary = ai && checked && state === 'trusted'
+  const fileBound = checked && state === 'trusted' && credentials?.get('hash binding') === 'matches the current file bytes'
+  const signer = credentials?.get('signer')
+  const documentary = ai && fileBound
   const selfDeclared = ai && checked && state === 'valid'
   const ingredients = chain.filter((n) => n.depth > 0)
   const { root, onKeyDown } = useTreeKeys(() => undefined)
@@ -108,21 +110,21 @@ export function C2paChain({ state, checked, credentials, chain }: { state: C2paS
         <div className="mt-3">
           <p className="m-0 flex flex-wrap items-baseline gap-x-2 text-small text-text">
             {documentary && <span aria-hidden>◆</span>}
-            <span className="font-medium">Active manifest</span>
-            <span>{credentials.get('claim generator') ?? 'claim generator not stated'} · signed by {credentials.get('signer') ?? 'not stated'} · {credentials.get('signed at') ?? 'no timestamp'}</span>
+            <span className="font-medium">{fileBound && signer && signer !== 'not stated' ? `Verified signer: ${signer}` : 'Active credential'}</span>
+            {!fileBound && signer && signer !== 'not stated' && <span>Signer named in the record: {signer}</span>}
             {ai && <span className="eyebrow">{documentary ? 'Documentary' : selfDeclared ? 'Self-declared' : 'Inspection only'}</span>}
           </p>
           <dl className="mt-2 m-0 grid grid-cols-[136px_minmax(0,1fr)] gap-x-4 gap-y-1 text-small max-[639px]:grid-cols-1">
-            {['actions', 'digital source types', 'hash binding', 'issuer', 'legacy trust'].filter((k) => credentials.has(k)).map((k) => (
+            {['claim generator', 'signed at', 'actions', 'digital source types', 'hash binding', 'issuer', 'legacy trust'].filter((k) => credentials.has(k)).map((k) => (
               <div key={k} className="contents"><dt className="text-text-muted">{k.charAt(0).toUpperCase() + k.slice(1)}</dt><dd className="m-0 text-text break-words">{credentials.get(k)}</dd></div>
             ))}
           </dl>
           {ai && <p className="mt-2 m-0 text-small text-text">
             {documentary
-              ? <>The record includes an AI-generation action by {credentials.get('claim generator') ?? 'the signing software'}.</>
+              ? 'The signed record declares AI involvement in this file.'
               : selfDeclared
-                ? 'The record declares AI generation. The signer is unverified, so this counts as self-declared evidence.'
-                : 'The record contains an AI declaration for inspection only; it is not relied on without validated credentials.'}
+                ? 'The record declares AI involvement. The signer’s identity is unverified.'
+                : 'The record contains an AI declaration for inspection. A trusted signature and a matching file hash are required to use it as evidence.'}
           </p>}
         </div>
       )}
@@ -143,6 +145,16 @@ export function C2paChain({ state, checked, credentials, chain }: { state: C2paS
       )}
     </div>
   )
+}
+
+export function PlainContentCredentials({ analysis, exhibits, runs }: { analysis: AnalysisDetail; exhibits: readonly ExhibitMeta[]; runs: readonly DetectorRun[] }) {
+  const ids = exhibits.filter((exhibit) => exhibit.kind === 'table' && exhibit.title === TITLES.c2pa).map((exhibit) => exhibit.id)
+  const payloads = useExhibitPayloads(analysis.id, ids)
+  const table = payloads.data.find((payload) => payload.kind === 'table' && payload.title === TITLES.c2pa)
+  if (!table || table.kind !== 'table') return null
+  const credentials = fields(table)
+  const checked = runs.some((run) => run.detector_id.startsWith('prov.c2pa') && run.status === 'ok')
+  return <C2paChain state={c2paState(analysis, credentials)} checked={checked} credentials={credentials} chain={[]} />
 }
 
 export function CodecFacts({ facts }: { facts: readonly Fact[] }) {

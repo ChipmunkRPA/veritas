@@ -182,3 +182,25 @@ python3 -B -S -m scripts.video_face_single_boundary calibrate \
 python3 -B -S -m scripts.video_face_single_boundary report \
   "$run/plan.json.gz" "$run/lock.json.gz" "$run/held.jsonl" "$run/result.json.gz"
 ```
+
+## Compare another detector
+
+The offline comparison accepts one result for each exact submitted file.
+It measures exact and one-frame locations, misses, abstentions, source-group
+gains and losses, and ordinary alerts split by control type. The prediction
+template contains file hashes and leaves the expected frames and labels in
+the panel. Use the native commands above to regenerate the submitted files.
+
+```sh
+export PYTHONPATH=backend
+panel=docs/evaluation-panels/video-face-single-boundary-2026-11-18.json.gz
+python3 -B -S -m scripts.compare_video_face_boundaries prepare "$panel" > predictions.json
+python3 -B -S -m scripts.compare_video_face_boundaries score "$panel" predictions.json
+```
+
+Set each result to `localized`, `no_match`, or `unassessed`. A localized
+result includes the zero-based index of the first frame of the second appearance, from
+1 to 99. Use a null frame for the other two outcomes. Both commands accept
+`--split development` to score the earlier development set separately.
+Fix the detector and operating point before measuring held inputs. The
+comparison includes all ordinary and unassessed inputs in its denominators.

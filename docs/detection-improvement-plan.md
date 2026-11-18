@@ -5,9 +5,9 @@ and the evidence supporting it before expanding hosting.
 
 The [stereo covariance comparison](video-stereo-covariance-2026-11-17.md)
 confirms missed speech removals under loud room sound on 12 further speakers.
-The [document format review](document-formats-2026-11-17.md) records eight
-local upload formats including Rich Text, signed Word and ODT verification and exact
-earlier-wording locations for qualifying ODT documents.
+The [document format review](document-formats-2026-11-17.md) records ten
+local upload formats including PowerPoint and EPUB, signed original-file
+verification, and exact earlier-wording locations for qualifying ODT documents.
 
 ## Requirements and order
 
@@ -65,6 +65,18 @@ test cases or rewrite a failure as a pass. Internal predeclared research setting
 are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
+
+- The single-transition face check located 81 of 96 staged one-sided
+  swaps within one frame and flagged none of 120 held ordinary controls.
+  The local app shows the three original frames and crops. Eight
+  deliveries from a separate synthetic source lacked enough background
+  texture for comparison. The readout accepts external exact-file
+  predictions for checking this result. [Face transition evaluation](video-face-single-boundary-2026-11-18.md)
+
+- On 18 exact held rewrites, the existing writing selection located zero.
+  Adding the word-order compression reading located one and increased
+  ordinary alerts from 14 to 16 out of 35. It marked the same location
+  in the untouched original as well. [Writing compression comparison](writing-compression-2026-11-18.md)
 
 - Explicitly labeling autoencoder-reconstructed background as a separate
   class did not recover any of the 64 staged JPEG edit variants. The

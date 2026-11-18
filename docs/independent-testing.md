@@ -30,6 +30,9 @@ short speech replacements, and deliberately mismatched picture controls.
 The [single face transition replay](video-face-single-boundary-2026-11-18.md#reproduce)
 recalculates the operating point and exact boundary errors for two delivery
 profiles, with ordinary camera edits and shot changes as controls.
+The [prediction comparison](video-face-single-boundary-2026-11-18.md#compare-another-detector)
+accepts results from a separate detector and scores the same source files by
+frame, ordinary alert type, and paired gains and losses.
 
 The [statistical reporting replay](document-chi-square-2026-11-18.md#replay-the-measurements)
 checks published numerical discrepancies and staged controls against the

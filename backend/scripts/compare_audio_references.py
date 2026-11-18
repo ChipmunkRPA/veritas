@@ -9,6 +9,7 @@ from pathlib import Path
 from app.evidence.audio_reference import (
     SCHEMA,
     SCHEMA_WITH_AAC_CLEAN_SPEECH,
+    SCHEMA_WITH_AAC_MATCHING_WAVEFORM,
     SCHEMA_WITH_AAC_TIMING,
     SCHEMA_WITH_ALIGNED_SPEECH,
     SCHEMA_WITH_CHANNEL_TIMING,
@@ -40,7 +41,8 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False, c
         if not isinstance(record, dict):
             raise ValueError("The comparison record must be a JSON object.")
         schema = record.get("schema")
-        waveform = schema == SCHEMA_WITH_MATCHING_WAVEFORM
+        waveform_aac = schema == SCHEMA_WITH_AAC_MATCHING_WAVEFORM
+        waveform = waveform_aac or schema == SCHEMA_WITH_MATCHING_WAVEFORM
         aligned = schema == SCHEMA_WITH_ALIGNED_SPEECH or waveform and "aligned_speech" in record
         if aligned or waveform:
             schema = record.get("comparison_schema")
@@ -78,7 +80,8 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False, c
                                      use_clean_speech_eq_guard=schema in eq_schemas,
                                      include_clean_speech_match_support=schema == SCHEMA_WITH_CLEAN_SPEECH_SUPPORT)
         if aligned or waveform:
-            compare_source = partial(compare_source, include_aligned_speech=aligned, include_matching_waveform=waveform)
+            compare_source = partial(compare_source, include_aligned_speech=aligned, include_matching_waveform=waveform,
+                                     include_matching_waveform_aac=waveform_aac)
     return replay(compare_source, earlier, submitted, output, verify=verify)
 
 

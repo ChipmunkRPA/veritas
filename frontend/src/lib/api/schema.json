@@ -1814,6 +1814,17 @@
               }
             ],
             "title": "Long Clean Speech Available"
+          },
+          "matching_waveform_aac_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Matching Waveform Aac Available"
           }
         },
         "required": [

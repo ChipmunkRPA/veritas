@@ -1,0 +1,79 @@
+{
+  "browser": {
+    "json_downloads_exact": 2,
+    "pdf_downloads": 2,
+    "results": 2
+  },
+  "original_assessments_preserved": true,
+  "results": {
+    "ordinary": {
+      "aac_presentation": {
+        "bit_rate": 65128,
+        "decoded_samples": 96256,
+        "excluded_trailing_samples": 256,
+        "native_clock": {
+          "channels": 1,
+          "presentation_end_exclusive_pts": 288000,
+          "sample_rate": 48000,
+          "time_base": "1/48000"
+        },
+        "presentation_end_exclusive_pts": 96000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "pdf_sha256": "61ff2dd042c758077a2e64ae901180fa28a8ff9f9916c5460759927d1a18caf3",
+      "ranges": {},
+      "sha256": "a15aeb5e9bb501ca420086ebdc478baee4bedba7463c76c6baa720a4449e3d98",
+      "status": "no_local_difference"
+    },
+    "positive": {
+      "aac_presentation": {
+        "bit_rate": 64978,
+        "decoded_samples": 96256,
+        "excluded_trailing_samples": 256,
+        "native_clock": {
+          "channels": 1,
+          "presentation_end_exclusive_pts": 288000,
+          "sample_rate": 48000,
+          "time_base": "1/48000"
+        },
+        "presentation_end_exclusive_pts": 96000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "native_source_pts": [
+        131520,
+        182847
+      ],
+      "pdf_sha256": "fb342cffe029d999a074a6f6972d7c34415db2fc4c387fe6fafb234f452d48a9",
+      "ranges": {
+        "earlier": {
+          "end_s": 3.94,
+          "pcm_sha256": "17b5a8f508ce4d323b54a5ed05ac71c811f67dd5b26d639e159293f6a50d8e57",
+          "samples": [
+            43840,
+            63040
+          ],
+          "start_s": 2.74
+        },
+        "submitted": {
+          "end_s": 3.8093125,
+          "pcm_sha256": "3b4d187b1eea55a76fa895ab2d70eb13b5185f9ad59cd4f553dd253f0cc06d64",
+          "samples": [
+            43840,
+            60949
+          ],
+          "start_s": 2.74
+        }
+      },
+      "sha256": "938cf0c6d849114142c3d07e2311af8b27e419278d35e0cf208e69a39c2b9afa",
+      "status": "localized_difference"
+    }
+  },
+  "simulated_paid_jobs": 2,
+  "unpaid_jobs": 0
+}

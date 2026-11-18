@@ -8,6 +8,7 @@ from app.evidence.audio_reference import (
     AUDIO_RATE,
     MAX_SECONDS,
     SCHEMA_WITH_AAC_CLEAN_SPEECH,
+    SCHEMA_WITH_AAC_MATCHING_WAVEFORM,
     SCHEMA_WITH_AAC_TIMING,
     SCHEMA_WITH_ALIGNED_SPEECH,
     SCHEMA_WITH_CHANNEL_TIMING,
@@ -152,7 +153,7 @@ def _audio_summary(document, record):
     if record["status"] != "measured":
         separate = record["schema"] in {SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH, SCHEMA_WITH_AAC_TIMING,
                                         *STEREO_AAC_SPEECH_SCHEMAS,
-                                        SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM}
+                                        SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM, SCHEMA_WITH_AAC_MATCHING_WAVEFORM}
         title = "Decoded sample comparison unavailable" if separate else "Comparison unassessed"
         _text(page, MARGIN, 346, title, size=16, font="hebo")
         _text(page, MARGIN, 370, AUDIO_ONLY_STATUS[record["status"]])
@@ -512,6 +513,9 @@ def _matching_waveform_page(document, result):
     page.insert_textbox((MARGIN, 125, RIGHT, 173), result["summary"], fontsize=12, fontname="hebo", color=INK)
     page.insert_textbox((MARGIN, 178, RIGHT, 242), result["scope"], fontsize=11, fontname="helv", color=MUTED)
     span = result.get("range")
+    if "aac_presentation" in result:
+        _text(page, MARGIN, 304, "The 48 kHz AAC presentation clock is mapped to the 16 kHz comparison waveform.",
+              size=9, color=MUTED)
     if not span:
         return
     values = span["flank_offsets_samples"]
@@ -532,7 +536,10 @@ def _audio_pair_waveforms(page, span):
         first, end = clip["samples"]
         _text(page, MARGIN, y - 65, f"{label}  {clip['start_s']:.3f} to {clip['end_s']:.3f} s", font="hebo")
         _draw_waveform(page, clip["waveform"], y, maximum, (end - first) / AUDIO_RATE)
-        _text(page, MARGIN, y + 55, f"Source samples [{first}, {end}) at 16 kHz.", size=9, color=MUTED)
+        native = clip.get("native_source_pts")
+        note = (f"AAC presentation [{native[0]}, {native[1]}) on the 48 kHz clock."
+                if native else f"Source samples [{first}, {end}) at 16 kHz.")
+        _text(page, MARGIN, y + 55, note, size=9, color=MUTED)
     _text(page, MARGIN, 657, "Waveforms share one amplitude scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
 
 
@@ -668,7 +675,7 @@ def render(record, assets):
                                         *STEREO_AAC_SPEECH_SCHEMAS,
                                         SCHEMA_WITH_DENSE_CLEAN_SPEECH,
                                         SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD, SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
-                                        SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM)
+                                        SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM, SCHEMA_WITH_AAC_MATCHING_WAVEFORM)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
         adjusted = record.get("level_adjusted")
         trimmed = is_audio and "trim_alignment" in record.get("audio", {})

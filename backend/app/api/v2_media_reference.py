@@ -47,6 +47,7 @@ class AudioReferenceAvailability(MediaReferenceAvailability):
     aligned_speech_available: bool | None = None
     clean_speech_aac_available: bool | None = None
     clean_speech_stereo_aac_available: bool | None = None
+    matching_waveform_aac_available: bool | None = None
 
 
 class VideoReferenceAvailability(MediaReferenceAvailability):
@@ -122,6 +123,8 @@ def availability(aid: str, request: Request):
             result["aligned_speech_available"] = True
         if settings.audio_reference_clean_speech_aac:
             result["clean_speech_aac_available"] = True
+            if settings.audio_reference_matching_waveform:
+                result["matching_waveform_aac_available"] = True
             if settings.audio_reference_long_clean_speech and settings.audio_reference_clean_speech_stereo_aac:
                 result["clean_speech_stereo_aac_available"] = True
     if available and kind == "video" and settings.video_reference_picture_insertion:
@@ -198,6 +201,7 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         and settings.audio_reference_aligned_speech,
                         include_matching_waveform=settings.audio_reference_clean_speech and earlier_has_clean_speech
                         and settings.audio_reference_matching_waveform,
+                        include_matching_waveform_aac=settings.audio_reference_clean_speech_aac,
                     )
                 elif timing_event_s is None:
                     record, assets = video_reference.compare(

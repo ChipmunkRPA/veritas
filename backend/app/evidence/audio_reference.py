@@ -43,6 +43,8 @@ SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/17"
 SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH = "chipmunk.audio-reference-comparison/18"
 SCHEMA_WITH_DENSER_STEREO_AAC = "chipmunk.audio-reference-comparison/19"
 SCHEMA_WITH_CLOSE_STEREO_AAC = "chipmunk.audio-reference-comparison/20"
+SCHEMA_WITH_AAC_MATCHING_WAVEFORM = "chipmunk.audio-reference-comparison/21"
+WAVEFORM_AAC_MIN_BIT_RATE = 60_000
 STEREO_AAC_SPEECH_SCHEMAS = frozenset({SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH, SCHEMA_WITH_DENSER_STEREO_AAC,
                                      SCHEMA_WITH_CLOSE_STEREO_AAC})
 MAX_BYTES = 48 * 1024 * 1024
@@ -451,7 +453,7 @@ def channel_timing(decoded, assets, *, sample_limit=None):
             "affects_overall_confidence": False, "sample_rate": AUDIO_RATE, "ranges": ranges}
 
 
-def _aac_presented_tracks(paths, decoded, *, high_rate=False):
+def _aac_presented_tracks(paths, decoded, *, high_rate=False, include_bit_rate=False):
     tracks = tuple(item[0] for item in decoded)
     if not all(track[0] == "measured" and track[2]["source_pts"] == 0 for track in tracks):
         return None
@@ -459,7 +461,7 @@ def _aac_presented_tracks(paths, decoded, *, high_rate=False):
         return None
     native = next(i for i, item in enumerate(decoded) if item[4])
     aac = 1 - native
-    native_clock = aac48_presentation(paths[aac]) if high_rate else None
+    native_clock = aac48_presentation(paths[aac], include_bit_rate=include_bit_rate) if high_rate else None
     if high_rate and (aac != 1 or native_clock is None):
         return None
     duration = native_clock["presentation_end_exclusive_pts"] // 3 if native_clock else aac_native_extent(paths[aac])
@@ -668,7 +670,7 @@ def _aligned_speech(decoded, assets):
     return result
 
 
-def _matching_waveform(decoded, assets):
+def _matching_waveform(decoded, assets, *, aac_tracks=None):
     from app.evidence import audio_reference_waveform as waveform
 
     result = {
@@ -680,9 +682,12 @@ def _matching_waveform(decoded, assets):
         "sample_rate": AUDIO_RATE,
         "affects_overall_confidence": False,
     }
-    tracks, reason, summary = _short_reference_tracks(decoded)
-    if tracks is None:
-        return result | {"reason": reason, "summary": summary}
+    if aac_tracks is None:
+        tracks, reason, summary = _short_reference_tracks(decoded)
+        if tracks is None:
+            return result | {"reason": reason, "summary": summary}
+    else:
+        tracks, result["aac_presentation"] = aac_tracks
     samples = [(track[1] * 32768).astype("<i2") for track in tracks]
     status, windows, chosen = waveform.locate(*samples)
     summaries = {
@@ -701,6 +706,9 @@ def _matching_waveform(decoded, assets):
             side: _timing_excerpt(assets, "matching-waveform", side, track[1], track[2]["source_pts"], chosen[field])
             for side, track, field in zip(("earlier", "submitted"), tracks, ("earlier_span", "span"), strict=True)
         }
+        if aac_tracks is not None:
+            # Preserve both the 16 kHz comparison coordinates and native 48 kHz presentation timestamps.
+            excerpts["submitted"]["native_source_pts"] = [3 * pts for pts in excerpts["submitted"]["source_pts"]]
         result["range"] = excerpts | {
             "matching_share": chosen["matching_ratio"],
             "flank_offsets_samples": dict(zip(("before", "after"), chosen["lags"], strict=True)),
@@ -731,7 +739,8 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             allow_denser_stereo_windows: bool = False,
             allow_close_stereo_consensus: bool = False,
             include_aligned_speech: bool = False,
-            include_matching_waveform: bool = False) -> tuple[dict, dict[str, bytes]]:
+            include_matching_waveform: bool = False,
+            include_matching_waveform_aac: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Compare continuous recordings and recover a small, exactly supported edge trim."""
     paths = earlier, submitted
     filenames = filenames or (earlier.name, submitted.name)
@@ -767,9 +776,14 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
     aac_tracks = _aac_presented_tracks(paths, (first, second)) if (
         (include_local_timing and include_aac_timing) or (include_clean_speech and include_clean_speech_aac)) else None
     timing_aac = aac_tracks if include_local_timing and include_aac_timing else None
+    want_waveform_aac = include_matching_waveform and include_matching_waveform_aac
+    native_aac = _aac_presented_tracks(paths, (first, second), high_rate=True, include_bit_rate=want_waveform_aac) if (
+        want_waveform_aac or (include_clean_speech and include_clean_speech_aac and aac_tracks is None)) else None
+    # Keep the existing clean speech clock record stable for archived reports.
+    native_bit_rate = native_aac[1]["native_clock"].pop("bit_rate", None) if native_aac else None
     speech_aac = None
     if include_clean_speech and include_clean_speech_aac:
-        presented = aac_tracks or _aac_presented_tracks(paths, (first, second), high_rate=True)
+        presented = aac_tracks or native_aac
         if presented and presented[1]["side"] == "submitted":
             proof = presented[1]
             duration = proof["presentation_end_exclusive_pts"]
@@ -805,7 +819,15 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
     if include_aligned_speech:
         record.update(schema=SCHEMA_WITH_ALIGNED_SPEECH, aligned_speech=_aligned_speech((first, second), assets))
     if include_matching_waveform:
-        record.update(schema=SCHEMA_WITH_MATCHING_WAVEFORM, matching_waveform=_matching_waveform((first, second), assets))
+        # The transfer study measured six-second pairs with one native mono source and mono AAC-LC.
+        waveform_aac = None
+        if (want_waveform_aac and native_aac and native_bit_rate is not None and native_bit_rate >= WAVEFORM_AAC_MIN_BIT_RATE
+                and native_aac[1]["native_clock"]["channels"] == 1
+                and native_aac[1]["presentation_end_exclusive_pts"] == 6 * AUDIO_RATE):
+            tracks, proof = native_aac
+            waveform_aac = tracks, proof | {"bit_rate": native_bit_rate}
+        record.update(schema=SCHEMA_WITH_AAC_MATCHING_WAVEFORM if waveform_aac else SCHEMA_WITH_MATCHING_WAVEFORM,
+                      matching_waveform=_matching_waveform((first, second), assets, aac_tracks=waveform_aac))
     if sources != tuple(_identity(path, name) for path, name in zip(paths, filenames, strict=True)):
         raise ValueError("One of the recordings changed while the comparison was running.")
     return record, assets

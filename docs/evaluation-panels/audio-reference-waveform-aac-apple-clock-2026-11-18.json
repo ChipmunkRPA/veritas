@@ -1,0 +1,57 @@
+{
+  "encoder": "afconvert -f m4af -d aac -b 64000",
+  "input": "six seconds of 48 kHz mono PCM16",
+  "platform": "26.5.2",
+  "reader": "688",
+  "records": [
+    {
+      "delivery_sha256": "d3f873cf63b08bef95e375bb07544e35b4968f761529960a5076cf45466b81ce",
+      "exact_clock_qualified": false,
+      "ffprobe": {
+        "bit_rate": "61114",
+        "channel_layout": "mono",
+        "channels": 1,
+        "duration_ts": 290816,
+        "profile": "LC",
+        "sample_rate": "48000",
+        "start_pts": 2112,
+        "time_base": "1/48000"
+      },
+      "input_sha256": "1dc507f95a08e5a14567d8bdee1a0f735a640dd7ee372e2c33c3e6294184e464",
+      "role": "clean"
+    },
+    {
+      "delivery_sha256": "e83ab7de0a69f9dd015141486f11856adbc9a691b43450a52440a88229441244",
+      "exact_clock_qualified": false,
+      "ffprobe": {
+        "bit_rate": "59948",
+        "channel_layout": "mono",
+        "channels": 1,
+        "duration_ts": 290816,
+        "profile": "LC",
+        "sample_rate": "48000",
+        "start_pts": 2112,
+        "time_base": "1/48000"
+      },
+      "input_sha256": "ae51779dbfcb86ab0c76c44e12d1a6ee7e0f04825d12d53e7749261ad049500f",
+      "role": "cut_paste"
+    },
+    {
+      "delivery_sha256": "d0bcaee353b1a9016d4a4a3b6c624d1687c11ce12005e6f9779c91aee7651a38",
+      "exact_clock_qualified": false,
+      "ffprobe": {
+        "bit_rate": "59977",
+        "channel_layout": "mono",
+        "channels": 1,
+        "duration_ts": 290816,
+        "profile": "LC",
+        "sample_rate": "48000",
+        "start_pts": 2112,
+        "time_base": "1/48000"
+      },
+      "input_sha256": "daf6ea544ac43117f35cf2a4225b50644d5221a4aee464525996d90d0b8610f2",
+      "role": "unchanged"
+    }
+  ],
+  "schema": "chipmunk.waveform-apple-aac-clock-probe/1"
+}

@@ -454,7 +454,7 @@ it.each([[8, false], [11, false], [12, false], [13, false], [16, false], [16, tr
   expect(screen.getByRole('button', { name: 'Download JSON evidence' })).toBeTruthy()
 })
 
-it.each([14, 15])('shows audio excerpts on two recording clocks for comparison version %s', async (version) => {
+it.each([14, 15, 21])('shows audio excerpts on two recording clocks for comparison version %s', async (version) => {
   const waveform = { low: [-.4], high: [.2] }
   const excerpt = (file: string, start_s: number, end_s: number) => ({
     start_s, end_s, waveform, audio: { file, media_type: 'audio/wav', sha256: 'c'.repeat(64) },
@@ -474,13 +474,17 @@ it.each([14, 15])('shows audio excerpts on two recording clocks for comparison v
         flank_duration_ms: 400,
       },
     },
-    ...(version === 15 ? {
+    ...(version !== 14 ? {
       matching_waveform: {
         status: 'localized_difference', summary: 'The matching speech shifts in time across this interval.',
         scope: 'This check contributes zero weight to the AI assessment.',
+        ...(version === 21 && { aac_presentation: { side: 'submitted', sample_rate: 16000, presentation_end_exclusive_pts: 96000,
+          bit_rate: 64978, excluded_trailing_samples: 256,
+          native_clock: { sample_rate: 48000, channels: 1, presentation_end_exclusive_pts: 288000 } } }),
         range: {
           earlier: excerpt('earlier.wav', 2.340, 3.020),
-          submitted: excerpt('submitted.wav', 2.340, 3.120),
+          submitted: { ...excerpt('submitted.wav', 2.340, 3.120),
+            ...(version === 21 && { source_pts: [37440, 49920], native_source_pts: [112320, 149760] }) },
           matching_share: .09, flank_offsets_samples: { before: 0, after: 1600 },
           supporting_windows: { before: 5, during: 9, after: 4 },
         },
@@ -488,13 +492,14 @@ it.each([14, 15])('shows audio excerpts on two recording clocks for comparison v
     } : {}),
   }
   const fetch = vi.fn().mockResolvedValueOnce(Response.json({
-    available: true, clean_speech_available: true, aligned_speech_available: true,
+    available: true, clean_speech_available: true, aligned_speech_available: true, matching_waveform_aac_available: version === 21,
   })).mockResolvedValueOnce(Response.json({ comparison, assets: { 'earlier.wav': 'UklGRg==', 'submitted.wav': 'UklGRg==' },
     pdf: 'JVBERi0xLjQK' }))
   vi.stubGlobal('fetch', fetch)
   show('audio')
   fireEvent.change(await screen.findByLabelText('Earlier audio'), { target: { files: [new File(['audio'], 'earlier.wav')] } })
   expect(screen.getByText(/Heavy background sound can prevent a result/)).toBeTruthy()
+  if (version === 21) expect(screen.getByText(/waveform check also supports six-second 48 kHz mono AAC M4A/)).toBeTruthy()
   fireEvent.click(screen.getByRole('checkbox', { name: 'The earlier file is a clean copy of the same recording' }))
   fireEvent.click(screen.getByRole('button', { name: 'Compare recordings' }))
   const region = within(await screen.findByRole('region', { name: 'Aligned speech comparison' }))
@@ -502,12 +507,16 @@ it.each([14, 15])('shows audio excerpts on two recording clocks for comparison v
   expect(region.getByText('Analyzed recording · 2.400–3.120 s')).toBeTruthy()
   expect(region.getByText(/before 0.258, during 2.689, after 0.699/)).toBeTruthy()
   expect(region.getAllByRole('img', { name: /aligned speech excerpt waveform/ })).toHaveLength(2)
-  if (version === 15) {
+  if (version !== 14) {
     const matching = within(screen.getByRole('region', { name: 'Matching speech waveform' }))
     expect(matching.getByText('Analyzed recording · 2.340–3.120 s')).toBeTruthy()
     expect(matching.getByText(/\+0 ms before and \+100 ms after/)).toBeTruthy()
     expect(matching.getByText(/9% of the weaker surrounding match/)).toBeTruthy()
     expect(matching.getAllByRole('img', { name: /matching waveform excerpt waveform/ })).toHaveLength(2)
+    if (version === 21) {
+      expect(matching.getByText(/6\.000 s · 48 kHz mono source/)).toBeTruthy()
+      expect(matching.getByText('AAC presentation [112320, 149760) on the 48 kHz clock.')).toBeTruthy()
+    }
   }
   expect(screen.getByText(/Decoded sample comparison unavailable/)).toBeTruthy()
   expect((fetch.mock.calls[1][1].body as FormData).get('earlier_has_clean_speech')).toBe('true')

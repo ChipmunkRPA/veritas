@@ -13,6 +13,10 @@ verified zero start. Ordinary cuts and recordings processed in different
 ways can produce timing differences. The finding contributes zero weight
 to the AI assessment.
 
+The [later AAC comparison](audio-reference-waveform-aac-transfer-2026-11-18.md)
+extends the local check to measured, six-second mono AAC-LC submissions
+that share the earlier lossless copy's presentation clock.
+
 ## Method and limits
 
 Estimate the submitted recording's broad frequency profile with median

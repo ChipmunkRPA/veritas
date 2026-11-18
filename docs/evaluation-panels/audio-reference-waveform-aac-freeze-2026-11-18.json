@@ -1,0 +1,11 @@
+{
+  "scope": "Fit-neutral transport comparison of the existing earlier-copy waveform method using both retained six-second SINE panels. Include all cut-and-paste pairs and all unchanged controls under the three fixed loud-background conditions. Include same-word resynthesis separately as an out-of-scope localization control.",
+  "scene_plan": ["AMI competing speech from the pinned publisher-derived bank", "DCASE bus06 first channel at 2,8,14,20 seconds", "DCASE office06 first channel at 2,8,14,20 seconds"],
+  "mix": "Existing sine.mix method at nominal foreground minus 5 dB; identical PCM passed to both containers before encoding.",
+  "carriers": ["earlier 16 kHz mono PCM16 WAV and submitted matching WAV", "earlier 16 kHz mono PCM16 FLAC and submitted matching FLAC", "earlier 16 kHz mono PCM16 FLAC and submitted 48 kHz 64 kb/s mono AAC-LC M4A"],
+  "constants": "Unchanged frozen waveform method from audio-reference-waveform-2026-11-14.json; localization must cover half of a target and 0.30 IoU.",
+  "clock_gate": "Every corresponding delivery has six full presented seconds starting at zero. Exact 16 kHz native sample and clocks must match between WAV and FLAC, and native AAC must be mono LC at 48 kHz on an independently verified zero-origin container clock with exactly 288000 presented native samples. Remove only decoded codec padding according to the existing helper.",
+  "edit_gate": "WAV must locate at least 30 of the 81 noisy edits. AAC must preserve at least 85 percent of WAV useful localizations and must lose no more than three net useful localizations in any one noise condition. Report case-wise gains/losses and paired ineligibility.",
+  "ordinary_gate": "On the 117 noisy unchanged pairs, AAC may newly flag up to two files from one source group and may flag at most two files above WAV overall. No missed transport clock. Report new resynthesis flags separately.",
+  "boundary": "Previously observed public recordings and known edits test transport only. Synthetic splices under mixed backgrounds and same-word resynthesis do not establish live customer performance or AI origin."
+}

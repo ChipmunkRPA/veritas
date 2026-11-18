@@ -51,7 +51,10 @@ type TimingComparison = {
   event_range_s?: number[]
   changed_audio_samples?: [number, number]
 } & Partial<Record<Side, TimingSide>>
-type SoundtrackSide = { start_s: number; end_s: number; audio: Asset; waveform: Waveform }
+type SoundtrackSide = {
+  start_s: number; end_s: number; audio: Asset; waveform: Waveform
+  source_pts?: [number, number]; native_source_pts?: [number, number]
+}
 type SoundtrackPicture = { frame_index: number; time_s: number; asset: Asset }
 type SoundtrackTiming = {
   summary: string
@@ -62,6 +65,7 @@ type SoundtrackTiming = {
   waveform_note?: string
   aac_presentation?: {
     side: Side; sample_rate: number; presentation_end_exclusive_pts: number; excluded_trailing_samples: number
+    bit_rate?: number
     native_clock?: { sample_rate: number; channels: number; presentation_end_exclusive_pts: number }
   }
   range?: Record<Side, SoundtrackSide> & {
@@ -114,6 +118,7 @@ type AlignedSpeechComparison = {
   }
 }
 type MatchingWaveformComparison = Omit<AlignedSpeechComparison, 'range'> & {
+  aac_presentation?: SoundtrackTiming['aac_presentation']
   range?: Record<Side, SoundtrackSide> & {
     matching_share: number
     flank_offsets_samples: Record<'before' | 'after', number>
@@ -199,7 +204,7 @@ type Comparison = {
     | 'chipmunk.audio-reference-comparison/13' | 'chipmunk.audio-reference-comparison/14'
     | 'chipmunk.audio-reference-comparison/15' | 'chipmunk.audio-reference-comparison/16'
     | 'chipmunk.audio-reference-comparison/17' | 'chipmunk.audio-reference-comparison/18' | 'chipmunk.audio-reference-comparison/19'
-    | 'chipmunk.audio-reference-comparison/20'
+    | 'chipmunk.audio-reference-comparison/20' | 'chipmunk.audio-reference-comparison/21'
   picture?: never
   picture_insertion?: never
   insertion_retention?: never
@@ -221,7 +226,7 @@ type Result = { comparison: Comparison; assets: Record<string, string>; pdf?: st
 type Availability = { available: boolean; timing_available?: boolean; picture_insertion_available?: boolean; sound_difference_available?: boolean
   short_native_sound_difference_available?: boolean;
   clean_speech_available?: boolean; long_clean_speech_available?: boolean; aligned_speech_available?: boolean; clean_speech_aac_available?: boolean
-  clean_speech_stereo_aac_available?: boolean }
+  clean_speech_stereo_aac_available?: boolean; matching_waveform_aac_available?: boolean }
 const sourceSeconds = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 7, useGrouping: false })
 const trimSampleRate = 16000
 
@@ -466,6 +471,7 @@ function SoundtrackTimingEvidence({ timing, assets, audioOnly = false, title: cu
     {aac && <p className="m-0 text-caption text-text-muted">
       {labels[aac.side]} · AAC duration {sourceSeconds.format(aac.presentation_end_exclusive_pts / aac.sample_rate)} s
       {aac.native_clock && ` · ${aac.native_clock.sample_rate / 1000} kHz ${aac.native_clock.channels === 2 ? 'stereo' : 'mono'} source`}
+      {aac.bit_rate && ` · ${(aac.bit_rate / 1000).toFixed(1)} kbps`}
       {' · '}{aac.excluded_trailing_samples.toLocaleString('en-US')} trailing decoded samples excluded
     </p>}
     {span && <>
@@ -496,6 +502,9 @@ function SoundtrackTimingEvidence({ timing, assets, audioOnly = false, title: cu
         const caption = side === 'submitted' && analyzedMono ? labels[side] + ' (mono mix)' : labels[side]
         return <div className="min-w-0 space-y-2" key={side}>
           <p className="m-0 text-small font-medium">{caption} · {sourceSeconds.format(row.start_s)}–{sourceSeconds.format(row.end_s)} s</p>
+          {row.native_source_pts && aac?.native_clock && <p className="m-0 text-caption text-text-muted">
+            AAC presentation [{row.native_source_pts[0]}, {row.native_source_pts[1]}) on the {aac.native_clock.sample_rate / 1000} kHz clock.
+          </p>}
           <ClipWaveform wave={row.waveform} maximum={maximum} name={`${labels[side]} ${excerpt}`} />
           <Playback body={assetBody(assets, row.audio, 'audio/wav')} name={`Play ${labels[side].toLowerCase()} ${excerpt}`} />
         </div>
@@ -603,7 +612,8 @@ function ResultView({ result }: { result: Result }) {
         comparison.schema === 'chipmunk.audio-reference-comparison/17' ||
         comparison.schema === 'chipmunk.audio-reference-comparison/18' ||
         comparison.schema === 'chipmunk.audio-reference-comparison/19' ||
-        comparison.schema === 'chipmunk.audio-reference-comparison/20') && 'Decoded sample comparison unavailable. '}
+        comparison.schema === 'chipmunk.audio-reference-comparison/20' ||
+        comparison.schema === 'chipmunk.audio-reference-comparison/21') && 'Decoded sample comparison unavailable. '}
       {notes[comparison.status] ?? 'The files could not be compared.'}
     </p>}
     {comparison.aligned_speech && <AlignedSpeechEvidence result={comparison.aligned_speech} assets={assets} />}
@@ -781,10 +791,12 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
 }
 
 function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertionAvailable, cleanSpeechAvailable, longCleanSpeechAvailable,
-  alignedSpeechAvailable, cleanSpeechAacAvailable, cleanSpeechStereoAacAvailable, soundDifferenceAvailable, shortNativeSoundDifferenceAvailable }: {
+  alignedSpeechAvailable, cleanSpeechAacAvailable, cleanSpeechStereoAacAvailable, matchingWaveformAacAvailable,
+  soundDifferenceAvailable, shortNativeSoundDifferenceAvailable }: {
   analysisId: string; kind: Kind; timingAvailable: boolean; pictureInsertionAvailable: boolean
   cleanSpeechAvailable: boolean; longCleanSpeechAvailable: boolean; alignedSpeechAvailable: boolean; cleanSpeechAacAvailable: boolean
   cleanSpeechStereoAacAvailable: boolean
+  matchingWaveformAacAvailable: boolean
   soundDifferenceAvailable: boolean
   shortNativeSoundDifferenceAvailable: boolean
 }) {
@@ -825,7 +837,8 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       const hasCoverage = recovered || versionedSchema === 'chipmunk.video-reference-comparison/15' ||
         versionedSchema === 'chipmunk.video-reference-comparison/17' || shortPhrase
       const hasSpeechAlignment = versionedSchema === 'chipmunk.audio-reference-comparison/14'
-      const hasWaveform = versionedSchema === 'chipmunk.audio-reference-comparison/15'
+      const hasAacWaveform = versionedSchema === 'chipmunk.audio-reference-comparison/21'
+      const hasWaveform = hasAacWaveform || versionedSchema === 'chipmunk.audio-reference-comparison/15'
       const schema = hasCoverage || hasSpeechAlignment || hasWaveform ? response.comparison.comparison_schema : versionedSchema
       const accepted = kind === 'video' && !hasCoverage ? 14 : 13
       const hasAacSpeech = kind === 'audio' && schema === 'chipmunk.audio-reference-comparison/16'
@@ -845,6 +858,18 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       const matching = response.comparison.matching_waveform
       if (hasWaveform && (!matching || (matching.status === 'localized_difference') !== !!matching.range)) {
         throw new Error('The comparison response is missing its matching waveform evidence.')
+      }
+      if (hasAacWaveform) {
+        const clock = matching?.aac_presentation
+        const native = clock?.native_clock
+        const span = matching?.range?.submitted
+        if (clock?.side !== 'submitted' || clock.sample_rate !== 16000 || clock.presentation_end_exclusive_pts !== 96000
+            || !clock.bit_rate || clock.bit_rate < 60000
+            || native?.sample_rate !== 48000 || native.channels !== 1 || native.presentation_end_exclusive_pts !== 288000
+            || (span && (!span.source_pts || span.native_source_pts?.length !== 2 ||
+              span.native_source_pts[0] !== 3 * span.source_pts[0] || span.native_source_pts[1] !== 3 * span.source_pts[1]))) {
+          throw new Error('The comparison response is missing its AAC waveform clock.')
+        }
       }
       if (schema === 'chipmunk.audio-reference-comparison/6' && !response.comparison.local_timing) {
         throw new Error('The comparison response is missing its local audio timing result.')
@@ -1003,6 +1028,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
           {cleanSpeechAacAvailable && longCleanSpeechAvailable &&
             ` Twelve-second AAC M4A is supported at 48 kHz mono${cleanSpeechStereoAacAvailable ? ' or stereo' : ''}.`}
           {cleanSpeechAacAvailable && ' Use a 16 kHz mono 16-bit WAV or FLAC earlier copy with matching duration and timing.'}
+          {matchingWaveformAacAvailable && ' The waveform check also supports six-second 48 kHz mono AAC M4A starting at zero with a measured bitrate of at least 60 kbps.'}
         </p>
       </div>}
       {soundDifferenceAvailable && <div className="min-w-0 basis-full">
@@ -1043,6 +1069,7 @@ export default function MediaReferenceComparison({ analysisId, kind }: { analysi
       cleanSpeechAvailable={kind === 'audio' && availability.data.clean_speech_available === true}
       cleanSpeechAacAvailable={kind === 'audio' && availability.data.clean_speech_aac_available === true}
       cleanSpeechStereoAacAvailable={kind === 'audio' && availability.data.clean_speech_stereo_aac_available === true}
+      matchingWaveformAacAvailable={kind === 'audio' && availability.data.matching_waveform_aac_available === true}
       alignedSpeechAvailable={kind === 'audio' && availability.data.aligned_speech_available === true}
       longCleanSpeechAvailable={kind === 'audio' && availability.data.long_clean_speech_available === true} /> : null
 }

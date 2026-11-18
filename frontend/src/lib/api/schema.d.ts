@@ -2358,6 +2358,8 @@ export interface components {
             clean_speech_stereo_aac_available?: boolean | null;
             /** Long Clean Speech Available */
             long_clean_speech_available?: boolean | null;
+            /** Matching Waveform Aac Available */
+            matching_waveform_aac_available?: boolean | null;
         };
         /** AuditEventOut */
         AuditEventOut: {

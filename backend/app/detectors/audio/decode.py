@@ -77,14 +77,17 @@ def aac_native_extent(path: Path) -> int | None:
     return None
 
 
-def aac48_presentation(path: Path) -> dict | None:
+def aac48_presentation(path: Path, *, include_bit_rate: bool = False) -> dict | None:
     """Read the native clock and channel count of a supported 48 kHz AAC-LC source."""
     stream = _aac_presentation_stream(path)
     if (stream and (stream.get("sample_rate"), stream.get("time_base"), stream.get("start_pts"), stream.get("profile"))
             == ("48000", "1/48000", 0, "LC") and (stream.get("channels"), stream.get("channel_layout"))
             in {(1, "mono"), (2, "stereo")} and stream["duration_ts"] % 3 == 0):
-        return {"sample_rate": 48_000, "channels": stream["channels"], "time_base": "1/48000",
-                "presentation_end_exclusive_pts": stream["duration_ts"]}
+        clock = {"sample_rate": 48_000, "channels": stream["channels"], "time_base": "1/48000",
+                 "presentation_end_exclusive_pts": stream["duration_ts"]}
+        if include_bit_rate and (rate := _number(stream.get("bit_rate"))) is not None and rate > 0:
+            clock["bit_rate"] = int(rate)
+        return clock
     return None
 
 

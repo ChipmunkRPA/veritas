@@ -45,6 +45,48 @@ def save_stereo(folder, name, samples):
     return path
 
 
+def test_matching_waveform_aac_requires_a_six_second_mono_clock_and_replays_exact_excerpts(tmp_path):
+    from scipy.signal import butter, sosfiltfilt
+
+    rng = np.random.default_rng(663)
+    shape = butter(3, (150, 3600), fs=16000, btype="bandpass", output="sos")
+    source, donor, noise = (sosfiltfilt(shape, rng.standard_normal(96000)) * scale for scale in (.13, .13, .075))
+    earlier = save(tmp_path, "earlier", source)
+    edited = save(tmp_path, "edited", np.r_[source[:43200], donor[43200:55680], source[51360:-4320]] + noise)
+    deliveries = (("mono.m4a", 1, 6, "64k"), ("stereo.m4a", 2, 6, "64k"), ("short.m4a", 1, 5.9, "64k"),
+                  ("low-rate.m4a", 1, 6, "32k"))
+    for name, channels, seconds, bit_rate in deliveries:
+        target = tmp_path / name
+        subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-i", str(edited), "-t", str(seconds), "-ar", "48000",
+                        "-ac", str(channels), "-c:a", "aac", "-b:a", bit_rate, str(target)], check=True)
+        record, assets = audio_reference.compare(earlier, target, include_matching_waveform=True, include_matching_waveform_aac=True)
+        waveform = record["matching_waveform"]
+        if name != "mono.m4a":
+            assert record["schema"] == audio_reference.SCHEMA_WITH_MATCHING_WAVEFORM
+            assert waveform["status"] == "unassessed" and "aac_presentation" not in waveform
+            continue
+        assert record["schema"] == audio_reference.SCHEMA_WITH_AAC_MATCHING_WAVEFORM
+        assert waveform["status"] == "localized_difference" and waveform["affects_overall_confidence"] is False
+        assert waveform["aac_presentation"]["bit_rate"] >= audio_reference.WAVEFORM_AAC_MIN_BIT_RATE
+        assert waveform["aac_presentation"]["native_clock"]["presentation_end_exclusive_pts"] == 288000
+        span = waveform["range"]["submitted"]
+        first, end = span["samples"]
+        assert first <= 44000 < end and span["native_source_pts"] == [3 * first, 3 * end]
+        assert span["start_s"] == first / 16000 and span["end_s"] == end / 16000
+        with pymupdf.open(stream=render_comparison(record, assets), filetype="pdf") as report:
+            text = " ".join(" ".join(page.get_text().split()) for page in report)
+            assert f"AAC presentation [{3 * first}, {3 * end}) on the 48 kHz clock." in text
+        output = tmp_path / "comparison.json"
+        output.write_text(json.dumps({"comparison": record, "assets": {name: base64.b64encode(data).decode()
+                                                                             for name, data in assets.items()}}))
+        assert run(earlier, target, output, verify=True) == record
+        payload = json.loads(output.read_text())
+        payload["comparison"]["matching_waveform"]["range"]["submitted"]["native_source_pts"][1] += 1
+        output.write_text(json.dumps(payload))
+        with pytest.raises(ValueError, match="differs from the re-decoded sources"):
+            run(earlier, target, output, verify=True)
+
+
 @pytest.mark.parametrize(("right_start", "allowed", "supported"), [
     (32000, True, True), (None, True, False), (38400, True, False), (32000, False, False),
 ])

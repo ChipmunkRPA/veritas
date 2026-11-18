@@ -85,6 +85,33 @@ describe('ordinary multimedia evidence', () => {
     expect(region.getAllByRole('link').map(link => link.getAttribute('href'))).toEqual(['#media-evidence-VLT01', '#media-evidence-VLT02'])
   })
 
+  it('links reduced speech activity to source frames and playback using the same sample range', () => {
+    const previous = video.packets[0]
+    const title = 'Reduced speech activity during visible mouth movement'
+    show({ ...video, lip_timing_review: {
+      schema: 'chipmunk.video-lip-timing/8', status: 'matched', observation: title, affects_overall_confidence: false,
+    }, packets: [{ ...previous, id: 'VLT01', title, claim_scope: 'sampled_window',
+      observation: 'Audio source time 0.640–1.024 s. Corresponding picture time 0.640–1.024 s.',
+      measurements: [{ label: 'Visible mouth frames', value: 8, unit: 'frames' }],
+      lip_timing_review: { audio_source_pts: [10240, 16384], picture_source_samples: [10240, 16384],
+        speech_activity_gap: { activity_millionths: [[900000, 880000], [150000, 130000], [860000, 840000]],
+          visible_mouth_frames: 8, margin_millionths: 710000 },
+      },
+      frames: (['before', 'during', 'after'] as const).map(role => ({ ...previous.frames[0], id: `VLT01.${role}`, interval_role: role })),
+      artifacts: { ...previous.artifacts, lip_timing_waveform: asset('2'), lip_timing_audio: asset('3', 'audio/wav') },
+    }] })
+    const region = within(screen.getByRole('region', { name: 'Speech activity and visible mouth movement' }))
+    expect(region.getByRole('link', { name: 'Inspect source frames and waveform' }).getAttribute('href')).toBe('#media-evidence-VLT01')
+    const evidence = within(screen.getByRole('article'))
+    expect(evidence.getByText(/mix of the original channels.*\[10240, 16384\) at 16 kHz/)).toBeTruthy()
+    for (const role of ['before', 'during', 'after']) {
+      expect(evidence.getByText(new RegExp(`${role} reduced speech activity range`, 'i'))).toBeTruthy()
+    }
+    expect(evidence.getAllByAltText(/exact measured mouth region/)).toHaveLength(3)
+    expect(evidence.getByAltText('Waveform around the reduced speech activity interval')).toBeTruthy()
+    expect(evidence.getByLabelText('Listen to the original channels mixed during reduced speech activity').getAttribute('src')).toContain('.wav')
+  })
+
   it('shows the exact language evidence when all authorship checks were outside scope', () => {
     show({ ...document, packets: [], coverage: { writing_check_coverage: {
       schema: 'document-writing-check-coverage/3',

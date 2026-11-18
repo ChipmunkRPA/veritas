@@ -769,6 +769,11 @@ def _lip_timing_packet(db, store, analysis, set_id, source, table, review, decod
         title = silent.TITLE
         interpretation = silent.INTERPRETATION
         measures = silent.measurements(review["measurement"])
+    elif binding.ACTIVITY_KEY in witness:
+        selection = binding.ACTIVITY_KEY
+        title = binding.ACTIVITY_TITLE
+        interpretation = binding.ACTIVITY_INTERPRETATION
+        measures = binding.activity_measurements(witness)
     elif agreement.KEY in witness:
         selection = agreement.KEY
         title = agreement.TITLE
@@ -1198,12 +1203,15 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         from app.evidence import video_silent_mouth as silent
 
         document["audio"] = video_audio.build_channel(db, analysis, store, result, set_id=set_id)
-        if timing and {agreement.KEY, silent.SHOT_KEY} & timing.get("inputs", {}).keys():
+        if timing and {agreement.KEY, silent.SHOT_KEY, video_viseme_binding.ACTIVITY_KEY} & timing.get("inputs", {}).keys():
             from app.evidence import audio_packets
 
             sound_input = result["manifest"]["sampling"]["video_audio_evidence"]["input"]
             _, mapping = audio_packets._input(store, analysis, sound_input)
             document["audio"]["source"]["source_codec"] = mapping["source_codec"]
+            if timing["schema"] == video_viseme_binding.SCHEMA_WITH_ACTIVITY:
+                document["audio"]["source"].update(source_time_base=mapping["source_time_base"],
+                                                  source_start_pts=mapping["source_start_pts"])
         document["av"] = video_av.build_channel(db, analysis, store, result, set_id=set_id,
             video_source=source, table=table, anchors=anchors, audio_channel=document["audio"])
         document["coverage"]["channels"] = {

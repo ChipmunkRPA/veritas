@@ -1234,15 +1234,23 @@ def render(ctx: StageContext) -> dict[str, Any]:
     decode_output = ctx.outputs.get("decode") or {}
     decoded_audio = decode_output.get("audio") or {}
     timing_review = None
-    if settings.environment == "dev" and settings.video_lip_timing_review and ctx.profile == Profile.FULL:
-        from app.detectors.video.viseme_review import assess
+    if (settings.environment == "dev" and ctx.profile == Profile.FULL
+            and (settings.video_lip_timing_review or settings.video_speech_activity_gap_enhancer)):
+        from app.detectors.video.viseme_review import activity_eligible, assess, assess_activity
 
-        timing_review = (video_viseme_binding.skipped("provenance") if provenance_gate.stop(ctx) else
-                         assess(ctx, frame_store, ctx.state.get("video_audio_mapping"),
-                                decoded_audio.get("evidence_input"), shot_output.get("ranges"),
-                                stereo_scope=decoded_audio.get("lip_timing_stereo_scope"),
-                                shot_frames=shot_output.get("frames_scanned")))
-        if timing_review["status"] == "matched":
+        mapping = ctx.state.get("video_audio_mapping")
+        shot_ranges, shot_frames = shot_output.get("ranges"), shot_output.get("frames_scanned")
+        use_activity = (settings.video_speech_activity_gap_enhancer and decoded_audio.get("evidence_input")
+                        and activity_eligible(frame_store.table if frame_store is not None else None,
+                                              mapping, shot_ranges, shot_frames))
+        if provenance_gate.stop(ctx):
+            timing_review = video_viseme_binding.skipped("provenance")
+        elif use_activity:
+            timing_review = assess_activity(ctx, frame_store, mapping)
+        elif settings.video_lip_timing_review:
+            timing_review = assess(ctx, frame_store, mapping, decoded_audio.get("evidence_input"), shot_ranges,
+                                   stereo_scope=decoded_audio.get("lip_timing_stereo_scope"), shot_frames=shot_frames)
+        if timing_review and timing_review["status"] == "matched":
             anchors = frame_store.native_anchors()
     stereo_sha = decoded_audio.get("stereo_context_sha256")
     # A reused historical render output must not acquire evidence on publication.

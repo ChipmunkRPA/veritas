@@ -612,15 +612,29 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         from app.evidence import video_lip_agreement as agreement
         from app.evidence import video_silent_mouth as silent
 
+        activity = lip_timing["inputs"].get(video_viseme_binding.ACTIVITY_KEY)
         stereo_scope = lip_timing.get("stereo_scope")
         decoded_audio = decode_audio(original, source_sha256=digest, max_seconds=VIDEO_AUDIO_MAX_SECONDS,
-                                     inspect_stereo=stereo_scope is not None, retain_stereo=stereo_scope is not None)
+                                     inspect_stereo=stereo_scope is not None, retain_stereo=bool(stereo_scope or activity))
         if stereo_scope is not None and capture(decoded_audio) != stereo_scope:
             raise ValueError("The original video does not reproduce the timing review's stereo channel measurements")
         limit = video_viseme_binding.sample_limit(lip_timing)
+        presented = video_viseme_binding.presented_samples(decoded_audio.mapping, max_samples=limit)
+        if activity:
+            from app.detectors.video.shots import detect_shots
+            from app.detectors.video.viseme_review import activity_eligible
+
+            with closing(decode_stream(original, table)) as shot_frames:
+                shots = detect_shots(shot_frames, table).as_json()
+            stereo_pcm = decoded_audio.stereo_pcm
+            if (not activity_eligible(table, decoded_audio.mapping, shots["ranges"], shots["frames_scanned"])
+                    or stereo_pcm is None or len(stereo_pcm) < presented
+                    or hashlib.sha256(stereo_pcm[:presented].astype("<i2", copy=False).tobytes()).hexdigest()
+                    != activity["stereo_sha256"]):
+                raise ValueError("The source does not reproduce the speech activity review's picture and stereo recording")
+        origin = 0 if activity else video_viseme_binding.audio_origin(decoded_audio.mapping, stereo_scope, max_samples=limit)
         if (decoded_audio.mapping["pcm_sha256"] != lip_timing["pcm_sha256"]
-                or video_viseme_binding.presented_samples(decoded_audio.mapping, max_samples=limit) != lip_timing["inputs"]["samples"]
-                or video_viseme_binding.audio_origin(decoded_audio.mapping, stereo_scope, max_samples=limit) != lip_timing["audio_origin_pts"]):
+                or presented != lip_timing["inputs"]["samples"] or origin != lip_timing["audio_origin_pts"]):
             raise ValueError("The original video does not reproduce the timing review's soundtrack")
         clock_fields = video_viseme_binding.AAC_PRESENTATION_FIELDS
         if decoded_audio.mapping.get(agreement.AAC_44100_CLOCK):

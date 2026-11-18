@@ -12,6 +12,8 @@ try {
   const errors = []
   page.on('pageerror', error => errors.push(error.message))
   const item = input.cases[0]
+  const range = item.activity ? 'reduced speech activity' : 'near-silent'
+  const title = item.activity ? 'Reduced speech activity during visible mouth movement' : 'Mouth movement with a near-silent soundtrack'
   await page.goto(`${input.url}/analyses/${item.analysis_id}/media-evidence?view=plain`)
   if (item.shot_count) {
     const coverage = page.getByRole('region', { name: 'Speech and mouth comparison' })
@@ -24,25 +26,27 @@ try {
   assert.equal(await link.getAttribute('href'), '#media-evidence-VLT01')
   await link.click()
   const card = page.locator('#media-evidence-VLT01')
-  assert.match(await card.innerText(), /Mouth movement with a near-silent soundtrack/)
+  assert((await card.innerText()).includes(title))
   const pictures = []
   for (const [role, index] of Object.entries(item.frames)) {
-    assert.match(await card.innerText(), new RegExp(`${role} near-silent range · Frame ${index}`, 'i'))
+    assert.match(await card.innerText(), new RegExp(`${role} ${range} range · Frame ${index}`, 'i'))
     for (const name of ['exact original video frame', 'exact measured mouth region']) {
       pictures.push(card.getByRole('img', { name: `VLT01.${role}: ${name}` }))
     }
   }
-  pictures.push(card.getByRole('img', { name: 'Waveform around the near-silent soundtrack interval' }))
+  pictures.push(card.getByRole('img', { name: item.activity ? 'Waveform around the reduced speech activity interval'
+    : 'Waveform around the near-silent soundtrack interval' }))
   for (const picture of pictures) {
     await picture.scrollIntoViewIfNeeded()
     assert(await picture.evaluate(async image => { await image.decode(); return image.naturalWidth > 0 }))
   }
-  const audio = card.getByLabel('Listen to the near-silent soundtrack interval')
+  const audio = card.getByLabel(item.activity ? 'Listen to the original channels mixed during reduced speech activity'
+    : 'Listen to the near-silent soundtrack interval')
   await audio.scrollIntoViewIfNeeded()
   await audio.evaluate(element => { element.preload = 'metadata'; element.load() })
   await page.waitForFunction(() => document.querySelector('#media-evidence-VLT01 audio')?.readyState >= 1)
   assert.deepEqual(errors, [])
-  await card.screenshot({ path: path.join(input.output, 'near-silent-browser.png'), animations: 'disabled' })
+  await card.screenshot({ path: path.join(input.output, `${item.activity ? 'reduced-activity' : 'near-silent'}-browser.png`), animations: 'disabled' })
   console.log(JSON.stringify({ chromium: browser.version(), ordinary_view: true, decoded_images: pictures.length, audio_ready: true }))
 } finally {
   await browser.close()

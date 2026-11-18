@@ -97,3 +97,46 @@ A separate local recount used the integer intersection and union of the
 retained sample ranges to reproduce all three methods' counts across the
 616 deliveries. It also verified the held input, mouth observation, source
 inventory and frozen reservation hashes.
+
+### Compare another detector on the same files
+
+The [independent comparison receipt](evaluation-panels/video-stereo-covariance-independent-2026-11-17.json.gz)
+contains the portable manifest, exact ground-truth intervals, relative file
+index, and three sets of predictions. The exporter checked all 336 delivered
+videos and their parent video hashes. The manifest classifies the task as audio
+because the labels apply to the soundtrack of each video. Intervals are
+half-open sample ranges on the presented 16 kHz clock. Each second corresponds
+to 16,000 samples. A copy of the mono prediction can verify interval counts.
+Its coverage is unknown when no proposal was retained.
+
+From the repository root, unpack the receipt and recount the selected system
+with standard-library Python. Replace the system identity and prediction rows
+in a new response file to compare your detector. Keep the manifest hash,
+case IDs and input hashes. Supply `regions: []` for an assessed clip with no
+proposal, or a reason and `response: null` for an unassessed clip.
+
+```sh
+review=$(mktemp -d)
+receipt=docs/evaluation-panels/video-stereo-covariance-independent-2026-11-17.json.gz
+python3 -B -S - "$receipt" "$review" <<'PY'
+import gzip
+import json
+import sys
+from pathlib import Path
+
+with gzip.open(sys.argv[1], "rt", encoding="utf-8") as stream:
+    receipt = json.load(stream)
+directory = Path(sys.argv[2])
+parts = {key: receipt[key] for key in ("manifest", "truth", "file_index")}
+for key, body in (parts | receipt["readings"]).items():
+    (directory / f"{key}.json").write_text(json.dumps(body), encoding="utf-8")
+PY
+python3 -B -IS backend/scripts/independent_review.py count-events \
+  "$review/manifest.json" "$review/truth.json" "$review/selected_covariance.json" \
+  "$review/counts.json" --match 0.4 0.4
+```
+
+Use `scripts.export_video_covariance_review --help` to rebuild the receipt
+after reproducing the original media in sibling `held` and `sources`
+directories. It rejects an input receipt that differs from the frozen held
+run and checks the exact files before exporting any comparison.

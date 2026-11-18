@@ -37,6 +37,11 @@ export interface VideoEvidencePacket extends PacketBase {
     picture_source_samples: [number, number]
     change_samples?: number
     silent_mouth?: { near_silent_peak_units: number; visible_mouth_frames: number }
+    speech_activity_gap?: {
+      activity_millionths: [[number, number], [number, number], [number, number]]
+      visible_mouth_frames: number
+      margin_millionths: number
+    }
     articulation?: { mismatched_events: number; audio_sample: number; picture_frame: number; picture_pts: number }
     motion_sound_agreement?: { agreement_units: [number, number, number] }
   }

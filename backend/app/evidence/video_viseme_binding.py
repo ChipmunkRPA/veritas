@@ -22,6 +22,15 @@ SCHEMA_WITH_STEREO = "chipmunk.video-lip-timing/4"
 SCHEMA_WITH_SILENCE = "chipmunk.video-lip-timing/5"
 SCHEMA_WITH_MOTION_SOUND = "chipmunk.video-lip-timing/6"
 SCHEMA_WITH_SHOTS = "chipmunk.video-lip-timing/7"
+SCHEMA_WITH_ACTIVITY = "chipmunk.video-lip-timing/8"
+ACTIVITY_KEY = "speech_activity_gap"
+ACTIVITY_TITLE = "Reduced speech activity during visible mouth movement"
+ACTIVITY_INTERPRETATION = ("The highlighted interval had lower measured speech activity than nearby portions of the "
+                           "soundtrack while the visible mouth continued moving.")
+ACTIVITY_LIMITATION = ("Ordinary speech pauses, offscreen voices, noise and mixing can affect this check. "
+                       "The waveform and excerpt show a mix of the submitted channels. "
+                       "This observation carries zero weight in the AI assessment.")
+ACTIVITY_POINTS = {"pcm": 362686, "aac48": 379013}
 PACKET_ID = "VLT01"
 CLIP, WAVEFORM = "lip_timing_audio", "lip_timing_waveform"
 REFERENCE = {"closure": {"median": .000578}, "rounded": {"median": .3973106}, "spread": {"median": .9265317}}
@@ -122,6 +131,71 @@ def audio_origin(mapping, stereo_scope=None, *, max_samples=64_000):
     return first if cursor == samples else None
 
 
+def activity_profile(timestamps, time_base, mapping):
+    """Admit the continuous 30 fps stereo source and exact clock used by the panel."""
+    if (not 40 <= len(timestamps) <= 120 or timestamps[0] != 0
+            or any((b - a) * Fraction(time_base) != Fraction(1, 30) for a, b in zip(timestamps, timestamps[1:]))
+            or mapping.get("source_channels") != 2 or mapping.get("audio_stream_indices")
+            or mapping.get("timeline_time_base") != "1/16000"):
+        return None
+    count = presented_samples(mapping)
+    if (count is None or count != round(len(timestamps) * timing.RATE / 30)
+            or mapping.get("timeline") != [{"start_sample": 0, "end_sample": mapping["samples"], "source_pts": 0}]):
+        return None
+    carrier = mapping.get("source_codec"), mapping.get("source_sample_rate")
+    if (carrier == ("pcm_s16le", 16_000) and mapping.get("source_time_base") == "1/16000"
+            and mapping.get("source_start_pts") == 0):
+        return "pcm"
+    if (carrier == ("aac", 48_000) and mapping.get("source_profile") == "LC"
+            and mapping.get("source_container") == stereo.CONTAINER):
+        return "aac48"
+    return None
+
+
+def _activity(raw, inputs, mapping, profile):
+    from app.bench.video_speech_activity_gap import BLOCK, scan
+
+    traces = raw[ACTIVITY_KEY]
+    if (not isinstance(traces, dict) or set(traces) != {"original", "reduced", "stereo_sha256"}
+            or not _SHA.fullmatch(str(traces["stereo_sha256"])) or inputs["phones"]):
+        raise ValueError("Invalid speech-activity measurement")
+    values = []
+    for name in ("original", "reduced"):
+        trace = traces[name]
+        if (not isinstance(trace, list) or len(trace) != inputs["samples"] // BLOCK
+                or any(not isinstance(item, str) or len(item) > 28 for item in trace)):
+            raise ValueError("Speech activity does not match the measured sample clock")
+        try:
+            values.append([float.fromhex(item) for item in trace])
+        except (ValueError, OverflowError) as error:
+            raise ValueError("Invalid speech activity value") from error
+    result = scan(*values, inputs["frames"])["both"]
+    chosen = result["reading"]
+    if chosen and chosen["margin_millionths"] > ACTIVITY_POINTS[profile]:
+        witness = {"audio_source_pts": chosen["span"], "picture_source_samples": chosen["span"],
+                   "picture_frames": chosen["picture_frames"],
+                   ACTIVITY_KEY: {"activity_millionths": chosen["activity_millionths"],
+                                  "margin_millionths": chosen["margin_millionths"],
+                                  "visible_mouth_frames": chosen["mouth_frames"]}}
+        note = {**skipped("matched"), "observation": _activity_observation(witness)}
+    else:
+        witness = None
+        if result["assessed"]:
+            note = {**skipped("no_match"), "observation": "No qualifying short decline in speech activity was measured."}
+        else:
+            note = {**skipped("insufficient_events"),
+                    "observation": "The soundtrack and picture did not provide enough comparable speech and mouth activity."}
+    return {**note, "schema": SCHEMA_WITH_ACTIVITY, "measurement_basis": ACTIVITY_KEY,
+            "inputs": {**inputs, ACTIVITY_KEY: traces}, "measurement": chosen, "witness": witness,
+            "audio_origin_pts": 0, "pcm_sha256": mapping["pcm_sha256"]}
+
+
+def _activity_observation(witness):
+    start, end = (sample / timing.RATE for sample in witness["audio_source_pts"])
+    return (f"Speech activity fell in both audio readings between {start:.3f} and {end:.3f} s, while mouth movement "
+            f"continued across {witness[ACTIVITY_KEY]['visible_mouth_frames']} submitted frames.")
+
+
 def _witness(candidate, pictures, samples, origin, point):
     state = candidate["status"]
     if state != "measured" or candidate["score"] <= point:
@@ -214,7 +288,12 @@ def exhibits(record):
 
 def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
     limit = agreement.MAX_MULTISHOT_SAMPLES if silent.SHOT_KEY in raw else 64_000
-    origin = audio_origin(mapping, stereo_scope, max_samples=limit)
+    activity = ACTIVITY_KEY in raw
+    profile = activity_profile(timestamps, time_base, mapping) if activity else None
+    if activity and (profile is None or stereo_scope is not None
+                     or not 320 <= source["width"] <= 1280 or not 240 <= source["height"] <= 720):
+        raise ValueError("The speech-activity check requires a qualified stereo video source")
+    origin = 0 if activity else audio_origin(mapping, stereo_scope, max_samples=limit)
     if origin is None or (mapping.get("source_sample_rate") == agreement.AAC_44100_RATE and silent.SHOT_KEY not in raw):
         raise ValueError("The mixed soundtrack has no supported continuous source clock")
     base = Fraction(time_base)
@@ -244,6 +323,8 @@ def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
     samples = presented_samples(mapping, max_samples=limit)
     _validate_phones(raw["phones"], samples, timing.PHONES)
     inputs = {"frames": rows, "phones": raw["phones"], "samples": samples}
+    if activity:
+        return _activity(raw, inputs, mapping, profile)
     if silent.SHOT_KEY in raw:
         return _measured_shots(raw, inputs, timestamps, time_base, mapping, origin, stereo_scope)
     picture = {"frames": geometry}
@@ -323,6 +404,8 @@ def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
 
 def observation(record):
     witness = record["witness"]
+    if ACTIVITY_KEY in witness:
+        return _activity_observation(witness)
     if silent.KEY in witness:
         return silent.observation(witness)
     if agreement.KEY in witness:
@@ -359,7 +442,7 @@ def validate(document, *, timestamps=None, committed=_UNSET):
         return
     state = record["status"]
     if (record.get("schema") not in {SCHEMA, SCHEMA_WITH_APERTURE, SCHEMA_WITH_ARTICULATION, SCHEMA_WITH_STEREO,
-                                   SCHEMA_WITH_SILENCE, SCHEMA_WITH_MOTION_SOUND, SCHEMA_WITH_SHOTS}
+                                   SCHEMA_WITH_SILENCE, SCHEMA_WITH_MOTION_SOUND, SCHEMA_WITH_SHOTS, SCHEMA_WITH_ACTIVITY}
             or state not in STATUS or record.get("affects_overall_confidence") is not False):
         raise ValueError("Invalid lip timing disposition")
     if "inputs" not in record:
@@ -393,6 +476,11 @@ def validate(document, *, timestamps=None, committed=_UNSET):
             or packet.get("measurements") != motion_measurements(record["witness"])
         ):
             raise ValueError("Local speech and mouth summary differs from the measured interval")
+        if ACTIVITY_KEY in record["witness"] and (
+            packet.get("title") != ACTIVITY_TITLE or packet.get("interpretation") != ACTIVITY_INTERPRETATION
+            or packet.get("measurements") != activity_measurements(record["witness"])
+        ):
+            raise ValueError("Speech-activity summary differs from the measured interval")
         frames = record["witness"]["picture_frames"]
         expected = [(role, frames[role]) for role in ROLES if frames[role] is not None]
         if [(frame.get("interval_role"), frame["anchor"]["frame_index"]) for frame in packet["frames"]] != expected:
@@ -413,6 +501,8 @@ def validate(document, *, timestamps=None, committed=_UNSET):
 
 
 def packet_limitation(witness):
+    if ACTIVITY_KEY in witness:
+        return ACTIVITY_LIMITATION
     if silent.KEY in witness:
         return silent.LIMITATION
     if agreement.KEY in witness:
@@ -423,3 +513,11 @@ def packet_limitation(witness):
 def motion_measurements(witness):
     return [{"label": f"Sound and mouth agreement {where}", "value": round(value / agreement.UNITS, 4), "unit": "relative score"}
             for where, value in zip(("before", "within", "after"), witness[agreement.KEY]["agreement_units"], strict=True)]
+
+
+def activity_measurements(witness):
+    readings = witness[ACTIVITY_KEY]["activity_millionths"]
+    return [{"label": f"Speech activity {where}, {audio}", "value": round(value / 1_000_000, 4),
+             "unit": "relative score"}
+            for where, pair in zip(("before", "within", "after"), readings, strict=True)
+            for audio, value in zip(("original", "noise-reduced"), pair, strict=True)]

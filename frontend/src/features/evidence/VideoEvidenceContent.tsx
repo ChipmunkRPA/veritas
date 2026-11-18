@@ -101,7 +101,10 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       const crop = frame.artifact_refs.crop && packet.artifacts[frame.artifact_refs.crop]
       const mouthCrop = (packet.mouth_local_hold || packet.lip_timing_review) && crop
       const mismatch = packet.lip_timing_review?.articulation || packet.lip_timing_review?.motion_sound_agreement
-      const rangeLabel = packet.scene_return ? 'picture change' : `${cut ? 'picture-cut' : refined ? 'refined' : packet.mouth_local_hold ? 'hold' : packet.lip_timing_review?.silent_mouth ? 'near-silent' : mismatch ? 'mismatch' : packet.lip_timing_review ? 'timing' : packet.face_spatial_cut ? 'review' : 'flagged'} range`
+      const timingLabel = packet.lip_timing_review?.speech_activity_gap ? 'reduced speech activity'
+        : packet.lip_timing_review?.silent_mouth ? 'near-silent' : mismatch ? 'mismatch' : 'timing'
+      const rangeLabel = packet.scene_return ? 'picture change'
+        : `${cut ? 'picture-cut' : refined ? 'refined' : packet.mouth_local_hold ? 'hold' : packet.lip_timing_review ? timingLabel : packet.face_spatial_cut ? 'review' : 'flagged'} range`
       const sceneSupport = frame.interval_role === 'during' && packet.scene_return
         ? packet.scene_return.tiles : null
       const navigationKnown = frame.anchor.playback_time_s != null && Number.isFinite(frame.anchor.playback_time_s) && frame.anchor.playback_time_s >= 0
@@ -137,8 +140,10 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
 
   return <div id="media-evidence-visual" data-testid="video-evidence-content" className="scroll-mt-20">
     {lipTiming && <section aria-labelledby="video-lip-timing-heading" className="mt-4 rounded-md border border-border p-4">
-      <h3 id="video-lip-timing-heading" className="m-0 text-body font-medium">{['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4', 'chipmunk.video-lip-timing/5', 'chipmunk.video-lip-timing/6', 'chipmunk.video-lip-timing/7'].includes(lipTiming.schema ?? '')
-        ? 'Speech and mouth comparison' : 'Speech and mouth timing trial'}</h3>
+      <h3 id="video-lip-timing-heading" className="m-0 text-body font-medium">{lipTiming.schema === 'chipmunk.video-lip-timing/8'
+        ? 'Speech activity and visible mouth movement'
+        : ['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4', 'chipmunk.video-lip-timing/5', 'chipmunk.video-lip-timing/6', 'chipmunk.video-lip-timing/7'].includes(lipTiming.schema ?? '')
+          ? 'Speech and mouth comparison' : 'Speech and mouth timing trial'}</h3>
       <p className="mt-2 mb-0 text-small text-text-muted">{lipTiming.observation}</p>
       {lipTiming.shot_coverage ? <ul className="mt-2 mb-0 space-y-1 pl-5 text-small">
         {lipTiming.shot_coverage.map(shot => <li key={shot.frames[0]}>
@@ -330,13 +335,17 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       {renderFrames(packet, packet.frames, false)}
       {packet.lip_timing_review && <div className="mt-4 space-y-3">
         <EvidencePicture set={set} artifact={packet.artifacts.lip_timing_waveform} token={token} ready={mediaReady}
-          alt={packet.lip_timing_review.silent_mouth ? 'Waveform around the near-silent soundtrack interval' :
+          alt={packet.lip_timing_review.speech_activity_gap ? 'Waveform around the reduced speech activity interval'
+            : packet.lip_timing_review.silent_mouth ? 'Waveform around the near-silent soundtrack interval' :
             (packet.lip_timing_review.articulation || packet.lip_timing_review.motion_sound_agreement)
               ? 'Waveform during the speech and mouth mismatch' :
             'Waveform on the audio source clock during the timing change'} chart />
-        <p className="m-0 text-caption text-text-muted">The shaded interval matches the playback below. The waveform is scaled to make quiet speech visible.</p>
+        <p className="m-0 text-caption text-text-muted">{packet.lip_timing_review.speech_activity_gap
+          ? <>The waveform and playback use a mix of the original channels. The highlighted interval spans samples [{packet.lip_timing_review.audio_source_pts[0]}, {packet.lip_timing_review.audio_source_pts[1]}) at 16 kHz.</>
+          : 'The shaded interval matches the playback below. The waveform is scaled to make quiet speech visible.'}</p>
         <EvidenceAudio set={set} artifact={packet.artifacts.lip_timing_audio} token={token} ready={mediaReady}
-          alt={packet.lip_timing_review.silent_mouth ? 'Listen to the near-silent soundtrack interval' :
+          alt={packet.lip_timing_review.speech_activity_gap ? 'Listen to the original channels mixed during reduced speech activity'
+            : packet.lip_timing_review.silent_mouth ? 'Listen to the near-silent soundtrack interval' :
             (packet.lip_timing_review.articulation || packet.lip_timing_review.motion_sound_agreement)
               ? 'Listen to the soundtrack during the speech and mouth mismatch' :
             'Listen to the soundtrack during the measured timing change'} />

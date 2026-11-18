@@ -22,6 +22,13 @@ available for comparison.
 The [stereo covariance replay](video-stereo-covariance-2026-11-17.md#reproduce)
 compares three ways to locate speech removals while room audio continues. Its
 336 held deliveries have pinned sources, edit intervals, and per-clip results.
+The portable comparison includes the manifest, exact 16 kHz truth intervals,
+original-file index and example model responses. A reviewer can score another
+detector on the same files without loading this project's models.
+
+The [speech-activity gap comparison](video-speech-activity-gaps-2026-11-17.md#replay)
+reserves 12 additional speaker groups and evaluates three frozen readings.
+The replay gives per-file clock, coverage and outcome for both encodings.
 
 The [portrait face-change replay](video-face-portrait-2026-11-17.md#reproduce)
 checks input hashes, native frame intervals and ordinary shot controls on

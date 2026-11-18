@@ -91,13 +91,13 @@ from the retained JPEGs produced no qualifying earlier grid.
 
 ## Local analysis
 
-In development, `VERITAS_IMAGE_JPEG_PRIOR_GRID_REVIEW=true` enables the
-check in Full and Deep image analyses. It accepts the tested quality-90
-4:2:0 tables in baseline JPEGs and in complete progressive JPEGs with
-fixed quantization tables. The quality-85 profile below uses the same
-formats. It can report a region when the aligned
-JPEG and regional image checks complete without selecting one. Verified
-AI credentials stop the analysis before this comparison.
+The check runs by default in local Full and Deep image analyses. Set
+`VERITAS_IMAGE_JPEG_PRIOR_GRID_REVIEW=false` to disable it. It accepts the
+tested quality-85 and quality-90 4:2:0 tables in baseline JPEGs and in
+complete progressive JPEGs with fixed quantization tables. It can report a
+region when the aligned JPEG and regional image checks complete without
+selecting one. Verified AI credentials stop the analysis before this
+comparison.
 
 The ordinary view shows a rectangular outline, the unmarked crop from
 the submitted image, and a link that focuses the original on the same
@@ -117,6 +117,16 @@ paired replay. The queue held zero jobs before payment. The browser, PDF,
 JSON and signed-source comparisons reproduced the native coordinates on
 representative cases.
 [Local checkout and browser receipt](evaluation-panels/image-previous-grid-app-2026-11-17.json)
+
+A separate local run used the project defaults without a local settings file
+or a switch override. The edited quality-90 file marked columns
+`[597, 725)` and rows `[117, 245)`, matching 14,882 pixels of the 16,768
+pixel target. Its unchanged counterpart and another source's direct export
+showed no region. The PDF, JSON and signed-source replay agreed on all
+four paid cases, including the same edit with the check disabled. The
+ordinary browser view displayed the 128 × 128 source crop and linked to
+the same coordinates. The automated assessment was identical with and
+without the evidence.
 
 ### Progressive JPEGs and EXIF orientation
 

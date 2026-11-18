@@ -63,6 +63,56 @@ def supported_shots(table, mapping, shots):
     return any(agreement.eligible_shot(start, stop) for start, stop in shots)
 
 
+def activity_eligible(table, mapping, shots, shot_frames):
+    return (table is not None and mapping and shots == [[0, len(table)]] and shot_frames == len(table)
+            and not (table.truncated or table.interpolated or table.rotation)
+            and 320 <= table.width <= 1280 and 240 <= table.height <= 720
+            and binding.activity_profile(table.pts, table.time_base, mapping) is not None)
+
+
+def assess_activity(ctx, frame_store, mapping):
+    table = frame_store.table
+    geometry = settings.video_lip_timing_face_asset
+    runtime = settings.video_lip_timing_runtime
+    enhancer = settings.video_speech_activity_gap_enhancer
+    vad = settings.weights_dir / "audio-upgrade" / "silero_vad.jit"
+    if not geometry or not geometry.is_file() or not enhancer.is_dir() or not vad.is_file():
+        return binding.skipped("assets")
+    remaining = ctx.deadline.remaining()
+    budget = TIME_BUDGET if remaining is None else min(TIME_BUDGET, remaining - 8.)
+    if budget < 12.:
+        return binding.skipped("runtime")
+    request = {"activity": True, "runtime": str(runtime.resolve()) if runtime else None, "geometry": str(geometry.resolve()),
+               "enhancer": str(enhancer.resolve()), "vad": str(vad.resolve()), "frames": table.to_json(),
+               "video": str(frame_store.path.resolve()), "source_sha256": mapping["source_sha256"]}
+    try:
+        measured = binding.measured(_observe(request, budget), timestamps=table.pts, time_base=table.time_base,
+                                    source={"width": table.width, "height": table.height}, mapping=mapping)
+        _verify_anchors(frame_store, measured)
+    except (OSError, ValueError, RuntimeError, subprocess.SubprocessError):
+        return binding.skipped("runtime")
+    return measured
+
+
+def _verify_anchors(frame_store, measured):
+    indices = sorted({i for _, exhibit in binding.exhibits(measured) for i in exhibit["witness"]["picture_frames"].values()})
+    if not indices:
+        return
+    frames = dict(frame_store.iter_many(indices, timeout_s=4.))
+    if any(i not in frames or not frame_store.native_pts_verified(i)
+           or hashlib.sha256(frames[i].tobytes()).hexdigest() != measured["inputs"]["frames"][i]["rgb_sha256"] for i in indices):
+        raise ValueError("Timing frames could not be verified against the original")
+
+
+def _observe(request, budget):
+    env = {"PATH": os.environ.get("PATH", os.defpath), "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1",
+           "HF_HUB_DISABLE_TELEMETRY": "1", "PYTHONPATH": str(Path(__file__).resolve().parents[3]),
+           "OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "VECLIB_MAXIMUM_THREADS": "1"}
+    run = subprocess.run([sys.executable, "-B", "-m", "app.detectors.video.viseme_worker"],
+                         input=json.dumps(request), env=env, text=True, capture_output=True, timeout=budget, check=True)
+    return json.loads(run.stdout)
+
+
 def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None, shot_frames=None):
     table = frame_store.table if frame_store is not None else None
     if audio_input is None:
@@ -106,13 +156,8 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None, 
                "shot_ranges": shots if shot_based_silence else None,
                "motion_models": str(agreement_models.resolve())
                if not shot_based_silence and agreement_profile and agreement_models and not mapping.get("audio_stream_indices") else None}
-    env = {"PATH": os.environ.get("PATH", os.defpath), "HF_HUB_OFFLINE": "1", "TRANSFORMERS_OFFLINE": "1",
-           "HF_HUB_DISABLE_TELEMETRY": "1", "PYTHONPATH": str(Path(__file__).resolve().parents[3]),
-           "OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "VECLIB_MAXIMUM_THREADS": "1"}
     try:
-        run = subprocess.run([sys.executable, "-B", "-m", "app.detectors.video.viseme_worker"],
-                             input=json.dumps(request), env=env, text=True, capture_output=True, timeout=budget, check=True)
-        raw = json.loads(run.stdout)
+        raw = _observe(request, budget)
         if settings.video_lip_silent_mouth_review and stereo_scope is None:
             from app.detectors.audio.decode import read_wav
 
@@ -122,13 +167,7 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None, 
                 raw[silent.SHOT_KEY] = shots
         measured = binding.measured(raw, timestamps=table.pts, time_base=table.time_base,
                                     source={"width": table.width, "height": table.height}, mapping=mapping, stereo_scope=stereo_scope)
-        indices = sorted({i for _, exhibit in binding.exhibits(measured) for i in exhibit["witness"]["picture_frames"].values()})
-        if indices:
-            frames = dict(frame_store.iter_many(indices, timeout_s=4.))
-            if any(i not in frames or not frame_store.native_pts_verified(i)
-                   or hashlib.sha256(frames[i].tobytes()).hexdigest() != measured["inputs"]["frames"][i]["rgb_sha256"]
-                   for i in indices):
-                return binding.skipped("runtime")
+        _verify_anchors(frame_store, measured)
     except (OSError, ValueError, RuntimeError, subprocess.SubprocessError):
         return binding.skipped("runtime")
     return measured
@@ -139,7 +178,8 @@ def audio_assets(pcm, mapping, record):
     from app.evidence.audio_packets import _chart
 
     limit = binding.sample_limit(record)
-    origin = binding.audio_origin(mapping, record.get("stereo_scope"), max_samples=limit)
+    origin = (0 if record["schema"] == binding.SCHEMA_WITH_ACTIVITY else
+              binding.audio_origin(mapping, record.get("stereo_scope"), max_samples=limit))
     presented = binding.presented_samples(mapping, max_samples=limit)
     start, end = record["measurement"]["span"]
     if (origin is None or len(pcm) != mapping["samples"] or mapping["pcm_sha256"] != record["pcm_sha256"]

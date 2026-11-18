@@ -124,6 +124,8 @@ def capture_mouth_frames(video, table, geometry, *, motion, articulation=False, 
 
 
 def observe(request):
+    if request.get("activity"):
+        return observe_activity(request)
     if request["runtime"]:
         sys.path.insert(0, request["runtime"])
 
@@ -173,6 +175,44 @@ def observe(request):
     decoder, _ = neural_decoder(Path(request["checkpoint"]), names=tuple(
         name for names in viseme_timing.PHONES.values() for name in names))
     return {"frames": measured, "phones": [[phones[phone], at, weight] for phone, at, weight in decoder(values)], **extra}
+
+
+def observe_activity(request):
+    import hashlib
+
+    import torch
+
+    from app.detectors.audio.decode import decode_audio
+    from app.detectors.video.decode import FrameTable
+    from app.evidence import video_viseme_binding as binding
+    from scripts import audio_noise_view_v4 as reducer
+    from scripts.video_speech_activity_gap_panel import VAD_SHA, activity, file_hash
+
+    table = FrameTable.from_json(request["frames"])
+    path = Path(request["video"])
+    decoded = decode_audio(path, source_sha256=request["source_sha256"], retain_stereo=True)
+    count = binding.presented_samples(decoded.mapping)
+    vad = Path(request["vad"])
+    geometry = Path(request["geometry"])
+    if (binding.activity_profile(table.pts, table.time_base, decoded.mapping) is None
+            or decoded.stereo_pcm is None or len(decoded.stereo_pcm) < count
+            or file_hash(vad) != VAD_SHA
+            or file_hash(geometry) != "64184e229b263107bc2b804c6625db1341ff2bb731874b0bcc2fe6544e0bc9ff"):
+        raise ValueError("Speech activity source clock or local assets differ from the reviewed scope")
+    samples = decoded.stereo_pcm[:count]
+    pcm = samples.mean(axis=1, dtype="float32") / 32768
+    torch.set_num_threads(1)
+    model = torch.jit.load(str(vad), map_location="cpu").eval()
+    cleaned = reducer.enhance(pcm, reducer.load(Path(request["enhancer"])))
+    original, enhanced = (activity(model, values) for values in (pcm, cleaned))
+    if request["runtime"]:
+        sys.path.insert(0, request["runtime"])
+    frames, _, _ = capture_mouth_frames(path, table, geometry, motion=False, shots=[[0, len(table)]])
+    return {"frames": frames, "phones": [], binding.ACTIVITY_KEY: {
+        "original": [float(value).hex() for value in original],
+        "reduced": [float(value).hex() for value in enhanced],
+        "stereo_sha256": hashlib.sha256(samples.astype("<i2", copy=False).tobytes()).hexdigest(),
+    }}
 
 
 if __name__ == "__main__":

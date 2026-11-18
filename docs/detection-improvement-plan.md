@@ -66,6 +66,17 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Speech-activity gaps during loud room sound](video-speech-activity-gaps-2026-11-17.md)
+  located six of 24 staged removals where voice was 5 dB below the room
+  recording, compared with two for the previous stereo check. Ordinary flags
+  fell from nine to one of 60 per encoding. The local finding pinpoints an
+  interval for inspection and carries zero AI weight.
+
+- [JPEG history at the edit location](image-previous-grid-2026-11-17.md#local-analysis)
+  now runs by default on eligible local Full and Deep analyses. A default-on
+  paid replay reproduced the original crop and an ordinary unchanged control
+  and preserved the automated assessment with the check disabled.
+
 - [Short portrait-video face changes](video-face-portrait-2026-11-17.md)
   add opt-in timestamps and before, during, and after frames to the local
   worker. At 360 × 640 the isolated check finds 20 of 36 direct edits and

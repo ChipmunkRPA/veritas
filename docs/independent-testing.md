@@ -21,6 +21,10 @@ short speech replacements, and deliberately mismatched picture controls.
 The [frequency-dependent stereo replay](audio-stereo-complex-projection-2026-11-18.md#replay)
 reproduces the paired sample-range counts for 160 Opus deliveries.
 
+The [same-photo reconstruction replay](image-vae-double-jpeg-2026-11-18.md#replay)
+compares two- and three-class readings over the same exact edit area
+after one and two JPEG encodes.
+
 The [lossless WebP comparison](image-exact-webp-copy-2026-11-18.md#replay)
 recounts copy locations against exact edit boxes on 212 deliveries
 using Python's standard library. The native replay checks the

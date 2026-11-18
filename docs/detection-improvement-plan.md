@@ -66,6 +66,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- Explicitly labeling autoencoder-reconstructed background as a separate
+  class did not recover any of the 64 staged JPEG edit variants. The
+  three-class check flagged 25 of 80 ordinary recompressed files, compared
+  with 23 for a two-class check. Both experimental readings remain out of
+  application scoring. [Same-photo reconstruction test](image-vae-double-jpeg-2026-11-18.md)
+
 - Frequency-dependent stereo foreground cancellation recovered the same
   7 of 24 staged background repeats as the existing comparison on the
   transfer recordings. Neither reading flagged any of the 72 controls.

@@ -119,14 +119,15 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         try:
             review = coverage.get(document_tracked_changes.KEY) or {}
             schema = review.get("schema")
+            table_grid = coverage.get(document_native_locations.WORD_TABLE_GRID_KEY)
             doc = extract(original, extension, allow_ocr=False,
                           project_word_revisions=schema in (document_tracked_changes.PROJECTION_SCHEMA,
                                                            document_tracked_changes.PARAGRAPH_SCHEMA),
                           project_word_breaks=schema == document_tracked_changes.PARAGRAPH_SCHEMA,
                           include_word_content_controls=coverage.get(WORD_CONTENT_CONTROLS_KEY) == WORD_CONTENT_CONTROLS,
                           include_word_saved_fields=document_native_locations.SAVED_FIELDS_KEY in coverage,
-                          map_word_table_grid=coverage.get(document_native_locations.WORD_TABLE_GRID_KEY)
-                          == document_native_locations.WORD_TABLE_GRID,
+                          map_word_table_grid=table_grid in document_native_locations.WORD_TABLE_GRID_VERSIONS,
+                          map_word_table_controls=table_grid == document_native_locations.WORD_TABLE_GRID,
                           map_word_hyperlink_runs=coverage.get(document_native_locations.WORD_RUN_MAP_KEY)
                           == document_native_locations.WORD_RUN_MAP)
         except (OpcError, XMLSyntaxError) as error:
@@ -137,7 +138,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                       include_html_article=document_scope.HTML_ARTICLE_KEY in coverage,
                       map_body_paragraphs=document_native_locations.PARAGRAPH_MAP_KEY in coverage,
                       skip_hidden_slide_groups=coverage.get(document_native_locations.PPTX_VISIBILITY_KEY)
-                      == document_native_locations.PPTX_VISIBILITY)
+                      == document_native_locations.PPTX_VISIBILITY,
+                      skip_hidden_odt_sections=coverage.get(document_native_locations.ODT_VISIBILITY_KEY)
+                      == document_native_locations.ODT_VISIBILITY)
     if used_ocr and not doc.source_rasters:
         raise ValueError("The local OCR runtime could not reproduce the original scan. Check that the verified OCR data are installed.")
     unassigned_email_roles = (
@@ -159,7 +162,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     fields = {"email": None, "ocr": None, "unmapped_pages": [], "partially_checked_pages": [],
               WORD_CONTENT_CONTROLS_KEY: None, document_scope.HTML_ARTICLE_KEY: None,
               document_native_locations.PARAGRAPH_MAP_KEY: None, document_native_locations.WORD_TABLE_GRID_KEY: None,
-              document_native_locations.PPTX_VISIBILITY_KEY: None, document_native_locations.WORD_RUN_MAP_KEY: None}
+              document_native_locations.PPTX_VISIBILITY_KEY: None, document_native_locations.WORD_RUN_MAP_KEY: None,
+              document_native_locations.ODT_VISIBILITY_KEY: None}
     local_coverage = {**doc.meta, "ocr": public_ocr_coverage(doc.meta)}
     if any(canonical_hash(coverage.get(key, default)) != canonical_hash(local_coverage.get(key, default))
            for key, default in fields.items()):

@@ -18,11 +18,16 @@ PACKAGE_METHODS = {"pptx": "slide", "epub": "epub_entry"}
 PACKAGE_LABELS = {"slide": "Slide", "epub_entry": "EPUB reading entry"}
 PPTX_VISIBILITY_KEY = "pptx_visibility"
 PPTX_VISIBILITY = "visible-slide-groups/1"
+ODT_VISIBILITY_KEY = "odt_section_visibility"
+ODT_VISIBILITY = "visible-odt-sections/1"
+ODT_VISIBILITY_SCOPE = "Hidden and conditional sections are excluded. The reader does not evaluate display conditions."
 SAVED_FIELDS_KEY = "word_saved_fields"
 SAVED_FIELDS_SCHEMA = "document-word-saved-fields/1"
 SAVED_FIELDS_READER = "word_saved_fields_reader"
 WORD_TABLE_GRID_KEY = "word_table_grid"
-WORD_TABLE_GRID = "word-table-grid/1"
+WORD_TABLE_GRID_V1 = "word-table-grid/1"
+WORD_TABLE_GRID = "word-table-grid/2"
+WORD_TABLE_GRID_VERSIONS = (WORD_TABLE_GRID_V1, WORD_TABLE_GRID)
 WORD_RUN_MAP_KEY = "word_run_map"
 WORD_RUN_MAP = "word-paragraph-runs/1"
 MAX_SAVED_FIELDS = 256
@@ -175,7 +180,7 @@ def build(document):
 def validate(document):
     validate_saved_fields(document)
     coverage = document.get("coverage") or {}
-    if WORD_TABLE_GRID_KEY in coverage and (coverage[WORD_TABLE_GRID_KEY] != WORD_TABLE_GRID
+    if WORD_TABLE_GRID_KEY in coverage and (coverage[WORD_TABLE_GRID_KEY] not in WORD_TABLE_GRID_VERSIONS
             or document.get("source", {}).get("method") != "python-docx"):
         raise ValueError("Invalid Word table grid mapping")
     if WORD_RUN_MAP_KEY in coverage and (coverage[WORD_RUN_MAP_KEY] != WORD_RUN_MAP
@@ -187,6 +192,9 @@ def validate(document):
     if PPTX_VISIBILITY_KEY in coverage and (coverage[PPTX_VISIBILITY_KEY] != PPTX_VISIBILITY
             or document.get("source", {}).get("method") != "pptx"):
         raise ValueError("Invalid PowerPoint visibility policy")
+    if ODT_VISIBILITY_KEY in coverage and (coverage[ODT_VISIBILITY_KEY] != ODT_VISIBILITY
+            or document.get("source", {}).get("method") != "odt"):
+        raise ValueError("Invalid OpenDocument section visibility policy")
     article = coverage.get(HTML_ARTICLE_KEY)
     if article is not None and (document.get("source", {}).get("method") != "html" or not valid_html_article_scope(article)):
         raise ValueError("Invalid saved HTML article boundaries")

@@ -39,7 +39,8 @@ const sheetExport = 'Save the sheets containing writing as macro-free XLSX, CSV 
 const delimitedCoverage = 'Writing is checked within each text field. Reports show the row and column, counting headers and blank records.'
 
 const documentCoverage = new Map(Object.entries({
-  docx: 'Word checks body paragraphs and supported tables. Export to PDF to include rendered footnotes, text boxes, headers, footers, or tables with controls around rows or cells.',
+  docx: 'Word checks body paragraphs and supported tables, including saved text in filled Word form controls. Export to PDF to include rendered footnotes, text boxes, headers, or footers.',
+  odt: 'OpenDocument checks the saved body text. Hidden and conditionally displayed sections are outside this check.',
   pdf: 'PDF checks selectable text and can try to recognize text on scans. Some pages or areas may remain unchecked.',
   pptx: 'PowerPoint checks editable text and tables on visible slides. Hidden groups are excluded. Export to PDF to include writing that appears only in images.',
   xlsx: 'Excel checks saved writing on visible sheets, rows and columns. Formulas, calculated results, comments and images are outside this check.',

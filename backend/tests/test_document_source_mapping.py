@@ -231,24 +231,38 @@ def test_docx_skips_accepted_revision_ranges_in_a_paragraph_with_controls(tmp_pa
     assert result.word_review["rows"] == []
 
 
-def test_docx_does_not_relabel_cells_or_rows_around_wrapped_table_parts(tmp_path):
+def test_docx_reads_filled_table_controls_without_relabeling_siblings(tmp_path):
     path = tmp_path / "wrapped-table.docx"
     document = docx.Document()
     document.add_paragraph("Useful introduction.")
-    table = document.add_table(rows=1, cols=2)
+    table = document.add_table(rows=1, cols=4)
     table.cell(0, 0).text = "The first cell is wrapped."
-    table.cell(0, 1).text = "The second cell must not be relabeled."
-    word_control([table.cell(0, 0)._tc])
+    table.cell(0, 1).merge(table.cell(0, 2)).text = "Excluded placeholder."
+    table.cell(0, 3).text = "The fourth column must not be relabeled."
+    first, placeholder, _ = table.rows[0]._tr.tc_lst
+    word_control([first])
+    word_control([placeholder], placeholder=True)
     second_table = document.add_table(rows=2, cols=1)
+    second_table.cell(0, 0).text = "The first row is wrapped."
     second_table.cell(1, 0).text = "The second row must not be relabeled."
     word_control([second_table.rows[0]._tr])
     document.add_paragraph("Useful conclusion.")
     document.save(path)
 
     result = extract_within(path, ".docx")
-    assert result.text == "Useful introduction.\n\nUseful conclusion."
-    assert [block["body_path"] for block in result.source_map] == [[0], [3]]
-    assert "tables with controls around entire rows or cells" in result.meta["coverage_warning"]
+    assert [(block["body_path"], result.text[block["start"]:block["end"]]) for block in result.source_map] == [
+        ([0], "Useful introduction."),
+        ([1, "row", 0, "cell", 0, 1], "The first cell is wrapped."),
+        ([1, "row", 0, "cell", 3, 1], "The fourth column must not be relabeled."),
+        ([2, "row", 0, "cell", 0, 1], "The first row is wrapped."),
+        ([2, "row", 1, "cell", 0, 1], "The second row must not be relabeled."),
+        ([3], "Useful conclusion."),
+    ]
+    assert result.meta[document_native_locations.WORD_TABLE_GRID_KEY] == document_native_locations.WORD_TABLE_GRID
+    legacy = extract(path, ".docx", map_word_table_controls=False)
+    assert legacy.text == "Useful introduction.\n\nUseful conclusion."
+    assert [block["body_path"] for block in legacy.source_map] == [[0], [3]]
+    assert legacy.meta[document_native_locations.WORD_TABLE_GRID_KEY] == document_native_locations.WORD_TABLE_GRID_V1
 
 
 def test_rtf_codepage_unicode_paragraphs_and_extracted_locations(tmp_path):

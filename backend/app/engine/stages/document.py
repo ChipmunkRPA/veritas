@@ -138,6 +138,9 @@ def current_decode_output(output: Any) -> bool:
     if (output["meta"].get("method") == "pptx"
             and output["meta"].get(document_native_locations.PPTX_VISIBILITY_KEY) != document_native_locations.PPTX_VISIBILITY):
         return False
+    if (output["meta"].get("method") == "odt"
+            and output["meta"].get(document_native_locations.ODT_VISIBILITY_KEY) != document_native_locations.ODT_VISIBILITY):
+        return False
     if (output["meta"].get("method") == "python-docx" and
             (output["meta"].get(WORD_CONTENT_CONTROLS_KEY) != WORD_CONTENT_CONTROLS
              or output["meta"].get(document_native_locations.SAVED_FIELDS_READER) != document_native_locations.SAVED_FIELDS_SCHEMA

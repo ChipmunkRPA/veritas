@@ -19,7 +19,7 @@ from zipfile import BadZipFile, ZipFile
 from app.core.deadline import StepTimeout
 from app.detectors.text import html_article
 from app.detectors.text.extract import _join_mapped, _normalise, extract, text_hash
-from app.evidence import document_revision_pdf, document_revision_values
+from app.evidence import document_native_locations, document_revision_pdf, document_revision_values
 from app.evidence.document_scope import (
     email_agreement_body_spans,
     mapped_email_html,
@@ -338,7 +338,8 @@ def _html_token_sources(text, layout, changed_tokens):
     return located
 
 
-def _source(path: Path, data: bytes, extension: str, *, mixed: bool = False, word_body=None, allow_empty_word_body=False):
+def _source(path: Path, data: bytes, extension: str, *, mixed: bool = False, word_body=None, allow_empty_word_body=False,
+            skip_hidden_odt_sections: bool = True):
     if extension == ".html":
         return _article_source(data)
     if extension == ".docx":
@@ -354,7 +355,7 @@ def _source(path: Path, data: bytes, extension: str, *, mixed: bool = False, wor
             except (RuntimeError, StepTimeout):
                 raise ValueError("The Rich Text draft could not be read. Save it as DOCX or TXT and try again.") from None
         else:
-            doc = extract(path, extension)
+            doc = extract(path, extension, skip_hidden_odt_sections=skip_hidden_odt_sections)
         if not 0 < len(doc.text) <= MAX_CHARS or "\ufffd" in doc.text or "\x00" in doc.text or not doc.source_map:
             raise ValueError(f"Each {label} version needs readable body text and at most {MAX_CHARS:,} extracted characters.")
         anchors = []
@@ -605,6 +606,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                          include_relocations: bool = True,
                          include_edited_relocations: bool = True,
                          include_values: bool = False,
+                         skip_hidden_odt_sections: bool = True,
                          ) -> tuple[dict, str, str, WordLayouts | PdfLayouts | MixedLayouts | None]:
     """Return ephemeral native layouts for the requested paired sentence scope."""
     if extension not in FORMATS:
@@ -640,9 +642,9 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
         directory = Path(staging)
         earlier_path, later_path = directory / f"earlier{old_extension}", directory / f"later{extension}"
         old_text, old_tokens, old_source, old_layout = _source(earlier_path, earlier, old_extension, mixed=mixed,
-            word_body=word_bodies[0], allow_empty_word_body=has_compared_table)
+            word_body=word_bodies[0], allow_empty_word_body=has_compared_table, skip_hidden_odt_sections=skip_hidden_odt_sections)
         new_text, new_tokens, new_source, new_layout = _source(later_path, later, extension, mixed=mixed,
-            word_body=word_bodies[1], allow_empty_word_body=has_compared_table)
+            word_body=word_bodies[1], allow_empty_word_body=has_compared_table, skip_hidden_odt_sections=skip_hidden_odt_sections)
         if mixed:
             spaces = {".txt": TEXT_COORDINATES, ".docx": WORD_COORDINATES, ".odt": ODT_COORDINATES,
                       ".rtf": RTF_COORDINATES, ".pdf": document_revision_pdf.COORDINATES}
@@ -711,6 +713,9 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
             "coordinate_space": coordinates,
             "earlier": old_source, "later": new_source, "changes": changes,
             "scope": scope, "interpretation": INTERPRETATION}
+    if skip_hidden_odt_sections and ".odt" in (old_extension, extension):
+        result[document_native_locations.ODT_VISIBILITY_KEY] = document_native_locations.ODT_VISIBILITY
+        result["scope"] += " " + document_native_locations.ODT_VISIBILITY_SCOPE
     if values is not None:
         result["numeric_comparison"] = values
     if mixed:

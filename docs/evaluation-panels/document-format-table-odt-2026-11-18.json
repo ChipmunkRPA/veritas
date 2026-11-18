@@ -1,0 +1,174 @@
+{
+  "scope": "Authored format fixtures; isolated local CPU checks with optional large model pair disabled.",
+  "browser_checkouts": 17,
+  "simulated_price_usd_cents": 999,
+  "analysis_jobs_before_payment": 0,
+  "analysis_jobs_after_payment": 17,
+  "first_browser_export_and_evidence_sweep": {
+    "pages": 17,
+    "pdf_downloads": 17,
+    "json_links": 17,
+    "page_errors": 0,
+    "evidence_checked": 16,
+    "evidence_missing": [
+      {
+        "format": "tsv",
+        "hasEvidenceHeading": true,
+        "apiErrorShown": true
+      }
+    ]
+  },
+  "fresh_browser_export_and_evidence_sweep": {
+    "pages": 17,
+    "pdf_downloads": 17,
+    "json_links": 17,
+    "page_errors": 0,
+    "evidence_checked": 17,
+    "evidence_missing": [],
+    "http_errors": []
+  },
+  "historical_signatures_and_originals_verified": [
+    "docx",
+    "odt"
+  ],
+  "formats": {
+    "docx": {
+      "readable_words": 273,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 6,
+      "exact_character_anchors": 17,
+      "distinct_browser_labels_verified": 4,
+      "filled_table_control_ranges": 5
+    },
+    "odt": {
+      "readable_words": 273,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 6,
+      "exact_character_anchors": 17,
+      "distinct_browser_labels_verified": 0
+    },
+    "eml": {
+      "readable_words": 273,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 6,
+      "exact_character_anchors": 17,
+      "distinct_browser_labels_verified": 0
+    },
+    "txt": {
+      "readable_words": 273,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 6,
+      "exact_character_anchors": 17,
+      "distinct_browser_labels_verified": 0
+    },
+    "md": {
+      "readable_words": 273,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 6,
+      "exact_character_anchors": 0,
+      "distinct_browser_labels_verified": 0
+    },
+    "html": {
+      "readable_words": 273,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 6,
+      "exact_character_anchors": 0,
+      "distinct_browser_labels_verified": 0
+    },
+    "pdf": {
+      "readable_words": 273,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 6,
+      "exact_character_anchors": 0,
+      "distinct_browser_labels_verified": 0
+    },
+    "rtf": {
+      "readable_words": 273,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 6,
+      "exact_character_anchors": 17,
+      "distinct_browser_labels_verified": 0
+    },
+    "pptx": {
+      "readable_words": 71,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 4,
+      "exact_character_anchors": 10,
+      "distinct_browser_labels_verified": 2
+    },
+    "epub": {
+      "readable_words": 71,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 4,
+      "exact_character_anchors": 10,
+      "distinct_browser_labels_verified": 2
+    },
+    "markdown": {
+      "readable_words": 273,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 6,
+      "exact_character_anchors": 0,
+      "distinct_browser_labels_verified": 0
+    },
+    "htm": {
+      "readable_words": 273,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 6,
+      "exact_character_anchors": 0,
+      "distinct_browser_labels_verified": 0
+    },
+    "xhtml": {
+      "readable_words": 275,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 6,
+      "exact_character_anchors": 15,
+      "distinct_browser_labels_verified": 1
+    },
+    "strict-docx": {
+      "readable_words": 273,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 6,
+      "exact_character_anchors": 17,
+      "distinct_browser_labels_verified": 4,
+      "filled_table_control_ranges": 5
+    },
+    "xlsx": {
+      "readable_words": 203,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 6,
+      "exact_character_anchors": 18,
+      "distinct_browser_labels_verified": 4
+    },
+    "csv": {
+      "readable_words": 222,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 6,
+      "exact_character_anchors": 18,
+      "distinct_browser_labels_verified": 5
+    },
+    "tsv": {
+      "readable_words": 222,
+      "completed_writing_checks": 2,
+      "signed_package_verified_with_original": true,
+      "evidence_packets": 6,
+      "exact_character_anchors": 18,
+      "distinct_browser_labels_verified": 5
+    }
+  }
+}

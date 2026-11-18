@@ -76,8 +76,8 @@ def test_original_replay_uses_the_recorded_word_control_projection(modern, tmp_p
         assert "extracted text and source mapping matched" in verify_document_source.check(archive, bundle, original)
 
 
-@pytest.mark.parametrize("modern", [True, False])
-def test_original_replay_uses_the_recorded_word_table_grid(modern, tmp_path):
+@pytest.mark.parametrize("grid", [None, document_native_locations.WORD_TABLE_GRID_V1, document_native_locations.WORD_TABLE_GRID])
+def test_original_replay_uses_the_recorded_word_table_grid(grid, tmp_path):
     original = tmp_path / "omitted-grid-cell.docx"
     native = Document()
     repeated = " ".join(f"reading{i}" for i in range(30))
@@ -90,24 +90,32 @@ def test_original_replay_uses_the_recorded_word_table_grid(modern, tmp_path):
     omitted = OxmlElement("w:gridBefore")
     omitted.set(qn("w:val"), "1")
     row.get_or_add_trPr().append(omitted)
+    if grid is not None:
+        word_control([row])
     native.save(original)
 
-    decoded = extract(original, ".docx", map_word_table_grid=modern)
-    column = int(modern)
-    assert [anchor["body_path"] for anchor in decoded.source_map] == [
-        [0], [1, "row", 0, "cell", column, 1], [1, "row", 0, "cell", column + 1, 1],
-    ]
-    assert decoded.text == f"{repeated}\n\nFirst visible value.\n\n{repeated}"
+    decoded = extract(original, ".docx", map_word_table_grid=grid is not None,
+                      map_word_table_controls=grid == document_native_locations.WORD_TABLE_GRID)
+    if grid == document_native_locations.WORD_TABLE_GRID_V1:
+        assert [anchor["body_path"] for anchor in decoded.source_map] == [[0]]
+        assert decoded.text == repeated
+    else:
+        column = int(grid is not None)
+        assert [anchor["body_path"] for anchor in decoded.source_map] == [
+            [0], [1, "row", 0, "cell", column, 1], [1, "row", 0, "cell", column + 1, 1],
+        ]
+        assert decoded.text == f"{repeated}\n\nFirst visible value.\n\n{repeated}"
     source = {"method": "python-docx", "sha256": decoded.meta["original_sha256"],
               "extracted_text_sha256": text_hash(decoded.text), "source_map_sha256": canonical_hash(decoded.source_map),
               "chars": len(decoded.text)}
     key = document_native_locations.WORD_TABLE_GRID_KEY
     coverage = {WORD_CONTENT_CONTROLS_KEY: decoded.meta[WORD_CONTENT_CONTROLS_KEY]}
-    if modern:
+    if grid is not None:
         coverage[key] = decoded.meta[key]
     evidence = {"source": source, "version": document_scope.VERSION, "packets": [], "coverage": coverage,
                 "repeated_passages": document_repeat.build(source, decoded.text, decoded.source_map)}
-    assert evidence["repeated_passages"]["status"] == "matched"
+    assert evidence["repeated_passages"]["status"] == (
+        "not_assessed" if grid == document_native_locations.WORD_TABLE_GRID_V1 else "matched")
     bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
               "source_commitment": {"sha256": source["sha256"], "bytes": original.stat().st_size}}
     archive_path = tmp_path / "grid-evidence.zip"
@@ -118,10 +126,8 @@ def test_original_replay_uses_the_recorded_word_table_grid(modern, tmp_path):
             return verify_document_source.check(archive, bundle, original)
 
     assert "extracted text and source mapping matched" in replay()
-    if modern:
-        del coverage[key]
-    else:
-        coverage[key] = document_native_locations.WORD_TABLE_GRID
+    coverage[key] = (document_native_locations.WORD_TABLE_GRID_V1 if grid != document_native_locations.WORD_TABLE_GRID_V1
+                     else document_native_locations.WORD_TABLE_GRID)
     with pytest.raises(ValueError, match="source mapping differs"):
         replay()
 

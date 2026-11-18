@@ -8,8 +8,8 @@ limit is 25 MB in the standard configuration.
 
 | Format | Writing examined | Source position in reports |
 | --- | --- | --- |
-| DOCX | Body paragraphs, tables, saved text in filled paragraph and inline controls, and supported saved field values in standard and Strict Open XML DOCX. Separate Word revision and visibility checks cover their supported structures. | Word body path, paragraph characters, and available run coordinates, including saved hyperlink labels |
-| ODT | Body paragraphs, headings, lists, and tables | Decoded body paragraph number and character range |
+| DOCX | Body paragraphs, tables, saved text in filled controls around paragraphs, runs, rows or cells, and supported saved field values in standard and Strict Open XML DOCX. Separate Word revision and visibility checks cover their supported structures. | Word body path, paragraph characters, and available run coordinates, including saved hyperlink labels |
+| ODT | Body paragraphs, headings, lists, and tables outside hidden and conditionally displayed sections | Decoded body paragraph number and character range |
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
 | PPTX | Editable text boxes and tables on visible slides | Slide in presentation order, text block, and decoded character range |
 | XLSX | Literal text on visible worksheet tabs, rows and columns | Workbook sheet order, row, column and saved cell character range |
@@ -25,17 +25,19 @@ For email, attachments can be submitted separately. Word and ODT use body
 text for writing checks. Document packages are read locally without opening
 Office, fetching linked content, or executing macros.
 
-Word form placeholders and tables with controls around entire rows or cells
-are outside the writing check. A paragraph mixing inline controls and
-tracked edits is outside the accepted-revision projection. Evidence for
-supported controls preserves the Word body path and paragraph character
-range. Word body text remains readable in exports without a default
-paragraph style. The original-file verifier applies the extraction recorded
-when the report was created. [Microsoft's Word control structure](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.sdtblock?view=openxml-3.0.1)
+The writing check reads saved text in supported Word form controls and
+skips placeholder text. A paragraph mixing inline controls and tracked
+edits is outside the accepted-revision projection. Evidence for filled
+controls preserves the Word body path and paragraph character range.
+Word body text remains readable in exports without a default paragraph
+style. The original-file verifier applies the extraction recorded when
+the report was created. [Microsoft's Word control structure](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.sdtblock?view=openxml-3.0.1)
 
-When a Word table row starts after an omitted grid column, new evidence
-uses the cell's actual table column. The report records which coordinate
-rule it used so the signed package can be verified against the original.
+Word tables retain the saved row and column positions even when a cell is
+wrapped in a form control, follows a placeholder, or starts after omitted
+grid columns. Merged continuations and unsupported tracked table
+structures are outside this check. The signed package records the
+coordinate rule for original-file verification. [Microsoft's Word table grid reference](https://learn.microsoft.com/en-us/office/open-xml/word/working-with-wordprocessingml-tables) · [Word row controls](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.sdtrow?view=openxml-3.0.1)
 
 Word passage locations include the saved label text within hyperlinks and
 the exact offsets of the text that follows. The reader uses the stored text
@@ -61,6 +63,12 @@ verifier follows the extraction policy recorded in each report.
 
 New ODT and RTF reports show Unicode character ranges before the analysis
 normalizes whitespace. ODT numbers readable body paragraphs in reading order.
+The ODT reader leaves out hidden sections and sections whose display depends
+on a condition. These sections also stay outside checkout's readable word
+count and earlier-draft comparisons. Signed packages and draft exports
+retain the extraction policy used for their source positions.
+[OpenDocument 1.3 section visibility](https://docs.oasis-open.org/office/OpenDocument/v1.3/os/part3-schema/OpenDocument-v1.3-os-part3-schema.html#attribute-text_display)
+
 RTF numbers decoded text blocks, including blocks separated by soft line
 breaks. The web view, PDF and JSON use the same ranges. The signed package can
 replay them against the original file.
@@ -138,6 +146,16 @@ of the analysis and both exports. All 15 signed packages verified against
 their original files. The run used the local CPU writing checks with the
 optional large model pair disabled.
 [Browser, export, and original-file receipt](evaluation-panels/document-format-browser-checkout-2026-11-18.json)
+
+After the Word table and OpenDocument visibility fixes, a local Chromium run
+completed the document upload and simulated USD 9.99 checkout for all 16
+advertised extensions and a separate Strict DOCX fixture. Every original
+verified against its signed package, and the browser returned the same PDF
+and JSON evidence. Both Word variants retained five evidence ranges from
+filled table controls. The ODT fixture excluded a saved hidden section.
+The first browser sweep failed to load one TSV evidence page. A fresh
+session verified all 17 evidence pages and both exports without HTTP errors.
+[Local format and evidence receipt](evaluation-panels/document-format-table-odt-2026-11-18.json)
 
 ### Spreadsheet writing
 

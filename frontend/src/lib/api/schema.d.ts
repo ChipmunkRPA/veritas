@@ -3575,6 +3575,8 @@ export interface components {
             interpretation: string;
             later: components["schemas"]["DraftSource"];
             numeric_comparison?: components["schemas"]["DraftValueComparison"] | null;
+            /** Odt Section Visibility */
+            odt_section_visibility?: "visible-odt-sections/1" | null;
             paired_check?: components["schemas"]["DraftPairedCheck"] | null;
             /** Relocated Passages */
             relocated_passages?: components["schemas"]["DraftRelocatedPassage"][] | null;

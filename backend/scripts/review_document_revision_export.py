@@ -8,6 +8,7 @@ import sys
 from collections import Counter
 from pathlib import Path
 
+from app.evidence import document_native_locations
 from app.evidence.document_revision import (
     ARTICLE_COORDINATES,
     EDITED_RELOCATION_SCHEMA,
@@ -82,6 +83,8 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
         include_relocations=anchored or relocated,
         include_edited_relocations=schema == EDITED_RELOCATION_SCHEMA,
         include_values="numeric_comparison" in received,
+        skip_hidden_odt_sections=received.get(document_native_locations.ODT_VISIBILITY_KEY)
+        == document_native_locations.ODT_VISIBILITY,
     )
     rebuilt = refine_wording(expected, old_text, new_text) if anchored else expected
     if json.dumps(received, sort_keys=True, allow_nan=False) != json.dumps(rebuilt, sort_keys=True, allow_nan=False):

@@ -287,6 +287,7 @@ class DraftComparison(BaseModel):
     word_tables: DraftWordTables | None = None
     relocated_passages: list[DraftRelocatedPassage] | None = None
     numeric_comparison: DraftValueComparison | None = None
+    odt_section_visibility: Literal["visible-odt-sections/1"] | None = None
 
 
 class DocumentRevisionResponse(BaseModel):

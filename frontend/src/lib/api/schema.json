@@ -5715,6 +5715,18 @@
               }
             ]
           },
+          "odt_section_visibility": {
+            "anyOf": [
+              {
+                "const": "visible-odt-sections/1",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Odt Section Visibility"
+          },
           "paired_check": {
             "anyOf": [
               {

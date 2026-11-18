@@ -30,15 +30,18 @@ def _visible_text(element):
         yield child.tail or ""
 
 
-def _paragraphs(element):
+def _paragraphs(element, *, skip_hidden_sections: bool):
     for child in element:
         if child.tag in PARAGRAPHS:
             yield "".join(_visible_text(child))
         elif child.tag in BODY_CONTAINERS:
-            yield from _paragraphs(child)
+            if (skip_hidden_sections and child.tag == TEXT + "section"
+                    and child.get(TEXT + "display") in {"none", "condition"}):
+                continue
+            yield from _paragraphs(child, skip_hidden_sections=skip_hidden_sections)
 
 
-def body_paragraphs(path: Path, *, check_crc: bool = False) -> list[str]:
+def body_paragraphs(path: Path, *, check_crc: bool = False, skip_hidden_sections: bool = True) -> list[str]:
     check_document_archive_safe(path, ".odt", check_crc=check_crc)
     try:
         with ZipFile(path) as archive:
@@ -56,7 +59,7 @@ def body_paragraphs(path: Path, *, check_crc: bool = False) -> list[str]:
             raise ValueError("The ODT file has no supported body text")
     except (KeyError, etree.XMLSyntaxError) as error:
         raise ValueError("The ODT file has no readable body text") from error
-    paragraphs = [value for value in _paragraphs(body) if value.strip()]
+    paragraphs = [value for value in _paragraphs(body, skip_hidden_sections=skip_hidden_sections) if value.strip()]
     if not paragraphs:
         raise ValueError("The ODT file has no readable body paragraphs")
     return paragraphs

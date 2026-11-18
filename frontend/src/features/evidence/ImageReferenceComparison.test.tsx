@@ -299,16 +299,19 @@ describe('earlier-copy comparison', () => {
     expect(screen.getByRole('button', { name: 'Download comparison JSON' })).toBeTruthy()
   })
 
-  it('shows exact decoded block evidence and rejects an impossible block count', async () => {
+  it.each([14, 28])('shows exact decoded block evidence and rejects an impossible count for schema %s', async (schema) => {
     const result = structuredClone(comparison)
-    result.comparison.schema = 'chipmunk.image-reference-comparison/14'
+    result.comparison.schema = `chipmunk.image-reference-comparison/${schema}`
     result.comparison.reference = { ...result.comparison.reference, width: 768, height: 512 }
     result.comparison.submitted = { ...result.comparison.submitted, width: 768, height: 512 }
     result.comparison.regions[0].reference_region = { x: 118, y: 65, w: 90, h: 70 }
+    result.comparison.regions[0].selected_pixels = 612
+    result.comparison.mask = artifact('difference-mask.png', 768, 512)
     result.comparison.affects_overall_confidence = false
     const overlap = { x: 0, y: 0, w: 768, h: 512 }
     result.comparison.alignment = {
-      method: 'exact_decoded_jpeg_pair_identity', reference_minus_submitted: { x: 0, y: 0 },
+      method: schema === 28 ? 'native_jpeg_sample_difference' : 'exact_decoded_jpeg_pair_identity',
+      reference_minus_submitted: { x: 0, y: 0 },
       submitted_overlap: overlap, reference_overlap: overlap,
       full_tiles: 1536, exact_tiles: 1490, anchor_count: 1100,
       anchor_sha256: hash, reference_decoded_rgb_sha256: hash,
@@ -322,8 +325,15 @@ describe('earlier-copy comparison', () => {
     await choose('earlier.jpg')
     fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
     expect((await screen.findByText(/1,490 of 1,536 complete decoded JPEG blocks/)).textContent).toContain('support the same framing')
+    if (schema === 28) {
+      expect(screen.getByText(/local brightness or color differences/).textContent).toContain('zero weight in the AI assessment')
+      expect(screen.getByAltText('Earlier copy crop for region 1')).toBeTruthy()
+      expect(screen.getByAltText('Difference mask in submitted image coordinates')).toBeTruthy()
+    }
     expect(screen.getByRole('button', { name: 'Download comparison PDF' })).toBeTruthy()
-    expect(screen.getByRole('button', { name: 'Download comparison JSON' })).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
+    const [download] = vi.mocked(saveBlob).mock.calls[0]
+    expect(JSON.parse(await blobText(download))).toEqual({ comparison: result.comparison, pngs: result.pngs })
     await choose('earlier-again.jpg')
     fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
     expect((await screen.findByRole('alert')).textContent).toContain('The server returned an incomplete exact-block JPEG comparison.')

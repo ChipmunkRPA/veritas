@@ -9,6 +9,7 @@ from app.detectors.image import (
     reference_jpeg_detail_loss,
     reference_lossless_webp,
     reference_lossy_webp,
+    reference_native_jpeg,
     reference_png_opacity,
     reference_png_orientation,
     reference_png_oriented_crop,
@@ -136,19 +137,21 @@ def _summary(document, comparison, assets):
         _text(page, MARGIN, 318, f"{proof['exact_tiles']:,} of {proof['full_tiles']:,} full blocks matched after JPEG encoding.",
               size=10, color=MUTED)
         _text(page, MARGIN, 334, f"{proof['anchor_count']:,} unique detailed blocks supported alignment.", size=10, color=MUTED)
-    if schema in {reference_same_jpeg.SCHEMA, *reference_jpeg_detail_loss.SCHEMAS}:
+    if schema in {reference_same_jpeg.SCHEMA, reference_native_jpeg.SCHEMA, *reference_jpeg_detail_loss.SCHEMAS}:
         proof = comparison["alignment"]
         _text(page, MARGIN, 302, "Matching JPEG blocks support the same framing.", size=10, font="hebo")
         _text(page, MARGIN, 318, f"{proof['exact_tiles']:,} of {proof['full_tiles']:,} complete decoded blocks match exactly.",
               size=10, color=MUTED)
         _text(page, MARGIN, 334, f"{proof['anchor_count']:,} unique detailed blocks support the alignment.", size=10, color=MUTED)
+        if schema == reference_native_jpeg.SCHEMA:
+            _text(page, MARGIN, 350, "Highlights show local differences in JPEG brightness or color samples.", size=10, color=MUTED)
     if schema == reference_structure_jpeg.SCHEMA:
         proof = comparison["same_framing_structure"]
         aligned, detailed = len(proof["aligned_tiles"]), proof["detailed_tiles"]
         _text(page, MARGIN, 302, "Matching detail supports the same framing.", size=10, font="hebo")
         _text(page, MARGIN, 318, f"{aligned} of {detailed} detailed areas matched across the two images.", size=10, color=MUTED)
         _text(page, MARGIN, 334, "Highlights require local color and structure changes under both tone fits.", size=10, color=MUTED)
-    elif (schema not in {reference_same_jpeg.SCHEMA, *reference_jpeg_detail_loss.SCHEMAS}
+    elif (schema not in {reference_same_jpeg.SCHEMA, reference_native_jpeg.SCHEMA, *reference_jpeg_detail_loss.SCHEMAS}
           and (alignment := comparison.get("alignment")) and "submitted_overlap" in alignment):
         label = "area compared" if schema == reference_shifted_jpeg.SCHEMA else "overlap"
         _text(page, MARGIN, 302, f"Earlier copy {label}: {_area(alignment['reference_overlap'])}", size=10)

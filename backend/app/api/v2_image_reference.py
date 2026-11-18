@@ -199,6 +199,7 @@ def _compare(original: tuple[str, int], reference: UploadFile, include_pdf: bool
                              allow_shifted_jpeg=settings.image_reference_shifted_jpeg,
                              allow_structure_jpeg=settings.image_reference_structure_jpeg,
                              allow_same_jpeg=settings.image_reference_same_jpeg,
+                             allow_native_jpeg=settings.image_reference_native_jpeg,
                              allow_jpeg_detail_loss=settings.image_reference_jpeg_detail_loss,
                              allow_jpeg_detail_loss_extra_qualities=settings.image_reference_jpeg_detail_loss_extra_qualities,
                              allow_lossy_webp=settings.image_reference_lossy_webp, allow_lossy_webp_crop=True,

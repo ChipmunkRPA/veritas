@@ -24,6 +24,7 @@ from app.detectors.image import (
     reference_lossy_webp_crop,
     reference_lossy_webp_crop_resize,
     reference_lossy_webp_resize,
+    reference_native_jpeg,
     reference_perspective,
     reference_png_exact_resize,
     reference_png_opacity,
@@ -201,7 +202,7 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             allow_lossy_webp: bool = False, allow_lossy_webp_crop: bool = False,
             allow_lossy_webp_crop_resize: bool = False, allow_lossy_webp_color: bool = False,
             allow_lossy_webp_earlier_jpeg: bool = False, allow_perspective: bool = False,
-            allow_earlier_heif: bool = False) -> dict:
+            allow_earlier_heif: bool = False, allow_native_jpeg: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     refuse_truncated_images()
     before, after = _bytes(reference_path), _bytes(submitted_path)
@@ -325,9 +326,14 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             perspective, selection, coverage = _perspective_check(original, questioned, reference, submitted)
             if perspective is not None:
                 result, mask, schema = perspective, selection, reference_perspective.SCHEMA
+        if allow_native_jpeg and not result["regions"] and original.format == questioned.format == "JPEG":
+            native_difference, selection = reference_native_jpeg.compare(original, questioned, before, after)
+            if native_difference is not None:
+                result, mask, schema, coverage = native_difference, selection, reference_native_jpeg.SCHEMA, None
     aligned = "alignment" in result
     interpretation = {reference_structure_jpeg.SCHEMA: reference_structure_jpeg.INTERPRETATION,
                       reference_same_jpeg.SCHEMA: reference_same_jpeg.INTERPRETATION,
+                      reference_native_jpeg.SCHEMA: reference_native_jpeg.INTERPRETATION,
                       reference_perspective.SCHEMA: reference_perspective.INTERPRETATION,
                       reference_scaled_screenshot.SCHEMA: reference_scaled_screenshot.INTERPRETATION,
                       reference_lossless_webp.SCHEMA: (reference_lossless_webp.INTERPRETATION
@@ -354,6 +360,13 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                                         "shifted_jpeg": allow_shifted_jpeg, "structure_jpeg": allow_structure_jpeg}
         if schema in reference_jpeg_detail_loss.SCHEMAS:
             output["comparison_options"]["same_jpeg"] = allow_same_jpeg
+    if schema == reference_native_jpeg.SCHEMA:
+        output["affects_overall_confidence"] = False
+        output["comparison_options"] = {"exact_jpeg_identity": allow_exact_jpeg_identity,
+                                        "shifted_jpeg": allow_shifted_jpeg, "structure_jpeg": allow_structure_jpeg,
+                                        "same_jpeg": allow_same_jpeg, "jpeg_detail_loss": allow_jpeg_detail_loss,
+                                        "jpeg_detail_loss_extra_qualities": allow_jpeg_detail_loss_extra_qualities,
+                                        "perspective": allow_perspective}
     if allow_lossy_webp_color and schema in LOSSY_WEBP_SCHEMAS and result["status"] == "comparable":
         proof, regions, color_mask, omitted = reference_webp_color.compare(reference, submitted, result)
         output.update(schema=reference_webp_color.SCHEMA, comparison_schema=schema, color_review=proof,

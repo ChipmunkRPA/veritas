@@ -167,6 +167,7 @@ export const earlierJpegWebpSchema = 'chipmunk.image-reference-comparison/24'
 export const perspectiveSchema = 'chipmunk.image-reference-comparison/25'
 export const earlierHeifSchema = 'chipmunk.image-reference-comparison/26'
 export const scaledScreenshotSchema = 'chipmunk.image-reference-comparison/27'
+export const nativeJpegDifferenceSchema = 'chipmunk.image-reference-comparison/28'
 const lossyWebpSchemas = [lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema]
 export const imageFramingSchema = (record: ImageReferenceRecord) =>
   record.schema === webpColorSchema ? record.comparison_schema : record.schema
@@ -223,10 +224,14 @@ function validSameJpegProof(comparison: ImageReferenceRecord): boolean {
   const { width, height } = comparison.submitted
   const proof = comparison.alignment
   const detailLoss = isJpegDetailLoss(comparison.schema)
+  const nativeDifference = comparison.schema === nativeJpegDifferenceSchema
+  const method = detailLoss ? 'exact_jpeg_pair_local_detail_loss'
+    : nativeDifference ? 'native_jpeg_sample_difference' : 'exact_decoded_jpeg_pair_identity'
+  const minimumSide = nativeDifference ? 256 : 512
   if (!proof || comparison.status !== 'comparable' || comparison.affects_overall_confidence !== false
-      || proof.method !== (detailLoss ? 'exact_jpeg_pair_local_detail_loss' : 'exact_decoded_jpeg_pair_identity')
+      || proof.method !== method
       || comparison.reference.width !== width || comparison.reference.height !== height
-      || ![width, height].every(value => Number.isSafeInteger(value) && value >= 512 && value <= 768)
+      || ![width, height].every(value => Number.isSafeInteger(value) && value >= minimumSide && value <= 768)
       || ![proof.submitted_overlap, proof.reference_overlap].every(area =>
         validArea(area) && area.x === 0 && area.y === 0 && area.w === width && area.h === height)
       || proof.reference_minus_submitted?.x !== 0 || proof.reference_minus_submitted.y !== 0
@@ -241,6 +246,10 @@ function validSameJpegProof(comparison: ImageReferenceRecord): boolean {
     return ![pixels, direct].every(Number.isSafeInteger) || pixels % 256 !== 0 || pixels < 1024
       || pixels > region.w * region.h || direct < 1 || direct > pixels / 256
       || [region.x, region.y, region.w, region.h].some(value => value % 16 !== 0)
+  }))) return false
+  if (nativeDifference && (!comparison.mask || !comparison.regions.length || comparison.regions.some(region => {
+    const pixels = region.selected_pixels ?? 0
+    return !Number.isSafeInteger(pixels) || pixels < 32 || pixels > region.w * region.h
   }))) return false
   return [full, exact, anchors].every(Number.isSafeInteger)
     && full === Math.floor(width / 16) * Math.floor(height / 16) && full >= exact && exact >= .85 * full
@@ -460,7 +469,8 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
       throw new Error('The server returned an incomplete JPEG structure comparison.')
     }
   }
-  if ((comparison.schema === sameJpegSchema || isJpegDetailLoss(comparison.schema)) && !validSameJpegProof(comparison)) {
+  if ((comparison.schema === sameJpegSchema || comparison.schema === nativeJpegDifferenceSchema
+       || isJpegDetailLoss(comparison.schema)) && !validSameJpegProof(comparison)) {
     throw new Error('The server returned an incomplete exact-block JPEG comparison.')
   }
   if (comparison.schema === exactPngCropResizeSchema && (!comparison.reference_crop_bounds

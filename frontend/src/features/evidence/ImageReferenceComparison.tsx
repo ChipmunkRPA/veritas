@@ -5,7 +5,7 @@ import { saveBlob } from '../../lib/api/reports'
 import {
   compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
-  IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
+  IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, nativeJpegDifferenceSchema, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
   pngOpacitySchema, exactWebpSchema, lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema,
   earlierHeifSchema, earlierJpegWebpSchema, imageFramingSchema, perspectiveSchema, scaledScreenshotSchema, webpColorSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
@@ -82,6 +82,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const perspective = comparison.schema === perspectiveSchema || earlierHeif ? comparison.perspective_check : undefined
   const sameJpegFraming = comparison.schema === exactJpegIdentitySchema ? alignment : undefined
   const detailLoss = isJpegDetailLoss(comparison.schema)
+  const nativeJpegDifference = comparison.schema === nativeJpegDifferenceSchema
   const opacity = comparison.schema === pngOpacitySchema ? comparison.png_opacity : undefined
   const exactWebp = comparison.schema === exactWebpSchema ? comparison.exact_webp : undefined
   const framing = imageFramingSchema(comparison)
@@ -91,7 +92,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const croppedWebp = framing === croppedLossyWebpSchema ? comparison.lossy_webp_crop : undefined
   const croppedResizedWebp = framing === croppedResizedLossyWebpSchema ? comparison.lossy_webp_crop_resize : undefined
   const colorReview = comparison.schema === webpColorSchema ? comparison.color_review : undefined
-  const sameJpegBlocks = (comparison.schema === sameJpegSchema || detailLoss) ? alignment : undefined
+  const sameJpegBlocks = (comparison.schema === sameJpegSchema || detailLoss || nativeJpegDifference) ? alignment : undefined
   const shiftedJpeg = comparison.schema === shiftedJpegSchema ? alignment : undefined
   const sameStructureFraming = comparison.schema === structureJpegSchema ? comparison.same_framing_structure : undefined
   const cropped = comparison.schema === 'chipmunk.image-reference-comparison/4' || exact || delivery
@@ -207,7 +208,9 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
     {sameJpegBlocks && <p className="mt-2 mb-0 text-small text-text-muted">
       {sameJpegBlocks.exact_tiles?.toLocaleString('en-US')} of {sameJpegBlocks.full_tiles?.toLocaleString('en-US')} complete decoded JPEG blocks match exactly.
       {' '}{sameJpegBlocks.anchor_count?.toLocaleString('en-US')} unique detailed blocks support the same framing.
-      Ordinary edits can produce highlighted differences.
+      {nativeJpegDifference
+        ? ' Highlights show local brightness or color differences. Retouching and JPEG re-encoding can cause these differences. The comparison carries zero weight in the AI assessment.'
+        : ' Ordinary edits can produce highlighted differences.'}
     </p>}
     {detailLoss && <p className="mt-2 mb-0 text-small text-text-muted">
       Fine luminance detail is weaker in the highlighted areas while broader structure remains similar. Local blur or other ordinary processing can produce this pattern. This check carries no weight in the AI estimate.

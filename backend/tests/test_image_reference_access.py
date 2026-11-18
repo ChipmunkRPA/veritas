@@ -25,6 +25,7 @@ from app.detectors.image import (
     reference_lossy_webp,
     reference_lossy_webp_crop,
     reference_lossy_webp_resize,
+    reference_native_jpeg,
     reference_perspective,
     reference_png_opacity,
     reference_png_orientation,
@@ -1318,6 +1319,96 @@ def test_exact_jpeg_block_fallback_preserves_completed_analysis_and_exports(
         assert db.get(Analysis, "image-a").result_hash == "a" * 64
 
 
+def test_native_jpeg_fallback_exports_replays_and_declines_unsupported_pairs(reference_http, tmp_path, monkeypatch):
+    f = reference_http
+    width, height = 640, 448
+    base = cv2.resize(np.random.default_rng(847).integers(22, 227, (44, 64, 3), dtype=np.uint8),
+                      (width, height), interpolation=cv2.INTER_CUBIC)
+    yy, xx = np.indices((height, width))
+    grain = np.rint(19 * np.sin(xx * 1.5 + yy * .85)).astype(np.int16)
+    source = np.clip(base.astype(np.int16) + grain[..., None], 0, 255).astype(np.uint8)
+    edited = source.copy()
+    y, x, side = 123, 253, 24
+    edited[y:y + side, x:x + side] = base[y:y + side, x:x + side]
+
+    def encode(pixels, quality=75, *, subsampling=2, progressive=False, optimize=False):
+        with io.BytesIO() as stream:
+            Image.fromarray(pixels).save(stream, "JPEG", quality=quality, subsampling=subsampling,
+                                         progressive=progressive, optimize=optimize)
+            return stream.getvalue()
+
+    earlier, submitted = encode(source), encode(edited)
+
+    def compare(payload, earlier_copy=earlier):
+        stored = f.store.put_bytes(payload)
+        with Session(f.engine) as db:
+            analysis = db.get(Analysis, "image-a")
+            analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+            db.commit()
+        response = f.client.post(_url(), headers=f.viewer, files={"reference": ("earlier.jpg", earlier_copy, "image/jpeg")},
+                                 data={"include_pdf": "true"})
+        assert response.status_code == 200 and response.headers["Cache-Control"] == "no-store"
+        return response.json()
+
+    for flag in ("image_reference_exact_jpeg_identity", "image_reference_shifted_jpeg", "image_reference_structure_jpeg",
+                 "image_reference_same_jpeg", "image_reference_jpeg_detail_loss", "image_reference_jpeg_detail_loss_extra_qualities",
+                 "image_reference_perspective_review"):
+        monkeypatch.setattr(settings, flag, True)
+    monkeypatch.setattr(settings, "image_reference_native_jpeg", False)
+    assert compare(submitted)["comparison"]["regions"] == []
+    monkeypatch.setattr(settings, "image_reference_native_jpeg", True)
+    payload = compare(submitted)
+    comparison = payload["comparison"]
+    assert comparison["schema"] == reference_native_jpeg.SCHEMA and comparison["status"] == "comparable"
+    assert comparison["affects_overall_confidence"] is False
+    assert comparison["alignment"]["method"] == reference_native_jpeg.METHOD
+    [region] = comparison["regions"]
+    assert region["reference_region"] == {key: region[key] for key in ("x", "y", "w", "h")}
+    with Image.open(io.BytesIO(_asset_bytes(payload, comparison["mask"]))) as image:
+        mask = np.array(image)
+    assert np.mean(mask[y:y + side, x:x + side] == 255) > .9
+    with pymupdf.open(stream=base64.b64decode(payload.pop("pdf")), filetype="pdf") as pdf:
+        summary = pdf[0].get_text()
+        assert "local differences in JPEG brightness or color samples" in summary
+        assert "zero weight in the AI assessment" in summary
+        _assert_pdf_assets(pdf, pdf[0], [comparison["mask"]], payload)
+        _assert_pdf_assets(pdf, pdf[1], [region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")], payload)
+
+    exported, reference_path, submitted_path = [tmp_path / name for name in ("comparison.json", "earlier.jpg", "submitted.jpg")]
+    reference_path.write_bytes(earlier)
+    submitted_path.write_bytes(submitted)
+    exported.write_text(json.dumps(payload))
+    assert review(exported, reference_path, submitted_path)["mask_pixels_counted"] == region["selected_pixels"]
+    comparison["alignment"]["exact_tiles"] += 1
+    exported.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="Exact JPEG source proof"):
+        review(exported, reference_path, submitted_path)
+    comparison["alignment"]["exact_tiles"] -= 1
+    mask[y, x] ^= 255
+    wrong_mask = _png(mask)
+    comparison["mask"]["sha256"] = hashlib.sha256(wrong_mask).hexdigest()
+    payload["pngs"][comparison["mask"]["file"]] = base64.b64encode(wrong_mask).decode("ascii")
+    exported.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="Difference mask pixels differ"):
+        review(exported, reference_path, submitted_path)
+
+    optimized = encode(source, optimize=True)
+    assert optimized != earlier
+    for untouched in (earlier, optimized):
+        clean = compare(untouched)
+        assert clean["comparison"]["regions"] == [] and clean["pngs"] == {}
+    with Image.open(io.BytesIO(earlier)) as decoded:
+        recompressed = encode(np.asarray(decoded))
+    assert recompressed != earlier
+    assert compare(recompressed)["comparison"]["schema"] != reference_native_jpeg.SCHEMA
+    for unsupported in (encode(edited, 90), encode(edited, subsampling=0), encode(edited, progressive=True),
+                        encode(np.roll(edited, 16, axis=1)), encode(np.minimum(source.astype(np.int16) + 24, 255).astype(np.uint8))):
+        assert compare(unsupported)["comparison"]["schema"] != reference_native_jpeg.SCHEMA
+    assert compare(encode(edited, 90), encode(source, 90))["comparison"]["schema"] != reference_native_jpeg.SCHEMA
+    with Session(f.engine) as db:
+        assert db.get(Analysis, "image-a").result_hash == "a" * 64
+
+
 @pytest.mark.parametrize("quality", (75, 85, 90))
 def test_jpeg_detail_loss_keeps_earlier_copy_crops_and_replays(reference_http, tmp_path, monkeypatch, quality):
     rng = np.random.default_rng(560)
@@ -1357,6 +1448,7 @@ def test_jpeg_detail_loss_keeps_earlier_copy_crops_and_replays(reference_http, t
     for flag in ("image_reference_exact_jpeg_identity", "image_reference_shifted_jpeg",
                  "image_reference_structure_jpeg", "image_reference_same_jpeg"):
         monkeypatch.setattr(settings, flag, True)
+    monkeypatch.setattr(settings, "image_reference_native_jpeg", False)
     monkeypatch.setattr(settings, "image_reference_jpeg_detail_loss", False)
     baseline = compare(after)["comparison"]
     assert baseline["regions"] == []

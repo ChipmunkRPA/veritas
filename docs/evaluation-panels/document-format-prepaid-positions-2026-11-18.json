@@ -1,0 +1,61 @@
+{
+  "cases": [
+    {
+      "format": "docx",
+      "method": "python-docx",
+      "words": 273,
+      "completed_checks": 2,
+      "pdf": true,
+      "json": true,
+      "package_original_replayed": true,
+      "native_ranges": 17,
+      "word_table_ranges": 2,
+      "assessment": "inconclusive"
+    },
+    {
+      "format": "pptx",
+      "method": "pptx",
+      "words": 71,
+      "completed_checks": 2,
+      "pdf": true,
+      "json": true,
+      "package_original_replayed": true,
+      "native_ranges": 10,
+      "word_table_ranges": null,
+      "assessment": "inconclusive"
+    },
+    {
+      "format": "epub",
+      "method": "epub",
+      "words": 71,
+      "completed_checks": 2,
+      "pdf": true,
+      "json": true,
+      "package_original_replayed": true,
+      "native_ranges": 10,
+      "word_table_ranges": null,
+      "assessment": "inconclusive"
+    },
+    {
+      "format": "xhtml",
+      "method": "html",
+      "words": 275,
+      "completed_checks": 2,
+      "pdf": true,
+      "json": true,
+      "package_original_replayed": true,
+      "native_ranges": 15,
+      "word_table_ranges": null,
+      "assessment": "inconclusive"
+    }
+  ],
+  "simulated_paid_jobs": 4,
+  "unpaid_jobs": 0,
+  "simulated_payment_usd_cents": 999,
+  "browser": {
+    "accepted_by_picker": 4,
+    "plain_results": 4,
+    "page_errors": 0
+  },
+  "runtime": "Isolated offline CPU checks, optional large model pair disabled, generated fixtures"
+}

@@ -37,7 +37,7 @@ from app.detectors.text import language_scope, stylometry
 from app.detectors.text import segment as segment_module
 from app.detectors.text.binoculars import Binoculars, borrow_binoculars, document_score, sentence_scores
 from app.detectors.text.classifier import borrow_primary, borrow_secondary
-from app.detectors.text.extract import Document, from_string
+from app.detectors.text.extract import Document, check_raw_size, from_string
 from app.detectors.text.segment import MIN_WORDS, Sentence, segment, sentences
 
 # Folio palette for figures (matches frontend/design/direction-b-stripe-notion.md)
@@ -458,25 +458,8 @@ def analyze_document_obj(doc: Document, art_dir: Path | None) -> dict:
     return _analyze_segmented(doc, segment(doc), art_dir, t0)
 
 
-# N-10 (SEC-04): a text file holds at most this many bytes for each character of an analysable document (UTF-8 needs up to
-# four; the rest is room for markup that extraction removes). A larger `.txt` or `.md` cannot be within `max_document_chars`
-# short of padding, and is refused before any pattern runs over it. HTML is not bounded here: a page is many times its text.
-RAW_BYTES_PER_CHAR = 8
-RAW_BOUNDED = frozenset({".txt", ".md", ".markdown"})
 EXTRACT_SCRIPT = Path(extract_module.__file__)
 SEGMENT_SCRIPT = Path(segment_module.__file__)
-
-
-def check_raw_size(path: Path, ext: str) -> None:
-    """Refuse a text file that is too large to hold an analysable document, by its size alone."""
-    if ext.lower() not in RAW_BOUNDED:
-        return
-    size, bound = path.stat().st_size, RAW_BYTES_PER_CHAR * settings.max_document_chars
-    if size > bound:
-        raise ValueError(
-            f"Document is {size:,} bytes; a text document within the limit of {settings.max_document_chars:,} characters "
-            f"is at most {bound:,} bytes. Split it into smaller documents and analyse each separately. No text was analysed."
-        )
 
 
 def _not_within(limit: float) -> deadline.StepTimeout:

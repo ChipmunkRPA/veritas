@@ -123,6 +123,19 @@ def test_no_order_payment_or_analysis_without_current_explicit_acknowledgement(b
         assert db.query(BillingOrderRow).count() == db.query(Analysis).count() == db.query(Job).count() == 0
 
 
+@pytest.mark.parametrize(("filename", "content", "message"), [
+    ("too-short.xhtml", b"<main><p>Only three words.</p></main>", "15 readable words"),
+    ("too-long.txt", b"word " * 24_001, "120,000 extracted characters"),
+])
+def test_checkout_rejects_ineligible_writing_before_creating_any_order(billing, filename, content, message):
+    response = upload(billing, filename=filename, content=content, kind="document", mime="application/octet-stream")
+    assert response.status_code == 422
+    assert message in response.json()["detail"]
+    assert billing.created == []
+    with billing.sessions() as db:
+        assert db.query(BillingOrderRow).count() == db.query(Analysis).count() == db.query(Job).count() == 0
+
+
 def test_purchase_receipt_and_hosted_warning_are_bound_to_the_order(billing):
     key = str(uuid.uuid4())
     first = upload(billing, request_key=key)

@@ -80,8 +80,10 @@ MixedLayouts = tuple[WordParagraphs | list[dict] | None, WordParagraphs | list[d
 
 
 def draft_extension(filename: str | Path) -> str:
+    from app.storage.files import HTML_EXTS
+
     suffix = Path(filename).suffix.lower()
-    return ".html" if suffix == ".htm" else suffix
+    return ".html" if suffix in HTML_EXTS else suffix
 
 
 def tokens(text, offsets):

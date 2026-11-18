@@ -238,21 +238,22 @@ def _upload(data, extension=".eml"):
     return {"earlier": ("earlier" + extension, data, "application/octet-stream")}
 
 
-def test_saved_html_draft_comparison_replays_exact_markup_positions(reference_http, monkeypatch, tmp_path):
+@pytest.mark.parametrize("extension", [".htm", ".xhtml"])
+def test_saved_html_draft_comparison_replays_exact_markup_positions(reference_http, monkeypatch, tmp_path, extension):
     fixture = _install(reference_http, monkeypatch)
     monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
     monkeypatch.setattr(paired, "score", lambda _: pytest.fail("HTML article comparison needs no writing model"))
-    earlier = ("<nav>Earlier menu</nav><main><article><h1>Visitor guide</h1>"
+    earlier = ('<html xmlns="http://www.w3.org/1999/xhtml"><body><nav>Earlier menu</nav><main><article><h1>Visitor guide</h1>'
                "<p>Café guests use the <b>nor</b>th gate until the repairs are complete.</p>"
-               "<p>Store each receipt until Monday and file it in the office.</p></article></main>")
+               "<p>Store each receipt until Monday and file it in the office.</p></article></main></body></html>")
     later = (earlier.replace("Earlier menu", "Later menu").replace("<b>nor</b>th", "<em>sou</em>th")
                     .replace("</article>", "<div>Additional unmapped text</div></article>"))
-    _saved(fixture, "html-article", ".htm", later.encode("utf-16"))
+    _saved(fixture, "html-article", extension, later.encode("utf-16"))
     route = _url("html-article")
     assert fixture.client.get(route, headers=fixture.viewer).json() == {
-        "available": True, "extension": ".html", "earlier_extensions": [".html", ".htm"]
+        "available": True, "extension": ".html", "earlier_extensions": [".html", ".htm", ".xhtml"]
     }
-    response = fixture.client.post(route, headers=fixture.viewer, files=_upload(earlier.encode(), ".html"),
+    response = fixture.client.post(route, headers=fixture.viewer, files=_upload(earlier.encode(), extension),
                                    data={"include_pdf": "true", "include_paired_check": "true"})
     assert response.status_code == 200, response.text
     result = response.json()
@@ -277,7 +278,7 @@ def test_saved_html_draft_comparison_replays_exact_markup_positions(reference_ht
     assert all(part in words for part in ("HTML article", "north", "south", "decoded HTML file", "Decoded HTML positions"))
     assert "Additional text outside supported blocks was skipped." in words
     assert "Additional unmapped text" not in words and "Later menu" not in words and "Earlier menu" not in words
-    export, old, new = (tmp_path / name for name in ("comparison.json", "old.html", "new.htm"))
+    export, old, new = (tmp_path / name for name in ("comparison.json", f"old{extension}", f"new{extension}"))
     export.write_text(json.dumps(comparison))
     old.write_bytes(earlier.encode())
     new.write_bytes(later.encode("utf-16"))

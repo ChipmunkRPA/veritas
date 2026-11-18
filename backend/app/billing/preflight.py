@@ -157,11 +157,6 @@ def _av(path: Path, kind: str) -> None:
 
 
 def _document(path: Path, extension: str) -> None:
-    from app.evidence.document_invisible_characters import ENCODED_FORMATTING
-
-    def readable(text: str) -> bool:
-        return any(char.isprintable() and not char.isspace() for char in text)
-
     if extension == ".pdf":
         import pymupdf
         with pymupdf.open(path) as document:
@@ -170,70 +165,74 @@ def _document(path: Path, extension: str) -> None:
             # Loading the first page exercises the page tree without OCR or a raster allocation.
             document.load_page(0)
         return
-    if extension == ".docx":
-        from app.detectors.text.extract import extract_docx
-        from app.detectors.text.segment import MIN_WORDS, segment
-        from app.evidence.document_native_locations import SAVED_FIELDS_KEY
-        from app.storage.files import check_document_archive_safe
 
-        check_document_archive_safe(path, extension, check_crc=True)
-        document = extract_docx(path)
-        if not readable(document.text):
-            raise PreflightError("The Word document has no readable body text. Save scanned pages or unsupported layouts as a PDF before paying.")
-        if (document.meta.get(SAVED_FIELDS_KEY, {}).get("included")
-                and sum(sentence.n_words for sentence in segment(document)) < MIN_WORDS):
-            raise PreflightError(f"The Word document includes saved field text but fewer than {MIN_WORDS} readable words. No payment was started.")
-        return
-    if extension == ".odt":
-        from app.detectors.text.opendocument import body_paragraphs
+    from app.core.config import settings
+    from app.detectors.text.extract import check_raw_size, extract
+    from app.detectors.text.segment import MIN_WORDS, sentences, spans
+    from app.evidence import document_bibliography, document_tracked_changes
+    from app.evidence.document_invisible_characters import ENCODED_FORMATTING
+    from app.evidence.document_native_locations import SAVED_FIELDS_KEY
+    from app.storage.files import DOCUMENT_ARCHIVES, HTML_EXTS, check_document_archive_safe
 
-        try:
-            paragraphs = body_paragraphs(path, check_crc=True)
-        except ValueError as error:
-            raise PreflightError(str(error)) from None
-        if not any(readable(paragraph) for paragraph in paragraphs):
-            raise PreflightError("The ODT document has no readable body text. For scanned pages, upload a PDF before paying.")
+    try:
+        check_raw_size(path, extension)
+    except ValueError as error:
+        raise PreflightError(f"{error} No payment was started.") from None
+
+    if extension in {".txt", ".md", ".markdown", *HTML_EXTS}:
+        # Keep checkout's strict encoding validation. The extractor also supports
+        # forensic review of damaged text with replacement characters.
+        raw = path.read_bytes()
+        raw.decode("utf-16" if raw.startswith((b"\xff\xfe", b"\xfe\xff")) else "utf-8-sig")
+
+    try:
+        if extension in {".docx", ".odt"}:
+            check_document_archive_safe(path, extension, check_crc=True)
+        document = extract(path, extension, allow_ocr=False)
+    except ValueError as error:
+        raise PreflightError(str(error)) from None
+
+    if document.meta.get("truncated") or len(document.text) > settings.max_document_chars:
+        raise PreflightError(f"Writing analysis allows up to {settings.max_document_chars:,} extracted characters. "
+                             "Split the document into smaller files. No payment was started.")
+
+    if settings.environment == "dev" and settings.text_bibliography_scope_review:
+        document = document_bibliography.body_view(document)
+    saved_fields = document.meta.get(SAVED_FIELDS_KEY, {}).get("included")
+    if not saved_fields and (document_tracked_changes.projected(document.word_review)
+                             or document_tracked_changes.unsupported(document.word_review)):
+        # The writing pipeline can still retain native Word revision evidence.
         return
+
+    text = document.text
+    readable = any(char.isprintable() and not char.isspace() for char in text)
+    scope = {".docx": "The Word body", ".odt": "The OpenDocument body", ".eml": "The selected email body"}
+    too_short = f"{scope.get(extension, 'This document')} needs at least {MIN_WORDS} readable words for writing analysis. No payment was started."
     if extension in {".pptx", ".epub"}:
-        from app.detectors.text.extract import extract
-        from app.detectors.text.segment import MIN_WORDS, segment
+        too_short = (f"The {extension[1:].upper()} needs at least {MIN_WORDS} readable words for writing analysis. "
+                     "For image-only pages or slides, upload a PDF for text recognition. No payment was started.")
+    elif extension == ".docx" and not readable:
+        raise PreflightError("The Word document has no readable body text. Save scanned pages or unsupported layouts as a PDF before paying.")
+    elif extension == ".odt" and not readable:
+        raise PreflightError("The OpenDocument file has no readable body text. Save scanned pages as a PDF before paying.")
+    elif extension not in DOCUMENT_ARCHIVES:
+        unusual = sum(not (char.isprintable() or char.isspace() or char in ENCODED_FORMATTING) for char in text)
+        if not readable or "\x00" in text or unusual > max(1, len(text) // 100):
+            if extension == ".eml":
+                raise PreflightError("The selected email body has no readable text. Export the message as EML or PDF before paying.")
+            raise PreflightError("This document has no readable text. Export it as UTF-8 text, PDF or DOCX before paying.")
+    if saved_fields:
+        too_short = (f"The Word document includes saved field text but fewer than {MIN_WORDS} readable words. "
+                     "No payment was started.")
 
-        try:
-            document = extract(path, extension)
-        except ValueError as error:
-            raise PreflightError(str(error)) from None
-        if not readable(document.text) or sum(sentence.n_words for sentence in segment(document)) < MIN_WORDS:
-            raise PreflightError(f"The {extension[1:].upper()} needs at least {MIN_WORDS} readable words for writing analysis. "
-                                 "For image-only pages or slides, upload a PDF for text recognition. No payment was started.")
-        return
-    from app.detectors.text.extract import rtf_text, text_like_content
-
-    raw = path.read_bytes()
-    if extension == ".eml":
-        from email import policy
-        from email.parser import BytesParser
-
-        message = BytesParser(policy=policy.default).parsebytes(raw)
-        body = message.get_body(preferencelist=("plain", "html"))
-        if body is None:
-            raise PreflightError("This email has no readable text or HTML body. Attachments are not analysed as its body.")
-        text = body.get_content()
-        if not isinstance(text, str):
-            raise PreflightError("This email body could not be decoded as text. Re-export it before paying.")
-        if body.get_content_type() == "text/html":
-            extension = ".html"
-    elif extension == ".rtf":
-        try:
-            text = rtf_text(raw)
-        except ValueError as error:
-            raise PreflightError(str(error)) from None
-    else:
-        text = raw.decode("utf-16") if raw.startswith((b"\xff\xfe", b"\xfe\xff")) else raw.decode("utf-8-sig")
-
-    text, _ = text_like_content(text, extension)
-    unusual = sum(not (char.isprintable() or char.isspace() or char in ENCODED_FORMATTING) for char in text)
-    if not readable(text) or "\x00" in text or unusual > max(1, len(text) // 100):
-        raise PreflightError("This document has no readable text. Export it as UTF-8 text, PDF or DOCX before paying.")
+    # The pipeline segments each paragraph independently. The same count can
+    # stop once the minimum is known without segmenting the remainder here.
+    words = 0
+    for paragraph in document.paragraphs:
+        words += sum(sentence.n_words for sentence in sentences(document, spans(text, (paragraph,))))
+        if words >= MIN_WORDS:
+            return
+    raise PreflightError(too_short)
 
 
 def _main() -> int:

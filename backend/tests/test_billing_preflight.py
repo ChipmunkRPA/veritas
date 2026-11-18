@@ -10,11 +10,16 @@ import time
 import wave
 import zipfile
 import zlib
+from email.message import EmailMessage
+from html import escape
 
 import pytest
 from PIL import Image
 
 from app.billing import preflight
+
+WORDS = "one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen"
+WRITING = "This fixture has enough ordinary writing for the local analysis to check its full body after payment."
 
 
 def png() -> bytes:
@@ -41,6 +46,36 @@ def verify(data: bytes, filename: str, kind: str) -> None:
         preflight.validate_upload(source, filename, kind)
     finally:
         assert source.tell() == position
+
+
+def document_fixture(path, text):
+    if path.suffix == ".docx":
+        from docx import Document
+
+        document = Document()
+        document.add_paragraph(text)
+        document.save(path)
+    elif path.suffix == ".odt":
+        with zipfile.ZipFile(path, "w") as archive:
+            archive.writestr("mimetype", "application/vnd.oasis.opendocument.text")
+            archive.writestr("content.xml", f'''
+                <office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
+                                         xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0">
+                    <office:body><office:text><text:p>{escape(text)}</text:p></office:text></office:body>
+                </office:document-content>''')
+    elif path.suffix in {".pptx", ".epub"}:
+        from test_reading_packages import epub, powerpoint
+
+        make = {".pptx": powerpoint, ".epub": epub}[path.suffix]
+        make(path, passages=(text, ""))
+    else:
+        templates = {".html": "<main><p>{}</p></main>", ".eml": "Content-Type: text/plain\r\n\r\n{}",
+                     ".rtf": r"{{\rtf1\ansi {}}}", ".md": "# {}", ".txt": "{}", ".xhtml": (
+                         '<?xml version="1.0" encoding="UTF-8"?>'
+                         '<html xmlns="http://www.w3.org/1999/xhtml"><body><p>{}</p></body></html>')}
+        value = escape(text) if path.suffix in {".html", ".xhtml"} else text
+        path.write_text(templates[path.suffix].format(value), encoding="utf-8")
+    return path.read_bytes()
 
 
 def test_valid_image_and_truncated_magic_only_image():
@@ -93,11 +128,21 @@ def test_readable_pdf_and_password_protected_or_broken_pdf():
         verify(b"%PDF-1.7\ntruncated document", "broken.pdf", "document")
 
 
+def test_scan_without_embedded_text_can_still_reach_pdf_checkout():
+    import pymupdf
+
+    with pymupdf.open() as document:
+        page = document.new_page()
+        page.insert_image(pymupdf.Rect(20, 20, 200, 200), stream=png())
+        assert not page.get_text().strip()
+        verify(document.tobytes(), "image-only-scan.pdf", "document")
+
+
 def test_docx_requires_a_readable_document_package():
     from docx import Document
 
     document = Document()
-    document.add_paragraph("A readable sample document.")
+    document.add_paragraph(WRITING)
     good = io.BytesIO()
     document.save(good)
     verify(good.getvalue(), "article.docx", "document")
@@ -121,14 +166,15 @@ def test_docx_requires_readable_body_text_but_accepts_a_table():
     with pytest.raises(preflight.PreflightError, match="no readable body text"):
         verify(content.getvalue(), "header-only.docx", "document")
 
-    document.add_table(rows=1, cols=1).cell(0, 0).text = "The text is in a table cell."
+    document.add_table(rows=1, cols=1).cell(0, 0).text = WRITING
     content = io.BytesIO()
     document.save(content)
     verify(content.getvalue(), "table-only.docx", "document")
 
 
 def test_rtf_preflight_requires_the_signature_and_readable_body():
-    verify(rb"{\rtf1\ansi A readable rich text document with literal braces \{ and \}.}", "article.RTF", "document")
+    verify(rb"{\rtf1\ansi A readable rich text document contains ordinary words and ends with two visible literal braces \{ and \}.}",
+           "article.RTF", "document")
     for data, reason in (
         (b"Plain text saved with the wrong extension.", "not a readable Rich Text"),
         (rb"{\rtf1\ansi{\info{\title Readable title only}} }", "no readable text"),
@@ -147,7 +193,7 @@ def test_docx_checkout_reads_filled_controls_but_rejects_placeholder_only(inline
     for placeholder in (False, True):
         document = Document()
         paragraph = document.add_paragraph()
-        run = paragraph.add_run("Saved answers in this completed form should be available to the writing checks.")
+        run = paragraph.add_run(WRITING)
         word_control([run._r if inline else paragraph._p], placeholder=placeholder)
         package = io.BytesIO()
         document.save(package)
@@ -159,9 +205,9 @@ def test_docx_checkout_reads_filled_controls_but_rejects_placeholder_only(inline
 
 
 def test_text_checks_encoding_and_readability_without_running_models():
-    verify("A UTF-8 document — with punctuation.".encode(), "article.txt", "document")
-    verify("A UTF-16 document with punctuation.".encode("utf-16"), "article.txt", "document")
-    verify("Readable 👩\u200d🔬 text includes Acct\u200bNumber, a word\u00adbreak and \u2067עברית\u2069.".encode(),
+    verify(("A UTF-8 document — with punctuation. " + WRITING).encode(), "article.txt", "document")
+    verify(("A UTF-16 document with punctuation. " + WRITING).encode("utf-16"), "article.txt", "document")
+    verify(("Readable 👩\u200d🔬 text includes Acct\u200bNumber, a word\u00adbreak and \u2067עברית\u2069. " + WRITING).encode(),
            "article.txt", "document")
     for data in (b" \r\n\t", b"\x00\xff\xfe\x80", b"", "\u2067\u2069\u202e\u202c".encode()):
         with pytest.raises(preflight.PreflightError):
@@ -169,9 +215,9 @@ def test_text_checks_encoding_and_readability_without_running_models():
 
 
 @pytest.mark.parametrize(("name", "readable", "empty"), [
-    ("article.html", b"<main><p>A readable article.</p></main>", b"<!-- comment --><style>section {color: red}</style>"),
-    ("article.markdown", b"# A readable heading", b"```python\ncode_without_prose()\n```"),
-    ("article.eml", b"Content-Type: text/html\r\n\r\n<p>A readable body.</p>",
+    ("article.html", f"<main><p>{WRITING}</p></main>".encode(), b"<!-- comment --><style>section {color: red}</style>"),
+    ("article.markdown", f"# {WRITING}".encode(), b"```python\ncode_without_prose()\n```"),
+    ("article.eml", f"Content-Type: text/html\r\n\r\n<p>{WRITING}</p>".encode(),
      b"Content-Type: text/html\r\n\r\n<script>hidden content</script><p>&nbsp;</p>"),
 ])
 def test_checkout_checks_extracted_writing_instead_of_markup(name, readable, empty):
@@ -183,7 +229,7 @@ def test_checkout_checks_extracted_writing_instead_of_markup(name, readable, emp
 def test_email_uses_mime_charset_and_requires_a_readable_body():
     email = (b"From: author@example.com\r\nTo: reader@example.com\r\nSubject: Example\r\n"
              b"Content-Type: text/plain; charset=iso-8859-1\r\nContent-Transfer-Encoding: 8bit\r\n\r\n"
-             b"An ordinary caf\xe9 update with a clearly readable email body.\r\n")
+             b"An ordinary caf\xe9 update with a clearly readable email body.\r\n" + WRITING.encode())
     verify(email, "message.eml", "document")
     for empty in (b"From: author@example.com\r\nSubject: Empty message\r\n\r\n",
                   b"Content-Type: multipart/mixed; boundary=fixture\r\n\r\n--fixture\r\n"
@@ -191,6 +237,88 @@ def test_email_uses_mime_charset_and_requires_a_readable_body():
                   b"Content-Transfer-Encoding: base64\r\n\r\nYWJj\r\n--fixture--\r\n"):
         with pytest.raises(preflight.PreflightError, match="no readable"):
             verify(empty, "empty.eml", "document")
+
+
+@pytest.mark.parametrize("extension", ["docx", "odt", "pptx", "epub", "rtf", "txt", "md", "html", "xhtml", "eml"])
+def test_checkout_word_floor_applies_to_the_same_extracted_text_across_formats(tmp_path, extension):
+    path = tmp_path / f"article.{extension}"
+    with pytest.raises(preflight.PreflightError, match="at least 15 readable words"):
+        verify(document_fixture(path, WORDS.rsplit(" ", 1)[0]), path.name, "document")
+    verify(document_fixture(path, WORDS), path.name, "document")
+
+
+@pytest.mark.parametrize("extension", ["docx", "odt", "pptx", "epub", "txt", "html"])
+def test_checkout_uses_character_limit_after_normalizing_the_body(tmp_path, monkeypatch, extension):
+    limit = 120
+    monkeypatch.setenv("VERITAS_MAX_DOCUMENT_CHARS", str(limit))
+    path = tmp_path / f"article.{extension}"
+    tail = "x" * (limit - len(WORDS) - 1)
+    # The padding normalizes to one space and the HTML entity becomes one character.
+    text = WORDS + " " * 20 + ("&" + tail[1:] if extension == "html" else tail)
+    verify(document_fixture(path, text), path.name, "document")
+    with pytest.raises(preflight.PreflightError, match=r"120(?: extracted characters|-character writing limit)"):
+        verify(document_fixture(path, text + "x"), path.name, "document")
+
+
+def test_checkout_word_floor_excludes_unselected_email_bodies_and_attachments():
+    message = EmailMessage()
+    message.set_content(WORDS.rsplit(" ", 1)[0])
+    message.add_alternative(f"<p>{WRITING}</p>", subtype="html")
+    message.add_attachment(WRITING, filename="attachment.txt")
+    with pytest.raises(preflight.PreflightError, match="selected email body needs at least 15 readable words"):
+        verify(message.as_bytes(), "selected-body.eml", "document")
+
+
+def test_xhtml_requires_valid_text_encoding(tmp_path):
+    source = document_fixture(tmp_path / "article.xhtml", WORDS)
+    with pytest.raises(preflight.PreflightError, match="unreadable or damaged"):
+        verify(source + b"\xff", "article.xhtml", "document")
+
+
+def test_character_cap_precedes_bibliography_projection(monkeypatch):
+    from test_document_bibliography import PROSE, REFERENCES
+
+    monkeypatch.setenv("VERITAS_ENVIRONMENT", "dev")
+    monkeypatch.setenv("VERITAS_TEXT_BIBLIOGRAPHY_SCOPE_REVIEW", "true")
+    monkeypatch.setenv("VERITAS_MAX_DOCUMENT_CHARS", str(len(PROSE)))
+    verify(PROSE.encode(), "body.txt", "document")
+    payload = "\n\n".join([PROSE, "Works Cited", *REFERENCES]).encode()
+    with pytest.raises(preflight.PreflightError, match="extracted characters"):
+        verify(payload, "body-and-bibliography.txt", "document")
+
+
+def test_checkout_applies_the_same_raw_plain_text_byte_limit_as_analysis(monkeypatch):
+    from app.core.config import Settings
+    from app.detectors.text.extract import RAW_BYTES_PER_CHAR
+
+    default_limit = Settings.model_fields["max_document_chars"].default
+    monkeypatch.setenv("VERITAS_MAX_DOCUMENT_CHARS", str(default_limit))
+    byte_limit = default_limit * RAW_BYTES_PER_CHAR
+    source = WORDS.encode().ljust(byte_limit)
+    verify(source, "padded.txt", "document")
+    with pytest.raises(preflight.PreflightError, match=rf"{byte_limit + 1:,} bytes.*No payment was started"):
+        verify(source + b" ", "padded.txt", "document")
+
+
+@pytest.mark.parametrize(("element", "text_element"), [("w:del", "w:delText"), ("w:moveFrom", "w:t")])
+def test_word_checkout_can_retain_revision_evidence_with_no_current_body_text(element, text_element):
+    from docx import Document
+    from docx.oxml import OxmlElement
+    from docx.oxml.ns import qn
+
+    document = Document()
+    paragraph = document.add_paragraph()
+    change = OxmlElement(element)
+    change.set(qn("w:id"), "1")
+    run = OxmlElement("w:r")
+    text = OxmlElement(text_element)
+    text.text = "Earlier wording."
+    run.append(text)
+    change.append(run)
+    paragraph._p.append(change)
+    package = io.BytesIO()
+    document.save(package)
+    verify(package.getvalue(), "tracked.docx", "document")
 
 
 def test_temporary_source_is_private_and_removed(tmp_path, monkeypatch):

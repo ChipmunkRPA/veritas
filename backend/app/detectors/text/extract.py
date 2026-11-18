@@ -47,6 +47,22 @@ OCR_MAX_PIXELS = 4_000_000
 OCR_MAX_RASTER_BYTES = 24 * 1024 * 1024
 OCR_BUDGET_SECONDS = 70.0
 NATIVE_COMPARISON_MAX_PAGES = 12
+RAW_BYTES_PER_CHAR = 8
+RAW_BOUNDED = frozenset({".txt", ".md", ".markdown"})
+
+
+def check_raw_size(path: Path, ext: str) -> None:
+    """Bound plain text and Markdown bytes before running extraction patterns."""
+    if ext.lower() not in RAW_BOUNDED:
+        return
+    from app.core.config import settings
+
+    size, bound = path.stat().st_size, RAW_BYTES_PER_CHAR * settings.max_document_chars
+    if size > bound:
+        raise ValueError(
+            f"Document is {size:,} bytes; a text document within the limit of {settings.max_document_chars:,} characters "
+            f"is at most {bound:,} bytes. Split it into smaller documents and analyse each separately. No text was analysed."
+        )
 
 
 def text_hash(text: str) -> str:
@@ -924,7 +940,9 @@ def _html_text(raw: str) -> str:
 
 def text_like_content(raw: str, ext: str) -> tuple[str, str]:
     """Project text-like input without constructing a per-character source map."""
-    if ext in (".html", ".htm"):
+    from app.storage.files import HTML_EXTS
+
+    if ext in HTML_EXTS:
         return _html_text(raw), "html"
     if ext in (".md", ".markdown"):
         for rx, rep in _MD_INLINE:

@@ -38,8 +38,9 @@ def _word(paragraph):
 
 
 def test_strict_word_preserves_native_locations_in_analysis_and_drafts(tmp_path):
-    old_bytes = _word("The case arrived on Monday.")
-    new_bytes = _word("The case arrived on Tuesday.")
+    body = "The case arrived on Monday. These files preserve the source evidence for the regional compliance review."
+    old_bytes = _word(body)
+    new_bytes = _word(body.replace("Monday", "Tuesday"))
     regular = tmp_path / "default.docx"
     regular.write_bytes(old_bytes)
     strict = tmp_path / "strict.docx"
@@ -47,7 +48,7 @@ def test_strict_word_preserves_native_locations_in_analysis_and_drafts(tmp_path)
     _document(strict, ".docx")
     expected = extract(regular, ".docx")
     actual = extract(strict, ".docx")
-    assert actual.text == "The case arrived on Monday.\n\nBody table entry."
+    assert actual.text == f"{body}\n\nBody table entry."
     assert actual.source_map == expected.source_map
     assert actual.meta["percentage_body_paragraphs"] == expected.meta["percentage_body_paragraphs"] == [0]
     assert actual.meta["original_sha256"] != expected.meta["original_sha256"]

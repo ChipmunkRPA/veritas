@@ -9,20 +9,23 @@ from app.detectors.text import html_article
 from app.detectors.text.extract import extract
 from app.evidence import document_native_locations
 from app.evidence.document_packets import _source_anchors
+from app.storage.files import validate_kind
 
 
-def test_static_article_adds_exact_source_ranges_without_changing_writing_input(tmp_path):
-    raw = ('<!doctype html><html><head><title>Navigation title</title></head><body>\r\n'
+@pytest.mark.parametrize("extension", [".htm", ".xhtml"])
+def test_static_article_adds_exact_source_ranges_without_changing_writing_input(tmp_path, extension):
+    raw = ('<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml"><head><title>Navigation title</title></head><body>\r\n'
            '<nav><article><p>Other teaser.</p></article></nav><div role="main">\r\n'
            '<header><p>Article heading boilerplate.</p></header><article><p>Read &amp; <em>review</em> the article.</p>\r\n'
-           '<p style="display: none !important">Hidden text.</p><p hidden>Placeholder text.</p>\r\n'
+           '<p style="display: none !important">Hidden text.</p><p hidden="hidden">Placeholder text.</p>\r\n'
            '<blockquote><p>Earlier quote should stay outside.</p></blockquote>'
-           '<p>The exact passage contains a &eacute; and another line.</p></article></div>\r\n'
+           '<p>The exact passage contains a &#233; and another line.</p></article></div>\r\n'
            '<footer><p>Unrelated facts.</p></footer></body></html>')
-    source = tmp_path / "article.htm"
+    source = tmp_path / f"article{extension.upper()}"
     source.write_bytes(raw.encode())
-    doc = extract(source, ".htm")
-    old = extract(source, ".htm", include_html_article=False)
+    assert validate_kind("document", raw.encode(), source.name)[1] == extension
+    doc = extract(source, extension)
+    old = extract(source, extension, include_html_article=False)
     assert doc.text == old.text and doc.paragraphs == old.paragraphs
     assert "Navigation title" in doc.text and "Hidden text" in doc.text
     assert doc.meta[html_article.KEY]["element"] == "article"

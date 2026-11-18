@@ -29,16 +29,36 @@ export const TABS: TabSpec[] = [
     formats: 'WAV · MP3 · M4A · OGG · OPUS · FLAC · up to 150 MB',
   },
   {
-    kind: 'document', label: 'Document', noun: 'a document', accept: '.pdf,.docx,.odt,.pptx,.epub,.rtf,.txt,.md,.markdown,.html,.htm,.eml',
-    exts: ['pdf', 'docx', 'odt', 'pptx', 'epub', 'rtf', 'txt', 'md', 'markdown', 'html', 'htm', 'eml'], maxBytes: 25 * MB,
-    formats: 'Word (DOCX) · PDF · ODT · PowerPoint (PPTX) · EPUB · RTF · TXT · Markdown · HTML · Email (EML) · up to 25 MB',
+    kind: 'document', label: 'Document', noun: 'a document', accept: '.pdf,.docx,.odt,.pptx,.epub,.rtf,.txt,.md,.markdown,.html,.htm,.xhtml,.eml',
+    exts: ['pdf', 'docx', 'odt', 'pptx', 'epub', 'rtf', 'txt', 'md', 'markdown', 'html', 'htm', 'xhtml', 'eml'], maxBytes: 25 * MB,
+    formats: 'Word (DOCX) · PDF · ODT · PowerPoint (PPTX) · EPUB · RTF · TXT · Markdown · HTML/XHTML · Email (EML) · up to 25 MB',
   },
 ]
+
+const sheetExport = 'Export the sheets containing writing as PDF, or paste the passages you want analysed.'
+
+const documentExport = new Map(Object.entries({
+  doc: 'Save the older Word file as DOCX or PDF, then upload it.',
+  docm: 'Save the Word file as a macro-free DOCX or PDF, then upload it.',
+  pages: 'Export the Apple Pages file as Word (DOCX) or PDF, then upload it.',
+  ppt: 'Save the older PowerPoint file as PPTX or PDF, then upload it.',
+  pptm: 'Save the presentation as a macro-free PPTX or PDF, then upload it.',
+  key: 'Export the Keynote file as PowerPoint (PPTX) or PDF, then upload it.',
+  odp: 'Export the OpenDocument presentation as PPTX or PDF, then upload it.',
+  msg: 'Export the Outlook message as EML or PDF, then upload it.',
+  xls: sheetExport,
+  xlsx: sheetExport,
+  xlsm: sheetExport,
+  ods: sheetExport,
+}))
 
 export function validate(f: File, t: TabSpec): string | null {
   const ext = f.name.split('.').pop()?.toLowerCase() ?? ''
   const mimeOk = t.mimePrefix ? f.type.startsWith(t.mimePrefix) : false
-  if (!mimeOk && !t.exts.includes(ext)) return `Unsupported type. Accepted: ${t.formats.split(' · ').slice(0, -1).join(', ')}`
+  if (!mimeOk && !t.exts.includes(ext)) {
+    const exportHelp = t.kind === 'document' ? documentExport.get(ext) : undefined
+    return exportHelp ?? `Unsupported type. Accepted: ${t.formats.split(' · ').slice(0, -1).join(', ')}`
+  }
   if (f.size > t.maxBytes) return `File exceeds ${Math.round(t.maxBytes / MB)} MB`
   if (f.size === 0) return 'File is empty'
   return null

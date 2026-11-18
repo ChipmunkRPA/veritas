@@ -38,7 +38,7 @@ router = APIRouter(prefix="/api/v2", tags=["evidence"], dependencies=[Depends(ra
                    route_class=CheckedRoute)
 
 
-DraftExtension = Literal[".eml", ".txt", ".docx", ".odt", ".pdf", ".rtf", ".html", ".htm"]
+DraftExtension = Literal[".eml", ".txt", ".docx", ".odt", ".pdf", ".rtf", ".html", ".htm", ".xhtml"]
 
 
 class DocumentRevisionAvailability(BaseModel):
@@ -357,7 +357,9 @@ def availability(aid: str, request: Request):
     if extension in COMPARABLE_DRAFTS:
         payload["earlier_extensions"] = list(COMPARABLE_DRAFTS)
     elif extension == ".html":
-        payload["earlier_extensions"] = [".html", ".htm"]
+        from app.storage.files import HTML_EXTS
+
+        payload["earlier_extensions"] = list(HTML_EXTS)
     if _paired_enabled(extension):
         payload["paired_check_available"] = True
         if extension in MIXED_DRAFTS and settings.document_paired_independent_review:

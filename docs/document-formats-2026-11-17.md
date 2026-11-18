@@ -1,7 +1,7 @@
 # Document formats and signed source records
 
 Chipmunk Verify accepts Word (`.docx`), OpenDocument Text (`.odt`), PDF,
-PowerPoint (`.pptx`), EPUB, Rich Text (`.rtf`), plain text, Markdown, HTML, and email (`.eml`). These use the same local
+PowerPoint (`.pptx`), EPUB, Rich Text (`.rtf`), plain text, Markdown, HTML and XHTML, and email (`.eml`). These use the same local
 writing pipeline and produce PDF and JSON reports. The document upload
 limit is 25 MB in the standard configuration.
 
@@ -16,7 +16,7 @@ limit is 25 MB in the standard configuration.
 | EML | The selected plain-text or HTML message body | Decoded text and supported HTML source positions |
 | TXT | Decoded Unicode text | Decoded character offsets |
 | Markdown | Text extracted from the markup | Paragraph and character position in the extracted text |
-| HTML | Text extracted from the saved markup | Original HTML character ranges for uniquely mapped article passages, otherwise extracted-text positions |
+| HTML and XHTML | Text extracted from saved `.html`, `.htm`, or `.xhtml` markup | Original markup character ranges for uniquely mapped article passages, otherwise extracted-text positions |
 
 For email, attachments can be submitted separately. Word and ODT use body
 text for writing checks. Document packages are read locally without opening
@@ -56,10 +56,16 @@ replay them against the original file.
 Export Google Docs, Apple Pages, and older Word (`.doc`) files as DOCX or
 PDF before uploading. Export Google Slides and Keynote as PowerPoint or PDF.
 Export Outlook (`.msg`) files as EML or PDF. Keep the
-original file if its native provenance matters.
-Checkout rejects Word and ODT files without readable body text and checks
-the text extracted from RTF, Markdown, HTML and HTML email bodies before
-starting payment. Scanned documents can be uploaded as PDF for local OCR.
+original file if its native provenance matters. A PDF export can also include
+Word text boxes, headers and footers in their rendered layout.
+For spreadsheets, export the sheets containing writing as PDF or paste the
+passages to assess.
+Before creating a payment, checkout checks that writing files have at least
+15 readable words and fit within the configured extracted-text limit, normally
+120,000 characters. Some Word files can still produce native revision evidence
+with fewer words. PDF checkout validates the file structure and allows scanned
+pages for local OCR during the paid analysis. Text recognition may yield too
+little writing to assess.
 Rich Text files with binary data should be saved as DOCX or PDF.
 The local batch tool also accepts native DOCX and ODT packages.
 
@@ -89,7 +95,16 @@ sample exceeded the configured writing limit.
 
 [Saved HTML evidence](writing-saved-html-scope-2026-11-18.md) preserves original
 character ranges for uniquely mapped article passages without changing the text
-sent to the writing checks.
+sent to the writing checks. XHTML uses the same handling for analysis, signed
+source replay and earlier-draft comparison.
+
+A follow-up local browser replay covered DOCX, PPTX, EPUB and XHTML under
+the revised checkout rules. Four simulated USD 9.99 payments preceded
+analysis. Each case produced PDF and JSON exports with matching positions
+and a signed package that verified against the original. Word preserved 17
+exact positions, including two in a table. The isolated replay used generated
+fixtures and the available CPU checks, with the optional large model pair
+disabled. [Prepaid document position receipt](evaluation-panels/document-format-prepaid-positions-2026-11-18.json)
 
 The local app also compares two saved HTML articles when an earlier copy is
 available. It marks wording changes in both decoded sources and gives the

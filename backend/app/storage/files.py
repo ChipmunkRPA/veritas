@@ -24,7 +24,8 @@ RTF_MIME = "application/rtf"
 OFFICE_CREDENTIAL_EXTENSIONS = {DOCX_MIME: ".docx", ODT_MIME: ".odt"}
 DOCUMENT_ARCHIVES = {".docx": DOCX_MIME, ".odt": ODT_MIME, ".pptx": PPTX_MIME, ".epub": EPUB_MIME}
 DOCUMENT_ARCHIVE_EXTENSIONS = {mime: extension for extension, mime in DOCUMENT_ARCHIVES.items()}
-DOC_EXTS = {".pdf", ".txt", ".md", ".markdown", ".html", ".htm", ".eml", ".rtf", *DOCUMENT_ARCHIVES}
+HTML_EXTS = (".html", ".htm", ".xhtml")
+DOC_EXTS = {".pdf", ".txt", ".md", ".markdown", ".eml", ".rtf", *HTML_EXTS, *DOCUMENT_ARCHIVES}
 RTF_HEADER = re.compile(rb"\{\\rtf1(?=[\\{}\s])")
 M4A_BRANDS = {b"M4A ", b"M4B "}
 ISO_BRANDS = {b"isom", b"iso2", b"iso4", b"iso5", b"iso6", b"mp41", b"mp42", b"dash"}
@@ -240,9 +241,12 @@ def validate_kind(kind: str, data: bytes, filename: str, size: int | None = None
         elif mime and mime.startswith("text/"):
             ext = ext if ext in DOC_EXTS else ".txt"
         else:
-            if Path(filename).suffix.lower() in {".doc", ".docm", ".pages", ".msg", ".ppt", ".pptm", ".key", ".odp"}:
+            upload_ext = Path(filename).suffix.lower()
+            if upload_ext in {".doc", ".docm", ".pages", ".msg", ".ppt", ".pptm", ".key", ".odp"}:
                 raise ValueError("Export Word or Pages files as DOCX or PDF, presentations as PPTX or PDF, and Outlook messages as EML or PDF.")
-            raise ValueError(f"Unsupported document type ({mime or ext}). Choose PDF, DOCX, ODT, PPTX, EPUB, RTF, TXT, Markdown, HTML or EML.")
+            if upload_ext in {".xls", ".xlsx", ".xlsm", ".ods"}:
+                raise ValueError("Export the sheets containing writing as PDF, or paste the passages you want analysed.")
+            raise ValueError(f"Unsupported document type ({mime or ext}). Choose PDF, DOCX, ODT, PPTX, EPUB, RTF, TXT, Markdown, HTML/XHTML or EML.")
         mime = mime or "text/plain"
     else:
         raise ValueError("Unknown analysis kind")

@@ -46,6 +46,17 @@ beforeEach(() => {
 afterEach(() => { cleanup(); clients.forEach((c) => c.clear()); clients.length = 0; vi.resetAllMocks() })
 
 describe('paid analysis intake', () => {
+  it('accepts Word and saved XHTML, and guides users who choose an older Word file', () => {
+    const { container } = mount()
+    const input = container.querySelector<HTMLInputElement>('input[type="file"]')!
+    expect(input.accept.split(',')).toEqual(expect.arrayContaining(['.docx', '.pdf', '.odt', '.pptx', '.rtf', '.xhtml', '.eml']))
+    fireEvent.change(input, { target: { files: [new File(['old Word'], 'draft.DOC')] } })
+    expect(screen.getByRole('alert').textContent).toContain('Save the older Word file as DOCX or PDF')
+    fireEvent.change(input, { target: { files: [new File(['saved article'], 'article.XHTML', { type: 'application/xhtml+xml' })] } })
+    expect(screen.getByText('article.XHTML')).toBeTruthy()
+    expect(screen.queryByRole('alert')).toBeNull()
+    expect(billingApi.checkout).not.toHaveBeenCalled()
+  })
   it('requires an unchecked limitations acknowledgement and resets it for a changed source', () => {
     mount()
     const sourceBox = screen.getByRole('textbox', { name: 'Text to analyse' })

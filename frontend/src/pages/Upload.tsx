@@ -212,7 +212,6 @@ export default function Upload() {
             <p className="text-caption text-text-muted mt-1">
               {tab.formats}{paid ? ' · one file per checkout' : <> · several files or a{' '}<Button variant="text" className="text-caption" onClick={pickFolder}>folder</Button>{' '}make a batch</>}
             </p>
-            {kind === 'document' && <p className="text-caption text-text-muted mt-1 mb-0">Export Google Docs, Apple Pages, or older Word (.doc) files as DOCX or PDF. Export Google Slides or Keynote as PPTX or PDF, and Outlook (.msg) messages as EML or PDF.</p>}
           </div>
         ) : (
           <div className="h-14 flex items-center gap-3 px-4 rounded-md bg-surface-2 border border-border">
@@ -227,6 +226,14 @@ export default function Upload() {
           </div>
         )}
         {file && <SourcePreview file={file} kind={kind} />}
+        {kind === 'document' && !isBatch && <div className="mt-2 text-caption text-text-muted">
+          <p className="m-0">Writing checks need at least {MIN_WORDS} readable words. For scans or image-only slides, upload a PDF for local text recognition.</p>
+          {!file && <details className="mt-1">
+            <summary className="cursor-pointer">Export from Google Docs, Pages, older Office, or Outlook</summary>
+            <p className="mt-1 mb-0">Export Google Docs, Apple Pages, or older Word (.doc) files as DOCX or PDF. Export Google Slides, Keynote, or older PowerPoint files as PPTX or PDF. Export Outlook (.msg) messages as EML or PDF.</p>
+          </details>}
+          {file && /\.docx$/i.test(file.name) && <p className="mt-1 mb-0">Word coverage includes body paragraphs and tables. For text boxes, headers, or footers, export and upload a PDF.</p>}
+        </div>}
         {error && <p className="mt-2 text-caption text-danger" role="alert">{error}</p>}
         {isBatch && (
           <p className="mt-2 mb-0 text-caption text-text-muted max-w-[60ch]">

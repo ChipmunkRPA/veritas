@@ -3530,9 +3530,9 @@ export interface components {
             /** Available */
             available: boolean;
             /** Earlier Extensions */
-            earlier_extensions?: (".eml" | ".txt" | ".docx" | ".odt" | ".pdf" | ".rtf" | ".html" | ".htm")[] | null;
+            earlier_extensions?: (".eml" | ".txt" | ".docx" | ".odt" | ".pdf" | ".rtf" | ".html" | ".htm" | ".xhtml")[] | null;
             /** Extension */
-            extension?: (".eml" | ".txt" | ".docx" | ".odt" | ".pdf" | ".rtf" | ".html" | ".htm") | null;
+            extension?: (".eml" | ".txt" | ".docx" | ".odt" | ".pdf" | ".rtf" | ".html" | ".htm" | ".xhtml") | null;
             /** Paired Check Available */
             paired_check_available?: boolean | null;
             /** Paired Mixed Formats Available */

@@ -65,6 +65,33 @@ the exact offsets of the text that follows. The reader uses the stored text
 and never opens the hyperlink destination. Signed reports record the
 mapping rule so earlier evidence can replay with its original coordinates.
 
+### Saved link destinations
+
+The document evidence view compares the hostname written in an ordinary
+link label with the hostname in its saved destination. The check supports
+top-level paragraphs in standard and Strict DOCX, HTML (`.html`, `.htm`,
+`.xhtml`), and the selected HTML body of an EML file. The browser, Standard
+PDF and JSON show normalized hostnames as plain text and zero-based Unicode
+ranges in the Word paragraph or the decoded HTML source. Email results also
+identify the MIME part. Signed packages can replay the findings against the
+original file. The check opens no links. An ordinary redirect can explain a
+difference, and the final destination remains unverified. This observation
+carries zero AI-authorship weight.
+
+In five synthetic fixtures covering UTF-8 and UTF-16 HTML, quoted-printable
+EML, and both DOCX variants, the check located all 20 planned hostname
+differences and five stored destination differences from ordinary generic
+redirects. The other 55 controls produced no findings. These included
+equivalent hostnames, known link wrappers, unsupported targets and plain
+labels. The fixtures measured saved-source behavior under these cases.
+
+In an isolated local checkout test, the five fixture reports showed the
+same 25 positions in Chromium, PDF, JSON and signed original-file replay.
+A sixth HTML file kept the same writing and saved matching destinations.
+It had no saved-link observation and produced the same writing assessment.
+The newsroom PDF omitted the hostname evidence. All six analyses ran only
+after simulated payment.
+
 ### Linked Word notes
 
 The writing check reads supported saved footnote and endnote paragraphs

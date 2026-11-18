@@ -8,6 +8,7 @@ import DocumentPassageCoverage from './DocumentPassageCoverage'
 import DocumentRepeatedPassages from './DocumentRepeatedPassages'
 import DocumentUnselectedResponses from './DocumentUnselectedResponses'
 import PdfSavedWording from './PdfSavedWording'
+import SavedLinkDestinations from './SavedLinkDestinations'
 import { type DocumentEvidencePacket, type DocumentEvidenceSet, type DocumentEvidenceWindow, type DocumentOriginalTextLocation, type DocumentPassagePosition, type EmailBodyAlternatives, type EmailClassifierInputScope, type MappedTextFinding, type PublishedWordingColumn, type PublishedWordingReview, type PublishedWordingSection, type WritingCheckReason } from './multimediaPackets'
 
 function BibliographyCoverage({ review, doiReviewed }: {
@@ -660,6 +661,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     {set.arithmetic_consistency && <ArithmeticConsistency review={set.arithmetic_consistency} />}
     {set.publication_identifier_consistency && <PublicationIdentifiers review={set.publication_identifier_consistency} />}
     {set.doi_reference_consistency && <DoiReferenceCheck review={set.doi_reference_consistency} />}
+    {set.saved_link_hosts && <SavedLinkDestinations review={set.saved_link_hosts} />}
     {set.coverage?.chat_format_markers && <ChatFormatMarkers review={set.coverage.chat_format_markers} />}
     {invisible && <section aria-labelledby="document-invisible-characters" className="mt-4 rounded-md border border-border p-4">
       <h3 id="document-invisible-characters" className="m-0 text-body font-medium">

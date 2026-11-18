@@ -298,6 +298,21 @@
 {% endif %}
 <p class="caption">Local {{ doi_review.snapshot.provider }} snapshot dated {{ doi_review.snapshot.as_of }} with {{ doi_review.snapshot.records }} registry records. {{ doi_review.limitation }}</p>
 {% endif %}
+{% set saved_links = evidence.get('saved_link_hosts') %}
+{% if saved_links and not evidence.withheld %}
+<h3 id="document-saved-link-hosts">Saved link destinations</h3>
+<p>The document stores a different destination hostname for each link below. An ordinary redirect or routing service can explain a difference. Hostnames use normalized spelling. Final destinations and destination safety remain unverified. These observations carry zero weight in the AI assessment.</p>
+{% for row in saved_links.findings %}
+<article class="multimedia-evidence-packet">
+<dl class="evidence-measurements">
+<div><dt>Displayed hostname</dt><dd class="mono evidence-hash">{{ row.label_host }}</dd></div>
+<div><dt>Saved destination hostname</dt><dd class="mono evidence-hash">{{ row.saved_host }}</dd></div>
+</dl>
+<p class="caption">{% if row.location.kind == 'word_paragraph' %}Word body path {{ row.location.body_path | join(' / ') }} · Paragraph characters{% elif row.location.kind == 'decoded_email_html' %}Email body part {{ row.location.mime_part }} · Decoded HTML characters{% else %}Decoded HTML characters{% endif %} {% for start, end in row.location.ranges %}[{{ start }}, {{ end }}){{ ', ' if not loop.last else '' }}{% endfor %}. JSON pointer <span class="mono">/saved_link_hosts/findings/{{ loop.index0 }}</span>.</p>
+</article>
+{% endfor %}
+{% if saved_links.omitted %}<p class="caption">Showing the first {{ saved_links.findings | length }} of {{ saved_links.counts.different_host }} comparisons with a different hostname.</p>{% endif %}
+{% endif %}
 {% set quantities = evidence.get('percentage_consistency') %}
 {% if quantities %}
 <h3 id="document-percentage-consistency">Repeated percentage statements</h3>
@@ -911,7 +926,7 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% if evidence.stereo_repetition.get('rate_measurement') and evidence.stereo_repetition.rate_measurement.pairs %}{% set stereo_repeats.found = true %}{% endif %}
 {% for row in evidence.stereo_repetition.channels %}{% if row.measurement.pairs or (row.get('gain_measurement') and row.gain_measurement.pairs) %}{% set stereo_repeats.found = true %}{% endif %}{% endfor %}
 {% endif %}
-{% if not stereo_repeats.found and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') and not (evidence.get('percentage_consistency') and evidence.percentage_consistency.groups) and not (evidence.get('doi_reference_consistency') and evidence.doi_reference_consistency.different_work) %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
+{% if not stereo_repeats.found and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') and not (evidence.get('percentage_consistency') and evidence.percentage_consistency.groups) and not (evidence.get('doi_reference_consistency') and evidence.doi_reference_consistency.different_work) and not (evidence.get('saved_link_hosts') and evidence.saved_link_hosts.findings) %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
 {% if evidence.omitted %}<p class="caption">{{ evidence.omitted }} additional candidates were omitted from this bounded evidence set.</p>{% endif %}
 {% for note in evidence.limitations %}<p class="caption">{{ note }}</p>{% endfor %}
 {% endif %}

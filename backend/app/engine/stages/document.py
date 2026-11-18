@@ -58,6 +58,7 @@ from app.evidence import (
     document_passage_intervals,
     document_pdf_visibility,
     document_published_wording,
+    document_saved_link_hosts,
     document_tracked_changes,
     document_word_visibility,
 )
@@ -98,6 +99,13 @@ def decode(ctx: StageContext) -> dict[str, Any]:
         policies["doi_review"] = True
     doc, sents = decode_document(path, path.suffix, **policies)
     doi_record = doc.meta.pop(document_doi_reference.KEY, None)
+    supports_link_review = doc.meta.get("method") in document_saved_link_hosts.LOCATIONS
+    saved_links = None
+    if supports_link_review and not provenance_gate.stop(ctx):
+        budget = document_saved_link_hosts.READ_BUDGET_S
+        remaining = ctx.deadline.remaining()
+        if remaining is None or remaining >= budget + 1:
+            saved_links = document_saved_link_hosts.inspect_within(path, timeout=budget, source_sha256=doc.meta["original_sha256"])
     if (doc.meta.get(document_pdf_visibility.KEY, {}).get("covered_locations")
             or document_tracked_changes.unsupported(doc.word_review) or document_tracked_changes.projected(doc.word_review)):
         # Retain source evidence even when little usable writing remains.
@@ -119,6 +127,8 @@ def decode(ctx: StageContext) -> dict[str, Any]:
             **({BIBLIOGRAPHY_POLICY: True} if prose_only else {}),
             **({document_doi_reference.POLICY: True} if doi_enabled else {}),
             **({document_doi_reference.KEY: doi_record} if doi_record else {}),
+            **({document_saved_link_hosts.POLICY: document_saved_link_hosts.SCHEMA} if supports_link_review else {}),
+            **({document_saved_link_hosts.KEY: saved_links} if saved_links else {}),
             **({document_tracked_changes.KEY: doc.word_review} if doc.word_review is not None else {})}
 
 
@@ -129,6 +139,9 @@ def current_decode_output(output: Any) -> bool:
     if output.get(BIBLIOGRAPHY_POLICY, False) is not (settings.environment == "dev" and settings.text_bibliography_scope_review):
         return False
     if output.get(document_doi_reference.POLICY, False) is not (settings.environment == "dev" and settings.text_doi_reference_review):
+        return False
+    if (output["meta"].get("method") in document_saved_link_hosts.LOCATIONS
+            and output.get(document_saved_link_hosts.POLICY) != document_saved_link_hosts.SCHEMA):
         return False
     if output["meta"].get("method") == "html" and output["meta"].get(html_article.READER) != html_article.POLICY:
         return False
@@ -670,6 +683,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         result.manifest.sampling[document_tracked_changes.COMMITMENT] = canonical_hash(tracked)
     if doi_reference := decoded.get(document_doi_reference.KEY):
         result.manifest.sampling[document_doi_reference.COMMITMENT] = canonical_hash(doi_reference)
+    if saved_links := decoded.get(document_saved_link_hosts.KEY):
+        result.manifest.sampling[document_saved_link_hosts.COMMITMENT] = canonical_hash(saved_links)
     detected = ctx.outputs.get("detect") or {}
     verified_credentials = provenance_gate.stop(ctx)
     if not verified_credentials and (reading := detected.get(document_character_review.KEY)):

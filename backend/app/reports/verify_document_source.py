@@ -37,6 +37,7 @@ from app.evidence import (
     document_publication_ids,
     document_published_wording,
     document_repeat,
+    document_saved_link_hosts,
     document_scope,
     document_tracked_changes,
     document_unselected_responses,
@@ -154,6 +155,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             and not document_scope.mapped_email_html(doc.meta["email"]) and not unassigned_email_roles):
         raise ValueError("Original-document replay requires a plain-text or source-mapped HTML EML body.")
     document_doi_reference.verify_original(evidence, doc)
+    document_saved_link_hosts.verify_original(evidence, original, extension)
     if document_bibliography.KEY in coverage:
         doc = document_bibliography.body_view(doc)
     document_bibliography.verify_source(evidence, doc.meta)
@@ -303,9 +305,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                          if document_publication_ids.KEY in evidence else "")
     marker_detail = " Verified chat formatting markers and retained source positions." if document_chat_markers.KEY in coverage else ""
     doi_detail = " Verified the DOI reference comparison and retained source positions." if document_doi_reference.KEY in evidence else ""
+    links_detail = " Verified saved link hostnames and their original label positions." if document_saved_link_hosts.KEY in evidence else ""
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
             f"{tracked_detail}{word_visibility_detail}{saved_fields_detail}{invisible_detail}{character_detail}{interval_detail}{pdf_replacement_detail}"
             f"{pdf_covered_detail}{percentage_detail}{calendar_detail}{arithmetic_detail}{identifier_detail}"
-            f"{marker_detail}{doi_detail}{wording_detail}{history_detail}")
+            f"{marker_detail}{doi_detail}{links_detail}{wording_detail}{history_detail}")

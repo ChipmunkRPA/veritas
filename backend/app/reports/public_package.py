@@ -89,6 +89,7 @@ def public_result(result: dict) -> dict:
             document_passage_position,
             document_pdf_history_binding,
             document_published_wording,
+            document_saved_link_hosts,
             document_tracked_changes,
             document_word_visibility,
         )
@@ -104,6 +105,8 @@ def public_result(result: dict) -> dict:
             source_coverage[document_tracked_changes.COMMITMENT] = tracked
         if doi_reference := document_doi_reference.from_result(result):
             source_coverage[document_doi_reference.COMMITMENT] = doi_reference
+        if saved_links := document_saved_link_hosts.from_result(result):
+            source_coverage[document_saved_link_hosts.COMMITMENT] = saved_links
         if word_visibility := document_word_visibility.from_result(result):
             source_coverage[document_word_visibility.COMMITMENT] = word_visibility
         if invisible := document_invisible_characters.from_result(result):

@@ -572,6 +572,22 @@ export type MappedTextFinding = {
     body_path?: (number | 'row' | 'cell' | 'control')[]; mime_part?: string }
   location: { boxes: number[][] } | { ranges: [number, number][] }
 }
+export type DocumentSavedLinkLocation = { ranges: [number, number][] } & (
+  | { kind: 'decoded_html' }
+  | { kind: 'decoded_email_html'; mime_part: string }
+  | { kind: 'word_paragraph'; body_path: [number] }
+)
+export interface DocumentSavedLinkHosts {
+  schema: 'document-saved-link-hosts/1'
+  status: 'checked'
+  method: 'html' | 'email' | 'python-docx'
+  offset_unit: 'unicode_codepoint'
+  counts: Partial<Record<'different_host' | 'registered_wrapper' | 'related_hostname' | 'same_host' | 'unsupported_label' | 'unsupported_target', number>>
+  findings: { label_host: string; saved_host: string; location: DocumentSavedLinkLocation }[]
+  omitted: number
+  authorship_confidence_contribution: 0
+  destinations_contacted: 0
+}
 export interface DocumentEvidenceSet extends SetBase {
   schema: 'chipmunk.document-evidence/1'; packets: DocumentEvidencePacket[]; omitted_windows: number
   source: { sha256: string; chars?: number; method?: string; offset_unit: 'unicode_codepoint' }
@@ -605,6 +621,7 @@ export interface DocumentEvidenceSet extends SetBase {
         | 'decoded_html' | 'odt_paragraph' | 'rtf_paragraph' }
       title_location: MappedTextFinding['location']; printed: { doi: string; title: string }; cited: { doi: string; title: string } })[]
   }
+  saved_link_hosts?: DocumentSavedLinkHosts
   percentage_consistency?: { schema: 'document-percentage-consistency/1' | 'document-percentage-consistency/2' | 'document-percentage-consistency/3'; status: 'different_values' | 'checked' | 'not_assessed';
     scope: string; limitation: string; authorship_confidence_contribution: 0; checked_sentences: number;
     excluded_blocks: number; different_claims: number; comparable_claims: number;

@@ -46,6 +46,7 @@ from app.evidence import (
     document_publication_ids,
     document_published_wording,
     document_repeat,
+    document_saved_link_hosts,
     document_scope,
     document_selection,
     document_tracked_changes,
@@ -350,6 +351,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_arithmetic.validate(document)
         document_publication_ids.validate(document)
         document_doi_reference.validate(document)
+        document_saved_link_hosts.validate(document)
         document_pdf_visibility.validate(document)
         document_pdf_history_binding.validate(document, document["source"].get(document_pdf_history_binding.COMMITMENT))
         document_bibliography.validate(document)
@@ -660,6 +662,11 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if doi_reference is not None or doi_commitment is not None:
         document[document_doi_reference.KEY] = doi_reference
         document["source"][document_doi_reference.COMMITMENT] = doi_commitment
+    links = decoded.get(document_saved_link_hosts.KEY)
+    links_commitment = document_saved_link_hosts.from_result(result)
+    if links is not None or links_commitment is not None:
+        document[document_saved_link_hosts.KEY] = links
+        document["source"][document_saved_link_hosts.COMMITMENT] = links_commitment
     if (settings.environment == "dev" and settings.document_percentage_consistency
             and document_percentage_consistency.supported(document["source"]["method"], decoded["meta"].get("email"))):
         document[document_percentage_consistency.KEY] = document_percentage_consistency.build(
@@ -830,6 +837,8 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_publication_ids.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])
             document_doi_reference.verify_record(document, decoded.get(document_doi_reference.KEY),
                                                 commitment=document_doi_reference.from_result(result))
+            document_saved_link_hosts.verify_record(document, decoded.get(document_saved_link_hosts.KEY),
+                                                    commitment=document_saved_link_hosts.from_result(result))
             document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()),
                                                           meta=decoded["meta"])
             document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)

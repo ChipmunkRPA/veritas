@@ -20,6 +20,8 @@ MAX_MULTISHOT_SAMPLES = 240_000
 MAX_MULTISHOT_FRAMES = 360
 SILENCE_FRAME_PERIODS = (Fraction(1001, 30_000), Fraction(1, 30))
 SILENCE_CLOCK_TOLERANCE = Fraction(3, 2000)  # Includes rebased millisecond-quantized timestamps.
+AAC_44100_RATE = 44_100
+AAC_44100_CLOCK = "aac_44100_native_clock_verified"
 WEIGHT_PINS = {
     "vision": "bc58acf5926044b6680e7b1c5588f67894b1cbdd43bb6dfe54ff25c5b6ab0a70",
     "shared": "d924e379f8a6a2d861401a8f25504c73012c4ab50d37e04b5aac5ecb19d9bbd4",
@@ -32,6 +34,15 @@ def carrier(mapping, *, origin, stereo_scope):
         return None
     return {("pcm_s16le", 16_000): "pcm", ("aac", 48_000): "aac48"}.get(
         (mapping.get("source_codec"), mapping.get("source_sample_rate"))
+    )
+
+
+def silence_carrier(mapping, origin):
+    """Accept 44.1 kHz AAC only for the shot-level amplitude comparison."""
+    return carrier(mapping, origin=origin, stereo_scope=None) or (
+        "aac441" if origin == 0 and (mapping.get("source_channels"), mapping.get("source_codec"),
+                                     mapping.get("source_sample_rate")) == (1, "aac", AAC_44100_RATE)
+        and mapping.get(AAC_44100_CLOCK) is True else None
     )
 
 

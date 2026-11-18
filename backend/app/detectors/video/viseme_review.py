@@ -32,7 +32,9 @@ def supported(table, mapping, shots, stereo_scope=None):
         and 24 <= len(table) <= 120 and 320 <= table.width <= 1280 and 240 <= table.height <= 720
         and all(Fraction(1, 28) <= (b-a) * table.tb <= Fraction(1, 22)
                 for a, b in zip(table.pts, table.pts[1:]))
-        and mapping.get("source_codec") in {"aac", "pcm_s16le"} and binding.audio_origin(mapping, stereo_scope) is not None
+        and mapping.get("source_codec") in {"aac", "pcm_s16le"}
+        and mapping.get("source_sample_rate") in (16_000, 48_000)
+        and binding.audio_origin(mapping, stereo_scope) is not None
     )
 
 
@@ -52,7 +54,7 @@ def supported_shots(table, mapping, shots):
         return False
     limit = agreement.MAX_MULTISHOT_SAMPLES
     origin = binding.audio_origin(mapping, max_samples=limit)
-    if agreement.carrier(mapping, origin=origin, stereo_scope=None) is None:
+    if not agreement.silence_carrier(mapping, origin):
         return False
     try:
         agreement.shot_audio_ranges(table.pts, table.time_base, binding.presented_samples(mapping, max_samples=limit), shots)

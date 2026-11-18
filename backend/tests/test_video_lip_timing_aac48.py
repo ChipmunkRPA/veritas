@@ -9,17 +9,48 @@ import pytest
 from app.detectors.audio.decode import decode_audio
 from app.detectors.audio.phone_events import MODEL_BLOBS
 from app.detectors.video import viseme_review, viseme_stereo
+from app.detectors.video.decode import FrameTable
 from app.evidence import video_lip_agreement as agreement
 from app.evidence import video_viseme_binding as binding
 
 
-@pytest.fixture
-def aac_mapping(tmp_path):
-    path = tmp_path / "sound.m4a"
+def _aac_mapping(tmp_path, rate):
+    path = tmp_path / f"sound-{rate}.m4a"
     subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-f", "lavfi", "-i",
-                    "sine=frequency=400:sample_rate=48000:duration=2.1", "-c:a", "aac", str(path)],
+                    f"sine=frequency=400:sample_rate={rate}:duration=2.1", "-c:a", "aac", str(path)],
                    check=True, timeout=20)
     return decode_audio(path, source_sha256=hashlib.sha256(path.read_bytes()).hexdigest()).mapping
+
+
+@pytest.fixture
+def aac_mapping(tmp_path):
+    return _aac_mapping(tmp_path, 48_000)
+
+
+def test_441khz_dropout_requires_a_verified_mono_clock(tmp_path):
+    mapping = _aac_mapping(tmp_path, 44_100)
+    assert mapping[agreement.AAC_44100_CLOCK] is True
+    assert mapping["source_duration_pts"] == 92_610
+    assert mapping["samples"] > 33_600
+    assert binding.presented_samples(mapping) == 33_600
+    assert binding.presented_samples(mapping | {"source_duration_pts": 92_609}) == 33_599
+    assert binding.audio_origin(mapping) == 0
+    assert binding.presented_samples(mapping | {agreement.AAC_44100_CLOCK: False}) is None
+    assert binding.presented_samples(mapping | {"source_profile": "HE-AAC"}) is None
+    assert binding.presented_samples(mapping | {"source_start_pts": 1}) is None
+    assert binding.audio_origin(mapping | {"source_channels": 2}) is None
+    assert binding.audio_origin(mapping | {"timeline": [
+        {"start_sample": 0, "end_sample": 500, "source_pts": 0},
+        {"start_sample": 500, "end_sample": mapping["samples"], "source_pts": 501},
+    ]}) is None
+
+    # This encoding is admitted to the separate amplitude and geometry route.
+    table = FrameTable(time_base="1/30", pts=tuple(range(63)), key_frames=(0,),
+                       pict_types="I" + "P" * 62, width=640, height=360, coded_width=640, coded_height=360)
+    assert viseme_review.supported_shots(table, mapping, [[0, 63]])
+    assert not viseme_review.supported(table, mapping, [[0, 63]])
+    with pytest.raises(ValueError, match="no supported continuous source clock"):
+        binding.measured({"frames": [], "phones": []}, timestamps=[], time_base="1/30", source={}, mapping=mapping)
 
 
 def test_48khz_timing_stops_at_the_presented_end(aac_mapping):

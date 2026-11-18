@@ -33,6 +33,7 @@ from app.evidence.audio_short_review_binding import (
 from app.evidence.audio_two_second_binding import MAXIMUM as LONG_WINDOW_MAXIMUM
 from app.evidence.audio_two_second_binding import MINIMUM as LONG_WINDOW_MINIMUM
 from app.evidence.stereo_binding import MAX_SECONDS as STEREO_MAX_SECONDS
+from app.evidence.video_lip_agreement import AAC_44100_CLOCK, AAC_44100_RATE, MAX_MULTISHOT_SAMPLES
 
 SAMPLE_RATE = 16_000
 VIDEO_AUDIO_MAX_SECONDS = 120
@@ -264,6 +265,14 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
             == (1, str(LOSSLESS_RATE), f"1/{LOSSLESS_RATE}")
             and (six_second_lossless or (longer_extent and max_seconds >= 15 and (lossless_clock or aac_clock)))
         )
+        inspect_aac441_clock = (
+            aac_clock and len(streams) == 1
+            and (stream.get("channels"), stream.get("sample_rate"), stream.get("time_base"))
+            == (1, str(AAC_44100_RATE), f"1/{AAC_44100_RATE}")
+            and type(native_extent) is int and native_extent > 0
+            and native_extent * SAMPLE_RATE <= min(MAX_MULTISHOT_SAMPLES, maximum) * AAC_44100_RATE
+        )
+        inspect_source_clock = inspect_native_clock or inspect_aac441_clock
         native_clock_verified = False
         stereo_pcm, stereo_clock = None, None
         capture_stereo = False
@@ -304,12 +313,12 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
                     stereo_pcm, stereo_clock = None, None
             if not capture_stereo:
                 input_filters = ("ashowinfo@original," + filters.replace("ashowinfo", "ashowinfo@mono")
-                                 if inspect_native_clock else filters)
+                                 if inspect_source_clock else filters)
                 run = subprocess.run(command + ["-map", input_stream, "-af", input_filters] + mono_output,
                                      capture_output=True, text=True, timeout=180, check=True, stdin=subprocess.DEVNULL)
                 pcm = read_wav(output.read_bytes())
-                timeline = _mapping(_named_timeline(run.stderr, "mono") if inspect_native_clock else run.stderr, len(pcm))
-                if inspect_native_clock:
+                timeline = _mapping(_named_timeline(run.stderr, "mono") if inspect_source_clock else run.stderr, len(pcm))
+                if inspect_source_clock:
                     native_clock_verified = _native_presentation_clock(
                         _named_timeline(run.stderr, "original"), native_extent, AAC_FRAME - 1 if aac_clock else 0,
                     )
@@ -329,7 +338,7 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
             "limit_samples": maximum,
         }
         if (fmt.get("format_name") == "mov,mp4,m4a,3gp,3g2,mj2"
-                and mapping["source_codec"] == "aac" and mapping["source_sample_rate"] == 48_000
+                and mapping["source_codec"] == "aac" and mapping["source_sample_rate"] in (48_000, AAC_44100_RATE)
                 and type(stream.get("duration_ts")) is int):
             mapping["source_duration_pts"] = stream["duration_ts"]
             mapping["source_container"] = fmt["format_name"]
@@ -345,8 +354,10 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
         if ((mapping.get("source_container"), mapping["source_codec"]) in LOSSLESS_FORMATS
                 and mapping["source_sample_rate"] == LOSSLESS_RATE and type(stream.get("duration_ts")) is int):
             mapping["source_duration_pts"] = stream["duration_ts"]
-        if native_clock_verified:
+        if native_clock_verified and inspect_native_clock:
             mapping[LOSSLESS_NATIVE_CLOCK] = True
+        if native_clock_verified and inspect_aac441_clock:
+            mapping[AAC_44100_CLOCK] = True
         if mapping["source_codec"] == "mp3":
             mapping["source_container"] = fmt.get("format_name")
             bit_rate = _number(stream.get("bit_rate"))

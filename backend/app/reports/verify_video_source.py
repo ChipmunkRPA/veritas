@@ -620,9 +620,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 or video_viseme_binding.presented_samples(decoded_audio.mapping, max_samples=limit) != lip_timing["inputs"]["samples"]
                 or video_viseme_binding.audio_origin(decoded_audio.mapping, stereo_scope, max_samples=limit) != lip_timing["audio_origin_pts"]):
             raise ValueError("The original video does not reproduce the timing review's soundtrack")
+        clock_fields = video_viseme_binding.AAC_PRESENTATION_FIELDS
+        if decoded_audio.mapping.get(agreement.AAC_44100_CLOCK):
+            clock_fields += video_viseme_binding.AAC_44100_PRESENTATION_FIELDS
         if "source_duration_pts" in decoded_audio.mapping and any(
             decoded_audio.mapping[key] != evidence["audio"]["source"].get(key)
-            for key in video_viseme_binding.AAC_PRESENTATION_FIELDS
+            for key in clock_fields
         ):
             raise ValueError("The timing review's AAC presentation clock differs from the original")
         if {agreement.KEY, silent.SHOT_KEY} & lip_timing["inputs"].keys() and (

@@ -13,6 +13,11 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [44.1 kHz video soundtrack replay](video-sound-dropouts-aac441-2026-11-17.md#reproduce)
+compares 392 new AAC encodes with the corresponding 48 kHz cases. It checks
+the original picture timestamps, the presented audio extent and each
+reported dropout against the prior labeled interval.
+
 The [JPEG texture replay](image-jpeg-texture-prediction-2026-11-17.md#reproduce)
 recounts two held panels with 896 deliveries. It binds the exact changed
 pixels to intact and traditionally edited versions of each photo for

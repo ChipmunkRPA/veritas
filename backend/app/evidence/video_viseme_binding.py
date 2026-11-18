@@ -63,6 +63,7 @@ STATUS = {
 _SHA = re.compile(r"[a-f0-9]{64}")
 _UNSET = object()
 AAC_PRESENTATION_FIELDS = ("source_codec", "source_time_base", "source_start_pts", "source_duration_pts")
+AAC_44100_PRESENTATION_FIELDS = ("source_container", "source_profile", agreement.AAC_44100_CLOCK)
 
 
 def skipped(reason):
@@ -75,16 +76,22 @@ def presented_samples(mapping, *, max_samples=64_000):
     if type(samples) is not int:
         return None
     rate = mapping.get("source_sample_rate")
-    if rate == 48_000:
-        if (mapping.get("source_codec") != "aac" or mapping.get("source_time_base") != "1/48000"
+    if rate in (48_000, agreement.AAC_44100_RATE):
+        if (mapping.get("source_codec") != "aac" or mapping.get("source_time_base") != f"1/{rate}"
                 or mapping.get("source_start_pts") != 0):
             return None
-        duration = mapping.get("source_duration_pts")
-        if type(duration) is not int:
+        if rate == agreement.AAC_44100_RATE and (
+            mapping.get("source_container") != stereo.CONTAINER or mapping.get("source_profile") != "LC"
+            or mapping.get(agreement.AAC_44100_CLOCK) is not True
+        ):
             return None
-        extent = duration // 3
-        # An AAC-LC frame is 1024 native samples, at most 342 output samples.
-        if not 0 <= samples - extent <= 342:
+        duration = mapping.get("source_duration_pts")
+        if type(duration) is not int or duration <= 0:
+            return None
+        extent = duration * timing.RATE // rate
+        # Ceiling bounds the decoded tail by one native AAC-LC frame.
+        padding = (1024 * timing.RATE + rate - 1) // rate
+        if not 0 <= samples - extent <= padding:
             return None
         samples = extent
     elif rate != timing.RATE:
@@ -105,7 +112,7 @@ def audio_origin(mapping, stereo_scope=None, *, max_samples=64_000):
     if not clock:
         return None
     first, cursor = clock[0]["source_pts"], 0
-    if mapping.get("source_sample_rate") == 48_000 and first != 0:
+    if mapping.get("source_sample_rate") in (48_000, agreement.AAC_44100_RATE) and first != 0:
         return None
     for block in clock:
         a, b, pts = (block[key] for key in ("start_sample", "end_sample", "source_pts"))
@@ -157,8 +164,8 @@ def sample_limit(record):
 
 
 def _measured_shots(raw, inputs, timestamps, time_base, mapping, origin, stereo_scope):
-    source = agreement.carrier(mapping, origin=origin, stereo_scope=stereo_scope)
-    if source is None or mapping.get("audio_stream_indices") or inputs["phones"]:
+    if (not agreement.silence_carrier(mapping, origin) or stereo_scope is not None
+            or mapping.get("audio_stream_indices") or inputs["phones"]):
         raise ValueError("The shot review requires one supported soundtrack")
     ranges, levels = (raw[key] for key in (silent.SHOT_KEY, "sound_levels"))
     samples, frames = inputs["samples"], inputs["frames"]
@@ -208,7 +215,7 @@ def exhibits(record):
 def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
     limit = agreement.MAX_MULTISHOT_SAMPLES if silent.SHOT_KEY in raw else 64_000
     origin = audio_origin(mapping, stereo_scope, max_samples=limit)
-    if origin is None:
+    if origin is None or (mapping.get("source_sample_rate") == agreement.AAC_44100_RATE and silent.SHOT_KEY not in raw):
         raise ValueError("The mixed soundtrack has no supported continuous source clock")
     base = Fraction(time_base)
     rows, geometry = [], []

@@ -15,7 +15,6 @@ from fractions import Fraction
 from pathlib import Path
 from urllib.request import Request, urlopen
 
-from scripts.acquire_video_common_sources_v91 import lfs_pointer
 from scripts.video_common_sources_v89 import CREMA, CREMA_REV
 from scripts.video_lip_multishot_panel import CARRIERS, RATE, digest, ffmpeg, overlap, read, save
 
@@ -45,6 +44,8 @@ def fetch(url, size):
 
 
 def acquire(index, license_file, earlier, output):
+    from scripts.acquire_video_common_sources_v91 import lfs_pointer
+
     if digest(index) != SOURCE_INDEX_SHA or digest(license_file) != LICENSE_SHA:
         raise ValueError("Publisher metadata differs from the reviewed revision")
     previous = {row["speaker"] for row in read(earlier)["rows"]}

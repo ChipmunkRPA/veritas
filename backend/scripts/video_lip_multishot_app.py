@@ -16,11 +16,11 @@ from scripts.video_silent_mouth_app import nested, proof_files
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def examples(panel, clock=None):
+def examples(panel, clock=None, *, carriers=CARRIERS):
     rows = read(panel / "result.json.gz")["rows"]
     if clock:
         rows = [row for row in rows if row.get("clock") == clock]
-    for carrier in CARRIERS:
+    for carrier in carriers:
         by_case = {(row["group"], row["role"]): row for row in rows if row["carrier"] == carrier}
         for (group, role), row in sorted(by_case.items()):
             if (role in {"muted", "muted_faded"} and len(row["matches"]) == 1
@@ -30,7 +30,7 @@ def examples(panel, clock=None):
                 break
 
 
-def run(panel, assets, output, *, browser, clock=None):
+def run(panel, assets, output, *, browser, clock=None, carriers=CARRIERS):
     configure(output, ROOT)
     timing_assets = assets
     os.environ.update(
@@ -56,8 +56,8 @@ def run(panel, assets, output, *, browser, clock=None):
             result = json.loads(default_store().read_bytes(db.get(Analysis, aid).result_hash))
         return result["decision"], result.get("customer_assessment")
 
-    selected = list(examples(panel, clock))
-    if not selected or (clock and len(selected) != len(CARRIERS)):
+    selected = list(examples(panel, clock, carriers=carriers))
+    if not selected or (clock and len(selected) != len(carriers)):
         raise ValueError("The confirmation panel needs a matched dropout and ordinary control in each encoding")
     stub = PaymentStub()
     service._stripe = stub
@@ -125,4 +125,8 @@ if __name__ == "__main__":
         cli.add_argument(name, type=Path)
     cli.add_argument("--browser", action="store_true")
     cli.add_argument("--clock", choices=("native-29.97", "exact-30", "montage-30"))
-    run(**vars(cli.parse_args()))
+    cli.add_argument("--carrier", action="append", choices=(*CARRIERS, "aac441"), dest="carriers")
+    options = vars(cli.parse_args())
+    if options["carriers"] is None:
+        options["carriers"] = CARRIERS
+    run(**options)

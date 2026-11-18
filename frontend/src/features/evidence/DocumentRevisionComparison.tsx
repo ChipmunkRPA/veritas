@@ -5,8 +5,9 @@ import { saveBlob } from '../../lib/api/reports'
 import { compareDraft, draftAvailability, type DraftComparison, type DraftExcerpt, type DraftExtension, type DocumentRevisionResponse } from './documentRevisionApi'
 
 const labels = { body: 'Message body', quoted: 'Quoted text', signature: 'Signature' }
-const sourceFormats = { plain_text: 'Plain text', docx: 'Word body text', odt: 'OpenDocument body text', pdf: 'PDF text layer' }
-const changeLabels = { email: null, plain_text: 'Text', docx: 'Word body text', odt: 'OpenDocument body text', pdf: 'PDF text', mixed: 'Wording change' }
+const sourceFormats = { plain_text: 'Plain text', docx: 'Word body text', odt: 'OpenDocument body text', pdf: 'PDF text layer', rtf: 'Rich Text passage' }
+const changeLabels = { ...sourceFormats, email: null, plain_text: 'Text', pdf: 'PDF text', mixed: 'Wording change' }
+const pairedMixedFormats: DraftExtension[] = ['.txt', '.docx', '.pdf']
 const contextLabels = ['Previous sentence', 'Changed sentence', 'Next sentence']
 const tableSkips = {
   no_matching_position: 'No table at the same body position.',
@@ -324,7 +325,7 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
   const earlierName = file?.name.toLowerCase()
   const sameFormat = !earlierName || earlierName.endsWith(extension)
   const canRunPairedCheck = pairedCheckAvailable && (sameFormat || (pairedMixedFormatsAvailable
-    && earlierExtensions.some(suffix => suffix !== '.odt' && earlierName?.endsWith(suffix))))
+    && pairedMixedFormats.some(suffix => earlierName?.endsWith(suffix))))
   const active = useRef<AbortController | null>(null)
   useEffect(() => () => active.current?.abort(), [])
 
@@ -351,9 +352,10 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
 
   return <section aria-labelledby={headingId} className="rounded-md border border-border p-4">
     <h2 id={headingId} className="m-0 text-body font-medium">Compare with an earlier draft</h2>
-    <p className="mt-2 mb-0 text-small text-text-muted">Choose an earlier {earlierExtensions.length > 1 ? 'TXT, DOCX, ODT or PDF' : extension} file, up to 1 MiB, to see where the wording changed.</p>
+    <p className="mt-2 mb-0 text-small text-text-muted">Choose an earlier draft up to 1 MiB. Supported formats are {earlierExtensions.map(suffix => suffix.slice(1).toUpperCase()).join(', ')}.</p>
     {extension === '.docx' && <p className="mt-2 mb-0 text-small text-text-muted">Checks body wording and matches simple Word tables by exact row and column labels. A moved table needs the same unique Word caption.</p>}
     {extension === '.odt' && <p className="mt-2 mb-0 text-small text-text-muted">Checks wording in extracted OpenDocument body paragraphs, headings, lists and tables.</p>}
+    {extension === '.rtf' && <p className="mt-2 mb-0 text-small text-text-muted">Rich Text positions refer to paragraphs in the extracted text.</p>}
     {(extension === '.txt' || extension === '.docx') && sameFormat && <p className="mt-2 mb-0 text-small text-text-muted">Matching file formats can also show where an unchanged body paragraph moved.</p>}
     {extension === '.eml' && <p className="mt-2 mb-0 text-small text-text-muted">Use two plain-text emails or two HTML-only replies with two, three, five or six simple body paragraphs and a trailing blockquote.</p>}
     {extension === '.pdf' && <p className="mt-2 mb-0 text-small text-text-muted">Use unlocked PDFs with selectable text on every page, up to 12 pages each.</p>}

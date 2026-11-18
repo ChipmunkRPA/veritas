@@ -66,6 +66,9 @@ An additional copy can still appear as an insertion. The comparison
 identifies changes between the two supplied files and carries zero weight in
 the automated AI assessment.
 
+Rich Text can also be compared with an earlier draft. See the [Rich Text
+format positions and historical revision tests](writing-rtf-draft-2026-11-18.md).
+
 | Replay with the earlier draft supplied | Rewritten sentences containing a marked word | Human wording changes located | Restyled originals with wording marks |
 | --- | ---: | ---: | ---: |
 | Earlier GAO paraphrase panel | 148/149 | — | 0/55 |

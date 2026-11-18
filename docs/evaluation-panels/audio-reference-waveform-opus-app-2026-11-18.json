@@ -1,0 +1,92 @@
+{
+  "browser": {
+    "json_downloads_exact": 3,
+    "pdf_downloads": 3,
+    "results": 3
+  },
+  "original_assessments_preserved": true,
+  "results": {
+    "ordinary": {
+      "opus_presentation": {
+        "decoded_samples": 96000,
+        "native_clock": {
+          "channels": 1,
+          "end_granule": 288312,
+          "end_trim": 648,
+          "packet_payload_bit_rate": 64213,
+          "packets": 301,
+          "pre_skip": 312,
+          "presentation_end_exclusive_pts": 288000,
+          "presentation_start_pts": 0,
+          "sample_rate": 48000
+        },
+        "presentation_end_exclusive_pts": 96000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "pdf_sha256": "795e28aa570795017e4231ff99226632dba7d482be76e093584158c85cc115be",
+      "ranges": {},
+      "sha256": "df8d716935aab70dfbd15e03ac4a6d12f4c0b76216459e87859ad27b6592d2c0",
+      "status": "no_local_difference"
+    },
+    "positive": {
+      "native_source_pts": [
+        192960,
+        216768
+      ],
+      "opus_presentation": {
+        "decoded_samples": 96000,
+        "native_clock": {
+          "channels": 1,
+          "end_granule": 288312,
+          "end_trim": 648,
+          "packet_payload_bit_rate": 64213,
+          "packets": 301,
+          "pre_skip": 312,
+          "presentation_end_exclusive_pts": 288000,
+          "presentation_start_pts": 0,
+          "sample_rate": 48000
+        },
+        "presentation_end_exclusive_pts": 96000,
+        "presentation_start_pts": 0,
+        "sample_rate": 16000,
+        "side": "submitted",
+        "time_base": "1/16000"
+      },
+      "pdf_sha256": "b6112986ad2813bd8fe40ec2f13919f5d204b10919e851aa39344fd5fc6d1e33",
+      "ranges": {
+        "earlier": {
+          "end_s": 4.38,
+          "pcm_sha256": "91b6cd9e67a8b987fa15ae6dba88e83706e7de49e69039cb26a25a2f22d6d62d",
+          "samples": [
+            64320,
+            70080
+          ],
+          "start_s": 4.02
+        },
+        "submitted": {
+          "end_s": 4.516,
+          "pcm_sha256": "223a3471270ccccc592e87b06f88e703719d46512857f506ebcf7b2f33b1fc56",
+          "samples": [
+            64320,
+            72256
+          ],
+          "start_s": 4.02
+        }
+      },
+      "sha256": "0f49bea06207c1da181e76408eb6e73be26f1b3f566abd3424bed69d09d2b73b",
+      "status": "localized_difference"
+    },
+    "rejected": {
+      "opus_presentation": null,
+      "pdf_sha256": "fec432232ec833149a1789c8bccc3d96b29d377ea574c8ae52d8507df5603365",
+      "ranges": {},
+      "sha256": "84e9cf21daa465470a0af59b584bce1d2fe3471e0b1e962b369b6489c994eb4f",
+      "status": "unassessed"
+    }
+  },
+  "simulated_paid_jobs": 3,
+  "unpaid_jobs": 0
+}

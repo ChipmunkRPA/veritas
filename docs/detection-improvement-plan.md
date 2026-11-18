@@ -66,6 +66,18 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Earlier-copy waveform evidence for Ogg Opus](audio-reference-waveform-opus-2026-11-18.md)
+  extends the six-second mono check to the verified 64 kbps profile. It
+  retained 15 of 16 lossless speech edit locations under room sound and
+  flagged zero of 64 ordinary recordings. The app records the playback
+  interval and verifying sample ranges.
+
+- [Rich Text draft comparison](writing-rtf-draft-2026-11-18.md) extends
+  source-linked wording evidence across RTF, Word, plain text, ODT and
+  selectable PDF. Nine historical changes mapped to the exact sentence
+  in four tested format directions. The app replay checked each changed
+  word against the originals and retained the existing AI assessment.
+
 - [Two separate edits in one JPEG](image-multiple-edit-replay-2026-11-18.md)
   adds an independently replayable per-edit measurement for irregular masks.
   The existing earlier-copy check located 27 of 28 staged edits. The

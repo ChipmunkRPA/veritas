@@ -19,7 +19,7 @@ from test_image_reference_access import reference_http as reference_http
 from app.api import auth, v2_media_reference
 from app.core.canonical import canonical_hash
 from app.core.config import settings
-from app.detectors.audio import gapless_aac
+from app.detectors.audio import gapless_aac, ogg_opus_reference
 from app.detectors.audio.decode import read_wav, wav_bytes
 from app.evidence import audio_reference
 from app.evidence import video_reference_soundtrack as reference_timing
@@ -104,6 +104,60 @@ def test_matching_waveform_aac_requires_a_six_second_mono_clock_and_replays_exac
         assert run(earlier, target, output, verify=True) == record
         payload = json.loads(output.read_text())
         payload["comparison"]["matching_waveform"]["range"]["submitted"]["native_source_pts"][1] += 1
+        output.write_text(json.dumps(payload))
+        with pytest.raises(ValueError, match="differs from the re-decoded sources"):
+            run(earlier, target, output, verify=True)
+
+
+def test_opus_clock_refuses_changed_pages_and_binds_the_presented_range(tmp_path):
+    from scipy.signal import butter, sosfiltfilt
+
+    rng = np.random.default_rng(917)
+    shape = butter(3, (150, 3600), fs=16000, btype="bandpass", output="sos")
+    source, donor = [sosfiltfilt(shape, rng.standard_normal(96000)) * .13 for _ in range(2)]
+    earlier = save(tmp_path, "earlier", source)
+    edited = save(tmp_path, "edited", np.r_[source[:43200], donor[43200:55680], source[51360:-4320]])
+
+    def encode(name, rate, vbr):
+        output = tmp_path / name
+        command = ["ffmpeg", "-nostdin", "-v", "error", "-i", str(edited), "-ar", "48000", "-c:a", "libopus",
+                   "-application", "voip", "-frame_duration", "20", "-b:a", rate, "-vbr", vbr, str(output)]
+        result = subprocess.run(command, capture_output=True, timeout=15)
+        if result.returncode and b"Unknown encoder 'libopus'" in result.stderr:
+            pytest.skip("FFmpeg libopus required")
+        result.check_returncode()
+        return output
+
+    target = encode("mono.opus", "64k", "off")
+    unsupported = encode("low.opus", "24k", "on")
+    broken = tmp_path / "bad.opus"
+    data = bytearray(target.read_bytes())
+    data[-1] ^= 1
+    broken.write_bytes(data)
+    assert ogg_opus_reference.read(unsupported) is None and ogg_opus_reference.read(broken) is None
+    for path in (target, unsupported):
+        record, assets = audio_reference.compare(earlier, path, include_matching_waveform=True,
+                                                 include_matching_waveform_opus=True)
+        waveform = record["matching_waveform"]
+        if path == unsupported:
+            assert record["schema"] == audio_reference.SCHEMA_WITH_MATCHING_WAVEFORM
+            assert waveform["status"] == "unassessed" and "opus_presentation" not in waveform
+            continue
+        assert record["schema"] == audio_reference.SCHEMA_WITH_OPUS_MATCHING_WAVEFORM
+        assert waveform["status"] == "localized_difference" and waveform["affects_overall_confidence"] is False
+        clock = waveform["opus_presentation"]["native_clock"]
+        assert (clock["pre_skip"], clock["end_trim"], clock["presentation_end_exclusive_pts"]) == (312, 648, 288000)
+        first, last = waveform["range"]["submitted"]["native_source_pts"]
+        bounds = waveform["range"]["submitted"]["samples"]
+        assert [first, last] == [3 * sample for sample in bounds]
+        with pymupdf.open(stream=render_comparison(record, assets), filetype="pdf") as report:
+            text = " ".join(page.get_text() for page in report)
+            assert f"Opus presentation [{first}, {last}) on the 48 kHz clock." in text
+        output = tmp_path / "opus-comparison.json"
+        payload = {"comparison": record, "assets": {name: base64.b64encode(value).decode() for name, value in assets.items()}}
+        output.write_text(json.dumps(payload))
+        assert run(earlier, target, output, verify=True) == record
+        waveform["range"]["submitted"]["native_source_pts"][1] += 1
         output.write_text(json.dumps(payload))
         with pytest.raises(ValueError, match="differs from the re-decoded sources"):
             run(earlier, target, output, verify=True)

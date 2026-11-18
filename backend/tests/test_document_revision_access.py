@@ -299,7 +299,7 @@ def test_pdf_comparison_binds_repeated_text_to_both_original_pages(reference_htt
     retained = _saved(f, "pdf-draft", ".pdf", later)
     url = _url("pdf-draft")
     assert f.client.get(url, headers=f.viewer).json() == {
-        "available": True, "extension": ".pdf", "earlier_extensions": [".txt", ".docx", ".pdf", ".odt"],
+        "available": True, "extension": ".pdf", "earlier_extensions": [".txt", ".docx", ".pdf", ".odt", ".rtf"],
     }
     response = f.client.post(url, headers=f.viewer, files=_upload(earlier, ".pdf"), data={"include_pdf": "true"})
     assert response.status_code == 200, response.text
@@ -769,7 +769,7 @@ def test_word_comparison_uses_exact_body_paragraph_coordinates_in_api_pdf_and_re
     _saved(f, "word-draft", ".DOCX", later)
     url = _url("word-draft")
     assert f.client.get(url, headers=f.viewer).json() == {
-        "available": True, "extension": ".docx", "earlier_extensions": [".txt", ".docx", ".pdf", ".odt"],
+        "available": True, "extension": ".docx", "earlier_extensions": [".txt", ".docx", ".pdf", ".odt", ".rtf"],
     }
     wrong = f.client.post(url, headers=f.viewer, files=_upload(earlier, ".txt"))
     assert wrong.status_code == 422
@@ -813,18 +813,22 @@ def test_word_comparison_uses_exact_body_paragraph_coordinates_in_api_pdf_and_re
 
 @pytest.mark.parametrize(("old_extension", "new_extension"), [
     (".odt", ".odt"), (".docx", ".odt"), (".odt", ".docx"), (".pdf", ".odt"), (".odt", ".pdf"),
+    (".rtf", ".rtf"), (".docx", ".rtf"), (".rtf", ".docx"), (".pdf", ".rtf"), (".rtf", ".pdf"),
 ])
-def test_odt_draft_changes_replay_original_paragraphs(reference_http, monkeypatch, tmp_path, old_extension, new_extension):
+def test_draft_changes_replay_extracted_paragraphs(reference_http, monkeypatch, tmp_path, old_extension, new_extension):
     from test_office_credentials import ODT_XML
 
     f = _install(reference_http, monkeypatch)
     monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
-    monkeypatch.setattr(paired, "score", lambda _: pytest.fail("ODT text changes must not request statistical responses"))
+    monkeypatch.setattr(paired, "score", lambda _: pytest.fail("These formats must only compare words"))
     opening = "Please send the résumé on "
     texts = (opening + "Monday.", opening + "Thursday.")
 
     def build(extension, text):
         paragraphs = ("Test heading", text, "Known table cell")
+        if extension == ".rtf":
+            rich_body = text.replace("résumé", r"r\'e9sum\'e9")
+            return (r"{\rtf1\ansi\ansicpg1252 Test heading\par {\b " + rich_body + r"}\par Known table cell}").encode("ascii")
         if extension == ".pdf":
             with pymupdf.open() as document:
                 page = document.new_page()
@@ -844,11 +848,12 @@ def test_odt_draft_changes_replay_original_paragraphs(reference_http, monkeypatc
         return buffer.getvalue()
 
     earlier, later = build(old_extension, texts[0]), build(new_extension, texts[1])
-    _saved(f, "odt-draft", new_extension, later)
-    url = _url("odt-draft")
+    _saved(f, "extracted-draft", new_extension, later)
+    url = _url("extracted-draft")
     availability = f.client.get(url, headers=f.viewer).json()
-    assert availability["extension"] == new_extension and ".odt" in availability["earlier_extensions"]
-    if new_extension == ".odt":
+    assert availability["extension"] == new_extension and {".odt", ".rtf"} <= set(availability["earlier_extensions"])
+    extracted_extension = ".odt" if ".odt" in (old_extension, new_extension) else ".rtf"
+    if new_extension == extracted_extension:
         assert not availability.get("paired_check_available")
 
     result = f.client.post(url, headers=f.viewer, files=_upload(earlier, old_extension),
@@ -859,13 +864,14 @@ def test_odt_draft_changes_replay_original_paragraphs(reference_http, monkeypatc
     report = content["comparison"]
     assert "paired_check" not in report and "Annotation text" not in result.text
     (change,) = report["changes"]
-    spaces = {".odt": document_revision.ODT_COORDINATES, ".docx": document_revision.WORD_COORDINATES,
+    spaces = {".odt": document_revision.ODT_COORDINATES, ".rtf": document_revision.RTF_COORDINATES,
+              ".docx": document_revision.WORD_COORDINATES,
               ".pdf": document_revision.document_revision_pdf.COORDINATES}
     for side, extension, paragraph in zip(("earlier", "later"), (old_extension, new_extension), texts, strict=True):
         if old_extension != new_extension:
             assert report[side]["coordinate_space"] == spaces[extension]
         else:
-            assert report["coordinate_space"] == document_revision.ODT_COORDINATES
+            assert report["coordinate_space"] == spaces[extracted_extension]
         excerpt = change[side]
         if extension == ".pdf":
             (page,) = excerpt["pdf_pages"]
@@ -878,7 +884,8 @@ def test_odt_draft_changes_replay_original_paragraphs(reference_http, monkeypatc
         assert excerpt["start"] == len("Test heading\n\n") + anchor["start"]
     with pymupdf.open(stream=base64.b64decode(content["pdf"]), filetype="pdf") as pdf:
         printed = " ".join(word for page in pdf for word in page.get_text().split())
-    assert all(value in printed for value in ("OpenDocument body text", "Monday", "Thursday", "Paragraph 2"))
+    label = "OpenDocument body text" if extracted_extension == ".odt" else "Rich Text passage"
+    assert all(value in printed for value in (label, "Monday", "Thursday", "Paragraph 2"))
 
     old_path = tmp_path / f"earlier{old_extension}"
     new_path = tmp_path / f"later{new_extension}"
@@ -891,8 +898,8 @@ def test_odt_draft_changes_replay_original_paragraphs(reference_http, monkeypatc
     assert rebuilt["body_paragraph_ranges_verified"] == (1 if pdf_present else 2)
     if pdf_present:
         assert rebuilt["pdf_word_regions_verified"] == 1
-    odt_side = "earlier" if old_extension == ".odt" else "later"
-    change[odt_side]["paragraphs"][0]["start"] += 1
+    extracted_side = "earlier" if old_extension == extracted_extension else "later"
+    change[extracted_side]["paragraphs"][0]["start"] += 1
     export.write_text(json.dumps(report))
     with pytest.raises(ValueError, match="does not replay"):
         review(export, old_path, new_path)

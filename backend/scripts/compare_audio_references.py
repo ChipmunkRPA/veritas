@@ -25,6 +25,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH,
     SCHEMA_WITH_LONG_CLEAN_SPEECH,
     SCHEMA_WITH_MATCHING_WAVEFORM,
+    SCHEMA_WITH_OPUS_MATCHING_WAVEFORM,
     SCHEMA_WITH_TRIM_ALIGNMENT,
     SCHEMA_WITH_TRIM_AND_LEVEL,
     STEREO_AAC_SPEECH_SCHEMAS,
@@ -44,7 +45,8 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False, c
         schema = record.get("schema")
         waveform_aac = schema == SCHEMA_WITH_AAC_MATCHING_WAVEFORM
         waveform_gapless = schema == SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM
-        waveform = waveform_aac or waveform_gapless or schema == SCHEMA_WITH_MATCHING_WAVEFORM
+        waveform_opus = schema == SCHEMA_WITH_OPUS_MATCHING_WAVEFORM
+        waveform = waveform_aac or waveform_gapless or waveform_opus or schema == SCHEMA_WITH_MATCHING_WAVEFORM
         aligned = schema == SCHEMA_WITH_ALIGNED_SPEECH or waveform and "aligned_speech" in record
         if aligned or waveform:
             schema = record.get("comparison_schema")
@@ -83,7 +85,8 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False, c
                                      include_clean_speech_match_support=schema == SCHEMA_WITH_CLEAN_SPEECH_SUPPORT)
         if aligned or waveform:
             compare_source = partial(compare_source, include_aligned_speech=aligned, include_matching_waveform=waveform,
-                                     include_matching_waveform_aac=waveform_aac, include_matching_waveform_gapless_aac=waveform_gapless)
+                                     include_matching_waveform_aac=waveform_aac, include_matching_waveform_gapless_aac=waveform_gapless,
+                                     include_matching_waveform_opus=waveform_opus)
     return replay(compare_source, earlier, submitted, output, verify=verify)
 
 

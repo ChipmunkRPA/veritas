@@ -1,0 +1,13 @@
+{
+  "schema": "chipmunk.opus-waveform-transfer-plan/1",
+  "inputs": "Use the 16 held SINE reader pairs and four held AMI excerpts in audio-standalone-dual-view-sources-2026-11-18.json. Verify every exact transported PCM against the earlier held receipt. Use each clean dry original as the earlier copy. Test unchanged foreground, same-recording ordinary splice and publisher-labeled cut-and-paste under the same room mix at -5 and +3 dB. Room-only recordings have no corresponding earlier copy and are outside the paired trial.",
+  "carriers": [
+    "Lossless 16 kHz mono PCM16 as the paired baseline",
+    "FFmpeg libopus, Ogg container, mono native 48 kHz, 20 ms packets, VoIP application, constant 64 kb/s",
+    "FFmpeg libopus, Ogg container, mono native 48 kHz, 20 ms packets, VoIP application, variable 24 kb/s"
+  ],
+  "clock": "Require one complete Ogg Opus stream, verified page CRCs and serial sequence, exact OpusHead, verified presentation start at zero and 288000 presented 48 kHz samples. Check packet timestamps, packet lengths and start/end discard independently against the header and Ogg granules. Require the standard comparison decoder to produce exactly 96000 contiguous 16 kHz samples beginning at zero.",
+  "matching": "Use the unchanged earlier-copy waveform continuity check. A useful location covers at least half of the edit and at least 30 percent of the temporal union. Report original and ordinary splice controls separately because a genuine splice may legitimately change the reference waveform.",
+  "gate": "Qualify 64 kb/s only if every clip passes the clock, lossless locates at least eight of the 32 edits, at least 85 percent of those locations remain, and no level loses more than two correct locations. The candidate may newly flag at most two unchanged files across at most one reader and at most two ordinary splices. Test 24 kb/s separately under the same rule as a transport stress point. Do not adjust the matcher or the acceptance rule after measurement.",
+  "scope": "A paired codec test using already reserved source material novel to this comparison. It neither evaluates whether a file is AI generated nor validates the standalone scan. Support remains limited to the qualified exact clock and carrier. No result from this test contributes to automated AI confidence."
+}

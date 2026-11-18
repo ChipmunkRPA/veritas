@@ -28,7 +28,8 @@ a { color: #285f50; }
 .page-preview figcaption { color: #526658; font-size: 8.5pt; }
 """
 LABELS = {"body": "Message body", "quoted": "Quoted text", "signature": "Signature"}
-FILE_LABELS = {"plain_text": "Plain text", "docx": "Word body text", "odt": "OpenDocument body text", "pdf": "PDF text layer"}
+FILE_LABELS = {"plain_text": "Plain text", "docx": "Word body text", "odt": "OpenDocument body text", "pdf": "PDF text layer",
+               "rtf": "Rich Text passage"}
 VALUE_LABELS = {"number": "Number changed", "date": "Date changed", "currency": "Amount changed",
                 "percentage": "Percentage changed", "percentage_points": "Percentage points changed"}
 PNG_URL = "data:image/png;base64,"
@@ -196,7 +197,7 @@ def render(comparison: dict) -> bytes:
     html_reply = comparison["coordinate_space"] == HTML_COORDINATES
     mixed = comparison["format"] == "mixed"
     format_label = {"plain_text": "Text", "docx": "Word body text", "odt": "OpenDocument body text",
-                    "pdf": "PDF text", "mixed": "Wording change"}.get(comparison["format"])
+                    "pdf": "PDF text", "rtf": "Rich Text passage", "mixed": "Wording change"}.get(comparison["format"])
     for change in comparison["changes"]:
         label = format_label or LABELS[change["role"]]
         anchor = escape(change["id"])
@@ -221,6 +222,8 @@ def render(comparison: dict) -> bytes:
                      "Previews show selected source regions.")
     if comparison["format"] == "odt":
         positions = "OpenDocument offsets count Unicode code points in the extracted body and within each listed paragraph."
+    if comparison["format"] == "rtf":
+        positions = "Rich Text offsets count Unicode code points in the extracted text and within each listed paragraph."
     if html_reply:
         positions = ("The first range gives the position in the extracted reply. The ranges after the arrow give the positions "
                      "in the decoded HTML MIME part. Both count Unicode code points.")

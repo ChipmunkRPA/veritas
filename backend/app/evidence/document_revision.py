@@ -16,6 +16,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 from zipfile import BadZipFile, ZipFile
 
+from app.core.deadline import StepTimeout
 from app.detectors.text.extract import _normalise, extract, text_hash
 from app.evidence import document_revision_pdf, document_revision_values
 from app.evidence.document_scope import email_agreement_body_spans, mapped_email_html
@@ -34,13 +35,15 @@ MAX_CHARS = 30_000
 MAX_TOKENS = 2_000
 MAX_DOCX_XML_BYTES = 2 * 1024 * 1024
 ROLES = ("body", "quoted", "signature")
-FORMATS = {".eml": "email", ".txt": "plain_text", ".docx": "docx", ".odt": "odt", ".pdf": "pdf"}
+FORMATS = {".eml": "email", ".txt": "plain_text", ".docx": "docx", ".odt": "odt", ".pdf": "pdf", ".rtf": "rtf"}
 MIXED_DRAFTS = (".txt", ".docx", ".pdf")
-COMPARABLE_DRAFTS = (*MIXED_DRAFTS, ".odt")
+EXTRACTED_PARAGRAPH_DRAFTS = {".odt": "OpenDocument", ".rtf": "Rich Text"}
+COMPARABLE_DRAFTS = (*MIXED_DRAFTS, *EXTRACTED_PARAGRAPH_DRAFTS)
 TEXT_COORDINATES = "decoded_source_unicode_codepoint"
 WORD_COORDINATES = "docx_body_unicode_codepoint"
 ODT_COORDINATES = "odt_body_unicode_codepoint"
-SUPPORTED_DRAFTS = "matching .eml, .txt, .docx, .odt or .pdf files"
+RTF_COORDINATES = "rtf_extracted_text_unicode_codepoint"
+SUPPORTED_DRAFTS = "matching .eml, .txt, .docx, .odt, .rtf or .pdf files"
 SCOPE = "Compares words and punctuation in the decoded text. Email body, quoted text and signatures are mapped separately."
 HTML_SCOPE = ("Compares visible words and punctuation in the reply body. Quoted text, attachments, headers and "
               "formatting are outside this comparison.")
@@ -49,6 +52,8 @@ DOCX_SCOPE = ("Compares words and punctuation in top-level Word body paragraphs.
 ODT_SCOPE = ("OpenDocument coverage includes extracted body paragraphs, headings, lists and table text in reading order. "
              "The comparison preserves uniquely matched unchanged sentences when their positions move. "
              "Headers, footers, notes, tracked changes and embedded objects are outside the comparison.")
+RTF_SCOPE = ("Rich Text positions refer to extracted text and its paragraphs. The comparison preserves uniquely matched "
+             "unchanged sentences when their positions move. Formatting and embedded objects are outside the comparison.")
 MIXED_SCOPE = "Compares words and punctuation across file formats. Formatting is outside the comparison."
 MIXED_WORD_SCOPE = "Word coverage includes top-level body paragraphs. Word tables, headers, footers and text boxes are excluded."
 MIXED_PDF_SCOPE = "PDF coverage includes the selectable text on one upright page with a clear reading order. Scanned text is excluded."
@@ -96,7 +101,7 @@ def differences(earlier, later):
 def _sentence_anchors(text, layout, extension, body):
     from app.detectors.text.segment import spans
 
-    if extension in {".docx", ".odt"}:
+    if extension == ".docx" or extension in EXTRACTED_PARAGRAPH_DRAFTS:
         blocks = [(start, end) for _, _, start, end in layout]
     elif extension == ".pdf":
         blocks = [(row["start"], row["end"]) for row in layout]
@@ -284,12 +289,24 @@ def _html_token_sources(text, layout, changed_tokens):
 def _source(path: Path, data: bytes, extension: str, *, mixed: bool = False, word_body=None, allow_empty_word_body=False):
     if extension == ".docx":
         return _docx_source(data, body=word_body, allow_empty=allow_empty_word_body)
-    if extension == ".odt":
+    if extension in EXTRACTED_PARAGRAPH_DRAFTS:
         path.write_bytes(data)
-        doc = extract(path, extension)
-        if not 0 < len(doc.text) <= MAX_CHARS or "\ufffd" in doc.text or not doc.source_map:
-            raise ValueError(f"Each OpenDocument version needs readable body text and at most {MAX_CHARS:,} extracted characters.")
-        anchors = [(row["paragraph_index"] + 1, row["paragraph_index"], row["start"], row["end"]) for row in doc.source_map]
+        label = EXTRACTED_PARAGRAPH_DRAFTS[extension]
+        if extension == ".rtf":
+            from app.detectors.text.pipeline import extract_within
+
+            try:
+                doc = extract_within(path, extension)
+            except (RuntimeError, StepTimeout):
+                raise ValueError("The Rich Text draft could not be read. Save it as DOCX or TXT and try again.") from None
+        else:
+            doc = extract(path, extension)
+        if not 0 < len(doc.text) <= MAX_CHARS or "\ufffd" in doc.text or "\x00" in doc.text or not doc.source_map:
+            raise ValueError(f"Each {label} version needs readable body text and at most {MAX_CHARS:,} extracted characters.")
+        anchors = []
+        for index, row in enumerate(doc.source_map):
+            paragraph_index = row.get("paragraph_index", index)
+            anchors.append((paragraph_index + 1, paragraph_index, row["start"], row["end"]))
         body = tokens(doc.text, [(start, end) for _, _, start, end in anchors])
         if len(body) > MAX_TOKENS:
             raise ValueError(f"Each version can contain up to {MAX_TOKENS:,} words and punctuation tokens.")
@@ -356,7 +373,7 @@ def _excerpt(text: str, extent: list[int] | None, changed_tokens: list[list[int]
     result = {"start": start, "end": end, "text": text[start:end], "changed_tokens": changed_tokens}
     if extension == ".pdf":
         result["pdf_pages"] = document_revision_pdf.page_locations(extent, changed_tokens, layout)
-    elif extension in {".docx", ".odt"}:
+    elif extension == ".docx" or extension in EXTRACTED_PARAGRAPH_DRAFTS:
         result["paragraphs"] = [
             {"paragraph": paragraph, "body_index": index, "start": max(start, a) - a, "end": min(end, b) - a}
             for paragraph, index, a, b in layout
@@ -383,7 +400,7 @@ def _figure_blocks(text, layout, by_role, extension, word_body):
     if extension == ".docx":
         visible = _ordinary_body_indices(text, layout, extension, word_body)
         return [(a, b) for index, (_, _, a, b) in enumerate(layout) if index in visible]
-    if extension == ".odt":
+    if extension in EXTRACTED_PARAGRAPH_DRAFTS:
         return [(a, b) for _, _, a, b in layout]
     if extension == ".pdf":
         if (any(row["hidden_text_on_page"] for row in layout)
@@ -538,7 +555,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     old_extension = extension if earlier_extension is None else earlier_extension
     mixed = old_extension != extension
     if mixed and any(value not in COMPARABLE_DRAFTS for value in (old_extension, extension)):
-        raise ValueError("Use TXT, DOCX, ODT or PDF when comparing drafts across formats. Email drafts require matching EML files.")
+        raise ValueError("Use TXT, DOCX, ODT, RTF or PDF when comparing drafts across formats. Email drafts require matching EML files.")
     mixed_paired = mixed_paired and all(value in MIXED_DRAFTS for value in (old_extension, extension))
     if any(not 0 < len(item) <= MAX_BYTES for item in (earlier, later)):
         raise ValueError("Each version must be nonempty and at most 1 MiB.")
@@ -571,7 +588,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
             word_body=word_bodies[1], allow_empty_word_body=has_compared_table)
         if mixed:
             spaces = {".txt": TEXT_COORDINATES, ".docx": WORD_COORDINATES, ".odt": ODT_COORDINATES,
-                      ".pdf": document_revision_pdf.COORDINATES}
+                      ".rtf": RTF_COORDINATES, ".pdf": document_revision_pdf.COORDINATES}
             for suffix, text, layout, source in ((old_extension, old_text, old_layout, old_source),
                                                  (extension, new_text, new_layout, new_source)):
                 if suffix == ".pdf":
@@ -604,7 +621,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                     by_role["body"] = [token for token in by_role["body"]
                                        if token[2] <= excerpt["start"] or token[1] >= excerpt["end"]]
         for role in ROLES:
-            if role == "body" and ".odt" in (old_extension, extension):
+            if role == "body" and (old_extension in EXTRACTED_PARAGRAPH_DRAFTS or extension in EXTRACTED_PARAGRAPH_DRAFTS):
                 edit_rows = _localized_body_differences(old_text, new_text, old_layout, new_layout, old_extension,
                                                         extension, old_tokens[role], new_tokens[role])
             else:
@@ -624,9 +641,11 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
         scope, coordinates = DOCX_SCOPE, WORD_COORDINATES
     if extension == ".odt":
         scope, coordinates = ODT_SCOPE, ODT_COORDINATES
+    if extension == ".rtf":
+        scope, coordinates = RTF_SCOPE, RTF_COORDINATES
     if mixed:
         schema, coordinates = MIXED_SCHEMA, MIXED_COORDINATES
-        scopes = {".docx": MIXED_WORD_SCOPE, ".odt": ODT_SCOPE, ".pdf": mixed_pdf_scope}
+        scopes = {".docx": MIXED_WORD_SCOPE, ".odt": ODT_SCOPE, ".rtf": RTF_SCOPE, ".pdf": mixed_pdf_scope}
         scope = " ".join([MIXED_SCOPE, *(scopes[suffix] for suffix in (old_extension, extension) if suffix in scopes)])
     result = {"schema": schema, "format": "mixed" if mixed else FORMATS[extension],
             "coordinate_space": coordinates,

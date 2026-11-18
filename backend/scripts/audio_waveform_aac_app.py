@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Replay the AAC waveform evidence in a local app with simulated payment."""
+"""Replay the AAC or Opus waveform evidence in a local app with simulated payment."""
 
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ from scripts.video_short_return_encoded_app import PaymentStub, body, checkout, 
 ROOT = Path(__file__).resolve().parents[2]
 
 
-def run(output: Path, inputs: Path, *, browser: bool = False, gapless: bool = False):
+def run(output: Path, inputs: Path, *, browser: bool = False, gapless: bool = False, opus: bool = False):
     configure(output, ROOT)
     os.environ.update(VERITAS_ENVIRONMENT="dev", VERITAS_AUDIO_DETECTOR_MODE="candidate", VERITAS_LOG_LEVEL="WARNING",
                       VERITAS_AUDIO_REFERENCE_COMPARISON_ENABLED="true", VERITAS_AUDIO_REFERENCE_CLEAN_SPEECH="true",
@@ -32,6 +32,8 @@ def run(output: Path, inputs: Path, *, browser: bool = False, gapless: bool = Fa
     from app.evidence.audio_reference import (
         SCHEMA_WITH_AAC_MATCHING_WAVEFORM,
         SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM,
+        SCHEMA_WITH_MATCHING_WAVEFORM,
+        SCHEMA_WITH_OPUS_MATCHING_WAVEFORM,
         _identity,
         read_track,
     )
@@ -40,10 +42,14 @@ def run(output: Path, inputs: Path, *, browser: bool = False, gapless: bool = Fa
     from scripts.compare_audio_references import run as replay
     from scripts.verify_multimedia_exports import scan
 
-    torch.set_num_threads(2)
+    torch.set_num_threads(1)
     torch.set_num_interop_threads(1)
     source = inputs / "earlier.flac"
     schema = SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM if gapless else SCHEMA_WITH_AAC_MATCHING_WAVEFORM
+    codec, proof, extension, media_type = "AAC", "aac_presentation", "m4a", "audio/mp4"
+    if opus:
+        schema = SCHEMA_WITH_OPUS_MATCHING_WAVEFORM
+        codec, proof, extension, media_type = "Opus", "opus_presentation", "opus", "audio/opus"
     stub = service._stripe = PaymentStub()
     cases, results = [], {}
     with TestClient(app, client=("127.0.0.1", 50000)) as client:
@@ -54,9 +60,12 @@ def run(output: Path, inputs: Path, *, browser: bool = False, gapless: bool = Fa
             key, _ = auth.issue_api_key(db, owner)
             client.headers["X-API-Key"] = key
             db.commit()
-        for role, status in (("positive", "localized_difference"), ("ordinary", "no_local_difference")):
-            path = inputs / f"{role}.m4a"
-            aid = checkout(client, stub, path, kind="audio", media_type="audio/mp4", filename=path.name)
+        scenarios = [("positive", "localized_difference"), ("ordinary", "no_local_difference")]
+        if opus:
+            scenarios.append(("rejected", "unassessed"))
+        for role, status in scenarios:
+            path = inputs / f"{role}.{extension}"
+            aid = checkout(client, stub, path, kind="audio", media_type=media_type, filename=path.name)
             with get_session() as db:
                 result_hash = db.get(Analysis, aid).result_hash
             endpoint = f"/api/v2/analyses/{aid}/audio-reference-comparison"
@@ -66,7 +75,9 @@ def run(output: Path, inputs: Path, *, browser: bool = False, gapless: bool = Fa
             payload = body(client.post(endpoint, files=files, data={"include_pdf": "true", "earlier_has_clean_speech": "true"}))
             record = payload["comparison"]
             waveform = record["matching_waveform"]
-            assert record["schema"] == schema and waveform["status"] == status
+            expected_schema = SCHEMA_WITH_MATCHING_WAVEFORM if role == "rejected" else schema
+            assert record["schema"] == expected_schema and waveform["status"] == status
+            assert (proof in waveform) == (role != "rejected")
             assert not waveform["affects_overall_confidence"] and not record["affects_overall_confidence"]
             scan(json.dumps(record))
             evidence = output / f"{role}.json"
@@ -79,7 +90,9 @@ def run(output: Path, inputs: Path, *, browser: bool = False, gapless: bool = Fa
                 text = " ".join(page.get_text().split())
                 scan(text)
                 note = "Playback begins after 2,112 priming samples" if gapless else "48 kHz AAC presentation clock"
-                assert waveform["summary"] in text and note in text and "zero weight" in text
+                if opus:
+                    note = "Verified 48 kHz Opus playback."
+                assert waveform["summary"] in text and (note in text) == (role != "rejected") and "zero weight" in text
                 if span := waveform.get("range"):
                     assert sum(len(drawing["items"]) > 20 for drawing in page.get_drawings()) == 2
                     for side, original in (("earlier", source), ("submitted", path)):
@@ -90,12 +103,12 @@ def run(output: Path, inputs: Path, *, browser: bool = False, gapless: bool = Fa
                         assert (audio == pcm[start:stop]).all()
                         assert f"{clip['start_s']:.3f} to {clip['end_s']:.3f} s" in text
                     first, last = span["submitted"]["native_source_pts"]
-                    assert f"AAC presentation [{first}, {last}) on the 48 kHz clock." in text
+                    assert f"{codec} presentation [{first}, {last}) on the 48 kHz clock." in text
             with get_session() as db:
                 assert db.get(Analysis, aid).result_hash == result_hash
             cases.append({"analysis_id": aid, "earlier": str(source.resolve()), "expected": str(evidence), "status": status})
             results[role] = {"status": status, "sha256": record["submitted"]["sha256"],
-                             "pdf_sha256": hashlib.sha256(pdf).hexdigest(), "aac_presentation": waveform["aac_presentation"],
+                             "pdf_sha256": hashlib.sha256(pdf).hexdigest(), proof: waveform.get(proof),
                              "ranges": {side: {key: span[side][key] for key in ("samples", "start_s", "end_s", "pcm_sha256")}
                                         for side in ("earlier", "submitted")} if span else {}}
             if span:
@@ -112,6 +125,8 @@ if __name__ == "__main__":
     parser.add_argument("output", type=Path)
     parser.add_argument("inputs", type=Path)
     parser.add_argument("--browser", action="store_true")
-    parser.add_argument("--gapless", action="store_true")
+    formats = parser.add_mutually_exclusive_group()
+    formats.add_argument("--gapless", action="store_true")
+    formats.add_argument("--opus", action="store_true")
     arguments = parser.parse_args()
-    run(arguments.output, arguments.inputs, browser=arguments.browser, gapless=arguments.gapless)
+    run(arguments.output, arguments.inputs, browser=arguments.browser, gapless=arguments.gapless, opus=arguments.opus)

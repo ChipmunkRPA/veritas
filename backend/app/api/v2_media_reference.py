@@ -203,6 +203,7 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         and settings.audio_reference_matching_waveform,
                         include_matching_waveform_aac=settings.audio_reference_clean_speech_aac,
                         include_matching_waveform_gapless_aac=settings.audio_reference_clean_speech_aac,
+                        include_matching_waveform_opus=settings.audio_reference_clean_speech_aac,
                     )
                 elif timing_event_s is None:
                     record, assets = video_reference.compare(

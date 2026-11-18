@@ -45,6 +45,7 @@ SCHEMA_WITH_DENSER_STEREO_AAC = "chipmunk.audio-reference-comparison/19"
 SCHEMA_WITH_CLOSE_STEREO_AAC = "chipmunk.audio-reference-comparison/20"
 SCHEMA_WITH_AAC_MATCHING_WAVEFORM = "chipmunk.audio-reference-comparison/21"
 SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM = "chipmunk.audio-reference-comparison/22"
+SCHEMA_WITH_OPUS_MATCHING_WAVEFORM = "chipmunk.audio-reference-comparison/23"
 WAVEFORM_AAC_MIN_BIT_RATE = 60_000
 STEREO_AAC_SPEECH_SCHEMAS = frozenset({SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH, SCHEMA_WITH_DENSER_STEREO_AAC,
                                      SCHEMA_WITH_CLOSE_STEREO_AAC})
@@ -509,6 +510,25 @@ def _gapless_waveform_tracks(submitted_path, decoded):
                        "native_clock": clock, "bit_rate": bit_rate}
 
 
+def _opus_waveform_tracks(submitted_path, decoded):
+    from app.detectors.audio import ogg_opus_reference
+
+    earlier, submitted = (item[0] for item in decoded)
+    duration = ogg_opus_reference.PRESENTED // 3
+    if (not decoded[0][4] or any(track[0] != "measured" or track[2]["source_pts"] != 0 or len(track[1]) != duration
+                                 for track in (earlier, submitted))):
+        return None
+    with submitted_path.open("rb") as stream:
+        if stream.read(4) != b"OggS":
+            return None
+    clock = ogg_opus_reference.read(submitted_path)
+    if clock is None:
+        return None
+    return (earlier, submitted), {"side": "submitted", "sample_rate": AUDIO_RATE, "time_base": f"1/{AUDIO_RATE}",
+                                  "presentation_start_pts": 0, "presentation_end_exclusive_pts": duration,
+                                  "decoded_samples": duration, "native_clock": clock}
+
+
 def _local_timing(decoded, audio, assets, *, aac_tracks=None):
     from app.evidence import video_reference_soundtrack as timing
 
@@ -694,7 +714,7 @@ def _aligned_speech(decoded, assets):
     return result
 
 
-def _matching_waveform(decoded, assets, *, aac_tracks=None):
+def _matching_waveform(decoded, assets, *, aac_tracks=None, opus_tracks=None):
     from app.evidence import audio_reference_waveform as waveform
 
     result = {
@@ -706,12 +726,14 @@ def _matching_waveform(decoded, assets, *, aac_tracks=None):
         "sample_rate": AUDIO_RATE,
         "affects_overall_confidence": False,
     }
-    if aac_tracks is None:
+    if aac_tracks is not None:
+        tracks, result["aac_presentation"] = aac_tracks
+    elif opus_tracks is not None:
+        tracks, result["opus_presentation"] = opus_tracks
+    else:
         tracks, reason, summary = _short_reference_tracks(decoded)
         if tracks is None:
             return result | {"reason": reason, "summary": summary}
-    else:
-        tracks, result["aac_presentation"] = aac_tracks
     samples = [(track[1] * 32768).astype("<i2") for track in tracks]
     status, windows, chosen = waveform.locate(*samples)
     summaries = {
@@ -730,7 +752,7 @@ def _matching_waveform(decoded, assets, *, aac_tracks=None):
             side: _timing_excerpt(assets, "matching-waveform", side, track[1], track[2]["source_pts"], chosen[field])
             for side, track, field in zip(("earlier", "submitted"), tracks, ("earlier_span", "span"), strict=True)
         }
-        if aac_tracks is not None:
+        if aac_tracks is not None or opus_tracks is not None:
             # Preserve both the 16 kHz comparison coordinates and native 48 kHz presentation timestamps.
             excerpts["submitted"]["native_source_pts"] = [3 * pts for pts in excerpts["submitted"]["source_pts"]]
         result["range"] = excerpts | {
@@ -765,7 +787,8 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             include_aligned_speech: bool = False,
             include_matching_waveform: bool = False,
             include_matching_waveform_aac: bool = False,
-            include_matching_waveform_gapless_aac: bool = False) -> tuple[dict, dict[str, bytes]]:
+            include_matching_waveform_gapless_aac: bool = False,
+            include_matching_waveform_opus: bool = False) -> tuple[dict, dict[str, bytes]]:
     """Compare continuous recordings and recover a small, exactly supported edge trim."""
     paths = earlier, submitted
     filenames = filenames or (earlier.name, submitted.name)
@@ -844,8 +867,8 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
     if include_aligned_speech:
         record.update(schema=SCHEMA_WITH_ALIGNED_SPEECH, aligned_speech=_aligned_speech((first, second), assets))
     if include_matching_waveform:
-        # The transfer study measured six-second pairs with one native mono source and mono AAC-LC.
         waveform_aac = None
+        waveform_opus = None
         schema = SCHEMA_WITH_MATCHING_WAVEFORM
         if (want_waveform_aac and native_aac and native_bit_rate is not None and native_bit_rate >= WAVEFORM_AAC_MIN_BIT_RATE
                 and native_aac[1]["native_clock"]["channels"] == 1
@@ -857,8 +880,13 @@ def compare(earlier: Path, submitted: Path, *, filenames: tuple[str, str] | None
             candidate = _gapless_waveform_tracks(submitted, (first, second))
             if candidate and candidate[1]["bit_rate"] >= WAVEFORM_AAC_MIN_BIT_RATE:
                 waveform_aac, schema = candidate, SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM
+        if waveform_aac is None and include_matching_waveform_opus:
+            waveform_opus = _opus_waveform_tracks(submitted, (first, second))
+            if waveform_opus is not None:
+                schema = SCHEMA_WITH_OPUS_MATCHING_WAVEFORM
         record.update(schema=schema,
-                      matching_waveform=_matching_waveform((first, second), assets, aac_tracks=waveform_aac))
+                      matching_waveform=_matching_waveform((first, second), assets,
+                                                          aac_tracks=waveform_aac, opus_tracks=waveform_opus))
     if sources != tuple(_identity(path, name) for path, name in zip(paths, filenames, strict=True)):
         raise ValueError("One of the recordings changed while the comparison was running.")
     return record, assets

@@ -33,12 +33,15 @@ router = APIRouter(prefix="/api/v2", tags=["evidence"], dependencies=[Depends(ra
                    route_class=CheckedRoute)
 
 
+DraftExtension = Literal[".eml", ".txt", ".docx", ".odt", ".pdf", ".rtf"]
+
+
 class DocumentRevisionAvailability(BaseModel):
     available: bool
-    extension: Literal[".eml", ".txt", ".docx", ".odt", ".pdf"] | None = None
+    extension: DraftExtension | None = None
     paired_check_available: bool | None = None
     paired_mixed_formats_available: bool | None = None
-    earlier_extensions: list[Literal[".eml", ".txt", ".docx", ".odt", ".pdf"]] | None = None
+    earlier_extensions: list[DraftExtension] | None = None
 
 
 class DraftSource(BaseModel):
@@ -49,9 +52,9 @@ class DraftSource(BaseModel):
     mime_part: str | None
     decoded_html_sha256: str | None = None
     decoded_html_characters: int | None = None
-    format: Literal["plain_text", "docx", "odt", "pdf"] | None = None
+    format: Literal["plain_text", "docx", "odt", "pdf", "rtf"] | None = None
     coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint", "odt_body_unicode_codepoint",
-                              "pdf_native_text_unicode_codepoint"] | None = None
+                              "pdf_native_text_unicode_codepoint", "rtf_extracted_text_unicode_codepoint"] | None = None
 
 
 class DraftParagraph(BaseModel):
@@ -255,10 +258,10 @@ class DraftComparison(BaseModel):
                          "chipmunk.document-revision-comparison/3", "chipmunk.document-revision-comparison/4",
                          "chipmunk.document-revision-comparison/5", "chipmunk.document-revision-comparison/6",
                          "chipmunk.document-revision-comparison/7", "chipmunk.document-revision-comparison/8"] = Field(alias="schema")
-    format: Literal["email", "plain_text", "docx", "odt", "pdf", "mixed"]
+    format: Literal["email", "plain_text", "docx", "odt", "pdf", "rtf", "mixed"]
     coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint", "odt_body_unicode_codepoint",
                               "pdf_native_text_unicode_codepoint", "email_html_extracted_text_unicode_codepoint",
-                              "per_source_unicode_codepoint"]
+                              "rtf_extracted_text_unicode_codepoint", "per_source_unicode_codepoint"]
     earlier: DraftSource
     later: DraftSource
     changes: list[DraftChange]
@@ -311,7 +314,7 @@ def _original(aid: str, *, reject_inactive: bool = False) -> tuple[str, int, str
 
 def _unavailable() -> ProblemError:
     return ProblemError(404, "Earlier-draft comparison unavailable",
-                        "A retained, completed, active .eml, .txt, .docx, .odt or .pdf analysis is required.")
+                        "A retained, completed, active .eml, .txt, .docx, .odt, .rtf or .pdf analysis is required.")
 
 
 def _paired_enabled(extension: str | None) -> bool:
@@ -470,7 +473,7 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
     ROUTE, response_model=DocumentRevisionResponse, responses=problem_responses(400, 401, 404, 409, 413, 422, 429, 500),
     openapi_extra={"requestBody": {"required": True, "content": {"multipart/form-data": {"schema": {
         "type": "object", "required": ["earlier"], "properties": {
-            "earlier": {"type": "string", "format": "binary", "description": "Earlier version. TXT, DOCX, ODT and PDF may be mixed. Use EML with EML."},
+            "earlier": {"type": "string", "format": "binary", "description": "Earlier version. TXT, DOCX, ODT, RTF and PDF may be mixed. Use EML with EML."},
             "include_pdf": {"type": "string", "enum": ["true", "false"], "default": "false"},
             "include_paired_check": {"type": "string", "enum": ["true", "false"], "default": "false"},
         },

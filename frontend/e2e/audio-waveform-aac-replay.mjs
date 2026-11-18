@@ -19,14 +19,21 @@ try {
     await page.getByRole('button', { name: 'Compare recordings' }).click()
     const region = page.getByRole('region', { name: 'Matching speech waveform' })
     await region.getByText(waveform.summary, { exact: true }).waitFor()
-    await region.getByText(/6\.000 s · 48 kHz mono source/).waitFor()
-    if (waveform.aac_presentation.native_clock.priming_samples) {
+    if (waveform.opus_presentation) {
+      await region.getByText(/Verified 48 kHz Opus playback/).waitFor()
+    } else if (waveform.aac_presentation) {
+      await region.getByText(/6\.000 s · 48 kHz mono source/).waitFor()
+    } else {
+      assert.equal(await region.getByText(/Verified 48 kHz Opus playback/).count(), 0)
+    }
+    if (waveform.aac_presentation?.native_clock.priming_samples) {
       await region.getByText(/Playback starts after 2,112 priming samples/).waitFor()
     }
     assert.equal(await region.getByRole('img', { name: /matching waveform excerpt waveform/ }).count(), flagged ? 2 : 0)
     if (flagged) {
       const [start, end] = waveform.range.submitted.native_source_pts
-      await region.getByText(`AAC presentation [${start}, ${end}) on the 48 kHz clock.`).waitFor()
+      const codec = waveform.opus_presentation ? 'Opus' : 'AAC'
+      await region.getByText(`${codec} presentation [${start}, ${end}) on the 48 kHz clock.`).waitFor()
     }
     for (const label of ['Download JSON evidence', 'Download PDF']) {
       const download = page.waitForEvent('download')

@@ -22,6 +22,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH,
     SCHEMA_WITH_LONG_CLEAN_SPEECH,
     SCHEMA_WITH_MATCHING_WAVEFORM,
+    SCHEMA_WITH_OPUS_MATCHING_WAVEFORM,
     SCHEMA_WITH_STEREO,
     SCHEMA_WITH_TRIM_ALIGNMENT,
     SCHEMA_WITH_TRIM_AND_LEVEL,
@@ -155,7 +156,7 @@ def _audio_summary(document, record):
         separate = record["schema"] in {SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH, SCHEMA_WITH_AAC_TIMING,
                                         *STEREO_AAC_SPEECH_SCHEMAS,
                                         SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM, SCHEMA_WITH_AAC_MATCHING_WAVEFORM,
-                                        SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM}
+                                        SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM, SCHEMA_WITH_OPUS_MATCHING_WAVEFORM}
         title = "Decoded sample comparison unavailable" if separate else "Comparison unassessed"
         _text(page, MARGIN, 346, title, size=16, font="hebo")
         _text(page, MARGIN, 370, AUDIO_ONLY_STATUS[record["status"]])
@@ -522,6 +523,11 @@ def _matching_waveform_page(document, result):
         else:
             note = "The 48 kHz AAC presentation clock is mapped to the 16 kHz comparison waveform."
         _text(page, MARGIN, 304, note, size=9, color=MUTED)
+    opus = result.get("opus_presentation")
+    if opus:
+        native = opus["native_clock"]
+        note = f"Verified 48 kHz Opus playback. The decoder skipped {native['pre_skip']} leading and {native['end_trim']} trailing samples."
+        _text(page, MARGIN, 304, note, size=9, color=MUTED)
     if not span:
         return
     values = span["flank_offsets_samples"]
@@ -532,10 +538,10 @@ def _matching_waveform_page(document, result):
           size=10)
     _text(page, MARGIN, 285, f"{support['before']} matching windows before, {support['during']} measured inside, "
           f"{support['after']} matching after.", size=9, color=MUTED)
-    _audio_pair_waveforms(page, span)
+    _audio_pair_waveforms(page, span, native_codec="Opus" if opus else "AAC")
 
 
-def _audio_pair_waveforms(page, span):
+def _audio_pair_waveforms(page, span, *, native_codec="AAC"):
     maximum = max(.01, *(abs(level) for side in LABELS for field in ("low", "high") for level in span[side]["waveform"][field]))
     for y, side, label in ((385, "earlier", "Earlier recording"), (559, "submitted", "Analyzed recording")):
         clip = span[side]
@@ -543,7 +549,7 @@ def _audio_pair_waveforms(page, span):
         _text(page, MARGIN, y - 65, f"{label}  {clip['start_s']:.3f} to {clip['end_s']:.3f} s", font="hebo")
         _draw_waveform(page, clip["waveform"], y, maximum, (end - first) / AUDIO_RATE)
         native = clip.get("native_source_pts")
-        note = (f"AAC presentation [{native[0]}, {native[1]}) on the 48 kHz clock."
+        note = (f"{native_codec} presentation [{native[0]}, {native[1]}) on the 48 kHz clock."
                 if native else f"Source samples [{first}, {end}) at 16 kHz.")
         _text(page, MARGIN, y + 55, note, size=9, color=MUTED)
     _text(page, MARGIN, 657, "Waveforms share one amplitude scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
@@ -682,7 +688,7 @@ def render(record, assets):
                                         SCHEMA_WITH_DENSE_CLEAN_SPEECH,
                                         SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD, SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
                                         SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM, SCHEMA_WITH_AAC_MATCHING_WAVEFORM,
-                                        SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM)
+                                        SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM, SCHEMA_WITH_OPUS_MATCHING_WAVEFORM)
         document.set_metadata({"title": "Earlier audio comparison" if is_audio else TITLE, "author": "Chipmunk Verify"})
         adjusted = record.get("level_adjusted")
         trimmed = is_audio and "trim_alignment" in record.get("audio", {})

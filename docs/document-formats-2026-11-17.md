@@ -7,7 +7,7 @@ limit is 25 MB in the standard configuration.
 
 | Format | Writing examined | Source position in reports |
 | --- | --- | --- |
-| DOCX | Body paragraphs, tables, and saved text in filled paragraph and inline controls. Separate Word revision and visibility checks cover their supported structures. | Word body path, paragraph characters, and available run coordinates |
+| DOCX | Body paragraphs, tables, and saved text in filled paragraph and inline controls in standard and Strict Open XML DOCX. Separate Word revision and visibility checks cover their supported structures. | Word body path, paragraph characters, and available run coordinates |
 | ODT | Body paragraphs, headings, lists, and tables | Decoded body paragraph number and character range |
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
 | RTF | Extracted writing from standard Rich Text files | Decoded text block number and character range |
@@ -27,6 +27,13 @@ supported controls preserves the Word body path and paragraph character
 range. Word body text remains readable in exports without a default
 paragraph style. The original-file verifier applies the extraction recorded
 when the report was created. [Microsoft's Word control structure](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.sdtblock?view=openxml-3.0.1)
+
+Word's **Strict Open XML Document** option also saves a `.docx` file.
+Upload it directly for analysis or an earlier-draft comparison. The reader
+maps the Strict body and style markup for text extraction and retains the
+submitted bytes for Content Credentials, hashing, and original-file review.
+[Microsoft's Word format reference](https://learn.microsoft.com/en-us/office/compatibility/office-file-format-reference) ·
+[Open XML SDK Strict DOCX test fixture](https://github.com/dotnet/Open-XML-SDK/blob/431ab05cf160248cc3885a4a766026d4f8243792/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/Strict01.docx)
 
 New ODT and RTF reports show Unicode character ranges before the analysis
 normalizes whitespace. ODT numbers readable body paragraphs in reading order.
@@ -87,6 +94,17 @@ table. Nine saved character ranges each for Word, OpenDocument and Rich Text
 matched their decoded text and appeared in the PDF. The same location
 labels appeared in the browser. A header-only DOCX, a blank ODT, an invalid
 RTF and a blank RTF were rejected before checkout.
+
+The Strict DOCX compatibility replay covered 11 files across the eight
+formats, including a scanned PDF and two Strict Word files. Every file
+completed its applicable checks after simulated checkout, produced PDF and
+JSON exports, and verified its signed package against the original. The
+controlled Strict file preserved nine exact paragraph ranges. The Open XML
+SDK fixture produced exact repeated-text locations and displayed a coverage
+notice for unsupported tracked revisions. A header-only Strict file was
+rejected before checkout. Local regression tests also check draft comparison
+offsets and reject external Word body relationships and macro-enabled
+packages disguised with a DOCX extension.
 
 ## Earlier OpenDocument drafts
 

@@ -634,11 +634,10 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool 
 
 def docx_body(path: Path, *, project_word_revisions: bool = True, project_word_breaks: bool = True,
               include_word_content_controls: bool = True):
-    import docx
-
+    from app.detectors.text.strict_word import open_document
     from app.evidence.document_tracked_changes import PART_NAME, inspect
 
-    document = docx.Document(str(path))
+    document = open_document(path)
     part = str(document.part.partname).removeprefix("/")
     joined = set() if project_word_revisions and project_word_breaks else None
     review = (inspect(document.element.body, part, project_inline=project_word_revisions, joined_paragraphs=joined,

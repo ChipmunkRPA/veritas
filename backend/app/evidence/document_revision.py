@@ -197,28 +197,41 @@ def _docx_part(archive, name):
     return data
 
 
-def docx_body(data):
-    """Read the bounded main part used by the earlier-draft comparison."""
+def _standard_docx_body(archive):
     from docx.oxml import parse_xml
     from docx.oxml.ns import qn
-    from lxml.etree import XMLSyntaxError
 
-    check_docx_safe(BytesIO(data))
-    try:
-        with ZipFile(BytesIO(data)) as archive:
-            declarations = parse_xml(_docx_part(archive, "[Content_Types].xml"))
-            namespace = "{http://schemas.openxmlformats.org/package/2006/content-types}"
-            content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
-            if not any(node.get("PartName") == f"/{DOCX_PART}" and node.get("ContentType") == content_type
-                       for node in declarations.findall(namespace + "Override")):
-                raise ValueError("Choose a Word document saved in the standard .docx format.")
-            document = parse_xml(_docx_part(archive, DOCX_PART))
-    except (BadZipFile, RuntimeError, NotImplementedError, XMLSyntaxError) as error:
-        raise ValueError("The Word document body could not be read.") from error
+    declarations = parse_xml(_docx_part(archive, "[Content_Types].xml"))
+    namespace = "{http://schemas.openxmlformats.org/package/2006/content-types}"
+    content_type = "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
+    if not any(node.get("PartName") == f"/{DOCX_PART}" and node.get("ContentType") == content_type
+               for node in declarations.findall(namespace + "Override")):
+        raise ValueError("Choose a Word document saved in the standard .docx format.")
+    document = parse_xml(_docx_part(archive, DOCX_PART))
     if (document.tag != qn("w:document") or (body := document.find(qn("w:body"))) is None
             or document.getroottree().docinfo.doctype or declarations.getroottree().docinfo.doctype):
         raise ValueError("The Word document body could not be read.")
     return body
+
+
+def docx_body(data):
+    """Read the bounded main part used by the earlier-draft comparison."""
+    from lxml.etree import XMLSyntaxError
+
+    from app.detectors.text.strict_word import read_document
+
+    check_docx_safe(BytesIO(data))
+    try:
+        with ZipFile(BytesIO(data)) as archive:
+            try:
+                return _standard_docx_body(archive)
+            except (ValueError, XMLSyntaxError):
+                strict = read_document(archive, include_styles=False, max_xml_bytes=MAX_DOCX_XML_BYTES)
+                if strict is None:
+                    raise
+                return strict.element.body
+    except (BadZipFile, RuntimeError, NotImplementedError, XMLSyntaxError) as error:
+        raise ValueError("The Word document body could not be read.") from error
 
 
 def _word_paragraphs(body):

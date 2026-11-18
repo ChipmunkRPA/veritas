@@ -71,6 +71,67 @@ An independent comparison reproduced every reported count and verified all
 and separate room recordings. The results do not estimate performance on
 natural edits or competing offscreen speakers.
 
+## Second mono holdout
+
+An additional 256 deliveries use eight CREMA-D speakers and eight DCASE
+room recordings outside the first mono and earlier stereo speech-gap
+comparisons. The speaker identities had appeared in other project tests.
+The fixed thresholds and staged treatments stayed the same. The PCM and
+AAC deliveries use the same eight foregrounds and rooms.
+
+| Condition | Correct locations in each encoding | Edited files assessed (PCM / AAC) | Ordinary files flagged (PCM / AAC) |
+| --- | ---: | ---: | ---: |
+| Voice 8 dB above room | 9/16 | 16/16 · 16/16 | 0/40 · 0/40 |
+| Voice 5 dB below room | 2/16 | 4/16 · 5/16 | 0/40 · 0/40 |
+| Clean | 8/8 | 8/8 · 8/8 | 0/8 · 0/8 |
+
+The near-silence comparator alone located none of the 16 noisy edits in
+each condition. The combined check kept all eight clean locations per
+encoding and returned zero misplaced edit ranges. The nine louder-voice
+locations span five speaker groups. Both louder-room hits are from one
+group. The check assessed 24 of 40 ordinary louder-room files per encoding.
+The louder-room result again missed the predetermined minimum. Mono
+speech activity stays in evaluation.
+
+A separate readback rechecked all 256 file hashes, 18,752 picture
+timestamps, and 10,001,056 presented mono samples. It excluded 12,976
+trailing codec-padding samples. Four research witnesses reproduced the
+source waveform, exact interval, and three frame anchors in both
+conditions and both encodings. The research signature rejected a changed
+byte. These witnesses used a test key outside the app. The portable
+receipt includes source commitments and sample ranges.
+[Second holdout measurements](evaluation-panels/video-mono-speech-activity-confirmation-2026-11-18.json.gz)
+
+The held mixes use separately recorded room sound. Recent work evaluates
+deliberately unsynchronized speech and mouth motion, and naturally
+recorded speaker overlap with reverberation. Those conditions help
+define further controls for this check.
+[LASER paper](https://openaccess.thecvf.com/content/WACV2026/html/Nguyen_LASER_Lip_Landmark_Assisted_Speaker_Detection_for_Robustness_WACV_2026_paper.html) ·
+[Real-World AVSE Challenge](https://real-world-avse.github.io/)
+
+Recount the second holdout with the independent comparison tool.
+
+```sh
+review=$(mktemp -d)
+panel=docs/evaluation-panels/video-mono-speech-activity-confirmation-2026-11-18.json.gz
+python3 -B -S - "$panel" "$review" <<'PY'
+import gzip
+import json
+import sys
+from pathlib import Path
+
+with gzip.open(sys.argv[1], "rt", encoding="utf-8") as stream:
+    receipt = json.load(stream)
+out = Path(sys.argv[2])
+parts = {name: receipt[name] for name in ("manifest", "truth")}
+for name, data in (parts | receipt["readings"]).items():
+    (out / f"{name}.json").write_text(json.dumps(data), encoding="utf-8")
+PY
+python3 -B -IS backend/scripts/independent_review.py compare-events \
+  "$review/manifest.json" "$review/truth.json" "$review/near_silence.json" \
+  "$review/preserve_near_silence.json" "$review/paired.json" --match 0.4 0.4
+```
+
 ## Replay
 
 The [reservation](evaluation-panels/video-mono-speech-activity-plan-2026-11-17.json.gz),

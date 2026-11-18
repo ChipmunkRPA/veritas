@@ -66,6 +66,25 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Word and other document formats](document-formats-2026-11-17.md) includes
+  saved text in filled Word forms and preserves the original body paths and
+  character ranges for findings. The older extraction remains available for
+  verifying previously issued reports.
+
+- [Length-conversion evidence](document-length-conversions-2026-11-18.md)
+  highlights the exact conflicting expression. It found all 30 controlled
+  changes and raised zero disagreements on the 30 published values or 30
+  restyled controls. It carries zero weight in AI assessments.
+
+- [Standalone stereo Opus repeats](audio-stereo-opus-repetition-2026-11-18.md)
+  located 11 of 64 staged edits, versus 24 for matched AAC. Neither format
+  highlighted any of 192 ordinary controls. The Opus variant remains
+  experimental.
+
+- [Signed lip-timing contrast](video-lip-signed-contrast-2026-11-18.md) added
+  one overlapping range in 20 planned edits. The range had the wrong timing
+  direction. The serving check retains its existing method.
+
 - [Native JPEG color consistency](image-native-chroma-consistency-2026-11-18.md)
   tested three measurements across 168 held edits. None picked a useful
   area even before applying its point. The native rectangle geometry fit

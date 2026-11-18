@@ -1,4 +1,4 @@
-"""Verify the presentation clock of a bounded single-stream mono Ogg Opus reference."""
+"""Verify the exact presentation clock of a bounded single-stream Ogg Opus file."""
 
 from __future__ import annotations
 
@@ -23,8 +23,8 @@ def crc_table():
     return table
 
 
-def page_counts(data):
-    """Check complete native pages of the fixed mono 20 ms trial profile."""
+def page_counts(data, *, channels=1, presented=PRESENTED):
+    """Check complete native pages of the fixed 20 ms trial profiles."""
     table = crc_table()
     serial = None
     offset = 0
@@ -63,9 +63,10 @@ def page_counts(data):
                 raise ValueError("Ogg headers require a zero granule and one contained packet")
             payload = data[lace_end:end]
             if sequence == 0:
-                if (len(payload) != 19 or payload[:10] != b"OpusHead\x01\x01" or payload[12:] != b"\x80\xbb\x00\x00\x00\x00\x00"
+                if (len(payload) != 19 or payload[:10] != b"OpusHead\x01" + bytes([channels])
+                        or payload[12:] != b"\x80\xbb\x00\x00\x00\x00\x00"
                         or len(lace) != 1):
-                    raise ValueError("Expected the fixed mono 48 kHz OpusHead profile")
+                    raise ValueError("OpusHead differs from the expected 48 kHz channel profile")
                 preskip = int.from_bytes(payload[10:12], "little")
                 if not 0 < preskip < PACKET:
                     raise ValueError("Pre-skip must be within the first 20 ms packet")
@@ -80,22 +81,22 @@ def page_counts(data):
                         raise ValueError("Empty Opus audio packet")
                     sizes.append(size)
                     size = 0
-            expected = PRESENTED + preskip if flags == 4 else len(sizes) * PACKET
+            expected = presented + preskip if flags == 4 else len(sizes) * PACKET
             if granule != expected:
                 raise ValueError("Opus page granules disagree with its presentation clock")
         offset = end
         sequence += 1
-    if len(sizes) != 301 or not 0 < len(sizes) * PACKET - granule < PACKET:
+    if preskip is None or len(sizes) != (presented + preskip + PACKET - 1) // PACKET or not 0 < len(sizes) * PACKET - granule < PACKET:
         raise ValueError("Expected the full bounded Ogg presentation and verified end trim")
     return preskip, granule, sizes
 
 
-def native_clock(path: Path, *, packet_bytes: int | None = None) -> dict:
+def native_clock(path: Path, *, packet_bytes: int | None = None, channels: int = 1, presented: int = PRESENTED) -> dict:
     with path.open("rb") as stream:
         data = stream.read(MAX_BYTES + 1)
     if len(data) > MAX_BYTES:
-        raise ValueError("Ogg Opus exceeds the six-second reference limit")
-    preskip, granule, sizes = page_counts(data)
+        raise ValueError("Ogg Opus exceeds the bounded verification limit")
+    preskip, granule, sizes = page_counts(data, channels=channels, presented=presented)
     if packet_bytes is not None and any(size != packet_bytes for size in sizes):
         raise ValueError("Opus packets do not match the qualified constant bitrate")
     command = ["ffprobe", "-v", "error", "-protocol_whitelist", "file", "-show_entries",
@@ -103,7 +104,7 @@ def native_clock(path: Path, *, packet_bytes: int | None = None) -> dict:
                "stream=codec_name,codec_type,sample_rate,channels,time_base,start_pts,duration_ts,extradata_size",
                "-of", "json", str(path)]
     result = json.loads(subprocess.run(command, check=True, capture_output=True, timeout=15).stdout)
-    stream = {"codec_name": "opus", "codec_type": "audio", "sample_rate": "48000", "channels": 1,
+    stream = {"codec_name": "opus", "codec_type": "audio", "sample_rate": "48000", "channels": channels,
               "time_base": "1/48000", "start_pts": 0, "duration_ts": granule, "extradata_size": 19}
     if result["streams"] != [stream] or len(result["packets"]) != len(sizes):
         raise ValueError("Opus probe does not match the native page inventory")
@@ -117,9 +118,9 @@ def native_clock(path: Path, *, packet_bytes: int | None = None) -> dict:
                            "discard_padding": trim if last else 0}] if first or last else [])
         if actual != expected or packet.get("side_data_list", []) != expected_side:
             raise ValueError("Opus packet timing or padding disagrees with the native pages")
-    return {"sample_rate": 48_000, "channels": 1, "presentation_start_pts": 0,
-            "presentation_end_exclusive_pts": PRESENTED, "end_granule": granule, "pre_skip": preskip,
-            "end_trim": trim, "packets": len(sizes), "packet_payload_bit_rate": round(sum(sizes) * 8 / 6)}
+    return {"sample_rate": 48_000, "channels": channels, "presentation_start_pts": 0,
+            "presentation_end_exclusive_pts": presented, "end_granule": granule, "pre_skip": preskip,
+            "end_trim": trim, "packets": len(sizes), "packet_payload_bit_rate": round(sum(sizes) * 8 * 48000 / presented)}
 
 
 def read(path: Path) -> dict | None:

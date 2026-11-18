@@ -3881,6 +3881,31 @@ use the earlier PNG. Combining their proposals found the same 27 of 28
 edit locations as the existing check, with 32 unmatched proposals versus
 two for the existing check. No ordinary exports were flagged.
 
+### Recount the single-upload localization trials
+
+The `standalone-localization` suite recounts the November 18 JPEG, lip
+timing, noisy speech and checklist evaluations. Each candidate reads one
+submitted item at inference. The suite checks the stored operating points
+and outcomes with Python 3.11 or newer and its standard library. The
+individual studies document how to rerun inference on the original public
+sources. The suite requires only the published code and numeric receipts.
+[JPEG color consistency](image-native-chroma-consistency-2026-11-18.md) ·
+[Lip timing](video-lip-signed-rescue-2026-11-18.md) ·
+[Noisy speech](audio-local-floor-return-2026-11-18.md) ·
+[Checklists](writing-list-item-2026-11-18.md)
+
+```sh
+review_dir=$(mktemp -d)
+replay=backend/scripts/replay_public_evaluations.py
+python3 -B -IS "$replay" "$review_dir/standalone.json" --suite standalone-localization
+python3 -B -IS "$replay" "$review_dir/standalone.json" --format-issue
+```
+
+The resulting receipt identifies the evaluation code and inputs by SHA-256.
+`--compare` checks two receipts against each other. Use the issue excerpt
+to share a result voluntarily. It omits media, exact private input
+locations, and local filenames.
+
 The source archives contain the separate `manifest`, `truth` and `readings`
 objects. For the mono replay, extract the two named readings and run the same
 command at the original 0.40 IoU and 0.40 recall. The portrait replay uses

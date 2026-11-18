@@ -382,13 +382,53 @@ SHORT_LOCAL_EVIDENCE = {
                                            "writing_revision_trajectory_transfer", "writing_sentence_anchor_transfer")
     )),
 }
+STANDALONE_LOCALIZATION = {
+    "image": ("image_native_chroma_consistency.py", (
+        "image-native-chroma-consistency-freeze-2026-11-18.json.gz",
+        "image-native-chroma-consistency-scene-2026-11-18.json.gz",
+    ), ("review",), (
+        "backend/app/__init__.py", "backend/app/bench/__init__.py", "backend/app/bench/image_jpeg_boundary.py",
+        f"{SCRIPTS}/image_local_spectral_peaks.py", f"{SCRIPTS}/image_region_rank_inputs.py",
+        f"{SCRIPTS}/video_face_temporal_fit.py",
+    )),
+    "video": ("review_video_lip_signed_rescue.py", tuple(f"video-lip-signed-rescue-{stage}-2026-11-18.json.gz"
+                                                        for stage in ("plan", "calibration", "held")), (), (
+        f"{SCRIPTS}/video_lip_signed_rescue.py",
+    )),
+    "audio": ("audio_local_floor_return.py", (
+        "audio-local-floor-return-calibration-2026-11-18.json.gz", "audio-local-floor-return-held-2026-11-18.json.gz",
+    ), ("review",), (
+        f"{PANELS}/audio-local-floor-return-plan-2026-11-18.json", f"{PANELS}/audio-standalone-dual-view-2026-11-18.json.gz",
+        f"{PANELS}/audio-standalone-dual-view-plan-2026-11-18.json", f"{PANELS}/audio-standalone-dual-view-sources-2026-11-18.json",
+        *(f"{SCRIPTS}/{module}.py" for module in ("audio_standalone_dual_view", "video_common_sources_v89",
+          "video_lip_multishot_panel", "video_shared_sound_panel", "video_silent_mouth_clock_panel", "video_stereo_covariance_panel")),
+    )),
+    "writing": ("writing_list_item_holdout.py", ("writing-list-item-2026-11-18.json.gz",), ("review",), (
+        *(f"backend/app/{module}.py" for module in (
+            "__init__", "bench/__init__", "bench/writing_entropy_prominence", "core/__init__", "core/canonical",
+            "evidence/__init__", "evidence/document_interval_locations", "evidence/document_native_locations",
+            "evidence/document_passage_intervals", "evidence/document_pdf_visibility", "evidence/document_scope",
+            "evidence/document_tracked_changes", "evidence/document_word_visibility", "evidence/passage_interval_selection",
+            "evidence/report_passage_calibration",
+        )),
+        *(f"{SCRIPTS}/{module}.py" for module in (
+            "text_elife_rewrites_v273", "verify_writing_entropy_prominence", "video_appearance_native_v108",
+            "writing_blind_rewrite_probe", "writing_economic_paraphrase_holdout", "writing_entropy_prominence",
+            "writing_entropy_sources", "writing_focus_v3", "writing_local_baseline_transfer", "writing_masked_word_reader",
+            "writing_multi_passage_panel", "writing_multi_passage_selection", "writing_profile_sources",
+            "writing_report_sources", "writing_revision_trajectory_transfer", "writing_short_sources",
+            "writing_token_supervision", "writing_token_supervision_data", "writing_token_supervision_eval",
+            "writing_token_supervision_transfer", "writing_transition_deviation", "writing_turing_editorial_history",
+        )),
+    )),
+}
 SUITES = ("overview", "localization", "transfer", "source-evidence", "recent-checks", "evidence-followups", "short-edits",
           "difficult-edits", "localization-limits", "specialist-transfer", "local-evidence-2026-11-13",
           "evidence-transfer-2026-11-13", "evidence-extent-2026-11-13", "local-evidence-expansion",
           "short-edit-transfer-2026-11-13", "delivery-and-localization", "reference-and-rotation", "single-upload-transfers",
           "processing-and-short-edits", "delivery-and-reference-transfers", "short-edit-checks", "edit-position-transfers",
           "single-upload-cues", "check-boundaries", "local-trials", "timing-and-location", "stereo-and-face",
-          "short-local-evidence")
+          "short-local-evidence", "standalone-localization")
 ISOLATED = (
     "import runpy,sys; "
     "script=sys.argv.pop(1); "
@@ -480,6 +520,8 @@ def replay_inputs(modality: str, suite: str) -> tuple[str, list[str], tuple[str,
         script, panel_names, prefix, dependencies = STEREO_AND_FACE_REPLAY[modality]
     elif suite == "short-local-evidence":
         script, panel_names, prefix, dependencies = SHORT_LOCAL_EVIDENCE[modality]
+    elif suite == "standalone-localization":
+        script, panel_names, prefix, dependencies = STANDALONE_LOCALIZATION[modality]
     elif suite == "source-evidence":
         script, panel_names, prefix, dependencies = SOURCE_EVIDENCE[modality]
     else:

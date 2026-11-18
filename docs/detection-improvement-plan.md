@@ -66,6 +66,16 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- [Native JPEG color consistency](image-native-chroma-consistency-2026-11-18.md)
+  tested three measurements across 168 held edits. None picked a useful
+  area even before applying its point. The native rectangle geometry fit
+  134 of the 168 exact edited regions.
+
+- [Temporary lip timing changes](video-lip-signed-rescue-2026-11-18.md)
+  found one additional correctly signed interval when used as a fallback.
+  The combined reading located 12 of 24 staged edits and raised two extra
+  ordinary alerts. The offline admission rule was unmet.
+
 - [Standalone low-power audio](audio-local-floor-return-2026-11-18.md)
   tested 32 speech edits and 32 room replacements with matched ordinary
   controls. Both readings located zero at their frozen points. The exact

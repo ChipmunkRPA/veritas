@@ -13,6 +13,15 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+From the repository root, run `make replay-evidence` with Python 3.11
+or newer. It uses the standard library to verify the published case
+records and recalculate results for [WebP images](image-exact-webp-copy-2026-11-18.md),
+[paired video](video-short-phrase-reencode-2026-11-18.md),
+[stereo audio](audio-stereo-complex-projection-2026-11-18.md), and
+[writing](writing-rewrite-response-2026-11-18.md). For a replay that
+decodes the original files or reruns inference, use the source preparation
+and native commands in each report.
+
 The [paired soundtrack replay](video-short-phrase-reencode-2026-11-18.md#reproduce)
 recounts exact 16 kHz analysis locations under three audio-carrier pairings.
 It includes two independent picture encodes with the same frame clock,

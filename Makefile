@@ -1,5 +1,5 @@
 .PHONY: setup backend frontend dev-api dev-web stop stop-all-dev smoke e2e e2e-demo e2e-fake test test-slow egress audit deploy-lint golden lint settings-doc sizing-doc notices-doc \
-	typecheck build ci ci-release api-types api-types-check test-frontend eval-image bench eval-text purge up down \
+	typecheck build ci ci-release api-types api-types-check test-frontend eval-image replay-evidence bench eval-text purge up down \
 	vbench-fetch vbench-audit vbench-split vbench-perturb vbench-score calibrate vbench-report vbench-gate vbench-smoke shortcut-gate
 
 BG := bash backend/scripts/bg.sh
@@ -132,6 +132,17 @@ ci-release:       ## release gate (N-15; OPS-13): make ci with the backend suite
 
 eval-image:       ## public-benchmark evaluation of image detectors -> docs/eval_image.md
 	cd backend && .venv/bin/python scripts/eval_image.py --per-source 100
+
+replay-evidence:  ## recount one published evaluation per modality offline using Python's standard library
+	PYTHONPATH=backend python3 -B -S -m scripts.image_webp_exact_copy_transfer review \
+		docs/evaluation-panels/image-exact-webp-copy-2026-11-18.json.gz
+	PYTHONPATH=backend python3 -B -S -m scripts.video_short_phrase_reencode verify \
+		docs/evaluation-panels/video-short-phrase-reencode-plan-2026-11-18.json.gz \
+		docs/evaluation-panels/video-short-phrase-reencode-held-2026-11-18.json.gz
+	PYTHONPATH=backend python3 -B -S -m scripts.audio_stereo_complex_projection review \
+		docs/evaluation-panels/audio-stereo-complex-projection-2026-11-18.json.gz
+	PYTHONPATH=backend python3 -B -S -m scripts.writing_rewrite_response review \
+		docs/evaluation-panels/writing-rewrite-response-2026-11-18.json.gz
 
 bench:            ## X-4 warm latency, stage / detector breakdown and memory per profile against the dev API (`make dev-api`; PROFILES=quick,full,deep ONLY=<labels> RUNS=<n> WORKER_PID=<pid> COVERAGE_CONTRACT=<json> PERF_OUT=<new-json>) → docs/v2/bench/perf.{json,md}
 	cd backend && { [ -f data/bench/perf/workloads.json ] || .venv/bin/python scripts/bench.py --make-workloads; }

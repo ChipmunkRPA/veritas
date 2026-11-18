@@ -120,6 +120,13 @@ const webpExactCoverageText = {
   no_pair: 'The lossless WebP check found no qualifying exact pair with or without right-angle rotation.',
   unsupported_profile: 'Exact comparison requires an opaque lossless WebP still with sides from 512 to 768 pixels. The image must be upright.',
 }
+const webpReflectionCoverageText = {
+  ...webpExactCoverageText,
+  no_pair: 'The reflection check found no qualifying exact pair after a horizontal or vertical flip.',
+  unassessed_match_budget: 'Too many matching areas prevented the reflection check from isolating a pair.',
+  ambiguous_pairs: 'Several reflected pairs met the evidence requirements, so no single pair is shown.',
+  unavailable: 'The exact reflection check could not complete.',
+}
 
 const copyAreaLabels = { area_a: 'Area A', area_b: 'Area B' } as const
 const copyAreas = ['area_a', 'area_b'] as const
@@ -207,13 +214,15 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   if (!check || check.status === 'skipped_trusted_ai_credentials') return null
   const reflected = field === 'copy_similarity'
   const geometric = field === 'copy_affine'
-  const heading = geometric ? 'Geometric copy comparison' : reflected ? 'Same-image copy similarity' : 'Copy similarity without mirroring'
   const sectionId = `image-${field.replace('_', '-')}`
   const baseVersion = set.prior_embedded_pair_evidence?.version ?? set.version
+  const reflectionVersion = baseVersion === 'image-evidence-34' || baseVersion === 'image-evidence-35'
+  const heading = geometric ? 'Geometric copy comparison' : reflected ? 'Same-image copy similarity'
+    : reflectionVersion ? 'Exact and geometric copy comparisons' : 'Copy similarity without mirroring'
   const turnedReview = ['image-evidence-22', 'image-evidence-23'].includes(baseVersion)
   const nativeJpegVersion = ['image-evidence-28', 'image-evidence-29', 'image-evidence-30', 'image-evidence-31'].includes(baseVersion)
-  const webpVersion = baseVersion === 'image-evidence-32' || baseVersion === 'image-evidence-33'
-  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29', 'image-evidence-31', 'image-evidence-33'].includes(baseVersion))
+  const webpVersion = baseVersion === 'image-evidence-32' || baseVersion === 'image-evidence-33' || reflectionVersion
+  const wide = (geometric && ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29', 'image-evidence-31', 'image-evidence-33', 'image-evidence-35'].includes(baseVersion))
     || (reflected && (turnedReview || ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12',
       'image-evidence-13', 'image-evidence-14', 'image-evidence-16', 'image-evidence-17', 'image-evidence-18',
       'image-evidence-19', 'image-evidence-20', 'image-evidence-21', 'image-evidence-24', 'image-evidence-25',
@@ -225,18 +234,22 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const nativeJpeg = Boolean(nativeJpegVersion && turnedJpeg && !offgrid)
   const separateMeasurements = turnedJpeg?.measurements
   const smallPng = field === 'copy_translation' ? set.copy_translation?.small_png_copy_review : undefined
-  const webpReview = field === 'copy_translation' ? set.copy_translation?.webp_exact_copy_review : undefined
+  const webpReflection = field === 'copy_translation' ? set.copy_translation?.webp_exact_reflection_review : undefined
+  const exactReflection = basis === 'webp_exact_reflected_copy'
+  const webpReview = webpReflection ?? (field === 'copy_translation' ? set.copy_translation?.webp_exact_copy_review : undefined)
   const transform = set.copy_translation?.pairs[0]?.transform
   const turned = (basis === 'png_exact_turned_copy' || basis === 'jpeg_turned_copy' || (basis === 'webp_exact_copy' && transform !== 'same_orientation')) && transform
   const rotation = turned === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'
   let webpObservation: string | undefined
   let webpScope: string | undefined
   if (webpReview?.status === 'supported_pair') {
-    webpObservation = turned
+    webpObservation = exactReflection
+      ? `Flipping Area B ${transform === 'horizontal_reflection' ? 'horizontally' : 'vertically'} aligns every RGB pixel with Area A in the lossless WebP.`
+      : turned
       ? `Rotating Area B ${rotation} aligns every RGB pixel with Area A in the lossless WebP.`
       : 'The two lossless WebP crops match exactly in their original orientation.'
   } else if (webpReview) {
-    webpObservation = webpExactCoverageText[webpReview.status]
+    webpObservation = (webpReflection ? webpReflectionCoverageText : webpExactCoverageText)[webpReview.status]
     if (webpReview.status === 'no_pair') webpScope = 'This check covers separated, textured crops with sides from 16 to 56 pixels.'
   } else if (field === 'copy_translation' && webpVersion) {
     const outsideExactSize = [set.source.width, set.source.height].some(side => side == null || side < 512 || side > 768)
@@ -295,7 +308,7 @@ function CopySimilarity({ set, field, token, mediaReady }: {
     {proposalSearch?.basis === 'reduced' && <p className="mt-2 mb-0 text-caption text-text-muted">The candidate search used a {proposalSearch.width} × {proposalSearch.height} pixel working image. The check measured any matching masks on the original pixel grid.</p>}
     {check.pairs.length > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">Coordinates use native pixels in the oriented original.</p>}
     {check.pairs.map((pair, pairIndex) => <article key={pair.id} className="mt-4 border-t border-border pt-4">
-      <h4 className="m-0 text-small font-medium text-text">{pair.id} · {basis === 'jpeg_turned_copy' ? 'Rotated JPEG pair' : turned ? 'Exact rotated pair' : basis === 'webp_exact_copy' ? 'Exact copy pair' : geometric ? 'Matched source areas' : reflected ? 'Reflected pair' : 'Non-mirrored pair'}</h4>
+      <h4 className="m-0 text-small font-medium text-text">{pair.id} · {exactReflection ? 'Exact reflected pair' : basis === 'jpeg_turned_copy' ? 'Rotated JPEG pair' : turned ? 'Exact rotated pair' : basis === 'webp_exact_copy' ? 'Exact copy pair' : geometric ? 'Matched source areas' : reflected ? 'Reflected pair' : 'Non-mirrored pair'}</h4>
       {separateMeasurements && 'transform' in pair && <p className="mt-2 mb-0 text-caption text-text-muted">
         Rotate Area B {pair.transform === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'} to align with Area A.{' '}
         Mean RGB difference inside {separateMeasurements[pairIndex].interior_mean.toFixed(2)} of 255 levels.{' '}

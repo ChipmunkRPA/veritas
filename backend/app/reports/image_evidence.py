@@ -126,6 +126,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         WEBP_EXACT_COPY_KEY,
         WEBP_EXACT_COPY_STATUS_TEXT,
         WEBP_EXACT_COPY_VERSIONS,
+        WEBP_EXACT_REFLECTION_KEY,
+        WEBP_EXACT_REFLECTION_STATUS_TEXT,
+        WEBP_EXACT_REFLECTION_VERSIONS,
         exact_copy_size,
         status_text,
     )
@@ -170,13 +173,18 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                     if field == "copy_similarity" or status == SKIPPED_CREDENTIALS
                                     else TRANSLATION_STATUS[status])
         if field == "copy_translation":
-            if webp_review := check.get(WEBP_EXACT_COPY_KEY):
+            reflected_webp = check.get(WEBP_EXACT_REFLECTION_KEY)
+            if webp_review := reflected_webp or check.get(WEBP_EXACT_COPY_KEY):
                 review_status = webp_review["status"]
+                coverage_text = WEBP_EXACT_REFLECTION_STATUS_TEXT if reflected_webp else WEBP_EXACT_COPY_STATUS_TEXT
                 check["observation"] = (webp_scope if review_status == "unsupported_profile"
-                                        else WEBP_EXACT_COPY_STATUS_TEXT[review_status])
+                                        else coverage_text[review_status])
                 if measured := webp_review["measurement"]:
                     transform = check["pairs"][0]["transform"]
-                    if transform == "same_orientation":
+                    if reflected_webp:
+                        direction = "horizontally" if transform == "horizontal_reflection" else "vertically"
+                        check["observation"] = f"Flipping Area B {direction} aligns every RGB pixel with Area A in the lossless WebP."
+                    elif transform == "same_orientation":
                         check["observation"] = "The two lossless WebP crops match exactly in their original orientation."
                     else:
                         rotation = "90° counterclockwise" if transform == "rotate_90_ccw" else "180°"
@@ -243,6 +251,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                     check["basis_text"] = " ".join(filter(None, (check.get("basis_text"), scope)))
             if base_version in WEBP_EXACT_COPY_VERSIONS and not check["pairs"] and status != SKIPPED_CREDENTIALS:
                 check["interpretation"] = "Copy comparisons look for repeated image detail. The origin of the image and AI involvement remain undetermined."
+        if field == "copy_translation" and base_version in WEBP_EXACT_REFLECTION_VERSIONS:
+            check["title"] = "Exact and geometric copy comparisons"
         for pair in check["pairs"]:
             pair["images"] = []
             for role, label in (("area_a", "Area A"), ("area_b", "Area B")):

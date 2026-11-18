@@ -1,0 +1,146 @@
+{
+  "browser": true,
+  "cases": {
+    "ambiguity": {
+      "copy_transform": null,
+      "coverage": "ambiguous_pairs",
+      "embedded_crop_count": 0,
+      "native_regions": null,
+      "pdf_sha256": "cbf9364fdcf9f00d7151e0644bb28e6606bc853ac3e5c6461e1f241af3080980",
+      "signed_source_verified": true,
+      "source_sha256": "86b9347a49932de0c422cbc7cf1a3f0598b89c3b915dca5ca83ac98f55bf1cbc"
+    },
+    "feathered_vertical": {
+      "copy_transform": "vertical_reflection",
+      "coverage": "supported_pair",
+      "embedded_crop_count": 2,
+      "native_regions": {
+        "area_a": {
+          "h": 38,
+          "w": 40,
+          "x": 53,
+          "y": 63
+        },
+        "area_b": {
+          "h": 38,
+          "w": 40,
+          "x": 377,
+          "y": 379
+        }
+      },
+      "pdf_sha256": "42632980ee7ee1b156638b981f76ddf9367664e94ab5c6602dc00b3e6cc691f2",
+      "signed_source_verified": true,
+      "source_sha256": "5804aaaaccec02f0a3f7aba069ac13e4fa18e3d155992d4884ad3f7bd3b8f472"
+    },
+    "horizontal": {
+      "assessment_preserved": true,
+      "copy_transform": "horizontal_reflection",
+      "coverage": "supported_pair",
+      "embedded_crop_count": 2,
+      "native_regions": {
+        "area_a": {
+          "h": 34,
+          "w": 30,
+          "x": 48,
+          "y": 58
+        },
+        "area_b": {
+          "h": 34,
+          "w": 30,
+          "x": 372,
+          "y": 374
+        }
+      },
+      "pdf_sha256": "f29e90918e59630560b622955705642f37589643c341d8a5ee72dee697d48e62",
+      "signed_source_verified": true,
+      "source_sha256": "d40f0ab6cab4dc3e1c89120cc431f5974b18e509df613d21b44f2a09723dfa2b",
+      "unchanged_calibrated_signal_count": 3,
+      "unchanged_signal_count": 7
+    },
+    "lossy": {
+      "copy_transform": null,
+      "coverage": "unsupported_profile",
+      "embedded_crop_count": 0,
+      "native_regions": null,
+      "pdf_sha256": "b8fdd9b0d18ec799695a5c37088e9ed0dd17336bdc0b7a75eb9b46385b26c77b",
+      "signed_source_verified": true,
+      "source_sha256": "84cb1cada58cd403fa86a719757c34dadb2f1333f8514c7d5bdf706d7c460027"
+    },
+    "ordinary": {
+      "copy_transform": null,
+      "coverage": "no_pair",
+      "embedded_crop_count": 0,
+      "native_regions": null,
+      "pdf_sha256": "0dfbd0b6024bf2994f1b460759304eda95766ec147afdf35f53a068f57a2e3dc",
+      "signed_source_verified": true,
+      "source_sha256": "94b29b6ef29e40686329ac7fc801c1fb5c01dcd68b6b2f30fc8c8b45f44cdae8"
+    },
+    "rotation": {
+      "copy_transform": "rotate_90_ccw",
+      "coverage": "prior_selected",
+      "embedded_crop_count": 2,
+      "native_regions": {
+        "area_a": {
+          "h": 32,
+          "w": 34,
+          "x": 372,
+          "y": 374
+        },
+        "area_b": {
+          "h": 34,
+          "w": 32,
+          "x": 48,
+          "y": 58
+        }
+      },
+      "pdf_sha256": "ca01a9d094a0a27417c66d7a0c48a5343585e0cb01c3a28973465458e65ac9a3",
+      "signed_source_verified": true,
+      "source_sha256": "f79c9221389c12a4d2aaf1fc5a01c1044b3f967b30d9f2fe08ea36cd70a87c00"
+    },
+    "symmetry": {
+      "copy_transform": null,
+      "coverage": "unassessed_match_budget",
+      "embedded_crop_count": 0,
+      "native_regions": null,
+      "pdf_sha256": "d8a4c9f7662eebf7de173bace92fb0b4122efdfa988bfcc2928050ad6dc7be67",
+      "signed_source_verified": true,
+      "source_sha256": "6d985fe06463122ddd8f8f52d960ef3d7377805e3107c68368ea39cf9417dca7"
+    },
+    "vertical": {
+      "assessment_preserved": true,
+      "copy_transform": "vertical_reflection",
+      "coverage": "supported_pair",
+      "embedded_crop_count": 2,
+      "native_regions": {
+        "area_a": {
+          "h": 28,
+          "w": 32,
+          "x": 48,
+          "y": 58
+        },
+        "area_b": {
+          "h": 28,
+          "w": 32,
+          "x": 372,
+          "y": 374
+        }
+      },
+      "pdf_sha256": "5e04a715b22902e0920ebfc247bddfa96d6169f4994d95f6af44bb92e7e37bcb",
+      "signed_source_verified": true,
+      "source_sha256": "e3aea7d4d06d02f62d7b88423465682a95f4b6b2a2608e56dd8d6c0aa03d84bc",
+      "unchanged_calibrated_signal_count": 3,
+      "unchanged_signal_count": 7
+    }
+  },
+  "date": "2026-11-18",
+  "pdf_json_package_consistency_cases": 8,
+  "pdf_visual_review": [
+    "horizontal",
+    "vertical"
+  ],
+  "plain_browser_case_count": 8,
+  "schema": "chipmunk.image-exact-webp-reflection-app/1",
+  "simulated_paid_analyses": 10,
+  "test_mode": "isolated simulated Stripe",
+  "unpaid_jobs": 0
+}

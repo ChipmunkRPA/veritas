@@ -661,7 +661,7 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
         assert local == {('app.evidence.image_copy_similarity_binding', item) for item in
                          ('TURNED_JPEG_COPY_AFFINE_VERSION', 'EXPANDED_JPEG_ROTATION_AFFINE_VERSION',
                           'NATIVE_JPEG_ROTATION_AFFINE_VERSION', 'DISJOINT_JPEG_ROTATION_AFFINE_VERSION',
-                          'WEBP_EXACT_COPY_AFFINE_VERSION')}
+                          'WEBP_EXACT_COPY_AFFINE_VERSION', 'WEBP_EXACT_REFLECTION_AFFINE_VERSION')}
     elif name == 'document_chat_markers.py':
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.core.canonical', 'FLOAT_DP'), ('app.core.canonical', 'canonical_hash'),

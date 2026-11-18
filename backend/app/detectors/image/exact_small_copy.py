@@ -29,13 +29,15 @@ def _blocks(rgb, first, second, turns):
             rgb[b - _PERIMETER:b + v + _PERIMETER, a - _PERIMETER:a + u + _PERIMETER])
 
 
-def witness(rgb, first, second, *, turns=0):
+def witness(rgb, first, second, *, turns=0, reflection_axis=None):
     blocks = _blocks(rgb, first, second, turns)
     if blocks is None:
         return None
     before, after = blocks
     if turns:
         after = np.rot90(after, turns)
+    if reflection_axis is not None:
+        after = np.flip(after, axis=reflection_axis)
     core = before[_PERIMETER:-_PERIMETER, _PERIMETER:-_PERIMETER]
     if not np.array_equal(core, after[_PERIMETER:-_PERIMETER, _PERIMETER:-_PERIMETER]):
         return None

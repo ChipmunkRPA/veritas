@@ -69,6 +69,12 @@ from app.evidence.image_copy_similarity_binding import (
     WEBP_EXACT_COPY_KEY,
     WEBP_EXACT_COPY_VERSION,
     WEBP_EXACT_COPY_VERSIONS,
+    WEBP_EXACT_REFLECTION_AFFINE_VERSION,
+    WEBP_EXACT_REFLECTION_BASIS,
+    WEBP_EXACT_REFLECTION_KEY,
+    WEBP_EXACT_REFLECTION_NOTE,
+    WEBP_EXACT_REFLECTION_VERSION,
+    WEBP_EXACT_REFLECTION_VERSIONS,
     box_bounds,
     copy_records,
     exact_copy_size,
@@ -86,7 +92,9 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
 CREATOR = "image-evidence-packets/10"
-_CREATORS = {WEBP_EXACT_COPY_AFFINE_VERSION: "image-evidence-packets/31",
+_CREATORS = {WEBP_EXACT_REFLECTION_AFFINE_VERSION: "image-evidence-packets/33",
+             WEBP_EXACT_REFLECTION_VERSION: "image-evidence-packets/32",
+             WEBP_EXACT_COPY_AFFINE_VERSION: "image-evidence-packets/31",
              WEBP_EXACT_COPY_VERSION: "image-evidence-packets/30",
              DISJOINT_JPEG_ROTATION_AFFINE_VERSION: "image-evidence-packets/29",
              DISJOINT_JPEG_ROTATION_VERSION: "image-evidence-packets/28",
@@ -120,6 +128,8 @@ def _active_version() -> str:
 
 
 def _analysis_version(analysis: Analysis) -> str:
+    if settings.environment == "dev" and settings.image_lossless_webp_reflection_review and analysis.content_type == "image/webp":
+        return WEBP_EXACT_REFLECTION_AFFINE_VERSION if settings.image_affine_copy_review else WEBP_EXACT_REFLECTION_VERSION
     if settings.environment == "dev" and settings.image_lossless_webp_copy_review and analysis.content_type == "image/webp":
         return WEBP_EXACT_COPY_AFFINE_VERSION if settings.image_affine_copy_review else WEBP_EXACT_COPY_VERSION
     if settings.environment == "dev" and settings.image_turned_jpeg_copy_review and analysis.content_type == "image/jpeg":
@@ -212,14 +222,15 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
             verify(legacy._verified(store, document["source"]["sha256"]), translation["pairs"])
         except (OSError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
-    if translation.get("basis") in {SMALL_PNG_BASIS, TURNED_PNG_BASIS, WEBP_EXACT_COPY_BASIS}:
+    if translation.get("basis") in {SMALL_PNG_BASIS, TURNED_PNG_BASIS, WEBP_EXACT_COPY_BASIS, WEBP_EXACT_REFLECTION_BASIS}:
         from app.evidence.image_exact_small_copy_source import verify
 
-        webp = translation["basis"] == WEBP_EXACT_COPY_BASIS
-        key = WEBP_EXACT_COPY_KEY if webp else "small_png_copy_review"
+        reflected = translation["basis"] == WEBP_EXACT_REFLECTION_BASIS
+        webp = reflected or translation["basis"] == WEBP_EXACT_COPY_BASIS
+        key = WEBP_EXACT_REFLECTION_KEY if reflected else WEBP_EXACT_COPY_KEY if webp else "small_png_copy_review"
         try:
             verify(legacy._verified(store, document["source"]["sha256"]), translation["pairs"][0],
-                   translation[key]["measurement"], webp=webp)
+                   translation[key]["measurement"], webp=webp, reflected=reflected)
         except (OSError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
     if translation.get("basis") == OFFGRID_BASIS:
@@ -271,7 +282,8 @@ def selected_translation_pairs(rgb: np.ndarray) -> tuple[str, list[tuple[copy_mo
 
 
 def _copy_record(db: Session, analysis: Analysis, store: ObjectStore, document: dict, source: Image.Image | None,
-                 status: str, boxes: list, *, reflected: bool, turns: int | tuple[int, ...] = 0) -> dict:
+                 status: str, boxes: list, *, reflected: bool, turns: int | tuple[int, ...] = 0,
+                 exact_reflection: str | None = None) -> dict:
     pairs = []
     rotations = (turns,) * len(boxes) if isinstance(turns, int) else turns
     for index, (areas, rotation) in enumerate(zip(boxes, rotations, strict=True), 1):
@@ -287,11 +299,12 @@ def _copy_record(db: Session, analysis: Analysis, store: ObjectStore, document: 
             artifacts[role] = {"sha256": art.sha256, "media_type": "image/png", "width": crop.width,
                                "height": crop.height, "url": url(document, art.sha256)}
         pairs.append({"id": f"{'R' if reflected else 'T'}{index:02d}",
-                      "transform": "horizontal_reflection" if reflected else PNG_COPY_TRANSFORMS[rotation],
+                      "transform": exact_reflection or ("horizontal_reflection" if reflected else PNG_COPY_TRANSFORMS[rotation]),
                       "regions": regions, "artifacts": artifacts})
     return {"schema": SCHEMA if reflected else TRANSLATION_SCHEMA,
             "source_sha256": analysis.sha256, "coordinate_space": "exif-oriented-original", "status": status,
-            "authorship_confidence_contribution": 0, "pairs": pairs, "interpretation": NOTE if reflected else TRANSLATION_NOTE}
+            "authorship_confidence_contribution": 0, "pairs": pairs,
+            "interpretation": WEBP_EXACT_REFLECTION_NOTE if exact_reflection else NOTE if reflected else TRANSLATION_NOTE}
 
 
 def _affine_record(db: Session, analysis: Analysis, store: ObjectStore, document: dict,
@@ -386,8 +399,9 @@ def build_packet_set(
     size = document["source"]["width"], document["source"]["height"]
     status, boxes = "unsupported_geometry", []
     translation_status, translations, basis, source = "unsupported_geometry", [], None, None
-    jpeg_status = offgrid_review = turned_jpeg_review = exact_review = None
+    jpeg_status = offgrid_review = turned_jpeg_review = exact_review = reflection_review = exact_reflection = None
     webp = version in WEBP_EXACT_COPY_VERSIONS
+    webp_reflection = version in WEBP_EXACT_REFLECTION_VERSIONS
     turns = 0
     skipped = result_skip(result) is not None
     if skipped:
@@ -454,9 +468,26 @@ def build_packet_set(
         if extra:
             source = source if source is not None else _source(document, store)
             translations, basis = extra, WEBP_EXACT_COPY_BASIS if webp else (TURNED_PNG_BASIS if turns else SMALL_PNG_BASIS)
+    if webp_reflection and version in AFFINE_VERSIONS:
+        document[affine.KEY] = _affine_record(db, analysis, store, document, source, skip=skipped)
+    affine_status = (document.get(affine.KEY) or {}).get("status")
+    if (webp_reflection and exact_review and status in {"no_pair", "unsupported_geometry"}
+            and affine_status in {None, "no_pair", "unsupported_geometry"}):
+        if exact_review["status"] == "unsupported_profile":
+            reflection_review = exact_review
+        elif exact_review["status"] == "no_pair":
+            from app.evidence.image_exact_small_copy_source import review_reflection
+
+            try:
+                reflection_review, extra, exact_reflection = review_reflection(legacy._verified(store, analysis.sha256))
+            except (cv2.error, OSError, ValueError, SystemError):
+                reflection_review, extra = {"status": "unavailable", "measurement": None}, []
+            if extra:
+                source = source if source is not None else _source(document, store)
+                translation_status, translations, basis = "supported_pair", extra, WEBP_EXACT_REFLECTION_BASIS
     document["copy_similarity"] = _copy_record(db, analysis, store, document, source, status, boxes, reflected=True)
     document["copy_translation"] = _copy_record(db, analysis, store, document, source, translation_status,
-                                                translations, reflected=False, turns=turns)
+                                                translations, reflected=False, turns=turns, exact_reflection=exact_reflection)
     document["copy_translation"]["basis"] = basis
     if version in JPEG_BLOCK_VERSIONS:
         document["copy_translation"]["jpeg_block_review"] = jpeg_status
@@ -468,7 +499,9 @@ def build_packet_set(
         document["copy_translation"]["small_png_copy_review"] = exact_review
     if webp:
         document["copy_translation"][WEBP_EXACT_COPY_KEY] = exact_review
-    if version in AFFINE_VERSIONS:
+    if webp_reflection:
+        document["copy_translation"][WEBP_EXACT_REFLECTION_KEY] = reflection_review
+    if not webp_reflection and version in AFFINE_VERSIONS:
         document[affine.KEY] = _affine_record(db, analysis, store, document, source, skip=skipped)
     document = json.loads(canonical_json(document))
     document["sha256"] = prior.packet_hash(document)

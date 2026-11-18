@@ -88,12 +88,33 @@ def review(data, *, include_rotation=False, webp=False):
     return {"status": item["status"], "measurement": match["measurement"]}, [match["pair"]], match.get("turns", 0)
 
 
-def verify(data, pair, measurement, *, webp=False):
+def review_reflection(data):
+    from app.detectors.image import exact_reflected_copy
+
+    pixels = webp_rgb(data)
+    if pixels is None:
+        return {"status": "unsupported_profile", "measurement": None}, [], None
+    item = exact_reflected_copy.analyse(pixels)
+    if not item["pairs"]:
+        return {"status": item["status"], "measurement": None}, [], None
+    match, = item["pairs"]
+    return {"status": item["status"], "measurement": match["measurement"]}, [match["pair"]], match["transform"]
+
+
+def verify(data, pair, measurement, *, webp=False, reflected=False):
     pixels = webp_rgb(data) if webp else native_rgb(data)
     if pixels is None:
         carrier = "lossless WebP" if webp else "PNG"
         raise ValueError(f"Exact copy comparison requires an upright static RGB {carrier} within its tested size.")
     boxes = [tuple(pair["regions"][role][key] for key in "xywh") for role in ROLES]
-    turns = PNG_COPY_TURNS.get(pair.get("transform"))
-    if turns is None or exact_small_copy.witness(pixels, *boxes, turns=turns) != measurement:
+    transform = pair.get("transform")
+    if reflected:
+        from app.detectors.image.exact_reflected_copy import AXES
+
+        axis = AXES.get(transform)
+        recorded = exact_small_copy.witness(pixels, *boxes, reflection_axis=axis) if webp and axis is not None else None
+    else:
+        turns = PNG_COPY_TURNS.get(transform)
+        recorded = exact_small_copy.witness(pixels, *boxes, turns=turns) if turns is not None else None
+    if recorded is None or recorded != measurement:
         raise ValueError("Exact copy measurement differs from the submitted RGB pixels or surroundings.")

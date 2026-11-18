@@ -31,7 +31,10 @@ DISJOINT_JPEG_ROTATION_VERSION = "image-evidence-30"
 DISJOINT_JPEG_ROTATION_AFFINE_VERSION = "image-evidence-31"
 WEBP_EXACT_COPY_VERSION = "image-evidence-32"
 WEBP_EXACT_COPY_AFFINE_VERSION = "image-evidence-33"
-WEBP_EXACT_COPY_VERSIONS = frozenset({WEBP_EXACT_COPY_VERSION, WEBP_EXACT_COPY_AFFINE_VERSION})
+WEBP_EXACT_REFLECTION_VERSION = "image-evidence-34"
+WEBP_EXACT_REFLECTION_AFFINE_VERSION = "image-evidence-35"
+WEBP_EXACT_REFLECTION_VERSIONS = frozenset({WEBP_EXACT_REFLECTION_VERSION, WEBP_EXACT_REFLECTION_AFFINE_VERSION})
+WEBP_EXACT_COPY_VERSIONS = WEBP_EXACT_REFLECTION_VERSIONS | {WEBP_EXACT_COPY_VERSION, WEBP_EXACT_COPY_AFFINE_VERSION}
 DISJOINT_JPEG_ROTATION_VERSIONS = frozenset({DISJOINT_JPEG_ROTATION_VERSION, DISJOINT_JPEG_ROTATION_AFFINE_VERSION})
 NATIVE_JPEG_ROTATION_VERSIONS = DISJOINT_JPEG_ROTATION_VERSIONS | {NATIVE_JPEG_ROTATION_VERSION, NATIVE_JPEG_ROTATION_AFFINE_VERSION}
 DISJOINT_ROTATION_MARGIN = 16
@@ -46,6 +49,13 @@ SMALL_PNG_BASIS = "png_exact_small_copy"
 TURNED_PNG_BASIS = "png_exact_turned_copy"
 WEBP_EXACT_COPY_BASIS = "webp_exact_copy"
 WEBP_EXACT_COPY_KEY = "webp_exact_copy_review"
+WEBP_EXACT_REFLECTION_BASIS = "webp_exact_reflected_copy"
+WEBP_EXACT_REFLECTION_KEY = "webp_exact_reflection_review"
+WEBP_REFLECTION_TRANSFORMS = ("horizontal_reflection", "vertical_reflection")
+WEBP_EXACT_REFLECTION_NOTE = (
+    "The displayed crops match after reflection. Reflected copies or repeated graphic elements can produce a match. "
+    "The comparison cannot establish which area came first or whether AI was involved."
+)
 PNG_COPY_TRANSFORMS = {0: "same_orientation", 1: "rotate_90_ccw", 2: "rotate_180"}
 PNG_COPY_TURNS = {transform: turns for turns, transform in PNG_COPY_TRANSFORMS.items()}
 SMALL_PNG_STATUS_TEXT = {
@@ -61,6 +71,13 @@ WEBP_EXACT_COPY_STATUS_TEXT = {
     "no_pair": "The lossless WebP check found no qualifying exact pair with or without right-angle rotation.",
     "unsupported_profile": "Exact comparison requires an opaque lossless WebP still with sides from 512 to 768 pixels.",
 }
+WEBP_EXACT_REFLECTION_STATUS_TEXT = {
+    **WEBP_EXACT_COPY_STATUS_TEXT,
+    "no_pair": "The reflection check found no qualifying exact pair after a horizontal or vertical flip.",
+    "unassessed_match_budget": "Too many matching areas prevented the reflection check from isolating a pair.",
+    "ambiguous_pairs": "Several reflected pairs met the evidence requirements, so no single pair is shown.",
+    "unavailable": "The exact reflection check could not complete.",
+}
 JPEG_OFFGRID_VERSIONS = TURNED_JPEG_VERSIONS | {JPEG_OFFGRID_VERSION, JPEG_OFFGRID_AFFINE_VERSION}
 JPEG_BLOCK_VERSIONS = JPEG_OFFGRID_VERSIONS | {JPEG_BLOCK_VERSION, JPEG_BLOCK_AFFINE_VERSION}
 VERSION = V12
@@ -68,7 +85,7 @@ AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_A
                              SMALL_PNG_COPY_AFFINE_VERSION, TURNED_PNG_COPY_AFFINE_VERSION,
                              TURNED_JPEG_COPY_AFFINE_VERSION, EXPANDED_JPEG_ROTATION_AFFINE_VERSION,
                              NATIVE_JPEG_ROTATION_AFFINE_VERSION, DISJOINT_JPEG_ROTATION_AFFINE_VERSION,
-                             WEBP_EXACT_COPY_AFFINE_VERSION})
+                             WEBP_EXACT_COPY_AFFINE_VERSION, WEBP_EXACT_REFLECTION_AFFINE_VERSION})
 CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12} | JPEG_BLOCK_VERSIONS | SMALL_PNG_VERSIONS | WEBP_EXACT_COPY_VERSIONS
 TRANSLATION_VERSIONS = CREDENTIAL_VERSIONS | {V10, V11}
 BASIS_VERSIONS = CREDENTIAL_VERSIONS | {V11}
@@ -352,6 +369,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     has_offgrid_review = not reflected and document["version"] in JPEG_OFFGRID_VERSIONS
     has_turned_jpeg_review = not reflected and document["version"] in TURNED_JPEG_VERSIONS
     webp = not reflected and document["version"] in WEBP_EXACT_COPY_VERSIONS
+    reflection_review = not reflected and document["version"] in WEBP_EXACT_REFLECTION_VERSIONS
     has_exact_review = webp or (not reflected and document["version"] in SMALL_PNG_VERSIONS)
     exact_key = WEBP_EXACT_COPY_KEY if webp else "small_png_copy_review"
     exact_size = has_exact_review and exact_copy_size(*size, webp=webp)
@@ -377,6 +395,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         fields.add("jpeg_turned_review")
     if has_exact_review:
         fields.add(exact_key)
+    if reflection_review:
+        fields.add(WEBP_EXACT_REFLECTION_KEY)
     if not isinstance(record, dict) or set(record) != fields:
         raise ValueError("Copy similarity has an invalid record")
     status, pairs = record["status"], record["pairs"]
@@ -387,7 +407,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         or record["coordinate_space"] != "exif-oriented-original"
         or type(record["authorship_confidence_contribution"]) is not int
         or record["authorship_confidence_contribution"] != 0
-        or record["interpretation"] != (NOTE if reflected else TRANSLATION_NOTE)
+        or record["interpretation"] != (NOTE if reflected else WEBP_EXACT_REFLECTION_NOTE
+                                       if reflection_review and record.get("basis") == WEBP_EXACT_REFLECTION_BASIS else TRANSLATION_NOTE)
         or status not in STATUS_TEXT
         or (skipped and document["version"] not in CREDENTIAL_VERSIONS)
         or (not skipped and (status == "unsupported_geometry") == supported)
@@ -416,12 +437,23 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
             raise ValueError("Native rotation evidence differs from its recorded source or result")
     if turned_jpeg_pair and len(pairs) != turned_jpeg_pair:
         raise ValueError("Rotated JPEG evidence must contain the recorded measured pairs")
+    reflected_exact_pair = False
+    if reflection_review and (reflection := record[WEBP_EXACT_REFLECTION_KEY]) is not None:
+        reflected_exact_pair = _validate_exact_copy(reflection)
+        legacy_review = record[exact_key]
+        previous = "unsupported_profile" if reflection["status"] == "unsupported_profile" else "no_pair"
+        if (not exact_size or not legacy_review or legacy_review["status"] != previous
+                or document["copy_similarity"]["status"] not in {"no_pair", "unsupported_geometry"}
+                or (document.get("copy_affine") or {}).get("status") not in {None, "no_pair", "unsupported_geometry"}
+                or status != ("supported_pair" if reflected_exact_pair else "no_pair")
+                or (reflected_exact_pair and len(pairs) != 1)):
+            raise ValueError("Reflected exact copy coverage differs from the completed source checks")
     exact_pair = False
     if has_exact_review and (review := record[exact_key]) is not None:
         exact_pair = _validate_exact_copy(review)
         if (not exact_size
                 or (review["status"] != "unsupported_profile" and document["source"]["exif_orientation"] != 1)
-                or status != ("supported_pair" if exact_pair else "no_pair")
+                or status != ("supported_pair" if exact_pair or reflected_exact_pair else "no_pair")
                 or (exact_pair and len(pairs) != 1)):
             raise ValueError("Exact copy coverage differs from the native source or recorded result")
     if has_basis:
@@ -439,6 +471,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
             else:
                 expected = ((SMALL_PNG_BASIS, TURNED_PNG_BASIS) if document["version"] in TURNED_PNG_VERSIONS
                             else (SMALL_PNG_BASIS,))
+        if reflected_exact_pair:
+            expected = (WEBP_EXACT_REFLECTION_BASIS,)
         if basis not in expected:
             raise ValueError("Copy similarity has an invalid matching basis")
     jpeg_pair = has_jpeg_review and record["jpeg_block_review"] == "supported_pair"
@@ -453,6 +487,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     for index, pair in enumerate(pairs, 1):
         turned = record.get("basis") in {TURNED_PNG_BASIS, TURNED_JPEG_BASIS}
         transforms = (("horizontal_reflection",) if reflected else
+                      WEBP_REFLECTION_TRANSFORMS if reflected_exact_pair else
                       tuple(PNG_COPY_TRANSFORMS.values()) if record.get("basis") == WEBP_EXACT_COPY_BASIS else
                       (PNG_COPY_TRANSFORMS[1], PNG_COPY_TRANSFORMS[2]) if turned else ("same_orientation",))
         if (
@@ -482,13 +517,14 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         ax, ay, aw, ah = boxes[0]
         bx, by, bw, bh = boxes[1]
         overlaps = ax < bx + bw and bx < ax + aw and ay < by + bh and by < ay + ah
-        equal_size = (reflected or offgrid_pair or exact_pair or turned_jpeg_pair
+        equal_size = (reflected or offgrid_pair or exact_pair or reflected_exact_pair or turned_jpeg_pair
                       or record.get("basis") in {"native_patch_alignment", JPEG_BLOCK_BASIS})
         aligned_size = (bh, bw) if pair["transform"] == PNG_COPY_TRANSFORMS[1] else (bw, bh)
         if overlaps or (equal_size and (aw, ah) != aligned_size):
             raise ValueError("The paired areas must be separate and aligned areas must share a native size")
-        if exact_pair and (not SMALL_PNG_CROP_MIN <= min(aw, ah) <= max(aw, ah) <= SMALL_PNG_CROP_MAX
-                           or record[exact_key]["measurement"]["matching_pixels"] != aw * ah
+        measurement_key = WEBP_EXACT_REFLECTION_KEY if reflected_exact_pair else exact_key
+        if (exact_pair or reflected_exact_pair) and (not SMALL_PNG_CROP_MIN <= min(aw, ah) <= max(aw, ah) <= SMALL_PNG_CROP_MAX
+                           or record[measurement_key]["measurement"]["matching_pixels"] != aw * ah
                            or (pair["transform"] == PNG_COPY_TRANSFORMS[0]
                                and pair["artifacts"]["area_a"]["sha256"] != pair["artifacts"]["area_b"]["sha256"])):
             carrier = "Lossless WebP" if webp else "Small PNG"

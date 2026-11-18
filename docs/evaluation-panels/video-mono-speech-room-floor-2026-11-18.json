@@ -1,0 +1,309 @@
+{
+  "frozen_gate": {
+    "aac48": {
+      "correct": false,
+      "groups": false,
+      "ordinary_files": true,
+      "ordinary_groups": true,
+      "paired_gains": false,
+      "preserved_clean_near_silence": true,
+      "wrong_ranges": true
+    },
+    "pcm": {
+      "correct": false,
+      "groups": false,
+      "ordinary_files": true,
+      "ordinary_groups": true,
+      "paired_gains": false,
+      "preserved_clean_near_silence": true,
+      "wrong_ranges": true
+    }
+  },
+  "frozen_gate_passed": false,
+  "method_selection_and_threshold": {
+    "additional_measured_loud_edits": 0,
+    "branch": "4-3.5",
+    "development_penalty": 0,
+    "development_reward": 0,
+    "point": 420000,
+    "rank": [
+      true,
+      0,
+      0,
+      0,
+      420000,
+      4,
+      -3.5
+    ],
+    "rule": {
+      "min_quiet_each_side": 4,
+      "room_tolerance_db": 3.5
+    }
+  },
+  "natural_controls": {
+    "counts_by_carrier": {
+      "aac48/natural": {
+        "baseline": {
+          "flag_role_natural_untouched": 2,
+          "ordinary_assessed": 3,
+          "ordinary_files": 3,
+          "ordinary_flag": 2,
+          "ordinary_flag_groups": 2
+        },
+        "combined": {
+          "flag_role_natural_untouched": 2,
+          "ordinary_assessed": 3,
+          "ordinary_files": 3,
+          "ordinary_flag": 2,
+          "ordinary_flag_groups": 2
+        },
+        "paired_change": {},
+        "spectral_only": {
+          "ordinary_files": 3
+        }
+      },
+      "pcm/natural": {
+        "baseline": {
+          "flag_role_natural_untouched": 2,
+          "ordinary_assessed": 3,
+          "ordinary_files": 3,
+          "ordinary_flag": 2,
+          "ordinary_flag_groups": 2
+        },
+        "combined": {
+          "flag_role_natural_untouched": 2,
+          "ordinary_assessed": 3,
+          "ordinary_files": 3,
+          "ordinary_flag": 2,
+          "ordinary_flag_groups": 2
+        },
+        "paired_change": {},
+        "spectral_only": {
+          "ordinary_files": 3
+        }
+      }
+    },
+    "excluded_audio_clock_groups": [
+      {
+        "group": 2,
+        "reason": "cannot_bind_2_seconds_of_original_audio_to_one_continuous_clock"
+      },
+      {
+        "group": 5,
+        "reason": "cannot_bind_2_seconds_of_original_audio_to_one_continuous_clock"
+      }
+    ],
+    "rendered_files": 6,
+    "selected_groups": 5
+  },
+  "private_run_commitments": {
+    "freeze.json": "931ac733be1596c28b169c5443f1e6e4e7b6e604702e6981a4f13efd80dc2d8c",
+    "held-source-lock.json": "20da3347e666ba7f59ba9a633654b7d23362a70b1a0f49994882651da33ef81f",
+    "held.json.gz": "2b9ba221583ed67c1d415f6316643adb8d5e8d2d4e0df9630b322c56ffdf21ae",
+    "natural.json": "578548e8556111039bc09d0f1303b435b0a24f6dae673834bf8bcb0296f2897c",
+    "recounted.json": "a8df36c3d09f9ea2eb0030af87c9b0c41153911889a2f49dbfaa025ea0ba3287"
+  },
+  "schema": "chipmunk.mono-room-floor-evaluation-summary/1",
+  "scope": "Staged speech removals with independently preserved room sound, with separate unchanged camera controls.",
+  "source_checks": {
+    "admitted_held_groups": 7,
+    "excluded_group": "The selected room stem did not reach the mix renderer minimum of 8 RMS PCM units.",
+    "locked_held_groups": 8,
+    "native_verification": {
+      "audio_samples": 9147744,
+      "codec_padding": 13648,
+      "native_picture_frames": 17152
+    },
+    "rendered_held_files": 224
+  },
+  "staged_recount": {
+    "aac48/-5": {
+      "baseline": {
+        "correct": 2,
+        "correct_groups": 1,
+        "edit_assessed": 10,
+        "edit_files": 14,
+        "flag_role_local_duck": 1,
+        "flag_role_local_eq": 1,
+        "ordinary_assessed": 26,
+        "ordinary_files": 35,
+        "ordinary_flag": 2,
+        "ordinary_flag_groups": 1,
+        "wrong": 1,
+        "wrong_groups": 1
+      },
+      "combined": {
+        "correct": 2,
+        "correct_groups": 1,
+        "edit_assessed": 10,
+        "edit_files": 14,
+        "flag_role_local_duck": 1,
+        "flag_role_local_eq": 1,
+        "ordinary_assessed": 26,
+        "ordinary_files": 35,
+        "ordinary_flag": 2,
+        "ordinary_flag_groups": 1,
+        "wrong": 1,
+        "wrong_groups": 1
+      },
+      "paired_change": {},
+      "spectral_only": {
+        "edit_assessed": 2,
+        "edit_files": 14,
+        "ordinary_assessed": 1,
+        "ordinary_files": 35
+      }
+    },
+    "aac48/8": {
+      "baseline": {
+        "correct": 9,
+        "correct_groups": 5,
+        "edit_assessed": 14,
+        "edit_files": 14,
+        "flag_role_local_duck": 2,
+        "ordinary_assessed": 35,
+        "ordinary_files": 35,
+        "ordinary_flag": 2,
+        "ordinary_flag_groups": 2
+      },
+      "combined": {
+        "correct": 9,
+        "correct_groups": 5,
+        "edit_assessed": 14,
+        "edit_files": 14,
+        "flag_role_local_duck": 2,
+        "ordinary_assessed": 35,
+        "ordinary_files": 35,
+        "ordinary_flag": 2,
+        "ordinary_flag_groups": 2
+      },
+      "paired_change": {},
+      "spectral_only": {
+        "edit_files": 14,
+        "ordinary_files": 35
+      }
+    },
+    "aac48/clean": {
+      "baseline": {
+        "correct": 6,
+        "correct_groups": 6,
+        "edit_assessed": 7,
+        "edit_files": 7,
+        "ordinary_assessed": 7,
+        "ordinary_files": 7
+      },
+      "combined": {
+        "correct": 6,
+        "correct_groups": 6,
+        "edit_assessed": 7,
+        "edit_files": 7,
+        "ordinary_assessed": 7,
+        "ordinary_files": 7
+      },
+      "paired_change": {
+        "preserved_near_silence": 6
+      },
+      "spectral_only": {
+        "correct": 6,
+        "correct_groups": 6,
+        "edit_assessed": 6,
+        "edit_files": 7,
+        "ordinary_files": 7
+      }
+    },
+    "pcm/-5": {
+      "baseline": {
+        "correct": 2,
+        "correct_groups": 1,
+        "edit_assessed": 8,
+        "edit_files": 14,
+        "flag_role_local_duck": 1,
+        "flag_role_local_eq": 1,
+        "ordinary_assessed": 26,
+        "ordinary_files": 35,
+        "ordinary_flag": 2,
+        "ordinary_flag_groups": 1,
+        "wrong": 2,
+        "wrong_groups": 1
+      },
+      "combined": {
+        "correct": 2,
+        "correct_groups": 1,
+        "edit_assessed": 8,
+        "edit_files": 14,
+        "flag_role_local_duck": 1,
+        "flag_role_local_eq": 1,
+        "ordinary_assessed": 27,
+        "ordinary_files": 35,
+        "ordinary_flag": 2,
+        "ordinary_flag_groups": 1,
+        "wrong": 2,
+        "wrong_groups": 1
+      },
+      "paired_change": {},
+      "spectral_only": {
+        "edit_assessed": 2,
+        "edit_files": 14,
+        "ordinary_assessed": 1,
+        "ordinary_files": 35
+      }
+    },
+    "pcm/8": {
+      "baseline": {
+        "correct": 10,
+        "correct_groups": 5,
+        "edit_assessed": 14,
+        "edit_files": 14,
+        "flag_role_local_duck": 2,
+        "ordinary_assessed": 35,
+        "ordinary_files": 35,
+        "ordinary_flag": 2,
+        "ordinary_flag_groups": 2
+      },
+      "combined": {
+        "correct": 10,
+        "correct_groups": 5,
+        "edit_assessed": 14,
+        "edit_files": 14,
+        "flag_role_local_duck": 2,
+        "ordinary_assessed": 35,
+        "ordinary_files": 35,
+        "ordinary_flag": 2,
+        "ordinary_flag_groups": 2
+      },
+      "paired_change": {},
+      "spectral_only": {
+        "edit_files": 14,
+        "ordinary_files": 35
+      }
+    },
+    "pcm/clean": {
+      "baseline": {
+        "correct": 6,
+        "correct_groups": 6,
+        "edit_assessed": 7,
+        "edit_files": 7,
+        "ordinary_assessed": 7,
+        "ordinary_files": 7
+      },
+      "combined": {
+        "correct": 6,
+        "correct_groups": 6,
+        "edit_assessed": 7,
+        "edit_files": 7,
+        "ordinary_assessed": 7,
+        "ordinary_files": 7
+      },
+      "paired_change": {
+        "preserved_near_silence": 6
+      },
+      "spectral_only": {
+        "correct": 6,
+        "correct_groups": 6,
+        "edit_assessed": 6,
+        "edit_files": 7,
+        "ordinary_files": 7
+      }
+    }
+  }
+}

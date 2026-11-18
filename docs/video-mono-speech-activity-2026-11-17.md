@@ -132,6 +132,29 @@ python3 -B -IS backend/scripts/independent_review.py compare-events \
   "$review/preserve_near_silence.json" "$review/paired.json" --match 0.4 0.4
 ```
 
+## Room reference and camera controls
+
+A further comparison estimated the room sound from quiet blocks outside
+each candidate. It looked for falling speech-band energy while other
+bands stayed steady. Six separate development groups set the rule. Of
+eight locked held groups, seven passed the existing mix renderer's
+minimum room level. A separate readback verified 224 deliveries against
+their original clocks and samples.
+
+At the stronger tested room level, the combined check still located
+2 of 14 edits per encoding. The room reference added no locations at
+either room level and preserved all six clean near-silence locations
+per encoding. In development, the room recordings supplied measurable
+energy in only one of the required bands. The comparison fell short
+of the frozen improvement requirement.
+
+Three of five separately selected camera excerpts had contiguous
+audio clocks. The earlier two-reading rule flagged two of these three
+ordinary clips in both encodings. The room reference and near-silence
+check flagged zero. This small real-world control set adds evidence
+against expanding the mono check from staged mixes to customer uploads.
+[Room reference and camera control results](evaluation-panels/video-mono-speech-room-floor-2026-11-18.json)
+
 ## Replay
 
 The [reservation](evaluation-panels/video-mono-speech-activity-plan-2026-11-17.json.gz),

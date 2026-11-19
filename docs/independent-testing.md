@@ -48,6 +48,8 @@ reports an exact three-frame recovery on held video and compares two ways of
 rejecting ordinary blur. The
 [exact-room-voice experiment](audio-room-voice-recovery-ceiling-2026-11-19.md)
 tests whether removing overlapping speech alone recovers known edits.
+The [short-speech room transfer](audio-room-layer-short-transfer-2026-11-19.md)
+separately compares response recalibration and layer fitting on two held rooms.
 The [sentence omission comparison](writing-sentence-omission-2026-11-19.md)
 checks whether a single-upload writing measurement points to the changed
 sentence or to a location that already scored in the untouched excerpt.

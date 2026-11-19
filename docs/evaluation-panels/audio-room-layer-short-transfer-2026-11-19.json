@@ -1,0 +1,191 @@
+{
+  "closed": true,
+  "counts": {
+    "incumbent": {
+      "aachen": {
+        "edited_total": 18,
+        "label_total": 24,
+        "labels_located": 1,
+        "missed_files": 17,
+        "ordinary_flags": 0,
+        "ordinary_total": 12,
+        "useful_files": 1,
+        "wrong_only_files": 0
+      },
+      "huddersfield": {
+        "edited_total": 18,
+        "label_total": 24,
+        "labels_located": 2,
+        "missed_files": 16,
+        "ordinary_flags": 1,
+        "ordinary_total": 12,
+        "useful_files": 2,
+        "wrong_only_files": 2
+      }
+    },
+    "learned": {
+      "aachen": {
+        "edited_total": 18,
+        "label_total": 24,
+        "labels_located": 1,
+        "missed_files": 17,
+        "ordinary_flags": 1,
+        "ordinary_total": 12,
+        "useful_files": 1,
+        "wrong_only_files": 3
+      },
+      "huddersfield": {
+        "edited_total": 18,
+        "label_total": 24,
+        "labels_located": 7,
+        "missed_files": 11,
+        "ordinary_flags": 4,
+        "ordinary_total": 12,
+        "useful_files": 7,
+        "wrong_only_files": 4
+      }
+    },
+    "point_only": {
+      "aachen": {
+        "edited_total": 18,
+        "label_total": 24,
+        "labels_located": 1,
+        "missed_files": 17,
+        "ordinary_flags": 1,
+        "ordinary_total": 12,
+        "useful_files": 1,
+        "wrong_only_files": 3
+      },
+      "huddersfield": {
+        "edited_total": 18,
+        "label_total": 24,
+        "labels_located": 4,
+        "missed_files": 14,
+        "ordinary_flags": 1,
+        "ordinary_total": 12,
+        "useful_files": 4,
+        "wrong_only_files": 0
+      }
+    }
+  },
+  "elapsed_inference_seconds": 474.5454335840186,
+  "learned_summary": {
+    "added_ordinary_seconds": 5.0,
+    "gain_rooms": 1,
+    "gain_single_families": 2,
+    "gain_source_pairs": 3,
+    "matched_ordinary_collision_files": 0,
+    "new_ordinary_flags": 4,
+    "new_useful_files": 5,
+    "quieter_only_gains": 0
+  },
+  "methods": {
+    "incumbent": "Frozen existing two-second and adjacent 750 ms methods on canonical original mono.",
+    "learned": "Retain incumbent and add a nonnegative simplex combination of frozen per-layer classifier-head responses plus bias. Balanced fitting-only logistic loss, one predeclared regularization, separately frozen genuine point.",
+    "limits": "Six-second evaluation inputs are outside the current twelve-second brief-review product admission. This study cannot activate a product change.",
+    "point_only": "Retain incumbent and add unchanged original 750 ms responses at a point frozen only on four separate genuine source-pair maxima.",
+    "point_policy": "Strictly exceed the second-highest of four genuine source-pair adjacent-window maxima."
+  },
+  "original_frozen_learned_gate": {
+    "both_single_edit_families": true,
+    "four_useful_gains": true,
+    "gains_both_rooms": false,
+    "layer_fit_beats_point_only": true,
+    "layer_fit_false_vs_point_only": false,
+    "matched_control_collision_budget": true,
+    "no_room_useful_loss": true,
+    "ordinary_budget": false,
+    "ordinary_seconds_budget": false,
+    "three_source_pairs": true,
+    "two_quieter_gains": false,
+    "wrong_only_each_room": false
+  },
+  "original_gate_passed": false,
+  "point_only_paired": {
+    "added_ordinary_seconds": 1.25,
+    "added_useful_deliveries": 2,
+    "existing_wrong_intervals_retained": true,
+    "formal_new_adoption_gate_created_after_results": false,
+    "gain_physical_labelled_events": 1,
+    "gain_quieter_only_deliveries": 0,
+    "gain_rooms": 1,
+    "gain_source_pairs": 1,
+    "gain_synthesis_families": 1,
+    "lost_useful_deliveries": 0,
+    "matched_ordinary_collision_files": 0,
+    "new_ordinary_files": 1,
+    "new_ordinary_kind": "matched_genuine_splice",
+    "new_ordinary_source_pairs": 1,
+    "next_step": "Separately frozen native twelve-second source/room confirmation with realistic ordinary edits and unchanged candidate point. No activation.",
+    "wrong_only_additions": {
+      "aachen": 3,
+      "huddersfield": 0
+    },
+    "wrong_only_converted_to_useful": {
+      "aachen": 0,
+      "huddersfield": 2
+    }
+  },
+  "production_activation_supported": false,
+  "publisher_sources": [
+    "https://zenodo.org/records/19522979",
+    "https://www.openslr.org/94/",
+    "https://huggingface.co/Sadanie/pellav2-audio-deepfake-detector"
+  ],
+  "reuse_and_limits": [
+    "All sources appeared in earlier project evaluations. New hidden-layer short-window responses were opened only in the sealed role order.",
+    "Six fitting readers, eight genuine-only point readers and 24 transfer readers are declared source-group separated. The transfer source selection pins its exclusions against older stock host/donor rosters. Cross-corpus aliases and training overlap remain unresolved.",
+    "Repeated delivery conditions and placements are correlated. The two point-only useful additions share one physical edited voice and one source pair.",
+    "Point-only paired review is a descriptive post-closure comparison of an arm frozen before held scoring. Its promise does not overturn the original learned-arm gate.",
+    "Room-rendered stationary mixtures do not establish accuracy for natural conversations, other rooms, clips or languages.",
+    "The aggregate excludes individual identities, source names, exact edit times, individual hashes, paths, audio, hidden vectors and response traces. Exact source/model replay requires retained private custody."
+  ],
+  "schema": "chipmunk.room-layer-short-transfer-aggregate/1",
+  "scope": {
+    "classified_view": "unchanged production-decoded mono",
+    "fit_inputs": 132,
+    "fit_parameters": 26,
+    "fit_reader_pairs": 3,
+    "fit_readers": 6,
+    "fit_rooms": 1,
+    "frozen_layer_count": 25,
+    "native_sample_rate_hz": 16000,
+    "native_seconds": 6,
+    "new_downloads": 0,
+    "new_synthesis": 0,
+    "point_inputs": 48,
+    "point_reader_pairs": 4,
+    "point_readers": 8,
+    "point_rooms": 1,
+    "source_stereo_channels": 2,
+    "transfer_edited_files": 36,
+    "transfer_inputs": 60,
+    "transfer_labelled_edit_clocks": 48,
+    "transfer_ordinary_files": 24,
+    "transfer_reader_pairs": 12,
+    "transfer_readers": 24,
+    "transfer_rooms": 2
+  },
+  "speaker_attribution_supported": false,
+  "verification": {
+    "authored_compatibility_calls": 3,
+    "authored_controls": 9,
+    "development_actual_calls": 1073,
+    "development_distinct_classifier_inputs": 1072,
+    "exact_initial_repeats": 2,
+    "exact_original_short_window_parity": 660,
+    "finite_difference_gradient": true,
+    "independent_canonical_pcm_replays": 240,
+    "independent_optimizer_and_points": true,
+    "independent_replay_passed": true,
+    "max_original_head_reconstruction_error": 1.6904924544647315e-06,
+    "native_inputs_checked": 240,
+    "native_stereo_sample_identities": 46080000,
+    "source_window_admission_bindings": 2640,
+    "transfer_actual_calls": 414,
+    "transfer_distinct_classifier_inputs": 413
+  },
+  "whole_numeric_closure_commitment": "65f6cf38c2beac1b3153e275c7e3563f9b31464748f58792eb4d01474aa6061a",
+  "whole_point_lock_commitment": "a554032ea36957029e689f60ec82428949a961de012ab28a6768c9a8f1a57493",
+  "whole_protocol_commitment": "6c380c22eab6b663de371ed1705e6d96881b3c12cc29d0d5b11e7751155ed083"
+}

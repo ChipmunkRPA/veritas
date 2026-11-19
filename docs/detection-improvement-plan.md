@@ -78,6 +78,14 @@ are not public screening promises or calibrated population probabilities.
   usable speech windows in both views. The result directs the next test
   toward room-transfer calibration. [Exact room voice diagnostic](audio-room-voice-recovery-ceiling-2026-11-19.md)
 
+- Recalibrating the existing short speech response located five of 36
+  edited deliveries, up from three, and flagged two of 24 ordinary files,
+  up from one. The two useful additions share one physical edit. The added
+  ordinary flag and three new misplaced highlights came from one different
+  source pair. A layer fit found eight useful deliveries and flagged five
+  ordinary files. Both candidates remain in evaluation.
+  [Short-speech room transfer](audio-room-layer-short-transfer-2026-11-19.md)
+
 - Equalizing sharpness among native face crops recovered one three-frame
   blurred swap beyond the enabled Full check, with zero added alerts in
   16 ordinary controls. An earlier correction recovered the same edit.

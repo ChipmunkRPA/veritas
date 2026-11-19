@@ -1,0 +1,379 @@
+{
+  "authorship_weight": 0,
+  "commitments": {
+    "neutral-scope-receipt": "1bec19856978376c74401e5744ee49fe8de6fe477083ef51b0f8b627b8c61deb",
+    "plan": "e843de32528ff63278d706b273b82559e72220368359bad6e1fc92c4106c88f3",
+    "receipt": "d941a9f908243edc2762eaa2cabf342423092f27a4200559e3358bda38fee46a"
+  },
+  "heading_controls": [
+    {
+      "case": "quoted_heading_only",
+      "end_matches": "not_applicable",
+      "expected_route": false,
+      "routes": false
+    },
+    {
+      "case": "repeated_exact_heading",
+      "end_matches": "not_applicable",
+      "expected_route": false,
+      "routes": false
+    },
+    {
+      "case": "body_quoted_under_valid_header",
+      "end_matches": true,
+      "expected_route": true,
+      "routes": true
+    },
+    {
+      "case": "nested_separate_section",
+      "end_matches": false,
+      "expected_route": true,
+      "routes": true
+    },
+    {
+      "case": "quote_preface_separate_block",
+      "end_matches": false,
+      "expected_route": false,
+      "routes": true
+    },
+    {
+      "case": "legitimate_neutral_heading",
+      "end_matches": true,
+      "expected_route": true,
+      "routes": true
+    },
+    {
+      "case": "unmarked_fabricated_heading",
+      "end_matches": false,
+      "expected_route": null,
+      "routes": true
+    }
+  ],
+  "issue": 126,
+  "model_calls": 0,
+  "observations": [
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 5,
+      "heading_page": 5,
+      "id": 1,
+      "inferred_scope": "manuscript",
+      "reference": "manuscript",
+      "selected_lines": 14,
+      "semantic_anchors": 1,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 6,
+      "heading_page": 6,
+      "id": 2,
+      "inferred_scope": "ambiguous",
+      "reference": "manuscript",
+      "selected_lines": 6,
+      "semantic_anchors": 0,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 5,
+      "heading_page": 4,
+      "id": 3,
+      "inferred_scope": "ambiguous",
+      "reference": "software_docs_only",
+      "selected_lines": 4,
+      "semantic_anchors": 0,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 5,
+      "heading_page": 5,
+      "id": 4,
+      "inferred_scope": "manuscript",
+      "reference": "manuscript",
+      "selected_lines": 4,
+      "semantic_anchors": 1,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 4,
+      "heading_page": 4,
+      "id": 5,
+      "inferred_scope": "ambiguous",
+      "reference": "manuscript",
+      "selected_lines": 7,
+      "semantic_anchors": 0,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 5,
+      "heading_page": 5,
+      "id": 6,
+      "inferred_scope": "manuscript",
+      "reference": "manuscript",
+      "selected_lines": 4,
+      "semantic_anchors": 1,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 4,
+      "heading_page": 4,
+      "id": 7,
+      "inferred_scope": "none",
+      "reference": "manuscript",
+      "selected_lines": 8,
+      "semantic_anchors": 1,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 3,
+      "heading_page": 3,
+      "id": 8,
+      "inferred_scope": "manuscript",
+      "reference": "manuscript",
+      "selected_lines": 4,
+      "semantic_anchors": 1,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 7,
+      "heading_page": 7,
+      "id": 9,
+      "inferred_scope": "manuscript",
+      "reference": "manuscript",
+      "selected_lines": 10,
+      "semantic_anchors": 1,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 4,
+      "heading_page": 4,
+      "id": 10,
+      "inferred_scope": "manuscript",
+      "reference": "ambiguous",
+      "selected_lines": 4,
+      "semantic_anchors": 1,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 4,
+      "heading_page": 4,
+      "id": 11,
+      "inferred_scope": "ambiguous",
+      "reference": "manuscript",
+      "selected_lines": 11,
+      "semantic_anchors": 0,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": false,
+      "end_page": 5,
+      "heading_page": 4,
+      "id": 12,
+      "inferred_scope": "ambiguous",
+      "reference": "ambiguous",
+      "selected_lines": 22,
+      "semantic_anchors": 0,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 4,
+      "heading_page": 4,
+      "id": 13,
+      "inferred_scope": "ambiguous",
+      "reference": "ambiguous",
+      "selected_lines": 4,
+      "semantic_anchors": 0,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 4,
+      "heading_page": 4,
+      "id": 14,
+      "inferred_scope": "software_docs_only",
+      "reference": "software_docs_only",
+      "selected_lines": 6,
+      "semantic_anchors": 2,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 5,
+      "heading_page": 5,
+      "id": 15,
+      "inferred_scope": "manuscript",
+      "reference": "software_docs_only",
+      "selected_lines": 4,
+      "semantic_anchors": 1,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 3,
+      "heading_page": 3,
+      "id": 16,
+      "inferred_scope": "ambiguous",
+      "reference": "manuscript",
+      "selected_lines": 5,
+      "semantic_anchors": 0,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 3,
+      "heading_page": 3,
+      "id": 17,
+      "inferred_scope": "manuscript",
+      "reference": "manuscript",
+      "selected_lines": 4,
+      "semantic_anchors": 1,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 7,
+      "heading_page": 7,
+      "id": 18,
+      "inferred_scope": "manuscript",
+      "reference": "manuscript",
+      "selected_lines": 7,
+      "semantic_anchors": 2,
+      "source_location_replayed": true
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": false,
+      "end_page": null,
+      "heading_page": null,
+      "id": 19,
+      "inferred_scope": "no_unique_declaration",
+      "reference": "no_unique_declaration",
+      "selected_lines": 0,
+      "semantic_anchors": 0,
+      "source_location_replayed": false
+    },
+    {
+      "anchors_replayed": true,
+      "end_matches_reference": true,
+      "end_page": 5,
+      "heading_page": 5,
+      "id": 20,
+      "inferred_scope": "ambiguous",
+      "reference": "manuscript",
+      "selected_lines": 9,
+      "semantic_anchors": 0,
+      "source_location_replayed": true
+    }
+  ],
+  "schema": "chipmunk.writing-joss-disclosures/1",
+  "semantic_controls": [
+    {
+      "case": "positive",
+      "reference": "manuscript",
+      "scope": "manuscript"
+    },
+    {
+      "case": "code_with_paper_denial",
+      "reference": "software_docs_only",
+      "scope": "software_docs_only"
+    },
+    {
+      "case": "explicit_bounded_software",
+      "reference": "software_docs_only",
+      "scope": "software_docs_only"
+    },
+    {
+      "case": "global_none",
+      "reference": "none",
+      "scope": "none"
+    },
+    {
+      "case": "manuscript_none_only",
+      "reference": "no_manuscript_use",
+      "scope": "no_manuscript_use"
+    },
+    {
+      "case": "general_scope_unclear",
+      "reference": "ambiguous",
+      "scope": "ambiguous"
+    },
+    {
+      "case": "only_software_mentioned",
+      "reference": "ambiguous",
+      "scope": "ambiguous"
+    },
+    {
+      "case": "two_identical_areas",
+      "reference": "no_unique_declaration",
+      "scope": "no_unique_declaration"
+    },
+    {
+      "case": "quotes",
+      "reference": "ambiguous",
+      "scope": "ambiguous"
+    },
+    {
+      "case": "citation",
+      "reference": "ambiguous",
+      "scope": "ambiguous"
+    },
+    {
+      "case": "example_separate_sentence",
+      "reference": "ambiguous",
+      "scope": "manuscript"
+    },
+    {
+      "case": "opposite_claims",
+      "reference": "ambiguous",
+      "scope": "ambiguous"
+    },
+    {
+      "case": "inverted_no_manuscript",
+      "reference": "software_docs_only",
+      "scope": "ambiguous"
+    },
+    {
+      "case": "unmarked_forged_claim",
+      "reference": "indistinguishable_from_claim",
+      "scope": "manuscript"
+    },
+    {
+      "case": "irrelevant_body_no_heading",
+      "reference": "no_unique_declaration",
+      "scope": "no_unique_declaration"
+    },
+    {
+      "case": "title_masquerade",
+      "reference": "no_unique_declaration",
+      "scope": "no_unique_declaration"
+    }
+  ]
+}

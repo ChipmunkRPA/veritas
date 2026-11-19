@@ -27,6 +27,7 @@ if TYPE_CHECKING:
 
 ROLES = (("context", "Position in the original"), ("crop", "Original crop"), ("overlay", "Diagnostic overlay"))
 COPY_CHECKS = ("copy_similarity", "copy_translation", "copy_affine")
+PRINTED_TOTAL_LABELS = {**printed_totals.ROLES, "discount": "Printed discount"}
 TRANSLATION_STATUS = {
     "supported_pair": "Similar image detail was found without mirroring.",
     "no_pair": "This check found no qualifying non-mirrored pair.",
@@ -176,14 +177,15 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     total_review = None
     if total_reading := document.get(printed_totals.KEY):
         total_review = {"title": printed_totals.TITLE, "limitation": printed_totals.LIMITATION, "fields": []}
+        record = total_reading["record"]
+        total_review["basis"] = record.get("basis")
         if not withheld:
-            record = total_reading["record"]
-            currency = record["currency"]
             total_review["calculated"] = printed_totals.calculated_display(record)
-            total_review["printed"] = currency + record["fields"]["total"]["printed"]
-            for role, label in printed_totals.ROLES.items():
+            total_review["printed"] = printed_totals.amount_display(record, record["fields"]["total"]["printed"])
+            for role in printed_totals.roles(record):
                 row = record["fields"][role]
-                total_review["fields"].append({"role": role, "label": label, "printed": currency + row["printed"],
+                total_review["fields"].append({"role": role, "label": PRINTED_TOTAL_LABELS[role],
+                    "printed": printed_totals.amount_display(record, row["printed"]),
                     "amount_region": row["amount_region"],
                     "uri": "data:image/png;base64," + base64.b64encode(_asset_bytes(total_reading["artifacts"][role], store)).decode("ascii")})
     packets = []

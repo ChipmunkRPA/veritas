@@ -227,7 +227,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                 raise ValueError("Printed total evidence requires the original upright opaque PNG")
             with raw.convert("RGB") as raster:
                 verify_crops(raster, review, lambda digest: archive.read(f"assets/{digest}.png"))
-        native_detail += " Matched all three printed total crops to the submitted image."
+        if review["record"]["schema"] == printed_totals.SCHEMA:
+            native_detail += " Matched all three printed total crops to the submitted image."
+        else:
+            native_detail += f" Matched all {len(review['artifacts'])} printed amount crops to the submitted image."
     projected = json.loads(archive.read('result.json')) if 'result.json' in archive.namelist() else {}
     preview = projected.get(IMAGE_EDITOR_PREVIEW)
     if transparency.KEY in projected:

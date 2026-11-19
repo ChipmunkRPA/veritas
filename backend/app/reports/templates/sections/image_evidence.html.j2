@@ -30,7 +30,13 @@
 <article class="image-evidence-packet" id="image-evidence-printed-total">
 <h3>{{ printed_totals.title }}</h3>
 {% if printed_totals.fields %}
+{% if printed_totals.basis %}
+{% if printed_totals.basis == 'tax_included' %}<p>The printed subtotal already includes tax.</p>{% endif %}
+<p>Calculated total {% for field in printed_totals.fields if field.role != 'total' %}{% if field.role == 'tax' %} + {% elif field.role == 'discount' %} − {% endif %}<a class="mono" href="#printed-amount-{{ field.role }}" title="{{ field.label }} in the original image">{{ field.printed[1:] if field.role == 'discount' else field.printed }}</a>{% endfor %} = <strong class="mono">{{ printed_totals.calculated }}</strong>.</p>
+<p>Printed total <a class="mono" href="#printed-amount-total" title="Printed total in the original image">{{ printed_totals.printed }}</a>.</p>
+{% else %}
 <p>The <a href="#printed-amount-subtotal">subtotal</a> plus <a href="#printed-amount-tax">tax</a> is <strong class="mono">{{ printed_totals.calculated }}</strong>. The <a href="#printed-amount-total">printed total</a> is <strong class="mono">{{ printed_totals.printed }}</strong>.</p>
+{% endif %}
 <div class="evidence-plates evidence-plates-totals">
 {% for field in printed_totals.fields %}
 <figure id="printed-amount-{{ field.role }}"><img src="{{ field.uri }}" alt="{{ field.label }} row in the original image">
@@ -38,6 +44,7 @@
 <figcaption>{{ field.label }} <span class="mono">{{ field.printed }}</span>. Amount columns [{{ amount[0] }}, {{ amount[2] }}) and rows [{{ amount[1] }}, {{ amount[3] }}).</figcaption></figure>
 {% endfor %}
 </div>
+{% elif printed_totals.basis %}<p>The compared amounts do not add up to the printed total. The values and crops are withheld in this copy.</p>
 {% else %}<p>The subtotal plus tax differs from the printed total. The values and crops are withheld in this copy.</p>{% endif %}
 <p class="caption">{{ printed_totals.limitation }} JSON pointer <span class="mono">/printed_total_comparison</span>.</p>
 </article>

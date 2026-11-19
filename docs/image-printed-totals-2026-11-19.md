@@ -52,3 +52,7 @@ Enable this inspection in development with
 `VERITAS_IMAGE_PRINTED_TOTAL_REVIEW=true`. Review the published counts with
 `make replay-evidence`.
 [Anonymous per-image evaluation receipt](evaluation-panels/image-printed-totals-2026-11-19.json)
+
+The [euro summary check](image-euro-totals-2026-11-19.md) extends the local
+PNG review to an explicit included or added VAT basis and a printed fixed
+rebate, with matching positions for every term in the calculation.

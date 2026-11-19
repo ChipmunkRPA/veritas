@@ -23,6 +23,7 @@ from app.engine.manifest import load_manifest
 from app.engine.media import StoredMedia
 from app.engine.registry import DetectorRegistry, parse_policy
 from app.engine.stages import common, image
+from app.evidence import image_printed_totals_binding as printed_totals
 from app.evidence import service
 from app.evidence.image_packets import packet_hash
 from app.reports import engine, image_evidence
@@ -101,6 +102,71 @@ def test_capture_freezes_set_despite_later_loader_mutation(tmp_path, monkeypatch
     assert snapshot_hash(loaded) == snapshot_hash(snapshot)
     monkeypatch.setattr("app.evidence.image_packets_v7.load_packet_set", lambda *a, **k: pytest.fail("Render queried mutable state"))
     assert image_evidence.view(loaded, store=store)["sha256"] == frozen["sha256"]
+
+
+@pytest.mark.parametrize(("basis", "amounts", "calculated", "formula"), [
+    (None, {"subtotal": "1,234.56", "tax": "12.00", "total": "1,247.79"}, 124656,
+     "The subtotal plus tax is $1,246.56. The printed total is $1,247.79."),
+    ("tax_added", {"subtotal": "1.234,56", "tax": "12,00", "discount": "-34,00", "total": "1.213,79"}, 121256,
+     "Calculated total €1.234,56 + €12,00 − €34,00 = €1.212,56. Printed total €1.213,79."),
+    ("tax_included", {"subtotal": "1.234,56", "discount": "-34,00", "total": "1.201,79"}, 120056,
+     "Calculated total €1.234,56 − €34,00 = €1.200,56. Printed total €1.201,79."),
+])
+def test_printed_total_pdf_links_formula_to_every_original_amount(packet_fixture, monkeypatch, basis, amounts, calculated, formula):
+    db, store, analysis, _, _ = packet_fixture
+    monkeypatch.setattr(settings, "environment", "prod")
+    monkeypatch.setattr(image_evidence, "default_store", lambda: store)
+    source = Image.new("RGB", (600, 320), "white")
+    drawing = ImageDraw.Draw(source)
+    currency = "€" if basis else "$"
+    fields = {}
+    for role, token in amounts.items():
+        y = 60 + 32 * len(fields)
+        drawing.text((24, y), role, fill="black")
+        drawing.text((145, y), printed_totals.amount_display({"currency": currency}, token), fill="black")
+        fields[role] = {"printed": token, "source_region": [15, y, 255, y + 23], "amount_region": [140, y, 255, y + 23]}
+    original = store.put_bytes(_bytes(source, format="PNG"))
+    analysis.sha256, analysis.size_bytes = original.sha256, original.size_bytes
+    snapshot = specimen("image", "standard")
+    result = copy.deepcopy(snapshot.result)
+    result.update(exhibits=[], signals=[], findings=[])
+    result["input"]["sha256"] = original.sha256
+    comparison = {"schema": printed_totals.EURO_SCHEMA if basis else printed_totals.SCHEMA,
+                  "source_sha256": original.sha256, "affects_overall_confidence": False, "currency": currency,
+                  "calculated_cents": calculated, "delta_cents": 123, "fields": fields}
+    if basis:
+        comparison["basis"] = basis
+    result.setdefault("manifest", {}).setdefault("sampling", {})[printed_totals.KEY] = comparison
+    analysis.result_hash = store.put_bytes(canonical_json(result)).sha256
+    evidence = service.persist_packet_set(db, analysis, store, result=result)
+    snapshot = snapshot.model_copy(update={
+        "result": result, "image_evidence": evidence,
+        "analysis": snapshot.analysis.model_copy(update={"id": analysis.id, "revision": analysis.revision}),
+        "media": snapshot.media.model_copy(update={"sha256": original.sha256}),
+    })
+    assert load(dump(snapshot)).image_evidence == evidence
+    html = engine.render_html(snapshot, embed_fonts=False)
+    for role in amounts:
+        assert f'href="#printed-amount-{role}"' in html
+        assert f'id="printed-amount-{role}"' in html
+    if "tax" not in amounts:
+        assert 'href="#printed-amount-tax"' not in html
+    assert ("The printed subtotal already includes tax." in html) == (basis == "tax_included")
+    report = engine.render_pdf(snapshot)
+    assert formula in " ".join(engine.pdf_text(report.pdf).split())
+    with pymupdf.open(stream=report.pdf, filetype="pdf") as pdf:
+        destinations = [link for page in pdf for link in page.get_links()
+                        if link.get("nameddest", "").startswith("printed-amount-")]
+        assert {link["nameddest"] for link in destinations} == {f"printed-amount-{role}" for role in amounts}
+    manifest = image_evidence.manifest(snapshot)
+    assert {a["role"] for a in manifest["artifacts"] if a["packet_id"] == printed_totals.PACKET_ID} == set(amounts)
+    redacted = snapshot.model_copy(update={"report": snapshot.report.model_copy(update={"redacted": True})})
+    withheld = engine.render_html(redacted, embed_fonts=False)
+    assert "The values and crops are withheld in this copy." in withheld
+    for role, token in amounts.items():
+        assert f'id="printed-amount-{role}"' not in withheld
+        assert printed_totals.amount_display(comparison, token) not in withheld
+    assert printed_totals.COMMITMENT not in image_evidence.manifest(redacted)
 
 
 def test_frozen_packet_hash_and_source_binding_are_checked(tmp_path):

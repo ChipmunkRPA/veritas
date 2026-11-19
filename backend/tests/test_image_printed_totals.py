@@ -8,12 +8,73 @@ import pytest
 from PIL import Image
 
 from app.core.canonical import canonical_hash
+from app.evidence import image_printed_euro_totals as euro
 from app.evidence import image_printed_totals as reader
 from app.evidence import image_printed_totals_binding as binding
 
 
 def _word(text, bounds):
     return reader.Word(text, bounds, 99.0)
+
+
+@pytest.mark.parametrize("included", [True, False])
+@pytest.mark.parametrize("extra_amount", [False, True])
+def test_euro_summary_checks_the_declared_basis_and_linked_crop(monkeypatch, included, extra_amount):
+    if included:
+        statements = ["Subtotal (incl. VAT): 2'000.00 EUR", "Less: rebate per agreement: -EUR 5.00", "TOTAL: 2.100,00 EUR"]
+        basis, expected = "tax_included", 199500
+    else:
+        statements = ["Plus 10% VAT on the subtotal.", "Subtotal: EUR 1,000.00", "VAT (10%): EUR 100.00",
+                      "Less: rebate per agreement: -EUR 5.00", "TOTAL: EUR 1,200.00"]
+        basis, expected = "tax_added", 109500
+    if extra_amount:
+        statements.append("Shipping later: EUR 10.00")
+    by_row = []
+    for i, statement in enumerate(statements):
+        x, y = 20, 20 + 30 * i
+        words = []
+        for token in statement.split():
+            right = x + 6 * len(token)
+            words.append(_word(token, (x, y, right, y + 16)))
+            x = right + 6
+        by_row.append(words)
+    monkeypatch.setattr(euro, "_confirm", lambda *_: True)
+    with Image.new("RGB", (600, 320), "white") as original:
+        measurement = euro.find("ocr", original, by_row, 0.0)
+    if extra_amount:
+        assert measurement is None
+        return
+    assert measurement["basis"] == basis and measurement["calculated_cents"] == expected
+    assert measurement["delta_cents"] == 10500
+    record = {**measurement, "source_sha256": "a" * 64, "affects_overall_confidence": False}
+    assert binding.roles(record) == (("subtotal", "discount", "total") if included else ("subtotal", "tax", "discount", "total"))
+    assert binding.amount_display(record, record["fields"]["discount"]["printed"]) == "-€5.00"
+    assert binding.calculated_display(record) == ("€1.995,00" if included else "€1,095.00")
+    evidence = {
+        "schema": "chipmunk.image-evidence/1",
+        "source": {"sha256": record["source_sha256"], "exif_orientation": 1, "width": 600, "height": 320},
+        binding.KEY: {"record": record, "artifacts": {}},
+    }
+    for role, field in record["fields"].items():
+        x, y, right, bottom = field["source_region"]
+        evidence[binding.KEY]["artifacts"][role] = {
+            "sha256": "b" * 64, "media_type": "image/png", "width": right - x, "height": bottom - y,
+        }
+    commitment = canonical_hash(record)
+    evidence["source"][binding.COMMITMENT] = commitment
+    binding.validate(evidence, commitment)
+    record["basis"] = "tax_added" if included else "tax_included"
+    evidence["source"][binding.COMMITMENT] = commitment = canonical_hash(record)
+    with pytest.raises(ValueError, match="calculation term"):
+        binding.validate(evidence, commitment)
+
+
+@pytest.mark.parametrize(("printed", "calculated"), [("2'000.05", "€1'995.00"), ("2000.05", "€1995.00")])
+def test_calculated_euro_total_preserves_the_printed_format(printed, calculated):
+    assert binding.calculated_display({
+        "schema": binding.EURO_SCHEMA, "calculated_cents": 199500, "currency": "€",
+        "fields": {"total": {"printed": printed}},
+    }) == calculated
 
 
 @pytest.mark.parametrize("other", [None, "additional row", "different currency", "balanced"])

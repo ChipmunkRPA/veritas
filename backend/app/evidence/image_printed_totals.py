@@ -201,8 +201,8 @@ def adjustments(lines, fields):
     return False
 
 
-def find(binary, image, end):
-    lines = rows(ocr(binary, image, 11, end))
+def find(binary, image, end, *, native_lines=None):
+    lines = rows(ocr(binary, image, 11, end)) if native_lines is None else native_lines
     fields = [item for row in lines if (item := field(row)) is not None]
     if adjustments(lines, fields) or len(fields) != len({f.role for f in fields}):
         return "not_supported", None
@@ -313,6 +313,8 @@ def find(binary, image, end):
 
 
 def inspect(path, source_sha256, time_budget):
+    from app.evidence import image_printed_euro_totals
+
     binary = shutil.which("tesseract")
     if binary is None or time_budget <= 0:
         return None
@@ -331,7 +333,12 @@ def inspect(path, source_sha256, time_budget):
             ):
                 return None
             with original.convert("RGB") as photo:
-                status, reading = find(binary, photo, end)
+                native_lines = rows(ocr(binary, photo, 11, end))
+                if record := image_printed_euro_totals.find(binary, photo, native_lines, end):
+                    if abs(record["delta_cents"]) < binding.MIN_DELTA_CENTS:
+                        return None
+                    return {"source_sha256": source_sha256, "affects_overall_confidence": False, **record}
+                status, reading = find(binary, photo, end, native_lines=native_lines)
     except (
         OSError,
         ValueError,

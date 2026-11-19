@@ -62,6 +62,9 @@ recounts the held two-voice and ordinary controls for short windows.
 
 The [printed identifier comparison](image-printed-identifiers-2026-11-19.md)
 compares the two explicitly linked fields in a single submitted image.
+The [printed euro summary comparison](image-euro-totals-2026-11-19.md)
+verifies the read amounts and their original pixel positions on balanced
+and deliberately inconsistent invoices from a public publisher.
 The [AI-edited infographic transfer](image-printed-ai-edit-transfer-2026-11-19.md)
 tests text localization in both versions of 12 publisher-supplied pairs.
 The [matched infographic edit study](image-paired-residual-transfer-2026-11-19.md)

@@ -27,6 +27,63 @@ const evidence: ImageEvidenceSet = {
 }
 
 const show = (value = evidence, token = 'signed token') => render(<MemoryRouter><ImageEvidenceContent set={value} token={token} mediaReady /></MemoryRouter>)
+
+const printedAmount = (printed: string, y: number) => ({ printed, source_region: [25, y, 320, y + 20] as [number, number, number, number],
+  amount_region: [210, y, 320, y + 20] as [number, number, number, number] })
+
+it.each([
+  ['tax_added', 121256, 'Calculated total €1.234,56 + €12,00 − €34,00 = €1.212,56.'],
+  ['tax_included', 120056, 'Calculated total €1.234,56 − €34,00 = €1.200,56.'],
+] as const)('links each amount in a euro printed total with %s to its exact source', (basis, calculated_cents, formula) => {
+  const separateTax = basis === 'tax_added'
+  show({ ...evidence, packets: [], printed_total_comparison: {
+    record: { schema: 'image-printed-total-comparison/2', basis, currency: '€', source_sha256: sourceHash,
+      affects_overall_confidence: false, calculated_cents, delta_cents: 123,
+      fields: { subtotal: printedAmount('1.234,56', 75), ...(separateTax && { tax: printedAmount('12,00', 100) }),
+        discount: printedAmount('-34,00', 125), total: printedAmount(separateTax ? '1.213,79' : '1.201,79', 150) } },
+    artifacts: { subtotal: artifact('1'), ...(separateTax && { tax: artifact('2') }), discount: artifact('3'), total: artifact('4') },
+  } })
+  const findings = within(screen.getByRole('region', { name: 'Printed total mismatch' }))
+  const calculation = within(findings.getByText(/Calculated total/))
+  expect(findings.getByText(/Calculated total/).textContent).toBe(formula)
+  expect(findings.getByText('-€34,00')).toBeTruthy()
+  expect(findings.getByAltText('Printed discount row in the original image')).toBeTruthy()
+  expect(calculation.getByRole('link', { name: '€34,00' }).getAttribute('href')).toBe('/analyses/analysis-1/evidence?layers=&focus=210%2C125%2C110%2C20')
+  expect(calculation.getByRole('link', { name: '€1.234,56' }).getAttribute('href')).toContain('focus=210%2C75%2C110%2C20')
+  expect(findings.getByRole('link', { name: separateTax ? '€1.213,79' : '€1.201,79' }).getAttribute('href')).toContain('focus=210%2C150%2C110%2C20')
+  expect(Boolean(findings.queryByText('The printed subtotal already includes tax.'))).toBe(!separateTax)
+  expect(Boolean(calculation.queryByRole('link', { name: '€12,00' }))).toBe(separateTax)
+  expect(findings.getByText(/zero weight in the AI assessment/)).toBeTruthy()
+})
+
+it.each([
+  ['1,201.79', '€1,200.56'],
+  ["1'201.79", "€1'200.56"],
+  ['1201,79', '€1200,56'],
+])('calculates the euro total in the same number format as %s', (printed, calculated) => {
+  show({ ...evidence, packets: [], printed_total_comparison: {
+    record: { schema: 'image-printed-total-comparison/2', basis: 'tax_included', currency: '€', source_sha256: sourceHash,
+      affects_overall_confidence: false, calculated_cents: 120056, delta_cents: 123,
+      fields: { subtotal: printedAmount('1.200,56', 75), total: printedAmount(printed, 100) } },
+    artifacts: { subtotal: artifact('1'), total: artifact('2') },
+  } })
+  const formula = within(screen.getByText(/Calculated total/))
+  expect(formula.getByText(calculated, { selector: 'strong' })).toBeTruthy()
+})
+
+it('keeps the saved US-style printed total display', () => {
+  show({ ...evidence, packets: [], printed_total_comparison: {
+    record: { schema: 'image-printed-total-comparison/1', currency: '$', source_sha256: sourceHash,
+      affects_overall_confidence: false, calculated_cents: 124656, delta_cents: 123,
+      fields: { subtotal: printedAmount('1,234.56', 75), tax: printedAmount('12.00', 100), total: printedAmount('1,247.79', 125) } },
+    artifacts: { subtotal: artifact('1'), tax: artifact('2'), total: artifact('3') },
+  } })
+  expect(screen.getByText('Subtotal plus tax')).toBeTruthy()
+  expect(screen.getByText('$1,246.56')).toBeTruthy()
+  expect(screen.queryByText(/Calculated total/)).toBeNull()
+  expect(screen.getByAltText('Printed tax row in the original image')).toBeTruthy()
+})
+
 it('shows the native interpolation measurement and exact crop next to its source position', () => {
   show({ ...evidence, source: { ...evidence.source, width: 2048, height: 1536 }, packets: [], native_interpolation_review: {
     record: { status: 'matched', observation: 'A local interpolation shift was measured.',

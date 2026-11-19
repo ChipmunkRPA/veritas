@@ -71,13 +71,19 @@ def test_selected_audio_windows_and_passage_spans_use_their_recorded_clocks():
     assert text_rows == [{"id": "T01", "selected_spans": [[5, 14], [77, 120]]}]
 
 
-def test_printed_amount_positions_keep_the_crop_and_amount_separate():
+@pytest.mark.parametrize("with_discount", [False, True])
+def test_printed_amount_positions_keep_the_crop_and_amount_separate(with_discount):
+    record = {"schema": printed_totals.SCHEMA}
+    role_names = tuple(printed_totals.ROLES)
+    if with_discount:
+        record = {"schema": printed_totals.EURO_SCHEMA, "basis": "tax_included"}
+        role_names = ("subtotal", "discount", "total")
     roles = {
         role: {"printed": "private", "source_region": [5, y, 160, y + 32],
                "amount_region": [130, y + 8, 157, y + 25]}
-        for role, y in zip(printed_totals.ROLES, (50, 90, 130), strict=True)
+        for role, y in zip(role_names, (50, 90, 130), strict=True)
     }
-    evidence = {"source": {"width": 200, "height": 200}, printed_totals.KEY: {"record": {"fields": roles}}}
+    evidence = {"source": {"width": 200, "height": 200}, printed_totals.KEY: {"record": {**record, "fields": roles}}}
     _, rows = _positions("image", evidence)
     assert rows == [{"id": "PT01", "affects_overall_confidence": False,
                      "amount_boxes": {role: item["amount_region"] for role, item in roles.items()},

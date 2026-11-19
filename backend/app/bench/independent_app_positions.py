@@ -46,10 +46,12 @@ def _printed_amount_positions(evidence: dict) -> list[dict]:
     comparison = evidence.get(printed_totals.KEY)
     if not comparison:
         return []
-    fields = comparison["record"]["fields"]
+    record = comparison["record"]
+    fields = record["fields"]
+    roles = printed_totals.roles(record)
     return [{"id": printed_totals.PACKET_ID, "affects_overall_confidence": False,
-             "amount_boxes": {role: fields[role]["amount_region"] for role in printed_totals.ROLES},
-             "row_crop_boxes": {role: fields[role]["source_region"] for role in printed_totals.ROLES}}]
+             "amount_boxes": {role: fields[role]["amount_region"] for role in roles},
+             "row_crop_boxes": {role: fields[role]["source_region"] for role in roles}}]
 
 
 def _brief_speech_positions(evidence: dict, samples: int) -> list[dict]:

@@ -1,4 +1,4 @@
-"""Verify the arithmetic and original positions of three printed amounts."""
+"""Verify printed summary arithmetic and original image positions."""
 
 from __future__ import annotations
 
@@ -9,6 +9,7 @@ from app.core.canonical import canonical_hash
 KEY = "printed_total_comparison"
 COMMITMENT = KEY + "_sha256"
 SCHEMA = "image-printed-total-comparison/1"
+EURO_SCHEMA = "image-printed-total-comparison/2"
 TITLE = "Printed total mismatch"
 PACKET_ID = "PT01"
 LIMITATION = (
@@ -19,6 +20,10 @@ ROLES = {"subtotal": "Printed subtotal", "tax": "Printed tax", "total": "Printed
 CURRENCIES = "$£€"
 CASH = r"[0-9]{1,3}(?:,[0-9]{3}){1,2}|[0-9]{1,8}"
 MONEY = rf"(?:{CASH})\.[0-9]{{2}}"
+EURO_MONEY = (
+    r"(?:[0-9]{1,8}[.,][0-9]{2}|[0-9]{1,3}(?:,[0-9]{3}){1,2}\.[0-9]{2}|"
+    r"[0-9]{1,3}(?:\.[0-9]{3}){1,2},[0-9]{2}|[0-9]{1,3}(?:'[0-9]{3}){1,2}\.[0-9]{2})"
+)
 MIN_DELTA_CENTS = 2
 
 
@@ -39,9 +44,35 @@ def cash_value(token):
     return int(token.replace(",", "").replace(".", ""))
 
 
+def euro_value(token):
+    return cash_value(token.replace("'", ""))
+
+
+def roles(record):
+    if record["schema"] == SCHEMA:
+        return tuple(ROLES)
+    ordered = ["subtotal"]
+    if record["basis"] == "tax_added":
+        ordered.append("tax")
+    if "discount" in record["fields"]:
+        ordered.append("discount")
+    return (*ordered, "total")
+
+
+def amount_display(record, token):
+    return f"-{record['currency']}{token[1:]}" if token.startswith("-") else f"{record['currency']}{token}"
+
+
 def calculated_display(record):
     cents = record["calculated_cents"]
-    return f"{record['currency']}{cents // 100:,}.{cents % 100:02d}"
+    integer = f"{cents // 100:,}"
+    decimal = "."
+    if record["schema"] == EURO_SCHEMA:
+        printed = record["fields"]["total"]["printed"]
+        grouping = next((char for char in printed[:-3] if char in ",.'"), "")
+        integer = integer.replace(",", grouping)
+        decimal = printed[-3]
+    return f"{record['currency']}{integer}{decimal}{cents % 100:02d}"
 
 
 def _box(value, dimensions):
@@ -67,44 +98,47 @@ def validate(document, commitment, *, stopped=False):
     ):
         raise ValueError("Invalid printed total evidence")
     record, images = reading["record"], reading["artifacts"]
+    if not isinstance(record, dict) or not isinstance(images, dict):
+        raise ValueError("Invalid printed total evidence")
     dimensions = (source["width"], source["height"])
+    is_euro = record.get("schema") == EURO_SCHEMA
+    currencies = ("€",) if is_euro else tuple(CURRENCIES)
+    record_keys = {"schema", "source_sha256", "affects_overall_confidence", "currency", "calculated_cents",
+                   "delta_cents", "fields"}
     if (
-        set(record)
-        != {
-            "schema",
-            "source_sha256",
-            "affects_overall_confidence",
-            "currency",
-            "calculated_cents",
-            "delta_cents",
-            "fields",
-        }
-        or record["schema"] != SCHEMA
+        set(record) != (record_keys | {"basis"} if is_euro else record_keys)
+        or record["schema"] not in (SCHEMA, EURO_SCHEMA)
         or record["affects_overall_confidence"] is not False
         or record["source_sha256"] != source["sha256"]
-        or record["currency"] not in tuple(CURRENCIES)
+        or record["currency"] not in currencies
+        or (is_euro and record["basis"] not in ("tax_added", "tax_included"))
+        or not isinstance(record["fields"], dict)
         or source.get("exif_orientation") != 1
         or not size_supported(dimensions)
         or source.get(COMMITMENT) != commitment
         or canonical_hash(record) != commitment
-        or set(record["fields"]) != set(ROLES)
-        or set(images) != set(ROLES)
     ):
         raise ValueError("Printed total evidence differs from the committed image or values")
+    ordered = roles(record)
+    if set(record["fields"]) != set(ordered) or set(images) != set(ordered):
+        raise ValueError("Printed total evidence omits or adds a calculation term")
     previous_bottom = 0
-    for role in ROLES:
+    values = []
+    for role in ordered:
         field, image = record["fields"][role], images[role]
-        if set(field) != {"printed", "source_region", "amount_region"} or not re.fullmatch(
-            MONEY, field["printed"], re.ASCII
-        ):
-            raise ValueError("Invalid printed subtotal, tax or total")
+        amount_pattern = ("-" if role == "discount" else "") + EURO_MONEY if is_euro else MONEY
+        if set(field) != {"printed", "source_region", "amount_region"} or not re.fullmatch(amount_pattern, field["printed"], re.ASCII):
+            raise ValueError("Invalid printed amount")
+        values.append(euro_value(field["printed"]) if is_euro else cash_value(field["printed"]))
+        if role == "discount" and values[-1] >= 0:
+            raise ValueError("The printed discount must be a deduction")
         x, y, right, bottom = _box(field["source_region"], dimensions)
         left_amount, top_amount, right_amount, bottom_amount = _box(field["amount_region"], dimensions)
         if (
             not (
                 x <= left_amount < right_amount <= right
                 and y <= top_amount < bottom_amount <= bottom
-                and 12 <= bottom - y <= 72
+                and (9 if is_euro else 12) <= bottom - y <= 72
                 and right - x <= 1000
                 and previous_bottom <= y
             )
@@ -113,13 +147,13 @@ def validate(document, commitment, *, stopped=False):
         ):
             raise ValueError("Invalid crop or position for printed total evidence")
         previous_bottom = bottom
-    subtotal, tax, total = (cash_value(record["fields"][role]["printed"]) for role in ROLES)
     calculated, delta = record["calculated_cents"], record["delta_cents"]
     if (
         type(calculated) is not int
         or type(delta) is not int
-        or calculated != subtotal + tax
-        or delta != total - calculated
+        or calculated < 0
+        or calculated != sum(values[:-1])
+        or delta != values[-1] - calculated
         or abs(delta) < MIN_DELTA_CENTS
     ):
         raise ValueError("Printed amounts do not reproduce the checked disagreement")

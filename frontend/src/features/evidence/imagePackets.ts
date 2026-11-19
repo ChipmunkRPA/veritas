@@ -10,7 +10,9 @@ export interface EvidenceImage {
   url: string
 }
 
-type PrintedTotalRole = 'subtotal' | 'tax' | 'total'
+type PrintedTotalField = { printed: string; source_region: [number, number, number, number];
+  amount_region: [number, number, number, number] }
+type PrintedTotalPositions<T> = Record<'subtotal' | 'total', T> & Partial<Record<'tax' | 'discount', T>>
 
 export interface CandidateEligibility {
   schema: 'image-candidate-eligibility/1' | 'image-candidate-eligibility/2'
@@ -180,11 +182,11 @@ export interface ImageEvidenceSet {
     artifacts: Record<'entry' | 'confirmation', EvidenceImage>
   }
   printed_total_comparison?: {
-    record: { schema: 'image-printed-total-comparison/1'; source_sha256: string; affects_overall_confidence: false;
-      currency: '$' | '£' | '€'; calculated_cents: number; delta_cents: number;
-      fields: Record<PrintedTotalRole, { printed: string; source_region: [number, number, number, number];
-        amount_region: [number, number, number, number] }> }
-    artifacts: Record<PrintedTotalRole, EvidenceImage>
+    record: ({ schema: 'image-printed-total-comparison/1'; currency: '$' | '£' | '€' }
+      | { schema: 'image-printed-total-comparison/2'; currency: '€'; basis: 'tax_added' | 'tax_included' }) & {
+        source_sha256: string; affects_overall_confidence: false; calculated_cents: number; delta_cents: number;
+        fields: PrintedTotalPositions<PrintedTotalField> }
+    artifacts: PrintedTotalPositions<EvidenceImage>
   }
   native_interpolation_review?: {
     record: { status: string; observation: string; scope: string; limitation: string; basis?: string | null;

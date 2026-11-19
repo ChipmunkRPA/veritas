@@ -616,26 +616,48 @@ function PrintedTotals({ set, token, mediaReady }: { set: ImageEvidenceSet; toke
   const review = set.printed_total_comparison
   if (!review || review.record.source_sha256 !== set.source.sha256 || review.record.affects_overall_confidence !== false) return null
   const { currency, calculated_cents, fields } = review.record
-  const computed = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(calculated_cents / 100)
+  const basis = review.record.schema === 'image-printed-total-comparison/2' ? review.record.basis : null
+  const decimal = basis ? fields.total.printed.slice(-3, -2) : '.'
+  const grouping = basis ? fields.total.printed.slice(0, -3).match(/[.,']/)?.[0] ?? '' : ','
+  const formatted = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).formatToParts(calculated_cents / 100)
+  const computed = formatted.map(part => part.type === 'decimal' ? decimal : part.type === 'group' ? grouping : part.value).join('')
+  const rows = ([
+    ['subtotal', 'Printed subtotal'], ['tax', 'Printed tax'], ['discount', 'Printed discount'], ['total', 'Printed total'],
+  ] as const).flatMap(([role, label]) => {
+    const field = fields[role]
+    const artifact = review.artifacts[role]
+    if (!field || !artifact) return []
+    const { printed, amount_region: [x, y, right, bottom] } = field
+    const amount = printed.startsWith('-') ? `-${currency}${printed.slice(1)}` : `${currency}${printed}`
+    const source = evidenceSourceUrl(set.analysis_id, { region: { x, y, w: right - x, h: bottom - y } })
+    return [{ role, label, artifact, amount, source }]
+  })
+  const sourceLink = 'font-medium text-accent underline underline-offset-[3px]'
   return <section id="image-evidence-printed-total" aria-labelledby="printed-total-heading" className="mt-4 rounded-md border border-border p-4 scroll-mt-20">
     <h3 id="printed-total-heading" className="m-0 text-body font-medium">Printed total mismatch</h3>
-    <dl className="mt-2 mb-0 grid max-w-lg grid-cols-2 gap-3 text-small">
+    {basis ? <>
+      {basis === 'tax_included' && <p className="mt-2 mb-0 text-small">The printed subtotal already includes tax.</p>}
+      <p className="mt-2 mb-0 text-small">
+        Calculated total {rows.filter(row => row.role !== 'total').map(({ role, label, amount, source }) => <span key={role}>
+          {role === 'tax' ? ' + ' : role === 'discount' ? ' − ' : ''}
+          <Link to={source} title={`${label} in the original image`} className={`font-mono ${sourceLink}`}>{role === 'discount' ? amount.slice(1) : amount}</Link>
+        </span>)} = <strong className="font-mono">{currency}{computed}</strong>.
+      </p>
+      <p className="mt-1 mb-0 text-small">Printed total {rows.filter(row => row.role === 'total').map(({ amount, source }) =>
+        <Link key={source} to={source} title="Printed total in the original image" className={`font-mono ${sourceLink}`}>{amount}</Link>)}.</p>
+    </> : <dl className="mt-2 mb-0 grid max-w-lg grid-cols-2 gap-3 text-small">
       <div><dt>Subtotal plus tax</dt><dd className="m-0 font-mono font-medium">{currency}{computed}</dd></div>
       <div><dt>Printed total</dt><dd className="m-0 font-mono font-medium">{currency}{fields.total.printed}</dd></div>
-    </dl>
-    <div className="mt-4 grid max-w-2xl gap-3">{([
-      ['subtotal', 'Printed subtotal'], ['tax', 'Printed tax'], ['total', 'Printed total'],
-    ] as const).map(([role, label]) => {
-      const { printed, amount_region: [x, y, right, bottom] } = fields[role]
-      return <figure key={role} className="m-0 min-w-0">
-        <EvidencePicture set={set} artifact={review.artifacts[role]} token={token} ready={mediaReady} alt={`${label} row in the original image`} compact />
+    </dl>}
+    <div className="mt-4 grid max-w-2xl gap-3">{rows.map(({ role, label, amount, source, artifact }) =>
+      <figure key={role} className="m-0 min-w-0">
+        <EvidencePicture set={set} artifact={artifact} token={token} ready={mediaReady} alt={`${label} row in the original image`} compact />
         <figcaption className="mt-1 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 text-small">
-          <span>{label} <span className="font-mono">{currency}{printed}</span></span>
-          <Link to={evidenceSourceUrl(set.analysis_id, { region: { x, y, w: right - x, h: bottom - y } })}
-            className="font-medium text-accent underline underline-offset-[3px]">Inspect the {role} amount in the original image</Link>
+          <span>{label} <span className="font-mono">{amount}</span></span>
+          <Link to={source} className={sourceLink}>Inspect the {role} amount in the original image</Link>
         </figcaption>
       </figure>
-    })}</div>
+    )}</div>
     <p className="mt-3 mb-0 text-small text-text-muted">Another adjustment or an ordinary accounting or transcription error can explain the difference. This observation carries zero weight in the AI assessment.</p>
   </section>
 }

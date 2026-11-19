@@ -1,0 +1,57 @@
+{
+  "schema": "chipmunk.video-apple-aac-priming-feasibility/1",
+  "date": "2026-11-19",
+  "runtime": {
+    "macos": "26.5.2",
+    "ffmpeg": "7.0.2"
+  },
+  "witnesses": {
+    "authored_tonal_waveforms": 1,
+    "apple_encoder_configurations": 1,
+    "hevc_video_seeds": 1,
+    "clock_treatment_remuxes": 4,
+    "natural_camera_exports": 0
+  },
+  "encoding": {
+    "audio_codec": "AAC-LC",
+    "audio_sample_rate_hz": 48000,
+    "audio_channels": 1,
+    "audio_nominal_bitrate_bps": 128000,
+    "aac_packets": 228,
+    "full_aac_packet_samples": 1024,
+    "valid_samples": 230400,
+    "priming_samples": 2112,
+    "remainder_samples": 960,
+    "video_codec": "HEVC Main",
+    "video_width": 1280,
+    "video_height": 720,
+    "video_fps": 25,
+    "movie_and_video_clock_hz": 90000
+  },
+  "clock_treatments": [
+    {"treatment": "ordinary_copy", "start_skip_samples": 0, "stream_duration_samples": 233472, "final_packet_duration_samples": 1024, "ffmpeg_uncapped_samples": 233472},
+    {"treatment": "copy_with_file_level_gapless_tag", "start_skip_samples": 0, "stream_duration_samples": 233472, "final_packet_duration_samples": 1024, "ffmpeg_uncapped_samples": 233472},
+    {"treatment": "leading_edit_only", "start_skip_samples": 2112, "stream_duration_samples": 231360, "final_packet_duration_samples": 1024, "ffmpeg_uncapped_samples": 231360},
+    {"treatment": "leading_edit_and_final_duration", "start_skip_samples": 2112, "stream_duration_samples": 230400, "final_packet_duration_samples": 64, "ffmpeg_uncapped_samples": 231360}
+  ],
+  "every_remux_vs_seed": {
+    "same_hevc_packet_hashes_and_timestamps": 120,
+    "same_hevc_decoder_configurations": 1,
+    "same_rgb_frame_hashes": 120,
+    "same_native_picture_clocks": 120,
+    "same_aac_packet_hashes_as_apple_encode": 228
+  },
+  "explicit_interval_cross_checks": {
+    "presentation_duration_movie_ticks": 432000,
+    "first_media_sample": 2112,
+    "ffmpeg_tail_beyond_declared_extent_samples": 960,
+    "ffmpeg_capped_samples": 230400,
+    "ffmpeg_capped_matches_independent_pcm_slice": true,
+    "resampled_rate_hz": 16000,
+    "resampled_samples": 76800,
+    "resampled_matches_independent_pcm_slice_resample": true,
+    "coreaudio_original_m4a_decoded_samples": 230400,
+    "coreaudio_explicit_mp4_decoded_samples": 230400,
+    "coreaudio_original_m4a_and_explicit_mp4_pcm_match": true
+  }
+}

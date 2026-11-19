@@ -43,6 +43,8 @@ about 0.40 ms. The audit withheld all three out-of-scope cases.
 The project team ran the study. It measures container transport on reused
 picture sources with authored tones. Real soundtrack diversity, voice forgery,
 lip-sync accuracy and additional encoder layouts need separate evidence.
+An [Apple AAC feasibility check](video-apple-aac-priming-feasibility.md)
+measured a separate encoder delay and trailing-sample case for future testing.
 
 ## Local analysis
 

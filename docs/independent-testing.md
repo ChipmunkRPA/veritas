@@ -18,8 +18,10 @@ or newer. It uses the standard library to verify the published case
 records and recalculate results for [reflected PNG areas](image-png-reflection-2026-11-18.md),
 [eye-region measurements at two video frame rates](video-eye-cadence-transfer-2026-11-18.md),
 [speech isolation with matched Opus encoding](audio-isolation-by-codec-2026-11-18.md), and
-[short writing rewrites](writing-replaced-token-study-2026-11-18.md). For a replay that
-decodes the original files or reruns inference, use the source preparation
+[short writing rewrites](writing-replaced-token-study-2026-11-18.md). It also replays
+the progressive JPEG, paired 44.1 kHz video, earlier-copy audio, and PDF
+disclosure receipts described below. For a replay that decodes the original
+files or reruns inference, use the source preparation
 and native commands in each report.
 
 The [paired soundtrack replay](video-short-phrase-reencode-2026-11-18.md#reproduce)

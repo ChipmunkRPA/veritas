@@ -133,7 +133,7 @@ ci-release:       ## release gate (N-15; OPS-13): make ci with the backend suite
 eval-image:       ## public-benchmark evaluation of image detectors -> docs/eval_image.md
 	cd backend && .venv/bin/python scripts/eval_image.py --per-source 100
 
-replay-evidence:  ## recount one published evaluation per modality offline using Python's standard library
+replay-evidence:  ## recount published image, video, audio, and writing evaluations offline with the standard library
 	PYTHONPATH=backend python3 -B -S -m scripts.review_image_png_reflection \
 		docs/evaluation-panels/image-png-reflection-2026-11-18.json.gz
 	PYTHONPATH=backend python3 -B -S -m scripts.review_video_eye_cadence_transfer \
@@ -142,6 +142,15 @@ replay-evidence:  ## recount one published evaluation per modality offline using
 		docs/evaluation-panels/audio-isolation-by-codec-2026-11-18.json.gz
 	PYTHONPATH=backend python3 -B -S -m scripts.review_writing_replaced_tokens \
 		docs/evaluation-panels/writing-replaced-token-study-2026-11-18.json.gz
+	PYTHONPATH=backend python3 -B -S -m scripts.image_regional_jpeg90_progressive \
+		docs/evaluation-panels/image-jpeg90-agreement-2026-11-16.json.gz \
+		docs/evaluation-panels/image-jpeg90-progressive-2026-11-18.json.gz
+	python3 -I -S backend/scripts/review_video_lip_motion_aac441.py \
+		docs/evaluation-panels/video-lip-motion-aac441-transfer-2026-11-18.json.gz
+	python3 -I -S backend/scripts/review_audio_native12_dense_reference.py \
+		docs/evaluation-panels/audio-dense-native12-reference-2026-11-18.json
+	python3 -I -S backend/scripts/review_writing_joss_disclosures.py \
+		docs/evaluation-panels/writing-joss-disclosures-2026-11-18.json
 
 bench:            ## X-4 warm latency, stage / detector breakdown and memory per profile against the dev API (`make dev-api`; PROFILES=quick,full,deep ONLY=<labels> RUNS=<n> WORKER_PID=<pid> COVERAGE_CONTRACT=<json> PERF_OUT=<new-json>) → docs/v2/bench/perf.{json,md}
 	cd backend && { [ -f data/bench/perf/workloads.json ] || .venv/bin/python scripts/bench.py --make-workloads; }

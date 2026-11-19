@@ -78,6 +78,9 @@ are not public screening promises or calibrated population probabilities.
   eight ordinary focus controls. Fifteen eligible exports from a separate
   camera-original roster produced no highlights. The evidence preserves
   original frame times and carries zero AI-assessment weight.
+  In a later clock transfer, all 80 remuxed deliveries preserved the
+  original detector records. The stricter clock check rejected 26 ordinary
+  timing controls with out-of-scope playback or delivery.
   [29.97 fps transition comparison](video-face-boundary-2997-2026-11-18.md)
 
 - The regional repeat check now runs on supported progressive quality-90

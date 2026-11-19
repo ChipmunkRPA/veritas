@@ -16,7 +16,10 @@ METHOD = "single-face-boundary/1"
 SPARSE_METHOD = "single-face-boundary/2"
 NATIVE30_METHOD = "single-face-boundary/3"
 NATIVE2997_METHOD = "single-face-boundary/4"
-METHODS = {METHOD, SPARSE_METHOD, NATIVE30_METHOD, NATIVE2997_METHOD}
+NATIVE2997_CARRIER_METHOD = "single-face-boundary/5"
+NTSC_METHODS = {NATIVE2997_METHOD, NATIVE2997_CARRIER_METHOD}
+NATIVE_CLOCK_METHODS = {NATIVE30_METHOD, *NTSC_METHODS}
+METHODS = {METHOD, SPARSE_METHOD, *NATIVE_CLOCK_METHODS}
 COARSE_CONTEXT, FINE_CONTEXT, MOTION_CONTEXT = "existing", "fine_tiles", "off_face_motion"
 ALTERNATE_CONTEXTS = (MOTION_CONTEXT, FINE_CONTEXT)
 PACKET_ID = "VFB01"
@@ -26,6 +29,7 @@ FRAME_COUNT, RATE = 100, 25
 NATIVE30_FRAME_COUNT = 120
 NATIVE30_TIME_BASE, NATIVE30_TICKS = "1/30000", 1000
 NATIVE_CLOCK_TICKS = {NATIVE30_METHOD: NATIVE30_TICKS, NATIVE2997_METHOD: 1001}
+NATIVE2997_CARRIER_TICKS = {"1/60000": 2002, "1/90000": 3003, "1/120000": 4004, "1/180000": 6006}
 COARSE_GRID, NATIVE30_COARSE_GRID = range(22, 79, 2), range(28, 93, 2)
 POINT = 0.165750624
 MIN_SCENE = .60
@@ -87,25 +91,36 @@ def reading(record, name):
     return _exact(record["readings_hex"][name], record[name])
 
 
-def native30_clock(pts, method=NATIVE30_METHOD):
-    ticks = NATIVE_CLOCK_TICKS[method]
-    return len(pts) == NATIVE30_FRAME_COUNT and all(value == index * ticks for index, value in enumerate(pts))
+def native_ticks(time_base, method):
+    if method == NATIVE2997_CARRIER_METHOD:
+        return NATIVE2997_CARRIER_TICKS.get(time_base)
+    if time_base == NATIVE30_TIME_BASE:
+        return NATIVE_CLOCK_TICKS.get(method)
+    return None
+
+
+def native30_clock(pts, method=NATIVE30_METHOD, *, time_base=NATIVE30_TIME_BASE):
+    ticks = native_ticks(time_base, method)
+    return (ticks is not None and len(pts) == NATIVE30_FRAME_COUNT
+            and all(value == index * ticks for index, value in enumerate(pts)))
 
 
 def native30_source(table, encoding, carrier, method=NATIVE30_METHOD):
     return (table is not None and tuple(encoding) == ("h264", "yuv420p", "avc1") and carrier == "mp4"
             and (table.width, table.height) == (table.coded_width, table.coded_height) == (WIDTH, HEIGHT)
             and not (table.rotation or table.truncated or table.interpolated)
-            and table.time_base == NATIVE30_TIME_BASE and native30_clock(table.pts, method))
+            and native30_clock(table.pts, method, time_base=table.time_base))
 
 
 def validate_clock(source, table_pts=None, *, interpolated=(), rotation=0, truncated=False, method=None):
     base = Fraction(source["time_base"])
-    native30 = method in NATIVE_CLOCK_TICKS
+    native30 = method in NATIVE_CLOCK_METHODS
     count = NATIVE30_FRAME_COUNT if native30 else FRAME_COUNT
     if native30:
-        cadence = "29.97" if method == NATIVE2997_METHOD else "30"
-        _require(source["time_base"] == NATIVE30_TIME_BASE and (table_pts is None or native30_clock(table_pts, method)),
+        cadence = "29.97" if method in NTSC_METHODS else "30"
+        _require(native_ticks(source["time_base"], method) is not None
+                 and (table_pts is None or native30_clock(table_pts, method, time_base=source["time_base"]))
+                 and (method != NATIVE2997_CARRIER_METHOD or source.get("timeline_origin_s") == 0),
                  f"Face transition differs from the verified {cadence} fps source clock")
     _require(base > 0 and source["width"] == WIDTH and source["height"] == HEIGHT
              and source["frame_count"] == count and not (rotation or truncated or interpolated)
@@ -142,15 +157,15 @@ def coverage_text(coverage):
         return "No qualifying face appearance transition was found in the portion checked."
     if coverage.get("method") == NATIVE30_METHOD and coverage["reason"] == "profile":
         return "This check covers four-second, 640 × 360 H.264 MP4 with a verified 25 fps or qualified 30 fps clock."
-    if coverage.get("method") == NATIVE2997_METHOD and coverage["reason"] == "profile":
+    if coverage.get("method") in NTSC_METHODS and coverage["reason"] == "profile":
         return "This check requires a short 640 × 360 H.264 MP4 and a supported fixed source clock."
     return UNAVAILABLE[coverage["reason"]]
 
 
 def validate_record(record, source, *, table_pts=None, interpolated=(), rotation=0, truncated=False):
     method = record.get("method")
-    ticks = NATIVE_CLOCK_TICKS.get(method)
-    native30 = ticks is not None
+    ticks = native_ticks(source["time_base"], method)
+    native30 = method in NATIVE_CLOCK_METHODS
     sparse = record.get("method") == SPARSE_METHOD or native30 and "scene_context" in record
     base = validate_clock(source, table_pts, interpolated=interpolated, rotation=rotation, truncated=truncated, method=method)
     fields = {"method", "coarse", "scene", "persistent", "edge_supported", "jump_excess", "boundary",
@@ -246,7 +261,7 @@ def validate(document, canonical_hash, *, table_pts=None, interpolated=(), rotat
     status = coverage["status"]
     counts = coverage["frames_scanned"], coverage["measured_face_frames"]
     method = coverage.get("method")
-    sparse, native30 = method == SPARSE_METHOD, method in NATIVE_CLOCK_TICKS
+    sparse, native30 = method == SPARSE_METHOD, method in NATIVE_CLOCK_METHODS
     frame_count, minimum_measured = (NATIVE30_FRAME_COUNT, 46) if native30 else (FRAME_COUNT, 38)
     base_fields = {"status", "reason", "frames_scanned", "measured_face_frames"}
     _require(set(coverage) == (base_fields | {"method"} if sparse or native30 else base_fields)
@@ -260,7 +275,7 @@ def validate(document, canonical_hash, *, table_pts=None, interpolated=(), rotat
     if status != "unavailable" or counts[0] == frame_count or native30 and counts[0] > 0:
         validate_clock(source, table_pts, interpolated=interpolated, rotation=rotation, truncated=truncated, method=method)
     if record is not None:
-        _require((not native30 and record.get("method") not in NATIVE_CLOCK_TICKS) or
+        _require((not native30 and record.get("method") not in NATIVE_CLOCK_METHODS) or
                  (native30 and record.get("method") == method), "Native cadence face transition requires matching coverage")
         _require(record.get("method") != SPARSE_METHOD or sparse, "Sparse face transition requires matching coverage")
         validate_record(record, source, table_pts=table_pts, interpolated=interpolated, rotation=rotation, truncated=truncated)

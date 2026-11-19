@@ -16,6 +16,7 @@ from app.detectors.video.decode import DecodeError, FrameTable, decode_frames
 from app.detectors.video.shots import ShotDetector
 from app.engine.boundary import DetectorTimeout
 from app.evidence import face_single_boundary_binding as binding
+from app.evidence import mp4_source_clock
 
 KEY = binding.KEY
 COVERAGE = binding.COVERAGE
@@ -39,6 +40,19 @@ def supported(path: Path, table: FrameTable, encoding: tuple[str | None, str | N
 def supported_native30(path: Path, table: FrameTable, encoding: tuple[str | None, str | None, str | None],
                        *, method=binding.NATIVE30_METHOD) -> bool:
     return binding.native30_source(table, encoding, face_return.source_carrier(path), method)
+
+
+def native_ntsc_method(path: Path, table: FrameTable, encoding, origin: float | None) -> str | None:
+    if table is None or origin != 0:
+        return None
+    legacy = table.time_base == binding.NATIVE30_TIME_BASE
+    method = binding.NATIVE2997_METHOD if legacy else binding.NATIVE2997_CARRIER_METHOD
+    carrier = face_return.source_carrier(path) if legacy else "mp4"
+    if binding.native30_source(table, encoding, carrier, method):
+        ticks = binding.native_ticks(table.time_base, method)
+        if mp4_source_clock.verified(path, table, ticks):
+            return method
+    return None
 
 
 def coverage(status: str, reason: str | None = None, *, frames_scanned: int = 0, measured_face_frames: int = 0,
@@ -251,7 +265,7 @@ def measure(path, table, locator, encoder, *, check, timeout_s, sparse=False, na
 
 
 def inspect(path, table, locator, encoder, *, check, timeout_s, sparse=False, native30=False, native_method=None) -> tuple[dict | None, dict]:
-    native30 = native30 or native_method in binding.NATIVE_CLOCK_TICKS
+    native30 = native30 or native_method in binding.NATIVE_CLOCK_METHODS
     reading, disposition = measure(path, table, locator, encoder, check=check, timeout_s=timeout_s, sparse=sparse, native30=native30)
     if native_method is not None:
         disposition["method"] = native_method

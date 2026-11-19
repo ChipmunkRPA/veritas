@@ -1,0 +1,112 @@
+{
+  "schema": "chipmunk.video-2997-clock-transfer/1",
+  "source_groups": 16,
+  "camera_original_groups": 8,
+  "retained_staged_source_groups": 8,
+  "time_base_30khz_older_scope_admitted": 176,
+  "alternate_profiles": {
+    "scale60": {
+      "time_base_hz": 60000,
+      "ticks_per_frame": 2002,
+      "source_groups": 16,
+      "frames_checked": 1920,
+      "prior_model_records_reproduced": 16,
+      "staged_edit_locations": 4,
+      "staged_edit_deliveries": 4,
+      "ordinary_highlights": 0,
+      "outcomes": {
+        "localized": 4,
+        "no_match": 11,
+        "unavailable": 1
+      }
+    },
+    "scale90": {
+      "time_base_hz": 90000,
+      "ticks_per_frame": 3003,
+      "source_groups": 16,
+      "frames_checked": 1920,
+      "prior_model_records_reproduced": 16,
+      "staged_edit_locations": 4,
+      "staged_edit_deliveries": 4,
+      "ordinary_highlights": 0,
+      "outcomes": {
+        "localized": 4,
+        "no_match": 11,
+        "unavailable": 1
+      }
+    },
+    "scale120": {
+      "time_base_hz": 120000,
+      "ticks_per_frame": 4004,
+      "source_groups": 16,
+      "frames_checked": 1920,
+      "prior_model_records_reproduced": 16,
+      "staged_edit_locations": 4,
+      "staged_edit_deliveries": 4,
+      "ordinary_highlights": 0,
+      "outcomes": {
+        "localized": 4,
+        "no_match": 11,
+        "unavailable": 1
+      }
+    },
+    "scale180": {
+      "time_base_hz": 180000,
+      "ticks_per_frame": 6006,
+      "source_groups": 16,
+      "frames_checked": 1920,
+      "prior_model_records_reproduced": 16,
+      "staged_edit_locations": 4,
+      "staged_edit_deliveries": 4,
+      "ordinary_highlights": 0,
+      "outcomes": {
+        "localized": 4,
+        "no_match": 11,
+        "unavailable": 1
+      }
+    },
+    "ctts_signed": {
+      "time_base_hz": 90000,
+      "ticks_per_frame": 3003,
+      "source_groups": 16,
+      "frames_checked": 1920,
+      "prior_model_records_reproduced": 16,
+      "staged_edit_locations": 4,
+      "staged_edit_deliveries": 4,
+      "ordinary_highlights": 0,
+      "outcomes": {
+        "localized": 4,
+        "no_match": 11,
+        "unavailable": 1
+      }
+    }
+  },
+  "older_signed_original_packages": 4,
+  "excluded_controls": {
+    "primary": 24,
+    "separate_extended_declared_end": 2
+  },
+  "local_application": {
+    "simulated_paid_analyses": 2,
+    "analysis_before_payment": 0,
+    "browser_pages": 2,
+    "page_errors": 0,
+    "signed_originals_replayed": 2,
+    "altered_edit_list": "unassessed",
+    "original_frames_and_crops_loaded": 6,
+    "witness_frame": 37,
+    "witness_pts": 111111,
+    "witness_pts_time_base": "1/90000",
+    "witness_display_seconds": 1.234567,
+    "witness_supporting_frames": [
+      36,
+      37,
+      49
+    ]
+  },
+  "whole_run_commitments": {
+    "container_matrix": "213b1998a37bf276e66cee889c75c9ce17f4651d319b3710c9901c32047759a3",
+    "model_comparison": "61a8ef0a7013cc6480104a841b1e4542c83b378a9159f70919ce659000ae586a",
+    "strict_scope_validation": "2fe3ed4f0e676a7afd7346b1faca0a65a396ad72316bcb23d81565ffae86695f"
+  }
+}

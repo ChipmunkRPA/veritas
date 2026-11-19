@@ -57,6 +57,34 @@ VERITAS_IMAGE_REGION_JPEG90_ORIENTATION_REVIEW=true
 The opt-in applies to new analyses. Earlier upright JPEG reports keep
 the re-encoding and pixel-coordinate rules they recorded when signed.
 
+The public receipt can be checked against the published baseline case
+records. The original assets are needed to repeat the two-decoder
+verification and model inference.
+
+```sh
+python3 -I -S - <<'PY'
+import gzip, hashlib, json
+from collections import Counter
+from pathlib import Path
+
+root = Path("docs/evaluation-panels")
+old = (root / "image-jpeg90-agreement-2026-11-16.json.gz").read_bytes()
+new = json.loads((root / "image-jpeg90-exif-orientation-2026-11-18.json").read_bytes())
+assert hashlib.sha256(old).hexdigest() == new["commitments"]["previous_case_records_sha256"]
+counts = {}
+for row in json.loads(gzip.decompress(old))["rows"]:
+    tally = counts.setdefault(row["split"], Counter(dict.fromkeys(new["native_transport"]["panel_counts"][row["split"]], 0)))
+    tally["stored_rgb_pairs"] += 1
+    if row["agreement"] is not None:
+        tally["eligible"] += 1
+        hit, selected, truth = [row["agreement"][k] for k in ("intersection", "selected", "truth")]
+        tally["inherited_useful"] += bool(truth and 2 * hit >= truth and 10 * hit >= 3 * (selected + truth - hit))
+        tally["inherited_ordinary_flags"] += bool(not truth and selected)
+assert counts == new["native_transport"]["panel_counts"]
+print("Published eligibility, location and ordinary-control counts agree.")
+PY
+```
+
 To repeat the local checkout from the retained `fresh-018/sharp-90.jpg`
 fixture described in the prior study, point the test at that file. The test
 checks its digest and adds the EXIF tag locally.

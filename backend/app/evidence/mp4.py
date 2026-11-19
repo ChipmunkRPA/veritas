@@ -117,21 +117,21 @@ class Box:
     end: int
 
 
-def inspect_mp4(source: bytes | BinaryIO) -> dict:
-    stream = io.BytesIO(source) if isinstance(source, bytes) else source
+def bounded_boxes(stream: BinaryIO, *, label: str = "Context clip"):
+    """Return capped metadata readers that can skip compressed media payloads."""
     stream.seek(0, 2)
     size = stream.tell()
     if not 32 <= size <= MAX_BYTES:
-        raise InvalidMP4('Context clip has an unsupported size')
+        raise InvalidMP4(f'{label} has an unsupported size')
     count = 0
 
     def read(offset: int, length: int) -> bytes:
         if length < 0 or length > MAX_METADATA or offset < 0 or offset + length > size:
-            raise InvalidMP4('Context clip metadata exceeds its bounds')
+            raise InvalidMP4(f'{label} metadata exceeds its bounds')
         stream.seek(offset)
         data = stream.read(length)
         if len(data) != length:
-            raise InvalidMP4('Context clip metadata is truncated')
+            raise InvalidMP4(f'{label} metadata is truncated')
         return data
 
     def boxes(start: int, end: int) -> list[Box]:
@@ -140,30 +140,38 @@ def inspect_mp4(source: bytes | BinaryIO) -> dict:
         while start < end:
             count += 1
             if count > MAX_BOXES or end - start < 8:
-                raise InvalidMP4('Context clip has invalid box boundaries')
+                raise InvalidMP4(f'{label} has invalid box boundaries')
             length, kind = struct.unpack('>I4s', read(start, 8))
             header = 8
             if length == 1:
                 if end - start < 16:
-                    raise InvalidMP4('Context clip large box is truncated')
+                    raise InvalidMP4(f'{label} large box is truncated')
                 length, header = struct.unpack('>Q', read(start + 8, 8))[0], 16
             elif length == 0:
                 length = end - start
             if length < header or start + length > end:
-                raise InvalidMP4('Context clip box exceeds its parent')
+                raise InvalidMP4(f'{label} box exceeds its parent')
             found.append(Box(kind, start + header, start + length))
             start += length
         return found
 
-    def one(children: list[Box], kind: bytes) -> Box:
+    def one(children: list[Box], kind: bytes, *, optional: bool = False) -> Box | None:
         selected = [box for box in children if box.kind == kind]
+        if optional and not selected:
+            return None
         if len(selected) != 1:
-            raise InvalidMP4('Context clip has a missing or duplicate required box')
+            raise InvalidMP4(f'{label} has a missing or duplicate required box')
         return selected[0]
 
     def payload(box: Box) -> bytes:
         return read(box.start, box.end - box.start)
 
+    return size, read, boxes, one, payload
+
+
+def inspect_mp4(source: bytes | BinaryIO) -> dict:
+    stream = io.BytesIO(source) if isinstance(source, bytes) else source
+    size, read, boxes, one, payload = bounded_boxes(stream)
     top = boxes(0, size)
     if any(box.kind not in {b'ftyp', b'moov', b'mdat', b'free'} for box in top):
         raise InvalidMP4('Context clip has unsupported top-level content')

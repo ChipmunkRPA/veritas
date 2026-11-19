@@ -74,3 +74,53 @@ Variable frame cadence, shifted time origins, rotated pictures and clips
 outside this profile remain outside the check. Saved 25 and 30 fps evidence
 uses its original file and clock rules. Seven saved 25 fps and five saved
 30 fps signed packages reverified against their original videos.
+
+## Other exact MP4 clocks
+
+On a 29.97 fps video, the same presentation time can be stored using
+several MP4 track time bases. In addition to the original 30 kHz clock,
+the check can use verified 60, 90, 120 and 180 kHz clocks. The report
+keeps the time base and integer frame timestamp from the submitted
+video. For example, frame 37 is tick 37,037 at 30 kHz and tick 111,111
+at 90 kHz. Both give 1.234567 seconds when rounded for display.
+
+A separate container reader checks the declared video duration, the
+decode and presentation timing tables, and any MP4 edit list. The video
+needs the same zero-origin sequence from the original file. The reader
+withholds the check when an edit list changes the playback rate or
+extends the display interval, even if the decoded frame timestamps
+appear unchanged. Saved packages with the earlier evidence record
+continue to verify using its recorded rules. Four previously signed
+29.97 fps packages verified against their originals.
+[Sample durations](https://developer.apple.com/documentation/quicktime-file-format/time-to-sample_atom/time-to-sample_table)
+· [Track edit-list structure](https://developer.apple.com/documentation/quicktime-file-format/edit_list_atom/edit_list_table)
+
+Sixteen retained source files covered staged edits, ordinary controls,
+and eight camera-original exports. Five alternate deliveries of each
+retained the same H.264 packets and all 9,600 decoded frames, their
+presentation times and durations. The alternatives were one remux per
+time base and a separate 90 kHz signed-composition variant. The reader
+withheld 24 clock controls and two separately tested extended-ending
+controls. These results measure file and clock transfer on the same
+footage. [Original staged clips](video-face-focus-context-transfer-2026-11-18.md#reproduce-the-counts)
+· [Camera originals](video-vcd2-unseen-controls-v287-method.md)
+
+The detector reproduced every record across the 80 alternate deliveries,
+including correct locations on all four staged edits per variant, one
+ordinary cut left unassessed and no ordinary highlights. The same strict
+reader admitted all 176 previously tested canonical-clock clips. Two
+simulated paid replays checked a qualified 90 kHz clip and an edit-list
+control. Browser, PDF and JSON showed frame 37 and supporting frames 36
+and 49 for the edit. The altered edit-list control showed the timing
+check as unassessed. Both signed packages verified against their original
+files. [Clock-transfer and local application receipt](evaluation-panels/video-face-boundary-2997-carriers-2026-11-18.json)
+
+An independent reviewer can construct a 90 kHz delivery from a qualifying
+30 kHz original without encoding the video again. The detector still
+reads the uploaded file's native tables. The original and remux can be
+checked against their own signed evidence packages.
+
+```sh
+ffmpeg -i original.mp4 -map 0 -c copy -video_track_timescale 90000 \
+  -movie_timescale 90000 -use_editlist 1 alternate.mp4
+```

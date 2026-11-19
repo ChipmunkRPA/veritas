@@ -44,6 +44,7 @@ def test_single_boundary_sparse_switch_invalidates_saved_detection(monkeypatch):
     monkeypatch.setattr(settings, "video_face_single_boundary_review", True)
     monkeypatch.setattr(settings, "video_face_single_sparse_context_review", False)
     monkeypatch.setattr(settings, "video_face_single_boundary_native30_review", False)
+    monkeypatch.setattr(settings, "video_face_single_boundary_native2997_review", False)
     monkeypatch.setattr(video, "current_voice_detection_output", lambda _: True)
     monkeypatch.setattr(video, "same_frame_enabled", lambda: False)
     monkeypatch.setattr(video, "detail_enabled", lambda: False)
@@ -56,7 +57,12 @@ def test_single_boundary_sparse_switch_invalidates_saved_detection(monkeypatch):
     monkeypatch.setattr(settings, "video_face_single_boundary_native30_review", True)
     current_sparse = old | {video.SINGLE_FACE_SPARSE_POLICY: True}
     assert not video.current_detect_output(current_sparse)
-    assert video.current_detect_output(current_sparse | {video.SINGLE_FACE_NATIVE30_POLICY: True})
+    current_native = current_sparse | {video.SINGLE_FACE_NATIVE30_POLICY: True}
+    assert video.current_detect_output(current_native)
+    monkeypatch.setattr(settings, "video_face_single_boundary_native2997_review", True)
+    previous_ntsc = current_native | {video.SINGLE_FACE_NATIVE2997_POLICY: True}
+    assert not video.current_detect_output(previous_ntsc)
+    assert video.current_detect_output(previous_ntsc | {video.SINGLE_FACE_NTSC_CARRIER_POLICY: True})
 
 
 def _native30_table():
@@ -141,6 +147,8 @@ def test_native2997_review_requires_exact_native_frame_positions(monkeypatch, tm
         assert not binding.native30_source(replace(table, pts=variant), encoding, "mp4", profile)
     assert video._single_boundary_review(ctx)[review.COVERAGE]["reason"] == "profile"
     monkeypatch.setattr(settings, "video_face_single_boundary_native2997_review", True)
+    monkeypatch.setattr(review.mp4_source_clock, "verified", lambda *_: True)
+    info["timeline_origin_s"] = 0
     assert video._single_boundary_review(ctx)[review.COVERAGE] == review.coverage(
         "unavailable", "models_unavailable", native30=True,
     ) | {"method": profile}

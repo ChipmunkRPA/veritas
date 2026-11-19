@@ -44,6 +44,7 @@ from app.evidence import (
     face_spatial_cut_binding,
     mouth_hold_sound,
     mouth_local_hold_binding,
+    mp4_source_clock,
     picture_hold_binding,
     picture_sequence,
     scene_return_binding,
@@ -463,13 +464,18 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     transition_shots = None
     coverage = (evidence.get("coverage") or {}).get(face_single_boundary_binding.COVERAGE, {})
     native_method = coverage.get("method")
-    native30 = native_method in face_single_boundary_binding.NATIVE_CLOCK_TICKS
+    native30 = native_method in face_single_boundary_binding.NATIVE_CLOCK_METHODS
     if native30 and coverage["frames_scanned"] > 0:
         if delivery is None or "codec_tag" not in delivery:
             delivery = probe_container(original, include_codec_tag=True)
         encoding = (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag"))
-        if not face_single_boundary_binding.native30_source(table, encoding, face_return.source_carrier(original), native_method):
+        alt_clock = native_method == face_single_boundary_binding.NATIVE2997_CARRIER_METHOD
+        carrier = "mp4" if alt_clock else face_return.source_carrier(original)
+        if not face_single_boundary_binding.native30_source(table, encoding, carrier, native_method):
             raise ValueError("The original video differs from its native-clock face transition profile")
+        if alt_clock and (delivery.get("timeline_origin_s") != 0 or not mp4_source_clock.verified(
+                    original, table, face_single_boundary_binding.native_ticks(table.time_base, native_method))):
+            raise ValueError("The original MP4 presentation clock differs from its face transition profile")
     if transition is not None:
         if not native30:
             from app.detectors.video.face_local_detail import supported

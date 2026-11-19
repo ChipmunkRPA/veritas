@@ -1,0 +1,684 @@
+{
+  "closed_error_diagnostic": {
+    "all_shared_false_ranges_outside_every_planted_edit": true,
+    "byte_identical_same_clock_excerpts": 7,
+    "connected_foreground_records": 1,
+    "new_detector_calls": 0,
+    "ordinary_false_flagged_files": 5,
+    "passed": true,
+    "shared_false_ranges": 1,
+    "synthetic_only_wrong_files": 2
+  },
+  "cohort": {
+    "background_deliveries": 12,
+    "background_excerpts": 12,
+    "background_recording_sessions": 3,
+    "conditions": 4,
+    "deliveries": 124,
+    "foreground_readers": 4,
+    "foreground_recordings": 4,
+    "generator_families": 2,
+    "ordinary_deliveries": 80,
+    "ordinary_roles_per_host": [
+      "untouched",
+      "same_reader_splice",
+      "different_reader_splice",
+      "roundtrip_piper",
+      "roundtrip_kitten"
+    ],
+    "synthetic_deliveries": 32,
+    "synthetic_events": 8
+  },
+  "commitments": {
+    "closed-error-review.json": "73fb36310f5d5c3c742ba28bc90ca2ec803d5c2ea7aa12c5ff4008e8bb7c9ca4",
+    "cutoff-diagnostic.json": "719f02bd711198c894df164391cd766ecd98ff68a1a9cd43410cdfd567971dfb",
+    "diagnose_cutoffs.py": "f753faf58054657fae0712dcc2215ab8aac107036644755a2017d7c15faf5201",
+    "diagnostic-plan.json": "8b4ed7f47a23d93e303fa4bebb69188d940d8aee3df673560d2b88ee729b6803",
+    "independent-native-review.json": "efecd8da414e762f15449a9352f531784759cbb03b691b19761ec5b0f2e1f4aa",
+    "independent-outcome-review.json": "7e22947860426120477bf45ae56a1ec0025ffeb72aea9181037fa31b123485da",
+    "measurement-closure.json": "e082ef03316f82ef872d1605418dbb378adc11229c35c9159da7da22faeb75e2",
+    "pilot.py": "4bab716538b11367324aed00b9f9ab4429615405facc1f78aec3011ab47f5645",
+    "plan.json": "e5378f8920807de2fb9e885460d72676c34e5be7a0c7738dd77332c8f9a3affd",
+    "prepared.json": "925b26d25d4e4ee42be2bce5b305ffdeb41465b41026ef7755652240cbc7051e",
+    "readings.jsonl": "6d6db6803b0ec1112ad98c4652744722bf303ac04c78931babc0bb3e2936e9b7",
+    "result.json": "a59947c7e792a0456d08e3cca2902b5a7cd8eaea071458c79c3a2652e4d705c8",
+    "review_inputs.py": "024d9dfb372567774390d29e8f72259cfc5333f4b05beabf9fa19726ac26c5bc",
+    "review_outcomes.py": "eb7f4d32459e610afacc29068a4a06137fd672cb0b194d92e385e1ba7918707a"
+  },
+  "conditions": {
+    "clean": {
+      "baseline": {
+        "by_family": {
+          "kitten": {
+            "located": 2,
+            "total": 4
+          },
+          "piper": {
+            "located": 0,
+            "total": 4
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 0,
+          "background_unassessed": 0,
+          "located": 2,
+          "matched_control_clear_locations": 2,
+          "missed": 6,
+          "off_target_ranges": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 20,
+          "ordinary_unassessed": 0,
+          "synthetic_only_off_target": 0,
+          "synthetic_total": 8,
+          "synthetic_unassessed": 0,
+          "synthetic_with_any_off_target": 0
+        }
+      },
+      "changes": {
+        "matched_control_collisions": 0,
+        "new_generator_families": [],
+        "new_locations": 0,
+        "new_ordinary_files": 0,
+        "new_readers": 0
+      },
+      "modified": {
+        "by_family": {
+          "kitten": {
+            "located": 1,
+            "total": 4
+          },
+          "piper": {
+            "located": 0,
+            "total": 4
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 0,
+          "background_unassessed": 0,
+          "located": 1,
+          "matched_control_clear_locations": 1,
+          "missed": 7,
+          "off_target_ranges": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 20,
+          "ordinary_unassessed": 0,
+          "synthetic_only_off_target": 0,
+          "synthetic_total": 8,
+          "synthetic_unassessed": 0,
+          "synthetic_with_any_off_target": 0
+        }
+      },
+      "union": {
+        "by_family": {
+          "kitten": {
+            "located": 2,
+            "total": 4
+          },
+          "piper": {
+            "located": 0,
+            "total": 4
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 0,
+          "background_unassessed": 0,
+          "located": 2,
+          "matched_control_clear_locations": 2,
+          "missed": 6,
+          "off_target_ranges": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 20,
+          "ordinary_unassessed": 0,
+          "synthetic_only_off_target": 0,
+          "synthetic_total": 8,
+          "synthetic_unassessed": 0,
+          "synthetic_with_any_off_target": 0
+        }
+      }
+    },
+    "restaurant": {
+      "baseline": {
+        "by_family": {
+          "kitten": {
+            "located": 0,
+            "total": 4
+          },
+          "piper": {
+            "located": 0,
+            "total": 4
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 4,
+          "background_unassessed": 4,
+          "located": 0,
+          "matched_control_clear_locations": 0,
+          "missed": 8,
+          "off_target_ranges": 2,
+          "ordinary_flagged": 5,
+          "ordinary_total": 20,
+          "ordinary_unassessed": 10,
+          "synthetic_only_off_target": 2,
+          "synthetic_total": 8,
+          "synthetic_unassessed": 4,
+          "synthetic_with_any_off_target": 2
+        }
+      },
+      "changes": {
+        "matched_control_collisions": 0,
+        "new_generator_families": [],
+        "new_locations": 0,
+        "new_ordinary_files": 0,
+        "new_readers": 0
+      },
+      "modified": {
+        "by_family": {
+          "kitten": {
+            "located": 0,
+            "total": 4
+          },
+          "piper": {
+            "located": 0,
+            "total": 4
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 4,
+          "background_unassessed": 2,
+          "located": 0,
+          "matched_control_clear_locations": 0,
+          "missed": 8,
+          "off_target_ranges": 0,
+          "ordinary_flagged": 1,
+          "ordinary_total": 20,
+          "ordinary_unassessed": 0,
+          "synthetic_only_off_target": 0,
+          "synthetic_total": 8,
+          "synthetic_unassessed": 0,
+          "synthetic_with_any_off_target": 0
+        }
+      },
+      "union": {
+        "by_family": {
+          "kitten": {
+            "located": 0,
+            "total": 4
+          },
+          "piper": {
+            "located": 0,
+            "total": 4
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 4,
+          "background_unassessed": 2,
+          "located": 0,
+          "matched_control_clear_locations": 0,
+          "missed": 8,
+          "off_target_ranges": 2,
+          "ordinary_flagged": 5,
+          "ordinary_total": 20,
+          "ordinary_unassessed": 0,
+          "synthetic_only_off_target": 2,
+          "synthetic_total": 8,
+          "synthetic_unassessed": 0,
+          "synthetic_with_any_off_target": 2
+        }
+      }
+    },
+    "river": {
+      "baseline": {
+        "by_family": {
+          "kitten": {
+            "located": 0,
+            "total": 4
+          },
+          "piper": {
+            "located": 0,
+            "total": 4
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 4,
+          "background_unassessed": 4,
+          "located": 0,
+          "matched_control_clear_locations": 0,
+          "missed": 8,
+          "off_target_ranges": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 20,
+          "ordinary_unassessed": 10,
+          "synthetic_only_off_target": 0,
+          "synthetic_total": 8,
+          "synthetic_unassessed": 4,
+          "synthetic_with_any_off_target": 0
+        }
+      },
+      "changes": {
+        "matched_control_collisions": 0,
+        "new_generator_families": [],
+        "new_locations": 0,
+        "new_ordinary_files": 0,
+        "new_readers": 0
+      },
+      "modified": {
+        "by_family": {
+          "kitten": {
+            "located": 0,
+            "total": 4
+          },
+          "piper": {
+            "located": 0,
+            "total": 4
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 4,
+          "background_unassessed": 4,
+          "located": 0,
+          "matched_control_clear_locations": 0,
+          "missed": 8,
+          "off_target_ranges": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 20,
+          "ordinary_unassessed": 1,
+          "synthetic_only_off_target": 0,
+          "synthetic_total": 8,
+          "synthetic_unassessed": 0,
+          "synthetic_with_any_off_target": 0
+        }
+      },
+      "union": {
+        "by_family": {
+          "kitten": {
+            "located": 0,
+            "total": 4
+          },
+          "piper": {
+            "located": 0,
+            "total": 4
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 4,
+          "background_unassessed": 4,
+          "located": 0,
+          "matched_control_clear_locations": 0,
+          "missed": 8,
+          "off_target_ranges": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 20,
+          "ordinary_unassessed": 1,
+          "synthetic_only_off_target": 0,
+          "synthetic_total": 8,
+          "synthetic_unassessed": 0,
+          "synthetic_with_any_off_target": 0
+        }
+      }
+    },
+    "washing": {
+      "baseline": {
+        "by_family": {
+          "kitten": {
+            "located": 1,
+            "total": 4
+          },
+          "piper": {
+            "located": 0,
+            "total": 4
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 4,
+          "background_unassessed": 4,
+          "located": 1,
+          "matched_control_clear_locations": 1,
+          "missed": 7,
+          "off_target_ranges": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 20,
+          "ordinary_unassessed": 0,
+          "synthetic_only_off_target": 0,
+          "synthetic_total": 8,
+          "synthetic_unassessed": 0,
+          "synthetic_with_any_off_target": 0
+        }
+      },
+      "changes": {
+        "matched_control_collisions": 0,
+        "new_generator_families": [],
+        "new_locations": 0,
+        "new_ordinary_files": 0,
+        "new_readers": 0
+      },
+      "modified": {
+        "by_family": {
+          "kitten": {
+            "located": 1,
+            "total": 4
+          },
+          "piper": {
+            "located": 0,
+            "total": 4
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 4,
+          "background_unassessed": 4,
+          "located": 1,
+          "matched_control_clear_locations": 1,
+          "missed": 7,
+          "off_target_ranges": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 20,
+          "ordinary_unassessed": 0,
+          "synthetic_only_off_target": 0,
+          "synthetic_total": 8,
+          "synthetic_unassessed": 0,
+          "synthetic_with_any_off_target": 0
+        }
+      },
+      "union": {
+        "by_family": {
+          "kitten": {
+            "located": 1,
+            "total": 4
+          },
+          "piper": {
+            "located": 0,
+            "total": 4
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 4,
+          "background_unassessed": 4,
+          "located": 1,
+          "matched_control_clear_locations": 1,
+          "missed": 7,
+          "off_target_ranges": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 20,
+          "ordinary_unassessed": 0,
+          "synthetic_only_off_target": 0,
+          "synthetic_total": 8,
+          "synthetic_unassessed": 0,
+          "synthetic_with_any_off_target": 0
+        }
+      }
+    }
+  },
+  "exposure": {
+    "backgrounds": "Three distinct recorded sessions with earlier unrelated project exposure; condition copies and excerpts remain dependent.",
+    "foreground": "New to this standalone detector comparison; previously measured by an earlier-copy physical-change comparator.",
+    "generators": "Two retained stock synthesis families and voice assets used in earlier project development.",
+    "pretraining_overlap": "Unknown.",
+    "source_roles": "Native-source plan and method frozen before new standalone voice inference. Genuine donor readers extend matched control ancestry."
+  },
+  "gate": {
+    "decisions": {
+      "added_noisy_locations": false,
+      "background_budget": true,
+      "foreground_readers": false,
+      "generator_families": false,
+      "matched_control_collisions": true,
+      "ordinary_budget": true
+    },
+    "passed": false,
+    "requirements": {
+      "maximum_added_background_only_files": 0,
+      "maximum_added_matched_edit_clock_collisions": 0,
+      "maximum_added_ordinary_files_per_condition": 2,
+      "minimum_added_noisy_locations": 4,
+      "minimum_foreground_readers": 3,
+      "required_generator_families": [
+        "piper",
+        "kitten"
+      ]
+    }
+  },
+  "method": {
+    "amplitude_floor": 0.1,
+    "classifier": "Unchanged installed commercial-permission voice model and confirmed two-second scan.",
+    "edit_clock_supplied_to_method": false,
+    "fft_samples": 1024,
+    "hop_samples": 256,
+    "isolated_background_supplied_to_method": false,
+    "magnitude_estimate": "Per-frequency median of remote cosine-similar frames, clamped to the current magnitude.",
+    "mask": "max(0.1, residual_magnitude^2 / (residual_magnitude^2 + 4 * background_magnitude^2))",
+    "neighbor_exclusion_samples": 32000,
+    "new_learned_weights": false,
+    "overall_confidence_weight": 0,
+    "phase": "original",
+    "remote_neighbors": 8,
+    "review_point": 6.822523597593649,
+    "speech_admission": "Same half-window rule independently on each view.",
+    "supplied_earlier_copy": false,
+    "union": "Retain all original intervals and add modified-view intervals.",
+    "view": "Single-upload non-local recurrent-background residual on the original sample clock."
+  },
+  "privacy": {
+    "absolute_edit_offsets": false,
+    "case_identifiers": false,
+    "customer_material": false,
+    "local_paths": false,
+    "raw_audio": false,
+    "reader_identifiers": false,
+    "score_vectors": false,
+    "source_media_retained_privately": true,
+    "transcripts": false,
+    "voice_embeddings": false
+  },
+  "public_replay_scope": "The public scalar reviewer checks aggregate arithmetic and admission counts. Original waveform, per-case location and score replay were independently completed locally and are committed by whole-artifact hashes.",
+  "retrospective_diagnostic": {
+    "candidate_score_boundaries": 969,
+    "counts_at_extra_ordinary_budgets_per_condition": {
+      "0": {
+        "conditions": {
+          "clean": {
+            "located": 4,
+            "new_ordinary": 0,
+            "only_wrong": 0,
+            "ordinary_flagged": 0
+          },
+          "restaurant": {
+            "background_flagged": 0,
+            "located": 0,
+            "new_ordinary": 0,
+            "only_wrong": 2,
+            "ordinary_flagged": 5
+          },
+          "river": {
+            "background_flagged": 0,
+            "located": 0,
+            "new_ordinary": 0,
+            "only_wrong": 0,
+            "ordinary_flagged": 0
+          },
+          "washing": {
+            "background_flagged": 0,
+            "located": 2,
+            "new_clear_noisy_locations": 1,
+            "new_noisy_locations": 1,
+            "new_ordinary": 0,
+            "only_wrong": 0,
+            "ordinary_flagged": 0
+          }
+        },
+        "new_clear_noisy_locations": 1,
+        "new_noisy_locations": 1,
+        "total_added_ordinary_files": 0
+      },
+      "1": {
+        "conditions": {
+          "clean": {
+            "located": 4,
+            "new_ordinary": 0,
+            "only_wrong": 0,
+            "ordinary_flagged": 0
+          },
+          "restaurant": {
+            "background_flagged": 0,
+            "located": 0,
+            "new_ordinary": 0,
+            "only_wrong": 2,
+            "ordinary_flagged": 5
+          },
+          "river": {
+            "background_flagged": 0,
+            "located": 0,
+            "new_ordinary": 0,
+            "only_wrong": 0,
+            "ordinary_flagged": 0
+          },
+          "washing": {
+            "background_flagged": 0,
+            "located": 2,
+            "new_clear_noisy_locations": 1,
+            "new_noisy_locations": 1,
+            "new_ordinary": 0,
+            "only_wrong": 0,
+            "ordinary_flagged": 0
+          }
+        },
+        "new_clear_noisy_locations": 1,
+        "new_noisy_locations": 1,
+        "total_added_ordinary_files": 0
+      },
+      "2": {
+        "conditions": {
+          "clean": {
+            "located": 4,
+            "new_ordinary": 0,
+            "only_wrong": 0,
+            "ordinary_flagged": 0
+          },
+          "restaurant": {
+            "background_flagged": 0,
+            "located": 0,
+            "new_ordinary": 0,
+            "only_wrong": 2,
+            "ordinary_flagged": 5
+          },
+          "river": {
+            "background_flagged": 0,
+            "located": 0,
+            "new_ordinary": 0,
+            "only_wrong": 0,
+            "ordinary_flagged": 0
+          },
+          "washing": {
+            "background_flagged": 0,
+            "located": 2,
+            "new_clear_noisy_locations": 1,
+            "new_noisy_locations": 1,
+            "new_ordinary": 0,
+            "only_wrong": 0,
+            "ordinary_flagged": 0
+          }
+        },
+        "new_clear_noisy_locations": 1,
+        "new_noisy_locations": 1,
+        "total_added_ordinary_files": 0
+      },
+      "4": {
+        "conditions": {
+          "clean": {
+            "located": 4,
+            "new_ordinary": 0,
+            "only_wrong": 0,
+            "ordinary_flagged": 0
+          },
+          "restaurant": {
+            "background_flagged": 0,
+            "located": 0,
+            "new_ordinary": 0,
+            "only_wrong": 2,
+            "ordinary_flagged": 5
+          },
+          "river": {
+            "background_flagged": 0,
+            "located": 0,
+            "new_ordinary": 0,
+            "only_wrong": 0,
+            "ordinary_flagged": 0
+          },
+          "washing": {
+            "background_flagged": 0,
+            "located": 2,
+            "new_clear_noisy_locations": 1,
+            "new_noisy_locations": 1,
+            "new_ordinary": 0,
+            "only_wrong": 0,
+            "ordinary_flagged": 0
+          }
+        },
+        "new_clear_noisy_locations": 1,
+        "new_noisy_locations": 1,
+        "total_added_ordinary_files": 0
+      }
+    },
+    "detector_calls": 0,
+    "extra_background_budget": 0,
+    "noisy_synthetic_deliveries": 24,
+    "primary_point_unchanged": true,
+    "status": "Within-panel shared-cutoff upper-bound diagnostic; establishes no calibrated operating point."
+  },
+  "schema": "chipmunk.standalone-recurrent-audio-public/1",
+  "scope": {
+    "channels": 1,
+    "correct_edit_coverage_minimum": 0.5,
+    "correct_temporal_iou_minimum": 0.3,
+    "insert_samples": 15360,
+    "native_rate": 16000,
+    "raw_speech_minimum_fraction": 0.5,
+    "samples": 192000,
+    "target_background_db": -10
+  },
+  "sources": [
+    {
+      "purpose": "recorded foreground",
+      "terms": "CC BY 4.0",
+      "url": "https://www.openslr.org/12/"
+    },
+    {
+      "purpose": "official archive wrapper",
+      "terms": "Pinned official publisher revision",
+      "url": "https://huggingface.co/datasets/openslr/librispeech_asr/tree/71cacbfb7e2354c4226d01e70d77d5fca3d04ba1"
+    },
+    {
+      "purpose": "recorded environmental backgrounds",
+      "terms": "CC BY-SA 3.0",
+      "url": "https://zenodo.org/records/1227121"
+    },
+    {
+      "purpose": "recurrent separation methodology",
+      "terms": "Research citation; independent NumPy/SciPy implementation",
+      "url": "https://users.cs.northwestern.edu/~zra446/repet.html"
+    }
+  ],
+  "status": "development; zero overall AI confidence weight; serving unchanged",
+  "verification": {
+    "actual_classifier_forwards": 1269,
+    "admitted_window_clock_bindings_checked": 3145,
+    "cpu_threads": 2,
+    "elapsed_seconds": 593.6475601670099,
+    "independent_modified_waveforms_byte_exact": 124,
+    "native_deliveries_checked": 124,
+    "original_and_modified_sample_clocks_checked": 248,
+    "outcome_rows_recounted": 124,
+    "outside_edit_pcm_samples_checked": 16957440,
+    "weight_changes": 0
+  }
+}

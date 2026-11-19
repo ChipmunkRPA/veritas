@@ -1,0 +1,55 @@
+{
+  "schema": "chipmunk.wiked-origin-collisions.grouped/1",
+  "scope": "identical-final-text ambiguity controls",
+  "source_intake": {
+    "archive": "wiked-v1.0.en.tgz",
+    "archive_prefix_bytes": 524288,
+    "archive_prefix_sha256": "c2cf9dadd4d4b8809cc4208849ab1babb9f0c72272f67ed83d69e9214a410c09",
+    "commented_diff_rows": 3865,
+    "grammar_or_copyedit_candidate_rows": 397,
+    "eligible_copyedit_rows": 173,
+    "locked_candidates": 18,
+    "archive_history_records_resolved": 16,
+    "complete_archive_pairs": 4,
+    "pairs_with_unique_word_alignment": 4,
+    "earlier_excerpts_with_12_to_15_sentences": 3
+  },
+  "generation": {
+    "families": 2,
+    "attempts_per_family_per_excerpt": 3,
+    "raw_replies": 18,
+    "outcomes": {
+      "exact_archived_wording": 8,
+      "not_one_bounded_replacement": 6,
+      "characters_changed_outside_replacement": 1,
+      "unchanged_word_tokens": 2,
+      "changed_numeric_content": 1
+    },
+    "distinct_meaning_preserving_accuracy_positives": 0
+  },
+  "collision_groups": [
+    {
+      "work": 1,
+      "matching_replies_by_editor": {"A": 3, "B": 1},
+      "archive_editor_comparisons_with_equal_utf8_and_measurements": 2
+    },
+    {
+      "work": 2,
+      "matching_replies_by_editor": {"A": 3, "B": 1},
+      "archive_editor_comparisons_with_equal_utf8_and_measurements": 2
+    }
+  ],
+  "selector_replay": {
+    "independent_works": 2,
+    "earlier_views": 2,
+    "archived_wording_views": 2,
+    "generator_wording_views": 4,
+    "distinct_classifier_inputs": 66,
+    "pooled": {"assessed": 8, "flagged": 0},
+    "within_document": {"assessed": 8, "flagged": 0},
+    "report_confirmed": {"assessed": 8, "flagged": 0}
+  },
+  "accuracy_estimate": null,
+  "false_alarm_estimate": null,
+  "changes_served_confidence": false
+}

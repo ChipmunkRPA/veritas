@@ -1,0 +1,123 @@
+{
+  "calibration_works": 8,
+  "commitments": {
+    "detector": "7896697af26ef0b3176e626c6c272575a8ea30512227897f48b276d3f2eef4f7",
+    "equivalence": "502d779b5c6572a4e0155009b164e3a8ad9033df517c7bb72661daea44e4682c",
+    "geometry": "a051e8de9375a7a4b3cba9a680332745445e38fb94ee8ab5f92c2f3ddc92c29b",
+    "incumbent": "0f2e7e30e5d59465e25c407c8ebef4455e680449cf9c3646444fa015eb8aa668",
+    "inputs": "ca5a8adff9b5145ff822d33792da5f4e5e1c4c79ad385f92465e49928f82d5f0",
+    "method": "f54be26fba670ef37558f39146ef1967fade5cee436c260b2d81b908da5e7e47"
+  },
+  "fiction_intake": {
+    "candidate_whole_works": 7,
+    "generation_requests": 20,
+    "qualified_whole_works": 5,
+    "review": {
+      "changed": 9,
+      "equivalent": 1,
+      "unclear": 2
+    },
+    "shape_qualified": 12
+  },
+  "method_runtime": {
+    "fiction_incumbent_inputs": 164,
+    "fiction_incumbent_seconds": 14.4777,
+    "python": "3.11.9",
+    "seconds": 0.0674,
+    "zlib": "1.2.12"
+  },
+  "metrics": {
+    "fiction_native_replay": {
+      "files": 32,
+      "source_anchors": 22
+    },
+    "incumbent": {
+      "fiction": {
+        "assessed": 16,
+        "ordinary_files": 15,
+        "ordinary_files_flagged": 0,
+        "ordinary_groups": 5,
+        "ordinary_groups_flagged": 0,
+        "positive_files": 1,
+        "positive_found": 0
+      },
+      "technical": {
+        "assessed": 25,
+        "ordinary_files": 18,
+        "ordinary_files_flagged": 0,
+        "ordinary_groups": 9,
+        "ordinary_groups_flagged": 0,
+        "positive_files": 7,
+        "positive_found": 0
+      }
+    },
+    "lexical": {
+      "fiction": {
+        "assessed": 16,
+        "ordinary_files": 15,
+        "ordinary_files_flagged": 0,
+        "ordinary_groups": 5,
+        "ordinary_groups_flagged": 0,
+        "positive_files": 1,
+        "positive_found": 0,
+        "positive_rank_one_unique": 0
+      },
+      "technical": {
+        "assessed": 25,
+        "ordinary_files": 18,
+        "ordinary_files_flagged": 2,
+        "ordinary_groups": 9,
+        "ordinary_groups_flagged": 1,
+        "positive_files": 7,
+        "positive_found": 0,
+        "positive_rank_one_unique": 2
+      }
+    },
+    "masked": {
+      "fiction": {
+        "assessed": 16,
+        "ordinary_files": 15,
+        "ordinary_files_flagged": 0,
+        "ordinary_groups": 5,
+        "ordinary_groups_flagged": 0,
+        "positive_files": 1,
+        "positive_found": 0,
+        "positive_rank_one_unique": 0
+      },
+      "technical": {
+        "assessed": 25,
+        "ordinary_files": 18,
+        "ordinary_files_flagged": 3,
+        "ordinary_groups": 9,
+        "ordinary_groups_flagged": 2,
+        "positive_files": 7,
+        "positive_found": 0,
+        "positive_rank_one_unique": 0
+      }
+    }
+  },
+  "paired_dictionary_works": 7,
+  "points": {
+    "lexical": {
+      "calibration_groups_flagged": 1,
+      "dictionary_bytes": 1161,
+      "threshold_fraction": [
+        3,
+        65
+      ]
+    },
+    "masked": {
+      "calibration_groups_flagged": 1,
+      "dictionary_bytes": 723,
+      "threshold_fraction": [
+        4,
+        57
+      ]
+    }
+  },
+  "schema": "chipmunk.writing-balanced-code-length-anonymous/1",
+  "technical_generator_positives": {
+    "qwen": 5,
+    "smol2": 2
+  }
+}

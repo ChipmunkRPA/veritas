@@ -43,6 +43,9 @@ trial and its separate best-case calculation both fell short under strong noise.
 The [published writing revision study](writing-publisher-insertions-2026-11-19.md)
 compares standalone and paired AI readings with known insertions. The earlier
 draft comparison recounts exact Word and plain-text source positions.
+The [writing compression study](writing-compression-dictionaries-2026-11-19.md)
+recounts flags by work and measured file on technical prose and a small
+exploratory fiction panel.
 
 From the repository root, run `make replay-evidence` with Python 3.11
 or newer. It uses the standard library to verify the published case

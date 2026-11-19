@@ -227,6 +227,8 @@ replay-evidence:  ## recount published image, video, audio, and writing evaluati
 		docs/evaluation-panels/audio-original-enrollment-admission-2026-11-19.json
 	python3 -B -I -S backend/scripts/review_writing_publisher_insertions.py \
 		docs/evaluation-panels/writing-publisher-insertions-2026-11-19.json
+	python3 -B -I -S backend/scripts/review_writing_compression_dictionaries.py \
+		docs/evaluation-panels/writing-compression-dictionaries-2026-11-19.json
 
 bench:            ## X-4 warm latency, stage / detector breakdown and memory per profile against the dev API (`make dev-api`; PROFILES=quick,full,deep ONLY=<labels> RUNS=<n> WORKER_PID=<pid> COVERAGE_CONTRACT=<json> PERF_OUT=<new-json>) → docs/v2/bench/perf.{json,md}
 	cd backend && { [ -f data/bench/perf/workloads.json ] || .venv/bin/python scripts/bench.py --make-workloads; }

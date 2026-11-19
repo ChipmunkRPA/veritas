@@ -53,6 +53,7 @@ from app.evidence import (
     document_selection,
     document_tracked_changes,
     document_unselected_responses,
+    document_word_reference_cache_binding,
     document_word_visibility,
     email_alternatives,
 )
@@ -356,6 +357,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_doi_reference.validate(document)
         document_saved_link_hosts_binding.validate(document)
         document_reference_links_binding.validate(document)
+        document_word_reference_cache_binding.validate(document)
         document_pdf_visibility.validate(document)
         document_pdf_history_binding.validate(document, document["source"].get(document_pdf_history_binding.COMMITMENT))
         document_bibliography.validate(document)
@@ -701,6 +703,11 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if reference_links is not None or reference_commitment is not None:
         document[document_reference_links_binding.KEY] = reference_links
         document["source"][document_reference_links_binding.COMMITMENT] = reference_commitment
+    word_references = decoded.get(document_word_reference_cache_binding.KEY)
+    word_reference_commitment = document_word_reference_cache_binding.from_result(result)
+    if word_references is not None or word_reference_commitment is not None:
+        document[document_word_reference_cache_binding.KEY] = word_references
+        document["source"][document_word_reference_cache_binding.COMMITMENT] = word_reference_commitment
     if (settings.environment == "dev" and settings.document_percentage_consistency
             and document_percentage_consistency.supported(document["source"]["method"], decoded["meta"].get("email"))):
         document[document_percentage_consistency.KEY] = document_percentage_consistency.build(
@@ -879,6 +886,8 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
                                                     commitment=document_saved_link_hosts_binding.from_result(result))
             document_reference_links_binding.verify_record(document, decoded.get(document_reference_links_binding.KEY),
                 commitment=document_reference_links_binding.from_result(result))
+            document_word_reference_cache_binding.verify_record(document, decoded.get(document_word_reference_cache_binding.KEY),
+                commitment=document_word_reference_cache_binding.from_result(result))
             document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()),
                                                           meta=decoded["meta"])
             document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)

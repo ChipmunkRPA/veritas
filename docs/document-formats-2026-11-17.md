@@ -222,6 +222,32 @@ verifier follows the extraction policy recorded in each report.
 [Microsoft's SimpleField reference](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.simplefield?view=openxml-3.0.1)
 · [Open XML SDK field fixture](https://github.com/dotnet/Open-XML-SDK/blob/431ab05cf160248cc3885a4a766026d4f8243792/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestDataStorage/v2FxTestFiles/wordprocessing/field/simple-field.docx)
 
+For a supported saved text cross-reference, the writing report checks the
+displayed field value against the saved text of its bookmark. When they
+differ, the browser, PDF, and JSON show both passages and their original
+Word body block and paragraph character positions. This covers literal
+same-document text references saved as a simple field or a flat complex
+field in ordinary body paragraphs. Original-file verification reads the
+same saved markup. A bookmark can change during ordinary editing before
+Word refreshes its cross-reference. The observation carries zero AI
+authorship weight. [Microsoft's cross-reference guidance](https://support.microsoft.com/en-us/word/troubleshoot-bookmarks)
+
+The offline validation compared 38 authored mismatches with 51 assessed
+ordinary controls in eight source groups. It reproduced all 38 mismatches
+and both saved character ranges for each, with zero ordinary alerts. The
+panel included genuine LibreOffice complex field exports, simple fields,
+and Strict Open XML files. Another 187 intentionally unsupported or
+ambiguous cases remained outside the comparison.
+
+Five local browser cases exercised simulated checkout, the writing worker,
+the PDF and JSON reports, and signed original-file verification. Standard
+and Strict DOCX reproduced both mismatch positions. The matching field and
+an unsupported formatting switch produced no discrepancy. The assessment
+matched for the same visible wording with an eligible or excluded field.
+The PDF preserved both full values at the maximum supported field length.
+Redacted reports withheld the two source excerpts.
+[Local application verification](evaluation-panels/document-word-reference-cache-app-2026-11-19.json)
+
 New ODT and RTF reports show Unicode character ranges before the analysis
 normalizes whitespace. ODT numbers readable body paragraphs in reading order.
 The ODT reader leaves out hidden sections and sections whose display depends

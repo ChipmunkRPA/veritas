@@ -39,7 +39,8 @@ are not prepared for use as court evidence or expert testimony.
   Impress (ODP), Excel (XLSX), Calc (ODS), CSV, TSV, EPUB, RTF, TXT, Markdown,
   HTML, XHTML or email (EML).
   Word evidence identifies body paragraphs, supported table cells, simple text
-  boxes, and linked footnotes and endnotes. Spreadsheet evidence identifies cells.
+  boxes, and linked footnotes and endnotes. It can also show where saved
+  cross-reference text differs from its bookmark. Spreadsheet evidence identifies cells.
   [Document format coverage](docs/document-formats-2026-11-17.md) explains which
   parts the writing check reads.
   Local [within-document review](docs/writing-local-baseline-transfer-2026-11-16.md#application-scope)

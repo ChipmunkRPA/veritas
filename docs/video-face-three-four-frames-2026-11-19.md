@@ -64,3 +64,27 @@ clock, and the option disabled. All six signed packages replayed against
 their original MP4 files. The overall decision was identical with the
 option on and off for the same file. Each analysis started after simulated
 payment confirmation.
+
+## Transfer to native 29.97 fps
+
+A separate comparison used six other native 29.97 fps recording groups
+and newly authored exact swap boundaries. The output was encoded on either
+a 30,000- or a 90,000-tick time base. The existing Full check did not find
+a useful range in the 18 edited deliveries. The candidate found 17 exact
+ranges: five of six three-frame swaps, six of six four-frame swaps, and
+six of six four-frame swaps after recompression. The candidate found no
+unrelated range in those edited files.
+
+Only five of the 24 ordinary controls supplied enough measured context for
+the new comparison. None of those five triggered an added range. The
+remaining 19 controls do not establish the false-alarm behavior. The
+ordinary coverage requirement was set before inference and the clock
+extension remains experimental. A follow-up comparison targets ordinary
+short movement and cuts that supply comparable face evidence.
+
+Four physical remuxes with identical coded pictures reproduced the exact
+decisions and crops on the alternate time base. Four invalid or unsupported
+clock variants stayed outside the check. Independent decoding and recounting
+verified 54 native anchors across 18 localized physical deliveries,
+including the localized remux. These checks establish the retained picture
+coordinates for the measured clips.

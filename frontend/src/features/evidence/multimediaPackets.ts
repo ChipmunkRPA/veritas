@@ -616,6 +616,9 @@ export interface DocumentSavedLinkHosts {
   authorship_confidence_contribution: 0
   destinations_contacted: 0
 }
+interface WordReferencePosition {
+  body_index: number; child_index: number; range: [number, number]; text: string
+}
 export interface DocumentEvidenceSet extends SetBase {
   schema: 'chipmunk.document-evidence/1'; packets: DocumentEvidencePacket[]; omitted_windows: number
   source: { sha256: string; chars?: number; method?: string; offset_unit: 'unicode_codepoint' }
@@ -661,6 +664,11 @@ export interface DocumentEvidenceSet extends SetBase {
       title_location: MappedTextFinding['location']; printed: { doi: string; title: string }; cited: { doi: string; title: string } })[]
   }
   saved_link_hosts?: DocumentSavedLinkHosts
+  word_reference_cache?: {
+    schema: 'document-word-reference-cache/1'; checked: number; mismatches: number
+    findings: { field: WordReferencePosition; target: WordReferencePosition; record_shape: 'simple' | 'complex' }[]
+    authorship_confidence_contribution: 0
+  }
   reference_link_discrepancies?: {
     schema: 'document-reference-link-discrepancies/1'
     decoded_characters: number; references: number; checked_links: number; mismatches: number

@@ -54,3 +54,32 @@ weights. [Numeric receipt](evaluation-panels/image-regional-component-contrast-2
 PYTHONPATH=backend python3 -B -S -m scripts.review_regional_component_contrast \
   docs/evaluation-panels/image-regional-component-contrast-2026-11-19.json
 ```
+
+## Extending the measured boundaries
+
+A separately frozen comparison began with the existing selected regions.
+It extended them through immediately adjacent reliable pixels above a
+lower response point, for a maximum of eight steps and 25% more selected
+area per component. On the second panel, a separate arm required each
+new pixel to qualify in the aligned horizontal repeat too. The existing
+pixels, model weights, and eligibility stayed fixed.
+
+| Panel | Check | Useful locations | Ordinary alerts | Ordinary area highlighted in pixels |
+| --- | --- | ---: | ---: | ---: |
+| Native PNG | Existing single pass | 45/59 | 34/177 | 915,779 |
+| Native PNG | Extend boundaries | 45/59 | 34/177 | 1,048,687 |
+| Other PNG sources | Existing horizontal repeat | 6/52 | 50/104 | 2,522,708 |
+| Other PNG sources | Extend from the original view | 6/52 | 50/104 | 2,847,162 |
+| Other PNG sources | Extend where both views support it | 6/52 | 50/104 | 2,694,557 |
+
+The replay matched all 236 archived native responses and reran the original
+and applicable reflected responses on the 156 separate PNGs. It reproduced
+the exact previous component overlap for every reflected view. None of the
+new masks changed which locations met the edit-overlap criterion. Ordinary
+marked areas grew, including in the two-view version. Boundary extension
+stays experimental. [Boundary growth receipt](evaluation-panels/image-regional-boundary-growth-2026-11-19.json)
+
+```sh
+PYTHONPATH=backend python3 -B -S -m scripts.review_regional_component_contrast \
+  docs/evaluation-panels/image-regional-boundary-growth-2026-11-19.json
+```

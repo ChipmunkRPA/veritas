@@ -206,3 +206,30 @@ Each sustained reading left 13 of 32 traffic-masked synthetic deliveries
 unassessed at both points. No arm met the frozen noisy recovery gate. An
 independent float32 check reproduced all 736 historical-contrast selections
 across the two points. The combined confidence uses the existing checks.
+
+## Reverse-time speech admission
+
+The forward speech-activity pass reproduced every recorded admission on
+the same 368 deliveries. A frozen alternative also read each recording in
+reverse time, projected the measured activity to the exact original
+samples, and allowed the original speech check to read newly admitted
+neighboring windows. The authenticity check always read the unchanged
+forward waveform and used its existing point. The separate persistence
+comparison reused the recorded readings and ran no additional model.
+
+| Edited delivery condition | Current useful locations | With reverse admission |
+| --- | ---: | ---: |
+| Clean speech | 21/32 | 21/32 |
+| Traffic background | 0/32 | 0/32 |
+| Competing speech | 0/32 | 0/32 |
+
+In traffic, the number of edited deliveries without an assessed short-window
+pair fell from 26 to 21 of 32. The equivalent ordinary count fell from 70 to
+55 of 80. Useful admission at the actual edited time rose from 4 to 6 of 32.
+Every one of the 257 newly scored unchanged-waveform windows stayed below
+the existing response point. Ordinary and isolated-background alerts did
+not increase. The separate persistence comparison also added zero useful
+noisy locations. These results isolate limits in the current speech response
+even when additional windows can be assessed. Reverse admission stays
+experimental. A separate reviewer checked all 1,472 arm decisions and the
+exact original PCM for every newly scored window.

@@ -93,6 +93,7 @@ def public_result(result: dict) -> dict:
             document_reference_links_binding,
             document_saved_link_hosts_binding,
             document_tracked_changes,
+            document_word_reference_cache_binding,
             document_word_visibility,
         )
         from app.evidence.email_alternatives import COMMITMENT, result_review
@@ -113,6 +114,8 @@ def public_result(result: dict) -> dict:
             source_coverage[document_saved_link_hosts_binding.COMMITMENT] = saved_links
         if reference_links := document_reference_links_binding.from_result(result):
             source_coverage[document_reference_links_binding.COMMITMENT] = reference_links
+        if word_references := document_word_reference_cache_binding.from_result(result):
+            source_coverage[document_word_reference_cache_binding.COMMITMENT] = word_references
         if word_visibility := document_word_visibility.from_result(result):
             source_coverage[document_word_visibility.COMMITMENT] = word_visibility
         if invisible := document_invisible_characters.from_result(result):

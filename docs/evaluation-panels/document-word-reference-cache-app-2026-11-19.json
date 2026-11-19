@@ -1,0 +1,41 @@
+{
+  "schema": "chipmunk.word-reference-local-checkout/1",
+  "cases": {
+    "standard_complex_difference": {
+      "discrepancies": 1,
+      "exact_input_positions": true,
+      "api_json_pdf_parity": true,
+      "authenticated_original_replay": true
+    },
+    "strict_simple_difference": {
+      "discrepancies": 1,
+      "exact_input_positions": true,
+      "api_json_pdf_parity": true,
+      "authenticated_original_replay": true
+    },
+    "ordinary_current_value": {
+      "discrepancies": 0,
+      "exact_input_positions": false,
+      "api_json_pdf_parity": true,
+      "authenticated_original_replay": true
+    },
+    "excluded_field_switch": {
+      "discrepancies": 0,
+      "exact_input_positions": false,
+      "api_json_pdf_parity": true,
+      "authenticated_original_replay": true
+    },
+    "long_exact_saved_values": {
+      "discrepancies": 1,
+      "exact_input_positions": true,
+      "api_json_pdf_parity": true,
+      "authenticated_original_replay": true
+    }
+  },
+  "simulated_checkout_usd_cents": 999,
+  "simulated_paid_cases": 5,
+  "unpaid_jobs": 0,
+  "same_writing_assessment": true,
+  "redacted_pdf_withheld": true,
+  "browser_passed": true
+}

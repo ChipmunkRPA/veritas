@@ -632,6 +632,25 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         </li>)}
       </ul>}
     </section>}
+    {set.word_reference_cache && <section id="document-word-reference-cache" aria-labelledby="document-word-reference-cache-title"
+      className="mt-4 rounded-md border border-border p-4">
+      <h3 id="document-word-reference-cache-title" className="m-0 text-body font-medium">Saved Word cross-references</h3>
+      <p className="mt-2 mb-0 text-small">The two saved texts differ. Editing a bookmarked passage without refreshing its cross-reference can cause this difference. The check reads the submitted file without updating fields. It carries zero weight in the AI assessment.</p>
+      <ol className="mt-3 mb-0 list-none space-y-3 p-0">
+        {set.word_reference_cache.findings.map(({ field, target }) => <li key={field.body_index} className="border-t border-border pt-3">
+          <dl className="m-0 grid gap-3 text-small sm:grid-cols-2">
+            {([['Saved field text', field], ['Bookmarked source text', target]] as const).map(([label, { text, body_index, range }]) =>
+              <div key={label}>
+                <dt className="font-medium">{label}</dt>
+                <dd className="m-0 whitespace-pre-wrap break-words">{text}</dd>
+                <dd className="m-0 text-caption text-text-muted">Word body block {body_index + 1}, saved paragraph characters <span className="font-mono">[{range[0]}, {range[1]})</span>.</dd>
+              </div>)}
+          </dl>
+        </li>)}
+      </ol>
+      {set.word_reference_cache.mismatches > set.word_reference_cache.findings.length &&
+        <p className="mt-2 mb-0 text-caption text-text-muted">Showing the first {set.word_reference_cache.findings.length} of {set.word_reference_cache.mismatches} differences.</p>}
+    </section>}
     {tracked && <section aria-label="Word tracked text changes" className="mt-4 rounded-md border border-border p-4">
       <h3 className="m-0 text-body font-medium">Word tracked text changes</h3>
       {tracked.writing_input === 'accepted_inline_changes' && <p className="mt-2 mb-0 text-small">Writing checks use the version with these inline insertions included and deletions excluded.</p>}

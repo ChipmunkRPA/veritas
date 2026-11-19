@@ -46,6 +46,8 @@ from app.evidence import (
     document_scope,
     document_tracked_changes,
     document_unselected_responses,
+    document_word_reference_cache,
+    document_word_reference_cache_binding,
     document_word_visibility,
     email_alternatives,
 )
@@ -188,6 +190,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         reference_links = document_reference_links.inspect(original, extension, source_sha256=source["sha256"])
         document_reference_links_binding.verify_record(evidence, reference_links,
             commitment=source.get(document_reference_links_binding.COMMITMENT))
+    if document_word_reference_cache_binding.KEY in evidence or document_word_reference_cache_binding.COMMITMENT in source:
+        word_references = document_word_reference_cache.inspect(original, source_sha256=source["sha256"]) if extension == ".docx" else None
+        document_word_reference_cache_binding.verify_record(evidence, word_references,
+            commitment=source.get(document_word_reference_cache_binding.COMMITMENT))
     if document_bibliography.KEY in coverage:
         doc = document_bibliography.body_view(doc)
     document_bibliography.verify_source(evidence, doc.meta)
@@ -344,9 +350,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     links_detail = " Verified saved link hostnames and their original label positions." if document_saved_link_hosts_binding.KEY in evidence else ""
     reference_links_detail = (" Verified saved reference links and both original number positions."
                               if document_reference_links_binding.KEY in evidence else "")
+    word_reference_detail = (" Verified the saved Word cross-reference text and both original paragraph positions."
+                             if document_word_reference_cache_binding.KEY in evidence else "")
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
             f"{tracked_detail}{word_visibility_detail}{saved_fields_detail}{invisible_detail}{character_detail}{interval_detail}{pdf_replacement_detail}"
             f"{pdf_covered_detail}{percentage_detail}{calendar_detail}{arithmetic_detail}{identifier_detail}"
-            f"{marker_detail}{doi_detail}{heading_detail}{links_detail}{reference_links_detail}{wording_detail}{history_detail}")
+            f"{marker_detail}{doi_detail}{heading_detail}{links_detail}{reference_links_detail}{word_reference_detail}"
+            f"{wording_detail}{history_detail}")

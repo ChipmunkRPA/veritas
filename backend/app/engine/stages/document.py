@@ -65,6 +65,8 @@ from app.evidence import (
     document_saved_link_hosts_binding,
     document_scope,
     document_tracked_changes,
+    document_word_reference_cache,
+    document_word_reference_cache_binding,
     document_word_visibility,
 )
 from app.schemas.evidence import AnalysisResultV2, Decision
@@ -126,6 +128,11 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     if supports_reference_links and not provenance_gate.stop(ctx):
         ctx.check("numbered reference link positions")
         references = document_reference_links.inspect(path, path.suffix.casefold(), source_sha256=doc.meta["original_sha256"])
+    supports_word_references = doc.meta.get("method") == "python-docx"
+    word_references = None
+    if supports_word_references and not provenance_gate.stop(ctx):
+        ctx.check("saved Word cross-references")
+        word_references = document_word_reference_cache.inspect(path, source_sha256=doc.meta["original_sha256"])
     if (doc.meta.get(document_pdf_visibility.KEY, {}).get("covered_locations")
             or document_tracked_changes.unsupported(doc.word_review) or document_tracked_changes.projected(doc.word_review)):
         # Retain source evidence even when little usable writing remains.
@@ -153,6 +160,8 @@ def decode(ctx: StageContext) -> dict[str, Any]:
             **({document_saved_link_hosts_binding.KEY: saved_links} if saved_links else {}),
             **({document_reference_links_binding.POLICY: document_reference_links_binding.SCHEMA} if supports_reference_links else {}),
             **({document_reference_links_binding.KEY: references} if references else {}),
+            **({document_word_reference_cache_binding.POLICY: document_word_reference_cache_binding.SCHEMA} if supports_word_references else {}),
+            **({document_word_reference_cache_binding.KEY: word_references} if word_references else {}),
             **({document_tracked_changes.KEY: doc.word_review} if doc.word_review is not None else {})}
 
 
@@ -184,6 +193,9 @@ def current_decode_output(output: Any, *, require_current_layout_reader: bool = 
         return False
     if (require_current_layout_reader and output["meta"].get("method") == "email"
             and output["meta"].get(email_body.READER_KEY) != email_body.SELECTION_POLICY):
+        return False
+    if (require_current_layout_reader and output["meta"].get("method") == "python-docx"
+            and output.get(document_word_reference_cache_binding.POLICY) != document_word_reference_cache_binding.SCHEMA):
         return False
     if (output["meta"].get("method") in document_native_locations.PARAGRAPH_COORDINATES
             and output["meta"].get(document_native_locations.PARAGRAPH_MAP_KEY) != document_native_locations.PARAGRAPH_MAP):
@@ -745,6 +757,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         result.manifest.sampling[document_saved_link_hosts_binding.COMMITMENT] = canonical_hash(saved_links)
     if reference_links := decoded.get(document_reference_links_binding.KEY):
         result.manifest.sampling[document_reference_links_binding.COMMITMENT] = canonical_hash(reference_links)
+    if word_references := decoded.get(document_word_reference_cache_binding.KEY):
+        result.manifest.sampling[document_word_reference_cache_binding.COMMITMENT] = canonical_hash(word_references)
     detected = ctx.outputs.get("detect") or {}
     verified_credentials = provenance_gate.stop(ctx)
     if not verified_credentials and (reading := detected.get(document_character_review.KEY)):

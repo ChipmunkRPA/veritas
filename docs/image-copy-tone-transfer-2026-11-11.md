@@ -28,6 +28,34 @@ The CPU run measured all 192 deliveries in 29.5 seconds. The standard-library re
 
 A separate proposal-only screen used the retained source cache. It selected the smallest encoded source digest per independent cache component and retained 151 of 155 groups after applying the serving size limits. The 302 ordinary deliveries used the decoded photo and a matched JPEG75 encode. The screen measured all views and recorded 33 RGB and 52 JPEG75 views with crowded repetition. Only three deliveries, from two source groups, had distinct sparse proposals. All three had an incumbent dense mask, so zero ordinary proposals entered the new fallback. The observed ordinary flag counts were two RGB and one JPEG75 in both arms. These results measure how often ordinary images reach the branch in this sample. They leave its error rate on eligible ordinary pairs unmeasured. The source cache qualifies licensed reference bytes and credited photographer separation. It does not establish camera provenance for every image. [Source qualification](image-fresh-source-cache-v39-results.md) · [Independent replay counts](evaluation-panels/image-copy-tone-transfer-2026-11-11.json)
 
+## Revisit on distinct photo groups and contact sheets
+
+A frozen repeat retained 24 attributed photo groups selected by source
+hash from the previous ordinary cache. It excluded exact files and credited
+authors from the earlier public photo roster. The controlled compositing
+and retouching applied to those photos was new. Both delivery formats
+contributed 96 manipulated examples and 96 ordinary examples. All 384
+deliveries completed. The comparison used the original tone rules and
+existing geometric proposals.
+
+In each format the tone check increased useful sharp tone-adjusted copies
+from 1 to 3 of 24 and feathered tone-adjusted copies from 0 to 1 of 24.
+The three gains came from two photo groups in each format. There were no
+additional alerts among the 96 ordinary deliveries per format. A replay
+against the app's existing reflection and translation crop positions found
+one genuinely new useful PNG position and two new JPEG75 positions from
+the three dense-mask gains in each format.
+
+An additional 108 ordinary contact sheets paired different native pictures
+from six genuine source recordings. Each pair had a plain layout, a grade
+applied to one picture, and a resized layout. On 54 JPEG75 views the
+candidate added two alerts on graded ordinary sheets from different
+recordings. All 54 PNG views had zero added alerts, with 51 already
+returning a dense pair and the remaining three outside sparse pair
+admission. The stress result demonstrates how common photographic content
+can trigger the tone comparison after ordinary processing. The check
+remains under evaluation.
+
 ## Reproduce
 
 From the repository root, use the four bound Wikimedia JPEGs and eight retained qualified originals. The public receipt records the four acquired source URLs, photographer credits and image byte hashes. Save each acquired file and its source URL as `<slot>.jpg` and `<slot>.url` in `$sources`. The receipt's `public_photo_roster` supplies `title`, `author` and `license` for `$sources/roster.json`, in slot order. The retained trial is the `trial` directory under `image-bg-real-small-insertions-2026-11-11`.

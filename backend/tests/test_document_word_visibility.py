@@ -75,8 +75,13 @@ def test_local_word_visibility_keeps_exact_coordinates_and_ignores_explicit_off(
     assert "Hidden link wording." in doc.text
     assert record["authorship_confidence_contribution"] == 0
     decoded = {"meta": doc.meta, "word_tracked_changes": doc.word_review,
-               stage.document_saved_link_hosts_binding.POLICY: stage.document_saved_link_hosts_binding.SCHEMA}
+               stage.document_saved_link_hosts_binding.POLICY: stage.document_saved_link_hosts_binding.SCHEMA,
+               stage.document_word_reference_cache_binding.POLICY: stage.document_word_reference_cache_binding.SCHEMA}
     assert stage.current_decode_output(decoded)
+    old_reference_reader = {key: value for key, value in decoded.items()
+                            if key != stage.document_word_reference_cache_binding.POLICY}
+    assert not stage.current_decode_output(old_reference_reader)
+    assert stage.current_decode_output(old_reference_reader, require_current_layout_reader=False)
     assert not stage.current_decode_output({key: value for key, value in decoded.items()
                                             if key != stage.document_saved_link_hosts_binding.POLICY})
     old_meta = {key: value for key, value in doc.meta.items() if key != visibility.KEY}

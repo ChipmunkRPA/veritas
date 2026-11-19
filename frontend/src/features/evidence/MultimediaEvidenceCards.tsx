@@ -33,7 +33,9 @@ export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: Mul
   const chatMarkers = set.schema === 'chipmunk.document-evidence/1' && (set.coverage?.chat_format_markers?.turns ?? 0) > 0
   const printedHeading = set.schema === 'chipmunk.document-evidence/1' && set.printed_ai_use_heading?.affects_overall_confidence === false
   const doiMismatch = set.schema === 'chipmunk.document-evidence/1' && (set.doi_reference_consistency?.different_work ?? 0) > 0
-  const savedLinkDifference = set.schema === 'chipmunk.document-evidence/1' && (set.saved_link_hosts?.findings.length ?? 0) > 0
+  const savedLinkDifference = set.schema === 'chipmunk.document-evidence/1' &&
+    ((set.saved_link_hosts?.findings.length ?? 0) > 0 || (set.reference_link_discrepancies?.findings.length ?? 0) > 0 ||
+      (set.word_reference_cache?.findings.length ?? 0) > 0)
   const writingPassages = set.schema === 'chipmunk.document-evidence/1' && (set.coverage?.writing_passage_intervals?.ranges.length ?? 0) > 0
   return <div data-testid="multimedia-evidence-content" data-evidence-set={set.id ?? ''} data-evidence-hash={set.sha256 ?? ''}>
     {set.status !== 'ready' ? <p role="status" className="mt-3 text-small text-text-muted">

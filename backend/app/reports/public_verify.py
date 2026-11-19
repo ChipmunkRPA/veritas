@@ -19,6 +19,7 @@ from app.evidence import (
     document_reference_links_binding,
     document_saved_link_hosts_binding,
     document_scope,
+    document_word_reference_cache_binding,
     email_alternatives,
     face_boundary_binding,
     face_return_coverage,
@@ -116,6 +117,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, WORD_TEXT_VISIBILITY, PDF_SAVED_WORDING_COMMITMENT,
                              DOI_REFERENCE_COMMITMENT, document_saved_link_hosts_binding.COMMITMENT,
                              document_reference_links_binding.COMMITMENT,
+                             document_word_reference_cache_binding.COMMITMENT,
                              document_disclosure_heading.COMMITMENT,
                              IMAGE_INTERPOLATION, prior_grid.COMMITMENT, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
                              image_animation_binding.KEY, image_motion_photo_binding.KEY,
@@ -311,6 +313,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     _require(analysis['kind'] == 'document' or (document_reference_links_binding.COMMITMENT not in result
                                                and document_reference_links_binding.KEY not in evidence),
              'Reference link commitments require document evidence')
+    _require(analysis['kind'] == 'document' or (document_word_reference_cache_binding.COMMITMENT not in result
+                                               and document_word_reference_cache_binding.KEY not in evidence),
+             'Word cross-reference commitments require document evidence')
     _require(analysis['kind'] == 'document' or PDF_SAVED_WORDING_COMMITMENT not in result,
              'Saved PDF wording requires document evidence')
     _require(analysis["kind"] == "document" or document_invisible_characters.COMMITMENT not in result,
@@ -372,6 +377,10 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                  == result.get(document_reference_links_binding.COMMITMENT),
                  'Reference link evidence differs from the published commitment')
         document_reference_links_binding.validate(evidence)
+        _require(evidence["source"].get(document_word_reference_cache_binding.COMMITMENT)
+                 == result.get(document_word_reference_cache_binding.COMMITMENT),
+                 'Word cross-reference evidence differs from its published source')
+        document_word_reference_cache_binding.validate(evidence)
         document_pdf_visibility.validate(evidence)
         history = evidence.get("coverage", {}).get(PDF_SAVED_WORDING)
         expected_history = result.get(PDF_SAVED_WORDING_COMMITMENT)

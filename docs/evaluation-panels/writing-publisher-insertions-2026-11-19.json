@@ -1,0 +1,222 @@
+{
+  "carrier_geometry": {
+    "archive_files_txt_and_docx": 36,
+    "generated_files_txt_and_docx": 14
+  },
+  "commitments": {
+    "application_revision": "304eb9d7a10da7972269b4bc4b27f379ad94d65d",
+    "comparison_lock_sha256": "591893049526943e8ba9fbc1c3c57b88d48f16b77101e6775624a8b6ccd02516",
+    "generation_plan_sha256": "ddca4e2d44c3e5df9a78f695cc110192ff85e23959f9b19831fe9cc3f518200b",
+    "measurement_roster_sha256": "3977a0cc7c827e4dd2e92d281ffbc6bcaf87efa46238b99597b968ea55e60a6c",
+    "source_panel_sha256": "cff74da7b4eaa3b6633d2fd38dfda7d62c6d8cd957c49269e9ab83cdb6e48736"
+  },
+  "families": {
+    "qwen": {
+      "generated_wins": 3,
+      "incumbent_any_alert": 0,
+      "incumbent_exact_alert": 0,
+      "ordinary_directional_on_same_groups": 0,
+      "ordinary_wins": 2,
+      "paired_directional": 0,
+      "rejected_by_shape": {
+        "changed-numeric-literal": 1,
+        "different-sentence-geometry-or-fragment": 3,
+        "word-change-outside-scope": 3
+      },
+      "requests": 18,
+      "review_decisions": {
+        "changed": 2,
+        "equivalent": 7,
+        "unclear": 2
+      },
+      "tie": 0,
+      "variants": 5
+    },
+    "smol2": {
+      "generated_wins": 1,
+      "incumbent_any_alert": 0,
+      "incumbent_exact_alert": 0,
+      "ordinary_directional_on_same_groups": 0,
+      "ordinary_wins": 1,
+      "paired_directional": 0,
+      "rejected_by_shape": {
+        "added-format-or-preface": 1,
+        "different-sentence-geometry-or-fragment": 2,
+        "word-change-outside-scope": 7,
+        "word-width": 2
+      },
+      "requests": 18,
+      "review_decisions": {
+        "changed": 3,
+        "equivalent": 2,
+        "unclear": 1
+      },
+      "tie": 0,
+      "variants": 2
+    }
+  },
+  "ordinary_controls": {
+    "paired_after": {
+      "assessed": 9,
+      "flags": 0
+    },
+    "standalone_after": {
+      "assessed": 9,
+      "flags": 0
+    },
+    "standalone_before": {
+      "assessed": 9,
+      "flags": 0
+    }
+  },
+  "product_draft_comparison": {
+    "current": {
+      "docx_to_docx": {
+        "generated_insertion": {
+          "all_wording_found": 7,
+          "docx_native_locations_checked": 7,
+          "earlier_changed_hunks": 0,
+          "exact_span": 7,
+          "period_choice_differs": 0
+        },
+        "ordinary_revision": {
+          "all_wording_found": 9,
+          "docx_native_locations_checked": 9,
+          "earlier_changed_hunks": 0,
+          "exact_span": 9,
+          "period_choice_differs": 0
+        }
+      },
+      "docx_to_txt": {
+        "generated_insertion": {
+          "all_wording_found": 7,
+          "docx_native_locations_checked": 0,
+          "earlier_changed_hunks": 0,
+          "exact_span": 7,
+          "period_choice_differs": 0
+        },
+        "ordinary_revision": {
+          "all_wording_found": 9,
+          "docx_native_locations_checked": 0,
+          "earlier_changed_hunks": 0,
+          "exact_span": 9,
+          "period_choice_differs": 0
+        }
+      },
+      "txt_to_docx": {
+        "generated_insertion": {
+          "all_wording_found": 7,
+          "docx_native_locations_checked": 7,
+          "earlier_changed_hunks": 0,
+          "exact_span": 7,
+          "period_choice_differs": 0
+        },
+        "ordinary_revision": {
+          "all_wording_found": 9,
+          "docx_native_locations_checked": 9,
+          "earlier_changed_hunks": 0,
+          "exact_span": 9,
+          "period_choice_differs": 0
+        }
+      },
+      "txt_to_txt": {
+        "generated_insertion": {
+          "all_wording_found": 7,
+          "docx_native_locations_checked": 0,
+          "earlier_changed_hunks": 0,
+          "exact_span": 7,
+          "period_choice_differs": 0
+        },
+        "ordinary_revision": {
+          "all_wording_found": 9,
+          "docx_native_locations_checked": 0,
+          "earlier_changed_hunks": 0,
+          "exact_span": 9,
+          "period_choice_differs": 0
+        }
+      }
+    },
+    "prior": {
+      "docx_to_docx": {
+        "generated_insertion": {
+          "all_wording_found": 7,
+          "docx_native_locations_checked": 7,
+          "earlier_changed_hunks": 0,
+          "exact_span": 6,
+          "period_choice_differs": 1
+        },
+        "ordinary_revision": {
+          "all_wording_found": 9,
+          "docx_native_locations_checked": 9,
+          "earlier_changed_hunks": 0,
+          "exact_span": 7,
+          "period_choice_differs": 2
+        }
+      },
+      "docx_to_txt": {
+        "generated_insertion": {
+          "all_wording_found": 7,
+          "docx_native_locations_checked": 0,
+          "earlier_changed_hunks": 0,
+          "exact_span": 6,
+          "period_choice_differs": 1
+        },
+        "ordinary_revision": {
+          "all_wording_found": 9,
+          "docx_native_locations_checked": 0,
+          "earlier_changed_hunks": 0,
+          "exact_span": 7,
+          "period_choice_differs": 2
+        }
+      },
+      "txt_to_docx": {
+        "generated_insertion": {
+          "all_wording_found": 7,
+          "docx_native_locations_checked": 7,
+          "earlier_changed_hunks": 0,
+          "exact_span": 6,
+          "period_choice_differs": 1
+        },
+        "ordinary_revision": {
+          "all_wording_found": 9,
+          "docx_native_locations_checked": 9,
+          "earlier_changed_hunks": 0,
+          "exact_span": 7,
+          "period_choice_differs": 2
+        }
+      },
+      "txt_to_txt": {
+        "generated_insertion": {
+          "all_wording_found": 7,
+          "docx_native_locations_checked": 0,
+          "earlier_changed_hunks": 0,
+          "exact_span": 6,
+          "period_choice_differs": 1
+        },
+        "ordinary_revision": {
+          "all_wording_found": 9,
+          "docx_native_locations_checked": 0,
+          "earlier_changed_hunks": 0,
+          "exact_span": 7,
+          "period_choice_differs": 2
+        }
+      }
+    }
+  },
+  "schema": "chipmunk.held-publisher-insertion-public/1",
+  "scoring": {
+    "seconds_single_cpu_thread": 36.96,
+    "unique_strings": 347
+  },
+  "source_cohorts": {
+    "data_carpentry_courses": 1,
+    "insertions_by_sentence_count": {
+      "1": 4,
+      "2": 3,
+      "3": 2
+    },
+    "no_known_overlap_comparator_files": 69,
+    "positive_source_groups": 6,
+    "programming_historian_articles": 8
+  }
+}

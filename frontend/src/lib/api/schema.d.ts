@@ -3593,6 +3593,8 @@ export interface components {
             schema: "chipmunk.document-revision-comparison/1" | "chipmunk.document-revision-comparison/2" | "chipmunk.document-revision-comparison/3" | "chipmunk.document-revision-comparison/4" | "chipmunk.document-revision-comparison/5" | "chipmunk.document-revision-comparison/6" | "chipmunk.document-revision-comparison/7" | "chipmunk.document-revision-comparison/8" | "chipmunk.document-revision-comparison/9";
             /** Scope */
             scope: string;
+            /** Sentence Insertion Alignment */
+            sentence_insertion_alignment?: "sentence-insertion-boundary/1" | null;
             word_tables?: components["schemas"]["DraftWordTables"] | null;
         };
         /** DraftExcerpt */

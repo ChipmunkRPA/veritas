@@ -17,6 +17,8 @@ from app.evidence.document_revision import (
     HTML_COORDINATES,
     MAX_BYTES,
     RELOCATION_SCHEMA,
+    SENTENCE_INSERTION_KEY,
+    SENTENCE_INSERTION_POLICY,
     compare_with_sources,
     draft_extension,
 )
@@ -88,6 +90,7 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
         == document_native_locations.ODT_VISIBILITY,
         skip_hidden_rtf_runs=received.get(document_native_locations.RTF_VISIBILITY_KEY)
         == document_native_locations.RTF_VISIBILITY,
+        exact_sentence_insertions=received.get(SENTENCE_INSERTION_KEY) == SENTENCE_INSERTION_POLICY,
     )
     rebuilt = refine_wording(expected, old_text, new_text) if anchored else expected
     if json.dumps(received, sort_keys=True, allow_nan=False) != json.dumps(rebuilt, sort_keys=True, allow_nan=False):

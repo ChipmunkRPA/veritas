@@ -5811,6 +5811,18 @@
             "title": "Scope",
             "type": "string"
           },
+          "sentence_insertion_alignment": {
+            "anyOf": [
+              {
+                "const": "sentence-insertion-boundary/1",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Sentence Insertion Alignment"
+          },
           "word_tables": {
             "anyOf": [
               {

@@ -292,6 +292,7 @@ class DraftComparison(BaseModel):
     odt_section_visibility: Literal["visible-odt-sections/1"] | None = None
     rtf_run_visibility: Literal["visible-rtf-direct-runs/1"] | None = None
     markdown_fenced_code: Literal["exclude-commonmark-fenced-code/1"] | None = None
+    sentence_insertion_alignment: Literal["sentence-insertion-boundary/1"] | None = None
 
 
 class DocumentRevisionResponse(BaseModel):

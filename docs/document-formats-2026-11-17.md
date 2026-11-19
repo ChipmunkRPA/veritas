@@ -604,6 +604,17 @@ local text recognition. A corrupt DOCX and undeclared legacy HTML failed
 before checkout. Zero analysis jobs started before payment.
 [Local format verification receipt](evaluation-panels/document-format-compatibility-2026-11-19.json)
 
+## Earlier Word and plain-text drafts
+
+When one complete, unambiguously located sentence block was inserted, the
+earlier-draft comparison marks its full source range, including punctuation.
+All 64 comparisons had exact boundaries across TXT and DOCX pairings, up from
+52. A separate local Chrome replay matched the highlighted text, PDF, and JSON
+against both original files in five comparisons after three simulated USD
+9.99 checkouts. Draft comparison kept the automated assessment unchanged and
+created zero additional analysis jobs.
+[Published writing revision study](writing-publisher-insertions-2026-11-19.md)
+
 ## Earlier OpenDocument drafts
 
 After a document analysis, **Compare with an earlier draft** accepts ODT

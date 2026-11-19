@@ -33,6 +33,8 @@ MIXED_SCHEMA = "chipmunk.document-revision-comparison/3"
 RELOCATION_SCHEMA = "chipmunk.document-revision-comparison/6"
 EDITED_RELOCATION_SCHEMA = "chipmunk.document-revision-comparison/8"
 ARTICLE_SCHEMA = "chipmunk.document-revision-comparison/9"
+SENTENCE_INSERTION_KEY = "sentence_insertion_alignment"
+SENTENCE_INSERTION_POLICY = "sentence-insertion-boundary/1"
 HTML_COORDINATES = "email_html_extracted_text_unicode_codepoint"
 ARTICLE_COORDINATES = "html_article_extracted_text_unicode_codepoint"
 MIXED_COORDINATES = "per_source_unicode_codepoint"
@@ -122,7 +124,7 @@ def differences(earlier, later):
             for a, b, c, d, old, new in edits]
 
 
-def _sentence_anchors(text, layout, extension, body):
+def _draft_sentence_spans(text, layout, extension):
     from app.detectors.text.segment import spans
 
     if extension == ".docx" or extension in EXTRACTED_PARAGRAPH_DRAFTS:
@@ -133,10 +135,14 @@ def _sentence_anchors(text, layout, extension, body):
         blocks = [(row["start"], row["end"]) for row in layout]
     else:
         blocks = layout
+    return spans(text, blocks)
+
+
+def _sentence_anchors(text, layout, extension, body):
     starts = [row[1] for row in body]
     result = {}
     repeated = set()
-    for start, end, _ in spans(text, blocks):
+    for start, end, _ in _draft_sentence_spans(text, layout, extension):
         a, b = (bisect_right(starts, point - 1) for point in (start, end))
         if b - a < 8 or body[b - 1][2] > end or a and body[a - 1][2] > start:
             continue
@@ -145,6 +151,51 @@ def _sentence_anchors(text, layout, extension, body):
             repeated.add(key)
         result[key] = a, b
     return {key: value for key, value in result.items() if key not in repeated}
+
+
+def _sentence_insertion(row, old, new, old_text, new_text, old_layout, new_layout, old_extension, new_extension):
+    """Keep an unchanged sentence's terminal punctuation on that sentence."""
+    before, after = row["earlier"], row["later"]
+    if not before or not after or before[0] != before[1] or row["earlier_changed_tokens"]:
+        return None
+    inserted_tokens = len(new) - len(old)
+    if inserted_tokens < 2 or len(row["later_changed_tokens"]) != inserted_tokens:
+        return None
+    first = bisect_right([token[1] for token in new], after[0] - 1)
+    stop = first + inserted_tokens
+    if not 0 < first < len(old) - 1 or stop >= len(new) - 1:
+        return None
+    terminal, unchanged_end = new[first][0], new[first][2]
+    if (terminal not in {".", "!", "?"} or terminal != new[stop][0] or terminal != old[first][0]
+            or old[first][1] != before[0] or new[first][1] != after[0] or new[stop - 1][2] != after[1]):
+        return None
+    if (old_text[:old[first][2]] != new_text[:unchanged_end]
+            or old_text[old[first + 1][1]:] != new_text[new[stop + 1][1]:]):
+        return None
+
+    old_sentences = _draft_sentence_spans(old_text, old_layout, old_extension)
+    new_sentences = _draft_sentence_spans(new_text, new_layout, new_extension)
+    start, end = new[first + 1][1], new[stop][2]
+    added = [index for index, (left, right, _) in enumerate(new_sentences) if start <= left and right <= end]
+    if not 1 <= len(added) <= 3:
+        return None
+    left, right = added[0], added[-1] + 1
+    if (left == 0 or right == len(new_sentences) or new_sentences[left][0] != start
+            or new_sentences[right - 1][1] != end or new_sentences[left - 1][1] != unchanged_end
+            or right - left != len(added) or len(old_sentences) != len(new_sentences) - len(added)
+            or old_sentences[left - 1][1] != old[first][2]):
+        return None
+    previous = [old_text[a:b] for a, b, _ in old_sentences]
+    revised = [new_text[a:b] for a, b, _ in new_sentences]
+    if previous != revised[:left] + revised[right:]:
+        return None
+    # A repeated edge sentence could move the insertion boundary another way.
+    if revised[left - 1] == revised[right - 1] or revised[left] == revised[right]:
+        return None
+
+    point = old[first + 1][1]
+    return {"earlier": [point, point], "later": [start, end], "earlier_changed_tokens": [],
+            "later_changed_tokens": [[a, b] for _, a, b in new[first + 1:stop + 1]]}
 
 
 def _localized_body_differences(old_text, new_text, old_layout, new_layout, old_extension, new_extension, old, new):
@@ -616,6 +667,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                          include_values: bool = False,
                          skip_hidden_odt_sections: bool = True,
                          skip_hidden_rtf_runs: bool = True,
+                         exact_sentence_insertions: bool = True,
                          ) -> tuple[dict, str, str, WordLayouts | PdfLayouts | MixedLayouts | None]:
     """Return ephemeral native layouts for the requested paired sentence scope."""
     old_extension = extension if earlier_extension is None else earlier_extension
@@ -631,6 +683,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     if any(not 0 < len(item) <= MAX_BYTES for item in (earlier, later)):
         raise ValueError("Each version must be nonempty and at most 1 MiB.")
     changes = []
+    sentence_insertion = False
     relocation = None
     edited_relocation = False
     schema = SCHEMA
@@ -702,6 +755,13 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                                                         extension, old_tokens[role], new_tokens[role])
             else:
                 edit_rows = differences(old_tokens[role], new_tokens[role])
+            if (exact_sentence_insertions and role == "body" and relocation is None and len(edit_rows) == 1
+                    and old_extension in {".txt", ".docx"} and extension in {".txt", ".docx"}):
+                aligned = _sentence_insertion(edit_rows[0], old_tokens[role], new_tokens[role], old_text, new_text,
+                                              old_layout, new_layout, old_extension, extension)
+                if aligned is not None:
+                    edit_rows = [aligned]
+                    sentence_insertion = True
             for change in edit_rows:
                 before = _excerpt(old_text, change["earlier"], change["earlier_changed_tokens"], old_layout, old_extension)
                 after = _excerpt(new_text, change["later"], change["later_changed_tokens"], new_layout, extension)
@@ -729,6 +789,8 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
             "coordinate_space": coordinates,
             "earlier": old_source, "later": new_source, "changes": changes,
             "scope": scope, "interpretation": INTERPRETATION}
+    if sentence_insertion:
+        result[SENTENCE_INSERTION_KEY] = SENTENCE_INSERTION_POLICY
     if skip_hidden_odt_sections and ".odt" in (old_extension, extension):
         result[document_native_locations.ODT_VISIBILITY_KEY] = document_native_locations.ODT_VISIBILITY
         result["scope"] += " " + document_native_locations.ODT_VISIBILITY_SCOPE

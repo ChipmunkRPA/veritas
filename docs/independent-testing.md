@@ -35,6 +35,10 @@ The [second voice-conversion trial](audio-openvoice-enrollment-2026-11-19.md)
 recounts paired outcomes from a different conversion pipeline with genuine
 splice and resampling controls, and separate isolated backgrounds.
 
+The [published writing revision study](writing-publisher-insertions-2026-11-19.md)
+compares standalone and paired AI readings with known insertions. The earlier
+draft comparison recounts exact Word and plain-text source positions.
+
 From the repository root, run `make replay-evidence` with Python 3.11
 or newer. It uses the standard library to verify the published case
 records and recalculate results for [reflected PNG areas](image-png-reflection-2026-11-18.md),

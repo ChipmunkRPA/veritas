@@ -872,6 +872,89 @@ def test_word_comparison_uses_exact_body_paragraph_coordinates_in_api_pdf_and_re
         review(export, old_path, new_path)
 
 
+@pytest.mark.parametrize(("before_format", "after_format"), [
+    (".txt", ".txt"), (".docx", ".docx"), (".docx", ".txt"), (".txt", ".docx"),
+])
+def test_draft_insertion_keeps_period_on_its_sentence(reference_http, monkeypatch, tmp_path, before_format, after_format):
+    f = _install(reference_http, monkeypatch)
+    prefix = "The café closes after lunch."
+    inserted = "Garden volunteers set three clean blue bowls on the longest table. They collect them after the queue ends."
+    suffix = ("The brown baskets stay near the entrance when members collect a meal. "
+              "Each order includes a clearly labeled receipt with a stamped number.")
+    before, after = f"{prefix} {suffix}", f"{prefix} {inserted} {suffix}"
+
+    def carrier(text, extension):
+        if extension == ".txt":
+            return text.encode()
+        word = Document()
+        word.add_paragraph(text)
+        output = BytesIO()
+        word.save(output)
+        return output.getvalue()
+
+    earlier, later = carrier(before, before_format), carrier(after, after_format)
+    _saved(f, "inserted-sentences", after_format, later)
+    response = f.client.post(_url("inserted-sentences"), headers=f.viewer, files=_upload(earlier, before_format),
+                             data={"include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    result = response.json()
+    comparison = result["comparison"]
+    key = document_revision.SENTENCE_INSERTION_KEY
+    assert comparison[key] == document_revision.SENTENCE_INSERTION_POLICY
+    (change,) = comparison["changes"]
+    old, new = change["earlier"], change["later"]
+    start = len(prefix) + 1
+    end = start + len(inserted)
+    assert old["text"] == "" and old["start"] == old["end"] == start and not old["changed_tokens"]
+    assert new["text"] == after[start:end] == inserted
+    assert [new["start"], new["end"]] == [start, end]
+    assert new["changed_tokens"][-1] == [end - 1, end]
+    if after_format == ".docx":
+        assert new["paragraphs"] == [{"paragraph": 1, "body_index": 0, "start": start, "end": end}]
+    with pymupdf.open(stream=base64.b64decode(result["pdf"]), filetype="pdf") as report:
+        text = " ".join(" ".join(page.get_text().split()) for page in report)
+    assert inserted in text
+
+    old_path, new_path = tmp_path / f"before{before_format}", tmp_path / f"after{after_format}"
+    old_path.write_bytes(earlier)
+    new_path.write_bytes(later)
+    export = tmp_path / "comparison.json"
+    export.write_text(json.dumps(comparison))
+    assert review(export, old_path, new_path)["source_hashes_verified"] == 2
+
+    historical, *_ = document_revision.compare_with_sources(
+        earlier, later, after_format, earlier_extension=before_format, include_values=True, exact_sentence_insertions=False,
+    )
+    assert key not in historical and historical["changes"][0]["later"]["text"] == ". " + inserted[:-1]
+    export.write_text(json.dumps(historical))
+    assert review(export, old_path, new_path)["source_hashes_verified"] == 2
+    export.write_text(json.dumps({**historical, key: document_revision.SENTENCE_INSERTION_POLICY}))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(export, old_path, new_path)
+    del comparison[key]
+    export.write_text(json.dumps(comparison))
+    with pytest.raises(ValueError, match="does not replay"):
+        review(export, old_path, new_path)
+
+
+@pytest.mark.parametrize("edit", [
+    "The café closes after a late lunch. The brown baskets stay near the entrance when members collect a meal.",
+    "The café closes after lunch.",
+    "The café closes after lunch. Joined sentence without terminator The brown baskets stay near the entrance "
+    "when members collect a meal.",
+    "The café closes after lunch. The café closes after lunch. The brown baskets stay near the entrance when members collect a meal.",
+    "The café closes after lunch. First group arrives. Second group rests. Third group waits. Fourth group leaves. "
+    "The brown baskets stay near the entrance when members collect a meal.",
+])
+def test_sentence_insertion_guard_preserves_other_draft_changes(edit):
+    earlier = ("The café closes after lunch. The brown baskets stay near the entrance when members collect a meal. "
+               "Each order includes a clearly labeled receipt with a stamped number.").encode()
+    later = f"{edit} Each order includes a clearly labeled receipt with a stamped number.".encode()
+    current, *_ = document_revision.compare_with_sources(earlier, later, ".txt")
+    legacy, *_ = document_revision.compare_with_sources(earlier, later, ".txt", exact_sentence_insertions=False)
+    assert current == legacy
+
+
 @pytest.mark.parametrize(("old_extension", "new_extension"), [
     (".odt", ".odt"), (".docx", ".odt"), (".odt", ".docx"), (".pdf", ".odt"), (".odt", ".pdf"),
     (".rtf", ".rtf"), (".docx", ".rtf"), (".rtf", ".docx"), (".pdf", ".rtf"), (".rtf", ".pdf"),

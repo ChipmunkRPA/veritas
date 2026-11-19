@@ -156,6 +156,40 @@ def _av(path: Path, kind: str) -> None:
         raise PreflightError(f"The {kind} stream contains no decodable content. No payment was started.")
 
 
+def _only_directly_hidden_word_text(document) -> bool:
+    """Prove that every readable character is covered by a mapped, directly hidden Word run."""
+    from app.evidence import document_word_visibility
+
+    visibility = document.meta.get(document_word_visibility.KEY, {})
+    hidden = {}
+    for location in visibility.get("locations", ()):
+        if "run_basis" not in location:
+            path = tuple(location["body_path"])
+            hidden.setdefault(path, set()).add((location["run"], location["source_start"], location["source_end"]))
+    if not hidden:
+        return False
+
+    readable = bytearray(char.isprintable() and not char.isspace() for char in document.text)
+    if not any(readable):
+        return False
+    for block in document.source_map:
+        if block["kind"] != "docx" or not block.get("run_mapping_complete"):
+            continue
+        recorded = hidden.get(tuple(block["body_path"]), ())
+        runs = [(item["start"], item["end"]) for item in block["runs"]
+                if (item["run"], item["start"], item["end"]) in recorded]
+        if not runs:
+            continue
+        for start, end, source_start, source_end in block["source_ranges"]:
+            if end - start != source_end - source_start:
+                continue
+            for left, right in runs:
+                a, b = max(source_start, left), min(source_end, right)
+                if a < b:
+                    readable[start + a - source_start:start + b - source_start] = b"\0" * (b - a)
+    return not any(readable)
+
+
 def _document(path: Path, extension: str) -> None:
     if extension == ".pdf":
         import pymupdf
@@ -203,6 +237,9 @@ def _document(path: Path, extension: str) -> None:
                              or document_tracked_changes.unsupported(document.word_review)):
         # The writing pipeline can still retain native Word revision evidence.
         return
+    if extension == ".docx" and _only_directly_hidden_word_text(document):
+        raise PreflightError("The Word document contains only text marked hidden in its supported body. "
+                             "Remove the hidden formatting or export a PDF that shows the writing. No payment was started.")
 
     text = document.text
     readable = any(char.isprintable() and not char.isspace() for char in text)

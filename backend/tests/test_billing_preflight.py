@@ -172,6 +172,36 @@ def test_docx_requires_readable_body_text_but_accepts_a_table():
     verify(content.getvalue(), "table-only.docx", "document")
 
 
+@pytest.mark.parametrize("location", ["body", "table", "hyperlink"])
+@pytest.mark.parametrize("strict", [False, True])
+def test_docx_checkout_requires_some_writing_outside_proven_hidden_runs(location, strict):
+    from docx import Document
+    from docx.oxml import OxmlElement
+    from test_strict_word import _strict_package
+
+    document = Document()
+    paragraph = (document.add_table(rows=1, cols=1).cell(0, 0).paragraphs[0]
+                 if location == "table" else document.add_paragraph())
+    first = paragraph.add_run("  🧪 First   hidden words.\t")
+    second = paragraph.add_run("\u00a0" + WRITING)
+    first.font.hidden = second.font.hidden = True
+    if location == "hyperlink":
+        hyperlink = OxmlElement("w:hyperlink")
+        hyperlink.append(second._r)
+        paragraph._p.append(hyperlink)
+
+    def package():
+        content = io.BytesIO()
+        document.save(content)
+        data = content.getvalue()
+        return _strict_package(data) if strict else data
+
+    with pytest.raises(preflight.PreflightError, match="only text marked hidden.*No payment was started"):
+        verify(package(), "hidden.docx", "document")
+    paragraph.add_run(" \t" + WRITING).font.hidden = False
+    verify(package(), "visible-and-hidden.docx", "document")
+
+
 def test_rtf_preflight_requires_the_signature_and_readable_body():
     verify(rb"{\rtf1\ansi A readable rich text document contains ordinary words and ends with two visible literal braces \{ and \}.}",
            "article.RTF", "document")
@@ -301,7 +331,8 @@ def test_checkout_applies_the_same_raw_plain_text_byte_limit_as_analysis(monkeyp
 
 
 @pytest.mark.parametrize(("element", "text_element"), [("w:del", "w:delText"), ("w:moveFrom", "w:t")])
-def test_word_checkout_can_retain_revision_evidence_with_no_current_body_text(element, text_element):
+@pytest.mark.parametrize("hidden_body", [False, True])
+def test_word_checkout_can_retain_revision_evidence_without_visible_body_text(element, text_element, hidden_body):
     from docx import Document
     from docx.oxml import OxmlElement
     from docx.oxml.ns import qn
@@ -316,6 +347,8 @@ def test_word_checkout_can_retain_revision_evidence_with_no_current_body_text(el
     run.append(text)
     change.append(run)
     paragraph._p.append(change)
+    if hidden_body:
+        document.add_paragraph().add_run(WRITING).font.hidden = True
     package = io.BytesIO()
     document.save(package)
     verify(package.getvalue(), "tracked.docx", "document")

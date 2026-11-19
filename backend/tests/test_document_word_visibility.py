@@ -15,7 +15,7 @@ from docx.shared import Inches
 from test_document_packets import packet_factory as packet_factory
 from test_strict_word import _strict_package
 from test_stripe_billing import billing as billing
-from test_stripe_billing import counts, event_for, signed
+from test_stripe_billing import counts, event_for, signed, upload
 
 from app.api.public_projection import project
 from app.billing import purchase_notice
@@ -29,7 +29,7 @@ from app.evidence import document_word_visibility as visibility
 from app.evidence.document_packets import build_packet_set, load_packet_set, packet_hash
 from app.reports import engine, multimedia_evidence, public_package, public_verify, verify_document_source
 from app.reports.specimens import specimen
-from app.storage.db import Analysis
+from app.storage.db import Analysis, BillingOrderRow
 from app.storage.objects import ObjectIntegrityError
 
 
@@ -211,3 +211,20 @@ def test_paid_document_pipeline_publishes_word_visibility(billing):
         assert project(result)["decision"]["verbal"] == visibility.HEADLINE
         assert evidence["coverage"][visibility.KEY]["hidden_runs"] == 1
         assert result["manifest"]["sampling"][visibility.COMMITMENT] == canonical_hash(evidence["coverage"][visibility.KEY])
+
+
+def test_hidden_only_word_does_not_create_a_payment_order(billing):
+    document = Document()
+    text = "These hidden words must never reach payment because the document contains no other writing in its supported body."
+    document.add_paragraph().add_run(text).font.hidden = True
+    content = io.BytesIO()
+    document.save(content)
+
+    response = upload(billing, filename="hidden.docx", content=content.getvalue(), kind="document",
+                      mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+    assert response.status_code == 422
+    assert "only text marked hidden" in response.json()["detail"]
+    assert text not in response.text
+    assert billing.created == [] and counts(billing) == (0, 0, 0)
+    with billing.sessions() as db:
+        assert db.query(BillingOrderRow).count() == 0

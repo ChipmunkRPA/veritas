@@ -90,3 +90,16 @@ three flags out of 72 ordinary files from one reader group, and zero flags
 on the 24 standalone traffic deliveries. More measurable speech did not
 improve these localization results. The follow-up reused the diagnosed
 recordings and carries no claim of independent accuracy.
+
+## Agreement at identical window positions
+
+A retrospective readback required the same two neighboring short windows
+to clear their existing points in both the original and projected views.
+Adding this rule to the two-second check located 24 of 48 clean edits
+with zero ordinary alerts, up from 15 of 48. Adding the raw short-window
+rule instead located 29 of 48 clean edits. Under competing speech the
+raw addition located two edits, flagged three ordinary files, and gave
+two misplaced alerts. Agreement between views gave zero alerts and zero
+correct locations under competing speech or traffic. Both views use the
+same detector and the same recorded signal. The result motivates
+a separate evaluation of agreement before any product change.

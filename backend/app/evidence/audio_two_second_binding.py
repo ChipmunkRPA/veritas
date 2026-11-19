@@ -12,7 +12,19 @@ KEY = "two_second_review"
 SCHEMA = "chipmunk.extended-short-voice-review/1"
 CONFIRMED_SCHEMA = "chipmunk.extended-short-voice-review/2"
 PRESENTED_SCHEMA = "chipmunk.extended-short-voice-review/3"
-CONFIRMATION_SCHEMAS = frozenset({CONFIRMED_SCHEMA, PRESENTED_SCHEMA})
+CONFIRMED_COVERAGE_SCHEMA = "chipmunk.extended-short-voice-review/4"
+PRESENTED_COVERAGE_SCHEMA = "chipmunk.extended-short-voice-review/5"
+UNCONFIRMED_COVERAGE_SCHEMA = "chipmunk.extended-short-voice-review/6"
+COVERAGE_SCHEMA_BY_RECEIPT = {
+    SCHEMA: UNCONFIRMED_COVERAGE_SCHEMA,
+    CONFIRMED_SCHEMA: CONFIRMED_COVERAGE_SCHEMA,
+    PRESENTED_SCHEMA: PRESENTED_COVERAGE_SCHEMA,
+}
+COVERAGE_SCHEMAS = frozenset(COVERAGE_SCHEMA_BY_RECEIPT.values())
+PRESENTATION_SCHEMAS = frozenset({PRESENTED_SCHEMA, PRESENTED_COVERAGE_SCHEMA})
+CONFIRMATION_SCHEMAS = PRESENTATION_SCHEMAS | {CONFIRMED_SCHEMA, CONFIRMED_COVERAGE_SCHEMA}
+LONG_REVIEW_SCHEMAS = frozenset({SCHEMA, UNCONFIRMED_COVERAGE_SCHEMA, CONFIRMED_SCHEMA, CONFIRMED_COVERAGE_SCHEMA})
+COVERAGE = "sample_coverage"
 DETECTOR_ID = "aud.extended_short_voice_review"
 TITLE = "Two-second speech windows"
 RATE = short.RATE
@@ -40,6 +52,9 @@ REASONS_BY_SCHEMA = {
     },
 }
 REASONS_BY_SCHEMA[PRESENTED_SCHEMA] = REASONS_BY_SCHEMA[CONFIRMED_SCHEMA]
+for receipt_schema, public_schema in COVERAGE_SCHEMA_BY_RECEIPT.items():
+    LIMITATIONS[public_schema] = LIMITATIONS[receipt_schema]
+    REASONS_BY_SCHEMA[public_schema] = REASONS_BY_SCHEMA[receipt_schema]
 TIMEOUT = "The two-second scan ran out of analysis time."
 TIME_BUDGET = "The two-second scan did not have enough analysis time."
 UNAVAILABLE = "The optional two-second scan could not complete."
@@ -85,7 +100,7 @@ def presented_samples(source):
 def supported_source(source, schema=SCHEMA):
     from app.evidence.audio_long_review_binding import supported_source as supported_long_source
 
-    if schema == PRESENTED_SCHEMA:
+    if schema in PRESENTATION_SCHEMAS:
         return presented_samples(source) is not None
     return bool(excerpt_starts(source.get("samples"))) and supported_long_source(source)
 
@@ -94,6 +109,43 @@ def _absolute_range(excerpt, index):
     start, end = short.GRID[index]
     offset = excerpt["start_sample"]
     return offset + start, offset + end
+
+
+def sample_coverage(excerpts, source, *, schema):
+    """Map checked window unions on the verified original clock, counting duplicate windows once."""
+    presented = schema in PRESENTATION_SCHEMAS
+    scope = presented_samples(source) if presented else source["samples"]
+    scheduled, checked = set(), set()
+    for excerpt in excerpts:
+        for index, count in enumerate(excerpt["speech_samples"]):
+            interval = _absolute_range(excerpt, index)
+            scheduled.add(interval)
+            if count >= RATE:
+                checked.add(interval)
+    merged = []
+    for start, end in sorted(checked):
+        if merged and start <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+        else:
+            merged.append((start, end))
+
+    def interval(start, end, status):
+        result = {"start_sample": start, "end_sample": end, "status": status,
+                  "source_timestamp_ranges": [short.source_range(source, start, end)]}
+        if presented:
+            result["native_source_range"] = native_range(start, end)
+        return result
+
+    intervals, cursor = [], 0
+    for start, end in merged:
+        if start > cursor:
+            intervals.append(interval(cursor, start, "insufficient_speech"))
+        intervals.append(interval(start, end, "checked"))
+        cursor = end
+    if cursor < scope:
+        intervals.append(interval(cursor, scope, "insufficient_speech"))
+    return {"scope_samples": scope, "checked_samples": sum(end - start for start, end in merged),
+            "scheduled_windows": len(scheduled), "checked_windows": len(checked), "intervals": intervals}
 
 
 def _cut(interval, excerpts):
@@ -109,7 +161,7 @@ def regions(excerpts, *, schema=SCHEMA):
         if schema in CONFIRMATION_SCHEMAS:
             for window in excerpt["elevated_windows"]:
                 elevated[_absolute_range(excerpt, window)].append(index)
-    if schema == SCHEMA:
+    if schema not in CONFIRMATION_SCHEMAS:
         return [_cut(interval, support) for interval, support in sorted(selected.items())]
     confirmed, shown_pairs = [], set()
     for interval, support in sorted(selected.items()):
@@ -194,7 +246,7 @@ def _validate_window(row, planned, source, *, schema):
 
     start, end, support = (row[key] for key in ("start_sample", "end_sample", "supporting_excerpts"))
     fields = {*planned, "pcm_sha256", "source_timestamp_ranges", "artifacts"}
-    if schema == PRESENTED_SCHEMA:
+    if schema in PRESENTATION_SCHEMAS:
         fields.add("native_source_range")
         _require(row.get("native_source_range") == native_range(start, end), "Speech window differs from the native source clock")
     _require(set(row) == fields
@@ -222,7 +274,10 @@ def _validate_elevated(row):
 def validate(review, source):
     try:
         schema = review["schema"]
-        _require(set(review) == {"schema", "title", "status", "reason", "limitation", "affects_overall_confidence", "excerpts", "regions"}
+        fields = {"schema", "title", "status", "reason", "limitation", "affects_overall_confidence", "excerpts", "regions"}
+        if schema in COVERAGE_SCHEMAS and review["status"] != "skipped":
+            fields.add(COVERAGE)
+        _require(set(review) == fields
                  and schema in LIMITATIONS and review["title"] == TITLE and review["limitation"] == LIMITATIONS[schema]
                  and review["affects_overall_confidence"] is False and supported_source(source, schema),
                  "Two-second evidence is outside its native source scope")
@@ -231,7 +286,7 @@ def validate(review, source):
         if review["status"] == "skipped":
             _require(not excerpts and not shown and review["reason"] in SKIP_REASONS, "Skipped two-second scan carries measurements")
             return
-        scope = presented_samples(source) if schema == PRESENTED_SCHEMA else source["samples"]
+        scope = presented_samples(source) if schema in PRESENTATION_SCHEMAS else source["samples"]
         starts = excerpt_starts(scope)
         _require(len(excerpts) == len(starts), "Incomplete set of speech excerpts")
         fields = {"start_sample", "pcm_sha256", "speech_samples", "selected_window"}
@@ -245,6 +300,9 @@ def validate(review, source):
                      "Flagged window has insufficient speech or falls outside its excerpt")
             if schema in CONFIRMATION_SCHEMAS:
                 _validate_elevated(row)
+        if schema in COVERAGE_SCHEMAS:
+            _require(review[COVERAGE] == sample_coverage(excerpts, source, schema=schema),
+                     "Two-second speech coverage differs from the admitted windows or source clock")
         expected = regions(excerpts, schema=schema)
         wanted = status(excerpts, expected)
         _require(review["status"] == wanted and review["reason"] == REASONS_BY_SCHEMA[schema][wanted]

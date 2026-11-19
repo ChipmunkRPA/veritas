@@ -304,6 +304,20 @@ def test_two_second_scan_deduplicates_source_ranges_and_replays_confirmation(sch
     assert scan["status"] == ("flagged" if marked else "no_flag") and scan["affects_overall_confidence"] is False
     assert all("responses" not in excerpt and ("elevated_windows" in excerpt) == (schema == two_second.CONFIRMED_SCHEMA)
                for excerpt in scan["excerpts"])
+    assert scan["schema"] == two_second.COVERAGE_SCHEMA_BY_RECEIPT[schema]
+    assert scan[two_second.COVERAGE] == {
+        "scope_samples": 160_001, "checked_samples": 160_000, "scheduled_windows": 14, "checked_windows": 9,
+        "intervals": [
+            {"start_sample": 0, "end_sample": 160_000, "status": "checked",
+             "source_timestamp_ranges": [short.source_range(source, 0, 160_000)]},
+            {"start_sample": 160_000, "end_sample": 160_001, "status": "insufficient_speech",
+             "source_timestamp_ranges": [short.source_range(source, 160_000, 160_001)]},
+        ],
+    }
+    forged_coverage = deepcopy(scan)
+    forged_coverage[two_second.COVERAGE]["intervals"][1]["source_timestamp_ranges"][0]["source_end_pts"] += 1
+    with pytest.raises(ValueError, match="coverage differs"):
+        two_second.validate(forged_coverage, source)
     windows = binding.all_media_windows(review)
     if marked:
         assert windows[0]["supporting_excerpts"] == [0, 1, 2]
@@ -346,6 +360,27 @@ def test_two_second_reciprocal_windows_share_one_exhibit():
     assert "same_pair_as" not in first and repeat["same_pair_as"] == first["start_sample"]
     assert first["confirming_window"]["start_sample"] == repeat["start_sample"]
     assert repeat["confirming_window"]["start_sample"] == first["start_sample"]
+
+
+def test_two_second_coverage_checks_a_duplicate_if_any_occurrence_had_enough_speech():
+    source = native_source(12 * short.RATE)
+    excerpts = [{"start_sample": value, "speech_samples": [0] * len(short.GRID)}
+               for value in two_second.excerpt_starts(source["samples"])]
+    schema = two_second.CONFIRMED_COVERAGE_SCHEMA
+    empty = two_second.sample_coverage(excerpts, source, schema=schema)
+    assert empty["scheduled_windows"] == 11 and empty["checked_windows"] == empty["checked_samples"] == 0
+    assert [row["status"] for row in empty["intervals"]] == ["insufficient_speech"]
+
+    excerpts[0]["speech_samples"][2] = short.RATE - 1
+    excerpts[1]["speech_samples"][0] = short.RATE
+    coverage = two_second.sample_coverage(excerpts, source, schema=schema)
+    assert coverage["scheduled_windows"] == 11 and coverage["checked_windows"] == 1
+    assert coverage["checked_samples"] == 32_000
+    assert [(row["start_sample"], row["end_sample"], row["status"]) for row in coverage["intervals"]] == [
+        (0, 32_000, "insufficient_speech"), (32_000, 64_000, "checked"), (64_000, 192_000, "insufficient_speech"),
+    ]
+    excerpts[0]["speech_samples"][2] = short.RATE
+    assert two_second.sample_coverage(excerpts, source, schema=schema) == coverage
 
 
 def test_two_second_scan_reuses_only_identical_source_windows():
@@ -408,11 +443,27 @@ def test_two_second_aac_review_ends_at_presented_samples_and_binds_native_ticks(
     review = audio_long_review.build_presented(record, store=store, source=source, pcm=pcm, mapping=source,
                                              asset=asset, waveform=audio_packets._chart)
     assert review["status"] == "flagged"
+    assert review["schema"] == two_second.PRESENTED_COVERAGE_SCHEMA
+    coverage = review[two_second.COVERAGE]
+    assert coverage["scope_samples"] == coverage["checked_samples"] == presented
+    interval, = coverage["intervals"]
+    assert interval["native_source_range"] == {"start_pts": 0, "end_pts": 3 * presented, "time_base": "1/48000"}
+    assert interval["end_sample"] < len(pcm)
     assert review["excerpts"][-1]["start_sample"] + short.SAMPLES == presented
     assert all(window["end_sample"] <= presented for window in two_second.media_windows(review))
     audio_long_review.verify(review, record, store=store, source=source, pcm=pcm, mapping=source,
                              read_asset=assets.__getitem__, waveform=audio_packets._chart)
     audio_long_review.verify_presented_source(review, pcm=pcm, mapping=source, waveform=audio_packets._chart)
+    legacy = audio_long_review.build_presented(record, store=store, source=source, pcm=pcm, mapping=source,
+                                              asset=asset, waveform=audio_packets._chart, include_coverage=False)
+    assert legacy["schema"] == two_second.PRESENTED_SCHEMA and two_second.COVERAGE not in legacy
+    audio_long_review.verify(legacy, record, store=store, source=source, pcm=pcm, mapping=source,
+                             read_asset=assets.__getitem__, waveform=audio_packets._chart)
+    skipped = audio_long_review.build_presented(
+        two_second.skipped(two_second.TIMEOUT, schema=two_second.PRESENTED_SCHEMA),
+        store=store, source=source, pcm=pcm, mapping=source, asset=asset, waveform=audio_packets._chart,
+    )
+    assert skipped["status"] == "skipped" and two_second.COVERAGE not in skipped
     review["regions"][0]["confirming_window"]["native_source_range"]["end_pts"] += 1
     with pytest.raises(ValueError, match="differs from the native source clock"):
         two_second.validate(review, source)

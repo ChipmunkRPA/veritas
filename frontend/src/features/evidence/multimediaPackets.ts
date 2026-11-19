@@ -314,10 +314,22 @@ interface TwoSecondSpeechWindow extends SampleInterval {
 }
 interface TwoSecondSpeechReview {
   schema: 'chipmunk.extended-short-voice-review/1' | 'chipmunk.extended-short-voice-review/2' | 'chipmunk.extended-short-voice-review/3'
+    | 'chipmunk.extended-short-voice-review/4' | 'chipmunk.extended-short-voice-review/5' | 'chipmunk.extended-short-voice-review/6'
   title: string; status: 'flagged' | 'no_flag' | 'unassessed' | 'skipped'
   reason: string; limitation: string; affects_overall_confidence: false
   excerpts: { start_sample: number; pcm_sha256: string; speech_samples: number[]; selected_window: number | null; elevated_windows?: number[] }[]
   regions: (TwoSecondSpeechWindow & { confirming_window?: TwoSecondSpeechWindow; same_pair_as?: number })[]
+  sample_coverage?: {
+    scope_samples: number
+    checked_samples: number
+    scheduled_windows: number
+    checked_windows: number
+    intervals: (SampleInterval & {
+      status: 'checked' | 'insufficient_speech'
+      source_timestamp_ranges: TwoSecondSpeechWindow['source_timestamp_ranges']
+      native_source_range?: TwoSecondSpeechWindow['native_source_range']
+    })[]
+  }
 }
 export interface LongVoiceReview {
   schema: 'chipmunk.long-voice-review/1' | 'chipmunk.long-voice-review/2' | 'chipmunk.long-voice-review/3'; title: 'Long speech-window review'

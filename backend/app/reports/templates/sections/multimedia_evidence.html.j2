@@ -401,7 +401,22 @@
 {% if scan %}
 <h3 id="multimedia-two-second-speech-review">{{ scan.title }}</h3>
 <p class="caption">{% if scan.status == 'skipped' %}Skipped. {% endif %}{{ scan.reason }}
-{% if scan.excerpts %}Completed {{ scan.checked_windows }} window checks across {{ scan.excerpts | length }} overlapping six-second excerpts.{% endif %}</p>
+{% if scan.excerpts and not scan.get('sample_coverage') %}Completed {{ scan.checked_windows }} window checks across {{ scan.excerpts | length }} overlapping six-second excerpts.{% endif %}</p>
+{% set scan_coverage = scan.get('sample_coverage') %}
+{% if scan_coverage %}
+<h4>Where the two-second check ran</h4>
+<p class="caption">{{ scan_coverage.checked_windows }} of {{ scan_coverage.scheduled_windows }} distinct windows checked, covering
+{{ '%.3f' | format(scan_coverage.checked_samples / 16000) }} of {{ '%.3f' | format(scan_coverage.scope_samples / 16000) }} s.
+Overlapping checked windows are counted once. Coverage describes where the check ran.</p>
+<table><thead><tr><th>Source interval</th><th>Coverage</th></tr></thead>
+<tbody>{% for interval in scan_coverage.intervals %}<tr>
+<td>{{ '%.7f' | format(interval.start_sample / 16000) }}–{{ '%.7f' | format(interval.end_sample / 16000) }} s.
+Samples [{{ interval.start_sample }}, {{ interval.end_sample }}).
+{% if interval.get('native_source_range') %}Original ticks [{{ interval.native_source_range.start_pts }}, {{ interval.native_source_range.end_pts }}) at {{ interval.native_source_range.time_base }}.
+{% else %}{% for range in interval.source_timestamp_ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% endfor %}{% endif %}</td>
+<td>{{ 'Checked' if interval.status == 'checked' else 'Insufficient detected speech' }}</td>
+</tr>{% endfor %}</tbody></table>
+{% endif %}
 {% for region in scan.regions %}
 <div class="multimedia-scored-context">
 {% set seconds_format = '%.7f' if region.get('confirming_window') else '%.3f' %}

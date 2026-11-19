@@ -116,6 +116,16 @@ def verify_exports(client, route, media, evidence, pcm, signer):
     presented = binding.KEY in evidence
     review = evidence[binding.KEY] if presented else evidence["long_voice_review"][binding.KEY]
     assert binding.TITLE in words and review["reason"] in words
+    coverage = review.get(binding.COVERAGE)
+    if coverage:
+        assert f"{coverage['checked_windows']} of {coverage['scheduled_windows']} distinct windows checked" in words
+        for interval in coverage["intervals"]:
+            assert f"Samples [{interval['start_sample']}, {interval['end_sample']})." in words
+            if native := interval.get("native_source_range"):
+                assert f"Original ticks [{native['start_pts']}, {native['end_pts']}) at {native['time_base']}." in words
+            else:
+                for span in interval["source_timestamp_ranges"]:
+                    assert f"Source PTS [{span['source_start_pts']}, {span['source_end_pts']}) at {span['time_base']}." in words
     assert words.count("Confirming response") == sum("confirming_window" in region and "same_pair_as" not in region
                                                      for region in review["regions"])
     with pymupdf.open(stream=pdf, filetype="pdf") as view:
@@ -149,8 +159,10 @@ def verify_exports(client, route, media, evidence, pcm, signer):
     check_text = ("original 48 kHz presentation clock" if presented
                   else f"{len(review['regions'])} marked two-second windows")
     assert any(check_text in check.detail for check in checked.checks)
-    if review["schema"] == binding.CONFIRMED_SCHEMA and review["regions"]:
+    if review["schema"] in binding.CONFIRMATION_SCHEMAS and not presented and review["regions"]:
         assert any(f"{len(review['regions'])} confirming two-second windows" in check.detail for check in checked.checks)
+    if coverage:
+        assert any("Recomputed the checked and unchecked source intervals" in check.detail for check in checked.checks)
     with ZipFile(archive) as exported:
         assert json.loads(exported.read("evidence.json")) == evidence
         assert exported.read("report.pdf") == pdf
@@ -215,7 +227,7 @@ def run(args):
             if review is None:
                 continue
             binding.validate(review, evidence["source"])
-            assert review["schema"] == schema
+            assert review["schema"] == binding.COVERAGE_SCHEMA_BY_RECEIPT.get(schema, schema)
             assert review["status"] == ("flagged" if expected else "no_flag")
             assert [span(region) for region in review["regions"]] == expected
             assert [span(region["confirming_window"]) for region in review["regions"] if "confirming_window" in region] == expected_support

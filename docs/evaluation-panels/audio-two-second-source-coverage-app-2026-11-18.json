@@ -1,0 +1,48 @@
+{
+  "assessment_equal_with_legacy_coverage": true,
+  "browser": {
+    "cases": 4,
+    "checked_coverage_rows": 7,
+    "page_errors": 0
+  },
+  "cases": {
+    "aac-source-clock": {
+      "checked_samples": 144000,
+      "coverage_interval_count": 3,
+      "decoded_samples": 192171,
+      "known_scope_samples": 192000,
+      "schema": "chipmunk.extended-short-voice-review/5",
+      "status": "no_flag",
+      "verified_api_json_pdf_signed_package": true
+    },
+    "partial-speech": {
+      "checked_samples": 128000,
+      "coverage_interval_count": 3,
+      "decoded_samples": 192000,
+      "known_scope_samples": 192000,
+      "schema": "chipmunk.extended-short-voice-review/4",
+      "status": "no_flag",
+      "verified_api_json_pdf_signed_package": true
+    },
+    "prior-signed-schema": {
+      "checked_samples": null,
+      "coverage_interval_count": 0,
+      "decoded_samples": 192000,
+      "known_scope_samples": 192000,
+      "schema": "chipmunk.extended-short-voice-review/2",
+      "status": "no_flag",
+      "verified_api_json_pdf_signed_package": true
+    },
+    "strong-traffic": {
+      "checked_samples": 0,
+      "coverage_interval_count": 1,
+      "decoded_samples": 192000,
+      "known_scope_samples": 192000,
+      "schema": "chipmunk.extended-short-voice-review/4",
+      "status": "unassessed",
+      "verified_api_json_pdf_signed_package": true
+    }
+  },
+  "simulated_paid_analyses": 4,
+  "unpaid_analyses": 0
+}

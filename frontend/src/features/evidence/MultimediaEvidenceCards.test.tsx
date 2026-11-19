@@ -38,6 +38,28 @@ const show = (set: MultimediaEvidenceSet, token = 'signed token', mediaReady = t
 afterEach(cleanup)
 
 describe('ordinary multimedia evidence', () => {
+  it('shows checked and insufficient speech intervals on the original audio clock', () => {
+    show({ ...audio, packets: [], two_second_review: {
+      schema: 'chipmunk.extended-short-voice-review/5', title: 'Two-second speech windows',
+      status: 'no_flag', reason: 'No elevated window was confirmed.', limitation: 'The review carries zero weight.',
+      affects_overall_confidence: false, regions: [], excerpts: [],
+      sample_coverage: { scope_samples: 160000, checked_samples: 32000, scheduled_windows: 9, checked_windows: 1,
+        intervals: [
+          { start_sample: 0, end_sample: 32000, status: 'checked', source_timestamp_ranges: [],
+            native_source_range: { start_pts: 0, end_pts: 96000, time_base: '1/48000' } },
+          { start_sample: 32000, end_sample: 160000, status: 'insufficient_speech', source_timestamp_ranges: [],
+            native_source_range: { start_pts: 96000, end_pts: 480000, time_base: '1/48000' } },
+        ] },
+    } })
+    const region = within(screen.getByRole('region', { name: 'Two-second speech windows' }))
+    expect(region.getByText(/1 of 9 distinct windows checked/)).toBeTruthy()
+    const table = within(region.getByRole('table', { name: 'Two-second speech coverage intervals' }))
+    const [, checked, insufficient] = table.getAllByRole('row')
+    expect(within(checked).getByText('Checked')).toBeTruthy()
+    expect(within(insufficient).getByText('Insufficient detected speech')).toBeTruthy()
+    expect(within(insufficient).getByText(/Original ticks \[96000, 480000\) at 1\/48000/)).toBeTruthy()
+  })
+
   it.each(['timing', 'articulation', 'movement'] as const)('links speech and mouth ranges to exact crops and audio (%s)', (method) => {
     const previous = video.packets[0]
     const mismatch = method !== 'timing'

@@ -325,6 +325,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
         verify_presented_source(scan, pcm=decoded.pcm, mapping=decoded.mapping, waveform=_chart)
         replay_detail += " Verified the two-second speech excerpts and waveforms on the original 48 kHz presentation clock."
+    scan = audio.get(two_second.KEY) or (audio.get("long_voice_review") or {}).get(two_second.KEY)
+    if scan and two_second.COVERAGE in scan:
+        replay_detail += " Recomputed the checked and unchecked source intervals from the saved speech admissions."
     from app.evidence import audio_silence_binding as silence
     from app.evidence import audio_tonal_phase_binding as tonal
     from app.evidence.audio_bandwidth_binding import BANDWIDTH_SCHEMAS

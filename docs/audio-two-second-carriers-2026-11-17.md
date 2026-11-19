@@ -139,3 +139,28 @@ build, Chromium, an isolated database, and simulated Stripe.
 "$runner" -B -m scripts.audio_two_second_carrier_app "$first" "$second" "$run/app" \
   "$run/wav.json.gz" "$run/m4a.json.gz"
 ```
+
+## Source coverage for the overlapping scan
+
+New saved reviews list the parts of the recording covered by at least one
+checked two-second window and the intervals where no covering window had
+enough detected speech to run. The browser, API, PDF, JSON, and signed
+evidence use the same source intervals. Overlapping windows contribute
+once to covered duration. A window repeated across excerpts counts once
+and qualifies as checked if any recorded occurrence was admitted. The
+original excerpt records preserve each admission count.
+
+The native 48 kHz view lists exact source ticks and stops at the verified
+presentation boundary. Extra samples emitted by the AAC decoder do not
+extend analysis coverage. The signed verifier reconstructs the map from
+the saved admissions and original clock. Earlier signed reviews replay
+under their original evidence version. A scan that did not complete
+includes its skip reason.
+
+Four local analyses completed with simulated checkout, including an
+unassessed traffic recording, a mixed-coverage WAV, the legacy evidence
+version of that WAV, and a mixed-coverage AAC file. The AAC input decoded
+to 192,171 samples. The presented extent stopped at 192,000 samples on
+the analysis clock. The browser verified seven displayed intervals.
+The WAV's AI assessment matched with the earlier and newer coverage
+formats. [Local application receipt](evaluation-panels/audio-two-second-source-coverage-app-2026-11-18.json)

@@ -144,7 +144,7 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
         if two_second.KEY in part:
             review = part[two_second.KEY]
             if (part is not document or part.get("schema") != "chipmunk.audio-evidence/1"
-                    or not isinstance(review, dict) or review.get("schema") != two_second.PRESENTED_SCHEMA):
+                    or not isinstance(review, dict) or review.get("schema") not in two_second.PRESENTATION_SCHEMAS):
                 raise ObjectIntegrityError("The evidence has an invalid native-clock speech-window review")
             try:
                 two_second.validate(review, part["source"])

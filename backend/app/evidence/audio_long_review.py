@@ -51,15 +51,17 @@ def _check_excerpt_inputs(excerpts, pcm):
             raise ValueError("Six-second speech excerpt differs from the original samples")
 
 
-def _two_second_review(record, *, store, source, pcm, mapping, artifacts):
+def _two_second_review(record, *, store, source, pcm, mapping, artifacts, include_coverage):
     skipped = set(record) in ({"reason"}, {"reason", "schema"}) and record["reason"] in two_second.SKIP_REASONS
     raw = None if skipped else _receipt(record, store, source, detector_id=two_second.DETECTOR_ID, key=two_second.KEY)
     schema = record.get("schema", two_second.SCHEMA) if skipped else raw.get("schema")
-    if schema not in two_second.LIMITATIONS or (raw is not None and set(raw) != {"schema", "excerpts"}):
+    if (schema not in two_second.LIMITATIONS or schema in two_second.COVERAGE_SCHEMAS
+            or (raw is not None and set(raw) != {"schema", "excerpts"})):
         raise ValueError("Malformed two-second scan receipt")
     if not two_second.supported_source(source, schema) or not two_second.supported_source(mapping, schema):
         raise ValueError("Two-second scan is outside its source profile")
-    public = {"schema": schema, "title": two_second.TITLE, "limitation": two_second.LIMITATIONS[schema],
+    public_schema = two_second.COVERAGE_SCHEMA_BY_RECEIPT.get(schema, schema) if include_coverage else schema
+    public = {"schema": public_schema, "title": two_second.TITLE, "limitation": two_second.LIMITATIONS[schema],
               "affects_overall_confidence": False}
     if skipped:
         return {**public, "status": "skipped", "reason": record["reason"], "excerpts": [], "regions": []}
@@ -83,6 +85,8 @@ def _two_second_review(record, *, store, source, pcm, mapping, artifacts):
             selected["confirming_window"] = freeze_window(confirming)
         regions.append(selected)
     status = two_second.status(excerpts, regions)
+    if public_schema in two_second.COVERAGE_SCHEMAS:
+        public[two_second.COVERAGE] = two_second.sample_coverage(excerpts, source, schema=public_schema)
     return {**public, "status": status, "reason": two_second.REASONS_BY_SCHEMA[schema][status], "excerpts": excerpts, "regions": regions}
 
 
@@ -92,17 +96,19 @@ def _artifacts(reading, pcm, waveform, asset):
             "waveform": asset(_waveform(reading, pcm, waveform), "image/png", width=960, height=280)}
 
 
-def build_presented(record, *, store, source, pcm, mapping, asset, waveform):
+def build_presented(record, *, store, source, pcm, mapping, asset, waveform, include_coverage=True):
     extent = two_second.presented_samples(mapping)
     review = _two_second_review(record, store=store, source=source, pcm=pcm, mapping=mapping,
-                                artifacts=lambda row: _artifacts(row, pcm[:extent], waveform, asset))
-    if review["schema"] != two_second.PRESENTED_SCHEMA:
+                                artifacts=lambda row: _artifacts(row, pcm[:extent], waveform, asset),
+                                include_coverage=include_coverage)
+    if review["schema"] not in two_second.PRESENTATION_SCHEMAS:
         raise ValueError("Presented audio requires the native-clock two-second review")
     two_second.validate(review, source)
     return review
 
 
-def build(record, *, store, source, pcm, mapping, asset, waveform, include_sample_coverage=True):
+def build(record, *, store, source, pcm, mapping, asset, waveform, include_sample_coverage=True,
+          include_two_second_coverage=True):
     extension = record.get(two_second.KEY)
     raw = _receipt({key: value for key, value in record.items() if key != two_second.KEY}, store, source)
     schema = raw.get("schema")
@@ -132,7 +138,10 @@ def build(record, *, store, source, pcm, mapping, asset, waveform, include_sampl
                             "artifacts": artifacts(reading)})
         document["regions"] = regions
     if extension is not None:
-        document[two_second.KEY] = _two_second_review(extension, store=store, source=source, pcm=pcm, mapping=mapping, artifacts=artifacts)
+        document[two_second.KEY] = _two_second_review(
+            extension, store=store, source=source, pcm=pcm, mapping=mapping, artifacts=artifacts,
+            include_coverage=include_two_second_coverage,
+        )
     binding.validate(document, source)
     if include_sample_coverage and windows:
         document[binding.COVERAGE] = binding.sample_coverage(len(pcm), windows)
@@ -140,7 +149,7 @@ def build(record, *, store, source, pcm, mapping, asset, waveform, include_sampl
 
 
 def verify(document, record, *, store, source, pcm, mapping, read_asset, waveform):
-    presented = document["schema"] == two_second.PRESENTED_SCHEMA
+    presented = document["schema"] in two_second.PRESENTATION_SCHEMAS
     windows = two_second.media_windows(document) if presented else binding.all_media_windows(document)
     assets = {item["sha256"]: item for window in windows for item in window["artifacts"].values()}
 
@@ -153,10 +162,12 @@ def verify(document, record, *, store, source, pcm, mapping, read_asset, wavefor
         return asset
 
     if presented:
-        expected = build_presented(record, store=store, source=source, pcm=pcm, mapping=mapping, asset=checked, waveform=waveform)
+        expected = build_presented(record, store=store, source=source, pcm=pcm, mapping=mapping, asset=checked, waveform=waveform,
+                                   include_coverage=document["schema"] in two_second.COVERAGE_SCHEMAS)
     else:
         expected = build(record, store=store, source=source, pcm=pcm, mapping=mapping, asset=checked, waveform=waveform,
-                         include_sample_coverage=binding.COVERAGE in document)
+                         include_sample_coverage=binding.COVERAGE in document,
+                         include_two_second_coverage=(document.get(two_second.KEY) or {}).get("schema") in two_second.COVERAGE_SCHEMAS)
     if expected != document:
         raise ValueError("Long speech-window presentation differs from its frozen response")
 

@@ -17,6 +17,24 @@ try {
     await page.goto(`${input.url}/analyses/${analysis_id}/media-evidence?view=plain`)
     const section = page.getByRole('region', { name: 'Two-second speech windows' })
     await section.getByRole('status').filter({ hasText: review.reason }).waitFor()
+    let checkedCoverageRows = 0
+    if (review.sample_coverage) {
+      const coverage = review.sample_coverage
+      const table = section.getByRole('table', { name: 'Two-second speech coverage intervals' })
+      await section.getByText(`${coverage.checked_windows} of ${coverage.scheduled_windows} distinct windows checked`, { exact: false }).waitFor()
+      assert.equal(await table.locator('tbody tr').count(), coverage.intervals.length)
+      for (const [index, interval] of coverage.intervals.entries()) {
+        const row = table.locator('tbody tr').nth(index)
+        const { start_sample: start, end_sample: end } = interval
+        await row.getByText(`Samples [${start}, ${end})`, { exact: true }).waitFor()
+        await row.getByRole('cell', { name: interval.status === 'checked' ? 'Checked' : 'Insufficient detected speech', exact: true }).waitFor()
+        const native = interval.native_source_range
+        const timestamps = native ? [`Original ticks [${native.start_pts}, ${native.end_pts}) at ${native.time_base}`]
+          : interval.source_timestamp_ranges.map(range => `Source PTS [${range.source_start_pts}, ${range.source_end_pts}) at ${range.time_base}.`)
+        for (const stamp of timestamps) await row.getByText(stamp, { exact: true }).waitFor()
+        checkedCoverageRows++
+      }
+    }
     const verified = []
     const shown = review.regions.filter(region => region.same_pair_as === undefined)
     assert.equal(await section.locator(':scope > ol > li').count(), shown.length)
@@ -58,7 +76,7 @@ try {
       }
     }
     if (verified.length) await section.screenshot({ path: path.join(input.output, `${name}-browser.png`), animations: 'disabled' })
-    cases.push({ case: name, verified })
+    cases.push({ case: name, verified, checked_coverage_rows: checkedCoverageRows })
   }
   assert.deepEqual(errors, [])
   process.stdout.write(JSON.stringify({ cases, page_errors: errors.length }))

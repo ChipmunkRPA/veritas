@@ -167,7 +167,7 @@ def validate_content(document: dict[str, Any]) -> None:
     if two_second.KEY in document:
         review = document[two_second.KEY]
         try:
-            if (document.get("schema") != SCHEMA or review.get("schema") != two_second.PRESENTED_SCHEMA
+            if (document.get("schema") != SCHEMA or review.get("schema") not in two_second.PRESENTATION_SCHEMAS
                     or two_second.KEY in (document.get("long_voice_review") or {})):
                 raise ValueError("Native-clock speech-window review is outside standalone audio")
             two_second.validate(review, source)

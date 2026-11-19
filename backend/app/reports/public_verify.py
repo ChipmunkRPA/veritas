@@ -547,7 +547,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
 
             review = part[two_second.KEY]
             _require(analysis['kind'] == 'audio' and part is evidence and isinstance(review, dict)
-                     and review.get('schema') == two_second.PRESENTED_SCHEMA
+                     and review.get('schema') in two_second.PRESENTATION_SCHEMAS
                      and two_second.KEY not in (part.get('long_voice_review') or {}),
                      'Native-clock speech-window review is outside standalone audio')
             two_second.validate(review, part['source'])

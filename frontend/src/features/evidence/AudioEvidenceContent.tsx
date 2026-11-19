@@ -81,6 +81,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
     : []
   const longReview = standalone ? set.long_voice_review : undefined
   const twoSecond = standalone ? set.two_second_review ?? longReview?.two_second_review : undefined
+  const twoSecondCoverage = twoSecond?.sample_coverage
   const twoSecondCount = twoSecond?.excerpts.reduce((total, row) =>
     total + row.speech_samples.filter(samples => samples >= longVoiceSampleRate).length, 0)
   const focusedSpeech = Array.isArray(longReview?.regions)
@@ -248,6 +249,27 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
       <h3 className="m-0 text-body font-medium">{twoSecond.title}</h3>
       <p className="mt-2 mb-0 text-small" role="status">{twoSecond.reason}</p>
+      {twoSecondCoverage && <div className="mt-3">
+        <h4 className="m-0 text-small font-medium">Where the two-second check ran</h4>
+        <p className="mt-1 mb-0 text-caption text-text-muted">
+          {twoSecondCoverage.checked_windows} of {twoSecondCoverage.scheduled_windows} distinct windows checked, covering{' '}
+          {seconds(twoSecondCoverage.checked_samples / longVoiceSampleRate)} of {seconds(twoSecondCoverage.scope_samples / longVoiceSampleRate)}.
+          Overlapping checked windows are counted once. Coverage describes where the check ran.
+        </p>
+        <table aria-label="Two-second speech coverage intervals" className="mt-2 w-full text-left text-caption">
+          <thead><tr><th scope="col">Source interval</th><th scope="col">Coverage</th></tr></thead>
+          <tbody>{twoSecondCoverage.intervals.map(interval => <tr key={interval.start_sample} className="border-t border-border">
+            <td className="py-2 pr-3 align-top">
+              <p className="m-0 font-mono">{(interval.start_sample / longVoiceSampleRate).toFixed(7)}–{(interval.end_sample / longVoiceSampleRate).toFixed(7)} s</p>
+              <p className="m-0 font-mono text-text-muted">Samples [{interval.start_sample}, {interval.end_sample})</p>
+              {interval.native_source_range ? <p className="m-0 font-mono text-text-muted">
+                Original ticks [{interval.native_source_range.start_pts}, {interval.native_source_range.end_pts}) at {interval.native_source_range.time_base}
+              </p> : <SourceTimestamps ranges={interval.source_timestamp_ranges} />}
+            </td>
+            <td className="py-2 align-top">{interval.status === 'checked' ? 'Checked' : 'Insufficient detected speech'}</td>
+          </tr>)}</tbody>
+        </table>
+      </div>}
       {twoSecond.regions.length > 0 && <ol className="mt-4 mb-0 space-y-3 list-none p-0">
         {twoSecond.regions.filter(region => region.same_pair_as === undefined).map(region => {
           const windows = region.confirming_window ? [region, region.confirming_window] : [region]
@@ -279,7 +301,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
           </li>
         })}
       </ol>}
-      {twoSecond.excerpts.length > 0 && <details className="mt-3 text-small">
+      {!twoSecondCoverage && twoSecond.excerpts.length > 0 && <details className="mt-3 text-small">
         <summary className="cursor-pointer">{twoSecondCount} checks across {twoSecond.excerpts.length} overlapping six-second excerpts</summary>
         <ul className="mt-2 mb-0 list-disc pl-4">{twoSecond.excerpts.map(excerpt => <li key={excerpt.start_sample}>
           {seconds(excerpt.start_sample / longVoiceSampleRate)}–{seconds(excerpt.start_sample / longVoiceSampleRate + 6)}

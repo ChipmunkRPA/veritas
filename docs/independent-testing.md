@@ -56,6 +56,10 @@ The [published disclosure audit](writing-joss-disclosures-2026-11-18.md)
 recounts exact heading and section locations in 20 accepted PDFs and shows
 how negation and quoted examples affect automated interpretation.
 
+The [minimal writing edit trial](writing-mmwr-minimal-edits-2026-11-18.md)
+checks how short excerpts, full articles, and exact changed-word geometry
+affect localization. It includes an ordinary correction from an official erratum.
+
 The [supplied-reference audio comparison](audio-short-window-reader-holdout-2026-11-18.md#supplied-reference-under-strong-background-noise)
 compares a dry earlier copy with an earlier copy that shares the exact same
 background. It verifies exact sample ranges in both source recordings.

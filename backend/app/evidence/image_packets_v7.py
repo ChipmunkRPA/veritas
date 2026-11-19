@@ -38,7 +38,9 @@ from app.evidence.image_copy_similarity_binding import (
     JPEG_DIAGONAL_BASIS,
     JPEG_DIAGONAL_KEY,
     JPEG_DIAGONAL_NOTE,
+    JPEG_DIAGONAL_Q90_VERSION,
     JPEG_DIAGONAL_VERSION,
+    JPEG_DIAGONAL_VERSIONS,
     JPEG_OFFGRID_AFFINE_VERSION,
     JPEG_OFFGRID_VERSION,
     JPEG_OFFGRID_VERSIONS,
@@ -119,7 +121,8 @@ from app.storage.db import Analysis, Artefact
 from app.storage.objects import ObjectStore
 
 CREATOR = "image-evidence-packets/10"
-_CREATORS = {JPEG_DIAGONAL_VERSION: "image-evidence-packets/46",
+_CREATORS = {JPEG_DIAGONAL_Q90_VERSION: "image-evidence-packets/47",
+             JPEG_DIAGONAL_VERSION: "image-evidence-packets/46",
              WEBP_DIAGONAL_EXACT_VERSION: "image-evidence-packets/45",
              PNG_DIAGONAL_EXACT_VERSION: "image-evidence-packets/44",
              WEBP_THREE_EXACT_AFFINE_VERSION: "image-evidence-packets/43", WEBP_THREE_EXACT_VERSION: "image-evidence-packets/42",
@@ -187,7 +190,7 @@ def _analysis_version(analysis: Analysis) -> str:
         if settings.image_jpeg_native_rotation_review:
             if settings.image_jpeg_disjoint_rotation_review:
                 if settings.image_jpeg_diagonal_copy_review and settings.image_affine_copy_review:
-                    return JPEG_DIAGONAL_VERSION
+                    return JPEG_DIAGONAL_Q90_VERSION if settings.image_jpeg_diagonal_q90_review else JPEG_DIAGONAL_VERSION
                 return DISJOINT_JPEG_ROTATION_AFFINE_VERSION if settings.image_affine_copy_review else DISJOINT_JPEG_ROTATION_VERSION
             return NATIVE_JPEG_ROTATION_AFFINE_VERSION if settings.image_affine_copy_review else NATIVE_JPEG_ROTATION_VERSION
         return EXPANDED_JPEG_ROTATION_AFFINE_VERSION if settings.image_affine_copy_review else EXPANDED_JPEG_ROTATION_VERSION
@@ -311,7 +314,7 @@ def validate_assets(document: dict, store: ObjectStore) -> None:
 
         try:
             verify(legacy._verified(store, document["source"]["sha256"]), np.asarray(source), translation["pairs"][0],
-                   translation[JPEG_DIAGONAL_KEY]["measurement"])
+                   translation[JPEG_DIAGONAL_KEY]["measurement"], version=document["version"])
         except (cv2.error, OSError, ValueError) as error:
             raise PacketIntegrityError(str(error)) from error
     if translation.get("basis") == TURNED_JPEG_BASIS:
@@ -464,7 +467,8 @@ def _add_jpeg_diagonal(db, analysis, store, document, source):
     if not jpeg_diagonal_admitted(document):
         return
     try:
-        measurement, boxes, transform = review(legacy._verified(store, analysis.sha256), np.asarray(source))
+        measurement, boxes, transform = review(legacy._verified(store, analysis.sha256), np.asarray(source),
+                                               version=document["version"])
     except (cv2.error, OSError, ValueError, SystemError):
         measurement, boxes, transform = {"status": "unavailable", "measurement": None}, [], None
     translation[JPEG_DIAGONAL_KEY] = measurement
@@ -622,7 +626,7 @@ def build_packet_set(
         document["copy_translation"][MULTI_EXACT_KEY] = multi_review
     if not exact_reflection_enabled and version in AFFINE_VERSIONS:
         document[affine.KEY] = _affine_record(db, analysis, store, document, source, skip=skipped)
-    if version == JPEG_DIAGONAL_VERSION:
+    if version in JPEG_DIAGONAL_VERSIONS:
         _add_jpeg_diagonal(db, analysis, store, document, source)
     document = json.loads(canonical_json(document))
     document["sha256"] = prior.packet_hash(document)

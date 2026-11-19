@@ -1,0 +1,29 @@
+{
+  "by_quality": {
+    "75": {
+      "clean_incumbent_misses": 5,
+      "known_pair_passes_but_both_missed_offset": 3,
+      "known_pair_passes_but_original_had_offset": 2,
+      "known_pair_passes_witness": 5,
+      "original_excluded_from_top14": 3,
+      "original_in_top14": 2,
+      "staggered_excluded_from_top14": 3,
+      "staggered_in_top14": 2,
+      "staggered_reaches_new_true_offset": 0
+    },
+    "90": {
+      "clean_incumbent_misses": 5,
+      "known_pair_passes_but_both_missed_offset": 3,
+      "known_pair_passes_but_original_had_offset": 2,
+      "known_pair_passes_witness": 5,
+      "original_excluded_from_top14": 3,
+      "original_in_top14": 2,
+      "staggered_excluded_from_top14": 3,
+      "staggered_in_top14": 2,
+      "staggered_reaches_new_true_offset": 0
+    }
+  },
+  "notes": "Follow-up role supplies original ground-truth rectangles and direction and evaluates the fixed color and perimeter witness and top-14 refined offset (within two native pixels in either donor direction). No blinded finding or new release metric.",
+  "same_frozen_geometry_sha256": "5e5d2a29746616bf146c0ae4d1a7341fed67ab8e07f6a8e499444d0b0f35526b",
+  "schema": "chipmunk.jpeg-staggered-known-offset-diagnostic/1"
+}

@@ -109,7 +109,7 @@ The service defines its settings in `backend/app/core/config.py`.
 | `VERITAS_MODEL_MEMORY_BUDGET_MB` ● | text | `auto` | auto: MPS min(0.5·RAM, RAM−20 GB), CUDA 0.85·VRAM, CPU 0.5·RAM (D-21) |
 | `VERITAS_OFFLINE` | `true` \| `false`, optional | unset | VERITAS_OFFLINE: no network fetches; HF hub and transformers read the local cache only. Unset: true in prod, false in dev (PL-01, ARCHITECTURE §8.5); `models fetch` and a models-init container set VERITAS_OFFLINE=false explicitly. |
 | `VERITAS_AUDIO_STEREO_RATE_REPEAT_REVIEW` | `true` \| `false` | `true` | Compare short lossless stereo excerpts at different speeds when native 48 kHz stereo review is enabled in development. |
-| `VERITAS_AUDIO_BRIEF_VOICE_REVIEW` | `true` \| `false` | `false` | Adds 750 ms listening ranges to Full candidate-mode analyses of exact twelve-second native 16 kHz mono PCM16 WAV files in development. These ranges carry zero weight in the overall assessment. |
+| `VERITAS_AUDIO_BRIEF_VOICE_REVIEW` | `true` \| `false` | `false` | Adds 750 ms listening ranges to Full candidate-mode analyses of exact twelve-second native 16 kHz mono PCM16 WAV or FLAC files in development. These ranges carry zero weight in the overall assessment. |
 | `VERITAS_DOCUMENT_DISCLOSURE_HEADING_REVIEW` | `true` \| `false` | `false` | Adds the exact position of an eligible printed AI-use heading in PDFs of up to 12 pages in development. The heading carries zero weight in the AI assessment. |
 | `VERITAS_VIDEO_FACE_SINGLE_BOUNDARY_NATIVE720_REVIEW` | `true` \| `false` | `false` | Extends the enabled face transition check to Full analyses of supported four-second 720p, 30 fps AVC MP4 uploads in development. It preserves the native frames and adds zero weight to the AI assessment. |
 
@@ -155,6 +155,7 @@ The orientation option defaults to false.
 | `VERITAS_IMAGE_THREE_EXACT_COPY_REVIEW` | `true` \| `false` | `false` | Also check for three distinct exact copy pairs in supported 512 × 512 upright lossless PNG or WebP images when disjoint copy review is enabled. |
 | `VERITAS_IMAGE_DIAGONAL_EXACT_COPY_REVIEW` | `true` \| `false` | `false` | Optional development-only exact diagonal copy evidence for upright, opaque PNG or lossless WebP with each side from 512 to 672 pixels. Requires disjoint, three-pair, and affine copy review. |
 | `VERITAS_IMAGE_JPEG_DIAGONAL_COPY_REVIEW` | `true` \| `false` | `false` | Optional development-only paired crops for supported upright JPEGs with standard JPEG 75 compression tables. Runs after the existing block, between-block, rotation and affine comparisons leave no pair. Requires existing affine, rotated JPEG, native rotation, and disjoint rotation options. |
+| `VERITAS_IMAGE_JPEG_DIAGONAL_Q90_REVIEW` | `true` \| `false` | `false` | Extend the development diagonal comparison to upright baseline 4:2:0 JPEGs with the tested quality-90 tables. Uses the existing diagonal option, size limits and preceding copy checks. |
 
 ## Metadata (I-3)
 

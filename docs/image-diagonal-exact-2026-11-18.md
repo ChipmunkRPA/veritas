@@ -192,3 +192,39 @@ their known rectangles, including eight missed by the blind search.
 This is a diagnostic that uses the test labels. It points to the search
 for candidate regions as the next part to improve. [Browser JPEG transfer
 receipt](evaluation-panels/image-jpeg-browser-diagonal-2026-11-18.json)
+
+### Fresh search comparison and quality-90 option
+
+A further 152-file panel used 12 fresh photo and structural-control groups
+in paired JPEG 75 and JPEG 90 deliveries. At each quality, the existing
+search located 19 of 24 edits. It found six of eight feathered copies,
+six of eight sharp copies along one diagonal and seven of eight along the
+other diagonal. It produced zero diagonal observations on 32 ordinary
+controls or 20 mirror, same-axis and repeat controls per quality. Earlier
+copy checks recorded two observations on repeat controls at each quality.
+
+A second pass starting four pixels later in both directions shared the
+existing search budget. It located zero additional edits and hit the budget
+on 73 of 95 attempts. The original search supplies the local option. With
+their known crops supplied, all five missed edits at each quality passed
+the pixel checks. Both searches missed the correct alignment among their
+top candidates on three of those edits. Both found the alignment and missed
+the crop boundaries on two. [Held search and control counts](evaluation-panels/image-jpeg-staggered-search-2026-11-18.json)
+· [Known-location diagnostic](evaluation-panels/image-jpeg-staggered-offsets-2026-11-18.json)
+
+`VERITAS_IMAGE_JPEG_DIAGONAL_Q90_REVIEW=true` adds upright, single-image
+baseline 4:2:0 JPEGs with the tested quality-90 tables to the development option.
+The app compares crops using the same pixel checks, dimensions and preceding
+review requirements. It identifies the two original areas and carries zero
+weight in AI authorship confidence. The option defaults to false.
+[JPEG frame markers](https://www.w3.org/Graphics/JPEG/itu-t81)
+
+Fourteen simulated checkouts verified the app and signed exports. Two Chrome
+quality-90 edits produced the expected native crops and pixel measurements.
+The app replayed quality-75 evidence with the option enabled and disabled.
+The browser opened all fourteen evidence pages and verified eight original
+crop links. The PDF and JSON matched the saved positions, and each signed
+package replayed against its original. The overall assessment agreed on
+three paired enabled and disabled cases. Progressive quality-90, rotated
+quality-90, the tested browser default, concatenated JPEGs, multi-picture
+JPEGs, and ordinary and mirror controls produced no added diagonal crop pair.

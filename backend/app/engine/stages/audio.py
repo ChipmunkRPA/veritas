@@ -336,7 +336,7 @@ def _brief_voice_review(ctx: StageContext, track) -> dict | None:
             or settings.audio_detector_mode != "candidate" or Profile(ctx.profile) is not Profile.FULL
             or provenance_gate.stop(ctx) or track.pcm is None or len(track.pcm) != binding.SAMPLES
             or not decoded.get("long_voice_review_source_supported")
-            or decoded.get("short_voice_review_source_codec") != "pcm_s16le"):
+            or decoded.get("short_voice_review_source_codec") not in binding.SOURCE_CODECS):
         return None
     from app.detectors.audio.brief_voice_review import BUDGET_S, BriefVoiceReview
     from app.engine.registry import get_registry

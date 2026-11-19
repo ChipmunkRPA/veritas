@@ -132,7 +132,7 @@ previously flagged ordinary restaurant files gained 0.5 seconds of
 highlighting each. No additional ordinary files were flagged.
 
 The development option `VERITAS_AUDIO_BRIEF_VOICE_REVIEW` uses 23
-overlapping 750 ms windows on exact twelve-second native 16 kHz mono WAV
+overlapping 750 ms windows on exact twelve-second native 16 kHz mono PCM16 WAV or FLAC
 files. It checks a window when at least half its samples contain detected
 speech and marks adjacent windows with repeated elevated responses. When
 there is no adjacent checked pair, the check is unassessed. The schedule
@@ -150,3 +150,29 @@ option enabled and disabled produced the same overall assessment and
 existing evidence. The new ranges and waveforms matched the original audio
 in the clean and washing-machine samples and in the previously flagged
 ordinary restaurant sample.
+
+## Native lossless FLAC delivery
+
+The same development option now accepts exact twelve-second, native 16 kHz
+mono 16-bit FLAC. Decoding preserves the original sample clock and every
+input to the existing 750 ms check. The source rate, bit depth, channel count,
+single audio stream and continuous zero-origin timeline remain required.
+Historical WAV receipts retain their existing schema and verification.
+
+Local delivery checks reused six retained source cases, including clean and
+washing-machine edits, their matched ordinary controls, isolated background
+and a previously flagged ordinary restaurant recording. The WAV/FLAC pairs
+produced identical admissions. All 138 paired saved-window comparisons matched,
+including unassessed windows. The six selected-window pairs retained the same native
+timestamps. Their twelve clip/waveform asset comparisons were byte-identical,
+and the overall assessments matched across each delivery pair. The previously
+flagged ordinary recording remains flagged in both formats.
+
+Fourteen simulated USD 9.99 checkouts exercised the real local worker, with
+zero unpaid analyses or real charges. All fourteen Chromium evidence pages,
+PDFs, JSON exports and signed original-source replays passed. The browser
+verified 750 ms playback and the PDF used the same waveform pixels. A disabled
+FLAC comparison retained the same assessment and existing evidence. An actual
+24-bit FLAC control remained outside this narrow source profile. This expands
+lossless delivery support with the existing readings and zero AI-confidence
+weight. The strong-background limitations above remain part of the result.

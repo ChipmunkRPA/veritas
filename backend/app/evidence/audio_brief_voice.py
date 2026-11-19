@@ -13,7 +13,7 @@ def _pcm_digest(pcm, start):
 
 def build(record, *, store, source, pcm, mapping, asset, waveform):
     if not binding.supported_source(mapping) or len(pcm) != binding.SAMPLES:
-        raise ValueError("Brief speech-window input differs from the native WAV profile")
+        raise ValueError("Brief speech-window input differs from the native PCM16 WAV or FLAC profile")
     if set(record) == {"status", "reason"} and record["status"] == "skipped":
         review = {**binding.presentation([], reason=record["reason"]), "windows": []}
     else:

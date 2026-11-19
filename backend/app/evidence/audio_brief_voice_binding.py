@@ -13,6 +13,7 @@ SCHEMA = "chipmunk.brief-voice-review/1"
 DETECTOR_ID = "aud.brief_voice_review"
 TITLE = "Brief speech windows"
 RATE, SAMPLES, WIDTH, STEP = 16000, 192000, 12000, 8000
+SOURCE_CODECS = frozenset({"pcm_s16le", "flac"})
 GRID = tuple(range(0, SAMPLES - WIDTH + 1, STEP))
 POINT = 6.642364579351768
 SHA = re.compile(r"[a-f0-9]{64}")
@@ -31,7 +32,7 @@ SKIP_REASONS = {TIMEOUT, TIME_BUDGET, UNAVAILABLE}
 
 
 def supported_source(source: dict) -> bool:
-    return (source.get("samples") == SAMPLES and source.get("source_codec") == "pcm_s16le"
+    return (source.get("samples") == SAMPLES and source.get("source_codec") in SOURCE_CODECS
             and supported_native_source(source))
 
 
@@ -107,7 +108,7 @@ def window_fields(i):
 
 def validate(review, source):
     if not supported_source(source) or not isinstance(review, dict):
-        raise ValueError("The brief speech review requires an exact twelve-second native mono WAV")
+        raise ValueError("The brief speech review requires an exact twelve-second native mono PCM16 WAV or FLAC")
     reason = review.get("reason") if review.get("status") == "skipped" else None
     checks = review.get("window_checks")
     if review.get("status") == "skipped":

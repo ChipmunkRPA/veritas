@@ -193,10 +193,9 @@ def read(data: bytes | memoryview) -> JpegStructure | None:
         return None
 
 
-def progressive_frame(data: bytes) -> tuple[JpegStructure, int] | None:
-    """Read a single progressive frame with fixed tables across the scan sequence."""
+def _complete_frame(data: bytes, kind: str, min_scans: int, max_scans: int) -> tuple[JpegStructure, int] | None:
     frame = read(data)
-    if frame is None or frame.frame != "progressive":
+    if frame is None or frame.frame != kind:
         return None
     pos, frames, scans, in_scan = 2, 0, 0, False
     while pos < len(data):
@@ -215,7 +214,7 @@ def progressive_frame(data: bytes) -> tuple[JpegStructure, int] | None:
         marker = data[pos]
         pos += 1
         if marker == EOI:
-            return (frame, scans) if frames == 1 and scans >= 2 and pos == len(data) else None
+            return (frame, scans) if frames == 1 and scans >= min_scans and pos == len(data) else None
         if marker in STANDALONE or (scans and (marker == DQT or marker in FRAMES)):
             return None
         if pos + 2 > len(data) or (size := _u16(data, pos)) < 2 or pos + size > len(data):
@@ -226,8 +225,28 @@ def progressive_frame(data: bytes) -> tuple[JpegStructure, int] | None:
                 return None
         if marker == SOS:
             scans += 1
-            if scans > 16:
+            if scans > max_scans:
+                return None
+            if kind == "baseline" and not _sequential_scan(data[pos + 2:pos + size], frame):
                 return None
             in_scan = True
         pos += size
     return None
+
+
+def _sequential_scan(header: bytes, frame: JpegStructure) -> bool:
+    count = len(frame.components)
+    return (len(header) == 4 + 2 * count and header[0] == count
+            and set(header[1:1 + 2 * count:2]) == {component.id for component in frame.components}
+            and header[-3:] == b"\x00\x3f\x00")
+
+
+def baseline_frame(data: bytes) -> JpegStructure | None:
+    """Read a standalone baseline JPEG with all components in a single scan."""
+    result = _complete_frame(data, "baseline", 1, 1)
+    return result[0] if result is not None else None
+
+
+def progressive_frame(data: bytes) -> tuple[JpegStructure, int] | None:
+    """Read a single progressive frame with fixed tables across the scan sequence."""
+    return _complete_frame(data, "progressive", 2, 16)

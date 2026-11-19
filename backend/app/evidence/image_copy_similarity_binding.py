@@ -45,6 +45,8 @@ WEBP_THREE_EXACT_AFFINE_VERSION = "image-evidence-45"
 PNG_DIAGONAL_EXACT_VERSION = "image-evidence-46"
 WEBP_DIAGONAL_EXACT_VERSION = "image-evidence-47"
 JPEG_DIAGONAL_VERSION = "image-evidence-48"
+JPEG_DIAGONAL_Q90_VERSION = "image-evidence-49"
+JPEG_DIAGONAL_VERSIONS = frozenset({JPEG_DIAGONAL_VERSION, JPEG_DIAGONAL_Q90_VERSION})
 DIAGONAL_EXACT_VERSIONS = frozenset({PNG_DIAGONAL_EXACT_VERSION, WEBP_DIAGONAL_EXACT_VERSION})
 PNG_THREE_EXACT_VERSIONS = frozenset({PNG_THREE_EXACT_VERSION, PNG_THREE_EXACT_AFFINE_VERSION, PNG_DIAGONAL_EXACT_VERSION})
 WEBP_THREE_EXACT_VERSIONS = frozenset({WEBP_THREE_EXACT_VERSION, WEBP_THREE_EXACT_AFFINE_VERSION, WEBP_DIAGONAL_EXACT_VERSION})
@@ -58,7 +60,7 @@ PNG_EXACT_REFLECTION_VERSION = "image-evidence-36"
 PNG_EXACT_REFLECTION_AFFINE_VERSION = "image-evidence-37"
 PNG_EXACT_REFLECTION_VERSIONS = PNG_MULTI_EXACT_VERSIONS | {PNG_EXACT_REFLECTION_VERSION, PNG_EXACT_REFLECTION_AFFINE_VERSION}
 EXACT_REFLECTION_VERSIONS = WEBP_EXACT_REFLECTION_VERSIONS | PNG_EXACT_REFLECTION_VERSIONS
-DISJOINT_JPEG_ROTATION_VERSIONS = frozenset({DISJOINT_JPEG_ROTATION_VERSION, DISJOINT_JPEG_ROTATION_AFFINE_VERSION, JPEG_DIAGONAL_VERSION})
+DISJOINT_JPEG_ROTATION_VERSIONS = JPEG_DIAGONAL_VERSIONS | {DISJOINT_JPEG_ROTATION_VERSION, DISJOINT_JPEG_ROTATION_AFFINE_VERSION}
 NATIVE_JPEG_ROTATION_VERSIONS = DISJOINT_JPEG_ROTATION_VERSIONS | {NATIVE_JPEG_ROTATION_VERSION, NATIVE_JPEG_ROTATION_AFFINE_VERSION}
 DISJOINT_ROTATION_MARGIN = 16
 TURNED_PNG_VERSIONS = PNG_EXACT_REFLECTION_VERSIONS | {TURNED_PNG_COPY_VERSION, TURNED_PNG_COPY_AFFINE_VERSION}
@@ -147,7 +149,7 @@ AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_A
                              NATIVE_JPEG_ROTATION_AFFINE_VERSION, DISJOINT_JPEG_ROTATION_AFFINE_VERSION,
                              WEBP_EXACT_COPY_AFFINE_VERSION, WEBP_EXACT_REFLECTION_AFFINE_VERSION, PNG_EXACT_REFLECTION_AFFINE_VERSION,
                              PNG_MULTI_EXACT_AFFINE_VERSION, WEBP_MULTI_EXACT_AFFINE_VERSION,
-                             PNG_THREE_EXACT_AFFINE_VERSION, WEBP_THREE_EXACT_AFFINE_VERSION, JPEG_DIAGONAL_VERSION}) | DIAGONAL_EXACT_VERSIONS
+                             PNG_THREE_EXACT_AFFINE_VERSION, WEBP_THREE_EXACT_AFFINE_VERSION}) | DIAGONAL_EXACT_VERSIONS | JPEG_DIAGONAL_VERSIONS
 CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12} | JPEG_BLOCK_VERSIONS | SMALL_PNG_VERSIONS | WEBP_EXACT_COPY_VERSIONS
 TRANSLATION_VERSIONS = CREDENTIAL_VERSIONS | {V10, V11}
 BASIS_VERSIONS = CREDENTIAL_VERSIONS | {V11}
@@ -184,6 +186,8 @@ JPEG_DIAGONAL_COVERAGE = {
     "ambiguous": "Several pairs fit the diagonal check, so this check withheld a distinct comparison.",
     "unassessed_match_budget": "Too many matching areas prevented a distinct diagonal comparison.",
 }
+JPEG_DIAGONAL_Q90_SCOPE = ("The diagonal check covers upright color images with the tested JPEG 75 compression tables, "
+                           "or single-image baseline JPEGs with the tested JPEG 90 compression tables.")
 OFFGRID_STATUS_TEXT = {
     "supported_pair": "The aligned crops have closely matching color values inside and more different surroundings on at least three sides.",
     "no_pair": ("The between-block JPEG check found no qualifying repeated area. "
@@ -270,7 +274,7 @@ def jpeg_diagonal_displacement(boxes, transform):
 
 
 def jpeg_diagonal_admitted(document: dict) -> bool:
-    if (document["version"] != JPEG_DIAGONAL_VERSION
+    if (document["version"] not in JPEG_DIAGONAL_VERSIONS
             or not jpeg_diagonal_size(document["source"]["width"], document["source"]["height"])):
         return False
     translation = document["copy_translation"]
@@ -504,7 +508,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     has_jpeg_review = not reflected and document["version"] in JPEG_BLOCK_VERSIONS
     has_offgrid_review = not reflected and document["version"] in JPEG_OFFGRID_VERSIONS
     has_turned_jpeg_review = not reflected and document["version"] in TURNED_JPEG_VERSIONS
-    has_diagonal_jpeg_review = not reflected and document["version"] == JPEG_DIAGONAL_VERSION
+    has_diagonal_jpeg_review = not reflected and document["version"] in JPEG_DIAGONAL_VERSIONS
     webp = not reflected and document["version"] in WEBP_EXACT_COPY_VERSIONS
     reflection_review = not reflected and document["version"] in EXACT_REFLECTION_VERSIONS
     multi_enabled = not reflected and document["version"] in MULTI_EXACT_VERSIONS

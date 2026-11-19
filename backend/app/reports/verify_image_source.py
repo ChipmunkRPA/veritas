@@ -284,7 +284,9 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
             from app.evidence.image_jpeg_diagonal_source import verify
 
-            verify(data, np.asarray(source), translation["pairs"][0], translation[JPEG_DIAGONAL_KEY]["measurement"])
+            version = embedded_pair.base_document(evidence)["version"]
+            verify(data, np.asarray(source), translation["pairs"][0], translation[JPEG_DIAGONAL_KEY]["measurement"],
+                   version=version)
         if turned_jpeg:
             import numpy as np
 

@@ -1,0 +1,259 @@
+{
+  "cases": 152,
+  "encodings": {
+    "75": {
+      "baseline_coverage": {
+        "no_pair": 48,
+        "prior_check_precedence": 2,
+        "same_axis": 6,
+        "supported_pair": 19,
+        "unassessed_match_budget": 1
+      },
+      "by_role": {
+        "blur": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 4
+        },
+        "feathered": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 6,
+          "correct_after": 6,
+          "correct_before": 6,
+          "files": 8,
+          "misplaced_new": 0,
+          "newly_correct": 0
+        },
+        "mirror_first": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 4
+        },
+        "mirror_second": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 4
+        },
+        "ordinary": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 12
+        },
+        "repeat": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 4
+        },
+        "resave": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 8
+        },
+        "same_axis_first": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 4
+        },
+        "same_axis_second": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 4
+        },
+        "sharp_first": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 6,
+          "correct_after": 6,
+          "correct_before": 6,
+          "files": 8,
+          "misplaced_new": 0,
+          "newly_correct": 0
+        },
+        "sharp_second": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 7,
+          "correct_after": 7,
+          "correct_before": 7,
+          "files": 8,
+          "misplaced_new": 0,
+          "newly_correct": 0
+        },
+        "tone": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 8
+        }
+      },
+      "counts": {
+        "additional_passes": 48,
+        "additional_passes_ambiguous": 0,
+        "additional_passes_scope_withheld": 0,
+        "additional_passes_unassessed": 38,
+        "correct_after": 19,
+        "correct_before": 19,
+        "extra_budget_with_prior_offset_cap": 30,
+        "extra_budget_with_total_seed_cap": 2,
+        "files": 76,
+        "misplaced_new": 0,
+        "newly_correct": 0,
+        "ordinary_controls_additional_alerts": 0,
+        "ordinary_controls_baseline_alerts": 0,
+        "ordinary_controls_files": 32,
+        "positive_files": 24,
+        "scope_controls_additional_alerts": 0,
+        "scope_controls_baseline_alerts": 2,
+        "scope_controls_files": 20
+      },
+      "existing_search_instrumented_ms": {
+        "median_ms": 312.578,
+        "n": 74,
+        "p95_ms": 467.71
+      },
+      "gate_pass": false,
+      "groups_with_incumbent_misses": 2,
+      "independent_crop_witnesses": 19,
+      "max_per_direction_refined_offsets_observed": 14,
+      "max_per_direction_refinement_checks_observed": 12000,
+      "new_correct_source_groups": 0,
+      "new_ordinary_alert_source_groups": 0,
+      "new_scope_alert_source_groups": 0,
+      "staggered_pass_instrumented_ms": {
+        "median_ms": 129.338,
+        "n": 48,
+        "p95_ms": 315.894
+      }
+    },
+    "90": {
+      "baseline_coverage": {
+        "no_pair": 47,
+        "prior_check_precedence": 2,
+        "same_axis": 7,
+        "supported_pair": 19,
+        "unassessed_match_budget": 1
+      },
+      "by_role": {
+        "blur": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 4
+        },
+        "feathered": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 6,
+          "correct_after": 6,
+          "correct_before": 6,
+          "files": 8,
+          "misplaced_new": 0,
+          "newly_correct": 0
+        },
+        "mirror_first": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 4
+        },
+        "mirror_second": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 4
+        },
+        "ordinary": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 12
+        },
+        "repeat": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 4
+        },
+        "resave": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 8
+        },
+        "same_axis_first": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 4
+        },
+        "same_axis_second": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 4
+        },
+        "sharp_first": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 6,
+          "correct_after": 6,
+          "correct_before": 6,
+          "files": 8,
+          "misplaced_new": 0,
+          "newly_correct": 0
+        },
+        "sharp_second": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 7,
+          "correct_after": 7,
+          "correct_before": 7,
+          "files": 8,
+          "misplaced_new": 0,
+          "newly_correct": 0
+        },
+        "tone": {
+          "added_diagonal": 0,
+          "baseline_has_diagonal": 0,
+          "files": 8
+        }
+      },
+      "counts": {
+        "additional_passes": 47,
+        "additional_passes_ambiguous": 0,
+        "additional_passes_scope_withheld": 0,
+        "additional_passes_unassessed": 35,
+        "correct_after": 19,
+        "correct_before": 19,
+        "extra_budget_with_prior_offset_cap": 30,
+        "extra_budget_with_total_seed_cap": 2,
+        "files": 76,
+        "misplaced_new": 0,
+        "newly_correct": 0,
+        "ordinary_controls_additional_alerts": 0,
+        "ordinary_controls_baseline_alerts": 0,
+        "ordinary_controls_files": 32,
+        "positive_files": 24,
+        "scope_controls_additional_alerts": 0,
+        "scope_controls_baseline_alerts": 2,
+        "scope_controls_files": 20
+      },
+      "existing_search_instrumented_ms": {
+        "median_ms": 320.662,
+        "n": 74,
+        "p95_ms": 471.296
+      },
+      "gate_pass": false,
+      "groups_with_incumbent_misses": 2,
+      "independent_crop_witnesses": 19,
+      "max_per_direction_refined_offsets_observed": 14,
+      "max_per_direction_refinement_checks_observed": 12000,
+      "new_correct_source_groups": 0,
+      "new_ordinary_alert_source_groups": 0,
+      "new_scope_alert_source_groups": 0,
+      "staggered_pass_instrumented_ms": {
+        "median_ms": 133.537,
+        "n": 47,
+        "p95_ms": 320.189
+      }
+    }
+  },
+  "frozen_sha256": "5e5d2a29746616bf146c0ae4d1a7341fed67ab8e07f6a8e499444d0b0f35526b",
+  "minimum_prior_or_held_256_bit_sketch_distance": 99,
+  "policy": "Original match retained. A clean miss may use source origin +4,+4 once with original dense target and shared per-direction budgets. Original geometry, displacement and witness retained.",
+  "predecessor_photo_bytes_available": 78,
+  "prior_cases_excluded_licenses": [
+    "CC BY 2.0",
+    "CC BY-SA 2.0"
+  ],
+  "schema": "chipmunk.jpeg-staggered-source-grid-recount/1",
+  "scope": "New saved locations require both original rectangles to have 0.50 IoU and correct diagonal. No effect on AI authorship. Qualities share exact source groups and interventions. Current Q90 eligibility is evaluated separately from the proposed search.",
+  "scored_sha256": "745e925372f372d83f2157be853bdf668a553597fd5a88b984b805dab4b5343c",
+  "source_groups": 12
+}

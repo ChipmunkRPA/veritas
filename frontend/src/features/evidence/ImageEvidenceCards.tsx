@@ -227,9 +227,10 @@ function CopySimilarity({ set, field, token, mediaReady }: {
     : diagonalJpeg ? 'JPEG diagonal copy comparison'
     : webpReflectionVersion || pngReflectionVersion ? 'Exact and geometric copy comparisons' : 'Copy similarity without mirroring'
   const turnedReview = pngReflectionVersion || ['image-evidence-22', 'image-evidence-23'].includes(baseVersion)
-  const nativeJpegVersion = ['image-evidence-28', 'image-evidence-29', 'image-evidence-30', 'image-evidence-31', 'image-evidence-48'].includes(baseVersion)
+  const diagonalJpegVersion = baseVersion === 'image-evidence-48' || baseVersion === 'image-evidence-49'
+  const nativeJpegVersion = diagonalJpegVersion || ['image-evidence-28', 'image-evidence-29', 'image-evidence-30', 'image-evidence-31'].includes(baseVersion)
   const webpVersion = baseVersion === 'image-evidence-32' || baseVersion === 'image-evidence-33' || webpReflectionVersion
-  const wide = (geometric && (diagonalVersion || baseVersion === 'image-evidence-48' || ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29', 'image-evidence-31', 'image-evidence-33', 'image-evidence-35', 'image-evidence-37', 'image-evidence-39', 'image-evidence-41', 'image-evidence-43', 'image-evidence-45'].includes(baseVersion)))
+  const wide = (geometric && (diagonalVersion || diagonalJpegVersion || ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29', 'image-evidence-31', 'image-evidence-33', 'image-evidence-35', 'image-evidence-37', 'image-evidence-39', 'image-evidence-41', 'image-evidence-43', 'image-evidence-45'].includes(baseVersion)))
     || (reflected && (turnedReview || ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12',
       'image-evidence-13', 'image-evidence-14', 'image-evidence-16', 'image-evidence-17', 'image-evidence-18',
       'image-evidence-19', 'image-evidence-20', 'image-evidence-21', 'image-evidence-24', 'image-evidence-25',
@@ -280,7 +281,9 @@ function CopySimilarity({ set, field, token, mediaReady }: {
     ambiguous: 'Several pairs fit the diagonal check, so this check withheld a distinct comparison.',
     unavailable: 'The diagonal JPEG check could not complete.',
     unassessed_match_budget: 'Too many matching areas prevented a distinct diagonal comparison.',
-    unsupported_profile: 'The diagonal check covers upright color images with the tested JPEG 75 compression tables.',
+    unsupported_profile: baseVersion === 'image-evidence-49'
+      ? 'The diagonal check covers upright color images with the tested JPEG 75 compression tables, or single-image baseline JPEGs with the tested JPEG 90 compression tables.'
+      : 'The diagonal check covers upright color images with the tested JPEG 75 compression tables.',
   }
   const turned = (basis === 'png_exact_turned_copy' || basis === 'jpeg_turned_copy' || (basis === 'webp_exact_copy' && transform !== 'same_orientation')) && transform
   const rotation = turned === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'

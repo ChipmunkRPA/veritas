@@ -37,3 +37,39 @@ The signed packages reproduced the original picture and sound evidence.
 Each of two paired option-off analyses had the same overall assessment
 as its option-on replay. The local run kept the older near-silence option
 enabled.
+
+## Within-recording omissions
+
+Ten separate GRID source groups supplied 30 authored omissions with the
+picture and sound edited together, plus 70 matched controls per carrier.
+The existing cut check located zero of the 30. A separate trial measured
+small foreground motion after accounting for camera translation and
+compared it with abrupt changes in the soundtrack. With the operating
+point fixed on development groups, it located 6 of 30 AAC and 7 of 30 PCM
+omissions. It placed zero findings at wrong times and flagged three AAC
+and two PCM controls. The test observed no flags on untouched clips,
+smooth retiming, lighting changes, camera pans, or gain controls.
+[GRID source collection](https://zenodo.org/records/3625687)
+
+Native MP4 replay verified all six correctly located AAC cases and three
+flagged control cases. It reproduced 567 decoded frames, 27 native frame
+positions and the original audio samples. After the holdout closed, an
+exact-timestamp requirement kept all correct locations and reduced the
+alerts to one picture-only omission per carrier. This follow-up used
+already measured clips. The method remains experimental. An abrupt
+timing change can occur in ordinary editing and carries no inference
+about who or what produced the file.
+
+A second test fixed the exact-timestamp rule before running it on 14
+fresh native source recordings, including six from two previously unseen
+participants. In clear audio it located 5 of 42 AAC omissions and 4 of 42
+PCM omissions, with zero misplaced findings and one picture-only edit
+flagged among 98 controls per carrier. Under strong background noise
+(−5 dB), the rule located none of the 42 omissions under either background
+condition. The picture cue still passed at 29 of those boundaries, while
+the soundtrack cue weakened. Two separate recordings adapted from 30 fps
+also produced too many ordinary alerts to support broader use.
+
+Original-file replay checked 27 MP4s, all 1,701 decoded picture timestamps
+and frames, 60 before, at and after anchors, and exact decoded audio. The
+rule remains experimental.

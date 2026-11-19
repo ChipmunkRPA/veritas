@@ -333,6 +333,7 @@ class Settings(BaseSettings):
     image_jpeg_native_rotation_review: bool = False  # Extend the development rotation check to qualified larger JPEGs.
     image_jpeg_disjoint_rotation_review: bool = False  # Report two independent rotated copy pairs on that native grid.
     image_jpeg_diagonal_copy_review: bool = False  # Compare two JPEG crops with a diagonal reflection and displacement.
+    image_jpeg_diagonal_q90_review: bool = False  # Extend diagonal copy evidence to the tested baseline JPEG 90 tables.
     image_embedded_pair_review: bool = False  # Development-only exact differences between two matching PNG areas.
     image_small_png_copy_review: bool = False  # Optional local exact copy evidence for eligible PNGs.
     image_lossless_webp_copy_review: bool = False  # Optional local exact copy evidence on the native WebP grid.

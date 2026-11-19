@@ -3,9 +3,12 @@
 import cv2
 
 from app.detectors.image import jpeg_turned_copy
+from app.detectors.image.jpeg_bitstream import baseline_frame
 from app.evidence.image_copy_similarity_binding import (
     DIAGONAL_TRANSFORMS,
     JPEG_DIAGONAL_MIN_PARALLEL_SUM,
+    JPEG_DIAGONAL_Q90_VERSION,
+    JPEG_DIAGONAL_VERSION,
     ROLES,
     jpeg_diagonal_displacement,
     jpeg_diagonal_size,
@@ -13,12 +16,20 @@ from app.evidence.image_copy_similarity_binding import (
 from app.evidence.image_jpeg_offgrid_source import encoded_profile
 
 
-def supported(data, rgb):
-    return jpeg_diagonal_size(rgb.shape[1], rgb.shape[0]) and encoded_profile(data) == 75
+def supported(data, rgb, *, version=JPEG_DIAGONAL_VERSION):
+    if not jpeg_diagonal_size(rgb.shape[1], rgb.shape[0]):
+        return False
+    profile = encoded_profile(data)
+    if profile == 75:
+        return True
+    if version == JPEG_DIAGONAL_Q90_VERSION and profile == 90:
+        frame = baseline_frame(data)
+        return frame is not None and frame.precision == 8
+    return False
 
 
-def review(data, rgb):
-    if not supported(data, rgb):
+def review(data, rgb, *, version=JPEG_DIAGONAL_VERSION):
+    if not supported(data, rgb, version=version):
         return {"status": "unsupported_profile", "measurement": None}, [], None
     status, candidates = jpeg_turned_copy.analyse_diagonal(rgb)
     if not candidates:
@@ -30,9 +41,9 @@ def review(data, rgb):
     return {"status": status, "measurement": match["measurement"]}, [match["pair"]], transform
 
 
-def verify(data, rgb, pair, measurement):
+def verify(data, rgb, pair, measurement, *, version=JPEG_DIAGONAL_VERSION):
     transform = pair["transform"]
-    if transform not in DIAGONAL_TRANSFORMS or not supported(data, rgb):
+    if transform not in DIAGONAL_TRANSFORMS or not supported(data, rgb, version=version):
         raise ValueError("Diagonal JPEG evidence requires a supported upright JPEG")
     boxes = [tuple(pair["regions"][role][axis] for axis in "xywh") for role in ROLES]
     first, second = boxes

@@ -81,6 +81,25 @@ to original Word paragraph character offsets or source PDF word boxes. The
 replay covers extraction and mapping. The table above is the plain-text
 detector comparison. [Format replay receipt](evaluation-panels/writing-turing-history-formats-2026-11-18.json)
 
+## Historical software-paper registration
+
+A separate audit checked whether shorter text anchors could qualify
+ordinary historical revisions from the Journal of Open Source Software.
+The frozen sample covered 16 papers. Of 34 adjacent revision pairs in the
+nine dated works, 26 supplied both manuscripts and matched the listed
+authors. The previous rule, which required two unchanged sentences on
+each side of an edit, admitted zero. One unique exact sentence on each
+side registered two edits from two papers. All four manuscript versions
+matched the original Git blob bytes. Exact passage ranges also replayed
+in four DOCX and four TXT files. Those are controls for locating ordinary
+revisions. The audit ran zero model calls.
+
+JOSS releases accepted papers under CC BY 4.0. The earlier historical
+commits carry package-level license notices. Source wording stays private
+while historical manuscript redistribution rights remain unconfirmed.
+[Publication licensing](https://joss.theoj.org/about#content-licensing-open-access) ·
+[Paper source requirements](https://joss.readthedocs.io/en/latest/submitting.html#submission-requirements)
+
 ## Replay locally
 
 The portable review recomputes passage selections and the overlap counts

@@ -54,6 +54,14 @@ The [supplied-reference audio comparison](audio-short-window-reader-holdout-2026
 compares a dry earlier copy with an earlier copy that shares the exact same
 background. It verifies exact sample ranges in both source recordings.
 
+The [paired 44.1 kHz video timing replay](video-lip-motion-aac441-transfer-2026-11-18.md#recount-the-paired-result)
+recounts local motion and speech timing across two matched audio encodings,
+with ordinary timing and gain controls on the same picture clock.
+
+The [denser twelve-second audio comparison](audio-dense-native12-reference-2026-11-18.md#independent-source-replay-and-public-recount)
+recounts new speech locations against a clean earlier copy and checks
+how the same approach responds to ordinary processing and incorrect copies.
+
 The [statistical reporting replay](document-chi-square-2026-11-18.md#replay-the-measurements)
 checks published numerical discrepancies and staged controls against the
 recorded document locations. It measures consistency of a printed result.

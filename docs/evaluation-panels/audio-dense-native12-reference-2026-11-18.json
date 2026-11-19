@@ -1,0 +1,944 @@
+{
+  "commitments": {
+    "independent_native_review": "0e77441d1768d5725aa6652c3b1cc0e856147a353a5eb5b646c054ab33798026",
+    "independent_native_reviewer": "527dac8611bdcff0dd6a64ae91db7c08cbfae811a51e7bd4834881d14881278e",
+    "private_aggregate": "a23b60129d2dd62646b5a96f91058c8ecdb6a84d95575da0d397d4ccc6697677",
+    "private_measurements": "cc759982e58be3325e4513aa781d1ca868765127046de8789683693ce61097b0",
+    "private_plan": "12adcde609eeb3d02e44c9c8d1f8928ac9fb63d516b0f8c53e20d5d3d69addad"
+  },
+  "counts": {
+    "clean": {
+      "different_reader_splice": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 14,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 1,
+          "unassessed_reference": 1
+        },
+        "candidate": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 7,
+          "unassessed_reference": 1
+        },
+        "total": 16
+      },
+      "edited_kitten": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 14,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 1,
+          "unassessed_reference": 1
+        },
+        "candidate": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 6,
+          "unassessed_reference": 1
+        },
+        "total": 16
+      },
+      "edited_piper": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 15,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 0,
+          "unassessed_reference": 1
+        },
+        "candidate": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 7,
+          "unassessed_reference": 1
+        },
+        "total": 16
+      },
+      "half_matched_earlier": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "roundtrip_kitten": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 15,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 0,
+          "unassessed_reference": 1
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 15,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 0,
+          "unassessed_reference": 1
+        },
+        "total": 16
+      },
+      "roundtrip_piper": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 15,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 0,
+          "unassessed_reference": 1
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 15,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 0,
+          "unassessed_reference": 1
+        },
+        "total": 16
+      },
+      "same_reader_splice": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 14,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 1,
+          "unassessed_reference": 1
+        },
+        "candidate": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 7,
+          "unassessed_reference": 1
+        },
+        "total": 16
+      },
+      "shifted_earlier": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "untouched": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 15,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 0,
+          "unassessed_reference": 1
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 15,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 0,
+          "unassessed_reference": 1
+        },
+        "total": 16
+      },
+      "whole_gain": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 15,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 0,
+          "unassessed_reference": 1
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 15,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 0,
+          "unassessed_reference": 1
+        },
+        "total": 16
+      },
+      "whole_high_shelf": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 15,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 0,
+          "unassessed_reference": 1
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 15,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 0,
+          "unassessed_reference": 1
+        },
+        "total": 16
+      },
+      "whole_lowpass": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 15,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 0,
+          "unassessed_reference": 1
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 15,
+            "reference_match_not_supported": 1
+          },
+          "target_locations": 0,
+          "unassessed_reference": 1
+        },
+        "total": 16
+      },
+      "wrong_reader": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      }
+    },
+    "competing_speech": {
+      "different_reader_splice": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 8
+          },
+          "target_locations": 0,
+          "unassessed_reference": 8
+        },
+        "candidate": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 4,
+            "reference_match_not_supported": 8
+          },
+          "target_locations": 3,
+          "unassessed_reference": 8
+        },
+        "total": 16
+      },
+      "edited_kitten": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 8
+          },
+          "target_locations": 0,
+          "unassessed_reference": 8
+        },
+        "candidate": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 4,
+            "reference_match_not_supported": 8
+          },
+          "target_locations": 3,
+          "unassessed_reference": 8
+        },
+        "total": 16
+      },
+      "edited_piper": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 8
+          },
+          "target_locations": 0,
+          "unassessed_reference": 8
+        },
+        "candidate": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 4,
+            "reference_match_not_supported": 8
+          },
+          "target_locations": 3,
+          "unassessed_reference": 8
+        },
+        "total": 16
+      },
+      "half_matched_earlier": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "roundtrip_kitten": {
+        "baseline": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "roundtrip_piper": {
+        "baseline": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "same_reader_splice": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 8
+          },
+          "target_locations": 0,
+          "unassessed_reference": 8
+        },
+        "candidate": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 4,
+            "reference_match_not_supported": 8
+          },
+          "target_locations": 3,
+          "unassessed_reference": 8
+        },
+        "total": 16
+      },
+      "shifted_earlier": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "untouched": {
+        "baseline": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "whole_gain": {
+        "baseline": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "whole_high_shelf": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "consistent_frequency_balance_change": 6,
+            "local_change": 1,
+            "no_corroborated_local_change": 3,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 1,
+          "states": {
+            "consistent_frequency_balance_change": 6,
+            "local_change": 1,
+            "no_corroborated_local_change": 3,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "whole_lowpass": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 9,
+            "reference_match_not_supported": 7
+          },
+          "target_locations": 0,
+          "unassessed_reference": 7
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 9,
+            "reference_match_not_supported": 7
+          },
+          "target_locations": 0,
+          "unassessed_reference": 7
+        },
+        "total": 16
+      },
+      "wrong_reader": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      }
+    },
+    "traffic": {
+      "different_reader_splice": {
+        "baseline": {
+          "flags": 2,
+          "states": {
+            "local_change": 2,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 7
+          },
+          "target_locations": 1,
+          "unassessed_reference": 7
+        },
+        "candidate": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 5,
+            "reference_match_not_supported": 7
+          },
+          "target_locations": 3,
+          "unassessed_reference": 7
+        },
+        "total": 16
+      },
+      "edited_kitten": {
+        "baseline": {
+          "flags": 2,
+          "states": {
+            "local_change": 2,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 7
+          },
+          "target_locations": 1,
+          "unassessed_reference": 7
+        },
+        "candidate": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 5,
+            "reference_match_not_supported": 7
+          },
+          "target_locations": 3,
+          "unassessed_reference": 7
+        },
+        "total": 16
+      },
+      "edited_piper": {
+        "baseline": {
+          "flags": 2,
+          "states": {
+            "local_change": 2,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 7
+          },
+          "target_locations": 1,
+          "unassessed_reference": 7
+        },
+        "candidate": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 5,
+            "reference_match_not_supported": 7
+          },
+          "target_locations": 3,
+          "unassessed_reference": 7
+        },
+        "total": 16
+      },
+      "half_matched_earlier": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "roundtrip_kitten": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 9,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 2,
+          "states": {
+            "local_change": 2,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "roundtrip_piper": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 9,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 2,
+          "states": {
+            "local_change": 2,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "same_reader_splice": {
+        "baseline": {
+          "flags": 2,
+          "states": {
+            "local_change": 2,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 7
+          },
+          "target_locations": 1,
+          "unassessed_reference": 7
+        },
+        "candidate": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 5,
+            "reference_match_not_supported": 7
+          },
+          "target_locations": 3,
+          "unassessed_reference": 7
+        },
+        "total": 16
+      },
+      "shifted_earlier": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "untouched": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 9,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 2,
+          "states": {
+            "local_change": 2,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "whole_gain": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 9,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 2,
+          "states": {
+            "local_change": 2,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "whole_high_shelf": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 6,
+            "no_corroborated_local_change": 4,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 6,
+            "no_corroborated_local_change": 4,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "whole_lowpass": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 10,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 10,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "wrong_reader": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      }
+    }
+  },
+  "decision": {
+    "new_generator_families": [
+      "kitten",
+      "piper"
+    ],
+    "new_noisy_synthetic_locations": 10,
+    "new_ordinary_or_processing_reader_components": {
+      "clean": 0,
+      "competing_speech": 0,
+      "traffic": 1
+    },
+    "new_reader_components": 3,
+    "new_wrong_locations": 4,
+    "passes": false,
+    "wrong_reference_flags": 0
+  },
+  "limitations": [
+    "This fixed development comparison uses previously observed sources and outcomes. Prospective independent source validation remains outstanding.",
+    "Two supplied versions with matching speech on the same sample clock are required.",
+    "The recorded backgrounds and 32 target events repeat across conditions. Counts cover paired deliveries from the same events.",
+    "Genuine edits and ordinary processing can reduce waveform matches. Authorship and individual-speaker attribution require separate evidence.",
+    "The public aggregate recounts tables and the frozen gate. Exact native regeneration uses retained private source pairs and fixed transformations."
+  ],
+  "method": {
+    "dense_point": 0.31758884,
+    "maximum_start_difference": 5760,
+    "preserves_existing_range": true,
+    "preserves_frequency_guard": true,
+    "preserves_reference_admission": true,
+    "six_second_window_starts": [
+      0,
+      19200,
+      38400,
+      57600,
+      76800,
+      96000
+    ],
+    "zero_model_weight": true
+  },
+  "native_review": {
+    "dense_evidence_windows_recomputed": 1464,
+    "new_misplaced_kind_counts": {
+      "ordinary": 3,
+      "synthetic": 1
+    },
+    "passed": true,
+    "source_deliveries_checked": 368,
+    "source_pairs_recomputed": 624
+  },
+  "privacy": {
+    "individual_decisions": false,
+    "individual_edit_positions": false,
+    "local_paths": false,
+    "per_case_scores": false,
+    "raw_audio": false,
+    "source_identifiers": false,
+    "wording_or_transcripts": false
+  },
+  "schema": "chipmunk.audio-native12-dense-reference-aggregate/1",
+  "scope": {
+    "affects_overall_confidence": false,
+    "background_captures": 4,
+    "conditions": [
+      "clean",
+      "traffic",
+      "competing_speech"
+    ],
+    "declared_host_reader_components": 8,
+    "foreground_hosts": 16,
+    "generator_families": 2,
+    "independent_new_source_holdout": false,
+    "new_model_calls": 0,
+    "pairs": 624,
+    "pairs_per_condition": 208,
+    "post_hoc_development": true,
+    "requires_supplied_clean_earlier_copy": true,
+    "sample_rate": 16000,
+    "samples_per_copy": 192000,
+    "single_upload_detection": false,
+    "synthetic_targets_repeated_across_conditions": 32
+  }
+}

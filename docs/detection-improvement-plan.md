@@ -67,6 +67,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- The regional repeat check now runs on supported progressive quality-90
+  JPEGs. All 360 paired scan conversions preserved decoded pixels, and
+  three full model replays preserved exact regional masks, including an
+  ordinary blur alert. Both encoding modes passed local simulated
+  checkout and original-source report verification.
+  [Progressive JPEG transfer](image-cross-quality-2026-11-16.md#progressive-jpeg-transport)
+
 - The 30 fps face transition check added 14 useful boundaries in 14 direct
   edits and 12 in 14 tandem encodes. The current Full check found one other
   tandem edit. One ordinary focus change produced an alert in both carriers.

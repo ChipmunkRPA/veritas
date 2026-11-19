@@ -65,6 +65,10 @@ The [same-photo reconstruction replay](image-vae-double-jpeg-2026-11-18.md#repla
 compares two- and three-class readings over the same exact edit area
 after one and two JPEG encodes.
 
+The [progressive JPEG transport replay](image-cross-quality-2026-11-16.md#progressive-jpeg-transport)
+checks 360 lossless scan conversions against the frozen baseline deliveries,
+including the repeated quality-75 view and three full model replays.
+
 The [lossless WebP comparison](image-exact-webp-copy-2026-11-18.md#replay)
 recounts copy locations against exact edit boxes on 212 deliveries
 using Python's standard library. The native replay checks the

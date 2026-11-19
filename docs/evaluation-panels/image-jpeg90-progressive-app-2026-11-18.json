@@ -1,0 +1,60 @@
+{
+  "checkout_mode": "simulated",
+  "results": {
+    "baseline": {
+      "browser_crop_and_mask_verified": true,
+      "browser_repeat_mask_verified": true,
+      "exact_source_mask_replayed": true,
+      "json_and_pdf_snapshot_match": true,
+      "model_names_hidden": true,
+      "native_regions": 2,
+      "original_crop_overlay_mask_hashes_verified": true,
+      "overlap_cells": [
+        8658,
+        8668
+      ],
+      "payment_before_weight_load_and_inference": true,
+      "pdf_signature_verified": true,
+      "price_usd_minor": 999,
+      "region": {
+        "h": 76,
+        "w": 128,
+        "x": 377,
+        "y": 456
+      },
+      "regional_forwards": 2,
+      "retained_regions": 1,
+      "signed_jpeg_repeat_replayed": true,
+      "simulated_stripe_only": true,
+      "source_sha256": "0deee9ea4b7d6da5fbc86fa65cc7474ed19b6655ec87af9ed41c3c23b72a2850"
+    },
+    "progressive": {
+      "browser_crop_and_mask_verified": true,
+      "browser_repeat_mask_verified": true,
+      "exact_source_mask_replayed": true,
+      "json_and_pdf_snapshot_match": true,
+      "model_names_hidden": true,
+      "native_regions": 2,
+      "original_crop_overlay_mask_hashes_verified": true,
+      "overlap_cells": [
+        8658,
+        8668
+      ],
+      "payment_before_weight_load_and_inference": true,
+      "pdf_signature_verified": true,
+      "price_usd_minor": 999,
+      "region": {
+        "h": 76,
+        "w": 128,
+        "x": 377,
+        "y": 456
+      },
+      "regional_forwards": 2,
+      "retained_regions": 1,
+      "signed_jpeg_repeat_replayed": true,
+      "simulated_stripe_only": true,
+      "source_sha256": "b7b0faed2d560ad99c3e329e3b112dfd8e1ec2a8ff18e887366bbec422a7d25e"
+    }
+  },
+  "schema": "chipmunk.jpeg90-progressive-app/1"
+}

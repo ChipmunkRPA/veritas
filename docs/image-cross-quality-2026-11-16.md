@@ -137,7 +137,8 @@ encoding profiles remains open. [JPEG90 results](evaluation-panels/image-jpeg90-
 
 Enable `VERITAS_IMAGE_REGION_JPEG90_REVIEW=true` and
 `VERITAS_IMAGE_REGION_JPEG_REVIEW=true` in development and run Full
-analysis. The option covers upright 8-bit RGB baseline 4:2:0 JPEGs with
+analysis. The option covers upright 8-bit RGB baseline and supported
+progressive 4:2:0 JPEGs with
 the standard quality-90 tables, a 768-pixel long side and a short side of
 at least 512 pixels. The existing quality-75 path is separate.
 
@@ -166,4 +167,55 @@ npm --prefix frontend run build
 export CHIPMUNK_REGIONAL_JPEG90_FLOW_INPUT="$run/fresh/fresh-018/sharp-90.jpg"
 export VERITAS_DEVICE=cpu HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1
 backend/.venv/bin/pytest backend/tests/test_native_regional_jpeg_paid.py -o addopts='' -m slow -k jpeg90-repeat
+```
+
+## Progressive JPEG transport
+
+The same regional check now accepts complete progressive JPEGs within the
+existing quality-90 profile. It requires a single frame with fixed
+quantization tables and a complete scan sequence. The app still asks
+whether the same region appears in a quality-75 save of the submitted
+pixels. The resulting local editing cues carry zero AI-origin weight.
+
+We used lossless scan conversion on the 360 baseline JPEG90 deliveries
+above. This isolates the effect of changing scan structure. Two decoders
+independently reproduced identical pixels within every pair. For all 342
+eligible pairs, the input tensor, reliability mask, and quality-75 repeat
+bytes were identical. The repeat also matched its historical digest. The
+18 undersized pairs stayed out of scope. Full inference was rerun on
+three pairs chosen from the closed panel by fixed digest order. The pairs
+cover a located edit, an unchanged photo, and a flagged conventional blur.
+All three reproduced their original response maps, overlap, and masks.
+
+| Panel | Eligible progressive files | Useful locations inherited from equivalent inputs | Ordinary flags inherited from equivalent inputs |
+| --- | ---: | ---: | ---: |
+| Fresh comparison cohort | 144/144 | 11/48 | 0/96 |
+| Retained removal cohort | 198/216 | 0/72 | 3/144 |
+
+These counts describe scan conversion of an earlier panel. New camera
+exports, subsequent recompression, different quantization profiles and
+better removal detection need their own evaluation.
+
+Two local simulated checkouts exercised baseline and progressive uploads
+of the same edited photo. Both waited for payment before loading weights
+or running inference. Chrome, PDF and JSON showed the same region at
+x 377, y 456, size 128 × 76 pixels, with 8,658 of 8,668 cells recurring.
+The signed verifier reproduced the original crops, mask and repeat view
+from each file. [Progressive browser and export receipt](evaluation-panels/image-jpeg90-progressive-app-2026-11-18.json)
+
+The portable receipt records matching digests and source geometry. The
+standard-library replay checks the pairs against the pinned earlier
+receipt, verifies the sampled inference records, and recounts the
+inherited outcomes. Native replay uses the original prepared delivery
+roots, the same regional checkpoint, and `jpegtran` and `djpeg`. It
+accepts `--fresh`, `--transfer`, and `--checkpoint` with an unused output
+path. The receipts contain no images.
+[Progressive transport receipt](evaluation-panels/image-jpeg90-progressive-2026-11-18.json.gz)
+
+```sh
+export PYTHONPATH=backend
+published=docs/evaluation-panels
+python3 -B -S -m scripts.image_regional_jpeg90_progressive \
+  "$published/image-jpeg90-agreement-2026-11-16.json.gz" \
+  "$published/image-jpeg90-progressive-2026-11-18.json.gz"
 ```

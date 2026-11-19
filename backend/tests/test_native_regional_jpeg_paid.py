@@ -6,6 +6,7 @@ import hashlib
 import io
 import json
 import os
+import shutil
 import subprocess
 import threading
 import uuid
@@ -44,7 +45,10 @@ from app.storage.db import Analysis, BillingOrderRow, DetectorRun, ReportRow
     ("CHIPMUNK_REGIONAL_JPEG90_FLOW_INPUT", "CHIPMUNK_REGIONAL_JPEG90_FLOW_PROOF",
      "0deee9ea4b7d6da5fbc86fa65cc7474ed19b6655ec87af9ed41c3c23b72a2850",
      "925b086aaf176be90469b0f5a1245454f00ad5205a222b07392696d108acad32"),
-], ids=["baseline", "progressive", "jpeg90-repeat"])
+    ("CHIPMUNK_REGIONAL_JPEG90_PROGRESSIVE_FLOW_INPUT", "CHIPMUNK_REGIONAL_JPEG90_PROGRESSIVE_FLOW_PROOF",
+     "0deee9ea4b7d6da5fbc86fa65cc7474ed19b6655ec87af9ed41c3c23b72a2850",
+     "925b086aaf176be90469b0f5a1245454f00ad5205a222b07392696d108acad32"),
+], ids=["baseline", "progressive", "jpeg90-repeat", "jpeg90-progressive-repeat"])
 def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
     billing, monkeypatch, tmp_path, input_var, proof_var, expected_source, expected_mask,
 ):
@@ -56,9 +60,21 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
     if not path:
         pytest.skip("Supply the digest-pinned held JPEG from the retained transfer panel")
     source = Path(path).read_bytes()
+    assert hashlib.sha256(source).hexdigest() == expected_source
+    jpeg90_progressive = input_var == "CHIPMUNK_REGIONAL_JPEG90_PROGRESSIVE_FLOW_INPUT"
+    if jpeg90_progressive:
+        jpegtran = shutil.which("jpegtran")
+        assert jpegtran, "Lossless progressive replay requires jpegtran"
+        progressive = subprocess.run([jpegtran, "-copy", "all", "-progressive"], input=source, check=True,
+                                     capture_output=True, timeout=15).stdout
+        assert source != progressive
+        with Image.open(io.BytesIO(source)) as baseline, Image.open(io.BytesIO(progressive)) as converted:
+            assert converted.info["progressive"] and baseline.tobytes() == converted.tobytes()
+        path = tmp_path / "progressive-source.jpg"
+        path.write_bytes(progressive)
+        source = progressive
     source_hash = hashlib.sha256(source).hexdigest()
-    assert source_hash == expected_source
-    jpeg90 = input_var == "CHIPMUNK_REGIONAL_JPEG90_FLOW_INPUT"
+    jpeg90 = jpeg90_progressive or input_var == "CHIPMUNK_REGIONAL_JPEG90_FLOW_INPUT"
     f = billing
     for key, value in {"environment": "dev", "device": "cpu", "image_region_mode": "legacy",
                        "image_region_jpeg_review": True, "image_region_flip_review": True,

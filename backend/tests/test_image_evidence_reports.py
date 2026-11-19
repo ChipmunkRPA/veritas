@@ -169,6 +169,8 @@ def test_summary_pdf_and_manifest_present_non_mirrored_pair(packet_fixture, monk
     db, store, analysis, _, _ = packet_fixture
     monkeypatch.setattr(settings, "environment", "dev")
     monkeypatch.setattr(settings, "image_embedded_pair_review", False)
+    monkeypatch.setattr(settings, "image_disjoint_exact_copy_review", False)
+    monkeypatch.setattr(settings, "image_png_reflection_review", False)
     monkeypatch.setattr(settings, "image_small_png_copy_review", False)
     monkeypatch.setattr(settings, "image_jpeg_block_copy_review", False)
     monkeypatch.setattr(settings, "image_jpeg_offgrid_copy_review", False)

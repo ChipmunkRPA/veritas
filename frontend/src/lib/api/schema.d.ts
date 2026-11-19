@@ -3530,9 +3530,9 @@ export interface components {
             /** Available */
             available: boolean;
             /** Earlier Extensions */
-            earlier_extensions?: (".eml" | ".txt" | ".docx" | ".odt" | ".pdf" | ".rtf" | ".html" | ".htm" | ".xhtml")[] | null;
+            earlier_extensions?: (".eml" | ".txt" | ".docx" | ".odt" | ".pdf" | ".rtf" | ".html" | ".htm" | ".xhtml" | ".md" | ".markdown")[] | null;
             /** Extension */
-            extension?: (".eml" | ".txt" | ".docx" | ".odt" | ".pdf" | ".rtf" | ".html" | ".htm" | ".xhtml") | null;
+            extension?: (".eml" | ".txt" | ".docx" | ".odt" | ".pdf" | ".rtf" | ".html" | ".htm" | ".xhtml" | ".md" | ".markdown") | null;
             /** Paired Check Available */
             paired_check_available?: boolean | null;
             /** Paired Mixed Formats Available */
@@ -3564,16 +3564,18 @@ export interface components {
              * Coordinate Space
              * @enum {string}
              */
-            coordinate_space: "decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "odt_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint" | "email_html_extracted_text_unicode_codepoint" | "rtf_extracted_text_unicode_codepoint" | "html_article_extracted_text_unicode_codepoint" | "per_source_unicode_codepoint";
+            coordinate_space: "decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "odt_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint" | "email_html_extracted_text_unicode_codepoint" | "rtf_extracted_text_unicode_codepoint" | "html_article_extracted_text_unicode_codepoint" | "per_source_unicode_codepoint" | "markdown_extracted_text_unicode_codepoint";
             earlier: components["schemas"]["DraftSource"];
             /**
              * Format
              * @enum {string}
              */
-            format: "email" | "plain_text" | "docx" | "odt" | "pdf" | "rtf" | "html" | "mixed";
+            format: "email" | "plain_text" | "docx" | "odt" | "pdf" | "rtf" | "html" | "mixed" | "markdown";
             /** Interpretation */
             interpretation: string;
             later: components["schemas"]["DraftSource"];
+            /** Markdown Fenced Code */
+            markdown_fenced_code?: "exclude-commonmark-fenced-code/1" | null;
             numeric_comparison?: components["schemas"]["DraftValueComparison"] | null;
             /** Odt Section Visibility */
             odt_section_visibility?: "visible-odt-sections/1" | null;
@@ -3806,7 +3808,7 @@ export interface components {
             /** Bytes */
             bytes: number;
             /** Coordinate Space */
-            coordinate_space?: ("decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "odt_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint" | "rtf_extracted_text_unicode_codepoint") | null;
+            coordinate_space?: ("decoded_source_unicode_codepoint" | "docx_body_unicode_codepoint" | "odt_body_unicode_codepoint" | "pdf_native_text_unicode_codepoint" | "rtf_extracted_text_unicode_codepoint" | "markdown_extracted_text_unicode_codepoint") | null;
             /** Decoded Characters */
             decoded_characters: number;
             /** Decoded Html Characters */
@@ -3816,7 +3818,7 @@ export interface components {
             /** Decoded Text Sha256 */
             decoded_text_sha256: string;
             /** Format */
-            format?: ("plain_text" | "docx" | "odt" | "pdf" | "rtf") | null;
+            format?: ("plain_text" | "docx" | "odt" | "pdf" | "rtf" | "markdown") | null;
             html_article_scope?: components["schemas"]["DraftHtmlArticleScope"] | null;
             /** Mime Part */
             mime_part: string | null;
@@ -7893,7 +7895,7 @@ export interface operations {
                 "multipart/form-data": {
                     /**
                      * Format: binary
-                     * @description Earlier version. TXT, DOCX, ODT, RTF and PDF may be mixed. Compare EML with EML and HTML with HTML.
+                     * @description Earlier version. TXT, DOCX, ODT, RTF, PDF and Markdown may be mixed. Compare EML with EML and HTML with HTML.
                      */
                     earlier: string;
                     /**

@@ -22,6 +22,7 @@ from app.core.logging import get_logger
 from app.evidence.document_revision import (
     COMPARABLE_DRAFTS,
     FORMATS,
+    MARKDOWN_ALIAS,
     MAX_BYTES,
     MIXED_DRAFTS,
     draft_extension,
@@ -38,7 +39,7 @@ router = APIRouter(prefix="/api/v2", tags=["evidence"], dependencies=[Depends(ra
                    route_class=CheckedRoute)
 
 
-DraftExtension = Literal[".eml", ".txt", ".docx", ".odt", ".pdf", ".rtf", ".html", ".htm", ".xhtml"]
+DraftExtension = Literal[".eml", ".txt", ".docx", ".odt", ".pdf", ".rtf", ".html", ".htm", ".xhtml", ".md", ".markdown"]
 
 
 class DocumentRevisionAvailability(BaseModel):
@@ -66,9 +67,10 @@ class DraftSource(BaseModel):
     decoded_html_sha256: str | None = None
     decoded_html_characters: int | None = None
     html_article_scope: DraftHtmlArticleScope | None = None
-    format: Literal["plain_text", "docx", "odt", "pdf", "rtf"] | None = None
+    format: Literal["plain_text", "docx", "odt", "pdf", "rtf", "markdown"] | None = None
     coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint", "odt_body_unicode_codepoint",
-                              "pdf_native_text_unicode_codepoint", "rtf_extracted_text_unicode_codepoint"] | None = None
+                              "pdf_native_text_unicode_codepoint", "rtf_extracted_text_unicode_codepoint",
+                              "markdown_extracted_text_unicode_codepoint"] | None = None
 
 
 class DraftParagraph(BaseModel):
@@ -273,11 +275,11 @@ class DraftComparison(BaseModel):
                          "chipmunk.document-revision-comparison/5", "chipmunk.document-revision-comparison/6",
                          "chipmunk.document-revision-comparison/7", "chipmunk.document-revision-comparison/8",
                          "chipmunk.document-revision-comparison/9"] = Field(alias="schema")
-    format: Literal["email", "plain_text", "docx", "odt", "pdf", "rtf", "html", "mixed"]
+    format: Literal["email", "plain_text", "docx", "odt", "pdf", "rtf", "html", "mixed", "markdown"]
     coordinate_space: Literal["decoded_source_unicode_codepoint", "docx_body_unicode_codepoint", "odt_body_unicode_codepoint",
                               "pdf_native_text_unicode_codepoint", "email_html_extracted_text_unicode_codepoint",
                               "rtf_extracted_text_unicode_codepoint", "html_article_extracted_text_unicode_codepoint",
-                              "per_source_unicode_codepoint"]
+                              "per_source_unicode_codepoint", "markdown_extracted_text_unicode_codepoint"]
     earlier: DraftSource
     later: DraftSource
     changes: list[DraftChange]
@@ -289,6 +291,7 @@ class DraftComparison(BaseModel):
     numeric_comparison: DraftValueComparison | None = None
     odt_section_visibility: Literal["visible-odt-sections/1"] | None = None
     rtf_run_visibility: Literal["visible-rtf-direct-runs/1"] | None = None
+    markdown_fenced_code: Literal["exclude-commonmark-fenced-code/1"] | None = None
 
 
 class DocumentRevisionResponse(BaseModel):
@@ -332,7 +335,7 @@ def _original(aid: str, *, reject_inactive: bool = False) -> tuple[str, int, str
 
 def _unavailable() -> ProblemError:
     return ProblemError(404, "Earlier-draft comparison unavailable",
-                        "A retained, completed, active EML, TXT, DOCX, ODT, RTF, PDF or HTML analysis is required.")
+                        "A retained, completed, active EML, TXT, DOCX, ODT, RTF, PDF, HTML or Markdown analysis is required.")
 
 
 def _paired_enabled(extension: str | None) -> bool:
@@ -357,7 +360,7 @@ def availability(aid: str, request: Request):
             pass
     payload = {"available": extension is not None, "extension": extension}
     if extension in COMPARABLE_DRAFTS:
-        payload["earlier_extensions"] = list(COMPARABLE_DRAFTS)
+        payload["earlier_extensions"] = [*COMPARABLE_DRAFTS, MARKDOWN_ALIAS]
     elif extension == ".html":
         from app.storage.files import HTML_EXTS
 
@@ -496,7 +499,7 @@ def _compare(aid: str, original: tuple[str, int, str], earlier: bytes, earlier_e
     openapi_extra={"requestBody": {"required": True, "content": {"multipart/form-data": {"schema": {
         "type": "object", "required": ["earlier"], "properties": {
             "earlier": {"type": "string", "format": "binary", "description": (
-                "Earlier version. TXT, DOCX, ODT, RTF and PDF may be mixed. Compare EML with EML and HTML with HTML."
+                "Earlier version. TXT, DOCX, ODT, RTF, PDF and Markdown may be mixed. Compare EML with EML and HTML with HTML."
             )},
             "include_pdf": {"type": "string", "enum": ["true", "false"], "default": "false"},
             "include_paired_check": {"type": "string", "enum": ["true", "false"], "default": "false"},

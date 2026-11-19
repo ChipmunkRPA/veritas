@@ -360,7 +360,7 @@ def test_pdf_comparison_binds_repeated_text_to_both_original_pages(reference_htt
     retained = _saved(f, "pdf-draft", ".pdf", later)
     url = _url("pdf-draft")
     assert f.client.get(url, headers=f.viewer).json() == {
-        "available": True, "extension": ".pdf", "earlier_extensions": [".txt", ".docx", ".pdf", ".odt", ".rtf"],
+        "available": True, "extension": ".pdf", "earlier_extensions": [".txt", ".docx", ".pdf", ".odt", ".rtf", ".md", ".markdown"],
     }
     response = f.client.post(url, headers=f.viewer, files=_upload(earlier, ".pdf"), data={"include_pdf": "true"})
     assert response.status_code == 200, response.text
@@ -830,7 +830,7 @@ def test_word_comparison_uses_exact_body_paragraph_coordinates_in_api_pdf_and_re
     _saved(f, "word-draft", ".DOCX", later)
     url = _url("word-draft")
     assert f.client.get(url, headers=f.viewer).json() == {
-        "available": True, "extension": ".docx", "earlier_extensions": [".txt", ".docx", ".pdf", ".odt", ".rtf"],
+        "available": True, "extension": ".docx", "earlier_extensions": [".txt", ".docx", ".pdf", ".odt", ".rtf", ".md", ".markdown"],
     }
     wrong = f.client.post(url, headers=f.viewer, files=_upload(earlier, ".txt"))
     assert wrong.status_code == 422
@@ -966,6 +966,79 @@ def test_draft_changes_replay_extracted_paragraphs(reference_http, monkeypatch, 
         review(export, old_path, new_path)
     unchanged = document_revision.compare(earlier, build(old_extension, texts[0]), old_extension)
     assert unchanged["changes"] == []
+
+
+@pytest.mark.parametrize(("earlier_extension", "later_extension"), [
+    (".md", ".markdown"), (".markdown", ".docx"), (".docx", ".markdown"), (".txt", ".md"),
+])
+def test_markdown_draft_replay_preserves_prose_and_skips_fenced_code(
+    reference_http, monkeypatch, tmp_path, earlier_extension, later_extension,
+):
+    from app.evidence import document_native_locations
+
+    f = _install(reference_http, monkeypatch)
+    monkeypatch.setattr(settings, "text_checkpoint_agreement_review", True)
+    monkeypatch.setattr(settings, "document_paired_independent_review", True)
+    monkeypatch.setattr(paired, "score", lambda _: pytest.fail("Markdown drafts only compare wording"))
+    earlier_word, later_word = "Monday", "Thursday"
+    markdown = {".md", ".markdown"}
+
+    def build(extension, word, hidden):
+        sentence = f"Please send the résumé on {word}."
+        if extension in markdown:
+            return f"# Test heading\n\n~~~~python\n{hidden}\n~~~~\n\nPlease send the **résumé** on {word}.".encode()
+        if extension == ".docx":
+            buffer = BytesIO()
+            writer = Document()
+            writer.add_paragraph("Test heading")
+            writer.add_paragraph(sentence)
+            writer.save(buffer)
+            return buffer.getvalue()
+        return f"Test heading\n\n{sentence}".encode()
+
+    earlier = build(earlier_extension, earlier_word, "CODE_EARLIER = 7")
+    later = build(later_extension, later_word, "CODE_LATER = 12")
+    _saved(f, "markdown-draft", later_extension, later)
+    url = _url("markdown-draft")
+    availability = f.client.get(url, headers=f.viewer).json()
+    assert {".md", ".markdown", ".docx"} <= set(availability["earlier_extensions"])
+    if later_extension in markdown:
+        assert availability["extension"] == ".md" and "paired_check_available" not in availability
+
+    result = f.client.post(url, headers=f.viewer, files=_upload(earlier, earlier_extension),
+                           data={"include_pdf": "true", "include_paired_check": "true"})
+    assert result.status_code == 200, result.text
+    payload = result.json()
+    report = v2_document_revision.DraftComparison.model_validate(payload["comparison"])
+    assert report.paired_check is None
+    assert report.markdown_fenced_code == document_native_locations.MARKDOWN_FENCES
+    assert "CODE_" not in result.text
+    (change,) = report.changes
+    assert change.earlier.text == earlier_word and change.later.text == later_word
+    for side, extension, word in (("earlier", earlier_extension, earlier_word), ("later", later_extension, later_word)):
+        if extension in markdown:
+            space = (getattr(report, side).coordinate_space if report.format == "mixed" else report.coordinate_space)
+            assert space == document_revision.MARKDOWN_COORDINATES
+            (anchor,) = getattr(change, side).paragraphs
+            assert anchor.paragraph == 2
+            assert f"Please send the résumé on {word}."[anchor.start:anchor.end] == word
+    with pymupdf.open(stream=base64.b64decode(payload["pdf"]), filetype="pdf") as pdf:
+        printed = " ".join(word for page in pdf for word in page.get_text().split())
+    assert all(value in printed for value in ("Markdown", "Paragraph 2", "Monday", "Thursday"))
+    assert "CODE_" not in printed
+
+    original_paths = [tmp_path / f"earlier{earlier_extension}", tmp_path / f"later{later_extension}"]
+    for path, body in zip(original_paths, (earlier, later), strict=True):
+        path.write_bytes(body)
+    export = tmp_path / "comparison.json"
+    export.write_text(json.dumps(payload["comparison"]))
+    assert review(export, *original_paths)["source_hashes_verified"] == 2
+
+
+def test_markdown_code_only_draft_has_no_comparable_prose():
+    prose = b"# Heading\n\nOnly the body prose can be compared."
+    with pytest.raises(ValueError, match="Markdown version needs readable body text"):
+        document_revision.compare_with_sources(b"```\nprint('a')\n```", prose, ".md", earlier_extension=".markdown")
 
 
 def test_odt_moved_unchanged_sentences_keep_their_words_unmarked():

@@ -5,7 +5,7 @@ import { saveBlob } from '../../lib/api/reports'
 import { compareDraft, draftAvailability, type DraftComparison, type DraftExcerpt, type DraftExtension, type DocumentRevisionResponse } from './documentRevisionApi'
 
 const labels = { body: 'Message body', quoted: 'Quoted text', signature: 'Signature' }
-const sourceFormats = { plain_text: 'Plain text', docx: 'Word body text', odt: 'OpenDocument body text', pdf: 'PDF text layer', rtf: 'Rich Text passage' }
+const sourceFormats = { plain_text: 'Plain text', docx: 'Word body text', odt: 'OpenDocument body text', pdf: 'PDF text layer', rtf: 'Rich Text passage', markdown: 'Markdown text' }
 const changeLabels = { ...sourceFormats, email: null, plain_text: 'Text', pdf: 'PDF text', html: 'HTML article', mixed: 'Wording change' }
 const pairedMixedFormats: DraftExtension[] = ['.txt', '.docx', '.pdf']
 const contextLabels = ['Previous sentence', 'Changed sentence', 'Next sentence']
@@ -300,6 +300,7 @@ function DraftResult({ result }: { result: DocumentRevisionResponse }) {
       <p className="mt-2 mb-0 text-caption text-text-muted">Highlights mark changed words and punctuation. {docx
         ? 'Word offsets count Unicode code points in the body text. Two line breaks separate included paragraphs. Paragraph ranges start within each paragraph.'
         : comparison.format === 'odt' ? 'OpenDocument offsets count Unicode code points in the extracted body and within each listed paragraph.'
+        : comparison.format === 'markdown' ? 'Markdown positions count Unicode code points in the extracted text and within each listed paragraph. Fenced code is excluded.'
         : htmlReply ? 'The first range gives the position in the extracted reply. The ranges after the arrow give the positions in the decoded HTML MIME part. Both count Unicode code points.'
         : htmlArticle ? 'The first range gives the position in the extracted article. The ranges after the arrow give the positions in the decoded HTML file. Both count Unicode code points.'
         : pdfText ? 'Offsets count Unicode code points in the extracted text. Page previews cover selected regions.'
@@ -332,7 +333,8 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
   const [includePairedCheck, setIncludePairedCheck] = useState(false)
   const earlierName = file?.name.toLowerCase()
   const sameFormat = !earlierName || earlierName.endsWith(extension)
-  const canRunPairedCheck = pairedCheckAvailable && (sameFormat || (pairedMixedFormatsAvailable
+  const markdown = ['.md', '.markdown'].includes(extension) || ['.md', '.markdown'].some(suffix => earlierName?.endsWith(suffix))
+  const canRunPairedCheck = !markdown && pairedCheckAvailable && (sameFormat || (pairedMixedFormatsAvailable
     && pairedMixedFormats.some(suffix => earlierName?.endsWith(suffix))))
   const active = useRef<AbortController | null>(null)
   useEffect(() => () => active.current?.abort(), [])
@@ -364,11 +366,12 @@ function DraftForm({ analysisId, extension, earlierExtensions = [extension], pai
     {extension === '.docx' && <p className="mt-2 mb-0 text-small text-text-muted">Checks body wording and matches simple Word tables by exact row and column labels. A moved table needs the same unique Word caption.</p>}
     {extension === '.odt' && <p className="mt-2 mb-0 text-small text-text-muted">Checks wording in extracted OpenDocument body paragraphs, headings, lists and tables.</p>}
     {extension === '.rtf' && <p className="mt-2 mb-0 text-small text-text-muted">Rich Text positions refer to paragraphs in the extracted text.</p>}
+    {['.md', '.markdown'].includes(extension) && <p className="mt-2 mb-0 text-small text-text-muted">Markdown positions refer to the extracted text and its paragraphs. Fenced code is excluded.</p>}
     {(extension === '.txt' || extension === '.docx') && sameFormat && <p className="mt-2 mb-0 text-small text-text-muted">Matching file formats can also show where an unchanged body paragraph moved.</p>}
     {extension === '.eml' && <p className="mt-2 mb-0 text-small text-text-muted">Use two plain-text emails or two HTML-only replies with two, three, five or six simple body paragraphs and a trailing blockquote.</p>}
     {extension === '.html' && <p className="mt-2 mb-0 text-small text-text-muted">Use two saved HTML files with readable paragraphs in one marked article or main area.</p>}
     {extension === '.pdf' && <p className="mt-2 mb-0 text-small text-text-muted">Use unlocked PDFs with selectable text on every page, up to 12 pages each.</p>}
-    {earlierExtensions.length > 1 && extension !== '.html' && <p className="mt-2 mb-0 text-small text-text-muted">For drafts in different formats, use an upright PDF with selectable text. Multi-page PDFs need a single column per page and can have up to 12 pages.</p>}
+    {earlierExtensions.length > 1 && extension !== '.html' && <p className="mt-2 mb-0 text-small text-text-muted">If either draft is a PDF, use an upright PDF with selectable text. Multi-page PDFs need a single column per page and can have up to 12 pages.</p>}
     {canRunPairedCheck && (extension === '.pdf' || earlierName?.endsWith('.pdf')) &&
       <p className="mt-2 mb-0 text-small text-text-muted">The paired writing check needs visible, selectable PDF text in a clear reading order and the same neighboring sentences in both drafts.</p>}
     <form onSubmit={event => void submit(event)} className="mt-4 flex flex-wrap items-end gap-3">

@@ -42,15 +42,18 @@ MAX_CHARS = 30_000
 MAX_TOKENS = 2_000
 MAX_DOCX_XML_BYTES = 2 * 1024 * 1024
 ROLES = ("body", "quoted", "signature")
-FORMATS = {".eml": "email", ".txt": "plain_text", ".docx": "docx", ".odt": "odt", ".pdf": "pdf", ".rtf": "rtf", ".html": "html"}
+FORMATS = {".eml": "email", ".txt": "plain_text", ".docx": "docx", ".odt": "odt", ".pdf": "pdf", ".rtf": "rtf",
+           ".html": "html", ".md": "markdown"}
 MIXED_DRAFTS = (".txt", ".docx", ".pdf")
-EXTRACTED_PARAGRAPH_DRAFTS = {".odt": "OpenDocument", ".rtf": "Rich Text"}
+EXTRACTED_PARAGRAPH_DRAFTS = {".odt": "OpenDocument", ".rtf": "Rich Text", ".md": "Markdown"}
 COMPARABLE_DRAFTS = (*MIXED_DRAFTS, *EXTRACTED_PARAGRAPH_DRAFTS)
+MARKDOWN_ALIAS = ".markdown"
 TEXT_COORDINATES = "decoded_source_unicode_codepoint"
 WORD_COORDINATES = "docx_body_unicode_codepoint"
 ODT_COORDINATES = "odt_body_unicode_codepoint"
 RTF_COORDINATES = "rtf_extracted_text_unicode_codepoint"
-SUPPORTED_DRAFTS = "matching .eml, .txt, .docx, .odt, .rtf, .pdf or HTML files"
+MARKDOWN_COORDINATES = "markdown_extracted_text_unicode_codepoint"
+SUPPORTED_DRAFTS = "matching email, text, Word, OpenDocument, Rich Text, PDF, HTML or Markdown files"
 SCOPE = "Compares words and punctuation in the decoded text. Email body, quoted text and signatures are mapped separately."
 HTML_SCOPE = ("Compares visible words and punctuation in the reply body. Quoted text, attachments, headers and "
               "formatting are outside this comparison.")
@@ -64,6 +67,8 @@ ODT_SCOPE = ("OpenDocument coverage includes extracted body paragraphs, headings
              "Headers, footers, notes, tracked changes and embedded objects are outside the comparison.")
 RTF_SCOPE = ("Rich Text positions refer to extracted text and its paragraphs. The comparison preserves uniquely matched "
              "unchanged sentences when their positions move. Formatting and embedded objects are outside the comparison.")
+MARKDOWN_SCOPE = ("Markdown positions refer to extracted text and its paragraphs. Formatting and recognized fenced code blocks "
+                  "are outside the comparison.")
 MIXED_SCOPE = "Compares words and punctuation across file formats. Formatting is outside the comparison."
 MIXED_WORD_SCOPE = "Word coverage includes top-level body paragraphs. Word tables, headers, footers and text boxes are excluded."
 MIXED_PDF_SCOPE = "PDF coverage includes the selectable text on one upright page with a clear reading order. Scanned text is excluded."
@@ -83,6 +88,8 @@ def draft_extension(filename: str | Path) -> str:
     from app.storage.files import HTML_EXTS
 
     suffix = Path(filename).suffix.lower()
+    if suffix == MARKDOWN_ALIAS:
+        return ".md"
     return ".html" if suffix in HTML_EXTS else suffix
 
 
@@ -610,12 +617,15 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
                          skip_hidden_rtf_runs: bool = True,
                          ) -> tuple[dict, str, str, WordLayouts | PdfLayouts | MixedLayouts | None]:
     """Return ephemeral native layouts for the requested paired sentence scope."""
+    old_extension = extension if earlier_extension is None else earlier_extension
+    extension = ".md" if extension == MARKDOWN_ALIAS else extension
+    old_extension = ".md" if old_extension == MARKDOWN_ALIAS else old_extension
     if extension not in FORMATS:
         raise ValueError(f"Choose two {SUPPORTED_DRAFTS}.")
-    old_extension = extension if earlier_extension is None else earlier_extension
     mixed = old_extension != extension
     if mixed and any(value not in COMPARABLE_DRAFTS for value in (old_extension, extension)):
-        raise ValueError("Use TXT, DOCX, ODT, RTF or PDF when comparing different formats. Compare email with email and HTML with HTML.")
+        raise ValueError("Use TXT, DOCX, ODT, RTF, PDF or Markdown when comparing different formats. "
+                         "Compare email with email and HTML with HTML.")
     mixed_paired = mixed_paired and all(value in MIXED_DRAFTS for value in (old_extension, extension))
     if any(not 0 < len(item) <= MAX_BYTES for item in (earlier, later)):
         raise ValueError("Each version must be nonempty and at most 1 MiB.")
@@ -650,7 +660,7 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
             skip_hidden_rtf_runs=skip_hidden_rtf_runs)
         if mixed:
             spaces = {".txt": TEXT_COORDINATES, ".docx": WORD_COORDINATES, ".odt": ODT_COORDINATES,
-                      ".rtf": RTF_COORDINATES, ".pdf": document_revision_pdf.COORDINATES}
+                      ".rtf": RTF_COORDINATES, ".pdf": document_revision_pdf.COORDINATES, ".md": MARKDOWN_COORDINATES}
             for suffix, text, layout, source in ((old_extension, old_text, old_layout, old_source),
                                                  (extension, new_text, new_layout, new_source)):
                 if suffix == ".pdf":
@@ -708,9 +718,11 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
         scope, coordinates = ODT_SCOPE, ODT_COORDINATES
     if extension == ".rtf":
         scope, coordinates = RTF_SCOPE, RTF_COORDINATES
+    if extension == ".md":
+        scope, coordinates = MARKDOWN_SCOPE, MARKDOWN_COORDINATES
     if mixed:
         schema, coordinates = MIXED_SCHEMA, MIXED_COORDINATES
-        scopes = {".docx": MIXED_WORD_SCOPE, ".odt": ODT_SCOPE, ".rtf": RTF_SCOPE, ".pdf": mixed_pdf_scope}
+        scopes = {".docx": MIXED_WORD_SCOPE, ".odt": ODT_SCOPE, ".rtf": RTF_SCOPE, ".pdf": mixed_pdf_scope, ".md": MARKDOWN_SCOPE}
         scope = " ".join([MIXED_SCOPE, *(scopes[suffix] for suffix in (old_extension, extension) if suffix in scopes)])
     result = {"schema": schema, "format": "mixed" if mixed else FORMATS[extension],
             "coordinate_space": coordinates,
@@ -722,6 +734,8 @@ def compare_with_sources(earlier: bytes, later: bytes, extension: str, *,
     if skip_hidden_rtf_runs and ".rtf" in (old_extension, extension):
         result[document_native_locations.RTF_VISIBILITY_KEY] = document_native_locations.RTF_VISIBILITY
         result["scope"] += " " + document_native_locations.RTF_VISIBILITY_SCOPE
+    if ".md" in (old_extension, extension):
+        result[document_native_locations.MARKDOWN_FENCES_KEY] = document_native_locations.MARKDOWN_FENCES
     if values is not None:
         result["numeric_comparison"] = values
     if mixed:

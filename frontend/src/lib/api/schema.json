@@ -5527,7 +5527,9 @@
                     ".rtf",
                     ".html",
                     ".htm",
-                    ".xhtml"
+                    ".xhtml",
+                    ".md",
+                    ".markdown"
                   ],
                   "type": "string"
                 },
@@ -5551,7 +5553,9 @@
                   ".rtf",
                   ".html",
                   ".htm",
-                  ".xhtml"
+                  ".xhtml",
+                  ".md",
+                  ".markdown"
                 ],
                 "type": "string"
               },
@@ -5676,7 +5680,8 @@
               "email_html_extracted_text_unicode_codepoint",
               "rtf_extracted_text_unicode_codepoint",
               "html_article_extracted_text_unicode_codepoint",
-              "per_source_unicode_codepoint"
+              "per_source_unicode_codepoint",
+              "markdown_extracted_text_unicode_codepoint"
             ],
             "title": "Coordinate Space",
             "type": "string"
@@ -5693,7 +5698,8 @@
               "pdf",
               "rtf",
               "html",
-              "mixed"
+              "mixed",
+              "markdown"
             ],
             "title": "Format",
             "type": "string"
@@ -5704,6 +5710,18 @@
           },
           "later": {
             "$ref": "#/components/schemas/DraftSource"
+          },
+          "markdown_fenced_code": {
+            "anyOf": [
+              {
+                "const": "exclude-commonmark-fenced-code/1",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Markdown Fenced Code"
           },
           "numeric_comparison": {
             "anyOf": [
@@ -6510,7 +6528,8 @@
                   "docx_body_unicode_codepoint",
                   "odt_body_unicode_codepoint",
                   "pdf_native_text_unicode_codepoint",
-                  "rtf_extracted_text_unicode_codepoint"
+                  "rtf_extracted_text_unicode_codepoint",
+                  "markdown_extracted_text_unicode_codepoint"
                 ],
                 "type": "string"
               },
@@ -6558,7 +6577,8 @@
                   "docx",
                   "odt",
                   "pdf",
-                  "rtf"
+                  "rtf",
+                  "markdown"
                 ],
                 "type": "string"
               },
@@ -16315,7 +16335,7 @@
               "schema": {
                 "properties": {
                   "earlier": {
-                    "description": "Earlier version. TXT, DOCX, ODT, RTF and PDF may be mixed. Compare EML with EML and HTML with HTML.",
+                    "description": "Earlier version. TXT, DOCX, ODT, RTF, PDF and Markdown may be mixed. Compare EML with EML and HTML with HTML.",
                     "format": "binary",
                     "type": "string"
                   },

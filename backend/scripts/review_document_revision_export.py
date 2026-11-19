@@ -12,6 +12,7 @@ from app.evidence import document_native_locations
 from app.evidence.document_revision import (
     ARTICLE_COORDINATES,
     EDITED_RELOCATION_SCHEMA,
+    EXTRACTED_PARAGRAPH_DRAFTS,
     FORMATS,
     HTML_COORDINATES,
     MAX_BYTES,
@@ -56,7 +57,7 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
     extension = draft_extension(later)
     old_extension = draft_extension(earlier)
     if extension not in FORMATS or old_extension not in FORMATS:
-        raise ValueError("Use the original files in TXT, DOCX, ODT, RTF, PDF, EML or HTML format")
+        raise ValueError("Use the original files in TXT, DOCX, ODT, RTF, PDF, EML, HTML or Markdown format")
     received = json.loads(_read(export, MAX_PDF_EXPORT if ".pdf" in (extension, old_extension) else MAX_EXPORT), object_pairs_hook=_unique)
     if "paired_check" in received and not isinstance(received["paired_check"], dict):
         raise ValueError("The optional paired writing check has invalid fields")
@@ -102,7 +103,7 @@ def review(export: Path, earlier: Path, later: Path) -> dict:
         result["changed_figures_located"] = len(values["changes"])
         excerpts.extend(row[side] for row in values["changes"] for side in ("earlier", "later"))
     result["changed_token_ranges_verified"] = sum(len(excerpt["changed_tokens"]) for excerpt in excerpts)
-    if {".docx", ".odt", ".rtf"} & {extension, old_extension}:
+    if {".docx", *EXTRACTED_PARAGRAPH_DRAFTS} & {extension, old_extension}:
         result["body_paragraph_ranges_verified"] = sum(len(excerpt.get("paragraphs", ())) for excerpt in excerpts)
     if ".pdf" in (extension, old_extension):
         pages = [page for excerpt in excerpts for page in excerpt.get("pdf_pages", ())]

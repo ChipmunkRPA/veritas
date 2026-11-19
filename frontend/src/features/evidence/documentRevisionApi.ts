@@ -31,6 +31,8 @@ export async function compareDraft(analysisId: string, file: File, signal: Abort
   const result = await unwrap(Promise.resolve({ response, data: response.ok ? data as DocumentRevisionResponse : undefined,
     error: response.ok ? undefined : data }))
   const schema = result?.comparison?.schema
+  const markdownSources = [result?.comparison?.earlier, result?.comparison?.later].filter(source => source?.format === 'markdown')
+  const hasMarkdown = result?.comparison?.format === 'markdown' || markdownSources.length > 0
   if ((schema !== 'chipmunk.document-revision-comparison/1' && schema !== 'chipmunk.document-revision-comparison/2'
       && schema !== 'chipmunk.document-revision-comparison/3' && schema !== 'chipmunk.document-revision-comparison/4'
       && schema !== 'chipmunk.document-revision-comparison/5' && schema !== 'chipmunk.document-revision-comparison/6'
@@ -40,6 +42,11 @@ export async function compareDraft(analysisId: string, file: File, signal: Abort
       || ((schema === 'chipmunk.document-revision-comparison/6' || schema === 'chipmunk.document-revision-comparison/8')
         && !result.comparison.relocated_passages?.length)
       || (schema === 'chipmunk.document-revision-comparison/7' && result.comparison.format !== 'plain_text')
+      || (result.comparison.format === 'markdown'
+        && result.comparison.coordinate_space !== 'markdown_extracted_text_unicode_codepoint')
+      || (hasMarkdown && (result.comparison.markdown_fenced_code !== 'exclude-commonmark-fenced-code/1'
+        || result.comparison.paired_check
+        || markdownSources.some(source => source?.coordinate_space !== 'markdown_extracted_text_unicode_codepoint')))
       || (schema === 'chipmunk.document-revision-comparison/9'
         && (result.comparison.format !== 'html' || result.comparison.coordinate_space !== 'html_article_extracted_text_unicode_codepoint'
           || !result.comparison.earlier.html_article_scope || !result.comparison.later.html_article_scope))

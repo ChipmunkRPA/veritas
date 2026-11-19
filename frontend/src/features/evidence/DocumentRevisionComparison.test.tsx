@@ -83,10 +83,12 @@ it('shows the page and both views of the source PDF crop', async () => {
 it.each([
   ['odt', 'odt_body_unicode_codepoint', 'OpenDocument body text'],
   ['rtf', 'rtf_extracted_text_unicode_codepoint', 'Rich Text passage'],
+  ['markdown', 'markdown_extracted_text_unicode_codepoint', 'Markdown text'],
 ] as const)('shows an extracted %s paragraph and exact offsets when comparing with Word', async (format, coordinates, label) => {
   const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64), decoded_characters: 33, mime_part: null }
   const comparison: DraftComparison = {
     schema: 'chipmunk.document-revision-comparison/3', format: 'mixed', coordinate_space: 'per_source_unicode_codepoint',
+    ...(format === 'markdown' && { markdown_fenced_code: 'exclude-commonmark-fenced-code/1' as const }),
     earlier: { ...source, format, coordinate_space: coordinates },
     later: { ...source, format: 'docx', coordinate_space: 'docx_body_unicode_codepoint' },
     changes: [{ id: 'C01', role: 'body',
@@ -96,7 +98,7 @@ it.each([
         paragraphs: [{ paragraph: 2, body_index: 1, start: 5, end: 13 }] } }],
     scope: 'Body wording.', interpretation: 'Source comparison.',
   }
-  vi.mocked(draftAvailability).mockResolvedValue({ extension: '.docx', earlierExtensions: ['.txt', '.docx', '.pdf', '.odt', '.rtf'],
+  vi.mocked(draftAvailability).mockResolvedValue({ extension: '.docx', earlierExtensions: ['.txt', '.docx', '.pdf', '.odt', '.rtf', '.md', '.markdown'],
     pairedCheckAvailable: true, pairedMixedFormatsAvailable: true })
   vi.mocked(compareDraft).mockResolvedValue({ comparison, pdf: 'JVBERi0xLjQK' })
   show()
@@ -110,6 +112,41 @@ it.each([
   expect(screen.getByText('Monday').tagName).toBe('MARK')
   expect(screen.getByText('Thursday').tagName).toBe('MARK')
   expect(vi.mocked(compareDraft).mock.calls[0][3]).toBe(false)
+})
+
+it.each(['.md', '.markdown'] as const)('shows Markdown extracted positions for %s without offering a paired writing check', async suffix => {
+  const source = { sha256: '0'.repeat(64), bytes: 100, decoded_text_sha256: '1'.repeat(64), decoded_characters: 34, mime_part: null }
+  const comparison: DraftComparison = {
+    schema: 'chipmunk.document-revision-comparison/1', format: 'markdown',
+    coordinate_space: 'markdown_extracted_text_unicode_codepoint',
+    markdown_fenced_code: 'exclude-commonmark-fenced-code/1',
+    earlier: source, later: source, scope: 'Extracted Markdown text.', interpretation: 'Source comparison only.',
+    changes: [{ id: 'C01', role: 'body',
+      earlier: { start: 20, end: 26, text: 'Monday', changed_tokens: [[20, 26]],
+        paragraphs: [{ paragraph: 2, body_index: 1, start: 5, end: 11 }] },
+      later: { start: 20, end: 28, text: 'Thursday', changed_tokens: [[20, 28]],
+        paragraphs: [{ paragraph: 2, body_index: 1, start: 5, end: 13 }] } }],
+  }
+  vi.mocked(draftAvailability).mockResolvedValue({ extension: '.md', earlierExtensions: ['.md', '.markdown', '.docx'],
+    pairedCheckAvailable: true, pairedMixedFormatsAvailable: true })
+  vi.mocked(compareDraft).mockResolvedValue({ comparison, pdf: 'JVBERi0xLjQK' })
+  show()
+  const input = await screen.findByLabelText('Earlier draft')
+  expect(input.getAttribute('accept')).toBe('.md,.markdown,.docx')
+  expect(screen.getByText('Markdown positions refer to the extracted text and its paragraphs. Fenced code is excluded.')).toBeTruthy()
+  expect(screen.queryByRole('checkbox')).toBeNull()
+  const file = new File(['# Earlier draft'], `earlier${suffix}`)
+  fireEvent.change(input, { target: { files: [file] } })
+  fireEvent.click(screen.getByRole('button', { name: 'Compare drafts' }))
+  await screen.findByText('C01 · Markdown text')
+  expect(screen.getByText('Paragraph 2 [5, 11)')).toBeTruthy()
+  expect(screen.getByText('Paragraph 2 [5, 13)')).toBeTruthy()
+  expect(screen.getByText('Monday').tagName).toBe('MARK')
+  expect(screen.getByText('Thursday').tagName).toBe('MARK')
+  expect(screen.getByText(/Markdown positions count Unicode code points in the extracted text/)).toBeTruthy()
+  expect(compareDraft).toHaveBeenCalledWith('draft-analysis', file, expect.any(AbortSignal), false)
+  expect(screen.getByRole('button', { name: 'Download comparison PDF' })).toBeTruthy()
+  expect(screen.getByRole('button', { name: 'Download comparison JSON' })).toBeTruthy()
 })
 
 it('shows exact changes in Word table cells and explains skipped table coverage', async () => {

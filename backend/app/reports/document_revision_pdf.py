@@ -29,7 +29,7 @@ a { color: #285f50; }
 """
 LABELS = {"body": "Message body", "quoted": "Quoted text", "signature": "Signature"}
 FILE_LABELS = {"plain_text": "Plain text", "docx": "Word body text", "odt": "OpenDocument body text", "pdf": "PDF text layer",
-               "rtf": "Rich Text passage"}
+               "rtf": "Rich Text passage", "markdown": "Markdown text"}
 VALUE_LABELS = {"number": "Number changed", "date": "Date changed", "currency": "Amount changed",
                 "percentage": "Percentage changed", "percentage_points": "Percentage points changed"}
 PNG_URL = "data:image/png;base64,"
@@ -198,7 +198,8 @@ def render(comparison: dict) -> bytes:
     html_article = comparison["coordinate_space"] == ARTICLE_COORDINATES
     mixed = comparison["format"] == "mixed"
     format_label = {"plain_text": "Text", "docx": "Word body text", "odt": "OpenDocument body text",
-                    "pdf": "PDF text", "rtf": "Rich Text passage", "html": "HTML article", "mixed": "Wording change"}.get(comparison["format"])
+                    "pdf": "PDF text", "rtf": "Rich Text passage", "markdown": "Markdown text",
+                    "html": "HTML article", "mixed": "Wording change"}.get(comparison["format"])
     for change in comparison["changes"]:
         label = format_label or LABELS[change["role"]]
         anchor = escape(change["id"])
@@ -229,6 +230,9 @@ def render(comparison: dict) -> bytes:
         positions = "OpenDocument offsets count Unicode code points in the extracted body and within each listed paragraph."
     if comparison["format"] == "rtf":
         positions = "Rich Text offsets count Unicode code points in the extracted text and within each listed paragraph."
+    if comparison["format"] == "markdown":
+        positions = ("Markdown positions count Unicode code points in the extracted text and within each listed paragraph. "
+                     "Fenced code is excluded.")
     if html_reply:
         positions = ("The first range gives the position in the extracted reply. The ranges after the arrow give the positions "
                      "in the decoded HTML MIME part. Both count Unicode code points.")

@@ -129,6 +129,9 @@ def test_jpeg_scope_requires_opt_in_and_evaluated_encoding(monkeypatch, quality,
     monkeypatch.setattr(settings, "image_region_jpeg90_review", True)
     supported_90 = quality == 90 and orientation == 1 and sampling == "4:2:0" and size == (768, 512)
     assert detector.applicable(ctx).ok is (supported or supported_90)
+    monkeypatch.setattr(settings, "image_region_jpeg90_orientation_review", True)
+    oriented_90 = quality == 90 and orientation == 6 and sampling == "4:2:0" and size == (768, 512)
+    assert detector.applicable(ctx).ok is (supported or supported_90 or oriented_90)
     monkeypatch.setattr(settings, "image_region_mode", "candidate")
     monkeypatch.setattr(settings, "environment", "prod")
     assert not detector.applicable(ctx).ok

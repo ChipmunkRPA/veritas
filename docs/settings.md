@@ -130,6 +130,12 @@ The service defines its settings in `backend/app/core/config.py`.
 
 ## Image detector
 
+The optional development regional JPEG check can preserve stored pixel
+geometry for supported quality-90 JPEGs with an EXIF rotation or reflection.
+Set `VERITAS_IMAGE_REGION_JPEG90_ORIENTATION_REVIEW=true` alongside
+`VERITAS_IMAGE_REGION_JPEG_REVIEW=true` and `VERITAS_IMAGE_REGION_JPEG90_REVIEW=true`.
+The orientation option defaults to false.
+
 | Variable | Type | Default | Description |
 |---|---|---|---|
 | `VERITAS_IMAGE_CLASSIFIERS` | JSON list of text | `["haywoodsloan/ai-image-detector-deploy\|artificial\|1.0", "Ateeqq/ai-vs-human-image-detector\|ai\|0.7", "dima806/deepfake_vs_real_image_detection\|fake\|1.0", "Wvolf/ViT_Deepfake_Detection\|fake\|0.8"]` | HuggingFace image-classification checkpoints, each "repo_id\|positive_label_substring\|weight" |

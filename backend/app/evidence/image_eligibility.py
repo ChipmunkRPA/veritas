@@ -92,6 +92,18 @@ def repeat_pass(record: dict) -> tuple[str | None, dict | None]:
     return key, record[key] if key is not None else None
 
 
+def stored_jpeg_orientation(policy: dict, source: dict) -> int:
+    if "jpeg_stored_orientation" not in policy:
+        return 1
+    orientation = policy["jpeg_stored_orientation"]
+    width, height = source["width"], source["height"]
+    if (type(orientation) is not int or orientation not in range(2, 9) or orientation != source["exif_orientation"]
+            or policy.get("source_format") != "JPEG" or policy.get("source_jpeg_quality") != 90
+            or max(width, height) != 768 or min(width, height) < 512):
+        raise ValueError("The regional JPEG map differs from its stored orientation")
+    return orientation
+
+
 def validate_repeat_pass(key: str, review: dict, raw_eligible: int, width: int, height: int) -> int:
     schema, view_hash = REPEAT_FIELDS[key]
     proof = review.get("aligned_mask_png_sha256")
@@ -163,6 +175,7 @@ def validate_inspection_coverage(document: dict) -> None:
         expected = raw if gate is None or gate["eligible"] else 0
         repeat_key, repeat = repeat_pass(check)
         policy = check.get("resolution_policy", {})
+        orientation = stored_jpeg_orientation(policy, document["source"])
         jpeg_repeat = policy.get("source_jpeg_quality") == 90
         if jpeg_repeat and policy.get("source_format") != "JPEG":
             raise ValueError("The JPEG repeat pass lacks the supported source profile")
@@ -181,6 +194,9 @@ def validate_inspection_coverage(document: dict) -> None:
         if len(packets) != selected:
             raise ValueError("Image inspection coverage differs from the displayed regions")
         for packet in packets:
+            packet_policy = packet.get("localisation", {}).get("resolution_policy", {})
+            if stored_jpeg_orientation(packet_policy, document["source"]) != orientation:
+                raise ValueError("A selected region has a different JPEG orientation")
             if packet.get("localisation", {}).get("candidate_eligibility") != gate:
                 raise ValueError("A selected region has different image candidate eligibility")
             if packet.get("anchor", {}).get("scalar_sha256") != check.get("scalar_map_sha256"):
@@ -201,6 +217,8 @@ def validate_inspection_coverage(document: dict) -> None:
         if reliability is not None and not any(a.get("sha256") == reliability for a in overview.values()):
             raise ValueError("The recorded image quality exclusions are not included")
         validate_source_quality(check)
+        if orientation != 1 and check.get("source_quality") is None:
+            raise ValueError("The oriented regional JPEG map requires the original quality exclusions")
         if check.get("source_quality") is not None:
             grid = check.get("map_grid")
             exclusion = check.get("excluded_area_fraction")

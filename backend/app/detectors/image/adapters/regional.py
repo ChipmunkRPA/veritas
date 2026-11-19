@@ -14,10 +14,11 @@ from app.detectors.image import regional
 from app.detectors.image.adapters.common import H2, image_spec, original_bytes
 from app.detectors.image.adapters.localisers import PNG_SIGNATURE, LocaliserDetector
 from app.detectors.image.lossless_webp import lossless_webp_size
-from app.detectors.image.regional_support import readout
+from app.detectors.image.native_forensics import orient, unorient
+from app.detectors.image.regional_support import display_orientation, readout
 from app.engine.detector import Applicability, InputUnit, RunContext
 from app.evidence.image_eligibility import FLIP_CONSISTENCY, JPEG_REPEAT_CONSISTENCY, LOSSLESS_WEBP_SCOPE
-from app.evidence.image_regional_jpeg import evaluated_jpeg, reencode
+from app.evidence.image_regional_jpeg import evaluated_jpeg, reencode, tagged_orientation
 
 JPEG_SIGNATURE = b"\xff\xd8"
 
@@ -66,9 +67,13 @@ class RegionalDetector(LocaliserDetector):
                 if self.spec.id not in get_registry().policy.allow_detectors:
                     return Applicability(False, "The optional regional review is enabled for eligible JPEG images")
             return super().applicable(ctx)
-        if jpeg_review and (evaluated_jpeg(data) or (settings.image_region_jpeg90_review and evaluated_jpeg(data, quality=90))):
+        jpeg90 = settings.image_region_jpeg90_review and evaluated_jpeg(data, quality=90) if jpeg_review else False
+        if jpeg_review and (jpeg90 or evaluated_jpeg(data)):
             info = ctx.media.info()
-            if info["mode"] == "RGB" and info["exif_orientation"] == 1:
+            orientation = info["exif_orientation"]
+            remap = (jpeg90 and settings.image_region_jpeg90_orientation_review and orientation in range(2, 9)
+                     and tagged_orientation(data) == orientation)
+            if info["mode"] == "RGB" and (orientation == 1 or remap):
                 return super().applicable(ctx)
         if settings.image_region_mode == "candidate" and (size := lossless_webp_size(data)) is not None:
             info = ctx.media.info()
@@ -82,19 +87,24 @@ class RegionalDetector(LocaliserDetector):
 
     def localise(self, ctx: RunContext, pixels: np.ndarray) -> loc.LocaliserOutput:
         loaded = ctx.lease.get(self.MODEL)
-        image = Image.fromarray(pixels)
-        prediction = loaded.obj.predict(image)
-        height, width = pixels.shape[:2]
-        if prediction.raw_mask.shape != (height, width):
-            raise ValueError("Regional response is not registered to this source")
         data = original_bytes(ctx)
         container = "JPEG" if data.startswith(JPEG_SIGNATURE) else "WebP" if lossless_webp_size(data) else None
-        measured = readout(prediction.raw_mask, prediction.candidate_eligibility["eligible"],
-                           self.REGION_THRESHOLD, data, pixels)
-        regions, stats = measured.regions, measured.stats
-        repeat = {}
         jpeg90 = (container == "JPEG" and settings.environment == "dev" and settings.image_region_jpeg_review
                   and settings.image_region_jpeg90_review and evaluated_jpeg(data, quality=90))
+        orientation = (tagged_orientation(data) or 1) if jpeg90 and settings.image_region_jpeg90_orientation_review else 1
+        stored = unorient(pixels, orientation)
+        image = Image.fromarray(stored)
+        prediction = loaded.obj.predict(image)
+        height, width = pixels.shape[:2]
+        if prediction.raw_mask.shape != stored.shape[:2]:
+            raise ValueError("Regional response is not registered to this source")
+        measured = readout(prediction.raw_mask, prediction.candidate_eligibility["eligible"],
+                           self.REGION_THRESHOLD, data, stored)
+        integrity = loc.integrity_score(measured.floating, measured.reliable)
+        if orientation != 1:
+            measured = display_orientation(measured, orientation)
+        regions, stats = measured.regions, measured.stats
+        repeat = {}
         if (data.startswith(PNG_SIGNATURE) and settings.environment == "dev" and settings.image_region_flip_review and regions
                 and max(width, height) == 768 and min(width, height) >= 512):
             ctx.deadline.check("regional repeatability check")
@@ -115,15 +125,15 @@ class RegionalDetector(LocaliserDetector):
             with Image.open(io.BytesIO(encoded)) as decoded:
                 repeated_prediction = loaded.obj.predict(decoded.convert("RGB"))
             repeated = readout(repeated_prediction.raw_mask, repeated_prediction.candidate_eligibility["eligible"],
-                               self.REGION_THRESHOLD, data, pixels)
-            aligned = repeated.selected_grid_mask
+                               self.REGION_THRESHOLD, data, stored)
+            aligned = orient(repeated.selected_grid_mask, orientation)
             regions, stats, review = repeat_components(measured, aligned, schema=JPEG_REPEAT_CONSISTENCY)
             proof = ctx.exhibits.binary_mask(aligned)
             repeat = {"jpeg_reencode_consistency": {**review, "aligned_mask_png_sha256": proof.sha256,
                                                     "reencoded_jpeg_sha256": hashlib.sha256(encoded).hexdigest()}}
         return loc.LocaliserOutput(
             anomaly_map=measured.floating, reliable=measured.reliable, reliability_source="conditions",
-            integrity_score=loc.integrity_score(measured.floating, measured.reliable), regions=regions,
+            integrity_score=integrity, regions=regions,
             region_stats=stats, method=self.METHOD, weights_sha256=str(loaded.revision),
             conditions=measured.conditions, candidate_eligibility=prediction.candidate_eligibility,
             resolution_policy={"mode": "screening", "input_px": self.INPUT,
@@ -134,6 +144,7 @@ class RegionalDetector(LocaliserDetector):
                                "input_float32_sha256": prediction.geometry["input_float32_sha256"],
                                **({"source_format": container} if container else {}),
                                **({"source_jpeg_quality": 90} if jpeg90 else {}),
+                               **({"jpeg_stored_orientation": orientation} if orientation != 1 else {}),
                                "native_binding": prediction.binding, **repeat})
 
     def run(self, ctx: RunContext):
@@ -168,4 +179,6 @@ class RegionalDetector(LocaliserDetector):
         if policy.get("source_jpeg_quality") == 90:
             result.reasoning += (" This JPEG review requires candidate regions to recur in a second compression of the same image. "
                                  "The two views share the same source. Agreement is a reason to inspect the region.")
+        if policy.get("jpeg_stored_orientation") is not None:
+            result.reasoning += " The JPEG was checked in its stored pixel order. Highlights follow its saved display orientation."
         return result

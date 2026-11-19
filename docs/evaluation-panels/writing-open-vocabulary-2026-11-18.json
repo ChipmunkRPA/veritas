@@ -1,0 +1,47 @@
+{
+  "schema": "chipmunk.writing-open-vocabulary.aggregate/1",
+  "assessed_views": 55,
+  "verified_edits_by_extent": {"small": 5, "broader_transfer": 2},
+  "panels": {
+    "wikipedia": {"verified_edits": 3, "earlier": 6, "archived": 6, "ordinary_flags": {"current": 0, "candidate": 4}},
+    "turing_way": {"verified_edits": 0, "earlier": 14, "archived": 14, "ordinary_flags": {"current": 2, "candidate": 9}},
+    "cdc_mmwr": {"verified_edits": 4, "earlier": 7, "archived": 1, "ordinary_flags": {"current": 1, "candidate": 7}}
+  },
+  "excluded": {"turing_exact_origin_collision_groups": 1, "duplicate_cdc_earlier_views": 1},
+  "calibration": {
+    "report_reference_groups": 600,
+    "genuine_calibration_groups": 12,
+    "operating_point": 2.630640856318,
+    "reference_shard_sha256": "e4a52b8cd3a56ac9d748d101f9d1ea75e6ae13b6eb6c38dc95e41f64488c45b5"
+  },
+  "measurements": {
+    "current": {"verified_edits_located": 0, "wrong_location_on_verified_edits": 1, "earlier_flags": 2, "archived_flags": 1},
+    "candidate": {"verified_edits_located": 0, "wrong_location_on_verified_edits": 4, "earlier_flags": 13, "archived_flags": 7}
+  },
+  "candidate_ranking": {
+    "native_spans_scored": 182822,
+    "verified_edits_with_a_usable_span": 7,
+    "wikipedia_edits_with_a_restored_usable_span": 3,
+    "best_usable_span_ranks_min_max": [28, 7789],
+    "verified_edits_in_top_six": 0
+  },
+  "matched_widths": {
+    "1": {"verified_edits": 1, "archived_edits": 8, "first_ranked_verified": 0, "first_ranked_archived": 0},
+    "2": {"verified_edits": 1, "archived_edits": 1, "first_ranked_verified": 0, "first_ranked_archived": 0},
+    "4": {"verified_edits": 2, "archived_edits": 2, "first_ranked_verified": 0, "first_ranked_archived": 0}
+  },
+  "ordinary_alert_groups": {"work_groups": 27, "current": 2, "candidate": 13, "candidate_only": 12},
+  "ordinary_flags_by_length": {
+    "12_to_15_sentences": {"views": 40, "current": 2, "candidate": 13},
+    "full_cdc_bodies": {"views": 8, "current": 1, "candidate": 7}
+  },
+  "archived_candidate_flags_also_present_on_earlier_view": 7,
+  "local_trial_commitments": {
+    "frozen_protocol_sha256": "c825b9cfcdf3e6a4803da64eacb772105c722b853d78d4a7b8bddb9f63e9b717",
+    "held_plan_sha256": "386d821ca50fbd2c6fc49017a133de9a78ed4f5012b068ad0abc3f4434abd832",
+    "calibration_sha256": "4a23bc7a928fafe23202f5a62ef40a0e26638c5dfdc46d7964936d4df3e30882",
+    "candidate_output_sha256": "7f2de7d8a723ac7af7822ea1c403d4688da588e3e6e21020ccb237f883a943ab",
+    "comparison_sha256": "b353514690986b53c0e8f87021d6b3a673b4b93a0d07ba2c9b76c237fafc2280"
+  },
+  "changes_served_confidence": false
+}

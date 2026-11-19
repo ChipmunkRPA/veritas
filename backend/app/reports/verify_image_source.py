@@ -41,7 +41,7 @@ from app.evidence.image_copy_similarity_binding import (
     copy_records,
     native_rotation_size,
 )
-from app.evidence.image_eligibility import repeat_pass
+from app.evidence.image_eligibility import repeat_pass, stored_jpeg_orientation
 
 MAX_SOURCE_BYTES = 60 * 1024 * 1024
 MAX_SOURCE_PIXELS = 80_000_000
@@ -111,15 +111,23 @@ def _verify_geometric_masks(archive, evidence, source):
 def _verify_repeat_masks(archive, checks, source, data, orientation):
     if not checks:
         return 0
+    import numpy as np
+
+    from app.detectors.image.native_forensics import unorient
     from app.evidence.image_flip_mask import png_grid, verify_overlap
-    from app.evidence.image_regional_jpeg import evaluated_jpeg, reencode
+    from app.evidence.image_regional_jpeg import evaluated_jpeg, reencode, tagged_orientation
 
     regions = 0
+    geometry = {"width": source.width, "height": source.height, "exif_orientation": orientation}
     for check, key, repeat in checks:
-        if key == "jpeg_reencode_consistency" and (
-                orientation != 1 or not evaluated_jpeg(data, quality=90)
-                or hashlib.sha256(reencode(source)).hexdigest() != repeat["reencoded_jpeg_sha256"]):
-            raise ValueError("The JPEG repeat view differs from the supported original and committed re-encoding")
+        if key == "jpeg_reencode_consistency":
+            stored_orientation = stored_jpeg_orientation(check.get("resolution_policy", {}), geometry)
+            if (stored_orientation != orientation or not evaluated_jpeg(data, quality=90)
+                    or (stored_orientation != 1 and tagged_orientation(data) != stored_orientation)):
+                raise ValueError("The JPEG repeat view differs from the supported original")
+            stored = source if stored_orientation == 1 else Image.fromarray(unorient(np.asarray(source), stored_orientation))
+            if hashlib.sha256(reencode(stored)).hexdigest() != repeat["reencoded_jpeg_sha256"]:
+                raise ValueError("The JPEG repeat view differs from the committed re-encoding")
         scalar = archive.read(f"assets/{check['scalar_map_sha256']}.png")
         reliable = archive.read(f"assets/{check['reliability_mask_sha256']}.png")
         aligned = archive.read(f"assets/{repeat['aligned_mask_png_sha256']}.png")
@@ -129,17 +137,28 @@ def _verify_repeat_masks(archive, checks, source, data, orientation):
     return regions
 
 
-def _verify_source_quality(archive, checks, source, data):
+def _verify_source_quality(archive, checks, source, data, orientation):
     if not checks:
         return 0
     import numpy as np
 
     from app.detectors.image import jpeg_bitstream, localiser
+    from app.detectors.image.native_forensics import orient, unorient
     from app.evidence.image_flip_mask import png_grid
+    from app.evidence.image_regional_jpeg import evaluated_jpeg, tagged_orientation
 
     structure = jpeg_bitstream.read(data)
-    unusable, shares = localiser.conditions_mask(np.asarray(source), structure.quality_luma if structure else None)
+    geometry = {"width": source.width, "height": source.height, "exif_orientation": orientation}
+    pixels = np.asarray(source)
+    masks = {}
     for check in checks:
+        stored_orientation = stored_jpeg_orientation(check.get("resolution_policy", {}), geometry)
+        if stored_orientation not in masks:
+            if stored_orientation != 1 and (not evaluated_jpeg(data, quality=90) or tagged_orientation(data) != stored_orientation):
+                raise ValueError("The oriented quality mask requires a supported original JPEG")
+            unusable, shares = localiser.conditions_mask(unorient(pixels, stored_orientation), structure.quality_luma if structure else None)
+            masks[stored_orientation] = orient(unusable, stored_orientation), shares
+        unusable, shares = masks[stored_orientation]
         grid = tuple(check["map_grid"])
         if len(grid) != 2 or any(type(value) is not int or not 0 < value <= limit
                                  for value, limit in zip(grid, source.size, strict=True)):
@@ -253,7 +272,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                     raise ValueError(f'{label} differs from pixels at its recorded source coordinates')
         masks = _verify_geometric_masks(archive, evidence, source)
         repeated = _verify_repeat_masks(archive, repeat_checks, source, data, orientation)
-        quality = _verify_source_quality(archive, quality_checks, source, data)
+        quality = _verify_source_quality(archive, quality_checks, source, data, orientation)
         if offgrid:
             import numpy as np
 

@@ -9,6 +9,8 @@ from PIL import Image
 
 from app.detectors.image import jpeg_bitstream
 from app.detectors.image import localiser as loc
+from app.detectors.image.native_forensics import orient
+from app.evidence.image_previous_grid_binding import orient_region
 
 
 @dataclass(frozen=True)
@@ -25,6 +27,25 @@ class RegionalReadout:
     def source_mask(self, width: int, height: int) -> np.ndarray:
         return np.asarray(Image.fromarray(self.selected_grid_mask.astype(np.uint8) * 255).resize(
             (width, height), Image.Resampling.NEAREST)) > 0
+
+
+def display_orientation(measured: RegionalReadout, orientation: int) -> RegionalReadout:
+    """Move a native JPEG readout onto its display grid while preserving each component's rank."""
+    height, width = measured.floating.shape
+    regions = []
+    for region in measured.regions:
+        box = region["region"]["bbox"]
+        x, y, w, h = (int(box[key]) for key in ("x", "y", "w", "h"))
+        left, top, right, bottom = orient_region((x, y, x + w, y + h), orientation, width, height)
+        regions.append({**region, "region": {"kind": "bbox", "bbox": {
+            "x": left, "y": top, "w": right - left, "h": bottom - top,
+        }}})
+    return RegionalReadout(
+        orient(measured.floating, orientation), orient(measured.recorded, orientation),
+        orient(measured.reliable, orientation), measured.conditions, regions, measured.stats,
+        orient(measured.selected_grid_mask, orientation),
+        tuple(orient(mask, orientation) for mask in measured.component_masks),
+    )
 
 
 def readout(raw: np.ndarray, gate: bool, threshold: float, data: bytes, pixels: np.ndarray,

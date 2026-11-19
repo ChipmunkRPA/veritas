@@ -67,6 +67,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- Supported quality-90 JPEGs with a saved rotation or reflection now use
+  the same stored-pixel measurement as upright files. The display maps
+  show the corresponding original crop. Two paid local replays and
+  42 full-model comparisons preserved the exact region and overlap.
+  [JPEG orientation comparison](image-jpeg90-exif-orientation-2026-11-18.md)
+
 - The face-transition check now accepts qualified 29.97 fps AVC exports.
   It located all 48 staged transitions across two encodes and highlighted
   eight ordinary focus controls. Fifteen eligible exports from a separate

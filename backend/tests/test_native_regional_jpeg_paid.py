@@ -15,7 +15,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 from fastapi.testclient import TestClient
-from PIL import Image
+from PIL import Image, ImageOps
 from sqlalchemy.orm import sessionmaker
 from test_native_regional_paid_flow_v49 import FORBIDDEN, ROOT, wait_for
 from test_stripe_billing import billing as billing
@@ -48,7 +48,10 @@ from app.storage.db import Analysis, BillingOrderRow, DetectorRun, ReportRow
     ("CHIPMUNK_REGIONAL_JPEG90_PROGRESSIVE_FLOW_INPUT", "CHIPMUNK_REGIONAL_JPEG90_PROGRESSIVE_FLOW_PROOF",
      "0deee9ea4b7d6da5fbc86fa65cc7474ed19b6655ec87af9ed41c3c23b72a2850",
      "925b086aaf176be90469b0f5a1245454f00ad5205a222b07392696d108acad32"),
-], ids=["baseline", "progressive", "jpeg90-repeat", "jpeg90-progressive-repeat"])
+    ("CHIPMUNK_REGIONAL_JPEG90_ORIENTED_FLOW_INPUT", "CHIPMUNK_REGIONAL_JPEG90_ORIENTED_FLOW_PROOF",
+     "0deee9ea4b7d6da5fbc86fa65cc7474ed19b6655ec87af9ed41c3c23b72a2850",
+     "925b086aaf176be90469b0f5a1245454f00ad5205a222b07392696d108acad32"),
+], ids=["baseline", "progressive", "jpeg90-repeat", "jpeg90-progressive-repeat", "jpeg90-oriented-repeat"])
 def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
     billing, monkeypatch, tmp_path, input_var, proof_var, expected_source, expected_mask,
 ):
@@ -62,6 +65,7 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
     source = Path(path).read_bytes()
     assert hashlib.sha256(source).hexdigest() == expected_source
     jpeg90_progressive = input_var == "CHIPMUNK_REGIONAL_JPEG90_PROGRESSIVE_FLOW_INPUT"
+    jpeg90_oriented = input_var == "CHIPMUNK_REGIONAL_JPEG90_ORIENTED_FLOW_INPUT"
     if jpeg90_progressive:
         jpegtran = shutil.which("jpegtran")
         assert jpegtran, "Lossless progressive replay requires jpegtran"
@@ -73,12 +77,21 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
         path = tmp_path / "progressive-source.jpg"
         path.write_bytes(progressive)
         source = progressive
+    if jpeg90_oriented:
+        with Image.open(io.BytesIO(source)) as image:
+            assert 274 not in image.getexif()
+        exif = Image.Exif()
+        exif[274] = 6
+        tag = exif.tobytes()
+        source = source[:2] + b"\xff\xe1" + (len(tag) + 2).to_bytes(2, "big") + tag + source[2:]
+        path = tmp_path / "rotated-source.jpg"
+        path.write_bytes(source)
     source_hash = hashlib.sha256(source).hexdigest()
-    jpeg90 = jpeg90_progressive or input_var == "CHIPMUNK_REGIONAL_JPEG90_FLOW_INPUT"
+    jpeg90 = jpeg90_progressive or jpeg90_oriented or input_var == "CHIPMUNK_REGIONAL_JPEG90_FLOW_INPUT"
     f = billing
     for key, value in {"environment": "dev", "device": "cpu", "image_region_mode": "legacy",
                        "image_region_jpeg_review": True, "image_region_flip_review": True,
-                       "image_region_jpeg90_review": jpeg90,
+                       "image_region_jpeg90_review": jpeg90, "image_region_jpeg90_orientation_review": jpeg90_oriented,
                        "model_memory_budget_mb": "4096", "worker_threads": 1, "job_timeout_s": 600,
                        "run_worker": False, "offline": True, "webhooks_enabled": False}.items():
         monkeypatch.setattr(settings, key, value)
@@ -188,7 +201,14 @@ def test_paid_jpeg_uses_same_source_regions_in_browser_pdf_and_json(
         asset = packet["artifacts"]["mask"]
         response = f.client.get(asset["url"], headers=f.headers)
         with Image.open(io.BytesIO(response.content)) as measured, Image.open(io.BytesIO(source)) as original:
-            restored = np.asarray(measured.convert("L").resize(original.size, Image.Resampling.NEAREST)) > 0
+            displayed = ImageOps.exif_transpose(original)
+            restored = measured.convert("L").resize(displayed.size, Image.Resampling.NEAREST)
+            if jpeg90_oriented:
+                restored = restored.transpose(Image.Transpose.ROTATE_90)
+                assert document["source"]["exif_orientation"] == 6
+                assert packet["localisation"]["resolution_policy"]["jpeg_stored_orientation"] == 6
+                assert packet["region"] == {"x": original.height - 532, "y": 377, "w": 76, "h": 128}
+            restored = np.asarray(restored) > 0
         browser_repeat = {}
         if jpeg90:
             repeat = next(check["jpeg_reencode_consistency"] for check in document["coverage"]["inspection_checks"]

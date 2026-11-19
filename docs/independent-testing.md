@@ -68,6 +68,9 @@ positions as an archived revision.
 The [short word-pair comparison](writing-phrase-seams-2026-11-18.md)
 compares generated copyedits with archived wording and audits which exact
 candidate ranges were eligible in DOCX and TXT.
+The [open-vocabulary comparison](writing-open-vocabulary-2026-11-18.md)
+removes the vocabulary gate and measures where the true edited spans rank
+against same-width alternatives and ordinary revisions.
 
 The [supplied-reference audio comparison](audio-short-window-reader-holdout-2026-11-18.md#supplied-reference-under-strong-background-noise)
 compares a dry earlier copy with an earlier copy that shares the exact same
@@ -110,6 +113,9 @@ the same operation is moved to a comparable region of the original photo.
 The [progressive JPEG transport replay](image-cross-quality-2026-11-16.md#progressive-jpeg-transport)
 checks 360 lossless scan conversions against the frozen baseline deliveries,
 including the repeated quality-75 view and three full model replays.
+The [JPEG orientation replay](image-jpeg90-exif-orientation-2026-11-18.md)
+checks that rotation and reflection metadata preserve the detector's stored
+inputs and that the evidence follows the displayed image.
 
 The [lossless WebP comparison](image-exact-webp-copy-2026-11-18.md#replay)
 recounts copy locations against exact edit boxes on 212 deliveries

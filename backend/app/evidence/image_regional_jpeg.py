@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import io
 
+from PIL import Image
+
 from app.detectors.image import jpeg_bitstream
 
 
@@ -22,3 +24,9 @@ def reencode(image) -> bytes:
     buffer = io.BytesIO()
     image.save(buffer, format="JPEG", quality=75, subsampling="4:2:0", optimize=False, progressive=False)
     return buffer.getvalue()
+
+
+def tagged_orientation(data: bytes) -> int | None:
+    with Image.open(io.BytesIO(data)) as source:
+        value = source.getexif().get(274)
+    return value if type(value) is int and value in range(2, 9) else None

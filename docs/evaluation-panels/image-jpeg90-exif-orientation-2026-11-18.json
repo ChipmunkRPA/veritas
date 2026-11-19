@@ -1,0 +1,354 @@
+{
+  "schema": "chipmunk.image-jpeg90-orientation-transfers/1",
+  "native_transport": {
+    "stored_rgb_pairs_checked_with_two_decoders": 360,
+    "same_tensor_quality_mask_and_repeat_jpeg": 342,
+    "dimension_exclusions": 18,
+    "orientation_tag_counts": {
+      "2": 52,
+      "3": 52,
+      "4": 52,
+      "5": 51,
+      "6": 51,
+      "7": 51,
+      "8": 51
+    },
+    "panel_counts": {
+      "fresh": {
+        "stored_rgb_pairs": 144,
+        "eligible": 144,
+        "inherited_useful": 11,
+        "inherited_ordinary_flags": 0
+      },
+      "transfer": {
+        "stored_rgb_pairs": 216,
+        "eligible": 198,
+        "inherited_useful": 0,
+        "inherited_ordinary_flags": 3
+      }
+    },
+    "model_witness_comparisons": [
+      {
+        "case": "edit",
+        "container": "baseline",
+        "orientation": 2,
+        "regions": 0,
+        "verified": true
+      },
+      {
+        "case": "edit",
+        "container": "baseline",
+        "orientation": 3,
+        "regions": 0,
+        "verified": true
+      },
+      {
+        "case": "edit",
+        "container": "baseline",
+        "orientation": 4,
+        "regions": 0,
+        "verified": true
+      },
+      {
+        "case": "edit",
+        "container": "baseline",
+        "orientation": 5,
+        "regions": 0,
+        "verified": true
+      },
+      {
+        "case": "edit",
+        "container": "baseline",
+        "orientation": 6,
+        "regions": 0,
+        "verified": true
+      },
+      {
+        "case": "edit",
+        "container": "baseline",
+        "orientation": 7,
+        "regions": 0,
+        "verified": true
+      },
+      {
+        "case": "edit",
+        "container": "baseline",
+        "orientation": 8,
+        "regions": 0,
+        "verified": true
+      },
+      {
+        "case": "edit",
+        "container": "progressive",
+        "orientation": 2,
+        "regions": 0,
+        "verified": true
+      },
+      {
+        "case": "edit",
+        "container": "progressive",
+        "orientation": 3,
+        "regions": 0,
+        "verified": true
+      },
+      {
+        "case": "edit",
+        "container": "progressive",
+        "orientation": 4,
+        "regions": 0,
+        "verified": true
+      },
+      {
+        "case": "edit",
+        "container": "progressive",
+        "orientation": 5,
+        "regions": 0,
+        "verified": true
+      },
+      {
+        "case": "edit",
+        "container": "progressive",
+        "orientation": 6,
+        "regions": 0,
+        "verified": true
+      },
+      {
+        "case": "edit",
+        "container": "progressive",
+        "orientation": 7,
+        "regions": 0,
+        "verified": true
+      },
+      {
+        "case": "edit",
+        "container": "progressive",
+        "orientation": 8,
+        "regions": 0,
+        "verified": true
+      },
+      {
+        "case": "unchanged",
+        "container": "baseline",
+        "orientation": 2,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "unchanged",
+        "container": "baseline",
+        "orientation": 3,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "unchanged",
+        "container": "baseline",
+        "orientation": 4,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "unchanged",
+        "container": "baseline",
+        "orientation": 5,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "unchanged",
+        "container": "baseline",
+        "orientation": 6,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "unchanged",
+        "container": "baseline",
+        "orientation": 7,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "unchanged",
+        "container": "baseline",
+        "orientation": 8,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "unchanged",
+        "container": "progressive",
+        "orientation": 2,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "unchanged",
+        "container": "progressive",
+        "orientation": 3,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "unchanged",
+        "container": "progressive",
+        "orientation": 4,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "unchanged",
+        "container": "progressive",
+        "orientation": 5,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "unchanged",
+        "container": "progressive",
+        "orientation": 6,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "unchanged",
+        "container": "progressive",
+        "orientation": 7,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "unchanged",
+        "container": "progressive",
+        "orientation": 8,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "ordinary_blur",
+        "container": "baseline",
+        "orientation": 2,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "ordinary_blur",
+        "container": "baseline",
+        "orientation": 3,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "ordinary_blur",
+        "container": "baseline",
+        "orientation": 4,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "ordinary_blur",
+        "container": "baseline",
+        "orientation": 5,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "ordinary_blur",
+        "container": "baseline",
+        "orientation": 6,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "ordinary_blur",
+        "container": "baseline",
+        "orientation": 7,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "ordinary_blur",
+        "container": "baseline",
+        "orientation": 8,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "ordinary_blur",
+        "container": "progressive",
+        "orientation": 2,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "ordinary_blur",
+        "container": "progressive",
+        "orientation": 3,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "ordinary_blur",
+        "container": "progressive",
+        "orientation": 4,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "ordinary_blur",
+        "container": "progressive",
+        "orientation": 5,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "ordinary_blur",
+        "container": "progressive",
+        "orientation": 6,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "ordinary_blur",
+        "container": "progressive",
+        "orientation": 7,
+        "regions": 1,
+        "verified": true
+      },
+      {
+        "case": "ordinary_blur",
+        "container": "progressive",
+        "orientation": 8,
+        "regions": 1,
+        "verified": true
+      }
+    ]
+  },
+  "local_application": {
+    "simulated_prepayment_analyses": 2,
+    "browser_pdf_json_and_original_replayed": 2,
+    "upright_region": {
+      "h": 76,
+      "w": 128,
+      "x": 377,
+      "y": 456
+    },
+    "orientation_6_region": {
+      "h": 128,
+      "w": 76,
+      "x": 44,
+      "y": 377
+    },
+    "overlap_cells": [
+      8658,
+      8668
+    ],
+    "retained_regions": 1,
+    "withheld_regions": 1
+  },
+  "commitments": {
+    "previous_case_records_sha256": "a2b1097cedf39c6f7076f7f4922c9afeb200e87c39ad601954957947143d5b1d",
+    "private_transport_decisions_sha256": "e447bd667579b4c03fd6e05a860d16ef9753485694e8fbe407cc6cfe0483c694",
+    "private_development_receipt_sha256": "0410fcb87bb3f96d40977c001b9f898e593f9b275e8f6270db23c8722ab6d2d6"
+  }
+}

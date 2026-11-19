@@ -157,19 +157,19 @@ def _av(path: Path, kind: str) -> None:
         raise PreflightError(f"The {kind} stream contains no decodable content. No payment was started.")
 
 
-def _only_directly_hidden_word_text(document) -> bool:
-    """Check the retained writing against the reader's private paragraph proofs."""
-    if not document.word_hidden_only_paths:
-        return False
+def _word_checkout_view(document):
+    """Use the visible paragraphs for checkout without changing the evidence reader's text."""
+    from app.detectors.text.extract import Document
 
-    readable = bytearray(char.isprintable() and not char.isspace() for char in document.text)
-    if not any(readable):
-        return False
-    for block in document.source_map:
-        if block["kind"] == "docx" and tuple(block["body_path"]) in document.word_hidden_only_paths:
-            start, end = block["start"], block["end"]
-            readable[start:end] = bytes(end - start)
-    return not any(readable)
+    paragraphs, spans = [], []
+    offset = 0
+    for start, end in document.paragraphs:
+        text = document.word_checkout_paragraphs.get(start, document.text[start:end])
+        if text:
+            paragraphs.append(text)
+            spans.append((offset, offset + len(text)))
+            offset += len(text) + 2
+    return Document("\n\n".join(paragraphs), spans)
 
 
 def _document(path: Path, extension: str) -> None:
@@ -224,12 +224,15 @@ def _document(path: Path, extension: str) -> None:
                              or document_tracked_changes.unsupported(document.word_review)):
         # The writing pipeline can still retain native Word revision evidence.
         return
-    if extension == ".docx" and _only_directly_hidden_word_text(document):
-        raise PreflightError("The Word document contains only text marked hidden in its supported body. "
-                             "Remove the hidden formatting or export a PDF that shows the writing. No payment was started.")
-
+    excludes_hidden = bool(document.word_checkout_paragraphs) and any(
+        start in document.word_checkout_paragraphs for start, _ in document.paragraphs)
+    if excludes_hidden:
+        document = _word_checkout_view(document)
     text = document.text
     readable = any(char.isprintable() and not char.isspace() for char in text)
+    if not readable and excludes_hidden:
+        raise PreflightError("The Word document contains only text marked hidden in its supported body. "
+                             "Remove the hidden formatting or export a PDF that shows the writing. No payment was started.")
     scope = {".docx": "The Word document", ".odt": "The OpenDocument body", ".eml": "The selected email body"}
     too_short = f"{scope.get(extension, 'This document')} needs at least {MIN_WORDS} readable words for writing analysis. No payment was started."
     if extension in {".pptx", ".odp", ".epub"}:
@@ -257,7 +260,10 @@ def _document(path: Path, extension: str) -> None:
                 raise PreflightError("The saved page has no readable text outside navigation and hidden markup. "
                                      "Save the displayed text as PDF or DOCX before paying.")
             raise PreflightError("This document has no readable text. Export it as UTF-8 text, PDF or DOCX before paying.")
-    if saved_fields:
+    if excludes_hidden:
+        too_short = (f"The Word document needs at least {MIN_WORDS} readable words outside text marked hidden. "
+                     "No payment was started.")
+    elif saved_fields:
         too_short = (f"The Word document includes saved field text but fewer than {MIN_WORDS} readable words. "
                      "No payment was started.")
 

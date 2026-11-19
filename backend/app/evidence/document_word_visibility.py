@@ -18,7 +18,7 @@ def paragraph_run_elements(paragraph):
     return paragraph._p.xpath("./w:r | ./w:hyperlink/w:r")
 
 
-def inspect_paragraph(paragraph, body_path, body_paragraph, *, projected_control=False):
+def inspect_paragraph(paragraph, body_path, body_paragraph, *, projected_control=False, include_whitespace=False):
     from docx.oxml.ns import qn
     from docx.text.run import Run
 
@@ -27,7 +27,7 @@ def inspect_paragraph(paragraph, body_path, body_paragraph, *, projected_control
         text = Run(element, paragraph).text
         end = offset + len(text)
         mark = element.xpath("./w:rPr/w:vanish")
-        if (text.strip() and len(mark) == 1
+        if (text and (include_whitespace or text.strip()) and len(mark) == 1
                 and mark[0].get(qn("w:val"), "true") in {"true", "1", "on"}):
             location = {"body_path": body_path, "body_paragraph": body_paragraph,
                         "run": index, "source_start": offset, "source_end": end}

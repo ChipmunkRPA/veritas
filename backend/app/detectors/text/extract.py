@@ -45,7 +45,7 @@ class Document:
     source_map: list[dict] = field(default_factory=list)
     source_rasters: dict[str, str] = field(default_factory=dict)  # SHA256 -> base64 exact OCR input PNG, child transport only
     word_review: dict | None = None
-    word_hidden_only_paths: set[tuple[int | str, ...]] = field(default_factory=set)  # checkout only
+    word_checkout_paragraphs: dict[int, str] = field(default_factory=dict)  # checkout only, by extracted paragraph offset
 
 
 SOURCE_MAP_VERSION = "document-source/1"
@@ -160,11 +160,24 @@ def _joined_word_mapping(group, text, origins, pos):
         first, source_start = last, source_end
 
 
+def _word_visible_paragraph(group, hidden_runs):
+    pieces = []
+    for raw, source in group:
+        cursor = 0
+        for start, end in hidden_runs.get(tuple(source.get("body_path", ())), ()):
+            pieces.append(raw[cursor:start])
+            cursor = end
+        pieces.append(raw[cursor:])
+    return _normalise("".join(pieces))[0]
+
+
 def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False, map_paragraphs: bool = False,
-                 preserve_pdf_wrap_hyphens: bool = False, separate_html_gaps: bool = False) -> Document:
+                 preserve_pdf_wrap_hyphens: bool = False, separate_html_gaps: bool = False,
+                 word_checkout_hidden_runs: dict[tuple[int | str, ...], list[tuple[int, int]]] | None = None) -> Document:
     texts: list[str] = []
     spans: list[tuple[int, int]] = []
     mapping: list[dict] = []
+    word_checkout_paragraphs = {}
     pos = 0
     for group in _paragraph_groups(parts):
         raw, source = group[0]
@@ -179,6 +192,8 @@ def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False, ma
             pos += 2
         spans.append((pos, pos + len(text)))
         texts.append(text)
+        if word_checkout_hidden_runs and any(tuple(item.get("body_path", ())) in word_checkout_hidden_runs for _, item in group):
+            word_checkout_paragraphs[pos] = _word_visible_paragraph(group, word_checkout_hidden_runs)
         if len(group) > 1:
             mapping.extend(_joined_word_mapping(group, text, origins, pos))
             pos += len(text)
@@ -215,7 +230,7 @@ def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False, ma
             entry["geometry_granularity"] = "word"
         mapping.append(entry)
         pos += len(text)
-    return Document("\n\n".join(texts), spans, source_map=mapping)
+    return Document("\n\n".join(texts), spans, source_map=mapping, word_checkout_paragraphs=word_checkout_paragraphs)
 
 
 def _seal(doc: Document, *, original_sha256: str | None = None) -> Document:
@@ -880,10 +895,12 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
                                       project_word_breaks=project_word_breaks,
                                       include_word_content_controls=include_word_content_controls,
                                       normalize_word_layout_breaks=normalize_word_layout_breaks)
+    check_word_checkout_visibility = (check_word_checkout_visibility and map_word_hyperlink_runs
+                                      and bool(PART_NAME.fullmatch(part)))
     parts: list[tuple[str, dict]] = []
     percentage_body_paragraphs = []
     hidden_locations = []
-    hidden_only_paths: set[tuple[int | str, ...]] = set()
+    checkout_hidden_runs: dict[tuple[int | str, ...], list[tuple[int, int]]] = {}
     checked_paragraphs = hidden_runs = 0
     fields_found = int(d.element.body.xpath("count(.//w:fldSimple)")) if include_word_saved_fields else 0
     can_project_fields = bool(fields_found and review and review["status"] == "no_match"
@@ -915,19 +932,19 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
                 field_ranges[path_here[0]] = saved
         projected = projected_control or bool(saved)
         body_paragraph = len(percentage_body_paragraphs) + 1 if top_level else None
-        hidden_end = 0 if check_word_checkout_visibility and not projected and map_word_hyperlink_runs else None
+        checkout_hidden = []
         if text.strip():
             checked_paragraphs += 1
             for location in document_word_visibility.inspect_paragraph(
-                    paragraph, path_here, body_paragraph, projected_control=projected):
-                hidden_runs += 1
-                if len(hidden_locations) < document_word_visibility.MAX_LOCATIONS:
-                    hidden_locations.append(location)
-                if hidden_end is not None:
-                    # A readable gap would include text outside the directly hidden runs.
-                    gap = text[hidden_end:location["source_start"]]
-                    hidden_end = (None if any(char.isprintable() and not char.isspace() for char in gap)
-                                  else location["source_end"])
+                    paragraph, path_here, body_paragraph, projected_control=projected,
+                    include_whitespace=check_word_checkout_visibility):
+                start, end = location["source_start"], location["source_end"]
+                if not check_word_checkout_visibility or text[start:end].strip():
+                    hidden_runs += 1
+                    if len(hidden_locations) < document_word_visibility.MAX_LOCATIONS:
+                        hidden_locations.append(location)
+                if check_word_checkout_visibility:
+                    checkout_hidden.append((start, end))
         joins_next = joined is not None and paragraph._p in joined
         if top_level:
             style = paragraph.style
@@ -952,13 +969,14 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
         source = {"kind": "docx", "body_path": path_here, "paragraph_index": len(parts),
                   "runs": [] if projected else runs,
                   "run_mapping_complete": not projected and cursor == len(text)}
-        if (hidden_end and source["run_mapping_complete"]
-                and not any(char.isprintable() and not char.isspace() for char in text[hidden_end:])):
-            hidden_only_paths.add(tuple(path_here))
+        # After a filled control or saved field is projected, independently
+        # prove the checkout offsets against the complete projected text.
+        if checkout_hidden and "".join(run.text for run in paragraph_runs) == text:
+            checkout_hidden_runs[tuple(path_here)] = checkout_hidden
         if joins_next:
             source["join_following_paragraph"] = True
         parts.append((text, source))
-    doc = _join_mapped(parts)
+    doc = _join_mapped(parts, word_checkout_hidden_runs=checkout_hidden_runs)
     note_parts = word_linked_notes.paragraphs(path, d, note_refs)
     extra_parts = [*box_parts, *note_parts]
     if extra_parts:
@@ -972,7 +990,7 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
         parts[insertion:insertion] = extra_parts
         for index, (_, source) in enumerate(parts[insertion:], insertion):
             source["paragraph_index"] = index
-        doc = _join_mapped(parts, map_paragraphs=True)
+        doc = _join_mapped(parts, map_paragraphs=True, word_checkout_hidden_runs=checkout_hidden_runs)
     doc.word_review = review
     word_warning = ""
     if review and review["status"] != "no_match":
@@ -1043,7 +1061,6 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
         doc.meta[JOINED_PARAGRAPHS] = len(joined)
     if PART_NAME.fullmatch(part):
         doc.meta[document_word_visibility.KEY] = document_word_visibility.build(part, checked_paragraphs, hidden_runs, hidden_locations)
-        doc.word_hidden_only_paths = hidden_only_paths
     return doc
 
 

@@ -188,7 +188,7 @@ def test_word_visibility_coordinates_replay_in_evidence_pdf_and_json(packet_fact
 
 def test_paid_document_pipeline_publishes_word_visibility(billing):
     word = Document()
-    paragraph = word.add_paragraph("El informe explica las decisiones del equipo durante la reunión del martes. ")
+    paragraph = word.add_paragraph("El informe explica las decisiones del equipo durante la reunión del martes pasado con los vecinos de la comunidad. ")
     paragraph.add_run("Los participantes revisaron los materiales antes de continuar con el trabajo.").font.hidden = True
     content = io.BytesIO()
     word.save(content)
@@ -221,28 +221,33 @@ def test_paid_document_pipeline_publishes_word_visibility(billing):
         assert result["manifest"]["sampling"][visibility.COMMITMENT] == canonical_hash(evidence["coverage"][visibility.KEY])
 
 
-@pytest.mark.parametrize(("hidden_runs", "include_visible"), [(1, False), (25, False), (25, True)])
-def test_word_checkout_checks_hidden_text_beyond_report_limit(billing, hidden_runs, include_visible):
+@pytest.mark.parametrize(("hidden_runs", "visible_text", "refusal"), [
+    (1, "", "only text marked hidden"),
+    (25, "", "only text marked hidden"),
+    (25, "Just a visible heading.", "at least 15 readable words outside text marked hidden"),
+    (25, "This visible passage contains enough words for a reader to understand the purpose of this ordinary document.", None),
+])
+def test_word_checkout_checks_hidden_text_beyond_report_limit(billing, hidden_runs, visible_text, refusal):
     document = Document()
     text = "These hidden words must never reach payment because the document contains no other writing in its supported body."
     paragraph = document.add_paragraph()
     for _ in range(hidden_runs):
         paragraph.add_run(text + " ").font.hidden = True
-    if include_visible:
-        paragraph.add_run("This visible passage contains enough words for a reader to understand the purpose of this ordinary document.")
+    if visible_text:
+        paragraph.add_run(visible_text)
     content = io.BytesIO()
     document.save(content)
 
     response = upload(billing, filename="hidden.docx", content=content.getvalue(), kind="document",
                       mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
     assert counts(billing) == (0, 0, 0)
-    if include_visible:
+    if refusal is None:
         assert response.status_code == 201, response.text
         assert len(billing.created) == 1
         return
 
     assert response.status_code == 422
-    assert "only text marked hidden" in response.json()["detail"]
+    assert refusal in response.json()["detail"]
     assert text not in response.text
     assert billing.created == []
     with billing.sessions() as db:

@@ -94,6 +94,16 @@ JSON evidence and a signed package verified against the original file.
 Five unusable uploads, including a wholly blank PDF, stopped before payment.
 [Local format and checkout receipt](evaluation-panels/document-checkout-formats-2026-11-19.json)
 
+Word checkout excludes directly hidden runs it can map in supported body
+paragraphs, table cells and hyperlink text, including paragraphs with
+supported filled controls and saved fields. Checkout requires 15 readable
+words outside those runs. For eligible files the report can still identify
+hidden runs and explain how they limit the writing assessment. A follow-up
+local Chrome run completed 25 simulated checkouts, including a Word document
+with enough visible text and 25 hidden runs. PDF and JSON evidence agreed
+for all 25, and each signed package verified against the original. A Word
+file with too little visible writing was among six refused before payment.
+
 A local Chromium run completed Word, Excel, ODS, CSV and TSV writing
 analyses after simulated USD 9.99 checkout. Each result displayed source
 positions in the browser and exported both a PDF and JSON. All five signed

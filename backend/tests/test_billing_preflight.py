@@ -294,8 +294,50 @@ def test_docx_checkout_requires_some_writing_outside_proven_hidden_runs(location
 
     with pytest.raises(preflight.PreflightError, match="only text marked hidden.*No payment was started"):
         verify(package(), "hidden.docx", "document")
+    paragraph.add_run("A short visible heading. ").font.hidden = False
+    with pytest.raises(preflight.PreflightError, match="at least 15 readable words outside text marked hidden.*No payment"):
+        verify(package(), "short-visible.docx", "document")
     paragraph.add_run(" \t" + WRITING).font.hidden = False
     verify(package(), "visible-and-hidden.docx", "document")
+
+
+@pytest.mark.parametrize("hidden", [" these words are marked hidden ", "   "])
+def test_docx_checkout_counts_visible_words_split_across_runs_once(hidden):
+    from docx import Document
+
+    document = Document()
+    paragraph = document.add_paragraph("One two three four five six seven eight nine ten eleven twelve thirteen co")
+    paragraph.add_run(hidden).font.hidden = True
+    paragraph.add_run("py.")
+    content = io.BytesIO()
+    document.save(content)
+    with pytest.raises(preflight.PreflightError, match="at least 15 readable words outside text marked hidden"):
+        verify(content.getvalue(), "fourteen-visible.docx", "document")
+
+    paragraph.add_run(" Fifteen.")
+    content = io.BytesIO()
+    document.save(content)
+    verify(content.getvalue(), "fifteen-visible.docx", "document")
+
+
+@pytest.mark.parametrize("projection", ["filled control", "saved field"])
+def test_docx_checkout_does_not_count_hidden_runs_next_to_projected_text(projection):
+    from docx import Document
+    from test_document_source_mapping import word_control
+    from test_document_word_saved_fields import add_field, word_bytes
+
+    document = Document()
+    paragraph = document.add_paragraph("Visible heading. ")
+    paragraph.add_run(WRITING).font.hidden = True
+    if projection == "filled control":
+        word_control([paragraph.add_run(" Approved.")._r])
+    else:
+        add_field(paragraph, "PAGE", " 1")
+
+    with pytest.raises(preflight.PreflightError, match="at least 15 readable words outside text marked hidden"):
+        verify(word_bytes(document), "short-visible.docx", "document")
+    paragraph.add_run(" " + WRITING)
+    verify(word_bytes(document), "enough-visible.docx", "document")
 
 
 def test_rtf_preflight_requires_the_signature_and_readable_body():

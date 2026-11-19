@@ -1499,15 +1499,17 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             d.meta["coverage_warning"] += " " + document_native_locations.ODT_TEXT_REFERENCES_SCOPE
         if map_body_paragraphs:
             d.meta[document_native_locations.PARAGRAPH_MAP_KEY] = document_native_locations.PARAGRAPH_MAP
-    elif ext in {".pptx", ".odp", ".epub"}:
-        from app.detectors.text.reading_packages import body_parts
+    elif ext in {".pptx", ".ppsx", ".odp", ".epub"}:
+        from app.detectors.text.reading_packages import POWERPOINT_TYPES, body_parts
 
         parts = body_parts(path, ext, skip_hidden_slide_groups=skip_hidden_slide_groups,
                            use_epub_visibility=use_epub_visibility)
         d = _join_mapped(parts, map_paragraphs=True)
-        if ext == ".pptx":
+        if ext in POWERPOINT_TYPES:
             warning = ("The writing check reads saved text boxes and tables on visible slides in presentation order. "
                        "Speaker notes, master slides, charts, SmartArt, images and embedded objects are outside this check.")
+            if ext == ".ppsx":
+                warning += " Slides marked visible in the file are included even when outside the saved playback range or custom show."
         elif ext == ".odp":
             warning = ("The writing check reads saved text in supported shapes and tables in the deck's stored slide order. "
                        "It excludes hidden slides, hidden layers and placeholders. Notes, master-slide text, animation, "
@@ -1519,7 +1521,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
                        + limitations)
         d.meta = {"method": ext[1:], "paragraph_count": len(parts), "coverage_warning": warning,
                   document_native_locations.PARAGRAPH_MAP_KEY: document_native_locations.PARAGRAPH_MAP}
-        if ext == ".pptx" and skip_hidden_slide_groups:
+        if ext in POWERPOINT_TYPES and skip_hidden_slide_groups:
             d.meta[document_native_locations.PPTX_VISIBILITY_KEY] = document_native_locations.PPTX_VISIBILITY
             d.meta["coverage_warning"] += " Hidden groups and their contents are excluded."
         if ext == ".epub" and use_epub_visibility:

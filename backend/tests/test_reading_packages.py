@@ -17,22 +17,27 @@ from app.detectors.text.reading_packages import (
     PRESENTATION_NAMESPACES,
     PRESENTATION_TYPE,
     RELATIONSHIPS,
+    SLIDESHOW_TYPE,
     XHTML,
 )
 from app.evidence import document_native_locations
 from app.evidence.document_packets import _source_anchors, build_packet_set
 from app.reports import public_verify, verify_document_source
-from app.storage.files import EPUB_MIME, ODP_MIME, PPTX_MIME, validate_kind
+from app.storage.files import EPUB_MIME, ODP_MIME, PPSX_MIME, PPTX_MIME, validate_kind
 
 PASSAGE = ("The community library stays open until eight on Thursday evenings. "
            "The volunteers use a separate entrance near the parking lot to deliver new books.")
 HIDDEN_GROUP_TEXT = "This hidden briefing paragraph is long enough to be scored if the reader accidentally includes its words."
 
 
-def powerpoint(path, passages=(PASSAGE, PASSAGE), *, strict=False, external=False, macro=False, hidden_group=False):
+def powerpoint(path, passages=(PASSAGE, PASSAGE), *, strict=False, external=False, macro=False, hidden_group=False,
+               slideshow=False):
     p, (a, r) = list(PRESENTATION_NAMESPACES.items())[int(strict)]
     p, a = p[1:-1], a[1:-1]
-    main_type = PRESENTATION_TYPE if not macro else "application/vnd.ms-powerpoint.presentation.macroEnabled.main+xml"
+    main_type = SLIDESHOW_TYPE if slideshow else PRESENTATION_TYPE
+    if macro:
+        subtype = "slideshow" if slideshow else "presentation"
+        main_type = f"application/vnd.ms-powerpoint.{subtype}.macroEnabled.main+xml"
     with ZipFile(path, "w", compression=ZIP_DEFLATED) as archive:
         archive.writestr("[Content_Types].xml",
                          f'<Types xmlns="{CONTENT_TYPES[1:-1]}"><Override PartName="/ppt/presentation.xml" '
@@ -123,12 +128,14 @@ def impress(path, passages=(PASSAGE, PASSAGE), *, mime=ODP_MIME, oversized=False
 
 @pytest.mark.parametrize(("extension", "make", "mime", "part_kind", "coordinate"), [
     (".pptx", powerpoint, PPTX_MIME, "slide", "pptx_block"),
+    (".ppsx", powerpoint, PPSX_MIME, "slide", "pptx_block"),
     (".odp", impress, ODP_MIME, "slide", "odp_block"),
     (".epub", epub, EPUB_MIME, "epub_entry", "epub_block"),
 ])
 def test_order_scope_and_exact_positions(tmp_path, extension, make, mime, part_kind, coordinate):
     path = tmp_path / f"source{extension.upper()}"
-    make(path, ("First table/chapter. " + PASSAGE, "Second   text 🦊. " + PASSAGE))
+    options = {"slideshow": True} if extension == ".ppsx" else {}
+    make(path, ("First table/chapter. " + PASSAGE, "Second   text 🦊. " + PASSAGE), **options)
     assert validate_kind("document", path.read_bytes()[:8192], path.name, path.stat().st_size) == (mime, extension)
     _document(path, extension)
     doc = extract(path, extension)
@@ -200,6 +207,10 @@ def test_powerpoint_evidence_replays_its_recorded_visibility_policy(tmp_path, pa
     (".pptx", powerpoint, {"external": True}, "internal slide relationship"),
     (".pptx", powerpoint, {"macro": True}, "macro-free"),
     (".pptx", powerpoint, {"passages": ("", "")}, "at least 15 readable words"),
+    (".ppsx", powerpoint, {"slideshow": True, "external": True}, "internal slide relationship"),
+    (".ppsx", powerpoint, {"slideshow": True, "macro": True}, "macro-free"),
+    (".ppsx", powerpoint, {}, "macro-free"),
+    (".ppsx", powerpoint, {"slideshow": True, "passages": ("", "")}, "at least 15 readable words"),
     (".odp", impress, {"mime": "application/zip"}, "not an OpenDocument Presentation"),
     (".odp", impress, {"oversized": True}, "writing limit for whitespace"),
     (".odp", impress, {"passages": ("", "")}, "at least 15 readable words"),

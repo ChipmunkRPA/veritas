@@ -21,10 +21,12 @@ ODT_MIME = "application/vnd.oasis.opendocument.text"
 ODS_MIME = "application/vnd.oasis.opendocument.spreadsheet"
 ODP_MIME = "application/vnd.oasis.opendocument.presentation"
 PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+PPSX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.slideshow"
 XLSX_MIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 EPUB_MIME = "application/epub+zip"
 RTF_MIME = "application/rtf"
-DOCUMENT_ARCHIVES = {".docx": DOCX_MIME, ".odt": ODT_MIME, ".ods": ODS_MIME, ".odp": ODP_MIME, ".pptx": PPTX_MIME,
+DOCUMENT_ARCHIVES = {".docx": DOCX_MIME, ".odt": ODT_MIME, ".ods": ODS_MIME, ".odp": ODP_MIME,
+                     ".pptx": PPTX_MIME, ".ppsx": PPSX_MIME,
                      ".epub": EPUB_MIME, ".xlsx": XLSX_MIME}
 DOCUMENT_ARCHIVE_EXTENSIONS = {mime: extension for extension, mime in DOCUMENT_ARCHIVES.items()}
 DELIMITED_TEXT = {".csv": "text/csv", ".tsv": "text/tab-separated-values"}
@@ -40,6 +42,8 @@ DOCUMENT_EXPORT_GUIDANCE = {
     ".numbers": "Export the Apple Numbers spreadsheet as Excel (XLSX), CSV or PDF, then upload the exported file.",
     ".dotx": WORD_TEMPLATE_GUIDANCE, ".dotm": WORD_TEMPLATE_GUIDANCE, ".ott": WORD_TEMPLATE_GUIDANCE,
     ".potx": SLIDE_TEMPLATE_GUIDANCE, ".potm": SLIDE_TEMPLATE_GUIDANCE, ".otp": SLIDE_TEMPLATE_GUIDANCE,
+    ".pps": "Save the older PowerPoint show as PPSX, PPTX or PDF, then upload it.",
+    ".ppsm": "Save the PowerPoint show as a macro-free PPSX, PPTX or PDF, then upload it.",
     ".xltx": SHEET_TEMPLATE_GUIDANCE, ".xltm": SHEET_TEMPLATE_GUIDANCE, ".ots": SHEET_TEMPLATE_GUIDANCE,
 }
 RTF_HEADER = re.compile(rb"\{\\rtf1(?=[\\{}\s])")
@@ -243,7 +247,13 @@ def validate_kind(kind: str, data: bytes, filename: str, size: int | None = None
         upload_ext = Path(filename).suffix.lower()
         if message := DOCUMENT_EXPORT_GUIDANCE.get(upload_ext):
             raise ValueError(message)
-        if mime == "application/pdf":
+        if upload_ext == ".ppsx":
+            # Magic-byte detection can report PPTX for a slideshow. The reader
+            # checks the actual main-part type before starting a paid analysis.
+            if mime not in {PPSX_MIME, PPTX_MIME, "application/zip"}:
+                raise ValueError("This file is not a readable PowerPoint Show (PPSX). Save it as PPSX, PPTX or PDF.")
+            ext, mime = upload_ext, PPSX_MIME
+        elif mime == "application/pdf":
             ext = ".pdf"
         elif mime in DOCUMENT_ARCHIVE_EXTENSIONS:
             ext = DOCUMENT_ARCHIVE_EXTENSIONS[mime]
@@ -266,7 +276,7 @@ def validate_kind(kind: str, data: bytes, filename: str, size: int | None = None
                 raise ValueError("Export Word or Pages files as DOCX or PDF, presentations as PPTX or PDF, and Outlook messages as EML or PDF.")
             if upload_ext in {".xls", ".xlsx", ".xlsm", ".ods"}:
                 raise ValueError("Save the spreadsheet as a readable XLSX, ODS, CSV or PDF containing the writing you want checked.")
-            raise ValueError(f"Unsupported document type ({mime or ext}). Choose PDF, DOCX, ODT, PPTX, ODP, XLSX, ODS, CSV, TSV, EPUB, RTF, TXT, Markdown, HTML/XHTML or EML.")
+            raise ValueError(f"Unsupported document type ({mime or ext}). Choose PDF, DOCX, ODT, PPTX, PPSX, ODP, XLSX, ODS, CSV, TSV, EPUB, RTF, TXT, Markdown, HTML/XHTML or EML.")
         mime = mime or "text/plain"
     else:
         raise ValueError("Unknown analysis kind")

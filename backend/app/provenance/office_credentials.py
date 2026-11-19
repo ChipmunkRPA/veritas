@@ -6,7 +6,7 @@ import io
 from zipfile import ZIP_STORED, BadZipFile, ZipFile
 
 from app.provenance import c2pa
-from app.storage.files import DOCUMENT_ARCHIVE_EXTENSIONS, check_document_archive_safe
+from app.storage.files import DOCUMENT_ARCHIVE_EXTENSIONS, PPSX_MIME, PPTX_MIME, check_document_archive_safe
 
 STORE = "META-INF/content_credential.c2pa"
 COLLECTION_MATCH = "assertion.collectionHash.match"
@@ -28,7 +28,10 @@ def read(data: bytes, mime: str, *, bundle: c2pa.TrustBundle, legacy: c2pa.Trust
     except (ValueError, BadZipFile, OSError):
         return c2pa.C2PAReport(state="unreadable"), False
 
-    report = c2pa.read(data, mime, bundle=bundle, legacy=legacy, thumbnails=False)
+    # PowerPoint shows use the same whole-package binding as presentations.
+    # The SDK exposes that handler under the PPTX MIME type.
+    sdk_mime = PPTX_MIME if mime == PPSX_MIME else mime
+    report = c2pa.read(data, sdk_mime, bundle=bundle, legacy=legacy, thumbnails=False)
     # A data hash for an embedded attachment cannot establish the provenance of the package.
     bound = report.covers_bytes and any(code.scope == "active manifest" and code.level == "success"
                                        and code.code == COLLECTION_MATCH for code in report.codes)

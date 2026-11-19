@@ -26,6 +26,8 @@ PRESENTATION_NAMESPACES = {
 RELATIONSHIPS = "{http://schemas.openxmlformats.org/package/2006/relationships}"
 CONTENT_TYPES = "{http://schemas.openxmlformats.org/package/2006/content-types}"
 PRESENTATION_TYPE = "application/vnd.openxmlformats-officedocument.presentationml.presentation.main+xml"
+SLIDESHOW_TYPE = "application/vnd.openxmlformats-officedocument.presentationml.slideshow.main+xml"
+POWERPOINT_TYPES = {".pptx": PRESENTATION_TYPE, ".ppsx": SLIDESHOW_TYPE}
 CONTAINER = "{urn:oasis:names:tc:opendocument:xmlns:container}"
 PACKAGE = "{http://www.idpf.org/2007/opf}"
 XHTML = "{http://www.w3.org/1999/xhtml}"
@@ -114,25 +116,25 @@ def _slide_paragraphs(shapes, presentation, drawing, *, skip_hidden_slide_groups
                     yield from cell.findall(f"{drawing}txBody/{drawing}p")
 
 
-def _powerpoint(package: _Package, *, skip_hidden_slide_groups: bool):
+def _powerpoint(package: _Package, extension: str, *, skip_hidden_slide_groups: bool):
     main = [
         row for row in package.relationships("_rels/.rels").values()
         if row.get("Type") in {f"{value[1]}/officeDocument" for value in PRESENTATION_NAMESPACES.values()}
         and row.get("TargetMode", "Internal") == "Internal"
     ]
     if len(main) != 1:
-        raise ValueError("The PPTX has no unique presentation part")
+        raise ValueError("The PowerPoint file has no unique presentation part")
     main_name = _part_name("", main[0].get("Target", ""))
     types = package.xml("[Content_Types].xml")
     if types.tag != CONTENT_TYPES + "Types" or [
         row.get("ContentType") for row in types.findall(CONTENT_TYPES + "Override")
         if row.get("PartName") == "/" + main_name
-    ] != [PRESENTATION_TYPE]:
-        raise ValueError("Save the presentation as a standard, macro-free PowerPoint .pptx file")
+    ] != [POWERPOINT_TYPES[extension]]:
+        raise ValueError(f"Save the presentation as a standard, macro-free PowerPoint {extension} file, or upload a PDF")
     root = package.xml(main_name)
     presentation = next((ns for ns in PRESENTATION_NAMESPACES if root.tag == ns + "presentation"), None)
     if presentation is None:
-        raise ValueError("The PPTX presentation part is unreadable")
+        raise ValueError("The PowerPoint presentation part is unreadable")
     drawing, relationship = PRESENTATION_NAMESPACES[presentation]
     part = PurePosixPath(main_name)
     links = package.relationships(str(part.parent / "_rels" / (part.name + ".rels")))
@@ -144,15 +146,15 @@ def _powerpoint(package: _Package, *, skip_hidden_slide_groups: bool):
     for index, row in enumerate(slides):
         link = links.get(row.get(f"{{{relationship}}}id"))
         if link is None or link.get("Type") != f"{relationship}/slide" or link.get("TargetMode", "Internal") != "Internal":
-            raise ValueError("The PPTX is missing an internal slide relationship")
+            raise ValueError("The PowerPoint file is missing an internal slide relationship")
         name = _part_name(main_name, link.get("Target", ""))
         if name in seen:
-            raise ValueError("The PPTX repeats a slide relationship")
+            raise ValueError("The PowerPoint file repeats a slide relationship")
         seen.add(name)
         slide = package.xml(name)
         tree = slide.find(f"{presentation}cSld/{presentation}spTree")
         if slide.tag != presentation + "sld" or tree is None:
-            raise ValueError("The PPTX has an unreadable slide")
+            raise ValueError("The PowerPoint file has an unreadable slide")
         if slide.get("show") in ("0", "false"):
             continue
         paragraphs = _slide_paragraphs(tree, presentation, drawing, skip_hidden_slide_groups=skip_hidden_slide_groups)
@@ -254,8 +256,8 @@ def body_parts(path: Path, extension: str, *, check_crc: bool = False,
     try:
         with ZipFile(path) as archive:
             package = _Package(archive)
-            if extension == ".pptx":
-                paragraphs = _powerpoint(package, skip_hidden_slide_groups=skip_hidden_slide_groups)
+            if extension in POWERPOINT_TYPES:
+                paragraphs = _powerpoint(package, extension, skip_hidden_slide_groups=skip_hidden_slide_groups)
             elif extension == ".odp":
                 paragraphs = slide_text(package, max_slides=MAX_TEXT_PARTS, max_chars=limit)
             else:

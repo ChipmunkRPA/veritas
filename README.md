@@ -35,7 +35,7 @@ are not prepared for use as court evidence or expert testimony.
   review shows the original recording intervals it could assess, including
   gaps where speech was too uncertain. Background labels do not establish AI origin.
 - **Documents and email:** source-positioned writing observations and passage links.
-  Upload Word (standard or Strict Open XML DOCX), PDF, ODT, PowerPoint (PPTX),
+  Upload Word (standard or Strict Open XML DOCX), PDF, ODT, PowerPoint (PPTX or PPSX),
   Impress (ODP), Excel (XLSX), Calc (ODS), CSV, TSV, EPUB, RTF, TXT, Markdown,
   HTML, XHTML or email (EML).
   Word evidence identifies body paragraphs, supported table cells, simple text

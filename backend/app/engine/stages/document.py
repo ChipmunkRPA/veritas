@@ -224,7 +224,7 @@ def current_decode_output(output: Any, *, require_current_layout_reader: bool = 
     if (output["meta"].get("method") in document_native_locations.PARAGRAPH_COORDINATES
             and output["meta"].get(document_native_locations.PARAGRAPH_MAP_KEY) != document_native_locations.PARAGRAPH_MAP):
         return False
-    if (output["meta"].get("method") == "pptx"
+    if (output["meta"].get("method") in document_native_locations.POWERPOINT_METHODS
             and output["meta"].get(document_native_locations.PPTX_VISIBILITY_KEY) != document_native_locations.PPTX_VISIBILITY):
         return False
     if (require_current_layout_reader and output["meta"].get("method") == "epub"

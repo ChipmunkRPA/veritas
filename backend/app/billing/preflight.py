@@ -235,7 +235,7 @@ def _document(path: Path, extension: str) -> None:
                              "Remove the hidden formatting or export a PDF that shows the writing. No payment was started.")
     scope = {".docx": "The Word document", ".odt": "The OpenDocument body", ".eml": "The selected email body"}
     too_short = f"{scope.get(extension, 'This document')} needs at least {MIN_WORDS} readable words for writing analysis. No payment was started."
-    if extension in {".pptx", ".odp", ".epub"}:
+    if extension in {".pptx", ".ppsx", ".odp", ".epub"}:
         too_short = (f"The {extension[1:].upper()} needs at least {MIN_WORDS} readable words for writing analysis. "
                      "For image-only pages or slides, upload a PDF for text recognition. No payment was started.")
     elif extension in {".xlsx", ".ods", ".csv", ".tsv"}:

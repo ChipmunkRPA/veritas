@@ -29,9 +29,9 @@ export const TABS: TabSpec[] = [
     formats: 'WAV/WAVE · MP3 · M4A/M4B · OGG/OGA · OPUS · FLAC · up to 150 MB',
   },
   {
-    kind: 'document', label: 'Document', noun: 'a document', accept: '.pdf,.docx,.odt,.pptx,.odp,.xlsx,.ods,.csv,.tsv,.epub,.rtf,.txt,.md,.markdown,.html,.htm,.xhtml,.eml',
-    exts: ['pdf', 'docx', 'odt', 'pptx', 'odp', 'xlsx', 'ods', 'csv', 'tsv', 'epub', 'rtf', 'txt', 'md', 'markdown', 'html', 'htm', 'xhtml', 'eml'], maxBytes: 25 * MB,
-    formats: 'Word (DOCX) · PDF · ODT · PowerPoint (PPTX) · LibreOffice Impress (ODP) · Excel (XLSX) · LibreOffice Calc (ODS) · CSV/TSV · EPUB · RTF · TXT · Markdown · HTML/XHTML · Email (EML) · up to 25 MB',
+    kind: 'document', label: 'Document', noun: 'a document', accept: '.pdf,.docx,.odt,.pptx,.ppsx,.odp,.xlsx,.ods,.csv,.tsv,.epub,.rtf,.txt,.md,.markdown,.html,.htm,.xhtml,.eml',
+    exts: ['pdf', 'docx', 'odt', 'pptx', 'ppsx', 'odp', 'xlsx', 'ods', 'csv', 'tsv', 'epub', 'rtf', 'txt', 'md', 'markdown', 'html', 'htm', 'xhtml', 'eml'], maxBytes: 25 * MB,
+    formats: 'Word (DOCX) · PDF · ODT · PowerPoint (PPTX/PPSX) · LibreOffice Impress (ODP) · Excel (XLSX) · LibreOffice Calc (ODS) · CSV/TSV · EPUB · RTF · TXT · Markdown · HTML/XHTML · Email (EML) · up to 25 MB',
   },
 ]
 
@@ -41,12 +41,14 @@ const slideTemplate = 'Save a presentation from this template as PPTX, ODP or PD
 const sheetTemplate = 'Save a spreadsheet from this template as XLSX, ODS, CSV or PDF, then upload it.'
 const delimitedCoverage = 'Writing is checked within each text field. Reports show the row and column, counting headers and blank records.'
 const htmlCoverage = 'Saved web pages are checked without navigation and text explicitly marked hidden. Visible table cells are read separately. Stylesheets and scripts are outside this check.'
+const powerpointCoverage = 'PowerPoint checks editable text and tables on visible slides. Hidden groups are excluded. Export to PDF to include writing that appears only in images.'
 
 const documentCoverage = new Map(Object.entries({
   docx: 'Word checks body paragraphs, supported tables, filled form controls, and simple text boxes. It also checks supported footnotes and endnotes. Export to PDF to include headers, footers, or text in complex layouts.',
   odt: 'OpenDocument checks the saved body text. Hidden and conditionally displayed sections are outside this check.',
   pdf: 'PDF checks selectable text and can try to recognize text on scans. Some pages or areas may remain unchecked.',
-  pptx: 'PowerPoint checks editable text and tables on visible slides. Hidden groups are excluded. Export to PDF to include writing that appears only in images.',
+  pptx: powerpointCoverage,
+  ppsx: `${powerpointCoverage} Visible slides outside a saved playback range or custom show are also included.`,
   odp: 'Impress checks saved text in supported shapes and tables. Hidden slides, hidden layers and speaker notes are outside this check.',
   xlsx: 'Excel checks saved writing on visible sheets, rows and columns. Cells directly formatted to hide their values are excluded. Formulas, calculated results, comments and images are outside this check.',
   ods: 'OpenDocument spreadsheets check saved writing on visible sheets, rows and columns. Linked sheets, formulas, comments and images are outside this check.',
@@ -78,6 +80,8 @@ const documentExport = new Map(Object.entries({
   pages: 'Export the Apple Pages file as Word (DOCX) or PDF, then upload it.',
   ppt: 'Save the older PowerPoint file as PPTX or PDF, then upload it.',
   pptm: 'Save the presentation as a macro-free PPTX or PDF, then upload it.',
+  pps: 'Save the older PowerPoint show as PPSX, PPTX or PDF, then upload it.',
+  ppsm: 'Save the PowerPoint show as a macro-free PPSX, PPTX or PDF, then upload it.',
   potx: slideTemplate,
   potm: slideTemplate,
   otp: slideTemplate,

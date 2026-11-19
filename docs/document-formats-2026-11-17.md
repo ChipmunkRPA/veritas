@@ -1,7 +1,7 @@
 # Document formats and signed source records
 
 Chipmunk Verify accepts Word (`.docx`), OpenDocument Text (`.odt`), PDF,
-PowerPoint (`.pptx`), LibreOffice Impress (`.odp`), Excel (`.xlsx`),
+PowerPoint (`.pptx`, `.ppsx`), LibreOffice Impress (`.odp`), Excel (`.xlsx`),
 OpenDocument Spreadsheet (`.ods`), CSV, TSV, EPUB, Rich Text (`.rtf`), plain
 text, Markdown, HTML, XHTML, and email (`.eml`). These use the same local
 writing pipeline and produce PDF and JSON reports. The document upload
@@ -16,7 +16,7 @@ upload screen gives format-specific directions when you drop a template.
 | DOCX | Body paragraphs, tables, filled form controls, supported saved fields, simple drawing text boxes, and supported linked footnotes and endnotes in standard and Strict Open XML DOCX. Explicit page and column breaks separate adjacent words in the saved body. Separate revision and visibility checks cover supported structures. | Word body paths, drawing or note references, paragraph character ranges, and available run coordinates |
 | ODT | Body paragraphs, headings, lists, tables, and supported text cross-references outside hidden and conditionally displayed sections | Decoded body paragraph number and character range |
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
-| PPTX | Editable text boxes and tables on visible slides | Slide in presentation order, text block, and decoded character range |
+| PPTX and PPSX | Editable text boxes and tables on slides marked visible in the saved deck. Custom slide show selections and playback settings are outside the check. | Slide in the deck's stored order, text block, and decoded character range |
 | ODP | Saved text in supported slide shapes and tables. Hidden slides, hidden layers and speaker notes are excluded. | Slide in the deck's stored order, text block, and decoded character range |
 | XLSX | Literal text on visible worksheet tabs, rows and columns | Workbook sheet order, row, column and saved cell character range |
 | ODS | Literal text on visible sheets, rows and columns. Linked sheets, formulas and calculated values are outside the check. | Workbook sheet order, row, column and saved cell character range |
@@ -27,6 +27,20 @@ upload screen gives format-specific directions when you drop a template.
 | TXT | Decoded Unicode text | Decoded character offsets |
 | Markdown | Text extracted from the markup outside recognized fenced code blocks | Paragraph and character position in the extracted text |
 | HTML and XHTML | Text extracted from saved `.html`, `.htm`, or `.xhtml` markup. HTML also supports an explicit Windows-1252 or ISO-8859-1 declaration when a file without a byte-order mark fails UTF-8 decoding. | Original markup character ranges for uniquely mapped article passages, otherwise extracted-text positions |
+
+PowerPoint Show uploads use their own macro-free slideshow package type.
+The reader checks the saved package before checkout and retains the original
+`.ppsx` file for evidence verification. Export macro-enabled `.ppsm` or older
+`.pps` files to `.ppsx`, `.pptx` or PDF first.
+[Microsoft's PowerPoint format reference](https://learn.microsoft.com/en-us/office/compatibility/office-file-format-reference#file-formats-that-are-supported-in-powerpoint)
+
+A local Chrome replay completed 14 document analyses after simulated USD
+9.99 checkouts. The replay covered four Word variants, scanned PDF, and a
+LibreOffice-exported PowerPoint Show. A Strict PowerPoint Show with a
+hidden slide retained source positions on slides 1 and 3 in Chrome, PDF
+and JSON. All 14 signed packages verified against their original uploads.
+Four unsuitable files were refused before checkout and no jobs ran before
+payment.
 
 EPUB chapter text with only `aria-hidden` remains eligible because the
 attribute affects accessibility exposure. The reader checks saved chapter
@@ -688,7 +702,7 @@ commands take file paths and provide usage through `--help`.
 
 ## Content Credentials
 
-The offline verifier checks DOCX, ODT, PPTX, ODP, XLSX, ODS, and EPUB for
+The offline verifier checks DOCX, ODT, PPTX, PPSX, ODP, XLSX, ODS, and EPUB for
 the standard embedded C2PA store. It requires cryptographic validation of the active collection hash,
 which covers the document's archive entries and central directory. To skip
 writing checks, the signature must also be trusted on the bundled official
@@ -701,7 +715,7 @@ credentials on attachments cannot authenticate the document body.
 [C2PA ZIP-format specification](https://spec.c2pa.org/specifications/specifications/2.5/specs/ContentCredentials.html#_embedding_manifests_into_zip_based_formats) ·
 [ZIP support in the SDK](https://github.com/contentauth/c2pa-rs/pull/499)
 
-Regression tests sign one authored file in each of the seven formats with a
+Regression tests sign one authored file in each of the eight formats with a
 temporary test certificate. The tests cover simulated $9.99 payment, worker
 execution, PDF and JSON records, and offline verification of the evidence
 package. The writing checks are skipped on trusted, whole-file AI declarations.

@@ -65,7 +65,7 @@ from app.reports.public_verify import SCHEMA
 from app.storage.files import check_docx_safe
 
 EXTENSIONS = {"plain": ".txt", "python-docx": ".docx", "odt": ".odt", "markdown": ".md", "html": ".html",
-              "rtf": ".rtf", "email": ".eml", "pymupdf": ".pdf", "pptx": ".pptx", "odp": ".odp", "epub": ".epub",
+              "rtf": ".rtf", "email": ".eml", "pymupdf": ".pdf", "pptx": ".pptx", "ppsx": ".ppsx", "odp": ".odp", "epub": ".epub",
               "xlsx": ".xlsx", "ods": ".ods", "csv": ".csv", "tsv": ".tsv"}
 MAX_SOURCE_BYTES = 25 * 1024 * 1024
 
@@ -115,7 +115,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     source, coverage = evidence["source"], evidence.get("coverage") or {}
     extension = EXTENSIONS.get(source.get("method"))
     if extension is None:
-        raise ValueError("Original-document verification supports TXT, DOCX, ODT, PPTX, ODP, XLSX, ODS, CSV, TSV, EPUB, RTF, Markdown, HTML, EML and PDF")
+        raise ValueError("Original-document verification supports TXT, DOCX, ODT, PPTX, PPSX, ODP, XLSX, ODS, CSV, TSV, EPUB, RTF, Markdown, HTML, EML and PDF")
     use_current_email_body = (coverage.get("email") or {}).get(email_body.SELECTION_KEY) == email_body.SELECTION_POLICY
     html_policy = coverage.get(document_scope.HTML_STATIC_KEY)
     use_static_html = isinstance(html_policy, str) and html_policy in document_scope.HTML_STATIC_POLICIES

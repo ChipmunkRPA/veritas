@@ -25,9 +25,10 @@ PARAGRAPH_MAP = "decoded-body-paragraphs/1"
 # The saved coordinate describes a decoded text block.
 CELL_METHODS = {"xlsx": "spreadsheet_cell", "ods": "spreadsheet_cell", "csv": "delimited_cell", "tsv": "delimited_cell"}
 PARAGRAPH_COORDINATES = {"odt": "odt_paragraph", "rtf": "rtf_paragraph", "markdown": "markdown_paragraph",
-                         "pptx": "pptx_block", "odp": "odp_block", "epub": "epub_block",
+                         "pptx": "pptx_block", "ppsx": "pptx_block", "odp": "odp_block", "epub": "epub_block",
                          **{method: f"{method}_cell" for method in CELL_METHODS}}
-PACKAGE_METHODS = {"pptx": "slide", "odp": "slide", "epub": "epub_entry"}
+POWERPOINT_METHODS = {"pptx", "ppsx"}
+PACKAGE_METHODS = {"pptx": "slide", "ppsx": "slide", "odp": "slide", "epub": "epub_entry"}
 PACKAGE_LABELS = {"slide": "Slide", "epub_entry": "EPUB reading entry"}
 PPTX_VISIBILITY_KEY = "pptx_visibility"
 PPTX_VISIBILITY = "visible-slide-groups/1"
@@ -292,7 +293,7 @@ def validate(document):
             or document.get("source", {}).get("method") not in PARAGRAPH_COORDINATES):
         raise ValueError("Invalid decoded body paragraph mapping")
     if PPTX_VISIBILITY_KEY in coverage and (coverage[PPTX_VISIBILITY_KEY] != PPTX_VISIBILITY
-            or document.get("source", {}).get("method") != "pptx"):
+            or document.get("source", {}).get("method") not in POWERPOINT_METHODS):
         raise ValueError("Invalid PowerPoint visibility policy")
     if EPUB_VISIBILITY_KEY in coverage and (coverage[EPUB_VISIBILITY_KEY] != EPUB_VISIBILITY
             or document.get("source", {}).get("method") != "epub"):

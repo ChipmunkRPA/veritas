@@ -70,7 +70,7 @@ describe('paid analysis intake', () => {
     expect(submitBatch).not.toHaveBeenCalled()
   })
 
-  it.each(['review.DOCX', 'article.pdf', 'deck.pptx', 'book.xlsx', 'message.eml'])('routes a dropped %s to Document before checkout', async (name) => {
+  it.each(['review.DOCX', 'article.pdf', 'deck.pptx', 'show.PPSX', 'book.xlsx', 'message.eml'])('routes a dropped %s to Document before checkout', async (name) => {
     const file = new File(['sample'], name)
     mount('/upload')
     expect(screen.getByRole('tab', { name: 'Image' }).getAttribute('aria-selected')).toBe('true')
@@ -101,6 +101,7 @@ describe('paid analysis intake', () => {
     ['book.numbers', 'Apple Numbers spreadsheet as Excel (XLSX)'],
     ['letter.DOTX', 'Save a document from this template as DOCX or PDF'],
     ['brief.potx', 'Save a presentation from this template as PPTX, ODP or PDF'],
+    ['brief.ppsm', 'Save the PowerPoint show as a macro-free PPSX, PPTX or PDF'],
     ['book.xltm', 'Save a spreadsheet from this template as XLSX, ODS, CSV or PDF'],
   ])('shows the export format for %s before checkout', async (filename, guidance) => {
     mount('/upload?kind=video')
@@ -114,7 +115,7 @@ describe('paid analysis intake', () => {
   it('accepts Word and saved XHTML, and guides users who choose an older Word file', () => {
     const { container } = mount()
     const input = container.querySelector<HTMLInputElement>('input[type="file"]')!
-    expect(input.accept.split(',')).toEqual(expect.arrayContaining(['.docx', '.pdf', '.odt', '.pptx', '.odp', '.xlsx', '.ods', '.csv', '.tsv', '.epub', '.rtf', '.txt', '.md', '.html', '.xhtml', '.eml']))
+    expect(input.accept.split(',')).toEqual(expect.arrayContaining(['.docx', '.pdf', '.odt', '.pptx', '.ppsx', '.odp', '.xlsx', '.ods', '.csv', '.tsv', '.epub', '.rtf', '.txt', '.md', '.html', '.xhtml', '.eml']))
     fireEvent.change(input, { target: { files: [new File(['old Word'], 'draft.DOC')] } })
     expect(screen.getByRole('alert').textContent).toContain('Save the older Word file as DOCX or PDF')
     fireEvent.change(input, { target: { files: [new File(['Word'], 'draft.DOCX')] } })

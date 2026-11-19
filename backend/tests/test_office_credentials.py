@@ -30,7 +30,7 @@ from app.engine.stages.common import detector_entry
 from app.provenance import c2pa, office_credentials
 from app.reports import engine, public_package, snapshot
 from app.storage.db import Analysis
-from app.storage.files import DOCUMENT_ARCHIVES
+from app.storage.files import DOCUMENT_ARCHIVES, PPSX_MIME, PPTX_MIME
 from scripts.review_public_content_credentials import inspect
 
 PARAGRAPH = "This locally authored paragraph gives the document reader enough ordinary prose to preserve its exact position."
@@ -39,6 +39,7 @@ CONTENT_PARTS = {
     ".docx": "word/document.xml",
     ".odt": "content.xml",
     ".pptx": "ppt/slides/slide1.xml",
+    ".ppsx": "ppt/slides/slide1.xml",
     ".xlsx": "xl/cells.xml",
     ".odp": "content.xml",
     ".ods": "content.xml",
@@ -46,7 +47,7 @@ CONTENT_PARTS = {
 }
 EXPECTED_TEXT = {
     **dict.fromkeys((".docx", ".odt"), f"Test heading\n\n{PARAGRAPH}\n\nKnown table cell"),
-    **dict.fromkeys((".pptx", ".odp", ".epub"), f"{FOLLOWUP}\n\n{PARAGRAPH}"),
+    **dict.fromkeys((".pptx", ".ppsx", ".odp", ".epub"), f"{FOLLOWUP}\n\n{PARAGRAPH}"),
     **dict.fromkeys((".xlsx", ".ods"), f"{PARAGRAPH}\n\n{FOLLOWUP}"),
 }
 ODT_XML = """<office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
@@ -87,6 +88,8 @@ def source(extension):
                 <text:p>{escape(FOLLOWUP)}</text:p>
               </table:table-cell></table:table-row>
             </table:table>''')
+    elif extension == ".ppsx":
+        powerpoint(output, passages=(PARAGRAPH, FOLLOWUP), slideshow=True)
     else:
         make = {".pptx": powerpoint, ".odp": impress, ".epub": epub}[extension]
         make(output, passages=(PARAGRAPH, FOLLOWUP))
@@ -105,7 +108,7 @@ def office(request, signing_material, monkeypatch):
     unsigned = source(extension)
     signer, bundle = signing_material
     monkeypatch.setattr(c2pa, "load_bundle", lambda _: bundle)
-    return extension, mime, unsigned, sign(unsigned, mime, signer), bundle
+    return extension, mime, unsigned, sign(unsigned, PPTX_MIME if mime == PPSX_MIME else mime, signer), bundle
 
 
 def entry(data, mime):

@@ -82,6 +82,18 @@ list. A local test placed 12 blank separators before a scan. The current
 reader preserved the scan's original page number, 13, and recovered all
 36 words. [Scanned PDF coverage receipt](evaluation-panels/document-blank-pages-ocr-2026-11-19.json)
 
+Before checkout, a separate bounded check refuses PDFs of up to 32 pages
+when every page is structurally blank and the file is unrepaired and has
+no saved form. A scan, a saved annotation, or writing on a later page
+keeps the file eligible for the existing checks. This step runs without
+text recognition or a Stripe payment session.
+
+A local Chrome replay completed 24 simulated USD 9.99 purchases, including
+four DOCX variants and three PDFs. Each file produced matching PDF and
+JSON evidence and a signed package verified against the original file.
+Five unusable uploads, including a wholly blank PDF, stopped before payment.
+[Local format and checkout receipt](evaluation-panels/document-checkout-formats-2026-11-19.json)
+
 A local Chromium run completed Word, Excel, ODS, CSV and TSV writing
 analyses after simulated USD 9.99 checkout. Each result displayed source
 positions in the browser and exported both a PDF and JSON. All five signed

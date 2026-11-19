@@ -577,3 +577,18 @@ def test_markup_without_readable_writing_never_reaches_payment_provider(billing)
     assert not billing.created and counts(billing) == (0, 0, 0)
     with billing.sessions() as db:
         assert db.query(BillingOrderRow).count() == 0
+
+
+def test_proven_blank_pdf_never_reaches_payment_provider(billing):
+    import pymupdf
+
+    with pymupdf.open() as document:
+        document.new_page()
+        document.new_page()
+        data = document.tobytes()
+    response = upload(billing, filename="blank.pdf", content=data, kind="document", mime="application/pdf")
+    assert response.status_code == 422
+    assert "Every page in this PDF is blank" in response.json()["detail"]
+    assert not billing.created and counts(billing) == (0, 0, 0)
+    with billing.sessions() as db:
+        assert db.query(BillingOrderRow).count() == 0

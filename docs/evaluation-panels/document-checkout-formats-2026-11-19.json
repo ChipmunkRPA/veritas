@@ -1,0 +1,171 @@
+{
+  "browser": {
+    "opened_evidence_pages": 24,
+    "verified_audio_alias_picker": 3,
+    "page_errors": 0
+  },
+  "cases": {
+    "word-standard.docx": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "word-strict.docx": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "word-apple.docx": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "word-libreoffice.DOCX": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "article.pdf": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 0
+    },
+    "scan.pdf": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 0
+    },
+    "article.odt": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "slides.pptx": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "slides.odp": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "strict-slides.pptx": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "book.xlsx": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "book.ods": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "book.csv": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "book.tsv": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "book.epub": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "accessible.epub": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 0
+    },
+    "article.rtf": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "apple-export.RTF": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "article.txt": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "article.md": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "saved-western.htm": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "article.xhtml": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "message.eml": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 3
+    },
+    "later-page.pdf": {
+      "analysis_finished": true,
+      "pdf_json_agree": true,
+      "source_verified": true,
+      "native_ranges": 0
+    }
+  },
+  "simulated_checkouts": 24,
+  "price_usd_cents": 999,
+  "rejected_before_payment": 5,
+  "jobs_before_payment": 0,
+  "prepayment_document_guards": {
+    "refused": [
+      "entirely blank two-page PDF",
+      "corrupt DOCX",
+      "legacy Word DOC",
+      "hidden-only EPUB",
+      "HTML with undeclared legacy encoding"
+    ],
+    "checkout_eligible_and_analyzed": [
+      "scanned PDF",
+      "selectable text PDF",
+      "PDF with writing after a blank first page"
+    ]
+  }
+}

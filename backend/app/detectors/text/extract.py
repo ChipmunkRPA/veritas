@@ -16,7 +16,6 @@ import subprocess
 import tempfile
 import time
 from collections import Counter
-from contextlib import suppress
 from dataclasses import dataclass, field
 from html import unescape
 from html.parser import HTMLParser
@@ -528,6 +527,23 @@ def _structurally_blank_pdf_page(page) -> bool:
         return False
 
 
+def _can_check_blank_pdf_pages(document) -> bool:
+    try:
+        return (not document.is_repaired
+                and document.xref_get_key(document.pdf_catalog(), "AcroForm")[0] == "null")
+    except (ValueError, RuntimeError):
+        return False
+
+
+def pdf_is_proven_blank(document, *, max_pages: int) -> bool:
+    """Return true only if every page of a bounded PDF is structurally blank."""
+    try:
+        return (0 < document.page_count <= max_pages and _can_check_blank_pdf_pages(document)
+                and all(_structurally_blank_pdf_page(page) for page in document))
+    except (ValueError, RuntimeError):
+        return False
+
+
 def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True,
                 preserve_pdf_wrap_hyphens: bool = False, skip_blank_pdf_pages: bool = False) -> Document:
     import pymupdf
@@ -574,10 +590,7 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool 
 
     with pymupdf.open(path) as doc:
         # A form can supply an appearance apart from the page's own saved content.
-        blank_review = False
-        if skip_blank_pdf_pages and not doc.is_repaired:
-            with suppress(ValueError, RuntimeError):
-                blank_review = doc.xref_get_key(doc.pdf_catalog(), "AcroForm")[0] == "null"
+        blank_review = skip_blank_pdf_pages and _can_check_blank_pdf_pages(doc)
         for page in doc:
             parts = []
             page_parts.append(parts)

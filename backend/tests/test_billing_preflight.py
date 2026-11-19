@@ -132,10 +132,47 @@ def test_scan_without_embedded_text_can_still_reach_pdf_checkout():
     import pymupdf
 
     with pymupdf.open() as document:
+        document.new_page()
         page = document.new_page()
         page.insert_image(pymupdf.Rect(20, 20, 200, 200), stream=png())
         assert not page.get_text().strip()
         verify(document.tobytes(), "image-only-scan.pdf", "document")
+
+
+def test_completely_blank_pdf_is_refused_before_checkout():
+    import pymupdf
+
+    with pymupdf.open() as document:
+        document.new_page()
+        document.new_page()
+        data = document.tobytes()
+    with pytest.raises(preflight.PreflightError, match="Every page in this PDF is blank.*No payment was started"):
+        verify(data, "blank.pdf", "document")
+
+
+@pytest.mark.parametrize("layout", ["later_text", "later_annotation", "form", "over_page_limit", "repaired"])
+def test_pdf_checkout_remains_eligible_without_proof_every_page_is_blank(layout):
+    import pymupdf
+
+    with pymupdf.open() as document:
+        document.new_page()
+        page = document.new_page()
+        if layout == "later_text":
+            page.insert_text((50, 50), WRITING)
+        elif layout == "later_annotation":
+            page.add_text_annot((50, 50), "Saved marginal note.")
+        elif layout == "form":
+            document.xref_set_key(document.pdf_catalog(), "AcroForm", "<</Fields []>>")
+        elif layout == "over_page_limit":
+            for _ in range(preflight.MAX_BLANK_PDF_CHECK_PAGES - 1):
+                document.new_page()
+        data = document.tobytes()
+    if layout == "repaired":
+        before_index = data.rsplit(b"\nstartxref\n", 1)[0]
+        data = before_index + b"\nstartxref\n0\n%%EOF\n"
+        with pymupdf.open(stream=data) as repaired:
+            assert repaired.is_repaired
+    verify(data, "possible-content.pdf", "document")
 
 
 @pytest.mark.parametrize("layout", ["alternative", "related", "named_attachment"])

@@ -22,6 +22,7 @@ from typing import BinaryIO
 WALL_SECONDS = 15
 PARSER_CPU_SECONDS = 12
 MAX_IMAGE_PIXELS = 80_000_000  # Matches engine.media.StoredMedia.
+MAX_BLANK_PDF_CHECK_PAGES = 32  # Bound prepayment checks without opening or rendering page content.
 CHUNK = 1024 * 1024
 
 
@@ -174,11 +175,16 @@ def _only_directly_hidden_word_text(document) -> bool:
 def _document(path: Path, extension: str) -> None:
     if extension == ".pdf":
         import pymupdf
+
+        from app.detectors.text.extract import pdf_is_proven_blank
+
         with pymupdf.open(path) as document:
             if not document.is_pdf or document.needs_pass or document.page_count < 1:
                 raise PreflightError("The PDF is empty, unreadable or password-protected. Export an unlocked PDF before paying.")
             # Loading the first page exercises the page tree without OCR or a raster allocation.
             document.load_page(0)
+            if pdf_is_proven_blank(document, max_pages=MAX_BLANK_PDF_CHECK_PAGES):
+                raise PreflightError("Every page in this PDF is blank. Export a copy that shows the document. No payment was started.")
         return
 
     from app.core.config import settings

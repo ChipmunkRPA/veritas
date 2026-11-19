@@ -21,6 +21,9 @@ The [held 25 fps face comparison](video-face-matched-detail-native25-confirmatio
 adds broader ordinary blur controls and publishes the alert tradeoff.
 A [stricter comparison on six new groups](video-face-matched-detail-native25-point20-2026-11-19.md)
 kept the exact swap ranges and reduced the additional ordinary alerts.
+The [25 fps HEVC transfer](video-short-face-hevc-25-holdout-2026-11-19.md)
+located two compound swaps and exposed a shortfall in measurable ordinary
+controls.
 
 The [learned speech reconstruction preflight](audio-learned-enrollment-genuine-preflight-2026-11-19.md)
 reviews two held noisy source groups. The replay checks grouped acoustic
@@ -28,6 +31,9 @@ measurements. A [separate clone retention test](audio-learned-enrollment-conditi
 preserved four held noisy deliveries and substantially suppressed one held
 clean edit. A [separate fixed-point detector comparison](audio-learned-enrollment-serving750-2026-11-19.md)
 found no useful gains from adding the extracted view.
+The [second voice-conversion trial](audio-openvoice-enrollment-2026-11-19.md)
+recounts paired outcomes from a different conversion pipeline with genuine
+splice and resampling controls, and separate isolated backgrounds.
 
 From the repository root, run `make replay-evidence` with Python 3.11
 or newer. It uses the standard library to verify the published case

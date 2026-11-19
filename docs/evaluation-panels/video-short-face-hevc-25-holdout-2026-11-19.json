@@ -1,0 +1,773 @@
+{
+  "commitments": {
+    "freeze.json": "a21c280bff911d6c130eb258c8b111214f9fac47dc5d31ebceeb896d3b3b1dd3",
+    "independent-media.json": "aeeb5f871884d347fcc17dd0ce904ca277480b9436922a8382235af8414c14e0",
+    "measurements.jsonl": "b92829946f0c42a3711518e2ae5801eb282f116f19f3e0aaa86e5468a52ee5b7",
+    "media.json": "c96abb35b226b45dacf2836bf918944ca7788ac0d3586d7a1e9ea867790a41d7",
+    "result-final.json": "792bdf74037dfb624748d9db1346cd5ac68c60cc0c146cd9021ee00a7eaa559b",
+    "scorer-lock.json": "a6d9f7074fe9f8707c4481ed0c45ced005ad4642afb491c6c11bd3b2b5c23110"
+  },
+  "gate": {
+    "gain": 2,
+    "gain_groups": 2,
+    "max_added_cut": 0,
+    "max_added_ordinary": 1,
+    "max_wrong": 0,
+    "min_ordinary_with_views": 4
+  },
+  "observations": [
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 1,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "untouched",
+      "staged_start": null,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": true,
+      "group": 1,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "cut",
+      "staged_start": 77,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 1,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "ordinary_blur",
+      "staged_start": 77,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "avc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 1,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "ordinary_blur",
+      "staged_start": 77,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 1,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "ordinary_light",
+      "staged_start": 77,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 1,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "clean_swap",
+      "staged_start": 77,
+      "truth": [
+        77,
+        81
+      ],
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "localized",
+      "exact_cut_observed": false,
+      "group": 1,
+      "incumbent": [],
+      "native_replay": {
+        "display_frames": [
+          76,
+          79,
+          81
+        ],
+        "range": [
+          77,
+          81
+        ],
+        "range_ticks": [
+          277200,
+          291600
+        ],
+        "response_hex": "0x1.3e973ec459ad3p-1",
+        "views": 10
+      },
+      "new_hevc_range": [
+        77,
+        81
+      ],
+      "role": "swap_plus_blur",
+      "staged_start": 77,
+      "truth": [
+        77,
+        81
+      ],
+      "with_views": true
+    },
+    {
+      "codec": "avc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 1,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "swap_plus_blur",
+      "staged_start": 77,
+      "truth": [
+        77,
+        81
+      ],
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 2,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "untouched",
+      "staged_start": null,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": true,
+      "group": 2,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "cut",
+      "staged_start": 97,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "no_match",
+      "exact_cut_observed": false,
+      "group": 2,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "ordinary_blur",
+      "staged_start": 97,
+      "truth": null,
+      "with_views": true
+    },
+    {
+      "codec": "avc",
+      "coverage": "no_match",
+      "exact_cut_observed": false,
+      "group": 2,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "ordinary_blur",
+      "staged_start": 97,
+      "truth": null,
+      "with_views": true
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 2,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "ordinary_light",
+      "staged_start": 97,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 2,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "clean_swap",
+      "staged_start": 97,
+      "truth": [
+        97,
+        100
+      ],
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "localized",
+      "exact_cut_observed": false,
+      "group": 2,
+      "incumbent": [],
+      "native_replay": {
+        "display_frames": [
+          96,
+          98,
+          100
+        ],
+        "range": [
+          97,
+          100
+        ],
+        "range_ticks": [
+          349200,
+          360000
+        ],
+        "response_hex": "0x1.c8678475c1d68p-2",
+        "views": 9
+      },
+      "new_hevc_range": [
+        97,
+        100
+      ],
+      "role": "swap_plus_blur",
+      "staged_start": 97,
+      "truth": [
+        97,
+        100
+      ],
+      "with_views": true
+    },
+    {
+      "codec": "avc",
+      "coverage": "localized",
+      "exact_cut_observed": false,
+      "group": 2,
+      "incumbent": [
+        [
+          97,
+          100
+        ]
+      ],
+      "native_replay": {
+        "display_frames": [
+          96,
+          98,
+          100
+        ],
+        "range": [
+          97,
+          100
+        ],
+        "range_ticks": [
+          349200,
+          360000
+        ],
+        "response_hex": "0x1.67fc927ca70d0p-2",
+        "views": 9
+      },
+      "new_hevc_range": null,
+      "role": "swap_plus_blur",
+      "staged_start": 97,
+      "truth": [
+        97,
+        100
+      ],
+      "with_views": true
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 3,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "untouched",
+      "staged_start": null,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": true,
+      "group": 3,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "cut",
+      "staged_start": 89,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 3,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "ordinary_blur",
+      "staged_start": 89,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "avc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 3,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "ordinary_blur",
+      "staged_start": 89,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 3,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "ordinary_light",
+      "staged_start": 89,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 3,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "clean_swap",
+      "staged_start": 89,
+      "truth": [
+        89,
+        93
+      ],
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 3,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "swap_plus_blur",
+      "staged_start": 89,
+      "truth": [
+        89,
+        93
+      ],
+      "with_views": false
+    },
+    {
+      "codec": "avc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 3,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "swap_plus_blur",
+      "staged_start": 89,
+      "truth": [
+        89,
+        93
+      ],
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 4,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "untouched",
+      "staged_start": null,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": true,
+      "group": 4,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "cut",
+      "staged_start": 67,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "no_match",
+      "exact_cut_observed": false,
+      "group": 4,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "ordinary_blur",
+      "staged_start": 67,
+      "truth": null,
+      "with_views": true
+    },
+    {
+      "codec": "avc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 4,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "ordinary_blur",
+      "staged_start": 67,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 4,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "ordinary_light",
+      "staged_start": 67,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 4,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "clean_swap",
+      "staged_start": 67,
+      "truth": [
+        67,
+        70
+      ],
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 4,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "swap_plus_blur",
+      "staged_start": 67,
+      "truth": [
+        67,
+        70
+      ],
+      "with_views": false
+    },
+    {
+      "codec": "avc",
+      "coverage": "localized",
+      "exact_cut_observed": false,
+      "group": 4,
+      "incumbent": [
+        [
+          67,
+          70
+        ]
+      ],
+      "native_replay": {
+        "display_frames": [
+          66,
+          68,
+          70
+        ],
+        "range": [
+          67,
+          70
+        ],
+        "range_ticks": [
+          241200,
+          252000
+        ],
+        "response_hex": "0x1.80108cd04d242p-2",
+        "views": 9
+      },
+      "new_hevc_range": null,
+      "role": "swap_plus_blur",
+      "staged_start": 67,
+      "truth": [
+        67,
+        70
+      ],
+      "with_views": true
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 5,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "untouched",
+      "staged_start": null,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": true,
+      "group": 5,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "cut",
+      "staged_start": 69,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 5,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "ordinary_blur",
+      "staged_start": 69,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "avc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 5,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "ordinary_blur",
+      "staged_start": 69,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 5,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "ordinary_light",
+      "staged_start": 69,
+      "truth": null,
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 5,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "clean_swap",
+      "staged_start": 69,
+      "truth": [
+        69,
+        73
+      ],
+      "with_views": false
+    },
+    {
+      "codec": "hevc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 5,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "swap_plus_blur",
+      "staged_start": 69,
+      "truth": [
+        69,
+        73
+      ],
+      "with_views": false
+    },
+    {
+      "codec": "avc",
+      "coverage": "unassessed",
+      "exact_cut_observed": false,
+      "group": 5,
+      "incumbent": [],
+      "native_replay": null,
+      "new_hevc_range": null,
+      "role": "swap_plus_blur",
+      "staged_start": 69,
+      "truth": [
+        69,
+        73
+      ],
+      "with_views": false
+    }
+  ],
+  "point_hex": "0x1.999999999999ap-3",
+  "profile": {
+    "frames": 120,
+    "rate": "25/1",
+    "size": [
+      1280,
+      720
+    ],
+    "step": 3600,
+    "time_base": "1/90000"
+  },
+  "schema": "chipmunk.video-short-face-hevc-25-holdout/1",
+  "summary": {
+    "added_ordinary_ranges": 0,
+    "bound_native_views": 37,
+    "gain_groups": 2,
+    "native_rgb_anchors": 12,
+    "ordinary_measured_files": 2,
+    "qualifies": false,
+    "rows": {
+      "avc/ordinary_blur": {
+        "added_ordinary_ranges": 0,
+        "files": 5,
+        "new_ordinary_files": 0,
+        "no_match": 1,
+        "stock_ordinary_files": 0,
+        "unassessed": 4,
+        "with_views": 1
+      },
+      "avc/swap_plus_blur": {
+        "enhanced_exact": 2,
+        "enhanced_useful": 2,
+        "files": 5,
+        "localized": 2,
+        "stock_exact": 2,
+        "stock_useful": 2,
+        "strict_added": 0,
+        "unassessed": 3,
+        "with_views": 2,
+        "wrong_added": 0
+      },
+      "hevc/clean_swap": {
+        "enhanced_exact": 0,
+        "enhanced_useful": 0,
+        "files": 5,
+        "stock_exact": 0,
+        "stock_useful": 0,
+        "strict_added": 0,
+        "unassessed": 5,
+        "with_views": 0,
+        "wrong_added": 0
+      },
+      "hevc/cut": {
+        "added_ordinary_ranges": 0,
+        "files": 5,
+        "new_ordinary_files": 0,
+        "stock_ordinary_files": 0,
+        "unassessed": 5,
+        "with_views": 0
+      },
+      "hevc/ordinary_blur": {
+        "added_ordinary_ranges": 0,
+        "files": 5,
+        "new_ordinary_files": 0,
+        "no_match": 2,
+        "stock_ordinary_files": 0,
+        "unassessed": 3,
+        "with_views": 2
+      },
+      "hevc/ordinary_light": {
+        "added_ordinary_ranges": 0,
+        "files": 5,
+        "new_ordinary_files": 0,
+        "stock_ordinary_files": 0,
+        "unassessed": 5,
+        "with_views": 0
+      },
+      "hevc/swap_plus_blur": {
+        "enhanced_exact": 2,
+        "enhanced_useful": 2,
+        "files": 5,
+        "localized": 2,
+        "stock_exact": 0,
+        "stock_useful": 0,
+        "strict_added": 2,
+        "unassessed": 3,
+        "with_views": 2,
+        "wrong_added": 0
+      },
+      "hevc/untouched": {
+        "added_ordinary_ranges": 0,
+        "files": 5,
+        "new_ordinary_files": 0,
+        "stock_ordinary_files": 0,
+        "unassessed": 5,
+        "with_views": 0
+      }
+    },
+    "verified_literal_cut_edges": 5,
+    "wrong_added_ranges": 0
+  },
+  "verified_originals": {
+    "exact_paired_sequences": 10,
+    "files": 40,
+    "frames_rgb_pts": 4800,
+    "native_roi_observed": 5,
+    "source_ordinals": 600
+  }
+}

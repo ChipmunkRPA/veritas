@@ -1,0 +1,3380 @@
+{
+  "acoustic_groups": [
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "clean",
+      "kind": "synthetic_converted",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 2,
+      "role": "development",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 0
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "clean",
+      "kind": "synthetic_converted",
+      "reference": "wrong_reference",
+      "retained_at_least_minus3": 0,
+      "role": "development",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 0
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "clean",
+      "kind": "untouched",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 2,
+      "role": "development",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 0
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "clean",
+      "kind": "same_reader_splice",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 2,
+      "role": "development",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 0
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "clean",
+      "kind": "different_reader_splice",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 0,
+      "role": "development",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 0
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "clean",
+      "kind": "local_resampling",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 2,
+      "role": "development",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 0
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "minus5",
+      "kind": "synthetic_converted",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 2,
+      "role": "development",
+      "snr_gain_at_least_point5": 2,
+      "snr_gain_cells": 2
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "minus5",
+      "kind": "synthetic_converted",
+      "reference": "wrong_reference",
+      "retained_at_least_minus3": 1,
+      "role": "development",
+      "snr_gain_at_least_point5": 1,
+      "snr_gain_cells": 2
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "minus5",
+      "kind": "untouched",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 2,
+      "role": "development",
+      "snr_gain_at_least_point5": 2,
+      "snr_gain_cells": 2
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "minus5",
+      "kind": "same_reader_splice",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 2,
+      "role": "development",
+      "snr_gain_at_least_point5": 2,
+      "snr_gain_cells": 2
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "minus5",
+      "kind": "different_reader_splice",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 0,
+      "role": "development",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 2
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "minus5",
+      "kind": "local_resampling",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 2,
+      "role": "development",
+      "snr_gain_at_least_point5": 2,
+      "snr_gain_cells": 2
+    },
+    {
+      "absent_target_projection_only": true,
+      "cells": 2,
+      "condition": "minus5",
+      "kind": "background",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 0,
+      "role": "development",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 2
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "minus10",
+      "kind": "synthetic_converted",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 2,
+      "role": "development",
+      "snr_gain_at_least_point5": 2,
+      "snr_gain_cells": 2
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "minus10",
+      "kind": "synthetic_converted",
+      "reference": "wrong_reference",
+      "retained_at_least_minus3": 0,
+      "role": "development",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 2
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "minus10",
+      "kind": "untouched",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 1,
+      "role": "development",
+      "snr_gain_at_least_point5": 2,
+      "snr_gain_cells": 2
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "minus10",
+      "kind": "same_reader_splice",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 2,
+      "role": "development",
+      "snr_gain_at_least_point5": 2,
+      "snr_gain_cells": 2
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "minus10",
+      "kind": "different_reader_splice",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 0,
+      "role": "development",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 2
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 2,
+      "condition": "minus10",
+      "kind": "local_resampling",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 1,
+      "role": "development",
+      "snr_gain_at_least_point5": 2,
+      "snr_gain_cells": 2
+    },
+    {
+      "absent_target_projection_only": true,
+      "cells": 2,
+      "condition": "minus10",
+      "kind": "background",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 0,
+      "role": "development",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 2
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "clean",
+      "kind": "synthetic_converted",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 0,
+      "role": "held",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 0
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "clean",
+      "kind": "synthetic_converted",
+      "reference": "wrong_reference",
+      "retained_at_least_minus3": 0,
+      "role": "held",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 0
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "clean",
+      "kind": "untouched",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 4,
+      "role": "held",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 0
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "clean",
+      "kind": "same_reader_splice",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 4,
+      "role": "held",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 0
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "clean",
+      "kind": "different_reader_splice",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 0,
+      "role": "held",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 0
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "clean",
+      "kind": "local_resampling",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 4,
+      "role": "held",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 0
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "minus5",
+      "kind": "synthetic_converted",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 3,
+      "role": "held",
+      "snr_gain_at_least_point5": 3,
+      "snr_gain_cells": 4
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "minus5",
+      "kind": "synthetic_converted",
+      "reference": "wrong_reference",
+      "retained_at_least_minus3": 0,
+      "role": "held",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 4
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "minus5",
+      "kind": "untouched",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 4,
+      "role": "held",
+      "snr_gain_at_least_point5": 3,
+      "snr_gain_cells": 4
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "minus5",
+      "kind": "same_reader_splice",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 3,
+      "role": "held",
+      "snr_gain_at_least_point5": 3,
+      "snr_gain_cells": 4
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "minus5",
+      "kind": "different_reader_splice",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 1,
+      "role": "held",
+      "snr_gain_at_least_point5": 1,
+      "snr_gain_cells": 4
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "minus5",
+      "kind": "local_resampling",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 4,
+      "role": "held",
+      "snr_gain_at_least_point5": 3,
+      "snr_gain_cells": 4
+    },
+    {
+      "absent_target_projection_only": true,
+      "cells": 4,
+      "condition": "minus5",
+      "kind": "background",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 0,
+      "role": "held",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 4
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "minus10",
+      "kind": "synthetic_converted",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 4,
+      "role": "held",
+      "snr_gain_at_least_point5": 3,
+      "snr_gain_cells": 4
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "minus10",
+      "kind": "synthetic_converted",
+      "reference": "wrong_reference",
+      "retained_at_least_minus3": 0,
+      "role": "held",
+      "snr_gain_at_least_point5": 1,
+      "snr_gain_cells": 4
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "minus10",
+      "kind": "untouched",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 4,
+      "role": "held",
+      "snr_gain_at_least_point5": 4,
+      "snr_gain_cells": 4
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "minus10",
+      "kind": "same_reader_splice",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 2,
+      "role": "held",
+      "snr_gain_at_least_point5": 2,
+      "snr_gain_cells": 4
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "minus10",
+      "kind": "different_reader_splice",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 1,
+      "role": "held",
+      "snr_gain_at_least_point5": 1,
+      "snr_gain_cells": 4
+    },
+    {
+      "absent_target_projection_only": false,
+      "cells": 4,
+      "condition": "minus10",
+      "kind": "local_resampling",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 2,
+      "role": "held",
+      "snr_gain_at_least_point5": 3,
+      "snr_gain_cells": 4
+    },
+    {
+      "absent_target_projection_only": true,
+      "cells": 4,
+      "condition": "minus10",
+      "kind": "background",
+      "reference": "true_reference",
+      "retained_at_least_minus3": 0,
+      "role": "held",
+      "snr_gain_at_least_point5": 0,
+      "snr_gain_cells": 4
+    }
+  ],
+  "acoustic_guard": {
+    "all_held_noisy_untouched_snr_gain_at_least_point5": false,
+    "all_held_synthetic_retention_at_least_minus3": false,
+    "all_held_untouched_retention_at_least_minus3": true
+  },
+  "counts": {
+    "distinct_classifier_inputs": 2489,
+    "extractor_calls": 121,
+    "forensic_calls": 2490,
+    "held_new_background_files": 0,
+    "held_new_genuine_files": 17,
+    "held_new_genuine_lineages": 3,
+    "held_new_noisy_physical_events": 0,
+    "held_new_useful_noisy_deliveries": 0,
+    "new_genuine_files_overall": 21,
+    "new_genuine_lineages_overall": 4,
+    "processed_only_lost_original_useful_deliveries": 3
+  },
+  "groups": [
+    {
+      "arm": "additive",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "clean",
+      "edit_unassessed": 2,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 40000,
+      "flagged": 2,
+      "kind": "synthetic_converted",
+      "missed": 0,
+      "off_target_intervals": 2,
+      "off_target_union_samples": 24000,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 2,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 40000,
+      "flagged": 2,
+      "kind": "synthetic_converted",
+      "missed": 0,
+      "off_target_intervals": 2,
+      "off_target_union_samples": 24000,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 2,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "synthetic_converted",
+      "missed": 1,
+      "off_target_intervals": 1,
+      "off_target_union_samples": 12000,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 1,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "wrong_reference",
+      "condition": "clean",
+      "edit_unassessed": 2,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "synthetic_converted",
+      "missed": 2,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 2,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "background",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "background",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "background",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "synthetic_converted",
+      "missed": 2,
+      "off_target_intervals": 2,
+      "off_target_union_samples": 20000,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 2,
+      "wrong_only": 1
+    },
+    {
+      "arm": "original",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "synthetic_converted",
+      "missed": 2,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "synthetic_converted",
+      "missed": 2,
+      "off_target_intervals": 2,
+      "off_target_union_samples": 20000,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 2,
+      "wrong_only": 1
+    },
+    {
+      "arm": "wrong_reference",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "synthetic_converted",
+      "missed": 2,
+      "off_target_intervals": 2,
+      "off_target_union_samples": 20000,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 2,
+      "wrong_only": 1
+    },
+    {
+      "arm": "additive",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "background",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "background",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "background",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 44000,
+      "flagged": 1,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 28000,
+      "flagged": 1,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 40000,
+      "flagged": 1,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 28000,
+      "flagged": 1,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 28000,
+      "flagged": 1,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 28000,
+      "flagged": 1,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 28000,
+      "flagged": 1,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 28000,
+      "flagged": 1,
+      "kind": "synthetic_converted",
+      "missed": 2,
+      "off_target_intervals": 3,
+      "off_target_union_samples": 28000,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 3,
+      "wrong_only": 1
+    },
+    {
+      "arm": "original",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 28000,
+      "flagged": 1,
+      "kind": "synthetic_converted",
+      "missed": 2,
+      "off_target_intervals": 3,
+      "off_target_union_samples": 28000,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 3,
+      "wrong_only": 1
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "synthetic_converted",
+      "missed": 2,
+      "off_target_intervals": 2,
+      "off_target_union_samples": 20000,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 2,
+      "wrong_only": 1
+    },
+    {
+      "arm": "wrong_reference",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "synthetic_converted",
+      "missed": 2,
+      "off_target_intervals": 2,
+      "off_target_union_samples": 20000,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 2,
+      "wrong_only": 1
+    },
+    {
+      "arm": "additive",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 28000,
+      "flagged": 1,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 28000,
+      "flagged": 1,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 2,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "development",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "clean",
+      "edit_unassessed": 1,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "clean",
+      "edit_unassessed": 1,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "clean",
+      "edit_unassessed": 2,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "clean",
+      "edit_unassessed": 1,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "clean",
+      "edit_unassessed": 1,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "clean",
+      "edit_unassessed": 1,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "clean",
+      "edit_unassessed": 1,
+      "files": 4,
+      "flag_union_samples": 40000,
+      "flagged": 2,
+      "kind": "synthetic_converted",
+      "missed": 2,
+      "off_target_intervals": 2,
+      "off_target_union_samples": 24000,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 2,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "clean",
+      "edit_unassessed": 1,
+      "files": 4,
+      "flag_union_samples": 40000,
+      "flagged": 2,
+      "kind": "synthetic_converted",
+      "missed": 2,
+      "off_target_intervals": 2,
+      "off_target_union_samples": 24000,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 2,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "clean",
+      "edit_unassessed": 2,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "synthetic_converted",
+      "missed": 4,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "wrong_reference",
+      "condition": "clean",
+      "edit_unassessed": 4,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "synthetic_converted",
+      "missed": 4,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 3,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "clean",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "background",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "background",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "background",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 88000,
+      "flagged": 3,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 80000,
+      "flagged": 3,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 60000,
+      "flagged": 2,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 60000,
+      "flagged": 2,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 108000,
+      "flagged": 3,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 108000,
+      "flagged": 3,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 40000,
+      "flagged": 2,
+      "kind": "synthetic_converted",
+      "missed": 4,
+      "off_target_intervals": 4,
+      "off_target_union_samples": 40000,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 4,
+      "wrong_only": 2
+    },
+    {
+      "arm": "original",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "synthetic_converted",
+      "missed": 4,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 40000,
+      "flagged": 2,
+      "kind": "synthetic_converted",
+      "missed": 4,
+      "off_target_intervals": 4,
+      "off_target_union_samples": 40000,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 4,
+      "wrong_only": 2
+    },
+    {
+      "arm": "wrong_reference",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "synthetic_converted",
+      "missed": 4,
+      "off_target_intervals": 2,
+      "off_target_union_samples": 20000,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 2,
+      "wrong_only": 1
+    },
+    {
+      "arm": "additive",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 60000,
+      "flagged": 2,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus10",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 60000,
+      "flagged": 2,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "background",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "background",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 0,
+      "flagged": 0,
+      "kind": "background",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 168000,
+      "flagged": 3,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 160000,
+      "flagged": 3,
+      "kind": "different_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 148000,
+      "flagged": 3,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 140000,
+      "flagged": 3,
+      "kind": "local_resampling",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 148000,
+      "flagged": 3,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 140000,
+      "flagged": 3,
+      "kind": "same_reader_splice",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "additive",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 148000,
+      "flagged": 3,
+      "kind": "synthetic_converted",
+      "missed": 4,
+      "off_target_intervals": 15,
+      "off_target_union_samples": 148000,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 15,
+      "wrong_only": 3
+    },
+    {
+      "arm": "original",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "synthetic_converted",
+      "missed": 4,
+      "off_target_intervals": 2,
+      "off_target_union_samples": 20000,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 2,
+      "wrong_only": 1
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 140000,
+      "flagged": 3,
+      "kind": "synthetic_converted",
+      "missed": 4,
+      "off_target_intervals": 14,
+      "off_target_union_samples": 140000,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 14,
+      "wrong_only": 3
+    },
+    {
+      "arm": "wrong_reference",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "synthetic_converted",
+      "missed": 4,
+      "off_target_intervals": 2,
+      "off_target_union_samples": 20000,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 2,
+      "wrong_only": 1
+    },
+    {
+      "arm": "additive",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 148000,
+      "flagged": 3,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "original",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 20000,
+      "flagged": 1,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    },
+    {
+      "arm": "true_reference",
+      "condition": "minus5",
+      "edit_unassessed": 0,
+      "files": 4,
+      "flag_union_samples": 140000,
+      "flagged": 3,
+      "kind": "untouched",
+      "missed": 0,
+      "off_target_intervals": 0,
+      "off_target_union_samples": 0,
+      "role": "held",
+      "unassessed": 0,
+      "useful": 0,
+      "wholly_outside_intervals": 0,
+      "wrong_only": 0
+    }
+  ],
+  "limitations": {
+    "acoustic_features_published": false,
+    "base_generator_exact_checkpoint_unverified": true,
+    "biometric_identity_verified": false,
+    "confidence_changed": false,
+    "latest_live_background_refresh_completed": false,
+    "per_case_outcomes_published": false,
+    "possible_extractor_training_corpus_overlap": true,
+    "prior_project_source_exposure": true,
+    "private_closure_required_for_source_replay": true,
+    "production_activation_supported": false,
+    "raw_audio_published": false,
+    "retained_native_background_replay_verified": true
+  },
+  "new_genuine_files_per_reader_histograms": [
+    {
+      "histogram": {
+        "0": 1,
+        "1": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "2": 0,
+        "3": 0,
+        "4": 1,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "role": "development"
+    },
+    {
+      "histogram": {
+        "0": 1,
+        "1": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "2": 0,
+        "3": 0,
+        "4": 1,
+        "5": 1,
+        "6": 0,
+        "7": 0,
+        "8": 1,
+        "9": 0
+      },
+      "role": "held"
+    }
+  ],
+  "new_noisy_useful_deliveries_per_event_histograms": [
+    {
+      "histogram": {
+        "0": 2,
+        "1": 0,
+        "2": 0
+      },
+      "role": "development"
+    },
+    {
+      "histogram": {
+        "0": 4,
+        "1": 0,
+        "2": 0
+      },
+      "role": "held"
+    }
+  ],
+  "new_useful_control_collisions": [
+    {
+      "condition": "clean",
+      "new_useful": 0,
+      "role": "development",
+      "with_matched_control_collision": 0
+    },
+    {
+      "condition": "minus5",
+      "new_useful": 0,
+      "role": "development",
+      "with_matched_control_collision": 0
+    },
+    {
+      "condition": "minus10",
+      "new_useful": 0,
+      "role": "development",
+      "with_matched_control_collision": 0
+    },
+    {
+      "condition": "clean",
+      "new_useful": 0,
+      "role": "held",
+      "with_matched_control_collision": 0
+    },
+    {
+      "condition": "minus5",
+      "new_useful": 0,
+      "role": "held",
+      "with_matched_control_collision": 0
+    },
+    {
+      "condition": "minus10",
+      "new_useful": 0,
+      "role": "held",
+      "with_matched_control_collision": 0
+    }
+  ],
+  "paired_transitions": [
+    {
+      "condition": "clean",
+      "files": 2,
+      "kind": "synthetic_converted",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          0,
+          1,
+          0,
+          1
+        ],
+        "useful": [
+          0,
+          1,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "files": 2,
+      "kind": "untouched",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          2,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "files": 2,
+      "kind": "same_reader_splice",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          2,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "files": 2,
+      "kind": "different_reader_splice",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          2,
+          0,
+          0
+        ],
+        "flag": [
+          2,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "files": 2,
+      "kind": "local_resampling",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          2,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "minus5",
+      "files": 2,
+      "kind": "synthetic_converted",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          1,
+          0,
+          0,
+          1
+        ],
+        "useful": [
+          2,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "minus5",
+      "files": 2,
+      "kind": "untouched",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          1,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "condition": "minus5",
+      "files": 2,
+      "kind": "same_reader_splice",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          1,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "condition": "minus5",
+      "files": 2,
+      "kind": "different_reader_splice",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          1,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "condition": "minus5",
+      "files": 2,
+      "kind": "local_resampling",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          1,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    {
+      "condition": "minus5",
+      "files": 2,
+      "kind": "background",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          2,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "minus10",
+      "files": 2,
+      "kind": "synthetic_converted",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          1,
+          0,
+          1,
+          0
+        ],
+        "useful": [
+          2,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "minus10",
+      "files": 2,
+      "kind": "untouched",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          1,
+          0,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "minus10",
+      "files": 2,
+      "kind": "same_reader_splice",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          1,
+          0,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "minus10",
+      "files": 2,
+      "kind": "different_reader_splice",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          1,
+          0,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "minus10",
+      "files": 2,
+      "kind": "local_resampling",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          1,
+          0,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "minus10",
+      "files": 2,
+      "kind": "background",
+      "role": "development",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          2,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "files": 4,
+      "kind": "synthetic_converted",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          1,
+          1,
+          0,
+          2
+        ],
+        "flag": [
+          2,
+          2,
+          0,
+          0
+        ],
+        "useful": [
+          2,
+          2,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "files": 4,
+      "kind": "untouched",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "flag": [
+          4,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "files": 4,
+      "kind": "same_reader_splice",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          1,
+          0,
+          0,
+          3
+        ],
+        "flag": [
+          4,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "files": 4,
+      "kind": "different_reader_splice",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          1,
+          1,
+          0,
+          2
+        ],
+        "flag": [
+          4,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "files": 4,
+      "kind": "local_resampling",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "flag": [
+          4,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "minus5",
+      "files": 4,
+      "kind": "synthetic_converted",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "flag": [
+          1,
+          0,
+          2,
+          1
+        ],
+        "useful": [
+          4,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "minus5",
+      "files": 4,
+      "kind": "untouched",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "flag": [
+          1,
+          0,
+          2,
+          1
+        ]
+      }
+    },
+    {
+      "condition": "minus5",
+      "files": 4,
+      "kind": "same_reader_splice",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "flag": [
+          1,
+          0,
+          2,
+          1
+        ]
+      }
+    },
+    {
+      "condition": "minus5",
+      "files": 4,
+      "kind": "different_reader_splice",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "flag": [
+          1,
+          0,
+          2,
+          1
+        ]
+      }
+    },
+    {
+      "condition": "minus5",
+      "files": 4,
+      "kind": "local_resampling",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "flag": [
+          1,
+          0,
+          2,
+          1
+        ]
+      }
+    },
+    {
+      "condition": "minus5",
+      "files": 4,
+      "kind": "background",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "flag": [
+          4,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "minus10",
+      "files": 4,
+      "kind": "synthetic_converted",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "flag": [
+          2,
+          0,
+          2,
+          0
+        ],
+        "useful": [
+          4,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "minus10",
+      "files": 4,
+      "kind": "untouched",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "flag": [
+          2,
+          0,
+          2,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "minus10",
+      "files": 4,
+      "kind": "same_reader_splice",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "flag": [
+          1,
+          0,
+          3,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "minus10",
+      "files": 4,
+      "kind": "different_reader_splice",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "flag": [
+          1,
+          0,
+          2,
+          1
+        ]
+      }
+    },
+    {
+      "condition": "minus10",
+      "files": 4,
+      "kind": "local_resampling",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "flag": [
+          2,
+          0,
+          2,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "minus10",
+      "files": 4,
+      "kind": "background",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          4
+        ],
+        "flag": [
+          4,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "research_gate": {
+    "at_most_one_new_genuine_file_overall": false,
+    "at_most_one_new_genuine_lineage_overall": false,
+    "at_most_one_new_held_genuine_file": false,
+    "at_most_one_new_held_genuine_lineage": false,
+    "held_genuine_edit_coverage_at_least80percent": true,
+    "held_synthetic_edit_coverage_at_least80percent": true,
+    "no_new_useful_same_clock_matched_control_collision": true,
+    "two_new_held_noisy_physical_events": false,
+    "zero_added_held_background_flags": true
+  },
+  "schema": "chipmunk.openvoice-v2-enrollment-serving750-anonymous/1",
+  "scope": {
+    "background_deliveries": 12,
+    "base_utterances": 2,
+    "conversion_pipelines": 1,
+    "development_readers": 2,
+    "extractor_outputs": 120,
+    "forensic_point": 6.642364579351768,
+    "forensic_step_samples": 8000,
+    "forensic_window_samples": 12000,
+    "genuine_deliveries": 72,
+    "held_meetings": 1,
+    "held_physical_synthetic_events": 4,
+    "held_readers": 4,
+    "meeting_groups": 2,
+    "native_rate": 16000,
+    "physical_synthetic_events": 6,
+    "readers": 6,
+    "scheduled_windows_per_view": 23,
+    "source_deliveries": 102,
+    "source_samples": 192000,
+    "synthetic_deliveries": 18,
+    "uncovered_tail_samples": 4000,
+    "views": 222
+  },
+  "verification": {
+    "admitted_window_bindings": 4441,
+    "authored_acoustic_controls": 7,
+    "authored_selection_controls": 8,
+    "extraction_output_values": 23040000,
+    "forensic_view_sample_values": 42624000,
+    "independent_acoustic_review": true,
+    "independent_detector_review": true,
+    "independent_native_review": true,
+    "independent_panel_review": true,
+    "native_input_sample_values": 19584000,
+    "outside_edit_identities": 12718080,
+    "scheduled_window_bindings": 5106
+  }
+}

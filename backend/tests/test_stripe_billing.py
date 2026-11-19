@@ -12,6 +12,7 @@ from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager
 from pathlib import Path
 from types import SimpleNamespace
+from zipfile import ZipFile
 
 import pytest
 from fastapi import FastAPI
@@ -132,6 +133,27 @@ def test_checkout_rejects_ineligible_writing_before_creating_any_order(billing, 
     response = upload(billing, filename=filename, content=content, kind="document", mime="application/octet-stream")
     assert response.status_code == 422
     assert message in response.json()["detail"]
+    assert billing.created == []
+    with billing.sessions() as db:
+        assert db.query(BillingOrderRow).count() == db.query(Analysis).count() == db.query(Job).count() == 0
+
+
+@pytest.mark.parametrize(("filename", "guidance"), [
+    ("draft.GDOC", "Google Docs document as Word (DOCX)"),
+    ("notes.gsheet", "Google Sheets spreadsheet as Excel (XLSX)"),
+    ("brief.gslides", "Google Slides presentation as PowerPoint (PPTX)"),
+    ("book.numbers", "Apple Numbers spreadsheet as Excel (XLSX)"),
+])
+def test_checkout_guides_exports_before_creating_any_order(billing, filename, guidance):
+    content = b'{"url":"https://docs.google.com/example"}'
+    if filename.endswith(".numbers"):
+        source = io.BytesIO()
+        with ZipFile(source, "w") as archive:
+            archive.writestr("Index/Document.iwa", b"Numbers")
+        content = source.getvalue()
+    response = upload(billing, filename=filename, content=content, kind="document", mime="application/octet-stream")
+    assert response.status_code == 415
+    assert guidance in response.json()["detail"]
     assert billing.created == []
     with billing.sessions() as db:
         assert db.query(BillingOrderRow).count() == db.query(Analysis).count() == db.query(Job).count() == 0

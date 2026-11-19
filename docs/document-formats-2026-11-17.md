@@ -171,8 +171,16 @@ hidden runs out of the writing and kept 17 visible source anchors. A separate
 RTF with only hidden writing could not start checkout.
 [Current local format and export receipt](evaluation-panels/document-formats-current-2026-11-18.json)
 
-Export Google Docs, Apple Pages, and older Word (`.doc`) files as DOCX or
-PDF before uploading. Export Google Slides and Keynote as PowerPoint or PDF.
+Export Google Docs, Apple Pages and older Word (`.doc`) files as DOCX or
+PDF before uploading. Export Google Sheets, Apple Numbers and older Excel
+files as XLSX or PDF. Export Google Slides, Apple Keynote and older
+PowerPoint files as PPTX or PDF. For a zipped Google Docs web export,
+extract and upload the HTML file. The upload screen and checkout API give
+export instructions for Google Workspace shortcut files (`.gdoc`, `.gsheet`,
+`.gslides`) and Apple Numbers files (`.numbers`).
+[Google Workspace export formats](https://developers.google.com/workspace/drive/api/guides/ref-export-formats)
+· [Apple iWork export formats](https://support.apple.com/en-us/105050)
+
 Export Outlook (`.msg`) files as EML or PDF. Keep the
 original file if its native provenance matters. A PDF export can include
 Word notes outside the native check, text boxes, headers and footers in

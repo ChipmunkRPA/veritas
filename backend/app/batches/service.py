@@ -373,7 +373,8 @@ def expand(batch_id: str, *, submit: Callable[[str], None]) -> str:
                     src.seek(0)
                     kind = detect_kind(head, name)
                     if kind is None:
-                        raise ItemRefused("Unrecognised file type: accepted are images, videos, audio and documents.")
+                        guidance = files.DOCUMENT_EXPORT_GUIDANCE.get(PurePosixPath(name).suffix.lower())
+                        raise ItemRefused(guidance or "Unrecognised file type: accepted are images, videos, audio and documents.")
                     outcome = intake.take_in(src, PurePosixPath(name).name, kind, principal_id=batch["created_by"], case_id=batch["case_id"],
                                              acquisition=intake.Acquisition(method="other", notes=f"Batch {batch_id}, item {seq + 1}: {name}"[:4000]),
                                              analyze=True, profile=batch["profile"],

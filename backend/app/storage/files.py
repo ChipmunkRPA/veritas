@@ -31,6 +31,12 @@ DOCUMENT_ARCHIVE_EXTENSIONS = {mime: extension for extension, mime in DOCUMENT_A
 DELIMITED_TEXT = {".csv": "text/csv", ".tsv": "text/tab-separated-values"}
 HTML_EXTS = (".html", ".htm", ".xhtml")
 DOC_EXTS = {".pdf", ".txt", ".md", ".markdown", ".eml", ".rtf", *HTML_EXTS, *DOCUMENT_ARCHIVES, *DELIMITED_TEXT}
+DOCUMENT_EXPORT_GUIDANCE = {
+    ".gdoc": "Download the Google Docs document as Word (DOCX) or PDF, then upload the downloaded file.",
+    ".gsheet": "Download the Google Sheets spreadsheet as Excel (XLSX) or PDF, then upload the downloaded file.",
+    ".gslides": "Download the Google Slides presentation as PowerPoint (PPTX) or PDF, then upload the downloaded file.",
+    ".numbers": "Export the Apple Numbers spreadsheet as Excel (XLSX), CSV or PDF, then upload the exported file.",
+}
 RTF_HEADER = re.compile(rb"\{\\rtf1(?=[\\{}\s])")
 M4A_BRANDS = {b"M4A ", b"M4B "}
 ISO_BRANDS = {b"isom", b"iso2", b"iso4", b"iso5", b"iso6", b"mp41", b"mp42", b"dash"}
@@ -249,6 +255,8 @@ def validate_kind(kind: str, data: bytes, filename: str, size: int | None = None
             ext = ext if ext in DOC_EXTS else ".txt"
         else:
             upload_ext = Path(filename).suffix.lower()
+            if message := DOCUMENT_EXPORT_GUIDANCE.get(upload_ext):
+                raise ValueError(message)
             if upload_ext in {".doc", ".docm", ".pages", ".msg", ".ppt", ".pptm", ".key"}:
                 raise ValueError("Export Word or Pages files as DOCX or PDF, presentations as PPTX or PDF, and Outlook messages as EML or PDF.")
             if upload_ext in {".xls", ".xlsx", ".xlsm", ".ods"}:

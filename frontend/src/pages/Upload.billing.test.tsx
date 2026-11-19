@@ -70,6 +70,20 @@ describe('paid analysis intake', () => {
     expect(billingApi.checkout).not.toHaveBeenCalled()
   })
 
+  it.each([
+    ['draft.GDOC', 'Google Docs document as Word (DOCX)'],
+    ['notes.gsheet', 'Google Sheets spreadsheet as Excel (XLSX)'],
+    ['brief.gslides', 'Google Slides presentation as PowerPoint (PPTX)'],
+    ['book.numbers', 'Apple Numbers spreadsheet as Excel (XLSX)'],
+  ])('shows the export format for %s before checkout', async (filename, guidance) => {
+    mount('/upload?kind=video')
+    fireEvent.drop(screen.getByTestId('drop-zone'), { dataTransfer: { files: [new File(['export needed'], filename)] } })
+    expect((await screen.findByRole('alert')).textContent).toContain(guidance)
+    expect(screen.getByRole('tab', { name: 'Document' }).getAttribute('aria-selected')).toBe('true')
+    expect(screen.getByRole('button', { name: /Continue to checkout/ }).hasAttribute('disabled')).toBe(true)
+    expect(billingApi.checkout).not.toHaveBeenCalled()
+  })
+
   it('accepts Word and saved XHTML, and guides users who choose an older Word file', () => {
     const { container } = mount()
     const input = container.querySelector<HTMLInputElement>('input[type="file"]')!

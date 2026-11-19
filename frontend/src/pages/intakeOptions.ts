@@ -60,6 +60,9 @@ export function documentCoverageNotice(filename: string): string | undefined {
 }
 
 const documentExport = new Map(Object.entries({
+  gdoc: 'Download the Google Docs document as Word (DOCX) or PDF, then upload the downloaded file.',
+  gsheet: 'Download the Google Sheets spreadsheet as Excel (XLSX) or PDF, then upload the downloaded file.',
+  gslides: 'Download the Google Slides presentation as PowerPoint (PPTX) or PDF, then upload the downloaded file.',
   doc: 'Save the older Word file as DOCX or PDF, then upload it.',
   docm: 'Save the Word file as a macro-free DOCX or PDF, then upload it.',
   pages: 'Export the Apple Pages file as Word (DOCX) or PDF, then upload it.',
@@ -69,6 +72,7 @@ const documentExport = new Map(Object.entries({
   msg: 'Export the Outlook message as EML or PDF, then upload it.',
   xls: sheetExport,
   xlsm: sheetExport,
+  numbers: 'Export the Apple Numbers spreadsheet as Excel (XLSX), CSV or PDF, then upload the exported file.',
 }))
 
 export function isDocumentFilename(filename: string): boolean {

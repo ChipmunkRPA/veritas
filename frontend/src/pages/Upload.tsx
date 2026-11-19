@@ -245,8 +245,14 @@ export default function Upload() {
         {kind === 'document' && !isBatch && <div className="mt-2 text-caption text-text-muted">
           <p className="m-0">Writing checks need at least {MIN_WORDS} readable words.{!file && ' For scans or image-only slides, upload a PDF for text recognition.'}</p>
           {!file && <details className="mt-1">
-            <summary className="cursor-pointer">Export from Google Docs, Pages, older Office, or Outlook</summary>
-            <p className="mt-1 mb-0">Export Google Docs, Apple Pages, or older Word (.doc) files as DOCX or PDF. Export Google Slides, Keynote, or older PowerPoint files as PPTX or PDF. Export Outlook (.msg) messages as EML or PDF.</p>
+            <summary className="cursor-pointer">Export from Google Workspace, Apple iWork, older Office, or Outlook</summary>
+            <ul className="my-1 pl-5">
+              <li>Google Docs, Apple Pages, or older Word (.doc) → DOCX or PDF</li>
+              <li>Google Sheets, Apple Numbers, or older Excel (.xls) → XLSX or PDF</li>
+              <li>Google Slides, Apple Keynote, or older PowerPoint (.ppt) → PPTX or PDF</li>
+              <li>Outlook (.msg) → EML or PDF</li>
+            </ul>
+            <p className="mt-1 mb-0">For a zipped Google Docs web page, unzip the download and upload the HTML file inside.</p>
           </details>}
           {coverage && <p className="mt-1 mb-0">{coverage}</p>}
         </div>}

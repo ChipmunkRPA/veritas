@@ -308,12 +308,13 @@ def verify_crops(record, native_frames):
         raise ValueError("Original crops do not reproduce the matched detail readings")
 
 
-def _verify_soundtrack(original, span, deadline):
+def _verify_soundtrack(original, span, deadline, allowed_priming):
     from app.evidence.mp4_source_clock import aac_track_schedule
 
     block = binding.AAC_BLOCK
     try:
-        rate, extent, durations = aac_track_schedule(original, span, block)
+        rate, extent, durations = aac_track_schedule(original, span, block, allowed_priming=allowed_priming)
+        priming = sum(durations) - extent
         remaining = deadline - time.monotonic()
         if remaining <= 0:
             raise ValueError("The soundtrack clock could not be checked within its time limit")
@@ -333,10 +334,10 @@ def _verify_soundtrack(original, span, deadline):
                 or (rate, channels, stream["channel_layout"]) not in binding.AAC_LAYOUTS
                 or len(packets) != len(durations)):
             raise ValueError("AAC packets differ from the exact soundtrack clock")
-        pts = -block
+        pts = -priming
         for i, (packet, duration) in enumerate(zip(packets, durations, strict=True)):
             packet_clock = tuple(packet[k] for k in ("stream_index", "pts", "dts", "duration"))
-            padding = [{"side_data_type": "Skip Samples", "skip_samples": block, "discard_padding": 0}] if i == 0 else []
+            padding = [{"side_data_type": "Skip Samples", "skip_samples": priming, "discard_padding": 0}] if i == 0 else []
             if packet_clock != (stream["index"], pts, pts, duration) or packet.get("side_data_list", []) != padding:
                 raise ValueError("AAC packet timing differs from its presentation edit")
             pts += duration
@@ -344,10 +345,13 @@ def _verify_soundtrack(original, span, deadline):
             raise ValueError("AAC packet clock ends at an unexpected sample")
     except (KeyError, OSError, TypeError, ValueError, subprocess.SubprocessError) as error:
         raise ValueError("Original soundtrack differs from the recorded matched-detail profile") from error
-    return {"rate": rate, "channels": channels, "start_pts": 0, "end_pts": extent, "priming_samples": block}
+    clock = {"rate": rate, "channels": channels, "start_pts": 0, "end_pts": extent, "priming_samples": priming}
+    if priming == binding.AAC_EXTENDED_PRIMING:
+        clock["trailing_samples"] = block - durations[-1]
+    return clock
 
 
-def verify_profile(original, table, profile, *, timeout_s=4.0):
+def verify_profile(original, table, profile, *, timeout_s=4.0, allow_extended_aac=False):
     """Verify the exact source carrier for the recorded review profile."""
     from app.detectors.video.frames import probe as probe_container
     from app.evidence import mp4_source_clock
@@ -365,8 +369,11 @@ def verify_profile(original, table, profile, *, timeout_s=4.0):
         or not mp4_source_clock.verified(original, table, profile.step, **clock_options)
     ):
         raise ValueError("Original video differs from the recorded matched-detail profile")
-    if profile == binding.PROFILE_HEVC25_AAC:
-        return _verify_soundtrack(original, Fraction(binding.FRAME_COUNT * profile.step, profile.timescale), deadline)
+    if profile.audio_priming is not None:
+        allowed = (profile.audio_priming,)
+        if allow_extended_aac and profile == binding.PROFILE_HEVC25_AAC:
+            allowed += (binding.AAC_EXTENDED_PRIMING,)
+        return _verify_soundtrack(original, Fraction(binding.FRAME_COUNT * profile.step, profile.timescale), deadline, allowed)
     return None
 
 

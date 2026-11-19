@@ -206,7 +206,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
       {matchedReview.method === 'face-matched-detail/3' && <p className="mt-2 mb-0 text-caption text-text-muted">
         25 fps HEVC source with 120 native frames over 4.8 seconds. The comparison examines short ranges with comparable face views.
         {' '}Ordinary blur can produce a highlight. This check carries zero AI confidence weight.</p>}
-      {matchedReview.method === 'face-matched-detail/4' && matchedReview.soundtrack_clock && <p className="mt-2 mb-0 text-caption text-text-muted">
+      {(matchedReview.method === 'face-matched-detail/4' || matchedReview.method === 'face-matched-detail/5') && matchedReview.soundtrack_clock && <p className="mt-2 mb-0 text-caption text-text-muted">
         25 fps HEVC source with 120 native frames over 4.8 seconds. The {matchedReview.soundtrack_clock.channels === 1 ? 'mono' : 'stereo'} AAC-LC soundtrack at {matchedReview.soundtrack_clock.rate.toLocaleString('en-US')} Hz has the same verified presentation span.
         {' '}The face comparison examines short ranges with comparable face views. Ordinary blur can produce a highlight. This check carries zero AI confidence weight.</p>}
       {matchedReview.candidate_pairs > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">

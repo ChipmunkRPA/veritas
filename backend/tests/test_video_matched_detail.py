@@ -6,6 +6,7 @@ import shutil
 import subprocess
 from copy import deepcopy
 from hashlib import sha256
+from struct import pack_into
 from types import SimpleNamespace
 
 import cv2
@@ -22,6 +23,7 @@ from app.engine.detector import Profile, StageOutputs
 from app.engine.stages import video as video_stages
 from app.evidence import face_matched_detail_binding as binding
 from app.evidence import mp4_source_clock, video_packets
+from app.evidence.mp4 import bounded_boxes
 
 START, END = 73, 76
 SOURCE = {
@@ -36,6 +38,7 @@ LANDMARKS = [
 ]
 BOX = {"x": 432, "y": 246, "w": 195, "h": 248}
 AAC48 = {"rate": 48000, "channels": 1, "start_pts": 0, "end_pts": 230400, "priming_samples": 1024}
+AAC48_EXTENDED = AAC48 | {"priming_samples": 2112, "trailing_samples": 960}
 
 
 def test_matched_detail_profile_keeps_native_scope():
@@ -124,6 +127,51 @@ def test_matched_detail_hevc_rejects_changed_source_track_layout(tmp_path):
     with pytest.raises(ValueError, match="recorded matched-detail profile"):
         detector.verify_profile(delayed, delayed_table, with_audio)
 
+    # A platform-independent test file with complete 1024-sample AAC packets. The edit selects the
+    # exact native picture span after the first 2112 samples and excludes the final 960 samples.
+    full_packets = tmp_path / "full-aac-packets.mp4"
+    subprocess.run([*common, "-i", str(exact), "-f", "lavfi", "-i", "anullsrc=r=48000:cl=mono",
+                    "-af", "atrim=end_sample=232448", "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "aac",
+                    *time_base, str(full_packets)], check=True, timeout=20)
+    patched = bytearray(full_packets.read_bytes())
+    with full_packets.open("rb") as stream:
+        size, _, boxes, one, payload = bounded_boxes(stream)
+
+        def children(box):
+            return boxes(box.start, box.end)
+
+        movie = children(one(boxes(0, size), b"moov"))
+        track = children([b for b in movie if b.kind == b"trak"][1])
+        mvhd, tkhd, elst = one(movie, b"mvhd"), one(track, b"tkhd"), one(children(one(track, b"edts")), b"elst")
+        assert all(payload(b)[0] == 0 for b in (mvhd, tkhd, elst))
+        for offset in (mvhd.start + 16, tkhd.start + 20, elst.start + 8):
+            pack_into(">I", patched, offset, 432000)
+        pack_into(">i", patched, elst.start + 12, 2112)
+    extended = tmp_path / "exact-extended-priming.mp4"
+    extended.write_bytes(patched)
+    profile_extended = binding.PROFILE_HEVC25_AAC_EXTENDED
+    extended_table = probe_frames(extended)
+    assert extended_table == audio_table
+    assert detector.verify_profile(extended, extended_table, profile_extended) == AAC48_EXTENDED
+    assert detector.verify_profile(extended, extended_table, with_audio, allow_extended_aac=True) == AAC48_EXTENDED
+    assert detector.verify_profile(soundtrack, audio_table, with_audio, allow_extended_aac=True) == AAC48
+    with pytest.raises(ValueError, match="recorded matched-detail profile"):
+        detector.verify_profile(extended, extended_table, with_audio)
+    with pytest.raises(ValueError, match="recorded matched-detail profile"):
+        detector.verify_profile(soundtrack, audio_table, profile_extended)
+    extended_state = binding.coverage("no_match", proposed=1, usable=1, profile=profile_extended,
+                                      soundtrack_clock=AAC48_EXTENDED)
+    detector.verify_coverage_source(extended, extended_table, extended_state)
+    with pytest.raises(ValueError, match="soundtrack clock differs from the original"):
+        detector.verify_coverage_source(extended, extended_table, extended_state | {
+            binding.SOUNDTRACK_CLOCK: AAC48_EXTENDED | {"trailing_samples": 959},
+        })
+    wrong_edit = tmp_path / "wrong-extended-priming.mp4"
+    pack_into(">i", patched, elst.start + 12, 2048)
+    wrong_edit.write_bytes(patched)
+    with pytest.raises(ValueError, match="recorded matched-detail profile"):
+        detector.verify_profile(wrong_edit, extended_table, with_audio, allow_extended_aac=True)
+
 
 @pytest.mark.parametrize(("hevc_enabled", "avc_enabled", "encode", "has_audio", "expected"), [
     (False, False, binding.HEVC, False, None),
@@ -131,6 +179,7 @@ def test_matched_detail_hevc_rejects_changed_source_track_layout(tmp_path):
     (False, True, binding.HEVC, True, "profile_avc"),
     (True, False, binding.HEVC, False, binding.PROFILE_HEVC25),
     (True, False, binding.HEVC, True, binding.PROFILE_HEVC25_AAC),
+    (True, False, binding.HEVC, True, binding.PROFILE_HEVC25_AAC_EXTENDED),
     (True, False, binding.AVC, False, None),
     (True, True, binding.AVC, True, binding.PROFILE_25),
     (True, False, ("hevc", "yuv420p", "hev1"), False, "profile_hevc"),
@@ -154,20 +203,23 @@ def test_matched_detail_hevc_uses_separate_opt_in_and_preserves_avc(monkeypatch,
     ctx = SimpleNamespace(profile=Profile.FULL, deadline=Deadline(30))
     result = SimpleNamespace(status="ok", details={"incumbent": "retained"})
     verify = []
+    soundtrack = (AAC48_EXTENDED if expected == binding.PROFILE_HEVC25_AAC_EXTENDED
+                  else AAC48 if expected == binding.PROFILE_HEVC25_AAC else None)
 
     def verify_profile(path, frame_table, received, **kwargs):
         assert path == "source" and frame_table is table
         verify.append(received)
-        return AAC48 if received == binding.PROFILE_HEVC25_AAC else None
+        assert kwargs["allow_extended_aac"] is True
+        return soundtrack
 
     monkeypatch.setattr(detector, "verify_profile", verify_profile)
     monkeypatch.setattr(detector, "inspect", lambda *args, profile: (None, binding.coverage("no_match", proposed=1, usable=1, profile=profile)))
     assert face_appearance._with_matched_detail(result, inputs, None, None, ctx) is result
     assert result.details["incumbent"] == "retained"
     if isinstance(expected, binding.NativeProfile):
-        assert verify == [expected]
+        assert verify == [binding.PROFILE_HEVC25_AAC if expected == binding.PROFILE_HEVC25_AAC_EXTENDED else expected]
         assert result.details[binding.COVERAGE] == binding.coverage("no_match", proposed=1, usable=1, profile=expected,
-            soundtrack_clock=AAC48 if expected == binding.PROFILE_HEVC25_AAC else None)
+            soundtrack_clock=soundtrack)
     elif expected is not None:
         assert not verify
         assert result.details[binding.COVERAGE] == binding.coverage("unassessed", expected)
@@ -309,14 +361,16 @@ def test_matched_detail_replays_exact_crops_and_rejects_changed_source(measured_
         binding.validate_record(record | {"scene_cuts": [72]}, SOURCE)
 
 
-@pytest.mark.parametrize("profile", (binding.PROFILE_30, binding.PROFILE_25, binding.PROFILE_HEVC25, binding.PROFILE_HEVC25_AAC))
+@pytest.mark.parametrize("profile", (binding.PROFILE_30, binding.PROFILE_25, binding.PROFILE_HEVC25,
+                                     binding.PROFILE_HEVC25_AAC, binding.PROFILE_HEVC25_AAC_EXTENDED))
 def test_matched_detail_packet_binds_coverage_and_original_views(measured_record, monkeypatch, profile):
     record, original = measured_record
     record.update(method=profile.method, time_base=profile.time_base, start_pts=START * profile.step,
                   end_pts=END * profile.step)
     for view in record["views"]:
         view["pts"] = view["index"] * profile.step
-    soundtrack_clock = AAC48 if profile == binding.PROFILE_HEVC25_AAC else None
+    soundtrack_clock = (AAC48_EXTENDED if profile == binding.PROFILE_HEVC25_AAC_EXTENDED
+                        else AAC48 if profile == binding.PROFILE_HEVC25_AAC else None)
     if soundtrack_clock:
         record[binding.SOUNDTRACK_CLOCK] = soundtrack_clock
     state = binding.coverage("localized", proposed=2, usable=1, profile=profile, soundtrack_clock=soundtrack_clock)
@@ -360,6 +414,13 @@ def test_matched_detail_packet_binds_coverage_and_original_views(measured_record
             binding.validate(document, canonical_hash)
         state[binding.SOUNDTRACK_CLOCK] = soundtrack_clock
         source[binding.COVERAGE_COMMITMENT] = canonical_hash(state)
+        if profile == binding.PROFILE_HEVC25_AAC_EXTENDED:
+            state[binding.SOUNDTRACK_CLOCK] = soundtrack_clock | {"trailing_samples": 224}
+            source[binding.COVERAGE_COMMITMENT] = canonical_hash(state)
+            with pytest.raises(ValueError, match="soundtrack clock differs from its verified profile"):
+                binding.validate(document, canonical_hash)
+            state[binding.SOUNDTRACK_CLOCK] = soundtrack_clock
+            source[binding.COVERAGE_COMMITMENT] = canonical_hash(state)
     state["measured_pairs"] = 2
     with pytest.raises(ValueError, match="published commitments"):
         binding.validate(document, canonical_hash)

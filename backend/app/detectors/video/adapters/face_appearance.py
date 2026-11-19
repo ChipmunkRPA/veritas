@@ -793,7 +793,11 @@ def _with_matched_detail(result, inputs, yunet, recognizer, ctx):
             if clock_budget <= 0:
                 details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "time_budget")
                 return result
-            soundtrack_clock = face_matched_detail.verify_profile(path, inputs.table, profile, timeout_s=clock_budget)
+            soundtrack_clock = face_matched_detail.verify_profile(
+                path, inputs.table, profile, timeout_s=clock_budget, allow_extended_aac=True
+            )
+            if soundtrack_clock and soundtrack_clock["priming_samples"] == matched_detail.AAC_EXTENDED_PRIMING:
+                profile = matched_detail.PROFILE_HEVC25_AAC_EXTENDED
         elif not mp4_source_clock.verified(path, inputs.table, profile.step):
             raise ValueError("The original MP4 clock could not be verified")
     except ValueError:

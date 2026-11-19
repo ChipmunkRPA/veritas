@@ -13,6 +13,14 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [paired JPEG residual experiment](image-paired-camera-residuals-2026-11-19.md)
+provides anonymous crop overlaps and false-alert counts for 532 image
+deliveries. The [archived travel-guide comparison](writing-wikivoyage-ordinary-controls-2026-11-19.md)
+provides earlier-copy locations and standalone alert counts on ordinary edits.
+Both include offline count replays. The [Apple AAC face-evidence replay](video-apple-aac-face-evidence-2026-11-19.md)
+provides exact video ranges and clocks, plus browser, PDF and JSON checks
+for the submitted source files.
+
 The [PNG printed-total comparison](image-printed-totals-2026-11-19.md)
 includes a replayable controlled evaluation for the arithmetic and exact
 source crops. It carries zero weight in the automated assessment.

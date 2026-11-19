@@ -173,8 +173,10 @@ def verified(path: Path, table, ticks: int, *, video_only: bool = False) -> bool
     return True
 
 
-def aac_track_schedule(path: Path, span: Fraction, block: int) -> tuple[int, int, list[int]]:
-    """Read the independently stored single AAC soundtrack schedule, including its edit and priming block."""
+def aac_track_schedule(
+    path: Path, span: Fraction, block: int, *, allowed_priming: tuple[int, ...] | None = None
+) -> tuple[int, int, list[int]]:
+    """Read the native AAC packet table and return durations on the edited presentation clock."""
     with path.open("rb") as stream:
         size, read, boxes, one, payload = bounded_boxes(stream, label="MP4 source soundtrack")
 
@@ -194,12 +196,19 @@ def aac_track_schedule(path: Path, span: Fraction, block: int) -> tuple[int, int
         track, media = handlers[b"soun"]
         rate, native_duration = _clock(payload(one(media, b"mdhd")))
         presented = span * rate
-        _require(rate in {44100, 48000} and native_duration == presented + block, "MP4 AAC native duration differs")
+        _require(rate in {44100, 48000} and presented.denominator == 1, "MP4 AAC source rate or clock differs")
         _require(_track_duration(payload(one(track, b"tkhd")), 0, 0) == movie_duration,
                  "MP4 AAC track duration differs")
         edit = children(one(track, b"edts"))
-        _require(len(edit) == 1 and _edit(payload(one(edit, b"elst"))) == (movie_duration, block),
-                 "MP4 AAC edit does not offset its exact priming block")
+        _require(len(edit) == 1, "MP4 AAC requires one presentation edit")
+        edit_duration, priming = _edit(payload(one(edit, b"elst")))
+        _require(edit_duration == movie_duration and priming in (allowed_priming or (block,)),
+                 "MP4 AAC edit does not offset supported priming samples")
+        trailing = 0
+        if priming != block:
+            _require(movie_scale == 90000, "Extended MP4 AAC timing requires the verified movie clock")
+            trailing = (-(int(presented) + priming)) % block
+        _require(native_duration == presented + priming + trailing, "MP4 AAC native duration differs")
         information = children(one(media, b"minf"))
         _require_local_reference(information, children, one, read, boxes, payload)
         tables = children(one(information, b"stbl"))
@@ -216,4 +225,5 @@ def aac_track_schedule(path: Path, span: Fraction, block: int) -> tuple[int, int
         timing = _runs(payload(one(tables, b"stts")), count)
         _require(timing == [block] * (count - 1) + [native_duration - (count - 1) * block],
                  "AAC packet timing is irregular")
+        timing[-1] -= trailing
         return rate, int(presented), timing

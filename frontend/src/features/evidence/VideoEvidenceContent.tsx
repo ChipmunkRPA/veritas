@@ -176,7 +176,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
         The check read {transitionReview.frames_scanned} native pictures for shot changes and measured {transitionReview.measured_face_frames} usable face views.
         {transitionReview.method === 'single-face-boundary/3' && ' Source timing was verified at 30 frames per second.'}
       </p>}
-      {transition?.method === 'single-face-boundary/3' && <p className="mt-2 mb-0 text-caption text-text-muted">Ordinary changes in focus can produce this pattern.</p>}
+      {transition?.method === 'single-face-boundary/3' && <p className="mt-2 mb-0 text-caption text-text-muted">A focus change can produce a similar pattern and can also occur alongside a face swap.</p>}
       <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero AI confidence weight.</p>
     </section>}
     {lipTiming && <section aria-labelledby="video-lip-timing-heading" className="mt-4 rounded-md border border-border p-4">

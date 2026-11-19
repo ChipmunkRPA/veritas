@@ -38,6 +38,10 @@ The [30 fps face transition replay](video-face-single-boundary-30fps-2026-11-18.
 recounts both detectors' results across 98 direct and recompressed deliveries.
 It includes ordinary focus changes, exposure changes, and cuts.
 
+The [paired sharpness comparison](video-face-focus-context-transfer-2026-11-18.md#reproduce-the-counts)
+shows how a proposed focus filter affected the exact frames of standalone
+face swaps and swaps staged alongside focus changes in 352 local deliveries.
+
 The [OpenDocument and Rich Text passage transfer](writing-decoded-carrier-transfer-2026-11-18.md#recount)
 recounts all 464 carrier comparisons and distinguishes mixed-length rewrites,
 short rewrites, and human revisions.

@@ -174,6 +174,8 @@ replay-evidence:  ## recount published image, video, audio, and writing evaluati
 		docs/evaluation-panels/audio-spectra-original-one-second-2026-11-19.json --self-test
 	python3 -I -S backend/scripts/review_image_printed_identifiers.py \
 		docs/evaluation-panels/image-printed-identifiers-2026-11-19.json
+	python3 -I -S backend/scripts/review_image_printed_totals.py \
+		docs/evaluation-panels/image-printed-totals-2026-11-19.json
 	python3 -I -S backend/scripts/review_video_common_detail.py \
 		docs/evaluation-panels/video-face-common-detail-native30-2026-11-19.json
 	python3 -I -S backend/scripts/review_audio_room_voice_recovery_ceiling.py \
@@ -187,10 +189,14 @@ replay-evidence:  ## recount published image, video, audio, and writing evaluati
 		docs/evaluation-panels/video-face-expanded-common-detail-native30-2026-11-19.json
 	python3 -I -S backend/scripts/review_audio_room_point12_confirmation.py \
 		docs/evaluation-panels/audio-room-point12-confirmation-2026-11-19.json --self-test
+	python3 -I -S backend/scripts/review_audio_learned_enrollment_genuine_preflight.py \
+		docs/evaluation-panels/audio-learned-enrollment-genuine-preflight-2026-11-19.json --self-test
 	python3 -I -S backend/scripts/review_writing_neighbor_factorial.py \
 		docs/evaluation-panels/writing-neighbor-factorial-2026-11-19.json
 	python3 -I -S backend/scripts/review_video_matched_detail_native25.py \
 		docs/evaluation-panels/video-face-matched-detail-native25-transfer-2026-11-19.json
+	python3 -I -S backend/scripts/review_video_matched_detail_native25_confirmation.py \
+		docs/evaluation-panels/video-face-matched-detail-native25-confirmation-2026-11-19.json
 	PYTHONPATH=backend python3 -B -S -m scripts.review_writing_retained_neighbor \
 		docs/evaluation-panels/writing-retained-neighbor-2026-11-19.json
 

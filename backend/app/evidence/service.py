@@ -89,6 +89,7 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
         document_pdf_form_binding,
         document_pdf_history_binding,
         image_printed_ids_binding,
+        image_printed_totals_binding,
     )
     from app.evidence.audio_focused_edit_binding import KEY as FOCUSED_EDIT
     from app.evidence.audio_stereo_timing_binding import KEY as STEREO_TIMING
@@ -103,6 +104,7 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
         groups.append(interpolation_assets(part))
         groups.append(jpeg_grid_assets(part))
         groups.append(image_printed_ids_binding.assets(part))
+        groups.append(image_printed_totals_binding.assets(part))
         if (history := (part.get("coverage") or {}).get(document_pdf_history_binding.KEY)) is not None:
             if part.get("schema") != "chipmunk.document-evidence/1":
                 raise ObjectIntegrityError("Saved wording is outside the document evidence")

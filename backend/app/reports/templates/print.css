@@ -365,6 +365,9 @@ table.waterfall { width: 100%; border-collapse: collapse; table-layout: fixed; m
 .evidence-plates figure:nth-child(n+2) img { image-rendering: pixelated; }
 .evidence-plates.evidence-plates-pair img { background: var(--color-surface-2); image-rendering: auto; }
 .evidence-plates.evidence-plates-identifiers figure img { height: 13mm; background: var(--color-surface-2); image-rendering: auto; }
+.evidence-plates.evidence-plates-totals { display: block; }
+.evidence-plates.evidence-plates-totals figure { width: 100%; margin-bottom: 2mm; break-inside: avoid; }
+.evidence-plates.evidence-plates-totals figure img { width: auto; max-width: 100%; height: auto; max-height: 20mm; background: var(--color-surface-2); image-rendering: auto; }
 .evidence-plates.exact-pixel-plates figure img { image-rendering: pixelated; }
 .evidence-plates.evidence-plates-pair .measured-footprint { image-rendering: pixelated; }
 .evidence-measurements { display: flex; flex-wrap: wrap; gap: 2mm 5mm; margin: 2mm 0; }

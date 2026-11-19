@@ -857,6 +857,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.eye_local_hold_binding',
                         'app.evidence.image_eligibility','app.evidence.image_copy_similarity_binding','app.evidence.image_interpolation_binding',
                         'app.evidence.image_previous_grid_binding', 'app.evidence.image_printed_ids_binding',
+                        'app.evidence.image_printed_totals_binding',
                         'app.evidence.image_copy_affine_binding','app.evidence.image_embedded_pair_binding',
                         'app.evidence.image_animation_binding','app.evidence.image_transparency_binding',
                         'app.evidence.image_motion_photo_binding',

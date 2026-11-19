@@ -1,0 +1,976 @@
+{
+  "commitments": {
+    "author": "6117b64051b7bd90811006b110941aecb824d2726690ffe6b68c594acc53f281",
+    "design": "e968ac46750ae19e7c741236ac8614fbd91af1fdebcf1d233649f1e5b2aa416b",
+    "full_face_stage_and_candidate": "448b16ebb30254296549ab5979063a07ef631d5719f2c91f4b4476dcfd244686",
+    "independent_crop_replay": "68a82e6d8af5f342d0ca5f418c1587062f37dbdd7a57c92437efe2f2243067c5",
+    "independent_media": "04b16fb5ff46b3a4e39ea06807e0d667b28941772629ea455723bf2aa3b8efb4",
+    "media": "99c7960235d81bc0ed4ff26e43fe2816d32846bd06d0b3b724f6db8b2b5ca1de"
+  },
+  "evidence_totals": {
+    "all_replayed_matched_detail_crops": 104,
+    "authored_edit_frames": 28,
+    "delivered_native_rgb_timestamps": 6720,
+    "display_anchors": 33
+  },
+  "fixed_point_hex": "0x1.999999999999ap-4",
+  "observations": [
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": [
+        75,
+        79
+      ],
+      "group": 1,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "swap"
+    },
+    {
+      "addition": [
+        75,
+        79
+      ],
+      "candidate_pairs": 1,
+      "coverage_status": "localized",
+      "expected": [
+        75,
+        79
+      ],
+      "group": 1,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": "0x1.310635a6e9b49p-1",
+      "role": "swap_plus_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 1,
+      "coverage_status": "no_match",
+      "expected": null,
+      "group": 1,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 1,
+      "coverage_status": "no_match",
+      "expected": null,
+      "group": 1,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_alternate_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 1,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "untouched"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 1,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_same_take_jump"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 1,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "hard_cut"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": [
+        87,
+        91
+      ],
+      "group": 2,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "swap"
+    },
+    {
+      "addition": [
+        87,
+        91
+      ],
+      "candidate_pairs": 1,
+      "coverage_status": "localized",
+      "expected": [
+        87,
+        91
+      ],
+      "group": 2,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": "0x1.f219345defe6ep-2",
+      "role": "swap_plus_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 1,
+      "coverage_status": "no_match",
+      "expected": null,
+      "group": 2,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 1,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 2,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_alternate_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 2,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "untouched"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 2,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_same_take_jump"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 2,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "hard_cut"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": [
+        66,
+        69
+      ],
+      "group": 3,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "swap"
+    },
+    {
+      "addition": [
+        66,
+        69
+      ],
+      "candidate_pairs": 1,
+      "coverage_status": "localized",
+      "expected": [
+        66,
+        69
+      ],
+      "group": 3,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": "0x1.bfff4411e1e6ep-2",
+      "role": "swap_plus_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 1,
+      "coverage_status": "no_match",
+      "expected": null,
+      "group": 3,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 1,
+      "coverage_status": "no_match",
+      "expected": null,
+      "group": 3,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_alternate_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 3,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "untouched"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 3,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_same_take_jump"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 3,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "hard_cut"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": [
+        93,
+        96
+      ],
+      "group": 4,
+      "measured_pairs": 0,
+      "prior": {
+        "face_sequence": [
+          46,
+          92
+        ]
+      },
+      "response_hex": null,
+      "role": "swap"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 1,
+      "coverage_status": "unassessed",
+      "expected": [
+        93,
+        96
+      ],
+      "group": 4,
+      "measured_pairs": 0,
+      "prior": {
+        "face_sequence": [
+          46,
+          92
+        ]
+      },
+      "response_hex": null,
+      "role": "swap_plus_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 1,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 4,
+      "measured_pairs": 0,
+      "prior": {
+        "face_sequence": [
+          46,
+          92
+        ]
+      },
+      "response_hex": null,
+      "role": "ordinary_blur"
+    },
+    {
+      "addition": [
+        58,
+        62
+      ],
+      "candidate_pairs": 1,
+      "coverage_status": "localized",
+      "expected": null,
+      "group": 4,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": "0x1.085ff046da9ecp-3",
+      "role": "ordinary_alternate_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 4,
+      "measured_pairs": 0,
+      "prior": {
+        "face_sequence": [
+          46,
+          92
+        ]
+      },
+      "response_hex": null,
+      "role": "untouched"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 4,
+      "measured_pairs": 0,
+      "prior": {
+        "face_sequence": [
+          46,
+          92
+        ]
+      },
+      "response_hex": null,
+      "role": "ordinary_same_take_jump"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 4,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "hard_cut"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": [
+        65,
+        69
+      ],
+      "group": 5,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "swap"
+    },
+    {
+      "addition": [
+        65,
+        69
+      ],
+      "candidate_pairs": 1,
+      "coverage_status": "localized",
+      "expected": [
+        65,
+        69
+      ],
+      "group": 5,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": "0x1.31bf2401b17b0p-1",
+      "role": "swap_plus_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 1,
+      "coverage_status": "no_match",
+      "expected": null,
+      "group": 5,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_blur"
+    },
+    {
+      "addition": [
+        88,
+        91
+      ],
+      "candidate_pairs": 1,
+      "coverage_status": "localized",
+      "expected": null,
+      "group": 5,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": "0x1.32d46339f1b98p-3",
+      "role": "ordinary_alternate_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 5,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "untouched"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 5,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_same_take_jump"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 5,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "hard_cut"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": [
+        86,
+        90
+      ],
+      "group": 6,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "swap"
+    },
+    {
+      "addition": [
+        86,
+        90
+      ],
+      "candidate_pairs": 1,
+      "coverage_status": "localized",
+      "expected": [
+        86,
+        90
+      ],
+      "group": 6,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": "0x1.510ea203267a8p-1",
+      "role": "swap_plus_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 1,
+      "coverage_status": "no_match",
+      "expected": null,
+      "group": 6,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 1,
+      "coverage_status": "no_match",
+      "expected": null,
+      "group": 6,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_alternate_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 6,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "untouched"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 6,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_same_take_jump"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 6,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "hard_cut"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": [
+        64,
+        67
+      ],
+      "group": 7,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "swap"
+    },
+    {
+      "addition": [
+        64,
+        67
+      ],
+      "candidate_pairs": 1,
+      "coverage_status": "localized",
+      "expected": [
+        64,
+        67
+      ],
+      "group": 7,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": "0x1.515564ffcd897p-1",
+      "role": "swap_plus_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 1,
+      "coverage_status": "no_match",
+      "expected": null,
+      "group": 7,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 1,
+      "coverage_status": "no_match",
+      "expected": null,
+      "group": 7,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_alternate_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 7,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "untouched"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 7,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_same_take_jump"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 7,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "hard_cut"
+    },
+    {
+      "addition": [
+        84,
+        87
+      ],
+      "candidate_pairs": 1,
+      "coverage_status": "localized",
+      "expected": [
+        84,
+        87
+      ],
+      "group": 8,
+      "measured_pairs": 1,
+      "prior": {
+        "face_boundary": [
+          81,
+          104
+        ],
+        "face_sequence": [
+          85,
+          99
+        ]
+      },
+      "response_hex": "0x1.a721a90770b11p-1",
+      "role": "swap"
+    },
+    {
+      "addition": [
+        84,
+        87
+      ],
+      "candidate_pairs": 1,
+      "coverage_status": "localized",
+      "expected": [
+        84,
+        87
+      ],
+      "group": 8,
+      "measured_pairs": 1,
+      "prior": {
+        "face_boundary": [
+          83,
+          104
+        ],
+        "face_sequence": [
+          85,
+          99
+        ]
+      },
+      "response_hex": "0x1.4fc83689b0be7p-1",
+      "role": "swap_plus_blur"
+    },
+    {
+      "addition": [
+        84,
+        87
+      ],
+      "candidate_pairs": 1,
+      "coverage_status": "localized",
+      "expected": null,
+      "group": 8,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": "0x1.b05f3dc6be3f8p-4",
+      "role": "ordinary_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 1,
+      "coverage_status": "no_match",
+      "expected": null,
+      "group": 8,
+      "measured_pairs": 1,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_alternate_blur"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 8,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "untouched"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 8,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "ordinary_same_take_jump"
+    },
+    {
+      "addition": null,
+      "candidate_pairs": 0,
+      "coverage_status": "unassessed",
+      "expected": null,
+      "group": 8,
+      "measured_pairs": 0,
+      "prior": {},
+      "response_hex": null,
+      "role": "hard_cut"
+    }
+  ],
+  "requirements": {
+    "max_new_ordinary": 1,
+    "max_wrong": 1,
+    "min_added_groups": 2,
+    "min_each_measured_blur_family": 3,
+    "min_measured_ordinary": 8,
+    "min_measured_ordinary_groups": 6,
+    "min_new_exact_compounds": 2,
+    "require_prior_ranges_preserved": true
+  },
+  "result": {
+    "by_condition": {
+      "hard_cut": {
+        "before_any": 0,
+        "before_exact": 0,
+        "before_useful": 0,
+        "files": 8,
+        "new_ranges": 0,
+        "unassessed": 8,
+        "with_candidate_any": 0,
+        "with_candidate_exact": 0,
+        "with_candidate_useful": 0
+      },
+      "ordinary_alternate_blur": {
+        "before_any": 0,
+        "before_exact": 0,
+        "before_useful": 0,
+        "files": 8,
+        "new_ranges": 2,
+        "unassessed": 1,
+        "with_candidate_any": 2,
+        "with_candidate_exact": 0,
+        "with_candidate_useful": 0
+      },
+      "ordinary_blur": {
+        "before_any": 1,
+        "before_exact": 0,
+        "before_useful": 0,
+        "files": 8,
+        "new_ranges": 1,
+        "unassessed": 1,
+        "with_candidate_any": 2,
+        "with_candidate_exact": 0,
+        "with_candidate_useful": 0
+      },
+      "ordinary_same_take_jump": {
+        "before_any": 1,
+        "before_exact": 0,
+        "before_useful": 0,
+        "files": 8,
+        "new_ranges": 0,
+        "unassessed": 8,
+        "with_candidate_any": 1,
+        "with_candidate_exact": 0,
+        "with_candidate_useful": 0
+      },
+      "swap": {
+        "before_any": 2,
+        "before_exact": 0,
+        "before_useful": 0,
+        "files": 8,
+        "new_ranges": 1,
+        "unassessed": 7,
+        "with_candidate_any": 2,
+        "with_candidate_exact": 1,
+        "with_candidate_useful": 1
+      },
+      "swap_plus_blur": {
+        "before_any": 2,
+        "before_exact": 0,
+        "before_useful": 0,
+        "files": 8,
+        "new_ranges": 7,
+        "unassessed": 1,
+        "with_candidate_any": 8,
+        "with_candidate_exact": 7,
+        "with_candidate_useful": 7
+      },
+      "untouched": {
+        "before_any": 1,
+        "before_exact": 0,
+        "before_useful": 0,
+        "files": 8,
+        "new_ranges": 0,
+        "unassessed": 8,
+        "with_candidate_any": 1,
+        "with_candidate_exact": 0,
+        "with_candidate_useful": 0
+      }
+    },
+    "totals": {
+      "exact_compound_gains": 7,
+      "gate_pass": false,
+      "groups_with_exact_compound_gain": 7,
+      "measured_ordinary_disc": 7,
+      "measured_ordinary_gaussian": 7,
+      "measured_ordinary_groups": 8,
+      "ordinary_added_ranges": 3,
+      "ordinary_measured": 14,
+      "wrong_location": 0
+    }
+  },
+  "schema": "chipmunk.video-matched-detail-native25-confirmation/1",
+  "scope": {
+    "fps": 25,
+    "frame_count": 120,
+    "height": 720,
+    "ticks_per_picture": 3600,
+    "time_base": "1/90000",
+    "width": 1280
+  },
+  "source_groups": [
+    {
+      "alternate_blur": [
+        97,
+        100
+      ],
+      "blur": "disc",
+      "group": 1,
+      "placement": [
+        75,
+        79
+      ],
+      "renderer": "first"
+    },
+    {
+      "alternate_blur": [
+        66,
+        69
+      ],
+      "blur": "gaussian",
+      "group": 2,
+      "placement": [
+        87,
+        91
+      ],
+      "renderer": "second"
+    },
+    {
+      "alternate_blur": [
+        87,
+        91
+      ],
+      "blur": "disc",
+      "group": 3,
+      "placement": [
+        66,
+        69
+      ],
+      "renderer": "second"
+    },
+    {
+      "alternate_blur": [
+        58,
+        62
+      ],
+      "blur": "gaussian",
+      "group": 4,
+      "placement": [
+        93,
+        96
+      ],
+      "renderer": "first"
+    },
+    {
+      "alternate_blur": [
+        88,
+        91
+      ],
+      "blur": "gaussian",
+      "group": 5,
+      "placement": [
+        65,
+        69
+      ],
+      "renderer": "second"
+    },
+    {
+      "alternate_blur": [
+        68,
+        71
+      ],
+      "blur": "disc",
+      "group": 6,
+      "placement": [
+        86,
+        90
+      ],
+      "renderer": "first"
+    },
+    {
+      "alternate_blur": [
+        88,
+        92
+      ],
+      "blur": "gaussian",
+      "group": 7,
+      "placement": [
+        64,
+        67
+      ],
+      "renderer": "first"
+    },
+    {
+      "alternate_blur": [
+        60,
+        64
+      ],
+      "blur": "disc",
+      "group": 8,
+      "placement": [
+        84,
+        87
+      ],
+      "renderer": "second"
+    }
+  ]
+}

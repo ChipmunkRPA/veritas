@@ -1,0 +1,4438 @@
+{
+  "app_verification": {
+    "browser": {
+      "browser_errors": 0,
+      "locations_checked": 6,
+      "matched_view_signs": [
+        "tax",
+        "total"
+      ]
+    },
+    "cases": {
+      "balanced": {
+        "present": false,
+        "signed_original": true
+      },
+      "jpeg-scope": {
+        "present": false,
+        "signed_original": true
+      },
+      "ordinary-fee": {
+        "present": false,
+        "signed_original": true
+      },
+      "tax": {
+        "exact_pdf_crop_images": 3,
+        "present": true,
+        "redacted_values_and_crops_withheld": true,
+        "signed_original": true
+      },
+      "total": {
+        "exact_pdf_crop_images": 3,
+        "present": true,
+        "redacted_values_and_crops_withheld": true,
+        "signed_original": true
+      }
+    },
+    "jobs_before_payment": 0,
+    "price_usd_cents": 999,
+    "simulated_checkouts": 5
+  },
+  "first_trial": {
+    "jpeg75": {
+      "control_alerts": 0,
+      "controls": 203,
+      "correct": 18,
+      "evaluated": 240,
+      "gate_pass": false,
+      "misread_positive": 0,
+      "misrendered_controls": 5,
+      "misrendered_controls_flagged": 2,
+      "positive": 32,
+      "unassessed_controls": 177,
+      "unassessed_positive": 14,
+      "valid_control_alert_roles": {}
+    },
+    "png": {
+      "control_alerts": 0,
+      "controls": 203,
+      "correct": 29,
+      "evaluated": 240,
+      "gate_pass": false,
+      "misread_positive": 0,
+      "misrendered_controls": 5,
+      "misrendered_controls_flagged": 5,
+      "positive": 32,
+      "unassessed_controls": 160,
+      "unassessed_positive": 3,
+      "valid_control_alert_roles": {}
+    }
+  },
+  "freeze_sha256s": {
+    "trial-first-shard-0": "d37079b7b50577fcec2c9cec4a14d39c31120656d66b739565e8f016eedd6b80",
+    "trial-first-shard-1": "39e3e05ef6c2521707e8de56370c58420dd717069e8e6dfbfd485e4a93304706",
+    "trial-fresh-shard-0": "623fb398e9c4a373ce36a3c2f04da266110f32f1cb026961fc7de4e8e3f468be",
+    "trial-fresh-shard-1": "afbaa91865db217bce04c8309d2dc5a3500519bf1c0b1729036c8833e9358636"
+  },
+  "fresh_confirmation": {
+    "jpeg75": {
+      "control_alerts": 0,
+      "controls": 208,
+      "correct": 20,
+      "evaluated": 240,
+      "gate_pass": false,
+      "misread_positive": 0,
+      "positive": 32,
+      "unassessed_controls": 177,
+      "unassessed_positive": 12,
+      "valid_control_alert_roles": {}
+    },
+    "png": {
+      "control_alerts": 0,
+      "controls": 208,
+      "correct": 25,
+      "evaluated": 240,
+      "gate_pass": true,
+      "misread_positive": 0,
+      "positive": 32,
+      "unassessed_controls": 170,
+      "unassessed_positive": 7,
+      "valid_control_alert_roles": {}
+    }
+  },
+  "linked_amount_regions": {
+    "at_least_90_percent_box_coverage": 75,
+    "exact_visual_amounts": 75,
+    "min_raster_reference_box_coverage": 0.9050925925925926
+  },
+  "production_replay": {
+    "alert_matches": 25,
+    "checked_pngs": 240,
+    "decision_differences": 0
+  },
+  "read_only_candidate_sha256": "686eacf896b80caae06f70b8a36686e41f2fed6169d9de7213e965fa6113fe76",
+  "records": [
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 0,
+      "min_amount_overlap": 0.9498177740398094,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 0,
+      "min_amount_overlap": 0.9498177740398094,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 0,
+      "min_amount_overlap": 0.9498177740398094,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 0,
+      "min_amount_overlap": 0.9498177740398094,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 0,
+      "min_amount_overlap": 0.9498177740398094,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 0,
+      "min_amount_overlap": 0.9498177740398094,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 0,
+      "min_amount_overlap": 0.9576675077095599,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 0,
+      "min_amount_overlap": 0.9576675077095599,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 0,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 2,
+      "min_amount_overlap": 0.975,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 2,
+      "min_amount_overlap": 0.975,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 2,
+      "min_amount_overlap": 0.975,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 2,
+      "min_amount_overlap": 0.975,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 2,
+      "min_amount_overlap": 0.975,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 2,
+      "min_amount_overlap": 0.975,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 2,
+      "min_amount_overlap": 0.975,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 2,
+      "min_amount_overlap": 0.975,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 2,
+      "min_amount_overlap": 0.975,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 2,
+      "min_amount_overlap": 0.975,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 2,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 4,
+      "min_amount_overlap": 0.9865771812080537,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 4,
+      "min_amount_overlap": 0.9836065573770492,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 4,
+      "min_amount_overlap": 0.9836065573770492,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 4,
+      "min_amount_overlap": 0.9865771812080537,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 4,
+      "min_amount_overlap": 0.9865771812080537,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 4,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 6,
+      "min_amount_overlap": 0.9774436090225563,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 6,
+      "min_amount_overlap": 0.9774436090225563,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 6,
+      "min_amount_overlap": 0.9774436090225563,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 6,
+      "min_amount_overlap": 0.9774436090225563,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 6,
+      "min_amount_overlap": 0.9690721649484536,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 6,
+      "min_amount_overlap": 0.9774436090225563,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 6,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 8,
+      "min_amount_overlap": 0.9527381845461366,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 8,
+      "min_amount_overlap": 0.9527381845461366,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 8,
+      "min_amount_overlap": 0.9377344336084021,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 8,
+      "min_amount_overlap": 0.9377344336084021,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 8,
+      "min_amount_overlap": 0.949985202722699,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 8,
+      "min_amount_overlap": 0.949985202722699,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 8,
+      "min_amount_overlap": 0.9527381845461366,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 8,
+      "min_amount_overlap": 0.9527381845461366,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 8,
+      "min_amount_overlap": 0.9452363090772693,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 8,
+      "min_amount_overlap": 0.9452363090772693,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 8,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 10,
+      "min_amount_overlap": 0.9482758620689655,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 10,
+      "min_amount_overlap": 0.9482758620689655,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 10,
+      "min_amount_overlap": 0.9482758620689655,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 10,
+      "min_amount_overlap": 0.9482758620689655,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 10,
+      "min_amount_overlap": 0.9482758620689655,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 10,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 12,
+      "min_amount_overlap": 0.9473684210526315,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 12,
+      "min_amount_overlap": 0.9473684210526315,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 12,
+      "min_amount_overlap": 0.9473684210526315,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 12,
+      "min_amount_overlap": 0.9473684210526315,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 12,
+      "min_amount_overlap": 0.9494047619047619,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 12,
+      "min_amount_overlap": 0.9494047619047619,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 12,
+      "min_amount_overlap": 0.9176470588235294,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 12,
+      "min_amount_overlap": 0.9176470588235294,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 12,
+      "min_amount_overlap": 0.9473684210526315,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 12,
+      "min_amount_overlap": 0.9473684210526315,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 12,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 14,
+      "min_amount_overlap": 0.9807692307692307,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 14,
+      "min_amount_overlap": 0.9807692307692307,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 14,
+      "min_amount_overlap": 0.9807692307692307,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 14,
+      "min_amount_overlap": 0.9807692307692307,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 14,
+      "min_amount_overlap": 0.9813084112149533,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 14,
+      "min_amount_overlap": 0.9813084112149533,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 14,
+      "min_amount_overlap": 0.9906542056074766,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 14,
+      "min_amount_overlap": 0.9906542056074766,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 14,
+      "min_amount_overlap": 0.9807692307692307,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 14,
+      "min_amount_overlap": 0.9807692307692307,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 14,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 1,
+      "min_amount_overlap": 0.9826086956521739,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 1,
+      "min_amount_overlap": 0.9826086956521739,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 1,
+      "min_amount_overlap": 0.9826086956521739,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 1,
+      "min_amount_overlap": 0.9826086956521739,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 1,
+      "min_amount_overlap": 0.9856115107913669,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 1,
+      "min_amount_overlap": 0.9856115107913669,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 1,
+      "min_amount_overlap": 0.9826086956521739,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 1,
+      "min_amount_overlap": 0.9826086956521739,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 1,
+      "min_amount_overlap": 0.9826086956521739,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 1,
+      "min_amount_overlap": 0.9826086956521739,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 1,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 3,
+      "min_amount_overlap": 0.9563218390804598,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 3,
+      "min_amount_overlap": 0.9563218390804598,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 3,
+      "min_amount_overlap": 0.9300854160075925,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 3,
+      "min_amount_overlap": 0.981651376146789,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 3,
+      "min_amount_overlap": 0.981651376146789,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 3,
+      "min_amount_overlap": 0.9563218390804598,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 3,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 5,
+      "min_amount_overlap": 0.9882352941176471,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 5,
+      "min_amount_overlap": 0.9882352941176471,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 5,
+      "min_amount_overlap": 0.9647058823529412,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 5,
+      "min_amount_overlap": 0.9647058823529412,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 5,
+      "min_amount_overlap": 0.9764705882352941,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 5,
+      "min_amount_overlap": 0.9764705882352941,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 5,
+      "min_amount_overlap": 0.9882352941176471,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 5,
+      "min_amount_overlap": 0.9882352941176471,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 5,
+      "min_amount_overlap": 0.9882352941176471,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 5,
+      "min_amount_overlap": 0.9882352941176471,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 5,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 7,
+      "min_amount_overlap": 0.9532563025210085,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 7,
+      "min_amount_overlap": 0.9532563025210085,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 7,
+      "min_amount_overlap": 0.9539777587681779,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 7,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 9,
+      "min_amount_overlap": 0.9868421052631579,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 9,
+      "min_amount_overlap": 0.9818181818181818,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 9,
+      "min_amount_overlap": 0.9904761904761905,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 9,
+      "min_amount_overlap": 0.9932885906040269,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 9,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 11,
+      "min_amount_overlap": 0.9690721649484536,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 11,
+      "min_amount_overlap": 0.9690721649484536,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 11,
+      "min_amount_overlap": 0.9739130434782609,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 11,
+      "min_amount_overlap": 0.9739130434782609,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 11,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 13,
+      "min_amount_overlap": 0.9568965517241379,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 13,
+      "min_amount_overlap": 0.9568965517241379,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 13,
+      "min_amount_overlap": 0.9435736677115988,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 13,
+      "min_amount_overlap": 0.9435736677115988,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 13,
+      "min_amount_overlap": 0.9655172413793104,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 13,
+      "min_amount_overlap": 0.9655172413793104,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 13,
+      "min_amount_overlap": 0.9655172413793104,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": true,
+      "id": 13,
+      "min_amount_overlap": 0.9435736677115988,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 13,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 15,
+      "min_amount_overlap": 0.9445277361319341,
+      "region_match": true,
+      "status": "match",
+      "variant": "intact"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "intact"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 15,
+      "min_amount_overlap": 0.9445277361319341,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_total"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 15,
+      "min_amount_overlap": 0.9564937157589429,
+      "region_match": true,
+      "status": "mismatch",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "change_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 15,
+      "min_amount_overlap": 0.9445277361319341,
+      "region_match": true,
+      "status": "match",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "synchronized"
+    },
+    {
+      "carrier": "png",
+      "exact": true,
+      "id": 15,
+      "min_amount_overlap": 0.9445277361319341,
+      "region_match": true,
+      "status": "match",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "one_cent"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "included_tax"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "mixed_currency"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duplicate_card"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "unrelated_rows"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "only_amount_due"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "service_fee"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "duties"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "discount_after"
+    },
+    {
+      "carrier": "png",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    },
+    {
+      "carrier": "jpeg75",
+      "exact": false,
+      "id": 15,
+      "min_amount_overlap": null,
+      "region_match": false,
+      "status": "not_supported",
+      "variant": "other_addition"
+    }
+  ],
+  "schema": "chipmunk.printed-total-evaluation/1",
+  "verified_exact_native_edits": 32
+}

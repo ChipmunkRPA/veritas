@@ -36,6 +36,7 @@ from app.evidence import (
 )
 from app.evidence import image_previous_grid_binding as prior_grid
 from app.evidence import image_printed_ids_binding as image_printed_ids
+from app.evidence import image_printed_totals_binding as printed_totals
 from app.evidence.audio_binding import SPEECH_SELECTION, SPEECH_SELECTION_COMMITMENT
 from app.evidence.av_binding import TIMING_COMMITMENT, TIMING_WINDOWS
 from app.evidence.document_check_coverage import COMMITMENT as WRITING_CHECK_COVERAGE
@@ -124,6 +125,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              document_pdf_form_binding.COMMITMENT,
                              document_disclosure_heading.COMMITMENT,
                              IMAGE_INTERPOLATION, prior_grid.COMMITMENT, image_printed_ids.COMMITMENT,
+                             printed_totals.COMMITMENT,
                              SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
                              image_animation_binding.KEY, image_motion_photo_binding.KEY,
                              document_invisible_characters.COMMITMENT, document_chat_markers.COMMITMENT,
@@ -259,6 +261,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         scope = (result.get('decision') or {}).get('image_copy_coverage')
         prior_grid.validate(evidence, result.get(prior_grid.COMMITMENT), stopped=scope is not None)
         image_printed_ids.validate(evidence, result.get(image_printed_ids.COMMITMENT), stopped=scope is not None)
+        printed_totals.validate(evidence, result.get(printed_totals.COMMITMENT), stopped=scope is not None)
         if native := evidence.get(interpolation.KEY):
             _require((native['record']['status'] == 'provenance') == (scope is not None),
                      'Interpolation evidence differs from the provenance disposition')
@@ -305,6 +308,8 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              'JPEG compression commitments require image evidence')
     _require(analysis['kind'] == 'image' or image_printed_ids.COMMITMENT not in result and image_printed_ids.KEY not in evidence,
              'Printed identifier evidence belongs to images')
+    _require(analysis['kind'] == 'image' or printed_totals.COMMITMENT not in result and printed_totals.KEY not in evidence,
+             'Printed total evidence belongs to images')
     _require(analysis['kind'] == 'document' or email_alternatives.COMMITMENT not in result,
              'Email body rendition commitments require document evidence')
     _require(analysis['kind'] == 'document' or WRITING_POSITION not in result,
@@ -510,6 +515,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         groups.append(interpolation.assets(evidence))
         groups.append(prior_grid.assets(evidence))
         groups.append(image_printed_ids.assets(evidence))
+        groups.append(printed_totals.assets(evidence))
     thumbnail_assets = set()
     png_limits = {}
     if IMAGE_EDITOR_PREVIEW in result:

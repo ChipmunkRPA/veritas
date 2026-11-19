@@ -16,6 +16,7 @@ from app.evidence import image_interpolation_binding as interpolation
 from app.evidence import image_motion_photo_binding as motion_photo
 from app.evidence import image_previous_grid_binding as prior_grid
 from app.evidence import image_printed_ids_binding as printed_ids
+from app.evidence import image_printed_totals_binding as printed_totals
 from app.evidence import image_transparency_binding as transparency
 from app.evidence.image_copy_similarity_binding import (
     DIAGONAL_EXACT_VERSIONS,
@@ -215,6 +216,18 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             with raw.convert("RGB") as raster:
                 verify_crops(raster, review, lambda digest: archive.read(f"assets/{digest}.png"))
         native_detail += " Matched both printed identifier crops to the submitted image."
+    if review := evidence.get(printed_totals.KEY):
+        from app.evidence.image_printed_totals import verify_crops
+
+        printed_totals.validate(evidence, evidence["source"].get(printed_totals.COMMITMENT))
+        with Image.open(io.BytesIO(data), formats=["PNG"]) as raw:
+            if (raw.size != (evidence["source"]["width"], evidence["source"]["height"])
+                    or raw.getexif().get(274, 1) != 1 or raw.mode not in {"RGB", "L"}
+                    or "transparency" in raw.info or raw.n_frames != 1):
+                raise ValueError("Printed total evidence requires the original upright opaque PNG")
+            with raw.convert("RGB") as raster:
+                verify_crops(raster, review, lambda digest: archive.read(f"assets/{digest}.png"))
+        native_detail += " Matched all three printed total crops to the submitted image."
     projected = json.loads(archive.read('result.json')) if 'result.json' in archive.namelist() else {}
     preview = projected.get(IMAGE_EDITOR_PREVIEW)
     if transparency.KEY in projected:

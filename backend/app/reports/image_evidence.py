@@ -13,6 +13,7 @@ from app.evidence import image_embedded_pair_binding as embedded_pair
 from app.evidence import image_interpolation_binding as interpolation
 from app.evidence import image_previous_grid_binding as prior_grid
 from app.evidence import image_printed_ids_binding as printed_ids
+from app.evidence import image_printed_totals_binding as printed_totals
 from app.evidence.image_eligibility import repeat_pass
 from app.reports.image_eligibility import eligibility_view, inspection_check_view
 from app.storage.objects import ObjectIntegrityError, ObjectStore, default_store
@@ -81,10 +82,9 @@ def capture(db: Session, analysis: Analysis, *, store: ObjectStore | None = None
             _asset_bytes(packet["artifacts"][role], store)
     for asset in embedded_pair.artifacts(document).values():
         _asset_bytes(asset, store)
-    for asset in (*interpolation.assets(document).values(), *prior_grid.assets(document).values()):
-        _asset_bytes(asset, store)
-    for asset in printed_ids.assets(document).values():
-        _asset_bytes(asset, store)
+    for method in (interpolation, prior_grid, printed_ids, printed_totals):
+        for asset in method.assets(document).values():
+            _asset_bytes(asset, store)
     return copy.deepcopy(document)
 
 
@@ -173,6 +173,19 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             for role, label in printed_ids.PLATES.items():
                 printed_review["fields"].append({**reading["record"]["values"][role], "label": label,
                     "uri": "data:image/png;base64," + base64.b64encode(_asset_bytes(reading["artifacts"][role], store)).decode("ascii")})
+    total_review = None
+    if total_reading := document.get(printed_totals.KEY):
+        total_review = {"title": printed_totals.TITLE, "limitation": printed_totals.LIMITATION, "fields": []}
+        if not withheld:
+            record = total_reading["record"]
+            currency = record["currency"]
+            total_review["calculated"] = printed_totals.calculated_display(record)
+            total_review["printed"] = currency + record["fields"]["total"]["printed"]
+            for role, label in printed_totals.ROLES.items():
+                row = record["fields"][role]
+                total_review["fields"].append({"role": role, "label": label, "printed": currency + row["printed"],
+                    "amount_region": row["amount_region"],
+                    "uri": "data:image/png;base64," + base64.b64encode(_asset_bytes(total_reading["artifacts"][role], store)).decode("ascii")})
     packets = []
     for packet in document["packets"]:
         images = []
@@ -391,7 +404,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "source_sha256": document["source"]["sha256"], "source": document["source"], "packets": packets,
             "limitations": document["limitations"], "omitted_regions": document["omitted_regions"], "withheld": withheld,
             "inspection_checks": inspection_checks,
-            "comparison": comparison, **copy_checks, embedded_pair.KEY: exact, printed_ids.KEY: printed_review, **local_reviews,
+            "comparison": comparison, **copy_checks, embedded_pair.KEY: exact, printed_ids.KEY: printed_review,
+            printed_totals.KEY: total_review, **local_reviews,
             "note": "Each plate is derived from the recorded original and the same evidence set used by the JSON export. "
                     "Inspection regions alone do not establish editing or AI generation."}
 
@@ -425,4 +439,8 @@ def manifest(snapshot: ReportSnapshot) -> dict[str, Any] | None:
         result[printed_ids.COMMITMENT] = document["source"][printed_ids.COMMITMENT]
         result["artifacts"].extend({"packet_id": "ID01", "role": role, "sha256": asset["sha256"]}
                                    for role, asset in printed_ids.assets(document).items())
+    if printed_totals.KEY in document and snapshot.report.profile != "newsroom" and not snapshot.report.redacted:
+        result[printed_totals.COMMITMENT] = document["source"][printed_totals.COMMITMENT]
+        result["artifacts"].extend({"packet_id": "PT01", "role": role, "sha256": asset["sha256"]}
+                                   for role, asset in printed_totals.assets(document).items())
     return result

@@ -13,6 +13,17 @@ or rerun a workflow.
 
 ## Start with a bounded check
 
+The [PNG printed-total comparison](image-printed-totals-2026-11-19.md)
+includes a replayable controlled evaluation for the arithmetic and exact
+source crops. It carries zero weight in the automated assessment.
+
+The [held 25 fps face comparison](video-face-matched-detail-native25-confirmation-2026-11-19.md)
+adds broader ordinary blur controls and publishes the alert tradeoff.
+
+The [learned speech reconstruction preflight](audio-learned-enrollment-genuine-preflight-2026-11-19.md)
+reviews two held noisy source groups. The replay checks grouped acoustic
+measurements. Synthetic speech retention and detection are still unmeasured.
+
 From the repository root, run `make replay-evidence` with Python 3.11
 or newer. It uses the standard library to verify the published case
 records and recalculate results for [reflected PNG areas](image-png-reflection-2026-11-18.md),

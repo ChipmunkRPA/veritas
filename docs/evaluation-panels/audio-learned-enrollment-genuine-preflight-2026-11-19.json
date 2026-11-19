@@ -1,0 +1,242 @@
+{
+  "claims": {
+    "authenticity_detection_measured": false,
+    "deepfake_false_alarm_rate_measured": false,
+    "deepfake_miss_rate_measured": false,
+    "overall_assessment_changed": false,
+    "production_activation_supported": false,
+    "source_attribution_supported": false,
+    "synthetic_retention_measured": false,
+    "unseen_reader_validation": false
+  },
+  "clean_genuine_groups": [
+    {
+      "genuine_deliveries": 2,
+      "retention_db_0_to_3": 2,
+      "role": "development"
+    },
+    {
+      "genuine_deliveries": 2,
+      "retention_db_0_to_3": 2,
+      "role": "held"
+    }
+  ],
+  "closed": true,
+  "frozen_gate": {
+    "held_retention_each_cell_at_least_minus3_db": true,
+    "held_snr_gain_each_cell_at_least_0p5_db": true,
+    "held_true_beats_wrong_at_least_two_thirds": true
+  },
+  "genuine_engineering_gate_passed": true,
+  "licensing_exclusions": {
+    "checkpoint_has_usef_tensor_entries": false,
+    "disabled_branch_has_fail_closed_stub": true,
+    "noncommercial_optional_source_removed_before_import": true,
+    "optional_usef_enabled": false,
+    "optional_usef_source_executed": false
+  },
+  "limits": [
+    "Only two held reader/meeting lineages supply the four held noisy conditions. Repeated noise levels are correlated observations.",
+    "The genuine recordings are from LibriSpeech train-clean-100 and the shipped model recipe names train-100. Exact upstream training membership is unresolved. Same-corpus overlap may favor reconstruction.",
+    "Genuine originals, references and AMI meeting groups appeared in previous project studies. Newly selected background clocks and project-role disjointness do not establish unseen-source validation.",
+    "Every foreground is genuine. Synthetic short-segment retention, downstream deepfake accuracy and false alarms remain unmeasured. The conditional one-family bank was not processed.",
+    "A supplied genuine same-reader reference is required. A wrong reference produced equal or better SNR in one held cell. Reconstruction establishes no speaker identity.",
+    "Known separated components exist for this acoustic audit. User uploads do not provide that ground truth. The acoustic improvement has no automatic implication for detection.",
+    "Public rows contain grouped counts and broad gain bands. They omit individual responses, positions, source hashes, identities, paths and audio. Exact source/model replay requires retained private custody."
+  ],
+  "method": {
+    "background_projection_is_speaker_attribution": false,
+    "checkpoint_bytes": 251856016,
+    "checkpoint_sha256": "42b73219eefefcbba4b5da0dcb89dce292359c9f93b1a951c7b6d196da2155b3",
+    "clean_snr_improvement_interpreted": false,
+    "config_sha256": "80820eb78de6639160f7124d09cbacbc8397e321d8075721e89edb7cec50a0fa",
+    "cpu_threads": 2,
+    "enrollment_vad_or_trimming": false,
+    "extractor": "REAL-TSE causal BSRNN with embedded ECAPA genuine enrollment",
+    "grader": "Known-component least-squares foreground/noise projection. Residual output energy remains error.",
+    "interop_threads": 1,
+    "kind": "learned_enrollment_conditioned_acoustic_reconstruction",
+    "original_clock_preserved": true,
+    "output_peak_normalization": false,
+    "published_config_preserved": true,
+    "source_alignment_or_truth_based_rescaling": false,
+    "strict_tensor_state_entries": 948,
+    "thresholds": {
+      "minimum_each_held_foreground_retention_db": -3,
+      "minimum_each_held_snr_gain_db": 0.5,
+      "true_beats_wrong_required_denominator": 3,
+      "true_beats_wrong_required_numerator": 2
+    },
+    "unsafe_pickle_globals": 0
+  },
+  "noisy_genuine_groups": [
+    {
+      "condition": "minus5",
+      "genuine_deliveries": 2,
+      "reader_meeting_lineages": 2,
+      "retention_db_bands": {
+        "0_to_3": 0,
+        "3_or_more": 0,
+        "below_minus3": 0,
+        "minus3_to_0": 2
+      },
+      "role": "development",
+      "snr_gain_db_bands": {
+        "0p5_to_5": 1,
+        "10_to_15": 0,
+        "15_or_more": 0,
+        "5_to_10": 1,
+        "below_0p5": 0
+      },
+      "true_reference_better_snr_than_wrong": 2,
+      "true_reference_retention_at_least_minus3_db": 2,
+      "true_reference_snr_gain_at_least_0p5_db": 2
+    },
+    {
+      "condition": "minus10",
+      "genuine_deliveries": 2,
+      "reader_meeting_lineages": 2,
+      "retention_db_bands": {
+        "0_to_3": 0,
+        "3_or_more": 0,
+        "below_minus3": 0,
+        "minus3_to_0": 2
+      },
+      "role": "development",
+      "snr_gain_db_bands": {
+        "0p5_to_5": 0,
+        "10_to_15": 0,
+        "15_or_more": 0,
+        "5_to_10": 2,
+        "below_0p5": 0
+      },
+      "true_reference_better_snr_than_wrong": 2,
+      "true_reference_retention_at_least_minus3_db": 2,
+      "true_reference_snr_gain_at_least_0p5_db": 2
+    },
+    {
+      "condition": "minus5",
+      "genuine_deliveries": 2,
+      "reader_meeting_lineages": 2,
+      "retention_db_bands": {
+        "0_to_3": 1,
+        "3_or_more": 0,
+        "below_minus3": 0,
+        "minus3_to_0": 1
+      },
+      "role": "held",
+      "snr_gain_db_bands": {
+        "0p5_to_5": 0,
+        "10_to_15": 1,
+        "15_or_more": 0,
+        "5_to_10": 1,
+        "below_0p5": 0
+      },
+      "true_reference_better_snr_than_wrong": 1,
+      "true_reference_retention_at_least_minus3_db": 2,
+      "true_reference_snr_gain_at_least_0p5_db": 2
+    },
+    {
+      "condition": "minus10",
+      "genuine_deliveries": 2,
+      "reader_meeting_lineages": 2,
+      "retention_db_bands": {
+        "0_to_3": 0,
+        "3_or_more": 0,
+        "below_minus3": 0,
+        "minus3_to_0": 2
+      },
+      "role": "held",
+      "snr_gain_db_bands": {
+        "0p5_to_5": 0,
+        "10_to_15": 1,
+        "15_or_more": 0,
+        "5_to_10": 1,
+        "below_0p5": 0
+      },
+      "true_reference_better_snr_than_wrong": 2,
+      "true_reference_retention_at_least_minus3_db": 2,
+      "true_reference_snr_gain_at_least_0p5_db": 2
+    }
+  ],
+  "publisher_sources": [
+    {
+      "license": "Apache-2.0 publisher grant for inference code and linked checkpoints",
+      "title": "REAL-TSE implementation and linked checkpoint grant",
+      "url": "https://github.com/REAL-TSE/wesep-real-tse/blob/d9ed77d788e9bc8ca08d15854defe404e4593773/README.md"
+    },
+    {
+      "license": "Apache-2.0 code. Publisher lists VoxCeleb pretrained weights as CC BY 4.0",
+      "title": "WeSpeaker upstream model terms",
+      "url": "https://github.com/wenet-e2e/wespeaker/blob/8f53b6485d9f88a207bd17e7f8dba899495ec794/docs/pretrained.md"
+    },
+    {
+      "license": "BSD-2-Clause",
+      "title": "TorchAudio Kaldi frontend",
+      "url": "https://github.com/pytorch/audio/blob/v2.7.1/LICENSE"
+    },
+    {
+      "license": "CC BY 4.0",
+      "title": "LibriSpeech source recordings",
+      "url": "https://www.openslr.org/12/"
+    },
+    {
+      "license": "CC BY 4.0",
+      "title": "AMI recordings and annotations",
+      "url": "https://groups.inf.ed.ac.uk/ami/corpus/license.shtml"
+    }
+  ],
+  "schema": "chipmunk.learned-enrollment-genuine-preflight-aggregate/1",
+  "scope": {
+    "acoustic_control_interval_samples": 15360,
+    "background_only_deliveries": 8,
+    "declared_annotated_participants": 16,
+    "development_reader_meeting_lineages": 2,
+    "distinct_meeting_groups": 4,
+    "genuine_deliveries": 12,
+    "genuine_upstream_training_corpus_overlap_possible": true,
+    "held_reader_meeting_lineages": 2,
+    "native_channels": 1,
+    "native_pcm_bits": 16,
+    "native_rate_hz": 16000,
+    "native_samples_per_delivery": 192000,
+    "noise_conditions_db": [
+      -5,
+      -10
+    ],
+    "noisy_genuine_deliveries_per_role": 4,
+    "original_native_host_seconds": 12,
+    "per_case_results_published": false,
+    "project_source_reuse": true,
+    "raw_waveforms_published": false,
+    "reference_choices_per_delivery": 2,
+    "role_meeting_overlap": 0,
+    "role_participant_overlap": 0,
+    "role_reader_overlap": 0,
+    "separate_genuine_enrollment_seconds": 4,
+    "synthetic_deliveries": 0,
+    "target_readers": 4,
+    "total_input_deliveries": 20
+  },
+  "verification": {
+    "actual_extraction_calls": 41,
+    "authenticity_calls": 0,
+    "authored_baseline_extraction_calls": 2,
+    "authored_grader_controls": 7,
+    "exact_initial_repeat": true,
+    "ffmpeg_input_replays": 20,
+    "independent_native_and_outcome_replays_passed": true,
+    "known_component_additive_samples": 1536000,
+    "native_input_samples_checked": 3840000,
+    "native_output_samples_checked": 7680000,
+    "original_clone_model_calls": 0,
+    "original_parquet_pins_verified": 3,
+    "original_source_flacs_verified": 8,
+    "output_records": 40,
+    "same_reader_different_chapter_enrollments": 4,
+    "scalar_fields_independently_recomputed": 480,
+    "synthetic_extraction_calls": 0,
+    "total_extraction_calls_including_authored": 43,
+    "wrong_reader_enrollments": 4
+  }
+}

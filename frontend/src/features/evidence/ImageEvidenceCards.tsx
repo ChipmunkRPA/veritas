@@ -612,6 +612,34 @@ function PrintedIdentifiers({ set, token, mediaReady }: { set: ImageEvidenceSet;
   </section>
 }
 
+function PrintedTotals({ set, token, mediaReady }: { set: ImageEvidenceSet; token: string; mediaReady: boolean }) {
+  const review = set.printed_total_comparison
+  if (!review || review.record.source_sha256 !== set.source.sha256 || review.record.affects_overall_confidence !== false) return null
+  const { currency, calculated_cents, fields } = review.record
+  const computed = new Intl.NumberFormat('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(calculated_cents / 100)
+  return <section id="image-evidence-printed-total" aria-labelledby="printed-total-heading" className="mt-4 rounded-md border border-border p-4 scroll-mt-20">
+    <h3 id="printed-total-heading" className="m-0 text-body font-medium">Printed total mismatch</h3>
+    <dl className="mt-2 mb-0 grid max-w-lg grid-cols-2 gap-3 text-small">
+      <div><dt>Subtotal plus tax</dt><dd className="m-0 font-mono font-medium">{currency}{computed}</dd></div>
+      <div><dt>Printed total</dt><dd className="m-0 font-mono font-medium">{currency}{fields.total.printed}</dd></div>
+    </dl>
+    <div className="mt-4 grid max-w-2xl gap-3">{([
+      ['subtotal', 'Printed subtotal'], ['tax', 'Printed tax'], ['total', 'Printed total'],
+    ] as const).map(([role, label]) => {
+      const { printed, amount_region: [x, y, right, bottom] } = fields[role]
+      return <figure key={role} className="m-0 min-w-0">
+        <EvidencePicture set={set} artifact={review.artifacts[role]} token={token} ready={mediaReady} alt={`${label} row in the original image`} compact />
+        <figcaption className="mt-1 flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1 text-small">
+          <span>{label} <span className="font-mono">{currency}{printed}</span></span>
+          <Link to={evidenceSourceUrl(set.analysis_id, { region: { x, y, w: right - x, h: bottom - y } })}
+            className="font-medium text-accent underline underline-offset-[3px]">Inspect the {role} amount in the original image</Link>
+        </figcaption>
+      </figure>
+    })}</div>
+    <p className="mt-3 mb-0 text-small text-text-muted">Another adjustment or an ordinary accounting or transcription error can explain the difference. This observation carries zero weight in the AI assessment.</p>
+  </section>
+}
+
 export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvidenceSet; token: string; mediaReady: boolean }) {
   const [showAll, setShowAll] = useState(false)
   const { hash, key } = useLocation()
@@ -642,6 +670,7 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
     : 0
   const hasLocalEvidence = set.copy_similarity?.pairs.length || set.copy_translation?.pairs.length || set.copy_affine?.pairs.length
     || set.embedded_pair_difference?.pair || region || set.jpeg_prior_grid_review?.record.region || set.printed_identifier_comparison
+    || set.printed_total_comparison
   const shown = showAll ? set.packets : set.packets.slice(0, 3)
   return (
     <div ref={root} data-testid="image-evidence-content" data-evidence-set={set.id ?? ''} data-evidence-hash={set.sha256 ?? ''}>
@@ -651,6 +680,7 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
       <CopySimilarity set={set} field="copy_affine" token={token} mediaReady={mediaReady} />
       <EmbeddedPairDifference set={set} token={token} mediaReady={mediaReady} />
       <PrintedIdentifiers set={set} token={token} mediaReady={mediaReady} />
+      <PrintedTotals set={set} token={token} mediaReady={mediaReady} />
       <JpegCompressionHistory set={set} token={token} mediaReady={mediaReady} />
       {interpolation && <section aria-label="Local pixel interpolation" className="mt-4 rounded-md border border-border p-4">
         <h3 className="m-0 text-body font-medium">Local pixel interpolation</h3>

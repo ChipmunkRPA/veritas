@@ -7,7 +7,8 @@
 {% set native_interpolation = v.image_evidence.get('native_interpolation_review') %}
 {% set jpeg_grid = v.image_evidence.get('jpeg_prior_grid_review') %}
 {% set printed_ids = v.image_evidence.get('printed_identifier_comparison') %}
-{% set evidence_detail = v.image_evidence.packets or v.image_evidence.get('inspection_checks') or (similarity and similarity.pairs) or (translation and translation.pairs) or (affine and affine.pairs) or (exact_pair and exact_pair.pair) or native_interpolation or jpeg_grid or printed_ids %}
+{% set printed_totals = v.image_evidence.get('printed_total_comparison') %}
+{% set evidence_detail = v.image_evidence.packets or v.image_evidence.get('inspection_checks') or (similarity and similarity.pairs) or (translation and translation.pairs) or (affine and affine.pairs) or (exact_pair and exact_pair.pair) or native_interpolation or jpeg_grid or printed_ids or printed_totals %}
 <section class="{% if evidence_detail %}chapter{% else %}chapter-cont{% endif %} image-evidence{% if s.report.profile in ['summary', 'newsroom'] and evidence_detail %} evidence-appendix{% endif %}" aria-labelledby="image-evidence-heading">
 <h2 class="chapter-title" id="image-evidence-heading">{% if v.get('number', {}).get('source-evidence') %}<span class="n">{{ v.number['source-evidence'] }}</span>{% endif %}Image evidence</h2>
 <p>{{ v.image_evidence.note }}</p>
@@ -23,6 +24,22 @@
 <div class="evidence-plates evidence-plates-identifiers">{% for item in printed_ids.fields %}<figure><img src="{{ item.uri }}" alt="{{ item.label }}"><figcaption>{{ item.label }} <span class="mono">{{ item.value }}</span><br>Source columns [{{ item.region[0] }}, {{ item.region[2] }}) and rows [{{ item.region[1] }}, {{ item.region[3] }}).</figcaption></figure>{% endfor %}</div>
 {% else %}<p>The printed entry and its confirmation differ. The values and crops are withheld in this copy.</p>{% endif %}
 <p class="caption">{{ printed_ids.limitation }} JSON pointer <span class="mono">/printed_identifier_comparison</span>.</p>
+</article>
+{% endif %}
+{% if printed_totals %}
+<article class="image-evidence-packet" id="image-evidence-printed-total">
+<h3>{{ printed_totals.title }}</h3>
+{% if printed_totals.fields %}
+<p>The <a href="#printed-amount-subtotal">subtotal</a> plus <a href="#printed-amount-tax">tax</a> is <strong class="mono">{{ printed_totals.calculated }}</strong>. The <a href="#printed-amount-total">printed total</a> is <strong class="mono">{{ printed_totals.printed }}</strong>.</p>
+<div class="evidence-plates evidence-plates-totals">
+{% for field in printed_totals.fields %}
+<figure id="printed-amount-{{ field.role }}"><img src="{{ field.uri }}" alt="{{ field.label }} row in the original image">
+{% set amount = field.amount_region %}
+<figcaption>{{ field.label }} <span class="mono">{{ field.printed }}</span>. Amount columns [{{ amount[0] }}, {{ amount[2] }}) and rows [{{ amount[1] }}, {{ amount[3] }}).</figcaption></figure>
+{% endfor %}
+</div>
+{% else %}<p>The subtotal plus tax differs from the printed total. The values and crops are withheld in this copy.</p>{% endif %}
+<p class="caption">{{ printed_totals.limitation }} JSON pointer <span class="mono">/printed_total_comparison</span>.</p>
 </article>
 {% endif %}
 {% if jpeg_grid %}

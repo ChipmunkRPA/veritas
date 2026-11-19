@@ -10,6 +10,8 @@ export interface EvidenceImage {
   url: string
 }
 
+type PrintedTotalRole = 'subtotal' | 'tax' | 'total'
+
 export interface CandidateEligibility {
   schema: 'image-candidate-eligibility/1' | 'image-candidate-eligibility/2'
   status: 'evaluated'
@@ -176,6 +178,13 @@ export interface ImageEvidenceSet {
     record: { source_sha256: string; field: string; affects_overall_confidence: false;
       values: Record<'entry' | 'confirmation', { value: string; region: [number, number, number, number] }> }
     artifacts: Record<'entry' | 'confirmation', EvidenceImage>
+  }
+  printed_total_comparison?: {
+    record: { schema: 'image-printed-total-comparison/1'; source_sha256: string; affects_overall_confidence: false;
+      currency: '$' | '£' | '€'; calculated_cents: number; delta_cents: number;
+      fields: Record<PrintedTotalRole, { printed: string; source_region: [number, number, number, number];
+        amount_region: [number, number, number, number] }> }
+    artifacts: Record<PrintedTotalRole, EvidenceImage>
   }
   native_interpolation_review?: {
     record: { status: string; observation: string; scope: string; limitation: string; basis?: string | null;

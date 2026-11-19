@@ -58,6 +58,12 @@ WORD_NOTES_KEY = "word_linked_notes"
 WORD_NOTES = "word-linked-notes/1"
 WORD_NOTE_LABELS = {"footnote": "Word footnote", "endnote": "Word endnote"}
 WORD_NOTE_FIELDS = ("note_id", "note_paragraph_index", "reference_body_index", "reference_run_index", "reference_child_index")
+WORD_TEXT_BOX_KEY = "word_text_boxes"
+WORD_TEXT_BOX = "word-saved-body-text-boxes/1"
+WORD_TEXT_BOX_FIELDS = ("reference_body_index", "part_index", "part_paragraph_index")
+WORD_TEXT_BOX_SCOPE = ("Includes supported saved text from simple drawing text boxes anchored in the Word body. "
+                       "Positions identify the stored drawing and paragraph. Page layout, linked boxes and clipping "
+                       "are outside this check.")
 MAX_SAVED_FIELDS = 256
 MAX_SAVED_FIELD_LOCATIONS = 16
 MAX_SAVED_FIELD_CHARS = 256
@@ -157,6 +163,12 @@ def _coordinate(source, coverage, anchor):
                 or any(type(anchor.get(field)) is not int or anchor[field] < 0 for field in WORD_NOTE_FIELDS)):
             raise ValueError("Missing Word footnote or endnote source position")
         return "word_note_paragraph"
+    if kind == "markup" and anchor.get("part_kind") == "word_text_box":
+        boxes = coverage.get(WORD_TEXT_BOX_KEY) or {}
+        if (method != "python-docx" or boxes.get("schema") != WORD_TEXT_BOX or not boxes.get("boxes")
+                or any(type(anchor.get(field)) is not int or anchor[field] < 0 for field in WORD_TEXT_BOX_FIELDS)):
+            raise ValueError("Missing Word text box source position")
+        return "word_text_box_paragraph"
     if (kind == "markup" and coverage.get(PARAGRAPH_MAP_KEY) == PARAGRAPH_MAP
             and type(anchor.get("paragraph_index")) is int and anchor["paragraph_index"] >= 0):
         if method in PACKAGE_METHODS and (anchor.get("part_kind") != PACKAGE_METHODS[method]
@@ -183,6 +195,9 @@ def _coordinate(source, coverage, anchor):
 
 def package_anchor_label(anchor):
     kind = anchor.get("part_kind")
+    if anchor.get("kind") == "markup" and kind == "word_text_box":
+        return (f"Word text box at body block {anchor['reference_body_index'] + 1}, "
+                f"drawing {anchor['part_index'] + 1}, paragraph {anchor['part_paragraph_index'] + 1}")
     if anchor.get("kind") == "markup" and kind in WORD_NOTE_LABELS:
         return (f"{WORD_NOTE_LABELS[kind]} ID {anchor['note_id']}, paragraph {anchor['note_paragraph_index'] + 1}. "
                 f"Reference in Word body block {anchor['reference_body_index'] + 1}")
@@ -240,6 +255,13 @@ def validate(document):
                 or notes["included"] > min(notes["references"], notes["paragraphs"])
                 or bool(notes["included"]) != bool(notes["paragraphs"])):
             raise ValueError("Invalid linked Word note coverage")
+    if WORD_TEXT_BOX_KEY in coverage:
+        boxes = coverage[WORD_TEXT_BOX_KEY]
+        if (not isinstance(boxes, dict) or set(boxes) != {"schema", "boxes", "paragraphs"}
+                or boxes["schema"] != WORD_TEXT_BOX or document.get("source", {}).get("method") != "python-docx"
+                or any(type(boxes[key]) is not int or not 0 <= boxes[key] <= 4096 for key in ("boxes", "paragraphs"))
+                or boxes["boxes"] > boxes["paragraphs"] or bool(boxes["boxes"]) != bool(boxes["paragraphs"])):
+            raise ValueError("Invalid Word text box coverage")
     if PARAGRAPH_MAP_KEY in coverage and (coverage[PARAGRAPH_MAP_KEY] != PARAGRAPH_MAP
             or document.get("source", {}).get("method") not in PARAGRAPH_COORDINATES):
         raise ValueError("Invalid decoded body paragraph mapping")
@@ -269,7 +291,7 @@ def validate(document):
         raise ValueError("Invalid saved HTML article boundaries")
     record = coverage.get(KEY)
     if (record is not None or article is not None
-            or PARAGRAPH_MAP_KEY in coverage or WORD_NOTES_KEY in coverage) and record != build(document):
+            or any(key in coverage for key in (PARAGRAPH_MAP_KEY, WORD_NOTES_KEY, WORD_TEXT_BOX_KEY))) and record != build(document):
         raise ValueError("Original text locations differ from their mapped evidence spans")
     if article is not None and record is not None:
         start, end = article["scope"]

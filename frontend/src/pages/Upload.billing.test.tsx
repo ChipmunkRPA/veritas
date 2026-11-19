@@ -91,7 +91,7 @@ describe('paid analysis intake', () => {
     fireEvent.change(input, { target: { files: [new File(['old Word'], 'draft.DOC')] } })
     expect(screen.getByRole('alert').textContent).toContain('Save the older Word file as DOCX or PDF')
     fireEvent.change(input, { target: { files: [new File(['Word'], 'draft.DOCX')] } })
-    expect(screen.getByText(/Word checks body paragraphs and supported tables/)).toBeTruthy()
+    expect(screen.getByText(/Word checks body paragraphs.*simple text boxes/)).toBeTruthy()
     const replacement = container.querySelector<HTMLInputElement>('input[type="file"]')!
     fireEvent.change(replacement, { target: { files: [new File(['saved article'], 'article.XHTML', { type: 'application/xhtml+xml' })] } })
     expect(screen.getByText('article.XHTML')).toBeTruthy()
@@ -117,7 +117,7 @@ describe('paid analysis intake', () => {
     ] } })
     const guidance = screen.getByText('What the document checks cover').parentElement!
     expect(guidance.querySelectorAll('li')).toHaveLength(2)
-    expect(guidance.textContent).toContain('Word checks body paragraphs and supported tables')
+    expect(guidance.textContent).toContain('simple text boxes')
     expect(guidance.textContent).toContain('Hidden groups are excluded')
   })
   it('requires an unchecked limitations acknowledgement and resets it for a changed source', () => {

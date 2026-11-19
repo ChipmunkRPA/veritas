@@ -140,6 +140,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                           map_word_table_grid=table_grid in document_native_locations.WORD_TABLE_GRID_VERSIONS,
                           map_word_table_controls=table_grid == document_native_locations.WORD_TABLE_GRID,
                           include_word_linked_notes=document_native_locations.WORD_NOTES_KEY in coverage,
+                          include_word_text_boxes=document_native_locations.WORD_TEXT_BOX_KEY in coverage,
                           map_word_hyperlink_runs=coverage.get(document_native_locations.WORD_RUN_MAP_KEY)
                           == document_native_locations.WORD_RUN_MAP)
         except (OpcError, XMLSyntaxError) as error:
@@ -200,6 +201,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
               document_native_locations.PARAGRAPH_MAP_KEY: None, document_native_locations.WORD_TABLE_GRID_KEY: None,
               document_native_locations.PPTX_VISIBILITY_KEY: None, document_native_locations.WORD_RUN_MAP_KEY: None,
               document_native_locations.ODT_VISIBILITY_KEY: None, document_native_locations.WORD_NOTES_KEY: None,
+              document_native_locations.WORD_TEXT_BOX_KEY: None,
               document_native_locations.RTF_VISIBILITY_KEY: None,
               document_native_locations.MARKDOWN_FENCES_KEY: None,
               document_native_locations.XLSX_VISIBILITY_KEY: None}

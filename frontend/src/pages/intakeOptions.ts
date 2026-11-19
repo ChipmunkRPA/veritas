@@ -40,7 +40,7 @@ const delimitedCoverage = 'Writing is checked within each text field. Reports sh
 const htmlCoverage = 'Saved web pages are checked without navigation and text explicitly marked hidden. Stylesheets and scripts are outside this check.'
 
 const documentCoverage = new Map(Object.entries({
-  docx: 'Word checks body paragraphs and supported tables, including filled form controls. It also checks supported footnotes and endnotes. Export to PDF to include rendered text boxes, headers, footers, or notes outside this scope.',
+  docx: 'Word checks body paragraphs, supported tables, filled form controls, and simple text boxes. It also checks supported footnotes and endnotes. Export to PDF to include headers, footers, or text in complex layouts.',
   odt: 'OpenDocument checks the saved body text. Hidden and conditionally displayed sections are outside this check.',
   pdf: 'PDF checks selectable text and can try to recognize text on scans. Some pages or areas may remain unchecked.',
   pptx: 'PowerPoint checks editable text and tables on visible slides. Hidden groups are excluded. Export to PDF to include writing that appears only in images.',

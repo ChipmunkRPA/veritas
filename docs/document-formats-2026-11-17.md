@@ -9,7 +9,7 @@ limit is 25 MB in the standard configuration.
 
 | Format | Writing examined | Source position in reports |
 | --- | --- | --- |
-| DOCX | Body paragraphs, tables, filled form controls, supported saved fields, and supported linked footnotes and endnotes in standard and Strict Open XML DOCX. Separate revision and visibility checks cover supported structures. | Word body paths, paragraph characters, available run coordinates, and the note's paragraph characters and reference |
+| DOCX | Body paragraphs, tables, filled form controls, supported saved fields, simple drawing text boxes, and supported linked footnotes and endnotes in standard and Strict Open XML DOCX. Separate revision and visibility checks cover supported structures. | Word body paths, drawing or note references, paragraph character ranges, and available run coordinates |
 | ODT | Body paragraphs, headings, lists, and tables outside hidden and conditionally displayed sections | Decoded body paragraph number and character range |
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
 | PPTX | Editable text boxes and tables on visible slides | Slide in presentation order, text block, and decoded character range |
@@ -195,6 +195,22 @@ maps the Strict body and style markup for text extraction and retains the
 submitted bytes for Content Credentials, hashing, and original-file review.
 [Microsoft's Word format reference](https://learn.microsoft.com/en-us/office/compatibility/office-file-format-reference) ·
 [Open XML SDK Strict DOCX test fixture](https://github.com/dotnet/Open-XML-SDK/blob/431ab05cf160248cc3885a4a766026d4f8243792/test/DocumentFormat.OpenXml.Tests.Assets/assets/TestFiles/Strict01.docx)
+
+The writing check also reads saved text in simple DrawingML text boxes
+anchored to top-level Word body paragraphs without tracked revisions. It
+reads the supported modern drawing once when the package also carries a
+copy for older viewers. The browser, PDF, and JSON identify the anchor's
+body block, drawing within that block, text box paragraph, and paragraph
+character range. Signed packages use the recorded reading policy to replay
+those positions. Export to PDF for linked boxes, older drawing-only boxes,
+headers, footers, or layouts that require the rendered page.
+[Microsoft's Word drawing text box specification](https://learn.microsoft.com/en-us/openspecs/office_standards/ms-odrawxml/9ef316cc-3b39-4765-89ac-f8524fab383b)
+
+Three local DOCX files with editable text boxes, including files with all
+their writing in a box, completed simulated checkout and analysis. The
+browser, PDF, and JSON agreed on all 26 selected text box ranges. Each signed
+package verified against the submitted DOCX. Two pre-update signed reports,
+one standard DOCX and one Strict DOCX, also verified against their originals.
 
 New analyses also read the saved display text of supported simple fields in
 ordinary body paragraphs, including dates, sequence numbers, and cross-references.

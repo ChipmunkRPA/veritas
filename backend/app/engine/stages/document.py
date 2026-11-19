@@ -209,6 +209,10 @@ def current_decode_output(output: Any, *, require_current_layout_reader: bool = 
     if (require_current_layout_reader and output["meta"].get("method") == "pymupdf"
             and output["meta"].get(document_native_locations.PDF_LINE_WRAP_KEY) != document_native_locations.PDF_LINE_WRAP):
         return False
+    if (require_current_layout_reader and output["meta"].get("method") == "python-docx"
+            and (output["meta"].get(document_native_locations.WORD_TEXT_BOX_KEY) or {}).get("schema")
+            != document_native_locations.WORD_TEXT_BOX):
+        return False
     if (output["meta"].get("method") == "python-docx" and
             (output["meta"].get(WORD_CONTENT_CONTROLS_KEY) != WORD_CONTENT_CONTROLS
              or output["meta"].get(document_native_locations.SAVED_FIELDS_READER) != document_native_locations.SAVED_FIELDS_SCHEMA

@@ -523,13 +523,19 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     disagreements, classifier_support = document_selection.directions(groups, candidates)
     method = decoded["meta"].get("method")
     blocks = document_scope.source_blocks(candidates, mapping) if method in {"plain", "python-docx", "pymupdf"} else {}
-    note_priorities = {}
+    package_priorities = {}
+    word_box_key = document_native_locations.WORD_TEXT_BOX_KEY
+    word_kinds = set()
     if (decoded["meta"].get(document_native_locations.WORD_NOTES_KEY) or {}).get("included"):
+        word_kinds.update(document_native_locations.WORD_NOTE_LABELS)
+    if (decoded["meta"].get(word_box_key) or {}).get("boxes"):
+        word_kinds.add("word_text_box")
+    if word_kinds:
         for location in sorted(blocks, key=lambda location: (location not in classifier_support, location)):
             kind = mapping[blocks[location] - 1].get("part_kind")
-            if kind in document_native_locations.WORD_NOTE_LABELS:
-                note_priorities.setdefault(kind, location)
-    priority = list(dict.fromkeys([*priority, *note_priorities.values()]))
+            if kind in word_kinds:
+                package_priorities.setdefault(kind, location)
+    priority = list(dict.fromkeys([*priority, *package_priorities.values()]))
     selected, distribution = document_selection.select(candidates, disagreements, classifier_support, priority, blocks)
     opposing_total = sum(document_scope.inspection_direction(w) is False for values in groups.values() for w in values)
     opposing_shown = sum(document_scope.inspection_direction(w) is False for key in selected for w in groups[key])
@@ -551,8 +557,10 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if distribution is not None:
         document["coverage"][document_scope.CARD_SELECTION_KEY] = distribution
         document["coverage"]["selection_policy"] = document_selection.BALANCED_POLICY
-    if note_priorities:
+    if document_native_locations.WORD_NOTE_LABELS.keys() & package_priorities.keys():
         document["coverage"]["selection_policy"] += " The display also gives priority to a qualifying passage from each available Word note type."
+    if "word_text_box" in package_priorities:
+        document["coverage"]["selection_policy"] += " The display also gives priority to a qualifying Word text box passage."
     if partially_checked := decoded["meta"].get("partially_checked_pages"):
         document["coverage"]["partially_checked_pages"] = partially_checked
     if word_controls := decoded["meta"].get(WORD_CONTENT_CONTROLS_KEY):
@@ -563,6 +571,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][document_native_locations.WORD_RUN_MAP_KEY] = word_runs
     if word_notes := decoded["meta"].get(document_native_locations.WORD_NOTES_KEY):
         document["coverage"][document_native_locations.WORD_NOTES_KEY] = word_notes
+    if word_boxes := decoded["meta"].get(word_box_key):
+        document["coverage"][word_box_key] = word_boxes
     if saved_fields := decoded["meta"].get(document_native_locations.SAVED_FIELDS_KEY):
         document["coverage"][document_native_locations.SAVED_FIELDS_KEY] = saved_fields
     if article := decoded["meta"].get(document_scope.HTML_ARTICLE_KEY):

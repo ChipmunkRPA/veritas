@@ -85,6 +85,18 @@ the staggered speech-window experiment. It compares unchanged native
 responses with a separately calibrated noise-reduced view, commits
 locations to the original sample clock and counts genuine time highlighted.
 
+The ICME 2026 environment-aware comparison evaluates separate decisions
+for generated speech and generated background sound, including mixtures
+where both are changed. Its separation baseline trains the separator to
+preserve evidence used by downstream detectors. It reports remaining
+difficulty with generated background and unfamiliar generators. Our
+local 750 ms comparison kept the original speech detector fixed and
+tested a learned cleanup view separately. The cleanup added no useful
+locations and covered more ordinary audio. Any future background check
+needs its own labeled tracks and ordinary-edit controls.
+[ICME challenge results and methods](https://arxiv.org/html/2606.10791v2#S3) ·
+[Local exact-window result](audio-learned-enrollment-serving750-2026-11-19.md)
+
 The [speech inpainting study](https://arxiv.org/html/2605.02223v1)
 evaluates a coarse scan with a separate boundary pass. Its reported
 localization remains poor at stricter overlap, and the public

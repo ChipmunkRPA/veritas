@@ -102,6 +102,7 @@ python3 -I -B -S backend/scripts/review_audio_learned_enrollment_conditional_ret
   docs/evaluation-panels/audio-learned-enrollment-conditional-retention-2026-11-19.json --self-test
 ```
 
-The next comparison will hold the existing serving detector points fixed and test
-original and extracted copies separately on synthetic, genuine and background
-controls. Acoustic retention supplies no automatic detection improvement.
+The subsequent comparison kept the serving point fixed and tested original
+and extracted copies on synthetic, genuine and background controls. The
+cleaned audio added zero useful locations and lost one clean detection
+when used alone. [Serving-window comparison](audio-learned-enrollment-serving750-2026-11-19.md)

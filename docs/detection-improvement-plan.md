@@ -139,6 +139,12 @@ are not public screening promises or calibrated population probabilities.
   out of 40 competing-speech files. The incumbent stays in use.
   [Independent room transfer](audio-room-point12-confirmation-2026-11-19.md)
 
+- Learned cleanup supplied no additional useful location in the 96-view
+  serving-window comparison. Extraction alone lost one of two clean held
+  detections. The additive view preserved existing detections and
+  extended held ordinary highlighting by three seconds. The cleaned
+  view remains experimental. [Exact-window comparison](audio-learned-enrollment-serving750-2026-11-19.md)
+
 - The 720p sustained face-transition comparison located all 12 staged
   boundaries at the exact frame. The existing short-return comparison
   found none of the 12. The new reading marked one ordinary focus change

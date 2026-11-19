@@ -26,7 +26,8 @@ The [learned speech reconstruction preflight](audio-learned-enrollment-genuine-p
 reviews two held noisy source groups. The replay checks grouped acoustic
 measurements. A [separate clone retention test](audio-learned-enrollment-conditional-retention-2026-11-19.md)
 preserved four held noisy deliveries and substantially suppressed one held
-clean edit. The acoustic test leaves detector accuracy open.
+clean edit. A [separate fixed-point detector comparison](audio-learned-enrollment-serving750-2026-11-19.md)
+found no useful gains from adding the extracted view.
 
 From the repository root, run `make replay-evidence` with Python 3.11
 or newer. It uses the standard library to verify the published case

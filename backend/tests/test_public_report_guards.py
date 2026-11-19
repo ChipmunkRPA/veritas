@@ -39,7 +39,7 @@ def test_old_reports_are_preserved_but_not_served(monkeypatch, template):
                                      'veritas-report-2.0.r108', 'veritas-report-2.0.r109', 'veritas-report-2.0.r110',
                                      'veritas-report-2.0.r111', 'veritas-report-2.0.r112', 'veritas-report-2.0.r168',
                                      'veritas-report-2.0.r169', 'veritas-report-2.0.r170', 'veritas-report-2.0.r171',
-                                     'veritas-report-2.0.r183', 'veritas-report-2.0.r184'])
+                                     'veritas-report-2.0.r183', 'veritas-report-2.0.r184', 'veritas-report-2.0.r191'])
 def test_public_safe_reports_remain_downloadable(monkeypatch, template):
     from app.engine.fusion.runtime import FACE_SCOPE_CAVEAT
     from app.reports.public_policy import package_template

@@ -10,6 +10,7 @@ from app.detectors.image import (
     reference_lossless_webp,
     reference_lossy_webp,
     reference_native_jpeg,
+    reference_native_png,
     reference_png_opacity,
     reference_png_orientation,
     reference_png_oriented_crop,
@@ -81,6 +82,8 @@ def _summary(document, comparison, assets):
     elif regions:
         count = len(regions)
         status = f"{count} difference {'region' if count == 1 else 'regions'} retained."
+    elif comparison["schema"] == reference_native_png.SCHEMA:
+        status = "Exact pixel differences measured below the region display limit."
     else:
         status = "Comparable images. No region met the difference check's selection rule."
     page = _page(document, "Earlier-copy image comparison", status)
@@ -125,6 +128,17 @@ def _summary(document, comparison, assets):
         if changed:
             _text(page, MARGIN, 318, f"{len(proof['matched_tiles'])} matching detailed areas supported the framing.",
                   size=10, color=MUTED)
+    if proof := comparison.get("native_png"):
+        changes = proof["changed_pixels"]
+        changed = f"{changes:,} original RGB pixels differ." if changes != 1 else "One original RGB pixel differs."
+        _text(page, MARGIN, 302, changed, size=10, font="hebo")
+        exact, tiles = proof["exact_common_pixels"], sum(proof["matching_tiles_by_quadrant"])
+        _text(page, MARGIN, 318, f"{exact:,} pixels match exactly, including {tiles:,} unique detailed areas.", size=10)
+        unshown = proof["unshown_changed_pixels"]
+        if unshown:
+            omitted = "One changed pixel lies outside the displayed regions." if unshown == 1 else (
+                f"{unshown:,} changed pixels lie outside the displayed regions.")
+            _text(page, MARGIN, 334, omitted, size=10, color=MUTED)
     if proof := comparison.get("axis_resize"):
         horizontal, vertical = proof["submitted_over_reference_xy"]
         scales = f"Width {horizontal[0] / horizontal[1]:.1%} of earlier copy. Height {vertical[0] / vertical[1]:.1%}."

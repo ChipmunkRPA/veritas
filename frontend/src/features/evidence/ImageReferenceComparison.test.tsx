@@ -99,6 +99,28 @@ afterEach(() => {
 })
 
 describe('earlier-copy comparison', () => {
+  it('shows exact small PNG changes and discloses unshown changed pixels', async () => {
+    const result = structuredClone(comparison)
+    const record = result.comparison
+    record.schema = 'chipmunk.image-reference-comparison/31'
+    record.reference = { ...record.submitted }
+    record.affects_overall_confidence = false
+    delete record.alignment
+    delete record.regions[0].reference_region
+    record.regions[0].selected_pixels = 25
+    record.native_png = { changed_pixels: 26, exact_common_pixels: 81_854, unshown_changed_pixels: 1,
+      matching_tiles_by_quadrant: [3, 4, 4, 3], minimum_region_pixels: 16 }
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText('1 difference region found')).toBeTruthy()
+    expect(screen.getByText(/26 original RGB pixels differ/).textContent).toContain('One changed pixel lies outside the displayed regions')
+    expect(screen.getByText(/26 original RGB pixels differ/).textContent).toContain('zero weight in the AI assessment')
+    expect(screen.getByAltText('Earlier copy crop for region 1')).toBeTruthy()
+    expect(screen.getByAltText('Submitted image crop for region 1')).toBeTruthy()
+  })
+
   it.each([false, true])('shows the evidence for independent axis resizing (edited %s)', async edited => {
     const result = structuredClone(comparison)
     const record = result.comparison

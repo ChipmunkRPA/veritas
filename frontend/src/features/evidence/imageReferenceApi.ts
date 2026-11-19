@@ -138,6 +138,13 @@ export interface ImageReferenceRecord {
   }
   png_opacity?: { opacity_changed_pixels: number; matched_pixels: number; matched_tiles: [number, number][] }
   exact_webp?: { changed_pixels: number; matched_tiles: [number, number][]; earlier_rgb_sha256: string; submitted_rgb_sha256: string }
+  native_png?: {
+    exact_common_pixels: number
+    changed_pixels: number
+    unshown_changed_pixels: number
+    matching_tiles_by_quadrant: [number, number, number, number]
+    minimum_region_pixels: number
+  }
   lossy_webp?: LossyWebpSupport
   lossy_webp_resize?: LossyWebpProjection
   lossy_webp_crop?: {
@@ -192,6 +199,7 @@ export const scaledScreenshotSchema = 'chipmunk.image-reference-comparison/27'
 export const nativeJpegDifferenceSchema = 'chipmunk.image-reference-comparison/28'
 export const axisResizeSchema = 'chipmunk.image-reference-comparison/29'
 export const axisJpegResizeSchema = 'chipmunk.image-reference-comparison/30'
+export const nativePngDifferenceSchema = 'chipmunk.image-reference-comparison/31'
 const lossyWebpSchemas = [lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema]
 export const imageFramingSchema = (record: ImageReferenceRecord) =>
   record.schema === webpColorSchema ? record.comparison_schema : record.schema
@@ -242,6 +250,26 @@ function validArea(area?: NativeImageArea): area is NativeImageArea {
 
 function validAreaWithin(area: NativeImageArea, width: number, height: number): boolean {
   return validArea(area) && area.x + area.w <= width && area.y + area.h <= height
+}
+
+function validNativePng(comparison: ImageReferenceRecord): boolean {
+  const { native_png: proof, reference, submitted, regions, mask } = comparison
+  const { width, height } = submitted
+  if (!proof || comparison.status !== 'comparable' || comparison.affects_overall_confidence !== false
+      || ![width, height].every(side => Number.isSafeInteger(side) && side >= 160)
+      || width * height > 4_000_000 || reference.width !== width || reference.height !== height
+      || ![proof.changed_pixels, proof.exact_common_pixels, proof.unshown_changed_pixels].every(Number.isSafeInteger)
+      || proof.changed_pixels < 1 || proof.changed_pixels * 50 > width * height
+      || proof.exact_common_pixels + proof.changed_pixels !== width * height || proof.unshown_changed_pixels < 0
+      || !Array.isArray(proof.matching_tiles_by_quadrant) || proof.matching_tiles_by_quadrant.length !== 4
+      || !proof.matching_tiles_by_quadrant.every(count => Number.isSafeInteger(count) && count >= 2)
+      || proof.minimum_region_pixels !== 16 || regions.length > 5
+      || (regions.length ? mask?.width !== width || mask.height !== height : Boolean(mask))) return false
+  return regions.every(region => validAreaWithin(region, width, height)
+    && Number.isSafeInteger(region.selected_pixels) && region.selected_pixels! >= proof.minimum_region_pixels
+    && region.selected_pixels! <= region.w * region.h)
+    && regions.reduce((sum, region) => sum + region.selected_pixels!, 0)
+      + proof.unshown_changed_pixels === proof.changed_pixels
 }
 
 function validAxisResize(comparison: ImageReferenceRecord): boolean {
@@ -423,6 +451,9 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
   }
   if (comparison.schema === axisResizeSchema && !validAxisResize(comparison)) {
     throw new Error('The server returned an incomplete width and height resize comparison.')
+  }
+  if (comparison.schema === nativePngDifferenceSchema && !validNativePng(comparison)) {
+    throw new Error('The server returned an incomplete same-grid PNG comparison.')
   }
   if (comparison.schema === exactWebpSchema && comparison.status === 'comparable') {
     const webp = comparison.exact_webp

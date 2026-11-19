@@ -43,6 +43,7 @@ EARLIER_JPEG_WEBP_SCHEMA = "chipmunk.image-reference-comparison/24"
 NATIVE_JPEG_SCHEMA = "chipmunk.image-reference-comparison/28"
 AXIS_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/29"
 AXIS_JPEG_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/30"
+NATIVE_PNG_SCHEMA = "chipmunk.image-reference-comparison/31"
 LOSSY_WEBP_SCHEMAS = {LOSSY_WEBP_SCHEMA, RESIZED_LOSSY_WEBP_SCHEMA, CROPPED_LOSSY_WEBP_SCHEMA, CROPPED_RESIZED_LOSSY_WEBP_SCHEMA}
 ORIENTATION_SCHEMA = "chipmunk.image-reference-comparison/6"
 CROPPED_RESIZE_SCHEMAS = {CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, JPEG_PNG_ENVELOPE_SCHEMA}
@@ -408,7 +409,8 @@ def _jpeg_replay(comparison, earlier, submitted, sub):
             return mask.tobytes()
 
 
-def _native_reference_replay(comparison, earlier, submitted, *, opacity, lossy_webp, axis_resize=False, axis_jpeg=False):
+def _native_reference_replay(comparison, earlier, submitted, *, opacity, lossy_webp, axis_resize=False, axis_jpeg=False,
+                             native_png=False):
     from app.evidence.image_reference import inspect
 
     color = comparison["schema"] == WEBP_COLOR_SCHEMA
@@ -416,13 +418,16 @@ def _native_reference_replay(comparison, earlier, submitted, *, opacity, lossy_w
     with TemporaryDirectory() as temporary:
         evidence = Path(temporary) / "evidence"
         regenerated = inspect(earlier, submitted, evidence_dir=evidence, allow_png_opacity=opacity, allow_lossy_webp=lossy_webp,
-                              allow_proportional_resize=geometry in LOSSY_WEBP_SCHEMAS - {LOSSY_WEBP_SCHEMA},
+                              allow_proportional_resize=native_png or geometry in LOSSY_WEBP_SCHEMAS - {LOSSY_WEBP_SCHEMA},
                               allow_axis_resize=axis_resize, allow_axis_jpeg_resize=axis_jpeg,
+                              allow_integer_alignment=native_png, allow_oriented_crop=native_png, allow_oriented_resize=native_png,
+                              allow_embedded_photo=native_png, allow_scaled_screenshot=native_png, allow_native_png=native_png,
                               allow_lossy_webp_crop=geometry in {CROPPED_LOSSY_WEBP_SCHEMA, CROPPED_RESIZED_LOSSY_WEBP_SCHEMA},
                               allow_lossy_webp_crop_resize=geometry == CROPPED_RESIZED_LOSSY_WEBP_SCHEMA,
                               allow_lossy_webp_color=color,
                               allow_lossy_webp_earlier_jpeg=geometry == EARLIER_JPEG_WEBP_SCHEMA)
-        label = ("Separate width and height JPEG resize" if axis_jpeg else "Separate width and height resize" if axis_resize
+        label = ("Same-grid PNG" if native_png else
+                 "Separate width and height JPEG resize" if axis_jpeg else "Separate width and height resize" if axis_resize
                  else "PNG opacity" if opacity else "Lossy WebP" if lossy_webp else "Exact WebP")
         _require(_same_replayed_fields(comparison, regenerated), f"{label} measurements differ from the supplied sources")
         if "mask" in regenerated:
@@ -453,6 +458,7 @@ def review(export, earlier, submitted):
         webp = comparison["schema"] == EXACT_WEBP_SCHEMA
         axis_resize = comparison["schema"] == AXIS_RESIZE_SCHEMA
         axis_jpeg = comparison["schema"] == AXIS_JPEG_RESIZE_SCHEMA
+        native_png = comparison["schema"] == NATIVE_PNG_SCHEMA
         webp_geometry = comparison["schema"]
         if webp_geometry == WEBP_COLOR_SCHEMA:
             webp_geometry = comparison.get("comparison_schema")
@@ -471,10 +477,10 @@ def review(export, earlier, submitted):
         crop = comparison.get("reference_crop_bounds") if comparison["schema"] in CROPPED_RESIZE_SCHEMAS else None
         if crop_resize_webp:
             crop = comparison["lossy_webp_crop_resize"]["reference_crop"]
-        if opacity or webp or lossy_webp or axis_resize or axis_jpeg:
+        if opacity or webp or lossy_webp or axis_resize or axis_jpeg or native_png:
             expected_native_mask = _native_reference_replay(comparison, earlier, submitted,
                                                             opacity=opacity, lossy_webp=lossy_webp, axis_resize=axis_resize,
-                                                            axis_jpeg=axis_jpeg)
+                                                            axis_jpeg=axis_jpeg, native_png=native_png)
             dx, dy, overlap = 0, 0, (0, 0, sub.width, sub.height)
             if cropped_webp:
                 dx, dy, _, _ = _bounds(comparison["lossy_webp_crop"]["reference_crop"], ref.size)
@@ -510,7 +516,7 @@ def review(export, earlier, submitted):
                      "Difference mask pixels differ from the recomputed resize comparison")
         if jpeg:
             _require(mask.tobytes() == expected_jpeg_mask, "Difference mask pixels differ from the recomputed JPEG comparison")
-        if opacity or webp or lossy_webp or axis_resize or axis_jpeg:
+        if opacity or webp or lossy_webp or axis_resize or axis_jpeg or native_png:
             _require(mask.tobytes() == expected_native_mask, "Difference mask pixels differ from the recomputed native comparison")
         if oriented:
             with ImageChops.subtract(mask, mismatch) as unsupported:

@@ -26,6 +26,7 @@ from app.detectors.image import (
     reference_lossy_webp_crop_resize,
     reference_lossy_webp_resize,
     reference_native_jpeg,
+    reference_native_png,
     reference_perspective,
     reference_png_exact_resize,
     reference_png_opacity,
@@ -205,7 +206,7 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             allow_lossy_webp_crop_resize: bool = False, allow_lossy_webp_color: bool = False,
             allow_lossy_webp_earlier_jpeg: bool = False, allow_perspective: bool = False,
             allow_earlier_heif: bool = False, allow_native_jpeg: bool = False, allow_axis_resize: bool = False,
-            allow_axis_jpeg_resize: bool = False) -> dict:
+            allow_axis_jpeg_resize: bool = False, allow_native_png: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     refuse_truncated_images()
     before, after = _bytes(reference_path), _bytes(submitted_path)
@@ -343,6 +344,10 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             stretched, selection = reference_axis_jpeg_resize.compare(original, questioned, before, after)
             if stretched is not None:
                 result, mask, schema, coverage = stretched, selection, reference_axis_jpeg_resize.SCHEMA, None
+        if allow_native_png and opacity is None and not result["regions"] and original.format == questioned.format == "PNG":
+            native, selection = reference_native_png.compare(reference, submitted, before, after, original, questioned)
+            if native is not None:
+                result, mask, schema, coverage = native, selection, reference_native_png.SCHEMA, None
     aligned = "alignment" in result
     interpretation = {AXIS_RESIZE_SCHEMA: ("The earlier copy was resized separately in width and height for comparison. "
                                           "Changes may reflect ordinary editing. The origin and authenticity of either file "
@@ -351,6 +356,7 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
                       reference_structure_jpeg.SCHEMA: reference_structure_jpeg.INTERPRETATION,
                       reference_same_jpeg.SCHEMA: reference_same_jpeg.INTERPRETATION,
                       reference_native_jpeg.SCHEMA: reference_native_jpeg.INTERPRETATION,
+                      reference_native_png.SCHEMA: reference_native_png.INTERPRETATION,
                       reference_perspective.SCHEMA: reference_perspective.INTERPRETATION,
                       reference_scaled_screenshot.SCHEMA: reference_scaled_screenshot.INTERPRETATION,
                       reference_lossless_webp.SCHEMA: (reference_lossless_webp.INTERPRETATION

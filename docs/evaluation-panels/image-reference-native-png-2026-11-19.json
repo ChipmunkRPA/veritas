@@ -1,0 +1,176 @@
+{
+  "simulated_paid_jobs": 2,
+  "jobs_before_payment": 0,
+  "real_payment": false,
+  "cases": {
+    "photo": {
+      "schema": "chipmunk.image-reference-comparison/31",
+      "regions": 1,
+      "changed_pixels": 144,
+      "selected_pixels": 144,
+      "source_replay_verified": true,
+      "pdf_pages": 2,
+      "unchanged_paid_analysis": true,
+      "no_additional_analysis_job": true,
+      "analysis_signed_original_verified": true
+    },
+    "glyph": {
+      "schema": "chipmunk.image-reference-comparison/31",
+      "regions": 1,
+      "changed_pixels": 237,
+      "selected_pixels": 237,
+      "source_replay_verified": true,
+      "pdf_pages": 2,
+      "unchanged_paid_analysis": true,
+      "no_additional_analysis_job": true,
+      "analysis_signed_original_verified": true
+    },
+    "identical": {
+      "schema": "chipmunk.image-reference-comparison/1",
+      "regions": 0,
+      "changed_pixels": 0,
+      "selected_pixels": 0,
+      "source_replay_verified": true,
+      "pdf_pages": 1,
+      "unchanged_paid_analysis": true,
+      "no_additional_analysis_job": true
+    }
+  },
+  "signing_scope": "Signed packages authenticate the paid analyses against their submitted originals. The comparison JSON independently replays against both source copies.",
+  "browser": {
+    "replays": [
+      {
+        "role": "photo",
+        "schema": "chipmunk.image-reference-comparison/31",
+        "regions": 1,
+        "verified_downloads": 2
+      },
+      {
+        "role": "glyph",
+        "schema": "chipmunk.image-reference-comparison/31",
+        "regions": 1,
+        "verified_downloads": 2
+      },
+      {
+        "role": "identical",
+        "schema": "chipmunk.image-reference-comparison/1",
+        "regions": 0,
+        "verified_downloads": 2
+      }
+    ],
+    "page_errors": 0
+  },
+  "paired_panel": {
+    "glyph:font_substitution": {
+      "admitted": 12,
+      "candidate_flag": 12,
+      "candidate_useful": 12,
+      "lost": 0,
+      "pixel_exact_selected": 12,
+      "prior_flag": 0,
+      "prior_useful": 0,
+      "total": 12
+    },
+    "glyph:ordinary_local_blur": {
+      "admitted": 12,
+      "candidate_flag": 12,
+      "candidate_useful": 12,
+      "lost": 0,
+      "pixel_exact_selected": 11,
+      "prior_flag": 0,
+      "prior_useful": 0,
+      "total": 12
+    },
+    "glyph:serialization": {
+      "admitted": 0,
+      "candidate_flag": 0,
+      "candidate_useful": 0,
+      "lost": 0,
+      "pixel_exact_selected": 0,
+      "prior_flag": 0,
+      "prior_useful": 0,
+      "total": 12
+    },
+    "glyph:shape_substitution": {
+      "admitted": 12,
+      "candidate_flag": 12,
+      "candidate_useful": 12,
+      "lost": 0,
+      "pixel_exact_selected": 12,
+      "prior_flag": 0,
+      "prior_useful": 0,
+      "total": 12
+    },
+    "glyph:unrelated_layout": {
+      "admitted": 0,
+      "candidate_flag": 0,
+      "candidate_useful": 0,
+      "lost": 0,
+      "pixel_exact_selected": 0,
+      "prior_flag": 0,
+      "prior_useful": 0,
+      "total": 12
+    },
+    "photo:generated_pixels_12": {
+      "admitted": 12,
+      "candidate_flag": 12,
+      "candidate_useful": 12,
+      "lost": 0,
+      "pixel_exact_selected": 12,
+      "prior_flag": 0,
+      "prior_useful": 0,
+      "total": 12
+    },
+    "photo:generated_pixels_20": {
+      "admitted": 12,
+      "candidate_flag": 12,
+      "candidate_useful": 12,
+      "lost": 0,
+      "pixel_exact_selected": 12,
+      "prior_flag": 0,
+      "prior_useful": 0,
+      "total": 12
+    },
+    "photo:global_tone": {
+      "admitted": 0,
+      "candidate_flag": 0,
+      "candidate_useful": 0,
+      "lost": 0,
+      "pixel_exact_selected": 0,
+      "prior_flag": 0,
+      "prior_useful": 0,
+      "total": 12
+    },
+    "photo:ordinary_local_blur": {
+      "admitted": 12,
+      "candidate_flag": 12,
+      "candidate_useful": 12,
+      "lost": 0,
+      "pixel_exact_selected": 12,
+      "prior_flag": 2,
+      "prior_useful": 2,
+      "total": 12
+    },
+    "photo:serialization": {
+      "admitted": 0,
+      "candidate_flag": 0,
+      "candidate_useful": 0,
+      "lost": 0,
+      "pixel_exact_selected": 0,
+      "prior_flag": 0,
+      "prior_useful": 0,
+      "total": 12
+    },
+    "photo:shift": {
+      "admitted": 0,
+      "candidate_flag": 0,
+      "candidate_useful": 0,
+      "lost": 0,
+      "pixel_exact_selected": 0,
+      "prior_flag": 0,
+      "prior_useful": 0,
+      "total": 12
+    }
+  },
+  "schema": "chipmunk.image-reference-native-png-local/1"
+}

@@ -5,7 +5,7 @@ import { saveBlob } from '../../lib/api/reports'
 import {
   axisJpegResizeSchema, axisResizeSchema, compareWithEarlierImage, comparisonAvailability, comparisonPdfData, exactOrientedCropSchema, exactOrientedResizeSchema,
   exactPngCropResizeSchema, exactPngOrientationSchema, embeddedPhotoSchema, exactJpegIdentitySchema, jpegPngEnvelopeSchema, shiftedJpegSchema,
-  IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, nativeJpegDifferenceSchema, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
+  IMAGE_REFERENCE_SECTION_ID, imageReferenceExport, isJpegDetailLoss, nativeJpegDifferenceSchema, nativePngDifferenceSchema, orientationLabels, referencePngSrc, sameJpegSchema, structureJpegSchema,
   pngOpacitySchema, exactWebpSchema, lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema,
   earlierHeifSchema, earlierJpegWebpSchema, imageFramingSchema, perspectiveSchema, scaledScreenshotSchema, webpColorSchema,
   type ImageReferenceResult, type NativeImageArea, type ReferencePng,
@@ -85,6 +85,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const nativeJpegDifference = comparison.schema === nativeJpegDifferenceSchema
   const opacity = comparison.schema === pngOpacitySchema ? comparison.png_opacity : undefined
   const exactWebp = comparison.schema === exactWebpSchema ? comparison.exact_webp : undefined
+  const nativePng = comparison.schema === nativePngDifferenceSchema ? comparison.native_png : undefined
   const axis = comparison.schema === axisResizeSchema ? comparison.axis_resize : undefined
   const axisJpeg = comparison.schema === axisJpegResizeSchema ? comparison.axis_jpeg_resize : undefined
   const framing = imageFramingSchema(comparison)
@@ -115,6 +116,7 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
   const reason = (earlierJpegWebp && comparison.interpretation) || genericReason
   const summary = !comparable ? 'Comparison unassessed'
     : regions.length ? `${regions.length} difference ${regions.length === 1 ? 'region' : 'regions'} found`
+      : nativePng ? 'Pixel differences below the region display limit'
       : axisJpeg?.basis === 'exact_full_jpeg_pixel_reproduction' ? 'All pixels match after resizing and JPEG encoding'
       : axis?.basis === 'exact_full_grid' ? 'All pixels match after resizing' : 'No localized differences found'
   const pdf = comparisonPdfData(result)
@@ -173,6 +175,14 @@ function ComparisonResult({ result }: { result: ImageReferenceResult }) {
       {exactWebp.changed_pixels === 0 ? 'All decoded RGB pixels match.' :
         `${exactWebp.changed_pixels.toLocaleString('en-US')} decoded pixels differ. ${exactWebp.matched_tiles.length} matching detailed areas supported the framing.`}
       {' '}Ordinary edits can produce these differences. This check carries no weight in the AI assessment.
+    </p>}
+    {nativePng && <p className="mt-2 mb-0 text-small text-text-muted">
+      {nativePng.changed_pixels === 1 ? 'One original RGB pixel differs.'
+        : `${nativePng.changed_pixels.toLocaleString('en-US')} original RGB pixels differ.`}
+      {' '}{nativePng.exact_common_pixels.toLocaleString('en-US')} pixels match exactly at the same coordinates.
+      {nativePng.unshown_changed_pixels === 1 ? ' One changed pixel lies outside the displayed regions.'
+        : nativePng.unshown_changed_pixels > 1 && ` ${nativePng.unshown_changed_pixels.toLocaleString('en-US')} changed pixels lie outside the displayed regions.`}
+      {' '}Ordinary edits can cause these differences. This comparison carries zero weight in the AI assessment.
     </p>}
     {axis && <p className="mt-2 mb-0 text-small text-text-muted">
       The earlier copy was resized separately in width and height. The submitted width is {(100 * submitted.width / reference.width).toFixed(1)}%

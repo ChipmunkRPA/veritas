@@ -26,6 +26,7 @@ from app.detectors.image import (
     reference_lossy_webp_crop,
     reference_lossy_webp_resize,
     reference_native_jpeg,
+    reference_native_png,
     reference_perspective,
     reference_png_opacity,
     reference_png_orientation,
@@ -788,6 +789,71 @@ def test_png_opacity_change_survives_browser_pdf_and_source_replay(reference_htt
     export_file.write_text(json.dumps(payload))
     with pytest.raises(ValueError, match="opacity measurements differ"):
         review(export_file, earlier_file, submitted_file)
+
+
+@pytest.mark.parametrize("has_region", [True, False])
+def test_same_grid_png_counts_small_differences_and_verifies_exports(reference_http, tmp_path, has_region):
+    f = reference_http
+    earlier = f.reference_pixels
+    submitted = earlier.copy()
+    # A faint 5x5 edit is under the generic comparison's limits.
+    if has_region:
+        submitted[70:75, 105:110] += 2
+    submitted[160, 230] += 1
+    after = _png(submitted)
+    stored = f.store.put_bytes(after)
+    with Session(f.engine) as db:
+        analysis = db.get(Analysis, "image-a")
+        analysis.sha256, analysis.size_bytes = stored.sha256, stored.size_bytes
+        db.commit()
+
+    response = f.client.post(_url(), headers=f.viewer, files=_upload(f.reference), data={"include_pdf": "true"})
+    assert response.status_code == 200, response.text
+    payload = response.json()
+    comparison = payload["comparison"]
+    assert comparison["schema"] == reference_native_png.SCHEMA
+    assert comparison["affects_overall_confidence"] is False
+    proof = comparison["native_png"]
+    assert proof["changed_pixels"] == (26 if has_region else 1) and proof["unshown_changed_pixels"] == 1
+    assert proof["exact_common_pixels"] + proof["changed_pixels"] == earlier.shape[0] * earlier.shape[1]
+    with pymupdf.open(stream=base64.b64decode(payload.pop("pdf")), filetype="pdf") as pdf:
+        assert ("26 original RGB pixels differ" if has_region else "One original RGB pixel differs") in pdf[0].get_text()
+        if has_region:
+            [region] = comparison["regions"]
+            assert [region[key] for key in ("x", "y", "w", "h", "selected_pixels")] == [105, 70, 5, 5, 25]
+            with Image.open(io.BytesIO(_asset_bytes(payload, comparison["mask"]))) as mask:
+                assert mask.getbbox() == (105, 70, 110, 75) and mask.histogram()[255] == 25
+            _assert_pdf_assets(pdf, pdf[1], [region[key] for key in ("reference_crop", "submitted_crop", "submitted_overlay")],
+                               payload)
+        else:
+            assert "below the region display limit" in pdf[0].get_text()
+            assert not comparison["regions"] and "mask" not in comparison and not payload["pngs"]
+    earlier_path, later_path, export = (tmp_path / n for n in ("earlier.png", "submitted.png", "export.json"))
+    earlier_path.write_bytes(f.reference)
+    later_path.write_bytes(after)
+    export.write_text(json.dumps(payload))
+    assert review(export, earlier_path, later_path)["mask_pixels_counted"] == (25 if has_region else 0)
+    proof["unshown_changed_pixels"] = 0
+    export.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="Same-grid PNG measurements differ"):
+        review(export, earlier_path, later_path)
+
+
+def test_same_grid_png_withholds_repetitive_background_and_avoids_overlapping_crops():
+    tile = np.random.default_rng(42).integers(0, 220, (24, 24, 3), dtype=np.uint8)
+    repeated = np.tile(tile, (8, 8, 1))
+    changed = repeated.copy()
+    changed[40:46, 45:51] += 2
+    before, after = _png(repeated), _png(changed)
+    with Image.open(io.BytesIO(before)) as earlier, Image.open(io.BytesIO(after)) as submitted:
+        assert reference_native_png.compare(repeated, changed, before, after, earlier, submitted) == (None, None)
+    mask = np.zeros((192, 192), dtype=bool)
+    mask[40:59, 45:63] = True
+    mask[41:58, 46:62] = False
+    mask[46:52, 50:56] = True
+    [region], selected, omitted = reference_native_png._measure_regions(mask)
+    assert region["selected_pixels"] == int(selected.sum()) == 70
+    assert not selected[46:52, 50:56].any() and omitted == 1
 
 
 def test_png_opacity_excludes_hidden_rgb_and_refuses_whole_image_change(reference_http):

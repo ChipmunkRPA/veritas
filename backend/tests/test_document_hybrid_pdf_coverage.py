@@ -14,10 +14,11 @@ from test_document_packets import packet_factory as packet_factory
 from app.api import v2_evidence_packets
 from app.core.canonical import canonical_hash
 from app.detectors.text import extract as extraction
+from app.engine.boundary import Deadline
 from app.engine.customer_assessment import customer_assessment
 from app.engine.fusion.registry import Selection
 from app.engine.stages import document as stage
-from app.evidence import document_pdf_visibility
+from app.evidence import document_pdf_form_binding, document_pdf_visibility
 from app.evidence.document_packets import (
     _pdf_plates,
     _source_anchors,
@@ -138,6 +139,9 @@ def test_pdf_invisible_layer_is_located_and_limits_the_actual_assessment(last_pa
     evidence = build_packet_set(db, analysis, store, result)
     key = document_pdf_visibility.KEY
     review = evidence["coverage"][key]
+    assert not stage.current_decode_output(decoded)
+    assert stage.current_decode_output(decoded, require_current_layout_reader=False)
+    decoded[document_pdf_form_binding.POLICY] = document_pdf_form_binding.SCHEMA
     assert stage.current_decode_output(decoded)
     assert review["schema"] == document_pdf_visibility.SCHEMA
     assert review["examined_pages"] == list(range(1, last_page + 1)) and review["authorship_confidence_contribution"] == 0
@@ -259,6 +263,7 @@ def test_normal_fuse_path_withholds_both_document_wide_directions(tmp_path, monk
         analysis_id="hybrid-pdf-fixture",
         state={},
         outputs={},
+        deadline=Deadline(),
         exhibits=SimpleNamespace(add=lambda *args, **kwargs: "fixture", exhibits=[], artefacts=[]),
     )
     decoded = stage.decode(ctx)
@@ -419,7 +424,7 @@ def test_real_local_hybrid_ocr_preserves_text_geometry_and_frozen_evidence(
     store = ObjectStore(tmp_path / "stage-objects")
     monkeypatch.setattr(stage.common, "media_path", lambda _ctx: path)
     decoded = stage.decode(SimpleNamespace(analysis_id="hybrid-local-ocr", store=store,
-                                           state={"kind": "document"}, outputs={}))
+                                           state={"kind": "document"}, outputs={}, deadline=Deadline()))
     assert decoded["text"].count(NATIVE) == 1
     assert all(line in decoded["text"] for line in SCAN_LINES[:2])
     assert "third line can be read only by viewing the scan." in decoded["text"]

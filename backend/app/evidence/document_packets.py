@@ -40,6 +40,7 @@ from app.evidence import (
     document_passage_coverage,
     document_passage_intervals,
     document_passage_position,
+    document_pdf_form_binding,
     document_pdf_history,
     document_pdf_history_binding,
     document_pdf_visibility,
@@ -359,6 +360,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_reference_links_binding.validate(document)
         document_word_reference_cache_binding.validate(document)
         document_pdf_visibility.validate(document)
+        document_pdf_form_binding.validate(document, document["source"].get(document_pdf_form_binding.COMMITMENT))
         document_pdf_history_binding.validate(document, document["source"].get(document_pdf_history_binding.COMMITMENT))
         document_bibliography.validate(document)
         document_word_visibility.validate(document, document["source"].get(document_word_visibility.COMMITMENT))
@@ -607,6 +609,19 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document_check_coverage.verify_source(document, text, decoded["sentences"])
     if visibility := decoded["meta"].get(document_pdf_visibility.KEY):
         document["coverage"][document_pdf_visibility.KEY] = visibility
+    if form := decoded.get(document_pdf_form_binding.KEY):
+        assets = {}
+        for index, row in enumerate(form["rows"]):
+            crop = row["crop"]
+            payload = store.read_bytes(crop["sha256"])
+            assets[document_pdf_form_binding.crop_role(index)] = {
+                "sha256": crop["sha256"], "media_type": "image/png", "size_bytes": len(payload),
+                "width": crop["width"], "height": crop["height"],
+                "url": f"/api/v2/analyses/{analysis.id}/evidence-packets/{document['id']}/assets/{crop['sha256']}.png",
+            }
+        document[document_pdf_form_binding.KEY] = {"inspection": form, "artifacts": assets}
+        document["source"][document_pdf_form_binding.COMMITMENT] = document_pdf_form_binding.from_result(result)
+    document_pdf_form_binding.validate(document, document_pdf_form_binding.from_result(result))
     if history := document_pdf_history_binding.from_result(result):
         assets = {}
         for role, payload, asset in document_pdf_history.previews(source, history):
@@ -895,6 +910,10 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_percentage_consistency.verify_source(document, decoded["text"], decoded["source_map"], decoded.get("sentences", ()),
                                                           meta=decoded["meta"])
             document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
+            document_pdf_form_binding.validate(document, document_pdf_form_binding.from_result(result))
+            form = (document.get(document_pdf_form_binding.KEY) or {}).get("inspection")
+            if form != decoded.get(document_pdf_form_binding.KEY):
+                raise ValueError("Saved PDF form evidence differs from the decoded inspection")
             document_pdf_history_binding.validate(document, document_pdf_history_binding.result_commitment(result))
             document_bibliography.verify_source(document, decoded["meta"])
             document_native_locations.verify_saved_fields(document, decoded["text"], decoded["source_map"], decoded["meta"])

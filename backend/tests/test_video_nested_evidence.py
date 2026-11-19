@@ -863,7 +863,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.document_scope','app.evidence.document_pdf_visibility','app.evidence.document_bibliography','app.evidence.email_alternatives',
                         'app.evidence.document_invisible_characters','app.evidence.document_native_locations',
                         'app.evidence.document_saved_link_hosts_binding', 'app.evidence.document_reference_links_binding',
-                        'app.evidence.document_word_reference_cache_binding',
+                        'app.evidence.document_word_reference_cache_binding', 'app.evidence.document_pdf_form_binding',
                         'app.evidence.document_disclosure_heading',
                         'app.evidence.document_check_coverage', 'app.evidence.document_chat_markers',
                         'app.evidence.document_repeat'):

@@ -336,6 +336,25 @@ JSON pointer <span class="mono">/printed_ai_use_heading</span>.</p>
 {% endfor %}
 {% if reference_links.mismatches > reference_links.findings | length %}<p class="caption">Showing the first {{ reference_links.findings | length }} of {{ reference_links.mismatches }} differences.</p>{% endif %}
 {% endif %}
+{% set pdf_form = evidence.get('pdf_form_value_differences') %}
+{% if pdf_form %}
+<h3 id="document-pdf-form-values">{{ pdf_form.title }}</h3>
+<p>{{ pdf_form.limitation }}</p>
+{% for row in pdf_form.rows %}
+<article class="multimedia-evidence-packet">
+<dl class="evidence-measurements">
+<div><dt>Stored form value</dt><dd style="white-space: pre-wrap">{{ row.saved_value }}</dd></div>
+<div><dt>Text in the saved appearance</dt><dd style="white-space: pre-wrap">{{ row.display_value }}</dd></div>
+</dl>
+<p class="caption">PDF page {{ row.page }}. Field rectangle [{{ row.box | join(', ') }}] in points from the upper left.<br>
+JSON pointer <span class="mono">/pdf_form_value_differences/inspection/rows/{{ loop.index0 }}</span>.</p>
+<figure class="pdf-form-value-crop">
+<img src="{{ row.picture.uri }}" alt="{{ row.picture.label }}">
+<figcaption>{{ row.picture.label }}</figcaption>
+</figure>
+</article>
+{% endfor %}
+{% endif %}
 {% set word_reference_cache = evidence.get('word_reference_cache') %}
 {% if word_reference_cache %}
 <h3 id="document-word-reference-cache">{{ word_reference_cache.title }}</h3>
@@ -1039,7 +1058,7 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% if evidence.stereo_repetition.get('rate_measurement') and evidence.stereo_repetition.rate_measurement.pairs %}{% set stereo_repeats.found = true %}{% endif %}
 {% for row in evidence.stereo_repetition.channels %}{% if row.measurement.pairs or (row.get('gain_measurement') and row.gain_measurement.pairs) %}{% set stereo_repeats.found = true %}{% endif %}{% endfor %}
 {% endif %}
-{% if not stereo_repeats.found and not (evidence.get('brief_voice_review') and evidence.brief_voice_review.status == 'flagged' and evidence.brief_voice_review.windows) and not (evidence.get('background_reduced_voice_review') and evidence.background_reduced_voice_review.status == 'flagged') and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') and not (evidence.get('percentage_consistency') and evidence.percentage_consistency.groups) and not evidence.get('printed_ai_use_heading') and not (evidence.get('doi_reference_consistency') and evidence.doi_reference_consistency.different_work) and not (evidence.get('saved_link_hosts') and evidence.saved_link_hosts.findings) and not evidence.get('reference_link_discrepancies') and not evidence.get('word_reference_cache') %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
+{% if not stereo_repeats.found and not (evidence.get('brief_voice_review') and evidence.brief_voice_review.status == 'flagged' and evidence.brief_voice_review.windows) and not (evidence.get('background_reduced_voice_review') and evidence.background_reduced_voice_review.status == 'flagged') and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') and not (evidence.get('percentage_consistency') and evidence.percentage_consistency.groups) and not evidence.get('printed_ai_use_heading') and not (evidence.get('doi_reference_consistency') and evidence.doi_reference_consistency.different_work) and not (evidence.get('saved_link_hosts') and evidence.saved_link_hosts.findings) and not evidence.get('reference_link_discrepancies') and not evidence.get('word_reference_cache') and not evidence.get('pdf_form_value_differences') %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
 {% if evidence.omitted %}<p class="caption">{{ evidence.omitted }} additional candidates were omitted from this bounded evidence set.</p>{% endif %}
 {% for note in evidence.limitations %}<p class="caption">{{ note }}</p>{% endfor %}
 {% endif %}

@@ -32,6 +32,7 @@ from app.evidence import (
     document_passage_coverage,
     document_passage_intervals,
     document_passage_position,
+    document_pdf_form_binding,
     document_pdf_history,
     document_pdf_history_binding,
     document_pdf_visibility,
@@ -201,6 +202,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         word_references = document_word_reference_cache.inspect(original, source_sha256=source["sha256"]) if extension == ".docx" else None
         document_word_reference_cache_binding.verify_record(evidence, word_references,
             commitment=source.get(document_word_reference_cache_binding.COMMITMENT))
+    if document_pdf_form_binding.KEY in evidence or document_pdf_form_binding.COMMITMENT in source:
+        from app.evidence.document_pdf_form_values import verify_original as verify_pdf_form
+
+        document_pdf_form_binding.validate(evidence, source.get(document_pdf_form_binding.COMMITMENT))
+        verify_pdf_form(evidence, archive, original)
     if document_bibliography.KEY in coverage:
         doc = document_bibliography.body_view(doc)
     document_bibliography.verify_source(evidence, doc.meta)
@@ -361,10 +367,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                               if document_reference_links_binding.KEY in evidence else "")
     word_reference_detail = (" Verified the saved Word cross-reference text and both original paragraph positions."
                              if document_word_reference_cache_binding.KEY in evidence else "")
+    pdf_form_detail = (" Verified the saved PDF form values, page locations and visible field crop pixels."
+                       if document_pdf_form_binding.KEY in evidence else "")
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
             f"{tracked_detail}{word_visibility_detail}{saved_fields_detail}{invisible_detail}{character_detail}{interval_detail}{pdf_replacement_detail}"
             f"{pdf_covered_detail}{percentage_detail}{calendar_detail}{arithmetic_detail}{identifier_detail}"
             f"{marker_detail}{doi_detail}{heading_detail}{links_detail}{reference_links_detail}{word_reference_detail}"
-            f"{wording_detail}{history_detail}")
+            f"{wording_detail}{history_detail}{pdf_form_detail}")

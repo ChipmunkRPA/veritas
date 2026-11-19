@@ -16,6 +16,7 @@ from app.evidence import (
     document_chat_markers,
     document_disclosure_heading,
     document_invisible_characters,
+    document_pdf_form_binding,
     document_reference_links_binding,
     document_saved_link_hosts_binding,
     document_scope,
@@ -118,6 +119,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              DOI_REFERENCE_COMMITMENT, document_saved_link_hosts_binding.COMMITMENT,
                              document_reference_links_binding.COMMITMENT,
                              document_word_reference_cache_binding.COMMITMENT,
+                             document_pdf_form_binding.COMMITMENT,
                              document_disclosure_heading.COMMITMENT,
                              IMAGE_INTERPOLATION, prior_grid.COMMITMENT, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
                              image_animation_binding.KEY, image_motion_photo_binding.KEY,
@@ -316,6 +318,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
     _require(analysis['kind'] == 'document' or (document_word_reference_cache_binding.COMMITMENT not in result
                                                and document_word_reference_cache_binding.KEY not in evidence),
              'Word cross-reference commitments require document evidence')
+    _require(analysis['kind'] == 'document' or (document_pdf_form_binding.COMMITMENT not in result
+                                               and document_pdf_form_binding.KEY not in evidence),
+             'Saved PDF form commitments require document evidence')
     _require(analysis['kind'] == 'document' or PDF_SAVED_WORDING_COMMITMENT not in result,
              'Saved PDF wording requires document evidence')
     _require(analysis["kind"] == "document" or document_invisible_characters.COMMITMENT not in result,
@@ -381,6 +386,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                  == result.get(document_word_reference_cache_binding.COMMITMENT),
                  'Word cross-reference evidence differs from its published source')
         document_word_reference_cache_binding.validate(evidence)
+        document_pdf_form_binding.validate(evidence, result.get(document_pdf_form_binding.COMMITMENT))
         document_pdf_visibility.validate(evidence)
         history = evidence.get("coverage", {}).get(PDF_SAVED_WORDING)
         expected_history = result.get(PDF_SAVED_WORDING_COMMITMENT)
@@ -528,6 +534,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         if history := (part.get("coverage") or {}).get(PDF_SAVED_WORDING):
             _require(analysis['kind'] == 'document' and part is evidence, 'Saved wording is outside its PDF')
             groups.append(history['artifacts'])
+        if form := part.get(document_pdf_form_binding.KEY):
+            _require(analysis['kind'] == 'document' and part is evidence, 'Saved form fields are outside their PDF')
+            groups.append(form['artifacts'])
         copy_base = part
         if part.get('version') == IMAGE_PAIR_VERSION:
             from app.evidence import image_embedded_pair_binding

@@ -29,7 +29,8 @@ export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: Mul
   const repeatedText = set.schema === 'chipmunk.document-evidence/1' && set.repeated_passages?.status === 'matched'
   const tracked = set.schema === 'chipmunk.document-evidence/1' ? set.coverage?.word_tracked_changes : undefined
   const trackedWordEdits = !!(tracked?.rows.length || tracked?.paragraph_marks?.length || tracked?.unsupported_marks)
-  const savedPdfEdits = set.schema === 'chipmunk.document-evidence/1' && set.coverage?.pdf_saved_wording?.inspection.status === 'changed'
+  const savedPdfEdits = set.schema === 'chipmunk.document-evidence/1' &&
+    (set.coverage?.pdf_saved_wording?.inspection.status === 'changed' || !!set.pdf_form_value_differences?.inspection.rows.length)
   const chatMarkers = set.schema === 'chipmunk.document-evidence/1' && (set.coverage?.chat_format_markers?.turns ?? 0) > 0
   const printedHeading = set.schema === 'chipmunk.document-evidence/1' && set.printed_ai_use_heading?.affects_overall_confidence === false
   const doiMismatch = set.schema === 'chipmunk.document-evidence/1' && (set.doi_reference_consistency?.different_work ?? 0) > 0

@@ -617,6 +617,25 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
       method={set.source.method} emailHtml={emailCoverage?.body_content_type === 'text/html'} wording={set.coverage.published_wording_review} />}
     {set.coverage?.published_wording_review && <PublishedWording review={set.coverage.published_wording_review} method={set.source.method} />}
     {set.coverage?.pdf_saved_wording && <PdfSavedWording review={set.coverage.pdf_saved_wording} set={set} token={token} mediaReady={mediaReady} />}
+    {set.pdf_form_value_differences && <section id="document-pdf-form-values" aria-labelledby="document-pdf-form-values-title"
+      className="mt-4 rounded-md border border-border p-4">
+      <h3 id="document-pdf-form-values-title" className="m-0 text-body font-medium">Saved PDF form values</h3>
+      <p className="mt-2 mb-0 text-small">The stored form value differs from the saved page appearance shown here. An outdated appearance or form formatting can explain the difference. PDF viewers may display the field differently. This observation carries zero weight in the AI assessment.</p>
+      <ol className="mt-3 mb-0 list-none space-y-3 p-0">
+        {set.pdf_form_value_differences.inspection.rows.map((row, index) => {
+          const crop = set.pdf_form_value_differences?.artifacts[`field_${index + 1}`]
+          return <li key={`${row.page}-${row.xref}`} className="border-t border-border pt-3">
+            <dl className="m-0 mb-3 grid gap-3 text-small sm:grid-cols-2">
+              <div><dt className="font-medium">Stored form value</dt><dd className="m-0 whitespace-pre-wrap break-words">{row.saved_value}</dd></div>
+              <div><dt className="font-medium">Text in the saved appearance</dt><dd className="m-0 whitespace-pre-wrap break-words">{row.display_value}</dd></div>
+            </dl>
+            <p className="text-caption text-text-muted">PDF page {row.page}. Field rectangle [{row.box.join(', ')}] in points from the upper left.</p>
+            {crop && <EvidencePicture set={set} artifact={crop} token={token} ready={mediaReady} chart
+              alt={`Crop from the saved appearance on PDF page ${row.page}`} />}
+          </li>
+        })}
+      </ol>
+    </section>}
     <EmailBodyComparison review={set.coverage?.email_body_alternatives} />
     {set.coverage?.email_classifier_input_scope && <EmailInputScope scope={set.coverage.email_classifier_input_scope} />}
     {savedFields && <section aria-label="Saved Word field values" className="mt-4 rounded-md border border-border p-4">

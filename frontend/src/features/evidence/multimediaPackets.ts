@@ -669,6 +669,16 @@ export interface DocumentEvidenceSet extends SetBase {
     findings: { field: WordReferencePosition; target: WordReferencePosition; record_shape: 'simple' | 'complex' }[]
     authorship_confidence_contribution: 0
   }
+  pdf_form_value_differences?: {
+    inspection: {
+      schema: 'chipmunk.pdf-form-value-differences/1'; affects_overall_confidence: false
+      rows: { page: number; xref: number; page_size: [number, number]; box: [number, number, number, number]
+        saved_value: string; display_value: string
+        crop: { sha256: string; pixels_sha256: string; width: number; height: number }
+      }[]
+    }
+    artifacts: Record<string, EvidenceAsset>
+  }
   reference_link_discrepancies?: {
     schema: 'document-reference-link-discrepancies/1'
     decoded_characters: number; references: number; checked_links: number; mismatches: number

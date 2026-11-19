@@ -88,6 +88,7 @@ def public_result(result: dict) -> dict:
             document_invisible_characters,
             document_passage_intervals,
             document_passage_position,
+            document_pdf_form_binding,
             document_pdf_history_binding,
             document_published_wording,
             document_reference_links_binding,
@@ -116,6 +117,8 @@ def public_result(result: dict) -> dict:
             source_coverage[document_reference_links_binding.COMMITMENT] = reference_links
         if word_references := document_word_reference_cache_binding.from_result(result):
             source_coverage[document_word_reference_cache_binding.COMMITMENT] = word_references
+        if pdf_form := document_pdf_form_binding.from_result(result):
+            source_coverage[document_pdf_form_binding.COMMITMENT] = pdf_form
         if word_visibility := document_word_visibility.from_result(result):
             source_coverage[document_word_visibility.COMMITMENT] = word_visibility
         if invisible := document_invisible_characters.from_result(result):

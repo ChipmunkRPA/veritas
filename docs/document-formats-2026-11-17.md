@@ -128,6 +128,37 @@ positions for article excerpts and saved link labels.
 [HTML encoding detection](https://html.spec.whatwg.org/multipage/parsing.html#determining-the-character-encoding) ·
 [Windows-1252 labels](https://encoding.spec.whatwg.org/#names-and-labels)
 
+### Saved PDF form values
+
+For supported static PDF text fields, the reader compares the stored value
+with the text painted by the field's saved appearance. A reported difference
+includes both values, the one-based page number, the original page rectangle
+and the rendered crop in the browser, Standard PDF and JSON evidence. The
+rectangle uses points from the upper left of the page. The signed evidence
+package supports original-file verification of both strings and the crop.
+
+The check requires a simple, visible single-line ASCII field on a supported
+unrotated page. Equivalent case and whitespace, dynamic forms, unsupported
+fonts and appearances, and overlaps with other annotations are outside its
+findings. An outdated appearance or ordinary formatting can explain a
+difference, and different PDF readers may show a different value. The
+observation contributes zero weight to the automated AI assessment.
+
+The integrated reader reproduced all 14 seeded differences in a 134-file
+comparison. Both values matched and the 14 crops matched the same rendered
+pixels on the source page. It also withheld findings on 28 equivalent or
+synchronized fields, eight untouched samples and 84 exclusion controls.
+Three mislabeled white-ink controls were corrected after native pixel
+inspection showed the fixture rendered black. The same reader withheld
+the three actually white controls. These authored comparisons measure the
+scope of the field reader. They provide no population error rate.
+
+Five local analyses completed after simulated USD 9.99 checkout. Two
+eligible differences matched in the browser, PDF, JSON and signed original
+verification. Synchronized, reformatted and hidden fields produced no
+observation. The redacted PDF withheld the form data, and there were zero
+analysis jobs before payment. [Local replay receipt](evaluation-panels/document-pdf-form-values-2026-11-19.json)
+
 ### Words wrapped in selectable PDFs
 
 New writing analyses retain regular hyphens stored in the PDF at a line

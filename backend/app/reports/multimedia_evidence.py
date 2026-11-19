@@ -88,10 +88,13 @@ def asset_bytes(asset: dict[str, Any], store: ObjectStore) -> bytes:
 def asset_items(document: dict[str, Any]):
     """Every JSON presentation asset, including overview plots and WAVs that a static PDF cannot play."""
     service.asset_refs(document)
+    from app.evidence.document_pdf_form_binding import KEY as PDF_FORM
     from app.evidence.document_pdf_history_binding import KEY as PDF_HISTORY
 
     if history := (document.get("coverage") or {}).get(PDF_HISTORY):
         yield from ((None, f"{PDF_HISTORY}_{role}", asset) for role, asset in sorted(history["artifacts"].items()))
+    if form := document.get(PDF_FORM):
+        yield from ((None, f"{PDF_FORM}_{role}", asset) for role, asset in sorted(form["artifacts"].items()))
     parts = [(None, document)]
     if document.get("version") in NESTED_VIDEO_VERSIONS:
         parts.extend((key, document[key]) for key in ("audio", "av"))
@@ -186,6 +189,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
             document_doi_reference,
             document_invisible_characters,
             document_passage_intervals,
+            document_pdf_form_binding,
             document_pdf_history_binding,
             document_published_wording,
             document_reference_links_binding,
@@ -210,6 +214,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
                 or source.get(document_passage_intervals.COMMITMENT) != document_passage_intervals.result_commitment(result)
                 or source.get(document_published_wording.COMMITMENT) != document_published_wording.result_commitment(result)
                 or source.get(document_pdf_history_binding.COMMITMENT) != document_pdf_history_binding.result_commitment(result)
+                or source.get(document_pdf_form_binding.COMMITMENT) != document_pdf_form_binding.from_result(result)
                 or source.get(document_chat_markers.COMMITMENT) != document_chat_markers.from_result(result)):
             raise ObjectIntegrityError("Document evidence does not match the published extraction commitments")
 
@@ -684,6 +689,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_passage_coverage,
         document_passage_intervals,
         document_passage_position,
+        document_pdf_form_binding,
         document_pdf_history,
         document_pdf_history_binding,
         document_pdf_visibility,
@@ -783,6 +789,17 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
             commitment=document_word_reference_cache_binding.from_result(result)
             if result is not None else source.get(document_word_reference_cache_binding.COMMITMENT))
         document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
+        form = document.get(document_pdf_form_binding.KEY)
+        expected_form = document_pdf_form_binding.from_result(result) if result is not None else source.get(document_pdf_form_binding.COMMITMENT)
+        document_pdf_form_binding.validate(document, expected_form)
+        if (form or {}).get("inspection") != decoded.get(document_pdf_form_binding.KEY):
+            raise ValueError("Saved PDF form values differ from their recorded source inspection")
+        if form:
+            from app.evidence.document_pdf_form_values import verify_crop
+
+            for row in form["inspection"]["rows"]:
+                crop = row["crop"]
+                verify_crop(crop, assets[crop["sha256"]])
         if history := coverage.get(document_pdf_history_binding.KEY):
             submitted = _bytes(source["sha256"], store)
             if len(submitted) != history["inspection"]["source_bytes"]:
@@ -926,6 +943,7 @@ def quoted_values(snapshot: ReportSnapshot) -> list[str]:
         return []
     from app.evidence.document_doi_reference import KEY as DOI_REFERENCE
     from app.evidence.document_passage_position import KEY as PASSAGE_POSITION
+    from app.evidence.document_pdf_form_binding import KEY as PDF_FORM
     from app.evidence.document_saved_link_hosts_binding import KEY as SAVED_LINK_HOSTS
     from app.evidence.document_tracked_changes import KEY as TRACKED
     from app.evidence.document_unselected_responses import KEY as UNSELECTED_RESPONSES
@@ -944,6 +962,8 @@ def quoted_values(snapshot: ReportSnapshot) -> list[str]:
         excerpts.extend((row["label_host"], row["saved_host"]))
     for row in (snapshot.evidence.get(WORD_REFERENCE_CACHE) or {}).get("findings", ()):
         excerpts.extend((row["field"]["text"], row["target"]["text"]))
+    for row in (snapshot.evidence.get(PDF_FORM) or {}).get("inspection", {}).get("rows", ()):
+        excerpts.extend((row["saved_value"], row["display_value"]))
     excerpts.extend(row["text"] for row in ((snapshot.evidence.get("coverage") or {}).get(TRACKED) or {}).get("rows", ()))
     if (position := (snapshot.evidence.get("coverage") or {}).get(PASSAGE_POSITION)) and (focus := position.get("focus_text")):
         excerpts.append(focus)
@@ -1223,6 +1243,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     from app.evidence import (
         document_native_locations,
         document_passage_intervals,
+        document_pdf_form_binding,
         document_published_wording,
         document_word_reference_cache_binding,
         face_single_boundary_binding,
@@ -1249,6 +1270,13 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
     def plate(role: str, asset: dict, label: str | None = None) -> dict:
         return {"role": role, "label": label or role.replace("_", " ").capitalize(), "sha256": asset["sha256"],
                 "uri": None if withheld else "data:image/png;base64," + base64.b64encode(verified[asset["sha256"]]).decode("ascii")}
+
+    pdf_form = None
+    if not withheld and (form := document.get(document_pdf_form_binding.KEY)):
+        pdf_form = {"title": document_pdf_form_binding.TITLE, "limitation": document_pdf_form_binding.LIMITATION,
+                    "rows": [{**row, "picture": plate("crop", form["artifacts"][document_pdf_form_binding.crop_role(index)],
+                                                     "Crop from the saved PDF appearance")}
+                             for index, row in enumerate(form["inspection"]["rows"])]}
 
     pdf_history = copy.deepcopy((document.get("coverage") or {}).get(PDF_HISTORY)) if not withheld else None
     if pdf_history:
@@ -1797,6 +1825,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "doi_reference_consistency": document.get("doi_reference_consistency"),
             "saved_link_hosts": document.get("saved_link_hosts") if not withheld else None,
             "reference_link_discrepancies": document.get("reference_link_discrepancies") if not withheld else None,
+            "pdf_form_value_differences": pdf_form,
             "word_reference_cache": (
                 {**word_references, "title": document_word_reference_cache_binding.TITLE,
                  "limitation": document_word_reference_cache_binding.LIMITATION}

@@ -370,6 +370,8 @@ table.waterfall { width: 100%; border-collapse: collapse; table-layout: fixed; m
 .evidence-measurements div { min-width: 35mm; }
 .evidence-measurements dt { font-size: 7.6pt; color: var(--color-text-muted); }
 .evidence-measurements dd { margin: 0; font-size: 8.2pt; }
+.pdf-form-value-crop { margin: 2mm 0 3mm; }
+.pdf-form-value-crop img { display: block; max-width: 100%; max-height: 24mm; width: auto; height: auto; border: 0.5pt solid var(--color-border); }
 .evidence-asset-hashes { overflow-wrap: anywhere; font-size: 6.6pt; line-height: 9pt; }
 .image-evidence > .caption .mono { overflow-wrap: anywhere; }
 .profile-summary .image-evidence-packet, .profile-newsroom .image-evidence-packet { margin-top: 3mm; }

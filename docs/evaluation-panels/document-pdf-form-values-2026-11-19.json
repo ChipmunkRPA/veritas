@@ -1,0 +1,46 @@
+{
+  "schema": "chipmunk.pdf-form-evaluation/1",
+  "native": {
+    "integrated_files": 134,
+    "exact_crops": 14,
+    "results": {
+      "different": 14,
+      "equivalent": 28,
+      "outside": 84,
+      "untouched": 8
+    },
+    "maximum_absolute_rectangle_error_points": 3e-05,
+    "corrected_initial_ordinary_fixture_labels": 3
+  },
+  "local_checkout": {
+    "schema": "chipmunk.pdf-form-local-checkout/1",
+    "cases": {
+      "direct": {
+        "reported": true,
+        "local_pdf_json_original_verified": true
+      },
+      "terminal_parent": {
+        "reported": true,
+        "local_pdf_json_original_verified": true
+      },
+      "synchronized": {
+        "reported": false,
+        "local_pdf_json_original_verified": true
+      },
+      "formatted_control": {
+        "reported": false,
+        "local_pdf_json_original_verified": true
+      },
+      "hidden_control": {
+        "reported": false,
+        "local_pdf_json_original_verified": true
+      }
+    },
+    "browser_passed": true,
+    "same_writing_assessment": true,
+    "redacted_pdf_withheld": true,
+    "simulated_paid_cases": 5,
+    "simulated_checkout_usd_cents": 999,
+    "unpaid_jobs": 0
+  }
+}

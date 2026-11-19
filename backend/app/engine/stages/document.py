@@ -57,6 +57,7 @@ from app.evidence import (
     document_invisible_characters,
     document_native_locations,
     document_passage_intervals,
+    document_pdf_form_binding,
     document_pdf_visibility,
     document_published_wording,
     document_reference_links,
@@ -72,7 +73,7 @@ from app.evidence import (
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p44"
+PIPELINE_VERSION = "doc-2.0-p45"
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 BIBLIOGRAPHY_POLICY = "writing_bibliography_review_enabled"
 CLAUSE_POLICY = "writing_within_sentence_language_review_enabled"
@@ -139,6 +140,15 @@ def decode(ctx: StageContext) -> dict[str, Any]:
         words = sum(sentence.n_words for sentence in sents)
     else:
         words = check_document_length(doc, sents)
+    form_pdf = doc.meta.get("method") == "pymupdf"
+    form_observation, form_crops = None, {}
+    if form_pdf and not provenance_gate.stop(ctx):
+        from app.evidence.document_pdf_form_values import inspect_within
+
+        budget = 8
+        remaining = ctx.deadline.remaining()
+        if remaining is None or remaining >= budget + 1:
+            form_observation, form_crops = inspect_within(path, timeout=budget, source_sha256=doc.meta["original_sha256"])
     artifacts = []
     for digest, encoded in doc.source_rasters.items():
         content = base64.b64decode(encoded, validate=True)
@@ -148,6 +158,11 @@ def decode(ctx: StageContext) -> dict[str, Any]:
         artifacts.append({"id": str(uuid.uuid5(uuid.NAMESPACE_URL, f"ocr:{ctx.analysis_id}:{digest}")),
                           "sha256": obj.sha256, "size_bytes": obj.size_bytes, "media_type": "image/png",
                           "role": "preview", "created_by": "document-ocr/1"})
+    for payload in form_crops.values():
+        obj = ctx.store.put_bytes(payload)
+        artifacts.append({"id": str(uuid.uuid5(uuid.NAMESPACE_URL, f"pdf-form:{ctx.analysis_id}:{obj.sha256}")),
+                          "sha256": obj.sha256, "size_bytes": obj.size_bytes, "media_type": "image/png",
+                          "role": "preview", "created_by": document_pdf_form_binding.SCHEMA})
     return {"text": doc.text, "paragraphs": [[int(a), int(b)] for a, b in doc.paragraphs], "meta": common.json_safe(doc.meta),
             "sentences": [dataclasses.asdict(s) for s in sents], "words": words, "source_map": doc.source_map,
             "artefacts": artifacts,
@@ -156,6 +171,8 @@ def decode(ctx: StageContext) -> dict[str, Any]:
             **({document_doi_reference.KEY: doi_record} if doi_record else {}),
             **({document_disclosure_heading.POLICY: True} if heading_enabled and doc.meta.get("method") == "pymupdf" else {}),
             **({document_disclosure_heading.KEY: heading_record} if heading_record else {}),
+            **({document_pdf_form_binding.POLICY: document_pdf_form_binding.SCHEMA} if form_pdf else {}),
+            **({document_pdf_form_binding.KEY: form_observation} if form_observation else {}),
             **({document_saved_link_hosts_binding.POLICY: document_saved_link_hosts_binding.SCHEMA} if supports_link_review else {}),
             **({document_saved_link_hosts_binding.KEY: saved_links} if saved_links else {}),
             **({document_reference_links_binding.POLICY: document_reference_links_binding.SCHEMA} if supports_reference_links else {}),
@@ -176,6 +193,9 @@ def current_decode_output(output: Any, *, require_current_layout_reader: bool = 
     if (output["meta"].get("method") == "pymupdf"
             and output.get(document_disclosure_heading.POLICY, False)
             is not (settings.environment == "dev" and settings.document_disclosure_heading_review)):
+        return False
+    if (require_current_layout_reader and output["meta"].get("method") == "pymupdf"
+            and output.get(document_pdf_form_binding.POLICY) != document_pdf_form_binding.SCHEMA):
         return False
     if (output["meta"].get("method") in document_saved_link_hosts_binding.LOCATIONS
             and output.get(document_saved_link_hosts_binding.POLICY) != document_saved_link_hosts_binding.SCHEMA):
@@ -762,6 +782,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         result.manifest.sampling[document_reference_links_binding.COMMITMENT] = canonical_hash(reference_links)
     if word_references := decoded.get(document_word_reference_cache_binding.KEY):
         result.manifest.sampling[document_word_reference_cache_binding.COMMITMENT] = canonical_hash(word_references)
+    if form_observation := decoded.get(document_pdf_form_binding.KEY):
+        result.manifest.sampling[document_pdf_form_binding.COMMITMENT] = canonical_hash(form_observation)
     detected = ctx.outputs.get("detect") or {}
     verified_credentials = provenance_gate.stop(ctx)
     if not verified_credentials and (reading := detected.get(document_character_review.KEY)):

@@ -363,6 +363,15 @@ export interface BackgroundVoiceReview {
   processed_pcm_sha256?: string
   artifacts: Partial<Record<'selected_clip' | 'processed_clip' | 'waveform' | 'processed_waveform', EvidenceAsset>>
 }
+export interface BriefVoiceReview {
+  schema: 'chipmunk.brief-voice-review/1'
+  status: 'flagged' | 'no_flag' | 'unassessed' | 'skipped'
+  reason: string; limitation: string; affects_overall_confidence: false
+  scheduled_windows: number; speech_windows_checked: number
+  windows: (SampleInterval & { id: string; start_s: number; end_s: number;
+    source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'];
+    artifacts: Record<'selected_clip' | 'waveform', EvidenceAsset> })[]
+}
 export interface AudioEvidenceSet extends SetBase {
   schema: 'chipmunk.audio-evidence/1'; packets: AudioEvidencePacket[]; omitted_windows: number
   source: { sha256: string; pcm_sha256?: string; samples?: number; sample_rate?: number; source_channels?: number; source_sample_rate?: number;
@@ -395,6 +404,7 @@ export interface AudioEvidenceSet extends SetBase {
   focused_speech_edit_review?: FocusedSpeechEditReview
   long_voice_review?: LongVoiceReview
   two_second_review?: TwoSecondSpeechReview
+  brief_voice_review?: BriefVoiceReview
   background_reduced_voice_review?: BackgroundVoiceReview
 }
 export type VideoChannelStatus = 'ready' | 'absent' | 'unavailable' | 'not_assessed' | 'not_applicable'

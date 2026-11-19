@@ -4,8 +4,9 @@ The small acoustic correction increased false alerts and added no useful
 noisy locations. The original shorter-window control found more clean
 and washing-machine edits with unchanged ordinary-file alerts. Both
 findings come from a completed 496-delivery comparison with frozen
-methods and points. Application behavior and overall confidence remain
-unchanged.
+methods and points. The optional local listening ranges described below
+use the frozen raw shorter-window result and carry zero weight in overall
+confidence.
 
 ## Fitting, calibration and transfer
 
@@ -118,7 +119,34 @@ python3 -B -S backend/scripts/review_audio_noise_matched_segment_transfer.py \
   docs/evaluation-panels/audio-noise-matched-segment-transfer-2026-11-18.json
 ```
 
-The raw shorter-window finding supports examining its source-bound
-application seam. Exact extra off-target ranges and paid-flow evidence
-need review before customer activation. The comparison leaves the
-severe river and restaurant localization gap unresolved.
+## Exact range review and local use
+
+A second replay checked the original two-second ranges and counted the
+additional intervals. Of the new ranges that fell short of the localization
+test, eleven clean ranges and one washing-machine range overlapped the
+actual edit and added 1.5 and 0.75 seconds of extra highlighting outside
+it, respectively. Four new restaurant ranges missed the actual edit and
+added one second of new highlighting across
+the same two synthetic files with existing off-target alerts. All five
+previously flagged ordinary restaurant files gained 0.5 seconds of
+highlighting each. No additional ordinary files were flagged.
+
+The development option `VERITAS_AUDIO_BRIEF_VOICE_REVIEW` uses 23
+overlapping 750 ms windows on exact twelve-second native 16 kHz mono WAV
+files. It checks a window when at least half its samples contain detected
+speech and marks adjacent windows with repeated elevated responses. When
+there is no adjacent checked pair, the check is unassessed. The schedule
+ends at 11.750 seconds, leaving the final 250 ms outside this check. The
+analysis page, PDF, and JSON use the same sample addresses. The signed
+evidence includes the marked waveform and exact audio clip for each
+listed range. These are listening ranges. Overlap, ordinary edits and
+background noise can also raise the response. River and restaurant
+localization remains unresolved.
+
+Eight local runs used simulated USD 9.99 checkout. No analysis started
+before checkout completion. All eight browser evidence views, PDF and JSON
+exports, and signed packages were checked. The same clean input with the
+option enabled and disabled produced the same overall assessment and
+existing evidence. The new ranges and waveforms matched the original audio
+in the clean and washing-machine samples and in the previously flagged
+ordinary restaurant sample.

@@ -8,7 +8,7 @@ import AudioStereoContext from './AudioStereoContext'
 import AudioRepetitionContext from './AudioRepetitionContext'
 import { EvidenceAudio, EvidenceLimits, EvidenceMeasurements, EvidencePicture, EvidenceReferences, evidenceCard, evidenceGrid } from './EvidenceMedia'
 import { measurementValue } from './imagePackets'
-import { rationalSeconds, seconds, type AudioEvidencePacket, type AudioEvidenceSet, type LongVoiceCoverageStatus } from './multimediaPackets'
+import { rationalSeconds, seconds, type AudioEvidencePacket, type AudioEvidenceSet, type BriefVoiceReview, type LongVoiceCoverageStatus } from './multimediaPackets'
 
 const longVoiceLabels = {
   ai: 'Leans AI-generated in this window',
@@ -66,6 +66,39 @@ function SpeechWindowSelection({ selection, rate, videoOriginS }: {
   </>
 }
 
+function BriefSpeechWindows({ review, set, token, mediaReady }: {
+  review: BriefVoiceReview; set: AudioEvidenceSet; token: string; mediaReady: boolean
+}) {
+  return <section id="media-evidence-brief-voice-review" aria-label="Brief speech windows"
+    className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
+    <h3 className="m-0 text-body font-medium">Brief speech windows</h3>
+    <p className="mt-2 mb-0 text-small" role="status">{review.reason}</p>
+    {review.status !== 'skipped' && <p className="mt-2 mb-0 text-caption text-text-muted">
+      {review.speech_windows_checked} of {review.scheduled_windows} scheduled 750 ms windows checked.
+    </p>}
+    {review.status === 'flagged' && review.windows.length > 0 && <>
+      <p className="mt-2 mb-0 text-caption text-text-muted">Each marked excerpt appears once, even when it supports two pairs.</p>
+      <ol className={`mt-4 mb-0 list-none p-0 ${evidenceGrid}`}>
+        {review.windows.map(window => {
+          const span = `${seconds(window.start_s)}–${seconds(window.end_s)}`
+          return <li key={window.id} id={`media-evidence-${window.id}`} className="rounded-md border border-border p-3 scroll-mt-20">
+            <h4 className="m-0 text-small font-medium">{span}</h4>
+            <p className="mt-1 mb-0 font-mono text-caption text-text-muted">
+              {window.id} · Analyzed samples [{window.start_sample}, {window.end_sample})
+            </p>
+            <SourceTimestamps ranges={window.source_timestamp_ranges} />
+            <div className="mt-3"><EvidencePicture set={set} artifact={window.artifacts.waveform} token={token} ready={mediaReady}
+              chart alt={`Waveform for brief speech window ${window.id} at ${span}`} /></div>
+            <div className="mt-3"><EvidenceAudio set={set} artifact={window.artifacts.selected_clip} token={token} ready={mediaReady}
+              alt={`Brief speech window ${window.id} at ${span}`} /></div>
+          </li>
+        })}
+      </ol>
+    </>}
+    <p className="mt-3 mb-0 text-caption text-text-muted">{review.limitation}</p>
+  </section>
+}
+
 export default function AudioEvidenceContent({ set, token, mediaReady, videoOriginS, standalone = true, hasTrackComparison = false }: {
   set: AudioEvidenceSet; token: string; mediaReady: boolean; videoOriginS?: number | null; standalone?: boolean; hasTrackComparison?: boolean
 }) {
@@ -84,6 +117,8 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
   const twoSecondCoverage = twoSecond?.sample_coverage
   const twoSecondCount = twoSecond?.excerpts.reduce((total, row) =>
     total + row.speech_samples.filter(samples => samples >= longVoiceSampleRate).length, 0)
+  const briefReview = standalone && set.brief_voice_review?.schema === 'chipmunk.brief-voice-review/1'
+    && set.brief_voice_review.affects_overall_confidence === false ? set.brief_voice_review : undefined
   const focusedSpeech = Array.isArray(longReview?.regions)
   const hasMeasuredSpeech = longReview?.windows.some((window) => window.direction !== 'unassessed')
   const backgroundReview = standalone ? set.background_reduced_voice_review : undefined
@@ -128,7 +163,8 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
     setSelection(packet.id)
   }, [hash, set.packets])
   return <div ref={root} data-testid="audio-evidence-content"
-    onPlayCapture={longReview?.status === 'corroborated' || twoSecond?.status === 'flagged' || backgroundReview?.status === 'flagged' ? (event) => {
+    onPlayCapture={longReview?.status === 'corroborated' || twoSecond?.status === 'flagged'
+      || briefReview?.status === 'flagged' || backgroundReview?.status === 'flagged' ? (event) => {
       if (event.target instanceof HTMLAudioElement) pauseAudio(event.target)
     } : undefined}>
     {tracks && tracks.length > 1 && <section aria-label="Audio track coverage" className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
@@ -312,6 +348,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
       </details>}
       <p className="mt-3 mb-0 text-caption text-text-muted">{twoSecond.limitation}</p>
     </section>}
+    {briefReview && <BriefSpeechWindows review={briefReview} set={set} token={token} mediaReady={mediaReady} />}
     {longReview && <section id="media-evidence-long-voice-review" aria-label={longReview.title}
       className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
       <h3 className="m-0 text-body font-medium">{longReview.title}</h3>
@@ -425,7 +462,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
     </section>}
     {set.packets.length > 0 && <AudioInspectionTimeline set={set} token={token} mediaReady={mediaReady} selectedId={selectedId} onSelect={select} />}
     {set.coverage && rate ? <div id={standalone ? 'media-evidence-voice-coverage' : undefined} className="scroll-mt-14 mt-4 rounded-md border border-border p-4 text-small text-text-muted">
-      <p className="m-0">{shortReview || longReview || backgroundReview ? 'Primary voice checks' : 'Voice checks'} cover {seconds(set.coverage.scored_samples / rate)} of the {seconds(set.coverage.decoded_samples / rate)} decoded input.
+      <p className="m-0">{shortReview || longReview || backgroundReview || briefReview ? 'Primary voice checks' : 'Voice checks'} cover {seconds(set.coverage.scored_samples / rate)} of the {seconds(set.coverage.decoded_samples / rate)} decoded input.
         {' '}{seconds(set.coverage.unscored_samples / rate)} of that input has no window score. Overlapping windows are counted once in this coverage.</p>
       <p className="mt-2 mb-0">{set.coverage.windows.length} scored windows. Responses apply to complete windows, normally four seconds; they do not identify individual words or exact voice-replacement boundaries.</p>
       {set.coverage.speech_window_selection && <details className="mt-3"

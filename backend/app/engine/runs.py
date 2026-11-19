@@ -27,13 +27,15 @@ from app.core import times
 from app.engine.detector import SERVER_REASONS, of_the_server
 from app.evidence.audio_background_review_binding import DETECTOR_ID as BACKGROUND_REVIEW_ID
 from app.evidence.audio_background_review_binding import KEY as BACKGROUND_REVIEW_KEY
+from app.evidence.audio_brief_voice_binding import DETECTOR_ID as BRIEF_VOICE_REVIEW_ID
+from app.evidence.audio_brief_voice_binding import KEY as BRIEF_VOICE_REVIEW_KEY
 from app.evidence.audio_long_review_binding import DETECTOR_ID as LONG_VOICE_REVIEW_ID
 from app.evidence.audio_two_second_binding import DETECTOR_ID as TWO_SECOND_REVIEW_ID
 from app.evidence.audio_two_second_binding import KEY as TWO_SECOND_REVIEW_KEY
 from app.storage.db import AnalysisStage, Artefact, DetectorRun
 from app.storage.objects import ObjectStore, default_store
 
-_AUXILIARY = {LONG_VOICE_REVIEW_ID, BACKGROUND_REVIEW_ID, TWO_SECOND_REVIEW_ID}
+_AUXILIARY = {LONG_VOICE_REVIEW_ID, BACKGROUND_REVIEW_ID, TWO_SECOND_REVIEW_ID, BRIEF_VOICE_REVIEW_ID}
 
 
 def _started(run: DetectorRun) -> tuple[int, str]:
@@ -56,7 +58,7 @@ def referenced(db: Session, analysis_id: str, store: ObjectStore | None = None) 
         if isinstance(output, dict):
             out.update(str(e["run_id"]) for e in output.get("detectors") or [] if isinstance(e, dict) and e.get("run_id"))
             if stage == "detect":
-                for key in ("long_voice_review", BACKGROUND_REVIEW_KEY, TWO_SECOND_REVIEW_KEY):
+                for key in ("long_voice_review", BACKGROUND_REVIEW_KEY, TWO_SECOND_REVIEW_KEY, BRIEF_VOICE_REVIEW_KEY):
                     if isinstance(review := output.get(key), dict) and review.get("run_id"):
                         out.add(str(review["run_id"]))
     return out

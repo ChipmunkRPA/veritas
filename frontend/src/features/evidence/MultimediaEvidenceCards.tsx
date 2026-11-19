@@ -16,8 +16,11 @@ export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: Mul
   const audio = set.schema === 'chipmunk.video-evidence/1' ? set.audio : set.schema === 'chipmunk.audio-evidence/1' ? set : undefined
   const repeatedAudio = repeatedAudioCount(audio)
   const stereoTimingFlag = !!audio?.stereo_timing_change?.measurement
+  const briefVoice = set.schema === 'chipmunk.audio-evidence/1' ? set.brief_voice_review : undefined
+  const briefSpeechFlag = briefVoice?.schema === 'chipmunk.brief-voice-review/1' && briefVoice.affects_overall_confidence === false
+    && briefVoice.status === 'flagged' && briefVoice.windows.length > 0
   const shortSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' &&
-    (set.short_voice_review?.status === 'flagged' || set.focused_speech_edit_review?.status === 'flagged')
+    (set.short_voice_review?.status === 'flagged' || set.focused_speech_edit_review?.status === 'flagged' || briefSpeechFlag)
   const longSpeechFlag = set.schema === 'chipmunk.audio-evidence/1' &&
     (set.long_voice_review?.status === 'corroborated' || set.long_voice_review?.two_second_review?.status === 'flagged' ||
       set.two_second_review?.status === 'flagged')

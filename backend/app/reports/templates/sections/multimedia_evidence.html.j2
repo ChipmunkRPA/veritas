@@ -434,6 +434,22 @@ Original source ticks [{{ window.native_source_range.start_pts }}, {{ window.nat
 {% endfor %}
 <p class="caption">{{ scan.limitation }} JSON pointer <span class="mono">{{ '/two_second_review' if presented_scan else '/long_voice_review/two_second_review' }}</span>.</p>
 {% endif %}
+{% if evidence.get('brief_voice_review') %}
+{% set review = evidence.brief_voice_review %}
+<h3 id="multimedia-brief-voice-review">Brief speech windows</h3>
+<p class="caption">{% if review.status == 'skipped' %}Skipped. {% endif %}{{ review.reason }}
+{% if review.status != 'skipped' %}{{ review.speech_windows_checked }} of {{ review.scheduled_windows }} scheduled windows had enough detected speech to check.{% endif %}</p>
+{% for window in review.windows %}
+<div class="multimedia-scored-context" id="multimedia-evidence-{{ window.id }}">
+<p class="caption"><strong>{{ window.id }}</strong> · {{ '%.3f' | format(window.start_s) }}–{{ '%.3f' | format(window.end_s) }} s.
+Samples [{{ window.start_sample }}, {{ window.end_sample }}) at 16000 Hz.
+{% for range in window.source_timestamp_ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% endfor %}</p>
+{% if window.waveform %}{{ plates([window.waveform]) }}{% endif %}
+<p class="caption">The signed evidence package contains the listening clip. JSON pointer <span class="mono">/brief_voice_review/windows/{{ loop.index0 }}</span>.</p>
+</div>
+{% endfor %}
+<p class="caption">{{ review.limitation }}</p>
+{% endif %}
 {% if evidence.get('short_voice_review') %}
 {% set review = evidence.short_voice_review %}
 <h3 id="multimedia-short-voice-review">{{ review.title }}</h3>

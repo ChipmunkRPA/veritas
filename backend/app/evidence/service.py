@@ -84,7 +84,7 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
     """Only declared presentation assets may be fetched; source/raw hashes are not download grants."""
     if document is None:
         return {}
-    from app.evidence import document_pdf_history_binding
+    from app.evidence import audio_brief_voice_binding, document_pdf_history_binding
     from app.evidence.audio_focused_edit_binding import KEY as FOCUSED_EDIT
     from app.evidence.audio_stereo_timing_binding import KEY as STEREO_TIMING
     from app.evidence.image_interpolation_binding import assets as interpolation_assets
@@ -151,6 +151,15 @@ def asset_refs(document: dict[str, Any] | None) -> dict[str, dict[str, Any]]:
             except ValueError as error:
                 raise ObjectIntegrityError(str(error)) from error
             groups.extend(window["artifacts"] for window in two_second.media_windows(review))
+        if audio_brief_voice_binding.KEY in part:
+            review = part[audio_brief_voice_binding.KEY]
+            if part is not document or part.get("schema") != "chipmunk.audio-evidence/1":
+                raise ObjectIntegrityError("Brief speech review is outside standalone audio")
+            try:
+                audio_brief_voice_binding.validate(review, part["source"])
+            except (KeyError, TypeError, ValueError) as error:
+                raise ObjectIntegrityError(str(error)) from error
+            groups.extend(window["artifacts"] for window in review["windows"])
         if "background_reduced_voice_review" in part:
             review = part["background_reduced_voice_review"]
             if (part is not document or part.get("schema") != "chipmunk.audio-evidence/1" or not isinstance(review, dict)):

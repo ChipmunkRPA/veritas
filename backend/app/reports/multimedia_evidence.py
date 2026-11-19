@@ -16,7 +16,13 @@ from PIL import Image
 
 from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.audio.coverage import interval_union
-from app.evidence import audio_focused_edit_binding, audio_two_second_binding, document_scope, service
+from app.evidence import (
+    audio_brief_voice_binding,
+    audio_focused_edit_binding,
+    audio_two_second_binding,
+    document_scope,
+    service,
+)
 from app.evidence.av_binding import (
     AUDIO_CLOCK_BREAKS,
     AV_CLOCK_DISPLAY_LIMIT,
@@ -115,6 +121,10 @@ def asset_items(document: dict[str, Any]):
             for index, window in enumerate(audio_two_second_binding.media_windows(review)):
                 for role, asset in sorted(window["artifacts"].items()):
                     yield None, f"two_second_review_{index}_{role}", asset
+        if review := part.get(audio_brief_voice_binding.KEY):
+            for window in review["windows"]:
+                for role, asset in sorted(window["artifacts"].items()):
+                    yield window["id"], role, asset
         for role, asset in sorted((part.get("background_reduced_voice_review") or {}).get("artifacts", {}).items()):
             yield None, f"background_reduced_voice_review_{role}", asset
         for window in (part.get("stereo_listening") or {}).get("windows", []):
@@ -495,6 +505,9 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                           if audio_record.get("mono_voice_policy") == MONO_VOICE_POLICY else None)
         if document["coverage"].get(MONO_VOICE_COVERAGE) != expected_limit:
             raise ObjectIntegrityError("The mono voice coverage limit differs from the recorded audio input and policy")
+        brief_key = audio_brief_voice_binding.KEY
+        if (brief_key in document) != (brief_key in audio_record):
+            raise ObjectIntegrityError("Brief speech evidence coverage differs from the recorded audio analysis")
     stereo_context = document.get("stereo_context")
     if stereo_sha := document.get("stereo_context_sha256"):
         if canonical_json(stereo_context) != _bytes(stereo_sha, store):
@@ -596,6 +609,19 @@ def _verify_audio(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                                      read_asset=assets.__getitem__, waveform=audio_packets._chart)
         except (ValueError, KeyError, TypeError) as error:
             raise ObjectIntegrityError("Frozen speech-window evidence differs from its recorded inputs") from error
+    if (review := document.get(audio_brief_voice_binding.KEY)) is not None:
+        from app.evidence import audio_brief_voice, audio_packets
+        from app.evidence.audio_short_review_binding import source_metadata_matches
+
+        result = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+        try:
+            if not source_metadata_matches(source, mapping):
+                raise ValueError("Audio codec scope changed")
+            record = result["manifest"]["sampling"]["audio_evidence"][audio_brief_voice_binding.KEY]
+            audio_brief_voice.verify(review, record, store=store, source=source, pcm=pcm, mapping=mapping,
+                                     read_asset=assets.__getitem__, waveform=audio_packets._chart)
+        except (ValueError, KeyError, TypeError) as error:
+            raise ObjectIntegrityError("Frozen brief speech evidence differs from its recorded inputs") from error
     if (review := document.get("background_reduced_voice_review")) is not None:
         from app.evidence import audio_background_review, audio_packets
         from app.evidence.audio_short_review_binding import source_metadata_matches
@@ -1644,6 +1670,11 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 if any(event["interval"]["start_sample"] < window["end_sample"]
                        and event["interval"]["end_sample"] > window["start_sample"] for window in windows)
             ]
+    brief_voice_review = copy.deepcopy(document.get(audio_brief_voice_binding.KEY))
+    if brief_voice_review:
+        for window in brief_voice_review["windows"]:
+            window["waveform"] = plate("waveform", window["artifacts"]["waveform"],
+                                       "Waveform with the selected 750 ms window highlighted")
     background_review = copy.deepcopy(document.get("background_reduced_voice_review"))
     if background_review and (asset := background_review["artifacts"].get("waveform")):
         paired = background_review["schema"] == "chipmunk.background-reduced-voice-review/2"
@@ -1698,6 +1729,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             audio_focused_edit_binding.KEY: focused_edit,
             "long_voice_review": long_voice_review,
             audio_two_second_binding.KEY: presented_two_second,
+            audio_brief_voice_binding.KEY: brief_voice_review,
             "background_reduced_voice_review": background_review,
             "stereo_context": stereo_context,
             "stereo_listening": stereo_listening,

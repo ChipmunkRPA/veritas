@@ -360,6 +360,7 @@ class Settings(BaseSettings):
     audio_focused_long_review: bool = False  # Optional source-clock review with overlapping native speech windows.
     audio_focused_long_48k_review: bool = False  # Local trial for continuous 48 kHz mono PCM16 WAV.
     audio_two_second_long_review: bool = False  # Local overlapping two-second check for nine- to fourteen-second lossless audio.
+    audio_brief_voice_review: bool = False  # Local exact 750 ms listening leads on twelve-second native mono WAV.
     audio_two_second_long_confirmation: bool = False  # Require a second overlapping elevated response for a reported window.
     audio_two_second_long_48k_review: bool = False  # Confirm two-second speech windows in verified 48 kHz lossless audio.
     audio_two_second_long_aac48_review: bool = False  # Confirm two-second windows within a verified 48 kHz AAC presentation.

@@ -552,6 +552,13 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                      'Native-clock speech-window review is outside standalone audio')
             two_second.validate(review, part['source'])
             groups.extend(window['artifacts'] for window in two_second.media_windows(review))
+        if 'brief_voice_review' in part:
+            from app.evidence import audio_brief_voice_binding as brief
+
+            _require(analysis['kind'] == 'audio' and part is evidence, 'Brief speech review is outside standalone audio')
+            review = part[brief.KEY]
+            brief.validate(review, part['source'])
+            groups.extend(window['artifacts'] for window in review['windows'])
         if 'background_reduced_voice_review' in part:
             from app.evidence.audio_background_review_binding import validate as validate_background_review
 

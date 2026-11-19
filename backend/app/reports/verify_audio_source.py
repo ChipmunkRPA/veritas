@@ -9,6 +9,7 @@ from pathlib import Path
 from zipfile import ZipFile
 
 from app.detectors.audio.decode import decode_audio, source_ranges, wav_bytes
+from app.evidence import audio_brief_voice_binding as brief_voice
 from app.evidence import audio_two_second_binding as two_second
 from app.evidence import mouth_hold_sound, mouth_local_hold_binding
 from app.evidence.audio_binding import SPEECH_SELECTION
@@ -51,6 +52,8 @@ def _clips(audio: dict, alignment: dict) -> Iterator[tuple[str, dict, list[dict]
     if review := audio.get(two_second.KEY):
         for window in two_second.media_windows(review):
             yield "Two-second speech-window clip", window, window["source_timestamp_ranges"], window["artifacts"]["selected_clip"]
+    for window in (audio.get(brief_voice.KEY) or {}).get("windows", []):
+        yield f"{window['id']} brief speech-window clip", window, window["source_timestamp_ranges"], window["artifacts"]["selected_clip"]
     if (review := audio.get("background_reduced_voice_review")) and review["status"] == "flagged":
         yield "Original background-reduced review clip", review["interval"], review["source_timestamp_ranges"], review["artifacts"]["selected_clip"]
     for name in ("repetition_context", "similarity_context"):
@@ -336,6 +339,13 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     scan = audio.get(two_second.KEY) or (audio.get("long_voice_review") or {}).get(two_second.KEY)
     if scan and two_second.COVERAGE in scan:
         replay_detail += " Recomputed the checked and unchecked source intervals from the saved speech admissions."
+    if (review := audio.get(brief_voice.KEY)) is not None:
+        from app.evidence.audio_brief_voice import verify_source
+        from app.evidence.audio_packets import _chart
+
+        verify_source(review, pcm=decoded.pcm, mapping=decoded.mapping, waveform=_chart)
+        if review["windows"]:
+            replay_detail += f" Verified {len(review['windows'])} exact 750 ms listening ranges and their marked waveforms."
     from app.evidence import audio_silence_binding as silence
     from app.evidence import audio_tonal_phase_binding as tonal
     from app.evidence.audio_bandwidth_binding import BANDWIDTH_SCHEMAS

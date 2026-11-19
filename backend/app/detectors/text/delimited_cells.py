@@ -8,12 +8,15 @@ import re
 from itertools import islice
 from pathlib import Path
 
+from app.evidence.document_native_locations import CSV_DECLARED_SEPARATORS
+
 MAX_BYTES = 25 * 1024 * 1024
 MAX_ROWS = 100_000
 MAX_COLUMNS = 1_024
 MAX_FIELDS = 1_000_000
 MAX_TEXT_CELLS = 8_000
 SAMPLE_ROWS = 24
+_SEPARATOR_DECLARATION = re.compile(r'\A(?:sep=([^\r\n"])|"sep=([^\r\n"])")(?:\r\n|\r|\n|\Z)', re.IGNORECASE)
 _SPLIT = "The table exceeds the local reader limit. Split it into smaller files."
 _QUOTING = "The table has invalid quoting. Export it again as CSV or TSV with quoted text fields."
 _FORMULA = re.compile(
@@ -107,14 +110,24 @@ def _writing(field: str) -> bool:
                 and not _LINK.fullmatch(field) and any(char.isalpha() for char in field))
 
 
-def read(path: Path, extension: str, *, max_chars: int) -> list[tuple[str, dict]]:
-    """Return one mapped block per readable field, preserving decoded field offsets."""
+def read(path: Path, extension: str, *, max_chars: int,
+         honor_separator_declaration: bool = True) -> tuple[list[tuple[str, dict]], str | None]:
+    """Return mapped writing fields and the separator declared in the file, if used."""
     if extension not in {".csv", ".tsv"}:
         raise ValueError("Choose a CSV or TSV file.")
     text = _table_text(path)
-    delimiter = _delimiter(text, extension)
+    declaration = _SEPARATOR_DECLARATION.match(text) if extension == ".csv" and honor_separator_declaration else None
+    declared_separator = (declaration[1] or declaration[2]) if declaration else None
+    first_record = 1
+    if declaration and declared_separator in CSV_DECLARED_SEPARATORS:
+        text = text[declaration.end():]
+        # Keep source record numbers aligned with the file, including its opening line.
+        first_record = 2
+    else:
+        declared_separator = None
+    delimiter = declared_separator or _delimiter(text, extension)
     fields = 0
-    for row, width in enumerate(_widths(text, delimiter), 1):
+    for row, width in enumerate(_widths(text, delimiter), first_record):
         fields += width
         if row > MAX_ROWS or fields > MAX_FIELDS:
             raise ValueError(_SPLIT)
@@ -122,7 +135,7 @@ def read(path: Path, extension: str, *, max_chars: int) -> list[tuple[str, dict]
     characters = raw_characters = 0
     try:
         reader = csv.reader(io.StringIO(text, newline=""), delimiter=delimiter, strict=True)
-        for row, fields_here in enumerate(reader, 1):
+        for row, fields_here in enumerate(reader, first_record):
             for column, raw in enumerate(fields_here, 1):
                 if not _writing(raw.strip()):
                     continue
@@ -135,4 +148,4 @@ def read(path: Path, extension: str, *, max_chars: int) -> list[tuple[str, dict]
     except csv.Error as error:
         message = _SPLIT if str(error).startswith("field larger than field limit") else _QUOTING
         raise ValueError(message) from error
-    return parts
+    return parts, declared_separator

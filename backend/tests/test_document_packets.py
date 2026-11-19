@@ -49,7 +49,8 @@ def packet_factory(tmp_path):
         def create(ext=".txt", scores=(0.1, 0.9, 0.2), ocr=False, text=None, source_pdf=None,
                    *, project_word_revisions=True, project_word_breaks=True, include_word_review=False,
                    map_body_paragraphs=True, skip_hidden_slide_groups=True, skip_hidden_odt_sections=True,
-                   skip_hidden_xlsx_cell_formats=True, skip_hidden_rtf_runs=True, skip_markdown_fences=True):
+                   skip_hidden_xlsx_cell_formats=True, skip_hidden_rtf_runs=True, skip_markdown_fences=True,
+                   honor_csv_separator_declaration=True):
             path = source_pdf if source_pdf is not None else tmp_path / ("source" + ext)
             text = text or "First sentence contains enough useful words. Second sentence adds more context to this test. Third sentence completes the source."
             if ext == ".pdf" and source_pdf is None:
@@ -79,6 +80,7 @@ def packet_factory(tmp_path):
             doc = extract(path, ext, project_word_revisions=project_word_revisions, project_word_breaks=project_word_breaks,
                           map_body_paragraphs=map_body_paragraphs, skip_hidden_slide_groups=skip_hidden_slide_groups,
                           skip_hidden_rtf_runs=skip_hidden_rtf_runs, skip_markdown_fences=skip_markdown_fences,
+                          honor_csv_separator_declaration=honor_csv_separator_declaration,
                           skip_hidden_odt_sections=skip_hidden_odt_sections, skip_hidden_xlsx_cell_formats=skip_hidden_xlsx_cell_formats)
             for content in doc.source_rasters.values():
                 register_artefact(db, store, base64.b64decode(content), media_type="image/png", role="preview", created_by="document-ocr/1")

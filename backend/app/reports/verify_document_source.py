@@ -149,8 +149,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                       == document_native_locations.RTF_VISIBILITY,
                       skip_markdown_fences=coverage.get(document_native_locations.MARKDOWN_FENCES_KEY)
                       == document_native_locations.MARKDOWN_FENCES,
+                      honor_csv_separator_declaration=document_native_locations.CSV_SEPARATOR_KEY in coverage,
                       skip_hidden_xlsx_cell_formats=coverage.get(document_native_locations.XLSX_VISIBILITY_KEY)
                       == document_native_locations.XLSX_VISIBILITY)
+    if doc.meta.get(document_native_locations.CSV_SEPARATOR_KEY) != coverage.get(document_native_locations.CSV_SEPARATOR_KEY):
+        raise ValueError("The declared CSV separator differs from the saved report")
     if used_ocr and not doc.source_rasters:
         raise ValueError("The local OCR runtime could not reproduce the original scan. Check that the verified OCR data are installed.")
     unassigned_email_roles = (

@@ -187,6 +187,10 @@ def run_analysis(analysis_id: str, *, deadline: Deadline | None = None, profile:
             # the integrity-checked stored detect output and trigger forbidden inference. Temporal still waits for both.
             stages = tuple(dataclasses.replace(s, after=tuple(d for d in s.after if d != "condition"))
                            if s.id == "detect" else s for s in stages)
+        if kind == "document":
+            # Stored CSV scores refer to the original decoded field boundaries.
+            reuse_decode = partial(doc.current_decode_output, require_current_csv_reader=False)
+            stages = tuple(dataclasses.replace(s, reuse_if=reuse_decode) if s.id == "decode" else s for s in stages)
         stages = tuple(dataclasses.replace(s, critical=True) if s.id in REFUSION_REUSED[kind] else s for s in stages)
     elif kind in ("audio", "video"):
         reuse = vid.current_detect_output if kind == "video" else current_voice_detection_output

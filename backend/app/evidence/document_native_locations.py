@@ -30,6 +30,10 @@ MARKDOWN_FENCES_KEY = "markdown_fenced_code"
 MARKDOWN_FENCES = "exclude-commonmark-fenced-code/1"
 XLSX_VISIBILITY_KEY = "xlsx_cell_visibility"
 XLSX_VISIBILITY = "visible-xlsx-direct-cell-formats/1"
+CSV_SEPARATOR_KEY = "csv_declared_separator"
+CSV_DECLARED_SEPARATORS = (",", ";", "|", "\t")
+CSV_SEPARATOR_READER_KEY = "csv_separator_reader"
+CSV_SEPARATOR_READER = "first-line-declaration/1"
 XLSX_VISIBILITY_SCOPE = ("Cells with Excel's directly applied hide-value format are excluded. Other display formatting, "
                          "including conditional and inherited styles, may differ from the saved text checked here.")
 SAVED_FIELDS_KEY = "word_saved_fields"
@@ -238,6 +242,9 @@ def validate(document):
     if XLSX_VISIBILITY_KEY in coverage and (coverage[XLSX_VISIBILITY_KEY] != XLSX_VISIBILITY
             or document.get("source", {}).get("method") != "xlsx"):
         raise ValueError("Invalid Excel cell visibility policy")
+    if CSV_SEPARATOR_KEY in coverage and (coverage[CSV_SEPARATOR_KEY] not in CSV_DECLARED_SEPARATORS
+            or document.get("source", {}).get("method") != "csv"):
+        raise ValueError("Invalid declared CSV separator")
     article = coverage.get(HTML_ARTICLE_KEY)
     if article is not None and (document.get("source", {}).get("method") != "html" or not valid_html_article_scope(article)):
         raise ValueError("Invalid saved HTML article boundaries")

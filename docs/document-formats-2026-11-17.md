@@ -16,7 +16,7 @@ limit is 25 MB in the standard configuration.
 | ODP | Saved text in supported slide shapes and tables. Hidden slides, hidden layers and speaker notes are excluded. | Slide in the deck's stored order, text block, and decoded character range |
 | XLSX | Literal text on visible worksheet tabs, rows and columns | Workbook sheet order, row, column and saved cell character range |
 | ODS | Literal text on visible sheets, rows and columns. Linked sheets, formulas and calculated values are outside the check. | Workbook sheet order, row, column and saved cell character range |
-| CSV and TSV | Text fields in UTF-8 or BOM-marked UTF-16 delimited files | Record, field and decoded character range |
+| CSV and TSV | Text fields in UTF-8 or BOM-marked UTF-16 delimited files. CSV honors a supported separator on a first-line `sep=` declaration. | Record, field and decoded character range |
 | EPUB | XHTML text in the main reading order | Reading-order entry, text block, and decoded character range |
 | RTF | Saved body writing outside directly hidden runs | Decoded text block number and character range |
 | EML | The selected plain-text or HTML message body | Decoded text and supported HTML source positions |
@@ -28,6 +28,20 @@ ODS row and column positions follow the saved grid, including repeated or
 hidden rows and columns before a finding. The writing check excludes
 explicitly hidden groups and reads text saved in cells on locally stored
 sheets. [OpenDocument spreadsheet schema](https://docs.oasis-open.org/office/OpenDocument/v1.3/OpenDocument-v1.3-part3-schema.html)
+
+CSV recognizes comma, semicolon, tab and pipe declarations, including the
+quoted form. The declaration counts as row 1 and is excluded from the
+writing and checkout word count. Later record numbers include blank records
+and treat a line break in a quoted field as part of that field. Signed
+packages preserve the separator used to reproduce the same field positions.
+[LibreOffice CSV separator declarations](https://help.libreoffice.org/latest/en-US/text/shared/guide/csv_params.html)
+
+A follow-up Chromium test covered standard and Strict DOCX, selectable PDF,
+ODT, XLSX, EML, and a UTF-16 CSV with a quoted semicolon declaration, comma
+decimals, and a blank record. Each analysis started after simulated
+USD 9.99 checkout and produced matching browser, PDF and JSON evidence.
+All seven signed packages replayed against their originals. The CSV reports
+matched 18 decoded field ranges.
 
 A local Chromium run completed Word, Excel, ODS, CSV and TSV writing
 analyses after simulated USD 9.99 checkout. Each result displayed source

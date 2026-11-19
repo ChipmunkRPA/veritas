@@ -524,6 +524,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.document_matched_context', 'app.evidence.document_paragraph_priority',
                         'app.evidence.document_email_contexts', 'app.evidence.document_native_locations',
                         'app.evidence.document_invisible_characters', 'app.evidence.document_chat_markers',
+                        'app.evidence.document_disclosure_heading',
                         'app.evidence.document_passage_position', 'app.evidence.document_long_passage_position',
                         'app.evidence.document_tracked_changes', 'app.evidence.document_pdf_visibility', 'app.evidence.document_word_visibility',
                         'app.evidence.document_bibliography',

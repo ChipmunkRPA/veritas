@@ -1297,6 +1297,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             map_word_table_controls: bool = True, skip_hidden_odt_sections: bool = True,
             include_word_linked_notes: bool = True, skip_hidden_xlsx_cell_formats: bool = True,
             skip_hidden_rtf_runs: bool = True, skip_markdown_fences: bool = True,
+            honor_csv_separator_declaration: bool = True,
             check_word_checkout_visibility: bool = False) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
@@ -1344,6 +1345,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
     elif ext in {".xlsx", ".ods", ".csv", ".tsv"}:
         from app.core.config import settings
         limit = settings.max_document_chars
+        separator = None
         if ext in {".xlsx", ".ods"}:
             from app.detectors.text import spreadsheet_cells
 
@@ -1356,7 +1358,8 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
         else:
             from app.detectors.text import delimited_cells
 
-            parts = delimited_cells.read(path, ext, max_chars=limit)
+            parts, separator = delimited_cells.read(path, ext, max_chars=limit,
+                                                    honor_separator_declaration=honor_csv_separator_declaration)
             warning = ("The writing check reads text fields as separate passages. "
                        "Row numbers count records, including headings and blank records. "
                        "Numeric-only and formula-like fields are excluded.")
@@ -1366,6 +1369,11 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
         if ext == ".xlsx" and skip_hidden_xlsx_cell_formats:
             d.meta[document_native_locations.XLSX_VISIBILITY_KEY] = document_native_locations.XLSX_VISIBILITY
             d.meta["coverage_warning"] += " " + document_native_locations.XLSX_VISIBILITY_SCOPE
+        if ext == ".csv" and honor_csv_separator_declaration:
+            d.meta[document_native_locations.CSV_SEPARATOR_READER_KEY] = document_native_locations.CSV_SEPARATOR_READER
+        if separator is not None:
+            d.meta[document_native_locations.CSV_SEPARATOR_KEY] = separator
+            d.meta["coverage_warning"] += " The separator declaration is counted as row 1 and excluded from the writing check."
     elif ext == ".eml":
         d = extract_eml(path)
     else:

@@ -742,6 +742,9 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     xlsx_visibility_key = document_native_locations.XLSX_VISIBILITY_KEY
     if coverage.get(xlsx_visibility_key) != decoded["meta"].get(xlsx_visibility_key):
         raise ObjectIntegrityError("Frozen Excel cell visibility policy differs from the recorded extraction")
+    csv_separator_key = document_native_locations.CSV_SEPARATOR_KEY
+    if coverage.get(csv_separator_key) != decoded["meta"].get(csv_separator_key):
+        raise ObjectIntegrityError("Frozen CSV separator differs from the recorded extraction")
     try:
         document_check_coverage.verify_source(document, text, decoded["sentences"])
         document_tracked_changes.verify_source(document, decoded.get(document_tracked_changes.KEY),

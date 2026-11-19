@@ -782,28 +782,33 @@ def _with_matched_detail(result, inputs, yunet, recognizer, ctx):
         return result
     details = result.details
     path = getattr(inputs.store, "path", None)
-    profile = matched_detail.input_profile(inputs.table, (*inputs.encoding, inputs.codec_tag), "mp4")
+    has_audio = inputs.has_audio
+    profile = matched_detail.input_profile(inputs.table, (*inputs.encoding, inputs.codec_tag), "mp4", has_audio=has_audio)
+    soundtrack_clock = None
     try:
-        if path is None or profile is None or (profile == matched_detail.PROFILE_HEVC25 and not hevc):
+        if path is None or profile is None or (profile.encoding == matched_detail.HEVC and not hevc):
             raise ValueError("Missing matched-detail source profile")
         if profile != matched_detail.PROFILE_30:
             clock_budget = min(4.0, ctx.deadline.remaining() - COARSE_RESULT_RESERVE_S)
             if clock_budget <= 0:
                 details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "time_budget")
                 return result
-            face_matched_detail.verify_profile(path, inputs.table, profile, timeout_s=clock_budget)
+            soundtrack_clock = face_matched_detail.verify_profile(path, inputs.table, profile, timeout_s=clock_budget)
         elif not mp4_source_clock.verified(path, inputs.table, profile.step):
             raise ValueError("The original MP4 clock could not be verified")
     except ValueError:
-        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "profile_hevc" if hevc else "profile_avc")
+        reason = ("profile_hevc_aac" if has_audio else "profile_hevc") if hevc else "profile_avc"
+        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", reason)
         return result
     if details.get("face_return") or details.get("face_return_secondary"):
-        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "prior_review", profile=profile)
+        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "prior_review", profile=profile,
+                                                                   soundtrack_clock=soundtrack_clock)
         return result
     earlier = [face_detail_repeat.original_range(details), details.get("face_boundary")]
     budget = min(12., ctx.deadline.remaining() - COARSE_RESULT_RESERVE_S)
     if budget <= 0:
-        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "time_budget", profile=profile)
+        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "time_budget", profile=profile,
+                                                                   soundtrack_clock=soundtrack_clock)
         return result
     try:
         record, coverage = face_matched_detail.inspect(inputs, yunet, recognizer, ctx.deadline.nested(budget),
@@ -812,6 +817,10 @@ def _with_matched_detail(result, inputs, yunet, recognizer, ctx):
         record, coverage = None, matched_detail.coverage("unassessed", "time_budget", profile=profile)
     except (DecodeError, ValueError, cv2.error):
         record, coverage = None, matched_detail.coverage("unassessed", "source_input", profile=profile)
+    if soundtrack_clock is not None:
+        coverage[matched_detail.SOUNDTRACK_CLOCK] = soundtrack_clock
+        if record is not None:
+            record[matched_detail.SOUNDTRACK_CLOCK] = soundtrack_clock
     details[matched_detail.COVERAGE] = coverage
     if record is not None:
         details[matched_detail.KEY] = record

@@ -41,6 +41,7 @@ class SequenceInputs:
     baseline: dict | None = None
     codec_profile: str | None = None
     shot_boundaries: tuple[int, ...] | None = None
+    has_audio: bool = False
 
 
 def record(window: dict, table: FrameTable, inputs: dict[int, dict]) -> dict:

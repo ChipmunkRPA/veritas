@@ -44,6 +44,26 @@ The project team ran the study. It measures container transport on reused
 picture sources with authored tones. Real soundtrack diversity, voice forgery,
 lip-sync accuracy and additional encoder layouts need separate evidence.
 
+## Local analysis
+
+The optional HEVC face check in Full development analyses accepts the three
+tested AAC layouts. The web view and Standard PDF state the layout alongside
+the original time range and crops. The JSON export records the source audio
+and video clocks, and signed verification checks both on the original MP4.
+The face observation carries zero weight in the overall assessment.
+
+The local app opened eight results in Chrome. Their PDF and JSON agreed and
+all eight signed packages replayed against the originals. The browser jumped
+to the exact selected range and showed the original before, during and after
+pictures and crops. The source verifier also replayed 84 measured crops and
+27 displayed frames across all nine marked deliveries in the transport trial.
+All three malformed soundtrack controls stayed outside this optional check.
+The app preserved the existing combined assessment, decoded soundtrack and
+audio measurements in all four on/off comparisons. Zero analysis jobs started
+before the 15 simulated payments. Three previously signed packages also
+replayed against their originals.
+[Local app verification receipt](evaluation-panels/video-hevc-aac-local-analysis-2026-11-19.json)
+
 ## Recount
 
 The receipt preserves the anonymous roles, ranges, clocks and measured marker

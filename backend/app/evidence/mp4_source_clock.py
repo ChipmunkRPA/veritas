@@ -68,6 +68,19 @@ def _edit(data: bytes) -> tuple[int, int]:
     return duration, start
 
 
+def _require_local_reference(information, children, one, read, boxes, payload):
+    reference = one(children(one(information, b"dinf")), b"dref")
+    _require(
+        reference.end - reference.start >= 8 and read(reference.start, 8) == bytes(7) + b"\1",
+        "MP4 must use one local media reference",
+    )
+    locations = boxes(reference.start + 8, reference.end)
+    _require(
+        len(locations) == 1 and locations[0].kind == b"url " and payload(locations[0]) == bytes(3) + b"\1",
+        "MP4 cannot reference external media",
+    )
+
+
 def _check(stream, *, time_base: Fraction, ticks: int, frames: int, width: int, height: int,
            video_only: bool = False) -> None:
     size, read, boxes, one, payload = bounded_boxes(stream, label="MP4 source video")
@@ -113,16 +126,7 @@ def _check(stream, *, time_base: Fraction, ticks: int, frames: int, width: int, 
     )
 
     information = children(one(media, b"minf"))
-    reference = one(children(one(information, b"dinf")), b"dref")
-    _require(
-        reference.end - reference.start >= 8 and read(reference.start, 8) == bytes(7) + b"\1",
-        "MP4 video must use one local media reference",
-    )
-    locations = boxes(reference.start + 8, reference.end)
-    _require(
-        len(locations) == 1 and locations[0].kind == b"url " and payload(locations[0]) == bytes(3) + b"\1",
-        "MP4 video cannot reference external media",
-    )
+    _require_local_reference(information, children, one, read, boxes, payload)
     tables = children(one(information, b"stbl"))
     _require(one(tables, b"cslg", optional=True) is None, "Unsupported MP4 composition shift")
     durations = _runs(payload(one(tables, b"stts")), frames)
@@ -167,3 +171,49 @@ def verified(path: Path, table, ticks: int, *, video_only: bool = False) -> bool
     except (InvalidMP4, OSError):
         return False
     return True
+
+
+def aac_track_schedule(path: Path, span: Fraction, block: int) -> tuple[int, int, list[int]]:
+    """Read the independently stored single AAC soundtrack schedule, including its edit and priming block."""
+    with path.open("rb") as stream:
+        size, read, boxes, one, payload = bounded_boxes(stream, label="MP4 source soundtrack")
+
+        def children(box):
+            return boxes(box.start, box.end)
+
+        movie = children(one(boxes(0, size), b"moov"))
+        movie_scale, movie_duration = _clock(payload(one(movie, b"mvhd")))
+        _require(movie_scale > 0 and movie_duration == span * movie_scale, "MP4 soundtrack and picture spans differ")
+        tracks = [children(box) for box in movie if box.kind == b"trak"]
+        _require(len(tracks) == 2, "MP4 must contain one video and one soundtrack track")
+        handlers = {}
+        for track in tracks:
+            media = children(one(track, b"mdia"))
+            handlers[payload(one(media, b"hdlr"))[8:12]] = (track, media)
+        _require(handlers.keys() == {b"vide", b"soun"}, "MP4 must contain one video and one soundtrack track")
+        track, media = handlers[b"soun"]
+        rate, native_duration = _clock(payload(one(media, b"mdhd")))
+        presented = span * rate
+        _require(rate in {44100, 48000} and native_duration == presented + block, "MP4 AAC native duration differs")
+        _require(_track_duration(payload(one(track, b"tkhd")), 0, 0) == movie_duration,
+                 "MP4 AAC track duration differs")
+        edit = children(one(track, b"edts"))
+        _require(len(edit) == 1 and _edit(payload(one(edit, b"elst"))) == (movie_duration, block),
+                 "MP4 AAC edit does not offset its exact priming block")
+        information = children(one(media, b"minf"))
+        _require_local_reference(information, children, one, read, boxes, payload)
+        tables = children(one(information, b"stbl"))
+        _require(not any(box.kind in {b"ctts", b"cslg"} for box in tables), "Unexpected MP4 AAC composition timing")
+        description = one(tables, b"stsd")
+        _require(description.end - description.start >= 8 and read(description.start, 8) == bytes(7) + b"\1",
+                 "Expected one AAC sample description")
+        entries = boxes(description.start + 8, description.end)
+        _require(len(entries) == 1 and entries[0].kind == b"mp4a", "Expected a local AAC sample description")
+        count = (native_duration + block - 1) // block
+        size_record = payload(one(tables, b"stsz"))
+        _require(len(size_record) >= 12 and size_record[:4] == bytes(4) and unpack_from(">I", size_record, 8)[0] == count,
+                 "AAC sample count differs from its edit")
+        timing = _runs(payload(one(tables, b"stts")), count)
+        _require(timing == [block] * (count - 1) + [native_duration - (count - 1) * block],
+                 "AAC packet timing is irregular")
+        return rate, int(presented), timing

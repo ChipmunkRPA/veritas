@@ -391,7 +391,7 @@ class Settings(BaseSettings):
     video_face_boundary_avc_review: bool = False  # Trial: check brief changes near either end of the four-second clip.
     video_face_very_brief_avc_review: bool = False  # Optional three- and four-picture face appearance review on exact 720p30 AVC MP4s.
     video_face_matched_detail_avc_review: bool = False  # Optional 120-frame matched-detail face comparison on eligible 720p30 and 720p25 AVC MP4s.
-    video_face_matched_detail_hevc_review: bool = False  # Optional short face comparison on eligible exact 720p25 HEVC MP4s with one video track and no audio.
+    video_face_matched_detail_hevc_review: bool = False  # Optional short face comparison on exact 720p25 HEVC MP4s with verified video-only or AAC-LC clocks.
     video_face_primary_track_avc_review: bool = False  # Trial: follow a dominant face past smaller detections.
     video_face_position_track_avc_review: bool = False  # Trial: follow a stable position across temporary size changes.
     video_face_pane_track_avc_review: bool = False  # Trial: follow faces separately on the left and right.

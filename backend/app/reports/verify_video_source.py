@@ -486,10 +486,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         from app.detectors.video.face_matched_detail import replay_source
 
         replay_source(original, table, matched)
-    elif profile := matched_detail.PROFILES.get(((evidence.get("coverage") or {}).get(matched_detail.COVERAGE) or {}).get("method")):
-        from app.detectors.video.face_matched_detail import verify_profile
+    elif (detail_coverage := (evidence.get("coverage") or {}).get(matched_detail.COVERAGE)) and detail_coverage.get("method"):
+        from app.detectors.video.face_matched_detail import verify_coverage_source
 
-        verify_profile(original, table, profile)
+        verify_coverage_source(original, table, detail_coverage)
     transition = next((p[face_single_boundary_binding.KEY] for p in evidence["packets"]
                        if face_single_boundary_binding.KEY in p), None)
     transition_frames, transition_scenes, sparse_pixels = {}, {}, {}

@@ -35,6 +35,7 @@ LANDMARKS = [
     [float(x).hex(), float(y).hex()] for x, y in ((475, 299), (584, 298), (530, 357), (487, 418), (574, 419))
 ]
 BOX = {"x": 432, "y": 246, "w": 195, "h": 248}
+AAC48 = {"rate": 48000, "channels": 1, "start_pts": 0, "end_pts": 230400, "priming_samples": 1024}
 
 
 def test_matched_detail_profile_keeps_native_scope():
@@ -66,6 +67,8 @@ def test_matched_detail_hevc_scope_requires_hvc1_and_exact_native_geometry():
                        1280, 720, 1280, 720)
     assert profile.point == binding.PROFILE_25.point
     assert binding.input_profile(table, binding.HEVC, "mp4") is profile
+    assert binding.input_profile(table, binding.HEVC, "mp4", has_audio=True) is binding.PROFILE_HEVC25_AAC
+    assert binding.input_profile(table, binding.AVC, "mp4", has_audio=True) is binding.PROFILE_25
     for encoding in (("hevc", "yuv420p", "hev1"), ("hevc", "yuv420p10le", "hvc1")):
         assert binding.input_profile(table, encoding, "mp4") is None
     for change in ({"rotation": 90}, {"width": 720}, {"time_base": "1/30000"},
@@ -101,17 +104,39 @@ def test_matched_detail_hevc_rejects_changed_source_track_layout(tmp_path):
         assert mp4_source_clock.verified(changed, table, profile.step)
         with pytest.raises(ValueError, match="recorded matched-detail profile"):
             detector.verify_profile(changed, table, profile)
+    with_audio = binding.PROFILE_HEVC25_AAC
+    audio_table = probe_frames(soundtrack)
+    assert detector.verify_profile(soundtrack, audio_table, with_audio) == AAC48
+    assert mp4_source_clock.aac_track_schedule(soundtrack, audio_table.tb * with_audio.step * len(audio_table), 1024) == (
+        48000, 230400, [1024] * 226)
+    state = binding.coverage("no_match", proposed=1, usable=1, profile=with_audio, soundtrack_clock=AAC48)
+    detector.verify_coverage_source(soundtrack, audio_table, state)
+    with pytest.raises(ValueError, match="soundtrack clock differs from the original"):
+        detector.verify_coverage_source(soundtrack, audio_table, state | {binding.SOUNDTRACK_CLOCK: AAC48 | {"channels": 2}})
+    with pytest.raises(ValueError, match="recorded matched-detail profile"):
+        detector.verify_profile(exact, probe_frames(exact), with_audio)
+
+    delayed = tmp_path / "offset-audio.mp4"
+    subprocess.run([*common, "-i", str(exact), "-itsoffset", "0.12", "-i", str(soundtrack), "-map", "0:v:0",
+                    "-map", "1:a:0", "-c", "copy", *time_base, str(delayed)], check=True, timeout=20)
+    delayed_table = probe_frames(delayed)
+    assert delayed_table.pts == audio_table.pts and mp4_source_clock.verified(delayed, delayed_table, with_audio.step)
+    with pytest.raises(ValueError, match="recorded matched-detail profile"):
+        detector.verify_profile(delayed, delayed_table, with_audio)
 
 
-@pytest.mark.parametrize(("hevc_enabled", "avc_enabled", "encode", "expected"), [
-    (False, False, binding.HEVC, None),
-    (False, True, binding.HEVC, "profile_avc"),
-    (True, False, binding.HEVC, binding.PROFILE_HEVC25),
-    (True, False, binding.AVC, None),
-    (True, True, binding.AVC, binding.PROFILE_25),
-    (True, False, ("hevc", "yuv420p", "hev1"), "profile_hevc"),
+@pytest.mark.parametrize(("hevc_enabled", "avc_enabled", "encode", "has_audio", "expected"), [
+    (False, False, binding.HEVC, False, None),
+    (False, True, binding.HEVC, False, "profile_avc"),
+    (False, True, binding.HEVC, True, "profile_avc"),
+    (True, False, binding.HEVC, False, binding.PROFILE_HEVC25),
+    (True, False, binding.HEVC, True, binding.PROFILE_HEVC25_AAC),
+    (True, False, binding.AVC, False, None),
+    (True, True, binding.AVC, True, binding.PROFILE_25),
+    (True, False, ("hevc", "yuv420p", "hev1"), False, "profile_hevc"),
+    (True, False, ("hevc", "yuv420p", "hev1"), True, "profile_hevc_aac"),
 ])
-def test_matched_detail_hevc_uses_separate_opt_in_and_preserves_avc(monkeypatch, hevc_enabled, avc_enabled, encode, expected):
+def test_matched_detail_hevc_uses_separate_opt_in_and_preserves_avc(monkeypatch, hevc_enabled, avc_enabled, encode, has_audio, expected):
     settings = face_appearance.settings
     for name, value in {
         "environment": "dev", "face_min_size": 48,
@@ -124,7 +149,8 @@ def test_matched_detail_hevc_uses_separate_opt_in_and_preserves_avc(monkeypatch,
     profile = binding.PROFILE_HEVC25
     table = FrameTable(profile.time_base, tuple(i * profile.step for i in range(120)), (0,), "I" + "P" * 119,
                        1280, 720, 1280, 720)
-    inputs = SimpleNamespace(table=table, encoding=encode[:2], codec_tag=encode[2], store=SimpleNamespace(path="source"))
+    inputs = SimpleNamespace(table=table, encoding=encode[:2], codec_tag=encode[2], has_audio=has_audio,
+                             store=SimpleNamespace(path="source"))
     ctx = SimpleNamespace(profile=Profile.FULL, deadline=Deadline(30))
     result = SimpleNamespace(status="ok", details={"incumbent": "retained"})
     verify = []
@@ -132,6 +158,7 @@ def test_matched_detail_hevc_uses_separate_opt_in_and_preserves_avc(monkeypatch,
     def verify_profile(path, frame_table, received, **kwargs):
         assert path == "source" and frame_table is table
         verify.append(received)
+        return AAC48 if received == binding.PROFILE_HEVC25_AAC else None
 
     monkeypatch.setattr(detector, "verify_profile", verify_profile)
     monkeypatch.setattr(detector, "inspect", lambda *args, profile: (None, binding.coverage("no_match", proposed=1, usable=1, profile=profile)))
@@ -139,7 +166,8 @@ def test_matched_detail_hevc_uses_separate_opt_in_and_preserves_avc(monkeypatch,
     assert result.details["incumbent"] == "retained"
     if isinstance(expected, binding.NativeProfile):
         assert verify == [expected]
-        assert result.details[binding.COVERAGE] == binding.coverage("no_match", proposed=1, usable=1, profile=expected)
+        assert result.details[binding.COVERAGE] == binding.coverage("no_match", proposed=1, usable=1, profile=expected,
+            soundtrack_clock=AAC48 if expected == binding.PROFILE_HEVC25_AAC else None)
     elif expected is not None:
         assert not verify
         assert result.details[binding.COVERAGE] == binding.coverage("unassessed", expected)
@@ -281,14 +309,17 @@ def test_matched_detail_replays_exact_crops_and_rejects_changed_source(measured_
         binding.validate_record(record | {"scene_cuts": [72]}, SOURCE)
 
 
-@pytest.mark.parametrize("profile", (binding.PROFILE_30, binding.PROFILE_25, binding.PROFILE_HEVC25))
+@pytest.mark.parametrize("profile", (binding.PROFILE_30, binding.PROFILE_25, binding.PROFILE_HEVC25, binding.PROFILE_HEVC25_AAC))
 def test_matched_detail_packet_binds_coverage_and_original_views(measured_record, monkeypatch, profile):
     record, original = measured_record
     record.update(method=profile.method, time_base=profile.time_base, start_pts=START * profile.step,
                   end_pts=END * profile.step)
     for view in record["views"]:
         view["pts"] = view["index"] * profile.step
-    state = binding.coverage("localized", proposed=2, usable=1, profile=profile)
+    soundtrack_clock = AAC48 if profile == binding.PROFILE_HEVC25_AAC else None
+    if soundtrack_clock:
+        record[binding.SOUNDTRACK_CLOCK] = soundtrack_clock
+    state = binding.coverage("localized", proposed=2, usable=1, profile=profile, soundtrack_clock=soundtrack_clock)
     source = SOURCE | {
         "time_base": profile.time_base,
         "sha256": "a" * 64,
@@ -322,6 +353,13 @@ def test_matched_detail_packet_binds_coverage_and_original_views(measured_record
     ]
     assert packet["affects_overall_confidence"] is False
     assert len(packet["artifacts"]) == 9
+    if soundtrack_clock:
+        state[binding.SOUNDTRACK_CLOCK] = soundtrack_clock | {"channels": 2}
+        source[binding.COVERAGE_COMMITMENT] = canonical_hash(state)
+        with pytest.raises(ValueError, match="confidence-neutral source interval"):
+            binding.validate(document, canonical_hash)
+        state[binding.SOUNDTRACK_CLOCK] = soundtrack_clock
+        source[binding.COVERAGE_COMMITMENT] = canonical_hash(state)
     state["measured_pairs"] = 2
     with pytest.raises(ValueError, match="published commitments"):
         binding.validate(document, canonical_hash)

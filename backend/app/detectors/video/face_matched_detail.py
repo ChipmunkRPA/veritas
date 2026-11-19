@@ -3,8 +3,12 @@
 
 from __future__ import annotations
 
+import json
+import subprocess
+import time
 from collections import defaultdict
 from contextlib import closing
+from fractions import Fraction
 from hashlib import sha256
 
 import cv2
@@ -12,7 +16,7 @@ import numpy as np
 
 from app.detectors.image.faces import detect_faces, iou
 from app.detectors.video import face_appearance
-from app.detectors.video.decode import DecodeError
+from app.detectors.video.decode import DecodeError, _input
 from app.evidence import face_matched_detail_binding as binding
 from app.evidence import face_short_proposal_binding as short
 
@@ -304,12 +308,52 @@ def verify_crops(record, native_frames):
         raise ValueError("Original crops do not reproduce the matched detail readings")
 
 
+def _verify_soundtrack(original, span, deadline):
+    from app.evidence.mp4_source_clock import aac_track_schedule
+
+    block = binding.AAC_BLOCK
+    try:
+        rate, extent, durations = aac_track_schedule(original, span, block)
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise ValueError("The soundtrack clock could not be checked within its time limit")
+        read = subprocess.run([
+            "ffprobe", "-v", "error", "-protocol_whitelist", "file", "-select_streams", "a",
+            "-read_intervals", f"%+#{len(durations) + 1}", "-show_packets", "-show_streams", "-show_entries",
+            "stream=index,codec_name,profile,channels,channel_layout,sample_rate,time_base,start_pts,duration_ts:"
+            "packet=stream_index,pts,dts,duration:packet_side_data=side_data_type,skip_samples,discard_padding",
+            "-of", "json", _input(original),
+        ], capture_output=True, check=True, timeout=remaining, stdin=subprocess.DEVNULL)
+        parsed = json.loads(read.stdout)
+        stream, = parsed["streams"]
+        fields = ("codec_name", "profile", "sample_rate", "time_base", "start_pts", "duration_ts")
+        channels = stream["channels"]
+        packets = parsed["packets"]
+        if (tuple(stream[k] for k in fields) != ("aac", "LC", str(rate), f"1/{rate}", 0, extent)
+                or (rate, channels, stream["channel_layout"]) not in binding.AAC_LAYOUTS
+                or len(packets) != len(durations)):
+            raise ValueError("AAC packets differ from the exact soundtrack clock")
+        pts = -block
+        for i, (packet, duration) in enumerate(zip(packets, durations, strict=True)):
+            packet_clock = tuple(packet[k] for k in ("stream_index", "pts", "dts", "duration"))
+            padding = [{"side_data_type": "Skip Samples", "skip_samples": block, "discard_padding": 0}] if i == 0 else []
+            if packet_clock != (stream["index"], pts, pts, duration) or packet.get("side_data_list", []) != padding:
+                raise ValueError("AAC packet timing differs from its presentation edit")
+            pts += duration
+        if pts != extent:
+            raise ValueError("AAC packet clock ends at an unexpected sample")
+    except (KeyError, OSError, TypeError, ValueError, subprocess.SubprocessError) as error:
+        raise ValueError("Original soundtrack differs from the recorded matched-detail profile") from error
+    return {"rate": rate, "channels": channels, "start_pts": 0, "end_pts": extent, "priming_samples": block}
+
+
 def verify_profile(original, table, profile, *, timeout_s=4.0):
     """Verify the exact source carrier for the recorded review profile."""
     from app.detectors.video.frames import probe as probe_container
     from app.evidence import mp4_source_clock
 
     strict = profile != binding.PROFILE_30
+    deadline = time.monotonic() + timeout_s
     profile_options = {"include_sample_aspect_ratio": True, "timeout_s": timeout_s} if strict else {}
     clock_options = {"video_only": True} if profile == binding.PROFILE_HEVC25 else {}
     info = probe_container(original, include_codec_tag=True, **profile_options)
@@ -321,6 +365,16 @@ def verify_profile(original, table, profile, *, timeout_s=4.0):
         or not mp4_source_clock.verified(original, table, profile.step, **clock_options)
     ):
         raise ValueError("Original video differs from the recorded matched-detail profile")
+    if profile == binding.PROFILE_HEVC25_AAC:
+        return _verify_soundtrack(original, Fraction(binding.FRAME_COUNT * profile.step, profile.timescale), deadline)
+    return None
+
+
+def verify_coverage_source(original, table, coverage):
+    """Replay an explicitly clock-bound scope even when the review selects no range."""
+    profile = binding.PROFILES[coverage["method"]]
+    if verify_profile(original, table, profile) != coverage.get(binding.SOUNDTRACK_CLOCK):
+        raise ValueError("Matched-detail coverage soundtrack clock differs from the original")
 
 
 def replay_source(original, table, record):
@@ -328,7 +382,8 @@ def replay_source(original, table, record):
     from app.detectors.video.decode import decode_frames, decode_stream
     from app.detectors.video.shots import ShotDetector
 
-    verify_profile(original, table, binding.PROFILES[record["method"]])
+    if verify_profile(original, table, binding.PROFILES[record["method"]]) != record.get(binding.SOUNDTRACK_CLOCK):
+        raise ValueError("Matched-detail soundtrack clock differs from the original")
     samples = [row["index"] for row in record["views"]]
     pixels = {}
     with closing(decode_frames(original, table, samples)) as frames:

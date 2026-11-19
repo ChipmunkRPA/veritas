@@ -140,6 +140,12 @@ are not public screening promises or calibrated population probabilities.
   verified the exact source ranges and crops. The analysis supports the
   tested video-only profile. [HEVC control and app results](video-short-face-hevc-25-ordinary-2026-11-19.md)
 
+- Remuxing the seven held HEVC picture roles with three supported AAC
+  soundtrack layouts preserved every face, coverage and shot result in all
+  21 paired files. The exact picture positions stayed identical across each
+  layout, including the ordinary blur highlight. The soundtrack used authored
+  tones for the clock verification. [HEVC soundtrack transport](video-hevc-aac-transport-2026-11-19.md)
+
 - A 184-delivery short-speech test of the lower operating point found
   three more clean and two more competing-speech edits. Ordinary alerts
   increased from zero to nine out of 40 clean files and from five to 21

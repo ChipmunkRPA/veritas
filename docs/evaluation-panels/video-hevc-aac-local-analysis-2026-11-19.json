@@ -1,0 +1,175 @@
+{
+  "older_r199_packages_verified_against_original": 3,
+  "original_source_replay": {
+    "audio_clocks_replayed": 21,
+    "displayed_anchors": 27,
+    "native_crops": 84,
+    "negative_track_controls_rejected": 3,
+    "selected_face_records_replayed": 9
+  },
+  "schema": "chipmunk.hevc-aac-local-analysis/1",
+  "verified_app_run": {
+    "browser": {
+      "cases": [
+        "matched_swap_mono_44100",
+        "matched_swap_mono_48000",
+        "ordinary_blur_stereo_48000",
+        "ordinary_comparable_mono_44100",
+        "ordinary_hard_cut",
+        "ordinary_untouched",
+        "clean_swap_unassessed",
+        "historical_video_only"
+      ],
+      "page_errors": 0
+    },
+    "cases": {
+      "clean_swap_unassessed": {
+        "new_range": null,
+        "original_assessment_unchanged": null,
+        "pdf_json_agree": true,
+        "qualified_soundtrack": [
+          48000,
+          2
+        ],
+        "signed_original_verified": true,
+        "status": "unassessed"
+      },
+      "historical_video_only": {
+        "native_clock": "1/90000",
+        "new_range": [
+          77,
+          81
+        ],
+        "original_assessment_unchanged": null,
+        "pdf_json_agree": true,
+        "signed_original_verified": true,
+        "source_frames": [
+          76,
+          79,
+          81
+        ],
+        "source_image_assets": 6,
+        "status": "localized"
+      },
+      "matched_swap_mono_44100": {
+        "existing_audio_reading_unchanged": true,
+        "native_clock": "1/90000",
+        "new_range": [
+          77,
+          81
+        ],
+        "original_assessment_unchanged": true,
+        "pdf_json_agree": true,
+        "qualified_soundtrack": [
+          44100,
+          1
+        ],
+        "signed_original_verified": true,
+        "source_frames": [
+          76,
+          79,
+          81
+        ],
+        "source_image_assets": 6,
+        "status": "localized"
+      },
+      "matched_swap_mono_48000": {
+        "existing_audio_reading_unchanged": true,
+        "native_clock": "1/90000",
+        "new_range": [
+          97,
+          100
+        ],
+        "original_assessment_unchanged": true,
+        "pdf_json_agree": true,
+        "qualified_soundtrack": [
+          48000,
+          1
+        ],
+        "signed_original_verified": true,
+        "source_frames": [
+          96,
+          98,
+          100
+        ],
+        "source_image_assets": 6,
+        "status": "localized"
+      },
+      "ordinary_blur_stereo_48000": {
+        "existing_audio_reading_unchanged": true,
+        "native_clock": "1/90000",
+        "new_range": [
+          73,
+          76
+        ],
+        "original_assessment_unchanged": true,
+        "pdf_json_agree": true,
+        "qualified_soundtrack": [
+          48000,
+          2
+        ],
+        "signed_original_verified": true,
+        "source_frames": [
+          72,
+          74,
+          76
+        ],
+        "source_image_assets": 6,
+        "status": "localized"
+      },
+      "ordinary_comparable_mono_44100": {
+        "existing_audio_reading_unchanged": true,
+        "new_range": null,
+        "original_assessment_unchanged": true,
+        "pdf_json_agree": true,
+        "qualified_soundtrack": [
+          44100,
+          1
+        ],
+        "signed_original_verified": true,
+        "status": "no_match"
+      },
+      "ordinary_hard_cut": {
+        "new_range": null,
+        "original_assessment_unchanged": null,
+        "pdf_json_agree": true,
+        "qualified_soundtrack": [
+          48000,
+          1
+        ],
+        "signed_original_verified": true,
+        "status": "unassessed"
+      },
+      "ordinary_untouched": {
+        "new_range": null,
+        "original_assessment_unchanged": null,
+        "pdf_json_agree": true,
+        "qualified_soundtrack": [
+          48000,
+          2
+        ],
+        "signed_original_verified": true,
+        "status": "unassessed"
+      },
+      "unsupported_dual_soundtrack": {
+        "coverage_reported": true,
+        "new_range": null,
+        "status": "out_of_scope"
+      },
+      "unsupported_offset_soundtrack": {
+        "coverage_reported": true,
+        "new_range": null,
+        "status": "out_of_scope"
+      },
+      "unsupported_short_soundtrack": {
+        "coverage_reported": true,
+        "new_range": null,
+        "status": "out_of_scope"
+      }
+    },
+    "jobs_before_payment": 0,
+    "price_usd_cents": 999,
+    "report_revision": "veritas-report-2.0.r200",
+    "simulated_checkouts": 15
+  }
+}

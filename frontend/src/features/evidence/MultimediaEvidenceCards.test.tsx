@@ -982,6 +982,8 @@ describe('ordinary multimedia evidence', () => {
       clock: { method: 'face-matched-detail/2', time_base: '1/90000' } },
     { version: 'video-evidence-44', fps: 25, step: 3600, range: '2.920 s–3.040 s',
       clock: { method: 'face-matched-detail/3', time_base: '1/90000' } },
+    { version: 'video-evidence-45', fps: 25, step: 3600, range: '2.920 s–3.040 s',
+      clock: { method: 'face-matched-detail/4', time_base: '1/90000' } },
   ] as const)('shows the matched-detail range and source navigation for $version', ({ version, fps, step, range, clock }) => {
     const set = { ...structuredClone(video), version }
     const packet = set.packets[0]
@@ -997,13 +999,17 @@ describe('ordinary multimedia evidence', () => {
     })
     set.coverage!.face_matched_detail_coverage = { status: 'localized', reason: null,
       candidate_pairs: 2, measured_pairs: 1, affects_overall_confidence: false,
-      ...(clock.method !== 'face-matched-detail/1' ? { method: clock.method } : {}) }
+      ...(clock.method !== 'face-matched-detail/1' ? { method: clock.method } : {}),
+      ...(clock.method === 'face-matched-detail/4' ? { soundtrack_clock: {
+        rate: 44100, channels: 1, start_pts: 0, end_pts: 211680, priming_samples: 1024,
+      } } : {}) }
     show(set)
     const region = screen.getByRole('region', { name: 'Brief face review at matched image detail' })
     expect(within(region).getByRole('link', { name: 'See the exact range and original crops' }).getAttribute('href')).toBe('#media-evidence-VMD01')
     expect(screen.getByText(range)).toBeTruthy()
     if (fps === 25) expect(within(region).getByText(/120 native frames over 4.8 seconds/)).toBeTruthy()
     if (clock.method === 'face-matched-detail/3') expect(within(region).getByText(/Ordinary blur can produce a highlight.*zero AI confidence weight/)).toBeTruthy()
+    if (clock.method === 'face-matched-detail/4') expect(within(region).getByText(/mono AAC-LC soundtrack at 44,100 Hz has the same verified presentation span/)).toBeTruthy()
     expect(screen.getByText(/position estimated from adjoining frames/)).toBeTruthy()
     const original = screen.getByLabelText('Original video evidence playback') as HTMLVideoElement
     Object.defineProperty(original, 'readyState', { value: 1 })

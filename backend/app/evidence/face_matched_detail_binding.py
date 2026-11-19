@@ -9,6 +9,7 @@ from dataclasses import dataclass
 
 from app.evidence.video_packet_versions import (
     MATCHED_DETAIL_AVC_VERSION,
+    MATCHED_DETAIL_HEVC25_AAC_VERSION,
     MATCHED_DETAIL_HEVC25_VERSION,
     MATCHED_DETAIL_NATIVE25_VERSION,
 )
@@ -21,6 +22,8 @@ COMMITMENTS = (COMMITMENT, COVERAGE_COMMITMENT)
 METHOD = "face-matched-detail/1"
 NATIVE25_METHOD = "face-matched-detail/2"
 HEVC25_METHOD = "face-matched-detail/3"
+HEVC25_AAC_METHOD = "face-matched-detail/4"
+SOUNDTRACK_CLOCK = "soundtrack_clock"
 PACKET_ID = "VMD01"
 TITLE = "Very brief face appearance change after matching image detail"
 OBSERVATION = (
@@ -35,6 +38,8 @@ TIME_BASE = "1/30000"
 TICKS = tuple(i * 1000 for i in range(FRAME_COUNT))
 AVC = ("h264", "yuv420p", "avc1")
 HEVC = ("hevc", "yuv420p", "hvc1")
+AAC_LAYOUTS = {(44100, 1, "mono"), (48000, 1, "mono"), (48000, 2, "stereo")}
+AAC_BLOCK = 1024
 POINT = 0.10
 SIGMAS = (0.0, 0.65, 1.0, 1.35, 1.8, 2.4, 3.2, 4.2, 5.0)
 DETAIL_FLOOR = 0.75
@@ -45,6 +50,7 @@ REASONS = {
     "profile": "This check needs a four-second 720p AVC MP4 with verified 30 fps timing.",
     "profile_avc": "This check needs 120 verified 720p AVC MP4 frames at 30 fps (four seconds) or 25 fps (4.8 seconds).",
     "profile_hevc": "This check needs a verified 4.8-second 720p HEVC MP4 at 25 fps with a single hvc1 video track and no audio.",
+    "profile_hevc_aac": "This check needs a verified 4.8-second 720p HEVC MP4 at 25 fps with one continuous AAC-LC soundtrack spanning the same source interval.",
     "prior_review": "The brief face appearance review already found a range for this file.",
     "shot_context": "The original pictures did not supply a complete shot review.",
     "face_context": "The source did not supply comparable face views around a selected range.",
@@ -68,6 +74,7 @@ class NativeProfile:
     step: int
     point: float
     encoding: tuple[str, str, str] = AVC
+    has_audio: bool | None = None
 
     @property
     def time_base(self):
@@ -82,8 +89,9 @@ class NativeProfile:
 
 PROFILE_30 = NativeProfile(METHOD, MATCHED_DETAIL_AVC_VERSION, 30000, 1000, POINT)
 PROFILE_25 = NativeProfile(NATIVE25_METHOD, MATCHED_DETAIL_NATIVE25_VERSION, 90000, 3600, 0.20)
-PROFILE_HEVC25 = NativeProfile(HEVC25_METHOD, MATCHED_DETAIL_HEVC25_VERSION, 90000, 3600, PROFILE_25.point, HEVC)
-PROFILES = {p.method: p for p in (PROFILE_30, PROFILE_25, PROFILE_HEVC25)}
+PROFILE_HEVC25 = NativeProfile(HEVC25_METHOD, MATCHED_DETAIL_HEVC25_VERSION, 90000, 3600, PROFILE_25.point, HEVC, False)
+PROFILE_HEVC25_AAC = NativeProfile(HEVC25_AAC_METHOD, MATCHED_DETAIL_HEVC25_AAC_VERSION, 90000, 3600, PROFILE_25.point, HEVC, True)
+PROFILES = {p.method: p for p in (PROFILE_30, PROFILE_25, PROFILE_HEVC25, PROFILE_HEVC25_AAC)}
 VERSIONS = frozenset(p.version for p in PROFILES.values())
 
 
@@ -97,13 +105,22 @@ def eligible(table, encoding, carrier, profile=PROFILE_30):
     )
 
 
-def input_profile(table, encoding, carrier):
-    return next((p for p in PROFILES.values() if eligible(table, encoding, carrier, p)), None)
+def input_profile(table, encoding, carrier, *, has_audio=False):
+    return next((p for p in PROFILES.values() if (p.has_audio is None or p.has_audio is has_audio)
+                 and eligible(table, encoding, carrier, p)), None)
 
 
 def _require(condition, message):
     if not condition:
         raise ValueError(message)
+
+
+def validate_soundtrack_clock(clock):
+    _require(isinstance(clock, dict) and set(clock) == {"rate", "channels", "start_pts", "end_pts", "priming_samples"}
+             and all(type(value) is int for value in clock.values())
+             and (clock["rate"], clock["channels"]) in {(rate, channels) for rate, channels, _ in AAC_LAYOUTS}
+             and clock["start_pts"] == 0 and clock["end_pts"] == clock["rate"] * 24 // 5
+             and clock["priming_samples"] == AAC_BLOCK, "Matched-detail soundtrack clock differs from its verified profile")
 
 
 def exact(raw, lo, hi):
@@ -198,10 +215,12 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
             "target_detail_hex",
             "views",
             "scene_cuts",
-        }
+        } | ({SOUNDTRACK_CLOCK} if profile == PROFILE_HEVC25_AAC else set())
         and record["time_base"] == profile.time_base,
         "Invalid matched-detail record",
     )
+    if profile == PROFILE_HEVC25_AAC:
+        validate_soundtrack_clock(record[SOUNDTRACK_CLOCK])
     a, b = record["start_frame_index"], record["end_frame_index"]
     _require(
         type(a) is type(b) is int
@@ -292,7 +311,7 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     )
 
 
-def coverage(status, reason=None, *, proposed=0, usable=0, profile=PROFILE_30):
+def coverage(status, reason=None, *, proposed=0, usable=0, profile=PROFILE_30, soundtrack_clock=None):
     return {
         "status": status,
         "reason": reason,
@@ -300,6 +319,7 @@ def coverage(status, reason=None, *, proposed=0, usable=0, profile=PROFILE_30):
         "measured_pairs": usable,
         "affects_overall_confidence": False,
         **({"method": profile.method} if profile != PROFILE_30 else {}),
+        **({SOUNDTRACK_CLOCK: soundtrack_clock} if profile == PROFILE_HEVC25_AAC else {}),
     }
 
 
@@ -344,6 +364,8 @@ def validate(document, digest, *, table_pts=None, interpolated=(), rotation=0, t
     )
     if status != "unassessed" or n or profile != PROFILE_30:
         validate_clock(source, table_pts, interpolated=interpolated, rotation=rotation, truncated=truncated, profile=profile)
+    if profile == PROFILE_HEVC25_AAC:
+        validate_soundtrack_clock(state[SOUNDTRACK_CLOCK])
     if not found:
         return
     validate_record(
@@ -353,6 +375,7 @@ def validate(document, digest, *, table_pts=None, interpolated=(), rotation=0, t
     _require(
         packet["id"] == PACKET_ID
         and packet["semantics"] == record["method"] == profile.method
+        and record.get(SOUNDTRACK_CLOCK) == state.get(SOUNDTRACK_CLOCK)
         and document["version"] == profile.version
         and packet["title"] == TITLE
         and packet["claim_scope"] == "sampled_window"

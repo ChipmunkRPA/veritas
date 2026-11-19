@@ -50,7 +50,7 @@ cadences, and general detection accuracy remain unmeasured here.
 The camera sources and replay implementations were separate from the held
 swap trial. The project team ran both trials locally.
 
-## Local analysis
+## Initial local analysis
 
 `VERITAS_VIDEO_FACE_MATCHED_DETAIL_HEVC_REVIEW=true` enables the additional
 check in Full analyses on a development instance. It requires an upright,
@@ -72,6 +72,9 @@ an added AAC track. The 18 simulated
 checkouts started zero jobs before payment. Turning the option on left
 the existing overall assessment identical in each of the four paired tests.
 [App verification receipt](evaluation-panels/video-short-face-hevc-25-local-analysis-2026-11-19.json)
+
+The [separate AAC soundtrack study](video-hevc-aac-transport-2026-11-19.md)
+documents the additional supported profiles and exact original-file replay.
 
 ```sh
 python3 -B -I -S backend/scripts/review_hevc_ordinary_confirmation.py \

@@ -63,6 +63,37 @@ same JSON evidence and verified the regenerated signed PDF against their
 source videos. The two localized cases kept all 12 displayed original
 frames and face crops. No new analysis or billing jobs were created.
 
+## Physical camera follow-up
+
+We ran the frozen background sharpness measurement on two physical camera
+captures. Each supplied one telemetry-confirmed focus change and one steady-lens
+reference. The measurement used 640 × 360 crops on the original 24000/1001 fps
+clock (about 23.976 fps), with the same central exclusion in every window.
+[Pinned InFlux-Real publisher release, CC BY 4.0](https://huggingface.co/datasets/princeton-vl/InFlux-Real/tree/b39c3a09134814e26644f0b2b0692d053d4ca9f4)
+
+| Capture pair | Focal length, change / steady | Eligible tiles, change / steady |
+| --- | ---: | ---: |
+| Different focal lengths | 62 / 17 mm | 1 / 0 |
+| Matched focal length | 53 / 53 mm | 0 / 0 |
+
+All four windows fell below the 12-tile minimum for textured, structurally
+comparable surrounding picture. Low structural correspondence was the main
+limit. The component abstained on every window, leaving optical-focus accuracy
+and face-screening performance undetermined.
+
+Two seek offsets per window reproduced 84 frame timestamps and cropped RGB
+hashes. The measurement used six verified frames per window. SHA-256 prefixes
+for native replay and component results are `4933f64d60a7` and `b616dd290c9f`
+for the first pair, and `c058be31bab2c` and `92ea229a83fa` for the matched pair.
+
+In a separate development comparison on 44 frame stacks, integer-pixel tile
+alignment made 24 of the 28 authored controls without blur measurable, up from
+14. Both methods recorded zero sharpening or softening readings on those
+controls. One motion-smear control gained a directional reading. The
+focus-change window in the 62/17 mm pair rose from 1 to 33 eligible tiles and
+showed sharpening. Its steady reference and both windows in the matched 53 mm
+pair still abstained.
+
 ## Reproduce the counts
 
 The native-input review replayed 42,240 decoded RGB checks and timestamps.

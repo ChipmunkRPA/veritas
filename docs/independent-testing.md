@@ -59,6 +59,9 @@ rejecting ordinary blur. The
 [expanded matched-detail comparison](video-face-expanded-common-detail-native30-2026-11-19.md)
 recounts 48 held deliveries, tracks exact three- and four-frame changes,
 and separates ordinary blur alerts from correctly localized swaps. The
+[25 fps carrier comparison](video-face-matched-detail-native25-transfer-2026-11-19.md)
+recounts 30 held clips and distinguishes ordinary blur with comparable
+views from controls that the new check could not measure. The
 [exact-room-voice experiment](audio-room-voice-recovery-ceiling-2026-11-19.md)
 tests whether removing overlapping speech alone recovers known edits.
 The [short-speech room transfer](audio-room-layer-short-transfer-2026-11-19.md)
@@ -74,6 +77,9 @@ sentence or to a location that already scored in the untouched excerpt.
 The [neighboring-sentence comparison](writing-neighbor-factorial-2026-11-19.md)
 recounts exact edit sites and measures how much a changed neighbor can
 affect the score assigned to an unchanged sentence.
+The [retained-neighbor follow-up](writing-retained-neighbor-2026-11-19.md)
+recounts both ranking rules and the factual review that admitted three
+of the generated rewrites.
 
 The [paired soundtrack replay](video-short-phrase-reencode-2026-11-18.md#reproduce)
 recounts exact 16 kHz analysis locations under three audio-carrier pairings.

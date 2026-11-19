@@ -85,6 +85,12 @@ are not public screening promises or calibrated population probabilities.
   alerts in this small trial. Both remain in research.
   [Neighboring-sentence comparison](writing-neighbor-factorial-2026-11-19.md)
 
+- Scoring a target alone and with either neighboring sentence located
+  zero of three qualifying rewrites at the frozen points. All eight
+  held ordinary work groups stayed clear across untouched and dated
+  revisions. Both trial methods ranked the same edit first before
+  applying their points. [Retained-neighbor follow-up](writing-retained-neighbor-2026-11-19.md)
+
 - Removing the interfering voice with known source components recovered
   zero of 12 short edits in reverberant recordings. All 12 clocks had
   usable speech windows in both views. The result directs the next test
@@ -109,6 +115,11 @@ are not public screening promises or calibrated population probabilities.
   with the added check, up from five. Ordinary alerts rose from one
   to two of 24. The matched-detail candidate passed the frozen gate
   for local customer-flow verification. [Expanded face comparison](video-face-expanded-common-detail-native30-2026-11-19.md)
+
+- The 25 fps transfer found four exact blurred swaps that the enabled
+  Full check missed across six source groups. It added no alerts across
+  18 ordinary files. Five were measurable with the added check, one
+  below the frozen requirement. [25 fps carrier comparison](video-face-matched-detail-native25-transfer-2026-11-19.md)
 
 - A 184-delivery short-speech test of the lower operating point found
   three more clean and two more competing-speech edits. Ordinary alerts

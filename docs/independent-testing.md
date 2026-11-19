@@ -65,6 +65,9 @@ compares the two explicitly linked fields in a single submitted image.
 The [printed euro summary comparison](image-euro-totals-2026-11-19.md)
 verifies the read amounts and their original pixel positions on balanced
 and deliberately inconsistent invoices from a public publisher.
+The [brightness-matched residual comparison](image-conditioned-residual-2026-11-19.md)
+recounts camera-photo and scene-text edits alongside ordinary processing
+on the same JPEG delivery settings.
 The [AI-edited infographic transfer](image-printed-ai-edit-transfer-2026-11-19.md)
 tests text localization in both versions of 12 publisher-supplied pairs.
 The [matched infographic edit study](image-paired-residual-transfer-2026-11-19.md)
@@ -4292,6 +4295,14 @@ it, especially small groups, and keep media, per-case scores and private
 manifests local.
 
 ## Evidence localization
+
+Add `--outcome-transitions` to `compare` for matched file-level coverage.
+For each medium, condition and truth label, `paired_alert_outcomes` counts
+how many files moved between an alert, an assessed result without an alert,
+an inconclusive result, a check outside scope, and a failure. Each transition
+includes its distinct source-group count. A group with multiple deliveries
+can appear in more than one transition. The output omits case IDs and reasons.
+Use it to distinguish a change in alert rate from a change in coverage.
 
 The portable receipt can also count localization outcomes without carrying source
 media, coordinates, or private text. To include them, add `localization_truth`

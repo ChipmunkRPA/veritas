@@ -584,6 +584,43 @@ def test_fixed_comparison_preserves_all_cases_and_does_not_inflate_source_groups
         assert row["candidate_minus_baseline"] == expected
 
 
+def test_paired_alert_outcomes_distinguish_lost_alerts_from_lost_coverage():
+    manifest, receipt = fixture()
+    related = next(case for case in manifest["cases"] if case["id"] == "audio/confirmation/0/clean")
+    repeated_id = related["id"] + "-alternate"
+    manifest["cases"].append({**related, "id": repeated_id, "input_sha256": review.digest({"input": repeated_id})})
+    points = {kind: .5 for kind in review.MEDIA}
+    baseline, candidate = (receipt("confirmation", name) for name in ("baseline", "candidate"))
+    baseline_lock, candidate_lock = (review.freeze(manifest, receipt("development", name), thresholds=points)
+                                     for name in ("baseline", "candidate"))
+    before = {row["id"]: row for row in baseline["predictions"]}
+    after = {row["id"]: row for row in candidate["predictions"]}
+
+    def omit(rows, label, condition, status):
+        rows[f"audio/confirmation/{label}/{condition}"].update(status=status, response=None, reason="Private reason")
+
+    omit(after, 1, "clean", "inconclusive")
+    omit(before, 1, "processed", "failed")
+    after["audio/confirmation/1/processed"]["response"] = .5
+    after["audio/confirmation/0/clean"]["response"] = .9
+    after[repeated_id]["response"] = .9
+    omit(before, 0, "processed", "not_applicable")
+    omit(after, 0, "processed", "failed")
+    default = review.compare(manifest, baseline, baseline_lock, candidate, candidate_lock, iterations=100)
+    compared = review.compare(manifest, baseline, baseline_lock, candidate, candidate_lock, iterations=100,
+                              include_outcome_transitions=True)
+    outcomes = compared.pop("paired_alert_outcomes")["strata"]
+    assert compared == default
+    assert all(sum(pair["cases"] for pair in stratum["transitions"]) == stratum["planned"] for stratum in outcomes)
+    assert "Private reason" not in str(outcomes) and "audio/confirmation" not in str(outcomes)
+    assert {(row["condition"], row["label"]): row["transitions"] for row in outcomes if row["modality"] == "audio"} == {
+        ("clean", 0): [{"baseline": "assessed_without_alert", "candidate": "alert", "cases": 2, "source_groups": 1}],
+        ("clean", 1): [{"baseline": "alert", "candidate": "inconclusive", "cases": 1, "source_groups": 1}],
+        ("processed", 0): [{"baseline": "not_applicable", "candidate": "failed", "cases": 1, "source_groups": 1}],
+        ("processed", 1): [{"baseline": "failed", "candidate": "alert", "cases": 1, "source_groups": 1}],
+    }
+
+
 def test_paired_localization_averages_variants_and_counts_assessment_losses():
     manifest, receipt = fixture()
     edited = next(row for row in manifest["cases"] if (row["modality"], row["split"], row["condition"], row["label"])

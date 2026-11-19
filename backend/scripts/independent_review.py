@@ -47,6 +47,8 @@ def main() -> None:
     pair.add_argument("--require-freeze-commitment", action="store_true", help="Require both confirmation receipts to commit to their exact freezes")
     pair.add_argument("--useful-location", nargs=2, type=float, metavar=("IOU", "RECALL"),
                       help="Count paired localization outcomes at the declared minimum IoU and recall")
+    pair.add_argument("--outcome-transitions", action="store_true",
+                      help="Count how paired alerts, assessed cases and unassessed reasons change")
     locations = commands.add_parser("count-locations", help="Count source-coordinate overlap for all planned localization cases")
     locations.add_argument("manifest", type=Path)
     locations.add_argument("truth", type=Path)
@@ -148,7 +150,8 @@ def main() -> None:
         result = compare(manifest, read(args.baseline), read(args.baseline_lock),
                          read(args.candidate), read(args.candidate_lock),
                          require_freeze_commitment=args.require_freeze_commitment,
-                         useful_location=tuple(args.useful_location) if args.useful_location else None)
+                         useful_location=tuple(args.useful_location) if args.useful_location else None,
+                         include_outcome_transitions=args.outcome_transitions)
     if args.command != "audit":
         write(args.output, result)
     print(digest(result) if args.command == "freeze" and args.print_digest else json.dumps(result, indent=2, allow_nan=False))

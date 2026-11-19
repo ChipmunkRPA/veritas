@@ -178,6 +178,8 @@ replay-evidence:  ## recount published image, video, audio, and writing evaluati
 		docs/evaluation-panels/image-printed-totals-2026-11-19.json
 	python3 -B -I -S backend/scripts/review_image_euro_totals.py \
 		docs/evaluation-panels/image-euro-totals-2026-11-19.json
+	python3 -B -I -S backend/scripts/review_image_conditioned_residual.py \
+		docs/evaluation-panels/image-conditioned-residual-2026-11-19.json.gz
 	python3 -I -S backend/scripts/review_video_common_detail.py \
 		docs/evaluation-panels/video-face-common-detail-native30-2026-11-19.json
 	python3 -I -S backend/scripts/review_audio_room_voice_recovery_ceiling.py \

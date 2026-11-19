@@ -290,6 +290,12 @@ def _location_transitions(strata, prior, operating_point):
     return {"minimum_iou": operating_point[0], "minimum_recall": operating_point[1], "strata": comparisons}
 
 
+def _alert_outcome(row, flagged):
+    if row["status"] != "ok":
+        return row["status"]
+    return "alert" if flagged else "assessed_without_alert"
+
+
 def summarize(manifest: dict, confirmation: dict, lock: dict, *, require_freeze_commitment: bool = False) -> dict:
     rows = audit_receipt(manifest, confirmation, "confirmation")
     if lock.get("manifest_sha256") != digest(manifest) or lock.get("schema") != SCHEMA:
@@ -341,7 +347,8 @@ def summarize(manifest: dict, confirmation: dict, lock: dict, *, require_freeze_
 
 def compare(manifest: dict, baseline: dict, baseline_lock: dict, candidate: dict,
             candidate_lock: dict, *, iterations: int = 2000, seed: int = 20261105,
-            require_freeze_commitment: bool = False, useful_location: tuple[float, float] | None = None) -> dict:
+            require_freeze_commitment: bool = False, useful_location: tuple[float, float] | None = None,
+            include_outcome_transitions: bool = False) -> dict:
     """Matched all-source alert differences, with source-group bootstrap intervals."""
     if type(iterations) is not int or iterations < 100:
         raise ValueError("Use at least 100 bootstrap replicates")
@@ -357,13 +364,20 @@ def compare(manifest: dict, baseline: dict, baseline_lock: dict, candidate: dict
         strata[(row["modality"], row["condition"], row["label"])].append(row)
     randomizer = random.Random(seed)
     differences = []
+    outcomes = []
     for (modality, condition, label), rows in sorted(strata.items()):
         grouped = defaultdict(list)
+        transitions = Counter()
+        transition_groups = defaultdict(set)
         for row in rows:
             before = prior[row["id"]]
             old_flag = before["status"] == "ok" and before["response"] >= baseline_lock["thresholds"][modality]
             new_flag = row["status"] == "ok" and row["response"] >= candidate_lock["thresholds"][modality]
             grouped[row["group"]].append(int(new_flag) - int(old_flag))
+            if include_outcome_transitions:
+                transition = (_alert_outcome(before, old_flag), _alert_outcome(row, new_flag))
+                transitions[transition] += 1
+                transition_groups[transition].add(row["group"])
         # Equal source-group weight; repeated variants do not create extra groups.
         values = [mean(group) for group in grouped.values()]
         differences.append({"modality": modality, "condition": condition,
@@ -371,6 +385,12 @@ def compare(manifest: dict, baseline: dict, baseline_lock: dict, candidate: dict
                             "planned": len(rows), "source_groups": len(values),
                             "candidate_minus_baseline": mean(values),
                             "group_bootstrap_95_percent": _group_interval(values, randomizer, iterations)})
+        if include_outcome_transitions:
+            outcomes.append({"modality": modality, "condition": condition, "label": label,
+                             "planned": len(rows), "source_groups": len(grouped),
+                             "transitions": [{"baseline": before, "candidate": after, "cases": count,
+                                              "source_groups": len(transition_groups[before, after])}
+                                             for (before, after), count in sorted(transitions.items())]})
     result = {"baseline": old, "candidate": new, "paired_differences": differences,
             "bootstrap": {"iterations": iterations, "seed": seed, "unit": "declared source group",
                           "weight": "equal source groups within modality, condition, and true class"},
@@ -380,4 +400,6 @@ def compare(manifest: dict, baseline: dict, baseline_lock: dict, candidate: dict
         result["paired_localization_differences"] = regional
     if useful_location is not None:
         result["paired_location_outcomes"] = _location_transitions(strata, prior, useful_location)
+    if include_outcome_transitions:
+        result["paired_alert_outcomes"] = {"strata": outcomes}
     return result

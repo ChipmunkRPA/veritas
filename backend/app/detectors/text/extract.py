@@ -50,6 +50,7 @@ OCR_BUDGET_SECONDS = 70.0
 NATIVE_COMPARISON_MAX_PAGES = 12
 RAW_BYTES_PER_CHAR = 8
 RAW_BOUNDED = frozenset({".txt", ".md", ".markdown"})
+_PDF_WRAP_HYPHEN = re.compile(r"(?<=\w)(?:\u00ad\u2010?|[-\u2010])\n(?=\w)")
 
 
 def check_raw_size(path: Path, ext: str) -> None:
@@ -70,10 +71,16 @@ def text_hash(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8", "surrogatepass")).hexdigest()
 
 
-def _normalise(raw: str, *, dehyphenate: bool = False) -> tuple[str, list[tuple[int, int]]]:
+def _normalise(raw: str, *, dehyphenate: bool = False,
+               preserve_pdf_wrap_hyphens: bool = False) -> tuple[str, list[tuple[int, int]]]:
     """Normalise whitespace while retaining each output codepoint's source range."""
     omitted = {m.start() + len(m.group(1)) for m in re.finditer(r"(\w)-\n(?=\w)", raw)} if dehyphenate else set()
     omitted |= {i + 1 for i in list(omitted)}
+    if preserve_pdf_wrap_hyphens:
+        for match in _PDF_WRAP_HYPHEN.finditer(raw):
+            # Some exporters save a soft marker and its drawn hyphen together.
+            first = match.start() if match[0][0] == "\u00ad" else match.end() - 1
+            omitted.update(range(first, match.end()))
     chars: list[str] = []
     origins: list[tuple[int, int]] = []
     for i, ch in enumerate(raw):
@@ -137,7 +144,8 @@ def _joined_word_mapping(group, text, origins, pos):
         first, source_start = last, source_end
 
 
-def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False, map_paragraphs: bool = False) -> Document:
+def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False, map_paragraphs: bool = False,
+                 preserve_pdf_wrap_hyphens: bool = False) -> Document:
     texts: list[str] = []
     spans: list[tuple[int, int]] = []
     mapping: list[dict] = []
@@ -146,7 +154,9 @@ def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False, ma
         raw, source = group[0]
         if len(group) > 1:
             raw = "".join(piece for piece, _ in group)
-        text, origins = _normalise(raw, dehyphenate=dehyphenate)
+        read_pdf_wrap = preserve_pdf_wrap_hyphens and source.get("extraction") == "text_layer"
+        text, origins = _normalise(raw, dehyphenate=dehyphenate and not read_pdf_wrap,
+                                   preserve_pdf_wrap_hyphens=read_pdf_wrap)
         if not text:
             continue
         if texts:
@@ -491,7 +501,8 @@ def hybrid_ocr_notice(ocr_pages: list[dict]) -> str:
     return f"{subject} mapped text with text transcribed from image areas. Authorship confidence has not been validated for this mixed extraction."
 
 
-def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True) -> Document:
+def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True,
+                preserve_pdf_wrap_hyphens: bool = False) -> Document:
     import pymupdf
 
     page_parts: list[list[tuple[str, dict]]] = []
@@ -620,7 +631,8 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool 
     pages = len(page_parts)
     partial_pages.sort(key=lambda page: page["page"])
     ocr_pages.sort(key=lambda page: page["page"])
-    d = _join_mapped([part for parts in page_parts for part in parts], dehyphenate=True)
+    d = _join_mapped([part for parts in page_parts for part in parts], dehyphenate=True,
+                     preserve_pdf_wrap_hyphens=preserve_pdf_wrap_hyphens)
     d.source_rasters = rasters
     d.meta = {"pages": pages, "method": "pymupdf", "unmapped_pages": empty_pages,
               "percentage_text_pages": percentage_text_pages,
@@ -633,6 +645,12 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool 
                       "confidence_semantics": "OCR recognition quality, not AI-generation confidence",
                       "max_pages": OCR_MAX_PAGES, "max_pixels_per_page": OCR_MAX_PIXELS}}
     warnings = []
+    if preserve_pdf_wrap_hyphens:
+        d.meta[document_native_locations.PDF_LINE_WRAP_KEY] = document_native_locations.PDF_LINE_WRAP
+        if any(source.get("extraction") == "text_layer" and _PDF_WRAP_HYPHEN.search(raw)
+               for parts in page_parts for raw, source in parts):
+            warnings.append("Wrapped words follow the saved PDF text. Explicit soft hyphens are removed at a wrap. "
+                            "Regular hyphens stay in the checked text, including ones an exporter may have added.")
     if empty_pages:
         warnings.append(f"Pages {', '.join(map(str, empty_pages))} could not be reliably extracted. They were not checked and must not be treated as human-authored.")
     elif any(page["status"] == "extracted" for page in ocr_pages):
@@ -1290,6 +1308,7 @@ def extract_eml(path: Path) -> Document:
 
 
 def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True,
+            preserve_pdf_wrap_hyphens: bool = False,
             project_word_revisions: bool = True, project_word_breaks: bool = True,
             include_word_content_controls: bool = True, include_word_saved_fields: bool = True, include_html_article: bool = True,
             map_body_paragraphs: bool = True, map_word_table_grid: bool = True,
@@ -1301,7 +1320,8 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             check_word_checkout_visibility: bool = False) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
-        d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
+        d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers,
+                        preserve_pdf_wrap_hyphens=preserve_pdf_wrap_hyphens)
     elif ext == ".docx":
         d = extract_docx(path, project_word_revisions=project_word_revisions, project_word_breaks=project_word_breaks,
                          include_word_content_controls=include_word_content_controls, include_word_saved_fields=include_word_saved_fields,
@@ -1409,7 +1429,8 @@ def _child(argv: list[str]) -> int:
             d = extract(path, ext, allow_ocr=False)
             d.meta["hidden_text_pages"] = hidden_text_pages
         else:
-            d = extract(path, ext, skip_hidden_rtf_runs=argv[3:] != ["--legacy-rtf-visibility"])
+            d = extract(path, ext, skip_hidden_rtf_runs=argv[3:] != ["--legacy-rtf-visibility"],
+                        preserve_pdf_wrap_hyphens="--pdf-saved-wrap-hyphens" in argv[3:])
         if ext.casefold() == ".pdf" and "--printed-ai-use-heading" in argv[3:]:
             from app.evidence import document_disclosure_heading
 

@@ -67,7 +67,7 @@ from app.evidence import (
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p42"
+PIPELINE_VERSION = "doc-2.0-p43"
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 BIBLIOGRAPHY_POLICY = "writing_bibliography_review_enabled"
 CLAUSE_POLICY = "writing_within_sentence_language_review_enabled"
@@ -98,6 +98,8 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     doi_enabled = settings.environment == "dev" and settings.text_doi_reference_review
     heading_enabled = settings.environment == "dev" and settings.document_disclosure_heading_review
     policies = {"prose_only": True} if prose_only else {}
+    if path.suffix.casefold() == ".pdf":
+        policies["preserve_pdf_wrap_hyphens"] = True
     if not provenance_gate.stop(ctx):
         if doi_enabled:
             policies["doi_review"] = True
@@ -143,7 +145,7 @@ def decode(ctx: StageContext) -> dict[str, Any]:
             **({document_tracked_changes.KEY: doc.word_review} if doc.word_review is not None else {})}
 
 
-def current_decode_output(output: Any, *, require_current_csv_reader: bool = True) -> bool:
+def current_decode_output(output: Any, *, require_current_layout_reader: bool = True) -> bool:
     """Reuse extraction only when its source coverage is current."""
     if not isinstance(output, dict) or output.get("meta", {}).get("extraction_version") != EXTRACTION_VERSION:
         return False
@@ -178,8 +180,11 @@ def current_decode_output(output: Any, *, require_current_csv_reader: bool = Tru
     if (output["meta"].get("method") == "xlsx"
             and output["meta"].get(document_native_locations.XLSX_VISIBILITY_KEY) != document_native_locations.XLSX_VISIBILITY):
         return False
-    if (require_current_csv_reader and output["meta"].get("method") == "csv"
+    if (require_current_layout_reader and output["meta"].get("method") == "csv"
             and output["meta"].get(document_native_locations.CSV_SEPARATOR_READER_KEY) != document_native_locations.CSV_SEPARATOR_READER):
+        return False
+    if (require_current_layout_reader and output["meta"].get("method") == "pymupdf"
+            and output["meta"].get(document_native_locations.PDF_LINE_WRAP_KEY) != document_native_locations.PDF_LINE_WRAP):
         return False
     if (output["meta"].get("method") == "python-docx" and
             (output["meta"].get(WORD_CONTENT_CONTROLS_KEY) != WORD_CONTENT_CONTROLS

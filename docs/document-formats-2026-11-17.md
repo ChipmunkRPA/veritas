@@ -84,6 +84,33 @@ the exact offsets of the text that follows. The reader uses the stored text
 and never opens the hyperlink destination. Signed reports record the
 mapping rule so earlier evidence can replay with its original coordinates.
 
+### Words wrapped in selectable PDFs
+
+New writing analyses retain regular hyphens stored in the PDF at a line
+wrap. The reader joins the word across the two lines and removes an explicit
+soft hyphen and its associated display glyph when the export records both.
+The browser and PDF can highlight both original line boxes. The JSON
+records the extraction policy so a signed report can be checked against
+the original file. Older signed reports replay using their recorded
+extraction. The projection applies within a selectable text block.
+[Unicode line-breaking and soft hyphens](https://unicode.org/reports/tr14/)
+
+Independent checks on authored macOS Quartz and Chromium PDF exports
+recovered all 274 wrapped words with exact text and both native boxes.
+Exact text across all 1,152 placements rose from 580 to 854. The other
+298 placements contained inline soft marks outside this check. A separate
+LibreOffice layout test recovered 37 of 37 regular and 36 of 36
+discretionary wraps. A local browser test verified analysis and report
+downloads after simulated checkout, including original-file verification
+of the signed package.
+[Independent renderer results](evaluation-panels/document-pdf-wrapped-hyphens-2026-11-18.json)
+
+A PDF can save an exporter-inserted layout hyphen as a regular character.
+Those characters stay in the text used for analysis. The same evidence
+rules continue to govern whether a writing assessment can use the page
+when its saved text and displayed glyphs differ. Scanned-page recognition
+and earlier-draft comparisons use their own extraction rules.
+
 ### Saved link destinations
 
 The document evidence view compares the hostname written in an ordinary

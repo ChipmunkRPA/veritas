@@ -117,6 +117,8 @@ def test_small_figure_and_searchable_scan_keep_mapped_coverage(tmp_path, overlay
 def test_pdf_invisible_layer_is_located_and_limits_the_actual_assessment(last_page, packet_factory, tmp_path, monkeypatch):
     # The packet fixture extracts the full document, independently of the local developer setting.
     monkeypatch.setattr(stage.settings, "text_bibliography_scope_review", False)
+    monkeypatch.setattr(stage.settings, "text_doi_reference_review", False)
+    monkeypatch.setattr(stage.settings, "document_disclosure_heading_review", False)
     path = tmp_path / "text-visibility.pdf"
     with pymupdf.open() as pdf:
         page = pdf.new_page()
@@ -240,7 +242,7 @@ def test_decode_error_explains_the_unchecked_scan_when_caption_is_too_short(tmp_
     hybrid_pdf(path, native="A short native caption.", overlapping_caption=True)
     monkeypatch.setattr(stage.common, "media_path", lambda _: path)
     with pytest.raises(ValueError, match=r"too little text.*Page 1 was partially checked"):
-        stage.decode(SimpleNamespace())
+        stage.decode(SimpleNamespace(state={"kind": "document"}, outputs={}))
 
 
 @pytest.mark.parametrize(("code", "score"), [("no_ai_indicators", 0.04), ("ai_supported", 0.96)])
@@ -416,7 +418,8 @@ def test_real_local_hybrid_ocr_preserves_text_geometry_and_frozen_evidence(
     hybrid_pdf(path, rotation=90)
     store = ObjectStore(tmp_path / "stage-objects")
     monkeypatch.setattr(stage.common, "media_path", lambda _ctx: path)
-    decoded = stage.decode(SimpleNamespace(analysis_id="hybrid-local-ocr", store=store))
+    decoded = stage.decode(SimpleNamespace(analysis_id="hybrid-local-ocr", store=store,
+                                           state={"kind": "document"}, outputs={}))
     assert decoded["text"].count(NATIVE) == 1
     assert all(line in decoded["text"] for line in SCAN_LINES[:2])
     assert "third line can be read only by viewing the scan." in decoded["text"]

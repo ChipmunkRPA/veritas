@@ -745,6 +745,9 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     csv_separator_key = document_native_locations.CSV_SEPARATOR_KEY
     if coverage.get(csv_separator_key) != decoded["meta"].get(csv_separator_key):
         raise ObjectIntegrityError("Frozen CSV separator differs from the recorded extraction")
+    pdf_line_wrap_key = document_native_locations.PDF_LINE_WRAP_KEY
+    if coverage.get(pdf_line_wrap_key) != decoded["meta"].get(pdf_line_wrap_key):
+        raise ObjectIntegrityError("Frozen PDF line-wrap policy differs from the recorded extraction")
     try:
         document_check_coverage.verify_source(document, text, decoded["sentences"])
         document_tracked_changes.verify_source(document, decoded.get(document_tracked_changes.KEY),

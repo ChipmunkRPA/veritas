@@ -175,3 +175,34 @@ manifest, original recordings and pinned model assets. The sanitized receipt
 alone cannot reconstruct the selected recordings. Repeating those sources
 checks implementation parity. A new operating policy requires separately
 frozen development and confirmation groups to establish fresh performance.
+
+## Transfer to traffic and competing speech
+
+Two contrast readouts tested whether sustained evidence inside the edit
+could recover noisy locations. One measured the weakest adjacent pair of
+bins against the stronger neighboring flank. The other also required
+contrast inside the candidate against its first and last bins. The same
+four development components fixed strict and wider points before transfer.
+No weights were fitted.
+
+The transfer used 368 retained 12-second deliveries from eight separate
+MLS host and donor groups. Each condition had 32 synthetic and 80 ordinary
+deliveries. Traffic and competing speech each had 16 additional isolated
+background recordings. Two generator families reused settings from
+development. The recordings were fresh to SAL and the new readouts.
+Earlier project voice checks had seen them. Exact delivered audio had no
+overlap with development. Physical identity aliases across corpora and
+upstream training exposure are unresolved.
+
+Every operating point, including the historical local contrast, found
+**0 of 32** correct added locations under traffic and **0 of 32** under
+competing speech. The strict persistence point added four useful clean
+locations to the serving baseline of 21 of 32, with six additional ordinary
+alerts out of 80. The wider persistence point found the same 25 clean
+locations with 23 additional ordinary alerts. The stricter historical
+contrast point flagged eight of the 16 isolated competing-speech recordings.
+The two sustained readings flagged none of those 16 at either point.
+Each sustained reading left 13 of 32 traffic-masked synthetic deliveries
+unassessed at both points. No arm met the frozen noisy recovery gate. An
+independent float32 check reproduced all 736 historical-contrast selections
+across the two points. The combined confidence uses the existing checks.

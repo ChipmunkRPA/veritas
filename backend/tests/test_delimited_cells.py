@@ -99,7 +99,7 @@ def test_csv_resume_reextracts_a_checkpoint_without_the_current_reader(tmp_path,
     assert document.current_decode_output(checkpoint)
     del checkpoint["meta"][locations.CSV_SEPARATOR_READER_KEY]
     assert not document.current_decode_output(checkpoint)
-    assert document.current_decode_output(checkpoint, require_current_csv_reader=False)
+    assert document.current_decode_output(checkpoint, require_current_layout_reader=False)
 
 
 @pytest.mark.parametrize("current", [True, False])

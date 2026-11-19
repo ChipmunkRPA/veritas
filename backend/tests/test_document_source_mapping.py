@@ -3,6 +3,7 @@ from __future__ import annotations
 import dataclasses
 import io
 from email.message import EmailMessage
+from pathlib import Path
 from types import SimpleNamespace
 
 import docx
@@ -13,7 +14,7 @@ from docx.oxml.ns import qn
 from PIL import Image
 
 from app.detectors.text.adapters import learned
-from app.detectors.text.extract import extract, from_string, text_hash
+from app.detectors.text.extract import _normalise, extract, from_string, text_hash
 from app.detectors.text.pipeline import extract_within
 from app.detectors.text.segment import segment
 from app.evidence import document_native_locations
@@ -58,6 +59,47 @@ def test_pdf_repeated_text_rotation_and_dehyphenated_word_geometry(tmp_path):
     assert parts[0]["bbox"][1] < parts[1]["bbox"][1]
     assert parts[0]["bbox"][0] > 90  # not the unrelated text at x=50 on line one
     assert document.source_map[1]["bbox"][1] > 200
+
+
+def write_pdf_with_wrapped_hyphens(path):
+    font = Path(__file__).resolve().parents[1] / "app/reports/fonts/Newsreader-400-latin.ttf"
+    with pymupdf.open() as pdf:
+        page = pdf.new_page()
+        page.insert_text((45, 60), "This operator-\napproved checklist follows the saved wording. "
+                         "The team confirmed the recon\u00ad\nstruction in the source document. "
+                         "The final sentence confirms which evidence is available.",
+                         fontfile=font, fontname="embedded")
+        page.set_rotation(90)
+        pdf.save(path)
+
+
+def test_pdf_wraps_preserve_saved_hard_hyphen_and_drop_explicit_soft_marker(tmp_path):
+    path = tmp_path / "saved-hyphens.pdf"
+    write_pdf_with_wrapped_hyphens(path)
+    with pymupdf.open(path) as pdf:
+        lines = ["".join(span["text"] for span in line["spans"])
+                 for block in pdf[0].get_text("dict")["blocks"] for line in block["lines"]]
+    assert lines[0].endswith("operator-") and lines[1].endswith("recon\u00ad")
+    legacy = extract(path, ".pdf")
+    assert "operatorapproved" in legacy.text and "recon\u00ad struction" in legacy.text
+    current = extract_within(path, ".PDF", preserve_pdf_wrap_hyphens=True)
+    assert "operator-approved" in current.text and "reconstruction" in current.text
+    assert current.meta[document_native_locations.PDF_LINE_WRAP_KEY] == document_native_locations.PDF_LINE_WRAP
+    assert current.source_map[0]["page_rotation"] == 90
+    for word in ("operator-approved", "reconstruction"):
+        start = current.text.index(word)
+        end = start + len(word)
+        before, after = [item["bbox"] for item in current.source_map[0]["fragments"] if item["start"] == start
+                         and item["end"] == end]
+        assert before[1] < after[1] and after[0] < before[0]
+
+
+def test_pdf_wrap_normalization_maps_saved_unicode_hyphens_without_crossing_empty_lines():
+    raw = "cold‐\nwater while recon\u00ad‐\nstructing a dash-\n\nAnother line"
+    text, ranges = _normalise(raw, preserve_pdf_wrap_hyphens=True)
+    assert text == "cold‐water while reconstructing a dash- Another line"
+    for character, (start, end) in zip(text, ranges, strict=True):
+        assert character == raw[start:end] or (character == " " and raw[start:end].isspace())
 
 
 def test_scanned_and_mixed_pdf_pages_are_explicitly_unchecked(tmp_path):

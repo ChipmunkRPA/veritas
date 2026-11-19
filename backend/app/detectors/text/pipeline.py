@@ -472,7 +472,8 @@ def extract_command(path: Path, ext: str) -> list[str]:
 
 
 def extract_within(path: Path, ext: str, *, native_pdf_only: bool = False,
-                   skip_hidden_rtf_runs: bool = True, disclosure_heading_review: bool = False) -> Document:
+                   skip_hidden_rtf_runs: bool = True, disclosure_heading_review: bool = False,
+                   preserve_pdf_wrap_hyphens: bool = False) -> Document:
     """`extract` in a child process with a hard limit (`document_decode_timeout_s`). A parser or a pattern that does not
     end holds the interpreter of whoever runs it, and a deadline that is checked between stages cannot interrupt it; a
     child is killed. An error of the reader is raised here under its own class name, a `ValueError` as a `ValueError`,
@@ -481,8 +482,11 @@ def extract_within(path: Path, ext: str, *, native_pdf_only: bool = False,
     command = extract_command(path, ext)
     if native_pdf_only:
         command.append("--native-pdf")
-    elif ext.casefold() == ".pdf" and disclosure_heading_review:
-        command.append("--printed-ai-use-heading")
+    elif ext.casefold() == ".pdf":
+        if disclosure_heading_review:
+            command.append("--printed-ai-use-heading")
+        if preserve_pdf_wrap_hyphens:
+            command.append("--pdf-saved-wrap-hyphens")
     elif ext == ".rtf" and not skip_hidden_rtf_runs:
         command.append("--legacy-rtf-visibility")
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -558,21 +562,27 @@ def segment_within(doc: Document, started: float | None = None) -> list[Sentence
     return sentences(doc, found)
 
 
-def prepare_document(path: Path, ext: str, *, disclosure_heading_review: bool = False) -> Document:
+def prepare_document(path: Path, ext: str, *, disclosure_heading_review: bool = False,
+                     preserve_pdf_wrap_hyphens: bool = False) -> Document:
     check_raw_size(path, ext)
     options = {"disclosure_heading_review": True} if disclosure_heading_review else {}
+    if preserve_pdf_wrap_hyphens:
+        options["preserve_pdf_wrap_hyphens"] = True
     doc = extract_within(path, ext, **options)
     check_document_size(doc)
     return doc
 
 
 def decode_document(path: Path, ext: str, *, prose_only: bool = False, doi_review: bool = False,
-                    disclosure_heading_review: bool = False) -> tuple[Document, list[Sentence]]:
+                    disclosure_heading_review: bool = False,
+                    preserve_pdf_wrap_hyphens: bool = False) -> tuple[Document, list[Sentence]]:
     """One document of a request, read and segmented: both in child processes that are killed, within
     `document_decode_timeout_s` together. The order is read, `check_document_size`, segment: a document over the size
     limit is never segmented."""
     started = time.monotonic()
     options = {"disclosure_heading_review": True} if disclosure_heading_review else {}
+    if preserve_pdf_wrap_hyphens:
+        options["preserve_pdf_wrap_hyphens"] = True
     doc = prepare_document(path, ext, **options)
     if doi_review:
         from app.evidence import document_doi_reference

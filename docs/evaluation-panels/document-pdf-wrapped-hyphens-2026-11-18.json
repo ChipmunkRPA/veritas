@@ -1,0 +1,123 @@
+{
+  "audited_layout_sha256": "d2a2577cdac10387792de71846e2fbcbef9e6a791ecf43605510c7b95c1f37fa",
+  "cases": [
+    {
+      "declared_kind": "ascii",
+      "emitted_wrap_codepoints": {
+        "U+002D": 47
+      },
+      "old_exact_wraps": 0,
+      "pages_with_replacement_difference": 0,
+      "passage_visibility_gate": true,
+      "placements": 192,
+      "previously_exact": 145,
+      "producer": "macOS Version 26.5.2 (Build 25F84) Quartz PDFContext",
+      "updated_exact": 192,
+      "updated_exact_wraps": 47,
+      "with_real_wrap": 47,
+      "wrapped_words_with_verified_native_offsets_and_two_boxes": 47
+    },
+    {
+      "declared_kind": "discretionary",
+      "emitted_wrap_codepoints": {
+        "U+00AD": 45
+      },
+      "old_exact_wraps": 0,
+      "pages_with_replacement_difference": 0,
+      "passage_visibility_gate": true,
+      "placements": 192,
+      "previously_exact": 0,
+      "producer": "macOS Version 26.5.2 (Build 25F84) Quartz PDFContext",
+      "updated_exact": 45,
+      "updated_exact_wraps": 45,
+      "with_real_wrap": 45,
+      "wrapped_words_with_verified_native_offsets_and_two_boxes": 45
+    },
+    {
+      "declared_kind": "unicode",
+      "emitted_wrap_codepoints": {
+        "U+2010": 47
+      },
+      "old_exact_wraps": 0,
+      "pages_with_replacement_difference": 32,
+      "passage_visibility_gate": false,
+      "placements": 192,
+      "previously_exact": 145,
+      "producer": "macOS Version 26.5.2 (Build 25F84) Quartz PDFContext",
+      "updated_exact": 192,
+      "updated_exact_wraps": 47,
+      "with_real_wrap": 47,
+      "wrapped_words_with_verified_native_offsets_and_two_boxes": 47
+    },
+    {
+      "declared_kind": "ascii",
+      "emitted_wrap_codepoints": {
+        "U+002D": 47
+      },
+      "old_exact_wraps": 0,
+      "pages_with_replacement_difference": 0,
+      "passage_visibility_gate": true,
+      "placements": 192,
+      "previously_exact": 145,
+      "producer": "Skia/PDF m157",
+      "updated_exact": 192,
+      "updated_exact_wraps": 47,
+      "with_real_wrap": 47,
+      "wrapped_words_with_verified_native_offsets_and_two_boxes": 47
+    },
+    {
+      "declared_kind": "discretionary",
+      "emitted_wrap_codepoints": {
+        "U+00AD U+2010": 41
+      },
+      "old_exact_wraps": 0,
+      "pages_with_replacement_difference": 22,
+      "passage_visibility_gate": false,
+      "placements": 192,
+      "previously_exact": 0,
+      "producer": "Skia/PDF m157",
+      "updated_exact": 41,
+      "updated_exact_wraps": 41,
+      "with_real_wrap": 41,
+      "wrapped_words_with_verified_native_offsets_and_two_boxes": 41
+    },
+    {
+      "declared_kind": "unicode",
+      "emitted_wrap_codepoints": {
+        "U+2010": 47
+      },
+      "old_exact_wraps": 0,
+      "pages_with_replacement_difference": 32,
+      "passage_visibility_gate": false,
+      "placements": 192,
+      "previously_exact": 145,
+      "producer": "Skia/PDF m157",
+      "updated_exact": 192,
+      "updated_exact_wraps": 47,
+      "with_real_wrap": 47,
+      "wrapped_words_with_verified_native_offsets_and_two_boxes": 47
+    }
+  ],
+  "extractor_sha256": "ee750906cf4818591deb0e4b6bfd5ea8ea095baabbe9f1fd9d6b7493da22d8f1",
+  "frozen_layout_sha256": "8e0d3b365663b83f590b556d12537c4557418028b66046a3f446446d44aca26b",
+  "placements_are_not_independent_documents": true,
+  "purpose": "Compare native selectable PDF words and evidence coordinates before and after the saved wrap projection.",
+  "schema": "chipmunk.pdf-hyphen-renderers/1",
+  "scope": [
+    "The original layouts were frozen before output and reused intact. The audit was updated to recognize the double codepoint observed in Chromium.",
+    "Two actual PDF producers were audited. Model inference and AI authorship calibration were outside this test.",
+    "All source-position checks recomputed original page line boxes for independently known affected terms.",
+    "A stable per-phrase native location does not override the separate whole-file saved-text visibility check.",
+    "Unwrapped discretionary soft marks remain outside this projection."
+  ],
+  "total": {
+    "fixture_placements": 1152,
+    "outside_wrap_scope_inline_soft_mark": 298,
+    "previously_exact_became_inexact": 0,
+    "previously_exact_placements": 580,
+    "updated_exact_placements": 854,
+    "updated_exact_wraps": 274,
+    "verified_native_two_box_anchors": 274,
+    "wrapped_placements": 274
+  }
+}

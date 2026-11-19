@@ -10,7 +10,7 @@ from docx import Document
 from docx.oxml import OxmlElement
 from docx.oxml.ns import qn
 from test_document_packets import packet_factory as packet_factory
-from test_document_source_mapping import word_control, word_hyperlink
+from test_document_source_mapping import word_control, word_hyperlink, write_pdf_with_wrapped_hyphens
 from test_public_evidence_package import rewrite
 from test_public_package_integration import multimedia_package as multimedia_package
 from test_strict_word import _strict_package
@@ -49,6 +49,43 @@ def test_replays_exact_native_text_formats(extension, packet_factory, tmp_path):
         archive.writestr("evidence.json", canonical_json(evidence))
     with zipfile.ZipFile(tmp_path / "evidence.zip") as archive:
         assert "extracted text and source mapping matched" in verify_document_source.check(archive, bundle, original)
+
+
+@pytest.mark.parametrize("current", [False, True])
+def test_pdf_evidence_replays_with_the_recorded_line_wrap_policy(packet_factory, tmp_path, current):
+    path = tmp_path / "wrapped.pdf"
+    write_pdf_with_wrapped_hyphens(path)
+    db, store, analysis, result, decoded, _ = packet_factory(".pdf", source_pdf=path, preserve_pdf_wrap_hyphens=current)
+    evidence = build_packet_set(db, analysis, store, result)
+    assert evidence["packets"]
+    key = document_native_locations.PDF_LINE_WRAP_KEY
+    assert (key in evidence["coverage"]) is current
+    assert ("operator-approved" in decoded["text"]) is current
+    assert ("reconstruction" in decoded["text"]) is current
+    assert any("Wrapped words follow the saved PDF text" in line for line in evidence["limitations"]) is current
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"sha256": analysis.sha256, "bytes": analysis.size_bytes}}
+    proof = tmp_path / "proof.zip"
+    with zipfile.ZipFile(proof, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(evidence))
+        for packet in evidence["packets"]:
+            for asset in packet["artifacts"].values():
+                digest = asset["sha256"]
+                if f"assets/{digest}.png" not in archive.namelist():
+                    archive.writestr(f"assets/{digest}.png", store.read_bytes(digest))
+    with zipfile.ZipFile(proof) as archive:
+        assert "extracted text and source mapping matched" in verify_document_source.check(archive, bundle, path)
+        entries = {name: archive.read(name) for name in archive.namelist()}
+    if current:
+        del evidence["coverage"][key]
+    else:
+        evidence["coverage"][key] = document_native_locations.PDF_LINE_WRAP
+    entries["evidence.json"] = canonical_json(evidence)
+    with zipfile.ZipFile(proof, "w") as archive:
+        for name, data in entries.items():
+            archive.writestr(name, data)
+    with zipfile.ZipFile(proof) as archive, pytest.raises(ValueError, match="source mapping differs"):
+        verify_document_source.check(archive, bundle, path)
 
 
 @pytest.mark.parametrize("modern", [True, False])

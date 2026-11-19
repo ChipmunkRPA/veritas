@@ -139,6 +139,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     else:
         covered_schema = coverage.get(document_pdf_visibility.KEY, {}).get("schema") == document_pdf_visibility.SCHEMA
         doc = extract(original, extension, allow_ocr=replay_ocr, inspect_pdf_covers=covered_schema,
+                      preserve_pdf_wrap_hyphens=coverage.get(document_native_locations.PDF_LINE_WRAP_KEY)
+                      == document_native_locations.PDF_LINE_WRAP,
                       include_html_article=document_scope.HTML_ARTICLE_KEY in coverage,
                       map_body_paragraphs=document_native_locations.PARAGRAPH_MAP_KEY in coverage,
                       skip_hidden_slide_groups=coverage.get(document_native_locations.PPTX_VISIBILITY_KEY)
@@ -154,6 +156,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                       == document_native_locations.XLSX_VISIBILITY)
     if doc.meta.get(document_native_locations.CSV_SEPARATOR_KEY) != coverage.get(document_native_locations.CSV_SEPARATOR_KEY):
         raise ValueError("The declared CSV separator differs from the saved report")
+    if doc.meta.get(document_native_locations.PDF_LINE_WRAP_KEY) != coverage.get(document_native_locations.PDF_LINE_WRAP_KEY):
+        raise ValueError("The PDF line-wrap policy differs from the saved report")
     if used_ocr and not doc.source_rasters:
         raise ValueError("The local OCR runtime could not reproduce the original scan. Check that the verified OCR data are installed.")
     unassigned_email_roles = (

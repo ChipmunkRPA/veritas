@@ -188,8 +188,8 @@ def run_analysis(analysis_id: str, *, deadline: Deadline | None = None, profile:
             stages = tuple(dataclasses.replace(s, after=tuple(d for d in s.after if d != "condition"))
                            if s.id == "detect" else s for s in stages)
         if kind == "document":
-            # Stored CSV scores refer to the original decoded field boundaries.
-            reuse_decode = partial(doc.current_decode_output, require_current_csv_reader=False)
+            # Stored writing scores refer to the original decoded text and layout.
+            reuse_decode = partial(doc.current_decode_output, require_current_layout_reader=False)
             stages = tuple(dataclasses.replace(s, reuse_if=reuse_decode) if s.id == "decode" else s for s in stages)
         stages = tuple(dataclasses.replace(s, critical=True) if s.id in REFUSION_REUSED[kind] else s for s in stages)
     elif kind in ("audio", "video"):

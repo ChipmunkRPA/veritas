@@ -16,6 +16,7 @@ from app.evidence import (
     document_chat_markers,
     document_disclosure_heading,
     document_invisible_characters,
+    document_reference_links_binding,
     document_saved_link_hosts_binding,
     document_scope,
     email_alternatives,
@@ -114,6 +115,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              WRITING_POSITION, WRITING_CHECK_COVERAGE,
                              EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, WORD_TEXT_VISIBILITY, PDF_SAVED_WORDING_COMMITMENT,
                              DOI_REFERENCE_COMMITMENT, document_saved_link_hosts_binding.COMMITMENT,
+                             document_reference_links_binding.COMMITMENT,
                              document_disclosure_heading.COMMITMENT,
                              IMAGE_INTERPOLATION, prior_grid.COMMITMENT, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
                              image_animation_binding.KEY, image_motion_photo_binding.KEY,
@@ -306,6 +308,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              'Printed AI-use headings require document evidence')
     _require(analysis['kind'] == 'document' or document_saved_link_hosts_binding.COMMITMENT not in result,
              'Saved link commitments require document evidence')
+    _require(analysis['kind'] == 'document' or (document_reference_links_binding.COMMITMENT not in result
+                                               and document_reference_links_binding.KEY not in evidence),
+             'Reference link commitments require document evidence')
     _require(analysis['kind'] == 'document' or PDF_SAVED_WORDING_COMMITMENT not in result,
              'Saved PDF wording requires document evidence')
     _require(analysis["kind"] == "document" or document_invisible_characters.COMMITMENT not in result,
@@ -363,6 +368,10 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         _require(evidence["source"].get(document_saved_link_hosts_binding.COMMITMENT) == result.get(document_saved_link_hosts_binding.COMMITMENT),
                  "Saved link evidence differs from the public result commitment")
         document_saved_link_hosts_binding.validate(evidence)
+        _require(evidence["source"].get(document_reference_links_binding.COMMITMENT)
+                 == result.get(document_reference_links_binding.COMMITMENT),
+                 'Reference link evidence differs from the published commitment')
+        document_reference_links_binding.validate(evidence)
         document_pdf_visibility.validate(evidence)
         history = evidence.get("coverage", {}).get(PDF_SAVED_WORDING)
         expected_history = result.get(PDF_SAVED_WORDING_COMMITMENT)

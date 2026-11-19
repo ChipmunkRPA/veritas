@@ -176,3 +176,51 @@ FLAC comparison retained the same assessment and existing evidence. An actual
 24-bit FLAC control remained outside this narrow source profile. This expands
 lossless delivery support with the existing readings and zero AI-confidence
 weight. The strong-background limitations above remain part of the result.
+
+
+## Exact duplicated-channel delivery
+
+The local brief-window option also accepts twelve-second PCM16 WAV and FLAC
+with two recorded channels when every sample in both channels equals the
+analyzed 16 kHz mono input. A separate full-recording channel digest binds
+this proof to the source. Ordinary stereo mixtures remain outside this
+extension. The schedule, speech admission, response point and zero confidence
+weight stay the same. Original mono exports keep their existing schema.
+
+A model-free qualification used six retained source cases covering clean and
+washing-machine edits, matched genuine speech, background-only audio and a
+previously flagged ordinary restaurant mixture. Twelve duplicated-channel
+deliveries and twelve unequal-channel controls passed independent native
+clock inspection. All 552 brief-window input comparisons matched the previously
+saved mono inputs. An independent integer decoder also recreated the selected
+listening clips and waveform pixels. Each unequal-channel control had the
+same mono average and still failed the full original-channel equality proof.
+These are delivery checks on retained cases. They add source-format coverage
+and preserve the earlier missed-edit and ordinary-alert results.
+
+
+Nine simulated USD 9.99 checkouts then exercised the real worker. The browser,
+PDF, JSON and signed original-source replay agreed on the selected windows,
+clips and waveform pixels. The matched ordinary speech remained unflagged,
+the isolated background remained unassessed, and the known ordinary restaurant
+alert remained visible. Neither unequal-channel WAV nor FLAC received a brief
+review. Enabling the option retained the same overall assessment and prior
+evidence. No analysis started before payment confirmation and no real charge
+was made.
+
+A separate readback matched all 138 current window readings to their retained
+mono counterparts and verified eight selected listening ranges. It rejected a
+substituted original, a changed channel digest and an unequal-channel source
+rebound to a matching mono waveform. Actual 24-bit FLAC and a WAV with one extra
+native sample stayed outside this source profile. Fourteen historical mono
+signed packages replayed against their unchanged original files. The extension
+improves lossless delivery coverage. River and restaurant speech-edit
+localization remains unresolved.
+
+
+The deterministic native-channel regression can be run locally without model
+weights or the retained recordings:
+
+```sh
+backend/.venv/bin/pytest -q backend/tests/test_audio_brief_voice_review.py
+```

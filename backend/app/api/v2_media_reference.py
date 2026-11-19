@@ -217,6 +217,7 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         reference, submitted, include_channel_timing=True, include_trimmed=True,
                         include_local_area=settings.video_reference_local_area,
                         include_short30_local_area=settings.video_reference_short30_local_area,
+                        include_short720_local_area=settings.video_reference_short720_local_area,
                         include_measured_interval=settings.video_reference_measured_interval,
                         include_trim_reencoded=settings.video_reference_local_area,
                         include_soundtrack_reencode=settings.video_reference_soundtrack_reencode,

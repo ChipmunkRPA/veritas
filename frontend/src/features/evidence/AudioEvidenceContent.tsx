@@ -73,6 +73,9 @@ function BriefSpeechWindows({ review, set, token, mediaReady }: {
     className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
     <h3 className="m-0 text-body font-medium">Brief speech windows</h3>
     <p className="mt-2 mb-0 text-small" role="status">{review.reason}</p>
+    {review.schema === 'chipmunk.brief-voice-review/2' && <p className="mt-2 mb-0 text-caption text-text-muted">
+      Both recorded channels contain exactly the same samples as the analyzed mono audio.
+    </p>}
     {review.status !== 'skipped' && <p className="mt-2 mb-0 text-caption text-text-muted">
       {review.speech_windows_checked} of {review.scheduled_windows} scheduled 750 ms windows checked.
     </p>}
@@ -117,7 +120,8 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
   const twoSecondCoverage = twoSecond?.sample_coverage
   const twoSecondCount = twoSecond?.excerpts.reduce((total, row) =>
     total + row.speech_samples.filter(samples => samples >= longVoiceSampleRate).length, 0)
-  const briefReview = standalone && set.brief_voice_review?.schema === 'chipmunk.brief-voice-review/1'
+  const briefReview = standalone && (set.brief_voice_review?.schema === 'chipmunk.brief-voice-review/1'
+    || set.brief_voice_review?.schema === 'chipmunk.brief-voice-review/2')
     && set.brief_voice_review.affects_overall_confidence === false ? set.brief_voice_review : undefined
   const focusedSpeech = Array.isArray(longReview?.regions)
   const hasMeasuredSpeech = longReview?.windows.some((window) => window.direction !== 'unassessed')

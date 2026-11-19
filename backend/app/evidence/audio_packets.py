@@ -499,6 +499,9 @@ def build_content(db: Session, analysis: Analysis, store: ObjectStore, result: d
         from app.evidence.audio_short_review_binding import source_metadata
 
         document["source"].update(source_metadata(mapping))
+        if pin := mapping.get(brief_voice.IDENTICAL_CHANNEL_PCM):
+            document["source"].update({brief_voice.IDENTICAL_CHANNEL_PCM: pin,
+                "source_time_base": mapping["source_time_base"], "source_start_pts": mapping.get("source_start_pts")})
         document[brief_voice.KEY] = build_brief_voice(
             review, store=store, source=document["source"], pcm=pcm, mapping=mapping,
             asset=lambda data, media_type, **metadata: _asset(db, store, analysis, set_id, data, media_type, **metadata),

@@ -874,6 +874,34 @@ def test_short30_local_area_requires_verified_scope(monkeypatch):
     assert not video_reference_photometric.eligible_short30(paths, (valid, valid), video_reference._elapsed(valid))
 
 
+@pytest.mark.parametrize("rate", [Fraction(30), Fraction(30000, 1001)])
+def test_short720_local_area_checks_both_absolute_clocks_and_tracks(monkeypatch, rate):
+    def table(timescale, *, count=68, start=0, rotation=0):
+        step = int(timescale / rate)
+        pts = tuple(start + i * step for i in range(count))
+        return decode.FrameTable(f"1/{timescale}", pts, (0,), "I" + "P" * (count - 1), 1280, 720, 1280, 720,
+                                 rotation=rotation)
+
+    paths = Path("earlier.mp4"), Path("submitted.mp4")
+    method = video_reference_photometric
+    valid = table(30000), table(90000)
+    clock = video_reference._elapsed(valid[0])
+    monkeypatch.setattr(method, "probe", lambda *_args, **_kwargs: {"codec": "h264", "pix_fmt": "yuv420p", "codec_tag": "avc1"})
+    monkeypatch.setattr(method.mp4_source_clock, "verified", lambda _, source, ticks: source.pts[1] == ticks)
+    assert method.eligible_short720(paths, valid, clock)
+    assert not method.eligible_short30(paths, valid, clock)
+    for unsupported in (table(90000, start=1), table(90000, rotation=90), table(60000), table(90000, count=67)):
+        assert not method.eligible_short720(paths, (valid[0], unsupported), clock)
+    for count in (65, 79):
+        outside = (table(30000, count=count), table(90000, count=count))
+        assert not method.eligible_short720(paths, outside, video_reference._elapsed(outside[0]))
+    monkeypatch.setattr(method.mp4_source_clock, "verified", lambda path, *_: path == paths[0])
+    assert not method.eligible_short720(paths, valid, clock)
+    monkeypatch.setattr(method.mp4_source_clock, "verified", lambda *_: True)
+    monkeypatch.setattr(method, "probe", lambda *_args, **_kwargs: {"codec": "h264", "pix_fmt": "yuv420p", "codec_tag": "avc3"})
+    assert not method.eligible_short720(paths, valid, clock)
+
+
 @pytest.mark.parametrize(("width", "height", "step"), [(360, 288, 400001), (480, 360, 333333)])
 def test_earlier_h264_requires_exact_grid_dimensions_and_cadence(monkeypatch, width, height, step):
     table = decode.FrameTable("1/10000000", (0, step, 2 * step), (0,), "IPP", width, height, width, height)

@@ -38,6 +38,8 @@ from app.evidence import (
     document_percentage_consistency,
     document_publication_ids,
     document_published_wording,
+    document_reference_links,
+    document_reference_links_binding,
     document_repeat,
     document_saved_link_hosts,
     document_saved_link_hosts_binding,
@@ -181,6 +183,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         document_disclosure_heading.verify_original(heading, original, doc)
     document_saved_link_hosts.verify_original(evidence, original, extension, use_current_email_body=use_current_email_body,
                                               use_static_html=use_static_html)
+    if document_reference_links_binding.KEY in evidence or document_reference_links_binding.COMMITMENT in source:
+        reference_links = document_reference_links.inspect(original, extension, source_sha256=source["sha256"])
+        document_reference_links_binding.verify_record(evidence, reference_links,
+            commitment=source.get(document_reference_links_binding.COMMITMENT))
     if document_bibliography.KEY in coverage:
         doc = document_bibliography.body_view(doc)
     document_bibliography.verify_source(evidence, doc.meta)
@@ -334,9 +340,11 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     doi_detail = " Verified the DOI reference comparison and retained source positions." if document_doi_reference.KEY in evidence else ""
     heading_detail = " Verified the printed AI-use heading and its exact PDF positions." if document_disclosure_heading.KEY in evidence else ""
     links_detail = " Verified saved link hostnames and their original label positions." if document_saved_link_hosts_binding.KEY in evidence else ""
+    reference_links_detail = (" Verified saved reference links and both original number positions."
+                              if document_reference_links_binding.KEY in evidence else "")
     return (f"Original SHA-256, extracted text and source mapping matched. Verified passages ({packet_count}), "
             f"recorded input windows ({window_count}) and {image_label} ({images})."
             f"{page_detail}{unselected_detail}{alternative_detail}{position_detail}{native_detail}{email_input_detail}"
             f"{tracked_detail}{word_visibility_detail}{saved_fields_detail}{invisible_detail}{character_detail}{interval_detail}{pdf_replacement_detail}"
             f"{pdf_covered_detail}{percentage_detail}{calendar_detail}{arithmetic_detail}{identifier_detail}"
-            f"{marker_detail}{doi_detail}{heading_detail}{links_detail}{wording_detail}{history_detail}")
+            f"{marker_detail}{doi_detail}{heading_detail}{links_detail}{reference_links_detail}{wording_detail}{history_detail}")

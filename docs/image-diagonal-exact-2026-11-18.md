@@ -228,3 +228,48 @@ package replayed against its original. The overall assessment agreed on
 three paired enabled and disabled cases. Progressive quality-90, rotated
 quality-90, the tested browser default, concatenated JPEGs, multi-picture
 JPEGs, and ordinary and mirror controls produced no added diagonal crop pair.
+
+### JPEG exports with the browser’s default compression tables
+
+Two further panels tested 24 photo and repeated-pattern groups distinct
+from earlier diagonal panels and from each other by recorded photographer,
+source digest and thumbnail similarity. Each panel encoded 84 staged edits
+and controls using Chrome’s default Canvas JPEG export, Pillow with the same
+quality-92 quantization tables, and Pillow quality 90 for comparison. The
+matching test and sampling geometry were unchanged. The default quality
+argument belongs to the browser implementation. The check selects the exact
+tables read from the file. [Canvas export standard](https://html.spec.whatwg.org/multipage/canvas.html#dom-canvas-toblob)
+
+| Result per renderer | First panel, quality 92 | Confirmation, quality 92 |
+| --- | ---: | ---: |
+| Earlier checks located a planted copy | 0/24 | 0/24 |
+| New pair with at least 0.50 overlap on both crops | 12/24 | 16/24 |
+| Source groups with a new crop pair at that overlap | 4/8 | 6/8 |
+| New ordinary alerts | 0/40 | 0/40 |
+| New mirror, same-axis, or repeat alerts | 0/20 | 0/20 |
+
+The first panel missed its frozen placement requirement on two additional
+pairs. Both crops stayed inside the planted regions and reproduced the
+intended reflection within three native pixels. A separate test froze those
+placement criteria before scoring the confirmation panel. All 16 pairs
+cleared the original overlap rule, with zero additional partial or misplaced
+pairs. The existing quality-90 check located 12 and 15 cases on the paired
+deliveries. Independent recount read 504 original JPEGs and replayed 60
+reported crop witnesses. [First panel](evaluation-panels/image-jpeg-browser-default-first-2026-11-19.json)
+· [Confirmation](evaluation-panels/image-jpeg-browser-default-confirmation-2026-11-19.json)
+
+`VERITAS_IMAGE_JPEG_DIAGONAL_Q92_REVIEW=true` adds the tested browser-export
+tables to the development comparison. It requires a single complete 8-bit
+baseline 4:2:0 frame within the same native size bounds. A supported match
+from an earlier check takes precedence. The browser-table branch requires a
+completed brightness-block check and explicit profile noncoverage from the
+between-block and rotated-copy checks. The crops show the verified matched
+area. The full edit can extend beyond those crops. This observation carries
+zero weight in the AI assessment.
+
+Eighteen isolated analyses followed simulated USD 9.99 checkout. The
+browser verified 14 original crop links. Each PDF and JSON matched the
+recorded result, and all 18 signed packages verified against their original
+JPEGs. The overall assessment matched on five paired runs with the option
+off and on. Progressive, quality-93, concatenated and multi-picture controls
+showed no browser-profile diagonal pair.

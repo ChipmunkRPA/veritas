@@ -366,7 +366,7 @@ export interface BackgroundVoiceReview {
   artifacts: Partial<Record<'selected_clip' | 'processed_clip' | 'waveform' | 'processed_waveform', EvidenceAsset>>
 }
 export interface BriefVoiceReview {
-  schema: 'chipmunk.brief-voice-review/1'
+  schema: 'chipmunk.brief-voice-review/1' | 'chipmunk.brief-voice-review/2'
   status: 'flagged' | 'no_flag' | 'unassessed' | 'skipped'
   reason: string; limitation: string; affects_overall_confidence: false
   scheduled_windows: number; speech_windows_checked: number
@@ -379,6 +379,7 @@ export interface AudioEvidenceSet extends SetBase {
   source: { sha256: string; pcm_sha256?: string; samples?: number; sample_rate?: number; source_channels?: number; source_sample_rate?: number;
     source_duration_s?: number | null; source_stream_index?: number; audio_stream_indices?: number[]; transform?: string; timeline_time_base?: string;
     identical_stereo_channel_pcm_sha256?: string; source_duration_pts?: number;
+    brief_identical_stereo_channel_pcm_sha256?: string;
     timeline?: (SampleInterval & { source_pts: number })[] }
   coverage?: { decoded_samples: number; scored_samples: number; unscored_samples: number; decode_limit_reached: boolean;
     selection_threshold: number; windows: (SampleInterval & { score: number; signal_refs: EvidenceRef[] })[];
@@ -658,6 +659,12 @@ export interface DocumentEvidenceSet extends SetBase {
       title_location: MappedTextFinding['location']; printed: { doi: string; title: string }; cited: { doi: string; title: string } })[]
   }
   saved_link_hosts?: DocumentSavedLinkHosts
+  reference_link_discrepancies?: {
+    schema: 'document-reference-link-discrepancies/1'
+    decoded_characters: number; references: number; checked_links: number; mismatches: number
+    findings: { label_number: number; target_number: number; label_range: [number, number]; target_range: [number, number] }[]
+    authorship_confidence_contribution: 0; destinations_contacted: 0
+  }
   percentage_consistency?: { schema: 'document-percentage-consistency/1' | 'document-percentage-consistency/2' | 'document-percentage-consistency/3'; status: 'different_values' | 'checked' | 'not_assessed';
     scope: string; limitation: string; authorship_confidence_contribution: 0; checked_sentences: number;
     excluded_blocks: number; different_claims: number; comparable_claims: number;

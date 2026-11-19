@@ -21,6 +21,7 @@ SOUND_DIFFERENCE_WRAPPERS = {f"chipmunk.video-reference-comparison/{number}" for
 LOCAL_AREA_BASIS = "paired_h264_local_area/1"
 SHORT30_BASIS = "paired_h264_short30_local_area/1"
 SHORT30_SHAPES = {(360, 640), (480, 480)}
+SHORT720_BASIS = "paired_h264_short720_local_area/1"
 MEASURED_INTERVAL_BASIS = "paired_h264_measured_picture_interval/1"
 ROLES = ("before", "during", "after")
 SHA = re.compile(r"[0-9a-f]{64}")
@@ -53,15 +54,16 @@ def run(command):
         raise ValueError(f"Native replay could not complete ({type(error).__name__})") from None
 
 
-def probe(path):
+def probe(path, *, require_avc1=False):
     report = run([
         "ffprobe", "-v", "error", "-protocol_whitelist", "file", "-select_streams", "v:0",
-        "-show_entries", "stream=width,height,time_base,codec_name,pix_fmt:stream_side_data=rotation:frame=pts",
+        "-show_entries", "stream=width,height,time_base,codec_name,codec_tag_string,pix_fmt:stream_side_data=rotation:frame=pts",
         "-show_frames", "-show_streams", "-of", "json", str(path.resolve()),
     ])
     document = json.loads(report.stdout)
     require(len(document.get("streams", [])) == 1, "One primary video stream is required")
     stream = document["streams"][0]
+    require(not require_avc1 or stream.get("codec_tag_string") == "avc1", "Expected AVC1 source pictures")
     require(not any(entry.get("rotation", 0) for entry in stream.get("side_data_list", [])),
             "The interval receipt requires an unrotated source stream")
     width, height = stream["width"], stream["height"]
@@ -165,14 +167,23 @@ def verify(source_path, receipt, exhibits=None):
     }
 
 
-def comparison_source(path, source, *, local_area=False, short30=False):
+def comparison_source(path, source, *, local_area=False, short30=False, short720=False):
     require(0 < path.stat().st_size == source["bytes"] <= MAX_COMPARISON_BYTES
             and sha_file(path) == source["sha256"], "Comparison source bytes do not match")
-    width, height, base, pts, codec, pix_fmt = probe(path)
-    shapes = SHORT30_SHAPES if short30 else {(720, 480)} if local_area else {(360, 288), (480, 360)}
+    width, height, base, pts, codec, pix_fmt = probe(path, require_avc1=short720)
+    shapes = {(720, 480)} if local_area else {(360, 288), (480, 360)}
+    if short30:
+        shapes = SHORT30_SHAPES
+    if short720:
+        shapes = {(1280, 720)}
     require((width, height) in shapes and len(pts) <= 100,
             "Source lies outside the local comparison dimensions or frame limit")
-    if short30:
+    if short720:
+        step = (pts[1] - pts[0]) * base
+        require(codec == "h264" and pix_fmt == "yuv420p" and 66 <= len(pts) <= 78 and pts[0] == 0
+                and base in {Fraction(1, 30000), Fraction(1, 90000)} and step in {Fraction(1, 30), Fraction(1001, 30000)}
+                and all((b - a) * base == step for a, b in pairwise(pts)), "Unsupported short 720p clock")
+    elif short30:
         require(codec == "h264" and pix_fmt == "yuv420p" and 65 <= len(pts) <= 91
                 and all((b - a) * base == Fraction(1, 30) for a, b in pairwise(pts)), "Unsupported portrait or square clock")
     elif local_area:
@@ -194,18 +205,21 @@ def verify_comparison(earlier, submitted, export):
     record, assets = export["comparison"], export["assets"]
     local = record["picture"]["local_comparison"]
     basis = local.get("basis")
-    local_area = basis in {LOCAL_AREA_BASIS, SHORT30_BASIS}
+    local_area = basis in {LOCAL_AREA_BASIS, SHORT30_BASIS, SHORT720_BASIS}
     short30 = basis == SHORT30_BASIS
+    short720 = basis == SHORT720_BASIS
+    short_area = short30 or short720
     schema = record["schema"]
-    if short30 and schema in SOUND_DIFFERENCE_WRAPPERS:
+    if short_area and schema in SOUND_DIFFERENCE_WRAPPERS:
         schema = record.get("comparison_schema")
     trimmed = schema == TRIM_REENCODE_SCHEMA
-    supported = ((COMPARISON_SCHEMA, ADDITIONAL_SOUNDTRACK_SCHEMA) if short30 else (COMPARISON_SCHEMA, TRIM_REENCODE_SCHEMA))
+    supported = ((COMPARISON_SCHEMA, ADDITIONAL_SOUNDTRACK_SCHEMA) if short_area
+                 else (COMPARISON_SCHEMA, TRIM_REENCODE_SCHEMA))
     require(schema in supported and record["status"] == "measured"
             and record["affects_overall_confidence"] is False, "Expected a measured local video comparison")
     require(local["status"] == "local_difference", "The export has no measured local picture interval")
     result = _verify_comparison_range(earlier, submitted, record, assets, local["range"],
-                                      local_area=local_area, trimmed=trimmed, short30=short30)
+                                      local_area=local_area, trimmed=trimmed, short30=short30, short720=short720)
     if precise := local.get("measured_interval"):
         coarse = local["range"]
         require(basis == LOCAL_AREA_BASIS and not trimmed and precise.get("basis") == MEASURED_INTERVAL_BASIS
@@ -220,7 +234,8 @@ def verify_comparison(earlier, submitted, export):
     return result
 
 
-def _verify_comparison_range(earlier, submitted, record, assets, region, *, local_area, trimmed=False, measured=False, short30=False):
+def _verify_comparison_range(earlier, submitted, record, assets, region, *, local_area, trimmed=False, measured=False,
+                             short30=False, short720=False):
     start, end = region["start_frame"], region["end_frame_exclusive"]
     require(type(start) is type(end) is int and 0 < start < end, "Invalid half-open comparison interval")
     previews = region["previews"]
@@ -249,7 +264,8 @@ def _verify_comparison_range(earlier, submitted, record, assets, region, *, loca
         offsets["earlier"] = offset
     clocks = []
     for side, path in (("earlier", earlier), ("submitted", submitted)):
-        width, height, base, pts = comparison_source(path, record[side], local_area=local_area, short30=short30)
+        width, height, base, pts = comparison_source(path, record[side], local_area=local_area, short30=short30,
+                                                    short720=short720)
         offset = offsets[side]
         begin, stop = start + offset, end + offset
         require(stop < len(pts) and x + w <= width and y + h <= height, "Interval or crop lies outside the source")

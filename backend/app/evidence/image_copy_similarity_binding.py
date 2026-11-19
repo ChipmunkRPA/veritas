@@ -46,7 +46,8 @@ PNG_DIAGONAL_EXACT_VERSION = "image-evidence-46"
 WEBP_DIAGONAL_EXACT_VERSION = "image-evidence-47"
 JPEG_DIAGONAL_VERSION = "image-evidence-48"
 JPEG_DIAGONAL_Q90_VERSION = "image-evidence-49"
-JPEG_DIAGONAL_VERSIONS = frozenset({JPEG_DIAGONAL_VERSION, JPEG_DIAGONAL_Q90_VERSION})
+JPEG_DIAGONAL_Q92_VERSION = "image-evidence-50"
+JPEG_DIAGONAL_VERSIONS = frozenset({JPEG_DIAGONAL_VERSION, JPEG_DIAGONAL_Q90_VERSION, JPEG_DIAGONAL_Q92_VERSION})
 DIAGONAL_EXACT_VERSIONS = frozenset({PNG_DIAGONAL_EXACT_VERSION, WEBP_DIAGONAL_EXACT_VERSION})
 PNG_THREE_EXACT_VERSIONS = frozenset({PNG_THREE_EXACT_VERSION, PNG_THREE_EXACT_AFFINE_VERSION, PNG_DIAGONAL_EXACT_VERSION})
 WEBP_THREE_EXACT_VERSIONS = frozenset({WEBP_THREE_EXACT_VERSION, WEBP_THREE_EXACT_AFFINE_VERSION, WEBP_DIAGONAL_EXACT_VERSION})
@@ -188,6 +189,8 @@ JPEG_DIAGONAL_COVERAGE = {
 }
 JPEG_DIAGONAL_Q90_SCOPE = ("The diagonal check covers upright color images with the tested JPEG 75 compression tables, "
                            "or single-image baseline JPEGs with the tested JPEG 90 compression tables.")
+JPEG_DIAGONAL_Q92_SCOPE = ("The diagonal check covers upright color images with the tested JPEG 75 tables and single-image "
+                           "baseline JPEGs with the tested JPEG 90 or browser-export JPEG 92 tables.")
 OFFGRID_STATUS_TEXT = {
     "supported_pair": "The aligned crops have closely matching color values inside and more different surroundings on at least three sides.",
     "no_pair": ("The between-block JPEG check found no qualifying repeated area. "
@@ -273,16 +276,23 @@ def jpeg_diagonal_displacement(boxes, transform):
     raise ValueError("A diagonal JPEG witness has an invalid reflection direction")
 
 
+def browser_diagonal_predecessors_unavailable(translation: dict) -> bool:
+    return all((translation[key] or {}).get("status") == "unsupported_profile"
+               for key in ("jpeg_offgrid_review", "jpeg_turned_review"))
+
+
 def jpeg_diagonal_admitted(document: dict) -> bool:
     if (document["version"] not in JPEG_DIAGONAL_VERSIONS
             or not jpeg_diagonal_size(document["source"]["width"], document["source"]["height"])):
         return False
     translation = document["copy_translation"]
+    predecessor_profiles = ((translation["jpeg_offgrid_review"] or {}).get("status"),
+                            (translation["jpeg_turned_review"] or {}).get("status"))
     return (
         translation["basis"] in {None, JPEG_DIAGONAL_BASIS}
         and translation["jpeg_block_review"] == "no_pair"
-        and (translation["jpeg_offgrid_review"] or {}).get("status") == "no_pair"
-        and (translation["jpeg_turned_review"] or {}).get("status") == "no_pair"
+        and (predecessor_profiles == ("no_pair", "no_pair")
+             or document["version"] == JPEG_DIAGONAL_Q92_VERSION and browser_diagonal_predecessors_unavailable(translation))
         and all(document[key]["status"] in {"no_pair", "unsupported_geometry"}
                 for key in ("copy_similarity", "copy_affine"))
     )

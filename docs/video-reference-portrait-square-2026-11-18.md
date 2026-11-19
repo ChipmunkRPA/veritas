@@ -84,3 +84,55 @@ The compressed [portable receipt](evaluation-panels/video-reference-portrait-squ
 preserves frozen runner and implementation hashes. The reconstruction uses the
 application's local dependencies and FFmpeg. The default recount uses Python's
 standard library and makes no network calls.
+
+## Earlier-copy comparison on short landscape 720p clips
+
+Enable `VERITAS_VIDEO_REFERENCE_SHORT720_LOCAL_AREA=true` with the existing
+earlier-video comparison in a development instance. This mode checks two
+upright 1280 × 720 H.264 AVC1 MP4 files with 66–78 pictures and matching,
+zero-origin picture instants at exactly 30 or 30,000/1,001 fps. Each file can
+use a 30 kHz or 90 kHz time base. Matching playback times do not require equal
+native tick values. A separate MP4 timing-table check verifies the full
+picture duration and edit-list timing for each original.
+
+Six distinct retained camera recordings supplied 48 new comparisons. Three
+sources were native 720p. Two 1080p captures were resized down and one
+960 × 544 capture was resized up. The original pictures stayed in the same
+order. Half the deliveries used an exact 29.97 fps timeline. A fixed masked
+local tone edit and a separate neighboring-texture replacement supplied the
+known changes. All deliveries used H.264 software encoding, including direct
+and second-encode controls. [VCD2 source terms](video-vcd2-unseen-controls-v287-method.md)
+· [Wikitongues donor terms](https://wikitongues.org/wp-content/uploads/2024/09/Wikitongues-Recording-an-Oral-History-Sep-2024.pdf)
+
+| Held outcome | Previous localized comparison | With short 720p comparison |
+| --- | ---: | ---: |
+| Edits meeting both location criteria | 0/12 | 10/12 |
+| Exact authored start and end | 0/12 | 5/12 |
+| Local tone / texture edits located | 0/6, 0/6 | 5/6, 5/6 |
+| Ordinary pairs with a local range | 0/24 | 0/24 |
+| Different recordings with a local range | 0/6 | 0/6 |
+| Different picture clocks excluded | 6/6 | 6/6 |
+
+The same pre-existing picture score and thresholds were used. The match
+criteria were 0.50 temporal overlap and 0.10 changed-pixel overlap at the
+selected middle frame. All ten reported ranges met both criteria. Both
+misses came from one 29.97 fps source with insufficient background picture
+support. Three ordinary pairs from that source were also unassessed. A native
+replay checked all 60 reported frame/crop anchors, and a separate FFmpeg
+replay independently checked one pair at each frame rate. Their ranges were
+2/3–14/15 seconds and 7,007/7,500–1,001/750 seconds. The study measures paired
+picture changes in authored fixtures. The comparison adds zero AI confidence.
+
+Some MP4 writers use a 1 kHz movie clock. It can represent the duration of the
+tested 66-picture 30 fps clips exactly. It rounds the duration of the tested
+78-picture 29.97 fps clips. A byte-preserving remux confirmed that the check
+withholds the local comparison on those rounded-duration files even when
+their H.264 packets and picture timestamps match.
+
+Three isolated, simulated USD $9.99 payments completed the original-video
+analyses. Six subsequent comparisons preserved the underlying results and
+created no extra jobs or charges. Five Chromium uploads exercised both rates,
+ordinary recompression, an unrelated copy and a different cadence. The JSON
+and PDF downloads matched the comparison API responses. All three original
+analysis archives reverified against their uploads. [Anonymous held and app
+verification receipt](evaluation-panels/video-reference-720p-exact-2026-11-19.json)

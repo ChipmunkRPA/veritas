@@ -83,8 +83,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     from app.evidence.stereo_repetition_binding import OPUS_UNAVAILABLE
 
     identical_channels = IDENTICAL_CHANNEL_PCM in source
+    brief_identical_channels = brief_voice.IDENTICAL_CHANNEL_PCM in source
     decoded = decode_audio(original, source_sha256=source_sha256, max_seconds=600.0 if kind == "audio" else 120.0,
-                           inspect_stereo=stereo is not None, retain_stereo=repeated is not None or identical_channels)
+                           inspect_stereo=stereo is not None,
+                           retain_stereo=repeated is not None or identical_channels or brief_identical_channels)
     with original.open("rb") as stream:
         if hashlib.file_digest(stream, "sha256").hexdigest() != source_sha256:
             raise ValueError("The supplied original changed during decoding")
@@ -101,12 +103,20 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if not (pin := identical_stereo_proof(decoded)) or source[IDENTICAL_CHANNEL_PCM] != pin:
             raise ValueError("The analyzed samples differ from the identical source channel commitment")
         decoded.mapping[IDENTICAL_CHANNEL_PCM] = pin
+    if brief_identical_channels:
+        from app.evidence.audio_brief_voice import identical_stereo_proof as brief_stereo_proof
+
+        if (kind != "audio" or (audio.get(brief_voice.KEY) or {}).get("schema") != brief_voice.IDENTICAL_STEREO_SCHEMA
+                or not (pin := brief_stereo_proof(decoded)) or source[brief_voice.IDENTICAL_CHANNEL_PCM] != pin
+                or any(source.get(key) != decoded.mapping.get(key) for key in ("source_time_base", "source_start_pts"))):
+            raise ValueError("The brief speech samples differ from the two identical original channels")
+        decoded.mapping[brief_voice.IDENTICAL_CHANNEL_PCM] = pin
     if "source_codec" in source and not source_metadata_matches(source, decoded.mapping):
         raise ValueError("Audio codec scope differs from the original container")
     if audio["coverage"]["decode_limit_reached"] != (len(decoded.pcm) >= decoded.mapping["limit_samples"]):
         raise ValueError("Decoded audio duration disagrees with the recorded coverage limit")
 
-    replay_detail = " Verified that both recorded channels match the analyzed audio." if identical_channels else ""
+    replay_detail = " Verified that both recorded channels match the analyzed audio." if identical_channels or brief_identical_channels else ""
     covered = set()
     intervals = 0
     if comparison := audio.get("soundtrack_pair"):

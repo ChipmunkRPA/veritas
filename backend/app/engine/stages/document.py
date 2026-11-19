@@ -59,6 +59,8 @@ from app.evidence import (
     document_passage_intervals,
     document_pdf_visibility,
     document_published_wording,
+    document_reference_links,
+    document_reference_links_binding,
     document_saved_link_hosts,
     document_saved_link_hosts_binding,
     document_scope,
@@ -118,6 +120,12 @@ def decode(ctx: StageContext) -> dict[str, Any]:
         remaining = ctx.deadline.remaining()
         if remaining is None or remaining >= budget + 1:
             saved_links = document_saved_link_hosts.inspect_within(path, timeout=budget, source_sha256=doc.meta["original_sha256"])
+    supports_reference_links = doc.meta.get(document_scope.HTML_STATIC_KEY) == document_scope.HTML_STATIC_POLICY and (
+        doc.meta.get("method") == "html")
+    references = None
+    if supports_reference_links and not provenance_gate.stop(ctx):
+        ctx.check("numbered reference link positions")
+        references = document_reference_links.inspect(path, path.suffix.casefold(), source_sha256=doc.meta["original_sha256"])
     if (doc.meta.get(document_pdf_visibility.KEY, {}).get("covered_locations")
             or document_tracked_changes.unsupported(doc.word_review) or document_tracked_changes.projected(doc.word_review)):
         # Retain source evidence even when little usable writing remains.
@@ -143,6 +151,8 @@ def decode(ctx: StageContext) -> dict[str, Any]:
             **({document_disclosure_heading.KEY: heading_record} if heading_record else {}),
             **({document_saved_link_hosts_binding.POLICY: document_saved_link_hosts_binding.SCHEMA} if supports_link_review else {}),
             **({document_saved_link_hosts_binding.KEY: saved_links} if saved_links else {}),
+            **({document_reference_links_binding.POLICY: document_reference_links_binding.SCHEMA} if supports_reference_links else {}),
+            **({document_reference_links_binding.KEY: references} if references else {}),
             **({document_tracked_changes.KEY: doc.word_review} if doc.word_review is not None else {})}
 
 
@@ -167,6 +177,10 @@ def current_decode_output(output: Any, *, require_current_layout_reader: bool = 
                   or (output["meta"].get("email") or {}).get("body_content_type") == "text/html")
     if (require_current_layout_reader and html_input
             and output["meta"].get(document_scope.HTML_STATIC_KEY) not in document_scope.HTML_STATIC_POLICIES):
+        return False
+    if (require_current_layout_reader and output["meta"].get("method") == "html"
+            and output["meta"].get(document_scope.HTML_STATIC_KEY) == document_scope.HTML_STATIC_POLICY
+            and output.get(document_reference_links_binding.POLICY) != document_reference_links_binding.SCHEMA):
         return False
     if (require_current_layout_reader and output["meta"].get("method") == "email"
             and output["meta"].get(email_body.READER_KEY) != email_body.SELECTION_POLICY):
@@ -725,6 +739,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         result.manifest.sampling[document_disclosure_heading.COMMITMENT] = canonical_hash(disclosure_heading)
     if saved_links := decoded.get(document_saved_link_hosts_binding.KEY):
         result.manifest.sampling[document_saved_link_hosts_binding.COMMITMENT] = canonical_hash(saved_links)
+    if reference_links := decoded.get(document_reference_links_binding.KEY):
+        result.manifest.sampling[document_reference_links_binding.COMMITMENT] = canonical_hash(reference_links)
     detected = ctx.outputs.get("detect") or {}
     verified_credentials = provenance_gate.stop(ctx)
     if not verified_credentials and (reading := detected.get(document_character_review.KEY)):

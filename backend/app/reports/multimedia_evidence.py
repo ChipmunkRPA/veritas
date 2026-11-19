@@ -188,6 +188,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
             document_passage_intervals,
             document_pdf_history_binding,
             document_published_wording,
+            document_reference_links_binding,
             document_saved_link_hosts_binding,
             document_tracked_changes,
             document_word_visibility,
@@ -200,6 +201,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
                 or source.get(document_disclosure_heading.COMMITMENT) != sampling.get(document_disclosure_heading.COMMITMENT)
                 or source.get(document_doi_reference.COMMITMENT) != document_doi_reference.from_result(result)
                 or source.get(document_saved_link_hosts_binding.COMMITMENT) != document_saved_link_hosts_binding.from_result(result)
+                or source.get(document_reference_links_binding.COMMITMENT) != document_reference_links_binding.from_result(result)
                 or source.get(document_word_visibility.COMMITMENT) != document_word_visibility.from_result(result)
                 or source.get(document_invisible_characters.COMMITMENT) != document_invisible_characters.from_result(result)
                 or source.get(document_character_review.COMMITMENT) != document_character_review.result_commitment(result)
@@ -686,6 +688,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_percentage_consistency,
         document_publication_ids,
         document_published_wording,
+        document_reference_links_binding,
         document_saved_link_hosts_binding,
         document_tracked_changes,
         document_unselected_responses,
@@ -765,6 +768,8 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
             commitment=document_doi_reference.from_result(result) if result is not None else source.get(document_doi_reference.COMMITMENT))
         document_saved_link_hosts_binding.verify_record(document, decoded.get(document_saved_link_hosts_binding.KEY),
             commitment=document_saved_link_hosts_binding.from_result(result) if result is not None else source.get(document_saved_link_hosts_binding.COMMITMENT))
+        document_reference_links_binding.verify_record(document, decoded.get(document_reference_links_binding.KEY),
+            commitment=document_reference_links_binding.from_result(result) if result is not None else source.get(document_reference_links_binding.COMMITMENT))
         document_pdf_visibility.verify_source(document, decoded["meta"], frozen=True)
         if history := coverage.get(document_pdf_history_binding.KEY):
             submitted = _bytes(source["sha256"], store)
@@ -1772,6 +1777,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "printed_ai_use_heading": document.get("printed_ai_use_heading") if not withheld else None,
             "doi_reference_consistency": document.get("doi_reference_consistency"),
             "saved_link_hosts": document.get("saved_link_hosts") if not withheld else None,
+            "reference_link_discrepancies": document.get("reference_link_discrepancies") if not withheld else None,
             "picture_hold": copy.deepcopy(document.get("picture_hold")),
             "scene_return_review": (document.get("coverage") or {}).get("scene_return_review") if kind == "video" else None,
             "lip_timing_review": document.get("lip_timing_review") if kind == "video" else None,

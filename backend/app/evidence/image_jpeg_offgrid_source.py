@@ -21,6 +21,7 @@ _STANDARD_TABLES = {
     "db12807ffe7ea7d208d803a4ad9d156e941af36754c009d3ec5de5aae4112903": 75,
     "25bb3739664e47c1cd8aadf2ff486d477738b962bc84a097ae7bab5d88084a12": 85,
     "4a947d5d753cb42d30d364a580030dd557d37404f5e12e09378359b0e9e397ac": 90,
+    "7337a8c177cd38278f043d55b727b3b1cecce0b52742bc4082e6e36eedf539d7": 92,
     "b40e056724db43022fcc08475520e2fda95cb91c31551a5dc0f9f9f6b50b1ddc": 95,
 }
 _QUANTIZATION_SHA256 = frozenset(digest for digest, profile in _STANDARD_TABLES.items() if profile in {75, 90})

@@ -119,6 +119,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         JPEG_DIAGONAL_KEY,
         JPEG_DIAGONAL_Q90_SCOPE,
         JPEG_DIAGONAL_Q90_VERSION,
+        JPEG_DIAGONAL_Q92_SCOPE,
+        JPEG_DIAGONAL_Q92_VERSION,
         MULTI_EXACT_KEY,
         MULTI_EXACT_STATUS,
         NATIVE_JPEG_ROTATION_VERSIONS,
@@ -237,8 +239,10 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             elif review := check.get(JPEG_DIAGONAL_KEY):
                 check["title"] = "JPEG diagonal copy comparison"
                 check["observation"] = JPEG_DIAGONAL_COVERAGE[review["status"]]
-                if base_version == JPEG_DIAGONAL_Q90_VERSION and review["status"] == "unsupported_profile":
-                    check["observation"] = JPEG_DIAGONAL_Q90_SCOPE
+                if review["status"] == "unsupported_profile":
+                    check["observation"] = {JPEG_DIAGONAL_Q90_VERSION: JPEG_DIAGONAL_Q90_SCOPE,
+                                            JPEG_DIAGONAL_Q92_VERSION: JPEG_DIAGONAL_Q92_SCOPE}.get(
+                                                base_version, check["observation"])
                 if measured := review["measurement"]:
                     transform = check["pairs"][0]["transform"]
                     axis = ("top-left to bottom-right" if transform == "top_left_to_bottom_right"

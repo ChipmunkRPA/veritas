@@ -671,6 +671,18 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
       </section>}
     {set.doi_reference_consistency && <DoiReferenceCheck review={set.doi_reference_consistency} />}
     {set.saved_link_hosts && <SavedLinkDestinations review={set.saved_link_hosts} />}
+    {set.reference_link_discrepancies && <section id="document-reference-links" aria-labelledby="document-reference-links-title" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="document-reference-links-title" className="m-0 text-body font-medium">Numbered reference links</h3>
+      <p className="mt-2 mb-0 text-small">The displayed citation number differs from the number printed at its saved destination. This check compares links inside the submitted HTML. These observations carry zero weight in the AI assessment.</p>
+      <ul className="mt-3 list-none space-y-3 pl-0 text-small">
+        {set.reference_link_discrepancies.findings.map(({ label_number, target_number, label_range, target_range }) => <li key={label_range[0]}>
+          <p className="m-0">Displayed citation <strong>[{label_number}]</strong>. Number at saved destination <strong>{target_number}</strong>.</p>
+          <p className="m-0 text-caption text-text-muted">Decoded HTML characters. Citation <span className="font-mono">[{label_range[0]}, {label_range[1]})</span>. Destination number <span className="font-mono">[{target_range[0]}, {target_range[1]})</span>.</p>
+        </li>)}
+      </ul>
+      {set.reference_link_discrepancies.mismatches > set.reference_link_discrepancies.findings.length &&
+        <p className="mt-2 mb-0 text-caption text-text-muted">Showing the first {set.reference_link_discrepancies.findings.length} of {set.reference_link_discrepancies.mismatches} differences.</p>}
+    </section>}
     {set.coverage?.chat_format_markers && <ChatFormatMarkers review={set.coverage.chat_format_markers} />}
     {invisible && <section aria-labelledby="document-invisible-characters" className="mt-4 rounded-md border border-border p-4">
       <h3 id="document-invisible-characters" className="m-0 text-body font-medium">

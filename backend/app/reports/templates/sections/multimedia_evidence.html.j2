@@ -321,6 +321,21 @@ JSON pointer <span class="mono">/printed_ai_use_heading</span>.</p>
 {% endfor %}
 {% if saved_links.omitted %}<p class="caption">Showing the first {{ saved_links.findings | length }} of {{ saved_links.counts.different_host }} comparisons with a different hostname.</p>{% endif %}
 {% endif %}
+{% set reference_links = evidence.get('reference_link_discrepancies') %}
+{% if reference_links %}
+<h3 id="document-reference-links">Numbered reference links</h3>
+<p>The displayed citation number differs from the number printed at its saved destination. This check compares links inside the submitted HTML. These observations carry zero weight in the AI assessment.</p>
+{% for row in reference_links.findings %}
+<article class="multimedia-evidence-packet">
+<dl class="evidence-measurements">
+<div><dt>Displayed citation</dt><dd>[{{ row.label_number }}]</dd></div>
+<div><dt>Number at saved destination</dt><dd>{{ row.target_number }}</dd></div>
+</dl>
+<p class="caption">Decoded HTML characters. Citation [{{ row.label_range[0] }}, {{ row.label_range[1] }}). Destination number [{{ row.target_range[0] }}, {{ row.target_range[1] }}).<br>JSON pointer <span class="mono">/reference_link_discrepancies/findings/{{ loop.index0 }}</span>.</p>
+</article>
+{% endfor %}
+{% if reference_links.mismatches > reference_links.findings | length %}<p class="caption">Showing the first {{ reference_links.findings | length }} of {{ reference_links.mismatches }} differences.</p>{% endif %}
+{% endif %}
 {% set quantities = evidence.get('percentage_consistency') %}
 {% if quantities %}
 <h3 id="document-percentage-consistency">Repeated percentage statements</h3>
@@ -450,6 +465,7 @@ Original source ticks [{{ window.native_source_range.start_pts }}, {{ window.nat
 {% if evidence.get('brief_voice_review') %}
 {% set review = evidence.brief_voice_review %}
 <h3 id="multimedia-brief-voice-review">Brief speech windows</h3>
+{% if review.schema == 'chipmunk.brief-voice-review/2' %}<p class="caption">Both recorded channels contain exactly the same samples as the analyzed mono audio.</p>{% endif %}
 <p class="caption">{% if review.status == 'skipped' %}Skipped. {% endif %}{{ review.reason }}
 {% if review.status != 'skipped' %}{{ review.speech_windows_checked }} of {{ review.scheduled_windows }} scheduled windows had enough detected speech to check.{% endif %}</p>
 {% for window in review.windows %}
@@ -982,7 +998,7 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% if evidence.stereo_repetition.get('rate_measurement') and evidence.stereo_repetition.rate_measurement.pairs %}{% set stereo_repeats.found = true %}{% endif %}
 {% for row in evidence.stereo_repetition.channels %}{% if row.measurement.pairs or (row.get('gain_measurement') and row.gain_measurement.pairs) %}{% set stereo_repeats.found = true %}{% endif %}{% endfor %}
 {% endif %}
-{% if not stereo_repeats.found and not (evidence.get('background_reduced_voice_review') and evidence.background_reduced_voice_review.status == 'flagged') and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') and not (evidence.get('percentage_consistency') and evidence.percentage_consistency.groups) and not evidence.get('printed_ai_use_heading') and not (evidence.get('doi_reference_consistency') and evidence.doi_reference_consistency.different_work) and not (evidence.get('saved_link_hosts') and evidence.saved_link_hosts.findings) %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
+{% if not stereo_repeats.found and not (evidence.get('background_reduced_voice_review') and evidence.background_reduced_voice_review.status == 'flagged') and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') and not (evidence.get('percentage_consistency') and evidence.percentage_consistency.groups) and not evidence.get('printed_ai_use_heading') and not (evidence.get('doi_reference_consistency') and evidence.doi_reference_consistency.different_work) and not (evidence.get('saved_link_hosts') and evidence.saved_link_hosts.findings) and not evidence.get('reference_link_discrepancies') %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
 {% if evidence.omitted %}<p class="caption">{{ evidence.omitted }} additional candidates were omitted from this bounded evidence set.</p>{% endif %}
 {% for note in evidence.limitations %}<p class="caption">{{ note }}</p>{% endfor %}
 {% endif %}

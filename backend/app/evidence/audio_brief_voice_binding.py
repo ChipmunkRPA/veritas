@@ -10,6 +10,9 @@ from app.evidence.audio_long_review_binding import supported_source as supported
 
 KEY = "brief_voice_review"
 SCHEMA = "chipmunk.brief-voice-review/1"
+IDENTICAL_STEREO_SCHEMA = "chipmunk.brief-voice-review/2"
+IDENTICAL_CHANNEL_PCM = "brief_identical_stereo_channel_pcm_sha256"
+IDENTICAL_CHANNEL_NOTICE = "Both recorded channels contain exactly the same samples as the analyzed mono audio."
 DETECTOR_ID = "aud.brief_voice_review"
 TITLE = "Brief speech windows"
 RATE, SAMPLES, WIDTH, STEP = 16000, 192000, 12000, 8000
@@ -32,8 +35,24 @@ SKIP_REASONS = {TIMEOUT, TIME_BUDGET, UNAVAILABLE}
 
 
 def supported_source(source: dict) -> bool:
-    return (source.get("samples") == SAMPLES and source.get("source_codec") in SOURCE_CODECS
-            and supported_native_source(source))
+    native = (source.get("samples") == SAMPLES and source.get("source_codec") in SOURCE_CODECS
+              and supported_native_source(source))
+    pin = source.get(IDENTICAL_CHANNEL_PCM)
+    return native or (eligible_stereo_source(source) and isinstance(pin, str) and SHA.fullmatch(pin) is not None)
+
+
+def eligible_stereo_source(source: dict) -> bool:
+    """Scope for proving both original channels equal every analyzed sample."""
+    return (source.get("samples") == SAMPLES and source.get("source_channels") == 2
+            and source.get("source_time_base") == "1/16000"
+            and (source.get("source_start_pts") == 0 or (
+                source.get("source_container") == "wav" and source.get("source_start_pts") is None))
+            and source.get("source_codec") in SOURCE_CODECS
+            and supported_native_source({**source, "source_channels": 1}))
+
+
+def source_schema(source: dict) -> str:
+    return IDENTICAL_STEREO_SCHEMA if source.get("source_channels") == 2 else SCHEMA
 
 
 def selected_indices(checks: list[dict]) -> list[int]:
@@ -53,9 +72,9 @@ def status(checks, selected):
     return "no_flag" if pair_checked else "unassessed"
 
 
-def presentation(checks: list[dict], *, reason: str | None = None) -> dict:
+def presentation(checks: list[dict], *, reason: str | None = None, schema: str = SCHEMA) -> dict:
     outcome = "skipped" if reason is not None else status(checks, selected_indices(checks))
-    return {"schema": SCHEMA, "status": outcome, "reason": reason if reason is not None else REASONS[outcome],
+    return {"schema": schema, "status": outcome, "reason": reason if reason is not None else REASONS[outcome],
             "limitation": LIMITATION, "affects_overall_confidence": False,
             "scheduled_windows": len(GRID), "speech_windows_checked": sum(row["elevated"] is not None for row in checks),
             "window_checks": checks}
@@ -107,8 +126,9 @@ def window_fields(i):
 
 
 def validate(review, source):
-    if not supported_source(source) or not isinstance(review, dict):
-        raise ValueError("The brief speech review requires an exact twelve-second native mono PCM16 WAV or FLAC")
+    if (not supported_source(source) or not isinstance(review, dict)
+            or review.get("schema") != source_schema(source)):
+        raise ValueError("The brief speech review requires exact twelve-second native PCM16 WAV or FLAC with supported channels")
     reason = review.get("reason") if review.get("status") == "skipped" else None
     checks = review.get("window_checks")
     if review.get("status") == "skipped":
@@ -116,7 +136,7 @@ def validate(review, source):
             raise ValueError("Invalid unavailable brief speech review")
     else:
         _validate_checks(checks)
-    expected = presentation(checks, reason=reason)
+    expected = presentation(checks, reason=reason, schema=review["schema"])
     windows = review.get("windows")
     indices = selected_indices(checks)
     if (set(review) != {*expected, "windows"} or {key: review[key] for key in expected} != expected

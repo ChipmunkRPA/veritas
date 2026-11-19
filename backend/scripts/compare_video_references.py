@@ -32,7 +32,7 @@ from app.evidence.video_reference import (
     compare,
 )
 from app.evidence.video_reference_photometric import BASIS as LOCAL_AREA_BASIS
-from app.evidence.video_reference_photometric import SHORT30_BASIS
+from app.evidence.video_reference_photometric import SHORT30_BASIS, SHORT720_BASIS
 from app.evidence.video_reference_soundtrack import QUIET_BASIS, SHORT_BASIS
 from app.evidence.video_reference_timing import SHORT_WAVEFORM_BASIS
 
@@ -79,6 +79,7 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
         sound_difference: bool = False) -> dict:
     options = {"include_trimmed": not verify, "include_local_area": not verify, "include_trim_reencoded": not verify,
                "include_short30_local_area": not verify,
+               "include_short720_local_area": not verify,
                "include_measured_interval": not verify, "include_soundtrack_reencode": reencoded_soundtrack,
                "include_hd_soundtrack_reencode": reencoded_soundtrack,
                "include_quiet_soundtrack": reencoded_soundtrack,
@@ -127,6 +128,7 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False,
             local = record.get("picture", {}).get("local_comparison", {})
             options["include_local_area"] = local.get("basis") == LOCAL_AREA_BASIS
             options["include_short30_local_area"] = local.get("basis") == SHORT30_BASIS
+            options["include_short720_local_area"] = local.get("basis") == SHORT720_BASIS
             options["include_measured_interval"] = "measured_interval" in local
             options.update(include_local=("local_comparison" in record.get("picture", {}) if composite
                                           else schema != SCHEMA),

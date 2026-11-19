@@ -299,6 +299,7 @@ class Settings(BaseSettings):
     video_soundtrack_short_difference_review: bool = False  # Compare short, same-time differences between two mono tracks.
     video_reference_local_area: bool = False  # Qualified short 720 x 480 earlier-copy picture evidence.
     video_reference_short30_local_area: bool = False  # Earlier-copy picture evidence for short portrait and square 30 fps clips.
+    video_reference_short720_local_area: bool = False  # Optional 720p earlier-copy picture evidence on exact 30 or 29.97 fps clocks.
     video_reference_measured_interval: bool = False  # Show strongly supported frame boundaries for qualified local picture ranges.
     video_reference_soundtrack_reencode: bool = False  # Compare local sound timing in qualified SD and 720p H.264 re-encodes.
     video_reference_short_soundtrack: bool = False  # Additional short-window pass for qualified 720p25 pairs.
@@ -334,6 +335,7 @@ class Settings(BaseSettings):
     image_jpeg_disjoint_rotation_review: bool = False  # Report two independent rotated copy pairs on that native grid.
     image_jpeg_diagonal_copy_review: bool = False  # Compare two JPEG crops with a diagonal reflection and displacement.
     image_jpeg_diagonal_q90_review: bool = False  # Extend diagonal copy evidence to the tested baseline JPEG 90 tables.
+    image_jpeg_diagonal_q92_review: bool = False  # Also admit the tested browser-export JPEG tables.
     image_embedded_pair_review: bool = False  # Development-only exact differences between two matching PNG areas.
     image_small_png_copy_review: bool = False  # Optional local exact copy evidence for eligible PNGs.
     image_lossless_webp_copy_review: bool = False  # Optional local exact copy evidence on the native WebP grid.
@@ -362,7 +364,7 @@ class Settings(BaseSettings):
     audio_focused_long_review: bool = False  # Optional source-clock review with overlapping native speech windows.
     audio_focused_long_48k_review: bool = False  # Local trial for continuous 48 kHz mono PCM16 WAV.
     audio_two_second_long_review: bool = False  # Local overlapping two-second check for nine- to fourteen-second lossless audio.
-    audio_brief_voice_review: bool = False  # Local exact 750 ms listening leads on twelve-second native mono WAV.
+    audio_brief_voice_review: bool = False  # Exact 750 ms listening leads on native mono or identical-channel WAV and FLAC.
     audio_two_second_long_confirmation: bool = False  # Require a second overlapping elevated response for a reported window.
     audio_two_second_long_48k_review: bool = False  # Confirm two-second speech windows in verified 48 kHz lossless audio.
     audio_two_second_long_aac48_review: bool = False  # Confirm two-second windows within a verified 48 kHz AAC presentation.

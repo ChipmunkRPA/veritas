@@ -101,9 +101,23 @@ describe('brief source-linked speech windows', () => {
     expect(screen.queryByRole('region', { name: 'Brief speech windows' })).toBeNull()
   })
 
-  it('counts the paired review as selected evidence in the overall evidence view', () => {
-    render(<MemoryRouter><MultimediaEvidenceContent set={fixture()} token="signed token" mediaReady /></MemoryRouter>)
+  it.each(['chipmunk.brief-voice-review/1', 'chipmunk.brief-voice-review/2'] as const)('counts %s as selected evidence', schema => {
+    const set = fixture()
+    set.brief_voice_review!.schema = schema
+    render(<MemoryRouter><MultimediaEvidenceContent set={set} token="signed token" mediaReady /></MemoryRouter>)
     expect(section().getAllByRole('listitem')).toHaveLength(2)
     expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
+  })
+
+  it('identifies the exact two-channel source only for its versioned proof', () => {
+    const set = fixture()
+    set.brief_voice_review!.schema = 'chipmunk.brief-voice-review/2'
+    set.source.source_channels = 2
+    set.source.brief_identical_stereo_channel_pcm_sha256 = 'a'.repeat(64)
+    const { rerender } = render(page(set))
+    expect(section().getByText('Both recorded channels contain exactly the same samples as the analyzed mono audio.')).toBeTruthy()
+    set.brief_voice_review!.schema = 'chipmunk.brief-voice-review/1'
+    rerender(page(set))
+    expect(section().queryByText('Both recorded channels contain exactly the same samples as the analyzed mono audio.')).toBeNull()
   })
 })

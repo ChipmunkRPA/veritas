@@ -38,6 +38,7 @@ from app.evidence.image_copy_similarity_binding import (
     WEBP_EXACT_REFLECTION_KEY,
     WEBP_MULTI_EXACT_VERSIONS,
     box_bounds,
+    browser_diagonal_predecessors_unavailable,
     copy_records,
     native_rotation_size,
 )
@@ -286,7 +287,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
             version = embedded_pair.base_document(evidence)["version"]
             verify(data, np.asarray(source), translation["pairs"][0], translation[JPEG_DIAGONAL_KEY]["measurement"],
-                   version=version)
+                   version=version, browser_predecessors_unavailable=browser_diagonal_predecessors_unavailable(translation))
         if turned_jpeg:
             import numpy as np
 

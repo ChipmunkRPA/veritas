@@ -28,6 +28,7 @@ from app.evidence import (
 )
 from app.evidence.image_copy_similarity_binding import (
     JPEG_DIAGONAL_Q90_VERSION,
+    JPEG_DIAGONAL_Q92_VERSION,
     JPEG_DIAGONAL_VERSION,
     V7,
     V8,
@@ -670,16 +671,20 @@ def test_native_rotation_scope_requires_a_supported_encoded_jpeg(
     assert len(calls) == int(supported)
 
 
-@pytest.mark.parametrize(("quality", "progressive", "sampling", "orientation", "legacy", "extended"), [
-    (75, False, 2, 1, True, True),
-    (75, True, 2, 1, True, True),
-    (90, False, 2, 1, False, True),
-    (90, True, 2, 1, False, False),
-    (90, False, 0, 1, False, False),
-    (90, False, 2, 6, False, False),
-    (92, False, 2, 1, False, False),
+@pytest.mark.parametrize(("quality", "progressive", "sampling", "orientation", "legacy", "extended", "browser"), [
+    (75, False, 2, 1, True, True, False),
+    (75, True, 2, 1, True, True, False),
+    (90, False, 2, 1, False, True, False),
+    (90, True, 2, 1, False, False, False),
+    (90, False, 0, 1, False, False, False),
+    (90, False, 2, 6, False, False, False),
+    (92, False, 2, 1, False, False, True),
+    (92, True, 2, 1, False, False, False),
+    (92, False, 0, 1, False, False, False),
+    (92, False, 2, 6, False, False, False),
+    (93, False, 2, 1, False, False, False),
 ])
-def test_diagonal_jpeg_profile_uses_the_recorded_version(quality, progressive, sampling, orientation, legacy, extended):
+def test_diagonal_jpeg_profile_uses_the_recorded_version(quality, progressive, sampling, orientation, legacy, extended, browser):
     image = Image.new("RGB", (640, 512))
     exif = image.getexif()
     exif[274] = orientation
@@ -687,6 +692,9 @@ def test_diagonal_jpeg_profile_uses_the_recorded_version(quality, progressive, s
     rgb = np.asarray(image)
     assert image_jpeg_diagonal_source.supported(data, rgb, version=JPEG_DIAGONAL_VERSION) is legacy
     assert image_jpeg_diagonal_source.supported(data, rgb, version=JPEG_DIAGONAL_Q90_VERSION) is extended
+    assert image_jpeg_diagonal_source.supported(data, rgb, version=JPEG_DIAGONAL_Q92_VERSION) is extended
+    assert image_jpeg_diagonal_source.supported(data, rgb, version=JPEG_DIAGONAL_Q92_VERSION,
+                                                browser_predecessors_unavailable=True) is browser
     if not legacy:
         with pytest.raises(ValueError, match="supported upright JPEG"):
             image_jpeg_diagonal_source.verify(data, rgb, {"transform": "top_left_to_bottom_right"}, None,
@@ -700,25 +708,33 @@ def test_diagonal_jpeg_quality_90_requires_local_diagonal_review(monkeypatch):
                    "image_jpeg_diagonal_copy_review"):
         monkeypatch.setattr(settings, option, True)
     monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "image_jpeg_diagonal_q92_review", False)
     monkeypatch.setattr(settings, "image_jpeg_diagonal_q90_review", False)
     assert image_packets_v7._analysis_version(image) == JPEG_DIAGONAL_VERSION
     monkeypatch.setattr(settings, "image_jpeg_diagonal_q90_review", True)
     assert image_packets_v7._analysis_version(image) == JPEG_DIAGONAL_Q90_VERSION
+    monkeypatch.setattr(settings, "image_jpeg_diagonal_q92_review", True)
+    assert image_packets_v7._analysis_version(image) == JPEG_DIAGONAL_Q92_VERSION
     monkeypatch.setattr(settings, "image_jpeg_diagonal_copy_review", False)
     assert image_packets_v7._analysis_version(image) != JPEG_DIAGONAL_Q90_VERSION
+    assert image_packets_v7._analysis_version(image) != JPEG_DIAGONAL_Q92_VERSION
     monkeypatch.setattr(settings, "image_jpeg_diagonal_copy_review", True)
     monkeypatch.setattr(settings, "environment", "production")
     assert image_packets_v7._analysis_version(image) != JPEG_DIAGONAL_Q90_VERSION
+    assert image_packets_v7._analysis_version(image) != JPEG_DIAGONAL_Q92_VERSION
 
 
-def test_diagonal_jpeg_quality_90_requires_one_complete_encoded_image():
+@pytest.mark.parametrize("quality", [90, 92])
+def test_diagonal_jpeg_high_quality_requires_one_complete_encoded_image(quality):
     image = Image.new("RGB", (640, 512))
-    data = _bytes(image, format="JPEG", quality=90, subsampling=2)
-    multi_picture = _bytes(image, format="MPO", save_all=True, append_images=[image], quality=90, subsampling=2)
+    data = _bytes(image, format="JPEG", quality=quality, subsampling=2)
+    multi_picture = _bytes(image, format="MPO", save_all=True, append_images=[image], quality=quality, subsampling=2)
     rgb = np.asarray(image)
-    assert image_jpeg_diagonal_source.supported(data, rgb, version=JPEG_DIAGONAL_Q90_VERSION)
+    policy = {"version": JPEG_DIAGONAL_Q90_VERSION if quality == 90 else JPEG_DIAGONAL_Q92_VERSION,
+              "browser_predecessors_unavailable": quality == 92}
+    assert image_jpeg_diagonal_source.supported(data, rgb, **policy)
     for compound in (data + data, data[:-2], multi_picture):
-        assert not image_jpeg_diagonal_source.supported(compound, rgb, version=JPEG_DIAGONAL_Q90_VERSION)
+        assert not image_jpeg_diagonal_source.supported(compound, rgb, **policy)
 
 
 def test_small_png_copy_preserves_exact_crops_and_rejects_unsupported_sources(evidence_http, monkeypatch):

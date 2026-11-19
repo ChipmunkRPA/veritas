@@ -1,0 +1,911 @@
+{
+  "cases": [
+    {
+      "authored_picture_interval": [
+        18,
+        30
+      ],
+      "baseline_local_range": false,
+      "crop_count_replayed": 6,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 1,
+      "local_status": "local_difference",
+      "measured_picture_interval": [
+        20,
+        28
+      ],
+      "overlap_counts": {
+        "spatial": [
+          10978,
+          13597
+        ],
+        "temporal": [
+          8,
+          12
+        ]
+      },
+      "pictures": 66,
+      "role": "local_tone"
+    },
+    {
+      "authored_picture_interval": [
+        29,
+        45
+      ],
+      "baseline_local_range": false,
+      "crop_count_replayed": 6,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 1,
+      "local_status": "local_difference",
+      "measured_picture_interval": [
+        27,
+        43
+      ],
+      "overlap_counts": {
+        "spatial": [
+          8620,
+          10815
+        ],
+        "temporal": [
+          14,
+          18
+        ]
+      },
+      "pictures": 66,
+      "role": "neighbor_patch"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 1,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 66,
+      "role": "independent_encode"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 1,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 66,
+      "role": "recompressed"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 1,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 66,
+      "role": "global_tone"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 1,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 66,
+      "role": "global_flash"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 1,
+      "local_status": "unverified_photometric_support",
+      "measured_picture_interval": null,
+      "pictures": 66,
+      "role": "different_camera"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 1,
+      "local_status": null,
+      "measured_picture_interval": null,
+      "pictures": 66,
+      "role": "wrong_clock"
+    },
+    {
+      "authored_picture_interval": [
+        23,
+        35
+      ],
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 2,
+      "local_status": "unverified_photometric_support",
+      "measured_picture_interval": null,
+      "pictures": 72,
+      "role": "local_tone"
+    },
+    {
+      "authored_picture_interval": [
+        34,
+        50
+      ],
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 2,
+      "local_status": "unverified_photometric_support",
+      "measured_picture_interval": null,
+      "pictures": 72,
+      "role": "neighbor_patch"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 2,
+      "local_status": "unverified_photometric_support",
+      "measured_picture_interval": null,
+      "pictures": 72,
+      "role": "independent_encode"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 2,
+      "local_status": "unverified_photometric_support",
+      "measured_picture_interval": null,
+      "pictures": 72,
+      "role": "recompressed"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 2,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 72,
+      "role": "global_tone"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 2,
+      "local_status": "unverified_photometric_support",
+      "measured_picture_interval": null,
+      "pictures": 72,
+      "role": "global_flash"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 2,
+      "local_status": "insufficient_shared_picture_content",
+      "measured_picture_interval": null,
+      "pictures": 72,
+      "role": "different_camera"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 2,
+      "local_status": null,
+      "measured_picture_interval": null,
+      "pictures": 72,
+      "role": "wrong_clock"
+    },
+    {
+      "authored_picture_interval": [
+        28,
+        40
+      ],
+      "baseline_local_range": false,
+      "crop_count_replayed": 6,
+      "dataset": "vcd",
+      "frame_rate": "30000/1001",
+      "group": 3,
+      "local_status": "local_difference",
+      "measured_picture_interval": [
+        28,
+        40
+      ],
+      "overlap_counts": {
+        "spatial": [
+          11062,
+          14201
+        ],
+        "temporal": [
+          12,
+          12
+        ]
+      },
+      "pictures": 78,
+      "role": "local_tone"
+    },
+    {
+      "authored_picture_interval": [
+        39,
+        55
+      ],
+      "baseline_local_range": false,
+      "crop_count_replayed": 6,
+      "dataset": "vcd",
+      "frame_rate": "30000/1001",
+      "group": 3,
+      "local_status": "local_difference",
+      "measured_picture_interval": [
+        39,
+        55
+      ],
+      "overlap_counts": {
+        "spatial": [
+          8836,
+          10618
+        ],
+        "temporal": [
+          16,
+          16
+        ]
+      },
+      "pictures": 78,
+      "role": "neighbor_patch"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30000/1001",
+      "group": 3,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 78,
+      "role": "independent_encode"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30000/1001",
+      "group": 3,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 78,
+      "role": "recompressed"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30000/1001",
+      "group": 3,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 78,
+      "role": "global_tone"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30000/1001",
+      "group": 3,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 78,
+      "role": "global_flash"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30000/1001",
+      "group": 3,
+      "local_status": "insufficient_shared_picture_content",
+      "measured_picture_interval": null,
+      "pictures": 78,
+      "role": "different_camera"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30000/1001",
+      "group": 3,
+      "local_status": null,
+      "measured_picture_interval": null,
+      "pictures": 78,
+      "role": "wrong_clock"
+    },
+    {
+      "authored_picture_interval": [
+        33,
+        45
+      ],
+      "baseline_local_range": false,
+      "crop_count_replayed": 6,
+      "dataset": "wiki",
+      "frame_rate": "30",
+      "group": 4,
+      "local_status": "local_difference",
+      "measured_picture_interval": [
+        33,
+        45
+      ],
+      "overlap_counts": {
+        "spatial": [
+          10960,
+          13613
+        ],
+        "temporal": [
+          12,
+          12
+        ]
+      },
+      "pictures": 66,
+      "role": "local_tone"
+    },
+    {
+      "authored_picture_interval": [
+        44,
+        60
+      ],
+      "baseline_local_range": false,
+      "crop_count_replayed": 6,
+      "dataset": "wiki",
+      "frame_rate": "30",
+      "group": 4,
+      "local_status": "local_difference",
+      "measured_picture_interval": [
+        44,
+        60
+      ],
+      "overlap_counts": {
+        "spatial": [
+          8738,
+          11346
+        ],
+        "temporal": [
+          16,
+          16
+        ]
+      },
+      "pictures": 66,
+      "role": "neighbor_patch"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30",
+      "group": 4,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 66,
+      "role": "independent_encode"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30",
+      "group": 4,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 66,
+      "role": "recompressed"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30",
+      "group": 4,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 66,
+      "role": "global_tone"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30",
+      "group": 4,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 66,
+      "role": "global_flash"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30",
+      "group": 4,
+      "local_status": "insufficient_shared_picture_content",
+      "measured_picture_interval": null,
+      "pictures": 66,
+      "role": "different_camera"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30",
+      "group": 4,
+      "local_status": null,
+      "measured_picture_interval": null,
+      "pictures": 66,
+      "role": "wrong_clock"
+    },
+    {
+      "authored_picture_interval": [
+        21,
+        33
+      ],
+      "baseline_local_range": false,
+      "crop_count_replayed": 6,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 5,
+      "local_status": "local_difference",
+      "measured_picture_interval": [
+        23,
+        31
+      ],
+      "overlap_counts": {
+        "spatial": [
+          10961,
+          13590
+        ],
+        "temporal": [
+          8,
+          12
+        ]
+      },
+      "pictures": 72,
+      "role": "local_tone"
+    },
+    {
+      "authored_picture_interval": [
+        32,
+        48
+      ],
+      "baseline_local_range": false,
+      "crop_count_replayed": 6,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 5,
+      "local_status": "local_difference",
+      "measured_picture_interval": [
+        34,
+        46
+      ],
+      "overlap_counts": {
+        "spatial": [
+          8856,
+          11617
+        ],
+        "temporal": [
+          12,
+          16
+        ]
+      },
+      "pictures": 72,
+      "role": "neighbor_patch"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 5,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 72,
+      "role": "independent_encode"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 5,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 72,
+      "role": "recompressed"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 5,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 72,
+      "role": "global_tone"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 5,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 72,
+      "role": "global_flash"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 5,
+      "local_status": "insufficient_shared_picture_content",
+      "measured_picture_interval": null,
+      "pictures": 72,
+      "role": "different_camera"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "vcd",
+      "frame_rate": "30",
+      "group": 5,
+      "local_status": null,
+      "measured_picture_interval": null,
+      "pictures": 72,
+      "role": "wrong_clock"
+    },
+    {
+      "authored_picture_interval": [
+        26,
+        38
+      ],
+      "baseline_local_range": false,
+      "crop_count_replayed": 6,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 6,
+      "local_status": "local_difference",
+      "measured_picture_interval": [
+        26,
+        38
+      ],
+      "overlap_counts": {
+        "spatial": [
+          10977,
+          13615
+        ],
+        "temporal": [
+          12,
+          12
+        ]
+      },
+      "pictures": 78,
+      "role": "local_tone"
+    },
+    {
+      "authored_picture_interval": [
+        37,
+        53
+      ],
+      "baseline_local_range": false,
+      "crop_count_replayed": 6,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 6,
+      "local_status": "local_difference",
+      "measured_picture_interval": [
+        39,
+        51
+      ],
+      "overlap_counts": {
+        "spatial": [
+          9051,
+          11063
+        ],
+        "temporal": [
+          12,
+          16
+        ]
+      },
+      "pictures": 78,
+      "role": "neighbor_patch"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 6,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 78,
+      "role": "independent_encode"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 6,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 78,
+      "role": "recompressed"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 6,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 78,
+      "role": "global_tone"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 6,
+      "local_status": "no_local_range",
+      "measured_picture_interval": null,
+      "pictures": 78,
+      "role": "global_flash"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 6,
+      "local_status": "insufficient_shared_picture_content",
+      "measured_picture_interval": null,
+      "pictures": 78,
+      "role": "different_camera"
+    },
+    {
+      "authored_picture_interval": null,
+      "baseline_local_range": false,
+      "crop_count_replayed": 0,
+      "dataset": "wiki",
+      "frame_rate": "30000/1001",
+      "group": 6,
+      "local_status": null,
+      "measured_picture_interval": null,
+      "pictures": 78,
+      "role": "wrong_clock"
+    }
+  ],
+  "coarse_movie_clock_diagnostic": [
+    {
+      "cadence": "30",
+      "eligible_1k_movie": true,
+      "eligible_exact_movie": true,
+      "packet_and_native_pts_equal": true,
+      "pictures": 66,
+      "qualified_paired_route": true,
+      "source_duration": "11/5"
+    },
+    {
+      "cadence": "30000/1001",
+      "eligible_1k_movie": false,
+      "eligible_exact_movie": true,
+      "packet_and_native_pts_equal": true,
+      "pictures": 78,
+      "qualified_paired_route": false,
+      "source_duration": "13013/5000"
+    },
+    {
+      "cadence": "30",
+      "eligible_1k_movie": true,
+      "eligible_exact_movie": true,
+      "packet_and_native_pts_equal": true,
+      "pictures": 66,
+      "qualified_paired_route": true,
+      "source_duration": "11/5"
+    },
+    {
+      "cadence": "30000/1001",
+      "eligible_1k_movie": false,
+      "eligible_exact_movie": true,
+      "packet_and_native_pts_equal": true,
+      "pictures": 78,
+      "qualified_paired_route": false,
+      "source_duration": "13013/5000"
+    }
+  ],
+  "counts": {
+    "all": 48,
+    "clock_excluded": 6,
+    "missed": 2,
+    "ordinary": 24,
+    "positives": 12,
+    "useful": 10,
+    "wrong_sources": 6
+  },
+  "freeze_sha256": "ef205b3afa031ac357489b7690b360a004f2d2ebbbf13da5e377449fe4dd36e5",
+  "frozen_pass_rule": {
+    "every_flag_replays_exact": true,
+    "max_ordinary": 1,
+    "max_wrong_location": 1,
+    "max_wrong_source_admitted": 0,
+    "min_each_rate": 4,
+    "min_each_role": 4,
+    "min_groups": 4,
+    "min_useful": 9,
+    "spatial_iou": 0.1,
+    "tiou": 0.5
+  },
+  "local_app": {
+    "browser": [
+      {
+        "asset_count": 14,
+        "case": "exact-30",
+        "checked_native_crops": 6,
+        "download_equal": true
+      },
+      {
+        "asset_count": 14,
+        "case": "exact-2997",
+        "checked_native_crops": 6,
+        "download_equal": true
+      },
+      {
+        "asset_count": 2,
+        "case": "ordinary-reencode",
+        "checked_native_crops": 0,
+        "download_equal": true
+      },
+      {
+        "asset_count": 2,
+        "case": "unrelated-earlier",
+        "checked_native_crops": 0,
+        "download_equal": true
+      },
+      {
+        "asset_count": 0,
+        "case": "different-clocks",
+        "checked_native_crops": 0,
+        "download_equal": true
+      }
+    ],
+    "browser_page_errors": 0,
+    "comparison_cases_with_unchanged_baseline_and_no_extra_jobs_or_payments": 6,
+    "signed_analysis_packages_reverified": 3,
+    "simulated_usd_9_99_payments": 3,
+    "unpaid_jobs": 0
+  },
+  "met_frozen_gate": true,
+  "native_replay": [
+    {
+      "fps": "30",
+      "frames": [
+        20,
+        28
+      ],
+      "native_clock_edges": [
+        "2/3",
+        "14/15"
+      ],
+      "replay_verified_crops": 6,
+      "source_time_bases": {
+        "earlier": "1/30000",
+        "submitted": "1/90000"
+      }
+    },
+    {
+      "fps": "30000/1001",
+      "frames": [
+        28,
+        40
+      ],
+      "native_clock_edges": [
+        "7007/7500",
+        "1001/750"
+      ],
+      "replay_verified_crops": 6,
+      "source_time_bases": {
+        "earlier": "1/30000",
+        "submitted": "1/90000"
+      }
+    }
+  ],
+  "published_media": false,
+  "recount_sha256": "f0ecef7763d73c45480bafaa15d1098dda6d7cbdf978dfa2d84b43763d47b5d5",
+  "schema": "chipmunk.local-research.video-reference-720p/1",
+  "scoring_log_sha256": "78823838619de95f5239fd3c549401f6aab0f0a90e75c0c5f63da68d3fd56a0a",
+  "test_scope": {
+    "affects_overall_confidence": false,
+    "candidate": "paired_h264_short720_local_area/1",
+    "clock_hz": [
+      30000,
+      90000
+    ],
+    "delivery_frame_rates": [
+      "30",
+      "30000/1001"
+    ],
+    "dimensions": [
+      1280,
+      720
+    ],
+    "fixed_local_difference_score_point": 1.5712549522005277,
+    "source_geometry": [
+      "3 source 720p",
+      "2 source 1080p down to 720p",
+      "1 source 960x544 up to 720p"
+    ],
+    "test_frame_counts": [
+      66,
+      72,
+      78
+    ]
+  }
+}

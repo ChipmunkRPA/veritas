@@ -8,6 +8,7 @@ from app.evidence.image_copy_similarity_binding import (
     DIAGONAL_TRANSFORMS,
     JPEG_DIAGONAL_MIN_PARALLEL_SUM,
     JPEG_DIAGONAL_Q90_VERSION,
+    JPEG_DIAGONAL_Q92_VERSION,
     JPEG_DIAGONAL_VERSION,
     ROLES,
     jpeg_diagonal_displacement,
@@ -16,20 +17,25 @@ from app.evidence.image_copy_similarity_binding import (
 from app.evidence.image_jpeg_offgrid_source import encoded_profile
 
 
-def supported(data, rgb, *, version=JPEG_DIAGONAL_VERSION):
+def supported(data, rgb, *, version=JPEG_DIAGONAL_VERSION, browser_predecessors_unavailable=False):
     if not jpeg_diagonal_size(rgb.shape[1], rgb.shape[0]):
         return False
     profile = encoded_profile(data)
+    if browser_predecessors_unavailable:
+        if version != JPEG_DIAGONAL_Q92_VERSION or profile != 92:
+            return False
+        frame = baseline_frame(data)
+        return frame is not None and frame.precision == 8
     if profile == 75:
         return True
-    if version == JPEG_DIAGONAL_Q90_VERSION and profile == 90:
+    if version in {JPEG_DIAGONAL_Q90_VERSION, JPEG_DIAGONAL_Q92_VERSION} and profile == 90:
         frame = baseline_frame(data)
         return frame is not None and frame.precision == 8
     return False
 
 
-def review(data, rgb, *, version=JPEG_DIAGONAL_VERSION):
-    if not supported(data, rgb, version=version):
+def review(data, rgb, *, version=JPEG_DIAGONAL_VERSION, browser_predecessors_unavailable=False):
+    if not supported(data, rgb, version=version, browser_predecessors_unavailable=browser_predecessors_unavailable):
         return {"status": "unsupported_profile", "measurement": None}, [], None
     status, candidates = jpeg_turned_copy.analyse_diagonal(rgb)
     if not candidates:
@@ -41,9 +47,10 @@ def review(data, rgb, *, version=JPEG_DIAGONAL_VERSION):
     return {"status": status, "measurement": match["measurement"]}, [match["pair"]], transform
 
 
-def verify(data, rgb, pair, measurement, *, version=JPEG_DIAGONAL_VERSION):
+def verify(data, rgb, pair, measurement, *, version=JPEG_DIAGONAL_VERSION, browser_predecessors_unavailable=False):
     transform = pair["transform"]
-    if transform not in DIAGONAL_TRANSFORMS or not supported(data, rgb, version=version):
+    if transform not in DIAGONAL_TRANSFORMS or not supported(
+            data, rgb, version=version, browser_predecessors_unavailable=browser_predecessors_unavailable):
         raise ValueError("Diagonal JPEG evidence requires a supported upright JPEG")
     boxes = [tuple(pair["regions"][role][axis] for axis in "xywh") for role in ROLES]
     first, second = boxes

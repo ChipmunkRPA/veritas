@@ -228,6 +228,7 @@ def _trimmed_pairs(paths, tables, offset):
 
 
 def _picture(paths, tables, assets, *, include_local, include_local_area=False, include_short30_local_area=False,
+             include_short720_local_area=False,
              include_measured_interval=False,
              include_soundtrack_reencode=False, include_short_phrase_reencode=False,
              trim_offset=None, trim_reencoded=False):
@@ -235,14 +236,20 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
     earlier_clock = _elapsed(tables[0]) if trim_offset is not None else None
     earlier_offset = trim_offset if trim_offset is not None else 0
     local_check = video_reference_local.eligible(paths, tables, clock) if include_local else None
-    area_basis = None
+    area_basis = area_scope = None
     if trim_reencoded or (
         include_local and include_local_area and video_reference_photometric.eligible(paths, tables, clock)
     ):
         area_basis = video_reference_photometric.BASIS
+        area_scope = video_reference_photometric.SCOPE
     elif (include_local and include_short30_local_area
           and video_reference_photometric.eligible_short30(paths, tables, clock)):
         area_basis = video_reference_photometric.SHORT30_BASIS
+        area_scope = video_reference_photometric.SHORT30_SCOPE
+    elif (include_local and include_short720_local_area
+          and video_reference_photometric.eligible_short720(paths, tables, clock)):
+        area_basis = video_reference_photometric.SHORT720_BASIS
+        area_scope = video_reference_photometric.SHORT720_SCOPE
     rects = video_reference_local.rectangles(tables[0].height, tables[0].width) if local_check or area_basis else None
     measurements = []
     signals, background_errors, cells = [], [], []
@@ -308,8 +315,7 @@ def _picture(paths, tables, assets, *, include_local, include_local_area=False, 
     local = choice = precise = None
     if rects is not None:
         if area_basis:
-            scope = (video_reference_photometric.SHORT30_SCOPE if area_basis == video_reference_photometric.SHORT30_BASIS
-                     else video_reference_photometric.SCOPE)
+            scope = area_scope
             status, choice = video_reference_photometric.assess(signals, background_errors, rects)
         else:
             dt, scope = local_check
@@ -418,6 +424,7 @@ def _additional_soundtracks(paths, sources, tables, assets):
 def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
             include_local_area: bool = False,
             include_short30_local_area: bool = False,
+            include_short720_local_area: bool = False,
             include_measured_interval: bool = False,
             timing_event_s: Fraction | None = None, timing_model: Path | None = None,
             timing_short_fallback: bool = False, include_soundtrack: bool = True,
@@ -533,6 +540,7 @@ def compare(earlier: Path, submitted: Path, *, include_local: bool = True,
         record["picture"] = _picture(paths, tables, assets, include_local=include_local,
                                      include_local_area=include_local_area and timing_event_s is None,
                                      include_short30_local_area=include_short30_local_area and timing_event_s is None,
+                                     include_short720_local_area=include_short720_local_area and timing_event_s is None,
                                      include_measured_interval=include_measured_interval,
                                      include_soundtrack_reencode=compare_timing_pictures,
                                      include_short_phrase_reencode=compare_phrase_pictures)

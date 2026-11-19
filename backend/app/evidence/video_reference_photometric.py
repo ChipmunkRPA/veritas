@@ -9,12 +9,19 @@ import cv2
 import numpy as np
 
 from app.detectors.video.decode import DecodeError
+from app.detectors.video.frames import probe
+from app.evidence import mp4_source_clock
 from app.evidence import video_reference_local as local
 
 BASIS = "paired_h264_local_area/1"
 SHORT30_BASIS = "paired_h264_short30_local_area/1"
+SHORT720_BASIS = "paired_h264_short720_local_area/1"
 SHORT30_SHAPES = {(360, 640), (480, 480)}
 SHORT30_MIN_FRAMES, SHORT30_MAX_FRAMES = 65, 91
+SHORT720_SIZE = (1280, 720)
+SHORT720_MIN_FRAMES, SHORT720_MAX_FRAMES = 66, 78
+SHORT720_STEPS = {Fraction(1, 30), Fraction(1001, 30000)}
+SHORT720_TIME_BASES = {Fraction(1, 30000), Fraction(1, 90000)}
 POINT = 1.5712549522005277
 FLANK = 5
 WIDTHS = (8, 12, 16, 20)
@@ -25,6 +32,9 @@ SCOPE = ("Compares two upright 720 x 480 H.264 clips with the same verified pict
 SHORT30_SCOPE = ("Compares two upright 360 x 640 portrait or 480 x 480 square H.264 clips, with 65 to 91 pictures "
                  "and matching verified timestamps at 30 fps. Highlights a short visual change after accounting for "
                  "overall brightness and contrast. Ordinary editing can produce this evidence. It adds no AI confidence.")
+SHORT720_SCOPE = ("Compares two upright 720p H.264 clips with 66 to 78 pictures at 30 or 29.97 fps on matching "
+                  "verified timelines. Highlights a short visual change after accounting for overall brightness "
+                  "and contrast. Ordinary editing can produce this evidence. It adds no AI confidence.")
 
 
 def _h264_pair(paths):
@@ -53,6 +63,28 @@ def eligible_short30(paths, tables, clock):
         return False
     step = Fraction(1, 30)
     return all(b - a == step for a, b in pairwise(clock)) and _h264_pair(paths)
+
+
+def eligible_short720(paths, tables, clock):
+    if not SHORT720_MIN_FRAMES <= len(clock) <= SHORT720_MAX_FRAMES:
+        return False
+    step = clock[1] - clock[0]
+    if step not in SHORT720_STEPS or any(b - a != step for a, b in pairwise(clock)):
+        return False
+    for path, table in zip(paths, tables, strict=True):
+        if (len(table) != len(clock) or table.rotation or table.interpolated or table.truncated
+                or (table.width, table.height) != SHORT720_SIZE or table.pts[0] != 0
+                or table.tb not in SHORT720_TIME_BASES):
+            return False
+        ticks = int(step / table.tb)
+        if table.pts != tuple(index * ticks for index in range(len(clock))):
+            return False
+        if not mp4_source_clock.verified(path, table, ticks):
+            return False
+        stream = probe(path, include_codec_tag=True)
+        if (stream.get("codec"), stream.get("pix_fmt"), stream.get("codec_tag")) != ("h264", "yuv420p", "avc1"):
+            return False
+    return True
 
 
 def assess(signals, background_errors, rects):

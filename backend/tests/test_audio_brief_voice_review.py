@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import copy
 import hashlib
+import io
 import math
 import shutil
 import subprocess
+import wave
 from types import SimpleNamespace
 
 import numpy as np
@@ -62,13 +64,17 @@ def test_no_speech_and_interrupted_scan_are_distinct():
 
 
 @pytest.mark.parametrize(("codec", "container"), [("pcm_s16le", "wav"), ("flac", "flac")])
-def test_frozen_media_match_original_samples_and_reject_changed_windows(monkeypatch, codec, container):
+@pytest.mark.parametrize("source_channels", [1, 2])
+def test_frozen_media_match_original_samples_and_reject_changed_windows(monkeypatch, codec, container, source_channels):
     pcm = (np.arange(binding.SAMPLES, dtype=np.int32) % 8192 - 4096).astype(np.float32) / 32768
     source = {"samples": len(pcm), "sample_rate": binding.RATE, "source_sample_rate": binding.RATE,
-              "channels": 1, "source_channels": 1, "source_codec": codec, "source_container": container,
+              "channels": 1, "source_channels": source_channels, "source_codec": codec, "source_container": container,
               "source_bit_depth": 16, "timeline_time_base": "1/16000",
               "pcm_sha256": hashlib.sha256(pcm.astype("<f4").tobytes()).hexdigest(),
               "timeline": [{"start_sample": 0, "end_sample": len(pcm), "source_pts": 0}]}
+    if source_channels == 2:
+        source.update(source_time_base="1/16000", source_start_pts=0,
+                      **{binding.IDENTICAL_CHANNEL_PCM: hashlib.sha256((pcm * 32768).astype("<i2").tobytes()).hexdigest()})
     monkeypatch.setattr(brief_voice_review.short, "voice_logit", lambda *_: binding.POINT + 1)
     rows = brief_voice_review.scan(pcm, [(0, 14000 / binding.RATE)], None,
                                    SimpleNamespace(check=lambda _: None))
@@ -92,6 +98,7 @@ def test_frozen_media_match_original_samples_and_reject_changed_windows(monkeypa
                   waveform=_chart)
     record = make_record()
     review = evidence.build(record, **inputs, asset=make_asset)
+    assert review["schema"] == (binding.SCHEMA if source_channels == 1 else binding.IDENTICAL_STEREO_SCHEMA)
     assert review["affects_overall_confidence"] is False
     assert [window["id"] for window in review["windows"]] == ["B750-01", "B750-02"]
     for window in review["windows"]:
@@ -102,6 +109,10 @@ def test_frozen_media_match_original_samples_and_reject_changed_windows(monkeypa
         np.testing.assert_array_equal(read_wav(clip), pcm[start:end])
     evidence.verify(review, record, **inputs, read_asset=objects.__getitem__)
     evidence.verify_source(review, pcm=pcm, mapping=source, waveform=_chart)
+    if source_channels == 2:
+        with pytest.raises(ValueError, match="channel proof differs"):
+            evidence.build(record, **{**inputs, "source": {**source, binding.IDENTICAL_CHANNEL_PCM: "0" * 64}},
+                           asset=make_asset)
 
     changed = copy.deepcopy(review)
     changed["windows"][0]["source_timestamp_ranges"][0]["source_end_pts"] += 1
@@ -111,6 +122,67 @@ def test_frozen_media_match_original_samples_and_reject_changed_windows(monkeypa
     with pytest.raises(ValueError, match="different source samples"):
         evidence.build(make_record(), **inputs, asset=make_asset)
     assert binding.supported_source(source)
+
+
+def test_identical_channel_proof_keeps_clock_and_format_scope():
+    pcm = np.zeros(binding.SAMPLES, dtype=np.float32)
+    source = {"samples": binding.SAMPLES, "sample_rate": binding.RATE, "source_sample_rate": binding.RATE,
+              "channels": 1, "source_channels": 2, "source_codec": "flac", "source_container": "flac",
+              "source_bit_depth": 16, "timeline_time_base": "1/16000", "source_time_base": "1/16000", "source_start_pts": 0,
+              "timeline": [{"start_sample": 0, "end_sample": binding.SAMPLES, "source_pts": 0}]}
+    decoded = SimpleNamespace(mapping=source, pcm=pcm, stereo_pcm=np.zeros((binding.SAMPLES, 2), dtype=np.int16))
+    assert not binding.supported_source(source)
+    pin = evidence.identical_stereo_proof(decoded)
+    assert pin == hashlib.sha256(bytes(binding.SAMPLES * 2)).hexdigest()
+    source[binding.IDENTICAL_CHANNEL_PCM] = pin
+    assert binding.supported_source(source)
+    review = {**binding.presentation([], reason=binding.TIME_BUDGET, schema=binding.IDENTICAL_STEREO_SCHEMA), "windows": []}
+    binding.validate(review, source)
+    with pytest.raises(ValueError, match="supported channels"):
+        binding.validate({**review, "schema": binding.SCHEMA}, source)
+    for changes in ({"source_bit_depth": 24}, {"source_sample_rate": 48000}, {"source_time_base": "1/48000"},
+                    {"source_start_pts": 1}, {"samples": binding.SAMPLES + 1}, {"audio_stream_indices": [0, 1]},
+                    {"timeline": [{"start_sample": 0, "end_sample": binding.SAMPLES, "source_pts": 1}]}):
+        assert not binding.supported_source(source | changes)
+        assert evidence.identical_stereo_proof(SimpleNamespace(**{**vars(decoded), "mapping": source | changes})) is None
+    decoded.stereo_pcm[17, 0] = 1
+    assert evidence.identical_stereo_proof(decoded) is None
+    decoded.stereo_pcm[17, 1] = 1
+    assert evidence.identical_stereo_proof(decoded) is None  # Equal original channels still differ from analyzed PCM.
+
+
+@pytest.mark.skipif(not shutil.which("ffmpeg"), reason="native dual-mono proof requires FFmpeg")
+def test_original_dual_mono_and_equal_average_unequal_channels(tmp_path):
+    integer = np.random.default_rng(20261119).integers(-4096, 4096, binding.SAMPLES, dtype=np.int16)
+    expected = integer.astype(np.float32) / 32768
+    for unequal in (False, True):
+        native = np.column_stack((integer, integer))
+        if unequal:
+            native[::8000, 0] += 1
+            native[::8000, 1] -= 1
+        encoded = io.BytesIO()
+        with wave.open(encoded, "wb") as output:
+            output.setnchannels(2)
+            output.setsampwidth(2)
+            output.setframerate(binding.RATE)
+            output.writeframes(native.astype("<i2").tobytes())
+        wav = tmp_path / ("unequal.wav" if unequal else "identical.wav")
+        wav.write_bytes(encoded.getvalue())
+        flac = wav.with_suffix(".flac")
+        subprocess.run(["ffmpeg", "-nostdin", "-v", "error", "-threads", "1", "-i", str(wav),
+                        "-c:a", "flac", "-sample_fmt", "s16", str(flac)], check=True)
+        for path in (wav, flac):
+            decoded = decode_audio(path, source_sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
+                                   inspect_stereo=True, retain_stereo=True)
+            np.testing.assert_array_equal(decoded.pcm, expected)
+            np.testing.assert_array_equal(decoded.stereo_pcm, native)
+            pin = evidence.identical_stereo_proof(decoded)
+            assert (pin is None) is unequal
+            if pin:
+                decoded.mapping[binding.IDENTICAL_CHANNEL_PCM] = pin
+                assert binding.supported_source(decoded.mapping)
+            else:
+                assert not binding.supported_source(decoded.mapping)
 
 
 @pytest.mark.parametrize("unsupported", [

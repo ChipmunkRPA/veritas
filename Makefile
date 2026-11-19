@@ -157,6 +157,8 @@ replay-evidence:  ## recount published image, video, audio, and writing evaluati
 		docs/evaluation-panels/audio-standalone-recurrent-view-2026-11-18.json
 	python3 -I -S backend/scripts/review_image_jpeg_rank_smoothing.py \
 		docs/evaluation-panels/image-jpeg-rank-smoothing-2026-11-18.json.gz
+	python3 -I -S backend/scripts/review_image_jpeg_matched_site_transfer.py \
+		docs/evaluation-panels/image-jpeg-matched-site-transfer-2026-11-18.json.gz
 	python3 -I -S backend/scripts/review_writing_joss_disclosures.py \
 		docs/evaluation-panels/writing-joss-disclosures-2026-11-18.json
 

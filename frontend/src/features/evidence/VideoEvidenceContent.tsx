@@ -164,7 +164,9 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
         ? <><a className="underline" href="#media-evidence-VFB01">Inspect the transition</a> at <strong>{seconds(transition.time_s)}</strong> on the source clock, frame {transition.boundary}.</>
         : transitionReview.status === 'no_match' ? 'No qualifying face appearance transition was found in the portion checked.'
         : transitionReview.reason === 'shot_change' ? 'This check requires one continuous shot. A shot change was detected.'
-        : transitionReview.reason === 'profile' ? transitionReview.method === 'single-face-boundary/3'
+        : transitionReview.reason === 'profile' ? transitionReview.method === 'single-face-boundary/4'
+          ? 'This check requires a short 640 × 360 H.264 MP4 and a supported fixed source clock.'
+          : transitionReview.method === 'single-face-boundary/3'
           ? 'This check covers four-second, 640 × 360 H.264 MP4 with a verified 25 fps or qualified 30 fps clock.'
           : 'This check covers four-second, 640 × 360 H.264 MP4 with a verified 25 fps clock.'
         : transitionReview.reason === 'provenance' ? 'Verified source credentials determined the analysis path.'
@@ -175,8 +177,9 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
       {transitionReview.frames_scanned > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">
         The check read {transitionReview.frames_scanned} native pictures for shot changes and measured {transitionReview.measured_face_frames} usable face views.
         {transitionReview.method === 'single-face-boundary/3' && ' Source timing was verified at 30 frames per second.'}
+        {transitionReview.method === 'single-face-boundary/4' && ' Source timing was verified at 29.97 frames per second.'}
       </p>}
-      {transition?.method === 'single-face-boundary/3' && <p className="mt-2 mb-0 text-caption text-text-muted">A focus change can produce a similar pattern and can also occur alongside a face swap.</p>}
+      {(transition?.method === 'single-face-boundary/3' || transition?.method === 'single-face-boundary/4') && <p className="mt-2 mb-0 text-caption text-text-muted">A focus change can produce a similar pattern and can also occur alongside a face swap.</p>}
       <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero AI confidence weight.</p>
     </section>}
     {lipTiming && <section aria-labelledby="video-lip-timing-heading" className="mt-4 rounded-md border border-border p-4">

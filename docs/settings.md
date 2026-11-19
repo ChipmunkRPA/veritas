@@ -155,6 +155,12 @@ The service defines its settings in `backend/app/core/config.py`.
 
 ## Video detector
 
+The development Full face-transition check can be enabled with
+`VERITAS_VIDEO_FACE_SINGLE_BOUNDARY_REVIEW=true`. Set
+`VERITAS_VIDEO_FACE_SINGLE_BOUNDARY_NATIVE2997_REVIEW=true` to also check
+qualified 640 × 360 AVC MP4 with 120 verified 30000/1001 fps pictures and a
+zero-origin native clock. The 29.97 fps option defaults to false.
+
 | Variable | Type | Default | Description |
 |---|---|---|---|
 | `VERITAS_VIDEO_MAX_FRAMES` | integer | `40` | v0.3 video pipeline: most frames sampled from a video (4 per second up to this) |

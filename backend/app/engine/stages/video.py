@@ -180,7 +180,7 @@ def probe(ctx: StageContext) -> dict[str, Any]:
                  or settings.video_face_spatial_cut_context or settings.video_face_short_window_review
                  or settings.video_face_short_carrier_review or settings.video_face_short_avc_review
                  or settings.video_scene_return_review
-                 or ctx.profile == Profile.FULL and single_face_native30_enabled())
+                 or ctx.profile == Profile.FULL and (single_face_native30_enabled() or single_face_native2997_enabled()))
     info = common.json_safe(ffprobe(path, include_codec_tag=True) if codec_tag else ffprobe(path))
     try:
         table = probe_frames(path, check=ctx.check)
@@ -443,6 +443,7 @@ LOCAL_FACE_RETURN_POLICY = "local_face_return_review"
 SINGLE_FACE_BOUNDARY_POLICY = "single_face_boundary_review"
 SINGLE_FACE_SPARSE_POLICY = "single_face_sparse_context_review"
 SINGLE_FACE_NATIVE30_POLICY = "single_face_boundary_native30_review"
+SINGLE_FACE_NATIVE2997_POLICY = "single_face_boundary_native2997_review"
 
 
 def single_face_boundary_enabled():
@@ -457,6 +458,10 @@ def single_face_native30_enabled():
     return single_face_boundary_enabled() and settings.video_face_single_boundary_native30_review
 
 
+def single_face_native2997_enabled():
+    return single_face_boundary_enabled() and settings.video_face_single_boundary_native2997_review
+
+
 def current_detect_output(output) -> bool:
     return (current_voice_detection_output(output)
             and output.get(WHOLE_FACE_SAME_FRAME_POLICY, False) is same_frame_enabled()
@@ -464,7 +469,8 @@ def current_detect_output(output) -> bool:
             and output.get(LOCAL_FACE_RETURN_POLICY, False) is local_return_enabled()
             and output.get(SINGLE_FACE_BOUNDARY_POLICY, False) is single_face_boundary_enabled()
             and output.get(SINGLE_FACE_SPARSE_POLICY, False) is single_face_sparse_enabled()
-            and output.get(SINGLE_FACE_NATIVE30_POLICY, False) is single_face_native30_enabled())
+            and output.get(SINGLE_FACE_NATIVE30_POLICY, False) is single_face_native30_enabled()
+            and output.get(SINGLE_FACE_NATIVE2997_POLICY, False) is single_face_native2997_enabled())
 
 
 def _single_boundary_review(ctx: StageContext) -> dict:
@@ -472,10 +478,17 @@ def _single_boundary_review(ctx: StageContext) -> dict:
         return {}
     method = face_single_boundary
     use_sparse = single_face_sparse_enabled()
-    native30 = ctx.profile == Profile.FULL and single_face_native30_enabled()
+    native_method = None
+    native_review = ctx.profile == Profile.FULL and single_face_native30_enabled()
+    ntsc_review = ctx.profile == Profile.FULL and single_face_native2997_enabled()
 
     def unavailable(reason):
-        return {method.COVERAGE: method.coverage("unavailable", reason, sparse=use_sparse, native30=native30)}
+        disposition = method.coverage("unavailable", reason, sparse=use_sparse, native30=native_review)
+        if native_method is not None:
+            disposition["method"] = native_method
+        elif ntsc_review:
+            disposition["method"] = method.binding.NATIVE2997_METHOD
+        return {method.COVERAGE: disposition}
 
     if provenance_gate.stop(ctx):
         return unavailable("provenance")
@@ -487,11 +500,16 @@ def _single_boundary_review(ctx: StageContext) -> dict:
     if path is None or not path.is_file():
         return unavailable("unsupported_video")
     encoding = (info.get("codec"), info.get("pix_fmt"))
+    announced = (*encoding, info.get("codec_tag"))
     if method.supported(path, store.table, encoding):
-        native30 = False
-    elif not native30 or not method.supported_native30(path, store.table, (*encoding, info.get("codec_tag"))):
+        native_review = ntsc_review = False
+    elif native_review and method.supported_native30(path, store.table, announced):
+        native_method = method.binding.NATIVE30_METHOD
+    elif ntsc_review and method.supported_native30(path, store.table, announced, method=method.binding.NATIVE2997_METHOD):
+        native_method = method.binding.NATIVE2997_METHOD
+    else:
         return unavailable("profile")
-    use_sparse = use_sparse or native30
+    use_sparse = use_sparse or native_method is not None
     from app.detectors.video.adapters.loaders import load_face_appearance
     from app.engine.fetchers import FetchError, WeightIntegrityError, ensure_verified
     from app.engine.models import MemoryBudgetExceeded, ModelUnavailable
@@ -519,7 +537,7 @@ def _single_boundary_review(ctx: StageContext) -> dict:
 
     def scan(sparse):
         # A full sparse scan retains the complete short RGB sequence and small context caches.
-        frame_budget_mib = 180 if native30 else (160 if sparse else 8)
+        frame_budget_mib = 180 if native_method is not None else (160 if sparse else 8)
         activation = models.declared_bytes(appearance_id, "cpu", "float32") + frame_budget_mib * 1024**2
         with models.lease((locator_id,), prefer="cpu", activation_bytes=activation) as lease:
             check()
@@ -529,13 +547,13 @@ def _single_boundary_review(ctx: StageContext) -> dict:
             encoder = load_face_appearance(appearance_id, "cpu", "float32").obj
             check()
             return method.inspect(path, store.table, locator, encoder, check=check, timeout_s=timeout_s,
-                                  sparse=sparse, native30=native30)
+                                  sparse=sparse, native_method=native_method)
 
     try:
         try:
             record, disposition = scan(use_sparse)
         except MemoryBudgetExceeded:
-            if native30 or not use_sparse:
+            if native_method is not None or not use_sparse:
                 raise
             record, disposition = scan(False)
     except DetectorTimeout:
@@ -554,7 +572,8 @@ def detect(ctx: StageContext) -> dict[str, Any]:
     policies = {"voice_clock_policy": VOICE_CLOCK_POLICY, WHOLE_FACE_SAME_FRAME_POLICY: same_frame_enabled(),
                 WHOLE_FACE_DETAIL_POLICY: detail_enabled(), LOCAL_FACE_RETURN_POLICY: local_return_enabled(),
                 SINGLE_FACE_BOUNDARY_POLICY: single_face_boundary_enabled(), SINGLE_FACE_SPARSE_POLICY: single_face_sparse_enabled(),
-                SINGLE_FACE_NATIVE30_POLICY: single_face_native30_enabled()}
+                SINGLE_FACE_NATIVE30_POLICY: single_face_native30_enabled(),
+                SINGLE_FACE_NATIVE2997_POLICY: single_face_native2997_enabled()}
     out = common.run_detectors(ctx, (Modality.VIDEO, Modality.AUDIO),
                                exclude={"provenance", "face-detection", "face-tracking", SEQUENCE_FAMILY, WHOLE_FACE_FAMILY, FACE_DETAIL_FAMILY},
                                outputs=outputs, max_units=VIDEO_MAX_UNIT_SCORES, face_failure=common.face_stage_failure(ctx),

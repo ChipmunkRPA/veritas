@@ -36,8 +36,9 @@ def supported(path: Path, table: FrameTable, encoding: tuple[str | None, str | N
     return face_local_detail.supported(table, encoding) and face_return.source_carrier(path) == "mp4"
 
 
-def supported_native30(path: Path, table: FrameTable, encoding: tuple[str | None, str | None, str | None]) -> bool:
-    return binding.native30_source(table, encoding, face_return.source_carrier(path))
+def supported_native30(path: Path, table: FrameTable, encoding: tuple[str | None, str | None, str | None],
+                       *, method=binding.NATIVE30_METHOD) -> bool:
+    return binding.native30_source(table, encoding, face_return.source_carrier(path), method)
 
 
 def coverage(status: str, reason: str | None = None, *, frames_scanned: int = 0, measured_face_frames: int = 0,
@@ -249,8 +250,11 @@ def measure(path, table, locator, encoder, *, check, timeout_s, sparse=False, na
         return None, result("unavailable", "native_measurement_unavailable")
 
 
-def inspect(path, table, locator, encoder, *, check, timeout_s, sparse=False, native30=False) -> tuple[dict | None, dict]:
+def inspect(path, table, locator, encoder, *, check, timeout_s, sparse=False, native30=False, native_method=None) -> tuple[dict | None, dict]:
+    native30 = native30 or native_method in binding.NATIVE_CLOCK_TICKS
     reading, disposition = measure(path, table, locator, encoder, check=check, timeout_s=timeout_s, sparse=sparse, native30=native30)
+    if native_method is not None:
+        disposition["method"] = native_method
     if disposition["status"] != "localized" or reading is None:
         return None, disposition
     # Canonical JSON rounds numeric displays. Preserve precise source geometry and measurements for replay.
@@ -259,7 +263,7 @@ def inspect(path, table, locator, encoder, *, check, timeout_s, sparse=False, na
         for role, row in reading["source_frames"].items()
     }
     return reading | {
-        "method": binding.NATIVE30_METHOD if native30 else binding.SPARSE_METHOD if "scene_context" in reading else METHOD,
+        "method": native_method or (binding.NATIVE30_METHOD if native30 else binding.SPARSE_METHOD if "scene_context" in reading else METHOD),
         "time_s": float(reading["pts"] * table.tb),
         "affects_overall_confidence": False,
         "source_frames": frames,

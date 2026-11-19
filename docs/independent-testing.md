@@ -39,6 +39,9 @@ frame, ordinary alert type, and paired gains and losses.
 The [30 fps face transition replay](video-face-single-boundary-30fps-2026-11-18.md#replay-the-counts)
 recounts both detectors' results across 98 direct and recompressed deliveries.
 It includes ordinary focus changes, exposure changes, and cuts.
+The [29.97 fps face transition check](video-face-boundary-2997-2026-11-18.md)
+replays source-timed transitions after two encodes and checks an additional
+camera-original control panel.
 
 The [paired sharpness comparison](video-face-focus-context-transfer-2026-11-18.md#reproduce-the-counts)
 shows how a proposed focus filter affected the exact frames of standalone
@@ -62,6 +65,9 @@ affect localization. It includes an ordinary correction from an official erratum
 The [archived wording collision pilot](writing-wiked-origin-collisions-2026-11-18.md)
 shows how separately produced edits can yield the same text and exact source
 positions as an archived revision.
+The [short word-pair comparison](writing-phrase-seams-2026-11-18.md)
+compares generated copyedits with archived wording and audits which exact
+candidate ranges were eligible in DOCX and TXT.
 
 The [supplied-reference audio comparison](audio-short-window-reader-holdout-2026-11-18.md#supplied-reference-under-strong-background-noise)
 compares a dry earlier copy with an earlier copy that shares the exact same
@@ -97,6 +103,9 @@ after one and two JPEG encodes.
 The [JPEG smoothing replay](image-jpeg-rank-smoothing-2026-11-18.md)
 checks whether either neighborhood statistic ranks known local edits above
 unrelated regions.
+The [matched-site JPEG replay](image-jpeg-matched-site-transfer-2026-11-18.md)
+checks whether the selected region follows an inpainted intervention when
+the same operation is moved to a comparable region of the original photo.
 
 The [progressive JPEG transport replay](image-cross-quality-2026-11-16.md#progressive-jpeg-transport)
 checks 360 lossless scan conversions against the frozen baseline deliveries,

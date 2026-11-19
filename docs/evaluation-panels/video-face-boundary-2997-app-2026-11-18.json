@@ -1,0 +1,75 @@
+{
+  "schema": "chipmunk.video-native2997.local-review/1",
+  "qualified_source_clock": {
+    "time_base": "1/30000",
+    "frame_step_ticks": 1001,
+    "frame_count": 120,
+    "start_pts": 0
+  },
+  "held_source_groups": 8,
+  "offline_decisions_and_measured_records_reproduced": 176,
+  "held_independent_packet_readout": {
+    "eligible_deliveries": 176,
+    "native_packet_pts": 21120
+  },
+  "held_by_delivery": {
+    "direct": {
+      "deliveries": 88,
+      "staged_edits": 24,
+      "exact_locations": 24,
+      "ordinary": 64,
+      "ordinary_alerts": 4,
+      "ordinary_unassessed": 14,
+      "ordinary_alert_roles": {
+        "sharpen_across_scene": 2,
+        "central_defocus": 2
+      }
+    },
+    "tandem": {
+      "deliveries": 88,
+      "staged_edits": 24,
+      "exact_locations": 24,
+      "ordinary": 64,
+      "ordinary_alerts": 4,
+      "ordinary_unassessed": 8,
+      "ordinary_alert_roles": {
+        "sharpen_across_scene": 2,
+        "central_defocus": 2
+      }
+    }
+  },
+  "separate_ordinary_camera_panel": {
+    "delivery_hashes_checked": 16,
+    "eligible_cases": 15,
+    "independent_packet_clocks_checked": 1920,
+    "ordinary_alerts": 0,
+    "original_sha256_checked": 8,
+    "outside_pixel_format_scope": 1
+  },
+  "app": {
+    "simulated_prepayment_analyses": 5,
+    "analysis_jobs_before_payment": 0,
+    "original_packages_verified": 5,
+    "browser_pages": 5,
+    "browser_errors": 0,
+    "original_frames_and_crops_loaded": 12,
+    "off_on_assessment_identical": true,
+    "example_frame": 37,
+    "example_pts": 37037,
+    "example_time_s": 1.2345666666666666,
+    "example_frames": [
+      36,
+      37,
+      49
+    ]
+  },
+  "prior_formats": {
+    "25fps_signed_packages": 7,
+    "30fps_signed_packages": 5
+  },
+  "whole_receipt_commitments": {
+    "held_analysis_replay": "5f81470e121fce51035ac9fa16f90206a9b3cca93f9eb35f429bf87baaa0478b",
+    "held_packet_clocks": "a9bc15c99335e778544ef8f22e34db36f877cf2bbd6fffb8ddfaf5cc4cfa57ff",
+    "camera_readout": "a3f23e1c47939418e1841795aa742c00587d29d3ad07c0015f4183cd2de90e3d"
+  }
+}

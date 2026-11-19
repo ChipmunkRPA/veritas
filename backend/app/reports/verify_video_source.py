@@ -462,13 +462,14 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     sparse_indices = set()
     transition_shots = None
     coverage = (evidence.get("coverage") or {}).get(face_single_boundary_binding.COVERAGE, {})
-    native30 = coverage.get("method") == face_single_boundary_binding.NATIVE30_METHOD
+    native_method = coverage.get("method")
+    native30 = native_method in face_single_boundary_binding.NATIVE_CLOCK_TICKS
     if native30 and coverage["frames_scanned"] > 0:
         if delivery is None or "codec_tag" not in delivery:
             delivery = probe_container(original, include_codec_tag=True)
         encoding = (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag"))
-        if not face_single_boundary_binding.native30_source(table, encoding, face_return.source_carrier(original)):
-            raise ValueError("The original video differs from its 30 fps face transition profile")
+        if not face_single_boundary_binding.native30_source(table, encoding, face_return.source_carrier(original), native_method):
+            raise ValueError("The original video differs from its native-clock face transition profile")
     if transition is not None:
         if not native30:
             from app.detectors.video.face_local_detail import supported

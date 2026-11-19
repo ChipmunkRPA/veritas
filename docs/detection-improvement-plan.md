@@ -67,6 +67,13 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- The face-transition check now accepts qualified 29.97 fps AVC exports.
+  It located all 48 staged transitions across two encodes and highlighted
+  eight ordinary focus controls. Fifteen eligible exports from a separate
+  camera-original roster produced no highlights. The evidence preserves
+  original frame times and carries zero AI-assessment weight.
+  [29.97 fps transition comparison](video-face-boundary-2997-2026-11-18.md)
+
 - The regional repeat check now runs on supported progressive quality-90
   JPEGs. All 360 paired scan conversions preserved decoded pixels, and
   three full model replays preserved exact regional masks, including an

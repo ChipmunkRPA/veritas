@@ -117,6 +117,43 @@ def test_native30_coverage_rejects_legacy_clock_and_incomplete_measurement():
             binding.validate(tampered, canonical_hash, table_pts=table.pts)
 
 
+def test_native2997_review_requires_exact_native_frame_positions(monkeypatch, tmp_path):
+    monkeypatch.setattr(settings, "environment", "dev")
+    monkeypatch.setattr(settings, "video_face_single_boundary_review", True)
+    monkeypatch.setattr(settings, "video_face_single_sparse_context_review", False)
+    monkeypatch.setattr(settings, "video_face_single_boundary_native30_review", True)
+    monkeypatch.setattr(settings, "video_face_single_boundary_native2997_review", False)
+    monkeypatch.setattr(video.provenance_gate, "stop", lambda _: False)
+    path = tmp_path / "source.mp4"
+    path.write_bytes(b"\x00\x00\x00\x18ftypisom\x00\x00\x02\x00isommp41")
+    pts = tuple(index * 1001 for index in range(120))
+    table = replace(_native30_table(), pts=pts)
+    profile = binding.NATIVE2997_METHOD
+    encoding = ("h264", "yuv420p", "avc1")
+    info = dict(zip(("codec", "pix_fmt", "codec_tag"), encoding, strict=True))
+    ctx = SimpleNamespace(profile=Profile.FULL, outputs={"probe": {"info": info}}, state={
+        "frame_store": SimpleNamespace(path=path, table=table),
+        "registry": SimpleNamespace(manifest=SimpleNamespace(model=lambda _: None)),
+    })
+    assert binding.native30_source(table, encoding, "mp4", profile)
+    assert not binding.native30_source(table, encoding, "mp4")
+    for variant in (pts[1:], tuple(value + 1 for value in pts), pts[:40] + (pts[40] + 1,) + pts[41:]):
+        assert not binding.native30_source(replace(table, pts=variant), encoding, "mp4", profile)
+    assert video._single_boundary_review(ctx)[review.COVERAGE]["reason"] == "profile"
+    monkeypatch.setattr(settings, "video_face_single_boundary_native2997_review", True)
+    assert video._single_boundary_review(ctx)[review.COVERAGE] == review.coverage(
+        "unavailable", "models_unavailable", native30=True,
+    ) | {"method": profile}
+
+    coverage = review.coverage("no_match", frames_scanned=120, measured_face_frames=60, native30=True) | {"method": profile}
+    evidence = {"source": {"time_base": table.time_base, "frame_count": 120, "width": 640, "height": 360,
+                           binding.COVERAGE_COMMITMENT: canonical_hash(coverage)},
+                "packets": [], "coverage": {binding.COVERAGE: coverage}}
+    binding.validate(evidence, canonical_hash, table_pts=table.pts)
+    with pytest.raises(ValueError, match="29.97 fps source clock"):
+        binding.validate(evidence, canonical_hash, table_pts=_native30_table().pts)
+
+
 @pytest.mark.parametrize(("incumbent", "alternatives", "localized", "status", "reason"), [
     (.4, (34, 40), 32, "localized", None),
     (.1, (34, 35), 34, "localized", None),

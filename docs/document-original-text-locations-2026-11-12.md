@@ -2,7 +2,7 @@
 
 After a document analysis, open **Media evidence**, choose a passage, and expand **Source anchors**. Each supported source anchor shows the exact original Unicode character ranges beside the extracted character range used by the writing check. The Standard PDF gives the same positions. The JSON export stores them under `evidence.coverage.original_text_locations` by passage and anchor.
 
-For plain-text uploads, ranges refer to the original decoded file. For Word documents, they are relative to the original paragraph and shown with its body path. For email, they refer to the decoded selected MIME part. Mapped HTML may yield several ranges when an inline tag interrupts the source text. The gaps preserve those original positions. For PDF, the report shows extracted text offsets and the original page location, including its crop where one was recorded.
+For plain-text uploads, ranges refer to the original decoded file. For Word documents, they are relative to the original paragraph and shown with its body path. For Markdown (`.md` and `.markdown`), the paragraph number and ranges refer to the decoded text after markup conversion and before whitespace normalization. For email, ranges refer to the decoded selected MIME part. Mapped HTML may yield several ranges when an inline tag interrupts the source text. The gaps preserve those original positions. For PDF, the report shows extracted text offsets and the original page location, including its crop where one was recorded.
 
 The app clips positions to the measured spans. Each range is zero-based and excludes its end. It omits native offsets for unsupported source mappings or spans without a complete map. The positions locate evidence from the existing writing checks.
 

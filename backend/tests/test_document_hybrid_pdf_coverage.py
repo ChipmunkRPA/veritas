@@ -43,6 +43,12 @@ SCAN_BOX = (40, 150, 570, 735)
 WARNING = "Page 1 was partially checked."
 
 
+@pytest.fixture(autouse=True)
+def isolate_optional_doi_review(monkeypatch):
+    # These fixtures exercise PDF coverage without constructing citation-check inputs.
+    monkeypatch.setattr(stage.settings, "text_doi_reference_review", False)
+
+
 def hybrid_pdf(path, *, box=SCAN_BOX, overlay=False, native=NATIVE, rotation=0, overlapping_caption=False):
     x0, y0, x1, y1 = box
     with pymupdf.open() as source, pymupdf.open() as pdf:

@@ -53,7 +53,7 @@ const documentCoverage = new Map(Object.entries({
   eml: 'Email checks the message body. Upload any attachment you want checked as a separate file.',
 }))
 
-const fileExtension = (filename: string) => filename.split('.').pop()?.toLowerCase() ?? ''
+const fileExtension = (filename: string) => /\.([^./]+)$/.exec(filename)?.[1]?.toLowerCase() ?? ''
 
 export function documentCoverageNotice(filename: string): string | undefined {
   return documentCoverage.get(fileExtension(filename))
@@ -70,6 +70,11 @@ const documentExport = new Map(Object.entries({
   xls: sheetExport,
   xlsm: sheetExport,
 }))
+
+export function isDocumentFilename(filename: string): boolean {
+  const extension = fileExtension(filename)
+  return TABS.some((tab) => tab.kind === 'document' && tab.exts.includes(extension)) || documentExport.has(extension)
+}
 
 export function validate(f: File, t: TabSpec): string | null {
   const ext = fileExtension(f.name)

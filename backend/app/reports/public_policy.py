@@ -23,6 +23,9 @@ _PREVIOUS_PUBLIC_TEMPLATES = _FACE_SCOPE_LEGACY_TEMPLATES | {
 
 
 def downloadable_template(template: str, kind: str | None = None) -> bool:
+    if template == "veritas-report-2.0.r182":
+        # Video needs the mouth-crop and picture-interval labels from r183.
+        return kind in {"image", "audio", "document"}
     # Earlier headlines could promote inconclusive results or overstate video
     # coverage. Generate a new public copy using the corrected presentation.
     return template == engine.TEMPLATE_SET or template in _PREVIOUS_PUBLIC_TEMPLATES

@@ -1152,10 +1152,21 @@ def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True
         encoding = "utf-8"
     decoded = data.decode(encoding, errors="replace")
     raw, method = text_like_content(decoded, ext)
-    d = _join_mapped(_text_parts(raw, kind="text" if method == "plain" else "markup"))
+    parts = _text_parts(raw, kind="text" if method == "plain" else "markup")
+    map_markdown = method == "markdown" and map_body_paragraphs
+    if map_markdown:
+        # These offsets restart in each decoded paragraph after Markdown conversion.
+        parts = [(value, {"kind": "markup"}) for value, _ in parts]
+    d = _join_mapped(parts, map_paragraphs=map_markdown)
     d.meta = {"method": method, "encoding": encoding,
               "decoded_source_sha256": text_hash(raw) if method == "plain" else None}
-    if method != "plain":
+    if map_markdown:
+        for index, row in enumerate(d.source_map):
+            row["paragraph_index"] = index
+        d.meta[document_native_locations.PARAGRAPH_MAP_KEY] = document_native_locations.PARAGRAPH_MAP
+        d.meta["coverage_warning"] = ("Markdown positions count Unicode code points within each decoded paragraph after "
+                                      "markup conversion. Formatting and original line numbers are outside the location map.")
+    elif method != "plain":
         d.meta["coverage_warning"] = "Markup was converted to text. Excerpts map to the extracted text, not exact HTML or Markdown source positions."
     if method == "html" and include_html_article:
         d.meta[html_article.READER] = html_article.POLICY

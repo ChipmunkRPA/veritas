@@ -128,6 +128,14 @@ def test_previous_public_safe_report_stays_downloadable_after_clock_evidence_upd
     assert package_template(template, 'audio')
 
 
+@pytest.mark.parametrize(('kind', 'available'), [('image', True), ('audio', True), ('document', True), ('video', False)])
+def test_old_mouth_crop_labels_require_a_new_video_copy_only(kind, available):
+    from app.reports.public_policy import downloadable_template, package_template
+
+    assert downloadable_template('veritas-report-2.0.r182', kind) is available
+    assert package_template('veritas-report-2.0.r182', kind) is available
+
+
 def test_r60_report_with_private_contribution_prose_is_preserved_but_withheld(monkeypatch):
     from app.reports.public_policy import downloadable_template, package_template
 

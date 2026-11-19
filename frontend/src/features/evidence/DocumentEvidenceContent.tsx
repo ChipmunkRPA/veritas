@@ -38,6 +38,7 @@ const originalLocationLabels: Record<DocumentOriginalTextLocation['coordinate'],
   word_note_paragraph: 'Original Word note paragraph characters',
   odt_paragraph: 'Decoded OpenDocument paragraph characters',
   rtf_paragraph: 'Decoded Rich Text block characters',
+  markdown_paragraph: 'Decoded Markdown paragraph characters',
   pptx_block: 'Decoded slide text characters',
   odp_block: 'Decoded OpenDocument slide text characters',
   epub_block: 'Decoded EPUB text characters',
@@ -904,7 +905,7 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
             const original = set.coverage?.original_text_locations?.packets[packet.id]?.find((row) => row.anchor_index === index)
             return <li key={index}>
               {packageAnchorLabel(anchor) ?? (anchor.page != null ? `Page ${anchor.page}` : anchor.paragraph_index != null
-                ? `${original?.coordinate === 'rtf_paragraph' ? 'Text block' : 'Paragraph'} ${anchor.paragraph_index + 1}`
+                ? `${original?.coordinate === 'markdown_paragraph' ? 'Decoded Markdown paragraph' : original?.coordinate === 'rtf_paragraph' ? 'Text block' : 'Paragraph'} ${anchor.paragraph_index + 1}`
                 : anchor.paragraph != null ? `Paragraph ${anchor.paragraph}` : 'Recorded source passage')}
               {anchor.kind === 'docx' && anchor.body_path && ` · document path ${anchor.body_path.join(' / ')}`}
               {anchor.mime_part != null && ` · email part ${anchor.mime_part}`}{anchor.quote_role && ` · ${anchor.quote_role}`}

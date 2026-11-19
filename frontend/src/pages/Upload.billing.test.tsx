@@ -33,10 +33,10 @@ vi.mock('../features/intake/IntakeChecks', () => ({ default: () => null }))
 vi.mock('../features/cases/NewCaseDialog', () => ({ default: () => null }))
 const source = 'This is a longer sample document with enough words to submit for automated authenticity analysis and evidence.'
 const clients: QueryClient[] = []
-function mount() {
+function mount(path = '/upload?kind=document') {
   const client = new QueryClient({ defaultOptions: { queries: { retry: false }, mutations: { retry: false } } })
   clients.push(client)
-  return render(<QueryClientProvider client={client}><MemoryRouter initialEntries={['/upload?kind=document']}><Upload /></MemoryRouter></QueryClientProvider>)
+  return render(<QueryClientProvider client={client}><MemoryRouter initialEntries={[path]}><Upload /></MemoryRouter></QueryClientProvider>)
 }
 beforeEach(() => {
   fixtures.billing.data.purchase_notice = JSON.parse(readFileSync('../backend/tests/fixtures/purchase_notice.json', 'utf8'))
@@ -46,6 +46,30 @@ beforeEach(() => {
 afterEach(() => { cleanup(); clients.forEach((c) => c.clear()); clients.length = 0; vi.resetAllMocks() })
 
 describe('paid analysis intake', () => {
+  it.each(['review.DOCX', 'article.pdf', 'deck.pptx', 'book.xlsx', 'message.eml'])('routes a dropped %s to Document before checkout', async (name) => {
+    const file = new File(['sample'], name)
+    mount('/upload')
+    expect(screen.getByRole('tab', { name: 'Image' }).getAttribute('aria-selected')).toBe('true')
+    fireEvent.drop(screen.getByTestId('drop-zone'), { dataTransfer: { files: [file] } })
+    await screen.findByText(name)
+    expect(screen.getByRole('tab', { name: 'Document' }).getAttribute('aria-selected')).toBe('true')
+    expect((screen.getByRole('button', { name: /Continue to checkout/ }) as HTMLButtonElement).disabled).toBe(true)
+    expect(billingApi.checkout).not.toHaveBeenCalled()
+    vi.mocked(billingApi.checkout).mockResolvedValue({ order_id: 'saved-order', checkout_url: 'https://checkout.stripe.com/c/pay/test', status: 'awaiting_payment' })
+    fireEvent.click(screen.getByRole('checkbox', { name: /I understand and accept/ }))
+    fireEvent.click(screen.getByRole('button', { name: /Continue to checkout/ }))
+    await waitFor(() => expect(billingApi.checkout).toHaveBeenCalledTimes(1))
+    expect(vi.mocked(billingApi.checkout).mock.calls[0].slice(0, 2)).toEqual(['document', file])
+  })
+
+  it('shows the conversion guidance when an older Word file is dropped on a media tab', async () => {
+    mount('/upload?kind=video')
+    fireEvent.drop(screen.getByTestId('drop-zone'), { dataTransfer: { files: [new File(['older Word'], 'draft.doc')] } })
+    expect((await screen.findByRole('alert')).textContent).toContain('Save the older Word file as DOCX or PDF')
+    expect(screen.getByRole('tab', { name: 'Document' }).getAttribute('aria-selected')).toBe('true')
+    expect(billingApi.checkout).not.toHaveBeenCalled()
+  })
+
   it('accepts Word and saved XHTML, and guides users who choose an older Word file', () => {
     const { container } = mount()
     const input = container.querySelector<HTMLInputElement>('input[type="file"]')!

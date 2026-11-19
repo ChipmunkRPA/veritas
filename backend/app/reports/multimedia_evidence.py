@@ -1230,6 +1230,10 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             repeated_sequence = packet.get("picture_sequence")
             row["picture_sequence"] = copy.deepcopy(repeated_sequence)
             mouth_hold = packet.get("mouth_local_hold")
+            if mouth_hold is not None:
+                row["mouth_local_hold"] = copy.deepcopy(mouth_hold)
+            if hold_sound := packet.get("mouth_hold_sound"):
+                row["mouth_hold_sound"] = copy.deepcopy(hold_sound)
             eye_hold = packet.get("eye_local_hold")
             if eye_hold is not None:
                 row["eye_local_hold"] = copy.deepcopy(eye_hold)
@@ -1437,10 +1441,13 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 row["locator"] = f"Audio {a:.3f}-{b:.3f} s"
         else:
             locations = []
+            markdown = part["source"].get("method") == "markdown"
             for anchor in packet["anchors"]:
                 label = document_native_locations.package_anchor_label(anchor) or (
                          f"page {anchor['page']}" if anchor["kind"] == "pdf" else
                          f"paragraph {anchor['paragraph_index'] + 1}" if anchor["kind"] == "docx" else
+                         f"Decoded Markdown paragraph {anchor['paragraph_index'] + 1}" if markdown and "paragraph_index" in anchor else
+                         "Decoded Markdown" if markdown else
                          f"MIME {anchor.get('mime_part', 'body')}" if anchor["kind"] in {"email", "markup"} else
                          str(anchor["kind"]))
                 if label not in locations:

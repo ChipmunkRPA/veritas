@@ -29,6 +29,7 @@ from scripts import document_word_projection_app as sample
 FIRST = "😀 First sentence has enough wording to inspect."
 MIDDLE = "The  middle sentence includes a source position."
 LAST = "The final sentence explains the report's purpose."
+MARKDOWN_PARAGRAPHS = [FIRST, "  " + MIDDLE, LAST]
 
 
 @pytest.mark.parametrize(("project", "breaks", "schema"), [
@@ -105,6 +106,10 @@ def _prepare(ext, path):
         # A soft line break starts another decoded text block within the same authored paragraph.
         first = FIRST.replace("😀", r"\u-10179?\u-8704?")
         path.write_bytes((r"{\rtf1\ansi\uc1 " + first + r"\line " + MIDDLE + r"\par " + LAST + "}").encode("ascii"))
+    elif ext in {".md", ".markdown"}:
+        middle = MIDDLE.replace("middle", "**middle**").replace("source position", "[source position](https://example.invalid/source)")
+        text = f"# {FIRST}\r\n\r\n```\r\nExcluded code block.\r\n```\r\n\r\n>   {middle}\r\n\r\n{LAST}"
+        path.write_bytes(text.encode("utf-16" if ext == ".markdown" else "utf-8-sig"))
     else:
         message = EmailMessage(policy=policy.SMTP)
         message.set_content(
@@ -156,6 +161,8 @@ def _snapshot(evidence, analysis, result):
         (".docx", "word_paragraph", "Original Word paragraph characters"),
         (".odt", "odt_paragraph", "Decoded OpenDocument paragraph characters"),
         (".rtf", "rtf_paragraph", "Decoded Rich Text block characters"),
+        (".md", "markdown_paragraph", "Decoded Markdown paragraph characters"),
+        (".markdown", "markdown_paragraph", "Decoded Markdown paragraph characters"),
         (".eml", "decoded_email_html", "Decoded email HTML source characters"),
     ],
 )
@@ -183,6 +190,8 @@ def test_original_text_locations_follow_native_source_in_exports_and_replay(
             text = [FIRST, "  " + MIDDLE, LAST][anchor["paragraph_index"]]
         elif ext == ".rtf":
             text = [FIRST, MIDDLE, LAST][anchor["paragraph_index"]]
+        elif ext in {".md", ".markdown"}:
+            text = MARKDOWN_PARAGRAPHS[anchor["paragraph_index"]]
         else:
             message = BytesParser(policy=policy.default).parsebytes(original.read_bytes())
             text = message.get_body(preferencelist=("html",)).get_content()
@@ -192,6 +201,10 @@ def test_original_text_locations_follow_native_source_in_exports_and_replay(
     if ext == ".eml":
         assert len(native[1]["ranges"]) == 3 and native[1]["ranges"][0][1] < native[1]["ranges"][1][0]
         assert {anchor["quote_role"] for anchor in packet["anchors"]} == {"body", "quoted"}
+    if ext in {".md", ".markdown"}:
+        assert [anchor["paragraph_index"] for anchor in packet["anchors"]] == [0, 1, 2]
+        assert native[1]["ranges"] == [[2, 2 + len(MIDDLE)]]
+        assert "Excluded code block" not in decoded["text"] and "https://example.invalid" not in decoded["text"]
 
     snapshot = _snapshot(evidence, analysis, result)
     monkeypatch.setattr(multimedia_evidence, "default_store", lambda: store)
@@ -203,6 +216,9 @@ def test_original_text_locations_follow_native_source_in_exports_and_replay(
     assert not rendered.refused and label in pdf
     if ext == ".rtf":
         assert "Decoded Rich Text block 2." in pdf
+    if ext in {".md", ".markdown"}:
+        assert "Decoded Markdown paragraph 2." in pdf
+        assert "MIME body" not in pdf
     assert f"). {label}" in pdf
     assert all(f"[{a}, {b})" in pdf for row in native for a, b in row["ranges"])
 
@@ -220,7 +236,7 @@ def test_original_text_locations_follow_native_source_in_exports_and_replay(
         )
 
 
-@pytest.mark.parametrize("ext", [".odt", ".rtf"])
+@pytest.mark.parametrize("ext", [".odt", ".rtf", ".md", ".markdown"])
 def test_original_document_replay_preserves_historical_unmapped_paragraphs(packet_factory, tmp_path, ext):
     original = tmp_path / ("source" + ext)
     _prepare(ext, original)
@@ -230,6 +246,7 @@ def test_original_document_replay_preserves_historical_unmapped_paragraphs(packe
     assert locations.PARAGRAPH_MAP_KEY not in evidence["coverage"]
     changed = extract(original, ext)
     assert changed.text == decoded["text"] and changed.source_map != decoded["source_map"]
+    assert changed.paragraphs == decoded["paragraphs"]
     bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
               "source_commitment": {"sha256": analysis.sha256, "bytes": analysis.size_bytes}}
     path = tmp_path / "earlier-evidence.zip"

@@ -13,7 +13,7 @@ import { cx } from '../lib/cx'
 import { Button, Disclosure, Eyebrow, Select, Tabs } from '../components/ui'
 import { MediaIcon } from '../components/MediaTypes'
 import SourcePreview from '../components/SourcePreview'
-import { beginBlocked, documentCoverageNotice, intakeKind, PROFILES, TABS, validate } from './intakeOptions'
+import { beginBlocked, documentCoverageNotice, intakeKind, isDocumentFilename, PROFILES, TABS, validate } from './intakeOptions'
 import IntakeChecks from '../features/intake/IntakeChecks'
 import IntakeFields from '../features/cases/IntakeFields'
 import NewCaseDialog from '../features/cases/NewCaseDialog'
@@ -44,6 +44,7 @@ export default function Upload() {
   const [created, setCreated] = useState<Case | null>(null)
   const [profile, setProfile] = useState<AnalysisProfile | ''>('')
   const inputRef = useRef<HTMLInputElement>(null)
+  const droppedDocument = useRef<File | null>(null)
   const attemptKey = useRef(crypto.randomUUID())
   const submitting = useRef(false)
   const billing = useBilling()
@@ -141,13 +142,26 @@ export default function Upload() {
     input.click()
   }
   const onTab = (k: Kind) => { if (submitting.current) return; setSearchParams((params) => { params.set('kind', k); return params }, { replace: true }) }
-  useEffect(() => { setFile(null); setBatch([]); setError(null); up.reset() }, [kind]) // clear source when its examination type changes
+  useEffect(() => {
+    const source = kind === 'document' ? droppedDocument.current : null
+    droppedDocument.current = null
+    choose(source)
+    up.reset()
+  }, [kind])
   useEffect(() => { attemptKey.current = crypto.randomUUID(); up.reset() }, [file, text, profile, kind]) // retry unchanged input with the same payment key
   useEffect(() => { setRiskAccepted(false) }, [file, text, profile, kind, purchaseNotice?.version, purchaseNotice?.sha256])
   const onDrop = (e: DragEvent) => {
     e.preventDefault()
     setDrag(false)
-    void droppedFiles(e.dataTransfer).then(chooseMany, () => setError('The dropped files could not be read'))
+    void droppedFiles(e.dataTransfer).then((files) => {
+      if (submitting.current) return
+      if (kind !== 'document' && files.length === 1 && isDocumentFilename(files[0].name)) {
+        droppedDocument.current = files[0]
+        onTab('document')
+        return
+      }
+      chooseMany(files)
+    }, () => setError('The dropped files could not be read'))
   }
 
   const pctLabel = progress == null ? null : `${Math.round(progress * 100)} %`  // N-19d: one percent format ("57%" against "70 %")

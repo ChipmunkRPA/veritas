@@ -197,6 +197,20 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.getByText(/Ordinary editing and polished writing can produce a similar response/)).toBeTruthy()
   })
 
+  it('labels the decoded Markdown paragraph separately from extracted document offsets', () => {
+    show({ ...document, coverage: { original_text_locations: {
+      schema: 'document-original-text-locations/1',
+      packets: { P01: [{ anchor_index: 0, coordinate: 'markdown_paragraph', ranges: [[2, 24]] }] },
+    } }, packets: [{ ...document.packets[0], artifacts: {}, anchors: [
+      { kind: 'markup', paragraph_index: 1, selected_start: 8, selected_end: 30 },
+    ] }] })
+    const summary = screen.getByText('Source anchors')
+    fireEvent.click(summary)
+    const anchor = within(summary.closest('details')!).getByRole('listitem')
+    expect(anchor.textContent).toContain('Decoded Markdown paragraph 2 · Extracted characters [8, 30)')
+    expect(anchor.textContent).toContain('Decoded Markdown paragraph characters [2, 24)')
+  })
+
   it('links mismatched DOI evidence to both original Word ranges and the local registry scope', () => {
     const set = { ...document, packets: [], source: { ...document.source, chars: 250 }, coverage: {
       writing_bibliography: { schema: 'chipmunk.writing-bibliography/1', heading: 'References', entry_count: 3,

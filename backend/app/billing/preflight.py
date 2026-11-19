@@ -157,36 +157,17 @@ def _av(path: Path, kind: str) -> None:
 
 
 def _only_directly_hidden_word_text(document) -> bool:
-    """Prove that every readable character is covered by a mapped, directly hidden Word run."""
-    from app.evidence import document_word_visibility
-
-    visibility = document.meta.get(document_word_visibility.KEY, {})
-    hidden = {}
-    for location in visibility.get("locations", ()):
-        if "run_basis" not in location:
-            path = tuple(location["body_path"])
-            hidden.setdefault(path, set()).add((location["run"], location["source_start"], location["source_end"]))
-    if not hidden:
+    """Check the retained writing against the reader's private paragraph proofs."""
+    if not document.word_hidden_only_paths:
         return False
 
     readable = bytearray(char.isprintable() and not char.isspace() for char in document.text)
     if not any(readable):
         return False
     for block in document.source_map:
-        if block["kind"] != "docx" or not block.get("run_mapping_complete"):
-            continue
-        recorded = hidden.get(tuple(block["body_path"]), ())
-        runs = [(item["start"], item["end"]) for item in block["runs"]
-                if (item["run"], item["start"], item["end"]) in recorded]
-        if not runs:
-            continue
-        for start, end, source_start, source_end in block["source_ranges"]:
-            if end - start != source_end - source_start:
-                continue
-            for left, right in runs:
-                a, b = max(source_start, left), min(source_end, right)
-                if a < b:
-                    readable[start + a - source_start:start + b - source_start] = b"\0" * (b - a)
+        if block["kind"] == "docx" and tuple(block["body_path"]) in document.word_hidden_only_paths:
+            start, end = block["start"], block["end"]
+            readable[start:end] = bytes(end - start)
     return not any(readable)
 
 
@@ -222,7 +203,7 @@ def _document(path: Path, extension: str) -> None:
     try:
         if extension in {".docx", ".odt"}:
             check_document_archive_safe(path, extension, check_crc=True)
-        document = extract(path, extension, allow_ocr=False)
+        document = extract(path, extension, allow_ocr=False, check_word_checkout_visibility=extension == ".docx")
     except ValueError as error:
         raise PreflightError(str(error)) from None
 

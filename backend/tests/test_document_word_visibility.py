@@ -213,18 +213,29 @@ def test_paid_document_pipeline_publishes_word_visibility(billing):
         assert result["manifest"]["sampling"][visibility.COMMITMENT] == canonical_hash(evidence["coverage"][visibility.KEY])
 
 
-def test_hidden_only_word_does_not_create_a_payment_order(billing):
+@pytest.mark.parametrize(("hidden_runs", "include_visible"), [(1, False), (25, False), (25, True)])
+def test_word_checkout_checks_hidden_text_beyond_report_limit(billing, hidden_runs, include_visible):
     document = Document()
     text = "These hidden words must never reach payment because the document contains no other writing in its supported body."
-    document.add_paragraph().add_run(text).font.hidden = True
+    paragraph = document.add_paragraph()
+    for _ in range(hidden_runs):
+        paragraph.add_run(text + " ").font.hidden = True
+    if include_visible:
+        paragraph.add_run("This visible passage contains enough words for a reader to understand the purpose of this ordinary document.")
     content = io.BytesIO()
     document.save(content)
 
     response = upload(billing, filename="hidden.docx", content=content.getvalue(), kind="document",
                       mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+    assert counts(billing) == (0, 0, 0)
+    if include_visible:
+        assert response.status_code == 201, response.text
+        assert len(billing.created) == 1
+        return
+
     assert response.status_code == 422
     assert "only text marked hidden" in response.json()["detail"]
     assert text not in response.text
-    assert billing.created == [] and counts(billing) == (0, 0, 0)
+    assert billing.created == []
     with billing.sessions() as db:
         assert db.query(BillingOrderRow).count() == 0

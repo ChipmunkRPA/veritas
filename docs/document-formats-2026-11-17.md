@@ -182,7 +182,9 @@ as macro-free XLSX, CSV or PDF.
 Before creating a payment, checkout checks that writing files have at least
 15 readable words and fit within the configured extracted-text limit, normally
 120,000 characters. Some Word files can still produce native revision evidence
-with fewer words. PDF checkout validates the file structure and allows scanned
+with fewer words. Checkout blocks Word files when all of their extracted
+writing is directly marked hidden and the source positions confirm it. PDF
+checkout validates the file structure and allows scanned
 pages for local OCR during the paid analysis. Text recognition may yield too
 little writing to assess.
 Rich Text files with binary data should be saved as DOCX or PDF.

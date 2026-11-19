@@ -34,6 +34,7 @@ class Document:
     source_map: list[dict] = field(default_factory=list)
     source_rasters: dict[str, str] = field(default_factory=dict)  # SHA256 -> base64 exact OCR input PNG, child transport only
     word_review: dict | None = None
+    word_hidden_only_paths: set[tuple[int | str, ...]] = field(default_factory=set)  # checkout only
 
 
 SOURCE_MAP_VERSION = "document-source/1"
@@ -784,7 +785,8 @@ def docx_paragraphs(parent, elements, body_path=(), *, include_content_controls=
 def extract_docx(path: Path, *, project_word_revisions: bool = True, project_word_breaks: bool = True,
                  include_word_content_controls: bool = True, include_word_saved_fields: bool = True,
                  map_word_table_grid: bool = True, map_word_table_controls: bool = True,
-                 map_word_hyperlink_runs: bool = True, include_word_linked_notes: bool = True) -> Document:
+                 map_word_hyperlink_runs: bool = True, include_word_linked_notes: bool = True,
+                 check_word_checkout_visibility: bool = False) -> Document:
     from bisect import bisect_left
 
     from app.detectors.text import word_linked_notes, word_saved_fields
@@ -798,6 +800,7 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
     parts: list[tuple[str, dict]] = []
     percentage_body_paragraphs = []
     hidden_locations = []
+    hidden_only_paths: set[tuple[int | str, ...]] = set()
     checked_paragraphs = hidden_runs = 0
     fields_found = int(d.element.body.xpath("count(.//w:fldSimple)")) if include_word_saved_fields else 0
     can_project_fields = bool(fields_found and review and review["status"] == "no_match"
@@ -825,6 +828,7 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
                 field_ranges[path_here[0]] = saved
         projected = projected_control or bool(saved)
         body_paragraph = len(percentage_body_paragraphs) + 1 if top_level else None
+        hidden_end = 0 if check_word_checkout_visibility and not projected and map_word_hyperlink_runs else None
         if text.strip():
             checked_paragraphs += 1
             for location in document_word_visibility.inspect_paragraph(
@@ -832,6 +836,11 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
                 hidden_runs += 1
                 if len(hidden_locations) < document_word_visibility.MAX_LOCATIONS:
                     hidden_locations.append(location)
+                if hidden_end is not None:
+                    # A readable gap would include text outside the directly hidden runs.
+                    gap = text[hidden_end:location["source_start"]]
+                    hidden_end = (None if any(char.isprintable() and not char.isspace() for char in gap)
+                                  else location["source_end"])
         joins_next = joined is not None and paragraph._p in joined
         if top_level:
             style = paragraph.style
@@ -853,6 +862,9 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
         source = {"kind": "docx", "body_path": path_here, "paragraph_index": len(parts),
                   "runs": [] if projected else runs,
                   "run_mapping_complete": not projected and cursor == len(text)}
+        if (hidden_end and source["run_mapping_complete"]
+                and not any(char.isprintable() and not char.isspace() for char in text[hidden_end:])):
+            hidden_only_paths.add(tuple(path_here))
         if joins_next:
             source["join_following_paragraph"] = True
         parts.append((text, source))
@@ -932,6 +944,7 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
         doc.meta[JOINED_PARAGRAPHS] = len(joined)
     if PART_NAME.fullmatch(part):
         doc.meta[document_word_visibility.KEY] = document_word_visibility.build(part, checked_paragraphs, hidden_runs, hidden_locations)
+        doc.word_hidden_only_paths = hidden_only_paths
     return doc
 
 
@@ -1283,7 +1296,8 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             skip_hidden_slide_groups: bool = True, map_word_hyperlink_runs: bool = True,
             map_word_table_controls: bool = True, skip_hidden_odt_sections: bool = True,
             include_word_linked_notes: bool = True, skip_hidden_xlsx_cell_formats: bool = True,
-            skip_hidden_rtf_runs: bool = True, skip_markdown_fences: bool = True) -> Document:
+            skip_hidden_rtf_runs: bool = True, skip_markdown_fences: bool = True,
+            check_word_checkout_visibility: bool = False) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
@@ -1291,7 +1305,8 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
         d = extract_docx(path, project_word_revisions=project_word_revisions, project_word_breaks=project_word_breaks,
                          include_word_content_controls=include_word_content_controls, include_word_saved_fields=include_word_saved_fields,
                          map_word_table_grid=map_word_table_grid, map_word_hyperlink_runs=map_word_hyperlink_runs,
-                         map_word_table_controls=map_word_table_controls, include_word_linked_notes=include_word_linked_notes)
+                         map_word_table_controls=map_word_table_controls, include_word_linked_notes=include_word_linked_notes,
+                         check_word_checkout_visibility=check_word_checkout_visibility)
     elif ext == ".odt":
         from app.detectors.text.opendocument import body_paragraphs
 

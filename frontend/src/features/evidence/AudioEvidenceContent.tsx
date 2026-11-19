@@ -6,6 +6,7 @@ import AudioBackgroundContext from './AudioBackgroundContext'
 import AudioSoundEvents from './AudioSoundEvents'
 import AudioStereoContext from './AudioStereoContext'
 import AudioRepetitionContext from './AudioRepetitionContext'
+import { briefCoverageLabels, briefVoiceCoverage } from './briefVoiceCoverage'
 import { EvidenceAudio, EvidenceLimits, EvidenceMeasurements, EvidencePicture, EvidenceReferences, evidenceCard, evidenceGrid } from './EvidenceMedia'
 import { measurementValue } from './imagePackets'
 import { rationalSeconds, seconds, type AudioEvidencePacket, type AudioEvidenceSet, type BriefVoiceReview, type LongVoiceCoverageStatus } from './multimediaPackets'
@@ -69,6 +70,7 @@ function SpeechWindowSelection({ selection, rate, videoOriginS }: {
 function BriefSpeechWindows({ review, set, token, mediaReady }: {
   review: BriefVoiceReview; set: AudioEvidenceSet; token: string; mediaReady: boolean
 }) {
+  const coverage = briefVoiceCoverage(review, set.source)
   return <section id="media-evidence-brief-voice-review" aria-label="Brief speech windows"
     className="mt-5 rounded-md border border-border p-4 scroll-mt-20">
     <h3 className="m-0 text-body font-medium">Brief speech windows</h3>
@@ -78,6 +80,41 @@ function BriefSpeechWindows({ review, set, token, mediaReady }: {
     </p>}
     {review.status !== 'skipped' && <p className="mt-2 mb-0 text-caption text-text-muted">
       {review.speech_windows_checked} of {review.scheduled_windows} scheduled 750 ms windows checked.
+    </p>}
+    {coverage ? <div className="mt-4 text-small" data-testid="brief-speech-coverage">
+      <h4 className="m-0 text-small font-medium">Where brief speech was checked</h4>
+      <p className="mt-2 mb-0 text-caption text-text-muted">
+        {(coverage.checked_samples / 16000).toFixed(3)} of 12.000 source seconds lie inside a checked window.
+        {' '}Overlapping checked windows are counted once. Coverage does not establish authenticity.
+      </p>
+      <p className="mt-2 mb-0 text-caption text-text-muted">Background sound can affect speech detection. Limited or uncertain speech can leave a window unchecked.</p>
+      <table aria-label="Brief speech coverage intervals" className="mt-2 w-full text-left text-caption">
+        <thead><tr><th scope="col">Source interval</th><th scope="col">Coverage</th></tr></thead>
+        <tbody>{coverage.intervals.map(interval => <tr key={interval.start_sample} className="border-t border-border">
+          <td className="py-2 pr-3 align-top font-mono">
+            {(interval.start_sample / 16000).toFixed(3)}–{(interval.end_sample / 16000).toFixed(3)} s
+            <SourceTimestamps ranges={[{ ...interval, source_start_pts: interval.start_sample,
+              source_end_pts: interval.end_sample, time_base: '1/16000' }]} />
+          </td>
+          <td className="py-2 align-top">{briefCoverageLabels[interval.status]}</td>
+        </tr>)}</tbody>
+      </table>
+      <details className="mt-3 text-caption"><summary className="cursor-pointer">All 23 scheduled windows</summary>
+        <table aria-label="Brief speech scheduled windows" className="mt-2 w-full text-left text-caption">
+          <thead><tr><th scope="col">Source interval</th><th scope="col">Coverage</th></tr></thead>
+          <tbody>{coverage.windows.map(window => <tr key={window.start_sample} className="border-t border-border">
+            <td className="py-2 pr-3 align-top font-mono">
+              {(window.start_sample / 16000).toFixed(3)}–{(window.end_sample / 16000).toFixed(3)} s
+              <SourceTimestamps ranges={[{ ...window, source_start_pts: window.start_sample,
+                source_end_pts: window.end_sample, time_base: '1/16000' }]} />
+            </td>
+            <td className="py-2 align-top">{window.checked ? 'Checked' : briefCoverageLabels.insufficient_speech}</td>
+          </tr>)}</tbody>
+        </table>
+      </details>
+    </div> : <p className="mt-3 mb-0 text-caption text-text-muted">
+      {review.status === 'skipped' ? 'No source-time coverage was recorded because this check did not complete.'
+        : 'Exact source-time coverage was not recorded for this result.'}
     </p>}
     {review.status === 'flagged' && review.windows.length > 0 && <>
       <p className="mt-2 mb-0 text-caption text-text-muted">Each marked excerpt appears once, even when it supports two pairs.</p>

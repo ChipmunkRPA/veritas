@@ -468,6 +468,29 @@ Original source ticks [{{ window.native_source_range.start_pts }}, {{ window.nat
 {% if review.schema == 'chipmunk.brief-voice-review/2' %}<p class="caption">Both recorded channels contain exactly the same samples as the analyzed mono audio.</p>{% endif %}
 <p class="caption">{% if review.status == 'skipped' %}Skipped. {% endif %}{{ review.reason }}
 {% if review.status != 'skipped' %}{{ review.speech_windows_checked }} of {{ review.scheduled_windows }} scheduled windows had enough detected speech to check.{% endif %}</p>
+{% set brief_coverage = review.get('display_coverage') %}
+{% if brief_coverage %}
+<h4>Where brief speech was checked</h4>
+<p class="caption">{{ '%.3f' | format(brief_coverage.checked_samples / 16000) }} of 12.000 source seconds lie inside a checked window.
+Overlapping checked windows are counted once. Coverage does not establish authenticity.
+Background sound can affect speech detection. Limited or uncertain speech can leave a window unchecked.</p>
+<table><thead><tr><th>Source interval</th><th>Coverage</th></tr></thead><tbody>
+{% for interval in brief_coverage.intervals %}<tr>
+<td>{{ '%.3f' | format(interval.start_sample / 16000) }}–{{ '%.3f' | format(interval.end_sample / 16000) }} s.
+Source PTS [{{ interval.start_sample }}, {{ interval.end_sample }}) at 1/16000.</td>
+<td>{{ {'checked': 'At least one checked window', 'insufficient_speech': 'Not checked · limited or uncertain speech', 'outside_schedule': 'Outside this check’s schedule'}[interval.status] }}</td>
+</tr>{% endfor %}</tbody></table>
+<h4>All 23 scheduled windows</h4>
+<table><thead><tr><th>Source interval</th><th>Coverage</th></tr></thead><tbody>
+{% for window in brief_coverage.windows %}<tr>
+<td>{{ '%.3f' | format(window.start_sample / 16000) }}–{{ '%.3f' | format(window.end_sample / 16000) }} s.
+Source PTS [{{ window.start_sample }}, {{ window.end_sample }}) at 1/16000.</td>
+<td>{{ 'Checked' if window.checked else 'Not checked · limited or uncertain speech' }}</td>
+</tr>{% endfor %}</tbody></table>
+<p class="caption">Window admissions are recorded at JSON pointer <span class="mono">/brief_voice_review/window_checks</span>.</p>
+{% else %}
+<p class="caption">{{ 'No source-time coverage was recorded because this check did not complete.' if review.status == 'skipped' else 'Exact source-time coverage was not recorded for this result.' }}</p>
+{% endif %}
 {% for window in review.windows %}
 <div class="multimedia-scored-context" id="multimedia-evidence-{{ window.id }}">
 <p class="caption"><strong>{{ window.id }}</strong> · {{ '%.3f' | format(window.start_s) }}–{{ '%.3f' | format(window.end_s) }} s.
@@ -998,7 +1021,7 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% if evidence.stereo_repetition.get('rate_measurement') and evidence.stereo_repetition.rate_measurement.pairs %}{% set stereo_repeats.found = true %}{% endif %}
 {% for row in evidence.stereo_repetition.channels %}{% if row.measurement.pairs or (row.get('gain_measurement') and row.gain_measurement.pairs) %}{% set stereo_repeats.found = true %}{% endif %}{% endfor %}
 {% endif %}
-{% if not stereo_repeats.found and not (evidence.get('background_reduced_voice_review') and evidence.background_reduced_voice_review.status == 'flagged') and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') and not (evidence.get('percentage_consistency') and evidence.percentage_consistency.groups) and not evidence.get('printed_ai_use_heading') and not (evidence.get('doi_reference_consistency') and evidence.doi_reference_consistency.different_work) and not (evidence.get('saved_link_hosts') and evidence.saved_link_hosts.findings) and not evidence.get('reference_link_discrepancies') %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
+{% if not stereo_repeats.found and not (evidence.get('brief_voice_review') and evidence.brief_voice_review.status == 'flagged' and evidence.brief_voice_review.windows) and not (evidence.get('background_reduced_voice_review') and evidence.background_reduced_voice_review.status == 'flagged') and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') and not (evidence.get('percentage_consistency') and evidence.percentage_consistency.groups) and not evidence.get('printed_ai_use_heading') and not (evidence.get('doi_reference_consistency') and evidence.doi_reference_consistency.different_work) and not (evidence.get('saved_link_hosts') and evidence.saved_link_hosts.findings) and not evidence.get('reference_link_discrepancies') %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
 {% if evidence.omitted %}<p class="caption">{{ evidence.omitted }} additional candidates were omitted from this bounded evidence set.</p>{% endif %}
 {% for note in evidence.limitations %}<p class="caption">{{ note }}</p>{% endfor %}
 {% endif %}

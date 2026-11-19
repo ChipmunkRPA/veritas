@@ -1697,6 +1697,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             ]
     brief_voice_review = copy.deepcopy(document.get(audio_brief_voice_binding.KEY))
     if brief_voice_review:
+        from app.reports.brief_voice_coverage import coverage as brief_coverage
+
+        brief_voice_review["display_coverage"] = brief_coverage(brief_voice_review, document["source"])
         for window in brief_voice_review["windows"]:
             window["waveform"] = plate("waveform", window["artifacts"]["waveform"],
                                        "Waveform with the selected 750 ms window highlighted")

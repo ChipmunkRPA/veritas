@@ -370,6 +370,7 @@ export interface BriefVoiceReview {
   status: 'flagged' | 'no_flag' | 'unassessed' | 'skipped'
   reason: string; limitation: string; affects_overall_confidence: false
   scheduled_windows: number; speech_windows_checked: number
+  window_checks?: { start_sample: number; speech_samples: number; elevated: boolean | null }[]
   windows: (SampleInterval & { id: string; start_s: number; end_s: number;
     source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges'];
     artifacts: Record<'selected_clip' | 'waveform', EvidenceAsset> })[]

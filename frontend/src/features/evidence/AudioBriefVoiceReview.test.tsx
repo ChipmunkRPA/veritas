@@ -120,4 +120,43 @@ describe('brief source-linked speech windows', () => {
     rerender(page(set))
     expect(section().queryByText('Both recorded channels contain exactly the same samples as the analyzed mono audio.')).toBeNull()
   })
+
+  it.each(['chipmunk.brief-voice-review/1', 'chipmunk.brief-voice-review/2'] as const)('shows original checked, uncertain and uncovered positions for %s', schema => {
+    const set = fixture()
+    const review = set.brief_voice_review!
+    review.schema = schema
+    review.status = 'unassessed'
+    review.windows = []
+    review.speech_windows_checked = 1
+    review.window_checks = Array.from({ length: 23 }, (_, i) => ({ start_sample: i * 8000,
+      speech_samples: i === 1 ? 6000 : 5999, elevated: i === 1 ? false : null }))
+    set.source.timeline_time_base = '1/16000'
+    set.source.timeline = [{ start_sample: 0, end_sample: 192000, source_pts: 0 }]
+    render(page(set))
+    const coverage = within(section().getByTestId('brief-speech-coverage'))
+    expect(coverage.getByText('Where brief speech was checked')).toBeTruthy()
+    const intervals = within(coverage.getByRole('table', { name: 'Brief speech coverage intervals' }))
+    expect(intervals.getAllByRole('row')).toHaveLength(5)
+    expect(intervals.getByText('0.500–1.250 s')).toBeTruthy()
+    expect(intervals.getByText('Source PTS [8000, 20000) at 1/16000.')).toBeTruthy()
+    expect(intervals.getAllByText('Not checked · limited or uncertain speech')).toHaveLength(2)
+    expect(intervals.getByText('11.750–12.000 s')).toBeTruthy()
+    expect(intervals.getByText('Outside this check’s schedule')).toBeTruthy()
+    fireEvent.click(coverage.getByText('All 23 scheduled windows'))
+    const windows = within(coverage.getByRole('table', { name: 'Brief speech scheduled windows' }))
+    expect(windows.getAllByRole('row')).toHaveLength(24)
+    expect(windows.getAllByText('Checked')).toHaveLength(1)
+    expect(coverage.queryByText(/Leans original/)).toBeNull()
+  })
+
+  it('does not infer exact coverage from a historical count or a skipped result', () => {
+    const set = fixture()
+    const { rerender } = render(page(set))
+    expect(section().getByText('Exact source-time coverage was not recorded for this result.')).toBeTruthy()
+    expect(section().queryByRole('table')).toBeNull()
+    set.brief_voice_review!.status = 'skipped'
+    rerender(page(set))
+    expect(section().getByText('No source-time coverage was recorded because this check did not complete.')).toBeTruthy()
+    expect(section().queryByRole('table')).toBeNull()
+  })
 })

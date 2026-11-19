@@ -103,3 +103,45 @@ two misplaced alerts. Agreement between views gave zero alerts and zero
 correct locations under competing speech or traffic. Both views use the
 same detector and the same recorded signal. The result motivates
 a separate evaluation of agreement before any product change.
+
+## Fixed score corrections on the original speech windows
+
+Two follow-ups replayed all 408 deliveries and 9,384 source-window admissions
+without running the voice detector again. A scalar correction fit separately
+on MLS foreground speech was evaluated on two other generator families. It
+was tested at its frozen wider point. A second comparison kept that point
+and required both short-window responses to exceed assessed non-overlapping
+speech on either side by at least 1.5 or 3.0 raw response units. Each arm
+kept the current short-window and two-second findings. A separate arithmetic
+recount verified the scalar cutoff and exact time overlaps.
+
+| Condition | Measurement | Current | Wider alone | Wider with 1.5-unit contrast | Wider with 3-unit contrast |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Clean | Located edits / 48 | 29 | 36 | 36 | 36 |
+| Clean | Ordinary alerts / 72 | 0 | 3 | 3 | 3 |
+| Traffic | Located edits / 48 | 0 | 0 | 0 | 0 |
+| Traffic | Ordinary alerts / 72 | 0 | 0 | 0 | 0 |
+| Competing speech | Located edits / 48 | 2 | 5 | 4 | 2 |
+| Competing speech | Ordinary alerts / 72 | 3 | 30 | 30 | 9 |
+
+All arms left the isolated backgrounds unflagged. With the wider point
+alone, one of three newly located competing-speech edits cleared every
+matched ordinary clock. The contrast additions supplied zero such noisy
+locations. Only 3 of 48 edited traffic recordings admitted an eligible
+short-window pair at the edit clock. With competing speech all 48 did, but
+the short-window responses ranked the edited signal higher than its matched
+genuine control at only 24 of 48 edit clocks. That comparison was 48 of 48
+for clean speech. The foregrounds and generator families were separate
+from fitting, while all four background captures had been used in the
+fitting or calibration panel. The frozen correction remains outside the
+app. These results distinguish insufficient speech admission from weak
+discrimination when two voices overlap.
+
+The brief speech evidence view and PDF now distinguish checked time, time
+with limited or uncertain speech, and time outside the check's schedule.
+For the supported twelve-second recordings, the original sample positions
+and all 23 window admissions appear alongside the selected listening ranges.
+The final 250 ms is outside this schedule. The display follows the retained
+admission data from each analysis. Six previously paid local analyses
+reproduced their signed original-file evidence and the same JSON exports
+when rendered with the new report layout.

@@ -165,3 +165,39 @@ done
   "$out/freeze.json.gz" "$out/transfer-baseline.json.gz" "$out/transfer-results.json.gz" --device mps
 python3 -B -S -m "$transfer" review "$out/freeze.json.gz" "$out/transfer-results.json.gz"
 ```
+
+## Source-independent official report follow-up
+
+Two sentence-selection variants were replayed on existing measurements.
+Requiring agreement between heads found 16 of 705 exact Gemini edit
+sentences, down from 20 at the tuned point, and raised ordinary alerts
+from 6 to 7 of 96. A length-conditional tail rule on the tuned response
+retained those 20 and added 28. It raised ordinary alerts from 6 to 13.
+On a separate Qwen report subset, the same rule found 10 of 188 exact
+sentences, up from 4, with 3 ordinary alerts out of 28, up from 1. It found
+one of 149 short edits from separately generated local examples, and
+flagged eight of nine ordinary files outside the report genre. These
+results limited the next test to medium and long official reports.
+
+Sixteen further official report pairs had no recorded source ID, text hash,
+or exact contiguous 24-word run in common with the project's 1,364
+previously recorded official reports or the model fitting and calibration
+panels. The fixed qualifications required 12–48 sentences, at least four
+edited sentences, at least 125 words in edited sentences, and exactly
+mapped native spans. A separate recount used the exact labeled spans. An
+independent Word extraction reproduced the paragraph and sentence locations
+on one untouched and edited pair per generator.
+
+| Selection rule | Exact edited sentences / 139 | Edited files located / 16 | Untouched files alerted / 16 |
+| --- | ---: | ---: | ---: |
+| Current app selection | 0 | 0 | 1 |
+| Previous tuned point | 4 | 3 | 1 |
+| Frozen length-conditional tail | 14 | 8 | 2 |
+
+All 32 files were assessed. The tail rule added one untouched alert and
+three misplaced ranges. Each affected edited file also contained a correct
+range. The gains were two exact locations in three Gemini publisher-test
+pairs and 12 in eight GPT Nano publisher-development pairs outside local
+calibration. Five earlier unused Gemini publisher-training pairs supplied
+no exact locations. These results support a separate transfer beyond GAO
+reports. The rule stays out of customer analyses pending that evaluation.

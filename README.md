@@ -29,7 +29,9 @@ are not prepared for use as court evidence or expert testimony.
 - **Audio:** selected source-bound speech windows, waveforms, spectrograms, and
   separate background/acoustic context. An optional
   [short speech edit check](docs/audio-six-ten-context-2026-11-16.md#local-six-second-check)
-  shows the selected range and plays the source excerpt. Background labels do not establish AI origin.
+  shows the selected range and plays the source excerpt. The brief speech
+  review shows the original recording intervals it could assess, including
+  gaps where speech was too uncertain. Background labels do not establish AI origin.
 - **Documents and email:** source-positioned writing observations and passage links.
   Upload Word (standard or Strict Open XML DOCX), PDF, ODT, PowerPoint (PPTX),
   Impress (ODP), Excel (XLSX), Calc (ODS), CSV, TSV, EPUB, RTF, TXT, Markdown,

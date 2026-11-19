@@ -1,0 +1,60 @@
+{
+  "schema": "chipmunk.writing-phrase-seams.aggregate/1",
+  "held": {
+    "independent_source_groups": 6,
+    "sentences_per_view_min": 13,
+    "sentences_per_view_max": 15,
+    "earlier_excerpts": 6,
+    "archived_copyedits": 6,
+    "archived_copyedits_in_positive_shape": 1,
+    "labeled_edits": 3,
+    "distinct_positive_work_groups": 3,
+    "editor_families_with_positives": 2,
+    "direct_labeled_edits": 1,
+    "projected_labeled_edits": 2
+  },
+  "generation": {
+    "attempts_per_editor_per_group": 4,
+    "editor_families": 2,
+    "direct_reply_outcomes": {
+      "eligible_reply": 1,
+      "identical_archived_sentence": 2,
+      "failed_single_word_block_rule": 42,
+      "outside_change_or_too_small": 2,
+      "bad_bounds": 1
+    },
+    "reviewable_projections": 8,
+    "blind_review": {"preserved": 3, "changed": 2, "uncertain": 4}
+  },
+  "calibration": {
+    "original_reference_reports": 600,
+    "genuine_calibration_files": 12,
+    "operating_point": 1.741920504295,
+    "reference_shard_sha256": "e4a52b8cd3a56ac9d748d101f9d1ea75e6ae13b6eb6c38dc95e41f64488c45b5"
+  },
+  "current_distinct_classifier_inputs": 205,
+  "measurements": {
+    "current_pooled": {"assessed": 15, "located_edits": 0, "earlier_flags": 0, "archive_flags": 0},
+    "current_within_document": {"assessed": 15, "located_edits": 0, "earlier_flags": 0, "archive_flags": 0},
+    "current_report_confirmed": {"assessed": 15, "located_edits": 0, "earlier_flags": 0, "archive_flags": 0},
+    "candidate": {"assessed": 15, "located_edits": 0, "earlier_flags": 0, "archive_flags": 0}
+  },
+  "candidate_geometry": {
+    "before_candidate_rules": 39,
+    "files_with_useful_geometry_before_rules": 3,
+    "whitespace_rule_alone": 7,
+    "files_with_useful_geometry_after_whitespace_rule": 1,
+    "vocabulary_rule_alone": 0,
+    "both_rules": 0
+  },
+  "native_format_positions_verified": {"txt": 15, "docx": 15},
+  "local_trial_commitments": {
+    "frozen_protocol_sha256": "8f88881772d53dcac6855b212a231132ce337d6ea7447cc82f1b9b24328aa2bf",
+    "frozen_projection_sha256": "cf28830bd131df09bea63db12821276cb86ef06f1dc846e139e10f67a0e24c35",
+    "held_plan_sha256": "7974043796cba768feb662328fb8bad41e31669301a21e87f488647715e4946e",
+    "comparison_sha256": "143ab458c63be5d25157d99d5f16401e221f47004681698b7b04c67a49ee9139",
+    "geometry_audit_sha256": "1833dc15f3fe4ba8c1f2d7995ad1c3e12bfdb8e89a064b47483ca418f5bb9c68",
+    "format_replay_sha256": "89a9e775e6bfe11a50d6d2b9d93f4f9472d93b0fcc6271cb1f5d428ce3a79caa"
+  },
+  "changes_served_confidence": false
+}

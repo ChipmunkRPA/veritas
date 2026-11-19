@@ -81,3 +81,7 @@ displayed a **209 ms** label and played the clip to completion. The unchanged
 clip produced a no-match result and independently replayed its signed source.
 With the timing option on and off, the same edit had the same overall
 assessment and confidence. [Local verification receipt](evaluation-panels/video-lip-motion-aac441-app-2026-11-18.json)
+
+The opt-in 360 × 288 route accepts a separate exact 25 fps source profile
+and checks for abrupt picture changes before comparing speech and mouth
+movement. [Native 25 fps and cut measurement](video-lip-native25-shot-2026-11-18.md)

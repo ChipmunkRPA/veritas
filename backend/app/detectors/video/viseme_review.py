@@ -134,11 +134,28 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None, 
         stereo_scope = None
     elif stereo_scope is None or binding.audio_origin(mapping, stereo_scope) is None:
         return binding.skipped("stereo_unresolved")
-    agreement_models = settings.video_lip_motion_sound_models
     shot_based_silence = bool(settings.video_lip_silent_mouth_review and stereo_scope is None and table is not None
                               and shot_frames == len(table) and supported_shots(table, mapping, shots))
+    shot_guard = None
+    if (not shot_based_silence and settings.video_lip_aac441_motion_review and settings.video_lip_aac441_native25_review
+            and stereo_scope is None
+            and table is not None and mapping and binding.native25_aac441_audio(mapping)
+            and agreement.native25_picture(table.pts, table.time_base, table.width, table.height)):
+        from app.detectors.video import lip_shot_guard
+
+        remaining = ctx.deadline.remaining()
+        if remaining is not None and remaining < 12.:
+            return binding.skipped("runtime")
+        try:
+            if lip_shot_guard.qualified_delivery(frame_store.path, table):
+                shot_guard = lip_shot_guard.scan(frame_store.path, table)
+        except (OSError, ValueError, RuntimeError, subprocess.SubprocessError):
+            return binding.skipped("runtime")
+        if shot_guard and shot_guard["boundary_frames"]:
+            return binding.shot_blocked(shot_guard)
+    agreement_models = settings.video_lip_motion_sound_models
     motion_only = (not shot_based_silence and settings.video_lip_aac441_motion_review and stereo_scope is None
-                   and supported_aac441_motion(table, mapping, shots, shot_frames))
+                   and (shot_guard is not None or supported_aac441_motion(table, mapping, shots, shot_frames)))
     if not (shot_based_silence or motion_only or supported(table, mapping, shots, stereo_scope)):
         return binding.skipped("unsupported")
 
@@ -189,7 +206,8 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None, 
             if shot_based_silence:
                 raw[silent.SHOT_KEY] = shots
         measured = binding.measured(raw, timestamps=table.pts, time_base=table.time_base,
-                                    source={"width": table.width, "height": table.height}, mapping=mapping, stereo_scope=stereo_scope)
+                                    source={"width": table.width, "height": table.height}, mapping=mapping,
+                                    stereo_scope=stereo_scope, shot_guard=shot_guard)
         _verify_anchors(frame_store, measured)
     except (OSError, ValueError, RuntimeError, subprocess.SubprocessError):
         return binding.skipped("runtime")

@@ -397,8 +397,12 @@ JSON pointer <span class="mono">/printed_ai_use_heading</span>.</p>
 {% endif %}
 {% if evidence.get('lip_timing_review') %}
 {% set review = evidence.lip_timing_review %}
-<h3>{% if review.schema == 'chipmunk.video-lip-timing/8' %}Speech activity and visible mouth movement{% elif review.schema in ['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4', 'chipmunk.video-lip-timing/5', 'chipmunk.video-lip-timing/6', 'chipmunk.video-lip-timing/7', 'chipmunk.video-lip-timing/10', 'chipmunk.video-lip-timing/11'] %}Speech and mouth comparison{% else %}Speech and mouth timing trial{% endif %}</h3>
+<h3>{% if review.schema == 'chipmunk.video-lip-timing/8' %}Speech activity and visible mouth movement{% elif review.schema in ['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4', 'chipmunk.video-lip-timing/5', 'chipmunk.video-lip-timing/6', 'chipmunk.video-lip-timing/7', 'chipmunk.video-lip-timing/10', 'chipmunk.video-lip-timing/11', 'chipmunk.video-lip-timing/12'] %}Speech and mouth comparison{% else %}Speech and mouth timing trial{% endif %}</h3>
 <p class="caption">{{ review.observation }}{% if review.status == 'matched' and not review.get('shot_coverage') %} See <a href="#multimedia-evidence-VLT01">VLT01</a> for the original frames and waveform.{% endif %}</p>
+{% if review.get('shot_guard') %}
+{% set guard = review.shot_guard %}
+<p class="caption">{% if guard.boundary_frames %}Abrupt picture changes on the source clock at {% for frame in guard.boundary_frames %}{{ '%.3f' | format(frame / 25) }} s (frame {{ frame }}){% if not loop.last %}, {% endif %}{% endfor %}.{% else %}The shot check read all {{ guard.frame_count }} source frames. Small jumps within one recording can escape this check.{% endif %} This check carries zero AI confidence weight.</p>
+{% endif %}
 {% if review.get('selected_audio') %}<p class="caption">Compared the picture with default audio track {{ review.selected_audio.source_stream_position + 1 }}. Dubbing, commentary, or a different voice can affect this comparison.</p>{% endif %}
 {% if review.get('shot_coverage') %}
 {% for shot in review.shot_coverage %}

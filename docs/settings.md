@@ -183,6 +183,7 @@ The 29.97 fps option defaults to false.
 | `VERITAS_VIDEO_EYE_LOCAL_HOLD_REVIEW` | `true` \| `false` | `false` | optional development-only evidence for eye-region holds on exact 60-picture 30 fps MP4s |
 | `VERITAS_VIDEO_LIP_AAC441_MOTION_REVIEW` | `true` \| `false` | `false` | optional development-only speech and mouth comparison for one 720 × 480 shot near 24 fps with up to four seconds of verified mono 44.1 kHz AAC-LC. Requires `VERITAS_VIDEO_LIP_TIMING_REVIEW=true`. |
 | `VERITAS_VIDEO_LIP_AAC441_DEFAULT_TRACK_REVIEW` | `true` \| `false` | `false` | optional development-only speech and mouth comparison on the uniquely marked default second audio track in a qualified two-track AAC-LC video. Requires both the general lip timing option and the 44.1 kHz motion option. |
+| `VERITAS_VIDEO_LIP_AAC441_NATIVE25_REVIEW` | `true` \| `false` | `false` | optional development-only speech and mouth comparison for qualified 360 × 288 AVC1 MP4 clips at exactly 25 fps with one mono 44.1 kHz AAC-LC track. Requires both the general lip timing option and the 44.1 kHz motion option. |
 | `VERITAS_VIDEO_REFERENCE_SHORT30_LOCAL_AREA` | `true` \| `false` | `false` | Optional development-only localized picture comparison on the supported short 30 fps paired video profile. |
 
 ## Audio (video sound track)

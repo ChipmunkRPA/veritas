@@ -24,6 +24,13 @@ AAC_44100_RATE = 44_100
 AAC_44100_CLOCK = "aac_44100_native_clock_verified"
 AAC_44100_MOTION_POINT = POINTS["aac48"][0]
 AAC_44100_MOTION_STATUS = "motion_aac441_status"
+NATIVE25_SHOT_KEY = "shot_guard"
+NATIVE25_SHOT_METHOD = "native25-persistent-shot/1"
+NATIVE25_FRAMES = 75
+NATIVE25_PIXELS = (360, 288)
+NATIVE25_TIME_BASE = "1/90000"
+NATIVE25_PTS = tuple(range(0, NATIVE25_FRAMES * 3_600, 3_600))
+NATIVE25_SAMPLES = 47_648
 WEIGHT_PINS = {
     "vision": "bc58acf5926044b6680e7b1c5588f67894b1cbdd43bb6dfe54ff25c5b6ab0a70",
     "shared": "d924e379f8a6a2d861401a8f25504c73012c4ab50d37e04b5aac5ecb19d9bbd4",
@@ -58,6 +65,23 @@ def aac441_motion_picture(timestamps, time_base, source, samples):
     return (Fraction(10, 241) <= period <= Fraction(10, 239)
             and all(end - start == step for start, end in zip(timestamps, timestamps[1:]))
             and abs(samples - round(timestamps[-1] * base * RATE)) <= round(2 * period * RATE))
+
+
+def native25_picture(timestamps, time_base, width, height):
+    return ((width, height) == NATIVE25_PIXELS and time_base == NATIVE25_TIME_BASE
+            and (timestamps is None or tuple(timestamps) == NATIVE25_PTS))
+
+
+def shot_guard_record(boundaries):
+    return {"method": NATIVE25_SHOT_METHOD, "frame_count": NATIVE25_FRAMES, "boundary_frames": boundaries}
+
+
+def validate_shot_guard(guard, timestamps, time_base, width, height, frame_count):
+    boundaries = guard.get("boundary_frames") if isinstance(guard, dict) else None
+    if (not native25_picture(timestamps, time_base, width, height) or frame_count != NATIVE25_FRAMES
+            or not isinstance(boundaries, list) or any(type(i) is not int or not 1 <= i < NATIVE25_FRAMES for i in boundaries)
+            or boundaries != sorted(set(boundaries)) or guard != shot_guard_record(boundaries)):
+        raise ValueError("The timing shot review differs from its exact native picture profile")
 
 
 def encode(candidate):

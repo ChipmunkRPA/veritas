@@ -199,9 +199,15 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
     {lipTiming && <section aria-labelledby="video-lip-timing-heading" className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-lip-timing-heading" className="m-0 text-body font-medium">{['chipmunk.video-lip-timing/8', 'chipmunk.video-lip-timing/9'].includes(lipTiming.schema ?? '')
         ? 'Speech activity and visible mouth movement'
-        : ['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4', 'chipmunk.video-lip-timing/5', 'chipmunk.video-lip-timing/6', 'chipmunk.video-lip-timing/7', 'chipmunk.video-lip-timing/10', 'chipmunk.video-lip-timing/11'].includes(lipTiming.schema ?? '')
+        : ['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4', 'chipmunk.video-lip-timing/5', 'chipmunk.video-lip-timing/6', 'chipmunk.video-lip-timing/7', 'chipmunk.video-lip-timing/10', 'chipmunk.video-lip-timing/11', 'chipmunk.video-lip-timing/12'].includes(lipTiming.schema ?? '')
           ? 'Speech and mouth comparison' : 'Speech and mouth timing trial'}</h3>
       <p className="mt-2 mb-0 text-small text-text-muted">{lipTiming.observation}</p>
+      {lipTiming.shot_guard && <p className="mt-2 mb-0 text-caption text-text-muted">
+        {lipTiming.shot_guard.boundary_frames.length > 0
+          ? <>Abrupt picture changes on the source clock at {lipTiming.shot_guard.boundary_frames.map(frame => `${seconds(frame / 25)} (frame ${frame})`).join(', ')}.</>
+          : <>The shot check read all {lipTiming.shot_guard.frame_count} source frames. Small jumps within one recording can escape this check.</>}
+        {' '}This check carries zero AI confidence weight.
+      </p>}
       {lipTiming.selected_audio && <p className="mt-2 mb-0 text-caption text-text-muted">
         Compared the picture with default audio track {lipTiming.selected_audio.source_stream_position + 1}.{' '}
         Dubbing, commentary, or a different voice can affect this comparison.

@@ -267,7 +267,7 @@ def _decode_lip_soundtrack(path: Path, digest: str, record: dict, first_source: 
         return decoded, selected
 
     stereo = record.get("stereo_scope")
-    activity = record["inputs"].get(video_viseme_binding.ACTIVITY_KEY)
+    activity = record.get("inputs", {}).get(video_viseme_binding.ACTIVITY_KEY)
     decoded = decode_audio(path, source_sha256=digest, max_seconds=VIDEO_AUDIO_MAX_SECONDS,
                            inspect_stereo=stereo is not None, retain_stereo=bool(stereo or activity))
     return decoded, first_source
@@ -366,6 +366,21 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     video_viseme_binding.validate(evidence, timestamps=table.pts)
     lip_timing = evidence.get(video_viseme_binding.KEY) or {}
     default_second = lip_timing.get("schema") == video_viseme_binding.SCHEMA_WITH_DEFAULT_AAC441_MOTION
+    native25_audio = None
+    if lip_timing.get("schema") == video_viseme_binding.SCHEMA_WITH_NATIVE25_AAC441_MOTION:
+        from app.detectors.video import lip_shot_guard
+        from app.evidence import video_lip_agreement
+
+        guard = lip_timing[video_lip_agreement.NATIVE25_SHOT_KEY]
+        if not lip_shot_guard.qualified_delivery(original, table) or lip_shot_guard.scan(original, table) != guard:
+            raise ValueError("The submitted video does not reproduce the native 25 fps timing shot review")
+        native25_audio = _decode_lip_soundtrack(original, digest, lip_timing, evidence["audio"]["source"])
+        decoded, recorded_source = native25_audio
+        fields = (*video_viseme_binding.AAC_PRESENTATION_FIELDS, *video_viseme_binding.AAC_44100_PRESENTATION_FIELDS,
+                  "pcm_sha256")
+        if (not video_viseme_binding.native25_aac441_audio(decoded.mapping)
+                or any(decoded.mapping.get(key) != recorded_source.get(key) for key in fields)):
+            raise ValueError("The submitted video does not reproduce the native 25 fps timing soundtrack")
     timing_frames = {row["index"]: row for row in lip_timing.get("inputs", {}).get("frames", []) if row["gap_units"] is not None}
     scene_coverage = (evidence.get("coverage") or {}).get(scene_return_binding.COVERAGE) or {}
     scene_committed = source.get(scene_return_binding.COMMITMENT)
@@ -743,7 +758,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
         activity = lip_timing["inputs"].get(video_viseme_binding.ACTIVITY_KEY)
         stereo_scope = lip_timing.get("stereo_scope")
-        decoded_audio, timing_source = _decode_lip_soundtrack(original, digest, lip_timing, evidence["audio"]["source"])
+        decoded_audio, timing_source = native25_audio or _decode_lip_soundtrack(original, digest, lip_timing, evidence["audio"]["source"])
         if stereo_scope is not None and capture(decoded_audio) != stereo_scope:
             raise ValueError("The original video does not reproduce the timing review's stereo channel measurements")
         limit = video_viseme_binding.sample_limit(lip_timing)
@@ -862,6 +877,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             + (" Recomputed the held mouth-region pixel measurements." if local_mouth and local_mouth["match"] else "")
             + (" Recomputed the held eye-region pixel measurements." if eye_match is not None else
                " Verified the eye-region input clock and pictures." if eye_limit else "")
+            + (" Recomputed the native 25 fps timing shot review and verified its soundtrack." if native25_audio else "")
             + (f" Verified the timing review's {'default second ' if default_second else ''}"
                f"soundtrack and {len(timing_frames)} native mouth crops."
                if lip_timing.get("inputs") else "")

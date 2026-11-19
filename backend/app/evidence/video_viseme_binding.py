@@ -27,6 +27,7 @@ SCHEMA_WITH_ACTIVITY = "chipmunk.video-lip-timing/8"
 SCHEMA_WITH_ACTIVITY_LEVELS = "chipmunk.video-lip-timing/9"
 SCHEMA_WITH_AAC441_MOTION = "chipmunk.video-lip-timing/10"
 SCHEMA_WITH_DEFAULT_AAC441_MOTION = "chipmunk.video-lip-timing/11"
+SCHEMA_WITH_NATIVE25_AAC441_MOTION = "chipmunk.video-lip-timing/12"
 SELECTED_AUDIO = "selected_audio"
 SELECTED_INPUT = "video_lip_default_audio_input"
 ACTIVITY_SCHEMAS = frozenset({SCHEMA_WITH_ACTIVITY, SCHEMA_WITH_ACTIVITY_LEVELS})
@@ -75,6 +76,7 @@ STATUS = {
     "assets": "The local timing trial's reference assets were unavailable.",
     "runtime": "The trial could not complete its measurements.",
     "provenance": "Trusted source credentials settled the provenance check. The local timing trial was skipped.",
+    "shot_change": "The speech and mouth comparison was withheld because the pictures showed an abrupt change.",
 }
 _SHA = re.compile(r"[a-f0-9]{64}")
 _UNSET = object()
@@ -89,6 +91,10 @@ SELECTED_AUDIO_FIELDS = (
 
 def skipped(reason):
     return {"schema": SCHEMA, "status": reason, "observation": STATUS[reason], "affects_overall_confidence": False}
+
+
+def shot_blocked(guard):
+    return {**skipped("shot_change"), "schema": SCHEMA_WITH_NATIVE25_AAC441_MOTION, agreement.NATIVE25_SHOT_KEY: guard}
 
 
 def presented_samples(mapping, *, max_samples=64_000):
@@ -325,16 +331,26 @@ def exhibits(record):
         yield shot["id"], {**record, "measurement": shot["measurement"], "witness": shot["witness"]}
 
 
-def _measured_aac441_motion(raw, inputs, timestamps, time_base, source, mapping, origin, stereo_scope):
+def native25_aac441_audio(mapping):
+    return (not mapping.get("audio_stream_indices") and agreement.silence_carrier(mapping, audio_origin(mapping)) == "aac441"
+            and presented_samples(mapping) == agreement.NATIVE25_SAMPLES)
+
+
+def _measured_aac441_motion(raw, inputs, timestamps, time_base, source, mapping, origin, stereo_scope, shot_guard):
     field = agreement.AAC_44100_MOTION_STATUS
     status, candidate = raw[field], raw.get(agreement.KEY)
     samples = inputs["samples"]
     selected = selected_audio(mapping)
+    if shot_guard is not None:
+        agreement.validate_shot_guard(shot_guard, timestamps, time_base, source["width"], source["height"], len(timestamps))
+        scope = native25_aac441_audio(mapping) and not shot_guard["boundary_frames"]
+    else:
+        scope = agreement.aac441_motion_picture(timestamps, time_base, source, samples)
     if (set(raw) - {"frames", "phones", "samples", field, agreement.KEY} or inputs["phones"]
             or raw.get("samples", samples) != samples or stereo_scope is not None
             or (mapping.get("audio_stream_indices") and selected is None)
             or agreement.silence_carrier(mapping, origin) != "aac441"
-            or not agreement.aac441_motion_picture(timestamps, time_base, source, samples)
+            or not scope
             or status not in {"coverage", "whole_track_delay", "no_local_dip", "measured"}
             or (status == "measured") != (candidate is not None)
             or (agreement.KEY in raw) != (candidate is not None)):
@@ -355,14 +371,17 @@ def _measured_aac441_motion(raw, inputs, timestamps, time_base, source, mapping,
         note["observation"] = "A consistent soundtrack offset made the local comparison inconclusive."
     elif state == "no_match":
         note["observation"] = "No qualifying local speech and mouth difference was found in the measured ranges."
-    source_scope = ({"schema": SCHEMA_WITH_DEFAULT_AAC441_MOTION, SELECTED_AUDIO: selected} if selected is not None
-                    else {"schema": SCHEMA_WITH_AAC441_MOTION})
+    if shot_guard is not None:
+        source_scope = {"schema": SCHEMA_WITH_NATIVE25_AAC441_MOTION, agreement.NATIVE25_SHOT_KEY: shot_guard}
+    else:
+        source_scope = ({"schema": SCHEMA_WITH_DEFAULT_AAC441_MOTION, SELECTED_AUDIO: selected} if selected is not None
+                        else {"schema": SCHEMA_WITH_AAC441_MOTION})
     return {**note, **source_scope, "measurement_basis": agreement.KEY,
             "pcm_sha256": mapping["pcm_sha256"], "audio_origin_pts": origin,
             "inputs": inputs, "measurement": candidate or {}, "witness": witness}
 
 
-def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
+def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None, shot_guard=None):
     limit = agreement.MAX_MULTISHOT_SAMPLES if silent.SHOT_KEY in raw else 64_000
     activity = ACTIVITY_KEY in raw
     profile = activity_profile(timestamps, time_base, mapping) if activity else None
@@ -371,7 +390,7 @@ def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
         raise ValueError("The speech-activity check requires a qualified stereo video source")
     origin = 0 if activity else audio_origin(mapping, stereo_scope, max_samples=limit)
     motion_aac441 = agreement.AAC_44100_MOTION_STATUS in raw
-    if origin is None or (mapping.get("source_sample_rate") == agreement.AAC_44100_RATE
+    if (shot_guard is not None and not motion_aac441) or origin is None or (mapping.get("source_sample_rate") == agreement.AAC_44100_RATE
                           and silent.SHOT_KEY not in raw and not motion_aac441):
         raise ValueError("The mixed soundtrack has no supported continuous source clock")
     base = Fraction(time_base)
@@ -402,7 +421,7 @@ def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
     _validate_phones(raw["phones"], samples, timing.PHONES)
     inputs = {"frames": rows, "phones": raw["phones"], "samples": samples}
     if motion_aac441:
-        return _measured_aac441_motion(raw, inputs, timestamps, time_base, source, mapping, origin, stereo_scope)
+        return _measured_aac441_motion(raw, inputs, timestamps, time_base, source, mapping, origin, stereo_scope, shot_guard)
     if activity:
         return _activity(raw, inputs, mapping, profile)
     if silent.SHOT_KEY in raw:
@@ -523,9 +542,20 @@ def validate(document, *, timestamps=None, committed=_UNSET):
     state = record["status"]
     if (record.get("schema") not in {SCHEMA, SCHEMA_WITH_APERTURE, SCHEMA_WITH_ARTICULATION, SCHEMA_WITH_STEREO,
                                    SCHEMA_WITH_SILENCE, SCHEMA_WITH_MOTION_SOUND, SCHEMA_WITH_SHOTS, SCHEMA_WITH_AAC441_MOTION,
-                                   SCHEMA_WITH_DEFAULT_AAC441_MOTION, *ACTIVITY_SCHEMAS}
+                                   SCHEMA_WITH_DEFAULT_AAC441_MOTION, SCHEMA_WITH_NATIVE25_AAC441_MOTION, *ACTIVITY_SCHEMAS}
             or state not in STATUS or record.get("affects_overall_confidence") is not False):
         raise ValueError("Invalid lip timing disposition")
+    shot_guard = record.get(agreement.NATIVE25_SHOT_KEY)
+    if record["schema"] == SCHEMA_WITH_NATIVE25_AAC441_MOTION:
+        agreement.validate_shot_guard(shot_guard, timestamps, source["time_base"], source["width"], source["height"], source["frame_count"])
+        if source.get("timeline_origin_s") != 0 or not native25_aac441_audio(document.get("audio", {}).get("source", {})):
+            raise ValueError("The timing shot review differs from its exact native sound and picture clocks")
+        if shot_guard["boundary_frames"]:
+            if record != shot_blocked(shot_guard) or packets:
+                raise ValueError("The timing comparison must be withheld at a recorded shot change")
+            return
+    elif agreement.NATIVE25_SHOT_KEY in record:
+        raise ValueError("The shot review requires its dedicated timing version")
     if "inputs" not in record:
         if record != skipped(state) or state not in {"unsupported", "stereo_unresolved", "assets", "runtime", "provenance"} or packets:
             raise ValueError("An unassessed lip timing review has unexpected details")
@@ -544,7 +574,7 @@ def validate(document, *, timestamps=None, committed=_UNSET):
             raise ValueError("The selected lip timing soundtrack differs from the original audio inventory")
         audio = selection
     if measured(record["inputs"], timestamps=actual_pts, time_base=source["time_base"], source=source, mapping=audio,
-                stereo_scope=record.get("stereo_scope")) != record:
+                stereo_scope=record.get("stereo_scope"), shot_guard=shot_guard) != record:
         raise ValueError("Lip timing measurements do not reproduce")
     intervals = list(exhibits(record))
     if len(packets) != len(intervals):

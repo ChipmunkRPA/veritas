@@ -92,6 +92,18 @@ are not public screening promises or calibrated population probabilities.
   Eight ordinary files supported the candidate measurement. The check stays
   offline pending more held cases. [Common-detail comparison](video-face-common-detail-native30-2026-11-19.md)
 
+- The 48-delivery follow-up found six more exact blurred face swaps
+  across four source groups. Full recovered 11 of 12 blurred swaps
+  with the added check, up from five. Ordinary alerts rose from one
+  to two of 24. The matched-detail candidate passed the frozen gate
+  for local customer-flow verification. [Expanded face comparison](video-face-expanded-common-detail-native30-2026-11-19.md)
+
+- A 184-delivery short-speech test of the lower operating point found
+  three more clean and two more competing-speech edits. Ordinary alerts
+  increased from zero to nine out of 40 clean files and from five to 21
+  out of 40 competing-speech files. The incumbent stays in use.
+  [Independent room transfer](audio-room-point12-confirmation-2026-11-19.md)
+
 - The 720p sustained face-transition comparison located all 12 staged
   boundaries at the exact frame. The existing short-return comparison
   found none of the 12. The new reading marked one ordinary focus change

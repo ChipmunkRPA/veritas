@@ -1,0 +1,293 @@
+{
+  "advance_broad_noise_followup": false,
+  "advance_clean_native_integration_trial": false,
+  "broad_gate": {
+    "both_noise_conditions": false,
+    "clean_gate": false,
+    "competing_speech_control_collisions": true,
+    "competing_speech_isolated_backgrounds": false,
+    "competing_speech_ordinary_files": false,
+    "competing_speech_ordinary_groups": false,
+    "competing_speech_ordinary_seconds": false,
+    "competing_speech_wrong_only": false,
+    "competing_speech_wrong_seconds": false,
+    "traffic_control_collisions": true,
+    "traffic_isolated_backgrounds": true,
+    "traffic_ordinary_files": true,
+    "traffic_ordinary_groups": true,
+    "traffic_ordinary_seconds": true,
+    "traffic_wrong_only": true,
+    "traffic_wrong_seconds": true,
+    "two_noisy_events": true,
+    "two_noisy_reader_groups": false
+  },
+  "clean_gate": {
+    "both_clean_families": false,
+    "clean_control_collisions": true,
+    "clean_ordinary_files": false,
+    "clean_ordinary_groups": false,
+    "clean_ordinary_seconds": false,
+    "clean_wrong_only": true,
+    "clean_wrong_seconds": false,
+    "four_new_clean_events": false,
+    "three_clean_reader_groups": true
+  },
+  "closed": true,
+  "closed_control_diagnostic": {
+    "clean": {
+      "flagged_distinct_background_captures": 0,
+      "new_ordinary_by_role": {
+        "different_reader_splice": 2,
+        "roundtrip_kitten": 2,
+        "roundtrip_piper": 2,
+        "same_reader_splice": 1,
+        "untouched": 2
+      },
+      "new_ordinary_groups": 3,
+      "new_ordinary_wholly_outside_target": 5,
+      "newly_flagged_distinct_background_captures": 0
+    },
+    "competing_speech": {
+      "flagged_distinct_background_captures": 1,
+      "new_ordinary_by_role": {
+        "different_reader_splice": 4,
+        "roundtrip_kitten": 3,
+        "roundtrip_piper": 3,
+        "same_reader_splice": 3,
+        "untouched": 3
+      },
+      "new_ordinary_groups": 4,
+      "new_ordinary_wholly_outside_target": 12,
+      "newly_flagged_distinct_background_captures": 1
+    },
+    "traffic": {
+      "flagged_distinct_background_captures": 0,
+      "new_ordinary_by_role": {},
+      "new_ordinary_groups": 0,
+      "new_ordinary_wholly_outside_target": 0,
+      "newly_flagged_distinct_background_captures": 0
+    }
+  },
+  "counts": {
+    "clean": {
+      "incumbent": {
+        "any_wrong_files": 9,
+        "missed": 4,
+        "ordinary_flags": 0,
+        "ordinary_total": 40,
+        "ordinary_unassessed": 0,
+        "synthetic_flags": 12,
+        "synthetic_total": 16,
+        "synthetic_unassessed": 0,
+        "useful": 12,
+        "wrong_intervals": 16,
+        "wrong_only": 0,
+        "wrong_union_samples": 236000
+      },
+      "point_only": {
+        "any_wrong_files": 13,
+        "missed": 1,
+        "ordinary_flags": 9,
+        "ordinary_total": 40,
+        "ordinary_unassessed": 0,
+        "synthetic_flags": 15,
+        "synthetic_total": 16,
+        "synthetic_unassessed": 0,
+        "useful": 15,
+        "wrong_intervals": 28,
+        "wrong_only": 0,
+        "wrong_union_samples": 360000
+      }
+    },
+    "competing_speech": {
+      "incumbent": {
+        "any_wrong_files": 2,
+        "background_flags": 0,
+        "background_total": 8,
+        "background_unassessed": 0,
+        "missed": 14,
+        "ordinary_flags": 5,
+        "ordinary_total": 40,
+        "ordinary_unassessed": 0,
+        "synthetic_flags": 2,
+        "synthetic_total": 16,
+        "synthetic_unassessed": 0,
+        "useful": 2,
+        "wrong_intervals": 2,
+        "wrong_only": 0,
+        "wrong_union_samples": 24000
+      },
+      "point_only": {
+        "any_wrong_files": 12,
+        "background_flags": 4,
+        "background_total": 8,
+        "background_unassessed": 0,
+        "missed": 12,
+        "ordinary_flags": 21,
+        "ordinary_total": 40,
+        "ordinary_unassessed": 0,
+        "synthetic_flags": 12,
+        "synthetic_total": 16,
+        "synthetic_unassessed": 0,
+        "useful": 4,
+        "wrong_intervals": 30,
+        "wrong_only": 8,
+        "wrong_union_samples": 300000
+      }
+    },
+    "traffic": {
+      "incumbent": {
+        "any_wrong_files": 0,
+        "background_flags": 0,
+        "background_total": 8,
+        "background_unassessed": 8,
+        "missed": 16,
+        "ordinary_flags": 0,
+        "ordinary_total": 40,
+        "ordinary_unassessed": 16,
+        "synthetic_flags": 0,
+        "synthetic_total": 16,
+        "synthetic_unassessed": 6,
+        "useful": 0,
+        "wrong_intervals": 0,
+        "wrong_only": 0,
+        "wrong_union_samples": 0
+      },
+      "point_only": {
+        "any_wrong_files": 0,
+        "background_flags": 0,
+        "background_total": 8,
+        "background_unassessed": 8,
+        "missed": 16,
+        "ordinary_flags": 0,
+        "ordinary_total": 40,
+        "ordinary_unassessed": 16,
+        "synthetic_flags": 0,
+        "synthetic_total": 16,
+        "synthetic_unassessed": 6,
+        "useful": 0,
+        "wrong_intervals": 0,
+        "wrong_only": 0,
+        "wrong_union_samples": 0
+      }
+    }
+  },
+  "elapsed_inference_seconds": 714.963013792003,
+  "limits": [
+    "All foreground, donor and background recordings appeared in earlier project studies. These newly rendered edit clocks and deliveries were sealed before original-model responses.",
+    "Distinct declared MLS host/donor readers are separate from prior point and room-trial groups under exact published alias mappings. Cross-corpus identities and model-training overlap remain unresolved.",
+    "Sixteen synthesis events repeat across three conditions. Five ordinary states of one host and scaled copies of one background are correlated observations.",
+    "The four newly flagged isolated background deliveries are scaled copies of one meeting capture, not four independent background sources.",
+    "There is no speaker attribution, whole-file AI probability, confidence update or product activation.",
+    "The public aggregate omits identities, per-case positions, individual waveform hashes, paths, response vectors and audio. Exact source/model replay needs the retained private custody."
+  ],
+  "method": {
+    "baseline": "Actual app confirmed extended two-second scan plus original adjacent750ms check. Preserve every selected and displayed confirming interval.",
+    "candidate": "Add the exact same original750ms responses at the independently frozen earlier genuine-only point. Strict excess and adjacent scheduled agreement.",
+    "earlier_point_unchanged": true,
+    "incumbent_brief_point": 6.642364579351768,
+    "new_inputs": "Deterministically selected one host per reader group and new amplitude/annotation-qualified960ms clocks separated from old edits. Two retained stock synthesis fragments per host, five matched genuine/processing controls.",
+    "noise": "Dominant traffic and annotated competing-speech backgrounds at minus10dB on original target. Two retained traffic captures and two retained AMI meetings. Exact scaled isolated-background controls.",
+    "point_only": 4.382393928394829,
+    "scope": "Native12sPCM16mono is qualified. Reused backgrounds test capture transfer from the BBC point context. The experiment introduces no new measured foreground room response."
+  },
+  "new_distinct_physical_events": 5,
+  "new_reader_groups": 4,
+  "noise_gain_summary": {
+    "new_distinct_physical_events": 2,
+    "new_reader_groups": 1
+  },
+  "paired": {
+    "clean": {
+      "added_off_target_intervals": 12,
+      "added_off_target_seconds": 7.75,
+      "added_ordinary_seconds": 11.25,
+      "matched_ordinary_collision_events": 0,
+      "new_isolated_background_flags": 0,
+      "new_ordinary_files": 9,
+      "new_ordinary_reader_groups": 3,
+      "new_useful_events": 3,
+      "new_useful_families": 1,
+      "new_useful_reader_groups": 3,
+      "new_wrong_only_synthetic_files": 0
+    },
+    "competing_speech": {
+      "added_off_target_intervals": 28,
+      "added_off_target_seconds": 17.25,
+      "added_ordinary_seconds": 29.0,
+      "matched_ordinary_collision_events": 0,
+      "new_isolated_background_flags": 4,
+      "new_ordinary_files": 16,
+      "new_ordinary_reader_groups": 4,
+      "new_useful_events": 2,
+      "new_useful_families": 2,
+      "new_useful_reader_groups": 1,
+      "new_wrong_only_synthetic_files": 8
+    },
+    "traffic": {
+      "added_off_target_intervals": 0,
+      "added_off_target_seconds": 0.0,
+      "added_ordinary_seconds": 0.0,
+      "matched_ordinary_collision_events": 0,
+      "new_isolated_background_flags": 0,
+      "new_ordinary_files": 0,
+      "new_ordinary_reader_groups": 0,
+      "new_useful_events": 0,
+      "new_useful_families": 0,
+      "new_useful_reader_groups": 0,
+      "new_wrong_only_synthetic_files": 0
+    }
+  },
+  "product_activation_supported": false,
+  "publisher_sources": [
+    "https://www.openslr.org/94/",
+    "https://groups.inf.ed.ac.uk/ami/corpus/license.shtml",
+    "https://huggingface.co/Sadanie/pellav2-audio-deepfake-detector"
+  ],
+  "schema": "chipmunk.room-point12-confirmation-aggregate/1",
+  "scope": {
+    "background_captures": 4,
+    "background_deliveries": 16,
+    "deliveries": 184,
+    "foreground_origin": "Previously qualified retained MLS Opus-derived source clips",
+    "genuine_donor_readers": 8,
+    "host_readers": 8,
+    "native_delivery_bits": 16,
+    "native_delivery_channels": 1,
+    "native_delivery_seconds": 12,
+    "native_rate_hz": 16000,
+    "native_samples": 192000,
+    "new_downloads": 0,
+    "new_foreground_impulse_response_rooms": 0,
+    "new_synthesis_calls": 0,
+    "ordinary_deliveries": 120,
+    "physical_synthetic_events": 16,
+    "point_reader_overlap": 0,
+    "prior_room_trial_reader_overlap": 0,
+    "reader_donor_groups": 8,
+    "synthetic_deliveries": 48
+  },
+  "speaker_attribution_supported": false,
+  "verification": {
+    "authenticity_calls": 1510,
+    "authored_controls": 8,
+    "brief_source_window_bindings": 4232,
+    "distinct_authenticity_inputs": 1509,
+    "exact_initial_repeat": true,
+    "independent_current_app_and_candidate_selectors": true,
+    "independent_native_and_outcome_replays_passed": true,
+    "independent_paired_counts_and_both_gates": true,
+    "independent_wav_decodes": 184,
+    "maximum_target_snr_error_db": 0.0001274014882373109,
+    "native_inputs": 184,
+    "native_sample_values_replayed": 35328000,
+    "outside_edit_foreground_sample_identities": 8478720,
+    "reviewer_receipt_only_name_collision_repaired": true,
+    "scheduled_source_window_bindings": 7912,
+    "six_second_excerpt_bindings": 736,
+    "source_scoring_reruns_after_repair": 0
+  },
+  "whole_independent_review_commitment": "6e2f0f1015454f4627e21eda8cfe74927717eb17832641cfa7eef5883312ad06",
+  "whole_numeric_closure_commitment": "536f674c03a514c0652bf7bc7d84685b2019a2ebe7a84073d1b73bbc6b8f1141",
+  "whole_protocol_commitment": "66ee93cbf7ce85e763b5e0beeaea23c085f30e7a42b83e31303016f9cdf4f6f8"
+}

@@ -62,12 +62,15 @@ useful Aachen delivery. Ordinary flags increase by four and highlighted
 ordinary time by five seconds. The original gate requires broader gains
 and a smaller ordinary cost, and remains failed.
 
-The point-only tradeoff is a reasonable candidate for a separately frozen
-twelve-second confirmation. Its two added files represent one physical
-edited event. A meaningful next test needs additional source pairs,
-ordinary edits and rooms while retaining this point. This is a research
-judgment after reviewing a predeclared arm. It changes no frozen gate,
-product setting, customer confidence or model weight.
+The point-only tradeoff motivated a separately frozen
+[twelve-second confirmation](audio-room-point12-confirmation-2026-11-19.md).
+That study uses eight different reader groups and sixteen newly placed
+synthetic events with five matched ordinary controls each. The fixed point
+adds three clean useful events alongside nine ordinary alerts and adds
+two competing-speech useful events alongside sixteen ordinary alerts.
+Both confirmation gates fail. The point stays in research, and the
+original gate, product settings, customer confidence and model weights
+remain unchanged.
 
 ## Independent verification and public replay
 

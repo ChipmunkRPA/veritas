@@ -1,0 +1,2899 @@
+{
+  "arms": {
+    "detail_pair": {
+      "at_truth_views": 12,
+      "native_witnesses": 42,
+      "new_exact": 7,
+      "new_exact_compound": 7,
+      "new_ordinary": 7,
+      "new_useful": 7,
+      "usable_ordinary": 14,
+      "usable_views": 28,
+      "wrong_positive": 0
+    },
+    "guarded_detail_pair": {
+      "at_truth_views": 12,
+      "native_witnesses": 30,
+      "new_exact": 7,
+      "new_exact_compound": 7,
+      "new_ordinary": 3,
+      "new_useful": 7,
+      "usable_ordinary": 14,
+      "usable_views": 28,
+      "wrong_positive": 0
+    },
+    "matched_detail": {
+      "at_truth_views": 11,
+      "native_witnesses": 21,
+      "new_exact": 6,
+      "new_exact_compound": 6,
+      "new_ordinary": 1,
+      "new_useful": 6,
+      "usable_ordinary": 13,
+      "usable_views": 26,
+      "wrong_positive": 0
+    }
+  },
+  "commitments": {
+    "design": "ecf1b142297de380344208d0adcf21d79ae42eda9d33833678347792ca198436",
+    "held_measurement": "6469ab2385e2f4f70b19e55eb034e469837abda5efc2f1b4b51de4180dd2d703",
+    "installed_full_comparator": "506bbb26772a982afabe10ec0decd0c81d14094a4dce5742781cf1743ab10791",
+    "source_binding": "dd83387026e7148023047b5027be4b7671fa023926f10bba752f662a7a0856ff"
+  },
+  "distinct_gain_groups": {
+    "detail_pair": 4,
+    "guarded_detail_pair": 4,
+    "matched_detail": 4
+  },
+  "files": 48,
+  "frozen_gate": {
+    "max_new_ordinary": 1,
+    "max_wrong_location": 1,
+    "min_added_exact_compounds": 2,
+    "min_gain_groups": 2,
+    "min_ordinary_usable": 6,
+    "require_existing_preserved": true
+  },
+  "groups": 6,
+  "incumbent_located_cases_preserved": 17,
+  "observations": [
+    {
+      "authored": [
+        69,
+        73
+      ],
+      "blur_family": "disc",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              69,
+              73
+            ],
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              69,
+              73
+            ],
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              69,
+              73
+            ],
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        }
+      },
+      "group": 1,
+      "position": "early",
+      "role": "disc",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 1,
+      "truth": null
+    },
+    {
+      "authored": [
+        69,
+        73
+      ],
+      "blur_family": "disc",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        }
+      },
+      "group": 1,
+      "position": "early",
+      "role": "swap",
+      "stock_ranges": [
+        [
+          69,
+          73
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 1,
+      "truth": [
+        69,
+        73
+      ]
+    },
+    {
+      "authored": [
+        69,
+        73
+      ],
+      "blur_family": "disc",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.239241545871fp-1",
+            "frame_anchors": [
+              [
+                68,
+                68000
+              ],
+              [
+                71,
+                71000
+              ],
+              [
+                73,
+                73000
+              ]
+            ],
+            "interval": [
+              69,
+              73
+            ]
+          },
+          "usable_ranges": [
+            [
+              69,
+              73
+            ],
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.239241545871fp-1",
+            "frame_anchors": [
+              [
+                68,
+                68000
+              ],
+              [
+                71,
+                71000
+              ],
+              [
+                73,
+                73000
+              ]
+            ],
+            "interval": [
+              69,
+              73
+            ]
+          },
+          "usable_ranges": [
+            [
+              69,
+              73
+            ],
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": {
+            "appearance_hex": "0x1.1616a45438417p-1",
+            "frame_anchors": [
+              [
+                68,
+                68000
+              ],
+              [
+                71,
+                71000
+              ],
+              [
+                73,
+                73000
+              ]
+            ],
+            "interval": [
+              69,
+              73
+            ]
+          },
+          "usable_ranges": [
+            [
+              69,
+              73
+            ],
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        }
+      },
+      "group": 1,
+      "position": "early",
+      "role": "swap_plus_blur",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 1,
+      "truth": [
+        69,
+        73
+      ]
+    },
+    {
+      "authored": null,
+      "blur_family": "disc",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        }
+      },
+      "group": 1,
+      "position": "early",
+      "role": "untouched",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 1,
+      "truth": null
+    },
+    {
+      "authored": [
+        69,
+        120
+      ],
+      "blur_family": "disc",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              32,
+              35
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              32,
+              35
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              32,
+              35
+            ]
+          ]
+        }
+      },
+      "group": 1,
+      "position": "early",
+      "role": "hard_cut",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 1,
+      "truth": null
+    },
+    {
+      "authored": [
+        103,
+        106
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              103,
+              106
+            ],
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              103,
+              106
+            ],
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              103,
+              106
+            ],
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        }
+      },
+      "group": 1,
+      "position": "late",
+      "role": "gaussian",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 2,
+      "truth": null
+    },
+    {
+      "authored": [
+        103,
+        106
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        }
+      },
+      "group": 1,
+      "position": "late",
+      "role": "swap",
+      "stock_ranges": [
+        [
+          103,
+          106
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 2,
+      "truth": [
+        103,
+        106
+      ]
+    },
+    {
+      "authored": [
+        103,
+        106
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              103,
+              106
+            ],
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              103,
+              106
+            ],
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              103,
+              106
+            ],
+            [
+              32,
+              35
+            ],
+            [
+              79,
+              83
+            ]
+          ]
+        }
+      },
+      "group": 1,
+      "position": "late",
+      "role": "swap_plus_blur",
+      "stock_ranges": [
+        [
+          103,
+          106
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 2,
+      "truth": [
+        103,
+        106
+      ]
+    },
+    {
+      "authored": [
+        62,
+        65
+      ],
+      "blur_family": "disc",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.c5c4b70d2879cp-3",
+            "frame_anchors": [
+              [
+                61,
+                61000
+              ],
+              [
+                63,
+                63000
+              ],
+              [
+                65,
+                65000
+              ]
+            ],
+            "interval": [
+              62,
+              65
+            ]
+          },
+          "usable_ranges": [
+            [
+              62,
+              65
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              62,
+              65
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              62,
+              65
+            ]
+          ]
+        }
+      },
+      "group": 2,
+      "position": "early",
+      "role": "disc",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 3,
+      "truth": null
+    },
+    {
+      "authored": [
+        62,
+        65
+      ],
+      "blur_family": "disc",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 2,
+      "position": "early",
+      "role": "swap",
+      "stock_ranges": [
+        [
+          62,
+          65
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 3,
+      "truth": [
+        62,
+        65
+      ]
+    },
+    {
+      "authored": [
+        62,
+        65
+      ],
+      "blur_family": "disc",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              62,
+              65
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              62,
+              65
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              62,
+              65
+            ]
+          ]
+        }
+      },
+      "group": 2,
+      "position": "early",
+      "role": "swap_plus_blur",
+      "stock_ranges": [
+        [
+          62,
+          65
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 3,
+      "truth": [
+        62,
+        65
+      ]
+    },
+    {
+      "authored": null,
+      "blur_family": "disc",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 2,
+      "position": "early",
+      "role": "untouched",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 3,
+      "truth": null
+    },
+    {
+      "authored": [
+        62,
+        120
+      ],
+      "blur_family": "disc",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 2,
+      "position": "early",
+      "role": "hard_cut",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 3,
+      "truth": null
+    },
+    {
+      "authored": [
+        103,
+        107
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.0949c98d345d2p-2",
+            "frame_anchors": [
+              [
+                102,
+                102000
+              ],
+              [
+                105,
+                105000
+              ],
+              [
+                107,
+                107000
+              ]
+            ],
+            "interval": [
+              103,
+              107
+            ]
+          },
+          "usable_ranges": [
+            [
+              103,
+              107
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              103,
+              107
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              103,
+              107
+            ]
+          ]
+        }
+      },
+      "group": 2,
+      "position": "late",
+      "role": "gaussian",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 4,
+      "truth": null
+    },
+    {
+      "authored": [
+        103,
+        107
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 2,
+      "position": "late",
+      "role": "swap",
+      "stock_ranges": [
+        [
+          103,
+          107
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 4,
+      "truth": [
+        103,
+        107
+      ]
+    },
+    {
+      "authored": [
+        103,
+        107
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              103,
+              107
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              103,
+              107
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              103,
+              107
+            ]
+          ]
+        }
+      },
+      "group": 2,
+      "position": "late",
+      "role": "swap_plus_blur",
+      "stock_ranges": [
+        [
+          103,
+          107
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 4,
+      "truth": [
+        103,
+        107
+      ]
+    },
+    {
+      "authored": [
+        66,
+        70
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              66,
+              70
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              66,
+              70
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              66,
+              70
+            ]
+          ]
+        }
+      },
+      "group": 3,
+      "position": "early",
+      "role": "gaussian",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 5,
+      "truth": null
+    },
+    {
+      "authored": [
+        66,
+        70
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 3,
+      "position": "early",
+      "role": "swap",
+      "stock_ranges": [
+        [
+          66,
+          70
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 5,
+      "truth": [
+        66,
+        70
+      ]
+    },
+    {
+      "authored": [
+        66,
+        70
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              66,
+              70
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              66,
+              70
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              66,
+              70
+            ]
+          ]
+        }
+      },
+      "group": 3,
+      "position": "early",
+      "role": "swap_plus_blur",
+      "stock_ranges": [
+        [
+          66,
+          70
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 5,
+      "truth": [
+        66,
+        70
+      ]
+    },
+    {
+      "authored": null,
+      "blur_family": "gaussian",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 3,
+      "position": "early",
+      "role": "untouched",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 5,
+      "truth": null
+    },
+    {
+      "authored": [
+        66,
+        120
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 3,
+      "position": "early",
+      "role": "hard_cut",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 5,
+      "truth": null
+    },
+    {
+      "authored": [
+        99,
+        102
+      ],
+      "blur_family": "disc",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              99,
+              102
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              99,
+              102
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              99,
+              102
+            ]
+          ]
+        }
+      },
+      "group": 3,
+      "position": "late",
+      "role": "disc",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 6,
+      "truth": null
+    },
+    {
+      "authored": [
+        99,
+        102
+      ],
+      "blur_family": "disc",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 3,
+      "position": "late",
+      "role": "swap",
+      "stock_ranges": [
+        [
+          99,
+          102
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 6,
+      "truth": [
+        99,
+        102
+      ]
+    },
+    {
+      "authored": [
+        99,
+        102
+      ],
+      "blur_family": "disc",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              99,
+              102
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              99,
+              102
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              99,
+              102
+            ]
+          ]
+        }
+      },
+      "group": 3,
+      "position": "late",
+      "role": "swap_plus_blur",
+      "stock_ranges": [
+        [
+          99,
+          102
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 6,
+      "truth": [
+        99,
+        102
+      ]
+    },
+    {
+      "authored": [
+        73,
+        76
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              73,
+              76
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              73,
+              76
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              73,
+              76
+            ]
+          ]
+        }
+      },
+      "group": 4,
+      "position": "early",
+      "role": "gaussian",
+      "stock_ranges": [
+        [
+          73,
+          76
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 7,
+      "truth": null
+    },
+    {
+      "authored": [
+        73,
+        76
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 4,
+      "position": "early",
+      "role": "swap",
+      "stock_ranges": [
+        [
+          73,
+          76
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 7,
+      "truth": [
+        73,
+        76
+      ]
+    },
+    {
+      "authored": [
+        73,
+        76
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.885f97beeec9dp-1",
+            "frame_anchors": [
+              [
+                72,
+                72000
+              ],
+              [
+                74,
+                74000
+              ],
+              [
+                76,
+                76000
+              ]
+            ],
+            "interval": [
+              73,
+              76
+            ]
+          },
+          "usable_ranges": [
+            [
+              73,
+              76
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.885f97beeec9dp-1",
+            "frame_anchors": [
+              [
+                72,
+                72000
+              ],
+              [
+                74,
+                74000
+              ],
+              [
+                76,
+                76000
+              ]
+            ],
+            "interval": [
+              73,
+              76
+            ]
+          },
+          "usable_ranges": [
+            [
+              73,
+              76
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": {
+            "appearance_hex": "0x1.466024f7e818ap-1",
+            "frame_anchors": [
+              [
+                72,
+                72000
+              ],
+              [
+                74,
+                74000
+              ],
+              [
+                76,
+                76000
+              ]
+            ],
+            "interval": [
+              73,
+              76
+            ]
+          },
+          "usable_ranges": [
+            [
+              73,
+              76
+            ]
+          ]
+        }
+      },
+      "group": 4,
+      "position": "early",
+      "role": "swap_plus_blur",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 7,
+      "truth": [
+        73,
+        76
+      ]
+    },
+    {
+      "authored": null,
+      "blur_family": "gaussian",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 4,
+      "position": "early",
+      "role": "untouched",
+      "stock_ranges": [],
+      "stock_status": "unassessed",
+      "treatment": 7,
+      "truth": null
+    },
+    {
+      "authored": [
+        73,
+        120
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 4,
+      "position": "early",
+      "role": "hard_cut",
+      "stock_ranges": [],
+      "stock_status": "unassessed",
+      "treatment": 7,
+      "truth": null
+    },
+    {
+      "authored": [
+        105,
+        109
+      ],
+      "blur_family": "disc",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.4f5ced8fd3f5ep-2",
+            "frame_anchors": [
+              [
+                104,
+                104000
+              ],
+              [
+                107,
+                107000
+              ],
+              [
+                109,
+                109000
+              ]
+            ],
+            "interval": [
+              105,
+              109
+            ]
+          },
+          "usable_ranges": [
+            [
+              105,
+              109
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              105,
+              109
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": {
+            "appearance_hex": "0x1.e8c860bbd7550p-4",
+            "frame_anchors": [
+              [
+                104,
+                104000
+              ],
+              [
+                107,
+                107000
+              ],
+              [
+                109,
+                109000
+              ]
+            ],
+            "interval": [
+              105,
+              109
+            ]
+          },
+          "usable_ranges": [
+            [
+              105,
+              109
+            ]
+          ]
+        }
+      },
+      "group": 4,
+      "position": "late",
+      "role": "disc",
+      "stock_ranges": [],
+      "stock_status": "unassessed",
+      "treatment": 8,
+      "truth": null
+    },
+    {
+      "authored": [
+        105,
+        109
+      ],
+      "blur_family": "disc",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 4,
+      "position": "late",
+      "role": "swap",
+      "stock_ranges": [
+        [
+          105,
+          109
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 8,
+      "truth": [
+        105,
+        109
+      ]
+    },
+    {
+      "authored": [
+        105,
+        109
+      ],
+      "blur_family": "disc",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.833c708af0329p-1",
+            "frame_anchors": [
+              [
+                104,
+                104000
+              ],
+              [
+                107,
+                107000
+              ],
+              [
+                109,
+                109000
+              ]
+            ],
+            "interval": [
+              105,
+              109
+            ]
+          },
+          "usable_ranges": [
+            [
+              105,
+              109
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.833c708af0329p-1",
+            "frame_anchors": [
+              [
+                104,
+                104000
+              ],
+              [
+                107,
+                107000
+              ],
+              [
+                109,
+                109000
+              ]
+            ],
+            "interval": [
+              105,
+              109
+            ]
+          },
+          "usable_ranges": [
+            [
+              105,
+              109
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": {
+            "appearance_hex": "0x1.0fac6cd0a5d93p-1",
+            "frame_anchors": [
+              [
+                104,
+                104000
+              ],
+              [
+                107,
+                107000
+              ],
+              [
+                109,
+                109000
+              ]
+            ],
+            "interval": [
+              105,
+              109
+            ]
+          },
+          "usable_ranges": [
+            [
+              105,
+              109
+            ]
+          ]
+        }
+      },
+      "group": 4,
+      "position": "late",
+      "role": "swap_plus_blur",
+      "stock_ranges": [],
+      "stock_status": "unassessed",
+      "treatment": 8,
+      "truth": [
+        105,
+        109
+      ]
+    },
+    {
+      "authored": [
+        69,
+        73
+      ],
+      "blur_family": "disc",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.01b28a0d6d0b4p-3",
+            "frame_anchors": [
+              [
+                68,
+                68000
+              ],
+              [
+                71,
+                71000
+              ],
+              [
+                73,
+                73000
+              ]
+            ],
+            "interval": [
+              69,
+              73
+            ]
+          },
+          "usable_ranges": [
+            [
+              69,
+              73
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.01b28a0d6d0b4p-3",
+            "frame_anchors": [
+              [
+                68,
+                68000
+              ],
+              [
+                71,
+                71000
+              ],
+              [
+                73,
+                73000
+              ]
+            ],
+            "interval": [
+              69,
+              73
+            ]
+          },
+          "usable_ranges": [
+            [
+              69,
+              73
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              69,
+              73
+            ]
+          ]
+        }
+      },
+      "group": 5,
+      "position": "early",
+      "role": "disc",
+      "stock_ranges": [],
+      "stock_status": "unassessed",
+      "treatment": 9,
+      "truth": null
+    },
+    {
+      "authored": [
+        69,
+        73
+      ],
+      "blur_family": "disc",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 5,
+      "position": "early",
+      "role": "swap",
+      "stock_ranges": [
+        [
+          69,
+          73
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 9,
+      "truth": [
+        69,
+        73
+      ]
+    },
+    {
+      "authored": [
+        69,
+        73
+      ],
+      "blur_family": "disc",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.8822cee9c4213p-1",
+            "frame_anchors": [
+              [
+                68,
+                68000
+              ],
+              [
+                71,
+                71000
+              ],
+              [
+                73,
+                73000
+              ]
+            ],
+            "interval": [
+              69,
+              73
+            ]
+          },
+          "usable_ranges": [
+            [
+              69,
+              73
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.8822cee9c4213p-1",
+            "frame_anchors": [
+              [
+                68,
+                68000
+              ],
+              [
+                71,
+                71000
+              ],
+              [
+                73,
+                73000
+              ]
+            ],
+            "interval": [
+              69,
+              73
+            ]
+          },
+          "usable_ranges": [
+            [
+              69,
+              73
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": {
+            "appearance_hex": "0x1.6a68bb2dcd9d6p-1",
+            "frame_anchors": [
+              [
+                68,
+                68000
+              ],
+              [
+                71,
+                71000
+              ],
+              [
+                73,
+                73000
+              ]
+            ],
+            "interval": [
+              69,
+              73
+            ]
+          },
+          "usable_ranges": [
+            [
+              69,
+              73
+            ]
+          ]
+        }
+      },
+      "group": 5,
+      "position": "early",
+      "role": "swap_plus_blur",
+      "stock_ranges": [],
+      "stock_status": "unassessed",
+      "treatment": 9,
+      "truth": [
+        69,
+        73
+      ]
+    },
+    {
+      "authored": null,
+      "blur_family": "disc",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 5,
+      "position": "early",
+      "role": "untouched",
+      "stock_ranges": [],
+      "stock_status": "unassessed",
+      "treatment": 9,
+      "truth": null
+    },
+    {
+      "authored": [
+        69,
+        120
+      ],
+      "blur_family": "disc",
+      "blur_strength": 6.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 5,
+      "position": "early",
+      "role": "hard_cut",
+      "stock_ranges": [],
+      "stock_status": "unassessed",
+      "treatment": 9,
+      "truth": null
+    },
+    {
+      "authored": [
+        94,
+        97
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.5bb2da01f842cp-3",
+            "frame_anchors": [
+              [
+                93,
+                93000
+              ],
+              [
+                95,
+                95000
+              ],
+              [
+                97,
+                97000
+              ]
+            ],
+            "interval": [
+              94,
+              97
+            ]
+          },
+          "usable_ranges": [
+            [
+              94,
+              97
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              94,
+              97
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              94,
+              97
+            ]
+          ]
+        }
+      },
+      "group": 5,
+      "position": "late",
+      "role": "gaussian",
+      "stock_ranges": [],
+      "stock_status": "unassessed",
+      "treatment": 10,
+      "truth": null
+    },
+    {
+      "authored": [
+        94,
+        97
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 5,
+      "position": "late",
+      "role": "swap",
+      "stock_ranges": [
+        [
+          94,
+          97
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 10,
+      "truth": [
+        94,
+        97
+      ]
+    },
+    {
+      "authored": [
+        94,
+        97
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.03183d9bf1b58p-1",
+            "frame_anchors": [
+              [
+                93,
+                93000
+              ],
+              [
+                95,
+                95000
+              ],
+              [
+                97,
+                97000
+              ]
+            ],
+            "interval": [
+              94,
+              97
+            ]
+          },
+          "usable_ranges": [
+            [
+              94,
+              97
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.03183d9bf1b58p-1",
+            "frame_anchors": [
+              [
+                93,
+                93000
+              ],
+              [
+                95,
+                95000
+              ],
+              [
+                97,
+                97000
+              ]
+            ],
+            "interval": [
+              94,
+              97
+            ]
+          },
+          "usable_ranges": [
+            [
+              94,
+              97
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": {
+            "appearance_hex": "0x1.660a5066cb458p-2",
+            "frame_anchors": [
+              [
+                93,
+                93000
+              ],
+              [
+                95,
+                95000
+              ],
+              [
+                97,
+                97000
+              ]
+            ],
+            "interval": [
+              94,
+              97
+            ]
+          },
+          "usable_ranges": [
+            [
+              94,
+              97
+            ]
+          ]
+        }
+      },
+      "group": 5,
+      "position": "late",
+      "role": "swap_plus_blur",
+      "stock_ranges": [],
+      "stock_status": "unassessed",
+      "treatment": 10,
+      "truth": [
+        94,
+        97
+      ]
+    },
+    {
+      "authored": [
+        77,
+        80
+      ],
+      "blur_family": "disc",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.4215557a28611p-1",
+            "frame_anchors": [
+              [
+                76,
+                76000
+              ],
+              [
+                78,
+                78000
+              ],
+              [
+                80,
+                80000
+              ]
+            ],
+            "interval": [
+              77,
+              80
+            ]
+          },
+          "usable_ranges": [
+            [
+              77,
+              80
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.4215557a28611p-1",
+            "frame_anchors": [
+              [
+                76,
+                76000
+              ],
+              [
+                78,
+                78000
+              ],
+              [
+                80,
+                80000
+              ]
+            ],
+            "interval": [
+              77,
+              80
+            ]
+          },
+          "usable_ranges": [
+            [
+              77,
+              80
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 6,
+      "position": "early",
+      "role": "disc",
+      "stock_ranges": [],
+      "stock_status": "unassessed",
+      "treatment": 11,
+      "truth": null
+    },
+    {
+      "authored": [
+        77,
+        80
+      ],
+      "blur_family": "disc",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 6,
+      "position": "early",
+      "role": "swap",
+      "stock_ranges": [
+        [
+          77,
+          80
+        ]
+      ],
+      "stock_status": "localized",
+      "treatment": 11,
+      "truth": [
+        77,
+        80
+      ]
+    },
+    {
+      "authored": [
+        77,
+        80
+      ],
+      "blur_family": "disc",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.628ae99fa3209p-1",
+            "frame_anchors": [
+              [
+                76,
+                76000
+              ],
+              [
+                78,
+                78000
+              ],
+              [
+                80,
+                80000
+              ]
+            ],
+            "interval": [
+              77,
+              80
+            ]
+          },
+          "usable_ranges": [
+            [
+              77,
+              80
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.628ae99fa3209p-1",
+            "frame_anchors": [
+              [
+                76,
+                76000
+              ],
+              [
+                78,
+                78000
+              ],
+              [
+                80,
+                80000
+              ]
+            ],
+            "interval": [
+              77,
+              80
+            ]
+          },
+          "usable_ranges": [
+            [
+              77,
+              80
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 6,
+      "position": "early",
+      "role": "swap_plus_blur",
+      "stock_ranges": [],
+      "stock_status": "unassessed",
+      "treatment": 11,
+      "truth": [
+        77,
+        80
+      ]
+    },
+    {
+      "authored": null,
+      "blur_family": "disc",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 6,
+      "position": "early",
+      "role": "untouched",
+      "stock_ranges": [],
+      "stock_status": "unassessed",
+      "treatment": 11,
+      "truth": null
+    },
+    {
+      "authored": [
+        77,
+        120
+      ],
+      "blur_family": "disc",
+      "blur_strength": 8.0,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 6,
+      "position": "early",
+      "role": "hard_cut",
+      "stock_ranges": [],
+      "stock_status": "unassessed",
+      "treatment": 11,
+      "truth": null
+    },
+    {
+      "authored": [
+        96,
+        100
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.89573ee1d4264p-3",
+            "frame_anchors": [
+              [
+                95,
+                95000
+              ],
+              [
+                98,
+                98000
+              ],
+              [
+                100,
+                100000
+              ]
+            ],
+            "interval": [
+              96,
+              100
+            ]
+          },
+          "usable_ranges": [
+            [
+              96,
+              100
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.89573ee1d4264p-3",
+            "frame_anchors": [
+              [
+                95,
+                95000
+              ],
+              [
+                98,
+                98000
+              ],
+              [
+                100,
+                100000
+              ]
+            ],
+            "interval": [
+              96,
+              100
+            ]
+          },
+          "usable_ranges": [
+            [
+              96,
+              100
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": [
+            [
+              96,
+              100
+            ]
+          ]
+        }
+      },
+      "group": 6,
+      "position": "late",
+      "role": "gaussian",
+      "stock_ranges": [],
+      "stock_status": "unassessed",
+      "treatment": 12,
+      "truth": null
+    },
+    {
+      "authored": [
+        96,
+        100
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "guarded_detail_pair": {
+          "selected": null,
+          "usable_ranges": []
+        },
+        "matched_detail": {
+          "selected": null,
+          "usable_ranges": []
+        }
+      },
+      "group": 6,
+      "position": "late",
+      "role": "swap",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 12,
+      "truth": [
+        96,
+        100
+      ]
+    },
+    {
+      "authored": [
+        96,
+        100
+      ],
+      "blur_family": "gaussian",
+      "blur_strength": 4.5,
+      "candidates": {
+        "detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.67330c67918edp-1",
+            "frame_anchors": [
+              [
+                95,
+                95000
+              ],
+              [
+                98,
+                98000
+              ],
+              [
+                100,
+                100000
+              ]
+            ],
+            "interval": [
+              96,
+              100
+            ]
+          },
+          "usable_ranges": [
+            [
+              96,
+              100
+            ]
+          ]
+        },
+        "guarded_detail_pair": {
+          "selected": {
+            "appearance_hex": "0x1.67330c67918edp-1",
+            "frame_anchors": [
+              [
+                95,
+                95000
+              ],
+              [
+                98,
+                98000
+              ],
+              [
+                100,
+                100000
+              ]
+            ],
+            "interval": [
+              96,
+              100
+            ]
+          },
+          "usable_ranges": [
+            [
+              96,
+              100
+            ]
+          ]
+        },
+        "matched_detail": {
+          "selected": {
+            "appearance_hex": "0x1.4953a742561bcp-1",
+            "frame_anchors": [
+              [
+                95,
+                95000
+              ],
+              [
+                98,
+                98000
+              ],
+              [
+                100,
+                100000
+              ]
+            ],
+            "interval": [
+              96,
+              100
+            ]
+          },
+          "usable_ranges": [
+            [
+              96,
+              100
+            ]
+          ]
+        }
+      },
+      "group": 6,
+      "position": "late",
+      "role": "swap_plus_blur",
+      "stock_ranges": [],
+      "stock_status": "no_range",
+      "treatment": 12,
+      "truth": [
+        96,
+        100
+      ]
+    }
+  ],
+  "passes": {
+    "detail_pair": false,
+    "guarded_detail_pair": false,
+    "matched_detail": true
+  },
+  "pinned_appearance_point": 0.1,
+  "roles": {
+    "disc": {
+      "detail_pair_added_exact": 0,
+      "detail_pair_new_ordinary": 4,
+      "detail_pair_usable": 6,
+      "files": 6,
+      "guarded_detail_pair_added_exact": 0,
+      "guarded_detail_pair_new_ordinary": 2,
+      "guarded_detail_pair_usable": 6,
+      "matched_detail_added_exact": 0,
+      "matched_detail_new_ordinary": 1,
+      "matched_detail_usable": 5,
+      "stock_exact": 0,
+      "stock_ordinary": 0,
+      "stock_unassessed": 3,
+      "stock_useful": 0
+    },
+    "gaussian": {
+      "detail_pair_added_exact": 0,
+      "detail_pair_new_ordinary": 3,
+      "detail_pair_usable": 6,
+      "files": 6,
+      "guarded_detail_pair_added_exact": 0,
+      "guarded_detail_pair_new_ordinary": 1,
+      "guarded_detail_pair_usable": 6,
+      "matched_detail_usable": 6,
+      "stock_exact": 0,
+      "stock_ordinary": 1,
+      "stock_unassessed": 2,
+      "stock_useful": 0
+    },
+    "hard_cut": {
+      "detail_pair_usable": 1,
+      "files": 6,
+      "guarded_detail_pair_usable": 1,
+      "matched_detail_usable": 1,
+      "stock_exact": 0,
+      "stock_ordinary": 0,
+      "stock_unassessed": 3,
+      "stock_useful": 0
+    },
+    "swap": {
+      "detail_pair_usable": 2,
+      "files": 12,
+      "guarded_detail_pair_usable": 2,
+      "matched_detail_usable": 2,
+      "stock_exact": 11,
+      "stock_ordinary": 0,
+      "stock_unassessed": 0,
+      "stock_useful": 11
+    },
+    "swap_plus_blur": {
+      "detail_pair_added_exact": 7,
+      "detail_pair_new_ordinary": 0,
+      "detail_pair_usable": 12,
+      "files": 12,
+      "guarded_detail_pair_added_exact": 7,
+      "guarded_detail_pair_new_ordinary": 0,
+      "guarded_detail_pair_usable": 12,
+      "matched_detail_added_exact": 6,
+      "matched_detail_new_ordinary": 0,
+      "matched_detail_usable": 11,
+      "stock_exact": 5,
+      "stock_ordinary": 0,
+      "stock_unassessed": 4,
+      "stock_useful": 5
+    },
+    "untouched": {
+      "detail_pair_usable": 1,
+      "files": 6,
+      "guarded_detail_pair_usable": 1,
+      "matched_detail_usable": 1,
+      "stock_exact": 0,
+      "stock_ordinary": 0,
+      "stock_unassessed": 3,
+      "stock_useful": 0
+    }
+  },
+  "schema": "chipmunk.native30-common-detail-expanded/1",
+  "strata": {
+    "disc": {
+      "detail_pair_added_exact": 4,
+      "detail_pair_new_ordinary": 4,
+      "files": 26,
+      "guarded_detail_pair_added_exact": 4,
+      "guarded_detail_pair_new_ordinary": 2,
+      "matched_detail_added_exact": 3,
+      "matched_detail_new_ordinary": 1,
+      "stock_exact": 8,
+      "stock_ordinary": 0,
+      "stock_unassessed": 10,
+      "stock_useful": 8
+    },
+    "early": {
+      "detail_pair_added_exact": 4,
+      "detail_pair_new_ordinary": 3,
+      "files": 30,
+      "guarded_detail_pair_added_exact": 4,
+      "guarded_detail_pair_new_ordinary": 2,
+      "matched_detail_added_exact": 3,
+      "matched_detail_new_ordinary": 0,
+      "stock_exact": 8,
+      "stock_ordinary": 1,
+      "stock_unassessed": 10,
+      "stock_useful": 8
+    },
+    "gaussian": {
+      "detail_pair_added_exact": 3,
+      "detail_pair_new_ordinary": 3,
+      "files": 22,
+      "guarded_detail_pair_added_exact": 3,
+      "guarded_detail_pair_new_ordinary": 1,
+      "matched_detail_added_exact": 3,
+      "matched_detail_new_ordinary": 0,
+      "stock_exact": 8,
+      "stock_ordinary": 1,
+      "stock_unassessed": 5,
+      "stock_useful": 8
+    },
+    "late": {
+      "detail_pair_added_exact": 3,
+      "detail_pair_new_ordinary": 4,
+      "files": 18,
+      "guarded_detail_pair_added_exact": 3,
+      "guarded_detail_pair_new_ordinary": 1,
+      "matched_detail_added_exact": 3,
+      "matched_detail_new_ordinary": 1,
+      "stock_exact": 8,
+      "stock_ordinary": 0,
+      "stock_unassessed": 5,
+      "stock_useful": 8
+    }
+  },
+  "usable_compound_opportunities": {
+    "no_stock_exact": 7,
+    "no_stock_exact_in_groups": 4,
+    "no_stock_useful": 7,
+    "no_stock_useful_in_groups": 4
+  }
+}

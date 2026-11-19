@@ -51,10 +51,18 @@ quality 90 deliveries and publishes every held geometry count.
 The [common-detail face comparison](video-face-common-detail-native30-2026-11-19.md)
 reports an exact three-frame recovery on held video and compares two ways of
 rejecting ordinary blur. The
+[expanded matched-detail comparison](video-face-expanded-common-detail-native30-2026-11-19.md)
+recounts 48 held deliveries, tracks exact three- and four-frame changes,
+and separates ordinary blur alerts from correctly localized swaps. The
 [exact-room-voice experiment](audio-room-voice-recovery-ceiling-2026-11-19.md)
 tests whether removing overlapping speech alone recovers known edits.
 The [short-speech room transfer](audio-room-layer-short-transfer-2026-11-19.md)
 separately compares response recalibration and layer fitting on two held rooms.
+The [twelve-second speech confirmation](audio-room-point12-confirmation-2026-11-19.md)
+recounts 184 newly rendered deliveries from eight separate reader groups,
+with matched genuine edits and exact background-only controls. Its frozen
+lower point adds useful intervals and substantially more ordinary alerts,
+so both advancement gates fail and the incumbent remains unchanged.
 The [sentence omission comparison](writing-sentence-omission-2026-11-19.md)
 checks whether a single-upload writing measurement points to the changed
 sentence or to a location that already scored in the untouched excerpt.

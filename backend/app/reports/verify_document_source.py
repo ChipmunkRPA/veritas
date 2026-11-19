@@ -166,6 +166,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                       == document_native_locations.EPUB_VISIBILITY,
                       skip_hidden_odt_sections=coverage.get(document_native_locations.ODT_VISIBILITY_KEY)
                       == document_native_locations.ODT_VISIBILITY,
+                      include_odt_text_references=coverage.get(document_native_locations.ODT_TEXT_REFERENCES_KEY)
+                      == document_native_locations.ODT_TEXT_REFERENCES,
                       skip_hidden_rtf_runs=coverage.get(document_native_locations.RTF_VISIBILITY_KEY)
                       == document_native_locations.RTF_VISIBILITY,
                       skip_markdown_fences=coverage.get(document_native_locations.MARKDOWN_FENCES_KEY)
@@ -225,7 +227,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
               document_native_locations.PARAGRAPH_MAP_KEY: None, document_native_locations.WORD_TABLE_GRID_KEY: None,
               document_native_locations.PPTX_VISIBILITY_KEY: None, document_native_locations.WORD_RUN_MAP_KEY: None,
               document_native_locations.EPUB_VISIBILITY_KEY: None,
-              document_native_locations.ODT_VISIBILITY_KEY: None, document_native_locations.WORD_NOTES_KEY: None,
+              document_native_locations.ODT_VISIBILITY_KEY: None, document_native_locations.ODT_TEXT_REFERENCES_KEY: None,
+              document_native_locations.WORD_NOTES_KEY: None,
               document_native_locations.WORD_TEXT_BOX_KEY: None,
               document_native_locations.WORD_LAYOUT_BREAK_KEY: None,
               document_native_locations.RTF_VISIBILITY_KEY: None,

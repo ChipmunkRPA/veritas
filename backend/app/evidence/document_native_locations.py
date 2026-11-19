@@ -36,6 +36,10 @@ EPUB_VISIBILITY_SCOPE = ("Text marked hidden or given a simple inline display:no
 ODT_VISIBILITY_KEY = "odt_section_visibility"
 ODT_VISIBILITY = "visible-odt-sections/1"
 ODT_VISIBILITY_SCOPE = "Hidden and conditional sections are excluded. The reader does not evaluate display conditions."
+ODT_TEXT_REFERENCES_KEY = "odt_text_reference_reader"
+ODT_TEXT_REFERENCES = "matching-odt-text-references/1"
+ODT_TEXT_REFERENCES_SCOPE = ("Supported body references retain saved wording that agrees with their marked text. "
+                             "Stale, calculated and unsupported reference fields are outside this check.")
 RTF_VISIBILITY_KEY = "rtf_run_visibility"
 RTF_VISIBILITY = "visible-rtf-direct-runs/1"
 RTF_VISIBILITY_SCOPE = ("The reader excludes directly hidden Rich Text runs and uses saved field display text. "
@@ -291,6 +295,9 @@ def validate(document):
     if ODT_VISIBILITY_KEY in coverage and (coverage[ODT_VISIBILITY_KEY] != ODT_VISIBILITY
             or document.get("source", {}).get("method") != "odt"):
         raise ValueError("Invalid OpenDocument section visibility policy")
+    if ODT_TEXT_REFERENCES_KEY in coverage and (coverage[ODT_TEXT_REFERENCES_KEY] != ODT_TEXT_REFERENCES
+            or document.get("source", {}).get("method") != "odt"):
+        raise ValueError("Invalid OpenDocument text reference policy")
     if RTF_VISIBILITY_KEY in coverage and (coverage[RTF_VISIBILITY_KEY] != RTF_VISIBILITY
             or document.get("source", {}).get("method") != "rtf"):
         raise ValueError("Invalid Rich Text run visibility policy")

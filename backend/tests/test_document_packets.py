@@ -49,6 +49,7 @@ def packet_factory(tmp_path):
         def create(ext=".txt", scores=(0.1, 0.9, 0.2), ocr=False, text=None, source_pdf=None,
                    *, project_word_revisions=True, project_word_breaks=True, include_word_review=False,
                    map_body_paragraphs=True, skip_hidden_slide_groups=True, skip_hidden_odt_sections=True,
+                   include_odt_text_references=True,
                    skip_hidden_xlsx_cell_formats=True, skip_hidden_rtf_runs=True, skip_markdown_fences=True,
                    honor_csv_separator_declaration=True, preserve_pdf_wrap_hyphens=True, use_static_html=True,
                    use_epub_visibility=True, skip_blank_pdf_pages=False):
@@ -85,6 +86,7 @@ def packet_factory(tmp_path):
                           preserve_pdf_wrap_hyphens=preserve_pdf_wrap_hyphens,
                           skip_blank_pdf_pages=skip_blank_pdf_pages,
                           use_static_html=use_static_html, use_epub_visibility=use_epub_visibility,
+                          include_odt_text_references=include_odt_text_references,
                           skip_hidden_odt_sections=skip_hidden_odt_sections, skip_hidden_xlsx_cell_formats=skip_hidden_xlsx_cell_formats)
             for content in doc.source_rasters.values():
                 register_artefact(db, store, base64.b64decode(content), media_type="image/png", role="preview", created_by="document-ocr/1")

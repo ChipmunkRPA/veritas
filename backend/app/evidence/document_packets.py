@@ -595,6 +595,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][document_native_locations.EPUB_VISIBILITY_KEY] = epub_visibility
     if section_visibility := decoded["meta"].get(document_native_locations.ODT_VISIBILITY_KEY):
         document["coverage"][document_native_locations.ODT_VISIBILITY_KEY] = section_visibility
+    if text_references := decoded["meta"].get(document_native_locations.ODT_TEXT_REFERENCES_KEY):
+        document["coverage"][document_native_locations.ODT_TEXT_REFERENCES_KEY] = text_references
     if run_visibility := decoded["meta"].get(document_native_locations.RTF_VISIBILITY_KEY):
         document["coverage"][document_native_locations.RTF_VISIBILITY_KEY] = run_visibility
     if markdown_fences := decoded["meta"].get(document_native_locations.MARKDOWN_FENCES_KEY):

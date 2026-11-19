@@ -14,7 +14,7 @@ upload screen gives format-specific directions when you drop a template.
 | Format | Writing examined | Source position in reports |
 | --- | --- | --- |
 | DOCX | Body paragraphs, tables, filled form controls, supported saved fields, simple drawing text boxes, and supported linked footnotes and endnotes in standard and Strict Open XML DOCX. Explicit page and column breaks separate adjacent words in the saved body. Separate revision and visibility checks cover supported structures. | Word body paths, drawing or note references, paragraph character ranges, and available run coordinates |
-| ODT | Body paragraphs, headings, lists, and tables outside hidden and conditionally displayed sections | Decoded body paragraph number and character range |
+| ODT | Body paragraphs, headings, lists, tables, and supported text cross-references outside hidden and conditionally displayed sections | Decoded body paragraph number and character range |
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
 | PPTX | Editable text boxes and tables on visible slides | Slide in presentation order, text block, and decoded character range |
 | ODP | Saved text in supported slide shapes and tables. Hidden slides, hidden layers and speaker notes are excluded. | Slide in the deck's stored order, text block, and decoded character range |
@@ -110,6 +110,17 @@ original extraction rules. [Excel's hide-value format](https://support.microsoft
 For email, attachments can be submitted separately. Word reads supported
 body and note text. ODT uses body text. Document packages are read locally
 without opening Office, fetching linked content, or executing macros.
+
+For ODT, the reader retains saved text in a supported cross-reference or
+bookmark reference when it exactly matches one marked phrase in the same
+document. The reference's Unicode positions follow the decoded paragraph
+text. Stale and calculated fields stay outside the writing input. In 44
+authored files, all eight matching fields agreed with LibreOffice's PDF
+output and all 36 excluded controls retained their prior writing inputs.
+LibreOffice refreshed the eight stale fields during PDF export. Three
+Writer-saved files also passed local checkout and matched the browser,
+Standard PDF, JSON and signed original-file verification.
+[ODT cross-reference results](evaluation-panels/odt-matching-text-references-2026-11-19.json)
 
 Email analysis prefers the plain-text message body. When that body is
 blank, it can use the single eligible HTML version in the same MIME

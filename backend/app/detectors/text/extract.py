@@ -1415,6 +1415,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             normalize_word_layout_breaks: bool = True,
             skip_hidden_slide_groups: bool = True, map_word_hyperlink_runs: bool = True,
             map_word_table_controls: bool = True, skip_hidden_odt_sections: bool = True,
+            include_odt_text_references: bool = True,
             include_word_linked_notes: bool = True, skip_hidden_xlsx_cell_formats: bool = True,
             skip_hidden_rtf_runs: bool = True, skip_markdown_fences: bool = True,
             honor_csv_separator_declaration: bool = True,
@@ -1436,7 +1437,8 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
     elif ext == ".odt":
         from app.detectors.text.opendocument import body_paragraphs
 
-        paragraphs = body_paragraphs(path, skip_hidden_sections=skip_hidden_odt_sections)
+        paragraphs = body_paragraphs(path, skip_hidden_sections=skip_hidden_odt_sections,
+                                    include_matching_text_references=include_odt_text_references)
         d = _join_mapped([(value, {"kind": "markup", "paragraph_index": index}) for index, value in enumerate(paragraphs)],
                          map_paragraphs=map_body_paragraphs)
         d.meta = {"method": "odt", "paragraph_count": len(paragraphs), "coverage_warning":
@@ -1445,6 +1447,9 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
         if skip_hidden_odt_sections:
             d.meta[document_native_locations.ODT_VISIBILITY_KEY] = document_native_locations.ODT_VISIBILITY
             d.meta["coverage_warning"] += " " + document_native_locations.ODT_VISIBILITY_SCOPE
+        if include_odt_text_references:
+            d.meta[document_native_locations.ODT_TEXT_REFERENCES_KEY] = document_native_locations.ODT_TEXT_REFERENCES
+            d.meta["coverage_warning"] += " " + document_native_locations.ODT_TEXT_REFERENCES_SCOPE
         if map_body_paragraphs:
             d.meta[document_native_locations.PARAGRAPH_MAP_KEY] = document_native_locations.PARAGRAPH_MAP
     elif ext in {".pptx", ".odp", ".epub"}:

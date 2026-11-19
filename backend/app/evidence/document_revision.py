@@ -362,7 +362,8 @@ def _source(path: Path, data: bytes, extension: str, *, mixed: bool = False, wor
             except (RuntimeError, StepTimeout):
                 raise ValueError("The Rich Text draft could not be read. Save it as DOCX or TXT and try again.") from None
         else:
-            doc = extract(path, extension, skip_hidden_odt_sections=skip_hidden_odt_sections)
+            doc = extract(path, extension, skip_hidden_odt_sections=skip_hidden_odt_sections,
+                          include_odt_text_references=False)
         if not 0 < len(doc.text) <= MAX_CHARS or "\ufffd" in doc.text or "\x00" in doc.text or not doc.source_map:
             raise ValueError(f"Each {label} version needs readable body text and at most {MAX_CHARS:,} extracted characters.")
         anchors = []

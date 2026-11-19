@@ -1,0 +1,71 @@
+{
+  "schema": "chipmunk.odt-matching-text-reference-render-probe/1",
+  "authored_work_groups": 4,
+  "odt_files": 44,
+  "variant_counts": {
+    "equal": 8,
+    "stale": 8,
+    "page": 8,
+    "hidden_target": 4,
+    "hidden_field": 4,
+    "duplicate": 4,
+    "missing": 4,
+    "point": 4
+  },
+  "projection_and_pdf_export": {
+    "exact_matching_fields": 8,
+    "equal_matches_writer_display": 8,
+    "excluded_fields": 36,
+    "stale_refreshes_on_writer_pdf_export": 8
+  },
+  "writer_resaved": {
+    "exact_matching_fields": 2,
+    "excluded_fields": 1
+  },
+  "coordinate": "decoded OpenDocument paragraph Unicode codepoint",
+  "source_breadth": "Four authored fictional contexts using plain text or a bookmark and a same-package marked span. No customer uploads.",
+  "method": "Local Writer PDF conversion and exact independently reconstructed native text projections. This measures format compatibility.",
+  "local_app": {
+    "known_cases": {
+      "01-reference-equal.odt": {
+        "matching_field_included": true,
+        "wording_occurrences": 2,
+        "saved_range": [
+          [
+            25,
+            50
+          ]
+        ],
+        "browser_report_json_policy_bound": true,
+        "original_verified": true
+      },
+      "01-bookmark-equal.odt": {
+        "matching_field_included": true,
+        "wording_occurrences": 2,
+        "saved_range": [
+          [
+            25,
+            50
+          ]
+        ],
+        "browser_report_json_policy_bound": true,
+        "original_verified": true
+      },
+      "01-reference-stale.odt": {
+        "matching_field_included": false,
+        "wording_occurrences": 1,
+        "saved_range": null,
+        "browser_report_json_policy_bound": true,
+        "original_verified": true
+      }
+    },
+    "browser": {
+      "opened": 3,
+      "scope_notice": 3,
+      "page_errors": 0
+    },
+    "simulated_payments": 3,
+    "price_usd_cents": 999,
+    "jobs_before_payment": 0
+  }
+}

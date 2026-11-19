@@ -1,0 +1,162 @@
+{
+  "closed": true,
+  "comparison": {
+    "added_ordinary_seconds": 0.0,
+    "matched_ordinary_collision_files": 0,
+    "new_ordinary_files": 0,
+    "new_ordinary_pairs": 0,
+    "new_quieter_only_files": 0,
+    "new_rooms": 0,
+    "new_single_edit_families": 0,
+    "new_source_pairs": 0,
+    "new_useful_files": 0
+  },
+  "counts": {
+    "two_second": {
+      "aachen": {
+        "edit_labels_located": 1,
+        "edit_labels_total": 24,
+        "edited_flags": 1,
+        "edited_total": 18,
+        "missed_files": 17,
+        "ordinary_flags": 0,
+        "ordinary_total": 12,
+        "useful_files": 1,
+        "wrong_only_files": 0
+      },
+      "huddersfield": {
+        "edit_labels_located": 2,
+        "edit_labels_total": 24,
+        "edited_flags": 4,
+        "edited_total": 18,
+        "missed_files": 16,
+        "ordinary_flags": 1,
+        "ordinary_total": 12,
+        "useful_files": 2,
+        "wrong_only_files": 2
+      }
+    },
+    "two_second_plus_mono750": {
+      "aachen": {
+        "edit_labels_located": 1,
+        "edit_labels_total": 24,
+        "edited_flags": 1,
+        "edited_total": 18,
+        "missed_files": 17,
+        "ordinary_flags": 0,
+        "ordinary_total": 12,
+        "useful_files": 1,
+        "wrong_only_files": 0
+      },
+      "huddersfield": {
+        "edit_labels_located": 2,
+        "edit_labels_total": 24,
+        "edited_flags": 4,
+        "edited_total": 18,
+        "missed_files": 16,
+        "ordinary_flags": 1,
+        "ordinary_total": 12,
+        "useful_files": 2,
+        "wrong_only_files": 2
+      }
+    },
+    "two_second_plus_native750": {
+      "aachen": {
+        "edit_labels_located": 1,
+        "edit_labels_total": 24,
+        "edited_flags": 1,
+        "edited_total": 18,
+        "missed_files": 17,
+        "ordinary_flags": 0,
+        "ordinary_total": 12,
+        "useful_files": 1,
+        "wrong_only_files": 0
+      },
+      "huddersfield": {
+        "edit_labels_located": 2,
+        "edit_labels_total": 24,
+        "edited_flags": 4,
+        "edited_total": 18,
+        "missed_files": 16,
+        "ordinary_flags": 1,
+        "ordinary_total": 12,
+        "useful_files": 2,
+        "wrong_only_files": 2
+      }
+    }
+  },
+  "elapsed_seconds": 567.2617014999851,
+  "frozen_gate": {
+    "at_most_two_new_ordinary_files": true,
+    "at_most_two_new_ordinary_pairs": true,
+    "both_families_on_single_edits": false,
+    "gains_in_both_rooms": false,
+    "no_paired_control_collisions": true,
+    "ordinary_time_budget": true,
+    "three_added_useful_files": false,
+    "three_source_pairs": false,
+    "two_quieter_only_additions": false,
+    "wrong_only_limit_each_room": true
+  },
+  "limitations": [
+    "Inputs have prior two-second experiment exposure and are new to the shorter channel method.",
+    "Controlled measured-room mixtures do not establish natural-manipulation accuracy.",
+    "Six-second unequal channels remain outside the current twelve-second brief-review serving scope.",
+    "No isolated natural-room stereo or different-reader within-voice ordinary replacements were evaluated.",
+    "The measured times identify listening windows and do not attribute a result to a person or prove AI generation."
+  ],
+  "maximum_rss_bytes": 2885959680,
+  "privacy": "Aggregate omits source names, source identities, individual filenames and hashes, local paths, exact edit positions, individual predictions, features and media.",
+  "proceed_to_independent_native_confirmation": false,
+  "production_activation_supported": false,
+  "publisher_sources": [
+    "https://www.openslr.org/94/",
+    "https://www.iks.rwth-aachen.de/en/research/tools-downloads/databases/aachen-impulse-response-database/",
+    "https://zenodo.org/records/2639677",
+    "https://huggingface.co/Sadanie/pellav2-audio-deepfake-detector"
+  ],
+  "sampling": {
+    "brief_hop_seconds": 0.5,
+    "brief_window_seconds": 0.75,
+    "brief_windows_per_view": 11,
+    "canonical_mono_views": 60,
+    "mono_two_second_windows_per_file": 5,
+    "native_channel_views": 120,
+    "outside_brief_schedule_seconds": 0.25
+  },
+  "schema": "chipmunk.original-channel-short-grid-aggregate/1",
+  "scope": {
+    "annotated_interventions": 48,
+    "declared_readers": 24,
+    "different_reader_within_voice_splice_controls": 0,
+    "isolated_natural_room_controls": 0,
+    "latest_mls_declared_reader_overlap": 0,
+    "latest_mls_native_source_overlap": 0,
+    "measured_rooms": 2,
+    "native_channels": 2,
+    "native_deliveries": 60,
+    "native_rate_hz": 16000,
+    "native_seconds": 6,
+    "ordinary_controls": 24,
+    "reader_pairs": 12,
+    "same_reader_splice_two_voice_controls": 12,
+    "synthetic_files": 36,
+    "untouched_two_voice_controls": 12
+  },
+  "speaker_attribution_supported": false,
+  "verification": {
+    "additive_intervention_sample_identities": 2304000,
+    "authored_controls": 7,
+    "classifier_calls_with_repeat": 1478,
+    "distinct_authenticity_windows": 1477,
+    "exact_repeat_passed": true,
+    "independent_canonical_mono_replays": 60,
+    "independent_outcomes_passed": true,
+    "native_source_files_replayed": 60,
+    "native_stereo_samples_compared": 11520000,
+    "view_records_checked": 180,
+    "window_source_admission_bindings": 2280
+  },
+  "whole_numeric_closure_commitment": "e749954fc8d48446c436d39854bd1992e3fd795fdc1b9141a4b6bf205f81e004",
+  "whole_protocol_commitment": "75e6829655c110c2247ffa69c3e7280ccd1d88a260aba440593f5c57cfa79d08"
+}

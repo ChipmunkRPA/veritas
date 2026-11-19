@@ -1,0 +1,607 @@
+{
+  "calibration": "Two VCD2 digital-blur alerts and 13 older exact-30 RTFS swap witnesses. Retrospective prior 29.97 placements stayed outside rule selection. Working held archive source participants and pretraining exposure are unknown.",
+  "cases": [
+    {
+      "authored": null,
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": null,
+      "group": 1,
+      "raw_status": "unassessed",
+      "role": "untouched",
+      "time_base": "1/30000"
+    },
+    {
+      "authored": [
+        86,
+        89
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": null,
+      "group": 1,
+      "raw_status": "no_range",
+      "role": "gaussian",
+      "time_base": "1/90000"
+    },
+    {
+      "authored": [
+        86,
+        89
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": null,
+      "group": 1,
+      "raw_status": "unassessed",
+      "role": "disc",
+      "time_base": "1/30000"
+    },
+    {
+      "authored": [
+        86,
+        89
+      ],
+      "bound_frame_pts": [
+        [
+          85,
+          255255
+        ],
+        [
+          87,
+          261261
+        ],
+        [
+          89,
+          267267
+        ]
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": [
+        86,
+        89
+      ],
+      "group": 1,
+      "raw_status": "localized",
+      "role": "swap",
+      "scalar_hex": {
+        "flank_coarse_error": "0x1.d35f4c89ec50bp+1",
+        "max_blur_error": "0x1.62d17e8769cfap+3",
+        "max_coarse_error": "0x1.d78d71a83b146p+2",
+        "min_fit_sigma": "0x1.c000000000000p+0",
+        "min_input_detail": "0x1.4eec5d7fa33aep+1",
+        "min_loss": "0x1.2a0c890f87634p-3",
+        "min_reduction": "0x1.8c412f21cde90p-5"
+      },
+      "time_base": "1/90000"
+    },
+    {
+      "authored": [
+        86,
+        89
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": null,
+      "group": 1,
+      "raw_status": "unassessed",
+      "role": "swap_plus_blur",
+      "time_base": "1/30000"
+    },
+    {
+      "authored": null,
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": null,
+      "group": 2,
+      "raw_status": "unassessed",
+      "role": "untouched",
+      "time_base": "1/90000"
+    },
+    {
+      "authored": [
+        94,
+        98
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": null,
+      "group": 2,
+      "raw_status": "unassessed",
+      "role": "gaussian",
+      "time_base": "1/30000"
+    },
+    {
+      "authored": [
+        94,
+        98
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": null,
+      "group": 2,
+      "raw_status": "unassessed",
+      "role": "disc",
+      "time_base": "1/90000"
+    },
+    {
+      "authored": [
+        94,
+        98
+      ],
+      "bound_frame_pts": [
+        [
+          93,
+          93093
+        ],
+        [
+          96,
+          96096
+        ],
+        [
+          98,
+          98098
+        ]
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": [
+        94,
+        98
+      ],
+      "group": 2,
+      "raw_status": "localized",
+      "role": "swap",
+      "scalar_hex": {
+        "flank_coarse_error": "0x1.2c5001ba20a81p+1",
+        "max_blur_error": "0x1.1cdfd1ddaa73dp+4",
+        "max_coarse_error": "0x1.2201137d3ccaap+3",
+        "min_fit_sigma": "0x1.4000000000000p+0",
+        "min_input_detail": "0x1.9aff5763a22a0p+2",
+        "min_loss": "0x1.4ce0a991fe5d0p-5",
+        "min_reduction": "0x1.30fa54b6e3b30p-4"
+      },
+      "time_base": "1/30000"
+    },
+    {
+      "authored": [
+        94,
+        98
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": null,
+      "group": 2,
+      "raw_status": "unassessed",
+      "role": "swap_plus_blur",
+      "time_base": "1/90000"
+    },
+    {
+      "authored": null,
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": null,
+      "group": 3,
+      "raw_status": "no_range",
+      "role": "untouched",
+      "time_base": "1/30000"
+    },
+    {
+      "authored": [
+        61,
+        64
+      ],
+      "bound_frame_pts": [
+        [
+          60,
+          180180
+        ],
+        [
+          62,
+          186186
+        ],
+        [
+          64,
+          192192
+        ]
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": [
+        61,
+        64
+      ],
+      "group": 3,
+      "raw_status": "localized",
+      "role": "gaussian",
+      "scalar_hex": {
+        "flank_coarse_error": "0x1.e1fd5ed426649p+0",
+        "max_blur_error": "0x1.b40cafc88bab1p+1",
+        "max_coarse_error": "0x1.04552515dec47p+2",
+        "min_fit_sigma": "0x1.999999999999ap+1",
+        "min_input_detail": "0x1.ef563f78669a5p+1",
+        "min_loss": "0x1.9576bc4feacabp-1",
+        "min_reduction": "0x1.529271c5b2596p-1"
+      },
+      "time_base": "1/90000"
+    },
+    {
+      "authored": [
+        61,
+        64
+      ],
+      "bound_frame_pts": [
+        [
+          60,
+          60060
+        ],
+        [
+          62,
+          62062
+        ],
+        [
+          64,
+          64064
+        ]
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": [
+        61,
+        64
+      ],
+      "group": 3,
+      "raw_status": "localized",
+      "role": "disc",
+      "scalar_hex": {
+        "flank_coarse_error": "0x1.fed902f3ef44cp+0",
+        "max_blur_error": "0x1.fa10a0d5c8d2dp+1",
+        "max_coarse_error": "0x1.13ab4d43fd295p+2",
+        "min_fit_sigma": "0x1.999999999999ap+1",
+        "min_input_detail": "0x1.f1524ae78fa48p+1",
+        "min_loss": "0x1.96a5b1ffe8140p-1",
+        "min_reduction": "0x1.440e6e4f03e49p-1"
+      },
+      "time_base": "1/30000"
+    },
+    {
+      "authored": [
+        61,
+        64
+      ],
+      "bound_frame_pts": [
+        [
+          60,
+          180180
+        ],
+        [
+          62,
+          186186
+        ],
+        [
+          64,
+          192192
+        ]
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": [
+        61,
+        64
+      ],
+      "group": 3,
+      "raw_status": "localized",
+      "role": "swap",
+      "scalar_hex": {
+        "flank_coarse_error": "0x1.341aee5ea55e7p+1",
+        "max_blur_error": "0x1.7f5ce194dec95p+3",
+        "max_coarse_error": "0x1.f1aaa28ff8449p+2",
+        "min_fit_sigma": "0x1.4000000000000p+0",
+        "min_input_detail": "0x1.31b002c4ac88ap+2",
+        "min_loss": "0x1.4cfcf935d35eap-2",
+        "min_reduction": "0x1.9aae9b35c5130p-5"
+      },
+      "time_base": "1/90000"
+    },
+    {
+      "authored": [
+        61,
+        64
+      ],
+      "bound_frame_pts": [
+        [
+          60,
+          60060
+        ],
+        [
+          62,
+          62062
+        ],
+        [
+          64,
+          64064
+        ]
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": [
+        61,
+        64
+      ],
+      "group": 3,
+      "raw_status": "localized",
+      "role": "swap_plus_blur",
+      "scalar_hex": {
+        "flank_coarse_error": "0x1.a6898df303c85p+0",
+        "max_blur_error": "0x1.5fe9a33379ddcp+3",
+        "max_coarse_error": "0x1.6bd9390ed3a48p+3",
+        "min_fit_sigma": "0x1.2000000000000p+2",
+        "min_input_detail": "0x1.21840db70edb6p+2",
+        "min_loss": "0x1.a07ece60c75d3p-1",
+        "min_reduction": "0x1.6ac0fbe55df92p-2"
+      },
+      "time_base": "1/30000"
+    },
+    {
+      "authored": null,
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": null,
+      "group": 4,
+      "raw_status": "unassessed",
+      "role": "untouched",
+      "time_base": "1/90000"
+    },
+    {
+      "authored": [
+        105,
+        109
+      ],
+      "bound_frame_pts": [
+        [
+          104,
+          104104
+        ],
+        [
+          107,
+          107107
+        ],
+        [
+          109,
+          109109
+        ]
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": [
+        105,
+        109
+      ],
+      "group": 4,
+      "raw_status": "localized",
+      "role": "gaussian",
+      "scalar_hex": {
+        "flank_coarse_error": "0x1.b445f92ea7741p+0",
+        "max_blur_error": "0x1.650fe7525f93fp+1",
+        "max_coarse_error": "0x1.395218a9a31c0p+1",
+        "min_fit_sigma": "0x1.3333333333333p+1",
+        "min_input_detail": "0x1.5c9b0a6c459bcp+1",
+        "min_loss": "0x1.7c38e17c38256p-1",
+        "min_reduction": "0x1.1f77cb2a70268p-1"
+      },
+      "time_base": "1/30000"
+    },
+    {
+      "authored": [
+        105,
+        109
+      ],
+      "bound_frame_pts": [
+        [
+          104,
+          312312
+        ],
+        [
+          107,
+          321321
+        ],
+        [
+          109,
+          327327
+        ]
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": [
+        105,
+        109
+      ],
+      "group": 4,
+      "raw_status": "localized",
+      "role": "disc",
+      "scalar_hex": {
+        "flank_coarse_error": "0x1.dabfa27284549p+0",
+        "max_blur_error": "0x1.e6cdacc751742p+1",
+        "max_coarse_error": "0x1.930a392288790p+1",
+        "min_fit_sigma": "0x1.999999999999ap+1",
+        "min_input_detail": "0x1.57c46a0e9b10cp+1",
+        "min_loss": "0x1.82e788fa28e3ap-1",
+        "min_reduction": "0x1.f0d5f4a1b708ep-2"
+      },
+      "time_base": "1/90000"
+    },
+    {
+      "authored": [
+        105,
+        109
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": null,
+      "group": 4,
+      "raw_status": "unassessed",
+      "role": "swap",
+      "time_base": "1/30000"
+    },
+    {
+      "authored": [
+        105,
+        109
+      ],
+      "camera_profile": "rtfs_native_ntsc",
+      "candidate_range": null,
+      "group": 4,
+      "raw_status": "unassessed",
+      "role": "swap_plus_blur",
+      "time_base": "1/90000"
+    },
+    {
+      "authored": null,
+      "camera_profile": "vcd2_30fps_one_to_one_ntsc",
+      "candidate_range": null,
+      "group": 5,
+      "raw_status": "no_range",
+      "role": "untouched",
+      "time_base": "1/30000"
+    },
+    {
+      "authored": [
+        71,
+        75
+      ],
+      "camera_profile": "vcd2_30fps_one_to_one_ntsc",
+      "candidate_range": null,
+      "group": 5,
+      "raw_status": "no_range",
+      "role": "gaussian",
+      "time_base": "1/90000"
+    },
+    {
+      "authored": [
+        71,
+        75
+      ],
+      "camera_profile": "vcd2_30fps_one_to_one_ntsc",
+      "candidate_range": null,
+      "group": 5,
+      "raw_status": "no_range",
+      "role": "disc",
+      "time_base": "1/30000"
+    },
+    {
+      "authored": null,
+      "camera_profile": "vcd2_30fps_one_to_one_ntsc",
+      "candidate_range": null,
+      "group": 6,
+      "raw_status": "unassessed",
+      "role": "untouched",
+      "time_base": "1/90000"
+    },
+    {
+      "authored": [
+        85,
+        89
+      ],
+      "camera_profile": "vcd2_30fps_one_to_one_ntsc",
+      "candidate_range": null,
+      "group": 6,
+      "raw_status": "no_range",
+      "role": "gaussian",
+      "time_base": "1/30000"
+    },
+    {
+      "authored": [
+        85,
+        89
+      ],
+      "camera_profile": "vcd2_30fps_one_to_one_ntsc",
+      "candidate_range": null,
+      "group": 6,
+      "raw_status": "unassessed",
+      "role": "disc",
+      "time_base": "1/90000"
+    }
+  ],
+  "commitments": {
+    "fixed_scorer_journal": "6aeee6b88cb3c25e798c9cdf5b3e56a8a73733d99c5e89629e8a0beb5526a103",
+    "frozen_source_plan": "f9e8d393ddca983993c9e99dc885f6429ba6c930ed11f6360ad6a473016622ef",
+    "private_closed_measurements": "d519a1976e6e43bd3c3e269d8d558cd9c1a5050b83f56e8874679cb00fca72b5",
+    "private_independent_sources": "a3cb79116240e6c868c4305b7fd6e60900433f3dcca85481c6a0b3a76e44ca2d"
+  },
+  "development_counts": {
+    "blur_suppressed": 2,
+    "exact30_swap_suppressed": 0
+  },
+  "evaluation": "Prospectively frozen 26-file local blur explanation analysis with source-separated development and newly authored native picture coordinates.",
+  "gate_pass": false,
+  "gate_requirements": {
+    "max_lost_exact_compounds": 0,
+    "max_lost_exact_swaps": 0,
+    "max_unrelated_suppression": 0,
+    "min_ordinary_blur_alerts": 2,
+    "min_raw_exact_compounds": 2,
+    "min_raw_exact_swaps": 3,
+    "min_suppressed_ordinary_blur_alerts": 2,
+    "min_suppressed_source_groups": 2
+  },
+  "limits": "Digital only. Rows contain study-only indices, exact rational delivery ticks, and scalar evidence. No source IDs, decoded pixels, face geometry, native source filenames or file-level source fingerprints. The explanation measures ordinary-looking softening and cannot establish that a subject or picture is authentic.",
+  "native_evidence_crops_replayed": 24,
+  "ordinary_blur_groups_suppressed": 2,
+  "recount": {
+    "all": {
+      "cases": 26,
+      "exact_raw": 8,
+      "exact_remaining": 4,
+      "guard_applied": 4,
+      "localized": 8,
+      "unassessed": 12,
+      "unrelated_suppression": 0
+    },
+    "disc": {
+      "cases": 6,
+      "exact_raw": 2,
+      "exact_remaining": 0,
+      "guard_applied": 2,
+      "localized": 2,
+      "unassessed": 3,
+      "unrelated_suppression": 0
+    },
+    "gaussian": {
+      "cases": 6,
+      "exact_raw": 2,
+      "exact_remaining": 0,
+      "guard_applied": 2,
+      "localized": 2,
+      "unassessed": 1,
+      "unrelated_suppression": 0
+    },
+    "swap": {
+      "cases": 4,
+      "exact_raw": 3,
+      "exact_remaining": 3,
+      "guard_applied": 0,
+      "localized": 3,
+      "unassessed": 1,
+      "unrelated_suppression": 0
+    },
+    "swap_plus_blur": {
+      "cases": 4,
+      "exact_raw": 1,
+      "exact_remaining": 1,
+      "guard_applied": 0,
+      "localized": 1,
+      "unassessed": 3,
+      "unrelated_suppression": 0
+    },
+    "untouched": {
+      "cases": 6,
+      "exact_raw": 0,
+      "exact_remaining": 0,
+      "guard_applied": 0,
+      "localized": 0,
+      "unassessed": 4,
+      "unrelated_suppression": 0
+    }
+  },
+  "retrospective_reused_locations": {
+    "alternate_raw": 1,
+    "alternate_withheld": 0,
+    "primary_raw": 17,
+    "primary_withheld": 0
+  },
+  "schema": "chipmunk.video-local-short-blur-hold/1",
+  "source_mapping_entries_rechecked": 748,
+  "thresholds": {
+    "flank_coarse_floor": 4.0,
+    "flank_multiplier": 1.9,
+    "flank_offset": 1.0,
+    "max_blur_error": 7.5,
+    "max_coarse_error": 7.0,
+    "min_fit_sigma": 1.25,
+    "min_input_detail": 2.5,
+    "min_loss": 0.5,
+    "min_reduction": 0.32
+  }
+}

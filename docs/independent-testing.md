@@ -33,6 +33,14 @@ recounts ordinary local-blur alerts with exact source frames. The
 recounts matched synthetic speech and ordinary recordings with the same
 traffic or competing speech at a supplied edit clock.
 
+The [small PNG copy comparison](image-reference-native-png-2026-11-19.md)
+checks exact RGB locations for planted photo and screenshot edits. The
+[local face blur study](video-face-short-local-blur-2026-11-19.md) and
+[face view recovery study](video-native-face-view-bridge-2026-11-19.md)
+measure where brief swaps fail under blur. The
+[original-channel speech study](audio-original-channel-short-grid-2026-11-19.md)
+recounts the held two-voice and ordinary controls for short windows.
+
 The [paired soundtrack replay](video-short-phrase-reencode-2026-11-18.md#reproduce)
 recounts exact 16 kHz analysis locations under three audio-carrier pairings.
 It includes two independent picture encodes with the same frame clock,

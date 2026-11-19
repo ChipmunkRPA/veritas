@@ -221,6 +221,8 @@ replay-evidence:  ## recount published image, video, audio, and writing evaluati
 		docs/evaluation-panels/video-short-face-hevc-25-holdout-2026-11-19.json
 	python3 -B -I -S backend/scripts/review_hevc_ordinary_confirmation.py \
 		docs/evaluation-panels/video-short-face-hevc-25-ordinary-2026-11-19.json
+	python3 -B -I -S backend/scripts/review_hevc_aac_transfer.py \
+		docs/evaluation-panels/video-hevc-aac-transport-2026-11-19.json
 	python3 -B -I -S backend/scripts/review_audio_openvoice_enrollment.py \
 		docs/evaluation-panels/audio-openvoice-enrollment-2026-11-19.json
 	python3 -B -I -S backend/scripts/review_audio_original_enrollment_admission.py \

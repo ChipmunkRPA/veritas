@@ -26,6 +26,9 @@ located two compound swaps and exposed a shortfall in measurable ordinary
 controls. A [separate ordinary test](video-short-face-hevc-25-ordinary-2026-11-19.md)
 replays 17 measurable blur files and one ordinary highlight, with additional
 unchanged and hard-cut controls.
+The [HEVC soundtrack comparison](video-hevc-aac-transport-2026-11-19.md)
+recounts 21 AAC muxes carrying the same scoped pictures and three excluded
+soundtrack layouts.
 
 The [learned speech reconstruction preflight](audio-learned-enrollment-genuine-preflight-2026-11-19.md)
 reviews two held noisy source groups. The replay checks grouped acoustic

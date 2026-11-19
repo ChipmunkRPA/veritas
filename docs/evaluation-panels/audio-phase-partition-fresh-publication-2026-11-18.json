@@ -1,0 +1,85 @@
+{
+  "limits": [
+    "Not a cryptographic issuer signature. Integrity is SHA-256 committed.",
+    "Public replay checks grouped decisions and frozen gate, not source grouping, scores, admission or media.",
+    "Small aggregate cells may permit membership inference when combined with independent outside knowledge."
+  ],
+  "media_read": false,
+  "models_called": false,
+  "negative_controls": [
+    {
+      "check": "extra_case_count",
+      "rejected": true
+    },
+    {
+      "check": "case_identity_injection",
+      "rejected": true
+    },
+    {
+      "check": "numeric_response_vector_injection",
+      "rejected": true
+    },
+    {
+      "check": "exact_clock_injection",
+      "rejected": true
+    },
+    {
+      "check": "invalid_categorical_state",
+      "rejected": true
+    },
+    {
+      "check": "duplicate_marginal_bin",
+      "rejected": true
+    },
+    {
+      "check": "missing_marginal_bin",
+      "rejected": true
+    },
+    {
+      "check": "paired_control_collision_changed",
+      "rejected": true
+    },
+    {
+      "check": "reader_gain_changed",
+      "rejected": true
+    },
+    {
+      "check": "gate_changed",
+      "rejected": true
+    },
+    {
+      "check": "frozen_point_changed",
+      "rejected": true
+    },
+    {
+      "check": "case_vector_injection",
+      "rejected": true
+    },
+    {
+      "check": "private_metadata_top_level_injection",
+      "rejected": true
+    },
+    {
+      "check": "development_hash_changed",
+      "rejected": true
+    }
+  ],
+  "negative_controls_rejected": 14,
+  "portable_isolated_stdlib_recount_equal": true,
+  "privacy_checks": {
+    "cross_arm_case_vectors_absent": true,
+    "exact_sample_clocks_absent": true,
+    "gzip_timestamp_zero": true,
+    "individual_fingerprints_absent": 1576,
+    "local_source_paths_absent": 0,
+    "per_window_scores_and_speech_counts_absent": true,
+    "source_aliases_absent": true,
+    "source_identity_values_absent": 32,
+    "wall_clock_timestamps_absent": true
+  },
+  "receipt_bytes": 2014,
+  "receipt_sha256": "41890c34104a13803ce2f8242f1e2c77ebf2408861ceb3b86e3a9c1db7422eff",
+  "reviewer_sha256": "7b4aa4661c1e60f9499f82dca469de075ee6c9ba127a3fe968770656f548bcc7",
+  "schema": "chipmunk.audio-public-decision-state-independent-review/1",
+  "status": "passed"
+}

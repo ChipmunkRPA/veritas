@@ -1,0 +1,123 @@
+{
+  "audit_scope": "Prepared input custody and clocks only; no detection-performance claim",
+  "auditor_model_inference_calls": 0,
+  "auditor_scoring_outputs_read": false,
+  "backgrounds": {
+    "ami_rights_url": "https://groups.inf.ed.ac.uk/ami/corpus/license.shtml",
+    "assigned_prompt_counts_per_recording": {
+      "competing_speech": [
+        12,
+        12
+      ],
+      "traffic": [
+        12,
+        12
+      ]
+    },
+    "competing_speech_rights": "AMI corpus and annotations, CC BY 4.0",
+    "recording_counts": {
+      "competing_speech": 2,
+      "traffic": 2
+    },
+    "traffic_rights": "CC0 1.0"
+  },
+  "commitments": {
+    "background_lock_sha256": "50f22b7a38ea30365a599cdf8da760361d10ad4262a7c8fc17dc282ff942bfa6",
+    "native_intake_certificate_sha256": "be17708cff0e14dcae650e7dfb836b325ff40da2ec259b7fc5572fd3d64de068",
+    "native_intake_sha256": "c4aa74ed3a92a7e09989383cf4997cf2e38ad1e418ecb03d64646b8e2cffa454",
+    "portable_reviewer_sha256": "5acc4b26b654da48528630d4ace54708e835a81c42ae70d31bd9326800d23946",
+    "prepared_manifest_sha256": "0cc78093a31e33b08c6b23b9406c38019f55c87403a76d6b106bbd28092dd9ac",
+    "renderer_source_sha256": "3fbb36acb6aea11c6229bf7f165c0bb53b22624a73dd327c8baa6a27854d0836",
+    "sealed_source_reserve_sha256": "5965ed2cb76c48257a46f670e8012ab9ed6456eb142b23e447d69aa5c7885931"
+  },
+  "duplicates": {
+    "byte_clusters": 15,
+    "excess_records_above_distinct_bytes": 15,
+    "explanation": "All repeated bytes are untouched/ordinary controls with equal native span lengths in the same source prompt and condition.",
+    "identity_ordinary_controls": 15,
+    "origin_or_condition_crossovers": 0
+  },
+  "layout": {
+    "distinct_pcm_bytes_verified": 150912000,
+    "distinct_pcm_deliveries": 393,
+    "native_sample_rate_hz": 16000,
+    "original_prompts": 24,
+    "reader_groups": 8,
+    "records_by_authored_role": {
+      "background": 48,
+      "edited": 144,
+      "ordinary_resampled": 144,
+      "untouched": 72
+    },
+    "records_by_condition": {
+      "clean": 120,
+      "competing_speech": 144,
+      "traffic": 144
+    },
+    "rendered_records": 408,
+    "samples_per_delivery": 192000,
+    "seconds_per_delivery": 12.0,
+    "synthetic_source_families": 2
+  },
+  "limits": [
+    "These are correlated deliveries from 24 prompts and 8 reader groups; 393 byte sequences are not 393 independent sources.",
+    "Known authored synthetic insertions are input labels, not detector predictions. No scoring outcome was read.",
+    "Native donor/grid/hash bindings, sample clocks, outside-span equality and exact additive backgrounds were checked. SciPy interpolation interiors were not regenerated."
+  ],
+  "maximum_scale_rounding_residual_pcm_units": 0.4999815047299023,
+  "mismatch_count": 0,
+  "passed": true,
+  "public_source_release": {
+    "archives": [
+      {
+        "bytes": 9420947621,
+        "file": "PhonemeDF_real.tar.gz",
+        "md5": "71371f453e3d56199f047b0ee16edac1",
+        "sha256": "8a6f957d6f4b9f26ea7404a9430d0239a482c8d23a1a6810cbb019aaf36c92c0"
+      },
+      {
+        "bytes": 7703256782,
+        "file": "PhonemeDF_MeloTTS.tar.gz",
+        "md5": "e12abaafe46a405e37ed9b24d1f9d76e",
+        "sha256": "c2d366a50e6a5e8880be46d2338d6289b8655872030bad742b37e41d3e928bc3"
+      },
+      {
+        "bytes": 7848724770,
+        "file": "PhonemeDF_ChatterboxTTS.tar.gz",
+        "md5": "ce8e6a0c2a1456ca201347032c906059",
+        "sha256": "50af314e46768c3cafe5d2596e2d343a7021270a530311322262eef6dac28843"
+      }
+    ],
+    "doi": "10.5281/zenodo.19522979",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "title": "PhonemeDF: A Synthetic Speech Dataset for Audio Deepfake Detection and Naturalness Evaluation",
+    "url": "https://zenodo.org/records/19522979"
+  },
+  "publication_scope": {
+    "case_to_source_mapping_included": false,
+    "form": "Aggregate receipt without case-level identifiers or individual delivery fingerprints",
+    "native_replay_requirement": "Replay requires the separately supplied frozen manifests and native/prepared media bound by the package hashes; this aggregate receipt does not reconstruct the input case list.",
+    "raw_media_included": false
+  },
+  "schema": "chipmunk.prepared-audio-custody-aggregate/1",
+  "verification_counts": {
+    "annotation_edit_overlap_bindings": 24,
+    "authored_synthetic_outside_span_comparisons": 144,
+    "authored_synthetic_outside_span_samples": 25866240,
+    "exact_additive_background_comparisons": 240,
+    "exact_additive_background_samples": 46080000,
+    "genuine_crop_gain_bindings": 24,
+    "genuine_crop_gain_samples": 4608000,
+    "isolated_background_scale_bindings": 48,
+    "isolated_background_scale_samples": 9216000,
+    "known_synthetic_replacement_interiors_changed": 144,
+    "locked_background_wavs": 4,
+    "native_grid_bindings": 72,
+    "native_wav_bindings": 72,
+    "noisy_record_metadata_bindings": 288,
+    "ordinary_control_outside_span_comparisons": 144,
+    "ordinary_control_outside_span_samples": 25866240,
+    "rendered_record_clocks": 408
+  }
+}

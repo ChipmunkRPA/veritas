@@ -7,21 +7,22 @@ import { evidenceImageUrl, evidenceSourceUrl, measurementValue, useImageEvidence
 import ImageInspectionChecks, { CandidateEligibilityNote } from './ImageInspectionChecks'
 import { evidenceSourceMediaUrl } from './multimediaPackets'
 
-function EvidencePicture({ set, artifact, token, ready, alt }: {
-  set: ImageEvidenceSet; artifact: EvidenceImage; token: string; ready: boolean; alt: string
+function EvidencePicture({ set, artifact, token, ready, alt, compact = false }: {
+  set: ImageEvidenceSet; artifact: EvidenceImage; token: string; ready: boolean; alt: string; compact?: boolean
 }) {
   const [failed, setFailed] = useState(false)
   const [attempt, setAttempt] = useState(0)
   const src = ready ? evidenceImageUrl(set, artifact, token) : null
   return (
-    <div className="min-h-44 aspect-[4/3] rounded-md border border-border bg-surface-2 flex items-center justify-center overflow-hidden">
+    <div className={cx('rounded-md border border-border bg-surface-2 flex items-center justify-center overflow-hidden',
+      compact ? 'min-h-20 px-2' : 'min-h-44 aspect-[4/3]')}>
       {!ready ? <p className="m-4 text-small text-text-muted">Preparing secure media links…</p>
         : !src || failed ? <div role="alert" className="p-4 text-small text-text-muted">
           <p className="m-0">This evidence image could not be loaded. Its recorded position and explanation remain below.</p>
           {src && <Button variant="text" className="mt-2" onClick={() => { setFailed(false); setAttempt((x) => x + 1) }}>Retry image</Button>}
         </div>
           : <img key={`${artifact.sha256}:${attempt}`} src={src} alt={alt} width={artifact.width} height={artifact.height}
-            loading="lazy" className="block w-full h-full object-contain" onError={() => setFailed(true)} />}
+            loading="lazy" className={cx('block w-full object-contain', compact ? 'h-20' : 'h-full')} onError={() => setFailed(true)} />}
     </div>
   )
 }
@@ -590,6 +591,27 @@ function JpegCompressionHistory({ set, token, mediaReady }: { set: ImageEvidence
   </section>
 }
 
+function PrintedIdentifiers({ set, token, mediaReady }: { set: ImageEvidenceSet; token: string; mediaReady: boolean }) {
+  const review = set.printed_identifier_comparison
+  if (!review || review.record.source_sha256 !== set.source.sha256) return null
+  return <section id="image-evidence-printed-identifiers" aria-labelledby="printed-ids-heading" className="mt-4 rounded-md border border-border p-4 scroll-mt-20">
+    <h3 id="printed-ids-heading" className="m-0 text-body font-medium">Printed identifier mismatch</h3>
+    <p className="mt-2 mb-0 text-small">The printed {review.record.field} and its confirmation show different values.</p>
+    <div className="mt-3 grid gap-4 sm:grid-cols-2">{([
+      ['entry', 'Printed identifier'], ['confirmation', 'Printed confirmation'],
+    ] as const).map(([role, label]) => {
+      const { value, region: [x, y, right, bottom] } = review.record.values[role]
+      return <figure key={role} className="m-0 min-w-0">
+        <EvidencePicture set={set} artifact={review.artifacts[role]} token={token} ready={mediaReady} alt={label} compact />
+        <figcaption className="mt-2 text-small">{label} <span className="font-mono">{value}</span></figcaption>
+        <Link to={evidenceSourceUrl(set.analysis_id, { region: { x, y, w: right - x, h: bottom - y } })}
+          className="text-small font-medium text-accent underline underline-offset-[3px]">Inspect this position in the original image</Link>
+      </figure>
+    })}</div>
+    <p className="mt-2 mb-0 text-small text-text-muted">A typing error or an ordinary edit can explain the mismatch. This observation carries zero weight in the AI assessment.</p>
+  </section>
+}
+
 export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvidenceSet; token: string; mediaReady: boolean }) {
   const [showAll, setShowAll] = useState(false)
   const { hash, key } = useLocation()
@@ -619,7 +641,7 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
     ? Math.floor(set.source.width / 32) * Math.floor(set.source.height / 32)
     : 0
   const hasLocalEvidence = set.copy_similarity?.pairs.length || set.copy_translation?.pairs.length || set.copy_affine?.pairs.length
-    || set.embedded_pair_difference?.pair || region || set.jpeg_prior_grid_review?.record.region
+    || set.embedded_pair_difference?.pair || region || set.jpeg_prior_grid_review?.record.region || set.printed_identifier_comparison
   const shown = showAll ? set.packets : set.packets.slice(0, 3)
   return (
     <div ref={root} data-testid="image-evidence-content" data-evidence-set={set.id ?? ''} data-evidence-hash={set.sha256 ?? ''}>
@@ -628,6 +650,7 @@ export function ImageEvidenceContent({ set, token, mediaReady }: { set: ImageEvi
       <CopySimilarity set={set} field="copy_translation" token={token} mediaReady={mediaReady} />
       <CopySimilarity set={set} field="copy_affine" token={token} mediaReady={mediaReady} />
       <EmbeddedPairDifference set={set} token={token} mediaReady={mediaReady} />
+      <PrintedIdentifiers set={set} token={token} mediaReady={mediaReady} />
       <JpegCompressionHistory set={set} token={token} mediaReady={mediaReady} />
       {interpolation && <section aria-label="Local pixel interpolation" className="mt-4 rounded-md border border-border p-4">
         <h3 className="m-0 text-body font-medium">Local pixel interpolation</h3>

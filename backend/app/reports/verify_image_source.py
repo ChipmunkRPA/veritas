@@ -15,6 +15,7 @@ from app.evidence import image_embedded_pair_binding as embedded_pair
 from app.evidence import image_interpolation_binding as interpolation
 from app.evidence import image_motion_photo_binding as motion_photo
 from app.evidence import image_previous_grid_binding as prior_grid
+from app.evidence import image_printed_ids_binding as printed_ids
 from app.evidence import image_transparency_binding as transparency
 from app.evidence.image_copy_similarity_binding import (
     DIAGONAL_EXACT_VERSIONS,
@@ -203,6 +204,17 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             native_detail += " Replayed the local JPEG compression record from the original."
             if review["record"]["region"] is not None:
                 native_detail += " Matched the marked image and exact source crop."
+    if review := evidence.get(printed_ids.KEY):
+        from app.evidence.image_printed_ids import verify_crops
+
+        printed_ids.validate(evidence, evidence["source"].get(printed_ids.COMMITMENT))
+        with Image.open(io.BytesIO(data), formats=["PNG", "JPEG"]) as raw:
+            if (not printed_ids.size_supported(raw.size) or raw.getexif().get(274, 1) != 1
+                    or raw.size != (evidence["source"]["width"], evidence["source"]["height"])):
+                raise ValueError("Printed identifier original does not match its source dimensions")
+            with raw.convert("RGB") as raster:
+                verify_crops(raster, review, lambda digest: archive.read(f"assets/{digest}.png"))
+        native_detail += " Matched both printed identifier crops to the submitted image."
     projected = json.loads(archive.read('result.json')) if 'result.json' in archive.namelist() else {}
     preview = projected.get(IMAGE_EDITOR_PREVIEW)
     if transparency.KEY in projected:

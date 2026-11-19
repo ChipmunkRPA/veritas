@@ -51,11 +51,12 @@ def public_result(result: dict) -> dict:
     if result.get('kind') == 'image':
         from app.evidence import image_interpolation_binding as interpolation
         from app.evidence import image_previous_grid_binding as prior_grid
+        from app.evidence import image_printed_ids_binding as image_printed_ids
         from app.evidence.image_copy_similarity_binding import result_skip
 
         if scope := result_skip(result):
             copy_coverage['image_copy_coverage'] = scope
-        for method in (interpolation, prior_grid):
+        for method in (interpolation, prior_grid, image_printed_ids):
             if reading := method.from_result(result):
                 source_coverage[method.COMMITMENT] = canonical_hash(reading)
     if result.get('kind') == 'video':

@@ -144,6 +144,9 @@ def multimedia_package(request, tmp_path, monkeypatch):
         monkeypatch.setattr(settings, "image_jpeg_block_copy_review", False)
         monkeypatch.setattr(settings, "image_jpeg_offgrid_copy_review", False)
         monkeypatch.setattr(settings, "image_small_png_copy_review", False)
+        monkeypatch.setattr(settings, "image_disjoint_exact_copy_review", False)
+        monkeypatch.setattr(settings, "image_png_reflection_review", False)
+        monkeypatch.setattr(settings, "image_turned_jpeg_copy_review", False)
         monkeypatch.setattr(settings, "image_embedded_pair_review", embedded)
         fixture = request.getfixturevalue("packet_fixture")
         if embedded:
@@ -517,6 +520,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.image_motion_photo_binding',
                         'app.evidence.image_interpolation_binding',
                         'app.evidence.image_previous_grid_binding',
+                        'app.evidence.image_printed_ids_binding',
                         'app.evidence.image_copy_affine_binding',
                         'app.evidence.document_context', 'app.evidence.document_scope', 'app.evidence.document_repeat',
                         'app.evidence.email_alternatives',

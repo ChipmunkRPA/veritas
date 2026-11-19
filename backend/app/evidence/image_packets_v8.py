@@ -14,6 +14,7 @@ from app.evidence import image_embedded_pair_pixels as pixels
 from app.evidence import image_interpolation_binding as interpolation
 from app.evidence import image_packets_v7 as prior
 from app.evidence import image_previous_grid_binding as prior_grid
+from app.evidence import image_printed_ids_binding as image_printed_ids
 from app.evidence.image_copy_similarity_binding import SKIPPED_CREDENTIALS, result_skip, url
 from app.storage.artefacts import register_artefact
 from app.storage.db import Artefact
@@ -56,6 +57,15 @@ def validate_assets(document, store) -> None:
     prior.validate_assets(binding.base_document(document), store)
     for asset in (*interpolation.assets(document).values(), *prior_grid.assets(document).values()):
         store.verify(asset["sha256"])
+    if printed := document.get(image_printed_ids.KEY):
+        from app.evidence.image_printed_ids import verify_crops
+
+        source, _ = prior.legacy._source(prior.legacy._verified(store, document["source"]["sha256"]))
+        with source:
+            try:
+                verify_crops(source, printed, lambda digest: prior.legacy._verified(store, digest))
+            except (KeyError, TypeError, ValueError, OSError) as exc:
+                raise PacketIntegrityError(str(exc)) from exc
     pair = (document.get(binding.KEY) or {}).get("pair")
     if pair is None:
         return
@@ -148,11 +158,13 @@ def load_packet_set(db, analysis, store, *, set_id=None):
         validate_assets(document, store)
         return document
     document = prior.load_packet_set(db, analysis, store, set_id=set_id)
-    if document is not None and {interpolation.KEY, prior_grid.KEY}.intersection(document):
+    if document is not None and {interpolation.KEY, prior_grid.KEY, image_printed_ids.KEY}.intersection(document):
         result = json.loads(prior.legacy._verified(store, analysis.result_hash))
         validate_packet_source_mapping(document, result)
         for asset in (*interpolation.assets(document).values(), *prior_grid.assets(document).values()):
             store.verify(asset["sha256"])
+        if image_printed_ids.KEY in document:
+            validate_assets(document, store)
     return document
 
 

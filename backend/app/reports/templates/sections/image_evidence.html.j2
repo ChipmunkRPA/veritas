@@ -6,7 +6,8 @@
 {% set exact_pair = v.image_evidence.get('embedded_pair_difference') %}
 {% set native_interpolation = v.image_evidence.get('native_interpolation_review') %}
 {% set jpeg_grid = v.image_evidence.get('jpeg_prior_grid_review') %}
-{% set evidence_detail = v.image_evidence.packets or v.image_evidence.get('inspection_checks') or (similarity and similarity.pairs) or (translation and translation.pairs) or (affine and affine.pairs) or (exact_pair and exact_pair.pair) or native_interpolation or jpeg_grid %}
+{% set printed_ids = v.image_evidence.get('printed_identifier_comparison') %}
+{% set evidence_detail = v.image_evidence.packets or v.image_evidence.get('inspection_checks') or (similarity and similarity.pairs) or (translation and translation.pairs) or (affine and affine.pairs) or (exact_pair and exact_pair.pair) or native_interpolation or jpeg_grid or printed_ids %}
 <section class="{% if evidence_detail %}chapter{% else %}chapter-cont{% endif %} image-evidence{% if s.report.profile in ['summary', 'newsroom'] and evidence_detail %} evidence-appendix{% endif %}" aria-labelledby="image-evidence-heading">
 <h2 class="chapter-title" id="image-evidence-heading">{% if v.get('number', {}).get('source-evidence') %}<span class="n">{{ v.number['source-evidence'] }}</span>{% endif %}Image evidence</h2>
 <p>{{ v.image_evidence.note }}</p>
@@ -14,6 +15,16 @@
 <p class="caption">Evidence set {{ v.image_evidence.version }} · <span class="mono">{{ v.image_evidence.sha256 }}</span></p>
 <p class="caption">Coordinates are in the EXIF-oriented original, {{ v.image_evidence.source.width }} × {{ v.image_evidence.source.height }} pixels.</p>
 {% if v.image_evidence.withheld %}<p class="caption">Source images and crops are withheld in this redacted copy. The evidence references and observations remain available.</p>{% endif %}
+{% if printed_ids %}
+<article class="image-evidence-packet">
+<h3>{{ printed_ids.title }}</h3>
+{% if printed_ids.fields %}
+<p>The printed {{ printed_ids.field }} and its confirmation show different values.</p>
+<div class="evidence-plates evidence-plates-identifiers">{% for item in printed_ids.fields %}<figure><img src="{{ item.uri }}" alt="{{ item.label }}"><figcaption>{{ item.label }} <span class="mono">{{ item.value }}</span><br>Source columns [{{ item.region[0] }}, {{ item.region[2] }}) and rows [{{ item.region[1] }}, {{ item.region[3] }}).</figcaption></figure>{% endfor %}</div>
+{% else %}<p>The printed entry and its confirmation differ. The values and crops are withheld in this copy.</p>{% endif %}
+<p class="caption">{{ printed_ids.limitation }} JSON pointer <span class="mono">/printed_identifier_comparison</span>.</p>
+</article>
+{% endif %}
 {% if jpeg_grid %}
 {% set reading = jpeg_grid.record %}
 <article class="image-evidence-packet">

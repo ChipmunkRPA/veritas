@@ -172,6 +172,11 @@ export interface ImageEvidenceSet {
   }
   prior_embedded_pair_evidence?: { id: string; version: 'image-evidence-12' | 'image-evidence-13' | 'image-evidence-14' | 'image-evidence-16' | 'image-evidence-17' | 'image-evidence-18' | 'image-evidence-19' | 'image-evidence-20' | 'image-evidence-21' | 'image-evidence-22' | 'image-evidence-23' | 'image-evidence-24' | 'image-evidence-25' | 'image-evidence-26' | 'image-evidence-27' | 'image-evidence-28' | 'image-evidence-29' | 'image-evidence-30' | 'image-evidence-31' | 'image-evidence-32' | 'image-evidence-33' | 'image-evidence-34' | 'image-evidence-35' | 'image-evidence-36' | 'image-evidence-37' | 'image-evidence-38' | 'image-evidence-39' | 'image-evidence-40' | 'image-evidence-41' | 'image-evidence-42' | 'image-evidence-43' | 'image-evidence-44' | 'image-evidence-45' | 'image-evidence-46' | 'image-evidence-47' | 'image-evidence-48' | 'image-evidence-49' | 'image-evidence-50'; sha256: string }
   embedded_pair_difference?: ImageEmbeddedPairDifference
+  printed_identifier_comparison?: {
+    record: { source_sha256: string; field: string; affects_overall_confidence: false;
+      values: Record<'entry' | 'confirmation', { value: string; region: [number, number, number, number] }> }
+    artifacts: Record<'entry' | 'confirmation', EvidenceImage>
+  }
   native_interpolation_review?: {
     record: { status: string; observation: string; scope: string; limitation: string; basis?: string | null;
       quantized_pattern?: { code_step: number; minimum_channel_fraction: number; phase_contrast: number } | null;

@@ -29,6 +29,7 @@ from app.engine.media import MAX_PIXELS, MAX_SIDE, refuse_truncated_images
 from app.evidence import image_flip_mask
 from app.evidence import image_interpolation_binding as interpolation
 from app.evidence import image_previous_grid_binding as prior_grid
+from app.evidence import image_printed_ids_binding as image_printed_ids
 from app.evidence.image_eligibility import (
     SOURCE_QUALITY,
     repeat_pass,
@@ -87,6 +88,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         validate_inspection_coverage(document)
         interpolation.validate(document, source.get(interpolation.COMMITMENT))
         prior_grid.validate(document, source.get(prior_grid.COMMITMENT))
+        image_printed_ids.validate(document, source.get(image_printed_ids.COMMITMENT))
     except (KeyError, TypeError, ValueError) as exc:
         raise PacketIntegrityError(str(exc)) from exc
     ids = set()
@@ -427,9 +429,12 @@ def validate_packet_source_mapping(document: dict[str, Any], result: dict[str, A
     from app.evidence.image_copy_similarity_binding import result_skip
 
     grid_review = prior_grid.from_result(result)
+    printed_ids = image_printed_ids.from_result(result)
     try:
+        stopped = result_skip(result) is not None
+        image_printed_ids.validate(document, canonical_hash(printed_ids) if printed_ids is not None else None, stopped=stopped)
         prior_grid.validate(document, canonical_hash(grid_review) if grid_review is not None else None,
-                            stopped=result_skip(result) is not None)
+                            stopped=stopped)
         if grid_review is not None and grid_review["status"] in {"matched", "no_region", "no_prior_grid", "earlier_region"}:
             prior = prior_grid.earlier_region(result.get("exhibits", []))
             if (grid_review["status"] == "earlier_region") != prior:
@@ -503,6 +508,16 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 artifacts[role] = {"sha256": art.sha256, "media_type": "image/png", "width": image.width, "height": image.height,
                                    "url": f"/api/v2/analyses/{analysis.id}/evidence-packets/{set_id}/images/{art.sha256}.png"}
         document[prior_grid.KEY] = {"record": recorded, "artifacts": artifacts}
+    if recorded := image_printed_ids.from_result(result):
+        document["source"][image_printed_ids.COMMITMENT] = canonical_hash(recorded)
+        artifacts = {}
+        for role, item in recorded["values"].items():
+            with source.crop(tuple(item["region"])) as image:
+                art = register_artefact(db, store, _png(image), media_type="image/png", role="preview",
+                                        created_by=CREATOR, analysis_id=analysis.id)
+                artifacts[role] = {"sha256": art.sha256, "media_type": "image/png", "width": image.width, "height": image.height,
+                                   "url": f"/api/v2/analyses/{analysis.id}/evidence-packets/{set_id}/images/{art.sha256}.png"}
+        document[image_printed_ids.KEY] = {"record": recorded, "artifacts": artifacts}
     exhibits = result.get("exhibits", [])
     region_exhibits = [e for e in exhibits if e.get("kind") == "regions" and e.get("frame_pts") is None]
     eligible = [e for e in exhibits if e.get("kind") == "heatmap" and e.get("semantics") in {"error_level", "residual", "p_manipulated"}

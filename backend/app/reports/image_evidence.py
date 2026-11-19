@@ -12,6 +12,7 @@ from app.core.canonical import canonical_hash
 from app.evidence import image_embedded_pair_binding as embedded_pair
 from app.evidence import image_interpolation_binding as interpolation
 from app.evidence import image_previous_grid_binding as prior_grid
+from app.evidence import image_printed_ids_binding as printed_ids
 from app.evidence.image_eligibility import repeat_pass
 from app.reports.image_eligibility import eligibility_view, inspection_check_view
 from app.storage.objects import ObjectIntegrityError, ObjectStore, default_store
@@ -81,6 +82,8 @@ def capture(db: Session, analysis: Analysis, *, store: ObjectStore | None = None
     for asset in embedded_pair.artifacts(document).values():
         _asset_bytes(asset, store)
     for asset in (*interpolation.assets(document).values(), *prior_grid.assets(document).values()):
+        _asset_bytes(asset, store)
+    for asset in printed_ids.assets(document).values():
         _asset_bytes(asset, store)
     return copy.deepcopy(document)
 
@@ -161,6 +164,15 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 {"label": label, "uri": None if withheld else "data:image/png;base64," + base64.b64encode(_asset_bytes(asset, store)).decode("ascii")}
                 for role, label in labels.items() if (asset := review["artifacts"].get(role)) is not None]
         local_reviews[method.KEY] = review
+    printed_review = None
+    if document.get(printed_ids.KEY):
+        printed_review = {"title": printed_ids.TITLE, "limitation": printed_ids.LIMITATION, "fields": []}
+        if not withheld:
+            reading = document[printed_ids.KEY]
+            printed_review["field"] = reading["record"]["field"]
+            for role, label in printed_ids.PLATES.items():
+                printed_review["fields"].append({**reading["record"]["values"][role], "label": label,
+                    "uri": "data:image/png;base64," + base64.b64encode(_asset_bytes(reading["artifacts"][role], store)).decode("ascii")})
     packets = []
     for packet in document["packets"]:
         images = []
@@ -379,7 +391,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "source_sha256": document["source"]["sha256"], "source": document["source"], "packets": packets,
             "limitations": document["limitations"], "omitted_regions": document["omitted_regions"], "withheld": withheld,
             "inspection_checks": inspection_checks,
-            "comparison": comparison, **copy_checks, embedded_pair.KEY: exact, **local_reviews,
+            "comparison": comparison, **copy_checks, embedded_pair.KEY: exact, printed_ids.KEY: printed_review, **local_reviews,
             "note": "Each plate is derived from the recorded original and the same evidence set used by the JSON export. "
                     "Inspection regions alone do not establish editing or AI generation."}
 
@@ -409,4 +421,8 @@ def manifest(snapshot: ReportSnapshot) -> dict[str, Any] | None:
             result[method.KEY] = copy.deepcopy(document[method.KEY]["record"])
             result["artifacts"].extend({"packet_id": packet_id, "role": role, "sha256": asset["sha256"]}
                                        for role, asset in method.assets(document).items())
+    if printed_ids.KEY in document and snapshot.report.profile != "newsroom" and not snapshot.report.redacted:
+        result[printed_ids.COMMITMENT] = document["source"][printed_ids.COMMITMENT]
+        result["artifacts"].extend({"packet_id": "ID01", "role": role, "sha256": asset["sha256"]}
+                                   for role, asset in printed_ids.assets(document).items())
     return result

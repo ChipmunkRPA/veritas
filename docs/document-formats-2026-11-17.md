@@ -60,6 +60,12 @@ For email, attachments can be submitted separately. Word reads supported
 body and note text. ODT uses body text. Document packages are read locally
 without opening Office, fetching linked content, or executing macros.
 
+Email analysis prefers the plain-text message body. When that body is
+blank, it can use the single eligible HTML version in the same MIME
+alternative. Parts with an attachment disposition or saved filename are
+excluded. The report records the selected MIME part, and signed reports
+use the same selection when verifying evidence against the original EML.
+
 Markdown checkout and analysis both exclude recognized backtick and tilde
 fences. If a file contains only code blocks, checkout stops before payment.
 The report records the extraction rule so older reports can still be checked
@@ -465,8 +471,8 @@ commands take file paths and provide usage through `--help`.
 
 ## Content Credentials
 
-The offline verifier checks DOCX and ODT for the standard embedded C2PA
-store. It requires cryptographic validation of the active collection hash,
+The offline verifier checks DOCX, ODT, PPTX, ODP, XLSX, ODS, and EPUB for
+the standard embedded C2PA store. It requires cryptographic validation of the active collection hash,
 which covers the document's archive entries and central directory. To skip
 writing checks, the signature must also be trusted on the bundled official
 list, explicitly declare AI involvement, and have zero validation failures.
@@ -478,14 +484,24 @@ credentials on attachments cannot authenticate the document body.
 [C2PA ZIP-format specification](https://spec.c2pa.org/specifications/specifications/2.5/specs/ContentCredentials.html#_embedding_manifests_into_zip_based_formats) ·
 [ZIP support in the SDK](https://github.com/contentauth/c2pa-rs/pull/499)
 
-The regression tests sign an authored DOCX and ODT with a temporary test
-certificate. Both are checked through simulated $9.99 payment, the analysis
-worker, PDF, JSON and offline verification of the evidence package. The
-writing models receive no work on the accepted signed files. Matching
-unsigned documents and documents whose contents changed after signing
-continue to the writing checks. Production trust uses the existing C2PA list.
-The test certificates establish format compatibility. Public vendor-issued
-DOCX and ODT exports remain unverified in this review.
+Regression tests sign one authored file in each of the seven formats with a
+temporary test certificate. The tests cover simulated $9.99 payment, worker
+execution, PDF and JSON records, and offline verification of the evidence
+package. The writing checks are skipped on trusted, whole-file AI declarations.
+Unsigned control files, files with changed contents, and files with an added
+ZIP entry continue to the writing checks. Production uses the bundled C2PA
+trust list.
+
+Two public Encypher samples contained an embedded signature and a verified
+signature timestamp. SDK 0.92.0 reported that the signed collection entry
+count differed from the downloaded archive in both cases. Both therefore
+continue to the writing checks. These observations apply to the download
+bytes identified below. [Publisher sample page](https://encypher.com/resources)
+
+| Download | SHA-256 |
+| --- | --- |
+| [Encypher DOCX](https://encypher.com/downloads/search-explainers/Encypher_Educational_Guides.docx) | `1e2e58481cd8e8ac47d13f80ec7b793666bdacbaabb88bb5b4ad005f35a0323e` |
+| [Encypher PPTX](https://encypher.com/downloads/search-explainers/Encypher_Provenance_Explained.pptx) | `d223ec00fef1ed3f92dcdc260aaf4c1e078377e8a9a646b561c1fdbb3ca1e04f` |
 
 The tested runtime uses `c2pa-python 0.39.0` (SDK 0.92.0), which reproduced
 the readings on all 21 earlier [public provider files](public-content-credentials-2026-11-17.md).

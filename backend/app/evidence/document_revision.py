@@ -398,7 +398,7 @@ def _source(path: Path, data: bytes, extension: str, *, mixed: bool = False, wor
     else:
         mime_part = None
     path.write_bytes(data)
-    doc = extract(path, extension)
+    doc = extract(path, extension, use_current_email_body=False)
     if extension == ".eml":
         if not mime_part or doc.meta["email"]["body_part"] != mime_part:
             raise ValueError("The selected email body did not match the source map.")

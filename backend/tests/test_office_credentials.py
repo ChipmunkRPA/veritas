@@ -5,14 +5,18 @@ import json
 import uuid
 import zipfile
 from datetime import UTC, datetime
+from html import escape
 from types import SimpleNamespace
 from unittest.mock import Mock
 
 import pytest
 from docx import Document
+from test_opendocument_spreadsheet import ods
 from test_pdf_credentials import _verify_public_package
 from test_provenance_gate_signed_asset import sign
 from test_provenance_gate_signed_asset import signing_material as signing_material
+from test_reading_packages import epub, impress, powerpoint
+from test_spreadsheet_cells import workbook
 from test_stripe_billing import billing as billing
 from test_stripe_billing import counts, event_for, signed
 
@@ -30,6 +34,21 @@ from app.storage.files import DOCUMENT_ARCHIVES
 from scripts.review_public_content_credentials import inspect
 
 PARAGRAPH = "This locally authored paragraph gives the document reader enough ordinary prose to preserve its exact position."
+FOLLOWUP = "The second paragraph follows its recorded reading order and leaves the original source locations available for review."
+CONTENT_PARTS = {
+    ".docx": "word/document.xml",
+    ".odt": "content.xml",
+    ".pptx": "ppt/slides/slide1.xml",
+    ".xlsx": "xl/cells.xml",
+    ".odp": "content.xml",
+    ".ods": "content.xml",
+    ".epub": "OPS/chapters/first page.xhtml",
+}
+EXPECTED_TEXT = {
+    **dict.fromkeys((".docx", ".odt"), f"Test heading\n\n{PARAGRAPH}\n\nKnown table cell"),
+    **dict.fromkeys((".pptx", ".odp", ".epub"), f"{FOLLOWUP}\n\n{PARAGRAPH}"),
+    **dict.fromkeys((".xlsx", ".ods"), f"{PARAGRAPH}\n\n{FOLLOWUP}"),
+}
 ODT_XML = """<office:document-content xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0"
   xmlns:text="urn:oasis:names:tc:opendocument:xmlns:text:1.0"
   xmlns:table="urn:oasis:names:tc:opendocument:xmlns:table:1.0" office:version="1.3">
@@ -49,19 +68,37 @@ def source(extension):
         word.add_table(1, 1).cell(0, 0).text = "Known table cell"
         word.sections[0].header.paragraphs[0].text = "Header text stays outside the body."
         word.save(output)
-    else:
+    elif extension == ".odt":
         with zipfile.ZipFile(output, "w") as archive:
             archive.writestr("mimetype", DOCUMENT_ARCHIVES[extension])
             archive.writestr("content.xml", ODT_XML.format(paragraph=PARAGRAPH))
+    elif extension == ".xlsx":
+        workbook(output, f'''
+            <row r="3"><c r="B3" t="inlineStr"><is><t>{escape(PARAGRAPH)}</t></is></c></row>
+            <row r="6"><c r="E6" t="inlineStr"><is><t>{escape(FOLLOWUP)}</t></is></c></row>
+            ''')
+    elif extension == ".ods":
+        ods(output, f'''
+            <table:table table:name="Notes">
+              <table:table-row><table:table-cell office:value-type="string">
+                <text:p>{escape(PARAGRAPH)}</text:p>
+              </table:table-cell></table:table-row>
+              <table:table-row><table:table-cell office:value-type="string">
+                <text:p>{escape(FOLLOWUP)}</text:p>
+              </table:table-cell></table:table-row>
+            </table:table>''')
+    else:
+        make = {".pptx": powerpoint, ".odp": impress, ".epub": epub}[extension]
+        make(output, passages=(PARAGRAPH, FOLLOWUP))
     return output.getvalue()
 
 
-@pytest.mark.parametrize("extension", [".docx", ".odt"])
+@pytest.mark.parametrize("extension", CONTENT_PARTS)
 def test_batch_accepts_native_document_package(extension):
     assert detect_kind(source(extension)[:8192], f"source{extension.upper()}") == "document"
 
 
-@pytest.fixture(params=[".docx", ".odt"])
+@pytest.fixture(params=CONTENT_PARTS)
 def office(request, signing_material, monkeypatch):
     extension = request.param
     mime = DOCUMENT_ARCHIVES[extension]
@@ -97,11 +134,18 @@ def test_office_credentials_reviewer_reads_original(office, tmp_path):
 
 def test_scope_binding_and_changed_document(office, tmp_path):
     extension, mime, unsigned, content, bundle = office
+    unsigned_path = tmp_path / ("unsigned" + extension)
+    unsigned_path.write_bytes(unsigned)
+    original_document = extract(unsigned_path, extension)
     path = tmp_path / ("signed" + extension)
     path.write_bytes(content)
     document = extract(path, extension)
-    assert document.text == f"Test heading\n\n{PARAGRAPH}\n\nKnown table cell"
-    assert document.text[slice(*document.paragraphs[1])] == PARAGRAPH
+    assert document.text == original_document.text == EXPECTED_TEXT[extension]
+    assert document.source_map == original_document.source_map
+    assert PARAGRAPH in [document.text[start:end] for start, end in document.paragraphs]
+    with zipfile.ZipFile(io.BytesIO(content)) as original:
+        manifest = original.getinfo(office_credentials.STORE)
+        assert manifest.compress_type == zipfile.ZIP_STORED and manifest.flag_bits == 0
 
     report, bound = office_credentials.read(content, mime, bundle=bundle, legacy=bundle)
     assert bound and report.state == "trusted" and report.ai_declared
@@ -111,14 +155,23 @@ def test_scope_binding_and_changed_document(office, tmp_path):
     assert provenance_gate.decide({"detectors": [verified]}, "document")["action"] == "continue_detection"
 
     changed = io.BytesIO()
-    main = "word/document.xml" if extension == ".docx" else "content.xml"
+    main = CONTENT_PARTS[extension]
     with zipfile.ZipFile(io.BytesIO(content)) as original, zipfile.ZipFile(changed, "w") as replacement:
         for part in original.infolist():
             data = original.read(part)
             if part.filename == main:
+                assert b"locally authored" in data
                 data = data.replace(b"locally authored", b"changed")
             replacement.writestr(part, data)
-    for data in (unsigned, changed.getvalue()):
+    appended = io.BytesIO(content)
+    with zipfile.ZipFile(appended, "a") as archive:
+        archive.writestr("extra.txt", "An additional member must invalidate the signed package.")
+    for data, expected in ((unsigned, "absent"), (changed.getvalue(), "invalid"), (appended.getvalue(), "invalid")):
+        result, bound = office_credentials.read(data, mime, bundle=bundle, legacy=bundle)
+        assert result.state == expected and not bound
+        if expected == "invalid":
+            assert any(code.scope == "active manifest" and code.level == "failure"
+                       and code.code == "assertion.collectionHash.mismatch" for code in result.codes)
         assert provenance_gate.decide({"detectors": [entry(data, mime)]}, "document")["action"] == "continue_detection"
 
 

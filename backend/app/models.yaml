@@ -2179,8 +2179,8 @@ detectors:
   # ---------------------------------------------------------------- text
   - id: prov.c2pa.office
     adapter: app.detectors.text.adapters.provenance:OfficeCredentialsDetector
-    version: 1.0.1
-    name: Content Credentials on the Word or OpenDocument file
+    version: 1.1.0
+    name: Content Credentials on the document package
     modality: text
     family: provenance
     hypotheses: [H3_provenance_integrity]
@@ -2193,7 +2193,7 @@ detectors:
     threat: [ai_text]
     training_data: "None (signed provenance verification)"
     coverage_date: "Bundled C2PA Trust List snapshot; see app/provenance/trust/snapshot.json"
-    input_constraints: ["Original DOCX or ODT; only a credential covering the document ZIP package qualifies"]
+    input_constraints: ["Original DOCX, ODT, PPTX, ODP, XLSX, ODS or EPUB with a credential covering the complete ZIP package"]
     contamination_sets: []
     fp_modes: ["Trusted signer makes an incorrect declaration or loses control of their key"]
     citation: "C2PA Technical Specification, Appendix A.6"

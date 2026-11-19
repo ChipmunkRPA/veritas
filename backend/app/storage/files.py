@@ -24,7 +24,6 @@ PPTX_MIME = "application/vnd.openxmlformats-officedocument.presentationml.presen
 XLSX_MIME = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 EPUB_MIME = "application/epub+zip"
 RTF_MIME = "application/rtf"
-OFFICE_CREDENTIAL_EXTENSIONS = {DOCX_MIME: ".docx", ODT_MIME: ".odt"}
 DOCUMENT_ARCHIVES = {".docx": DOCX_MIME, ".odt": ODT_MIME, ".ods": ODS_MIME, ".odp": ODP_MIME, ".pptx": PPTX_MIME,
                      ".epub": EPUB_MIME, ".xlsx": XLSX_MIME}
 DOCUMENT_ARCHIVE_EXTENSIONS = {mime: extension for extension, mime in DOCUMENT_ARCHIVES.items()}

@@ -44,7 +44,7 @@ An optional [whole-document PDF credential check](pdf-content-credentials-2026-1
 also stops statistical writing checks when a trusted embedded declaration covers
 the submitted PDF. This was verified offline on a pinned public provider PDF.
 The accepted layout requires a single catalog-associated store and a signed byte
-hash covering the file outside that store. [Word DOCX and OpenDocument ODT](document-formats-2026-11-17.md)
+hash covering the file outside that store. [DOCX, ODT, PPTX, ODP, XLSX, ODS and EPUB](document-formats-2026-11-17.md)
 also qualify when an embedded C2PA store verifies the whole document archive.
 Ordinary article spacing, editable package metadata and credentials on embedded
 objects do not qualify.

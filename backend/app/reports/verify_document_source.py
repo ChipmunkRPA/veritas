@@ -13,6 +13,7 @@ from zipfile import ZipFile
 from PIL import Image
 
 from app.core.canonical import canonical_hash
+from app.detectors.text import email_body
 from app.detectors.text.extract import WORD_CONTENT_CONTROLS, WORD_CONTENT_CONTROLS_KEY, extract, text_hash
 from app.evidence import (
     document_arithmetic,
@@ -109,7 +110,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     source, coverage = evidence["source"], evidence.get("coverage") or {}
     extension = EXTENSIONS.get(source.get("method"))
     if extension is None:
-        raise ValueError("Original-document verification supports TXT, DOCX, ODT, PPTX, XLSX, ODS, CSV, TSV, EPUB, RTF, Markdown, HTML, EML and PDF")
+        raise ValueError("Original-document verification supports TXT, DOCX, ODT, PPTX, ODP, XLSX, ODS, CSV, TSV, EPUB, RTF, Markdown, HTML, EML and PDF")
+    use_current_email_body = (coverage.get("email") or {}).get(email_body.SELECTION_KEY) == email_body.SELECTION_POLICY
     ocr_pages = (coverage.get("ocr") or {}).get("pages", [])
     page_coverage = (coverage.get(document_passage_coverage.KEY) or {}).get(document_scope.PDF_PAGE_COVERAGE_KEY)
     used_ocr = extension == ".pdf" and any(row.get("status") == "extracted" for row in ocr_pages)
@@ -152,6 +154,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                       skip_markdown_fences=coverage.get(document_native_locations.MARKDOWN_FENCES_KEY)
                       == document_native_locations.MARKDOWN_FENCES,
                       honor_csv_separator_declaration=document_native_locations.CSV_SEPARATOR_KEY in coverage,
+                      use_current_email_body=use_current_email_body,
                       skip_hidden_xlsx_cell_formats=coverage.get(document_native_locations.XLSX_VISIBILITY_KEY)
                       == document_native_locations.XLSX_VISIBILITY)
     if doc.meta.get(document_native_locations.CSV_SEPARATOR_KEY) != coverage.get(document_native_locations.CSV_SEPARATOR_KEY):
@@ -171,7 +174,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if heading := evidence.get(document_disclosure_heading.KEY):
         document_disclosure_heading.validate_evidence(evidence)
         document_disclosure_heading.verify_original(heading, original, doc)
-    document_saved_link_hosts.verify_original(evidence, original, extension)
+    document_saved_link_hosts.verify_original(evidence, original, extension, use_current_email_body=use_current_email_body)
     if document_bibliography.KEY in coverage:
         doc = document_bibliography.body_view(doc)
     document_bibliography.verify_source(evidence, doc.meta)

@@ -21,7 +21,7 @@ from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 
-from app.detectors.text import html_article
+from app.detectors.text import email_body, html_article
 from app.evidence import document_native_locations, document_pdf_visibility
 from app.evidence.document_scope import EMAIL_HTML_COORDINATES, valid_html_article_scope
 
@@ -1241,7 +1241,7 @@ def _text_parts(raw: str, *, kind: str = "text", **anchor) -> list[tuple[str, di
     return parts
 
 
-def extract_eml(path: Path) -> Document:
+def extract_eml(path: Path, *, use_current_email_body: bool = True) -> Document:
     from email import policy
     from email.parser import BytesParser
 
@@ -1254,10 +1254,14 @@ def extract_eml(path: Path) -> Document:
                 yield from leaves(child, f"{part_id}.{index}")
 
     indexed = list(leaves(message))
-    body = message.get_body(preferencelist=("plain", "html"))
+    if use_current_email_body:
+        mime_part, body, selection_changed = email_body.select(message)
+    else:
+        body = message.get_body(preferencelist=("plain", "html"))
+        mime_part = next((part_id for part_id, part in indexed if part is body), None)
+        selection_changed = False
     if body is None:
         raise ValueError("This email has no readable plain-text or HTML body. Attachments are not analysed as its body.")
-    mime_part = next(part_id for part_id, part in indexed if part is body)
     raw = body.get_content()
     if not isinstance(raw, str):
         raise ValueError("This email body could not be decoded as text.")
@@ -1304,6 +1308,10 @@ def extract_eml(path: Path) -> Document:
             "The extracted email text maps to decoded HTML in one selected message part. Quote labels follow explicit blockquotes. "
             "Attachments and sender authenticity are outside the analysis scope."
         )
+    if use_current_email_body:
+        document.meta[email_body.READER_KEY] = email_body.SELECTION_POLICY
+    if selection_changed:
+        document.meta["email"][email_body.SELECTION_KEY] = email_body.SELECTION_POLICY
     return document
 
 
@@ -1317,7 +1325,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             include_word_linked_notes: bool = True, skip_hidden_xlsx_cell_formats: bool = True,
             skip_hidden_rtf_runs: bool = True, skip_markdown_fences: bool = True,
             honor_csv_separator_declaration: bool = True,
-            check_word_checkout_visibility: bool = False) -> Document:
+            check_word_checkout_visibility: bool = False, use_current_email_body: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers,
@@ -1395,7 +1403,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             d.meta[document_native_locations.CSV_SEPARATOR_KEY] = separator
             d.meta["coverage_warning"] += " The separator declaration is counted as row 1 and excluded from the writing check."
     elif ext == ".eml":
-        d = extract_eml(path)
+        d = extract_eml(path, use_current_email_body=use_current_email_body)
     else:
         d = extract_text_like(path, ext, include_html_article=include_html_article, map_body_paragraphs=map_body_paragraphs,
                               skip_hidden_rtf_runs=skip_hidden_rtf_runs, skip_markdown_fences=skip_markdown_fences)

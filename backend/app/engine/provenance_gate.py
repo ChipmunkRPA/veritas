@@ -13,14 +13,18 @@ VERSION = 'provenance-first/1'
 CREDENTIALS = {'image': 'prov.c2pa', 'video': 'prov.c2pa.video', 'audio': 'prov.c2pa.audio', 'document': 'prov.c2pa.pdf'}
 OFFICE_CREDENTIALS = 'prov.c2pa.office'
 DOCUMENT_BINDINGS = {CREDENTIALS['document']: 'pdf_document_binding', OFFICE_CREDENTIALS: 'office_document_binding'}
-DOCUMENT_DETECTORS = {'.pdf': CREDENTIALS['document'], '.docx': OFFICE_CREDENTIALS, '.odt': OFFICE_CREDENTIALS}
 CREDENTIALS_TITLE = 'C2PA Content Credentials'
 SKIP_REASON = ('Further detection was not run: trusted Content Credentials bound to this file declare AI involvement. '
     'The record does not locate edited regions or establish the complete history of the file.')
 
 
 def document_detector(filename: str) -> str | None:
-    return DOCUMENT_DETECTORS.get(Path(filename).suffix.lower())
+    from app.storage.files import DOCUMENT_ARCHIVES
+
+    extension = Path(filename).suffix.lower()
+    if extension == '.pdf':
+        return CREDENTIALS['document']
+    return OFFICE_CREDENTIALS if extension in DOCUMENT_ARCHIVES else None
 
 
 def recorded_signature_timestamp(result: dict) -> str | None:

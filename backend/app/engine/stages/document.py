@@ -20,7 +20,7 @@ from typing import Any
 
 from app.core.canonical import canonical_hash
 from app.core.config import settings
-from app.detectors.text import html_article, language_scope
+from app.detectors.text import email_body, html_article, language_scope
 from app.detectors.text.adapters.stylometry import LEXICON_TITLE, SPANS_TITLE
 from app.detectors.text.extract import (
     EXTRACTION_VERSION,
@@ -161,6 +161,9 @@ def current_decode_output(output: Any, *, require_current_layout_reader: bool = 
             and output.get(document_saved_link_hosts_binding.POLICY) != document_saved_link_hosts_binding.SCHEMA):
         return False
     if output["meta"].get("method") == "html" and output["meta"].get(html_article.READER) != html_article.POLICY:
+        return False
+    if (require_current_layout_reader and output["meta"].get("method") == "email"
+            and output["meta"].get(email_body.READER_KEY) != email_body.SELECTION_POLICY):
         return False
     if (output["meta"].get("method") in document_native_locations.PARAGRAPH_COORDINATES
             and output["meta"].get(document_native_locations.PARAGRAPH_MAP_KEY) != document_native_locations.PARAGRAPH_MAP):
@@ -759,7 +762,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         markers = document_chat_markers.measure(decoded["text"], decoded["source_map"], decoded["meta"])
         if markers is not None:
             result.manifest.sampling[document_chat_markers.COMMITMENT] = canonical_hash(markers)
-    if settings.document_email_alternatives_review and decoded.get("meta", {}).get("method") == "email":
+    email = decoded.get("meta", {}).get("email")
+    if settings.document_email_alternatives_review and email and email.get(email_body.SELECTION_KEY) is None:
         from app.evidence import email_alternatives
 
         ctx.check("email body alternatives")

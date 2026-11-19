@@ -360,6 +360,28 @@ def test_selected_plain_email_body_excludes_alternative_and_attachment(tmp_path)
     assert result["status"] == "outside_scope" and result["findings"] == []
 
 
+def test_saved_email_links_follow_the_selected_html_alternative(tmp_path):
+    path = tmp_path / "fallback.eml"
+    message = EmailMessage()
+    message.set_content(" \t\n")
+    message.add_alternative(_html(CASES[:1]), subtype="html")
+    message.add_attachment(_html(CASES[1:2]), subtype="html", filename="attachment.html")
+    path.write_bytes(message.as_bytes())
+    capture = inspect(path, ".eml")
+    email = extract(path, ".eml").meta["email"]
+    assert email["body_part"] == "1.1.2"
+    assert [finding["location"]["mime_part"] for finding in capture["findings"]] == ["1.1.2"]
+    assert inspect(path, ".eml", use_current_email_body=False)["status"] == "outside_scope"
+
+    packet = {"source": {"method": "email", binding.COMMITMENT: canonical_hash(capture)},
+              "coverage": {"email": email}, binding.KEY: capture}
+    reader.verify_original(packet, path, ".eml")
+    capture["findings"][0]["location"]["mime_part"] = "1.2"
+    packet["source"][binding.COMMITMENT] = canonical_hash(capture)
+    with pytest.raises(ValueError, match="outside the selected email body"):
+        binding.validate(packet)
+
+
 def test_unreadable_archive_has_no_word_evidence(tmp_path):
     path = tmp_path / "broken.docx"
     path.write_bytes(b"not an Office package")

@@ -92,12 +92,15 @@ def validate(document):
             or type(record["omitted"]) is not int or record["omitted"] != counts["different_host"] - len(findings)):
         raise ValueError("Saved link counts differ from their retained locations")
     seen = set()
+    selected_email = (document.get("coverage") or {}).get("email") if method == "email" else None
     for row in findings:
         if (not isinstance(row, dict) or row.keys() != {"label_host", "saved_host", "location"}
                 or not all(_canonical_host(row[key]) for key in ("label_host", "saved_host"))
                 or related_root(row["label_host"]) == related_root(row["saved_host"])
                 or not isinstance(row["location"], dict) or not _valid_location(row["location"], method)):
             raise ValueError("Saved link evidence has an invalid hostname or source position")
+        if selected_email and row["location"]["mime_part"] != selected_email.get("body_part"):
+            raise ValueError("Saved link evidence comes from outside the selected email body")
         loc = canonical_hash(row["location"])
         if loc in seen:
             raise ValueError("Saved link evidence repeats a source position")

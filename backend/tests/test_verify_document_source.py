@@ -4,6 +4,7 @@ import hashlib
 import json
 import zipfile
 from datetime import UTC, datetime
+from email.message import EmailMessage
 
 import pytest
 from docx import Document
@@ -17,6 +18,7 @@ from test_strict_word import _strict_package
 
 from app.cli import main
 from app.core.canonical import canonical_hash, canonical_json
+from app.detectors.text import email_body
 from app.detectors.text.extract import WORD_CONTENT_CONTROLS_KEY, extract, text_hash
 from app.evidence import document_native_locations, document_repeat, document_scope
 from app.evidence.document_packets import build_packet_set, packet_hash
@@ -49,6 +51,35 @@ def test_replays_exact_native_text_formats(extension, packet_factory, tmp_path):
         archive.writestr("evidence.json", canonical_json(evidence))
     with zipfile.ZipFile(tmp_path / "evidence.zip") as archive:
         assert "extracted text and source mapping matched" in verify_document_source.check(archive, bundle, original)
+
+
+def test_html_alternative_replays_with_its_recorded_body_selection(packet_factory, tmp_path):
+    original = tmp_path / "source.eml"
+    text = ("First sentence contains enough useful words. Second sentence adds more context to this test. "
+            "Third sentence completes the source.")
+    message = EmailMessage()
+    message.set_content(" \t\n")
+    message.add_alternative(f"<html><body><p>{text}</p></body></html>", subtype="html")
+    message.add_attachment("Named attachment must remain outside the analysis.", filename="notes.txt")
+    original.write_bytes(message.as_bytes())
+    db, store, analysis, result, _, _ = packet_factory(".eml", source_pdf=original)
+    evidence = build_packet_set(db, analysis, store, result)
+    email = evidence["coverage"]["email"]
+    assert email["body_part"] == "1.1.2"
+    assert email[email_body.SELECTION_KEY] == email_body.SELECTION_POLICY
+    assert {anchor["mime_part"] for row in evidence["packets"] for anchor in row["anchors"]} == {"1.1.2"}
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"sha256": analysis.sha256, "bytes": analysis.size_bytes}}
+    proof = tmp_path / "proof.zip"
+    with zipfile.ZipFile(proof, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(evidence))
+    with zipfile.ZipFile(proof) as archive:
+        assert "extracted text and source mapping matched" in verify_document_source.check(archive, bundle, original)
+    del email[email_body.SELECTION_KEY]
+    with zipfile.ZipFile(proof, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(evidence))
+    with zipfile.ZipFile(proof) as archive, pytest.raises(ValueError, match="source mapping differs"):
+        verify_document_source.check(archive, bundle, original)
 
 
 @pytest.mark.parametrize("current", [False, True])

@@ -48,7 +48,7 @@ def inspect(path: Path, expected_sha256: str | None = None, *, office_extension:
     elif extension in DOCUMENT_ARCHIVES:
         mime, _ = validate_kind("document", data, f"original{extension}", len(data))
         if mime not in DOCUMENT_ARCHIVE_EXTENSIONS:
-            raise ValueError("The file does not have a recognized DOCX or ODT format")
+            raise ValueError("The file is outside the supported document archive formats")
         kind = "document"
         report, document_binding = office_credentials.read(
             data, mime, bundle=c2pa.load_bundle(c2pa.OFFICIAL), legacy=c2pa.load_bundle(c2pa.LEGACY),

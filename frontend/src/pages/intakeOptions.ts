@@ -50,7 +50,7 @@ const documentCoverage = new Map(Object.entries({
   tsv: delimitedCoverage,
   epub: 'EPUB checks the main reading text. Navigation, optional chapters, and text in images are outside this check.',
   rtf: 'Rich Text checks saved body text and leaves out directly hidden text. Layout and style-based visibility are outside this check.',
-  eml: 'Email checks the message body. Upload any attachment you want checked as a separate file.',
+  eml: 'Email checks the message body. If the plain-text version is empty, it can read the matching HTML version. Upload attachments separately.',
 }))
 
 const fileExtension = (filename: string) => /\.([^./]+)$/.exec(filename)?.[1]?.toLowerCase() ?? ''

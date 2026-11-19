@@ -1,4 +1,4 @@
-"""Offline validation of the active credential in a Word or OpenDocument package."""
+"""Offline validation of the active credential in a supported document archive."""
 
 from __future__ import annotations
 
@@ -6,14 +6,14 @@ import io
 from zipfile import ZIP_STORED, BadZipFile, ZipFile
 
 from app.provenance import c2pa
-from app.storage.files import OFFICE_CREDENTIAL_EXTENSIONS, check_document_archive_safe
+from app.storage.files import DOCUMENT_ARCHIVE_EXTENSIONS, check_document_archive_safe
 
 STORE = "META-INF/content_credential.c2pa"
 COLLECTION_MATCH = "assertion.collectionHash.match"
 
 
 def read(data: bytes, mime: str, *, bundle: c2pa.TrustBundle, legacy: c2pa.TrustBundle) -> tuple[c2pa.C2PAReport, bool]:
-    extension = OFFICE_CREDENTIAL_EXTENSIONS.get(mime)
+    extension = DOCUMENT_ARCHIVE_EXTENSIONS.get(mime)
     if extension is None or not data.startswith(b"PK\x03\x04"):
         return c2pa.C2PAReport(state="unreadable"), False
     try:

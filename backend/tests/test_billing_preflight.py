@@ -138,6 +138,65 @@ def test_scan_without_embedded_text_can_still_reach_pdf_checkout():
         verify(document.tobytes(), "image-only-scan.pdf", "document")
 
 
+@pytest.mark.parametrize("layout", ["alternative", "related", "named_attachment"])
+def test_checkout_reads_html_body_when_plain_alternative_is_blank_or_named(tmp_path, layout):
+    from app.detectors.text import email_body
+    from app.detectors.text.extract import extract
+
+    message = EmailMessage()
+    if layout == "named_attachment":
+        message.set_content(f"<p>{WRITING}</p>", subtype="html")
+        message.make_mixed()
+        attachment = EmailMessage()
+        attachment.set_content("Named attachment words belong to a different document.")
+        attachment.set_param("name", "notes.txt")
+        message.attach(attachment)
+        part = "1.1"
+    else:
+        message.set_content(" \t\n")
+        message.add_alternative(f"<html><body><p>{WRITING}</p></body></html>", subtype="html")
+        part = "1.2"
+        if layout == "related":
+            html = list(message.iter_parts())[1]
+            html["Content-ID"] = "<body@example.org>"
+            html.add_related(png(), maintype="image", subtype="png", cid="<image@example.org>")
+            html.set_param("start", "<body@example.org>")
+            html.set_payload(list(reversed(list(html.iter_parts()))))
+            part = "1.2.2"
+    data = message.as_bytes()
+    path = tmp_path / "message.eml"
+    path.write_bytes(data)
+    verify(data, path.name, "document")
+    doc = extract(path, ".eml")
+    assert doc.text == WRITING
+    assert doc.meta["email"]["body_part"] == part
+    assert doc.meta["email"][email_body.SELECTION_KEY] == email_body.SELECTION_POLICY
+    assert extract(path, ".eml", use_current_email_body=False).text != WRITING
+
+
+@pytest.mark.parametrize("layout", ["unrelated", "attachment", "dangling", "duplicate", "short_plain"])
+def test_checkout_does_not_promote_unrelated_html_or_override_nonblank_plain(layout):
+    message = EmailMessage()
+    message.set_content("Short plain body." if layout == "short_plain" else " \t\n")
+    html = f"<p>{WRITING}</p>"
+    if layout in {"unrelated", "attachment"}:
+        message.make_mixed()
+        part = EmailMessage()
+        part.set_content(html, subtype="html")
+        if layout == "attachment":
+            part.set_param("name", "attached.html")
+        message.attach(part)
+    else:
+        message.add_alternative(html, subtype="html")
+        if layout in {"dangling", "duplicate"}:
+            part = list(message.iter_parts())[1]
+            part["Content-ID"] = "<body@example.org>"
+            part.add_related(png(), maintype="image", subtype="png", cid="<body@example.org>")
+            part.set_param("start", "<body@example.org>" if layout == "duplicate" else "<missing@example.org>")
+    with pytest.raises(preflight.PreflightError):
+        verify(message.as_bytes(), "message.eml", "document")
+
+
 def test_docx_requires_a_readable_document_package():
     from docx import Document
 

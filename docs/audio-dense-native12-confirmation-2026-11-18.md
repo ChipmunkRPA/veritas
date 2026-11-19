@@ -150,3 +150,53 @@ controls, an incorrect reference, a clock mismatch and a previously flagged
 ordinary recording. Chromium verified all 18 PDF and JSON downloads and the
 bytes and duration of all eight playable excerpts. The comparison created zero
 additional analysis jobs and preserved each standalone assessment.
+
+## Experimental clock-repair follow-up
+
+A separate model-free candidate estimates a uniform timing-rate change and
+delay from the supplied pair, corrects the earlier copy, and applies the same
+dense comparison and points. It retains existing findings first. Development
+on 624 LibriSpeech/DEMAND pairs added 21 noisy locations from eight underlying
+synthetic events. The prospective source transfer below failed its frozen
+advancement requirements. **The affine-clock candidate remains experimental.**
+
+The 1,536-pair transfer preserves sixteen MLS host clips from eight host-reader
+groups and eight dedicated donor readers, with four recorded traffic and AMI
+backgrounds. Two familiar stock generators recur across three clock conditions,
+including two timing-rate/latency recipes fixed before measurement. Each
+condition has 32 synthetic events delivered on three clocks. Ordinary negatives
+include unchanged speech, two local roundtrips, whole-file gain and low-pass
+processing. Genuine splices remain physical-change positives. These MLS sources,
+backgrounds and generator families had prior project exposure, including the
+dense baseline's development. The prepared waveforms differ from affine
+development. Cross-corpus identity and pretraining overlap remain uncertain.
+The authoritative PCM fixtures retain their disclosed Opus ancestry.
+[Source qualification and terms](audio-short-window-reader-holdout-2026-11-18.md)
+
+| Condition | Synthetic locations, baseline / candidate, of 96 | Ordinary alerts, baseline / candidate, of 240 | New misplaced synthetic files |
+| --- | ---: | ---: | ---: |
+| Clean | 13 / 36 | 0 / 0 | 1 |
+| Traffic, −10 dB | 6 / 8 | 8 / 8 | 0 |
+| Competing speech, −10 dB | 6 / 6 | 12 / 24 | 2 |
+
+Identity-clock locations stayed unchanged. The clean gain recovers perturbed
+copies. The two additional noisy locations came from one host/component and
+both families. Competing speech added twelve ordinary alerts across two
+components with zero location gain. The candidate failed the
+fixed noisy-gain, source-component, ordinary-alert and misplacement requirements.
+It flagged zero of 144 unrelated-reference and 96 isolated-background pairs,
+and accepted no clock fit for those controls. Insufficient reference matching
+left 13 clean, 66 traffic and 74 competing-speech synthetic comparisons
+unassessed out of 96 each. Unlocated edits include these unassessed comparisons.
+
+Independent native replay reproduced all 1,536 pairs, 3,072 source clocks and
+558 corrected references, including each admission, clock fit and selected
+range. The two implementations used the same pinned numerical libraries.
+The clock estimate used signal measurements and carried zero AI-confidence
+weight.
+
+The earlier copy was clean in every condition. A clean-only route needs a
+predeclared admission rule using measurable support in the uploaded pair,
+followed by fresh held testing of clean and noisy inputs. These results are
+development evidence for any further admission choice. Source identities,
+individual offsets, response traces, paths and recordings remain private.

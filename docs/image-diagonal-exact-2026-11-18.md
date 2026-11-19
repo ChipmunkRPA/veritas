@@ -161,3 +161,34 @@ PDF and JSON export matched the evidence on file, and the offline verifier
 replayed all eight signed packages against the submitted JPEGs. Ordinary,
 mirror, same-axis local, and other-compression controls produced no
 diagonal pair. [Local application receipt](evaluation-panels/image-jpeg-diagonal-displacement-app-2026-11-18.json)
+
+### Browser JPEG transfer
+
+A separate panel used 12 retained, commercially reusable source groups.
+Their source photos and recorded authors were distinct from those in the
+five earlier diagonal panels. Chromium encoded each of the 48 cases three ways using
+the same input pixels. Its omitted quality setting produced the same
+quantization tables as the tested quality-92 implementation. All three
+profiles were verified as 4:2:0.
+
+| Browser profile | Existing correct locations / 16 | With the candidate / 16 | Added ordinary alerts / 20 | Added mirror or repeat alerts / 12 |
+| --- | ---: | ---: | ---: | ---: |
+| Quality 75 | 6 | 6 | 0 | 0 |
+| Quality 90 | 0 | 6 | 0 | 0 |
+| Browser default in this test | 0 | 6 | 0 | 0 |
+
+The three profiles localized the same six edits from four source groups,
+with no new wrong location on the quality-90 or default profiles. Existing
+checks flagged four mirror or repeat controls on every profile. The extra
+scan did not add any. An independent replay verified the original crop
+locations and both image measurements. Both experimental profiles fell
+short of the frozen eight-location goal on this panel. The default profile
+also needs separate admission because two preceding JPEG checks are
+unsupported at its quantization. The existing quality-75 route continues
+to serve.
+
+The same geometric and pixel tests verified 14 of 16 edits when given
+their known rectangles, including eight missed by the blind search.
+This is a diagnostic that uses the test labels. It points to the search
+for candidate regions as the next part to improve. [Browser JPEG transfer
+receipt](evaluation-panels/image-jpeg-browser-diagonal-2026-11-18.json)

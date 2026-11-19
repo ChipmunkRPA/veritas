@@ -1,0 +1,110 @@
+{
+  "browser": "157.0.8103.79",
+  "browser_delivery_commitment": "a69e9474df6d1ef8d18ef856e71f01e41d524f5d87f07241fda9d9c4e69f5776",
+  "by_profile": {
+    "canvas_default": {
+      "added_source_groups": 4,
+      "browser_quantization_equivalent": 92,
+      "counts": {
+        "after_correct": 6,
+        "before_correct": 0,
+        "edited_files": 16,
+        "hard_controls_added_alerts": 0,
+        "hard_controls_after_alerts": 4,
+        "hard_controls_before_alerts": 4,
+        "hard_controls_files": 12,
+        "new_correct": 6,
+        "new_wrong_location": 0,
+        "ordinary_controls_added_alerts": 0,
+        "ordinary_controls_after_alerts": 0,
+        "ordinary_controls_before_alerts": 0,
+        "ordinary_controls_files": 20,
+        "prospective_native_measurements_replayed": 6,
+        "same_precedence_with_explicit_unsupported": 44,
+        "strict_predecessor_states_clear": 0
+      },
+      "passed_new_profile_gate": false,
+      "statuses": {
+        "earlier_check_precedence": 4,
+        "no_pair": 38,
+        "supported_pair": 6
+      },
+      "strict_unsupported_stage_counts": {
+        "1": 44,
+        "2": 44
+      },
+      "table_digest": "7337a8c177cd38278f043d55b727b3b1cecce0b52742bc4082e6e36eedf539d7"
+    },
+    "q75": {
+      "added_source_groups": 0,
+      "browser_quantization_equivalent": 75,
+      "counts": {
+        "after_correct": 6,
+        "before_correct": 6,
+        "edited_files": 16,
+        "hard_controls_added_alerts": 0,
+        "hard_controls_after_alerts": 4,
+        "hard_controls_before_alerts": 4,
+        "hard_controls_files": 12,
+        "new_correct": 0,
+        "new_wrong_location": 0,
+        "ordinary_controls_added_alerts": 0,
+        "ordinary_controls_after_alerts": 0,
+        "ordinary_controls_before_alerts": 0,
+        "ordinary_controls_files": 20,
+        "prospective_native_measurements_replayed": 7,
+        "same_precedence_with_explicit_unsupported": 44,
+        "strict_predecessor_states_clear": 44
+      },
+      "passed_new_profile_gate": false,
+      "statuses": {
+        "earlier_check_precedence": 4,
+        "no_pair": 37,
+        "supported_pair": 7
+      },
+      "strict_unsupported_stage_counts": {},
+      "table_digest": "db12807ffe7ea7d208d803a4ad9d156e941af36754c009d3ec5de5aae4112903"
+    },
+    "q90": {
+      "added_source_groups": 4,
+      "browser_quantization_equivalent": 90,
+      "counts": {
+        "after_correct": 6,
+        "before_correct": 0,
+        "edited_files": 16,
+        "hard_controls_added_alerts": 0,
+        "hard_controls_after_alerts": 4,
+        "hard_controls_before_alerts": 4,
+        "hard_controls_files": 12,
+        "new_correct": 6,
+        "new_wrong_location": 0,
+        "ordinary_controls_added_alerts": 0,
+        "ordinary_controls_after_alerts": 0,
+        "ordinary_controls_before_alerts": 0,
+        "ordinary_controls_files": 20,
+        "prospective_native_measurements_replayed": 6,
+        "same_precedence_with_explicit_unsupported": 44,
+        "strict_predecessor_states_clear": 44
+      },
+      "passed_new_profile_gate": false,
+      "statuses": {
+        "earlier_check_precedence": 4,
+        "no_pair": 38,
+        "supported_pair": 6
+      },
+      "strict_unsupported_stage_counts": {},
+      "table_digest": "4a947d5d753cb42d30d364a580030dd557d37404f5e12e09378359b0e9e397ac"
+    }
+  },
+  "complete_result_commitment": "ee116a258962753dab2346ab941dabb60beb7104f5e7fc7813a4afdeb6e041fa",
+  "control_scope": "Untouched browser encodes, twice-encoded resaves, local group controls and whole-image mirrored or authored repeated-pattern controls.",
+  "deliveries": 144,
+  "frozen_input_commitment": "811927a47423397af252d62cf1951fbb808bf226940930f35e51333b219130b3",
+  "independent": "Rechecked all browser delivery hashes, quantization tables, native rectangle overlap and forward color/perimeter witnesses. No model inference or public media.",
+  "schema": "chipmunk.canvas-jpeg-native-diagonal/1",
+  "serving_scope": "Released development JPEG route with all predecessors and the current qualified Q75 diagonal rule enabled. Candidate allows explicit unsupported predecessor compression profiles while retaining every existing positive. Zero AI-score effect.",
+  "source_groups": 12,
+  "source_scope": "Eight retained previously unassigned camera groups and four independent repeats/ordinary groups. CC BY 2.0 or CC BY-SA 2.0. Exact asset, publisher identity, author and thumbnail separation measured against five preceding diagonal panels.",
+  "target_scope": "Known copy and paste after either diagonal reflection. Each pair must reach 0.50 IoU per crop and stated orientation.",
+  "views_are_matched_by_source": true
+}

@@ -26,6 +26,8 @@ RTF_VISIBILITY_KEY = "rtf_run_visibility"
 RTF_VISIBILITY = "visible-rtf-direct-runs/1"
 RTF_VISIBILITY_SCOPE = ("The reader excludes directly hidden Rich Text runs and uses saved field display text. "
                         "Visibility from styles and viewer settings is outside this check.")
+MARKDOWN_FENCES_KEY = "markdown_fenced_code"
+MARKDOWN_FENCES = "exclude-commonmark-fenced-code/1"
 XLSX_VISIBILITY_KEY = "xlsx_cell_visibility"
 XLSX_VISIBILITY = "visible-xlsx-direct-cell-formats/1"
 XLSX_VISIBILITY_SCOPE = ("Cells with Excel's directly applied hide-value format are excluded. Other display formatting, "
@@ -230,6 +232,9 @@ def validate(document):
     if RTF_VISIBILITY_KEY in coverage and (coverage[RTF_VISIBILITY_KEY] != RTF_VISIBILITY
             or document.get("source", {}).get("method") != "rtf"):
         raise ValueError("Invalid Rich Text run visibility policy")
+    if MARKDOWN_FENCES_KEY in coverage and (coverage[MARKDOWN_FENCES_KEY] != MARKDOWN_FENCES
+            or document.get("source", {}).get("method") != "markdown"):
+        raise ValueError("Invalid Markdown fenced code policy")
     if XLSX_VISIBILITY_KEY in coverage and (coverage[XLSX_VISIBILITY_KEY] != XLSX_VISIBILITY
             or document.get("source", {}).get("method") != "xlsx"):
         raise ValueError("Invalid Excel cell visibility policy")

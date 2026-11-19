@@ -21,7 +21,7 @@ limit is 25 MB in the standard configuration.
 | RTF | Saved body writing outside directly hidden runs | Decoded text block number and character range |
 | EML | The selected plain-text or HTML message body | Decoded text and supported HTML source positions |
 | TXT | Decoded Unicode text | Decoded character offsets |
-| Markdown | Text extracted from the markup | Paragraph and character position in the extracted text |
+| Markdown | Text extracted from the markup outside recognized fenced code blocks | Paragraph and character position in the extracted text |
 | HTML and XHTML | Text extracted from saved `.html`, `.htm`, or `.xhtml` markup | Original markup character ranges for uniquely mapped article passages, otherwise extracted-text positions |
 
 ODS row and column positions follow the saved grid, including repeated or
@@ -45,6 +45,11 @@ original extraction rules. [Excel's hide-value format](https://support.microsoft
 For email, attachments can be submitted separately. Word reads supported
 body and note text. ODT uses body text. Document packages are read locally
 without opening Office, fetching linked content, or executing macros.
+
+Markdown checkout and analysis both exclude recognized backtick and tilde
+fences. If a file contains only code blocks, checkout stops before payment.
+The report records the extraction rule so older reports can still be checked
+against their original files. [CommonMark fenced code blocks](https://spec.commonmark.org/0.31.2/#fenced-code-blocks)
 
 The writing check reads saved text in supported Word form controls and
 skips placeholder text. A paragraph mixing inline controls and tracked

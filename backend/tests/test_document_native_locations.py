@@ -256,6 +256,32 @@ def test_original_document_replay_preserves_historical_unmapped_paragraphs(packe
         assert "Verified" in verify_document_source.check(archive, bundle, original)
 
 
+@pytest.mark.parametrize("skip_markdown_fences", [True, False])
+def test_markdown_fence_policy_replays_original_prose_and_mapped_positions(packet_factory, tmp_path, skip_markdown_fences):
+    original = tmp_path / "mixed.markdown"
+    code = "This literal sample includes words that must stay out of the prose analysis."
+    original.write_bytes(f"# {FIRST}\r\n\r\n> ~~~text\r\n> {code}\r\n> ~~~\r\n\r\n{MIDDLE}\r\n\r\n{LAST}".encode("utf-16"))
+    db, store, analysis, result, decoded, _ = packet_factory(
+        ".markdown", source_pdf=original, skip_markdown_fences=skip_markdown_fences
+    )
+    evidence = build_packet_set(db, analysis, store, result)
+    if skip_markdown_fences:
+        assert decoded["text"] == "\n\n".join(" ".join(paragraph.split()) for paragraph in (FIRST, MIDDLE, LAST))
+        assert evidence["coverage"][locations.MARKDOWN_FENCES_KEY] == locations.MARKDOWN_FENCES
+        assert [row["paragraph_index"] for row in decoded["source_map"]] == [0, 1, 2]
+    else:
+        assert code in decoded["text"]
+        assert locations.MARKDOWN_FENCES_KEY not in evidence["coverage"]
+
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"sha256": analysis.sha256, "bytes": analysis.size_bytes}}
+    path = tmp_path / "markdown-evidence.zip"
+    with zipfile.ZipFile(path, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(evidence))
+    with zipfile.ZipFile(path) as archive:
+        assert "Verified decoded original text locations" in verify_document_source.check(archive, bundle, original)
+
+
 def test_location_malformed_gaps_abstain_and_drift_is_rejected(packet_factory):
     assert locations.clip_source_ranges([[0, 5, 2, 7], [6, 9, 8, 11]], 3, 9) == []
     assert locations.clip_source_ranges([[0, 2, 0, 5]], 1, 2) == []

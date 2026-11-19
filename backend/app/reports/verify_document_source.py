@@ -146,6 +146,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                       == document_native_locations.ODT_VISIBILITY,
                       skip_hidden_rtf_runs=coverage.get(document_native_locations.RTF_VISIBILITY_KEY)
                       == document_native_locations.RTF_VISIBILITY,
+                      skip_markdown_fences=coverage.get(document_native_locations.MARKDOWN_FENCES_KEY)
+                      == document_native_locations.MARKDOWN_FENCES,
                       skip_hidden_xlsx_cell_formats=coverage.get(document_native_locations.XLSX_VISIBILITY_KEY)
                       == document_native_locations.XLSX_VISIBILITY)
     if used_ocr and not doc.source_rasters:
@@ -173,6 +175,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
               document_native_locations.PPTX_VISIBILITY_KEY: None, document_native_locations.WORD_RUN_MAP_KEY: None,
               document_native_locations.ODT_VISIBILITY_KEY: None, document_native_locations.WORD_NOTES_KEY: None,
               document_native_locations.RTF_VISIBILITY_KEY: None,
+              document_native_locations.MARKDOWN_FENCES_KEY: None,
               document_native_locations.XLSX_VISIBILITY_KEY: None}
     local_coverage = {**doc.meta, "ocr": public_ocr_coverage(doc.meta)}
     if any(canonical_hash(coverage.get(key, default)) != canonical_hash(local_coverage.get(key, default))

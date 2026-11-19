@@ -256,6 +256,19 @@ def test_checkout_checks_extracted_writing_instead_of_markup(name, readable, emp
         verify(empty, name, "document")
 
 
+@pytest.mark.parametrize("source", [
+    f"~~~text\n{WRITING}\n~~~\n",
+    f"   ````text\n{WRITING}\n```\n   `````\n",
+    f"> ~~~text\n> {WRITING}\n> ~~~\n",
+    f"- ~~~text\n  {WRITING}\n  ~~~\n",
+    f"~~~text\n{WRITING}",
+])
+def test_checkout_counts_prose_outside_commonmark_fences(source):
+    with pytest.raises(preflight.PreflightError, match="no readable text outside fenced code blocks"):
+        verify(source.encode(), "code.md", "document")
+    verify(f"{WRITING}\r\n\r\n{source}".encode("utf-16"), "mixed.markdown", "document")
+
+
 def test_email_uses_mime_charset_and_requires_a_readable_body():
     email = (b"From: author@example.com\r\nTo: reader@example.com\r\nSubject: Example\r\n"
              b"Content-Type: text/plain; charset=iso-8859-1\r\nContent-Transfer-Encoding: 8bit\r\n\r\n"

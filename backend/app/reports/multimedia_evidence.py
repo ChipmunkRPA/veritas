@@ -691,6 +691,9 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     rtf_visibility_key = document_native_locations.RTF_VISIBILITY_KEY
     if coverage.get(rtf_visibility_key) != decoded["meta"].get(rtf_visibility_key):
         raise ObjectIntegrityError("Frozen Rich Text run visibility policy differs from the recorded extraction")
+    markdown_fences_key = document_native_locations.MARKDOWN_FENCES_KEY
+    if coverage.get(markdown_fences_key) != decoded["meta"].get(markdown_fences_key):
+        raise ObjectIntegrityError("Frozen Markdown fenced code policy differs from the recorded extraction")
     xlsx_visibility_key = document_native_locations.XLSX_VISIBILITY_KEY
     if coverage.get(xlsx_visibility_key) != decoded["meta"].get(xlsx_visibility_key):
         raise ObjectIntegrityError("Frozen Excel cell visibility policy differs from the recorded extraction")

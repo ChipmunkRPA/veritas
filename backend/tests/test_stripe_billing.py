@@ -126,6 +126,7 @@ def test_no_order_payment_or_analysis_without_current_explicit_acknowledgement(b
 @pytest.mark.parametrize(("filename", "content", "message"), [
     ("too-short.xhtml", b"<main><p>Only three words.</p></main>", "15 readable words"),
     ("too-long.txt", b"word " * 24_001, "120,000 extracted characters"),
+    ("code-only.md", b"~~~text\n" + b"example words " * 20 + b"\n~~~\n", "no readable text outside fenced code blocks"),
 ])
 def test_checkout_rejects_ineligible_writing_before_creating_any_order(billing, filename, content, message):
     response = upload(billing, filename=filename, content=content, kind="document", mime="application/octet-stream")

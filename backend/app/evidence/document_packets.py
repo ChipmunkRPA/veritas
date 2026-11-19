@@ -571,6 +571,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][document_native_locations.ODT_VISIBILITY_KEY] = section_visibility
     if run_visibility := decoded["meta"].get(document_native_locations.RTF_VISIBILITY_KEY):
         document["coverage"][document_native_locations.RTF_VISIBILITY_KEY] = run_visibility
+    if markdown_fences := decoded["meta"].get(document_native_locations.MARKDOWN_FENCES_KEY):
+        document["coverage"][document_native_locations.MARKDOWN_FENCES_KEY] = markdown_fences
     if cell_visibility := decoded["meta"].get(document_native_locations.XLSX_VISIBILITY_KEY):
         document["coverage"][document_native_locations.XLSX_VISIBILITY_KEY] = cell_visibility
     if writing_checks := document_check_coverage.from_result(result):

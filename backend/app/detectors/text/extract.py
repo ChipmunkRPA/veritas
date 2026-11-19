@@ -200,13 +200,13 @@ def _seal(doc: Document, *, original_sha256: str | None = None) -> Document:
 
 
 _WS = re.compile(r"[ \t ]+")
+_MD_LEGACY_FENCE = re.compile(r"```.*?```", re.DOTALL)
 # Every pattern is linear in the length of the file (N-10; SEC-04). A bracket class that could run to the end of the file
 # from each `[`, or `\s*` that could run over every blank line from each line start, made three of them quadratic: 40,000
 # characters of `[` took 2.6 s and 200,000 took 69 s, inside one call that holds the interpreter. The text of a link or an
 # image cannot hold `[`, and its address cannot either, so the scan from one opener ends at the next; the rule and table
 # patterns stay on their line.
 _MD_INLINE = [
-    (re.compile(r"```.*?```", re.DOTALL), " "),
     (re.compile(r"`([^`]*)`"), r"\1"),
     (re.compile(r"!\[[^\[\]]*\]\([^)\[]*\)"), " "),
     (re.compile(r"\[([^\[\]]+)\]\([^)\[]*\)"), r"\1"),
@@ -1050,13 +1050,37 @@ def _html_text(raw: str) -> str:
     return "".join(parser.parts)
 
 
-def text_like_content(raw: str, ext: str) -> tuple[str, str]:
+def _without_markdown_fences(raw: str) -> str:
+    if "```" not in raw and "~~~" not in raw:
+        return raw
+    from markdown_it import MarkdownIt
+
+    # Use CommonMark's block positions, including fences inside quotes and lists.
+    # Keep the existing prose projection and avoid running inline rules or rendering HTML.
+    blocks = MarkdownIt("commonmark").disable("inline").parse(raw)
+    fences = [block.map for block in blocks if block.type == "fence"]
+    if not fences:
+        return raw
+
+    lines = raw.replace("\r\n", "\n").replace("\r", "\n").split("\n")
+    kept = []
+    cursor = 0
+    for start, end in fences:
+        kept.extend(lines[cursor:start])
+        kept.append("")  # Prevent adjacent prose blocks from merging across the code.
+        cursor = end
+    kept.extend(lines[cursor:])
+    return "\n".join(kept)
+
+
+def text_like_content(raw: str, ext: str, *, skip_markdown_fences: bool = True) -> tuple[str, str]:
     """Project text-like input without constructing a per-character source map."""
     from app.storage.files import HTML_EXTS
 
     if ext in HTML_EXTS:
         return _html_text(raw), "html"
     if ext in (".md", ".markdown"):
+        raw = _without_markdown_fences(raw) if skip_markdown_fences else _MD_LEGACY_FENCE.sub(" ", raw)
         for rx, rep in _MD_INLINE:
             raw = rx.sub(rep, raw)
         return raw, "markdown"
@@ -1128,7 +1152,7 @@ def _attach_html_source_ranges(doc: Document, raw: str) -> None:
 
 
 def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True, map_body_paragraphs: bool = True,
-                      skip_hidden_rtf_runs: bool = True) -> Document:
+                      skip_hidden_rtf_runs: bool = True, skip_markdown_fences: bool = True) -> Document:
     data = path.read_bytes()
     if ext == ".rtf":
         # RTF \par becomes a newline. Keep those breaks as passage boundaries.
@@ -1151,7 +1175,7 @@ def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True
     else:
         encoding = "utf-8"
     decoded = data.decode(encoding, errors="replace")
-    raw, method = text_like_content(decoded, ext)
+    raw, method = text_like_content(decoded, ext, skip_markdown_fences=skip_markdown_fences)
     parts = _text_parts(raw, kind="text" if method == "plain" else "markup")
     map_markdown = method == "markdown" and map_body_paragraphs
     if map_markdown:
@@ -1168,6 +1192,9 @@ def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True
                                       "markup conversion. Formatting and original line numbers are outside the location map.")
     elif method != "plain":
         d.meta["coverage_warning"] = "Markup was converted to text. Excerpts map to the extracted text, not exact HTML or Markdown source positions."
+    if method == "markdown" and skip_markdown_fences:
+        d.meta[document_native_locations.MARKDOWN_FENCES_KEY] = document_native_locations.MARKDOWN_FENCES
+        d.meta["coverage_warning"] += " Recognized fenced code blocks are excluded from the writing check."
     if method == "html" and include_html_article:
         d.meta[html_article.READER] = html_article.POLICY
         _attach_html_source_ranges(d, decoded)
@@ -1256,7 +1283,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             skip_hidden_slide_groups: bool = True, map_word_hyperlink_runs: bool = True,
             map_word_table_controls: bool = True, skip_hidden_odt_sections: bool = True,
             include_word_linked_notes: bool = True, skip_hidden_xlsx_cell_formats: bool = True,
-            skip_hidden_rtf_runs: bool = True) -> Document:
+            skip_hidden_rtf_runs: bool = True, skip_markdown_fences: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers)
@@ -1328,7 +1355,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
         d = extract_eml(path)
     else:
         d = extract_text_like(path, ext, include_html_article=include_html_article, map_body_paragraphs=map_body_paragraphs,
-                              skip_hidden_rtf_runs=skip_hidden_rtf_runs)
+                              skip_hidden_rtf_runs=skip_hidden_rtf_runs, skip_markdown_fences=skip_markdown_fences)
     d.meta.update({"chars": len(d.text), "words": len(d.text.split()), "paragraphs": len(d.paragraphs)})
     return _seal(d, original_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
 

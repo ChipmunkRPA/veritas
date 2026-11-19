@@ -263,6 +263,9 @@ def _document(path: Path, extension: str) -> None:
             if extension == ".rtf":
                 raise PreflightError("The Rich Text file has no readable text in its supported body. "
                                      "Save the displayed text as DOCX or PDF before paying.")
+            if extension in {".md", ".markdown"} and not readable:
+                raise PreflightError("The Markdown document has no readable text outside fenced code blocks. "
+                                     "Add prose before paying.")
             raise PreflightError("This document has no readable text. Export it as UTF-8 text, PDF or DOCX before paying.")
     if saved_fields:
         too_short = (f"The Word document includes saved field text but fewer than {MIN_WORDS} readable words. "

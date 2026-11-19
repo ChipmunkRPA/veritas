@@ -38,3 +38,27 @@ These are software/controlled-media checks, not fresh deepfake error-rate
 measurements. Historical evaluations remain at their recorded commits and
 parameters. New native generation/articulation evaluation is still required;
 this coverage fix does not detect well-synchronized retalking by itself.
+
+## 30 fps timing with gain and filtering
+
+A headless follow-up compared frequency-band rank and magnitude against
+the same native mouth motion. It checked for a timing difference inside
+a suspected interval while requiring the earlier and later observations
+to support a common reference lag. The frozen comparison used four
+points set from 66 development controls and held 12 acted speakers
+apart from the preceding cadence intake. The retained acted recordings
+had appeared in other project comparisons. Their timing variants were new.
+
+Each of the two audio encodings contributed 108 matched deliveries. In
+each encoding both approaches assessed 41 of 108, localized zero of 24
+clean timing edits and zero of 24 timing edits combined with gain and
+filtering, and flagged zero of 36 ordinary controls and zero of 24 whole
+track shifts. Before the points were applied, each approach made only
+one correctly placed and signed estimate along with 8–12 control
+proposals. The frozen limits for coverage and recall both failed.
+
+Native readback verified usable original mouth geometry on 970 of 971
+pictures and independently replayed nine frame and crop anchors. The
+earlier graphics-dependent correspondence comparator was outside the
+headless run. The standard check's quiet-audio branch had no eligible
+near-silent interval on these files. The candidate remains experimental.

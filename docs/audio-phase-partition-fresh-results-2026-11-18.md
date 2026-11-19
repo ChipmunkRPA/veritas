@@ -78,3 +78,15 @@ python3 -B -I -S backend/scripts/review_audio_phase_partition_decisions.py \
   docs/evaluation-panels/audio-phase-partition-fresh-decisions-2026-11-18.json.gz \
   docs/evaluation-panels/audio-phase-partition-diagnostic-2026-11-18.json.gz
 ```
+
+## Follow-up on traffic speech admission
+
+A separate retrospective run scored 1,100 additional windows in the 144
+traffic deliveries. It admitted a window when the projected view had enough
+speech and neither the original nor the remainder met the original speech
+requirement. It kept the existing response point and neighbor rule. The
+independent count confirmed zero correct locations out of 48 edited files,
+three flags out of 72 ordinary files from one reader group, and zero flags
+on the 24 standalone traffic deliveries. More measurable speech did not
+improve these localization results. The follow-up reused the diagnosed
+recordings and carries no claim of independent accuracy.

@@ -207,6 +207,12 @@ replay-evidence:  ## recount published image, video, audio, and writing evaluati
 		docs/evaluation-panels/video-face-matched-detail-native25-point20-2026-11-19.json
 	PYTHONPATH=backend python3 -B -S -m scripts.review_writing_retained_neighbor \
 		docs/evaluation-panels/writing-retained-neighbor-2026-11-19.json
+	python3 -B -I -S backend/scripts/review_writing_positional_attribution.py \
+		docs/evaluation-panels/writing-positional-attribution-2026-11-19.json.gz
+	python3 -B -I -S backend/scripts/review_shot_relative_lag.py \
+		docs/evaluation-panels/video-shot-relative-lag-2026-11-19.json
+	python3 -B -I -S backend/scripts/review_shot_lag_point21.py \
+		docs/evaluation-panels/video-shot-lag-point21-transfer-2026-11-19.json
 
 bench:            ## X-4 warm latency, stage / detector breakdown and memory per profile against the dev API (`make dev-api`; PROFILES=quick,full,deep ONLY=<labels> RUNS=<n> WORKER_PID=<pid> COVERAGE_CONTRACT=<json> PERF_OUT=<new-json>) → docs/v2/bench/perf.{json,md}
 	cd backend && { [ -f data/bench/perf/workloads.json ] || .venv/bin/python scripts/bench.py --make-workloads; }

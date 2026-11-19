@@ -44,6 +44,15 @@ glyph measurement. The method stays experimental. Repeated digits on an
 inventory page are a deliberately favorable setup, and the result says
 little about handwriting, sparse text, invoices, or PDF page photographs.
 
+A follow-up checked all 2,506 metadata rows of the English-infographic
+preparation split at the pinned MaskEdit-10k revision. To qualify, the
+opening instruction needed a numeric-field term after an editing verb,
+along with a written digit. The pinned Parquet column reads found zero
+qualifying instructions. The source and target infographics in that split
+are both generated. The check used 2.03 MB of range reads for metadata
+and loaded no candidate image, so these counts establish the intake
+coverage of that selector. [Pinned publisher card and terms](https://huggingface.co/datasets/ReyChiaro/MaskEdit-10k/tree/3e0c54f7a6aeca5fb3e12758cb93d0be14310f55)
+
 The native audit rechecked all 252 input files and masks, independently
 reconstructed each changed-pixel mask, and verified all 504 ranked region
 areas and overlaps. The scalar receipt gives the group, role, carrier, score,

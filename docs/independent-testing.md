@@ -37,7 +37,8 @@ records and recalculate results for [reflected PNG areas](image-png-reflection-2
 [short writing rewrites](writing-replaced-token-study-2026-11-18.md). It also replays
 the progressive JPEG, paired 44.1 kHz video, earlier-copy audio, and PDF
 disclosure receipts described below. The command includes the shifted-grid,
-expanded face, twelve-second speech, and neighboring-sentence comparisons.
+expanded face, twelve-second speech, neighboring-sentence, cross-cut timing,
+and sentence attribution comparisons.
 For a replay that decodes the original
 files or reruns inference, use the source preparation
 and native commands in each report.
@@ -96,6 +97,11 @@ affect the score assigned to an unchanged sentence.
 The [retained-neighbor follow-up](writing-retained-neighbor-2026-11-19.md)
 recounts both ranking rules and the factual review that admitted three
 of the generated rewrites.
+The [positional attribution study](writing-positional-attribution-2026-11-19.md)
+recounts two methods for locating a rewrite and compares their highlighted
+sentences with exact changes. The [cross-cut timing study](video-shot-relative-lag-2026-11-19.md)
+checks the sign and location of timing changes beside matched cuts, pauses,
+and equal-delay controls.
 
 The [paired soundtrack replay](video-short-phrase-reencode-2026-11-18.md#reproduce)
 recounts exact 16 kHz analysis locations under three audio-carrier pairings.

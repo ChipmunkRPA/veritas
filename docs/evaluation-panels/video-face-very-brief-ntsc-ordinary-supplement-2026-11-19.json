@@ -1,0 +1,786 @@
+{
+  "accepted_input": "720p AVC H.264 4:2:0, exact 120 continuous pictures at 30000/1001 with zero origin, 30k or 90k fixed clock.",
+  "assertion": "Raw source clips, file-level native hashes, paths, face geometry and camera identities are private. Group numbers identify study clusters only.",
+  "commitments": {
+    "design": "5a4eaf3bbdaf8cd804bdc68717cc1b0849235e30679a22d8a520e733b5af903e",
+    "independent_recount": "4b12a312725f79f0bd711dbf2949280fbab47579628fa5e344dae21fd6566f24",
+    "private_scoring_journal": "8ad77688f8c0cfd515e585c075c4627fc6f98d2dcfcb934e5ded9f8855c80190",
+    "private_selected_case_manifest": "c39c39395d40600fb68768b218982714384bd1140f4d3dc1d866a0ad51b5abfa",
+    "source_decode_witness_replay": "2b93d61151fe50fe698c77596b5970ddd957a85defc808b5c78dfc30e6af8a7c"
+  },
+  "comparison": "Appearance-only Full comparison at unchanged internal point, before any new blur guard.",
+  "rows": [
+    {
+      "author_frames": null,
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 1,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "untouched"
+    },
+    {
+      "author_frames": null,
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 1,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "second_window"
+    },
+    {
+      "author_frames": [
+        58,
+        61
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 1,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "jump3"
+    },
+    {
+      "author_frames": [
+        69,
+        73
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 1,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "jump4"
+    },
+    {
+      "author_frames": [
+        58,
+        61
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 1,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "zoom3"
+    },
+    {
+      "author_frames": [
+        69,
+        73
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/90000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 1,
+      "independently_replayed_frames": 3,
+      "new_status": "localized",
+      "output_frames": [
+        69,
+        73
+      ],
+      "output_pts": [
+        207207,
+        219219
+      ],
+      "physical_pairs": 1,
+      "physical_target_support": true,
+      "role": "blur4"
+    },
+    {
+      "author_frames": [
+        58,
+        62
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 1,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "cutaway4"
+    },
+    {
+      "author_frames": [
+        58,
+        120
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 1,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "hard_cut"
+    },
+    {
+      "author_frames": null,
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/90000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 2,
+      "new_status": "unassessed",
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "untouched"
+    },
+    {
+      "author_frames": null,
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 2,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "second_window"
+    },
+    {
+      "author_frames": [
+        68,
+        71
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 2,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "jump3"
+    },
+    {
+      "author_frames": [
+        80,
+        84
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/30000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 2,
+      "new_status": "unassessed",
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "jump4"
+    },
+    {
+      "author_frames": [
+        68,
+        71
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 2,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "zoom3"
+    },
+    {
+      "author_frames": [
+        80,
+        84
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 2,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "blur4"
+    },
+    {
+      "author_frames": [
+        68,
+        72
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 2,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "cutaway4"
+    },
+    {
+      "author_frames": [
+        68,
+        120
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "cut_at_authored_edge": true,
+      "delivery_time_base": "1/30000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 2,
+      "new_status": "unassessed",
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "hard_cut"
+    },
+    {
+      "author_frames": null,
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 3,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "untouched"
+    },
+    {
+      "author_frames": null,
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 3,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "second_window"
+    },
+    {
+      "author_frames": [
+        74,
+        77
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/30000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 3,
+      "new_status": "no_range",
+      "physical_pairs": 1,
+      "physical_target_support": true,
+      "role": "jump3"
+    },
+    {
+      "author_frames": [
+        88,
+        92
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/90000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 3,
+      "new_status": "no_range",
+      "physical_pairs": 2,
+      "physical_target_support": true,
+      "role": "jump4"
+    },
+    {
+      "author_frames": [
+        74,
+        77
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 3,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "zoom3"
+    },
+    {
+      "author_frames": [
+        88,
+        92
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/90000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 3,
+      "independently_replayed_frames": 3,
+      "new_status": "localized",
+      "output_frames": [
+        88,
+        92
+      ],
+      "output_pts": [
+        264264,
+        276276
+      ],
+      "physical_pairs": 1,
+      "physical_target_support": true,
+      "role": "blur4"
+    },
+    {
+      "author_frames": [
+        74,
+        78
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 3,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "cutaway4"
+    },
+    {
+      "author_frames": [
+        74,
+        120
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 3,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "hard_cut"
+    },
+    {
+      "author_frames": null,
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 4,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "untouched"
+    },
+    {
+      "author_frames": null,
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/30000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 4,
+      "new_status": "unassessed",
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "second_window"
+    },
+    {
+      "author_frames": [
+        83,
+        86
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 4,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "jump3"
+    },
+    {
+      "author_frames": [
+        93,
+        97
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 4,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "jump4"
+    },
+    {
+      "author_frames": [
+        83,
+        86
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 4,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "zoom3"
+    },
+    {
+      "author_frames": [
+        93,
+        97
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/30000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 4,
+      "new_status": "unassessed",
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "blur4"
+    },
+    {
+      "author_frames": [
+        83,
+        87
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 4,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "cutaway4"
+    },
+    {
+      "author_frames": [
+        83,
+        120
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 4,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "hard_cut"
+    },
+    {
+      "author_frames": null,
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 5,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "untouched"
+    },
+    {
+      "author_frames": null,
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 5,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "second_window"
+    },
+    {
+      "author_frames": [
+        78,
+        81
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 5,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "jump3"
+    },
+    {
+      "author_frames": [
+        91,
+        95
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 5,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "jump4"
+    },
+    {
+      "author_frames": [
+        78,
+        81
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 5,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "zoom3"
+    },
+    {
+      "author_frames": [
+        91,
+        95
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 5,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "blur4"
+    },
+    {
+      "author_frames": [
+        78,
+        82
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 5,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "cutaway4"
+    },
+    {
+      "author_frames": [
+        78,
+        120
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 5,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "hard_cut"
+    },
+    {
+      "author_frames": null,
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/90000",
+      "entered_scoring": false,
+      "group": 6,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "untouched"
+    },
+    {
+      "author_frames": null,
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 6,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "second_window"
+    },
+    {
+      "author_frames": [
+        88,
+        91
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/90000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 6,
+      "new_status": "unassessed",
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "jump3"
+    },
+    {
+      "author_frames": [
+        100,
+        104
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 6,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "jump4"
+    },
+    {
+      "author_frames": [
+        88,
+        91
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/90000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 6,
+      "new_status": "unassessed",
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "zoom3"
+    },
+    {
+      "author_frames": [
+        100,
+        104
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 6,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "blur4"
+    },
+    {
+      "author_frames": [
+        88,
+        92
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "cut_at_authored_edge": true,
+      "delivery_time_base": "1/90000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 6,
+      "new_status": "unassessed",
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "cutaway4"
+    },
+    {
+      "author_frames": [
+        88,
+        120
+      ],
+      "camera_clock": "one_to_one_30_as_ntsc",
+      "delivery_time_base": "1/30000",
+      "entered_scoring": false,
+      "group": 6,
+      "physical_pairs": 0,
+      "physical_target_support": false,
+      "role": "hard_cut"
+    },
+    {
+      "author_frames": null,
+      "camera_clock": "native_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/30000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 7,
+      "new_status": "no_range",
+      "physical_pairs": 4,
+      "physical_target_support": true,
+      "role": "untouched"
+    },
+    {
+      "author_frames": null,
+      "camera_clock": "native_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/90000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 7,
+      "new_status": "no_range",
+      "physical_pairs": 1,
+      "physical_target_support": true,
+      "role": "second_window"
+    },
+    {
+      "author_frames": [
+        62,
+        65
+      ],
+      "camera_clock": "native_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/30000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 7,
+      "new_status": "no_range",
+      "physical_pairs": 5,
+      "physical_target_support": false,
+      "role": "jump3"
+    },
+    {
+      "author_frames": [
+        76,
+        80
+      ],
+      "camera_clock": "native_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/90000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 7,
+      "new_status": "no_range",
+      "physical_pairs": 6,
+      "physical_target_support": false,
+      "role": "jump4"
+    },
+    {
+      "author_frames": [
+        62,
+        65
+      ],
+      "camera_clock": "native_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/30000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 7,
+      "new_status": "no_range",
+      "physical_pairs": 3,
+      "physical_target_support": false,
+      "role": "zoom3"
+    },
+    {
+      "author_frames": [
+        76,
+        80
+      ],
+      "camera_clock": "native_ntsc",
+      "cut_at_authored_edge": false,
+      "delivery_time_base": "1/90000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 7,
+      "new_status": "no_range",
+      "physical_pairs": 4,
+      "physical_target_support": false,
+      "role": "blur4"
+    },
+    {
+      "author_frames": [
+        62,
+        66
+      ],
+      "camera_clock": "native_ntsc",
+      "cut_at_authored_edge": true,
+      "delivery_time_base": "1/30000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 7,
+      "new_status": "no_range",
+      "physical_pairs": 1,
+      "physical_target_support": false,
+      "role": "cutaway4"
+    },
+    {
+      "author_frames": [
+        62,
+        120
+      ],
+      "camera_clock": "native_ntsc",
+      "cut_at_authored_edge": true,
+      "delivery_time_base": "1/90000",
+      "entered_scoring": true,
+      "existing_return": false,
+      "group": 7,
+      "new_status": "no_range",
+      "physical_pairs": 2,
+      "physical_target_support": true,
+      "role": "hard_cut"
+    }
+  ],
+  "schema": "chipmunk.video-short-ntsc-ordinary-supplement/1",
+  "scope": "Physical admission screened fixed native pixel motion, same-face boxes and exact delivery clock, then forbade any appearance output from selecting cases. This is selected-role coverage rather than a false-alarm estimate for all uploads.",
+  "source_coverage": "Six prior-archive genuine VCD2 camera recordings contributed one-to-one nominal-30 source pictures re-clocked at 29.97. One method-unused exact native 29.97 RTFS original provided a separate retained-source subgroup. No subject-level independence is claimed.",
+  "study": "Ordinary scene and blur follow-up to three/four-picture 29.97 fps transfer",
+  "witnesses": {
+    "native_crop_checks_replayed": 6,
+    "source_picture_mapping_records_checked": 6720
+  }
+}

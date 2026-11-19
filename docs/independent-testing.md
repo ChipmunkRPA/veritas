@@ -24,6 +24,15 @@ disclosure receipts described below. For a replay that decodes the original
 files or reruns inference, use the source preparation
 and native commands in each report.
 
+The [screenshot glyph pilot](image-glyph-consistency-2026-11-19.md) recounts
+252 authored deliveries and distinguishes intentional formatting, local
+blur and planted glyph substitutions. The
+[29.97 fps face comparison](video-face-three-four-frames-2026-11-19.md#ordinary-motion-supplement)
+recounts ordinary local-blur alerts with exact source frames. The
+[one-second voice comparison](audio-spectra-original-one-second-2026-11-19.md)
+recounts matched synthetic speech and ordinary recordings with the same
+traffic or competing speech at a supplied edit clock.
+
 The [paired soundtrack replay](video-short-phrase-reencode-2026-11-18.md#reproduce)
 recounts exact 16 kHz analysis locations under three audio-carrier pairings.
 It includes two independent picture encodes with the same frame clock,
@@ -3743,6 +3752,39 @@ python3 backend/scripts/independent_review.py freeze manifest.json development.j
 python3 backend/scripts/independent_review.py summarize manifest.json confirmation.json frozen.json summary.json
 python3 backend/scripts/independent_review.py compare manifest.json baseline.json baseline-frozen.json candidate.json candidate-frozen.json comparison.json
 ```
+
+### Read positions from your own signed app export
+
+Obtain the instance's public key separately and keep the submitted original
+next to its downloaded signed evidence package. The command checks the
+package signature and matches the original's complete bytes to the signed
+commitment. The worksheet keeps packet IDs and positions, so you can compare
+the reported locations with labels collected separately from the analysis.
+Try it first using the public authored image:
+
+```sh
+example=docs/evaluation-panels/signed-evidence-example
+backend/.venv/bin/python -B backend/scripts/independent_review.py packet-positions \
+  "$example/evidence.zip" "$example/authored-gradient.png" image-positions.json \
+  --public-key "$example/example-public.pem"
+```
+
+The worksheet returns display-oriented image rectangles, signed video frame
+indices with separately recorded face ranges or transitions, analysed audio
+sample ranges, and selected Unicode spans in the extracted document text.
+Video witness frames are individual samples. Image rectangles enclose
+reported regions and can cover more pixels than a mask. Audio windows and
+writing spans represent the measured inputs or selected contexts. Use these
+coordinates only with labels on the same grid, sample clock, or extracted
+text. A missing packet leaves coverage unresolved until you check what
+actually ran. The app can also show evidence outside the worksheet's scope.
+
+The worksheet contains source and coordinate commitments. Keep it local if
+those commitments and positions are sensitive. Use the existing
+`count-locations` or `count-events` tool to score independently labeled
+cases and share counts without precise positions. Use the
+[original-file evidence verifier](evaluation-panels/signed-evidence-example/README.md)
+when you also want to replay available measurements from the source.
 
 Before sharing a result, an evaluator with the original files can verify
 the actual submitted and parent bytes against every planned digest.

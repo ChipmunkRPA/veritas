@@ -79,8 +79,8 @@ Only five of the 24 ordinary controls supplied enough measured context for
 the new comparison. None of those five triggered an added range. The
 remaining 19 controls do not establish the false-alarm behavior. The
 ordinary coverage requirement was set before inference and the clock
-extension remains experimental. A follow-up comparison targets ordinary
-short movement and cuts that supply comparable face evidence.
+extension remains experimental. The supplement below tests ordinary short
+movement and cuts that supply comparable face evidence.
 
 Four physical remuxes with identical coded pictures reproduced the exact
 decisions and crops on the alternate time base. Four invalid or unsupported
@@ -88,3 +88,45 @@ clock variants stayed outside the check. Independent decoding and recounting
 verified 54 native anchors across 18 localized physical deliveries,
 including the localized remux. These checks establish the retained picture
 coordinates for the measured clips.
+
+## Ordinary-motion supplement
+
+The follow-up fixed the same three- and four-picture check and measured ordinary
+events without changing the face-change point. Seven retained camera groups
+supplied 56 authored controls. Six groups contributed genuine camera pictures
+mapped one-for-one from nominal 30 fps to 29.97 fps. The seventh contributed one
+recording with exact native 29.97 fps timestamps. Both 30,000- and 90,000-tick
+delivery clocks carried untouched windows, three- and four-picture jumps within
+a take, digital reframing, local blur, cutaways, and hard cuts.
+
+The fixed pixel-motion and face-geometry intake selected all 12 controls with
+measurable short pairs and eight fixed controls for the remaining roles and
+clocks. The existing Full check returned no primary or secondary face return
+in the 20 selected files. The short-range extension produced two ordinary
+alerts among 12 assessed files and recorded eight as unassessed. The two
+alerts matched the exact four blurred pictures in separate camera groups.
+The other ten assessed controls included four same-take jumps, two untouched
+windows, two cut controls, one digital reframe, and one local blur. Independent
+decoding matched all six endpoint and center crops. The reviewer checked
+6,720 native source frame-index and timestamp mappings.
+
+| Selected subgroup | Scored | Assessed | Added ordinary alerts |
+| --- | ---: | ---: | ---: |
+| 30,000-tick delivery clock | 9 | 5 | 0 |
+| 90,000-tick delivery clock | 11 | 7 | 2 |
+| Exact native 29.97 fps source | 8 | 8 | 0 |
+| One-to-one adapted camera sources | 12 | 4 | 2 |
+
+Both alerts used the 90,000-tick clock. The treatment and source differ
+between the subgroups and this comparison does not isolate a clock effect.
+The selected controls probe this particular confound and do not estimate
+false-alarm frequency for customer videos. Results for the original frozen
+positive and ordinary panel remain unchanged. The 29.97 fps transfer remains
+experimental. The findings establish that a short ordinary local blur can
+produce the same measured appearance signal as a short face swap.
+[Anonymized observations](evaluation-panels/video-face-very-brief-ntsc-ordinary-supplement-2026-11-19.json)
+
+```sh
+python3 -I -S backend/scripts/review_video_face_short_ntsc_ordinary.py \
+  docs/evaluation-panels/video-face-very-brief-ntsc-ordinary-supplement-2026-11-19.json
+```

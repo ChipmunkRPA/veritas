@@ -72,6 +72,10 @@ def main() -> None:
     inputs.add_argument("file_index", type=Path)
     inputs.add_argument("output", type=Path)
     inputs.add_argument("--root", type=Path, required=True)
+    positions = commands.add_parser("packet-positions", help="Read review coordinates from a signed app export and its original")
+    for field in ("package", "original", "output"):
+        positions.add_argument(field, type=Path)
+    positions.add_argument("--public-key", type=Path, required=True, help="Instance public key obtained separately from the package")
     repeat = commands.add_parser("replicate", help="Compare independently produced receipts from one frozen method")
     repeat.add_argument("manifest", type=Path)
     repeat.add_argument("reference", type=Path)
@@ -94,6 +98,13 @@ def main() -> None:
 
         create(args.output, write)
         print(args.output / "comparison.json")
+        return
+    if args.command == "packet-positions":
+        from app.bench.independent_app_positions import packet_positions
+
+        result = packet_positions(args.package, args.original, args.public_key)
+        write(args.output, result)
+        print(digest(result))
         return
     manifest = read(args.manifest)
     if args.command == "audit":

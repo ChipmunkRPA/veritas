@@ -1,0 +1,241 @@
+{
+  "closed": true,
+  "counts": {
+    "development": {
+      "clean": {
+        "ordinary_candidate_flagged": 0,
+        "ordinary_total": 80,
+        "synthetic_candidate_flagged": 6,
+        "synthetic_total": 32
+      },
+      "restaurant": {
+        "background_candidate_flagged": 0,
+        "background_total": 16,
+        "ordinary_candidate_flagged": 0,
+        "ordinary_total": 80,
+        "synthetic_candidate_flagged": 0,
+        "synthetic_total": 32
+      },
+      "river": {
+        "background_candidate_flagged": 0,
+        "background_total": 16,
+        "ordinary_candidate_flagged": 1,
+        "ordinary_total": 80,
+        "synthetic_candidate_flagged": 1,
+        "synthetic_total": 32
+      },
+      "washing": {
+        "background_candidate_flagged": 0,
+        "background_total": 16,
+        "ordinary_candidate_flagged": 0,
+        "ordinary_total": 80,
+        "synthetic_candidate_flagged": 2,
+        "synthetic_total": 32
+      }
+    },
+    "transfer": {
+      "clean": {
+        "added_useful_at_supplied_clock": 2,
+        "baseline_useful": 21,
+        "baseline_wrong_only": 0,
+        "combined_useful_at_supplied_clock": 23,
+        "combined_wrong_only": 0,
+        "missed": 9,
+        "new_ordinary_flags": 0,
+        "ordinary_baseline_flagged": 1,
+        "ordinary_candidate_flagged": 0,
+        "ordinary_combined_flagged": 1,
+        "ordinary_total": 80,
+        "synthetic_baseline_flagged": 21,
+        "synthetic_candidate_flagged": 3,
+        "synthetic_combined_flagged": 23,
+        "synthetic_total": 32
+      },
+      "competing_speech": {
+        "added_useful_at_supplied_clock": 0,
+        "background_baseline_flagged": 0,
+        "background_candidate_flagged": 0,
+        "background_combined_flagged": 0,
+        "background_total": 16,
+        "baseline_useful": 0,
+        "baseline_wrong_only": 2,
+        "combined_useful_at_supplied_clock": 0,
+        "combined_wrong_only": 2,
+        "missed": 32,
+        "new_background_flags": 0,
+        "new_ordinary_flags": 0,
+        "ordinary_baseline_flagged": 5,
+        "ordinary_candidate_flagged": 0,
+        "ordinary_combined_flagged": 5,
+        "ordinary_total": 80,
+        "synthetic_baseline_flagged": 2,
+        "synthetic_candidate_flagged": 0,
+        "synthetic_combined_flagged": 2,
+        "synthetic_total": 32
+      },
+      "traffic": {
+        "added_useful_at_supplied_clock": 0,
+        "background_baseline_flagged": 0,
+        "background_candidate_flagged": 0,
+        "background_combined_flagged": 0,
+        "background_total": 16,
+        "baseline_useful": 0,
+        "baseline_wrong_only": 0,
+        "combined_useful_at_supplied_clock": 0,
+        "combined_wrong_only": 0,
+        "missed": 32,
+        "new_background_flags": 0,
+        "new_ordinary_flags": 2,
+        "ordinary_baseline_flagged": 0,
+        "ordinary_candidate_flagged": 2,
+        "ordinary_combined_flagged": 2,
+        "ordinary_total": 80,
+        "synthetic_baseline_flagged": 0,
+        "synthetic_candidate_flagged": 0,
+        "synthetic_combined_flagged": 0,
+        "synthetic_total": 32
+      }
+    }
+  },
+  "elapsed_seconds": {
+    "development": 291.31323870900087,
+    "transfer": 227.76898458402138
+  },
+  "experimental_scope": "Known-clock discrimination on original mixtures. Positions are supplied from exact authored edit labels. This is not a free-search localization result or a customer confidence calibration.",
+  "exposure": "Retained recordings have earlier project exposure to other audio checks. This is new to the one-second Spectra readout. Noise variants, controls and generators reuse hosts. Training overlap and cross-corpus physical identity aliases remain unresolved.",
+  "gate": {
+    "both_generators": false,
+    "ordinary_files_within_budget": true,
+    "ordinary_groups_within_budget": true,
+    "three_added_noisy_at_supplied_clock": false,
+    "three_source_groups": false,
+    "wrong_only_within_budget": true,
+    "zero_added_isolated": true,
+    "zero_matched_ordinary_collisions": true
+  },
+  "matched_ordinary_collisions": 0,
+  "model_forwards": {
+    "authored_compatibility": 2,
+    "development": 497,
+    "transfer": 369
+  },
+  "new_noisy_generator_families": 0,
+  "new_noisy_source_groups": 0,
+  "new_ordinary_groups_by_condition": {
+    "clean": 0,
+    "competing_speech": 0,
+    "traffic": 2
+  },
+  "paired_ordering_at_supplied_clock": {
+    "development": {
+      "clean": {
+        "above_all_five_controls": 21,
+        "losses": 19,
+        "pairs": 160,
+        "synthetic_files": 32,
+        "ties": 0,
+        "wins": 141
+      },
+      "restaurant": {
+        "above_all_five_controls": 5,
+        "losses": 81,
+        "pairs": 160,
+        "synthetic_files": 32,
+        "ties": 0,
+        "wins": 79
+      },
+      "river": {
+        "above_all_five_controls": 10,
+        "losses": 62,
+        "pairs": 160,
+        "synthetic_files": 32,
+        "ties": 0,
+        "wins": 98
+      },
+      "washing": {
+        "above_all_five_controls": 24,
+        "losses": 14,
+        "pairs": 160,
+        "synthetic_files": 32,
+        "ties": 0,
+        "wins": 146
+      }
+    },
+    "transfer": {
+      "clean": {
+        "above_all_five_controls": 28,
+        "losses": 6,
+        "pairs": 160,
+        "synthetic_files": 32,
+        "ties": 0,
+        "wins": 154
+      },
+      "competing_speech": {
+        "above_all_five_controls": 12,
+        "losses": 60,
+        "pairs": 160,
+        "synthetic_files": 32,
+        "ties": 0,
+        "wins": 100
+      },
+      "traffic": {
+        "above_all_five_controls": 4,
+        "losses": 83,
+        "pairs": 160,
+        "synthetic_files": 32,
+        "ties": 0,
+        "wins": 77
+      }
+    }
+  },
+  "point_selection": "Single predeclared point from the second-highest development ordinary-component maximum, floored by every development isolated-background response. Fixed before transfer.",
+  "preparation": {
+    "graph_input_samples": 64600,
+    "native_excerpt_samples": 16000,
+    "new_speech_gate": false,
+    "pre_emphasis": 0.97,
+    "source_audio_modified_for_denoising": false,
+    "source_extent_samples": 192000,
+    "source_rate_hz": 16000,
+    "whole_excerpt_repeats": 5
+  },
+  "privacy": "Aggregate omits raw audio, individual identities, host aliases, exact source clock positions, per-source fingerprints, file paths, per-source scalar scores and response vectors.",
+  "proceed_to_separate_free_search": false,
+  "production_change_supported": false,
+  "publisher_sources": [
+    "https://huggingface.co/Limitless-8/spectra-aasist3-int8-audio-deepfake/tree/b56aed04853cb4e5bf825025c54c93d4bc345c61",
+    "https://huggingface.co/lab260/Spectra-AASIST3/tree/bc0ded888080ddad493177bb53aa6f5b95219d7c",
+    "https://www.openslr.org/12",
+    "https://www.openslr.org/94",
+    "https://zenodo.org/records/1227121",
+    "https://groups.inf.ed.ac.uk/ami/corpus/license.shtml"
+  ],
+  "schema": "chipmunk.spectra-original-one-second-aggregate/1",
+  "source_counts": {
+    "delivered_one_second_roles_disjoint": true,
+    "development_connected_reader_donor_components": 4,
+    "development_deliveries": 496,
+    "development_foreground_host_recordings": 16,
+    "development_physical_background_sessions": 3,
+    "generator_families": 2,
+    "transfer_deliveries": 368,
+    "transfer_host_donor_groups": 8,
+    "transfer_host_recordings": 16,
+    "transfer_physical_background_captures": 4
+  },
+  "verification": {
+    "authored_checks": 7,
+    "decision_rows_recounted": 864,
+    "gate_reconstructed_exact": true,
+    "graph_input_bindings": 864,
+    "graph_samples_checked": 55814400,
+    "native_deliveries": 864,
+    "paired_orderings_recounted": 1120,
+    "passed": true,
+    "point_reconstructed_exact": true,
+    "proceed_to_free_search": false,
+    "production_change_supported": false
+  },
+  "whole_private_numeric_closure_commitment": "2f2d40b9575914b3c72cd833bf9e9d8fed134bbc013d64198f701e1721a1e5fd",
+  "whole_private_protocol_commitment": "f2a9ea7ffab9878250efd475781887fc73435cc9c641423b0c35e3eb9bb33151"
+}

@@ -1,0 +1,2014 @@
+{
+  "arithmetic_clarification": {
+    "identified_before_closed_results": true,
+    "measured_decisions_or_inputs_changed": false,
+    "original_result_preserved": true,
+    "required_family_collection": "unordered membership"
+  },
+  "commitments": {
+    "canonical_result": "263baf336c296800adf5b16463b931f96cddc5cc1c829a89686f5747b9ce0c0c",
+    "independent_outcome_review": "0896a89b0d34c86564a20b761a148f6beef3c6472ec631b3f2e38c0302abc98c",
+    "independent_render_review": "d8b697478867b034a49dd5aac30bc4c4c9f7d5301deb78a8f49eaeed080fb23e",
+    "independent_source_review": "1bb6f3b72a171eacc975f01b64057685d73ab97e41dce5d0e58b04bb492e8435",
+    "measurements": "370a410a86a3632c425157a6120f5c6ef3d718354a1d77b08d360e1a1b22f915",
+    "native_intake": "ed1fbff6e4cb5ac407f9b0ca86c834772cf04ddbc4dcd82429a8d859d210e2ea",
+    "original_result": "11c595741294a7cd0ba3f836f79b6c9772c7b91a48caf33febb0d3a119d1a43f",
+    "preclosure_family_membership_clarification": "4b6ebf748f6ff7ca0acfa4afdbfd312142177fcbd5762d9bd4367194295d5609",
+    "protocol": "ca34db07a0a191394a8049e03d4a7c3cdcd0b1647c57f0d70a1e055714e3c08c",
+    "rendered_inputs": "d478f3da9f92ec638bb835ce64e2d7372968369dbd2f0da1b727e313000ed31c",
+    "rendered_truth": "9ff578beb714dde0a1f880d706524e38dd0381cccc6fae4f638aa3593cbb186c",
+    "score_lock": "780b6d018b132156aa63b3d4469f08333aa738260de4691d5f15ca56a5370011"
+  },
+  "counts": {
+    "clean": {
+      "clock_faster": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "clock_slower": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "different_reader_splice": {
+        "baseline": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 9
+          },
+          "target_locations": 7,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "earlier_gain_half/kitten": {
+        "baseline": {
+          "flags": 6,
+          "states": {
+            "local_change": 6,
+            "no_corroborated_local_change": 10
+          },
+          "target_locations": 6,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "earlier_gain_half/piper": {
+        "baseline": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 9
+          },
+          "target_locations": 7,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "earlier_gain_high/kitten": {
+        "baseline": {
+          "flags": 6,
+          "states": {
+            "local_change": 6,
+            "no_corroborated_local_change": 10
+          },
+          "target_locations": 6,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "earlier_gain_high/piper": {
+        "baseline": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 9
+          },
+          "target_locations": 7,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "edited_kitten": {
+        "baseline": {
+          "flags": 6,
+          "states": {
+            "local_change": 6,
+            "no_corroborated_local_change": 10
+          },
+          "target_locations": 6,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "edited_piper": {
+        "baseline": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 9
+          },
+          "target_locations": 7,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "half_matched_earlier": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "roundtrip_kitten": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "roundtrip_piper": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "same_reader_splice": {
+        "baseline": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 9
+          },
+          "target_locations": 7,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "shifted_earlier": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "untouched": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "whole_gain": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "whole_high_shelf": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "whole_lowpass": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "wrong_reader": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      }
+    },
+    "restaurant": {
+      "background_only": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "clock_faster": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "clock_slower": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "different_reader_splice": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 6,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 2,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 3,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 5,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "earlier_gain_half/kitten": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 6,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 2,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 3,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 5,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "earlier_gain_half/piper": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 6,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 2,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 3,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 5,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "earlier_gain_high/kitten": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 6,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 2,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 3,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 5,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "earlier_gain_high/piper": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 6,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 2,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 3,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 5,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "edited_kitten": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 6,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 2,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 3,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 5,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "edited_piper": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 6,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 2,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 3,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 5,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "half_matched_earlier": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "roundtrip_kitten": {
+        "baseline": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "roundtrip_piper": {
+        "baseline": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "same_reader_splice": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 6,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 2,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 3,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 5,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "shifted_earlier": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "untouched": {
+        "baseline": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "whole_gain": {
+        "baseline": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 3,
+          "states": {
+            "local_change": 3,
+            "no_corroborated_local_change": 7,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "whole_high_shelf": {
+        "baseline": {
+          "flags": 2,
+          "states": {
+            "consistent_frequency_balance_change": 7,
+            "local_change": 2,
+            "no_corroborated_local_change": 1,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 2,
+          "states": {
+            "consistent_frequency_balance_change": 7,
+            "local_change": 2,
+            "no_corroborated_local_change": 1,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "whole_lowpass": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 10,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 10,
+            "reference_match_not_supported": 6
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 6
+        },
+        "total": 16
+      },
+      "wrong_reader": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      }
+    },
+    "river": {
+      "background_only": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "clock_faster": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "clock_slower": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "different_reader_splice": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 4,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "candidate": {
+          "flags": 10,
+          "states": {
+            "local_change": 10,
+            "no_corroborated_local_change": 2,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 10,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "total": 16
+      },
+      "earlier_gain_half/kitten": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 4,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "candidate": {
+          "flags": 10,
+          "states": {
+            "local_change": 10,
+            "no_corroborated_local_change": 2,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 10,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "total": 16
+      },
+      "earlier_gain_half/piper": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 4,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "candidate": {
+          "flags": 10,
+          "states": {
+            "local_change": 10,
+            "no_corroborated_local_change": 2,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 10,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "total": 16
+      },
+      "earlier_gain_high/kitten": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 4,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "candidate": {
+          "flags": 10,
+          "states": {
+            "local_change": 10,
+            "no_corroborated_local_change": 2,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 10,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "total": 16
+      },
+      "earlier_gain_high/piper": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 4,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "candidate": {
+          "flags": 10,
+          "states": {
+            "local_change": 10,
+            "no_corroborated_local_change": 2,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 10,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "total": 16
+      },
+      "edited_kitten": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 4,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "candidate": {
+          "flags": 10,
+          "states": {
+            "local_change": 10,
+            "no_corroborated_local_change": 2,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 10,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "total": 16
+      },
+      "edited_piper": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 4,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "candidate": {
+          "flags": 10,
+          "states": {
+            "local_change": 10,
+            "no_corroborated_local_change": 2,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 10,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "total": 16
+      },
+      "half_matched_earlier": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "roundtrip_kitten": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 13,
+            "reference_match_not_supported": 2
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 2
+        },
+        "candidate": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 13,
+            "reference_match_not_supported": 2
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 2
+        },
+        "total": 16
+      },
+      "roundtrip_piper": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 13,
+            "reference_match_not_supported": 2
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 2
+        },
+        "candidate": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 13,
+            "reference_match_not_supported": 2
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 2
+        },
+        "total": 16
+      },
+      "same_reader_splice": {
+        "baseline": {
+          "flags": 4,
+          "states": {
+            "local_change": 4,
+            "no_corroborated_local_change": 8,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 4,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "candidate": {
+          "flags": 10,
+          "states": {
+            "local_change": 10,
+            "no_corroborated_local_change": 2,
+            "reference_match_not_supported": 4
+          },
+          "target_locations": 10,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 4
+        },
+        "total": 16
+      },
+      "shifted_earlier": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "untouched": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 13,
+            "reference_match_not_supported": 2
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 2
+        },
+        "candidate": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 13,
+            "reference_match_not_supported": 2
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 2
+        },
+        "total": 16
+      },
+      "whole_gain": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 13,
+            "reference_match_not_supported": 2
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 2
+        },
+        "candidate": {
+          "flags": 1,
+          "states": {
+            "local_change": 1,
+            "no_corroborated_local_change": 13,
+            "reference_match_not_supported": 2
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 2
+        },
+        "total": 16
+      },
+      "whole_high_shelf": {
+        "baseline": {
+          "flags": 1,
+          "states": {
+            "consistent_frequency_balance_change": 8,
+            "local_change": 1,
+            "no_corroborated_local_change": 5,
+            "reference_match_not_supported": 2
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 2
+        },
+        "candidate": {
+          "flags": 1,
+          "states": {
+            "consistent_frequency_balance_change": 8,
+            "local_change": 1,
+            "no_corroborated_local_change": 5,
+            "reference_match_not_supported": 2
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 2
+        },
+        "total": 16
+      },
+      "whole_lowpass": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 13,
+            "reference_match_not_supported": 3
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 3
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 13,
+            "reference_match_not_supported": 3
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 3
+        },
+        "total": 16
+      },
+      "wrong_reader": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      }
+    },
+    "washing": {
+      "background_only": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "clock_faster": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "clock_slower": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "different_reader_splice": {
+        "baseline": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 9
+          },
+          "target_locations": 7,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "earlier_gain_half/kitten": {
+        "baseline": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 9
+          },
+          "target_locations": 7,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "earlier_gain_half/piper": {
+        "baseline": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 9
+          },
+          "target_locations": 7,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "earlier_gain_high/kitten": {
+        "baseline": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 9
+          },
+          "target_locations": 7,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "earlier_gain_high/piper": {
+        "baseline": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 9
+          },
+          "target_locations": 7,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "edited_kitten": {
+        "baseline": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 9
+          },
+          "target_locations": 7,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "edited_piper": {
+        "baseline": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 9
+          },
+          "target_locations": 7,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "half_matched_earlier": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "roundtrip_kitten": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "roundtrip_piper": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "same_reader_splice": {
+        "baseline": {
+          "flags": 7,
+          "states": {
+            "local_change": 7,
+            "no_corroborated_local_change": 9
+          },
+          "target_locations": 7,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 13,
+          "states": {
+            "local_change": 13,
+            "no_corroborated_local_change": 3
+          },
+          "target_locations": 13,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "shifted_earlier": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      },
+      "untouched": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "whole_gain": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "no_corroborated_local_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "whole_high_shelf": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "whole_lowpass": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "consistent_frequency_balance_change": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 0
+        },
+        "total": 16
+      },
+      "wrong_reader": {
+        "baseline": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "candidate": {
+          "flags": 0,
+          "states": {
+            "reference_match_not_supported": 16
+          },
+          "target_locations": 0,
+          "unassessed_local_support": 0,
+          "unassessed_reference": 16
+        },
+        "total": 16
+      }
+    }
+  },
+  "decision": {
+    "background_only_flags": 0,
+    "gate_checks": {
+      "background_only": true,
+      "component_gain": true,
+      "family_gain": true,
+      "location_gain": true,
+      "misplaced_synthetic": true,
+      "ordinary_components": true,
+      "ordinary_rows": true,
+      "wrong_reference_and_clock": true
+    },
+    "new_connected_components": 4,
+    "new_control_rows_and_components": {
+      "clean": {
+        "components": 0,
+        "hosts": 0,
+        "rows": 0
+      },
+      "restaurant": {
+        "components": 0,
+        "hosts": 0,
+        "rows": 0
+      },
+      "river": {
+        "components": 0,
+        "hosts": 0,
+        "rows": 0
+      },
+      "washing": {
+        "components": 0,
+        "hosts": 0,
+        "rows": 0
+      }
+    },
+    "new_families": [
+      "kitten",
+      "piper"
+    ],
+    "new_misplaced_synthetic_rows": {
+      "clean": {
+        "components": 0,
+        "rows": 0
+      },
+      "restaurant": {
+        "components": 0,
+        "rows": 0
+      },
+      "river": {
+        "components": 0,
+        "rows": 0
+      },
+      "washing": {
+        "components": 0,
+        "rows": 0
+      }
+    },
+    "new_noisy_synthetic_locations": 30,
+    "passed": true,
+    "wrong_reference_or_clock_flags": 0
+  },
+  "error_budget": {
+    "maximum_background_only_flags": 0,
+    "maximum_new_misplaced_synthetic_rows_per_condition": 1,
+    "maximum_new_ordinary_control_rows_per_condition": 4,
+    "maximum_new_ordinary_reader_components_per_condition": 1,
+    "maximum_wrong_reference_or_clock_flags": 0,
+    "minimum_added_noisy_synthetic_locations": 4,
+    "minimum_connected_components": 2,
+    "preserve_all_baseline_ranges": true,
+    "required_families": [
+      "piper",
+      "kitten"
+    ],
+    "scope": "Only principal equal-level reference cases count toward the gain gate. Earlier-gain variants are a separately reported robustness condition. No post-result source/control replacement or point fitting."
+  },
+  "limitations": [
+    "The confirmation uses eight newly qualified declared host readers and sixteen original lossless source recordings. Unknown speaker aliases and classifier pretraining exposure remain unresolved.",
+    "The three background sessions are physically different from candidate-development traffic and AMI recordings. Their earlier unrelated project exposure remains disclosed.",
+    "Conditions and reference-level variants reuse32 target events. Four paired-reader components remain joint, with three fixed background sessions.",
+    "Two supplied versions are required. A physical waveform change can follow genuine edits and ordinary processing. Authorship and speaker attribution require separate evidence.",
+    "Absolute inherited control and misplaced highlights remain visible in the table. Zero added alerts describes the paired increment in this scope.",
+    "The aggregate recount checks arithmetic and the frozen error budget. Exact native regeneration uses retained private source pairs and fixed recipes."
+  ],
+  "method": {
+    "ai_confidence_weight": 0,
+    "current_result_first": true,
+    "maximum_start_difference": 5760,
+    "model_calls": 0,
+    "neighbor_separation": 19200,
+    "point": 0.31758884,
+    "reference_and_frequency_guards_unchanged": true,
+    "six_second_starts": [
+      0,
+      19200,
+      38400,
+      57600,
+      76800,
+      96000
+    ]
+  },
+  "native_review": {
+    "dense_evidence_windows_recomputed": 2838,
+    "native_synthesis_phrases_and_fragments_replayed": 32,
+    "original_source_alternate_decodes": 16,
+    "passed": true,
+    "source_clocks_checked": 2528,
+    "source_pairs_reconstructed": 1264
+  },
+  "privacy": {
+    "individual_decisions": false,
+    "individual_edit_positions": false,
+    "local_paths": false,
+    "per_case_scores": false,
+    "raw_audio": false,
+    "reader_identifiers": false,
+    "transcripts": false
+  },
+  "schema": "chipmunk.audio-native12-dense-confirmation-aggregate/1",
+  "scope": {
+    "authorship_confidence_weight": 0,
+    "background_captures": 3,
+    "conditions": [
+      "clean",
+      "washing",
+      "river",
+      "restaurant"
+    ],
+    "connected_reader_components": 4,
+    "declared_host_readers": 8,
+    "generator_calls": 32,
+    "generator_families": 2,
+    "host_readers_disjoint_from_recorded_prior_roles": true,
+    "hosts": 16,
+    "hosts_per_reader": 2,
+    "native_source_admission_attempts": 19,
+    "new_detector_calls": 0,
+    "pairs": 1264,
+    "prospective_confirmation": true,
+    "qualified_source_records": 16,
+    "requires_supplied_clean_earlier_copy": true,
+    "sample_rate": 16000,
+    "samples_per_copy": 192000,
+    "standalone_voice_check_remeasured": false,
+    "unique_synthetic_targets_repeated_across_conditions": 32,
+    "unrestricted_corpus_blind_validation": false
+  },
+  "sources": [
+    {
+      "license": "CC-BY-4.0",
+      "object_bytes": 463813718,
+      "object_sha256": "4f64d2912e134fd4e39bbba91a4e6e38637e93e43285f2951d93d48efa0efb16",
+      "object_url": "https://huggingface.co/datasets/openslr/librispeech_asr/resolve/71cacbfb7e2354c4226d01e70d77d5fca3d04ba1/clean/train.360/0004.parquet",
+      "publisher": "OpenSLR LibriSpeech",
+      "role": "foreground",
+      "terms_url": "https://www.openslr.org/12/"
+    },
+    {
+      "license": "CC-BY-SA-3.0",
+      "object_sha256": "f687c0806b0e9731b71a9c01c6134a21330efc5fa4aa7ee97cf4df276ad1dae1",
+      "object_url": "https://zenodo.org/records/1227121/files/DWASHING_16k.zip",
+      "publisher": "DEMAND",
+      "role": "appliance_background"
+    },
+    {
+      "license": "CC-BY-SA-3.0",
+      "object_sha256": "98e3a3f05a7234ea07619d965bafeea68a100bbce5c9269b7487393e3b559660",
+      "object_url": "https://zenodo.org/records/1227121/files/NRIVER_16k.zip",
+      "publisher": "DEMAND",
+      "role": "water_background"
+    },
+    {
+      "license": "CC-BY-SA-3.0",
+      "object_url": "https://zenodo.org/records/1227121/files/PRESTO_48k.zip",
+      "published_object_md5": "6e9fef96d78e636029fd4c5929b9cece",
+      "publisher": "DEMAND",
+      "role": "restaurant_background"
+    }
+  ]
+}

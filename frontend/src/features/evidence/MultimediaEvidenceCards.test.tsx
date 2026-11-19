@@ -60,16 +60,18 @@ describe('ordinary multimedia evidence', () => {
     expect(within(insufficient).getByText(/Original ticks \[96000, 480000\) at 1\/48000/)).toBeTruthy()
   })
 
-  it.each(['timing', 'articulation', 'movement', 'aac441'] as const)('links speech and mouth ranges to exact crops and audio (%s)', (method) => {
+  it.each(['timing', 'articulation', 'movement', 'aac441', 'default-track'] as const)('links speech and mouth ranges to exact crops and audio (%s)', (method) => {
     const previous = video.packets[0]
     const mismatch = method !== 'timing'
-    const movement = method === 'movement' || method === 'aac441'
+    const movement = method === 'movement' || method === 'aac441' || method === 'default-track'
     const title = movement ? 'Local sound and mouth movement mismatch'
       : method === 'articulation' ? 'Local speech and mouth mismatch' : 'Local speech and mouth timing change'
     const schema = { timing: 'chipmunk.video-lip-timing/2', articulation: 'chipmunk.video-lip-timing/3',
-      movement: 'chipmunk.video-lip-timing/6', aac441: 'chipmunk.video-lip-timing/10' }[method]
+      movement: 'chipmunk.video-lip-timing/6', aac441: 'chipmunk.video-lip-timing/10',
+      'default-track': 'chipmunk.video-lip-timing/11' }[method]
     show({ ...video, lip_timing_review: { schema,
-      status: 'matched', observation: title, affects_overall_confidence: false },
+      status: 'matched', observation: title, affects_overall_confidence: false,
+      ...(method === 'default-track' && { selected_audio: { source_stream_index: 2, source_stream_position: 1 } }) },
       packets: [{ ...previous, id: 'VLT01', title, claim_scope: 'sampled_window',
         observation: 'Audio source time 0.680–1.400 s. Corresponding picture time 0.520–1.240 s.',
         lip_timing_review: { audio_source_pts: [10880, 22400], picture_source_samples: [8320, 19840], change_samples: mismatch ? 0 : 2560,
@@ -80,6 +82,7 @@ describe('ordinary multimedia evidence', () => {
       }],
     })
     const coverage = within(screen.getByRole('region', { name: mismatch ? 'Speech and mouth comparison' : 'Speech and mouth timing trial' }))
+    expect(Boolean(coverage.queryByText(/default audio track 2.*Dubbing, commentary/))).toBe(method === 'default-track')
     const link = coverage.getByRole('link', { name: 'Inspect source frames and waveform' })
     expect(link.getAttribute('href')).toBe('#media-evidence-VLT01')
     const evidence = within(screen.getByRole('article'))

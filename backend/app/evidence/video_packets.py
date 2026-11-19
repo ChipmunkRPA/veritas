@@ -825,6 +825,8 @@ def _lip_timing_packet(db, store, analysis, set_id, source, table, review, decod
                        "region_meaning": "measured_mouth_region",
                        "artifact_refs": {"original": original_key, "context": original_key, "crop": crop_key}})
     pcm, mapping = audio_packets._input(store, analysis, audio_input)
+    if (selected := review.get(binding.SELECTED_AUDIO)) is not None and binding.selected_audio(mapping) != selected:
+        raise PacketIntegrityError("Lip timing audio differs from the selected source track")
     sound = audio_assets(pcm, mapping, review)
     a, b = review["measurement"]["span"]
     assets[binding.CLIP] = audio_packets._asset(db, store, analysis, set_id, sound[binding.CLIP], "audio/wav",
@@ -1288,7 +1290,9 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if single_boundary is not None:
         document["packets"].append(_single_face_boundary_packet(db, store, analysis, set_id, source, single_boundary, anchors, decoded))
     for packet_id, review in timing_intervals:
-        audio_input = (result.get("manifest", {}).get("sampling", {}).get("video_audio_evidence") or {})["input"]
+        sampling = result["manifest"]["sampling"]
+        audio_input = (sampling[video_viseme_binding.SELECTED_INPUT] if review.get(video_viseme_binding.SELECTED_AUDIO) is not None
+                       else sampling["video_audio_evidence"]["input"])
         document["packets"].append(_lip_timing_packet(db, store, analysis, set_id, source, table, review, decoded, audio_input,
                                                       packet_id=packet_id))
     if VERSION in NESTED_VERSIONS:

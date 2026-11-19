@@ -83,6 +83,7 @@ export interface VideoEvidenceSet extends SetBase {
   schema: 'chipmunk.video-evidence/1'; packets: VideoEvidencePacket[]; omitted_candidates: number
   lip_timing_review?: {
     schema?: string; status: string; observation: string; affects_overall_confidence: false
+    selected_audio?: { source_stream_index: number; source_stream_position: 1 }
     shot_coverage?: { frames: [number, number]; audio_samples: [number, number]; observation: string; exhibit: string | null }[]
   }
   source: { sha256: string; time_base?: string; width?: number; height?: number; timeline_origin_s?: number | null }

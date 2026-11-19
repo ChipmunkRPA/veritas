@@ -42,7 +42,7 @@ def supported_aac441_motion(table, mapping, shots, shot_frames):
     if (table is None or not mapping or shots != [[0, len(table)]] or shot_frames != len(table)
             or table.truncated or table.interpolated or table.rotation
             or (table.width, table.height) != (table.coded_width, table.coded_height)
-            or mapping.get("audio_stream_indices")):
+            or mapping.get("audio_stream_indices") and binding.selected_audio(mapping) is None):
         return False
     origin = binding.audio_origin(mapping)
     return agreement.silence_carrier(mapping, origin) == "aac441" and agreement.aac441_motion_picture(
@@ -177,7 +177,8 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None, 
                "motion_only": motion_only,
                "motion_models": str(agreement_models.resolve())
                if not shot_based_silence and (agreement_profile or motion_only) and agreement_models
-               and not mapping.get("audio_stream_indices") else None}
+               and (not mapping.get("audio_stream_indices") or (motion_only and binding.selected_audio(mapping) is not None))
+               else None}
     try:
         raw = _observe(request, budget)
         if settings.video_lip_silent_mouth_review and stereo_scope is None and not motion_only:
@@ -195,6 +196,30 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None, 
     return measured
 
 
+def assess_default_aac441(ctx, frame_store, first_mapping, shots, shot_frames):
+    """Review a qualified second soundtrack without changing the regular first-track analysis."""
+    from app.detectors.audio.decode import decode_default_second_aac441
+    from app.evidence.video_audio import freeze_input
+
+    if (frame_store is None or not first_mapping or first_mapping.get("source_sample_rate") != agreement.AAC_44100_RATE
+            or len(first_mapping.get("audio_stream_indices", ())) != 2):
+        return None
+    table = frame_store.table
+    if (shots != [[0, len(table)]] or shot_frames != len(table)
+            or (table.width, table.height) != (720, 480) or not 34 <= len(table) <= 120):
+        return None
+    try:
+        decoded = decode_default_second_aac441(frame_store.path, source_sha256=first_mapping["source_sha256"])
+    except (OSError, ValueError, RuntimeError):
+        return None
+    if (decoded is None or decoded.mapping["audio_stream_indices"] != first_mapping["audio_stream_indices"]
+            or not supported_aac441_motion(table, decoded.mapping, shots, shot_frames)):
+        return None
+    frozen = freeze_input(ctx, decoded, allow_repeats=False)
+    timing = assess(ctx, frame_store, decoded.mapping, frozen["input"], shots, shot_frames=shot_frames)
+    return timing, frozen
+
+
 def audio_assets(pcm, mapping, record):
     from app.detectors.audio.decode import wav_bytes
     from app.evidence.audio_packets import _chart
@@ -208,6 +233,9 @@ def audio_assets(pcm, mapping, record):
             or presented != record["inputs"]["samples"] or not 0 <= start < end <= presented
             or record["witness"]["audio_source_pts"] != [origin + start, origin + end]):
         raise ValueError("The timing excerpt differs from its frozen soundtrack")
+    if (record["schema"] == binding.SCHEMA_WITH_DEFAULT_AAC441_MOTION
+            and binding.selected_audio(mapping) != record[binding.SELECTED_AUDIO]):
+        raise ValueError("The timing excerpt differs from its selected default soundtrack")
     if silent.KEY in record["witness"] and sound_levels(pcm, presented) != record["inputs"]["sound_levels"]:
         raise ValueError("The near-silent interval differs from its frozen soundtrack levels")
     return {

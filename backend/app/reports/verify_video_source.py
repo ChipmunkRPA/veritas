@@ -254,6 +254,23 @@ def _verify_picture_hold(evidence, table, observations) -> None:
         raise ValueError("The longest repeated picture differs from the original video")
 
 
+def _decode_lip_soundtrack(path: Path, digest: str, record: dict, first_source: dict):
+    from app.detectors.audio.decode import VIDEO_AUDIO_MAX_SECONDS, decode_audio, decode_default_second_aac441
+
+    if record["schema"] == video_viseme_binding.SCHEMA_WITH_DEFAULT_AAC441_MOTION:
+        decoded = decode_default_second_aac441(path, source_sha256=digest)
+        selected = record.get(video_viseme_binding.SELECTED_AUDIO)
+        if decoded is None or selected is None or video_viseme_binding.selected_audio(decoded.mapping) != selected:
+            raise ValueError("The original video does not reproduce the timing review's selected default soundtrack")
+        return decoded, selected
+
+    stereo = record.get("stereo_scope")
+    activity = record["inputs"].get(video_viseme_binding.ACTIVITY_KEY)
+    decoded = decode_audio(path, source_sha256=digest, max_seconds=VIDEO_AUDIO_MAX_SECONDS,
+                           inspect_stereo=stereo is not None, retain_stereo=bool(stereo or activity))
+    return decoded, first_source
+
+
 def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if bundle.get("schema") != SCHEMA or bundle.get("analysis", {}).get("kind") != "video":
         raise ValueError("Original-video verification requires a public video evidence package")
@@ -346,6 +363,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     scene_return_binding.validate_coverage(evidence, canonical_hash=canonical_hash, pts=table.pts)
     video_viseme_binding.validate(evidence, timestamps=table.pts)
     lip_timing = evidence.get(video_viseme_binding.KEY) or {}
+    default_second = lip_timing.get("schema") == video_viseme_binding.SCHEMA_WITH_DEFAULT_AAC441_MOTION
     timing_frames = {row["index"]: row for row in lip_timing.get("inputs", {}).get("frames", []) if row["gap_units"] is not None}
     scene_coverage = (evidence.get("coverage") or {}).get(scene_return_binding.COVERAGE) or {}
     scene_committed = source.get(scene_return_binding.COMMITMENT)
@@ -701,7 +719,6 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
         verify_eye_measurements(eye_pictures, eye_match)
     if lip_timing.get("inputs"):
-        from app.detectors.audio.decode import VIDEO_AUDIO_MAX_SECONDS, decode_audio
         from app.detectors.video.viseme_review import audio_assets
         from app.detectors.video.viseme_stereo import capture
         from app.evidence import video_lip_agreement as agreement
@@ -709,8 +726,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
         activity = lip_timing["inputs"].get(video_viseme_binding.ACTIVITY_KEY)
         stereo_scope = lip_timing.get("stereo_scope")
-        decoded_audio = decode_audio(original, source_sha256=digest, max_seconds=VIDEO_AUDIO_MAX_SECONDS,
-                                     inspect_stereo=stereo_scope is not None, retain_stereo=bool(stereo_scope or activity))
+        decoded_audio, timing_source = _decode_lip_soundtrack(original, digest, lip_timing, evidence["audio"]["source"])
         if stereo_scope is not None and capture(decoded_audio) != stereo_scope:
             raise ValueError("The original video does not reproduce the timing review's stereo channel measurements")
         limit = video_viseme_binding.sample_limit(lip_timing)
@@ -739,17 +755,17 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         if decoded_audio.mapping.get(agreement.AAC_44100_CLOCK):
             clock_fields += video_viseme_binding.AAC_44100_PRESENTATION_FIELDS
         if "source_duration_pts" in decoded_audio.mapping and any(
-            decoded_audio.mapping[key] != evidence["audio"]["source"].get(key)
+            decoded_audio.mapping[key] != timing_source.get(key)
             for key in clock_fields
         ):
             raise ValueError("The timing review's AAC presentation clock differs from the original")
         if {agreement.KEY, silent.SHOT_KEY} & lip_timing["inputs"].keys() and (
-            decoded_audio.mapping.get("source_codec") != evidence["audio"]["source"].get("source_codec")
-            or decoded_audio.mapping.get("audio_stream_indices")
+            decoded_audio.mapping.get("source_codec") != timing_source.get("source_codec")
+            or (not default_second and decoded_audio.mapping.get("audio_stream_indices"))
         ):
             raise ValueError("The timing review's mono soundtrack format differs from the original")
         shot_cover = lip_timing.get("shot_coverage")
-        motion_aac441 = lip_timing.get("schema") == video_viseme_binding.SCHEMA_WITH_AAC441_MOTION
+        motion_aac441 = default_second or lip_timing["schema"] == video_viseme_binding.SCHEMA_WITH_AAC441_MOTION
         if shot_cover or motion_aac441:
             from app.detectors.video.shots import detect_shots
 
@@ -829,7 +845,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             + (" Recomputed the held mouth-region pixel measurements." if local_mouth and local_mouth["match"] else "")
             + (" Recomputed the held eye-region pixel measurements." if eye_match is not None else
                " Verified the eye-region input clock and pictures." if eye_limit else "")
-            + (f" Verified the timing review's soundtrack and {len(timing_frames)} native mouth crops."
+            + (f" Verified the timing review's {'default second ' if default_second else ''}"
+               f"soundtrack and {len(timing_frames)} native mouth crops."
                if lip_timing.get("inputs") else "")
             + (" Recomputed the exact moving-sequence comparison." if sequence is not None else "")
             + (" Replayed the motion-aware moving-sequence checks." if motion_records else ""))

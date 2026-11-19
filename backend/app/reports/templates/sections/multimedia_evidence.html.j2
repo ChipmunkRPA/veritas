@@ -388,8 +388,9 @@
 {% endif %}
 {% if evidence.get('lip_timing_review') %}
 {% set review = evidence.lip_timing_review %}
-<h3>{% if review.schema == 'chipmunk.video-lip-timing/8' %}Speech activity and visible mouth movement{% elif review.schema in ['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4', 'chipmunk.video-lip-timing/5', 'chipmunk.video-lip-timing/6', 'chipmunk.video-lip-timing/7', 'chipmunk.video-lip-timing/10'] %}Speech and mouth comparison{% else %}Speech and mouth timing trial{% endif %}</h3>
+<h3>{% if review.schema == 'chipmunk.video-lip-timing/8' %}Speech activity and visible mouth movement{% elif review.schema in ['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4', 'chipmunk.video-lip-timing/5', 'chipmunk.video-lip-timing/6', 'chipmunk.video-lip-timing/7', 'chipmunk.video-lip-timing/10', 'chipmunk.video-lip-timing/11'] %}Speech and mouth comparison{% else %}Speech and mouth timing trial{% endif %}</h3>
 <p class="caption">{{ review.observation }}{% if review.status == 'matched' and not review.get('shot_coverage') %} See <a href="#multimedia-evidence-VLT01">VLT01</a> for the original frames and waveform.{% endif %}</p>
+{% if review.get('selected_audio') %}<p class="caption">Compared the picture with default audio track {{ review.selected_audio.source_stream_position + 1 }}. Dubbing, commentary, or a different voice can affect this comparison.</p>{% endif %}
 {% if review.get('shot_coverage') %}
 {% for shot in review.shot_coverage %}
 <p class="caption">{{ '%.3f' | format(shot.audio_samples[0] / 16000) }}–{{ '%.3f' | format(shot.audio_samples[1] / 16000) }} s. {{ shot.observation }}.{% if shot.exhibit %} See <a href="#multimedia-evidence-{{ shot.exhibit }}">{{ shot.exhibit }}</a> for the original frames and waveform.{% endif %}</p>

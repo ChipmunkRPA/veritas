@@ -419,13 +419,22 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         if video_viseme_binding.KEY in packet:
             from app.detectors.audio.decode import read_wav
             from app.detectors.video.viseme_review import audio_assets
+            from app.evidence.audio_packets import PacketIntegrityError, _input_for_source
 
-            sound = document["audio"]["source"]
-            pcm = read_wav(_bytes(sound["wav_sha256"], store))
             try:
                 review = dict(video_viseme_binding.exhibits(document[video_viseme_binding.KEY]))[packet["id"]]
+                if review.get(video_viseme_binding.SELECTED_AUDIO) is not None:
+                    frozen = result if result is not None else json.loads(_bytes(document["original_result_hash"], store))
+                    key = video_viseme_binding.SELECTED_INPUT
+                    binding = frozen["manifest"]["sampling"][key]
+                    if binding != records["render"].get(key):
+                        raise ValueError("Selected soundtrack differs from the frozen rendering input")
+                    pcm, sound = _input_for_source(store, source["sha256"], binding)
+                else:
+                    sound = document["audio"]["source"]
+                    pcm = read_wav(_bytes(sound["wav_sha256"], store))
                 expected = audio_assets(pcm, sound, review)
-            except (KeyError, ValueError) as error:
+            except (KeyError, ValueError, PacketIntegrityError) as error:
                 raise ObjectIntegrityError("Lip timing audio differs from the frozen soundtrack") from error
             if any(assets[packet["artifacts"][role]["sha256"]] != data for role, data in expected.items()):
                 raise ObjectIntegrityError("Lip timing audio or waveform differs from the frozen soundtrack")

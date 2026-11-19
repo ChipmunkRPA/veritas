@@ -147,10 +147,16 @@ replay-evidence:  ## recount published image, video, audio, and writing evaluati
 		docs/evaluation-panels/image-jpeg90-progressive-2026-11-18.json.gz
 	python3 -I -S backend/scripts/review_video_lip_motion_aac441.py \
 		docs/evaluation-panels/video-lip-motion-aac441-transfer-2026-11-18.json.gz
+	python3 -I -S backend/scripts/review_video_default_audio_motion.py \
+		docs/evaluation-panels/video-default-audio-motion-2026-11-18.json.gz
 	python3 -I -S backend/scripts/review_audio_native12_dense_reference.py \
 		docs/evaluation-panels/audio-dense-native12-reference-2026-11-18.json
 	python3 -I -S backend/scripts/review_audio_native12_dense_confirmation.py \
 		docs/evaluation-panels/audio-dense-native12-confirmation-2026-11-18.json
+	python3 -I -S backend/scripts/review_audio_standalone_recurrent_view.py \
+		docs/evaluation-panels/audio-standalone-recurrent-view-2026-11-18.json
+	python3 -I -S backend/scripts/review_image_jpeg_rank_smoothing.py \
+		docs/evaluation-panels/image-jpeg-rank-smoothing-2026-11-18.json.gz
 	python3 -I -S backend/scripts/review_writing_joss_disclosures.py \
 		docs/evaluation-panels/writing-joss-disclosures-2026-11-18.json
 

@@ -45,11 +45,13 @@ class AudioStreamUnavailable(ValueError):
     """The container has no audio stream to decode."""
 
 
-def _probe(path: Path, *, exact_duration: bool = False) -> dict:
+def _probe(path: Path, *, exact_duration: bool = False, stream_dispositions: bool = False) -> dict:
     fields = "index,channels,channel_layout,sample_rate,codec_name,bit_rate,bits_per_raw_sample,time_base,start_pts,duration"
     if exact_duration:
         fields += ",duration_ts,profile"
     entries = f"stream={fields}:format=format_name,start_time,duration"
+    if stream_dispositions:
+        entries += ":stream_disposition=default,dub,comment,descriptions,clean_effects"
     probe = subprocess.run(["ffprobe", "-v", "error", "-protocol_whitelist", "file", "-select_streams", "a",
                             "-show_entries", entries, "-of", "json", _input(path)],
                            capture_output=True, text=True, timeout=60, check=True, stdin=subprocess.DEVNULL)
@@ -97,6 +99,21 @@ def audio_stream_indices(path: Path) -> tuple[int, ...]:
         return tuple(int(stream["index"]) for stream in _probe(path).get("streams", ()))
     except (subprocess.SubprocessError, TypeError, ValueError, KeyError, OSError) as error:
         raise ValueError("The audio stream inventory could not be read") from error
+
+
+def _default_second_aac441(info):
+    streams = info.get("streams") or []
+    container = info.get("format") or {}
+    if (len(streams) != 2 or container.get("format_name") != AAC_CONTAINER or container.get("start_time") != "0.000000"
+            or [stream.get("disposition", {}).get("default") for stream in streams] != [0, 1]):
+        return False
+    if any(streams[1]["disposition"].get(flag) for flag in ("dub", "comment", "descriptions", "clean_effects")):
+        return False
+    fields = ("codec_name", "profile", "channels", "channel_layout", "sample_rate", "time_base", "start_pts")
+    expected = ("aac", "LC", 1, "mono", str(AAC_44100_RATE), f"1/{AAC_44100_RATE}", 0)
+    return all(tuple(stream.get(key) for key in fields) == expected
+               and type(stream.get("duration_ts")) is int
+               and 20_000 <= stream["duration_ts"] * SAMPLE_RATE // AAC_44100_RATE <= 64_000 for stream in streams)
 
 
 @dataclass(frozen=True)
@@ -239,7 +256,7 @@ def decode_native_stereo(path: Path, mapping: dict[str, Any], *, aac: bool = Fal
 
 def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
                  inspect_stereo: bool = False, stream_position: int = 0,
-                 retain_stereo: bool = False) -> DecodedAudio:
+                 retain_stereo: bool = False, verify_default_second_aac441: bool = False) -> DecodedAudio:
     if not (0 < max_seconds <= 600):
         raise ValueError("Audio decoding is bounded to 600 seconds")
     if not shutil.which("ffmpeg") or not shutil.which("ffprobe"):
@@ -250,8 +267,11 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
     if type(stream_position) is not int or stream_position < 0:
         raise ValueError("Invalid audio stream position")
     try:
-        info = _probe(path, exact_duration=True)
+        info = _probe(path, exact_duration=True, stream_dispositions=True) if verify_default_second_aac441 else _probe(
+            path, exact_duration=True)
         streams = info.get("streams") or []
+        if verify_default_second_aac441 and (stream_position != 1 or not _default_second_aac441(info)):
+            raise AudioStreamUnavailable("The second audio stream is outside the verified default-track scope")
         if not streams:
             raise AudioStreamUnavailable("The file has no audio stream")
         if stream_position >= len(streams):
@@ -276,7 +296,7 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
             and (six_second_lossless or (longer_extent and max_seconds >= 15 and (lossless_clock or aac_clock)))
         )
         inspect_aac441_clock = (
-            aac_clock and len(streams) == 1
+            aac_clock and (len(streams) == 1 or verify_default_second_aac441)
             and (stream.get("channels"), stream.get("sample_rate"), stream.get("time_base"))
             == (1, str(AAC_44100_RATE), f"1/{AAC_44100_RATE}")
             and type(native_extent) is int and native_extent > 0
@@ -370,13 +390,17 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
             mapping[LOSSLESS_NATIVE_CLOCK] = True
         if native_clock_verified and inspect_aac441_clock:
             mapping[AAC_44100_CLOCK] = True
+            if verify_default_second_aac441:
+                mapping.update(default_audio_dispositions=[0, 1], source_stream_position=stream_position)
         if mapping["source_codec"] == "mp3":
             mapping["source_container"] = fmt.get("format_name")
             bit_rate = _number(stream.get("bit_rate"))
             mapping["source_bit_rate"] = int(bit_rate) if bit_rate is not None else None
         if len(streams) > 1:
             mapping["audio_stream_indices"] = [int(track["index"]) for track in streams]
-        if stream_position:
+        if verify_default_second_aac441:
+            mapping["transform"] = mapping["transform"].replace("First audio stream", "Default second audio stream", 1)
+        elif stream_position:
             mapping["transform"] = mapping["transform"].replace("First audio stream", "Selected audio stream", 1)
         verified_stereo = None
         if inspect_stereo:
@@ -389,6 +413,16 @@ def decode_audio(path: Path, *, source_sha256: str, max_seconds: float = 600.0,
         return DecodedAudio(pcm, wav_bytes(pcm), mapping, verified_stereo)
     except (subprocess.SubprocessError, json.JSONDecodeError, KeyError, IndexError, OSError) as exc:
         raise ValueError("The audio stream could not be decoded with a verified sample timeline") from exc
+
+
+def decode_default_second_aac441(path: Path, *, source_sha256: str) -> DecodedAudio | None:
+    """Decode the unique default second soundtrack with its exact native and mono clocks."""
+    try:
+        decoded = decode_audio(path, source_sha256=source_sha256, max_seconds=4.1, stream_position=1,
+                               verify_default_second_aac441=True)
+    except AudioStreamUnavailable:
+        return None
+    return decoded if decoded.mapping.get(AAC_44100_CLOCK) is True else None
 
 
 def source_ranges(mapping: dict[str, Any], start: int, end: int) -> list[dict[str, Any]]:

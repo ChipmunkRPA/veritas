@@ -239,11 +239,15 @@ def validate_content(document: dict[str, Any]) -> None:
 
 
 def _input(store: ObjectStore, analysis: Analysis, binding: dict[str, Any]) -> tuple[np.ndarray, dict[str, Any]]:
-    _verified(store, analysis.sha256)
+    return _input_for_source(store, analysis.sha256, binding)
+
+
+def _input_for_source(store: ObjectStore, source_sha256: str, binding: dict[str, Any]) -> tuple[np.ndarray, dict[str, Any]]:
+    _verified(store, source_sha256)
     mapping = json.loads(_verified(store, binding["mapping_sha256"]))
     pcm = read_wav(_verified(store, binding["wav_sha256"]))
     actual = hashlib.sha256(pcm.astype("<f4").tobytes()).hexdigest()
-    if (mapping.get("version") != "audio-input/1" or mapping.get("source_sha256") != analysis.sha256
+    if (mapping.get("version") != "audio-input/1" or mapping.get("source_sha256") != source_sha256
             or binding.get("version") != "audio-input/1" or binding.get("pcm_sha256") != actual
             or mapping.get("pcm_sha256") != actual or mapping.get("samples") != len(pcm)
             or binding.get("samples") != len(pcm) or binding.get("sample_rate") != SAMPLE_RATE

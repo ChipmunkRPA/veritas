@@ -59,6 +59,9 @@ how negation and quoted examples affect automated interpretation.
 The [minimal writing edit trial](writing-mmwr-minimal-edits-2026-11-18.md)
 checks how short excerpts, full articles, and exact changed-word geometry
 affect localization. It includes an ordinary correction from an official erratum.
+The [archived wording collision pilot](writing-wiked-origin-collisions-2026-11-18.md)
+shows how separately produced edits can yield the same text and exact source
+positions as an archived revision.
 
 The [supplied-reference audio comparison](audio-short-window-reader-holdout-2026-11-18.md#supplied-reference-under-strong-background-noise)
 compares a dry earlier copy with an earlier copy that shares the exact same
@@ -67,6 +70,9 @@ background. It verifies exact sample ranges in both source recordings.
 The [paired 44.1 kHz video timing replay](video-lip-motion-aac441-transfer-2026-11-18.md#recount-the-paired-result)
 recounts local motion and speech timing across two matched audio encodings,
 with ordinary timing and gain controls on the same picture clock.
+The [default-track replay](video-default-audio-motion-2026-11-18.md#recount)
+checks the same timing evidence on two-track video and includes ambiguous
+track selection and ordinary alternate voices as controls.
 
 The [denser twelve-second audio comparison](audio-dense-native12-reference-2026-11-18.md#independent-source-replay-and-public-recount)
 recounts new speech locations against a clean earlier copy and checks
@@ -74,6 +80,9 @@ how the same approach responds to ordinary processing and incorrect copies.
 The [prospective confirmation](audio-dense-native12-confirmation-2026-11-18.md#native-replay-and-public-reproducibility)
 recounts 1,264 paired comparisons with new readers and three noise conditions.
 It includes local application and original-file verification instructions.
+The [standalone background-reduction pilot](audio-standalone-recurrent-view-2026-11-18.md)
+checks whether recurrent background subtraction locates more replacements
+from the submitted recording alone.
 
 The [statistical reporting replay](document-chi-square-2026-11-18.md#replay-the-measurements)
 checks published numerical discrepancies and staged controls against the
@@ -85,6 +94,9 @@ reproduces the paired sample-range counts for 160 Opus deliveries.
 The [same-photo reconstruction replay](image-vae-double-jpeg-2026-11-18.md#replay)
 compares two- and three-class readings over the same exact edit area
 after one and two JPEG encodes.
+The [JPEG smoothing replay](image-jpeg-rank-smoothing-2026-11-18.md)
+checks whether either neighborhood statistic ranks known local edits above
+unrelated regions.
 
 The [progressive JPEG transport replay](image-cross-quality-2026-11-16.md#progressive-jpeg-transport)
 checks 360 lossless scan conversions against the frozen baseline deliveries,

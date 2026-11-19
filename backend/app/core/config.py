@@ -286,6 +286,7 @@ class Settings(BaseSettings):
     video_lip_articulation_review: bool = False  # Compare visible mouth opening with brief speech events.
     video_lip_aac48_articulation_review: bool = False  # Admit that comparison on verified mono 48 kHz AAC.
     video_lip_aac441_motion_review: bool = False  # Compare speech and mouth motion on qualified 720 × 480 mono 44.1 kHz AAC clips.
+    video_lip_aac441_default_track_review: bool = False  # Compare a unique default second soundtrack on qualified 44.1 kHz AAC clips.
     video_lip_silent_mouth_review: bool = False  # Check for near-silent sound during visible mouth movement.
     video_lip_stereo_aac_review: bool = False  # Admit verified stereo when both channels support the analyzed mix.
     video_lip_motion_sound_models: Path | None = None  # Pinned local mouth and sound projections for short mono video.

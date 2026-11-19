@@ -50,6 +50,29 @@ cadences, and general detection accuracy remain unmeasured here.
 The camera sources and replay implementations were separate from the held
 swap trial. The project team ran both trials locally.
 
+## Local analysis
+
+`VERITAS_VIDEO_FACE_MATCHED_DETAIL_HEVC_REVIEW=true` enables the additional
+check in Full analyses on a development instance. It requires an upright,
+square-pixel, 1280 × 720 MP4 with one 8-bit `hvc1` video track, no audio, and
+120 exact 25 fps pictures starting at zero on the 90 kHz source clock.
+The report identifies the exact start and exclusive end and includes the
+original pictures and face crops from before, during and after the change.
+The check carries zero weight in the overall assessment. It reuses the
+existing pinned face weights. [Face and appearance model terms](../THIRD_PARTY_NOTICES.md)
+
+The local app replay opened eight test results in Chrome, including both
+held HEVC ranges, the highlighted ordinary blur, and both earlier AVC
+formats. The browser matched the before, during and after images and
+sought to the reported start. All eight PDF and JSON packages verified
+against their originals. A separate replay with the older optional AVC
+checks off reproduced the first range and preserved the known hard cut.
+The out-of-scope tests covered `hev1`, an unsupported source clock, and
+an added AAC track. The 18 simulated
+checkouts started zero jobs before payment. Turning the option on left
+the existing overall assessment identical in each of the four paired tests.
+[App verification receipt](evaluation-panels/video-short-face-hevc-25-local-analysis-2026-11-19.json)
+
 ```sh
 python3 -B -I -S backend/scripts/review_hevc_ordinary_confirmation.py \
   docs/evaluation-panels/video-short-face-hevc-25-ordinary-2026-11-19.json

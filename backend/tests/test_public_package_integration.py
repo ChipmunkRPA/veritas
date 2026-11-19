@@ -658,7 +658,7 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
     elif name == 'face_matched_detail_binding.py':
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.evidence.video_packet_versions', item)
-                         for item in ('MATCHED_DETAIL_AVC_VERSION', 'MATCHED_DETAIL_NATIVE25_VERSION')}
+                         for item in ('MATCHED_DETAIL_AVC_VERSION', 'MATCHED_DETAIL_NATIVE25_VERSION', 'MATCHED_DETAIL_HEVC25_VERSION')}
     elif name in {'document_saved_link_hosts_binding.py', 'document_word_reference_cache_binding.py', 'document_pdf_form_binding.py'}:
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.core.canonical', 'canonical_hash')}

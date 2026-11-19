@@ -6,6 +6,7 @@ import shutil
 import subprocess
 from copy import deepcopy
 from hashlib import sha256
+from types import SimpleNamespace
 
 import cv2
 import numpy as np
@@ -14,7 +15,11 @@ import pytest
 from app.core.canonical import canonical_hash
 from app.detectors.video import face_matched_detail as detector
 from app.detectors.video import frames as video_frames
+from app.detectors.video.adapters import face_appearance
 from app.detectors.video.decode import FrameTable, probe_frames
+from app.engine.boundary import Deadline
+from app.engine.detector import Profile, StageOutputs
+from app.engine.stages import video as video_stages
 from app.evidence import face_matched_detail_binding as binding
 from app.evidence import mp4_source_clock, video_packets
 
@@ -53,6 +58,131 @@ def test_matched_detail_scope_distinguishes_exact_25_fps_clocks():
                    {"pts": [i * 1200 for i in range(120)], "time_base": "1/30000"},
                    {"pts": [i * profile.step + 1 for i in range(120)]}):
         assert binding.input_profile(FrameTable.from_json(frames.to_json() | change), binding.AVC, "mp4") is None
+
+
+def test_matched_detail_hevc_scope_requires_hvc1_and_exact_native_geometry():
+    profile = binding.PROFILE_HEVC25
+    table = FrameTable(profile.time_base, tuple(i * profile.step for i in range(120)), (0,), "I" + "P" * 119,
+                       1280, 720, 1280, 720)
+    assert profile.point == binding.PROFILE_25.point
+    assert binding.input_profile(table, binding.HEVC, "mp4") is profile
+    for encoding in (("hevc", "yuv420p", "hev1"), ("hevc", "yuv420p10le", "hvc1")):
+        assert binding.input_profile(table, encoding, "mp4") is None
+    for change in ({"rotation": 90}, {"width": 720}, {"time_base": "1/30000"},
+                   {"pts": [1 + i * profile.step for i in range(120)]}):
+        altered = FrameTable.from_json(table.to_json() | change)
+        assert binding.input_profile(altered, binding.HEVC, "mp4") is None
+
+
+@pytest.mark.skipif(not (shutil.which("ffmpeg") and shutil.which("ffprobe")), reason="requires FFmpeg source replay")
+def test_matched_detail_hevc_rejects_changed_source_track_layout(tmp_path):
+    common = ["ffmpeg", "-nostdin", "-v", "error", "-threads", "1"]
+    encoders = subprocess.check_output([*common, "-encoders"], text=True, timeout=10)
+    if "libx265" not in encoders:
+        pytest.skip("requires an HEVC encoder for the native clock witness")
+    exact = tmp_path / "video-only.mp4"
+    other_tag = tmp_path / "other-tag.mp4"
+    soundtrack = tmp_path / "audio-present.mp4"
+    time_base = ["-video_track_timescale", "90000", "-movie_timescale", "90000", "-use_editlist", "1"]
+    subprocess.run([*common, "-f", "lavfi", "-i", "color=black:size=1280x720:rate=25:duration=4.8",
+                    "-c:v", "libx265", "-preset", "ultrafast", "-threads", "1", "-x265-params",
+                    "pools=none:frame-threads=1:wpp=0:log-level=error", "-pix_fmt", "yuv420p", "-tag:v", "hvc1",
+                    *time_base, str(exact)], check=True, timeout=30)
+    subprocess.run([*common, "-i", str(exact), "-map", "0:v:0", "-c:v", "copy", "-tag:v", "hev1",
+                    *time_base, str(other_tag)], check=True, timeout=20)
+    subprocess.run([*common, "-i", str(exact), "-f", "lavfi", "-i", "anullsrc=r=48000:cl=mono:d=4.8",
+                    "-map", "0:v:0", "-map", "1:a:0", "-c:v", "copy", "-tag:v", "hvc1", "-c:a", "aac",
+                    *time_base, str(soundtrack)], check=True, timeout=20)
+    profile = binding.PROFILE_HEVC25
+    detector.verify_profile(exact, probe_frames(exact), profile)
+    for changed in (other_tag, soundtrack):
+        table = probe_frames(changed)
+        assert table.pts == probe_frames(exact).pts
+        assert mp4_source_clock.verified(changed, table, profile.step)
+        with pytest.raises(ValueError, match="recorded matched-detail profile"):
+            detector.verify_profile(changed, table, profile)
+
+
+@pytest.mark.parametrize(("hevc_enabled", "avc_enabled", "encode", "expected"), [
+    (False, False, binding.HEVC, None),
+    (False, True, binding.HEVC, "profile_avc"),
+    (True, False, binding.HEVC, binding.PROFILE_HEVC25),
+    (True, False, binding.AVC, None),
+    (True, True, binding.AVC, binding.PROFILE_25),
+    (True, False, ("hevc", "yuv420p", "hev1"), "profile_hevc"),
+])
+def test_matched_detail_hevc_uses_separate_opt_in_and_preserves_avc(monkeypatch, hevc_enabled, avc_enabled, encode, expected):
+    settings = face_appearance.settings
+    for name, value in {
+        "environment": "dev", "face_min_size": 48,
+        "video_face_matched_detail_hevc_review": hevc_enabled,
+        "video_face_matched_detail_avc_review": avc_enabled,
+        "video_face_very_brief_avc_review": avc_enabled,
+        "video_face_short_avc_review": avc_enabled,
+    }.items():
+        monkeypatch.setattr(settings, name, value)
+    profile = binding.PROFILE_HEVC25
+    table = FrameTable(profile.time_base, tuple(i * profile.step for i in range(120)), (0,), "I" + "P" * 119,
+                       1280, 720, 1280, 720)
+    inputs = SimpleNamespace(table=table, encoding=encode[:2], codec_tag=encode[2], store=SimpleNamespace(path="source"))
+    ctx = SimpleNamespace(profile=Profile.FULL, deadline=Deadline(30))
+    result = SimpleNamespace(status="ok", details={"incumbent": "retained"})
+    verify = []
+
+    def verify_profile(path, frame_table, received, **kwargs):
+        assert path == "source" and frame_table is table
+        verify.append(received)
+
+    monkeypatch.setattr(detector, "verify_profile", verify_profile)
+    monkeypatch.setattr(detector, "inspect", lambda *args, profile: (None, binding.coverage("no_match", proposed=1, usable=1, profile=profile)))
+    assert face_appearance._with_matched_detail(result, inputs, None, None, ctx) is result
+    assert result.details["incumbent"] == "retained"
+    if isinstance(expected, binding.NativeProfile):
+        assert verify == [expected]
+        assert result.details[binding.COVERAGE] == binding.coverage("no_match", proposed=1, usable=1, profile=expected)
+    elif expected is not None:
+        assert not verify
+        assert result.details[binding.COVERAGE] == binding.coverage("unassessed", expected)
+    else:
+        assert not verify and binding.COVERAGE not in result.details
+
+
+@pytest.mark.parametrize(("encoding", "analysis_profile", "scanned", "expected"), [
+    (binding.HEVC, Profile.FULL, 120, (67,)),
+    (binding.HEVC, Profile.FULL, 119, None),
+    (binding.HEVC, Profile.DEEP, 120, None),
+    (("hevc", "yuv420p", "hev1"), Profile.FULL, 120, None),
+    (binding.AVC, Profile.FULL, 120, None),
+])
+def test_matched_detail_hevc_receives_shot_context_without_avc(monkeypatch, encoding, analysis_profile, scanned, expected):
+    settings = video_stages.settings
+    for name, value in {
+        "environment": "dev", "video_face_matched_detail_hevc_review": True,
+        "video_face_matched_detail_avc_review": False, "video_face_very_brief_avc_review": False,
+        "video_face_short_avc_review": False,
+    }.items():
+        monkeypatch.setattr(settings, name, value)
+    profile = binding.PROFILE_HEVC25
+    table = FrameTable(profile.time_base, tuple(i * profile.step for i in range(120)), (0,), "I" + "P" * 119,
+                       1280, 720, 1280, 720)
+    ctx = SimpleNamespace(profile=analysis_profile, state={
+        "frame_store": SimpleNamespace(table=table),
+        "registry": SimpleNamespace(enabled=lambda *_: [video_stages.APPEARANCE_REVIEW]),
+    }, outputs={"shots": {"frames_scanned": scanned, "boundaries": [{"frame_index": 67}]}})
+    seen = []
+
+    def run_detectors(*args, outputs, **kwargs):
+        if outputs.face_review is not None:
+            seen.append(outputs.face_review.shot_boundaries)
+        return {"detectors": []}
+
+    probe = dict(zip(("codec", "pix_fmt", "codec_tag"), encoding, strict=True))
+    monkeypatch.setattr(video_stages, "_outputs", lambda _: StageOutputs(probe=probe))
+    monkeypatch.setattr(video_stages, "_single_boundary_review", lambda _: {})
+    monkeypatch.setattr(video_stages.common, "run_detectors", run_detectors)
+    monkeypatch.setattr(video_stages.common, "stage_exhibit_list", lambda *_: [])
+    video_stages.detect(ctx)
+    assert seen == [expected]
 
 
 @pytest.mark.skipif(not (shutil.which("ffmpeg") and shutil.which("ffprobe")), reason="requires FFmpeg source replay")
@@ -151,7 +281,7 @@ def test_matched_detail_replays_exact_crops_and_rejects_changed_source(measured_
         binding.validate_record(record | {"scene_cuts": [72]}, SOURCE)
 
 
-@pytest.mark.parametrize("profile", (binding.PROFILE_30, binding.PROFILE_25))
+@pytest.mark.parametrize("profile", (binding.PROFILE_30, binding.PROFILE_25, binding.PROFILE_HEVC25))
 def test_matched_detail_packet_binds_coverage_and_original_views(measured_record, monkeypatch, profile):
     record, original = measured_record
     record.update(method=profile.method, time_base=profile.time_base, start_pts=START * profile.step,
@@ -188,7 +318,7 @@ def test_matched_detail_packet_binds_coverage_and_original_views(measured_record
     binding.validate(document, canonical_hash)
     assert [frame["interval_role"] for frame in packet["frames"]] == ["before", "during", "after"]
     assert [frame["anchor"]["playback_time_s"] for frame in packet["frames"]] == [
-        index / (25 if profile == binding.PROFILE_25 else 30) for index in (72, 74, 76)
+        index / (30 if profile == binding.PROFILE_30 else 25) for index in (72, 74, 76)
     ]
     assert packet["affects_overall_confidence"] is False
     assert len(packet["artifacts"]) == 9
@@ -202,7 +332,7 @@ def test_matched_detail_packet_binds_coverage_and_original_views(measured_record
     packet["frames"][1]["anchor"]["pts"] -= 1000
     record["readings_hex"]["entry"] = record["response_hex"] = 0.15.hex()
     source[binding.COMMITMENT] = canonical_hash(record)
-    if profile == binding.PROFILE_25:
+    if profile != binding.PROFILE_30:
         with pytest.raises(ValueError, match="response differs"):
             binding.validate(document, canonical_hash)
     else:

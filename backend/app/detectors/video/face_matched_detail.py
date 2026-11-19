@@ -309,15 +309,16 @@ def verify_profile(original, table, profile, *, timeout_s=4.0):
     from app.detectors.video.frames import probe as probe_container
     from app.evidence import mp4_source_clock
 
-    native25 = profile == binding.PROFILE_25
-    profile_options = {"include_sample_aspect_ratio": True, "timeout_s": timeout_s} if native25 else {}
+    strict = profile != binding.PROFILE_30
+    profile_options = {"include_sample_aspect_ratio": True, "timeout_s": timeout_s} if strict else {}
+    clock_options = {"video_only": True} if profile == binding.PROFILE_HEVC25 else {}
     info = probe_container(original, include_codec_tag=True, **profile_options)
     encoding = tuple(info.get(key) for key in ("codec", "pix_fmt", "codec_tag"))
     if (
         not binding.eligible(table, encoding, "mp4", profile)
         or info.get("timeline_origin_s") != 0
-        or (native25 and info.get("sample_aspect_ratio") not in {None, "1:1"})
-        or not mp4_source_clock.verified(original, table, profile.step)
+        or (strict and info.get("sample_aspect_ratio") not in {None, "1:1"})
+        or not mp4_source_clock.verified(original, table, profile.step, **clock_options)
     ):
         raise ValueError("Original video differs from the recorded matched-detail profile")
 

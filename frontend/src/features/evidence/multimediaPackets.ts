@@ -49,7 +49,7 @@ export interface VideoEvidencePacket extends PacketBase {
   }
   scene_return?: { schema: 'picture-change-return/1' | 'picture-change-return/2'; start_stream_s: number; end_stream_s: number; tiles: number[] }
   face_matched_detail?: { start_frame_index: number; end_frame_index: number; start_pts: number; end_pts: number } & (
-    { method: 'face-matched-detail/1'; time_base: '1/30000' } | { method: 'face-matched-detail/2'; time_base: '1/90000' }
+    { method: 'face-matched-detail/1'; time_base: '1/30000' } | { method: 'face-matched-detail/2' | 'face-matched-detail/3'; time_base: '1/90000' }
   )
   face_single_boundary?: { method: 'single-face-boundary/1' | 'single-face-boundary/2' | 'single-face-boundary/3' | 'single-face-boundary/4' | 'single-face-boundary/5' | 'single-face-boundary/6';
     boundary: number; pts: number; time_base: string; time_s: number; affects_overall_confidence: false;
@@ -118,8 +118,8 @@ export interface VideoEvidenceSet extends SetBase {
     brief_face_review?: { observations: string[]; affects_overall_confidence: false };
     brief_face_windows?: { observations: string[]; affects_overall_confidence: false };
     face_matched_detail_coverage?: { status: 'localized' | 'no_match' | 'unassessed'; candidate_pairs: number;
-      measured_pairs: number; affects_overall_confidence: false; method?: 'face-matched-detail/2';
-      reason: 'profile' | 'profile_avc' | 'prior_review' | 'shot_context' | 'face_context' | 'time_budget' | 'source_input' | null };
+      measured_pairs: number; affects_overall_confidence: false; method?: 'face-matched-detail/2' | 'face-matched-detail/3';
+      reason: 'profile' | 'profile_avc' | 'profile_hevc' | 'prior_review' | 'shot_context' | 'face_context' | 'time_budget' | 'source_input' | null };
     face_single_boundary_coverage?: { status: 'localized' | 'no_match' | 'unavailable'; frames_scanned: number;
       method?: 'single-face-boundary/2' | 'single-face-boundary/3' | 'single-face-boundary/4' | 'single-face-boundary/5' | 'single-face-boundary/6';
       measured_face_frames: number; reason: 'provenance' | 'profile' | 'unsupported_video' | 'models_unavailable'
@@ -872,6 +872,7 @@ nestedVideoVersions.add('video-evidence-40')
 nestedVideoVersions.add('video-evidence-41')
 nestedVideoVersions.add('video-evidence-42')
 nestedVideoVersions.add('video-evidence-43')
+nestedVideoVersions.add('video-evidence-44')
 export function hasNestedVideoEvidence(version: string): boolean { return nestedVideoVersions.has(version) }
 
 export async function getMultimediaEvidence(analysisId: string, kind: EvidenceKind): Promise<MultimediaEvidenceSet> {

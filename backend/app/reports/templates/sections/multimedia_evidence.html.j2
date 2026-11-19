@@ -450,6 +450,7 @@ JSON pointer <span class="mono">/word_reference_cache/findings/{{ loop.index0 }}
 <h3>Brief face review at matched image detail</h3>
 <p class="caption">{{ review.message }}{% if review.status == 'localized' %} See <a href="#multimedia-evidence-VMD01">VMD01</a> for the exact range and original crops.{% endif %}</p>
 {% if review.get('method') == 'face-matched-detail/2' %}<p class="caption">25 fps source with 120 native frames over 4.8 seconds. The comparison examines short ranges with comparable face views.</p>{% endif %}
+{% if review.get('method') == 'face-matched-detail/3' %}<p class="caption">25 fps HEVC source with 120 native frames over 4.8 seconds. The comparison examines short ranges with comparable face views. Ordinary blur can produce a highlight. This check carries zero AI confidence weight.</p>{% endif %}
 {% if review.candidate_pairs %}<p class="caption">The source supported {{ review.measured_pairs }} of {{ review.candidate_pairs }} proposed ranges for this comparison.</p>{% endif %}
 {% endif %}
 {% if evidence.get('scene_return_review') %}

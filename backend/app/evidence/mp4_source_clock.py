@@ -68,7 +68,8 @@ def _edit(data: bytes) -> tuple[int, int]:
     return duration, start
 
 
-def _check(stream, *, time_base: Fraction, ticks: int, frames: int, width: int, height: int) -> None:
+def _check(stream, *, time_base: Fraction, ticks: int, frames: int, width: int, height: int,
+           video_only: bool = False) -> None:
     size, read, boxes, one, payload = bounded_boxes(stream, label="MP4 source video")
 
     def children(box):
@@ -91,8 +92,10 @@ def _check(stream, *, time_base: Fraction, ticks: int, frames: int, width: int, 
     span = time_base * ticks * frames
     _require(movie_scale > 0 and movie_ticks >= span * movie_scale, "MP4 movie ends before the video")
 
+    tracks = [box for box in movie if box.kind == b"trak"]
+    _require(not video_only or len(tracks) == 1, "The source must have only one video track")
     videos = []
-    for trak in (box for box in movie if box.kind == b"trak"):
+    for trak in tracks:
         track = children(trak)
         media = children(one(track, b"mdia"))
         handler = payload(one(media, b"hdlr"))
@@ -148,7 +151,7 @@ def _check(stream, *, time_base: Fraction, ticks: int, frames: int, width: int, 
     )
 
 
-def verified(path: Path, table, ticks: int) -> bool:
+def verified(path: Path, table, ticks: int, *, video_only: bool = False) -> bool:
     """Check an independently decoded profile against bounded native timing boxes."""
     try:
         with path.open("rb") as stream:
@@ -159,6 +162,7 @@ def verified(path: Path, table, ticks: int) -> bool:
                 frames=len(table),
                 width=table.width,
                 height=table.height,
+                video_only=video_only,
             )
     except (InvalidMP4, OSError):
         return False

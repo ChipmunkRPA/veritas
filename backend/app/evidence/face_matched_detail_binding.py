@@ -7,7 +7,11 @@ import math
 import re
 from dataclasses import dataclass
 
-from app.evidence.video_packet_versions import MATCHED_DETAIL_AVC_VERSION, MATCHED_DETAIL_NATIVE25_VERSION
+from app.evidence.video_packet_versions import (
+    MATCHED_DETAIL_AVC_VERSION,
+    MATCHED_DETAIL_HEVC25_VERSION,
+    MATCHED_DETAIL_NATIVE25_VERSION,
+)
 
 KEY = "face_matched_detail"
 COVERAGE = "face_matched_detail_coverage"
@@ -16,6 +20,7 @@ COVERAGE_COMMITMENT = "face_matched_detail_coverage_sha256"
 COMMITMENTS = (COMMITMENT, COVERAGE_COMMITMENT)
 METHOD = "face-matched-detail/1"
 NATIVE25_METHOD = "face-matched-detail/2"
+HEVC25_METHOD = "face-matched-detail/3"
 PACKET_ID = "VMD01"
 TITLE = "Very brief face appearance change after matching image detail"
 OBSERVATION = (
@@ -29,6 +34,7 @@ SIZE = (1280, 720)
 TIME_BASE = "1/30000"
 TICKS = tuple(i * 1000 for i in range(FRAME_COUNT))
 AVC = ("h264", "yuv420p", "avc1")
+HEVC = ("hevc", "yuv420p", "hvc1")
 POINT = 0.10
 SIGMAS = (0.0, 0.65, 1.0, 1.35, 1.8, 2.4, 3.2, 4.2, 5.0)
 DETAIL_FLOOR = 0.75
@@ -38,6 +44,7 @@ MAX_FACE_READS = 60
 REASONS = {
     "profile": "This check needs a four-second 720p AVC MP4 with verified 30 fps timing.",
     "profile_avc": "This check needs 120 verified 720p AVC MP4 frames at 30 fps (four seconds) or 25 fps (4.8 seconds).",
+    "profile_hevc": "This check needs a verified 4.8-second 720p HEVC MP4 at 25 fps with a single hvc1 video track and no audio.",
     "prior_review": "The brief face appearance review already found a range for this file.",
     "shot_context": "The original pictures did not supply a complete shot review.",
     "face_context": "The source did not supply comparable face views around a selected range.",
@@ -60,6 +67,7 @@ class NativeProfile:
     timescale: int
     step: int
     point: float
+    encoding: tuple[str, str, str] = AVC
 
     @property
     def time_base(self):
@@ -74,13 +82,14 @@ class NativeProfile:
 
 PROFILE_30 = NativeProfile(METHOD, MATCHED_DETAIL_AVC_VERSION, 30000, 1000, POINT)
 PROFILE_25 = NativeProfile(NATIVE25_METHOD, MATCHED_DETAIL_NATIVE25_VERSION, 90000, 3600, 0.20)
-PROFILES = {p.method: p for p in (PROFILE_30, PROFILE_25)}
+PROFILE_HEVC25 = NativeProfile(HEVC25_METHOD, MATCHED_DETAIL_HEVC25_VERSION, 90000, 3600, PROFILE_25.point, HEVC)
+PROFILES = {p.method: p for p in (PROFILE_30, PROFILE_25, PROFILE_HEVC25)}
 VERSIONS = frozenset(p.version for p in PROFILES.values())
 
 
 def eligible(table, encoding, carrier, profile=PROFILE_30):
     return (
-        tuple(encoding) == AVC
+        tuple(encoding) == profile.encoding
         and carrier == "mp4"
         and (table.width, table.height) == (table.coded_width, table.coded_height) == SIZE
         and not (table.rotation or table.interpolated or table.truncated)
@@ -290,7 +299,7 @@ def coverage(status, reason=None, *, proposed=0, usable=0, profile=PROFILE_30):
         "candidate_pairs": proposed,
         "measured_pairs": usable,
         "affects_overall_confidence": False,
-        **({"method": profile.method} if profile == PROFILE_25 else {}),
+        **({"method": profile.method} if profile != PROFILE_30 else {}),
     }
 
 
@@ -333,7 +342,7 @@ def validate(document, digest, *, table_pts=None, interpolated=(), rotation=0, t
         and (status == "unassessed" or seen > 0),
         "Invalid matched-detail coverage",
     )
-    if status != "unassessed" or n or profile == PROFILE_25:
+    if status != "unassessed" or n or profile != PROFILE_30:
         validate_clock(source, table_pts, interpolated=interpolated, rotation=rotation, truncated=truncated, profile=profile)
     if not found:
         return

@@ -772,17 +772,21 @@ def _with_short_proposal(result, inputs, yunet, recognizer, deadline):
 
 def _with_matched_detail(result, inputs, yunet, recognizer, ctx):
     if (settings.environment != "dev" or ctx.profile != Profile.FULL
-            or not settings.video_face_matched_detail_avc_review or not settings.video_face_very_brief_avc_review
-            or not settings.video_face_short_avc_review or settings.face_min_size != 48
+            or settings.face_min_size != 48
             or result.status not in {"ok", "not_applicable"}):
+        return result
+    avc_enabled = (settings.video_face_matched_detail_avc_review and settings.video_face_very_brief_avc_review
+                   and settings.video_face_short_avc_review)
+    hevc = settings.video_face_matched_detail_hevc_review and inputs.encoding[0] == matched_detail.HEVC[0]
+    if not (hevc or avc_enabled):
         return result
     details = result.details
     path = getattr(inputs.store, "path", None)
     profile = matched_detail.input_profile(inputs.table, (*inputs.encoding, inputs.codec_tag), "mp4")
     try:
-        if path is None or profile is None:
+        if path is None or profile is None or (profile == matched_detail.PROFILE_HEVC25 and not hevc):
             raise ValueError("Missing matched-detail source profile")
-        if profile == matched_detail.PROFILE_25:
+        if profile != matched_detail.PROFILE_30:
             clock_budget = min(4.0, ctx.deadline.remaining() - COARSE_RESULT_RESERVE_S)
             if clock_budget <= 0:
                 details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "time_budget")
@@ -791,7 +795,7 @@ def _with_matched_detail(result, inputs, yunet, recognizer, ctx):
         elif not mp4_source_clock.verified(path, inputs.table, profile.step):
             raise ValueError("The original MP4 clock could not be verified")
     except ValueError:
-        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "profile_avc")
+        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "profile_hevc" if hevc else "profile_avc")
         return result
     if details.get("face_return") or details.get("face_return_secondary"):
         details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "prior_review", profile=profile)

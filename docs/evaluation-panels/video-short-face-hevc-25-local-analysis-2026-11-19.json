@@ -1,0 +1,200 @@
+{
+  "checkout": {
+    "amount_minor": 999,
+    "currency": "usd",
+    "jobs_before_payment": 0,
+    "simulated_checkouts": 18
+  },
+  "hevc_enabled_with_older_avc_options_off": {
+    "browser": {
+      "cases": [
+        "matched_swap_gaussian",
+        "ordinary_hard_cut"
+      ],
+      "page_errors": 0
+    },
+    "cases": {
+      "matched_swap_gaussian": {
+        "native_clock": "1/90000",
+        "new_range": [
+          77,
+          81
+        ],
+        "original_assessment_unchanged": true,
+        "pdf_json_agree": true,
+        "signed_original_verified": true,
+        "source_frames": [
+          76,
+          79,
+          81
+        ],
+        "source_image_assets": 6,
+        "status": "localized"
+      },
+      "ordinary_hard_cut": {
+        "new_range": null,
+        "original_assessment_unchanged": null,
+        "pdf_json_agree": true,
+        "signed_original_verified": true,
+        "status": "unassessed"
+      }
+    },
+    "jobs_before_payment": 0,
+    "price_usd_cents": 999,
+    "report_revision": "veritas-report-2.0.r199",
+    "simulated_checkouts": 3
+  },
+  "original_source_replay": {
+    "all_required_native_crops": 46,
+    "avc_native_profile_checks": 10,
+    "avc_source_record_replays": 2,
+    "displayed_before_during_after": 15,
+    "hevc_native_profile_checks": 62,
+    "hevc_source_record_replays": 3
+  },
+  "prior_signed_avc_packages_replayed": 2,
+  "report_revision": "veritas-report-2.0.r199",
+  "schema": "chipmunk.hevc-short-face-local-analysis/1",
+  "standard_run": {
+    "browser": {
+      "cases": [
+        "matched_swap_gaussian",
+        "matched_swap_circle",
+        "ordinary_circle_highlighted",
+        "ordinary_gaussian_measured",
+        "ordinary_hard_cut",
+        "ordinary_untouched",
+        "historical_avc25",
+        "historical_avc30"
+      ],
+      "page_errors": 0
+    },
+    "cases": {
+      "hevc_has_audio": {
+        "coverage_reported": true,
+        "new_range": null,
+        "status": "out_of_scope"
+      },
+      "hevc_unsupported_clock": {
+        "coverage_reported": true,
+        "new_range": null,
+        "status": "out_of_scope"
+      },
+      "hevc_unsupported_tag": {
+        "coverage_reported": false,
+        "new_range": null,
+        "status": "out_of_scope"
+      },
+      "historical_avc25": {
+        "native_clock": "1/90000",
+        "new_range": [
+          97,
+          100
+        ],
+        "original_assessment_unchanged": null,
+        "pdf_json_agree": true,
+        "signed_original_verified": true,
+        "source_frames": [
+          96,
+          98,
+          100
+        ],
+        "source_image_assets": 6,
+        "status": "localized"
+      },
+      "historical_avc30": {
+        "native_clock": "1/30000",
+        "new_range": [
+          73,
+          76
+        ],
+        "original_assessment_unchanged": null,
+        "pdf_json_agree": true,
+        "signed_original_verified": true,
+        "source_frames": [
+          72,
+          74,
+          76
+        ],
+        "source_image_assets": 6,
+        "status": "localized"
+      },
+      "matched_swap_circle": {
+        "native_clock": "1/90000",
+        "new_range": [
+          97,
+          100
+        ],
+        "original_assessment_unchanged": true,
+        "pdf_json_agree": true,
+        "signed_original_verified": true,
+        "source_frames": [
+          96,
+          98,
+          100
+        ],
+        "source_image_assets": 6,
+        "status": "localized"
+      },
+      "matched_swap_gaussian": {
+        "native_clock": "1/90000",
+        "new_range": [
+          77,
+          81
+        ],
+        "original_assessment_unchanged": true,
+        "pdf_json_agree": true,
+        "signed_original_verified": true,
+        "source_frames": [
+          76,
+          79,
+          81
+        ],
+        "source_image_assets": 6,
+        "status": "localized"
+      },
+      "ordinary_circle_highlighted": {
+        "native_clock": "1/90000",
+        "new_range": [
+          73,
+          76
+        ],
+        "original_assessment_unchanged": true,
+        "pdf_json_agree": true,
+        "signed_original_verified": true,
+        "source_frames": [
+          72,
+          74,
+          76
+        ],
+        "source_image_assets": 6,
+        "status": "localized"
+      },
+      "ordinary_gaussian_measured": {
+        "new_range": null,
+        "original_assessment_unchanged": true,
+        "pdf_json_agree": true,
+        "signed_original_verified": true,
+        "status": "no_match"
+      },
+      "ordinary_hard_cut": {
+        "new_range": null,
+        "original_assessment_unchanged": null,
+        "pdf_json_agree": true,
+        "signed_original_verified": true,
+        "status": "unassessed"
+      },
+      "ordinary_untouched": {
+        "new_range": null,
+        "original_assessment_unchanged": null,
+        "pdf_json_agree": true,
+        "signed_original_verified": true,
+        "status": "unassessed"
+      }
+    },
+    "jobs_before_payment": 0,
+    "price_usd_cents": 999,
+    "report_revision": "veritas-report-2.0.r199",
+    "simulated_checkouts": 15
+  }
+}

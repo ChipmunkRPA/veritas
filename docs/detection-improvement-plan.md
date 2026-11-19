@@ -133,6 +133,13 @@ are not public screening promises or calibrated population probabilities.
   ordinary alerts from six to one out of 24 files, with 16 measurable.
   [Fresh 25 fps comparison](video-face-matched-detail-native25-point20-2026-11-19.md)
 
+- The optional local 720p25 HEVC review located two of five compound swaps,
+  up from zero. It found none of the five swaps without blur. A separate
+  test highlighted one of 18 ordinary blur clips and none of the untouched
+  excerpts or hard cuts. Local payment, Chrome, PDF, JSON, and signed replay
+  verified the exact source ranges and crops. The analysis supports the
+  tested video-only profile. [HEVC control and app results](video-short-face-hevc-25-ordinary-2026-11-19.md)
+
 - A 184-delivery short-speech test of the lower operating point found
   three more clean and two more competing-speech edits. Ordinary alerts
   increased from zero to nine out of 40 clean files and from five to 21

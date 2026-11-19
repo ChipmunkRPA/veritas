@@ -322,10 +322,10 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             from app.detectors.video.face_matched_detail import replay_source
 
             replay_source(store.path_for(source["sha256"]), table, detail)
-        elif (coverage.get(matched.COVERAGE) or {}).get("method") == matched.NATIVE25_METHOD:
+        elif profile := matched.PROFILES.get((coverage.get(matched.COVERAGE) or {}).get("method")):
             from app.detectors.video.face_matched_detail import verify_profile
 
-            verify_profile(store.path_for(source["sha256"]), table, matched.PROFILE_25)
+            verify_profile(store.path_for(source["sha256"]), table, profile)
     except (ValueError, KeyError, TypeError) as error:
         raise ObjectIntegrityError("Picture evidence differs from the recorded native inspection") from error
     for packet in document["packets"]:

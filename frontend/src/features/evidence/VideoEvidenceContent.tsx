@@ -112,6 +112,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
   const matchedReasons = {
     profile: 'This check needs a four-second 720p AVC MP4 with verified 30 fps timing.',
     profile_avc: 'This check needs 120 verified 720p AVC MP4 frames at 30 fps (four seconds) or 25 fps (4.8 seconds).',
+    profile_hevc: 'This check needs a verified 4.8-second 720p HEVC MP4 at 25 fps with a single hvc1 video track and no audio.',
     prior_review: 'The brief face appearance review already found a range for this file.',
     shot_context: 'The original pictures did not supply a complete shot review.',
     face_context: 'The source did not supply comparable face views around a selected range.',
@@ -201,6 +202,9 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
         {matchedReview.status === 'localized' && <> <a className="underline" href="#media-evidence-VMD01">See the exact range and original crops</a>.</>}</p>
       {matchedReview.method === 'face-matched-detail/2' && <p className="mt-2 mb-0 text-caption text-text-muted">
         25 fps source with 120 native frames over 4.8 seconds. The comparison examines short ranges with comparable face views.</p>}
+      {matchedReview.method === 'face-matched-detail/3' && <p className="mt-2 mb-0 text-caption text-text-muted">
+        25 fps HEVC source with 120 native frames over 4.8 seconds. The comparison examines short ranges with comparable face views.
+        {' '}Ordinary blur can produce a highlight. This check carries zero AI confidence weight.</p>}
       {matchedReview.candidate_pairs > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">
         The source supported {matchedReview.measured_pairs} of {matchedReview.candidate_pairs} proposed ranges for this comparison.</p>}
     </section>}

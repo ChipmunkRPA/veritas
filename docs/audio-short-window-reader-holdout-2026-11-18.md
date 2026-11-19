@@ -98,3 +98,24 @@ needs source-bound playable excerpts, exact timestamps, preserved existing
 findings, and unchanged confidence. The strong-background results motivate
 testing other ways to measure the target voice and separating background
 limitations from any claim about the voice itself.
+
+## Isolated application trial
+
+Six local worker analyses completed after simulated payment. The trial
+started zero analyses before payment and made zero real charges. The four
+held-panel witnesses reused the earlier test deliveries to verify
+application behavior and reproduced their recorded readings. The clean
+positive showed two original 750 ms windows. The matched same-reader
+splice showed no selected window. The two competing-speech witnesses
+retained their flags at the same unrelated windows, and an authored silent
+control was unassessed.
+
+The positive with and without the additional check had identical primary
+scores, overall assessment, and existing evidence. Five experimental
+appendices had signed PDF and JSON records linked to the standard signed
+packages. Original-file replay checked six source excerpts and their
+recorded and processed waveforms. The trial carries zero confidence weight.
+The appended check remains isolated from the customer application.
+
+The local trial receipt has SHA-256
+`5fb29b195f571824072f37d1d5debc4e7b535fd07ab4eaeaeb9585cc7935da90`.

@@ -98,15 +98,18 @@ def decode_saved(data: bytes, *, allow_legacy: bool = True, errors: str = "stric
     return data.decode("utf-8", errors=errors), "utf-8"
 
 
-def _outside(tag, attrs):
-    values = dict(reversed(attrs))  # The first occurrence is the saved HTML attribute.
-    if tag in OMIT or "hidden" in values or (values.get("role") or "").strip().casefold() == "navigation":
-        return True
-    style = values.get("style") or ""
+def inline_display_none(style: str | None) -> bool:
+    """Recognize one unambiguous inline display declaration without evaluating CSS."""
     if not style or any(ch in COMPLEX_CSS for ch in style):
         return False
     display = [match[1] for declaration in style.split(";") if (match := DISPLAY.fullmatch(declaration))]
     return len(display) == 1 and NONE.fullmatch(display[0]) is not None
+
+
+def _outside(tag, attrs):
+    values = dict(reversed(attrs))  # The first occurrence is the saved HTML attribute.
+    return (tag in OMIT or "hidden" in values or (values.get("role") or "").strip().casefold() == "navigation"
+            or inline_display_none(values.get("style")))
 
 
 class _Omissions(HTMLParser):

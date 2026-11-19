@@ -73,7 +73,7 @@ from app.evidence import (
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p45"
+PIPELINE_VERSION = "doc-2.0-p46"
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 BIBLIOGRAPHY_POLICY = "writing_bibliography_review_enabled"
 CLAUSE_POLICY = "writing_within_sentence_language_review_enabled"
@@ -222,6 +222,9 @@ def current_decode_output(output: Any, *, require_current_layout_reader: bool = 
         return False
     if (output["meta"].get("method") == "pptx"
             and output["meta"].get(document_native_locations.PPTX_VISIBILITY_KEY) != document_native_locations.PPTX_VISIBILITY):
+        return False
+    if (require_current_layout_reader and output["meta"].get("method") == "epub"
+            and output["meta"].get(document_native_locations.EPUB_VISIBILITY_KEY) != document_native_locations.EPUB_VISIBILITY):
         return False
     if (output["meta"].get("method") == "odt"
             and output["meta"].get(document_native_locations.ODT_VISIBILITY_KEY) != document_native_locations.ODT_VISIBILITY):

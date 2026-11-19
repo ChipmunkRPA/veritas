@@ -9,6 +9,7 @@ from zipfile import BadZipFile, ZipFile
 from lxml import etree
 
 from app.core.config import settings
+from app.detectors.text.html_content import inline_display_none
 from app.detectors.text.opendocument_presentation import slide_text
 from app.storage.files import EPUB_MIME, check_document_archive_safe
 
@@ -163,7 +164,7 @@ def _powerpoint(package: _Package, *, skip_hidden_slide_groups: bool):
             yield value, index, paragraph_index
 
 
-def _chapter_blocks(body):
+def _chapter_blocks(body, *, use_epub_visibility):
     text = []
 
     def flush():
@@ -177,7 +178,12 @@ def _chapter_blocks(body):
         if not isinstance(element.tag, str) or not element.tag.startswith(XHTML):
             return
         tag = element.tag.removeprefix(XHTML)
-        if tag in HTML_OMITTED or element.get("hidden") is not None or element.get("aria-hidden") == "true":
+        if tag in HTML_OMITTED or element.get("hidden") is not None:
+            return
+        if use_epub_visibility:
+            if inline_display_none(element.get("style")):
+                return
+        elif element.get("aria-hidden") == "true":
             return
         if tag in HTML_BLOCKS:
             yield from flush()
@@ -194,7 +200,7 @@ def _chapter_blocks(body):
     yield from flush()
 
 
-def _ebook(package: _Package):
+def _ebook(package: _Package, *, use_epub_visibility: bool):
     with package.archive.open("mimetype") as media_type:
         if media_type.read(len(EPUB_MIME) + 1) != EPUB_MIME.encode("ascii"):
             raise ValueError("This archive is not an EPUB book")
@@ -234,12 +240,12 @@ def _ebook(package: _Package):
         body = chapter.find(XHTML + "body")
         if chapter.tag != XHTML + "html" or body is None:
             raise ValueError("The EPUB contains an unreadable XHTML chapter")
-        for paragraph_index, text in enumerate(_chapter_blocks(body)):
+        for paragraph_index, text in enumerate(_chapter_blocks(body, use_epub_visibility=use_epub_visibility)):
             yield text, index, paragraph_index
 
 
 def body_parts(path: Path, extension: str, *, check_crc: bool = False,
-               skip_hidden_slide_groups: bool = True) -> list[tuple[str, dict]]:
+               skip_hidden_slide_groups: bool = True, use_epub_visibility: bool = True) -> list[tuple[str, dict]]:
     check_document_archive_safe(path, extension, check_crc=check_crc)
     part_kind = "epub_entry" if extension == ".epub" else "slide"
     parts = []
@@ -253,7 +259,7 @@ def body_parts(path: Path, extension: str, *, check_crc: bool = False,
             elif extension == ".odp":
                 paragraphs = slide_text(package, max_slides=MAX_TEXT_PARTS, max_chars=limit)
             else:
-                paragraphs = _ebook(package)
+                paragraphs = _ebook(package, use_epub_visibility=use_epub_visibility)
             for text, index, paragraph_index in paragraphs:
                 if not text.strip():
                     continue

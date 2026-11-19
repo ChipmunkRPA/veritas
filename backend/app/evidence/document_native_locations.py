@@ -28,6 +28,10 @@ PACKAGE_METHODS = {"pptx": "slide", "odp": "slide", "epub": "epub_entry"}
 PACKAGE_LABELS = {"slide": "Slide", "epub_entry": "EPUB reading entry"}
 PPTX_VISIBILITY_KEY = "pptx_visibility"
 PPTX_VISIBILITY = "visible-slide-groups/1"
+EPUB_VISIBILITY_KEY = "epub_chapter_visibility"
+EPUB_VISIBILITY = "static-epub-chapters/1"
+EPUB_VISIBILITY_SCOPE = ("Text marked hidden or given a simple inline display:none style is excluded. "
+                         "Stylesheets and reading-system behavior are outside this check.")
 ODT_VISIBILITY_KEY = "odt_section_visibility"
 ODT_VISIBILITY = "visible-odt-sections/1"
 ODT_VISIBILITY_SCOPE = "Hidden and conditional sections are excluded. The reader does not evaluate display conditions."
@@ -279,6 +283,9 @@ def validate(document):
     if PPTX_VISIBILITY_KEY in coverage and (coverage[PPTX_VISIBILITY_KEY] != PPTX_VISIBILITY
             or document.get("source", {}).get("method") != "pptx"):
         raise ValueError("Invalid PowerPoint visibility policy")
+    if EPUB_VISIBILITY_KEY in coverage and (coverage[EPUB_VISIBILITY_KEY] != EPUB_VISIBILITY
+            or document.get("source", {}).get("method") != "epub"):
+        raise ValueError("Invalid EPUB visibility policy")
     if ODT_VISIBILITY_KEY in coverage and (coverage[ODT_VISIBILITY_KEY] != ODT_VISIBILITY
             or document.get("source", {}).get("method") != "odt"):
         raise ValueError("Invalid OpenDocument section visibility policy")

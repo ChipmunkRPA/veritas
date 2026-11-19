@@ -1382,7 +1382,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             honor_csv_separator_declaration: bool = True,
             check_word_checkout_visibility: bool = False, use_current_email_body: bool = True,
             use_static_html: bool = True, include_word_text_boxes: bool = True,
-            allow_legacy_html: bool = True) -> Document:
+            allow_legacy_html: bool = True, use_epub_visibility: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers,
@@ -1412,7 +1412,8 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
     elif ext in {".pptx", ".odp", ".epub"}:
         from app.detectors.text.reading_packages import body_parts
 
-        parts = body_parts(path, ext, skip_hidden_slide_groups=skip_hidden_slide_groups)
+        parts = body_parts(path, ext, skip_hidden_slide_groups=skip_hidden_slide_groups,
+                           use_epub_visibility=use_epub_visibility)
         d = _join_mapped(parts, map_paragraphs=True)
         if ext == ".pptx":
             warning = ("The writing check reads saved text boxes and tables on visible slides in presentation order. "
@@ -1422,13 +1423,17 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
                        "It excludes hidden slides, hidden layers and placeholders. Notes, master-slide text, animation, "
                        "charts, images and embedded objects are outside this check.")
         else:
+            limitations = ("image text and SVG chapters are outside this check. " + document_native_locations.EPUB_VISIBILITY_SCOPE
+                           if use_epub_visibility else "image text, SVG chapters and styling are outside this check.")
             warning = ("The writing check reads main XHTML chapters in EPUB reading order. Navigation, optional entries, "
-                       "image text, SVG chapters and styling are outside this check.")
+                       + limitations)
         d.meta = {"method": ext[1:], "paragraph_count": len(parts), "coverage_warning": warning,
                   document_native_locations.PARAGRAPH_MAP_KEY: document_native_locations.PARAGRAPH_MAP}
         if ext == ".pptx" and skip_hidden_slide_groups:
             d.meta[document_native_locations.PPTX_VISIBILITY_KEY] = document_native_locations.PPTX_VISIBILITY
             d.meta["coverage_warning"] += " Hidden groups and their contents are excluded."
+        if ext == ".epub" and use_epub_visibility:
+            d.meta[document_native_locations.EPUB_VISIBILITY_KEY] = document_native_locations.EPUB_VISIBILITY
     elif ext in {".xlsx", ".ods", ".csv", ".tsv"}:
         from app.core.config import settings
         limit = settings.max_document_chars

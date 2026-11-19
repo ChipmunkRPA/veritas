@@ -36,6 +36,9 @@ export const TABS: TabSpec[] = [
 ]
 
 const sheetExport = 'Save the sheets containing writing as macro-free XLSX, CSV or PDF, then upload them.'
+const wordTemplate = 'Save a document from this template as DOCX or PDF, then upload it.'
+const slideTemplate = 'Save a presentation from this template as PPTX, ODP or PDF, then upload it.'
+const sheetTemplate = 'Save a spreadsheet from this template as XLSX, ODS, CSV or PDF, then upload it.'
 const delimitedCoverage = 'Writing is checked within each text field. Reports show the row and column, counting headers and blank records.'
 const htmlCoverage = 'Saved web pages are checked without navigation and text explicitly marked hidden. Stylesheets and scripts are outside this check.'
 
@@ -49,7 +52,7 @@ const documentCoverage = new Map(Object.entries({
   ods: 'OpenDocument spreadsheets check saved writing on visible sheets, rows and columns. Linked sheets, formulas, comments and images are outside this check.',
   csv: delimitedCoverage,
   tsv: delimitedCoverage,
-  epub: 'EPUB checks the main reading text. Navigation, optional chapters, and text in images are outside this check.',
+  epub: 'EPUB checks the main reading text. It skips navigation, optional chapters, and text explicitly hidden in the saved chapter. External stylesheets and words in images are outside this check.',
   rtf: 'Rich Text checks saved body text and leaves out directly hidden text. Layout and style-based visibility are outside this check.',
   html: htmlCoverage,
   htm: htmlCoverage,
@@ -69,13 +72,22 @@ const documentExport = new Map(Object.entries({
   gslides: 'Download the Google Slides presentation as PowerPoint (PPTX) or PDF, then upload the downloaded file.',
   doc: 'Save the older Word file as DOCX or PDF, then upload it.',
   docm: 'Save the Word file as a macro-free DOCX or PDF, then upload it.',
+  dotx: wordTemplate,
+  dotm: wordTemplate,
+  ott: wordTemplate,
   pages: 'Export the Apple Pages file as Word (DOCX) or PDF, then upload it.',
   ppt: 'Save the older PowerPoint file as PPTX or PDF, then upload it.',
   pptm: 'Save the presentation as a macro-free PPTX or PDF, then upload it.',
+  potx: slideTemplate,
+  potm: slideTemplate,
+  otp: slideTemplate,
   key: 'Export the Keynote file as PowerPoint (PPTX) or PDF, then upload it.',
   msg: 'Export the Outlook message as EML or PDF, then upload it.',
   xls: sheetExport,
   xlsm: sheetExport,
+  xltx: sheetTemplate,
+  xltm: sheetTemplate,
+  ots: sheetTemplate,
   numbers: 'Export the Apple Numbers spreadsheet as Excel (XLSX), CSV or PDF, then upload the exported file.',
 }))
 

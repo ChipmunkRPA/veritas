@@ -99,6 +99,9 @@ describe('paid analysis intake', () => {
     ['notes.gsheet', 'Google Sheets spreadsheet as Excel (XLSX)'],
     ['brief.gslides', 'Google Slides presentation as PowerPoint (PPTX)'],
     ['book.numbers', 'Apple Numbers spreadsheet as Excel (XLSX)'],
+    ['letter.DOTX', 'Save a document from this template as DOCX or PDF'],
+    ['brief.potx', 'Save a presentation from this template as PPTX, ODP or PDF'],
+    ['book.xltm', 'Save a spreadsheet from this template as XLSX, ODS, CSV or PDF'],
   ])('shows the export format for %s before checkout', async (filename, guidance) => {
     mount('/upload?kind=video')
     fireEvent.drop(screen.getByTestId('drop-zone'), { dataTransfer: { files: [new File(['export needed'], filename)] } })

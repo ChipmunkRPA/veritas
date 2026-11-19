@@ -7,6 +7,10 @@ text, Markdown, HTML, XHTML, and email (`.eml`). These use the same local
 writing pipeline and produce PDF and JSON reports. The document upload
 limit is 25 MB in the standard configuration.
 
+For older Office formats, Office and LibreOffice templates, and Apple
+iWork documents, save a copy in one of the supported formats below. The
+upload screen gives format-specific directions when you drop a template.
+
 | Format | Writing examined | Source position in reports |
 | --- | --- | --- |
 | DOCX | Body paragraphs, tables, filled form controls, supported saved fields, simple drawing text boxes, and supported linked footnotes and endnotes in standard and Strict Open XML DOCX. Explicit page and column breaks separate adjacent words in the saved body. Separate revision and visibility checks cover supported structures. | Word body paths, drawing or note references, paragraph character ranges, and available run coordinates |
@@ -17,12 +21,20 @@ limit is 25 MB in the standard configuration.
 | XLSX | Literal text on visible worksheet tabs, rows and columns | Workbook sheet order, row, column and saved cell character range |
 | ODS | Literal text on visible sheets, rows and columns. Linked sheets, formulas and calculated values are outside the check. | Workbook sheet order, row, column and saved cell character range |
 | CSV and TSV | Text fields in UTF-8 or BOM-marked UTF-16 delimited files. CSV honors a supported separator on a first-line `sep=` declaration. | Record, field and decoded character range |
-| EPUB | XHTML text in the main reading order | Reading-order entry, text block, and decoded character range |
+| EPUB | XHTML text in the main reading order, excluding content hidden by the saved `hidden` attribute or a simple inline `display: none` declaration | Reading-order entry, text block, and decoded character range |
 | RTF | Saved body writing outside directly hidden runs | Decoded text block number and character range |
 | EML | The selected plain-text or HTML message body | Decoded text and supported HTML source positions |
 | TXT | Decoded Unicode text | Decoded character offsets |
 | Markdown | Text extracted from the markup outside recognized fenced code blocks | Paragraph and character position in the extracted text |
 | HTML and XHTML | Text extracted from saved `.html`, `.htm`, or `.xhtml` markup. HTML also supports an explicit Windows-1252 or ISO-8859-1 declaration when a file without a byte-order mark fails UTF-8 decoding. | Original markup character ranges for uniquely mapped article passages, otherwise extracted-text positions |
+
+EPUB chapter text with only `aria-hidden` remains eligible because the
+attribute affects accessibility exposure. The reader checks saved chapter
+markup and leaves stylesheet evaluation outside its scope. Exported EPUB
+evidence records the chapter visibility rule so older signed reports can
+still be verified with the rules under which they were created.
+[WAI-ARIA definition](https://www.w3.org/TR/wai-aria-1.2/#aria-hidden) ·
+[CSS display definition](https://www.w3.org/TR/css-display-3/#valdef-display-none)
 
 ODS row and column positions follow the saved grid, including repeated or
 hidden rows and columns before a finding. The writing check excludes
@@ -42,6 +54,16 @@ decimals, and a blank record. Each analysis started after simulated
 USD 9.99 checkout and produced matching browser, PDF and JSON evidence.
 All seven signed packages replayed against their originals. The CSV reports
 matched 18 decoded field ranges.
+
+A later Chromium test completed 23 simulated $9.99 checkouts covering every
+format family in the table. The four Word files covered standard and Strict
+DOCX, an Apple text-system export, and a LibreOffice export with an uppercase
+filename extension. The test also covered selectable and scanned PDF, Strict
+PowerPoint, and an EPUB containing both visible accessibility-marked text and
+explicitly hidden text. All 23 opened in the browser, produced PDF and JSON,
+and passed signed verification against their originals. A hidden-only EPUB
+and three unreadable or export-only files were refused before payment.
+[Local compatibility receipt](evaluation-panels/document-popular-formats-2026-11-19.json)
 
 A local Chromium run completed Word, Excel, ODS, CSV and TSV writing
 analyses after simulated USD 9.99 checkout. Each result displayed source

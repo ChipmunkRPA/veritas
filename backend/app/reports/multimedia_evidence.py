@@ -750,6 +750,9 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     slide_visibility_key = document_native_locations.PPTX_VISIBILITY_KEY
     if coverage.get(slide_visibility_key) != decoded["meta"].get(slide_visibility_key):
         raise ObjectIntegrityError("Frozen PowerPoint visibility policy differs from the recorded extraction")
+    epub_visibility_key = document_native_locations.EPUB_VISIBILITY_KEY
+    if coverage.get(epub_visibility_key) != decoded["meta"].get(epub_visibility_key):
+        raise ObjectIntegrityError("Frozen EPUB visibility policy differs from the recorded extraction")
     odt_visibility_key = document_native_locations.ODT_VISIBILITY_KEY
     if coverage.get(odt_visibility_key) != decoded["meta"].get(odt_visibility_key):
         raise ObjectIntegrityError("Frozen OpenDocument section visibility policy differs from the recorded extraction")

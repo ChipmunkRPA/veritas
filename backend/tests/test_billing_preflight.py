@@ -303,6 +303,20 @@ def test_text_checks_encoding_and_readability_without_running_models():
             verify(data, "article.txt", "document")
 
 
+@pytest.mark.parametrize(("name", "export"), [
+    ("letter.DOTX", "DOCX or PDF"),
+    ("deck.potm", "PPTX, ODP or PDF"),
+    ("workbook.xltx", "XLSX, ODS, CSV or PDF"),
+    ("letter.ott", "DOCX or PDF"),
+    ("deck.otp", "PPTX, ODP or PDF"),
+    ("workbook.ots", "XLSX, ODS, CSV or PDF"),
+])
+def test_template_extensions_offer_a_readable_export_before_checkout(tmp_path, name, export):
+    payload = document_fixture(tmp_path / "office-container.docx", WRITING)
+    with pytest.raises(preflight.PreflightError, match=export):
+        verify(payload, name, "document")
+
+
 @pytest.mark.parametrize(("name", "readable", "empty"), [
     ("article.html", f"<main><p>{WRITING}</p></main>".encode(), b"<!-- comment --><style>section {color: red}</style>"),
     ("article.markdown", f"# {WRITING}".encode(), b"```python\ncode_without_prose()\n```"),

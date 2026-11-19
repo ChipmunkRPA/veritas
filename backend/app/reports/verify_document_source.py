@@ -160,6 +160,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                       map_body_paragraphs=document_native_locations.PARAGRAPH_MAP_KEY in coverage,
                       skip_hidden_slide_groups=coverage.get(document_native_locations.PPTX_VISIBILITY_KEY)
                       == document_native_locations.PPTX_VISIBILITY,
+                      use_epub_visibility=coverage.get(document_native_locations.EPUB_VISIBILITY_KEY)
+                      == document_native_locations.EPUB_VISIBILITY,
                       skip_hidden_odt_sections=coverage.get(document_native_locations.ODT_VISIBILITY_KEY)
                       == document_native_locations.ODT_VISIBILITY,
                       skip_hidden_rtf_runs=coverage.get(document_native_locations.RTF_VISIBILITY_KEY)
@@ -220,6 +222,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
               document_scope.HTML_LEGACY_ENCODING_KEY: None,
               document_native_locations.PARAGRAPH_MAP_KEY: None, document_native_locations.WORD_TABLE_GRID_KEY: None,
               document_native_locations.PPTX_VISIBILITY_KEY: None, document_native_locations.WORD_RUN_MAP_KEY: None,
+              document_native_locations.EPUB_VISIBILITY_KEY: None,
               document_native_locations.ODT_VISIBILITY_KEY: None, document_native_locations.WORD_NOTES_KEY: None,
               document_native_locations.WORD_TEXT_BOX_KEY: None,
               document_native_locations.WORD_LAYOUT_BREAK_KEY: None,

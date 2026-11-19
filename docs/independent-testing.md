@@ -3838,6 +3838,17 @@ coordinates only with labels on the same grid, sample clock, or extracted
 text. A missing packet leaves coverage unresolved until you check what
 actually ran. The app can also show evidence outside the worksheet's scope.
 
+The worksheet also carries the three printed amount boxes separately from
+their wider row crops. It records matching face appearance changes in
+native frame indices and timestamps, with the before, during, and after
+witness roles. Brief speech windows retain their original sample addresses
+and source timestamps. For supported document packets, the extracted spans
+have corresponding original text ranges and available Word, slide, cell,
+or email locators. The worksheet omits the amounts, excerpts, waveform
+images and image crops themselves. Five saved signed packages covering
+image, video, audio, DOCX and XLSX were verified against their originals
+through this command.
+
 The worksheet contains source and coordinate commitments. Keep it local if
 those commitments and positions are sensitive. Use the existing
 `count-locations` or `count-events` tool to score independently labeled

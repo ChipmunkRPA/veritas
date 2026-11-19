@@ -10,6 +10,7 @@ KEY = "printed_total_comparison"
 COMMITMENT = KEY + "_sha256"
 SCHEMA = "image-printed-total-comparison/1"
 TITLE = "Printed total mismatch"
+PACKET_ID = "PT01"
 LIMITATION = (
     "Another adjustment or an ordinary accounting or transcription error can explain the difference. "
     "This observation carries zero weight in the AI assessment."

@@ -441,6 +441,6 @@ def manifest(snapshot: ReportSnapshot) -> dict[str, Any] | None:
                                    for role, asset in printed_ids.assets(document).items())
     if printed_totals.KEY in document and snapshot.report.profile != "newsroom" and not snapshot.report.redacted:
         result[printed_totals.COMMITMENT] = document["source"][printed_totals.COMMITMENT]
-        result["artifacts"].extend({"packet_id": "PT01", "role": role, "sha256": asset["sha256"]}
+        result["artifacts"].extend({"packet_id": printed_totals.PACKET_ID, "role": role, "sha256": asset["sha256"]}
                                    for role, asset in printed_totals.assets(document).items())
     return result

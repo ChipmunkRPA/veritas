@@ -185,6 +185,8 @@ replay-evidence:  ## recount published image, video, audio, and writing evaluati
 	python3 -I -S backend/scripts/review_image_shifted_grid_transfer.py \
 		docs/evaluation-panels/image-shifted-grid-transfer-2026-11-19.json \
 		docs/evaluation-panels/image-shifted-grid-transfer-2026-11-19.jsonl.gz
+	python3 -I -S backend/scripts/review_image_ranked_context.py \
+		docs/evaluation-panels/image-ranked-context-2026-11-19.json.gz
 	python3 -I -S backend/scripts/review_video_expanded_common_detail.py \
 		docs/evaluation-panels/video-face-expanded-common-detail-native30-2026-11-19.json
 	python3 -I -S backend/scripts/review_audio_room_point12_confirmation.py \

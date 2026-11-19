@@ -7,6 +7,8 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 from app.bench.independent_app_positions import _positions, packet_positions
+from app.evidence import audio_brief_voice_binding, document_native_locations, face_matched_detail_binding
+from app.evidence import image_printed_totals_binding as printed_totals
 
 FIXTURE = Path(__file__).resolve().parents[2] / "docs/evaluation-panels/signed-evidence-example"
 
@@ -67,3 +69,54 @@ def test_selected_audio_windows_and_passage_spans_use_their_recorded_clocks():
     assert audio_rows == [{"id": "A01", "windows": [[8000, 48000]]}]
     assert text_coords["extracted_text_sha256"] == text_sha256
     assert text_rows == [{"id": "T01", "selected_spans": [[5, 14], [77, 120]]}]
+
+
+def test_printed_amount_positions_keep_the_crop_and_amount_separate():
+    roles = {
+        role: {"printed": "private", "source_region": [5, y, 160, y + 32],
+               "amount_region": [130, y + 8, 157, y + 25]}
+        for role, y in zip(printed_totals.ROLES, (50, 90, 130), strict=True)
+    }
+    evidence = {"source": {"width": 200, "height": 200}, printed_totals.KEY: {"record": {"fields": roles}}}
+    _, rows = _positions("image", evidence)
+    assert rows == [{"id": "PT01", "affects_overall_confidence": False,
+                     "amount_boxes": {role: item["amount_region"] for role, item in roles.items()},
+                     "row_crop_boxes": {role: item["source_region"] for role, item in roles.items()}}]
+
+
+def test_matched_detail_positions_keep_native_time_and_three_witness_roles():
+    frames = [{"interval_role": role, "anchor": {"frame_index": index}}
+              for role, index in zip(face_matched_detail_binding.ROLES, (72, 74, 76), strict=True)]
+    packet = {"id": "VMD01", "frames": frames, face_matched_detail_binding.KEY: {
+        "start_frame_index": 73, "end_frame_index": 76, "start_pts": 73000, "end_pts": 76000,
+        "time_base": "1/30000",
+    }}
+    evidence = {"source": {"frame_count": 120, "time_base": "1/30000", "frame_table_sha256": "f" * 64},
+                "packets": [packet]}
+    _, rows = _positions("video", evidence)
+    assert rows == [{"id": "VMD01", "face_change_span": [73, 76],
+                     "source_pts": {"start": 73000, "end": 76000, "time_base": "1/30000"},
+                     "witness_frames": [72, 74, 76], "witness_roles": {"before": 72, "during": 74, "after": 76},
+                     "affects_overall_confidence": False}]
+
+
+def test_brief_speech_and_saved_wording_positions_only_copy_positions():
+    pcm = {"samples": 192000, "sample_rate": 16000, "pcm_sha256": "d" * 64}
+    timestamps = [{"start_sample": 8000, "end_sample": 20000, "source_start_pts": 8000,
+                   "source_end_pts": 20000, "time_base": "1/16000"}]
+    _, rows = _positions("audio", {"source": pcm, audio_brief_voice_binding.KEY: {"windows": [{
+        "id": "B750-02", "start_sample": 8000, "end_sample": 20000, "source_timestamp_ranges": timestamps,
+        "artifacts": {"selected_clip": {"url": "omit from worksheet"}},
+    }]}})
+    assert rows == [{"id": "B750-02", "windows": [[8000, 20000]], "source_timestamp_ranges": timestamps,
+                     "affects_overall_confidence": False}]
+    native = [{"anchor_index": 0, "coordinate": "word_paragraph", "ranges": [[4, 21]]}]
+    _, rows = _positions("document", {
+        "source": {"chars": 50, "offset_unit": "unicode_codepoint", "extracted_text_sha256": "e" * 64},
+        "packets": [{"id": "T01", "anchors": [{"selected_start": 9, "selected_end": 26, "excerpt": "private",
+                                              "kind": "docx", "body_path": [2], "paragraph_index": 1}]}],
+        "coverage": {document_native_locations.KEY: {"packets": {"T01": native}}},
+    })
+    assert rows == [{"id": "T01", "selected_spans": [[9, 26]], "native_text_locations": [{
+        **native[0], "source_locator": {"kind": "docx", "body_path": [2], "paragraph_index": 1},
+    }]}]

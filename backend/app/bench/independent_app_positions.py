@@ -6,12 +6,18 @@ import json
 from pathlib import Path
 from zipfile import ZipFile
 
+from app.evidence import audio_brief_voice_binding, document_native_locations, face_matched_detail_binding
+from app.evidence import image_printed_totals_binding as printed_totals
 from app.evidence.source_geometry import pixel_bounds
 from app.reports import public_verify
 from app.reports.verify import verify_package
 
 SCHEMA = "chipmunk.independent-app-positions/1"
 EVIDENCE_LIMIT = 64 * 1024 * 1024
+TEXT_LOCATOR_FIELDS = (
+    "kind", "body_path", "paragraph_index", "part_kind", "part_index", "part_paragraph_index",
+    "note_id", "note_paragraph_index", "reference_body_index", "row", "column", "mime_part",
+)
 
 
 def _positive_extent(*sizes: object) -> list[int]:
@@ -36,6 +42,41 @@ def _source_commits(path: Path, commitment: dict) -> bool:
         return hashlib.file_digest(original, "sha256").hexdigest() == commitment["sha256"]
 
 
+def _printed_amount_positions(evidence: dict) -> list[dict]:
+    comparison = evidence.get(printed_totals.KEY)
+    if not comparison:
+        return []
+    fields = comparison["record"]["fields"]
+    return [{"id": printed_totals.PACKET_ID, "affects_overall_confidence": False,
+             "amount_boxes": {role: fields[role]["amount_region"] for role in printed_totals.ROLES},
+             "row_crop_boxes": {role: fields[role]["source_region"] for role in printed_totals.ROLES}}]
+
+
+def _brief_speech_positions(evidence: dict, samples: int) -> list[dict]:
+    review = evidence.get(audio_brief_voice_binding.KEY) or {}
+    return [
+        {"id": window["id"], "affects_overall_confidence": False,
+         "windows": [_span(window["start_sample"], window["end_sample"], samples)],
+         "source_timestamp_ranges": window["source_timestamp_ranges"]}
+        for window in review.get("windows", [])
+    ]
+
+
+def _document_packet_positions(packet: dict, native: list[dict], chars: int) -> dict:
+    anchors = packet["anchors"]
+    row = {"id": packet["id"], "selected_spans": [
+        _span(anchor["selected_start"], anchor["selected_end"], chars) for anchor in anchors
+    ]}
+    if native:
+        locations = []
+        for location in native:
+            anchor = anchors[location["anchor_index"]]
+            locator = {field: anchor[field] for field in TEXT_LOCATOR_FIELDS if field in anchor}
+            locations.append({**location, "source_locator": locator} if locator else location)
+        row["native_text_locations"] = locations
+    return row
+
+
 def _positions(kind: str, evidence: dict) -> tuple[dict, list[dict]]:
     source = evidence["source"]
     packets = evidence.get("packets") or []
@@ -43,7 +84,7 @@ def _positions(kind: str, evidence: dict) -> tuple[dict, list[dict]]:
         extent = _positive_extent(source["width"], source["height"])
         return ({"basis": "display-oriented bounding boxes", "unit": "pixels", "extent": extent},
                 [{"id": packet["id"], "boxes": [list(pixel_bounds(packet["region"], *extent))]}
-                 for packet in packets])
+                 for packet in packets] + _printed_amount_positions(evidence))
     if kind == "audio":
         extent = _positive_extent(source["samples"])
         [rate] = _positive_extent(source["sample_rate"])
@@ -51,16 +92,17 @@ def _positions(kind: str, evidence: dict) -> tuple[dict, list[dict]]:
                  "pcm_sha256": source["pcm_sha256"]},
                 [{"id": packet["id"], "windows": [_span(interval["start_sample"], interval["end_sample"], extent[0])]}
                  for packet in packets
-                 if (interval := packet.get("interval")) and packet.get("anchor", {}).get("pcm_sha256") == source["pcm_sha256"]])
+                 if (interval := packet.get("interval")) and packet.get("anchor", {}).get("pcm_sha256") == source["pcm_sha256"]]
+                + _brief_speech_positions(evidence, extent[0]))
     if kind == "document":
         extent = _positive_extent(source["chars"])
         if source.get("offset_unit") != "unicode_codepoint":
             raise ValueError("The package does not declare Unicode passage coordinates")
+        coverage = evidence.get("coverage") or {}
+        native = (coverage.get(document_native_locations.KEY) or {}).get("packets", {})
         return ({"basis": "extracted document text", "unit": "unicode_codepoints", "extent": extent,
                  "extracted_text_sha256": source["extracted_text_sha256"]},
-                [{"id": packet["id"],
-                  "selected_spans": [_span(anchor["selected_start"], anchor["selected_end"], extent[0])
-                                     for anchor in packet["anchors"]]}
+                [_document_packet_positions(packet, native.get(packet["id"], []), extent[0])
                  for packet in packets if packet.get("anchors")])
     extent = _positive_extent(source["frame_count"])
     return ({"basis": "native frame indices", "unit": "frames", "extent": extent, "time_base": source["time_base"],
@@ -80,6 +122,13 @@ def _video(packet: dict, frame_count: int) -> dict:
         boundary = transition["boundary"]
         _span(boundary, boundary + 1, frame_count)
         row["face_transition_index"] = boundary
+    if match := packet.get(face_matched_detail_binding.KEY):
+        row.update(
+            face_change_span=_span(match["start_frame_index"], match["end_frame_index"], frame_count),
+            source_pts={"start": match["start_pts"], "end": match["end_pts"], "time_base": match["time_base"]},
+            witness_roles={frame["interval_role"]: frame["anchor"]["frame_index"] for frame in packet["frames"]},
+            affects_overall_confidence=False,
+        )
     return row
 
 

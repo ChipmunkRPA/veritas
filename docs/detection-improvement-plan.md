@@ -67,6 +67,12 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- Keeping up to three disjoint infographic regions recovered one of 31
+  direct JPEG edits when paired with a local contrast adjustment.
+  That arm flagged 21 of 72 authored controls compared with 12 for the
+  top-ranked baseline. None of the 31 confined edits was located.
+  [Region ranking diagnostic](image-ranked-context-2026-11-19.md)
+
 - A single-image check displays two printed identifiers and their original
   crops when an entry and its labeled confirmation conflict. It reproduced
   all 64 held mismatches with zero alerts in 192 authored controls and met

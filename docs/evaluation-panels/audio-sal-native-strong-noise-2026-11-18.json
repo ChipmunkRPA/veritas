@@ -1,0 +1,965 @@
+{
+  "cohort": {
+    "background_sessions": 3,
+    "deliveries": 496,
+    "donor_connected_components": 4,
+    "foreground_variants_per_host_condition": 7,
+    "fresh_to_segment_model": 496,
+    "generator_families": 2,
+    "hosts": 16,
+    "ordinary_variants": 5,
+    "previously_examined_source_deliveries": 496,
+    "readers": 8,
+    "unique_deliveries": 496
+  },
+  "conditions": {
+    "clean": {
+      "arms": {
+        "contrast_strict": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 0
+          },
+          "candidate_false_only_synthetic": 3,
+          "candidate_located_component_count": 4,
+          "candidate_located_host_count": 14,
+          "candidate_locations_by_family": {
+            "family_a": 13,
+            "family_b": 13
+          },
+          "candidate_ordinary_component_count": 4,
+          "candidate_ordinary_host_count": 15,
+          "ordinary_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 37,
+            "neither": 43
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 15,
+            "roundtrip_kitten": 4,
+            "roundtrip_piper": 4,
+            "same_reader_splice": 10,
+            "untouched": 4
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 6,
+            "both": 22,
+            "candidate_only": 4,
+            "neither": 0
+          },
+          "zero_overlap_candidate_intervals": 15
+        },
+        "contrast_wider": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 0
+          },
+          "candidate_false_only_synthetic": 3,
+          "candidate_located_component_count": 4,
+          "candidate_located_host_count": 14,
+          "candidate_locations_by_family": {
+            "family_a": 13,
+            "family_b": 13
+          },
+          "candidate_ordinary_component_count": 4,
+          "candidate_ordinary_host_count": 15,
+          "ordinary_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 37,
+            "neither": 43
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 15,
+            "roundtrip_kitten": 4,
+            "roundtrip_piper": 4,
+            "same_reader_splice": 10,
+            "untouched": 4
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 6,
+            "both": 22,
+            "candidate_only": 4,
+            "neither": 0
+          },
+          "zero_overlap_candidate_intervals": 17
+        },
+        "level_strict": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 0
+          },
+          "candidate_false_only_synthetic": 19,
+          "candidate_located_component_count": 0,
+          "candidate_located_host_count": 0,
+          "candidate_locations_by_family": {
+            "family_a": 0,
+            "family_b": 0
+          },
+          "candidate_ordinary_component_count": 4,
+          "candidate_ordinary_host_count": 7,
+          "ordinary_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 7,
+            "neither": 73
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 7,
+            "roundtrip_kitten": 0,
+            "roundtrip_piper": 0,
+            "same_reader_splice": 0,
+            "untouched": 0
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 28,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 4
+          },
+          "zero_overlap_candidate_intervals": 3
+        },
+        "level_wider": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 0
+          },
+          "candidate_false_only_synthetic": 25,
+          "candidate_located_component_count": 0,
+          "candidate_located_host_count": 0,
+          "candidate_locations_by_family": {
+            "family_a": 0,
+            "family_b": 0
+          },
+          "candidate_ordinary_component_count": 4,
+          "candidate_ordinary_host_count": 10,
+          "ordinary_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 11,
+            "neither": 69
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 10,
+            "roundtrip_kitten": 0,
+            "roundtrip_piper": 0,
+            "same_reader_splice": 1,
+            "untouched": 0
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 28,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 4
+          },
+          "zero_overlap_candidate_intervals": 3
+        }
+      },
+      "baseline": {
+        "background_flags": 0,
+        "ordinary_flags": 0,
+        "synthetic_flags": 28,
+        "synthetic_locations": 28
+      },
+      "clocked_rank_comparisons": {
+        "all": {
+          "above_all_five": 20,
+          "comparisons": 160,
+          "losses": 12,
+          "ties": 0,
+          "wins": 148
+        },
+        "by_family": {
+          "family_a": {
+            "comparisons": 80,
+            "losses": 6,
+            "ties": 0,
+            "wins": 74
+          },
+          "family_b": {
+            "comparisons": 80,
+            "losses": 6,
+            "ties": 0,
+            "wins": 74
+          }
+        },
+        "by_role": {
+          "different_reader_splice": {
+            "comparisons": 32,
+            "losses": 12,
+            "ties": 0,
+            "wins": 20
+          },
+          "roundtrip_kitten": {
+            "comparisons": 32,
+            "losses": 0,
+            "ties": 0,
+            "wins": 32
+          },
+          "roundtrip_piper": {
+            "comparisons": 32,
+            "losses": 0,
+            "ties": 0,
+            "wins": 32
+          },
+          "same_reader_splice": {
+            "comparisons": 32,
+            "losses": 0,
+            "ties": 0,
+            "wins": 32
+          },
+          "untouched": {
+            "comparisons": 32,
+            "losses": 0,
+            "ties": 0,
+            "wins": 32
+          }
+        }
+      },
+      "denominators": {
+        "background": 0,
+        "ordinary": 80,
+        "synthetic": 32
+      },
+      "unassessed": {
+        "background": 0,
+        "ordinary": 0,
+        "synthetic": 0
+      }
+    },
+    "restaurant": {
+      "arms": {
+        "contrast_strict": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 16
+          },
+          "candidate_false_only_synthetic": 0,
+          "candidate_located_component_count": 0,
+          "candidate_located_host_count": 0,
+          "candidate_locations_by_family": {
+            "family_a": 0,
+            "family_b": 0
+          },
+          "candidate_ordinary_component_count": 0,
+          "candidate_ordinary_host_count": 0,
+          "ordinary_flag_cells": {
+            "baseline_only": 5,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 75
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 0,
+            "roundtrip_kitten": 0,
+            "roundtrip_piper": 0,
+            "same_reader_splice": 0,
+            "untouched": 0
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 32
+          },
+          "zero_overlap_candidate_intervals": 0
+        },
+        "contrast_wider": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 16
+          },
+          "candidate_false_only_synthetic": 0,
+          "candidate_located_component_count": 0,
+          "candidate_located_host_count": 0,
+          "candidate_locations_by_family": {
+            "family_a": 0,
+            "family_b": 0
+          },
+          "candidate_ordinary_component_count": 0,
+          "candidate_ordinary_host_count": 0,
+          "ordinary_flag_cells": {
+            "baseline_only": 5,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 75
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 0,
+            "roundtrip_kitten": 0,
+            "roundtrip_piper": 0,
+            "same_reader_splice": 0,
+            "untouched": 0
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 32
+          },
+          "zero_overlap_candidate_intervals": 0
+        },
+        "level_strict": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 16
+          },
+          "candidate_false_only_synthetic": 0,
+          "candidate_located_component_count": 0,
+          "candidate_located_host_count": 0,
+          "candidate_locations_by_family": {
+            "family_a": 0,
+            "family_b": 0
+          },
+          "candidate_ordinary_component_count": 0,
+          "candidate_ordinary_host_count": 0,
+          "ordinary_flag_cells": {
+            "baseline_only": 5,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 75
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 0,
+            "roundtrip_kitten": 0,
+            "roundtrip_piper": 0,
+            "same_reader_splice": 0,
+            "untouched": 0
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 32
+          },
+          "zero_overlap_candidate_intervals": 0
+        },
+        "level_wider": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 16
+          },
+          "candidate_false_only_synthetic": 0,
+          "candidate_located_component_count": 0,
+          "candidate_located_host_count": 0,
+          "candidate_locations_by_family": {
+            "family_a": 0,
+            "family_b": 0
+          },
+          "candidate_ordinary_component_count": 0,
+          "candidate_ordinary_host_count": 0,
+          "ordinary_flag_cells": {
+            "baseline_only": 5,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 75
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 0,
+            "roundtrip_kitten": 0,
+            "roundtrip_piper": 0,
+            "same_reader_splice": 0,
+            "untouched": 0
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 32
+          },
+          "zero_overlap_candidate_intervals": 0
+        }
+      },
+      "baseline": {
+        "background_flags": 0,
+        "ordinary_flags": 5,
+        "synthetic_flags": 2,
+        "synthetic_locations": 0
+      },
+      "clocked_rank_comparisons": {
+        "all": {
+          "above_all_five": 0,
+          "comparisons": 160,
+          "losses": 112,
+          "ties": 0,
+          "wins": 48
+        },
+        "by_family": {
+          "family_a": {
+            "comparisons": 80,
+            "losses": 63,
+            "ties": 0,
+            "wins": 17
+          },
+          "family_b": {
+            "comparisons": 80,
+            "losses": 49,
+            "ties": 0,
+            "wins": 31
+          }
+        },
+        "by_role": {
+          "different_reader_splice": {
+            "comparisons": 32,
+            "losses": 18,
+            "ties": 0,
+            "wins": 14
+          },
+          "roundtrip_kitten": {
+            "comparisons": 32,
+            "losses": 23,
+            "ties": 0,
+            "wins": 9
+          },
+          "roundtrip_piper": {
+            "comparisons": 32,
+            "losses": 23,
+            "ties": 0,
+            "wins": 9
+          },
+          "same_reader_splice": {
+            "comparisons": 32,
+            "losses": 25,
+            "ties": 0,
+            "wins": 7
+          },
+          "untouched": {
+            "comparisons": 32,
+            "losses": 23,
+            "ties": 0,
+            "wins": 9
+          }
+        }
+      },
+      "denominators": {
+        "background": 16,
+        "ordinary": 80,
+        "synthetic": 32
+      },
+      "unassessed": {
+        "background": 16,
+        "ordinary": 50,
+        "synthetic": 20
+      }
+    },
+    "river": {
+      "arms": {
+        "contrast_strict": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 16
+          },
+          "candidate_false_only_synthetic": 2,
+          "candidate_located_component_count": 1,
+          "candidate_located_host_count": 1,
+          "candidate_locations_by_family": {
+            "family_a": 1,
+            "family_b": 1
+          },
+          "candidate_ordinary_component_count": 2,
+          "candidate_ordinary_host_count": 2,
+          "ordinary_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 6,
+            "neither": 74
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 2,
+            "roundtrip_kitten": 1,
+            "roundtrip_piper": 1,
+            "same_reader_splice": 1,
+            "untouched": 1
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 2,
+            "neither": 30
+          },
+          "zero_overlap_candidate_intervals": 2
+        },
+        "contrast_wider": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 16
+          },
+          "candidate_false_only_synthetic": 3,
+          "candidate_located_component_count": 1,
+          "candidate_located_host_count": 1,
+          "candidate_locations_by_family": {
+            "family_a": 1,
+            "family_b": 1
+          },
+          "candidate_ordinary_component_count": 2,
+          "candidate_ordinary_host_count": 3,
+          "ordinary_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 8,
+            "neither": 72
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 3,
+            "roundtrip_kitten": 1,
+            "roundtrip_piper": 1,
+            "same_reader_splice": 2,
+            "untouched": 1
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 2,
+            "neither": 30
+          },
+          "zero_overlap_candidate_intervals": 3
+        },
+        "level_strict": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 16
+          },
+          "candidate_false_only_synthetic": 0,
+          "candidate_located_component_count": 0,
+          "candidate_located_host_count": 0,
+          "candidate_locations_by_family": {
+            "family_a": 0,
+            "family_b": 0
+          },
+          "candidate_ordinary_component_count": 0,
+          "candidate_ordinary_host_count": 0,
+          "ordinary_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 80
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 0,
+            "roundtrip_kitten": 0,
+            "roundtrip_piper": 0,
+            "same_reader_splice": 0,
+            "untouched": 0
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 32
+          },
+          "zero_overlap_candidate_intervals": 0
+        },
+        "level_wider": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 16
+          },
+          "candidate_false_only_synthetic": 0,
+          "candidate_located_component_count": 0,
+          "candidate_located_host_count": 0,
+          "candidate_locations_by_family": {
+            "family_a": 0,
+            "family_b": 0
+          },
+          "candidate_ordinary_component_count": 1,
+          "candidate_ordinary_host_count": 1,
+          "ordinary_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 1,
+            "neither": 79
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 1,
+            "roundtrip_kitten": 0,
+            "roundtrip_piper": 0,
+            "same_reader_splice": 0,
+            "untouched": 0
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 32
+          },
+          "zero_overlap_candidate_intervals": 0
+        }
+      },
+      "baseline": {
+        "background_flags": 0,
+        "ordinary_flags": 0,
+        "synthetic_flags": 0,
+        "synthetic_locations": 0
+      },
+      "clocked_rank_comparisons": {
+        "all": {
+          "above_all_five": 9,
+          "comparisons": 160,
+          "losses": 56,
+          "ties": 0,
+          "wins": 104
+        },
+        "by_family": {
+          "family_a": {
+            "comparisons": 80,
+            "losses": 30,
+            "ties": 0,
+            "wins": 50
+          },
+          "family_b": {
+            "comparisons": 80,
+            "losses": 26,
+            "ties": 0,
+            "wins": 54
+          }
+        },
+        "by_role": {
+          "different_reader_splice": {
+            "comparisons": 32,
+            "losses": 19,
+            "ties": 0,
+            "wins": 13
+          },
+          "roundtrip_kitten": {
+            "comparisons": 32,
+            "losses": 8,
+            "ties": 0,
+            "wins": 24
+          },
+          "roundtrip_piper": {
+            "comparisons": 32,
+            "losses": 8,
+            "ties": 0,
+            "wins": 24
+          },
+          "same_reader_splice": {
+            "comparisons": 32,
+            "losses": 13,
+            "ties": 0,
+            "wins": 19
+          },
+          "untouched": {
+            "comparisons": 32,
+            "losses": 8,
+            "ties": 0,
+            "wins": 24
+          }
+        }
+      },
+      "denominators": {
+        "background": 16,
+        "ordinary": 80,
+        "synthetic": 32
+      },
+      "unassessed": {
+        "background": 16,
+        "ordinary": 35,
+        "synthetic": 14
+      }
+    },
+    "washing": {
+      "arms": {
+        "contrast_strict": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 16
+          },
+          "candidate_false_only_synthetic": 3,
+          "candidate_located_component_count": 4,
+          "candidate_located_host_count": 11,
+          "candidate_locations_by_family": {
+            "family_a": 10,
+            "family_b": 8
+          },
+          "candidate_ordinary_component_count": 4,
+          "candidate_ordinary_host_count": 12,
+          "ordinary_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 20,
+            "neither": 60
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 10,
+            "roundtrip_kitten": 1,
+            "roundtrip_piper": 1,
+            "same_reader_splice": 7,
+            "untouched": 1
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 2,
+            "both": 6,
+            "candidate_only": 12,
+            "neither": 12
+          },
+          "zero_overlap_candidate_intervals": 5
+        },
+        "contrast_wider": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 16
+          },
+          "candidate_false_only_synthetic": 2,
+          "candidate_located_component_count": 4,
+          "candidate_located_host_count": 11,
+          "candidate_locations_by_family": {
+            "family_a": 10,
+            "family_b": 10
+          },
+          "candidate_ordinary_component_count": 4,
+          "candidate_ordinary_host_count": 13,
+          "ordinary_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 24,
+            "neither": 56
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 10,
+            "roundtrip_kitten": 2,
+            "roundtrip_piper": 2,
+            "same_reader_splice": 8,
+            "untouched": 2
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 2,
+            "both": 6,
+            "candidate_only": 14,
+            "neither": 10
+          },
+          "zero_overlap_candidate_intervals": 7
+        },
+        "level_strict": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 16
+          },
+          "candidate_false_only_synthetic": 3,
+          "candidate_located_component_count": 0,
+          "candidate_located_host_count": 0,
+          "candidate_locations_by_family": {
+            "family_a": 0,
+            "family_b": 0
+          },
+          "candidate_ordinary_component_count": 1,
+          "candidate_ordinary_host_count": 1,
+          "ordinary_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 1,
+            "neither": 79
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 1,
+            "roundtrip_kitten": 0,
+            "roundtrip_piper": 0,
+            "same_reader_splice": 0,
+            "untouched": 0
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 8,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 24
+          },
+          "zero_overlap_candidate_intervals": 0
+        },
+        "level_wider": {
+          "background_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 16
+          },
+          "candidate_false_only_synthetic": 11,
+          "candidate_located_component_count": 0,
+          "candidate_located_host_count": 0,
+          "candidate_locations_by_family": {
+            "family_a": 0,
+            "family_b": 0
+          },
+          "candidate_ordinary_component_count": 2,
+          "candidate_ordinary_host_count": 2,
+          "ordinary_flag_cells": {
+            "baseline_only": 0,
+            "both": 0,
+            "candidate_only": 2,
+            "neither": 78
+          },
+          "ordinary_flags_by_role": {
+            "different_reader_splice": 2,
+            "roundtrip_kitten": 0,
+            "roundtrip_piper": 0,
+            "same_reader_splice": 0,
+            "untouched": 0
+          },
+          "synthetic_location_cells": {
+            "baseline_only": 8,
+            "both": 0,
+            "candidate_only": 0,
+            "neither": 24
+          },
+          "zero_overlap_candidate_intervals": 0
+        }
+      },
+      "baseline": {
+        "background_flags": 0,
+        "ordinary_flags": 0,
+        "synthetic_flags": 8,
+        "synthetic_locations": 8
+      },
+      "clocked_rank_comparisons": {
+        "all": {
+          "above_all_five": 25,
+          "comparisons": 160,
+          "losses": 7,
+          "ties": 0,
+          "wins": 153
+        },
+        "by_family": {
+          "family_a": {
+            "comparisons": 80,
+            "losses": 2,
+            "ties": 0,
+            "wins": 78
+          },
+          "family_b": {
+            "comparisons": 80,
+            "losses": 5,
+            "ties": 0,
+            "wins": 75
+          }
+        },
+        "by_role": {
+          "different_reader_splice": {
+            "comparisons": 32,
+            "losses": 7,
+            "ties": 0,
+            "wins": 25
+          },
+          "roundtrip_kitten": {
+            "comparisons": 32,
+            "losses": 0,
+            "ties": 0,
+            "wins": 32
+          },
+          "roundtrip_piper": {
+            "comparisons": 32,
+            "losses": 0,
+            "ties": 0,
+            "wins": 32
+          },
+          "same_reader_splice": {
+            "comparisons": 32,
+            "losses": 0,
+            "ties": 0,
+            "wins": 32
+          },
+          "untouched": {
+            "comparisons": 32,
+            "losses": 0,
+            "ties": 0,
+            "wins": 32
+          }
+        }
+      },
+      "denominators": {
+        "background": 16,
+        "ordinary": 80,
+        "synthetic": 32
+      },
+      "unassessed": {
+        "background": 16,
+        "ordinary": 0,
+        "synthetic": 0
+      }
+    }
+  },
+  "custody_commitment_sha256": "4ea590c9d06f9a84482f5661fcdfaf2b119c57d00dddfd8170a2e0bfe8349929",
+  "decision": "diagnostic_only_no_product_acceptance_gate",
+  "frozen_points": {
+    "contrast": {
+      "strict": 6.430497348308563,
+      "wider": 6.051407992839813
+    },
+    "level": {
+      "strict": 10.786407470703125,
+      "wider": 9.697216033935547
+    }
+  },
+  "method": {
+    "cpu_threads": 2,
+    "flank_bins": 2,
+    "input_views": 1,
+    "maximum_ranges": 5,
+    "minimum_edit_coverage": [
+      1,
+      2
+    ],
+    "minimum_speech_fraction": [
+      1,
+      2
+    ],
+    "minimum_temporal_iou": [
+      3,
+      10
+    ],
+    "newly_fitted_parameters": 0,
+    "prediction_bin_samples": 2560,
+    "range_bins": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "recording_samples": 192000,
+    "sample_rate": 16000
+  },
+  "schema": "chipmunk.audio-sal-native-strong-noise-summary/1",
+  "study": "audio-sal-native-strong-noise-2026-11-18",
+  "verification": {
+    "actual_selection_parity_comparisons": 1984,
+    "additive_noisy_deliveries_replayed": 336,
+    "authored_boundary_checks": 8,
+    "authored_selection_parity_comparisons": 68,
+    "changed_clean_foregrounds": 96,
+    "inference_elapsed_seconds": 465.706,
+    "native_prediction_bins": 37200,
+    "original_hosts_replayed": 16,
+    "outside_edit_samples_compared": 79134720,
+    "range_admission_checks": 215760
+  }
+}

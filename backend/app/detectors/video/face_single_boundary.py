@@ -5,6 +5,7 @@ from __future__ import annotations
 
 from collections.abc import Callable, Mapping
 from contextlib import closing
+from hashlib import sha256
 from pathlib import Path
 
 import cv2
@@ -53,6 +54,19 @@ def native_ntsc_method(path: Path, table: FrameTable, encoding, origin: float | 
         if mp4_source_clock.verified(path, table, ticks):
             return method
     return None
+
+
+def supported_native720(path: Path, table: FrameTable, encoding, origin: float | None) -> bool:
+    return (origin == 0 and supported_native30(path, table, encoding, method=binding.NATIVE720_METHOD)
+            and mp4_source_clock.verified(path, table, binding.NATIVE30_TICKS))
+
+
+def working_rgb(native: np.ndarray) -> np.ndarray:
+    """Average each original 2 × 2 RGB cell, rounding half up on the working raster."""
+    if native.shape != (binding.NATIVE720_SIZE[1], binding.NATIVE720_SIZE[0], 3) or native.dtype != np.uint8:
+        raise DecodeError("The face transition needs the original 720p RGB frame")
+    values = native.astype(np.uint16)
+    return ((values[::2, ::2] + values[1::2, ::2] + values[::2, 1::2] + values[1::2, 1::2] + 2) // 4).astype(np.uint8)
 
 
 def coverage(status: str, reason: str | None = None, *, frames_scanned: int = 0, measured_face_frames: int = 0,
@@ -115,7 +129,7 @@ def proposals(samples: Mapping[int, face_return.Sample], check: Callable[[], Non
 
 
 def _refine(path, table, samples, reading, locator, encoder, *, check, timeout_s,
-            background=None, arm=None, observed=None):
+            background=None, arm=None, observed=None, working_frames=None):
     coarse = reading["coarse"]
     centers = []
     for region in (range(coarse - 12, coarse - 3, 2), range(coarse + 2, coarse + 12, 2)):
@@ -129,7 +143,11 @@ def _refine(path, table, samples, reading, locator, encoder, *, check, timeout_s
         selected[index] = sample, (pin | {"index": index, "pts": table.pts[index],
                                          "eyes": [list(eye) for eye in pin["eyes"]]} if pin else None)
 
-    if background is None:
+    if working_frames is not None:
+        for index in wanted:
+            check()
+            observe(index, working_frames[index])
+    elif background is None:
         with closing(decode_frames(path, table, wanted, check=check, timeout_s=timeout_s())) as frames:
             for frame in frames:
                 check()
@@ -204,17 +222,33 @@ def _sparse_readings(path, table, samples, rgb, locator, encoder, *, check, time
     return readings
 
 
-def measure(path, table, locator, encoder, *, check, timeout_s, sparse=False, native30=False) -> tuple[dict | None, dict]:
+def measure(path, table, locator, encoder, *, check, timeout_s, sparse=False, native30=False,
+            native720=False) -> tuple[dict | None, dict]:
     """Return the refined measurement before applying the point, plus its actual coverage."""
+    native30 = native30 or native720
     schedule = NATIVE30_SAMPLE if native30 else SAMPLE
     sparse = sparse or native30
     observer = ShotDetector(table, min_shot_s=0.)
     samples = {}
     rgb = {}
+    native_hashes = {}
     scanned = measured = 0
 
     def result(status, reason=None):
         return coverage(status, reason, frames_scanned=scanned, measured_face_frames=measured, sparse=sparse, native30=native30)
+
+    def localized(reading):
+        if native720:
+            native_frames = {
+                role: pin | {
+                    "box": {key: value * 2 for key, value in pin["box"].items()},
+                    "working_rgb_sha256": pin["decoded_rgb_sha256"],
+                    "decoded_rgb_sha256": native_hashes[pin["index"]],
+                }
+                for role, pin in reading["source_frames"].items()
+            }
+            reading = reading | {"source_frames": native_frames, "measurement_raster": dict(binding.MEASUREMENT_RASTER)}
+        return reading, result("localized")
 
     try:
         with closing(decode_frames(path, table, None, check=check, timeout_s=timeout_s())) as frames:
@@ -222,13 +256,17 @@ def measure(path, table, locator, encoder, *, check, timeout_s, sparse=False, na
                 check()
                 if frame.index != index or not frame.pts_verified or frame.pts != table.pts[index]:
                     raise DecodeError("A measured picture lacks its native timestamp")
-                observer.update(index, frame.rgb)
+                pixels = frame.rgb
+                if native720:
+                    native_hashes[index] = sha256(pixels).hexdigest()
+                    pixels = working_rgb(pixels)
+                observer.update(index, pixels)
                 scanned += 1
                 if sparse:
-                    rgb[index] = frame.rgb
+                    rgb[index] = pixels
                 if index in schedule:
                     # Only the unused frequency output is omitted on the coarse scan.
-                    sample, _, _, _ = face_local_detail.observe(frame.rgb, locator, encoder, with_texture=False)
+                    sample, _, _, _ = face_local_detail.observe(pixels, locator, encoder, with_texture=False)
                     samples[index] = sample
                     measured += sample.vector is not None
         if observer.frames_seen != len(table) or set(samples) != set(schedule):
@@ -237,9 +275,9 @@ def measure(path, table, locator, encoder, *, check, timeout_s, sparse=False, na
             return None, result("unavailable", "shot_change")
         candidates = proposals(samples, check, native30=native30)
         incumbent = (_refine(path, table, samples, max(candidates, key=_rank), locator, encoder,
-                             check=check, timeout_s=timeout_s) if candidates else None)
+                             check=check, timeout_s=timeout_s, working_frames=rgb if native720 else None) if candidates else None)
         if incumbent is not None and incumbent["persistent"] > POINT:
-            return incumbent, result("localized")
+            return localized(incumbent)
         if sparse:
             try:
                 alternatives = _sparse_readings(path, table, samples, rgb, locator, encoder,
@@ -252,7 +290,7 @@ def measure(path, table, locator, encoder, *, check, timeout_s, sparse=False, na
             if len(positives) == 2 and abs(positives[0]["boundary"] - positives[1]["boundary"]) > 1:
                 return None, result("unavailable", "conflicting_boundary_context")
             if positives:
-                return positives[0], result("localized")
+                return localized(positives[0])
             if alternatives:
                 return incumbent or alternatives[0], result("no_match")
         if incumbent is not None:
@@ -266,7 +304,8 @@ def measure(path, table, locator, encoder, *, check, timeout_s, sparse=False, na
 
 def inspect(path, table, locator, encoder, *, check, timeout_s, sparse=False, native30=False, native_method=None) -> tuple[dict | None, dict]:
     native30 = native30 or native_method in binding.NATIVE_CLOCK_METHODS
-    reading, disposition = measure(path, table, locator, encoder, check=check, timeout_s=timeout_s, sparse=sparse, native30=native30)
+    reading, disposition = measure(path, table, locator, encoder, check=check, timeout_s=timeout_s, sparse=sparse,
+                                   native30=native30, native720=native_method == binding.NATIVE720_METHOD)
     if native_method is not None:
         disposition["method"] = native_method
     if disposition["status"] != "localized" or reading is None:

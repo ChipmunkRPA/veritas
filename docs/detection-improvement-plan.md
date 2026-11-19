@@ -67,6 +67,29 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- The 720p sustained face-transition comparison located all 12 staged
+  boundaries at the exact frame. The existing short-return comparison
+  found none of the 12. The new reading marked one ordinary focus change
+  among 30 controls. The backend reproduced all 45 held and separate
+  camera outcomes. [720p transition comparison](video-face-boundary-720p-2026-11-18.md)
+
+- The PDF heading check reproduced 19 exact locations from the 20-paper
+  disclosure audit, with zero weight in the AI assessment. Six simulated
+  checkouts verified the browser, PDF, JSON and signed original file.
+  [Printed AI-use heading evidence](writing-printed-ai-use-heading-2026-11-18.md)
+
+- A separate segment-trained audio check found two river-noise edits,
+  both on one host, and flagged six of 80 ordinary river files. It added
+  12 washing-noise locations and 20 ordinary-file alerts. It did not
+  localize restaurant edits and remains out of serving.
+  [Strong-noise speech diagnostic](audio-sal-native-strong-noise-2026-11-18.md)
+
+- A residual phase comparison located one of 64 staged small JPEG edits.
+  The same quality-75 measurement added five wrong inpainting locations
+  and flagged three of 16 untouched photos. Native independent replay
+  checked all 240 inputs. The measurement remains out of serving.
+  [JPEG phase comparison](image-jpeg-phase-consistency-2026-11-18.md)
+
 - Supported quality-90 JPEGs with a saved rotation or reflection now use
   the same stored-pixel measurement as upright files. The display maps
   show the corresponding original crop. Two paid local replays and
@@ -77,8 +100,9 @@ are not public screening promises or calibrated population probabilities.
   washing-machine edits by adding the shorter-window check at its frozen
   point. Ordinary alerts were unchanged. Learned acoustic correction
   added 15 restaurant alerts and located no additional noisy edits.
-  River and restaurant localization remain open. Source-bound and paid-flow
-  checks are still needed for the shorter-window addition.
+  River and restaurant localization remain open. The optional local check
+  now shows exact 750 ms clips and waveforms. Eight simulated checkouts
+  verified the evidence page, PDF, JSON and signed replay.
   [Matched audio transfer](audio-noise-matched-segment-transfer-2026-11-18.md)
 
 - The face-transition check now accepts qualified 29.97 fps AVC exports.

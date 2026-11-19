@@ -48,8 +48,9 @@ export interface VideoEvidencePacket extends PacketBase {
     motion_sound_agreement?: { agreement_units: [number, number, number] }
   }
   scene_return?: { schema: 'picture-change-return/1' | 'picture-change-return/2'; start_stream_s: number; end_stream_s: number; tiles: number[] }
-  face_single_boundary?: { method: 'single-face-boundary/1' | 'single-face-boundary/2' | 'single-face-boundary/3' | 'single-face-boundary/4' | 'single-face-boundary/5'; boundary: number; pts: number; time_base: string;
-    time_s: number; affects_overall_confidence: false }
+  face_single_boundary?: { method: 'single-face-boundary/1' | 'single-face-boundary/2' | 'single-face-boundary/3' | 'single-face-boundary/4' | 'single-face-boundary/5' | 'single-face-boundary/6';
+    boundary: number; pts: number; time_base: string; time_s: number; affects_overall_confidence: false;
+    measurement_raster?: { width: 640; height: 360; transform: 'rgb-box-2x2-half-up' } }
   picture_sequence?: { first: PictureSequenceSpan; second: PictureSequenceSpan; frame_count: number; span_s: number; order?: 'reverse';
     frame_steps?: Record<'first' | 'second', 1 | 2 | 3 | 4>; spatial_transform?: 'horizontal_reflection';
     framing?: { wider_range: 'first' | 'second'; crop_box: [number, number, number, number]; alignment?: 'centered' | 'landmarks' } }
@@ -113,7 +114,7 @@ export interface VideoEvidenceSet extends SetBase {
     brief_face_review?: { observations: string[]; affects_overall_confidence: false };
     brief_face_windows?: { observations: string[]; affects_overall_confidence: false };
     face_single_boundary_coverage?: { status: 'localized' | 'no_match' | 'unavailable'; frames_scanned: number;
-      method?: 'single-face-boundary/2' | 'single-face-boundary/3' | 'single-face-boundary/4' | 'single-face-boundary/5';
+      method?: 'single-face-boundary/2' | 'single-face-boundary/3' | 'single-face-boundary/4' | 'single-face-boundary/5' | 'single-face-boundary/6';
       measured_face_frames: number; reason: 'provenance' | 'profile' | 'unsupported_video' | 'models_unavailable'
         | 'time_budget' | 'native_measurement_unavailable' | 'shot_change' | 'insufficient_face_context' | 'insufficient_native_boundary'
         | 'conflicting_boundary_context' | null };
@@ -634,6 +635,17 @@ export interface DocumentEvidenceSet extends SetBase {
       anchor: Omit<MappedTextFinding['anchor'], 'kind'> & { kind: MappedTextFinding['anchor']['kind']
         | 'decoded_html' | 'odt_paragraph' | 'rtf_paragraph' }
     })[]
+  }
+  printed_ai_use_heading?: {
+    schema: 'chipmunk.printed-ai-use-heading/1'
+    text: string
+    start: number
+    end: number
+    page: number
+    block: number
+    box: [number, number, number, number]
+    word_boxes: { text: string; box: [number, number, number, number] }[]
+    affects_overall_confidence: false
   }
   doi_reference_consistency?: {
     schema: 'document-doi-reference/1'; affects_overall_confidence: false; scope: string; limitation: string

@@ -28,6 +28,7 @@ from app.detectors.video import (
     scene_return_carrier,
 )
 from app.detectors.video.decode import DecodedFrame, FrameTable, decode_frames, decode_stream, probe_frames
+from app.detectors.video.face_single_boundary import working_rgb
 from app.detectors.video.frames import probe as probe_container
 from app.detectors.video.lipsync import source_mouth_patch
 from app.detectors.video.shots import ShotDetector
@@ -465,6 +466,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     coverage = (evidence.get("coverage") or {}).get(face_single_boundary_binding.COVERAGE, {})
     native_method = coverage.get("method")
     native30 = native_method in face_single_boundary_binding.NATIVE_CLOCK_METHODS
+    native720 = native_method == face_single_boundary_binding.NATIVE720_METHOD
     if native30 and coverage["frames_scanned"] > 0:
         if delivery is None or "codec_tag" not in delivery:
             delivery = probe_container(original, include_codec_tag=True)
@@ -473,7 +475,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         carrier = "mp4" if alt_clock else face_return.source_carrier(original)
         if not face_single_boundary_binding.native30_source(table, encoding, carrier, native_method):
             raise ValueError("The original video differs from its native-clock face transition profile")
-        if alt_clock and (delivery.get("timeline_origin_s") != 0 or not mp4_source_clock.verified(
+        if native_method in face_single_boundary_binding.STRICT_CLOCK_METHODS and (
+                delivery.get("timeline_origin_s") != 0 or not mp4_source_clock.verified(
                     original, table, face_single_boundary_binding.native_ticks(table.time_base, native_method))):
             raise ValueError("The original MP4 presentation clock differs from its face transition profile")
     if transition is not None:
@@ -582,12 +585,15 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             index = frame.index
             found.add(index)
             rgb_sha = hashlib.sha256(frame.rgb).hexdigest()
+            transition_pixels = frame.rgb
             if transition_shots is not None:
                 if not frame.pts_verified or frame.pts != table.pts[index]:
                     raise ValueError("Face transition requires a verified native picture clock")
-                transition_shots.update(index, frame.rgb)
+                if native720:
+                    transition_pixels = working_rgb(frame.rgb)
+                transition_shots.update(index, transition_pixels)
                 if index in sparse_indices:
-                    sparse_pixels[index] = frame.rgb
+                    sparse_pixels[index] = transition_pixels
             if row := timing_frames.get(index):
                 _frame_anchor(frame, row["pts"], row["rgb_sha256"], "Speech and mouth timing input", rgb_sha)
                 x, y, right, bottom = row["mouth_box"]
@@ -619,14 +625,18 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
 
                 row = transition_frames[index]
                 _frame_anchor(frame, row["pts"], row["decoded_rgb_sha256"], "Face appearance transition", rgb_sha)
-                crop = align(frame.rgb, face_single_boundary_binding.eyes(row))
+                if native720 and hashlib.sha256(transition_pixels).hexdigest() != row["working_rgb_sha256"]:
+                    raise ValueError("The original video does not reproduce the face transition working picture")
+                crop = align(transition_pixels, face_single_boundary_binding.eyes(row))
                 if crop is None or hashlib.sha256(crop.tobytes()).hexdigest() != row["aligned_rgb_sha256"]:
                     raise ValueError("The original video does not reproduce the face transition crop")
                 alignments += 1
                 if not sparse_indices and index in {transition["boundary"] - 1, transition["boundary"]}:
                     box = row["box"]
+                    if native720:
+                        box = {key: value // 2 for key, value in box.items()}
                     face = Face(box["x"], box["y"], box["w"], box["h"], 0.)
-                    transition_scenes[index] = face_return.Sample(face, None, face_return.scene(frame.rgb, face))
+                    transition_scenes[index] = face_return.Sample(face, None, face_return.scene(transition_pixels, face))
             for packet, row in mouths[index]:
                 _frame_anchor(frame, row["frame_pts"], row["decoded_rgb_sha256"], packet["id"], rgb_sha)
                 _verify_mouth(archive, frame.rgb, packet, row)

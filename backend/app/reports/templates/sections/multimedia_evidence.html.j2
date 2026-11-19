@@ -276,6 +276,14 @@
 {% endif %}
 <p class="caption">{{ identifiers.limitation }}</p>
 {% endif %}
+{% if evidence.get('printed_ai_use_heading') %}
+{% set heading = evidence.printed_ai_use_heading %}
+<h3 id="multimedia-printed-ai-use-heading">Printed AI-use heading</h3>
+<blockquote>{{ heading.text }}</blockquote>
+<p class="caption">PDF page {{ heading.page }} · Extracted characters [{{ heading.start }}, {{ heading.end }}).
+JSON pointer <span class="mono">/printed_ai_use_heading</span>.</p>
+<p class="caption">A printed heading can be part of a quotation or example. This observation carries zero weight in the AI assessment.</p>
+{% endif %}
 {% set doi_review = evidence.get('doi_reference_consistency') %}
 {% if doi_review %}
 <h3 id="document-doi-review">DOI reference check</h3>
@@ -376,8 +384,9 @@
 {% set review = evidence.face_single_boundary_coverage %}
 <h3>Face transition coverage</h3>
 <p class="caption">{{ review.message }}{% if review.status == 'localized' %} See <a href="#multimedia-evidence-VFB01">VFB01</a> for the timestamp and original frames.{% endif %}</p>
-{% if review.frames_scanned %}<p class="caption">The check read {{ review.frames_scanned }} native pictures for shot changes and measured {{ review.measured_face_frames }} usable face views on its sampling grid.{% if review.get('method') == 'single-face-boundary/3' %} Source timing was verified at 30 frames per second.{% elif review.get('method') in ['single-face-boundary/4', 'single-face-boundary/5'] %} Source timing was verified at 29.97 frames per second.{% endif %}</p>{% endif %}
-{% if review.status == 'localized' and review.get('method') in ['single-face-boundary/3', 'single-face-boundary/4', 'single-face-boundary/5'] %}<p class="caption">A focus change can produce a similar pattern and can also occur alongside a face swap.</p>{% endif %}
+{% if review.frames_scanned %}<p class="caption">The check read {{ review.frames_scanned }} native pictures for shot changes and measured {{ review.measured_face_frames }} usable face views on its sampling grid.{% if review.get('method') in ['single-face-boundary/3', 'single-face-boundary/6'] %} Source timing was verified at 30 frames per second.{% elif review.get('method') in ['single-face-boundary/4', 'single-face-boundary/5'] %} Source timing was verified at 29.97 frames per second.{% endif %}</p>{% endif %}
+{% if review.get('method') == 'single-face-boundary/6' and review.frames_scanned %}<p class="caption">The face measurement uses a 640 × 360 view made by averaging 2 × 2 source pixels. Any displayed frames and crops use the original 1280 × 720 pixels.</p>{% endif %}
+{% if review.status == 'localized' and review.get('method') in ['single-face-boundary/3', 'single-face-boundary/4', 'single-face-boundary/5', 'single-face-boundary/6'] %}<p class="caption">A focus change can produce a similar pattern and can also occur alongside a face swap.</p>{% endif %}
 <p class="caption">This check carries zero AI confidence weight. JSON pointer <span class="mono">/coverage/face_single_boundary_coverage</span>.</p>
 {% endif %}
 {% if evidence.get('scene_return_review') %}
@@ -969,7 +978,7 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% if evidence.stereo_repetition.get('rate_measurement') and evidence.stereo_repetition.rate_measurement.pairs %}{% set stereo_repeats.found = true %}{% endif %}
 {% for row in evidence.stereo_repetition.channels %}{% if row.measurement.pairs or (row.get('gain_measurement') and row.gain_measurement.pairs) %}{% set stereo_repeats.found = true %}{% endif %}{% endfor %}
 {% endif %}
-{% if not stereo_repeats.found and not (evidence.get('background_reduced_voice_review') and evidence.background_reduced_voice_review.status == 'flagged') and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') and not (evidence.get('percentage_consistency') and evidence.percentage_consistency.groups) and not (evidence.get('doi_reference_consistency') and evidence.doi_reference_consistency.different_work) and not (evidence.get('saved_link_hosts') and evidence.saved_link_hosts.findings) %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
+{% if not stereo_repeats.found and not (evidence.get('background_reduced_voice_review') and evidence.background_reduced_voice_review.status == 'flagged') and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') and not (evidence.get('percentage_consistency') and evidence.percentage_consistency.groups) and not evidence.get('printed_ai_use_heading') and not (evidence.get('doi_reference_consistency') and evidence.doi_reference_consistency.different_work) and not (evidence.get('saved_link_hosts') and evidence.saved_link_hosts.findings) %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
 {% if evidence.omitted %}<p class="caption">{{ evidence.omitted }} additional candidates were omitted from this bounded evidence set.</p>{% endif %}
 {% for note in evidence.limitations %}<p class="caption">{{ note }}</p>{% endfor %}
 {% endif %}

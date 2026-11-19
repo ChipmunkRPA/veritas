@@ -98,6 +98,15 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
   const sceneReview = coverage?.scene_return_review
   const transitionReview = coverage?.face_single_boundary_coverage
   const transition = packets.find(packet => packet.face_single_boundary)?.face_single_boundary
+  const transition720p = (transition?.method ?? transitionReview?.method) === 'single-face-boundary/6'
+  const transition2997 = transitionReview?.method === 'single-face-boundary/4' || transitionReview?.method === 'single-face-boundary/5'
+  const transitionMeasurement = transition720p ? transition?.measurement_raster : undefined
+  const transitionProfile = transition720p
+    ? 'The 720p face transition check needs a four-second 1280 × 720 H.264 MP4 (avc1) at exactly 30 fps starting at source time zero.'
+    : transition2997 ? 'This check requires a short 640 × 360 H.264 MP4 and a supported fixed source clock.'
+      : transitionReview?.method === 'single-face-boundary/3'
+        ? 'This check covers four-second, 640 × 360 H.264 MP4 with a verified 25 fps or qualified 30 fps clock.'
+        : 'This check covers four-second, 640 × 360 H.264 MP4 with a verified 25 fps clock.'
   const mouthHold = hold?.mouth_local_hold
   const eyeHold = hold?.eye_local_hold
   const lipTiming = scope !== 'visual' ? set.lip_timing_review : undefined
@@ -113,6 +122,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
     <div className="mt-5 space-y-5">{frames.map((frame) => {
       const cut = packet.face_spatial_cut_frames?.some(item => item.id === frame.id)
       const crop = frame.artifact_refs.crop && packet.artifacts[frame.artifact_refs.crop]
+      const nativeFaceCrop = crop && packet.face_single_boundary?.method === 'single-face-boundary/6' ? frame.context_region : null
       const measuredRegion = crop && (packet.eye_local_hold ? 'eye' : (packet.mouth_local_hold || packet.lip_timing_review) ? 'mouth' : null)
       const mismatch = packet.lip_timing_review?.articulation || packet.lip_timing_review?.motion_sound_agreement
       const timingLabel = packet.lip_timing_review?.speech_activity_gap ? 'reduced speech activity'
@@ -147,6 +157,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
           {!packet.picture_hold && !packet.picture_sequence && !packet.scene_return && <figure className="m-0 min-w-0"><EvidencePicture set={set} artifact={crop || packet.artifacts[frame.artifact_refs.context]} token={token} ready={mediaReady}
             alt={`${frame.id}: ${measuredRegion ? `exact measured ${measuredRegion} region` : crop ? 'source face crop for context' : 'frame context with its recorded label'}`} />
             <figcaption className="mt-2 text-caption text-text-muted">{measuredRegion ? `Exact pixels of the measured ${measuredRegion} region.`
+              : nativeFaceCrop ? `Exact source face crop · x ${nativeFaceCrop.x}, y ${nativeFaceCrop.y} · ${nativeFaceCrop.w} × ${nativeFaceCrop.h} pixels.`
               : packet.face_single_boundary ? 'Exact crop of the face from this source frame.'
               : crop ? 'Detected-face crop for inspection; not an edit boundary or the exact aligned classifier input.'
               : 'Source context with a navigation label; no local edit mask is available.'}</figcaption></figure>}
@@ -164,23 +175,25 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
         ? <><a className="underline" href="#media-evidence-VFB01">Inspect the transition</a> at <strong>{seconds(transition.time_s)}</strong> on the source clock, frame {transition.boundary}.</>
         : transitionReview.status === 'no_match' ? 'No qualifying face appearance transition was found in the portion checked.'
         : transitionReview.reason === 'shot_change' ? 'This check requires one continuous shot. A shot change was detected.'
-        : transitionReview.reason === 'profile' ? ['single-face-boundary/4', 'single-face-boundary/5'].includes(transitionReview.method ?? '')
-          ? 'This check requires a short 640 × 360 H.264 MP4 and a supported fixed source clock.'
-          : transitionReview.method === 'single-face-boundary/3'
-          ? 'This check covers four-second, 640 × 360 H.264 MP4 with a verified 25 fps or qualified 30 fps clock.'
-          : 'This check covers four-second, 640 × 360 H.264 MP4 with a verified 25 fps clock.'
+        : transitionReview.reason === 'profile' ? transitionProfile
         : transitionReview.reason === 'provenance' ? 'Verified source credentials determined the analysis path.'
         : transitionReview.reason === 'insufficient_face_context' ? 'The face views and surrounding picture did not support a stable comparison.'
         : transitionReview.reason === 'insufficient_native_boundary' ? 'The nearby source frames did not establish a precise transition.'
         : transitionReview.reason === 'conflicting_boundary_context' ? 'The background checks pointed to different source frames, so this check did not display a transition.'
         : 'The face transition check was unavailable for this upload.'}</p>
       {transitionReview.frames_scanned > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">
-        The check read {transitionReview.frames_scanned} native pictures for shot changes and measured {transitionReview.measured_face_frames} usable face views.
-        {transitionReview.method === 'single-face-boundary/3' && ' Source timing was verified at 30 frames per second.'}
-        {['single-face-boundary/4', 'single-face-boundary/5'].includes(transitionReview.method ?? '') && ' Source timing was verified at 29.97 frames per second.'}
+        {transition720p ? `The check read ${transitionReview.frames_scanned} source frames and measured ${transitionReview.measured_face_frames} usable face views.`
+          : `The check read ${transitionReview.frames_scanned} native pictures for shot changes and measured ${transitionReview.measured_face_frames} usable face views.`}
+        {(transition720p || transitionReview.method === 'single-face-boundary/3') && ' Source timing was verified at 30 frames per second.'}
+        {transition2997 && ' Source timing was verified at 29.97 frames per second.'}
       </p>}
-      {['single-face-boundary/3', 'single-face-boundary/4', 'single-face-boundary/5'].includes(transition?.method ?? '')
-        && <p className="mt-2 mb-0 text-caption text-text-muted">A focus change can produce a similar pattern and can also occur alongside a face swap.</p>}
+      {transition720p && transitionReview.frames_scanned > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">
+        The check averaged 2 × 2 groups of source pixels to measure {transitionMeasurement?.width ?? 640} × {transitionMeasurement?.height ?? 360} views from 1280 × 720 frames.
+        {transition && ' The displayed frames and face crops retain the original pixels.'}
+      </p>}
+      {transition && ['single-face-boundary/3', 'single-face-boundary/4', 'single-face-boundary/5', 'single-face-boundary/6'].includes(transition.method)
+        && <p className="mt-2 mb-0 text-caption text-text-muted">{transition720p ? 'An ordinary focus change can trigger this observation.'
+          : 'A focus change can produce a similar pattern and can also occur alongside a face swap.'}</p>}
       <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero AI confidence weight.</p>
     </section>}
     {lipTiming && <section aria-labelledby="video-lip-timing-heading" className="mt-4 rounded-md border border-border p-4">

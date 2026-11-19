@@ -1402,6 +1402,14 @@ def _child(argv: list[str]) -> int:
             d.meta["hidden_text_pages"] = hidden_text_pages
         else:
             d = extract(path, ext, skip_hidden_rtf_runs=argv[3:] != ["--legacy-rtf-visibility"])
+        if ext.casefold() == ".pdf" and "--printed-ai-use-heading" in argv[3:]:
+            from app.evidence import document_disclosure_heading
+
+            try:
+                if heading := document_disclosure_heading.capture(path, d):
+                    d.meta[document_disclosure_heading.KEY] = heading
+            except (OSError, RuntimeError, ValueError):
+                pass
         out: dict = {"text": d.text, "paragraphs": d.paragraphs, "meta": d.meta, "source_map": d.source_map,
                      "source_rasters": d.source_rasters, "word_review": d.word_review}
     except Exception as e:  # noqa: BLE001 - handed to the parent, which raises it again

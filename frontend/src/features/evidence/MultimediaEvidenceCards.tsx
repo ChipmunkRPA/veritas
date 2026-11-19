@@ -30,6 +30,7 @@ export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: Mul
   const trackedWordEdits = !!(tracked?.rows.length || tracked?.paragraph_marks?.length || tracked?.unsupported_marks)
   const savedPdfEdits = set.schema === 'chipmunk.document-evidence/1' && set.coverage?.pdf_saved_wording?.inspection.status === 'changed'
   const chatMarkers = set.schema === 'chipmunk.document-evidence/1' && (set.coverage?.chat_format_markers?.turns ?? 0) > 0
+  const printedHeading = set.schema === 'chipmunk.document-evidence/1' && set.printed_ai_use_heading?.affects_overall_confidence === false
   const doiMismatch = set.schema === 'chipmunk.document-evidence/1' && (set.doi_reference_consistency?.different_work ?? 0) > 0
   const savedLinkDifference = set.schema === 'chipmunk.document-evidence/1' && (set.saved_link_hosts?.findings.length ?? 0) > 0
   const writingPassages = set.schema === 'chipmunk.document-evidence/1' && (set.coverage?.writing_passage_intervals?.ranges.length ?? 0) > 0
@@ -38,7 +39,7 @@ export function MultimediaEvidenceContent({ set, token, mediaReady }: { set: Mul
       Detailed evidence has not been prepared for this result. Run a new analysis to capture the exact inputs and their source positions. Unavailable evidence does not establish authenticity.
     </p> : <>
       <p className="mt-3 mb-0 text-body text-text-muted">Inspect the exact inputs behind the recorded responses, with their source context and limits. These observations do not prove that AI was used.</p>
-      {set.packets.length === 0 && !nestedCandidates && !monoLevelDrop && !repeatedAudio && !stereoTimingFlag && !shortSpeechFlag && !longSpeechFlag && !backgroundSpeechFlag && !repeatedText && !trackedWordEdits && !savedPdfEdits && !chatMarkers && !doiMismatch && !savedLinkDifference && !writingPassages && <p data-testid="multimedia-evidence-empty" className="mt-3 mb-0 text-small text-text-muted">
+      {set.packets.length === 0 && !nestedCandidates && !monoLevelDrop && !repeatedAudio && !stereoTimingFlag && !shortSpeechFlag && !longSpeechFlag && !backgroundSpeechFlag && !repeatedText && !trackedWordEdits && !savedPdfEdits && !chatMarkers && !printedHeading && !doiMismatch && !savedLinkDifference && !writingPassages && <p data-testid="multimedia-evidence-empty" className="mt-3 mb-0 text-small text-text-muted">
         No inspection candidate was selected from the recorded inputs. This does not establish authenticity; check the coverage and limitations below.
       </p>}
       {set.schema === 'chipmunk.video-evidence/1' ? nestedVideo

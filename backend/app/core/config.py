@@ -400,6 +400,7 @@ class Settings(BaseSettings):
     video_face_single_sparse_context_review: bool = False  # Add bounded sparse-background witnesses to this review.
     video_face_single_boundary_native30_review: bool = False  # Extend the local Full face transition review to qualified 30 fps AVC sources.
     video_face_single_boundary_native2997_review: bool = False  # Extend the same local review to the exact 30000/1001 fps clock.
+    video_face_single_boundary_native720_review: bool = False  # Local sustained face transitions on verified 720p30 AVC MP4.
     video_face_portrait_return_review: bool = False  # Optional face comparison on qualified portrait or square MP4.
     audio_weight: float = 0.8  # docs/eval_audio.md: fused AUC 0.92 on ASVspoof-DF + in-the-wild, FPR ~10 % in the wild
     audio_classifiers: list[str] = [  # HuggingFace audio-classification checkpoints, each "repo_id|positive_label_substring|weight"
@@ -422,6 +423,7 @@ class Settings(BaseSettings):
     text_long_passage_position_review: bool = False
     text_bibliography_scope_review: bool = False  # Keep qualified terminal citations out of body writing inference.
     text_doi_reference_review: bool = False  # Review mapped citations against a pinned local Crossref snapshot.
+    document_disclosure_heading_review: bool = False  # Show a verified position for a printed PDF AI-use heading.
     text_within_sentence_language_review: bool = False  # Check shorter language switches in local writing input.
     text_classifier_id: str = "desklib/ai-text-detector-v1.01"  # base checkpoint (HF Hub)
     # fine-tuned on 2025-26 LLM output (scripts/finetune_text_detector.py); used automatically when present

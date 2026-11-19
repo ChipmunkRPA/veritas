@@ -52,6 +52,7 @@ from app.evidence import (
     document_character_review,
     document_chat_markers,
     document_check_coverage,
+    document_disclosure_heading,
     document_doi_reference,
     document_invisible_characters,
     document_native_locations,
@@ -95,11 +96,18 @@ def decode(ctx: StageContext) -> dict[str, Any]:
     path = common.media_path(ctx)
     prose_only = settings.environment == "dev" and settings.text_bibliography_scope_review
     doi_enabled = settings.environment == "dev" and settings.text_doi_reference_review
+    heading_enabled = settings.environment == "dev" and settings.document_disclosure_heading_review
     policies = {"prose_only": True} if prose_only else {}
-    if doi_enabled and not provenance_gate.stop(ctx):
-        policies["doi_review"] = True
+    if not provenance_gate.stop(ctx):
+        if doi_enabled:
+            policies["doi_review"] = True
+        if heading_enabled and path.suffix.casefold() == ".pdf":
+            policies["disclosure_heading_review"] = True
     doc, sents = decode_document(path, path.suffix, **policies)
     doi_record = doc.meta.pop(document_doi_reference.KEY, None)
+    heading_record = doc.meta.pop(document_disclosure_heading.KEY, None)
+    if heading_record and heading_record["end"] > len(doc.text):
+        heading_record = None
     supports_link_review = doc.meta.get("method") in document_saved_link_hosts_binding.LOCATIONS
     saved_links = None
     if supports_link_review and not provenance_gate.stop(ctx):
@@ -128,6 +136,8 @@ def decode(ctx: StageContext) -> dict[str, Any]:
             **({BIBLIOGRAPHY_POLICY: True} if prose_only else {}),
             **({document_doi_reference.POLICY: True} if doi_enabled else {}),
             **({document_doi_reference.KEY: doi_record} if doi_record else {}),
+            **({document_disclosure_heading.POLICY: True} if heading_enabled and doc.meta.get("method") == "pymupdf" else {}),
+            **({document_disclosure_heading.KEY: heading_record} if heading_record else {}),
             **({document_saved_link_hosts_binding.POLICY: document_saved_link_hosts_binding.SCHEMA} if supports_link_review else {}),
             **({document_saved_link_hosts_binding.KEY: saved_links} if saved_links else {}),
             **({document_tracked_changes.KEY: doc.word_review} if doc.word_review is not None else {})}
@@ -140,6 +150,10 @@ def current_decode_output(output: Any) -> bool:
     if output.get(BIBLIOGRAPHY_POLICY, False) is not (settings.environment == "dev" and settings.text_bibliography_scope_review):
         return False
     if output.get(document_doi_reference.POLICY, False) is not (settings.environment == "dev" and settings.text_doi_reference_review):
+        return False
+    if (output["meta"].get("method") == "pymupdf"
+            and output.get(document_disclosure_heading.POLICY, False)
+            is not (settings.environment == "dev" and settings.document_disclosure_heading_review)):
         return False
     if (output["meta"].get("method") in document_saved_link_hosts_binding.LOCATIONS
             and output.get(document_saved_link_hosts_binding.POLICY) != document_saved_link_hosts_binding.SCHEMA):
@@ -690,6 +704,8 @@ def publish(ctx: StageContext) -> dict[str, Any]:
         result.manifest.sampling[document_tracked_changes.COMMITMENT] = canonical_hash(tracked)
     if doi_reference := decoded.get(document_doi_reference.KEY):
         result.manifest.sampling[document_doi_reference.COMMITMENT] = canonical_hash(doi_reference)
+    if disclosure_heading := decoded.get(document_disclosure_heading.KEY):
+        result.manifest.sampling[document_disclosure_heading.COMMITMENT] = canonical_hash(disclosure_heading)
     if saved_links := decoded.get(document_saved_link_hosts_binding.KEY):
         result.manifest.sampling[document_saved_link_hosts_binding.COMMITMENT] = canonical_hash(saved_links)
     detected = ctx.outputs.get("detect") or {}

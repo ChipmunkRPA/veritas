@@ -30,6 +30,7 @@ from app.evidence import (
     document_character_review,
     document_chat_markers,
     document_check_coverage,
+    document_disclosure_heading,
     document_doi_reference,
     document_email_contexts,
     document_invisible_characters,
@@ -350,6 +351,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         document_calendar.validate(document)
         document_arithmetic.validate(document)
         document_publication_ids.validate(document)
+        document_disclosure_heading.validate_evidence(document)
         document_doi_reference.validate(document)
         document_saved_link_hosts_binding.validate(document)
         document_pdf_visibility.validate(document)
@@ -661,6 +663,11 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document[document_arithmetic.KEY] = document_arithmetic.build(document["source"], text, mapping, include_lengths=True)
     if identifiers := document_publication_ids.build(document["source"], text, mapping, decoded["meta"]):
         document[document_publication_ids.KEY] = identifiers
+    heading = decoded.get(document_disclosure_heading.KEY)
+    heading_commitment = (result.get("manifest", {}).get("sampling") or {}).get(document_disclosure_heading.COMMITMENT)
+    if heading is not None or heading_commitment is not None:
+        document[document_disclosure_heading.KEY] = heading
+        document["source"][document_disclosure_heading.COMMITMENT] = heading_commitment
     doi_reference = decoded.get(document_doi_reference.KEY)
     doi_commitment = document_doi_reference.from_result(result)
     if doi_reference is not None or doi_commitment is not None:
@@ -839,6 +846,10 @@ def load_packet_set(db: Session, analysis: Analysis, store: ObjectStore, *, set_
             document_calendar.verify_source(document, decoded["text"], decoded["source_map"])
             document_arithmetic.verify_source(document, decoded["text"], decoded["source_map"])
             document_publication_ids.verify_source(document, decoded["text"], decoded["source_map"], decoded["meta"])
+            if (document.get(document_disclosure_heading.KEY) != decoded.get(document_disclosure_heading.KEY)
+                    or document["source"].get(document_disclosure_heading.COMMITMENT)
+                    != (result.get("manifest", {}).get("sampling") or {}).get(document_disclosure_heading.COMMITMENT)):
+                raise ValueError("Printed AI-use heading differs from the published extraction")
             document_doi_reference.verify_record(document, decoded.get(document_doi_reference.KEY),
                                                 commitment=document_doi_reference.from_result(result))
             document_saved_link_hosts_binding.verify_record(document, decoded.get(document_saved_link_hosts_binding.KEY),

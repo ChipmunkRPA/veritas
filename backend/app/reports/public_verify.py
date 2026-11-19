@@ -14,6 +14,7 @@ import wave
 from app.core.canonical import canonical_hash
 from app.evidence import (
     document_chat_markers,
+    document_disclosure_heading,
     document_invisible_characters,
     document_saved_link_hosts_binding,
     document_scope,
@@ -113,6 +114,7 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
                              WRITING_POSITION, WRITING_CHECK_COVERAGE,
                              EMAIL_CLASSIFIER_SCOPE, WORD_TRACKED_CHANGES, WORD_TEXT_VISIBILITY, PDF_SAVED_WORDING_COMMITMENT,
                              DOI_REFERENCE_COMMITMENT, document_saved_link_hosts_binding.COMMITMENT,
+                             document_disclosure_heading.COMMITMENT,
                              IMAGE_INTERPOLATION, prior_grid.COMMITMENT, SPEECH_SELECTION_COMMITMENT, image_transparency_binding.KEY,
                              image_animation_binding.KEY, image_motion_photo_binding.KEY,
                              document_invisible_characters.COMMITMENT, document_chat_markers.COMMITMENT,
@@ -299,6 +301,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
              'Word text visibility requires document evidence')
     _require(analysis['kind'] == 'document' or DOI_REFERENCE_COMMITMENT not in result,
              'DOI reference commitments require document evidence')
+    _require(analysis['kind'] == 'document' or (document_disclosure_heading.COMMITMENT not in result
+                                               and document_disclosure_heading.KEY not in evidence),
+             'Printed AI-use headings require document evidence')
     _require(analysis['kind'] == 'document' or document_saved_link_hosts_binding.COMMITMENT not in result,
              'Saved link commitments require document evidence')
     _require(analysis['kind'] == 'document' or PDF_SAVED_WORDING_COMMITMENT not in result,
@@ -341,6 +346,9 @@ def _checks(archive, names: set[str], bundle: dict) -> list[tuple[str, bool, str
         document_percentage_consistency.validate(evidence)
         document_calendar.validate(evidence)
         document_arithmetic.validate(evidence)
+        _require(evidence['source'].get(document_disclosure_heading.COMMITMENT) == result.get(document_disclosure_heading.COMMITMENT),
+                 'Printed AI-use heading differs from the public result commitment')
+        document_disclosure_heading.validate_evidence(evidence)
         if "publication_identifier_consistency" in evidence:
             from app.evidence.document_publication_ids import validate as validate_identifiers
 

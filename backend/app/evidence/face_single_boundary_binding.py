@@ -17,18 +17,22 @@ SPARSE_METHOD = "single-face-boundary/2"
 NATIVE30_METHOD = "single-face-boundary/3"
 NATIVE2997_METHOD = "single-face-boundary/4"
 NATIVE2997_CARRIER_METHOD = "single-face-boundary/5"
+NATIVE720_METHOD = "single-face-boundary/6"
 NTSC_METHODS = {NATIVE2997_METHOD, NATIVE2997_CARRIER_METHOD}
-NATIVE_CLOCK_METHODS = {NATIVE30_METHOD, *NTSC_METHODS}
+NATIVE_CLOCK_METHODS = {NATIVE30_METHOD, NATIVE720_METHOD, *NTSC_METHODS}
+STRICT_CLOCK_METHODS = {NATIVE2997_CARRIER_METHOD, NATIVE720_METHOD}
 METHODS = {METHOD, SPARSE_METHOD, *NATIVE_CLOCK_METHODS}
 COARSE_CONTEXT, FINE_CONTEXT, MOTION_CONTEXT = "existing", "fine_tiles", "off_face_motion"
 ALTERNATE_CONTEXTS = (MOTION_CONTEXT, FINE_CONTEXT)
 PACKET_ID = "VFB01"
 ROLES = ("before", "transition", "after")
 WIDTH, HEIGHT = 640, 360
+NATIVE720_SIZE = (1280, 720)
+MEASUREMENT_RASTER = {"width": WIDTH, "height": HEIGHT, "transform": "rgb-box-2x2-half-up"}
 FRAME_COUNT, RATE = 100, 25
 NATIVE30_FRAME_COUNT = 120
 NATIVE30_TIME_BASE, NATIVE30_TICKS = "1/30000", 1000
-NATIVE_CLOCK_TICKS = {NATIVE30_METHOD: NATIVE30_TICKS, NATIVE2997_METHOD: 1001}
+NATIVE_CLOCK_TICKS = {NATIVE30_METHOD: NATIVE30_TICKS, NATIVE2997_METHOD: 1001, NATIVE720_METHOD: NATIVE30_TICKS}
 NATIVE2997_CARRIER_TICKS = {"1/60000": 2002, "1/90000": 3003, "1/120000": 4004, "1/180000": 6006}
 COARSE_GRID, NATIVE30_COARSE_GRID = range(22, 79, 2), range(28, 93, 2)
 POINT = 0.165750624
@@ -107,7 +111,8 @@ def native30_clock(pts, method=NATIVE30_METHOD, *, time_base=NATIVE30_TIME_BASE)
 
 def native30_source(table, encoding, carrier, method=NATIVE30_METHOD):
     return (table is not None and tuple(encoding) == ("h264", "yuv420p", "avc1") and carrier == "mp4"
-            and (table.width, table.height) == (table.coded_width, table.coded_height) == (WIDTH, HEIGHT)
+            and (table.width, table.height) == (table.coded_width, table.coded_height)
+            == (NATIVE720_SIZE if method == NATIVE720_METHOD else (WIDTH, HEIGHT))
             and not (table.rotation or table.truncated or table.interpolated)
             and native30_clock(table.pts, method, time_base=table.time_base))
 
@@ -120,9 +125,9 @@ def validate_clock(source, table_pts=None, *, interpolated=(), rotation=0, trunc
         cadence = "29.97" if method in NTSC_METHODS else "30"
         _require(native_ticks(source["time_base"], method) is not None
                  and (table_pts is None or native30_clock(table_pts, method, time_base=source["time_base"]))
-                 and (method != NATIVE2997_CARRIER_METHOD or source.get("timeline_origin_s") == 0),
+                 and (method not in STRICT_CLOCK_METHODS or source.get("timeline_origin_s") == 0),
                  f"Face transition differs from the verified {cadence} fps source clock")
-    _require(base > 0 and source["width"] == WIDTH and source["height"] == HEIGHT
+    _require(base > 0 and (source["width"], source["height"]) == (NATIVE720_SIZE if method == NATIVE720_METHOD else (WIDTH, HEIGHT))
              and source["frame_count"] == count and not (rotation or truncated or interpolated)
              and (native30 or table_pts is None or len(table_pts) == count
                   and all((pts - table_pts[0]) * base * RATE == index for index, pts in enumerate(table_pts))),
@@ -159,6 +164,8 @@ def coverage_text(coverage):
         return "This check covers four-second, 640 × 360 H.264 MP4 with a verified 25 fps or qualified 30 fps clock."
     if coverage.get("method") in NTSC_METHODS and coverage["reason"] == "profile":
         return "This check requires a short 640 × 360 H.264 MP4 and a supported fixed source clock."
+    if coverage.get("method") == NATIVE720_METHOD and coverage["reason"] == "profile":
+        return "The 720p face transition check needs a four-second H.264 MP4 with a verified 30 fps source clock."
     return UNAVAILABLE[coverage["reason"]]
 
 
@@ -166,11 +173,15 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     method = record.get("method")
     ticks = native_ticks(source["time_base"], method)
     native30 = method in NATIVE_CLOCK_METHODS
+    native720 = method == NATIVE720_METHOD
     sparse = record.get("method") == SPARSE_METHOD or native30 and "scene_context" in record
     base = validate_clock(source, table_pts, interpolated=interpolated, rotation=rotation, truncated=truncated, method=method)
     fields = {"method", "coarse", "scene", "persistent", "edge_supported", "jump_excess", "boundary",
               "pts", "time_base", "time_s", "fine_margin", "fine_scene", "source_frames",
               "affects_overall_confidence", "readings_hex"}
+    if native720:
+        fields.add("measurement_raster")
+        _require(record.get("measurement_raster") == MEASUREMENT_RASTER, "Unexpected face transition measurement raster")
     _require(set(record) == (fields | {"scene_context"} if sparse else fields)
              and record["method"] in METHODS and record["affects_overall_confidence"] is False
              and record["time_base"] == source["time_base"] and set(record["readings_hex"]) == set(READINGS),
@@ -197,10 +208,13 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
                  and len(context["coarse_boxes"]) == 2 and all(_box(box) for box in context["coarse_boxes"]),
                  "Invalid sparse scene context for face transition")
     rows = record["source_frames"]
+    frame_fields = {"index", "pts", "box", "eyes", "eyes_hex", "decoded_rgb_sha256", "aligned_rgb_sha256"}
+    if native720:
+        frame_fields.add("working_rgb_sha256")
     _require(set(rows) == set(ROLES), "Face transition must have three original frame records")
     for role, index in zip(ROLES, (boundary - 1, boundary, coarse + 11), strict=True):
         row = rows[role]
-        _require(set(row) == {"index", "pts", "box", "eyes", "eyes_hex", "decoded_rgb_sha256", "aligned_rgb_sha256"}
+        _require(set(row) == frame_fields
                  and type(row["index"]) is int and row["index"] == index and type(row["pts"]) is int
                  and (row["pts"] - pts == (index - boundary) * ticks if native30 else
                       (row["pts"] - pts) * base * RATE == index - boundary)
@@ -209,6 +223,11 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
                          for key in ("decoded_rgb_sha256", "aligned_rgb_sha256")),
                  "Face transition frame does not match its exact source position")
         box, points = row["box"], eyes(row)
+        if native720:
+            _require(isinstance(row["working_rgb_sha256"], str) and _SHA.fullmatch(row["working_rgb_sha256"])
+                     and all(type(value) is int and value % 2 == 0 for value in box.values()),
+                     "The native face crop differs from its working picture")
+            box = {key: value // 2 for key, value in box.items()}
         _require(_box(box)
                  and all(_number(point[0], 0, WIDTH) and _number(point[1], 0, HEIGHT) for point in points),
                  "A face transition crop lies outside its native frame")
@@ -236,7 +255,8 @@ def _validate_packet(packet, record, source):
                  and anchor["frame_index"] == frozen["index"] and anchor["pts"] == frozen["pts"]
                  and anchor["decoded_rgb_sha256"] == frozen["decoded_rgb_sha256"]
                  and anchor["original_sha256"] == source["sha256"] and anchor["time_base"] == source["time_base"]
-                 and anchor["stream_selector"] == "v:0" and (anchor["width"], anchor["height"]) == (WIDTH, HEIGHT)
+                 and anchor["stream_selector"] == "v:0"
+                 and (anchor["width"], anchor["height"]) == (source["width"], source["height"])
                  and abs(anchor["stream_time_s"] - stream) <= 1e-6
                  and (anchor["playback_time_s"] is None if origin is None else
                       abs(anchor["playback_time_s"] - (stream - origin)) <= 1e-6)

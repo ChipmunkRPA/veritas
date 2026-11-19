@@ -83,6 +83,7 @@ def public_result(result: dict) -> dict:
             document_character_review,
             document_chat_markers,
             document_check_coverage,
+            document_disclosure_heading,
             document_doi_reference,
             document_invisible_characters,
             document_passage_intervals,
@@ -103,6 +104,8 @@ def public_result(result: dict) -> dict:
             source_coverage[document_passage_position.COMMITMENT] = canonical_hash(position)
         if tracked := document_tracked_changes.from_result(result):
             source_coverage[document_tracked_changes.COMMITMENT] = tracked
+        if heading := (result.get("manifest", {}).get("sampling") or {}).get(document_disclosure_heading.COMMITMENT):
+            source_coverage[document_disclosure_heading.COMMITMENT] = heading
         if doi_reference := document_doi_reference.from_result(result):
             source_coverage[document_doi_reference.COMMITMENT] = doi_reference
         if saved_links := document_saved_link_hosts_binding.from_result(result):

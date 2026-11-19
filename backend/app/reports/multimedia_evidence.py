@@ -182,6 +182,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
         from app.evidence import (
             document_character_review,
             document_chat_markers,
+            document_disclosure_heading,
             document_doi_reference,
             document_invisible_characters,
             document_passage_intervals,
@@ -196,6 +197,7 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
         if binding.get("source_sha256") != source_sha256 or any(source.get(key) != binding.get(key) or not source.get(key)
                 for key in ("extracted_text_sha256", "source_map_sha256", "decode_sha256")) or (
                 source.get(document_tracked_changes.COMMITMENT) != document_tracked_changes.from_result(result)
+                or source.get(document_disclosure_heading.COMMITMENT) != sampling.get(document_disclosure_heading.COMMITMENT)
                 or source.get(document_doi_reference.COMMITMENT) != document_doi_reference.from_result(result)
                 or source.get(document_saved_link_hosts_binding.COMMITMENT) != document_saved_link_hosts_binding.from_result(result)
                 or source.get(document_word_visibility.COMMITMENT) != document_word_visibility.from_result(result)
@@ -415,7 +417,14 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
                     from app.detectors.video.face_detail_inputs import align
 
                     item = transition["source_frames"][frame["interval_role"]]
-                    aligned = align(np.asarray(rgb), face_single_boundary_binding.eyes(item))
+                    measurement_rgb = np.asarray(rgb)
+                    if transition["method"] == face_single_boundary_binding.NATIVE720_METHOD:
+                        from app.detectors.video.face_single_boundary import working_rgb
+
+                        measurement_rgb = working_rgb(measurement_rgb)
+                        if hashlib.sha256(measurement_rgb.tobytes()).hexdigest() != item["working_rgb_sha256"]:
+                            raise ObjectIntegrityError("Face transition measurement pixels differ from the original 720p frame")
+                    aligned = align(measurement_rgb, face_single_boundary_binding.eyes(item))
                     if aligned is None or hashlib.sha256(aligned.tobytes()).hexdigest() != item["aligned_rgb_sha256"]:
                         raise ObjectIntegrityError("Face transition refers to a different aligned source crop")
                 if "crop" in frame["artifact_refs"]:
@@ -661,6 +670,7 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_character_review,
         document_chat_markers,
         document_check_coverage,
+        document_disclosure_heading,
         document_doi_reference,
         document_email_contexts,
         document_invisible_characters,
@@ -741,6 +751,8 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
         document_calendar.verify_source(document, text, mapping)
         document_arithmetic.verify_source(document, text, mapping)
         document_publication_ids.verify_source(document, text, mapping, decoded["meta"])
+        if document.get(document_disclosure_heading.KEY) != decoded.get(document_disclosure_heading.KEY):
+            raise ValueError("Printed AI-use heading differs from the frozen extraction")
         document_doi_reference.verify_record(document, decoded.get(document_doi_reference.KEY),
             commitment=document_doi_reference.from_result(result) if result is not None else source.get(document_doi_reference.COMMITMENT))
         document_saved_link_hosts_binding.verify_record(document, decoded.get(document_saved_link_hosts_binding.KEY),
@@ -1749,6 +1761,7 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "calendar_consistency": document.get("calendar_consistency"),
             "arithmetic_consistency": document.get("arithmetic_consistency"),
             "publication_identifier_consistency": document.get("publication_identifier_consistency"),
+            "printed_ai_use_heading": document.get("printed_ai_use_heading") if not withheld else None,
             "doi_reference_consistency": document.get("doi_reference_consistency"),
             "saved_link_hosts": document.get("saved_link_hosts") if not withheld else None,
             "picture_hold": copy.deepcopy(document.get("picture_hold")),

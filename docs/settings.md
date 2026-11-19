@@ -110,6 +110,8 @@ The service defines its settings in `backend/app/core/config.py`.
 | `VERITAS_OFFLINE` | `true` \| `false`, optional | unset | VERITAS_OFFLINE: no network fetches; HF hub and transformers read the local cache only. Unset: true in prod, false in dev (PL-01, ARCHITECTURE §8.5); `models fetch` and a models-init container set VERITAS_OFFLINE=false explicitly. |
 | `VERITAS_AUDIO_STEREO_RATE_REPEAT_REVIEW` | `true` \| `false` | `true` | Compare short lossless stereo excerpts at different speeds when native 48 kHz stereo review is enabled in development. |
 | `VERITAS_AUDIO_BRIEF_VOICE_REVIEW` | `true` \| `false` | `false` | Adds 750 ms listening ranges to Full candidate-mode analyses of exact twelve-second native 16 kHz mono PCM16 WAV files in development. These ranges carry zero weight in the overall assessment. |
+| `VERITAS_DOCUMENT_DISCLOSURE_HEADING_REVIEW` | `true` \| `false` | `false` | Adds the exact position of an eligible printed AI-use heading in PDFs of up to 12 pages in development. The heading carries zero weight in the AI assessment. |
+| `VERITAS_VIDEO_FACE_SINGLE_BOUNDARY_NATIVE720_REVIEW` | `true` \| `false` | `false` | Extends the enabled face transition check to Full analyses of supported four-second 720p, 30 fps AVC MP4 uploads in development. It preserves the native frames and adds zero weight to the AI assessment. |
 
 ## Reports (ARCHITECTURE §6.1)
 

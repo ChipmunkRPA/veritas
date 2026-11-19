@@ -662,6 +662,13 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
     {set.calendar_consistency && <CalendarConsistency review={set.calendar_consistency} />}
     {set.arithmetic_consistency && <ArithmeticConsistency review={set.arithmetic_consistency} />}
     {set.publication_identifier_consistency && <PublicationIdentifiers review={set.publication_identifier_consistency} />}
+    {set.printed_ai_use_heading?.schema === 'chipmunk.printed-ai-use-heading/1' && set.printed_ai_use_heading.affects_overall_confidence === false &&
+      <section id="media-evidence-printed-ai-use-heading" aria-labelledby="printed-ai-use-heading-title" className="mt-4 rounded-md border border-border p-4 scroll-mt-20">
+        <h3 id="printed-ai-use-heading-title" className="m-0 text-body font-medium">Printed AI-use heading</h3>
+        <blockquote className="my-2 border-l-2 border-border pl-3 text-small">{set.printed_ai_use_heading.text}</blockquote>
+        <p className="mt-2 mb-0 text-caption text-text-muted">PDF page {set.printed_ai_use_heading.page} · Extracted characters <span className="font-mono">[{set.printed_ai_use_heading.start}, {set.printed_ai_use_heading.end})</span>.</p>
+        <p className="mt-2 mb-0 text-small">A printed heading can be part of a quotation or example. This observation carries zero weight in the AI assessment.</p>
+      </section>}
     {set.doi_reference_consistency && <DoiReferenceCheck review={set.doi_reference_consistency} />}
     {set.saved_link_hosts && <SavedLinkDestinations review={set.saved_link_hosts} />}
     {set.coverage?.chat_format_markers && <ChatFormatMarkers review={set.coverage.chat_format_markers} />}

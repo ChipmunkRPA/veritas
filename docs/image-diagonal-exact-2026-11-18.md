@@ -74,3 +74,47 @@ standard-library reviewer from the repository root.
 ```sh
 python3 -B -I -S backend/scripts/review_image_diagonal_exact.py docs/evaluation-panels/image-diagonal-exact-2026-11-18.json.gz
 ```
+
+## JPEG transfer trial
+
+Two local panels tested the same diagonal search geometry using the existing
+JPEG color comparison and its unchanged interior and surroundings checks.
+Each panel encoded its images at two standard compression settings, JPEG
+75 and JPEG 90. Both settings share the same photos and planted edits.
+The candidate ran after the existing copy checks completed and left no pair.
+It measured both crops on the decoded native pixels. A correct localization
+required at least 50% overlap by intersection over union on each crop,
+regardless of which crop the result listed first.
+
+The first panel used six camera sources and four extra patterned controls.
+The second used twelve distinct camera sources and six extra patterned
+controls. The authored edits were new to these panels. The photographs came
+from retained collections that were available to earlier image research.
+
+| Measure | First, 75 | First, 90 | Second, 75 | Second, 90 |
+| --- | ---: | ---: | ---: | ---: |
+| Current check located a planted diagonal copy | 0/18 | 0/18 | 0/36 | 0/36 |
+| With the candidate | 7/18 | 7/18 | 21/36 | 20/36 |
+| Source groups with a new correct location | 3/6 | 3/6 | 8/12 | 8/12 |
+| Added alerts on ordinary photos and ordinary edits | 0/22 | 0/22 | 0/36 | 0/36 |
+| Added alerts on whole-image mirror controls | 0/10 | 0/10 | 2/18 | 2/18 |
+| Added localizations below the required overlap | 0 | 0 | 1 | 1 |
+
+The first study required eight new correct locations across at least four
+source groups at each setting. The second showed a gain across eight groups
+and missed the fixed control and location criteria. In both encodings, one
+pair overlapped the intended feathered edit and its source with a smaller
+intersection over union of 0.499. Two mirror controls at each setting yielded
+matching crops that should have been recognized as part of a larger pattern.
+Other transformation controls added no diagonal alerts. The JPEG candidate
+is still experimental. The app continues to serve the existing image checks.
+
+The [first panel](evaluation-panels/image-jpeg-diagonal-pilot-2026-11-18.json.gz)
+and [second panel](evaluation-panels/image-jpeg-diagonal-confirmation-2026-11-18.json.gz)
+contain numeric crop coordinates, comparisons and commitments. Recount the
+reported locations and control alerts with the standard library.
+
+```sh
+python3 -B -I -S backend/scripts/review_image_jpeg_diagonal.py docs/evaluation-panels/image-jpeg-diagonal-pilot-2026-11-18.json.gz
+python3 -B -I -S backend/scripts/review_image_jpeg_diagonal.py docs/evaluation-panels/image-jpeg-diagonal-confirmation-2026-11-18.json.gz
+```

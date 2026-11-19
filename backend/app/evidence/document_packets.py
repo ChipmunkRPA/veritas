@@ -585,6 +585,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][document_scope.HTML_ARTICLE_KEY] = article
     if static_html := decoded["meta"].get(document_scope.HTML_STATIC_KEY):
         document["coverage"][document_scope.HTML_STATIC_KEY] = static_html
+    if html_cells := decoded["meta"].get(document_scope.HTML_CELL_BOUNDARY_KEY):
+        document["coverage"][document_scope.HTML_CELL_BOUNDARY_KEY] = html_cells
     if legacy_html := decoded["meta"].get(document_scope.HTML_LEGACY_ENCODING_KEY):
         document["coverage"][document_scope.HTML_LEGACY_ENCODING_KEY] = legacy_html
     if policy := decoded["meta"].get(document_native_locations.PARAGRAPH_MAP_KEY):

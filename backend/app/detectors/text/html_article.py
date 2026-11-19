@@ -23,11 +23,12 @@ OMIT = frozenset({"aside", "audio", "blockquote", "button", "canvas", "code", "d
                   "head", "header", "iframe", "math", "nav", "noscript", "pre", "script", "style", "svg", "table", "template", "video"})
 HIDDEN_STYLE = re.compile(r"(?:^|;)\s*(?:display\s*:\s*none|visibility\s*:\s*(?:hidden|collapse))\s*(?:!important\s*)?(?:;|$)", re.I)
 BLOCKS = frozenset({"p", "h1", "h2", "h3", "h4", "h5", "h6", "li", "dt", "dd"})
+TABLE_CELLS = frozenset({"td", "th"})
 
 
-def _hidden(tag, attrs):
+def _hidden(tag, attrs, *, include_table_cells=False):
     values = dict(attrs)
-    return (tag in OMIT or "hidden" in values or "inert" in values
+    return ((tag in OMIT and not (include_table_cells and tag == "table")) or "hidden" in values or "inert" in values
             or (values.get("role") or "").strip().casefold() in {"navigation", "contentinfo", "banner", "complementary"}
             or (values.get("aria-hidden") or "").strip().casefold() == "true"
             or bool(HIDDEN_STYLE.search(values.get("style") or "")))
@@ -97,9 +98,11 @@ class _Regions(_StaticHTML):
 
 
 class _Paragraphs(_StaticHTML):
-    def __init__(self, raw, base):
+    def __init__(self, raw, base, *, include_table_cells):
         super().__init__(raw)
         self.base = base
+        self.include_table_cells = include_table_cells
+        self.blocks = BLOCKS | TABLE_CELLS if include_table_cells else BLOCKS
         self.parts = []
         self.words = []
         self.origins = []
@@ -112,20 +115,20 @@ class _Paragraphs(_StaticHTML):
         self.words, self.origins = [], []
 
     def handle_starttag(self, tag, attrs):
-        hidden = self.hidden() or _hidden(tag, attrs)
-        if not hidden and (tag in BLOCKS or tag in {"br", "hr"}):
+        hidden = self.hidden() or _hidden(tag, attrs, include_table_cells=self.include_table_cells)
+        if not hidden and (tag in self.blocks or tag in {"br", "hr"}):
             self.flush()
         if tag not in VOID:
             self.stack.append((tag, hidden))
 
     def handle_endtag(self, tag):
         if (position := self.end_index(tag)) is not None:
-            if not self.hidden() and any(name in BLOCKS for name, _ in self.stack[position:]):
+            if not self.hidden() and any(name in self.blocks for name, _ in self.stack[position:]):
                 self.flush()
             del self.stack[position:]
 
     def reading(self):
-        return not self.hidden() and any(tag in BLOCKS for tag, _ in self.stack)
+        return not self.hidden() and any(tag in self.blocks for tag, _ in self.stack)
 
     def _append(self, value, origins):
         self.chars += len(value)
@@ -156,7 +159,7 @@ class _Paragraphs(_StaticHTML):
         self._entity(f"&#{name};")
 
 
-def read(raw):
+def read(raw, *, include_table_cells=False):
     """Return literal text ranges and any unmapped text inside the selected area."""
     if len(raw) > MAX_HTML or "\ufffd" in raw or "\x00" in raw:
         return None
@@ -168,7 +171,7 @@ def read(raw):
         if selected is None:
             return None
         start, end = selected["start"], selected["end"]
-        parser = _Paragraphs(raw[start:end], start)
+        parser = _Paragraphs(raw[start:end], start, include_table_cells=include_table_cells)
         parser.feed(raw[start:end])
         parser.close()
         parser.flush()
@@ -179,6 +182,6 @@ def read(raw):
     return parser.parts, {"policy": POLICY, "element": selected["tag"], "scope": [start, end]}, parser.unmapped
 
 
-def parts(raw):
-    result = read(raw)
+def parts(raw, *, include_table_cells=False):
+    result = read(raw, include_table_cells=include_table_cells)
     return result[:2] if result is not None else None

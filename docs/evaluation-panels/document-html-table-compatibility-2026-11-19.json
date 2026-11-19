@@ -1,0 +1,39 @@
+{
+  "test": "Local Word and common document formats through simulated checkout, Chrome, reports, and signed original verification",
+  "analysis_files": 32,
+  "file_extensions": {
+    "csv": 1,
+    "docx": 7,
+    "eml": 4,
+    "epub": 2,
+    "htm": 1,
+    "html": 1,
+    "md": 1,
+    "odp": 1,
+    "ods": 1,
+    "odt": 1,
+    "pdf": 3,
+    "pptx": 2,
+    "rtf": 2,
+    "tsv": 1,
+    "txt": 1,
+    "xhtml": 2,
+    "xlsx": 1
+  },
+  "simulated_checkouts": 32,
+  "price_usd_cents": 999,
+  "unusable_files_refused_before_payment": 6,
+  "jobs_before_payment": 0,
+  "browser_evidence_pages_opened": 32,
+  "browser_page_errors": 0,
+  "matching_pdf_json_packages_verified_against_original": 32,
+  "older_package_original_replays": 6,
+  "successful_scanned_pdf_text_recognition": 1,
+  "table_carriers": {
+    "source_mapped_saved_html": 6,
+    "source_mapped_xhtml": 6,
+    "source_mapped_simple_email": 6,
+    "complex_email_extracted_text_fallback": true,
+    "plain_email_body_selected_over_html_alternative": true
+  }
+}

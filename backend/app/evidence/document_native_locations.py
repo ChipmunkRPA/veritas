@@ -5,6 +5,8 @@ from __future__ import annotations
 from app.evidence.document_scope import (
     EMAIL_HTML_COORDINATES,
     HTML_ARTICLE_KEY,
+    HTML_CELL_BOUNDARY,
+    HTML_CELL_BOUNDARY_KEY,
     HTML_LEGACY_ENCODING,
     HTML_LEGACY_ENCODING_KEY,
     HTML_STATIC_KEY,
@@ -258,6 +260,9 @@ def validate(document):
             or document.get("source", {}).get("method") != "html"
             or coverage.get(HTML_STATIC_KEY) != HTML_STATIC_POLICY):
         raise ValueError("Invalid legacy HTML encoding policy")
+    if HTML_CELL_BOUNDARY_KEY in coverage and (coverage[HTML_CELL_BOUNDARY_KEY] != HTML_CELL_BOUNDARY
+            or HTML_STATIC_KEY not in coverage):
+        raise ValueError("Invalid HTML table cell boundary policy")
     if WORD_TABLE_GRID_KEY in coverage and (coverage[WORD_TABLE_GRID_KEY] not in WORD_TABLE_GRID_VERSIONS
             or document.get("source", {}).get("method") != "python-docx"):
         raise ValueError("Invalid Word table grid mapping")

@@ -40,7 +40,7 @@ const wordTemplate = 'Save a document from this template as DOCX or PDF, then up
 const slideTemplate = 'Save a presentation from this template as PPTX, ODP or PDF, then upload it.'
 const sheetTemplate = 'Save a spreadsheet from this template as XLSX, ODS, CSV or PDF, then upload it.'
 const delimitedCoverage = 'Writing is checked within each text field. Reports show the row and column, counting headers and blank records.'
-const htmlCoverage = 'Saved web pages are checked without navigation and text explicitly marked hidden. Stylesheets and scripts are outside this check.'
+const htmlCoverage = 'Saved web pages are checked without navigation and text explicitly marked hidden. Visible table cells are read separately. Stylesheets and scripts are outside this check.'
 
 const documentCoverage = new Map(Object.entries({
   docx: 'Word checks body paragraphs, supported tables, filled form controls, and simple text boxes. It also checks supported footnotes and endnotes. Export to PDF to include headers, footers, or text in complex layouts.',
@@ -57,7 +57,7 @@ const documentCoverage = new Map(Object.entries({
   html: htmlCoverage,
   htm: htmlCoverage,
   xhtml: htmlCoverage,
-  eml: 'Email checks the message body. If the plain-text version is empty, it can read the matching HTML version. Upload attachments separately.',
+  eml: 'Email checks the message body. If the plain-text version is empty, it can read the matching HTML version and keep visible table cells separate. Upload attachments separately.',
 }))
 
 const fileExtension = (filename: string) => /\.([^./]+)$/.exec(filename)?.[1]?.toLowerCase() ?? ''

@@ -138,6 +138,20 @@ alternative. Parts with an attachment disposition or saved filename are
 excluded. The report records the selected MIME part, and signed reports
 use the same selection when verifying evidence against the original EML.
 
+Saved HTML, XHTML and selected HTML email bodies keep visible table cells
+separate. Simple, source-mapped tables retain their original decoded HTML
+character ranges. When the markup cannot be matched exactly, passages use
+positions in the extracted text. Existing signed reports use their recorded
+table-reading rules during verification.
+
+A local test opened 32 document results in Chrome after simulated checkout,
+including seven Word files and three PDFs. All 32 produced matching PDF and
+JSON evidence and verified against the uploaded originals. Saved HTML, XHTML,
+and simple HTML email retained 18 exact table text blocks. A complex email
+used extracted-text positions, and a separate email retained its plain-text
+body over its HTML alternative. Six unusable files stopped before payment.
+[Local compatibility receipt](evaluation-panels/document-html-table-compatibility-2026-11-19.json)
+
 New HTML, XHTML and HTML email analyses leave out saved navigation, head
 metadata, script, style and template content, elements with a `hidden`
 attribute, and an unambiguous inline `display: none` declaration. Visible

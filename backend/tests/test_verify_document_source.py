@@ -50,6 +50,42 @@ def test_legacy_html_replays_with_the_recorded_encoding(packet_factory, tmp_path
         verify_document_source.check(archive, bundle, original)
 
 
+@pytest.mark.parametrize("extension", [".html", ".xhtml", ".eml"])
+@pytest.mark.parametrize("current", [False, True])
+def test_html_table_cell_offsets_replay_under_the_recorded_policy(packet_factory, tmp_path, extension, current):
+    rows = ("<table><tbody><tr><th>An old district's attendance record includes visitors</th>"
+            "<td>New attendance permits are recorded separately for weekend visits</td></tr></tbody></table>")
+    if extension == ".eml":
+        message = EmailMessage()
+        message.set_content(f"<html><body>{rows}</body></html>", subtype="html")
+        data = message.as_bytes()
+    else:
+        data = f"<html><body><main>{rows}</main></body></html>".encode()
+    original = tmp_path / ("table" + extension)
+    original.write_bytes(data)
+    db, store, analysis, result, _, _ = packet_factory(extension, source_pdf=original,
+                                                      split_html_cells=current, scores=(0.9,))
+    evidence = build_packet_set(db, analysis, store, result)
+    key = document_scope.HTML_CELL_BOUNDARY_KEY
+    assert evidence["coverage"].get(key) == (document_scope.HTML_CELL_BOUNDARY if current else None)
+    assert any(document_scope.HTML_CELL_BOUNDARY_NOTICE in warning for warning in evidence["limitations"]) is current
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"sha256": analysis.sha256, "bytes": analysis.size_bytes}}
+    proof = tmp_path / "table-proof.zip"
+    with zipfile.ZipFile(proof, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(evidence))
+    with zipfile.ZipFile(proof) as archive:
+        assert "extracted text and source mapping matched" in verify_document_source.check(archive, bundle, original)
+    if current:
+        del evidence["coverage"][key]
+    else:
+        evidence["coverage"][key] = document_scope.HTML_CELL_BOUNDARY
+    with zipfile.ZipFile(proof, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(evidence))
+    with zipfile.ZipFile(proof) as archive, pytest.raises(ValueError, match="source mapping differs|plain-text or source-mapped"):
+        verify_document_source.check(archive, bundle, original)
+
+
 @pytest.mark.parametrize("extension", [".txt", ".eml", ".docx"])
 def test_replays_exact_native_text_formats(extension, packet_factory, tmp_path):
     if extension == ".docx":

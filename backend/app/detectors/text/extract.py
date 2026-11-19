@@ -25,6 +25,9 @@ from app.detectors.text import email_body, html_article, html_content
 from app.evidence import document_native_locations, document_pdf_visibility
 from app.evidence.document_scope import (
     EMAIL_HTML_COORDINATES,
+    HTML_CELL_BOUNDARY,
+    HTML_CELL_BOUNDARY_KEY,
+    HTML_CELL_BOUNDARY_NOTICE,
     HTML_LEGACY_ENCODING,
     HTML_LEGACY_ENCODING_KEY,
     HTML_STATIC_KEY,
@@ -1067,21 +1070,22 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
 class _HTMLText(HTMLParser):
     BLOCK = {"p", "div", "br", "li", "h1", "h2", "h3", "h4", "h5", "h6", "tr", "section", "article", "blockquote", "pre"}
 
-    def __init__(self) -> None:
+    def __init__(self, *, split_table_cells=False) -> None:
         super().__init__()
+        self.blocks = self.BLOCK | html_article.TABLE_CELLS if split_table_cells else self.BLOCK
         self.parts: list[str] = []
         self.skip = 0
 
     def handle_starttag(self, tag, attrs):
         if tag in ("script", "style"):
             self.skip += 1
-        if tag in self.BLOCK:
+        if tag in self.blocks:
             self.parts.append("\n\n")
 
     def handle_endtag(self, tag):
         if tag in ("script", "style") and self.skip:
             self.skip -= 1
-        if tag in self.BLOCK:
+        if tag in self.blocks:
             self.parts.append("\n\n")
 
     def handle_data(self, data):
@@ -1090,13 +1094,15 @@ class _HTMLText(HTMLParser):
 
 
 class _MappedEmailHTML(HTMLParser):
-    """Locate text inside simple HTML paragraphs in the decoded MIME part."""
+    """Locate text inside supported HTML paragraphs and cells in the decoded MIME part."""
 
     INLINE = frozenset({"b", "em", "i", "span", "strong"})
     PARENTS = {"html": {None}, "body": {"html"}, "blockquote": {None, "body"},
                "p": {None, "body", "blockquote"}}
+    TABLE_PARENTS = {"table": {None, "body", "blockquote"}, "thead": {"table"}, "tbody": {"table"}, "tfoot": {"table"},
+                     "tr": {"table", "thead", "tbody", "tfoot"}, "td": {"tr"}, "th": {"tr"}}
 
-    def __init__(self, raw):
+    def __init__(self, raw, *, split_table_cells=False):
         super().__init__(convert_charrefs=False)
         self.raw = raw
         self.lines = [0, *(match.end() for match in re.finditer("\n", raw))]
@@ -1104,6 +1110,10 @@ class _MappedEmailHTML(HTMLParser):
         self.parts: list[tuple[str, dict]] = []
         self.words: list[str] = []
         self.ranges: list[tuple[int, int]] = []
+        self.blocks = {"p", *html_article.TABLE_CELLS} if split_table_cells else {"p"}
+        self.parents = self.PARENTS
+        if split_table_cells:
+            self.parents = self.PARENTS | self.TABLE_PARENTS | {"p": self.PARENTS["p"] | html_article.TABLE_CELLS}
 
     def _offset(self):
         line, col = self.getpos()
@@ -1111,24 +1121,29 @@ class _MappedEmailHTML(HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         parent = self.stack[-1] if self.stack else None
-        if attrs or not (parent in self.PARENTS.get(tag, ()) or tag in self.INLINE and "p" in self.stack):
+        if attrs or not (parent in self.parents.get(tag, ()) or tag in self.INLINE and not self.blocks.isdisjoint(self.stack)):
             raise ValueError("Unsupported email HTML structure")
+        if tag == "p" and parent in html_article.TABLE_CELLS:
+            self._flush()
         self.stack.append(tag)
 
     def handle_endtag(self, tag):
         if not self.stack or self.stack.pop() != tag:
             raise ValueError("Unbalanced email HTML")
-        if tag == "p":
-            role = "quoted" if "blockquote" in self.stack else "body"
-            text = "".join(self.words)
-            if role == "body" and any(re.match(r"\s*(?:>|--\s*$|-----Original Message-----|On .{1,300} wrote:\s*$)", line, re.I)
-                                      for line in text.splitlines()):
-                raise ValueError("Unmarked quotation or signature in email HTML")
-            self.parts.append((text, {"kind": "email", "quote_role": role, "html_origins": self.ranges}))
-            self.words, self.ranges = [], []
+        if tag in self.blocks:
+            self._flush()
+
+    def _flush(self):
+        role = "quoted" if "blockquote" in self.stack else "body"
+        text = "".join(self.words)
+        if role == "body" and any(re.match(r"\s*(?:>|--\s*$|-----Original Message-----|On .{1,300} wrote:\s*$)", line, re.I)
+                                  for line in text.splitlines()):
+            raise ValueError("Unmarked quotation or signature in email HTML")
+        self.parts.append((text, {"kind": "email", "quote_role": role, "html_origins": self.ranges}))
+        self.words, self.ranges = [], []
 
     def handle_data(self, data):
-        if "p" not in self.stack:
+        if self.blocks.isdisjoint(self.stack):
             if data.strip():
                 raise ValueError("Email HTML text must appear in a paragraph")
             return
@@ -1139,7 +1154,8 @@ class _MappedEmailHTML(HTMLParser):
     def _entity(self, token):
         start = self._offset()
         value = unescape(token)
-        if "p" not in self.stack or self.raw[start:start + len(token)] != token or len(value) != 1 or value == "\ufffd":
+        if (self.blocks.isdisjoint(self.stack) or self.raw[start:start + len(token)] != token
+                or len(value) != 1 or value == "\ufffd"):
             raise ValueError("Unsupported email HTML entity")
         self.words.append(value)
         self.ranges.append((start, start + len(token)))
@@ -1158,10 +1174,10 @@ class _MappedEmailHTML(HTMLParser):
         raise ValueError("Unsupported email HTML instruction")
 
 
-def _mapped_email_html(raw, mime_part, text, *, separate_html_gaps=False):
+def _mapped_email_html(raw, mime_part, text, *, separate_html_gaps=False, split_table_cells=False):
     if len(raw) > 64 * 1024 or "\ufffd" in raw:
         return None
-    parser = _MappedEmailHTML(raw)
+    parser = _MappedEmailHTML(raw, split_table_cells=split_table_cells)
     try:
         parser.feed(raw)
         parser.close()
@@ -1174,8 +1190,8 @@ def _mapped_email_html(raw, mime_part, text, *, separate_html_gaps=False):
     return candidate if candidate.text == text and candidate.source_map else None
 
 
-def _html_text(raw: str) -> str:
-    parser = _HTMLText()
+def _html_text(raw: str, *, split_table_cells: bool = False) -> str:
+    parser = _HTMLText(split_table_cells=split_table_cells)
     parser.feed(raw)
     return "".join(parser.parts)
 
@@ -1203,12 +1219,13 @@ def _without_markdown_fences(raw: str) -> str:
     return "\n".join(kept)
 
 
-def text_like_content(raw: str, ext: str, *, skip_markdown_fences: bool = True) -> tuple[str, str]:
+def text_like_content(raw: str, ext: str, *, skip_markdown_fences: bool = True,
+                      split_table_cells: bool = False) -> tuple[str, str]:
     """Project text-like input without constructing a per-character source map."""
     from app.storage.files import HTML_EXTS
 
     if ext in HTML_EXTS:
-        return _html_text(raw), "html"
+        return _html_text(raw, split_table_cells=split_table_cells), "html"
     if ext in (".md", ".markdown"):
         raw = _without_markdown_fences(raw) if skip_markdown_fences else _MD_LEGACY_FENCE.sub(" ", raw)
         for rx, rep in _MD_INLINE:
@@ -1254,8 +1271,9 @@ def rtf_text(data: bytes, *, skip_hidden_rtf_runs: bool = True) -> str:
         raise ValueError("The RTF text could not be decoded. Save it as DOCX or PDF.") from error
 
 
-def _attach_html_source_ranges(doc: Document, raw: str, *, projected: str | None = None) -> None:
-    candidate = html_article.parts(raw if projected is None else projected)
+def _attach_html_source_ranges(doc: Document, raw: str, *, projected: str | None = None,
+                               split_table_cells: bool = False) -> None:
+    candidate = html_article.parts(raw if projected is None else projected, include_table_cells=split_table_cells)
     if candidate is None or not valid_html_article_scope(candidate[1]):
         return
     parts, scope = candidate
@@ -1285,7 +1303,7 @@ def _attach_html_source_ranges(doc: Document, raw: str, *, projected: str | None
 
 def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True, map_body_paragraphs: bool = True,
                       skip_hidden_rtf_runs: bool = True, skip_markdown_fences: bool = True, use_static_html: bool = True,
-                      allow_legacy_html: bool = True) -> Document:
+                      allow_legacy_html: bool = True, split_html_cells: bool = True) -> Document:
     data = path.read_bytes()
     if ext == ".rtf":
         # RTF \par becomes a newline. Keep those breaks as passage boundaries.
@@ -1306,7 +1324,9 @@ def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True
     from app.storage.files import HTML_EXTS
 
     projected = html_content.mask(decoded, xhtml=ext == ".xhtml") if use_static_html and ext in HTML_EXTS else None
-    raw, method = text_like_content(decoded if projected is None else projected, ext, skip_markdown_fences=skip_markdown_fences)
+    split_table_cells = split_html_cells and projected is not None
+    raw, method = text_like_content(decoded if projected is None else projected, ext, skip_markdown_fences=skip_markdown_fences,
+                                    split_table_cells=split_table_cells)
     parts = _text_parts(raw, kind="text" if method == "plain" else "markup")
     map_markdown = method == "markdown" and map_body_paragraphs
     if map_markdown:
@@ -1328,10 +1348,13 @@ def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True
         d.meta["coverage_warning"] += " Recognized fenced code blocks are excluded from the writing check."
     if method == "html" and include_html_article:
         d.meta[html_article.READER] = html_article.POLICY
-        _attach_html_source_ranges(d, decoded, projected=projected)
+        _attach_html_source_ranges(d, decoded, projected=projected, split_table_cells=split_table_cells)
     if projected is not None:
         d.meta[HTML_STATIC_KEY] = XHTML_STATIC_POLICY if ext == ".xhtml" else HTML_STATIC_POLICY
         d.meta["coverage_warning"] += " " + HTML_STATIC_NOTICE
+    if split_table_cells:
+        d.meta[HTML_CELL_BOUNDARY_KEY] = HTML_CELL_BOUNDARY
+        d.meta["coverage_warning"] += " " + HTML_CELL_BOUNDARY_NOTICE
     if encoding == "windows-1252":
         d.meta[HTML_LEGACY_ENCODING_KEY] = HTML_LEGACY_ENCODING
     return d
@@ -1346,7 +1369,8 @@ def _text_parts(raw: str, *, kind: str = "text", **anchor) -> list[tuple[str, di
     return parts
 
 
-def extract_eml(path: Path, *, use_current_email_body: bool = True, use_static_html: bool = True) -> Document:
+def extract_eml(path: Path, *, use_current_email_body: bool = True, use_static_html: bool = True,
+                split_html_cells: bool = True) -> Document:
     from email import policy
     from email.parser import BytesParser
 
@@ -1371,9 +1395,11 @@ def extract_eml(path: Path, *, use_current_email_body: bool = True, use_static_h
     if not isinstance(raw, str):
         raise ValueError("This email body could not be decoded as text.")
     is_html = body.get_content_type() == "text/html"
+    split_table_cells = use_static_html and is_html and split_html_cells
     if is_html:
         markup = html_content.mask(raw) if use_static_html else raw
-        parts = _text_parts(_html_text(markup), kind="markup", mime_part=mime_part, quote_role="unknown")
+        parts = _text_parts(_html_text(markup, split_table_cells=split_table_cells), kind="markup", mime_part=mime_part,
+                            quote_role="unknown")
     else:
         # Quotation detection is a navigation aid, never an authorship assertion.
         # Keep the '>' prefixes and signature text rather than silently deleting it.
@@ -1400,7 +1426,8 @@ def extract_eml(path: Path, *, use_current_email_body: bool = True, use_static_h
             parts.append(("".join(accumulated), {"kind": "email", "source_start": start,
                                                 "mime_part": mime_part, "quote_role": previous_role}))
     document = _join_mapped(parts)
-    mapped = _mapped_email_html(markup, mime_part, document.text, separate_html_gaps=use_static_html) if is_html else None
+    mapped = _mapped_email_html(markup, mime_part, document.text, separate_html_gaps=use_static_html,
+                                split_table_cells=split_table_cells) if is_html else None
     if mapped is not None:
         document = mapped
     attachments = [{"mime_part": part_id, "filename": part.get_filename(), "content_type": part.get_content_type()}
@@ -1421,6 +1448,9 @@ def extract_eml(path: Path, *, use_current_email_body: bool = True, use_static_h
     if is_html and use_static_html:
         document.meta[HTML_STATIC_KEY] = HTML_STATIC_POLICY
         document.meta["coverage_warning"] += " " + HTML_STATIC_NOTICE
+    if split_table_cells:
+        document.meta[HTML_CELL_BOUNDARY_KEY] = HTML_CELL_BOUNDARY
+        document.meta["coverage_warning"] += " " + HTML_CELL_BOUNDARY_NOTICE
     return document
 
 
@@ -1438,7 +1468,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             honor_csv_separator_declaration: bool = True,
             check_word_checkout_visibility: bool = False, use_current_email_body: bool = True,
             use_static_html: bool = True, include_word_text_boxes: bool = True,
-            allow_legacy_html: bool = True, use_epub_visibility: bool = True) -> Document:
+            allow_legacy_html: bool = True, use_epub_visibility: bool = True, split_html_cells: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers,
@@ -1527,11 +1557,12 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             d.meta[document_native_locations.CSV_SEPARATOR_KEY] = separator
             d.meta["coverage_warning"] += " The separator declaration is counted as row 1 and excluded from the writing check."
     elif ext == ".eml":
-        d = extract_eml(path, use_current_email_body=use_current_email_body, use_static_html=use_static_html)
+        d = extract_eml(path, use_current_email_body=use_current_email_body, use_static_html=use_static_html,
+                        split_html_cells=split_html_cells)
     else:
         d = extract_text_like(path, ext, include_html_article=include_html_article, map_body_paragraphs=map_body_paragraphs,
                               skip_hidden_rtf_runs=skip_hidden_rtf_runs, skip_markdown_fences=skip_markdown_fences,
-                              use_static_html=use_static_html, allow_legacy_html=allow_legacy_html)
+                              use_static_html=use_static_html, allow_legacy_html=allow_legacy_html, split_html_cells=split_html_cells)
     d.meta.update({"chars": len(d.text), "words": len(d.text.split()), "paragraphs": len(d.paragraphs)})
     return _seal(d, original_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
 

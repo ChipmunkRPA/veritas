@@ -73,7 +73,7 @@ from app.evidence import (
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p49"
+PIPELINE_VERSION = "doc-2.0-p50"
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 BIBLIOGRAPHY_POLICY = "writing_bibliography_review_enabled"
 CLAUSE_POLICY = "writing_within_sentence_language_review_enabled"
@@ -207,6 +207,9 @@ def current_decode_output(output: Any, *, require_current_layout_reader: bool = 
                   or (output["meta"].get("email") or {}).get("body_content_type") == "text/html")
     if (require_current_layout_reader and html_input
             and output["meta"].get(document_scope.HTML_STATIC_KEY) not in document_scope.HTML_STATIC_POLICIES):
+        return False
+    if (require_current_layout_reader and html_input
+            and output["meta"].get(document_scope.HTML_CELL_BOUNDARY_KEY) != document_scope.HTML_CELL_BOUNDARY):
         return False
     if (require_current_layout_reader and output["meta"].get("method") == "html"
             and output["meta"].get(document_scope.HTML_STATIC_KEY) == document_scope.HTML_STATIC_POLICY

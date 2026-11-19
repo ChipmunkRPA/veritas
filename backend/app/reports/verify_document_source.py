@@ -174,6 +174,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                       == document_native_locations.MARKDOWN_FENCES,
                       honor_csv_separator_declaration=document_native_locations.CSV_SEPARATOR_KEY in coverage,
                       use_current_email_body=use_current_email_body,
+                      split_html_cells=coverage.get(document_scope.HTML_CELL_BOUNDARY_KEY) == document_scope.HTML_CELL_BOUNDARY,
                       use_static_html=use_static_html,
                       allow_legacy_html=allow_legacy_html,
                       skip_hidden_xlsx_cell_formats=coverage.get(document_native_locations.XLSX_VISIBILITY_KEY)
@@ -224,6 +225,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     fields = {"email": None, "ocr": None, "unmapped_pages": [], "partially_checked_pages": [],
               WORD_CONTENT_CONTROLS_KEY: None, document_scope.HTML_ARTICLE_KEY: None, document_scope.HTML_STATIC_KEY: None,
               document_scope.HTML_LEGACY_ENCODING_KEY: None,
+              document_scope.HTML_CELL_BOUNDARY_KEY: None,
               document_native_locations.PARAGRAPH_MAP_KEY: None, document_native_locations.WORD_TABLE_GRID_KEY: None,
               document_native_locations.PPTX_VISIBILITY_KEY: None, document_native_locations.WORD_RUN_MAP_KEY: None,
               document_native_locations.EPUB_VISIBILITY_KEY: None,

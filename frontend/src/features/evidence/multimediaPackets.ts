@@ -702,6 +702,7 @@ export interface DocumentEvidenceSet extends SetBase {
       occurrences: { start: number; end: number; anchor: { kind: 'text' | 'email' | 'docx' | 'pdf'; source_start?: number;
         source_end?: number; mime_part?: string; paragraph_index?: number; page?: number; block?: number; bbox?: number[] } }[] }[] }
   coverage?: { scored_windows?: number; candidate_spans?: number; unmapped_pages?: number[];
+    html_cell_boundaries?: 'visible-html-cell-boundaries/1';
     writing_bibliography?: { schema: 'chipmunk.writing-bibliography/1'; heading: string; entry_count: number;
       section_start: number; section_end: number; first_location: BibliographySource; last_location: BibliographySource };
     balanced_passage_selection?: { schema: 'document-balanced-passage-selection/1'; candidate_blocks: number;

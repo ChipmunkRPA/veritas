@@ -176,6 +176,56 @@ def test_static_projection_restores_writing_after_an_implicitly_closed_omission(
     assert extract(source, ".html").text == visible
 
 
+@pytest.mark.parametrize("extension", [".html", ".htm", ".xhtml", ".eml"])
+def test_visible_table_cells_have_exact_distinct_text_and_source_ranges(tmp_path, extension):
+    before = "The public committee gathered at the western station"
+    after = "Other members confirmed every receipt before lunch"
+    table = (f"<table><tbody><tr><td>{before.replace('western', '<strong>western</strong>')}</td>"
+             f'<td style="display:none">EXCLUDED WORDS</td><td>{after}</td></tr></tbody></table>')
+    raw = (f"<html><body>{table}</body></html>" if extension == ".eml"
+           else f"<html><body><main>{table}</main></body></html>")
+    source = tmp_path / ("saved" + extension)
+    if extension == ".eml":
+        message = EmailMessage()
+        message.set_content(" \t\n")
+        message.add_alternative(raw, subtype="html", cte="base64")
+        source.write_bytes(message.as_bytes())
+    else:
+        source.write_text(raw)
+
+    validate_upload(BytesIO(source.read_bytes()), source.name, "document")
+    doc = extract(source, extension)
+    assert doc.text == f"{before}\n\n{after}"
+    assert doc.meta[document_scope.HTML_CELL_BOUNDARY_KEY] == document_scope.HTML_CELL_BOUNDARY
+    assert len(doc.paragraphs) == len(doc.source_map) == 2
+    for block, original in zip(doc.source_map, (before, after), strict=True):
+        assert "".join(unescape(raw[lo:hi]) for _, _, lo, hi in block["source_ranges"]) == original
+        assert all("EXCLUDED" not in raw[lo:hi] and "<" not in raw[lo:hi] for _, _, lo, hi in block["source_ranges"])
+        if extension == ".eml":
+            assert block["mime_part"] == "1.2" and block["quote_role"] == "body"
+    legacy = extract(source, extension, split_html_cells=False)
+    assert legacy.text == f"{before}{after}"
+    assert document_scope.HTML_CELL_BOUNDARY_KEY not in legacy.meta
+
+
+def test_plain_email_and_markdown_keep_their_own_format_scope(tmp_path):
+    original = "Writing in the first saved alternative remains the selected source for our ordinary correspondence checks."
+    table = "<table><tr><th>HTML alternate heading</th><td>HTML alternate paragraph</td></tr></table>"
+    message = EmailMessage()
+    message.set_content(original)
+    message.add_alternative(table, subtype="html", cte="quoted-printable")
+    source = tmp_path / "saved.eml"
+    source.write_bytes(message.as_bytes())
+    doc = extract(source, ".eml")
+    assert doc.text == original and doc.meta["email"]["body_content_type"] == "text/plain"
+    assert document_scope.HTML_CELL_BOUNDARY_KEY not in doc.meta
+    markdown = tmp_path / "notes.md"
+    markdown.write_text(f"# Meeting report\n\n{table}")
+    current, older = (extract(markdown, ".md", split_html_cells=active) for active in (True, False))
+    assert current.text == older.text and current.source_map == older.source_map
+    assert document_scope.HTML_CELL_BOUNDARY_KEY not in current.meta
+
+
 @pytest.mark.parametrize("extension", [".html", ".eml"])
 def test_hidden_only_html_rejects_before_checkout(extension):
     html = ('<p hidden>This long and ordinary saved text would otherwise be counted as writing if it were visible.</p>'

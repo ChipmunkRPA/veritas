@@ -3,8 +3,8 @@
 This file imports pysbd and nothing of the application: `pipeline.segment_within` runs it as a script in a child process
 (`python -I segment.py`), which reads the paragraphs and the text from its input and prints the offsets of the sentences as
 JSON (N-14b; S2-01). The time of pysbd grows with the sentences times the characters of a paragraph, inside one call that
-holds the interpreter of whoever runs it; `spans` is that part, and a request's document passes through it in the child
-only. `segment` is for a caller that brings its own text (the benchmark, the tests)."""
+holds the interpreter of whoever runs it. Initial analysis segments text in the child. Evidence replay also segments
+bounded source text in the serving process."""
 from __future__ import annotations
 
 import re
@@ -18,7 +18,6 @@ if TYPE_CHECKING:
 
     from app.detectors.text.extract import Document
 
-_seg = pysbd.Segmenter(language="en", clean=False, char_span=True)
 _WORD = re.compile(r"\w[\w'’-]*", re.UNICODE)  # unicode-aware: CJK characters count as words
 MAX_UNITS = 1500  # beyond this, adjacent sentences are merged so cost stays bounded for huge documents
 MIN_WORDS = 15
@@ -44,11 +43,13 @@ class Sentence:
 
 def spans(text: str, paragraphs: Sequence[Sequence[int]]) -> list[tuple[int, int, int]]:
     """(start, end, paragraph) of each sentence in `text`, without the whitespace around it."""
+    # The segmenter keeps the current text while locating sentence offsets.
+    segmenter = pysbd.Segmenter(language="en", clean=False, char_span=True)
     out: list[tuple[int, int, int]] = []
     for pi, (ps, pe) in enumerate(paragraphs):
         ptxt = text[ps:pe]
         try:
-            found = [(sp.start, sp.end) for sp in _seg.segment(ptxt)]
+            found = [(sp.start, sp.end) for sp in segmenter.segment(ptxt)]
         except Exception:
             found = []
         if not found:

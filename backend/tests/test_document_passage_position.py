@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+from concurrent.futures import ThreadPoolExecutor
 from copy import deepcopy
 from email.message import EmailMessage
+from threading import Barrier
 from types import SimpleNamespace
 
 import pytest
@@ -11,7 +13,7 @@ from app.core.canonical import canonical_hash
 from app.core.config import settings
 from app.detectors.text import passage_position
 from app.detectors.text.extract import extract, text_hash
-from app.detectors.text.segment import segment
+from app.detectors.text.segment import segment, spans
 from app.engine.boundary import Deadline, DetectorTimeout
 from app.evidence import document_long_passage_position, document_matched_context, document_passage_coverage
 from app.evidence import document_passage_position as review
@@ -21,6 +23,24 @@ from app.reports.multimedia_evidence import _passage_position_view
 TEXT = ("The committee distributed its original recommendation and reviewed the supporting material. "
         "The published instructions include a detailed record of who authorized every major change in the final draft. "
         "The editor preserved those details for the next meeting and for later review.")
+
+
+def test_parallel_document_reads_keep_each_source_sentence_ranges(monkeypatch):
+    from pysbd import Segmenter
+
+    texts = [TEXT, "An editor rewrote these instructions. The publisher kept the revised copy for future readers."]
+    paragraphs = [[(0, len(text))] for text in texts]
+    expected = [spans(text, bounds) for text, bounds in zip(texts, paragraphs, strict=True)]
+    before_locating = Barrier(2, timeout=5)
+    locate = Segmenter.sentences_with_char_spans
+
+    def locate_together(segmenter, sentences):
+        before_locating.wait()
+        return locate(segmenter, sentences)
+
+    monkeypatch.setattr(Segmenter, "sentences_with_char_spans", locate_together)
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        assert list(pool.map(spans, texts, paragraphs)) == expected
 
 
 def setup_source(tmp_path, text=TEXT):

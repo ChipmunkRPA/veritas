@@ -545,7 +545,7 @@ class RuntimeUnavailable(importlib.abc.MetaPathFinder):
                         'app.evidence.face_interval_binding', 'app.evidence.face_boundary_binding', 'app.evidence.face_boundary_clock', 'app.evidence.face_alignment_context',
                         'app.evidence.face_paired_edge_binding', 'app.evidence.face_short_proposal_binding', 'app.evidence.face_short_window_binding', 'app.evidence.face_short_carrier_binding', 'app.evidence.face_spatial_cut_binding',
                         'app.evidence.face_lighting_context', 'app.evidence.face_return_binding', 'app.evidence.face_return_coverage',
-                        'app.evidence.face_local_return_binding',
+                        'app.evidence.face_local_return_binding', 'app.evidence.face_matched_detail_binding',
                         'app.evidence.face_portrait_return_binding',
                         'app.evidence.face_primary_track_binding',
                         'app.evidence.mouth_hold_sound', 'app.evidence.mouth_local_hold_binding', 'app.evidence.source_geometry',
@@ -619,7 +619,7 @@ def test_native_source_verifier_checks_exif_oriented_original_and_donor_crops(tm
                                  'document_arithmetic.py', 'document_publication_ids.py', 'document_saved_link_hosts_binding.py',
                                  'document_reference_links_binding.py',
                                  'document_word_reference_cache_binding.py', 'document_pdf_form_binding.py',
-                                 'face_single_boundary_binding.py',
+                                 'face_single_boundary_binding.py', 'face_matched_detail_binding.py',
                                  'eye_local_hold_binding.py'])
 def test_new_offline_binding_helpers_remain_standard_library_only(name):
     import ast
@@ -654,6 +654,9 @@ def test_new_offline_binding_helpers_remain_standard_library_only(name):
     elif name == 'document_scope.py':
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.evidence', 'document_pdf_visibility')}
+    elif name == 'face_matched_detail_binding.py':
+        assert imports <= sys.stdlib_module_names | {'app'}
+        assert local == {('app.evidence.video_packet_versions', 'MATCHED_DETAIL_AVC_VERSION')}
     elif name in {'document_saved_link_hosts_binding.py', 'document_word_reference_cache_binding.py', 'document_pdf_form_binding.py'}:
         assert imports <= sys.stdlib_module_names | {'app'}
         assert local == {('app.core.canonical', 'canonical_hash')}

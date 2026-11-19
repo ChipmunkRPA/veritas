@@ -52,6 +52,7 @@ from app.evidence import (
     video_viseme_binding,
     whole_face_binding,
 )
+from app.evidence import face_matched_detail_binding as matched_detail
 from app.evidence.av_binding import TIMING_WINDOWS
 from app.evidence.face_boundary_binding import validate_packet as validate_face_boundary
 from app.evidence.face_return_binding import (
@@ -478,6 +479,13 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     interpolated = set(table.interpolated)
     face_single_boundary_binding.validate(evidence, canonical_hash, table_pts=table.pts,
         interpolated=interpolated, rotation=table.rotation, truncated=table.truncated)
+    matched_detail.validate(evidence, canonical_hash, table_pts=table.pts,
+        interpolated=interpolated, rotation=table.rotation, truncated=table.truncated)
+    matched = next((p[matched_detail.KEY] for p in evidence["packets"] if matched_detail.KEY in p), None)
+    if matched is not None:
+        from app.detectors.video.face_matched_detail import replay_source
+
+        replay_source(original, table, matched)
     transition = next((p[face_single_boundary_binding.KEY] for p in evidence["packets"]
                        if face_single_boundary_binding.KEY in p), None)
     transition_frames, transition_scenes, sparse_pixels = {}, {}, {}
@@ -873,6 +881,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     return (f"Original SHA-256 and the source frame clock matched. Verified native frames ({len(found)}), "
             f"original images or crops ({images}), mouth patches ({patches}), and aligned face inputs ({alignments})."
             + (" Verified the face appearance transition frames, aligned inputs and nearby picture similarity." if transition else "")
+            + (" Verified the matched-detail native views, source crops and detail measurements." if matched else "")
             + (f" Recomputed picture-clock coverage for {len(timing['windows'])} timing windows." if timing else "")
             + (f" Recomputed fine background boundaries ({fine_edges})." if fine_edges else "")
             + (" Recomputed 4 guarded background boundaries and verified the source carrier." if len(guarded_records) == 2 else

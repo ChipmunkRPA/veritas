@@ -46,6 +46,7 @@ from app.evidence import (
     video_viseme_binding,
     whole_face_binding,
 )
+from app.evidence import face_matched_detail_binding as matched_detail
 from app.evidence.image_packets import PacketIntegrityError, _bounds, _box, _png, _verified
 from app.evidence.mp4 import validate_clip_binding
 from app.evidence.video_clips import ClipUnavailable, build_clip, select_range
@@ -56,6 +57,7 @@ from app.evidence.video_packet_versions import (
     BOUNDARY_VERSION,
     CONTINUITY_VERSIONS,
     LIGHTING_CONTEXT_VERSIONS,
+    MATCHED_DETAIL_AVC_VERSION,
     MOVING_AVC_PROPOSAL_VERSION,
     NESTED_VERSIONS,
     OPPOSITE_PANE_VERSIONS,
@@ -176,8 +178,15 @@ def _records(db: Session, store: ObjectStore, analysis: Analysis, result: dict):
             raise PacketIntegrityError("Face transition differs from the frozen source commitment")
         if digest is not None:
             source[key] = digest
+    detail = tuple(render[0].get(key) for key in (matched_detail.KEY, matched_detail.COVERAGE))
+    for reading, key in zip(detail, matched_detail.COMMITMENTS, strict=True):
+        digest = sampling.get(key)
+        if (canonical_hash(reading) if reading is not None else None) != digest:
+            raise PacketIntegrityError("Matched-detail review differs from its frozen source commitment")
+        if digest is not None:
+            source[key] = digest
     stages = [{"stage": "probe", "sha256": probe[1]}, {"stage": "render", "sha256": render[1]}]
-    return table, source, by_index, stages, hold, scene, scene_coverage, timing, (transition, transition_coverage)
+    return table, source, by_index, stages, hold, scene, scene_coverage, timing, (transition, transition_coverage), detail
 
 
 def _signals(result: dict, exhibit: dict) -> list[dict]:
@@ -606,6 +615,36 @@ def _single_face_boundary_packet(db, store, analysis, set_id, source, record, an
                            "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
 
 
+def _matched_detail_packet(db, store, analysis, set_id, source, record, anchors, decoded):
+    binding = matched_detail
+    packet_id = binding.PACKET_ID
+    frames, assets = [], {}
+    views = {row["index"]: row for row in record["views"]}
+    for index, role in zip(binding.anchor_indices(record), binding.ROLES, strict=True):
+        item = views[index]
+        box, time_s = item["box"], index/30
+        frame_id = f"{packet_id}.{role}"
+        refs = {name: f"{role}_{name}" for name in ("original", "context", "crop")}
+        with Image.fromarray(decoded[index]) as original:
+            context = _context(original, box, f"{frame_id} - frame {index}, {time_s:.3f} s")
+            crop = original.crop(_bounds(box, source["width"], source["height"]))
+            for name, image in zip(refs, (original, context, crop), strict=True):
+                assets[refs[name]] = _packet_image(db, store, analysis, set_id, image)
+        frames.append({"id": frame_id, "interval_role": role, "anchor": {
+            **anchors[index], "original_sha256": source["sha256"], "stream_selector": "v:0",
+            "coordinate_space": source["coordinate_space"], "stream_time_s": time_s, "playback_time_s": time_s},
+            "score": None, "is_peak": False, "context_region": box, "region_meaning": "detected_face_context",
+            "artifact_refs": refs})
+    return {"id": packet_id, "title": binding.TITLE, "evidence_type": "anomaly", "claim_scope": "sampled_window",
+            "semantics": binding.METHOD, binding.KEY: record, "affects_overall_confidence": False,
+            "finding_ids": [], "signal_refs": [], "exhibit_refs": [], "frames": frames, "artifacts": assets,
+            "observation": binding.OBSERVATION, "interpretation": binding.INTERPRETATION,
+            "measurements": [], "limitations": [binding.LIMITATION],
+            "clip": {"status": "unavailable", "reason": "Use the original video to inspect this range."},
+            "derivation": {"version": MATCHED_DETAIL_AVC_VERSION, "selection": binding.METHOD,
+                           "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
+
+
 def _picture_sequence_packet(db: Session, store: ObjectStore, analysis: Analysis, set_id: str,
                              source: dict, review: dict, decoded: dict) -> dict:
     pair = review["pair"]
@@ -903,8 +942,20 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if canonical_hash(result) != analysis.result_hash or result.get("input", {}).get("sha256") != analysis.sha256:
         raise PacketIntegrityError("Video result or original identity does not match")
     store.verify(analysis.sha256)
-    table, source, anchors, records, hold, scene, scene_coverage, timing, transition = _records(db, store, analysis, result)
+    table, source, anchors, records, hold, scene, scene_coverage, timing, transition, detail = _records(db, store, analysis, result)
     single_boundary, boundary_coverage = transition
+    detail_record, detail_coverage = detail
+    detail_indices = set()
+    if detail_record is not None:
+        try:
+            matched_detail.validate_record(detail_record, source, table_pts=table.pts,
+                interpolated=table.interpolated, rotation=table.rotation, truncated=table.truncated)
+            for row in detail_record["views"]:
+                if anchors[row["index"]]["decoded_rgb_sha256"] != row["decoded_rgb_sha256"]:
+                    raise ValueError("Matched-detail view differs from the render-stage source picture")
+            detail_indices.update(matched_detail.anchor_indices(detail_record))
+        except (KeyError, TypeError, ValueError) as error:
+            raise PacketIntegrityError(str(error)) from error
     transition_indices = set()
     if single_boundary is not None:
         try:
@@ -925,6 +976,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     window_frames.update(row["frame_index"] for candidate in whole_candidates for row in candidate["whole_face_review"]["samples"]
                          if candidate["series_name"] == "face_detail" or any(value is not None for value in row["responses_hex"]))
     window_frames |= sequence_frames | return_frames | transition_indices
+    if detail_record is not None:
+        window_frames.update(row["index"] for row in detail_record["views"])
     sequence_checks = sum(1 for signal in result.get("signals", []) if signal.get("status", "ok") == "ok"
                           and (signal.get("details") or {}).get("face_sequence_binding_version") in face_interval_binding.SEQUENCE_METHODS
                           and ((signal.get("details") or {}).get("face_sequence_windows") or (signal.get("details") or {}).get("face_sequence")))
@@ -946,11 +999,14 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         version = PAIRED_EDGE_VERSION
     if any(item.get("face_spatial_cut") for item in chosen):
         version = SPATIAL_CUT_VERSION
+    if detail_record is not None:
+        version = MATCHED_DETAIL_AVC_VERSION
     document = {"schema": SCHEMA, "version": version, "id": set_id, "status": "ready", "analysis_id": analysis.id,
                 "revision": analysis.revision, "original_result_hash": analysis.result_hash, "source": source, "packets": [],
                 "coverage": {"kind": "point_and_window_samples" if window_frames else "point_samples", "frame_count": len(table), "decoded_frame_indices": sorted(anchors),
                              "scored_frame_indices": sorted(scored_frames), "scored_frame_count": len(scored_frames),
-                             "window_frame_indices": sorted(window_frames), "window_check_count": len(window_candidates) + sequence_checks + len(whole_candidates) + len(return_candidates) + int(single_boundary is not None),
+                             "window_frame_indices": sorted(window_frames), "window_check_count": (len(window_candidates) + sequence_checks
+                                 + len(whole_candidates) + len(return_candidates) + int(single_boundary is not None) + int(detail_record is not None)),
                              "table_truncated": table.truncated, "interpolated_frame_indices": list(table.interpolated),
                              "unmapped_observations": omitted, "channels": _channel_coverage(db, store, analysis, result)},
                 "source_records": records, "omitted_candidates": omitted_candidates,
@@ -963,6 +1019,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][scene_return_binding.COVERAGE] = scene_coverage
     if boundary_coverage is not None:
         document["coverage"][face_single_boundary_binding.COVERAGE] = boundary_coverage
+    if detail_coverage is not None:
+        document["coverage"][matched_detail.COVERAGE] = detail_coverage
     try:
         if brief_review := face_return_coverage.from_result(result, len(table)):
             document["coverage"][face_return_coverage.KEY] = brief_review
@@ -989,8 +1047,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     boundary_indices.update(i for candidate in chosen for i in candidate.get("face_spatial_cut", {}).get("anchors", {}).values())
     exact_indices = boundary_indices | {i for candidate in return_candidates for i in candidate["face_return"]["anchors"].values()}
     wanted = {row["frame_index"] for candidate in chosen for row in candidate["rows"]} | boundary_indices
-    wanted.update(transition_indices)
-    exact_indices.update(transition_indices)
+    wanted.update(transition_indices | detail_indices)
+    exact_indices.update(transition_indices | detail_indices)
     if scene is not None:
         scene_indices = {item["frame_index"] for item in scene["anchors"]}
         wanted.update(scene_indices)
@@ -1296,6 +1354,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["packets"].append(_scene_return_packet(db, store, analysis, set_id, source, scene, decoded))
     if single_boundary is not None:
         document["packets"].append(_single_face_boundary_packet(db, store, analysis, set_id, source, single_boundary, anchors, decoded))
+    if detail_record is not None:
+        document["packets"].append(_matched_detail_packet(db, store, analysis, set_id, source, detail_record, anchors, decoded))
     for packet_id, review in timing_intervals:
         sampling = result["manifest"]["sampling"]
         audio_input = (sampling[video_viseme_binding.SELECTED_INPUT] if review.get(video_viseme_binding.SELECTED_AUDIO) is not None
@@ -1355,6 +1415,7 @@ def validate_packet_set(document: dict[str, Any], *, analysis_id: str, revision:
         scene_return_binding.validate_coverage(document, canonical_hash=canonical_hash)
         face_return_binding.validate_set(document)
         face_single_boundary_binding.validate(document, canonical_hash)
+        matched_detail.validate(document, canonical_hash)
         face_boundary_binding.validate_set(document)
         face_spatial_cut_binding.validate_set(document)
         face_return_coverage.validate(document)

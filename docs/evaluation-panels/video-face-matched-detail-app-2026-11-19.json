@@ -1,0 +1,116 @@
+{
+  "customer_flow": {
+    "browser": {
+      "cases": [
+        "gaussian_swap",
+        "disc_swap",
+        "ordinary_blur_alert",
+        "ordinary_blur_clear",
+        "unassessed_swap",
+        "stock_exact",
+        "hard_cut",
+        "other_frame_rate"
+      ],
+      "page_errors": 0
+    },
+    "cases": {
+      "disc_swap": {
+        "new_range": [
+          105,
+          109
+        ],
+        "original_assessment_unchanged": true,
+        "pdf_json_agree": true,
+        "rejects_mismatched_public_projection": true,
+        "signed_original_verified": true,
+        "source_frames": [
+          104,
+          107,
+          109
+        ],
+        "source_image_assets": 6,
+        "status": "localized"
+      },
+      "gaussian_swap": {
+        "new_range": [
+          73,
+          76
+        ],
+        "original_assessment_unchanged": true,
+        "pdf_json_agree": true,
+        "rejects_mismatched_public_projection": true,
+        "signed_original_verified": true,
+        "source_frames": [
+          72,
+          74,
+          76
+        ],
+        "source_image_assets": 6,
+        "status": "localized"
+      },
+      "hard_cut": {
+        "new_range": null,
+        "original_assessment_unchanged": null,
+        "status": "unassessed"
+      },
+      "ordinary_blur_alert": {
+        "new_range": [
+          105,
+          109
+        ],
+        "original_assessment_unchanged": true,
+        "pdf_json_agree": true,
+        "rejects_mismatched_public_projection": true,
+        "signed_original_verified": true,
+        "source_frames": [
+          104,
+          107,
+          109
+        ],
+        "source_image_assets": 6,
+        "status": "localized"
+      },
+      "ordinary_blur_clear": {
+        "new_range": null,
+        "original_assessment_unchanged": null,
+        "status": "no_match"
+      },
+      "other_frame_rate": {
+        "new_range": null,
+        "original_assessment_unchanged": null,
+        "status": "unassessed"
+      },
+      "stock_exact": {
+        "new_range": null,
+        "original_assessment_unchanged": true,
+        "status": "unassessed"
+      },
+      "unassessed_swap": {
+        "new_range": null,
+        "original_assessment_unchanged": null,
+        "status": "unassessed"
+      }
+    },
+    "jobs_before_payment": 0,
+    "price_usd_cents": 999,
+    "report_revision": "veritas-report-2.0.r195",
+    "simulated_checkouts": 12
+  },
+  "full_face_stage_replays": {
+    "cases": 48,
+    "coverage_localized": 7,
+    "coverage_no_match": 11,
+    "coverage_unassessed": 30,
+    "same": 48,
+    "same_new_range": 7
+  },
+  "max_response_delta": 0.0,
+  "production_face_module_sha256s": {
+    "app/detectors/video/adapters/face_appearance.py": "05f4dce989966798d8b66a2567b34b20d3d019c22ff467aa6324add9e3d79444",
+    "app/detectors/video/face_matched_detail.py": "1b4077f10c0913711aaa48e947739f1fa80d5a62b1990c288ea9faaf4917eb57",
+    "app/evidence/face_matched_detail_binding.py": "70fecc27b10063935bb821ec42471a914513278c7f23bc69ae7e484359bade81"
+  },
+  "result_lineage_sha256": "d000daeb9cd712b3b1f4cce0ac784ca35074b1c136decf9003dd4c9d4f6d5f9b",
+  "schema": "chipmunk.video-matched-detail-app-local/1",
+  "signed_reports_backwards_compatible": 2
+}

@@ -165,7 +165,12 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
     source = document["source"]
     sampling = result.get("manifest", {}).get("sampling", {})
     if kind == "video":
-        from app.evidence import face_single_boundary_binding, scene_return_binding, video_viseme_binding
+        from app.evidence import (
+            face_matched_detail_binding,
+            face_single_boundary_binding,
+            scene_return_binding,
+            video_viseme_binding,
+        )
 
         if (sampling.get("frame_anchor_version") != "stream-pts-rgb24/1"
                 or any(source.get(key) != sampling.get(key) or not source.get(key)
@@ -173,7 +178,8 @@ def _validate(document: dict, *, kind: str, analysis_id: str, revision: int, res
                 or source.get("timeline_origin_s") != sampling.get("timeline_origin_s")
                 or any(source.get(key) != sampling.get(key)
                        for key in (scene_return_binding.COMMITMENT, scene_return_binding.COVERAGE_COMMITMENT,
-                                   video_viseme_binding.COMMITMENT, *face_single_boundary_binding.COMMITMENTS))
+                                   video_viseme_binding.COMMITMENT, *face_single_boundary_binding.COMMITMENTS,
+                                   *face_matched_detail_binding.COMMITMENTS))
                 or ("picture_hold" in document and source.get("picture_hold_sha256") != sampling.get("picture_hold_sha256"))):
             raise ObjectIntegrityError("Video evidence does not match the published source-frame commitments")
     elif kind == "audio":
@@ -234,6 +240,7 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
     from app.evidence import (
         face_boundary_binding,
         face_lighting_context,
+        face_matched_detail_binding,
         face_return_binding,
         face_return_coverage,
         face_short_carrier_binding,
@@ -304,6 +311,17 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
         if (transition != records["render"].get(face_single_boundary_binding.KEY)
                 or coverage.get(face_single_boundary_binding.COVERAGE) != records["render"].get(face_single_boundary_binding.COVERAGE)):
             raise ValueError("Face transition differs from the frozen render output")
+        matched = face_matched_detail_binding
+        matched.validate(document, canonical_hash, table_pts=table.pts,
+                         interpolated=table.interpolated, rotation=table.rotation, truncated=table.truncated)
+        detail = next((p[matched.KEY] for p in document["packets"] if matched.KEY in p), None)
+        if (detail != records["render"].get(matched.KEY)
+                or coverage.get(matched.COVERAGE) != records["render"].get(matched.COVERAGE)):
+            raise ValueError("Matched-detail review differs from the frozen render output")
+        if detail is not None:
+            from app.detectors.video.face_matched_detail import replay_source
+
+            replay_source(store.path_for(source["sha256"]), table, detail)
     except (ValueError, KeyError, TypeError) as error:
         raise ObjectIntegrityError("Picture evidence differs from the recorded native inspection") from error
     for packet in document["packets"]:
@@ -1383,6 +1401,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                 row["face_return"] = copy.deepcopy(packet["face_return"])
             if transition := packet.get(face_single_boundary_binding.KEY):
                 row[face_single_boundary_binding.KEY] = copy.deepcopy(transition)
+            if detail := packet.get("face_matched_detail"):
+                row["face_matched_detail"] = {"start_s": detail["start_pts"]/30000, "end_s": detail["end_pts"]/30000,
+                                              "start": detail["start_frame_index"], "end": detail["end_frame_index"]}
             row["whole_face_review"] = copy.deepcopy(packet.get("whole_face_review"))
             row["clip"] = copy.deepcopy(packet.get("clip"))
             coarse_count = len(packet["frames"])
@@ -1406,7 +1427,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                                  for role in ("original", "context", "crop", "measured_patch")
                                                  if role in frame["artifact_refs"] and (not (hold or repeated_sequence or scene_return) or role == "original"
                                                                                         or (role == "crop" and frame["region_meaning"] == "matched_frame_crop"))
-                                                 and (not (mouth_hold or eye_hold or lip_timing or packet.get(face_single_boundary_binding.KEY)) or role != "context")]})
+                                                 and (not (mouth_hold or eye_hold or lip_timing or packet.get(face_single_boundary_binding.KEY)
+                                                           or packet.get("face_matched_detail")) or role != "context")]})
         elif packet_kind == "audio":
             row["images"] = [plate(role, packet["artifacts"][role]) for role in ("waveform", "scores")]
             row["audio"] = {"interval": copy.deepcopy(packet["interval"]), "context_interval": copy.deepcopy(packet["context_interval"]),
@@ -1808,6 +1830,9 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                                              "reason": TIMING_REASONS[row["status"]]})
     av_coverage = (document.get("av") or {}).get("coverage") or {}
     face_transition_coverage = (document.get("coverage") or {}).get(face_single_boundary_binding.COVERAGE) if kind == "video" else None
+    from app.evidence import face_matched_detail_binding as matched_detail
+
+    detail_coverage = (document.get("coverage") or {}).get(matched_detail.COVERAGE) if kind == "video" else None
     return {"available": True, "kind": kind, "title": f"{kind.capitalize()} evidence", "id": document["id"],
             "av_repeated_offsets": copy.deepcopy(av_coverage.get(REPEATED_OFFSETS, [])),
             "av_timing_windows": timing_view,
@@ -1854,6 +1879,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             face_single_boundary_binding.COVERAGE: ({**face_transition_coverage,
                 "message": face_single_boundary_binding.coverage_text(face_transition_coverage)}
                 if face_transition_coverage is not None else None),
+            matched_detail.COVERAGE: ({**detail_coverage, "message": matched_detail.coverage_text(detail_coverage)}
+                                     if detail_coverage is not None else None),
             "picture_frame_count": document["source"].get("frame_count", 0) if kind == "video" else 0,
             "picture_dimensions": (document["source"]["width"], document["source"]["height"]) if kind == "video" else None,
             "voice_gaps": voice_gaps,

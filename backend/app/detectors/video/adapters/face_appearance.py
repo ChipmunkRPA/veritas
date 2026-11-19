@@ -14,6 +14,7 @@ from app.detectors.video import face_appearance as method
 from app.detectors.video import (
     face_boundary,
     face_detail_repeat,
+    face_matched_detail,
     face_paired_edge,
     face_primary_track,
     face_return,
@@ -25,8 +26,9 @@ from app.detectors.video.adapters.common import CPU_ONLY, FULL_DEEP, video_spec
 from app.detectors.video.adapters.face_sequence import FAMILY, FaceSequenceReviewDetector, SequenceInputs
 from app.detectors.video.decode import DecodeError
 from app.engine.boundary import Deadline, DetectorTimeout
-from app.engine.detector import ActivationUse, Applicability, DetectorResult, InputUnit, UnitScore
+from app.engine.detector import ActivationUse, Applicability, DetectorResult, InputUnit, Profile, UnitScore
 from app.evidence import face_local_return_binding as local
+from app.evidence import face_matched_detail_binding as matched_detail
 from app.evidence import face_paired_edge_binding as paired
 from app.evidence import face_portrait_return_binding as portrait_return
 from app.evidence import face_primary_track_binding, mp4_source_clock
@@ -768,6 +770,39 @@ def _with_short_proposal(result, inputs, yunet, recognizer, deadline):
     return result
 
 
+def _with_matched_detail(result, inputs, yunet, recognizer, ctx):
+    if (settings.environment != "dev" or ctx.profile != Profile.FULL
+            or not settings.video_face_matched_detail_avc_review or not settings.video_face_very_brief_avc_review
+            or not settings.video_face_short_avc_review or settings.face_min_size != 48
+            or result.status not in {"ok", "not_applicable"}):
+        return result
+    details = result.details
+    path = getattr(inputs.store, "path", None)
+    if (path is None or not matched_detail.eligible(inputs.table, (*inputs.encoding, inputs.codec_tag), "mp4")
+            or not mp4_source_clock.verified(path, inputs.table, 1000)):
+        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "profile")
+        return result
+    if details.get("face_return") or details.get("face_return_secondary"):
+        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "prior_review")
+        return result
+    earlier = [face_detail_repeat.original_range(details), details.get("face_boundary")]
+    budget = min(12., ctx.deadline.remaining() - COARSE_RESULT_RESERVE_S)
+    if budget <= 0:
+        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "time_budget")
+        return result
+    try:
+        record, coverage = face_matched_detail.inspect(inputs, yunet, recognizer, ctx.deadline.nested(budget),
+                                                      [item for item in earlier if item])
+    except DetectorTimeout:
+        record, coverage = None, matched_detail.coverage("unassessed", "time_budget")
+    except (DecodeError, ValueError, cv2.error):
+        record, coverage = None, matched_detail.coverage("unassessed", "source_input")
+    details[matched_detail.COVERAGE] = coverage
+    if record is not None:
+        details[matched_detail.KEY] = record
+    return result
+
+
 def _with_short_windows(result, inputs, yunet, recognizer, deadline):
     table = inputs.table
     detail = result.details
@@ -1328,13 +1363,18 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
         inputs: SequenceInputs = ctx.outputs.face_review
         table = inputs.table
         yunet, recognizer = ctx.lease.get(self.YUNET).obj, ctx.lease.get(self.APPEARANCE).obj
+
+        def supplemental(result):
+            result = _with_short_proposal(result, inputs, yunet, recognizer, ctx.deadline)
+            return _with_matched_detail(result, inputs, yunet, recognizer, ctx)
+
         if (settings.video_face_short_return_review or _short_source(inputs) or _short_webm_source(inputs)
                 or _short_avc_source(inputs) or _window_source(inputs)) and not (incumbent := super().applicable(ctx)).ok:
             result = DetectorResult.not_applicable(incumbent.reason or 'insufficient coarse face context')
             result.details['appearance_check_status'] = 'not_applicable'
             result.model_revisions = revisions(ctx, self.YUNET, self.DINO, self.APPEARANCE)
             result = _with_return(result, inputs, yunet, recognizer, ctx.deadline)
-            return _with_short_proposal(result, inputs, yunet, recognizer, ctx.deadline)
+            return supplemental(result)
         centers = {i for i in inputs.centers if 0 < i < len(table) - 1}
         scheduled = {i + k for i in centers for k in (-1, 0, 1)}
         check = ctx.deadline.check if ctx.deadline is not None else lambda *_: None
@@ -1363,7 +1403,7 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
                 appearance_check_reason='insufficient source-bound tracked context; the previous review check was retained')
             fallback.model_revisions = revisions(ctx, self.YUNET, self.DINO, self.APPEARANCE)
             fallback = _with_return(fallback, inputs, yunet, recognizer, ctx.deadline)
-            return _with_short_proposal(fallback, inputs, yunet, recognizer, ctx.deadline)
+            return supplemental(fallback)
         highest = windows[0]
         selected = record(highest, table, bindings) if highest['response'] > method.REVIEW_POINT else None
         details = {'face_sequence_binding_version': method.METHOD, 'face_sequence': selected,
@@ -1389,5 +1429,5 @@ class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):
         result = _with_return(result, inputs, yunet, recognizer, ctx.deadline)
         result = _repeat_face_detail(result, inputs, recognizer, ctx.deadline)
         result = _with_paired_boundary(result, inputs, yunet, recognizer, ctx.deadline)
-        result = _with_short_proposal(result, inputs, yunet, recognizer, ctx.deadline)
+        result = supplemental(result)
         return _with_spatial_cut(result, inputs, yunet, ctx.deadline)

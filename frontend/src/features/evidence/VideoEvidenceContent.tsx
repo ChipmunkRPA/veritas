@@ -77,10 +77,11 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
 }) {
   const player = useRef<HTMLVideoElement>(null)
   const [selected, setSelected] = useState<VideoEvidenceFrame | null>(null)
+  const [rangeStart, setRangeStart] = useState<number | null>(null)
   const [failed, setFailed] = useState(false)
   const [attempt, setAttempt] = useState(0)
   useEffect(() => { const media = player.current; return () => { if (media && !media.paused) media.pause() } }, [mediaReady, token, attempt, failed])
-  const target = selected?.anchor.playback_time_s
+  const target = rangeStart ?? selected?.anchor.playback_time_s
   const showVisual = scope !== 'timing'
   const packets = scope === 'all' ? set.packets : set.packets.filter(packet => showVisual ? !packet.lip_timing_review : packet.lip_timing_review)
   const playableContext = packets.find(packet => packet.clip?.status === 'ready')
@@ -90,12 +91,28 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
   useEffect(() => { if (player.current?.readyState) seek() }, [target, selected]) // a click seeks; never starts autoplay
   useEffect(() => { setFailed(false) }, [token])
   const chooseFrame = (frame: VideoEvidenceFrame) => {
+    setRangeStart(null)
     setSelected(frame)
+    player.current?.scrollIntoView?.({ block: 'center', behavior: 'auto' })
+  }
+  const jumpToRange = (start: number) => {
+    setSelected(null)
+    setRangeStart(start)
+    if (player.current?.readyState) player.current.currentTime = start
     player.current?.scrollIntoView?.({ block: 'center', behavior: 'auto' })
   }
   const coverage = showVisual ? set.coverage : undefined
   const hold = showVisual ? set.picture_hold : undefined
   const sceneReview = coverage?.scene_return_review
+  const matchedReview = coverage?.face_matched_detail_coverage
+  const matchedReasons = {
+    profile: 'This check needs a four-second 720p AVC MP4 with verified 30 fps timing.',
+    prior_review: 'The brief face appearance review already found a range for this file.',
+    shot_context: 'The original pictures did not supply a complete shot review.',
+    face_context: 'The source did not supply comparable face views around a selected range.',
+    time_budget: 'This review did not complete within its time limit.',
+    source_input: 'The native source pictures could not be verified for this check.',
+  }
   const transitionReview = coverage?.face_single_boundary_coverage
   const transition = packets.find(packet => packet.face_single_boundary)?.face_single_boundary
   const transition720p = (transition?.method ?? transitionReview?.method) === 'single-face-boundary/6'
@@ -158,7 +175,8 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
             alt={`${frame.id}: ${measuredRegion ? `exact measured ${measuredRegion} region` : crop ? 'source face crop for context' : 'frame context with its recorded label'}`} />
             <figcaption className="mt-2 text-caption text-text-muted">{measuredRegion ? `Exact pixels of the measured ${measuredRegion} region.`
               : nativeFaceCrop ? `Exact source face crop · x ${nativeFaceCrop.x}, y ${nativeFaceCrop.y} · ${nativeFaceCrop.w} × ${nativeFaceCrop.h} pixels.`
-              : packet.face_single_boundary ? 'Exact crop of the face from this source frame.'
+              : packet.face_matched_detail && frame.interval_role === 'during' ? 'Exact source pixels at a face position estimated from adjoining frames.'
+              : packet.face_single_boundary || packet.face_matched_detail ? 'Exact crop of the face from this source frame.'
               : crop ? 'Detected-face crop for inspection; not an edit boundary or the exact aligned classifier input.'
               : 'Source context with a navigation label; no local edit mask is available.'}</figcaption></figure>}
         </div>
@@ -169,6 +187,16 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
     })}</div>
 
   return <div id={showVisual ? 'media-evidence-visual' : undefined} data-testid="video-evidence-content" className="scroll-mt-20">
+    {matchedReview && <section aria-labelledby="video-matched-detail-heading" className="mt-4 rounded-md border border-border p-4">
+      <h3 id="video-matched-detail-heading" className="m-0 text-body font-medium">Brief face review at matched image detail</h3>
+      <p className="mt-2 mb-0 text-small text-text-muted">{matchedReview.status === 'localized'
+        ? 'A very brief face appearance change remained after matching image detail.'
+        : matchedReview.status === 'no_match' ? 'The comparable source views supplied no additional brief face change.'
+          : matchedReview.reason && matchedReasons[matchedReview.reason]}
+        {matchedReview.status === 'localized' && <> <a className="underline" href="#media-evidence-VMD01">See the exact range and original crops</a>.</>}</p>
+      {matchedReview.candidate_pairs > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">
+        The source supported {matchedReview.measured_pairs} of {matchedReview.candidate_pairs} proposed ranges for this comparison.</p>}
+    </section>}
     {transitionReview && <section aria-labelledby="video-face-transition-heading" className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-face-transition-heading" className="m-0 text-body font-medium">Face transition check</h3>
       <p className="mt-2 mb-0 text-small">{transition
@@ -358,6 +386,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
             onLoadedMetadata={seek} onError={() => setFailed(true)} />}
       <p className="mt-2 mb-0 text-caption text-text-muted">Browser playback can land near a frame. The exact analyzed frame images below are the evidence; playback between sampled frames is context.</p>
       {selected && <p role="status" className="mt-2 mb-0 text-caption font-mono">Selected frame {selected.anchor.frame_index} · source {seconds(selected.anchor.stream_time_s)} · player {target != null ? seconds(target) : 'time unavailable'}</p>}
+      {rangeStart != null && <p role="status" className="mt-2 mb-0 text-caption font-mono">Selected range start · source {seconds(rangeStart)}</p>}
     </div>}
     <VideoFrameNavigator set={{ ...set, packets }} token={token} mediaReady={mediaReady} selected={selected} onSelect={chooseFrame} />
     <div className="mt-6 space-y-7">{packets.map((packet) => <article key={packet.id} id={`media-evidence-${packet.id}`} className={evidenceCard}>
@@ -366,7 +395,11 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
       {packet.face_single_boundary && <p className="mt-2 mb-0 text-small text-text-muted">
         Transition at <strong>{seconds(packet.face_single_boundary.time_s)}</strong> on the source clock · frame {packet.face_single_boundary.boundary}.
       </p>}
-      {!packet.scene_return && !packet.lip_timing_review && !packet.face_single_boundary && <p className="mt-2 mb-0 text-small text-text-muted">{packet.picture_hold
+      {packet.face_matched_detail && <p className="mt-2 mb-0 text-small text-text-muted">
+        Source range <strong>{seconds(packet.face_matched_detail.start_pts / 30000)}–{seconds(packet.face_matched_detail.end_pts / 30000)}</strong>, frames [{packet.face_matched_detail.start_frame_index}, {packet.face_matched_detail.end_frame_index}), with an exclusive end.
+        {' '}<Button variant="text" disabled={!mediaReady || failed} onClick={() => jumpToRange(packet.face_matched_detail!.start_pts / 30000)}>Jump to range start</Button>
+      </p>}
+      {!packet.scene_return && !packet.lip_timing_review && !packet.face_single_boundary && !packet.face_matched_detail && <p className="mt-2 mb-0 text-small text-text-muted">{packet.picture_hold
         ? <>{packet.picture_hold.frame_count} consecutive decoded frames have identical pixels over <strong>{seconds(packet.picture_hold.span_s)}</strong> between the first and last source timestamps.</>
         : packet.picture_sequence
         ? <>{occurrenceLabel(packet.picture_sequence, 'first')} <strong>{seconds(packet.picture_sequence.first.start_stream_s)}–{seconds(packet.picture_sequence.first.end_stream_s)}</strong> · {occurrenceLabel(packet.picture_sequence, 'second')} <strong>{seconds(packet.picture_sequence.second.start_stream_s)}–{seconds(packet.picture_sequence.second.end_stream_s)}</strong> on the source clock.</>
@@ -407,7 +440,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
         <p className="mt-1 mb-0">End of change · frames {packet.face_return.edges.exit.frame_indices.join(', ')}</p>
         <p className="mt-2 mb-0 text-caption text-text-muted">At each boundary the check compared the first three frames with the last three.</p>
       </div>}
-      {!packet.picture_hold && !packet.picture_sequence && !packet.whole_face_review && !packet.scene_return && !packet.lip_timing_review && !packet.face_single_boundary && !packet.eye_local_hold && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
+      {!packet.picture_hold && !packet.picture_sequence && !packet.whole_face_review && !packet.scene_return && !packet.lip_timing_review && !packet.face_single_boundary && !packet.face_matched_detail && !packet.eye_local_hold && <ContextClip packet={packet} set={set} token={token} ready={mediaReady} />}
       {packet.face_spatial_cut && packet.face_spatial_cut_frames && <section className="mt-5 rounded-md border border-border p-3">
         <h4 className="m-0 text-small font-medium">Picture-cut context</h4>
         <p className="mt-2 mb-0 text-small text-text-muted">Picture detail outside the face changed at both ends of <strong>{seconds(packet.face_spatial_cut.start_stream_s)}–{seconds(packet.face_spatial_cut.end_stream_s)}</strong> on the source clock, with an exclusive end. A cut between shots is one plausible explanation for this face change.</p>

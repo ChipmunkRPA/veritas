@@ -445,6 +445,12 @@ JSON pointer <span class="mono">/word_reference_cache/findings/{{ loop.index0 }}
 {% if review.status == 'localized' and review.get('method') in ['single-face-boundary/3', 'single-face-boundary/4', 'single-face-boundary/5', 'single-face-boundary/6'] %}<p class="caption">A focus change can produce a similar pattern and can also occur alongside a face swap.</p>{% endif %}
 <p class="caption">This check carries zero AI confidence weight. JSON pointer <span class="mono">/coverage/face_single_boundary_coverage</span>.</p>
 {% endif %}
+{% if evidence.get('face_matched_detail_coverage') %}
+{% set review = evidence.face_matched_detail_coverage %}
+<h3>Brief face review at matched image detail</h3>
+<p class="caption">{{ review.message }}{% if review.status == 'localized' %} See <a href="#multimedia-evidence-VMD01">VMD01</a> for the exact range and original crops.{% endif %}</p>
+{% if review.candidate_pairs %}<p class="caption">The source supported {{ review.measured_pairs }} of {{ review.candidate_pairs }} proposed ranges for this comparison.</p>{% endif %}
+{% endif %}
 {% if evidence.get('scene_return_review') %}
 {% set review = evidence.scene_return_review %}
 <h3>Picture-change coverage</h3>
@@ -911,6 +917,7 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% if packet.face_sequence %}<p class="caption">The measured review range spans {{ '%.3f' | format(packet.face_sequence.start_stream_s) }}-{{ '%.3f' | format(packet.face_sequence.end_stream_s) }} s on the source clock. Three consecutive source crops support each of {{ packet.face_sequence.centers.during | length }} centers in this range. Before and after groups provide comparison context. The sequence response is not an individual-frame confidence.</p>{% endif %}
 {% if packet.face_return is defined %}<p class="caption">The brief face-change range spans {{ '%.3f' | format(packet.face_return.start_stream_s) }}-{{ '%.3f' | format(packet.face_return.end_stream_s) }} s on the source clock, with an exclusive end. The three source frames show the face before, during, and after the measured change. This range is for review and carries zero weight in overall AI confidence.</p>{% endif %}
 {% if packet.face_return is defined and packet.face_return.method == 'face-short-return/28' %}<p class="caption">The selected interval contains {{ packet.face_return.end_frame_index - packet.face_return.start_frame_index }} consecutive original pictures. The shot scan found no abrupt cut at either boundary.</p>{% endif %}
+{% if packet.get('face_matched_detail') %}{% set detail = packet.face_matched_detail %}<p class="caption">Source range {{ '%.3f' | format(detail.start_s) }}–{{ '%.3f' | format(detail.end_s) }} s, frames [{{ detail.start }}, {{ detail.end }}), with an exclusive end. The middle crop uses a face position estimated from the adjoining frames. The displayed crops show original pixels.</p>{% endif %}
 {% if packet.get('eye_local_hold') %}
 <p class="caption">Measured source frames [{{ packet.eye_local_hold.frames[0] }}, {{ packet.eye_local_hold.frames[1] }}) and source PTS [{{ packet.window.start_pts }}, {{ packet.window.end_pts }}) at time base {{ packet.window.time_base }}. The three exact crops show the same region before, during and after the range.</p>
 {% endif %}
@@ -923,7 +930,7 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% endif %}
 {% if concise_av %}{% for image in packet.images if image.role in ['waveform', 'lag_profile'] %}{{ plates([image], true) }}{% endfor %}{% else %}{{ plates(packet.images, true) }}{% endif %}
 {% if packet.clip and packet.clip.status == 'ready' %}{% if concise_av %}<p class="caption">The evidence ZIP includes a silent context clip covering source frames [{{ packet.clip.start_frame_index }}, {{ packet.clip.end_frame_index_exclusive }}).</p>{% else %}<p class="caption">A silent video context clip is included in the JSON evidence assets and evidence ZIP, source frames [{{ packet.clip.start_frame_index }}, {{ packet.clip.end_frame_index_exclusive }}). It is a re-encoded viewing aid; extra context frames have no additional detection score. The PDF provides the corresponding frozen source frames and clip checksum below.</p>{% endif %}{% endif %}
-{% if packet.clip and packet.clip.status == 'unavailable' and not packet.get('picture_hold') and not packet.get('picture_sequence') and not packet.get('whole_face_review') and not packet.get('scene_return') and not packet.get('lip_timing_review') and not packet.get('face_single_boundary') and not packet.get('eye_local_hold') and not packet.get('mouth_local_hold') %}<p class="caption">Context clip unavailable: {{ packet.clip.reason }}. The exact recorded frame images remain available below.</p>{% endif %}
+{% if packet.clip and packet.clip.status == 'unavailable' and not packet.get('picture_hold') and not packet.get('picture_sequence') and not packet.get('whole_face_review') and not packet.get('scene_return') and not packet.get('lip_timing_review') and not packet.get('face_single_boundary') and not packet.get('face_matched_detail') and not packet.get('eye_local_hold') and not packet.get('mouth_local_hold') %}<p class="caption">Context clip unavailable: {{ packet.clip.reason }}. The exact recorded frame images remain available below.</p>{% endif %}
 {% if packet.get('mouth_hold_sound') %}
 {% set soundtrack = packet.mouth_hold_sound %}
 <p class="caption">Soundtrack source PTS [{{ soundtrack.source_pts[0] }}, {{ soundtrack.source_pts[1] }}) at time base {{ soundtrack.time_base }}. The playable mono excerpt in the evidence ZIP uses decoded samples [{{ soundtrack.samples[0] }}, {{ soundtrack.samples[1] }}). The ends are exclusive.</p>

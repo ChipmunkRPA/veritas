@@ -21,8 +21,13 @@ from app.audit import chain as audit
 from app.cases import review
 from app.core.canonical import canonical_hash, canonical_json
 from app.core.config import settings
+from app.evidence import (
+    face_matched_detail_binding,
+    face_single_boundary_binding,
+    scene_return_binding,
+    video_viseme_binding,
+)
 from app.evidence import face_short_window_binding as face_windows
-from app.evidence import face_single_boundary_binding, scene_return_binding, video_viseme_binding
 from app.evidence import image_animation_binding as animation
 from app.evidence import image_editor_preview_binding as editor_preview
 from app.evidence import image_motion_photo_binding as motion_photo
@@ -76,7 +81,8 @@ def public_result(result: dict) -> dict:
             source_coverage[face_windows.COMMITMENT] = canonical_hash(window_review)
         sampling = result.get("manifest", {}).get("sampling", {})
         for key in (scene_return_binding.COMMITMENT, scene_return_binding.COVERAGE_COMMITMENT,
-                    video_viseme_binding.COMMITMENT, *face_single_boundary_binding.COMMITMENTS):
+                    video_viseme_binding.COMMITMENT, *face_single_boundary_binding.COMMITMENTS,
+                    *face_matched_detail_binding.COMMITMENTS):
             if commitment := sampling.get(key):
                 source_coverage[key] = commitment
     if result.get('kind') == 'document':

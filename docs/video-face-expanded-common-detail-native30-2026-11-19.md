@@ -58,3 +58,37 @@ An independent pass reconstructed 42 distinct native picture and aligned crop wi
 python3 -I -S backend/scripts/review_video_expanded_common_detail.py \
   docs/evaluation-panels/video-face-expanded-common-detail-native30-2026-11-19.json
 ```
+
+## Local application check
+
+The optional Full check covers exact four-second, upright 1280 × 720
+AVC MP4 video at 30 fps. It runs when the ordinary brief face check
+leaves an opportunity to examine the clip. The browser and Standard
+PDF give the source interval and three original frames with face crops.
+The browser can seek to the start of that interval. The middle crop
+uses a face position estimated from the adjoining measured faces.
+JSON preserves the exact frame and clock values and the signed package
+binds the source image evidence to the public result. The check carries
+zero weight in the overall assessment.
+
+The final face-analysis stages reproduced all 48 frozen cases. The
+seven added ranges had identical appearance scores, exact source
+frame bounds and original crop commitments. Earlier measured ranges
+were preserved.
+
+An isolated test used 12 simulated US$9.99 checkouts and verified
+that analysis jobs started only after payment confirmation. The final
+browser build opened eight test results and loaded the six images on
+each of its three highlighted cases. The Standard PDF, JSON and signed
+original-file replay agreed for a Gaussian-blur swap, a circular-blur
+swap and the ordinary circular-blur alert. The four paired on/off
+analyses preserved the earlier findings and assessment. The controls
+include an ordinary cut and a 29.97 fps upload outside this check's
+scope. Two previously signed Standard reports remained downloadable
+byte for byte.
+[Local application verification receipt](evaluation-panels/video-face-matched-detail-app-2026-11-19.json)
+
+The repository setting defaults to false. In a local development
+instance, enable `VERITAS_VIDEO_FACE_MATCHED_DETAIL_AVC_REVIEW` with
+the short and very brief AVC options. Set the new option to false to
+roll back. Earlier reports retain their recorded source evidence.

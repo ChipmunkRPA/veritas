@@ -975,6 +975,33 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByRole('article')).toBeNull()
   })
 
+  it('shows the matched-detail range, estimated middle crop and exact source navigation', () => {
+    const set = { ...structuredClone(video), version: 'video-evidence-42' }
+    const packet = set.packets[0]
+    packet.id = 'VMD01'
+    packet.title = 'Very brief face appearance change after matching image detail'
+    packet.face_matched_detail = { method: 'face-matched-detail/1', start_frame_index: 73,
+      end_frame_index: 76, start_pts: 73000, end_pts: 76000, time_base: '1/30000' }
+    packet.frames = (['before', 'during', 'after'] as const).map((role, i) => {
+      const index = [72, 74, 76][i]
+      return { ...packet.frames[0], id: `VMD01.${role}`, interval_role: role,
+        anchor: { frame_index: index, pts: index * 1000, time_base: '1/30000',
+          stream_time_s: index / 30, playback_time_s: index / 30 } }
+    })
+    set.coverage!.face_matched_detail_coverage = { status: 'localized', reason: null,
+      candidate_pairs: 2, measured_pairs: 1, affects_overall_confidence: false }
+    show(set)
+    const region = screen.getByRole('region', { name: 'Brief face review at matched image detail' })
+    expect(within(region).getByRole('link', { name: 'See the exact range and original crops' }).getAttribute('href')).toBe('#media-evidence-VMD01')
+    expect(screen.getByText('2.433 s–2.533 s')).toBeTruthy()
+    expect(screen.getByText(/position estimated from adjoining frames/)).toBeTruthy()
+    const original = screen.getByLabelText('Original video evidence playback') as HTMLVideoElement
+    Object.defineProperty(original, 'readyState', { value: 1 })
+    fireEvent.click(screen.getByRole('button', { name: 'Jump to range start' }))
+    expect(original.currentTime).toBe(73 / 30)
+    expect(screen.getByText(/Selected range start/)).toBeTruthy()
+  })
+
   it.each([['video-evidence-21', 'face-short-return/9'], ['video-evidence-28', 'face-short-return/15'],
     ['video-evidence-29', 'face-short-return/16'], ['video-evidence-30', 'face-short-return/17'],
     ['video-evidence-31', 'face-short-return/18'], ['video-evidence-32', 'face-short-return/19'],

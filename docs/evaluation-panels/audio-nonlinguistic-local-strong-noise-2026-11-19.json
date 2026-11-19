@@ -1,0 +1,1498 @@
+{
+  "advance_larger_source_confirmation": false,
+  "gate": {
+    "at_most_one_new_collision_base_event": true,
+    "at_most_one_new_noisy_ordinary_host": true,
+    "at_most_three_new_ordinary_files_overall": false,
+    "at_most_two_new_noisy_ordinary_files": true,
+    "at_most_two_new_wrong_only_noisy_synthetic_files": true,
+    "both_generators_gain": false,
+    "both_held_hosts_gain": false,
+    "held_ordinary_edit_coverage80percent": true,
+    "held_synthetic_edit_coverage80percent": true,
+    "incumbent_ranges_preserved": true,
+    "no_added_isolated_background_flags": true,
+    "two_new_noisy_base_events": false
+  },
+  "groups": [
+    {
+      "arm": "incumbent",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 0,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "clean",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "role": "fit",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 6,
+        "highlight_samples": 232000,
+        "missed": 2,
+        "off_target_ranges": 7,
+        "off_target_samples": 84000,
+        "unassessed": 0,
+        "useful": 6,
+        "wholly_outside_ranges": 0,
+        "wrong_only": 0
+      }
+    },
+    {
+      "arm": "candidate",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 0,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "clean",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "role": "fit",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 2,
+        "highlight_samples": 25600,
+        "missed": 6,
+        "off_target_ranges": 0,
+        "off_target_samples": 0,
+        "unassessed": 0,
+        "useful": 2,
+        "wholly_outside_ranges": 0,
+        "wrong_only": 0
+      }
+    },
+    {
+      "arm": "augmented",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 0,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "clean",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "role": "fit",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 6,
+        "highlight_samples": 232000,
+        "missed": 2,
+        "off_target_ranges": 7,
+        "off_target_samples": 84000,
+        "unassessed": 0,
+        "useful": 6,
+        "wholly_outside_ranges": 0,
+        "wrong_only": 0
+      }
+    },
+    {
+      "arm": "incumbent",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 2,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "competing",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "role": "fit",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "missed": 8,
+        "off_target_ranges": 0,
+        "off_target_samples": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wholly_outside_ranges": 0,
+        "wrong_only": 0
+      }
+    },
+    {
+      "arm": "candidate",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 2,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "competing",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "role": "fit",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "missed": 8,
+        "off_target_ranges": 0,
+        "off_target_samples": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wholly_outside_ranges": 0,
+        "wrong_only": 0
+      }
+    },
+    {
+      "arm": "augmented",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 2,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "competing",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "role": "fit",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "missed": 8,
+        "off_target_ranges": 0,
+        "off_target_samples": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wholly_outside_ranges": 0,
+        "wrong_only": 0
+      }
+    },
+    {
+      "arm": "incumbent",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 0,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "clean",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 1,
+        "highlight_samples": 32000,
+        "unassessed": 0
+      },
+      "role": "point",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 8,
+        "highlight_samples": 272000,
+        "missed": 0,
+        "off_target_ranges": 4,
+        "off_target_samples": 48000,
+        "unassessed": 0,
+        "useful": 8,
+        "wholly_outside_ranges": 0,
+        "wrong_only": 0
+      }
+    },
+    {
+      "arm": "candidate",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 0,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "clean",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 1,
+        "highlight_samples": 9600,
+        "unassessed": 0
+      },
+      "role": "point",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 2,
+        "highlight_samples": 19200,
+        "missed": 8,
+        "off_target_ranges": 2,
+        "off_target_samples": 19200,
+        "unassessed": 0,
+        "useful": 0,
+        "wholly_outside_ranges": 2,
+        "wrong_only": 2
+      }
+    },
+    {
+      "arm": "augmented",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 0,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "clean",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 2,
+        "highlight_samples": 41600,
+        "unassessed": 0
+      },
+      "role": "point",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 8,
+        "highlight_samples": 272000,
+        "missed": 0,
+        "off_target_ranges": 6,
+        "off_target_samples": 67200,
+        "unassessed": 0,
+        "useful": 8,
+        "wholly_outside_ranges": 2,
+        "wrong_only": 0
+      }
+    },
+    {
+      "arm": "incumbent",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 2,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "competing",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 6,
+        "highlight_samples": 192000,
+        "unassessed": 0
+      },
+      "role": "point",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 4,
+        "highlight_samples": 128000,
+        "missed": 8,
+        "off_target_ranges": 4,
+        "off_target_samples": 128000,
+        "unassessed": 0,
+        "useful": 0,
+        "wholly_outside_ranges": 4,
+        "wrong_only": 4
+      }
+    },
+    {
+      "arm": "candidate",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 2,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "competing",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "role": "point",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "missed": 8,
+        "off_target_ranges": 0,
+        "off_target_samples": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wholly_outside_ranges": 0,
+        "wrong_only": 0
+      }
+    },
+    {
+      "arm": "augmented",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 2,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "competing",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 6,
+        "highlight_samples": 192000,
+        "unassessed": 0
+      },
+      "role": "point",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 4,
+        "highlight_samples": 128000,
+        "missed": 8,
+        "off_target_ranges": 4,
+        "off_target_samples": 128000,
+        "unassessed": 0,
+        "useful": 0,
+        "wholly_outside_ranges": 4,
+        "wrong_only": 4
+      }
+    },
+    {
+      "arm": "incumbent",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 0,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "clean",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "role": "held",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 6,
+        "highlight_samples": 192000,
+        "missed": 2,
+        "off_target_ranges": 8,
+        "off_target_samples": 96000,
+        "unassessed": 0,
+        "useful": 6,
+        "wholly_outside_ranges": 0,
+        "wrong_only": 0
+      }
+    },
+    {
+      "arm": "candidate",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 0,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "clean",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 6,
+        "highlight_samples": 57600,
+        "unassessed": 0
+      },
+      "role": "held",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 6,
+        "highlight_samples": 83200,
+        "missed": 4,
+        "off_target_ranges": 4,
+        "off_target_samples": 38400,
+        "unassessed": 0,
+        "useful": 4,
+        "wholly_outside_ranges": 4,
+        "wrong_only": 2
+      }
+    },
+    {
+      "arm": "augmented",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 0,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "clean",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 6,
+        "highlight_samples": 57600,
+        "unassessed": 0
+      },
+      "role": "held",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 8,
+        "highlight_samples": 220000,
+        "missed": 2,
+        "off_target_ranges": 12,
+        "off_target_samples": 132800,
+        "unassessed": 0,
+        "useful": 6,
+        "wholly_outside_ranges": 4,
+        "wrong_only": 2
+      }
+    },
+    {
+      "arm": "incumbent",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 2,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "competing",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 4,
+        "highlight_samples": 80000,
+        "unassessed": 0
+      },
+      "role": "held",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "missed": 8,
+        "off_target_ranges": 0,
+        "off_target_samples": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wholly_outside_ranges": 0,
+        "wrong_only": 0
+      }
+    },
+    {
+      "arm": "candidate",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 2,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "competing",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "role": "held",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "missed": 8,
+        "off_target_ranges": 0,
+        "off_target_samples": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wholly_outside_ranges": 0,
+        "wrong_only": 0
+      }
+    },
+    {
+      "arm": "augmented",
+      "background": {
+        "edit_unassessed": 0,
+        "files": 2,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "unassessed": 0
+      },
+      "condition": "competing",
+      "ordinary": {
+        "edit_unassessed": 0,
+        "files": 12,
+        "flagged": 4,
+        "highlight_samples": 80000,
+        "unassessed": 0
+      },
+      "role": "held",
+      "synthetic": {
+        "edit_unassessed": 0,
+        "files": 8,
+        "flagged": 0,
+        "highlight_samples": 0,
+        "missed": 8,
+        "off_target_ranges": 0,
+        "off_target_samples": 0,
+        "unassessed": 0,
+        "useful": 0,
+        "wholly_outside_ranges": 0,
+        "wrong_only": 0
+      }
+    }
+  ],
+  "held_comparison": {
+    "held_new_background_files": 0,
+    "held_new_collision_base_events": 0,
+    "held_new_noisy_wrong_only_files": 0,
+    "held_new_ordinary_files": 6,
+    "held_new_ordinary_hosts": 1,
+    "held_noisy_new_base_events": 0,
+    "held_noisy_new_deliveries": 0,
+    "held_noisy_new_ordinary_files": 0
+  },
+  "held_ordinary_control_breakdown": [
+    {
+      "arm": "augmented",
+      "condition": "clean",
+      "control": "different_reader",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 9600
+    },
+    {
+      "arm": "candidate",
+      "condition": "clean",
+      "control": "different_reader",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 9600
+    },
+    {
+      "arm": "incumbent",
+      "condition": "clean",
+      "control": "different_reader",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "augmented",
+      "condition": "clean",
+      "control": "roundtrip22050",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 9600
+    },
+    {
+      "arm": "candidate",
+      "condition": "clean",
+      "control": "roundtrip22050",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 9600
+    },
+    {
+      "arm": "incumbent",
+      "condition": "clean",
+      "control": "roundtrip22050",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "augmented",
+      "condition": "clean",
+      "control": "roundtrip24000",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 9600
+    },
+    {
+      "arm": "candidate",
+      "condition": "clean",
+      "control": "roundtrip24000",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 9600
+    },
+    {
+      "arm": "incumbent",
+      "condition": "clean",
+      "control": "roundtrip24000",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "augmented",
+      "condition": "clean",
+      "control": "roundtrip_opus",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 9600
+    },
+    {
+      "arm": "candidate",
+      "condition": "clean",
+      "control": "roundtrip_opus",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 9600
+    },
+    {
+      "arm": "incumbent",
+      "condition": "clean",
+      "control": "roundtrip_opus",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "augmented",
+      "condition": "clean",
+      "control": "same_reader",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 9600
+    },
+    {
+      "arm": "candidate",
+      "condition": "clean",
+      "control": "same_reader",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 9600
+    },
+    {
+      "arm": "incumbent",
+      "condition": "clean",
+      "control": "same_reader",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "augmented",
+      "condition": "clean",
+      "control": "untouched",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 9600
+    },
+    {
+      "arm": "candidate",
+      "condition": "clean",
+      "control": "untouched",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 9600
+    },
+    {
+      "arm": "incumbent",
+      "condition": "clean",
+      "control": "untouched",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "augmented",
+      "condition": "competing",
+      "control": "different_reader",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "candidate",
+      "condition": "competing",
+      "control": "different_reader",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "incumbent",
+      "condition": "competing",
+      "control": "different_reader",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "augmented",
+      "condition": "competing",
+      "control": "roundtrip22050",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 20000
+    },
+    {
+      "arm": "candidate",
+      "condition": "competing",
+      "control": "roundtrip22050",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "incumbent",
+      "condition": "competing",
+      "control": "roundtrip22050",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 20000
+    },
+    {
+      "arm": "augmented",
+      "condition": "competing",
+      "control": "roundtrip24000",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 20000
+    },
+    {
+      "arm": "candidate",
+      "condition": "competing",
+      "control": "roundtrip24000",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "incumbent",
+      "condition": "competing",
+      "control": "roundtrip24000",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 20000
+    },
+    {
+      "arm": "augmented",
+      "condition": "competing",
+      "control": "roundtrip_opus",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 20000
+    },
+    {
+      "arm": "candidate",
+      "condition": "competing",
+      "control": "roundtrip_opus",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "incumbent",
+      "condition": "competing",
+      "control": "roundtrip_opus",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 20000
+    },
+    {
+      "arm": "augmented",
+      "condition": "competing",
+      "control": "same_reader",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "candidate",
+      "condition": "competing",
+      "control": "same_reader",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "incumbent",
+      "condition": "competing",
+      "control": "same_reader",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "augmented",
+      "condition": "competing",
+      "control": "untouched",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 20000
+    },
+    {
+      "arm": "candidate",
+      "condition": "competing",
+      "control": "untouched",
+      "files": 2,
+      "flagged": 0,
+      "highlight_samples": 0
+    },
+    {
+      "arm": "incumbent",
+      "condition": "competing",
+      "control": "untouched",
+      "files": 2,
+      "flagged": 1,
+      "highlight_samples": 20000
+    }
+  ],
+  "limitations": {
+    "codec_controls_establish_ai_origin": false,
+    "global_alias_and_pretraining_independence_established": false,
+    "head_coefficients_published": false,
+    "inspired_representation_not_paper_reproduction": true,
+    "per_source_features_or_scores_published": false,
+    "physical_room_independence_established": false,
+    "private_custody_required_for_native_replay": true,
+    "production_activation_supported": false,
+    "raw_or_generated_voice_published": false,
+    "repeated_carriers_and_conditions": true,
+    "retained_background_prior_exposure": true,
+    "service_confidence_changed": false,
+    "shared_nuisance_within_each_role": true,
+    "traffic_transfer_tested": false,
+    "windows_are_independent_people": false
+  },
+  "new_noisy_carrier_gains_per_base_event": [
+    {
+      "families_with_gain": 0,
+      "histogram": {
+        "0": 4,
+        "1": 0,
+        "2": 0
+      },
+      "hosts_with_gain": 0,
+      "role": "fit"
+    },
+    {
+      "families_with_gain": 0,
+      "histogram": {
+        "0": 4,
+        "1": 0,
+        "2": 0
+      },
+      "hosts_with_gain": 0,
+      "role": "point"
+    },
+    {
+      "families_with_gain": 0,
+      "histogram": {
+        "0": 4,
+        "1": 0,
+        "2": 0
+      },
+      "hosts_with_gain": 0,
+      "role": "held"
+    }
+  ],
+  "new_ordinary_files_per_host": [
+    {
+      "histogram": {
+        "0": 2,
+        "1": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "role": "fit"
+    },
+    {
+      "histogram": {
+        "0": 1,
+        "1": 1,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "role": "point"
+    },
+    {
+      "histogram": {
+        "0": 1,
+        "1": 0,
+        "10": 0,
+        "11": 0,
+        "12": 0,
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 1,
+        "7": 0,
+        "8": 0,
+        "9": 0
+      },
+      "role": "held"
+    }
+  ],
+  "paired_transitions": [
+    {
+      "condition": "clean",
+      "files": 8,
+      "kind": "synthetic",
+      "role": "fit",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          8
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          8
+        ],
+        "flag": [
+          2,
+          4,
+          0,
+          2
+        ],
+        "useful": [
+          2,
+          4,
+          0,
+          2
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "files": 12,
+      "kind": "ordinary",
+      "role": "fit",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "flag": [
+          12,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "competing",
+      "files": 8,
+      "kind": "synthetic",
+      "role": "fit",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          8
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          8
+        ],
+        "flag": [
+          8,
+          0,
+          0,
+          0
+        ],
+        "useful": [
+          8,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "competing",
+      "files": 12,
+      "kind": "ordinary",
+      "role": "fit",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "flag": [
+          12,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "competing",
+      "files": 2,
+      "kind": "background",
+      "role": "fit",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          2,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "files": 8,
+      "kind": "synthetic",
+      "role": "point",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          8
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          8
+        ],
+        "flag": [
+          0,
+          6,
+          0,
+          2
+        ],
+        "useful": [
+          0,
+          8,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "files": 12,
+      "kind": "ordinary",
+      "role": "point",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "flag": [
+          10,
+          1,
+          1,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "competing",
+      "files": 8,
+      "kind": "synthetic",
+      "role": "point",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          8
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          8
+        ],
+        "flag": [
+          4,
+          4,
+          0,
+          0
+        ],
+        "useful": [
+          8,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "competing",
+      "files": 12,
+      "kind": "ordinary",
+      "role": "point",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "flag": [
+          6,
+          6,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "competing",
+      "files": 2,
+      "kind": "background",
+      "role": "point",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          2,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "files": 8,
+      "kind": "synthetic",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          8
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          8
+        ],
+        "flag": [
+          0,
+          2,
+          2,
+          4
+        ],
+        "useful": [
+          2,
+          2,
+          0,
+          4
+        ]
+      }
+    },
+    {
+      "condition": "clean",
+      "files": 12,
+      "kind": "ordinary",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "flag": [
+          6,
+          0,
+          6,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "competing",
+      "files": 8,
+      "kind": "synthetic",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          8
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          8
+        ],
+        "flag": [
+          8,
+          0,
+          0,
+          0
+        ],
+        "useful": [
+          8,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "competing",
+      "files": 12,
+      "kind": "ordinary",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          12
+        ],
+        "flag": [
+          8,
+          4,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "condition": "competing",
+      "files": 2,
+      "kind": "background",
+      "role": "held",
+      "transitions": {
+        "assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "edit_assessed": [
+          0,
+          0,
+          0,
+          2
+        ],
+        "flag": [
+          2,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "schema": "chipmunk.nonlinguistic-local-noise-counts/1",
+  "scope": {
+    "allowed_ordinary_point_host_groups": 1,
+    "annotated_background_participants": 12,
+    "background_deliveries": 6,
+    "base_generated_events": 12,
+    "candidate_interval_samples": 9600,
+    "cell_samples": 3200,
+    "cells_per_file": 60,
+    "conditions": 2,
+    "declared_readers": 9,
+    "distinct_books": 9,
+    "edit_samples": 15360,
+    "embedding_dimensions": 512,
+    "fit_cells": 2138,
+    "fit_hosts": 2,
+    "head_features": 64,
+    "head_parameters": 65,
+    "held_base_generated_events": 4,
+    "held_hosts": 2,
+    "held_source_components": 1,
+    "meeting_captures": 3,
+    "native_original_utterances": 15,
+    "native_rate": 16000,
+    "nuisance_readers": 3,
+    "ordinary_deliveries": 72,
+    "ordinary_point_host_groups": 2,
+    "point_hosts": 2,
+    "projected_dimensions": 32,
+    "source_components": 3,
+    "source_deliveries": 126,
+    "source_samples": 192000,
+    "synthetic_carrier_variants": 24,
+    "synthetic_deliveries": 48,
+    "target_hosts": 6,
+    "valid_context_cells": 54
+  },
+  "verification": {
+    "admitted_two_second_source_window_bindings": 2480,
+    "baseline_distinct_inputs": 1245,
+    "baseline_model_calls": 1246,
+    "brief_original_window_bindings": 2898,
+    "closed_generation_calls": 14,
+    "confirming_support_adds_no_useful_locations": true,
+    "confirming_support_audit_strata": 6,
+    "convex_fit_stationarity_checked": true,
+    "decoded_original_samples": 3920480,
+    "delivered_pcm_samples": 24192000,
+    "edited_copies": 108,
+    "exact_first_baseline_repeat": true,
+    "exact_first_feature_repeat": true,
+    "failed_kitten_startups": 2,
+    "feature_distinct_inputs": 1692,
+    "feature_model_calls": 1693,
+    "fit_before_point_features": true,
+    "independent_feature_point_replay": true,
+    "independent_paired_outcome_replay": true,
+    "independent_renderer_replay": true,
+    "independent_source_replay": true,
+    "official_source_full_checksum_verified": true,
+    "opus_roundtrips_verified": 18,
+    "original_source_rows_verified": 15,
+    "outside_edit_equal_samples": 19077120,
+    "point_locked_before_held_features": true,
+    "private_feature_values_verified": 3870720,
+    "retained_crop_samples": 2880000,
+    "role_reader_and_book_overlap": 0,
+    "source_cell_bindings": 7560,
+    "successful_piper_calls_in_failed_startups": 4
+  }
+}

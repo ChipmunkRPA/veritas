@@ -21,6 +21,16 @@ Both include offline count replays. The [Apple AAC face-evidence replay](video-a
 provides exact video ranges and clocks, plus browser, PDF and JSON checks
 for the submitted source files.
 
+The [strong competing-speech study](audio-nonlinguistic-local-strong-noise-2026-11-19.md)
+records the paired outcomes of a local short-edit candidate on 126 deliveries.
+The held comparison found no additional correctly located edits in strong
+competing speech. The public script recounts the aggregate outcomes from the
+receipt without reading recordings or features.
+
+```sh
+python3 -B -I -S backend/scripts/review_audio_nonlinguistic_local_strong_noise.py --self-test
+```
+
 The [PNG printed-total comparison](image-printed-totals-2026-11-19.md)
 includes a replayable controlled evaluation for the arithmetic and exact
 source crops. It carries zero weight in the automated assessment.

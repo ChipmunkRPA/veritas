@@ -55,11 +55,15 @@ def _processed(record, store, source):
     return status, processed
 
 
-def _waveform(pcm, waveform):
-    return waveform(pcm, [], start=0, end=binding.SPAN, selected=(0, binding.SPAN), scores=False)
+def waveform_bytes(pcm, waveform, *, processed=False):
+    title = "Background-reduced waveform (context only)" if processed else None
+    return waveform(pcm, [], start=0, end=binding.SPAN, selected=(0, binding.SPAN), scores=False, title=title,
+                    peak_scaled=False)
 
 
-def build(record, *, store, source, pcm, mapping, asset, waveform):
+def build(record, *, store, source, pcm, mapping, asset, waveform, schema=binding.SCHEMA):
+    if schema not in binding.SCHEMAS:
+        raise ValueError("Unsupported background-reduced speech evidence version")
     if (not binding.supported_source(mapping) or _sha(pcm.astype("<f4").tobytes()) != source["pcm_sha256"]):
         raise ValueError("Background-reduced speech PCM differs from the source")
     if set(record) == {"status", "reason"} and record["status"] == "skipped":
@@ -67,7 +71,7 @@ def build(record, *, store, source, pcm, mapping, asset, waveform):
     else:
         status, processed = _processed(record, store, source)
         reason = binding.REASONS[status]
-    document = {"schema": binding.SCHEMA, "title": binding.TITLE, "status": status, "reason": reason,
+    document = {"schema": schema, "title": binding.TITLE, "status": status, "reason": reason,
                 "limitation": binding.LIMITATION, "affects_overall_confidence": False, "interval": dict(binding.INTERVAL),
                 "source_timestamp_ranges": source_ranges(mapping, 0, binding.SPAN), "artifacts": {}}
     if processed is not None:
@@ -76,22 +80,27 @@ def build(record, *, store, source, pcm, mapping, asset, waveform):
         document["processed_pcm_sha256"] = _sha(processed)
         document["artifacts"] = {"selected_clip": asset(wav_bytes(pcm), "audio/wav", **metadata),
                                  "processed_clip": asset(wav_bytes(wave), "audio/wav", **metadata),
-                                 "waveform": asset(_waveform(pcm, waveform), "image/png", width=960, height=280)}
+                                 "waveform": asset(waveform_bytes(pcm, waveform), "image/png", width=960, height=280)}
+        if schema == binding.SCHEMA:
+            document["artifacts"]["processed_waveform"] = asset(
+                waveform_bytes(wave, waveform, processed=True), "image/png", width=960, height=280)
     binding.validate(document, source)
     return document
 
 
 def verify(document, record, *, store, source, pcm, mapping, read_asset, waveform):
+    binding.validate(document, source)
     assets = {item["sha256"]: item for item in document["artifacts"].values()}
 
     def checked(data, media_type, **metadata):
         pin = _sha(data)
-        asset = assets[pin]
-        if (read_asset(pin) != data or asset["media_type"] != media_type
+        asset = assets.get(pin)
+        if (asset is None or read_asset(pin) != data or asset["media_type"] != media_type
                 or any(asset.get(key) != value for key, value in metadata.items())):
             raise ValueError("Background-reduced speech asset differs from its frozen input")
         return asset
 
-    expected = build(record, store=store, source=source, pcm=pcm, mapping=mapping, asset=checked, waveform=waveform)
+    expected = build(record, store=store, source=source, pcm=pcm, mapping=mapping, asset=checked, waveform=waveform,
+                     schema=document["schema"])
     if expected != document:
         raise ValueError("Background-reduced speech presentation differs from its receipt")

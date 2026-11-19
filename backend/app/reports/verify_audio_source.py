@@ -255,6 +255,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         replay_detail += " Recomputed the stereo timing change and its source excerpts."
     if (review := audio.get("background_reduced_voice_review")) is not None:
         from app.detectors.audio.decode import read_wav
+        from app.evidence.audio_background_review import waveform_bytes
+        from app.evidence.audio_background_review_binding import SCHEMA as BACKGROUND_SCHEMA
         from app.evidence.audio_background_review_binding import SPAN
         from app.evidence.audio_background_review_binding import validate as validate_background_review
         from app.evidence.audio_packets import _chart
@@ -268,10 +270,16 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             if len(pcm) != SPAN or hashlib.sha256((pcm * 32768.0).astype("<i2").tobytes()).hexdigest() != review["processed_pcm_sha256"]:
                 raise ValueError("Processed speech playback differs from its recorded PCM commitment")
             covered.add(pin)
-            original_waveform = _chart(decoded.pcm, [], start=0, end=SPAN, selected=(0, SPAN), scores=False)
+            original_waveform = waveform_bytes(decoded.pcm, _chart)
             if hashlib.sha256(original_waveform).hexdigest() != assets["waveform"]["sha256"]:
                 raise ValueError("Background-reduced speech waveform differs from the original samples")
-            replay_detail += " Matched the marked original waveform and the saved processed audio commitment."
+            if review["schema"] == BACKGROUND_SCHEMA:
+                processed_waveform = waveform_bytes(pcm, _chart, processed=True)
+                if hashlib.sha256(processed_waveform).hexdigest() != assets["processed_waveform"]["sha256"]:
+                    raise ValueError("Background-reduced speech waveform differs from the saved processed samples")
+                replay_detail += " Reproduced the original and processed waveforms on the same clock."
+            else:
+                replay_detail += " Matched the marked original waveform and the saved processed audio commitment."
     expected = {entry["sha256"] for entry in bundle["artifacts"] if entry["media_type"] == "audio/wav"}
     if covered != expected:
         raise ValueError("The source comparison did not account for every WAV asset in the package")

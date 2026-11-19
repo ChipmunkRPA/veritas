@@ -3,7 +3,9 @@
 from app.evidence.audio_long_review_binding import RATE, SHA, SPAN
 
 KEY = "background_reduced_voice_review"
-SCHEMA = "chipmunk.background-reduced-voice-review/1"
+LEGACY_SCHEMA = "chipmunk.background-reduced-voice-review/1"
+SCHEMA = "chipmunk.background-reduced-voice-review/2"
+SCHEMAS = (LEGACY_SCHEMA, SCHEMA)
 DETECTOR_ID = "aud.background_reduced_voice_review"
 TITLE = "Speech review with reduced background sound"
 LIMITATION = (
@@ -50,7 +52,7 @@ def validate(review, source):
 
 def _validate(review, source):
     assets = review["artifacts"]
-    _require(supported_source(source) and review["schema"] == SCHEMA and review["title"] == TITLE
+    _require(supported_source(source) and review["schema"] in SCHEMAS and review["title"] == TITLE
              and review["limitation"] == LIMITATION and review["affects_overall_confidence"] is False
              and review["interval"] == INTERVAL and review["source_timestamp_ranges"] == TIMESTAMPS,
              "Background-reduced speech evidence differs from its native source interval")
@@ -62,15 +64,17 @@ def _validate(review, source):
         _require(set(review) == fields and assets == {} and valid_reason,
                  "Invalid background-reduced speech disposition")
         return
+    waves = ("waveform", "processed_waveform") if review["schema"] == SCHEMA else ("waveform",)
     _require(set(review) == fields | {"processed_pcm_sha256"} and reason == REASONS["flagged"]
              and SHA.fullmatch(review["processed_pcm_sha256"]) is not None
-             and set(assets) == {"selected_clip", "processed_clip", "waveform"},
+             and set(assets) == {"selected_clip", "processed_clip", *waves},
              "Incomplete flagged background-reduced speech evidence")
     for role in ("selected_clip", "processed_clip"):
         clip = assets[role]
         _require(clip["media_type"] == "audio/wav" and clip["samples"] == SPAN and clip["sample_rate"] == RATE
                  and clip["channels"] == 1 and SHA.fullmatch(clip["sha256"]) is not None,
                  "Invalid background-reduced speech playback asset")
-    waveform = assets["waveform"]
-    _require(waveform["media_type"] == "image/png" and (waveform["width"], waveform["height"]) == (960, 280)
-             and SHA.fullmatch(waveform["sha256"]) is not None, "Invalid background-reduced speech waveform")
+    for role in waves:
+        waveform = assets[role]
+        _require(waveform["media_type"] == "image/png" and (waveform["width"], waveform["height"]) == (960, 280)
+                 and SHA.fullmatch(waveform["sha256"]) is not None, "Invalid background-reduced speech waveform")

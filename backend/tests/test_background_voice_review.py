@@ -14,7 +14,9 @@ from app.detectors.audio.decode import decode_audio, read_wav, wav_bytes
 from app.engine.boundary import Deadline
 from app.engine.detector import Profile
 from app.engine.stages import audio
-from app.evidence import audio_background_review as evidence, audio_background_review_binding as binding, audio_packets
+from app.evidence import audio_background_review as evidence
+from app.evidence import audio_background_review_binding as binding
+from app.evidence import audio_packets
 
 
 def source(pcm):
@@ -86,7 +88,8 @@ def test_scope_preserves_existing_direction_and_checks_provenance(monkeypatch):
     ("inconclusive", True, detector.OPERATING_POINT, "no_flag"),
     ("unassessed", False, None, "unassessed"),
 ])
-def test_replays_the_frozen_direction_and_processed_interval(direction, admitted, response, expected):
+@pytest.mark.parametrize("schema", binding.SCHEMAS)
+def test_replays_the_frozen_direction_and_processed_interval(direction, admitted, response, expected, schema):
     pcm = np.zeros(48_000, dtype="<f4")
     mapping = source(pcm)
     processed = np.arange(len(pcm), dtype="<i2").tobytes()
@@ -114,7 +117,8 @@ def test_replays_the_frozen_direction_and_processed_interval(direction, admitted
         return {"sha256": pin, "media_type": media_type, **metadata}
 
     args = {"store": store, "source": mapping, "pcm": pcm, "mapping": mapping, "waveform": audio_packets._chart}
-    review = evidence.build(record, **args, asset=asset)
+    review = evidence.build(record, **args, asset=asset, schema=schema)
+    assert review["schema"] == schema
     assert review["status"] == expected and review["affects_overall_confidence"] is False
     assert review["source_timestamp_ranges"] == binding.TIMESTAMPS
     evidence.verify(review, record, **args, read_asset=objects.__getitem__)
@@ -125,6 +129,19 @@ def test_replays_the_frozen_direction_and_processed_interval(direction, admitted
     rendered = review["artifacts"]["processed_clip"]["sha256"]
     np.testing.assert_array_equal(read_wav(objects[original]), pcm)
     assert (read_wav(objects[rendered]) * 32768.0).astype("<i2").tobytes() == processed
+    assert ("processed_waveform" in review["artifacts"]) is (schema == binding.SCHEMA)
+    if schema == binding.SCHEMA:
+        chart = review["artifacts"]["processed_waveform"]["sha256"]
+        assert objects[chart] == audio_packets._chart(read_wav(objects[rendered]), [], start=0, end=48_000,
+                                                     selected=(0, 48_000), scores=False,
+                                                     title="Background-reduced waveform (context only)", peak_scaled=False)
+        changed = deepcopy(review)
+        changed["artifacts"].pop("processed_waveform")
+        with pytest.raises(ValueError, match="Incomplete flagged"):
+            evidence.verify(changed, record, **args, read_asset=objects.__getitem__)
+        changed["artifacts"]["processed_waveform"] = changed["artifacts"]["waveform"]
+        with pytest.raises(ValueError, match="frozen input"):
+            evidence.verify(changed, record, **args, read_asset=objects.__getitem__)
     changed = deepcopy(review)
     changed["interval"]["end_sample"] -= 1
     with pytest.raises(ValueError, match="native source interval"):

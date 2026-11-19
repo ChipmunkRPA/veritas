@@ -522,7 +522,10 @@ Samples [{{ window.start_sample }}, {{ window.end_sample }}) at 16000 Hz.
 <p class="caption">Flagged interval 0.000–3.000 s. Samples [{{ review.interval.start_sample }}, {{ review.interval.end_sample }}) at 16000 Hz.
 {% for range in review.source_timestamp_ranges %}Source PTS [{{ range.source_start_pts }}, {{ range.source_end_pts }}) at {{ range.time_base }}.{% endfor %}</p>
 {% if not evidence.withheld %}<p class="caption">The evidence export includes original and background-reduced playback of this interval.</p>{% endif %}
-{% if review.get('waveform') %}{{ plates([review.waveform]) }}{% endif %}
+{% if review.get('processed_waveform') %}
+{% if not evidence.withheld %}<p class="caption">Both waveforms cover the same 0.000-3.000 s source interval on a fixed digital amplitude scale. Processing can change the sound of overlapping voices.</p>{% endif %}
+{{ plates([review.waveform, review.processed_waveform], wide=true) }}
+{% elif review.get('waveform') %}{{ plates([review.waveform]) }}{% endif %}
 {% endif %}
 <p class="caption">{{ review.limitation }} JSON pointer <span class="mono">/background_reduced_voice_review</span>.</p>
 {% endif %}
@@ -949,7 +952,7 @@ On the original timeline, the audio spans {{ '%.3f' | format(item.before.source_
 {% if evidence.stereo_repetition.get('rate_measurement') and evidence.stereo_repetition.rate_measurement.pairs %}{% set stereo_repeats.found = true %}{% endif %}
 {% for row in evidence.stereo_repetition.channels %}{% if row.measurement.pairs or (row.get('gain_measurement') and row.gain_measurement.pairs) %}{% set stereo_repeats.found = true %}{% endif %}{% endfor %}
 {% endif %}
-{% if not stereo_repeats.found and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') and not (evidence.get('percentage_consistency') and evidence.percentage_consistency.groups) and not (evidence.get('doi_reference_consistency') and evidence.doi_reference_consistency.different_work) and not (evidence.get('saved_link_hosts') and evidence.saved_link_hosts.findings) %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
+{% if not stereo_repeats.found and not (evidence.get('background_reduced_voice_review') and evidence.background_reduced_voice_review.status == 'flagged') and not (evidence.get('repetition_context') and evidence.repetition_context.pairs) and not (evidence.get('similarity_context') and evidence.similarity_context.pairs) and not (evidence.get('repeated_passages') and evidence.repeated_passages.groups) and not (evidence.get('passage_position') and evidence.passage_position.status == 'flagged') and not (evidence.get('percentage_consistency') and evidence.percentage_consistency.groups) and not (evidence.get('doi_reference_consistency') and evidence.doi_reference_consistency.different_work) and not (evidence.get('saved_link_hosts') and evidence.saved_link_hosts.findings) %}<p>No usable local candidates were recorded in this evidence set. This does not establish authenticity or human authorship.</p>{% endif %}{% endfor %}
 {% if evidence.omitted %}<p class="caption">{{ evidence.omitted }} additional candidates were omitted from this bounded evidence set.</p>{% endif %}
 {% for note in evidence.limitations %}<p class="caption">{{ note }}</p>{% endfor %}
 {% endif %}

@@ -87,6 +87,7 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
   const focusedSpeech = Array.isArray(longReview?.regions)
   const hasMeasuredSpeech = longReview?.windows.some((window) => window.direction !== 'unassessed')
   const backgroundReview = standalone ? set.background_reduced_voice_review : undefined
+  const pairedBackgroundWaveforms = backgroundReview?.schema === 'chipmunk.background-reduced-voice-review/2'
   const intervals = standalone && set.packets.length === 0 ? [...new Map(set.coverage?.windows?.map((window) =>
     [`${window.start_sample}:${window.end_sample}`, window] as const)).values()]
     .sort((a, b) => a.start_sample - b.start_sample || a.end_sample - b.end_sample) : []
@@ -398,18 +399,27 @@ export default function AudioEvidenceContent({ set, token, mediaReady, videoOrig
         <p className="m-0 font-mono text-caption text-text-muted">
           Samples [{backgroundReview.interval.start_sample}, {backgroundReview.interval.end_sample})
         </p>
-        {backgroundReview.artifacts.waveform && <div className="mt-4">
-          <EvidencePicture set={set} artifact={backgroundReview.artifacts.waveform} token={token} ready={mediaReady} chart
-            alt="Original waveform across the flagged three-second interval" />
-        </div>}
-        {backgroundReview.artifacts.selected_clip && <div className="mt-4">
-          <EvidenceAudio set={set} artifact={backgroundReview.artifacts.selected_clip} token={token} ready={mediaReady}
-            alt="Original three-second interval" />
-        </div>}
-        {backgroundReview.artifacts.processed_clip && <div className="mt-4">
-          <EvidenceAudio set={set} artifact={backgroundReview.artifacts.processed_clip} token={token} ready={mediaReady}
-            alt="Processed copy with reduced background sound" />
-        </div>}
+        {pairedBackgroundWaveforms && <p className="mt-3 mb-0 text-small text-text-muted">
+          Both waveforms cover the same 0.000–3.000 s source interval on a fixed digital amplitude scale.
+          Processing can change the sound of overlapping voices.
+        </p>}
+        <div className="mt-4 space-y-4">
+          <div className="space-y-3">
+            {pairedBackgroundWaveforms && <h4 className="m-0 text-small font-medium">Original recording</h4>}
+            {backgroundReview.artifacts.waveform && <EvidencePicture set={set} artifact={backgroundReview.artifacts.waveform}
+              token={token} ready={mediaReady} chart alt="Original waveform across the flagged three-second interval" />}
+            {backgroundReview.artifacts.selected_clip && <EvidenceAudio set={set} artifact={backgroundReview.artifacts.selected_clip}
+              token={token} ready={mediaReady} alt="Original three-second interval" />}
+          </div>
+          <div className="space-y-3">
+            {pairedBackgroundWaveforms && <h4 className="m-0 text-small font-medium">Processed copy</h4>}
+            {pairedBackgroundWaveforms && backgroundReview.artifacts.processed_waveform && <EvidencePicture set={set}
+              artifact={backgroundReview.artifacts.processed_waveform} token={token} ready={mediaReady} chart
+              alt="Processed waveform across the same three-second interval" />}
+            {backgroundReview.artifacts.processed_clip && <EvidenceAudio set={set} artifact={backgroundReview.artifacts.processed_clip}
+              token={token} ready={mediaReady} alt="Processed copy with reduced background sound" />}
+          </div>
+        </div>
       </>}
       <p className="mt-3 mb-0 text-caption text-text-muted">{backgroundReview.limitation}</p>
     </section>}

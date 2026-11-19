@@ -52,6 +52,23 @@ without the optional review. The standard PDF showed the warning, original
 waveform and source interval. The export and signed package retained the
 matching evidence and verified against the uploaded samples.
 
+## Paired waveforms in the local app
+
+When this optional review flags a three-second interval, the evidence view
+shows the original playback and the background-reduced copy with separate
+waveforms. Both plots use the same source samples from 0.000 to 3.000 seconds
+and the same fixed digital amplitude scale. The standard PDF places both
+waveforms with their source timestamp. The JSON export identifies each
+image and its corresponding audio clip. Signed original-file replay
+recreates the original waveform from the uploaded source and the processed
+waveform from the saved processed playback.
+
+The local worker replayed one of the flagged genuine speech-and-traffic
+fixtures and tried a separate silent control after simulated checkout. The
+flagged report reproduced both images and their source positions. The silent
+file was unassessed and had no paired playback or plots. The optional
+response carries zero weight in the overall assessment.
+
 ## Run the review locally
 
 The portable check recounts the branches and decisions without downloading

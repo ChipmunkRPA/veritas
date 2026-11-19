@@ -1637,7 +1637,14 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             ]
     background_review = copy.deepcopy(document.get("background_reduced_voice_review"))
     if background_review and (asset := background_review["artifacts"].get("waveform")):
-        background_review["waveform"] = plate("waveform", asset, "Original waveform across the flagged three-second interval")
+        paired = background_review["schema"] == "chipmunk.background-reduced-voice-review/2"
+        label = ("Original waveform, source 0.000-3.000 s, fixed digital amplitude scale" if paired else
+                 "Original waveform across the flagged three-second interval")
+        background_review["waveform"] = plate("waveform", asset, label)
+        if paired and (processed := background_review["artifacts"].get("processed_waveform")):
+            background_review["processed_waveform"] = plate(
+                "processed_waveform", processed, "Processed waveform, source 0.000-3.000 s, same digital amplitude scale",
+            )
     timing_view = None
     av_clock_view = None
     if clock := (document.get("av") or {}).get(AUDIO_CLOCK_BREAKS):

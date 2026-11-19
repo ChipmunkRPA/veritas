@@ -724,6 +724,8 @@ describe('ordinary multimedia evidence', () => {
     expect(review.getByText(/cannot identify which speaker drove the result/)).toBeTruthy()
     expect(review.getByText(/Original audio 0\.000 s–3\.000 s\. Source PTS \[0, 48000\) at 1\/16000/)).toBeTruthy()
     expect(review.getByAltText('Original waveform across the flagged three-second interval')).toBeTruthy()
+    expect(review.queryByAltText('Processed waveform across the same three-second interval')).toBeNull()
+    expect(review.queryByText(/fixed digital amplitude scale/)).toBeNull()
     const original = review.getByLabelText('Original three-second interval')
     const processed = review.getByLabelText('Processed copy with reduced background sound')
     expect(original.getAttribute('src')).toContain(`${'f'.repeat(64)}.wav`)
@@ -733,6 +735,56 @@ describe('ordinary multimedia evidence', () => {
     fireEvent.play(processed)
     expect(pause).toHaveBeenCalledOnce()
     expect(screen.queryByTestId('multimedia-evidence-empty')).toBeNull()
+  })
+
+  it('pairs the original and modified waveforms on the same source clock and fixed scale', () => {
+    const set = { ...structuredClone(audio), packets: [] }
+    const interval = { start_sample: 0, end_sample: 48000 }
+    set.background_reduced_voice_review = {
+      schema: 'chipmunk.background-reduced-voice-review/2', title: 'Speech review with reduced background sound',
+      status: 'flagged', reason: 'The speech response leaned AI-generated after background sound was reduced.',
+      limitation: 'This review carries no weight in the overall assessment.', affects_overall_confidence: false,
+      interval, source_timestamp_ranges: [{ ...interval, source_start_pts: 0, source_end_pts: 48000, time_base: '1/16000' }],
+      artifacts: { selected_clip: asset('f', 'audio/wav'), processed_clip: asset('e', 'audio/wav'),
+        waveform: asset('2'), processed_waveform: asset('4') },
+    }
+    const originalSet = structuredClone(set)
+    show(set)
+    const review = within(screen.getByRole('region', { name: 'Speech review with reduced background sound' }))
+    expect(review.getByRole('heading', { name: 'Original recording' })).toBeTruthy()
+    expect(review.getByRole('heading', { name: 'Processed copy' })).toBeTruthy()
+    expect(review.getByText(/same 0.000–3.000 s source interval on a fixed digital amplitude scale/)).toBeTruthy()
+    expect(review.getByText(/Processing can change the sound of overlapping voices/)).toBeTruthy()
+    expect(review.getByText(/cannot identify which speaker drove the result/)).toBeTruthy()
+    expect(review.getByText('Samples [0, 48000)')).toBeTruthy()
+    expect(review.getByAltText('Original waveform across the flagged three-second interval').getAttribute('src')).toContain(`${'2'.repeat(64)}.png`)
+    expect(review.getByAltText('Processed waveform across the same three-second interval').getAttribute('src')).toContain(`${'4'.repeat(64)}.png`)
+    const player = review.getByLabelText('Original three-second interval')
+    const pause = vi.fn()
+    Object.defineProperties(player, { paused: { value: false }, pause: { value: pause } })
+    fireEvent.play(review.getByLabelText('Processed copy with reduced background sound'))
+    expect(pause).toHaveBeenCalledOnce()
+    expect(set).toEqual(originalSet)
+  })
+
+  it.each(['no_flag', 'unassessed', 'skipped'] as const)('keeps a %s background review distinct from a waveform comparison', status => {
+    const set = { ...structuredClone(audio), packets: [] }
+    set.background_reduced_voice_review = {
+      schema: 'chipmunk.background-reduced-voice-review/2', title: 'Speech review with reduced background sound',
+      status, reason: status === 'unassessed' ? 'The processed copy did not contain enough detected speech for this review.'
+        : status === 'skipped' ? 'The optional background-reduced speech review could not complete.'
+          : 'The speech response did not lean clearly toward AI generation after background sound was reduced.',
+      limitation: 'This review carries no weight in the overall assessment.', affects_overall_confidence: false,
+      interval: { start_sample: 0, end_sample: 48000 }, source_timestamp_ranges: [], artifacts: {},
+    }
+    show(set)
+    const review = within(screen.getByRole('region', { name: 'Speech review with reduced background sound' }))
+    expect(review.getByText(set.background_reduced_voice_review.reason)).toBeTruthy()
+    expect(review.queryByAltText('Original waveform across the flagged three-second interval')).toBeNull()
+    expect(review.queryByAltText('Processed waveform across the same three-second interval')).toBeNull()
+    expect(review.queryByLabelText('Original three-second interval')).toBeNull()
+    expect(review.queryByLabelText('Processed copy with reduced background sound')).toBeNull()
+    expect(review.queryByText(/fixed digital amplitude scale/)).toBeNull()
   })
 
   it('shows source ranges and plays only corroborating long speech windows', () => {

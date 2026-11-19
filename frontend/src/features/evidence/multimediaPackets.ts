@@ -354,13 +354,13 @@ export interface LongVoiceReview {
 }
 export type LongVoiceCoverageStatus = 'directional' | 'inconclusive' | 'below_speech_minimum' | 'outside_schedule'
 export interface BackgroundVoiceReview {
-  schema: 'chipmunk.background-reduced-voice-review/1'
+  schema: 'chipmunk.background-reduced-voice-review/1' | 'chipmunk.background-reduced-voice-review/2'
   title: string; status: 'flagged' | 'no_flag' | 'unassessed' | 'skipped'
   reason: string; limitation: string; affects_overall_confidence: false
   interval: SampleInterval
   source_timestamp_ranges: AudioEvidencePacket['anchor']['source_timestamp_ranges']
   processed_pcm_sha256?: string
-  artifacts: Partial<Record<'selected_clip' | 'processed_clip' | 'waveform', EvidenceAsset>>
+  artifacts: Partial<Record<'selected_clip' | 'processed_clip' | 'waveform' | 'processed_waveform', EvidenceAsset>>
 }
 export interface AudioEvidenceSet extends SetBase {
   schema: 'chipmunk.audio-evidence/1'; packets: AudioEvidencePacket[]; omitted_windows: number

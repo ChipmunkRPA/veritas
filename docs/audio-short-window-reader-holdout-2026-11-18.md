@@ -61,6 +61,19 @@ of unassessed synthetic deliveries fell from 16 to 14 and ordinary deliveries
 from 42 to 37. Both approaches left all 16 isolated traffic deliveries
 unassessed. All 16 isolated competing-speech deliveries were assessed.
 
+In a follow-up diagnostic on the closed records, the five ordinary alerts
+and two false-only synthetic alerts all used the same two windows from one
+host. The submitted PCM in those windows was identical across the five
+ordinary deliveries, and both windows lay outside every matched edit span.
+The clean foreground and the isolated background were each readable at
+those clocks. Neither reached the raw decision point by itself. This is
+evidence of a response to the mixture, with the contribution of each voice
+unresolved. A future evaluation can cross new host readers with several
+independently recorded backgrounds and test speaker-conditioned extraction
+against both foreground-present and background-only spans.
+[Speaker-conditioned extraction research](https://proceedings.neurips.cc/paper_files/paper/2025/file/67b0579a7298d9cf39c59404d867bdd7-Paper-Conference.pdf) ·
+[Detector sensitivity to speaker identity](https://arxiv.org/abs/2607.21820)
+
 ## Independent verification
 
 An independent render checker reconstructed the PCM deliveries and checked

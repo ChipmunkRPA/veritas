@@ -94,6 +94,24 @@ focus-change window in the 62/17 mm pair rose from 1 to 33 eligible tiles and
 showed sharpening. Its steady reference and both windows in the matched 53 mm
 pair still abstained.
 
+On 76 development frame stacks, a wider coarse-luminance search extended
+integer alignment from ±8 to ±48 pixels and kept fine-detail measurements on
+unwarped source crops. Of 52 authored controls without blur, 14 were measurable
+without alignment, 28 with the narrow search, and 29 with the wider search.
+All three methods recorded zero directional readings on those controls.
+Ordinary blur or motion smear produced directional readings in 6 of 20
+controls without alignment and 8 of 20 with either search.
+
+In an 88-stack follow-up, checking the fixed offsets for competing locations
+within ±48 pixels withheld all 105 wrong repeated-pattern matches. It kept
+144 of 147 verified narrow-motion matches and 77 of 95 wider matches. The
+unequal-focal focus-change window still showed sharpening with 23 eligible
+tiles. Its steady reference had two, and both 53 mm windows had zero, so all
+three still abstained. Independent replay verified 173 wider integer-crop
+readings and all 555 ambiguity decisions. The single measurable camera change
+leaves optical-focus accuracy undetermined. Both comparisons stayed offline.
+[Aggregate counts and verification commitments](evaluation-panels/video-face-focus-correspondence-development-2026-11-18.json)
+
 ## Reproduce the counts
 
 The native-input review replayed 42,240 decoded RGB checks and timestamps.

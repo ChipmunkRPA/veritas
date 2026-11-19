@@ -1,0 +1,227 @@
+{
+  "camera_pairs": {
+    "different_focal_lengths": {
+      "focal_lengths_mm": {
+        "optical_change": 62,
+        "steady_lens": 17
+      },
+      "phases": {
+        "optical_change": {
+          "guarded": {
+            "direction": "sharpening",
+            "eligible_tiles": 23
+          },
+          "narrow": {
+            "direction": "sharpening",
+            "eligible_tiles": 33
+          },
+          "unregistered": {
+            "direction": null,
+            "eligible_tiles": 1
+          },
+          "wide": {
+            "direction": "sharpening",
+            "eligible_tiles": 33
+          }
+        },
+        "steady_lens": {
+          "guarded": {
+            "direction": null,
+            "eligible_tiles": 2
+          },
+          "narrow": {
+            "direction": null,
+            "eligible_tiles": 0
+          },
+          "unregistered": {
+            "direction": null,
+            "eligible_tiles": 0
+          },
+          "wide": {
+            "direction": null,
+            "eligible_tiles": 2
+          }
+        }
+      }
+    },
+    "matched_focal_length": {
+      "focal_lengths_mm": {
+        "optical_change": 53,
+        "steady_lens": 53
+      },
+      "phases": {
+        "optical_change": {
+          "guarded": {
+            "direction": null,
+            "eligible_tiles": 0
+          },
+          "narrow": {
+            "direction": null,
+            "eligible_tiles": 0
+          },
+          "unregistered": {
+            "direction": null,
+            "eligible_tiles": 0
+          },
+          "wide": {
+            "direction": null,
+            "eligible_tiles": 0
+          }
+        },
+        "steady_lens": {
+          "guarded": {
+            "direction": null,
+            "eligible_tiles": 0
+          },
+          "narrow": {
+            "direction": null,
+            "eligible_tiles": 0
+          },
+          "unregistered": {
+            "direction": null,
+            "eligible_tiles": 0
+          },
+          "wide": {
+            "direction": null,
+            "eligible_tiles": 0
+          }
+        }
+      }
+    }
+  },
+  "cross_radius": {
+    "ambiguous_locations_withheld": 187,
+    "candidate_locations": 555,
+    "correct_nonperiodic_motion_locations": {
+      "narrow": {
+        "exact": 138,
+        "exact_retained": 138,
+        "within_one": 147,
+        "within_one_retained": 144
+      },
+      "wide": {
+        "exact": 95,
+        "exact_retained": 77,
+        "within_one": 95,
+        "within_one_retained": 77
+      }
+    },
+    "retained_locations": 368,
+    "rotation_cut_smear_controls": {
+      "cross_capture_cut": {
+        "guarded_assessed": 0,
+        "guarded_directional_readings": 0,
+        "stacks": 4,
+        "wide_assessed": 0,
+        "wide_directional_readings": 0
+      },
+      "directional_motion_smear": {
+        "guarded_assessed": 4,
+        "guarded_directional_readings": 1,
+        "stacks": 4,
+        "wide_assessed": 4,
+        "wide_directional_readings": 1
+      },
+      "periodic_texture_cut": {
+        "guarded_assessed": 0,
+        "guarded_directional_readings": 0,
+        "stacks": 4,
+        "wide_assessed": 0,
+        "wide_directional_readings": 0
+      },
+      "rotated_translation": {
+        "guarded_assessed": 0,
+        "guarded_directional_readings": 0,
+        "stacks": 4,
+        "wide_assessed": 0,
+        "wide_directional_readings": 0
+      },
+      "rotational_motion_smear": {
+        "guarded_assessed": 0,
+        "guarded_directional_readings": 0,
+        "stacks": 4,
+        "wide_assessed": 0,
+        "wide_directional_readings": 0
+      },
+      "small_rotation": {
+        "guarded_assessed": 0,
+        "guarded_directional_readings": 0,
+        "stacks": 4,
+        "wide_assessed": 1,
+        "wide_directional_readings": 0
+      },
+      "wide_directional_smear": {
+        "guarded_assessed": 0,
+        "guarded_directional_readings": 0,
+        "stacks": 4,
+        "wide_assessed": 1,
+        "wide_directional_readings": 0
+      }
+    },
+    "wrong_periodic_locations_input": 105,
+    "wrong_periodic_locations_withheld": 105
+  },
+  "fixed_measurement": {
+    "coarse_search_step_px": 4,
+    "cross_radius_competing_peak_correlation_gap": 0.025,
+    "minimum_eligible_tiles": 12,
+    "narrow_maximum_integer_displacement_px": 8,
+    "wide_maximum_integer_displacement_px": 48
+  },
+  "local_verification": {
+    "cross_radius_competing_peaks": 1110,
+    "cross_radius_independent_review_sha256": "c8d063741c4eb22487be661773afd29a724ac125ebaf9c285c1f9fa5145b6658",
+    "cross_radius_method_sha256": "2b95233a09b9b8f3d35264fdd8d2f0877ff09a99533f0e3df69043356e93a503",
+    "exact_camera_crop_frame_pins": 24,
+    "wide_exact_integer_crop_readings": 173,
+    "wide_independent_review_sha256": "96fb0f18f5376cae0be6af8a3e538118b24c09113d0614dca02b57725470cb50",
+    "wide_method_sha256": "4dd1b1bcd6addd9d83b31e8a1ebde8632d3537f605cb0ce0b8db20b163e8f71e"
+  },
+  "schema": "chipmunk.physical-focus-correspondence-study-aggregate/1",
+  "scope": {
+    "analysis_raster": [
+      640,
+      360
+    ],
+    "camera_captures": 2,
+    "camera_rate": "24000/1001",
+    "camera_windows": 4,
+    "optical_focus_accuracy_established": false,
+    "site_behavior_changed": false,
+    "stage": "development",
+    "tested_stacks_cross_radius": 88,
+    "tested_stacks_wide": 76
+  },
+  "wide_authored_controls": {
+    "ordinary_blur": {
+      "narrow": {
+        "assessed": 11,
+        "directional_readings": 8
+      },
+      "stacks": 20,
+      "unregistered": {
+        "assessed": 8,
+        "directional_readings": 6
+      },
+      "wide": {
+        "assessed": 12,
+        "directional_readings": 8
+      }
+    },
+    "ordinary_nonblur": {
+      "narrow": {
+        "assessed": 28,
+        "directional_readings": 0
+      },
+      "stacks": 52,
+      "unregistered": {
+        "assessed": 14,
+        "directional_readings": 0
+      },
+      "wide": {
+        "assessed": 29,
+        "directional_readings": 0
+      }
+    }
+  }
+}

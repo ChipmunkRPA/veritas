@@ -46,6 +46,14 @@ The [OpenDocument and Rich Text passage transfer](writing-decoded-carrier-transf
 recounts all 464 carrier comparisons and distinguishes mixed-length rewrites,
 short rewrites, and human revisions.
 
+The [matched-style writing comparison](writing-matched-style-holdout-2026-11-18.md)
+recounts ranked passages in historical editorial revisions and staged sentence
+rewrites. It also checks exact reuse of repeated scoring inputs.
+
+The [supplied-reference audio comparison](audio-short-window-reader-holdout-2026-11-18.md#supplied-reference-under-strong-background-noise)
+compares a dry earlier copy with an earlier copy that shares the exact same
+background. It verifies exact sample ranges in both source recordings.
+
 The [statistical reporting replay](document-chi-square-2026-11-18.md#replay-the-measurements)
 checks published numerical discrepancies and staged controls against the
 recorded document locations. It measures consistency of a printed result.

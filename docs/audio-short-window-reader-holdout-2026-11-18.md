@@ -119,3 +119,42 @@ The appended check remains isolated from the customer application.
 
 The local trial receipt has SHA-256
 `5fb29b195f571824072f37d1d5debc4e7b535fd07ab4eaeaeb9585cc7935da90`.
+
+## Supplied reference under strong background noise
+
+A development follow-up applied the existing earlier-copy checks to the
+same 336 foreground deliveries. For the 12-second clean-copy check, the
+earlier file was the dry host. It located 1 of 32 staged AI replacements in
+the clean condition, 2 of 32 with traffic, and 0 of 32 with competing
+speech. Of 48 untouched or locally roundtripped controls per condition,
+the check flagged 0 clean, 3 traffic, and 9 competing-speech deliveries.
+The timing-shift waveform comparison localized zero staged replacements.
+These replacements preserve the original sample clock.
+
+The result changed when both versions contained the identical background
+on the same sample clock. The existing exact waveform comparison located
+all 32 staged AI replacements, all 32 genuine speech splices, and all 32
+local roundtrips in each condition. All 16 untouched copies per condition
+had zero difference. A separate check verified 3,515,958 different samples,
+300 displayed ranges, and 600 playable excerpts against the two original
+sample clocks. This comparison locates processing or edits between two
+supplied recordings. It carries zero weight for AI origin.
+
+With the exact synchronized background track and its original mixing gain,
+subtraction reproduced all 224 clean foregrounds sample-for-sample. The
+verified identical inputs could reuse the saved clean readings. They found
+13 of 32 edit locations with the current voice check and 21 of 32 with the
+experimental shorter-window variant, compared with zero for both on the
+noisy mixtures. Estimating the gain reproduced only 16 of 224 clean files.
+None of the 96 deliberately wrong references reconstructed the clean file.
+The exact subtraction trial used access to the original isolated noise
+track and controlled lossless mixing. It leaves arbitrary room samples,
+separate microphones, and re-encoded copies unqualified for this method.
+The follow-up ran no new model inference and leaves serving checks unchanged.
+
+The closed exact-copy receipt has SHA-256
+`3f8acae971c00128de1d016aa3649ab6f86a4d991fd2c61ddc3ba5e474e11d1e`.
+The broader comparison receipt has SHA-256
+`eded1a2010fad63fd73368064252b025977da3c4bb91ad23aecc4d30b22f069c`.
+The underlying recordings and per-case source data
+remain local.

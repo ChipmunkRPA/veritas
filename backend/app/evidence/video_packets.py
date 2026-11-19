@@ -73,6 +73,7 @@ from app.evidence.video_packet_versions import (
     SHORT_WINDOW_VERSION,
     SPATIAL_CUT_VERSION,
     VERSIONS,
+    VERY_BRIEF_AVC_PROPOSAL_VERSION,
 )
 from app.storage.artefacts import get_artefact, register_artefact
 from app.storage.db import Analysis, AnalysisStage, Artefact
@@ -938,7 +939,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     proposal_versions = {SHORT_PROPOSAL_VERSION, SHORT_WEBM_PROPOSAL_VERSION, SHORT_AVC_PROPOSAL_VERSION,
                          SECOND_AVC_PROPOSAL_VERSION, MOVING_AVC_PROPOSAL_VERSION, PRIMARY_TRACK_AVC_PROPOSAL_VERSION,
                          POSITION_TRACK_AVC_PROPOSAL_VERSION, PANE_TRACK_AVC_PROPOSAL_VERSION,
-                         SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION, BOUNDARY_AVC_PROPOSAL_VERSION} | OPPOSITE_PANE_VERSIONS
+                         SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION, BOUNDARY_AVC_PROPOSAL_VERSION,
+                         VERY_BRIEF_AVC_PROPOSAL_VERSION} | OPPOSITE_PANE_VERSIONS
     if version not in proposal_versions | {SHORT_WINDOW_VERSION, SHORT_CARRIER_VERSION} and any(
             face_boundary_binding.is_paired(item.get("face_boundary")) for item in chosen):
         version = PAIRED_EDGE_VERSION
@@ -1246,6 +1248,11 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
                 packet["interpretation"] += " This interval overlaps the brief change on the other tracked face."
             if face_return["method"] == face_short_proposal_binding.BOUNDARY_AVC_METHOD:
                 packet["title"] = "Brief face change near the start or end of the clip"
+            if face_return["method"] == face_short_proposal_binding.VERY_BRIEF_AVC_METHOD:
+                pictures = face_return["end_frame_index"] - face_return["start_frame_index"]
+                packet["title"] = "Very brief face appearance change"
+                packet["interpretation"] += (f" The selected interval contains {pictures} consecutive source pictures. "
+                                             "The shot scan found no abrupt cut at either boundary.")
             if face_return["method"] in face_return_binding.LOCAL_METHODS:
                 packet["title"] = "Temporary face appearance change"
                 packet["interpretation"] += (

@@ -22,6 +22,7 @@ SECOND_PANE_TRACK_AVC_METHOD = "face-short-return/19"
 OPPOSITE_PANE_TRACK_AVC_METHOD = "face-short-return/20"
 OVERLAPPING_PANE_TRACK_AVC_METHOD = "face-short-return/21"
 BOUNDARY_AVC_METHOD = "face-short-return/22"
+VERY_BRIEF_AVC_METHOD = "face-short-return/28"
 AVC_ENCODING = ("h264", "yuv420p", "avc1")
 AVC_FRAME_STEPS = (Fraction(1, 30), Fraction(1001, 30_000))
 SOURCE_PROFILES = {METHOD: (paired.ENCODING, "mp4"), WEBM_METHOD: (WEBM_ENCODING, "webm"),
@@ -29,7 +30,8 @@ SOURCE_PROFILES = {METHOD: (paired.ENCODING, "mp4"), WEBM_METHOD: (WEBM_ENCODING
                    MOVING_AVC_METHOD: (AVC_ENCODING, "mp4"), PRIMARY_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"),
                    POSITION_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"), PANE_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"),
                    SECOND_PANE_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"), OPPOSITE_PANE_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"),
-                   OVERLAPPING_PANE_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"), BOUNDARY_AVC_METHOD: (AVC_ENCODING, "mp4")}
+                   OVERLAPPING_PANE_TRACK_AVC_METHOD: (AVC_ENCODING, "mp4"), BOUNDARY_AVC_METHOD: (AVC_ENCODING, "mp4"),
+                   VERY_BRIEF_AVC_METHOD: (AVC_ENCODING, "mp4")}
 METHODS = frozenset(SOURCE_PROFILES)
 OPPOSITE_PANE_METHODS = frozenset({OPPOSITE_PANE_TRACK_AVC_METHOD, OVERLAPPING_PANE_TRACK_AVC_METHOD})
 PANE_METHODS = OPPOSITE_PANE_METHODS | {PANE_TRACK_AVC_METHOD, SECOND_PANE_TRACK_AVC_METHOD}
@@ -40,6 +42,8 @@ POINT = 0.10
 ANCHOR_SAMPLES = tuple(range(4, 120, 10))
 EDGE_SCAN = range(6, 115)
 DURATIONS = (5, 6, 7)
+VERY_BRIEF_DURATIONS = (3, 4)
+VERY_BRIEF_TICKS = tuple(range(0, 120000, 1000))
 SECOND_AVC_DURATIONS = (5, 6, 7, 8, 9)
 BOUNDARY_EDGES = frozenset((3, 4, 5, 115, 116, 117))
 BOUNDARY_PAIRS = frozenset((start, start + length) for start in range(3, 118) for length in SECOND_AVC_DURATIONS
@@ -64,6 +68,11 @@ def avc_source(table, encoding, carrier):
             and (table.width, table.height) == (table.coded_width, table.coded_height) == paired.SIZE
             and len(table) == paired.FRAME_COUNT and not (table.rotation or table.truncated or table.interpolated)
             and _avc_tick_step(table.tb, table.pts, table.pts[0]) is not None)
+
+
+def very_brief_source(table, encoding, carrier):
+    return (table.time_base == "1/30000" and table.pts == VERY_BRIEF_TICKS
+            and avc_source(table, encoding, carrier))
 
 
 def _avc_tick_step(base, pts, first):
@@ -109,6 +118,11 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
         clock = table_pts is None or exact_clock(base, table_pts, first_pts)
     extra = {"face_detection_boxes"} if record["method"] in TRACK_METHODS else set()
     is_pane = record["method"] in PANE_METHODS
+    very_brief = record["method"] == VERY_BRIEF_AVC_METHOD
+    if very_brief:
+        extra.add("shot_boundary_frames")
+        pts = table_pts if table_pts is not None else [row["pts"] for row in record["scene_frame_inputs"]]
+        clock = clock and record["time_base"] == "1/30000" and tuple(pts) == VERY_BRIEF_TICKS
     if is_pane:
         extra.update(("pane", "off_face_motion_tiles"))
     require(
@@ -151,6 +165,9 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     edges = record["shortlist_edges"]
     near_boundary = record["method"] == BOUNDARY_AVC_METHOD
     allowed_edges = BOUNDARY_CANDIDATES if near_boundary else EDGE_SCAN
+    durations = SECOND_AVC_DURATIONS if record["method"] in MOVING_METHODS | SECOND_METHODS else DURATIONS
+    if very_brief:
+        durations = VERY_BRIEF_DURATIONS
     require(
         isinstance(edges, list)
         and 2 <= len(edges) <= MAX_EDGES
@@ -160,10 +177,14 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
         and stop in edges
         and type(start) is int
         and type(stop) is int
-        and ((start, stop) in BOUNDARY_PAIRS if near_boundary else
-             stop - start in (SECOND_AVC_DURATIONS if record["method"] in MOVING_METHODS | SECOND_METHODS else DURATIONS)),
+        and ((start, stop) in BOUNDARY_PAIRS if near_boundary else stop - start in durations),
         "Brief face proposal has an invalid edge shortlist",
     )
+    if very_brief:
+        cuts = record["shot_boundary_frames"]
+        require(isinstance(cuts, list) and all(type(i) is int and 0 < i < paired.FRAME_COUNT for i in cuts)
+                and cuts == sorted(set(cuts)) and not any(abs(a - b) <= 1 for a in (start, stop) for b in cuts),
+                "Very brief face range has conflicting source shot context")
     planned = face_schedule(edges)
     require(
         record["scheduled_frame_indices"] == planned and len(planned) <= MAX_FACE_READS,

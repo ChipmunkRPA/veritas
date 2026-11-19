@@ -452,3 +452,34 @@ def test_secondary_uses_existing_aggregate_when_incumbent_is_present(monkeypatch
     selected = face_appearance._with_return(current, None, None, None, None)
     assert selected is current and selected.aggregate.raw == .15
     assert selected.observed.startswith("Incumbent range.") and "2.880 to 3.240" in selected.observed
+
+
+def test_very_brief_face_coverage_distinguishes_missing_context_and_no_range():
+    from app.evidence import face_return_coverage as coverage
+
+    def measure(status, reason, pixels=120, scheduled=24, measured=20):
+        return dict(status=status, reason=reason, pixel_frames=pixels, scheduled_frames=scheduled,
+                    measured_face_frames=measured)
+
+    key = coverage.VERY_BRIEF_AVC
+    missed = coverage.from_worker(None, 120, very_brief=measure("no_distinct_range", None))
+    assert missed["affects_overall_confidence"] is False
+    assert "No three- or four-picture change" in missed["observations"][0]
+    unknown = coverage.from_worker(None, 120, very_brief=measure("unassessed", "shot_context_unavailable"))
+    assert "verified shot scan" in unknown["observations"][0]
+    unsupported = coverage.from_worker(None, 78, very_brief=measure("not_applicable", "native_scope", 0, 0, 0))
+    assert unsupported["passes"][key]["status"] == "not_applicable"
+    with pytest.raises(ValueError, match="cannot replace"):
+        coverage.from_worker(None, 120, bounded=measure("localized", None),
+                             very_brief=measure("no_distinct_range", None))
+
+
+def test_very_brief_face_source_requires_exact_720p_30_avc_clock():
+    from app.evidence import face_short_proposal_binding as proposal
+
+    table = FrameTable("1/30000", proposal.VERY_BRIEF_TICKS, (0,), "I" + "P" * 119, 1280, 720, 1280, 720)
+    assert proposal.very_brief_source(table, proposal.AVC_ENCODING, "mp4")
+    assert not proposal.very_brief_source(table, proposal.AVC_ENCODING, "webm")
+    assert not proposal.very_brief_source(replace(table, pts=tuple(i * 1001 for i in range(120))), proposal.AVC_ENCODING, "mp4")
+    assert not proposal.very_brief_source(replace(table, pts=tuple(p + 1000 for p in table.pts)), proposal.AVC_ENCODING, "mp4")
+    assert not proposal.very_brief_source(replace(table, rotation=90), proposal.AVC_ENCODING, "mp4")

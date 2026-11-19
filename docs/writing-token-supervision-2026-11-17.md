@@ -199,5 +199,23 @@ three misplaced ranges. Each affected edited file also contained a correct
 range. The gains were two exact locations in three Gemini publisher-test
 pairs and 12 in eight GPT Nano publisher-development pairs outside local
 calibration. Five earlier unused Gemini publisher-training pairs supplied
-no exact locations. These results support a separate transfer beyond GAO
-reports. The rule stays out of customer analyses pending that evaluation.
+no exact locations.
+
+The frozen rule then ran on text from the Bureau of Labor Statistics
+*Monthly Labor Review* archive for 2018–2019. The study retained 16
+untouched reports. Two independent local editors produced 29 eligible
+rewrites in seven of the reports. Manual comparison before scoring
+identified 14 rewrites that preserved the original meaning. All 23 files
+were assessed, and an independent Word extraction reproduced 460 sentence
+positions, including all 29 edited ranges.
+[Monthly Labor Review archive and reuse terms](https://www.bls.gov/opub/mlr/about.htm)
+
+| Selection rule | Exact edited sentences / 29 | Meaning-preserving edits located / 14 | Untouched files alerted / 16 |
+| --- | ---: | ---: | ---: |
+| Current app selection | 1 | 0 | 0 |
+| Previous tuned point | 0 | 0 | 1 |
+| Frozen length-conditional tail | 0 | 0 | 4 |
+
+The tail rule also flagged one wrong location in an edited report. Its
+gain on the GAO panel did not transfer to these works. The current writing
+selection remains the one used in customer analyses.

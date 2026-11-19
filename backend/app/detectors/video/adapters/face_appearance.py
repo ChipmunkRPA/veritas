@@ -29,7 +29,7 @@ from app.engine.detector import ActivationUse, Applicability, DetectorResult, In
 from app.evidence import face_local_return_binding as local
 from app.evidence import face_paired_edge_binding as paired
 from app.evidence import face_portrait_return_binding as portrait_return
-from app.evidence import face_primary_track_binding
+from app.evidence import face_primary_track_binding, mp4_source_clock
 from app.evidence import face_short_carrier_binding as short_carriers
 from app.evidence import face_short_proposal_binding as proposal
 from app.evidence import face_short_window_binding as windows
@@ -748,9 +748,22 @@ def _with_short_proposal(result, inputs, yunet, recognizer, deadline):
         proposal_method = (proposal.METHOD if _short_source(inputs)
                            else proposal.WEBM_METHOD if _short_webm_source(inputs)
                            else proposal.AVC_METHOD if _short_avc_source(inputs) else None)
+        very_brief = False
+        if (settings.environment == "dev" and settings.video_face_very_brief_avc_review
+                and settings.video_face_short_avc_review):
+            path = getattr(inputs.store, "path", None) if isinstance(inputs, SequenceInputs) else None
+            very_brief = (proposal_method == proposal.AVC_METHOD and path is not None
+                          and proposal.very_brief_source(inputs.table, (*inputs.encoding, inputs.codec_tag), "mp4")
+                          and mp4_source_clock.verified(path, inputs.table, 1000))
+            result.details["face_very_brief_avc_check"] = {
+                "status": "unassessed" if very_brief else "not_applicable",
+                "reason": "time_budget" if very_brief else "native_scope",
+                "pixel_frames": 0, "scheduled_frames": 0, "measured_face_frames": 0,
+            }
         if proposal_method:
             _propose_short(result.details, inputs, yunet, recognizer, deadline,
-                           face_detail_repeat.original_range(result.details), proposal_method=proposal_method)
+                           face_detail_repeat.original_range(result.details), proposal_method=proposal_method,
+                           very_brief=very_brief)
             return _describe_return(result)
     return result
 
@@ -871,7 +884,8 @@ def _with_short_windows(result, inputs, yunet, recognizer, deadline):
                           details={**detail,'review_only':True}, model_revisions=result.model_revisions)
 
 
-def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, proposal_method=proposal.METHOD):
+def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, proposal_method=proposal.METHOD,
+                   very_brief=False):
     coverage = {"status": "unassessed", "reason": "time_budget", "pixel_frames": 0,
                 "scheduled_frames": 0, "measured_face_frames": 0}
     prior = details.get("face_return")
@@ -899,6 +913,8 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
     pane = None
     reference_faces = {}
     pane_measured = None
+    brief_coverage = details.get("face_very_brief_avc_check") if very_brief else None
+    brief_record = None
 
     def read(indices, *, face, pixels):
         seen = set()
@@ -1165,6 +1181,23 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
         if prior is None:
             selected = face_short_proposal.select(edges, faces, reduced, stop.check, excluded)
             stop.check("brief face proposal")
+            if brief_coverage is not None and selected is None:
+                brief_coverage.update(pixel_frames=len(reduced), scheduled_frames=len(planned), measured_face_frames=len(faces))
+                if inputs.shot_boundaries is None:
+                    brief_coverage["reason"] = "shot_context_unavailable"
+                elif not face_short_proposal.has_measurable_pair(edges, faces, proposal.VERY_BRIEF_DURATIONS):
+                    brief_coverage["reason"] = "insufficient_same_shot_context"
+                else:
+                    brief = face_short_proposal.select(edges, faces, reduced, stop.check, excluded,
+                                                       durations=proposal.VERY_BRIEF_DURATIONS)
+                    brief_coverage.update(status="no_distinct_range", reason=None)
+                    if brief is not None:
+                        _, start, end = brief[0]
+                        if any(abs(edge - cut) <= 1 for edge in (start, end) for cut in inputs.shot_boundaries):
+                            brief_coverage["reason"] = "local_shot_change"
+                        else:
+                            brief_record = record(brief, proposal.VERY_BRIEF_AVC_METHOD)
+                            brief_record["shot_boundary_frames"] = list(inputs.shot_boundaries)
             if selected is None and retry_moving:
                 coverage.update(status="unassessed", reason="time_budget")
                 edges = face_short_proposal.moving_shortlist(reduced, anchors, stop.check)
@@ -1219,6 +1252,16 @@ def _propose_short(details, inputs, yunet, recognizer, deadline, incumbent, *, p
             details["face_second_avc_check"] = coverage.copy()
         if second_avc and prior is not None and details.get("face_short_proposal_check") is coverage:
             coverage.update(status="localized", reason=None)
+        if brief_coverage is not None:
+            if details.get("face_return") is not None:
+                details.pop("face_very_brief_avc_check", None)
+            elif brief_record is not None:
+                details["face_return"] = brief_record
+                brief_coverage.update(status="localized", reason=None)
+            elif brief_coverage["reason"] == "time_budget" and coverage["status"] == "unassessed":
+                brief_coverage.update(reason=coverage["reason"], pixel_frames=coverage["pixel_frames"],
+                                      scheduled_frames=coverage["scheduled_frames"],
+                                      measured_face_frames=coverage["measured_face_frames"])
 
 
 class FaceAppearanceReviewDetector(FaceSequenceReviewDetector):

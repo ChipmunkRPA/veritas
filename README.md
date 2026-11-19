@@ -26,6 +26,8 @@ are not prepared for use as court evidence or expert testimony.
   [retimed](docs/video-retimed-compression-2026-11-16.md),
   [mirrored](docs/video-mirrored-hd-2026-11-16.md), or
   [reused with a tighter crop](docs/video-crop-alignment-2026-11-16.md).
+  The optional [very brief face check](docs/video-face-three-four-frames-2026-11-19.md)
+  can locate a three- or four-frame appearance change in a supported 720p clip.
 - **Audio:** selected source-bound speech windows, waveforms, spectrograms, and
   separate background/acoustic context. An optional
   [short speech edit check](docs/audio-six-ten-context-2026-11-16.md#local-six-second-check)

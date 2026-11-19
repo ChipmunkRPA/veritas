@@ -83,6 +83,7 @@ from app.evidence.video_packet_versions import (
     SHORT_WEBM_PROPOSAL_VERSION,
     SHORT_WINDOW_VERSION,
     SPATIAL_CUT_VERSION,
+    VERY_BRIEF_AVC_PROPOSAL_VERSION,
 )
 from app.reports.public_verify import SCHEMA
 from app.reports.verify_image_source import _matches
@@ -295,7 +296,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         evidence["version"] in {SHORT_PROPOSAL_VERSION, SHORT_WEBM_PROPOSAL_VERSION, SHORT_AVC_PROPOSAL_VERSION,
                                 MOVING_AVC_PROPOSAL_VERSION, PRIMARY_TRACK_AVC_PROPOSAL_VERSION,
                                 POSITION_TRACK_AVC_PROPOSAL_VERSION, PANE_TRACK_AVC_PROPOSAL_VERSION,
-                                BOUNDARY_AVC_PROPOSAL_VERSION})
+                                BOUNDARY_AVC_PROPOSAL_VERSION, VERY_BRIEF_AVC_PROPOSAL_VERSION})
     windowed = evidence["version"] == SHORT_WINDOW_VERSION
     carrier_windows = evidence["version"] == SHORT_CARRIER_VERSION
     paired = evidence["version"] in {PAIRED_EDGE_VERSION, SHORT_PROPOSAL_VERSION, SPATIAL_CUT_VERSION}
@@ -340,12 +341,16 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if evidence["version"] in {SHORT_AVC_PROPOSAL_VERSION, SECOND_AVC_PROPOSAL_VERSION, MOVING_AVC_PROPOSAL_VERSION,
                                PRIMARY_TRACK_AVC_PROPOSAL_VERSION, POSITION_TRACK_AVC_PROPOSAL_VERSION,
                                PANE_TRACK_AVC_PROPOSAL_VERSION, SECOND_PANE_TRACK_AVC_PROPOSAL_VERSION,
-                               BOUNDARY_AVC_PROPOSAL_VERSION} | OPPOSITE_PANE_VERSIONS:
+                               BOUNDARY_AVC_PROPOSAL_VERSION, VERY_BRIEF_AVC_PROPOSAL_VERSION} | OPPOSITE_PANE_VERSIONS:
         delivery = probe_container(original, include_codec_tag=True)
         encoding = delivery.get("codec"), delivery.get("pix_fmt")
         if not face_short_proposal_binding.avc_source(table, (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag")),
                                                       face_return.source_carrier(original)):
             raise ValueError("The original video differs from its brief H.264 face-review source profile")
+        if evidence["version"] == VERY_BRIEF_AVC_PROPOSAL_VERSION and (
+                table.pts != face_short_proposal_binding.VERY_BRIEF_TICKS or table.time_base != "1/30000"
+                or not mp4_source_clock.verified(original, table, 1000)):
+            raise ValueError("The original video differs from its very brief appearance source clock")
     if windowed:
         delivery = probe_container(original, include_codec_tag=True)
         if not face_short_window_binding.supported(table, (delivery.get("codec"), delivery.get("pix_fmt"), delivery.get("codec_tag")),
@@ -838,6 +843,17 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("The original video evidence version disagrees with its brief face proposal")
     for record in proposal_records:
         _verify_paired_motion(record, paired_pixels, proposal=True)
+        if record["method"] == face_short_proposal_binding.VERY_BRIEF_AVC_METHOD:
+            detector = ShotDetector(table)
+            count = 0
+            with closing(decode_stream(original, table)) as shot_frames:
+                for frame in shot_frames:
+                    if frame.index != count or not frame.pts_verified or frame.pts != table.pts[count]:
+                        raise ValueError("Very brief face shot context differs from the original picture clock")
+                    detector.update(frame.index, frame.rgb)
+                    count += 1
+            if count != len(table) or [row["frame_index"] for row in detector.boundaries] != record["shot_boundary_frames"]:
+                raise ValueError("The original video does not reproduce the very brief face shot context")
     if window_records and not (windowed or carrier_windows):
         raise ValueError("The original video evidence version disagrees with its overlapping face windows")
     for record in window_records:

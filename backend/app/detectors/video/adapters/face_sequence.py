@@ -40,6 +40,7 @@ class SequenceInputs:
     codec_tag: str | None = None
     baseline: dict | None = None
     codec_profile: str | None = None
+    shot_boundaries: tuple[int, ...] | None = None
 
 
 def record(window: dict, table: FrameTable, inputs: dict[int, dict]) -> dict:

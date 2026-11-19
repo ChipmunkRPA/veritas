@@ -46,3 +46,21 @@ and presentation timestamps with the original local files.
 The range describes a temporary change in face appearance. The result
 applies to the measured clock and carrier, and supplies no calibrated
 estimate of AI authorship or general face-swap error rates.
+
+## Local application verification
+
+The optional development check uses the existing face appearance pass on
+the tested native profile. The browser and report identify the half-open
+frame interval and display original face crops from before, during, and
+after it. The exact frame indices, timestamps, and review coverage are
+retained in JSON and the signed package.
+
+Six isolated analyses exercised the check in a simulated USD 9.99 checkout.
+The three-frame source reproduced frames `[66, 69)` with witnesses 65,
+67, and 69. The re-encoded four-frame source reproduced `[110, 114)`
+with witnesses 109, 112, and 114. The remaining cases exercised a measured
+no-range result, insufficient same-shot context, an unsupported source
+clock, and the option disabled. All six signed packages replayed against
+their original MP4 files. The overall decision was identical with the
+option on and off for the same file. Each analysis started after simulated
+payment confirmation.

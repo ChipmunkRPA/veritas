@@ -182,6 +182,7 @@ def _document(path: Path, extension: str) -> None:
         return
 
     from app.core.config import settings
+    from app.detectors.text import html_content
     from app.detectors.text.extract import check_raw_size, extract
     from app.detectors.text.segment import MIN_WORDS, sentences, spans
     from app.evidence import document_bibliography, document_tracked_changes
@@ -197,8 +198,7 @@ def _document(path: Path, extension: str) -> None:
     if extension in {".txt", ".md", ".markdown", *HTML_EXTS}:
         # Keep checkout's strict encoding validation. The extractor also supports
         # forensic review of damaged text with replacement characters.
-        raw = path.read_bytes()
-        raw.decode("utf-16" if raw.startswith((b"\xff\xfe", b"\xfe\xff")) else "utf-8-sig")
+        html_content.decode_saved(path.read_bytes(), allow_legacy=extension in {".html", ".htm"})
 
     try:
         if extension in {".docx", ".odt"}:

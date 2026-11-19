@@ -16,6 +16,9 @@ HEAD_BODY = CLOSE_PARAGRAPH | {"body"}
 DISPLAY = re.compile(r"^\s*display\s*:\s*(.*?)\s*$", re.IGNORECASE | re.ASCII)
 NONE = re.compile(r"none(?:\s*!\s*important)?", re.IGNORECASE | re.ASCII)
 COMPLEX_CSS = frozenset("'\"(){}\\/")
+LEGACY_CHARSETS = frozenset({"windows-1252", "cp1252", "iso-8859-1", "latin1", "latin-1"})
+MIME_CHARSET = re.compile(r"""(?:^|;)\s*charset\s*=\s*["']?([\w-]+)(?=["';\s]|$)""", re.IGNORECASE | re.ASCII)
+HEAD_TAGS = frozenset({"html", "head", "base", "link", "meta", "title", "style", "script"})
 BREAKER = frozenset({"button", "caption", "html", "table", "td", "th", "template"})
 TABLE_SECTIONS = frozenset({"thead", "tbody", "tfoot"})
 OPTIONAL_ENDS = {
@@ -27,6 +30,72 @@ OPTIONAL_ENDS = {
     "th": ({"td", "th"}, {"tr", "table"}),
     **dict.fromkeys(TABLE_SECTIONS, (TABLE_SECTIONS, {"table"})),
 }
+
+
+class _HeadEncoding(HTMLParser):
+    CDATA_CONTENT_ELEMENTS = (*HTMLParser.CDATA_CONTENT_ELEMENTS, "title")
+
+    def __init__(self):
+        super().__init__(convert_charrefs=False)
+        self.finished = False
+        self.raw_text = False
+        self.encodings = set()
+
+    def handle_starttag(self, tag, attrs):
+        if self.finished or tag not in HEAD_TAGS:
+            self.finished = True
+            return
+        if tag in self.CDATA_CONTENT_ELEMENTS:
+            self.raw_text = True
+        if tag != "meta":
+            return
+        values = dict(reversed(attrs))
+        label = values.get("charset")
+        if "charset" not in values and (values.get("http-equiv") or "").strip().lower() == "content-type":
+            match = MIME_CHARSET.search(values.get("content") or "")
+            label = match[1] if match else None
+        if label:
+            label = label.strip().lower()
+            self.encodings.add("windows-1252" if label in LEGACY_CHARSETS else label)
+
+    def handle_endtag(self, tag):
+        if tag in {"head", "html"}:
+            self.finished = True
+        if tag in self.CDATA_CONTENT_ELEMENTS:
+            self.raw_text = False
+
+    def handle_startendtag(self, tag, attrs):
+        if tag in {"meta", "base", "link"}:
+            self.handle_starttag(tag, attrs)
+        else:
+            self.finished = True
+
+    def handle_data(self, data):
+        if not self.raw_text and data.strip(" \t\r\n\f"):
+            self.finished = True
+
+    def handle_entityref(self, name):
+        self.handle_data("&")
+
+    def handle_charref(self, name):
+        self.handle_data("&")
+
+
+def decode_saved(data: bytes, *, allow_legacy: bool = True, errors: str = "strict") -> tuple[str, str]:
+    """Read Unicode or an early, explicit Western European declaration in saved HTML."""
+    if data.startswith((b"\xff\xfe", b"\xfe\xff")):
+        return data.decode("utf-16", errors=errors), "utf-16"
+    if data.startswith(b"\xef\xbb\xbf"):
+        return data.decode("utf-8-sig", errors=errors), "utf-8-sig"
+    if allow_legacy:
+        try:
+            return data.decode("utf-8"), "utf-8"
+        except UnicodeDecodeError:
+            head = _HeadEncoding()
+            head.feed(data[:1024].decode("latin-1"))
+            if head.encodings == {"windows-1252"} and b"\x00" not in data:
+                return data.decode("windows-1252", errors=errors), "windows-1252"
+    return data.decode("utf-8", errors=errors), "utf-8"
 
 
 def _outside(tag, attrs):

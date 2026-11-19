@@ -118,6 +118,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     use_current_email_body = (coverage.get("email") or {}).get(email_body.SELECTION_KEY) == email_body.SELECTION_POLICY
     html_policy = coverage.get(document_scope.HTML_STATIC_KEY)
     use_static_html = isinstance(html_policy, str) and html_policy in document_scope.HTML_STATIC_POLICIES
+    allow_legacy_html = coverage.get(document_scope.HTML_LEGACY_ENCODING_KEY) == document_scope.HTML_LEGACY_ENCODING
     if extension == ".html" and html_policy == document_scope.XHTML_STATIC_POLICY:
         extension = ".xhtml"
     ocr_pages = (coverage.get("ocr") or {}).get("pages", [])
@@ -143,6 +144,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                           map_word_table_controls=table_grid == document_native_locations.WORD_TABLE_GRID,
                           include_word_linked_notes=document_native_locations.WORD_NOTES_KEY in coverage,
                           include_word_text_boxes=document_native_locations.WORD_TEXT_BOX_KEY in coverage,
+                          normalize_word_layout_breaks=coverage.get(document_native_locations.WORD_LAYOUT_BREAK_KEY)
+                          == document_native_locations.WORD_LAYOUT_BREAK,
                           map_word_hyperlink_runs=coverage.get(document_native_locations.WORD_RUN_MAP_KEY)
                           == document_native_locations.WORD_RUN_MAP)
         except (OpcError, XMLSyntaxError) as error:
@@ -165,6 +168,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                       honor_csv_separator_declaration=document_native_locations.CSV_SEPARATOR_KEY in coverage,
                       use_current_email_body=use_current_email_body,
                       use_static_html=use_static_html,
+                      allow_legacy_html=allow_legacy_html,
                       skip_hidden_xlsx_cell_formats=coverage.get(document_native_locations.XLSX_VISIBILITY_KEY)
                       == document_native_locations.XLSX_VISIBILITY)
     if doc.meta.get(document_native_locations.CSV_SEPARATOR_KEY) != coverage.get(document_native_locations.CSV_SEPARATOR_KEY):
@@ -185,9 +189,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         document_disclosure_heading.validate_evidence(evidence)
         document_disclosure_heading.verify_original(heading, original, doc)
     document_saved_link_hosts.verify_original(evidence, original, extension, use_current_email_body=use_current_email_body,
-                                              use_static_html=use_static_html)
+                                              use_static_html=use_static_html, allow_legacy_html=allow_legacy_html,
+                                              normalize_word_layout_breaks=coverage.get(document_native_locations.WORD_LAYOUT_BREAK_KEY)
+                                              == document_native_locations.WORD_LAYOUT_BREAK)
     if document_reference_links_binding.KEY in evidence or document_reference_links_binding.COMMITMENT in source:
-        reference_links = document_reference_links.inspect(original, extension, source_sha256=source["sha256"])
+        reference_links = document_reference_links.inspect(original, extension, source_sha256=source["sha256"],
+                                                          allow_legacy_html=allow_legacy_html)
         document_reference_links_binding.verify_record(evidence, reference_links,
             commitment=source.get(document_reference_links_binding.COMMITMENT))
     if document_word_reference_cache_binding.KEY in evidence or document_word_reference_cache_binding.COMMITMENT in source:
@@ -204,10 +211,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         raise ValueError("Re-extracted text or source mapping differs from the committed extraction")
     fields = {"email": None, "ocr": None, "unmapped_pages": [], "partially_checked_pages": [],
               WORD_CONTENT_CONTROLS_KEY: None, document_scope.HTML_ARTICLE_KEY: None, document_scope.HTML_STATIC_KEY: None,
+              document_scope.HTML_LEGACY_ENCODING_KEY: None,
               document_native_locations.PARAGRAPH_MAP_KEY: None, document_native_locations.WORD_TABLE_GRID_KEY: None,
               document_native_locations.PPTX_VISIBILITY_KEY: None, document_native_locations.WORD_RUN_MAP_KEY: None,
               document_native_locations.ODT_VISIBILITY_KEY: None, document_native_locations.WORD_NOTES_KEY: None,
               document_native_locations.WORD_TEXT_BOX_KEY: None,
+              document_native_locations.WORD_LAYOUT_BREAK_KEY: None,
               document_native_locations.RTF_VISIBILITY_KEY: None,
               document_native_locations.MARKDOWN_FENCES_KEY: None,
               document_native_locations.XLSX_VISIBILITY_KEY: None}

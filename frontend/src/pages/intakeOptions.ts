@@ -25,8 +25,8 @@ export const TABS: TabSpec[] = [
     formats: 'MP4 · MOV · WebM · MKV · up to 500 MB',
   },
   {
-    kind: 'audio', label: 'Audio', noun: 'a recording', accept: 'audio/*,.m4a,.opus,.flac', exts: ['wav', 'mp3', 'm4a', 'ogg', 'opus', 'flac'], mimePrefix: 'audio/', maxBytes: 150 * MB,
-    formats: 'WAV · MP3 · M4A · OGG · OPUS · FLAC · up to 150 MB',
+    kind: 'audio', label: 'Audio', noun: 'a recording', accept: 'audio/*,.wave,.m4a,.m4b,.oga,.opus,.flac', exts: ['wav', 'wave', 'mp3', 'm4a', 'm4b', 'ogg', 'oga', 'opus', 'flac'], mimePrefix: 'audio/', maxBytes: 150 * MB,
+    formats: 'WAV/WAVE · MP3 · M4A/M4B · OGG/OGA · OPUS · FLAC · up to 150 MB',
   },
   {
     kind: 'document', label: 'Document', noun: 'a document', accept: '.pdf,.docx,.odt,.pptx,.odp,.xlsx,.ods,.csv,.tsv,.epub,.rtf,.txt,.md,.markdown,.html,.htm,.xhtml,.eml',

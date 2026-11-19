@@ -5,6 +5,8 @@ from __future__ import annotations
 from app.evidence.document_scope import (
     EMAIL_HTML_COORDINATES,
     HTML_ARTICLE_KEY,
+    HTML_LEGACY_ENCODING,
+    HTML_LEGACY_ENCODING_KEY,
     HTML_STATIC_KEY,
     HTML_STATIC_POLICIES,
     HTML_STATIC_POLICY,
@@ -54,6 +56,8 @@ WORD_TABLE_GRID = "word-table-grid/2"
 WORD_TABLE_GRID_VERSIONS = (WORD_TABLE_GRID_V1, WORD_TABLE_GRID)
 WORD_RUN_MAP_KEY = "word_run_map"
 WORD_RUN_MAP = "word-paragraph-runs/1"
+WORD_LAYOUT_BREAK_KEY = "word_layout_breaks"
+WORD_LAYOUT_BREAK = "word-hard-layout-breaks/1"
 WORD_NOTES_KEY = "word_linked_notes"
 WORD_NOTES = "word-linked-notes/1"
 WORD_NOTE_LABELS = {"footnote": "Word footnote", "endnote": "Word endnote"}
@@ -240,12 +244,19 @@ def validate(document):
         if not isinstance(policy, str) or not (method == "html" and policy in HTML_STATIC_POLICIES
                                                or html_email and policy == HTML_STATIC_POLICY):
             raise ValueError("Invalid static HTML reading policy")
+    if HTML_LEGACY_ENCODING_KEY in coverage and (coverage[HTML_LEGACY_ENCODING_KEY] != HTML_LEGACY_ENCODING
+            or document.get("source", {}).get("method") != "html"
+            or coverage.get(HTML_STATIC_KEY) != HTML_STATIC_POLICY):
+        raise ValueError("Invalid legacy HTML encoding policy")
     if WORD_TABLE_GRID_KEY in coverage and (coverage[WORD_TABLE_GRID_KEY] not in WORD_TABLE_GRID_VERSIONS
             or document.get("source", {}).get("method") != "python-docx"):
         raise ValueError("Invalid Word table grid mapping")
     if WORD_RUN_MAP_KEY in coverage and (coverage[WORD_RUN_MAP_KEY] != WORD_RUN_MAP
             or document.get("source", {}).get("method") != "python-docx"):
         raise ValueError("Invalid Word paragraph run mapping")
+    if WORD_LAYOUT_BREAK_KEY in coverage and (coverage[WORD_LAYOUT_BREAK_KEY] != WORD_LAYOUT_BREAK
+            or document.get("source", {}).get("method") != "python-docx"):
+        raise ValueError("Invalid Word page or column break mapping")
     if WORD_NOTES_KEY in coverage:
         notes = coverage[WORD_NOTES_KEY]
         if (not isinstance(notes, dict) or set(notes) != {"schema", "references", "included", "paragraphs"}

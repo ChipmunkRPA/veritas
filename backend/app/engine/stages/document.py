@@ -72,7 +72,7 @@ from app.evidence import (
 from app.schemas.evidence import AnalysisResultV2, Decision
 from app.schemas.legacy import FALLBACK_CAVEAT
 
-PIPELINE_VERSION = "doc-2.0-p43"
+PIPELINE_VERSION = "doc-2.0-p44"
 DOCUMENT_MAX_UNITS = 4000  # 1 500 sentence windows (segment.MAX_UNITS) plus chunks
 BIBLIOGRAPHY_POLICY = "writing_bibliography_review_enabled"
 CLAUSE_POLICY = "writing_within_sentence_language_review_enabled"
@@ -224,6 +224,9 @@ def current_decode_output(output: Any, *, require_current_layout_reader: bool = 
     if (require_current_layout_reader and output["meta"].get("method") == "python-docx"
             and (output["meta"].get(document_native_locations.WORD_TEXT_BOX_KEY) or {}).get("schema")
             != document_native_locations.WORD_TEXT_BOX):
+        return False
+    if (require_current_layout_reader and output["meta"].get("method") == "python-docx"
+            and output["meta"].get(document_native_locations.WORD_LAYOUT_BREAK_KEY) != document_native_locations.WORD_LAYOUT_BREAK):
         return False
     if (output["meta"].get("method") == "python-docx" and
             (output["meta"].get(WORD_CONTENT_CONTROLS_KEY) != WORD_CONTENT_CONTROLS

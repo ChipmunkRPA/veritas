@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 from copy import deepcopy
 from email.message import EmailMessage
 from html import unescape
@@ -12,7 +13,55 @@ from app.detectors.text import html_article
 from app.detectors.text.extract import extract
 from app.evidence import document_native_locations, document_scope
 from app.evidence.document_packets import _source_anchors
+from app.evidence.document_saved_link_hosts import inspect
 from app.storage.files import validate_kind
+
+LEGACY_WRITING = ("Café records — including curly quotes “as recorded” and costs in € — were reviewed "
+                  "by the public archives team before publication this week.")
+
+
+@pytest.mark.parametrize(("extension", "declaration"), [
+    (".htm", '<title>Saved page</title><meta charset="Windows-1252">'),
+    (".html", '<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">'),
+])
+def test_declared_western_html_passes_checkout_and_preserves_native_offsets(tmp_path, extension, declaration):
+    raw = (f"<html><head>{declaration}</head><body><main><p>{LEGACY_WRITING}</p>"
+           '<p><a href="https://other.example.net/">https://bücher.example.org</a></p></main></body></html>')
+    source = tmp_path / ("page" + extension)
+    data = raw.encode("windows-1252")
+    source.write_bytes(data)
+    validate_upload(BytesIO(data), source.name, "document")
+    doc = extract(source, extension)
+    assert doc.meta[document_scope.HTML_LEGACY_ENCODING_KEY] == document_scope.HTML_LEGACY_ENCODING
+    assert doc.meta["decoded_source_sha256"] == hashlib.sha256(raw.encode()).hexdigest()
+    assert doc.text.startswith(LEGACY_WRITING)
+    assert "�" not in doc.text
+    first = doc.source_map[0]
+    assert "".join(unescape(raw[lo:hi]) for _, _, lo, hi in first["source_ranges"]) == LEGACY_WRITING
+    [finding] = inspect(source, extension)["findings"]
+    assert "".join(raw[lo:hi] for lo, hi in finding["location"]["ranges"]) == "bücher.example.org"
+    assert not inspect(source, extension, allow_legacy_html=False)["findings"]
+    legacy = extract(source, extension, allow_legacy_html=False)
+    assert document_scope.HTML_LEGACY_ENCODING_KEY not in legacy.meta
+    assert legacy.text != doc.text
+
+
+@pytest.mark.parametrize(("extension", "head", "in_body"), [
+    (".html", "", ""),
+    (".html", "<!-- <meta charset=windows-1252> -->", ""),
+    (".html", '<title><meta charset="windows-1252"></title>', ""),
+    (".html", '<title/><meta charset=windows-1252></title>', ""),
+    (".html", 'Body text before <meta charset=windows-1252>', ""),
+    (".html", '&#65;<meta charset=windows-1252>', ""),
+    (".html", "", "<meta charset=windows-1252>"),
+    (".html", "<meta charset=utf-8><meta charset=windows-1252>", ""),
+    (".html", '<meta content="text/html; charset=windows-1252">', ""),
+    (".xhtml", "<meta charset=windows-1252 />", ""),
+])
+def test_legacy_html_checkout_requires_an_unambiguous_head_declaration(extension, head, in_body):
+    raw = f"<html><head>{head}</head><body><main>{in_body}<p>{LEGACY_WRITING}</p></main></body></html>"
+    with pytest.raises(PreflightError, match="unreadable or damaged"):
+        validate_upload(BytesIO(raw.encode("windows-1252")), "page" + extension, "document")
 
 
 @pytest.mark.parametrize("extension", [".htm", ".xhtml"])

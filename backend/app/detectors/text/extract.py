@@ -25,6 +25,8 @@ from app.detectors.text import email_body, html_article, html_content
 from app.evidence import document_native_locations, document_pdf_visibility
 from app.evidence.document_scope import (
     EMAIL_HTML_COORDINATES,
+    HTML_LEGACY_ENCODING,
+    HTML_LEGACY_ENCODING_KEY,
     HTML_STATIC_KEY,
     HTML_STATIC_NOTICE,
     HTML_STATIC_POLICY,
@@ -680,11 +682,22 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool 
 
 
 def docx_body(path: Path, *, project_word_revisions: bool = True, project_word_breaks: bool = True,
-              include_word_content_controls: bool = True):
+              include_word_content_controls: bool = True, normalize_word_layout_breaks: bool = False):
     from app.detectors.text.strict_word import open_document
     from app.evidence.document_tracked_changes import PART_NAME, inspect
 
     document = open_document(path)
+    if normalize_word_layout_breaks:
+        from docx.oxml.ns import qn
+
+        # python-docx's text projection drops hard breaks. Preserve each as one
+        # separator in the in-memory body before deriving paragraph/run offsets.
+        # Revision-contained breaks require separate review of the accepted layout.
+        for node in document.element.body.xpath(
+            ".//w:r/w:br[(@w:type='page' or @w:type='column') and "
+            "not(ancestor::w:ins or ancestor::w:del or ancestor::w:moveFrom or ancestor::w:moveTo)]"
+        ):
+            node.set(qn("w:type"), "textWrapping")
     part = str(document.part.partname).removeprefix("/")
     joined = set() if project_word_revisions and project_word_breaks else None
     review = (inspect(document.element.body, part, project_inline=project_word_revisions, joined_paragraphs=joined,
@@ -816,7 +829,8 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
                  include_word_content_controls: bool = True, include_word_saved_fields: bool = True,
                  map_word_table_grid: bool = True, map_word_table_controls: bool = True,
                  map_word_hyperlink_runs: bool = True, include_word_linked_notes: bool = True,
-                 include_word_text_boxes: bool = True, check_word_checkout_visibility: bool = False) -> Document:
+                 include_word_text_boxes: bool = True, check_word_checkout_visibility: bool = False,
+                 normalize_word_layout_breaks: bool = True) -> Document:
     from bisect import bisect_left
 
     from app.detectors.text import word_linked_notes, word_saved_fields, word_text_boxes
@@ -826,7 +840,8 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
 
     d, part, review, joined = docx_body(path, project_word_revisions=project_word_revisions,
                                       project_word_breaks=project_word_breaks,
-                                      include_word_content_controls=include_word_content_controls)
+                                      include_word_content_controls=include_word_content_controls,
+                                      normalize_word_layout_breaks=normalize_word_layout_breaks)
     parts: list[tuple[str, dict]] = []
     percentage_body_paragraphs = []
     hidden_locations = []
@@ -932,6 +947,8 @@ def extract_docx(path: Path, *, project_word_revisions: bool = True, project_wor
                 "percentage_body_paragraphs": percentage_body_paragraphs,
                 "coverage_warning": ("Body paragraphs and tables were extracted in document order. "
                                      f"{outside} DOCX has no stable page numbers." + word_warning)}
+    if normalize_word_layout_breaks:
+        doc.meta[document_native_locations.WORD_LAYOUT_BREAK_KEY] = document_native_locations.WORD_LAYOUT_BREAK
     if include_word_linked_notes:
         included_notes = len({(source["part_kind"], source["note_id"]) for _, source in note_parts})
         doc.meta[document_native_locations.WORD_NOTES_KEY] = {
@@ -1212,7 +1229,8 @@ def _attach_html_source_ranges(doc: Document, raw: str, *, projected: str | None
 
 
 def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True, map_body_paragraphs: bool = True,
-                      skip_hidden_rtf_runs: bool = True, skip_markdown_fences: bool = True, use_static_html: bool = True) -> Document:
+                      skip_hidden_rtf_runs: bool = True, skip_markdown_fences: bool = True, use_static_html: bool = True,
+                      allow_legacy_html: bool = True) -> Document:
     data = path.read_bytes()
     if ext == ".rtf":
         # RTF \par becomes a newline. Keep those breaks as passage boundaries.
@@ -1228,13 +1246,8 @@ def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True
             doc.meta[document_native_locations.RTF_VISIBILITY_KEY] = document_native_locations.RTF_VISIBILITY
             doc.meta["coverage_warning"] += " " + document_native_locations.RTF_VISIBILITY_SCOPE
         return doc
-    if data.startswith((b"\xff\xfe", b"\xfe\xff")):
-        encoding = "utf-16"
-    elif data.startswith(b"\xef\xbb\xbf"):
-        encoding = "utf-8-sig"
-    else:
-        encoding = "utf-8"
-    decoded = data.decode(encoding, errors="replace")
+    decoded, encoding = html_content.decode_saved(
+        data, allow_legacy=allow_legacy_html and use_static_html and ext in {".html", ".htm"}, errors="replace")
     from app.storage.files import HTML_EXTS
 
     projected = html_content.mask(decoded, xhtml=ext == ".xhtml") if use_static_html and ext in HTML_EXTS else None
@@ -1264,6 +1277,8 @@ def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True
     if projected is not None:
         d.meta[HTML_STATIC_KEY] = XHTML_STATIC_POLICY if ext == ".xhtml" else HTML_STATIC_POLICY
         d.meta["coverage_warning"] += " " + HTML_STATIC_NOTICE
+    if encoding == "windows-1252":
+        d.meta[HTML_LEGACY_ENCODING_KEY] = HTML_LEGACY_ENCODING
     return d
 
 
@@ -1359,13 +1374,15 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             project_word_revisions: bool = True, project_word_breaks: bool = True,
             include_word_content_controls: bool = True, include_word_saved_fields: bool = True, include_html_article: bool = True,
             map_body_paragraphs: bool = True, map_word_table_grid: bool = True,
+            normalize_word_layout_breaks: bool = True,
             skip_hidden_slide_groups: bool = True, map_word_hyperlink_runs: bool = True,
             map_word_table_controls: bool = True, skip_hidden_odt_sections: bool = True,
             include_word_linked_notes: bool = True, skip_hidden_xlsx_cell_formats: bool = True,
             skip_hidden_rtf_runs: bool = True, skip_markdown_fences: bool = True,
             honor_csv_separator_declaration: bool = True,
             check_word_checkout_visibility: bool = False, use_current_email_body: bool = True,
-            use_static_html: bool = True, include_word_text_boxes: bool = True) -> Document:
+            use_static_html: bool = True, include_word_text_boxes: bool = True,
+            allow_legacy_html: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers,
@@ -1376,6 +1393,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
                          map_word_table_grid=map_word_table_grid, map_word_hyperlink_runs=map_word_hyperlink_runs,
                          map_word_table_controls=map_word_table_controls, include_word_linked_notes=include_word_linked_notes,
                          include_word_text_boxes=include_word_text_boxes,
+                         normalize_word_layout_breaks=normalize_word_layout_breaks,
                          check_word_checkout_visibility=check_word_checkout_visibility)
     elif ext == ".odt":
         from app.detectors.text.opendocument import body_paragraphs
@@ -1448,7 +1466,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
     else:
         d = extract_text_like(path, ext, include_html_article=include_html_article, map_body_paragraphs=map_body_paragraphs,
                               skip_hidden_rtf_runs=skip_hidden_rtf_runs, skip_markdown_fences=skip_markdown_fences,
-                              use_static_html=use_static_html)
+                              use_static_html=use_static_html, allow_legacy_html=allow_legacy_html)
     d.meta.update({"chars": len(d.text), "words": len(d.text.split()), "paragraphs": len(d.paragraphs)})
     return _seal(d, original_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
 

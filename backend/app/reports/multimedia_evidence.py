@@ -732,6 +732,12 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     word_run_key = document_native_locations.WORD_RUN_MAP_KEY
     if coverage.get(word_run_key) != decoded["meta"].get(word_run_key):
         raise ObjectIntegrityError("Frozen Word paragraph run mapping differs from the recorded extraction")
+    legacy_html_key = document_scope.HTML_LEGACY_ENCODING_KEY
+    if coverage.get(legacy_html_key) != decoded["meta"].get(legacy_html_key):
+        raise ObjectIntegrityError("Frozen legacy HTML encoding differs from the recorded extraction")
+    word_break_key = document_native_locations.WORD_LAYOUT_BREAK_KEY
+    if coverage.get(word_break_key) != decoded["meta"].get(word_break_key):
+        raise ObjectIntegrityError("Frozen Word page or column break mapping differs from the recorded extraction")
     word_notes_key = document_native_locations.WORD_NOTES_KEY
     if coverage.get(word_notes_key) != decoded["meta"].get(word_notes_key):
         raise ObjectIntegrityError("Frozen linked Word notes differ from the recorded extraction")

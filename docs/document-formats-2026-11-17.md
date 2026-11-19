@@ -9,7 +9,7 @@ limit is 25 MB in the standard configuration.
 
 | Format | Writing examined | Source position in reports |
 | --- | --- | --- |
-| DOCX | Body paragraphs, tables, filled form controls, supported saved fields, simple drawing text boxes, and supported linked footnotes and endnotes in standard and Strict Open XML DOCX. Separate revision and visibility checks cover supported structures. | Word body paths, drawing or note references, paragraph character ranges, and available run coordinates |
+| DOCX | Body paragraphs, tables, filled form controls, supported saved fields, simple drawing text boxes, and supported linked footnotes and endnotes in standard and Strict Open XML DOCX. Explicit page and column breaks separate adjacent words in the saved body. Separate revision and visibility checks cover supported structures. | Word body paths, drawing or note references, paragraph character ranges, and available run coordinates |
 | ODT | Body paragraphs, headings, lists, and tables outside hidden and conditionally displayed sections | Decoded body paragraph number and character range |
 | PDF | Selectable text and supported local OCR | Page and region where mapped |
 | PPTX | Editable text boxes and tables on visible slides | Slide in presentation order, text block, and decoded character range |
@@ -22,7 +22,7 @@ limit is 25 MB in the standard configuration.
 | EML | The selected plain-text or HTML message body | Decoded text and supported HTML source positions |
 | TXT | Decoded Unicode text | Decoded character offsets |
 | Markdown | Text extracted from the markup outside recognized fenced code blocks | Paragraph and character position in the extracted text |
-| HTML and XHTML | Text extracted from saved `.html`, `.htm`, or `.xhtml` markup | Original markup character ranges for uniquely mapped article passages, otherwise extracted-text positions |
+| HTML and XHTML | Text extracted from saved `.html`, `.htm`, or `.xhtml` markup. HTML also supports an explicit Windows-1252 or ISO-8859-1 declaration when a file without a byte-order mark fails UTF-8 decoding. | Original markup character ranges for uniquely mapped article passages, otherwise extracted-text positions |
 
 ODS row and column positions follow the saved grid, including repeated or
 hidden rows and columns before a finding. The writing check excludes
@@ -109,6 +109,24 @@ Word passage locations include the saved label text within hyperlinks and
 the exact offsets of the text that follows. The reader uses the stored text
 and never opens the hyperlink destination. Signed reports record the
 mapping rule so earlier evidence can replay with its original coordinates.
+
+An explicit Word page or column break in supported body paragraphs and
+tables counts as one character in the paragraph position. Renderer-cached
+page break markers do not split words. Two local simulated checkouts tested
+standard DOCX with a page break and Strict DOCX with a column break. The
+browser, PDF, JSON and signed original-file check agreed on the corrected
+locations. Two earlier signed Word reports also passed original-file
+verification.
+[WordprocessingML break element](https://learn.microsoft.com/en-us/dotnet/api/documentformat.openxml.wordprocessing.break?view=openxml-3.0.1)
+
+Saved HTML with an unambiguous Western European character declaration near
+the start of its header preserves accented letters, curly quotes and
+currency symbols. The reader prefers valid UTF-8 and BOM-marked Unicode.
+When it uses the declared Windows-1252 fallback, the JSON records the
+decoding rule and signed verification uses the same decoded character
+positions for article excerpts and saved link labels.
+[HTML encoding detection](https://html.spec.whatwg.org/multipage/parsing.html#determining-the-character-encoding) ·
+[Windows-1252 labels](https://encoding.spec.whatwg.org/#names-and-labels)
 
 ### Words wrapped in selectable PDFs
 
@@ -473,6 +491,15 @@ notice for unsupported tracked revisions. A header-only Strict file was
 rejected before checkout. Local regression tests also check draft comparison
 offsets and reject external Word body relationships and macro-enabled
 packages disguised with a DOCX extension.
+
+A later local Chromium replay covered 19 document files, including three
+DOCX variants, selectable and scanned PDFs, both spreadsheet and slide
+families, and the Western European HTML fallback. All 19 completed after
+simulated USD 9.99 payment, produced matching PDF and JSON evidence, and
+passed signed verification against the original. The scanned PDF exercised
+local text recognition. A corrupt DOCX and undeclared legacy HTML failed
+before checkout. Zero analysis jobs started before payment.
+[Local format verification receipt](evaluation-panels/document-format-compatibility-2026-11-19.json)
 
 ## Earlier OpenDocument drafts
 

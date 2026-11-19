@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import codecs
 import hashlib
 import json
 import re
@@ -350,7 +349,7 @@ def _word_relationships(path, name):
     return rows
 
 
-def _word_text(path):
+def _word_text(path, *, normalize_word_layout_breaks):
     from docx.oxml.ns import qn
     from docx.text.paragraph import Paragraph
     from docx.text.run import Run
@@ -361,7 +360,8 @@ def _word_text(path):
 
     check_docx_safe(path)
     document, name, revisions, _ = docx_body(
-        path, project_word_revisions=False, include_word_content_controls=False
+        path, project_word_revisions=False, include_word_content_controls=False,
+        normalize_word_layout_breaks=normalize_word_layout_breaks,
     )
     if (
         not revisions
@@ -414,7 +414,8 @@ def _word_text(path):
     return _result("python-docx", counts, findings)
 
 
-def inspect(path: Path, extension: str, *, use_current_email_body: bool = True, use_static_html: bool = True):
+def inspect(path: Path, extension: str, *, use_current_email_body: bool = True, use_static_html: bool = True,
+            allow_legacy_html: bool = True, normalize_word_layout_breaks: bool = True):
     """Read only a bounded supported source and report saved hostname differences."""
     ext = extension.casefold()
     method = METHODS.get(ext)
@@ -425,7 +426,7 @@ def inspect(path: Path, extension: str, *, use_current_email_body: bool = True, 
         from lxml.etree import XMLSyntaxError
 
         try:
-            return _word_text(path)
+            return _word_text(path, normalize_word_layout_breaks=normalize_word_layout_breaks)
         except (BadZipFile, KeyError, OpcError, ValueError, XMLSyntaxError):
             return _result(method, status="outside_scope")
     if ext != ".eml" and path.stat().st_size > binding.MAX_HTML_CHARS * 4 + 4:
@@ -434,8 +435,7 @@ def inspect(path: Path, extension: str, *, use_current_email_body: bool = True, 
     try:
         if ext == ".eml":
             return _email_body(data, use_current_email_body=use_current_email_body, use_static_html=use_static_html)
-        encoding = "utf-16" if data.startswith((codecs.BOM_UTF16_BE, codecs.BOM_UTF16_LE)) else "utf-8-sig"
-        raw = data.decode(encoding)
+        raw, _ = html_content.decode_saved(data, allow_legacy=allow_legacy_html and ext != ".xhtml")
         return _inspect_html(html_content.mask(raw, xhtml=ext == ".xhtml") if use_static_html else raw, "html")
     except (LookupError, ValueError, RecursionError):
         return _result(method, status="outside_scope")
@@ -454,9 +454,11 @@ def inspect_within(path: Path, *, timeout: float, source_sha256: str):
         return None
 
 
-def verify_original(document, original, extension, *, use_current_email_body: bool = True, use_static_html: bool = True):
+def verify_original(document, original, extension, *, use_current_email_body: bool = True, use_static_html: bool = True,
+                    allow_legacy_html: bool = True, normalize_word_layout_breaks: bool = True):
     if binding.KEY in document or binding.COMMITMENT in document["source"]:
-        result = inspect(original, extension, use_current_email_body=use_current_email_body, use_static_html=use_static_html)
+        result = inspect(original, extension, use_current_email_body=use_current_email_body, use_static_html=use_static_html,
+                         allow_legacy_html=allow_legacy_html, normalize_word_layout_breaks=normalize_word_layout_breaks)
         binding.verify_record(document, result, commitment=document["source"].get(binding.COMMITMENT))
 
 

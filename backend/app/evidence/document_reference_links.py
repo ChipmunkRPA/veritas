@@ -175,7 +175,7 @@ def capture(raw):
             "authorship_confidence_contribution": 0, "destinations_contacted": 0}
 
 
-def inspect(path: Path, extension: str, *, source_sha256: str):
+def inspect(path: Path, extension: str, *, source_sha256: str, allow_legacy_html: bool = True):
     if extension not in binding.EXTENSIONS:
         return None
     with path.open("rb") as source:
@@ -184,8 +184,8 @@ def inspect(path: Path, extension: str, *, source_sha256: str):
         return None
     if hashlib.sha256(data).hexdigest() != source_sha256:
         raise ValueError("Submitted HTML differs from the reference link source")
-    encoding = "utf-16" if data.startswith((b"\xff\xfe", b"\xfe\xff")) else "utf-8-sig"
     try:
-        return capture(data.decode(encoding))
+        raw, _ = html_content.decode_saved(data, allow_legacy=allow_legacy_html)
+        return capture(raw)
     except UnicodeError:
         return None

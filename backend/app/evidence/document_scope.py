@@ -51,6 +51,8 @@ HTML_ARTICLE_MAX_SOURCE = 512 * 1024
 HTML_STATIC_KEY = "html_static_content"
 HTML_STATIC_POLICY = "static-html-content/1"
 XHTML_STATIC_POLICY = "static-xhtml-content/1"
+HTML_LEGACY_ENCODING_KEY = "html_legacy_encoding"
+HTML_LEGACY_ENCODING = "declared-windows-1252/1"
 HTML_STATIC_POLICIES = frozenset({HTML_STATIC_POLICY, XHTML_STATIC_POLICY})
 HTML_STATIC_NOTICE = ("Writing checks exclude saved page navigation, inactive template and script markup, and text explicitly "
                       "marked hidden or given a simple inline display:none style. Stylesheets and browser behavior were not evaluated.")

@@ -571,6 +571,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][document_native_locations.WORD_TABLE_GRID_KEY] = word_grid
     if word_runs := decoded["meta"].get(document_native_locations.WORD_RUN_MAP_KEY):
         document["coverage"][document_native_locations.WORD_RUN_MAP_KEY] = word_runs
+    if layout_breaks := decoded["meta"].get(document_native_locations.WORD_LAYOUT_BREAK_KEY):
+        document["coverage"][document_native_locations.WORD_LAYOUT_BREAK_KEY] = layout_breaks
     if word_notes := decoded["meta"].get(document_native_locations.WORD_NOTES_KEY):
         document["coverage"][document_native_locations.WORD_NOTES_KEY] = word_notes
     if word_boxes := decoded["meta"].get(word_box_key):
@@ -581,6 +583,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][document_scope.HTML_ARTICLE_KEY] = article
     if static_html := decoded["meta"].get(document_scope.HTML_STATIC_KEY):
         document["coverage"][document_scope.HTML_STATIC_KEY] = static_html
+    if legacy_html := decoded["meta"].get(document_scope.HTML_LEGACY_ENCODING_KEY):
+        document["coverage"][document_scope.HTML_LEGACY_ENCODING_KEY] = legacy_html
     if policy := decoded["meta"].get(document_native_locations.PARAGRAPH_MAP_KEY):
         document["coverage"][document_native_locations.PARAGRAPH_MAP_KEY] = policy
     if slide_visibility := decoded["meta"].get(document_native_locations.PPTX_VISIBILITY_KEY):

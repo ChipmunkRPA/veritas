@@ -46,6 +46,30 @@ beforeEach(() => {
 afterEach(() => { cleanup(); clients.forEach((c) => c.clear()); clients.length = 0; vi.resetAllMocks() })
 
 describe('paid analysis intake', () => {
+  it.each([
+    ['recording.WAVE', '.wave'], ['recording.oga', '.oga'], ['audiobook.M4B', '.m4b'],
+  ])('accepts the supported %s alias without a browser MIME type before checkout', async (name, suffix) => {
+    const file = new File(['recording'], name)
+    const { container } = mount('/upload?kind=audio')
+    const input = container.querySelector<HTMLInputElement>('input[type="file"]')!
+    expect(file.type).toBe('')
+    expect(input.accept.split(',')).toContain(suffix)
+    fireEvent.change(input, { target: { files: [file] } })
+    expect(await screen.findByText(name)).toBeTruthy()
+    expect(screen.queryByRole('alert')).toBeNull()
+    const button = screen.getByRole('button', { name: /Continue to checkout/ }) as HTMLButtonElement
+    expect(button.disabled).toBe(true)
+    expect(billingApi.checkout).not.toHaveBeenCalled()
+    vi.mocked(billingApi.checkout).mockResolvedValue({ order_id: 'saved-order', checkout_url: 'https://checkout.stripe.com/c/pay/test', status: 'awaiting_payment' })
+    fireEvent.click(screen.getByRole('checkbox', { name: /I understand and accept/ }))
+    fireEvent.click(button)
+    await waitFor(() => expect(billingApi.checkout).toHaveBeenCalledTimes(1))
+    expect(vi.mocked(billingApi.checkout).mock.calls[0].slice(0, 2)).toEqual(['audio', file])
+    expect(api.uploadWithProgress).not.toHaveBeenCalled()
+    expect(intakeItem).not.toHaveBeenCalled()
+    expect(submitBatch).not.toHaveBeenCalled()
+  })
+
   it.each(['review.DOCX', 'article.pdf', 'deck.pptx', 'book.xlsx', 'message.eml'])('routes a dropped %s to Document before checkout', async (name) => {
     const file = new File(['sample'], name)
     mount('/upload')

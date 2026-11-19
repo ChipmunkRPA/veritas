@@ -25,6 +25,31 @@ from app.evidence.document_packets import build_packet_set, packet_hash
 from app.reports import package, public_verify, verify, verify_document_source
 
 
+def test_legacy_html_replays_with_the_recorded_encoding(packet_factory, tmp_path):
+    original = tmp_path / "saved.htm"
+    raw = ('<html><head><meta charset="windows-1252"></head><body><main>'
+           '<p>First café sentence contains enough useful words.</p>'
+           '<p>Second sentence adds “quoted words” and an exact € figure to the original.</p>'
+           '<p>Third sentence completes the source.</p></main></body></html>')
+    original.write_bytes(raw.encode("windows-1252"))
+    db, store, analysis, result, _, _ = packet_factory(".htm", source_pdf=original)
+    evidence = build_packet_set(db, analysis, store, result)
+    key = document_scope.HTML_LEGACY_ENCODING_KEY
+    assert evidence["coverage"][key] == document_scope.HTML_LEGACY_ENCODING
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"sha256": analysis.sha256, "bytes": analysis.size_bytes}}
+    proof = tmp_path / "html-proof.zip"
+    with zipfile.ZipFile(proof, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(evidence))
+    with zipfile.ZipFile(proof) as archive:
+        assert "extracted text and source mapping matched" in verify_document_source.check(archive, bundle, original)
+    del evidence["coverage"][key]
+    with zipfile.ZipFile(proof, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(evidence))
+    with zipfile.ZipFile(proof) as archive, pytest.raises(ValueError, match="source mapping differs"):
+        verify_document_source.check(archive, bundle, original)
+
+
 @pytest.mark.parametrize("extension", [".txt", ".eml", ".docx"])
 def test_replays_exact_native_text_formats(extension, packet_factory, tmp_path):
     if extension == ".docx":

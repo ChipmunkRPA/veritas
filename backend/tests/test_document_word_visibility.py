@@ -90,6 +90,9 @@ def test_local_word_visibility_keeps_exact_coordinates_and_ignores_explicit_off(
     assert not stage.current_decode_output({**decoded, "meta": old_grid})
     old_runs = {key: value for key, value in doc.meta.items() if key != locations.WORD_RUN_MAP_KEY}
     assert not stage.current_decode_output({**decoded, "meta": old_runs})
+    old_breaks = {key: value for key, value in doc.meta.items() if key != locations.WORD_LAYOUT_BREAK_KEY}
+    assert not stage.current_decode_output({**decoded, "meta": old_breaks})
+    assert stage.current_decode_output({**decoded, "meta": old_breaks}, require_current_layout_reader=False)
     for code in ("ai_supported", "no_ai_indicators"):
         decision = {"code": code, "verbal": "Fixture tendency", "reason": "Fixture",
                     "band": "uncertain", "confidence": "medium", "fusion_mode": "fallback",

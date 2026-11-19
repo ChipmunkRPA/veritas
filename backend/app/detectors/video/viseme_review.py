@@ -38,6 +38,18 @@ def supported(table, mapping, shots, stereo_scope=None):
     )
 
 
+def supported_aac441_motion(table, mapping, shots, shot_frames):
+    if (table is None or not mapping or shots != [[0, len(table)]] or shot_frames != len(table)
+            or table.truncated or table.interpolated or table.rotation
+            or (table.width, table.height) != (table.coded_width, table.coded_height)
+            or mapping.get("audio_stream_indices")):
+        return False
+    origin = binding.audio_origin(mapping)
+    return agreement.silence_carrier(mapping, origin) == "aac441" and agreement.aac441_motion_picture(
+        table.pts, table.time_base, {"width": table.width, "height": table.height}, binding.presented_samples(mapping),
+    )
+
+
 def sound_levels(pcm, presented):
     """Return the exact peak and sum of squared values of each full 5 ms block."""
     import numpy as np
@@ -125,16 +137,24 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None, 
     agreement_models = settings.video_lip_motion_sound_models
     shot_based_silence = bool(settings.video_lip_silent_mouth_review and stereo_scope is None and table is not None
                               and shot_frames == len(table) and supported_shots(table, mapping, shots))
-    if not shot_based_silence and not supported(table, mapping, shots, stereo_scope):
+    motion_only = (not shot_based_silence and settings.video_lip_aac441_motion_review and stereo_scope is None
+                   and supported_aac441_motion(table, mapping, shots, shot_frames))
+    if not (shot_based_silence or motion_only or supported(table, mapping, shots, stereo_scope)):
         return binding.skipped("unsupported")
-    from app.detectors.audio.phone_events import MODEL_BLOBS
 
     model = settings.video_lip_timing_model_dir
     geometry = settings.video_lip_timing_face_asset
     runtime = settings.video_lip_timing_runtime
-    if (not geometry or not geometry.is_file() or (runtime and not runtime.is_dir())
-            or (not shot_based_silence and (not model or not all((model / name).is_file() for name in (*MODEL_BLOBS, "pytorch_model.bin"))))):
+    if not geometry or not geometry.is_file() or (runtime and not runtime.is_dir()):
         return binding.skipped("assets")
+    if motion_only:
+        if not agreement_models or not all((agreement_models / f"{name}.safetensors").is_file() for name in ("vision", "shared")):
+            return binding.skipped("assets")
+    elif not shot_based_silence:
+        from app.detectors.audio.phone_events import MODEL_BLOBS
+
+        if not model or not all((model / name).is_file() for name in (*MODEL_BLOBS, "pytorch_model.bin")):
+            return binding.skipped("assets")
     remaining = ctx.deadline.remaining()
     budget = TIME_BUDGET if remaining is None else min(TIME_BUDGET, remaining - 8.)
     if budget < 12.:
@@ -144,7 +164,7 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None, 
     agreement_profile = agreement.carrier(
         mapping, origin=binding.audio_origin(mapping, stereo_scope, max_samples=limit), stereo_scope=stereo_scope,
     )
-    apply_articulation = not shot_based_silence and settings.video_lip_articulation_review and (
+    apply_articulation = not (shot_based_silence or motion_only) and settings.video_lip_articulation_review and (
         source_rate == 16_000 or source_rate == 48_000 and settings.video_lip_aac48_articulation_review
     )
     request = {"runtime": str(runtime.resolve()) if runtime else None, "geometry": str(geometry.resolve()),
@@ -154,11 +174,13 @@ def assess(ctx, frame_store, mapping, audio_input, shots, *, stereo_scope=None, 
                "ranked": settings.video_lip_timing_ranked and source_rate == 16_000,
                "articulation": apply_articulation,
                "shot_ranges": shots if shot_based_silence else None,
+               "motion_only": motion_only,
                "motion_models": str(agreement_models.resolve())
-               if not shot_based_silence and agreement_profile and agreement_models and not mapping.get("audio_stream_indices") else None}
+               if not shot_based_silence and (agreement_profile or motion_only) and agreement_models
+               and not mapping.get("audio_stream_indices") else None}
     try:
         raw = _observe(request, budget)
-        if settings.video_lip_silent_mouth_review and stereo_scope is None:
+        if settings.video_lip_silent_mouth_review and stereo_scope is None and not motion_only:
             from app.detectors.audio.decode import read_wav
 
             pcm = read_wav(ctx.store.read_bytes(audio_input["wav_sha256"]))

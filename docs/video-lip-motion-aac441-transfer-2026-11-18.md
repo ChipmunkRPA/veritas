@@ -54,3 +54,30 @@ python3 -I -S backend/scripts/review_video_lip_motion_aac441.py \
 ```
 
 [Anonymized carrier transfer](evaluation-panels/video-lip-motion-aac441-transfer-2026-11-18.json.gz)
+
+## Local app verification
+
+The check is available in development Full analysis with
+
+```sh
+VERITAS_VIDEO_LIP_TIMING_REVIEW=true
+VERITAS_VIDEO_LIP_AAC441_MOTION_REVIEW=true
+```
+
+Supported inputs have one upright 720 × 480 shot close to 24 frames per
+second and up to four seconds of continuous, verified mono 44.1 kHz AAC-LC.
+The timing evidence reports local sound and mouth movement and carries zero
+weight in AI confidence. A consistent whole-track offset leaves the local
+comparison inconclusive. The existing near-silent and 48 kHz checks each
+replayed with their earlier evidence format.
+
+Six simulated $9.99 checkouts confirmed that payment preceded analysis.
+The staged edit showed audio from **1.149 to 1.358 seconds** and original
+before, during, and after frames **26, 28, and 32**. The browser, PDF, and
+JSON agreed, and the signed export reproduced eight evidence assets from
+the original file. An independent decoder check reproduced the three RGB
+frames and every sample of the 0.2090625-second WAV excerpt. The browser
+displayed a **209 ms** label and played the clip to completion. The unchanged
+clip produced a no-match result and independently replayed its signed source.
+With the timing option on and off, the same edit had the same overall
+assessment and confidence. [Local verification receipt](evaluation-panels/video-lip-motion-aac441-app-2026-11-18.json)

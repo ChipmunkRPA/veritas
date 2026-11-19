@@ -70,11 +70,11 @@ def _compare_motion(models, patches, valid, times, pcm):
     return status, video_lip_agreement.encode(candidate)
 
 
-def motion_agreement(directory, patches, valid, table, pcm):
+def motion_observation(directory, patches, valid, table, pcm):
     import numpy as np
 
     times = np.asarray([round(pts * table.tb * viseme_timing.RATE) for pts in table.pts])
-    return _compare_motion(_motion_models(directory), patches, valid, times, pcm)[1]
+    return _compare_motion(_motion_models(directory), patches, valid, times, pcm)
 
 
 def capture_mouth_frames(video, table, geometry, *, motion, articulation=False, shots=None):
@@ -147,16 +147,23 @@ def observe(request):
     )
     if shots:
         return {"frames": measured, "phones": []}
-    if sum(row["gap_units"] is not None for row in measured) < 20:
+    if not request.get("motion_only") and sum(row["gap_units"] is not None for row in measured) < 20:
         for row in measured:
             row.pop("shape", None)
         return {"frames": measured, "phones": []}
     values = np.rint(pcm[:request["presented_samples"]] * 32768.).astype("<i2")
+    if request.get("motion_only"):
+        if not models:
+            raise ValueError("The verified local mouth and sound assets are unavailable")
+        status, candidate = motion_observation(Path(models), patches, valid, table, values)
+        return {"frames": measured, "phones": [], video_lip_agreement.AAC_44100_MOTION_STATUS: status,
+                **({video_lip_agreement.KEY: candidate} if candidate is not None else {})}
     # A missing or incompatible optional local model leaves the ordinary timing check available.
     extra = {}
     if models and valid.sum() >= 24:
         try:
-            if candidate := motion_agreement(Path(models), patches, valid, table, values):
+            _, candidate = motion_observation(Path(models), patches, valid, table, values)
+            if candidate is not None:
                 extra[video_lip_agreement.KEY] = candidate
         except (ImportError, OSError, RuntimeError, ValueError):
             pass

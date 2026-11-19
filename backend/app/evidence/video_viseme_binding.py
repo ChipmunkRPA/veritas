@@ -25,6 +25,7 @@ SCHEMA_WITH_MOTION_SOUND = "chipmunk.video-lip-timing/6"
 SCHEMA_WITH_SHOTS = "chipmunk.video-lip-timing/7"
 SCHEMA_WITH_ACTIVITY = "chipmunk.video-lip-timing/8"
 SCHEMA_WITH_ACTIVITY_LEVELS = "chipmunk.video-lip-timing/9"
+SCHEMA_WITH_AAC441_MOTION = "chipmunk.video-lip-timing/10"
 ACTIVITY_SCHEMAS = frozenset({SCHEMA_WITH_ACTIVITY, SCHEMA_WITH_ACTIVITY_LEVELS})
 ACTIVITY_KEY = "speech_activity_gap"
 ACTIVITY_TITLE = "Reduced speech activity during visible mouth movement"
@@ -296,6 +297,39 @@ def exhibits(record):
         yield shot["id"], {**record, "measurement": shot["measurement"], "witness": shot["witness"]}
 
 
+def _measured_aac441_motion(raw, inputs, timestamps, time_base, source, mapping, origin, stereo_scope):
+    field = agreement.AAC_44100_MOTION_STATUS
+    status, candidate = raw[field], raw.get(agreement.KEY)
+    samples = inputs["samples"]
+    if (set(raw) - {"frames", "phones", "samples", field, agreement.KEY} or inputs["phones"]
+            or raw.get("samples", samples) != samples or stereo_scope is not None or mapping.get("audio_stream_indices")
+            or agreement.silence_carrier(mapping, origin) != "aac441"
+            or not agreement.aac441_motion_picture(timestamps, time_base, source, samples)
+            or status not in {"coverage", "whole_track_delay", "no_local_dip", "measured"}
+            or (status == "measured") != (candidate is not None)
+            or (agreement.KEY in raw) != (candidate is not None)):
+        raise ValueError("The 44.1 kHz mouth and sound comparison differs from its qualified input")
+    inputs[field] = status
+    witness = None
+    if candidate is not None:
+        agreement._proposal(candidate, inputs["frames"], samples)
+        inputs[agreement.KEY] = candidate
+        if candidate["score_units"] > agreement.AAC_44100_MOTION_POINT:
+            witness = agreement.record(candidate, inputs["frames"])
+    state = ("matched" if witness else
+             {"coverage": "insufficient_events", "whole_track_delay": "ambiguous_change"}.get(status, "no_match"))
+    note = skipped(state)
+    if witness is not None:
+        note["observation"] = agreement.observation(witness)
+    elif status == "whole_track_delay":
+        note["observation"] = "A consistent soundtrack offset made the local comparison inconclusive."
+    elif state == "no_match":
+        note["observation"] = "No qualifying local speech and mouth difference was found in the measured ranges."
+    return {**note, "schema": SCHEMA_WITH_AAC441_MOTION, "measurement_basis": agreement.KEY,
+            "pcm_sha256": mapping["pcm_sha256"], "audio_origin_pts": origin,
+            "inputs": inputs, "measurement": candidate or {}, "witness": witness}
+
+
 def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
     limit = agreement.MAX_MULTISHOT_SAMPLES if silent.SHOT_KEY in raw else 64_000
     activity = ACTIVITY_KEY in raw
@@ -304,7 +338,9 @@ def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
                      or not 320 <= source["width"] <= 1280 or not 240 <= source["height"] <= 720):
         raise ValueError("The speech-activity check requires a qualified stereo video source")
     origin = 0 if activity else audio_origin(mapping, stereo_scope, max_samples=limit)
-    if origin is None or (mapping.get("source_sample_rate") == agreement.AAC_44100_RATE and silent.SHOT_KEY not in raw):
+    motion_aac441 = agreement.AAC_44100_MOTION_STATUS in raw
+    if origin is None or (mapping.get("source_sample_rate") == agreement.AAC_44100_RATE
+                          and silent.SHOT_KEY not in raw and not motion_aac441):
         raise ValueError("The mixed soundtrack has no supported continuous source clock")
     base = Fraction(time_base)
     rows, geometry = [], []
@@ -333,6 +369,8 @@ def measured(raw, *, timestamps, time_base, source, mapping, stereo_scope=None):
     samples = presented_samples(mapping, max_samples=limit)
     _validate_phones(raw["phones"], samples, timing.PHONES)
     inputs = {"frames": rows, "phones": raw["phones"], "samples": samples}
+    if motion_aac441:
+        return _measured_aac441_motion(raw, inputs, timestamps, time_base, source, mapping, origin, stereo_scope)
     if activity:
         return _activity(raw, inputs, mapping, profile)
     if silent.SHOT_KEY in raw:
@@ -452,7 +490,8 @@ def validate(document, *, timestamps=None, committed=_UNSET):
         return
     state = record["status"]
     if (record.get("schema") not in {SCHEMA, SCHEMA_WITH_APERTURE, SCHEMA_WITH_ARTICULATION, SCHEMA_WITH_STEREO,
-                                   SCHEMA_WITH_SILENCE, SCHEMA_WITH_MOTION_SOUND, SCHEMA_WITH_SHOTS, *ACTIVITY_SCHEMAS}
+                                   SCHEMA_WITH_SILENCE, SCHEMA_WITH_MOTION_SOUND, SCHEMA_WITH_SHOTS, SCHEMA_WITH_AAC441_MOTION,
+                                   *ACTIVITY_SCHEMAS}
             or state not in STATUS or record.get("affects_overall_confidence") is not False):
         raise ValueError("Invalid lip timing disposition")
     if "inputs" not in record:

@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react'
+import { useId, useState, type ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '../../components/ui'
 import { measurementValue } from './imagePackets'
@@ -24,13 +24,23 @@ export function EvidencePicture(props: PictureProps) {
 }
 function Clip({ set, artifact, token, ready, alt }: MediaProps) {
   const [failed, setFailed] = useState(false)
+  const durationId = useId()
   const url = ready && artifact.media_type === 'audio/wav' ? evidenceAssetUrl(set, artifact, token) : null
+  const { samples, sample_rate: sampleRate } = artifact
+  const shortDuration = samples && sampleRate && Number.isSafeInteger(samples) && Number.isSafeInteger(sampleRate)
+    && samples > 0 && samples < sampleRate ? samples * 1000 / sampleRate : null
   return <div className="p-3 rounded-md border border-border bg-surface-2">
     <p className="m-0 mb-2 text-small font-medium">{alt}</p>
     {!ready ? <p className="m-0 text-small text-text-muted">Preparing secure media links…</p>
       : !url || failed ? <div role="alert" className="text-small text-text-muted">This clip could not be loaded.
         {url && <Button variant="text" onClick={() => setFailed(false)}>Retry clip</Button>}</div>
-        : <audio controls preload="none" aria-label={alt} src={url} className="w-full max-w-full" onError={() => setFailed(true)} />}
+        : <>
+          {shortDuration !== null && <p id={durationId} className="m-0 mb-2 text-caption text-text-muted">
+            {shortDuration < 1 ? 'Clip length under 1 ms' : `Clip length ${Math.floor(shortDuration)} ms`}
+          </p>}
+          <audio controls preload="none" aria-label={alt} aria-describedby={shortDuration !== null ? durationId : undefined}
+            src={url} className="w-full max-w-full" onError={() => setFailed(true)} />
+        </>}
   </div>
 }
 export function EvidenceAudio(props: MediaProps) { return <Clip key={`${props.artifact.sha256}:${props.token}:${props.ready}`} {...props} /> }

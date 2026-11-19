@@ -748,13 +748,22 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             or decoded_audio.mapping.get("audio_stream_indices")
         ):
             raise ValueError("The timing review's mono soundtrack format differs from the original")
-        if shot_cover := lip_timing.get("shot_coverage"):
+        shot_cover = lip_timing.get("shot_coverage")
+        motion_aac441 = lip_timing.get("schema") == video_viseme_binding.SCHEMA_WITH_AAC441_MOTION
+        if shot_cover or motion_aac441:
             from app.detectors.video.shots import detect_shots
 
             with closing(decode_stream(original, table)) as shot_frames:
                 measured_shots = detect_shots(shot_frames, table).as_json()
-            if measured_shots["frames_scanned"] != len(table) or measured_shots["ranges"] != [row["frames"] for row in shot_cover]:
+            if shot_cover and (measured_shots["frames_scanned"] != len(table)
+                               or measured_shots["ranges"] != [row["frames"] for row in shot_cover]):
                 raise ValueError("The submitted video does not reproduce the shot review's picture boundaries")
+            if motion_aac441:
+                from app.detectors.video.viseme_review import supported_aac441_motion
+
+                if not supported_aac441_motion(table, decoded_audio.mapping, measured_shots["ranges"],
+                                               measured_shots["frames_scanned"]):
+                    raise ValueError("The submitted video does not reproduce the qualified 44.1 kHz mouth and sound scope")
         for packet_id, review in video_viseme_binding.exhibits(lip_timing):
             packet = next(packet for packet in packets if packet["id"] == packet_id)
             for role, content in audio_assets(decoded_audio.pcm, decoded_audio.mapping, review).items():

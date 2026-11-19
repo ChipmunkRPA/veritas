@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: MIT
 import hashlib
 import subprocess
+from dataclasses import replace
 from fractions import Fraction
 from types import SimpleNamespace
 
@@ -51,6 +52,82 @@ def test_441khz_dropout_requires_a_verified_mono_clock(tmp_path):
     assert not viseme_review.supported(table, mapping, [[0, 63]])
     with pytest.raises(ValueError, match="no supported continuous source clock"):
         binding.measured({"frames": [], "phones": []}, timestamps=[], time_base="1/30", source={}, mapping=mapping)
+
+
+def test_aac441_motion_has_separate_qualified_picture_and_audio_clocks(tmp_path):
+    mapping = _aac_mapping(tmp_path, 44_100)
+    table = FrameTable(time_base="1/24", pts=tuple(range(51)), key_frames=(0,),
+                       pict_types="I" + "P" * 50, width=720, height=480, coded_width=720, coded_height=480)
+    assert viseme_review.supported_aac441_motion(table, mapping, [[0, 51]], 51)
+    assert not viseme_review.supported(table, mapping, [[0, 51]])
+    assert not viseme_review.supported_shots(table, mapping, [[0, 51]])
+    assert not viseme_review.supported_aac441_motion(table, mapping, [[0, 25], [25, 51]], 51)
+    assert not viseme_review.supported_aac441_motion(table, mapping, [[0, 51]], 50)
+    assert not viseme_review.supported_aac441_motion(replace(table, coded_width=768), mapping, [[0, 51]], 51)
+    assert not viseme_review.supported_aac441_motion(replace(table, time_base="1/30"), mapping, [[0, 51]], 51)
+    assert not viseme_review.supported_aac441_motion(table, mapping | {"audio_stream_indices": [1, 2]}, [[0, 51]], 51)
+    assert not viseme_review.supported_aac441_motion(table, mapping | {agreement.AAC_44100_CLOCK: False}, [[0, 51]], 51)
+
+    frames = [{"index": i, "pts": i, "gap_units": 20_000, "mouth_box": [1, 1, 3, 3],
+               "rgb_sha256": "1" * 64, "mouth_crop_sha256": "2" * 64} for i in table.pts]
+    source = {"width": table.width, "height": table.height}
+    scope = {"timestamps": table.pts, "time_base": "1/24", "source": source, "mapping": mapping}
+    base = {"frames": frames, "phones": [], agreement.AAC_44100_MOTION_STATUS: "measured"}
+    comparison = agreement.encode({"span": [12667, 16667], "picture_span": [19, 25],
+                                   "bracket_frames": [18, 21, 26], "lag_samples": 0,
+                                   "agreement": [0.75, 0.14, 0.70], "score": 0.56})
+    raw = base | {agreement.KEY: comparison}
+    result = binding.measured(raw, **scope)
+    assert result["schema"] == binding.SCHEMA_WITH_AAC441_MOTION
+    assert result["measurement_basis"] == agreement.KEY and result["affects_overall_confidence"] is False
+    assert result["witness"]["picture_frames"] == {"before": 18, "during": 21, "after": 26}
+    assert result["witness"]["audio_source_pts"] == [12667, 16667]
+    assert result["inputs"]["samples"] == 33_600
+    assert binding.measured(result["inputs"], **scope) == result
+    for status, state in (("coverage", "insufficient_events"), ("whole_track_delay", "ambiguous_change"), ("no_local_dip", "no_match")):
+        unresolved = binding.measured(base | {agreement.AAC_44100_MOTION_STATUS: status}, **scope)
+        assert unresolved["status"] == state and unresolved["witness"] is None
+        assert binding.measured(unresolved["inputs"], **scope) == unresolved
+        if status == "whole_track_delay":
+            assert "soundtrack offset" in unresolved["observation"] and "inconclusive" in unresolved["observation"]
+    with pytest.raises(ValueError, match="qualified input"):
+        binding.measured(raw | {"phones": [["closure", 200, 0.9]]}, **scope)
+    with pytest.raises(ValueError, match="qualified input"):
+        binding.measured(raw, **(scope | {"source": {"width": 640, "height": 360}}))
+    with pytest.raises(ValueError, match="native timestamps"):
+        binding.measured(raw | {agreement.KEY: comparison | {"span": [12668, 16667]}}, **scope)
+
+
+def test_aac441_motion_routes_without_phone_checkpoint(tmp_path, monkeypatch):
+    mapping = _aac_mapping(tmp_path, 44_100)
+    table = FrameTable(time_base="1/24", pts=tuple(range(51)), key_frames=(0,),
+                       pict_types="I" + "P" * 50, width=720, height=480, coded_width=720, coded_height=480)
+    geometry = tmp_path / "geometry.task"
+    geometry.touch()
+    for name in ("vision", "shared"):
+        (tmp_path / f"{name}.safetensors").touch()
+    for field, value in {"video_lip_aac441_motion_review": False, "video_lip_timing_model_dir": None,
+                         "video_lip_timing_runtime": None, "video_lip_motion_sound_models": tmp_path,
+                         "video_lip_timing_face_asset": geometry, "video_lip_silent_mouth_review": True,
+                         "video_lip_aac48_articulation_review": True, "video_lip_articulation_review": True}.items():
+        monkeypatch.setattr(viseme_review.settings, field, value)
+    ctx = SimpleNamespace(deadline=SimpleNamespace(remaining=lambda: 50), store=SimpleNamespace(path_for=lambda _: tmp_path / "sound.wav"))
+    store = SimpleNamespace(table=table, path=tmp_path / "video.mov")
+    args = (ctx, store, mapping, {"wav_sha256": "0" * 64}, [[0, 51]])
+    assert viseme_review.assess(*args, shot_frames=51) == binding.skipped("unsupported")
+
+    def compare(request, _):
+        assert request["motion_only"] is True and request["checkpoint"] is None
+        assert not request["articulation"] and not request["ranked"] and request["shot_ranges"] is None
+        assert request["motion_models"] == str(tmp_path.resolve())
+        return {"frames": [{"index": i, "pts": i, "gap_units": None} for i in table.pts],
+                "phones": [], agreement.AAC_44100_MOTION_STATUS: "coverage"}
+
+    monkeypatch.setattr(viseme_review.settings, "video_lip_aac441_motion_review", True)
+    monkeypatch.setattr(viseme_review, "_observe", compare)
+    result = viseme_review.assess(*args, shot_frames=51)
+    assert result["schema"] == binding.SCHEMA_WITH_AAC441_MOTION and result["status"] == "insufficient_events"
+    assert result["witness"] is None and result["inputs"]["phones"] == []
 
 
 def test_48khz_timing_stops_at_the_presented_end(aac_mapping):

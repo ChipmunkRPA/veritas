@@ -1,0 +1,75 @@
+{
+  "analysis_jobs_before_payment": 0,
+  "audio_analysis_rate": 16000,
+  "audio_analysis_samples": [
+    18383,
+    21728
+  ],
+  "before_during_after": [
+    26,
+    28,
+    32
+  ],
+  "charges": "simulated",
+  "commitment_sha256": "b109cd6f8be7531143f46f711dc9abc8da6bae35ecf6a824f362095b91d2f742",
+  "confidence_unchanged_on_same_input": true,
+  "currency": "USD",
+  "independent_native_rgb_replays": 3,
+  "matched_browser": {
+    "audio_played_to_end": true,
+    "audio_seconds": 0.209063,
+    "browser_duration_seconds": 0.209063,
+    "duration_label_ms": 209,
+    "matching_audio_range": true,
+    "new_jobs": 0,
+    "new_payments": 0,
+    "original_mouth_crops": 3,
+    "page_errors": 0
+  },
+  "native_audio_excerpt_replayed": true,
+  "native_audio_time_base": "1/44100",
+  "ordinary_signed_source_replay": true,
+  "price_minor": 999,
+  "scenarios": [
+    {
+      "case": "off",
+      "schema": "chipmunk.video-lip-timing/1",
+      "status": "unsupported",
+      "zero_weight": true
+    },
+    {
+      "case": "edit",
+      "schema": "chipmunk.video-lip-timing/10",
+      "status": "matched",
+      "zero_weight": true
+    },
+    {
+      "case": "ordinary",
+      "schema": "chipmunk.video-lip-timing/10",
+      "status": "no_match",
+      "zero_weight": true
+    },
+    {
+      "case": "whole-track",
+      "schema": "chipmunk.video-lip-timing/10",
+      "status": "ambiguous_change",
+      "zero_weight": true
+    },
+    {
+      "case": "dropout",
+      "schema": "chipmunk.video-lip-timing/7",
+      "status": "matched",
+      "zero_weight": true
+    },
+    {
+      "case": "legacy48",
+      "schema": "chipmunk.video-lip-timing/6",
+      "status": "matched",
+      "zero_weight": true
+    }
+  ],
+  "schema": "chipmunk.video-lip-motion-aac441-app/1",
+  "signed_assets_verified": 8,
+  "simulated_payments": 6,
+  "source_duration_seconds": 0.2090625
+}

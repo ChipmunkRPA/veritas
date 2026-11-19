@@ -22,6 +22,8 @@ SILENCE_FRAME_PERIODS = (Fraction(1001, 30_000), Fraction(1, 30))
 SILENCE_CLOCK_TOLERANCE = Fraction(3, 2000)  # Includes rebased millisecond-quantized timestamps.
 AAC_44100_RATE = 44_100
 AAC_44100_CLOCK = "aac_44100_native_clock_verified"
+AAC_44100_MOTION_POINT = POINTS["aac48"][0]
+AAC_44100_MOTION_STATUS = "motion_aac441_status"
 WEIGHT_PINS = {
     "vision": "bc58acf5926044b6680e7b1c5588f67894b1cbdd43bb6dfe54ff25c5b6ab0a70",
     "shared": "d924e379f8a6a2d861401a8f25504c73012c4ab50d37e04b5aac5ecb19d9bbd4",
@@ -44,6 +46,18 @@ def silence_carrier(mapping, origin):
                                      mapping.get("source_sample_rate")) == (1, "aac", AAC_44100_RATE)
         and mapping.get(AAC_44100_CLOCK) is True else None
     )
+
+
+def aac441_motion_picture(timestamps, time_base, source, samples):
+    """Bind the short, upright picture profile used for the 44.1 kHz transfer."""
+    if (source["width"], source["height"]) != (720, 480) or not 34 <= len(timestamps) <= 120 or timestamps[0] != 0:
+        return False
+    base = Fraction(time_base)
+    step = timestamps[1] - timestamps[0]
+    period = step * base
+    return (Fraction(10, 241) <= period <= Fraction(10, 239)
+            and all(end - start == step for start, end in zip(timestamps, timestamps[1:]))
+            and abs(samples - round(timestamps[-1] * base * RATE)) <= round(2 * period * RATE))
 
 
 def encode(candidate):

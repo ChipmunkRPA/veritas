@@ -164,6 +164,7 @@ The service defines its settings in `backend/app/core/config.py`.
 | `VERITAS_VIDEO_MIN_FRAMES` | integer | `16` | v0.3 video pipeline: fewest frames sampled from a video |
 | `VERITAS_VIDEO_FACE_TRACK_IOU` | number | `0.3` | overlap (IoU) from which face boxes of consecutive frames are one track |
 | `VERITAS_VIDEO_EYE_LOCAL_HOLD_REVIEW` | `true` \| `false` | `false` | optional development-only evidence for eye-region holds on exact 60-picture 30 fps MP4s |
+| `VERITAS_VIDEO_LIP_AAC441_MOTION_REVIEW` | `true` \| `false` | `false` | optional development-only speech and mouth comparison for one 720 × 480 shot near 24 fps with up to four seconds of verified mono 44.1 kHz AAC-LC. Requires `VERITAS_VIDEO_LIP_TIMING_REVIEW=true`. |
 | `VERITAS_VIDEO_REFERENCE_SHORT30_LOCAL_AREA` | `true` \| `false` | `false` | Optional development-only localized picture comparison on the supported short 30 fps paired video profile. |
 
 ## Audio (video sound track)

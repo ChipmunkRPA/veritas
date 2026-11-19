@@ -21,6 +21,8 @@ from app.evidence.image_copy_similarity_binding import (
     DIAGONAL_TRANSFORMS,
     EXPANDED_JPEG_ROTATION_VERSIONS,
     JPEG_BLOCK_BASIS,
+    JPEG_DIAGONAL_BASIS,
+    JPEG_DIAGONAL_KEY,
     MULTI_EXACT_BASIS,
     NATIVE_JPEG_ROTATION_VERSIONS,
     OFFGRID_BASIS,
@@ -238,6 +240,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     translation = evidence.get('copy_translation') or {}
     offgrid = translation.get('basis') == OFFGRID_BASIS
     turned_jpeg = translation.get("basis") == TURNED_JPEG_BASIS
+    diagonal_jpeg = translation.get("basis") == JPEG_DIAGONAL_BASIS
     with source:
         if (declared.get('coordinate_space') != 'exif-oriented-original'
                 or source.size != (declared.get('width'), declared.get('height'))
@@ -257,6 +260,12 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             from app.evidence.image_jpeg_offgrid_source import verify
 
             verify(data, np.asarray(source), translation['pairs'][0], translation['jpeg_offgrid_review']['measurement'])
+        if diagonal_jpeg:
+            import numpy as np
+
+            from app.evidence.image_jpeg_diagonal_source import verify
+
+            verify(data, np.asarray(source), translation["pairs"][0], translation[JPEG_DIAGONAL_KEY]["measurement"])
         if turned_jpeg:
             import numpy as np
 
@@ -319,6 +328,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
         detail += " Recomputed exact RGB equality and surrounding differences for both copy pairs."
     if offgrid:
         detail += ' Recomputed the recorded color differences inside and around the two selected JPEG crops.'
+    if diagonal_jpeg:
+        detail += " Recomputed the color differences inside and around the two diagonally aligned JPEG crops."
     if turned_jpeg:
         number = "four" if len(translation["pairs"]) == 2 else "two"
         detail += f" Recomputed the color differences inside and around the {number} selected JPEG crops after rotation."

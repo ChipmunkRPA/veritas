@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Find disjoint JPEG regions with closely matching color after a right-angle turn."""
+"""Find disjoint JPEG regions with closely matching color after a turn or diagonal reflection."""
 
 from collections import defaultdict
 
@@ -22,7 +22,7 @@ def _sample(image, *, step):
     return np.stack((x[texture], y[texture]), axis=1), descriptors[texture]
 
 
-def _alignments(canvas, rotated, turns):
+def _alignments(canvas, rotated, turns, source_box):
     h, w = canvas.shape
     rh, rw = rotated.shape
     points, desc = _sample(canvas, step=8)
@@ -36,7 +36,7 @@ def _alignments(canvas, rotated, turns):
     for row, col in zip(*np.where(distances < .14)):
         x, y = map(int, points[row])
         a, b = map(int, targets[nearest[row, col]])
-        u, v, _, _ = _source_box((a, b, 1, 1), h, w, turns)
+        u, v, _, _ = source_box((a, b, 1, 1), h, w, turns)
         if max(abs(x - u), abs(y - v)) >= 24:
             votes[a - x, b - y].add((x, y))
 
@@ -82,9 +82,9 @@ def _measure(left, right, boxes):
     return None
 
 
-def _regions(gray, rgray, band, color, turns, alignments):
+def _regions(gray, rgray, band, color, turns, alignments, transform, source_box):
     h, w = gray.shape
-    rband, rcolor = [np.ascontiguousarray(np.rot90(image, turns)) for image in (band, color)]
+    rband, rcolor = [np.ascontiguousarray(transform(image, turns)) for image in (band, color)]
     rh, rw = rgray.shape
     kernel = np.ones((9, 9), np.uint8)
     for (dx, dy), seeds in alignments:
@@ -107,7 +107,7 @@ def _regions(gray, rgray, band, color, turns, alignments):
             r, d = min(right - left, x + bw + 4), min(bottom - top, y + bh + 4)
             first = left + l, top + t, r - l, d - t
             second = left + l + dx, top + t + dy, r - l, d - t
-            source = _source_box(second, h, w, turns)
+            source = source_box(second, h, w, turns)
             if min(first[2:]) < MIN_CROP_SIDE or iou(first, source):
                 continue
             if metrics := _measure(color, rcolor, (first, second)):
@@ -132,7 +132,7 @@ def _same_pair(a, b):
     return max(min(iou(a[0], b[0]), iou(a[1], b[1])), min(iou(a[0], b[1]), iou(a[1], b[0]))) >= .5
 
 
-def analyse(rgb):
+def _search(rgb, *, transform, source_box):
     height, width = rgb.shape[:2]
     if not 384 <= min(height, width) <= max(height, width) <= 1024 or max(height, width) < 513:
         return "unsupported_profile", []
@@ -142,11 +142,11 @@ def analyse(rgb):
     color = _color(rgb)
     matches = []
     for turns in (1, 2):
-        rotated = np.ascontiguousarray(np.rot90(blurred, turns))
-        alignments = _alignments(blurred, rotated, turns)
+        rotated = np.ascontiguousarray(transform(blurred, turns))
+        alignments = _alignments(blurred, rotated, turns, source_box)
         if alignments is None:
             return "unassessed_match_budget", []
-        matches.extend(_regions(blurred, rotated, band, color, turns, alignments))
+        matches.extend(_regions(blurred, rotated, band, color, turns, alignments, transform, source_box))
     if not matches:
         return "no_pair", []
     matches.sort(key=lambda item: item[:4], reverse=True)
@@ -155,3 +155,31 @@ def analyse(rgb):
            for _, _, other_pair, other_turns, _ in matches[1:]):
         return "ambiguous", []
     return "supported_pair", [{"pair": pair, "turns": turns, "measurement": measurement}]
+
+
+def analyse(rgb):
+    return _search(rgb, transform=np.rot90, source_box=_source_box)
+
+
+def _reflect_diagonal(image, direction):
+    axes_swapped = np.swapaxes(image, 0, 1)
+    return np.flip(axes_swapped, axis=(0, 1)) if direction == 2 else axes_swapped
+
+
+def _diagonal_source_box(box, height, width, direction):
+    left, top, span_x, span_y = box
+    if direction == 1:
+        return top, left, span_y, span_x
+    return width - top - span_y, height - left - span_x, span_y, span_x
+
+
+def analyse_diagonal(rgb):
+    return _search(rgb, transform=_reflect_diagonal, source_box=_diagonal_source_box)
+
+
+def diagonal_witness(rgb, pair, direction):
+    """Recompute the color readings for two saved, diagonally aligned JPEG crops."""
+    height, width = rgb.shape[:2]
+    aligned = _diagonal_source_box(pair[1], width, height, direction)
+    color = _color(rgb)
+    return _measure(color, _reflect_diagonal(color, direction), (pair[0], aligned))

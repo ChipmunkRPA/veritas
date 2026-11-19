@@ -44,6 +44,7 @@ WEBP_THREE_EXACT_VERSION = "image-evidence-44"
 WEBP_THREE_EXACT_AFFINE_VERSION = "image-evidence-45"
 PNG_DIAGONAL_EXACT_VERSION = "image-evidence-46"
 WEBP_DIAGONAL_EXACT_VERSION = "image-evidence-47"
+JPEG_DIAGONAL_VERSION = "image-evidence-48"
 DIAGONAL_EXACT_VERSIONS = frozenset({PNG_DIAGONAL_EXACT_VERSION, WEBP_DIAGONAL_EXACT_VERSION})
 PNG_THREE_EXACT_VERSIONS = frozenset({PNG_THREE_EXACT_VERSION, PNG_THREE_EXACT_AFFINE_VERSION, PNG_DIAGONAL_EXACT_VERSION})
 WEBP_THREE_EXACT_VERSIONS = frozenset({WEBP_THREE_EXACT_VERSION, WEBP_THREE_EXACT_AFFINE_VERSION, WEBP_DIAGONAL_EXACT_VERSION})
@@ -57,7 +58,7 @@ PNG_EXACT_REFLECTION_VERSION = "image-evidence-36"
 PNG_EXACT_REFLECTION_AFFINE_VERSION = "image-evidence-37"
 PNG_EXACT_REFLECTION_VERSIONS = PNG_MULTI_EXACT_VERSIONS | {PNG_EXACT_REFLECTION_VERSION, PNG_EXACT_REFLECTION_AFFINE_VERSION}
 EXACT_REFLECTION_VERSIONS = WEBP_EXACT_REFLECTION_VERSIONS | PNG_EXACT_REFLECTION_VERSIONS
-DISJOINT_JPEG_ROTATION_VERSIONS = frozenset({DISJOINT_JPEG_ROTATION_VERSION, DISJOINT_JPEG_ROTATION_AFFINE_VERSION})
+DISJOINT_JPEG_ROTATION_VERSIONS = frozenset({DISJOINT_JPEG_ROTATION_VERSION, DISJOINT_JPEG_ROTATION_AFFINE_VERSION, JPEG_DIAGONAL_VERSION})
 NATIVE_JPEG_ROTATION_VERSIONS = DISJOINT_JPEG_ROTATION_VERSIONS | {NATIVE_JPEG_ROTATION_VERSION, NATIVE_JPEG_ROTATION_AFFINE_VERSION}
 DISJOINT_ROTATION_MARGIN = 16
 TURNED_PNG_VERSIONS = PNG_EXACT_REFLECTION_VERSIONS | {TURNED_PNG_COPY_VERSION, TURNED_PNG_COPY_AFFINE_VERSION}
@@ -146,7 +147,7 @@ AFFINE_VERSIONS = frozenset({V13, V14, JPEG_BLOCK_AFFINE_VERSION, JPEG_OFFGRID_A
                              NATIVE_JPEG_ROTATION_AFFINE_VERSION, DISJOINT_JPEG_ROTATION_AFFINE_VERSION,
                              WEBP_EXACT_COPY_AFFINE_VERSION, WEBP_EXACT_REFLECTION_AFFINE_VERSION, PNG_EXACT_REFLECTION_AFFINE_VERSION,
                              PNG_MULTI_EXACT_AFFINE_VERSION, WEBP_MULTI_EXACT_AFFINE_VERSION,
-                             PNG_THREE_EXACT_AFFINE_VERSION, WEBP_THREE_EXACT_AFFINE_VERSION}) | DIAGONAL_EXACT_VERSIONS
+                             PNG_THREE_EXACT_AFFINE_VERSION, WEBP_THREE_EXACT_AFFINE_VERSION, JPEG_DIAGONAL_VERSION}) | DIAGONAL_EXACT_VERSIONS
 CREDENTIAL_VERSIONS = AFFINE_VERSIONS | {V12} | JPEG_BLOCK_VERSIONS | SMALL_PNG_VERSIONS | WEBP_EXACT_COPY_VERSIONS
 TRANSLATION_VERSIONS = CREDENTIAL_VERSIONS | {V10, V11}
 BASIS_VERSIONS = CREDENTIAL_VERSIONS | {V11}
@@ -167,6 +168,22 @@ OFFGRID_MIN_SIDE = 32
 OFFGRID_MAX_SIDE = 118
 OFFGRID_BASIS = "jpeg_offgrid_texture"
 TURNED_JPEG_BASIS = "jpeg_turned_copy"
+JPEG_DIAGONAL_BASIS = "jpeg_diagonal_copy"
+JPEG_DIAGONAL_KEY = "jpeg_diagonal_review"
+JPEG_DIAGONAL_NOTE = (
+    "The check compares supported upright JPEGs with a short side of at least 512 pixels and a long side from 608 to 704 pixels. "
+    "Ordinary editing and repeated patterns can also produce similar areas. The observation leaves authorship undetermined."
+)
+JPEG_DIAGONAL_MIN_PARALLEL_SUM = 16
+JPEG_DIAGONAL_COVERAGE = {
+    "supported_pair": "The aligned interiors have closely matching colors, with greater differences on at least three surrounding sides.",
+    "no_pair": "The diagonal JPEG check found no qualifying pair.",
+    "same_axis": "The match could be part of a larger mirror pattern, so this check withheld the local pair.",
+    "unsupported_profile": "The diagonal check covers upright color images with the tested JPEG 75 compression tables.",
+    "unavailable": "The diagonal JPEG check could not complete.",
+    "ambiguous": "Several pairs fit the diagonal check, so this check withheld a distinct comparison.",
+    "unassessed_match_budget": "Too many matching areas prevented a distinct diagonal comparison.",
+}
 OFFGRID_STATUS_TEXT = {
     "supported_pair": "The aligned crops have closely matching color values inside and more different surroundings on at least three sides.",
     "no_pair": ("The between-block JPEG check found no qualifying repeated area. "
@@ -235,6 +252,36 @@ def exact_copy_size(width: int, height: int, *, webp: bool) -> bool:
 
 def exact_diagonal_size(width: int, height: int) -> bool:
     return 512 <= min(width, height) <= max(width, height) <= 672
+
+
+def jpeg_diagonal_size(width: int, height: int) -> bool:
+    short, long = sorted((width, height))
+    return short >= 512 and 608 <= long <= 704
+
+
+def jpeg_diagonal_displacement(boxes, transform):
+    """Project the relative displacement onto the diagonal in native pixel coordinates."""
+    (ax, ay, aw, ah), (bx, by, _, _) = boxes
+    if transform == DIAGONAL_TRANSFORMS[0]:
+        return abs((bx - ay) + (by - ax))
+    if transform == DIAGONAL_TRANSFORMS[1]:
+        return abs((bx + ay + ah) - (by + ax + aw))
+    raise ValueError("A diagonal JPEG witness has an invalid reflection direction")
+
+
+def jpeg_diagonal_admitted(document: dict) -> bool:
+    if (document["version"] != JPEG_DIAGONAL_VERSION
+            or not jpeg_diagonal_size(document["source"]["width"], document["source"]["height"])):
+        return False
+    translation = document["copy_translation"]
+    return (
+        translation["basis"] in {None, JPEG_DIAGONAL_BASIS}
+        and translation["jpeg_block_review"] == "no_pair"
+        and (translation["jpeg_offgrid_review"] or {}).get("status") == "no_pair"
+        and (translation["jpeg_turned_review"] or {}).get("status") == "no_pair"
+        and all(document[key]["status"] in {"no_pair", "unsupported_geometry"}
+                for key in ("copy_similarity", "copy_affine"))
+    )
 
 
 def disjoint_copy_regions(first, second) -> bool:
@@ -390,6 +437,22 @@ def _validate_turned_jpeg(record: dict | None, offgrid_review: dict | None, *, e
     return int(_validate_jpeg_measurement(measurement))
 
 
+def _validate_jpeg_diagonal(document: dict, record: dict) -> bool:
+    review = record[JPEG_DIAGONAL_KEY]
+    if not jpeg_diagonal_admitted(document):
+        if review is not None:
+            raise ValueError("Diagonal JPEG coverage differs from the earlier checks or source geometry")
+        return False
+    if not isinstance(review, dict) or set(review) != {"status", "measurement"}:
+        raise ValueError("Diagonal JPEG evidence lacks its completed comparison")
+    measured = review["measurement"]
+    if (review["status"] not in JPEG_DIAGONAL_COVERAGE
+            or (review["status"] == "supported_pair") != (measured is not None)
+            or (review["status"] != "unsupported_profile" and document["source"]["exif_orientation"] != 1)):
+        raise ValueError("Diagonal JPEG coverage differs from the recorded source or comparison")
+    return _validate_jpeg_measurement(measured)
+
+
 def _validate_jpeg_measurement(measurement: dict | None) -> bool:
     if measurement is None:
         return False
@@ -441,6 +504,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     has_jpeg_review = not reflected and document["version"] in JPEG_BLOCK_VERSIONS
     has_offgrid_review = not reflected and document["version"] in JPEG_OFFGRID_VERSIONS
     has_turned_jpeg_review = not reflected and document["version"] in TURNED_JPEG_VERSIONS
+    has_diagonal_jpeg_review = not reflected and document["version"] == JPEG_DIAGONAL_VERSION
     webp = not reflected and document["version"] in WEBP_EXACT_COPY_VERSIONS
     reflection_review = not reflected and document["version"] in EXACT_REFLECTION_VERSIONS
     multi_enabled = not reflected and document["version"] in MULTI_EXACT_VERSIONS
@@ -469,6 +533,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         fields.add("jpeg_offgrid_review")
     if has_turned_jpeg_review:
         fields.add("jpeg_turned_review")
+    if has_diagonal_jpeg_review:
+        fields.add(JPEG_DIAGONAL_KEY)
     if has_exact_review:
         fields.add(exact_key)
     if reflection_review:
@@ -487,6 +553,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         interpretation = EXACT_DIAGONAL_NOTE if diagonal_pair else EXACT_REFLECTION_NOTE
     if multi_enabled and record.get("basis") == MULTI_EXACT_BASIS:
         interpretation = MULTI_EXACT_NOTE
+    if has_diagonal_jpeg_review and record[JPEG_DIAGONAL_KEY] is not None:
+        interpretation = JPEG_DIAGONAL_NOTE
     if (
         record["schema"] != (SCHEMA if reflected else TRANSLATION_SCHEMA)
         or record["source_sha256"] != document["source"]["sha256"]
@@ -539,6 +607,9 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
             raise ValueError("Native rotation evidence differs from its recorded source or result")
     if turned_jpeg_pair and len(pairs) != turned_jpeg_pair:
         raise ValueError("Rotated JPEG evidence must contain the recorded measured pairs")
+    diagonal_jpeg_pair = has_diagonal_jpeg_review and _validate_jpeg_diagonal(document, record)
+    if diagonal_jpeg_pair and len(pairs) != 1:
+        raise ValueError("Diagonal JPEG evidence must contain its single measured pair")
     reflected_exact_pair = False
     if reflection_review and (reflection := record[reflection_key]) is not None:
         reflected_exact_pair = _validate_exact_copy(reflection)
@@ -567,6 +638,8 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
             expected = (OFFGRID_BASIS,)
         if turned_jpeg_pair:
             expected = (TURNED_JPEG_BASIS,)
+        if diagonal_jpeg_pair:
+            expected = (JPEG_DIAGONAL_BASIS,)
         if exact_pair:
             if webp:
                 expected = (WEBP_EXACT_COPY_BASIS,)
@@ -583,7 +656,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
     if has_jpeg_review:
         jpeg_status = record["jpeg_block_review"]
         if (jpeg_status is not None and (jpeg_status not in JPEG_BLOCK_STATUS_TEXT
-                or (status != "no_pair" and not (status == "supported_pair" and (jpeg_pair or offgrid_pair or turned_jpeg_pair)))
+                or (status != "no_pair" and not (status == "supported_pair" and (jpeg_pair or offgrid_pair or turned_jpeg_pair or diagonal_jpeg_pair)))
                 or (jpeg_status != "unsupported_profile" and document["source"]["exif_orientation"] != 1))
                 or jpeg_pair and not pairs):
             raise ValueError("JPEG block coverage differs from the completed copy check")
@@ -594,6 +667,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
                       (*REFLECTION_TRANSFORMS, *PNG_COPY_TURNS) if multi_values else
                       (*REFLECTION_TRANSFORMS, *DIAGONAL_TRANSFORMS) if reflected_exact_pair and diagonal_enabled else
                       REFLECTION_TRANSFORMS if reflected_exact_pair else
+                      DIAGONAL_TRANSFORMS if diagonal_jpeg_pair else
                       tuple(PNG_COPY_TRANSFORMS.values()) if record.get("basis") == WEBP_EXACT_COPY_BASIS else
                       (PNG_COPY_TRANSFORMS[1], PNG_COPY_TRANSFORMS[2]) if turned else ("same_orientation",))
         if (
@@ -624,7 +698,7 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
         bx, by, bw, bh = boxes[1]
         overlaps = ax < bx + bw and bx < ax + aw and ay < by + bh and by < ay + ah
         equal_size = (reflected or offgrid_pair or exact_pair or reflected_exact_pair or bool(multi_values) or turned_jpeg_pair
-                      or record.get("basis") in {"native_patch_alignment", JPEG_BLOCK_BASIS})
+                      or diagonal_jpeg_pair or record.get("basis") in {"native_patch_alignment", JPEG_BLOCK_BASIS})
         swaps_dimensions = pair["transform"] == PNG_COPY_TRANSFORMS[1] or pair["transform"] in DIAGONAL_TRANSFORMS
         aligned_size = (bh, bw) if swaps_dimensions else (bw, bh)
         if overlaps or (equal_size and (aw, ah) != aligned_size):
@@ -648,6 +722,9 @@ def _validate_check(document: dict, record: dict, size: tuple[int, int], support
             raise ValueError("Between-block JPEG pair is outside its measured geometry")
         if turned_jpeg_pair and not OFFGRID_MIN_SIDE <= min(aw, ah) <= max(aw, ah) <= OFFGRID_MAX_SIDE:
             raise ValueError("Rotated JPEG pair is outside its measured geometry")
+        if diagonal_jpeg_pair and (not OFFGRID_MIN_SIDE <= min(aw, ah) <= max(aw, ah) <= OFFGRID_MAX_SIDE
+                                   or jpeg_diagonal_displacement(boxes, pair["transform"]) < JPEG_DIAGONAL_MIN_PARALLEL_SUM):
+            raise ValueError("Diagonal JPEG crops are outside the bounded local comparison")
         measured_boxes.append(boxes)
     if len(multi_values) == 3 and not three_exact_profile(size, (pair["transform"] for pair in pairs)):
         raise ValueError("The three exact copy pairs are outside the supported raster or transform profile")

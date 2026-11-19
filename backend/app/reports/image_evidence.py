@@ -115,6 +115,8 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
         DIAGONAL_TRANSFORMS,
         EXACT_REFLECTION_VERSIONS,
         JPEG_BLOCK_STATUS_TEXT,
+        JPEG_DIAGONAL_COVERAGE,
+        JPEG_DIAGONAL_KEY,
         MULTI_EXACT_KEY,
         MULTI_EXACT_STATUS,
         NATIVE_JPEG_ROTATION_VERSIONS,
@@ -230,6 +232,20 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
                     perimeter = ", ".join(f"{value:.2f}" for value in measured["perimeter_mean_absolute_difference"])
                     check["basis_text"] += (f" Compared {measured['matching_pixels']:,} RGB pixels in each crop. "
                                             f"Mean surrounding differences (top, bottom, left, right) {perimeter} of 255 levels.")
+            elif review := check.get(JPEG_DIAGONAL_KEY):
+                check["title"] = "JPEG diagonal copy comparison"
+                check["observation"] = JPEG_DIAGONAL_COVERAGE[review["status"]]
+                if measured := review["measurement"]:
+                    transform = check["pairs"][0]["transform"]
+                    axis = ("top-left to bottom-right" if transform == "top_left_to_bottom_right"
+                            else "top-right to bottom-left")
+                    check["observation"] = f"Area B closely matches Area A after reflection across its {axis} diagonal."
+                    perimeter = ", ".join("unavailable" if value is None else f"{value:.2f}"
+                                          for value in measured["perimeter_means"])
+                    check["basis_text"] = (f"{JPEG_DIAGONAL_COVERAGE['supported_pair']} Mean RGB difference in the "
+                                           f"smoothed interior was {measured['interior_mean']:.2f} of 255 levels, "
+                                           "excluding a six-pixel border. Surrounding differences "
+                                           f"(left, right, top, bottom) {perimeter}.")
             elif review := check.get("jpeg_turned_review") or check.get("jpeg_offgrid_review"):
                 turned_jpeg = check.get("jpeg_turned_review") is not None
                 statuses = TURNED_JPEG_STATUS_TEXT if turned_jpeg else OFFGRID_STATUS_TEXT

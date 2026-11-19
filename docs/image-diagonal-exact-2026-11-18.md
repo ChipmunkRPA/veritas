@@ -106,8 +106,8 @@ and missed the fixed control and location criteria. In both encodings, one
 pair overlapped the intended feathered edit and its source with a smaller
 intersection over union of 0.499. Two mirror controls at each setting yielded
 matching crops that should have been recognized as part of a larger pattern.
-Other transformation controls added no diagonal alerts. The JPEG candidate
-is still experimental. The app continues to serve the existing image checks.
+Other transformation controls added no diagonal alerts. The original JPEG
+candidate remained experimental after these two comparisons.
 
 The [first panel](evaluation-panels/image-jpeg-diagonal-pilot-2026-11-18.json.gz)
 and [second panel](evaluation-panels/image-jpeg-diagonal-confirmation-2026-11-18.json.gz)
@@ -118,3 +118,46 @@ reported locations and control alerts with the standard library.
 python3 -B -I -S backend/scripts/review_image_jpeg_diagonal.py docs/evaluation-panels/image-jpeg-diagonal-pilot-2026-11-18.json.gz
 python3 -B -I -S backend/scripts/review_image_jpeg_diagonal.py docs/evaluation-panels/image-jpeg-diagonal-confirmation-2026-11-18.json.gz
 ```
+
+## Local JPEG comparison after the mirror test
+
+The local JPEG option applies to upright color JPEGs with the standard
+JPEG 75 tables and 4:2:0 color sampling. It compares the two original crops
+after reversing one across a diagonal. The check withholds pairs whose
+relative movement along that diagonal projects to less than eight pixels
+in each coordinate. A near-axis match can be part of a larger mirror
+pattern. Earlier copy checks keep precedence. The finding carries zero
+weight in AI authorship confidence.
+
+The separate test used original photos from ten different camera sources
+and six distinct patterned groups, including four authored repeated layouts.
+The test used 640 × 512, 544 × 608, and 704 × 512 pixels. The local option
+covers a short side of at least 512 px and a long side of 608–704 px.
+The reported error counts apply to the three measured sizes.
+
+| Result | JPEG 75 | JPEG 90 |
+| --- | ---: | ---: |
+| Existing check located the authored displaced copy | 0/30 | 0/30 |
+| With the diagonal check | 13/30 | 11/30 |
+| Camera sources with a new correct location | 5/10 | 5/10 |
+| Added ordinary alerts | 0/32 | 1/32 |
+| Added whole-image mirror alerts | 0/32 | 0/32 |
+| Added rotated-copy control alerts | 0/10 | 0/10 |
+| New misplaced or partial locations | 0 | 0 |
+
+The guard suppressed the single whole-mirror alert made without the guard
+at JPEG 75. At each setting it also withheld five correctly located local
+copies placed on a shared diagonal. This is a deliberate coverage limit
+for this comparison. JPEG 75 passed the predefined evaluation criteria.
+JPEG 90 fell one correct location short of the minimum of 12, and the
+result for its one added ordinary alert was on an untouched photo.
+The independent recount reproduced all 248 deliveries' schedule and paired
+geometry. [Evaluation receipt](evaluation-panels/image-jpeg-diagonal-displacement-2026-11-18.json)
+
+The isolated local application completed eight analyses after simulated
+checkout. It rendered four original crop links in the browser and kept the
+same image assessment for both examples with the option on and off. Every
+PDF and JSON export matched the evidence on file, and the offline verifier
+replayed all eight signed packages against the submitted JPEGs. Ordinary,
+mirror, same-axis local, and other-compression controls produced no
+diagonal pair. [Local application receipt](evaluation-panels/image-jpeg-diagonal-displacement-app-2026-11-18.json)

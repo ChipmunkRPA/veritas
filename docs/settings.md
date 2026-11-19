@@ -145,6 +145,7 @@ The service defines its settings in `backend/app/core/config.py`.
 | `VERITAS_IMAGE_DISJOINT_EXACT_COPY_REVIEW` | `true` \| `false` | `false` | Optional development-only evidence for independent pixel matches in two pairs of lossless crops. |
 | `VERITAS_IMAGE_THREE_EXACT_COPY_REVIEW` | `true` \| `false` | `false` | Also check for three distinct exact copy pairs in supported 512 × 512 upright lossless PNG or WebP images when disjoint copy review is enabled. |
 | `VERITAS_IMAGE_DIAGONAL_EXACT_COPY_REVIEW` | `true` \| `false` | `false` | Optional development-only exact diagonal copy evidence for upright, opaque PNG or lossless WebP with each side from 512 to 672 pixels. Requires disjoint, three-pair, and affine copy review. |
+| `VERITAS_IMAGE_JPEG_DIAGONAL_COPY_REVIEW` | `true` \| `false` | `false` | Optional development-only paired crops for supported upright JPEGs with standard JPEG 75 compression tables. Runs after the existing block, between-block, rotation and affine comparisons leave no pair. Requires existing affine, rotated JPEG, native rotation, and disjoint rotation options. |
 
 ## Metadata (I-3)
 

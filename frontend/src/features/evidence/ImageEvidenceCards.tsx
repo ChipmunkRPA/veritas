@@ -222,12 +222,14 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const pngReflectionVersion = ['image-evidence-36', 'image-evidence-37', 'image-evidence-38', 'image-evidence-39', 'image-evidence-42', 'image-evidence-43', 'image-evidence-46'].includes(baseVersion)
   const threePairScope = (diagonalVersion || ['image-evidence-42', 'image-evidence-43', 'image-evidence-44', 'image-evidence-45'].includes(baseVersion))
     && set.source.width === 512 && set.source.height === 512
+  const diagonalJpeg = field === 'copy_translation' ? set.copy_translation?.jpeg_diagonal_review : undefined
   const heading = geometric ? 'Geometric copy comparison' : reflected ? 'Same-image copy similarity'
+    : diagonalJpeg ? 'JPEG diagonal copy comparison'
     : webpReflectionVersion || pngReflectionVersion ? 'Exact and geometric copy comparisons' : 'Copy similarity without mirroring'
   const turnedReview = pngReflectionVersion || ['image-evidence-22', 'image-evidence-23'].includes(baseVersion)
-  const nativeJpegVersion = ['image-evidence-28', 'image-evidence-29', 'image-evidence-30', 'image-evidence-31'].includes(baseVersion)
+  const nativeJpegVersion = ['image-evidence-28', 'image-evidence-29', 'image-evidence-30', 'image-evidence-31', 'image-evidence-48'].includes(baseVersion)
   const webpVersion = baseVersion === 'image-evidence-32' || baseVersion === 'image-evidence-33' || webpReflectionVersion
-  const wide = (geometric && (diagonalVersion || ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29', 'image-evidence-31', 'image-evidence-33', 'image-evidence-35', 'image-evidence-37', 'image-evidence-39', 'image-evidence-41', 'image-evidence-43', 'image-evidence-45'].includes(baseVersion)))
+  const wide = (geometric && (diagonalVersion || baseVersion === 'image-evidence-48' || ['image-evidence-14', 'image-evidence-17', 'image-evidence-19', 'image-evidence-21', 'image-evidence-23', 'image-evidence-25', 'image-evidence-27', 'image-evidence-29', 'image-evidence-31', 'image-evidence-33', 'image-evidence-35', 'image-evidence-37', 'image-evidence-39', 'image-evidence-41', 'image-evidence-43', 'image-evidence-45'].includes(baseVersion)))
     || (reflected && (turnedReview || ['image-evidence-9', 'image-evidence-10', 'image-evidence-11', 'image-evidence-12',
       'image-evidence-13', 'image-evidence-14', 'image-evidence-16', 'image-evidence-17', 'image-evidence-18',
       'image-evidence-19', 'image-evidence-20', 'image-evidence-21', 'image-evidence-24', 'image-evidence-25',
@@ -266,8 +268,20 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const exactReflection = basis === 'webp_exact_reflected_copy' || basis === 'png_exact_reflected_copy'
   const exactReview = reflection ?? (field === 'copy_translation' ? set.copy_translation?.webp_exact_copy_review : undefined)
   const transform = set.copy_translation?.pairs[0]?.transform
-  const diagonal = exactReflection && diagonalScope && (transform === 'top_left_to_bottom_right' ? 'top-left to bottom-right'
-    : transform === 'top_right_to_bottom_left' ? 'top-right to bottom-left' : undefined)
+  const diagonalAxis = transform === 'top_left_to_bottom_right' ? 'top-left to bottom-right'
+    : transform === 'top_right_to_bottom_left' ? 'top-right to bottom-left' : undefined
+  const diagonal = exactReflection && diagonalScope && diagonalAxis
+  const approximateDiagonal = diagonalJpeg?.status === 'supported_pair' && diagonalAxis
+  const diagonalJpegStatus = {
+    ...turnedJpegCoverageText,
+    supported_pair: 'The aligned interiors have closely matching colors, with greater differences on at least three surrounding sides.',
+    no_pair: 'The diagonal JPEG check found no qualifying pair.',
+    same_axis: 'The match could be part of a larger mirror pattern, so this check withheld the local pair.',
+    ambiguous: 'Several pairs fit the diagonal check, so this check withheld a distinct comparison.',
+    unavailable: 'The diagonal JPEG check could not complete.',
+    unassessed_match_budget: 'Too many matching areas prevented a distinct diagonal comparison.',
+    unsupported_profile: 'The diagonal check covers upright color images with the tested JPEG 75 compression tables.',
+  }
   const turned = (basis === 'png_exact_turned_copy' || basis === 'jpeg_turned_copy' || (basis === 'webp_exact_copy' && transform !== 'same_orientation')) && transform
   const rotation = turned === 'rotate_90_ccw' ? '90° counterclockwise' : '180°'
   let exactObservation: string | undefined
@@ -307,17 +321,19 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   const interpretation = field === 'copy_translation' && (webpVersion || pngReflectionVersion) && !check.pairs.length
     ? 'Copy comparisons look for repeated image detail. The origin of the image and AI involvement remain undetermined.'
     : check.interpretation
-  const colorMeasurement = turnedJpeg?.measurement ?? offgrid?.measurement
+  const colorMeasurement = diagonalJpeg?.measurement ?? turnedJpeg?.measurement ?? offgrid?.measurement
   const basisText = exactReview?.status === 'supported_pair' ? 'Pixels outside the aligned crops differ on at least three sides.' : smallPng && !reflection
     ? turned ? 'After alignment, pixels outside the crops differ on at least three sides.'
       : turnedReview && smallPng.status === 'no_pair' ? 'The small-copy check found no qualifying exact pair with or without right-angle rotation.'
         : smallPngCoverageText[smallPng.status]
-    : turnedJpeg ? turnedJpegCoverageText[turnedJpeg.status]
+    : diagonalJpeg ? diagonalJpegStatus[diagonalJpeg.status]
+      : turnedJpeg ? turnedJpegCoverageText[turnedJpeg.status]
       : offgrid ? offgridCoverageText[offgrid.status] : jpegReview ? jpegCoverageText[jpegReview]
         : basis && basis in copyBasisText && check.pairs.length > 0 && copyBasisText[basis as keyof typeof copyBasisText]
   const proposalSearch = geometric ? set.copy_affine?.proposal_search : undefined
   const statusText = {
-    supported_pair: separateMeasurements ? 'Two separate pairs of rotated areas share closely matching detail.'
+    supported_pair: approximateDiagonal ? `Area B closely matches Area A after reflection across its ${approximateDiagonal} diagonal.`
+      : separateMeasurements ? 'Two separate pairs of rotated areas share closely matching detail.'
       : turned ? `Area B ${basis === 'jpeg_turned_copy' ? 'closely matches Area A' : 'matches Area A exactly'} after rotating it ${rotation}.`
       : geometric ? 'Matching detail was found after geometric alignment.'
       : reflected ? 'Similar areas were found after horizontal reflection.' : 'Similar image detail was found without mirroring.',
@@ -331,10 +347,10 @@ function CopySimilarity({ set, field, token, mediaReady }: {
   return <section className="mt-5 rounded-md border border-border p-4" aria-labelledby={`${sectionId}-heading`}>
     <h3 id={`${sectionId}-heading`} className="m-0 text-body font-medium text-text">{heading}</h3>
     <p className="mt-2 mb-0 text-small text-text">{multi?.status === 'supported_pair' ? multiStatus.supported_pair
-      : exactObservation ?? (nativeJpeg && check.status === 'no_pair' ? basisText : statusText[check.status])}</p>
+      : exactObservation ?? ((diagonalJpeg || nativeJpeg) && check.status === 'no_pair' ? basisText : statusText[check.status])}</p>
     <p className="mt-2 mb-0 text-small text-text-muted">{interpretation}</p>
     {!reflected && <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero weight in AI authorship confidence.</p>}
-    {basisText && (!nativeJpeg || check.status !== 'no_pair') && <p className="mt-2 mb-0 text-caption text-text-muted">{basisText}</p>}
+    {basisText && (!(nativeJpeg || diagonalJpeg) || check.status !== 'no_pair') && <p className="mt-2 mb-0 text-caption text-text-muted">{basisText}</p>}
     {exactScope && <p className="mt-2 mb-0 text-caption text-text-muted">{exactScope}</p>}
     {multi && multi.status !== 'supported_pair' && <p className="mt-2 mb-0 text-caption text-text-muted">{multiStatus[multi.status]}</p>}
     {nativeJpeg && check.status === 'supported_pair' && <p className="mt-2 mb-0 text-caption text-text-muted">
@@ -348,7 +364,8 @@ function CopySimilarity({ set, field, token, mediaReady }: {
       Mean surrounding differences (top, bottom, left, right) {exactMeasurement.perimeter_mean_absolute_difference.map(value => value.toFixed(2)).join(', ')} of 255 levels.
     </p>}
     {colorMeasurement && <p className="mt-2 mb-0 text-caption text-text-muted">
-      Mean RGB difference inside {colorMeasurement.interior_mean.toFixed(2)} of 255 levels.
+      {diagonalJpeg ? `Mean RGB difference in the smoothed interior was ${colorMeasurement.interior_mean.toFixed(2)} of 255 levels, excluding a six-pixel border.`
+        : `Mean RGB difference inside ${colorMeasurement.interior_mean.toFixed(2)} of 255 levels.`}
       Surrounding differences (left, right, top, bottom) {colorMeasurement.perimeter_means.map(value => value?.toFixed(2) ?? 'unavailable').join(', ')}.
     </p>}
     {proposalSearch?.basis === 'reduced' && <p className="mt-2 mb-0 text-caption text-text-muted">The candidate search used a {proposalSearch.width} × {proposalSearch.height} pixel working image. The check measured any matching masks on the original pixel grid.</p>}
@@ -357,7 +374,7 @@ function CopySimilarity({ set, field, token, mediaReady }: {
       const exactPair = multi?.measurements[pairIndex]
       const alignment = exactPair && 'transform' in pair ? multiAlignments[pair.transform] : undefined
       return <article key={pair.id} className="mt-4 border-t border-border pt-4">
-        <h4 className="m-0 text-small font-medium text-text">{pair.id} · {alignment?.[0] ?? (diagonal ? 'Exact diagonally reflected pair' : exactReflection ? 'Exact reflected pair' : basis === 'jpeg_turned_copy' ? 'Rotated JPEG pair' : turned ? 'Exact rotated pair' : basis === 'webp_exact_copy' ? 'Exact copy pair' : geometric ? 'Matched source areas' : reflected ? 'Reflected pair' : 'Non-mirrored pair')}</h4>
+        <h4 className="m-0 text-small font-medium text-text">{pair.id} · {alignment?.[0] ?? (diagonal ? 'Exact diagonally reflected pair' : exactReflection ? 'Exact reflected pair' : approximateDiagonal ? 'Diagonally aligned JPEG pair' : basis === 'jpeg_turned_copy' ? 'Rotated JPEG pair' : turned ? 'Exact rotated pair' : basis === 'webp_exact_copy' ? 'Exact copy pair' : geometric ? 'Matched source areas' : reflected ? 'Reflected pair' : 'Non-mirrored pair')}</h4>
         {exactPair && alignment && <p className="mt-2 mb-0 text-caption text-text-muted">
           {alignment[1]} Compared {exactPair.matching_pixels.toLocaleString('en-US')} RGB pixels in each crop.{' '}
           Mean surrounding differences (top, bottom, left, right) {exactPair.perimeter_mean_absolute_difference.map(value => value.toFixed(2)).join(', ')} of 255 levels.

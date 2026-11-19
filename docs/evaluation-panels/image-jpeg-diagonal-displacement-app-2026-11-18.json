@@ -1,0 +1,68 @@
+{
+  "browser": {
+    "checked_cases": 8,
+    "page_errors": 0,
+    "verified_crop_links": 4
+  },
+  "cases": {
+    "enabled-local-top-left": {
+      "diagonal_status": "supported_pair",
+      "json_exact": true,
+      "pdf_exact": true,
+      "signed_source_replayed": true,
+      "source_crop_count": 2
+    },
+    "enabled-local-top-right": {
+      "diagonal_status": "supported_pair",
+      "json_exact": true,
+      "pdf_exact": true,
+      "signed_source_replayed": true,
+      "source_crop_count": 2
+    },
+    "enabled-local-within-axis": {
+      "diagonal_status": "same_axis",
+      "json_exact": true,
+      "pdf_exact": true,
+      "signed_source_replayed": true,
+      "source_crop_count": 0
+    },
+    "enabled-ordinary-photo": {
+      "diagonal_status": "no_pair",
+      "json_exact": true,
+      "pdf_exact": true,
+      "signed_source_replayed": true,
+      "source_crop_count": 0
+    },
+    "enabled-other-compression": {
+      "diagonal_status": "unsupported_profile",
+      "json_exact": true,
+      "pdf_exact": true,
+      "signed_source_replayed": true,
+      "source_crop_count": 0
+    },
+    "enabled-whole-mirror": {
+      "diagonal_status": "same_axis",
+      "json_exact": true,
+      "pdf_exact": true,
+      "signed_source_replayed": true,
+      "source_crop_count": 0
+    },
+    "off-local-top-left": {
+      "diagonal_status": null,
+      "json_exact": true,
+      "pdf_exact": true,
+      "signed_source_replayed": true,
+      "source_crop_count": 0
+    },
+    "off-local-top-right": {
+      "diagonal_status": null,
+      "json_exact": true,
+      "pdf_exact": true,
+      "signed_source_replayed": true,
+      "source_crop_count": 0
+    }
+  },
+  "paired_assessments_match": 2,
+  "simulated_paid": 8,
+  "unpaid_analyses": 0
+}

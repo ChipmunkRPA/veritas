@@ -1,0 +1,254 @@
+{
+  "cases": 248,
+  "encodings": {
+    "75": {
+      "gate_pass": true,
+      "roles": {
+        "anti_diagonal": {
+          "files": 10,
+          "guarded_flags": 5,
+          "new_guarded_correct": 5,
+          "new_unrestricted_correct": 5,
+          "off_target_guarded": 0,
+          "partially_located_guarded": 0,
+          "previously_located": 0,
+          "targeted_copies": 10,
+          "unrestricted_flags": 5
+        },
+        "blur": {
+          "files": 6,
+          "guarded_flags": 0,
+          "guarded_ordinary_flags": 0,
+          "unrestricted_flags": 0,
+          "unrestricted_ordinary_flags": 0
+        },
+        "diagonal": {
+          "files": 10,
+          "guarded_flags": 5,
+          "new_guarded_correct": 5,
+          "new_unrestricted_correct": 5,
+          "off_target_guarded": 0,
+          "partially_located_guarded": 0,
+          "previously_located": 0,
+          "targeted_copies": 10,
+          "unrestricted_flags": 5
+        },
+        "feathered_diagonal": {
+          "files": 10,
+          "guarded_flags": 3,
+          "new_guarded_correct": 3,
+          "new_unrestricted_correct": 3,
+          "off_target_guarded": 0,
+          "partially_located_guarded": 0,
+          "previously_located": 0,
+          "targeted_copies": 10,
+          "unrestricted_flags": 3
+        },
+        "ordinary_turn": {
+          "files": 10,
+          "guarded_flags": 0,
+          "guarded_transform_control_flags": 0,
+          "unrestricted_flags": 0
+        },
+        "same_axis_anti": {
+          "files": 10,
+          "guarded_flags": 0,
+          "scope_excluded_copies": 10,
+          "scope_excluded_current_correct": 0,
+          "scope_excluded_guarded_correct": 0,
+          "scope_excluded_unrestricted_correct": 3,
+          "unrestricted_flags": 3
+        },
+        "same_axis_local": {
+          "files": 10,
+          "guarded_flags": 0,
+          "scope_excluded_copies": 10,
+          "scope_excluded_current_correct": 0,
+          "scope_excluded_guarded_correct": 0,
+          "scope_excluded_unrestricted_correct": 2,
+          "unrestricted_flags": 2
+        },
+        "tone": {
+          "files": 10,
+          "guarded_flags": 0,
+          "guarded_ordinary_flags": 0,
+          "unrestricted_flags": 0,
+          "unrestricted_ordinary_flags": 0
+        },
+        "unchanged": {
+          "files": 16,
+          "guarded_flags": 0,
+          "guarded_ordinary_flags": 0,
+          "unrestricted_flags": 0,
+          "unrestricted_ordinary_flags": 0
+        },
+        "whole_anti": {
+          "files": 16,
+          "guarded_flags": 0,
+          "guarded_mirror_flags": 0,
+          "unrestricted_flags": 0,
+          "unrestricted_mirror_flags": 0
+        },
+        "whole_diagonal": {
+          "files": 16,
+          "guarded_flags": 0,
+          "guarded_mirror_flags": 0,
+          "unrestricted_flags": 1,
+          "unrestricted_mirror_flags": 1
+        }
+      },
+      "total": {
+        "files": 124,
+        "guarded_flags": 13,
+        "guarded_gaining_source_groups": 5,
+        "guarded_mirror_flags": 0,
+        "guarded_ordinary_flags": 0,
+        "guarded_ordinary_source_groups": 0,
+        "guarded_transform_control_flags": 0,
+        "new_guarded_correct": 13,
+        "new_unrestricted_correct": 13,
+        "off_target_guarded": 0,
+        "partially_located_guarded": 0,
+        "previously_located": 0,
+        "scope_excluded_copies": 20,
+        "scope_excluded_current_correct": 0,
+        "scope_excluded_guarded_correct": 0,
+        "scope_excluded_unrestricted_correct": 5,
+        "targeted_copies": 30,
+        "unrestricted_flags": 19,
+        "unrestricted_mirror_flags": 1,
+        "unrestricted_ordinary_flags": 0,
+        "unrestricted_ordinary_source_groups": 0
+      }
+    },
+    "90": {
+      "gate_pass": false,
+      "roles": {
+        "anti_diagonal": {
+          "files": 10,
+          "guarded_flags": 4,
+          "new_guarded_correct": 4,
+          "new_unrestricted_correct": 4,
+          "off_target_guarded": 0,
+          "partially_located_guarded": 0,
+          "previously_located": 0,
+          "targeted_copies": 10,
+          "unrestricted_flags": 4
+        },
+        "blur": {
+          "files": 6,
+          "guarded_flags": 0,
+          "guarded_ordinary_flags": 0,
+          "unrestricted_flags": 0,
+          "unrestricted_ordinary_flags": 0
+        },
+        "diagonal": {
+          "files": 10,
+          "guarded_flags": 5,
+          "new_guarded_correct": 5,
+          "new_unrestricted_correct": 5,
+          "off_target_guarded": 0,
+          "partially_located_guarded": 0,
+          "previously_located": 0,
+          "targeted_copies": 10,
+          "unrestricted_flags": 5
+        },
+        "feathered_diagonal": {
+          "files": 10,
+          "guarded_flags": 2,
+          "new_guarded_correct": 2,
+          "new_unrestricted_correct": 2,
+          "off_target_guarded": 0,
+          "partially_located_guarded": 0,
+          "previously_located": 0,
+          "targeted_copies": 10,
+          "unrestricted_flags": 2
+        },
+        "ordinary_turn": {
+          "files": 10,
+          "guarded_flags": 0,
+          "guarded_transform_control_flags": 0,
+          "unrestricted_flags": 0
+        },
+        "same_axis_anti": {
+          "files": 10,
+          "guarded_flags": 0,
+          "scope_excluded_copies": 10,
+          "scope_excluded_current_correct": 0,
+          "scope_excluded_guarded_correct": 0,
+          "scope_excluded_unrestricted_correct": 3,
+          "unrestricted_flags": 3
+        },
+        "same_axis_local": {
+          "files": 10,
+          "guarded_flags": 0,
+          "scope_excluded_copies": 10,
+          "scope_excluded_current_correct": 0,
+          "scope_excluded_guarded_correct": 0,
+          "scope_excluded_unrestricted_correct": 2,
+          "unrestricted_flags": 2
+        },
+        "tone": {
+          "files": 10,
+          "guarded_flags": 0,
+          "guarded_ordinary_flags": 0,
+          "unrestricted_flags": 0,
+          "unrestricted_ordinary_flags": 0
+        },
+        "unchanged": {
+          "files": 16,
+          "guarded_flags": 1,
+          "guarded_ordinary_flags": 1,
+          "unrestricted_flags": 1,
+          "unrestricted_ordinary_flags": 1
+        },
+        "whole_anti": {
+          "files": 16,
+          "guarded_flags": 0,
+          "guarded_mirror_flags": 0,
+          "unrestricted_flags": 0,
+          "unrestricted_mirror_flags": 0
+        },
+        "whole_diagonal": {
+          "files": 16,
+          "guarded_flags": 0,
+          "guarded_mirror_flags": 0,
+          "unrestricted_flags": 0,
+          "unrestricted_mirror_flags": 0
+        }
+      },
+      "total": {
+        "files": 124,
+        "guarded_flags": 12,
+        "guarded_gaining_source_groups": 5,
+        "guarded_mirror_flags": 0,
+        "guarded_ordinary_flags": 1,
+        "guarded_ordinary_source_groups": 1,
+        "guarded_transform_control_flags": 0,
+        "new_guarded_correct": 11,
+        "new_unrestricted_correct": 11,
+        "off_target_guarded": 0,
+        "partially_located_guarded": 0,
+        "previously_located": 0,
+        "scope_excluded_copies": 20,
+        "scope_excluded_current_correct": 0,
+        "scope_excluded_guarded_correct": 0,
+        "scope_excluded_unrestricted_correct": 5,
+        "targeted_copies": 30,
+        "unrestricted_flags": 17,
+        "unrestricted_mirror_flags": 0,
+        "unrestricted_ordinary_flags": 1,
+        "unrestricted_ordinary_source_groups": 1
+      }
+    }
+  },
+  "frozen_sha256": "8c1552b62e9c184c4cdb41ca1f565f7e0bd304bd4bb63f968a26724f653045a0",
+  "independent_numeric_recount_sha256": "b009794519217b18e233835d26476c324d124a989eef3c72bb2b407aee0da0a2",
+  "journal_sha256": "1853ac0a779fa0835665b53e9a61fe50646aef9850e252ac40ba0465b114e93e",
+  "scope": {
+    "camera_sources": 10,
+    "exposure": "Those inputs may have been used by prior studies of different image checks.",
+    "patterned_sources": 6,
+    "release_analysis_profile": "local optional, JPEG 75 only"
+  }
+}

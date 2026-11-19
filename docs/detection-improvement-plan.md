@@ -73,6 +73,18 @@ are not public screening promises or calibrated population probabilities.
   the crop coverage rule in 63 of 64 cases. It carries zero confidence weight.
   [Printed identifier comparison](image-printed-identifiers-2026-11-19.md)
 
+- Moving the image measurement grid changed the top region on many
+  infographics without locating any of 11 exact edits in either carrier.
+  All 546 location measurements were checked against their masks or
+  unedited controls. [Shifted-grid comparison](image-shifted-grid-transfer-2026-11-19.md)
+
+- Changing only a neighboring sentence moved the rolling-context
+  response in all 16 exact checks. Fixed context located two distinct
+  AI rewrites and flagged three of five ordinary source groups.
+  The sentence-only check located one distinct edit with zero ordinary
+  alerts in this small trial. Both remain in research.
+  [Neighboring-sentence comparison](writing-neighbor-factorial-2026-11-19.md)
+
 - Removing the interfering voice with known source components recovered
   zero of 12 short edits in reverberant recordings. All 12 clocks had
   usable speech windows in both views. The result directs the next test

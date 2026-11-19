@@ -20,7 +20,9 @@ records and recalculate results for [reflected PNG areas](image-png-reflection-2
 [speech isolation with matched Opus encoding](audio-isolation-by-codec-2026-11-18.md), and
 [short writing rewrites](writing-replaced-token-study-2026-11-18.md). It also replays
 the progressive JPEG, paired 44.1 kHz video, earlier-copy audio, and PDF
-disclosure receipts described below. For a replay that decodes the original
+disclosure receipts described below. The command includes the shifted-grid,
+expanded face, twelve-second speech, and neighboring-sentence comparisons.
+For a replay that decodes the original
 files or reruns inference, use the source preparation
 and native commands in each report.
 
@@ -48,6 +50,9 @@ tests text localization in both versions of 12 publisher-supplied pairs.
 The [matched infographic edit study](image-paired-residual-transfer-2026-11-19.md)
 compares paired and unpaired training across native-pixel PNG and JPEG
 quality 90 deliveries and publishes every held geometry count.
+The [shifted-grid infographic comparison](image-shifted-grid-transfer-2026-11-19.md)
+recounts 546 detector selections and compares three searches on the same
+native edit geometry.
 The [common-detail face comparison](video-face-common-detail-native30-2026-11-19.md)
 reports an exact three-frame recovery on held video and compares two ways of
 rejecting ordinary blur. The
@@ -66,6 +71,9 @@ so both advancement gates fail and the incumbent remains unchanged.
 The [sentence omission comparison](writing-sentence-omission-2026-11-19.md)
 checks whether a single-upload writing measurement points to the changed
 sentence or to a location that already scored in the untouched excerpt.
+The [neighboring-sentence comparison](writing-neighbor-factorial-2026-11-19.md)
+recounts exact edit sites and measures how much a changed neighbor can
+affect the score assigned to an unchanged sentence.
 
 The [paired soundtrack replay](video-short-phrase-reencode-2026-11-18.md#reproduce)
 recounts exact 16 kHz analysis locations under three audio-carrier pairings.

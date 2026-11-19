@@ -180,6 +180,15 @@ replay-evidence:  ## recount published image, video, audio, and writing evaluati
 		docs/evaluation-panels/audio-room-voice-recovery-ceiling-2026-11-19.json --self-test
 	python3 -I -S backend/scripts/review_audio_room_layer_short_transfer.py \
 		docs/evaluation-panels/audio-room-layer-short-transfer-2026-11-19.json --self-test
+	python3 -I -S backend/scripts/review_image_shifted_grid_transfer.py \
+		docs/evaluation-panels/image-shifted-grid-transfer-2026-11-19.json \
+		docs/evaluation-panels/image-shifted-grid-transfer-2026-11-19.jsonl.gz
+	python3 -I -S backend/scripts/review_video_expanded_common_detail.py \
+		docs/evaluation-panels/video-face-expanded-common-detail-native30-2026-11-19.json
+	python3 -I -S backend/scripts/review_audio_room_point12_confirmation.py \
+		docs/evaluation-panels/audio-room-point12-confirmation-2026-11-19.json --self-test
+	python3 -I -S backend/scripts/review_writing_neighbor_factorial.py \
+		docs/evaluation-panels/writing-neighbor-factorial-2026-11-19.json
 
 bench:            ## X-4 warm latency, stage / detector breakdown and memory per profile against the dev API (`make dev-api`; PROFILES=quick,full,deep ONLY=<labels> RUNS=<n> WORKER_PID=<pid> COVERAGE_CONTRACT=<json> PERF_OUT=<new-json>) → docs/v2/bench/perf.{json,md}
 	cd backend && { [ -f data/bench/perf/workloads.json ] || .venv/bin/python scripts/bench.py --make-workloads; }

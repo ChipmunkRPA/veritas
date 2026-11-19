@@ -172,6 +172,12 @@ replay-evidence:  ## recount published image, video, audio, and writing evaluati
 		docs/evaluation-panels/video-face-very-brief-ntsc-ordinary-supplement-2026-11-19.json
 	python3 -I -S backend/scripts/review_audio_spectra_original_one_second.py \
 		docs/evaluation-panels/audio-spectra-original-one-second-2026-11-19.json --self-test
+	python3 -I -S backend/scripts/review_image_printed_identifiers.py \
+		docs/evaluation-panels/image-printed-identifiers-2026-11-19.json
+	python3 -I -S backend/scripts/review_video_common_detail.py \
+		docs/evaluation-panels/video-face-common-detail-native30-2026-11-19.json
+	python3 -I -S backend/scripts/review_audio_room_voice_recovery_ceiling.py \
+		docs/evaluation-panels/audio-room-voice-recovery-ceiling-2026-11-19.json --self-test
 
 bench:            ## X-4 warm latency, stage / detector breakdown and memory per profile against the dev API (`make dev-api`; PROFILES=quick,full,deep ONLY=<labels> RUNS=<n> WORKER_PID=<pid> COVERAGE_CONTRACT=<json> PERF_OUT=<new-json>) → docs/v2/bench/perf.{json,md}
 	cd backend && { [ -f data/bench/perf/workloads.json ] || .venv/bin/python scripts/bench.py --make-workloads; }

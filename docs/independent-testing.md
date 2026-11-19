@@ -41,6 +41,17 @@ measure where brief swaps fail under blur. The
 [original-channel speech study](audio-original-channel-short-grid-2026-11-19.md)
 recounts the held two-voice and ordinary controls for short windows.
 
+The [printed identifier comparison](image-printed-identifiers-2026-11-19.md)
+compares the two explicitly linked fields in a single submitted image.
+The [common-detail face comparison](video-face-common-detail-native30-2026-11-19.md)
+reports an exact three-frame recovery on held video and compares two ways of
+rejecting ordinary blur. The
+[exact-room-voice experiment](audio-room-voice-recovery-ceiling-2026-11-19.md)
+tests whether removing overlapping speech alone recovers known edits.
+The [sentence omission comparison](writing-sentence-omission-2026-11-19.md)
+checks whether a single-upload writing measurement points to the changed
+sentence or to a location that already scored in the untouched excerpt.
+
 The [paired soundtrack replay](video-short-phrase-reencode-2026-11-18.md#reproduce)
 recounts exact 16 kHz analysis locations under three audio-carrier pairings.
 It includes two independent picture encodes with the same frame clock,

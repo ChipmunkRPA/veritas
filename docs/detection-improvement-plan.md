@@ -67,6 +67,23 @@ are not public screening promises or calibrated population probabilities.
 
 ## Latest checks added and evaluated locally
 
+- A single-image check displays two printed identifiers and their original
+  crops when an entry and its labeled confirmation conflict. It reproduced
+  all 64 held mismatches with zero alerts in 192 authored controls and met
+  the crop coverage rule in 63 of 64 cases. It carries zero confidence weight.
+  [Printed identifier comparison](image-printed-identifiers-2026-11-19.md)
+
+- Removing the interfering voice with known source components recovered
+  zero of 12 short edits in reverberant recordings. All 12 clocks had
+  usable speech windows in both views. The result directs the next test
+  toward room-transfer calibration. [Exact room voice diagnostic](audio-room-voice-recovery-ceiling-2026-11-19.md)
+
+- Equalizing sharpness among native face crops recovered one three-frame
+  blurred swap beyond the enabled Full check, with zero added alerts in
+  16 ordinary controls. An earlier correction recovered the same edit.
+  Eight ordinary files supported the candidate measurement. The check stays
+  offline pending more held cases. [Common-detail comparison](video-face-common-detail-native30-2026-11-19.md)
+
 - The 720p sustained face-transition comparison located all 12 staged
   boundaries at the exact frame. The existing short-return comparison
   found none of the 12. The new reading marked one ordinary focus change

@@ -1,0 +1,115 @@
+{
+  "admission_detail": {
+    "phoneme_transfer": {
+      "mixture_admitted_geometry_at_edit": 4,
+      "mixture_files_with_adjacent_speech": 4,
+      "oracle_admitted_geometry_at_edit": 4,
+      "oracle_files_with_adjacent_speech": 4
+    },
+    "stock_transfer": {
+      "mixture_admitted_geometry_at_edit": 8,
+      "mixture_files_with_adjacent_speech": 8,
+      "oracle_admitted_geometry_at_edit": 8,
+      "oracle_files_with_adjacent_speech": 8
+    }
+  },
+  "closed": true,
+  "counts": {
+    "phoneme_transfer": {
+      "geometrically_reachable": 4,
+      "mixture_brief_useful": 0,
+      "mixture_two_second_useful": 0,
+      "new_ordinary_stem_flags": 0,
+      "oracle_brief_clear_recoveries": 0,
+      "oracle_brief_useful": 0,
+      "oracle_two_second_useful": 0,
+      "ordinary_mixture_flags": 0,
+      "ordinary_mixture_observations": 8,
+      "ordinary_stem_flags": 0,
+      "ordinary_stem_observations": 8,
+      "voices": 4
+    },
+    "stock_transfer": {
+      "geometrically_reachable": 8,
+      "mixture_brief_useful": 0,
+      "mixture_two_second_useful": 1,
+      "new_ordinary_stem_flags": 0,
+      "oracle_brief_clear_recoveries": 0,
+      "oracle_brief_useful": 0,
+      "oracle_two_second_useful": 1,
+      "ordinary_mixture_flags": 0,
+      "ordinary_mixture_observations": 16,
+      "ordinary_stem_flags": 0,
+      "ordinary_stem_observations": 16,
+      "voices": 8
+    }
+  },
+  "elapsed_seconds": 194.4755275840289,
+  "frozen_gate": {
+    "both_cohorts": false,
+    "ordinary_stem_additions_within_budget": true,
+    "three_clear_recoveries": false,
+    "three_source_pairs": false,
+    "two_families": false
+  },
+  "limitations": [
+    "This is a source-informed recovery ceiling, not an extraction method available from an upload alone.",
+    "One measured room and six reader pairs form a bounded diagnostic, with prior source exposure to other checks.",
+    "The twelve source clocks are source-level observations rather than twelve independent generators.",
+    "Ordinary mixtures are counted once per target voice in paired summaries; there are twelve distinct ordinary mixture files.",
+    "Original source names, paths, offsets, individual waveform hashes, individual scores and features remain private."
+  ],
+  "paired_context_summary": {
+    "fully_admitted": 11,
+    "planned": 12,
+    "synthetic_above_genuine_in_both": 8
+  },
+  "production_activation_supported": false,
+  "publisher_sources": [
+    "https://zenodo.org/records/19522979",
+    "https://www.openslr.org/94/",
+    "https://huggingface.co/Sadanie/pellav2-audio-deepfake-detector"
+  ],
+  "schema": "chipmunk.room-voice-recovery-ceiling-aggregate/1",
+  "scope": {
+    "exact_room_voice_states": 36,
+    "measured_held_rooms": 1,
+    "mixtures": 30,
+    "native_seconds": 6,
+    "oracle_component_selection": true,
+    "ordinary_isolated_voice_observations": 24,
+    "ordinary_mixture_source_observations": 24,
+    "phoneme_pairs": 2,
+    "same_carrier_inputs": 66,
+    "sample_rate_hz": 16000,
+    "selected_reader_pairs": 6,
+    "source_generation_calls": 0,
+    "source_states_per_voice": 3,
+    "source_stereo_channels": 2,
+    "source_voice_instances": 12,
+    "stock_pairs": 4,
+    "unique_ordinary_mixture_files": 12
+  },
+  "source_procedure": "Retain exact room response, native PCM16 carrier, delivered levels and source clock; score production-decoded mono of the known mixture and exact component. Fixed two-second and adjacent 750 ms methods and points. No new separator, denoiser, weight, fit, cutoff or speech-admission variant.",
+  "speaker_attribution_supported": false,
+  "summary": {
+    "clear_recoveries": 0,
+    "gain_cohorts": 0,
+    "gain_families": 0,
+    "gain_source_pairs": 0,
+    "new_ordinary_stem_flags": 0
+  },
+  "supports_further_mixture_recovery_research": false,
+  "verification": {
+    "actual_classifier_calls": 521,
+    "authored_controls": 7,
+    "distinct_classifier_inputs": 520,
+    "exact_additive_stereo_sample_identities": 5760000,
+    "exact_initial_repeat": true,
+    "independent_outcomes_passed": true,
+    "native_inputs_checked": 66,
+    "source_window_admission_bindings": 1056
+  },
+  "whole_numeric_closure_commitment": "107c8c7069247bbe0f89bffb953fb1db2ec15e32600d7ef568c1bebe15d63901",
+  "whole_protocol_commitment": "2005b83b54464b42c1029832a98ff52bf2773e96e112234cb449a632165ba5db"
+}

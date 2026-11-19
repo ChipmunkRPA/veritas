@@ -1,0 +1,1064 @@
+{
+  "arms": {
+    "detail_pair": {
+      "geometry_true_pairs": 4,
+      "native_witnesses": 9,
+      "new_compound_exact": 1,
+      "new_exact_clean": 0,
+      "new_ordinary": 2,
+      "usable_ordinary": 8,
+      "view_coverage": 12,
+      "wrong_positive": 0
+    },
+    "guarded_detail_pair": {
+      "geometry_true_pairs": 4,
+      "native_witnesses": 3,
+      "new_compound_exact": 1,
+      "new_exact_clean": 0,
+      "new_ordinary": 0,
+      "usable_ordinary": 8,
+      "view_coverage": 12,
+      "wrong_positive": 0
+    },
+    "matched_detail": {
+      "geometry_true_pairs": 4,
+      "native_witnesses": 3,
+      "new_compound_exact": 1,
+      "new_exact_clean": 0,
+      "new_ordinary": 0,
+      "usable_ordinary": 8,
+      "view_coverage": 12,
+      "wrong_positive": 0
+    }
+  },
+  "by_role": {
+    "disc": {
+      "detail_pair_exact": 1,
+      "detail_pair_new": 1,
+      "detail_pair_usable": 4,
+      "files": 4,
+      "guarded_detail_pair_usable": 4,
+      "matched_detail_usable": 4,
+      "stock_exact": 0,
+      "stock_localized": 0,
+      "stock_unassessed": 1
+    },
+    "gaussian": {
+      "detail_pair_exact": 1,
+      "detail_pair_new": 1,
+      "detail_pair_usable": 4,
+      "files": 4,
+      "guarded_detail_pair_usable": 4,
+      "matched_detail_usable": 4,
+      "stock_exact": 0,
+      "stock_localized": 0,
+      "stock_unassessed": 1
+    },
+    "hard_cut": {
+      "detail_pair_usable": 0,
+      "files": 4,
+      "guarded_detail_pair_usable": 0,
+      "matched_detail_usable": 0,
+      "stock_exact": 0,
+      "stock_localized": 0,
+      "stock_unassessed": 2
+    },
+    "swap": {
+      "detail_pair_usable": 0,
+      "files": 4,
+      "guarded_detail_pair_usable": 0,
+      "matched_detail_usable": 0,
+      "stock_exact": 4,
+      "stock_localized": 4,
+      "stock_unassessed": 0
+    },
+    "swap_plus_blur": {
+      "detail_pair_exact": 1,
+      "detail_pair_new": 1,
+      "detail_pair_usable": 4,
+      "files": 4,
+      "guarded_detail_pair_exact": 1,
+      "guarded_detail_pair_new": 1,
+      "guarded_detail_pair_usable": 4,
+      "matched_detail_exact": 1,
+      "matched_detail_new": 1,
+      "matched_detail_usable": 4,
+      "stock_exact": 3,
+      "stock_localized": 3,
+      "stock_unassessed": 0
+    },
+    "untouched": {
+      "detail_pair_usable": 0,
+      "files": 4,
+      "guarded_detail_pair_usable": 0,
+      "matched_detail_usable": 0,
+      "stock_exact": 0,
+      "stock_localized": 0,
+      "stock_unassessed": 2
+    }
+  },
+  "exact_compound_gain_group_count": {
+    "detail_pair": 1,
+    "guarded_detail_pair": 1,
+    "matched_detail": 1
+  },
+  "files": 24,
+  "freeze_sha256": "520df07e299e9bfe62c75fea6ce56ead15d4b2f417a33c1050ae9f6d8a963d33",
+  "fresh_capture_count": 4,
+  "gate": {
+    "max_new_ordinary": 1,
+    "max_wrong_location": 1,
+    "min_added_exact_compounds": 2,
+    "min_gain_groups": 2,
+    "min_ordinary_usable": 6,
+    "require_existing_preserved": true
+  },
+  "match_journal_sha256": "7dad699bf772a43606b153a3f19fdef7f647a5662a2806bf6615100797c8cce7",
+  "observations": [
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [],
+          "new": null
+        }
+      },
+      "authored": null,
+      "group": 1,
+      "role": "untouched",
+      "stock": "unassessed",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [
+            [
+              91,
+              95
+            ]
+          ],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [
+            [
+              91,
+              95
+            ]
+          ],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [
+            [
+              91,
+              95
+            ]
+          ],
+          "new": null
+        }
+      },
+      "authored": [
+        91,
+        95
+      ],
+      "group": 1,
+      "role": "gaussian",
+      "stock": "unassessed",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [
+            [
+              91,
+              95
+            ]
+          ],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [
+            [
+              91,
+              95
+            ]
+          ],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [
+            [
+              91,
+              95
+            ]
+          ],
+          "new": null
+        }
+      },
+      "authored": [
+        91,
+        95
+      ],
+      "group": 1,
+      "role": "disc",
+      "stock": "unassessed",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [],
+          "new": null
+        }
+      },
+      "authored": [
+        91,
+        95
+      ],
+      "group": 1,
+      "role": "swap",
+      "stock": "localized",
+      "stock_range": [
+        91,
+        95
+      ],
+      "threshold": 0.1,
+      "truth": [
+        91,
+        95
+      ]
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [
+            [
+              91,
+              95
+            ]
+          ],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [
+            [
+              91,
+              95
+            ]
+          ],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [
+            [
+              91,
+              95
+            ]
+          ],
+          "new": null
+        }
+      },
+      "authored": [
+        91,
+        95
+      ],
+      "group": 1,
+      "role": "swap_plus_blur",
+      "stock": "localized",
+      "stock_range": [
+        91,
+        95
+      ],
+      "threshold": 0.1,
+      "truth": [
+        91,
+        95
+      ]
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [],
+          "new": null
+        }
+      },
+      "authored": [
+        91,
+        120
+      ],
+      "group": 1,
+      "role": "hard_cut",
+      "stock": "unassessed",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [],
+          "new": null
+        }
+      },
+      "authored": null,
+      "group": 2,
+      "role": "untouched",
+      "stock": "no_range",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [
+            [
+              67,
+              70
+            ]
+          ],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [
+            [
+              67,
+              70
+            ]
+          ],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [
+            [
+              67,
+              70
+            ]
+          ],
+          "new": null
+        }
+      },
+      "authored": [
+        67,
+        70
+      ],
+      "group": 2,
+      "role": "gaussian",
+      "stock": "no_range",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [
+            [
+              67,
+              70
+            ]
+          ],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [
+            [
+              67,
+              70
+            ]
+          ],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [
+            [
+              67,
+              70
+            ]
+          ],
+          "new": null
+        }
+      },
+      "authored": [
+        67,
+        70
+      ],
+      "group": 2,
+      "role": "disc",
+      "stock": "no_range",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [],
+          "new": null
+        }
+      },
+      "authored": [
+        67,
+        70
+      ],
+      "group": 2,
+      "role": "swap",
+      "stock": "localized",
+      "stock_range": [
+        67,
+        70
+      ],
+      "threshold": 0.1,
+      "truth": [
+        67,
+        70
+      ]
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [
+            [
+              67,
+              70
+            ]
+          ],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [
+            [
+              67,
+              70
+            ]
+          ],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [
+            [
+              67,
+              70
+            ]
+          ],
+          "new": null
+        }
+      },
+      "authored": [
+        67,
+        70
+      ],
+      "group": 2,
+      "role": "swap_plus_blur",
+      "stock": "localized",
+      "stock_range": [
+        67,
+        70
+      ],
+      "threshold": 0.1,
+      "truth": [
+        67,
+        70
+      ]
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [],
+          "new": null
+        }
+      },
+      "authored": [
+        67,
+        120
+      ],
+      "group": 2,
+      "role": "hard_cut",
+      "stock": "no_range",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [],
+          "new": null
+        }
+      },
+      "authored": null,
+      "group": 3,
+      "role": "untouched",
+      "stock": "no_range",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [
+            [
+              86,
+              90
+            ]
+          ],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [
+            [
+              86,
+              90
+            ]
+          ],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [
+            [
+              86,
+              90
+            ]
+          ],
+          "new": null
+        }
+      },
+      "authored": [
+        86,
+        90
+      ],
+      "group": 3,
+      "role": "gaussian",
+      "stock": "no_range",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [
+            [
+              86,
+              90
+            ]
+          ],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [
+            [
+              86,
+              90
+            ]
+          ],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [
+            [
+              86,
+              90
+            ]
+          ],
+          "new": null
+        }
+      },
+      "authored": [
+        86,
+        90
+      ],
+      "group": 3,
+      "role": "disc",
+      "stock": "no_range",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [],
+          "new": null
+        }
+      },
+      "authored": [
+        86,
+        90
+      ],
+      "group": 3,
+      "role": "swap",
+      "stock": "localized",
+      "stock_range": [
+        86,
+        90
+      ],
+      "threshold": 0.1,
+      "truth": [
+        86,
+        90
+      ]
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [
+            [
+              86,
+              90
+            ]
+          ],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [
+            [
+              86,
+              90
+            ]
+          ],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [
+            [
+              86,
+              90
+            ]
+          ],
+          "new": null
+        }
+      },
+      "authored": [
+        86,
+        90
+      ],
+      "group": 3,
+      "role": "swap_plus_blur",
+      "stock": "localized",
+      "stock_range": [
+        86,
+        90
+      ],
+      "threshold": 0.1,
+      "truth": [
+        86,
+        90
+      ]
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [],
+          "new": null
+        }
+      },
+      "authored": [
+        86,
+        120
+      ],
+      "group": 3,
+      "role": "hard_cut",
+      "stock": "no_range",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [],
+          "new": null
+        }
+      },
+      "authored": null,
+      "group": 4,
+      "role": "untouched",
+      "stock": "unassessed",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [
+            [
+              82,
+              85
+            ]
+          ],
+          "new": {
+            "range": [
+              82,
+              85
+            ],
+            "response_hex": "0x1.ed40914871c94p-3",
+            "witness_indexes_and_pts": [
+              [
+                81,
+                81000
+              ],
+              [
+                83,
+                83000
+              ],
+              [
+                85,
+                85000
+              ]
+            ]
+          }
+        },
+        "guarded_detail_pair": {
+          "evaluated": [
+            [
+              82,
+              85
+            ]
+          ],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [
+            [
+              82,
+              85
+            ]
+          ],
+          "new": null
+        }
+      },
+      "authored": [
+        82,
+        85
+      ],
+      "group": 4,
+      "role": "gaussian",
+      "stock": "no_range",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [
+            [
+              82,
+              85
+            ]
+          ],
+          "new": {
+            "range": [
+              82,
+              85
+            ],
+            "response_hex": "0x1.38103b2fd4656p-2",
+            "witness_indexes_and_pts": [
+              [
+                81,
+                81000
+              ],
+              [
+                83,
+                83000
+              ],
+              [
+                85,
+                85000
+              ]
+            ]
+          }
+        },
+        "guarded_detail_pair": {
+          "evaluated": [
+            [
+              82,
+              85
+            ]
+          ],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [
+            [
+              82,
+              85
+            ]
+          ],
+          "new": null
+        }
+      },
+      "authored": [
+        82,
+        85
+      ],
+      "group": 4,
+      "role": "disc",
+      "stock": "no_range",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [],
+          "new": null
+        }
+      },
+      "authored": [
+        82,
+        85
+      ],
+      "group": 4,
+      "role": "swap",
+      "stock": "localized",
+      "stock_range": [
+        82,
+        85
+      ],
+      "threshold": 0.1,
+      "truth": [
+        82,
+        85
+      ]
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [
+            [
+              82,
+              85
+            ]
+          ],
+          "new": {
+            "range": [
+              82,
+              85
+            ],
+            "response_hex": "0x1.2575d955528c7p-1",
+            "witness_indexes_and_pts": [
+              [
+                81,
+                81000
+              ],
+              [
+                83,
+                83000
+              ],
+              [
+                85,
+                85000
+              ]
+            ]
+          }
+        },
+        "guarded_detail_pair": {
+          "evaluated": [
+            [
+              82,
+              85
+            ]
+          ],
+          "new": {
+            "range": [
+              82,
+              85
+            ],
+            "response_hex": "0x1.2575d955528c7p-1",
+            "witness_indexes_and_pts": [
+              [
+                81,
+                81000
+              ],
+              [
+                83,
+                83000
+              ],
+              [
+                85,
+                85000
+              ]
+            ]
+          }
+        },
+        "matched_detail": {
+          "evaluated": [
+            [
+              82,
+              85
+            ]
+          ],
+          "new": {
+            "range": [
+              82,
+              85
+            ],
+            "response_hex": "0x1.949c618ddfefcp-2",
+            "witness_indexes_and_pts": [
+              [
+                81,
+                81000
+              ],
+              [
+                83,
+                83000
+              ],
+              [
+                85,
+                85000
+              ]
+            ]
+          }
+        }
+      },
+      "authored": [
+        82,
+        85
+      ],
+      "group": 4,
+      "role": "swap_plus_blur",
+      "stock": "no_range",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": [
+        82,
+        85
+      ]
+    },
+    {
+      "arms": {
+        "detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "guarded_detail_pair": {
+          "evaluated": [],
+          "new": null
+        },
+        "matched_detail": {
+          "evaluated": [],
+          "new": null
+        }
+      },
+      "authored": [
+        82,
+        120
+      ],
+      "group": 4,
+      "role": "hard_cut",
+      "stock": "unassessed",
+      "stock_range": null,
+      "threshold": 0.1,
+      "truth": null
+    }
+  ],
+  "passes": {
+    "detail_pair": false,
+    "guarded_detail_pair": false,
+    "matched_detail": false
+  },
+  "pilot_unmodified_point": 0.1,
+  "schema": "chipmunk.native30-common-detail/1",
+  "stock_journal_sha256": "3dc75482aa7380d6425239798f417fae4bc09a219396a50b2acb091b9741cea0"
+}

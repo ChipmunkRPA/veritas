@@ -14,7 +14,9 @@ try {
   const item = input.cases[0]
   const range = item.activity ? 'reduced speech activity' : 'near-silent'
   const title = item.activity ? 'Reduced speech activity during visible mouth movement' : 'Mouth movement with a near-silent soundtrack'
-  await page.goto(`${input.url}/analyses/${item.analysis_id}/media-evidence?view=plain`)
+  await page.goto(`${input.url}/analyses/${item.analysis_id}/media-evidence?view=plain#media-evidence-timing`)
+  await page.getByRole('tab', { name: /Audio\/picture timing/ }).waitFor()
+  assert.equal(await page.getByRole('tab', { name: /Audio\/picture timing/ }).getAttribute('aria-selected'), 'true')
   if (item.shot_count) {
     const coverage = page.getByRole('region', { name: 'Speech and mouth comparison' })
     await coverage.getByText('Mouth movement during a near-silent interval.', { exact: false }).waitFor()

@@ -15,7 +15,7 @@ try {
   const errors = []
   page.on('pageerror', error => errors.push(error.message))
   const [example] = input.cases
-  await page.goto(`${input.url}/analyses/${example.analysis_id}/media-evidence?view=plain`, { waitUntil: 'domcontentloaded' })
+  await page.goto(`${input.url}/analyses/${example.analysis_id}/media-evidence?view=plain#media-evidence-timing`, { waitUntil: 'domcontentloaded' })
   const coverage = page.getByRole('region', { name: 'Speech and mouth comparison' })
   const support = coverage.getByRole('link', { name: 'Inspect source frames and waveform' })
   await support.waitFor()

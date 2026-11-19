@@ -1,5 +1,5 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, render, screen } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { afterEach, expect, it } from 'vitest'
 import VideoEvidenceWorkspace, { videoLaneForHash } from './VideoEvidenceWorkspace'
@@ -30,7 +30,10 @@ it('puts video, voice and timing behind visible channel selectors and mounts onl
 })
 it('opens the correct channel for a deep-linked audio or alignment packet', () => {
   expect(videoLaneForHash('#media-evidence-AV03')).toBe('timing')
-  expect(videoLaneForHash('#media-evidence-VLT01')).toBe('visual')
+  expect(videoLaneForHash('#media-evidence-VLT01')).toBe('timing')
+  expect(videoLaneForHash('#media-evidence-VFB01')).toBe('visual')
+  expect(videoLaneForHash('#media-evidence-VPR07')).toBe('visual')
+  expect(videoLaneForHash('#media-evidence-VSC01')).toBe('visual')
   expect(videoLaneForHash('#media-evidence-A02')).toBe('voice')
   expect(videoLaneForHash('#media-evidence-C02')).toBe('voice')
   expect(videoLaneForHash('#media-evidence-sounds')).toBe('voice')
@@ -44,6 +47,49 @@ it('opens the correct channel for a deep-linked audio or alignment packet', () =
   show('#media-evidence-A02')
   expect(screen.getByRole('tab', { name: /Voice intervals/ }).getAttribute('aria-selected')).toBe('true')
   expect(screen.getByRole('region', { name: 'Voice evidence from this video' })).toBeTruthy()
+})
+it('exposes recorded local lip evidence in timing even when correlation windows were not assessed', () => {
+  const roles = ['before', 'during', 'after'] as const
+  const frameIndices = [24, 33, 41]
+  const artifact = { sha256: 'd'.repeat(64), media_type: 'image/png' as const, width: 960, height: 280, url: '/evidence/frame.png' }
+  const local: VideoEvidencePacket = { id: 'VLT01', title: 'Reduced speech activity during visible mouth movement',
+    observation: 'The sound and the mouth were checked between 0.832 and 1.344 seconds.', interpretation: 'Review the local interval.',
+    limitations: [], finding_ids: [], signal_refs: [], measurements: [], claim_scope: 'sampled_window',
+    lip_timing_review: { audio_source_pts: [13312, 21504], picture_source_samples: [13312, 21504], change_samples: 0 },
+    artifacts: { source: artifact, crop: { ...artifact, sha256: 'e'.repeat(64) }, lip_timing_waveform: { ...artifact, sha256: 'f'.repeat(64) },
+      lip_timing_audio: { sha256: '1'.repeat(64), media_type: 'audio/wav', samples: 8192, sample_rate: 16000, url: '/evidence/sound.wav' } },
+    frames: roles.map((role, i) => ({ id: `VLT01.${role}`, score: null, is_peak: false, interval_role: role,
+      region_meaning: 'measured_mouth_region', context_region: { x: 20, y: 30, w: 40, h: 30 },
+      artifact_refs: { original: 'source', context: 'source', crop: 'crop' },
+      anchor: { frame_index: frameIndices[i], pts: frameIndices[i] * 1000, time_base: '1/30000',
+        stream_time_s: frameIndices[i] / 30, playback_time_s: frameIndices[i] / 30 } })),
+  }
+  const visual: VideoEvidencePacket = { ...local, id: 'V01', title: 'A separate face check', lip_timing_review: undefined, frames: [], artifacts: {} }
+  show('#media-evidence-VLT01', { ...set, packets: [visual, local], lip_timing_review: { schema: 'chipmunk.video-lip-timing/9',
+    status: 'matched', observation: 'Found a local interval.', affects_overall_confidence: false } })
+  const timing = screen.getByRole('tab', { name: /Audio\/picture timing.*1 selected window/ })
+  expect(timing.getAttribute('aria-selected')).toBe('true')
+  const card = within(screen.getByRole('article'))
+  expect(card.getAllByRole('img', { name: /exact measured mouth region/ })).toHaveLength(3)
+  expect(card.getByRole('img', { name: /Waveform on the audio source clock/ })).toBeTruthy()
+  expect(card.getByLabelText('Listen to the soundtrack during the measured timing change')).toBeTruthy()
+  expect(screen.getByRole('heading', { name: 'Speech activity and visible mouth movement' })).toBeTruthy()
+  expect(screen.getByRole('heading', { name: 'Audio and picture correlation windows' })).toBeTruthy()
+  const destination = document.getElementById('media-evidence-timing')
+  expect(destination?.compareDocumentPosition(card.getByRole('heading'))).toBe(Node.DOCUMENT_POSITION_FOLLOWING)
+  expect(screen.getByText(/No timing inputs retained/)).toBeTruthy()
+  fireEvent.click(screen.getByRole('tab', { name: /Video frames/ }))
+  expect(screen.queryByText('VLT01')).toBeNull()
+  expect(screen.getByRole('heading', { name: /A separate face check/ })).toBeTruthy()
+  fireEvent.click(screen.getByRole('tab', { name: /All evidence/ }))
+  expect(screen.getAllByRole('heading', { name: /VLT01\s*Reduced speech activity/ })).toHaveLength(1)
+})
+it('retains local timing coverage when no qualifying interval was found', () => {
+  show('#media-evidence-timing', { ...set, lip_timing_review: { schema: 'chipmunk.video-lip-timing/9', status: 'no_match',
+    observation: 'No qualifying short decline in speech activity was measured.', affects_overall_confidence: false } })
+  expect(screen.getByRole('tab', { name: /Audio\/picture timing.*No qualifying local interval/ })).toBeTruthy()
+  expect(screen.getByText('No qualifying short decline in speech activity was measured.')).toBeTruthy()
+  expect(screen.queryByRole('link', { name: 'Inspect source frames and waveform' })).toBeNull()
 })
 it('supports arrow-key channel switching and moves focus with the selected tab', () => {
   show()

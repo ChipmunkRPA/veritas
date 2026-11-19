@@ -12,9 +12,9 @@ const lanes: { id: Lane; title: string; description: string }[] = [
   { id: 'all', title: 'All evidence', description: 'Read the complete evidence record in sequence.' },
 ]
 export function videoLaneForHash(hash: string): Lane | null {
-  if (/^#media-evidence-(?:timing|AV\d+)/.test(hash)) return 'timing'
+  if (/^#media-evidence-(?:timing|(?:AV|VLT)\d+)/.test(hash)) return 'timing'
   if (/^#media-evidence-(?:voice|background|sounds|stereo|soundtrack-pair|repetition|similar-audio|(?:difference|aligned|rate)-repetition|(?:left|right)-(?:gain-)?repetition|[LR][RG]\d+|[ADS]R\d+|[ABC]\d+|RS?\d+)/.test(hash)) return 'voice'
-  if (/^#media-evidence-(?:visual|V(?:PH|LT)?\d+)/.test(hash)) return 'visual'
+  if (/^#media-evidence-(?:visual|V(?:FB|PH|PR|SC)?\d+)/.test(hash)) return 'visual'
   if (hash === '#media-evidence-all') return 'all'
   return null
 }
@@ -28,7 +28,10 @@ export default function VideoEvidenceWorkspace({ set, token, mediaReady }: {
     setActive(lane)
     navigate({ pathname: location.pathname, search: location.search, hash: `#media-evidence-${lane}` }, { replace: true, preventScrollReset: true })
   }
-  const counts = { visual: set.packets.length, voice: set.audio?.packets.length ?? 0, timing: set.av?.packets.length ?? 0, all: 0 }
+  const localTiming = set.packets.filter(packet => packet.lip_timing_review).length
+  const correlationWindows = set.av?.source.sha256 === set.source.sha256 ? set.av.packets.length : 0
+  const counts = { visual: set.packets.length - localTiming, voice: set.audio?.packets.length ?? 0,
+    timing: correlationWindows + localTiming, all: 0 }
   const status = (lane: Lane) => {
     if (lane === 'all') return 'Complete record'
     if (lane === 'voice') {
@@ -48,7 +51,11 @@ export default function VideoEvidenceWorkspace({ set, token, mediaReady }: {
         return summary.join(' · ')
       }
     }
-    if (counts[lane]) return `${counts[lane]} selected ${lane === 'voice' ? 'intervals' : lane === 'visual' ? 'frame groups' : 'windows'}`
+    if (counts[lane]) {
+      const noun = lane === 'voice' ? 'interval' : lane === 'visual' ? 'frame group' : 'window'
+      return `${counts[lane]} selected ${noun}${counts[lane] === 1 ? '' : 's'}`
+    }
+    if (lane === 'timing' && set.lip_timing_review?.status === 'no_match') return 'No qualifying local interval'
     const channel = lane === 'voice' ? set.audio : lane === 'timing' ? set.av : null
     return channel?.status === 'absent' ? 'No audio stream' : channel?.status === 'unavailable' ? 'Unavailable' : 'No selected evidence'
   }
@@ -66,9 +73,10 @@ export default function VideoEvidenceWorkspace({ set, token, mediaReady }: {
         <span className="block mt-1 text-caption text-text-muted">{status(lane.id)}</span>
       </button>)}
     </div>
-    <p className="mt-3 mb-0 text-small text-text-muted">{lanes.find((lane) => lane.id === active)?.description}</p>
+    <p id={active === 'timing' ? 'media-evidence-timing' : undefined} className="mt-3 mb-0 scroll-mt-20 text-small text-text-muted">{lanes.find((lane) => lane.id === active)?.description}</p>
     <div role="tabpanel" id="video-evidence-panel" aria-labelledby={`evidence-tab-${active}`} className="mt-4">
-      {(active === 'visual' || active === 'all') && <VideoEvidenceContent set={{ ...set, coverage: set.coverage ? { ...set.coverage, channels: undefined } : set.coverage }} token={token} mediaReady={mediaReady} />}
+      {(active === 'visual' || active === 'all' || (active === 'timing' && (set.lip_timing_review || localTiming > 0))) &&
+        <VideoEvidenceContent key={active} scope={active} set={{ ...set, coverage: set.coverage ? { ...set.coverage, channels: undefined } : set.coverage }} token={token} mediaReady={mediaReady} />}
       {active !== 'visual' && <VideoNestedEvidenceContent set={set} token={token} mediaReady={mediaReady}
         channel={active === 'voice' ? 'audio' : active === 'timing' ? 'av' : 'all'} />}
     </div>

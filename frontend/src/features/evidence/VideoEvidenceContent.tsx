@@ -72,14 +72,18 @@ export function ContextClip({ packet, set, token, ready }: {
   </div>
 }
 
-export default function VideoEvidenceContent({ set, token, mediaReady }: { set: VideoEvidenceSet; token: string; mediaReady: boolean }) {
+export default function VideoEvidenceContent({ set, token, mediaReady, scope = 'all' }: {
+  set: VideoEvidenceSet; token: string; mediaReady: boolean; scope?: 'visual' | 'timing' | 'all'
+}) {
   const player = useRef<HTMLVideoElement>(null)
   const [selected, setSelected] = useState<VideoEvidenceFrame | null>(null)
   const [failed, setFailed] = useState(false)
   const [attempt, setAttempt] = useState(0)
   useEffect(() => { const media = player.current; return () => { if (media && !media.paused) media.pause() } }, [mediaReady, token, attempt, failed])
   const target = selected?.anchor.playback_time_s
-  const playableContext = set.packets.find(packet => packet.clip?.status === 'ready')
+  const showVisual = scope !== 'timing'
+  const packets = scope === 'all' ? set.packets : set.packets.filter(packet => showVisual ? !packet.lip_timing_review : packet.lip_timing_review)
+  const playableContext = packets.find(packet => packet.clip?.status === 'ready')
   const seek = () => {
     if (player.current && target != null && Number.isFinite(target) && target >= 0) player.current.currentTime = target
   }
@@ -89,13 +93,14 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
     setSelected(frame)
     player.current?.scrollIntoView?.({ block: 'center', behavior: 'auto' })
   }
-  const hold = set.picture_hold
-  const sceneReview = set.coverage?.scene_return_review
-  const transitionReview = set.coverage?.face_single_boundary_coverage
-  const transition = set.packets.find(packet => packet.face_single_boundary)?.face_single_boundary
+  const coverage = showVisual ? set.coverage : undefined
+  const hold = showVisual ? set.picture_hold : undefined
+  const sceneReview = coverage?.scene_return_review
+  const transitionReview = coverage?.face_single_boundary_coverage
+  const transition = packets.find(packet => packet.face_single_boundary)?.face_single_boundary
   const mouthHold = hold?.mouth_local_hold
   const eyeHold = hold?.eye_local_hold
-  const lipTiming = set.lip_timing_review
+  const lipTiming = scope !== 'visual' ? set.lip_timing_review : undefined
   const motion = hold?.motion_sequence_review
   const reverseMotion = hold?.reverse_motion_sequence_review
   const retimedMotion = hold?.retimed_motion_sequence_review
@@ -103,7 +108,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
   const croppedMotion = hold?.cropped_motion_sequence_review
   const motionRate = motion?.parameters.frame_rate ?? 20
   const motionLimit = motion?.frames_scanned || motionRate * 9
-  const laterFrames = hold && set.coverage ? set.coverage.frame_count - hold.frames_scanned : 0
+  const laterFrames = hold && coverage ? coverage.frame_count - hold.frames_scanned : 0
   const renderFrames = (packet: VideoEvidencePacket, frames: VideoEvidenceFrame[], refined: boolean) =>
     <div className="mt-5 space-y-5">{frames.map((frame) => {
       const cut = packet.face_spatial_cut_frames?.some(item => item.id === frame.id)
@@ -152,7 +157,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       </div>
     })}</div>
 
-  return <div id="media-evidence-visual" data-testid="video-evidence-content" className="scroll-mt-20">
+  return <div id={showVisual ? 'media-evidence-visual' : undefined} data-testid="video-evidence-content" className="scroll-mt-20">
     {transitionReview && <section aria-labelledby="video-face-transition-heading" className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-face-transition-heading" className="m-0 text-body font-medium">Face transition check</h3>
       <p className="mt-2 mb-0 text-small">{transition
@@ -175,7 +180,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero AI confidence weight.</p>
     </section>}
     {lipTiming && <section aria-labelledby="video-lip-timing-heading" className="mt-4 rounded-md border border-border p-4">
-      <h3 id="video-lip-timing-heading" className="m-0 text-body font-medium">{lipTiming.schema === 'chipmunk.video-lip-timing/8'
+      <h3 id="video-lip-timing-heading" className="m-0 text-body font-medium">{['chipmunk.video-lip-timing/8', 'chipmunk.video-lip-timing/9'].includes(lipTiming.schema ?? '')
         ? 'Speech activity and visible mouth movement'
         : ['chipmunk.video-lip-timing/3', 'chipmunk.video-lip-timing/4', 'chipmunk.video-lip-timing/5', 'chipmunk.video-lip-timing/6', 'chipmunk.video-lip-timing/7'].includes(lipTiming.schema ?? '')
           ? 'Speech and mouth comparison' : 'Speech and mouth timing trial'}</h3>
@@ -282,17 +287,17 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         : croppedMotion.status === 'no_match' ? `No qualifying cropped repeat was found in the first ${croppedMotion.frames_scanned} frames.`
         : 'This check needs regular, verified source timestamps throughout the checked opening frames.'}</p>
     </section>}
-    {!!set.coverage?.brief_face_review?.observations.length && <section aria-labelledby="video-brief-face-coverage-heading"
+    {!!coverage?.brief_face_review?.observations.length && <section aria-labelledby="video-brief-face-coverage-heading"
       className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-brief-face-coverage-heading" className="m-0 text-body font-medium">Brief face-change check</h3>
-      {set.coverage.brief_face_review.observations.map((observation) => <p key={observation}
+      {coverage.brief_face_review.observations.map((observation) => <p key={observation}
         className="mt-2 mb-0 text-small">{observation}</p>)}
       <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero AI confidence weight.</p>
     </section>}
-    {!!set.coverage?.brief_face_windows?.observations.length && <section aria-labelledby="video-brief-face-windows-heading"
+    {!!coverage?.brief_face_windows?.observations.length && <section aria-labelledby="video-brief-face-windows-heading"
       className="mt-4 rounded-md border border-border p-4">
       <h3 id="video-brief-face-windows-heading" className="m-0 text-body font-medium">Overlapping face-change windows</h3>
-      {set.coverage.brief_face_windows.observations.map((observation) => <p key={observation}
+      {coverage.brief_face_windows.observations.map((observation) => <p key={observation}
         className="mt-2 mb-0 text-small">{observation}</p>)}
       <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero AI confidence weight.</p>
     </section>}
@@ -302,20 +307,20 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
         <> <a className="underline" href={`#media-evidence-${sceneReview.packet_id}`}>Inspect the source frames and measured tiles</a></>}</p>
       <p className="mt-2 mb-0 text-caption text-text-muted">{sceneReview.limitation}</p>
     </section>}
-    {set.coverage ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
-      <p className="m-0">{set.coverage.scored_frame_count} frame(s) were inputs to recorded {hasNestedVideoEvidence(set.version) ? 'visual frame or window' : 'frame or window'} checks in a table of {set.coverage.frame_count} frames.
-        {' '}{set.coverage.window_check_count} window check(s) cover {set.coverage.window_frame_indices.length} distinct sampled frames.</p>
+    {coverage ? <div className="mt-4 rounded-md border border-border p-4 text-small text-text-muted">
+      <p className="m-0">{coverage.scored_frame_count} frame(s) were inputs to recorded {hasNestedVideoEvidence(set.version) ? 'visual frame or window' : 'frame or window'} checks in a table of {coverage.frame_count} frames.
+        {' '}{coverage.window_check_count} window check(s) cover {coverage.window_frame_indices.length} distinct sampled frames.</p>
       {hasNestedVideoEvidence(set.version) && <p className="mt-2 mb-0">These counts cover visual checks only. Voice and audio/picture timing coverage appear in their separate sections.</p>}
-      {set.coverage.face_detail_repeat && <p className="mt-2 mb-0">{set.coverage.face_detail_repeat.observation}</p>}
+      {coverage.face_detail_repeat && <p className="mt-2 mb-0">{coverage.face_detail_repeat.observation}</p>}
       <p className="mt-2 mb-0">These counts may overlap. Decoded frames are not all scored; unscored frames and the gaps between samples have not been cleared.</p>
-      {set.coverage.table_truncated && <p className="mt-2 mb-0">The frame table is truncated; this does not represent the entire video.</p>}
-      {set.coverage.unmapped_observations > 0 && <p className="mt-2 mb-0">{set.coverage.unmapped_observations} observation(s) could not be mapped reliably and are omitted.</p>}
-      {set.coverage.channels && <div className="mt-3 border-t border-border pt-3">{(['audio', 'av_sync'] as const).map((key) => {
-        const channel = set.coverage!.channels![key]
+      {coverage.table_truncated && <p className="mt-2 mb-0">The frame table is truncated; this does not represent the entire video.</p>}
+      {coverage.unmapped_observations > 0 && <p className="mt-2 mb-0">{coverage.unmapped_observations} observation(s) could not be mapped reliably and are omitted.</p>}
+      {coverage.channels && <div className="mt-3 border-t border-border pt-3">{(['audio', 'av_sync'] as const).map((key) => {
+        const channel = coverage.channels?.[key]
         return channel && <p key={key} className="mt-2 mb-0"><strong>{key === 'audio' ? 'Voice evidence' : 'Audio/video synchronization evidence'}:</strong> {channel.reason}</p>
       })}</div>}
-    </div> : <p className="mt-3 text-small text-text-muted">Frame coverage is unavailable. Missing evidence does not establish authenticity.</p>}
-    {set.packets.length > 0 && <div className="mt-5">
+    </div> : showVisual && <p className="mt-3 text-small text-text-muted">Frame coverage is unavailable. Missing evidence does not establish authenticity.</p>}
+    {packets.length > 0 && <div className="mt-5">
       <h3 className="m-0 mb-2 text-small font-medium">Original video for context</h3>
       {!mediaReady ? <p className="text-small text-text-muted">Preparing secure media links…</p>
         : failed ? <div role="alert" className="text-small text-text-muted">Original video playback is unavailable. Exact recorded frame images remain below.
@@ -327,8 +332,8 @@ export default function VideoEvidenceContent({ set, token, mediaReady }: { set: 
       <p className="mt-2 mb-0 text-caption text-text-muted">Browser playback can land near a frame. The exact analyzed frame images below are the evidence; playback between sampled frames is context.</p>
       {selected && <p role="status" className="mt-2 mb-0 text-caption font-mono">Selected frame {selected.anchor.frame_index} · source {seconds(selected.anchor.stream_time_s)} · player {target != null ? seconds(target) : 'time unavailable'}</p>}
     </div>}
-    <VideoFrameNavigator set={set} token={token} mediaReady={mediaReady} selected={selected} onSelect={chooseFrame} />
-    <div className="mt-6 space-y-7">{set.packets.map((packet) => <article key={packet.id} id={`media-evidence-${packet.id}`} className={evidenceCard}>
+    <VideoFrameNavigator set={{ ...set, packets }} token={token} mediaReady={mediaReady} selected={selected} onSelect={chooseFrame} />
+    <div className="mt-6 space-y-7">{packets.map((packet) => <article key={packet.id} id={`media-evidence-${packet.id}`} className={evidenceCard}>
       <h3 className="m-0 text-body font-medium"><span className="font-mono text-accent mr-3">{packet.id}</span>{packet.title}</h3>
       {!packet.picture_hold && <p className="mt-2 mb-0 text-body">{packet.observation}</p>}
       {packet.face_single_boundary && <p className="mt-2 mb-0 text-small text-text-muted">

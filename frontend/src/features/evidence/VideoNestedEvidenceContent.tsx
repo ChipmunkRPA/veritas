@@ -137,8 +137,8 @@ export default function VideoNestedEvidenceContent({ set, token, mediaReady, cha
       </> : <UnavailableChannel reason={!audioBound && audio ? 'The audio record does not match this original video.' : audio?.reason} />}
       <EvidenceLimits lines={audio?.limitations ?? []} />
     </section>}
-    {channel !== 'audio' && <section id="media-evidence-timing" aria-label="Audio and picture timing evidence" className="border-t border-border pt-6 scroll-mt-20">
-      <h3 className="m-0 text-body font-medium">Audio and picture timing evidence</h3>
+    {channel !== 'audio' && <section id={channel === 'all' ? 'media-evidence-timing' : undefined} aria-label="Audio and picture timing evidence" className="border-t border-border pt-6 scroll-mt-20">
+      <h3 className="m-0 text-body font-medium">{set.lip_timing_review ? 'Audio and picture correlation windows' : 'Audio and picture timing evidence'}</h3>
       {showAV && av ? <>
         {av.status !== 'ready' && <UnavailableChannel reason={av.reason} />}
         <VideoAVEvidenceContent set={set} channel={av} token={token} mediaReady={mediaReady} />

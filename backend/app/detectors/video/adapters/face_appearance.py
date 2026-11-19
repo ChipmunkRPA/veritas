@@ -778,25 +778,36 @@ def _with_matched_detail(result, inputs, yunet, recognizer, ctx):
         return result
     details = result.details
     path = getattr(inputs.store, "path", None)
-    if (path is None or not matched_detail.eligible(inputs.table, (*inputs.encoding, inputs.codec_tag), "mp4")
-            or not mp4_source_clock.verified(path, inputs.table, 1000)):
-        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "profile")
+    profile = matched_detail.input_profile(inputs.table, (*inputs.encoding, inputs.codec_tag), "mp4")
+    try:
+        if path is None or profile is None:
+            raise ValueError("Missing matched-detail source profile")
+        if profile == matched_detail.PROFILE_25:
+            clock_budget = min(4.0, ctx.deadline.remaining() - COARSE_RESULT_RESERVE_S)
+            if clock_budget <= 0:
+                details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "time_budget")
+                return result
+            face_matched_detail.verify_profile(path, inputs.table, profile, timeout_s=clock_budget)
+        elif not mp4_source_clock.verified(path, inputs.table, profile.step):
+            raise ValueError("The original MP4 clock could not be verified")
+    except ValueError:
+        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "profile_avc")
         return result
     if details.get("face_return") or details.get("face_return_secondary"):
-        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "prior_review")
+        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "prior_review", profile=profile)
         return result
     earlier = [face_detail_repeat.original_range(details), details.get("face_boundary")]
     budget = min(12., ctx.deadline.remaining() - COARSE_RESULT_RESERVE_S)
     if budget <= 0:
-        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "time_budget")
+        details[matched_detail.COVERAGE] = matched_detail.coverage("unassessed", "time_budget", profile=profile)
         return result
     try:
         record, coverage = face_matched_detail.inspect(inputs, yunet, recognizer, ctx.deadline.nested(budget),
-                                                      [item for item in earlier if item])
+                                                      [item for item in earlier if item], profile=profile)
     except DetectorTimeout:
-        record, coverage = None, matched_detail.coverage("unassessed", "time_budget")
+        record, coverage = None, matched_detail.coverage("unassessed", "time_budget", profile=profile)
     except (DecodeError, ValueError, cv2.error):
-        record, coverage = None, matched_detail.coverage("unassessed", "source_input")
+        record, coverage = None, matched_detail.coverage("unassessed", "source_input", profile=profile)
     details[matched_detail.COVERAGE] = coverage
     if record is not None:
         details[matched_detail.KEY] = record

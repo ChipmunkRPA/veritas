@@ -1,0 +1,130 @@
+{
+  "browser": {
+    "cases": [
+      "circular_swap",
+      "gaussian_swap",
+      "remaining_ordinary_defocus",
+      "ordinary_circular_suppressed",
+      "untouched",
+      "other_frame_rate",
+      "historical_30"
+    ],
+    "page_errors": 0
+  },
+  "cases": {
+    "circular_swap": {
+      "native_clock": "1/90000",
+      "new_range": [
+        63,
+        67
+      ],
+      "original_assessment_unchanged": true,
+      "pdf_json_agree": true,
+      "signed_original_verified": true,
+      "source_frames": [
+        62,
+        65,
+        67
+      ],
+      "source_image_assets": 6,
+      "status": "localized"
+    },
+    "gaussian_swap": {
+      "native_clock": "1/90000",
+      "new_range": [
+        93,
+        96
+      ],
+      "original_assessment_unchanged": null,
+      "pdf_json_agree": true,
+      "signed_original_verified": true,
+      "source_frames": [
+        92,
+        94,
+        96
+      ],
+      "source_image_assets": 6,
+      "status": "localized"
+    },
+    "historical_30": {
+      "native_clock": "1/30000",
+      "new_range": [
+        73,
+        76
+      ],
+      "original_assessment_unchanged": null,
+      "pdf_json_agree": true,
+      "signed_original_verified": true,
+      "source_frames": [
+        72,
+        74,
+        76
+      ],
+      "source_image_assets": 6,
+      "status": "localized"
+    },
+    "ordinary_circular_suppressed": {
+      "new_range": null,
+      "original_assessment_unchanged": true,
+      "status": "no_match"
+    },
+    "other_frame_rate": {
+      "new_range": null,
+      "original_assessment_unchanged": null,
+      "status": "unassessed"
+    },
+    "remaining_ordinary_defocus": {
+      "native_clock": "1/90000",
+      "new_range": [
+        81,
+        84
+      ],
+      "original_assessment_unchanged": null,
+      "pdf_json_agree": true,
+      "signed_original_verified": true,
+      "source_frames": [
+        80,
+        82,
+        84
+      ],
+      "source_image_assets": 6,
+      "status": "localized"
+    },
+    "untouched": {
+      "new_range": null,
+      "original_assessment_unchanged": null,
+      "status": "unassessed"
+    }
+  },
+  "detector_and_original_source_replay": {
+    "fresh_exact_parity": 30,
+    "historical_clock_byte_parity": 1,
+    "seconds": 44.05,
+    "statuses": {
+      "localized": 7,
+      "no_match": 15,
+      "unassessed": 8
+    },
+    "strict_native_source_replays": 7
+  },
+  "final_browser_replay": {
+    "cases": [
+      "circular_swap",
+      "gaussian_swap",
+      "remaining_ordinary_defocus",
+      "ordinary_circular_suppressed",
+      "untouched",
+      "other_frame_rate",
+      "historical_30"
+    ],
+    "page_errors": 0
+  },
+  "final_signed_source_replay": {
+    "prior30_checked": 1,
+    "source_checked": 4
+  },
+  "jobs_before_payment": 0,
+  "price_usd_cents": 999,
+  "report_revision": "veritas-report-2.0.r197",
+  "simulated_checkouts": 9
+}

@@ -201,6 +201,8 @@ replay-evidence:  ## recount published image, video, audio, and writing evaluati
 		docs/evaluation-panels/video-face-matched-detail-native25-transfer-2026-11-19.json
 	python3 -I -S backend/scripts/review_video_matched_detail_native25_confirmation.py \
 		docs/evaluation-panels/video-face-matched-detail-native25-confirmation-2026-11-19.json
+	python3 -I -S backend/scripts/review_video_matched_detail_native25_point20.py \
+		docs/evaluation-panels/video-face-matched-detail-native25-point20-2026-11-19.json
 	PYTHONPATH=backend python3 -B -S -m scripts.review_writing_retained_neighbor \
 		docs/evaluation-panels/writing-retained-neighbor-2026-11-19.json
 

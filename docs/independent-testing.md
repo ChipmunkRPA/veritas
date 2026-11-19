@@ -19,6 +19,8 @@ source crops. It carries zero weight in the automated assessment.
 
 The [held 25 fps face comparison](video-face-matched-detail-native25-confirmation-2026-11-19.md)
 adds broader ordinary blur controls and publishes the alert tradeoff.
+A [stricter comparison on six new groups](video-face-matched-detail-native25-point20-2026-11-19.md)
+kept the exact swap ranges and reduced the additional ordinary alerts.
 
 The [learned speech reconstruction preflight](audio-learned-enrollment-genuine-preflight-2026-11-19.md)
 reviews two held noisy source groups. The replay checks grouped acoustic

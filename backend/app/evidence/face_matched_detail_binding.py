@@ -5,8 +5,9 @@ from __future__ import annotations
 
 import math
 import re
+from dataclasses import dataclass
 
-from app.evidence.video_packet_versions import MATCHED_DETAIL_AVC_VERSION
+from app.evidence.video_packet_versions import MATCHED_DETAIL_AVC_VERSION, MATCHED_DETAIL_NATIVE25_VERSION
 
 KEY = "face_matched_detail"
 COVERAGE = "face_matched_detail_coverage"
@@ -14,6 +15,7 @@ COMMITMENT = "face_matched_detail_sha256"
 COVERAGE_COMMITMENT = "face_matched_detail_coverage_sha256"
 COMMITMENTS = (COMMITMENT, COVERAGE_COMMITMENT)
 METHOD = "face-matched-detail/1"
+NATIVE25_METHOD = "face-matched-detail/2"
 PACKET_ID = "VMD01"
 TITLE = "Very brief face appearance change after matching image detail"
 OBSERVATION = (
@@ -35,6 +37,7 @@ MAX_PAIRS = 8
 MAX_FACE_READS = 60
 REASONS = {
     "profile": "This check needs a four-second 720p AVC MP4 with verified 30 fps timing.",
+    "profile_avc": "This check needs 120 verified 720p AVC MP4 frames at 30 fps (four seconds) or 25 fps (4.8 seconds).",
     "prior_review": "The brief face appearance review already found a range for this file.",
     "shot_context": "The original pictures did not supply a complete shot review.",
     "face_context": "The source did not supply comparable face views around a selected range.",
@@ -50,15 +53,43 @@ READINGS = ("near", "far", "flanks", "inside", "entry", "exit")
 SUPPORT = ("detail_drop", "edge_step", "flank_patch_difference")
 
 
-def eligible(table, encoding, carrier):
+@dataclass(frozen=True)
+class NativeProfile:
+    method: str
+    version: str
+    timescale: int
+    step: int
+    point: float
+
+    @property
+    def time_base(self):
+        return f"1/{self.timescale}"
+
+    def exact_clock(self, time_base, pts):
+        return time_base == self.time_base and tuple(pts) == tuple(i * self.step for i in range(FRAME_COUNT))
+
+    def seconds(self, ticks):
+        return ticks / self.timescale
+
+
+PROFILE_30 = NativeProfile(METHOD, MATCHED_DETAIL_AVC_VERSION, 30000, 1000, POINT)
+PROFILE_25 = NativeProfile(NATIVE25_METHOD, MATCHED_DETAIL_NATIVE25_VERSION, 90000, 3600, 0.20)
+PROFILES = {p.method: p for p in (PROFILE_30, PROFILE_25)}
+VERSIONS = frozenset(p.version for p in PROFILES.values())
+
+
+def eligible(table, encoding, carrier, profile=PROFILE_30):
     return (
         tuple(encoding) == AVC
         and carrier == "mp4"
         and (table.width, table.height) == (table.coded_width, table.coded_height) == SIZE
         and not (table.rotation or table.interpolated or table.truncated)
-        and table.time_base == TIME_BASE
-        and table.pts == TICKS
+        and profile.exact_clock(table.time_base, table.pts)
     )
+
+
+def input_profile(table, encoding, carrier):
+    return next((p for p in PROFILES.values() if eligible(table, encoding, carrier, p)), None)
 
 
 def _require(condition, message):
@@ -127,20 +158,22 @@ def interpolate(before, after, index, a, b):
     return box, xy
 
 
-def validate_clock(source, table_pts=None, *, interpolated=(), rotation=0, truncated=False):
+def validate_clock(source, table_pts=None, *, interpolated=(), rotation=0, truncated=False, profile=PROFILE_30):
     _require(
         (source["width"], source["height"]) == SIZE
         and source["frame_count"] == FRAME_COUNT
-        and source["time_base"] == TIME_BASE
+        and source["time_base"] == profile.time_base
         and source["timeline_origin_s"] == 0
         and not (interpolated or rotation or truncated)
-        and (table_pts is None or tuple(table_pts) == TICKS),
-        "Matched-detail review differs from its verified 720p30 source clock",
+        and (table_pts is None or profile.exact_clock(source["time_base"], table_pts)),
+        "Matched-detail review differs from its verified source clock",
     )
 
 
 def validate_record(record, source, *, table_pts=None, interpolated=(), rotation=0, truncated=False):
-    validate_clock(source, table_pts, interpolated=interpolated, rotation=rotation, truncated=truncated)
+    profile = PROFILES.get(record.get("method"))
+    _require(profile is not None, "Invalid matched-detail method")
+    validate_clock(source, table_pts, interpolated=interpolated, rotation=rotation, truncated=truncated, profile=profile)
     _require(
         set(record)
         == {
@@ -157,8 +190,7 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
             "views",
             "scene_cuts",
         }
-        and record["method"] == METHOD
-        and record["time_base"] == TIME_BASE,
+        and record["time_base"] == profile.time_base,
         "Invalid matched-detail record",
     )
     a, b = record["start_frame_index"], record["end_frame_index"]
@@ -166,7 +198,7 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
         type(a) is type(b) is int
         and 6 <= a < b <= 114
         and b - a in (3, 4)
-        and (record["start_pts"], record["end_pts"]) == (TICKS[a], TICKS[b]),
+        and (record["start_pts"], record["end_pts"]) == (a * profile.step, b * profile.step),
         "Invalid matched-detail interval",
     )
     cuts = record["scene_cuts"]
@@ -187,8 +219,8 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
         and 0 <= inside <= 2
         and entry <= near
         and exit <= far
-        and point > POINT
-        and exact(record["response_hex"], POINT, 2) == point,
+        and point > profile.point
+        and exact(record["response_hex"], profile.point, 2) == point,
         "Matched-detail response differs from the bounded comparison",
     )
     support = record["proposal_hex"]
@@ -218,7 +250,7 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
                 "matched_detail_hex",
             }
             and row["index"] == index
-            and row["pts"] == TICKS[index]
+            and row["pts"] == index * profile.step
             and row["geometry"] == ("interpolated" if a <= index < b else "observed")
             and all(
                 _digest(row[k]) for k in ("decoded_rgb_sha256", "aligned_rgb_sha256", "matched_rgb_sha256")
@@ -251,13 +283,14 @@ def validate_record(record, source, *, table_pts=None, interpolated=(), rotation
     )
 
 
-def coverage(status, reason=None, *, proposed=0, usable=0):
+def coverage(status, reason=None, *, proposed=0, usable=0, profile=PROFILE_30):
     return {
         "status": status,
         "reason": reason,
         "candidate_pairs": proposed,
         "measured_pairs": usable,
         "affects_overall_confidence": False,
+        **({"method": profile.method} if profile == PROFILE_25 else {}),
     }
 
 
@@ -268,12 +301,12 @@ def coverage_text(record):
 def validate(document, digest, *, table_pts=None, interpolated=(), rotation=0, truncated=False):
     source = document["source"]
     found = [
-        p for p in document["packets"] if KEY in p or p.get("id") == PACKET_ID or p.get("semantics") == METHOD
+        p for p in document["packets"] if KEY in p or p.get("id") == PACKET_ID or p.get("semantics") in PROFILES
     ]
     state = document.get("coverage", {}).get(COVERAGE)
     _require(len(found) <= 1 and (not found or KEY in found[0]), "Invalid matched-detail packet count")
     _require(
-        (document["version"] == MATCHED_DETAIL_AVC_VERSION) == bool(found),
+        (document["version"] in VERSIONS) == bool(found),
         "The evidence version disagrees with its matched-detail interval",
     )
     record = found[0][KEY] if found else None
@@ -287,8 +320,10 @@ def validate(document, digest, *, table_pts=None, interpolated=(), rotation=0, t
         return
     status, reason = state["status"], state["reason"]
     n, seen = state["candidate_pairs"], state["measured_pairs"]
+    profile = PROFILES.get(state.get("method", METHOD))
     _require(
-        set(state) == set(coverage("unassessed"))
+        profile is not None
+        and set(state) == set(coverage("unassessed", profile=profile))
         and state["affects_overall_confidence"] is False
         and status in {"localized", "no_match", "unassessed"}
         and ((reason in REASONS) if status == "unassessed" else reason is None)
@@ -298,8 +333,8 @@ def validate(document, digest, *, table_pts=None, interpolated=(), rotation=0, t
         and (status == "unassessed" or seen > 0),
         "Invalid matched-detail coverage",
     )
-    if status != "unassessed" or n:
-        validate_clock(source, table_pts, interpolated=interpolated, rotation=rotation, truncated=truncated)
+    if status != "unassessed" or n or profile == PROFILE_25:
+        validate_clock(source, table_pts, interpolated=interpolated, rotation=rotation, truncated=truncated, profile=profile)
     if not found:
         return
     validate_record(
@@ -308,7 +343,8 @@ def validate(document, digest, *, table_pts=None, interpolated=(), rotation=0, t
     packet = found[0]
     _require(
         packet["id"] == PACKET_ID
-        and packet["semantics"] == METHOD
+        and packet["semantics"] == record["method"] == profile.method
+        and document["version"] == profile.version
         and packet["title"] == TITLE
         and packet["claim_scope"] == "sampled_window"
         and packet["affects_overall_confidence"] is False
@@ -334,13 +370,13 @@ def validate(document, digest, *, table_pts=None, interpolated=(), rotation=0, t
             and frame["is_peak"] is False
             and anchor["frame_index"] == index
             and anchor["pts"] == item["pts"]
-            and anchor["time_base"] == TIME_BASE
+            and anchor["time_base"] == profile.time_base
             and anchor["decoded_rgb_sha256"] == item["decoded_rgb_sha256"]
             and anchor["original_sha256"] == source["sha256"]
             and anchor["stream_selector"] == "v:0"
             and (anchor["width"], anchor["height"]) == SIZE
-            and abs(anchor["stream_time_s"] - index / 30) <= 1e-6
-            and abs(anchor["playback_time_s"] - index / 30) <= 1e-6
+            and abs(anchor["stream_time_s"] - profile.seconds(item["pts"])) <= 1e-6
+            and abs(anchor["playback_time_s"] - profile.seconds(item["pts"])) <= 1e-6
             and set(refs) == {"original", "context", "crop"}
             and set(refs.values()) <= packet["artifacts"].keys(),
             "Displayed matched-detail frame differs from its native witness",

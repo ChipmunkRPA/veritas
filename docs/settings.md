@@ -113,7 +113,7 @@ The service defines its settings in `backend/app/core/config.py`.
 | `VERITAS_DOCUMENT_DISCLOSURE_HEADING_REVIEW` | `true` \| `false` | `false` | Adds the exact position of an eligible printed AI-use heading in PDFs of up to 12 pages in development. The heading carries zero weight in the AI assessment. |
 | `VERITAS_VIDEO_FACE_SINGLE_BOUNDARY_NATIVE720_REVIEW` | `true` \| `false` | `false` | Extends the enabled face transition check to Full analyses of supported four-second 720p, 30 fps AVC MP4 uploads in development. It preserves the native frames and adds zero weight to the AI assessment. |
 | `VERITAS_VIDEO_FACE_VERY_BRIEF_AVC_REVIEW` | `true` \| `false` | `false` | Adds a three- or four-frame face appearance check to Full analyses of supported four-second 720p, 30 fps AVC MP4 uploads in development. Requires `VERITAS_VIDEO_FACE_SHORT_AVC_REVIEW=true`. The range carries zero weight in the overall assessment. |
-| `VERITAS_VIDEO_FACE_MATCHED_DETAIL_AVC_REVIEW` | `true` \| `false` | `false` | Adds an optional three- or four-frame face comparison to Full analyses of eligible four-second 720p, exact 30 fps AVC MP4 uploads in development when both brief AVC options are enabled and the initial check locates no range. Any additional range carries zero weight in the overall assessment. |
+| `VERITAS_VIDEO_FACE_MATCHED_DETAIL_AVC_REVIEW` | `true` \| `false` | `false` | Adds an optional three- or four-frame face comparison to Full development analyses of eligible 120-frame 720p AVC MP4 uploads at exact 30 fps or at exact 25 fps on a verified 90 kHz clock. Both brief AVC options must be enabled, and the initial check must leave an opportunity. The additional range carries zero weight in the overall assessment. |
 
 ## Reports (ARCHITECTURE §6.1)
 

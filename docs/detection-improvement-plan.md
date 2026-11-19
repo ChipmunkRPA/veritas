@@ -127,6 +127,12 @@ are not public screening promises or calibrated population probabilities.
   18 ordinary files. Five were measurable with the added check, one
   below the frozen requirement. [25 fps carrier comparison](video-face-matched-detail-native25-transfer-2026-11-19.md)
 
+- The stricter 25 fps comparison found all six exact blurred-swap ranges
+  in a fresh controlled panel, compared with zero from Full alone. Both
+  candidate points found the same six ranges. The stricter point reduced
+  ordinary alerts from six to one out of 24 files, with 16 measurable.
+  [Fresh 25 fps comparison](video-face-matched-detail-native25-point20-2026-11-19.md)
+
 - A 184-delivery short-speech test of the lower operating point found
   three more clean and two more competing-speech edits. Ordinary alerts
   increased from zero to nine out of 40 clean files and from five to 21

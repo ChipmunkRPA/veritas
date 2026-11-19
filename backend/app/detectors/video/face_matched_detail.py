@@ -172,12 +172,12 @@ def _geometry(faces, a, b):
     return rows
 
 
-def inspect(inputs, detector, recognizer, deadline, prior):
+def inspect(inputs, detector, recognizer, deadline, prior, *, profile=binding.PROFILE_30):
     """Return a bounded optional face observation and its measured coverage."""
     table = inputs.table
     cuts = inputs.shot_boundaries
     if cuts is None:
-        return None, binding.coverage("unassessed", "shot_context")
+        return None, binding.coverage("unassessed", "shot_context", profile=profile)
 
     def read(indices):
         expected = set(indices)
@@ -208,7 +208,7 @@ def inspect(inputs, detector, recognizer, deadline, prior):
     anchors = {}
     seek(short.ANCHOR_SAMPLES, anchors)
     if len(anchors) < 4:
-        return None, binding.coverage("unassessed", "face_context")
+        return None, binding.coverage("unassessed", "face_context", profile=profile)
     with closing(read(range(binding.FRAME_COUNT))) as frames:
         trace = _bridge_trace(frames, anchors)
     proposals = _shortlist(trace, allowed)
@@ -249,7 +249,7 @@ def inspect(inputs, detector, recognizer, deadline, prior):
         if (result := _response(normalized, a, b, recognizer)) is None:
             continue
         response, readings = result
-        if response > binding.POINT:
+        if response > profile.point:
             rows = [{**geometry[a, b][i], **frame_readings[i]} for i in range(a - 3, b + 3)]
             outcomes.append(
                 (
@@ -257,7 +257,7 @@ def inspect(inputs, detector, recognizer, deadline, prior):
                     a,
                     b,
                     {
-                        "method": binding.METHOD,
+                        "method": profile.method,
                         "time_base": table.time_base,
                         "start_frame_index": a,
                         "end_frame_index": b,
@@ -278,7 +278,7 @@ def inspect(inputs, detector, recognizer, deadline, prior):
     record = min(outcomes, key=lambda value: value[:3])[-1] if outcomes else None
     state = "localized" if record else "no_match" if usable else "unassessed"
     return record, binding.coverage(
-        state, "face_context" if not usable else None, proposed=len(proposals), usable=usable
+        state, "face_context" if not usable else None, proposed=len(proposals), usable=usable, profile=profile
     )
 
 
@@ -304,21 +304,30 @@ def verify_crops(record, native_frames):
         raise ValueError("Original crops do not reproduce the matched detail readings")
 
 
+def verify_profile(original, table, profile, *, timeout_s=4.0):
+    """Verify the exact source carrier for the recorded review profile."""
+    from app.detectors.video.frames import probe as probe_container
+    from app.evidence import mp4_source_clock
+
+    native25 = profile == binding.PROFILE_25
+    profile_options = {"include_sample_aspect_ratio": True, "timeout_s": timeout_s} if native25 else {}
+    info = probe_container(original, include_codec_tag=True, **profile_options)
+    encoding = tuple(info.get(key) for key in ("codec", "pix_fmt", "codec_tag"))
+    if (
+        not binding.eligible(table, encoding, "mp4", profile)
+        or info.get("timeline_origin_s") != 0
+        or (native25 and info.get("sample_aspect_ratio") not in {None, "1:1"})
+        or not mp4_source_clock.verified(original, table, profile.step)
+    ):
+        raise ValueError("Original video differs from the recorded matched-detail profile")
+
+
 def replay_source(original, table, record):
     """Verify the signed interval's MP4 clock, shot context and image transformations."""
     from app.detectors.video.decode import decode_frames, decode_stream
-    from app.detectors.video.frames import probe as probe_container
     from app.detectors.video.shots import ShotDetector
-    from app.evidence import mp4_source_clock
 
-    info = probe_container(original, include_codec_tag=True)
-    encoding = tuple(info.get(key) for key in ("codec", "pix_fmt", "codec_tag"))
-    if (
-        not binding.eligible(table, encoding, "mp4")
-        or info.get("timeline_origin_s") != 0
-        or not mp4_source_clock.verified(original, table, 1000)
-    ):
-        raise ValueError("Original video differs from the exact 720p30 matched-detail profile")
+    verify_profile(original, table, binding.PROFILES[record["method"]])
     samples = [row["index"] for row in record["views"]]
     pixels = {}
     with closing(decode_frames(original, table, samples)) as frames:

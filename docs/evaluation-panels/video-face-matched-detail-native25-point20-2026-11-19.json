@@ -1,0 +1,898 @@
+{
+  "commitments": {
+    "authored": "4c2fd3ecdd17d870759c691c210c1454ced1c7e8e8cb19818ed1935630a0b390",
+    "crop_replay": "a0a0a61297b5e60eb4881259a10f98fbd73d064cda9469ffdfdb575708735d27",
+    "design": "b27105c6dd43ab0cd637fc4e1bb788e7606c7c1c2e490f05f32f435dfac00fbe",
+    "development_first": "fefe629e0d4e482e6d8b3352dd9e23bae3574bfa507b2f593b72785252b5280d",
+    "development_second": "448b16ebb30254296549ab5979063a07ef631d5719f2c91f4b4476dcfd244686",
+    "independent_media": "d9707af780234327492d5907489d748dd824b878f7a0ca5d96bb2eb6809595cb",
+    "media": "df3716015f4f55106cb6e108e8d48f0d8683f5b007fa7d1b8892d4cad176c6ce",
+    "scores": "2d5a5845a8af871357e5f31e4f6dc9457f1bd94637dedb21ff4c9adea9ea6b00"
+  },
+  "evidence": {
+    "native_rgb_and_pts": 3600,
+    "planted_frames": 21,
+    "point10_frames": 36,
+    "point20_frames": 21,
+    "replayed_crops": 113
+  },
+  "observations": [
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "localized"
+      },
+      "full_ranges": {},
+      "group": 1,
+      "ordinary_treatment": null,
+      "point10_range": [
+        63,
+        67
+      ],
+      "point20_range": [
+        63,
+        67
+      ],
+      "response_hex": "0x1.4f4f732c50bd7p-1",
+      "role": "swap_plus_blur",
+      "truth": [
+        63,
+        67
+      ]
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "no_match"
+      },
+      "full_ranges": {},
+      "group": 1,
+      "ordinary_treatment": [
+        63,
+        67
+      ],
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "ordinary_blur",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 0,
+        "reason": "face_context",
+        "status": "unassessed"
+      },
+      "full_ranges": {},
+      "group": 1,
+      "ordinary_treatment": [
+        84,
+        87
+      ],
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "ordinary_alternate_blur",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 2,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "localized"
+      },
+      "full_ranges": {},
+      "group": 1,
+      "ordinary_treatment": [
+        78,
+        87
+      ],
+      "point10_range": [
+        81,
+        84
+      ],
+      "point20_range": [
+        81,
+        84
+      ],
+      "response_hex": "0x1.0a57bcca26904p-2",
+      "role": "ordinary_gradual_defocus",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 0,
+        "measured_pairs": 0,
+        "reason": "face_context",
+        "status": "unassessed"
+      },
+      "full_ranges": {},
+      "group": 1,
+      "ordinary_treatment": [
+        63,
+        120
+      ],
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "hard_cut",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "localized"
+      },
+      "full_ranges": {},
+      "group": 2,
+      "ordinary_treatment": null,
+      "point10_range": [
+        93,
+        96
+      ],
+      "point20_range": [
+        93,
+        96
+      ],
+      "response_hex": "0x1.1a1b5e01bd902p-1",
+      "role": "swap_plus_blur",
+      "truth": [
+        93,
+        96
+      ]
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "no_match"
+      },
+      "full_ranges": {},
+      "group": 2,
+      "ordinary_treatment": [
+        93,
+        96
+      ],
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "ordinary_blur",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 0,
+        "measured_pairs": 0,
+        "reason": "face_context",
+        "status": "unassessed"
+      },
+      "full_ranges": {},
+      "group": 2,
+      "ordinary_treatment": [
+        72,
+        76
+      ],
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "ordinary_alternate_blur",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 2,
+        "measured_pairs": 2,
+        "reason": null,
+        "status": "localized"
+      },
+      "full_ranges": {},
+      "group": 2,
+      "ordinary_treatment": [
+        84,
+        93
+      ],
+      "point10_range": [
+        87,
+        90
+      ],
+      "point20_range": null,
+      "response_hex": "0x1.a5a9016cc3868p-4",
+      "role": "ordinary_gradual_defocus",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 0,
+        "measured_pairs": 0,
+        "reason": "face_context",
+        "status": "unassessed"
+      },
+      "full_ranges": {},
+      "group": 2,
+      "ordinary_treatment": null,
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "untouched",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "localized"
+      },
+      "full_ranges": {},
+      "group": 3,
+      "ordinary_treatment": null,
+      "point10_range": [
+        66,
+        69
+      ],
+      "point20_range": [
+        66,
+        69
+      ],
+      "response_hex": "0x1.e106428776b42p-2",
+      "role": "swap_plus_blur",
+      "truth": [
+        66,
+        69
+      ]
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "no_match"
+      },
+      "full_ranges": {},
+      "group": 3,
+      "ordinary_treatment": [
+        66,
+        69
+      ],
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "ordinary_blur",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 3,
+        "measured_pairs": 3,
+        "reason": null,
+        "status": "localized"
+      },
+      "full_ranges": {},
+      "group": 3,
+      "ordinary_treatment": [
+        81,
+        85
+      ],
+      "point10_range": [
+        81,
+        85
+      ],
+      "point20_range": null,
+      "response_hex": "0x1.5b168210ceae4p-3",
+      "role": "ordinary_alternate_blur",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 5,
+        "measured_pairs": 5,
+        "reason": null,
+        "status": "localized"
+      },
+      "full_ranges": {},
+      "group": 3,
+      "ordinary_treatment": [
+        74,
+        83
+      ],
+      "point10_range": [
+        77,
+        80
+      ],
+      "point20_range": null,
+      "response_hex": "0x1.c4aa07ad3fbb0p-4",
+      "role": "ordinary_gradual_defocus",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 0,
+        "measured_pairs": 0,
+        "reason": "face_context",
+        "status": "unassessed"
+      },
+      "full_ranges": {},
+      "group": 3,
+      "ordinary_treatment": [
+        66,
+        120
+      ],
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "hard_cut",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "localized"
+      },
+      "full_ranges": {},
+      "group": 4,
+      "ordinary_treatment": null,
+      "point10_range": [
+        82,
+        86
+      ],
+      "point20_range": [
+        82,
+        86
+      ],
+      "response_hex": "0x1.32bef950c8c21p-1",
+      "role": "swap_plus_blur",
+      "truth": [
+        82,
+        86
+      ]
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "no_match"
+      },
+      "full_ranges": {},
+      "group": 4,
+      "ordinary_treatment": [
+        82,
+        86
+      ],
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "ordinary_blur",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "no_match"
+      },
+      "full_ranges": {},
+      "group": 4,
+      "ordinary_treatment": [
+        62,
+        65
+      ],
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "ordinary_alternate_blur",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 3,
+        "measured_pairs": 3,
+        "reason": null,
+        "status": "no_match"
+      },
+      "full_ranges": {},
+      "group": 4,
+      "ordinary_treatment": [
+        84,
+        93
+      ],
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "ordinary_gradual_defocus",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 0,
+        "measured_pairs": 0,
+        "reason": "face_context",
+        "status": "unassessed"
+      },
+      "full_ranges": {},
+      "group": 4,
+      "ordinary_treatment": null,
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "untouched",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "localized"
+      },
+      "full_ranges": {},
+      "group": 5,
+      "ordinary_treatment": null,
+      "point10_range": [
+        73,
+        76
+      ],
+      "point20_range": [
+        73,
+        76
+      ],
+      "response_hex": "0x1.1582c5c919124p-1",
+      "role": "swap_plus_blur",
+      "truth": [
+        73,
+        76
+      ]
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "no_match"
+      },
+      "full_ranges": {},
+      "group": 5,
+      "ordinary_treatment": [
+        73,
+        76
+      ],
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "ordinary_blur",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "localized"
+      },
+      "full_ranges": {},
+      "group": 5,
+      "ordinary_treatment": [
+        92,
+        96
+      ],
+      "point10_range": [
+        92,
+        96
+      ],
+      "point20_range": null,
+      "response_hex": "0x1.d722cef3f39f0p-4",
+      "role": "ordinary_alternate_blur",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 4,
+        "measured_pairs": 3,
+        "reason": null,
+        "status": "no_match"
+      },
+      "full_ranges": {},
+      "group": 5,
+      "ordinary_treatment": [
+        64,
+        73
+      ],
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "ordinary_gradual_defocus",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 0,
+        "measured_pairs": 0,
+        "reason": "face_context",
+        "status": "unassessed"
+      },
+      "full_ranges": {},
+      "group": 5,
+      "ordinary_treatment": [
+        73,
+        120
+      ],
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "hard_cut",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "localized"
+      },
+      "full_ranges": {},
+      "group": 6,
+      "ordinary_treatment": null,
+      "point10_range": [
+        85,
+        89
+      ],
+      "point20_range": [
+        85,
+        89
+      ],
+      "response_hex": "0x1.2c356ae601fddp-1",
+      "role": "swap_plus_blur",
+      "truth": [
+        85,
+        89
+      ]
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "no_match"
+      },
+      "full_ranges": {},
+      "group": 6,
+      "ordinary_treatment": [
+        85,
+        89
+      ],
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "ordinary_blur",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 1,
+        "measured_pairs": 1,
+        "reason": null,
+        "status": "localized"
+      },
+      "full_ranges": {},
+      "group": 6,
+      "ordinary_treatment": [
+        75,
+        78
+      ],
+      "point10_range": [
+        75,
+        78
+      ],
+      "point20_range": null,
+      "response_hex": "0x1.6540ecd3233bcp-3",
+      "role": "ordinary_alternate_blur",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 4,
+        "measured_pairs": 4,
+        "reason": null,
+        "status": "no_match"
+      },
+      "full_ranges": {},
+      "group": 6,
+      "ordinary_treatment": [
+        82,
+        91
+      ],
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "ordinary_gradual_defocus",
+      "truth": null
+    },
+    {
+      "coverage": {
+        "affects_overall_confidence": false,
+        "candidate_pairs": 0,
+        "measured_pairs": 0,
+        "reason": "face_context",
+        "status": "unassessed"
+      },
+      "full_ranges": {},
+      "group": 6,
+      "ordinary_treatment": null,
+      "point10_range": null,
+      "point20_range": null,
+      "response_hex": null,
+      "role": "untouched",
+      "truth": null
+    }
+  ],
+  "points_hex": [
+    "0x1.999999999999ap-4",
+    "0x1.999999999999ap-3"
+  ],
+  "requirements": {
+    "max_new_ordinary": 1,
+    "max_wrong": 0,
+    "min_added_groups": 3,
+    "min_measured_circular": 4,
+    "min_measured_gaussian": 2,
+    "min_measured_ordinary": 8,
+    "min_measured_ordinary_groups": 5,
+    "min_new_exact_compounds": 3,
+    "require_all_low_point_exact_compounds": true,
+    "require_prior_ranges_preserved": true
+  },
+  "schema": "chipmunk.video-matched-detail-native25-point20/1",
+  "scope": {
+    "fps": 25,
+    "frames": 120,
+    "height": 720,
+    "ticks": 3600,
+    "time_base": "1/90000",
+    "width": 1280
+  },
+  "source_groups": [
+    {
+      "alternate_blur": [
+        84,
+        87
+      ],
+      "compound": [
+        63,
+        67
+      ],
+      "control": "hard_cut",
+      "group": 1,
+      "matched_kernel": "disc",
+      "ordinary_ramp": [
+        78,
+        87
+      ],
+      "renderer": "first"
+    },
+    {
+      "alternate_blur": [
+        72,
+        76
+      ],
+      "compound": [
+        93,
+        96
+      ],
+      "control": "untouched",
+      "group": 2,
+      "matched_kernel": "gaussian",
+      "ordinary_ramp": [
+        84,
+        93
+      ],
+      "renderer": "second"
+    },
+    {
+      "alternate_blur": [
+        81,
+        85
+      ],
+      "compound": [
+        66,
+        69
+      ],
+      "control": "hard_cut",
+      "group": 3,
+      "matched_kernel": "disc",
+      "ordinary_ramp": [
+        74,
+        83
+      ],
+      "renderer": "second"
+    },
+    {
+      "alternate_blur": [
+        62,
+        65
+      ],
+      "compound": [
+        82,
+        86
+      ],
+      "control": "untouched",
+      "group": 4,
+      "matched_kernel": "gaussian",
+      "ordinary_ramp": [
+        84,
+        93
+      ],
+      "renderer": "first"
+    },
+    {
+      "alternate_blur": [
+        92,
+        96
+      ],
+      "compound": [
+        73,
+        76
+      ],
+      "control": "hard_cut",
+      "group": 5,
+      "matched_kernel": "gaussian",
+      "ordinary_ramp": [
+        64,
+        73
+      ],
+      "renderer": "second"
+    },
+    {
+      "alternate_blur": [
+        75,
+        78
+      ],
+      "compound": [
+        85,
+        89
+      ],
+      "control": "untouched",
+      "group": 6,
+      "matched_kernel": "disc",
+      "ordinary_ramp": [
+        82,
+        91
+      ],
+      "renderer": "first"
+    }
+  ],
+  "totals": {
+    "by_role": {
+      "hard_cut": {
+        "files": 3,
+        "full_any": 0,
+        "full_exact": 0,
+        "full_useful": 0,
+        "measured": 0,
+        "point10_any": 0,
+        "point10_exact": 0,
+        "point10_useful": 0,
+        "point20_any": 0,
+        "point20_exact": 0,
+        "point20_useful": 0
+      },
+      "ordinary_alternate_blur": {
+        "files": 6,
+        "full_any": 0,
+        "full_exact": 0,
+        "full_useful": 0,
+        "measured": 4,
+        "point10_any": 3,
+        "point10_exact": 0,
+        "point10_useful": 0,
+        "point20_any": 0,
+        "point20_exact": 0,
+        "point20_useful": 0
+      },
+      "ordinary_blur": {
+        "files": 6,
+        "full_any": 0,
+        "full_exact": 0,
+        "full_useful": 0,
+        "measured": 6,
+        "point10_any": 0,
+        "point10_exact": 0,
+        "point10_useful": 0,
+        "point20_any": 0,
+        "point20_exact": 0,
+        "point20_useful": 0
+      },
+      "ordinary_gradual_defocus": {
+        "files": 6,
+        "full_any": 0,
+        "full_exact": 0,
+        "full_useful": 0,
+        "measured": 6,
+        "point10_any": 3,
+        "point10_exact": 0,
+        "point10_useful": 0,
+        "point20_any": 1,
+        "point20_exact": 0,
+        "point20_useful": 0
+      },
+      "swap_plus_blur": {
+        "files": 6,
+        "full_any": 0,
+        "full_exact": 0,
+        "full_useful": 0,
+        "measured": 6,
+        "point10_any": 6,
+        "point10_exact": 6,
+        "point10_useful": 6,
+        "point20_any": 6,
+        "point20_exact": 6,
+        "point20_useful": 6
+      },
+      "untouched": {
+        "files": 3,
+        "full_any": 0,
+        "full_exact": 0,
+        "full_useful": 0,
+        "measured": 0,
+        "point10_any": 0,
+        "point10_exact": 0,
+        "point10_useful": 0,
+        "point20_any": 0,
+        "point20_exact": 0,
+        "point20_useful": 0
+      }
+    },
+    "cases": 30,
+    "gate_pass": true,
+    "measured_controls": 16,
+    "measured_disc": 13,
+    "measured_gaussian": 3,
+    "measured_groups": 6,
+    "point10_added_ordinary": 6,
+    "point10_exact_gains": 6,
+    "point10_wrong": 0,
+    "point20_added_ordinary": 1,
+    "point20_exact_gains": 6,
+    "point20_wrong": 0
+  }
+}

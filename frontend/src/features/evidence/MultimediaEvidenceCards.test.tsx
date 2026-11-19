@@ -975,30 +975,37 @@ describe('ordinary multimedia evidence', () => {
     expect(screen.queryByRole('article')).toBeNull()
   })
 
-  it('shows the matched-detail range, estimated middle crop and exact source navigation', () => {
-    const set = { ...structuredClone(video), version: 'video-evidence-42' }
+  it.each([
+    { version: 'video-evidence-42', fps: 30, step: 1000, range: '2.433 s–2.533 s',
+      clock: { method: 'face-matched-detail/1', time_base: '1/30000' } },
+    { version: 'video-evidence-43', fps: 25, step: 3600, range: '2.920 s–3.040 s',
+      clock: { method: 'face-matched-detail/2', time_base: '1/90000' } },
+  ] as const)('shows the matched-detail range and source navigation at $fps fps', ({ version, fps, step, range, clock }) => {
+    const set = { ...structuredClone(video), version }
     const packet = set.packets[0]
     packet.id = 'VMD01'
     packet.title = 'Very brief face appearance change after matching image detail'
-    packet.face_matched_detail = { method: 'face-matched-detail/1', start_frame_index: 73,
-      end_frame_index: 76, start_pts: 73000, end_pts: 76000, time_base: '1/30000' }
+    packet.face_matched_detail = { ...clock, start_frame_index: 73,
+      end_frame_index: 76, start_pts: 73 * step, end_pts: 76 * step }
     packet.frames = (['before', 'during', 'after'] as const).map((role, i) => {
       const index = [72, 74, 76][i]
       return { ...packet.frames[0], id: `VMD01.${role}`, interval_role: role,
-        anchor: { frame_index: index, pts: index * 1000, time_base: '1/30000',
-          stream_time_s: index / 30, playback_time_s: index / 30 } }
+        anchor: { frame_index: index, pts: index * step, time_base: clock.time_base,
+          stream_time_s: index / fps, playback_time_s: index / fps } }
     })
     set.coverage!.face_matched_detail_coverage = { status: 'localized', reason: null,
-      candidate_pairs: 2, measured_pairs: 1, affects_overall_confidence: false }
+      candidate_pairs: 2, measured_pairs: 1, affects_overall_confidence: false,
+      ...(clock.method === 'face-matched-detail/2' ? { method: clock.method } : {}) }
     show(set)
     const region = screen.getByRole('region', { name: 'Brief face review at matched image detail' })
     expect(within(region).getByRole('link', { name: 'See the exact range and original crops' }).getAttribute('href')).toBe('#media-evidence-VMD01')
-    expect(screen.getByText('2.433 s–2.533 s')).toBeTruthy()
+    expect(screen.getByText(range)).toBeTruthy()
+    if (fps === 25) expect(within(region).getByText(/120 native frames over 4.8 seconds/)).toBeTruthy()
     expect(screen.getByText(/position estimated from adjoining frames/)).toBeTruthy()
     const original = screen.getByLabelText('Original video evidence playback') as HTMLVideoElement
     Object.defineProperty(original, 'readyState', { value: 1 })
     fireEvent.click(screen.getByRole('button', { name: 'Jump to range start' }))
-    expect(original.currentTime).toBe(73 / 30)
+    expect(original.currentTime).toBe(73 / fps)
     expect(screen.getByText(/Selected range start/)).toBeTruthy()
   })
 

@@ -4,6 +4,10 @@ import { EvidenceAudio, EvidenceLimits, EvidenceMeasurements, EvidencePicture, E
 import { evidenceAssetUrl, evidenceSourceMediaUrl, hasNestedVideoEvidence, seconds, type VideoEvidenceFrame, type VideoEvidencePacket, type VideoEvidenceSet } from './multimediaPackets'
 import VideoFrameNavigator from './VideoFrameNavigator'
 
+function matchedDetailTime(record: NonNullable<VideoEvidencePacket['face_matched_detail']>, edge: 'start_pts' | 'end_pts') {
+  return record[edge] / (record.time_base === '1/90000' ? 90000 : 30000)
+}
+
 function occurrenceLabel(sequence: NonNullable<VideoEvidencePacket['picture_sequence']>, side: 'first' | 'second') {
   if (sequence.frame_steps) {
     const other = side === 'first' ? 'second' : 'first'
@@ -107,6 +111,7 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
   const matchedReview = coverage?.face_matched_detail_coverage
   const matchedReasons = {
     profile: 'This check needs a four-second 720p AVC MP4 with verified 30 fps timing.',
+    profile_avc: 'This check needs 120 verified 720p AVC MP4 frames at 30 fps (four seconds) or 25 fps (4.8 seconds).',
     prior_review: 'The brief face appearance review already found a range for this file.',
     shot_context: 'The original pictures did not supply a complete shot review.',
     face_context: 'The source did not supply comparable face views around a selected range.',
@@ -194,6 +199,8 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
         : matchedReview.status === 'no_match' ? 'The comparable source views supplied no additional brief face change.'
           : matchedReview.reason && matchedReasons[matchedReview.reason]}
         {matchedReview.status === 'localized' && <> <a className="underline" href="#media-evidence-VMD01">See the exact range and original crops</a>.</>}</p>
+      {matchedReview.method === 'face-matched-detail/2' && <p className="mt-2 mb-0 text-caption text-text-muted">
+        25 fps source with 120 native frames over 4.8 seconds. The comparison examines short ranges with comparable face views.</p>}
       {matchedReview.candidate_pairs > 0 && <p className="mt-2 mb-0 text-caption text-text-muted">
         The source supported {matchedReview.measured_pairs} of {matchedReview.candidate_pairs} proposed ranges for this comparison.</p>}
     </section>}
@@ -396,8 +403,8 @@ export default function VideoEvidenceContent({ set, token, mediaReady, scope = '
         Transition at <strong>{seconds(packet.face_single_boundary.time_s)}</strong> on the source clock · frame {packet.face_single_boundary.boundary}.
       </p>}
       {packet.face_matched_detail && <p className="mt-2 mb-0 text-small text-text-muted">
-        Source range <strong>{seconds(packet.face_matched_detail.start_pts / 30000)}–{seconds(packet.face_matched_detail.end_pts / 30000)}</strong>, frames [{packet.face_matched_detail.start_frame_index}, {packet.face_matched_detail.end_frame_index}), with an exclusive end.
-        {' '}<Button variant="text" disabled={!mediaReady || failed} onClick={() => jumpToRange(packet.face_matched_detail!.start_pts / 30000)}>Jump to range start</Button>
+        Source range <strong>{seconds(matchedDetailTime(packet.face_matched_detail, 'start_pts'))}–{seconds(matchedDetailTime(packet.face_matched_detail, 'end_pts'))}</strong>, frames [{packet.face_matched_detail.start_frame_index}, {packet.face_matched_detail.end_frame_index}), with an exclusive end.
+        {' '}<Button variant="text" disabled={!mediaReady || failed} onClick={() => jumpToRange(matchedDetailTime(packet.face_matched_detail!, 'start_pts'))}>Jump to range start</Button>
       </p>}
       {!packet.scene_return && !packet.lip_timing_review && !packet.face_single_boundary && !packet.face_matched_detail && <p className="mt-2 mb-0 text-small text-text-muted">{packet.picture_hold
         ? <>{packet.picture_hold.frame_count} consecutive decoded frames have identical pixels over <strong>{seconds(packet.picture_hold.span_s)}</strong> between the first and last source timestamps.</>

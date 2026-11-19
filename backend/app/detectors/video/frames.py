@@ -15,7 +15,8 @@ from app.detectors.video.decode import _input
 log = get_logger(__name__)
 
 
-def probe(path: Path, *, include_codec_tag: bool = False) -> dict:
+def probe(path: Path, *, include_codec_tag: bool = False, include_sample_aspect_ratio: bool = False,
+          timeout_s: float = 60) -> dict:
     if not shutil.which("ffprobe"):
         log.warning("ffprobe.missing")
         return {}
@@ -23,7 +24,7 @@ def probe(path: Path, *, include_codec_tag: bool = False) -> dict:
         r = subprocess.run(
             ["ffprobe", "-v", "error", "-protocol_whitelist", "file", "-print_format", "json", "-show_format", "-show_streams",
              _input(path)],
-            capture_output=True, text=True, timeout=60, check=True, stdin=subprocess.DEVNULL,
+            capture_output=True, text=True, timeout=timeout_s, check=True, stdin=subprocess.DEVNULL,
         )
         j = json.loads(r.stdout)
     except Exception as e:
@@ -42,6 +43,7 @@ def probe(path: Path, *, include_codec_tag: bool = False) -> dict:
         "bit_rate": int(fmt.get("bit_rate", 0) or 0),
         "codec": v.get("codec_name"),
         **({"codec_tag": v.get("codec_tag_string")} if include_codec_tag else {}),
+        **({"sample_aspect_ratio": v.get("sample_aspect_ratio")} if include_sample_aspect_ratio else {}),
         "profile": v.get("profile"),
         "width": v.get("width"),
         "height": v.get("height"),

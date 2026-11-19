@@ -322,6 +322,10 @@ def _verify_video(document: dict, store: ObjectStore, assets: dict[str, bytes], 
             from app.detectors.video.face_matched_detail import replay_source
 
             replay_source(store.path_for(source["sha256"]), table, detail)
+        elif (coverage.get(matched.COVERAGE) or {}).get("method") == matched.NATIVE25_METHOD:
+            from app.detectors.video.face_matched_detail import verify_profile
+
+            verify_profile(store.path_for(source["sha256"]), table, matched.PROFILE_25)
     except (ValueError, KeyError, TypeError) as error:
         raise ObjectIntegrityError("Picture evidence differs from the recorded native inspection") from error
     for packet in document["packets"]:
@@ -1405,7 +1409,11 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             if transition := packet.get(face_single_boundary_binding.KEY):
                 row[face_single_boundary_binding.KEY] = copy.deepcopy(transition)
             if detail := packet.get("face_matched_detail"):
-                row["face_matched_detail"] = {"start_s": detail["start_pts"]/30000, "end_s": detail["end_pts"]/30000,
+                from app.evidence import face_matched_detail_binding as matched_detail
+
+                profile = matched_detail.PROFILES[detail["method"]]
+                row["face_matched_detail"] = {"start_s": profile.seconds(detail["start_pts"]),
+                                               "end_s": profile.seconds(detail["end_pts"]),
                                               "start": detail["start_frame_index"], "end": detail["end_frame_index"]}
             row["whole_face_review"] = copy.deepcopy(packet.get("whole_face_review"))
             row["clip"] = copy.deepcopy(packet.get("clip"))

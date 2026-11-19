@@ -57,7 +57,6 @@ from app.evidence.video_packet_versions import (
     BOUNDARY_VERSION,
     CONTINUITY_VERSIONS,
     LIGHTING_CONTEXT_VERSIONS,
-    MATCHED_DETAIL_AVC_VERSION,
     MOVING_AVC_PROPOSAL_VERSION,
     NESTED_VERSIONS,
     OPPOSITE_PANE_VERSIONS,
@@ -617,12 +616,13 @@ def _single_face_boundary_packet(db, store, analysis, set_id, source, record, an
 
 def _matched_detail_packet(db, store, analysis, set_id, source, record, anchors, decoded):
     binding = matched_detail
+    profile = binding.PROFILES[record["method"]]
     packet_id = binding.PACKET_ID
     frames, assets = [], {}
     views = {row["index"]: row for row in record["views"]}
     for index, role in zip(binding.anchor_indices(record), binding.ROLES, strict=True):
         item = views[index]
-        box, time_s = item["box"], index/30
+        box, time_s = item["box"], profile.seconds(item["pts"])
         frame_id = f"{packet_id}.{role}"
         refs = {name: f"{role}_{name}" for name in ("original", "context", "crop")}
         with Image.fromarray(decoded[index]) as original:
@@ -636,12 +636,12 @@ def _matched_detail_packet(db, store, analysis, set_id, source, record, anchors,
             "score": None, "is_peak": False, "context_region": box, "region_meaning": "detected_face_context",
             "artifact_refs": refs})
     return {"id": packet_id, "title": binding.TITLE, "evidence_type": "anomaly", "claim_scope": "sampled_window",
-            "semantics": binding.METHOD, binding.KEY: record, "affects_overall_confidence": False,
+            "semantics": profile.method, binding.KEY: record, "affects_overall_confidence": False,
             "finding_ids": [], "signal_refs": [], "exhibit_refs": [], "frames": frames, "artifacts": assets,
             "observation": binding.OBSERVATION, "interpretation": binding.INTERPRETATION,
             "measurements": [], "limitations": [binding.LIMITATION],
             "clip": {"status": "unavailable", "reason": "Use the original video to inspect this range."},
-            "derivation": {"version": MATCHED_DETAIL_AVC_VERSION, "selection": binding.METHOD,
+            "derivation": {"version": profile.version, "selection": profile.method,
                            "decoder": "ffmpeg-rgb24-display-v1", "frame_pts_unit": "stream_ticks", "source_pixels": "exact_native_rgb"}}
 
 
@@ -1000,7 +1000,7 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
     if any(item.get("face_spatial_cut") for item in chosen):
         version = SPATIAL_CUT_VERSION
     if detail_record is not None:
-        version = MATCHED_DETAIL_AVC_VERSION
+        version = matched_detail.PROFILES[detail_record["method"]].version
     document = {"schema": SCHEMA, "version": version, "id": set_id, "status": "ready", "analysis_id": analysis.id,
                 "revision": analysis.revision, "original_result_hash": analysis.result_hash, "source": source, "packets": [],
                 "coverage": {"kind": "point_and_window_samples" if window_frames else "point_samples", "frame_count": len(table), "decoded_frame_indices": sorted(anchors),

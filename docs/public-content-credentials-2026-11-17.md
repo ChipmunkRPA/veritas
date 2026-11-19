@@ -10,6 +10,8 @@ received zero requests.
 The [November 18 follow-up](content-credentials-timestamps-2026-11-18.md)
 connected the separate timestamp authority list, reproduced the 21
 pipeline decisions and published ten exact timestamp replays.
+The [plain-text interoperability check](content-credentials-plain-text-2026-11-18.md)
+compares native SDK results on Encypher's exact TXT, WAV and MP4 exports.
 
 ## Files with signed records
 

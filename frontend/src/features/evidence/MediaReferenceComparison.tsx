@@ -94,8 +94,11 @@ type CleanSpeechComparison = {
   scope: string
   status: 'localized_difference' | 'no_local_difference' | 'unassessed' | 'broad_processing_difference'
   reason: string
-  basis?: 'dense_clean_reference_v1' | 'dense_clean_reference_frequency_balance_v1'
+  basis?: 'dense_clean_reference_v1' | 'dense_clean_reference_frequency_balance_v1' | 'dense_long_clean_reference_v1'
+  range_method?: 'retained' | 'dense_fallback'
+  sample_rate?: number
   sample_count?: number
+  affects_overall_confidence?: boolean
   aac_presentation?: SoundtrackTiming['aac_presentation']
   stereo_support?: {
     denser_window_starts?: true
@@ -110,6 +113,7 @@ type CleanSpeechComparison = {
     relative_gains: (number[] | null)[]
   }
   range?: Record<Side, SoundtrackSide & { source_pts: [number, number] }> & {
+    samples?: [number, number]
     bands: { band_hz: [number, number]; before: number; within: number; after: number }[]
     relative_drop: number
     supporting_window_starts?: [number, number]
@@ -216,7 +220,7 @@ type Comparison = {
     | 'chipmunk.audio-reference-comparison/17' | 'chipmunk.audio-reference-comparison/18' | 'chipmunk.audio-reference-comparison/19'
     | 'chipmunk.audio-reference-comparison/20' | 'chipmunk.audio-reference-comparison/21'
     | 'chipmunk.audio-reference-comparison/22'
-    | 'chipmunk.audio-reference-comparison/23'
+    | 'chipmunk.audio-reference-comparison/23' | 'chipmunk.audio-reference-comparison/24'
   picture?: never
   picture_insertion?: never
   insertion_retention?: never
@@ -239,9 +243,34 @@ type Availability = { available: boolean; timing_available?: boolean; picture_in
   short_native_sound_difference_available?: boolean;
   short_phrase_reencode_available?: boolean;
   clean_speech_available?: boolean; long_clean_speech_available?: boolean; aligned_speech_available?: boolean; clean_speech_aac_available?: boolean
-  clean_speech_stereo_aac_available?: boolean; matching_waveform_aac_available?: boolean }
+  clean_speech_stereo_aac_available?: boolean; matching_waveform_aac_available?: boolean; dense_long_clean_speech_available?: boolean }
 const sourceSeconds = new Intl.NumberFormat('en-US', { minimumFractionDigits: 3, maximumFractionDigits: 7, useGrouping: false })
 const trimSampleRate = 16000
+const denseLongSpeechSchema = 'chipmunk.audio-reference-comparison/24'
+const denseLongSpeechBasis = 'dense_long_clean_reference_v1'
+
+function hasDenseLongSpeechEvidence(result: CleanSpeechComparison | undefined, assets: Result['assets']) {
+  if (result?.basis !== denseLongSpeechBasis || result.sample_rate !== trimSampleRate || result.sample_count !== 192000 ||
+      result.affects_overall_confidence !== false || !result.reason || !result.summary || !result.scope ||
+      result.aac_presentation || result.stereo_support) return false
+  const span = result.range
+  if (!span) return result.range_method === undefined &&
+    (result.status === 'no_local_difference' || result.status === 'broad_processing_difference' || result.status === 'unassessed')
+  if (result.status !== 'localized_difference' || (result.range_method !== 'retained' && result.range_method !== 'dense_fallback') ||
+      span.samples?.length !== 2 || span.supporting_window_starts?.length !== 2 || !span.bands?.length) return false
+  const [start, end] = span.samples
+  const [firstWindow, secondWindow] = span.supporting_window_starts
+  return Number.isInteger(start) && Number.isInteger(end) && Number.isInteger(firstWindow) &&
+    firstWindow >= 0 && secondWindow <= 96000 && firstWindow % 19200 === 0 && secondWindow - firstWindow === 19200 &&
+    start >= firstWindow && end <= secondWindow + 96000 && end - start === (result.range_method === 'dense_fallback' ? 15360 : 11520) &&
+    sides.every(side => {
+      const excerpt = span[side]
+      return excerpt?.source_pts?.length === 2 && excerpt.source_pts[0] === start && excerpt.source_pts[1] === end &&
+        excerpt.start_s === start / trimSampleRate && excerpt.end_s === end / trimSampleRate &&
+        !!excerpt.waveform?.low?.length && excerpt.waveform.low.length === excerpt.waveform.high?.length &&
+        !!excerpt.audio && !!assets && !!assetBody(assets, excerpt.audio, 'audio/wav')
+    })
+}
 
 const unassessed: Record<string, string> = {
   comparison_limit: 'At least one clip exceeds the picture comparison limits.',
@@ -640,7 +669,8 @@ function ResultView({ result }: { result: Result }) {
         comparison.schema === 'chipmunk.audio-reference-comparison/20' ||
         comparison.schema === 'chipmunk.audio-reference-comparison/21' ||
         comparison.schema === 'chipmunk.audio-reference-comparison/22' ||
-        comparison.schema === 'chipmunk.audio-reference-comparison/23') && 'Decoded sample comparison unavailable. '}
+        comparison.schema === 'chipmunk.audio-reference-comparison/23' ||
+        comparison.schema === denseLongSpeechSchema) && 'Decoded sample comparison unavailable. '}
       {notes[comparison.status] ?? 'The files could not be compared.'}
     </p>}
     {comparison.aligned_speech && <AlignedSpeechEvidence result={comparison.aligned_speech} assets={assets} />}
@@ -761,6 +791,8 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
   const balance = result.frequency_balance
   const support = result.match_support
   const stereo = result.stereo_support
+  const denseFallback = result.range_method === 'dense_fallback'
+  const signedGain = result.basis && (result.basis !== denseLongSpeechBasis || denseFallback)
   return <div className="space-y-2 rounded-md border border-border p-3">
     <SoundtrackTimingEvidence timing={result} assets={assets} audioOnly title="Local speech comparison" analyzedMono={!!stereo} />
     {stereo?.witness_channels.map(channel => {
@@ -785,8 +817,9 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
       {stereo?.channel_window_starts
         ? ' Both original channels supported the same part of the interval.'
         : stereo?.denser_window_starts && ' The interval was found by checking additional window starts.'}
+      {denseFallback && ' This check used shorter intervals within both windows to locate the drop in shared sound.'}
     </p>}
-    {span && result.basis && <div className="text-caption text-text-muted">
+    {span && signedGain && <div className="text-caption text-text-muted">
       <p className="m-0">Drop in signed matching-sound gain {span.relative_drop.toFixed(3)}.</p>
       <table className="mt-2 text-left">
         <caption className="mb-1 text-left font-medium">Matching sound gain by frequency band</caption>
@@ -819,11 +852,11 @@ function CleanSpeechEvidence({ result, assets }: { result: CleanSpeechComparison
 
 function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertionAvailable, cleanSpeechAvailable, longCleanSpeechAvailable,
   alignedSpeechAvailable, cleanSpeechAacAvailable, cleanSpeechStereoAacAvailable, matchingWaveformAacAvailable,
-  soundDifferenceAvailable, shortNativeSoundDifferenceAvailable, shortPhraseReencodeAvailable }: {
+  denseLongSpeechAvailable, soundDifferenceAvailable, shortNativeSoundDifferenceAvailable, shortPhraseReencodeAvailable }: {
   analysisId: string; kind: Kind; timingAvailable: boolean; pictureInsertionAvailable: boolean
   cleanSpeechAvailable: boolean; longCleanSpeechAvailable: boolean; alignedSpeechAvailable: boolean; cleanSpeechAacAvailable: boolean
   cleanSpeechStereoAacAvailable: boolean
-  matchingWaveformAacAvailable: boolean
+  matchingWaveformAacAvailable: boolean; denseLongSpeechAvailable: boolean
   soundDifferenceAvailable: boolean
   shortNativeSoundDifferenceAvailable: boolean
   shortPhraseReencodeAvailable: boolean
@@ -876,7 +909,8 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
       const hasStereoAacSpeech = kind === 'audio' && (schema === 'chipmunk.audio-reference-comparison/18' ||
         schema === 'chipmunk.audio-reference-comparison/19' || schema === 'chipmunk.audio-reference-comparison/20')
       const hasLongAacSpeech = hasStereoAacSpeech || (kind === 'audio' && schema === 'chipmunk.audio-reference-comparison/17')
-      if (!hasAacSpeech && !hasLongAacSpeech && !Array.from({ length: accepted }, (_, index) => index + 1).some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
+      const hasDenseLongSpeech = kind === 'audio' && schema === denseLongSpeechSchema
+      if (!hasAacSpeech && !hasLongAacSpeech && !hasDenseLongSpeech && !Array.from({ length: accepted }, (_, index) => index + 1).some(version => schema === `chipmunk.${kind}-reference-comparison/${version}`)) {
         throw new Error('The comparison response is incomplete.')
       }
       if (schema === 'chipmunk.audio-reference-comparison/3' && !response.comparison.audio?.trim_alignment) {
@@ -945,6 +979,9 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
         throw new Error('The comparison response is missing its matching sound counts.')
       }
       const localSpeech = response.comparison.clean_speech
+      if (hasDenseLongSpeech && !hasDenseLongSpeechEvidence(localSpeech, response.assets)) {
+        throw new Error('The comparison response is missing its twelve-second speech evidence.')
+      }
       if ((hasAacSpeech || hasLongAacSpeech) && localSpeech?.aac_presentation?.side !== 'submitted') {
         throw new Error('The comparison response is missing its AAC speech clock.')
       }
@@ -1082,6 +1119,7 @@ function MediaReferenceForm({ analysisId, kind, timingAvailable, pictureInsertio
             ` Twelve-second AAC M4A is supported at 48 kHz mono${cleanSpeechStereoAacAvailable ? ' or stereo' : ''}.`}
           {cleanSpeechAacAvailable && ' Use a 16 kHz mono 16-bit WAV or FLAC earlier copy with matching duration and timing.'}
           {matchingWaveformAacAvailable && ' The waveform check also supports six-second 48 kHz mono AAC M4A with verified playback timing and a measured bitrate of at least 60 kbps, and qualified Ogg Opus at a constant 64 kbps.'}
+          {denseLongSpeechAvailable && ' Matching twelve-second WAV or FLAC copies support a closer check for brief changes in shared sound.'}
         </p>
       </div>}
       {soundDifferenceAvailable && <div className="min-w-0 basis-full">
@@ -1128,5 +1166,6 @@ export default function MediaReferenceComparison({ analysisId, kind }: { analysi
       cleanSpeechStereoAacAvailable={kind === 'audio' && availability.data.clean_speech_stereo_aac_available === true}
       matchingWaveformAacAvailable={kind === 'audio' && availability.data.matching_waveform_aac_available === true}
       alignedSpeechAvailable={kind === 'audio' && availability.data.aligned_speech_available === true}
+      denseLongSpeechAvailable={kind === 'audio' && availability.data.dense_long_clean_speech_available === true}
       longCleanSpeechAvailable={kind === 'audio' && availability.data.long_clean_speech_available === true} /> : null
 }

@@ -462,6 +462,48 @@ it.each([[8, false], [11, false], [12, false], [13, false], [16, false], [16, tr
   expect(screen.getByRole('button', { name: 'Download JSON evidence' })).toBeTruthy()
 })
 
+it.each([
+  [24, 'dense_fallback', false], [14, 'dense_fallback', false], [15, 'dense_fallback', false],
+  [24, 'retained', false], [24, 'dense_fallback', true],
+] as const)('shows the twelve-second result for version %s and %s with invalid clock %s', async (version, method, invalidClock) => {
+  const dense = method === 'dense_fallback'
+  const samples = dense ? [130560, 145920] : [30720, 42240]
+  const excerpt = (file: string, source_pts = samples) => ({
+    source_pts, start_s: samples[0] / 16000, end_s: samples[1] / 16000,
+    audio: { file, media_type: 'audio/wav', sha256: 'c'.repeat(64) }, waveform: { low: [-.4], high: [.2] },
+  })
+  const comparison = { schema: `chipmunk.audio-reference-comparison/${version}`, status: 'measured', interpretation: 'Compared recordings.',
+    ...(version !== 24 && { comparison_schema: 'chipmunk.audio-reference-comparison/24' }),
+    ...(version === 14 && { aligned_speech: { status: 'no_local_difference', summary: 'Aligned.', scope: 'Scope.' } }),
+    ...(version === 15 && { matching_waveform: { status: 'no_local_difference', summary: 'Waveform checked.', scope: 'Scope.' } }),
+    clean_speech: { basis: 'dense_long_clean_reference_v1', range_method: method, status: 'localized_difference',
+      reason: 'local_change', summary: 'Matching sound became weaker.', scope: 'Ordinary edits can cause this. This carries zero weight in the AI estimate.',
+      sample_rate: 16000, sample_count: 192000, affects_overall_confidence: false,
+      range: { samples, supporting_window_starts: dense ? [57600, 76800] : [0, 19200], relative_drop: .5,
+        earlier: excerpt('earlier.wav'), submitted: excerpt('analyzed.wav', invalidClock ? [samples[0] + 1, samples[1]] : samples),
+        bands: [{ band_hz: [300, 900], before: 1, within: .5, after: 1 }] } },
+  }
+  vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(Response.json({ available: true, clean_speech_available: true,
+    long_clean_speech_available: true, dense_long_clean_speech_available: true }))
+    .mockResolvedValueOnce(Response.json({ comparison, assets: { 'earlier.wav': 'UklGRg==', 'analyzed.wav': 'UklGRg==' }, pdf: 'JVBERi0xLjQK' })))
+  show('audio')
+  fireEvent.change(await screen.findByLabelText('Earlier audio'), { target: { files: [new File(['audio'], 'earlier.wav')] } })
+  fireEvent.click(screen.getByRole('checkbox', { name: 'The earlier file is a clean copy of the same recording' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Compare recordings' }))
+  if (invalidClock) {
+    expect((await screen.findByRole('alert')).textContent).toContain('missing its twelve-second speech evidence')
+    expect(screen.queryByRole('button', { name: 'Download JSON evidence' })).toBeNull()
+    return
+  }
+  const local = await screen.findByRole('region', { name: 'Local speech comparison' })
+  expect(within(local).getAllByRole('img', { name: /matched excerpt waveform/ })).toHaveLength(2)
+  expect(screen.getByText(new RegExp(`source ticks ${samples[0]} to ${samples[1]}`))).toBeTruthy()
+  expect(Boolean(screen.queryByText(/shorter intervals within both windows/))).toBe(dense)
+  expect(Boolean(screen.queryByText('Matching sound gain by frequency band'))).toBe(dense)
+  expect(screen.getByRole('button', { name: 'Download PDF' })).toBeTruthy()
+  expect(screen.getByRole('button', { name: 'Download JSON evidence' })).toBeTruthy()
+})
+
 it.each([14, 15, 21, 22])('shows audio excerpts on two recording clocks for comparison version %s', async (version) => {
   const waveform = { low: [-.4], high: [.2] }
   const aac = version >= 21

@@ -18,6 +18,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
     SCHEMA_WITH_CLOSE_STEREO_AAC,
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
+    SCHEMA_WITH_DENSE_LONG_CLEAN_SPEECH,
     SCHEMA_WITH_DENSER_STEREO_AAC,
     SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
@@ -75,11 +76,13 @@ def run(earlier: Path, submitted: Path, output: Path, *, verify: bool = False, c
                                      include_channel_timing="channel_timing" in record)
         elif schema in {
             SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH, SCHEMA_WITH_DENSE_CLEAN_SPEECH,
-            *eq_schemas,
+            SCHEMA_WITH_DENSE_LONG_CLEAN_SPEECH, *eq_schemas,
         }:
             compare_source = partial(compare, include_clean_speech=True, include_local_timing="local_timing" in record,
                                      include_channel_timing="channel_timing" in record,
-                                     allow_long_clean_speech=schema == SCHEMA_WITH_LONG_CLEAN_SPEECH,
+                                     allow_long_clean_speech=schema in {SCHEMA_WITH_LONG_CLEAN_SPEECH,
+                                                                        SCHEMA_WITH_DENSE_LONG_CLEAN_SPEECH},
+                                     use_dense_long_clean_speech=schema == SCHEMA_WITH_DENSE_LONG_CLEAN_SPEECH,
                                      use_dense_clean_speech=schema in {SCHEMA_WITH_DENSE_CLEAN_SPEECH, *eq_schemas},
                                      use_clean_speech_eq_guard=schema in eq_schemas,
                                      include_clean_speech_match_support=schema == SCHEMA_WITH_CLEAN_SPEECH_SUPPORT)

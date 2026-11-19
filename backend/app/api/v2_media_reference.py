@@ -44,6 +44,7 @@ class MediaReferenceAvailability(BaseModel):
 class AudioReferenceAvailability(MediaReferenceAvailability):
     clean_speech_available: bool | None = None
     long_clean_speech_available: bool | None = None
+    dense_long_clean_speech_available: bool | None = None
     aligned_speech_available: bool | None = None
     clean_speech_aac_available: bool | None = None
     clean_speech_stereo_aac_available: bool | None = None
@@ -120,6 +121,8 @@ def availability(aid: str, request: Request):
         result["clean_speech_available"] = True
         if settings.audio_reference_long_clean_speech:
             result["long_clean_speech_available"] = True
+            if settings.audio_reference_dense_long_clean_speech:
+                result["dense_long_clean_speech_available"] = True
         if settings.audio_reference_aligned_speech:
             result["aligned_speech_available"] = True
         if settings.audio_reference_clean_speech_aac:
@@ -195,6 +198,7 @@ def _compare(aid: str, kind: str, original: tuple[str, int, str], earlier: Uploa
                         include_clean_speech=settings.audio_reference_clean_speech and earlier_has_clean_speech,
                         allow_long_clean_speech=settings.audio_reference_long_clean_speech,
                         use_dense_clean_speech=settings.audio_reference_dense_clean_speech,
+                        use_dense_long_clean_speech=settings.audio_reference_dense_long_clean_speech,
                         use_clean_speech_eq_guard=settings.audio_reference_clean_speech_eq_guard,
                         include_clean_speech_aac=settings.audio_reference_clean_speech_aac,
                         include_clean_speech_stereo_aac=settings.audio_reference_clean_speech_stereo_aac,

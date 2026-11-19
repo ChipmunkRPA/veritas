@@ -149,6 +149,8 @@ replay-evidence:  ## recount published image, video, audio, and writing evaluati
 		docs/evaluation-panels/video-lip-motion-aac441-transfer-2026-11-18.json.gz
 	python3 -I -S backend/scripts/review_audio_native12_dense_reference.py \
 		docs/evaluation-panels/audio-dense-native12-reference-2026-11-18.json
+	python3 -I -S backend/scripts/review_audio_native12_dense_confirmation.py \
+		docs/evaluation-panels/audio-dense-native12-confirmation-2026-11-18.json
 	python3 -I -S backend/scripts/review_writing_joss_disclosures.py \
 		docs/evaluation-panels/writing-joss-disclosures-2026-11-18.json
 

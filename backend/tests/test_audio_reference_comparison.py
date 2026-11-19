@@ -1086,8 +1086,10 @@ def test_clean_speech_lane_api_is_opt_in_and_renders_source_ranges(reference_htt
         assert db.get(Analysis, "other-kind").result_hash == original_result
 
 
-@pytest.mark.parametrize(("aac_channels", "stereo_enabled"), [(None, False), (1, False), (2, False), (2, True)])
-def test_clean_speech_twelve_seconds_distinguishes_late_change_and_broad_frequency_processing(tmp_path, aac_channels, stereo_enabled):
+@pytest.mark.parametrize(("aac_channels", "stereo_enabled", "dense_long_enabled"),
+                         [(None, False, False), (None, False, True), (1, False, False), (2, False, False), (2, True, False)])
+def test_clean_speech_twelve_seconds_distinguishes_late_change_and_broad_frequency_processing(
+        tmp_path, aac_channels, stereo_enabled, dense_long_enabled):
     from scipy.signal import butter, sosfiltfilt
 
     rng = np.random.default_rng(172)
@@ -1104,7 +1106,8 @@ def test_clean_speech_twelve_seconds_distinguishes_late_change_and_broad_frequen
         ("mismatched", donor + background, "unassessed"),
     ):
         other = save(tmp_path, name, (np.rint(waveform) / 32768).astype(np.float32))
-        schema = audio_reference.SCHEMA_WITH_LONG_CLEAN_SPEECH
+        schema = (audio_reference.SCHEMA_WITH_DENSE_LONG_CLEAN_SPEECH if dense_long_enabled
+                  else audio_reference.SCHEMA_WITH_LONG_CLEAN_SPEECH)
         if aac_channels:
             encoded = tmp_path / f"{name}.m4a"
             subprocess.run(["ffmpeg", "-v", "error", "-i", str(other), "-ar", "48000", "-ac", str(aac_channels),
@@ -1112,8 +1115,8 @@ def test_clean_speech_twelve_seconds_distinguishes_late_change_and_broad_frequen
             other = encoded
             schema = (audio_reference.SCHEMA_WITH_STEREO_AAC_CLEAN_SPEECH if stereo_enabled
                       else audio_reference.SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH)
-        options = dict(include_clean_speech=True, use_dense_clean_speech=True, include_clean_speech_aac=bool(aac_channels),
-                       include_clean_speech_stereo_aac=stereo_enabled)
+        options = dict(include_clean_speech=True, use_dense_clean_speech=True, use_dense_long_clean_speech=dense_long_enabled,
+                       include_clean_speech_aac=bool(aac_channels), include_clean_speech_stereo_aac=stereo_enabled)
         record, assets = audio_reference.compare(path, other, **options)
         if aac_channels == 2 and not stereo_enabled:
             assert record["clean_speech"]["status"] == "unassessed"
@@ -1142,6 +1145,8 @@ def test_clean_speech_twelve_seconds_distinguishes_late_change_and_broad_frequen
             assert measured["samples"] == [145920, 157440]
             assert measured["excerpts_verified"] == 2
             assert len(check["range"]["supporting_window_starts"]) == 2
+            if dense_long_enabled:
+                assert check["range_method"] == "retained"
             if stereo_enabled:
                 assert check["stereo_support"]["witness_channels"] == ["left", "right"]
         else:
@@ -1152,3 +1157,118 @@ def test_clean_speech_twelve_seconds_distinguishes_late_change_and_broad_frequen
                 with pymupdf.open(stream=render_comparison(record, assets), filetype="pdf") as report:
                     assert "Frequency balance across the recording" in report[1].get_text()
                     assert "Selected interval" not in report[1].get_text()
+
+
+@pytest.fixture
+def native_twelve_review_pair(tmp_path):
+    from scipy.signal import butter, sosfiltfilt
+
+    rng = np.random.default_rng(172)
+    shape = butter(2, (260, 3600), fs=16000, btype="bandpass", output="sos")
+    earlier, donor, background = (
+        sosfiltfilt(shape, rng.standard_normal(192000)) * scale for scale in (2000, 1800, 1600))
+    start, end = 21760, 37120
+    edited = earlier.copy()
+    edited[start:end] = .60 * earlier[start:end] + .40 * donor[start:end]
+    return {name: save(tmp_path, name, (np.rint(pcm) / 32768).astype(np.float32))
+            for name, pcm in (("earlier-twelve", earlier), ("fallback-twelve", edited + .7 * background),
+                              ("unchanged-twelve", earlier + .7 * background))}
+
+
+def _save_speech_export(path, record, assets):
+    payload = {"comparison": record, "assets": {name: base64.b64encode(blob).decode() for name, blob in assets.items()}}
+    path.write_text(json.dumps(payload))
+    return payload
+
+
+@pytest.mark.parametrize("wrapper", [None, audio_reference.SCHEMA_WITH_ALIGNED_SPEECH,
+                                     audio_reference.SCHEMA_WITH_MATCHING_WAVEFORM])
+def test_dense_native_twelve_replay_preserves_earlier_schema_and_exact_sources(tmp_path, native_twelve_review_pair, wrapper):
+    earlier = native_twelve_review_pair["earlier-twelve"]
+    submitted = native_twelve_review_pair["fallback-twelve"]
+    output = tmp_path / "speech-evidence.json"
+    for enabled in (False, True):
+        schema = (audio_reference.SCHEMA_WITH_DENSE_LONG_CLEAN_SPEECH if enabled
+                  else audio_reference.SCHEMA_WITH_LONG_CLEAN_SPEECH)
+        record, assets = audio_reference.compare(
+            earlier, submitted, include_clean_speech=True, use_dense_long_clean_speech=enabled,
+            include_aligned_speech=wrapper is not None,
+            include_matching_waveform=wrapper == audio_reference.SCHEMA_WITH_MATCHING_WAVEFORM,
+        )
+        speech = record["clean_speech"]
+        assert record["schema"] == (wrapper or schema)
+        if wrapper is not None:
+            assert record["comparison_schema"] == schema
+        _save_speech_export(output, record, assets)
+        assert run(earlier, submitted, output, verify=True) == record
+        verified = verify_clean_speech(earlier, submitted, output)
+        if enabled:
+            assert speech["range_method"] == "dense_fallback"
+            assert verified == {"status": "localized_difference", "reason": "local_change",
+                                "samples": [21760, 37120], "excerpts_verified": 2}
+            assert speech["range"]["supporting_window_starts"] == [0, 19200]
+        else:
+            assert "range_method" not in speech
+            assert verified == {"status": "no_local_difference", "reason": "no_corroborated_local_change",
+                                "excerpts_verified": 0}
+
+
+def test_dense_native_twelve_verifier_rejects_altered_measurements_and_preview(tmp_path, native_twelve_review_pair):
+    earlier = native_twelve_review_pair["earlier-twelve"]
+    submitted = native_twelve_review_pair["fallback-twelve"]
+    unchanged = native_twelve_review_pair["unchanged-twelve"]
+    output = tmp_path / "speech-evidence.json"
+    record, assets = audio_reference.compare(earlier, submitted, include_clean_speech=True,
+                                             use_dense_long_clean_speech=True)
+    payload = _save_speech_export(output, record, assets)
+    for key, changed, message in (
+        ("basis", "unexpected", "measurement basis differs"),
+        ("range_method", "retained", "range method differs"),
+        ("sample_count", 191999, "speech duration or frequency measurements differ"),
+        ("scope", "An altered scope", "speech scope or explanation differs"),
+    ):
+        tampered = deepcopy(payload)
+        tampered["comparison"]["clean_speech"][key] = changed
+        output.write_text(json.dumps(tampered))
+        with pytest.raises(ValueError, match=message):
+            verify_clean_speech(earlier, submitted, output)
+
+    tampered = deepcopy(payload)
+    span = tampered["comparison"]["clean_speech"]["range"]
+    span["supporting_window_starts"] = [19200, 38400]
+    span["support_sha256"] = canonical_hash({key: span[key] for key in ("samples", "supporting_window_starts",
+                                                                        "bands", "relative_drop")})
+    output.write_text(json.dumps(tampered))
+    with pytest.raises(ValueError, match="speech measurement or range differs"):
+        verify_clean_speech(earlier, submitted, output)
+    with pytest.raises(ValueError, match="differs from the re-decoded sources"):
+        run(earlier, submitted, output, verify=True)
+
+    tampered = deepcopy(payload)
+    tampered["comparison"]["clean_speech"]["range"]["earlier"]["source_pts"][0] += 1
+    output.write_text(json.dumps(tampered))
+    with pytest.raises(ValueError, match="source clock differs"):
+        verify_clean_speech(earlier, submitted, output)
+
+    tampered = deepcopy(payload)
+    file = "clean-reference-speech-submitted.wav"
+    cue = assets[file][:-1] + bytes([assets[file][-1] ^ 1])
+    tampered["assets"][file] = base64.b64encode(cue).decode()
+    tampered["comparison"]["clean_speech"]["range"]["submitted"]["audio"]["sha256"] = hashlib.sha256(cue).hexdigest()
+    output.write_text(json.dumps(tampered))
+    with pytest.raises(ValueError, match="Preview differs"):
+        verify_clean_speech(earlier, submitted, output)
+
+    output.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="Original file differs"):
+        verify_clean_speech(earlier, unchanged, output)
+
+    record, assets = audio_reference.compare(earlier, unchanged, include_clean_speech=True,
+                                             use_dense_long_clean_speech=True)
+    payload = _save_speech_export(output, record, assets)
+    assert verify_clean_speech(earlier, unchanged, output)["excerpts_verified"] == 0
+    assert run(earlier, unchanged, output, verify=True) == record
+    payload["comparison"]["clean_speech"]["range_method"] = None
+    output.write_text(json.dumps(payload))
+    with pytest.raises(ValueError, match="range method differs"):
+        verify_clean_speech(earlier, unchanged, output)

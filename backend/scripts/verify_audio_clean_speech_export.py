@@ -16,15 +16,18 @@ from app.evidence import (
     audio_clean_speech,
     audio_clean_speech_dense,
     audio_clean_speech_long,
+    audio_clean_speech_long_dense,
     audio_clean_speech_stereo,
 )
 from app.evidence.audio_reference import (
+    LONG_CLEAN_SPEECH_SUMMARY,
     SCHEMA_WITH_AAC_CLEAN_SPEECH,
     SCHEMA_WITH_ALIGNED_SPEECH,
     SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD,
     SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
     SCHEMA_WITH_CLOSE_STEREO_AAC,
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
+    SCHEMA_WITH_DENSE_LONG_CLEAN_SPEECH,
     SCHEMA_WITH_DENSER_STEREO_AAC,
     SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH,
     SCHEMA_WITH_MATCHING_WAVEFORM,
@@ -72,7 +75,8 @@ def verify_export(earlier, submitted, export):
         schema = record["comparison_schema"]
     stereo_aac = schema in STEREO_AAC_SPEECH_SCHEMAS
     long_aac = stereo_aac or schema == SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH
-    long = schema == LONG_SCHEMA or long_aac
+    dense_long = schema == SCHEMA_WITH_DENSE_LONG_CLEAN_SPEECH
+    long = schema == LONG_SCHEMA or long_aac or dense_long
     dense = schema == SCHEMA_WITH_DENSE_CLEAN_SPEECH
     aac = schema == SCHEMA_WITH_AAC_CLEAN_SPEECH or long_aac
     with_support = schema in {SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_CLEAN_SPEECH_SUPPORT}
@@ -98,7 +102,14 @@ def verify_export(earlier, submitted, export):
         require(record["audio"][side] == expected, "Decoded source metadata differs")
     samples = [pcm[:sample_count] for pcm in samples]
     if long:
-        if stereo_aac:
+        if dense_long:
+            require(result.get("basis") == audio_clean_speech_long_dense.BASIS, "Local speech measurement basis differs")
+            reason, measured, profile, method = audio_clean_speech_long_dense.locate(*samples)
+            require(("range_method" not in result if method is None else result.get("range_method") == method),
+                    "Native speech range method differs")
+            require(result.get("scope") == audio_clean_speech_long_dense.SCOPE
+                    and result.get("summary") == LONG_CLEAN_SPEECH_SUMMARY[reason], "Native speech scope or explanation differs")
+        elif stereo_aac:
             stereo = _decode_stereo(submitted, proof["decoded_samples"])[:sample_count]
             reason, measured, profile, stereo_support = audio_clean_speech_stereo.locate(
                 *samples, stereo, allow_denser_windows=schema == SCHEMA_WITH_DENSER_STEREO_AAC,
@@ -127,6 +138,8 @@ def verify_export(earlier, submitted, export):
         require("range" not in result, "No local speech interval was supported")
         return {"status": status, "reason": reason, "excerpts_verified": 0}
     span = result["range"]
+    if dense_long:
+        require(span.keys() == measured.keys() | {*SIDES, "support_sha256"}, "Unexpected native speech range measurements")
     require({key: span[key] for key in measured} == measured
             and span["support_sha256"] == canonical_hash(measured), "Local speech measurement or range differs")
     start, end = measured["samples"]

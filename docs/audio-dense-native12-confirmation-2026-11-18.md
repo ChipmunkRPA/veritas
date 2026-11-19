@@ -2,9 +2,8 @@
 
 The fixed candidate added 30 correctly located noisy replacements on new
 readers, with zero added ordinary-control highlights or misplaced synthetic
-ranges. Every prospective advancement condition passed. These results support
-a scoped local integration of the optional earlier-copy evidence check.
-Product integration and customer confidence remain unchanged at this stage.
+ranges. Every prospective advancement condition passed. The local application
+now uses the candidate in an optional earlier-copy comparison.
 
 ## Source independence and fixed method
 
@@ -128,8 +127,26 @@ python3 -B -S backend/scripts/review_audio_native12_dense_confirmation.py \
   docs/evaluation-panels/audio-dense-native12-confirmation-2026-11-18.json
 ```
 
-The serving follow-up is an optional, versioned comparison for two supported
-native recordings after a user supplies a clean earlier copy. It should retain
-both source clocks, excerpts, waveform evidence and existing findings while
-leaving the standalone assessment unchanged. Historical exports must continue
-to replay with their original method.
+## Local application
+
+On a development instance, enable `VERITAS_AUDIO_REFERENCE_CLEAN_SPEECH`,
+`VERITAS_AUDIO_REFERENCE_LONG_CLEAN_SPEECH` and
+`VERITAS_AUDIO_REFERENCE_DENSE_LONG_CLEAN_SPEECH` with audio reference
+comparison available. From a completed audio analysis, supply an earlier
+copy and confirm it is clean. This check requires two continuous, exactly
+twelve-second, 16 kHz mono PCM16 WAV or FLAC recordings on the same clock.
+
+The page and PDF show the selected interval, both waveforms and the starts
+of the two supporting windows. The JSON also includes exact sample ranges
+and both playable excerpts. `scripts.compare_audio_references` and
+`scripts.verify_audio_clean_speech_export` verify the record against the
+two original files. Historical exports still replay with their original
+method. The comparison carries zero weight in the standalone AI assessment.
+
+The serving method reproduced all 1,264 frozen comparison outcomes, including
+192 retained ranges and 171 ranges from its fallback. Nine simulated prepaid
+analyses exercised added locations in all three noise conditions, unchanged
+controls, an incorrect reference, a clock mismatch and a previously flagged
+ordinary recording. Chromium verified all 18 PDF and JSON downloads and the
+bytes and duration of all eight playable excerpts. The comparison created zero
+additional analysis jobs and preserved each standalone assessment.

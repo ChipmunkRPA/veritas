@@ -1804,6 +1804,17 @@
             ],
             "title": "Clean Speech Stereo Aac Available"
           },
+          "dense_long_clean_speech_available": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Dense Long Clean Speech Available"
+          },
           "long_clean_speech_available": {
             "anyOf": [
               {

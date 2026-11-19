@@ -71,6 +71,9 @@ with ordinary timing and gain controls on the same picture clock.
 The [denser twelve-second audio comparison](audio-dense-native12-reference-2026-11-18.md#independent-source-replay-and-public-recount)
 recounts new speech locations against a clean earlier copy and checks
 how the same approach responds to ordinary processing and incorrect copies.
+The [prospective confirmation](audio-dense-native12-confirmation-2026-11-18.md#native-replay-and-public-reproducibility)
+recounts 1,264 paired comparisons with new readers and three noise conditions.
+It includes local application and original-file verification instructions.
 
 The [statistical reporting replay](document-chi-square-2026-11-18.md#replay-the-measurements)
 checks published numerical discrepancies and staged controls against the

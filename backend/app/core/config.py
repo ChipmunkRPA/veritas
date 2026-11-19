@@ -268,6 +268,7 @@ class Settings(BaseSettings):
     audio_reference_clean_speech: bool = False  # Optional earlier clean copy on the same native sample clock.
     audio_reference_long_clean_speech: bool = False  # Extend the optional clean-copy comparison to twelve seconds.
     audio_reference_dense_clean_speech: bool = False  # Trial: denser comparison of six-second clean-copy pairs.
+    audio_reference_dense_long_clean_speech: bool = False  # Trial: dense fallback on native twelve-second clean-copy pairs.
     audio_reference_clean_speech_eq_guard: bool = False  # Trial: explain consistent frequency changes in six-second pairs.
     audio_reference_clean_speech_aac: bool = False  # Compare a native clean source with qualified AAC M4A.
     audio_reference_clean_speech_stereo_aac: bool = False  # Corroborate a 12-second AAC interval with native channels.

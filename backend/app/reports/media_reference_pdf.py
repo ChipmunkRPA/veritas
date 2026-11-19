@@ -16,6 +16,7 @@ from app.evidence.audio_reference import (
     SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD,
     SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
     SCHEMA_WITH_DENSE_CLEAN_SPEECH,
+    SCHEMA_WITH_DENSE_LONG_CLEAN_SPEECH,
     SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM,
     SCHEMA_WITH_LEVEL_ADJUSTMENT,
     SCHEMA_WITH_LOCAL_TIMING,
@@ -457,6 +458,8 @@ def _clean_speech_page(document, result):
     _text(page, MARGIN, 253 + offset, f"Selected interval  {first / rate:.3f} to {end / rate:.3f} s", font="hebo")
     _text(page, MARGIN, 274 + offset, f"{len(span['bands'])} frequency bands had matching sound on both sides.", size=10, color=MUTED)
     stereo = result.get("stereo_support")
+    dense_fallback = result.get("range_method") == "dense_fallback"
+    signed_gain = "basis" in result and result.get("range_method") != "retained"
     if "supporting_window_starts" in span:
         first_window, last_window = (x / rate for x in span["supporting_window_starts"])
         starts = f"{first_window:.3f} s and {last_window:.3f} s"
@@ -464,11 +467,14 @@ def _clean_speech_page(document, result):
             witness_text = f"Two mono mix checks starting at {starts} agreed with both source channels."
         elif stereo and stereo.get("denser_window_starts"):
             witness_text = f"The denser scan found agreement at window starts of {starts}."
+        elif dense_fallback:
+            witness_text = f"Shorter intervals in two six-second checks starting at {starts} supported this finding."
         else:
             witness_text = f"Two six-second checks starting at {starts} agreed."
         _text(page, MARGIN, 291 + offset, witness_text, size=9, color=MUTED)
-    if "basis" in result:
-        _text(page, MARGIN, 291 + offset, f"Drop in signed matching-sound gain  {span['relative_drop']:.3f}", size=9, color=MUTED)
+    if signed_gain:
+        gain_y = 304 if dense_fallback else 291
+        _text(page, MARGIN, gain_y + offset, f"Drop in signed matching-sound gain  {span['relative_drop']:.3f}", size=9, color=MUTED)
     if stereo:
         for index, side in enumerate(stereo["witness_channels"]):
             start, stop = stereo["views"][side]["range"]
@@ -488,7 +494,7 @@ def _clean_speech_page(document, result):
         _draw_waveform(page, row["waveform"], y, maximum, (end - first) / rate)
         _text(page, MARGIN, y + 53, f"Source ticks [{source_start}, {source_end}) at 16 kHz.", size=9, color=MUTED)
     _text(page, MARGIN, 673, "Waveforms share one scale. The JSON includes both playable excerpts.", size=9, color=MUTED)
-    if "basis" in result:
+    if signed_gain:
         _text(page, MARGIN, 691, "Matching sound gain by band  ·  before / within / after", size=9, font="hebo")
         for index, band in enumerate(span["bands"]):
             low, high = band["band_hz"]
@@ -685,7 +691,7 @@ def render(record, assets):
                                         SCHEMA_WITH_CHANNEL_TIMING, SCHEMA_WITH_CLEAN_SPEECH, SCHEMA_WITH_LONG_CLEAN_SPEECH,
                                         SCHEMA_WITH_AAC_TIMING, SCHEMA_WITH_AAC_CLEAN_SPEECH, SCHEMA_WITH_LONG_AAC_CLEAN_SPEECH,
                                         *STEREO_AAC_SPEECH_SCHEMAS,
-                                        SCHEMA_WITH_DENSE_CLEAN_SPEECH,
+                                        SCHEMA_WITH_DENSE_CLEAN_SPEECH, SCHEMA_WITH_DENSE_LONG_CLEAN_SPEECH,
                                         SCHEMA_WITH_CLEAN_SPEECH_EQ_GUARD, SCHEMA_WITH_CLEAN_SPEECH_SUPPORT,
                                         SCHEMA_WITH_ALIGNED_SPEECH, SCHEMA_WITH_MATCHING_WAVEFORM, SCHEMA_WITH_AAC_MATCHING_WAVEFORM,
                                         SCHEMA_WITH_GAPLESS_AAC_MATCHING_WAVEFORM, SCHEMA_WITH_OPUS_MATCHING_WAVEFORM)

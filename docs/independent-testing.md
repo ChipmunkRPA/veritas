@@ -22,7 +22,9 @@ adds broader ordinary blur controls and publishes the alert tradeoff.
 
 The [learned speech reconstruction preflight](audio-learned-enrollment-genuine-preflight-2026-11-19.md)
 reviews two held noisy source groups. The replay checks grouped acoustic
-measurements. Synthetic speech retention and detection are still unmeasured.
+measurements. A [separate clone retention test](audio-learned-enrollment-conditional-retention-2026-11-19.md)
+preserved four held noisy deliveries and substantially suppressed one held
+clean edit. The acoustic test leaves detector accuracy open.
 
 From the repository root, run `make replay-evidence` with Python 3.11
 or newer. It uses the standard library to verify the published case

@@ -1,0 +1,257 @@
+{
+  "claims": {
+    "acoustic_clone_preservation_measured": true,
+    "detection_accuracy_measured": false,
+    "general_clone_preservation_supported": false,
+    "overall_assessment_changed": false,
+    "production_activation_supported": false,
+    "speaker_attribution_supported": false
+  },
+  "closed": true,
+  "diagnostic": {
+    "development_noisy_below_minus3": 1,
+    "development_noisy_deliveries": 4,
+    "held_clean_below_minus3": 1,
+    "held_clean_below_minus30": 1,
+    "held_clean_deliveries": 2,
+    "held_noisy_deliveries": 4,
+    "held_noisy_retained": 4
+  },
+  "frozen_noisy_guard_passed": true,
+  "groups": [
+    {
+      "condition": "clean",
+      "deliveries": 2,
+      "lineages": 2,
+      "reference": "true_reference",
+      "retained_at_least_minus3_db": 2,
+      "retention_db_bands": {
+        "0_or_more": 2,
+        "below_minus30": 0,
+        "minus30_to_minus3": 0,
+        "minus3_to_0": 0
+      },
+      "role": "development"
+    },
+    {
+      "condition": "clean",
+      "deliveries": 2,
+      "lineages": 2,
+      "reference": "wrong_reference",
+      "retained_at_least_minus3_db": 0,
+      "retention_db_bands": {
+        "0_or_more": 0,
+        "below_minus30": 2,
+        "minus30_to_minus3": 0,
+        "minus3_to_0": 0
+      },
+      "role": "development"
+    },
+    {
+      "condition": "minus5",
+      "deliveries": 2,
+      "lineages": 2,
+      "reference": "true_reference",
+      "retained_at_least_minus3_db": 2,
+      "retention_db_bands": {
+        "0_or_more": 0,
+        "below_minus30": 0,
+        "minus30_to_minus3": 0,
+        "minus3_to_0": 2
+      },
+      "role": "development"
+    },
+    {
+      "condition": "minus5",
+      "deliveries": 2,
+      "lineages": 2,
+      "reference": "wrong_reference",
+      "retained_at_least_minus3_db": 0,
+      "retention_db_bands": {
+        "0_or_more": 0,
+        "below_minus30": 0,
+        "minus30_to_minus3": 2,
+        "minus3_to_0": 0
+      },
+      "role": "development"
+    },
+    {
+      "condition": "minus10",
+      "deliveries": 2,
+      "lineages": 2,
+      "reference": "true_reference",
+      "retained_at_least_minus3_db": 1,
+      "retention_db_bands": {
+        "0_or_more": 0,
+        "below_minus30": 0,
+        "minus30_to_minus3": 1,
+        "minus3_to_0": 1
+      },
+      "role": "development"
+    },
+    {
+      "condition": "minus10",
+      "deliveries": 2,
+      "lineages": 2,
+      "reference": "wrong_reference",
+      "retained_at_least_minus3_db": 0,
+      "retention_db_bands": {
+        "0_or_more": 0,
+        "below_minus30": 0,
+        "minus30_to_minus3": 2,
+        "minus3_to_0": 0
+      },
+      "role": "development"
+    },
+    {
+      "condition": "clean",
+      "deliveries": 2,
+      "lineages": 2,
+      "reference": "true_reference",
+      "retained_at_least_minus3_db": 1,
+      "retention_db_bands": {
+        "0_or_more": 1,
+        "below_minus30": 1,
+        "minus30_to_minus3": 0,
+        "minus3_to_0": 0
+      },
+      "role": "held"
+    },
+    {
+      "condition": "clean",
+      "deliveries": 2,
+      "lineages": 2,
+      "reference": "wrong_reference",
+      "retained_at_least_minus3_db": 0,
+      "retention_db_bands": {
+        "0_or_more": 0,
+        "below_minus30": 2,
+        "minus30_to_minus3": 0,
+        "minus3_to_0": 0
+      },
+      "role": "held"
+    },
+    {
+      "condition": "minus5",
+      "deliveries": 2,
+      "lineages": 2,
+      "reference": "true_reference",
+      "retained_at_least_minus3_db": 2,
+      "retention_db_bands": {
+        "0_or_more": 0,
+        "below_minus30": 0,
+        "minus30_to_minus3": 0,
+        "minus3_to_0": 2
+      },
+      "role": "held"
+    },
+    {
+      "condition": "minus5",
+      "deliveries": 2,
+      "lineages": 2,
+      "reference": "wrong_reference",
+      "retained_at_least_minus3_db": 2,
+      "retention_db_bands": {
+        "0_or_more": 0,
+        "below_minus30": 0,
+        "minus30_to_minus3": 0,
+        "minus3_to_0": 2
+      },
+      "role": "held"
+    },
+    {
+      "condition": "minus10",
+      "deliveries": 2,
+      "lineages": 2,
+      "reference": "true_reference",
+      "retained_at_least_minus3_db": 2,
+      "retention_db_bands": {
+        "0_or_more": 0,
+        "below_minus30": 0,
+        "minus30_to_minus3": 0,
+        "minus3_to_0": 2
+      },
+      "role": "held"
+    },
+    {
+      "condition": "minus10",
+      "deliveries": 2,
+      "lineages": 2,
+      "reference": "wrong_reference",
+      "retained_at_least_minus3_db": 1,
+      "retention_db_bands": {
+        "0_or_more": 0,
+        "below_minus30": 0,
+        "minus30_to_minus3": 1,
+        "minus3_to_0": 1
+      },
+      "role": "held"
+    }
+  ],
+  "limits": [
+    "Two held source-reader and meeting lineages repeat at two noisy levels. One generator family only.",
+    "Foreground, enrollment and background sources have prior project exposure and possible model-training corpus overlap. Exact clone prompt audio is unavailable.",
+    "The frozen noisy-only guard passes. A held clean clone loses more than30dB and one development noisy clone falls below-3dB. General preservation is unsupported.",
+    "The original and processed copies must stay distinct. Acoustic component gain establishes no detector accuracy or speaker identity.",
+    "Retained PhonemeDF second families use built-in or VCTK voices. The publisher explicitly did not clone the original LibriSpeech readers, so they do not replicate this same-identity guard.",
+    "Public-safe material contains grouped bands and counts with no individual identities, clocks, source fingerprints, paths, features or audio. Exact source/model replay requires private custody."
+  ],
+  "method": {
+    "clean_guard_predeclared": false,
+    "construction": "Fixed-clocks with independent rounded clone, surviving genuine boundary, and exact retained background. Original samples outside edit unchanged.",
+    "enrollment": "Separate genuine reference for same publisher-declared reader or wrong reader within role.",
+    "measurement": "Exact-source component coefficients in fixed original-clock interval. Residual output remains error.",
+    "minimum_each_held_noisy_clone_retention_db": -3,
+    "noise_only_gate_predeclared": true,
+    "points_or_weights_fitted": false,
+    "representation": "Unchanged causal BSRNN plus embedded ECAPA and original raw amplitude."
+  },
+  "schema": "chipmunk.learned-enrollment-one-family-retention-aggregate/1",
+  "scope": {
+    "conditions": [
+      "clean",
+      "minus5",
+      "minus10"
+    ],
+    "declared_clone_targets": 4,
+    "declared_role_reader_collisions": 0,
+    "development_lineages": 2,
+    "edit_duration_samples": 15360,
+    "generator_families": 1,
+    "held_lineages": 2,
+    "native_bits": 16,
+    "native_channels": 1,
+    "native_inputs": 12,
+    "native_rate_hz": 16000,
+    "native_samples_per_input": 192000,
+    "normalized_script_key_role_collisions": 0,
+    "original_clone_prompt_audio_overlap_unresolved": true,
+    "possible_train_clean_100_overlap": true,
+    "project_source_reuse": true
+  },
+  "source_citations": [
+    "https://huggingface.co/datasets/DuplexGen/duplexgen-spoken",
+    "https://github.com/duplexgen/duplexgen-code/blob/main/docs/DATA_LICENSES.md",
+    "https://www.openslr.org/12/",
+    "https://groups.inf.ed.ac.uk/ami/corpus/license.shtml",
+    "https://aclanthology.org/2026.lrec-1.469.pdf"
+  ],
+  "verification": {
+    "authenticity_calls": 0,
+    "authored_grader_controls": 8,
+    "exact_initial_repeat": true,
+    "extraction_calls": 25,
+    "generator_calls": 0,
+    "independent_native_and_outcome_checks_passed": true,
+    "native_input_samples_checked": 2304000,
+    "original_channels": 2,
+    "original_rate_hz": 24000,
+    "output_records": 24,
+    "outside_edit_sample_identities": 2119680,
+    "publisher_native_user_channel_replays": 4,
+    "publisher_whole_tar_archives_rehashed": 3,
+    "qualified_derivative_rate_hz": 16000,
+    "raw_output_samples_checked": 4608000,
+    "scalar_fields_recomputed": 120
+  }
+}

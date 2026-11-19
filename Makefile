@@ -193,6 +193,8 @@ replay-evidence:  ## recount published image, video, audio, and writing evaluati
 		docs/evaluation-panels/audio-room-point12-confirmation-2026-11-19.json --self-test
 	python3 -I -S backend/scripts/review_audio_learned_enrollment_genuine_preflight.py \
 		docs/evaluation-panels/audio-learned-enrollment-genuine-preflight-2026-11-19.json --self-test
+	python3 -I -S backend/scripts/review_audio_learned_enrollment_conditional_retention.py \
+		docs/evaluation-panels/audio-learned-enrollment-conditional-retention-2026-11-19.json --self-test
 	python3 -I -S backend/scripts/review_writing_neighbor_factorial.py \
 		docs/evaluation-panels/writing-neighbor-factorial-2026-11-19.json
 	python3 -I -S backend/scripts/review_video_matched_detail_native25.py \

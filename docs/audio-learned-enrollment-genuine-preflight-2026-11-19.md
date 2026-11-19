@@ -118,8 +118,8 @@ The source run closed with forty raw outputs plus one exact repeat in about two
 minutes. Two authored baseline calls separately checked safe runtime operation
 before source inference. Independent original-clock arithmetic recomputed 480
 scalar fields from all 7,680,000 saved output samples and matched every frozen
-gate. No authenticity detector or synthetic input was run. The separately drafted
-one-family synthetic-preservation guard remains unexecuted.
+gate. A separate follow-up tested clone retention on the same reference setup.
+[Synthetic speech retention](audio-learned-enrollment-conditional-retention-2026-11-19.md)
 
 The [anonymous scalar receipt](evaluation-panels/audio-learned-enrollment-genuine-preflight-2026-11-19.json)
 contains grouped decisions, coarse gain bands, global asset digests and source

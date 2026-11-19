@@ -78,3 +78,8 @@ readers, two generation families, originals, matched ordinary reprocessing,
 real traffic and separately recorded competing speech. The diagnostic above
 uses different inputs. The fresh comparison uses predeclared operating points
 and retains its source and timing checks before scoring. [Fresh speech and word alignment source](https://zenodo.org/records/19522979)
+
+A separate 368-delivery comparison used held-out MLS readers and saved
+stock synthesis. It verified a clean-audio gain and no correctly located
+edits under the two tested strong backgrounds.
+[Held-out reader comparison](audio-short-window-reader-holdout-2026-11-18.md)

@@ -73,6 +73,14 @@ are not public screening promises or calibrated population probabilities.
   42 full-model comparisons preserved the exact region and overlap.
   [JPEG orientation comparison](image-jpeg90-exif-orientation-2026-11-18.md)
 
+- The 496-delivery audio transfer found 12 more clean and three more
+  washing-machine edits by adding the shorter-window check at its frozen
+  point. Ordinary alerts were unchanged. Learned acoustic correction
+  added 15 restaurant alerts and located no additional noisy edits.
+  River and restaurant localization remain open. Source-bound and paid-flow
+  checks are still needed for the shorter-window addition.
+  [Matched audio transfer](audio-noise-matched-segment-transfer-2026-11-18.md)
+
 - The face-transition check now accepts qualified 29.97 fps AVC exports.
   It located all 48 staged transitions across two encodes and highlighted
   eight ordinary focus controls. Fifteen eligible exports from a separate

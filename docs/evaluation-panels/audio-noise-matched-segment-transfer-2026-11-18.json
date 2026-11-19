@@ -1,0 +1,1862 @@
+{
+  "cohort": {
+    "additional_standalone_deliveries": 372,
+    "calibration_deliveries": 184,
+    "calibration_foreground_readers": 4,
+    "calibration_readers_including_genuine_donors": 8,
+    "fit_deliveries": 184,
+    "fit_foreground_readers": 4,
+    "fit_readers_including_genuine_donors": 8,
+    "generator_families": 2,
+    "generator_voices_per_family": 1,
+    "old_source_groups": 8,
+    "prior_standalone_deliveries": 124,
+    "shared_declared_fit_calibration_readers": 0,
+    "transfer_background_deliveries": 48,
+    "transfer_background_sessions": 3,
+    "transfer_conditions": 4,
+    "transfer_connected_components": 4,
+    "transfer_deliveries": 496,
+    "transfer_foreground_readers": 8,
+    "transfer_ordinary_deliveries": 320,
+    "transfer_recordings": 16,
+    "transfer_synthetic_deliveries": 128,
+    "transfer_synthetic_events": 32
+  },
+  "conditions": {
+    "clean": {
+      "current": {
+        "by_generator": {
+          "kitten": {
+            "located": 10,
+            "located_and_control_clear": 10,
+            "total": 16
+          },
+          "piper": {
+            "located": 6,
+            "located_and_control_clear": 6,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 0,
+          "background_unassessed": 0,
+          "located": 16,
+          "located_and_control_clear": 16,
+          "missed": 16,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 16,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "noise_aware_strict_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 10,
+            "located_and_control_clear": 9,
+            "total": 16
+          },
+          "piper": {
+            "located": 8,
+            "located_and_control_clear": 7,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 0,
+          "background_unassessed": 0,
+          "located": 18,
+          "located_and_control_clear": 16,
+          "missed": 14,
+          "new_background_files": 0,
+          "new_clear_locations": 10,
+          "new_locations": 10,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 2,
+          "only_wrong": 0,
+          "ordinary_flagged": 2,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 18,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 4,
+        "new_clear_generators": [
+          "kitten",
+          "piper"
+        ],
+        "new_ordinary_components": 1
+      },
+      "noise_aware_strict_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 15,
+            "located_and_control_clear": 13,
+            "total": 16
+          },
+          "piper": {
+            "located": 11,
+            "located_and_control_clear": 10,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 0,
+          "background_unassessed": 0,
+          "located": 26,
+          "located_and_control_clear": 23,
+          "missed": 6,
+          "new_background_files": 0,
+          "new_clear_locations": 10,
+          "new_locations": 10,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 2,
+          "only_wrong": 0,
+          "ordinary_flagged": 2,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 26,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 4,
+        "new_clear_generators": [
+          "kitten",
+          "piper"
+        ],
+        "new_ordinary_components": 1
+      },
+      "noise_aware_wider_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 11,
+            "located_and_control_clear": 10,
+            "total": 16
+          },
+          "piper": {
+            "located": 11,
+            "located_and_control_clear": 9,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 0,
+          "background_unassessed": 0,
+          "located": 22,
+          "located_and_control_clear": 19,
+          "missed": 10,
+          "new_background_files": 0,
+          "new_clear_locations": 11,
+          "new_locations": 12,
+          "new_matched_collisions": 1,
+          "new_ordinary_files": 2,
+          "only_wrong": 0,
+          "ordinary_flagged": 2,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 22,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 4,
+        "new_clear_generators": [
+          "kitten",
+          "piper"
+        ],
+        "new_ordinary_components": 1
+      },
+      "noise_aware_wider_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 15,
+            "located_and_control_clear": 13,
+            "total": 16
+          },
+          "piper": {
+            "located": 13,
+            "located_and_control_clear": 11,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 0,
+          "background_unassessed": 0,
+          "located": 28,
+          "located_and_control_clear": 24,
+          "missed": 4,
+          "new_background_files": 0,
+          "new_clear_locations": 11,
+          "new_locations": 12,
+          "new_matched_collisions": 1,
+          "new_ordinary_files": 2,
+          "only_wrong": 0,
+          "ordinary_flagged": 2,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 28,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 4,
+        "new_clear_generators": [
+          "kitten",
+          "piper"
+        ],
+        "new_ordinary_components": 1
+      },
+      "raw_short_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 15,
+            "located_and_control_clear": 15,
+            "total": 16
+          },
+          "piper": {
+            "located": 12,
+            "located_and_control_clear": 12,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 0,
+          "background_unassessed": 0,
+          "located": 27,
+          "located_and_control_clear": 27,
+          "missed": 5,
+          "new_background_files": 0,
+          "new_clear_locations": 12,
+          "new_locations": 12,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 27,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 4,
+        "new_clear_generators": [
+          "kitten",
+          "piper"
+        ],
+        "new_ordinary_components": 0
+      },
+      "raw_short_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 16,
+            "located_and_control_clear": 16,
+            "total": 16
+          },
+          "piper": {
+            "located": 12,
+            "located_and_control_clear": 12,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 0,
+          "background_unassessed": 0,
+          "located": 28,
+          "located_and_control_clear": 28,
+          "missed": 4,
+          "new_background_files": 0,
+          "new_clear_locations": 12,
+          "new_locations": 12,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 28,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 4,
+        "new_clear_generators": [
+          "kitten",
+          "piper"
+        ],
+        "new_ordinary_components": 0
+      },
+      "score_only_strict_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 15,
+            "located_and_control_clear": 15,
+            "total": 16
+          },
+          "piper": {
+            "located": 10,
+            "located_and_control_clear": 10,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 0,
+          "background_unassessed": 0,
+          "located": 25,
+          "located_and_control_clear": 25,
+          "missed": 7,
+          "new_background_files": 0,
+          "new_clear_locations": 11,
+          "new_locations": 11,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 25,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 4,
+        "new_clear_generators": [
+          "kitten",
+          "piper"
+        ],
+        "new_ordinary_components": 0
+      },
+      "score_only_strict_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 16,
+            "located_and_control_clear": 16,
+            "total": 16
+          },
+          "piper": {
+            "located": 11,
+            "located_and_control_clear": 11,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 0,
+          "background_unassessed": 0,
+          "located": 27,
+          "located_and_control_clear": 27,
+          "missed": 5,
+          "new_background_files": 0,
+          "new_clear_locations": 11,
+          "new_locations": 11,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 27,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 4,
+        "new_clear_generators": [
+          "kitten",
+          "piper"
+        ],
+        "new_ordinary_components": 0
+      },
+      "score_only_wider_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 16,
+            "located_and_control_clear": 16,
+            "total": 16
+          },
+          "piper": {
+            "located": 14,
+            "located_and_control_clear": 14,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 0,
+          "background_unassessed": 0,
+          "located": 30,
+          "located_and_control_clear": 30,
+          "missed": 2,
+          "new_background_files": 0,
+          "new_clear_locations": 14,
+          "new_locations": 14,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 30,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 4,
+        "new_clear_generators": [
+          "kitten",
+          "piper"
+        ],
+        "new_ordinary_components": 0
+      },
+      "score_only_wider_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 16,
+            "located_and_control_clear": 16,
+            "total": 16
+          },
+          "piper": {
+            "located": 14,
+            "located_and_control_clear": 14,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 0,
+          "background_unassessed": 0,
+          "located": 30,
+          "located_and_control_clear": 30,
+          "missed": 2,
+          "new_background_files": 0,
+          "new_clear_locations": 14,
+          "new_locations": 14,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 30,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 4,
+        "new_clear_generators": [
+          "kitten",
+          "piper"
+        ],
+        "new_ordinary_components": 0
+      }
+    },
+    "restaurant": {
+      "current": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 14,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 2,
+          "ordinary_flagged": 5,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 29,
+          "synthetic_flagged": 2,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 11
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "noise_aware_strict_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 15,
+          "only_wrong": 8,
+          "ordinary_flagged": 20,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 55,
+          "synthetic_flagged": 8,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 22
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 3
+      },
+      "noise_aware_strict_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 14,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 15,
+          "only_wrong": 8,
+          "ordinary_flagged": 20,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 29,
+          "synthetic_flagged": 8,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 11
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 3
+      },
+      "noise_aware_wider_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 15,
+          "only_wrong": 8,
+          "ordinary_flagged": 20,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 55,
+          "synthetic_flagged": 8,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 22
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 3
+      },
+      "noise_aware_wider_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 14,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 15,
+          "only_wrong": 8,
+          "ordinary_flagged": 20,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 29,
+          "synthetic_flagged": 8,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 11
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 3
+      },
+      "raw_short_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 2,
+          "ordinary_flagged": 5,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 55,
+          "synthetic_flagged": 2,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 22
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "raw_short_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 14,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 2,
+          "ordinary_flagged": 5,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 29,
+          "synthetic_flagged": 2,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 11
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "score_only_strict_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 55,
+          "synthetic_flagged": 0,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 22
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "score_only_strict_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 14,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 2,
+          "ordinary_flagged": 5,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 29,
+          "synthetic_flagged": 2,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 11
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "score_only_wider_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 5,
+          "only_wrong": 4,
+          "ordinary_flagged": 10,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 55,
+          "synthetic_flagged": 4,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 22
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 1
+      },
+      "score_only_wider_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 14,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 5,
+          "only_wrong": 4,
+          "ordinary_flagged": 10,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 29,
+          "synthetic_flagged": 4,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 11
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 1
+      }
+    },
+    "river": {
+      "current": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 31,
+          "synthetic_flagged": 0,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 13
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "noise_aware_strict_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 35,
+          "synthetic_flagged": 0,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 14
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "noise_aware_strict_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 31,
+          "synthetic_flagged": 0,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 13
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "noise_aware_wider_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 5,
+          "only_wrong": 2,
+          "ordinary_flagged": 5,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 35,
+          "synthetic_flagged": 2,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 14
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 1
+      },
+      "noise_aware_wider_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 5,
+          "only_wrong": 2,
+          "ordinary_flagged": 5,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 31,
+          "synthetic_flagged": 2,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 13
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 1
+      },
+      "raw_short_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 35,
+          "synthetic_flagged": 0,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 14
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "raw_short_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 31,
+          "synthetic_flagged": 0,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 13
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "score_only_strict_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 35,
+          "synthetic_flagged": 0,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 14
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "score_only_strict_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 31,
+          "synthetic_flagged": 0,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 13
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "score_only_wider_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 35,
+          "synthetic_flagged": 0,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 14
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "score_only_wider_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 31,
+          "synthetic_flagged": 0,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 13
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      }
+    },
+    "washing": {
+      "current": {
+        "by_generator": {
+          "kitten": {
+            "located": 2,
+            "located_and_control_clear": 2,
+            "total": 16
+          },
+          "piper": {
+            "located": 3,
+            "located_and_control_clear": 3,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 5,
+          "located_and_control_clear": 5,
+          "missed": 27,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 5,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "noise_aware_strict_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 0,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "noise_aware_strict_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 2,
+            "located_and_control_clear": 2,
+            "total": 16
+          },
+          "piper": {
+            "located": 3,
+            "located_and_control_clear": 3,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 5,
+          "located_and_control_clear": 5,
+          "missed": 27,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 5,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "noise_aware_wider_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          },
+          "piper": {
+            "located": 0,
+            "located_and_control_clear": 0,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 0,
+          "located_and_control_clear": 0,
+          "missed": 32,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 0,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "noise_aware_wider_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 2,
+            "located_and_control_clear": 2,
+            "total": 16
+          },
+          "piper": {
+            "located": 3,
+            "located_and_control_clear": 3,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 5,
+          "located_and_control_clear": 5,
+          "missed": 27,
+          "new_background_files": 0,
+          "new_clear_locations": 0,
+          "new_locations": 0,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 5,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 0,
+        "new_clear_generators": [],
+        "new_ordinary_components": 0
+      },
+      "raw_short_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 2,
+            "located_and_control_clear": 2,
+            "total": 16
+          },
+          "piper": {
+            "located": 2,
+            "located_and_control_clear": 2,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 4,
+          "located_and_control_clear": 4,
+          "missed": 28,
+          "new_background_files": 0,
+          "new_clear_locations": 3,
+          "new_locations": 3,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 4,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 3,
+        "new_clear_generators": [
+          "kitten",
+          "piper"
+        ],
+        "new_ordinary_components": 0
+      },
+      "raw_short_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 3,
+            "located_and_control_clear": 3,
+            "total": 16
+          },
+          "piper": {
+            "located": 5,
+            "located_and_control_clear": 5,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 8,
+          "located_and_control_clear": 8,
+          "missed": 24,
+          "new_background_files": 0,
+          "new_clear_locations": 3,
+          "new_locations": 3,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 8,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 3,
+        "new_clear_generators": [
+          "kitten",
+          "piper"
+        ],
+        "new_ordinary_components": 0
+      },
+      "score_only_strict_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 1,
+            "located_and_control_clear": 1,
+            "total": 16
+          },
+          "piper": {
+            "located": 2,
+            "located_and_control_clear": 2,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 3,
+          "located_and_control_clear": 3,
+          "missed": 29,
+          "new_background_files": 0,
+          "new_clear_locations": 2,
+          "new_locations": 2,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 3,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 2,
+        "new_clear_generators": [
+          "piper"
+        ],
+        "new_ordinary_components": 0
+      },
+      "score_only_strict_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 2,
+            "located_and_control_clear": 2,
+            "total": 16
+          },
+          "piper": {
+            "located": 5,
+            "located_and_control_clear": 5,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 7,
+          "located_and_control_clear": 7,
+          "missed": 25,
+          "new_background_files": 0,
+          "new_clear_locations": 2,
+          "new_locations": 2,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 7,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 2,
+        "new_clear_generators": [
+          "piper"
+        ],
+        "new_ordinary_components": 0
+      },
+      "score_only_wider_only": {
+        "by_generator": {
+          "kitten": {
+            "located": 6,
+            "located_and_control_clear": 6,
+            "total": 16
+          },
+          "piper": {
+            "located": 4,
+            "located_and_control_clear": 4,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 10,
+          "located_and_control_clear": 10,
+          "missed": 22,
+          "new_background_files": 0,
+          "new_clear_locations": 8,
+          "new_locations": 8,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 10,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 4,
+        "new_clear_generators": [
+          "kitten",
+          "piper"
+        ],
+        "new_ordinary_components": 0
+      },
+      "score_only_wider_only_plus_current": {
+        "by_generator": {
+          "kitten": {
+            "located": 6,
+            "located_and_control_clear": 6,
+            "total": 16
+          },
+          "piper": {
+            "located": 7,
+            "located_and_control_clear": 7,
+            "total": 16
+          }
+        },
+        "counts": {
+          "background_flagged": 0,
+          "background_total": 16,
+          "background_unassessed": 16,
+          "located": 13,
+          "located_and_control_clear": 13,
+          "missed": 19,
+          "new_background_files": 0,
+          "new_clear_locations": 8,
+          "new_locations": 8,
+          "new_matched_collisions": 0,
+          "new_ordinary_files": 0,
+          "only_wrong": 0,
+          "ordinary_flagged": 0,
+          "ordinary_total": 80,
+          "ordinary_unassessed": 0,
+          "synthetic_flagged": 13,
+          "synthetic_total": 32,
+          "synthetic_unassessed": 0
+        },
+        "new_clear_components": 4,
+        "new_clear_generators": [
+          "kitten",
+          "piper"
+        ],
+        "new_ordinary_components": 0
+      }
+    }
+  },
+  "exposure": {
+    "backgrounds": "Training uses two traffic and two meeting captures. Transfer uses separate washing, river and restaurant capture sessions. Excerpts and condition copies remain dependent.",
+    "generators": "Piper and Kitten stock synthesis appear in both old and transfer cohorts.",
+    "physical_reader_identity": "Cross-corpus physical identity remains unresolved; publisher groups and exact PCM are distinct.",
+    "pretraining_overlap": "Unknown.",
+    "training_calibration": "Old MLS stock-synthesis panel with separately grouped readers and genuine donors.",
+    "transfer": "Separate native LibriSpeech cohort, fresh to the fitted correction. All inputs had prior earlier-copy comparator use. Four foreground recordings had prior standalone recurrent-view testing."
+  },
+  "method": {
+    "calibration": "Four separate ordinary foreground groups and eight admitted background-only files. Strict point uses highest ordinary group maximum and background floor. Wider point uses second-highest group maximum with the same floor.",
+    "channels": 1,
+    "correct_edit_coverage_minimum": 0.5,
+    "correct_temporal_iou_minimum": 0.3,
+    "current_two_second_point": 6.822523597593649,
+    "edit_clocks_supplied_at_inference": false,
+    "feature_names": [
+      "voice_logit",
+      "logit_above_recording_median",
+      "logit_above_neighbor",
+      "speech_fraction",
+      "local_relative_log_rms",
+      "zero_crossing",
+      "log_kurtosis",
+      "spectral_flatness_mean",
+      "spectral_flatness_std",
+      "spectral_centroid_mean",
+      "spectral_centroid_std",
+      "high_band_fraction",
+      "spectral_flux_mean",
+      "spectral_flux_std",
+      "harmonicity",
+      "logit_times_flatness",
+      "logit_times_missing_speech",
+      "local_contrast_times_tonality"
+    ],
+    "fit_positive_windows": 47,
+    "fit_windows": 2530,
+    "fitting": "Balanced fitting-source, condition and class logistic loss plus half-weight same-clock synthetic-versus-genuine ranking. Ridge0.05 on standardized coefficients, zero penalty on intercept, nonnegative original-score coefficient. Standardization uses fitting rows only.",
+    "insert_samples": 15360,
+    "learned_heads": {
+      "noise_aware_parameters": 19,
+      "score_only_parameters": 2
+    },
+    "new_pretrained_checkpoint": false,
+    "noisy_target_db": -10,
+    "overall_confidence_weight": 0,
+    "paired_fit_comparisons": 216,
+    "points": {
+      "noise_aware": {
+        "strict": 1.8530249951848503,
+        "wider": 1.6719150382698125
+      },
+      "score_only": {
+        "strict": 1.446403696478589,
+        "wider": 1.1605737956273912
+      }
+    },
+    "product_weight_changes": 0,
+    "rate": 16000,
+    "raw_short_point": 6.642364579351768,
+    "readout": "Both adjacent750ms readings exceed the point. Each original750ms interval remains separate. Combined arms retain all current two-second intervals.",
+    "samples": 192000,
+    "speech_fraction_minimum": 0.5,
+    "step_samples": 8000,
+    "supplied_reference_at_inference": false,
+    "window_samples": 12000,
+    "windows_per_recording": 23
+  },
+  "primary_gate": {
+    "candidate": "noise_aware_wider_only_plus_current",
+    "decisions": {
+      "background": true,
+      "connected_components": false,
+      "families": false,
+      "new_clear_noisy_locations": false,
+      "ordinary_components": false,
+      "ordinary_files": false
+    },
+    "passed": false,
+    "requirements": {
+      "maximum_added_background_flags": 0,
+      "maximum_new_ordinary_components_per_condition": 1,
+      "maximum_new_ordinary_files_per_condition": 5,
+      "minimum_new_clear_noisy_locations": 4,
+      "minimum_new_connected_components": 2,
+      "required_families": [
+        "piper",
+        "kitten"
+      ]
+    }
+  },
+  "privacy": {
+    "customer_material": false,
+    "exact_edit_offsets": false,
+    "individual_rows": false,
+    "individual_source_replay_retained_privately": true,
+    "learned_head_weights": false,
+    "local_paths": false,
+    "per_recording_hashes": false,
+    "raw_media": false,
+    "reader_identifiers": false,
+    "transcripts": false,
+    "voice_embeddings": false,
+    "voice_response_vectors": false
+  },
+  "public_replay_scope": "Public review checks aggregate arithmetic, source-group denominators, role coverage and gate. Native inputs, independent feature reconstruction, fitting and exact case outcomes were verified locally. The whole-study commitment binds the private custody manifest without exposing recording fingerprints.",
+  "schema": "chipmunk.noise-matched-segment-public/1",
+  "sources": [
+    {
+      "scope": "MLS",
+      "terms": "CC BY 4.0",
+      "url": "https://www.openslr.org/94/"
+    },
+    {
+      "scope": "LibriSpeech",
+      "terms": "CC BY 4.0",
+      "url": "https://www.openslr.org/12/"
+    },
+    {
+      "scope": "DEMAND background recordings",
+      "terms": "CC BY-SA 3.0",
+      "url": "https://zenodo.org/records/1227121"
+    },
+    {
+      "scope": "AMI background recordings",
+      "terms": "CC BY 4.0",
+      "url": "https://groups.inf.ed.ac.uk/ami/corpus/license.shtml"
+    }
+  ],
+  "status": "Frozen local research comparison. Product behavior and overall confidence remain unchanged.",
+  "verification": {
+    "all_feature_vectors_reconstructed": 11683,
+    "authored_arithmetic_checks": 9,
+    "capture_elapsed_seconds": 1293.9135167500353,
+    "cpu_threads": 2,
+    "current_model_forwards": 3028,
+    "features_per_vector": 18,
+    "gradient_checks_passed": true,
+    "independent_optimizer": "SLSQP",
+    "independent_points_reproduced": true,
+    "maximum_fit_weight_difference": 5.174889578796193e-07,
+    "maximum_independent_feature_difference": 1.7763568394002505e-15,
+    "native_input_deliveries_checked": 864,
+    "native_pcm_samples_checked": 165888000,
+    "old_window_clocks_checked": 8464,
+    "outcome_rows_recounted": 496,
+    "prior_current_readings_exact": 124,
+    "product_writes": 0,
+    "transfer_admitted_current_window_bindings_checked": 5903,
+    "transfer_short_window_clocks_checked": 11408
+  },
+  "whole_study_commitment": "c09f61ed9843c8884e4c10fe0b7a97720f120944cfebaa1a8105f29a43b7a6db"
+}

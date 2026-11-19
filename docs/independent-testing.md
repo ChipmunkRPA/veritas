@@ -92,6 +92,9 @@ It includes local application and original-file verification instructions.
 The [standalone background-reduction pilot](audio-standalone-recurrent-view-2026-11-18.md)
 checks whether recurrent background subtraction locates more replacements
 from the submitted recording alone.
+The [matched genuine-edit audio comparison](audio-noise-matched-segment-transfer-2026-11-18.md)
+checks how shorter windows and two fitted corrections change edit locations,
+ordinary alerts and unassessed coverage across four recording conditions.
 
 The [statistical reporting replay](document-chi-square-2026-11-18.md#replay-the-measurements)
 checks published numerical discrepancies and staged controls against the

@@ -155,6 +155,8 @@ replay-evidence:  ## recount published image, video, audio, and writing evaluati
 		docs/evaluation-panels/audio-dense-native12-confirmation-2026-11-18.json
 	python3 -I -S backend/scripts/review_audio_standalone_recurrent_view.py \
 		docs/evaluation-panels/audio-standalone-recurrent-view-2026-11-18.json
+	python3 -I -S backend/scripts/review_audio_noise_matched_segment_transfer.py \
+		docs/evaluation-panels/audio-noise-matched-segment-transfer-2026-11-18.json
 	python3 -I -S backend/scripts/review_image_jpeg_rank_smoothing.py \
 		docs/evaluation-panels/image-jpeg-rank-smoothing-2026-11-18.json.gz
 	python3 -I -S backend/scripts/review_image_jpeg_matched_site_transfer.py \

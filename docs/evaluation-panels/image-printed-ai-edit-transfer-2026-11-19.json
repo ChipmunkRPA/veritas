@@ -1,0 +1,597 @@
+{
+  "schema": "chipmunk.infographic-localization-paired-evaluation/1",
+  "publisher_revision": "3e0c54f7a6aeca5fb3e12758cb93d0be14310f55",
+  "publisher_test_rows": [
+    14,
+    17,
+    21,
+    46,
+    58,
+    63,
+    88,
+    92,
+    96,
+    131,
+    134,
+    138
+  ],
+  "publisher_license_sha256": "6c6207161372d1a37b4d603596ff3e3608b7a451c09e8452b71062bfef079244",
+  "frozen_protocol_sha256": "c8e13827e87602c5efbc206f1795712a262636afffec6b58446a22784930f392",
+  "rows": [
+    {
+      "group": 0,
+      "role": "source",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 7,
+      "text_metrics": {
+        "area": 4844,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": -0.002658444456756115,
+      "text_status": "measured"
+    },
+    {
+      "group": 0,
+      "role": "target",
+      "stock_metrics": {
+        "area": 56328,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 6,
+      "text_metrics": {
+        "area": 4844,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": -0.003641786053776741,
+      "text_status": "measured"
+    },
+    {
+      "group": 1,
+      "role": "source",
+      "stock_metrics": {
+        "area": 4224,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 9,
+      "text_metrics": {
+        "area": 3519,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": -0.004583810456097126,
+      "text_status": "measured"
+    },
+    {
+      "group": 1,
+      "role": "target",
+      "stock_metrics": {
+        "area": 1456,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 7,
+      "text_metrics": {
+        "area": 4015,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": -0.007561785168945789,
+      "text_status": "measured"
+    },
+    {
+      "group": 2,
+      "role": "source",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 2,
+      "text_metrics": {
+        "area": 65988,
+        "iou": 0.8610527511214582,
+        "overlap": 60656,
+        "recall": 0.931564074210591,
+        "useful": true
+      },
+      "text_score": 0.0002781150978989899,
+      "text_status": "measured"
+    },
+    {
+      "group": 2,
+      "role": "target",
+      "stock_metrics": {
+        "area": 20091,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 2,
+      "text_metrics": {
+        "area": 23406,
+        "iou": 0.13728110184626058,
+        "overlap": 10685,
+        "recall": 0.16410185526477455,
+        "useful": false
+      },
+      "text_score": -0.0003802988794632256,
+      "text_status": "measured"
+    },
+    {
+      "group": 3,
+      "role": "source",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 5,
+      "text_metrics": {
+        "area": 23552,
+        "iou": 0.36933306151891987,
+        "overlap": 23552,
+        "recall": 0.36933306151891987,
+        "useful": false
+      },
+      "text_score": 0.010696474462747574,
+      "text_status": "measured"
+    },
+    {
+      "group": 3,
+      "role": "target",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 6,
+      "text_metrics": {
+        "area": 25056,
+        "iou": 0.3915434264945482,
+        "overlap": 24993,
+        "recall": 0.3919302482397403,
+        "useful": false
+      },
+      "text_score": 0.0008887375006452203,
+      "text_status": "measured"
+    },
+    {
+      "group": 4,
+      "role": "source",
+      "stock_metrics": {
+        "area": 30665,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 7,
+      "text_metrics": {
+        "area": 1274,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": -0.00037356949178501964,
+      "text_status": "measured"
+    },
+    {
+      "group": 4,
+      "role": "target",
+      "stock_metrics": {
+        "area": 6687,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 3,
+      "text_metrics": {
+        "area": 4214,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": -0.0011192952515557408,
+      "text_status": "measured"
+    },
+    {
+      "group": 5,
+      "role": "source",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 4,
+      "text_metrics": {
+        "area": 35820,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": -7.04806880094111e-05,
+      "text_status": "measured"
+    },
+    {
+      "group": 5,
+      "role": "target",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 3,
+      "text_metrics": {
+        "area": 35422,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": -0.00010961736552417278,
+      "text_status": "measured"
+    },
+    {
+      "group": 6,
+      "role": "source",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 4,
+      "text_metrics": {
+        "area": 1674,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": -0.0048014819622039795,
+      "text_status": "measured"
+    },
+    {
+      "group": 6,
+      "role": "target",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 4,
+      "text_metrics": {
+        "area": 1701,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": -0.005209222435951233,
+      "text_status": "measured"
+    },
+    {
+      "group": 7,
+      "role": "source",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 10,
+      "text_metrics": {
+        "area": 14760,
+        "iou": 0.004245586448431134,
+        "overlap": 297,
+        "recall": 0.005352122828515822,
+        "useful": false
+      },
+      "text_score": 0.0005527847679331899,
+      "text_status": "measured"
+    },
+    {
+      "group": 7,
+      "role": "target",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 10,
+      "text_metrics": {
+        "area": 14297,
+        "iou": 0.03075014400283575,
+        "overlap": 2082,
+        "recall": 0.03751892164636344,
+        "useful": false
+      },
+      "text_score": 0.00035609956830739975,
+      "text_status": "measured"
+    },
+    {
+      "group": 8,
+      "role": "source",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 5,
+      "text_metrics": {
+        "area": 4611,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": 0.040408045053482056,
+      "text_status": "measured"
+    },
+    {
+      "group": 8,
+      "role": "target",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 6,
+      "text_metrics": {
+        "area": 4640,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": 0.06508845090866089,
+      "text_status": "measured"
+    },
+    {
+      "group": 9,
+      "role": "source",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 7,
+      "text_metrics": {
+        "area": 1632,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": 0.000465253833681345,
+      "text_status": "measured"
+    },
+    {
+      "group": 9,
+      "role": "target",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 6,
+      "text_metrics": {
+        "area": 1581,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": -8.548458572477102e-05,
+      "text_status": "measured"
+    },
+    {
+      "group": 10,
+      "role": "source",
+      "stock_metrics": {
+        "area": 18121,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 5,
+      "text_metrics": {
+        "area": 1767,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": -3.321186522953212e-05,
+      "text_status": "measured"
+    },
+    {
+      "group": 10,
+      "role": "target",
+      "stock_metrics": {
+        "area": 26287,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 5,
+      "text_metrics": {
+        "area": 2100,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": 0.0004087686538696289,
+      "text_status": "measured"
+    },
+    {
+      "group": 11,
+      "role": "source",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 4,
+      "text_metrics": {
+        "area": 4715,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": -0.004249736666679382,
+      "text_status": "measured"
+    },
+    {
+      "group": 11,
+      "role": "target",
+      "stock_metrics": {
+        "area": 0,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_lines": 4,
+      "text_metrics": {
+        "area": 3680,
+        "iou": 0.0,
+        "overlap": 0,
+        "recall": 0.0,
+        "useful": false
+      },
+      "text_score": 0.008012652397155762,
+      "text_status": "measured"
+    }
+  ],
+  "audit": {
+    "verified_target_region_areas": 24,
+    "verified_normalized_images": 24,
+    "rendering_identity_by_group": [
+      {
+        "group": 0,
+        "source_target_top_iou": 1.0
+      },
+      {
+        "group": 1,
+        "source_target_top_iou": 0.8764632627646326
+      },
+      {
+        "group": 2,
+        "source_target_top_iou": 0.16180598877105426
+      },
+      {
+        "group": 3,
+        "source_target_top_iou": 0.8931297709923665
+      },
+      {
+        "group": 4,
+        "source_target_top_iou": 0.3023255813953488
+      },
+      {
+        "group": 5,
+        "source_target_top_iou": 0.9888888888888889
+      },
+      {
+        "group": 6,
+        "source_target_top_iou": 0.9841269841269841
+      },
+      {
+        "group": 7,
+        "source_target_top_iou": 0.5936488784072835
+      },
+      {
+        "group": 8,
+        "source_target_top_iou": 0.99375
+      },
+      {
+        "group": 9,
+        "source_target_top_iou": 0.96875
+      },
+      {
+        "group": 10,
+        "source_target_top_iou": 0.0
+      },
+      {
+        "group": 11,
+        "source_target_top_iou": 0.7804878048780488
+      }
+    ],
+    "summary": {
+      "source": {
+        "files": 12,
+        "stock_any": 3,
+        "stock_useful_region_or_future_target": 0,
+        "text_rank_useful_region_or_future_target": 1,
+        "text_covered": 12
+      },
+      "target": {
+        "files": 12,
+        "stock_any": 5,
+        "stock_useful_region_or_future_target": 0,
+        "text_rank_useful_region_or_future_target": 0,
+        "text_covered": 12
+      }
+    }
+  },
+  "activation_supported": false
+}

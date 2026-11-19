@@ -43,6 +43,8 @@ recounts the held two-voice and ordinary controls for short windows.
 
 The [printed identifier comparison](image-printed-identifiers-2026-11-19.md)
 compares the two explicitly linked fields in a single submitted image.
+The [AI-edited infographic transfer](image-printed-ai-edit-transfer-2026-11-19.md)
+tests text localization in both versions of 12 publisher-supplied pairs.
 The [common-detail face comparison](video-face-common-detail-native30-2026-11-19.md)
 reports an exact three-frame recovery on held video and compares two ways of
 rejecting ordinary blur. The

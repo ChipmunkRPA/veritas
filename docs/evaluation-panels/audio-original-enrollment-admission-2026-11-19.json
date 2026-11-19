@@ -1,0 +1,214 @@
+{
+  "limitations": {
+    "detector_improvement_measured": false,
+    "encoder_training_independence_established": false,
+    "original_audio_modified_for_representation": false,
+    "overlapping_windows": true,
+    "per_source_scores_or_features_published": false,
+    "physical_room_independence_established": false,
+    "private_custody_required_for_native_replay": true,
+    "production_activation_supported": false,
+    "reader_identity_historical_project_exposure": true,
+    "reused_background_captures": true,
+    "reused_nuisance_readers": true,
+    "single_held_reader": true,
+    "source_conditions_are_correlated": true,
+    "synthetic_retention_measured": false,
+    "windows_are_independent_people": false
+  },
+  "posthoc": {
+    "diagnostic_only": true,
+    "groups": [
+      {
+        "absent_windows": 46,
+        "condition": "clean",
+        "frozen_target_admitted": 16,
+        "optimistic_held_selected_absent_flags": 0,
+        "optimistic_held_selected_best_target_at10percent_absent": 16,
+        "positive_margin_absent_any_likeness": 0,
+        "positive_margin_target_any_likeness": 16,
+        "target_windows": 16
+      },
+      {
+        "absent_windows": 46,
+        "condition": "traffic",
+        "frozen_target_admitted": 3,
+        "optimistic_held_selected_absent_flags": 4,
+        "optimistic_held_selected_best_target_at10percent_absent": 10,
+        "positive_margin_absent_any_likeness": 25,
+        "positive_margin_target_any_likeness": 13,
+        "target_windows": 16
+      },
+      {
+        "absent_windows": 46,
+        "condition": "competing",
+        "frozen_target_admitted": 0,
+        "optimistic_held_selected_absent_flags": 3,
+        "optimistic_held_selected_best_target_at10percent_absent": 3,
+        "positive_margin_absent_any_likeness": 12,
+        "positive_margin_target_any_likeness": 9,
+        "target_windows": 16
+      }
+    ],
+    "held_selected": true,
+    "independently_recounted": true,
+    "new_inference_calls": 0,
+    "new_point_adopted": false
+  },
+  "primary": {
+    "groups": [
+      {
+        "background_admitted": 0,
+        "background_windows": 23,
+        "condition": "clean",
+        "original_background_admitted": 0,
+        "original_other_admitted": 23,
+        "other_admitted": 0,
+        "other_windows": 23,
+        "role": "development",
+        "target_admitted": 21,
+        "target_current_admitted": 21,
+        "target_new_admitted": 0,
+        "target_removed_current": 0,
+        "target_windows": 21
+      },
+      {
+        "background_admitted": 0,
+        "background_windows": 23,
+        "condition": "traffic",
+        "original_background_admitted": 0,
+        "original_other_admitted": 0,
+        "other_admitted": 0,
+        "other_windows": 23,
+        "role": "development",
+        "target_admitted": 2,
+        "target_current_admitted": 0,
+        "target_new_admitted": 2,
+        "target_removed_current": 0,
+        "target_windows": 21
+      },
+      {
+        "background_admitted": 0,
+        "background_windows": 23,
+        "condition": "competing",
+        "original_background_admitted": 23,
+        "original_other_admitted": 22,
+        "other_admitted": 0,
+        "other_windows": 23,
+        "role": "development",
+        "target_admitted": 3,
+        "target_current_admitted": 21,
+        "target_new_admitted": 0,
+        "target_removed_current": 18,
+        "target_windows": 21
+      },
+      {
+        "background_admitted": 0,
+        "background_windows": 23,
+        "condition": "clean",
+        "original_background_admitted": 0,
+        "original_other_admitted": 21,
+        "other_admitted": 0,
+        "other_windows": 23,
+        "role": "held",
+        "target_admitted": 16,
+        "target_current_admitted": 16,
+        "target_new_admitted": 0,
+        "target_removed_current": 0,
+        "target_windows": 16
+      },
+      {
+        "background_admitted": 0,
+        "background_windows": 23,
+        "condition": "traffic",
+        "original_background_admitted": 0,
+        "original_other_admitted": 6,
+        "other_admitted": 0,
+        "other_windows": 23,
+        "role": "held",
+        "target_admitted": 3,
+        "target_current_admitted": 0,
+        "target_new_admitted": 3,
+        "target_removed_current": 0,
+        "target_windows": 16
+      },
+      {
+        "background_admitted": 1,
+        "background_windows": 23,
+        "condition": "competing",
+        "original_background_admitted": 21,
+        "original_other_admitted": 23,
+        "other_admitted": 0,
+        "other_windows": 23,
+        "role": "held",
+        "target_admitted": 0,
+        "target_current_admitted": 16,
+        "target_new_admitted": 0,
+        "target_removed_current": 16,
+        "target_windows": 16
+      }
+    ],
+    "held_metric_guard": {
+      "clean": {
+        "absent_admits_at_most10percent": true,
+        "retains80percent": true
+      },
+      "competing": {
+        "absent_admits_at_most10percent": true,
+        "retains80percent": false
+      },
+      "traffic": {
+        "absent_admits_at_most10percent": true,
+        "retains80percent": false
+      }
+    },
+    "point_locked_before_held_encoding": true,
+    "source_goal_met": false
+  },
+  "schema": "chipmunk.original-enrollment-admission-feasibility-counts/1",
+  "scope": {
+    "background_deliveries": 6,
+    "development_absent_windows": 138,
+    "embedding_dimensions": 192,
+    "isolated_recorded_noise_deliveries": 4,
+    "native_rate": 16000,
+    "ordinary_nuisance_readers": 2,
+    "original_utterances_including_nuisances": 12,
+    "other_genuine_deliveries": 6,
+    "planned_development_readers": 1,
+    "planned_held_readers": 2,
+    "planned_target_readers": 3,
+    "qualified_development_readers": 1,
+    "qualified_held_readers": 1,
+    "qualified_target_readers": 2,
+    "reference_samples": 64000,
+    "rejected_held_readers": 1,
+    "scheduled_windows_per_view": 23,
+    "source_deliveries": 18,
+    "source_samples": 192000,
+    "step_samples": 8000,
+    "synthetic_deliveries": 0,
+    "target_present_deliveries": 6,
+    "window_observations": 414,
+    "window_samples": 12000
+  },
+  "verification": {
+    "cosine_pairs_replayed": 1656,
+    "distinct_encoder_inputs": 377,
+    "exact_additive_sample_values": 3456000,
+    "exact_native_initial_repeat": true,
+    "forensic_calls": 0,
+    "independent_encoder_calls": 377,
+    "independent_speech_activity_calls": 18,
+    "native_delivery_sample_values": 3456000,
+    "native_original_sample_values": 1280000,
+    "original_window_clocks_replayed": 414,
+    "original_window_sample_values": 4968000,
+    "participant_encoder_calls": 378,
+    "reference_encoder_calls": 8,
+    "role_original_source_overlap": 0,
+    "separator_calls": 0,
+    "source_clock_and_point_parity": true,
+    "synthesis_calls": 0
+  }
+}

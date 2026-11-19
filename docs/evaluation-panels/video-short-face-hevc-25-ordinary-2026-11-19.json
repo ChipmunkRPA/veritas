@@ -1,0 +1,476 @@
+{
+  "commitments": {
+    "independent-media.json": "743c11126ff30f9be20c1c01811fad7525bb86ca9555217846a6ffdacf59f65c",
+    "measurements.jsonl": "fd00980092f289378577f577afa6e48f0b796c9a249308d356047e99d52f9f40",
+    "media.json": "158780b416fedabe2abf983a1e2c631c0a90e628159ef14a1149654d5e456bc0",
+    "ordinary-design.json": "5ba43b4ed5462e2bd6f12e4e8f6131731c619aa344f63bdde1fdf97991268ca2",
+    "ordinary-result.json": "5aa22019a4642e96c32ee9b19e5659b1f985e0bb9dcea9604b8319018cda0cdd",
+    "original-scene-intake.json": "2adffa2f95bc0c4221939134cc3b7df682e15d7bfd30e982c9f2873ec4897f3e",
+    "qualified-ordinary.json": "dde83089c27be6d20065c171237f47d96fea121de9e7cf1de9da05968df8921a",
+    "scorer-lock.json": "2f60ed396da865b38838346765c30c399b1cf345d2a296cf873f16ed6913fc88"
+  },
+  "decoded_rgb_pts": 3840,
+  "eligible_pool": 19,
+  "gate": {
+    "maximum_cut_flags": 0,
+    "maximum_ordinary_flags": 1,
+    "minimum_measured_ordinary_groups": 6
+  },
+  "groups": 9,
+  "observations": [
+    {
+      "authored_boundaries": null,
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 1,
+      "measured": 0,
+      "proposals": 0,
+      "role": "untouched",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        67,
+        70
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 1,
+      "measured": 1,
+      "proposals": 1,
+      "role": "gaussian",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        67,
+        70
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 1,
+      "measured": 1,
+      "proposals": 1,
+      "role": "disc",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        67,
+        120
+      ],
+      "baseline_flag": false,
+      "cut_seen": true,
+      "group": 1,
+      "measured": 0,
+      "proposals": 0,
+      "role": "cut",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": null,
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 2,
+      "measured": 0,
+      "proposals": 0,
+      "role": "untouched",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        66,
+        70
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 2,
+      "measured": 1,
+      "proposals": 1,
+      "role": "gaussian",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        66,
+        70
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 2,
+      "measured": 1,
+      "proposals": 1,
+      "role": "disc",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": null,
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 3,
+      "measured": 0,
+      "proposals": 0,
+      "role": "untouched",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        61,
+        64
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 3,
+      "measured": 1,
+      "proposals": 1,
+      "role": "gaussian",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        61,
+        64
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 3,
+      "measured": 1,
+      "proposals": 1,
+      "role": "disc",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        61,
+        120
+      ],
+      "baseline_flag": false,
+      "cut_seen": true,
+      "group": 3,
+      "measured": 0,
+      "proposals": 0,
+      "role": "cut",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": null,
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 4,
+      "measured": 0,
+      "proposals": 0,
+      "role": "untouched",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        73,
+        77
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 4,
+      "measured": 1,
+      "proposals": 1,
+      "role": "gaussian",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        73,
+        77
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 4,
+      "measured": 1,
+      "proposals": 1,
+      "role": "disc",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": null,
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 5,
+      "measured": 0,
+      "proposals": 0,
+      "role": "untouched",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        75,
+        78
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 5,
+      "measured": 1,
+      "proposals": 1,
+      "role": "gaussian",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        75,
+        78
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 5,
+      "measured": 0,
+      "proposals": 1,
+      "role": "disc",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        75,
+        120
+      ],
+      "baseline_flag": false,
+      "cut_seen": true,
+      "group": 5,
+      "measured": 0,
+      "proposals": 0,
+      "role": "cut",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": null,
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 6,
+      "measured": 0,
+      "proposals": 0,
+      "role": "untouched",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        68,
+        72
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 6,
+      "measured": 1,
+      "proposals": 1,
+      "role": "gaussian",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        68,
+        72
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 6,
+      "measured": 1,
+      "proposals": 1,
+      "role": "disc",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": null,
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 7,
+      "measured": 0,
+      "proposals": 0,
+      "role": "untouched",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        73,
+        76
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 7,
+      "measured": 1,
+      "proposals": 1,
+      "role": "gaussian",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        73,
+        76
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 7,
+      "measured": 1,
+      "proposals": 1,
+      "role": "disc",
+      "supplemental": {
+        "anchors": [
+          72,
+          74,
+          76
+        ],
+        "clock": [
+          262800,
+          273600
+        ],
+        "range": [
+          73,
+          76
+        ],
+        "reading": "0x1.0565d0e66a5c6p-2"
+      }
+    },
+    {
+      "authored_boundaries": [
+        73,
+        120
+      ],
+      "baseline_flag": false,
+      "cut_seen": true,
+      "group": 7,
+      "measured": 0,
+      "proposals": 0,
+      "role": "cut",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": null,
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 8,
+      "measured": 0,
+      "proposals": 0,
+      "role": "untouched",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        64,
+        68
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 8,
+      "measured": 1,
+      "proposals": 1,
+      "role": "gaussian",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        64,
+        68
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 8,
+      "measured": 1,
+      "proposals": 1,
+      "role": "disc",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": null,
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 9,
+      "measured": 0,
+      "proposals": 0,
+      "role": "untouched",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        76,
+        79
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 9,
+      "measured": 1,
+      "proposals": 1,
+      "role": "gaussian",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        76,
+        79
+      ],
+      "baseline_flag": false,
+      "cut_seen": false,
+      "group": 9,
+      "measured": 1,
+      "proposals": 1,
+      "role": "disc",
+      "supplemental": null
+    },
+    {
+      "authored_boundaries": [
+        76,
+        120
+      ],
+      "baseline_flag": false,
+      "cut_seen": true,
+      "group": 9,
+      "measured": 0,
+      "proposals": 0,
+      "role": "cut",
+      "supplemental": null
+    }
+  ],
+  "point": "0x1.999999999999ap-3",
+  "raw_scene_screen_hits": 0,
+  "schema": "chipmunk.video-short-face-hevc-ordinary/1",
+  "scope": {
+    "frame_ticks": 3600,
+    "frames": 120,
+    "rate": "25/1",
+    "resolution": [
+      1280,
+      720
+    ],
+    "time_base": "1/90000"
+  },
+  "summary": {
+    "by_role": {
+      "cut": {
+        "added": 0,
+        "files": 5,
+        "has_face_views": 0,
+        "incumbent": 0,
+        "shortlisted": 0
+      },
+      "disc": {
+        "added": 1,
+        "files": 9,
+        "has_face_views": 8,
+        "incumbent": 0,
+        "shortlisted": 9
+      },
+      "gaussian": {
+        "added": 0,
+        "files": 9,
+        "has_face_views": 9,
+        "incumbent": 0,
+        "shortlisted": 9
+      },
+      "untouched": {
+        "added": 0,
+        "files": 9,
+        "has_face_views": 0,
+        "incumbent": 0,
+        "shortlisted": 0
+      }
+    },
+    "correct_preexisting_cut_views": 5,
+    "native_frame_witnesses": 3,
+    "ordinary_added_flags": 1,
+    "ordinary_with_measured_groups": 9,
+    "passes_ordinary_confirmation": true
+  }
+}

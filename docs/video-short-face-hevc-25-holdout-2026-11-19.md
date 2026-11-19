@@ -56,6 +56,7 @@ proposal and two had proposals without measurable views. The frozen gate
 needed four measured ordinary files, so this trial did not qualify serving
 expansion. The two exact gains motivate a separate specificity comparison
 with strong evidence of assessable ordinary views.
+[Separate ordinary control confirmation](video-short-face-hevc-25-ordinary-2026-11-19.md)
 
 Independent FFprobe and RGB readback verified 4,800 exact delivered frame
 timestamps and decoded pixels and the ten matched pre-encode sequences.

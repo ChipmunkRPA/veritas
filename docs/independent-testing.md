@@ -23,7 +23,9 @@ A [stricter comparison on six new groups](video-face-matched-detail-native25-poi
 kept the exact swap ranges and reduced the additional ordinary alerts.
 The [25 fps HEVC transfer](video-short-face-hevc-25-holdout-2026-11-19.md)
 located two compound swaps and exposed a shortfall in measurable ordinary
-controls.
+controls. A [separate ordinary test](video-short-face-hevc-25-ordinary-2026-11-19.md)
+replays 17 measurable blur files and one ordinary highlight, with additional
+unchanged and hard-cut controls.
 
 The [learned speech reconstruction preflight](audio-learned-enrollment-genuine-preflight-2026-11-19.md)
 reviews two held noisy source groups. The replay checks grouped acoustic
@@ -34,6 +36,9 @@ found no useful gains from adding the extracted view.
 The [second voice-conversion trial](audio-openvoice-enrollment-2026-11-19.md)
 recounts paired outcomes from a different conversion pipeline with genuine
 splice and resampling controls, and separate isolated backgrounds.
+The [original speech sample study](audio-original-enrollment-admission-2026-11-19.md)
+compares admission of genuine speech before any reconstruction. The single-reader
+trial and its separate best-case calculation both fell short under strong noise.
 
 The [published writing revision study](writing-publisher-insertions-2026-11-19.md)
 compares standalone and paired AI readings with known insertions. The earlier

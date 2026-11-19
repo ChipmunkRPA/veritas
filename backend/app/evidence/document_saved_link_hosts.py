@@ -17,7 +17,7 @@ from html.parser import HTMLParser
 from pathlib import Path, PurePosixPath
 from zipfile import BadZipFile, ZipFile
 
-from app.detectors.text import email_body
+from app.detectors.text import email_body, html_content
 from app.evidence import document_saved_link_hosts_binding as binding
 
 METHODS = {".html": "html", ".htm": "html", ".xhtml": "html", ".eml": "email", ".docx": "python-docx"}
@@ -293,7 +293,7 @@ def _inspect_html(raw: str, method: str, part: str | None = None):
     return _result(method, counts, findings)
 
 
-def _email_body(data: bytes, *, use_current_email_body: bool):
+def _email_body(data: bytes, *, use_current_email_body: bool, use_static_html: bool):
     message = BytesParser(policy=policy.default).parsebytes(data)
 
     def find(node, path="1", depth=0):
@@ -315,7 +315,7 @@ def _email_body(data: bytes, *, use_current_email_body: bool):
     raw = body.get_content()
     if not isinstance(raw, str):
         return _result("email", status="outside_scope")
-    return _inspect_html(raw, "email", part)
+    return _inspect_html(html_content.mask(raw) if use_static_html else raw, "email", part)
 
 
 def _word_relationships(path, name):
@@ -414,7 +414,7 @@ def _word_text(path):
     return _result("python-docx", counts, findings)
 
 
-def inspect(path: Path, extension: str, *, use_current_email_body: bool = True):
+def inspect(path: Path, extension: str, *, use_current_email_body: bool = True, use_static_html: bool = True):
     """Read only a bounded supported source and report saved hostname differences."""
     ext = extension.casefold()
     method = METHODS.get(ext)
@@ -433,9 +433,10 @@ def inspect(path: Path, extension: str, *, use_current_email_body: bool = True):
     data = path.read_bytes()
     try:
         if ext == ".eml":
-            return _email_body(data, use_current_email_body=use_current_email_body)
+            return _email_body(data, use_current_email_body=use_current_email_body, use_static_html=use_static_html)
         encoding = "utf-16" if data.startswith((codecs.BOM_UTF16_BE, codecs.BOM_UTF16_LE)) else "utf-8-sig"
-        return _inspect_html(data.decode(encoding), "html")
+        raw = data.decode(encoding)
+        return _inspect_html(html_content.mask(raw, xhtml=ext == ".xhtml") if use_static_html else raw, "html")
     except (LookupError, ValueError, RecursionError):
         return _result(method, status="outside_scope")
 
@@ -453,9 +454,9 @@ def inspect_within(path: Path, *, timeout: float, source_sha256: str):
         return None
 
 
-def verify_original(document, original, extension, *, use_current_email_body: bool = True):
+def verify_original(document, original, extension, *, use_current_email_body: bool = True, use_static_html: bool = True):
     if binding.KEY in document or binding.COMMITMENT in document["source"]:
-        result = inspect(original, extension, use_current_email_body=use_current_email_body)
+        result = inspect(original, extension, use_current_email_body=use_current_email_body, use_static_html=use_static_html)
         binding.verify_record(document, result, commitment=document["source"].get(binding.COMMITMENT))
 
 

@@ -66,6 +66,26 @@ alternative. Parts with an attachment disposition or saved filename are
 excluded. The report records the selected MIME part, and signed reports
 use the same selection when verifying evidence against the original EML.
 
+New HTML, XHTML and HTML email analyses leave out saved navigation, head
+metadata, script, style and template content, elements with a `hidden`
+attribute, and an unambiguous inline `display: none` declaration. Visible
+headings, links, quotations and tables stay in the writing input. The
+reader skips linked stylesheets and browser behavior. Complex or competing
+style rules and accessibility attributes stay outside this visibility rule.
+Mapped passages retain their original decoded character positions, including
+separate ranges on either side of omitted inline markup. Earlier signed
+reports replay with the extraction rules recorded at the time.
+[HTML rendering rules](https://html.spec.whatwg.org/multipage/rendering.html)
+
+An independent 21-file test preserved all expected writing and excluded
+all selected hidden and navigation controls. It verified 51 mapped text
+blocks against the originals. A nine-file test completed simulated
+checkout, browser review, PDF and JSON export, and signed verification.
+Standalone HTML and one HTML email each retained 19 exact source ranges,
+including a finding with separate ranges around an omitted inline node.
+Thirteen unchanged reports created with earlier extraction rules also
+verified against their original files.
+
 Markdown checkout and analysis both exclude recognized backtick and tilde
 fences. If a file contains only code blocks, checkout stops before payment.
 The report records the extraction rule so older reports can still be checked

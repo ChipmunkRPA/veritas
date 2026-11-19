@@ -360,6 +360,16 @@ def test_selected_plain_email_body_excludes_alternative_and_attachment(tmp_path)
     assert result["status"] == "outside_scope" and result["findings"] == []
 
 
+def test_static_policy_excludes_navigation_links_from_saved_source_review(tmp_path):
+    path = tmp_path / "navigation.html"
+    path.write_text('<nav><a href="https://target.example.net">https://navigation.example.org</a></nav>'
+                    '<main><a href="https://target.example.net">https://visible.example.org</a></main>')
+    current = inspect(path, ".html")
+    previous = inspect(path, ".html", use_static_html=False)
+    assert [row["label_host"] for row in current["findings"]] == ["visible.example.org"]
+    assert [row["label_host"] for row in previous["findings"]] == ["navigation.example.org", "visible.example.org"]
+
+
 def test_saved_email_links_follow_the_selected_html_alternative(tmp_path):
     path = tmp_path / "fallback.eml"
     message = EmailMessage()

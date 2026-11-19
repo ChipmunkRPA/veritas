@@ -37,6 +37,7 @@ export const TABS: TabSpec[] = [
 
 const sheetExport = 'Save the sheets containing writing as macro-free XLSX, CSV or PDF, then upload them.'
 const delimitedCoverage = 'Writing is checked within each text field. Reports show the row and column, counting headers and blank records.'
+const htmlCoverage = 'Saved web pages are checked without navigation and text explicitly marked hidden. Stylesheets and scripts are outside this check.'
 
 const documentCoverage = new Map(Object.entries({
   docx: 'Word checks body paragraphs and supported tables, including filled form controls. It also checks supported footnotes and endnotes. Export to PDF to include rendered text boxes, headers, footers, or notes outside this scope.',
@@ -50,6 +51,9 @@ const documentCoverage = new Map(Object.entries({
   tsv: delimitedCoverage,
   epub: 'EPUB checks the main reading text. Navigation, optional chapters, and text in images are outside this check.',
   rtf: 'Rich Text checks saved body text and leaves out directly hidden text. Layout and style-based visibility are outside this check.',
+  html: htmlCoverage,
+  htm: htmlCoverage,
+  xhtml: htmlCoverage,
   eml: 'Email checks the message body. If the plain-text version is empty, it can read the matching HTML version. Upload attachments separately.',
 }))
 

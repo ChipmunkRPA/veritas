@@ -73,3 +73,35 @@ also produced too many ordinary alerts to support broader use.
 Original-file replay checked 27 MP4s, all 1,701 decoded picture timestamps
 and frames, 60 before, at and after anchors, and exact decoded audio. The
 rule remains experimental.
+
+## Audio prediction under continuous background noise
+
+An additional experiment compared locally normalized audio cues at the
+same picture transition. It froze a bidirectional audio prediction error
+and a file-level background-energy requirement before testing new takes
+from eight speakers absent from that method’s development. All eight had
+appeared in earlier project studies. The 264 deliveries used exact native
+25 fps picture timing and paired PCM and AAC audio. Separate conditions
+kept the background continuous or cut it with the speech. The two audio
+formats gave the same counts. [GRID recordings](https://zenodo.org/records/3625687)
+· [DCASE background recordings](https://dcase.community/challenge2013/task-acoustic-scene-classification)
+
+| Background | Earlier exact locations / 24 | New exact locations / 24 | Additional ordinary alerts / 56 |
+| --- | ---: | ---: | ---: |
+| Clean | 4 | 0 | 0 |
+| Continuous at −5 dB | 0 | 0 | 0 |
+| Cut with the speech at −5 dB | 0 | 3 | 2 |
+
+The new locations came from two speakers. The ordinary alerts covered a
+camera translation with a gain change and a local audio delay. No wrong
+locations or cross-take alerts were added. Picture support held at 19 of
+24 known edit positions in each background condition. With continuous
+noise, the audio cue failed there before the final cutoff. The check stays
+experimental. An independent recount verified 216 frame positions and
+replayed two native MP4s with exact neighboring frames and presented audio.
+
+Related research measures picture and audio cues separately and evaluates
+short edits under real-world perturbations. This experiment used its own
+deterministic cues and authored timing controls.
+[KLASSify to Verify](https://arxiv.org/abs/2508.07337) ·
+[AV-Deepfake1M++ benchmark](https://arxiv.org/abs/2507.20579)

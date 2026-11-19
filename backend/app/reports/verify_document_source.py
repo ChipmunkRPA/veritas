@@ -112,6 +112,10 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if extension is None:
         raise ValueError("Original-document verification supports TXT, DOCX, ODT, PPTX, ODP, XLSX, ODS, CSV, TSV, EPUB, RTF, Markdown, HTML, EML and PDF")
     use_current_email_body = (coverage.get("email") or {}).get(email_body.SELECTION_KEY) == email_body.SELECTION_POLICY
+    html_policy = coverage.get(document_scope.HTML_STATIC_KEY)
+    use_static_html = isinstance(html_policy, str) and html_policy in document_scope.HTML_STATIC_POLICIES
+    if extension == ".html" and html_policy == document_scope.XHTML_STATIC_POLICY:
+        extension = ".xhtml"
     ocr_pages = (coverage.get("ocr") or {}).get("pages", [])
     page_coverage = (coverage.get(document_passage_coverage.KEY) or {}).get(document_scope.PDF_PAGE_COVERAGE_KEY)
     used_ocr = extension == ".pdf" and any(row.get("status") == "extracted" for row in ocr_pages)
@@ -155,6 +159,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
                       == document_native_locations.MARKDOWN_FENCES,
                       honor_csv_separator_declaration=document_native_locations.CSV_SEPARATOR_KEY in coverage,
                       use_current_email_body=use_current_email_body,
+                      use_static_html=use_static_html,
                       skip_hidden_xlsx_cell_formats=coverage.get(document_native_locations.XLSX_VISIBILITY_KEY)
                       == document_native_locations.XLSX_VISIBILITY)
     if doc.meta.get(document_native_locations.CSV_SEPARATOR_KEY) != coverage.get(document_native_locations.CSV_SEPARATOR_KEY):
@@ -174,7 +179,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     if heading := evidence.get(document_disclosure_heading.KEY):
         document_disclosure_heading.validate_evidence(evidence)
         document_disclosure_heading.verify_original(heading, original, doc)
-    document_saved_link_hosts.verify_original(evidence, original, extension, use_current_email_body=use_current_email_body)
+    document_saved_link_hosts.verify_original(evidence, original, extension, use_current_email_body=use_current_email_body,
+                                              use_static_html=use_static_html)
     if document_bibliography.KEY in coverage:
         doc = document_bibliography.body_view(doc)
     document_bibliography.verify_source(evidence, doc.meta)
@@ -184,7 +190,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             or canonical_hash(mapping) != source["source_map_sha256"]):
         raise ValueError("Re-extracted text or source mapping differs from the committed extraction")
     fields = {"email": None, "ocr": None, "unmapped_pages": [], "partially_checked_pages": [],
-              WORD_CONTENT_CONTROLS_KEY: None, document_scope.HTML_ARTICLE_KEY: None,
+              WORD_CONTENT_CONTROLS_KEY: None, document_scope.HTML_ARTICLE_KEY: None, document_scope.HTML_STATIC_KEY: None,
               document_native_locations.PARAGRAPH_MAP_KEY: None, document_native_locations.WORD_TABLE_GRID_KEY: None,
               document_native_locations.PPTX_VISIBILITY_KEY: None, document_native_locations.WORD_RUN_MAP_KEY: None,
               document_native_locations.ODT_VISIBILITY_KEY: None, document_native_locations.WORD_NOTES_KEY: None,

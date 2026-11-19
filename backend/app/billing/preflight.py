@@ -247,6 +247,9 @@ def _document(path: Path, extension: str) -> None:
             if extension in {".md", ".markdown"} and not readable:
                 raise PreflightError("The Markdown document has no readable text outside fenced code blocks. "
                                      "Add prose before paying.")
+            if extension in HTML_EXTS and not readable:
+                raise PreflightError("The saved page has no readable text outside navigation and hidden markup. "
+                                     "Save the displayed text as PDF or DOCX before paying.")
             raise PreflightError("This document has no readable text. Export it as UTF-8 text, PDF or DOCX before paying.")
     if saved_fields:
         too_short = (f"The Word document includes saved field text but fewer than {MIN_WORDS} readable words. "

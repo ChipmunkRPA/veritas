@@ -718,6 +718,8 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     email = coverage.get("email")
     if isinstance(email, dict) and canonical_hash(email) != canonical_hash(decoded.get("meta", {}).get("email")):
         raise ObjectIntegrityError("Frozen email coverage differs from the recorded extraction")
+    if coverage.get(document_scope.HTML_STATIC_KEY) != decoded["meta"].get(document_scope.HTML_STATIC_KEY):
+        raise ObjectIntegrityError("Frozen HTML reading scope differs from the recorded extraction")
     word_grid_key = document_native_locations.WORD_TABLE_GRID_KEY
     if coverage.get(word_grid_key) != decoded["meta"].get(word_grid_key):
         raise ObjectIntegrityError("Frozen Word table grid mapping differs from the recorded extraction")

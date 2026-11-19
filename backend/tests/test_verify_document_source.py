@@ -82,6 +82,43 @@ def test_html_alternative_replays_with_its_recorded_body_selection(packet_factor
         verify_document_source.check(archive, bundle, original)
 
 
+@pytest.mark.parametrize("extension", [".html", ".xhtml", ".eml"])
+@pytest.mark.parametrize("current", [False, True])
+def test_static_html_replays_the_recorded_policy(packet_factory, tmp_path, extension, current):
+    original = tmp_path / ("source" + extension)
+    html = ("<p>First sentence contains <span hidden>unseen </span>enough useful words.</p>"
+            "<p>Second sentence adds more context to the exact original.</p>"
+            "<p>Third sentence completes the document source.</p>")
+    if extension == ".eml":
+        message = EmailMessage()
+        message.set_content(f"<html><body>{html}</body></html>", subtype="html", cte="quoted-printable")
+        original.write_bytes(message.as_bytes())
+    else:
+        original.write_bytes(f"<html><body><main>{html}</main></body></html>".encode("utf-16"))
+    db, store, analysis, result, _, _ = packet_factory(extension, source_pdf=original, use_static_html=current)
+    evidence = build_packet_set(db, analysis, store, result)
+    key = document_scope.HTML_STATIC_KEY
+    assert (key in evidence["coverage"]) is current
+    if current:
+        assert evidence["coverage"][key] == (
+            document_scope.XHTML_STATIC_POLICY if extension == ".xhtml" else document_scope.HTML_STATIC_POLICY)
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"sha256": analysis.sha256, "bytes": analysis.size_bytes}}
+    proof = tmp_path / "html-proof.zip"
+    renamed = tmp_path / "original.upload"
+    renamed.write_bytes(original.read_bytes())
+    with zipfile.ZipFile(proof, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(evidence))
+    with zipfile.ZipFile(proof) as archive:
+        assert "extracted text and source mapping matched" in verify_document_source.check(archive, bundle, renamed)
+    if current:
+        del evidence["coverage"][key]
+        with zipfile.ZipFile(proof, "w") as archive:
+            archive.writestr("evidence.json", canonical_json(evidence))
+        with zipfile.ZipFile(proof) as archive, pytest.raises(ValueError, match="source mapping differs|source-mapped HTML EML"):
+            verify_document_source.check(archive, bundle, renamed)
+
+
 @pytest.mark.parametrize("current", [False, True])
 def test_pdf_evidence_replays_with_the_recorded_line_wrap_policy(packet_factory, tmp_path, current):
     path = tmp_path / "wrapped.pdf"

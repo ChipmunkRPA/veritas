@@ -61,6 +61,7 @@ from app.evidence import (
     document_published_wording,
     document_saved_link_hosts,
     document_saved_link_hosts_binding,
+    document_scope,
     document_tracked_changes,
     document_word_visibility,
 )
@@ -161,6 +162,11 @@ def current_decode_output(output: Any, *, require_current_layout_reader: bool = 
             and output.get(document_saved_link_hosts_binding.POLICY) != document_saved_link_hosts_binding.SCHEMA):
         return False
     if output["meta"].get("method") == "html" and output["meta"].get(html_article.READER) != html_article.POLICY:
+        return False
+    html_input = (output["meta"].get("method") == "html"
+                  or (output["meta"].get("email") or {}).get("body_content_type") == "text/html")
+    if (require_current_layout_reader and html_input
+            and output["meta"].get(document_scope.HTML_STATIC_KEY) not in document_scope.HTML_STATIC_POLICIES):
         return False
     if (require_current_layout_reader and output["meta"].get("method") == "email"
             and output["meta"].get(email_body.READER_KEY) != email_body.SELECTION_POLICY):

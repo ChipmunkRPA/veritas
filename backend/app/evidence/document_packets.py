@@ -565,6 +565,8 @@ def build_packet_set(db: Session, analysis: Analysis, store: ObjectStore, result
         document["coverage"][document_native_locations.SAVED_FIELDS_KEY] = saved_fields
     if article := decoded["meta"].get(document_scope.HTML_ARTICLE_KEY):
         document["coverage"][document_scope.HTML_ARTICLE_KEY] = article
+    if static_html := decoded["meta"].get(document_scope.HTML_STATIC_KEY):
+        document["coverage"][document_scope.HTML_STATIC_KEY] = static_html
     if policy := decoded["meta"].get(document_native_locations.PARAGRAPH_MAP_KEY):
         document["coverage"][document_native_locations.PARAGRAPH_MAP_KEY] = policy
     if slide_visibility := decoded["meta"].get(document_native_locations.PPTX_VISIBILITY_KEY):

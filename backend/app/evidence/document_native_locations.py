@@ -2,7 +2,14 @@
 
 from __future__ import annotations
 
-from app.evidence.document_scope import EMAIL_HTML_COORDINATES, HTML_ARTICLE_KEY, valid_html_article_scope
+from app.evidence.document_scope import (
+    EMAIL_HTML_COORDINATES,
+    HTML_ARTICLE_KEY,
+    HTML_STATIC_KEY,
+    HTML_STATIC_POLICIES,
+    HTML_STATIC_POLICY,
+    valid_html_article_scope,
+)
 
 KEY = "original_text_locations"
 SCHEMA = "document-original-text-locations/1"
@@ -211,6 +218,13 @@ def build(document):
 def validate(document):
     validate_saved_fields(document)
     coverage = document.get("coverage") or {}
+    if HTML_STATIC_KEY in coverage:
+        method = document.get("source", {}).get("method")
+        policy = coverage[HTML_STATIC_KEY]
+        html_email = method == "email" and (coverage.get("email") or {}).get("body_content_type") == "text/html"
+        if not isinstance(policy, str) or not (method == "html" and policy in HTML_STATIC_POLICIES
+                                               or html_email and policy == HTML_STATIC_POLICY):
+            raise ValueError("Invalid static HTML reading policy")
     if WORD_TABLE_GRID_KEY in coverage and (coverage[WORD_TABLE_GRID_KEY] not in WORD_TABLE_GRID_VERSIONS
             or document.get("source", {}).get("method") != "python-docx"):
         raise ValueError("Invalid Word table grid mapping")

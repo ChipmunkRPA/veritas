@@ -21,9 +21,16 @@ from html import unescape
 from html.parser import HTMLParser
 from pathlib import Path
 
-from app.detectors.text import email_body, html_article
+from app.detectors.text import email_body, html_article, html_content
 from app.evidence import document_native_locations, document_pdf_visibility
-from app.evidence.document_scope import EMAIL_HTML_COORDINATES, valid_html_article_scope
+from app.evidence.document_scope import (
+    EMAIL_HTML_COORDINATES,
+    HTML_STATIC_KEY,
+    HTML_STATIC_NOTICE,
+    HTML_STATIC_POLICY,
+    XHTML_STATIC_POLICY,
+    valid_html_article_scope,
+)
 
 
 @dataclass
@@ -101,10 +108,15 @@ def _normalise(raw: str, *, dehyphenate: bool = False,
     return "".join(chars[start:end]), origins[start:end]
 
 
-def _source_ranges(raw, text, origins, pos, *, base=0, html_origins=None):
+def _source_ranges(raw, text, origins, pos, *, base=0, html_origins=None, separate_html_gaps=False):
     ranges = []
     previous_direct = False
     for i, (a, b) in enumerate(origins):
+        # One normalized space may straddle tags or an excluded subtree.
+        # Its first visible character is sufficient proof of the space.
+        if (separate_html_gaps and html_origins is not None and b - a > 1
+                and any(html_origins[index - 1][1] != html_origins[index][0] for index in range(a + 1, b))):
+            b = a + 1
         lo, hi = (html_origins[a][0], html_origins[b - 1][1]) if html_origins is not None else (base + a, base + b)
         row = [pos + i, pos + i + 1, lo, hi]
         direct = b - a == hi - lo == 1 and raw[a:b] == text[i]
@@ -145,7 +157,7 @@ def _joined_word_mapping(group, text, origins, pos):
 
 
 def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False, map_paragraphs: bool = False,
-                 preserve_pdf_wrap_hyphens: bool = False) -> Document:
+                 preserve_pdf_wrap_hyphens: bool = False, separate_html_gaps: bool = False) -> Document:
     texts: list[str] = []
     spans: list[tuple[int, int]] = []
     mapping: list[dict] = []
@@ -173,7 +185,7 @@ def _join_mapped(parts: list[tuple[str, dict]], *, dehyphenate: bool = False, ma
             # Consecutive 1:1 stretches are compacted; collapsed whitespace keeps
             # its entire source range. These are decoded codepoints, not bytes.
             entry["source_ranges"] = _source_ranges(raw, text, origins, pos, base=source.get("source_start", 0),
-                                                     html_origins=source.get("html_origins"))
+                                                     html_origins=source.get("html_origins"), separate_html_gaps=separate_html_gaps)
         glyphs = source.get("glyphs")
         if glyphs is not None:
             fragments = []
@@ -1060,7 +1072,7 @@ class _MappedEmailHTML(HTMLParser):
         raise ValueError("Unsupported email HTML instruction")
 
 
-def _mapped_email_html(raw, mime_part, text):
+def _mapped_email_html(raw, mime_part, text, *, separate_html_gaps=False):
     if len(raw) > 64 * 1024 or "\ufffd" in raw:
         return None
     parser = _MappedEmailHTML(raw)
@@ -1071,7 +1083,8 @@ def _mapped_email_html(raw, mime_part, text):
         return None
     if parser.stack:
         return None
-    candidate = _join_mapped([(value, {**source, "mime_part": mime_part}) for value, source in parser.parts])
+    candidate = _join_mapped([(value, {**source, "mime_part": mime_part}) for value, source in parser.parts],
+                             separate_html_gaps=separate_html_gaps)
     return candidate if candidate.text == text and candidate.source_map else None
 
 
@@ -1155,12 +1168,12 @@ def rtf_text(data: bytes, *, skip_hidden_rtf_runs: bool = True) -> str:
         raise ValueError("The RTF text could not be decoded. Save it as DOCX or PDF.") from error
 
 
-def _attach_html_source_ranges(doc: Document, raw: str) -> None:
-    candidate = html_article.parts(raw)
+def _attach_html_source_ranges(doc: Document, raw: str, *, projected: str | None = None) -> None:
+    candidate = html_article.parts(raw if projected is None else projected)
     if candidate is None or not valid_html_article_scope(candidate[1]):
         return
     parts, scope = candidate
-    mapped = _join_mapped(parts)
+    mapped = _join_mapped(parts, separate_html_gaps=projected is not None)
     texts = [doc.text[block["start"]:block["end"]] for block in doc.source_map]
     body = [mapped.text[block["start"]:block["end"]] for block in mapped.source_map]
     full_counts, body_counts = Counter(texts), Counter(body)
@@ -1177,13 +1190,15 @@ def _attach_html_source_ranges(doc: Document, raw: str) -> None:
         block["source_ranges"] = [[a + shift, b + shift, lo, hi] for a, b, lo, hi in match["source_ranges"]]
         attached = True
     if attached:
-        doc.meta.update({html_article.KEY: scope, "decoded_source_sha256": text_hash(raw), "coverage_warning": (
-            "Original HTML source positions are available for uniquely matched article passages. Other positions refer to the "
-            "extracted text, which can include page navigation and hidden markup text. Scripts and linked content were not loaded.")})
+        warning = ("Original HTML source positions are available for uniquely matched article passages. "
+                   "Other positions refer to the extracted text")
+        warning += ", which can include page navigation and hidden markup text." if projected is None else "."
+        doc.meta.update({html_article.KEY: scope, "decoded_source_sha256": text_hash(raw),
+                         "coverage_warning": warning + " Scripts and linked content were not loaded."})
 
 
 def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True, map_body_paragraphs: bool = True,
-                      skip_hidden_rtf_runs: bool = True, skip_markdown_fences: bool = True) -> Document:
+                      skip_hidden_rtf_runs: bool = True, skip_markdown_fences: bool = True, use_static_html: bool = True) -> Document:
     data = path.read_bytes()
     if ext == ".rtf":
         # RTF \par becomes a newline. Keep those breaks as passage boundaries.
@@ -1206,7 +1221,10 @@ def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True
     else:
         encoding = "utf-8"
     decoded = data.decode(encoding, errors="replace")
-    raw, method = text_like_content(decoded, ext, skip_markdown_fences=skip_markdown_fences)
+    from app.storage.files import HTML_EXTS
+
+    projected = html_content.mask(decoded, xhtml=ext == ".xhtml") if use_static_html and ext in HTML_EXTS else None
+    raw, method = text_like_content(decoded if projected is None else projected, ext, skip_markdown_fences=skip_markdown_fences)
     parts = _text_parts(raw, kind="text" if method == "plain" else "markup")
     map_markdown = method == "markdown" and map_body_paragraphs
     if map_markdown:
@@ -1228,7 +1246,10 @@ def extract_text_like(path: Path, ext: str, *, include_html_article: bool = True
         d.meta["coverage_warning"] += " Recognized fenced code blocks are excluded from the writing check."
     if method == "html" and include_html_article:
         d.meta[html_article.READER] = html_article.POLICY
-        _attach_html_source_ranges(d, decoded)
+        _attach_html_source_ranges(d, decoded, projected=projected)
+    if projected is not None:
+        d.meta[HTML_STATIC_KEY] = XHTML_STATIC_POLICY if ext == ".xhtml" else HTML_STATIC_POLICY
+        d.meta["coverage_warning"] += " " + HTML_STATIC_NOTICE
     return d
 
 
@@ -1241,7 +1262,7 @@ def _text_parts(raw: str, *, kind: str = "text", **anchor) -> list[tuple[str, di
     return parts
 
 
-def extract_eml(path: Path, *, use_current_email_body: bool = True) -> Document:
+def extract_eml(path: Path, *, use_current_email_body: bool = True, use_static_html: bool = True) -> Document:
     from email import policy
     from email.parser import BytesParser
 
@@ -1267,7 +1288,8 @@ def extract_eml(path: Path, *, use_current_email_body: bool = True) -> Document:
         raise ValueError("This email body could not be decoded as text.")
     is_html = body.get_content_type() == "text/html"
     if is_html:
-        parts = _text_parts(_html_text(raw), kind="markup", mime_part=mime_part, quote_role="unknown")
+        markup = html_content.mask(raw) if use_static_html else raw
+        parts = _text_parts(_html_text(markup), kind="markup", mime_part=mime_part, quote_role="unknown")
     else:
         # Quotation detection is a navigation aid, never an authorship assertion.
         # Keep the '>' prefixes and signature text rather than silently deleting it.
@@ -1294,7 +1316,7 @@ def extract_eml(path: Path, *, use_current_email_body: bool = True) -> Document:
             parts.append(("".join(accumulated), {"kind": "email", "source_start": start,
                                                 "mime_part": mime_part, "quote_role": previous_role}))
     document = _join_mapped(parts)
-    mapped = _mapped_email_html(raw, mime_part, document.text) if is_html else None
+    mapped = _mapped_email_html(markup, mime_part, document.text, separate_html_gaps=use_static_html) if is_html else None
     if mapped is not None:
         document = mapped
     attachments = [{"mime_part": part_id, "filename": part.get_filename(), "content_type": part.get_content_type()}
@@ -1312,6 +1334,9 @@ def extract_eml(path: Path, *, use_current_email_body: bool = True) -> Document:
         document.meta[email_body.READER_KEY] = email_body.SELECTION_POLICY
     if selection_changed:
         document.meta["email"][email_body.SELECTION_KEY] = email_body.SELECTION_POLICY
+    if is_html and use_static_html:
+        document.meta[HTML_STATIC_KEY] = HTML_STATIC_POLICY
+        document.meta["coverage_warning"] += " " + HTML_STATIC_NOTICE
     return document
 
 
@@ -1325,7 +1350,8 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             include_word_linked_notes: bool = True, skip_hidden_xlsx_cell_formats: bool = True,
             skip_hidden_rtf_runs: bool = True, skip_markdown_fences: bool = True,
             honor_csv_separator_declaration: bool = True,
-            check_word_checkout_visibility: bool = False, use_current_email_body: bool = True) -> Document:
+            check_word_checkout_visibility: bool = False, use_current_email_body: bool = True,
+            use_static_html: bool = True) -> Document:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers,
@@ -1403,10 +1429,11 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
             d.meta[document_native_locations.CSV_SEPARATOR_KEY] = separator
             d.meta["coverage_warning"] += " The separator declaration is counted as row 1 and excluded from the writing check."
     elif ext == ".eml":
-        d = extract_eml(path, use_current_email_body=use_current_email_body)
+        d = extract_eml(path, use_current_email_body=use_current_email_body, use_static_html=use_static_html)
     else:
         d = extract_text_like(path, ext, include_html_article=include_html_article, map_body_paragraphs=map_body_paragraphs,
-                              skip_hidden_rtf_runs=skip_hidden_rtf_runs, skip_markdown_fences=skip_markdown_fences)
+                              skip_hidden_rtf_runs=skip_hidden_rtf_runs, skip_markdown_fences=skip_markdown_fences,
+                              use_static_html=use_static_html)
     d.meta.update({"chars": len(d.text), "words": len(d.text.split()), "paragraphs": len(d.paragraphs)})
     return _seal(d, original_sha256=hashlib.sha256(path.read_bytes()).hexdigest())
 

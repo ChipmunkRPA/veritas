@@ -23,6 +23,8 @@ from app.detectors.image import (
 from app.evidence.image_reference import CROP_RESIZE_SCHEMA, EXACT_PNG_CROP_RESIZE_SCHEMA, RESIZE_SCHEMA
 from app.evidence.image_reference_delivery_envelope import SCHEMA as JPEG_PNG_ENVELOPE_SCHEMA
 
+AXIS_JPEG_RESIZE_SCHEMA = "chipmunk.image-reference-comparison/30"
+
 PAGE_WIDTH = 612
 PAGE_HEIGHT = 792
 MARGIN = 42
@@ -72,6 +74,8 @@ def _summary(document, comparison, assets):
     if comparison["status"] != "comparable":
         status = RESIZE_UNASSESSED.get(comparison["status"],
                                       "Comparison unassessed. The inputs did not meet the alignment or delivery checks.")
+    elif comparison.get("axis_jpeg_resize", {}).get("basis") == "exact_full_jpeg_pixel_reproduction":
+        status = "All pixels match after resizing and JPEG encoding."
     elif comparison.get("axis_resize", {}).get("basis") == "exact_full_grid":
         status = "All pixels match after separate width and height resizing."
     elif regions:
@@ -80,8 +84,22 @@ def _summary(document, comparison, assets):
     else:
         status = "Comparable images. No region met the difference check's selection rule."
     page = _page(document, "Earlier-copy image comparison", status)
+    interpretation = comparison["interpretation"]
+    if comparison["schema"] == AXIS_JPEG_RESIZE_SCHEMA:
+        if comparison["axis_jpeg_resize"]["basis"] == "exact_full_jpeg_pixel_reproduction":
+            interpretation = ("Both supplied copies were compared after resizing the earlier PNG separately in width and "
+                              "height. Every decoded RGB pixel matches a reproduced JPEG encoding. Pixel agreement under "
+                              "these steps does not establish either file's origin or authenticity.")
+        elif regions:
+            interpretation = ("Both supplied copies were compared after resizing the earlier PNG and reproducing "
+                              "compatible JPEG encoding. Highlights show retained local brightness or color differences. "
+                              "Ordinary editing and compression can cause these differences. AI origin is undetermined.")
+        else:
+            interpretation = ("Both supplied copies were compared after resizing the earlier PNG and reproducing "
+                              "compatible JPEG encoding. Matching JPEG blocks support the comparison. No local difference "
+                              "met the retention rule. Small changes may still be present. AI origin is undetermined.")
     page.insert_textbox(
-        (MARGIN, 141, RIGHT, 194), comparison["interpretation"], fontsize=11, fontname="helv", color=INK,
+        (MARGIN, 141, RIGHT, 194), interpretation, fontsize=11, fontname="helv", color=INK,
     )
     for y, label, source in ((207, "Earlier copy", comparison["reference"]),
                              (252, "Submitted image", comparison["submitted"])):
@@ -116,6 +134,26 @@ def _summary(document, comparison, assets):
                    f"{proof['matched_pixels']:,} RGB pixels match, including {len(proof['matched_tiles'])} detailed areas.")
         _text(page, MARGIN, 334, finding, size=10, color=MUTED)
         _text(page, MARGIN, 350, "Crops use their original source pixels. Zero weight in AI assessment.", size=10, color=MUTED)
+    if schema == AXIS_JPEG_RESIZE_SCHEMA and (proof := comparison.get("axis_jpeg_resize")):
+        horizontal, vertical = proof["submitted_over_reference_xy"]
+        scales = f"Width {horizontal[0] / horizontal[1]:.1%} of earlier copy. Height {vertical[0] / vertical[1]:.1%}."
+        _text(page, MARGIN, 302, "Supplied earlier PNG resized separately in width and height.", size=10, font="hebo")
+        _text(page, MARGIN, 318, scales, size=10)
+        writes = sorted({row["jpeg_writes"] for row in proof["projection"]})
+        count = " or ".join(str(value) for value in writes)
+        encodes = "encode" if writes == [1] else "encodes"
+        _text(page, MARGIN, 334, f"Matching reproductions use JPEG quality {proof['jpeg_quality']} and {count} {encodes}.", size=10)
+        kernels = ", ".join(dict.fromkeys(row["resize_kernel"].replace("opencv_area", "area")
+                                           for row in proof["projection"]))
+        _text(page, MARGIN, 350, f"Matching resize filters include {kernels}.", size=10, color=MUTED)
+        if proof["basis"] == "exact_full_jpeg_pixel_reproduction":
+            finding = "Every decoded RGB pixel matches the reproduced JPEG."
+        else:
+            aligned = comparison["alignment"]
+            finding = f"On the projected JPEG grid, {aligned['exact_tiles']:,} of {aligned['full_tiles']:,} decoded blocks match."
+        _text(page, MARGIN, 366, finding, size=10, color=MUTED)
+        note = ("Native source crops. " if regions else "") + "Zero AI confidence weight. AI origin is undetermined."
+        _text(page, MARGIN, 382, note, size=10, color=MUTED)
     if proof := comparison.get("lossy_webp"):
         note = ("Matching framing across the earlier JPEG and submitted WebP."
                 if schema == reference_lossy_webp.EARLIER_JPEG_SCHEMA else "The comparison allows for lossy WebP compression.")
@@ -162,7 +200,7 @@ def _summary(document, comparison, assets):
         _text(page, MARGIN, 302, "Matching detail supports the same framing.", size=10, font="hebo")
         _text(page, MARGIN, 318, f"{aligned} of {detailed} detailed areas matched across the two images.", size=10, color=MUTED)
         _text(page, MARGIN, 334, "Highlights require local color and structure changes under both tone fits.", size=10, color=MUTED)
-    elif (schema not in {reference_same_jpeg.SCHEMA, reference_native_jpeg.SCHEMA, *reference_jpeg_detail_loss.SCHEMAS}
+    elif (schema not in {reference_same_jpeg.SCHEMA, reference_native_jpeg.SCHEMA, AXIS_JPEG_RESIZE_SCHEMA, *reference_jpeg_detail_loss.SCHEMAS}
           and (alignment := comparison.get("alignment")) and "submitted_overlap" in alignment):
         label = "area compared" if schema == reference_shifted_jpeg.SCHEMA else "overlap"
         _text(page, MARGIN, 302, f"Earlier copy {label}: {_area(alignment['reference_overlap'])}", size=10)
@@ -239,7 +277,9 @@ def _summary(document, comparison, assets):
             _text(page, MARGIN, 350, "Retained pixels were flagged by at least two tested resizes.", size=10, color=MUTED)
     mask, coverage = comparison.get("mask"), comparison.get("coverage_mask")
     split = (MARGIN + RIGHT) / 2
-    exhibit_top = 381 if schema in {reference_png_screenshot.SCHEMA, reference_scaled_screenshot.SCHEMA} else 366
+    exhibit_top = 404 if schema == AXIS_JPEG_RESIZE_SCHEMA else (
+        381 if schema in {reference_png_screenshot.SCHEMA, reference_scaled_screenshot.SCHEMA} else 366
+    )
     if coverage:
         _text(page, MARGIN, exhibit_top, "Compared area", font="hebo")
         _text(page, MARGIN, exhibit_top + 16, "White marks the pixels included in the comparison.", size=9, color=MUTED)
@@ -261,9 +301,13 @@ def render(comparison: dict, assets: dict[str, bytes]) -> bytes:
         _summary(document, comparison, assets)
         for index, region in enumerate(comparison["regions"], 1):
             color_region = region.get("difference_basis") == "color"
-            label = ("Color difference" if color_region else
+            label = ("JPEG sample difference" if comparison["schema"] == AXIS_JPEG_RESIZE_SCHEMA else
+                     "Color difference" if color_region else
                      "Fine detail loss" if comparison["schema"] in reference_jpeg_detail_loss.SCHEMAS else "Difference region")
-            page = _page(document, f"{label} {index}", "Coordinates use each image's oriented native pixels.")
+            subtitle = ("Crops use native source pixels. Differences were measured on the reproduced JPEG grid."
+                        if comparison["schema"] == AXIS_JPEG_RESIZE_SCHEMA else
+                        "Coordinates use each image's oriented native pixels.")
+            page = _page(document, f"{label} {index}", subtitle)
             overlay = region.get("submitted_overlay")
             for x, right, label, bounds, asset, hash_y in (
                 (MARGIN, 296, "Earlier copy", region.get("reference_region", region), region["reference_crop"], 585),
@@ -279,7 +323,10 @@ def render(comparison: dict, assets: dict[str, bytes]) -> bytes:
                 _text(page, 316, 395, "Amber marks the selected pixels in this crop.", size=10, color=MUTED)
                 _image(page, pymupdf.Rect(316, 407, RIGHT, 558), region["submitted_crop"], assets, overlay=overlay)
                 _text(page, MARGIN, 379, f"Retained difference pixels: {region['selected_pixels']}", size=10)
-                _text(page, MARGIN, 395, f"/regions/{index - 1}/submitted_overlay", size=9, font="cour", color=MUTED)
+                if comparison["schema"] == AXIS_JPEG_RESIZE_SCHEMA:
+                    _text(page, MARGIN, 395, "Read with the original crops above.", size=9, color=MUTED)
+                else:
+                    _text(page, MARGIN, 395, f"/regions/{index - 1}/submitted_overlay", size=9, font="cour", color=MUTED)
                 if "directly_measured_tiles" in region:
                     total = region["selected_pixels"] // reference_jpeg_detail_loss.TILE ** 2
                     _text(page, MARGIN, 412, f"{region['directly_measured_tiles']} of {total} tiles directly support the finding.",

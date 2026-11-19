@@ -1,0 +1,163 @@
+{
+  "added_comparison_jobs": 0,
+  "browser": {
+    "page_errors": 0,
+    "replays": [
+      {
+        "basis": "reproduced_jpeg_background_with_local_sample_difference",
+        "compared_source_coordinates": [
+          [
+            684,
+            768
+          ],
+          [
+            631,
+            576
+          ]
+        ],
+        "regions": 1,
+        "role": "q75-edited",
+        "status": "comparable"
+      },
+      {
+        "basis": "reproduced_jpeg_background_with_local_sample_difference",
+        "compared_source_coordinates": [
+          [
+            684,
+            768
+          ],
+          [
+            561,
+            512
+          ]
+        ],
+        "regions": 1,
+        "role": "q90-edited-resave",
+        "status": "comparable"
+      },
+      {
+        "basis": "exact_full_jpeg_pixel_reproduction",
+        "compared_source_coordinates": [
+          [
+            841,
+            768
+          ],
+          [
+            684,
+            768
+          ]
+        ],
+        "regions": 0,
+        "role": "q90-ordinary-resave",
+        "status": "comparable"
+      },
+      {
+        "basis": null,
+        "compared_source_coordinates": null,
+        "regions": 0,
+        "role": "q75-incompatible-tone",
+        "status": "unsupported_resize_geometry"
+      }
+    ]
+  },
+  "cases": {
+    "q75-edited": {
+      "basis": "reproduced_jpeg_background_with_local_sample_difference",
+      "earlier_and_submitted_source_hashes_verified": 2,
+      "off_status": "unsupported_resize_geometry",
+      "original_crops_verified": 2,
+      "projection": [
+        {
+          "body_sha256": "3e26062a17008265d0810659c9fbec7a69ff82b6cb2614170d605dc625c1c332",
+          "jpeg_writes": 1,
+          "resize_kernel": "lanczos",
+          "rgb_sha256": "76e2cf9cdeb861a3f0b68072d9966904ff6a24fb7f964f1bb50dabe47e59a11c"
+        }
+      ],
+      "regions": 1,
+      "schema": "chipmunk.image-reference-comparison/30",
+      "selected_pixels": 4808,
+      "status": "comparable",
+      "truth_intersection": 4363
+    },
+    "q75-incompatible-tone": {
+      "basis": null,
+      "earlier_and_submitted_source_hashes_verified": 2,
+      "off_status": "unsupported_resize_geometry",
+      "original_crops_verified": 0,
+      "projection": [],
+      "regions": 0,
+      "schema": "chipmunk.image-reference-comparison/3",
+      "selected_pixels": 0,
+      "status": "unsupported_resize_geometry",
+      "truth_intersection": 0
+    },
+    "q90-edited-resave": {
+      "basis": "reproduced_jpeg_background_with_local_sample_difference",
+      "earlier_and_submitted_source_hashes_verified": 2,
+      "off_status": "unsupported_resize_geometry",
+      "original_crops_verified": 2,
+      "projection": [
+        {
+          "body_sha256": "d1087f8ce9183f8598f71586e74028acfe917107c83c93c30316ddc7149d9c4a",
+          "jpeg_writes": 2,
+          "resize_kernel": "bicubic",
+          "rgb_sha256": "5cea2c1fac6714e0be3bf9e444d14557ede40ad8c414fa316cc76fe49bc944e9"
+        }
+      ],
+      "regions": 1,
+      "schema": "chipmunk.image-reference-comparison/30",
+      "selected_pixels": 3818,
+      "status": "comparable",
+      "truth_intersection": 3548
+    },
+    "q90-ordinary-resave": {
+      "basis": "exact_full_jpeg_pixel_reproduction",
+      "earlier_and_submitted_source_hashes_verified": 2,
+      "off_status": "unsupported_resize_geometry",
+      "original_crops_verified": 0,
+      "projection": [
+        {
+          "body_sha256": "eb51fec0beef7545fe303fcec37cd5abd09781631e0f0d841dc7a091e3edd393",
+          "jpeg_writes": 2,
+          "resize_kernel": "lanczos",
+          "rgb_sha256": "a057cc2075a30c8a7eca6db258871e955d50e6a3b079c1e652f79d6506a1ad99"
+        }
+      ],
+      "regions": 0,
+      "schema": "chipmunk.image-reference-comparison/30",
+      "selected_pixels": 0,
+      "status": "comparable",
+      "truth_intersection": 0
+    }
+  },
+  "jobs_before_payment": 0,
+  "paid_assessment_and_frozen_result_unchanged": true,
+  "paid_screening_jobs": 4,
+  "purchase_price_usd_cents": 999,
+  "reports": {
+    "q75-edited": {
+      "byte_exact_original_crops": 2,
+      "pages": 2,
+      "pixel_matched_overlays": 1
+    },
+    "q75-incompatible-tone": {
+      "byte_exact_original_crops": 0,
+      "pages": 1,
+      "pixel_matched_overlays": 0
+    },
+    "q90-edited-resave": {
+      "byte_exact_original_crops": 2,
+      "pages": 2,
+      "pixel_matched_overlays": 1
+    },
+    "q90-ordinary-resave": {
+      "byte_exact_original_crops": 0,
+      "pages": 1,
+      "pixel_matched_overlays": 0
+    }
+  },
+  "schema": "chipmunk.axis-jpeg-local-app/1",
+  "separate_paid_screening_used_only_model_free_installed_provenance_checks": true,
+  "simulated_checkout_count": 4
+}

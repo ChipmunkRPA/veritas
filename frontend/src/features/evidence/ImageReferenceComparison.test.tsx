@@ -57,6 +57,39 @@ function blobText(blob: Blob): Promise<string> {
   })
 }
 
+function axisJpegComparison(quality: 75 | 90, writes: 1 | 2, edited: boolean): ImageReferenceResult {
+  const result = structuredClone(comparison)
+  const record = result.comparison
+  record.schema = 'chipmunk.image-reference-comparison/30'
+  record.coordinate_space = 'exif-oriented-submitted'
+  record.reference = { ...record.reference, width: 512, height: 576 }
+  record.submitted = { ...record.submitted, width: 576, height: 512 }
+  record.affects_overall_confidence = false
+  record.axis_jpeg_resize = {
+    basis: edited ? 'reproduced_jpeg_background_with_local_sample_difference' : 'exact_full_jpeg_pixel_reproduction',
+    jpeg_quality: quality, submitted_over_reference_xy: [[576, 512], [512, 576]],
+    projection: [{ resize_kernel: 'bicubic', jpeg_writes: writes, body_sha256: hash, rgb_sha256: 'd'.repeat(64) }],
+    ...(!edited ? { matched_pixels: 576 * 512 } : {}),
+  }
+  if (edited) {
+    record.mask = artifact('difference-mask.png', 576, 512)
+    record.regions[0].selected_pixels = 500
+    record.regions[0].reference_region = { x: 104, y: 73, w: 81, h: 79 }
+    record.regions[0].reference_crop = artifact('reference-01.png', 81, 79)
+    record.alignment = { method: 'native_jpeg_sample_difference',
+      submitted_overlap: { x: 0, y: 0, w: 576, h: 512 }, reference_overlap: { x: 0, y: 0, w: 576, h: 512 },
+      reference_minus_submitted: { x: 0, y: 0 }, full_tiles: 1152, exact_tiles: 1100, anchor_count: 40,
+      supported_zones: [[0, 0], [0, 1], [1, 0], [1, 2], [2, 1], [2, 2]],
+      anchor_sha256: hash, reference_decoded_rgb_sha256: 'd'.repeat(64) }
+  } else {
+    delete record.alignment
+    delete record.mask
+    record.regions = []
+    result.pngs = {}
+  }
+  return result
+}
+
 afterEach(() => {
   cleanup()
   vi.unstubAllGlobals()
@@ -98,6 +131,91 @@ describe('earlier-copy comparison', () => {
       expect(screen.getByText('All pixels match after resizing')).toBeTruthy()
       expect(screen.queryByAltText('Difference mask in submitted image coordinates')).toBeNull()
     }
+  })
+
+  it.each([75, 90] as const)('shows resized JPEG evidence and exports unchanged proof at quality %s', async quality => {
+    const result = axisJpegComparison(quality, 2, true)
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText('1 difference region found')).toBeTruthy()
+    expect(screen.getByText(/two supplied copies, your earlier PNG and the submitted JPEG/)).toBeTruthy()
+    expect(screen.getByText(/submitted width is 112.5% and its height is 88.9%/)).toBeTruthy()
+    expect(screen.getByText(/Matching decoded JPEG blocks \(1,100 of 1,152\)/)).toBeTruthy()
+    expect(screen.getByText(/carries zero weight in the AI confidence score/)).toBeTruthy()
+    expect(screen.getByText(/Reproductions used JPEG quality/).textContent).toContain(String(quality))
+    expect(screen.getByText('Bicubic resize · 2 JPEG encodes')).toBeTruthy()
+    expect(screen.getByText('x 104, y 73 · 81 × 79 px')).toBeTruthy()
+    expect(screen.getByText('x 118, y 65 · 90 × 70 px')).toBeTruthy()
+    expect(screen.queryByText('Earlier copy overlap')).toBeNull()
+    expect(screen.queryByText('Submitted image overlap')).toBeNull()
+    for (const label of ['Earlier copy crop for region 1', 'Submitted image crop for region 1', 'Difference mask in submitted image coordinates']) {
+      expect(screen.getByAltText(label)).toBeTruthy()
+    }
+    fireEvent.click(screen.getByRole('button', { name: 'Download comparison JSON' }))
+    expect(JSON.parse(await blobText(vi.mocked(saveBlob).mock.calls[0][0]))).toEqual({ comparison: result.comparison, pngs: result.pngs })
+  })
+
+  it.each([[75, 1], [75, 2], [90, 1], [90, 2]] as const)('distinguishes full JPEG reproduction at quality %s after %s encode(s)', async (quality, writes) => {
+    const result = axisJpegComparison(quality, writes, false)
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText('All pixels match after resizing and JPEG encoding')).toBeTruthy()
+    expect(screen.getByText(/Every decoded RGB pixel in the submitted JPEG matches/)).toBeTruthy()
+    expect(screen.getByText(`Bicubic resize · ${writes} JPEG ${writes === 1 ? 'encode' : 'encodes'}`)).toBeTruthy()
+    expect(screen.queryByText(/Small changes may still be present/)).toBeNull()
+    expect(screen.queryByAltText('Difference mask in submitted image coordinates')).toBeNull()
+    expect(screen.getByText(/does not determine AI origin/)).toBeTruthy()
+  })
+
+  it('shows multiple compatible JPEG processing routes without claiming their creation history', async () => {
+    const result = axisJpegComparison(75, 1, true)
+    result.comparison.axis_jpeg_resize!.projection.push({ resize_kernel: 'opencv_area', jpeg_writes: 2, body_sha256: hash, rgb_sha256: hash })
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText('1 difference region found')).toBeTruthy()
+    expect(screen.getByText('Bicubic resize · 1 JPEG encode')).toBeTruthy()
+    expect(screen.getByText('Area resize · 2 JPEG encodes')).toBeTruthy()
+    expect(screen.getByText(/These steps are compatible with the two supplied copies/)).toBeTruthy()
+  })
+
+  it('distinguishes supported JPEG samples below the local retention rule from full equality', async () => {
+    const result = axisJpegComparison(75, 1, true)
+    result.comparison.regions = []
+    delete result.comparison.mask
+    result.pngs = {}
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect(await screen.findByText('No localized differences found')).toBeTruthy()
+    expect(screen.getByText(/Small changes may still be present/)).toBeTruthy()
+    expect(screen.getByText(/check measured brightness and color samples on that grid/)).toBeTruthy()
+    expect(screen.queryByText('All pixels match after resizing and JPEG encoding')).toBeNull()
+    expect(screen.queryByAltText('Difference mask in submitted image coordinates')).toBeNull()
+  })
+
+  it.each(['quality', 'projection', 'grid', 'ratio', 'weight', 'native_crop', 'shifted_crop'] as const)('rejects inconsistent JPEG evidence: %s', async changed => {
+    const result = axisJpegComparison(75, 1, true)
+    const proof = result.comparison.axis_jpeg_resize!
+    if (changed === 'quality') Object.assign(proof, { jpeg_quality: 85 })
+    if (changed === 'projection') proof.projection.push({ ...proof.projection[0] })
+    if (changed === 'grid') result.comparison.alignment!.reference_overlap = { x: 0, y: 0, w: 512, h: 576 }
+    if (changed === 'ratio') proof.submitted_over_reference_xy[0][0]++
+    if (changed === 'weight') result.comparison.affects_overall_confidence = true
+    if (changed === 'native_crop') result.comparison.regions[0].reference_region!.x = 500
+    if (changed === 'shifted_crop') result.comparison.regions[0].reference_region!.x++
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValueOnce(json({ available: true })).mockResolvedValueOnce(json(result)))
+    show()
+    await choose()
+    fireEvent.click(screen.getByRole('button', { name: 'Compare images' }))
+    expect((await screen.findByRole('alert')).textContent).toContain('The server returned an incomplete resized JPEG comparison.')
+    expect(screen.queryByText('1 difference region found')).toBeNull()
   })
 
   it('shows exact WebP pixel differences with the source crop and mask', async () => {

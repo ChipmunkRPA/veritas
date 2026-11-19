@@ -94,6 +94,18 @@ export interface ImageReferenceRecord {
     projected_rgb_sha256: string
     difference_mask_sha256: string
   }
+  axis_jpeg_resize?: {
+    basis: 'exact_full_jpeg_pixel_reproduction' | 'reproduced_jpeg_background_with_local_sample_difference'
+    jpeg_quality: 75 | 90
+    submitted_over_reference_xy: [[number, number], [number, number]]
+    projection: {
+      resize_kernel: string
+      jpeg_writes: 1 | 2
+      body_sha256: string
+      rgb_sha256: string
+    }[]
+    matched_pixels?: number
+  }
   exact_orientation?: {
     transform: keyof typeof orientationLabels
     matched_pixels: number
@@ -179,6 +191,7 @@ export const earlierHeifSchema = 'chipmunk.image-reference-comparison/26'
 export const scaledScreenshotSchema = 'chipmunk.image-reference-comparison/27'
 export const nativeJpegDifferenceSchema = 'chipmunk.image-reference-comparison/28'
 export const axisResizeSchema = 'chipmunk.image-reference-comparison/29'
+export const axisJpegResizeSchema = 'chipmunk.image-reference-comparison/30'
 const lossyWebpSchemas = [lossyWebpSchema, resizedLossyWebpSchema, croppedLossyWebpSchema, croppedResizedLossyWebpSchema]
 export const imageFramingSchema = (record: ImageReferenceRecord) =>
   record.schema === webpColorSchema ? record.comparison_schema : record.schema
@@ -258,6 +271,62 @@ function validAxisResize(comparison: ImageReferenceRecord): boolean {
       && tile.every(value => Number.isSafeInteger(value) && value >= 0 && value < 5))
     && Boolean(mask) === (regions.length > 0) && regions.every(region => validAreaWithin(region, submitted.width, submitted.height)
       && region.reference_region && validAreaWithin(region.reference_region, reference.width, reference.height))
+}
+
+function validAxisJpegResize(comparison: ImageReferenceRecord): boolean {
+  const proof = comparison.axis_jpeg_resize
+  const { reference, submitted, regions, mask, alignment } = comparison
+  const dimensions = [[submitted.width, reference.width], [submitted.height, reference.height]]
+  if (!proof || comparison.status !== 'comparable' || comparison.affects_overall_confidence !== false
+    || comparison.coordinate_space !== 'exif-oriented-submitted'
+    || !dimensions.flat().every(side => Number.isSafeInteger(side) && side >= 256)
+    || Math.max(reference.width, reference.height) > 768 || Math.max(submitted.width, submitted.height) > 845
+    || !Array.isArray(proof.submitted_over_reference_xy) || proof.submitted_over_reference_xy.length !== 2
+    || !dimensions.every(([out, source], index) => {
+      const pair = proof.submitted_over_reference_xy[index]
+      return Array.isArray(pair) && pair.length === 2 && pair[0] === out && pair[1] === source
+    })
+    || ![75, 90].includes(proof.jpeg_quality)
+    || !Array.isArray(proof.projection) || proof.projection.length < 1 || proof.projection.length > 8
+    || !proof.projection.every(row => row && exactResizeKernels.has(row.resize_kernel)
+      && (row.jpeg_writes === 1 || row.jpeg_writes === 2)
+      && [row.body_sha256, row.rgb_sha256].every(pin => typeof pin === 'string' && /^[0-9a-f]{64}$/.test(pin)))
+    || new Set(proof.projection.map(row => `${row.resize_kernel}/${row.jpeg_writes}`)).size !== proof.projection.length) return false
+  const [sx, sy] = dimensions.map(([out, source]) => out / source)
+  if (sx < .72 || sx > 1.17 || sy < .72 || sy > 1.17 || Math.abs(sx / sy - 1) < .10) return false
+  if (proof.basis === 'exact_full_jpeg_pixel_reproduction') {
+    return proof.matched_pixels === submitted.width * submitted.height && !alignment && !mask && regions.length === 0
+  }
+  if (proof.basis !== 'reproduced_jpeg_background_with_local_sample_difference' || proof.matched_pixels !== undefined
+    || !alignment || alignment.method !== 'native_jpeg_sample_difference' || Boolean(mask) !== (regions.length > 0)
+    || ![alignment.submitted_overlap, alignment.reference_overlap].every(area => validArea(area)
+      && area.x === 0 && area.y === 0 && area.w === submitted.width && area.h === submitted.height)
+    || alignment.reference_minus_submitted?.x !== 0 || alignment.reference_minus_submitted.y !== 0) return false
+  const full = alignment.full_tiles ?? 0
+  const exact = alignment.exact_tiles ?? 0
+  const anchors = alignment.anchor_count ?? 0
+  const zones = alignment.supported_zones
+  return [full, exact, anchors].every(Number.isSafeInteger)
+    && full === Math.floor(submitted.width / 16) * Math.floor(submitted.height / 16)
+    && exact <= full && exact >= .85 * full && anchors >= 24 && anchors <= exact
+    && Array.isArray(zones) && zones.length >= 6
+    && zones.every(zone => Array.isArray(zone) && zone.length === 2 && zone.every(value => [0, 1, 2].includes(value)))
+    && new Set(zones.map(zone => zone.join(','))).size === zones.length
+    && [0, 1].every(axis => new Set(zones.map(zone => zone[axis])).size === 3)
+    && [alignment.anchor_sha256, alignment.reference_decoded_rgb_sha256].every(pin =>
+      typeof pin === 'string' && /^[0-9a-f]{64}$/.test(pin))
+    && regions.every(region => {
+      const earlier = region.reference_region
+      if (!validAreaWithin(region, submitted.width, submitted.height) || !earlier
+        || !validAreaWithin(earlier, reference.width, reference.height)
+        || !Number.isSafeInteger(region.selected_pixels) || (region.selected_pixels ?? 0) < 32
+        || (region.selected_pixels ?? 0) > region.w * region.h) return false
+      const left = Math.floor(region.x * reference.width / submitted.width)
+      const top = Math.floor(region.y * reference.height / submitted.height)
+      const right = Math.ceil((region.x + region.w) * reference.width / submitted.width)
+      const bottom = Math.ceil((region.y + region.h) * reference.height / submitted.height)
+      return earlier.x === left && earlier.y === top && earlier.w === right - left && earlier.h === bottom - top
+    })
 }
 
 function validSameJpegProof(comparison: ImageReferenceRecord): boolean {
@@ -349,6 +418,9 @@ export async function compareWithEarlierImage(analysisId: string, file: File, si
   }
   const proof = comparison.exact_projection
   const framing = imageFramingSchema(comparison)
+  if (comparison.schema === axisJpegResizeSchema && !validAxisJpegResize(comparison)) {
+    throw new Error('The server returned an incomplete resized JPEG comparison.')
+  }
   if (comparison.schema === axisResizeSchema && !validAxisResize(comparison)) {
     throw new Error('The server returned an incomplete width and height resize comparison.')
   }

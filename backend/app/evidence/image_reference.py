@@ -14,6 +14,7 @@ from PIL import Image, ImageOps, JpegImagePlugin
 
 from app.detectors.image import (
     reference_alignment,
+    reference_axis_jpeg_resize,
     reference_compare,
     reference_crop_resize,
     reference_exact_jpeg,
@@ -203,7 +204,8 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             allow_lossy_webp: bool = False, allow_lossy_webp_crop: bool = False,
             allow_lossy_webp_crop_resize: bool = False, allow_lossy_webp_color: bool = False,
             allow_lossy_webp_earlier_jpeg: bool = False, allow_perspective: bool = False,
-            allow_earlier_heif: bool = False, allow_native_jpeg: bool = False, allow_axis_resize: bool = False) -> dict:
+            allow_earlier_heif: bool = False, allow_native_jpeg: bool = False, allow_axis_resize: bool = False,
+            allow_axis_jpeg_resize: bool = False) -> dict:
     """Use an earlier reference supplied by the reviewer. This measures pixel differences."""
     refuse_truncated_images()
     before, after = _bytes(reference_path), _bytes(submitted_path)
@@ -337,10 +339,15 @@ def inspect(reference_path: Path, submitted_path: Path, *, evidence_dir: Path | 
             stretched, selection = reference_axis_resize.compare(original, questioned, before, after)
             if stretched is not None:
                 result, mask, schema, coverage = stretched, selection, AXIS_RESIZE_SCHEMA, None
+        if allow_axis_jpeg_resize and result["status"] != "comparable" and not webp and opacity is None:
+            stretched, selection = reference_axis_jpeg_resize.compare(original, questioned, before, after)
+            if stretched is not None:
+                result, mask, schema, coverage = stretched, selection, reference_axis_jpeg_resize.SCHEMA, None
     aligned = "alignment" in result
     interpretation = {AXIS_RESIZE_SCHEMA: ("The earlier copy was resized separately in width and height for comparison. "
                                           "Changes may reflect ordinary editing. The origin and authenticity of either file "
                                           "require separate evidence."),
+                      reference_axis_jpeg_resize.SCHEMA: reference_axis_jpeg_resize.INTERPRETATION,
                       reference_structure_jpeg.SCHEMA: reference_structure_jpeg.INTERPRETATION,
                       reference_same_jpeg.SCHEMA: reference_same_jpeg.INTERPRETATION,
                       reference_native_jpeg.SCHEMA: reference_native_jpeg.INTERPRETATION,

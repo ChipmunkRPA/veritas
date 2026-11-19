@@ -71,3 +71,53 @@ $9.99 payments cleared before the initial analyses started. The four
 earlier-copy comparisons used the retained inputs without creating
 another analysis job.
 [Browser and export receipt](evaluation-panels/image-reference-axis-resize-app-2026-11-18.json)
+
+## JPEG exports of an earlier PNG
+
+The optional `VERITAS_IMAGE_REFERENCE_AXIS_JPEG_RESIZE` setting compares an
+earlier opaque RGB PNG with an upright baseline JPEG that was resized by
+different amounts in width and height. The feature is available through the
+earlier-copy comparison when other checks leave the pair unassessed. It
+supports standard quality-75 and quality-90 JPEGs with
+4:2:0 color sampling. The earlier and submitted images have minimum sides of
+256 pixels, and maximum sides of 768 and 845 pixels, respectively. Both
+axes remain between 0.72× and 1.17×, with at least 10% relative axis drift.
+[JPEG encoder options](https://pillow.readthedocs.io/en/stable/handbook/image-file-formats.html#jpeg)
+
+The comparison reproduces the resize and one or two JPEG encodes using the
+submitted quantization tables. A whole-image pixel match supplies an exact
+decoded comparison without a highlight. Otherwise, detailed matching JPEG
+tiles must corroborate alignment across the frame. The difference mask shows
+measured brightness or color changes on the submitted grid, and each crop
+uses the native pixels of its own file. JPEG compression and conventional
+retouching can affect these samples. These results carry zero weight in the
+AI assessment and require both copies.
+
+The held test uses 12 archived photos from 12 authors outside the two earlier
+axis-resize studies. Each quality reuses these photos with known sharp and
+feathered local removals, including a second encode of the feathered version.
+Controls cover unchanged exports, second encodes, local blur, unrelated
+sources, and unsupported deliveries. The archived photos may have appeared
+in other project studies. The test measures relative localization with the
+matching earlier PNG. [Test photos and source attribution](https://huggingface.co/datasets/anush-123/bg-real/tree/aaba6cd1ced4ce3c846be9641fed092adb4919d1)
+
+| Held measure | JPEG quality 75 | JPEG quality 90 |
+| --- | ---: | ---: |
+| Staged removals located, existing → combined | 0 → 12 of 36 | 0 → 12 of 36 |
+| Distinct photo sources with useful additions | 4 of 12 | 4 of 12 |
+| Unchanged exports reproduced without a region | 36 of 36 | 36 of 36 |
+| Additional incompatible pairs accepted | 0 of 72 | 0 of 72 |
+| Separate conventional blurs located | 3 of 12 | 2 of 12 |
+
+An independent numeric check reconstructed overlap, crop projections,
+counts, and the test decision from all 468 reading records. A useful region
+covers at least half the known changed pixels and reaches 0.30 intersection
+over union. The result applies to the specific source and JPEG profiles
+tested here.
+
+The application replay rebuilt all 312 held deliveries and matched their
+frozen source, encoded file, mask, and crop coordinates. Four isolated
+simulated checkouts exercised the browser, PDF, JSON, and original-file
+replay. They covered two edits, an unchanged resave, and an incompatible
+pair. Each comparison used the existing paid analysis job.
+[Local browser and export receipt](evaluation-panels/image-reference-axis-jpeg-app-2026-11-18.json)

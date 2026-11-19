@@ -124,6 +124,59 @@ def test_replays_width_and_height_resize_with_native_crops(tmp_path, extension, 
         review(export, reference, submitted)
 
 
+@pytest.mark.parametrize(("quality", "writes", "edited"), [(75, 1, True), (90, 2, True), (75, 2, False), (90, 1, False)])
+def test_replays_stretched_jpeg_delivery_with_both_native_sources(tmp_path, quality, writes, edited):
+    from app.detectors.image import reference_axis_jpeg_resize as axis_jpeg
+
+    pixels = np.random.default_rng(647).integers(40, 220, (576, 512, 3), dtype=np.uint8)
+    reference, submitted = tmp_path / "earlier.png", tmp_path / "submitted.jpeg"
+    Image.fromarray(pixels).save(reference)
+    if edited:
+        pixels[210:258, 180:241] = (130, 32, 170)
+    Image.fromarray(pixels).resize((555, 512), Image.Resampling.BICUBIC).save(submitted, quality=quality, subsampling=2)
+    if writes == 2:
+        with Image.open(submitted) as image:
+            rendered = image.convert("RGB")
+        rendered.save(submitted, quality=quality, subsampling=2)
+
+    ordinary = inspect(reference, submitted, allow_proportional_resize=True, allow_axis_resize=True)
+    assert ordinary["status"] != "comparable"
+    evidence = tmp_path / "evidence"
+    result = inspect(reference, submitted, evidence_dir=evidence, allow_proportional_resize=True, allow_axis_jpeg_resize=True)
+    assert result["schema"] == axis_jpeg.SCHEMA and result["affects_overall_confidence"] is False
+    proof = result["axis_jpeg_resize"]
+    assert proof["basis"] == (axis_jpeg.LOCAL_DIFFERENCE if edited else axis_jpeg.FULL_GRID)
+    assert proof["jpeg_quality"] == quality and proof["submitted_over_reference_xy"] == [[555, 512], [512, 576]]
+    assert [(row["resize_kernel"], row["jpeg_writes"]) for row in proof["projection"]] == [("bicubic", writes)]
+    bundle = {"comparison": result, "pngs": {png.name: base64.b64encode(png.read_bytes()).decode("ascii")
+                                             for png in evidence.glob("*.png")}}
+    export = tmp_path / "export.json"
+    _write(export, bundle)
+    verified = review(export, reference, submitted)
+    assert verified["source_hashes_verified"] == 2 and (verified["crops_verified"] > 0) is edited
+    proof["projection"][0]["jpeg_writes"] = 3 - writes
+    _write(export, bundle)
+    with pytest.raises(ValueError, match="JPEG resize measurements differ"):
+        review(export, reference, submitted)
+
+
+def test_replays_stretched_jpeg_with_no_retained_local_region(tmp_path):
+    from app.detectors.image import reference_axis_jpeg_resize as axis_jpeg
+
+    pixels = np.random.default_rng(647).integers(40, 220, (576, 512, 3), dtype=np.uint8)
+    reference, submitted = tmp_path / "earlier.png", tmp_path / "submitted.jpg"
+    Image.fromarray(pixels).save(reference)
+    pixels[236, 190] += 8
+    Image.fromarray(pixels).resize((555, 512), Image.Resampling.BICUBIC).save(submitted, quality=75, subsampling=2)
+    result = inspect(reference, submitted, allow_axis_jpeg_resize=True)
+    assert result["axis_jpeg_resize"]["basis"] == axis_jpeg.LOCAL_DIFFERENCE
+    assert result["regions"] == [] and "mask" not in result
+    export = tmp_path / "export.json"
+    _write(export, {"comparison": result, "pngs": {}})
+    assert review(export, reference, submitted) == {"reported_status": "comparable", "source_hashes_verified": 2,
+        "crops_verified": 0, "mask_pixels_counted": 0}
+
+
 @pytest.mark.parametrize("variant,status", [("resize", "comparable"), ("aspect", "unsupported_resize_geometry"),
                                               ("rotated", "same_framing_unresolved")])
 def test_resize_reviewer_recomputes_empty_comparison_status(tmp_path, variant, status):

@@ -28,10 +28,11 @@ def policy() -> str | bool:
     if not enabled():
         return False
     if settings.text_passage_document_baseline_review:
-        if settings.text_passage_report_review:
-            return document_passage_intervals.REPORT_SCHEMA
-        return document_passage_intervals.DOCUMENT_BASELINE_SCHEMA
-    return document_passage_intervals.NATIVE_SCHEMA
+        schema = (document_passage_intervals.REPORT_SCHEMA if settings.text_passage_report_review
+                  else document_passage_intervals.DOCUMENT_BASELINE_SCHEMA)
+    else:
+        schema = document_passage_intervals.NATIVE_SCHEMA
+    return f"{schema}+short-scope/1"
 
 
 def measure(classifier, doc, sentences, context, ctx, spec, revisions):
@@ -46,7 +47,9 @@ def measure(classifier, doc, sentences, context, ctx, spec, revisions):
     if end is None:
         return None
     scoped = [sentence for sentence in sentences if sentence.end <= end]
-    if not document_passage_intervals.MIN_SENTENCES <= len(scoped) <= document_passage_intervals.MAX_SENTENCES:
+    if len(scoped) < document_passage_intervals.MIN_SENTENCES:
+        return document_passage_intervals.short_scope(method, end, len(scoped))
+    if len(scoped) > document_passage_intervals.MAX_SENTENCES:
         return None
     geometry = [[sentence.start, sentence.end, sentence.n_words] for sentence in scoped]
     remaining = ctx.deadline.remaining()

@@ -1,0 +1,30 @@
+{
+  "browser": {
+    "cases": 3,
+    "verified_skip_notices": 2,
+    "page_errors": 0
+  },
+  "cases": {
+    "11.txt": {
+      "eligible_sentence_count": 11,
+      "interval_status": "skipped",
+      "source_verified": true,
+      "pdf_and_json_match": true
+    },
+    "11.docx": {
+      "eligible_sentence_count": 11,
+      "interval_status": "skipped",
+      "source_verified": true,
+      "pdf_and_json_match": true
+    },
+    "12.txt": {
+      "eligible_sentence_count": 12,
+      "interval_status": "no_ranges",
+      "source_verified": true,
+      "pdf_and_json_match": true
+    }
+  },
+  "simulated_checkouts": 3,
+  "price_usd_cents": 999,
+  "jobs_before_payment": 0
+}

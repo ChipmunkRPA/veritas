@@ -1,17 +1,22 @@
 from copy import deepcopy
 from dataclasses import asdict
 from types import SimpleNamespace
+from zipfile import ZipFile
 
 import pytest
+from test_document_packets import packet_factory as packet_factory
 from test_odt_section_visibility import odt
 
-from app.core.canonical import canonical_hash
+from app.billing.preflight import _document
+from app.core.canonical import canonical_hash, canonical_json
 from app.detectors.text import language_scope
 from app.detectors.text.adapters import interval_review
 from app.detectors.text.extract import extract
 from app.detectors.text.segment import segment
 from app.evidence import document_interval_locations as native
 from app.evidence import document_passage_intervals as proof
+from app.evidence.document_packets import build_packet_set
+from app.reports import public_verify, verify_document_source
 from scripts.writing_native_passage_panel import fixture
 
 BODY = "\n\n".join(
@@ -19,6 +24,104 @@ BODY = "\n\n".join(
              for item in range(start, start + 6)) for start in (10, 20, 30)
 )
 QUOTE = "The previous author wrote a separate passage. Its text belongs to a different email."
+
+
+@pytest.mark.parametrize(("carrier", "suffix"), [("plain", ".txt"), ("word", ".docx"), ("email_html", ".eml")])
+def test_short_passage_skip_replays_only_eligible_sentences(tmp_path, monkeypatch, packet_factory, carrier, suffix):
+    body = " ".join(f"The writer recorded useful facts for document item {item}." for item in range(10, 21))
+    path = tmp_path / f"short passages{suffix}"
+    path.write_bytes(body.encode() if carrier == "plain" else fixture(carrier, body, None, quote=QUOTE))
+    _document(path, suffix)
+    doc = extract(path, suffix)
+    sentences = segment(doc)
+    assert len(sentences) == (13 if carrier == "email_html" else 11)
+    monkeypatch.setattr(interval_review, "enabled", lambda: True)
+    monkeypatch.setattr(interval_review.document_matched_context, "matches", lambda *_: True)
+    ctx = SimpleNamespace(profile="full", outputs=SimpleNamespace(document={language_scope.KEY: language_scope.ENGLISH}))
+    spec = SimpleNamespace(id="fixture", version="1")
+    review = interval_review.measure(None, doc, sentences, [], ctx, spec, {})
+    expected = {"schema": proof.SHORT_SCOPE_SCHEMA, "status": "skipped", "reason": "too_few_sentences",
+                "eligible_sentences": 11, "min_sentences": 12, "ranges": [], "authorship_confidence_contribution": 0}
+    if carrier != "plain":
+        expected["checked_end"] = len(body)
+    assert review == expected
+
+    db, store, analysis, result, _, _ = packet_factory(suffix, source_pdf=path, include_word_review=carrier == "word")
+    historical = build_packet_set(db, analysis, store, result)
+    assert proof.KEY not in historical["coverage"]
+    assert proof.COMMITMENT not in historical["source"]
+    result["manifest"]["sampling"][proof.KEY] = review
+    analysis.result_hash = canonical_hash(result)
+    store.put_bytes(canonical_json(result))
+    evidence = build_packet_set(db, analysis, store, result)
+    assert evidence["coverage"][proof.KEY] == expected
+    assert evidence["source"][proof.COMMITMENT] == canonical_hash(expected)
+    assert historical["packets"] == evidence["packets"]
+
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"sha256": analysis.sha256, "bytes": analysis.size_bytes}}
+    archive_path = tmp_path / "proof.zip"
+    for record in (historical, evidence):
+        with ZipFile(archive_path, "w") as archive:
+            archive.writestr("evidence.json", canonical_json(record))
+        with ZipFile(archive_path) as archive:
+            note = verify_document_source.check(archive, bundle, path)
+        assert ("Verified the eligible sentence count" in note) is (record is evidence)
+
+    forged = evidence["coverage"][proof.KEY] | {"eligible_sentences": 10}
+    evidence["coverage"][proof.KEY] = forged
+    evidence["source"][proof.COMMITMENT] = canonical_hash(forged)
+    with ZipFile(archive_path, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(evidence))
+    with ZipFile(archive_path) as archive, pytest.raises(ValueError, match="sentence count differs from the source text"):
+        verify_document_source.check(archive, bundle, path)
+
+
+@pytest.mark.parametrize("changes", [
+    {"status": "no_ranges"}, {"reason": "model_unavailable"}, {"eligible_sentences": 12},
+    {"min_sentences": 12.0}, {"authorship_confidence_contribution": False}, {"ranges": [{"start": 0, "end": 3}]},
+])
+def test_short_passage_skip_has_a_fixed_neutral_shape(changes):
+    record = proof.short_scope("plain", 200, 11) | changes
+    evidence = {"source": {"method": "plain", "chars": 200}, "coverage": {proof.KEY: record}}
+    with pytest.raises(ValueError, match="invalid short-input record"):
+        proof.validate(evidence, canonical_hash(record))
+
+
+def test_twelve_eligible_sentences_run_the_existing_interval_check(tmp_path, monkeypatch):
+    path = tmp_path / "twelve.txt"
+    path.write_text("\n\n".join(BODY.split("\n\n")[:2]))
+    doc = extract(path, ".txt")
+    sentences = segment(doc)
+    assert len(sentences) == 12
+    monkeypatch.setattr(interval_review, "enabled", lambda: True)
+    monkeypatch.setattr(interval_review.document_matched_context, "matches", lambda *_: True)
+    deadline = SimpleNamespace(remaining=lambda: None, nested=lambda _: SimpleNamespace(check=lambda _: None))
+    ctx = SimpleNamespace(profile="full", outputs=SimpleNamespace(document={language_scope.KEY: language_scope.ENGLISH}), deadline=deadline)
+    calls = []
+
+    def predict(inputs, **_):
+        calls.extend(inputs)
+        return [.005] * len(inputs)
+
+    review = interval_review.measure(SimpleNamespace(predict=predict), doc, sentences, [.005] * 12,
+                                     ctx, SimpleNamespace(id="fixture", version="1"), {})
+    assert calls == [sentence.text for sentence in sentences]
+    assert review["status"] == "no_ranges" and review["schema"] != proof.SHORT_SCOPE_SCHEMA
+    assert "eligible_sentences" not in review
+
+
+@pytest.mark.parametrize("gate", ["configuration", "profile", "language", "source", "checkpoint"])
+def test_short_count_does_not_replace_other_passage_eligibility_gates(tmp_path, monkeypatch, gate):
+    suffix = ".md" if gate == "source" else ".txt"
+    path = tmp_path / f"input{suffix}"
+    path.write_text(BODY.split("\n\n")[0])
+    doc = extract(path, suffix)
+    monkeypatch.setattr(interval_review, "enabled", lambda: gate != "configuration")
+    monkeypatch.setattr(interval_review.document_matched_context, "matches", lambda *_: gate != "checkpoint")
+    ctx = SimpleNamespace(profile="quick" if gate == "profile" else "full",
+                          outputs=SimpleNamespace(document={language_scope.KEY: None if gate == "language" else language_scope.ENGLISH}))
+    assert interval_review.measure(None, doc, segment(doc), [], ctx, SimpleNamespace(id="fixture", version="1"), {}) is None
 
 
 @pytest.mark.parametrize("kind", ["email_plain", "email_html"])

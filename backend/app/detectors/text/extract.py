@@ -16,6 +16,7 @@ import subprocess
 import tempfile
 import time
 from collections import Counter
+from contextlib import suppress
 from dataclasses import dataclass, field
 from html import unescape
 from html.parser import HTMLParser
@@ -30,6 +31,8 @@ from app.evidence.document_scope import (
     HTML_STATIC_KEY,
     HTML_STATIC_NOTICE,
     HTML_STATIC_POLICY,
+    PDF_OCR_BLANK_PAGES,
+    PDF_OCR_BLANK_VERSION,
     XHTML_STATIC_POLICY,
     valid_html_article_scope,
 )
@@ -515,12 +518,23 @@ def hybrid_ocr_notice(ocr_pages: list[dict]) -> str:
     return f"{subject} mapped text with text transcribed from image areas. Authorship confidence has not been validated for this mixed extraction."
 
 
+def _structurally_blank_pdf_page(page) -> bool:
+    """Require absence of both page content and annotation appearance sources."""
+    try:
+        fields = [page.parent.xref_get_key(page.xref, field) for field in ("Contents", "Annots")]
+        return (all((kind, value) in {("null", "null"), ("array", "[]")} for kind, value in fields)
+                and not page.get_contents() and not page.annot_xrefs())
+    except (ValueError, RuntimeError):
+        return False
+
+
 def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True,
-                preserve_pdf_wrap_hyphens: bool = False) -> Document:
+                preserve_pdf_wrap_hyphens: bool = False, skip_blank_pdf_pages: bool = False) -> Document:
     import pymupdf
 
     page_parts: list[list[tuple[str, dict]]] = []
     empty_pages: list[int] = []
+    blank_pages: list[int] = []
     partial_pages: list[dict] = []
     hybrid_pages: list[dict] = []
     ocr_pages, rasters, raster_bytes = [], {}, 0
@@ -559,6 +573,11 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool 
         return parts, info
 
     with pymupdf.open(path) as doc:
+        # A form can supply an appearance apart from the page's own saved content.
+        blank_review = False
+        if skip_blank_pdf_pages and not doc.is_repaired:
+            with suppress(ValueError, RuntimeError):
+                blank_review = doc.xref_get_key(doc.pdf_catalog(), "AcroForm")[0] == "null"
         for page in doc:
             parts = []
             page_parts.append(parts)
@@ -618,6 +637,9 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool 
                                         "page_width": page.cropbox.width, "page_height": page.cropbox.height,
                                         "coordinate_space": "unrotated-page-points", "extraction": "text_layer", "glyphs": glyphs}))
             if page_chars < 2:
+                if blank_review and _structurally_blank_pdf_page(page):
+                    blank_pages.append(page.number + 1)
+                    continue
                 local_parts, info = recognize(page)
                 parts.extend(local_parts)
                 if info["status"] != "extracted":
@@ -648,7 +670,7 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool 
     d = _join_mapped([part for parts in page_parts for part in parts], dehyphenate=True,
                      preserve_pdf_wrap_hyphens=preserve_pdf_wrap_hyphens)
     d.source_rasters = rasters
-    d.meta = {"pages": pages, "method": "pymupdf", "unmapped_pages": empty_pages,
+    d.meta = {"pages": pages, "method": "pymupdf", "unmapped_pages": sorted([*empty_pages, *blank_pages]),
               "percentage_text_pages": percentage_text_pages,
               document_pdf_visibility.KEY: document_pdf_visibility.build(pages, visibility_examined, invisible_text,
                   replacement_examined, replacement_differences,
@@ -658,6 +680,9 @@ def extract_pdf(path: Path, *, allow_ocr: bool = True, inspect_pdf_covers: bool 
                       "pages": ocr_pages, "pages_without_text": [p["page"] for p in ocr_pages if p.get("coverage_scope") != "image_region"], "unchecked_pages": empty_pages,
                       "confidence_semantics": "OCR recognition quality, not AI-generation confidence",
                       "max_pages": OCR_MAX_PAGES, "max_pixels_per_page": OCR_MAX_PIXELS}}
+    if skip_blank_pdf_pages:
+        d.meta["ocr"]["version"] = PDF_OCR_BLANK_VERSION
+        d.meta["ocr"][PDF_OCR_BLANK_PAGES] = blank_pages
     warnings = []
     if preserve_pdf_wrap_hyphens:
         d.meta[document_native_locations.PDF_LINE_WRAP_KEY] = document_native_locations.PDF_LINE_WRAP
@@ -1370,7 +1395,7 @@ def extract_eml(path: Path, *, use_current_email_body: bool = True, use_static_h
 
 
 def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers: bool = True,
-            preserve_pdf_wrap_hyphens: bool = False,
+            preserve_pdf_wrap_hyphens: bool = False, skip_blank_pdf_pages: bool = False,
             project_word_revisions: bool = True, project_word_breaks: bool = True,
             include_word_content_controls: bool = True, include_word_saved_fields: bool = True, include_html_article: bool = True,
             map_body_paragraphs: bool = True, map_word_table_grid: bool = True,
@@ -1386,7 +1411,7 @@ def extract(path: Path, ext: str, *, allow_ocr: bool = True, inspect_pdf_covers:
     ext = ext.lower()
     if ext == ".pdf":
         d = extract_pdf(path, allow_ocr=allow_ocr, inspect_pdf_covers=inspect_pdf_covers,
-                        preserve_pdf_wrap_hyphens=preserve_pdf_wrap_hyphens)
+                        preserve_pdf_wrap_hyphens=preserve_pdf_wrap_hyphens, skip_blank_pdf_pages=skip_blank_pdf_pages)
     elif ext == ".docx":
         d = extract_docx(path, project_word_revisions=project_word_revisions, project_word_breaks=project_word_breaks,
                          include_word_content_controls=include_word_content_controls, include_word_saved_fields=include_word_saved_fields,
@@ -1503,7 +1528,8 @@ def _child(argv: list[str]) -> int:
             d.meta["hidden_text_pages"] = hidden_text_pages
         else:
             d = extract(path, ext, skip_hidden_rtf_runs=argv[3:] != ["--legacy-rtf-visibility"],
-                        preserve_pdf_wrap_hyphens="--pdf-saved-wrap-hyphens" in argv[3:])
+                        preserve_pdf_wrap_hyphens="--pdf-saved-wrap-hyphens" in argv[3:],
+                        skip_blank_pdf_pages="--pdf-skip-blank-pages" in argv[3:])
         if ext.casefold() == ".pdf" and "--printed-ai-use-heading" in argv[3:]:
             from app.evidence import document_disclosure_heading
 

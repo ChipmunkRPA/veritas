@@ -300,6 +300,35 @@ describe('ordinary multimedia evidence', () => {
     expect(section.getByText('Across pages')).toBeTruthy()
   })
 
+  it('explains the short input as skipped coverage without a passage highlight', () => {
+    const { rerender } = show({ ...document, packets: [], coverage: {
+      writing_passage_intervals: {
+        schema: 'document-writing-passage-intervals/5', status: 'skipped', reason: 'too_few_sentences',
+        eligible_sentences: 11, min_sentences: 12, ranges: [], authorship_confidence_contribution: 0,
+      },
+    } })
+    const section = within(screen.getByRole('region', { name: 'Optional writing passage check' }))
+    expect(section.getByText('This optional check requires at least 12 eligible sentences. The writing input contained 11, so the check was skipped.')).toBeTruthy()
+    expect(section.getByText(/carries zero weight/)).toBeTruthy()
+    expect(section.queryByText(/No passage was selected|Original text characters/)).toBeNull()
+    expect(screen.getByTestId('multimedia-evidence-empty')).toBeTruthy()
+    rerender(<MemoryRouter><MultimediaEvidenceContent set={{ ...document, packets: [], coverage: {} }} token="signed token" mediaReady /></MemoryRouter>)
+    expect(screen.queryByRole('region', { name: 'Optional writing passage check' })).toBeNull()
+  })
+
+  it('distinguishes structurally blank PDF pages from unchecked pages', () => {
+    show({ ...document, source: { ...document.source, method: 'pymupdf' }, packets: [], coverage: {
+      unmapped_pages: [1, 2, 4], ocr: {
+        structurally_blank_pages: [1, 2], unchecked_pages: [4],
+        pages: [{ page: 3, status: 'extracted' }, { page: 4, status: 'unchecked' }],
+      },
+    } })
+    expect(screen.getByText('Structurally blank PDF pages 1, 2 skipped text recognition.')).toBeTruthy()
+    expect(screen.getByText('Pages without mapped text: 4. Those pages have not been cleared.')).toBeTruthy()
+    expect(screen.getByText('Page 3: text extracted for analysis.')).toBeTruthy()
+    expect(screen.queryByText('Page 1: not checked.')).toBeNull()
+  })
+
   it('moves exact dated wording out of style highlights while preserving a different flagged passage', () => {
     show({ ...document, packets: [], source: { ...document.source, method: 'plain' }, coverage: {
       writing_passage_intervals: {

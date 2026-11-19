@@ -46,6 +46,10 @@
 {% set wording = evidence.get('published_wording') %}
 <div class="multimedia-acoustic-summary" id="document-writing-passage-intervals">
 <h3>{{ intervals.title }}</h3>
+{% if intervals.status == 'skipped' %}
+<p>{{ intervals.status_note }}</p>
+<p class="caption">{{ intervals.explanation }}</p>
+{% else %}
 <p>{{ intervals.explanation }}</p>
 {% if intervals.method == 'email' %}<p class="caption">This check covers the mapped reply body.</p>{% endif %}
 {% if intervals.ranges or not (wording and wording.published_style_matches) %}<p>{{ intervals.status_note }}</p>{% endif %}
@@ -67,6 +71,7 @@
 </div>
 {% endfor %}
 <p class="caption">Positions are zero-based with the end excluded. JSON pointer <span class="mono">/coverage/writing_passage_intervals</span>.</p>
+{% endif %}
 </div>
 {% endif %}
 {% set wording = evidence.get('published_wording') %}

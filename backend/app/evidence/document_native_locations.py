@@ -11,6 +11,7 @@ from app.evidence.document_scope import (
     HTML_STATIC_POLICIES,
     HTML_STATIC_POLICY,
     valid_html_article_scope,
+    validate_pdf_blank_pages,
 )
 
 KEY = "original_text_locations"
@@ -241,6 +242,7 @@ def build(document):
 def validate(document):
     validate_saved_fields(document)
     coverage = document.get("coverage") or {}
+    validate_pdf_blank_pages(document, coverage)
     if HTML_STATIC_KEY in coverage:
         method = document.get("source", {}).get("method")
         policy = coverage[HTML_STATIC_KEY]

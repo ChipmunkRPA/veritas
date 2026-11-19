@@ -531,6 +531,11 @@ function WritingPassageIntervals({ review, method, emailHtml, wording }: {
   emailHtml: boolean
   wording?: PublishedWordingReview
 }) {
+  if (review.status === 'skipped') return <section id="document-writing-passage-intervals" aria-labelledby="writing-passage-intervals-title" className="mt-4 rounded-md border border-border p-4">
+    <h3 id="writing-passage-intervals-title" className="m-0 text-body font-medium">Optional writing passage check</h3>
+    <p className="mt-2 mb-0 text-small">This optional check requires at least {review.min_sentences} eligible sentences. The writing input contained {review.eligible_sentences}, so the check was skipped.</p>
+    <p className="mt-2 mb-0 text-caption text-text-muted">This check carries zero weight in the overall assessment.</p>
+  </section>
   const summary = {
     'document-writing-passage-intervals/3': 'It also looks for passages that stand out within the document.',
     'document-writing-passage-intervals/4': 'This file matched the writing patterns of the economic-report reference set. Each displayed passage also stood out against that reference.',
@@ -594,7 +599,10 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
   const bodyFormat = emailCoverage?.body_content_type === 'text/plain' ? 'plain-text'
     : emailCoverage?.body_content_type === 'text/html' ? 'HTML' : null
   const attachmentCount = emailCoverage?.attachments?.length ?? 0
+  const blankPages = set.coverage?.ocr?.structurally_blank_pages ?? []
+  const blankPageSet = new Set(blankPages)
   const unmapped = [...new Set([...(set.coverage?.unmapped_pages ?? []), ...(set.coverage?.ocr?.unchecked_pages ?? [])])]
+    .filter(page => !blankPageSet.has(page))
   const partialPages = set.coverage?.partially_checked_pages ?? []
   const textVisibility = set.coverage?.pdf_text_visibility
   const wordVisibility = set.coverage?.word_text_visibility
@@ -901,6 +909,8 @@ export default function DocumentEvidenceContent({ set, token, mediaReady }: { se
         The selection reserves space for disagreements.
       </p>}
       {matched && <p className="mt-2 mb-0">Short-passage review selected {matched.selected_sentences} of {matched.eligible_sentences} eligible sentences. This evidence has zero weight in the overall assessment.</p>}
+      {blankPages.length > 0 && <p className="mt-2 mb-0">Structurally blank PDF {blankPages.length === 1 ? 'page' : 'pages'}{' '}
+        {blankPages.slice(0, 24).join(', ')}{blankPages.length > 24 && `, and ${blankPages.length - 24} more listed in JSON`} skipped text recognition.</p>}
       {unmapped.length > 0 && <p className="mt-2 mb-0">Pages without mapped text: {unmapped.join(', ')}. Those pages have not been cleared.</p>}
       {partialPages.length > 0 && <>
         <p className="mt-2 mb-0">{partialPages.length === 1 ? 'Page' : 'Pages'} {partialPages.map((page) => page.page).join(', ')} {partialPages.length === 1 ? 'has' : 'have'} mapped text and unchecked image areas.</p>

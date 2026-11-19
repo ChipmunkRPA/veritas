@@ -51,7 +51,7 @@ def packet_factory(tmp_path):
                    map_body_paragraphs=True, skip_hidden_slide_groups=True, skip_hidden_odt_sections=True,
                    skip_hidden_xlsx_cell_formats=True, skip_hidden_rtf_runs=True, skip_markdown_fences=True,
                    honor_csv_separator_declaration=True, preserve_pdf_wrap_hyphens=True, use_static_html=True,
-                   use_epub_visibility=True):
+                   use_epub_visibility=True, skip_blank_pdf_pages=False):
             path = source_pdf if source_pdf is not None else tmp_path / ("source" + ext)
             text = text or "First sentence contains enough useful words. Second sentence adds more context to this test. Third sentence completes the source."
             if ext == ".pdf" and source_pdf is None:
@@ -83,6 +83,7 @@ def packet_factory(tmp_path):
                           skip_hidden_rtf_runs=skip_hidden_rtf_runs, skip_markdown_fences=skip_markdown_fences,
                           honor_csv_separator_declaration=honor_csv_separator_declaration,
                           preserve_pdf_wrap_hyphens=preserve_pdf_wrap_hyphens,
+                          skip_blank_pdf_pages=skip_blank_pdf_pages,
                           use_static_html=use_static_html, use_epub_visibility=use_epub_visibility,
                           skip_hidden_odt_sections=skip_hidden_odt_sections, skip_hidden_xlsx_cell_formats=skip_hidden_xlsx_cell_formats)
             for content in doc.source_rasters.values():

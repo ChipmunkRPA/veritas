@@ -727,6 +727,11 @@ def _verify_document(document: dict, store: ObjectStore, assets: dict[str, bytes
     partial_pages = coverage.get("partially_checked_pages", [])
     if canonical_hash(partial_pages) != canonical_hash(decoded.get("meta", {}).get("partially_checked_pages", [])):
         raise ObjectIntegrityError("Frozen partial-page coverage differs from the recorded extraction")
+    public_ocr, decoded_ocr = (coverage.get("ocr") or {}), (decoded["meta"].get("ocr") or {})
+    blank_key = document_scope.PDF_OCR_BLANK_PAGES
+    if (public_ocr.get(blank_key) != decoded_ocr.get(blank_key)
+            or (blank_key in public_ocr and public_ocr.get("version") != decoded_ocr.get("version"))):
+        raise ObjectIntegrityError("Frozen blank PDF page coverage differs from the recorded extraction")
     email = coverage.get("email")
     if isinstance(email, dict) and canonical_hash(email) != canonical_hash(decoded.get("meta", {}).get("email")):
         raise ObjectIntegrityError("Frozen email coverage differs from the recorded extraction")
@@ -1015,7 +1020,14 @@ def _coverage(kind: str, document: dict) -> str:
             summary += " The writing checks selected no passages for review. AI editing may still be present."
     else:
         summary = "No local writing responses were recorded."
-    if unmapped := coverage.get("unmapped_pages"):
+    blank_pages = (coverage.get("ocr") or {}).get(document_scope.PDF_OCR_BLANK_PAGES, [])
+    if blank_pages:
+        numbers = ", ".join(map(str, blank_pages[:24]))
+        extra = f", and {len(blank_pages) - 24} more listed in JSON" if len(blank_pages) > 24 else ""
+        noun = "page" if len(blank_pages) == 1 else "pages"
+        summary += f" Structurally blank PDF {noun} {numbers}{extra} skipped text recognition."
+    unmapped = set(coverage.get("unmapped_pages", [])) - set(blank_pages)
+    if unmapped:
         qualifier = "source page has" if len(unmapped) == 1 else "source pages have"
         summary += f" {len(unmapped)} {qualifier} no mapped text."
     partial_count = len(coverage.get("partially_checked_pages") or [])
@@ -1868,11 +1880,13 @@ def view(snapshot: ReportSnapshot, *, store: ObjectStore | None = None) -> dict[
             "passage_position": _passage_position_view(document.get("coverage") or {}, withheld=withheld)
             if kind == "document" else None,
             "writing_passage_intervals": (
-                {**intervals, "title": document_passage_intervals.TITLE,
+                {**intervals, "title": (document_passage_intervals.SHORT_SCOPE_TITLE if intervals["status"] == "skipped"
+                                       else document_passage_intervals.TITLE),
                  "ranges": document_published_wording.display_intervals(intervals, wording),
-                 "explanation": document_passage_intervals.explanation(intervals["schema"]),
+                 "explanation": (document_passage_intervals.ASSESSMENT_WEIGHT_NOTE if intervals["status"] == "skipped"
+                                 else document_passage_intervals.explanation(intervals["schema"])),
                  "baseline_reason": document_passage_intervals.BASELINE_REASON,
-                 "status_note": document_passage_intervals.STATUS[intervals["status"]],
+                 "status_note": document_passage_intervals.status_note(intervals),
                  "method": document["source"]["method"],
                  "email_html": ((document.get("coverage") or {}).get("email") or {}).get("body_content_type") == "text/html"}
                 if kind == "document" and not withheld

@@ -716,6 +716,14 @@ export interface DocumentEvidenceSet extends SetBase {
     published_wording_review?: PublishedWordingReview;
     pdf_saved_wording?: PdfSavedWording;
     writing_passage_intervals?: {
+      schema: 'document-writing-passage-intervals/5';
+      status: 'skipped';
+      reason: 'too_few_sentences';
+      eligible_sentences: number;
+      min_sentences: 12;
+      ranges: [];
+      authorship_confidence_contribution: 0;
+    } | {
       schema: 'document-writing-passage-intervals/1' | 'document-writing-passage-intervals/2' | 'document-writing-passage-intervals/3' | 'document-writing-passage-intervals/4';
       status: 'flagged' | 'no_ranges' | 'unassessed';
       ranges: ({ start: number; end: number; preview: string; basis?: 'pooled' | 'document_baseline' } & (
@@ -771,7 +779,7 @@ export interface DocumentEvidenceSet extends SetBase {
       locations: { opener: DocumentChatMarker; closer: DocumentChatMarker }[] };
     checks?: { signal_ref: EvidenceRef; status: 'recorded' | 'partial' | 'context_not_recorded'; scored_windows: number; limitation?: string }[];
     writing_check_coverage?: WritingCheckCoverage;
-    ocr?: { status?: string; pages?: { page: number; status: string; coverage_scope?: 'image_region'; reason?: string | null; mean_recognition_confidence?: number;
+    ocr?: { status?: string; structurally_blank_pages?: number[]; pages?: { page: number; status: string; coverage_scope?: 'image_region'; reason?: string | null; mean_recognition_confidence?: number;
       language?: { status?: string; language?: string; reason?: string }; [key: string]: unknown }[]; unchecked_pages?: number[] } | null
     email?: { body_part?: string; body_content_type?: 'text/plain' | 'text/html'; attachments?: unknown[]; [key: string]: unknown } | boolean | null }
 }

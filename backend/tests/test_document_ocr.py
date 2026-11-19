@@ -7,14 +7,20 @@ import json
 import subprocess
 from copy import deepcopy
 from types import SimpleNamespace
+from zipfile import ZipFile
 
 import pymupdf
 import pytest
 from PIL import Image
+from test_document_packets import packet_factory as packet_factory
 
+from app.core.canonical import canonical_json
 from app.detectors.text import extract as extraction
 from app.detectors.text.segment import segment
 from app.engine.stages import document as stage
+from app.evidence import document_scope
+from app.evidence.document_packets import build_packet_set
+from app.reports import public_verify, verify_document_source
 from app.storage.objects import ObjectStore
 
 TEXT = ("This is a scanned document with enough clear English words for reliable local transcription. "
@@ -63,6 +69,94 @@ def test_real_local_ocr_scanned_rotated_mixed_page(tmp_path):
         assert 0 <= word["recognition_confidence"] <= 100
         assert 0 <= word["bbox"][0] < word["bbox"][2] <= anchor["page_width"]
         assert 0 <= word["bbox"][1] < word["bbox"][3] <= anchor["page_height"]
+
+
+def test_blank_separators_leave_ocr_slots_for_saved_scan(tmp_path):
+    if not extraction._ocr_runtime().get("available"):
+        pytest.skip("Verified local OCR fixture data are not provisioned")
+    scan = tmp_path / "scan.pdf"
+    scanned_pdf(scan)
+    path = tmp_path / "scan-after-blank-separators.pdf"
+    blank_count = extraction.OCR_MAX_PAGES
+    with pymupdf.open() as result, pymupdf.open(scan) as original:
+        for _ in range(blank_count):
+            result.new_page(width=144, height=216)
+        result.insert_pdf(original)
+        result.save(path)
+
+    legacy = extraction.extract(path, ".pdf")
+    assert legacy.text == "" and document_scope.PDF_OCR_BLANK_PAGES not in legacy.meta["ocr"]
+    assert "budget exhausted" in legacy.meta["ocr"]["pages"][-1]["reason"]
+
+    current = extraction.extract(path, ".pdf", skip_blank_pdf_pages=True)
+    reference = extraction.extract(scan, ".pdf")
+    assert current.text == reference.text and "scanned document" in current.text
+    assert current.meta["ocr"]["version"] == document_scope.PDF_OCR_BLANK_VERSION
+    assert current.meta["ocr"][document_scope.PDF_OCR_BLANK_PAGES] == list(range(1, blank_count + 1))
+    assert current.meta["ocr"]["status"] == "complete"
+    assert current.meta["ocr"]["unchecked_pages"] == []
+    assert [(row["page"], row["status"]) for row in current.meta["ocr"]["pages"]] == [(blank_count + 1, "extracted")]
+    assert {row["page"] for row in current.source_map} == {blank_count + 1}
+    assert current.source_rasters == reference.source_rasters
+
+
+@pytest.mark.parametrize("kind", ["empty", "empty_arrays", "vector", "annotation", "widget", "link"])
+def test_blank_page_requires_absence_of_saved_ops_and_annotations(tmp_path, kind):
+    path = tmp_path / "page.pdf"
+    with pymupdf.open() as doc:
+        page = doc.new_page(width=300, height=400)
+        box = pymupdf.Rect(10, 10, 200, 100)
+        if kind == "empty_arrays":
+            doc.xref_set_key(page.xref, "Contents", "[]")
+            doc.xref_set_key(page.xref, "Annots", "[]")
+        elif kind == "vector":
+            page.draw_line((10, 10), (200, 100))
+        elif kind == "annotation":
+            page.add_freetext_annot(box, "Visible annotation")
+        elif kind == "widget":
+            widget = pymupdf.Widget()
+            widget.field_name = "Test field"
+            widget.field_value = "Visible saved value"
+            widget.field_type = pymupdf.PDF_WIDGET_TYPE_TEXT
+            widget.rect = box
+            page.add_widget(widget)
+        elif kind == "link":
+            page.insert_link({"kind": pymupdf.LINK_GOTO, "from": box, "page": 0})
+        doc.save(path)
+    with pymupdf.open(path) as doc:
+        assert extraction._structurally_blank_pdf_page(doc[0]) is (kind in {"empty", "empty_arrays"})
+
+
+@pytest.mark.parametrize("current", [False, True])
+def test_original_replays_historical_ocr_and_rejects_a_forged_blank_subset(tmp_path, packet_factory, current):
+    if not extraction._ocr_runtime().get("available"):
+        pytest.skip("Verified local OCR fixture data are not provisioned")
+    scan = tmp_path / "scan.pdf"
+    scanned_pdf(scan)
+    path = tmp_path / "scan-with-separator.pdf"
+    with pymupdf.open() as result, pymupdf.open(scan) as original:
+        result.new_page(width=144, height=216)
+        result.insert_pdf(original)
+        result.save(path)
+    db, store, analysis, result, _, _ = packet_factory(".pdf", source_pdf=path, scores=(), skip_blank_pdf_pages=current)
+    evidence = build_packet_set(db, analysis, store, result)
+    ocr = evidence["coverage"]["ocr"]
+    key = document_scope.PDF_OCR_BLANK_PAGES
+    assert ocr.get(key) == ([1] if current else None)
+    bundle = {"schema": public_verify.SCHEMA, "analysis": {"kind": "document"},
+              "source_commitment": {"sha256": analysis.sha256, "bytes": analysis.size_bytes}}
+    archive_path = tmp_path / "proof.zip"
+    with ZipFile(archive_path, "w") as archive:
+        archive.writestr("evidence.json", canonical_json(evidence))
+    with ZipFile(archive_path) as archive:
+        summary = verify_document_source.check(archive, bundle, path)
+    assert ("Verified the structurally blank PDF pages" in summary) is current
+    if current:
+        ocr[key] = []
+        with ZipFile(archive_path, "w") as archive:
+            archive.writestr("evidence.json", canonical_json(evidence))
+        with ZipFile(archive_path) as archive, pytest.raises(ValueError, match="coverage differs from the re-extracted original"):
+            verify_document_source.check(archive, bundle, path)
 
 
 def _fake_tsv(confidence=95):

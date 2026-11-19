@@ -65,6 +65,23 @@ and passed signed verification against their originals. A hidden-only EPUB
 and three unreadable or export-only files were refused before payment.
 [Local compatibility receipt](evaluation-panels/document-popular-formats-2026-11-19.json)
 
+Eligible short writing uploads now show when the optional passage check was
+skipped for having fewer than 12 eligible sentences. The browser and Standard
+PDF give the sentence count and reason. JSON and signed evidence retain the
+same count, which the original-file verifier recomputes from the retained
+writing scope. This check carries zero weight in the overall assessment.
+Local simulated checkout verified the notice on Word and TXT with 11 eligible
+sentences and verified that TXT with 12 sentences still ran the check.
+[Short passage coverage receipt](evaluation-panels/document-short-passage-coverage-2026-11-19.json)
+
+For scanned PDFs, a page with no saved content or annotations can be
+skipped without consuming the text-recognition budget. The browser and
+Standard PDF list the blank page numbers separately from pages with
+unmapped text. The JSON and original-file verification include the full
+list. A local test placed 12 blank separators before a scan. The current
+reader preserved the scan's original page number, 13, and recovered all
+36 words. [Scanned PDF coverage receipt](evaluation-panels/document-blank-pages-ocr-2026-11-19.json)
+
 A local Chromium run completed Word, Excel, ODS, CSV and TSV writing
 analyses after simulated USD 9.99 checkout. Each result displayed source
 positions in the browser and exported both a PDF and JSON. All five signed

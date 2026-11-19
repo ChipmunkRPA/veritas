@@ -29,13 +29,18 @@ SCHEMA = "document-writing-passage-intervals/1"
 NATIVE_SCHEMA = "document-writing-passage-intervals/2"
 DOCUMENT_BASELINE_SCHEMA = "document-writing-passage-intervals/3"
 REPORT_SCHEMA = "document-writing-passage-intervals/4"
+SHORT_SCOPE_SCHEMA = "document-writing-passage-intervals/5"
+SHORT_SCOPE_REASON = "too_few_sentences"
 BASELINE_SCHEMAS = (DOCUMENT_BASELINE_SCHEMA, REPORT_SCHEMA)
-MIN_SENTENCES = 12
+SHORT_SCOPE_MIN_SENTENCES = 12
+MIN_SENTENCES = SHORT_SCOPE_MIN_SENTENCES
 MAX_SENTENCES = 128
 PREVIEW_CHARS = 600
 TITLE = "Possible AI-like writing passages"
+SHORT_SCOPE_TITLE = "Optional writing passage check"
 CHECK_SUMMARY = "This optional check combines readings of individual sentences and their surrounding text. "
-LIMITATION = "Ordinary writing can produce similar patterns. This check carries zero weight in the overall assessment."
+ASSESSMENT_WEIGHT_NOTE = "This check carries zero weight in the overall assessment."
+LIMITATION = "Ordinary writing can produce similar patterns. " + ASSESSMENT_WEIGHT_NOTE
 EXPLANATION = CHECK_SUMMARY + "Sustained AI-like patterns can highlight separate passages for review. " + LIMITATION
 BASELINE_EXPLANATION = CHECK_SUMMARY + "It also looks for passages that stand out within the document. " + LIMITATION
 REPORT_EXPLANATION = (CHECK_SUMMARY + "This file matched the writing patterns of the economic-report reference set. "
@@ -81,6 +86,13 @@ def explanation(schema):
     return {DOCUMENT_BASELINE_SCHEMA: BASELINE_EXPLANATION, REPORT_SCHEMA: REPORT_EXPLANATION}.get(schema, EXPLANATION)
 
 
+def status_note(record):
+    if record["schema"] == SHORT_SCOPE_SCHEMA:
+        return (f"This optional check requires at least {record['min_sentences']} eligible sentences. "
+                f"The writing input contained {record['eligible_sentences']}, so the check was skipped.")
+    return STATUS[record["status"]]
+
+
 def from_result(result):
     return (result.get("manifest", {}).get("sampling") or {}).get(KEY)
 
@@ -124,6 +136,15 @@ def _original_position(mapping, offset):
     return None
 
 
+def short_scope(method, checked_end, sentence_count):
+    result = {"schema": SHORT_SCOPE_SCHEMA, "status": "skipped", "reason": SHORT_SCOPE_REASON,
+              "eligible_sentences": sentence_count, "min_sentences": SHORT_SCOPE_MIN_SENTENCES,
+              "ranges": [], "authorship_confidence_contribution": 0}
+    if method != "plain":
+        result["checked_end"] = checked_end
+    return result
+
+
 def capture(text, mapping, sentences, readings, *, method="plain", checked_end=None, document_baseline=False,
             report_review=False):
     rows = []
@@ -161,6 +182,19 @@ def validate(document, expected):
         return
     method, chars = document["source"]["method"], document["source"]["chars"]
     is_native = method in native.KINDS
+    if isinstance(record, dict) and record.get("schema") == SHORT_SCOPE_SCHEMA:
+        count = record.get("eligible_sentences")
+        checked = record.get("checked_end") if is_native else chars
+        if (type(count) is not int or not 0 <= count < SHORT_SCOPE_MIN_SENTENCES
+                or type(record.get("min_sentences")) is not int
+                or type(record.get("authorship_confidence_contribution")) is not int
+                or record != short_scope(method, checked, count) or canonical_hash(record) != expected
+                or type(checked) is not int or not 0 < checked <= chars
+                or not is_native and method != "plain"
+                or is_native and (not native.eligible_source(method, metadata, metadata.get(document_tracked_changes.KEY))
+                                  or method != "email" and checked != chars)):
+            raise ValueError("Writing passage coverage has an invalid short-input record")
+        return
     fields = {"schema", "sentences", "readings", "ranges", "status", "authorship_confidence_contribution"}
     if is_native:
         fields.add("checked_end")
@@ -227,6 +261,10 @@ def verify_source(document, text, mapping, sentences, *, metadata=None, word_rev
         if end is None or (method != "plain" and end != record["checked_end"]):
             raise ValueError("Writing passage intervals differ from the mapped text scope")
         geometry = [[row["start"], row["end"], row["n_words"]] for row in sentences if row["end"] <= end]
+        if record["schema"] == SHORT_SCOPE_SCHEMA:
+            if len(geometry) != record["eligible_sentences"]:
+                raise ValueError("Writing passage coverage sentence count differs from the source text")
+            return
         if capture(text, mapping, geometry, record["readings"], method=method,
                    checked_end=end, document_baseline=record["schema"] in BASELINE_SCHEMAS,
                    report_review=record["schema"] == REPORT_SCHEMA) != record:

@@ -135,7 +135,7 @@ def test_pdf_invisible_layer_is_located_and_limits_the_actual_assessment(last_pa
         page.set_rotation(90)
         pdf.save(path)
 
-    db, store, analysis, result, decoded, _ = packet_factory(".pdf", scores=(), source_pdf=path)
+    db, store, analysis, result, decoded, _ = packet_factory(".pdf", scores=(), source_pdf=path, skip_blank_pdf_pages=True)
     evidence = build_packet_set(db, analysis, store, result)
     key = document_pdf_visibility.KEY
     review = evidence["coverage"][key]

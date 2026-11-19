@@ -122,7 +122,8 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     allow_legacy_html = coverage.get(document_scope.HTML_LEGACY_ENCODING_KEY) == document_scope.HTML_LEGACY_ENCODING
     if extension == ".html" and html_policy == document_scope.XHTML_STATIC_POLICY:
         extension = ".xhtml"
-    ocr_pages = (coverage.get("ocr") or {}).get("pages", [])
+    ocr = coverage.get("ocr") or {}
+    ocr_pages = ocr.get("pages", [])
     page_coverage = (coverage.get(document_passage_coverage.KEY) or {}).get(document_scope.PDF_PAGE_COVERAGE_KEY)
     used_ocr = extension == ".pdf" and any(row.get("status") == "extracted" for row in ocr_pages)
     replay_ocr = used_ocr or (extension == ".pdf" and page_coverage is not None and bool(ocr_pages))
@@ -154,6 +155,7 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     else:
         covered_schema = coverage.get(document_pdf_visibility.KEY, {}).get("schema") == document_pdf_visibility.SCHEMA
         doc = extract(original, extension, allow_ocr=replay_ocr, inspect_pdf_covers=covered_schema,
+                      skip_blank_pdf_pages=ocr.get("version") == document_scope.PDF_OCR_BLANK_VERSION,
                       preserve_pdf_wrap_hyphens=coverage.get(document_native_locations.PDF_LINE_WRAP_KEY)
                       == document_native_locations.PDF_LINE_WRAP,
                       include_html_article=document_scope.HTML_ARTICLE_KEY in coverage,
@@ -348,8 +350,14 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
     )
     character_detail = (" Verified the character-adjusted writing input hashes and original sentence positions."
                         if document_character_review.KEY in coverage else "")
-    interval_detail = (" Verified writing passage selection from the saved responses and positions in the original text."
-                       if document_passage_intervals.KEY in coverage else "")
+    intervals = coverage.get(document_passage_intervals.KEY)
+    interval_detail = ""
+    if intervals:
+        interval_detail = (" Verified the eligible sentence count for the skipped writing passage check."
+                           if intervals["schema"] == document_passage_intervals.SHORT_SCOPE_SCHEMA
+                           else " Verified writing passage selection from the saved responses and positions in the original text.")
+    blank_pages_detail = (" Verified the structurally blank PDF pages from the original file."
+                          if ocr.get(document_scope.PDF_OCR_BLANK_PAGES) else "")
     wording_detail = (" Verified earlier wording against the retained transcript and submitted locations."
                       if document_published_wording.KEY in coverage else "")
     pdf_visibility = coverage.get(document_pdf_visibility.KEY, {})
@@ -378,4 +386,4 @@ def check(archive: ZipFile, bundle: dict, original: Path) -> str:
             f"{tracked_detail}{word_visibility_detail}{saved_fields_detail}{invisible_detail}{character_detail}{interval_detail}{pdf_replacement_detail}"
             f"{pdf_covered_detail}{percentage_detail}{calendar_detail}{arithmetic_detail}{identifier_detail}"
             f"{marker_detail}{doi_detail}{heading_detail}{links_detail}{reference_links_detail}{word_reference_detail}"
-            f"{wording_detail}{history_detail}{pdf_form_detail}")
+            f"{wording_detail}{history_detail}{pdf_form_detail}{blank_pages_detail}")

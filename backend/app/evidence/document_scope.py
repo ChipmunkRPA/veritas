@@ -34,6 +34,8 @@ PASSAGE_COVERAGE_MAX_RANGES = 256
 PASSAGE_COVERAGE_STATES = ("no_local_record", "context_only", "response_range")
 PDF_PAGE_COVERAGE_KEY = "pdf_pages"
 PDF_PAGE_COVERAGE_SCHEMA = "document-pdf-page-coverage/1"
+PDF_OCR_BLANK_VERSION = "local-ocr/2"
+PDF_OCR_BLANK_PAGES = "structurally_blank_pages"
 CHECKPOINT_AGREEMENT_KEY = "writing_second_check"
 CHECKPOINT_AGREEMENT_SCHEMA = "document-writing-second-check/1"
 CHECKPOINT_AGREEMENT_EMAIL_SCHEMA = "document-writing-second-check/2"
@@ -472,6 +474,23 @@ def page_gaps(total: int, mapped: list[int]) -> list[list[int]]:
     """Compress uncovered page numbers into inclusive one-based ranges."""
     boundaries = [0, *mapped, total + 1]
     return [[a + 1, b - 1] for a, b in zip(boundaries, boundaries[1:]) if b - a > 1]
+
+
+def validate_pdf_blank_pages(document: dict, coverage: dict) -> None:
+    ocr = coverage.get("ocr")
+    if not isinstance(ocr, dict) or (PDF_OCR_BLANK_PAGES not in ocr and ocr.get("version") != PDF_OCR_BLANK_VERSION):
+        return
+    pages = ocr.get(PDF_OCR_BLANK_PAGES)
+    total = (coverage.get(document_pdf_visibility.KEY) or {}).get("total_pages")
+    if (document["source"]["method"] != "pymupdf" or ocr.get("version") != PDF_OCR_BLANK_VERSION
+            or type(total) is not int or not isinstance(pages, list)
+            or any(type(page) is not int or not 1 <= page <= total for page in pages)
+            or pages != sorted(set(pages))):
+        raise ValueError("Invalid structurally blank PDF page coverage")
+    blank = set(pages)
+    if (not blank.issubset(coverage.get("unmapped_pages", [])) or blank.intersection(ocr.get("unchecked_pages", []))
+            or any(row["page"] in blank for row in ocr.get("pages", []))):
+        raise ValueError("Blank PDF pages cannot also be OCR attempts or mapped text")
 
 
 def _validate_pdf_pages(document: dict, passage: dict) -> None:
